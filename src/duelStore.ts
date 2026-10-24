@@ -86,7 +86,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  const finishBurn=actions.filter((a):a is Extract<Action,{kind:'monsterEffect'}>=>a.kind==='monsterEffect')
   .filter(a=>{const effect=getMonsterEffect(p.monsters.find(m=>m.uid===a.card)!.id);return effect?.operation.kind==='burn'&&op.lp<=effect.operation.amount;})
   .sort((a,b)=>{
-   const rating=(x:Extract<Action,{kind:'monsterEffect'}>)=>x.tributes?.reduce((n,uid)=>n+(getCard(p.monsters.find(m=>m.uid===uid)!.id)?.atk??0),0)??0;
+   const rating=(x:Extract<Action,{kind:'monsterEffect'}>)=>x.tributes?.reduce((n,uid)=>n+(getCard(p.monsters.find(m=>m.uid===uid)!.id)?.atk??0)+(uid===x.card?10000:0),0)??0;
    return rating(a)-rating(b);
   });
  if(finishBurn.length)return finishBurn[0];
