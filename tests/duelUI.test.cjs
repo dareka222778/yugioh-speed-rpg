@@ -19,7 +19,7 @@ test('public renderer never requests hidden art; private renderer requests only 
 test('PNG attachments, menus and invitations serialize within Discord limits, and final/no-actions panels work',async()=>{
  for(const owner of ['101','102'])for(const page of [-1,1,999]){const p=duelPrivateMessage(record(),owner,page);assert.ok(p.components.length<=5);for(const row of p.components){const data=row.toJSON();for(const c of data.components){assert.ok(c.custom_id.length<=100);if(c.options)assert.ok(c.options.length<=25);}}for(const e of p.embeds)e.toJSON();}
  const pub=await visualDuelPublic(record());assert.equal(pub.files.length,1);assert.equal(pub.embeds[0].toJSON().image.url,'attachment://campo-duelo.png');
- const privatePanel=await visualDuelPrivate(record(),'101');assert.equal(privatePanel.files.length,1);assert.equal((await sharp(privatePanel.files[0].attachment).metadata()).height,1360);
+ const privatePanel=await visualDuelPrivate(record(),'101');assert.equal(privatePanel.files.length,2);assert.equal((await sharp(privatePanel.files[0].attachment).metadata()).height,340);assert.equal((await sharp(privatePanel.files[1].attachment).metadata()).height,1020);
  const inv={...record(),status:'pending',state:null,invite:{owner:'101',opponent:'102',name:'Kise',cards:ids('warrior')}};for(const row of invitationMessage(inv).components)row.toJSON();
  const done={...record(),status:'finished',state:step(s,'101',{kind:'concede'})};assert.equal(duelPrivateMessage(done,'101').components.length,0);
 });
