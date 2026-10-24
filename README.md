@@ -58,3 +58,11 @@ Mantenha `DATABASE_PATH` apontando para armazenamento persistente e inclua os re
 `npm test` compila e verifica migração de um banco legado, persistência após reabertura, validação dos campos, payload dos embeds, upload simulado, exibição e remoção de retrato. O teste de download usa fetch simulado; permissões, rede Discord e aparência final precisam ser conferidas no servidor.
 
 A V0 registra o estilo inicial; ainda não entrega cartas, executa duelos ou possui economia jogável. O perfil não inventa vitórias ou progressão que o motor ainda não implementa.
+
+## V0.3 — Fase 1: identidade visual
+
+Perfil em uma única imagem PNG (1000 × 760), retrato integrado sem distorcer ou cortar a imagem, silhueta quando não há retrato, cinco cores e texto alternativo com os dados reais. Nomes longos são divididos e ajustados ao espaço disponível; biografia até 240 caracteres. A tela inicial também ganha uma composição visual com os três estilos e mantém a indicação de que cartas e duelos ainda não foram implementados.
+
+Renderer: `src/cardRenderer.ts`, usando sharp 0.34.5. Cache de imagens do sharp limitado a 8 MB, um thread por imagem e fila de até quatro renderizações; nenhuma API paga, navegador ou geração por IA é usada no bot. As interações aguardam a renderização com resposta deferida. Retratos antigos ilegíveis ou acima do limite de 16 megapixels usam a silhueta para não derrubar o comando.
+
+`npm test` cobre migração e persistência, dados reais no texto alternativo, dimensões da ficha, integração e remoção do retrato, texto com caracteres XML, nomes longos, cores, retrato danificado e tela inicial. A legibilidade foi inspecionada em prévias locais; a apresentação final precisa ser conferida no aplicativo Discord. O renderer usa fontes sans-serif disponíveis no sistema; verificar a fonte após implantação em outro sistema operacional.

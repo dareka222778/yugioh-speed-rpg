@@ -1,8 +1,9 @@
-import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, escapeMarkdown } from 'discord.js';
+import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from 'discord.js';
 import type { Player } from './database';
 import { isStarterDeck, starterDecks } from './starterDecks';
 import fs from 'node:fs';
 import path from 'node:path';
+import { renderCard } from './cardRenderer';
 
 export const themes = { ametista: 0x9b59b6, ouro: 0xf1c40f, oceano: 0x3498db, rubi: 0xe74c3c, esmeralda: 0x2ecc71 } as const;
 export function validateProfile(name: string, bio: string, theme: string) {
@@ -16,30 +17,17 @@ export function portraitPath(id: string) {
   if (!/^\d{1,20}$/.test(id)) throw new Error('Identificador inválido.');
   return path.join(portraitsDir, `${id}.image`);
 }
-export function profileMessage(player: Player, avatar: string, editable = true) {
+export async function profileMessage(player: Player, avatar: string, editable = true) {
   const deck = player.starter_deck && isStarterDeck(player.starter_deck) ? starterDecks[player.starter_deck] : null;
-  const embed = new EmbedBuilder()
-    .setColor(themes[player.theme as keyof typeof themes] ?? themes.ametista)
-    .setAuthor({ name: 'DUELIST ARCHIVE • SPEED RPG', iconURL: avatar })
-    .setTitle(escapeMarkdown(player.character_name || player.username))
-    .setDescription(player.biography ? escapeMarkdown(player.biography) : '*Toda lenda começa com uma primeira jogada.*')
-    .setThumbnail(avatar)
-    .addFields(
-      { name: '✦ NÍVEL', value: String(player.duelist_level), inline: true },
-      { name: '◆ PONTOS DE EXPERIÊNCIA', value: `${player.xp.toLocaleString('pt-BR')} XP`, inline: true },
-      { name: '◈ CARTEIRA', value: `${player.dp.toLocaleString('pt-BR')} DP`, inline: true },
-      { name: 'ESTILO INICIAL', value: deck ? `${deck.emoji} ${deck.name}` : 'Escolha com /start' }
-    )
-    .setFooter({ text: 'Speed RPG • Perfil de personagem • V0.2' });
-  const files: AttachmentBuilder[] = [];
   const portrait = portraitPath(player.discord_id);
-  if (fs.existsSync(portrait)) {
-    const bytes = fs.readFileSync(portrait);
-    const extension = bytes[0] === 255 ? 'jpg' : bytes.toString('ascii', 0, 4) === 'RIFF' ? 'webp' : 'png';
-    const filename = `personagem.${extension}`;
-    files.push(new AttachmentBuilder(bytes, { name: filename }));
-    embed.setImage(`attachment://${filename}`);
-  }
+  let photo: Buffer | undefined;
+  try { photo = await fs.promises.readFile(portrait); } catch { /* Default silhouette. */ }
+  const bytes = await renderCard(player, photo);
+  const filename = 'ficha-duelista.png';
+  const files = [new AttachmentBuilder(bytes, { name: filename,
+    description: `${player.character_name || player.username}. Nível ${player.duelist_level}. ${player.xp} XP. ${player.dp} DP. Estilo: ${deck?.name ?? 'Não escolhido'}. ${player.biography}`.slice(0,1024) })];
+  const embed = new EmbedBuilder().setColor(themes[player.theme as keyof typeof themes] ?? themes.ametista)
+    .setImage(`attachment://${filename}`);
   const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder().setCustomId(`profile:refresh:${player.discord_id}`).setLabel('Atualizar').setEmoji('🔄').setStyle(ButtonStyle.Secondary),
     new ButtonBuilder().setCustomId(`profile:edit:${player.discord_id}`).setLabel('Personalizar').setEmoji('🎨').setStyle(ButtonStyle.Primary),
