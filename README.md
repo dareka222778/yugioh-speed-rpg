@@ -97,3 +97,8 @@ Antes de entregar conjuntos a jogadores antigos, a inicialização grava uma có
 - Painéis e modais usam revisão para rejeitar alterações antigas; botões privados verificam o proprietário. Gravações são transacionais.
 - Testes incluem os três conjuntos iniciais, isolamento entre jogadores, persistência após reabrir o banco, limites, invalidação, rollback e o listener real de interações com o transporte Discord simulado. O teste local não substitui uma interação real no Discord.
 - Duelos, efeitos e recompensas permanecem para as próximas fases. Ativar um deck nesta versão só salva a seleção.
+
+
+### Editor visual de cartas
+
+O `/deck ver` agora anexa uma grade PNG de seis cartas reais por página e uma ampliação da selecionada. O menu e os botões continuam responsáveis pelos cliques (a imagem do Discord não possui áreas clicáveis). Quantidades, estado, atributos e destaque são desenhados com os contornos de fonte incorporados. As imagens usam o mesmo cache de cartas da Fase 2: até três downloads simultâneos, seis IDs por página e timeout por imagem. Se o CDN falhar, o espaço mantém nome/ID e os controles continuam disponíveis. Uma fila limita a renderização simultânea para o plano de 512 MB. Não há alterações no banco nem nas regras de deck.
