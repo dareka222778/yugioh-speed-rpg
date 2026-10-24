@@ -13,7 +13,7 @@ class TestREST{setToken(){return this;}async put(route,payload){assert.equal(cli
 const original=Module._load;
 Module._load=function(name,parent,isMain){
  if(name==='discord.js')return {...discord,Client:TestClient,REST:TestREST};
- if(name==='./duelUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDuelPublic:async(...args)=>ui.duelPublicMessage(...args),visualDuelPrivate:async(...args)=>ui.duelPrivateMessage(...args)};}
+ if(name==='./duelUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDuelPublic:async(...args)=>ui.duelPublicMessage(...args),visualDuelPrivate:async(...args)=>ui.duelPrivateMessage(...args),visualDuelCard:async(...args)=>ui.duelCardMessage(...args)};}
  if(name==='./deckUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDeckMessage:async(...args)=>ui.deckMessage(...args)};}
  if(name==='./npcUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualNPCLobby:async(...args)=>ui.npcLobby(...args)};}
  if(name==='./networkRetry'&&parent.filename.endsWith('/dist/index.js')){const network=original.apply(this,arguments);return {...network,retryNetwork:(work,label)=>network.retryNetwork(work,label,{sleep:async()=>{},log:()=>{}})};}
@@ -106,6 +106,26 @@ test('quick action buttons execute through the real listener and reject repeat c
  const ui=require('../dist/duelUI');const button=ui.duelPrivateMessage(r,'108').components.flatMap(row=>row.toJSON().components).find(c=>c.custom_id?.startsWith('duel:quick:'));
  assert.ok(button);const user={id:'108',username:'Atalho',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};const click=interaction('button',undefined,{user,customId:button.custom_id});await dispatch(click.i);assert.equal(click.calls[0][0],'deferUpdate');assert.equal(store.getDuel(r.id).revision,r.revision+1);
  const repeat=interaction('button',undefined,{user,customId:button.custom_id});await dispatch(repeat.i);assert.match(repeat.calls.at(-1)[1].content,/antigo/);
+});
+test('per-card hand carousel works through the real Discord handler and rejects other owners',async()=>{
+ const store=require('../dist/duelStore'),ui=require('../dist/duelUI');
+ db.createPlayer('1188','Card Viewer');
+ const r=store.createTraining('1188','g','c',true);
+ const menu=ui.duelPrivateMessage(r,'1188').components.flatMap(row=>row.toJSON().components).find(c=>c.custom_id?.startsWith('duel:card:'));
+ assert.ok(menu);assert.equal(menu.options.length,r.state.players[0].hand.length);
+ const user={id:'1188',username:'Card Viewer',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};
+ const selection=interaction('select',undefined,{user,customId:menu.custom_id,isStringSelectMenu:()=>true,values:['0']});
+ await dispatch(selection.i);
+ assert.deepEqual(selection.calls.map(c=>c[0]),['deferUpdate','edit']);
+ const panel=selection.calls[1][1];assert.ok(panel.embeds[0].toJSON().title.includes('1/'));
+ const next=panel.components[0].toJSON().components[2].custom_id;
+ const advance=interaction('button',undefined,{user,customId:next});
+ await dispatch(advance.i);
+ assert.deepEqual(advance.calls.map(c=>c[0]),['deferUpdate','edit']);
+ assert.ok(advance.calls[1][1].embeds[0].toJSON().title.includes('2/'));
+ const stranger=interaction('button',undefined,{customId:next});
+ await dispatch(stranger.i);assert.equal(stranger.calls[0][0],'reply');
+ assert.match(stranger.calls[0][1].content,/participantes/);
 });
 test('NPC slash command and owner-bound buttons start real challenges, preserve inventory and block double starts',async()=>{
  assert.ok(registered.some(c=>c.name==='npc'));const deck=require('../dist/decks'),store=require('../dist/duelStore');db.createPlayer('109','Lendário');db.chooseStarterDeck('109','warrior');deck.openDeck('109');deck.activateDeck('109',1);const inventory=db.getCollection('109');const user={id:'109',username:'Lendário',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};
