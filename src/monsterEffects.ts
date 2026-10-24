@@ -2,7 +2,7 @@
  * Each registered effect must have a matching card in effectRegistry.ts.
  * Effects with targets choose them on activation, before the response window.
  */
-export type MonsterTrigger='ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onSentToGrave'|'continuous';
+export type MonsterTrigger='ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onBattleDestroyed'|'onSentToGrave'|'continuous';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard'|'tribute';count:number};
 export type MonsterOperation=
  |{kind:'heal'|'burn';amount:number}
@@ -10,6 +10,7 @@ export type MonsterOperation=
  |{kind:'destroy'|'bounce';target:'opponentMonster'|'anyMonster'}
  |{kind:'recover';cardKind:'spell'|'trap'}
  |{kind:'search';stat:'atk'|'defense';maximum:number}
+ |{kind:'specialSummon';attribute:string;maximumAtk:number}
  |{kind:'negateTraps'};
 export type MonsterEffect={trigger:MonsterTrigger;oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean;fieldMonsterCount?:number};
@@ -41,7 +42,8 @@ const monsterEffects:Readonly<Record<string,MonsterEffect>>=Object.freeze({
  '26202165':{trigger:'onSentToGrave',oncePerTurn:true,operation:{kind:'search',stat:'atk',maximum:1500}}, // Sangan
  '78010363':{trigger:'onSentToGrave',oncePerTurn:true,operation:{kind:'search',stat:'defense',maximum:1500}}, // Witch of the Black Forest
  '77585513':{trigger:'continuous',operation:{kind:'negateTraps'}}, // Jinzo
- '54098121':{trigger:'onOtherSummon',operation:{kind:'heal',amount:500}} // Mysterious Puppeteer
+ '54098121':{trigger:'onOtherSummon',operation:{kind:'heal',amount:500}}, // Mysterious Puppeteer
+ '83011277':{trigger:'onBattleDestroyed',operation:{kind:'specialSummon',attribute:'DARK',maximumAtk:1500}} // Mystic Tomato
 });
 export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return monsterEffects[cardId];}
 
