@@ -30,3 +30,15 @@ test('targeted destruction accepts only opponent monster instance IDs',()=>{
  assert.throws(()=>monsterDestructionTarget(effect,['enemy-a'],''),/Invalid opponent/);
  assert.throws(()=>monsterDestructionTarget({trigger:'flip',operation:{kind:'draw',count:1}},['enemy-a'],'enemy-a'),/does not destroy/);
 });
+
+test('Man-Eater Bug is registered with official FLIP destruction operation',()=>{
+ const {getMonsterEffect}=require('../dist/monsterEffects');
+ const {getEffect,enabledCardIds}=require('../dist/effectRegistry');
+ const {getCard}=require('../dist/collection');
+ const e=getMonsterEffect('54652250');
+ assert.equal(e.trigger,'flip');
+ assert.deepEqual(e.operation,{kind:'destroy',target:'anyMonster'});
+ assert.equal(getCard('54652250').atk,450);
+ assert.ok(enabledCardIds.includes('54652250'));
+ assert.ok(getEffect('54652250'));
+});
