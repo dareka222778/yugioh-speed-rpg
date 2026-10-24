@@ -25,6 +25,10 @@ O portal é uma interface de consulta: inspecionar uma carta não concede cartas
 
 Retratos/arte dos personagens: © Studio Dice / SHUEISHA, TV TOKYO, KONAMI. Projeto de fã não afiliado à Konami; o uso de ilustrações não implica licença para redistribuição comercial. A identidade visual e a estrutura de navegação foram feitas para este bot.
 
+## Conteúdo exclusivo do nosso jogo
+
+O Joey agora inclui **Força do Espelho** no deck de 30 cartas. O efeito funciona durante a declaração de ataque; a primeira vitória também pode conceder a carta. O deck não é uma reprodução de produto oficial, e o portal não oferece outra lista.
+
 ## Validação
 
 Os testes em `tests/npcGallery.test.cjs`, `tests/interactions.test.cjs` e `tests/npc.test.cjs` verificam a identidade dos decks, navegação por índice, autoria dos botões, limites Discord e 30 partidas simuladas. O workflow também produz prévias PNG sem buscar artes na internet. Aceite visual humano no Discord ainda precisa acontecer antes de integrar à `main`.
