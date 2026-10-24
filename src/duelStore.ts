@@ -6,6 +6,7 @@ import {createDuel,step,legalActions,validateDuelCards,timeoutDuel,atk,def,type 
 import {getCard} from './collection';
 import {getNPC,dailyEvent} from './npcContent';
 import {getEffect} from './effectRegistry';
+import {getMonsterEffect} from './monsterEffects';
 import {settleEncounter} from './npcProgress';
 export type DuelRecord={id:string;guild_id:string;channel_id:string;message_id:string|null;status:string;revision:number;updated:number;public_revision?:number;state:DuelState|null;invite:{owner:string;opponent:string;name:string;cards:string[];extra?:string[]}|null};
 db.exec(`CREATE TABLE IF NOT EXISTS duels (id TEXT PRIMARY KEY,guild_id TEXT NOT NULL,channel_id TEXT NOT NULL,message_id TEXT,status TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 0,updated INTEGER NOT NULL,state TEXT,invite TEXT);
@@ -49,7 +50,22 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  });
  if(useful)return useful;if(s.phase==='response')return actions.find(a=>a.kind==='pass');
  if(s.phase==='discard')return [...actions].sort((a,b)=>{const score=(x:Action)=>x.kind==='discard'?(getCard(p.hand.find(c=>c.uid===x.card)!.id)!.atk??0):0;return score(a)-score(b);})[0];
- if(s.phase==='choice')return actions[0];
+ if(s.phase==='choice'){
+  if(s.choice?.source==='monsterTarget'&&s.pending.kind==='monsterEffect'){
+   const effect=getMonsterEffect(s.pending.id);
+   if(effect?.operation.kind==='destroy'||effect?.operation.kind==='bounce'){
+    // Prefer the strongest visible enemy. Never inspect an unrevealed opponent.
+    const enemies=actions.filter((a):a is Extract<Action,{kind:'choose'}>=>a.kind==='choose')
+     .map(a=>({action:a,monster:op.monsters.find(m=>m.uid===a.target)}))
+     .filter(x=>x.monster);
+    if(enemies.length)return enemies.sort((a,b)=>{
+     const score=(x:typeof enemies[number])=>x.monster!.faceUp?atk(x.monster!,s):1000;
+     return score(b)-score(a);
+    })[0].action;
+   }
+  }
+  return actions[0];
+ }
  const advanced=actions.find(a=>a.kind==='field')??actions.find(a=>a.kind==='fusion'&&a.position==='atk');if(advanced)return advanced;
  const spells=actions.filter((a):a is Extract<Action,{kind:'spell'}>=>a.kind==='spell').filter(a=>{
   const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
@@ -68,6 +84,8 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  };
  if(spells.length)return spells.sort((a,b)=>value(b)-value(a))[0];
  const summon=actions.filter((a):a is Extract<Action,{kind:'summon'}>=>a.kind==='summon'&&a.position==='atk').sort((a,b)=>getCard(p.hand.find(c=>c.uid===b.card)!.id)!.atk!-getCard(p.hand.find(c=>c.uid===a.card)!.id)!.atk!);
+ const flipSet=actions.find(a=>a.kind==='summon'&&a.position==='set'&&getMonsterEffect(p.hand.find(c=>c.uid===a.card)!.id)?.trigger==='flip');
+ if(flipSet&&(!summon.length||getCard(p.hand.find(c=>c.uid===summon[0].card)!.id)!.atk!<1800))return flipSet;
  if(summon.length)return summon[0];const set=actions.find(a=>a.kind==='set');if(set)return set;
  const position=actions.find(a=>a.kind==='position'&&a.mode!=='def');if(position)return position;
  const attacks=actions.filter((a):a is Extract<Action,{kind:'attack'}>=>a.kind==='attack').filter(a=>{if(!a.target)return true;const m=p.monsters.find(m=>m.uid===a.card)!;const target=op.monsters.find(m=>m.uid===a.target)!;return !target.faceUp||atk(m,s)>=(target.position==='atk'?atk(target,s):def(target,s));});if(attacks.length)return attacks[0];
