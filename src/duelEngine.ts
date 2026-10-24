@@ -1,20 +1,22 @@
 import {randomInt} from 'node:crypto';
 import {getCard} from './collection';
-export type CardRef={uid:string;id:string};
-export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;changed:number;attacked:number;atkBoost:number;defBoost:number};
-export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean};
-export type DuelPlayer={id:string;name:string;lp:number;deck:CardRef[];hand:CardRef[];monsters:Monster[];backrow:Backrow[];grave:CardRef[];extra?:CardRef[];field?:Backrow|null;banished?:CardRef[];summoned:boolean};
+import {enabledCardIds,getEffect} from './effectRegistry';
+import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips} from './classicEffects';
+export type CardRef={uid:string;id:string;properlySummoned?:boolean};
+export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number};
+export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean;equippedTo?:string};
+export type DuelPlayer={id:string;name:string;lp:number;deck:CardRef[];hand:CardRef[];monsters:Monster[];backrow:Backrow[];grave:CardRef[];extra?:CardRef[];field?:Backrow|null;banished?:CardRef[];summoned:boolean;battleProtectedUntil?:number};
 export type Action=
  |{kind:'summon';card:string;position:'atk'|'set';tributes:string[]}
- |{kind:'set';card:string}|{kind:'spell';card:string}|{kind:'field'|'setField';card:string}
+ |{kind:'set';card:string}|{kind:'spell';card:string;target?:string;position?:'atk'|'def'}|{kind:'field'|'setField';card:string}
  |{kind:'fusion';card:string;extra:string;materials:string[];position:'atk'|'def'}
  |{kind:'position';card:string;mode:'atk'|'def'|'flip'}
  |{kind:'attack';card:string;target?:string}|{kind:'trap';card:string;target:string}
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
-export type Pending={kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string};
+export type Pending={kind:'summon';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
 export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:{actor:number;card:string;target:string;id:string}[];choice?:{actor:number;targets:string[]};winner:string|null;reason:string;log:string[]};
-export const IMPLEMENTED_DUEL_CARDS:readonly string[]=["91152256", "48305365", "55550921", "44287299", "00756652", "03573512", "05053103", "48365709", "93221206", "15025844", "91939608", "50930991", "49218300", "75850803", "17358176", "28546905", "88819587", "75356564", "87796900", "55444629", "67494157", "28279543", "67724379", "33064647", "38199696", "66788016", "17814387", "44209392","34460851","24094653","86318356","45231177", "89631139", "46986414", "74677422"];
+export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
 export function validateDuelCards(ids:string[]){
@@ -30,20 +32,29 @@ export function createDuel(players:[{id:string;name:string;cards:string[];extra?
  }) as [DuelPlayer,DuelPlayer];
  return {version:1,players:ps,turn:1,current:first,phase:'main',resume:'main',priority:first,passes:0,pending:{kind:'none'},chain:[],winner:null,reason:'',log:[`${ps[first].name} começa. Sem compra ou batalha no primeiro turno.`]};
 }
-function fieldBonus(m:Monster,s?:DuelState){return s&&m.faceUp&&['Warrior','Beast-Warrior'].includes(card(m.id).race??'')?s.players.reduce((n,p)=>n+Number(p.field?.id==='86318356'&&p.field.faceUp&&p.field.resolved!==false)*200,0):0;}
-export function atk(m:Monster,s?:DuelState){return card(m.id).atk!+m.atkBoost+fieldBonus(m,s);}
-export function def(m:Monster,s?:DuelState){return card(m.id).defense!+m.defBoost+fieldBonus(m,s);}
+export function atk(m:Monster,s?:DuelState){return Math.max(0,(s&&m.swappedUntil===s.turn?card(m.id).defense!:card(m.id).atk!)+m.atkBoost+(s?persistentModifier(m,s,'atk'):0));}
+export function def(m:Monster,s?:DuelState){return Math.max(0,(s&&m.swappedUntil===s.turn?card(m.id).atk!:card(m.id).defense!)+m.defBoost+(s?persistentModifier(m,s,'def'):0));}
 export function decisionPlayer(s:DuelState){return s.phase==='response'?s.priority:s.phase==='choice'?s.choice!.actor:s.current;}
 export function timeoutDuel(input:DuelState):DuelState{if(input.phase==='finished')return input;const s=structuredClone(input);finish(s,1-decisionPlayer(s),'vitória por W.O.: tempo de decisão esgotado');return s;}
 function note(s:DuelState,text:string){s.log.push(text);s.log=s.log.slice(-12);}
 function findMonster(s:DuelState,uid:string){for(const p of s.players){const m=p.monsters.find(m=>m.uid===uid);if(m)return {p,m};}}
-function graveMonster(s:DuelState,uid:string){const found=findMonster(s,uid);if(found){found.p.monsters=found.p.monsters.filter(m=>m.uid!==uid);found.p.grave.push({uid:found.m.uid,id:found.m.id});}}
+function graveMonster(s:DuelState,uid:string){const found=findMonster(s,uid);if(found){const controller=s.players.indexOf(found.p);const owner=found.m.owner??controller;found.p.monsters=found.p.monsters.filter(m=>m.uid!==uid);s.players[owner].grave.push({uid:found.m.uid,id:found.m.id,...found.m.properlySummoned?{properlySummoned:true}:{}});cleanEquips(s);}}
+
 function finish(s:DuelState,winner:number|null,reason:string){s.phase='finished';s.winner=winner===null?null:s.players[winner].id;s.reason=reason;note(s,`${winner===null?'Empate':`${s.players[winner].name} venceu`}: ${reason}.`);}
 function checkLP(s:DuelState){if(s.players.every(p=>p.lp<=0))finish(s,null,'pontos de vida');else for(let i=0;i<2;i++)if(s.players[i].lp<=0)finish(s,1-i,'pontos de vida');}
 function combos<T>(values:T[],n:number):T[][]{if(n===0)return [[]];return values.flatMap((v,i)=>combos(values.slice(i+1),n-1).map(rest=>[v,...rest]));}
 function trapActions(s:DuelState,index:number):Action[]{
- return s.players[index].backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&card(c.id).kind==='trap').flatMap(c=>s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>({kind:'trap',card:c.uid,target:m.uid}) as Action)));
+ const out:Action[]=[];
+ for(const c of s.players[index].backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&card(c.id).kind==='trap')){
+  const effect=getEffect(c.id);if(!effect)continue;
+  if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&!['reinforcements','castleWalls'].includes(effect.kind))continue;
+  if(effect.kind==='reinforcements'||effect.kind==='castleWalls')out.push(...s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>({kind:'trap',card:c.uid,target:m.uid}) as Action)));
+  else if(effect.kind==='waboku')out.push({kind:'trap',card:c.uid,target:''});
+  else if(effect.kind==='justDesserts'&&s.players[1-index].monsters.length)out.push({kind:'trap',card:c.uid,target:''});
+  else if(effect.kind==='trapHole'&&s.phase==='response'&&s.pending.kind==='summon'&&s.pending.actor!==index){const m=findMonster(s,s.pending.card)?.m;if(m?.faceUp&&atk(m,s)>=1000)out.push({kind:'trap',card:c.uid,target:m.uid});}
+ }return out;
 }
+
 export function legalActions(s:DuelState,actor:string):Action[]{
  const index=s.players.findIndex(p=>p.id===actor);if(index<0||s.phase==='finished')return [];
  if(s.phase==='response')return index===s.priority?[...trapActions(s,index),{kind:'pass'}]:[];
@@ -66,7 +77,7 @@ export function legalActions(s:DuelState,actor:string):Action[]{
        for(const materials of combos(pool,recipe.length))if([...materials.map(m=>m.id)].sort().join(',')===[...recipe].sort().join(',')&&p.monsters.length-materials.filter(m=>p.monsters.some(n=>n.uid===m.uid)).length<3)
         for(const position of ['atk','def'] as const)actions.push({kind:'fusion',card:c.uid,extra:extra.uid,materials:materials.map(m=>m.uid),position});
       }
-    }else if(c.id!=='66788016'||op.monsters.some(m=>m.faceUp))actions.push({kind:'spell',card:c.uid});
+    }else actions.push(...spellActions(s,index,c));
   }
   for(const m of p.monsters)if(m.entered<s.turn&&m.changed<s.turn&&m.attacked<s.turn)actions.push({kind:'position',card:m.uid,mode:!m.faceUp?'flip':m.position==='atk'?'def':'atk'});
   if(s.turn>1)actions.push({kind:'battle'});
@@ -79,7 +90,7 @@ export function legalActions(s:DuelState,actor:string):Action[]{
 }
 function response(s:DuelState,pending:Pending,resume:'main'|'battle',priority=1-s.current){s.pending=pending;s.resume=resume;s.phase='response';s.priority=priority;s.passes=0;s.chain=[];}
 function endTurn(s:DuelState){
- for(const p of s.players)for(const m of p.monsters){m.atkBoost=0;m.defBoost=0;}
+ for(const p of s.players)for(const m of [...p.monsters]){m.atkBoost=0;m.defBoost=0;if(m.returnTo!==undefined&&m.returnTurn===s.turn){const target=s.players[m.returnTo];if(target!==p){if(target.monsters.length<3){p.monsters=p.monsters.filter(c=>c.uid!==m.uid);target.monsters.push(m);}else graveMonster(s,m.uid);}delete m.returnTo;delete m.returnTurn;}}
  if(s.players[s.current].hand.length>6){s.phase='discard';note(s,'Descarte até ficar com 6 cartas.');return;}
  nextTurn(s);
 }
@@ -88,46 +99,49 @@ function nextTurn(s:DuelState){s.current=1-s.current;s.turn++;s.phase='main';s.p
 }
 function resolve(s:DuelState){
  for(const link of [...s.chain].reverse()){
-  const target=findMonster(s,link.target)?.m;if(target?.faceUp){if(link.id==='17814387')target.atkBoost+=500;else target.defBoost+=500;}
-  const owner=s.players[link.actor];const c=owner.backrow.find(c=>c.uid===link.card);if(c){owner.backrow=owner.backrow.filter(c=>c.uid!==link.card);owner.grave.push({uid:c.uid,id:c.id});}
+  const target=findMonster(s,link.target)?.m;const effect=getEffect(link.id);
+  if(target?.faceUp){if(effect?.kind==='reinforcements')target.atkBoost+=500;else if(effect?.kind==='castleWalls')target.defBoost+=500;else if(effect?.kind==='trapHole')graveMonster(s,target.uid);}
+  if(effect?.kind==='waboku')s.players[link.actor].battleProtectedUntil=s.turn;
+  if(effect?.kind==='justDesserts'){const op=s.players[1-link.actor];op.lp=Math.max(0,op.lp-500*op.monsters.length);checkLP(s);}
+  discardBackrow(s,link.card);if(s.phase==='finished')break;
  }
- s.chain=[];const pending=s.pending;s.pending={kind:'none'};s.phase=s.resume;
+ s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};return;}const pending=s.pending;s.pending={kind:'none'};s.phase=s.resume;
  if(pending.kind==='end'){endTurn(s);return;}
  if(pending.kind==='battle'){s.phase='battle';note(s,'Fase de Batalha.');return;}
- if(pending.kind==='field'){const f=s.players[pending.actor].field;if(f?.uid===pending.card)f.resolved=true;note(s,'Sogen entrou em vigor.');return;}
+ if(pending.kind==='field'){const f=s.players[pending.actor].field;if(f?.uid===pending.card)f.resolved=true;note(s,`${f?card(f.id).name:'Magia de Campo'} entrou em vigor.`);return;}
  if(pending.kind==='fusion'){
   const p=s.players[pending.actor],poly=p.backrow.find(c=>c.uid===pending.card),fusion=p.extra?.find(c=>c.uid===pending.extra);
   const materials=pending.materials.map(uid=>[...p.hand,...p.monsters].find(c=>c.uid===uid));
   p.backrow=p.backrow.filter(c=>c.uid!==pending.card);if(poly)p.grave.push({uid:poly.uid,id:poly.id});
   if(fusion&&materials.every(Boolean)){
    for(const uid of pending.materials){const hand=p.hand.find(c=>c.uid===uid);if(hand){p.hand=p.hand.filter(c=>c.uid!==uid);p.grave.push(hand);}else graveMonster(s,uid);}
-   p.extra=p.extra!.filter(c=>c.uid!==fusion.uid);p.monsters.push({...fusion,position:pending.position,faceUp:true,entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});
+   p.extra=p.extra!.filter(c=>c.uid!==fusion.uid);p.monsters.push({...fusion,properlySummoned:true,owner:pending.actor,position:pending.position,faceUp:true,entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});
    note(s,`${p.name} fez a Invocação-Fusão de ${card(fusion.id).name}.`);response(s,{kind:'none'},'main');
   }return;
  }
  if(pending.kind==='spell'){
   const p=s.players[pending.actor],op=s.players[1-pending.actor];const c=p.backrow.find(c=>c.uid===pending.card);
-  p.backrow=p.backrow.filter(c=>c.uid!==pending.card);if(c)p.grave.push({uid:c.uid,id:c.id});
-  if(pending.id==='38199696'){p.lp+=500;note(s,`${p.name} recuperou 500 PV.`);}
-  else {const face=op.monsters.filter(m=>m.faceUp);if(face.length){const min=Math.min(...face.map(m=>atk(m,s)));const targets=face.filter(m=>atk(m,s)===min).map(m=>m.uid);
+  if(getEffect(pending.id)?.kind!=='equip'){p.backrow=p.backrow.filter(c=>c.uid!==pending.card);if(c)p.grave.push({uid:c.uid,id:c.id});}
+  if(resolveClassicSpell(s,pending,{destroy:graveMonster,note,finish,checkLP}))return;
+  if(getEffect(pending.id)?.kind==='fissure') {const face=op.monsters.filter(m=>m.faceUp);if(face.length){const min=Math.min(...face.map(m=>atk(m,s)));const targets=face.filter(m=>atk(m,s)===min).map(m=>m.uid);
    if(targets.length===1){note(s,`Fissura destruiu ${card(findMonster(s,targets[0])!.m.id).name}.`);graveMonster(s,targets[0]);}
    else{s.choice={actor:pending.actor,targets};s.phase='choice';note(s,'Fissura: escolha um dos monstros empatados no menor ATK.');}
-  }}return;
+  }}else throw new Error('Efeito sem implementação explícita.');return;
  }
  if(pending.kind==='attack'){
-  const attacking=findMonster(s,pending.card);if(!attacking)return;const a=attacking.m;const defender=pending.target?findMonster(s,pending.target):undefined;
+  const attacking=findMonster(s,pending.card);if(!attacking||attacking.p!==s.players[pending.actor]||!attacking.m.faceUp||attacking.m.position!=='atk')return;const a=attacking.m;const defender=pending.target?findMonster(s,pending.target):undefined;
   if(pending.stage==='declare'){
    if(defender&&!defender.m.faceUp){defender.m.faceUp=true;note(s,`Revelado: ${card(defender.m.id).name}.`);}
    response(s,{...pending,stage:'damage'},'battle',1-pending.actor);return;
   }
   const opponent=s.players[1-pending.actor];
-  if(!pending.target){if(opponent.monsters.length)return;opponent.lp=Math.max(0,opponent.lp-atk(a,s));note(s,`Ataque direto: ${atk(a,s)} de dano.`);}
+  if(!pending.target){if(opponent.monsters.length)return;const damage=opponent.battleProtectedUntil===s.turn?0:atk(a,s);opponent.lp=Math.max(0,opponent.lp-damage);note(s,`Ataque direto: ${damage} de dano.`);}
   else if(defender){const d=defender.m;const difference=atk(a,s)-(d.position==='atk'?atk(d,s):def(d,s));
    if(d.position==='atk'){
-    if(difference>0){graveMonster(s,d.uid);opponent.lp=Math.max(0,opponent.lp-difference);}
-    else if(difference<0){graveMonster(s,a.uid);s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}
-    else if(atk(a,s)>0){graveMonster(s,a.uid);graveMonster(s,d.uid);}
-   }else{if(difference>0)graveMonster(s,d.uid);else if(difference<0)s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}
+    if(difference>0){if(opponent.battleProtectedUntil!==s.turn){graveMonster(s,d.uid);opponent.lp=Math.max(0,opponent.lp-difference);}}
+    else if(difference<0){if(s.players[pending.actor].battleProtectedUntil!==s.turn){graveMonster(s,a.uid);s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}}
+    else if(atk(a,s)>0){if(s.players[pending.actor].battleProtectedUntil!==s.turn)graveMonster(s,a.uid);if(opponent.battleProtectedUntil!==s.turn)graveMonster(s,d.uid);}
+   }else{if(difference>0&&opponent.battleProtectedUntil!==s.turn)graveMonster(s,d.uid);else if(difference<0&&s.players[pending.actor].battleProtectedUntil!==s.turn)s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}
    note(s,`${card(a.id).name} enfrentou ${card(d.id).name}. Diferença: ${Math.abs(difference)}.`);
   }
   checkLP(s);
@@ -146,41 +160,41 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   const c=p.backrow.find(c=>c.uid===action.card)!;c.faceUp=true;s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target});s.passes=0;s.priority=1-index;note(s,`${p.name} ativou ${card(c.id).name}.`);
  }else if(action.kind==='summon'){
   const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);for(const uid of action.tributes)graveMonster(s,uid);
-  p.monsters.push({...c,position:action.position==='set'?'def':'atk',faceUp:action.position!=='set',entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});p.summoned=true;
-  note(s,action.position==='set'?`${p.name} baixou um monstro em Defesa.`:`${p.name} invocou ${card(c.id).name}.`);response(s,{kind:'none'},'main');
+  p.monsters.push({...c,owner:index,position:action.position==='set'?'def':'atk',faceUp:action.position!=='set',entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});p.summoned=true;
+  note(s,action.position==='set'?`${p.name} baixou um monstro em Defesa.`:`${p.name} invocou ${card(c.id).name}.`);response(s,action.position==='set'?{kind:'none'}:{kind:'summon',actor:index,card:c.uid},'main');
  }else if(action.kind==='set'){
   const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);
   p.backrow.push({...c,setTurn:s.turn,faceUp:false});note(s,`${p.name} baixou uma Magia/Armadilha.`);response(s,{kind:'none'},'main');
  }else if(action.kind==='field'||action.kind==='setField'){
   const inHand=p.hand.find(c=>c.uid===action.card);if(inHand){p.hand=p.hand.filter(c=>c.uid!==action.card);if(p.field)p.grave.push({id:p.field.id,uid:p.field.uid});p.field={...inHand,setTurn:s.turn,faceUp:action.kind==='field',resolved:false};}
   else if(p.field)p.field.faceUp=true;
-  note(s,action.kind==='field'?`${p.name} ativou Sogen na Zona de Campo.`:`${p.name} baixou uma Magia de Campo.`);
+  note(s,action.kind==='field'?`${p.name} ativou ${card(p.field!.id).name} na Zona de Campo.`:`${p.name} baixou uma Magia de Campo.`);
   response(s,action.kind==='field'?{kind:'field',actor:index,card:action.card}:{kind:'none'},'main');
  }else if(action.kind==='fusion'){
   const hand=p.hand.find(c=>c.uid===action.card);if(hand){p.hand=p.hand.filter(c=>c.uid!==action.card);p.backrow.push({...hand,setTurn:s.turn,faceUp:true});}else p.backrow.find(c=>c.uid===action.card)!.faceUp=true;
   note(s,`${p.name} ativou Polimerização.`);response(s,{kind:'fusion',actor:index,card:action.card,extra:action.extra,materials:action.materials,position:action.position},'main');
  }else if(action.kind==='spell'){
   let c=p.hand.find(c=>c.uid===action.card);if(c){p.hand=p.hand.filter(c=>c.uid!==action.card);p.backrow.push({...c,setTurn:s.turn,faceUp:true});}else{const back=p.backrow.find(c=>c.uid===action.card)!;back.faceUp=true;c=back;}
-  note(s,`${p.name} ativou ${card(c.id).name}.`);response(s,{kind:'spell',actor:index,card:c.uid,id:c.id},'main');
+  note(s,`${p.name} ativou ${card(c.id).name}.`);response(s,{kind:'spell',actor:index,card:c.uid,id:c.id,...action.target?{target:action.target}:{},...action.position?{position:action.position}:{}},'main');
  }else if(action.kind==='position'){
-  const m=p.monsters.find(m=>m.uid===action.card)!;m.faceUp=true;m.position=action.mode==='def'?'def':'atk';m.changed=s.turn;note(s,`${p.name} mudou a posição de ${card(m.id).name}.`);response(s,{kind:'none'},'main');
+  const m=p.monsters.find(m=>m.uid===action.card)!;m.faceUp=true;m.position=action.mode==='def'?'def':'atk';m.changed=s.turn;note(s,`${p.name} mudou a posição de ${card(m.id).name}.`);response(s,action.mode==='flip'?{kind:'summon',actor:index,card:m.uid}:{kind:'none'},'main');
  }else if(action.kind==='battle')response(s,{kind:'battle'},'main');
  else if(action.kind==='end')response(s,{kind:'end'},s.phase as 'main'|'battle');
  else if(action.kind==='attack'){
   const m=p.monsters.find(m=>m.uid===action.card)!;m.attacked=s.turn;note(s,`${p.name} declarou um ataque com ${card(m.id).name}.`);response(s,{kind:'attack',actor:index,card:m.uid,target:action.target,stage:'declare'},'battle');
  }else if(action.kind==='choose'){note(s,`Fissura destruiu ${card(findMonster(s,action.target)!.m.id).name}.`);graveMonster(s,action.target);s.choice=undefined;s.phase=s.resume;}
  else if(action.kind==='discard'){const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);p.grave.push(c);note(s,`${p.name} descartou ${card(c.id).name}.`);if(p.hand.length<=6)nextTurn(s);}
- settle(s);return s;
+ cleanEquips(s);settle(s);cleanEquips(s);return s;
 }
 export function actionLabel(s:DuelState,actor:string,a:Action){
- const p=s.players.find(p=>p.id===actor)!;const all=[...p.hand,...s.players.flatMap(p=>[...p.monsters,...p.backrow])];
- const name=(uid:string)=>{for(const owner of s.players){const zone=owner.monsters.findIndex(m=>m.uid===uid);if(zone>=0){const m=owner.monsters[zone];return `${owner.id===actor?'Seu':'Rival'} M${zone+1} ${m.faceUp||owner.id===actor?card(m.id).name:'virado para baixo'}`;}}const c=all.find(c=>c.uid===uid);return c?card(c.id).name:'carta';};
+ const p=s.players.find(p=>p.id===actor)!;const all=[...p.hand,...s.players.flatMap(p=>[...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.field?[p.field]:[]])];
+ const name=(uid:string)=>{for(const owner of s.players){const zone=owner.monsters.findIndex(m=>m.uid===uid);if(zone>=0){const m=owner.monsters[zone];return `${owner.id===actor?'Seu':'Rival'} M${zone+1} ${m.faceUp||owner.id===actor?card(m.id).name:'virado para baixo'}`;}const back=owner.backrow.findIndex(b=>b.uid===uid);if(back>=0){const b=owner.backrow[back];return `${owner.id===actor?'Sua':'Rival'} M/A${back+1} ${b.faceUp||owner.id===actor?card(b.id).name:'virada para baixo'}`;}if(owner.field?.uid===uid)return owner.field.faceUp||owner.id===actor?card(owner.field.id).name:'Campo rival virado para baixo';}const c=all.find(c=>c.uid===uid);return c?card(c.id).name:'carta';};
  if(a.kind==='summon')return `${a.position==='set'?'Baixar DEF':'Invocar ATK'}: ${name(a.card)}${a.tributes.length?` | Tributar ${a.tributes.map(uid=>'M'+(p.monsters.findIndex(m=>m.uid===uid)+1)).join(' + ')}`:''}`;
- if(a.kind==='field')return 'Ativar Sogen na Zona de Campo';if(a.kind==='setField')return 'Baixar Sogen na Zona de Campo';if(a.kind==='fusion')return `Fusão: Espadachim das Chamas (${a.position.toUpperCase()}) | Materiais: ${a.materials.map(name).join(' + ')}`;
- if(a.kind==='set')return `Baixar: ${name(a.card)}`;if(a.kind==='spell')return `Ativar: ${name(a.card)}`;
+ if(a.kind==='field')return `Ativar ${name(a.card)} na Zona de Campo`;if(a.kind==='setField')return `Baixar ${name(a.card)} na Zona de Campo`;if(a.kind==='fusion')return `Fusão: Espadachim das Chamas (${a.position.toUpperCase()}) | Materiais: ${a.materials.map(name).join(' + ')}`;
+ if(a.kind==='set')return `Baixar: ${name(a.card)}`;if(a.kind==='spell')return `Ativar: ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.position?` (${a.position.toUpperCase()})`:''}`;
  if(a.kind==='position')return `${a.mode==='flip'?'Virar para ATK':`Mudar para ${a.mode.toUpperCase()}`}: ${name(a.card)}`;
  if(a.kind==='attack'){const target=a.target?findMonster(s,a.target):undefined;return `Atacar: ${name(a.card)} → ${target?name(target.m.uid):'direto'}`;}
- if(a.kind==='trap')return `Ativar ${name(a.card)} → ${name(a.target)}`;
+ if(a.kind==='trap')return `Ativar ${name(a.card)}${a.target?` → ${name(a.target)}`:''}`;
  if(a.kind==='choose')return `Fissura: destruir ${name(a.target)}`;
  if(a.kind==='discard')return `Descartar: ${name(a.card)}`;
  return {battle:'Entrar na Batalha',end:'Encerrar turno',pass:'Não responder / passar',concede:'Desistir'}[a.kind];
