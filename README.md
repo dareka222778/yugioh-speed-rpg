@@ -80,3 +80,5 @@ Renderer: `src/cardRenderer.ts`, usando sharp 0.34.5. Cache de imagens do sharp 
 - A Fase 2 não implementa montagem de decks, duelos, efeitos, loja, preços ou raridades do RPG. A seleção é temática e não certifica legalidade de torneio Speed Duel.
 
 Validação inclui rollback simulado durante entrega, migração de jogador antigo, preservação de saldo/perfil/inventário, reabertura de banco, três conjuntos iniciais, repetição de ações, paginação, busca com acentos e cache/falha de arte. Nenhuma nova dependência npm na Fase 2. `package.json` e `package-lock.json` devem sempre ser atualizados juntos.
+
+Antes de entregar conjuntos a jogadores antigos, a inicialização grava uma cópia de recuperação SQLite em `data/backups` (junto ao banco configurado). Se o backup falhar, a migração não prossegue. A coleção também é contada no banco e registrada nos logs de início para verificação operacional.
