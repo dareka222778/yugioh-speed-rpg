@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GatewayIntentBits, MessageFlags, ModalBuilder, REST, Routes, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
+import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GatewayIntentBits, MessageFlags, ModalBuilder, REST, Routes, SlashCommandBuilder, TextInputBuilder, TextInputStyle, type Interaction } from 'discord.js';
 import { chooseStarterDeck, createPlayer, getPlayer, updateProfile, getCollection, grantLegacyStarters, grantStarterCards, backupPendingStarterGrants, db } from './database';
 import { isStarterDeck, starterDecks } from './starterDecks';
 import { profileMessage, themes, validateProfile } from './profile';
@@ -12,6 +12,7 @@ import {visualDeckMessage} from './deckUI';
 import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChallenge,createTraining,createNPCDuel,currentDuel,getDuel,performDuelAction,setDuelMessage,type DuelRecord} from './duelStore';
 import {visualDuelPublic,visualDuelPrivate,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
 
+import {retryNetwork} from './networkRetry';
 import {npcLobby} from './npcUI';
 import {npcs} from './npcContent';
 
@@ -53,10 +54,15 @@ const commands = [
     .addSubcommand(c=>c.setName('ver').setDescription('Abra seu duelo atual e sua mão privada.'))
     .addSubcommand(c=>c.setName('sair').setDescription('Cancele seu convite ou confirme a desistência do duelo.'))
 ].map(c => c.toJSON());
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-client.on(Events.Error, error => console.error('Discord client:', errorSummary(error)));
-client.on(Events.Warn, warning => console.warn('Discord aviso:', warning));
-client.once(Events.ClientReady, c => {console.log(`Yu-Gi-Oh! Speed RPG online como ${c.user.tag}`);const timer=setInterval(()=>void sweepDuelTimeouts(),10_000);timer.unref();void sweepDuelTimeouts();});
+let duelTimer:ReturnType<typeof setInterval>|undefined;
+function createDiscordClient(){
+ const c=new Client({intents:[GatewayIntentBits.Guilds]});
+ c.on(Events.Error,error=>console.error('Discord client:',errorSummary(error)));
+ c.on(Events.Warn,warning=>console.warn('Discord aviso:',warning));
+ c.once(Events.ClientReady,ready=>{console.log(`Yu-Gi-Oh! Speed RPG online como ${ready.user.tag}`);if(!duelTimer){duelTimer=setInterval(()=>void sweepDuelTimeouts(),10_000);duelTimer.unref();}void sweepDuelTimeouts();});
+ c.on(Events.InteractionCreate,handleInteraction);return c;
+}
+let client=createDiscordClient();
 const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nPara começar: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Use `/deck ver` para montar e ativar seus decks. Depois abra `/npc ver` para desafios com prêmios, `/duelo treino` ou `/duelo desafiar`. Duelos básicos com 4000 PV, mão privada, tributos e quatro efeitos implementados; com Campo, Cemitério e uma Fusão de Deck Adicional; sem Skills.';
 // One mutation at a time per player, including network downloads.
 async function showCard(id:string, userId:string) {
@@ -82,7 +88,7 @@ async function refreshArena(record:DuelRecord){
   }catch(error){console.error('Falha ao atualizar arena; use Atualizar campo:',errorSummary(error));}
  });arenaUpdates.set(record.id,work);try{await work;}finally{if(arenaUpdates.get(record.id)===work)arenaUpdates.delete(record.id);}
 }
-client.on(Events.InteractionCreate, async i => {
+async function handleInteraction(i:Interaction) {
   console.log(`Interação recebida: ${i.type} / ${'commandName' in i ? i.commandName : 'componente'}`);
   if(i.isAutocomplete()) {
     try {const matches=searchCards(String(i.options.getFocused()));const owned=i.commandName==='deck'?new Set(getCollection(i.user.id).map(c=>c.card_key)):null;await i.respond(matches.filter(c=>!owned||owned.has(c.id)).slice(0,25).map(c=>({name:`${c.name} • ${c.id}`.slice(0,100),value:c.id})));} catch(error){console.error('Falha no autocomplete:',errorSummary(error));}
@@ -291,7 +297,7 @@ client.on(Events.InteractionCreate, async i => {
       else await i.reply({ content, flags: MessageFlags.Ephemeral });
     } catch (replyError) { console.error('Falha ao responder:', errorSummary(replyError)); }
   }
-});
+}
 async function main() {
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
@@ -299,12 +305,17 @@ async function main() {
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
   console.log('Fase 5: NPCs clássicos, evento diário e recompensas transacionais carregados.');
+  console.log('Rede: recuperação automática de DNS/conexão ativada (5–30 segundos entre tentativas).');
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
-  await client.login(token);
+  await retryNetwork(async attempt=>{
+    // discord.js destroys a failed login client; every retry needs a fresh instance.
+    if(attempt>1)client=createDiscordClient();
+    await client.login(token);
+  },'Conexão ao Discord');
   const rest = new REST({ version: '10' }).setToken(token!);
   console.log('Sincronizando comandos sem bloquear a conexão do bot.');
   try {
-    await rest.put(guildId ? Routes.applicationGuildCommands(clientId!,guildId) : Routes.applicationCommands(clientId!), { body: commands });
+    await retryNetwork(()=>rest.put(guildId ? Routes.applicationGuildCommands(clientId!,guildId) : Routes.applicationCommands(clientId!), { body: commands }),'Registro dos comandos');
     console.log('Fase 5: /npc, /duelo, /deck, /colecao e /carta registrados.');
   } catch(error) {
     console.error('Falha ao sincronizar comandos; a conexão do bot continua ativa:',errorSummary(error));
