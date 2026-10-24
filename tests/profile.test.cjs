@@ -17,7 +17,7 @@ test('profile is one image, includes accessible real stats and private controls'
   const embed = payload.embeds[0].toJSON();
   assert.equal(embed.color,0xf1c40f); assert.equal(embed.image.url,'attachment://ficha-duelista.png');
   assert.match(payload.files[0].description,/1000 DP/);
-  assert.equal(payload.components[0].toJSON().components.length,3);
+  assert.equal(payload.components[0].toJSON().components.length,4);
   assert.equal((await profileMessage(player,avatar,false)).components.length,0);
   const meta = await sharp(payload.files[0].attachment).metadata();
   assert.equal(meta.width,1000); assert.equal(meta.height,760);
