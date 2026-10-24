@@ -5,6 +5,7 @@ import {starterContents} from './cardCatalog';
 import {createDuel,step,legalActions,validateDuelCards,timeoutDuel,atk,def,type Action,type DuelState} from './duelEngine';
 import {getCard} from './collection';
 import {getNPC,dailyEvent} from './npcContent';
+import {getEffect} from './effectRegistry';
 import {settleEncounter} from './npcProgress';
 export type DuelRecord={id:string;guild_id:string;channel_id:string;message_id:string|null;status:string;revision:number;updated:number;public_revision?:number;state:DuelState|null;invite:{owner:string;opponent:string;name:string;cards:string[];extra?:string[]}|null};
 db.exec(`CREATE TABLE IF NOT EXISTS duels (id TEXT PRIMARY KEY,guild_id TEXT NOT NULL,channel_id TEXT NOT NULL,message_id TEXT,status TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 0,updated INTEGER NOT NULL,state TEXT,invite TEXT);
@@ -37,12 +38,35 @@ export const acceptChallenge=db.transaction((id:string,actor:string,guild:string
 export const declineChallenge=db.transaction((id:string,actor:string,guild:string):DuelRecord=>{const r=getDuel(id);if(r.guild_id!==guild||r.status!=='pending'||![r.invite!.owner,r.invite!.opponent].includes(actor))throw new Error('Não é possível cancelar esse convite.');r.status='declined';r.revision++;r.updated=Date.now();save(r);return r;});
 export function chooseNPC(s:DuelState,id:string):Action|undefined {
  const actions=legalActions(s,id);const p=s.players.find(p=>p.id===id)!;const op=s.players.find(p=>p.id!==id)!;
- const beneficial=actions.filter(a=>a.kind==='trap'&&p.monsters.some(m=>m.uid===a.target&&m.faceUp));
- if(beneficial.length)return beneficial[0];if(s.phase==='response')return actions.find(a=>a.kind==='pass');
+ const source=(a:Extract<Action,{kind:'trap'|'spell'}>)=>[...p.hand,...p.backrow].find(c=>c.uid===a.card);
+ const fast=actions.filter((a):a is Extract<Action,{kind:'trap'}>=>a.kind==='trap');
+ const useful=fast.find(a=>{const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
+  if(effect.kind==='reinforcements'||effect.kind==='castleWalls')return p.monsters.some(m=>m.uid===a.target&&m.faceUp);
+  if(effect.kind==='trapHole')return op.monsters.some(m=>m.uid===a.target);
+  if(effect.kind==='waboku')return s.pending.kind==='attack'&&s.players[s.pending.actor].id!==id;
+  if(effect.kind==='justDesserts')return op.monsters.length>=2||op.lp<=op.monsters.length*500;
+  return false;
+ });
+ if(useful)return useful;if(s.phase==='response')return actions.find(a=>a.kind==='pass');
  if(s.phase==='discard')return [...actions].sort((a,b)=>{const score=(x:Action)=>x.kind==='discard'?(getCard(p.hand.find(c=>c.uid===x.card)!.id)!.atk??0):0;return score(a)-score(b);})[0];
  if(s.phase==='choice')return actions[0];
  const advanced=actions.find(a=>a.kind==='field')??actions.find(a=>a.kind==='fusion'&&a.position==='atk');if(advanced)return advanced;
- const spells=actions.filter(a=>a.kind==='spell');if(spells.length)return spells[0];
+ const spells=actions.filter((a):a is Extract<Action,{kind:'spell'}>=>a.kind==='spell').filter(a=>{
+  const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
+  if(effect.kind==='equip')return p.monsters.some(m=>m.uid===a.target);
+  if(effect.kind==='darkHole')return op.monsters.length>0&&op.monsters.filter(m=>m.faceUp).reduce((n,m)=>n+atk(m,s),0)>=p.monsters.reduce((n,m)=>n+atk(m,s),0);
+  if(effect.kind==='deSpell'||effect.kind==='removeTrap')return op.backrow.some(b=>b.uid===a.target)||op.field?.uid===a.target;
+  if(effect.kind==='giantTrunade')return op.backrow.length+Number(!!op.field)>p.backrow.length+Number(!!p.field);
+  if(effect.kind==='cardDestruction')return op.hand.length>p.hand.length+1;
+  if(effect.kind==='shieldSword')return p.monsters.some(m=>m.faceUp&&(getCard(m.id)!.defense??0)>(getCard(m.id)!.atk??0));
+  return true;
+ });
+ const value=(a:Extract<Action,{kind:'spell'}>)=>{
+  // Only our monsters, face-up rival monsters and public graves inform target scores.
+  const own=p.monsters.find(m=>m.uid===a.target),rival=op.monsters.find(m=>m.uid===a.target&&m.faceUp),grave=[...p.grave,...op.grave].find(m=>m.uid===a.target);
+  const target=own??rival??grave;return target?(getCard(target.id)?.atk??0):0;
+ };
+ if(spells.length)return spells.sort((a,b)=>value(b)-value(a))[0];
  const summon=actions.filter((a):a is Extract<Action,{kind:'summon'}>=>a.kind==='summon'&&a.position==='atk').sort((a,b)=>getCard(p.hand.find(c=>c.uid===b.card)!.id)!.atk!-getCard(p.hand.find(c=>c.uid===a.card)!.id)!.atk!);
  if(summon.length)return summon[0];const set=actions.find(a=>a.kind==='set');if(set)return set;
  const position=actions.find(a=>a.kind==='position'&&a.mode!=='def');if(position)return position;
