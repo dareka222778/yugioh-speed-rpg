@@ -34,7 +34,7 @@ test('rendered duel arena shows bundled NPC portrait without revealing any hidde
  assert.notDeepEqual(on,off,'Character portrait must create real, visible pixels in the duel HUD');
 });
 test('gallery portrait, deck editor and private duel PNGs share blue layout and stable image sizes',async()=>{
- const hero=await renderNPC({id:'kaiba',name:'Seto Kaiba',index:2,prefix:'SDK',year:2002,won:false,reward:'100 DP',daily:false,dailyClaimed:false,cards:[],page:0,view:'hero'});
+ const hero=await renderNPC({id:'kaiba',name:'Seto Kaiba',index:2,style:'Dragões',description:'Poder dos dragões',won:false,reward:'100 DP',daily:false,dailyClaimed:false,cards:[],page:0,view:'hero',mainCount:30,extraCount:0});
  const deck={name:'Duel Studio',slot:1,active:false,errors:[],total:20,extraTotal:0,items:[],revision:1};
  const workshop=await renderDeck({deck,visible:['91152256'],selected:'91152256',owned:[],page:1,pages:1},async()=>null);
  assert.deepEqual([(await sharp(hero).metadata()).width,(await sharp(hero).metadata()).height],[1280,720]);
