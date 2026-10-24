@@ -156,7 +156,7 @@ Os alvos são selecionados na ativação, antes da janela de resposta; efeitos n
 
 ### Como experimentar no Discord
 
-Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui oito monstros de efeito clássicos (os seis anteriores, Sangan e Bruxa da Floresta Negra), Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
+Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui nove monstros de efeito clássicos (os seis anteriores, Sangan, Bruxa da Floresta Negra e Jinzo), Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
 
 Para instalar as alterações no bot hospedado, atualize o código da branch aprovada, compile e reinicie o processo, e registre os novos comandos slash no Discord. Commits no GitHub não atualizam automaticamente uma instância em execução.
 
@@ -169,3 +169,7 @@ Ainda faltam outras famílias clássicas de efeitos (incluindo gatilhos ao envia
 O escopo de cada fase e as porcentagens fundamentadas por entrega estão em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md). Após `npm run build`, use `npm run progress` para mostrar percentual concluído/restante da engine e do redesign, cobertura **real** do lote histórico e número de monstros de efeito jogáveis.
 
 A versão atual incorpora Sangan e Bruxa da Floresta Negra: ao irem **do campo para o Cemitério**, podem buscar um monstro elegível no Deck com ATK/DEF até 1500, com limitação por nome e bloqueio temporário de ativação dos efeitos do card buscado. Há testes de busca depois da corrente, Tributo, batalha, proprietário verdadeiro e privacidade da escolha.
+
+### Efeito contínuo: Jinzo
+
+O Jinzo com face para cima bloqueia a ativação de Armadilhas de ambos os jogadores e nega efeitos de Armadilha no campo durante a resolução de correntes. Seu bloqueio é recalculado conforme o estado do campo; monstros virados para baixo não o aplicam, e a remoção de Jinzo devolve acesso às Armadilhas. O laboratório pode testar esse caso sem conceder cartas. A base está em `src/monsterEffects.ts`, a execução em `src/duelEngine.ts` e os cenários em `tests/classicContinuousEffects.test.cjs`.
