@@ -20,7 +20,7 @@ try{
  };
  ({renderNPC}=require('../dist/npcRenderer'));
 }finally{Module._load=originalLoad;}
-const {renderDeck}=require('../dist/deckRenderer');
+const {renderDeck,renderOwnedCard}=require('../dist/deckRenderer');
 const {getCard,kindLabel}=require('../dist/collection');
 const {getNPC}=require('../dist/npcContent');
 
@@ -57,7 +57,8 @@ async function run(){
   ['arena-privada.png',await renderDuel(s,'preview',noNetwork)],
   ['duelista-kaiba.png',await renderNPC(heroModel)],
   ['carta-individual.png',await renderNPC(cardModel)],
-  ['editor-deck.png',await renderDeck({deck,visible:cards.slice(0,6),selected:cards[0],owned:[],page:1,pages:4},noNetwork)]
+  ['editor-deck.png',await renderDeck({deck,visible:cards.slice(0,6),selected:cards[0],owned:[],page:1,pages:4},noNetwork)],
+  ['meu-deck-carta.png',await renderOwnedCard({id:cards[0],deckName:'Deck do Jogador',inDeck:2,owned:2,index:0,total:12},noNetwork)]
  ];
  for(const [name,png]of previews){
   const data=await sharp(png).png().toBuffer();
