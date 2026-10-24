@@ -18,7 +18,7 @@ test('azure design tokens pass WCAG AA contrast and maintain one neutral blue UI
  assert.deepEqual([duelLayout.width,duelLayout.boardHeight,duelLayout.handHeight,duelLayout.zoneCount],[1400,1020,340,3]);
  assert.equal(embedColors.deck,embedColors.npc);assert.equal(embedColors.public,embedColors.npc);
 });
-test('rendered duel arena shows bundled NPC portrait without revealing any hidden card art',async()=>{
+test('original amber duel arena protects hidden card art and does not inherit portrait/gallery redesigns',async()=>{
  const s=createDuel([{id:'owner',name:'Duelista',cards:basic},{id:'npc-azure',name:'Joey Wheeler',cards:basic}],()=>.5);
  s.encounter={npcId:'joey'};
  s.players[1].monsters=[{uid:'enemy-secret',id:'15025844',faceUp:false,position:'def',entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0,owner:1}];
@@ -31,9 +31,9 @@ test('rendered duel arena shows bundled NPC portrait without revealing any hidde
  const baseline=await renderDuel(noCharacter,undefined,provider);
  const crop={left:222,top:118,width:64,height:100};
  const [on,off]=await Promise.all([sharp(npc).extract(crop).raw().toBuffer(),sharp(baseline).extract(crop).raw().toBuffer()]);
- assert.notDeepEqual(on,off,'Character portrait must create real, visible pixels in the duel HUD');
+ assert.deepEqual(on,off,'Original duel layout must not introduce NPC portrait overlays');
 });
-test('gallery portrait, deck editor and private duel PNGs share blue layout and stable image sizes',async()=>{
+test('shared blue command galleries coexist with original amber duel board and private hand image sizes',async()=>{
  const hero=await renderNPC({id:'kaiba',name:'Seto Kaiba',index:2,style:'Dragões',description:'Poder dos dragões',won:false,reward:'100 DP',daily:false,dailyClaimed:false,cards:[],page:0,view:'hero',mainCount:30,extraCount:0});
  const deck={name:'Duel Studio',slot:1,active:false,errors:[],total:20,extraTotal:0,items:[],revision:1};
  const workshop=await renderDeck({deck,visible:['91152256'],selected:'91152256',owned:[],page:1,pages:1},async()=>null);
@@ -44,19 +44,16 @@ test('gallery portrait, deck editor and private duel PNGs share blue layout and 
  assert.equal((await sharp(privatePNG).metadata()).height,1360);
 });
 
-test('saved duelist profile portrait appears as actual HUD pixels in public and private arenas',async()=>{
+test('original duel field stays pixel-identical when optional profile portrait files are added',async()=>{
  const {portraitPath}=require('../dist/profile');
  const s=createDuel([{id:'901',name:'Avatar',cards:basic},{id:'902',name:'Rival',cards:basic}],()=>.5);
- const image=await sharp({create:{width:160,height:160,channels:4,background:{r:235,g:62,b:90,alpha:1}}}).png().toBuffer();
+ const portrait=await sharp({create:{width:160,height:160,channels:4,background:'#e53045'}}).png().toBuffer();
  const provider=async()=>null;
  const earlier=await renderDuel(s,undefined,provider);
- const file=portraitPath('901');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,image);
- const updated=await renderDuel(s,undefined,provider);
- const region={left:220,top:553,width:75,height:136};
- const [a,b]=await Promise.all([sharp(earlier).extract(region).raw().toBuffer(),sharp(updated).extract(region).raw().toBuffer()]);
- assert.notDeepEqual(a,b,'uploaded duelist photo must be shown instead of a placeholder');
- const privateImage=await renderDuel(s,'901',provider);
- const privateCrop=await sharp(privateImage).extract({left:220,top:893,width:75,height:136}).raw().toBuffer();
- assert.notDeepEqual(privateCrop,a,'portrait remains present when a hand panel is shown');
+ const file=portraitPath('901');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,portrait);
+ const later=await renderDuel(s,undefined,provider);
+ assert.deepEqual(later,earlier,'portrait belongs to profile commands, not the original duel field');
+ const hand=await renderDuel(s,'901',provider);
+ assert.deepEqual([(await sharp(hand).metadata()).width,(await sharp(hand).metadata()).height],[1400,1360]);
 });
 require('node:test').after(()=>fs.rmSync(temp,{recursive:true,force:true}));
