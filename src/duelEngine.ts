@@ -94,6 +94,10 @@ function trapActions(s:DuelState,index:number):Action[]{
   else if(effect.kind==='justDesserts'&&s.players[1-index].monsters.length)out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='mirrorForce'&&s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='declare'&&s.pending.actor!==index)
    out.push({kind:'trap',card:c.uid,target:''});
+  else if(effect.kind==='sakuretsuArmor'&&s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='declare'&&s.pending.actor!==index){
+   const attacker=findMonster(s,s.pending.card);
+   if(attacker?.m.faceUp&&attacker.m.position==='atk')out.push({kind:'trap',card:c.uid,target:attacker.m.uid});
+  }
   else if(effect.kind==='torrentialTribute'&&s.phase==='response'&&['summon','flip','specialSummon'].includes(s.pending.kind)&&s.players.some(p=>p.monsters.length))
    out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='trapHole'&&s.phase==='response'&&(s.pending.kind==='summon'||s.pending.kind==='flip')&&s.pending.actor!==index){const m=findMonster(s,s.pending.card)?.m;if(m?.faceUp&&atk(m,s)>=1000)out.push({kind:'trap',card:c.uid,target:m.uid});}
@@ -281,6 +285,10 @@ function resolve(s:DuelState){
    const attackers=opponent.monsters.filter(m=>m.position==='atk').map(m=>m.uid);
    for(const uid of attackers)graveMonster(s,uid);
    note(s,`Força do Espelho destruiu ${attackers.length} monstro(s) adversário(s) em Ataque.`);
+  }
+  if(effect?.kind==='sakuretsuArmor'&&target?.faceUp&&target.position==='atk'){
+   graveMonster(s,target.uid);
+   note(s,'Armadura Sakuretsu destruiu o monstro atacante.');
   }
   discardBackrow(s,link.card);},link=>{discardBackrow(s,link.card);},()=>s.phase==='finished');
  s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};s.pendingNegated=false;return;}
