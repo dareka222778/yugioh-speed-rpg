@@ -106,3 +106,15 @@ export function updateProfile(id: string, profile: { character_name: string; bio
   db.prepare('UPDATE players SET character_name = ?, biography = ?, theme = ? WHERE discord_id = ?')
     .run(profile.character_name, profile.biography, profile.theme, id);
 }
+
+// Refuse automatic grants if their local recovery copy cannot be completed.
+export async function backupPendingStarterGrants(): Promise<string|null> {
+  const pending = db.prepare(`SELECT 1 FROM players p LEFT JOIN starter_grants g ON p.discord_id=g.discord_id
+    WHERE p.starter_deck IN ('warrior','spellcaster','dragon') AND g.discord_id IS NULL LIMIT 1`).get();
+  if (!pending) return null;
+  const folder=path.join(path.dirname(databasePath),'backups');
+  fs.mkdirSync(folder,{recursive:true});
+  const filename=path.join(folder,`before-starter-grants-${Date.now()}-${Math.random().toString(16).slice(2)}.sqlite`);
+  try {await db.backup(filename);} catch(error) {fs.rmSync(filename,{force:true});throw error;}
+  return filename;
+}
