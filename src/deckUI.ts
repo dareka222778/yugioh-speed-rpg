@@ -71,7 +71,7 @@ export function deckCardMessage(owner:string,slot=1,requestedIndex=0){
  const key=(action:string,index:number,selected=id)=>`deck:${action}:${owner}:${slot}:${deck.revision}:${index}:${selected}`;
  const embed=new EmbedBuilder().setColor(embedColors.deck)
   .setTitle(`${requestedIndex+1}/${ids.length} • ${escapeMarkdown(card.name)}`)
-  .setDescription(`**${kindLabel(card)}**${card.kind==='monster'?` • ${card.attribute??'—'} • ${card.race??'—'}\\n**NÍVEL ${card.level}  /  ATK ${card.atk}  /  DEF ${card.defense}**`:''}\n\n${card.summary}\n\n**No seu deck:** ${quantity} ×  •  **Na coleção:** ${owned} ×`)
+  .setDescription(`**${kindLabel(card)}**${card.kind==='monster'?` • ${card.attribute??'—'} • ${card.race??'—'}\n**NÍVEL ${card.level}  /  ATK ${card.atk}  /  DEF ${card.defense}**`:''}\n\n${card.summary}\n\n**No seu deck:** ${quantity} ×  •  **Na coleção:** ${owned} ×`)
   .setFooter({text:`Seu deck ${slot}/3 • Carta ${requestedIndex+1}/${ids.length} • Somente você pode editar`});
  const rows=[new ActionRowBuilder<ButtonBuilder>().addComponents(
    new ButtonBuilder().setCustomId(key('card',(requestedIndex-1+ids.length)%ids.length)).setLabel('◀ Carta anterior').setStyle(ButtonStyle.Secondary),
