@@ -1,6 +1,6 @@
 {
   "name": "yugioh-speed-rpg",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "private": true,
   "description": "Discord RPG bot inspired by Yu-Gi-Oh! Speed Duel",
   "main": "dist/index.js",
