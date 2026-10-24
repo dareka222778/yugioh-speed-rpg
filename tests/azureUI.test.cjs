@@ -1,0 +1,42 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const sharp=require('sharp');
+const {azure,contrast,duelLayout,embedColors}=require('../dist/duelTheme');
+const {createDuel}=require('../dist/duelEngine');
+const {renderDuel}=require('../dist/duelRenderer');
+const {renderNPC}=require('../dist/npcRenderer');
+const {renderDeck}=require('../dist/deckRenderer');
+const {starterContents}=require('../dist/cardCatalog');
+const basic=starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id));
+test('azure design tokens pass WCAG AA contrast and maintain one neutral blue UI accent',()=>{
+ assert.ok(contrast(azure.text,azure.deep)>=7);
+ assert.ok(contrast(azure.muted,azure.surface)>=4.5);
+ assert.ok(contrast(azure.primaryBright,azure.navy)>=4.5);
+ assert.deepEqual([duelLayout.width,duelLayout.boardHeight,duelLayout.handHeight,duelLayout.zoneCount],[1400,1020,340,3]);
+ assert.equal(embedColors.deck,embedColors.npc);assert.equal(embedColors.public,embedColors.npc);
+});
+test('rendered duel arena shows bundled NPC portrait without revealing any hidden card art',async()=>{
+ const s=createDuel([{id:'owner',name:'Duelista',cards:basic},{id:'npc-azure',name:'Joey Wheeler',cards:basic}],()=>.5);
+ s.encounter={npcId:'joey'};
+ s.players[1].monsters=[{uid:'enemy-secret',id:'15025844',faceUp:false,position:'def',entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0,owner:1}];
+ s.players[1].backrow=[{uid:'trap-secret',id:'04206964',faceUp:false,setTurn:1}];
+ const requests=[];const provider=async id=>{requests.push(id);return null;};
+ const npc=await renderDuel(s,undefined,provider);const metadata=await sharp(npc).metadata();
+ assert.equal(metadata.width,1400);assert.equal(metadata.height,1020);
+ assert.ok(!requests.includes('15025844')&&!requests.includes('04206964'));
+ const noCharacter=structuredClone(s);delete noCharacter.encounter;
+ const baseline=await renderDuel(noCharacter,undefined,provider);
+ const crop={left:222,top:118,width:64,height:100};
+ const [on,off]=await Promise.all([sharp(npc).extract(crop).raw().toBuffer(),sharp(baseline).extract(crop).raw().toBuffer()]);
+ assert.notDeepEqual(on,off,'Character portrait must create real, visible pixels in the duel HUD');
+});
+test('gallery portrait, deck editor and private duel PNGs share blue layout and stable image sizes',async()=>{
+ const hero=await renderNPC({id:'kaiba',name:'Seto Kaiba',index:2,prefix:'SDK',year:2002,won:false,reward:'100 DP',daily:false,dailyClaimed:false,cards:[],page:0,view:'hero'});
+ const deck={name:'Duel Studio',slot:1,active:false,errors:[],total:20,extraTotal:0,items:[],revision:1};
+ const workshop=await renderDeck({deck,visible:['91152256'],selected:'91152256',owned:[],page:1,pages:1},async()=>null);
+ assert.deepEqual([(await sharp(hero).metadata()).width,(await sharp(hero).metadata()).height],[1280,720]);
+ assert.deepEqual([(await sharp(workshop).metadata()).width,(await sharp(workshop).metadata()).height],[1200,1090]);
+ const s=createDuel([{id:'a',name:'A',cards:basic},{id:'b',name:'B',cards:basic}],()=>.5);
+ const privatePNG=await renderDuel(s,'a',async()=>null);
+ assert.equal((await sharp(privatePNG).metadata()).height,1360);
+});
