@@ -56,3 +56,7 @@ test('complete simulated games conserve every card UID through 100 deterministic
   }assert.equal(s.phase,'finished',`seed ${seed} stalled`);
  }
 });
+test('production shuffle uses cryptographic draws, preserves every unique card and does not change on views',()=>{
+ const input=[{id:'a',name:'A',cards:ids('warrior')},{id:'b',name:'B',cards:ids('spellcaster')}];
+ const orders=new Set();for(let n=0;n<40;n++){const s=createDuel(input);for(const [i,p] of s.players.entries()){const all=[...p.hand,...p.deck];assert.equal(new Set(all.map(c=>c.uid)).size,20);assert.deepEqual(all.map(c=>c.id).sort(),[...input[i].cards].sort());}orders.add(s.players[0].hand.map(c=>c.uid).join(','));const before=JSON.stringify(s.players[0].deck);legalActions(s,'a');assert.equal(JSON.stringify(s.players[0].deck),before);}assert.ok(orders.size>1);
+});

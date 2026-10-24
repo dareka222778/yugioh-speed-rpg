@@ -23,4 +23,7 @@ test('PNG attachments, menus and invitations serialize within Discord limits, an
  const inv={...record(),status:'pending',state:null,invite:{owner:'101',opponent:'102',name:'Kise',cards:ids('warrior')}};for(const row of invitationMessage(inv).components)row.toJSON();
  const done={...record(),status:'finished',state:step(s,'101',{kind:'concede'})};assert.equal(duelPrivateMessage(done,'101').components.length,0);
 });
+test('identical views reuse the PNG cache, with isolation by viewer and invalidation after a draw',async()=>{
+ const a=await renderDuel(s);assert.strictEqual(await renderDuel(s),a);const own=await renderDuel(s,'101');assert.notStrictEqual(own,a);assert.strictEqual(await renderDuel(s,'101'),own);const next=structuredClone(s);next.players[0].hand.push(next.players[0].deck.shift());assert.notStrictEqual(await renderDuel(next,'101'),own);
+});
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});

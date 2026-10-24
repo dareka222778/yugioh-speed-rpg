@@ -50,7 +50,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on(Events.Error, error => console.error('Discord client:', errorSummary(error)));
 client.on(Events.Warn, warning => console.warn('Discord aviso:', warning));
 client.once(Events.ClientReady, c => {console.log(`Yu-Gi-Oh! Speed RPG online como ${c.user.tag}`);const timer=setInterval(()=>void sweepDuelTimeouts(),10_000);timer.unref();void sweepDuelTimeouts();});
-const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nO RPG está na V0: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Use `/deck ver` para montar e ativar seus decks. Depois abra `/duelo treino` ou `/duelo desafiar`. Duelos básicos com 4000 PV, mão privada, tributos e quatro efeitos implementados; sem Skills ou Extra Deck.';
+const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nO RPG está na V0: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Use `/deck ver` para montar e ativar seus decks. Depois abra `/duelo treino` ou `/duelo desafiar`. Duelos básicos com 4000 PV, mão privada, tributos e quatro efeitos implementados; com Campo, Cemitério e uma Fusão de Deck Adicional; sem Skills.';
 // One mutation at a time per player, including network downloads.
 async function showCard(id:string, userId:string) {
   const card=getCard(id);if(!card)throw new Error('Essa carta não faz parte do catálogo inicial.');
@@ -100,6 +100,9 @@ client.on(Events.InteractionCreate, async i => {
       if(action==='open'&&i.isButton()){await i.deferReply({flags:MessageFlags.Ephemeral});await i.editReply(await privatePayload(r,id));return;}
       if(action==='quit'&&i.isButton()){await i.reply({...quitMessage(r),flags:MessageFlags.Ephemeral});return;}
       if(action==='view'&&i.isButton()){await i.deferUpdate();await i.editReply(await privatePayload(r,id,page));return;}
+      if(action==='quick'&&i.isButton()){
+        await i.deferUpdate();r=performDuelAction(duelId,id,i.guildId,revision,page);await i.editReply(await privatePayload(r,id));await refreshArena(r);return;
+      }
       if(action==='act'&&i.isStringSelectMenu()){
         await i.deferUpdate();const index=Number(i.values[0]);if(!Number.isSafeInteger(index)||index<0)throw new Error('Ação inválida.');
         r=performDuelAction(duelId,id,i.guildId,revision,index);await i.editReply(await privatePayload(r,id,page));await refreshArena(r);return;
@@ -274,7 +277,7 @@ async function main() {
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
-  console.log('Fase 4.1: W.O. automático, Campo, Deck Adicional, Fusão e Cemitério carregados.');
+  console.log('Fase 4.2: arena redesenhada, mão no topo, versos e atalhos carregados.');
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
   await client.login(token);
   const rest = new REST({ version: '10' }).setToken(token!);
