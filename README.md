@@ -66,3 +66,17 @@ Perfil em uma única imagem PNG (1000 × 760), retrato integrado sem distorcer o
 Renderer: `src/cardRenderer.ts`, usando sharp 0.34.5. Cache de imagens do sharp limitado a 8 MB, um thread por imagem e fila de até quatro renderizações; nenhuma API paga, navegador ou geração por IA é usada no bot. As interações aguardam a renderização com resposta deferida. Retratos antigos ilegíveis ou acima do limite de 16 megapixels usam a silhueta para não derrubar o comando.
 
 `npm test` cobre migração e persistência, dados reais no texto alternativo, dimensões da ficha, integração e remoção do retrato, texto com caracteres XML, nomes longos, cores, retrato danificado e tela inicial. A legibilidade foi inspecionada em prévias locais; a apresentação final precisa ser conferida no aplicativo Discord. O renderer usa fontes sans-serif disponíveis no sistema; verificar a fonte após implantação em outro sistema operacional.
+
+## V0.4 — Fase 2: cartas e coleção
+
+- 28 cartas clássicas no catálogo local; confira `CARD_SOURCES.md` para origem e limites.
+- Cada conjunto inicial contém 20 cartas: 16 monstros (duas cópias de oito) e quatro Magias/Armadilhas.
+- Escolher um estilo agora entrega as cartas. Jogadores da V0.3 recebem automaticamente o conjunto correspondente na primeira inicialização da V0.4.
+- Um recibo em `starter_grants` e a atualização de inventário são gravados na mesma transação. Repetir `/start`, abrir coleção ou reiniciar não repete a entrega. Um erro desfaz toda a operação.
+- `/colecao` mostra quantidades, seis cartas por página e seleção para consulta; também acessível pelo botão Coleção no perfil.
+- `/carta busca:<nome ou ID>` procura em português, inglês ou pelo identificador de oito dígitos. Há autocomplete; consultas ambíguas mostram alternativas.
+- Consulta mostra categoria, ATK/DEF/nível quando aplicável, quantidade possuída e link para a base Konami.
+- A arte é opcional, baixada do CDN YGOPRODeck para cache local em `data/card-art`, com timeout, limite de tamanho e bloqueio temporário de novas tentativas após falha. Se indisponível, a ficha textual continua funcionando. Inclua o cache nos backups ou deixe-o ser reconstruído.
+- A Fase 2 não implementa montagem de decks, duelos, efeitos, loja, preços ou raridades do RPG. A seleção é temática e não certifica legalidade de torneio Speed Duel.
+
+Validação inclui rollback simulado durante entrega, migração de jogador antigo, preservação de saldo/perfil/inventário, reabertura de banco, três conjuntos iniciais, repetição de ações, paginação, busca com acentos e cache/falha de arte. Nenhuma nova dependência npm na Fase 2. `package.json` e `package-lock.json` devem sempre ser atualizados juntos.
