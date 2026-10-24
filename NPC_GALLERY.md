@@ -49,7 +49,7 @@ No Duel Links audio, game engine, UI screenshot or executable code is included.
 
 The full historical lists are **inspection-only**. They do not enter the owned
 collection, grant cards, alter an active duel, or become enabled engine cards.
-`Duelar` continues to use the tested 20-card Speed adaptation (Joey also has one
+`Duelar` continues to use the tested 30-card Speed adaptation (Joey also has one
 extra Fusion), and both the UI and the separate playable-deck browser identify it.
 The engine currently has 35 enabled cards. Merely listing a historical effect
 card must not make it playable: the existing spell dispatcher cannot safely
