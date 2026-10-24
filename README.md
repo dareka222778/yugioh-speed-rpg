@@ -166,7 +166,7 @@ Ainda faltam diversas outras famílias clássicas de efeitos (sobretudo efeitos 
 
 ### Acompanhamento da engine e do próximo layout
 
-O escopo de cada fase e as porcentagens fundamentadas por entrega estão em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md). Após `npm run build`, use `npm run progress` para mostrar percentual concluído/restante da engine e do redesign, cobertura **real** do lote histórico e número de monstros de efeito jogáveis.
+O escopo de cada fase e as porcentagens fundamentadas por entrega estão em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md). Após `npm run build`, use `npm run progress` para mostrar percentual concluído/restante da engine e do redesign, validação dos decks próprios dos NPCs e número de monstros de efeito jogáveis.
 
 A versão atual incorpora Sangan e Bruxa da Floresta Negra: ao irem **do campo para o Cemitério**, podem buscar um monstro elegível no Deck com ATK/DEF até 1500, com limitação por nome e bloqueio temporário de ativação dos efeitos do card buscado. Há testes de busca depois da corrente, Tributo, batalha, proprietário verdadeiro e privacidade da escolha.
 
@@ -191,12 +191,18 @@ A reformulação funcional já está disponível na branch de desenvolvimento:
 - Arena azul inspirada no ritmo e na hierarquia do Duel Links, com HUD dos duelistas, PV, três zonas, indicador de fases e de respostas, mão privada e retratos dos NPCs.
 - Fotos de perfil dos jogadores que possuem imagem cadastrada agora aparecem no HUD do duelo. Cartas ocultas não são incluídas no conjunto público de artes.
 - A mão pode ser explorada **carta por carta**: imagem grande, nome, ATK/DEF, resumo de efeito, controles anterior/próxima, menu de ações legais da carta e retorno ao painel. A permissão é verificada pelo servidor.
-- Galeria dos NPCs e editor de decks agora usam a mesma linguagem azul. Os decks *jogáveis* de Joey, Yugi e Kaiba têm **30 cartas** cada; os produtos históricos de 50 cartas permanecem somente para consulta.
+- Galeria dos NPCs e editor de decks agora usam a mesma linguagem azul. Os decks **próprios** de Joey, Yugi e Kaiba têm **30 cartas** cada, e somente essas cartas aparecem no portal dos duelistas.
 - **Pote da Ganância**, **Raigeki** e **Tufão Espacial Místico** foram acrescentados ao motor e ao laboratório. Tufão é uma Magia Rápida com janela de resposta, e destruir uma Magia/Armadilha já ativada não nega automaticamente seu efeito.
-- O GitHub Actions executa os testes e gera prévias PNG da arena pública e privada, ficha de duelista, carta histórica individual e editor. As prévias são anexadas como artefato **duel-azure-previews** à execução do workflow de validação. As imagens do catálogo podem aparecer como placeholders na geração offline; a execução normal utiliza o cache de arte de cartas.
+- O GitHub Actions executa os testes e gera prévias PNG da arena pública e privada, ficha de duelista, carta jogável individual e editor. As prévias são anexadas como artefato **duel-azure-previews** à execução do workflow de validação. As imagens do catálogo podem aparecer como placeholders na geração offline; a execução normal utiliza o cache de arte de cartas.
 
 ### Validação, limitações e implantação
 
 Em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md) os percentuais representam pesos fixos de entregas e não um percentual de todas as regras TCG/anime. Testes automatizados verificam componentes, regras, partidas simuladas, conservação de cartas, privacidade de mão/deck e renderização, mas **não substituem testes humanos no Discord** e não validam todas as cartas existentes.
 
 A hospedagem não é atualizada por estes commits: é necessário implantar a branch validada, disponibilizar as dependências do projeto, registrar os comandos slash e reiniciar o bot. Não faça merge na main sem validar as interfaces em um servidor de teste.
+
+### Portal de duelistas centrado no nosso RPG
+
+A galeria `/npc ver` passou a mostrar **somente o baralho que o oponente realmente utiliza**: 30 cartas principais e uma carta adicional quando houver Fusão disponível. O jogador pode abrir cada carta para ver imagem, tipo, ATK/DEF e seu efeito adaptado. Os botões e menus não mostram baralhos alternativos. A prontidão dos decks dos NPCs pode ser verificada com `node scripts/duel-readiness.cjs --require-complete`.
+
+As artes são apenas apresentação: os efeitos e a legalidade das cartas continuam determinados exclusivamente pelo nosso motor. Nenhuma coleção é modificada pela navegação. O arquivo [NPC_GALLERY.md](NPC_GALLERY.md) documenta apenas os fluxos atuais.
