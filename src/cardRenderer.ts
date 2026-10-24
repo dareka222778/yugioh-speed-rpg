@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import { outlineText } from './fontPaths';
 import type { Player } from './database';
 import { isStarterDeck, starterDecks } from './starterDecks';
 
@@ -21,11 +22,7 @@ export function wrapText(value: string, width = 39): string[] {
   if (line) lines.push(line);
   return lines;
 }
-function text(x:number,y:number,value:string,size=24,fill='#f2f4ff',weight=400, maxWidth=0) {
-  const estimate = Array.from(value).reduce((sum,c) => sum + (/[WM@]/.test(c) ? 1.1 : /[ilI .,]/.test(c) ? .36 : .8),0) * size;
-  const fit = maxWidth && estimate > maxWidth ? ` textLength="${maxWidth}" lengthAdjust="spacingAndGlyphs"` : '';
-  return `<text${fit} x="${x}" y="${y}" font-family="DejaVu Sans, sans-serif" font-size="${size}" fill="${fill}" font-weight="${weight}">${xml(value)}</text>`;
-}
+const text = outlineText;
 let queue = Promise.resolve();
 let waiting = 0;
 export async function renderCard(player: Player, portrait?: Buffer): Promise<Buffer> {
