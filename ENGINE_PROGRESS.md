@@ -85,7 +85,7 @@ O progresso de regras é **deliberadamente independente do total de cartas habil
 
 Testes: `tests/classicBattleRecruiters.test.cjs`, cenários com compra pelo dono (inclusive carta sob controle adversário), alvo válido/inválido, recusa, batalha e distinção de causas de destruição.
 
-## Segunda grande entrega — Azure / Decks / Magias Rápidas
+## Segunda grande entrega — Comandos / Decks / Magias Rápidas
 
 **Engine (85%, etapa atual)**
 
