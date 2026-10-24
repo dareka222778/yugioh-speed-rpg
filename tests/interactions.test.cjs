@@ -7,8 +7,8 @@ process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
 process.env.DISCORD_TOKEN='test-token';process.env.DISCORD_CLIENT_ID='123';
 const discord=require('discord.js');let client;let registered;
 let signal;const ready=new Promise(r=>{signal=r;});
-class TestClient extends EventEmitter{constructor(){super();client=this;}async login(){signal();}}
-class TestREST{setToken(){return this;}async put(route,payload){registered=payload.body;}}
+class TestClient extends EventEmitter{constructor(){super();client=this;}async login(){this.loggedIn=true;signal();}}
+class TestREST{setToken(){return this;}async put(route,payload){assert.equal(client.loggedIn,true,'login must not wait for command synchronization');registered=payload.body;}}
 const original=Module._load;
 Module._load=function(name,parent,isMain){
  if(name==='discord.js')return {...discord,Client:TestClient,REST:TestREST};
@@ -28,7 +28,7 @@ function interaction(kind,commandName,extra={}){
 }
 async function dispatch(i){await ready;await client.listeners(discord.Events.InteractionCreate)[0](i);}
 test('registered collection command acknowledges and returns the real inventory',async()=>{
- await ready;assert.ok(registered.some(c=>c.name==='colecao'));assert.ok(registered.some(c=>c.name==='carta'));
+ await ready;await Promise.resolve();assert.ok(registered.some(c=>c.name==='colecao'));assert.ok(registered.some(c=>c.name==='carta'));
  db.createPlayer('101','Kise');db.chooseStarterDeck('101','spellcaster');
  const {i,calls}=interaction('command','colecao');await dispatch(i);
  assert.deepEqual(calls.map(c=>c[0]),['defer','edit']);
