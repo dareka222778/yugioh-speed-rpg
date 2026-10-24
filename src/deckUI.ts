@@ -2,8 +2,7 @@ import {AttachmentBuilder,ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilde
 import {getCollection} from './database';
 import {openDeck} from './decks';
 import {getCard,kindLabel} from './collection';
-import {getCardArt} from './cardArt';
-import {renderDeck} from './deckRenderer';
+import {renderDeck,renderOwnedCard} from './deckRenderer';
 import {embedColors} from './duelTheme';
 export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string,notice?:string){
  const deck=openDeck(owner,slot);const owned=getCollection(owner);
@@ -82,13 +81,16 @@ export function deckCardMessage(owner:string,slot=1,requestedIndex=0){
 }
 export async function visualDeckCard(owner:string,slot=1,index=0){
  const {cardId,...payload}=deckCardMessage(owner,slot,index);
+ const deck=openDeck(owner,slot),owned=getCollection(owner);
  try{
-  const bytes=await getCardArt(cardId);
-  if(bytes){
-   const name='minha-carta.jpg';
-   payload.embeds[0].setImage(`attachment://${name}`);
-   return {...payload,files:[new AttachmentBuilder(bytes,{name})]};
-  }
- }catch{/* Text-only view remains accessible if the card image CDN is unavailable. */}
+  const bytes=await renderOwnedCard({
+   id:cardId,deckName:deck.name,index,total:ownCardIds(owner,slot).length,
+   inDeck:deck.items.find(i=>i.card_key===cardId)?.quantity??0,
+   owned:owned.find(i=>i.card_key===cardId)?.quantity??0
+  });
+  const name='minha-carta.png';
+  payload.embeds[0].setImage(`attachment://${name}`);
+  return {...payload,files:[new AttachmentBuilder(bytes,{name})]};
+ }catch{/* Text-only view remains accessible if renderer fails. */}
  return {...payload,files:[]};
 }
