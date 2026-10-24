@@ -1,0 +1,47 @@
+const {test,after}=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');const os=require('node:os');const path=require('node:path');
+const Module=require('node:module');const {EventEmitter}=require('node:events');
+const temp=fs.mkdtempSync(path.join(os.tmpdir(),'discord-interactions-'));
+process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
+process.env.DISCORD_TOKEN='test-token';process.env.DISCORD_CLIENT_ID='123';
+const discord=require('discord.js');let client;let registered;
+let signal;const ready=new Promise(r=>{signal=r;});
+class TestClient extends EventEmitter{constructor(){super();client=this;}async login(){signal();}}
+class TestREST{setToken(){return this;}async put(route,payload){registered=payload.body;}}
+const original=Module._load;
+Module._load=function(name,parent,isMain){
+ if(name==='discord.js')return {...discord,Client:TestClient,REST:TestREST};
+ if(name==='./cardArt'&&parent.filename.endsWith('/dist/index.js'))return {getCardArt:async()=>null};
+ return original.apply(this,arguments);
+};
+require('../dist/index');Module._load=original;
+const db=require('../dist/database');
+function interaction(kind,commandName,extra={}){
+ const calls=[];
+ const i={type:kind==='autocomplete'?4:kind==='command'?2:3,commandName,user:{id:'101',username:'Kise',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'},
+ isAutocomplete:()=>kind==='autocomplete',isChatInputCommand:()=>kind==='command',isButton:()=>kind==='button',isModalSubmit:()=>false,isStringSelectMenu:()=>false,
+ options:{getFocused:()=> 'guardiao',getInteger:()=>null,getString:()=> '91152256'},
+ async deferReply(p){calls.push(['defer',p]);i.deferred=true;},async editReply(p){calls.push(['edit',p]);},async reply(p){calls.push(['reply',p]);i.replied=true;},
+ async respond(p){calls.push(['suggestions',p]);},async update(p){calls.push(['update',p]);},...extra};
+ return {i,calls};
+}
+async function dispatch(i){await ready;await client.listeners(discord.Events.InteractionCreate)[0](i);}
+test('registered collection command acknowledges and returns the real inventory',async()=>{
+ await ready;assert.ok(registered.some(c=>c.name==='colecao'));assert.ok(registered.some(c=>c.name==='carta'));
+ db.createPlayer('101','Kise');db.chooseStarterDeck('101','spellcaster');
+ const {i,calls}=interaction('command','colecao');await dispatch(i);
+ assert.deepEqual(calls.map(c=>c[0]),['defer','edit']);
+ assert.match(calls[1][1].embeds[0].toJSON().description,/20 cartas/);
+});
+test('autocomplete and card command run through the actual event listener',async()=>{
+ const a=interaction('autocomplete','carta');await dispatch(a.i);
+ assert.equal(a.calls[0][0],'suggestions');assert.ok(a.calls[0][1].some(c=>c.value==='91152256'));
+ const c=interaction('command','carta');await dispatch(c.i);
+ assert.deepEqual(c.calls.map(x=>x[0]),['defer','edit']);assert.equal(c.calls[1][1].embeds[0].toJSON().title,'Guardião Celta');
+});
+test('profile collection button opens the collection through the actual event listener',async()=>{
+ const b=interaction('button',undefined,{customId:'collection:page:101:1'});await dispatch(b.i);
+ assert.equal(b.calls[0][0],'update');assert.match(b.calls[0][1].embeds[0].toJSON().description,/20 cartas/);
+});
+after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
