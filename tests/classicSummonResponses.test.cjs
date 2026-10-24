@@ -130,6 +130,27 @@ test('Torrential Tribute activation can be negated by Seven Tools; the newly Sum
  assert.equal(s.players[0].lp,3000);
  assert.ok(s.players[1].grave.some(c=>c.uid==='torrent'));
 });
+test('Torrential Tribute gets a response window after Polymerization Fusion Summon',()=>{
+ const cards=['24094653','34460851','44287299','86318356',...basic.slice(0,16)];
+ let s=createDuel([{id:'a',name:'Alice',cards,extra:['45231177']},{id:'b',name:'Bob',cards:basic}],()=>.999999);
+ s.turn=3;s.players[1].backrow=[back('torrent','53582587')];
+ s=act(s,'a','fusion',a=>a.position==='atk');
+ assert.equal(s.phase,'response');
+ assert.equal(s.pending.kind,'specialSummon');
+ assert.equal(s.players[0].monsters[0].id,'45231177');
+ assert.equal(legalActions(s,'b').some(a=>a.kind==='trap'&&a.card==='torrent'),true);
+ s=act(s,'b','trap',a=>a.card==='torrent');
+ assert.equal(s.players[0].monsters.length,0);
+ assert.ok(s.players[0].grave.some(c=>c.uid==='0-e0'));
+ assert.equal(s.players[0].summoned,false,'Fusion must not consume a Normal Summon');
+});
+test('Trap Hole cannot respond to a Special Summon, but Torrential Tribute can',()=>{
+ let s=game();s.players[1].backrow=[back('hole','04206964'),back('torrent','53582587')];
+ s.phase='response';s.priority=1;s.pending={kind:'specialSummon',actor:0,card:'special',id:'91152256'};
+ s.players[0].monsters=[monster('special')];
+ assert.ok(!legalActions(s,'b').some(a=>a.kind==='trap'&&a.card==='hole'));
+ assert.ok(legalActions(s,'b').some(a=>a.kind==='trap'&&a.card==='torrent'));
+});
 test('Both Quick-Play Spells are barred from Damage Step and Counter Trap chains',()=>{
  let s=game();s.players[0].monsters=[monster('target')];s.players[0].hand=[ref('book','14087893'),ref('mst','05318639')];
  s.players[1].backrow=[back('victim','12607053')];
