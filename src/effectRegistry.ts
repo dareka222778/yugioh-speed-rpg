@@ -2,7 +2,7 @@
 import {cards as starterCards,type Card} from './cardCatalog';
 import {classicEngineCards} from './classicEngineCards';
 export type Effect=
- |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'mirrorForce'}
+ |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'mirrorForce'}
  |{kind:'heal'|'burn';amount:number}
  |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
@@ -23,6 +23,8 @@ const effects:Record<string,Effect>={
  '55144522':{kind:'potOfGreed'},
  '12580477':{kind:'raigeki'},
  '05318639':{kind:'mysticalSpaceTyphoon'},
+ '14087893':{kind:'bookOfMoon'},
+ '53582587':{kind:'torrentialTribute'},
  '44095762':{kind:'mirrorForce'},
  '38199696':{kind:'heal',amount:500},'84257639':{kind:'heal',amount:1000},'19523799':{kind:'burn',amount:800},
  '66788016':{kind:'fissure'},'24094653':{kind:'polymerization'},
@@ -56,12 +58,14 @@ const supportedEffectMonsters:Card[]=[
 const supportedCounterTraps:Card[]=[
  {id:'77414722',konamiId:4862,name:'Bloqueador de Magia',englishName:'Magic Jammer',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando uma Magia é ativada: descarte 1 carta; negue a ativação e destrua a Magia.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4862&request_locale=pt'},
  {id:'03819470',konamiId:4863,name:'Sete Ferramentas do Bandido',englishName:'Seven Tools of the Bandit',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando uma Armadilha é ativada: pague 1000 PV; negue a ativação e destrua a Armadilha.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4863&request_locale=pt'},
- {id:'44095762',konamiId:4887,name:'Força do Espelho',englishName:'Mirror Force',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando um monstro do oponente declara um ataque: destrua todos os monstros em Posição de Ataque que o oponente controla.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4887&request_locale=pt'}
+ {id:'44095762',konamiId:4887,name:'Força do Espelho',englishName:'Mirror Force',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando um monstro do oponente declara um ataque: destrua todos os monstros em Posição de Ataque que o oponente controla.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4887&request_locale=pt'},
+ {id:'53582587',konamiId:5114,name:'Tributo Torrencial',englishName:'Torrential Tribute',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando um ou mais monstros forem Invocados: destrua todos os monstros no campo.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5114&request_locale=pt'}
 ];
 const supportedClassicSpells:Card[]=[
  {id:'55144522',konamiId:4844,name:'Pote da Ganância',englishName:'Pot of Greed',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Compre 2 cartas.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4844&request_locale=pt'},
  {id:'12580477',konamiId:4343,name:'Raigeki',englishName:'Raigeki',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Destrua todos os monstros que seu oponente controla.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4343&request_locale=pt'},
- {id:'05318639',konamiId:4909,name:'Tufão Espacial Místico',englishName:'Mystical Space Typhoon',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Magia Rápida: escolha 1 Magia/Armadilha no campo; destrua-a. Destruir não significa negar a ativação.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4909&request_locale=pt'}
+ {id:'05318639',konamiId:4909,name:'Tufão Espacial Místico',englishName:'Mystical Space Typhoon',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Magia Rápida: escolha 1 Magia/Armadilha no campo; destrua-a. Destruir não significa negar a ativação.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4909&request_locale=pt'},
+ {id:'14087893',konamiId:5432,name:'Livro da Lua',englishName:'Book of Moon',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Magia Rápida: escolha 1 monstro com a face para cima no campo; coloque-o com a face para baixo em Posição de Defesa.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5432&request_locale=pt'}
 ];
 export const engineCatalog:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells];
 const metadata=new Map(engineCatalog.map(c=>[c.id,c]));
@@ -70,6 +74,8 @@ for(const c of engineCatalog)if(!effects[c.id]){
  else if(c.kind==='monster'&&c.summary.startsWith('Monstro Normal:'))effects[c.id]={kind:'normal'};
 }
 export function getEffect(id:string):Effect|undefined{return effects[id];}
+/** Only audited Spell Speed 2 Magias Rápidas may activate in a response window. */
+export function isQuickPlaySpell(id:string):boolean{return ['mysticalSpaceTyphoon','bookOfMoon'].includes(getEffect(id)?.kind??'');}
 export function engineCard(id:string){return metadata.get(id);}
 export const enabledCardIds=Object.freeze(Object.keys(effects).filter(id=>metadata.has(id)));
 export function equipEligible(effect:Extract<Effect,{kind:'equip'}>,monster:Card){return (!effect.races||effect.races.includes(monster.race??''))&&(!effect.attribute||effect.attribute===monster.attribute);}
