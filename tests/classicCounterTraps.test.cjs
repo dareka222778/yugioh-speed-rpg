@@ -77,7 +77,7 @@ test('counter of a counter: Seven Tools negates Magic Jammer so the original Spe
  assert.ok(s.players[0].grave.some(c=>c.uid==='burn'));
 });
 test('ordinary traps cannot answer counter traps at Spell Speed 2',()=>{
- let s=game();s.players[0].hand=[ref('burn','19523799')];s.players[0].backrow=[trap('boost','17814387')];s.players[0].monsters=[m('own')];
+ let s=game();s.players[0].hand=[ref('burn','19523799')];s.players[0].backrow=[trap('boost','17814387'),trap('seven','03819470')];s.players[0].monsters=[m('own')];
  s.players[1].hand=[ref('cost','91152256')];s.players[1].backrow=[trap('jam','77414722')];
  s=act(s,'a','spell');s=act(s,'b','trap',a=>a.card==='jam');
  assert.ok(!legalActions(s,'a').some(a=>a.kind==='trap'&&a.card==='boost'));
