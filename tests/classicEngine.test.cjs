@@ -148,4 +148,13 @@ test('NPC sets its FLIP monsters and aims destruction at enemy threats, never at
  const choice=chooseNPC(s,'b');assert.equal(choice.kind,'choose');assert.equal(choice.target,'enemy');
 });
 
+
+test('NPC recognizes lethal ignition burn and selects the cheaper Tribute',()=>{
+ const s=game();s.current=1;s.players[1].hand=[];
+ s.players[1].monsters=[monster('11384280','cannon',1),monster('91152256','fodder',1)];
+ s.players[0].lp=500;
+ const chosen=chooseNPC(s,'b');
+ assert.equal(chosen.kind,'monsterEffect');assert.equal(chosen.card,'cannon');assert.deepEqual(chosen.tributes,['cannon']);
+});
+
 after(()=>{require('../dist/database').db.close();fs.rmSync(temporary,{recursive:true,force:true});});
