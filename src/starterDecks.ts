@@ -19,5 +19,5 @@ export const starterDecks = {
 export type StarterDeckKey = keyof typeof starterDecks;
 
 export function isStarterDeck(value: string): value is StarterDeckKey {
-  return value in starterDecks;
+  return Object.hasOwn(starterDecks, value);
 }
