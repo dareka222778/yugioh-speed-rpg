@@ -1,6 +1,6 @@
 import {randomInt} from 'node:crypto';
 import {resolveChainLinks,type ChainLink} from './chainEngine';
-import {getMonsterEffect,canActivateMonsterEffect,payMonsterEffectCost,monsterDestructionTarget} from './monsterEffects';
+import {getMonsterEffect,canActivateMonsterEffect,payMonsterEffectCost,monsterDestructionTarget,type MonsterEffect} from './monsterEffects';
 import {getCard} from './collection';
 import {enabledCardIds,getEffect} from './effectRegistry';
 import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips} from './classicEffects';
@@ -14,11 +14,11 @@ export type Action=
  |{kind:'fusion';card:string;extra:string;materials:string[];position:'atk'|'def'}
  |{kind:'position';card:string;mode:'atk'|'def'|'flip'}
  |{kind:'attack';card:string;target?:string}|{kind:'trap';card:string;target:string}
- |{kind:'monsterEffect';card:string;discards:string[]}
+ |{kind:'monsterEffect';card:string;discards:string[];target?:string}
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
-export type Pending={kind:'monsterEffect';actor:number;card:string;id:string}|{kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
-export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'};afterMonsterEffect?:Pending;winner:string|null;reason:string;log:string[]};
+export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
+export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'|'monsterTarget'};afterMonsterEffect?:Pending;battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -46,6 +46,13 @@ function graveMonster(s:DuelState,uid:string){const found=findMonster(s,uid);if(
 function finish(s:DuelState,winner:number|null,reason:string){s.phase='finished';s.winner=winner===null?null:s.players[winner].id;s.reason=reason;note(s,`${winner===null?'Empate':`${s.players[winner].name} venceu`}: ${reason}.`);}
 function checkLP(s:DuelState){if(s.players.every(p=>p.lp<=0))finish(s,null,'pontos de vida');else for(let i=0;i<2;i++)if(s.players[i].lp<=0)finish(s,1-i,'pontos de vida');}
 function combos<T>(values:T[],n:number):T[][]{if(n===0)return [[]];return values.flatMap((v,i)=>combos(values.slice(i+1),n-1).map(rest=>[v,...rest]));}
+/** Only activation-time targets may be chosen. Resolution must never retarget. */
+function monsterTargets(s:DuelState,actor:number,e:MonsterEffect):string[]|undefined{
+ const op=e.operation;
+ if(op.kind==='destroy'||op.kind==='bounce')return (op.target==='anyMonster'?s.players:s.players.filter((_,i)=>i!==actor)).flatMap(p=>p.monsters.map(m=>m.uid));
+ if(op.kind==='recover')return s.players[actor].grave.filter(c=>card(c.id).kind===op.cardKind).map(c=>c.uid);
+ return undefined;
+}
 function trapActions(s:DuelState,index:number):Action[]{
  const out:Action[]=[];
  for(const c of s.players[index].backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&card(c.id).kind==='trap')){
@@ -88,7 +95,10 @@ export function legalActions(s:DuelState,actor:string):Action[]{
     const context={lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,usedThisTurn:m.effectUsedTurn===s.turn};
     if(canActivateMonsterEffect(e,context)){
      const n=e.cost?.kind==='discard'?e.cost.count:0;
-     for(const discards of combos(p.hand.map(c=>c.uid),n))actions.push({kind:'monsterEffect',card:m.uid,discards});
+     const targets=monsterTargets(s,index,e);
+     for(const discards of combos(p.hand.map(c=>c.uid),n))
+      for(const target of targets??[undefined])if(targets===undefined||target!==undefined)actions.push({kind:'monsterEffect',card:m.uid,discards,...target?{target}:{}});
+
     }
    }
   }
@@ -110,17 +120,28 @@ function endTurn(s:DuelState){
 function nextTurn(s:DuelState){s.current=1-s.current;s.turn++;s.phase='main';s.players[s.current].summoned=false;
  const p=s.players[s.current];const c=p.deck.shift();if(!c){finish(s,1-s.current,'não conseguiu comprar uma carta');return;}p.hand.push(c);note(s,`Turno ${s.turn}: ${p.name} comprou uma carta.`);
 }
-function triggerMonsterEffect(s:DuelState,actor:number,uid:string,trigger:'flip'|'onSummon'){
+/** Triggered effects may resolve after their source left the field (battle FLIP).
+ * For targeted triggers, offer target choices BEFORE opening the chain window.
+ */
+function triggerMonsterEffect(s:DuelState,actor:number,uid:string,trigger:'flip'|'onSummon',sourceId?:string){
  const m=s.players[actor].monsters.find(m=>m.uid===uid);
- if(!m||!m.faceUp)return false;
- const e=getMonsterEffect(m.id);
+ if(!sourceId&&(!m||!m.faceUp))return false;
+ const id=sourceId??m!.id,e=getMonsterEffect(id);
  if(!e||e.trigger!==trigger)return false;
- const p=s.players[actor],ctx={lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,usedThisTurn:m.effectUsedTurn===s.turn};
- if(!canActivateMonsterEffect(e,ctx)||e.cost?.kind==='discard')return false;
- const cost=payMonsterEffectCost(e,ctx);
- p.lp-=cost.lpPaid;m.effectUsedTurn=s.turn;
- note(s,'Efeito de monstro disparado.');
- response(s,{kind:'monsterEffect',actor,card:uid,id:m.id},s.resume);
+ const p=s.players[actor];
+ const targets=monsterTargets(s,actor,e);
+ if(targets!==undefined&&!targets.length)return false;
+ const ctx={lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,usedThisTurn:m?.effectUsedTurn===s.turn};
+ // Mandatory flip draws must be attempted even if the deck is empty.
+ const check=e.operation.kind==='draw'&&trigger==='flip'?{...ctx,deckSize:Math.max(p.deck.length,e.operation.count)}:ctx;
+ if(!canActivateMonsterEffect(e,check)||e.cost?.kind==='discard')return false;
+ const cost=payMonsterEffectCost(e,check);
+ p.lp-=cost.lpPaid;if(m)m.effectUsedTurn=s.turn;
+ note(s,`Efeito de ${card(id).name} ativado.`);
+ if(targets){
+  s.pending={kind:'monsterEffect',actor,card:uid,id};
+  s.choice={actor,targets,source:'monsterTarget'};s.phase='choice';
+ }else response(s,{kind:'monsterEffect',actor,card:uid,id},s.resume,1-actor);
  return true;
 }
 function resolve(s:DuelState){
@@ -133,20 +154,33 @@ function resolve(s:DuelState){
  s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};return;}const pending=s.pending;s.pending={kind:'none'};s.phase=s.resume;
  if(pending.kind==='monsterEffect'){
   const p=s.players[pending.actor],e=getMonsterEffect(pending.id);
-  // Activated effects remain on the chain even if their source leaves the field.
+  // Paid costs are never refunded and removing the source does not negate its effect.
   if(!e)return;
-  if(e.operation.kind==='heal')p.lp+=e.operation.amount;
-  else if(e.operation.kind==='burn'){const op=s.players[1-pending.actor];op.lp=Math.max(0,op.lp-e.operation.amount);checkLP(s);}
-  else if(e.operation.kind==='draw'){
-   if(p.deck.length<e.operation.count){finish(s,1-pending.actor,'não conseguiu comprar uma carta');return;}
-   p.hand.push(...p.deck.splice(0,e.operation.count));
-  }
-  if(e.operation.kind==='destroy'){
-   const targets=e.operation.target==='anyMonster'?s.players.flatMap(p=>p.monsters.map(m=>m.uid)):s.players[1-pending.actor].monsters.map(m=>m.uid);
-   if(targets.length){s.choice={actor:pending.actor,targets,source:'monsterDestroy'};s.phase='choice';note(s,'Escolha um monstro adversário para destruir.');return;}
+  const op=e.operation;
+  if(op.kind==='heal')p.lp+=op.amount;
+  else if(op.kind==='burn'){const other=s.players[1-pending.actor];other.lp=Math.max(0,other.lp-op.amount);checkLP(s);}
+  else if(op.kind==='draw'){
+   if(p.deck.length<op.count){finish(s,1-pending.actor,'não conseguiu comprar uma carta');return;}
+   p.hand.push(...p.deck.splice(0,op.count));
+  }else if(op.kind==='destroy'||op.kind==='bounce'){
+   const target=pending.target?findMonster(s,pending.target):undefined;
+   if(target){
+    if(op.kind==='destroy'){graveMonster(s,target.m.uid);note(s,'Efeito destruiu o monstro escolhido.');}
+    else{
+     const controller=s.players.indexOf(target.p),owner=target.m.owner??controller;
+     const uid=target.m.uid,id=target.m.id;
+     target.p.monsters=target.p.monsters.filter(m=>m.uid!==uid);
+     if(card(id).fusion)s.players[owner].extra=[...s.players[owner].extra??[],{uid,id}];
+     else s.players[owner].hand.push({uid,id});
+     cleanEquips(s);note(s,'Efeito devolveu o monstro ao dono.');
+    }
+   }else note(s,'O alvo do efeito não está mais no campo.');
+  }else if(op.kind==='recover'){
+   const i=p.grave.findIndex(c=>c.uid===pending.target&&card(c.id).kind===op.cardKind);
+   if(i>=0){const [recovered]=p.grave.splice(i,1);p.hand.push(recovered);note(s,'Carta recuperada do Cemitério.');}
+   else note(s,'O alvo não está mais no Cemitério.');
   }
   note(s,'Efeito de monstro resolvido.');
-  if(s.afterMonsterEffect){const followup=s.afterMonsterEffect;s.afterMonsterEffect=undefined;if(s.winner===null&&followup.kind==='attack')response(s,followup,'battle',1-followup.actor);}
   return;
  }
  if(pending.kind==='flip'||pending.kind==='summon'){
@@ -180,7 +214,8 @@ function resolve(s:DuelState){
   if(pending.stage==='declare'){
    if(defender&&!defender.m.faceUp){
     defender.m.faceUp=true;note(s,`Revelado: ${card(defender.m.id).name}.`);
-    if(triggerMonsterEffect(s,1-pending.actor,defender.m.uid,'flip')){s.afterMonsterEffect={...pending,stage:'damage'};return;}
+    if(getMonsterEffect(defender.m.id)?.trigger==='flip')
+     s.battleFlip={actor:1-pending.actor,card:defender.m.uid,id:defender.m.id};
    }
    response(s,{...pending,stage:'damage'},'battle',1-pending.actor);return;
   }
@@ -195,6 +230,10 @@ function resolve(s:DuelState){
    note(s,`${card(a.id).name} enfrentou ${card(d.id).name}. Diferença: ${Math.abs(difference)}.`);
   }
   checkLP(s);
+  // FLIP effects revealed by battle are activated after damage calculation,
+  // including when the defending monster was destroyed in that battle.
+  const flip=s.battleFlip;s.battleFlip=undefined;
+  if(s.phase!=='finished'&&flip)triggerMonsterEffect(s,flip.actor,flip.card,'flip',flip.id);
  }
 }
 function settle(s:DuelState){let budget=30;while(s.phase==='response'&&!trapActions(s,s.priority).length&&budget-->0){s.passes++;s.priority=1-s.priority;if(s.passes===2)resolve(s);}if(budget<=0)throw new Error('Janela de resposta inválida.');}
@@ -215,7 +254,9 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   for(const uid of action.discards){const discarded=p.hand.find(c=>c.uid===uid);if(!discarded)throw new Error('Carta de custo indisponível.');p.hand=p.hand.filter(c=>c.uid!==uid);p.grave.push(discarded);}
   p.lp-=cost.lpPaid;m.effectUsedTurn=s.turn;
   note(s,'Efeito de monstro ativado.');
-  response(s,{kind:'monsterEffect',actor:index,card:m.uid,id:m.id},'main');
+  const targets=monsterTargets(s,index,e);
+  if(targets&&(!action.target||!targets.includes(action.target)))throw new Error('Alvo de efeito inválido.');
+  response(s,{kind:'monsterEffect',actor:index,card:m.uid,id:m.id,...action.target?{target:action.target}:{}},'main');
  }else if(action.kind==='summon'){
   const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);for(const uid of action.tributes)graveMonster(s,uid);
   p.monsters.push({...c,owner:index,position:action.position==='set'?'def':'atk',faceUp:action.position!=='set',entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});p.summoned=true;
@@ -241,12 +282,17 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  else if(action.kind==='attack'){
   const m=p.monsters.find(m=>m.uid===action.card)!;m.attacked=s.turn;note(s,`${p.name} declarou um ataque com ${card(m.id).name}.`);response(s,{kind:'attack',actor:index,card:m.uid,target:action.target,stage:'declare'},'battle');
  }else if(action.kind==='choose'){
-  if(s.choice?.source==='monsterDestroy'){
-   const target=monsterDestructionTarget({trigger:'flip',operation:{kind:'destroy',target:'opponentMonster'}},s.choice.targets,action.target);
-   note(s,'Efeito de monstro destruiu o alvo.');graveMonster(s,target);
-  }else{note(s,'Fissura destruiu o alvo.');graveMonster(s,action.target);}
-  s.choice=undefined;s.phase=s.resume;
-  if(s.afterMonsterEffect){const followup=s.afterMonsterEffect;s.afterMonsterEffect=undefined;if(s.winner===null&&followup.kind==='attack')response(s,followup,'battle',1-followup.actor);}
+  if(s.choice?.source==='monsterTarget'){
+   const pending=s.pending;
+   if(pending.kind!=='monsterEffect'||!s.choice.targets.includes(action.target))throw new Error('Alvo de efeito inválido.');
+   const e=getMonsterEffect(pending.id);
+   if(e?.operation.kind==='destroy')monsterDestructionTarget(e,s.choice.targets,action.target);
+   s.choice=undefined;
+   response(s,{...pending,target:action.target},s.resume,1-index);
+  }else if(s.choice?.source==='monsterDestroy'){
+   // Backwards compatibility for stored duels created by the early prototype.
+   note(s,'Efeito de monstro destruiu o alvo.');graveMonster(s,action.target);s.choice=undefined;s.phase=s.resume;
+  }else{note(s,`Fissura destruiu ${card(findMonster(s,action.target)!.m.id).name}.`);graveMonster(s,action.target);s.choice=undefined;s.phase=s.resume;}
  }
  else if(action.kind==='discard'){const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);p.grave.push(c);note(s,`${p.name} descartou ${card(c.id).name}.`);if(p.hand.length<=6)nextTurn(s);}
  cleanEquips(s);settle(s);cleanEquips(s);return s;
@@ -254,14 +300,14 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
 export function actionLabel(s:DuelState,actor:string,a:Action){
  const p=s.players.find(p=>p.id===actor)!;const all=[...p.hand,...s.players.flatMap(p=>[...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.field?[p.field]:[]])];
  const name=(uid:string)=>{for(const owner of s.players){const zone=owner.monsters.findIndex(m=>m.uid===uid);if(zone>=0){const m=owner.monsters[zone];return `${owner.id===actor?'Seu':'Rival'} M${zone+1} ${m.faceUp||owner.id===actor?card(m.id).name:'virado para baixo'}`;}const back=owner.backrow.findIndex(b=>b.uid===uid);if(back>=0){const b=owner.backrow[back];return `${owner.id===actor?'Sua':'Rival'} M/A${back+1} ${b.faceUp||owner.id===actor?card(b.id).name:'virada para baixo'}`;}if(owner.field?.uid===uid)return owner.field.faceUp||owner.id===actor?card(owner.field.id).name:'Campo rival virado para baixo';}const c=all.find(c=>c.uid===uid);return c?card(c.id).name:'carta';};
- if(a.kind==='monsterEffect')return `Ativar efeito: ${name(a.card)}`;
+ if(a.kind==='monsterEffect')return `Ativar efeito: ${name(a.card)}${a.target?` → ${name(a.target)}`:''}`;
  if(a.kind==='summon')return `${a.position==='set'?'Baixar DEF':'Invocar ATK'}: ${name(a.card)}${a.tributes.length?` | Tributar ${a.tributes.map(uid=>'M'+(p.monsters.findIndex(m=>m.uid===uid)+1)).join(' + ')}`:''}`;
  if(a.kind==='field')return `Ativar ${name(a.card)} na Zona de Campo`;if(a.kind==='setField')return `Baixar ${name(a.card)} na Zona de Campo`;if(a.kind==='fusion')return `Fusão: Espadachim das Chamas (${a.position.toUpperCase()}) | Materiais: ${a.materials.map(name).join(' + ')}`;
  if(a.kind==='set')return `Baixar: ${name(a.card)}`;if(a.kind==='spell')return `Ativar: ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.position?` (${a.position.toUpperCase()})`:''}`;
  if(a.kind==='position')return `${a.mode==='flip'?'Virar para ATK':`Mudar para ${a.mode.toUpperCase()}`}: ${name(a.card)}`;
  if(a.kind==='attack'){const target=a.target?findMonster(s,a.target):undefined;return `Atacar: ${name(a.card)} → ${target?name(target.m.uid):'direto'}`;}
  if(a.kind==='trap')return `Ativar ${name(a.card)}${a.target?` → ${name(a.target)}`:''}`;
- if(a.kind==='choose')return `${s.choice?.source==='monsterDestroy'?'Efeito':'Fissura'}: destruir ${name(a.target)}`;
+ if(a.kind==='choose')return `${s.choice?.source==='monsterTarget'?'Efeito: escolher':s.choice?.source==='monsterDestroy'?'Efeito: destruir':'Fissura: destruir'} ${name(a.target)}`;
  if(a.kind==='discard')return `Descartar: ${name(a.card)}`;
  return {battle:'Entrar na Batalha',end:'Encerrar turno',pass:'Não responder / passar',concede:'Desistir'}[a.kind];
 }
