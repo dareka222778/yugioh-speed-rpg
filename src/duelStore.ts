@@ -83,6 +83,13 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
   const target=own??rival??grave;return target?(getCard(target.id)?.atk??0):0;
  };
  if(spells.length)return spells.sort((a,b)=>value(b)-value(a))[0];
+ const finishBurn=actions.filter((a):a is Extract<Action,{kind:'monsterEffect'}>=>a.kind==='monsterEffect')
+  .filter(a=>{const effect=getMonsterEffect(p.monsters.find(m=>m.uid===a.card)!.id);return effect?.operation.kind==='burn'&&op.lp<=effect.operation.amount;})
+  .sort((a,b)=>{
+   const rating=(x:Extract<Action,{kind:'monsterEffect'}>)=>x.tributes?.reduce((n,uid)=>n+(getCard(p.monsters.find(m=>m.uid===uid)!.id)?.atk??0),0)??0;
+   return rating(a)-rating(b);
+  });
+ if(finishBurn.length)return finishBurn[0];
  const summon=actions.filter((a):a is Extract<Action,{kind:'summon'}>=>a.kind==='summon'&&a.position==='atk').sort((a,b)=>getCard(p.hand.find(c=>c.uid===b.card)!.id)!.atk!-getCard(p.hand.find(c=>c.uid===a.card)!.id)!.atk!);
  const flipSet=actions.find(a=>a.kind==='summon'&&a.position==='set'&&getMonsterEffect(p.hand.find(c=>c.uid===a.card)!.id)?.trigger==='flip');
  if(flipSet&&(!summon.length||getCard(p.hand.find(c=>c.uid===summon[0].card)!.id)!.atk!<1800))return flipSet;
@@ -93,7 +100,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
 }
 function driveNPC(s:DuelState){let steps=0;while(s.phase!=='finished'){const npc=s.players.find(p=>p.id.startsWith('npc-'));if(!npc)return s;const a=chooseNPC(s,npc.id);if(!a)return s;if(++steps>100)throw new Error('Limite de ações do treino excedido.');s=step(s,npc.id,a);}return s;}
 export const createTraining=db.transaction((owner:string,guild:string,channel:string,laboratory=false):DuelRecord=>{
- available(owner);const id=randomBytes(8).toString('hex');const tutorial=['24094653','34460851','44287299','86318356','54652250','07089711','31560081','28933734','60694662',...starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id)).slice(0,11)];const loadout=laboratory?{cards:tutorial,extra:['45231177']}:activeCards(owner);const style=['warrior','spellcaster','dragon'][randomInt(3)];const opponent=starterContents[style].flatMap(c=>Array(c.quantity).fill(c.id));
+ available(owner);const id=randomBytes(8).toString('hex');const tutorial=['24094653','34460851','44287299','86318356','54652250','07089711','31560081','28933734','60694662','11384280',...starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id)).slice(0,10)];const loadout=laboratory?{cards:tutorial,extra:['45231177']}:activeCards(owner);const style=['warrior','spellcaster','dragon'][randomInt(3)];const opponent=starterContents[style].flatMap(c=>Array(c.quantity).fill(c.id));
  const state=driveNPC(createDuel([{id:owner,name:name(owner),...loadout},{id:`npc-${id}`,name:'Duelista de treino',cards:opponent}],laboratory?()=>0.999999:Math.random,laboratory?0:randomInt(2)));state.fixedOpening=laboratory;
  const r:DuelRecord={id,guild_id:guild,channel_id:channel,message_id:null,status:'playing',revision:0,updated:Date.now(),state,invite:null};insert(r,[owner]);return r;
 });
