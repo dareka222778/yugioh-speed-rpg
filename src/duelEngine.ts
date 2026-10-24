@@ -142,7 +142,7 @@ function resolve(s:DuelState){
    p.hand.push(...p.deck.splice(0,e.operation.count));
   }
   if(e.operation.kind==='destroy'){
-   const targets=s.players[1-pending.actor].monsters.map(m=>m.uid);
+   const targets=e.operation.target==='anyMonster'?s.players.flatMap(p=>p.monsters.map(m=>m.uid)):s.players[1-pending.actor].monsters.map(m=>m.uid);
    if(targets.length){s.choice={actor:pending.actor,targets,source:'monsterDestroy'};s.phase='choice';note(s,'Escolha um monstro adversário para destruir.');return;}
   }
   note(s,'Efeito de monstro resolvido.');
@@ -242,7 +242,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   const m=p.monsters.find(m=>m.uid===action.card)!;m.attacked=s.turn;note(s,`${p.name} declarou um ataque com ${card(m.id).name}.`);response(s,{kind:'attack',actor:index,card:m.uid,target:action.target,stage:'declare'},'battle');
  }else if(action.kind==='choose'){
   if(s.choice?.source==='monsterDestroy'){
-   const target=monsterDestructionTarget({trigger:'flip',operation:{kind:'destroy',target:'opponentMonster'}},s.players[1-index].monsters.map(m=>m.uid),action.target);
+   const target=monsterDestructionTarget({trigger:'flip',operation:{kind:'destroy',target:'opponentMonster'}},s.choice.targets,action.target);
    note(s,'Efeito de monstro destruiu o alvo.');graveMonster(s,target);
   }else{note(s,'Fissura destruiu o alvo.');graveMonster(s,action.target);}
   s.choice=undefined;s.phase=s.resume;
