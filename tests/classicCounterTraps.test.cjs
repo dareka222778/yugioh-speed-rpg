@@ -110,3 +110,33 @@ test('Jinzo suppresses both counter-trap activation and effect resolution',()=>{
  assert.ok(!legalActions(s,'b').some(a=>a.kind==='trap'&&a.card==='jam'));
  assert.equal(s.players[1].lp,3200);
 });
+
+test('four-link counter-trap chain resolves LIFO: Seven Tools can negate Seven Tools',()=>{
+ let s=game();s.players[0].hand=[ref('burn','19523799')];
+ s.players[0].backrow=[trap('seven-a','03819470')];
+ s.players[1].hand=[ref('cost','91152256')];
+ s.players[1].backrow=[trap('jam','77414722'),trap('seven-b','03819470')];
+ s=act(s,'a','spell',a=>a.card==='burn');
+ s=act(s,'b','trap',a=>a.card==='jam');
+ s=act(s,'a','trap',a=>a.card==='seven-a');
+ assert.equal(s.phase,'response');assert.equal(s.priority,1);
+ s=act(s,'b','trap',a=>a.card==='seven-b');
+ assert.equal(s.phase,'main');
+ assert.equal(s.players[0].lp,3000);assert.equal(s.players[1].lp,3000);
+ assert.ok(s.players[0].grave.some(c=>c.uid==='burn'));
+ assert.ok(s.players[1].grave.some(c=>c.uid==='cost'));
+ assert.ok(s.players[0].grave.some(c=>c.uid==='seven-a'));
+ assert.ok(s.players[1].grave.some(c=>c.uid==='seven-b'));
+ assert.ok(s.players[1].grave.some(c=>c.uid==='jam'));
+});
+test('Seven Tools negates Trap Hole before the summoned monster is destroyed',()=>{
+ let s=game();s.players[0].hand=[ref('summoned','91152256')];
+ s.players[0].backrow=[trap('seven','03819470')];
+ s.players[1].backrow=[trap('hole','04206964')];
+ s=act(s,'a','summon',a=>a.position==='atk'&&a.card==='summoned');
+ s=act(s,'b','trap',a=>a.card==='hole');
+ s=act(s,'a','trap',a=>a.card==='seven');
+ assert.equal(s.players[0].lp,3000);assert.equal(s.phase,'main');
+ assert.ok(s.players[0].monsters.some(m=>m.uid==='summoned'));
+ assert.ok(!s.players[0].grave.some(c=>c.uid==='summoned'));
+});
