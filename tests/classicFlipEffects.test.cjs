@@ -117,3 +117,23 @@ test('no legal targets means a recovery FLIP does not open a dead choice',()=>{
  s=act(s,'a','position',a=>a.mode==='flip');
  assert.equal(s.phase,'main');assert.equal(s.choice,undefined);
 });
+
+test('a targeted FLIP effect does not retarget if its chosen monster leaves before resolution',()=>{
+ let s=game();s.players[0].monsters=[m('bug','54652250')];
+ s.players[1].monsters=[
+  m('victim','91152256',{owner:1,faceUp:true,position:'atk'}),
+  m('survivor','91152256',{owner:1,faceUp:true,position:'atk'})
+ ];
+ s.players[1].backrow=[{uid:'trap',id:'17814387',setTurn:1,faceUp:false}];
+ s=act(s,'a','position',a=>a.mode==='flip');
+ if(s.phase==='response')s=act(s,'b','pass');
+ assert.equal(s.phase,'choice');
+ s=act(s,'a','choose',a=>a.target==='victim');
+ assert.equal(s.phase,'response');
+ // Simulate another chain link having removed the target.
+ const [departed]=s.players[1].monsters.splice(0,1);s.players[1].grave.push({uid:departed.uid,id:departed.id});
+ s=act(s,'b','pass');
+ assert.equal(s.players[1].monsters.length,1);
+ assert.equal(s.players[1].monsters[0].uid,'survivor');
+ assert.ok(s.log.some(line=>line.includes('não está mais no campo')));
+});
