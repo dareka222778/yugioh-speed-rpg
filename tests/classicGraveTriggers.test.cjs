@@ -100,3 +100,17 @@ test('the graveyard effect belongs to the owner, even if the monster changed con
  assert.ok(s.players[1].hand.some(c=>c.uid==='owner-card'));
  assert.ok(!s.players[0].hand.some(c=>c.uid==='controller-card'));
 });
+
+test('deck search labels show individual candidate names in the acting player’s controls',()=>{
+ const {actionLabel}=require('../dist/duelEngine');
+ const {publicDuelData}=require('../dist/duelUI');
+ let s=game();s.players[0].monsters=[monster('cannon','11384280'),monster('sangan','26202165')];
+ s.players[0].deck=[ref('search-target','91152256'),ref('secret','48305365')];
+ s=use(s,'a','monsterEffect',a=>a.tributes?.[0]==='sangan');
+ const choice=legalActions(s,'a').find(a=>a.kind==='choose');
+ assert.ok(choice);
+ assert.match(actionLabel(s,'a',choice),/Guardião Celta/);
+ assert.equal(legalActions(s,'b').length,0);
+ const publicView=JSON.stringify(publicDuelData(s));
+ assert.ok(!publicView.includes('search-target'));assert.ok(!publicView.includes('secret'));
+});
