@@ -13,12 +13,12 @@ export type Action=
  |{kind:'set';card:string}|{kind:'spell';card:string;target?:string;position?:'atk'|'def'}|{kind:'field'|'setField';card:string}
  |{kind:'fusion';card:string;extra:string;materials:string[];position:'atk'|'def'}
  |{kind:'position';card:string;mode:'atk'|'def'|'flip'}
- |{kind:'attack';card:string;target?:string}|{kind:'trap';card:string;target:string}
+ |{kind:'attack';card:string;target?:string}|{kind:'trap';card:string;target:string;discards?:string[]}
  |{kind:'monsterEffect';card:string;discards:string[];tributes?:string[];target?:string}
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
 export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
-export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'|'monsterTarget'|'monsterSearch'};afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'|'monsterTarget'|'monsterSearch'};afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -70,8 +70,22 @@ function trapsNegated(s:DuelState):boolean{
 function trapActions(s:DuelState,index:number):Action[]{
  if(trapsNegated(s))return [];
  const out:Action[]=[];
+ const last=s.phase==='response'?s.chain.at(-1):undefined;
+ const lastKind=last?getEffect(last.id)?.kind:undefined;
+ const counterWindow=lastKind==='magicJammer'||lastKind==='sevenTools';
  for(const c of s.players[index].backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&card(c.id).kind==='trap')){
   const effect=getEffect(c.id);if(!effect||effectNameBlocked(s,index,c.id))continue;
+  if(effect.kind==='magicJammer'){
+   if(s.phase==='response'&&!s.chain.length&&['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending)
+    for(const discarded of s.players[index].hand)out.push({kind:'trap',card:c.uid,target:s.pending.card,discards:[discarded.uid]});
+   continue;
+  }
+  if(effect.kind==='sevenTools'){
+   if(s.phase==='response'&&last&&s.players[index].lp>1000)out.push({kind:'trap',card:c.uid,target:last.card});
+   continue;
+  }
+  // Counter Traps have Spell Speed 3: ordinary Traps cannot be chained to them.
+  if(counterWindow)continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&!['reinforcements','castleWalls'].includes(effect.kind))continue;
   if(effect.kind==='reinforcements'||effect.kind==='castleWalls')out.push(...s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>({kind:'trap',card:c.uid,target:m.uid}) as Action)));
   else if(effect.kind==='waboku')out.push({kind:'trap',card:c.uid,target:''});
@@ -128,7 +142,7 @@ export function legalActions(s:DuelState,actor:string):Action[]{
  }
  actions.push({kind:'end'});return actions;
 }
-function response(s:DuelState,pending:Pending,resume:'main'|'battle',priority=1-s.current){s.pending=pending;s.resume=resume;s.phase='response';s.priority=priority;s.passes=0;s.chain=[];}
+function response(s:DuelState,pending:Pending,resume:'main'|'battle',priority=1-s.current){s.pending=pending;s.pendingNegated=false;s.resume=resume;s.phase='response';s.priority=priority;s.passes=0;s.chain=[];}
 function endTurn(s:DuelState){
  for(const p of s.players)for(const m of [...p.monsters]){m.atkBoost=0;m.defBoost=0;if(m.returnTo!==undefined&&m.returnTurn===s.turn){const target=s.players[m.returnTo];if(target!==p){if(target.monsters.length<3){p.monsters=p.monsters.filter(c=>c.uid!==m.uid);target.monsters.push(m);}else graveMonster(s,m.uid);}delete m.returnTo;delete m.returnTurn;}}
  if(s.players[s.current].hand.length>6){s.phase='discard';note(s,'Descarte até ficar com 6 cartas.');return;}
@@ -179,11 +193,26 @@ function resolve(s:DuelState){
   // costs already paid and cards activated earlier still go to the Graveyard.
   if(trapsNegated(s)){note(s,'Jinzo negou um efeito de Armadilha.');discardBackrow(s,link.card);return;}
   const target=findMonster(s,link.target)?.m;const effect=getEffect(link.id);
+  if(effect?.kind==='sevenTools'){
+   const negated=s.chain.find(other=>other.card===link.target);
+   if(negated){negated.negated=true;note(s,'Sete Ferramentas negou a ativação da Armadilha.');}
+   discardBackrow(s,link.card);return;
+  }
+  if(effect?.kind==='magicJammer'){
+   if(['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending&&s.pending.card===link.target){
+    s.pendingNegated=true;
+    discardBackrow(s,link.target);
+    note(s,'Bloqueador de Magia negou a ativação da Magia.');
+   }
+   discardBackrow(s,link.card);return;
+  }
   if(target?.faceUp){if(effect?.kind==='reinforcements')target.atkBoost+=500;else if(effect?.kind==='castleWalls')target.defBoost+=500;else if(effect?.kind==='trapHole')graveMonster(s,target.uid);}
   if(effect?.kind==='waboku')s.players[link.actor].battleProtectedUntil=s.turn;
   if(effect?.kind==='justDesserts'){const op=s.players[1-link.actor];op.lp=Math.max(0,op.lp-500*op.monsters.length);checkLP(s);}
   discardBackrow(s,link.card);},link=>{discardBackrow(s,link.card);},()=>s.phase==='finished');
- s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};return;}const pending=s.pending;s.pending={kind:'none'};s.phase=s.resume;
+ s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};s.pendingNegated=false;return;}
+ const pending=s.pending,negated=s.pendingNegated===true;s.pending={kind:'none'};s.pendingNegated=false;s.phase=s.resume;
+ if(negated){note(s,'Ativação negada: o efeito da Magia não foi resolvido.');return;}
  if(pending.kind==='monsterEffect'){
   const p=s.players[pending.actor],e=getMonsterEffect(pending.id);
   // Paid costs are never refunded and removing the source does not negate its effect.
@@ -302,7 +331,18 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  if(action.kind==='pass'){s.passes++;s.priority=1-index;if(s.passes===2)resolve(s);}
  else if(action.kind==='trap'){
   if(s.phase!=='response')response(s,{kind:'none'},s.phase as 'main'|'battle',1-index);
-  const c=p.backrow.find(c=>c.uid===action.card)!;c.faceUp=true;s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target});s.passes=0;s.priority=1-index;note(s,`${p.name} ativou ${card(c.id).name}.`);
+  const c=p.backrow.find(c=>c.uid===action.card)!;
+  const e=getEffect(c.id),discards=action.discards??[];
+  if(e?.kind==='magicJammer'){
+   if(discards.length!==1||!p.hand.some(h=>h.uid===discards[0]))throw new Error('Custo de descarte inválido.');
+   const [discarded]=p.hand.splice(p.hand.findIndex(h=>h.uid===discards[0]),1);
+   p.grave.push(discarded);note(s,`${p.name} descartou uma carta para ativar Bloqueador de Magia.`);
+  }else if(discards.length)throw new Error('Descarte não permitido para esta Armadilha.');
+  if(e?.kind==='sevenTools'){
+   if(p.lp<=1000)throw new Error('PV insuficientes para o custo.');
+   p.lp-=1000;note(s,`${p.name} pagou 1000 PV para Sete Ferramentas.`);
+  }
+  c.faceUp=true;s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target});s.passes=0;s.priority=1-index;note(s,`${p.name} ativou ${card(c.id).name}.`);
  }else if(action.kind==='monsterEffect'){
   const m=p.monsters.find(m=>m.uid===action.card)!;const e=getMonsterEffect(m.id)!;
   const sourceUid=m.uid,sourceId=m.id;
@@ -379,7 +419,7 @@ export function actionLabel(s:DuelState,actor:string,a:Action){
  if(a.kind==='set')return `Baixar: ${name(a.card)}`;if(a.kind==='spell')return `Ativar: ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.position?` (${a.position.toUpperCase()})`:''}`;
  if(a.kind==='position')return `${a.mode==='flip'?'Virar para ATK':`Mudar para ${a.mode.toUpperCase()}`}: ${name(a.card)}`;
  if(a.kind==='attack'){const target=a.target?findMonster(s,a.target):undefined;return `Atacar: ${name(a.card)} → ${target?name(target.m.uid):'direto'}`;}
- if(a.kind==='trap')return `Ativar ${name(a.card)}${a.target?` → ${name(a.target)}`:''}`;
+ if(a.kind==='trap')return `Ativar ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.discards?.length?` | Descartar ${a.discards.map(name).join(' + ')}`:''}`;
  if(a.kind==='choose')return `${s.choice?.source==='monsterSearch'?'Buscar no Deck':s.choice?.source==='monsterTarget'?'Efeito: escolher':s.choice?.source==='monsterDestroy'?'Efeito: destruir':'Fissura: destruir'} ${name(a.target)}`;
  if(a.kind==='discard')return `Descartar: ${name(a.card)}`;
  return {battle:'Entrar na Batalha',end:'Encerrar turno',pass:'Não responder / passar',concede:'Desistir'}[a.kind];
