@@ -331,7 +331,7 @@ async function main() {
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
   console.log('Fase 5: NPCs clássicos, evento diário e recompensas transacionais carregados.');
-  console.log('Galeria 0.7.2: retratos, navegação por duelista e 150 cartas clássicas para inspeção.');
+  console.log('Portal de duelistas: retratos e navegação exclusiva pelos decks jogáveis de 30 cartas do RPG.');
   console.log('Rede: recuperação automática de DNS/conexão ativada (5–30 segundos entre tentativas).');
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
   await retryNetwork(async attempt=>{
