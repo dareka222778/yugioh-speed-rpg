@@ -2,7 +2,7 @@
 
 **Branch de trabalho:** `classic-engine-foundation` (não altera `main`).
 
-**Métrica:** escopo da **primeira etapa de engine clássica adaptada** e da **futura reformulação visual**, cada uma com 100 pontos. Estes percentuais são **avaliações de marcos**, não uma porcentagem oficial de compatibilidade com todas as cartas da Konami. O comando `npm run progress` lê pontuações versionadas em `scripts/project-progress.cjs` e mede separadamente as cartas habilitadas do arquivo histórico real.
+**Métrica:** escopo da **primeira etapa de engine clássica adaptada** e da **futura reformulação visual**, cada uma com 100 pontos. Estes percentuais são **avaliações de marcos**, não uma porcentagem oficial de compatibilidade com todas as cartas da Konami. O comando `npm run progress` lê pontuações versionadas em `scripts/project-progress.cjs` e verifica separadamente a prontidão dos decks realmente jogáveis de Yugi, Kaiba e Joey.
 
 ## Estado desta revisão
 
@@ -27,12 +27,12 @@ A reformulação Azure está implementada parcialmente na arena, na mão, na gal
 | Gatilhos de invocação e invocações especiais | 7 | 5 | Reações Normais/Virar e recrutamento DARK do Tomate Místico; especiais avançadas pendentes |
 | Outros gatilhos de destruição | 7 | 2 | Causa de destruição em batalha separada de custo/efeito; regras amplas pendentes |
 | Contínuos, rápidos, negações complexas | 8 | 4 | Jinzo, MST Rápido e negações; monstros rápidos e efeitos avançados pendentes |
-| Primeiro lote histórico de cartas | 7 | 4 | Quantidades reais exibidas pelo `npm run progress` |
+| Catálogo de cartas utilizáveis no RPG | 7 | 4 | Registro de cartas executáveis e validação dos decks dos NPCs |
 | IA dos NPCs | 4 | 4 | Reações, descarte, recrutamento, Magias Rápidas e decks de 30; heurística não exaustiva |
 | CI, regressão e aceite no Discord | 5 | 4 | Testes de motor/UI e 30 partidas simuladas; aceite humano na hospedagem pendente |
 | **Total** | **100** | **78** | |
 
-O progresso de regras é **deliberadamente menor que a porcentagem de cartas habilitadas**, pois boa parte do lote histórico é de monstros sem efeitos e não representa todo o trabalho de regras.
+O progresso de regras é **deliberadamente independente do total de cartas habilitadas**, pois um catálogo com muitos monstros normais não representa toda a complexidade de efeitos e correntes.
 
 ### Critérios da futura fase de layout
 
@@ -51,7 +51,7 @@ O progresso de regras é **deliberadamente menor que a porcentagem de cartas hab
 ## Regras para avançar pontuações
 
 1. Entregas ganham pontos somente junto a código funcional, testes, documentação e/ou validação visual pertinentes.
-2. O lote histórico é medido automaticamente pela lista real em `classicCoverage()`, não por contagem declarada.
+2. A prontidão dos decks do nosso RPG é medida em `scripts/duel-readiness.cjs` e `npm run progress`, a partir do registro de efeitos que realmente funcionam.
 3. Um resultado verde de CI confirma regressões testadas, **não** suporte integral às regras do jogo.
 4. O redesenho só ganha pontos quando seus novos componentes forem realmente implementados e revisados; não se contabiliza layout legado.
 5. Ao fim de cada bloco de desenvolvimento, executar `npm ci`, `npm run check`, `npm test`, `npm run progress`. No GitHub Actions, essas etapas rodam automaticamente para a branch.
@@ -62,7 +62,7 @@ O progresso de regras é **deliberadamente menor que a porcentagem de cartas hab
 - Resolver gatilhos adicionais de invocação e destruição com cartas clássicas verificadas.
 - Ampliar efeitos rápidos, contínuos, condições de ativação, resolução e negação real de elos.
 - Fazer testes simultâneos com mais efeitos encadeados, deck-out, alvos ausentes e partidas completas.
-- Fechar cobertura do primeiro lote histórico, respeitando incompatibilidades explícitas do formato de três zonas.
+- Ampliar o conjunto de cartas jogáveis do RPG com implementação e teste de cada efeito novo, respeitando o formato de três zonas.
 - Iniciar posteriormente o sistema de design azul e a galeria navegável, **um duelista/carta por vez**, com personagens e imagens consistentes.
 
 ## Efeito contínuo habilitado
@@ -91,15 +91,15 @@ Testes: `tests/classicBattleRecruiters.test.cjs`, cenários com compra pelo dono
 
 - Pote da Ganância (55144522) compra duas cartas; Raigeki (12580477) destrói os monstros adversários e diferencia efeitos que disparam ao enviar cartas ao Cemitério de efeitos de batalha.
 - Tufão Espacial Místico (05318639) é uma Magia Rápida: jogável da mão durante o próprio turno ou previamente baixada, inclusive como resposta; respeita a Velocidade de Magia 3, pode ser negado por Bloqueador de Magia e **não nega automaticamente o efeito** de outra Magia/Armadilha apenas por destruí-la.
-- Joey, Yugi e Kaiba possuem **adaptações de 30 cartas jogáveis**, usando somente cartas auditadas pelo motor. A galeria histórica de 50 cartas por duelista continua independente e intocada. Testes de partidas simuladas conferem conservação global das cartas quando elas mudam de controlador.
+- Joey, Yugi e Kaiba possuem **decks próprios de 30 cartas jogáveis**, usando somente cartas auditadas pelo motor. O portal exibe exclusivamente esses decks. Testes de partidas simuladas conferem conservação global das cartas quando elas mudam de controlador.
 
 **Layout Azure (56%)**
 
 - src/duelTheme.ts: sistema azul neutro, tokens compartilhados e medição de contraste.
 - src/duelRenderer.ts: arena azul com efeitos luminosos moderados, zonas táticas, LP, fases e correntes, cartas da mão privada e retratos locais de NPCs; dimensões compatíveis com os painéis de Discord.
 - src/duelUI.ts e src/index.ts: **inspeção privada carta por carta**, imagem ampliada, texto e estatísticas, ações legais diretamente relacionadas à carta, anterior/próxima e retorno ao painel. Componente vinculado ao duelista e à revisão do duelo.
-- src/npcRenderer.ts e src/npcUI.ts: apresentação de Yugi, Joey e Kaiba, retratos e galeria histórica de 50 cartas, cada uma ampliável separadamente.
+- src/npcRenderer.ts e src/npcUI.ts: apresentação de Yugi, Joey e Kaiba, retratos e navegação individual por todas as cartas dos seus decks jogáveis.
 - src/deckRenderer.ts e src/deckUI.ts: editor de decks azul com painel individual, cópias, quantidade possuída e distinção entre monstro normal e de efeito.
 - Testes novos de contraste, privacidade de cartas escondidas, comportamento real dos botões, formato dos PNGs e pixels dos retratos: tests/azureUI.test.cjs, tests/duelUI.test.cjs e tests/interactions.test.cjs.
 
-**Ainda não concluído:** engine geral do TCG/anime além do lote auditado, efeitos rápidos de monstros com variedade de timings, todas as cartas históricas incompatíveis/pendentes, animações avançadas, revisão manual em dispositivos reais, otimização de performance no host e deploy efetivo. A porcentagem NÃO implica que 78% de todas as regras/cartas oficiais estejam implementadas nem que 56% de todas as telas imagináveis tenham sido verificadas.
+**Ainda não concluído:** engine geral do TCG/anime além das cartas implementadas, efeitos rápidos de monstros com variedade de timings, outros efeitos e cartas que ainda não foram programados, animações avançadas, revisão manual em dispositivos reais, otimização de performance no host e deploy efetivo. A porcentagem NÃO implica que 78% de todas as regras/cartas oficiais estejam implementadas nem que 56% de todas as telas imagináveis tenham sido verificadas.
