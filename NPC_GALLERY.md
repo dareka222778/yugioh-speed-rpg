@@ -51,7 +51,7 @@ The full historical lists are **inspection-only**. They do not enter the owned
 collection, grant cards, alter an active duel, or become enabled engine cards.
 `Duelar` continues to use the tested 30-card Speed adaptation (Joey also has one
 extra Fusion), and both the UI and the separate playable-deck browser identify it.
-The engine currently has 35 enabled cards. Merely listing a historical effect
+The engine now has a larger audited registry with effect monsters, classic Spells, Counter Traps and Quick-Play support. See npm run progress for the live count. Merely listing a historical effect
 card must not make it playable: the existing spell dispatcher cannot safely
 handle unknown effects. Full historical play still requires effects, target
 selection, response timing, flip/graveyard triggers and additional zone/rule work.
@@ -84,3 +84,7 @@ Actual PNG previews were rendered and inspected for portraits, grid and large
 Fusion detail. Live Discord message appearance still needs a real `/npc ver`
 interaction after deployment; a successful unit test or bot login alone does not
 prove Discord has shown the gallery to the user.
+
+## Azure redesign and playable NPCs (2026-10-24)
+
+The playable adaptations for Joey, Yugi, and Kaiba now each have 30 cards, while the 50-card historical product listings remain inspection-only. The theme and UI of the duel, NPC gallery and deck editor share a blue neutral design system. NPC portraits are also shown in live NPC duels and the owner's saved custom portrait can appear in the public duel HUD. Owner-scoped card-by-card hand inspection is available through duel:card components. See ENGINE_PROGRESS.md for what is implemented versus what remains.
