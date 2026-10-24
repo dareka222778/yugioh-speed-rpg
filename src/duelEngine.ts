@@ -1,6 +1,6 @@
 import {randomInt} from 'node:crypto';
 import {resolveChainLinks,type ChainLink} from './chainEngine';
-import {getMonsterEffect,canActivateMonsterEffect,payMonsterEffectCost} from './monsterEffects';
+import {getMonsterEffect,canActivateMonsterEffect,payMonsterEffectCost,monsterDestructionTarget} from './monsterEffects';
 import {getCard} from './collection';
 import {enabledCardIds,getEffect} from './effectRegistry';
 import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips} from './classicEffects';
@@ -18,7 +18,7 @@ export type Action=
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
 export type Pending={kind:'monsterEffect';actor:number;card:string;id:string}|{kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
-export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:ChainLink[];choice?:{actor:number;targets:string[]};afterMonsterEffect?:Pending;winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'};afterMonsterEffect?:Pending;winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -141,6 +141,10 @@ function resolve(s:DuelState){
    if(p.deck.length<e.operation.count){finish(s,1-pending.actor,'não conseguiu comprar uma carta');return;}
    p.hand.push(...p.deck.splice(0,e.operation.count));
   }
+  if(e.operation.kind==='destroy'){
+   const targets=s.players[1-pending.actor].monsters.map(m=>m.uid);
+   if(targets.length){s.choice={actor:pending.actor,targets,source:'monsterDestroy'};s.phase='choice';note(s,'Escolha um monstro adversário para destruir.');return;}
+  }
   note(s,'Efeito de monstro resolvido.');
   if(s.afterMonsterEffect){const followup=s.afterMonsterEffect;s.afterMonsterEffect=undefined;if(s.winner===null&&followup.kind==='attack')response(s,followup,'battle',1-followup.actor);}
   return;
@@ -236,7 +240,14 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  else if(action.kind==='end')response(s,{kind:'end'},s.phase as 'main'|'battle');
  else if(action.kind==='attack'){
   const m=p.monsters.find(m=>m.uid===action.card)!;m.attacked=s.turn;note(s,`${p.name} declarou um ataque com ${card(m.id).name}.`);response(s,{kind:'attack',actor:index,card:m.uid,target:action.target,stage:'declare'},'battle');
- }else if(action.kind==='choose'){note(s,`Fissura destruiu ${card(findMonster(s,action.target)!.m.id).name}.`);graveMonster(s,action.target);s.choice=undefined;s.phase=s.resume;}
+ }else if(action.kind==='choose'){
+  if(s.choice?.source==='monsterDestroy'){
+   const target=monsterDestructionTarget({trigger:'flip',operation:{kind:'destroy',target:'opponentMonster'}},s.players[1-index].monsters.map(m=>m.uid),action.target);
+   note(s,'Efeito de monstro destruiu o alvo.');graveMonster(s,target);
+  }else{note(s,'Fissura destruiu o alvo.');graveMonster(s,action.target);}
+  s.choice=undefined;s.phase=s.resume;
+  if(s.afterMonsterEffect){const followup=s.afterMonsterEffect;s.afterMonsterEffect=undefined;if(s.winner===null&&followup.kind==='attack')response(s,followup,'battle',1-followup.actor);}
+ }
  else if(action.kind==='discard'){const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);p.grave.push(c);note(s,`${p.name} descartou ${card(c.id).name}.`);if(p.hand.length<=6)nextTurn(s);}
  cleanEquips(s);settle(s);cleanEquips(s);return s;
 }
@@ -250,7 +261,7 @@ export function actionLabel(s:DuelState,actor:string,a:Action){
  if(a.kind==='position')return `${a.mode==='flip'?'Virar para ATK':`Mudar para ${a.mode.toUpperCase()}`}: ${name(a.card)}`;
  if(a.kind==='attack'){const target=a.target?findMonster(s,a.target):undefined;return `Atacar: ${name(a.card)} → ${target?name(target.m.uid):'direto'}`;}
  if(a.kind==='trap')return `Ativar ${name(a.card)}${a.target?` → ${name(a.target)}`:''}`;
- if(a.kind==='choose')return `Fissura: destruir ${name(a.target)}`;
+ if(a.kind==='choose')return `${s.choice?.source==='monsterDestroy'?'Efeito':'Fissura'}: destruir ${name(a.target)}`;
  if(a.kind==='discard')return `Descartar: ${name(a.card)}`;
  return {battle:'Entrar na Batalha',end:'Encerrar turno',pass:'Não responder / passar',concede:'Desistir'}[a.kind];
 }
