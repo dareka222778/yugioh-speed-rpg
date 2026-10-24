@@ -1,6 +1,8 @@
 import Database from 'better-sqlite3';
 import fs from 'node:fs';
 import path from 'node:path';
+import { starterContents } from './cardCatalog';
+import { isStarterDeck } from './starterDecks';
 
 const databasePath = process.env.DATABASE_PATH ?? './data/game.sqlite';
 fs.mkdirSync(path.dirname(databasePath), { recursive: true });
@@ -61,12 +63,43 @@ export function createPlayer(discordId: string, username: string): Player {
   return getPlayer(discordId)!;
 }
 
-export function chooseStarterDeck(discordId: string, deck: string): boolean {
-  const player = getPlayer(discordId);
-  if (!player || player.starter_deck) return false;
+// A receipt and all inventory rows commit together, or none of them do.
+db.exec(`CREATE TABLE IF NOT EXISTS starter_grants (
+  discord_id TEXT PRIMARY KEY REFERENCES players(discord_id) ON DELETE CASCADE,
+  starter_deck TEXT NOT NULL,
+  catalog_version INTEGER NOT NULL DEFAULT 1,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+)`);
 
-  db.prepare('UPDATE players SET starter_deck = ? WHERE discord_id = ?').run(deck, discordId);
+export const grantStarterCards = db.transaction((discordId: string): boolean => {
+  const player = getPlayer(discordId);
+  if (!player?.starter_deck || !isStarterDeck(player.starter_deck)) return false;
+  if (db.prepare('SELECT 1 FROM starter_grants WHERE discord_id = ?').get(discordId)) return false;
+  const contents = starterContents[player.starter_deck];
+  if (!contents || contents.reduce((sum,item)=>sum+item.quantity,0) !== 20) throw new Error('Conjunto inicial inválido.');
+  db.prepare('INSERT INTO starter_grants (discord_id, starter_deck) VALUES (?, ?)').run(discordId,player.starter_deck);
+  const add = db.prepare(`INSERT INTO player_cards (discord_id,card_key,quantity) VALUES (?,?,?)
+    ON CONFLICT(discord_id,card_key) DO UPDATE SET quantity = quantity + excluded.quantity`);
+  for (const item of contents) add.run(discordId,item.id,item.quantity);
   return true;
+});
+
+export const chooseStarterDeck = db.transaction((discordId: string, deck: string): boolean => {
+  if (!isStarterDeck(deck)) return false;
+  const result = db.prepare('UPDATE players SET starter_deck = ? WHERE discord_id = ? AND starter_deck IS NULL').run(deck,discordId);
+  if (!result.changes) return false;
+  grantStarterCards(discordId);
+  return true;
+});
+
+export function grantLegacyStarters(): number {
+  const pending = db.prepare(`SELECT p.discord_id FROM players p LEFT JOIN starter_grants g ON p.discord_id = g.discord_id
+    WHERE p.starter_deck IS NOT NULL AND g.discord_id IS NULL`).all() as {discord_id:string}[];
+  return pending.reduce((sum,p)=>sum+Number(grantStarterCards(p.discord_id)),0);
+}
+
+export function getCollection(id:string): {card_key:string;quantity:number}[] {
+  return db.prepare('SELECT card_key,quantity FROM player_cards WHERE discord_id = ? AND quantity > 0 ORDER BY card_key').all(id) as {card_key:string;quantity:number}[];
 }
 
 export function updateProfile(id: string, profile: { character_name: string; biography: string; theme: string }) {

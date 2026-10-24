@@ -31,6 +31,7 @@ export async function profileMessage(player: Player, avatar: string, editable = 
   const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder().setCustomId(`profile:refresh:${player.discord_id}`).setLabel('Atualizar').setEmoji('🔄').setStyle(ButtonStyle.Secondary),
     new ButtonBuilder().setCustomId(`profile:edit:${player.discord_id}`).setLabel('Personalizar').setEmoji('🎨').setStyle(ButtonStyle.Primary),
+    new ButtonBuilder().setCustomId(`collection:page:${player.discord_id}:1`).setLabel('Coleção').setStyle(ButtonStyle.Secondary),
     new ButtonBuilder().setCustomId(`profile:help:${player.discord_id}`).setLabel('Ajuda').setStyle(ButtonStyle.Secondary)
   );
   return { embeds: [embed], files, components: editable ? [row] : [], allowedMentions: { parse: [] as never[] } };
