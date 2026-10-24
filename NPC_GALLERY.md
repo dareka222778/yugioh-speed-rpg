@@ -32,3 +32,9 @@ O Joey agora inclui **Força do Espelho** no deck de 30 cartas. O efeito funcion
 ## Validação
 
 Os testes em `tests/npcGallery.test.cjs`, `tests/interactions.test.cjs` e `tests/npc.test.cjs` verificam a identidade dos decks, navegação por índice, autoria dos botões, limites Discord e 30 partidas simuladas. O workflow também produz prévias PNG sem buscar artes na internet. Aceite visual humano no Discord ainda precisa acontecer antes de integrar à `main`.
+
+## Interações novas nos decks jogáveis
+
+O Yugi pode usar **Livro da Lua** e **Buraco Armadilha Sem Fundo**; o Kaiba tem **Tributo Torrencial** e **Armadura Sakuretsu**; o Joey mantém **Força do Espelho**. Todos continuam com 30 cartas principais próprias, visíveis no único navegador de decks do RPG. A IA escolhe alvos públicos e aplica os efeitos somente quando legalmente disponíveis.
+
+A aparência do campo de duelo permanece original. A identidade Azul Azure é usada nos painéis de comando, galeria, cartas individuais e editor.
