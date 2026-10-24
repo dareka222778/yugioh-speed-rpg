@@ -12,7 +12,7 @@ export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string
  const have=(id:string)=>owned.find(c=>c.card_key===id)?.quantity??0;
  const key=(action:string,p=page)=>`deck:${action}:${owner}:${slot}:${deck.revision}:${p}:${choice??''}`;
  const embed=new EmbedBuilder().setColor(deck.active?0x4dbb9d:0x75caff).setTitle(`Deck ${slot} • ${escapeMarkdown(deck.name)}`)
- .setDescription(`${notice?`${notice}\n\n`:''}**${deck.total}/30 cartas • ${deck.active?'ATIVO':deck.errors.length?'RASCUNHO':'VÁLIDO — pode ativar'}**\n${deck.errors.length?deck.errors.slice(0,3).join('\n'):'Tamanho e cópias conferidos com sua coleção.'}\n\nEdite pelo menu e pelos botões. As cartas continuam na coleção e podem ser usadas em outros decks.`)
+ .setDescription(`${notice?`${notice}\n\n`:''}**${deck.total}/30 no Principal • ${deck.extraTotal}/6 no Adicional • ${deck.active?'ATIVO':deck.errors.length?'RASCUNHO':'VÁLIDO — pode ativar'}**\n${deck.errors.length?deck.errors.slice(0,3).join('\n'):'Tamanho e cópias conferidos com sua coleção.'}\n\nEdite pelo menu e pelos botões. As cartas continuam na coleção e podem ser usadas em outros decks.`)
  .setFooter({text:`Página ${page}/${pages} • Decks de 20–30 cartas • Até 3 cópias • Duelo básico com /duelo`});
  for(const id of visible)embed.addFields({name:`${inDeck(id)}× ${getCard(id)!.name}`,value:`Possui: ${have(id)} • ID ${id}${choice===id?' • SELECIONADA':''}`});
  const slotRow=new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(new StringSelectMenuBuilder().setCustomId(key('slot')).setPlaceholder('Trocar espaço do deck').addOptions([1,2,3].map(n=>({label:`Deck ${n}`,value:String(n),default:n===slot}))));
@@ -20,14 +20,14 @@ export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string
  if(visible.length)rows.push(new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(new StringSelectMenuBuilder().setCustomId(key('select')).setPlaceholder('Escolha a carta para editar').addOptions(visible.map(id=>({label:getCard(id)!.name,value:id,description:`No deck: ${inDeck(id)} • Na coleção: ${have(id)}`,default:id===choice})))));
  rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(
  new ButtonBuilder().setCustomId(key('minus')).setLabel('− 1 cópia').setStyle(ButtonStyle.Secondary).setDisabled(!choice||inDeck(choice)===0),
- new ButtonBuilder().setCustomId(key('plus')).setLabel('+ 1 cópia').setStyle(ButtonStyle.Primary).setDisabled(!choice||inDeck(choice)>=Math.min(3,have(choice))||deck.total>=30),
+ new ButtonBuilder().setCustomId(key('plus')).setLabel('+ 1 cópia').setStyle(ButtonStyle.Primary).setDisabled(!choice||inDeck(choice)>=Math.min(3,have(choice))||(choice&&getCard(choice)?.fusion?deck.extraTotal>=6:deck.total>=30)),
  new ButtonBuilder().setCustomId(key('activate')).setLabel(deck.active?'Deck ativo':'Ativar deck').setStyle(ButtonStyle.Success).setDisabled(!!deck.errors.length||!!deck.active),
  new ButtonBuilder().setCustomId(key('rename')).setLabel('Renomear').setStyle(ButtonStyle.Secondary)));
  rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(
  new ButtonBuilder().setCustomId(key('view',page-1)).setLabel('Anterior').setStyle(ButtonStyle.Secondary).setDisabled(page===1),
  new ButtonBuilder().setCustomId(key('view')).setLabel('Atualizar').setStyle(ButtonStyle.Secondary),
  new ButtonBuilder().setCustomId(key('view',page+1)).setLabel('Próxima').setStyle(ButtonStyle.Secondary).setDisabled(page===pages),
- new ButtonBuilder().setCustomId(key('initial')).setLabel('Copiar conjunto inicial').setStyle(ButtonStyle.Secondary).setDisabled(deck.total!==0)));
+ new ButtonBuilder().setCustomId(key('initial')).setLabel('Copiar conjunto inicial').setStyle(ButtonStyle.Secondary).setDisabled(deck.total!==0||deck.extraTotal!==0)));
  return {embeds:[embed],components:rows,attachments:[],allowedMentions:{parse:[] as never[]}};
 }
 
