@@ -120,6 +120,8 @@ client.on(Events.InteractionCreate, async i => {
   }
 });
 async function main() {
+  await renderWelcome();
+  console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
   const rest = new REST({ version: '10' }).setToken(token!);
   await rest.put(guildId ? Routes.applicationGuildCommands(clientId!,guildId) : Routes.applicationCommands(clientId!), { body: commands });
   await client.login(token);
