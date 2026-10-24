@@ -3,7 +3,7 @@ import {cards as starterCards,type Card} from './cardCatalog';
 import {archiveCards} from './classicDecks';
 import {classicEngineCards} from './classicEngineCards';
 export type Effect=
- |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'}
+ |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'}
  |{kind:'heal'|'burn';amount:number}
  |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
@@ -17,6 +17,9 @@ const effects:Record<string,Effect>={
  '26202165':{kind:'monsterEffect'},
  '78010363':{kind:'monsterEffect'},
  '77585513':{kind:'monsterEffect'},
+ '54098121':{kind:'monsterEffect'},
+ '77414722':{kind:'magicJammer'},
+ '03819470':{kind:'sevenTools'},
  '38199696':{kind:'heal',amount:500},'84257639':{kind:'heal',amount:1000},'19523799':{kind:'burn',amount:800},
  '66788016':{kind:'fissure'},'24094653':{kind:'polymerization'},
  '17814387':{kind:'reinforcements'},'44209392':{kind:'castleWalls'},
@@ -42,9 +45,14 @@ const supportedEffectMonsters:Card[]=[
  {id:'11384280',konamiId:4518,name:'Soldado Canhão',englishName:'Cannon Soldier',kind:'monster',race:'Machine',attribute:'DARK',level:4,atk:1400,defense:1300,summary:'Ofereça 1 monstro que você controla como Tributo; cause 500 de dano ao oponente.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4518&request_locale=pt'},
  {id:'26202165',konamiId:4054,name:'Sangan',englishName:'Sangan',kind:'monster',race:'Fiend',attribute:'DARK',level:3,atk:1000,defense:600,summary:'Se enviado do campo ao Cemitério: busque no Deck 1 monstro com até 1500 ATK. Uma vez por turno; não ative cards/efeitos de cards com esse nome neste turno.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4054&request_locale=pt'},
  {id:'78010363',konamiId:4580,name:'Bruxa da Floresta Negra',englishName:'Witch of the Black Forest',kind:'monster',race:'Spellcaster',attribute:'DARK',level:4,atk:1100,defense:1200,summary:'Se enviada do campo ao Cemitério: busque no Deck 1 monstro com até 1500 DEF. Uma vez por turno; não ative cards/efeitos de cards com esse nome neste turno.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4580&request_locale=pt'},
- {id:'77585513',konamiId:4758,name:'Jinzo',englishName:'Jinzo',kind:'monster',race:'Machine',attribute:'DARK',level:6,atk:2400,defense:1500,summary:'Enquanto estiver com a face para cima no campo, nenhum jogador pode ativar Armadilhas. Negue os efeitos de Armadilha no campo.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4758&request_locale=pt'}
+ {id:'77585513',konamiId:4758,name:'Jinzo',englishName:'Jinzo',kind:'monster',race:'Machine',attribute:'DARK',level:6,atk:2400,defense:1500,summary:'Enquanto estiver com a face para cima no campo, nenhum jogador pode ativar Armadilhas. Negue os efeitos de Armadilha no campo.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4758&request_locale=pt'},
+ {id:'54098121',konamiId:4172,name:'Ventríloco Misterioso',englishName:'Mysterious Puppeteer',kind:'monster',race:'Warrior',attribute:'EARTH',level:4,atk:1000,defense:1500,summary:'Quando outro monstro é Invocado por Invocação-Normal ou Virar: ganhe 500 PV.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4172&request_locale=pt'}
 ];
-export const engineCatalog:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters];
+const supportedCounterTraps:Card[]=[
+ {id:'77414722',konamiId:4862,name:'Bloqueador de Magia',englishName:'Magic Jammer',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando uma Magia é ativada: descarte 1 carta; negue a ativação e destrua a Magia.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4862&request_locale=pt'},
+ {id:'03819470',konamiId:4863,name:'Sete Ferramentas do Bandido',englishName:'Seven Tools of the Bandit',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando uma Armadilha é ativada: pague 1000 PV; negue a ativação e destrua a Armadilha.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4863&request_locale=pt'}
+];
+export const engineCatalog:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps];
 const metadata=new Map(engineCatalog.map(c=>[c.id,c]));
 for(const c of engineCatalog)if(!effects[c.id]){
  if(c.fusion)effects[c.id]={kind:'fusion'};
