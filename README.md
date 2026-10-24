@@ -130,3 +130,9 @@ Prazo de 30 minutos por decisão, vitória do adversário por W.O., verificaçã
 - Motor próprio, campo clássico e verso enviado pelo usuário mantidos. O motor continua sendo um conjunto limitado de regras/cartas, não uma implementação completa do TCG.
 
 Próximas etapas são loja e mercado/expansões, e 2v2 após estabilizar o 1v1. Esta versão não cria uma loja de fachada.
+
+## v0.7.1 — recuperação de rede na inicialização
+
+Falhas transitórias de DNS/conexão (`ENOTFOUND`, `EAI_AGAIN`, resets, timeout e HTTP 502/503/504) aguardam dentro do processo e repetem após 5, 10, 20 e depois 30 segundos. O login usa um Client novo a cada tentativa, pois discord.js destrói o Client quando o login falha. O registro dos comandos também tenta novamente após falhas transitórias, sem bloquear o cliente já conectado. Token inválido, permissões e erros desconhecidos não entram nessa repetição. Os logs informam apenas operação, código do erro e intervalo, sem corpo de requisição ou credenciais.
+
+Isso evita um ciclo de encerrar/recompilar o bot por uma falha temporária. Não altera DNS do servidor, não ignora TLS e não resolve uma indisponibilidade persistente da rede da hospedagem. Considere o bot conectado somente após o log `online como ...`, e os novos comandos disponíveis após o log de registro.
