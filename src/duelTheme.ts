@@ -1,8 +1,9 @@
 /**
  * Speed RPG — Azure system.
- * Shared, accessible visual tokens for every classic duel surface.
- * Distinctive duelists keep character-specific accents, but the chrome is
- * neutral Duel Links-inspired blue. No game-state or Discord dependency.
+ * Shared accessible visual tokens for Discord command panels, character gallery,
+ * card inspection, deck editor and informative embeds. The duel playmat is a
+ * separate, original amber renderer and must not inherit this blue layout.
+ * No game-state or Discord dependency.
  */
 export const azure={
  ink:'#06101F',
