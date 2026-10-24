@@ -18,7 +18,7 @@ export type Action=
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
 export type Pending={kind:'monsterEffect';actor:number;card:string;id:string}|{kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
-export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:ChainLink[];choice?:{actor:number;targets:string[]};winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:ChainLink[];choice?:{actor:number;targets:string[]};afterMonsterEffect?:Pending;winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -141,7 +141,9 @@ function resolve(s:DuelState){
    if(p.deck.length<e.operation.count){finish(s,1-pending.actor,'não conseguiu comprar uma carta');return;}
    p.hand.push(...p.deck.splice(0,e.operation.count));
   }
-  note(s,'Efeito de monstro resolvido.');return;
+  note(s,'Efeito de monstro resolvido.');
+  if(s.phase!=='finished'&&s.afterMonsterEffect){const followup=s.afterMonsterEffect;s.afterMonsterEffect=undefined;response(s,followup,'battle',1-followup.actor);}
+  return;
  }
  if(pending.kind==='flip'||pending.kind==='summon'){
   triggerMonsterEffect(s,pending.actor,pending.card,pending.kind==='flip'?'flip':'onSummon');
@@ -174,7 +176,7 @@ function resolve(s:DuelState){
   if(pending.stage==='declare'){
    if(defender&&!defender.m.faceUp){
     defender.m.faceUp=true;note(s,`Revelado: ${card(defender.m.id).name}.`);
-    if(triggerMonsterEffect(s,1-pending.actor,defender.m.uid,'flip'))return;
+    if(triggerMonsterEffect(s,1-pending.actor,defender.m.uid,'flip')){s.afterMonsterEffect={...pending,stage:'damage'};return;}
    }
    response(s,{...pending,stage:'damage'},'battle',1-pending.actor);return;
   }
