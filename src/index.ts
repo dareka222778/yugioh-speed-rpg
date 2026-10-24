@@ -171,9 +171,14 @@ async function main() {
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
-  const rest = new REST({ version: '10' }).setToken(token!);
-  await rest.put(guildId ? Routes.applicationGuildCommands(clientId!,guildId) : Routes.applicationCommands(clientId!), { body: commands });
-  console.log('Fase 2: comandos /colecao e /carta registrados.');
   await client.login(token);
+  const rest = new REST({ version: '10' }).setToken(token!);
+  console.log('Sincronizando comandos sem bloquear a conexão do bot.');
+  try {
+    await rest.put(guildId ? Routes.applicationGuildCommands(clientId!,guildId) : Routes.applicationCommands(clientId!), { body: commands });
+    console.log('Fase 2: comandos /colecao e /carta registrados.');
+  } catch(error) {
+    console.error('Falha ao sincronizar comandos; a conexão do bot continua ativa:',error);
+  }
 }
 main().catch(error => { console.error(error); process.exit(1); });
