@@ -139,7 +139,7 @@ test('NPC gallery buttons and card selection use the real handler, acknowledge f
  const user={id:'109',username:'Lendário',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};
  const next=interaction('button',undefined,{user,customId:'npc:gallery:109:yugi:hero:0'});await dispatch(next.i);assert.deepEqual(next.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(next.calls[1][1].embeds[0].toJSON().title,/Yugi/);
  const deck=interaction('button',undefined,{user,customId:'npc:gallery:109:joey:deck:2'});await dispatch(deck.i);const menu=deck.calls[1][1].components[1].toJSON().components[0];assert.equal(menu.options[2].value,'22');
- const select=interaction('select',undefined,{user,customId:menu.custom_id,isStringSelectMenu:()=>true,values:['22']});await dispatch(select.i);assert.deepEqual(select.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(select.calls[1][1].embeds[0].toJSON().fields[0].name,/23\/50/);
+ const select=interaction('select',undefined,{user,customId:menu.custom_id,isStringSelectMenu:()=>true,values:['22']});await dispatch(select.i);assert.deepEqual(select.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(select.calls[1][1].embeds[0].toJSON().fields[0].name,/23\/31/);
  const stranger=interaction('button',undefined,{customId:'npc:gallery:109:kaiba:hero:0'});await dispatch(stranger.i);assert.equal(stranger.calls[0][0],'reply');assert.match(stranger.calls[0][1].content,/próprios/);
  const invalid=interaction('button',undefined,{user,customId:'npc:gallery:109:yugi:card:50'});await dispatch(invalid.i);assert.equal(invalid.calls[0][0],'deferUpdate');assert.equal(invalid.calls.at(-1)[0],'followUp');assert.match(invalid.calls.at(-1)[1].content,/inexistente/);
 });
