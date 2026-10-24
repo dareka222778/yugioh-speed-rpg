@@ -35,7 +35,7 @@ test('deadline awards W.O. at the exact boundary, no interaction is needed for s
 test('tutorial is playable without granting cards; cemetery and own Extra Deck can be inspected without leaking opponents extra',()=>{
  db.createPlayer('103','Tutorial');const inventory=db.getCollection('103');const r=store.createTraining('103','g','c',true);assert.ok(engine.legalActions(r.state,'103').some(a=>a.kind==='fusion'));assert.ok(engine.legalActions(r.state,'103').some(a=>a.kind==='field'));assert.deepEqual(db.getCollection('103'),inventory);
  const tutorialIds=new Set([...r.state.players[0].deck,...r.state.players[0].hand].map(c=>c.id));
- for(const id of ['54652250','07089711','31560081','28933734','60694662'])assert.ok(tutorialIds.has(id),`tutorial missing ${id}`);
+ for(const id of ['54652250','07089711','31560081','28933734','60694662','11384280'])assert.ok(tutorialIds.has(id),`tutorial missing ${id}`);
  const mine=JSON.stringify(ui.duelZonesMessage(r,'103').embeds[0].toJSON());assert.match(mine,/Espadachim das Chamas/);const outsider=JSON.stringify(ui.duelZonesMessage(r,'stranger').embeds[0].toJSON());assert.ok(!outsider.includes('Espadachim das Chamas'));assert.ok(!JSON.stringify(ui.publicDuelData(r.state)).includes('45231177'));
 });
 test('deck exhaustion wins only when a required draw fails, not when the last card has just been drawn',()=>{
