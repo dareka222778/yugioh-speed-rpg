@@ -3,7 +3,7 @@ import {cards as starterCards,type Card} from './cardCatalog';
 import {archiveCards} from './classicDecks';
 import {classicEngineCards} from './classicEngineCards';
 export type Effect=
- |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'}
+ |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'}
  |{kind:'heal'|'burn';amount:number}
  |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
@@ -21,6 +21,8 @@ const effects:Record<string,Effect>={
  '83011277':{kind:'monsterEffect'},
  '77414722':{kind:'magicJammer'},
  '03819470':{kind:'sevenTools'},
+ '55144522':{kind:'potOfGreed'},
+ '12580477':{kind:'raigeki'},
  '38199696':{kind:'heal',amount:500},'84257639':{kind:'heal',amount:1000},'19523799':{kind:'burn',amount:800},
  '66788016':{kind:'fissure'},'24094653':{kind:'polymerization'},
  '17814387':{kind:'reinforcements'},'44209392':{kind:'castleWalls'},
@@ -54,7 +56,11 @@ const supportedCounterTraps:Card[]=[
  {id:'77414722',konamiId:4862,name:'Bloqueador de Magia',englishName:'Magic Jammer',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando uma Magia é ativada: descarte 1 carta; negue a ativação e destrua a Magia.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4862&request_locale=pt'},
  {id:'03819470',konamiId:4863,name:'Sete Ferramentas do Bandido',englishName:'Seven Tools of the Bandit',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando uma Armadilha é ativada: pague 1000 PV; negue a ativação e destrua a Armadilha.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4863&request_locale=pt'}
 ];
-export const engineCatalog:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps];
+const supportedClassicSpells:Card[]=[
+ {id:'55144522',konamiId:4844,name:'Pote da Ganância',englishName:'Pot of Greed',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Compre 2 cartas.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4844&request_locale=pt'},
+ {id:'12580477',konamiId:4343,name:'Raigeki',englishName:'Raigeki',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Destrua todos os monstros que seu oponente controla.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4343&request_locale=pt'}
+];
+export const engineCatalog:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells];
 const metadata=new Map(engineCatalog.map(c=>[c.id,c]));
 for(const c of engineCatalog)if(!effects[c.id]){
  if(c.fusion)effects[c.id]={kind:'fusion'};
