@@ -68,7 +68,8 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
    ?book.find(a=>a.target===counterTarget.target&&p.monsters.some(m=>m.uid===a.target)):undefined;
   if(protect)return protect;
   if(s.pending.kind==='attack'&&s.pending.actor!==s.players.indexOf(p)){
-   const save=book.find(a=>a.target===s.pending.card);
+   const attackingUid=s.pending.card;
+   const save=book.find(a=>a.target===attackingUid);
    if(save)return save;
   }
   // Prefer destroying a known enemy Field/Spell/Trap; never inspect hidden
