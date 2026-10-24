@@ -1,5 +1,6 @@
 import {ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
-import {cards, type Card} from './cardCatalog';
+import {type Card} from './cardCatalog';
+import {engineCatalog as cards} from './effectRegistry';
 export const PAGE_SIZE=6;
 const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const byId=new Map(cards.map(c=>[c.id,c]));
