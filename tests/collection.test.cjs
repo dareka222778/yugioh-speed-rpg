@@ -3,7 +3,7 @@ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'collection-db-'));process.env.D
 let api=require('../dist/database');const {cards,starterContents}=require('../dist/cardCatalog');const {collectionMessage,searchCards,exactCard,cardMessage}=require('../dist/collection');
 const total=id=>api.getCollection(id).reduce((s,x)=>s+x.quantity,0);
 test('catalog has stable unique identifiers and each starter contains exactly 20 valid cards',()=>{
- assert.equal(cards.length,28);assert.equal(new Set(cards.map(c=>c.id)).size,28);
+ assert.equal(cards.length,32);assert.equal(new Set(cards.map(c=>c.id)).size,32);
  for(const contents of Object.values(starterContents)){assert.equal(contents.reduce((s,x)=>s+x.quantity,0),20);assert.equal(contents.length,12);for(const x of contents)assert.ok(cards.some(c=>c.id===x.id));}
  const c=exactCard('Guardião Celta');assert.equal(c.atk,1400);assert.equal(c.defense,1200);assert.equal(c.id,'91152256');
 });

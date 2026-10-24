@@ -11,3 +11,6 @@ The catalog is bundled locally, so commands do not query the API. Optional card 
 Starter sets v1 contain 20 cards each: two copies of eight Normal Monsters and one copy of each of four shared Spell/Trap cards. These are a small classic-themed prototype selection, not a claim to include every card shown in the first anime or to certify official Speed Duel legality. No duels or card effects are implemented in Phase 2.
 
 Regenerate with `python scripts/import_catalog.py /path/to/cards.json`. Only the selected factual fields enter the project; the complete upstream aggregate is not bundled.
+
+
+Fase 4.1: catálogo ampliado para 32 cartas, preservando os conjuntos iniciais de 20. Sogen, Polimerização, Manipulador de Chamas e Espadachim das Chamas foram selecionados do mesmo agregado; Campo/Fusão conferidos nas páginas oficiais Konami (CIDs 4339, 4837, 4148, 4021). A receita e os efeitos são implementados no motor; não são apenas descrições no catálogo.

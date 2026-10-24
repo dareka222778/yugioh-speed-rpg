@@ -37,13 +37,13 @@ Magias podem ser ativadas da mão se houver zona livre, ou de uma zona onde este
 
 - A composição dos decks é copiada no início/convite; editar um deck depois não muda uma partida em andamento. Nenhuma carta da coleção é consumida e não há DP, XP, apostas ou recompensas nesta fase.
 - Tabelas adicionais `duels` e `duel_members`. O estado JSON, revisão e vínculos são gravados em uma transação. Um jogador participa de uma sessão por vez. Um clique antigo ou repetido não executa novamente uma ação.
-- Convites expirados e partidas com 30 minutos sem ações são encerrados na próxima consulta/interação, liberando o jogador. Não há cronômetro de derrota por turno. Expiração não concede vitória.
+- Convites expirados e partidas com 30 minutos sem a decisão exigida perdem por W.O., com vitória do adversário. Um verificador roda a cada 10 segundos e também confere o prazo em cada interação. Abrir ou atualizar painel não renova o prazo; apenas uma jogada aceita o faz. O responsável é quem deve responder/decidir, que pode ser diferente do dono do turno.
 - O estado inclui mãos e ordem do deck no banco do servidor, mas a projeção pública e seu renderer omitem esses dados e a identidade de cartas baixadas. O painel privado é autorizado por participante e servidor antes de anexar a mão. Logs técnicos não registram a mão nem opções privadas.
 - O histórico recente guarda até 12 eventos por duelo; o banco preserva as sessões finalizadas para inspeção. Mensagens perdidas não apagam o estado. Os backups de `game.sqlite` devem incluir essas novas tabelas.
 
-## Limites deliberados
+## Limites deliberados (atualizados pela Fase 4.1 abaixo)
 
-Este é um motor próprio e limitado ao conjunto inicial, inspirado em Speed Duel; não é uma implementação integral de torneios. Não há Skills, Extra Deck, fusões, monstros de efeito, condições alternativas de vitória, lista oficial de restrições, regras genéricas de timing ou cartas não habilitadas. O NPC é heurístico e simples; não é uma IA competitiva e decide usando a própria mão e o campo visível. Ele pode atacar um monstro baixado sem conhecer sua identidade.
+Este é um motor próprio e limitado ao conjunto inicial, inspirado em Speed Duel; não é uma implementação integral de torneios. Há Deck Adicional de até 6 cartas e a Fusão específica descrita abaixo. Ainda não há Skills, outras Fusões, Rituais, monstros de efeito, condições alternativas de vitória, lista oficial de restrições, regras genéricas de timing ou cartas não habilitadas. O NPC é heurístico e simples; não é uma IA competitiva e decide usando a própria mão e o campo visível. Ele pode atacar um monstro baixado sem conhecer sua identidade.
 
 ## Referências verificadas
 
@@ -55,3 +55,17 @@ Este é um motor próprio e limitado ao conjunto inicial, inspirado em Speed Due
 - Muralhas do Castelo: https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4850&ope=2&request_locale=en
 
 Os textos acima resumem o comportamento em português. Nenhum código de outra engine foi incorporado.
+
+
+## Fase 4.1 — W.O., Campo, Deck Adicional e inspeção
+
+- Aos 30 minutos da decisão pendente, o adversário vence por W.O.; o estado é finalizado, a revisão muda e os vínculos da sessão são liberados. O vencedor é o adversário de quem deveria agir (fase principal, batalha, resposta, escolha ou descarte). O prazo persistido sobrevive a reinícios. O anúncio automático pode levar até 10 segundos; cliques no prazo vencido já são bloqueados imediatamente.
+- Partidas encerradas não têm menus/botões ativos. Painéis privados antigos não executam ações: ao primeiro clique, são substituídos pelo resultado sem controles. O bot não consegue reescrever preventivamente uma mensagem efêmera cujo token já expirou no Discord; isso não permite continuar a partida, pois o servidor também rejeita a ação.
+- Deck vazio causa derrota **quando uma compra obrigatória falha**. Comprar a última carta ou simplesmente ficar com zero cartas no deck não encerra antes disso. Cemitério vazio não é condição de derrota.
+- Zona de Campo separada por jogador, sem ocupar as três zonas comuns. Sogen aumenta 200 ATK/DEF dos Guerreiros e Bestas-Guerreiras dos dois lados; seu efeito só se aplica depois da resolução. Substituir sua Magia de Campo manda a anterior ao cemitério. Cada lado pode manter sua própria Magia de Campo.
+- Deck Adicional separado (0–6 cartas; até 3 cópias), fora da compra inicial e da contagem de 20–30 do Principal. O editor envia automaticamente as cartas de Fusão possuídas para essa composição adicional. Editar continua sem consumir a coleção.
+- Polimerização invoca **Espadachim das Chamas**, usando **Manipulador de Chamas + Masaki, o Espadachim Lendário** da mão ou campo. Materiais e Polimerização vão ao cemitério, a Fusão sai do Adicional e entra no campo em Ataque ou Defesa, sem gastar a Invocação Normal. Zona cheia impede a Fusão se os materiais não liberarem espaço. As escolhas são apresentadas antes da corrente; este conjunto não tem respostas que removam/troquem materiais. Não é uma implementação genérica de todos os textos de Fusão.
+- **Cemitério / zonas** permite consultar os cemitérios, a Magia de Campo, banidas e seu próprio Deck Adicional. O Adicional do oponente permanece oculto. A lista de banidas existe, mas nenhuma das 32 cartas atuais bane cartas.
+- `/duelo treino_fusao` é um tutorial separado: fornece uma composição virtual com Campo, Polimerização, os materiais e uma Fusão, com mão inicial conhecida para praticar. Não entrega essas cartas à coleção, não exige um deck ativo e não gera recompensas. Exige apenas personagem criado. Os duelos normais continuam usando somente as cartas possuídas.
+
+Referências adicionais: Sogen https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4339&ope=2&request_locale=en ; Polimerização https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4837&ope=2&request_locale=en ; Espadachim das Chamas https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4021&ope=2&request_locale=en .

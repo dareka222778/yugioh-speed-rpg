@@ -1,5 +1,5 @@
 // Factual metadata imported by scripts/import_catalog.py. See CARD_SOURCES.md.
-export type Card = { id:string; konamiId:number; name:string; englishName:string; kind:'monster'|'spell'|'trap'; race:string|null; attribute:string|null; level:number|null; atk:number|null; defense:number|null; summary:string; source:string };
+export type Card = { id:string; konamiId:number; name:string; englishName:string; kind:'monster'|'spell'|'trap'; race:string|null; attribute:string|null; level:number|null; atk:number|null; defense:number|null; summary:string; source:string; field?:boolean; fusion?:string[] };
 export type StarterItem = { id:string; quantity:number };
 export const cards: Card[] = [
   {
@@ -393,6 +393,67 @@ export const cards: Card[] = [
     "defense": null,
     "summary": "Reforço temporário de defesa.",
     "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4850&request_locale=pt"
+  },
+  {
+    "id": "86318356",
+    "konamiId": 4339,
+    "name": "Sogen",
+    "englishName": "Sogen",
+    "kind": "spell",
+    "race": null,
+    "attribute": null,
+    "level": null,
+    "atk": null,
+    "defense": null,
+    "summary": "Magia de Campo: Guerreiros e Bestas-Guerreiras ganham 200 ATK/DEF.",
+    "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4339&request_locale=pt",
+    "field": true
+  },
+  {
+    "id": "45231177",
+    "konamiId": 4021,
+    "name": "Espadachim das Chamas",
+    "englishName": "Flame Swordsman",
+    "kind": "monster",
+    "race": "Warrior",
+    "attribute": "FIRE",
+    "level": 5,
+    "atk": 1800,
+    "defense": 1600,
+    "summary": "Fusão: Manipulador de Chamas + Masaki, o Espadachim Lendário.",
+    "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4021&request_locale=pt",
+    "fusion": [
+      "34460851",
+      "44287299"
+    ]
+  },
+  {
+    "id": "34460851",
+    "konamiId": 4148,
+    "name": "Manipulador de Chamas",
+    "englishName": "Flame Manipulator",
+    "kind": "monster",
+    "race": "Spellcaster",
+    "attribute": "FIRE",
+    "level": 3,
+    "atk": 900,
+    "defense": 1000,
+    "summary": "Monstro Normal: sem efeito.",
+    "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4148&request_locale=pt"
+  },
+  {
+    "id": "24094653",
+    "konamiId": 4837,
+    "name": "Polimerização",
+    "englishName": "Polymerization",
+    "kind": "spell",
+    "race": null,
+    "attribute": null,
+    "level": null,
+    "atk": null,
+    "defense": null,
+    "summary": "Fusão de monstros usando materiais da mão ou do campo.",
+    "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4837&request_locale=pt"
   }
 ];
 export const starterContents: Record<string, StarterItem[]> = {

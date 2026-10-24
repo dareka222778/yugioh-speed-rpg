@@ -21,6 +21,6 @@ test('PNG attachments, menus and invitations serialize within Discord limits, an
  const pub=await visualDuelPublic(record());assert.equal(pub.files.length,1);assert.equal(pub.embeds[0].toJSON().image.url,'attachment://campo-duelo.png');
  const privatePanel=await visualDuelPrivate(record(),'101');assert.equal(privatePanel.files.length,1);assert.equal((await sharp(privatePanel.files[0].attachment).metadata()).height,1360);
  const inv={...record(),status:'pending',state:null,invite:{owner:'101',opponent:'102',name:'Kise',cards:ids('warrior')}};for(const row of invitationMessage(inv).components)row.toJSON();
- const done={...record(),status:'finished',state:step(s,'101',{kind:'concede'})};assert.ok(duelPrivateMessage(done,'101').components[0].toJSON().components.at(-1).disabled);
+ const done={...record(),status:'finished',state:step(s,'101',{kind:'concede'})};assert.equal(duelPrivateMessage(done,'101').components.length,0);
 });
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});

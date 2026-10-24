@@ -22,7 +22,7 @@ async function draw(v:DeckCanvas,artProvider:typeof getCardArt){
  const status=deck.active?'DECK ATIVO':deck.errors.length?'RASCUNHO':'PRONTO PARA ATIVAR';
  let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#19243a"/><stop offset="1" stop-color="#090e1a"/></linearGradient></defs><rect width="1200" height="1090" rx="28" fill="url(#bg)"/><rect x="1" y="1" width="1198" height="1088" rx="28" fill="none" stroke="#3a4862"/>`;
  svg+=text(36,42,'OFICINA DE DECKS',17,'#a99bff',700)+text(36,86,deck.name,34,'#ffffff',700,790);
- svg+=text(917,45,`${deck.total} / 30 CARTAS`,23,'#ffffff',700)+text(917,77,status,14,deck.errors.length?'#f4c476':'#76dfb7',700,245);
+ svg+=text(917,45,`${deck.total} / 30 CARTAS`,23,'#ffffff',700)+text(917,103,`ADICIONAL: ${deck.extraTotal??0}/6`,13,'#a8b4cb',700)+text(917,77,status,14,deck.errors.length?'#f4c476':'#76dfb7',700,245);
  svg+='<path d="M36 110H1164" stroke="#34415a"/>'+text(36,141,'SUAS CARTAS  /  SELECIONE NO MENU ABAIXO',14,'#a8b4cb',700);
  for(const [i,id] of v.visible.entries()){
   const c=getCard(id)!;const x=36+(i%3)*278,y=160+Math.floor(i/3)*421;const selected=id===v.selected;
@@ -42,7 +42,7 @@ async function draw(v:DeckCanvas,artProvider:typeof getCardArt){
   if(bytes){try{overlays.push({input:await sharp(bytes,{limitInputPixels:20_000_000}).resize(238,347,{fit:'contain',background:'#111b2c'}).png().toBuffer(),left:904,top:224});}catch{}}
   else svg+='<rect x="904" y="224" width="238" height="347" rx="10" fill="#202c42"/>'+text(925,400,'SEM IMAGEM',20,'#a8b4cb',700);
   svg+=text(904,612,`${qty(selected.id)} NO DECK`,26,'#ffffff',700)+text(904,645,`${have(selected.id)} cópia(s) na coleção`,17,'#a8b4cb',400,238);
-  svg+=text(904,697,selected.kind==='monster'?'MONSTRO NORMAL':selected.kind==='spell'?'MAGIA':'ARMADILHA',17,'#76dfb7',700);
+  svg+=text(904,697,selected.fusion?'MONSTRO DE FUSÃO':selected.field?'MAGIA DE CAMPO':selected.kind==='monster'?'MONSTRO NORMAL':selected.kind==='spell'?'MAGIA':'ARMADILHA',17,'#76dfb7',700);
   if(selected.kind==='monster')svg+=text(904,732,`NÍVEL ${selected.level}`,20,'#ffffff',700)+text(904,766,`ATK ${selected.atk} / DEF ${selected.defense}`,19,'#ffffff',700,238);
   svg+=text(904,812,`ID ${selected.id}`,15,'#9cabc5',400);
  }

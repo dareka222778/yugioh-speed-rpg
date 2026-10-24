@@ -13,7 +13,7 @@ export function exactCard(query:string): Card|undefined {
 }
 const attributes:Record<string,string>={EARTH:'TERRA',WIND:'VENTO',DARK:'TREVAS',LIGHT:'LUZ',FIRE:'FOGO',WATER:'ÁGUA'};
 const races:Record<string,string>={Warrior:'Guerreiro','Beast-Warrior':'Besta-Guerreira',Spellcaster:'Mago',Dragon:'Dragão'};
-export function kindLabel(c:Card) {return c.kind==='monster'?'Monstro Normal':c.kind==='spell'?'Magia':'Armadilha';}
+export function kindLabel(c:Card) {return c.fusion?'Monstro de Fusão':c.field?'Magia de Campo':c.kind==='monster'?'Monstro Normal':c.kind==='spell'?'Magia':'Armadilha';}
 export function collectionMessage(owner:string, inventory:{card_key:string;quantity:number}[], requestedPage=1) {
   const owned=inventory.map(row=>({card:getCard(row.card_key),...row}));
   const known=owned.filter(row=>row.card).sort((a,b)=>a.card!.name.localeCompare(b.card!.name,'pt-BR'));
@@ -40,7 +40,7 @@ export function cardMessage(card:Card, quantity=0) {
     .setTitle(card.name).setURL(card.source).setDescription(`${escapeMarkdown(card.englishName)}\n\`ID ${card.id}\``)
     .addFields({name:'Categoria',value:kindLabel(card),inline:true},{name:'Na sua coleção',value:`${quantity} cópia(s)`,inline:true});
   if(card.kind==='monster')embed.addFields({name:'Tipo / Atributo',value:`${races[card.race!]??card.race} / ${attributes[card.attribute!]??card.attribute}`},{name:'Nível',value:String(card.level),inline:true},{name:'ATK',value:String(card.atk),inline:true},{name:'DEF',value:String(card.defense),inline:true});
-  embed.addFields({name:'Resumo',value:card.summary},{name:'Disponibilidade',value:'Disponível no motor básico 1v1. Monstros normais e quatro efeitos iniciais implementados; sem Skills ou Extra Deck.'});
+  embed.addFields({name:'Resumo',value:card.summary},{name:'Disponibilidade',value:'Disponível no motor básico 1v1. Monstros normais, efeitos iniciais, Sogen e Fusão do Espadachim das Chamas implementados.'});
   embed.setFooter({text:'Catálogo inicial • Dados YAML Yugi / referência Konami • Projeto não oficial'});
   return {embeds:[embed],allowedMentions:{parse:[] as never[]}};
 }
