@@ -1,6 +1,11 @@
 import {ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
 import {type Card} from './cardCatalog';
-import {engineCatalog as cards} from './effectRegistry';
+import {engineCatalog,enabledCardIds} from './effectRegistry';
+/** Public collection and search are intentionally restricted to executable RPG
+ * cards, even when metadata for a future effect is already staged.
+ */
+const enabled=new Set<string>(enabledCardIds);
+const cards=engineCatalog.filter(card=>enabled.has(card.id));
 import {getMonsterEffect} from './monsterEffects';
 export const PAGE_SIZE=6;
 const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
