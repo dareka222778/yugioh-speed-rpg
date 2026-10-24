@@ -136,3 +136,30 @@ Próximas etapas são loja e mercado/expansões, e 2v2 após estabilizar o 1v1. 
 Falhas transitórias de DNS/conexão (`ENOTFOUND`, `EAI_AGAIN`, resets, timeout e HTTP 502/503/504) aguardam dentro do processo e repetem após 5, 10, 20 e depois 30 segundos. O login usa um Client novo a cada tentativa, pois discord.js destrói o Client quando o login falha. O registro dos comandos também tenta novamente após falhas transitórias, sem bloquear o cliente já conectado. Token inválido, permissões e erros desconhecidos não entram nessa repetição. Os logs informam apenas operação, código do erro e intervalo, sem corpo de requisição ou credenciais.
 
 Isso evita um ciclo de encerrar/recompilar o bot por uma falha temporária. Não altera DNS do servidor, não ignora TLS e não resolve uma indisponibilidade persistente da rede da hospedagem. Considere o bot conectado somente após o log `online como ...`, e os novos comandos disponíveis após o log de registro.
+
+## Engine clássica — marco de efeitos (branch `classic-engine-foundation`)
+
+Este marco amplia o motor antes de fechar os decks e retratos definitivos dos duelistas. **Não indica suporte integral ao anime ou ao TCG.** O formato adaptado mantém 4000 PV, 3 zonas de monstro, 3 zonas de Magia/Armadilha e 20–30 cartas no Deck Principal, sem Skills.
+
+### Efeitos de monstro efetivamente habilitados
+
+| Carta | Evento | Operação |
+| --- | --- | --- |
+| Man-Eater Bug (54652250) | FLIP | Escolhe um monstro de qualquer lado e destrói |
+| Hane-Hane (07089711) | FLIP | Devolve um monstro ao dono |
+| Magician of Faith (31560081) | FLIP | Recupera Magia do próprio Cemitério |
+| Mask of Darkness (28933734) | FLIP | Recupera Armadilha do próprio Cemitério |
+| Skelengel (60694662) | FLIP | Compra uma carta; falha obrigatória pode causar derrota |
+| Cannon Soldier (11384280) | Ignição | Tributa um monstro (inclusive si mesmo) como custo para causar 500 de dano |
+
+Os alvos são selecionados na ativação, antes da janela de resposta; efeitos não selecionam automaticamente novos alvos depois da resposta. Custos de Tributo são pagos antes da corrente, não reembolsáveis se o efeito não resolver. Em batalha, efeitos FLIP são ativados após o cálculo de dano, inclusive quando o monstro é destruído pelo combate.
+
+### Como experimentar no Discord
+
+Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui as seis cartas acima, Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
+
+Para instalar as alterações no bot hospedado, atualize o código da branch aprovada, compile e reinicie o processo, e registre os novos comandos slash no Discord. Commits no GitHub não atualizam automaticamente uma instância em execução.
+
+### Escopo pendente
+
+Ainda faltam outras famílias clássicas de efeitos (incluindo gatilhos ao enviar ao Cemitério, efeitos rápidos, interações complexas de corrente, restrições de ativação e efeitos contínuos). A IA de duelo usa heurísticas e não substitui uma implementação completa das regras. Antes de migrar esta branch para `main`, executar `npm ci`, `npm run check`, `npm test` e aceitar manualmente um duelo com dois clientes Discord, incluindo alvos, cartas ocultas e efeitos em combate.
