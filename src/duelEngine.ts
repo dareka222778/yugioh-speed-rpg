@@ -233,7 +233,7 @@ function resolve(s:DuelState){
   // FLIP effects revealed by battle are activated after damage calculation,
   // including when the defending monster was destroyed in that battle.
   const flip=s.battleFlip;s.battleFlip=undefined;
-  if(s.phase!=='finished'&&flip)triggerMonsterEffect(s,flip.actor,flip.card,'flip',flip.id);
+  if(s.winner===null&&flip)triggerMonsterEffect(s,flip.actor,flip.card,'flip',flip.id);
  }
 }
 function settle(s:DuelState){let budget=30;while(s.phase==='response'&&!trapActions(s,s.priority).length&&budget-->0){s.passes++;s.priority=1-s.priority;if(s.passes===2)resolve(s);}if(budget<=0)throw new Error('Janela de resposta inválida.');}
