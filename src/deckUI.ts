@@ -13,7 +13,7 @@ export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string
  const key=(action:string,p=page)=>`deck:${action}:${owner}:${slot}:${deck.revision}:${p}:${choice??''}`;
  const embed=new EmbedBuilder().setColor(deck.active?0x4dbb9d:0x75caff).setTitle(`Deck ${slot} • ${escapeMarkdown(deck.name)}`)
  .setDescription(`${notice?`${notice}\n\n`:''}**${deck.total}/30 cartas • ${deck.active?'ATIVO':deck.errors.length?'RASCUNHO':'VÁLIDO — pode ativar'}**\n${deck.errors.length?deck.errors.slice(0,3).join('\n'):'Tamanho e cópias conferidos com sua coleção.'}\n\nEdite pelo menu e pelos botões. As cartas continuam na coleção e podem ser usadas em outros decks.`)
- .setFooter({text:`Página ${page}/${pages} • Decks de 20–30 cartas • Até 3 cópias • Duelos ainda não disponíveis`});
+ .setFooter({text:`Página ${page}/${pages} • Decks de 20–30 cartas • Até 3 cópias • Duelo básico com /duelo`});
  for(const id of visible)embed.addFields({name:`${inDeck(id)}× ${getCard(id)!.name}`,value:`Possui: ${have(id)} • ID ${id}${choice===id?' • SELECIONADA':''}`});
  const slotRow=new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(new StringSelectMenuBuilder().setCustomId(key('slot')).setPlaceholder('Trocar espaço do deck').addOptions([1,2,3].map(n=>({label:`Deck ${n}`,value:String(n),default:n===slot}))));
  const rows:(ActionRowBuilder<StringSelectMenuBuilder>|ActionRowBuilder<ButtonBuilder>)[]=[slotRow];

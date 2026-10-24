@@ -102,3 +102,12 @@ Antes de entregar conjuntos a jogadores antigos, a inicialização grava uma có
 ### Editor visual de cartas
 
 O `/deck ver` agora anexa uma grade PNG de seis cartas reais por página e uma ampliação da selecionada. O menu e os botões continuam responsáveis pelos cliques (a imagem do Discord não possui áreas clicáveis). Quantidades, estado, atributos e destaque são desenhados com os contornos de fonte incorporados. As imagens usam o mesmo cache de cartas da Fase 2: até três downloads simultâneos, seis IDs por página e timeout por imagem. Se o CDN falhar, o espaço mantém nome/ID e os controles continuam disponíveis. Uma fila limita a renderização simultânea para o plano de 512 MB. Não há alterações no banco nem nas regras de deck.
+
+
+## Fase 4 — Duelo básico 1v1 (v0.6)
+
+Ative seu deck e use `/duelo treino`, `/duelo desafiar oponente:...`, `/duelo ver` ou `/duelo sair`. A arena é pública e a mão fica no painel privado do participante. O motor possui turnos, invocações/tributos, posições, combate, 4000 PV, compra/descarte, derrota por deck vazio, desistência e os quatro efeitos iniciais. PvP exige aceite; o treino usa um NPC heurístico sem recompensas. O estado persiste no SQLite após reinício, com revisão contra cliques antigos e uma sessão por jogador.
+
+Leia [DUEL_RULES.md](DUEL_RULES.md) para regras implementadas, privacidade, expiração e limites. Adicionar uma carta ao catálogo não a habilita para duelar: a lista do motor é explícita. Não há Skills, Extra Deck ou motor universal de efeitos. A renderização usa o cache de cartas existente e conserva fallback textual.
+
+Validação inclui partidas completas simuladas, conservação de cartas em 100 sementes, combate/efeitos, consentimento do convite, retomada, rollback, privacidade do campo e o listener real com transporte Discord simulado. Confirmar a experiência de dois usuários no Discord permanece um teste de aceitação separado.

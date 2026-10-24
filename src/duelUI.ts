@@ -1,0 +1,33 @@
+import {ActionRowBuilder,AttachmentBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
+import {legalActions,actionLabel,type DuelState} from './duelEngine';
+import type {DuelRecord} from './duelStore';
+import {renderDuel,phaseNames} from './duelRenderer';
+import {getCard} from './collection';
+export function publicDuelData(s:DuelState){return {turn:s.turn,phase:s.phase,current:s.current,winner:s.winner,reason:s.reason,players:s.players.map(p=>({id:p.id,name:p.name,lp:p.lp,deckCount:p.deck.length,handCount:p.hand.length,grave:p.grave.map(c=>c.id),monsters:p.monsters.map(m=>({id:m.faceUp?m.id:null,position:m.position,faceUp:m.faceUp})),backrow:p.backrow.map(c=>({id:c.faceUp?c.id:null,faceUp:c.faceUp}))})),log:s.log};}
+export function invitationMessage(r:DuelRecord){const embed=new EmbedBuilder().setColor(0xb59aff).setTitle('Desafio de duelo 1v1').setDescription(`${escapeMarkdown(r.invite!.name)} convidou <@${r.invite!.opponent}> para duelar.\n\n4000 PV • Deck ativo • Regras básicas\nO convite expira em 2 minutos. Sem apostas ou recompensas.`);
+ return {embeds:[embed],components:[new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:accept:${r.id}:${r.revision}`).setLabel('Aceitar duelo').setStyle(ButtonStyle.Success),new ButtonBuilder().setCustomId(`duel:decline:${r.id}:${r.revision}`).setLabel('Recusar / cancelar').setStyle(ButtonStyle.Secondary))],allowedMentions:{parse:[] as never[]}};
+}
+export function duelPublicMessage(r:DuelRecord){
+ if(r.status==='pending')return invitationMessage(r);
+ if(!r.state)return {embeds:[new EmbedBuilder().setTitle('Convite encerrado').setDescription(r.status==='expired'?'O convite expirou.':'Convite cancelado.')],components:[],attachments:[],allowedMentions:{parse:[] as never[]}};
+ const view=publicDuelData(r.state);const acting=r.state.phase==='response'?r.state.priority:r.state.phase==='choice'?r.state.choice!.actor:r.state.current;
+ const embed=new EmbedBuilder().setColor(0x75caff).setTitle(r.state.phase==='finished'?'Duelo encerrado':'Arena • Duelo 1v1')
+ .setDescription(`${view.players.map(p=>`**${escapeMarkdown(p.name)}** — ${p.lp} PV | Mão ${p.handCount} | Deck ${p.deckCount}`).join('\n')}\n\nTurno ${view.turn} • ${phaseNames[view.phase]}${view.phase==='finished'?`\n${view.winner?escapeMarkdown(view.players.find(p=>p.id===view.winner)!.name)+' venceu':'Sem vencedor'}: ${view.reason}`:`\nAguardando **${escapeMarkdown(view.players[acting].name)}**.`}`)
+ .addFields({name:'Últimas jogadas',value:view.log.slice(-4).map(line=>escapeMarkdown(line)).join('\n').slice(-1000)||'O duelo começou.'}).setFooter({text:'Fase 4 • Motor básico • Mãos privadas • Sem recompensas'});
+ const row=new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:open:${r.id}:${r.revision}`).setLabel('Abrir meu painel / mão').setStyle(ButtonStyle.Primary),new ButtonBuilder().setCustomId(`duel:public:${r.id}:${r.revision}`).setLabel('Atualizar campo').setStyle(ButtonStyle.Secondary));
+ return {embeds:[embed],components:[row],attachments:[],allowedMentions:{parse:[] as never[]}};
+}
+export async function visualDuelPublic(r:DuelRecord){const p=duelPublicMessage(r);if(!r.state)return p;const png=await renderDuel(r.state);p.embeds[0].setImage('attachment://campo-duelo.png');return {...p,files:[new AttachmentBuilder(png,{name:'campo-duelo.png'})]};}
+export function duelPrivateMessage(r:DuelRecord,owner:string,requestedPage=1){
+ if(!r.state||!r.state.players.some(p=>p.id===owner))throw new Error('Só participantes podem abrir a mão deste duelo.');
+ const s=r.state;const p=s.players.find(p=>p.id===owner)!;const actions=legalActions(s,owner);const pages=Math.max(1,Math.ceil(actions.length/20));const page=Math.min(pages,Math.max(1,Number.isInteger(requestedPage)?requestedPage:1));
+ const base=duelPublicMessage(r);const embed=base.embeds[0];embed.setTitle(`Seu painel privado • ${escapeMarkdown(p.name)}`).addFields({name:'Sua mão',value:p.hand.map((c,n)=>`${n+1}. ${getCard(c.id)!.name}`).join('\n')||'Sem cartas.'});
+ if(s.phase!=='finished')embed.addFields({name:'Próximo passo',value:actions.length?'Escolha uma jogada no menu. Ela será executada imediatamente.':'Aguarde o outro jogador. Use Atualizar para acompanhar.'});
+ embed.setFooter({text:`Ações ${page}/${pages} • Só você vê sua mão • Revisão ${r.revision}`});
+ const rows:(ActionRowBuilder<ButtonBuilder>|ActionRowBuilder<StringSelectMenuBuilder>)[]=[];
+ if(actions.length)rows.push(new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(new StringSelectMenuBuilder().setCustomId(`duel:act:${r.id}:${r.revision}:${page}`).setPlaceholder('Escolha sua próxima jogada').addOptions(actions.slice((page-1)*20,page*20).map((a,i)=>({label:actionLabel(s,owner,a).slice(0,100),value:String((page-1)*20+i)})))));
+ rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:view:${r.id}:${r.revision}:${page-1}`).setLabel('Anterior').setStyle(ButtonStyle.Secondary).setDisabled(page===1),new ButtonBuilder().setCustomId(`duel:view:${r.id}:${r.revision}:${page}`).setLabel('Atualizar').setStyle(ButtonStyle.Primary),new ButtonBuilder().setCustomId(`duel:view:${r.id}:${r.revision}:${page+1}`).setLabel('Próxima').setStyle(ButtonStyle.Secondary).setDisabled(page===pages),new ButtonBuilder().setCustomId(`duel:quit:${r.id}:${r.revision}`).setLabel('Desistir').setStyle(ButtonStyle.Danger).setDisabled(s.phase==='finished')));
+ return {embeds:[embed],components:rows,attachments:[],allowedMentions:{parse:[] as never[]}};
+}
+export async function visualDuelPrivate(r:DuelRecord,owner:string,page=1){const p=duelPrivateMessage(r,owner,page);const png=await renderDuel(r.state!,owner);p.embeds[0].setImage('attachment://meu-campo.png');return {...p,files:[new AttachmentBuilder(png,{name:'meu-campo.png'})]};}
+export function quitMessage(r:DuelRecord){return {content:'Desistir encerra o duelo. Confirma?',components:[new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:confirm:${r.id}:${r.revision}`).setLabel('Sim, desistir').setStyle(ButtonStyle.Danger),new ButtonBuilder().setCustomId(`duel:open:${r.id}:${r.revision}`).setLabel('Continuar jogando').setStyle(ButtonStyle.Secondary))],allowedMentions:{parse:[] as never[]}};}

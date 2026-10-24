@@ -23,7 +23,7 @@ export function collectionMessage(owner:string, inventory:{card_key:string;quant
   const total=inventory.reduce((sum,row)=>sum+row.quantity,0);
   const embed=new EmbedBuilder().setColor(0x75caff).setTitle('Sua coleção de cartas')
     .setDescription(`**${total} cartas • ${known.length} diferentes**\n${selected.length?'Escolha uma carta no menu para ver os detalhes.':'Escolha seu conjunto inicial com /start.'}`)
-    .setFooter({text:`Página ${page}/${pages} • Fase 2 • Duelos ainda não disponíveis`});
+    .setFooter({text:`Página ${page}/${pages} • Fase 2 • Duelo básico disponível com /duelo`});
   for(const row of selected){const c=row.card!;embed.addFields({name:`${row.quantity}× ${c.name}`,value:`\`${c.id}\` · ${kindLabel(c)}${c.kind==='monster'?` · Nível ${c.level} · ATK ${c.atk} / DEF ${c.defense}`:''}`});}
   const unknown=owned.filter(row=>!row.card).length;
   if(unknown)embed.addFields({name:'Registros preservados',value:`${unknown} identificadores antigos fora deste catálogo. Nenhuma carta foi apagada.`});
@@ -40,7 +40,7 @@ export function cardMessage(card:Card, quantity=0) {
     .setTitle(card.name).setURL(card.source).setDescription(`${escapeMarkdown(card.englishName)}\n\`ID ${card.id}\``)
     .addFields({name:'Categoria',value:kindLabel(card),inline:true},{name:'Na sua coleção',value:`${quantity} cópia(s)`,inline:true});
   if(card.kind==='monster')embed.addFields({name:'Tipo / Atributo',value:`${races[card.race!]??card.race} / ${attributes[card.attribute!]??card.attribute}`},{name:'Nível',value:String(card.level),inline:true},{name:'ATK',value:String(card.atk),inline:true},{name:'DEF',value:String(card.defense),inline:true});
-  embed.addFields({name:'Resumo',value:card.summary},{name:'Disponibilidade',value:'Colecionável. Duelos e efeitos ainda não estão implementados.'});
+  embed.addFields({name:'Resumo',value:card.summary},{name:'Disponibilidade',value:'Disponível no motor básico 1v1. Monstros normais e quatro efeitos iniciais implementados; sem Skills ou Extra Deck.'});
   embed.setFooter({text:'Catálogo inicial • Dados YAML Yugi / referência Konami • Projeto não oficial'});
   return {embeds:[embed],allowedMentions:{parse:[] as never[]}};
 }
