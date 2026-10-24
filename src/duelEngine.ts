@@ -172,7 +172,10 @@ function resolve(s:DuelState){
  if(pending.kind==='attack'){
   const attacking=findMonster(s,pending.card);if(!attacking||attacking.p!==s.players[pending.actor]||!attacking.m.faceUp||attacking.m.position!=='atk')return;const a=attacking.m;const defender=pending.target?findMonster(s,pending.target):undefined;
   if(pending.stage==='declare'){
-   if(defender&&!defender.m.faceUp){defender.m.faceUp=true;note(s,`Revelado: ${card(defender.m.id).name}.`);}
+   if(defender&&!defender.m.faceUp){
+    defender.m.faceUp=true;note(s,`Revelado: ${card(defender.m.id).name}.`);
+    if(triggerMonsterEffect(s,1-pending.actor,defender.m.uid,'flip'))return;
+   }
    response(s,{...pending,stage:'damage'},'battle',1-pending.actor);return;
   }
   const opponent=s.players[1-pending.actor];
