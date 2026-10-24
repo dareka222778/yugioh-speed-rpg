@@ -6,9 +6,11 @@ export type ChainLink = {actor:number;card:string;id:string;target:string;negate
 export function resolveChainLinks<T extends ChainLink>(
  links:readonly T[],
  apply:(link:T)=>void,
- onNegated?:(link:T)=>void
+ onNegated?:(link:T)=>void,
+ shouldStop?:()=>boolean
 ):void {
  for(let i=links.length-1;i>=0;i--){
+  if(shouldStop?.())break;
   const link=links[i];
   if(link.negated){onNegated?.(link);continue;}
   apply(link);
