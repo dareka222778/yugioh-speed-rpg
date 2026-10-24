@@ -1,4 +1,5 @@
 import {randomInt} from 'node:crypto';
+import {resolveChainLinks,type ChainLink} from './chainEngine';
 import {getCard} from './collection';
 import {enabledCardIds,getEffect} from './effectRegistry';
 import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips} from './classicEffects';
@@ -15,7 +16,7 @@ export type Action=
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
 export type Pending={kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
-export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:{actor:number;card:string;target:string;id:string}[];choice?:{actor:number;targets:string[]};winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:ChainLink[];choice?:{actor:number;targets:string[]};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -98,13 +99,12 @@ function nextTurn(s:DuelState){s.current=1-s.current;s.turn++;s.phase='main';s.p
  const p=s.players[s.current];const c=p.deck.shift();if(!c){finish(s,1-s.current,'não conseguiu comprar uma carta');return;}p.hand.push(c);note(s,`Turno ${s.turn}: ${p.name} comprou uma carta.`);
 }
 function resolve(s:DuelState){
- for(const link of [...s.chain].reverse()){
+ resolveChainLinks(s.chain,link=>{
   const target=findMonster(s,link.target)?.m;const effect=getEffect(link.id);
   if(target?.faceUp){if(effect?.kind==='reinforcements')target.atkBoost+=500;else if(effect?.kind==='castleWalls')target.defBoost+=500;else if(effect?.kind==='trapHole')graveMonster(s,target.uid);}
   if(effect?.kind==='waboku')s.players[link.actor].battleProtectedUntil=s.turn;
   if(effect?.kind==='justDesserts'){const op=s.players[1-link.actor];op.lp=Math.max(0,op.lp-500*op.monsters.length);checkLP(s);}
-  discardBackrow(s,link.card);if(s.phase==='finished')break;
- }
+  discardBackrow(s,link.card);},link=>{discardBackrow(s,link.card);});
  s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};return;}const pending=s.pending;s.pending={kind:'none'};s.phase=s.resume;
  if(pending.kind==='end'){endTurn(s);return;}
  if(pending.kind==='battle'){s.phase='battle';note(s,'Fase de Batalha.');return;}
