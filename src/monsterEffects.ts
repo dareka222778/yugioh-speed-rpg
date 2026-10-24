@@ -23,3 +23,12 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 /** Only explicitly registered and audited cards may expose monster effects. */
 const monsterEffects:Readonly<Record<string,MonsterEffect>>=Object.freeze({});
 export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return monsterEffects[cardId];}
+
+/** Resolve an opponent-monster target by unique instance ID, never by card ID.
+ * The caller must apply the resulting removal to the authoritative duel state.
+ */
+export function monsterDestructionTarget(effect:MonsterEffect,opponentMonsterUids:readonly string[],targetUid:string):string{
+ if(effect.operation.kind!=='destroy'||effect.operation.target!=='opponentMonster')throw new Error('Effect does not destroy an opponent monster.');
+ if(!targetUid||!opponentMonsterUids.includes(targetUid))throw new Error('Invalid opponent monster target.');
+ return targetUid;
+}
