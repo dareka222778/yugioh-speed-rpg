@@ -9,8 +9,8 @@ import { collectionMessage, cardMessage, searchCards, exactCard, getCard } from 
 import { getCardArt } from './cardArt';
 import {openDeck,changeDeck,renameDeck,activateDeck,fillInitialDeck} from './decks';
 import {visualDeckMessage} from './deckUI';
-import {challenge,acceptChallenge,declineChallenge,createTraining,currentDuel,getDuel,performDuelAction,setDuelMessage,type DuelRecord} from './duelStore';
-import {visualDuelPublic,visualDuelPrivate,duelPublicMessage,duelPrivateMessage,invitationMessage,quitMessage} from './duelUI';
+import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChallenge,createTraining,currentDuel,getDuel,performDuelAction,setDuelMessage,type DuelRecord} from './duelStore';
+import {visualDuelPublic,visualDuelPrivate,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
 
 const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
@@ -41,6 +41,7 @@ const commands = [
     .addSubcommand(c=>c.setName('inicial').setDescription('Copia o conjunto inicial para um espaço vazio.').addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
   ,new SlashCommandBuilder().setName('duelo').setDescription('Duelo básico 1v1 com campo e mão privada.').setDMPermission(false)
     .addSubcommand(c=>c.setName('treino').setDescription('Jogue contra o bot usando seu deck ativo.'))
+    .addSubcommand(c=>c.setName('treino_fusao').setDescription('Treino guiado de Campo e Fusão, sem alterar sua coleção.'))
     .addSubcommand(c=>c.setName('desafiar').setDescription('Convide outro jogador para um duelo.').addUserOption(o=>o.setName('oponente').setDescription('Jogador que receberá o convite.').setRequired(true)))
     .addSubcommand(c=>c.setName('ver').setDescription('Abra seu duelo atual e sua mão privada.'))
     .addSubcommand(c=>c.setName('sair').setDescription('Cancele seu convite ou confirme a desistência do duelo.'))
@@ -48,7 +49,7 @@ const commands = [
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on(Events.Error, error => console.error('Discord client:', errorSummary(error)));
 client.on(Events.Warn, warning => console.warn('Discord aviso:', warning));
-client.once(Events.ClientReady, c => console.log(`Yu-Gi-Oh! Speed RPG online como ${c.user.tag}`));
+client.once(Events.ClientReady, c => {console.log(`Yu-Gi-Oh! Speed RPG online como ${c.user.tag}`);const timer=setInterval(()=>void sweepDuelTimeouts(),10_000);timer.unref();void sweepDuelTimeouts();});
 const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nO RPG está na V0: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Use `/deck ver` para montar e ativar seus decks. Depois abra `/duelo treino` ou `/duelo desafiar`. Duelos básicos com 4000 PV, mão privada, tributos e quatro efeitos implementados; sem Skills ou Extra Deck.';
 // One mutation at a time per player, including network downloads.
 async function showCard(id:string, userId:string) {
@@ -63,12 +64,14 @@ function errorSummary(error:unknown){return error instanceof Error?{name:error.n
 const busy = new Set<string>();
 async function arenaPayload(r:DuelRecord){try{return await visualDuelPublic(r);}catch(error){console.error('Falha no campo visual:',errorSummary(error));return duelPublicMessage(r);}}
 async function privatePayload(r:DuelRecord,owner:string,page=1){try{return await visualDuelPrivate(r,owner,page);}catch(error){console.error('Falha no painel visual:',errorSummary(error));return duelPrivateMessage(r,owner,page);}}
+let sweepingDuels=false;
+export async function sweepDuelTimeouts(){if(sweepingDuels)return;sweepingDuels=true;try{for(const r of expireDueDuels())await refreshArena(r);}catch(error){console.error('Falha ao conferir prazo dos duelos:',errorSummary(error));}finally{sweepingDuels=false;}}
 const arenaUpdates=new Map<string,Promise<void>>();
 async function refreshArena(record:DuelRecord){
  const previous=arenaUpdates.get(record.id)??Promise.resolve();
  const work=previous.catch(()=>{}).then(async()=>{const r=getDuel(record.id);if(!r.message_id)return;
   try{const channel=await client.channels.fetch(r.channel_id);if(!channel||!('messages' in channel))return;
-   const message=await channel.messages.fetch(r.message_id);const payload=await arenaPayload(r);if(getDuel(r.id).revision===r.revision)await message.edit(payload);
+   const message=await channel.messages.fetch(r.message_id);const payload=await arenaPayload(r);if(getDuel(r.id).revision===r.revision){await message.edit(payload);markDuelPublished(r.id,r.revision);}
   }catch(error){console.error('Falha ao atualizar arena; use Atualizar campo:',errorSummary(error));}
  });arenaUpdates.set(record.id,work);try{await work;}finally{if(arenaUpdates.get(record.id)===work)arenaUpdates.delete(record.id);}
 }
@@ -86,6 +89,8 @@ client.on(Events.InteractionCreate, async i => {
       if(!i.guildId)throw new Error('Use os duelos dentro de um servidor.');
       const [,action,duelId,revisionText,pageText]=i.customId.split(':');let r=getDuel(duelId);
       if(r.guild_id!==i.guildId)throw new Error('Esse duelo pertence a outro servidor.');
+      if(r.state?.phase==='finished'){await i.deferUpdate();await i.editReply(duelPublicMessage(r));return;}
+      if(action==='zones'&&i.isButton()){await i.deferReply({flags:MessageFlags.Ephemeral});await i.editReply(duelZonesMessage(r,id));return;}
       const revision=Number(revisionText),page=Number(pageText??1);
       if(!Number.isSafeInteger(revision)||!Number.isSafeInteger(page))throw new Error('Painel inválido. Use /duelo ver.');
       if(action==='accept'&&i.isButton()){await i.deferUpdate();r=acceptChallenge(duelId,id,i.guildId,revision);await refreshArena(r);await i.followUp({content:'Duelo iniciado! Clique em Abrir meu painel / mão no campo.',flags:MessageFlags.Ephemeral});return;}
@@ -105,9 +110,9 @@ client.on(Events.InteractionCreate, async i => {
     if(i.isChatInputCommand()&&i.commandName==='duelo'){
       if(!i.guildId||!i.channelId)throw new Error('Use os duelos dentro de um servidor.');const action=i.options.getSubcommand();
       await i.deferReply(action==='ver'||action==='sair'?{flags:MessageFlags.Ephemeral}:{});
-      if(action==='treino'||action==='desafiar'){
+      if(action==='treino'||action==='treino_fusao'||action==='desafiar'){
         let r:DuelRecord;
-        if(action==='treino')r=createTraining(id,i.guildId,i.channelId);
+        if(action==='treino'||action==='treino_fusao')r=createTraining(id,i.guildId,i.channelId,action==='treino_fusao');
         else{const other=i.options.getUser('oponente',true);if(other.bot)throw new Error('Para enfrentar o bot, use /duelo treino.');r=challenge(id,other.id,i.guildId,i.channelId);}
         const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
       }
@@ -269,7 +274,7 @@ async function main() {
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
-  console.log('Fase 4: motor 1v1, treino e campo privado carregados.');
+  console.log('Fase 4.1: W.O. automático, Campo, Deck Adicional, Fusão e Cemitério carregados.');
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
   await client.login(token);
   const rest = new REST({ version: '10' }).setToken(token!);
