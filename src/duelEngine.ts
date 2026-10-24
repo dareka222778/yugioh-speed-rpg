@@ -24,22 +24,25 @@ export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
 export function validateDuelCards(ids:string[]){
- if(ids.length<20||ids.length>30)throw new Error('O duelo exige um deck de 20 a 30 cartas.');
+ if(!Array.isArray(ids)||ids.length<20||ids.length>30)throw new Error('O duelo exige um deck de 20 a 30 cartas.');
  const counts=new Map<string,number>();for(const id of ids){const c=card(id);if(c.fusion)throw new Error('Fusões pertencem ao Deck Adicional.');counts.set(id,(counts.get(id)??0)+1);if(counts.get(id)!>3)throw new Error('Máximo de 3 cópias por carta.');if(!supported.has(id))throw new Error(`Efeito não implementado: ${c.name}.`);}
 }
 export function createDuel(players:[{id:string;name:string;cards:string[];extra?:string[]},{id:string;name:string;cards:string[];extra?:string[]}],rng:()=>number=Math.random,first=0):DuelState{
+ if(!Array.isArray(players)||players.length!==2||players.some(p=>!p||typeof p.id!=='string'||!p.id.trim()||typeof p.name!=='string'||!p.name.trim()||!Array.isArray(p.cards)||p.extra!==undefined&&!Array.isArray(p.extra)))throw new Error('Dados dos duelistas inválidos.');
+ if(typeof rng!=='function')throw new Error('Sorteio inválido.');
  if(players[0].id===players[1].id)throw new Error('São necessários dois duelistas distintos.');
  if(first!==0&&first!==1)throw new Error('Primeiro jogador inválido.');
  const ps=players.map((p,index)=>{validateDuelCards(p.cards);if((p.extra?.length??0)>6)throw new Error('Deck Adicional: máximo de 6 cartas.');const counts=new Map<string,number>();for(const id of p.extra??[]){if(!card(id).fusion||!supported.has(id))throw new Error('Fusão não implementada.');counts.set(id,(counts.get(id)??0)+1);if(counts.get(id)!>3)throw new Error('Máximo de 3 cópias no Deck Adicional.');}const deck=p.cards.map((id,n)=>({id,uid:`${index}-${n}`}));
   for(let i=deck.length-1;i>0;i--){const r=rng===Math.random?randomInt(i+1):Math.floor(rng()*(i+1));if(!Number.isInteger(r)||r<0||r>i)throw new Error('Sorteio inválido.');[deck[i],deck[r]]=[deck[r],deck[i]];}
   return {id:p.id,name:p.name.slice(0,32),lp:4000,hand:deck.splice(0,4),deck,monsters:[],backrow:[],grave:[],extra:(p.extra??[]).map((id,n)=>({id,uid:`${index}-e${n}`})),field:null,banished:[],summoned:false} as DuelPlayer;
  }) as [DuelPlayer,DuelPlayer];
- return {version:1,players:ps,turn:1,current:first,phase:'main',resume:'main',priority:first,passes:0,pending:{kind:'none'},chain:[],winner:null,reason:'',log:[`${ps[first].name} começa. Sem compra ou batalha no primeiro turno.`]};
+ const state:DuelState={version:1,players:ps,turn:1,current:first,phase:'main',resume:'main',priority:first,passes:0,pending:{kind:'none'},chain:[],winner:null,reason:'',log:[`${ps[first].name} começa. Sem compra ou batalha no primeiro turno.`]};
+ assertDuelState(state);return state;
 }
 export function atk(m:Monster,s?:DuelState){return Math.max(0,(s&&m.swappedUntil===s.turn?card(m.id).defense!:card(m.id).atk!)+m.atkBoost+(s?persistentModifier(m,s,'atk'):0));}
 export function def(m:Monster,s?:DuelState){return Math.max(0,(s&&m.swappedUntil===s.turn?card(m.id).atk!:card(m.id).defense!)+m.defBoost+(s?persistentModifier(m,s,'def'):0));}
 export function decisionPlayer(s:DuelState){return s.phase==='response'?s.priority:s.phase==='choice'?s.choice!.actor:s.current;}
-export function timeoutDuel(input:DuelState):DuelState{if(input.phase==='finished')return input;const s=structuredClone(input);finish(s,1-decisionPlayer(s),'vitória por W.O.: tempo de decisão esgotado');return s;}
+export function timeoutDuel(input:DuelState):DuelState{assertDuelState(input);if(input.phase==='finished')return input;const s=structuredClone(input);finish(s,1-decisionPlayer(s),'vitória por W.O.: tempo de decisão esgotado');assertDuelTransition(input,s);return s;}
 function note(s:DuelState,text:string){s.log.push(text);s.log=s.log.slice(-12);}
 function findMonster(s:DuelState,uid:string){for(const p of s.players){const m=p.monsters.find(m=>m.uid===uid);if(m)return {p,m};}}
 function graveMonster(s:DuelState,uid:string,byBattle=false){const found=findMonster(s,uid);if(found){const controller=s.players.indexOf(found.p);const owner=found.m.owner??controller;found.p.monsters=found.p.monsters.filter(m=>m.uid!==uid);s.players[owner].grave.push({uid:found.m.uid,id:found.m.id,...found.m.properlySummoned?{properlySummoned:true}:{}});
@@ -450,7 +453,7 @@ function resolve(s:DuelState){
   // FLIP effects revealed by battle are activated after damage calculation,
   // including when the defending monster was destroyed in that battle.
   const flip=s.battleFlip;s.battleFlip=undefined;
-  if(s.phase!=='finished'&&flip)triggerMonsterEffect(s,flip.actor,flip.card,'flip',flip.id);
+  if((s as DuelState).phase!=='finished'&&flip)triggerMonsterEffect(s,flip.actor,flip.card,'flip',flip.id);
  }
 }
 function settle(s:DuelState){

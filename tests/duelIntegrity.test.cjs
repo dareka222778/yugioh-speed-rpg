@@ -25,4 +25,9 @@ test('invalid saved state never mutates SQLite or pays a reward',()=>{
 test('invalid JSON and missing playing-state fail without erasing the stored record',()=>{
  for(const [id,raw]of [['bad-json','{'],['missing',null]]){db.db.prepare('INSERT INTO duels(id,guild_id,channel_id,status,revision,updated,state) VALUES(?,?,?,?,?,?,?)').run(id,'g','c','playing',0,Date.now(),raw);assert.throws(()=>store.getDuel(id),/inválid/);assert.equal(db.db.prepare('SELECT state FROM duels WHERE id=?').get(id).state,raw);}
 });
+test('constructor and timeout boundaries reject malformed input without changing valid snapshots',()=>{
+ assert.throws(()=>e.validateDuelCards(null),/20 a 30/);assert.throws(()=>e.createDuel(null),/inválidos/);assert.throws(()=>e.createDuel([{id:'',name:'A',cards:basic},{id:'b',name:'B',cards:basic}]),/inválidos/);assert.throws(()=>e.createDuel([{id:'a',name:'A',cards:basic},{id:'b',name:'B',cards:basic}],42),/Sorteio/);
+ const s=game(),copy=JSON.stringify(s),expired=e.timeoutDuel(s);assert.equal(expired.phase,'finished');integrity.assertDuelTransition(s,expired);assert.equal(JSON.stringify(s),copy);
+ const bad=structuredClone(s);bad.version=999;assert.throws(()=>e.timeoutDuel(bad),/inválido/);
+});
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});

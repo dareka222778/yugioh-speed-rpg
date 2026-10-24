@@ -54,17 +54,18 @@ esses contratos, junto da implementação e de testes próprios.
 Os campos novos são opcionais em snapshots de versão 1. O banco valida na
 leitura e antes de salvar/recompensar. JSON inválido ou registro inconsistente
 produz erro controlado; nada é apagado automaticamente. As transações existentes
-continuam protegendo revisão, economia e recompensas únicas.
+continuam protegendo revisão, economia e recompensas únicas. Construtor,
+encerramento por W.O. e abertura de partidas antigas também passam pelo contrato.
 
 ## Evidência local
 
 - Instalação limpa com Node 22: concluída.
 - Build e tipagem: aprovados.
-- Suíte completa: **268 testes aprovados, zero falhas**.
-- Auditoria adicional: **1.000 jogos completos**, 49.161 decisões executadas,
-  3.329 restaurações de snapshots JSON, todos os UID/identidades conservados.
-- Neste ambiente, a auditoria levou 6.238,4 ms; mediana de decisão 0,099 ms,
-  p95 0,194 ms. Isso mede execução local da engine, sem rede ou renderização,
+- Suíte completa: **269 testes aprovados, zero falhas**.
+- Auditoria adicional: **1.000 jogos completos**, 49.512 decisões executadas,
+  3.353 restaurações de snapshots JSON, todos os UID/identidades conservados.
+- Neste ambiente, a auditoria levou 6.182,1 ms; mediana de decisão 0,099 ms,
+  p95 0,181 ms. Isso mede execução local da engine, sem rede ou renderização,
   e não prevê o tempo de resposta do Discord ou da hospedagem.
 - Arena: arquivo original inalterado e testes visuais anteriores aprovados.
 
@@ -92,3 +93,15 @@ Nenhum desses itens deve ser anunciado como concluído por causa dos testes verd
 - Livro da Lua e timing: https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=5432&ope=4&request_locale=ja&sort=2
 - Ventríloco: https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4172&ope=2&request_locale=en
 - Kuriboh: https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4064&ope=2
+
+
+### Ordem de verificação e CI
+
+Uma primeira execução de CI desta revisão detectou erros de tipagem mesmo com
+os testes JavaScript aprovados: o compilador havia emitido JavaScript, e uma
+sequência local sem interrupção imediata permitiu continuar após a falha.
+Os tipos foram corrigidos e a revisão foi novamente executada com parada no
+primeiro erro: tipagem sem emissão, build, suíte completa, auditoria e prontidão.
+O CI mantém cada verificação como uma etapa obrigatória separada. O teste antigo
+de timeout foi ajustado para criar uma escolha válida com alvo real, conservando
+a verificação de que o jogador correto perde por W.O. nessa fase.

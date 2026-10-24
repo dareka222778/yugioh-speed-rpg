@@ -147,6 +147,6 @@ byte a byte inalterada; os decks atuais não foram editados nesta entrega.
   de persistir, antes de conceder recompensa e ao reabrir uma partida.
 - Node 22 fixado como runtime testado; o teste de carga isolado foi adicionado ao CI.
 
-Validação local: 268 testes; 1.000 partidas extras, 49.161 jogadas e 3.329
+Validação local: 269 testes; 1.000 partidas extras, 49.512 jogadas e 3.353
 restaurações serializadas. Isto não mede latência do Discord/Botkeep.
 Veja [ENGINE_AUDIT.md](ENGINE_AUDIT.md) para escopo, evidências e limitações.

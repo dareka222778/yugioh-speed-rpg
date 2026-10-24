@@ -35,7 +35,7 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
    for(const c of list){
     checkRef(c);const info=getCard(c.id)!;
     if(zone==='monsters'){
-     if(info.kind!=='monster'||typeof c.faceUp!=='boolean'||!['atk','def'].includes(c.position)||!integer(c.entered)||!integer(c.changed)||!integer(c.attacked)||!integer(c.atkBoost,Number.MIN_SAFE_INTEGER)||!integer(c.defBoost,Number.MIN_SAFE_INTEGER))fail('monstro inválido');
+     if(info.kind!=='monster'||typeof c.faceUp!=='boolean'||(c.position!=='atk'&&c.position!=='def')||!integer(c.entered)||!integer(c.changed)||!integer(c.attacked)||!integer(c.atkBoost,Number.MIN_SAFE_INTEGER)||!integer(c.defBoost,Number.MIN_SAFE_INTEGER))fail('monstro inválido');
      if(c.owner!==undefined&&!actor(c.owner)||c.returnTo!==undefined&&!actor(c.returnTo))fail('proprietário do monstro');
     }
     if(zone==='backrow'&&(info.kind==='monster'||!integer(c.setTurn)||typeof c.faceUp!=='boolean'))fail('Magia/Armadilha inválida');
@@ -47,7 +47,7 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
  if(s.winner!==null&&!ids.has(s.winner))fail('vencedor desconhecido');
  if(s.phase!=='finished'&&s.winner!==null)fail('vencedor sem encerramento');
  if(s.phase==='choice'&&(!object(s.choice)||!actor(s.choice.actor)||!Array.isArray(s.choice.targets)||!s.choice.targets.length||s.choice.targets.some((id:unknown)=>typeof id!=='string')))fail('escolha pendente');
- function checkRef(c:unknown):asserts c is CardRef{
+ function checkRef(c:unknown):asserts c is CardRef & Record<string,unknown>{
   if(!object(c)||typeof c.uid!=='string'||!c.uid||uids.has(c.uid)||typeof c.id!=='string'||!getCard(c.id))fail('identificador de carta ausente, duplicado ou desconhecido');
   if(c.properlySummoned!==undefined&&typeof c.properlySummoned!=='boolean')fail('histórico de Invocação');
   uids.add(c.uid);
