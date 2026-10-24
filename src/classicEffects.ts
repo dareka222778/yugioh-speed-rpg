@@ -1,9 +1,11 @@
 import {getCard} from './collection';
-import {getEffect,equipEligible} from './effectRegistry';
+import {getEffect,equipEligible,isQuickPlaySpell} from './effectRegistry';
 import type {Action,Backrow,CardRef,DuelState,Monster,Pending} from './duelEngine';
 export type EffectServices={destroy:(s:DuelState,uid:string)=>void;note:(s:DuelState,line:string)=>void;finish:(s:DuelState,winner:number|null,reason:string)=>void;checkLP:(s:DuelState)=>void};
 export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  const e=getEffect(c.id),p=s.players[index],op=s.players[1-index];if(!e)return [];
+ // Quick-Play cards Set during this turn cannot be activated until a later turn.
+ if(isQuickPlaySpell(c.id)&&p.backrow.some(b=>b.uid===c.uid&&b.setTurn===s.turn))return [];
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
   case 'equip':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp&&equipEligible(e,getCard(m.id)!)).map(m=>m.uid)));
@@ -13,6 +15,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
   // A facedown target's identity must never determine the action menu.
   case 'deSpell':return targeted(s.players.flatMap(p=>[...p.backrow,...p.field?[p.field]:[]].filter(t=>t.uid!==c.uid&&(!t.faceUp||getCard(t.id)?.kind==='spell')).map(t=>t.uid)));
   case 'mysticalSpaceTyphoon':return targeted(s.players.flatMap(p=>[...p.backrow,...p.field?[p.field]:[]].filter(t=>t.uid!==c.uid).map(t=>t.uid)));
+  case 'bookOfMoon':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>m.uid)));
   case 'removeTrap':return targeted(s.players.flatMap(p=>p.backrow.filter(t=>t.uid!==c.uid&&t.faceUp&&getCard(t.id)?.kind==='trap').map(t=>t.uid)));
   case 'darkHole':return s.players.some(p=>p.monsters.length)?[{kind:'spell',card:c.uid}]:[];
   case 'raigeki':return op.monsters.length?[{kind:'spell',card:c.uid}]:[];
@@ -60,6 +63,9 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
    if(failed[0]&&failed[1])service.finish(s,null,'ambos não conseguiram comprar as cartas');else if(failed.some(Boolean))service.finish(s,failed[0]?1:0,'não conseguiu comprar uma carta');return true;
   }
   case 'mysticalSpaceTyphoon':if(a.target&&s.players.some(p=>p.backrow.some(b=>b.uid===a.target)||p.field?.uid===a.target)){discardBackrow(s,a.target);service.note(s,'Tufão Espacial Místico destruiu a Magia/Armadilha escolhida.');}return true;
+  case 'bookOfMoon':
+   if(found?.m.faceUp){found.m.faceUp=false;found.m.position='def';found.m.changed=s.turn;service.note(s,`Livro da Lua colocou ${getCard(found.m.id)!.name} em Defesa com a face para baixo.`);}
+   return true;
   case 'giantTrunade':for(const p of s.players){p.hand.push(...p.backrow.map(b=>({id:b.id,uid:b.uid})));p.backrow=[];if(p.field){p.hand.push({id:p.field.id,uid:p.field.uid});p.field=null;}}service.note(s,'Retorno Gigante devolveu as Magias e Armadilhas às mãos.');return true;
   case 'shieldSword':for(const p of s.players)for(const m of p.monsters)if(m.faceUp)m.swappedUntil=m.swappedUntil===s.turn?undefined:s.turn;service.note(s,'ATK e DEF originais dos monstros revelados foram trocados até o fim do turno.');return true;
   case 'blockAttack':if(found&&found.index!==a.actor&&found.m.faceUp)found.m.position='def';return true;
