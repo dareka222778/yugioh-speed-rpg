@@ -8,10 +8,10 @@
 
 | Área | Concluído | Falta |
 | --- | ---: | ---: |
-| Engine clássica adaptada | **72%** | **28%** |
-| Reformulação visual inspirada em Duel Links | **0%** | **100%** |
+| Engine clássica adaptada | **78%** | **22%** |
+| Reformulação visual inspirada em Duel Links | **56%** | **44%** |
 
-A base do bot já possui imagens e comandos, mas nenhum componente da **nova reformulação** foi aprovado como pronto. **Layout 0% não significa bot sem interface.**
+A reformulação Azure está implementada parcialmente na arena, na mão, na galeria de NPCs e no editor de decks. Os **56 pontos representam trabalho funcional e testado automaticamente**, mas não substituem revisões humanas em desktop/mobile e ajustes gráficos finais.
 
 ### Critérios de pontuação da engine
 
@@ -19,18 +19,18 @@ A base do bot já possui imagens e comandos, mas nenhum componente da **nova ref
 | --- | ---: | ---: | --- |
 | Formato 4000 PV, três zonas, 20–30 cartas | 10 | 10 | Implementado |
 | Turnos, combate e encerramento | 9 | 9 | Implementado; mais detalhes de timing pendentes |
-| Magias e Armadilhas | 9 | 7 | Bloqueador de Magia e Sete Ferramentas jogáveis; lote incompleto |
-| Correntes, prioridades e respostas | 10 | 7 | Negação de ativação, custos prévios, correntes Speed 3; casos avançados pendentes |
+| Magias e Armadilhas | 9 | 8 | Bloqueador de Magia, Sete Ferramentas, Pote, Raigeki e Tufão jogáveis; outras cartas faltam |
+| Correntes, prioridades e respostas | 10 | 8 | Correntes Speed 2/3, negação real e MST: destruir não nega; timing TCG completo falta |
 | FLIP e cálculo de dano | 8 | 7 | Efeitos de cinco monstros reais; cenários raros pendentes |
 | Ignição e custos | 8 | 7 | Cannon Soldier + mecanismo genérico de custo |
 | Cemitério e buscas | 8 | 6 | Sangan/Witch e Tomate Místico; fila de eventos e busca/Invocação-Especial |
 | Gatilhos de invocação e invocações especiais | 7 | 5 | Reações Normais/Virar e recrutamento DARK do Tomate Místico; especiais avançadas pendentes |
 | Outros gatilhos de destruição | 7 | 2 | Causa de destruição em batalha separada de custo/efeito; regras amplas pendentes |
-| Contínuos, rápidos, negações complexas | 8 | 2 | Jinzo contínuo habilitado; efeitos rápidos e negações complexas pendentes |
+| Contínuos, rápidos, negações complexas | 8 | 4 | Jinzo, MST Rápido e negações; monstros rápidos e efeitos avançados pendentes |
 | Primeiro lote histórico de cartas | 7 | 4 | Quantidades reais exibidas pelo `npm run progress` |
-| IA dos NPCs | 4 | 3 | Escolha de contra-armadilhas e custo de descarte; estratégia incompleta |
-| CI, regressão e aceite no Discord | 5 | 3 | Testes automatizados; aceite humano na hospedagem pendente |
-| **Total** | **100** | **72** | |
+| IA dos NPCs | 4 | 4 | Reações, descarte, recrutamento, Magias Rápidas e decks de 30; heurística não exaustiva |
+| CI, regressão e aceite no Discord | 5 | 4 | Testes de motor/UI e 30 partidas simuladas; aceite humano na hospedagem pendente |
+| **Total** | **100** | **78** | |
 
 O progresso de regras é **deliberadamente menor que a porcentagem de cartas habilitadas**, pois boa parte do lote histórico é de monstros sem efeitos e não representa todo o trabalho de regras.
 
@@ -38,15 +38,15 @@ O progresso de regras é **deliberadamente menor que a porcentagem de cartas hab
 
 | Entrega | Peso | Concluído |
 | --- | ---: | ---: |
-| Sistema visual (azul, tipografia e hierarquia) | 12 | 0 |
-| Retratos e identidade dos duelistas | 15 | 0 |
-| Navegação individual de cartas e decks | 15 | 0 |
-| Arena com HUD e campo de duelo | 20 | 0 |
-| Feedback de efeitos e invocações | 12 | 0 |
-| Responsividade e integração com Discord | 10 | 0 |
-| Usabilidade e acessibilidade | 10 | 0 |
-| Capturas, testes e revisão humana | 6 | 0 |
-| **Total** | **100** | **0** |
+| Sistema visual (azul, tipografia e hierarquia) | 12 | 9 |
+| Retratos e identidade dos duelistas | 15 | 8 |
+| Navegação individual de cartas e decks | 15 | 11 |
+| Arena com HUD e campo de duelo | 20 | 13 |
+| Feedback de efeitos e invocações | 12 | 4 |
+| Responsividade e integração com Discord | 10 | 3 |
+| Usabilidade e acessibilidade | 10 | 5 |
+| Capturas, testes e revisão humana | 6 | 3 |
+| **Total** | **100** | **56** |
 
 ## Regras para avançar pontuações
 
@@ -84,3 +84,22 @@ O progresso de regras é **deliberadamente menor que a porcentagem de cartas hab
 **Tomate Místico (83011277):** somente quando é destruído **em batalha** e enviado ao Cemitério, permite escolher 1 monstro **TREVAS** de até **1500 ATK** no Deck do dono e Invocá-lo por Invocação-Especial, com a face para cima em Ataque. A escolha apresenta uma opção explícita de recusa. Uma carta enviada ao Cemitério por Magia ou Tributo não dispara o efeito. Se não houver monstro elegível ou zona livre, a engine continua a batalha sem opção inválida. A Invocação-Especial não consome a quota de Invocação-Normal e não ativa o Ventríloco Misterioso (que exige Normal/Virar). Base oficial: <https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4930&request_locale=pt>.
 
 Testes: `tests/classicBattleRecruiters.test.cjs`, cenários com compra pelo dono (inclusive carta sob controle adversário), alvo válido/inválido, recusa, batalha e distinção de causas de destruição.
+
+## Segunda grande entrega — Azure / Decks / Magias Rápidas
+
+**Engine (78%)**
+
+- Pote da Ganância (55144522) compra duas cartas; Raigeki (12580477) destrói os monstros adversários e diferencia efeitos que disparam ao enviar cartas ao Cemitério de efeitos de batalha.
+- Tufão Espacial Místico (05318639) é uma Magia Rápida: jogável da mão durante o próprio turno ou previamente baixada, inclusive como resposta; respeita a Velocidade de Magia 3, pode ser negado por Bloqueador de Magia e **não nega automaticamente o efeito** de outra Magia/Armadilha apenas por destruí-la.
+- Joey, Yugi e Kaiba possuem **adaptações de 30 cartas jogáveis**, usando somente cartas auditadas pelo motor. A galeria histórica de 50 cartas por duelista continua independente e intocada. Testes de partidas simuladas conferem conservação global das cartas quando elas mudam de controlador.
+
+**Layout Azure (56%)**
+
+- src/duelTheme.ts: sistema azul neutro, tokens compartilhados e medição de contraste.
+- src/duelRenderer.ts: arena azul com efeitos luminosos moderados, zonas táticas, LP, fases e correntes, cartas da mão privada e retratos locais de NPCs; dimensões compatíveis com os painéis de Discord.
+- src/duelUI.ts e src/index.ts: **inspeção privada carta por carta**, imagem ampliada, texto e estatísticas, ações legais diretamente relacionadas à carta, anterior/próxima e retorno ao painel. Componente vinculado ao duelista e à revisão do duelo.
+- src/npcRenderer.ts e src/npcUI.ts: apresentação de Yugi, Joey e Kaiba, retratos e galeria histórica de 50 cartas, cada uma ampliável separadamente.
+- src/deckRenderer.ts e src/deckUI.ts: editor de decks azul com painel individual, cópias, quantidade possuída e distinção entre monstro normal e de efeito.
+- Testes novos de contraste, privacidade de cartas escondidas, comportamento real dos botões, formato dos PNGs e pixels dos retratos: tests/azureUI.test.cjs, tests/duelUI.test.cjs e tests/interactions.test.cjs.
+
+**Ainda não concluído:** engine geral do TCG/anime além do lote auditado, efeitos rápidos de monstros com variedade de timings, todas as cartas históricas incompatíveis/pendentes, animações avançadas, revisão manual em dispositivos reais, otimização de performance no host e deploy efetivo. A porcentagem NÃO implica que 78% de todas as regras/cartas oficiais estejam implementadas nem que 56% de todas as telas imagináveis tenham sido verificadas.
