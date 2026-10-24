@@ -27,7 +27,7 @@ async function render(m:GalleryModel){
   s+=`<image href="data:image/png;base64,${portrait}" x="680" y="85" width="590" height="590" preserveAspectRatio="xMidYMin meet"/><rect x="0" y="76" width="710" height="644" fill="url(#shade)"/>`;
   s+=text(55,139,`DUELISTA  0${m.index+1} / 03`,18,t.color,700)+text(50,225,m.name,62,'#ffffff',700,665)+text(55,265,t.title,19,t.color,700);
   s+=`<path d="M55 294H520" stroke="${t.color}" stroke-opacity=".45"/>`+text(55,338,t.line,23,'#E6F5FF',400,590);
-  s+=text(55,412,'DUELO CLÁSSICO • 4.000 PV',16,azure.primaryBright,700)+text(55,453,'Seu deck × '+m.name.split(' ')[0],30,'#ffffff',700)+text(55,489,'20 cartas • 3 zonas • Recompensas ao vencer',17,azure.muted,400,590);
+  s+=text(55,412,'DUELO CLÁSSICO • 4.000 PV',16,azure.primaryBright,700)+text(55,453,'Seu deck × '+m.name.split(' ')[0],30,'#ffffff',700)+text(55,489,'30 cartas • 3 zonas • Recompensas ao vencer',17,azure.muted,400,590);
   s+=`<rect x="50" y="535" width="580" height="83" rx="12" fill="#102D4D" stroke="${t.color}" stroke-opacity=".25"/>`+text(72,565,m.won?'PRIMEIRA VITÓRIA CONCLUÍDA':'PRIMEIRA VITÓRIA',14,t.color,700)+text(72,596,m.won?'Revanche liberada':m.reward,23,'#ffffff',700);
   s+=text(55,659,`${m.prefix} · ${m.year} · 50 cartas no acervo clássico`,18,'#BCD5ED',400)+text(55,691,'Explore o deck completo, inspecione cada carta ou inicie um duelo.',15,azure.tertiary);
   layers.push({input:svg(s),left:0,top:0});
