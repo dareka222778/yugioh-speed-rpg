@@ -157,4 +157,25 @@ test('NPC recognizes lethal ignition burn and selects the cheaper Tribute',()=>{
  assert.equal(chosen.kind,'monsterEffect');assert.equal(chosen.card,'cannon');assert.deepEqual(chosen.tributes,['fodder']);
 });
 
+
+test('NPC selects Magic Jammer to stop an enemy Spell with its cheapest discard',()=>{
+ let s=game();
+ s.players[0].hand=[ref('19523799','burn')];
+ s.players[1].hand=[ref('48305365','expensive'),ref('91152256','cheap')];
+ s.players[1].backrow=[{id:'77414722',uid:'jam',faceUp:false,setTurn:1}];
+ s=use(s,'a','spell',a=>a.card==='burn');
+ assert.equal(s.phase,'response');
+ const decision=chooseNPC(s,'b');
+ assert.equal(decision.kind,'trap');assert.equal(decision.card,'jam');
+ assert.deepEqual(decision.discards,['cheap']);
+});
+test('NPC pays Seven Tools to negate the rival Trap, not its own Trap',()=>{
+ let s=game();s.phase='response';s.priority=1;
+ s.pending={kind:'none'};s.chain=[{actor:0,card:'boost',id:'17814387',target:'own'}];
+ s.players[1].backrow=[{id:'03819470',uid:'seven',faceUp:false,setTurn:1}];
+ let a=chooseNPC(s,'b');assert.equal(a.kind,'trap');assert.equal(a.card,'seven');assert.equal(a.target,'boost');
+ s.chain[0].actor=1;
+ a=chooseNPC(s,'b');assert.equal(a.kind,'pass');
+});
+
 after(()=>{require('../dist/database').db.close();fs.rmSync(temporary,{recursive:true,force:true});});
