@@ -1,12 +1,8 @@
 import sharp from 'sharp';
-import fs from 'node:fs/promises';
-import {portraitPath} from './profile';
 import {CARD_BACK_PNG,CARD_BACK_WIDTH,CARD_BACK_HEIGHT} from './cardBackAsset';
 import {outlineText as text} from './fontPaths';
 import {getCard} from './collection';
 import {getCardArt} from './cardArt';
-import {azure,duelistAccents} from './duelTheme';
-import {npcPortraits} from './npcPortraits';
 import {atk,def,decisionPlayer,type DuelState,type CardRef} from './duelEngine';
 export const phaseNames:Record<string,string>={main:'FASE PRINCIPAL',battle:'BATALHA',response:'RESPOSTA',choice:'ESCOLHA',discard:'DESCARTE',finished:'FINALIZADO'};
 let queue=Promise.resolve();let waiting=0;
@@ -21,28 +17,17 @@ export async function renderDuel(s:DuelState,viewer?:string,provider=getCardArt)
 async function draw(s:DuelState,viewer:string|undefined,provider:typeof getCardArt){
  const privateIndex=s.players.findIndex(p=>p.id===viewer),bottom=privateIndex<0?0:privateIndex,top=1-bottom;
  const hand=privateIndex<0?[]:s.players[privateIndex].hand,offset=hand.length?340:0,height=1020+offset;
- // Only encounter NPCs have bundled character art. Never infer portraits
- // from player names or request hidden card images to decorate the HUD.
- const npcIndex=s.encounter?s.players.findIndex(p=>p.id.startsWith('npc-')):-1;
- const portrait=s.encounter&&npcIndex>=0?npcPortraits[s.encounter.npcId]:undefined;
  const overlays:sharp.OverlayOptions[]=[],wanted=new Set<string>();
  for(const p of s.players){for(const c of [...p.monsters,...p.backrow,...(p.field?[p.field]:[])])if(c.faceUp||p.id===viewer)wanted.add(c.id);if(p.grave.at(-1))wanted.add(p.grave.at(-1)!.id);}for(const c of hand)wanted.add(c.id);
  const art=new Map<string,Buffer>(),ids=[...wanted];for(let i=0;i<ids.length;i+=3)await Promise.all(ids.slice(i,i+3).map(async id=>{try{const b=await provider(id);if(b)art.set(id,b);}catch{}}));
- let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="${height}">
- <defs>
- <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${azure.deep}"/><stop offset=".48" stop-color="${azure.navy}"/><stop offset="1" stop-color="#030A18"/></linearGradient>
- <linearGradient id="stone" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#163F67"/><stop offset=".53" stop-color="#102C4B"/><stop offset="1" stop-color="#091C34"/></linearGradient>
- <linearGradient id="gold" x2="1" y2="0"><stop stop-color="#087BCC"/><stop offset=".42" stop-color="${azure.primary}"/><stop offset=".75" stop-color="${azure.primaryBright}"/><stop offset="1" stop-color="#1389CB"/></linearGradient>
- <linearGradient id="hud" x2="1" y2="1"><stop stop-color="#173F65"/><stop offset=".6" stop-color="#0D2948"/><stop offset="1" stop-color="#091D37"/></linearGradient>
- <radialGradient id="arenaGlow"><stop stop-color="#3EC7FF" stop-opacity=".13"/><stop offset="1" stop-color="#3EC7FF" stop-opacity="0"/></radialGradient>
- <filter id="energy"><feGaussianBlur stdDeviation="5"/></filter>
+ let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="${height}"><defs>
+ <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#282328"/><stop offset=".5" stop-color="#51474a"/><stop offset="1" stop-color="#242128"/></linearGradient>
+ <linearGradient id="stone" x2="1" y2="1"><stop stop-color="#928785"/><stop offset=".45" stop-color="#625b60"/><stop offset="1" stop-color="#48434e"/></linearGradient>
+ <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#fff0bb"/><stop offset=".3" stop-color="#c7a267"/><stop offset=".6" stop-color="#775630"/><stop offset="1" stop-color="#dfc395"/></linearGradient>
+ <linearGradient id="hud" x2="0" y2="1"><stop stop-color="#561f2a"/><stop offset="1" stop-color="#180f1c"/></linearGradient>
  <image id="card-back-image" width="${CARD_BACK_WIDTH}" height="${CARD_BACK_HEIGHT}" href="data:image/png;base64,${CARD_BACK_PNG}"/>
- <pattern id="grid" width="92" height="92" patternUnits="userSpaceOnUse"><path d="M92 0H0V92M12 12H80V80H12Z" fill="none" stroke="#9DDFFF" stroke-opacity=".065"/><path d="M0 46H92M46 0V92" stroke="#A1E6FF" stroke-opacity=".035"/></pattern>
- </defs>
- <rect width="1400" height="${height}" fill="url(#bg)"/>
- <rect x="11" y="11" width="1378" height="${height-22}" rx="20" fill="none" stroke="#227AB9" stroke-width="3"/>
- <rect x="18" y="18" width="1364" height="${height-36}" rx="16" fill="none" stroke="#94DBFF" stroke-opacity=".35"/>
- <path d="M28 42V28H260M1140 28H1372V42M28 ${height-54}V${height-28}H260M1140 ${height-28}H1372V${height-54}" fill="none" stroke="${azure.primary}" stroke-opacity=".8" stroke-width="4"/>`;
+ <pattern id="grid" width="93" height="93" patternUnits="userSpaceOnUse"><path d="M93 0H0V93M8 8H85V85H8Z" fill="none" stroke="#dfcab5" stroke-opacity=".08"/><path d="M0 46H93M46 0V93" stroke="#0f0d16" stroke-opacity=".12"/></pattern>
+ </defs><rect width="1400" height="${height}" fill="url(#bg)"/><rect x="9" y="9" width="1382" height="${height-18}" fill="none" stroke="url(#gold)" stroke-width="6"/><rect x="19" y="19" width="1362" height="${height-38}" fill="none" stroke="#a88c68"/>`;
  function rect(x:number,y:number,w:number,h:number,fill:string,stroke='#aa8b62',r=2){return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}" stroke="${stroke}"/>`;}
  function back(x:number,y:number,w:number,h:number,rotation=0){
   // Reuse the uploaded pixels for every back; rotate the same portrait asset for DEF.
@@ -53,80 +38,55 @@ async function draw(s:DuelState,viewer:string|undefined,provider:typeof getCardA
  }
  async function image(c:CardRef,x:number,y:number,w:number,h:number,visible:boolean,rotation=0){
   if(!visible){svg+=back(x,y,w,h,rotation);return;}
-  svg+=rect(x,y,w,h,azure.card,azure.line,8);
-  if(art.has(c.id)){try{overlays.push({input:await sharp(art.get(c.id)!,{limitInputPixels:20_000_000}).rotate(rotation).resize(w-4,h-4,{fit:'contain',background:azure.card}).png().toBuffer(),left:x+2,top:y+2});return;}catch{}}
+  svg+=rect(x,y,w,h,'#152333','#7592a6',6);
+  if(art.has(c.id)){try{overlays.push({input:await sharp(art.get(c.id)!,{limitInputPixels:20_000_000}).rotate(rotation).resize(w-4,h-4,{fit:'contain',background:'#152333'}).png().toBuffer(),left:x+2,top:y+2});return;}catch{}}
   svg+=text(x+7,y+h/2,getCard(c.id)!.name,14,'#ffffff',700,w-14);
  }
  if(hand.length){
-  const p=s.players[privateIndex];svg+=rect(28,17,1344,304,'url(#hud)',azure.line,15)+text(48,48,'SUAS CARTAS',25,azure.text,700)+text(315,45,`${hand.length} NA MÃO   /   ${p.deck.length} NO DECK`,17,azure.muted,700)+text(1030,45,'VISÍVEL SÓ PARA VOCÊ',13,azure.primaryBright,700);
-  for(const [i,c] of hand.slice(0,7).entries()){const x=36+i*192;svg+=rect(x-4,56,173,249,i%2===0?'#143655':'#11304E','#356E98',9);
- await image(c,x,62,160,209,true);svg+=text(x,288,`${i+1}. ${getCard(c.id)!.name}`,14,azure.text,700,165);
- const info=getCard(c.id)!;svg+=text(x,310,info.kind==='monster'?`ATK ${info.atk} / DEF ${info.defense}`:info.field?'MAGIA DE CAMPO':info.kind==='trap'?'ARMADILHA':'MAGIA',12,azure.primaryBright,700,169);}
+  const p=s.players[privateIndex];svg+=rect(16,12,1368,316,'#211920','#bda477',3)+text(36,42,'SUA MÃO',22,'#f0d59c',700)+text(260,41,`${hand.length} CARTAS  •  BARALHO: ${p.deck.length} PARA COMPRAR`,17,'#ddd2c6',700)+text(1010,41,'SÓ VOCÊ VÊ ESTAS CARTAS',13,'#c2ae98',700);
+  for(const [i,c] of hand.slice(0,7).entries()){const x=35+i*192;await image(c,x,57,160,211,true);svg+=text(x,290,`${i+1}. ${getCard(c.id)!.name}`,14,'#ffffff',700,178);const info=getCard(c.id)!;svg+=text(x,313,info.kind==='monster'?`ATK ${info.atk} / DEF ${info.defense}`:info.field?'MAGIA DE CAMPO':info.kind==='trap'?'ARMADILHA':'MAGIA',12,'#f0d59c',700,180);}
  }
  const T=(x:number,y:number,v:string,size=16,color='#b8ced9',weight=700,width=1300)=>text(x,y+offset,v,size,color,weight,width);
- svg+=rect(29,24+offset,1342,68,'url(#hud)',azure.line,12)+T(50,53,'DUEL ARENA',27,azure.text)+T(50,78,'SPEED RPG   •   ERA CLÁSSICA',12,azure.primaryBright);
- svg+=T(430,52,`TURNO ${s.turn}`,22,azure.text)+T(430,78,phaseNames[s.phase],15,azure.primaryBright);
- svg+=T(828,52,s.phase==='finished'?'DUELO ENCERRADO':`AÇÃO: ${s.players[decisionPlayer(s)].name}`,20,azure.text,700,515)+T(828,78,viewer?'VISÃO PRIVADA   •   CARTAS REVELADAS':'VISÃO PÚBLICA   •   INFORMAÇÕES PROTEGIDAS',12,azure.muted,700,515);
+ svg+=rect(28,24+offset,1344,68,'url(#hud)','#cfac73',3)+T(49,53,'DUEL FIELD',27,'#f5d9a0')+T(49,78,'SPEED RPG  /  DUELO CLÁSSICO',12,'#c4a884');
+ svg+=T(420,52,`TURNO ${s.turn}`,22,'#ffffff')+T(420,78,phaseNames[s.phase],15,'#f5d9a0');
+ svg+=T(835,52,s.phase==='finished'?'DUELO ENCERRADO':`VEZ DE ${s.players[decisionPlayer(s)].name}`,20,'#f0d59c',700,510)+T(835,78,viewer?'SUA MÃO ESTÁ NO PAINEL ACIMA':'CAMPO PÚBLICO • CARTAS OCULTAS',12,'#c4b9ae',700,510);
  // Mirrored playmat: opposing monsters meet at the center, spells remain behind them.
- svg+=rect(29,105+offset,1342,854,'url(#stone)','#3C96CB',12)+`<rect x="29" y="${105+offset}" width="1342" height="854" fill="url(#grid)"/><ellipse cx="700" cy="${531+offset}" rx="520" ry="320" fill="url(#arenaGlow)"/>`;
+ svg+=rect(29,105+offset,1342,854,'url(#stone)','#c9b38c',0)+`<rect x="29" y="${105+offset}" width="1342" height="854" fill="url(#grid)"/>`;
  for(const [row,index] of [top,bottom].entries()){
-  const p=s.players[index],upper=row===0,my=p.id===viewer,y=upper?112:548,accent=index===decisionPlayer(s)?azure.primary:azure.lineMuted;
-  svg+=rect(36,y+offset,260,156,'url(#hud)',accent,11)+rect(42,y+6+offset,248,144,'none','#235579',8)+T(53,y+33,p.name,22,azure.text,700,npcIndex===index?160:230)+T(53,y+58,viewer?(my?'VOCÊ':'ADVERSÁRIO'):'DUELISTA',11,azure.primaryBright);
-  // NPC art is bundled and player art comes only from the local, validated
-  // portrait path. Public profiles already expose these chosen illustrations.
-  try{
-   let pixels:Buffer|undefined;
-   if(portrait&&index===npcIndex)pixels=Buffer.from(portrait,'base64');
-   else if(/^\d{1,20}$/.test(p.id))pixels=await fs.readFile(portraitPath(p.id));
-   if(pixels&&pixels.length<=2*1024*1024){
-    const avatar=await sharp(pixels,{limitInputPixels:8_000_000})
-      .resize(75,136,{fit:'contain'}).png().toBuffer();
-    overlays.push({input:avatar,left:220,top:y+offset+5});
-   }
-  }catch{/* Avatar is optional; duel UI remains complete without it. */}
-  svg+=T(53,y+102,`LP ${String(p.lp).padStart(4,'0')}`,35,p.lp>1000?azure.text:azure.danger,700,230);
-  const ratio=Math.max(0,Math.min(1,p.lp/4000));svg+=rect(53,y+115+offset,220,8,azure.deep,azure.lineMuted,4);if(ratio)svg+=rect(53,y+115+offset,220*ratio,8,'url(#gold)',azure.primary,4);
-  svg+=T(53,y+144,`MÃO: ${p.hand.length}  •  BANIDAS: ${p.banished?.length??0}`,12,azure.muted,700,230);
+  const p=s.players[index],upper=row===0,my=p.id===viewer,y=upper?112:548,accent=index===s.current?'#f0cb79':'#ad9e8c';
+  svg+=rect(36,y+offset,260,156,'url(#hud)',accent,3)+rect(42,y+6+offset,248,144,'none','#7d6150',2)+T(53,y+33,p.name,23,'#ffffff',700,230)+T(53,y+58,viewer?(my?'SEU CAMPO':'ADVERSÁRIO'):'DUELISTA',11,'#d6b481');
+  svg+=T(53,y+102,`LP  ${String(p.lp).padStart(4,'0')}`,36,p.lp>1000?'#fff0b1':'#ff879a',700,230);
+  const ratio=Math.max(0,Math.min(1,p.lp/4000));svg+=rect(53,y+115+offset,220,8,'#120d13','#806342',0);if(ratio)svg+=rect(53,y+115+offset,220*ratio,8,'url(#gold)','#e8c88a',0);
+  svg+=T(53,y+144,`MÃO: ${p.hand.length}   •   BANIDAS: ${p.banished?.length??0}`,12,'#d0bda8',700,230);
   // Field spell, deck, graveyard and Extra Deck remain outside the two main rows.
-  svg+=rect(94,y+175+offset,140,207,'#173B53','#469BCA',1)+T(104,y+195,'MAGIA DE CAMPO',12,'#B6E0F5',700,125);
+  svg+=rect(94,y+175+offset,140,207,'#313d39','#bdb99b',1)+T(104,y+195,'MAGIA DE CAMPO',12,'#e0dcc2',700,125);
   if(p.field)await image(p.field,107,y+203+offset,114,153,p.field.faceUp||my);else svg+=T(124,y+288,'CAMPO',17,'#8e9d8e',700,110);
-  svg+=T(108,y+374,p.field?.faceUp?'ATIVA':p.field?'BAIXADA':'ZONA DE CAMPO',11,'#A6D5E9',700,120);
+  svg+=T(108,y+374,p.field?.faceUp?'ATIVA':p.field?'BAIXADA':'ZONA DE CAMPO',11,'#d1d1b0',700,120);
   const deckX=1124,graveX=1251;
-  svg+=T(1114,y+20,'DECK',13,'#C4EFFF',700,108)+T(1240,y+20,'CEMITÉRIO',12,'#f1e8d9',700,120);
-  svg+=rect(deckX,y+32+offset,104,147,'#142A47','#579ECF',1)+rect(graveX,y+32+offset,104,147,'#132B48','#4387BD',1);
+  svg+=T(1114,y+20,'DECK',13,'#fff0b1',700,108)+T(1240,y+20,'CEMITÉRIO',12,'#f1e8d9',700,120);
+  svg+=rect(deckX,y+32+offset,104,147,'#30292b','#d3b17b',1)+rect(graveX,y+32+offset,104,147,'#34323b','#c3beb8',1);
   if(p.deck.length)for(let layer=2;layer>=0;layer--)svg+=back(deckX+layer*2,y+32+offset-layer*2,104,147);else svg+=T(deckX+16,y+112,'VAZIO',15,'#c5b59f',700,90);
   const grave=p.grave.at(-1);if(grave)await image(grave,graveX+3,y+35+offset,98,141,true);else svg+=T(graveX+12,y+112,'VAZIO',15,'#9b96a5',700,90);
-  svg+=T(1139,y+207,`${p.deck.length}`,30,'#C4EFFF',700,92)+T(1267,y+207,`${p.grave.length}`,30,'#ECF8FF',700,92)+T(1118,y+230,'PARA COMPRAR',12,'#B4D3E9',700,120)+T(1256,y+230,'CARTAS',12,'#B4D3E9',700,90);
-  svg+=rect(1110,y+255+offset,245,131,'#102C50','#377ECA',2)+T(1124,y+278,'DECK ADICIONAL',13,'#D2E9FF',700,212);
+  svg+=T(1139,y+207,`${p.deck.length}`,30,'#ffe09c',700,92)+T(1267,y+207,`${p.grave.length}`,30,'#eee8df',700,92)+T(1118,y+230,'PARA COMPRAR',12,'#eee1cc',700,120)+T(1256,y+230,'CARTAS',12,'#eee1cc',700,90);
+  svg+=rect(1110,y+255+offset,245,131,'#302738','#c6a6d0',2)+T(1124,y+278,'DECK ADICIONAL',13,'#e1c6ea',700,212);
   if((p.extra?.length??0)>0)svg+=back(1124,y+290+offset,48,67);
-  svg+=T(1200,y+327,`${p.extra?.length??0}`,30,'#ffffff',700,100)+T(1200,y+351,'CARTAS',12,'#B9D8F1');
+  svg+=T(1200,y+327,`${p.extra?.length??0}`,30,'#ffffff',700,100)+T(1200,y+351,'CARTAS',12,'#c8b3ce');
   for(let zone=0;zone<3;zone++){
    const x=338+zone*252,monsterY=y+(upper?215:10),backY=y+(upper?10:215),m=p.monsters[zone],b=p.backrow[zone];
    function socket(zY:number,magic:boolean){
-    svg+=rect(x-5,zY-4+offset,206,196,'#123451','#3E8FBE',0)+rect(x,zY+offset,196,188,magic?'#143657':'#20476B',magic?'#549FD7':'#4284AE',0);
-    svg+=`<path d="M${x+8} ${zY+30+offset}V${zY+8+offset}H${x+31}M${x+165} ${zY+8+offset}H${x+188}V${zY+30+offset}M${x+8} ${zY+158+offset}V${zY+180+offset}H${x+31}M${x+165} ${zY+180+offset}H${x+188}V${zY+158+offset}" fill="none" stroke="${magic?'#8ACFF1':'#8ACFF1'}" stroke-width="2"/>`;
+    svg+=rect(x-5,zY-4+offset,206,196,'#40383a','#c9b38e',0)+rect(x,zY+offset,196,188,magic?'#3a4249':'#55484c',magic?'#b6bec7':'#d3b3a1',0);
+    svg+=`<path d="M${x+8} ${zY+30+offset}V${zY+8+offset}H${x+31}M${x+165} ${zY+8+offset}H${x+188}V${zY+30+offset}M${x+8} ${zY+158+offset}V${zY+180+offset}H${x+31}M${x+165} ${zY+180+offset}H${x+188}V${zY+158+offset}" fill="none" stroke="${magic?'#c3c9d5':'#dfbea9'}" stroke-width="2"/>`;
    }
    socket(monsterY,false);
-   if(m){const visible=m.faceUp||my;await image(m,x+(m.position==='def'?12:45),monsterY+5+offset,m.position==='def'?172:106,m.position==='def'?119:145,visible,m.position==='def'?90:0);svg+=T(x+7,monsterY+164,visible?getCard(m.id)!.name:'Virado para baixo',12,'#ffffff',700,184)+T(x+7,monsterY+182,visible?`${m.faceUp?m.position.toUpperCase():'DEF BAIXADA'}  ${atk(m,s)} / ${def(m,s)}`:'DEF • OCULTA',12,'#BCEBFF',700,184);}
-   else svg+=T(x+37,monsterY+83,'MONSTRO',18,'#7EB4D8',700,142)+T(x+83,monsterY+112,`${zone+1}`,26,'#7EB4D8',700,45);
+   if(m){const visible=m.faceUp||my;await image(m,x+(m.position==='def'?12:45),monsterY+5+offset,m.position==='def'?172:106,m.position==='def'?119:145,visible,m.position==='def'?90:0);svg+=T(x+7,monsterY+164,visible?getCard(m.id)!.name:'Virado para baixo',12,'#ffffff',700,184)+T(x+7,monsterY+182,visible?`${m.faceUp?m.position.toUpperCase():'DEF BAIXADA'}  ${atk(m,s)} / ${def(m,s)}`:'DEF • OCULTA',12,'#f0d59c',700,184);}
+   else svg+=T(x+37,monsterY+83,'MONSTRO',18,'#bca7a3',700,142)+T(x+83,monsterY+112,`${zone+1}`,26,'#bca7a3',700,45);
    socket(backY,true);
    if(b){await image(b,x+45,backY+5+offset,106,145,b.faceUp||my);svg+=T(x+7,backY+164,b.faceUp||my?getCard(b.id)!.name:'Virada para baixo',12,'#f1e8f2',700,184)+T(x+7,backY+182,b.faceUp?'ATIVADA':my?'BAIXADA • SÓ VOCÊ VÊ':'OCULTA',10,'#d2c4df',700,184);}
-   else svg+=T(x+31,backY+80,'MAGIA /',17,'#91C7EA',700,151)+T(x+19,backY+105,'ARMADILHA',17,'#91C7EA',700,164)+T(x+86,backY+136,`${zone+1}`,24,'#91C7EA',700,35);
+   else svg+=T(x+31,backY+80,'MAGIA /',17,'#acb4c5',700,151)+T(x+19,backY+105,'ARMADILHA',17,'#acb4c5',700,164)+T(x+86,backY+136,`${zone+1}`,24,'#acb4c5',700,35);
   }
  }
- // Phase-specific feedback is part of the board itself, not a separate
- // Discord message that the player might miss on mobile.
- const phaseSignal=s.phase==='response'?'JANELA DE RESPOSTA':
-  s.phase==='choice'?'ESCOLHA O ALVO':
-  s.phase==='battle'?'BATALHA EM ANDAMENTO':
-  s.phase==='finished'?'RESULTADO DO DUELO':
-  s.phase==='discard'?'DESCARTE OBRIGATÓRIO':'FASE PRINCIPAL';
- const phaseAccent=s.phase==='finished'?azure.success:s.phase==='response'?azure.warning:azure.primary;
- svg+=rect(553,504+offset,296,58,'url(#hud)',phaseAccent,15);
- svg+=T(580,528,phaseSignal,17,azure.text,700,255);
- svg+=T(580,551,s.phase==='response'?`CORRENTE  •  ${s.chain.length+1} ELO(S)`:`TURNO ${s.turn}  •  4.000 PV INICIAIS`,12,phaseAccent,700,255);
- // Center energy line separates the two duelists without stealing focus from card art.
- svg+=`<path d="M40 ${532+offset}H604L624 ${518+offset}H776L796 ${532+offset}H1360M40 ${536+offset}H604L624 ${550+offset}H776L796 ${536+offset}H1360" fill="none" stroke="#71C4F3" stroke-width="2"/>`+T(657,540,'DUEL',17,'#E3F7FF',700,110);
- svg+=T(40,984,s.log.at(-1)??'',15,'#BEEDFF',700,1320)+T(35,1007,s.phase==='finished'?`${s.winner?s.players.find(p=>p.id===s.winner)!.name+' venceu':'Duelo encerrado'}: ${s.reason}`:'M1–M3: monstros  •  A1–A3: magias / armadilhas  •  O número no baralho indica as próximas compras.',11,'#9FC4E4',400,1330);
+ // Central duel line, inspired by engraved playmats rather than dashboard panels.
+ svg+=`<path d="M40 ${532+offset}H604L624 ${518+offset}H776L796 ${532+offset}H1360M40 ${536+offset}H604L624 ${550+offset}H776L796 ${536+offset}H1360" fill="none" stroke="#dfc89f" stroke-width="2"/>`+T(657,540,'DUEL',17,'#ffe7b5',700,110);
+ svg+=T(35,984,s.log.at(-1)??'',13,'#e6c989',700,1320)+T(35,1007,s.phase==='finished'?`${s.winner?s.players.find(p=>p.id===s.winner)!.name+' venceu':'Duelo encerrado'}: ${s.reason}`:'M1–M3: monstros  •  A1–A3: magias / armadilhas  •  O número no baralho indica as próximas compras.',11,'#cfc1b4',400,1330);
  return sharp(Buffer.from(svg+'</svg>')).composite(overlays).png().toBuffer();
 }
