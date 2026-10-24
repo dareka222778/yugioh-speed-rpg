@@ -14,12 +14,14 @@ test('new starter delivery is atomic and repeat actions never duplicate cards',(
   assert.equal(total(id),20);assert.equal(api.getPlayer(id).dp,1000);
  }
 });
-test('legacy delivery preserves profile and inventory and survives reopening',()=>{
+test('legacy delivery preserves profile and inventory and survives reopening',async()=>{
  api.createPlayer('200','Kise');api.db.prepare("UPDATE players SET starter_deck='spellcaster',dp=1250,character_name='Kairos',theme='rubi' WHERE discord_id='200'").run();
  api.db.prepare("INSERT INTO player_cards(discord_id,card_key,quantity) VALUES ('200','91152256',3)").run();
+ const backup=await api.backupPendingStarterGrants();assert.ok(backup);
+ const Database=require('better-sqlite3');const recovery=new Database(backup,{readonly:true});assert.equal(recovery.prepare("SELECT dp FROM players WHERE discord_id='200'").get().dp,1250);assert.equal(recovery.prepare("SELECT 1 FROM starter_grants WHERE discord_id='200'").get(),undefined);recovery.close();
  assert.equal(api.grantLegacyStarters(),1);assert.equal(total('200'),23);assert.equal(api.grantLegacyStarters(),0);
  api.db.close();delete require.cache[require.resolve('../dist/database')];api=require('../dist/database');
- assert.equal(api.grantLegacyStarters(),0);assert.equal(total('200'),23);assert.equal(api.getPlayer('200').character_name,'Kairos');assert.equal(api.getPlayer('200').dp,1250);
+ assert.equal(await api.backupPendingStarterGrants(),null);assert.equal(api.grantLegacyStarters(),0);assert.equal(total('200'),23);assert.equal(api.getPlayer('200').character_name,'Kairos');assert.equal(api.getPlayer('200').dp,1250);
 });
 test('a failure mid-delivery rolls back style, receipt and all inventory rows',()=>{
  api.createPlayer('300','Falha');api.db.exec("CREATE TRIGGER fail_grant BEFORE INSERT ON player_cards WHEN NEW.discord_id='300' AND NEW.card_key='48305365' BEGIN SELECT RAISE(ABORT,'simulated disk failure'); END");
