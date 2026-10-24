@@ -35,7 +35,7 @@ test('hand inspector is per-card, owner-only, and offers original legal-action i
  const r=record(),hand=s.players[0].hand;
  assert.ok(hand.length>=2);
  const panel=duelCardMessage(r,'101',0);
- assert.match(panel.embeds[0].toJSON().title,/1\\/4/);
+ assert.ok(panel.embeds[0].toJSON().title.startsWith('1/4'));
  assert.equal(panel.cardId,hand[0].id);
  assert.ok(panel.components[0].toJSON().components[0].custom_id.startsWith('duel:card:'));
  assert.ok(panel.components[0].toJSON().components[2].custom_id.endsWith(':1'));
