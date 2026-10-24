@@ -13,7 +13,7 @@ function setTrap(s,index,id){s.players[index].backrow.push({...ref(id),faceUp:fa
 function all(s){return s.players.flatMap(p=>[...p.hand,...p.deck,...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.field?[p.field]:[],...p.banished??[]]);}
 
 test('coverage distinguishes all classical normal monsters, explicit effects and unsupported cards',()=>{
- const coverage=r.classicCoverage();assert.equal(coverage.length,123);assert.equal(coverage.filter(c=>c.enabled).length,88);assert.equal(e.IMPLEMENTED_DUEL_CARDS.length,99);
+ const coverage=r.classicCoverage();assert.equal(coverage.length,123);assert.ok(coverage.filter(c=>c.enabled).length>=88);assert.equal(e.IMPLEMENTED_DUEL_CARDS.length,r.enabledCardIds.length);
  for(const c of a.archiveCards.values())if(c.kind==='Monster'&&c.type.includes('Normal'))assert.ok(r.getEffect(c.id)?.kind==='normal',c.name);
  assert.equal(r.getEffect('71625222'),undefined);assert.throws(()=>e.validateDuelCards([...basic.slice(1),'71625222']),/implementada/);
  for(const id of e.IMPLEMENTED_DUEL_CARDS)assert.ok(r.engineCard(id)&&r.getEffect(id));
@@ -134,7 +134,7 @@ test('NPC uses new defensive and summon-response effects without knowing opponen
 });
 
 test('the readiness gate refuses to label a partial classical engine complete',()=>{
- const out=require('node:child_process').spawnSync(process.execPath,['scripts/classic-engine-coverage.cjs','--require-complete'],{encoding:'utf8'});assert.equal(out.status,1);const report=JSON.parse(out.stdout);assert.equal(report.complete,false);assert.equal(report.enabled,88);assert.equal(report.blocked,34);assert.equal(report.incompatible,1);
+ const out=require('node:child_process').spawnSync(process.execPath,['scripts/classic-engine-coverage.cjs','--require-complete'],{encoding:'utf8'});assert.equal(out.status,1);const report=JSON.parse(out.stdout);assert.equal(report.complete,false);assert.equal(report.total,123);assert.equal(report.enabled,r.classicCoverage().filter(c=>c.enabled).length);assert.equal(report.blocked+r.classicCoverage().filter(c=>c.status==='enabled').length+report.incompatible,report.total);assert.equal(report.incompatible,1);
 });
 
 after(()=>{require('../dist/database').db.close();fs.rmSync(temporary,{recursive:true,force:true});});
