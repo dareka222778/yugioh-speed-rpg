@@ -24,7 +24,7 @@ export function npcLobby(owner:string,now=Date.now(),npcId='joey',view:GalleryVi
  const embed=new EmbedBuilder().setColor(embedColors.npc).setTitle(view==='hero'?n.name:`${n.name} • ${view==='deck'||view==='card'?'Deck clássico':'Deck do desafio'}`);
  const rows:(ActionRowBuilder<ButtonBuilder>|ActionRowBuilder<StringSelectMenuBuilder>)[]=[];
  if(view==='hero'){
-  embed.setDescription(`**Duelar:** 20 cartas em regras Speed${n.extra.length?' + 1 Fusão':''}.\n**Deck clássico ${d.prefix}:** 50 cartas para inspecionar; duelo completo ainda indisponível.`);
+  embed.setDescription(`**Duelar:** ${n.cards.length} cartas em regras Speed${n.extra.length?' + 1 Fusão':''}.\n**Deck clássico ${d.prefix}:** 50 cartas para inspecionar; duelo completo ainda indisponível.`);
   embed.addFields({name:m.won?'✓ Primeira vitória recebida':'Primeira vitória',value:m.won?'Revanche livre.':`**${n.reward.dp} DP + ${n.reward.xp} XP + ${n.reward.cards.length} carta${n.reward.cards.length===1?'':'s'}**`});
   rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(btn('◀ Duelista',nav(npcs[(m.index+2)%3].id,'hero',0)),btn(`Duelar com ${n.name.split(' ')[0]}`,`npc:challenge:${owner}:${npcId}`,ButtonStyle.Primary),btn('Duelista ▶',nav(npcs[(m.index+1)%3].id,'hero',0))));
   rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(btn(`Deck clássico · ${d.prefix}`,nav(npcId,'deck',0)),btn('Deck jogável',nav(npcId,'loadout',0)),btn(`Diário: ${event.npc.name.split(' ')[0]}`,`npc:daily:${owner}:today`,ButtonStyle.Success).setDisabled(m.dailyClaimed)));
