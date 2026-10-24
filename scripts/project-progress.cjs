@@ -18,7 +18,7 @@ const engine=[
  {id:'graveyard',name:'Gatilhos e buscas do Cemitério',weight:8,done:5},
  {id:'summon',name:'Gatilhos de invocação e invocações especiais',weight:7,done:2},
  {id:'destruction',name:'Outros gatilhos de destruição e ordem de eventos',weight:7,done:0},
- {id:'continuous',name:'Efeitos contínuos, rápidos e negações complexas',weight:8,done:0},
+ {id:'continuous',name:'Efeitos contínuos, rápidos e negações complexas',weight:8,done:2},
  {id:'archive',name:'Cobertura do lote histórico inicial (123 cartas)',weight:7,done:4},
  {id:'npc',name:'IA dos NPCs com efeitos',weight:4,done:2},
  {id:'acceptance',name:'CI, testes de regressão e aceitação real no Discord',weight:5,done:3}
