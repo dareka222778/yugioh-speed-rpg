@@ -8,7 +8,7 @@ import { renderWelcome } from './cardRenderer';
 import { collectionMessage, cardMessage, searchCards, exactCard, getCard } from './collection';
 import { getCardArt } from './cardArt';
 import {openDeck,changeDeck,renameDeck,activateDeck,fillInitialDeck} from './decks';
-import {deckMessage} from './deckUI';
+import {visualDeckMessage} from './deckUI';
 
 const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
@@ -75,7 +75,7 @@ client.on(Events.InteractionCreate, async i => {
         await i.showModal(new ModalBuilder().setCustomId(`deck:save-name:${id}:${slot}:${revision}:${page}:${cardId}`).setTitle('Renomear deck').addComponents(new ActionRowBuilder<TextInputBuilder>().addComponents(field)));return;
       }
       if(action==='save-name'&&i.isModalSubmit()){
-        await i.deferReply({flags:MessageFlags.Ephemeral});renameDeck(id,slot,i.fields.getTextInputValue('name'),revision);await i.editReply(deckMessage(id,slot,page,cardId,'✦ Nome salvo.'));return;
+        await i.deferReply({flags:MessageFlags.Ephemeral});renameDeck(id,slot,i.fields.getTextInputValue('name'),revision);await i.editReply(await visualDeckMessage(id,slot,page,cardId,'✦ Nome salvo.'));return;
       }
       if(!i.isButton()&&!i.isStringSelectMenu())return;
       await i.deferUpdate();
@@ -87,7 +87,7 @@ client.on(Events.InteractionCreate, async i => {
       else if(action==='select'&&i.isStringSelectMenu())selected=i.values[0];
       else if(action==='slot'&&i.isStringSelectMenu()){targetSlot=Number(i.values[0]);selected='';}
       else if(action!=='view')throw new Error('Ação desconhecida. Abra /deck ver.');
-      await i.editReply(deckMessage(id,targetSlot,action==='slot'?1:page,selected));return;
+      await i.editReply(await visualDeckMessage(id,targetSlot,action==='slot'?1:page,selected));return;
     }
     if (i.isChatInputCommand()) {
       if(i.commandName==='deck'){
@@ -99,7 +99,7 @@ client.on(Events.InteractionCreate, async i => {
         }else if(action==='nome')renameDeck(id,slot,i.options.getString('texto',true));
         else if(action==='ativar')activateDeck(id,slot);
         else if(action==='inicial')fillInitialDeck(id,slot);
-        await i.editReply(deckMessage(id,slot,1,selected));return;
+        await i.editReply(await visualDeckMessage(id,slot,1,selected));return;
       }
       if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! O RPG está online.', flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'start') {
@@ -216,7 +216,7 @@ async function main() {
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
-  console.log('Fase 3: editor de decks carregado (20–30 cartas, até 3 cópias).');
+  console.log('Fase 3 visual: editor com imagens das cartas carregado.');
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
   await client.login(token);
   const rest = new REST({ version: '10' }).setToken(token!);
