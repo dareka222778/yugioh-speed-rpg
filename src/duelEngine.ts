@@ -18,7 +18,7 @@ export type Action=
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
 export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
-export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'|'monsterTarget'|'monsterSearch'};afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'|'monsterTarget'|'monsterSearch'};afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -187,6 +187,24 @@ function activateGraveTrigger(s:DuelState,event:{actor:number;card:string;id:str
  response(s,{kind:'monsterEffect',actor,card:event.card,id:event.id},s.resume,1-actor);
  return true;
 }
+/** Watches a successful Normal or Flip Summon. The newly summoned card
+ * never triggers its own 'another monster' effect, and a battle reveal is
+ * not a Flip Summon. The source must remain face-up to activate. */
+function queueOtherSummonTriggers(s:DuelState,summonedUid:string):void{
+ for(const [actor,p] of s.players.entries())for(const m of p.monsters){
+  if(m.uid!==summonedUid&&m.faceUp&&getMonsterEffect(m.id)?.trigger==='onOtherSummon')
+   (s.summonTriggers??=[]).push({actor,card:m.uid,id:m.id});
+ }
+}
+function activateOtherSummonTrigger(s:DuelState,event:{actor:number;card:string;id:string}):boolean{
+ const m=s.players[event.actor].monsters.find(m=>m.uid===event.card);
+ if(!m?.faceUp||m.id!==event.id)return false;
+ const e=getMonsterEffect(event.id);
+ if(e?.trigger!=='onOtherSummon'||effectNameBlocked(s,event.actor,event.id))return false;
+ note(s,`${card(event.id).name} reagiu à Invocação de outro monstro.`);
+ response(s,{kind:'monsterEffect',actor:event.actor,card:event.card,id:event.id},s.resume,1-event.actor);
+ return true;
+}
 function resolve(s:DuelState){
  resolveChainLinks(s.chain,link=>{
   // Jinzo negates Trap effects on the field at the moment each link resolves;
@@ -254,6 +272,7 @@ function resolve(s:DuelState){
   return;
  }
  if(pending.kind==='flip'||pending.kind==='summon'){
+  queueOtherSummonTriggers(s,pending.card);
   triggerMonsterEffect(s,pending.actor,pending.card,pending.kind==='flip'?'flip':'onSummon');
   return;
  }
@@ -309,7 +328,7 @@ function resolve(s:DuelState){
 function settle(s:DuelState){
  let budget=100;
  while(budget-->0){
-  if(s.phase==='finished'){s.graveTriggers=[];return;}
+  if(s.phase==='finished'){s.graveTriggers=[];s.summonTriggers=[];return;}
   if(s.phase==='response'){
    if(trapActions(s,s.priority).length)return;
    s.passes++;s.priority=1-s.priority;
@@ -317,8 +336,9 @@ function settle(s:DuelState){
    continue;
   }
   if(s.phase!=='main'&&s.phase!=='battle')return;
-  const event=s.graveTriggers?.shift();if(!event)return;
-  activateGraveTrigger(s,event);
+  const event=s.graveTriggers?.shift();if(event){activateGraveTrigger(s,event);continue;}
+  const summoned=s.summonTriggers?.shift();if(summoned){activateOtherSummonTrigger(s,summoned);continue;}
+  return;
  }
  throw new Error('Limite de encadeamento de eventos do Cemitério excedido.');
 }
