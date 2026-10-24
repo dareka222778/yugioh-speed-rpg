@@ -45,7 +45,8 @@ test('Trap Hole responds to a normal summon, but not a flip summon',()=>{
  s=use(s,'101','position',a=>a.mode==='flip');
  assert.ok(!engine.legalActions(s,'102').some(a=>a.kind==='trap'&&a.card==='trap-hole'));
  let normal=game();normal.players[1].backrow=[{uid:'trap-hole',id:'04206964',faceUp:false,setTurn:0}];
- normal=use(normal,'101','summon',a=>a.position==='atk');
+ normal.players[0].hand.push({uid:'trap-target',id:'91152256'});
+ normal=use(normal,'101','summon',a=>a.position==='atk'&&a.card==='trap-target');
  assert.ok(engine.legalActions(normal,'102').some(a=>a.kind==='trap'&&a.card==='trap-hole'));
 });
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
