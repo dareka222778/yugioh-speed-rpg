@@ -30,7 +30,16 @@ db.exec(`
   );
 `);
 
+// Additive migration: preserve existing duelists, balances and starter choices.
+const columns = new Set((db.prepare('PRAGMA table_info(players)').all() as {name: string}[]).map(c => c.name));
+for (const [name, definition] of Object.entries({ character_name: "TEXT NOT NULL DEFAULT ''", biography: "TEXT NOT NULL DEFAULT ''", theme: "TEXT NOT NULL DEFAULT 'ametista'" })) {
+  if (!columns.has(name)) db.exec(`ALTER TABLE players ADD COLUMN ${name} ${definition}`);
+}
+
 export type Player = {
+  character_name: string;
+  biography: string;
+  theme: string;
   discord_id: string;
   username: string;
   duelist_level: number;
@@ -58,4 +67,9 @@ export function chooseStarterDeck(discordId: string, deck: string): boolean {
 
   db.prepare('UPDATE players SET starter_deck = ? WHERE discord_id = ?').run(deck, discordId);
   return true;
+}
+
+export function updateProfile(id: string, profile: { character_name: string; biography: string; theme: string }) {
+  db.prepare('UPDATE players SET character_name = ?, biography = ?, theme = ? WHERE discord_id = ?')
+    .run(profile.character_name, profile.biography, profile.theme, id);
 }
