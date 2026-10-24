@@ -4,6 +4,12 @@ import {legalActions,actionLabel,type DuelState} from './duelEngine';
 import {DECISION_TIMEOUT_MS,type DuelRecord} from './duelStore';
 import {renderDuel,phaseNames} from './duelRenderer';
 import {getCard} from './collection';
+import {getNPC} from './npcContent';
+function encounterFields(embed:EmbedBuilder,s:DuelState){
+ if(!s.encounter)return;const npc=getNPC(s.encounter.npcId);
+ embed.addFields({name:s.encounter.eventDay?`Evento diário • ${s.encounter.eventDay}`:'Desafio clássico',value:`${npc.name} • ${npc.style}. Recompensa de primeira vitória; bônus diário apenas no modo de evento.`});
+ if(s.reward)embed.addFields({name:'Resultado das recompensas',value:`${s.reward.dp} DP • ${s.reward.xp} XP${s.reward.first?' • Primeira vitória':''}${s.reward.daily?' • Bônus diário':''}\n${s.reward.cards.map(id=>`+1 ${getCard(id)!.name}`).join('\n')}\n${s.reward.note}`.slice(0,1024)});
+}
 export function publicDuelData(s:DuelState){return {turn:s.turn,phase:s.phase,current:s.current,winner:s.winner,reason:s.reason,players:s.players.map(p=>({id:p.id,name:p.name,lp:p.lp,deckCount:p.deck.length,handCount:p.hand.length,grave:p.grave.map(c=>c.id),extraCount:p.extra?.length??0,banishedCount:p.banished?.length??0,field:p.field?{id:p.field.faceUp?p.field.id:null,faceUp:p.field.faceUp}:null,monsters:p.monsters.map(m=>({id:m.faceUp?m.id:null,position:m.position,faceUp:m.faceUp})),backrow:p.backrow.map(c=>({id:c.faceUp?c.id:null,faceUp:c.faceUp}))})),log:s.log};}
 export function invitationMessage(r:DuelRecord){const embed=new EmbedBuilder().setColor(0xb59aff).setTitle('Desafio de duelo 1v1').setDescription(`${escapeMarkdown(r.invite!.name)} convidou <@${r.invite!.opponent}> para duelar.\n\n4000 PV • Deck ativo • Regras básicas\nO convite expira em 2 minutos. Sem apostas ou recompensas.`);
  return {embeds:[embed],components:[new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:accept:${r.id}:${r.revision}`).setLabel('Aceitar duelo').setStyle(ButtonStyle.Success),new ButtonBuilder().setCustomId(`duel:decline:${r.id}:${r.revision}`).setLabel('Recusar / cancelar').setStyle(ButtonStyle.Secondary))],allowedMentions:{parse:[] as never[]}};
@@ -16,7 +22,8 @@ export function duelPublicMessage(r:DuelRecord){
  .setDescription(`${view.players.map(p=>`**${escapeMarkdown(p.name)}** — ${p.lp} PV | Mão ${p.handCount} | Deck ${p.deckCount}`).join('\n')}\n\nTurno ${view.turn} • ${phaseNames[view.phase]}${view.phase==='finished'?`\n${view.winner?escapeMarkdown(view.players.find(p=>p.id===view.winner)!.name)+' venceu':'Sem vencedor'}: ${view.reason}`:`\nAguardando **${escapeMarkdown(view.players[acting].name)}**.`}`)
  .addFields({name:'Últimas jogadas',value:view.log.slice(-4).map(line=>escapeMarkdown(line)).join('\n').slice(-1000)||'O duelo começou.'}).setFooter({text:'Arena clássica • Mãos privadas • Sem recompensas'});
  if(view.phase!=='finished')embed.addFields({name:'Limite da decisão',value:`<t:${Math.floor((r.updated+DECISION_TIMEOUT_MS)/1000)}:R> • 30 minutos. Quem deve agir perde por W.O. ao esgotar o prazo.`});
- embed.setFooter({text:r.state.fixedOpening?'Laboratório de fusão • Mão inicial fixa para testar a receita':'Baralho embaralhado no início • Compra do topo • Sem escolha da próxima carta'});
+ encounterFields(embed,r.state);
+ embed.setFooter({text:r.state.encounter?'Fase 5 • Recompensas creditadas uma vez • Prêmios de primeira vitória e diário':r.state.fixedOpening?'Laboratório de fusão • Mão inicial fixa para testar a receita':'Baralho embaralhado no início • Compra do topo • Sem escolha da próxima carta'});
  const row=new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:open:${r.id}:${r.revision}`).setLabel('🃏 Ver minha mão / jogar').setStyle(ButtonStyle.Primary),new ButtonBuilder().setCustomId(`duel:public:${r.id}:${r.revision}`).setLabel('Atualizar campo').setStyle(ButtonStyle.Secondary),new ButtonBuilder().setCustomId(`duel:zones:${r.id}:${r.revision}`).setLabel('Cemitério / zonas').setStyle(ButtonStyle.Secondary));
  return {embeds:[embed],components:r.state.phase==='finished'?[]:[row],attachments:[],allowedMentions:{parse:[] as never[]}};
 }
@@ -26,6 +33,7 @@ export function duelPrivateMessage(r:DuelRecord,owner:string,requestedPage=1){
  const s=r.state;const p=s.players.find(p=>p.id===owner)!;const actions=legalActions(s,owner);const pages=Math.max(1,Math.ceil(actions.length/20));const page=Math.min(pages,Math.max(1,Number.isInteger(requestedPage)?requestedPage:1));
  const embed=new EmbedBuilder().setColor(0xc7a267).setTitle(`🃏 Sua mão • ${escapeMarkdown(p.name)}`).setDescription(`**${p.lp} PV** • **${p.deck.length} cartas para comprar** • Turno ${s.turn} • ${phaseNames[s.phase]}\n${s.phase==='finished'?s.reason:actions.length?'**Sua vez de decidir.**':'Aguardando o outro jogador.'}`).addFields({name:'Sua mão',value:p.hand.map((c,n)=>`${n+1}. ${getCard(c.id)!.name}`).join('\n')||'Sem cartas.'});
  if(s.phase!=='finished')embed.addFields({name:'Próximo passo',value:actions.length?'Escolha uma jogada no menu. Ela será executada imediatamente.':'Aguarde o outro jogador. Use Atualizar para acompanhar.'});
+ encounterFields(embed,s);
  embed.setFooter({text:`Ações ${page}/${pages} • ${s.fixedOpening?'Treino de fusão: mão inicial fixa':'Baralho embaralhado • Compra do topo'} • Só você vê sua mão`});
  if(s.phase==='finished')return {embeds:[embed],components:[],attachments:[],allowedMentions:{parse:[] as never[]}};
  const rows:(ActionRowBuilder<ButtonBuilder>|ActionRowBuilder<StringSelectMenuBuilder>)[]=[];
