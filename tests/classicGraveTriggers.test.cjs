@@ -35,7 +35,7 @@ test('Tributing Sangan for Cannon Soldier pays cost first then searches ATK <= 1
  s=use(s,'a','choose');
  assert.equal(s.phase,'main');assert.ok(s.players[0].hand.some(c=>c.uid==='eligible'));
  assert.equal(s.players[0].deck.length,2);
- assert.equal(s.players[0].blockedEffectNames[0]['91152256'],3);
+ assert.equal(s.blockedEffectNames[0]['91152256'],3);
 });
 test('Witch of the Black Forest selects monsters by DEF, not ATK',()=>{
  let s=game();s.players[0].monsters=[monster('cannon','11384280'),monster('witch','78010363')];
