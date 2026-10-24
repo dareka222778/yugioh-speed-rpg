@@ -1,4 +1,4 @@
-// Factual metadata; official product membership verified in classicDecks.ts / fixtures.
+// Normal monsters and other card metadata selected for the playable RPG catalog.
 import type {Card} from './cardCatalog';
 export const classicEngineCards:Card[]=[
  {
