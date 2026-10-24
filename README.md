@@ -182,7 +182,7 @@ O escopo e o percentual atualizado por entregas estão documentados em [ENGINE_P
 
 ### Destruição por batalha e Invocação-Especial do Deck
 
-**Tomate Místico** (83011277) é a primeira carta do laboratório que pode recrutar outro monstro diretamente do Deck quando é destruído por batalha e enviado ao Cemitério. Só permite monstros TREVAS com até 1500 ATK; o jogador também pode recusar. A engine diferencia esta causa de destruição da causada por custos/efeitos e considera o verdadeiro dono da carta. Os cenários em `tests/classicBattleRecruiters.test.cjs` são executados automaticamente. O marco atual está em **78% engine / 22% restantes** e **56% do redesign Azure / 44% restantes**, conforme [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md).
+**Tomate Místico** (83011277) é a primeira carta do laboratório que pode recrutar outro monstro diretamente do Deck quando é destruído por batalha e enviado ao Cemitério. Só permite monstros TREVAS com até 1500 ATK; o jogador também pode recusar. A engine diferencia esta causa de destruição da causada por custos/efeitos e considera o verdadeiro dono da carta. Os cenários em `tests/classicBattleRecruiters.test.cjs` são executados automaticamente. O marco atual está em **80% engine / 20% restantes** e **61% do redesign Azure / 39% restantes**, conforme [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md).
 
 ## Arena Azure e avanço do motor — 2026-10-24
 
@@ -193,7 +193,7 @@ A reformulação funcional já está disponível na branch de desenvolvimento:
 - A mão pode ser explorada **carta por carta**: imagem grande, nome, ATK/DEF, resumo de efeito, controles anterior/próxima, menu de ações legais da carta e retorno ao painel. A permissão é verificada pelo servidor.
 - Galeria dos NPCs e editor de decks agora usam a mesma linguagem azul. Os decks **próprios** de Joey, Yugi e Kaiba têm **30 cartas** cada, e somente essas cartas aparecem no portal dos duelistas.
 - **Pote da Ganância**, **Raigeki** e **Tufão Espacial Místico** foram acrescentados ao motor e ao laboratório. Tufão é uma Magia Rápida com janela de resposta, e destruir uma Magia/Armadilha já ativada não nega automaticamente seu efeito.
-- O GitHub Actions executa os testes e gera prévias PNG da arena pública e privada, ficha de duelista, carta jogável individual e editor. As prévias são anexadas como artefato **duel-azure-previews** à execução do workflow de validação. As imagens do catálogo podem aparecer como placeholders na geração offline; a execução normal utiliza o cache de arte de cartas.
+- O GitHub Actions executa os testes e gera prévias PNG da arena pública e privada, ficha de duelista, carta jogável individual, editor e ficha azul do deck próprio. As prévias são anexadas como artefato **duel-azure-previews** à execução do workflow de validação. As imagens do catálogo podem aparecer como placeholders na geração offline; a execução normal utiliza o cache de arte de cartas.
 
 ### Validação, limitações e implantação
 
@@ -206,3 +206,9 @@ A hospedagem não é atualizada por estes commits: é necessário implantar a br
 A galeria `/npc ver` passou a mostrar **somente o baralho que o oponente realmente utiliza**: 30 cartas principais e uma carta adicional quando houver Fusão disponível. O jogador pode abrir cada carta para ver imagem, tipo, ATK/DEF e seu efeito adaptado. Os botões e menus não mostram baralhos alternativos. A prontidão dos decks dos NPCs pode ser verificada com `node scripts/duel-readiness.cjs --require-complete`.
 
 As artes são apenas apresentação: os efeitos e a legalidade das cartas continuam determinados exclusivamente pelo nosso motor. Nenhuma coleção é modificada pela navegação. O arquivo [NPC_GALLERY.md](NPC_GALLERY.md) documenta apenas os fluxos atuais.
+
+### Carta individual do seu próprio deck e Força do Espelho
+
+O editor `/deck ver` passou a oferecer **Ver carta** para abrir uma tela própria de 1200×720 pixels: nome, arte, atributo/tipo, ATK/DEF, efeito, quantidade que você possui e quantidade incluída no deck. Botões **Anterior**, **Próxima** e **Voltar ao deck** permitem navegar sem sair do painel privado e verificam dono/revisão para não executar cliques antigos.
+
+**Força do Espelho** (44095762) entrou como carta com efeito real: reage à declaração de ataque, destrói os monstros do adversário em Ataque e pode ser respondida ou negada em corrente. Destruição por efeito não conta como destruição por batalha. O Joey pode utilizá-la em seu próprio deck e entregá-la como recompensa na primeira vitória. Veja `tests/classicMirrorForce.test.cjs` para os casos de interação e `tests/deckRenderer.test.cjs` para a ficha azul.
