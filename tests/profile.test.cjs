@@ -62,3 +62,25 @@ test('welcome screen renders and cached rendering is reused', async () => {
   const a=await renderWelcome(); const b=await renderWelcome();
   assert.equal(a,b); assert.equal((await sharp(a).metadata()).width,1000);
 });
+test('all card text uses embedded geometry, independent of installed fonts', async () => {
+  const {outlineText}=require('../dist/fontPaths');
+  const text=outlineText(10,40,'Kise NÍVEL EXPERIÊNCIA Feiticeiros 1.000 DP çãé',30);
+  assert.doesNotMatch(text,/<text|font-family/);
+  assert.match(text,/<path/);
+  const image=await sharp(Buffer.from(`<svg width="800" height="80" xmlns="http://www.w3.org/2000/svg">${text}</svg>`)).png().toBuffer();
+  const stats=await sharp(image).stats();
+  assert.ok(stats.channels[3].max>0);
+});
+test('render is byte-identical in a child process with no system fonts', () => {
+  const {execFileSync}=require('node:child_process');
+  const crypto=require('node:crypto');
+  const sandbox=fs.mkdtempSync(path.join(os.tmpdir(),'fontless-'));
+  try {
+    const config=path.join(sandbox,'fonts.conf');
+    fs.writeFileSync(config,`<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "fonts.dtd"><fontconfig><cachedir>${sandbox}</cachedir></fontconfig>`);
+    const script=`const {renderCard}=require('./dist/cardRenderer'); const c=require('node:crypto'); renderCard(${JSON.stringify(player)}).then(b=>process.stdout.write(c.createHash('sha256').update(b).digest('hex')));`;
+    const base=execFileSync(process.execPath,['-e',script],{cwd:path.join(__dirname,'..'),encoding:'utf8'});
+    const isolated=execFileSync(process.execPath,['-e',script],{cwd:path.join(__dirname,'..'),encoding:'utf8',env:{...process.env,FONTCONFIG_FILE:config,FONTCONFIG_PATH:sandbox}});
+    assert.equal(isolated,base);
+  } finally {fs.rmSync(sandbox,{recursive:true,force:true});}
+});
