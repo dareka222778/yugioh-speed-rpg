@@ -39,4 +39,13 @@ test('tutorial is playable without granting cards; cemetery and own Extra Deck c
 test('deck exhaustion wins only when a required draw fails, not when the last card has just been drawn',()=>{
  let s=game();s.players[0].deck=[];assert.ok(engine.legalActions(s,'101').length);assert.notEqual(s.phase,'finished');s.players[1].deck=[];s=use(s,'101','end');assert.equal(s.winner,'101');assert.match(s.reason,/comprar/);
 });
+test('Trap Hole responds to a normal summon, but not a flip summon',()=>{
+ let s=game();s.players[1].backrow=[{uid:'trap-hole',id:'04206964',faceUp:false,setTurn:0}];
+ s.players[0].monsters=[{...m('flip-monster'),faceUp:false,position:'def'}];
+ s=use(s,'101','position',a=>a.mode==='flip');
+ assert.ok(!engine.legalActions(s,'102').some(a=>a.kind==='trap'&&a.card==='trap-hole'));
+ let normal=game();normal.players[1].backrow=[{uid:'trap-hole',id:'04206964',faceUp:false,setTurn:0}];
+ normal=use(normal,'101','summon',a=>a.position==='atk');
+ assert.ok(engine.legalActions(normal,'102').some(a=>a.kind==='trap'&&a.card==='trap-hole'));
+});
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
