@@ -7,11 +7,13 @@ process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
 process.env.DISCORD_TOKEN='test-token';process.env.DISCORD_CLIENT_ID='123';
 const discord=require('discord.js');let client;let registered;
 let signal;const ready=new Promise(r=>{signal=r;});
-class TestClient extends EventEmitter{constructor(){super();client=this;}async login(){this.loggedIn=true;signal();}}
+const publicUpdates=[];
+class TestClient extends EventEmitter{constructor(){super();client=this;this.channels={fetch:async()=>({messages:{fetch:async()=>({edit:async payload=>publicUpdates.push(payload)})}})};}async login(){this.loggedIn=true;signal();}}
 class TestREST{setToken(){return this;}async put(route,payload){assert.equal(client.loggedIn,true,'login must not wait for command synchronization');registered=payload.body;}}
 const original=Module._load;
 Module._load=function(name,parent,isMain){
  if(name==='discord.js')return {...discord,Client:TestClient,REST:TestREST};
+ if(name==='./duelUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDuelPublic:async(...args)=>ui.duelPublicMessage(...args),visualDuelPrivate:async(...args)=>ui.duelPrivateMessage(...args)};}
  if(name==='./deckUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDeckMessage:async(...args)=>ui.deckMessage(...args)};}
  if(name==='./cardArt'&&parent.filename.endsWith('/dist/index.js'))return {getCardArt:async()=>null};
  return original.apply(this,arguments);
@@ -20,10 +22,10 @@ require('../dist/index');Module._load=original;
 const db=require('../dist/database');
 function interaction(kind,commandName,extra={}){
  const calls=[];
- const i={type:kind==='autocomplete'?4:kind==='command'?2:3,commandName,user:{id:'101',username:'Kise',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'},
+ const i={type:kind==='autocomplete'?4:kind==='command'?2:3,commandName,guildId:'g',channelId:'c',user:{id:'101',username:'Kise',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'},
  isAutocomplete:()=>kind==='autocomplete',isChatInputCommand:()=>kind==='command',isButton:()=>kind==='button',isModalSubmit:()=>false,isStringSelectMenu:()=>false,
  options:{getFocused:()=> 'guardiao',getInteger:()=>null,getString:()=> '91152256'},
- async deferReply(p){calls.push(['defer',p]);i.deferred=true;},async editReply(p){calls.push(['edit',p]);},async reply(p){calls.push(['reply',p]);i.replied=true;},
+ async deferReply(p){calls.push(['defer',p]);i.deferred=true;},async editReply(p){calls.push(['edit',p]);return {id:'public-message',channelId:'c'};},async followUp(p){calls.push(['followUp',p]);},async reply(p){calls.push(['reply',p]);i.replied=true;},
  async respond(p){calls.push(['suggestions',p]);},async update(p){calls.push(['update',p]);},async deferUpdate(){calls.push(['deferUpdate']);i.deferred=true;},...extra};
  return {i,calls};
 }
@@ -54,5 +56,25 @@ test('deck command and private controls edit real inventory-backed drafts, block
  const edit=interaction('button',undefined,{customId:minus});await dispatch(edit.i);assert.deepEqual(edit.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(edit.calls[1][1].embeds[0].toJSON().description,/19\/30/);
  const stale=interaction('button',undefined,{customId:minus});await dispatch(stale.i);assert.match(stale.calls.at(-1)[1].content,/antigo/);
  assert.equal(db.getCollection('101').reduce((s,c)=>s+c.quantity,0),20);
+});
+test('duel listener creates training, keeps hands private, rejects strangers and stale clicks, and confirms surrender',async()=>{
+ const decks=require('../dist/decks'),store=require('../dist/duelStore'),engine=require('../dist/duelEngine');
+ const user={id:'104',username:'Teste',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};
+ db.createPlayer('104','Treino');db.chooseStarterDeck('104','warrior');decks.openDeck('104');decks.activateDeck('104',1);
+ const train=interaction('command','duelo',{user,options:{getSubcommand:()=> 'treino'}});await dispatch(train.i);assert.deepEqual(train.calls.map(x=>x[0]),['defer','edit']);assert.equal(train.calls[0][1].flags,undefined);
+ let r=store.currentDuel('104');assert.ok(r);assert.ok(train.calls[1][1].components[0].toJSON().components[0].custom_id.includes('duel:open:'));
+ const privatePanel=interaction('button',undefined,{user,customId:`duel:open:${r.id}:${r.revision}`});await dispatch(privatePanel.i);assert.equal(privatePanel.calls[0][1].flags,64);assert.ok(privatePanel.calls[1][1].embeds[0].toJSON().fields.some(f=>f.name==='Sua mão'));
+ const stranger=interaction('button',undefined,{customId:`duel:open:${r.id}:${r.revision}`});await dispatch(stranger.i);assert.equal(stranger.calls[0][0],'reply');assert.match(stranger.calls[0][1].content,/participantes/);
+ const action=interaction('button',undefined,{user,customId:`duel:act:${r.id}:${r.revision}:1`,isButton:()=>false,isStringSelectMenu:()=>true,values:['0']});await dispatch(action.i);assert.equal(action.calls[0][0],'deferUpdate');assert.equal(store.getDuel(r.id).revision,r.revision+1);assert.ok(publicUpdates.length);
+ const stale=interaction('button',undefined,{user,customId:`duel:act:${r.id}:${r.revision}:1`,isButton:()=>false,isStringSelectMenu:()=>true,values:['0']});await dispatch(stale.i);assert.equal(stale.calls.at(-1)[0],'followUp');assert.match(stale.calls.at(-1)[1].content,/antigo/);
+ r=store.getDuel(r.id);const quit=interaction('button',undefined,{user,customId:`duel:quit:${r.id}:${r.revision}`});await dispatch(quit.i);assert.match(quit.calls[0][1].content,/Confirma/);assert.equal(store.getDuel(r.id).status,'playing');
+ const confirm=interaction('button',undefined,{user,customId:`duel:confirm:${r.id}:${r.revision}`});await dispatch(confirm.i);assert.equal(store.getDuel(r.id).status,'finished');
+});
+test('duel invitation is accepted only by its intended opponent without overwriting the public invitation on error',async()=>{
+ const decks=require('../dist/decks'),store=require('../dist/duelStore');for(const id of ['105','106']){db.createPlayer(id,'PvP '+id);db.chooseStarterDeck(id,'dragon');decks.openDeck(id);decks.activateDeck(id,1);}
+ const user=id=>({id,username:'PvP',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'});
+ const invite=interaction('command','duelo',{user:user('105'),options:{getSubcommand:()=> 'desafiar',getUser:()=>({id:'106',bot:false})}});await dispatch(invite.i);const r=store.currentDuel('105');assert.equal(r.status,'pending');const count=publicUpdates.length;
+ const wrong=interaction('button',undefined,{user:user('104'),customId:`duel:accept:${r.id}:${r.revision}`});await dispatch(wrong.i);assert.equal(wrong.calls.at(-1)[0],'followUp');assert.equal(publicUpdates.length,count);assert.equal(store.getDuel(r.id).status,'pending');
+ const accept=interaction('button',undefined,{user:user('106'),customId:`duel:accept:${r.id}:${r.revision}`});await dispatch(accept.i);assert.equal(store.getDuel(r.id).status,'playing');assert.equal(accept.calls.at(-1)[0],'followUp');
 });
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
