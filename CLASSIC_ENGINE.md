@@ -15,7 +15,7 @@ O **catálogo jogável** é `src/effectRegistry.ts`, composto pelos monstros nor
 - Eventos de invocação: Ventríloco Misterioso.
 - Contínuo: Jinzo bloqueia Armadilhas conforme seu estado no campo.
 - Magias: Pote da Ganância, Raigeki, Tufão Espacial Místico, Polimerização e outras operações explicitamente definidas.
-- Armadilhas de Resposta: Bloqueador de Magia e Sete Ferramentas do Bandido.
+- Armadilhas de Resposta: Bloqueador de Magia e Sete Ferramentas do Bandido; Força do Espelho como Armadilha Normal de declaração de ataque.
 - Correntes resolvem na ordem inversa, os custos são pagos na ativação e destruir uma carta não significa negar seu efeito.
 
 ## NPCs e laboratório
