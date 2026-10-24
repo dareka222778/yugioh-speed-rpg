@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GatewayIntentBits, MessageFlags, ModalBuilder, REST, Routes, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
-import { chooseStarterDeck, createPlayer, getPlayer, updateProfile, getCollection, grantLegacyStarters, grantStarterCards } from './database';
+import { chooseStarterDeck, createPlayer, getPlayer, updateProfile, getCollection, grantLegacyStarters, grantStarterCards, backupPendingStarterGrants } from './database';
 import { isStarterDeck, starterDecks } from './starterDecks';
 import { profileMessage, themes, validateProfile } from './profile';
 import { removePortrait, savePortrait } from './portrait';
@@ -161,6 +161,7 @@ client.on(Events.InteractionCreate, async i => {
   }
 });
 async function main() {
+  if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   await renderWelcome();
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
