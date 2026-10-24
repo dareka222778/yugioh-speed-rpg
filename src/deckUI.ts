@@ -3,6 +3,7 @@ import {getCollection} from './database';
 import {openDeck} from './decks';
 import {getCard} from './collection';
 import {renderDeck} from './deckRenderer';
+import {embedColors} from './duelTheme';
 export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string,notice?:string){
  const deck=openDeck(owner,slot);const owned=getCollection(owner);
  const ids=[...new Set([...owned.map(c=>c.card_key),...deck.items.map(c=>c.card_key)])].filter(id=>getCard(id)).sort((a,b)=>getCard(a)!.name.localeCompare(getCard(b)!.name,'pt-BR'));
@@ -11,7 +12,7 @@ export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string
  const inDeck=(id:string)=>deck.items.find(c=>c.card_key===id)?.quantity??0;
  const have=(id:string)=>owned.find(c=>c.card_key===id)?.quantity??0;
  const key=(action:string,p=page)=>`deck:${action}:${owner}:${slot}:${deck.revision}:${p}:${choice??''}`;
- const embed=new EmbedBuilder().setColor(deck.active?0x4dbb9d:0x75caff).setTitle(`Deck ${slot} • ${escapeMarkdown(deck.name)}`)
+ const embed=new EmbedBuilder().setColor(embedColors.deck).setTitle(`Deck ${slot} • ${escapeMarkdown(deck.name)}`)
  .setDescription(`${notice?`${notice}\n\n`:''}**${deck.total}/30 no Principal • ${deck.extraTotal}/6 no Adicional • ${deck.active?'ATIVO':deck.errors.length?'RASCUNHO':'VÁLIDO — pode ativar'}**\n${deck.errors.length?deck.errors.slice(0,3).join('\n'):'Tamanho e cópias conferidos com sua coleção.'}\n\nEdite pelo menu e pelos botões. As cartas continuam na coleção e podem ser usadas em outros decks.`)
  .setFooter({text:`Página ${page}/${pages} • Decks de 20–30 cartas • Até 3 cópias • Duelo básico com /duelo`});
  for(const id of visible)embed.addFields({name:`${inDeck(id)}× ${getCard(id)!.name}`,value:`Possui: ${have(id)} • ID ${id}${choice===id?' • SELECIONADA':''}`});
