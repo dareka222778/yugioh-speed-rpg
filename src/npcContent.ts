@@ -5,10 +5,7 @@ const initial=(style:string)=>starterContents[style].flatMap(c=>Array(c.quantity
 const yugi=initial('spellcaster');yugi[0]='46986414';
 const kaiba=initial('dragon');kaiba[0]='89631139';kaiba[1]='48305365';
 const joey=initial('warrior');joey[0]='74677422';joey[2]='24094653';joey[4]='34460851';
-/** Thirty-card playable character adaptations. Historical 50-card decks
- * remain separately inspectable, unmodified and clearly labeled archival.
- * These additions all have explicitly audited, executable effects.
- */
+/** Our custom 30-card duelist builds. Every included effect is executable by the engine. */
 joey.push('54652250','07089711','26202165','83011277','03819470','05318639','12580477','55144522','77414722','83764718');
 yugi.push('31560081','28933734','26202165','78010363','55144522','12580477','77414722','05318639','83011277','54098121');
 kaiba.push('77585513','11384280','83011277','26202165','78010363','12580477','05318639','03819470','77414722','55144522');
