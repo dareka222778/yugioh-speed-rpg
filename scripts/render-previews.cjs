@@ -8,7 +8,18 @@ const sharp=require('sharp');
 const {createDuel}=require('../dist/duelEngine');
 const {starterContents}=require('../dist/cardCatalog');
 const {renderDuel}=require('../dist/duelRenderer');
-const {renderNPC}=require('../dist/npcRenderer');
+// The NPC gallery has a fixed global art provider. Intercept that import
+// while loading the module to guarantee screenshot builds never call a CDN.
+const Module=require('node:module'),originalLoad=Module._load;
+let renderNPC;
+try{
+ Module._load=function(name,parent,isMain){
+  if(name==='./cardArt'&&parent?.filename?.endsWith('/dist/npcRenderer.js'))
+   return {getCardArt:async()=>undefined};
+  return originalLoad.apply(this,arguments);
+ };
+ ({renderNPC}=require('../dist/npcRenderer'));
+}finally{Module._load=originalLoad;}
 const {renderDeck}=require('../dist/deckRenderer');
 const {classicDeck}=require('../dist/classicDecks');
 const {getNPC}=require('../dist/npcContent');
