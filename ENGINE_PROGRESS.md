@@ -8,7 +8,7 @@
 
 | Área | Concluído | Falta |
 | --- | ---: | ---: |
-| Engine clássica adaptada | **68%** | **32%** |
+| Engine clássica adaptada | **72%** | **28%** |
 | Reformulação visual inspirada em Duel Links | **0%** | **100%** |
 
 A base do bot já possui imagens e comandos, mas nenhum componente da **nova reformulação** foi aprovado como pronto. **Layout 0% não significa bot sem interface.**
@@ -23,14 +23,14 @@ A base do bot já possui imagens e comandos, mas nenhum componente da **nova ref
 | Correntes, prioridades e respostas | 10 | 7 | Negação de ativação, custos prévios, correntes Speed 3; casos avançados pendentes |
 | FLIP e cálculo de dano | 8 | 7 | Efeitos de cinco monstros reais; cenários raros pendentes |
 | Ignição e custos | 8 | 7 | Cannon Soldier + mecanismo genérico de custo |
-| Cemitério e buscas | 8 | 5 | Sangan / Witch, restrição por nome, fila de gatilhos |
-| Gatilhos de invocação e invocações especiais | 7 | 4 | Ventríloco Misterioso reage a Invocações Normais/Virar; especiais avançadas pendentes |
-| Outros gatilhos de destruição | 7 | 0 | Sem implementação ampla |
+| Cemitério e buscas | 8 | 6 | Sangan/Witch e Tomate Místico; fila de eventos e busca/Invocação-Especial |
+| Gatilhos de invocação e invocações especiais | 7 | 5 | Reações Normais/Virar e recrutamento DARK do Tomate Místico; especiais avançadas pendentes |
+| Outros gatilhos de destruição | 7 | 2 | Causa de destruição em batalha separada de custo/efeito; regras amplas pendentes |
 | Contínuos, rápidos, negações complexas | 8 | 2 | Jinzo contínuo habilitado; efeitos rápidos e negações complexas pendentes |
 | Primeiro lote histórico de cartas | 7 | 4 | Quantidades reais exibidas pelo `npm run progress` |
 | IA dos NPCs | 4 | 3 | Escolha de contra-armadilhas e custo de descarte; estratégia incompleta |
 | CI, regressão e aceite no Discord | 5 | 3 | Testes automatizados; aceite humano na hospedagem pendente |
-| **Total** | **100** | **68** | |
+| **Total** | **100** | **72** | |
 
 O progresso de regras é **deliberadamente menor que a porcentagem de cartas habilitadas**, pois boa parte do lote histórico é de monstros sem efeitos e não representa todo o trabalho de regras.
 
@@ -78,3 +78,9 @@ O progresso de regras é **deliberadamente menor que a porcentagem de cartas hab
 - O laboratório gratuito de cartas virtuais passa a conter os três itens acima, mantendo **20 cartas** e a Fusão demonstrativa.
 
 **Limite conhecido:** essa implementação modela correntes e janelas de resposta das cartas acima, mas ainda não é um sistema TCG universal (por exemplo, efeitos rápidos arbitrários, regras integrais de simultaneidade/SEGOC e janelas de timing não implementadas).
+
+## Gatilho de destruição em batalha e recrutamento
+
+**Tomate Místico (83011277):** somente quando é destruído **em batalha** e enviado ao Cemitério, permite escolher 1 monstro **TREVAS** de até **1500 ATK** no Deck do dono e Invocá-lo por Invocação-Especial, com a face para cima em Ataque. A escolha apresenta uma opção explícita de recusa. Uma carta enviada ao Cemitério por Magia ou Tributo não dispara o efeito. Se não houver monstro elegível ou zona livre, a engine continua a batalha sem opção inválida. A Invocação-Especial não consome a quota de Invocação-Normal e não ativa o Ventríloco Misterioso (que exige Normal/Virar). Base oficial: <https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4930&request_locale=pt>.
+
+Testes: `tests/classicBattleRecruiters.test.cjs`, cenários com compra pelo dono (inclusive carta sob controle adversário), alvo válido/inválido, recusa, batalha e distinção de causas de destruição.
