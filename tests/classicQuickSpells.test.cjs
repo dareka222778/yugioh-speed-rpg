@@ -18,7 +18,11 @@ test('Quick-Play can be activated from hand during own turn in response to a spe
  s.players[0].deck=[ref('draw1','91152256'),ref('draw2','48305365')];s.players[1].backrow=[back('set','12607053')];
  s=play(s,'a','spell',a=>a.card==='pot');
  assert.equal(s.phase,'response');
+ // Priority belongs to the opponent first. They pass their response window,
+ // allowing the turn player to chain a Quick-Play from hand.
+ s=play(s,'b','pass');
  s=play(s,'a','spell',a=>a.card==='mst'&&a.target==='set');
+ if(s.phase==='response')s=play(s,'b','pass');
  assert.equal(s.phase,'main');
  assert.equal(s.players[1].backrow.length,0);assert.ok(s.players[1].grave.some(c=>c.uid==='set'));
  assert.equal(s.players[0].hand.length,2);
@@ -32,6 +36,7 @@ test('opponent cannot activate Quick-Play from hand during rival turn, but may a
  assert.ok(!legalActions(s,'b').some(a=>a.kind==='spell'&&a.card==='mst-hand'));
  assert.ok(legalActions(s,'b').some(a=>a.kind==='spell'&&a.card==='old-mst'&&a.target==='victim'));
  s=play(s,'b','spell',a=>a.card==='old-mst'&&a.target==='victim');
+ if(s.phase==='response')s=play(s,'b','pass');
  assert.equal(s.phase,'main');assert.equal(s.players[1].hand.length,1);assert.equal(s.players[1].backrow.length,0);
 });
 test('Quick-Play set this turn cannot be activated until a future turn',()=>{
