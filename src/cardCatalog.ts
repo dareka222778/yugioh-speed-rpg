@@ -454,6 +454,48 @@ export const cards: Card[] = [
     "defense": null,
     "summary": "Fusão de monstros usando materiais da mão ou do campo.",
     "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4837&request_locale=pt"
+  },
+  {
+    "id": "89631139",
+    "konamiId": 4007,
+    "name": "Dragão Branco de Olhos Azuis",
+    "englishName": "Blue-Eyes White Dragon",
+    "kind": "monster",
+    "race": "Dragon",
+    "attribute": "LIGHT",
+    "level": 8,
+    "atk": 3000,
+    "defense": 2500,
+    "summary": "Monstro Normal: sem efeito. Exige 2 tributos na Invocação-Normal.",
+    "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007&request_locale=pt"
+  },
+  {
+    "id": "46986414",
+    "konamiId": 4041,
+    "name": "Mago Negro",
+    "englishName": "Dark Magician",
+    "kind": "monster",
+    "race": "Spellcaster",
+    "attribute": "DARK",
+    "level": 7,
+    "atk": 2500,
+    "defense": 2100,
+    "summary": "Monstro Normal: sem efeito. Exige 2 tributos na Invocação-Normal.",
+    "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4041&request_locale=pt"
+  },
+  {
+    "id": "74677422",
+    "konamiId": 4088,
+    "name": "Dragão Negro de Olhos Vermelhos",
+    "englishName": "Red-Eyes Black Dragon",
+    "kind": "monster",
+    "race": "Dragon",
+    "attribute": "DARK",
+    "level": 7,
+    "atk": 2400,
+    "defense": 2000,
+    "summary": "Monstro Normal: sem efeito. Exige 2 tributos na Invocação-Normal.",
+    "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4088&request_locale=pt"
   }
 ];
 export const starterContents: Record<string, StarterItem[]> = {
