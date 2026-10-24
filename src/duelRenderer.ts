@@ -77,7 +77,7 @@ async function draw(s:DuelState,viewer:string|undefined,provider:typeof getCardA
   try{
    let pixels:Buffer|undefined;
    if(portrait&&index===npcIndex)pixels=Buffer.from(portrait,'base64');
-   else if(/^\\d{1,20}$/.test(p.id))pixels=await fs.readFile(portraitPath(p.id));
+   else if(/^\d{1,20}$/.test(p.id))pixels=await fs.readFile(portraitPath(p.id));
    if(pixels&&pixels.length<=2*1024*1024){
     const avatar=await sharp(pixels,{limitInputPixels:8_000_000})
       .resize(75,136,{fit:'contain'}).png().toBuffer();
