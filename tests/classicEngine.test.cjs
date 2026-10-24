@@ -137,4 +137,15 @@ test('the readiness gate refuses to label a partial classical engine complete',(
  const out=require('node:child_process').spawnSync(process.execPath,['scripts/classic-engine-coverage.cjs','--require-complete'],{encoding:'utf8'});assert.equal(out.status,1);const report=JSON.parse(out.stdout);assert.equal(report.complete,false);assert.equal(report.total,123);assert.equal(report.enabled,r.classicCoverage().filter(c=>c.enabled).length);assert.equal(report.blocked+r.classicCoverage().filter(c=>c.status==='enabled').length+report.incompatible,report.total);assert.equal(report.incompatible,1);
 });
 
+
+test('NPC sets its FLIP monsters and aims destruction at enemy threats, never at itself',()=>{
+ let s=game();s.current=1;s.players[1].hand=[{uid:'npc-flip',id:'54652250'}];
+ const opening=chooseNPC(s,'b');assert.equal(opening.kind,'summon');assert.equal(opening.position,'set');assert.equal(opening.card,'npc-flip');
+ s=game();s.current=0;s.phase='choice';s.players[0].monsters=[monster('91152256','enemy')];
+ s.players[1].monsters=[monster('54652250','self',1)];
+ s.pending={kind:'monsterEffect',actor:1,card:'self',id:'54652250'};
+ s.choice={actor:1,source:'monsterTarget',targets:['self','enemy']};
+ const choice=chooseNPC(s,'b');assert.equal(choice.kind,'choose');assert.equal(choice.target,'enemy');
+});
+
 after(()=>{require('../dist/database').db.close();fs.rmSync(temporary,{recursive:true,force:true});});
