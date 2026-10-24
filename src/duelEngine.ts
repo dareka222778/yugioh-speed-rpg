@@ -1,10 +1,11 @@
 import {randomInt} from 'node:crypto';
 import {resolveChainLinks,type ChainLink} from './chainEngine';
+import {getMonsterEffect,canActivateMonsterEffect,payMonsterEffectCost} from './monsterEffects';
 import {getCard} from './collection';
 import {enabledCardIds,getEffect} from './effectRegistry';
 import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips} from './classicEffects';
 export type CardRef={uid:string;id:string;properlySummoned?:boolean};
-export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number};
+export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
 export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean;equippedTo?:string};
 export type DuelPlayer={id:string;name:string;lp:number;deck:CardRef[];hand:CardRef[];monsters:Monster[];backrow:Backrow[];grave:CardRef[];extra?:CardRef[];field?:Backrow|null;banished?:CardRef[];summoned:boolean;battleProtectedUntil?:number};
 export type Action=
@@ -13,9 +14,10 @@ export type Action=
  |{kind:'fusion';card:string;extra:string;materials:string[];position:'atk'|'def'}
  |{kind:'position';card:string;mode:'atk'|'def'|'flip'}
  |{kind:'attack';card:string;target?:string}|{kind:'trap';card:string;target:string}
+ |{kind:'monsterEffect';card:string;discards:string[]}
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
-export type Pending={kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
+export type Pending={kind:'monsterEffect';actor:number;card:string;id:string}|{kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
 export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;chain:ChainLink[];choice?:{actor:number;targets:string[]};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
@@ -80,6 +82,16 @@ export function legalActions(s:DuelState,actor:string):Action[]{
       }
     }else actions.push(...spellActions(s,index,c));
   }
+  for(const m of p.monsters){
+   const e=m.faceUp?getMonsterEffect(m.id):undefined;
+   if(e?.trigger==='ignition'){
+    const context={lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,usedThisTurn:m.effectUsedTurn===s.turn};
+    if(canActivateMonsterEffect(e,context)){
+     const n=e.cost?.kind==='discard'?e.cost.count:0;
+     for(const discards of combos(p.hand.map(c=>c.uid),n))actions.push({kind:'monsterEffect',card:m.uid,discards});
+    }
+   }
+  }
   for(const m of p.monsters)if(m.entered<s.turn&&m.changed<s.turn&&m.attacked<s.turn)actions.push({kind:'position',card:m.uid,mode:!m.faceUp?'flip':m.position==='atk'?'def':'atk'});
   if(s.turn>1)actions.push({kind:'battle'});
  }else if(s.phase==='battle'){
@@ -106,6 +118,17 @@ function resolve(s:DuelState){
   if(effect?.kind==='justDesserts'){const op=s.players[1-link.actor];op.lp=Math.max(0,op.lp-500*op.monsters.length);checkLP(s);}
   discardBackrow(s,link.card);},link=>{discardBackrow(s,link.card);},()=>s.phase==='finished');
  s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};return;}const pending=s.pending;s.pending={kind:'none'};s.phase=s.resume;
+ if(pending.kind==='monsterEffect'){
+  const p=s.players[pending.actor],m=p.monsters.find(m=>m.uid===pending.card),e=getMonsterEffect(pending.id);
+  if(!m||!m.faceUp||!e)return;
+  if(e.operation.kind==='heal')p.lp+=e.operation.amount;
+  else if(e.operation.kind==='burn'){const op=s.players[1-pending.actor];op.lp=Math.max(0,op.lp-e.operation.amount);checkLP(s);}
+  else if(e.operation.kind==='draw'){
+   if(p.deck.length<e.operation.count){finish(s,1-pending.actor,'não conseguiu comprar uma carta');return;}
+   p.hand.push(...p.deck.splice(0,e.operation.count));
+  }
+  note(s,'Efeito de monstro resolvido.');return;
+ }
  if(pending.kind==='end'){endTurn(s);return;}
  if(pending.kind==='battle'){s.phase='battle';note(s,'Fase de Batalha.');return;}
  if(pending.kind==='field'){const f=s.players[pending.actor].field;if(f?.uid===pending.card)f.resolved=true;note(s,`${f?card(f.id).name:'Magia de Campo'} entrou em vigor.`);return;}
@@ -158,6 +181,14 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  else if(action.kind==='trap'){
   if(s.phase!=='response')response(s,{kind:'none'},s.phase as 'main'|'battle',1-index);
   const c=p.backrow.find(c=>c.uid===action.card)!;c.faceUp=true;s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target});s.passes=0;s.priority=1-index;note(s,`${p.name} ativou ${card(c.id).name}.`);
+ }else if(action.kind==='monsterEffect'){
+  const m=p.monsters.find(m=>m.uid===action.card)!;const e=getMonsterEffect(m.id)!;
+  const cost=payMonsterEffectCost(e,{lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,usedThisTurn:m.effectUsedTurn===s.turn});
+  if(action.discards.length!==cost.cardsDiscarded||new Set(action.discards).size!==action.discards.length)throw new Error('Custo de descarte inválido.');
+  for(const uid of action.discards){const discarded=p.hand.find(c=>c.uid===uid);if(!discarded)throw new Error('Carta de custo indisponível.');p.hand=p.hand.filter(c=>c.uid!==uid);p.grave.push(discarded);}
+  p.lp-=cost.lpPaid;m.effectUsedTurn=s.turn;
+  note(s,'Efeito de monstro ativado.');
+  response(s,{kind:'monsterEffect',actor:index,card:m.uid,id:m.id},'main');
  }else if(action.kind==='summon'){
   const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);for(const uid of action.tributes)graveMonster(s,uid);
   p.monsters.push({...c,owner:index,position:action.position==='set'?'def':'atk',faceUp:action.position!=='set',entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});p.summoned=true;
@@ -189,6 +220,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
 export function actionLabel(s:DuelState,actor:string,a:Action){
  const p=s.players.find(p=>p.id===actor)!;const all=[...p.hand,...s.players.flatMap(p=>[...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.field?[p.field]:[]])];
  const name=(uid:string)=>{for(const owner of s.players){const zone=owner.monsters.findIndex(m=>m.uid===uid);if(zone>=0){const m=owner.monsters[zone];return `${owner.id===actor?'Seu':'Rival'} M${zone+1} ${m.faceUp||owner.id===actor?card(m.id).name:'virado para baixo'}`;}const back=owner.backrow.findIndex(b=>b.uid===uid);if(back>=0){const b=owner.backrow[back];return `${owner.id===actor?'Sua':'Rival'} M/A${back+1} ${b.faceUp||owner.id===actor?card(b.id).name:'virada para baixo'}`;}if(owner.field?.uid===uid)return owner.field.faceUp||owner.id===actor?card(owner.field.id).name:'Campo rival virado para baixo';}const c=all.find(c=>c.uid===uid);return c?card(c.id).name:'carta';};
+ if(a.kind==='monsterEffect')return `Ativar efeito: ${name(a.card)}`;
  if(a.kind==='summon')return `${a.position==='set'?'Baixar DEF':'Invocar ATK'}: ${name(a.card)}${a.tributes.length?` | Tributar ${a.tributes.map(uid=>'M'+(p.monsters.findIndex(m=>m.uid===uid)+1)).join(' + ')}`:''}`;
  if(a.kind==='field')return `Ativar ${name(a.card)} na Zona de Campo`;if(a.kind==='setField')return `Baixar ${name(a.card)} na Zona de Campo`;if(a.kind==='fusion')return `Fusão: Espadachim das Chamas (${a.position.toUpperCase()}) | Materiais: ${a.materials.map(name).join(' + ')}`;
  if(a.kind==='set')return `Baixar: ${name(a.card)}`;if(a.kind==='spell')return `Ativar: ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.position?` (${a.position.toUpperCase()})`:''}`;
