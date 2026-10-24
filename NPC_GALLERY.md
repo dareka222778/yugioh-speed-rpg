@@ -1,90 +1,30 @@
-# NPC gallery — v0.7.2
+# Portal de duelistas — Speed RPG
 
-`/npc ver` now opens a private visual character selector: one portrait at a time,
-cyclic previous/next controls, a challenge button for the selected character,
-a complete historical deck browser, and a separate browser for the NPC's actual
-playable adaptation. Deck pages show ten cards; selecting one opens a large card
-with previous/next controls across the entire list, a return to the original page,
-and a link to the official Konami rules. All controls validate the owner.
+## Escopo do produto
 
-## Historical deck verification
+O portal `/npc ver` mostra **somente as cartas que os duelistas usam no nosso RPG**. Joey, Yami Yugi e Seto Kaiba possuem **30 cartas no Deck Principal**, com Deck Adicional somente quando a engine oferece a Fusão correspondente. Não há listas alternativas de decks, nem navegação por cartas não implementadas.
 
-The complete US-numbered products are SDY (2002), SDK (2002), SDJ (2003).
-Each has 50 distinct numbered cards, one copy each. SDJ has 48 main cards and two
-Fusion cards (Thousand Dragon, Flame Swordsman); SDY and SDK each have 50 main.
+## Experiência do jogador
 
-On 2026-10-24 all 50 Konami card IDs in each imported list were compared with the
-corresponding official product page. All three comparisons returned zero missing
-and zero unexpected IDs. Independently extracted official IDs are stored in
-`tests/fixtures/classic-official-cids.json` and asserted by the tests.
+1. Abra `/npc ver`: um duelista por vez, retrato grande, identidade própria, recompensa e desafio diário.
+2. Use **Ver deck** para inspecionar as cartas do baralho jogável, em grupos de até 10.
+3. Escolha **Ampliar carta** para visualizar uma carta individual, com arte, nome, tipo, nível, ATK/DEF e resumo do efeito usado no RPG.
+4. Use **Anterior / Próxima / Voltar ao deck** para navegar. As cartas são lidas diretamente de `src/npcContent.ts`.
+5. Clique em **Duelar** para enfrentar o personagem com aquele mesmo baralho. O acesso aos controles de navegação é restrito ao dono do painel.
 
-- https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=13301000&rp=99999&request_locale=en
-- https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=13301001&rp=99999&request_locale=en
-- https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&pid=13302000&rp=99999&request_locale=en
+O portal é uma interface de consulta: inspecionar uma carta não concede cartas, não altera a coleção e não modifica partidas existentes. Recompensas são creditadas apenas pelas regras de vitória/evento.
 
-Names, set numbers and factual card metadata were imported from YAML Yugi's card
-aggregate (https://dawnbrandbots.github.io/yaml-yugi/cards.json), then membership
-was verified against Konami. The factual catalog is compressed into classicDecks.ts.
-Portuguese names use that catalog's localization; English names are also displayed.
-The official-rule links reflect current rules, not a promised 2002 errata snapshot.
-Card images use the existing YGOPRODeck CDN/cache and may show later printings or
-artwork. Exact original-print artwork is not guaranteed.
+## Design
 
-## Portraits and identity
+- `src/npcContent.ts` define os duelistas, suas 30 cartas jogáveis e recompensas.
+- `src/npcUI.ts` valida o jogador, a página, o modo de exibição e a seleção.
+- `src/npcRenderer.ts` gera a arte visual com retratos e identidade azul Azure.
+- `src/npcPortraits.ts` contém retratos incorporados ao projeto; os pixels renderizam sem baixar retratos em runtime.
+- `src/index.ts` roteia as interações do Discord. IDs antigos apontam para o navegador jogável ou falham na validação; não recriam listas paralelas.
+- `src/cardArt.ts` só aceita imagens de cartas incluídas no catálogo habilitado do RPG.
 
-Official Duel Links character artwork is bundled as optimized WebP in
-npcPortraits.ts, converted by Sharp to PNG before embedding in SVG (librsvg did
-not display embedded WebP in the first preview; this was corrected and tested).
-Source page: https://www.konami.com/yugioh/duel_links/en/series/dm/
-Assets: ../images/character/dm01.png (Yami Yugi), dm02.png (Seto Kaiba),
-dm03.png (Joey Wheeler), relative to that page.
+Retratos/arte dos personagens: © Studio Dice / SHUEISHA, TV TOKYO, KONAMI. Projeto de fã não afiliado à Konami; o uso de ilustrações não implica licença para redistribuição comercial. A identidade visual e a estrutura de navegação foram feitas para este bot.
 
-Illustrations and characters © Studio Dice / SHUEISHA, TV TOKYO, KONAMI.
-This fan project is not affiliated with Konami. Bundling these illustrations
-adds no license grant; commercial distribution needs an appropriate rights review.
-The layout, colors and short characterization lines are original to this bot.
-No Duel Links audio, game engine, UI screenshot or executable code is included.
+## Validação
 
-## Boundaries and implementation
-
-The full historical lists are **inspection-only**. They do not enter the owned
-collection, grant cards, alter an active duel, or become enabled engine cards.
-`Duelar` continues to use the tested 30-card Speed adaptation (Joey also has one
-extra Fusion), and both the UI and the separate playable-deck browser identify it.
-The engine now has a larger audited registry with effect monsters, classic Spells, Counter Traps and Quick-Play support. See npm run progress for the live count. Merely listing a historical effect
-card must not make it playable: the existing spell dispatcher cannot safely
-handle unknown effects. Full historical play still requires effects, target
-selection, response timing, flip/graveyard triggers and additional zone/rule work.
-
-Modules:
-- classicDecks.ts: historical factual catalog, independent of enabled cards.
-- npcPortraits.ts: bundled portrait assets; no runtime portrait download.
-- npcRenderer.ts: Sharp/SVG presentation with embedded font outlines; bounded
-  twelve-image render cache, in-flight de-duplication, existing disk card cache.
-- npcUI.ts: owner-bound controls, validated page models, image attachments and
-  text fallback when visual rendering fails.
-- index.ts: immediate component acknowledgement before rendering, button and
-  select routing. Existing `npc:lobby` controls remain accepted.
-- cardArt.ts: allows only enabled or known archival card IDs, preserving arbitrary
-  path/URL rejection. Missing image labels remain visible in deck pages.
-
-No schema migration or change to DP, ownership, XP or reward claims is required.
-Existing duel snapshots retain their saved names. New Yugi challenges use the
-name Yami Yugi to match the selected official portrait.
-
-## Validation
-
-Build: `npm run build`.
-Tests: Node 22 `node --test tests/*.test.cjs` (native SQLite dependency is ABI-specific).
-The suite covers historical membership and counts, all 150 individually reachable
-cards, page wrapping/return paths, real interaction dispatch, owner rejection,
-invalid indexes, inventory nonmutation, the playable/archive boundary, Discord
-component limits, offline portrait pixels and distinct character output.
-Actual PNG previews were rendered and inspected for portraits, grid and large
-Fusion detail. Live Discord message appearance still needs a real `/npc ver`
-interaction after deployment; a successful unit test or bot login alone does not
-prove Discord has shown the gallery to the user.
-
-## Azure redesign and playable NPCs (2026-10-24)
-
-The playable adaptations for Joey, Yugi, and Kaiba now each have 30 cards, while the 50-card historical product listings remain inspection-only. The theme and UI of the duel, NPC gallery and deck editor share a blue neutral design system. NPC portraits are also shown in live NPC duels and the owner's saved custom portrait can appear in the public duel HUD. Owner-scoped card-by-card hand inspection is available through duel:card components. See ENGINE_PROGRESS.md for what is implemented versus what remains.
+Os testes em `tests/npcGallery.test.cjs`, `tests/interactions.test.cjs` e `tests/npc.test.cjs` verificam a identidade dos decks, navegação por índice, autoria dos botões, limites Discord e 30 partidas simuladas. O workflow também produz prévias PNG sem buscar artes na internet. Aceite visual humano no Discord ainda precisa acontecer antes de integrar à `main`.
