@@ -1,4 +1,6 @@
 import sharp from 'sharp';
+import fs from 'node:fs/promises';
+import {portraitPath} from './profile';
 import {CARD_BACK_PNG,CARD_BACK_WIDTH,CARD_BACK_HEIGHT} from './cardBackAsset';
 import {outlineText as text} from './fontPaths';
 import {getCard} from './collection';
@@ -70,10 +72,18 @@ async function draw(s:DuelState,viewer:string|undefined,provider:typeof getCardA
  for(const [row,index] of [top,bottom].entries()){
   const p=s.players[index],upper=row===0,my=p.id===viewer,y=upper?112:548,accent=index===decisionPlayer(s)?azure.primary:azure.lineMuted;
   svg+=rect(36,y+offset,260,156,'url(#hud)',accent,11)+rect(42,y+6+offset,248,144,'none','#235579',8)+T(53,y+33,p.name,22,azure.text,700,npcIndex===index?160:230)+T(53,y+58,viewer?(my?'VOCÊ':'ADVERSÁRIO'):'DUELISTA',11,azure.primaryBright);
-  if(portrait&&index===npcIndex){try{
-   const npcPng=await sharp(Buffer.from(portrait,'base64')).resize(75,136,{fit:'contain'}).png().toBuffer();
-   overlays.push({input:npcPng,left:220,top:y+offset+5});
-  }catch{/* Character HUD remains legible without external images. */}}
+  // NPC art is bundled and player art comes only from the local, validated
+  // portrait path. Public profiles already expose these chosen illustrations.
+  try{
+   let pixels:Buffer|undefined;
+   if(portrait&&index===npcIndex)pixels=Buffer.from(portrait,'base64');
+   else if(/^\\d{1,20}$/.test(p.id))pixels=await fs.readFile(portraitPath(p.id));
+   if(pixels&&pixels.length<=2*1024*1024){
+    const avatar=await sharp(pixels,{limitInputPixels:8_000_000})
+      .resize(75,136,{fit:'contain'}).png().toBuffer();
+    overlays.push({input:avatar,left:220,top:y+offset+5});
+   }
+  }catch{/* Avatar is optional; duel UI remains complete without it. */}
   svg+=T(53,y+102,`LP ${String(p.lp).padStart(4,'0')}`,35,p.lp>1000?azure.text:azure.danger,700,230);
   const ratio=Math.max(0,Math.min(1,p.lp/4000));svg+=rect(53,y+115+offset,220,8,azure.deep,azure.lineMuted,4);if(ratio)svg+=rect(53,y+115+offset,220*ratio,8,'url(#gold)',azure.primary,4);
   svg+=T(53,y+144,`MÃO: ${p.hand.length}  •  BANIDAS: ${p.banished?.length??0}`,12,azure.muted,700,230);
