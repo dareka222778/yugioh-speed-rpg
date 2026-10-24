@@ -14,6 +14,8 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
   case 'deSpell':return targeted(s.players.flatMap(p=>[...p.backrow,...p.field?[p.field]:[]].filter(t=>t.uid!==c.uid&&(!t.faceUp||getCard(t.id)?.kind==='spell')).map(t=>t.uid)));
   case 'removeTrap':return targeted(s.players.flatMap(p=>p.backrow.filter(t=>t.uid!==c.uid&&t.faceUp&&getCard(t.id)?.kind==='trap').map(t=>t.uid)));
   case 'darkHole':return s.players.some(p=>p.monsters.length)?[{kind:'spell',card:c.uid}]:[];
+  case 'raigeki':return op.monsters.length?[{kind:'spell',card:c.uid}]:[];
+  case 'potOfGreed':return p.deck.length>=2?[{kind:'spell',card:c.uid}]:[];
   case 'cardDestruction':return p.hand.some(h=>h.uid!==c.uid)||op.hand.length?[{kind:'spell',card:c.uid}]:[];
   case 'giantTrunade':return s.players.some(p=>p.field||p.backrow.some(b=>b.uid!==c.uid))?[{kind:'spell',card:c.uid}]:[];
   case 'shieldSword':return s.players.some(p=>p.monsters.some(m=>m.faceUp))?[{kind:'spell',card:c.uid}]:[];
@@ -43,6 +45,13 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
   case 'heal':p.lp+=e.amount;service.note(s,`${p.name} recuperou ${e.amount} PV.`);return true;
   case 'burn':op.lp=Math.max(0,op.lp-e.amount);service.note(s,`${op.name} recebeu ${e.amount} de dano.`);service.checkLP(s);return true;
   case 'darkHole':for(const m of s.players.flatMap(p=>[...p.monsters]))service.destroy(s,m.uid);service.note(s,'Buraco Negro destruiu os monstros do campo.');return true;
+  case 'raigeki':
+   for(const m of [...op.monsters])service.destroy(s,m.uid);
+   service.note(s,'Raigeki destruiu os monstros do adversário.');return true;
+  case 'potOfGreed':
+   if(p.deck.length<2){service.finish(s,1-a.actor,'não conseguiu comprar 2 cartas');return true;}
+   p.hand.push(...p.deck.splice(0,2));
+   service.note(s,`${p.name} comprou 2 cartas com Pote da Ganância.`);return true;
   case 'cardDestruction':{
    const need=s.players.map(p=>p.hand.length),failed=s.players.map((p,i)=>p.deck.length<need[i]);
    for(const [i,p]of s.players.entries()){p.grave.push(...p.hand);p.hand=p.deck.splice(0,need[i]);}
