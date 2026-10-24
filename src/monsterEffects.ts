@@ -2,13 +2,14 @@
  * Each registered effect must have a matching card in effectRegistry.ts.
  * Effects with targets choose them on activation, before the response window.
  */
-export type MonsterTrigger='ignition'|'flip'|'onSummon'|'onDestroy';
+export type MonsterTrigger='ignition'|'flip'|'onSummon'|'onDestroy'|'onSentToGrave';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard'|'tribute';count:number};
 export type MonsterOperation=
  |{kind:'heal'|'burn';amount:number}
  |{kind:'draw';count:number}
  |{kind:'destroy'|'bounce';target:'opponentMonster'|'anyMonster'}
- |{kind:'recover';cardKind:'spell'|'trap'};
+ |{kind:'recover';cardKind:'spell'|'trap'}
+ |{kind:'search';stat:'atk'|'defense';maximum:number};
 export type MonsterEffect={trigger:MonsterTrigger;oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean;fieldMonsterCount?:number};
 
@@ -35,7 +36,9 @@ const monsterEffects:Readonly<Record<string,MonsterEffect>>=Object.freeze({
  '31560081':{trigger:'flip',operation:{kind:'recover',cardKind:'spell'}}, // Magician of Faith
  '28933734':{trigger:'flip',operation:{kind:'recover',cardKind:'trap'}}, // Mask of Darkness
  '60694662':{trigger:'flip',operation:{kind:'draw',count:1}}, // Skelengel
- '11384280':{trigger:'ignition',cost:{kind:'tribute',count:1},operation:{kind:'burn',amount:500}} // Cannon Soldier
+ '11384280':{trigger:'ignition',cost:{kind:'tribute',count:1},operation:{kind:'burn',amount:500}}, // Cannon Soldier
+ '26202165':{trigger:'onSentToGrave',oncePerTurn:true,operation:{kind:'search',stat:'atk',maximum:1500}}, // Sangan
+ '78010363':{trigger:'onSentToGrave',oncePerTurn:true,operation:{kind:'search',stat:'defense',maximum:1500}} // Witch of the Black Forest
 });
 export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return monsterEffects[cardId];}
 
