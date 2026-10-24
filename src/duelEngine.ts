@@ -2,7 +2,7 @@ import {randomInt} from 'node:crypto';
 import {resolveChainLinks,type ChainLink} from './chainEngine';
 import {getMonsterEffect,canActivateMonsterEffect,payMonsterEffectCost,monsterDestructionTarget,type MonsterEffect} from './monsterEffects';
 import {getCard} from './collection';
-import {enabledCardIds,getEffect} from './effectRegistry';
+import {enabledCardIds,getEffect,isQuickPlaySpell} from './effectRegistry';
 import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips} from './classicEffects';
 export type CardRef={uid:string;id:string;properlySummoned?:boolean};
 export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
@@ -77,7 +77,7 @@ function trapActions(s:DuelState,index:number):Action[]{
   const effect=getEffect(c.id);if(!effect||effectNameBlocked(s,index,c.id))continue;
   if(effect.kind==='magicJammer'){
    if(s.phase==='response'&&!counterWindow){
-    const spellTarget=lastKind==='mysticalSpaceTyphoon'?last?.card:!last&&['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending?s.pending.card:undefined;
+    const spellTarget=last&&isQuickPlaySpell(last.id)?last.card:!last&&['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending?s.pending.card:undefined;
     if(spellTarget)for(const discarded of s.players[index].hand)out.push({kind:'trap',card:c.uid,target:spellTarget,discards:[discarded.uid]});
    }
    continue;
@@ -94,6 +94,8 @@ function trapActions(s:DuelState,index:number):Action[]{
   else if(effect.kind==='justDesserts'&&s.players[1-index].monsters.length)out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='mirrorForce'&&s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='declare'&&s.pending.actor!==index)
    out.push({kind:'trap',card:c.uid,target:''});
+  else if(effect.kind==='torrentialTribute'&&s.phase==='response'&&['summon','flip','specialSummon'].includes(s.pending.kind)&&s.players.some(p=>p.monsters.length))
+   out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='trapHole'&&s.phase==='response'&&s.pending.kind==='summon'&&s.pending.actor!==index){const m=findMonster(s,s.pending.card)?.m;if(m?.faceUp&&atk(m,s)>=1000)out.push({kind:'trap',card:c.uid,target:m.uid});}
  }return out;
 }
@@ -108,11 +110,15 @@ function quickSpellActions(s:DuelState,index:number):Action[]{
  if(lastKind==='magicJammer'||lastKind==='sevenTools')return [];
  if(s.pending.kind==='attack'&&s.pending.stage==='damage')return [];
  const p=s.players[index],candidates=[
-  ...p.backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&getEffect(c.id)?.kind==='mysticalSpaceTyphoon'),
-  ...index===s.current&&p.backrow.length<3?p.hand.filter(c=>getEffect(c.id)?.kind==='mysticalSpaceTyphoon'):[]
+  ...p.backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&isQuickPlaySpell(c.id)),
+  ...index===s.current&&p.backrow.length<3?p.hand.filter(c=>isQuickPlaySpell(c.id)):[]
  ];
- const targetUids=s.players.flatMap(player=>[...player.backrow,...player.field?[player.field]:[]].map(c=>c.uid));
- return candidates.flatMap(c=>targetUids.filter(uid=>uid!==c.uid).map(target=>({kind:'spell',card:c.uid,target} as Action)));
+ return candidates.flatMap(c=>{
+  const targetUids=getEffect(c.id)?.kind==='bookOfMoon'
+   ?s.players.flatMap(player=>player.monsters.filter(m=>m.faceUp).map(m=>m.uid))
+   :s.players.flatMap(player=>[...player.backrow,...player.field?[player.field]:[]].map(card=>card.uid).filter(uid=>uid!==c.uid));
+  return targetUids.map(target=>({kind:'spell',card:c.uid,target} as Action));
+ });
 }
 export function legalActions(s:DuelState,actor:string):Action[]{
  const index=s.players.findIndex(p=>p.id===actor);if(index<0||s.phase==='finished')return [];
@@ -241,13 +247,24 @@ function resolve(s:DuelState){
    note(s,'Tufão Espacial Místico destruiu o alvo sem negar sua ativação.');
    discardBackrow(s,link.card);return;
   }
+  if(effect?.kind==='bookOfMoon'){
+   const m=findMonster(s,link.target)?.m;
+   if(m?.faceUp){m.faceUp=false;m.position='def';m.changed=s.turn;note(s,`Livro da Lua virou ${card(m.id).name} para Defesa com a face para baixo.`);}
+   discardBackrow(s,link.card);return;
+  }
+  if(effect?.kind==='torrentialTribute'){
+   const monsters=s.players.flatMap(p=>p.monsters.map(m=>m.uid));
+   for(const uid of monsters)graveMonster(s,uid);
+   note(s,`Tributo Torrencial destruiu ${monsters.length} monstro(s) no campo.`);
+   discardBackrow(s,link.card);return;
+  }
   if(effect?.kind==='sevenTools'){
    const negated=s.chain.find(other=>other.card===link.target);
    if(negated){negated.negated=true;note(s,'Sete Ferramentas negou a ativação da Armadilha.');}
    discardBackrow(s,link.card);return;
   }
   if(effect?.kind==='magicJammer'){
-   const spellLink=s.chain.find(other=>other.card===link.target&&getEffect(other.id)?.kind==='mysticalSpaceTyphoon');
+   const spellLink=s.chain.find(other=>other.card===link.target&&isQuickPlaySpell(other.id));
    if(spellLink){spellLink.negated=true;note(s,'Bloqueador de Magia negou uma Magia Rápida na corrente.');}
    else if(['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending&&s.pending.card===link.target){
     s.pendingNegated=true;
@@ -435,7 +452,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   let c=p.hand.find(c=>c.uid===action.card);if(c){p.hand=p.hand.filter(c=>c.uid!==action.card);p.backrow.push({...c,setTurn:s.turn,faceUp:true});}else{const back=p.backrow.find(c=>c.uid===action.card)!;back.faceUp=true;c=back;}
   note(s,`${p.name} ativou ${card(c.id).name}.`);
   if(s.phase==='response'){
-   if(getEffect(c.id)?.kind!=='mysticalSpaceTyphoon')throw new Error('Só Magias Rápidas podem responder.');
+   if(!isQuickPlaySpell(c.id))throw new Error('Só Magias Rápidas podem responder.');
    s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target??''});s.passes=0;s.priority=1-index;
   }else response(s,{kind:'spell',actor:index,card:c.uid,id:c.id,...action.target?{target:action.target}:{},...action.position?{position:action.position}:{}},'main');
  }else if(action.kind==='position'){
