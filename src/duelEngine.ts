@@ -63,7 +63,12 @@ function searchDeckTargets(s:DuelState,actor:number,stat:'atk'|'defense',maximum
   return info.kind==='monster'&&typeof info[stat]==='number'&&info[stat]<=maximum;
  }).map(c=>c.uid);
 }
+/** Continuous effects are recalculated from face-up field state, not cached. */
+function trapsNegated(s:DuelState):boolean{
+ return s.players.some(p=>p.monsters.some(m=>m.faceUp&&getMonsterEffect(m.id)?.operation.kind==='negateTraps'));
+}
 function trapActions(s:DuelState,index:number):Action[]{
+ if(trapsNegated(s))return [];
  const out:Action[]=[];
  for(const c of s.players[index].backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&card(c.id).kind==='trap')){
   const effect=getEffect(c.id);if(!effect||effectNameBlocked(s,index,c.id))continue;
@@ -170,6 +175,9 @@ function activateGraveTrigger(s:DuelState,event:{actor:number;card:string;id:str
 }
 function resolve(s:DuelState){
  resolveChainLinks(s.chain,link=>{
+  // Jinzo negates Trap effects on the field at the moment each link resolves;
+  // costs already paid and cards activated earlier still go to the Graveyard.
+  if(trapsNegated(s)){note(s,'Jinzo negou um efeito de Armadilha.');discardBackrow(s,link.card);return;}
   const target=findMonster(s,link.target)?.m;const effect=getEffect(link.id);
   if(target?.faceUp){if(effect?.kind==='reinforcements')target.atkBoost+=500;else if(effect?.kind==='castleWalls')target.defBoost+=500;else if(effect?.kind==='trapHole')graveMonster(s,target.uid);}
   if(effect?.kind==='waboku')s.players[link.actor].battleProtectedUntil=s.turn;
