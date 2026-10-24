@@ -4,7 +4,7 @@
  */
 export type MonsterTrigger='ignition'|'flip'|'onSummon'|'onDestroy';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard';count:number};
-export type MonsterOperation={kind:'heal'|'burn';amount:number}|{kind:'draw';count:number};
+export type MonsterOperation={kind:'heal'|'burn';amount:number}|{kind:'draw';count:number}|{kind:'destroy';target:'opponentMonster'};
 export type MonsterEffect={trigger:MonsterTrigger;oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean};
 export function canActivateMonsterEffect(effect:MonsterEffect,ctx:MonsterEffectContext):boolean{
