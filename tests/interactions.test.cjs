@@ -85,7 +85,7 @@ test('laboratory slash command creates a six-effect trial duel without awarding 
  const record=require('../dist/duelStore').currentDuel('1199');
  assert.ok(record);assert.ok(record.state.fixedOpening);
  const ids=new Set([...record.state.players[0].hand,...record.state.players[0].deck].map(c=>c.id));
- for(const id of ['54652250','07089711','31560081','28933734','60694662','11384280','26202165','78010363','77585513','54098121','77414722','03819470'])assert.ok(ids.has(id),`Missing test card ${id}`);
+ for(const id of ['54652250','07089711','31560081','28933734','60694662','11384280','26202165','78010363','77585513','54098121','77414722','03819470','83011277'])assert.ok(ids.has(id),`Missing test card ${id}`);
  assert.deepEqual(db.getCollection('1199'),before);
 });
 test('duel invitation is accepted only by its intended opponent without overwriting the public invitation on error',async()=>{
