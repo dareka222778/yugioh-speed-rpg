@@ -96,7 +96,7 @@ function trapActions(s:DuelState,index:number):Action[]{
    out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='torrentialTribute'&&s.phase==='response'&&['summon','flip','specialSummon'].includes(s.pending.kind)&&s.players.some(p=>p.monsters.length))
    out.push({kind:'trap',card:c.uid,target:''});
-  else if(effect.kind==='trapHole'&&s.phase==='response'&&['summon','flip'].includes(s.pending.kind)&&s.pending.actor!==index){const m='card' in s.pending?findMonster(s,s.pending.card)?.m:undefined;if(m?.faceUp&&atk(m,s)>=1000)out.push({kind:'trap',card:c.uid,target:m.uid});}
+  else if(effect.kind==='trapHole'&&s.phase==='response'&&(s.pending.kind==='summon'||s.pending.kind==='flip')&&s.pending.actor!==index){const m=findMonster(s,s.pending.card)?.m;if(m?.faceUp&&atk(m,s)>=1000)out.push({kind:'trap',card:c.uid,target:m.uid});}
  }return out;
 }
 
