@@ -6,15 +6,16 @@ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'discord-interactions-'));
 process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
 process.env.DISCORD_TOKEN='test-token';process.env.DISCORD_CLIENT_ID='123';
 const discord=require('discord.js');let client;let registered;
-let signal;const ready=new Promise(r=>{signal=r;});
-const publicUpdates=[];
-class TestClient extends EventEmitter{constructor(){super();client=this;this.channels={fetch:async()=>({messages:{fetch:async()=>({edit:async payload=>publicUpdates.push(payload)})}})};}async login(){this.loggedIn=true;signal();}}
-class TestREST{setToken(){return this;}async put(route,payload){assert.equal(client.loggedIn,true,'login must not wait for command synchronization');registered=payload.body;}}
+let signal;const ready=new Promise(r=>{signal=r;});let registrationSignal;const registrationReady=new Promise(r=>{registrationSignal=r;});let registrationAttempts=0;
+const publicUpdates=[];let loginAttempts=0;const clientInstances=[];
+class TestClient extends EventEmitter{constructor(){super();client=this;clientInstances.push(this);this.channels={fetch:async()=>({messages:{fetch:async()=>({edit:async payload=>publicUpdates.push(payload)})}})};}async login(){if(++loginAttempts===1)throw Object.assign(new Error('DNS test'),{code:'ENOTFOUND'});this.loggedIn=true;signal();}}
+class TestREST{setToken(){return this;}async put(route,payload){assert.equal(client.loggedIn,true,'login must not wait for command synchronization');if(++registrationAttempts===1)throw Object.assign(new Error('REST DNS test'),{code:'EAI_AGAIN'});registered=payload.body;registrationSignal();}}
 const original=Module._load;
 Module._load=function(name,parent,isMain){
  if(name==='discord.js')return {...discord,Client:TestClient,REST:TestREST};
  if(name==='./duelUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDuelPublic:async(...args)=>ui.duelPublicMessage(...args),visualDuelPrivate:async(...args)=>ui.duelPrivateMessage(...args)};}
  if(name==='./deckUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDeckMessage:async(...args)=>ui.deckMessage(...args)};}
+ if(name==='./networkRetry'&&parent.filename.endsWith('/dist/index.js')){const network=original.apply(this,arguments);return {...network,retryNetwork:(work,label)=>network.retryNetwork(work,label,{sleep:async()=>{},log:()=>{}})};}
  if(name==='./cardArt'&&parent.filename.endsWith('/dist/index.js'))return {getCardArt:async()=>null};
  return original.apply(this,arguments);
 };
@@ -31,7 +32,7 @@ function interaction(kind,commandName,extra={}){
 }
 async function dispatch(i){await ready;await client.listeners(discord.Events.InteractionCreate)[0](i);}
 test('registered collection command acknowledges and returns the real inventory',async()=>{
- await ready;await Promise.resolve();assert.ok(registered.some(c=>c.name==='colecao'));assert.ok(registered.some(c=>c.name==='carta'));
+ await ready;await registrationReady;assert.equal(registrationAttempts,2);assert.equal(loginAttempts,2);assert.equal(clientInstances.length,2);assert.notStrictEqual(clientInstances[0],clientInstances[1]);assert.ok(registered.some(c=>c.name==='colecao'));assert.ok(registered.some(c=>c.name==='carta'));
  db.createPlayer('101','Kise');db.chooseStarterDeck('101','spellcaster');
  const {i,calls}=interaction('command','colecao');await dispatch(i);
  assert.deepEqual(calls.map(c=>c[0]),['defer','edit']);
