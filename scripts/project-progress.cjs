@@ -18,21 +18,21 @@ const engine=[
  {id:'ignition',name:'Ignição e custos (LP, descarte, Tributo)',weight:8,done:7},
  {id:'graveyard',name:'Gatilhos e buscas do Cemitério',weight:8,done:6},
  {id:'summon',name:'Gatilhos de invocação e invocações especiais',weight:7,done:5},
- {id:'destruction',name:'Outros gatilhos de destruição e ordem de eventos',weight:7,done:2},
+ {id:'destruction',name:'Outros gatilhos de destruição e ordem de eventos',weight:7,done:3},
  {id:'continuous',name:'Efeitos contínuos, rápidos e negações complexas',weight:8,done:4},
- {id:'playableCards',name:'Cobertura e validação das cartas jogáveis deste RPG',weight:7,done:4},
+ {id:'playableCards',name:'Cobertura e validação das cartas jogáveis deste RPG',weight:7,done:5},
  {id:'npc',name:'IA dos NPCs com efeitos',weight:4,done:4},
  {id:'acceptance',name:'CI, testes de regressão e aceitação real no Discord',weight:5,done:4}
 ];
 const layout=[
  {id:'design',name:'Sistema de design azul, hierarquia, tipografia',weight:12,done:9},
  {id:'portraits',name:'Retratos, identidades e apresentações dos duelistas',weight:15,done:8},
- {id:'gallery',name:'Galeria, decks e navegação carta por carta',weight:15,done:11},
+ {id:'gallery',name:'Galeria, decks e navegação carta por carta',weight:15,done:14},
  {id:'arena',name:'Campo e HUD responsivos no estilo Duel Links',weight:20,done:13},
  {id:'feedback',name:'Feedback visual de invocações e efeitos',weight:12,done:4},
  {id:'responsive',name:'Layouts desktop, mobile e Discord',weight:10,done:3},
- {id:'accessibility',name:'Usabilidade, botões e acessibilidade',weight:10,done:5},
- {id:'validation',name:'Testes, capturas e validação visual humana',weight:6,done:3}
+ {id:'accessibility',name:'Usabilidade, botões e acessibilidade',weight:10,done:6},
+ {id:'validation',name:'Testes, capturas e validação visual humana',weight:6,done:4}
 ];
 
 function calculate(items){
