@@ -1,17 +1,17 @@
-# Acompanhamento — Engine clássica e redesign Duel Links
+# Acompanhamento — Engine clássica e padrão visual dos comandos
 
 **Branch de trabalho:** `classic-engine-foundation` (não altera `main`).
 
-**Métrica:** escopo da **primeira etapa de engine clássica adaptada** e da **futura reformulação visual**, cada uma com 100 pontos. Estes percentuais são **avaliações de marcos**, não uma porcentagem oficial de compatibilidade com todas as cartas da Konami. O comando `npm run progress` lê pontuações versionadas em `scripts/project-progress.cjs` e verifica separadamente a prontidão dos decks realmente jogáveis de Yugi, Kaiba e Joey.
+**Métrica:** escopo da **engine clássica adaptada** e da **padronização visual dos comandos sem modificar o tabuleiro de duelo**, cada uma com 100 pontos. Estes percentuais são **avaliações de marcos**, não uma porcentagem oficial de compatibilidade com todas as cartas da Konami. O comando `npm run progress` lê pontuações versionadas em `scripts/project-progress.cjs` e verifica separadamente a prontidão dos decks realmente jogáveis de Yugi, Kaiba e Joey.
 
 ## Estado desta revisão
 
 | Área | Concluído | Falta |
 | --- | ---: | ---: |
-| Engine clássica adaptada | **80%** | **20%** |
-| Reformulação visual inspirada em Duel Links | **61%** | **39%** |
+| Engine clássica adaptada | **85%** | **15%** |
+| Padrão visual compartilhado dos comandos | **47%** | **53%** |
 
-A reformulação Azure está implementada parcialmente na arena, na mão, na galeria de NPCs e no editor de decks. Os **61 pontos representam trabalho funcional e testado automaticamente**, mas não substituem revisões humanas em desktop/mobile e ajustes gráficos finais.
+**O campo de duelo original (âmbar) foi restaurado integralmente.** Ele não faz parte do redesign dos comandos e há teste de regressão impedindo que a aparência seja alterada. O padrão visual azul é aplicado aos painéis e comandos do bot, como galeria de NPCs, editor do jogador e controles de cartas. Os **47 pontos representam somente o trabalho já funcional e testado nesses comandos**, não mudanças no campo nem aceite humano.
 
 ### Critérios de pontuação da engine
 
@@ -20,40 +20,40 @@ A reformulação Azure está implementada parcialmente na arena, na mão, na gal
 | Formato 4000 PV, três zonas, 20–30 cartas | 10 | 10 | Implementado |
 | Turnos, combate e encerramento | 9 | 9 | Implementado; mais detalhes de timing pendentes |
 | Magias e Armadilhas | 9 | 8 | Bloqueador de Magia, Sete Ferramentas, Pote, Raigeki e Tufão jogáveis; outras cartas faltam |
-| Correntes, prioridades e respostas | 10 | 8 | Correntes Speed 2/3, negação real e MST: destruir não nega; timing TCG completo falta |
+| Correntes, prioridades e respostas | 10 | 9 | Magias Rápidas compartilhadas, Livro da Lua e MST em correntes, Bloqueador/Sete Ferramentas; timing completo ainda falta |
 | FLIP e cálculo de dano | 8 | 7 | Efeitos de cinco monstros reais; cenários raros pendentes |
 | Ignição e custos | 8 | 7 | Cannon Soldier + mecanismo genérico de custo |
 | Cemitério e buscas | 8 | 6 | Sangan/Witch e Tomate Místico; fila de eventos e busca/Invocação-Especial |
-| Gatilhos de invocação e invocações especiais | 7 | 5 | Reações Normais/Virar e recrutamento DARK do Tomate Místico; especiais avançadas pendentes |
-| Outros gatilhos de destruição | 7 | 3 | Força do Espelho, destruição em área por efeito separada de batalha; regras amplas pendentes |
+| Gatilhos de invocação e invocações especiais | 7 | 6 | Janelas reativas após Normal, Virar, Fusão, Monster Reborn e recrutamento do Deck; especiais avançadas pendentes |
+| Outros gatilhos de destruição | 7 | 5 | Força do Espelho, Tributo Torrencial, Sakuretsu e banimento do Sem Fundo; causas de destruição distintas |
 | Contínuos, rápidos, negações complexas | 8 | 4 | Jinzo, MST Rápido e negações; monstros rápidos e efeitos avançados pendentes |
-| Catálogo de cartas utilizáveis no RPG | 7 | 5 | Registro de cartas executáveis, decks reais e ocultação de cartas ainda não programadas |
+| Catálogo de cartas utilizáveis no RPG | 7 | 6 | Registro auditado, quatro novas cartas com regras reais e laboratório com 24; decks de 30 válidos |
 | IA dos NPCs | 4 | 4 | Reações, descarte, recrutamento, Magias Rápidas e decks de 30; heurística não exaustiva |
 | CI, regressão e aceite no Discord | 5 | 4 | Testes de motor/UI e 30 partidas simuladas; aceite humano na hospedagem pendente |
-| **Total** | **100** | **80** | |
+| **Total** | **100** | **85** | |
 
 O progresso de regras é **deliberadamente independente do total de cartas habilitadas**, pois um catálogo com muitos monstros normais não representa toda a complexidade de efeitos e correntes.
 
-### Critérios da futura fase de layout
+### Critérios do padrão visual compartilhado (sem alterar a arena)
 
 | Entrega | Peso | Concluído |
 | --- | ---: | ---: |
 | Sistema visual (azul, tipografia e hierarquia) | 12 | 9 |
 | Retratos e identidade dos duelistas | 15 | 8 |
 | Navegação individual de cartas e decks | 15 | 14 |
-| Arena com HUD e campo de duelo | 20 | 13 |
-| Feedback de efeitos e invocações | 12 | 4 |
+| Padronização de painéis dos comandos, mantendo arena original | 20 | 2 |
+| Feedback de ações e resultados fora do tabuleiro | 12 | 1 |
 | Responsividade e integração com Discord | 10 | 3 |
 | Usabilidade e acessibilidade | 10 | 6 |
 | Capturas, testes e revisão humana | 6 | 4 |
-| **Total** | **100** | **61** |
+| **Total** | **100** | **47** |
 
 ## Regras para avançar pontuações
 
 1. Entregas ganham pontos somente junto a código funcional, testes, documentação e/ou validação visual pertinentes.
 2. A prontidão dos decks do nosso RPG é medida em `scripts/duel-readiness.cjs` e `npm run progress`, a partir do registro de efeitos que realmente funcionam.
 3. Um resultado verde de CI confirma regressões testadas, **não** suporte integral às regras do jogo.
-4. O redesenho só ganha pontos quando seus novos componentes forem realmente implementados e revisados; não se contabiliza layout legado.
+4. A padronização visual só ganha pontos quando aplicada e verificada nos comandos; **nenhuma modificação no tabuleiro original será contabilizada ou feita sem solicitação específica**.
 5. Ao fim de cada bloco de desenvolvimento, executar `npm ci`, `npm run check`, `npm test`, `npm run progress`. No GitHub Actions, essas etapas rodam automaticamente para a branch.
 6. Antes de incorporar à `main`, testar manualmente jogabilidade, resultados, cartas ocultas, persistência e apresentação no Discord.
 
@@ -75,7 +75,7 @@ O progresso de regras é **deliberadamente independente do total de cartas habil
 - **Sete Ferramentas do Bandido (03819470):** responde diretamente à última ativação de Armadilha, custa 1000 PV pagos antes da corrente e impede a resolução do elo negado; também pode responder a outras Armadilhas de Resposta.
 - **Prioridade de resposta:** Armadilhas comuns não podem responder a uma Armadilha de Resposta recém-ativada (Velocidade de Magia 3). As correntes são resolvidas do último elo para o primeiro, conservando custos já pagos.
 - **Ventríloco Misterioso (54098121):** quando outro monstro de qualquer duelista é Invocado normalmente ou por Virar, ganha 500 PV para o controlador. Não ativa ao ser ele próprio invocado, por baixar monstro com a face para baixo ou por revelar um monstro durante batalha. Múltiplas cópias geram gatilhos em fila; interações simultâneas complexas continuam fora do escopo completo.
-- O laboratório gratuito de cartas virtuais passa a conter os três itens acima, mantendo **20 cartas** e a Fusão demonstrativa.
+- O laboratório mantém a Fusão demonstrativa e, nesta etapa, foi ampliado para **24 cartas virtuais**, incluindo Livro da Lua, Tributo Torrencial, Sakuretsu e Sem Fundo.
 
 **Limite conhecido:** essa implementação modela correntes e janelas de resposta das cartas acima, mas ainda não é um sistema TCG universal (por exemplo, efeitos rápidos arbitrários, regras integrais de simultaneidade/SEGOC e janelas de timing não implementadas).
 
@@ -87,22 +87,22 @@ Testes: `tests/classicBattleRecruiters.test.cjs`, cenários com compra pelo dono
 
 ## Segunda grande entrega — Azure / Decks / Magias Rápidas
 
-**Engine (80%)**
+**Engine (85%, etapa atual)**
 
 - Pote da Ganância (55144522) compra duas cartas; Raigeki (12580477) destrói os monstros adversários e diferencia efeitos que disparam ao enviar cartas ao Cemitério de efeitos de batalha.
 - Tufão Espacial Místico (05318639) é uma Magia Rápida: jogável da mão durante o próprio turno ou previamente baixada, inclusive como resposta; respeita a Velocidade de Magia 3, pode ser negado por Bloqueador de Magia e **não nega automaticamente o efeito** de outra Magia/Armadilha apenas por destruí-la.
 - Joey, Yugi e Kaiba possuem **decks próprios de 30 cartas jogáveis**, usando somente cartas auditadas pelo motor. O portal exibe exclusivamente esses decks. Testes de partidas simuladas conferem conservação global das cartas quando elas mudam de controlador.
 
-**Layout Azure (61%)**
+**Padrão Azure nos comandos (47%, etapa atual)**
 
 - src/duelTheme.ts: sistema azul neutro, tokens compartilhados e medição de contraste.
-- src/duelRenderer.ts: arena azul com efeitos luminosos moderados, zonas táticas, LP, fases e correntes, cartas da mão privada e retratos locais de NPCs; dimensões compatíveis com os painéis de Discord.
+- src/duelRenderer.ts: **restaurado ao campo de duelo original anterior à reformulação azul**, preservando zonas, PV e cartas privadas, sem retratos adicionados. Teste protege a aparência anterior.
 - src/duelUI.ts e src/index.ts: **inspeção privada carta por carta**, imagem ampliada, texto e estatísticas, ações legais diretamente relacionadas à carta, anterior/próxima e retorno ao painel. Componente vinculado ao duelista e à revisão do duelo.
 - src/npcRenderer.ts e src/npcUI.ts: apresentação de Yugi, Joey e Kaiba, retratos e navegação individual por todas as cartas dos seus decks jogáveis.
 - src/deckRenderer.ts e src/deckUI.ts: editor de decks azul com painel individual, cópias, quantidade possuída e distinção entre monstro normal e de efeito.
 - Testes novos de contraste, privacidade de cartas escondidas, comportamento real dos botões, formato dos PNGs e pixels dos retratos: tests/azureUI.test.cjs, tests/duelUI.test.cjs e tests/interactions.test.cjs.
 
-**Ainda não concluído:** engine geral do TCG/anime além das cartas implementadas, efeitos rápidos de monstros com variedade de timings, outros efeitos e cartas que ainda não foram programados, animações avançadas, revisão manual em dispositivos reais, otimização de performance no host e deploy efetivo. A porcentagem NÃO implica que 80% de todas as regras/cartas oficiais estejam implementadas nem que 61% de todas as telas imagináveis tenham sido verificadas.
+**Ainda não concluído:** engine geral do TCG/anime além das cartas implementadas, efeitos rápidos de monstros com variedade de timings, outros efeitos e cartas que ainda não foram programados, animações avançadas, revisão manual em dispositivos reais, otimização de performance no host e deploy efetivo. A porcentagem NÃO implica que 85% das regras/cartas oficiais estejam implementadas nem que 47% de todas as telas possíveis tenham sido verificadas.
 
 ## Terceira entrega — catálogo unificado, carta individual e reação à batalha
 
@@ -113,3 +113,18 @@ Testes: `tests/classicBattleRecruiters.test.cjs`, cenários com compra pelo dono
 **Engine:** Força do Espelho (44095762) entra como Armadilha Normal de declaração de ataque; destrói apenas monstros adversários em Ataque, enquanto os de Defesa permanecem. Resolve em correntes com Sete Ferramentas, Tufão Espacial Místico e Jinzo; destruição por efeito não ativa a habilidade de batalha do Tomate Místico. Joey utiliza a carta no seu deck de 30 e pode entregá-la como recompensa da primeira vitória.
 
 **Qualidade:** CI executa testes de permissões, duelos completos, efeitos, indicadores de legalidade e renderização; gera seis imagens de prévia da arena, duelistas e decks. Esses testes não equivalem a uma análise de layout em aparelhos reais nem à publicação da branch na hospedagem.
+
+## Quarta entrega — restauração visual e janelas de resposta avançadas
+
+**Correção de direção:** o renderer do tabuleiro foi revertido para o visual âmbar anterior à reformulação Azure (mesmas cartas de verso, zonas e tamanhos). As telas de comandos continuam usando o tema compartilhado. A mudança reduziu de propósito a pontuação visual: o trabalho removido da arena não conta para o padrão de comandos.
+
+**Engine (85% dos marcos definidos):**
+
+- **Livro da Lua (14087893):** Magia Rápida jogável na mão no próprio turno ou previamente baixada; escolhe um monstro revelado e o coloca em Defesa com a face para baixo. Baixada no turno atual, a Magia Rápida não pode ser ativada. Bloqueador de Magia consegue negar o elo, e o card pode proteger contra destruição que exija monstro revelado.
+- **Tributo Torrencial (53582587):** Armadilha Normal que reage a Invocações Normais, por Virar e Especiais e destrói todos os monstros em campo. As janelas de Fusão, Monster Reborn e recrutamento passam a permitir respostas antes de seguir a partida.
+- **Armadura Sakuretsu (56120475):** escolhe o monstro atacante durante a declaração de ataque e o destrói se ainda for um alvo válido; Livro da Lua e Sete Ferramentas podem interromper a resolução.
+- **Buraco Armadilha Sem Fundo (29401950):** Invocações do adversário com 1500+ ATK permitem destruir **e banir** o monstro; o banimento vai para o verdadeiro dono da carta, não ao Cemitério, e não ativa gatilhos que exigem envio ao Cemitério.
+- Efeitos FLIP passam a conservar os dados do monstro fonte quando destruído durante resposta à Invocação-Virar, evitando perder um gatilho válido.
+- O laboratório de efeitos agora possui 24 cartas; Yugi, Kaiba e Joey têm cartas e decisões de IA associadas às novas reações.
+
+A entrega possui testes automatizados de encadeamentos, timing, banimento, preservação de propriedade, estatísticas, efeitos FLIP e permanência do campo original. **Ainda faltam** SEGOC/timing completo, efeitos de monstro de Velocidade 2 mais complexos, categorias adicionais de invocação, suporte amplo a outras cartas e homologação no Discord.
