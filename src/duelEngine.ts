@@ -18,7 +18,7 @@ export type Action=
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
 export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
-export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'|'monsterTarget'|'monsterSearch'};afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -41,9 +41,9 @@ export function decisionPlayer(s:DuelState){return s.phase==='response'?s.priori
 export function timeoutDuel(input:DuelState):DuelState{if(input.phase==='finished')return input;const s=structuredClone(input);finish(s,1-decisionPlayer(s),'vitória por W.O.: tempo de decisão esgotado');return s;}
 function note(s:DuelState,text:string){s.log.push(text);s.log=s.log.slice(-12);}
 function findMonster(s:DuelState,uid:string){for(const p of s.players){const m=p.monsters.find(m=>m.uid===uid);if(m)return {p,m};}}
-function graveMonster(s:DuelState,uid:string){const found=findMonster(s,uid);if(found){const controller=s.players.indexOf(found.p);const owner=found.m.owner??controller;found.p.monsters=found.p.monsters.filter(m=>m.uid!==uid);s.players[owner].grave.push({uid:found.m.uid,id:found.m.id,...found.m.properlySummoned?{properlySummoned:true}:{}});
+function graveMonster(s:DuelState,uid:string,byBattle=false){const found=findMonster(s,uid);if(found){const controller=s.players.indexOf(found.p);const owner=found.m.owner??controller;found.p.monsters=found.p.monsters.filter(m=>m.uid!==uid);s.players[owner].grave.push({uid:found.m.uid,id:found.m.id,...found.m.properlySummoned?{properlySummoned:true}:{}});
 const effect=getMonsterEffect(found.m.id);
-if(effect?.trigger==='onSentToGrave')(s.graveTriggers??=[]).push({actor:owner,card:found.m.uid,id:found.m.id});
+if(effect?.trigger==='onSentToGrave'||(byBattle&&effect?.trigger==='onBattleDestroyed'))(s.graveTriggers??=[]).push({actor:owner,card:found.m.uid,id:found.m.id});
 cleanEquips(s);}}
 
 function finish(s:DuelState,winner:number|null,reason:string){s.phase='finished';s.winner=winner===null?null:s.players[winner].id;s.reason=reason;note(s,`${winner===null?'Empate':`${s.players[winner].name} venceu`}: ${reason}.`);}
@@ -57,10 +57,10 @@ function monsterTargets(s:DuelState,actor:number,e:MonsterEffect):string[]|undef
  return undefined;
 }
 function effectNameBlocked(s:DuelState,actor:number,id:string):boolean{return s.blockedEffectNames?.[actor]?.[id]===s.turn;}
-function searchDeckTargets(s:DuelState,actor:number,stat:'atk'|'defense',maximum:number):string[]{
+function searchDeckTargets(s:DuelState,actor:number,stat:'atk'|'defense',maximum:number,attribute?:string):string[]{
  return s.players[actor].deck.filter(c=>{
   const info=card(c.id);
-  return info.kind==='monster'&&typeof info[stat]==='number'&&info[stat]<=maximum;
+  return info.kind==='monster'&&typeof info[stat]==='number'&&info[stat]<=maximum&&(!attribute||info.attribute===attribute);
  }).map(c=>c.uid);
 }
 /** Continuous effects are recalculated from face-up field state, not cached. */
@@ -178,9 +178,13 @@ function triggerMonsterEffect(s:DuelState,actor:number,uid:string,trigger:'flip'
 /** Queue field-to-graveyard effects; once-per-turn applies across instances. */
 function activateGraveTrigger(s:DuelState,event:{actor:number;card:string;id:string}):boolean{
  const e=getMonsterEffect(event.id),actor=event.actor;
- if(e?.trigger!=='onSentToGrave'||effectNameBlocked(s,actor,event.id))return false;
+ if(!e||!['onSentToGrave','onBattleDestroyed'].includes(e.trigger)||effectNameBlocked(s,actor,event.id))return false;
  const search=e.operation;
- if(search.kind!=='search'||!searchDeckTargets(s,actor,search.stat,search.maximum).length)return false;
+ if(search.kind==='search'){
+  if(!searchDeckTargets(s,actor,search.stat,search.maximum).length)return false;
+ }else if(search.kind==='specialSummon'){
+  if(s.players[actor].monsters.length>=3||!searchDeckTargets(s,actor,'atk',search.maximumAtk,search.attribute).length)return false;
+ }else return false;
  if(e.oncePerTurn&&s.monsterNameUsed?.[actor]?.[event.id]===s.turn)return false;
  s.monsterNameUsed??=[{},{}];s.monsterNameUsed[actor][event.id]=s.turn;
  note(s,`${card(event.id).name}: efeito ativado ao entrar no Cemitério.`);
@@ -254,15 +258,16 @@ function resolve(s:DuelState){
      cleanEquips(s);note(s,'Efeito devolveu o monstro ao dono.');
     }
    }else note(s,'O alvo do efeito não está mais no campo.');
-  }else if(op.kind==='search'){
-   const targets=searchDeckTargets(s,pending.actor,op.stat,op.maximum);
-   if(targets.length){
+  }else if(op.kind==='search'||op.kind==='specialSummon'){
+   const recruit=op.kind==='specialSummon';
+   const targets=recruit?searchDeckTargets(s,pending.actor,'atk',op.maximumAtk,op.attribute):searchDeckTargets(s,pending.actor,op.stat,op.maximum);
+   if(targets.length&&(!recruit||p.monsters.length<3)){
     s.pending=pending;
-    s.choice={actor:pending.actor,targets,source:'monsterSearch'};s.phase='choice';
-    note(s,'Escolha um monstro elegível do seu Deck.');
+    s.choice={actor:pending.actor,targets:recruit?[...targets,'__skip__']:targets,source:recruit?'monsterRecruit':'monsterSearch'};s.phase='choice';
+    note(s,recruit?'Tomate Místico: escolha um monstro TREVAS de até 1500 ATK ou recuse a Invocação.':'Escolha um monstro elegível do seu Deck.');
     return;
    }
-   note(s,'Nenhum monstro elegível no Deck.');
+   note(s,'Nenhum monstro elegível no Deck ou nenhuma zona livre.');
   }else if(op.kind==='recover'){
    const i=p.grave.findIndex(c=>c.uid===pending.target&&card(c.id).kind===op.cardKind);
    if(i>=0){const [recovered]=p.grave.splice(i,1);p.hand.push(recovered);note(s,'Carta recuperada do Cemitério.');}
@@ -312,10 +317,10 @@ function resolve(s:DuelState){
   if(!pending.target){if(opponent.monsters.length)return;const damage=opponent.battleProtectedUntil===s.turn?0:atk(a,s);opponent.lp=Math.max(0,opponent.lp-damage);note(s,`Ataque direto: ${damage} de dano.`);}
   else if(defender){const d=defender.m;const difference=atk(a,s)-(d.position==='atk'?atk(d,s):def(d,s));
    if(d.position==='atk'){
-    if(difference>0){if(opponent.battleProtectedUntil!==s.turn){graveMonster(s,d.uid);opponent.lp=Math.max(0,opponent.lp-difference);}}
-    else if(difference<0){if(s.players[pending.actor].battleProtectedUntil!==s.turn){graveMonster(s,a.uid);s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}}
-    else if(atk(a,s)>0){if(s.players[pending.actor].battleProtectedUntil!==s.turn)graveMonster(s,a.uid);if(opponent.battleProtectedUntil!==s.turn)graveMonster(s,d.uid);}
-   }else{if(difference>0&&opponent.battleProtectedUntil!==s.turn)graveMonster(s,d.uid);else if(difference<0&&s.players[pending.actor].battleProtectedUntil!==s.turn)s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}
+    if(difference>0){if(opponent.battleProtectedUntil!==s.turn){graveMonster(s,d.uid,true);opponent.lp=Math.max(0,opponent.lp-difference);}}
+    else if(difference<0){if(s.players[pending.actor].battleProtectedUntil!==s.turn){graveMonster(s,a.uid,true);s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}}
+    else if(atk(a,s)>0){if(s.players[pending.actor].battleProtectedUntil!==s.turn)graveMonster(s,a.uid,true);if(opponent.battleProtectedUntil!==s.turn)graveMonster(s,d.uid,true);}
+   }else{if(difference>0&&opponent.battleProtectedUntil!==s.turn)graveMonster(s,d.uid,true);else if(difference<0&&s.players[pending.actor].battleProtectedUntil!==s.turn)s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}
    note(s,`${card(a.id).name} enfrentou ${card(d.id).name}. Diferença: ${Math.abs(difference)}.`);
   }
   checkLP(s);
@@ -402,7 +407,23 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  else if(action.kind==='attack'){
   const m=p.monsters.find(m=>m.uid===action.card)!;m.attacked=s.turn;note(s,`${p.name} declarou um ataque com ${card(m.id).name}.`);response(s,{kind:'attack',actor:index,card:m.uid,target:action.target,stage:'declare'},'battle');
  }else if(action.kind==='choose'){
-  if(s.choice?.source==='monsterSearch'){
+  if(s.choice?.source==='monsterRecruit'){
+   const pending=s.pending,choice=s.choice;
+   if(pending.kind!=='monsterEffect'||!choice.targets.includes(action.target))throw new Error('Invocação inválida.');
+   const op=getMonsterEffect(pending.id)?.operation;
+   if(op?.kind!=='specialSummon')throw new Error('Invocação inválida.');
+   if(action.target!=='__skip__'){
+    const allowed=searchDeckTargets(s,index,'atk',op.maximumAtk,op.attribute);
+    if(p.monsters.length>=3||!allowed.includes(action.target))throw new Error('Monstro inelegível para Invocação-Especial.');
+    const deck=p.deck,i=deck.findIndex(c=>c.uid===action.target);
+    const [found]=deck.splice(i,1);
+    p.monsters.push({...found,owner:index,faceUp:true,position:'atk',entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});
+    for(let j=deck.length-1;j>0;j--){const k=randomInt(j+1);[deck[j],deck[k]]=[deck[k],deck[j]];}
+    note(s,`Tomate Místico Invocou ${card(found.id).name} do Deck.`);
+   }else note(s,'O jogador recusou a Invocação-Especial de Tomate Místico.');
+   s.choice=undefined;s.pending={kind:'none'};s.phase=s.resume;
+   if(action.target!=='__skip__')response(s,{kind:'none'},s.resume,1-index);
+  }else if(s.choice?.source==='monsterSearch'){
    const pending=s.pending;
    if(pending.kind!=='monsterEffect'||!s.choice.targets.includes(action.target))throw new Error('Busca inválida.');
    const source=getMonsterEffect(pending.id),op=source?.operation;
@@ -440,7 +461,8 @@ export function actionLabel(s:DuelState,actor:string,a:Action){
  if(a.kind==='position')return `${a.mode==='flip'?'Virar para ATK':`Mudar para ${a.mode.toUpperCase()}`}: ${name(a.card)}`;
  if(a.kind==='attack'){const target=a.target?findMonster(s,a.target):undefined;return `Atacar: ${name(a.card)} → ${target?name(target.m.uid):'direto'}`;}
  if(a.kind==='trap')return `Ativar ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.discards?.length?` | Descartar ${a.discards.map(name).join(' + ')}`:''}`;
- if(a.kind==='choose')return `${s.choice?.source==='monsterSearch'?'Buscar no Deck':s.choice?.source==='monsterTarget'?'Efeito: escolher':s.choice?.source==='monsterDestroy'?'Efeito: destruir':'Fissura: destruir'} ${name(a.target)}`;
+ if(a.kind==='choose'&&s.choice?.source==='monsterRecruit'&&a.target==='__skip__')return 'Não Invocar (Tomate Místico)';
+ if(a.kind==='choose')return `${s.choice?.source==='monsterRecruit'?'Invocar do Deck':s.choice?.source==='monsterSearch'?'Buscar no Deck':s.choice?.source==='monsterTarget'?'Efeito: escolher':s.choice?.source==='monsterDestroy'?'Efeito: destruir':'Fissura: destruir'} ${name(a.target)}`;
  if(a.kind==='discard')return `Descartar: ${name(a.card)}`;
  return {battle:'Entrar na Batalha',end:'Encerrar turno',pass:'Não responder / passar',concede:'Desistir'}[a.kind];
 }
