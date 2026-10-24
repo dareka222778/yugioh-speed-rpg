@@ -82,3 +82,18 @@ Renderer: `src/cardRenderer.ts`, usando sharp 0.34.5. Cache de imagens do sharp 
 Validação inclui rollback simulado durante entrega, migração de jogador antigo, preservação de saldo/perfil/inventário, reabertura de banco, três conjuntos iniciais, repetição de ações, paginação, busca com acentos e cache/falha de arte. Nenhuma nova dependência npm na Fase 2. `package.json` e `package-lock.json` devem sempre ser atualizados juntos.
 
 Antes de entregar conjuntos a jogadores antigos, a inicialização grava uma cópia de recuperação SQLite em `data/backups` (junto ao banco configurado). Se o backup falhar, a migração não prossegue. A coleção também é contada no banco e registrada nos logs de início para verificação operacional.
+
+
+## Fase 3 — Editor de decks (v0.5)
+
+- `/deck ver` abre o editor; `espaco` escolhe 1, 2 ou 3. Um botão Decks aparece nos novos perfis.
+- No primeiro acesso, o espaço 1 recebe uma composição do conjunto inicial já possuído. Os demais começam vazios. Não há entrega de novas cartas.
+- Selecione uma carta e use +1/−1, troque de espaço, renomeie e ative um deck válido. As alterações são salvas imediatamente no SQLite; não é necessário clicar em Salvar.
+- Alternativas por comando: `/deck adicionar`, `/deck remover` (carta, quantidade, espaco), `/deck nome` (texto, espaco), `/deck ativar` e `/deck inicial`.
+- Copiar o conjunto inicial exige um espaço vazio e nunca sobrescreve um deck existente.
+- Regras deste protótipo de RPG: 20–30 cartas, até 3 cópias por identificador, respeitando a quantidade da coleção. Não é um verificador de listas oficiais de torneio.
+- Um único deck pode estar ativo por jogador. Um rascunho com menos de 20 cartas é salvo, mas não pode ser ativado. Editar um ativo até ficar inválido desativa esse deck. O jogador precisa ativá-lo novamente quando estiver válido.
+- As mesmas cópias podem compor decks diferentes: editar um deck não vende, consome ou apaga cartas da coleção. As tabelas decks/deck_cards são adicionais e não alteram os dados de perfil.
+- Painéis e modais usam revisão para rejeitar alterações antigas; botões privados verificam o proprietário. Gravações são transacionais.
+- Testes incluem os três conjuntos iniciais, isolamento entre jogadores, persistência após reabrir o banco, limites, invalidação, rollback e o listener real de interações com o transporte Discord simulado. O teste local não substitui uma interação real no Discord.
+- Duelos, efeitos e recompensas permanecem para as próximas fases. Ativar um deck nesta versão só salva a seleção.
