@@ -21,7 +21,7 @@ try{
  ({renderNPC}=require('../dist/npcRenderer'));
 }finally{Module._load=originalLoad;}
 const {renderDeck}=require('../dist/deckRenderer');
-const {classicDeck}=require('../dist/classicDecks');
+const {getCard,kindLabel}=require('../dist/collection');
 const {getNPC}=require('../dist/npcContent');
 
 const dir=path.resolve(process.argv[2]??'artifacts/previews');
@@ -41,9 +41,15 @@ async function run(){
  s.players[1].backrow=[{uid:'enemy-trap',id:'03819470',setTurn:4,faceUp:false}];
  s.players[0].lp=3200;s.players[1].lp=2400;
  s.log=['Yami Yugi comprou uma carta.','Seto Kaiba revelou um monstro.','A fase de Batalha começou.'];
- const gallery=getNPC('kaiba'),archive=classicDeck('kaiba');
- const heroModel={id:'kaiba',name:gallery.name,index:2,prefix:archive.prefix,year:archive.year,won:false,
-   reward:'+200 DP',daily:false,dailyClaimed:false,cards:archive.cards,page:0,view:'hero'};
+ const gallery=getNPC('kaiba');
+ const galleryCards=[...gallery.cards,...gallery.extra].map((id,i)=>{
+  const c=getCard(id);
+  return {...c,slot:i<gallery.cards.length?`PRINCIPAL · ${i+1}`:`ADICIONAL · ${i-gallery.cards.length+1}`,
+   category:kindLabel(c),isExtra:i>=gallery.cards.length};
+ });
+ const heroModel={id:'kaiba',name:gallery.name,index:2,style:gallery.style,description:gallery.description,won:false,
+   reward:'+200 DP',daily:false,dailyClaimed:false,cards:galleryCards,page:0,view:'hero',
+   mainCount:gallery.cards.length,extraCount:gallery.extra.length};
  const cardModel={...heroModel,view:'card',page:0};
  const deck={name:'Deck Azul · Clássico',slot:1,active:false,errors:[],total:20,extraTotal:0,items:[],revision:1};
  const previews=[
