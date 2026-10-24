@@ -19,7 +19,7 @@ test('invalid deck blocks training, revisions reject stale/double/outsider actio
 test('expired invitations and sessions release locks; failed acceptance rolls back all state',()=>{
  const r=store.challenge('101','102','g','c');db.db.prepare('UPDATE duels SET updated=0 WHERE id=?').run(r.id);assert.equal(store.getDuel(r.id).status,'expired');assert.equal(store.currentDuel('101'),undefined);
  const x=store.challenge('101','102','g','c');db.db.exec("CREATE TRIGGER fail_join BEFORE INSERT ON duel_members WHEN NEW.owner='102' BEGIN SELECT RAISE(ABORT,'simulated failure'); END");assert.throws(()=>store.acceptChallenge(x.id,'102','g',0),/simulated/);assert.equal(store.getDuel(x.id).status,'pending');assert.equal(store.currentDuel('102'),undefined);db.db.exec('DROP TRIGGER fail_join');store.declineChallenge(x.id,'101','g');
- const active=store.createTraining('101','g','c');db.db.prepare('UPDATE duels SET updated=0 WHERE id=?').run(active.id);assert.equal(store.getDuel(active.id).status,'expired');assert.equal(store.currentDuel('101'),undefined);
+ const active=store.createTraining('101','g','c');db.db.prepare('UPDATE duels SET updated=0 WHERE id=?').run(active.id);assert.equal(store.getDuel(active.id).status,'finished');assert.match(store.getDuel(active.id).state.reason,/W.O./);assert.equal(store.currentDuel('101'),undefined);
 });
 test('training finishes against NPC, preserves economy, survives reopen and never uses another players session',()=>{
  let r=store.createTraining('103','g','c');store.setDuelMessage(r.id,'c','message-1');const saved=store.getDuel(r.id);
