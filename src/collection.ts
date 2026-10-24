@@ -1,6 +1,7 @@
 import {ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
 import {type Card} from './cardCatalog';
 import {engineCatalog as cards} from './effectRegistry';
+import {getMonsterEffect} from './monsterEffects';
 export const PAGE_SIZE=6;
 const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const byId=new Map(cards.map(c=>[c.id,c]));
@@ -14,7 +15,7 @@ export function exactCard(query:string): Card|undefined {
 }
 const attributes:Record<string,string>={EARTH:'TERRA',WIND:'VENTO',DARK:'TREVAS',LIGHT:'LUZ',FIRE:'FOGO',WATER:'ÁGUA'};
 const races:Record<string,string>={Warrior:'Guerreiro','Beast-Warrior':'Besta-Guerreira',Spellcaster:'Mago',Dragon:'Dragão'};
-export function kindLabel(c:Card) {return c.fusion?'Monstro de Fusão':c.field?'Magia de Campo':c.kind==='monster'?'Monstro Normal':c.kind==='spell'?'Magia':'Armadilha';}
+export function kindLabel(c:Card) {return c.fusion?'Monstro de Fusão':c.field?'Magia de Campo':c.kind==='monster'?(getMonsterEffect(c.id)?'Monstro de Efeito':'Monstro Normal'):c.kind==='spell'?'Magia':'Armadilha';}
 export function collectionMessage(owner:string, inventory:{card_key:string;quantity:number}[], requestedPage=1) {
   const owned=inventory.map(row=>({card:getCard(row.card_key),...row}));
   const known=owned.filter(row=>row.card).sort((a,b)=>a.card!.name.localeCompare(b.card!.name,'pt-BR'));
