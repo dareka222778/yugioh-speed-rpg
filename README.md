@@ -156,7 +156,7 @@ Os alvos são selecionados na ativação, antes da janela de resposta; efeitos n
 
 ### Como experimentar no Discord
 
-Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui nove monstros de efeito clássicos (os seis anteriores, Sangan, Bruxa da Floresta Negra e Jinzo), Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
+Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui dez monstros de efeito clássicos (os seis anteriores, Sangan, Bruxa da Floresta Negra, Jinzo e Ventríloco Misterioso), além de Bloqueador de Magia e Sete Ferramentas do Bandido, Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
 
 Para instalar as alterações no bot hospedado, atualize o código da branch aprovada, compile e reinicie o processo, e registre os novos comandos slash no Discord. Commits no GitHub não atualizam automaticamente uma instância em execução.
 
@@ -173,3 +173,9 @@ A versão atual incorpora Sangan e Bruxa da Floresta Negra: ao irem **do campo p
 ### Efeito contínuo: Jinzo
 
 O Jinzo com face para cima bloqueia a ativação de Armadilhas de ambos os jogadores e nega efeitos de Armadilha no campo durante a resolução de correntes. Seu bloqueio é recalculado conforme o estado do campo; monstros virados para baixo não o aplicam, e a remoção de Jinzo devolve acesso às Armadilhas. O laboratório pode testar esse caso sem conceder cartas. A base está em `src/monsterEffects.ts`, a execução em `src/duelEngine.ts` e os cenários em `tests/classicContinuousEffects.test.cjs`.
+
+### Armadilhas de Resposta e Invocações (marco de engine)
+
+A engine agora admite **Bloqueador de Magia** (custo de descarte, negar ativação de Magia), **Sete Ferramentas do Bandido** (pagar 1000 PV, negar ativação de Armadilha) e correntes que negam outros elos. Armadilhas comuns não podem ser acorrentadas à Velocidade 3, e os custos permanecem pagos quando um elo é negado. **Ventríloco Misterioso** dispara efeito de ganho de PV quando outro monstro é Invocado por Invocação-Normal ou Virar, sem disparar ao próprio entrar em campo ou a um simples virar durante batalha. Os três cards entram no laboratório virtual sem alterar o inventário real.
+
+O escopo e o percentual atualizado por entregas estão documentados em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md). Validação: `tests/classicCounterTraps.test.cjs`, `tests/classicSummonTriggers.test.cjs` e `npm run progress` no GitHub Actions.
