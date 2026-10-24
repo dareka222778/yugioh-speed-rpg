@@ -56,6 +56,11 @@ function ownCardIds(owner:string,slot:number){
  return [...new Set([...inventory.filter(i=>i.quantity>0).map(i=>i.card_key),...deck.items.map(i=>i.card_key)])]
   .filter(id=>!!getCard(id)).sort((a,b)=>getCard(a)!.name.localeCompare(getCard(b)!.name,'pt-BR'));
 }
+export function getDeckCardIndex(owner:string,slot:number,cardId:string){
+ const index=ownCardIds(owner,slot).indexOf(cardId);
+ if(index<0)throw new Error('Essa carta não pertence à sua coleção.');
+ return index;
+}
 export function deckCardMessage(owner:string,slot=1,requestedIndex=0){
  const deck=openDeck(owner,slot),ids=ownCardIds(owner,slot);
  if(!Number.isSafeInteger(requestedIndex)||requestedIndex<0||requestedIndex>=ids.length)
