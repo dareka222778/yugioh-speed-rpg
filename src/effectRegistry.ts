@@ -2,7 +2,7 @@
 import {cards as starterCards,type Card} from './cardCatalog';
 import {classicEngineCards} from './classicEngineCards';
 export type Effect=
- |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'mirrorForce'}
+ |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'sakuretsuArmor'|'mirrorForce'}
  |{kind:'heal'|'burn';amount:number}
  |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
@@ -25,6 +25,7 @@ const effects:Record<string,Effect>={
  '05318639':{kind:'mysticalSpaceTyphoon'},
  '14087893':{kind:'bookOfMoon'},
  '53582587':{kind:'torrentialTribute'},
+ '56120475':{kind:'sakuretsuArmor'},
  '44095762':{kind:'mirrorForce'},
  '38199696':{kind:'heal',amount:500},'84257639':{kind:'heal',amount:1000},'19523799':{kind:'burn',amount:800},
  '66788016':{kind:'fissure'},'24094653':{kind:'polymerization'},
@@ -59,7 +60,8 @@ const supportedCounterTraps:Card[]=[
  {id:'77414722',konamiId:4862,name:'Bloqueador de Magia',englishName:'Magic Jammer',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando uma Magia é ativada: descarte 1 carta; negue a ativação e destrua a Magia.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4862&request_locale=pt'},
  {id:'03819470',konamiId:4863,name:'Sete Ferramentas do Bandido',englishName:'Seven Tools of the Bandit',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando uma Armadilha é ativada: pague 1000 PV; negue a ativação e destrua a Armadilha.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4863&request_locale=pt'},
  {id:'44095762',konamiId:4887,name:'Força do Espelho',englishName:'Mirror Force',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando um monstro do oponente declara um ataque: destrua todos os monstros em Posição de Ataque que o oponente controla.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4887&request_locale=pt'},
- {id:'53582587',konamiId:5114,name:'Tributo Torrencial',englishName:'Torrential Tribute',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando um ou mais monstros forem Invocados: destrua todos os monstros no campo.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5114&request_locale=pt'}
+ {id:'53582587',konamiId:5114,name:'Tributo Torrencial',englishName:'Torrential Tribute',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando um ou mais monstros forem Invocados: destrua todos os monstros no campo.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5114&request_locale=pt'},
+ {id:'56120475',konamiId:5799,name:'Armadura Sakuretsu',englishName:'Sakuretsu Armor',kind:'trap',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Quando um monstro do oponente declarar um ataque: escolha o monstro atacante; destrua o alvo.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5799&request_locale=pt'}
 ];
 const supportedClassicSpells:Card[]=[
  {id:'55144522',konamiId:4844,name:'Pote da Ganância',englishName:'Pot of Greed',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Compre 2 cartas.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4844&request_locale=pt'},
