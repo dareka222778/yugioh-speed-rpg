@@ -154,7 +154,7 @@ test('NPC recognizes lethal ignition burn and selects the cheaper Tribute',()=>{
  s.players[1].monsters=[monster('11384280','cannon',1),monster('91152256','fodder',1)];
  s.players[0].lp=500;
  const chosen=chooseNPC(s,'b');
- assert.equal(chosen.kind,'monsterEffect');assert.equal(chosen.card,'cannon');assert.deepEqual(chosen.tributes,['cannon']);
+ assert.equal(chosen.kind,'monsterEffect');assert.equal(chosen.card,'cannon');assert.deepEqual(chosen.tributes,['fodder']);
 });
 
 after(()=>{require('../dist/database').db.close();fs.rmSync(temporary,{recursive:true,force:true});});
