@@ -41,13 +41,22 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  const actions=legalActions(s,id);const p=s.players.find(p=>p.id===id)!;const op=s.players.find(p=>p.id!==id)!;
  const source=(a:Extract<Action,{kind:'trap'|'spell'}>)=>[...p.hand,...p.backrow].find(c=>c.uid===a.card);
  const fast=actions.filter((a):a is Extract<Action,{kind:'trap'}>=>a.kind==='trap');
- const useful=fast.find(a=>{const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
+ const useful=fast.filter(a=>{const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
   if(effect.kind==='reinforcements'||effect.kind==='castleWalls')return p.monsters.some(m=>m.uid===a.target&&m.faceUp);
   if(effect.kind==='trapHole')return op.monsters.some(m=>m.uid===a.target);
+  if(effect.kind==='magicJammer')
+   return s.pending.kind!=='none'&&'actor' in s.pending&&s.pending.actor!==s.players.indexOf(p);
+  if(effect.kind==='sevenTools'){
+   const last=s.chain.at(-1);
+   return !!last&&last.actor!==s.players.indexOf(p);
+  }
   if(effect.kind==='waboku')return s.pending.kind==='attack'&&s.players[s.pending.actor].id!==id;
   if(effect.kind==='justDesserts')return op.monsters.length>=2||op.lp<=op.monsters.length*500;
   return false;
- });
+ }).sort((a,b)=>{
+  const score=(x:Extract<Action,{kind:'trap'}>)=>x.discards?.reduce((n,uid)=>n+(getCard(p.hand.find(c=>c.uid===uid)!.id)?.atk??0),0)??0;
+  return score(a)-score(b);
+ })[0];
  if(useful)return useful;if(s.phase==='response')return actions.find(a=>a.kind==='pass');
  if(s.phase==='discard')return [...actions].sort((a,b)=>{const score=(x:Action)=>x.kind==='discard'?(getCard(p.hand.find(c=>c.uid===x.card)!.id)!.atk??0):0;return score(a)-score(b);})[0];
  if(s.phase==='choice'){
