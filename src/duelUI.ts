@@ -1,3 +1,4 @@
+import sharp from 'sharp';
 import {ActionRowBuilder,AttachmentBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
 import {legalActions,actionLabel,type DuelState} from './duelEngine';
 import {DECISION_TIMEOUT_MS,type DuelRecord} from './duelStore';
@@ -34,7 +35,14 @@ export function duelPrivateMessage(r:DuelRecord,owner:string,requestedPage=1){
  rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:view:${r.id}:${r.revision}:${page-1}`).setLabel('Anterior').setStyle(ButtonStyle.Secondary).setDisabled(page===1),new ButtonBuilder().setCustomId(`duel:view:${r.id}:${r.revision}:${page}`).setLabel('Atualizar').setStyle(ButtonStyle.Primary),new ButtonBuilder().setCustomId(`duel:view:${r.id}:${r.revision}:${page+1}`).setLabel('Próxima').setStyle(ButtonStyle.Secondary).setDisabled(page===pages),new ButtonBuilder().setCustomId(`duel:quit:${r.id}:${r.revision}`).setLabel('Desistir').setStyle(ButtonStyle.Danger),new ButtonBuilder().setCustomId(`duel:zones:${r.id}:${r.revision}`).setLabel('Cemitério / zonas').setStyle(ButtonStyle.Secondary)));
  return {embeds:[embed],components:rows,attachments:[],allowedMentions:{parse:[] as never[]}};
 }
-export async function visualDuelPrivate(r:DuelRecord,owner:string,page=1){const p=duelPrivateMessage(r,owner,page);const png=await renderDuel(r.state!,owner);p.embeds[0].setImage('attachment://meu-campo.png');return {...p,files:[new AttachmentBuilder(png,{name:'meu-campo.png'})]};}
+export async function visualDuelPrivate(r:DuelRecord,owner:string,page=1){
+ const p=duelPrivateMessage(r,owner,page),s=r.state!,png=await renderDuel(s,owner);
+ if(!s.players.find(player=>player.id===owner)!.hand.length){p.embeds[0].setImage('attachment://meu-campo.png');return {...p,files:[new AttachmentBuilder(png,{name:'meu-campo.png'})]};}
+ // Separate images keep Discord from shrinking the hand to fit a tall board.
+ const [hand,field]=await Promise.all([sharp(png).extract({left:0,top:0,width:1400,height:340}).png().toBuffer(),sharp(png).extract({left:0,top:340,width:1400,height:1020}).png().toBuffer()]);
+ p.embeds[0].setImage('attachment://minha-mao.png');p.embeds.push(new EmbedBuilder().setColor(0x69c9ae).setTitle('Seu campo • visão privada').setImage('attachment://meu-campo.png'));
+ return {...p,files:[new AttachmentBuilder(hand,{name:'minha-mao.png'}),new AttachmentBuilder(field,{name:'meu-campo.png'})]};
+}
 export function quitMessage(r:DuelRecord){return {content:'Desistir encerra o duelo. Confirma?',components:[new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:confirm:${r.id}:${r.revision}`).setLabel('Sim, desistir').setStyle(ButtonStyle.Danger),new ButtonBuilder().setCustomId(`duel:open:${r.id}:${r.revision}`).setLabel('Continuar jogando').setStyle(ButtonStyle.Secondary))],allowedMentions:{parse:[] as never[]}};}
 
 export function duelZonesMessage(r:DuelRecord,viewer:string){
