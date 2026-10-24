@@ -119,8 +119,9 @@ function resolve(s:DuelState){
   discardBackrow(s,link.card);},link=>{discardBackrow(s,link.card);},()=>s.phase==='finished');
  s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};return;}const pending=s.pending;s.pending={kind:'none'};s.phase=s.resume;
  if(pending.kind==='monsterEffect'){
-  const p=s.players[pending.actor],m=p.monsters.find(m=>m.uid===pending.card),e=getMonsterEffect(pending.id);
-  if(!m||!m.faceUp||!e)return;
+  const p=s.players[pending.actor],e=getMonsterEffect(pending.id);
+  // Activated effects remain on the chain even if their source leaves the field.
+  if(!e)return;
   if(e.operation.kind==='heal')p.lp+=e.operation.amount;
   else if(e.operation.kind==='burn'){const op=s.players[1-pending.actor];op.lp=Math.max(0,op.lp-e.operation.amount);checkLP(s);}
   else if(e.operation.kind==='draw'){
