@@ -2,7 +2,7 @@
  * Each registered effect must have a matching card in effectRegistry.ts.
  * Effects with targets choose them on activation, before the response window.
  */
-export type MonsterTrigger='ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onBattleDestroyed'|'onSentToGrave'|'continuous';
+export type MonsterTrigger='quick'|'ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onBattleDestroyed'|'onSentToGrave'|'continuous';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard'|'tribute';count:number};
 export type MonsterOperation=
  |{kind:'heal'|'burn';amount:number}
@@ -11,7 +11,7 @@ export type MonsterOperation=
  |{kind:'recover';cardKind:'spell'|'trap'}
  |{kind:'search';stat:'atk'|'defense';maximum:number}
  |{kind:'specialSummon';attribute:string;maximumAtk:number}
- |{kind:'negateTraps'};
+ |{kind:'negateTraps'|'battleShield'};
 export type MonsterEffect={trigger:MonsterTrigger;oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean;fieldMonsterCount?:number};
 
@@ -33,6 +33,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 
 /** Official card texts: Konami card database (CIDs 4507, 4547, 4434, 4108, 4546, 4518). */
 const monsterEffects:Readonly<Record<string,MonsterEffect>>=Object.freeze({
+ '40640057':{trigger:'quick',cost:{kind:'discard',count:1},operation:{kind:'battleShield'}}, // Kuriboh, self-discard during opposing damage calculation
  '54652250':{trigger:'flip',operation:{kind:'destroy',target:'anyMonster'}}, // Man-Eater Bug
  '07089711':{trigger:'flip',operation:{kind:'bounce',target:'anyMonster'}}, // Hane-Hane
  '31560081':{trigger:'flip',operation:{kind:'recover',cardKind:'spell'}}, // Magician of Faith

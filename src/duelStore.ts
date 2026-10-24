@@ -1,4 +1,5 @@
 import {randomBytes,randomInt} from 'node:crypto';
+import {assertDuelState} from './duelIntegrity';
 import {db,getPlayer} from './database';
 import {openDeck} from './decks';
 import {starterContents} from './cardCatalog';
@@ -13,8 +14,8 @@ db.exec(`CREATE TABLE IF NOT EXISTS duels (id TEXT PRIMARY KEY,guild_id TEXT NOT
  CREATE TABLE IF NOT EXISTS duel_members (owner TEXT PRIMARY KEY,duel_id TEXT NOT NULL REFERENCES duels(id) ON DELETE CASCADE);`);
 const duelColumns=new Set((db.prepare('PRAGMA table_info(duels)').all() as {name:string}[]).map(c=>c.name));
 if(!duelColumns.has('public_revision'))db.exec('ALTER TABLE duels ADD COLUMN public_revision INTEGER NOT NULL DEFAULT -1');
-function read(id:string):DuelRecord|undefined {const row=db.prepare('SELECT * FROM duels WHERE id=?').get(id) as any;if(!row)return;return {...row,state:row.state?JSON.parse(row.state):null,invite:row.invite?JSON.parse(row.invite):null};}
-function save(record:DuelRecord){if(record.status==='finished'&&record.state?.encounter)settleEncounter(record.id,record.state);db.prepare('UPDATE duels SET status=?,revision=?,updated=?,state=?,invite=? WHERE id=?').run(record.status,record.revision,record.updated,record.state?JSON.stringify(record.state):null,record.invite?JSON.stringify(record.invite):null,record.id);if(!['pending','playing'].includes(record.status))db.prepare('DELETE FROM duel_members WHERE duel_id=?').run(record.id);}
+function read(id:string):DuelRecord|undefined {const row=db.prepare('SELECT * FROM duels WHERE id=?').get(id) as any;if(!row)return;let state,invite;try{state=row.state?JSON.parse(row.state):null;invite=row.invite?JSON.parse(row.invite):null;}catch{throw new Error('Dados salvos do duelo inválidos. Nenhuma alteração foi gravada.');}if(state)assertDuelState(state);if(row.status==='playing'&&!state)throw new Error('Estado do duelo inválido: partida ativa sem dados. Nenhuma alteração foi gravada.');return {...row,state,invite};}
+function save(record:DuelRecord){if(record.state)assertDuelState(record.state);if(record.status==='finished'&&record.state?.encounter)settleEncounter(record.id,record.state);db.prepare('UPDATE duels SET status=?,revision=?,updated=?,state=?,invite=? WHERE id=?').run(record.status,record.revision,record.updated,record.state?JSON.stringify(record.state):null,record.invite?JSON.stringify(record.invite):null,record.id);if(!['pending','playing'].includes(record.status))db.prepare('DELETE FROM duel_members WHERE duel_id=?').run(record.id);}
 export const DECISION_TIMEOUT_MS=30*60_000;
 export const getDuel=db.transaction((id:string,now=Date.now()):DuelRecord=>{
  const record=read(id);if(!record)throw new Error('Duelo não encontrado.');
@@ -61,6 +62,15 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  })[0];
  if(useful)return useful;
  if(s.phase==='response'){
+  const handShield=actions.find(a=>a.kind==='monsterEffect'&&p.hand.some(c=>c.uid===a.card&&getMonsterEffect(c.id)?.operation.kind==='battleShield'));
+  const alreadyProtected=p.battleProtectedUntil===s.turn||s.chain.some(link=>link.actor===s.players.indexOf(p)&&link.monsterEffect&&getMonsterEffect(link.id)?.operation.kind==='battleShield');
+  if(handShield&&!alreadyProtected&&s.pending.kind==='attack'){
+   const attack=s.pending;
+   const attacker=op.monsters.find(m=>m.uid===attack.card&&m.faceUp);
+   const defender=p.monsters.find(m=>m.uid===attack.target);
+   const damage=attacker?defender?(defender.position==='atk'?Math.max(0,atk(attacker,s)-atk(defender,s)):0):atk(attacker,s):0;
+   if(damage>0)return handShield;
+  }
   const counterTarget=s.chain.at(-1);
   const book=actions.filter((a):a is Extract<Action,{kind:'spell'}>=>a.kind==='spell')
    .filter(a=>getEffect(source(a)?.id??'')?.kind==='bookOfMoon');

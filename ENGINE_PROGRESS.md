@@ -8,7 +8,7 @@
 
 | Área | Concluído | Falta |
 | --- | ---: | ---: |
-| Engine clássica adaptada | **85%** | **15%** |
+| Engine clássica adaptada | **87%** | **13%** |
 | Padrão visual compartilhado dos comandos | **47%** | **53%** |
 
 **O campo de duelo original (âmbar) foi restaurado integralmente.** Ele não faz parte do redesign dos comandos e há teste de regressão impedindo que a aparência seja alterada. O padrão visual azul é aplicado aos painéis e comandos do bot, como galeria de NPCs, editor do jogador e controles de cartas. Os **47 pontos representam somente o trabalho já funcional e testado nesses comandos**, não mudanças no campo nem aceite humano.
@@ -23,14 +23,14 @@
 | Correntes, prioridades e respostas | 10 | 9 | Magias Rápidas compartilhadas, Livro da Lua e MST em correntes, Bloqueador/Sete Ferramentas; timing completo ainda falta |
 | FLIP e cálculo de dano | 8 | 7 | Efeitos de cinco monstros reais; cenários raros pendentes |
 | Ignição e custos | 8 | 7 | Cannon Soldier + mecanismo genérico de custo |
-| Cemitério e buscas | 8 | 6 | Sangan/Witch e Tomate Místico; fila de eventos e busca/Invocação-Especial |
+| Cemitério e buscas | 8 | 7 | Sangan/Witch e Tomate Místico; fila de eventos e busca/Invocação-Especial |
 | Gatilhos de invocação e invocações especiais | 7 | 6 | Janelas reativas após Normal, Virar, Fusão, Monster Reborn e recrutamento do Deck; especiais avançadas pendentes |
 | Outros gatilhos de destruição | 7 | 5 | Força do Espelho, Tributo Torrencial, Sakuretsu e banimento do Sem Fundo; causas de destruição distintas |
-| Contínuos, rápidos, negações complexas | 8 | 4 | Jinzo, MST Rápido e negações; monstros rápidos e efeitos avançados pendentes |
+| Contínuos, rápidos, negações complexas | 8 | 5 | Jinzo, MST Rápido e negações; monstros rápidos e efeitos avançados pendentes |
 | Catálogo de cartas utilizáveis no RPG | 7 | 6 | Registro auditado, quatro novas cartas com regras reais e laboratório com 24; decks de 30 válidos |
 | IA dos NPCs | 4 | 4 | Reações, descarte, recrutamento, Magias Rápidas e decks de 30; heurística não exaustiva |
 | CI, regressão e aceite no Discord | 5 | 4 | Testes de motor/UI e 30 partidas simuladas; aceite humano na hospedagem pendente |
-| **Total** | **100** | **85** | |
+| **Total** | **100** | **87** | |
 
 O progresso de regras é **deliberadamente independente do total de cartas habilitadas**, pois um catálogo com muitos monstros normais não representa toda a complexidade de efeitos e correntes.
 
@@ -128,3 +128,25 @@ Testes: `tests/classicBattleRecruiters.test.cjs`, cenários com compra pelo dono
 - O laboratório de efeitos agora possui 24 cartas; Yugi, Kaiba e Joey têm cartas e decisões de IA associadas às novas reações.
 
 A entrega possui testes automatizados de encadeamentos, timing, banimento, preservação de propriedade, estatísticas, efeitos FLIP e permanência do campo original. **Ainda faltam** SEGOC/timing completo, efeitos de monstro de Velocidade 2 mais complexos, categorias adicionais de invocação, suporte amplo a outras cartas e homologação no Discord.
+
+
+## Quinta entrega — auditoria de integridade e efeitos rápidos de monstro
+
+**Engine: 87% dos marcos versionados; padrão dos comandos permanece 47%.**
+A pontuação não representa compatibilidade geral com o TCG. A arena permaneceu
+byte a byte inalterada; os decks atuais não foram editados nesta entrega.
+
+- Corrigidos Sete Ferramentas contra Magias Rápidas, ativação de Magias Rápidas
+  entre ataques, preservação da fase, resets de Livro da Lua e gatilhos de fim de turno.
+- Ventríloco Misterioso entra na corrente da Invocação antes das respostas e
+  seu efeito já ativado resolve mesmo depois de ser destruído ou colocado com a face para baixo.
+- Kuriboh implementado com descarte de si mesmo, janela própria de cálculo de
+  dano, proteção somente para aquele combate e IA que evita gastar a carta sem dano previsto.
+- Contratos de estado/transição impedem UID duplicado, carta perdida ou
+  transformada, fases/dados inválidos e zonas excedidas. O banco valida antes
+  de persistir, antes de conceder recompensa e ao reabrir uma partida.
+- Node 22 fixado como runtime testado; o teste de carga isolado foi adicionado ao CI.
+
+Validação local: 268 testes; 1.000 partidas extras, 49.161 jogadas e 3.329
+restaurações serializadas. Isto não mede latência do Discord/Botkeep.
+Veja [ENGINE_AUDIT.md](ENGINE_AUDIT.md) para escopo, evidências e limitações.

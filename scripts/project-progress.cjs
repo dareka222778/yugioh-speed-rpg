@@ -16,10 +16,10 @@ const engine=[
  {id:'chains',name:'Correntes, janelas de resposta e prioridade',weight:10,done:9},
  {id:'flip',name:'Efeitos FLIP e cálculo de dano',weight:8,done:7},
  {id:'ignition',name:'Ignição e custos (LP, descarte, Tributo)',weight:8,done:7},
- {id:'graveyard',name:'Gatilhos e buscas do Cemitério',weight:8,done:6},
+ {id:'graveyard',name:'Gatilhos e buscas do Cemitério',weight:8,done:7},
  {id:'summon',name:'Gatilhos de invocação e invocações especiais',weight:7,done:6},
  {id:'destruction',name:'Outros gatilhos de destruição e ordem de eventos',weight:7,done:5},
- {id:'continuous',name:'Efeitos contínuos, rápidos e negações complexas',weight:8,done:4},
+ {id:'continuous',name:'Efeitos contínuos, rápidos e negações complexas',weight:8,done:5},
  {id:'playableCards',name:'Cobertura e validação das cartas jogáveis deste RPG',weight:7,done:6},
  {id:'npc',name:'IA dos NPCs com efeitos',weight:4,done:4},
  {id:'acceptance',name:'CI, testes de regressão e aceitação real no Discord',weight:5,done:4}

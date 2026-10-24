@@ -42,6 +42,13 @@ export function discardBackrow(s:DuelState,uid:string){
 export function cleanEquips(s:DuelState){
  for(const p of s.players)for(const b of [...p.backrow])if(b.equippedTo){const target=s.players.flatMap(p=>p.monsters).find(m=>m.uid===b.equippedTo);const e=getEffect(b.id);if(!target?.faceUp||e?.kind!=='equip'||!equipEligible(e,getCard(target.id)!))discardBackrow(s,b.uid);}
 }
+/** Being set by an effect clears temporary stat/soft-use modifiers, but does
+ * not spend the player's manual position change or erase summon/attack history.
+ * Ownership, scheduled return of control and proper Fusion status persist. */
+export function turnMonsterFaceDown(m:Monster):void{
+ m.faceUp=false;m.position='def';m.atkBoost=0;m.defBoost=0;
+ delete m.swappedUntil;delete m.effectUsedTurn;
+}
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{
  const e=getEffect(a.id),p=s.players[a.actor],op=s.players[1-a.actor];if(!e)return false;
  const found=s.players.flatMap((p,index)=>p.monsters.map(m=>({p,m,index}))).find(t=>t.m.uid===a.target);
@@ -64,7 +71,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
   }
   case 'mysticalSpaceTyphoon':if(a.target&&s.players.some(p=>p.backrow.some(b=>b.uid===a.target)||p.field?.uid===a.target)){discardBackrow(s,a.target);service.note(s,'Tufão Espacial Místico destruiu a Magia/Armadilha escolhida.');}return true;
   case 'bookOfMoon':
-   if(found?.m.faceUp){found.m.faceUp=false;found.m.position='def';found.m.changed=s.turn;service.note(s,`Livro da Lua colocou ${getCard(found.m.id)!.name} em Defesa com a face para baixo.`);}
+   if(found?.m.faceUp){turnMonsterFaceDown(found.m);service.note(s,`Livro da Lua colocou ${getCard(found.m.id)!.name} em Defesa com a face para baixo.`);}
    return true;
   case 'giantTrunade':for(const p of s.players){p.hand.push(...p.backrow.map(b=>({id:b.id,uid:b.uid})));p.backrow=[];if(p.field){p.hand.push({id:p.field.id,uid:p.field.uid});p.field=null;}}service.note(s,'Retorno Gigante devolveu as Magias e Armadilhas às mãos.');return true;
   case 'shieldSword':for(const p of s.players)for(const m of p.monsters)if(m.faceUp)m.swappedUntil=m.swappedUntil===s.turn?undefined:s.turn;service.note(s,'ATK e DEF originais dos monstros revelados foram trocados até o fim do turno.');return true;

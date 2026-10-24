@@ -45,3 +45,22 @@ Efeitos rápidos de monstros, outras categorias de invocação, resolução avan
 Testes: `tests/classicSummonResponses.test.cjs`, `tests/classicSakuretsu.test.cjs`, `tests/classicBanishment.test.cjs`, `tests/classicQuickSpells.test.cjs` e `tests/duelExpansion.test.cjs`.
 
 As janelas implementadas cobrem esses efeitos auditados e **não são uma engine TCG completa**; efeitos simultâneos/SEGOC, timing avançado e cartas com outros tipos de efeito continuam pendentes.
+
+
+## Auditoria posterior — integridade e janela de cálculo de dano
+
+A revisão em [ENGINE_AUDIT.md](ENGINE_AUDIT.md) mantém o formato fixo e a arena
+original. Ela adiciona contratos de execução e persistência, corrige as respostas
+de Sete Ferramentas e Magias Rápidas, conserva gatilhos de fim de turno no turno
+correto e distingue a janela anterior ao cálculo de dano do cálculo em si.
+Kuriboh é um efeito rápido de monstro com custo de descarte da própria mão;
+seu efeito não pode ser negado por Bloqueador de Magia ou Sete Ferramentas.
+O banco antigo de versão 1 continua aceito quando válido. Registros corrompidos
+são recusados sem serem apagados nem gerar recompensas.
+
+`npm run audit:engine` executa um teste isolado de 300 partidas após o build.
+O script permite `--games 1000` diretamente. Não usa o banco real do jogador.
+
+A ordenação completa de gatilhos simultâneos, efeitos rápidos arbitrários e
+replays de batalha continuam pendentes. Testes verdes não certificam regras
+universais nem substituem uma partida real no Discord.

@@ -7,6 +7,7 @@ export type Effect=
  |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
 const effects:Record<string,Effect>={
+ '40640057':{kind:'monsterEffect'},
  '54652250':{kind:'monsterEffect'},
  '07089711':{kind:'monsterEffect'},
  '31560081':{kind:'monsterEffect'},
@@ -45,6 +46,7 @@ const effects:Record<string,Effect>={
 };
 /** Audited real-card metadata adapted to this RPG's supported effects. */
 const supportedEffectMonsters:Card[]=[
+ {id:'40640057',konamiId:4064,name:'Kuriboh',englishName:'Kuriboh',kind:'monster',race:'Fiend',attribute:'DARK',level:1,atk:300,defense:200,summary:'Durante o cálculo de dano de um ataque do oponente: descarte esta carta da mão; você não recebe dano de batalha desse combate. Não impede a destruição do monstro.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4064&request_locale=en'},
  {id:'54652250',konamiId:4507,name:'Inseto Devorador de Homens',englishName:'Man-Eater Bug',kind:'monster',race:'Insect',attribute:'EARTH',level:2,atk:450,defense:600,summary:'VIRAR: escolha 1 monstro no campo; destrua-o.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4507&request_locale=en'},
  {id:'07089711',konamiId:4547,name:'Hane-Hane',englishName:'Hane-Hane',kind:'monster',race:'Beast',attribute:'EARTH',level:2,atk:450,defense:500,summary:'VIRAR: escolha 1 monstro no campo; devolva-o à mão do dono.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4547&request_locale=en'},
  {id:'31560081',konamiId:4434,name:'Mago da Fé',englishName:'Magician of Faith',kind:'monster',race:'Spellcaster',attribute:'LIGHT',level:1,atk:300,defense:400,summary:'VIRAR: escolha 1 Magia no seu Cemitério; adicione-a à sua mão.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4434&request_locale=en'},
