@@ -156,7 +156,7 @@ Os alvos são selecionados na ativação, antes da janela de resposta; efeitos n
 
 ### Como experimentar no Discord
 
-Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui dez monstros de efeito clássicos (os seis anteriores, Sangan, Bruxa da Floresta Negra, Jinzo e Ventríloco Misterioso), além de Bloqueador de Magia e Sete Ferramentas do Bandido, Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
+Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui onze monstros de efeito clássicos (os seis anteriores, Sangan, Bruxa da Floresta Negra, Jinzo, Ventríloco Misterioso e Tomate Místico), além de Bloqueador de Magia e Sete Ferramentas do Bandido, Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
 
 Para instalar as alterações no bot hospedado, atualize o código da branch aprovada, compile e reinicie o processo, e registre os novos comandos slash no Discord. Commits no GitHub não atualizam automaticamente uma instância em execução.
 
@@ -179,3 +179,7 @@ O Jinzo com face para cima bloqueia a ativação de Armadilhas de ambos os jogad
 A engine agora admite **Bloqueador de Magia** (custo de descarte, negar ativação de Magia), **Sete Ferramentas do Bandido** (pagar 1000 PV, negar ativação de Armadilha) e correntes que negam outros elos. Armadilhas comuns não podem ser acorrentadas à Velocidade 3, e os custos permanecem pagos quando um elo é negado. **Ventríloco Misterioso** dispara efeito de ganho de PV quando outro monstro é Invocado por Invocação-Normal ou Virar, sem disparar ao próprio entrar em campo ou a um simples virar durante batalha. Os três cards entram no laboratório virtual sem alterar o inventário real.
 
 O escopo e o percentual atualizado por entregas estão documentados em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md). Validação: `tests/classicCounterTraps.test.cjs`, `tests/classicSummonTriggers.test.cjs` e `npm run progress` no GitHub Actions.
+
+### Destruição por batalha e Invocação-Especial do Deck
+
+**Tomate Místico** (83011277) é a primeira carta do laboratório que pode recrutar outro monstro diretamente do Deck quando é destruído por batalha e enviado ao Cemitério. Só permite monstros TREVAS com até 1500 ATK; o jogador também pode recusar. A engine diferencia esta causa de destruição da causada por custos/efeitos e considera o verdadeiro dono da carta. Os cenários em `tests/classicBattleRecruiters.test.cjs` são executados automaticamente. O marco atual está em **72% engine / 28% restantes**, conforme [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md); o redesenho visual permanece **0%**.
