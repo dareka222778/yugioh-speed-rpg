@@ -26,4 +26,9 @@ test('PNG attachments, menus and invitations serialize within Discord limits, an
 test('identical views reuse the PNG cache, with isolation by viewer and invalidation after a draw',async()=>{
  const a=await renderDuel(s);assert.strictEqual(await renderDuel(s),a);const own=await renderDuel(s,'101');assert.notStrictEqual(own,a);assert.strictEqual(await renderDuel(s,'101'),own);const next=structuredClone(s);next.players[0].hand.push(next.players[0].deck.shift());assert.notStrictEqual(await renderDuel(next,'101'),own);
 });
+test('uploaded card back is rendered from the asset and rotated as a whole for face-down DEF',async()=>{
+ const {CARD_BACK_PNG,CARD_BACK_WIDTH,CARD_BACK_HEIGHT}=require('../dist/cardBackAsset');const asset=Buffer.from(CARD_BACK_PNG,'base64');const metadata=await sharp(asset).metadata();assert.equal(metadata.width,CARD_BACK_WIDTH);assert.equal(metadata.height,CARD_BACK_HEIGHT);
+ const png=await renderDuel(s,undefined,async()=>undefined);const actual=await sharp(png).extract({left:350,top:332,width:172,height:119}).removeAlpha().raw().toBuffer();
+ const expected=await sharp(asset).rotate(90).resize(172,119,{fit:'contain',background:'#55484c'}).removeAlpha().raw().toBuffer();let error=0;for(let n=0;n<actual.length;n++)error+=Math.abs(actual[n]-expected[n]);assert.ok(error/actual.length<12,'DEF back must match the supplied portrait image rotated 90 degrees');
+});
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
