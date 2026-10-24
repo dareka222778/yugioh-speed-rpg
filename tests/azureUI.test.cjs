@@ -1,6 +1,9 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const sharp=require('sharp');
+const fs=require('node:fs'),path=require('node:path'),os=require('node:os');
+const temp=fs.mkdtempSync(path.join(os.tmpdir(),'azure-ui-'));
+process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
 const {azure,contrast,duelLayout,embedColors}=require('../dist/duelTheme');
 const {createDuel}=require('../dist/duelEngine');
 const {renderDuel}=require('../dist/duelRenderer');
@@ -40,3 +43,20 @@ test('gallery portrait, deck editor and private duel PNGs share blue layout and 
  const privatePNG=await renderDuel(s,'a',async()=>null);
  assert.equal((await sharp(privatePNG).metadata()).height,1360);
 });
+
+test('saved duelist profile portrait appears as actual HUD pixels in public and private arenas',async()=>{
+ const {portraitPath}=require('../dist/profile');
+ const s=createDuel([{id:'901',name:'Avatar',cards:basic},{id:'902',name:'Rival',cards:basic}],()=>.5);
+ const image=await sharp({create:{width:160,height:160,channels:4,background:{r:235,g:62,b:90,alpha:1}}}).png().toBuffer();
+ const provider=async()=>null;
+ const earlier=await renderDuel(s,undefined,provider);
+ const file=portraitPath('901');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,image);
+ const updated=await renderDuel(s,undefined,provider);
+ const region={left:220,top:553,width:75,height:136};
+ const [a,b]=await Promise.all([sharp(earlier).extract(region).raw().toBuffer(),sharp(updated).extract(region).raw().toBuffer()]);
+ assert.notDeepEqual(a,b,'uploaded duelist photo must be shown instead of a placeholder');
+ const privateImage=await renderDuel(s,'901',provider);
+ const privateCrop=await sharp(privateImage).extract({left:220,top:893,width:75,height:136}).raw().toBuffer();
+ assert.notDeepEqual(privateCrop,a,'portrait remains present when a hand panel is shown');
+});
+require('node:test').after(()=>fs.rmSync(temp,{recursive:true,force:true}));
