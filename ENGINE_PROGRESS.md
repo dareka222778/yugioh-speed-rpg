@@ -8,10 +8,10 @@
 
 | Área | Concluído | Falta |
 | --- | ---: | ---: |
-| Engine clássica adaptada | **78%** | **22%** |
-| Reformulação visual inspirada em Duel Links | **56%** | **44%** |
+| Engine clássica adaptada | **80%** | **20%** |
+| Reformulação visual inspirada em Duel Links | **61%** | **39%** |
 
-A reformulação Azure está implementada parcialmente na arena, na mão, na galeria de NPCs e no editor de decks. Os **56 pontos representam trabalho funcional e testado automaticamente**, mas não substituem revisões humanas em desktop/mobile e ajustes gráficos finais.
+A reformulação Azure está implementada parcialmente na arena, na mão, na galeria de NPCs e no editor de decks. Os **61 pontos representam trabalho funcional e testado automaticamente**, mas não substituem revisões humanas em desktop/mobile e ajustes gráficos finais.
 
 ### Critérios de pontuação da engine
 
@@ -25,12 +25,12 @@ A reformulação Azure está implementada parcialmente na arena, na mão, na gal
 | Ignição e custos | 8 | 7 | Cannon Soldier + mecanismo genérico de custo |
 | Cemitério e buscas | 8 | 6 | Sangan/Witch e Tomate Místico; fila de eventos e busca/Invocação-Especial |
 | Gatilhos de invocação e invocações especiais | 7 | 5 | Reações Normais/Virar e recrutamento DARK do Tomate Místico; especiais avançadas pendentes |
-| Outros gatilhos de destruição | 7 | 2 | Causa de destruição em batalha separada de custo/efeito; regras amplas pendentes |
+| Outros gatilhos de destruição | 7 | 3 | Força do Espelho, destruição em área por efeito separada de batalha; regras amplas pendentes |
 | Contínuos, rápidos, negações complexas | 8 | 4 | Jinzo, MST Rápido e negações; monstros rápidos e efeitos avançados pendentes |
-| Catálogo de cartas utilizáveis no RPG | 7 | 4 | Registro de cartas executáveis e validação dos decks dos NPCs |
+| Catálogo de cartas utilizáveis no RPG | 7 | 5 | Registro de cartas executáveis, decks reais e ocultação de cartas ainda não programadas |
 | IA dos NPCs | 4 | 4 | Reações, descarte, recrutamento, Magias Rápidas e decks de 30; heurística não exaustiva |
 | CI, regressão e aceite no Discord | 5 | 4 | Testes de motor/UI e 30 partidas simuladas; aceite humano na hospedagem pendente |
-| **Total** | **100** | **78** | |
+| **Total** | **100** | **80** | |
 
 O progresso de regras é **deliberadamente independente do total de cartas habilitadas**, pois um catálogo com muitos monstros normais não representa toda a complexidade de efeitos e correntes.
 
@@ -40,13 +40,13 @@ O progresso de regras é **deliberadamente independente do total de cartas habil
 | --- | ---: | ---: |
 | Sistema visual (azul, tipografia e hierarquia) | 12 | 9 |
 | Retratos e identidade dos duelistas | 15 | 8 |
-| Navegação individual de cartas e decks | 15 | 11 |
+| Navegação individual de cartas e decks | 15 | 14 |
 | Arena com HUD e campo de duelo | 20 | 13 |
 | Feedback de efeitos e invocações | 12 | 4 |
 | Responsividade e integração com Discord | 10 | 3 |
-| Usabilidade e acessibilidade | 10 | 5 |
-| Capturas, testes e revisão humana | 6 | 3 |
-| **Total** | **100** | **56** |
+| Usabilidade e acessibilidade | 10 | 6 |
+| Capturas, testes e revisão humana | 6 | 4 |
+| **Total** | **100** | **61** |
 
 ## Regras para avançar pontuações
 
@@ -63,7 +63,7 @@ O progresso de regras é **deliberadamente independente do total de cartas habil
 - Ampliar efeitos rápidos, contínuos, condições de ativação, resolução e negação real de elos.
 - Fazer testes simultâneos com mais efeitos encadeados, deck-out, alvos ausentes e partidas completas.
 - Ampliar o conjunto de cartas jogáveis do RPG com implementação e teste de cada efeito novo, respeitando o formato de três zonas.
-- Iniciar posteriormente o sistema de design azul e a galeria navegável, **um duelista/carta por vez**, com personagens e imagens consistentes.
+- Refinar a identidade visual Azure, a navegação responsiva, as animações e o aceite humano, preservando o fluxo de inspeção carta por carta já implementado.
 
 ## Efeito contínuo habilitado
 
@@ -87,13 +87,13 @@ Testes: `tests/classicBattleRecruiters.test.cjs`, cenários com compra pelo dono
 
 ## Segunda grande entrega — Azure / Decks / Magias Rápidas
 
-**Engine (78%)**
+**Engine (80%)**
 
 - Pote da Ganância (55144522) compra duas cartas; Raigeki (12580477) destrói os monstros adversários e diferencia efeitos que disparam ao enviar cartas ao Cemitério de efeitos de batalha.
 - Tufão Espacial Místico (05318639) é uma Magia Rápida: jogável da mão durante o próprio turno ou previamente baixada, inclusive como resposta; respeita a Velocidade de Magia 3, pode ser negado por Bloqueador de Magia e **não nega automaticamente o efeito** de outra Magia/Armadilha apenas por destruí-la.
 - Joey, Yugi e Kaiba possuem **decks próprios de 30 cartas jogáveis**, usando somente cartas auditadas pelo motor. O portal exibe exclusivamente esses decks. Testes de partidas simuladas conferem conservação global das cartas quando elas mudam de controlador.
 
-**Layout Azure (56%)**
+**Layout Azure (61%)**
 
 - src/duelTheme.ts: sistema azul neutro, tokens compartilhados e medição de contraste.
 - src/duelRenderer.ts: arena azul com efeitos luminosos moderados, zonas táticas, LP, fases e correntes, cartas da mão privada e retratos locais de NPCs; dimensões compatíveis com os painéis de Discord.
@@ -102,4 +102,14 @@ Testes: `tests/classicBattleRecruiters.test.cjs`, cenários com compra pelo dono
 - src/deckRenderer.ts e src/deckUI.ts: editor de decks azul com painel individual, cópias, quantidade possuída e distinção entre monstro normal e de efeito.
 - Testes novos de contraste, privacidade de cartas escondidas, comportamento real dos botões, formato dos PNGs e pixels dos retratos: tests/azureUI.test.cjs, tests/duelUI.test.cjs e tests/interactions.test.cjs.
 
-**Ainda não concluído:** engine geral do TCG/anime além das cartas implementadas, efeitos rápidos de monstros com variedade de timings, outros efeitos e cartas que ainda não foram programados, animações avançadas, revisão manual em dispositivos reais, otimização de performance no host e deploy efetivo. A porcentagem NÃO implica que 78% de todas as regras/cartas oficiais estejam implementadas nem que 56% de todas as telas imagináveis tenham sido verificadas.
+**Ainda não concluído:** engine geral do TCG/anime além das cartas implementadas, efeitos rápidos de monstros com variedade de timings, outros efeitos e cartas que ainda não foram programados, animações avançadas, revisão manual em dispositivos reais, otimização de performance no host e deploy efetivo. A porcentagem NÃO implica que 80% de todas as regras/cartas oficiais estejam implementadas nem que 61% de todas as telas imagináveis tenham sido verificadas.
+
+## Terceira entrega — catálogo unificado, carta individual e reação à batalha
+
+**Escopo do RPG:** não existem mais decks paralelos de consulta. `/npc ver` mostra somente as 30 cartas que o personagem utiliza (e seu eventual Deck Adicional). Os arquivos dessas listas anteriores e as validações associadas foram retirados. A prontidão dos decks atuais é medida por `node scripts/duel-readiness.cjs --require-complete`. Nenhuma alteração de coleção é feita ao navegar.
+
+**Carta por carta no próprio deck:** `/deck ver` ganhou botão **Ver carta**, com painel azul de 1200×720 gerado em `renderOwnedCard`. Ele exibe arte (ou fallback local), tipo, atributos, efeito, quantidade possuída e quantidade no deck. O jogador pode navegar para anterior/próxima e retornar ao editor, sempre com ID, proprietário e revisão validados.
+
+**Engine:** Força do Espelho (44095762) entra como Armadilha Normal de declaração de ataque; destrói apenas monstros adversários em Ataque, enquanto os de Defesa permanecem. Resolve em correntes com Sete Ferramentas, Tufão Espacial Místico e Jinzo; destruição por efeito não ativa a habilidade de batalha do Tomate Místico. Joey utiliza a carta no seu deck de 30 e pode entregá-la como recompensa da primeira vitória.
+
+**Qualidade:** CI executa testes de permissões, duelos completos, efeitos, indicadores de legalidade e renderização; gera seis imagens de prévia da arena, duelistas e decks. Esses testes não equivalem a uma análise de layout em aparelhos reais nem à publicação da branch na hospedagem.
