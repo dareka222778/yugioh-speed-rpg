@@ -8,7 +8,7 @@
 
 | Área | Concluído | Falta |
 | --- | ---: | ---: |
-| Engine clássica adaptada | **62%** | **38%** |
+| Engine clássica adaptada | **68%** | **32%** |
 | Reformulação visual inspirada em Duel Links | **0%** | **100%** |
 
 A base do bot já possui imagens e comandos, mas nenhum componente da **nova reformulação** foi aprovado como pronto. **Layout 0% não significa bot sem interface.**
@@ -19,18 +19,18 @@ A base do bot já possui imagens e comandos, mas nenhum componente da **nova ref
 | --- | ---: | ---: | --- |
 | Formato 4000 PV, três zonas, 20–30 cartas | 10 | 10 | Implementado |
 | Turnos, combate e encerramento | 9 | 9 | Implementado; mais detalhes de timing pendentes |
-| Magias e Armadilhas | 9 | 6 | Primeiro lote, não o catálogo completo |
-| Correntes, prioridades e respostas | 10 | 5 | LIFO e respostas; negações complexas ainda faltam |
+| Magias e Armadilhas | 9 | 7 | Bloqueador de Magia e Sete Ferramentas jogáveis; lote incompleto |
+| Correntes, prioridades e respostas | 10 | 7 | Negação de ativação, custos prévios, correntes Speed 3; casos avançados pendentes |
 | FLIP e cálculo de dano | 8 | 7 | Efeitos de cinco monstros reais; cenários raros pendentes |
 | Ignição e custos | 8 | 7 | Cannon Soldier + mecanismo genérico de custo |
 | Cemitério e buscas | 8 | 5 | Sangan / Witch, restrição por nome, fila de gatilhos |
-| Gatilhos de invocação e invocações especiais | 7 | 2 | Despacho existe; efeitos reais adicionais pendentes |
+| Gatilhos de invocação e invocações especiais | 7 | 4 | Ventríloco Misterioso reage a Invocações Normais/Virar; especiais avançadas pendentes |
 | Outros gatilhos de destruição | 7 | 0 | Sem implementação ampla |
 | Contínuos, rápidos, negações complexas | 8 | 2 | Jinzo contínuo habilitado; efeitos rápidos e negações complexas pendentes |
 | Primeiro lote histórico de cartas | 7 | 4 | Quantidades reais exibidas pelo `npm run progress` |
-| IA dos NPCs | 4 | 2 | Heurísticas de FLIP/Tributo; estratégia incompleta |
+| IA dos NPCs | 4 | 3 | Escolha de contra-armadilhas e custo de descarte; estratégia incompleta |
 | CI, regressão e aceite no Discord | 5 | 3 | Testes automatizados; aceite humano na hospedagem pendente |
-| **Total** | **100** | **62** | |
+| **Total** | **100** | **68** | |
 
 O progresso de regras é **deliberadamente menor que a porcentagem de cartas habilitadas**, pois boa parte do lote histórico é de monstros sem efeitos e não representa todo o trabalho de regras.
 
@@ -68,3 +68,13 @@ O progresso de regras é **deliberadamente menor que a porcentagem de cartas hab
 ## Efeito contínuo habilitado
 
 **Jinzo (77585513):** no campo com a face para cima, impede a ativação de Armadilhas dos dois duelistas e nega efeitos de Armadilhas já ativadas que resolveriam enquanto ele ainda estiver em campo. Com a face para baixo ou ao sair do campo, a restrição não se aplica. A implementação segue o texto oficial do card (<https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4758&request_locale=pt>) e possui testes de invocação, virada, controle de ambos os lados, corrente e restauração após deixar o campo.
+
+## Correntes com Armadilhas de Resposta e gatilhos de invocação
+
+- **Bloqueador de Magia (77414722):** na resposta direta à ativação de uma Magia, descarta uma carta como custo; se a ativação não for negada por outra Armadilha, cancela a Magia, envia-a ao Cemitério e impede sua resolução. Aplica-se a Magias Normais, de Campo e à Polimerização.
+- **Sete Ferramentas do Bandido (03819470):** responde diretamente à última ativação de Armadilha, custa 1000 PV pagos antes da corrente e impede a resolução do elo negado; também pode responder a outras Armadilhas de Resposta.
+- **Prioridade de resposta:** Armadilhas comuns não podem responder a uma Armadilha de Resposta recém-ativada (Velocidade de Magia 3). As correntes são resolvidas do último elo para o primeiro, conservando custos já pagos.
+- **Ventríloco Misterioso (54098121):** quando outro monstro de qualquer duelista é Invocado normalmente ou por Virar, ganha 500 PV para o controlador. Não ativa ao ser ele próprio invocado, por baixar monstro com a face para baixo ou por revelar um monstro durante batalha. Múltiplas cópias geram gatilhos em fila; interações simultâneas complexas continuam fora do escopo completo.
+- O laboratório gratuito de cartas virtuais passa a conter os três itens acima, mantendo **20 cartas** e a Fusão demonstrativa.
+
+**Limite conhecido:** essa implementação modela correntes e janelas de resposta das cartas acima, mas ainda não é um sistema TCG universal (por exemplo, efeitos rápidos arbitrários, regras integrais de simultaneidade/SEGOC e janelas de timing não implementadas).
