@@ -45,6 +45,17 @@ function graveMonster(s:DuelState,uid:string,byBattle=false){const found=findMon
 const effect=getMonsterEffect(found.m.id);
 if(effect?.trigger==='onSentToGrave'||(byBattle&&effect?.trigger==='onBattleDestroyed'))(s.graveTriggers??=[]).push({actor:owner,card:found.m.uid,id:found.m.id});
 cleanEquips(s);}}
+/** Destruction that banishes instead of sending to the Graveyard.
+ * No field-to-Graveyard/battle trigger is queued, and stolen monsters return
+ * to their original owner's banished zone.
+ */
+function banishDestroyedMonster(s:DuelState,uid:string):boolean{
+ const found=findMonster(s,uid);if(!found)return false;
+ const controller=s.players.indexOf(found.p),owner=found.m.owner??controller;
+ found.p.monsters=found.p.monsters.filter(m=>m.uid!==uid);
+ (s.players[owner].banished??=[]).push({uid:found.m.uid,id:found.m.id,...found.m.properlySummoned?{properlySummoned:true}:{}});
+ cleanEquips(s);return true;
+}
 
 function finish(s:DuelState,winner:number|null,reason:string){s.phase='finished';s.winner=winner===null?null:s.players[winner].id;s.reason=reason;note(s,`${winner===null?'Empate':`${s.players[winner].name} venceu`}: ${reason}.`);}
 function checkLP(s:DuelState){if(s.players.every(p=>p.lp<=0))finish(s,null,'pontos de vida');else for(let i=0;i<2;i++)if(s.players[i].lp<=0)finish(s,1-i,'pontos de vida');}
@@ -101,6 +112,10 @@ function trapActions(s:DuelState,index:number):Action[]{
   else if(effect.kind==='torrentialTribute'&&s.phase==='response'&&['summon','flip','specialSummon'].includes(s.pending.kind)&&s.players.some(p=>p.monsters.length))
    out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='trapHole'&&s.phase==='response'&&(s.pending.kind==='summon'||s.pending.kind==='flip')&&s.pending.actor!==index){const m=findMonster(s,s.pending.card)?.m;if(m?.faceUp&&atk(m,s)>=1000)out.push({kind:'trap',card:c.uid,target:m.uid});}
+  else if(effect.kind==='bottomlessTrapHole'&&s.phase==='response'&&(s.pending.kind==='summon'||s.pending.kind==='flip'||s.pending.kind==='specialSummon')&&s.pending.actor!==index){
+   const m=findMonster(s,s.pending.card)?.m;
+   if(m?.faceUp&&atk(m,s)>=1500)out.push({kind:'trap',card:c.uid,target:m.uid});
+  }
  }return out;
 }
 
@@ -289,6 +304,10 @@ function resolve(s:DuelState){
   if(effect?.kind==='sakuretsuArmor'&&target?.faceUp&&target.position==='atk'){
    graveMonster(s,target.uid);
    note(s,'Armadura Sakuretsu destruiu o monstro atacante.');
+  }
+  if(effect?.kind==='bottomlessTrapHole'&&target?.faceUp&&atk(target,s)>=1500){
+   banishDestroyedMonster(s,target.uid);
+   note(s,'Buraco Armadilha Sem Fundo destruiu e baniu o monstro Invocado.');
   }
   discardBackrow(s,link.card);},link=>{discardBackrow(s,link.card);},()=>s.phase==='finished');
  s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};s.pendingNegated=false;return;}
