@@ -13,23 +13,25 @@ const engine=[
  {id:'format',name:'Formato Speed RPG (4000 PV, zonas, decks)',weight:10,done:10},
  {id:'combat',name:'Turnos, combate e condições de vitória',weight:9,done:9},
  {id:'spells',name:'Magias e Armadilhas clássicas',weight:9,done:8},
- {id:'chains',name:'Correntes, janelas de resposta e prioridade',weight:10,done:8},
+ {id:'chains',name:'Correntes, janelas de resposta e prioridade',weight:10,done:9},
  {id:'flip',name:'Efeitos FLIP e cálculo de dano',weight:8,done:7},
  {id:'ignition',name:'Ignição e custos (LP, descarte, Tributo)',weight:8,done:7},
  {id:'graveyard',name:'Gatilhos e buscas do Cemitério',weight:8,done:6},
- {id:'summon',name:'Gatilhos de invocação e invocações especiais',weight:7,done:5},
- {id:'destruction',name:'Outros gatilhos de destruição e ordem de eventos',weight:7,done:3},
+ {id:'summon',name:'Gatilhos de invocação e invocações especiais',weight:7,done:6},
+ {id:'destruction',name:'Outros gatilhos de destruição e ordem de eventos',weight:7,done:5},
  {id:'continuous',name:'Efeitos contínuos, rápidos e negações complexas',weight:8,done:4},
- {id:'playableCards',name:'Cobertura e validação das cartas jogáveis deste RPG',weight:7,done:5},
+ {id:'playableCards',name:'Cobertura e validação das cartas jogáveis deste RPG',weight:7,done:6},
  {id:'npc',name:'IA dos NPCs com efeitos',weight:4,done:4},
  {id:'acceptance',name:'CI, testes de regressão e aceitação real no Discord',weight:5,done:4}
 ];
+// The duel field intentionally stays in its original amber skin; only Discord command surfaces
+// are being standardized under the shared blue design system.
 const layout=[
  {id:'design',name:'Sistema de design azul, hierarquia, tipografia',weight:12,done:9},
  {id:'portraits',name:'Retratos, identidades e apresentações dos duelistas',weight:15,done:8},
  {id:'gallery',name:'Galeria, decks e navegação carta por carta',weight:15,done:14},
- {id:'arena',name:'Campo e HUD responsivos no estilo Duel Links',weight:20,done:13},
- {id:'feedback',name:'Feedback visual de invocações e efeitos',weight:12,done:4},
+ {id:'commandPanels',name:'Painéis padronizados dos comandos, sem modificar o campo de duelo',weight:20,done:2},
+ {id:'feedback',name:'Feedback visual de ações e resultados nos comandos',weight:12,done:1},
  {id:'responsive',name:'Layouts desktop, mobile e Discord',weight:10,done:3},
  {id:'accessibility',name:'Usabilidade, botões e acessibilidade',weight:10,done:6},
  {id:'validation',name:'Testes, capturas e validação visual humana',weight:6,done:4}
@@ -49,7 +51,7 @@ const report={scope:'Playability of this RPG only; not every TCG/anime card',
 if(process.argv.includes('--json'))console.log(JSON.stringify(report,null,2));
 else{
  console.log(`ENGINE ${report.engine.complete}% complete / ${report.engine.remaining}% remaining`);
- console.log(`LAYOUT REBUILD ${report.layout.complete}% complete / ${report.layout.remaining}% remaining`);
+ console.log(`COMMAND VISUAL STANDARD ${report.layout.complete}% complete / ${report.layout.remaining}% remaining (original duel field preserved)`);
  console.log(`NPC DECKS ${playableNPCDecks.filter(n=>n.valid).length}/${playableNPCDecks.length} playable in this RPG, ${playableNPCDecks.map(n=>n.main).join('/')} cards in main decks`);
  console.log(`ENGINE CARDS ${report.enabledEngineCards} enabled / ${report.playableEffectMonsters} with monster effect definitions`);
  console.log('Milestone scores are reviewed manually; NPC deck readiness uses the executable card registry.');
