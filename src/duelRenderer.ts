@@ -47,7 +47,7 @@ async function draw(s:DuelState,viewer:string|undefined,provider:typeof getCardA
   svg+=rect(162,y+137+offset,108,183,'#182431','#647b89')+T(167,y+155,'CEMITÉRIO',11,'#b8ced9',700,100);
   const grave=p.grave.at(-1);if(grave)await image(grave,172,y+165+offset,88,126,true);
   svg+=T(177,y+309,`${p.grave.length} CARTAS`,12,'#ffffff',700,90);
-  const deckX=1184;for(let layer=2;layer>=0;layer--)svg+=back(deckX+layer*4,y+37+offset-layer*3,112,151);
+  const deckX=1184;if(p.deck.length)for(let layer=2;layer>=0;layer--)svg+=back(deckX+layer*4,y+37+offset-layer*3,112,151);else svg+=rect(deckX,y+37+offset,112,151,'#102632','#4e7d8b')+T(deckX+18,y+120,'VAZIO',16,'#4c7382',700,90);
   svg+=T(1130,y+216,`${p.deck.length} PARA COMPRAR`,21,'#f0d38c',700,240);
   svg+=rect(1120,y+237+offset,238,135,'#171c32','#75688d')+T(1134,y+261,'DECK ADICIONAL',13,'#c9b8f2',700,212);
   if((p.extra?.length??0)>0)svg+=back(1137,y+275+offset,48,65);
@@ -55,7 +55,7 @@ async function draw(s:DuelState,viewer:string|undefined,provider:typeof getCardA
   for(let zone=0;zone<3;zone++){
    const x=302+zone*266,monsterY=y+(upper?213:14),backY=y+(upper?14:213),m=p.monsters[zone],b=p.backrow[zone];
    svg+=rect(x,monsterY+offset,238,191,'#102632','#4e7d8b');
-   if(m){const visible=m.faceUp||my;await image(m,x+(m.position==='def'?27:68),monsterY+5+offset,m.position==='def'?184:103,m.position==='def'?127:143,visible,m.position==='def'?90:0);svg+=T(x+8,monsterY+164,visible?getCard(m.id)!.name:'Carta virada para baixo',13,'#ffffff',700,221)+T(x+8,monsterY+183,visible?`${m.position.toUpperCase()}  •  ${atk(m,s)} / ${def(m,s)}`:'DEF • OCULTA',13,'#8aebcf',700,221);}
+   if(m){const visible=m.faceUp||my;await image(m,x+(m.position==='def'?27:68),monsterY+5+offset,m.position==='def'?184:103,m.position==='def'?127:143,visible,m.position==='def'?90:0);svg+=T(x+8,monsterY+164,visible?getCard(m.id)!.name:'Carta virada para baixo',13,'#ffffff',700,221)+T(x+8,monsterY+183,visible?`${m.faceUp?m.position.toUpperCase():'DEF BAIXADA'}  •  ${atk(m,s)} / ${def(m,s)}`:'DEF • OCULTA',13,'#8aebcf',700,221);}
    else svg+=T(x+40,monsterY+101,`MONSTRO ${zone+1}`,18,'#4c7382',700,190);
    svg+=rect(x,backY+offset,238,191,'#192036','#655e85');
    if(b){await image(b,x+68,backY+5+offset,103,143,b.faceUp||my);svg+=T(x+8,backY+164,b.faceUp||my?getCard(b.id)!.name:'Carta virada para baixo',13,'#ded5f0',700,221)+T(x+8,backY+183,b.faceUp?'ATIVADA':my?'BAIXADA • SÓ VOCÊ VÊ':'OCULTA',11,'#a89bc7',700,221);}
