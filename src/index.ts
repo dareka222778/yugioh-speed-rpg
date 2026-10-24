@@ -277,7 +277,7 @@ async function main() {
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
-  console.log('Fase 4.2: arena redesenhada, mão no topo, versos e atalhos carregados.');
+  console.log('Fase 4.3: campo clássico, LP dourados e verso espiral âmbar carregados.');
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
   await client.login(token);
   const rest = new REST({ version: '10' }).setToken(token!);
