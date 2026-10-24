@@ -106,7 +106,10 @@ async function handleInteraction(i:Interaction) {
       if(action==='lobby'||action==='gallery'||action==='inspect'){
         await i.deferUpdate();
         const target=action==='lobby'?'joey':npcId;
-        const panel=action==='inspect'?(view==='deck'?'card':view==='loadout'?'playcard':'invalid'):action==='lobby'?'hero':view;
+        // Older published component IDs are redirected into the single playable
+        // deck browser. They never expose a second, non-playable card listing.
+        const selectedView=action==='lobby'?'hero':view==='loadout'?'deck':view==='playcard'?'card':view;
+        const panel=action==='inspect'?(i.isStringSelectMenu()?'card':'invalid'):selectedView;
         const selected=action==='inspect'&&i.isStringSelectMenu()?i.values[0]:action==='lobby'?'0':page;
         if(!/^\d+$/.test(selected??''))throw new Error('Página inválida. Abra /npc ver.');
         await i.editReply(await visualNPCLobby(id,Date.now(),target,panel as GalleryView,Number(selected)));return;
