@@ -92,6 +92,8 @@ function trapActions(s:DuelState,index:number):Action[]{
   if(effect.kind==='reinforcements'||effect.kind==='castleWalls')out.push(...s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>({kind:'trap',card:c.uid,target:m.uid}) as Action)));
   else if(effect.kind==='waboku')out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='justDesserts'&&s.players[1-index].monsters.length)out.push({kind:'trap',card:c.uid,target:''});
+  else if(effect.kind==='mirrorForce'&&s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='declare'&&s.pending.actor!==index)
+   out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='trapHole'&&s.phase==='response'&&s.pending.kind==='summon'&&s.pending.actor!==index){const m=findMonster(s,s.pending.card)?.m;if(m?.faceUp&&atk(m,s)>=1000)out.push({kind:'trap',card:c.uid,target:m.uid});}
  }return out;
 }
@@ -257,6 +259,12 @@ function resolve(s:DuelState){
   if(target?.faceUp){if(effect?.kind==='reinforcements')target.atkBoost+=500;else if(effect?.kind==='castleWalls')target.defBoost+=500;else if(effect?.kind==='trapHole')graveMonster(s,target.uid);}
   if(effect?.kind==='waboku')s.players[link.actor].battleProtectedUntil=s.turn;
   if(effect?.kind==='justDesserts'){const op=s.players[1-link.actor];op.lp=Math.max(0,op.lp-500*op.monsters.length);checkLP(s);}
+  if(effect?.kind==='mirrorForce'){
+   const opponent=s.players[1-link.actor];
+   const attackers=opponent.monsters.filter(m=>m.position==='atk').map(m=>m.uid);
+   for(const uid of attackers)graveMonster(s,uid);
+   note(s,`Força do Espelho destruiu ${attackers.length} monstro(s) adversário(s) em Ataque.`);
+  }
   discardBackrow(s,link.card);},link=>{discardBackrow(s,link.card);},()=>s.phase==='finished');
  s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};s.pendingNegated=false;return;}
  const pending=s.pending,negated=s.pendingNegated===true;s.pending={kind:'none'};s.pendingNegated=false;s.phase=s.resume;
