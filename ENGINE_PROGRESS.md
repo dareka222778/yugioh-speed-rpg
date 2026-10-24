@@ -8,7 +8,7 @@
 
 | Área | Concluído | Falta |
 | --- | ---: | ---: |
-| Engine clássica adaptada | **60%** | **40%** |
+| Engine clássica adaptada | **62%** | **38%** |
 | Reformulação visual inspirada em Duel Links | **0%** | **100%** |
 
 A base do bot já possui imagens e comandos, mas nenhum componente da **nova reformulação** foi aprovado como pronto. **Layout 0% não significa bot sem interface.**
@@ -26,11 +26,11 @@ A base do bot já possui imagens e comandos, mas nenhum componente da **nova ref
 | Cemitério e buscas | 8 | 5 | Sangan / Witch, restrição por nome, fila de gatilhos |
 | Gatilhos de invocação e invocações especiais | 7 | 2 | Despacho existe; efeitos reais adicionais pendentes |
 | Outros gatilhos de destruição | 7 | 0 | Sem implementação ampla |
-| Contínuos, rápidos, negações complexas | 8 | 0 | Pendentes |
+| Contínuos, rápidos, negações complexas | 8 | 2 | Jinzo contínuo habilitado; efeitos rápidos e negações complexas pendentes |
 | Primeiro lote histórico de cartas | 7 | 4 | Quantidades reais exibidas pelo `npm run progress` |
 | IA dos NPCs | 4 | 2 | Heurísticas de FLIP/Tributo; estratégia incompleta |
 | CI, regressão e aceite no Discord | 5 | 3 | Testes automatizados; aceite humano na hospedagem pendente |
-| **Total** | **100** | **60** | |
+| **Total** | **100** | **62** | |
 
 O progresso de regras é **deliberadamente menor que a porcentagem de cartas habilitadas**, pois boa parte do lote histórico é de monstros sem efeitos e não representa todo o trabalho de regras.
 
@@ -64,3 +64,7 @@ O progresso de regras é **deliberadamente menor que a porcentagem de cartas hab
 - Fazer testes simultâneos com mais efeitos encadeados, deck-out, alvos ausentes e partidas completas.
 - Fechar cobertura do primeiro lote histórico, respeitando incompatibilidades explícitas do formato de três zonas.
 - Iniciar posteriormente o sistema de design azul e a galeria navegável, **um duelista/carta por vez**, com personagens e imagens consistentes.
+
+## Efeito contínuo habilitado
+
+**Jinzo (77585513):** no campo com a face para cima, impede a ativação de Armadilhas dos dois duelistas e nega efeitos de Armadilhas já ativadas que resolveriam enquanto ele ainda estiver em campo. Com a face para baixo ou ao sair do campo, a restrição não se aplica. A implementação segue o texto oficial do card (<https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4758&request_locale=pt>) e possui testes de invocação, virada, controle de ambos os lados, corrente e restauração após deixar o campo.
