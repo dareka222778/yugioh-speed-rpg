@@ -13,6 +13,7 @@ const effects:Record<string,Effect>={
  '31560081':{kind:'monsterEffect'},
  '28933734':{kind:'monsterEffect'},
  '60694662':{kind:'monsterEffect'},
+ '11384280':{kind:'monsterEffect'},
  '38199696':{kind:'heal',amount:500},'84257639':{kind:'heal',amount:1000},'19523799':{kind:'burn',amount:800},
  '66788016':{kind:'fissure'},'24094653':{kind:'polymerization'},
  '17814387':{kind:'reinforcements'},'44209392':{kind:'castleWalls'},
@@ -34,7 +35,8 @@ const supportedEffectMonsters:Card[]=[
  {id:'07089711',konamiId:4547,name:'Hane-Hane',englishName:'Hane-Hane',kind:'monster',race:'Beast',attribute:'EARTH',level:2,atk:450,defense:500,summary:'VIRAR: escolha 1 monstro no campo; devolva-o à mão do dono.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4547&request_locale=en'},
  {id:'31560081',konamiId:4434,name:'Mago da Fé',englishName:'Magician of Faith',kind:'monster',race:'Spellcaster',attribute:'LIGHT',level:1,atk:300,defense:400,summary:'VIRAR: escolha 1 Magia no seu Cemitério; adicione-a à sua mão.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4434&request_locale=en'},
  {id:'28933734',konamiId:4108,name:'Máscara das Trevas',englishName:'Mask of Darkness',kind:'monster',race:'Fiend',attribute:'DARK',level:2,atk:900,defense:400,summary:'VIRAR: escolha 1 Armadilha no seu Cemitério; adicione-a à sua mão.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4108&request_locale=en'},
- {id:'60694662',konamiId:4546,name:'Anjo Esquelético',englishName:'Skelengel',kind:'monster',race:'Fairy',attribute:'LIGHT',level:2,atk:900,defense:400,summary:'VIRAR: compre 1 carta.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4546&request_locale=en'}
+ {id:'60694662',konamiId:4546,name:'Anjo Esquelético',englishName:'Skelengel',kind:'monster',race:'Fairy',attribute:'LIGHT',level:2,atk:900,defense:400,summary:'VIRAR: compre 1 carta.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4546&request_locale=en'},
+ {id:'11384280',konamiId:4518,name:'Soldado Canhão',englishName:'Cannon Soldier',kind:'monster',race:'Machine',attribute:'DARK',level:4,atk:1400,defense:1300,summary:'Ofereça 1 monstro que você controla como Tributo; cause 500 de dano ao oponente.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4518&request_locale=pt'}
 ];
 export const engineCatalog:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters];
 const metadata=new Map(engineCatalog.map(c=>[c.id,c]));
