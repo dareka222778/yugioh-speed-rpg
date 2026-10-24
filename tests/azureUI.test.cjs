@@ -18,6 +18,13 @@ test('azure design tokens pass WCAG AA contrast and maintain one neutral blue UI
  assert.deepEqual([duelLayout.width,duelLayout.boardHeight,duelLayout.handHeight,duelLayout.zoneCount],[1400,1020,340,3]);
  assert.equal(embedColors.deck,embedColors.npc);assert.equal(embedColors.public,embedColors.npc);
 });
+test('duel renderer keeps pre-Azure visual skin while command surfaces use shared blue tokens',()=>{
+ const source=fs.readFileSync(path.resolve(__dirname,'../src/duelRenderer.ts'),'utf8');
+ assert.match(source,/DUEL FIELD/);
+ assert.match(source,/#928785/);
+ assert.match(source,/#fff0bb/);
+ assert.ok(!source.includes("from './duelTheme'"),'visual tokens must not replace the original duel playmat');
+});
 test('original amber duel arena protects hidden card art and does not inherit portrait/gallery redesigns',async()=>{
  const s=createDuel([{id:'owner',name:'Duelista',cards:basic},{id:'npc-azure',name:'Joey Wheeler',cards:basic}],()=>.5);
  s.encounter={npcId:'joey'};
