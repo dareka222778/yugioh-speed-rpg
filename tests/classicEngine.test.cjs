@@ -1,6 +1,6 @@
 const {test,after}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'classic-engine-'));process.env.DATABASE_PATH=path.join(temporary,'game.sqlite');
-const e=require('../dist/duelEngine'),r=require('../dist/effectRegistry'),a=require('../dist/classicDecks'),catalog=require('../dist/cardCatalog'),{chooseNPC}=require('../dist/duelStore');
+const e=require('../dist/duelEngine'),r=require('../dist/effectRegistry'),catalog=require('../dist/cardCatalog'),{chooseNPC}=require('../dist/duelStore');
 const basic=catalog.starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id));
 function game(){const s=e.createDuel([{id:'a',name:'A',cards:basic},{id:'b',name:'B',cards:basic}],()=>.999999);s.turn=3;return s;}
 const ref=(id,uid='c-'+id)=>({id,uid});
@@ -12,10 +12,13 @@ function spell(s,id,predicate=()=>true){hand(s,id);return passes(use(s,'a','spel
 function setTrap(s,index,id){s.players[index].backrow.push({...ref(id),faceUp:false,setTurn:1});}
 function all(s){return s.players.flatMap(p=>[...p.hand,...p.deck,...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.field?[p.field]:[],...p.banished??[]]);}
 
-test('coverage distinguishes all classical normal monsters, explicit effects and unsupported cards',()=>{
- const coverage=r.classicCoverage();assert.equal(coverage.length,123);assert.ok(coverage.filter(c=>c.enabled).length>=88);assert.equal(e.IMPLEMENTED_DUEL_CARDS.length,r.enabledCardIds.length);
- for(const c of a.archiveCards.values())if(c.kind==='Monster'&&c.type.includes('Normal'))assert.ok(r.getEffect(c.id)?.kind==='normal',c.name);
- assert.equal(r.getEffect('71625222'),undefined);assert.throws(()=>e.validateDuelCards([...basic.slice(1),'71625222']),/implementada/);
+test('only audited card effects can join a duel, and every Normal monster has an executable Normal definition',()=>{
+ assert.equal(e.IMPLEMENTED_DUEL_CARDS.length,r.enabledCardIds.length);
+ const normals=r.engineCatalog.filter(c=>c.kind==='monster'&&c.summary.startsWith('Monstro Normal:'));
+ assert.ok(normals.length>=60);
+ for(const c of normals)assert.equal(r.getEffect(c.id)?.kind,'normal',c.name);
+ assert.equal(r.getEffect('71625222'),undefined);
+ assert.throws(()=>e.validateDuelCards([...basic.slice(1),'71625222']),/implementada/);
  for(const id of e.IMPLEMENTED_DUEL_CARDS)assert.ok(r.engineCard(id)&&r.getEffect(id));
 });
 test('every newly supported Normal monster uses its own printed stats and correct tribute requirement',()=>{
@@ -133,8 +136,13 @@ test('NPC uses new defensive and summon-response effects without knowing opponen
  s=game();hand(s,'04031928');s.players[1].monsters=[{...monster('88819587','hidden'),faceUp:false}];s.players[1].hand=[ref('91152256','unknown')];const before=chooseNPC(s,'a');s.players[1].monsters[0].id='89631139';s.players[1].hand[0].id='46986414';assert.deepEqual(chooseNPC(s,'a'),before);
 });
 
-test('the readiness gate refuses to label a partial classical engine complete',()=>{
- const out=require('node:child_process').spawnSync(process.execPath,['scripts/classic-engine-coverage.cjs','--require-complete'],{encoding:'utf8'});assert.equal(out.status,1);const report=JSON.parse(out.stdout);assert.equal(report.complete,false);assert.equal(report.total,123);assert.equal(report.enabled,r.classicCoverage().filter(c=>c.enabled).length);assert.equal(report.blocked+r.classicCoverage().filter(c=>c.status==='enabled').length+report.incompatible,report.total);assert.equal(report.incompatible,1);
+test('RPG readiness gate checks each actual NPC duel deck, without depending on unplayable lists',()=>{
+ const out=require('node:child_process').spawnSync(process.execPath,['scripts/duel-readiness.cjs','--require-complete'],{encoding:'utf8'});
+ assert.equal(out.status,0,out.stderr);
+ const report=JSON.parse(out.stdout);
+ assert.equal(report.complete,true);
+ assert.equal(report.npcDecks.length,3);
+ for(const n of report.npcDecks){assert.equal(n.main,30);assert.equal(n.ready,true);assert.deepEqual(n.invalid,[]);}
 });
 
 
