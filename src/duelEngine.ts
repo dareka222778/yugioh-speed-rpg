@@ -110,6 +110,19 @@ function endTurn(s:DuelState){
 function nextTurn(s:DuelState){s.current=1-s.current;s.turn++;s.phase='main';s.players[s.current].summoned=false;
  const p=s.players[s.current];const c=p.deck.shift();if(!c){finish(s,1-s.current,'não conseguiu comprar uma carta');return;}p.hand.push(c);note(s,`Turno ${s.turn}: ${p.name} comprou uma carta.`);
 }
+function triggerMonsterEffect(s:DuelState,actor:number,uid:string,trigger:'flip'|'onSummon'){
+ const m=s.players[actor].monsters.find(m=>m.uid===uid);
+ if(!m||!m.faceUp)return false;
+ const e=getMonsterEffect(m.id);
+ if(!e||e.trigger!==trigger)return false;
+ const p=s.players[actor],ctx={lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,usedThisTurn:m.effectUsedTurn===s.turn};
+ if(!canActivateMonsterEffect(e,ctx)||e.cost?.kind==='discard')return false;
+ const cost=payMonsterEffectCost(e,ctx);
+ p.lp-=cost.lpPaid;m.effectUsedTurn=s.turn;
+ note(s,'Efeito de monstro disparado.');
+ response(s,{kind:'monsterEffect',actor,card:uid,id:m.id},s.resume);
+ return true;
+}
 function resolve(s:DuelState){
  resolveChainLinks(s.chain,link=>{
   const target=findMonster(s,link.target)?.m;const effect=getEffect(link.id);
@@ -129,6 +142,10 @@ function resolve(s:DuelState){
    p.hand.push(...p.deck.splice(0,e.operation.count));
   }
   note(s,'Efeito de monstro resolvido.');return;
+ }
+ if(pending.kind==='flip'||pending.kind==='summon'){
+  triggerMonsterEffect(s,pending.actor,pending.card,pending.kind==='flip'?'flip':'onSummon');
+  return;
  }
  if(pending.kind==='end'){endTurn(s);return;}
  if(pending.kind==='battle'){s.phase='battle';note(s,'Fase de Batalha.');return;}
@@ -156,6 +173,7 @@ function resolve(s:DuelState){
   const attacking=findMonster(s,pending.card);if(!attacking||attacking.p!==s.players[pending.actor]||!attacking.m.faceUp||attacking.m.position!=='atk')return;const a=attacking.m;const defender=pending.target?findMonster(s,pending.target):undefined;
   if(pending.stage==='declare'){
    if(defender&&!defender.m.faceUp){defender.m.faceUp=true;note(s,`Revelado: ${card(defender.m.id).name}.`);}
+   if(defender&&!defender.m.faceUp){/* reveal handled before trigger checks */ }
    response(s,{...pending,stage:'damage'},'battle',1-pending.actor);return;
   }
   const opponent=s.players[1-pending.actor];
