@@ -19,3 +19,7 @@ export function payMonsterEffectCost(effect:MonsterEffect,ctx:MonsterEffectConte
  return {lpPaid:effect.cost?.kind==='lp'?effect.cost.amount:0,cardsDiscarded:effect.cost?.kind==='discard'?effect.cost.count:0};
 }
 export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{return effect.operation;}
+
+/** Only explicitly registered and audited cards may expose monster effects. */
+const monsterEffects:Readonly<Record<string,MonsterEffect>>=Object.freeze({});
+export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return monsterEffects[cardId];}
