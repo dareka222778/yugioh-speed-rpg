@@ -21,3 +21,12 @@ test('monster effect checks discard and draw availability',()=>{
  assert.equal(canActivateMonsterEffect(draw,ctx),false);
  assert.equal(canActivateMonsterEffect(draw,{...ctx,deckSize:2}),true);
 });
+
+test('targeted destruction accepts only opponent monster instance IDs',()=>{
+ const {monsterDestructionTarget}=require('../dist/monsterEffects');
+ const effect={trigger:'flip',operation:{kind:'destroy',target:'opponentMonster'}};
+ assert.equal(monsterDestructionTarget(effect,['enemy-a','enemy-b'],'enemy-b'),'enemy-b');
+ assert.throws(()=>monsterDestructionTarget(effect,['enemy-a'],'friendly-a'),/Invalid opponent/);
+ assert.throws(()=>monsterDestructionTarget(effect,['enemy-a'],''),/Invalid opponent/);
+ assert.throws(()=>monsterDestructionTarget({trigger:'flip',operation:{kind:'draw',count:1}},['enemy-a'],'enemy-a'),/does not destroy/);
+});
