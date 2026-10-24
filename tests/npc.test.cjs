@@ -12,7 +12,7 @@ test('all NPC loadouts contain only implemented cards; three new signature monst
 });
 test('30 seeded complete games across NPCs terminate and preserve every main/extra card',()=>{
  for(const n of content.npcs)for(let seed=1;seed<=10;seed++){let value=seed;const rng=()=>((value=(value*1664525+1013904223)>>>0)/2**32);let s=engine.createDuel([{id:'human',name:'A',cards:basic},{id:'npc',name:n.name,cards:n.cards,extra:n.extra}],rng,seed%2),moves=0;
- while(s.phase!=='finished'){const actor=s.players[engine.decisionPlayer(s)].id,a=store.chooseNPC(s,actor);assert.ok(a,`${n.id}: no action in ${s.phase}`);s=engine.step(s,actor,a);assert.ok(++moves<2000);for(const [i,p]of s.players.entries()){const all=[...p.deck,...p.hand,...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.field?[p.field]:[]];assert.equal(new Set(all.map(c=>c.uid)).size,20+(i===1?n.extra.length:0));}}
+ while(s.phase!=='finished'){const actor=s.players[engine.decisionPlayer(s)].id,a=store.chooseNPC(s,actor);assert.ok(a,`${n.id}: no action in ${s.phase}`);s=engine.step(s,actor,a);assert.ok(++moves<2000);for(const [i,p]of s.players.entries()){const all=[...p.deck,...p.hand,...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.field?[p.field]:[]];assert.equal(new Set(all.map(c=>c.uid)).size,i===1?n.cards.length+n.extra.length:20);}}
  }
 });
 test('start grants nothing; first victory atomically awards exact DP, XP and owned cards once, and survives reopening',()=>{
