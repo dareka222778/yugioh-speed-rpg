@@ -1,9 +1,10 @@
 import 'dotenv/config';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GatewayIntentBits, MessageFlags, ModalBuilder, REST, Routes, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
+import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GatewayIntentBits, MessageFlags, ModalBuilder, REST, Routes, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
 import { chooseStarterDeck, createPlayer, getPlayer, updateProfile } from './database';
 import { isStarterDeck, starterDecks } from './starterDecks';
 import { profileMessage, themes, validateProfile } from './profile';
 import { removePortrait, savePortrait } from './portrait';
+import { renderWelcome } from './cardRenderer';
 
 const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
@@ -36,20 +37,23 @@ client.on(Events.InteractionCreate, async i => {
       if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! O RPG está online.', flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'start') {
         const player = createPlayer(id, i.user.username);
-        if (player.starter_deck) { await i.reply({ ...profileMessage(player, avatar), flags: MessageFlags.Ephemeral }); return; }
+        if (player.starter_deck) { await i.deferReply({ flags: MessageFlags.Ephemeral }); await i.editReply(await profileMessage(player, avatar)); return; }
+        await i.deferReply({ flags: MessageFlags.Ephemeral });
+        const welcomeImage = new AttachmentBuilder(await renderWelcome(), {name:'primeira-jogada.png'});
         const embed = new EmbedBuilder().setColor(themes.ouro).setAuthor({ name: 'SPEED RPG • PRIMEIRA JOGADA', iconURL: avatar })
-          .setTitle('Sua jornada começa aqui')
+          .setTitle('A primeira jogada é sua')
           .setDescription('Escolha o estilo do seu duelista. A escolha será permanente nesta versão.\n\n**V0:** o estilo será salvo; as cartas e os duelos ainda estão em desenvolvimento.')
-          .addFields(Object.values(starterDecks).map(d => ({ name: `${d.emoji} ${d.name}`, value: d.description })))
+          .setImage('attachment://primeira-jogada.png')
           .setFooter({ text: 'Depois da escolha, personalize seu personagem com /personalizar.' });
         const row = new ActionRowBuilder<ButtonBuilder>().addComponents(Object.entries(starterDecks).map(([key,d]) => new ButtonBuilder().setCustomId(`starter:${key}`).setLabel(d.name).setEmoji(d.emoji).setStyle(ButtonStyle.Primary)));
-        await i.reply({ embeds: [embed], components: [row], flags: MessageFlags.Ephemeral }); return;
+        await i.editReply({ embeds: [embed], files:[welcomeImage], components: [row] }); return;
       }
       const player = getPlayer(id);
       if (!player) { await i.reply({ content: 'Crie seu duelista primeiro com `/start`.', flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'perfil') {
         const publicProfile = i.options.getBoolean('publico') ?? false;
-        await i.reply({ ...profileMessage(player, avatar, !publicProfile), ...(publicProfile ? {} : { flags: MessageFlags.Ephemeral }) }); return;
+        await i.deferReply(publicProfile ? {} : { flags: MessageFlags.Ephemeral });
+        await i.editReply(await profileMessage(player, avatar, !publicProfile)); return;
       }
       if (i.commandName === 'personalizar') {
         if (busy.has(id)) { await i.reply({ content: 'Sua alteração anterior ainda está sendo salva.', flags: MessageFlags.Ephemeral }); return; }
@@ -63,7 +67,7 @@ client.on(Events.InteractionCreate, async i => {
           if (image) await savePortrait(id, image);
           if (remove) await removePortrait(id);
           updateProfile(id, profile);
-          await i.editReply({ content: '✦ Personagem atualizado.', ...profileMessage(getPlayer(id)!, avatar) });
+          await i.editReply({ content: '✦ Personagem atualizado.', ...await profileMessage(getPlayer(id)!, avatar) });
         } finally { busy.delete(id); }
         return;
       }
@@ -73,7 +77,8 @@ client.on(Events.InteractionCreate, async i => {
       if (!isStarterDeck(key)) return;
       createPlayer(id, i.user.username);
       const success = chooseStarterDeck(id, key);
-      await i.update({ content: success ? '✦ Estilo inicial salvo. Agora dê vida ao seu personagem!' : 'Seu estilo inicial já foi escolhido.', ...profileMessage(getPlayer(id)!, avatar) }); return;
+      await i.deferUpdate();
+      await i.editReply({ attachments: [], content: success ? '✦ Estilo inicial salvo. Agora dê vida ao seu personagem!' : 'Seu estilo inicial já foi escolhido.', ...await profileMessage(getPlayer(id)!, avatar) }); return;
     }
     if (i.isButton() && i.customId.startsWith('profile:')) {
       const [,action,owner] = i.customId.split(':');
@@ -81,7 +86,7 @@ client.on(Events.InteractionCreate, async i => {
       const player = getPlayer(id);
       if (!player) throw new Error('Crie seu duelista com /start.');
       if (action === 'help') { await i.reply({ content: help, flags: MessageFlags.Ephemeral }); return; }
-      if (action === 'refresh') { await i.update({ ...profileMessage(player, avatar), attachments: [] }); return; }
+      if (action === 'refresh') { await i.deferUpdate(); await i.editReply({ ...await profileMessage(player, avatar), attachments: [] }); return; }
       if (action === 'edit') {
         const modal = new ModalBuilder().setCustomId(`profile-edit:${id}`).setTitle('Seu personagem');
         for (const [key,label,value,max,style] of [
@@ -101,13 +106,14 @@ client.on(Events.InteractionCreate, async i => {
       if (!getPlayer(id)) throw new Error('Crie seu duelista com /start.');
       const profile = validateProfile(i.fields.getTextInputValue('name'), i.fields.getTextInputValue('bio'), i.fields.getTextInputValue('theme').trim().toLowerCase());
       updateProfile(id, profile);
-      await i.reply({ content: '✦ Personagem atualizado.', ...profileMessage(getPlayer(id)!, avatar), flags: MessageFlags.Ephemeral });
+      await i.deferReply({ flags: MessageFlags.Ephemeral });
+      await i.editReply({ content: '✦ Personagem atualizado.', ...await profileMessage(getPlayer(id)!, avatar) });
     }
   } catch (error) {
     console.error('Falha na interação:', error);
     const content = error instanceof Error && !('code' in error) ? error.message : 'Não foi possível concluir. Tente novamente.';
     try {
-      if (i.deferred) await i.editReply({ content });
+      if (i.deferred) await i.editReply({ content, embeds: [], components: [], attachments: [] });
       else if (i.replied) await i.followUp({ content, flags: MessageFlags.Ephemeral });
       else await i.reply({ content, flags: MessageFlags.Ephemeral });
     } catch (replyError) { console.error('Falha ao responder:', replyError); }
