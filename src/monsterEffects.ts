@@ -21,7 +21,9 @@ export function payMonsterEffectCost(effect:MonsterEffect,ctx:MonsterEffectConte
 export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{return effect.operation;}
 
 /** Only explicitly registered and audited cards may expose monster effects. */
-const monsterEffects:Readonly<Record<string,MonsterEffect>>=Object.freeze({});
+const monsterEffects:Readonly<Record<string,MonsterEffect>>=Object.freeze({
+ '54652250':{trigger:'flip',operation:{kind:'destroy',target:'opponentMonster'}} // Man-Eater Bug: FLIP, target and destroy 1 monster on the field (opponent-only engine subset)
+});
 export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return monsterEffects[cardId];}
 
 /** Resolve an opponent-monster target by unique instance ID, never by card ID.
