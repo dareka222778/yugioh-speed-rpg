@@ -72,6 +72,22 @@ test('duel listener creates training, keeps hands private, rejects strangers and
  r=store.getDuel(r.id);const quit=interaction('button',undefined,{user,customId:`duel:quit:${r.id}:${r.revision}`});await dispatch(quit.i);assert.match(quit.calls[0][1].content,/Confirma/);assert.equal(store.getDuel(r.id).status,'playing');
  const confirm=interaction('button',undefined,{user,customId:`duel:confirm:${r.id}:${r.revision}`});await dispatch(confirm.i);assert.equal(store.getDuel(r.id).status,'finished');
 });
+test('laboratory slash command creates a six-effect trial duel without awarding inventory',async()=>{
+ await registrationReady;
+ const duel=registered.find(c=>c.name==='duelo');
+ assert.ok(duel.options.some(o=>o.name==='laboratorio'));
+ const user={id:'109',username:'Laboratório',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};
+ db.createPlayer('109','Laboratório');
+ const before=db.getCollection('109');
+ const command=interaction('command','duelo',{user,options:{getSubcommand:()=> 'laboratorio'}});
+ await dispatch(command.i);
+ assert.deepEqual(command.calls.map(x=>x[0]),['defer','edit']);
+ const record=require('../dist/duelStore').currentDuel('109');
+ assert.ok(record);assert.ok(record.state.fixedOpening);
+ const ids=new Set([...record.state.players[0].hand,...record.state.players[0].deck].map(c=>c.id));
+ for(const id of ['54652250','07089711','31560081','28933734','60694662','11384280'])assert.ok(ids.has(id),`Missing test card ${id}`);
+ assert.deepEqual(db.getCollection('109'),before);
+});
 test('duel invitation is accepted only by its intended opponent without overwriting the public invitation on error',async()=>{
  const decks=require('../dist/decks'),store=require('../dist/duelStore');for(const id of ['105','106']){db.createPlayer(id,'PvP '+id);db.chooseStarterDeck(id,'dragon');decks.openDeck(id);decks.activateDeck(id,1);}
  const user=id=>({id,username:'PvP',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'});
