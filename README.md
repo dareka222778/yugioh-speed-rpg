@@ -166,7 +166,7 @@ Ainda faltam diversas outras famílias clássicas de efeitos (sobretudo efeitos 
 
 ### Acompanhamento da engine e do próximo layout
 
-O escopo de cada fase e as porcentagens fundamentadas por entrega estão em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md). Após `npm run build`, use `npm run progress` para mostrar percentual concluído/restante da engine e do redesign, validação dos decks próprios dos NPCs e número de monstros de efeito jogáveis.
+O escopo de cada fase e as porcentagens fundamentadas por entrega estão em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md). Após `npm run build`, use `npm run progress` para mostrar percentual concluído/restante da engine e do padrão visual dos comandos, sem redesenhar o campo, além da validação dos decks próprios dos NPCs.
 
 A versão atual incorpora Sangan e Bruxa da Floresta Negra: ao irem **do campo para o Cemitério**, podem buscar um monstro elegível no Deck com ATK/DEF até 1500, com limitação por nome e bloqueio temporário de ativação dos efeitos do card buscado. Há testes de busca depois da corrente, Tributo, batalha, proprietário verdadeiro e privacidade da escolha.
 
@@ -182,14 +182,14 @@ O escopo e o percentual atualizado por entregas estão documentados em [ENGINE_P
 
 ### Destruição por batalha e Invocação-Especial do Deck
 
-**Tomate Místico** (83011277) é a primeira carta do laboratório que pode recrutar outro monstro diretamente do Deck quando é destruído por batalha e enviado ao Cemitério. Só permite monstros TREVAS com até 1500 ATK; o jogador também pode recusar. A engine diferencia esta causa de destruição da causada por custos/efeitos e considera o verdadeiro dono da carta. Os cenários em `tests/classicBattleRecruiters.test.cjs` são executados automaticamente. O marco atual está em **80% engine / 20% restantes** e **61% do redesign Azure / 39% restantes**, conforme [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md).
+**Tomate Místico** (83011277) é a primeira carta do laboratório que pode recrutar outro monstro diretamente do Deck quando é destruído por batalha e enviado ao Cemitério. Só permite monstros TREVAS com até 1500 ATK; o jogador também pode recusar. A engine diferencia esta causa de destruição da causada por custos/efeitos e considera o verdadeiro dono da carta. Os cenários em `tests/classicBattleRecruiters.test.cjs` são executados automaticamente. O marco atual está em **85% dos marcos da engine / 15% restantes** e **47% do padrão visual dos comandos / 53% restantes**, conforme [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md).
 
 ## Arena Azure e avanço do motor — 2026-10-24
 
 A reformulação funcional já está disponível na branch de desenvolvimento:
 
-- Arena azul inspirada no ritmo e na hierarquia do Duel Links, com HUD dos duelistas, PV, três zonas, indicador de fases e de respostas, mão privada e retratos dos NPCs.
-- Fotos de perfil dos jogadores que possuem imagem cadastrada agora aparecem no HUD do duelo. Cartas ocultas não são incluídas no conjunto público de artes.
+- **Arena de duelo original preservada:** tabuleiro âmbar anterior à reformulação azul, com três zonas, PV, cartas ocultas, compras e mão privada. O visual do campo não será redesenhado como parte da padronização dos comandos.
+- Retratos e fotos de perfil ficam nos painéis apropriados de personagem e duelista. Cartas ocultas não são incluídas no conjunto público de artes nem divulgadas pelo renderer da arena.
 - A mão pode ser explorada **carta por carta**: imagem grande, nome, ATK/DEF, resumo de efeito, controles anterior/próxima, menu de ações legais da carta e retorno ao painel. A permissão é verificada pelo servidor.
 - Galeria dos NPCs e editor de decks agora usam a mesma linguagem azul. Os decks **próprios** de Joey, Yugi e Kaiba têm **30 cartas** cada, e somente essas cartas aparecem no portal dos duelistas.
 - **Pote da Ganância**, **Raigeki** e **Tufão Espacial Místico** foram acrescentados ao motor e ao laboratório. Tufão é uma Magia Rápida com janela de resposta, e destruir uma Magia/Armadilha já ativada não nega automaticamente seu efeito.
@@ -212,3 +212,13 @@ As artes são apenas apresentação: os efeitos e a legalidade das cartas contin
 O editor `/deck ver` passou a oferecer **Ver carta** para abrir uma tela própria de 1200×720 pixels: nome, arte, atributo/tipo, ATK/DEF, efeito, quantidade que você possui e quantidade incluída no deck. Botões **Anterior**, **Próxima** e **Voltar ao deck** permitem navegar sem sair do painel privado e verificam dono/revisão para não executar cliques antigos.
 
 **Força do Espelho** (44095762) entrou como carta com efeito real: reage à declaração de ataque, destrói os monstros do adversário em Ataque e pode ser respondida ou negada em corrente. Destruição por efeito não conta como destruição por batalha. O Joey pode utilizá-la em seu próprio deck e entregá-la como recompensa na primeira vitória. Veja `tests/classicMirrorForce.test.cjs` para os casos de interação e `tests/deckRenderer.test.cjs` para a ficha azul.
+
+## Restauração do campo e expansão dos efeitos — atualização
+
+**A arena de duelo permanece com o layout original âmbar.** Restauramos `src/duelRenderer.ts` à versão anterior à reformulação Azure; o fluxo de efeitos, a mão privada e os componentes interativos não foram revertidos junto com a aparência. Existe um teste automático para impedir que mudanças futuras voltem a introduzir os elementos visuais removidos no campo. O azul é uma **identidade comum dos comandos**, sobretudo galeria, editor de decks, inspeção de cartas e painéis informativos.
+
+A engine avançou na interação de correntes e invocações com mais quatro cartas reais: **Livro da Lua**, **Tributo Torrencial**, **Armadura Sakuretsu** e **Buraco Armadilha Sem Fundo**. Magias Rápidas baixadas no turno atual não podem ser ativadas; as Armadilhas reagem às janelas corretas de ataque ou Invocação; Invocação-Fusão, Monster Reborn e Tomate Místico abrem janelas após Invocações-Especiais. O Sem Fundo destrói e **bane** o monstro, respeitando seu dono original e sem disparar efeitos de Cemitério.
+
+O laboratório com `/duelo laboratorio` foi expandido para **24 cartas** para experimentar os novos efeitos. Os decks próprios dos NPCs continuam com 30 cartas, e seus controles de IA conseguem utilizar as novas respostas. Acompanhamento: [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md), [CLASSIC_ENGINE.md](CLASSIC_ENGINE.md).
+
+**Os marcos atuais não equivalem à implementação completa do TCG:** ainda faltam sistemas avançados de timing, novas famílias de cartas, regras simultâneas/SEGOC e revisão humana da jogabilidade hospedada.
