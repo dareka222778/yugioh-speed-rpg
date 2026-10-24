@@ -5,6 +5,7 @@ import {npcs,dailyEvent,getNPC} from './npcContent';
 import {npcProgress} from './npcProgress';
 import {classicDeck,ClassicCard} from './classicDecks';
 import {GalleryView,GalleryModel,npcThemes,renderNPC} from './npcRenderer';
+import {embedColors} from './duelTheme';
 const views=new Set<GalleryView>(['hero','deck','card','loadout','playcard']);
 export function galleryModel(owner:string,now=Date.now(),npcId='joey',view:GalleryView='hero',page=0):GalleryModel{
  if(!getPlayer(owner))throw new Error('Crie seu duelista com /start.');
@@ -20,7 +21,7 @@ export function npcLobby(owner:string,now=Date.now(),npcId='joey',view:GalleryVi
  const m=galleryModel(owner,now,npcId,view,page),n=getNPC(npcId),d=classicDeck(npcId),t=npcThemes[npcId],event=dailyEvent(now);
  const nav=(id:string,v:GalleryView,p:number)=>`npc:gallery:${owner}:${id}:${v}:${p}`;
  const btn=(label:string,id:string,style=ButtonStyle.Secondary)=>new ButtonBuilder().setLabel(label).setCustomId(id).setStyle(style);
- const embed=new EmbedBuilder().setColor(parseInt(t.color.slice(1),16)).setTitle(view==='hero'?n.name:`${n.name} • ${view==='deck'||view==='card'?'Deck clássico':'Deck do desafio'}`);
+ const embed=new EmbedBuilder().setColor(embedColors.npc).setTitle(view==='hero'?n.name:`${n.name} • ${view==='deck'||view==='card'?'Deck clássico':'Deck do desafio'}`);
  const rows:(ActionRowBuilder<ButtonBuilder>|ActionRowBuilder<StringSelectMenuBuilder>)[]=[];
  if(view==='hero'){
   embed.setDescription(`**Duelar:** 20 cartas em regras Speed${n.extra.length?' + 1 Fusão':''}.\n**Deck clássico ${d.prefix}:** 50 cartas para inspecionar; duelo completo ainda indisponível.`);
