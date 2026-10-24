@@ -156,13 +156,13 @@ Os alvos são selecionados na ativação, antes da janela de resposta; efeitos n
 
 ### Como experimentar no Discord
 
-Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui onze monstros de efeito clássicos (os seis anteriores, Sangan, Bruxa da Floresta Negra, Jinzo, Ventríloco Misterioso e Tomate Místico), além de Bloqueador de Magia e Sete Ferramentas do Bandido, Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
+Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui onze monstros de efeito clássicos (os seis anteriores, Sangan, Bruxa da Floresta Negra, Jinzo, Ventríloco Misterioso e Tomate Místico), além de Bloqueador de Magia, Sete Ferramentas do Bandido, Pote da Ganância, Raigeki, Tufão Espacial Místico, Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
 
 Para instalar as alterações no bot hospedado, atualize o código da branch aprovada, compile e reinicie o processo, e registre os novos comandos slash no Discord. Commits no GitHub não atualizam automaticamente uma instância em execução.
 
 ### Escopo pendente
 
-Ainda faltam outras famílias clássicas de efeitos (incluindo gatilhos ao enviar ao Cemitério, efeitos rápidos, interações complexas de corrente, restrições de ativação e efeitos contínuos). A IA de duelo usa heurísticas e não substitui uma implementação completa das regras. Antes de migrar esta branch para `main`, executar `npm ci`, `npm run check`, `npm test` e aceitar manualmente um duelo com dois clientes Discord, incluindo alvos, cartas ocultas e efeitos em combate.
+Ainda faltam diversas outras famílias clássicas de efeitos (sobretudo efeitos rápidos de monstros, casos complexos de corrente, regras de simultaneidade e suporte às cartas restantes). Gatilhos do Cemitério, Magias Rápidas, custos, Armadilhas de Resposta e efeitos contínuos possuem apenas um primeiro conjunto de implementações auditadas. A IA de duelo usa heurísticas e não substitui uma implementação completa das regras. Antes de migrar esta branch para `main`, executar `npm ci`, `npm run check`, `npm test` e aceitar manualmente um duelo com dois clientes Discord, incluindo alvos, cartas ocultas e efeitos em combate.
 
 ### Acompanhamento da engine e do próximo layout
 
@@ -182,4 +182,21 @@ O escopo e o percentual atualizado por entregas estão documentados em [ENGINE_P
 
 ### Destruição por batalha e Invocação-Especial do Deck
 
-**Tomate Místico** (83011277) é a primeira carta do laboratório que pode recrutar outro monstro diretamente do Deck quando é destruído por batalha e enviado ao Cemitério. Só permite monstros TREVAS com até 1500 ATK; o jogador também pode recusar. A engine diferencia esta causa de destruição da causada por custos/efeitos e considera o verdadeiro dono da carta. Os cenários em `tests/classicBattleRecruiters.test.cjs` são executados automaticamente. O marco atual está em **72% engine / 28% restantes**, conforme [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md); o redesenho visual permanece **0%**.
+**Tomate Místico** (83011277) é a primeira carta do laboratório que pode recrutar outro monstro diretamente do Deck quando é destruído por batalha e enviado ao Cemitério. Só permite monstros TREVAS com até 1500 ATK; o jogador também pode recusar. A engine diferencia esta causa de destruição da causada por custos/efeitos e considera o verdadeiro dono da carta. Os cenários em `tests/classicBattleRecruiters.test.cjs` são executados automaticamente. O marco atual está em **78% engine / 22% restantes** e **56% do redesign Azure / 44% restantes**, conforme [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md).
+
+## Arena Azure e avanço do motor — 2026-10-24
+
+A reformulação funcional já está disponível na branch de desenvolvimento:
+
+- Arena azul inspirada no ritmo e na hierarquia do Duel Links, com HUD dos duelistas, PV, três zonas, indicador de fases e de respostas, mão privada e retratos dos NPCs.
+- Fotos de perfil dos jogadores que possuem imagem cadastrada agora aparecem no HUD do duelo. Cartas ocultas não são incluídas no conjunto público de artes.
+- A mão pode ser explorada **carta por carta**: imagem grande, nome, ATK/DEF, resumo de efeito, controles anterior/próxima, menu de ações legais da carta e retorno ao painel. A permissão é verificada pelo servidor.
+- Galeria dos NPCs e editor de decks agora usam a mesma linguagem azul. Os decks *jogáveis* de Joey, Yugi e Kaiba têm **30 cartas** cada; os produtos históricos de 50 cartas permanecem somente para consulta.
+- **Pote da Ganância**, **Raigeki** e **Tufão Espacial Místico** foram acrescentados ao motor e ao laboratório. Tufão é uma Magia Rápida com janela de resposta, e destruir uma Magia/Armadilha já ativada não nega automaticamente seu efeito.
+- O GitHub Actions executa os testes e gera prévias PNG da arena pública e privada, ficha de duelista, carta histórica individual e editor. As prévias são anexadas como artefato **duel-azure-previews** à execução do workflow de validação. As imagens do catálogo podem aparecer como placeholders na geração offline; a execução normal utiliza o cache de arte de cartas.
+
+### Validação, limitações e implantação
+
+Em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md) os percentuais representam pesos fixos de entregas e não um percentual de todas as regras TCG/anime. Testes automatizados verificam componentes, regras, partidas simuladas, conservação de cartas, privacidade de mão/deck e renderização, mas **não substituem testes humanos no Discord** e não validam todas as cartas existentes.
+
+A hospedagem não é atualizada por estes commits: é necessário implantar a branch validada, disponibilizar as dependências do projeto, registrar os comandos slash e reiniciar o bot. Não faça merge na main sem validar as interfaces em um servidor de teste.
