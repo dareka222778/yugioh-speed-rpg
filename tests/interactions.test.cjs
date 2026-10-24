@@ -14,7 +14,7 @@ const original=Module._load;
 Module._load=function(name,parent,isMain){
  if(name==='discord.js')return {...discord,Client:TestClient,REST:TestREST};
  if(name==='./duelUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDuelPublic:async(...args)=>ui.duelPublicMessage(...args),visualDuelPrivate:async(...args)=>ui.duelPrivateMessage(...args),visualDuelCard:async(...args)=>ui.duelCardMessage(...args)};}
- if(name==='./deckUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDeckMessage:async(...args)=>ui.deckMessage(...args)};}
+ if(name==='./deckUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDeckMessage:async(...args)=>ui.deckMessage(...args),visualDeckCard:async(...args)=>ui.deckCardMessage(...args)};}
  if(name==='./npcUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualNPCLobby:async(...args)=>ui.npcLobby(...args)};}
  if(name==='./networkRetry'&&parent.filename.endsWith('/dist/index.js')){const network=original.apply(this,arguments);return {...network,retryNetwork:(work,label)=>network.retryNetwork(work,label,{sleep:async()=>{},log:()=>{}})};}
  if(name==='./cardArt'&&parent.filename.endsWith('/dist/index.js'))return {getCardArt:async()=>null};
@@ -58,6 +58,32 @@ test('deck command and private controls edit real inventory-backed drafts, block
  const edit=interaction('button',undefined,{customId:minus});await dispatch(edit.i);assert.deepEqual(edit.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(edit.calls[1][1].embeds[0].toJSON().description,/19\/30/);
  const stale=interaction('button',undefined,{customId:minus});await dispatch(stale.i);assert.match(stale.calls.at(-1)[1].content,/antigo/);
  assert.equal(db.getCollection('101').reduce((s,c)=>s+c.quantity,0),20);
+});
+test('private own-deck card inspector opens, scrolls and returns through the real Discord listener',async()=>{
+ const user={id:'101',username:'Kise',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};
+ const view=interaction('command','deck',{user,options:{getSubcommand:()=> 'ver',getInteger:()=>null}});
+ await dispatch(view.i);
+ const panel=view.calls[1][1],buttons=panel.components[2].toJSON().components;
+ const inspect=buttons.find(b=>b.custom_id.startsWith('deck:inspect:'));
+ assert.ok(inspect&&!inspect.disabled);
+ const open=interaction('button',undefined,{user,customId:inspect.custom_id});
+ await dispatch(open.i);
+ assert.deepEqual(open.calls.map(c=>c[0]),['deferUpdate','edit']);
+ const card=open.calls[1][1];assert.match(card.embeds[0].toJSON().description,/No seu deck/);
+ const next=card.components[0].toJSON().components[2].custom_id;
+ const forward=interaction('button',undefined,{user,customId:next});
+ await dispatch(forward.i);
+ assert.deepEqual(forward.calls.map(c=>c[0]),['deferUpdate','edit']);
+ assert.notEqual(forward.calls[1][1].cardId,card.cardId);
+ const back=card.components[0].toJSON().components[1].custom_id;
+ const close=interaction('button',undefined,{user,customId:back});
+ await dispatch(close.i);
+ assert.deepEqual(close.calls.map(c=>c[0]),['deferUpdate','edit']);
+ assert.ok(close.calls[1][1].components[2].toJSON().components.some(b=>b.custom_id.startsWith('deck:inspect:')));
+ const stranger=interaction('button',undefined,{customId:next,user:{id:'999',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'}});
+ await dispatch(stranger.i);
+ assert.equal(stranger.calls[0][0],'reply');
+ assert.match(stranger.calls[0][1].content,/próprio/);
 });
 test('duel listener creates training, keeps hands private, rejects strangers and stale clicks, and confirms surrender',async()=>{
  const decks=require('../dist/decks'),store=require('../dist/duelStore'),engine=require('../dist/duelEngine');
