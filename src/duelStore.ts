@@ -57,7 +57,20 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
   const score=(x:Extract<Action,{kind:'trap'}>)=>x.discards?.reduce((n,uid)=>n+(getCard(p.hand.find(c=>c.uid===uid)!.id)?.atk??0),0)??0;
   return score(a)-score(b);
  })[0];
- if(useful)return useful;if(s.phase==='response')return actions.find(a=>a.kind==='pass');
+ if(useful)return useful;
+ if(s.phase==='response'){
+  // Prefer destroying a known enemy Field/Spell/Trap; never inspect hidden
+  // identities or waste a Quick-Play on a friendly card.
+  const quick=actions.filter((a):a is Extract<Action,{kind:'spell'}>=>a.kind==='spell')
+   .filter(a=>getEffect(source(a)?.id??'')?.kind==='mysticalSpaceTyphoon')
+   .filter(a=>op.backrow.some(b=>b.uid===a.target)||op.field?.uid===a.target)
+   .sort((a,b)=>{
+    const priority=(x:Extract<Action,{kind:'spell'}>)=>
+      op.field?.uid===x.target?3:op.backrow.some(c=>c.uid===x.target&&c.faceUp)?2:1;
+    return priority(b)-priority(a);
+   });
+  return quick[0]??actions.find(a=>a.kind==='pass');
+ }
  if(s.phase==='discard')return [...actions].sort((a,b)=>{const score=(x:Action)=>x.kind==='discard'?(getCard(p.hand.find(c=>c.uid===x.card)!.id)!.atk??0):0;return score(a)-score(b);})[0];
  if(s.phase==='choice'){
   if(s.choice?.source==='monsterRecruit'){
