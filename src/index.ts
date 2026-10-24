@@ -8,7 +8,7 @@ import { renderWelcome } from './cardRenderer';
 import { collectionMessage, cardMessage, searchCards, exactCard, getCard } from './collection';
 import { getCardArt } from './cardArt';
 import {openDeck,changeDeck,renameDeck,activateDeck,fillInitialDeck} from './decks';
-import {visualDeckMessage} from './deckUI';
+import {visualDeckMessage,visualDeckCard,getDeckCardIndex} from './deckUI';
 import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChallenge,createTraining,createNPCDuel,currentDuel,getDuel,performDuelAction,setDuelMessage,type DuelRecord} from './duelStore';
 import {visualDuelPublic,visualDuelPrivate,visualDuelCard,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
 
@@ -183,6 +183,14 @@ async function handleInteraction(i:Interaction) {
         await i.deferReply({flags:MessageFlags.Ephemeral});renameDeck(id,slot,i.fields.getTextInputValue('name'),revision);await i.editReply(await visualDeckMessage(id,slot,page,cardId,'✦ Nome salvo.'));return;
       }
       if(!i.isButton()&&!i.isStringSelectMenu())return;
+      if((action==='inspect'||action==='card')&&i.isButton()){
+        const deck=openDeck(id,slot);
+        if(deck.revision!==revision)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
+        const targetIndex=action==='inspect'?getDeckCardIndex(id,slot,cardId):page;
+        await i.deferUpdate();
+        await i.editReply(await visualDeckCard(id,slot,targetIndex));
+        return;
+      }
       await i.deferUpdate();
       let selected=cardId;let targetSlot=slot;
       if(action==='plus'&&i.isButton())changeDeck(id,slot,cardId,1,revision);
