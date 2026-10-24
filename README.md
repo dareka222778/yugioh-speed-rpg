@@ -184,7 +184,7 @@ O escopo e o percentual atualizado por entregas estão documentados em [ENGINE_P
 
 **Tomate Místico** (83011277) é a primeira carta do laboratório que pode recrutar outro monstro diretamente do Deck quando é destruído por batalha e enviado ao Cemitério. Só permite monstros TREVAS com até 1500 ATK; o jogador também pode recusar. A engine diferencia esta causa de destruição da causada por custos/efeitos e considera o verdadeiro dono da carta. Os cenários em `tests/classicBattleRecruiters.test.cjs` são executados automaticamente. O marco atual está em **85% dos marcos da engine / 15% restantes** e **47% do padrão visual dos comandos / 53% restantes**, conforme [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md).
 
-## Arena Azure e avanço do motor — 2026-10-24
+## Campo original e identidade compartilhada dos comandos — 2026-10-24
 
 A reformulação funcional já está disponível na branch de desenvolvimento:
 
@@ -193,7 +193,7 @@ A reformulação funcional já está disponível na branch de desenvolvimento:
 - A mão pode ser explorada **carta por carta**: imagem grande, nome, ATK/DEF, resumo de efeito, controles anterior/próxima, menu de ações legais da carta e retorno ao painel. A permissão é verificada pelo servidor.
 - Galeria dos NPCs e editor de decks agora usam a mesma linguagem azul. Os decks **próprios** de Joey, Yugi e Kaiba têm **30 cartas** cada, e somente essas cartas aparecem no portal dos duelistas.
 - **Pote da Ganância**, **Raigeki** e **Tufão Espacial Místico** foram acrescentados ao motor e ao laboratório. Tufão é uma Magia Rápida com janela de resposta, e destruir uma Magia/Armadilha já ativada não nega automaticamente seu efeito.
-- O GitHub Actions executa os testes e gera prévias PNG da arena pública e privada, ficha de duelista, carta jogável individual, editor e ficha azul do deck próprio. As prévias são anexadas como artefato **duel-azure-previews** à execução do workflow de validação. As imagens do catálogo podem aparecer como placeholders na geração offline; a execução normal utiliza o cache de arte de cartas.
+- O GitHub Actions executa os testes e gera prévias PNG da arena pública e privada, ficha de duelista, carta jogável individual, editor e ficha azul do deck próprio. As prévias são anexadas como artefato **speed-rpg-visual-previews** à execução do workflow de validação. As imagens do catálogo podem aparecer como placeholders na geração offline; a execução normal utiliza o cache de arte de cartas.
 
 ### Validação, limitações e implantação
 
