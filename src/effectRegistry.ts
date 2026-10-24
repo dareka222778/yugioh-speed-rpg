@@ -16,6 +16,7 @@ const effects:Record<string,Effect>={
  '11384280':{kind:'monsterEffect'},
  '26202165':{kind:'monsterEffect'},
  '78010363':{kind:'monsterEffect'},
+ '77585513':{kind:'monsterEffect'},
  '38199696':{kind:'heal',amount:500},'84257639':{kind:'heal',amount:1000},'19523799':{kind:'burn',amount:800},
  '66788016':{kind:'fissure'},'24094653':{kind:'polymerization'},
  '17814387':{kind:'reinforcements'},'44209392':{kind:'castleWalls'},
@@ -40,7 +41,8 @@ const supportedEffectMonsters:Card[]=[
  {id:'60694662',konamiId:4546,name:'Anjo Esquelético',englishName:'Skelengel',kind:'monster',race:'Fairy',attribute:'LIGHT',level:2,atk:900,defense:400,summary:'VIRAR: compre 1 carta.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4546&request_locale=en'},
  {id:'11384280',konamiId:4518,name:'Soldado Canhão',englishName:'Cannon Soldier',kind:'monster',race:'Machine',attribute:'DARK',level:4,atk:1400,defense:1300,summary:'Ofereça 1 monstro que você controla como Tributo; cause 500 de dano ao oponente.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4518&request_locale=pt'},
  {id:'26202165',konamiId:4054,name:'Sangan',englishName:'Sangan',kind:'monster',race:'Fiend',attribute:'DARK',level:3,atk:1000,defense:600,summary:'Se enviado do campo ao Cemitério: busque no Deck 1 monstro com até 1500 ATK. Uma vez por turno; não ative cards/efeitos de cards com esse nome neste turno.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4054&request_locale=pt'},
- {id:'78010363',konamiId:4580,name:'Bruxa da Floresta Negra',englishName:'Witch of the Black Forest',kind:'monster',race:'Spellcaster',attribute:'DARK',level:4,atk:1100,defense:1200,summary:'Se enviada do campo ao Cemitério: busque no Deck 1 monstro com até 1500 DEF. Uma vez por turno; não ative cards/efeitos de cards com esse nome neste turno.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4580&request_locale=pt'}
+ {id:'78010363',konamiId:4580,name:'Bruxa da Floresta Negra',englishName:'Witch of the Black Forest',kind:'monster',race:'Spellcaster',attribute:'DARK',level:4,atk:1100,defense:1200,summary:'Se enviada do campo ao Cemitério: busque no Deck 1 monstro com até 1500 DEF. Uma vez por turno; não ative cards/efeitos de cards com esse nome neste turno.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4580&request_locale=pt'},
+ {id:'77585513',konamiId:4758,name:'Jinzo',englishName:'Jinzo',kind:'monster',race:'Machine',attribute:'DARK',level:6,atk:2400,defense:1500,summary:'Enquanto estiver com a face para cima no campo, nenhum jogador pode ativar Armadilhas. Negue os efeitos de Armadilha no campo.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4758&request_locale=pt'}
 ];
 export const engineCatalog:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters];
 const metadata=new Map(engineCatalog.map(c=>[c.id,c]));
