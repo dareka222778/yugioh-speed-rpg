@@ -10,7 +10,7 @@ import { getCardArt } from './cardArt';
 import {openDeck,changeDeck,renameDeck,activateDeck,fillInitialDeck} from './decks';
 import {visualDeckMessage} from './deckUI';
 import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChallenge,createTraining,createNPCDuel,currentDuel,getDuel,performDuelAction,setDuelMessage,type DuelRecord} from './duelStore';
-import {visualDuelPublic,visualDuelPrivate,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
+import {visualDuelPublic,visualDuelPrivate,visualDuelCard,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
 
 import {retryNetwork} from './networkRetry';
 import {visualNPCLobby} from './npcUI';
@@ -136,6 +136,12 @@ async function handleInteraction(i:Interaction) {
       if(action==='open'&&i.isButton()){await i.deferReply({flags:MessageFlags.Ephemeral});await i.editReply(await privatePayload(r,id));return;}
       if(action==='quit'&&i.isButton()){await i.reply({...quitMessage(r),flags:MessageFlags.Ephemeral});return;}
       if(action==='view'&&i.isButton()){await i.deferUpdate();await i.editReply(await privatePayload(r,id,page));return;}
+      if(action==='card'&&(i.isButton()||i.isStringSelectMenu())){
+        if(r.revision!==revision)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
+        const cardIndex=i.isStringSelectMenu()?Number(i.values[0]):page;
+        if(!Number.isSafeInteger(cardIndex)||cardIndex<0)throw new Error('Carta inválida.');
+        await i.deferUpdate();await i.editReply(await visualDuelCard(r,id,cardIndex));return;
+      }
       if(action==='quick'&&i.isButton()){
         await i.deferUpdate();r=performDuelAction(duelId,id,i.guildId,revision,page);await i.editReply(await privatePayload(r,id));await refreshArena(r);return;
       }
