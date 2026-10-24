@@ -30,6 +30,8 @@ const commands = [
     .addStringOption(o=>o.setName('busca').setDescription('Nome em português, inglês ou ID da carta.').setRequired(true).setAutocomplete(true).setMaxLength(100))
 ].map(c => c.toJSON());
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+client.on(Events.Error, error => console.error('Discord client:', error));
+client.on(Events.Warn, warning => console.warn('Discord aviso:', warning));
 client.once(Events.ClientReady, c => console.log(`Yu-Gi-Oh! Speed RPG online como ${c.user.tag}`));
 const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nO RPG está na V0: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Duelos ainda estão em desenvolvimento.';
 // One mutation at a time per player, including network downloads.
@@ -43,6 +45,7 @@ async function showCard(id:string, userId:string) {
 }
 const busy = new Set<string>();
 client.on(Events.InteractionCreate, async i => {
+  console.log(`Interação recebida: ${i.type} / ${'commandName' in i ? i.commandName : 'componente'}`);
   if(i.isAutocomplete()) {
     try {await i.respond(searchCards(String(i.options.getFocused())).slice(0,25).map(c=>({name:`${c.name} • ${c.id}`.slice(0,100),value:c.id})));} catch(error){console.error('Falha no autocomplete:',error);}
     return;
@@ -76,8 +79,9 @@ client.on(Events.InteractionCreate, async i => {
       const player = getPlayer(id);
       if (!player) { await i.reply({ content: 'Crie seu duelista primeiro com `/start`.', flags: MessageFlags.Ephemeral }); return; }
       if(i.commandName==='colecao') {
+        await i.deferReply({flags:MessageFlags.Ephemeral});
         grantStarterCards(id);
-        await i.reply({...collectionMessage(id,getCollection(id),i.options.getInteger('pagina')??1),flags:MessageFlags.Ephemeral});return;
+        await i.editReply(collectionMessage(id,getCollection(id),i.options.getInteger('pagina')??1));return;
       }
       if (i.commandName === 'perfil') {
         const publicProfile = i.options.getBoolean('publico') ?? false;
