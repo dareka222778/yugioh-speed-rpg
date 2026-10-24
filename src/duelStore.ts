@@ -44,6 +44,8 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  const useful=fast.filter(a=>{const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
   if(effect.kind==='reinforcements'||effect.kind==='castleWalls')return p.monsters.some(m=>m.uid===a.target&&m.faceUp);
   if(effect.kind==='trapHole')return op.monsters.some(m=>m.uid===a.target);
+  if(effect.kind==='torrentialTribute')return op.monsters.length>0&&op.monsters.length>=p.monsters.length;
+  if(effect.kind==='sakuretsuArmor')return s.pending.kind==='attack'&&s.players[s.pending.actor].id!==id&&op.monsters.some(m=>m.uid===a.target);
   if(effect.kind==='magicJammer')
    return s.pending.kind!=='none'&&'actor' in s.pending&&s.pending.actor!==s.players.indexOf(p);
   if(effect.kind==='sevenTools'){
@@ -59,6 +61,16 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  })[0];
  if(useful)return useful;
  if(s.phase==='response'){
+  const counterTarget=s.chain.at(-1);
+  const book=actions.filter((a):a is Extract<Action,{kind:'spell'}>=>a.kind==='spell')
+   .filter(a=>getEffect(source(a)?.id??'')?.kind==='bookOfMoon');
+  const protect=counterTarget&&['trapHole','sakuretsuArmor'].includes(getEffect(counterTarget.id)?.kind??'')
+   ?book.find(a=>a.target===counterTarget.target&&p.monsters.some(m=>m.uid===a.target)):undefined;
+  if(protect)return protect;
+  if(s.pending.kind==='attack'&&s.pending.actor!==s.players.indexOf(p)){
+   const save=book.find(a=>a.target===s.pending.card);
+   if(save)return save;
+  }
   // Prefer destroying a known enemy Field/Spell/Trap; never inspect hidden
   // identities or waste a Quick-Play on a friendly card.
   const quick=actions.filter((a):a is Extract<Action,{kind:'spell'}>=>a.kind==='spell')
@@ -104,6 +116,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
   if(effect.kind==='giantTrunade')return op.backrow.length+Number(!!op.field)>p.backrow.length+Number(!!p.field);
   if(effect.kind==='cardDestruction')return op.hand.length>p.hand.length+1;
   if(effect.kind==='shieldSword')return p.monsters.some(m=>m.faceUp&&(getCard(m.id)!.defense??0)>(getCard(m.id)!.atk??0));
+  if(effect.kind==='bookOfMoon')return op.monsters.some(m=>m.uid===a.target&&m.faceUp);
   return true;
  });
  const value=(a:Extract<Action,{kind:'spell'}>)=>{
