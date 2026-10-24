@@ -50,7 +50,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
    const last=s.chain.at(-1);
    return !!last&&last.actor!==s.players.indexOf(p);
   }
-  if(effect.kind==='waboku')return s.pending.kind==='attack'&&s.players[s.pending.actor].id!==id;
+  if(effect.kind==='waboku'||effect.kind==='mirrorForce')return s.pending.kind==='attack'&&s.players[s.pending.actor].id!==id;
   if(effect.kind==='justDesserts')return op.monsters.length>=2||op.lp<=op.monsters.length*500;
   return false;
  }).sort((a,b)=>{
