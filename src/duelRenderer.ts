@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import {CARD_BACK_PNG,CARD_BACK_WIDTH,CARD_BACK_HEIGHT} from './cardBackAsset';
 import {outlineText as text} from './fontPaths';
 import {getCard} from './collection';
 import {getCardArt} from './cardArt';
@@ -24,23 +25,19 @@ async function draw(s:DuelState,viewer:string|undefined,provider:typeof getCardA
  <linearGradient id="stone" x2="1" y2="1"><stop stop-color="#928785"/><stop offset=".45" stop-color="#625b60"/><stop offset="1" stop-color="#48434e"/></linearGradient>
  <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#fff0bb"/><stop offset=".3" stop-color="#c7a267"/><stop offset=".6" stop-color="#775630"/><stop offset="1" stop-color="#dfc395"/></linearGradient>
  <linearGradient id="hud" x2="0" y2="1"><stop stop-color="#561f2a"/><stop offset="1" stop-color="#180f1c"/></linearGradient>
- <radialGradient id="back"><stop stop-color="#060403"/><stop offset=".24" stop-color="#160a03"/><stop offset=".63" stop-color="#8f4817"/><stop offset=".85" stop-color="#3b1b08"/><stop offset="1" stop-color="#110905"/></radialGradient>
+ <image id="card-back-image" width="${CARD_BACK_WIDTH}" height="${CARD_BACK_HEIGHT}" href="data:image/png;base64,${CARD_BACK_PNG}"/>
  <pattern id="grid" width="93" height="93" patternUnits="userSpaceOnUse"><path d="M93 0H0V93M8 8H85V85H8Z" fill="none" stroke="#dfcab5" stroke-opacity=".08"/><path d="M0 46H93M46 0V93" stroke="#0f0d16" stroke-opacity=".12"/></pattern>
  </defs><rect width="1400" height="${height}" fill="url(#bg)"/><rect x="9" y="9" width="1382" height="${height-18}" fill="none" stroke="url(#gold)" stroke-width="6"/><rect x="19" y="19" width="1362" height="${height-38}" fill="none" stroke="#a88c68"/>`;
  function rect(x:number,y:number,w:number,h:number,fill:string,stroke='#aa8b62',r=2){return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}" stroke="${stroke}"/>`;}
- let backNumber=0;
- function back(x:number,y:number,w:number,h:number){
-  const clip=`vortex-${backNumber++}`,cx=x+w/2,cy=y+h/2;
-  let v=rect(x,y,w,h,'#ab662c','#e9b773',3)+rect(x+3,y+3,w-6,h-6,'#271105','#4d2b0e',2)+`<defs><clipPath id="${clip}"><rect x="${x+5}" y="${y+5}" width="${w-10}" height="${h-10}" rx="1"/></clipPath></defs><g clip-path="url(#${clip})"><rect x="${x+5}" y="${y+5}" width="${w-10}" height="${h-10}" fill="url(#back)"/>`;
-  // Continuous logarithmic whorls form the classic amber vortex, not orbital rings.
-  for(let arm=0;arm<14;arm++){
-   const points:string[]=[];for(let n=0;n<=260;n++){const t=n/260*32,r=.035*Math.exp(.135*t),angle=t+arm*Math.PI*2/14;const px=cx+Math.cos(angle)*w*.48*r,py=cy+Math.sin(angle)*h*.49*r;points.push(`${n?'L':'M'}${px.toFixed(2)} ${py.toFixed(2)}`);}
-   v+=`<path d="${points.join(' ')}" fill="none" stroke="${arm%3===0?'#e6a451':arm%3===1?'#2a1005':'#b76620'}" stroke-width="${w*(arm%3===0?.009:.025)}" opacity=".83"/>`;
-  }
-  return v+`<ellipse cx="${cx}" cy="${cy}" rx="${w*.15}" ry="${h*.24}" fill="#090503" transform="rotate(20 ${cx} ${cy})"/><ellipse cx="${cx}" cy="${cy}" rx="${w*.18}" ry="${h*.28}" fill="none" stroke="#a35c27" stroke-width="${w*.012}" transform="rotate(20 ${cx} ${cy})"/></g>`;
+ function back(x:number,y:number,w:number,h:number,rotation=0){
+  // Reuse the uploaded pixels for every back; rotate the same portrait asset for DEF.
+  const sideways=Math.abs(rotation)%180===90,pw=sideways?h:w,ph=sideways?w:h;
+  const scale=Math.min(pw/CARD_BACK_WIDTH,ph/CARD_BACK_HEIGHT),rw=CARD_BACK_WIDTH*scale,rh=CARD_BACK_HEIGHT*scale;
+  const cx=x+w/2,cy=y+h/2;
+  return `<g transform="translate(${cx} ${cy}) rotate(${rotation})"><use href="#card-back-image" transform="translate(${-rw/2} ${-rh/2}) scale(${scale})"/></g>`;
  }
  async function image(c:CardRef,x:number,y:number,w:number,h:number,visible:boolean,rotation=0){
-  if(!visible){svg+=back(x,y,w,h);return;}
+  if(!visible){svg+=back(x,y,w,h,rotation);return;}
   svg+=rect(x,y,w,h,'#152333','#7592a6',6);
   if(art.has(c.id)){try{overlays.push({input:await sharp(art.get(c.id)!,{limitInputPixels:20_000_000}).rotate(rotation).resize(w-4,h-4,{fit:'contain',background:'#152333'}).png().toBuffer(),left:x+2,top:y+2});return;}catch{}}
   svg+=text(x+7,y+h/2,getCard(c.id)!.name,14,'#ffffff',700,w-14);
