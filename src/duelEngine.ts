@@ -76,12 +76,14 @@ function trapActions(s:DuelState,index:number):Action[]{
  for(const c of s.players[index].backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&card(c.id).kind==='trap')){
   const effect=getEffect(c.id);if(!effect||effectNameBlocked(s,index,c.id))continue;
   if(effect.kind==='magicJammer'){
-   if(s.phase==='response'&&!s.chain.length&&['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending)
-    for(const discarded of s.players[index].hand)out.push({kind:'trap',card:c.uid,target:s.pending.card,discards:[discarded.uid]});
+   if(s.phase==='response'&&!counterWindow){
+    const spellTarget=lastKind==='mysticalSpaceTyphoon'?last?.card:!last&&['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending?s.pending.card:undefined;
+    if(spellTarget)for(const discarded of s.players[index].hand)out.push({kind:'trap',card:c.uid,target:spellTarget,discards:[discarded.uid]});
+   }
    continue;
   }
   if(effect.kind==='sevenTools'){
-   if(s.phase==='response'&&last&&s.players[index].lp>1000)out.push({kind:'trap',card:c.uid,target:last.card});
+   if(s.phase==='response'&&last&&lastKind!=='mysticalSpaceTyphoon'&&s.players[index].lp>1000)out.push({kind:'trap',card:c.uid,target:last.card});
    continue;
   }
   // Counter Traps have Spell Speed 3: ordinary Traps cannot be chained to them.
@@ -94,9 +96,25 @@ function trapActions(s:DuelState,index:number):Action[]{
  }return out;
 }
 
+/** Quick-Play spells can be played from the current player's hand, or from a
+ * Spell/Trap Zone if they were set on a previous turn. They cannot answer
+ * Counter Traps (Spell Speed 3) or be activated during the Damage Step.
+ */
+function quickSpellActions(s:DuelState,index:number):Action[]{
+ if(s.phase!=='response')return [];
+ const last=s.chain.at(-1),lastKind=last?getEffect(last.id)?.kind:undefined;
+ if(lastKind==='magicJammer'||lastKind==='sevenTools')return [];
+ if(s.pending.kind==='attack'&&s.pending.stage==='damage')return [];
+ const p=s.players[index],candidates=[
+  ...p.backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&getEffect(c.id)?.kind==='mysticalSpaceTyphoon'),
+  ...index===s.current&&p.backrow.length<3?p.hand.filter(c=>getEffect(c.id)?.kind==='mysticalSpaceTyphoon'):[]
+ ];
+ const targetUids=s.players.flatMap(player=>[...player.backrow,...player.field?[player.field]:[]].map(c=>c.uid));
+ return candidates.flatMap(c=>targetUids.filter(uid=>uid!==c.uid).map(target=>({kind:'spell',card:c.uid,target} as Action)));
+}
 export function legalActions(s:DuelState,actor:string):Action[]{
  const index=s.players.findIndex(p=>p.id===actor);if(index<0||s.phase==='finished')return [];
- if(s.phase==='response')return index===s.priority?[...trapActions(s,index),{kind:'pass'}]:[];
+ if(s.phase==='response')return index===s.priority?[...trapActions(s,index),...quickSpellActions(s,index),{kind:'pass'}]:[];
  if(s.phase==='choice')return s.choice?.actor===index?s.choice.targets.map(target=>({kind:'choose',target})):[];
  if(index!==s.current)return [];
  const p=s.players[index],op=s.players[1-index];
@@ -213,15 +231,23 @@ function resolve(s:DuelState){
  resolveChainLinks(s.chain,link=>{
   // Jinzo negates Trap effects on the field at the moment each link resolves;
   // costs already paid and cards activated earlier still go to the Graveyard.
-  if(trapsNegated(s)){note(s,'Jinzo negou um efeito de Armadilha.');discardBackrow(s,link.card);return;}
-  const target=findMonster(s,link.target)?.m;const effect=getEffect(link.id);
+  const effect=getEffect(link.id);
+  if(trapsNegated(s)&&card(link.id).kind==='trap'){note(s,'Jinzo negou um efeito de Armadilha.');discardBackrow(s,link.card);return;}
+  const target=findMonster(s,link.target)?.m;
+  if(effect?.kind==='mysticalSpaceTyphoon'){
+   if(s.players.some(p=>p.backrow.some(b=>b.uid===link.target)||p.field?.uid===link.target))discardBackrow(s,link.target);
+   note(s,'Tufão Espacial Místico destruiu o alvo sem negar sua ativação.');
+   discardBackrow(s,link.card);return;
+  }
   if(effect?.kind==='sevenTools'){
    const negated=s.chain.find(other=>other.card===link.target);
    if(negated){negated.negated=true;note(s,'Sete Ferramentas negou a ativação da Armadilha.');}
    discardBackrow(s,link.card);return;
   }
   if(effect?.kind==='magicJammer'){
-   if(['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending&&s.pending.card===link.target){
+   const spellLink=s.chain.find(other=>other.card===link.target&&getEffect(other.id)?.kind==='mysticalSpaceTyphoon');
+   if(spellLink){spellLink.negated=true;note(s,'Bloqueador de Magia negou uma Magia Rápida na corrente.');}
+   else if(['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending&&s.pending.card===link.target){
     s.pendingNegated=true;
     discardBackrow(s,link.target);
     note(s,'Bloqueador de Magia negou a ativação da Magia.');
@@ -335,7 +361,7 @@ function settle(s:DuelState){
  while(budget-->0){
   if(s.phase==='finished'){s.graveTriggers=[];s.summonTriggers=[];return;}
   if(s.phase==='response'){
-   if(trapActions(s,s.priority).length)return;
+   if(trapActions(s,s.priority).length||quickSpellActions(s,s.priority).length)return;
    s.passes++;s.priority=1-s.priority;
    if(s.passes===2)resolve(s);
    continue;
@@ -399,7 +425,11 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   note(s,`${p.name} ativou Polimerização.`);response(s,{kind:'fusion',actor:index,card:action.card,extra:action.extra,materials:action.materials,position:action.position},'main');
  }else if(action.kind==='spell'){
   let c=p.hand.find(c=>c.uid===action.card);if(c){p.hand=p.hand.filter(c=>c.uid!==action.card);p.backrow.push({...c,setTurn:s.turn,faceUp:true});}else{const back=p.backrow.find(c=>c.uid===action.card)!;back.faceUp=true;c=back;}
-  note(s,`${p.name} ativou ${card(c.id).name}.`);response(s,{kind:'spell',actor:index,card:c.uid,id:c.id,...action.target?{target:action.target}:{},...action.position?{position:action.position}:{}},'main');
+  note(s,`${p.name} ativou ${card(c.id).name}.`);
+  if(s.phase==='response'){
+   if(getEffect(c.id)?.kind!=='mysticalSpaceTyphoon')throw new Error('Só Magias Rápidas podem responder.');
+   s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target??''});s.passes=0;s.priority=1-index;
+  }else response(s,{kind:'spell',actor:index,card:c.uid,id:c.id,...action.target?{target:action.target}:{},...action.position?{position:action.position}:{}},'main');
  }else if(action.kind==='position'){
   const m=p.monsters.find(m=>m.uid===action.card)!;m.faceUp=true;m.position=action.mode==='def'?'def':'atk';m.changed=s.turn;note(s,`${p.name} mudou a posição de ${card(m.id).name}.`);response(s,action.mode==='flip'?{kind:'flip',actor:index,card:m.uid}:{kind:'none'},'main');
  }else if(action.kind==='battle')response(s,{kind:'battle'},'main');
