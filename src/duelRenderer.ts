@@ -68,7 +68,7 @@ async function draw(s:DuelState,viewer:string|undefined,provider:typeof getCardA
  // Mirrored playmat: opposing monsters meet at the center, spells remain behind them.
  svg+=rect(29,105+offset,1342,854,'url(#stone)','#3C96CB',12)+`<rect x="29" y="${105+offset}" width="1342" height="854" fill="url(#grid)"/><ellipse cx="700" cy="${531+offset}" rx="520" ry="320" fill="url(#arenaGlow)"/>`;
  for(const [row,index] of [top,bottom].entries()){
-  const p=s.players[index],upper=row===0,my=p.id===viewer,y=upper?112:548,accent=index===s.current?azure.primary:azure.lineMuted;
+  const p=s.players[index],upper=row===0,my=p.id===viewer,y=upper?112:548,accent=index===decisionPlayer(s)?azure.primary:azure.lineMuted;
   svg+=rect(36,y+offset,260,156,'url(#hud)',accent,11)+rect(42,y+6+offset,248,144,'none','#235579',8)+T(53,y+33,p.name,22,azure.text,700,npcIndex===index?160:230)+T(53,y+58,viewer?(my?'VOCÊ':'ADVERSÁRIO'):'DUELISTA',11,azure.primaryBright);
   if(portrait&&index===npcIndex){try{
    const npcPng=await sharp(Buffer.from(portrait,'base64')).resize(75,136,{fit:'contain'}).png().toBuffer();
@@ -104,6 +104,17 @@ async function draw(s:DuelState,viewer:string|undefined,provider:typeof getCardA
    else svg+=T(x+31,backY+80,'MAGIA /',17,'#91C7EA',700,151)+T(x+19,backY+105,'ARMADILHA',17,'#91C7EA',700,164)+T(x+86,backY+136,`${zone+1}`,24,'#91C7EA',700,35);
   }
  }
+ // Phase-specific feedback is part of the board itself, not a separate
+ // Discord message that the player might miss on mobile.
+ const phaseSignal=s.phase==='response'?'JANELA DE RESPOSTA':
+  s.phase==='choice'?'ESCOLHA O ALVO':
+  s.phase==='battle'?'BATALHA EM ANDAMENTO':
+  s.phase==='finished'?'RESULTADO DO DUELO':
+  s.phase==='discard'?'DESCARTE OBRIGATÓRIO':'FASE PRINCIPAL';
+ const phaseAccent=s.phase==='finished'?azure.success:s.phase==='response'?azure.warning:azure.primary;
+ svg+=rect(553,504+offset,296,58,'url(#hud)',phaseAccent,15);
+ svg+=T(580,528,phaseSignal,17,azure.text,700,255);
+ svg+=T(580,551,s.phase==='response'?`CORRENTE  •  ${s.chain.length+1} ELO(S)`:`TURNO ${s.turn}  •  4.000 PV INICIAIS`,12,phaseAccent,700,255);
  // Center energy line separates the two duelists without stealing focus from card art.
  svg+=`<path d="M40 ${532+offset}H604L624 ${518+offset}H776L796 ${532+offset}H1360M40 ${536+offset}H604L624 ${550+offset}H776L796 ${536+offset}H1360" fill="none" stroke="#71C4F3" stroke-width="2"/>`+T(657,540,'DUEL',17,'#E3F7FF',700,110);
  svg+=T(40,984,s.log.at(-1)??'',15,'#BEEDFF',700,1320)+T(35,1007,s.phase==='finished'?`${s.winner?s.players.find(p=>p.id===s.winner)!.name+' venceu':'Duelo encerrado'}: ${s.reason}`:'M1–M3: monstros  •  A1–A3: magias / armadilhas  •  O número no baralho indica as próximas compras.',11,'#9FC4E4',400,1330);
