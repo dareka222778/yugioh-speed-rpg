@@ -4,7 +4,7 @@
  */
 export type MonsterTrigger='ignition'|'flip'|'onSummon'|'onDestroy';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard';count:number};
-export type MonsterOperation={kind:'heal'|'burn';amount:number}|{kind:'draw';count:number}|{kind:'destroy';target:'opponentMonster'};
+export type MonsterOperation={kind:'heal'|'burn';amount:number}|{kind:'draw';count:number}|{kind:'destroy';target:'opponentMonster'|'anyMonster'};
 export type MonsterEffect={trigger:MonsterTrigger;oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean};
 export function canActivateMonsterEffect(effect:MonsterEffect,ctx:MonsterEffectContext):boolean{
@@ -22,7 +22,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 
 /** Only explicitly registered and audited cards may expose monster effects. */
 const monsterEffects:Readonly<Record<string,MonsterEffect>>=Object.freeze({
- '54652250':{trigger:'flip',operation:{kind:'destroy',target:'opponentMonster'}} // Man-Eater Bug: FLIP, target and destroy 1 monster on the field (opponent-only engine subset)
+ '54652250':{trigger:'flip',operation:{kind:'destroy',target:'anyMonster'}} // Man-Eater Bug: FLIP, target and destroy 1 monster on the field
 });
 export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return monsterEffects[cardId];}
 
