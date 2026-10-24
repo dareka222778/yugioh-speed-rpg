@@ -12,9 +12,9 @@ export function duelPublicMessage(r:DuelRecord){
  if(r.status==='pending')return invitationMessage(r);
  if(!r.state)return {embeds:[new EmbedBuilder().setTitle('Convite encerrado').setDescription(r.status==='expired'?'O convite expirou.':'Convite cancelado.')],components:[],attachments:[],allowedMentions:{parse:[] as never[]}};
  const view=publicDuelData(r.state);const acting=r.state.phase==='response'?r.state.priority:r.state.phase==='choice'?r.state.choice!.actor:r.state.current;
- const embed=new EmbedBuilder().setColor(0x75caff).setTitle(r.state.phase==='finished'?'Duelo encerrado':'Arena • Duelo 1v1')
+ const embed=new EmbedBuilder().setColor(0xc7a267).setTitle(r.state.phase==='finished'?'Duelo encerrado':'Arena • Duelo 1v1')
  .setDescription(`${view.players.map(p=>`**${escapeMarkdown(p.name)}** — ${p.lp} PV | Mão ${p.handCount} | Deck ${p.deckCount}`).join('\n')}\n\nTurno ${view.turn} • ${phaseNames[view.phase]}${view.phase==='finished'?`\n${view.winner?escapeMarkdown(view.players.find(p=>p.id===view.winner)!.name)+' venceu':'Sem vencedor'}: ${view.reason}`:`\nAguardando **${escapeMarkdown(view.players[acting].name)}**.`}`)
- .addFields({name:'Últimas jogadas',value:view.log.slice(-4).map(line=>escapeMarkdown(line)).join('\n').slice(-1000)||'O duelo começou.'}).setFooter({text:'Arena 4.2 • Mãos privadas • Sem recompensas'});
+ .addFields({name:'Últimas jogadas',value:view.log.slice(-4).map(line=>escapeMarkdown(line)).join('\n').slice(-1000)||'O duelo começou.'}).setFooter({text:'Arena clássica • Mãos privadas • Sem recompensas'});
  if(view.phase!=='finished')embed.addFields({name:'Limite da decisão',value:`<t:${Math.floor((r.updated+DECISION_TIMEOUT_MS)/1000)}:R> • 30 minutos. Quem deve agir perde por W.O. ao esgotar o prazo.`});
  embed.setFooter({text:r.state.fixedOpening?'Laboratório de fusão • Mão inicial fixa para testar a receita':'Baralho embaralhado no início • Compra do topo • Sem escolha da próxima carta'});
  const row=new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:open:${r.id}:${r.revision}`).setLabel('🃏 Ver minha mão / jogar').setStyle(ButtonStyle.Primary),new ButtonBuilder().setCustomId(`duel:public:${r.id}:${r.revision}`).setLabel('Atualizar campo').setStyle(ButtonStyle.Secondary),new ButtonBuilder().setCustomId(`duel:zones:${r.id}:${r.revision}`).setLabel('Cemitério / zonas').setStyle(ButtonStyle.Secondary));
@@ -24,7 +24,7 @@ export async function visualDuelPublic(r:DuelRecord){const p=duelPublicMessage(r
 export function duelPrivateMessage(r:DuelRecord,owner:string,requestedPage=1){
  if(!r.state||!r.state.players.some(p=>p.id===owner))throw new Error('Só participantes podem abrir a mão deste duelo.');
  const s=r.state;const p=s.players.find(p=>p.id===owner)!;const actions=legalActions(s,owner);const pages=Math.max(1,Math.ceil(actions.length/20));const page=Math.min(pages,Math.max(1,Number.isInteger(requestedPage)?requestedPage:1));
- const embed=new EmbedBuilder().setColor(0x69c9ae).setTitle(`🃏 Sua mão • ${escapeMarkdown(p.name)}`).setDescription(`**${p.lp} PV** • **${p.deck.length} cartas para comprar** • Turno ${s.turn} • ${phaseNames[s.phase]}\n${s.phase==='finished'?s.reason:actions.length?'**Sua vez de decidir.**':'Aguardando o outro jogador.'}`).addFields({name:'Sua mão',value:p.hand.map((c,n)=>`${n+1}. ${getCard(c.id)!.name}`).join('\n')||'Sem cartas.'});
+ const embed=new EmbedBuilder().setColor(0xc7a267).setTitle(`🃏 Sua mão • ${escapeMarkdown(p.name)}`).setDescription(`**${p.lp} PV** • **${p.deck.length} cartas para comprar** • Turno ${s.turn} • ${phaseNames[s.phase]}\n${s.phase==='finished'?s.reason:actions.length?'**Sua vez de decidir.**':'Aguardando o outro jogador.'}`).addFields({name:'Sua mão',value:p.hand.map((c,n)=>`${n+1}. ${getCard(c.id)!.name}`).join('\n')||'Sem cartas.'});
  if(s.phase!=='finished')embed.addFields({name:'Próximo passo',value:actions.length?'Escolha uma jogada no menu. Ela será executada imediatamente.':'Aguarde o outro jogador. Use Atualizar para acompanhar.'});
  embed.setFooter({text:`Ações ${page}/${pages} • ${s.fixedOpening?'Treino de fusão: mão inicial fixa':'Baralho embaralhado • Compra do topo'} • Só você vê sua mão`});
  if(s.phase==='finished')return {embeds:[embed],components:[],attachments:[],allowedMentions:{parse:[] as never[]}};
@@ -40,7 +40,7 @@ export async function visualDuelPrivate(r:DuelRecord,owner:string,page=1){
  if(!s.players.find(player=>player.id===owner)!.hand.length){p.embeds[0].setImage('attachment://meu-campo.png');return {...p,files:[new AttachmentBuilder(png,{name:'meu-campo.png'})]};}
  // Separate images keep Discord from shrinking the hand to fit a tall board.
  const [hand,field]=await Promise.all([sharp(png).extract({left:0,top:0,width:1400,height:340}).png().toBuffer(),sharp(png).extract({left:0,top:340,width:1400,height:1020}).png().toBuffer()]);
- p.embeds[0].setImage('attachment://minha-mao.png');p.embeds.push(new EmbedBuilder().setColor(0x69c9ae).setTitle('Seu campo • visão privada').setImage('attachment://meu-campo.png'));
+ p.embeds[0].setImage('attachment://minha-mao.png');p.embeds.push(new EmbedBuilder().setColor(0xc7a267).setTitle('Campo de duelo • visão privada').setImage('attachment://meu-campo.png'));
  return {...p,files:[new AttachmentBuilder(hand,{name:'minha-mao.png'}),new AttachmentBuilder(field,{name:'meu-campo.png'})]};
 }
 export function quitMessage(r:DuelRecord){return {content:'Desistir encerra o duelo. Confirma?',components:[new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:confirm:${r.id}:${r.revision}`).setLabel('Sim, desistir').setStyle(ButtonStyle.Danger),new ButtonBuilder().setCustomId(`duel:open:${r.id}:${r.revision}`).setLabel('Continuar jogando').setStyle(ButtonStyle.Secondary))],allowedMentions:{parse:[] as never[]}};}
