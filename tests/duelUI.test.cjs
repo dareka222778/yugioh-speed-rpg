@@ -1,0 +1,26 @@
+const {test,after}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const os=require('node:os');const path=require('node:path');const sharp=require('sharp');const Module=require('node:module');
+const temp=fs.mkdtempSync(path.join(os.tmpdir(),'duel-ui-'));process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
+const load=Module._load;Module._load=function(name,parent){if(name==='./cardArt'&&parent.filename.endsWith('/dist/duelRenderer.js'))return {getCardArt:async()=>undefined};return load.apply(this,arguments);};
+const {renderDuel}=require('../dist/duelRenderer');Module._load=load;
+const {createDuel,step}=require('../dist/duelEngine');const {publicDuelData,duelPrivateMessage,duelPublicMessage,visualDuelPrivate,visualDuelPublic,invitationMessage}=require('../dist/duelUI');const db=require('../dist/database');const {starterContents}=require('../dist/cardCatalog');
+const ids=style=>starterContents[style].flatMap(c=>Array(c.quantity).fill(c.id));
+let s=createDuel([{id:'101',name:'Kise',cards:ids('warrior')},{id:'102',name:'Oponente',cards:ids('spellcaster')}],()=>.5);
+const m={uid:'hidden',id:'15025844',position:'def',faceUp:false,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0};s.players[1].monsters=[m];s.players[1].backrow=[{uid:'set-trap',id:'44209392',setTurn:1,faceUp:false}];
+function record(){return {id:'d',guild_id:'g',channel_id:'c',message_id:null,status:'playing',revision:0,updated:Date.now(),state:s,invite:null};}
+test('public projection never includes hand, deck order, face-down IDs or internal card UIDs',()=>{
+ const data=publicDuelData(s);assert.equal(data.players[1].monsters[0].id,null);assert.equal(data.players[1].backrow[0].id,null);assert.equal('hand' in data.players[1],false);assert.equal('deck' in data.players[1],false);
+ const text=JSON.stringify(duelPublicMessage(record()).embeds.map(e=>e.toJSON()));assert.ok(!text.includes('15025844'));assert.ok(!text.includes('44209392'));assert.ok(!text.includes('hidden'));assert.throws(()=>duelPrivateMessage(record(),'stranger'),/participantes/);
+});
+test('public renderer never requests hidden art; private renderer requests only own hand and own hidden cards',async()=>{
+ const publicRequests=[];const image=await renderDuel(s,undefined,async id=>{publicRequests.push(id);return undefined;});assert.equal(publicRequests.length,0);assert.equal((await sharp(image).metadata()).height,1020);
+ const requests=[];await renderDuel(s,'101',async id=>{requests.push(id);return undefined;});const own=new Set(s.players[0].hand.map(c=>c.id));assert.deepEqual(new Set(requests),own);
+ const privateRequests=[];await renderDuel(s,'102',async id=>{privateRequests.push(id);return undefined;});assert.ok(privateRequests.includes('15025844')&&privateRequests.includes('44209392'));
+});
+test('PNG attachments, menus and invitations serialize within Discord limits, and final/no-actions panels work',async()=>{
+ for(const owner of ['101','102'])for(const page of [-1,1,999]){const p=duelPrivateMessage(record(),owner,page);assert.ok(p.components.length<=5);for(const row of p.components){const data=row.toJSON();for(const c of data.components){assert.ok(c.custom_id.length<=100);if(c.options)assert.ok(c.options.length<=25);}}for(const e of p.embeds)e.toJSON();}
+ const pub=await visualDuelPublic(record());assert.equal(pub.files.length,1);assert.equal(pub.embeds[0].toJSON().image.url,'attachment://campo-duelo.png');
+ const privatePanel=await visualDuelPrivate(record(),'101');assert.equal(privatePanel.files.length,1);assert.equal((await sharp(privatePanel.files[0].attachment).metadata()).height,1360);
+ const inv={...record(),status:'pending',state:null,invite:{owner:'101',opponent:'102',name:'Kise',cards:ids('warrior')}};for(const row of invitationMessage(inv).components)row.toJSON();
+ const done={...record(),status:'finished',state:step(s,'101',{kind:'concede'})};assert.ok(duelPrivateMessage(done,'101').components[0].toJSON().components.at(-1).disabled);
+});
+after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
