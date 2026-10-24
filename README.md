@@ -111,3 +111,8 @@ Ative seu deck e use `/duelo treino`, `/duelo desafiar oponente:...`, `/duelo ve
 Leia [DUEL_RULES.md](DUEL_RULES.md) para regras implementadas, privacidade, expiração e limites. Adicionar uma carta ao catálogo não a habilita para duelar: a lista do motor é explícita. Não há Skills, Extra Deck ou motor universal de efeitos. A renderização usa o cache de cartas existente e conserva fallback textual.
 
 Validação inclui partidas completas simuladas, conservação de cartas em 100 sementes, combate/efeitos, consentimento do convite, retomada, rollback, privacidade do campo e o listener real com transporte Discord simulado. Confirmar a experiência de dois usuários no Discord permanece um teste de aceitação separado.
+
+
+## Fase 4.1 — W.O., Campo e Fusão
+
+Prazo de 30 minutos por decisão, vitória do adversário por W.O., verificação automática a cada 10 segundos e bloqueio de controles após fim. Derrota por deck vazio ocorre na falha de compra obrigatória. Campo, Deck Adicional, cemitério consultável e área de banidas aparecem na arena. Sogen e a Fusão do Espadachim das Chamas estão implementados; `/duelo treino_fusao` oferece tutorial virtual, sem alterar coleção ou economia. O editor separa automaticamente cartas de Fusão do Principal. Ver DUEL_RULES.md para as diferenças entre suporte implementado e o TCG completo.
