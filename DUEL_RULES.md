@@ -1,5 +1,7 @@
 # Fase 4 — Motor básico 1v1 (v0.6)
 
+> **Observação de versão (2026-10-24):** esta seção é o registro histórico do protótipo v0.6, não uma descrição exaustiva da branch atual. Na branch classic-engine-foundation existem efeitos FLIP, Ignição, Cemitério, destruição em batalha, Armadilhas de Resposta, Magias Rápidas, Jinzo, cartas de busca e duelos NPC de 30 cartas. Veja ENGINE_PROGRESS.md e o capítulo atual do README.md. O jogo continua uma **adaptação própria**, não um simulador integral de torneios.
+
 ## Como jogar
 
 1. Ative um deck válido no editor (`/deck ativar`).
