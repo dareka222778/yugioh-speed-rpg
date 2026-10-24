@@ -1,7 +1,8 @@
-import {ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
+import {AttachmentBuilder,ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
 import {getCollection} from './database';
 import {openDeck} from './decks';
 import {getCard} from './collection';
+import {renderDeck} from './deckRenderer';
 export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string,notice?:string){
  const deck=openDeck(owner,slot);const owned=getCollection(owner);
  const ids=[...new Set([...owned.map(c=>c.card_key),...deck.items.map(c=>c.card_key)])].filter(id=>getCard(id)).sort((a,b)=>getCard(a)!.name.localeCompare(getCard(b)!.name,'pt-BR'));
@@ -28,4 +29,17 @@ export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string
  new ButtonBuilder().setCustomId(key('view',page+1)).setLabel('Próxima').setStyle(ButtonStyle.Secondary).setDisabled(page===pages),
  new ButtonBuilder().setCustomId(key('initial')).setLabel('Copiar conjunto inicial').setStyle(ButtonStyle.Secondary).setDisabled(deck.total!==0)));
  return {embeds:[embed],components:rows,attachments:[],allowedMentions:{parse:[] as never[]}};
+}
+
+export async function visualDeckMessage(owner:string,slot=1,page=1,selected?:string,notice?:string){
+ const message=deckMessage(owner,slot,page,selected,notice);
+ const deck=openDeck(owner,slot);
+ const menu=message.components[1]?.toJSON().components[0];
+ const options=menu&&'options' in menu?menu.options:[];
+ const visible=options.map(o=>o.value);const choice=options.find(o=>o.default)?.value;
+ const footer=message.embeds[0].toJSON().footer?.text??'';const position=footer.match(/Página (\d+)\/(\d+)/);
+ const bytes=await renderDeck({deck,visible,selected:choice,owned:getCollection(owner),page:Number(position?.[1]??1),pages:Number(position?.[2]??1)});
+ const name='oficina-de-decks.png';
+ message.embeds[0].spliceFields(0,25).setImage(`attachment://${name}`);
+ return {...message,files:[new AttachmentBuilder(bytes,{name,description:`Deck ${deck.name}, ${deck.total} cartas. ${visible.map(id=>`${getCard(id)!.name}: ${deck.items.find(c=>c.card_key===id)?.quantity??0} no deck`).join('; ')}`.slice(0,1024)})]};
 }
