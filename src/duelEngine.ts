@@ -17,7 +17,7 @@ export type Action=
  |{kind:'monsterEffect';card:string;discards:string[];tributes?:string[];target?:string}
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
-export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip';actor:number;card:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
+export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
 export type DuelState={version:1;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
@@ -96,7 +96,7 @@ function trapActions(s:DuelState,index:number):Action[]{
    out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='torrentialTribute'&&s.phase==='response'&&['summon','flip','specialSummon'].includes(s.pending.kind)&&s.players.some(p=>p.monsters.length))
    out.push({kind:'trap',card:c.uid,target:''});
-  else if(effect.kind==='trapHole'&&s.phase==='response'&&s.pending.kind==='summon'&&s.pending.actor!==index){const m=findMonster(s,s.pending.card)?.m;if(m?.faceUp&&atk(m,s)>=1000)out.push({kind:'trap',card:c.uid,target:m.uid});}
+  else if(effect.kind==='trapHole'&&s.phase==='response'&&['summon','flip'].includes(s.pending.kind)&&s.pending.actor!==index){const m='card' in s.pending?findMonster(s,s.pending.card)?.m:undefined;if(m?.faceUp&&atk(m,s)>=1000)out.push({kind:'trap',card:c.uid,target:m.uid});}
  }return out;
 }
 
@@ -327,9 +327,12 @@ function resolve(s:DuelState){
   note(s,'Efeito de monstro resolvido.');
   return;
  }
- if(pending.kind==='flip'||pending.kind==='summon'){
-  queueOtherSummonTriggers(s,pending.card);
-  triggerMonsterEffect(s,pending.actor,pending.card,pending.kind==='flip'?'flip':'onSummon');
+ if(pending.kind==='flip'||pending.kind==='summon'||pending.kind==='specialSummon'){
+  // Only Normal/Flip Summons trigger monsters that specifically react to them.
+  if(pending.kind!=='specialSummon')queueOtherSummonTriggers(s,pending.card);
+  // A FLIP or Summon trigger can still activate if a chained Trap destroyed
+  // the source after the summon; the source ID is captured at declaration.
+  triggerMonsterEffect(s,pending.actor,pending.card,pending.kind==='flip'?'flip':'onSummon',pending.id);
   return;
  }
  if(pending.kind==='end'){endTurn(s);return;}
@@ -342,13 +345,13 @@ function resolve(s:DuelState){
   if(fusion&&materials.every(Boolean)){
    for(const uid of pending.materials){const hand=p.hand.find(c=>c.uid===uid);if(hand){p.hand=p.hand.filter(c=>c.uid!==uid);p.grave.push(hand);}else graveMonster(s,uid);}
    p.extra=p.extra!.filter(c=>c.uid!==fusion.uid);p.monsters.push({...fusion,properlySummoned:true,owner:pending.actor,position:pending.position,faceUp:true,entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});
-   note(s,`${p.name} fez a Invocação-Fusão de ${card(fusion.id).name}.`);response(s,{kind:'none'},'main');
+   note(s,`${p.name} fez a Invocação-Fusão de ${card(fusion.id).name}.`);response(s,{kind:'specialSummon',actor:pending.actor,card:fusion.uid,id:fusion.id},'main');
   }return;
  }
  if(pending.kind==='spell'){
   const p=s.players[pending.actor],op=s.players[1-pending.actor];const c=p.backrow.find(c=>c.uid===pending.card);
   if(getEffect(pending.id)?.kind!=='equip'){p.backrow=p.backrow.filter(c=>c.uid!==pending.card);if(c)p.grave.push({uid:c.uid,id:c.id});}
-  if(resolveClassicSpell(s,pending,{destroy:graveMonster,note,finish,checkLP}))return;
+  if(resolveClassicSpell(s,pending,{destroy:graveMonster,note,finish,checkLP,onSpecialSummon:(state,actor,uid,id)=>response(state,{kind:'specialSummon',actor,card:uid,id},state.resume,1-actor)}))return;
   if(getEffect(pending.id)?.kind==='fissure') {const face=op.monsters.filter(m=>m.faceUp);if(face.length){const min=Math.min(...face.map(m=>atk(m,s)));const targets=face.filter(m=>atk(m,s)===min).map(m=>m.uid);
    if(targets.length===1){note(s,`Fissura destruiu ${card(findMonster(s,targets[0])!.m.id).name}.`);graveMonster(s,targets[0]);}
    else{s.choice={actor:pending.actor,targets};s.phase='choice';note(s,'Fissura: escolha um dos monstros empatados no menor ATK.');}
@@ -436,7 +439,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  }else if(action.kind==='summon'){
   const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);for(const uid of action.tributes)graveMonster(s,uid);
   p.monsters.push({...c,owner:index,position:action.position==='set'?'def':'atk',faceUp:action.position!=='set',entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});p.summoned=true;
-  note(s,action.position==='set'?`${p.name} baixou um monstro em Defesa.`:`${p.name} invocou ${card(c.id).name}.`);response(s,action.position==='set'?{kind:'none'}:{kind:'summon',actor:index,card:c.uid},'main');
+  note(s,action.position==='set'?`${p.name} baixou um monstro em Defesa.`:`${p.name} invocou ${card(c.id).name}.`);response(s,action.position==='set'?{kind:'none'}:{kind:'summon',actor:index,card:c.uid,id:c.id},'main');
  }else if(action.kind==='set'){
   const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);
   p.backrow.push({...c,setTurn:s.turn,faceUp:false});note(s,`${p.name} baixou uma Magia/Armadilha.`);response(s,{kind:'none'},'main');
@@ -456,7 +459,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target??''});s.passes=0;s.priority=1-index;
   }else response(s,{kind:'spell',actor:index,card:c.uid,id:c.id,...action.target?{target:action.target}:{},...action.position?{position:action.position}:{}},'main');
  }else if(action.kind==='position'){
-  const m=p.monsters.find(m=>m.uid===action.card)!;m.faceUp=true;m.position=action.mode==='def'?'def':'atk';m.changed=s.turn;note(s,`${p.name} mudou a posição de ${card(m.id).name}.`);response(s,action.mode==='flip'?{kind:'flip',actor:index,card:m.uid}:{kind:'none'},'main');
+  const m=p.monsters.find(m=>m.uid===action.card)!;m.faceUp=true;m.position=action.mode==='def'?'def':'atk';m.changed=s.turn;note(s,`${p.name} mudou a posição de ${card(m.id).name}.`);response(s,action.mode==='flip'?{kind:'flip',actor:index,card:m.uid,id:m.id}:{kind:'none'},'main');
  }else if(action.kind==='battle')response(s,{kind:'battle'},'main');
  else if(action.kind==='end')response(s,{kind:'end'},s.phase as 'main'|'battle');
  else if(action.kind==='attack'){
@@ -477,7 +480,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
     note(s,`Tomate Místico Invocou ${card(found.id).name} do Deck.`);
    }else note(s,'O jogador recusou a Invocação-Especial de Tomate Místico.');
    s.choice=undefined;s.pending={kind:'none'};s.phase=s.resume;
-   if(action.target!=='__skip__')response(s,{kind:'none'},s.resume,1-index);
+   if(action.target!=='__skip__')response(s,{kind:'specialSummon',actor:index,card:action.target,id:card(p.monsters.find(m=>m.uid===action.target)!.id).id},s.resume,1-index);
   }else if(s.choice?.source==='monsterSearch'){
    const pending=s.pending;
    if(pending.kind!=='monsterEffect'||!s.choice.targets.includes(action.target))throw new Error('Busca inválida.');
