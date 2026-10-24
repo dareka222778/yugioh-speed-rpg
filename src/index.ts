@@ -1,139 +1,121 @@
 import 'dotenv/config';
-import {
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  Client,
-  EmbedBuilder,
-  Events,
-  GatewayIntentBits,
-  REST,
-  Routes,
-  SlashCommandBuilder
-} from 'discord.js';
-import { chooseStarterDeck, createPlayer, getPlayer } from './database';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GatewayIntentBits, MessageFlags, ModalBuilder, REST, Routes, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
+import { chooseStarterDeck, createPlayer, getPlayer, updateProfile } from './database';
 import { isStarterDeck, starterDecks } from './starterDecks';
+import { profileMessage, themes, validateProfile } from './profile';
+import { removePortrait, savePortrait } from './portrait';
 
 const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
 const guildId = process.env.DISCORD_GUILD_ID;
-
-if (!token || !clientId) {
-  throw new Error('Preencha DISCORD_TOKEN e DISCORD_CLIENT_ID no .env.');
-}
+if (!token || !clientId) throw new Error('Preencha DISCORD_TOKEN e DISCORD_CLIENT_ID no ambiente da hospedagem.');
 
 const commands = [
   new SlashCommandBuilder().setName('ping').setDescription('Testa se o bot está online.'),
-  new SlashCommandBuilder().setName('start').setDescription('Cria seu duelista e escolhe um deck inicial.'),
-  new SlashCommandBuilder().setName('perfil').setDescription('Mostra seu perfil de duelista.')
-].map(command => command.toJSON());
-
-async function registerCommands() {
-  const rest = new REST({ version: '10' }).setToken(token!);
-  if (guildId) {
-    await rest.put(Routes.applicationGuildCommands(clientId!, guildId), { body: commands });
-    console.log('Comandos registrados no servidor de teste.');
-  } else {
-    await rest.put(Routes.applicationCommands(clientId!), { body: commands });
-    console.log('Comandos globais registrados.');
-  }
-}
-
+  new SlashCommandBuilder().setName('start').setDescription('Cria seu duelista e escolhe um estilo inicial.'),
+  new SlashCommandBuilder().setName('perfil').setDescription('Abre sua ficha de personagem.')
+    .addBooleanOption(o => o.setName('publico').setDescription('Compartilha o perfil neste canal.')),
+  new SlashCommandBuilder().setName('personalizar').setDescription('Edita a aparência e a história do seu personagem.')
+    .addStringOption(o => o.setName('nome').setDescription('Nome do personagem (até 32 caracteres).').setMaxLength(32))
+    .addStringOption(o => o.setName('bio').setDescription('Sua história (até 240 caracteres).').setMaxLength(240))
+    .addStringOption(o => o.setName('cor').setDescription('Cor do seu perfil.').addChoices(...Object.keys(themes).map(v => ({ name: v, value: v }))))
+    .addAttachmentOption(o => o.setName('imagem').setDescription('Retrato PNG, JPG ou WebP, até 2 MB.'))
+    .addBooleanOption(o => o.setName('remover_imagem').setDescription('Apaga o retrato salvo.'))
+].map(c => c.toJSON());
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-client.once(Events.ClientReady, readyClient => {
-  console.log(`Yu-Gi-Oh! Speed RPG online como ${readyClient.user.tag}`);
-});
-
-client.on(Events.InteractionCreate, async interaction => {
-  if (interaction.isChatInputCommand()) {
-    if (interaction.commandName === 'ping') {
-      await interaction.reply({ content: '🏓 Pong! O RPG está online.', ephemeral: true });
-      return;
-    }
-
-    if (interaction.commandName === 'start') {
-      const player = createPlayer(interaction.user.id, interaction.user.username);
-
-      if (player.starter_deck) {
-        await interaction.reply({ content: 'Você já escolheu seu deck inicial. Use `/perfil`.', ephemeral: true });
+client.once(Events.ClientReady, c => console.log(`Yu-Gi-Oh! Speed RPG online como ${c.user.tag}`));
+const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nO RPG está na V0: duelos, coleção e entrega de cartas ainda estão em desenvolvimento.';
+// One mutation at a time per player, including network downloads.
+const busy = new Set<string>();
+client.on(Events.InteractionCreate, async i => {
+  if (!i.isChatInputCommand() && !i.isButton() && !i.isModalSubmit()) return;
+  const id = i.user.id;
+  const avatar = i.user.displayAvatarURL({ size: 256 });
+  try {
+    if (i.isChatInputCommand()) {
+      if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! O RPG está online.', flags: MessageFlags.Ephemeral }); return; }
+      if (i.commandName === 'start') {
+        const player = createPlayer(id, i.user.username);
+        if (player.starter_deck) { await i.reply({ ...profileMessage(player, avatar), flags: MessageFlags.Ephemeral }); return; }
+        const embed = new EmbedBuilder().setColor(themes.ouro).setAuthor({ name: 'SPEED RPG • PRIMEIRA JOGADA', iconURL: avatar })
+          .setTitle('Sua jornada começa aqui')
+          .setDescription('Escolha o estilo do seu duelista. A escolha será permanente nesta versão.\n\n**V0:** o estilo será salvo; as cartas e os duelos ainda estão em desenvolvimento.')
+          .addFields(Object.values(starterDecks).map(d => ({ name: `${d.emoji} ${d.name}`, value: d.description })))
+          .setFooter({ text: 'Depois da escolha, personalize seu personagem com /personalizar.' });
+        const row = new ActionRowBuilder<ButtonBuilder>().addComponents(Object.entries(starterDecks).map(([key,d]) => new ButtonBuilder().setCustomId(`starter:${key}`).setLabel(d.name).setEmoji(d.emoji).setStyle(ButtonStyle.Primary)));
+        await i.reply({ embeds: [embed], components: [row], flags: MessageFlags.Ephemeral }); return;
+      }
+      const player = getPlayer(id);
+      if (!player) { await i.reply({ content: 'Crie seu duelista primeiro com `/start`.', flags: MessageFlags.Ephemeral }); return; }
+      if (i.commandName === 'perfil') {
+        const publicProfile = i.options.getBoolean('publico') ?? false;
+        await i.reply({ ...profileMessage(player, avatar, !publicProfile), ...(publicProfile ? {} : { flags: MessageFlags.Ephemeral }) }); return;
+      }
+      if (i.commandName === 'personalizar') {
+        if (busy.has(id)) { await i.reply({ content: 'Sua alteração anterior ainda está sendo salva.', flags: MessageFlags.Ephemeral }); return; }
+        const image = i.options.getAttachment('imagem');
+        const remove = i.options.getBoolean('remover_imagem');
+        if (image && remove) throw new Error('Escolha enviar ou remover a imagem, uma opção por vez.');
+        const profile = validateProfile(i.options.getString('nome') ?? (player.character_name || i.user.username), i.options.getString('bio') ?? player.biography, i.options.getString('cor') ?? player.theme);
+        busy.add(id);
+        try {
+          await i.deferReply({ flags: MessageFlags.Ephemeral });
+          if (image) await savePortrait(id, image);
+          if (remove) await removePortrait(id);
+          updateProfile(id, profile);
+          await i.editReply({ content: '✦ Personagem atualizado.', ...profileMessage(getPlayer(id)!, avatar) });
+        } finally { busy.delete(id); }
         return;
       }
-
-      const embed = new EmbedBuilder()
-        .setTitle('⚡ Yu-Gi-Oh! Speed RPG')
-        .setDescription('Sua jornada como duelista começa agora. Escolha seu primeiro deck. Esta escolha será permanente na V0.')
-        .addFields(Object.entries(starterDecks).map(([, deck]) => ({
-          name: `${deck.emoji} ${deck.name}`,
-          value: deck.description
-        })));
-
-      const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-        Object.entries(starterDecks).map(([key, deck]) =>
-          new ButtonBuilder()
-            .setCustomId(`starter:${key}`)
-            .setLabel(deck.name)
-            .setEmoji(deck.emoji)
-            .setStyle(ButtonStyle.Primary)
-        )
-      );
-
-      await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
-      return;
     }
-
-    if (interaction.commandName === 'perfil') {
-      const player = getPlayer(interaction.user.id);
-      if (!player) {
-        await interaction.reply({ content: 'Você ainda não é um duelista. Use `/start`.', ephemeral: true });
-        return;
+    if (i.isButton() && i.customId.startsWith('starter:')) {
+      const key = i.customId.split(':')[1];
+      if (!isStarterDeck(key)) return;
+      createPlayer(id, i.user.username);
+      const success = chooseStarterDeck(id, key);
+      await i.update({ content: success ? '✦ Estilo inicial salvo. Agora dê vida ao seu personagem!' : 'Seu estilo inicial já foi escolhido.', ...profileMessage(getPlayer(id)!, avatar) }); return;
+    }
+    if (i.isButton() && i.customId.startsWith('profile:')) {
+      const [,action,owner] = i.customId.split(':');
+      if (owner !== id) { await i.reply({ content: 'Abra sua própria ficha com `/perfil`.', flags: MessageFlags.Ephemeral }); return; }
+      const player = getPlayer(id);
+      if (!player) throw new Error('Crie seu duelista com /start.');
+      if (action === 'help') { await i.reply({ content: help, flags: MessageFlags.Ephemeral }); return; }
+      if (action === 'refresh') { await i.update({ ...profileMessage(player, avatar), attachments: [] }); return; }
+      if (action === 'edit') {
+        const modal = new ModalBuilder().setCustomId(`profile-edit:${id}`).setTitle('Seu personagem');
+        for (const [key,label,value,max,style] of [
+          ['name','Nome do personagem',player.character_name || i.user.username,32,TextInputStyle.Short],
+          ['bio','Biografia',player.biography,240,TextInputStyle.Paragraph],
+          ['theme','Cor: ametista, ouro, oceano, rubi, esmeralda',player.theme,16,TextInputStyle.Short]
+        ] as const) {
+          const input = new TextInputBuilder().setCustomId(key).setLabel(label).setStyle(style).setMaxLength(max).setRequired(key !== 'bio');
+          if (value) input.setValue(value);
+          modal.addComponents(new ActionRowBuilder<TextInputBuilder>().addComponents(input));
+        }
+        await i.showModal(modal); return;
       }
-
-      const deck = player.starter_deck && isStarterDeck(player.starter_deck)
-        ? `${starterDecks[player.starter_deck].emoji} ${starterDecks[player.starter_deck].name}`
-        : 'Ainda não escolhido';
-
-      const embed = new EmbedBuilder()
-        .setTitle(`🪪 ${interaction.user.username}`)
-        .addFields(
-          { name: 'Nível', value: String(player.duelist_level), inline: true },
-          { name: 'XP', value: String(player.xp), inline: true },
-          { name: 'DP', value: `${player.dp} DP`, inline: true },
-          { name: 'Deck inicial', value: deck }
-        );
-
-      await interaction.reply({ embeds: [embed], ephemeral: true });
     }
-    return;
-  }
-
-  if (interaction.isButton() && interaction.customId.startsWith('starter:')) {
-    const key = interaction.customId.split(':')[1];
-    if (!isStarterDeck(key)) return;
-
-    createPlayer(interaction.user.id, interaction.user.username);
-    const success = chooseStarterDeck(interaction.user.id, key);
-
-    if (!success) {
-      await interaction.update({ content: 'Você já escolheu seu deck inicial.', embeds: [], components: [] });
-      return;
+    if (i.isModalSubmit() && i.customId === `profile-edit:${id}`) {
+      if (busy.has(id)) throw new Error('Sua alteração anterior ainda está sendo salva.');
+      if (!getPlayer(id)) throw new Error('Crie seu duelista com /start.');
+      const profile = validateProfile(i.fields.getTextInputValue('name'), i.fields.getTextInputValue('bio'), i.fields.getTextInputValue('theme').trim().toLowerCase());
+      updateProfile(id, profile);
+      await i.reply({ content: '✦ Personagem atualizado.', ...profileMessage(getPlayer(id)!, avatar), flags: MessageFlags.Ephemeral });
     }
-
-    const deck = starterDecks[key];
-    await interaction.update({
-      content: `${deck.emoji} **${deck.name} escolhido!**\nVocê recebeu seu primeiro deck. Use \`/perfil\` para ver seu duelista.`,
-      embeds: [],
-      components: []
-    });
+  } catch (error) {
+    console.error('Falha na interação:', error);
+    const content = error instanceof Error && !('code' in error) ? error.message : 'Não foi possível concluir. Tente novamente.';
+    try {
+      if (i.deferred) await i.editReply({ content });
+      else if (i.replied) await i.followUp({ content, flags: MessageFlags.Ephemeral });
+      else await i.reply({ content, flags: MessageFlags.Ephemeral });
+    } catch (replyError) { console.error('Falha ao responder:', replyError); }
   }
 });
-
 async function main() {
-  await registerCommands();
+  const rest = new REST({ version: '10' }).setToken(token!);
+  await rest.put(guildId ? Routes.applicationGuildCommands(clientId!,guildId) : Routes.applicationCommands(clientId!), { body: commands });
   await client.login(token);
 }
-
-main().catch(error => {
-  console.error(error);
-  process.exit(1);
-});
+main().catch(error => { console.error(error); process.exit(1); });
