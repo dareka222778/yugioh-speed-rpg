@@ -83,4 +83,10 @@ test('automatic timeout sweep announces W.O. without a player click and stale pr
  db.db.prepare('UPDATE duels SET updated=0 WHERE id=?').run(r.id);assert.equal(store.getDuel(r.id).status,'finished');const count=publicUpdates.length;await require('../dist/index').sweepDuelTimeouts();const ended=store.getDuel(r.id);assert.equal(ended.status,'finished');assert.match(ended.state.reason,/W.O./);assert.ok(publicUpdates.length>count);assert.equal(publicUpdates.at(-1).components.length,0);
  const user={id:'107',username:'Relógio',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};const old=interaction('button',undefined,{user,customId:`duel:act:${r.id}:${r.revision}:1`,isButton:()=>false,isStringSelectMenu:()=>true,values:['0']});await dispatch(old.i);assert.equal(old.calls[0][0],'deferUpdate');assert.equal(old.calls[1][1].components.length,0);assert.equal(store.getDuel(r.id).revision,ended.revision);
 });
+test('quick action buttons execute through the real listener and reject repeat clicks',async()=>{
+ const store=require('../dist/duelStore');db.createPlayer('108','Atalho');const r=store.createTraining('108','g','c',true);assert.equal(r.state.fixedOpening,true);
+ const ui=require('../dist/duelUI');const button=ui.duelPrivateMessage(r,'108').components.flatMap(row=>row.toJSON().components).find(c=>c.custom_id?.startsWith('duel:quick:'));
+ assert.ok(button);const user={id:'108',username:'Atalho',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};const click=interaction('button',undefined,{user,customId:button.custom_id});await dispatch(click.i);assert.equal(click.calls[0][0],'deferUpdate');assert.equal(store.getDuel(r.id).revision,r.revision+1);
+ const repeat=interaction('button',undefined,{user,customId:button.custom_id});await dispatch(repeat.i);assert.match(repeat.calls.at(-1)[1].content,/antigo/);
+});
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
