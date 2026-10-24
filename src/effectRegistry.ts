@@ -8,6 +8,7 @@ export type Effect=
  |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
 const effects:Record<string,Effect>={
+ '54652250':{kind:'normal'}, // Engine-supported effect monster; behavior in monsterEffects.ts
  '38199696':{kind:'heal',amount:500},'84257639':{kind:'heal',amount:1000},'19523799':{kind:'burn',amount:800},
  '66788016':{kind:'fissure'},'24094653':{kind:'polymerization'},
  '17814387':{kind:'reinforcements'},'44209392':{kind:'castleWalls'},
@@ -23,7 +24,12 @@ const effects:Record<string,Effect>={
  '98374133':{kind:'equip',attribute:'EARTH',atk:400,def:-200},
  '01435851':{kind:'equip',races:['Dragon'],atk:300,def:300}
 };
-export const engineCatalog:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id))];
+const supportedEffectMonsters:Card[]=[{
+ id:'54652250',konamiId:0,name:'Inseto Devorador de Homens',englishName:'Man-Eater Bug',kind:'monster',race:'Insect',attribute:'EARTH',level:2,atk:450,defense:600,
+ summary:'VIRAR: escolha 1 monstro no campo; destrua-o.',
+ source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&request_locale=pt'
+}];
+export const engineCatalog:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters];
 const metadata=new Map(engineCatalog.map(c=>[c.id,c]));
 for(const c of engineCatalog)if(!effects[c.id]){
  if(c.fusion)effects[c.id]={kind:'fusion'};
