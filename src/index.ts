@@ -7,6 +7,8 @@ import { removePortrait, savePortrait } from './portrait';
 import { renderWelcome } from './cardRenderer';
 import { collectionMessage, cardMessage, searchCards, exactCard, getCard } from './collection';
 import { getCardArt } from './cardArt';
+import {openDeck,changeDeck,renameDeck,activateDeck,fillInitialDeck} from './decks';
+import {deckMessage} from './deckUI';
 
 const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
@@ -27,13 +29,20 @@ const commands = [
   new SlashCommandBuilder().setName('colecao').setDescription('Veja suas cartas e quantidades.')
     .addIntegerOption(o=>o.setName('pagina').setDescription('Página da coleção.').setMinValue(1)),
   new SlashCommandBuilder().setName('carta').setDescription('Consulte uma carta do catálogo inicial.')
-    .addStringOption(o=>o.setName('busca').setDescription('Nome em português, inglês ou ID da carta.').setRequired(true).setAutocomplete(true).setMaxLength(100))
+    .addStringOption(o=>o.setName('busca').setDescription('Nome em português, inglês ou ID da carta.').setRequired(true).setAutocomplete(true).setMaxLength(100)),
+  new SlashCommandBuilder().setName('deck').setDescription('Monte e escolha seu deck ativo.')
+    .addSubcommand(c=>c.setName('ver').setDescription('Abre o editor de decks.').addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
+    .addSubcommand(c=>c.setName('adicionar').setDescription('Adiciona cartas que você possui.').addStringOption(o=>o.setName('carta').setDescription('Nome ou ID da carta.').setRequired(true).setAutocomplete(true)).addIntegerOption(o=>o.setName('quantidade').setDescription('Quantidade de cópias.').setMinValue(1).setMaxValue(3)).addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
+    .addSubcommand(c=>c.setName('remover').setDescription('Remove cartas do deck, mantendo a coleção.').addStringOption(o=>o.setName('carta').setDescription('Nome ou ID da carta.').setRequired(true).setAutocomplete(true)).addIntegerOption(o=>o.setName('quantidade').setDescription('Quantidade de cópias.').setMinValue(1).setMaxValue(3)).addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
+    .addSubcommand(c=>c.setName('nome').setDescription('Renomeia um deck.').addStringOption(o=>o.setName('texto').setDescription('Nome do deck.').setRequired(true).setMaxLength(32)).addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
+    .addSubcommand(c=>c.setName('ativar').setDescription('Escolhe um deck válido como ativo.').addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
+    .addSubcommand(c=>c.setName('inicial').setDescription('Copia o conjunto inicial para um espaço vazio.').addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
 ].map(c => c.toJSON());
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on(Events.Error, error => console.error('Discord client:', error));
 client.on(Events.Warn, warning => console.warn('Discord aviso:', warning));
 client.once(Events.ClientReady, c => console.log(`Yu-Gi-Oh! Speed RPG online como ${c.user.tag}`));
-const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nO RPG está na V0: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Duelos ainda estão em desenvolvimento.';
+const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nO RPG está na V0: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Duelos ainda estão em desenvolvimento. Use `/deck ver` para montar, nomear e ativar seus decks.';
 // One mutation at a time per player, including network downloads.
 async function showCard(id:string, userId:string) {
   const card=getCard(id);if(!card)throw new Error('Essa carta não faz parte do catálogo inicial.');
@@ -47,14 +56,51 @@ const busy = new Set<string>();
 client.on(Events.InteractionCreate, async i => {
   console.log(`Interação recebida: ${i.type} / ${'commandName' in i ? i.commandName : 'componente'}`);
   if(i.isAutocomplete()) {
-    try {await i.respond(searchCards(String(i.options.getFocused())).slice(0,25).map(c=>({name:`${c.name} • ${c.id}`.slice(0,100),value:c.id})));} catch(error){console.error('Falha no autocomplete:',error);}
+    try {const matches=searchCards(String(i.options.getFocused()));const owned=i.commandName==='deck'?new Set(getCollection(i.user.id).map(c=>c.card_key)):null;await i.respond(matches.filter(c=>!owned||owned.has(c.id)).slice(0,25).map(c=>({name:`${c.name} • ${c.id}`.slice(0,100),value:c.id})));} catch(error){console.error('Falha no autocomplete:',error);}
     return;
   }
   if (!i.isChatInputCommand() && !i.isButton() && !i.isModalSubmit() && !i.isStringSelectMenu()) return;
   const id = i.user.id;
   const avatar = i.user.displayAvatarURL({ size: 256 });
   try {
+    if((i.isButton()||i.isStringSelectMenu()||i.isModalSubmit())&&i.customId.startsWith('deck:')) {
+      const [,action,owner,slotText,revisionText,pageText,cardId]=i.customId.split(':');
+      if(owner!==id){await i.reply({content:'Abra seu próprio editor com /deck ver.',flags:MessageFlags.Ephemeral});return;}
+      const slot=Number(slotText),revision=Number(revisionText),page=Number(pageText);
+      if(!Number.isSafeInteger(revision)||!Number.isSafeInteger(page))throw new Error('Painel inválido. Abra /deck ver.');
+      if(action==='rename'&&i.isButton()){
+        const deck=openDeck(id,slot);
+        if(deck.revision!==revision)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
+        const field=new TextInputBuilder().setCustomId('name').setLabel('Nome do deck').setStyle(TextInputStyle.Short).setRequired(true).setMaxLength(32).setValue(deck.name);
+        await i.showModal(new ModalBuilder().setCustomId(`deck:save-name:${id}:${slot}:${revision}:${page}:${cardId}`).setTitle('Renomear deck').addComponents(new ActionRowBuilder<TextInputBuilder>().addComponents(field)));return;
+      }
+      if(action==='save-name'&&i.isModalSubmit()){
+        await i.deferReply({flags:MessageFlags.Ephemeral});renameDeck(id,slot,i.fields.getTextInputValue('name'),revision);await i.editReply(deckMessage(id,slot,page,cardId,'✦ Nome salvo.'));return;
+      }
+      if(!i.isButton()&&!i.isStringSelectMenu())return;
+      await i.deferUpdate();
+      let selected=cardId;let targetSlot=slot;
+      if(action==='plus'&&i.isButton())changeDeck(id,slot,cardId,1,revision);
+      else if(action==='minus'&&i.isButton())changeDeck(id,slot,cardId,-1,revision);
+      else if(action==='activate'&&i.isButton())activateDeck(id,slot,revision);
+      else if(action==='initial'&&i.isButton())fillInitialDeck(id,slot,revision);
+      else if(action==='select'&&i.isStringSelectMenu())selected=i.values[0];
+      else if(action==='slot'&&i.isStringSelectMenu()){targetSlot=Number(i.values[0]);selected='';}
+      else if(action!=='view')throw new Error('Ação desconhecida. Abra /deck ver.');
+      await i.editReply(deckMessage(id,targetSlot,action==='slot'?1:page,selected));return;
+    }
     if (i.isChatInputCommand()) {
+      if(i.commandName==='deck'){
+        await i.deferReply({flags:MessageFlags.Ephemeral});
+        const slot=i.options.getInteger('espaco')??1;const action=i.options.getSubcommand();let selected:string|undefined;
+        if(action==='adicionar'||action==='remover'){
+          const query=i.options.getString('carta',true);const card=exactCard(query);if(!card)throw new Error('Use o nome completo ou selecione uma sugestão de carta.');
+          selected=card.id;changeDeck(id,slot,card.id,(i.options.getInteger('quantidade')??1)*(action==='adicionar'?1:-1));
+        }else if(action==='nome')renameDeck(id,slot,i.options.getString('texto',true));
+        else if(action==='ativar')activateDeck(id,slot);
+        else if(action==='inicial')fillInitialDeck(id,slot);
+        await i.editReply(deckMessage(id,slot,1,selected));return;
+      }
       if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! O RPG está online.', flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'start') {
         const player = createPlayer(id, i.user.username);
@@ -170,13 +216,14 @@ async function main() {
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
+  console.log('Fase 3: editor de decks carregado (20–30 cartas, até 3 cópias).');
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
   await client.login(token);
   const rest = new REST({ version: '10' }).setToken(token!);
   console.log('Sincronizando comandos sem bloquear a conexão do bot.');
   try {
     await rest.put(guildId ? Routes.applicationGuildCommands(clientId!,guildId) : Routes.applicationCommands(clientId!), { body: commands });
-    console.log('Fase 2: comandos /colecao e /carta registrados.');
+    console.log('Fase 3: comandos /deck, /colecao e /carta registrados.');
   } catch(error) {
     console.error('Falha ao sincronizar comandos; a conexão do bot continua ativa:',error);
   }
