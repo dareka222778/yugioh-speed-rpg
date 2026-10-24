@@ -1,7 +1,7 @@
 import {getCard} from './collection';
 import {getEffect,equipEligible,isQuickPlaySpell} from './effectRegistry';
 import type {Action,Backrow,CardRef,DuelState,Monster,Pending} from './duelEngine';
-export type EffectServices={destroy:(s:DuelState,uid:string)=>void;note:(s:DuelState,line:string)=>void;finish:(s:DuelState,winner:number|null,reason:string)=>void;checkLP:(s:DuelState)=>void};
+export type EffectServices={destroy:(s:DuelState,uid:string)=>void;note:(s:DuelState,line:string)=>void;finish:(s:DuelState,winner:number|null,reason:string)=>void;checkLP:(s:DuelState)=>void;onSpecialSummon?:(s:DuelState,actor:number,uid:string,id:string)=>void};
 export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  const e=getEffect(c.id),p=s.players[index],op=s.players[1-index];if(!e)return [];
  // Quick-Play cards Set during this turn cannot be activated until a later turn.
@@ -71,7 +71,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
   case 'blockAttack':if(found&&found.index!==a.actor&&found.m.faceUp)found.m.position='def';return true;
   case 'monsterReborn':{
    if(p.monsters.length>=3)return true;
-   for(const [index,owner]of s.players.entries()){const c=owner.grave.find(c=>c.uid===a.target);if(c&&getCard(c.id)?.kind==='monster'&&(!getCard(c.id)?.fusion||c.properlySummoned)){owner.grave=owner.grave.filter(ref=>ref.uid!==a.target);p.monsters.push({...c,owner:index,position:a.position??'atk',faceUp:true,entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});service.note(s,`${p.name} reviveu ${getCard(c.id)!.name}.`);break;}}
+   for(const [index,owner]of s.players.entries()){const c=owner.grave.find(c=>c.uid===a.target);if(c&&getCard(c.id)?.kind==='monster'&&(!getCard(c.id)?.fusion||c.properlySummoned)){owner.grave=owner.grave.filter(ref=>ref.uid!==a.target);p.monsters.push({...c,owner:index,position:a.position??'atk',faceUp:true,entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});service.note(s,`${p.name} reviveu ${getCard(c.id)!.name}.`);service.onSpecialSummon?.(s,a.actor,c.uid,c.id);break;}}
    return true;
   }
   case 'changeHeart':if(found&&found.index!==a.actor&&p.monsters.length<3){found.p.monsters=found.p.monsters.filter(m=>m.uid!==found.m.uid);found.m.owner??=found.index;found.m.returnTo=found.index;found.m.returnTurn=s.turn;p.monsters.push(found.m);service.note(s,`${p.name} ganhou o controle temporário de um monstro.`);}return true;
