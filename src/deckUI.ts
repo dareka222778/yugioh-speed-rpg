@@ -1,7 +1,8 @@
 import {AttachmentBuilder,ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
 import {getCollection} from './database';
 import {openDeck} from './decks';
-import {getCard} from './collection';
+import {getCard,kindLabel} from './collection';
+import {getCardArt} from './cardArt';
 import {renderDeck} from './deckRenderer';
 import {embedColors} from './duelTheme';
 export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string,notice?:string){
@@ -23,7 +24,8 @@ export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string
  new ButtonBuilder().setCustomId(key('minus')).setLabel('− 1 cópia').setStyle(ButtonStyle.Secondary).setDisabled(!choice||inDeck(choice)===0),
  new ButtonBuilder().setCustomId(key('plus')).setLabel('+ 1 cópia').setStyle(ButtonStyle.Primary).setDisabled(!choice||inDeck(choice)>=Math.min(3,have(choice))||(choice&&getCard(choice)?.fusion?deck.extraTotal>=6:deck.total>=30)),
  new ButtonBuilder().setCustomId(key('activate')).setLabel(deck.active?'Deck ativo':'Ativar deck').setStyle(ButtonStyle.Success).setDisabled(!!deck.errors.length||!!deck.active),
- new ButtonBuilder().setCustomId(key('rename')).setLabel('Renomear').setStyle(ButtonStyle.Secondary)));
+ new ButtonBuilder().setCustomId(key('rename')).setLabel('Renomear').setStyle(ButtonStyle.Secondary),
+ new ButtonBuilder().setCustomId(key('inspect')).setLabel('Ver carta').setStyle(ButtonStyle.Primary).setDisabled(!choice)));
  rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(
  new ButtonBuilder().setCustomId(key('view',page-1)).setLabel('Anterior').setStyle(ButtonStyle.Secondary).setDisabled(page===1),
  new ButtonBuilder().setCustomId(key('view')).setLabel('Atualizar').setStyle(ButtonStyle.Secondary),
@@ -43,4 +45,45 @@ export async function visualDeckMessage(owner:string,slot=1,page=1,selected?:str
  const name='oficina-de-decks.png';
  message.embeds[0].spliceFields(0,25).setImage(`attachment://${name}`);
  return {...message,files:[new AttachmentBuilder(bytes,{name,description:`Deck ${deck.name}, ${deck.total} cartas. ${visible.map(id=>`${getCard(id)!.name}: ${deck.items.find(c=>c.card_key===id)?.quantity??0} no deck`).join('; ')}`.slice(0,1024)})]};
+}
+
+/** Single-card view of a card actually present in the player's own collection.
+ * The revision and owner are verified again by the Discord interaction router.
+ * A user cannot invent another card ID or see another player's inventory.
+ */
+function ownCardIds(owner:string,slot:number){
+ const deck=openDeck(owner,slot),inventory=getCollection(owner);
+ return [...new Set([...inventory.filter(i=>i.quantity>0).map(i=>i.card_key),...deck.items.map(i=>i.card_key)])]
+  .filter(id=>!!getCard(id)).sort((a,b)=>getCard(a)!.name.localeCompare(getCard(b)!.name,'pt-BR'));
+}
+export function deckCardMessage(owner:string,slot=1,requestedIndex=0){
+ const deck=openDeck(owner,slot),ids=ownCardIds(owner,slot);
+ if(!Number.isSafeInteger(requestedIndex)||requestedIndex<0||requestedIndex>=ids.length)
+  throw new Error('Carta inexistente na sua coleção. Volte ao editor de decks.');
+ const id=ids[requestedIndex],card=getCard(id)!,inventory=getCollection(owner);
+ const quantity=deck.items.find(item=>item.card_key===id)?.quantity??0;
+ const owned=inventory.find(item=>item.card_key===id)?.quantity??0;
+ const key=(action:string,index:number,selected=id)=>`deck:${action}:${owner}:${slot}:${deck.revision}:${index}:${selected}`;
+ const embed=new EmbedBuilder().setColor(embedColors.deck)
+  .setTitle(`${requestedIndex+1}/${ids.length} • ${escapeMarkdown(card.name)}`)
+  .setDescription(`**${kindLabel(card)}**${card.kind==='monster'?` • ${card.attribute??'—'} • ${card.race??'—'}\\n**NÍVEL ${card.level}  /  ATK ${card.atk}  /  DEF ${card.defense}**`:''}\n\n${card.summary}\n\n**No seu deck:** ${quantity} ×  •  **Na coleção:** ${owned} ×`)
+  .setFooter({text:`Seu deck ${slot}/3 • Carta ${requestedIndex+1}/${ids.length} • Somente você pode editar`});
+ const rows=[new ActionRowBuilder<ButtonBuilder>().addComponents(
+   new ButtonBuilder().setCustomId(key('card',(requestedIndex-1+ids.length)%ids.length)).setLabel('◀ Carta anterior').setStyle(ButtonStyle.Secondary),
+   new ButtonBuilder().setCustomId(key('view',Math.floor(requestedIndex/6)+1)).setLabel('Voltar ao deck').setStyle(ButtonStyle.Primary),
+   new ButtonBuilder().setCustomId(key('card',(requestedIndex+1)%ids.length)).setLabel('Próxima carta ▶').setStyle(ButtonStyle.Secondary)
+ )];
+ return {cardId:id,embeds:[embed],components:rows,attachments:[],allowedMentions:{parse:[] as never[]}};
+}
+export async function visualDeckCard(owner:string,slot=1,index=0){
+ const {cardId,...payload}=deckCardMessage(owner,slot,index);
+ try{
+  const bytes=await getCardArt(cardId);
+  if(bytes){
+   const name='minha-carta.jpg';
+   payload.embeds[0].setImage(`attachment://${name}`);
+   return {...payload,files:[new AttachmentBuilder(bytes,{name})]};
+  }
+ }catch{/* Text-only view remains accessible if the card image CDN is unavailable. */}
+ return {...payload,files:[]};
 }
