@@ -116,3 +116,17 @@ Validação inclui partidas completas simuladas, conservação de cartas em 100 
 ## Fase 4.1 — W.O., Campo e Fusão
 
 Prazo de 30 minutos por decisão, vitória do adversário por W.O., verificação automática a cada 10 segundos e bloqueio de controles após fim. Derrota por deck vazio ocorre na falha de compra obrigatória. Campo, Deck Adicional, cemitério consultável e área de banidas aparecem na arena. Sogen e a Fusão do Espadachim das Chamas estão implementados; `/duelo treino_fusao` oferece tutorial virtual, sem alterar coleção ou economia. O editor separa automaticamente cartas de Fusão do Principal. Ver DUEL_RULES.md para as diferenças entre suporte implementado e o TCG completo.
+
+## Fase 5 — conteúdo jogável (v0.7.0)
+
+- `/npc ver`: portal privado com Joey Wheeler, Yugi Muto, Seto Kaiba, progresso e prêmios.
+- `/npc desafiar duelista:<nome>` ou botões do portal: duelo público, mão privada, deck ativo real, embaralhamento normal e mesmas regras do jogador.
+- `/npc diario`: oponente em rotação diária, com 100 DP + 50 XP + uma carta de apoio. Uma recompensa por conta/dia, global entre servidores, renovação às 00:00 de São Paulo. É preciso vencer antes de virar o dia; revanche fora do modo diário não dá o bônus.
+- Primeira vitória contra cada NPC, uma vez por conta: Joey 150 DP/100 XP + Olhos Vermelhos e conjunto da Fusão do Espadachim das Chamas (Polimerização, Manipulador de Chamas, Masaki e a Fusão); Yugi 150 DP/100 XP + Mago Negro; Kaiba 200 DP/125 XP + Olhos Azuis e Sogen.
+- Primeira vitória e diário podem somar. Revanche normal, treino, PvP, derrota, desistência e W.O. não geram prêmio repetido. Não há apostas nem cobrança de entrada.
+- XP total é mantido; cada 100 XP completa um nível. Níveis existentes nunca são reduzidos. Cartas recebidas vão para a coleção; o jogador edita seu deck com `/deck ver`.
+- Catálogo com 35 cartas, incluindo os três monstros clássicos de dois tributos. São adaptações temáticas dos NPCs, usando somente efeitos já implementados; a IA é uma heurística e não lê a mão ou cartas ocultas do adversário.
+- Migrações aditivas: `npc_results`, `npc_first_wins`, `npc_daily_claims`. Estado final, saldo, XP, inventário e recibos são confirmados na mesma transação. Uma falha de gravação desfaz a jogada inteira, permitindo tentar de novo sem pagamento parcial.
+- Motor próprio, campo clássico e verso enviado pelo usuário mantidos. O motor continua sendo um conjunto limitado de regras/cartas, não uma implementação completa do TCG.
+
+Próximas etapas são loja e mercado/expansões, e 2v2 após estabilizar o 1v1. Esta versão não cria uma loja de fachada.

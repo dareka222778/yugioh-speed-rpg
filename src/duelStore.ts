@@ -4,13 +4,15 @@ import {openDeck} from './decks';
 import {starterContents} from './cardCatalog';
 import {createDuel,step,legalActions,validateDuelCards,timeoutDuel,atk,def,type Action,type DuelState} from './duelEngine';
 import {getCard} from './collection';
+import {getNPC,dailyEvent} from './npcContent';
+import {settleEncounter} from './npcProgress';
 export type DuelRecord={id:string;guild_id:string;channel_id:string;message_id:string|null;status:string;revision:number;updated:number;public_revision?:number;state:DuelState|null;invite:{owner:string;opponent:string;name:string;cards:string[];extra?:string[]}|null};
 db.exec(`CREATE TABLE IF NOT EXISTS duels (id TEXT PRIMARY KEY,guild_id TEXT NOT NULL,channel_id TEXT NOT NULL,message_id TEXT,status TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 0,updated INTEGER NOT NULL,state TEXT,invite TEXT);
  CREATE TABLE IF NOT EXISTS duel_members (owner TEXT PRIMARY KEY,duel_id TEXT NOT NULL REFERENCES duels(id) ON DELETE CASCADE);`);
 const duelColumns=new Set((db.prepare('PRAGMA table_info(duels)').all() as {name:string}[]).map(c=>c.name));
 if(!duelColumns.has('public_revision'))db.exec('ALTER TABLE duels ADD COLUMN public_revision INTEGER NOT NULL DEFAULT -1');
 function read(id:string):DuelRecord|undefined {const row=db.prepare('SELECT * FROM duels WHERE id=?').get(id) as any;if(!row)return;return {...row,state:row.state?JSON.parse(row.state):null,invite:row.invite?JSON.parse(row.invite):null};}
-function save(record:DuelRecord){db.prepare('UPDATE duels SET status=?,revision=?,updated=?,state=?,invite=? WHERE id=?').run(record.status,record.revision,record.updated,record.state?JSON.stringify(record.state):null,record.invite?JSON.stringify(record.invite):null,record.id);if(!['pending','playing'].includes(record.status))db.prepare('DELETE FROM duel_members WHERE duel_id=?').run(record.id);}
+function save(record:DuelRecord){if(record.status==='finished'&&record.state?.encounter)settleEncounter(record.id,record.state);db.prepare('UPDATE duels SET status=?,revision=?,updated=?,state=?,invite=? WHERE id=?').run(record.status,record.revision,record.updated,record.state?JSON.stringify(record.state):null,record.invite?JSON.stringify(record.invite):null,record.id);if(!['pending','playing'].includes(record.status))db.prepare('DELETE FROM duel_members WHERE duel_id=?').run(record.id);}
 export const DECISION_TIMEOUT_MS=30*60_000;
 export const getDuel=db.transaction((id:string,now=Date.now()):DuelRecord=>{
  const record=read(id);if(!record)throw new Error('Duelo não encontrado.');
@@ -51,6 +53,12 @@ function driveNPC(s:DuelState){let steps=0;while(s.phase!=='finished'){const npc
 export const createTraining=db.transaction((owner:string,guild:string,channel:string,laboratory=false):DuelRecord=>{
  available(owner);const id=randomBytes(8).toString('hex');const tutorial=['24094653','34460851','44287299','86318356',...starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id)).slice(0,16)];const loadout=laboratory?{cards:tutorial,extra:['45231177']}:activeCards(owner);const style=['warrior','spellcaster','dragon'][randomInt(3)];const opponent=starterContents[style].flatMap(c=>Array(c.quantity).fill(c.id));
  const state=driveNPC(createDuel([{id:owner,name:name(owner),...loadout},{id:`npc-${id}`,name:'Duelista de treino',cards:opponent}],laboratory?()=>0.999999:Math.random,laboratory?0:randomInt(2)));state.fixedOpening=laboratory;
+ const r:DuelRecord={id,guild_id:guild,channel_id:channel,message_id:null,status:'playing',revision:0,updated:Date.now(),state,invite:null};insert(r,[owner]);return r;
+});
+export const createNPCDuel=db.transaction((owner:string,guild:string,channel:string,npcId:string,daily=false):DuelRecord=>{
+ available(owner);const loadout=activeCards(owner),event=dailyEvent(),npc=getNPC(daily?event.npc.id:npcId),id=randomBytes(8).toString('hex');
+ let state=createDuel([{id:owner,name:name(owner),...loadout},{id:`npc-${id}`,name:npc.name,cards:npc.cards,extra:npc.extra}],Math.random,randomInt(2));
+ state.encounter={npcId:npc.id,...daily?{eventDay:event.day}:{}};state=driveNPC(state);
  const r:DuelRecord={id,guild_id:guild,channel_id:channel,message_id:null,status:'playing',revision:0,updated:Date.now(),state,invite:null};insert(r,[owner]);return r;
 });
 export const performDuelAction=db.transaction((id:string,owner:string,guild:string,expected:number,index:number|Action):DuelRecord=>{

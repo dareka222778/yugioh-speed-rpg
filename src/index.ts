@@ -9,8 +9,11 @@ import { collectionMessage, cardMessage, searchCards, exactCard, getCard } from 
 import { getCardArt } from './cardArt';
 import {openDeck,changeDeck,renameDeck,activateDeck,fillInitialDeck} from './decks';
 import {visualDeckMessage} from './deckUI';
-import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChallenge,createTraining,currentDuel,getDuel,performDuelAction,setDuelMessage,type DuelRecord} from './duelStore';
+import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChallenge,createTraining,createNPCDuel,currentDuel,getDuel,performDuelAction,setDuelMessage,type DuelRecord} from './duelStore';
 import {visualDuelPublic,visualDuelPrivate,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
+
+import {npcLobby} from './npcUI';
+import {npcs} from './npcContent';
 
 const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
@@ -39,6 +42,10 @@ const commands = [
     .addSubcommand(c=>c.setName('nome').setDescription('Renomeia um deck.').addStringOption(o=>o.setName('texto').setDescription('Nome do deck.').setRequired(true).setMaxLength(32)).addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
     .addSubcommand(c=>c.setName('ativar').setDescription('Escolhe um deck válido como ativo.').addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
     .addSubcommand(c=>c.setName('inicial').setDescription('Copia o conjunto inicial para um espaço vazio.').addIntegerOption(o=>o.setName('espaco').setDescription('Deck 1, 2 ou 3.').setMinValue(1).setMaxValue(3)))
+  ,new SlashCommandBuilder().setName('npc').setDescription('Duelistas clássicos, progresso e evento diário.').setDMPermission(false)
+    .addSubcommand(c=>c.setName('ver').setDescription('Abra os desafios e suas recompensas.'))
+    .addSubcommand(c=>c.setName('desafiar').setDescription('Enfrente um duelista clássico com seu deck ativo.').addStringOption(o=>o.setName('duelista').setDescription('Oponente').setRequired(true).addChoices(...npcs.map(n=>({name:n.name,value:n.id})))))
+    .addSubcommand(c=>c.setName('diario').setDescription('Dispute o evento diário e ganhe o bônus uma vez por dia.'))
   ,new SlashCommandBuilder().setName('duelo').setDescription('Duelo básico 1v1 com campo e mão privada.').setDMPermission(false)
     .addSubcommand(c=>c.setName('treino').setDescription('Jogue contra o bot usando seu deck ativo.'))
     .addSubcommand(c=>c.setName('treino_fusao').setDescription('Treino guiado de Campo e Fusão, sem alterar sua coleção.'))
@@ -50,7 +57,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on(Events.Error, error => console.error('Discord client:', errorSummary(error)));
 client.on(Events.Warn, warning => console.warn('Discord aviso:', warning));
 client.once(Events.ClientReady, c => {console.log(`Yu-Gi-Oh! Speed RPG online como ${c.user.tag}`);const timer=setInterval(()=>void sweepDuelTimeouts(),10_000);timer.unref();void sweepDuelTimeouts();});
-const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nO RPG está na V0: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Use `/deck ver` para montar e ativar seus decks. Depois abra `/duelo treino` ou `/duelo desafiar`. Duelos básicos com 4000 PV, mão privada, tributos e quatro efeitos implementados; com Campo, Cemitério e uma Fusão de Deck Adicional; sem Skills.';
+const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nPara começar: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Use `/deck ver` para montar e ativar seus decks. Depois abra `/npc ver` para desafios com prêmios, `/duelo treino` ou `/duelo desafiar`. Duelos básicos com 4000 PV, mão privada, tributos e quatro efeitos implementados; com Campo, Cemitério e uma Fusão de Deck Adicional; sem Skills.';
 // One mutation at a time per player, including network downloads.
 async function showCard(id:string, userId:string) {
   const card=getCard(id);if(!card)throw new Error('Essa carta não faz parte do catálogo inicial.');
@@ -85,6 +92,20 @@ client.on(Events.InteractionCreate, async i => {
   const id = i.user.id;
   const avatar = i.user.displayAvatarURL({ size: 256 });
   try {
+    if(i.isButton()&&i.customId.startsWith('npc:')){
+      if(!i.guildId||!i.channelId)throw new Error('Abra os desafios dentro de um servidor.');
+      const [,action,owner,npcId]=i.customId.split(':');if(owner!==id)throw new Error('Abra seus próprios desafios com /npc ver.');
+      if(action==='lobby'){await i.deferUpdate();await i.editReply(npcLobby(id));return;}
+      if(action!=='challenge'&&action!=='daily')throw new Error('Desafio inválido. Use /npc ver.');
+      const r=createNPCDuel(id,i.guildId,i.channelId,npcId,action==='daily');await i.deferReply();const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
+    }
+    if(i.isChatInputCommand()&&i.commandName==='npc'){
+      if(!i.guildId||!i.channelId)throw new Error('Abra os desafios dentro de um servidor.');const action=i.options.getSubcommand();
+      await i.deferReply(action==='ver'?{flags:MessageFlags.Ephemeral}:{});
+      if(action==='ver'){await i.editReply(npcLobby(id));return;}
+      if(action!=='desafiar'&&action!=='diario')throw new Error('Desafio inválido. Use /npc ver.');
+      const r=createNPCDuel(id,i.guildId,i.channelId,action==='diario'?'':i.options.getString('duelista',true),action==='diario');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
+    }
     if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('duel:')){
       if(!i.guildId)throw new Error('Use os duelos dentro de um servidor.');
       const [,action,duelId,revisionText,pageText]=i.customId.split(':');let r=getDuel(duelId);
@@ -264,7 +285,7 @@ client.on(Events.InteractionCreate, async i => {
     console.error('Falha na interação:', errorSummary(error));
     const content = error instanceof Error && !('code' in error) ? error.message : 'Não foi possível concluir. Tente novamente.';
     try {
-      if ((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('duel:')&&i.deferred) await i.followUp({content,flags:MessageFlags.Ephemeral});
+      if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:'))&&i.deferred) await i.followUp({content,flags:MessageFlags.Ephemeral});
       else if (i.deferred) await i.editReply({ content, embeds: [], components: [], attachments: [] });
       else if (i.replied) await i.followUp({ content, flags: MessageFlags.Ephemeral });
       else await i.reply({ content, flags: MessageFlags.Ephemeral });
@@ -277,14 +298,14 @@ async function main() {
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
-  console.log('Fase 4.4: verso enviado pelo usuário aplicado às cartas ocultas e baralhos.');
+  console.log('Fase 5: NPCs clássicos, evento diário e recompensas transacionais carregados.');
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
   await client.login(token);
   const rest = new REST({ version: '10' }).setToken(token!);
   console.log('Sincronizando comandos sem bloquear a conexão do bot.');
   try {
     await rest.put(guildId ? Routes.applicationGuildCommands(clientId!,guildId) : Routes.applicationCommands(clientId!), { body: commands });
-    console.log('Fase 4: /duelo, /deck, /colecao e /carta registrados.');
+    console.log('Fase 5: /npc, /duelo, /deck, /colecao e /carta registrados.');
   } catch(error) {
     console.error('Falha ao sincronizar comandos; a conexão do bot continua ativa:',errorSummary(error));
   }

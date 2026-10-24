@@ -89,4 +89,12 @@ test('quick action buttons execute through the real listener and reject repeat c
  assert.ok(button);const user={id:'108',username:'Atalho',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};const click=interaction('button',undefined,{user,customId:button.custom_id});await dispatch(click.i);assert.equal(click.calls[0][0],'deferUpdate');assert.equal(store.getDuel(r.id).revision,r.revision+1);
  const repeat=interaction('button',undefined,{user,customId:button.custom_id});await dispatch(repeat.i);assert.match(repeat.calls.at(-1)[1].content,/antigo/);
 });
+test('NPC slash command and owner-bound buttons start real challenges, preserve inventory and block double starts',async()=>{
+ assert.ok(registered.some(c=>c.name==='npc'));const deck=require('../dist/decks'),store=require('../dist/duelStore');db.createPlayer('109','Lendário');db.chooseStarterDeck('109','warrior');deck.openDeck('109');deck.activateDeck('109',1);const inventory=db.getCollection('109');const user={id:'109',username:'Lendário',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};
+ const lobby=interaction('command','npc',{user,options:{getSubcommand:()=> 'ver'}});await dispatch(lobby.i);assert.equal(lobby.calls[0][1].flags,64);const button=lobby.calls[1][1].components[0].toJSON().components[0].custom_id;
+ const stranger=interaction('button',undefined,{customId:button});await dispatch(stranger.i);assert.match(stranger.calls.at(-1)[1].content,/próprios/);
+ const start=interaction('button',undefined,{user,customId:button});await dispatch(start.i);assert.equal(start.calls[0][0],'defer');let r=store.currentDuel('109');assert.equal(r.state.encounter.npcId,'joey');assert.deepEqual(db.getCollection('109'),inventory);
+ const duplicate=interaction('button',undefined,{user,customId:button});await dispatch(duplicate.i);assert.equal(duplicate.calls.at(-1)[0],'reply');assert.match(duplicate.calls.at(-1)[1].content,/já tem/);store.performDuelAction(r.id,'109','g',r.revision,{kind:'concede'});
+ const daily=interaction('command','npc',{user,options:{getSubcommand:()=> 'diario'}});await dispatch(daily.i);r=store.currentDuel('109');assert.ok(r.state.encounter.eventDay);store.performDuelAction(r.id,'109','g',r.revision,{kind:'concede'});
+});
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
