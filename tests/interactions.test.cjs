@@ -15,6 +15,7 @@ Module._load=function(name,parent,isMain){
  if(name==='discord.js')return {...discord,Client:TestClient,REST:TestREST};
  if(name==='./duelUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDuelPublic:async(...args)=>ui.duelPublicMessage(...args),visualDuelPrivate:async(...args)=>ui.duelPrivateMessage(...args)};}
  if(name==='./deckUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDeckMessage:async(...args)=>ui.deckMessage(...args)};}
+ if(name==='./npcUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualNPCLobby:async(...args)=>ui.npcLobby(...args)};}
  if(name==='./networkRetry'&&parent.filename.endsWith('/dist/index.js')){const network=original.apply(this,arguments);return {...network,retryNetwork:(work,label)=>network.retryNetwork(work,label,{sleep:async()=>{},log:()=>{}})};}
  if(name==='./cardArt'&&parent.filename.endsWith('/dist/index.js'))return {getCardArt:async()=>null};
  return original.apply(this,arguments);
@@ -92,10 +93,18 @@ test('quick action buttons execute through the real listener and reject repeat c
 });
 test('NPC slash command and owner-bound buttons start real challenges, preserve inventory and block double starts',async()=>{
  assert.ok(registered.some(c=>c.name==='npc'));const deck=require('../dist/decks'),store=require('../dist/duelStore');db.createPlayer('109','Lendário');db.chooseStarterDeck('109','warrior');deck.openDeck('109');deck.activateDeck('109',1);const inventory=db.getCollection('109');const user={id:'109',username:'Lendário',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};
- const lobby=interaction('command','npc',{user,options:{getSubcommand:()=> 'ver'}});await dispatch(lobby.i);assert.equal(lobby.calls[0][1].flags,64);const button=lobby.calls[1][1].components[0].toJSON().components[0].custom_id;
+ const lobby=interaction('command','npc',{user,options:{getSubcommand:()=> 'ver'}});await dispatch(lobby.i);assert.equal(lobby.calls[0][1].flags,64);const button=lobby.calls[1][1].components[0].toJSON().components[1].custom_id;
  const stranger=interaction('button',undefined,{customId:button});await dispatch(stranger.i);assert.match(stranger.calls.at(-1)[1].content,/próprios/);
  const start=interaction('button',undefined,{user,customId:button});await dispatch(start.i);assert.equal(start.calls[0][0],'defer');let r=store.currentDuel('109');assert.equal(r.state.encounter.npcId,'joey');assert.deepEqual(db.getCollection('109'),inventory);
  const duplicate=interaction('button',undefined,{user,customId:button});await dispatch(duplicate.i);assert.equal(duplicate.calls.at(-1)[0],'reply');assert.match(duplicate.calls.at(-1)[1].content,/já tem/);store.performDuelAction(r.id,'109','g',r.revision,{kind:'concede'});
  const daily=interaction('command','npc',{user,options:{getSubcommand:()=> 'diario'}});await dispatch(daily.i);r=store.currentDuel('109');assert.ok(r.state.encounter.eventDay);store.performDuelAction(r.id,'109','g',r.revision,{kind:'concede'});
+});
+test('NPC gallery buttons and card selection use the real handler, acknowledge first, and preserve the current duel',async()=>{
+ const user={id:'109',username:'Lendário',displayAvatarURL:()=> 'https://cdn.discordapp.com/embed/avatars/0.png'};
+ const next=interaction('button',undefined,{user,customId:'npc:gallery:109:yugi:hero:0'});await dispatch(next.i);assert.deepEqual(next.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(next.calls[1][1].embeds[0].toJSON().title,/Yugi/);
+ const deck=interaction('button',undefined,{user,customId:'npc:gallery:109:joey:deck:2'});await dispatch(deck.i);const menu=deck.calls[1][1].components[1].toJSON().components[0];assert.equal(menu.options[2].value,'22');
+ const select=interaction('select',undefined,{user,customId:menu.custom_id,isStringSelectMenu:()=>true,values:['22']});await dispatch(select.i);assert.deepEqual(select.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(select.calls[1][1].embeds[0].toJSON().fields[0].name,/23\/50/);
+ const stranger=interaction('button',undefined,{customId:'npc:gallery:109:kaiba:hero:0'});await dispatch(stranger.i);assert.equal(stranger.calls[0][0],'reply');assert.match(stranger.calls[0][1].content,/próprios/);
+ const invalid=interaction('button',undefined,{user,customId:'npc:gallery:109:yugi:card:50'});await dispatch(invalid.i);assert.equal(invalid.calls[0][0],'deferUpdate');assert.equal(invalid.calls.at(-1)[0],'followUp');assert.match(invalid.calls.at(-1)[1].content,/inexistente/);
 });
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});

@@ -13,7 +13,8 @@ import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChalle
 import {visualDuelPublic,visualDuelPrivate,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
 
 import {retryNetwork} from './networkRetry';
-import {npcLobby} from './npcUI';
+import {visualNPCLobby} from './npcUI';
+import type {GalleryView} from './npcRenderer';
 import {npcs} from './npcContent';
 
 const token = process.env.DISCORD_TOKEN;
@@ -98,17 +99,24 @@ async function handleInteraction(i:Interaction) {
   const id = i.user.id;
   const avatar = i.user.displayAvatarURL({ size: 256 });
   try {
-    if(i.isButton()&&i.customId.startsWith('npc:')){
+    if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('npc:')){
       if(!i.guildId||!i.channelId)throw new Error('Abra os desafios dentro de um servidor.');
-      const [,action,owner,npcId]=i.customId.split(':');if(owner!==id)throw new Error('Abra seus próprios desafios com /npc ver.');
-      if(action==='lobby'){await i.deferUpdate();await i.editReply(npcLobby(id));return;}
+      const [,action,owner,npcId,view,page]=i.customId.split(':');if(owner!==id)throw new Error('Abra seus próprios desafios com /npc ver.');
+      if(action==='lobby'||action==='gallery'||action==='inspect'){
+        await i.deferUpdate();
+        const target=action==='lobby'?'joey':npcId;
+        const panel=action==='inspect'?(view==='deck'?'card':view==='loadout'?'playcard':'invalid'):action==='lobby'?'hero':view;
+        const selected=action==='inspect'&&i.isStringSelectMenu()?i.values[0]:action==='lobby'?'0':page;
+        if(!/^\d+$/.test(selected??''))throw new Error('Página inválida. Abra /npc ver.');
+        await i.editReply(await visualNPCLobby(id,Date.now(),target,panel as GalleryView,Number(selected)));return;
+      }
       if(action!=='challenge'&&action!=='daily')throw new Error('Desafio inválido. Use /npc ver.');
       const r=createNPCDuel(id,i.guildId,i.channelId,npcId,action==='daily');await i.deferReply();const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
     }
     if(i.isChatInputCommand()&&i.commandName==='npc'){
       if(!i.guildId||!i.channelId)throw new Error('Abra os desafios dentro de um servidor.');const action=i.options.getSubcommand();
       await i.deferReply(action==='ver'?{flags:MessageFlags.Ephemeral}:{});
-      if(action==='ver'){await i.editReply(npcLobby(id));return;}
+      if(action==='ver'){await i.editReply(await visualNPCLobby(id));return;}
       if(action!=='desafiar'&&action!=='diario')throw new Error('Desafio inválido. Use /npc ver.');
       const r=createNPCDuel(id,i.guildId,i.channelId,action==='diario'?'':i.options.getString('duelista',true),action==='diario');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
     }
@@ -305,6 +313,7 @@ async function main() {
   console.log(`Fase 2: ${inventoryAudit.total} cartas persistidas nas coleções.`);
   await renderWelcome();
   console.log('Fase 5: NPCs clássicos, evento diário e recompensas transacionais carregados.');
+  console.log('Galeria 0.7.2: retratos, navegação por duelista e 150 cartas clássicas para inspeção.');
   console.log('Rede: recuperação automática de DNS/conexão ativada (5–30 segundos entre tentativas).');
   console.log('Renderer verificado: letras incorporadas, sem fontes do sistema.');
   await retryNetwork(async attempt=>{
