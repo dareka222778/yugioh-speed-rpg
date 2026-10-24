@@ -69,3 +69,11 @@ Os textos acima resumem o comportamento em português. Nenhum código de outra e
 - `/duelo treino_fusao` é um tutorial separado: fornece uma composição virtual com Campo, Polimerização, os materiais e uma Fusão, com mão inicial conhecida para praticar. Não entrega essas cartas à coleção, não exige um deck ativo e não gera recompensas. Exige apenas personagem criado. Os duelos normais continuam usando somente as cartas possuídas.
 
 Referências adicionais: Sogen https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4339&ope=2&request_locale=en ; Polimerização https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4837&ope=2&request_locale=en ; Espadachim das Chamas https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4021&ope=2&request_locale=en .
+
+## NPCs e evento diário (Fase 5)
+
+Use `/npc ver`, `/npc desafiar` e `/npc diario`. Prêmios são apenas de primeira vitória contra cada NPC e da primeira vitória diária no modo evento. Recompensas são automáticas e aparecem no resultado, sem botão de resgate. Repetir cliques, atualizar mensagens ou reiniciar o processo não cria outro prêmio. Desistência, derrota, W.O., PvP e os dois modos de treino não pagam. Vitória de NPC elegível é por pontos de vida ou falha de compra obrigatória.
+
+O evento usa a data de America/Sao_Paulo e exige conclusão antes da meia-noite da mesma data. Se virar o dia durante o duelo, o bônus daquele evento expira; primeira vitória do NPC ainda é válida. Bônus e primeiras vitórias são globais por conta, não por servidor.
+
+Joey tem uma receita de Fusão implementada; Yugi e Kaiba usam monstros normais e dois tributos para seus monstros principais. Os decks são adaptações temáticas de 20 cartas. O saldo inicial, as cartas antigas e os decks salvos são preservados; nada é distribuído só por atualizar o bot.
