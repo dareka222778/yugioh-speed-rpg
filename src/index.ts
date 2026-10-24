@@ -50,7 +50,8 @@ const commands = [
     .addSubcommand(c=>c.setName('diario').setDescription('Dispute o evento diário e ganhe o bônus uma vez por dia.'))
   ,new SlashCommandBuilder().setName('duelo').setDescription('Duelo básico 1v1 com campo e mão privada.').setDMPermission(false)
     .addSubcommand(c=>c.setName('treino').setDescription('Jogue contra o bot usando seu deck ativo.'))
-    .addSubcommand(c=>c.setName('treino_fusao').setDescription('Treino guiado de Campo e Fusão, sem alterar sua coleção.'))
+    .addSubcommand(c=>c.setName('treino_fusao').setDescription('Treino de Campo e Fusão, com efeitos clássicos, sem alterar a coleção.'))
+    .addSubcommand(c=>c.setName('laboratorio').setDescription('Teste 6 monstros de efeito clássicos, Campo e Fusão sem gastar cartas.'))
     .addSubcommand(c=>c.setName('desafiar').setDescription('Convide outro jogador para um duelo.').addUserOption(o=>o.setName('oponente').setDescription('Jogador que receberá o convite.').setRequired(true)))
     .addSubcommand(c=>c.setName('ver').setDescription('Abra seu duelo atual e sua mão privada.'))
     .addSubcommand(c=>c.setName('sair').setDescription('Cancele seu convite ou confirme a desistência do duelo.'))
@@ -148,9 +149,9 @@ async function handleInteraction(i:Interaction) {
     if(i.isChatInputCommand()&&i.commandName==='duelo'){
       if(!i.guildId||!i.channelId)throw new Error('Use os duelos dentro de um servidor.');const action=i.options.getSubcommand();
       await i.deferReply(action==='ver'||action==='sair'?{flags:MessageFlags.Ephemeral}:{});
-      if(action==='treino'||action==='treino_fusao'||action==='desafiar'){
+      if(action==='treino'||action==='treino_fusao'||action==='laboratorio'||action==='desafiar'){
         let r:DuelRecord;
-        if(action==='treino'||action==='treino_fusao')r=createTraining(id,i.guildId,i.channelId,action==='treino_fusao');
+        if(action==='treino'||action==='treino_fusao'||action==='laboratorio')r=createTraining(id,i.guildId,i.channelId,action!=='treino');
         else{const other=i.options.getUser('oponente',true);if(other.bot)throw new Error('Para enfrentar o bot, use /duelo treino.');r=challenge(id,other.id,i.guildId,i.channelId);}
         const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
       }
