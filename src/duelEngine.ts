@@ -142,7 +142,7 @@ function resolve(s:DuelState){
    p.hand.push(...p.deck.splice(0,e.operation.count));
   }
   note(s,'Efeito de monstro resolvido.');
-  if(s.phase!=='finished'&&s.afterMonsterEffect){const followup=s.afterMonsterEffect;s.afterMonsterEffect=undefined;response(s,followup,'battle',1-followup.actor);}
+  if(s.afterMonsterEffect){const followup=s.afterMonsterEffect;s.afterMonsterEffect=undefined;if(followup.kind==='attack')response(s,followup,'battle',1-followup.actor);}
   return;
  }
  if(pending.kind==='flip'||pending.kind==='summon'){
