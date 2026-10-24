@@ -2,7 +2,7 @@
  * Each registered effect must have a matching card in effectRegistry.ts.
  * Effects with targets choose them on activation, before the response window.
  */
-export type MonsterTrigger='ignition'|'flip'|'onSummon'|'onDestroy'|'onSentToGrave'|'continuous';
+export type MonsterTrigger='ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onSentToGrave'|'continuous';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard'|'tribute';count:number};
 export type MonsterOperation=
  |{kind:'heal'|'burn';amount:number}
@@ -40,7 +40,8 @@ const monsterEffects:Readonly<Record<string,MonsterEffect>>=Object.freeze({
  '11384280':{trigger:'ignition',cost:{kind:'tribute',count:1},operation:{kind:'burn',amount:500}}, // Cannon Soldier
  '26202165':{trigger:'onSentToGrave',oncePerTurn:true,operation:{kind:'search',stat:'atk',maximum:1500}}, // Sangan
  '78010363':{trigger:'onSentToGrave',oncePerTurn:true,operation:{kind:'search',stat:'defense',maximum:1500}}, // Witch of the Black Forest
- '77585513':{trigger:'continuous',operation:{kind:'negateTraps'}} // Jinzo
+ '77585513':{trigger:'continuous',operation:{kind:'negateTraps'}}, // Jinzo
+ '54098121':{trigger:'onOtherSummon',operation:{kind:'heal',amount:500}} // Mysterious Puppeteer
 });
 export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return monsterEffects[cardId];}
 
