@@ -11,14 +11,17 @@ test('progress report is internally consistent and anchored to the actual suppor
   assert.equal(phase.complete+phase.remaining,100);
   assert.ok(phase.milestones.every(x=>x.done>=0&&x.done<=x.weight));
  }
- const {classicCoverage,enabledCardIds}=require('../dist/effectRegistry');
+ const {enabledCardIds,engineCard,getEffect}=require('../dist/effectRegistry');
+ const {npcs}=require('../dist/npcContent');
  const {getMonsterEffect}=require('../dist/monsterEffects');
- const cards=classicCoverage();
- assert.equal(report.classicArchive.total,cards.length);
- assert.equal(report.classicArchive.enabled,cards.filter(c=>c.enabled).length);
- assert.equal(report.classicArchive.pending,cards.filter(c=>c.status==='pending').length);
- assert.equal(report.classicArchive.incompatible,cards.filter(c=>c.status==='format-incompatible').length);
- assert.equal(report.classicArchive.total,report.classicArchive.enabled+report.classicArchive.pending+report.classicArchive.incompatible);
+ assert.equal(report.playableNPCDecks.length,npcs.length);
+ for(const n of report.playableNPCDecks){
+  const original=npcs.find(p=>p.id===n.id);
+  assert.ok(original);assert.equal(n.main,original.cards.length);assert.equal(n.extra,original.extra.length);
+  assert.equal(n.valid,original.cards.length>=20&&original.cards.length<=30&&original.extra.length<=6&&
+   [...original.cards,...original.extra].every(id=>!!engineCard(id)&&!!getEffect(id)));
+ }
+ assert.equal('classicArchive' in report,false);
  assert.equal(report.enabledEngineCards,enabledCardIds.length);
  assert.equal(report.playableEffectMonsters,enabledCardIds.filter(id=>!!getMonsterEffect(id)).length);
 });
