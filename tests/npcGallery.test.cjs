@@ -50,7 +50,7 @@ test('every card in every NPC duel loadout has a unique reachable index and retu
     const position=Number(option.value),card=getCard(all[position]),detail=ui.npcLobby('501',Date.now(),npc.id,'card',position);
     assert.ok(card);
     assert.match(detail.embeds[0].toJSON().fields[0].name,new RegExp(`^${position+1}/${all.length} ·`));
-    assert.equal(detail.embeds[0].toJSON().fields[1].value,card.summary);
+    assert.equal(detail.embeds[0].toJSON().fields[1].value,require('../dist/cardText').cardRulesPT(card.id));
     assert.equal(detail.components[0].toJSON().components[1].custom_id,`npc:gallery:501:${npc.id}:deck:${page}`);
     assert.ok(!detail.components.some(r=>r.toJSON().components.some(c=>c.url)));
    }

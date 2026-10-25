@@ -1,3 +1,5 @@
+> **Atualização 0.8.0:** regras novas `speed-rpg-v2`, mão de sete com compra interrompível, eventos administrativos, decks revisados e textos operacionais em português. Leia [RELEASE_0_8_0.md](RELEASE_0_8_0.md) para testes, compatibilidade e homologação pendente. Os percentuais antigos de marcos não medem prontidão de lançamento.
+
 # Yu-Gi-Oh! Speed RPG
 
 Bot de Discord para um RPG de cartas inspirado em Speed Duel.

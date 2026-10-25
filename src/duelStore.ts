@@ -1,3 +1,4 @@
+import {tacticalSummon,tacticalPosition,tacticalAttack,handCardValue} from './npcStrategy';
 import {randomBytes,randomInt} from 'node:crypto';
 import {applyDuelAction,transitionEvents,type DuelTransitionEvent} from './duelTransitions';
 import {assertDuelState} from './duelIntegrity';
@@ -104,7 +105,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
    });
   return quick[0]??actions.find(a=>a.kind==='pass');
  }
- if(s.phase==='discard')return [...actions].sort((a,b)=>{const score=(x:Action)=>x.kind==='discard'?(getCard(p.hand.find(c=>c.uid===x.card)!.id)!.atk??0):0;return score(a)-score(b);})[0];
+ if(s.phase==='discard')return [...actions].sort((a,b)=>{const score=(x:Action)=>x.kind==='discard'?handCardValue(p.hand.find(c=>c.uid===x.card)!.id):0;return score(a)-score(b);})[0];
  if(s.phase==='choice'){
   if(s.choice?.source==='attackReplay'&&s.pending.kind==='attack'){
    const attackingUid=s.pending.card,attacking=p.monsters.find(m=>m.uid===attackingUid);
@@ -138,7 +139,8 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
   }
   return actions[0];
  }
- const advanced=actions.find(a=>a.kind==='field')??actions.find(a=>a.kind==='fusion'&&a.position==='atk');if(advanced)return advanced;
+ const threat=Math.max(0,...op.monsters.filter(m=>m.faceUp&&m.position==='atk').map(m=>atk(m,s)));
+ const advanced=actions.find(a=>a.kind==='field')??actions.find(a=>a.kind==='fusion'&&a.position===((getCard(p.extra?.find(c=>c.uid===a.extra)?.id??'')?.atk??0)<threat?'def':'atk'));if(advanced)return advanced;
  const spells=actions.filter((a):a is Extract<Action,{kind:'spell'}>=>a.kind==='spell').filter(a=>{
   const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
   if(effect.kind==='sequence'){
@@ -167,12 +169,10 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
    return rating(a)-rating(b);
   });
  if(finishBurn.length)return finishBurn[0];
- const summon=actions.filter((a):a is Extract<Action,{kind:'summon'}>=>a.kind==='summon'&&a.position==='atk').sort((a,b)=>getCard(p.hand.find(c=>c.uid===b.card)!.id)!.atk!-getCard(p.hand.find(c=>c.uid===a.card)!.id)!.atk!);
- const flipSet=actions.find(a=>a.kind==='summon'&&a.position==='set'&&getMonsterEffect(p.hand.find(c=>c.uid===a.card)!.id)?.trigger==='flip');
- if(flipSet&&(!summon.length||getCard(p.hand.find(c=>c.uid===summon[0].card)!.id)!.atk!<1800))return flipSet;
- if(summon.length)return summon[0];const set=actions.find(a=>a.kind==='set');if(set)return set;
- const position=actions.find(a=>a.kind==='position'&&a.mode!=='def');if(position)return position;
- const attacks=actions.filter((a):a is Extract<Action,{kind:'attack'}>=>a.kind==='attack').filter(a=>{if(!a.target)return true;const m=p.monsters.find(m=>m.uid===a.card)!;const target=op.monsters.find(m=>m.uid===a.target)!;return !target.faceUp||atk(m,s)>=(target.position==='atk'?atk(target,s):def(target,s));});if(attacks.length)return attacks[0];
+ const summon=tacticalSummon(s,id,actions);if(summon)return summon;
+ const set=actions.find(a=>a.kind==='set');if(set)return set;
+ const position=tacticalPosition(s,id,actions);if(position)return position;
+ const attack=tacticalAttack(s,id,actions);if(attack)return attack;
  return actions.find(a=>a.kind==='battle')??actions.find(a=>a.kind==='end');
 }
 function driveNPC(s:DuelState){let steps=0;while(s.phase!=='finished'){const npc=s.players.find(p=>p.id.startsWith('npc-'));if(!npc)return s;const a=chooseNPC(s,npc.id);if(!a)return s;if(++steps>100)throw new Error('Limite de ações do treino excedido.');s=step(s,npc.id,a);}return s;}

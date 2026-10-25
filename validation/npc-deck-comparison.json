@@ -1,0 +1,26 @@
+{
+  "games": 360,
+  "newPolicyWins": 274,
+  "oldPolicyWins": 86,
+  "draws": 0,
+  "moves": 20596,
+  "byNPC": {
+    "joey": {
+      "wins": 74,
+      "losses": 46,
+      "draws": 0
+    },
+    "yugi": {
+      "wins": 102,
+      "losses": 18,
+      "draws": 0
+    },
+    "kaiba": {
+      "wins": 98,
+      "losses": 22,
+      "draws": 0
+    }
+  },
+  "comparison": "new decks vs v0.7.3 decks, both current policy",
+  "protocol": "360 games; 30 seeds per character; paired seats and first player; current v2 core and current hand decisions for both"
+}

@@ -1,3 +1,4 @@
+import {cardRulesPT,racePT,attributePT} from './cardText';
 import {ActionRowBuilder,AttachmentBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder} from 'discord.js';
 import {getPlayer} from './database';
 import {getCard,kindLabel} from './collection';
@@ -48,8 +49,8 @@ export function npcLobby(owner:string,now=Date.now(),npcId='joey',view:GalleryVi
   if(single){const c=m.cards[page];
    embed.addFields(
     {name:`${page+1}/${m.cards.length} · ${c.name}`,value:`${c.slot} • ${c.category}`},
-    {name:'Efeito e informações',value:(c.summary||'Sem efeito.').slice(0,1024)});
-   if(c.kind==='monster')embed.addFields({name:'Estatísticas',value:`Nível ${c.level} • ${c.attribute??'—'} • ${c.race??'—'}\nATK ${c.atk} / DEF ${c.defense}`});
+    {name:'Efeito e informações',value:cardRulesPT(c.id)});
+   if(c.kind==='monster')embed.addFields({name:'Estatísticas',value:`Nível ${c.level} • ${attributePT[c.attribute??'']??'—'} • ${racePT[c.race??'']??'—'}\nATK ${c.atk} / DEF ${c.defense}`});
   }
   rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(
    btn('◀ Anterior',nav(npcId,view,(page+total-1)%total)),

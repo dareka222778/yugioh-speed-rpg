@@ -45,14 +45,14 @@ function calculate(items){
 const playableNPCDecks=npcs.map(n=>({id:n.id,name:n.name,main:n.cards.length,extra:n.extra.length,
  valid:n.cards.length>=20&&n.cards.length<=30&&n.extra.length<=6&&
   [...n.cards,...n.extra].every(id=>!!getPlayableCard(id)&&!!getEffect(id))}));
-const report={scope:'Playability of this RPG only; not every TCG/anime card',
+const report={readiness:{release:'0.8.0',historicalMilestoneScores:true,productionAcceptance:'pending Discord validation of v2 hand rules, events and UI',scope:'130 enabled cards; not all classic anime cards'},scope:'Playability of this RPG only; not every TCG/anime card',
  engine:calculate(engine),layout:calculate(layout),playableNPCDecks,
  enabledEngineCards:enabledCardIds.length,playableEffectMonsters:enabledCardIds.filter(id=>!!getMonsterEffect(id)).length};
 if(process.argv.includes('--json'))console.log(JSON.stringify(report,null,2));
 else{
- console.log(`ENGINE ${report.engine.complete}% complete / ${report.engine.remaining}% remaining`);
+ console.log(`HISTORICAL ENGINE MILESTONES ${report.engine.complete}/100 (not release readiness)`);
  console.log(`COMMAND VISUAL STANDARD ${report.layout.complete}% complete / ${report.layout.remaining}% remaining (original duel field preserved)`);
  console.log(`NPC DECKS ${playableNPCDecks.filter(n=>n.valid).length}/${playableNPCDecks.length} playable in this RPG, ${playableNPCDecks.map(n=>n.main).join('/')} cards in main decks`);
  console.log(`ENGINE CARDS ${report.enabledEngineCards} enabled / ${report.playableEffectMonsters} with monster effect definitions`);
- console.log('Milestone scores are reviewed manually; NPC deck readiness uses the executable card registry.');
+ console.log('Release 0.8.0 still requires real Discord acceptance. Scores above are historical manual assessments, not completion percentages.');
 }

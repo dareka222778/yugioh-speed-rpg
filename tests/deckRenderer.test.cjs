@@ -36,4 +36,11 @@ test('custom owned-card detail is a readable 1200x720 blue PNG with real art or 
  assert.equal(message.embeds[0].toJSON().image.url,'attachment://minha-carta.png');
  for(const row of message.components)row.toJSON();
 });
+test('owned-card navigation never duplicates IDs for collections with one or two cards',()=>{
+ const {deckCardMessage}=require('../dist/deckUI');
+ for(let n=1;n<=2;n++){
+  const id='small-'+n;db.createPlayer(id,'Small');openDeck(id);for(let i=0;i<n;i++)db.db.prepare('INSERT INTO player_cards(discord_id,card_key,quantity) VALUES(?,?,?)').run(id,['91152256','86318356'][i],1);
+  for(let index=0;index<n;index++){const p=deckCardMessage(id,1,index);const ids=p.components.flatMap(row=>row.toJSON().components.map(c=>c.custom_id));assert.equal(new Set(ids).size,ids.length);assert.equal(ids.length,n);}
+ }
+});
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});

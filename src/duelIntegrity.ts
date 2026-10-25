@@ -1,3 +1,4 @@
+import {economicOperationIssues} from './economicOperations';
 /** Runtime contracts for the serialized three-zone game. No UI or database writes.
  * The current catalog has no token-generation or card-transformation effect, so
  * each transition must conserve every physical UID and its card identity.
@@ -17,8 +18,14 @@ export function duelCards(s:DuelState):CardRef[]{return s.players.flatMap(p=>[..
 export function assertDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');
  const s=value as any;
- if(s.rulesVersion!==undefined&&s.rulesVersion!==RULES_VERSION||s.cardDefinitionsVersion!==undefined&&s.cardDefinitionsVersion!==CARD_DEFINITIONS_VERSION)fail('versão de regras ou definições incompatível');
+ if(s.rulesVersion!==undefined&&s.rulesVersion!==RULES_VERSION&&s.rulesVersion!=='speed-rpg-v1'||s.cardDefinitionsVersion!==undefined&&s.cardDefinitionsVersion!==CARD_DEFINITIONS_VERSION)fail('versão de regras ou definições incompatível');
  if(s.random!==undefined)assertDuelRandom(s.random);
+ if(s.rulesVersion===RULES_VERSION&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
+ if(s.handFlow!==undefined){
+  const f=s.handFlow;
+  if(!object(f)||s.rulesVersion!==RULES_VERSION||s.phase!=='discard'||!actor(f.actor)||!integer(f.remaining)||f.remaining>30||!['draw','overflow'].includes(f.mode)||!['main','battle','response'].includes(f.returnPhase)||!Array.isArray(f.after)||f.after.length>0&&economicOperationIssues(f.after).length>0||f.resumeChainRoot!==undefined&&typeof f.resumeChainRoot!=='boolean'||f.mode==='draw'&&f.remaining<1||f.mode==='overflow'&&f.remaining!==0||f.resumeChainRoot&&!s.chainRoot)fail('continuação de compra/descarte');
+ }
+
  if(!Array.isArray(s.players)||s.players.length!==2||!actor(s.current)||!actor(s.priority))fail('participantes ou prioridade');
  if(!integer(s.turn,1)||!phases.has(s.phase)||!['main','battle'].includes(s.resume)||!integer(s.passes)||s.passes>2)fail('turno ou fase');
  if(!object(s.pending)||!pendingKinds.has(s.pending.kind)||!Array.isArray(s.chain)||!Array.isArray(s.log)||s.log.some((x:unknown)=>typeof x!=='string'))fail('resolução pendente');
@@ -36,7 +43,7 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
  if(s.pending.kind==='attack'&&s.pending.defenders!==undefined&&(!Array.isArray(s.pending.defenders)||s.pending.defenders.some((uid:unknown)=>typeof uid!=='string')||new Set(s.pending.defenders).size!==s.pending.defenders.length))fail('campo de declaração do ataque');
  if(s.chainRoot!==undefined){
   const root=s.chainRoot;
-  if(!object(root)||!pendingKinds.has(root.kind)||s.phase!=='choice'||!['monsterSearch','monsterRecruit'].includes(s.choice?.source))fail('continuação da corrente');
+  if(!object(root)||!pendingKinds.has(root.kind)||!(s.phase==='choice'&&['monsterSearch','monsterRecruit'].includes(s.choice?.source)||s.phase==='discard'&&s.handFlow?.resumeChainRoot))fail('continuação da corrente');
   if(!['none','end','battle'].includes(root.kind)&&(!actor(root.actor)||typeof root.card!=='string'))fail('origem da continuação');
  }
  if(s.phase==='choice'&&['triggerOrder','triggerTarget','triggerOptional'].includes(s.choice?.source)){

@@ -1,5 +1,7 @@
 import 'dotenv/config';
-import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GatewayIntentBits, MessageFlags, ModalBuilder, REST, Routes, SlashCommandBuilder, TextInputBuilder, TextInputStyle, type Interaction } from 'discord.js';
+import {createCardEvent,activateCardEvent,grantEventCards,closeCardEvent,listCardEvents} from './cardEvents';
+import {randomUUID} from 'node:crypto';
+import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GatewayIntentBits, MessageFlags, ModalBuilder, PermissionFlagsBits, REST, Routes, SlashCommandBuilder, TextInputBuilder, TextInputStyle, type Interaction } from 'discord.js';
 import { chooseStarterDeck, createPlayer, getPlayer, updateProfile, getCollection, grantLegacyStarters, grantStarterCards, backupPendingStarterGrants, db } from './database';
 import { isStarterDeck, starterDecks } from './starterDecks';
 import { profileMessage, themes, validateProfile } from './profile';
@@ -23,6 +25,18 @@ const guildId = process.env.DISCORD_GUILD_ID;
 if (!token || !clientId) throw new Error('Preencha DISCORD_TOKEN e DISCORD_CLIENT_ID no ambiente da hospedagem.');
 
 const commands = [
+  new SlashCommandBuilder().setName('evento').setDescription('Distribuição de cartas autorizada pela administração.').setDefaultMemberPermissions(PermissionFlagsBits.Administrator).setDMPermission(false)
+    .addSubcommand(c=>c.setName('listar').setDescription('Lista os oito eventos mais recentes deste servidor.'))
+    .addSubcommand(c=>c.setName('criar').setDescription('Prepara um pacote; só ativa após confirmação explícita.')
+      .addStringOption(o=>o.setName('nome').setDescription('Nome do evento.').setRequired(true).setMaxLength(80))
+      .addStringOption(o=>o.setName('cartas').setDescription('IDs e quantidades: 89631139:1,86318356:1').setRequired(true).setMaxLength(400))
+      .addIntegerOption(o=>o.setName('participantes').setDescription('Máximo de destinatários diferentes.').setRequired(true).setMinValue(1).setMaxValue(1000))
+      .addIntegerOption(o=>o.setName('horas').setDescription('Validade, contada a partir da criação.').setRequired(true).setMinValue(1).setMaxValue(720)))
+    .addSubcommand(c=>c.setName('entregar').setDescription('Entrega o pacote ativo uma única vez ao jogador.')
+      .addStringOption(o=>o.setName('evento').setDescription('ID do evento confirmado.').setRequired(true))
+      .addUserOption(o=>o.setName('jogador').setDescription('Destinatário com perfil criado.').setRequired(true)))
+    .addSubcommand(c=>c.setName('encerrar').setDescription('Bloqueia novas entregas deste evento.')
+      .addStringOption(o=>o.setName('evento').setDescription('ID do evento.').setRequired(true))),
   new SlashCommandBuilder().setName('ping').setDescription('Testa se o bot está online.'),
   new SlashCommandBuilder().setName('start').setDescription('Cria seu duelista e escolhe um estilo inicial.'),
   new SlashCommandBuilder().setName('perfil').setDescription('Abre sua ficha de personagem.')
@@ -91,6 +105,7 @@ async function refreshArena(record:DuelRecord){
  });arenaUpdates.set(record.id,work);try{await work;}finally{if(arenaUpdates.get(record.id)===work)arenaUpdates.delete(record.id);}
 }
 async function handleInteraction(i:Interaction) {
+ const correlation=randomUUID().slice(0,8),started=Date.now();
   console.log(`Interação recebida: ${i.type} / ${'commandName' in i ? i.commandName : 'componente'}`);
   if(i.isAutocomplete()) {
     try {const matches=searchCards(String(i.options.getFocused()));const owned=i.commandName==='deck'?new Set(getCollection(i.user.id).map(c=>c.card_key)):null;await i.respond(matches.filter(c=>!owned||owned.has(c.id)).slice(0,25).map(c=>({name:`${c.name} • ${c.id}`.slice(0,100),value:c.id})));} catch(error){console.error('Falha no autocomplete:',errorSummary(error));}
@@ -100,6 +115,26 @@ async function handleInteraction(i:Interaction) {
   const id = i.user.id;
   const avatar = i.user.displayAvatarURL({ size: 256 });
   try {
+    if(i.isChatInputCommand()&&i.commandName==='evento'||i.isButton()&&i.customId.startsWith('cardevent:')){
+      if(!i.inGuild())throw new Error('Eventos só podem ser administrados em um servidor.');
+      const operator={guild:i.guildId!,actor:id,admin:!!i.memberPermissions?.has(PermissionFlagsBits.Administrator)};
+      if(!operator.admin)throw new Error('Somente administradores podem configurar ou entregar cartas de evento.');
+      if(i.isButton()){
+        const event=activateCardEvent(operator,i.customId.slice('cardevent:'.length));await i.update({content:`Evento ativo: ${event.name}\nID: ${event.id}\nUse /evento entregar. Limite: ${event.quota} participantes. Expira <t:${Math.floor(event.expires/1000)}:R>.`,components:[],allowedMentions:{parse:[]}});return;
+      }
+      if(!i.isChatInputCommand())return;
+      await i.deferReply({flags:MessageFlags.Ephemeral});const action=i.options.getSubcommand();
+      if(action==='listar'){const events=listCardEvents(operator);await i.editReply({content:events.map(e=>`${e.name} • ${e.status} • ${e.delivered}/${e.quota} entregas\nID: ${e.id} • prazo <t:${Math.floor(e.expires/1000)}:R>`).join('\n\n')||'Nenhum evento criado neste servidor.',allowedMentions:{parse:[]}});return;}
+      if(action==='criar'){
+        const event=createCardEvent(operator,i.options.getString('nome',true),i.options.getString('cartas',true),i.options.getInteger('participantes',true),i.options.getInteger('horas',true));
+        const cards=event.cards.map(c=>`${c.quantity}× ${getCard(c.id)!.name} (${c.id})`).join('\n');
+        await i.editReply({content:`Revise antes de ativar **${event.name}**:\n${cards}\nMáximo: ${event.quota} destinatários, uma entrega por pessoa.\nExpira <t:${Math.floor(event.expires/1000)}:R>.\nID: ${event.id}\nNenhuma carta foi entregue.`,components:[new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`cardevent:${event.id}`).setLabel('Confirmar e ativar este pacote').setStyle(ButtonStyle.Danger))],allowedMentions:{parse:[]}});return;
+      }
+      const eventId=i.options.getString('evento',true);
+      if(action==='encerrar'){closeCardEvent(operator,eventId);await i.editReply({content:'Evento encerrado. Entregas anteriores foram preservadas.'});return;}
+      const user=i.options.getUser('jogador',true);if(user.bot)throw new Error('Escolha um jogador humano.');const result=grantEventCards(operator,eventId,user.id);
+      await i.editReply({content:result.duplicate?'Esse jogador já recebeu este pacote. Nenhuma carta foi duplicada.':`Pacote entregue. Recibo: ${eventId} / ${user.id}.`,allowedMentions:{parse:[]}});return;
+    }
     if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('npc:')){
       if(!i.guildId||!i.channelId)throw new Error('Abra os desafios dentro de um servidor.');
       const [,action,owner,npcId,view,page]=i.customId.split(':');if(owner!==id)throw new Error('Abra seus próprios desafios com /npc ver.');
@@ -220,7 +255,7 @@ async function handleInteraction(i:Interaction) {
         else if(action==='inicial')fillInitialDeck(id,slot);
         await i.editReply(await visualDeckMessage(id,slot,1,selected));return;
       }
-      if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! O RPG está online.', flags: MessageFlags.Ephemeral }); return; }
+      if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! Versão 0.8.0 • 130 cartas habilitadas • novos duelos: mão de sete.', flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'start') {
         const player = createPlayer(id, i.user.username);
         if (player.starter_deck) { grantStarterCards(id); await i.deferReply({ flags: MessageFlags.Ephemeral }); await i.editReply(await profileMessage(player, avatar)); return; }
@@ -320,8 +355,8 @@ async function handleInteraction(i:Interaction) {
       await i.editReply({ content: '✦ Personagem atualizado.', ...await profileMessage(getPlayer(id)!, avatar) });
     }
   } catch (error) {
-    console.error('Falha na interação:', errorSummary(error));
-    const content = error instanceof Error && !('code' in error) ? error.message : 'Não foi possível concluir. Tente novamente.';
+    console.error('Falha na interação:', {correlation,release:'0.8.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
+    const content = error instanceof Error && !('code' in error) ? error.message : `Não foi possível concluir esta ação. Reabra o painel com /duelo ver ou /npc ver. Código de atendimento: ${correlation}.`;
     try {
       if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:'))&&i.deferred) await i.followUp({content,flags:MessageFlags.Ephemeral});
       else if (i.deferred) await i.editReply({ content, embeds: [], components: [], attachments: [] });
@@ -331,7 +366,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
- console.log('Release 0.7.3 | E0: cartas automáticas bloqueadas; visualizador corrigido');
+ console.log('Release 0.8.0 | regras speed-rpg-v2 | mão 7 | NPCs revisados | 130 cartas em português');
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};

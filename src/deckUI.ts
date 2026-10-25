@@ -1,3 +1,4 @@
+import {cardRulesPT,racePT,attributePT} from './cardText';
 import {AttachmentBuilder,ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
 import {getCollection} from './database';
 import {openDeck} from './decks';
@@ -70,13 +71,12 @@ export function deckCardMessage(owner:string,slot=1,requestedIndex=0){
  const key=(action:string,index:number,selected=id)=>`deck:${action}:${owner}:${slot}:${deck.revision}:${index}:${selected}`;
  const embed=new EmbedBuilder().setColor(embedColors.deck)
   .setTitle(`${requestedIndex+1}/${ids.length} • ${escapeMarkdown(card.name)}`)
-  .setDescription(`**${kindLabel(card)}**${card.kind==='monster'?` • ${card.attribute??'—'} • ${card.race??'—'}\n**NÍVEL ${card.level}  /  ATK ${card.atk}  /  DEF ${card.defense}**`:''}\n\n${card.summary}\n\n**No seu deck:** ${quantity} ×  •  **Na coleção:** ${owned} ×`)
+  .setDescription(`**${kindLabel(card)}**${card.kind==='monster'?` • ${attributePT[card.attribute??'']??'—'} • ${racePT[card.race??'']??'—'}\n**NÍVEL ${card.level}  /  ATK ${card.atk}  /  DEF ${card.defense}**`:''}\n\n${cardRulesPT(card.id)}\n\n**No seu deck:** ${quantity} ×  •  **Na coleção:** ${owned} ×`)
   .setFooter({text:`Seu deck ${slot}/3 • Carta ${requestedIndex+1}/${ids.length} • Somente você pode editar`});
- const rows=[new ActionRowBuilder<ButtonBuilder>().addComponents(
-   new ButtonBuilder().setCustomId(key('card',(requestedIndex-1+ids.length)%ids.length)).setLabel('◀ Carta anterior').setStyle(ButtonStyle.Secondary),
-   new ButtonBuilder().setCustomId(key('view',Math.floor(requestedIndex/6)+1)).setLabel('Voltar ao deck').setStyle(ButtonStyle.Primary),
-   new ButtonBuilder().setCustomId(key('card',(requestedIndex+1)%ids.length)).setLabel('Próxima carta ▶').setStyle(ButtonStyle.Secondary)
- )];
+ const nav=[new ButtonBuilder().setCustomId(key('view',Math.floor(requestedIndex/6)+1)).setLabel('Voltar ao deck').setStyle(ButtonStyle.Primary)];
+ if(ids.length>2)nav.unshift(new ButtonBuilder().setCustomId(key('card',(requestedIndex-1+ids.length)%ids.length)).setLabel('◀ Carta anterior').setStyle(ButtonStyle.Secondary));
+ if(ids.length>1)nav.push(new ButtonBuilder().setCustomId(key('card',(requestedIndex+1)%ids.length)).setLabel('Próxima carta ▶').setStyle(ButtonStyle.Secondary));
+ const rows=[new ActionRowBuilder<ButtonBuilder>().addComponents(nav)];
  return {cardId:id,embeds:[embed],components:rows,attachments:[],allowedMentions:{parse:[] as never[]}};
 }
 export async function visualDeckCard(owner:string,slot=1,index=0){

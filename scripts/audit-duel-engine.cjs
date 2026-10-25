@@ -31,5 +31,5 @@ try{
   reasons[s.reason]=(reasons[s.reason]||0)+1;
  }
  durations.sort((a,b)=>a-b);const q=p=>Number(durations[Math.min(durations.length-1,Math.floor(durations.length*p))].toFixed(3));
- console.log(JSON.stringify({scope:'Local isolated engine; not Botkeep or Discord latency',deterministicReplay:true,replayDigest:replayHash.digest('hex'),games,moves,serializedRestores:reloads,completed:games,cardIntegrity:'all physical identities preserved',elapsedMs:Number((performance.now()-started).toFixed(1)),decisionMs:{median:q(.5),p95:q(.95),max:q(1)},reasons},null,2));
+ console.log(JSON.stringify({scope:'Local isolated engine; not hosting or Discord latency',deterministicReplay:true,replayDigest:replayHash.digest('hex'),games,moves,serializedRestores:reloads,completed:games,cardIntegrity:'all physical identities preserved',elapsedMs:Number((performance.now()-started).toFixed(1)),decisionMs:{median:q(.5),p95:q(.95),max:q(1)},reasons},null,2));
 }finally{require('../dist/database').db.close();fs.rmSync(temp,{recursive:true,force:true});}

@@ -1,6 +1,7 @@
+import {cardRulesPT,racePT,attributePT} from './cardText';
 import sharp from 'sharp';
 import {ActionRowBuilder,AttachmentBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
-import {legalActions,actionLabel,type DuelState} from './duelEngine';
+import {decisionPlayer,legalActions,actionLabel,type DuelState} from './duelEngine';
 import {DECISION_TIMEOUT_MS,type DuelRecord} from './duelStore';
 import {renderDuel,phaseNames} from './duelRenderer';
 import {getCard} from './collection';
@@ -19,7 +20,7 @@ export function invitationMessage(r:DuelRecord){const embed=new EmbedBuilder().s
 export function duelPublicMessage(r:DuelRecord){
  if(r.status==='pending')return invitationMessage(r);
  if(!r.state)return {embeds:[new EmbedBuilder().setTitle('Convite encerrado').setDescription(r.status==='expired'?'O convite expirou.':'Convite cancelado.')],components:[],attachments:[],allowedMentions:{parse:[] as never[]}};
- const view=publicDuelData(r.state);const acting=r.state.phase==='response'?r.state.priority:r.state.phase==='choice'?r.state.choice!.actor:r.state.current;
+ const view=publicDuelData(r.state);const acting=decisionPlayer(r.state);
  const embed=new EmbedBuilder().setColor(embedColors.public).setTitle(r.state.phase==='finished'?'DUEL ARENA • Resultado':'DUEL ARENA • Speed RPG')
  .setDescription(`${view.players.map(p=>`**${escapeMarkdown(p.name)}** — ${p.lp} PV | Mão ${p.handCount} | Deck ${p.deckCount}`).join('\n')}\n\nTurno ${view.turn} • ${phaseNames[view.phase]}${view.phase==='finished'?`\n${view.winner?escapeMarkdown(view.players.find(p=>p.id===view.winner)!.name)+' venceu':'Sem vencedor'}: ${view.reason}`:`\nAguardando **${escapeMarkdown(view.players[acting].name)}**.`}`)
  .addFields({name:'Últimas jogadas',value:view.log.slice(-4).map(line=>escapeMarkdown(line)).join('\n').slice(-1000)||'O duelo começou.'}).setFooter({text:'Arena clássica • Mãos privadas • Sem recompensas'});
@@ -35,6 +36,7 @@ export function duelPrivateMessage(r:DuelRecord,owner:string,requestedPage=1){
  const s=r.state;const p=s.players.find(p=>p.id===owner)!;const actions=legalActions(s,owner);const pages=Math.max(1,Math.ceil(actions.length/20));const page=Math.min(pages,Math.max(1,Number.isInteger(requestedPage)?requestedPage:1));
  const embed=new EmbedBuilder().setColor(embedColors.public).setTitle(`DUEL PANEL • ${escapeMarkdown(p.name)}`).setDescription(`**${p.lp} PV** • **${p.deck.length} cartas para comprar** • Turno ${s.turn} • ${phaseNames[s.phase]}\n${s.phase==='finished'?s.reason:actions.length?'**Sua vez de decidir.**':'Aguardando o outro jogador.'}`).addFields({name:'Sua mão',value:p.hand.map((c,n)=>`${n+1}. ${getCard(c.id)!.name}`).join('\n')||'Sem cartas.'});
  if(s.phase!=='finished')embed.addFields({name:'Próximo passo',value:actions.length?'Escolha uma jogada no menu. Ela será executada imediatamente.':'Aguarde o outro jogador. Use Atualizar para acompanhar.'});
+ if(s.phase==='discard'&&s.handFlow)embed.addFields({name:'Limite de sete cartas',value:s.handFlow.actor===s.players.indexOf(p)?s.handFlow.mode==='draw'?'Escolha uma carta para descartar antes da próxima compra. A compra continuará automaticamente.':'O efeito terminou. Descarte o excedente até ficar com sete cartas.':'Aguardando o descarte do outro duelista.'});
  encounterFields(embed,s);
  embed.setFooter({text:`Ações ${page}/${pages} • ${s.fixedOpening?'Laboratório de efeitos':'Baralho embaralhado • Compra do topo'} • Mão privada`});
  if(s.phase==='finished')return {embeds:[embed],components:[],attachments:[],allowedMentions:{parse:[] as never[]}};
@@ -73,11 +75,11 @@ export function duelCardMessage(r:DuelRecord,owner:string,requestedIndex:number)
   .filter(({a})=>'card' in a&&a.card===selected.uid)
   .slice(0,25);
  const stats=info.kind==='monster'
-  ?`**NÍVEL ${info.level}** • ${info.attribute??'—'} • ${info.race??'—'}\n**ATK ${info.atk}  /  DEF ${info.defense}**`
+  ?`**NÍVEL ${info.level}** • ${attributePT[info.attribute??'']??'—'} • ${racePT[info.race??'']??'—'}\n**ATK ${info.atk}  /  DEF ${info.defense}**`
   :info.kind==='trap'?'**ARMADILHA**':info.field?'**MAGIA DE CAMPO**':'**MAGIA**';
  const embed=new EmbedBuilder().setColor(embedColors.private)
   .setTitle(`${requestedIndex+1}/${p.hand.length}  •  ${escapeMarkdown(info.name)}`)
-  .setDescription(`${stats}\n\n${info.summary??'Confira o texto oficial para regras completas.'}\n\n${actions.length?`${actions.length} jogadas disponíveis com esta carta.`:'Nenhuma jogada disponível com esta carta neste momento.'}`)
+  .setDescription(`${stats}\n\n${cardRulesPT(info.id)}\n\n${actions.length?`${actions.length} jogadas disponíveis com esta carta.`:'Nenhuma jogada disponível com esta carta neste momento.'}`)
   .setFooter({text:`Carta da sua mão • Privado • ${s.turn}º turno`});
  const rows:(ActionRowBuilder<ButtonBuilder>|ActionRowBuilder<StringSelectMenuBuilder>)[]=[];
  const navigation=[new ButtonBuilder().setCustomId(`duel:view:${r.id}:${r.revision}:1`).setLabel('Voltar ao painel').setStyle(ButtonStyle.Primary)];
@@ -134,7 +136,7 @@ export function duelZoneCardMessage(r:DuelRecord,viewer:string,index:number){
  const selected=cards[index],info=getCard(selected.card.id);
  if(!info)throw new Error('Carta indisponível no catálogo.');
  const embed=new EmbedBuilder().setColor(embedColors.private).setTitle(info.name)
-  .setDescription(`${info.kind==='monster'?`ATK ${info.atk} / DEF ${info.defense} • Nível ${info.level}\n\n`:''}${info.summary??'Sem descrição disponível.'}`)
+  .setDescription(`${info.kind==='monster'?`ATK ${info.atk} / DEF ${info.defense} • Nível ${info.level}\n\n`:''}${cardRulesPT(info.id)}`)
   .setFooter({text:`${selected.player} • ${selected.zone} • Somente consulta`});
  return {embeds:[embed],components:[new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:zoneback:${r.id}:${r.revision}:0`).setLabel('Voltar às zonas').setStyle(ButtonStyle.Secondary))],attachments:[],allowedMentions:{parse:[] as never[]},cardId:selected.card.id};
 }

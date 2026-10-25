@@ -1,3 +1,4 @@
+import {cardRulesPT,racePT,attributePT} from './cardText';
 import {ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
 import {type Card} from './cardCatalog';
 import {engineCatalog,enabledCardIds} from './effectRegistry';
@@ -18,8 +19,8 @@ export function searchCards(query:string): Card[] {
 export function exactCard(query:string): Card|undefined {
   return cards.find(c=>c.id===query.trim()||normalize(c.name)===normalize(query)||normalize(c.englishName)===normalize(query));
 }
-const attributes:Record<string,string>={EARTH:'TERRA',WIND:'VENTO',DARK:'TREVAS',LIGHT:'LUZ',FIRE:'FOGO',WATER:'ÁGUA'};
-const races:Record<string,string>={Warrior:'Guerreiro','Beast-Warrior':'Besta-Guerreira',Spellcaster:'Mago',Dragon:'Dragão'};
+const attributes=attributePT;
+const races=racePT;
 export function kindLabel(c:Card) {return c.fusion?'Monstro de Fusão':c.field?'Magia de Campo':c.kind==='monster'?(getMonsterEffect(c.id)?'Monstro de Efeito':'Monstro Normal'):c.kind==='spell'?'Magia':'Armadilha';}
 export function collectionMessage(owner:string, inventory:{card_key:string;quantity:number}[], requestedPage=1) {
   const owned=inventory.map(row=>({card:getCard(row.card_key),...row}));
@@ -47,7 +48,7 @@ export function cardMessage(card:Card, quantity=0) {
     .setTitle(card.name).setURL(card.source).setDescription(`${escapeMarkdown(card.englishName)}\n\`ID ${card.id}\``)
     .addFields({name:'Categoria',value:kindLabel(card),inline:true},{name:'Na sua coleção',value:`${quantity} cópia(s)`,inline:true});
   if(card.kind==='monster')embed.addFields({name:'Tipo / Atributo',value:`${races[card.race!]??card.race} / ${attributes[card.attribute!]??card.attribute}`},{name:'Nível',value:String(card.level),inline:true},{name:'ATK',value:String(card.atk),inline:true},{name:'DEF',value:String(card.defense),inline:true});
-  embed.addFields({name:'Resumo',value:card.summary},{name:'Disponibilidade',value:'Disponível no motor básico 1v1. Monstros normais, efeitos iniciais, Sogen e Fusão do Espadachim das Chamas implementados.'});
+  embed.addFields({name:'Regras em português • adaptação do RPG',value:cardRulesPT(card.id)},{name:'Disponibilidade',value:'Carta habilitada no motor. O texto explica o comportamento implementado nesta adaptação.'});
   embed.setFooter({text:'Catálogo inicial • Dados YAML Yugi / referência Konami • Projeto não oficial'});
   return {embeds:[embed],allowedMentions:{parse:[] as never[]}};
 }

@@ -1,3 +1,4 @@
+import {drawCards} from './handFlow';
 /** Reusable, bounded LP/draw operations. Damage recipients in one group are
  * applied together before checking victory; sequences stop when a duel ends. */
 import type {DuelState} from './duelEngine';
@@ -24,12 +25,10 @@ export function canStartEconomicOperations(s:DuelState,actor:number,ops:readonly
  const needed=ops.reduce((n,op)=>n+(op.kind==='draw'?op.count:0),0);return s.players[actor].deck.length>=needed;
 }
 export function executeEconomicOperations(s:DuelState,actor:number,ops:readonly EconomicOperation[],service:EconomicServices):boolean{
- for(const op of ops){
+ for(const [index,op] of ops.entries()){
   if(s.phase==='finished')return false;
   if(op.kind==='draw'){
-   const p=s.players[actor];
-   if(p.deck.length<op.count){service.finish(s,1-actor,op.count===1?'não conseguiu comprar uma carta':`não conseguiu comprar ${op.count} cartas`);return false;}
-   p.hand.push(...p.deck.splice(0,op.count));
+   if(!drawCards(s,actor,op.count,service)){if(s.handFlow)s.handFlow.after=ops.slice(index+1);return false;}
   }else if(op.kind==='gainLP')s.players[op.player==='self'?actor:1-actor].lp+=op.amount;
   else {
    for(const recipient of op.recipients){const p=s.players[recipient.player==='self'?actor:1-actor];p.lp=Math.max(0,p.lp-recipient.amount);}

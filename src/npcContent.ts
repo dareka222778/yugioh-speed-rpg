@@ -1,14 +1,11 @@
-import {starterContents} from './cardCatalog';
 export type NPC={id:string;name:string;style:string;description:string;cards:string[];extra:string[];reward:{dp:number;xp:number;cards:string[]}};
-const initial=(style:string)=>starterContents[style].flatMap(c=>Array(c.quantity).fill(c.id)) as string[];
-// These are themed, playable adaptations, not replicas of official character decks.
-const yugi=initial('spellcaster');yugi[0]='46986414';yugi[3]='14087893';yugi[4]='29401950';
-const kaiba=initial('dragon');kaiba[0]='89631139';kaiba[1]='48305365';kaiba[3]='53582587';kaiba[4]='56120475';
-const joey=initial('warrior');joey[0]='74677422';joey[2]='24094653';joey[4]='34460851';
-/** Our custom 30-card duelist builds. Every included effect is executable by the engine. */
-joey.push('54652250','07089711','26202165','83011277','03819470','05318639','12580477','55144522','44095762','83764718');
-yugi.push('31560081','28933734','26202165','78010363','55144522','12580477','77414722','05318639','83011277','54098121');
-kaiba.push('77585513','11384280','83011277','26202165','78010363','12580477','05318639','03819470','77414722','55144522');
+// Explicit 30-card adaptations. Repetitions express the real playable counts.
+const joey=['74677422','44287299','44287299','34460851','34460851','05053103','05053103','48305365','48305365','91152256','26202165','83011277','54652250','07089711',
+ '24094653','24094653','12580477','55144522','83764718','05318639','05318639','66788016','14087893','86318356','44095762','17814387','17814387','56120475','03819470','14315573'];
+const yugi=['46986414','50930991','50930991','50930991','93221206','93221206','15025844','15025844','31560081','31560081','28933734','26202165','78010363','83011277','83011277','40640057',
+ '55144522','12580477','83764718','14087893','14087893','05318639','66788016','53129443','70368879','44095762','77414722','14315573','62279055','29401950'];
+const kaiba=['89631139','89631139','77585513','28279543','97590747','97590747','97590747','48305365','48305365','67724379','67724379','26202165','78010363','83011277','83011277','11384280',
+ '55144522','12580477','83764718','05318639','05318639','14087893','66788016','70368879','52097679','56120475','56120475','44095762','77414722','14315573'];
 export const npcs:readonly NPC[]=[
  {id:'joey',name:'Joey Wheeler',style:'Guerreiros, Fusão e Truques',description:'Ataques, viradas, correntes rápidas e Espadachim das Chamas.',cards:joey,extra:['45231177'],reward:{dp:150,xp:100,cards:[]}},
  {id:'yugi',name:'Yami Yugi',style:'Magos, Busca e Estratégia',description:'Mago Negro, recuperação de Magias, Sangan e controle do duelo.',cards:yugi,extra:[],reward:{dp:150,xp:100,cards:[]}},
