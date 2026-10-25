@@ -92,9 +92,11 @@ async function showCard(id:string, userId:string) {
   const card=getCard(id);if(!card)throw new Error('Essa carta não faz parte do catálogo inicial.');
   const quantity=getCollection(userId).find(row=>row.card_key===id)?.quantity??0;
   const message=cardMessage(card,quantity);
-  const art=await getCardArt(id);
-  if(art){const bytes=await renderOwnedCard({id,deckName:'Sua coleção',inDeck:0,owned:quantity,index:0,total:1,heading:'CATÁLOGO     /     CARTA',detail:`VOCÊ POSSUI ${quantity} CÓPIA(S)`},async()=>art);message.embeds[0].setImage('attachment://carta-ampliada.png');return {...message,files:[new AttachmentBuilder(bytes,{name:'carta-ampliada.png',description:card.name})]};}
-  return message;
+  try{
+   const art=await getCardArt(id);
+   if(art){const bytes=await renderOwnedCard({id,deckName:'Sua coleção',inDeck:0,owned:quantity,index:0,total:1,heading:'CATÁLOGO     /     CARTA',detail:`VOCÊ POSSUI ${quantity} CÓPIA(S)`},async()=>art);message.embeds[0].setImage('attachment://carta-ampliada.png');return {...message,attachments:[],files:[new AttachmentBuilder(bytes,{name:'carta-ampliada.png',description:card.name})]};}
+  }catch{/* Full accessible rules remain available when the image queue or artwork fails. */}
+  return {...message,attachments:[],files:[]};
 }
 function errorSummary(error:unknown){return error instanceof Error?{name:error.name,message:error.message,code:'code' in error?error.code:undefined}:'Falha desconhecida';}
 const busy = new Set<string>();

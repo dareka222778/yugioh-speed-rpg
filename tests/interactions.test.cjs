@@ -43,7 +43,7 @@ test('autocomplete and card command run through the actual event listener',async
  const a=interaction('autocomplete','carta');await dispatch(a.i);
  assert.equal(a.calls[0][0],'suggestions');assert.ok(a.calls[0][1].some(c=>c.value==='91152256'));
  const c=interaction('command','carta');await dispatch(c.i);
- assert.deepEqual(c.calls.map(x=>x[0]),['defer','edit']);assert.equal(c.calls[1][1].embeds[0].toJSON().title,'Guardião Celta');
+ assert.deepEqual(c.calls.map(x=>x[0]),['defer','edit']);assert.equal(c.calls[1][1].embeds[0].toJSON().title,'Guardião Celta');assert.deepEqual(c.calls[1][1].attachments,[]);assert.deepEqual(c.calls[1][1].files,[]);
 });
 test('profile collection button opens the collection through the actual event listener',async()=>{
  const b=interaction('button',undefined,{customId:'collection:page:101:1'});await dispatch(b.i);
