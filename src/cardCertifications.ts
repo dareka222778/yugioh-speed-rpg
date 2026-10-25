@@ -238,7 +238,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "37120512": {
     "fingerprint": "9f5204457437819afa1ad27f361859b7c9e28fe059ae2eb9ad33a916e7a3f496",
     "suites": [
-      "tests/classicEngine.test.cjs"
+      "tests/classicEngine.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "38199696": {
@@ -377,7 +378,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "50913601": {
     "fingerprint": "5a3ee510125d4edb290ff6354591d1c47f7be74a7ab269e4a1ddf110501e8ebe",
     "suites": [
-      "tests/classicEngine.test.cjs"
+      "tests/classicEngine.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "50930991": {
@@ -395,7 +397,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "52097679": {
     "fingerprint": "e9362b2005ba552ae33eb593b29ce847026824c0285b7af958fc741f2ddb522e",
     "suites": [
-      "tests/classicEngine.test.cjs"
+      "tests/classicEngine.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "53129443": {
@@ -452,7 +455,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "59197169": {
     "fingerprint": "56b985586b91ee677008660672887404d42a7595292d6644678bf0e8196d7885",
     "suites": [
-      "tests/classicEngine.test.cjs"
+      "tests/classicEngine.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "60694662": {
@@ -520,7 +524,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "72892473": {
     "fingerprint": "34cffc49c6367b1000b809826852cf54d20de10bbbcde1268c6088149c0cd896",
     "suites": [
-      "tests/classicEngine.test.cjs"
+      "tests/classicEngine.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "73481154": {
@@ -626,7 +631,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "d8bc328ac0c0b62a69b62cefa16067df5a20d17a8f7ee5f8919dc92567937c39",
     "suites": [
       "tests/classicEngine.test.cjs",
-      "tests/classicCardReview.test.cjs"
+      "tests/classicCardReview.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "86325596": {
@@ -674,7 +680,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "91595718": {
     "fingerprint": "b601e84d2f22953d16573b1d3c7cec64d49accb295b6adfa6aefbfe38800bebb",
     "suites": [
-      "tests/classicEngine.test.cjs"
+      "tests/classicEngine.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "91939608": {
@@ -704,7 +711,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "98374133": {
     "fingerprint": "3d5a00d47c53c42380a7541649c12daaf65975b189ea76b282ed4152defca251",
     "suites": [
-      "tests/classicEngine.test.cjs"
+      "tests/classicEngine.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "07089711": {
@@ -742,13 +750,15 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "04614116": {
     "fingerprint": "0a5b822e1461ff59445c6b8a62c8dcb86e288ac9df3a2ce5f0c0665009096753",
     "suites": [
-      "tests/classicEngine.test.cjs"
+      "tests/classicEngine.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "01435851": {
     "fingerprint": "2a37131e50b1ba4af8510b3ed231553f36d94d0a46f05fd5ec8ff77357c0693d",
     "suites": [
-      "tests/classicEngine.test.cjs"
+      "tests/classicEngine.test.cjs",
+      "tests/classicPersistentReview.test.cjs"
     ]
   },
   "00756652": {

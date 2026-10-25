@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "release": "0.16.2",
+  "release": "0.16.3",
   "rulesVersion": "speed-rpg-classic-v1",
   "scope": "registered-and-certified-only",
   "warning": "Suite references and literal ID mentions do not prove full effect/timing/combination coverage. Historical availability, official Portuguese wording and Discord behavior require separate reviews.",
@@ -552,6 +552,10 @@
         {
           "file": "tests/classicEngine.test.cjs",
           "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Ambos os jogadores descartam toda a mão e compram o mesmo número de cartas que cada um descartou. A Magia ativada já saiu da mão e não entra nessa contagem. Se faltar compra obrigatória, esse jogador perde; se faltar para ambos, há empate. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
@@ -904,6 +908,10 @@
         {
           "file": "tests/classicEngine.test.cjs",
           "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima do tipo Demônio. Enquanto estiver equipado e elegível, aplique +300 ATK e +300 DEF. Ocupa uma zona de Magia/Armadilha. Se o monstro sair, ficar com a face para baixo ou perder a elegibilidade, o equipamento vai ao Cemitério. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
@@ -926,6 +934,10 @@
         {
           "file": "tests/classicEngine.test.cjs",
           "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Troque o ATK e a DEF originais de todos os monstros com a face para cima até o fim do turno. Bônus de campo, equipamento e outros modificadores continuam aplicados separadamente. Outra resolução no mesmo turno desfaz a troca dos monstros afetados. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
@@ -947,6 +959,10 @@
       "suites": [
         {
           "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
           "mentionsCardId": true
         }
       ],
@@ -1237,6 +1253,10 @@
       "suites": [
         {
           "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
           "mentionsCardId": true
         }
       ],
@@ -1782,6 +1802,10 @@
         {
           "file": "tests/classicEngine.test.cjs",
           "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima do tipo Mago. Enquanto estiver equipado e elegível, aplique +300 ATK e +300 DEF. Ocupa uma zona de Magia/Armadilha. Se o monstro sair, ficar com a face para baixo ou perder a elegibilidade, o equipamento vai ao Cemitério. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
@@ -1987,6 +2011,10 @@
       "suites": [
         {
           "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
           "mentionsCardId": true
         }
       ],
@@ -2598,6 +2626,10 @@
         {
           "file": "tests/classicCardReview.test.cjs",
           "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Magia de Campo: ative na sua Fase Principal. Sem custo adicional de ativação. Enquanto estiver com a face para cima e resolvida, todos os monstros Guerreiro ou Besta-Guerreira dos dois jogadores recebem 200 ATK e 200 DEF. Ocupa sua Zona de Campo; substituí-la envia a anterior ao Cemitério. Os efeitos dos dois campos podem acumular nesta adaptação. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
@@ -2733,6 +2765,10 @@
       "suites": [
         {
           "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
           "mentionsCardId": true
         }
       ],
@@ -2965,6 +3001,10 @@
       "suites": [
         {
           "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicPersistentReview.test.cjs",
           "mentionsCardId": true
         }
       ],

@@ -1,9 +1,9 @@
 {
   "scope": "solo 2v2 training, one simulated human plus three NPCs; exact saved component adapter",
   "completeGames": 100,
-  "humanDecisions": 2077,
-  "npcDecisions": 6292,
-  "totalDecisions": 8369,
+  "humanDecisions": 2193,
+  "npcDecisions": 5970,
+  "totalDecisions": 8163,
   "cardConservation": true,
   "economyUnchanged": true,
   "releasedHumanSeats": 100,

@@ -59,3 +59,9 @@ Fase 2: construir matriz de requisitos/efeitos/testes das 130 cartas, priorizar 
 O último código do outro chat era e6216ca (0.16.1), com cautela contra cartas ocultas, matriz de 130 cartas e teste de retomada de treino corrigido. O host real Bot-Hosting.net estava em 0.16.0, online, com dados preservados; o problema do Botkeep não bloqueia esta instância.
 
 A próxima entrega reutiliza esse código e corrige a repetição de ataque da IA e a descrição do timing FLIP. Cinco cenários dedicados passam a constar dos certificados de Fissura, Polimerização, Pote da Ganância, Sogen e Tufão Espacial Místico; a matriz passa a identificar a versão e não possui referências indiretas de efeitos. Isso não encerra a revisão das 58 cartas com efeito: uma menção literal ou um cenário aprovado não prova todos os timings e combinações. Próximo lote: equipamentos/campos e revisão das exceções, mantendo o catálogo em 130 até concluir os gates do núcleo.
+
+## Continuidade 0.16.3 — equipamentos, campos e exceções
+
+A fase 2 acrescenta cenários por carta para os cinco equipamentos, três campos e as exceções Destruição de Cards e Escudo e Espada. Corrige a mensagem de Campo que saiu antes da resolução e valida os tipos dos indicadores de resolução e alvo de equipamento nos estados persistidos. Campos legados sem indicador explícito continuam aceitos. Não muda o efeito de troca repetida de Escudo e Espada, que permanece a adaptação já documentada, nem acrescenta novas cartas.
+
+As referências da certificação e a matriz incorporam a suíte classicPersistentReview. Essa evidência delimita cenários, não encerra a revisão completa das 58 cartas com efeito ou a homologação humana. Próximo lote: custos/alvos e perda de alvo entre elos para as demais famílias; revisar o que já tem evidência antes de criar testes repetidos. O catálogo histórico segue separado e não está liberado.

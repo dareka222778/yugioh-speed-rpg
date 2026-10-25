@@ -69,10 +69,11 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
      if(c.owner!==undefined&&!actor(c.owner)||c.returnTo!==undefined&&!actor(c.returnTo))fail('proprietário do monstro');
     }
     if(zone==='backrow'&&(info.kind==='monster'||!integer(c.setTurn)||typeof c.faceUp!=='boolean'))fail('Magia/Armadilha inválida');
+    if(zone==='backrow'&&(c.resolved!==undefined&&typeof c.resolved!=='boolean'||c.equippedTo!==undefined&&(typeof c.equippedTo!=='string'||!c.equippedTo)))fail('metadados de Magia/Armadilha inválidos');
     if(zone==='extra'&&!info.fusion||['deck','hand'].includes(zone)&&info.fusion)fail('Fusão em zona incorreta');
    }
   }
-  if(p.field){checkRef(p.field);if(!getCard(p.field.id)?.field||typeof p.field.faceUp!=='boolean'||!integer(p.field.setTurn))fail('Magia de Campo');}
+  if(p.field){checkRef(p.field);if(!getCard(p.field.id)?.field||typeof p.field.faceUp!=='boolean'||!integer(p.field.setTurn)||p.field.resolved!==undefined&&typeof p.field.resolved!=='boolean')fail('Magia de Campo');}
  }
  if(s.teamRotation!==undefined){
   const r=s.teamRotation;

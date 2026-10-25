@@ -460,7 +460,7 @@ function resolve(s:DuelState){
  }
  if(pending.kind==='end'){endTurn(s);return;}
  if(pending.kind==='battle'){s.phase='battle';note(s,'Fase de Batalha.');return;}
- if(pending.kind==='field'){const f=s.players[pending.actor].field;if(f?.uid===pending.card)f.resolved=true;note(s,`${f?card(f.id).name:'Magia de Campo'} entrou em vigor.`);return;}
+ if(pending.kind==='field'){const f=s.players[pending.actor].field;if(f?.uid===pending.card&&f.faceUp){f.resolved=true;note(s,`${card(f.id).name} entrou em vigor.`);}else note(s,'A Magia de Campo ativada não permaneceu com a face para cima; nenhum efeito contínuo foi aplicado.');return;}
  if(pending.kind==='fusion'){
   const p=s.players[pending.actor],poly=p.backrow.find(c=>c.uid===pending.card),fusion=p.extra?.find(c=>c.uid===pending.extra);
   const materials=pending.materials.map(uid=>[...p.hand,...p.monsters].find(c=>c.uid===uid));
