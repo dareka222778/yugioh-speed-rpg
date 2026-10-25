@@ -16,3 +16,7 @@ Derivada da 0.16.0; regras de mão (6 na Fase Final), Deck Adicional (até 5), p
 ## Estado da implantação
 
 **Não implantada/validada no Botkeep em 25/10/2026.** O painel mostra o antigo servidor excluído e nenhum backup disponível para restauração na própria interface. Código pode ser publicado no GitHub sem afetar o progresso; criar instância nova exige verificar antes se há backup externo e restabelecer o token Discord por mecanismo seguro. Não tratar bot indisponível como se tivesse sido reiniciado com sucesso.
+
+## Continuidade verificada
+
+A indisponibilidade descrita acima refere-se ao Botkeep, não ao Bot-Hosting.net. Na retomada deste trabalho, a instância Bot-Hosting.net foi encontrada em execução com 0.16.0, dados íntegros e backup local verificado. A 0.16.2 incorpora as alterações desta candidata sem criar servidor novo nem trocar o banco. Veja RELEASE_0_16_2.md para o escopo da entrega seguinte.

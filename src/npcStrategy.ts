@@ -3,6 +3,14 @@
 import {atk,def,type DuelState,type Action,type Monster} from './duelEngine';
 import {getPlayableCard as getCard} from './effectRegistry';
 import {getMonsterEffect} from './monsterEffects';
+/** Same public-information estimate for attack declaration and replay. */
+export const UNKNOWN_DEFENSE_ESTIMATE=1600;
+export function publicBattleAssessment(s:DuelState,attacker:Monster,target?:Monster){
+ const power=atk(attacker,s);
+ const resistance=target?target.faceUp?(target.position==='atk'?atk(target,s):def(target,s)):UNKNOWN_DEFENSE_ESTIMATE:0;
+ const damage=!target||target.faceUp&&target.position==='atk'?Math.max(0,power-resistance):0;
+ return {resistance,damage,safe:!target||power>=resistance&&power>0};
+}
 export function handCardValue(id:string){
  const c=getCard(id)!;
  if(c.kind!=='monster')return 25;
@@ -30,7 +38,7 @@ export function tacticalSummon(s:DuelState,id:string,actions:Action[]):Action|un
   const danger=attack<threat;
   // Face-down opponents are not free direct attacks. Evaluate an unknown wall
   // without reading its identity, otherwise low-ATK summons are exposed needlessly.
-  const hiddenRisk=unknownDefenders&&attack<1600?18+(1600-attack)/100:0;
+  const hiddenRisk=unknownDefenders&&attack<UNKNOWN_DEFENSE_ESTIMATE?18+(UNKNOWN_DEFENSE_ESTIMATE-attack)/100:0;
   let score=action.position==='atk'?attack/100+12-(danger?55+(threat-attack)/100:0)-hiddenRisk:defense/100+3+flip+(danger||hiddenRisk?12:0);
   score-=sacrifice;
   // Breaking a public attack wall is worth spending Tributes; passive bodies are not.
@@ -57,12 +65,8 @@ export function tacticalAttack(s:DuelState,id:string,actions:Action[]):Action|un
  const p=s.players.find(p=>p.id===id)!,op=s.players.find(p=>p.id!==id)!;
  return actions.filter((a):a is Extract<Action,{kind:'attack'}>=>a.kind==='attack').map(action=>{
   const m=p.monsters.find(m=>m.uid===action.card)!,power=atk(m,s),target=op.monsters.find(m=>m.uid===action.target);
-  const resistance=target?target.faceUp?(target.position==='atk'?atk(target,s):def(target,s)):1200:0;
-  const damage=target&&target.position==='def'?0:Math.max(0,power-resistance);
-  // A legal equal-ATK trade can open a path for another attacker; zero-ATK does not destroy.
-  // A weak attacker should not charge into an unknown Defense Position wall;
-  // never inspect the hidden ID to decide whether the attack is safe.
-  const safe=!target||(target.faceUp?power>=resistance&&power>0:power>=1600);
+  const {resistance,damage,safe}=publicBattleAssessment(s,m,target);
+  // Includes legal equal-ATK trades; an unrevealed card never exposes its ID.
   const score=(!target||target.faceUp&&target.position==='atk')&&damage>=op.lp?10000:damage+(target?resistance/2:0);
   return {action,safe,score};
  }).filter(x=>x.safe).sort((a,b)=>b.score-a.score)[0]?.action;

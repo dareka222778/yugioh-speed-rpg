@@ -4,6 +4,8 @@ const {enabledCardIds}=require('../dist/effectRegistry');
 
 test('certified card matrix has one verifiable row per enabled card and separates evidence from coverage',()=>{
  const audit=buildCardMatrix();
+ assert.equal(audit.release,require('../package.json').version);
+ assert.equal(audit.rulesVersion,require('../dist/rulesProfile').RULES_VERSION);
  assert.equal(audit.totals.certified,enabledCardIds.length);
  assert.equal(new Set(audit.cards.map(c=>c.id)).size,audit.totals.certified);
  assert.equal(Object.values(audit.effectKinds).reduce((sum,n)=>sum+n,0),audit.totals.certified);

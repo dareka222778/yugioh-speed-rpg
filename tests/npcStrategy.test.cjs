@@ -34,4 +34,12 @@ test('changing hidden identities and rival deck order cannot change the chosen a
 test('all redesigned NPC decks have 30 cards, capped copies and a manageable tribute curve',()=>{
  for(const npc of npcs){e.validateDuelCards(npc.cards);assert.equal(npc.cards.length,30);assert.ok(npc.cards.filter(id=>get(id).kind==='monster').length>=14);assert.ok(npc.cards.filter(id=>(get(id).level??0)>=5).length<=4);assert.equal(npc.reward.cards.length,0);}
 });
+test('NPC replay uses the same hidden-defense caution as its first attack and never reads the hidden card',()=>{
+ for(const attackId of ['91152256','48305365']){
+  let s=game();s.phase='battle';s.players[0].monsters=[mon('attacker',attackId)];s.players[1].monsters=[mon('original','15025844')];s.players[1].backrow=[{uid:'hold',id:'17814387',setTurn:0,faceUp:false}];
+  s=e.step(s,'a',e.legalActions(s,'a').find(a=>a.kind==='attack'));const old=s.players[1].monsters.shift();s.players[1].grave.push({uid:old.uid,id:old.id});s.players[1].monsters.push(mon('new','89631139',{faceUp:false,position:'def'}));
+  for(let n=0;s.phase==='response';n++){assert.ok(n<20);const who=s.players[e.decisionPlayer(s)].id;s=e.step(s,who,e.legalActions(s,who).find(a=>a.kind==='pass'));}
+  assert.equal(s.choice.source,'attackReplay');const action=chooseNPC(s,'a');assert.equal(action.target,attackId==='91152256'?'__cancel__':'new');const other=structuredClone(s);other.players[1].monsters[0].id='34460851';other.players[1].deck.reverse();assert.deepEqual(chooseNPC(other,'a'),action);
+ }
+});
 after(()=>{require('../dist/database').db.close();fs.rmSync(tmp,{recursive:true,force:true});});

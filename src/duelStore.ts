@@ -1,4 +1,4 @@
-import {tacticalSummon,tacticalPosition,tacticalAttack,handCardValue} from './npcStrategy';
+import {tacticalSummon,tacticalPosition,tacticalAttack,handCardValue,publicBattleAssessment} from './npcStrategy';
 import {randomBytes,randomInt} from 'node:crypto';
 import {applyDuelAction,transitionEvents,type DuelTransitionEvent} from './duelTransitions';
 import {assertDuelState} from './duelIntegrity';
@@ -112,8 +112,8 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
    if(attacking){
     const options=actions.filter((a):a is Extract<Action,{kind:'choose'}>=>a.kind==='choose');
     const direct=options.find(a=>a.target==='__direct__');if(direct)return direct;
-    // Hidden defenders get a neutral estimate; never inspect their printed stats.
-    const safe=options.filter(a=>{const m=op.monsters.find(m=>m.uid===a.target);return m&&(m.faceUp?(m.position==='atk'?atk(m,s):def(m,s)):1000)<atk(attacking,s);});
+    // Use exactly the declaration policy, without reading hidden identities.
+    const safe=options.filter(a=>{const m=op.monsters.find(m=>m.uid===a.target);return !!m&&publicBattleAssessment(s,attacking,m).safe;});
     return safe[0]??options.find(a=>a.target==='__cancel__');
    }
   }

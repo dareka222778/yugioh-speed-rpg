@@ -17,6 +17,7 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run check:cards
+      - run: npm run audit:cards:matrix
       - run: npm run coverage:engine
       - run: npm run progress
       - run: npm run audit:engine

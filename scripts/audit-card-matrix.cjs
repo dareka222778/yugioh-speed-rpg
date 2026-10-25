@@ -7,6 +7,7 @@ const {enabledCardIds,getCardStatus,getEffect,getPlayableCard}=require('../dist/
 const {cardCertifications}=require('../dist/cardCertifications');
 const {getMonsterDefinition}=require('../dist/monsterEffects');
 const {cardRulesPT}=require('../dist/cardText');
+const {RULES_VERSION}=require('../dist/rulesProfile');
 
 function buildCardMatrix(){
  const rows=enabledCardIds.map(id=>{
@@ -35,7 +36,7 @@ function buildCardMatrix(){
  const effectRows=rows.filter(row=>row.manualEffectReview);
  const kinds=Object.fromEntries([...new Set(rows.map(row=>row.effectKind))].sort().map(kind=>[kind,rows.filter(row=>row.effectKind===kind).length]));
  return {
-  schema:1,scope:'registered-and-certified-only',
+  schema:1,release:require('../package.json').version,rulesVersion:RULES_VERSION,scope:'registered-and-certified-only',
   warning:'Suite references and literal ID mentions do not prove full effect/timing/combination coverage. Historical availability, official Portuguese wording and Discord behavior require separate reviews.',
   totals:{certified:rows.length,requiresEffectReview:effectRows.length,indirectTestReferences:effectRows.filter(row=>!row.directIdMention).length},
   effectKinds:kinds,cards:rows,

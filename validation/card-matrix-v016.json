@@ -1,11 +1,13 @@
 {
   "schema": 1,
+  "release": "0.16.2",
+  "rulesVersion": "speed-rpg-classic-v1",
   "scope": "registered-and-certified-only",
   "warning": "Suite references and literal ID mentions do not prove full effect/timing/combination coverage. Historical availability, official Portuguese wording and Discord behavior require separate reviews.",
   "totals": {
     "certified": 130,
     "requiresEffectReview": 58,
-    "indirectTestReferences": 5
+    "indirectTestReferences": 0
   },
   "effectKinds": {
     "attackResponse": 2,
@@ -86,8 +88,8 @@
           "mentionsCardId": false
         }
       ],
-      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Compre 1 carta(s). A compra resolve normalmente; o limite de seis cartas é verificado na Fase Final do próprio turno. Falta de carta obrigatória causa derrota. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
-      "descriptionCharacters": 341,
+      "descriptionPT": "Ao ser virado com a face para cima (em batalha, o efeito é ativado após o cálculo de dano). Sem custo de ativação. Compre 1 carta(s). A compra resolve normalmente; o limite de seis cartas é verificado na Fase Final do próprio turno. Falta de carta obrigatória causa derrota. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
+      "descriptionCharacters": 349,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4546&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
       "directIdMention": true,
@@ -1166,13 +1168,17 @@
         {
           "file": "tests/classicEngine.test.cjs",
           "mentionsCardId": false
+        },
+        {
+          "file": "tests/classicCardReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Destrua o monstro com a face para cima de menor ATK atual que o oponente controla. Não escolhe alvo na ativação; se houver empate, você escolhe na resolução. Ignora monstros com a face para baixo. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 344,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4835&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
-      "directIdMention": false,
+      "directIdMention": true,
       "manualEffectReview": true
     },
     {
@@ -1436,8 +1442,8 @@
           "mentionsCardId": false
         }
       ],
-      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Escolha 1 monstro em qualquer campo, inclusive com a face para baixo; devolva-o à mão do proprietário (Fusão volta ao Adicional). O alvo deve continuar no campo na resolução; não escolha outro se ele sair. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
-      "descriptionCharacters": 456,
+      "descriptionPT": "Ao ser virado com a face para cima (em batalha, o efeito é ativado após o cálculo de dano). Sem custo de ativação. Escolha 1 monstro em qualquer campo, inclusive com a face para baixo; devolva-o à mão do proprietário (Fusão volta ao Adicional). O alvo deve continuar no campo na resolução; não escolha outro se ele sair. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
+      "descriptionCharacters": 464,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4547&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
       "directIdMention": true,
@@ -1528,8 +1534,8 @@
           "mentionsCardId": false
         }
       ],
-      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Escolha 1 monstro em qualquer campo, inclusive com a face para baixo; destrua-o. O alvo deve continuar no campo na resolução; não escolha outro se ele sair. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
-      "descriptionCharacters": 338,
+      "descriptionPT": "Ao ser virado com a face para cima (em batalha, o efeito é ativado após o cálculo de dano). Sem custo de ativação. Escolha 1 monstro em qualquer campo, inclusive com a face para baixo; destrua-o. O alvo deve continuar no campo na resolução; não escolha outro se ele sair. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
+      "descriptionCharacters": 346,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4507&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
       "directIdMention": true,
@@ -1804,8 +1810,8 @@
           "mentionsCardId": false
         }
       ],
-      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Escolha 1 Magia no seu Cemitério; adicione-a à mão se ainda estiver lá na resolução. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
-      "descriptionCharacters": 335,
+      "descriptionPT": "Ao ser virado com a face para cima (em batalha, o efeito é ativado após o cálculo de dano). Sem custo de ativação. Escolha 1 Magia no seu Cemitério; adicione-a à mão se ainda estiver lá na resolução. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
+      "descriptionCharacters": 343,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4434&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
       "directIdMention": true,
@@ -1918,8 +1924,8 @@
           "mentionsCardId": false
         }
       ],
-      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Escolha 1 Armadilha no seu Cemitério; adicione-a à mão se ainda estiver lá na resolução. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
-      "descriptionCharacters": 339,
+      "descriptionPT": "Ao ser virado com a face para cima (em batalha, o efeito é ativado após o cálculo de dano). Sem custo de ativação. Escolha 1 Armadilha no seu Cemitério; adicione-a à mão se ainda estiver lá na resolução. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
+      "descriptionCharacters": 347,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4108&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
       "directIdMention": true,
@@ -2290,13 +2296,17 @@
         {
           "file": "tests/classicEngine.test.cjs",
           "mentionsCardId": false
+        },
+        {
+          "file": "tests/classicCardReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha o Espadachim das Chamas no seu Deck Adicional e seus materiais exatos (Masaki, o Espadachim Lendário e Manipulador de Chamas), na sua mão e/ou campo. Na resolução, envie os materiais ao Cemitério e faça a Invocação-Fusão em Ataque ou Defesa com a face para cima. Exige espaço no campo após usar os materiais. Materiais ausentes impedem a Fusão. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 500,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4837&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
-      "directIdMention": false,
+      "directIdMention": true,
       "manualEffectReview": true
     },
     {
@@ -2312,13 +2322,17 @@
         {
           "file": "tests/classicEngine.test.cjs",
           "mentionsCardId": false
+        },
+        {
+          "file": "tests/classicCardReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Compre 2 carta(s). A compra resolve normalmente; descarte o excedente de seis na Fase Final do próprio turno. Falta de compra obrigatória causa derrota. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 300,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4844&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
-      "directIdMention": false,
+      "directIdMention": true,
       "manualEffectReview": true
     },
     {
@@ -2580,13 +2594,17 @@
         {
           "file": "tests/classicEngine.test.cjs",
           "mentionsCardId": false
+        },
+        {
+          "file": "tests/classicCardReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Magia de Campo: ative na sua Fase Principal. Sem custo adicional de ativação. Enquanto estiver com a face para cima e resolvida, todos os monstros Guerreiro ou Besta-Guerreira dos dois jogadores recebem 200 ATK e 200 DEF. Ocupa sua Zona de Campo; substituí-la envia a anterior ao Cemitério. Os efeitos dos dois campos podem acumular nesta adaptação. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 435,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4339&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
-      "directIdMention": false,
+      "directIdMention": true,
       "manualEffectReview": true
     },
     {
@@ -2852,13 +2870,17 @@
         {
           "file": "tests/classicEngine.test.cjs",
           "mentionsCardId": false
+        },
+        {
+          "file": "tests/classicCardReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Ative numa janela de resposta permitida; velocidade 2. Sem custo adicional de ativação. Escolha 1 Magia/Armadilha no campo, incluindo a Zona de Campo e cartas baixadas; destrua-a se ainda estiver no campo. Destruir a carta não nega sua ativação. Pode ser ativada da mão no próprio turno; depois de baixada, somente em um turno posterior. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 423,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4909&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
-      "directIdMention": false,
+      "directIdMention": true,
       "manualEffectReview": true
     },
     {
