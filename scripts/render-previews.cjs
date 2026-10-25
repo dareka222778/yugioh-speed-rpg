@@ -52,7 +52,11 @@ async function run(){
    mainCount:gallery.cards.length,extraCount:gallery.extra.length};
  const cardModel={...heroModel,view:'card',page:0};
  const deck={name:'Deck Azul · Clássico',slot:1,active:false,errors:[],total:20,extraTotal:0,items:[],revision:1};
+ const tag=require('../dist/tagDuel').createTagDuel([0,1,2,3].map(i=>({id:'tag-preview-'+i,name:['Matheus','Kaiba','Yugi','Joey'][i],cards:gallery.cards,extra:gallery.extra})),{classic:true,seed:'visual-preview'});
+ tag.core.players[0].monsters=[normal('m0:preview','91152256')];tag.core.players[1].monsters=[normal('m1:preview','89631139',1)];
  const previews=[
+  ['equipes-publico.png',await require('../dist/tagRenderer').renderTag(tag,undefined,noNetwork)],
+  ['equipes-privado.png',await require('../dist/tagRenderer').renderTag(tag,'tag-preview-0',noNetwork)],
   ['perfil-azul.png',await require('../dist/cardRenderer').renderCard({discord_id:'100',username:'Duelista',character_name:'Kairos',biography:'Cada carta guarda uma possibilidade. A próxima jogada é sua.',theme:'oceano',duelist_level:4,xp:350,dp:1250,starter_deck:'warrior'})],
   ['colecao-resumo.png',await require('../dist/commandHeader').renderCommandHeader('MINHA COLEÇÃO','Suas cartas, prontas para a próxima jogada.',[{label:'Cartas',value:'42'},{label:'Diferentes',value:'27'},{label:'Deck principal',value:'20–30 cartas'}])],
   ['arena-publica.png',await renderDuel(s,undefined,noNetwork)],

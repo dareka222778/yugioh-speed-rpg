@@ -1,5 +1,5 @@
 {
-  "release": "0.13.0",
+  "release": "0.14.0",
   "scope": "enabled 1v1 Speed RPG; not every anime/TCG card",
   "enabledCards": 130,
   "criticalSuites": [
@@ -16,7 +16,7 @@
     "tests/cardText.test.cjs"
   ],
   "criticalTests": 92,
-  "coreFingerprint": "b138636950ed33677dc653b70cd54f915922583fc021c6247ce5df27e6514919",
+  "coreFingerprint": "98bd175d67b0b1b13c229e2715389fdfbfa5c8b11610d717846d182c8c7cbcae",
   "completeGames": 1000,
   "decisions": 63120,
   "serializedRestores": 4388,

@@ -1,3 +1,4 @@
+import {teamReserveCards} from './teamRotation';
 import {economicOperationIssues} from './economicOperations';
 /** Runtime contracts for the serialized three-zone game. No UI or database writes.
  * The current catalog has no token-generation or card-transformation effect, so
@@ -14,7 +15,7 @@ function fail(reason:string):never{throw new Error(`Estado do duelo inválido: $
 function object(value:unknown):value is Record<string,any>{return !!value&&typeof value==='object'&&!Array.isArray(value);}
 const integer=(n:unknown,min=0)=>Number.isSafeInteger(n)&&Number(n)>=min;
 const actor=(n:unknown)=>n===0||n===1;
-export function duelCards(s:DuelState):CardRef[]{return s.players.flatMap(p=>[...p.deck,...p.hand,...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.banished??[],...p.field?[p.field]:[]]);}
+export function duelCards(s:DuelState):CardRef[]{return s.players.flatMap(p=>[...p.deck,...p.hand,...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.banished??[],...p.field?[p.field]:[]]).concat(teamReserveCards(s));}
 export function assertDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');
  const s=value as any;
@@ -72,6 +73,17 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
    }
   }
   if(p.field){checkRef(p.field);if(!getCard(p.field.id)?.field||typeof p.field.faceUp!=='boolean'||!integer(p.field.setTurn))fail('Magia de Campo');}
+ }
+ if(s.teamRotation!==undefined){
+  const r=s.teamRotation;
+  if(!object(r)||r.version!==1||!integer(r.cursor)||r.cursor>3||!Array.isArray(r.active)||r.active.length!==2||r.active.some((i:unknown,t:number)=>!integer(i)||Number(i)>3||Number(i)%2!==t)||!object(r.reserves)||Object.keys(r.reserves).length!==2||Object.keys(r.reserves).some(k=>!(/^[0-3]$/).test(k)||r.active.includes(Number(k)))||s.current!==r.cursor%2||s.players.some((p:any,i:number)=>p.id!==`tag-team-${i}`))fail('rotação de equipes');
+  if(r.overflowReturn!==undefined&&(!object(r.overflowReturn)||!actor(r.overflowReturn.team)||!integer(r.overflowReturn.seat)||r.overflowReturn.seat>3||r.overflowReturn.seat%2!==r.overflowReturn.team||!r.reserves[r.overflowReturn.seat]))fail('retomada do parceiro');
+  if(r.overflowReturn&&s.phase!=='finished'&&(s.phase!=='discard'||s.handFlow?.mode!=='overflow'||s.handFlow?.actor!==r.overflowReturn.team))fail('descarte do parceiro sem continuação');
+  if(r.active[s.current]!==r.cursor&&!(r.overflowReturn?.team===s.current&&r.overflowReturn.seat===r.cursor))fail('participante da vez');
+  for(const h of Object.values(r.reserves) as any[]){if(!object(h)||!Array.isArray(h.hand)||!Array.isArray(h.deck)||!Array.isArray(h.extra)||h.extra.length>RULES_PROFILE.extraDeckMax)fail('mão/deck do parceiro');for(const c of [...h.hand,...h.deck]){checkRef(c);if(getCard(c.id)!.fusion)fail('Fusão na mão do parceiro');}for(const c of h.extra){checkRef(c);if(!getCard(c.id)!.fusion)fail('adicional do parceiro');}}
+  for(const c of duelCards(s))if(!(/^m[0-3]:/).test(c.uid))fail('proprietário físico de equipe');
+  for(const [team,p] of s.players.entries())for(const c of [...p.deck,...p.hand,...p.extra??[]])if(!c.uid.startsWith(`m${r.active[team]}:`))fail('zona privada de outro parceiro');
+  for(const [seat,h] of Object.entries(r.reserves) as [string,any][])for(const c of [...h.deck,...h.hand,...h.extra])if(!c.uid.startsWith(`m${seat}:`))fail('reserva privada de outro parceiro');
  }
  if(s.winner!==null&&!ids.has(s.winner))fail('vencedor desconhecido');
  if(s.phase!=='finished'&&s.winner!==null)fail('vencedor sem encerramento');

@@ -1,3 +1,4 @@
+import {renderDuel} from './duelRenderer';
 /** Dedicated 2v2 renderer. Never calls or modifies the original 1v1 playmat. */
 import sharp from 'sharp';
 import {outlineText as text} from './fontPaths';
@@ -12,7 +13,7 @@ let queue=Promise.resolve(),waiting=0;
 export async function renderTag(s:TagDuel,viewer?:string,provider=getCardArt){
  assertTagDuel(s);if(viewer&&!s.members.some(p=>p.id===viewer))throw Error('Você não participa deste 2v2.');
  if(waiting>=4)throw Error('Campo de equipes ocupado. Atualize em alguns segundos.');waiting++;const previous=queue;let release!:()=>void;queue=new Promise<void>(resolve=>release=resolve);await previous;
- try{return await draw(s,viewer,provider);}finally{waiting--;release();}
+ try{return s.mode==='tag-classic'?await drawClassic(s,viewer,provider):await draw(s,viewer,provider);}finally{waiting--;release();}
 }
 async function draw(s:TagDuel,viewer:string|undefined,provider:typeof getCardArt){
  const hand=viewer?tagMemberHand(s,viewer):[],H=viewer?1260:930,overlays:sharp.OverlayOptions[]=[],wanted=new Set<string>();
@@ -40,7 +41,19 @@ async function draw(s:TagDuel,viewer:string|undefined,provider:typeof getCardArt
   }
   const dx=991;svg+=T(dx,y+40,'CEMITÉRIO',12,azure.muted,160);const last=p.grave.at(-1);if(last)await image(last.id,dx+10,y+57,109,155);else svg+=rect(dx+10,y+57,109,155,azure.ink);svg+=T(dx+8,y+242,`${p.grave.length} CARTAS`,17,azure.text,155)+T(dx,y+279,'DECKS INDIVIDUAIS',9,azure.muted,164);
  }
- svg+=T(32,863,s.core.phase==='finished'?`${s.core.winner==='tag-team-0'?'EQUIPE AZUL':'EQUIPE VERMELHA'} VENCEU • ${s.core.reason}`:`AGUARDANDO ${tagDecisionMember(s).name.toUpperCase()}`,20,azure.primaryBright,1120)+T(32,900,'HOMOLOGAÇÃO • 30 MONSTROS NORMAIS EMPRESTADOS • SEM RECOMPENSAS',13,azure.muted,1120);
+ svg+=T(32,863,s.core.phase==='finished'?`${s.core.winner?(s.core.winner==='tag-team-0'?'EQUIPE AZUL':'EQUIPE VERMELHA')+' VENCEU':'EMPATE'} • ${s.core.reason}`:`AGUARDANDO ${tagDecisionMember(s).name.toUpperCase()}`,20,azure.primaryBright,1120)+T(32,900,'HOMOLOGAÇÃO • 30 MONSTROS NORMAIS EMPRESTADOS • SEM RECOMPENSAS',13,azure.muted,1120);
  if(viewer){svg+=rect(24,935,1152,302,azure.deep)+T(42,966,'SUA MÃO / SOMENTE VOCÊ',20,azure.primaryBright)+T(755,963,'USE OS MENUS ABAIXO PARA JOGAR',12,azure.muted,400);for(const [i,c] of hand.slice(0,7).entries()){const x=42+i*162;await image(c.id,x,980,139,197);svg+=T(x,1200,`${i+1}. ${getCard(c.id)!.name}`,12,azure.text,148)+T(x,1221,`${getCard(c.id)!.atk} ATQ / ${getCard(c.id)!.defense} DEF`,10,azure.muted,148);}}
  return sharp(Buffer.from(svg+'</svg>')).composite(overlays).png().toBuffer();
+}
+
+export function tagImageLayout(s:TagDuel){return s.mode==='tag-classic'?{width:1400,fieldHeight:1240,handHeight:340}:{width:1200,fieldHeight:930,handHeight:330};}
+async function drawClassic(s:TagDuel,viewer:string|undefined,provider:typeof getCardArt){
+ const core=structuredClone(s.core),member=viewer?s.members.find(p=>p.id===viewer):undefined,seat=viewer?s.members.findIndex(p=>p.id===viewer):-1;
+ if(member){const p=core.players[member.team];p.hand=tagMemberHand(s,viewer!);if(s.active[member.team]!==seat){p.deck=s.reserves[seat].deck;p.extra=s.reserves[seat].extra??[];}}
+ const field=await renderDuel(core,member?core.players[member.team].id:undefined,provider),layout=tagImageLayout(s),overlays:sharp.OverlayOptions[]=[];
+ let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="220"><rect width="1400" height="220" fill="${azure.deep}"/>${text(28,43,'TAG DUEL / EQUIPES CLÁSSICAS',27,azure.text,700,1300)}${text(28,74,'CAMPO E PV POR EQUIPE • DECKS, MÃOS E ADICIONAIS INDIVIDUAIS',14,azure.muted,700,1300)}`;
+ for(const [i,m] of s.members.entries()){const active=s.active[m.team]===i,held=active?s.core.players[m.team]:s.reserves[i],x=28+i*346,acting=s.core.phase!=='finished'&&tagDecisionMember(s).id===m.id;svg+=`<rect x="${x}" y="94" width="326" height="106" rx="8" fill="${acting?azure.surfaceSelected:azure.surface}" stroke="${m.team===0?azure.primary:'#FF9CA5'}"/>${text(x+12,124,m.name+(viewer===m.id?' (VOCÊ)':''),20,azure.text,700,302)}${text(x+12,151,(m.team===0?'EQUIPE AZUL':'EQUIPE VERMELHA')+(acting?' • SUA VEZ':''),11,azure.muted,700,300)}${text(x+12,181,`MÃO ${held.hand.length}  /  DECK ${held.deck.length}  /  EXTRA ${held.extra?.length??0}`,12,azure.primaryBright,700,300)}`;}
+ overlays.push({input:await sharp(Buffer.from(svg+'</svg>')).png().toBuffer(),left:0,top:0});
+ if(member){overlays.push({input:await sharp(field).extract({left:0,top:340,width:1400,height:1020}).png().toBuffer(),left:0,top:220},{input:await sharp(field).extract({left:0,top:0,width:1400,height:340}).png().toBuffer(),left:0,top:layout.fieldHeight});}else overlays.push({input:field,left:0,top:220});
+ return sharp({create:{width:1400,height:layout.fieldHeight+(member?layout.handHeight:0),channels:4,background:azure.ink}}).composite(overlays).png().toBuffer();
 }

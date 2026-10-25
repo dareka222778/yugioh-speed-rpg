@@ -1,47 +1,64 @@
-# Fase 6 — laboratório 2v2, release 0.10.0
+# Fase 6 — equipes clássicas 2v2, versão 0.14.0
 
-## Implementação funcional desta etapa
+## Estado atual
 
-`src/tagDuel.ts` reutiliza o núcleo 1v1 para dois campos compartilhados e coordena quatro mãos e decks independentes. Os participantes alternam A1 → B1 → A2 → B2; a equipe compartilha 4000 PV e três zonas de Monstro. O dono da decisão é o parceiro ativo, inclusive durante o descarte antes da compra. Cartas conservam seus UIDs ao trocar a mão/deck ativo por reservas. O primeiro jogador não compra nem ataca no primeiro turno; posições, Tributos, combate, derrota por compra, desistência e W.O. reutilizam o motor atual.
+A implementação jogável está disponível para quatro humanos, com efeitos, decks próprios ou emprestados e persistência. A homologação de uma partida por quatro pessoas reais no Discord e a aceitação visual em celular continuam pendentes. Testes automatizados não substituem esses dois critérios. A engine continua limitada às 130 definições habilitadas do RPG; não abrange todas as cartas do anime/TCG.
 
-Apenas monstros Normais certificados são admitidos. Cartas com efeito, Magias, Armadilhas e Fusões são recusadas na construção e validação do estado; nenhum efeito é simplesmente ignorado. O campo compartilhado pode ser usado pelo parceiro seguinte. Esta é uma adaptação própria de laboratório, não uma afirmação de aderência integral a regras de Tag Duel oficiais.
+## Como jogar
 
-`/dupla simular` executa uma partida completa com quatro participantes virtuais e mostra o resultado em resposta privada. Não usa decks de jogadores, não cria sessão humana e não altera coleção, DP ou XP. Está disponível para experimentar a infraestrutura da fase 6 sem afetar os duelos 1v1.
+1. Os quatro participantes criam seus perfis com `/start`.
+2. Um deles usa `/dupla convidar parceiro:... oponente1:... oponente2:...`.
+3. A opção `cartas` escolhe clássicos emprestados (padrão), decks ativos próprios ou o antigo laboratório Normal. Cada convidado confirma sua participação em até cinco minutos.
+4. O campo público oferece **Minha mão / jogar** e **Cemitério / zonas**. A mão é privada e tem consulta carta a carta, descrição em português e ações legais. `/dupla ver` recupera seu painel. `/dupla campo` republica o campo no mesmo servidor se a mensagem foi perdida.
 
-## Evidências
+Não há apostas, gastos, recompensas ou entrega de cartas. Cartas emprestadas existem somente dentro da sessão. Decks próprios são fotografados como dados no momento da confirmação de cada participante; editar um deck depois disso não altera a partida.
 
-- 383 testes completos, incluindo rotação das quatro posições, campo compartilhado, sete cartas no parceiro que entra, deck correto, visibilidade, serialização, ações ilegais e efeitos recusados.
-- `validation/tag-normal-audit.json`: 100 duelos completos, 4317 decisões, 284 restaurações, nenhuma carta perdida ou duplicada. Sementes e posições iniciais alternadas; reprodução via `npm run audit:tag`.
-- Gate 1v1 executado separadamente; a aceitação do 1v1 não é herdada pelo 2v2.
+## Regras da adaptação
 
-## Próximas entregas da fase 6
+- Ordem: Azul 1 → Vermelha 1 → Azul 2 → Vermelha 2, a partir da primeira posição sorteada. O primeiro turno não tem compra nem batalha.
+- Cada equipe compartilha 4000 PV, três zonas de Monstro, três de Magia/Armadilha, Campo, cemitério e banidas. Mãos, decks e Adicionais são individuais: 20–30 cartas principais, até seis no Adicional e até três cópias por carta.
+- O representante ativo da equipe decide suas respostas usando a própria mão/deck e pode usar o campo compartilhado, inclusive cartas baixadas pelo parceiro. O parceiro inativo não oferece uma segunda janela de resposta. Efeitos sobre as duas mãos/decks afetam os dois representantes ativos. Efeitos de monstros do campo/cemitério são controlados pelo representante ativo da equipe.
+- A troca de parceiro ocorre somente depois das respostas/gatilhos do fim do turno, imediatamente antes da compra do participante que entra. O Adicional também troca nessa transição.
+- Uma carta devolvida à mão ou ao Adicional retorna ao participante que é seu dono físico. O dono inativo escolhe seu próprio descarte se receber cartas acima de sete; a prioridade anterior é restaurada depois. Uma devolução coletiva termina antes dos descartes individuais.
+- Cada pessoa tem limite de sete cartas, com descarte antes da próxima compra. A equipe perde por falha de compra obrigatória, PV, desistência confirmada de qualquer membro ou W.O. de 30 minutos de quem precisa decidir. Falhas simultâneas de compra podem resultar em empate.
 
-1. Aprovar as regras detalhadas de efeitos/controle de propriedade em equipes: devolução à mão do dono, buscas, respostas do parceiro, perdas do participante e desconexão.
-2. Estender as mesmas operações declarativas às mãos dos quatro participantes e correntes com prioridade por equipe, sem remendar o motor por captura de texto.
-3. Lobby persistente de quatro humanos, consentimento, reserva de decks, timeout, retomada e painéis privados para cada participante.
-4. Admitir cartas por famílias apenas após testes; adicionar renderer próprio de equipes sem alterar o campo 1v1.
-5. Homologar quatro clientes Discord antes de habilitar jogos humanos e economia.
+Estas são regras próprias de equipes do Speed RPG, não uma alegação de aderência integral ao Tag Duel oficial.
 
-**Não entregue ainda:** convites e duelos 2v2 humanos, suporte às 130 cartas no 2v2 e integração de recompensas nessa modalidade. O laboratório está implantável; estas partes permanecem deliberadamente indisponíveis.
+## Arquitetura e proteção dos dados
 
-## Bloco 0.11.0 — quatro humanos, modo de homologação
+`teamRotation.ts` contém somente a coordenação serializável de quatro posições. O núcleo de regras e o registro declarativo de efeitos são compartilhados com o 1v1; a coordenação opcional não é inserida nos duelos 1v1. As reservas entram na verificação de conservação física de cartas. `tagDuel.ts` adapta ações/decisões e conserva o modo Normal das sessões antigas.
 
-`/dupla convidar parceiro:... oponente1:... oponente2:...` cria um lobby persistido por cinco minutos; cada convidado aceita em seu próprio usuário. Todos precisam de `/start`. As equipes são anfitrião/parceiro contra os dois oponentes. A partida começa somente após as quatro confirmações, em posição inicial sorteada. `/dupla ver` recupera convite ou mão após reconexão/reinício.
+`tagStore.ts` grava estado e revisão em transação SQLite. Identificadores dos controles vinculam usuário, servidor, sessão e revisão. Cliques repetidos não executam novamente uma ação. Reservas bloqueiam partidas simultâneas 1v1/2v2. Migrações são aditivas e foram testadas sobre uma sessão anterior à coluna de formato. Dados inconsistentes são preservados e recusados para revisão.
 
-Nesta etapa cada participante recebe temporariamente um baralho de 30 monstros Normais certificados. Os baralhos emprestados existem apenas no estado da sessão; nenhuma carta é entregue na coleção e não há DP/XP/recompensas. O campo 1v1 permanece intacto. `tagUI.ts` exibe as três zonas de cada equipe, PV, contagens de mão/deck, vez e prazo; a mão individual contém menus de ações legais com paginação. Identificadores vinculam usuário, sessão e revisão. Uma jogada grava o JSON inteiro em transação antes de atualizar mensagens. Cliques antigos não repetem ações. Participantes ficam reservados, impedindo duelos simultâneos 1v1/2v2. Qualquer membro pode desistir pela equipe após confirmação. W.O. de 30 minutos, descarte antes da compra e derrota por deck vazio seguem o núcleo.
+Publicações têm uma revisão confirmada separada da revisão do jogo. O verificador periódico retenta mensagens pendentes após falhas/reinício. Uma confirmação antiga não encobre uma jogada mais recente. O estado já salvo não depende de a edição da mensagem funcionar.
 
-Testes cobrem confirmação, isolamento de servidor/usuário, retomada, revisão, conservação, W.O., cancelamento, bloqueio entre modalidades, falha de rede após gravação e limites dos componentes. Ainda requer homologação manual com quatro contas no Discord, além de efeitos e decks próprios no 2v2. Este bloco **não conclui a fase 6 inteira**.
+`tagRenderer.ts` mostra quatro contadores individuais sobre o campo clássico completo. A mão fica em uma imagem separada para leitura no celular; o azul identifica as equipes e os controles. O laboratório Normal mantém seu renderer azul. `tagUI.ts` inclui consultas paginadas das zonas, ocultando cartas adversárias baixadas e Adicionais dos outros participantes. Falha de imagem retorna texto e botões completos.
 
-## Bloco 0.12.0 — campo azul e cartas ampliadas
+O arquivo do campo 1v1 permanece idêntico: SHA-256 `01d2253332cae7cf18106979e461af7524eda88794021134d2424755b0fb351c`.
 
-O 2v2 tem um renderer separado (`tagRenderer.ts`), com quatro contadores individuais de mão/baralho, dois campos de três zonas, PV por equipe, cemitério, indicador da decisão e o verso enviado pelo usuário. O painel privado mostra apenas a mão de quem o abriu. A consulta de uma carta amplia a imagem e mantém a descrição em português; suas jogadas conservam os mesmos índices e revisões da lista legal. Falhas de imagem retornam o painel textual completo. Fila limitada evita várias composições simultâneas no host. O campo âmbar 1v1 não é alterado.
+## Evidências desta versão
 
-A versão visual segue em homologação: os testes verificam que a composição pública não carrega imagens de cartas ocultas e que a privada carrega somente a mão solicitada, incluindo cartas baixadas por parceiros. Não há certificação automatizada de aceitação estética/mobile com quatro clientes humanos.
+| Verificação | Resultado |
+|---|---|
+| Suíte completa | 410 testes aprovados |
+| Aceitação 1v1 | 1.000 partidas, 63.120 decisões, 4.388 restaurações, conservação física |
+| 2v2 clássico determinístico | 1.000 partidas, 58.507 decisões, 4.045 restaurações, conservação física |
+| Definições presentes na auditoria 2v2 | 130; 47 definições com ativação explícita observada |
+| Integração 2v2 clássico persistida | 100 partidas através do mesmo adaptador de componentes e SQLite, sem alterar economia |
+| Casos específicos de equipes | respostas no fim do turno, custo do representante, Adicional individual, devolução ao dono inativo, quatro mãos com excedente, empate e migração |
+| Privacidade/Discord | limites de payload, bloqueio por usuário/servidor, imagens sem mãos alheias, controles com revisão |
 
-## Bloco 0.13.0 — recuperação de publicação e partidas persistidas
+A presença de uma carta na auditoria não prova, sozinha, todos os seus efeitos. A evidência combina os testes do núcleo por famílias com os testes específicos do coordenador e as partidas de integração. Os relatórios em `validation/` preservam esse escopo e não afirmam certificação humana.
 
-Cada mensagem pública registra a última revisão publicada. O verificador periódico retenta revisões pendentes, inclusive depois de uma reinicialização, sem repetir a jogada. Uma confirmação antiga não pode marcar uma revisão nova como entregue. `/dupla campo` recupera a arena em outro canal do mesmo servidor se a mensagem anterior foi apagada. Migrações SQLite são aditivas, e sessões inconsistentes são recusadas sem apagar o estado.
+Reprodução: `npm test`, `npm run accept:engine`, `npm run audit:tag`, `npm run audit:tag-sessions`, `npm run audit:tag-classic`, `npm run audit:tag-classic-sessions`. No plano de hospedagem, use `npm run test:host`, que executa uma suíte por vez. A execução paralela abortou processos naquele plano; a execução sequencial completa passou.
 
-`npm run audit:tag-sessions` joga 100 partidas completas usando SQLite, quatro participantes simulados e o mesmo adaptador de componentes de produção. Resultado desta entrega: 2.909 decisões, 2.909 recargas, 2.909 publicações, 120 cartas físicas preservadas por partida, 400 reservas liberadas e economia inalterada. Os testes completos somam 396 casos. A validação no host usa `npm run test:host` com uma suíte por vez para respeitar os limites de processos do plano; a execução paralela naquele plano abortou um processo de teste, enquanto os testes sequenciais e o CI passaram.
+## Histórico dos blocos implantados
 
-Isso comprova a integração automatizada do modo Normal, não uma partida feita por quatro pessoas no Discord. Os requisitos restantes de efeitos/decks próprios e homologação humana continuam abertos; fases posteriores não devem ser declaradas concluídas enquanto esses critérios estiverem pendentes.
+- 0.11.0: lobby, quatro confirmações, ações privadas, conservação, reservas, W.O. e retomada, ainda só com Normais.
+- 0.12.0: campo visual e consulta carta a carta.
+- 0.13.0: publicação recuperável, republicação de arena e auditoria de sessões persistidas.
+- 0.14.0: efeitos clássicos, decks próprios, Adicionais individuais, propriedade física, correntes e zonas completas.
+
+## Critério para encerrar a homologação
+
+Uma partida completa com quatro pessoas reais, usando as respostas, a consulta de cartas e a retomada de painel em pelo menos um celular. É preciso conferir também o resultado e os controles desativados ao terminar. Sem essa evidência, não registrar “100% homologado” nem declarar as fases seguintes concluídas.
