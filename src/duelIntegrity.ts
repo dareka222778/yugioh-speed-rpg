@@ -67,6 +67,7 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
     if(zone==='monsters'){
      if(info.kind!=='monster'||typeof c.faceUp!=='boolean'||(c.position!=='atk'&&c.position!=='def')||!integer(c.entered)||!integer(c.changed)||!integer(c.attacked)||!integer(c.atkBoost,Number.MIN_SAFE_INTEGER)||!integer(c.defBoost,Number.MIN_SAFE_INTEGER))fail('monstro inválido');
      if(c.owner!==undefined&&!actor(c.owner)||c.returnTo!==undefined&&!actor(c.returnTo))fail('proprietário do monstro');
+     if((c.returnTo===undefined)!==(c.returnTurn===undefined)||c.returnTurn!==undefined&&(!integer(c.returnTurn,1)||c.returnTurn!==s.turn))fail('prazo de devolução do controle');
     }
     if(zone==='backrow'&&(info.kind==='monster'||!integer(c.setTurn)||typeof c.faceUp!=='boolean'))fail('Magia/Armadilha inválida');
     if(zone==='backrow'&&(c.resolved!==undefined&&typeof c.resolved!=='boolean'||c.equippedTo!==undefined&&(typeof c.equippedTo!=='string'||!c.equippedTo)))fail('metadados de Magia/Armadilha inválidos');

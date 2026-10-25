@@ -3,7 +3,7 @@ on:
   push:
     branches: [classic-engine-foundation]
   pull_request:
-    branches: [main]
+    branches: [main, classic-engine-foundation]
 jobs:
   test:
     runs-on: ubuntu-latest

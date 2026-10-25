@@ -187,3 +187,37 @@ test('NPC pays Seven Tools to negate the rival Trap, not its own Trap',()=>{
 });
 
 after(()=>{require('../dist/database').db.close();fs.rmSync(temporary,{recursive:true,force:true});});
+test('temporary control ending into a full owner field sends the monster to the correct Graveyard',()=>{
+ let s=game();s.players[1].monsters=[monster('88819587','taken',1)];
+ s=spell(s,'04031928');assert.equal(s.players[0].monsters[0].owner,1);
+ s.players[1].monsters=[monster('91152256','occupied-1',1),monster('91152256','occupied-2',1),monster('91152256','occupied-3',1)];
+ s=passes(use(s,'a','end'));
+ assert.equal(s.players[1].monsters.length,3);
+ assert.ok(s.players[1].grave.some(c=>c.uid==='taken'));
+ assert.ok(!s.players[0].grave.some(c=>c.uid==='taken'));
+ assert.ok(!s.players[0].monsters.some(c=>c.uid==='taken'));
+ assert.equal(new Set(all(s).map(c=>c.uid)).size,all(s).length);
+});
+
+test('Monster Reborn preserves a correctly summoned Fusion history and physical owner',()=>{
+ let s=game();s.players[1].grave=[{...ref('45231177','fusion-dead'),properlySummoned:true}];
+ s=spell(s,'83764718',a=>a.target==='fusion-dead'&&a.position==='def');
+ const revived=s.players[0].monsters.find(m=>m.uid==='fusion-dead');
+ assert.equal(revived.owner,1);assert.equal(revived.properlySummoned,true);
+ assert.equal(revived.position,'def');
+ assert.ok(!s.players[1].grave.some(c=>c.uid==='fusion-dead'));
+ s=spell(s,'53129443');
+ assert.ok(s.players[1].grave.some(c=>c.uid==='fusion-dead'&&c.properlySummoned===true));
+ assert.ok(!s.players[0].grave.some(c=>c.uid==='fusion-dead'));
+});
+
+test('Monster entry checks destination capacity before touching either source pile',()=>{
+ const {specialSummonFromPile}=require('../dist/monsterEntry');
+ const s=game();s.players[0].monsters=[monster('91152256','full-1'),monster('91152256','full-2'),monster('91152256','full-3')];
+ s.players[1].grave=[{...ref('45231177','fusion-dead'),properlySummoned:true}];
+ s.players[0].deck=[ref('91152256','candidate')];
+ const before=JSON.stringify(s);
+ assert.equal(specialSummonFromPile(s,0,1,'grave','fusion-dead'),undefined);
+ assert.equal(specialSummonFromPile(s,0,0,'deck','candidate'),undefined);
+ assert.equal(JSON.stringify(s),before);
+});

@@ -31,3 +31,19 @@ test('constructor and timeout boundaries reject malformed input without changing
  const bad=structuredClone(s);bad.version=999;assert.throws(()=>e.timeoutDuel(bad),/inválido/);
 });
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
+test('temporary control needs a paired, valid deadline but legacy monsters need no new metadata',()=>{
+ const s=game();s.turn=3;
+ const borrowed={uid:'borrowed',id:'91152256',owner:1,faceUp:true,position:'atk',entered:2,changed:2,attacked:0,atkBoost:0,defBoost:0,returnTo:1,returnTurn:3};
+ s.players[0].monsters=[borrowed];
+ assert.doesNotThrow(()=>integrity.assertDuelState(s));
+ for(const corrupt of [
+  m=>{m.returnTurn=NaN;},m=>{m.returnTurn=Infinity;},m=>{m.returnTurn='3';},
+  m=>{m.returnTurn=-1;},m=>{m.returnTurn=3.5;},m=>{m.returnTurn=4;},
+  m=>{m.returnTurn=2;},m=>{delete m.returnTurn;},m=>{delete m.returnTo;}
+ ]){
+  const damaged=structuredClone(s);corrupt(damaged.players[0].monsters[0]);
+  assert.throws(()=>integrity.assertDuelState(damaged),/prazo de devolução/);
+ }
+ const legacy=structuredClone(s);delete legacy.players[0].monsters[0].returnTurn;delete legacy.players[0].monsters[0].returnTo;
+ assert.doesNotThrow(()=>integrity.assertDuelState(legacy));
+});

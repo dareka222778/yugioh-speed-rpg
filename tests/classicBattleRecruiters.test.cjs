@@ -74,3 +74,15 @@ test('a battle-destroyed opponent-controlled Tomato attempts to recruit to its o
  assert.ok(s.players[0].monsters.some(m=>m.uid==='owner-target'));
  assert.ok(!s.players[1].monsters.some(m=>m.uid==='owner-target'));
 });
+test('battle recruiter does not move a card when the physical owner has no free monster zone',()=>{
+ let s=game();s.phase='battle';
+ s.players[0].monsters=[monster('attacker','48305365'),monster('full-1','91152256'),monster('full-2','91152256')];
+ s.players[1].monsters=[monster('borrowed-tomato','83011277',{owner:0})];
+ s.players[0].deck=[ref('candidate','11384280')];
+ s=use(s,'a','attack',a=>a.target==='borrowed-tomato');
+ assert.equal(s.phase,'battle');assert.equal(s.choice,undefined);
+ assert.equal(s.players[0].monsters.length,3);
+ assert.ok(s.players[0].deck.some(c=>c.uid==='candidate'));
+ assert.ok(s.players[0].grave.some(c=>c.uid==='borrowed-tomato'));
+ assert.ok(!s.players[1].grave.some(c=>c.uid==='borrowed-tomato'));
+});
