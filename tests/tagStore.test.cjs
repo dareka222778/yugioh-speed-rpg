@@ -40,3 +40,11 @@ test('private one-card inspection binds owner and keeps canonical legal indices;
  await handleTagComponent({guildId:'guild',user:{id:actor},customId:`tag:inspect:${r.id}:${r.revision}:${actor}`,values:['0'],deferUpdate:async()=>{},editReply:async p=>{edited=p;}},async()=>{},()=>{});assert.match(edited.embeds[0].toJSON().title,/1\/4/);
  await assert.rejects(handleTagComponent({guildId:'guild',user:{id:actor},customId:`tag:card,${actor},0:${r.id}:0`,deferUpdate:async()=>{throw Error('must not ack');}},async()=>{},()=>{}),/atualizada/);
 });
+test('failed/unpublished revisions survive reload and remain due until acknowledged; stale publication cannot hide a newer move',()=>{
+ let r=playing();store.setTagMessage(r.id,'arena');assert.ok(store.dueTags().some(p=>p.id===r.id));store.markTagPublished(r.id,r.revision);assert.ok(!store.dueTags().some(p=>p.id===r.id));const oldRevision=r.revision,actor=tag.tagDecisionMember(r.state).id,index=tag.tagActions(r.state,actor).findIndex(a=>a.kind==='end');r=store.actTag(r.id,actor,r.guild,r.revision,index);store.markTagPublished(r.id,oldRevision);assert.ok(store.dueTags().some(p=>p.id===r.id));store.markTagPublished(r.id,r.revision);assert.ok(!store.dueTags().some(p=>p.id===r.id));store.setTagMessage(r.id,'replacement','other-channel');const reopened=store.getTag(r.id);assert.equal(reopened.channel,'other-channel');assert.equal(reopened.message,'replacement');assert.equal(reopened.public_revision,-1);
+});
+test('corrupt session membership fails closed without deleting the saved duel or touching collections',()=>{
+ const r=playing(),state=db.prepare('SELECT state FROM tag_sessions WHERE id=?').get(r.id).state,before=snapshot();db.prepare('UPDATE tag_sessions SET members=? WHERE id=?').run('[{}]',r.id);assert.throws(()=>store.getTag(r.id),/inconsistente/);assert.equal(db.prepare('SELECT state FROM tag_sessions WHERE id=?').get(r.id).state,state);assert.equal(snapshot(),before);
+ // Restore only the deliberately corrupt test row so subsequent expiry scans remain meaningful.
+ db.prepare('UPDATE tag_sessions SET members=? WHERE id=?').run(JSON.stringify(r.members),r.id);
+});

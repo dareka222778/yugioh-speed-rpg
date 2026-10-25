@@ -37,3 +37,11 @@ Testes cobrem confirmação, isolamento de servidor/usuário, retomada, revisão
 O 2v2 tem um renderer separado (`tagRenderer.ts`), com quatro contadores individuais de mão/baralho, dois campos de três zonas, PV por equipe, cemitério, indicador da decisão e o verso enviado pelo usuário. O painel privado mostra apenas a mão de quem o abriu. A consulta de uma carta amplia a imagem e mantém a descrição em português; suas jogadas conservam os mesmos índices e revisões da lista legal. Falhas de imagem retornam o painel textual completo. Fila limitada evita várias composições simultâneas no host. O campo âmbar 1v1 não é alterado.
 
 A versão visual segue em homologação: os testes verificam que a composição pública não carrega imagens de cartas ocultas e que a privada carrega somente a mão solicitada, incluindo cartas baixadas por parceiros. Não há certificação automatizada de aceitação estética/mobile com quatro clientes humanos.
+
+## Bloco 0.13.0 — recuperação de publicação e partidas persistidas
+
+Cada mensagem pública registra a última revisão publicada. O verificador periódico retenta revisões pendentes, inclusive depois de uma reinicialização, sem repetir a jogada. Uma confirmação antiga não pode marcar uma revisão nova como entregue. `/dupla campo` recupera a arena em outro canal do mesmo servidor se a mensagem anterior foi apagada. Migrações SQLite são aditivas, e sessões inconsistentes são recusadas sem apagar o estado.
+
+`npm run audit:tag-sessions` joga 100 partidas completas usando SQLite, quatro participantes simulados e o mesmo adaptador de componentes de produção. Resultado desta entrega: 2.909 decisões, 2.909 recargas, 2.909 publicações, 120 cartas físicas preservadas por partida, 400 reservas liberadas e economia inalterada. Os testes completos somam 396 casos. A validação no host usa `npm run test:host` com uma suíte por vez para respeitar os limites de processos do plano; a execução paralela naquele plano abortou um processo de teste, enquanto os testes sequenciais e o CI passaram.
+
+Isso comprova a integração automatizada do modo Normal, não uma partida feita por quatro pessoas no Discord. Os requisitos restantes de efeitos/decks próprios e homologação humana continuam abertos; fases posteriores não devem ser declaradas concluídas enquanto esses critérios estiverem pendentes.
