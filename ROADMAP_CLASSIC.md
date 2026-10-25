@@ -32,7 +32,7 @@ Não é necessário habilitar todo o histórico antes de homologar uma versão: 
 
 H1 OCG 1999; H2 OCG 2000–2001; H3 TCG 2002; H4 2003; H5 janeiro–setembro/2004; H6 somente 01/10/2004. A1+ legado do anime comercializado depois do corte. A ordenação real deriva de datas verificadas por produto; reimpressões atualizam disponibilidade, sem duplicar identidade canônica.
 
-Separar catálogos histórico, anime e jogável. A contagem alternativa 1962 é provisória: existem blocos de produtos vazios no conjunto consultado. O bloqueio 403 da API YGOPRODeck não foi resolvido; não afirmar que a contagem veio daquela API. Importador ainda pendente.
+Separar catálogos histórico, anime e jogável. A contagem alternativa 1962 é provisória: existem blocos de produtos vazios no conjunto consultado. O bloqueio 403 da API YGOPRODeck não foi resolvido; não afirmar que a contagem veio daquela API. Importador entregue em 0.17.0; auditoria de completude ainda pendente.
 
 Estados futuros: importada → catalogada → em análise → implementada → testada → certificada; disponibilidade administrativa e habilitação são controles separados. Incompatibilidade e adaptação ficam explícitas. Não habilitar Scapegoat com quatro fichas em três zonas nem alterar texto silenciosamente. Adaptações relevantes exigem decisão do usuário.
 
@@ -71,3 +71,9 @@ As referências da certificação e a matriz incorporam a suíte classicPersiste
 Por solicitação do usuário, avançamos para preparação histórica mantendo as pendências da fase 2 e da homologação humana. O importador isolado reproduz a união de 1962 cartas até 01/10/2004, mantém códigos alternativos e produz relações nominais/produtos/datas/lacunas. Uma projeção factual versionada permite reproduzir as saídas sem depender do ZIP mutável. O cruzamento confirma as 130 cartas atuais nesse recorte sem modificar a admissão.
 
 A entrega técnica da primeira importação é verificável; a auditoria de completude continua aberta pelos produtos vazios e datas ausentes. O catálogo do anime não é inferido. Ver HISTORICAL_IMPORT.md para escopo, comandos, hashes e pendências. O pacote não é carregado pela engine nem pela UI; exibição de catálogo e liberação de cartas pertencem a blocos posteriores.
+
+## 0.17.1 — alvos e correntes, ponte das fases 2 e 4
+
+Magias Rápidas passam a reutilizar a lista de alvos e o resolvedor das ativações principais. Corrige o registro falso de destruição do Tufão quando um elo anterior já retirou seu alvo. A revisão acrescenta oito cenários dedicados de alvo perdido, fonte destruída sem negação, contracorrentes com custos pagos e retomada JSON, conservando os UIDs. Os quatro certificados afetados referenciam essa evidência.
+
+Não adiciona cartas, adaptações, migrações de estado ou alterações no campo. O recorte permanece em 130 jogáveis; as 1962 históricas seguem em preparação. Não encerra a revisão completa das 58 cartas com efeito ou a homologação humana. Próximo lote: regras de seleção/resolução de cemitério, controle e gatilhos com zonas ocupadas; só então ampliar a certificação histórica por produto.

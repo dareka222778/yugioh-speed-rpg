@@ -1,3 +1,5 @@
+> **0.17.1 — alvos e correntes:** Magias Rápidas compartilham seleção e resolução, com regressões de perda de alvo, custos e restauração. 130 cartas jogáveis; catálogo histórico separado. Veja [RELEASE_0_17_1.md](RELEASE_0_17_1.md).
+
 > **0.17.0 — Fase 3:** importador histórico offline, 1962 identidades observadas até 01/10/2004, linha de produtos e reprodução sem rede a partir de projeção factual preservada. As 130 cartas jogáveis continuam separadas; zero novas cartas habilitadas ou concedidas pela importação. Veja [HISTORICAL_IMPORT.md](HISTORICAL_IMPORT.md) e [RELEASE_0_17_0.md](RELEASE_0_17_0.md). A completude histórica e a revisão da fase 2 continuam abertas.
 
 > **0.16.3 — efeitos persistentes e exceções:** regressões dedicadas para os cinco equipamentos, três campos e duas exceções existentes. Corrige a mensagem de Campo destruído em resposta e recusa metadados persistidos malformados. Sem habilitar cartas, alterar regras ou redesenhar a arena. Veja [RELEASE_0_16_3.md](RELEASE_0_16_3.md).

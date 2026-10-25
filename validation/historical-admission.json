@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "release": "0.17.0",
+  "release": "0.17.1",
   "scope": "crosswalk of existing admitted engine cards; not historical certification or release authorization",
   "historicalCards": 1962,
   "enabledEngineCards": 130,

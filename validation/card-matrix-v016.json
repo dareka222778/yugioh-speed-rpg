@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "release": "0.17.0",
+  "release": "0.17.1",
   "rulesVersion": "speed-rpg-classic-v1",
   "scope": "registered-and-certified-only",
   "warning": "Suite references and literal ID mentions do not prove full effect/timing/combination coverage. Historical availability, official Portuguese wording and Discord behavior require separate reviews.",
@@ -283,6 +283,10 @@
       "suites": [
         {
           "file": "tests/classicCounterTraps.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicTargetReview.test.cjs",
           "mentionsCardId": true
         }
       ],
@@ -1780,6 +1784,10 @@
         {
           "file": "tests/classicSummonResponses.test.cjs",
           "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicTargetReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Ative numa janela de resposta permitida; velocidade 2. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima no campo; coloque-o em Defesa com a face para baixo. Limpa modificadores temporários definidos pela engine e rompe equipamentos incompatíveis. Não reinicia o histórico de ataque/Invocação do turno. Da mão, apenas no próprio turno; se baixada, não pode ser usada no mesmo turno. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
@@ -2600,6 +2608,10 @@
         {
           "file": "tests/classicCounterTraps.test.cjs",
           "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicTargetReview.test.cjs",
+          "mentionsCardId": true
         }
       ],
       "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative em resposta à ativação de uma Armadilha; velocidade 3. Em resposta à ativação de uma Armadilha: pague 1000 PV como custo; negue a ativação e destrua a Armadilha. Você deve ter mais de 1000 PV. O custo não é reembolsado se a resolução falhar. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
@@ -2909,6 +2921,10 @@
         },
         {
           "file": "tests/classicCardReview.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/classicTargetReview.test.cjs",
           "mentionsCardId": true
         }
       ],

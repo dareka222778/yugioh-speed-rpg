@@ -12,7 +12,7 @@ import {resolveChainLinks,type ChainLink} from './chainEngine';
 import {getMonsterEffect,getMonsterDefinition,canActivateMonsterEffect,payMonsterEffectCost,monsterDestructionTarget,type MonsterEffect} from './monsterEffects';
 import {getPlayableCard as getCard} from './effectRegistry';
 import {enabledCardIds,getEffect,isQuickPlaySpell} from './effectRegistry';
-import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips,turnMonsterFaceDown} from './classicEffects';
+import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips} from './classicEffects';
 export type CardRef={uid:string;id:string;properlySummoned?:boolean};
 export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
 export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean;equippedTo?:string};
@@ -154,12 +154,9 @@ function quickSpellActions(s:DuelState,index:number):Action[]{
   ...p.backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&isQuickPlaySpell(c.id)),
   ...index===s.current&&p.backrow.length<RULES_PROFILE.spellTrapZones?p.hand.filter(c=>isQuickPlaySpell(c.id)):[]
  ];
- return candidates.flatMap(c=>{
-  const targetUids=getEffect(c.id)?.kind==='bookOfMoon'
-   ?s.players.flatMap(player=>player.monsters.filter(m=>m.faceUp).map(m=>m.uid))
-   :s.players.flatMap(player=>[...player.backrow,...player.field?[player.field]:[]].map(card=>card.uid).filter(uid=>uid!==c.uid));
-  return targetUids.map(target=>({kind:'spell',card:c.uid,target} as Action));
- });
+ // Main Phase and response windows share the same target policy. Timing is
+ // checked above; a response must not invent a second set of legal targets.
+ return candidates.flatMap(c=>spellActions(s,index,c));
 }
 /** Audited hand Quick Effects during damage calculation. Costs are paid
  * before the chain; a Monster effect is neither a Spell nor a Trap activation. */
@@ -399,14 +396,10 @@ function resolve(s:DuelState){
   }
 
   const target=findMonster(s,link.target)?.m;
-  if(effect?.kind==='mysticalSpaceTyphoon'){
-   if(s.players.some(p=>p.backrow.some(b=>b.uid===link.target)||p.field?.uid===link.target))discardBackrow(s,link.target);
-   note(s,'Tufão Espacial Místico destruiu o alvo sem negar sua ativação.');
-   discardBackrow(s,link.card);return;
-  }
-  if(effect?.kind==='bookOfMoon'){
-   const m=findMonster(s,link.target)?.m;
-   if(m?.faceUp){turnMonsterFaceDown(m);note(s,`Livro da Lua virou ${card(m.id).name} para Defesa com a face para baixo.`);}
+  if(effect?.kind==='mysticalSpaceTyphoon'||effect?.kind==='bookOfMoon'){
+   // One resolver for a root activation and an added link. It rechecks only
+   // the recorded UID; a vanished target never selects a replacement.
+   resolveClassicSpell(s,{kind:'spell',actor:link.actor,card:link.card,id:link.id,target:link.target},{destroy:graveMonster,attack:atk,note,finish,checkLP});
    discardBackrow(s,link.card);return;
   }
   if(effect?.kind==='sevenTools'){

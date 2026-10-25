@@ -76,7 +76,11 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
  }
 
  switch(e.kind){
-  case 'mysticalSpaceTyphoon':if(a.target&&s.players.some(p=>p.backrow.some(b=>b.uid===a.target)||p.field?.uid===a.target)){discardBackrow(s,a.target);service.note(s,'Tufão Espacial Místico destruiu a Magia/Armadilha escolhida.');}return true;
+  case 'mysticalSpaceTyphoon':
+   if(a.target&&s.players.some(p=>p.backrow.some(b=>b.uid===a.target)||p.field?.uid===a.target)){
+    discardBackrow(s,a.target);service.note(s,'Tufão Espacial Místico destruiu a Magia/Armadilha escolhida, sem negar sua ativação.');
+   }else service.note(s,'Tufão Espacial Místico: o alvo já saiu do campo; nenhuma carta foi destruída por este efeito.');
+   return true;
   case 'bookOfMoon':
    if(found?.m.faceUp){turnMonsterFaceDown(found.m);service.note(s,`Livro da Lua colocou ${getCard(found.m.id)!.name} em Defesa com a face para baixo.`);}
    return true;
