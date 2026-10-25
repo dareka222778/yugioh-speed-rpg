@@ -5,7 +5,7 @@
  * Update scores only alongside commits containing relevant implementation
  * and tests. The playable NPC decks are validated independently.
  */
-const {enabledCardIds,getEffect,engineCard}=require('../dist/effectRegistry');
+const {enabledCardIds,getEffect,getPlayableCard}=require('../dist/effectRegistry');
 const {npcs}=require('../dist/npcContent');
 const {getMonsterEffect}=require('../dist/monsterEffects');
 
@@ -44,7 +44,7 @@ function calculate(items){
 }
 const playableNPCDecks=npcs.map(n=>({id:n.id,name:n.name,main:n.cards.length,extra:n.extra.length,
  valid:n.cards.length>=20&&n.cards.length<=30&&n.extra.length<=6&&
-  [...n.cards,...n.extra].every(id=>!!engineCard(id)&&!!getEffect(id))}));
+  [...n.cards,...n.extra].every(id=>!!getPlayableCard(id)&&!!getEffect(id))}));
 const report={scope:'Playability of this RPG only; not every TCG/anime card',
  engine:calculate(engine),layout:calculate(layout),playableNPCDecks,
  enabledEngineCards:enabledCardIds.length,playableEffectMonsters:enabledCardIds.filter(id=>!!getMonsterEffect(id)).length};

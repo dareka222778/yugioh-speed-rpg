@@ -2,7 +2,9 @@
  * The current catalog has no token-generation or card-transformation effect, so
  * each transition must conserve every physical UID and its card identity.
  */
-import {getCard} from './collection';
+import {getPlayableCard as getCard} from './effectRegistry';
+import {assertDuelRandom} from './duelRandom';
+import {RULES_VERSION,CARD_DEFINITIONS_VERSION,RULES_PROFILE} from './rulesProfile';
 import {getMonsterEffect} from './monsterEffects';
 import type {CardRef,DuelState} from './duelEngine';
 const phases=new Set(['main','battle','response','choice','discard','finished']);
@@ -15,6 +17,8 @@ export function duelCards(s:DuelState):CardRef[]{return s.players.flatMap(p=>[..
 export function assertDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');
  const s=value as any;
+ if(s.rulesVersion!==undefined&&s.rulesVersion!==RULES_VERSION||s.cardDefinitionsVersion!==undefined&&s.cardDefinitionsVersion!==CARD_DEFINITIONS_VERSION)fail('versão de regras ou definições incompatível');
+ if(s.random!==undefined)assertDuelRandom(s.random);
  if(!Array.isArray(s.players)||s.players.length!==2||!actor(s.current)||!actor(s.priority))fail('participantes ou prioridade');
  if(!integer(s.turn,1)||!phases.has(s.phase)||!['main','battle'].includes(s.resume)||!integer(s.passes)||s.passes>2)fail('turno ou fase');
  if(!object(s.pending)||!pendingKinds.has(s.pending.kind)||!Array.isArray(s.chain)||!Array.isArray(s.log)||s.log.some((x:unknown)=>typeof x!=='string'))fail('resolução pendente');
@@ -48,7 +52,7 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
   for(const zone of ['deck','hand','monsters','backrow','grave','extra','banished']){
    const list=p[zone];if(list===undefined&&['extra','banished'].includes(zone))continue;
    if(!Array.isArray(list))fail('zona ausente');
-   if((zone==='monsters'||zone==='backrow')&&list.length>3||zone==='extra'&&list.length>6)fail('limite de zonas');
+   if(zone==='monsters'&&list.length>RULES_PROFILE.monsterZones||zone==='backrow'&&list.length>RULES_PROFILE.spellTrapZones||zone==='extra'&&list.length>RULES_PROFILE.extraDeckMax)fail('limite de zonas');
    for(const c of list){
     checkRef(c);const info=getCard(c.id)!;
     if(zone==='monsters'){

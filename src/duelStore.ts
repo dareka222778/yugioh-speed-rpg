@@ -1,4 +1,5 @@
 import {randomBytes,randomInt} from 'node:crypto';
+import {applyDuelAction,transitionEvents,type DuelTransitionEvent} from './duelTransitions';
 import {assertDuelState} from './duelIntegrity';
 import {db,getPlayer} from './database';
 import {openDeck} from './decks';
@@ -9,7 +10,7 @@ import {getNPC,dailyEvent} from './npcContent';
 import {getEffect} from './effectRegistry';
 import {getMonsterEffect} from './monsterEffects';
 import {settleEncounter} from './npcProgress';
-export type DuelRecord={id:string;guild_id:string;channel_id:string;message_id:string|null;status:string;revision:number;updated:number;public_revision?:number;state:DuelState|null;invite:{owner:string;opponent:string;name:string;cards:string[];extra?:string[]}|null};
+export type DuelRecord={events?:DuelTransitionEvent[];id:string;guild_id:string;channel_id:string;message_id:string|null;status:string;revision:number;updated:number;public_revision?:number;state:DuelState|null;invite:{owner:string;opponent:string;name:string;cards:string[];extra?:string[]}|null};
 db.exec(`CREATE TABLE IF NOT EXISTS duels (id TEXT PRIMARY KEY,guild_id TEXT NOT NULL,channel_id TEXT NOT NULL,message_id TEXT,status TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 0,updated INTEGER NOT NULL,state TEXT,invite TEXT);
  CREATE TABLE IF NOT EXISTS duel_members (owner TEXT PRIMARY KEY,duel_id TEXT NOT NULL REFERENCES duels(id) ON DELETE CASCADE);`);
 const duelColumns=new Set((db.prepare('PRAGMA table_info(duels)').all() as {name:string}[]).map(c=>c.name));
@@ -177,7 +178,7 @@ export const performDuelAction=db.transaction((id:string,owner:string,guild:stri
  const r=getDuel(id);if(r.guild_id!==guild||r.status!=='playing'||!r.state)throw new Error('Esse duelo não está ativo neste servidor.');if(r.revision!==expected)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
  const actions=legalActions(r.state,owner);const action=typeof index==='number'?actions[index]:index;
  if(!action||(typeof index!=='number'&&action.kind!=='concede'))throw new Error('Ação inválida.');
- r.state=driveNPC(step(r.state,owner,action));r.revision++;r.updated=Date.now();if(r.state.phase==='finished')r.status='finished';save(r);return r;
+ const before=r.state;r.state=driveNPC(applyDuelAction(before,owner,action).state);r.events=transitionEvents(before,r.state);r.revision++;r.updated=Date.now();if(r.state.phase==='finished')r.status='finished';save(r);return r;
 });
 export function setDuelMessage(id:string,channel:string,message:string){db.prepare('UPDATE duels SET channel_id=?,message_id=?,public_revision=revision WHERE id=?').run(channel,message,id);}
 

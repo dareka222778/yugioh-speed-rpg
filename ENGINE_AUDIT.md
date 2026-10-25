@@ -1,5 +1,10 @@
 # Engine / motor de duelo — revisão funcional
 
+> Esta seção registra a revisão funcional anterior (`e6840e1`). A refatoração
+> incremental posterior, os novos módulos e as evidências atuais estão em
+> [ENGINE_REFACTOR.md](ENGINE_REFACTOR.md). O sorteio das buscas agora é persistido
+> e reproduzível em partidas novas; a limitação de seed descrita abaixo é histórica.
+
 ## Contrato preservado
 
 Um motor: 4000 PV, três zonas de monstro, três de Magia/Armadilha, 20–30 cartas

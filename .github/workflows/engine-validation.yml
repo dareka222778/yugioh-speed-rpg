@@ -16,6 +16,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm test
+      - run: npm run check:cards
       - run: npm run progress
       - run: npm run audit:engine
       - run: node scripts/render-previews.cjs artifacts/previews

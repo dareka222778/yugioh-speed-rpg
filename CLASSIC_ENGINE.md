@@ -66,3 +66,12 @@ pausa/retomada de correntes em escolhas de busca, gatilhos opcionais e replays
 de ataque. Nenhuma nova carta ou categoria passa a funcionar só por usar
 essa infraestrutura. Testes verdes não certificam regras universais nem
 substituem uma partida real no Discord.
+
+## Separação incremental de responsabilidades
+
+A arquitetura e o protocolo de habilitação de cartas estão em
+[ENGINE_REFACTOR.md](ENGINE_REFACTOR.md). O núcleo foi separado da coleção/UI;
+destruições compartilham operação e políticas explícitas, cartas Normais usam
+classificação estruturada, e novos snapshots persistem versões e sorteio.
+O CI verifica certificações depois dos testes. As 121 cartas, decks e a arena
+continuam iguais; handlers legados restantes serão migrados por família.

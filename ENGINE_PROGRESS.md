@@ -171,3 +171,13 @@ Tributo Torrencial e armadilhas comuns não ganham uma janela indevida.
 O layout e os decks dos NPCs continuam inalterados. A engine não é anunciada
 como universal nem implantada; aceite real no Discord e novas categorias/cartas
 continuam sendo trabalho separado. Evidências em ENGINE_AUDIT.md.
+
+## Refatoração incremental da arquitetura
+
+Concluída a primeira extração em ENGINE_REFACTOR.md: sete definições de destruição
+compartilham uma operação; doze definições de monstro têm políticas explícitas;
+71 Normais usam classificação estruturada; as 121 cartas exigem admissão
+certificada. Núcleo sem importação de Discord/DB/UI, RNG persistido, versões e
+eventos de transição com projeção privada. Nenhuma carta ou regra nova foi
+contabilizada como cobertura adicional. A pontuação manual permanece 92/100,
+e os comandos visuais 47/100, sem alteração na arena. A suíte passou a 308 testes.

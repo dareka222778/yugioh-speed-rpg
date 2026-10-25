@@ -11,7 +11,8 @@
     "check": "tsc --noEmit",
     "test": "npm run build && node --test tests/*.test.cjs",
     "progress": "node scripts/project-progress.cjs",
-    "audit:engine": "node scripts/audit-duel-engine.cjs --games 300"
+    "audit:engine": "node scripts/audit-duel-engine.cjs --games 300",
+    "check:cards": "node scripts/check-card-certification.cjs"
   },
   "engines": {
     "node": "22.x"
