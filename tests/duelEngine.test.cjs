@@ -45,7 +45,7 @@ test('Fissure ignores face-down monsters, chooses ties at resolution, reacts to 
  s=use(s,'a','spell');s=use(s,'b','trap',a=>a.target==='low');assert.equal(s.phase,'main');assert.equal(s.players[1].monsters[0].uid,'low');assert.equal(atk(s.players[1].monsters[0]),1800);
 });
 test('hand size discard, deck-out, surrender and strangers',()=>{
- let s=game();s.players[0].hand=Array.from({length:8},(_,n)=>({uid:'h'+n,id:'91152256'}));s=use(s,'a','end');assert.equal(s.phase,'discard');s=use(s,'a','discard');s=use(s,'a','discard');assert.equal(s.turn,2);assert.equal(s.players[0].hand.length,6);
+ let s=game();s.rulesVersion='speed-rpg-v1';s.players[0].hand=Array.from({length:8},(_,n)=>({uid:'h'+n,id:'91152256'}));s=use(s,'a','end');assert.equal(s.phase,'discard');s=use(s,'a','discard');s=use(s,'a','discard');assert.equal(s.turn,2);assert.equal(s.players[0].hand.length,6);
  s=game();s.players[1].deck=[];s=use(s,'a','end');assert.equal(s.winner,'a');assert.match(s.reason,/comprar/);assert.throws(()=>step(s,'a',{kind:'concede'}),/terminou/);
  assert.equal(step(game(),'b',{kind:'concede'}).winner,'a');assert.throws(()=>step(game(),'stranger',{kind:'concede'}),/participa/);
 });

@@ -30,13 +30,25 @@ test('deck editor separates owned Fusion cards from the Main Deck and preserves 
 test('deadline awards W.O. at the exact boundary, no interaction is needed for sweep, old actions cannot execute, controls are removed',()=>{
  const r=store.createTraining('101','g','c');const deadline=r.updated+store.DECISION_TIMEOUT_MS;const loser=engine.decisionPlayer(r.state);assert.equal(store.getDuel(r.id,deadline-1).status,'playing');
  assert.equal(store.expireDueDuels(deadline).find(x=>x.id===r.id).status,'finished');const ended=store.getDuel(r.id);assert.equal(ended.state.winner,r.state.players[1-loser].id);assert.match(ended.state.reason,/W.O./);assert.equal(ui.duelPublicMessage(ended).components.length,0);assert.equal(ui.duelPrivateMessage(ended,'101').components.length,0);assert.deepEqual(engine.legalActions(ended.state,'101'),[]);assert.throws(()=>store.performDuelAction(r.id,'101','g',r.revision,0),/ativo/);assert.equal(store.currentDuel('101'),undefined);
- const response=game();response.phase='response';response.priority=1;assert.equal(engine.timeoutDuel(response).winner,'101');response.phase='choice';response.choice={actor:1,targets:[]};assert.equal(engine.timeoutDuel(response).winner,'101');
+ const response=game();response.phase='response';response.priority=1;assert.equal(engine.timeoutDuel(response).winner,'101');response.phase='choice';response.players[0].monsters=[m('timeout-target')];response.choice={actor:1,targets:['timeout-target']};assert.equal(engine.timeoutDuel(response).winner,'101');
 });
 test('tutorial is playable without granting cards; cemetery and own Extra Deck can be inspected without leaking opponents extra',()=>{
  db.createPlayer('103','Tutorial');const inventory=db.getCollection('103');const r=store.createTraining('103','g','c',true);assert.ok(engine.legalActions(r.state,'103').some(a=>a.kind==='fusion'));assert.ok(engine.legalActions(r.state,'103').some(a=>a.kind==='field'));assert.deepEqual(db.getCollection('103'),inventory);
+ const tutorialIds=new Set([...r.state.players[0].deck,...r.state.players[0].hand].map(c=>c.id));
+ for(const id of ['54652250','07089711','31560081','28933734','60694662','11384280','26202165','78010363','77585513','54098121','77414722','03819470','83011277','55144522','12580477','05318639','14087893','53582587','56120475','29401950'])assert.ok(tutorialIds.has(id),`tutorial missing ${id}`);assert.equal(tutorialIds.size,24);
  const mine=JSON.stringify(ui.duelZonesMessage(r,'103').embeds[0].toJSON());assert.match(mine,/Espadachim das Chamas/);const outsider=JSON.stringify(ui.duelZonesMessage(r,'stranger').embeds[0].toJSON());assert.ok(!outsider.includes('Espadachim das Chamas'));assert.ok(!JSON.stringify(ui.publicDuelData(r.state)).includes('45231177'));
 });
 test('deck exhaustion wins only when a required draw fails, not when the last card has just been drawn',()=>{
  let s=game();s.players[0].deck=[];assert.ok(engine.legalActions(s,'101').length);assert.notEqual(s.phase,'finished');s.players[1].deck=[];s=use(s,'101','end');assert.equal(s.winner,'101');assert.match(s.reason,/comprar/);
+});
+test('Trap Hole responds to both Normal and Flip Summons of monsters with at least 1000 ATK',()=>{
+ let s=game();s.players[1].backrow=[{uid:'trap-hole',id:'04206964',faceUp:false,setTurn:0}];
+ s.players[0].monsters=[{...m('flip-monster'),faceUp:false,position:'def'}];
+ s=use(s,'101','position',a=>a.mode==='flip');
+ assert.ok(engine.legalActions(s,'102').some(a=>a.kind==='trap'&&a.card==='trap-hole'));
+ let normal=game();normal.players[1].backrow=[{uid:'trap-hole',id:'04206964',faceUp:false,setTurn:0}];
+ normal.players[0].hand.push({uid:'trap-target',id:'91152256'});
+ normal=use(normal,'101','summon',a=>a.position==='atk'&&a.card==='trap-target');
+ assert.ok(engine.legalActions(normal,'102').some(a=>a.kind==='trap'&&a.card==='trap-hole'));
 });
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});

@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "source": {
+    "provider": "YGOJSON",
+    "archiveURL": "https://github.com/iconmaster5326/YGOJSON/releases/download/v1/aggregate.zip",
+    "importerSHA256": "39d959ff5ac03251b11bf251da0bfb8ca7e248b2da2b59ef30301c373dec9d2d",
+    "retrievedOn": "2026-10-25",
+    "inputs": {
+      "cards": {
+        "sha256": "39600195b984943b997bf999a61a7a04e9a141f8c9852c3f7ce36aaa550d8968",
+        "bytes": 109600335
+      },
+      "sets": {
+        "sha256": "d1be6ed7aeddcf69bbc3e928e162d7f495c1bf7cd3f93ace9b96462d3eca7376",
+        "bytes": 124120820
+      }
+    },
+    "note": "release asset URL is mutable; hashes identify the exact supplied snapshot"
+  },
+  "window": {
+    "start": "1999-01-01",
+    "cutoff": "2004-10-01",
+    "inclusive": true
+  },
+  "files": {
+    "cards.json": {
+      "sha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a",
+      "bytes": 1205709
+    },
+    "releases.json": {
+      "sha256": "b0a4a66609c3986f8b8a4b087c0973c739ad1c57e31becfab820ef2caab96603",
+      "bytes": 778420
+    },
+    "audit.json": {
+      "sha256": "11a80c13d114429f1cf1ba0519c36033dae93998958e4ec3dd3f2f96a856be18",
+      "bytes": 296055
+    },
+    "cards.csv": {
+      "sha256": "51ecdbcea9744ab9acd4f47fd523063157b82fe3bee6b6b5d43a75e3be0837f9",
+      "bytes": 345781
+    },
+    "releases.csv": {
+      "sha256": "7ce74ff9c81bbfa847b0ee72458bc40060799ad8476f96207350cda5ca8ca5dc",
+      "bytes": 51076
+    }
+  }
+}

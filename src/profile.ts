@@ -1,4 +1,5 @@
 import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from 'discord.js';
+import {azure} from './duelTheme';
 import type { Player } from './database';
 import { isStarterDeck, starterDecks } from './starterDecks';
 import fs from 'node:fs';
@@ -26,14 +27,14 @@ export async function profileMessage(player: Player, avatar: string, editable = 
   const filename = 'ficha-duelista.png';
   const files = [new AttachmentBuilder(bytes, { name: filename,
     description: `${player.character_name || player.username}. Nível ${player.duelist_level}. ${player.xp} XP. ${player.dp} DP. Estilo: ${deck?.name ?? 'Não escolhido'}. ${player.biography}`.slice(0,1024) })];
-  const embed = new EmbedBuilder().setColor(themes[player.theme as keyof typeof themes] ?? themes.ametista)
+  const embed = new EmbedBuilder().setColor(themes[player.theme as keyof typeof themes]??themes.oceano).setTitle(player.character_name||player.username).setDescription(player.biography||'Pronto para sua próxima jogada.').addFields({name:'Nível',value:String(player.duelist_level),inline:true},{name:'Experiência',value:`${player.xp} XP`,inline:true},{name:'Carteira',value:`${player.dp} DP`,inline:true},{name:'Estilo inicial',value:deck?.name??'Escolha com /start'}).setFooter({text:'Seu personagem • Retrato e cores personalizáveis'})
     .setImage(`attachment://${filename}`);
   const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder().setCustomId(`profile:refresh:${player.discord_id}`).setLabel('Atualizar').setEmoji('🔄').setStyle(ButtonStyle.Secondary),
-    new ButtonBuilder().setCustomId(`profile:edit:${player.discord_id}`).setLabel('Personalizar').setEmoji('🎨').setStyle(ButtonStyle.Primary),
-    new ButtonBuilder().setCustomId(`collection:page:${player.discord_id}:1`).setLabel('Coleção').setStyle(ButtonStyle.Secondary),
-    new ButtonBuilder().setCustomId(`deck:view:${player.discord_id}:1:0:1:`).setLabel('Decks').setStyle(ButtonStyle.Secondary),
-    new ButtonBuilder().setCustomId(`profile:help:${player.discord_id}`).setLabel('Ajuda').setStyle(ButtonStyle.Secondary)
+    new ButtonBuilder().setCustomId(`profile:edit:${player.discord_id}`).setLabel('Editar perfil').setEmoji('🎨').setStyle(ButtonStyle.Primary),
+    new ButtonBuilder().setCustomId(`collection:page:${player.discord_id}:1`).setLabel('Minha coleção').setStyle(ButtonStyle.Secondary),
+    new ButtonBuilder().setCustomId(`deck:view:${player.discord_id}:1:0:1:`).setLabel('Meus decks').setStyle(ButtonStyle.Secondary),
+    new ButtonBuilder().setCustomId(`profile:help:${player.discord_id}`).setLabel('Como jogar').setStyle(ButtonStyle.Secondary)
   );
   return { embeds: [embed], files, components: editable ? [row] : [], allowedMentions: { parse: [] as never[] } };
 }

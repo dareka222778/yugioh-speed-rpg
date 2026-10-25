@@ -1,5 +1,14 @@
-import {ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
-import {cards, type Card} from './cardCatalog';
+import {renderCommandHeader} from './commandHeader';
+import {cardRulesPT,racePT,attributePT} from './cardText';
+import {ActionRowBuilder,AttachmentBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
+import {type Card} from './cardCatalog';
+import {engineCatalog,enabledCardIds} from './effectRegistry';
+/** Public collection and search are intentionally restricted to executable RPG
+ * cards, even when metadata for a future effect is already staged.
+ */
+const enabled=new Set<string>(enabledCardIds);
+const cards=engineCatalog.filter(card=>enabled.has(card.id));
+import {getMonsterEffect} from './monsterEffects';
 export const PAGE_SIZE=6;
 const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const byId=new Map(cards.map(c=>[c.id,c]));
@@ -11,9 +20,9 @@ export function searchCards(query:string): Card[] {
 export function exactCard(query:string): Card|undefined {
   return cards.find(c=>c.id===query.trim()||normalize(c.name)===normalize(query)||normalize(c.englishName)===normalize(query));
 }
-const attributes:Record<string,string>={EARTH:'TERRA',WIND:'VENTO',DARK:'TREVAS',LIGHT:'LUZ',FIRE:'FOGO',WATER:'ÁGUA'};
-const races:Record<string,string>={Warrior:'Guerreiro','Beast-Warrior':'Besta-Guerreira',Spellcaster:'Mago',Dragon:'Dragão'};
-export function kindLabel(c:Card) {return c.fusion?'Monstro de Fusão':c.field?'Magia de Campo':c.kind==='monster'?'Monstro Normal':c.kind==='spell'?'Magia':'Armadilha';}
+const attributes=attributePT;
+const races=racePT;
+export function kindLabel(c:Card) {return c.fusion?'Monstro de Fusão':c.field?'Magia de Campo':c.kind==='monster'?(getMonsterEffect(c.id)?'Monstro de Efeito':'Monstro Normal'):c.kind==='spell'?'Magia':'Armadilha';}
 export function collectionMessage(owner:string, inventory:{card_key:string;quantity:number}[], requestedPage=1) {
   const owned=inventory.map(row=>({card:getCard(row.card_key),...row}));
   const known=owned.filter(row=>row.card).sort((a,b)=>a.card!.name.localeCompare(b.card!.name,'pt-BR'));
@@ -21,9 +30,9 @@ export function collectionMessage(owner:string, inventory:{card_key:string;quant
   const page=Math.min(pages,Math.max(1,Number.isSafeInteger(requestedPage)?requestedPage:1));
   const selected=known.slice((page-1)*PAGE_SIZE,page*PAGE_SIZE);
   const total=inventory.reduce((sum,row)=>sum+row.quantity,0);
-  const embed=new EmbedBuilder().setColor(0x75caff).setTitle('Sua coleção de cartas')
+  const embed=new EmbedBuilder().setColor(0x75caff).setTitle('Minha coleção')
     .setDescription(`**${total} cartas • ${known.length} diferentes**\n${selected.length?'Escolha uma carta no menu para ver os detalhes.':'Escolha seu conjunto inicial com /start.'}`)
-    .setFooter({text:`Página ${page}/${pages} • Fase 2 • Duelo básico disponível com /duelo`});
+    .setFooter({text:`Página ${page}/${pages} • Selecione uma carta para ampliar`});
   for(const row of selected){const c=row.card!;embed.addFields({name:`${row.quantity}× ${c.name}`,value:`\`${c.id}\` · ${kindLabel(c)}${c.kind==='monster'?` · Nível ${c.level} · ATK ${c.atk} / DEF ${c.defense}`:''}`});}
   const unknown=owned.filter(row=>!row.card).length;
   if(unknown)embed.addFields({name:'Registros preservados',value:`${unknown} identificadores antigos fora deste catálogo. Nenhuma carta foi apagada.`});
@@ -40,7 +49,15 @@ export function cardMessage(card:Card, quantity=0) {
     .setTitle(card.name).setURL(card.source).setDescription(`${escapeMarkdown(card.englishName)}\n\`ID ${card.id}\``)
     .addFields({name:'Categoria',value:kindLabel(card),inline:true},{name:'Na sua coleção',value:`${quantity} cópia(s)`,inline:true});
   if(card.kind==='monster')embed.addFields({name:'Tipo / Atributo',value:`${races[card.race!]??card.race} / ${attributes[card.attribute!]??card.attribute}`},{name:'Nível',value:String(card.level),inline:true},{name:'ATK',value:String(card.atk),inline:true},{name:'DEF',value:String(card.defense),inline:true});
-  embed.addFields({name:'Resumo',value:card.summary},{name:'Disponibilidade',value:'Disponível no motor básico 1v1. Monstros normais, efeitos iniciais, Sogen e Fusão do Espadachim das Chamas implementados.'});
+  embed.addFields({name:'Regras em português • adaptação do RPG',value:cardRulesPT(card.id)},{name:'Disponibilidade',value:'Carta habilitada no motor. O texto explica o comportamento implementado nesta adaptação.'});
   embed.setFooter({text:'Catálogo inicial • Dados YAML Yugi / referência Konami • Projeto não oficial'});
   return {embeds:[embed],allowedMentions:{parse:[] as never[]}};
+}
+
+export async function visualCollectionMessage(owner:string,inventory:{card_key:string;quantity:number}[],page=1){
+ const message=collectionMessage(owner,inventory,page);
+ try{const total=inventory.reduce((n,c)=>n+c.quantity,0),different=inventory.filter(c=>getCard(c.card_key)).length;
+  const bytes=await renderCommandHeader('MINHA COLEÇÃO','Suas cartas, prontas para a próxima jogada.',[{label:'Cartas',value:String(total)},{label:'Diferentes',value:String(different)},{label:'Deck principal',value:'20–30 cartas'}]);
+  message.embeds[0].setImage('attachment://minha-colecao.png');return {...message,attachments:[],files:[new AttachmentBuilder(bytes,{name:'minha-colecao.png',description:`Coleção com ${total} cartas; ${different} diferentes.`})]};
+ }catch{return message;}
 }

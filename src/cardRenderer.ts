@@ -1,3 +1,4 @@
+import {azure} from './duelTheme';
 import sharp from 'sharp';
 import { outlineText } from './fontPaths';
 import type { Player } from './database';
@@ -46,14 +47,14 @@ async function draw(p: Player, portrait?: Buffer) {
   const stats = [['NÍVEL',p.duelist_level.toLocaleString('pt-BR')],['EXPERIÊNCIA',`${p.xp.toLocaleString('pt-BR')} XP`],['CARTEIRA',`${p.dp.toLocaleString('pt-BR')} DP`]];
   const statSVG = stats.map(([label,value],i)=>{
     const x=444+i*166;
-    return `<rect x="${x}" y="315" width="154" height="98" rx="14" fill="#171f32" stroke="#2c374e"/>${text(x+16,342,label,13,'#a8b4cb',700)}${text(x+16,385,value,value.length>10?18:25,'#ffffff',700,122)}`;
+    return `<rect x="${x}" y="315" width="154" height="98" rx="14" fill="${azure.surface}" stroke="${azure.lineMuted}"/>${text(x+16,342,label,13,'#a8b4cb',700)}${text(x+16,385,value,value.length>10?18:25,'#ffffff',700,122)}`;
   }).join('');
   const placeholder = `<circle cx="222" cy="285" r="65" fill="#34425c"/><path d="M100 509 Q105 365 222 365 Q339 365 344 509Z" fill="#34425c"/>${text(118,556,'SEU PERSONAGEM',18,'#99aac4',700)}`;
-  const bg = `<svg width="1000" height="760" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#19243a"/><stop offset="1" stop-color="#090e1a"/></linearGradient></defs>
-  <rect width="1000" height="760" rx="28" fill="url(#bg)"/><rect x="1" y="1" width="998" height="758" rx="28" fill="none" stroke="#34425b" stroke-width="2"/>
+  const bg = `<svg width="1000" height="760" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="${azure.navy}"/><stop offset="1" stop-color="${azure.deep}"/></linearGradient></defs>
+  <rect width="1000" height="760" rx="28" fill="url(#bg)"/><rect x="1" y="1" width="998" height="758" rx="28" fill="none" stroke="${azure.lineMuted}" stroke-width="2"/>
   <path d="M730 0L1000 270M810 0L1000 190M0 600L160 760" stroke="${color}" stroke-opacity=".12" stroke-width="2"/>
   <rect x="40" y="40" width="6" height="34" rx="3" fill="${color}"/>${text(62,65,'ARQUIVO DE DUELISTAS',21,'#e6ecfa',700)}${text(790,65,'SPEED RPG',19,color,700)}
-  <rect x="40" y="108" width="364" height="568" rx="20" fill="#111b2c" stroke="#3a4a66"/>
+  <rect x="40" y="108" width="364" height="568" rx="20" fill="#102D4D" stroke="${azure.lineMuted}"/>
   ${placeholder}<rect x="40" y="650" width="364" height="26" rx="10" fill="${color}" fill-opacity=".2"/>
   ${text(444,139,'IDENTIDADE DO PERSONAGEM',14,color,700)}
   ${nameLines.map((line,i)=>text(444,195+i*46,line,38,'#ffffff',700,490)).join('')}
@@ -61,11 +62,11 @@ async function draw(p: Player, portrait?: Buffer) {
   ${statSVG}${text(444,458,'ESTILO INICIAL',14,color,700)}${text(444,496,deck,28,'#ffffff',700)}
   <path d="M444 523H944" stroke="#34415a"/>
   ${bio.map((line,i)=>text(444,557+i*(bioSize === 19 ? 23 : 28),line,bioSize,'#c4cfe1',400,500)).join('')}
-  <path d="M40 704H960" stroke="#2a3650"/>${text(40,735,'SUA HISTÓRIA. SUA PRÓXIMA JOGADA.',14,'#9cabc5',700)}${text(827,735,'PERFIL • V0.3',13,color,700)}</svg>`;
+  <path d="M40 704H960" stroke="#2a3650"/>${text(40,735,'SUA HISTÓRIA. SUA PRÓXIMA JOGADA.',14,'#9cabc5',700)}${text(827,735,'SEU DUELISTA',13,color,700)}</svg>`;
   const overlays: sharp.OverlayOptions[] = [];
   if (portrait) {
     try {
-      const photo = await sharp(portrait,{limitInputPixels:16_000_000,failOn:'error'}).rotate().resize(340,540,{fit:'contain',background:'#111b2c'}).png().toBuffer();
+      const photo = await sharp(portrait,{limitInputPixels:16_000_000,failOn:'error'}).rotate().resize(340,540,{fit:'contain',background:'#102D4D'}).png().toBuffer();
       overlays.push({input:photo,left:52,top:120});
     } catch { /* A damaged legacy portrait never prevents viewing the profile. */ }
   }

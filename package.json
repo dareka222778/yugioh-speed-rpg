@@ -1,6 +1,6 @@
 {
   "name": "yugioh-speed-rpg",
-  "version": "0.7.2",
+  "version": "0.17.1",
   "private": true,
   "description": "Discord RPG bot inspired by Yu-Gi-Oh! Speed Duel",
   "main": "dist/index.js",
@@ -9,10 +9,23 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "check": "tsc --noEmit",
-    "test": "npm run build && node --test tests/*.test.cjs"
+    "test": "npm run build && node scripts/run-tests-isolated.cjs",
+    "progress": "node scripts/project-progress.cjs",
+    "audit:engine": "node scripts/audit-duel-engine.cjs --games 300",
+    "check:cards": "node scripts/check-card-certification.cjs",
+    "audit:history": "node scripts/import-historical.cjs --verify catalog/historical/2004-10-01 && node scripts/historical-replay.cjs --verify && node scripts/audit-historical-admission.cjs --write",
+    "audit:cards:matrix": "node scripts/audit-card-matrix.cjs --write",
+    "coverage:engine": "node scripts/engine-coverage.cjs",
+    "accept:engine": "npm run build && node scripts/accept-engine.cjs",
+    "audit:tag": "npm run build && node scripts/audit-tag.cjs",
+    "test:host": "npm run build && node scripts/run-tests-isolated.cjs --serial",
+    "audit:tag-sessions": "npm run build && node scripts/audit-tag-sessions.cjs",
+    "audit:tag-classic": "npm run build && node scripts/audit-tag-classic.cjs",
+    "audit:tag-classic-sessions": "npm run build && node scripts/audit-tag-sessions.cjs --classic",
+    "audit:tag-training": "npm run build && node scripts/audit-tag-training.cjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   },
   "dependencies": {
     "better-sqlite3": "^11.8.1",
@@ -25,5 +38,10 @@
     "@types/node": "^22.15.3",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
+  },
+  "allowScripts": {
+    "better-sqlite3@11.10.0": true,
+    "sharp@0.34.5": true,
+    "esbuild@0.28.2": true
   }
 }
