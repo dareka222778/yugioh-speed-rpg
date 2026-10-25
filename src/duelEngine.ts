@@ -13,6 +13,7 @@ import {getMonsterEffect,getMonsterDefinition,canActivateMonsterEffect,payMonste
 import {getPlayableCard as getCard} from './effectRegistry';
 import {enabledCardIds,getEffect,isQuickPlaySpell} from './effectRegistry';
 import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips} from './classicEffects';
+import {specialSummonFromPile} from './monsterEntry';
 export type CardRef={uid:string;id:string;properlySummoned?:boolean};
 export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
 export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean;equippedTo?:string};
@@ -627,11 +628,10 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    if(action.target!=='__skip__'){
     const allowed=searchDeckTargets(s,index,'atk',op.maximumAtk,op.attribute);
     if(p.monsters.length>=RULES_PROFILE.monsterZones||!allowed.includes(action.target))throw new Error('Monstro inelegível para Invocação-Especial.');
-    const deck=p.deck,i=deck.findIndex(c=>c.uid===action.target);
-    const [found]=deck.splice(i,1);
-    p.monsters.push({...found,owner:index,faceUp:true,position:'atk',entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});
-    shuffleDuel(deck,s);
-    note(s,`Tomate Místico Invocou ${card(found.id).name} do Deck.`);
+    const recruited=specialSummonFromPile(s,index,index,'deck',action.target);
+    if(!recruited)throw new Error('Monstro inelegível para Invocação-Especial.');
+    shuffleDuel(p.deck,s);
+    note(s,`Tomate Místico Invocou ${card(recruited.id).name} do Deck.`);
    }else note(s,'O jogador recusou a Invocação-Especial de Tomate Místico.');
    s.choice=undefined;s.pending={kind:'none'};s.phase=s.resume;
    if(s.chainRoot){
