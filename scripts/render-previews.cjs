@@ -53,6 +53,8 @@ async function run(){
  const cardModel={...heroModel,view:'card',page:0};
  const deck={name:'Deck Azul · Clássico',slot:1,active:false,errors:[],total:20,extraTotal:0,items:[],revision:1};
  const previews=[
+  ['perfil-azul.png',await require('../dist/cardRenderer').renderCard({discord_id:'100',username:'Duelista',character_name:'Kairos',biography:'Cada carta guarda uma possibilidade. A próxima jogada é sua.',theme:'oceano',duelist_level:4,xp:350,dp:1250,starter_deck:'warrior'})],
+  ['colecao-resumo.png',await require('../dist/commandHeader').renderCommandHeader('MINHA COLEÇÃO','Suas cartas, prontas para a próxima jogada.',[{label:'Cartas',value:'42'},{label:'Diferentes',value:'27'},{label:'Deck principal',value:'20–30 cartas'}])],
   ['arena-publica.png',await renderDuel(s,undefined,noNetwork)],
   ['arena-privada.png',await renderDuel(s,'preview',noNetwork)],
   ['duelista-kaiba.png',await renderNPC(heroModel)],

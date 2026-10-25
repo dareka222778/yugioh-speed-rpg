@@ -1,3 +1,4 @@
+import {renderOwnedCard} from './cardInspector';
 import sharp from 'sharp';
 import {outlineText as text} from './fontPaths';
 import {npcPortraits} from './npcPortraits';
@@ -12,7 +13,7 @@ export const npcThemes:Record<string,{color:string;dark:string;title:string;line
 export type GalleryView='hero'|'deck'|'card';
 export type GalleryCard=Card&{slot:string;isExtra:boolean;category:string};
 export type GalleryModel={id:string;name:string;index:number;style:string;description:string;won:boolean;reward:string;daily:boolean;dailyClaimed:boolean;cards:GalleryCard[];page:number;view:GalleryView;mainCount:number;extraCount:number};
-function base(m:GalleryModel,height:number){const t=npcThemes[m.id];let lines='';for(let i=-2;i<12;i++)lines+=`<path d="M${i*180} 0L${i*180-440} ${height}" stroke="${t.color}" stroke-opacity=".045" stroke-width="2"/>`;return `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="${height}"><defs><radialGradient id="glow"><stop stop-color="${t.dark}"/><stop offset="1" stop-color="${azure.deep}"/></radialGradient><linearGradient id="shade"><stop stop-color="#08101f"/><stop offset="1" stop-color="#08101f" stop-opacity="0"/></linearGradient></defs><rect width="1280" height="${height}" fill="${azure.deep}"/><ellipse cx="960" cy="340" rx="650" ry="620" fill="url(#glow)"/>${lines}<path d="M0 7H1280" stroke="${azure.primary}" stroke-width="7"/>${text(50,53,'DUELIST WORLD',21,azure.text,700)}${text(965,53,'SPEED RPG  /  DM',17,t.color,700)}<path d="M50 76H1230" stroke="#8fd6ff" stroke-opacity=".32"/>`;}
+function base(m:GalleryModel,height:number){const t=npcThemes[m.id];let lines='';for(let i=-2;i<12;i++)lines+=`<path d="M${i*180} 0L${i*180-440} ${height}" stroke="${t.color}" stroke-opacity=".045" stroke-width="2"/>`;return `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="${height}"><defs><radialGradient id="glow"><stop stop-color="${t.dark}"/><stop offset="1" stop-color="${azure.deep}"/></radialGradient><linearGradient id="shade"><stop stop-color="#08101f"/><stop offset="1" stop-color="#08101f" stop-opacity="0"/></linearGradient></defs><rect width="1280" height="${height}" fill="${azure.deep}"/><ellipse cx="960" cy="340" rx="650" ry="620" fill="url(#glow)"/>${lines}<path d="M0 7H1280" stroke="${azure.primary}" stroke-width="7"/>${text(50,53,'MUNDO DOS DUELISTAS',21,azure.text,700)}${text(965,53,'DUELISTAS  /  CLÁSSICO',17,t.color,700)}<path d="M50 76H1230" stroke="#8fd6ff" stroke-opacity=".32"/>`;}
 function svg(bytes:string){return Buffer.from(bytes+'</svg>');}
 const rendered=new Map<string,Buffer>(),pending=new Map<string,Promise<Buffer>>();
 export async function renderNPC(m:GalleryModel):Promise<Buffer>{
@@ -21,6 +22,7 @@ export async function renderNPC(m:GalleryModel):Promise<Buffer>{
 }
 async function render(m:GalleryModel){
  const t=npcThemes[m.id],layers:sharp.OverlayOptions[]=[];
+ if(m.view==='card'){const c=m.cards[m.page];return renderOwnedCard({id:c.id,deckName:m.name,inDeck:m.cards.filter(x=>x.id===c.id).length,owned:0,index:m.page,total:m.cards.length,heading:'DUELISTAS     /     CARTA',detail:`${m.cards.filter(x=>x.id===c.id).length} CÓPIA(S) NO DECK DE ${m.name}`},getCardArt);}
  if(m.view==='hero'){
   const portrait=(await sharp(Buffer.from(npcPortraits[m.id],'base64')).png().toBuffer()).toString('base64');
   let s=base(m,720);s+=`<path d="M850 76H1210L940 650H580Z" fill="${t.color}" opacity=".065"/><circle cx="968" cy="340" r="242" fill="none" stroke="${t.color}" opacity=".16" stroke-width="2"/><circle cx="968" cy="340" r="215" fill="none" stroke="${t.color}" opacity=".1" stroke-width="20"/>`;
@@ -34,20 +36,7 @@ async function render(m:GalleryModel){
   layers.push({input:svg(s),left:0,top:0});
   return sharp({create:{width:1280,height:720,channels:4,background:'#07162B'}}).composite(layers).png().toBuffer();
  }
- const single=m.view==='card';
- let s=base(m,single?800:900);s+=text(50,126,m.name,34,'#ffffff',700)+text(50,158,`DECK JOGÁVEL · ${m.mainCount} CARTAS + ${m.extraCount} ADICIONAL`,18,t.color,700);
- if(single){
-  const c=m.cards[m.page];let art=await getCardArt(c.id);
-  s+=`<rect x="50" y="187" width="400" height="580" rx="12" fill="#173B60" stroke="${t.color}" stroke-opacity=".5"/>`;
-  s+=text(510,230,`CARD VIEW  •  ${String(m.page+1).padStart(2,'0')} / ${m.cards.length}`,18,azure.primaryBright,700)+text(510,292,c.name,35,'#ffffff',700,705)+text(510,326,c.englishName,19,'#B0D1EA',400,700);
-  s+=text(510,390,c.slot+'  ·  '+c.category,19,t.color,700);
-  if(c.kind==='monster')s+=text(510,442,`${c.attribute??'—'} · ${c.race??'—'}`,20,'#d3def0',400,700)+text(510,494,`NÍVEL ${c.level??'?'}    ATK ${c.atk??'?'}    DEF ${c.defense??'?'}`,26,'#ffffff',700,700);
-  const wrapped=(c.summary||'Sem efeito.').replace(/\\s+/g,' ').match(/.{1,53}(?:\\s|$)|\\S+/g)?.map(line=>line.trim()).slice(0,4)??[];
-  s+=`<path d="M510 546H1210" stroke="${t.color}" stroke-opacity=".25"/>`+text(510,586,'EFEITO / TEXTO DO RPG',18,t.color,700);
-  for(const [i,line] of wrapped.entries())s+=text(510,625+i*26,line,17,'#BCD5ED',400,695);
-  s+=text(510,743,'◀ ANTERIOR   /   DETALHES DA CARTA   /   PRÓXIMA ▶',18,azure.muted,400,700);
-  layers.push({input:svg(s),left:0,top:0});if(art)layers.push({input:await sharp(art).resize(390,568,{fit:'contain',background:'#173B60'}).toBuffer(),left:55,top:193});
- }else{
+ let s=base(m,900);s+=text(50,126,m.name,34,'#ffffff',700)+text(50,158,`DECK JOGÁVEL · ${m.mainCount} CARTAS + ${m.extraCount} ADICIONAL`,18,t.color,700);
   const pageCards=m.cards.slice(m.page*10,m.page*10+10);const arts=await Promise.all(pageCards.map(c=>getCardArt(c.id)));
   // Gallery has no non-playable cards; every displayed card is in this NPC's actual duel loadout.
   for(let j=0;j<pageCards.length;j++){const c=pageCards[j],x=50+(j%5)*240,y=190+Math.floor(j/5)*322;
@@ -57,6 +46,5 @@ async function render(m:GalleryModel){
   }
   s+=text(50,869,`PÁGINA ${m.page+1} / ${Math.ceil(m.cards.length/10)}   ·   Escolha uma carta no menu para ampliar.`,17,'#BCD5ED',400);
   layers.unshift({input:svg(s),left:0,top:0});
- }
- return sharp({create:{width:1280,height:single?800:900,channels:4,background:'#07162B'}}).composite(layers).png().toBuffer();
+ return sharp({create:{width:1280,height:900,channels:4,background:'#07162B'}}).composite(layers).png().toBuffer();
 }

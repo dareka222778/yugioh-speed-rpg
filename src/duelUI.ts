@@ -1,3 +1,4 @@
+import {renderOwnedCard} from './cardInspector';
 import {cardRulesPT,racePT,attributePT} from './cardText';
 import sharp from 'sharp';
 import {ActionRowBuilder,AttachmentBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
@@ -102,7 +103,8 @@ async function cardArtPayload(model:ReturnType<typeof duelCardMessage>){
   if(art){
    const attachment='carta-ampliada.png';
    payload.embeds[0].setImage(`attachment://${attachment}`);
-   return {...payload,files:[new AttachmentBuilder(art,{name:attachment})]};
+   const bytes=await renderOwnedCard({id:cardId,deckName:'Consulta privada do duelo',inDeck:0,owned:0,index:0,total:1,heading:'DUELO     /     CARTA',detail:payload.embeds[0].toJSON().footer?.text??'SOMENTE CONSULTA'},async()=>art);
+   return {...payload,files:[new AttachmentBuilder(bytes,{name:attachment})]};
   }
  }catch{/* A complete accessible card inspector remains without external art. */}
  return {...payload,files:[]};

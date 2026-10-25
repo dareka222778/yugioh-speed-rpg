@@ -1,5 +1,6 @@
+import {renderCommandHeader} from './commandHeader';
 import {cardRulesPT,racePT,attributePT} from './cardText';
-import {ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
+import {ActionRowBuilder,AttachmentBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
 import {type Card} from './cardCatalog';
 import {engineCatalog,enabledCardIds} from './effectRegistry';
 /** Public collection and search are intentionally restricted to executable RPG
@@ -29,9 +30,9 @@ export function collectionMessage(owner:string, inventory:{card_key:string;quant
   const page=Math.min(pages,Math.max(1,Number.isSafeInteger(requestedPage)?requestedPage:1));
   const selected=known.slice((page-1)*PAGE_SIZE,page*PAGE_SIZE);
   const total=inventory.reduce((sum,row)=>sum+row.quantity,0);
-  const embed=new EmbedBuilder().setColor(0x75caff).setTitle('Sua coleção de cartas')
+  const embed=new EmbedBuilder().setColor(0x75caff).setTitle('Minha coleção')
     .setDescription(`**${total} cartas • ${known.length} diferentes**\n${selected.length?'Escolha uma carta no menu para ver os detalhes.':'Escolha seu conjunto inicial com /start.'}`)
-    .setFooter({text:`Página ${page}/${pages} • Fase 2 • Duelo básico disponível com /duelo`});
+    .setFooter({text:`Página ${page}/${pages} • Selecione uma carta para ampliar`});
   for(const row of selected){const c=row.card!;embed.addFields({name:`${row.quantity}× ${c.name}`,value:`\`${c.id}\` · ${kindLabel(c)}${c.kind==='monster'?` · Nível ${c.level} · ATK ${c.atk} / DEF ${c.defense}`:''}`});}
   const unknown=owned.filter(row=>!row.card).length;
   if(unknown)embed.addFields({name:'Registros preservados',value:`${unknown} identificadores antigos fora deste catálogo. Nenhuma carta foi apagada.`});
@@ -51,4 +52,12 @@ export function cardMessage(card:Card, quantity=0) {
   embed.addFields({name:'Regras em português • adaptação do RPG',value:cardRulesPT(card.id)},{name:'Disponibilidade',value:'Carta habilitada no motor. O texto explica o comportamento implementado nesta adaptação.'});
   embed.setFooter({text:'Catálogo inicial • Dados YAML Yugi / referência Konami • Projeto não oficial'});
   return {embeds:[embed],allowedMentions:{parse:[] as never[]}};
+}
+
+export async function visualCollectionMessage(owner:string,inventory:{card_key:string;quantity:number}[],page=1){
+ const message=collectionMessage(owner,inventory,page);
+ try{const total=inventory.reduce((n,c)=>n+c.quantity,0),different=inventory.filter(c=>getCard(c.card_key)).length;
+  const bytes=await renderCommandHeader('MINHA COLEÇÃO','Suas cartas, prontas para a próxima jogada.',[{label:'Cartas',value:String(total)},{label:'Diferentes',value:String(different)},{label:'Deck principal',value:'20–30 cartas'}]);
+  message.embeds[0].setImage('attachment://minha-colecao.png');return {...message,attachments:[],files:[new AttachmentBuilder(bytes,{name:'minha-colecao.png',description:`Coleção com ${total} cartas; ${different} diferentes.`})]};
+ }catch{return message;}
 }

@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import {helpMessage} from './commandUI';
+import {renderOwnedCard} from './cardInspector';
 import {handleDuelComponent} from './duelInteraction';
 import {createCardEvent,activateCardEvent,grantEventCards,closeCardEvent,listCardEvents} from './cardEvents';
 import {randomUUID} from 'node:crypto';
@@ -8,7 +10,7 @@ import { isStarterDeck, starterDecks } from './starterDecks';
 import { profileMessage, themes, validateProfile } from './profile';
 import { removePortrait, savePortrait } from './portrait';
 import { renderWelcome } from './cardRenderer';
-import { collectionMessage, cardMessage, searchCards, exactCard, getCard } from './collection';
+import { collectionMessage, visualCollectionMessage, cardMessage, searchCards, exactCard, getCard } from './collection';
 import { getCardArt } from './cardArt';
 import {openDeck,changeDeck,renameDeck,activateDeck,fillInitialDeck} from './decks';
 import {visualDeckMessage,visualDeckCard,getDeckCardIndex} from './deckUI';
@@ -38,6 +40,8 @@ const commands = [
       .addUserOption(o=>o.setName('jogador').setDescription('Destinatário com perfil criado.').setRequired(true)))
     .addSubcommand(c=>c.setName('encerrar').setDescription('Bloqueia novas entregas deste evento.')
       .addStringOption(o=>o.setName('evento').setDescription('ID do evento.').setRequired(true))),
+  new SlashCommandBuilder().setName('ajuda').setDescription('Escolha um assunto e encontre sua próxima jogada.'),
+  new SlashCommandBuilder().setName('regras').setDescription('Consulta as regras do duelo e o limite da mão.'),
   new SlashCommandBuilder().setName('ping').setDescription('Testa se o bot está online.'),
   new SlashCommandBuilder().setName('start').setDescription('Cria seu duelista e escolhe um estilo inicial.'),
   new SlashCommandBuilder().setName('perfil').setDescription('Abre sua ficha de personagem.')
@@ -80,14 +84,14 @@ function createDiscordClient(){
  c.on(Events.InteractionCreate,handleInteraction);return c;
 }
 let client=createDiscordClient();
-const help = '🎨 **Seu personagem, seu estilo**\nUse `/personalizar` para escolher **nome**, **bio**, **cor** e anexar uma **imagem** de até 2 MB (PNG/JPG/WebP).\nO botão Personalizar abre o editor de texto. Para trocar o retrato, use o campo imagem do comando.\n`/perfil publico:True` compartilha sua ficha no canal.\n`/personalizar remover_imagem:True` apaga o retrato.\n\nPara começar: use `/colecao` para ver suas cartas e `/carta` para consultar o catálogo. Use `/deck ver` para montar e ativar seus decks. Depois abra `/npc ver` para desafios com prêmios, `/duelo treino` ou `/duelo desafiar`. Duelos básicos com 4000 PV, mão privada, tributos e quatro efeitos implementados; com Campo, Cemitério e uma Fusão de Deck Adicional; sem Skills.';
+
 // One mutation at a time per player, including network downloads.
 async function showCard(id:string, userId:string) {
   const card=getCard(id);if(!card)throw new Error('Essa carta não faz parte do catálogo inicial.');
   const quantity=getCollection(userId).find(row=>row.card_key===id)?.quantity??0;
   const message=cardMessage(card,quantity);
   const art=await getCardArt(id);
-  if(art){message.embeds[0].setImage(`attachment://carta-${id}.jpg`);return {...message,files:[new AttachmentBuilder(art,{name:`carta-${id}.jpg`,description:card.name})]};}
+  if(art){const bytes=await renderOwnedCard({id,deckName:'Sua coleção',inDeck:0,owned:quantity,index:0,total:1,heading:'CATÁLOGO     /     CARTA',detail:`VOCÊ POSSUI ${quantity} CÓPIA(S)`},async()=>art);message.embeds[0].setImage('attachment://carta-ampliada.png');return {...message,files:[new AttachmentBuilder(bytes,{name:'carta-ampliada.png',description:card.name})]};}
   return message;
 }
 function errorSummary(error:unknown){return error instanceof Error?{name:error.name,message:error.message,code:'code' in error?error.code:undefined}:'Falha desconhecida';}
@@ -119,6 +123,8 @@ async function handleInteraction(i:Interaction) {
   const id = i.user.id;
   const avatar = i.user.displayAvatarURL({ size: 256 });
   try {
+    if(i.isChatInputCommand()&&['ajuda','regras'].includes(i.commandName)){await i.reply({...helpMessage(id,i.commandName==='regras'?'rules':'start'),flags:MessageFlags.Ephemeral});return;}
+    if(i.isStringSelectMenu()&&i.customId.startsWith('help:page:')){if(i.customId.split(':')[2]!==id)throw new Error('Abra sua própria ajuda com /ajuda.');await deferUpdate();await i.editReply(helpMessage(id,i.values[0]));return;}
     if(i.isChatInputCommand()&&i.commandName==='evento'||i.isButton()&&i.customId.startsWith('cardevent:')){
       if(!i.inGuild())throw new Error('Eventos só podem ser administrados em um servidor.');
       const operator={guild:i.guildId!,actor:id,admin:!!i.memberPermissions?.has(PermissionFlagsBits.Administrator)};
@@ -225,7 +231,7 @@ async function handleInteraction(i:Interaction) {
         else if(action==='inicial')fillInitialDeck(id,slot);
         await i.editReply(await visualDeckMessage(id,slot,1,selected));return;
       }
-      if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! Versão 0.8.1 • 130 cartas habilitadas • novos duelos: mão de sete.', flags: MessageFlags.Ephemeral }); return; }
+      if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! Versão 0.9.0 • 130 cartas habilitadas • novos duelos: mão de sete.', flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'start') {
         const player = createPlayer(id, i.user.username);
         if (player.starter_deck) { grantStarterCards(id); await deferReply({ flags: MessageFlags.Ephemeral }); await i.editReply(await profileMessage(player, avatar)); return; }
@@ -251,7 +257,7 @@ async function handleInteraction(i:Interaction) {
       if(i.commandName==='colecao') {
         await deferReply({flags:MessageFlags.Ephemeral});
         grantStarterCards(id);
-        await i.editReply(collectionMessage(id,getCollection(id),i.options.getInteger('pagina')??1));return;
+        await i.editReply(await visualCollectionMessage(id,getCollection(id),i.options.getInteger('pagina')??1));return;
       }
       if (i.commandName === 'perfil') {
         const publicProfile = i.options.getBoolean('publico') ?? false;
@@ -287,7 +293,7 @@ async function handleInteraction(i:Interaction) {
       const [,action,owner,page]=i.customId.split(':');
       if(owner!==id){await i.reply({content:'Abra sua coleção com /colecao.',flags:MessageFlags.Ephemeral});return;}
       if(!getPlayer(id))throw new Error('Crie seu duelista com /start.');
-      if(action==='page'&&i.isButton()){await i.update(collectionMessage(id,getCollection(id),Number(page)));return;}
+      if(action==='page'&&i.isButton()){await deferUpdate();await i.editReply(await visualCollectionMessage(id,getCollection(id),Number(page)));return;}
       if(action==='card'&&i.isStringSelectMenu()){
         const selected=i.values[0];
         if(!getCollection(id).some(row=>row.card_key===selected))throw new Error('Essa carta não está na sua coleção.');
@@ -300,7 +306,7 @@ async function handleInteraction(i:Interaction) {
       if (owner !== id) { await i.reply({ content: 'Abra sua própria ficha com `/perfil`.', flags: MessageFlags.Ephemeral }); return; }
       const player = getPlayer(id);
       if (!player) throw new Error('Crie seu duelista com /start.');
-      if (action === 'help') { await i.reply({ content: help, flags: MessageFlags.Ephemeral }); return; }
+      if (action === 'help') { await i.reply({ ...helpMessage(id), flags: MessageFlags.Ephemeral }); return; }
       if (action === 'refresh') { await deferUpdate(); await i.editReply({ ...await profileMessage(player, avatar), attachments: [] }); return; }
       if (action === 'edit') {
         const modal = new ModalBuilder().setCustomId(`profile-edit:${id}`).setTitle('Seu personagem');
@@ -325,7 +331,7 @@ async function handleInteraction(i:Interaction) {
       await i.editReply({ content: '✦ Personagem atualizado.', ...await profileMessage(getPlayer(id)!, avatar) });
     }
   } catch (error) {
-    console.error('Falha na interação:', {correlation,release:'0.8.1',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
+    console.error('Falha na interação:', {correlation,release:'0.9.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
     const content = error instanceof Error && !('code' in error) ? error.message : `Não foi possível concluir esta ação. Reabra o painel com /duelo ver ou /npc ver. Código de atendimento: ${correlation}.`;
     try {
       if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:'))&&i.deferred&&acknowledgment==='update') await i.followUp({content,flags:MessageFlags.Ephemeral});
@@ -336,7 +342,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
- console.log('Release 0.8.1 | regras speed-rpg-v2 | mão 7 | NPCs revisados | 130 cartas em português');
+ console.log('Release 0.9.0 | regras speed-rpg-v2 | comandos azuis | ajuda e regras | 130 cartas');
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};

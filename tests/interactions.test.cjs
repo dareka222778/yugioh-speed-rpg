@@ -47,7 +47,7 @@ test('autocomplete and card command run through the actual event listener',async
 });
 test('profile collection button opens the collection through the actual event listener',async()=>{
  const b=interaction('button',undefined,{customId:'collection:page:101:1'});await dispatch(b.i);
- assert.equal(b.calls[0][0],'update');assert.match(b.calls[0][1].embeds[0].toJSON().description,/20 cartas/);
+ assert.deepEqual(b.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(b.calls[1][1].embeds[0].toJSON().description,/20 cartas/);
 });
 test('deck command and private controls edit real inventory-backed drafts, block strangers and stale panels',async()=>{
  const options={getSubcommand:()=> 'ver',getInteger:()=>null};
@@ -168,5 +168,11 @@ test('NPC gallery buttons and card selection use the real handler, acknowledge f
  const select=interaction('select',undefined,{user,customId:menu.custom_id,isStringSelectMenu:()=>true,values:['22']});await dispatch(select.i);assert.deepEqual(select.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(select.calls[1][1].embeds[0].toJSON().fields[0].name,/23\/31/);
  const stranger=interaction('button',undefined,{customId:'npc:gallery:109:kaiba:hero:0'});await dispatch(stranger.i);assert.equal(stranger.calls[0][0],'reply');assert.match(stranger.calls[0][1].content,/próprios/);
  const invalid=interaction('button',undefined,{user,customId:'npc:gallery:109:yugi:card:50'});await dispatch(invalid.i);assert.equal(invalid.calls[0][0],'deferUpdate');assert.equal(invalid.calls.at(-1)[0],'followUp');assert.match(invalid.calls.at(-1)[1].content,/inexistente/);
+});
+test('help and rules commands are private, owner-bound and use current hand/reward rules',async()=>{
+ assert.ok(registered.some(c=>c.name==='ajuda'));assert.ok(registered.some(c=>c.name==='regras'));
+ const help=interaction('command','ajuda');await dispatch(help.i);assert.equal(help.calls[0][1].flags,64);const menu=help.calls[0][1].components[0].toJSON().components[0];
+ const select=interaction('select',undefined,{isStringSelectMenu:()=>true,customId:menu.custom_id,values:['rules']});await dispatch(select.i);assert.deepEqual(select.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(JSON.stringify(select.calls[1][1].embeds[0].toJSON()),/Mão de sete/);
+ const other=interaction('select',undefined,{isStringSelectMenu:()=>true,customId:menu.custom_id,values:['events'],user:{id:'999',displayAvatarURL:()=>''}});await dispatch(other.i);assert.match(other.calls.at(-1)[1].content,/própria ajuda/);
 });
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});
