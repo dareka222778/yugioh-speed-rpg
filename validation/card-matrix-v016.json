@@ -1,0 +1,2827 @@
+{
+  "schema": 1,
+  "scope": "registered-and-certified-only",
+  "warning": "Suite references and literal ID mentions do not prove full effect/timing/combination coverage. Historical availability, official Portuguese wording and Discord behavior require separate reviews.",
+  "totals": {
+    "certified": 130,
+    "requiresEffectReview": 58,
+    "indirectTestReferences": 5
+  },
+  "effectKinds": {
+    "attackResponse": 2,
+    "blockAttack": 1,
+    "bookOfMoon": 1,
+    "bottomlessTrapHole": 1,
+    "burn": 3,
+    "cardDestruction": 1,
+    "castleWalls": 1,
+    "changeHeart": 1,
+    "darkHole": 1,
+    "deSpell": 1,
+    "equip": 5,
+    "field": 3,
+    "fissure": 1,
+    "fusion": 1,
+    "giantTrunade": 1,
+    "heal": 4,
+    "justDesserts": 1,
+    "magicJammer": 1,
+    "mirrorForce": 1,
+    "monsterEffect": 12,
+    "monsterReborn": 1,
+    "mysticalSpaceTyphoon": 1,
+    "normal": 71,
+    "polymerization": 1,
+    "potOfGreed": 1,
+    "raigeki": 1,
+    "reinforcements": 1,
+    "removeTrap": 1,
+    "sakuretsuArmor": 1,
+    "sequence": 3,
+    "sevenTools": 1,
+    "shieldSword": 1,
+    "torrentialTribute": 1,
+    "trapHole": 1,
+    "waboku": 1
+  },
+  "cards": [
+    {
+      "id": "47852924",
+      "namePT": "Alma do Puro",
+      "englishName": "Soul of the Pure",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "heal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicExpansionFamilies.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 166,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4347&ope=2&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "60694662",
+      "namePT": "Anjo Esquelético",
+      "englishName": "Skelengel",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "flip",
+      "operation": "draw",
+      "suites": [
+        {
+          "file": "tests/classicFlipEffects.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 341,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4546&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "48365709",
+      "namePT": "Ansatsu",
+      "englishName": "Ansatsu",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 407,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4133&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "24068492",
+      "namePT": "Apenas Sobremesas",
+      "englishName": "Just Desserts",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "justDesserts",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 401,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4865&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "56120475",
+      "namePT": "Armadura Sakuretsu",
+      "englishName": "Sakuretsu Armor",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "sakuretsuArmor",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicSakuretsu.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 354,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5799&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "41949033",
+      "namePT": "Assassino das Trevas",
+      "englishName": "Dark Assailant",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 409,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4247&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "86325596",
+      "namePT": "Barão da Espada Demoníaca",
+      "englishName": "Baron of the Fiend Sword",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 410,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4882&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "30532390",
+      "namePT": "Batedor Celeste",
+      "englishName": "Sky Scout",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 413,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4980&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "13723605",
+      "namePT": "Baú de Tesouros, Devorador de Homens",
+      "englishName": "Man-Eating Treasure Chest",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4883&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "21263083",
+      "namePT": "Besta Pálida",
+      "englishName": "Pale Beast",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4603&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "77414722",
+      "namePT": "Bloqueador de Magia",
+      "englishName": "Magic Jammer",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "magicJammer",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicCounterTraps.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 439,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4862&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "25880422",
+      "namePT": "Bloquear Ataque",
+      "englishName": "Block Attack",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "blockAttack",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 290,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4874&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "91939608",
+      "namePT": "Boneca Marota",
+      "englishName": "Rogue Doll",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 405,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4050&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "78010363",
+      "namePT": "Bruxa da Floresta Negra",
+      "englishName": "Witch of the Black Forest",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "onSentToGrave",
+      "operation": "search",
+      "suites": [
+        {
+          "file": "tests/classicGraveTriggers.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 424,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4580&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "04206964",
+      "namePT": "Buraco Armadilha",
+      "englishName": "Trap Hole",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "trapHole",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicSummonResponses.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 454,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4836&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "29401950",
+      "namePT": "Buraco Armadilha Sem Fundo",
+      "englishName": "Bottomless Trap Hole",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "bottomlessTrapHole",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicBanishment.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 536,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5400&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "53129443",
+      "namePT": "Buraco Negro",
+      "englishName": "Dark Hole",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "darkHole",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 238,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4342&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "32452818",
+      "namePT": "Castor Guerreiro",
+      "englishName": "Beaver Warrior",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 418,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4033&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "70781052",
+      "namePT": "Caveira Invocada",
+      "englishName": "Summoned Skull",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 406,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4028&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "40374923",
+      "namePT": "Cemitério de Mamutes",
+      "englishName": "Mammoth Graveyard",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 412,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4065&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "68516705",
+      "namePT": "Centauro Místico",
+      "englishName": "Mystic Horseman",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4097&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "62279055",
+      "namePT": "Cilindro Mágico",
+      "englishName": "Magic Cylinder",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "attackResponse",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicExpansionFamilies.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 590,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5124&ope=2&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "72892473",
+      "namePT": "Destruição de Cards",
+      "englishName": "Card Destruction",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "cardDestruction",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 387,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4821&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "41392891",
+      "namePT": "Diabrete Selvagem",
+      "englishName": "Feral Imp",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4012&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "84257639",
+      "namePT": "Dian Keto, Mestre da Cura",
+      "englishName": "Dian Keto the Cure Master",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "heal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 167,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4348&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "16972957",
+      "namePT": "Doma, O Anjo do Silêncio",
+      "englishName": "Doma The Angel of Silence",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 403,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4117&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "00756652",
+      "namePT": "Doron",
+      "englishName": "Doron",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 410,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4201&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "87796900",
+      "namePT": "Dragão Alado, Guardião da Fortaleza No1",
+      "englishName": "Winged Dragon, Guardian of the Fortress #1",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 409,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4013&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "89631139",
+      "namePT": "Dragão Branco de Olhos Azuis",
+      "englishName": "Blue-Eyes White Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 403,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "33064647",
+      "namePT": "Dragão Escudo de Um Só Olho",
+      "englishName": "One-Eyed Shield Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4302&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "88819587",
+      "namePT": "Dragão Filhote",
+      "englishName": "Baby Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4010&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "55444629",
+      "namePT": "Dragão Inferior",
+      "englishName": "Lesser Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 409,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4567&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "67724379",
+      "namePT": "Dragão Koumori",
+      "englishName": "Koumori Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 410,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4037&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "74677422",
+      "namePT": "Dragão Negro de Olhos Vermelhos",
+      "englishName": "Red-Eyes Black Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 406,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4088&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "67494157",
+      "namePT": "Dragão Rastejante",
+      "englishName": "Crawling Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 404,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4100&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "66672569",
+      "namePT": "Dragão Zumbi",
+      "englishName": "Dragon Zombie",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 406,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4103&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "15025844",
+      "namePT": "Elfa Mística",
+      "englishName": "Mystical Elf",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 404,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4008&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": false
+    },
+    {
+      "id": "93221206",
+      "namePT": "Elfo Ancião",
+      "englishName": "Ancient Elf",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 405,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4439&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "04614116",
+      "namePT": "Energia das Trevas",
+      "englishName": "Dark Energy",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "equip",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4309&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "52097679",
+      "namePT": "Escudo & Espada",
+      "englishName": "Shield & Sword",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "shieldSword",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 395,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4811&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "37120512",
+      "namePT": "Espada Sombria da Destruição",
+      "englishName": "Sword of Dark Destruction",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "equip",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 414,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4308&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "45231177",
+      "namePT": "Espadachim das Chamas",
+      "englishName": "Flame Swordsman",
+      "kind": "monster",
+      "monsterType": "fusion",
+      "effectKind": "fusion",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelExpansion.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 381,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4021&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": false
+    },
+    {
+      "id": "03573512",
+      "namePT": "Espadachim de Landstar",
+      "englishName": "Swordsman of Landstar",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4759&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "50005633",
+      "namePT": "Espadachim Sorrateiro",
+      "englishName": "Swordstalker",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4384&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "80770678",
+      "namePT": "Espírito da Harpa",
+      "englishName": "Spirit of the Harp",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 404,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4176&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "41218256",
+      "namePT": "Estende Garras",
+      "englishName": "Claw Reacher",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 410,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4184&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "76103675",
+      "namePT": "Faíscas",
+      "englishName": "Sparks",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "burn",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicExpansionFamilies.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 261,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4349&ope=2&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "46474915",
+      "namePT": "Fantasma Mágico",
+      "englishName": "Magical Ghost",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 409,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4476&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "36304921",
+      "namePT": "Fantasma Sarcástico",
+      "englishName": "Witty Phantom",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4142&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "49218300",
+      "namePT": "Feiticeiro dos Condenados",
+      "englishName": "Sorcerer of the Doomed",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4884&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "66788016",
+      "namePT": "Fissura",
+      "englishName": "Fissure",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "fissure",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 344,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4835&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": true
+    },
+    {
+      "id": "46918794",
+      "namePT": "Fogo Medonho",
+      "englishName": "Tremendous Fire",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "sequence",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicExpansionFamilies.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 307,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4353&ope=2&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "44095762",
+      "namePT": "Força do Espelho",
+      "englishName": "Mirror Force",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "mirrorForce",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicMirrorForce.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 332,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4887&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "98374133",
+      "namePT": "Fortalecimento",
+      "englishName": "Invigoration",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "equip",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 413,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4330&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "06368038",
+      "namePT": "Gaia, o Cavaleiro Impetuoso",
+      "englishName": "Gaia The Fierce Knight",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4044&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "76184692",
+      "namePT": "Gigante Hitotsu-Me",
+      "englishName": "Hitotsu-Me Giant",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 418,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4009&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "70368879",
+      "namePT": "Goblin Inexperiente",
+      "englishName": "Upstart Goblin",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "sequence",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicExpansionFamilies.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 348,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4895&ope=2&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "73481154",
+      "namePT": "Golem Destruidor",
+      "englishName": "Destroyer Golem",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4460&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "91152256",
+      "namePT": "Guardião Celta",
+      "englishName": "Celtic Guardian",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 412,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4047&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": false
+    },
+    {
+      "id": "55550921",
+      "namePT": "Guerreiro Batalhador",
+      "englishName": "Battle Warrior",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4106&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "97360116",
+      "namePT": "Guerreiro Demoníaco Desconhecido",
+      "englishName": "Unknown Warrior of Fiend",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 412,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4273&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "31122090",
+      "namePT": "Gyakutenno Megami",
+      "englishName": "Gyakutenno Megami",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 400,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4096&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "07089711",
+      "namePT": "Hane-Hane",
+      "englishName": "Hane-Hane",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "flip",
+      "operation": "bounce",
+      "suites": [
+        {
+          "file": "tests/classicFlipEffects.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 456,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4547&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "46130346",
+      "namePT": "Hinotama",
+      "englishName": "Hinotama",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "burn",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicExpansionFamilies.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 261,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4350&ope=2&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "81057959",
+      "namePT": "Humano Dragão",
+      "englishName": "D. Human",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 412,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4508&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "28546905",
+      "namePT": "Ilusionista Sem Rosto",
+      "englishName": "Illusionist Faceless Mage",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 403,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4048&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": false
+    },
+    {
+      "id": "54652250",
+      "namePT": "Inseto Devorador de Homens",
+      "englishName": "Man-Eater Bug",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "flip",
+      "operation": "destroy",
+      "suites": [
+        {
+          "file": "tests/classicFlipEffects.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 338,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4507&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "83968380",
+      "namePT": "Jarra da Ganância",
+      "englishName": "Jar of Greed",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "sequence",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicExpansionFamilies.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 403,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5210&ope=2&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "77585513",
+      "namePT": "Jinzo",
+      "englishName": "Jinzo",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "continuous",
+      "operation": "negateTraps",
+      "suites": [
+        {
+          "file": "tests/classicContinuousEffects.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 294,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4758&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "26378150",
+      "namePT": "Kaiser Violento",
+      "englishName": "Rude Kaiser",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 413,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4388&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "01184620",
+      "namePT": "Kojikocy",
+      "englishName": "Kojikocy",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 412,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4072&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "40640057",
+      "namePT": "Kuriboh",
+      "englishName": "Kuriboh",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "quick",
+      "operation": "battleShield",
+      "suites": [
+        {
+          "file": "tests/classicQuickMonsters.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 286,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4064&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "97590747",
+      "namePT": "La Jinn, o Gênio Místico da Lâmpada",
+      "englishName": "La Jinn the Mystical Genie of the Lamp",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4385&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "17358176",
+      "namePT": "Lady da Fé",
+      "englishName": "Lady of Faith",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 404,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4618&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "15480588",
+      "namePT": "Lagarto Encouraçado",
+      "englishName": "Armored Lizard",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 409,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4057&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "75850803",
+      "namePT": "LaMoon",
+      "englishName": "LaMoon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 400,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4134&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "14087893",
+      "namePT": "Livro da Lua",
+      "englishName": "Book of Moon",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "bookOfMoon",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicSummonResponses.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 490,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5432&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "91595718",
+      "namePT": "Livro das Artes Secretas",
+      "englishName": "Book of Secret Arts",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "equip",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4329&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "31560081",
+      "namePT": "Mago da Fé",
+      "englishName": "Magician of Faith",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "flip",
+      "operation": "recover",
+      "suites": [
+        {
+          "file": "tests/classicFlipEffects.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 335,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4434&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "46986414",
+      "namePT": "Mago Negro",
+      "englishName": "Dark Magician",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 404,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4041&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "28279543",
+      "namePT": "Maldição do Dragão",
+      "englishName": "Curse of Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 405,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4045&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "34460851",
+      "namePT": "Manipulador de Chamas",
+      "englishName": "Flame Manipulator",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 405,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4148&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "44287299",
+      "namePT": "Masaki, o Espadachim Lendário",
+      "englishName": "Masaki the Legendary Swordsman",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 412,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4299&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "28933734",
+      "namePT": "Máscara das Trevas",
+      "englishName": "Mask of Darkness",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "flip",
+      "operation": "recover",
+      "suites": [
+        {
+          "file": "tests/classicFlipEffects.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 339,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4108&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "20871001",
+      "namePT": "Medicamento Azul",
+      "englishName": "Blue Medicine",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "heal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicExpansionFamilies.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 166,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4840&ope=2&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "75499502",
+      "namePT": "Mestre & Especialista",
+      "englishName": "Master & Expert",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4254&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "50913601",
+      "namePT": "Montanha",
+      "englishName": "Mountain",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "field",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 438,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4338&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "04031928",
+      "namePT": "Mudança de Opinião",
+      "englishName": "Change of Heart",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "changeHeart",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 351,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4860&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "44209392",
+      "namePT": "Muralhas do Castelo",
+      "englishName": "Castle Walls",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "castleWalls",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 414,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4850&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "14315573",
+      "namePT": "Negativação de Ataque",
+      "englishName": "Negate Attack",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "attackResponse",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicExpansionFamilies.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 537,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4804&ope=2&request_locale=en",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "50930991",
+      "namePT": "Neo, o Espadachim Mágico",
+      "englishName": "Neo the Magic Swordsman",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 405,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4881&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "13429800",
+      "namePT": "O Grande Branco",
+      "englishName": "Great White",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 406,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4066&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "30113682",
+      "namePT": "O Juiz",
+      "englishName": "Judge Man",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 407,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4039&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "90357090",
+      "namePT": "O Presa de Prata",
+      "englishName": "Silver Fang",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 407,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4071&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "45121025",
+      "namePT": "Ogre da Sombra Negra",
+      "englishName": "Ogre of the Black Shadow",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 418,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4293&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "19523799",
+      "namePT": "Ookazi",
+      "englishName": "Ookazi",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "burn",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 261,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4352&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "47060154",
+      "namePT": "Palhaço Místico",
+      "englishName": "Mystic Clown",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4287&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "10202894",
+      "namePT": "Pássaro da Crista Vermelha",
+      "englishName": "Skull Red Bird",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 414,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4472&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "23771716",
+      "namePT": "Peixe de 7 Cores",
+      "englishName": "7 Colored Fish",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 406,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4446&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "75356564",
+      "namePT": "Pequeno Dragão",
+      "englishName": "Petit Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 407,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4206&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "24094653",
+      "namePT": "Polimerização",
+      "englishName": "Polymerization",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "polymerization",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 500,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4837&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": true
+    },
+    {
+      "id": "55144522",
+      "namePT": "Pote da Ganância",
+      "englishName": "Pot of Greed",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "potOfGreed",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 300,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4844&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": true
+    },
+    {
+      "id": "48305365",
+      "namePT": "Predador com Machado",
+      "englishName": "Axe Raider",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 412,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4084&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "12580477",
+      "namePT": "Raigeki",
+      "englishName": "Raigeki",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "raigeki",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicSpells.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 231,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4343&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "17814387",
+      "namePT": "Reforços",
+      "englishName": "Reinforcements",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "reinforcements",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 414,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4849&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "38199696",
+      "namePT": "Remédio Vermelho",
+      "englishName": "Red Medicine",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "heal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 166,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4345&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "51482758",
+      "namePT": "Remover Armadilha",
+      "englishName": "Remove Trap",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "removeTrap",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 272,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4838&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "19159413",
+      "namePT": "Remover Magia",
+      "englishName": "De-Spell",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "deSpell",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 354,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4843&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "83764718",
+      "namePT": "Reviver Monstro",
+      "englishName": "Monster Reborn",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "monsterReborn",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 450,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4842&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "15303296",
+      "namePT": "Ryu-Kishin",
+      "englishName": "Ryu-Kishin",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 410,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4011&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "24611934",
+      "namePT": "Ryu-Kishin Potencializado",
+      "englishName": "Ryu-Kishin Powered",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4383&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "26202165",
+      "namePT": "Sangan",
+      "englishName": "Sangan",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "onSentToGrave",
+      "operation": "search",
+      "suites": [
+        {
+          "file": "tests/classicGraveTriggers.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 424,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4054&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "03819470",
+      "namePT": "Sete Ferramentas do Bandido",
+      "englishName": "Seven Tools of the Bandit",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "sevenTools",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicCounterTraps.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 410,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4863&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "86318356",
+      "namePT": "Sogen",
+      "englishName": "Sogen",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "field",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 435,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4339&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": true
+    },
+    {
+      "id": "11384280",
+      "namePT": "Soldado Canhão",
+      "englishName": "Cannon Soldier",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "ignition",
+      "operation": "burn",
+      "suites": [
+        {
+          "file": "tests/classicIgnitionEffects.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 215,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4518&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "13039848",
+      "namePT": "Soldado de Pedra Gigante",
+      "englishName": "Giant Soldier of Stone",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 408,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4080&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "05388481",
+      "namePT": "Soldado do Fogo Negro #1",
+      "englishName": "Darkfire Soldier #1",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 406,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4973&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "04042268",
+      "namePT": "Tartaruga Ilha",
+      "englishName": "Island Turtle",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 406,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5146&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "63308047",
+      "namePT": "Terra, O Terrível",
+      "englishName": "Terra the Terrible",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4200&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "01435851",
+      "namePT": "Tesouro do Dragão",
+      "englishName": "Dragon Treasure",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "equip",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 410,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4321&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "89494469",
+      "namePT": "Titã Negro do Terror",
+      "englishName": "Dark Titan of Terror",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 411,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4239&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "83011277",
+      "namePT": "Tomate Místico",
+      "englishName": "Mystic Tomato",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "onBattleDestroyed",
+      "operation": "specialSummon",
+      "suites": [
+        {
+          "file": "tests/classicBattleRecruiters.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 318,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4930&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "42703248",
+      "namePT": "Tornado Gigante",
+      "englishName": "Giant Trunade",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "giantTrunade",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 409,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4910&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "05053103",
+      "namePT": "Touro Guerreiro",
+      "englishName": "Battle Ox",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 418,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4032&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "53582587",
+      "namePT": "Tributo Torrencial",
+      "englishName": "Torrential Tribute",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "torrentialTribute",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicSummonResponses.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 398,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5114&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "05318639",
+      "namePT": "Tufão Espacial Místico",
+      "englishName": "Mystical Space Typhoon",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "mysticalSpaceTyphoon",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 423,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4909&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": true
+    },
+    {
+      "id": "01784619",
+      "namePT": "Uraby",
+      "englishName": "Uraby",
+      "kind": "monster",
+      "monsterType": "normal",
+      "effectKind": "normal",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 412,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4086&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": false,
+      "manualEffectReview": false
+    },
+    {
+      "id": "54098121",
+      "namePT": "Ventríloco Misterioso",
+      "englishName": "Mysterious Puppeteer",
+      "kind": "monster",
+      "monsterType": "effect",
+      "effectKind": "monsterEffect",
+      "trigger": "onOtherSummon",
+      "operation": "heal",
+      "suites": [
+        {
+          "file": "tests/classicSummonTriggers.test.cjs",
+          "mentionsCardId": true
+        },
+        {
+          "file": "tests/engineRefactor.test.cjs",
+          "mentionsCardId": false
+        }
+      ],
+      "descriptionCharacters": 174,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4172&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "12607053",
+      "namePT": "Waboku",
+      "englishName": "Waboku",
+      "kind": "trap",
+      "monsterType": null,
+      "effectKind": "waboku",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 466,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4886&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    },
+    {
+      "id": "59197169",
+      "namePT": "Yami",
+      "englishName": "Yami",
+      "kind": "spell",
+      "monsterType": null,
+      "effectKind": "field",
+      "trigger": null,
+      "operation": null,
+      "suites": [
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "mentionsCardId": true
+        }
+      ],
+      "descriptionCharacters": 465,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4341&request_locale=pt",
+      "evidence": "mechanical-fingerprint-and-referenced-suite",
+      "directIdMention": true,
+      "manualEffectReview": true
+    }
+  ]
+}

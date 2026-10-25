@@ -5,7 +5,17 @@ test('solo 2v2 training plays three NPCs automatically, persists each decision a
  assert.equal(s.currentTag(owner),undefined);assert.deepEqual(getPlayer(owner),before);assert.deepEqual(getCollection(owner),collection);assert.ok(r.revision>steps);}
 });
 test('a restart with a pending NPC decision resumes before the next human panel and never spends player assets',()=>{
- const owner='restart-solo';createPlayer(owner,owner);let r=s.runTagBots(s.createTagTraining(owner,'g','c').id);if(r.status!=='playing')throw Error('Unexpected finish');const index=t.tagActions(r.state,owner).findIndex(a=>a.kind==='end');r=s.actTag(r.id,owner,r.guild,r.revision,index);assert.ok(s.isTagBotDecision(r));s.setTagMessage(r.id,'arena');s.markTagPublished(r.id,r.revision);assert.ok(s.dueTags().some(x=>x.id===r.id),'pending bot remains due even if arena was published');const before=getPlayer(owner);delete require.cache[require.resolve('../dist/tagStore')];const reopened=require('../dist/tagStore').runTagBots(r.id);assert.ok(!s.isTagBotDecision(reopened));assert.ok(reopened.revision>r.revision);assert.deepEqual(getPlayer(owner),before);
+ const owner='restart-solo';createPlayer(owner,owner);let r=s.runTagBots(s.createTagTraining(owner,'g','c').id);if(r.status!=='playing')throw Error('Unexpected finish');
+ // The opening seat and the NPCs' set cards are randomized. Ending the human
+ // Main Phase can legitimately open a response window that still needs the
+ // human to pass before the next automated decision becomes pending.
+ for(let attempt=0;attempt<12&&!s.isTagBotDecision(r);attempt++){
+  const actions=t.tagActions(r.state,owner),index=actions.findIndex(a=>a.kind==='end'||a.kind==='pass');
+  assert.ok(index>=0,'human can finish or pass the current response window');
+  r=s.actTag(r.id,owner,r.guild,r.revision,index);
+ }
+ assert.ok(s.isTagBotDecision(r),'a saved automated decision must be pending before restart');
+ s.setTagMessage(r.id,'arena');s.markTagPublished(r.id,r.revision);assert.ok(s.dueTags().some(x=>x.id===r.id),'pending bot remains due even if arena was published');const before=getPlayer(owner);delete require.cache[require.resolve('../dist/tagStore')];const reopened=require('../dist/tagStore').runTagBots(r.id);assert.ok(!s.isTagBotDecision(reopened));assert.ok(reopened.revision>r.revision);assert.deepEqual(getPlayer(owner),before);
 });
 test('training validates profile, chosen style, owned deck and reservation before inserting a session',()=>{
  const count=()=>db.prepare('SELECT COUNT(*) AS n FROM tag_sessions').get().n;let n=count();assert.throws(()=>s.createTagTraining('absent','g','c'),/perfil/);assert.equal(count(),n);createPlayer('bad-style','Test');assert.throws(()=>s.createTagTraining('bad-style','g','c','unknown'),/desconhecido/);assert.equal(count(),n);assert.throws(()=>s.createTagTraining('bad-style','g','c','meu_deck'),/Ative/);assert.equal(count(),n);

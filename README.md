@@ -59,7 +59,7 @@ Bot de Discord para um RPG de cartas inspirado em Speed Duel.
 ### Atualizar no Botkeep
 
 1. Faça um backup de `data/` (SQLite e retratos); não use instalação limpa nem apague dados.
-2. Na aba **GitHub**, atualize os arquivos a partir de `main`.
+2. Na aba **GitHub**, confirme a branch de implantação e sincronize `classic-engine-foundation` para receber as versões 0.16.x. Não use `main` por hábito sem verificar a versão/commit exibidos.
 3. Reinicie usando `npm run build && npm start`. Um simples Redeploy pode não buscar os arquivos novos.
 4. Use `/perfil`, personalize e reinicie novamente para verificar persistência.
 

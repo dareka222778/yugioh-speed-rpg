@@ -6,6 +6,16 @@ function game(){const s=e.createDuel([{id:'a',name:'A',cards:npcs[0].cards,extra
 test('NPC sets a weak monster against a public 2500 ATK threat instead of exposing it in Attack',()=>{
  const s=game();s.players[0].hand=[{uid:'weak',id:'55444629'}];s.players[1].monsters=[mon('threat','46986414')];assert.equal(chooseNPC(s,'a').position,'set');
 });
+test('NPC respects unknown face-down walls without reading their identity',()=>{
+ const s=game();s.players[0].hand=[{uid:'weak',id:'55444629'}];s.players[1].monsters=[mon('hidden','89631139',{faceUp:false,position:'def'})];
+ assert.equal(chooseNPC(s,'a').position,'set');
+ s.players[0].hand=[];s.phase='battle';s.players[0].monsters=[mon('attacker','55444629')];
+ assert.equal(chooseNPC(s,'a').kind,'end');
+ s.players[0].monsters=[mon('attacker','48305365')];
+ assert.equal(chooseNPC(s,'a').kind,'attack');
+ const other=structuredClone(s);other.players[1].monsters[0].id='91152256';
+ assert.deepEqual(chooseNPC(other,'a'),chooseNPC(s,'a'));
+});
 test('NPC keeps a strong board instead of tributing two superior monsters for a weaker boss',()=>{
  const s=game();s.players[0].hand=[{uid:'boss',id:'74677422'}];s.players[0].monsters=[mon('one','89631139'),mon('two','46986414')];assert.notEqual(chooseNPC(s,'a').kind,'summon');
 });

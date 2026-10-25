@@ -47,3 +47,9 @@ As 130 definições têm referências de certificação no registro atual; a fas
 ## Próximo bloco após 0.16.0
 
 Fase 2: construir matriz de requisitos/efeitos/testes das 130 cartas, priorizar lacunas reais e revisar tática dos NPCs com cenários. A fase 3 pode avançar na preparação de dados sem liberar cartas nem bloquear correções.
+
+### Auditoria automatizada da fase 2 (em andamento)
+
+`npm run audit:cards:matrix` gera `validation/card-matrix-v016.json` com as 130 identidades, famílias de efeitos, descrição operacional PT-BR e a relação das suítes certificadoras. A coluna `directIdMention` registra somente uma indicação textual do ID nos testes; não é prova de que todas as ativações, resoluções ou combinações foram testadas. A matriz separa explicitamente efeitos que exigem revisão individual antes de prometer cobertura integral.
+
+**Bloqueio operacional observado em 25/10/2026:** o painel Botkeep da conta `dareka222778` mostrava 0 servidores, com exclusão concluída do antigo `yugioh-speed-rpg` aproximadamente 13 horas antes. O painel de backups não listava ponto de recuperação. A alegação anterior de reinício da v0.16.0 não equivale a validação online atual. Antes de recriar o servidor, recuperar e conferir a cópia externa do SQLite, retratos e variáveis de ambiente, se disponíveis; não substituir arquivos de dados por um banco vazio por suposição. Atualização GitHub e implantação são etapas independentes.
