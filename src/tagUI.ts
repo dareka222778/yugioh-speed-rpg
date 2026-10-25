@@ -1,0 +1,25 @@
+import {ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
+import {actionLabel,atk,def} from './duelEngine';
+import {tagActions,tagDecisionMember,tagMemberHand,publicTagDuel} from './tagDuel';
+import {tagDeadline,type TagRecord} from './tagStore';
+import {getCard} from './collection';
+const row=(...buttons:ButtonBuilder[])=>new ActionRowBuilder<ButtonBuilder>().addComponents(buttons);
+const button=(r:TagRecord,action:string,label:string,style=ButtonStyle.Secondary)=>new ButtonBuilder().setCustomId(`tag:${action}:${r.id}:${r.revision}`).setLabel(label).setStyle(style);
+const safe={parse:[] as never[]};
+export function tagPublicMessage(r:TagRecord){
+ const embed=new EmbedBuilder().setColor(0x1688d8).setTitle(r.status==='lobby'?'2v2 • Convite para as equipes':'2v2 • Campo das equipes');
+ embed.setDescription(`**Azul:** ${r.members.filter((_,i)=>i%2===0).map(p=>escapeMarkdown(p.name)).join(' + ')}\n**Vermelha:** ${r.members.filter((_,i)=>i%2===1).map(p=>escapeMarkdown(p.name)).join(' + ')}\n\nModo de homologação: decks emprestados de 30 monstros Normais. Sem custos ou recompensas. A coleção não é alterada.`);
+ const components:ActionRowBuilder<ButtonBuilder>[]=[];
+ if(r.status==='lobby'){embed.addFields({name:'Confirmações',value:r.members.map(p=>`${p.accepted?'✓':'○'} ${escapeMarkdown(p.name)}`).join('\n')},{name:'Prazo do convite',value:`<t:${Math.floor(tagDeadline(r)/1000)}:R>`});components.push(row(button(r,'accept','Aceitar participação',ButtonStyle.Success),button(r,'cancel','Recusar / cancelar',ButtonStyle.Danger),button(r,'refresh','Atualizar')));}
+ if(r.state){const s=r.state,g=publicTagDuel(s);embed.addFields(...g.teams.map((t,i)=>({name:`${t.name} • ${t.lp} PV`,value:[0,1,2].map(slot=>{const m=t.monsters[slot];if(!m)return `${slot+1}. Zona vazia`;if(!m.faceUp)return `${slot+1}. Carta virada para baixo • Defesa`;const real=s.core.players[i].monsters[slot];return `${slot+1}. ${getCard(m.id!)?.name} • ${m.position==='atk'?'ATQ '+atk(real,s.core):'DEF '+def(real,s.core)}`;}).join('\n')})),{name:'Mãos e baralhos',value:g.members.map(p=>`${escapeMarkdown(p.name)} • ${p.handCount} na mão • ${p.deckCount} para comprar`).join('\n')},{name:s.core.phase==='finished'?'Resultado':`Turno ${s.core.turn}`,value:s.core.phase==='finished'?`${g.winner==='tag-team-0'?'Azul':'Vermelha'} venceu • ${g.reason}`:`Aguardando **${escapeMarkdown(tagDecisionMember(s).name)}** • <t:${Math.floor(tagDeadline(r)/1000)}:R>\nW.O. para a equipe que não decidir em 30 minutos.`},{name:'Últimas jogadas',value:s.core.log.slice(-4).map(line=>escapeMarkdown(line)).join('\n').slice(-1000)||'Partida iniciada.'});if(r.status==='playing')components.push(row(button(r,'open','Minha mão / jogar',ButtonStyle.Primary),button(r,'refresh','Atualizar campo')));}
+ if(['cancelled','expired'].includes(r.status))embed.addFields({name:'Convite encerrado',value:r.status==='expired'?'Prazo esgotado.':'Um participante recusou ou cancelou.'});embed.setFooter({text:'2v2 experimental • Mãos privadas • Rotação A1 → B1 → A2 → B2'});
+ return {embeds:[embed],components,attachments:[],files:[],allowedMentions:safe};
+}
+export function tagPrivateMessage(r:TagRecord,owner:string,requested=0){
+ if(!r.state||!r.members.some(p=>p.id===owner))throw Error('Somente participantes podem abrir suas mãos.');const s=r.state,hand=tagMemberHand(s,owner),member=s.members.find(p=>p.id===owner)!,actions=tagActions(s,owner),pages=Math.max(1,Math.ceil(actions.length/20)),page=Math.min(pages-1,Math.max(0,Number.isSafeInteger(requested)?requested:0));
+ const embed=new EmbedBuilder().setColor(0x1688d8).setTitle(`2v2 • ${escapeMarkdown(member.name)}`).setDescription(`${member.team===0?'Equipe Azul':'Equipe Vermelha'} • Turno ${s.core.turn}\n${r.status!=='playing'?'Partida encerrada.':actions.length?'**Sua vez de decidir.**':'Aguarde '+escapeMarkdown(tagDecisionMember(s).name)+'.'}`).addFields({name:'Sua mão privada',value:hand.map((c,i)=>`${i+1}. ${getCard(c.id)!.name} • ATQ ${getCard(c.id)!.atk} / DEF ${getCard(c.id)!.defense}`).join('\n')||'Sem cartas.'}).setFooter({text:`Jogadas ${page+1}/${pages} • Atualize para acompanhar • Ninguém vê sua mão`});
+ const components:(ActionRowBuilder<ButtonBuilder>|ActionRowBuilder<StringSelectMenuBuilder>)[]=[];
+ if(actions.length&&r.status==='playing')components.push(new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(new StringSelectMenuBuilder().setCustomId(`tag:act:${r.id}:${r.revision}:${owner}`).setPlaceholder('Escolha sua jogada').addOptions(actions.slice(page*20,page*20+20).map((a,i)=>({label:actionLabel(s.core,'tag-team-'+member.team,a).slice(0,100),value:String(page*20+i)})))));
+ if(r.status==='playing')components.push(row(button(r,`page,${owner},${page-1}`,'Anterior').setDisabled(page===0),button(r,`page,${owner},${page}`,'Atualizar',ButtonStyle.Primary),button(r,`page,${owner},${page+1}`,'Próxima').setDisabled(page===pages-1),button(r,`quit,${owner}`,'Desistir',ButtonStyle.Danger)));
+ return {embeds:[embed],components,attachments:[],files:[],allowedMentions:safe};
+}

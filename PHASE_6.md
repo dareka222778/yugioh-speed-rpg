@@ -23,3 +23,11 @@ Apenas monstros Normais certificados são admitidos. Cartas com efeito, Magias, 
 5. Homologar quatro clientes Discord antes de habilitar jogos humanos e economia.
 
 **Não entregue ainda:** convites e duelos 2v2 humanos, suporte às 130 cartas no 2v2 e integração de recompensas nessa modalidade. O laboratório está implantável; estas partes permanecem deliberadamente indisponíveis.
+
+## Bloco 0.11.0 — quatro humanos, modo de homologação
+
+`/dupla convidar parceiro:... oponente1:... oponente2:...` cria um lobby persistido por cinco minutos; cada convidado aceita em seu próprio usuário. Todos precisam de `/start`. As equipes são anfitrião/parceiro contra os dois oponentes. A partida começa somente após as quatro confirmações, em posição inicial sorteada. `/dupla ver` recupera convite ou mão após reconexão/reinício.
+
+Nesta etapa cada participante recebe temporariamente um baralho de 30 monstros Normais certificados. Os baralhos emprestados existem apenas no estado da sessão; nenhuma carta é entregue na coleção e não há DP/XP/recompensas. O campo 1v1 permanece intacto. `tagUI.ts` exibe as três zonas de cada equipe, PV, contagens de mão/deck, vez e prazo; a mão individual contém menus de ações legais com paginação. Identificadores vinculam usuário, sessão e revisão. Uma jogada grava o JSON inteiro em transação antes de atualizar mensagens. Cliques antigos não repetem ações. Participantes ficam reservados, impedindo duelos simultâneos 1v1/2v2. Qualquer membro pode desistir pela equipe após confirmação. W.O. de 30 minutos, descarte antes da compra e derrota por deck vazio seguem o núcleo.
+
+Testes cobrem confirmação, isolamento de servidor/usuário, retomada, revisão, conservação, W.O., cancelamento, bloqueio entre modalidades, falha de rede após gravação e limites dos componentes. Ainda requer homologação manual com quatro contas no Discord, além de efeitos e decks próprios no 2v2. Este bloco **não conclui a fase 6 inteira**.

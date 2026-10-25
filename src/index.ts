@@ -1,3 +1,6 @@
+import {createTagLobby,currentTag,getTag,setTagMessage,dueTags,type TagRecord} from './tagStore';
+import {tagPublicMessage,tagPrivateMessage} from './tagUI';
+import {handleTagComponent} from './tagInteraction';
 import 'dotenv/config';
 import {simulateTag,tagSimulationMessage} from './tagSimulation';
 import {helpMessage} from './commandUI';
@@ -41,7 +44,9 @@ const commands = [
       .addUserOption(o=>o.setName('jogador').setDescription('Destinatário com perfil criado.').setRequired(true)))
     .addSubcommand(c=>c.setName('encerrar').setDescription('Bloqueia novas entregas deste evento.')
       .addStringOption(o=>o.setName('evento').setDescription('ID do evento.').setRequired(true))),
-  new SlashCommandBuilder().setName('dupla').setDescription('Laboratório inicial de equipes 2v2, sem alterar sua coleção.').addSubcommand(c=>c.setName('simular').setDescription('Simula quatro bots: apenas monstros normais; não é uma partida humana.')),
+  new SlashCommandBuilder().setName('dupla').setDescription('Laboratório inicial de equipes 2v2, sem alterar sua coleção.').setDMPermission(false).addSubcommand(c=>c.setName('simular').setDescription('Simula quatro bots: apenas monstros normais; não é uma partida humana.'))
+    .addSubcommand(c=>c.setName('convidar').setDescription('2v2 humano de homologação, com decks emprestados de monstros Normais.').addUserOption(o=>o.setName('parceiro').setDescription('Seu parceiro da equipe Azul.').setRequired(true)).addUserOption(o=>o.setName('oponente1').setDescription('Primeiro jogador da equipe Vermelha.').setRequired(true)).addUserOption(o=>o.setName('oponente2').setDescription('Segundo jogador da equipe Vermelha.').setRequired(true)))
+    .addSubcommand(c=>c.setName('ver').setDescription('Reabre seu lobby ou sua mão privada 2v2.')), 
   new SlashCommandBuilder().setName('ajuda').setDescription('Escolha um assunto e encontre sua próxima jogada.'),
   new SlashCommandBuilder().setName('regras').setDescription('Consulta as regras do duelo e o limite da mão.'),
   new SlashCommandBuilder().setName('ping').setDescription('Testa se o bot está online.'),
@@ -103,7 +108,7 @@ const busy = new Set<string>();
 async function arenaPayload(r:DuelRecord){try{return await visualDuelPublic(r);}catch(error){console.error('Falha no campo visual:',errorSummary(error));return duelPublicMessage(r);}}
 async function privatePayload(r:DuelRecord,owner:string,page=1){try{return await visualDuelPrivate(r,owner,page);}catch(error){console.error('Falha no painel visual:',errorSummary(error));return duelPrivateMessage(r,owner,page);}}
 let sweepingDuels=false;
-export async function sweepDuelTimeouts(){if(sweepingDuels)return;sweepingDuels=true;try{for(const r of expireDueDuels())await refreshArena(r);}catch(error){console.error('Falha ao conferir prazo dos duelos:',errorSummary(error));}finally{sweepingDuels=false;}}
+export async function sweepDuelTimeouts(){if(sweepingDuels)return;sweepingDuels=true;try{for(const r of expireDueDuels())await refreshArena(r);for(const r of dueTags())if(['finished','expired'].includes(r.status))await refreshTag(r);}catch(error){console.error('Falha ao conferir prazo dos duelos:',errorSummary(error));}finally{sweepingDuels=false;}}
 const arenaUpdates=new Map<string,Promise<void>>();
 async function refreshArena(record:DuelRecord){
  const previous=arenaUpdates.get(record.id)??Promise.resolve();
@@ -112,6 +117,10 @@ async function refreshArena(record:DuelRecord){
    const message=await channel.messages.fetch(r.message_id);const payload=await arenaPayload(r);if(getDuel(r.id).revision===r.revision){await message.edit(payload);markDuelPublished(r.id,r.revision);}
   }catch(error){console.error('Falha ao atualizar arena; use Atualizar campo:',errorSummary(error));}
  });arenaUpdates.set(record.id,work);try{await work;}finally{if(arenaUpdates.get(record.id)===work)arenaUpdates.delete(record.id);}
+}
+const tagUpdates=new Map<string,Promise<void>>();
+async function refreshTag(record:TagRecord){
+ const previous=tagUpdates.get(record.id)??Promise.resolve();const work=previous.catch(()=>{}).then(async()=>{const r=getTag(record.id);if(!r.message)return;try{const channel=await client.channels.fetch(r.channel);if(!channel||!('messages' in channel))return;const message=await channel.messages.fetch(r.message);if(getTag(r.id).revision===r.revision)await message.edit(tagPublicMessage(r));}catch(error){console.error('Falha ao atualizar equipes; use /dupla ver:',errorSummary(error));}});tagUpdates.set(record.id,work);try{await work;}finally{if(tagUpdates.get(record.id)===work)tagUpdates.delete(record.id);}
 }
 async function handleInteraction(i:Interaction) {
  const correlation=randomUUID().slice(0,8),started=Date.now();
@@ -127,7 +136,14 @@ async function handleInteraction(i:Interaction) {
   const id = i.user.id;
   const avatar = i.user.displayAvatarURL({ size: 256 });
   try {
-    if(i.isChatInputCommand()&&i.commandName==='dupla'){await deferReply({flags:MessageFlags.Ephemeral});await i.editReply(tagSimulationMessage(simulateTag()));return;}
+    if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('tag:')){await handleTagComponent(i,refreshTag,kind=>{acknowledgment=kind;});return;}
+    if(i.isChatInputCommand()&&i.commandName==='dupla'){
+      if(!i.guildId||!i.channelId)throw Error('Use o 2v2 dentro do servidor.');const sub=i.options.getSubcommand();await deferReply(sub==='convidar'?{}:{flags:MessageFlags.Ephemeral});
+      if(sub==='simular'){await i.editReply(tagSimulationMessage(simulateTag()));return;}
+      if(sub==='ver'){const r=currentTag(id);if(!r)throw Error('Você não possui uma partida 2v2 aberta.');if(r.guild!==i.guildId)throw Error('Abra o 2v2 no servidor de origem.');await i.editReply(r.state?tagPrivateMessage(r,id):tagPublicMessage(r));return;}
+      const partner=i.options.getUser('parceiro',true),op1=i.options.getUser('oponente1',true),op2=i.options.getUser('oponente2',true);if([partner,op1,op2].some(p=>p.bot))throw Error('Convide três jogadores humanos. Para bots, use /dupla simular.');
+      const r=createTagLobby([id,op1.id,partner.id,op2.id],i.guildId,i.channelId);const message=await i.editReply(tagPublicMessage(r));setTagMessage(r.id,message.id);return;
+    }
     if(i.isChatInputCommand()&&['ajuda','regras'].includes(i.commandName)){await i.reply({...helpMessage(id,i.commandName==='regras'?'rules':'start'),flags:MessageFlags.Ephemeral});return;}
     if(i.isStringSelectMenu()&&i.customId.startsWith('help:page:')){if(i.customId.split(':')[2]!==id)throw new Error('Abra sua própria ajuda com /ajuda.');await deferUpdate();await i.editReply(helpMessage(id,i.values[0]));return;}
     if(i.isChatInputCommand()&&i.commandName==='evento'||i.isButton()&&i.customId.startsWith('cardevent:')){
@@ -336,10 +352,10 @@ async function handleInteraction(i:Interaction) {
       await i.editReply({ content: '✦ Personagem atualizado.', ...await profileMessage(getPlayer(id)!, avatar) });
     }
   } catch (error) {
-    console.error('Falha na interação:', {correlation,release:'0.10.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
+    console.error('Falha na interação:', {correlation,release:'0.11.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
     const content = error instanceof Error && !('code' in error) ? error.message : `Não foi possível concluir esta ação. Reabra o painel com /duelo ver ou /npc ver. Código de atendimento: ${correlation}.`;
     try {
-      if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:'))&&i.deferred&&acknowledgment==='update') await i.followUp({content,flags:MessageFlags.Ephemeral});
+      if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:')||i.customId.startsWith('tag:'))&&i.deferred&&acknowledgment==='update') await i.followUp({content,flags:MessageFlags.Ephemeral});
       else if (i.deferred) await i.editReply({ content, embeds: [], components: [], attachments: [] });
       else if (i.replied) await i.followUp({ content, flags: MessageFlags.Ephemeral });
       else await i.reply({ content, flags: MessageFlags.Ephemeral });
@@ -347,7 +363,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
- console.log('Release 0.10.0 | regras speed-rpg-v2 | comandos azuis | laboratório 2v2 normal | 130 cartas 1v1');
+ console.log('Release 0.11.0 | regras speed-rpg-v2 | comandos azuis | 2v2 humano de homologação normal | 130 cartas 1v1');
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
