@@ -28,3 +28,7 @@ A migração de uma sessão 2v2 anterior foi testada preservando exatamente o JS
 Uma partida entre quatro pessoas reais no Discord, incluindo uso em celular, consultas e retomada do painel. O treino solo facilita a validação inicial de uma pessoa, mas não substitui esse aceite. A qualidade estética também exige avaliação humana. Não declarar “100% homologado” ou fases posteriores concluídas apenas porque testes passaram.
 
 As regras de representantes ativos, respostas do parceiro, cemitério compartilhado e devolução ao dono estão documentadas em `PHASE_6.md` e `/ajuda` → Duelos em equipes 2v2.
+
+## Patch 0.15.1
+
+417 testes aprovados após acrescentar guardas do executor. O processo inteiro de testes recebe um SQLite temporário e não herda credenciais Discord. O teste de UI que podia abrir o banco padrão agora também declara um banco isolado antes dos imports. A comparação do banco real com o backup confirmou perfis e coleções preservados. A inicialização lista todos os comandos registrados, incluindo `/dupla`.

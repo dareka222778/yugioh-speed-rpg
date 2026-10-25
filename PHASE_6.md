@@ -1,4 +1,4 @@
-# Fase 6 — equipes clássicas 2v2, versão 0.15.0
+# Fase 6 — equipes clássicas 2v2, versão 0.15.1
 
 ## Estado atual
 
@@ -42,7 +42,7 @@ O arquivo do campo 1v1 permanece idêntico: SHA-256 `01d2253332cae7cf18106979e46
 
 | Verificação | Resultado |
 |---|---|
-| Suíte completa | 415 testes aprovados |
+| Suíte completa | 417 testes aprovados |
 | Aceitação 1v1 | 1.000 partidas, 63.120 decisões, 4.388 restaurações, conservação física |
 | 2v2 clássico determinístico | 1.000 partidas, 58.507 decisões, 4.045 restaurações, conservação física |
 | Definições presentes na auditoria 2v2 | 130; 47 definições com ativação explícita observada |
@@ -66,3 +66,7 @@ Reprodução: `npm test`, `npm run accept:engine`, `npm run audit:tag`, `npm run
 ## Critério para encerrar a homologação
 
 Uma partida completa com quatro pessoas reais, usando as respostas, a consulta de cartas e a retomada de painel em pelo menos um celular. É preciso conferir também o resultado e os controles desativados ao terminar. Sem essa evidência, não registrar “100% homologado” nem declarar as fases seguintes concluídas.
+
+## Patch 0.15.1 — isolamento do executor de testes
+
+O executor cria um SQLite temporário para todo o processo de testes, remove credenciais Discord herdadas e apaga somente seu próprio diretório temporário ao terminar. Cada suíte ainda pode criar seu próprio banco. Um teste de UI do 2v2 foi corrigido para declarar seu banco temporário antes de qualquer importação. Guardas verificam que um caminho de produção sentinela não é tocado, que credenciais não chegam ao worker e que falhas retornam código de saída diferente de zero. Perfis e coleções reais foram comparados ao backup e permaneceram iguais. O log de inicialização também lista os comandos realmente registrados.

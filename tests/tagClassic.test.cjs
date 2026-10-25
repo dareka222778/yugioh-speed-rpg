@@ -1,3 +1,4 @@
+const fs=require('node:fs'),os=require('node:os'),path=require('node:path');process.env.DATABASE_PATH=path.join(fs.mkdtempSync(path.join(os.tmpdir(),'tag-classic-tests-')),'game.sqlite');
 const {test}=require('node:test'),assert=require('node:assert/strict'),t=require('../dist/tagDuel'),e=require('../dist/duelEngine'),{npcs}=require('../dist/npcContent');
 const normal=t.tagNormalCardIds.slice(0,10).flatMap(id=>[id,id]);
 function game(first=0){return t.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'P'+i,cards:normal})),{seed:'classic',classic:true,first});}

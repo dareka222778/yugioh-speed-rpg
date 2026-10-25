@@ -355,7 +355,7 @@ async function handleInteraction(i:Interaction) {
       await i.editReply({ content: '✦ Personagem atualizado.', ...await profileMessage(getPlayer(id)!, avatar) });
     }
   } catch (error) {
-    console.error('Falha na interação:', {correlation,release:'0.15.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
+    console.error('Falha na interação:', {correlation,release:'0.15.1',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
     const content = error instanceof Error && !('code' in error) ? error.message : `Não foi possível concluir esta ação. Reabra o painel com /duelo ver ou /npc ver. Código de atendimento: ${correlation}.`;
     try {
       if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:')||i.customId.startsWith('tag:'))&&i.deferred&&acknowledgment==='update') await i.followUp({content,flags:MessageFlags.Ephemeral});
@@ -366,7 +366,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
- console.log('Release 0.15.0 | regras speed-rpg-v2 | comandos azuis | 2v2 clássico com efeitos e mãos individuais | 130 cartas 1v1');
+ console.log('Release 0.15.1 | regras speed-rpg-v2 | comandos azuis | 2v2 clássico com efeitos e mãos individuais | 130 cartas 1v1');
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
@@ -385,7 +385,7 @@ async function main() {
   console.log('Sincronizando comandos sem bloquear a conexão do bot.');
   try {
     await retryNetwork(()=>rest.put(guildId ? Routes.applicationGuildCommands(clientId!,guildId) : Routes.applicationCommands(clientId!), { body: commands }),'Registro dos comandos');
-    console.log('Fase 5: /npc, /duelo, /deck, /colecao e /carta registrados.');
+    console.log('Comandos registrados: '+commands.map(c=>'/'+c.name).join(', '));
   } catch(error) {
     console.error('Falha ao sincronizar comandos; a conexão do bot continua ativa:',errorSummary(error));
   }
