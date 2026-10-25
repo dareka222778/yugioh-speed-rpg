@@ -181,3 +181,12 @@ certificada. Núcleo sem importação de Discord/DB/UI, RNG persistido, versões
 eventos de transição com projeção privada. Nenhuma carta ou regra nova foi
 contabilizada como cobertura adicional. A pontuação manual permanece 92/100,
 e os comandos visuais 47/100, sem alteração na arena. A suíte passou a 308 testes.
+
+## Continuidade por famílias — 130 cartas habilitadas
+
+Implementados o executor de compra/PV, grupos de dano simultâneo, sequências
+ordenadas e resposta a ataque com velocidade parametrizada. Nove cartas novas,
+334 testes aprovados e auditoria de 1.000 partidas. `coverage:engine` apresenta
+a contagem objetiva de rotas; 16 handlers legados ainda serão migrados.
+A pontuação manual não foi alterada: quantidade de cartas não mede
+compatibilidade universal. Próximos incrementos em ENGINE_CONTINUITY.md.

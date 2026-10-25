@@ -1,8 +1,10 @@
 import {createDuelRandom,randomIndex,shuffleDuel,type DuelRandom} from './duelRandom';
 import {RULES_VERSION,CARD_DEFINITIONS_VERSION,RULES_PROFILE} from './rulesProfile';
 import {assertDuelState,assertDuelTransition} from './duelIntegrity';
-import {getEffectModel,getDestructionModel} from './effectModels';
+import {getEffectModel,getDestructionModel,getActivationModel} from './effectModels';
 import {effectActivationAllowed} from './effectTiming';
+import {canStartEconomicOperations,executeEconomicOperations} from './economicOperations';
+import {resolveAttackResponse} from './attackResponses';
 import {executeDestruction} from './effectOperations';
 import {resolveChainLinks,type ChainLink} from './chainEngine';
 import {getMonsterEffect,getMonsterDefinition,canActivateMonsterEffect,payMonsterEffectCost,monsterDestructionTarget,type MonsterEffect} from './monsterEffects';
@@ -22,7 +24,7 @@ export type Action=
  |{kind:'monsterEffect';card:string;discards:string[];tributes?:string[];target?:string}
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
-export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
+export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
 export type TriggerEvent={actor:number;card:string;id:string};
 export type DuelState={version:1;rulesVersion?:typeof RULES_VERSION;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
@@ -94,10 +96,10 @@ function trapActions(s:DuelState,index:number):Action[]{
  const out:Action[]=[];
  const last=s.phase==='response'?s.chain.at(-1):undefined;
  const lastKind=last?getEffect(last.id)?.kind:undefined;
- const counterWindow=lastKind==='magicJammer'||lastKind==='sevenTools';
+ const counterWindow=!!last&&!!getEffect(last.id)&&getActivationModel(getEffect(last.id)!)?.speed===3;
  for(const c of s.players[index].backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&card(c.id).kind==='trap')){
   const effect=getEffect(c.id);if(!effect||effectNameBlocked(s,index,c.id))continue;
-  const activation=getEffectModel(effect.kind)?.activation;if(activation&&!effectActivationAllowed(s,index,activation))continue;
+  const activation=getActivationModel(effect);if(activation&&!effectActivationAllowed(s,index,activation))continue;
   if(effect.kind==='magicJammer'){
    if(s.phase==='response'&&!counterWindow){
     const spellTarget=last&&isQuickPlaySpell(last.id)?last.card:!last&&['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending?s.pending.card:undefined;
@@ -110,11 +112,15 @@ function trapActions(s:DuelState,index:number):Action[]{
    continue;
   }
   // Counter Traps have Spell Speed 3: ordinary Traps cannot be chained to them.
-  if(counterWindow)continue;
-  if(s.damageStep&&!(s.pending.kind==='attack'&&s.pending.stage==='damage'&&getEffectModel(effect.kind)?.activation.damage==='beforeCalculation'))continue;
+  if(counterWindow&&activation?.speed!==3)continue;
+  if(s.damageStep&&!(s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage==='beforeCalculation'))continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='calculation')continue;
-  if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&getEffectModel(effect.kind)?.activation.damage!=='beforeCalculation')continue;
-  if(effect.kind==='reinforcements'||effect.kind==='castleWalls')out.push(...s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>({kind:'trap',card:c.uid,target:m.uid}) as Action)));
+  if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage!=='beforeCalculation')continue;
+  if(effect.kind==='attackResponse'&&s.pending.kind==='attack'){
+   const attacker=findMonster(s,s.pending.card);
+   if(!s.pending.cancelled&&attacker?.m.faceUp&&attacker.m.position==='atk'&&attacker.p===s.players[s.pending.actor])out.push({kind:'trap',card:c.uid,target:attacker.m.uid});
+  }else if(effect.kind==='sequence'){if(canStartEconomicOperations(s,index,effect.operations))out.push({kind:'trap',card:c.uid,target:''});}
+  else if(effect.kind==='reinforcements'||effect.kind==='castleWalls')out.push(...s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>({kind:'trap',card:c.uid,target:m.uid}) as Action)));
   else if(effect.kind==='waboku')out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='justDesserts'&&s.players[1-index].monsters.length)out.push({kind:'trap',card:c.uid,target:''});
   else if(effect.kind==='mirrorForce')
@@ -140,7 +146,7 @@ function trapActions(s:DuelState,index:number):Action[]{
 function quickSpellActions(s:DuelState,index:number):Action[]{
  if(s.phase!=='response'&&s.phase!=='battle'||s.damageStep)return [];
  const last=s.phase==='response'?s.chain.at(-1):undefined,lastKind=last?getEffect(last.id)?.kind:undefined;
- if(lastKind==='magicJammer'||lastKind==='sevenTools')return [];
+ if(last&&getEffect(last.id)&&getActivationModel(getEffect(last.id)!)?.speed===3)return [];
  if(s.pending.kind==='attack'&&s.pending.stage!=='declare')return [];
  const p=s.players[index],candidates=[
   ...p.backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&isQuickPlaySpell(c.id)),
@@ -158,7 +164,7 @@ function quickSpellActions(s:DuelState,index:number):Action[]{
 function quickMonsterActions(s:DuelState,index:number):Action[]{
  if(s.phase!=='response'||s.pending.kind!=='attack'||s.pending.stage!=='calculation'||s.pending.actor===index)return [];
  const last=s.chain.at(-1),kind=last&&getEffect(last.id)?.kind;
- if(kind==='magicJammer'||kind==='sevenTools')return [];
+ if(last&&getEffect(last.id)&&getActivationModel(getEffect(last.id)!)?.speed===3)return [];
  const attacking=findMonster(s,s.pending.card);
  if(!attacking?.m.faceUp||attacking.p!==s.players[s.pending.actor])return [];
  if(s.pending.target&&!findMonster(s,s.pending.target))return [];
@@ -382,6 +388,14 @@ function resolve(s:DuelState){
    return;
   }
   if(trapsNegated(s)&&card(link.id).kind==='trap'){note(s,'Jinzo negou um efeito de Armadilha.');discardBackrow(s,link.card);return;}
+  if(effect?.kind==='sequence'){
+   executeEconomicOperations(s,link.actor,effect.operations,{finish,checkLP});discardBackrow(s,link.card);note(s,'Efeito de compra/PV resolvido.');return;
+  }
+  if(effect?.kind==='attackResponse'){
+   const cancelled=resolveAttackResponse(s,link.actor,link.target,effect,{attack:atk,checkLP});
+   note(s,cancelled?`${card(link.id).name} negou o ataque.`:'O ataque já não pode ser negado pelo efeito.');discardBackrow(s,link.card);return;
+  }
+
   const target=findMonster(s,link.target)?.m;
   if(effect?.kind==='mysticalSpaceTyphoon'){
    if(s.players.some(p=>p.backrow.some(b=>b.uid===link.target)||p.field?.uid===link.target))discardBackrow(s,link.target);
@@ -425,6 +439,12 @@ function resolve(s:DuelState){
  }
  s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};s.pendingNegated=false;return;}
  const pending=s.pending,negated=s.pendingNegated===true;s.pending={kind:'none'};s.pendingNegated=false;s.phase=s.resume;
+ if(pending.kind==='attack'&&pending.cancelled){
+  s.battleFlip=undefined;
+  if(pending.endBattle){note(s,'Fase de Batalha encerrada pelo efeito.');response(s,{kind:'end'},'battle',s.current);}
+  return;
+ }
+
  if(negated){note(s,'Ativação negada: o efeito da Magia não foi resolvido.');return;}
  if(pending.kind==='monsterEffect'){resolveMonsterPending(s,pending);return;}
  if(pending.kind==='flip'||pending.kind==='summon'||pending.kind==='specialSummon'){

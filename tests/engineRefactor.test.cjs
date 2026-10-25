@@ -17,8 +17,8 @@ test('headless engine imports neither Discord, collection UI, SQLite nor rendere
  const script="require('./dist/duelEngine');console.log(JSON.stringify(Object.keys(require.cache).filter(p=>/discord.js|better-sqlite3|\\/(collection|database|duelUI|duelRenderer)\\.js$/.test(p))));";
  assert.deepEqual(JSON.parse(child.execFileSync(process.execPath,['-e',script],{encoding:'utf8'})),[]);
 });
-test('the existing enabled cohort is unchanged and every member has explicit certification',()=>{
- assert.equal(registry.enabledCardIds.length,121);assert.equal(registry.enabledCardIds.filter(id=>registry.getEffect(id).kind==='normal').length,71);
+test('every enabled card has explicit certification after audited family expansion',()=>{
+ assert.equal(registry.enabledCardIds.length,130);assert.equal(registry.enabledCardIds.filter(id=>registry.getEffect(id).kind==='normal').length,71);
  for(const id of registry.enabledCardIds)assert.equal(registry.getCardStatus(id).stage,'certified');
  assert.equal(child.spawnSync(process.execPath,['scripts/check-card-certification.cjs'],{encoding:'utf8'}).status,0);
 });

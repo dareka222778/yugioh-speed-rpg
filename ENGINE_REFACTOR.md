@@ -1,5 +1,8 @@
 # Refatoração incremental do motor — primeira entrega
 
+> Registro da entrega anterior de 121 cartas. A continuidade atual, com 130
+> cartas e cobertura por famílias, está em [ENGINE_CONTINUITY.md](ENGINE_CONTINUITY.md).
+
 ## Contrato preservado
 
 Base de comparação: `e6840e13a40b590d9d98754faf6effe74acb9231`.

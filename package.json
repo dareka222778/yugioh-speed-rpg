@@ -12,7 +12,8 @@
     "test": "npm run build && node --test tests/*.test.cjs",
     "progress": "node scripts/project-progress.cjs",
     "audit:engine": "node scripts/audit-duel-engine.cjs --games 300",
-    "check:cards": "node scripts/check-card-certification.cjs"
+    "check:cards": "node scripts/check-card-certification.cjs",
+    "coverage:engine": "node scripts/engine-coverage.cjs"
   },
   "engines": {
     "node": "22.x"

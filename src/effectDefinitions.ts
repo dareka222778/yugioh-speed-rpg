@@ -1,10 +1,25 @@
 // Explicit executable definitions, independent from card admission.
+import type {ActivationModel} from './effectModels';
+import type {EconomicOperation} from './economicOperations';
+import {economicOperationIssues} from './economicOperations';
 export type Effect=
+ |{kind:'sequence';activation:ActivationModel;operations:readonly EconomicOperation[]}
+ |{kind:'attackResponse';activation:ActivationModel;endBattle:boolean;reflectAttack:boolean}
  |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'bottomlessTrapHole'|'sakuretsuArmor'|'mirrorForce'}
  |{kind:'heal'|'burn';amount:number}
  |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
 export const effectDefinitions:Record<string,Effect>={
+ '76103675':{kind:'burn',amount:200},
+ '46130346':{kind:'burn',amount:500},
+ '20871001':{kind:'heal',amount:400},
+ '47852924':{kind:'heal',amount:800},
+ '46918794':{kind:'sequence',activation:{speed:1,window:'main',damage:'never'},operations:[{kind:'damage',recipients:[{player:'opponent',amount:1000},{player:'self',amount:500}]}]},
+ '70368879':{kind:'sequence',activation:{speed:1,window:'main',damage:'never'},operations:[{kind:'draw',count:1},{kind:'gainLP',player:'opponent',amount:1000}]},
+ '83968380':{kind:'sequence',activation:{speed:2,window:'free',damage:'never'},operations:[{kind:'draw',count:1}]},
+ '14315573':{kind:'attackResponse',activation:{speed:3,window:'attackDeclared',damage:'never',opponentOnly:true},endBattle:true,reflectAttack:false},
+ '62279055':{kind:'attackResponse',activation:{speed:2,window:'attackDeclared',damage:'never',opponentOnly:true},endBattle:false,reflectAttack:true},
+
  '40640057':{kind:'monsterEffect'},
  '54652250':{kind:'monsterEffect'},
  '07089711':{kind:'monsterEffect'},
@@ -43,10 +58,12 @@ export const effectDefinitions:Record<string,Effect>={
  '01435851':{kind:'equip',races:['Dragon'],atk:300,def:300}
 };
 /** Runtime boundary for imported/staged data, in addition to TypeScript. */
-const executableKinds=new Set<Effect['kind']>(['monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
+const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
  if(!e||typeof e!=='object'||!executableKinds.has(e.kind))return ['unknown-effect-operation'];
+ if(e.kind==='sequence')return economicOperationIssues(e.operations);
+ if(e.kind==='attackResponse'&&(typeof e.endBattle!=='boolean'||typeof e.reflectAttack!=='boolean'||!e.endBattle&&!e.reflectAttack))return ['invalid-attack-response'];
  if((e.kind==='heal'||e.kind==='burn')&&(!Number.isSafeInteger(e.amount)||e.amount<=0))return ['invalid-effect-amount'];
  if(e.kind==='field'||e.kind==='equip'){
   if(!Number.isSafeInteger(e.atk)||!Number.isSafeInteger(e.def))return ['invalid-modifier'];

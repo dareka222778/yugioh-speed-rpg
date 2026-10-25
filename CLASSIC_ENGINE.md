@@ -75,3 +75,11 @@ destruições compartilham operação e políticas explícitas, cartas Normais u
 classificação estruturada, e novos snapshots persistem versões e sorteio.
 O CI verifica certificações depois dos testes. As 121 cartas, decks e a arena
 continuam iguais; handlers legados restantes serão migrados por família.
+
+## Continuidade atual — 130 cartas
+
+Nove cartas adicionais foram habilitadas com os modelos de compra/PV e resposta
+a ataque; detalhes, fontes, testes e fila de trabalho em
+[ENGINE_CONTINUITY.md](ENGINE_CONTINUITY.md). Rode `npm run coverage:engine` para
+ver a divisão real entre dados, modelos, exceções e os 16 handlers legados.
+Arena, mãos, versos e decks dos NPCs continuam inalterados.

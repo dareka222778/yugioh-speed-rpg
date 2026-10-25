@@ -24,3 +24,15 @@ const models:Partial<Record<Effect['kind'],SpellTrapModel>>={
 };
 export function getEffectModel(kind:Effect['kind']):SpellTrapModel|undefined{return models[kind];}
 export function getDestructionModel(kind:Effect['kind']):DestructionModel|undefined{return models[kind]?.destruction;}
+
+/** Definitions with variable parameters carry their own activation policy. */
+export function getActivationModel(effect:Effect):ActivationModel|undefined{
+ return effect.kind==='sequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
+}
+
+export function economicOperations(effect:Effect):readonly import('./economicOperations').EconomicOperation[]|undefined{
+ if(effect.kind==='sequence')return effect.operations;
+ if(effect.kind==='heal')return [{kind:'gainLP',player:'self',amount:effect.amount}];
+ if(effect.kind==='burn')return [{kind:'damage',recipients:[{player:'opponent',amount:effect.amount}]}];
+ if(effect.kind==='potOfGreed')return [{kind:'draw',count:2}];
+}

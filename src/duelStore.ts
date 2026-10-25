@@ -7,6 +7,7 @@ import {starterContents} from './cardCatalog';
 import {createDuel,step,legalActions,validateDuelCards,timeoutDuel,atk,def,type Action,type DuelState} from './duelEngine';
 import {getCard} from './collection';
 import {getNPC,dailyEvent} from './npcContent';
+import {economicOperations} from './effectModels';
 import {getEffect} from './effectRegistry';
 import {getMonsterEffect} from './monsterEffects';
 import {settleEncounter} from './npcProgress';
@@ -44,6 +45,14 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  const source=(a:Extract<Action,{kind:'trap'|'spell'}>)=>[...p.hand,...p.backrow].find(c=>c.uid===a.card);
  const fast=actions.filter((a):a is Extract<Action,{kind:'trap'}>=>a.kind==='trap');
  const useful=fast.filter(a=>{const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
+  if(effect.kind==='sequence'){
+   const draws=(id:string)=>{const effect=getEffect(id);return effect?(economicOperations(effect)??[]).reduce((n,op)=>n+(op.kind==='draw'?op.count:0),0):0;};
+   const index=s.players.indexOf(p),root=s.pending;
+   const committed=(root.kind==='spell'&&root.actor===index?draws(root.id):0)+s.chain.filter(link=>link.actor===index).reduce((n,link)=>n+draws(link.id),0);
+   const ownDraw=effect.operations.reduce((n,op)=>n+(op.kind==='draw'?op.count:0),0);
+   return ownDraw>0&&p.deck.length>=committed+ownDraw;
+  }
+  if(effect.kind==='attackResponse')return s.pending.kind==='attack'&&s.pending.actor!==s.players.indexOf(p)&&!s.chain.some(link=>link.actor===s.players.indexOf(p)&&getEffect(link.id)?.kind==='attackResponse');
   if(effect.kind==='reinforcements'||effect.kind==='castleWalls')return p.monsters.some(m=>m.uid===a.target&&m.faceUp);
   if(effect.kind==='trapHole'||effect.kind==='bottomlessTrapHole')return op.monsters.some(m=>m.uid===a.target);
   if(effect.kind==='torrentialTribute')return op.monsters.length>0&&op.monsters.length>=p.monsters.length;
@@ -132,6 +141,10 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  const advanced=actions.find(a=>a.kind==='field')??actions.find(a=>a.kind==='fusion'&&a.position==='atk');if(advanced)return advanced;
  const spells=actions.filter((a):a is Extract<Action,{kind:'spell'}>=>a.kind==='spell').filter(a=>{
   const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
+  if(effect.kind==='sequence'){
+   const selfDamage=effect.operations.flatMap(op=>op.kind==='damage'?op.recipients:[]).filter(r=>r.player==='self').reduce((sum,r)=>sum+r.amount,0);
+   if(p.lp<=selfDamage)return false;
+  }
   if(effect.kind==='equip')return p.monsters.some(m=>m.uid===a.target);
   if(effect.kind==='darkHole')return op.monsters.length>0&&op.monsters.filter(m=>m.faceUp).reduce((n,m)=>n+atk(m,s),0)>=p.monsters.reduce((n,m)=>n+atk(m,s),0);
   if(effect.kind==='deSpell'||effect.kind==='removeTrap')return op.backrow.some(b=>b.uid===a.target)||op.field?.uid===a.target;

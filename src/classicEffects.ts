@@ -3,6 +3,8 @@ import {getPlayableCard as getCard} from './effectRegistry';
 import {getEffect,equipEligible,isQuickPlaySpell} from './effectRegistry';
 import type {Action,Backrow,CardRef,DuelState,Monster,Pending} from './duelEngine';
 import {resolveSpellException} from './spellExceptions';
+import {canStartEconomicOperations,executeEconomicOperations} from './economicOperations';
+import {economicOperations} from './effectModels';
 import {getDestructionModel} from './effectModels';
 import {executeDestruction} from './effectOperations';
 export type EffectServices={destroy:(s:DuelState,uid:string)=>void;attack:(m:Monster,s:DuelState)=>number;note:(s:DuelState,line:string)=>void;finish:(s:DuelState,winner:number|null,reason:string)=>void;checkLP:(s:DuelState)=>void;onSpecialSummon?:(s:DuelState,actor:number,uid:string,id:string)=>void};
@@ -10,6 +12,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  const e=getEffect(c.id),p=s.players[index],op=s.players[1-index];if(!e)return [];
  // Quick-Play cards Set during this turn cannot be activated until a later turn.
  if(isQuickPlaySpell(c.id)&&p.backrow.some(b=>b.uid===c.uid&&b.setTurn===s.turn))return [];
+ if(e.kind==='sequence')return canStartEconomicOperations(s,index,e.operations)?[{kind:'spell',card:c.uid}]:[];
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
   case 'equip':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp&&equipEligible(e,getCard(m.id)!)).map(m=>m.uid)));
@@ -62,13 +65,17 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
   service.note(s,e.kind==='darkHole'?'Buraco Negro destruiu os monstros do campo.':'Raigeki destruiu os monstros do adversário.');return true;
  }
  if(resolveSpellException(s,a,service))return true;
+ const operations=economicOperations(e);
+ if(operations){
+  const completed=executeEconomicOperations(s,a.actor,operations,service);
+  if(e.kind==='heal')service.note(s,`${p.name} recuperou ${e.amount} PV.`);
+  else if(e.kind==='burn')service.note(s,`${op.name} recebeu ${e.amount} de dano.`);
+  else if(e.kind==='potOfGreed'&&completed)service.note(s,`${p.name} comprou 2 cartas com Pote da Ganância.`);
+  else if(e.kind==='sequence'&&completed)service.note(s,'Efeito de compra/PV resolvido.');
+  return true;
+ }
+
  switch(e.kind){
-  case 'heal':p.lp+=e.amount;service.note(s,`${p.name} recuperou ${e.amount} PV.`);return true;
-  case 'burn':op.lp=Math.max(0,op.lp-e.amount);service.note(s,`${op.name} recebeu ${e.amount} de dano.`);service.checkLP(s);return true;
-  case 'potOfGreed':
-   if(p.deck.length<2){service.finish(s,1-a.actor,'não conseguiu comprar 2 cartas');return true;}
-   p.hand.push(...p.deck.splice(0,2));
-   service.note(s,`${p.name} comprou 2 cartas com Pote da Ganância.`);return true;
   case 'mysticalSpaceTyphoon':if(a.target&&s.players.some(p=>p.backrow.some(b=>b.uid===a.target)||p.field?.uid===a.target)){discardBackrow(s,a.target);service.note(s,'Tufão Espacial Místico destruiu a Magia/Armadilha escolhida.');}return true;
   case 'bookOfMoon':
    if(found?.m.faceUp){turnMonsterFaceDown(found.m);service.note(s,`Livro da Lua colocou ${getCard(found.m.id)!.name} em Defesa com a face para baixo.`);}
