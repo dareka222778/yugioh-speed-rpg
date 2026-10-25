@@ -1,10 +1,12 @@
-# Fase 6 — equipes clássicas 2v2, versão 0.14.0
+# Fase 6 — equipes clássicas 2v2, versão 0.15.0
 
 ## Estado atual
 
 A implementação jogável está disponível para quatro humanos, com efeitos, decks próprios ou emprestados e persistência. A homologação de uma partida por quatro pessoas reais no Discord e a aceitação visual em celular continuam pendentes. Testes automatizados não substituem esses dois critérios. A engine continua limitada às 130 definições habilitadas do RPG; não abrange todas as cartas do anime/TCG.
 
 ## Como jogar
+
+Para experimentar sem reunir outras três pessoas, use `/dupla treino`: você e Yugi enfrentam Kaiba e Joey. A opção `deck` permite escolher um clássico emprestado ou seu deck ativo. Os três NPCs usam o mesmo núcleo, decisões legais e estado salvo das partidas entre humanos; pausam sempre que cabe a você decidir. Uma decisão de NPC pendente após reinício é retomada automaticamente.
 
 1. Os quatro participantes criam seus perfis com `/start`.
 2. Um deles usa `/dupla convidar parceiro:... oponente1:... oponente2:...`.
@@ -28,7 +30,7 @@ Estas são regras próprias de equipes do Speed RPG, não uma alegação de ader
 
 `teamRotation.ts` contém somente a coordenação serializável de quatro posições. O núcleo de regras e o registro declarativo de efeitos são compartilhados com o 1v1; a coordenação opcional não é inserida nos duelos 1v1. As reservas entram na verificação de conservação física de cartas. `tagDuel.ts` adapta ações/decisões e conserva o modo Normal das sessões antigas.
 
-`tagStore.ts` grava estado e revisão em transação SQLite. Identificadores dos controles vinculam usuário, servidor, sessão e revisão. Cliques repetidos não executam novamente uma ação. Reservas bloqueiam partidas simultâneas 1v1/2v2. Migrações são aditivas e foram testadas sobre uma sessão anterior à coluna de formato. Dados inconsistentes são preservados e recusados para revisão.
+`tagStore.ts` grava estado e revisão em transação SQLite. Identificadores dos controles vinculam usuário, servidor, sessão e revisão. Cliques repetidos não executam novamente uma ação. O anfitrião fica reservado ao criar o convite; cada convidado fica reservado somente ao aceitar. Convites não podem bloquear outra pessoa sem consentimento. As reservas aceitas bloqueiam partidas simultâneas 1v1/2v2. Migrações são aditivas e foram testadas sobre uma sessão anterior à coluna de formato. Dados inconsistentes são preservados e recusados para revisão.
 
 Publicações têm uma revisão confirmada separada da revisão do jogo. O verificador periódico retenta mensagens pendentes após falhas/reinício. Uma confirmação antiga não encobre uma jogada mais recente. O estado já salvo não depende de a edição da mensagem funcionar.
 
@@ -40,17 +42,18 @@ O arquivo do campo 1v1 permanece idêntico: SHA-256 `01d2253332cae7cf18106979e46
 
 | Verificação | Resultado |
 |---|---|
-| Suíte completa | 410 testes aprovados |
+| Suíte completa | 415 testes aprovados |
 | Aceitação 1v1 | 1.000 partidas, 63.120 decisões, 4.388 restaurações, conservação física |
 | 2v2 clássico determinístico | 1.000 partidas, 58.507 decisões, 4.045 restaurações, conservação física |
 | Definições presentes na auditoria 2v2 | 130; 47 definições com ativação explícita observada |
+| Treino solo persistido | 100 partidas, um transporte humano simulado e três NPCs, conservação e economia inalterada |
 | Integração 2v2 clássico persistida | 100 partidas através do mesmo adaptador de componentes e SQLite, sem alterar economia |
 | Casos específicos de equipes | respostas no fim do turno, custo do representante, Adicional individual, devolução ao dono inativo, quatro mãos com excedente, empate e migração |
 | Privacidade/Discord | limites de payload, bloqueio por usuário/servidor, imagens sem mãos alheias, controles com revisão |
 
 A presença de uma carta na auditoria não prova, sozinha, todos os seus efeitos. A evidência combina os testes do núcleo por famílias com os testes específicos do coordenador e as partidas de integração. Os relatórios em `validation/` preservam esse escopo e não afirmam certificação humana.
 
-Reprodução: `npm test`, `npm run accept:engine`, `npm run audit:tag`, `npm run audit:tag-sessions`, `npm run audit:tag-classic`, `npm run audit:tag-classic-sessions`. No plano de hospedagem, use `npm run test:host`, que executa uma suíte por vez. A execução paralela abortou processos naquele plano; a execução sequencial completa passou.
+Reprodução: `npm test`, `npm run accept:engine`, `npm run audit:tag`, `npm run audit:tag-sessions`, `npm run audit:tag-classic`, `npm run audit:tag-classic-sessions`, `npm run audit:tag-training`. No plano de hospedagem, use `npm run test:host`, que executa uma suíte por vez. A execução paralela abortou processos naquele plano; a execução sequencial completa passou.
 
 ## Histórico dos blocos implantados
 
@@ -58,6 +61,7 @@ Reprodução: `npm test`, `npm run accept:engine`, `npm run audit:tag`, `npm run
 - 0.12.0: campo visual e consulta carta a carta.
 - 0.13.0: publicação recuperável, republicação de arena e auditoria de sessões persistidas.
 - 0.14.0: efeitos clássicos, decks próprios, Adicionais individuais, propriedade física, correntes e zonas completas.
+- 0.15.0: treino solo com três NPCs, retomada automática dos NPCs e reserva de convidados somente após consentimento.
 
 ## Critério para encerrar a homologação
 

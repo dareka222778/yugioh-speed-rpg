@@ -1,5 +1,5 @@
 import {ActionRowBuilder,ButtonBuilder,ButtonStyle,MessageFlags} from 'discord.js';
-import {acceptTag,actTag,getTag,quitTag,type TagRecord} from './tagStore';
+import {acceptTag,actTag,runTagBots,getTag,quitTag,type TagRecord} from './tagStore';
 import {tagPrivateMessage,tagPublicMessage,tagCardMessage,tagZonesMessage,tagZoneCardMessage} from './tagUI';
 /** Transport adapter: acknowledgements precede mutation; revisions reject double clicks. */
 export async function handleTagComponent(i:any,refresh:(r:TagRecord)=>Promise<void>,onDefer:(kind:'reply'|'update')=>void,panels={public:async(r:TagRecord)=>tagPublicMessage(r),private:async(r:TagRecord,id:string,page=0)=>tagPrivateMessage(r,id,page),card:async(r:TagRecord,id:string,index:number)=>tagCardMessage(r,id,index),zones:async(r:TagRecord,id:string,page=0)=>tagZonesMessage(r,id,page),zonecard:async(r:TagRecord,id:string,index:number)=>tagZoneCardMessage(r,id,index)}){
@@ -18,7 +18,7 @@ export async function handleTagComponent(i:any,refresh:(r:TagRecord)=>Promise<vo
  }
  if(!['accept','cancel','confirm','act'].includes(action))throw Error('Controle 2v2 inválido.');
  await i.deferUpdate();onDefer('update');
- const next=action==='accept'?acceptTag(id,actor,i.guildId,Number(revision)):action==='act'?actTag(id,actor,i.guildId,Number(revision),Number(i.values?.[0])):quitTag(id,actor,i.guildId,Number(revision));
+ let next=action==='accept'?acceptTag(id,actor,i.guildId,Number(revision)):action==='act'?actTag(id,actor,i.guildId,Number(revision),Number(i.values?.[0])):quitTag(id,actor,i.guildId,Number(revision));
  // Public refresh still runs if a committed action cannot edit the private response.
- try{await i.editReply(action==='act'||action==='confirm'?await panels.private(next,actor):await panels.public(next));}finally{await refresh(next);}
+ try{if(action==='act')next=runTagBots(next.id);await i.editReply(action==='act'||action==='confirm'?await panels.private(next,actor):await panels.public(next));}finally{await refresh(getTag(id));}
 }

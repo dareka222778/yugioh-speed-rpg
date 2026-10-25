@@ -1,3 +1,5 @@
+> **0.15.0 — equipes clássicas e treino solo:** `/dupla convidar` cria uma partida entre quatro pessoas, com decks próprios ou emprestados; `/dupla treino` coloca você e Yugi contra Kaiba e Joey. Há efeitos, correntes, mãos/Adicionais individuais, salvamento e recuperação de arena. Sem alterar coleção ou economia. As 130 cartas são o escopo atual; homologação humana e aceitação visual ainda precisam ser concluídas. Regras em [PHASE_6.md](PHASE_6.md), entrega em [RELEASE_0_15_0.md](RELEASE_0_15_0.md).
+
 > **0.10.0 — fase 6 iniciada:** `/dupla simular` exercita quatro bots em um laboratório 2v2 com monstros normais. Não inicia partidas humanas nem altera sua coleção. Escopo e próximos gates em [PHASE_6.md](PHASE_6.md). O 1v1 mantém 130 cartas e a arena original.
 
 > **0.9.0 — comandos azuis:** perfil acessível, coleção com resumo, ficha de carta compartilhada e guia privado em `/ajuda` e `/regras`. A arena permanece intacta. Veja [RELEASE_0_9_0.md](RELEASE_0_9_0.md).
@@ -20,15 +22,15 @@ Bot de Discord para um RPG de cartas inspirado em Speed Duel.
 
 ## Rodando localmente
 
-1. Instale Node.js 20+.
+1. Instale Node.js 22.x (a versão usada no host e no CI).
 2. Copie `.env.example` para `.env`.
 3. Preencha `DISCORD_TOKEN` e `DISCORD_CLIENT_ID`.
-4. Rode `npm install`.
+4. Rode `npm ci`.
 5. Rode `npm run dev`.
 
 > Nunca envie seu token do Discord para ninguém e nunca coloque o `.env` no GitHub.
 
-## Próximas etapas
+## Plano inicial histórico (não é a numeração atual das fases)
 
 1. Importador de cartas Speed Duel / primeira geração.
 2. Coleção e editor de deck.

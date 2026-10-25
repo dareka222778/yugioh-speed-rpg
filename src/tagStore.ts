@@ -1,11 +1,11 @@
-import {npcs} from './npcContent';
-import {step} from './duelEngine';
+import {npcs,getNPC} from './npcContent';
+import {step,decisionPlayer} from './duelEngine';
 import {randomBytes,randomInt} from 'node:crypto';
 import {db,getPlayer} from './database';
-import {currentDuel,activeCards,DECISION_TIMEOUT_MS} from './duelStore';
+import {currentDuel,activeCards,chooseNPC,DECISION_TIMEOUT_MS} from './duelStore';
 import {createTagDuel,assertTagDuel,stepTagDuel,tagActions,tagNormalCardIds,timeoutTagDuel,tagDecisionMember,type TagDuel} from './tagDuel';
 import {getPlayableCard} from './effectRegistry';
-export type TagRecord={id:string;guild:string;channel:string;message:string|null;revision:number;updated:number;status:'lobby'|'playing'|'finished'|'cancelled'|'expired';members:{id:string;name:string;accepted:boolean;cards?:string[];extra?:string[]}[];state:TagDuel|null;public_revision?:number;rules?:'normal'|'classic-loan'|'classic-owned'};
+export type TagRecord={id:string;guild:string;channel:string;message:string|null;revision:number;updated:number;status:'lobby'|'playing'|'finished'|'cancelled'|'expired';members:{id:string;name:string;accepted:boolean;automated?:boolean;deckSource?:string;cards?:string[];extra?:string[]}[];state:TagDuel|null;public_revision?:number;rules?:'normal'|'classic-loan'|'classic-owned'};
 db.exec(`CREATE TABLE IF NOT EXISTS tag_sessions(id TEXT PRIMARY KEY,guild TEXT NOT NULL,channel TEXT NOT NULL,message TEXT,revision INTEGER NOT NULL,updated INTEGER NOT NULL,status TEXT NOT NULL,members TEXT NOT NULL,state TEXT);
 CREATE TABLE IF NOT EXISTS tag_members(owner TEXT PRIMARY KEY,session_id TEXT NOT NULL REFERENCES tag_sessions(id));`);
 const columns=new Set((db.prepare('PRAGMA table_info(tag_sessions)').all() as {name:string}[]).map(c=>c.name));if(!columns.has('public_revision'))db.exec('ALTER TABLE tag_sessions ADD COLUMN public_revision INTEGER NOT NULL DEFAULT -1');
@@ -22,10 +22,10 @@ export const createTagLobby=db.transaction((ids:string[],guild:string,channel:st
  if(ids.length!==4||new Set(ids).size!==4)throw Error('Escolha quatro humanos diferentes.');
  const members=ids.map((id,index)=>{available(id);const p=getPlayer(id);if(!p)throw Error('Todos os participantes precisam criar o perfil com /start.');return {id,name:(p.character_name||p.username).slice(0,32),accepted:index===0};});
  const r:TagRecord={id:randomBytes(8).toString('hex'),guild,channel,message:null,revision:0,updated:Date.now(),status:'lobby',members,state:null,rules};if(rules==='classic-owned'){const host=members[0] as TagRecord['members'][number];Object.assign(host,activeCards(ids[0]));}
- db.prepare('INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)').run(r.id,guild,channel,null,0,r.updated,r.status,JSON.stringify(members),null,rules);for(const id of ids)db.prepare('INSERT INTO tag_members VALUES(?,?)').run(id,r.id);return r;
+ db.prepare('INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)').run(r.id,guild,channel,null,0,r.updated,r.status,JSON.stringify(members),null,rules);db.prepare('INSERT INTO tag_members VALUES(?,?)').run(ids[0],r.id);return r;
 });
 function authorize(r:TagRecord,actor:string,guild:string){if(r.guild!==guild||!r.members.some(p=>p.id===actor))throw Error('Você não participa deste 2v2 neste servidor.');}
-export const acceptTag=db.transaction((id:string,actor:string,guild:string,revision:number)=>{const r=getTag(id);authorize(r,actor,guild);if(r.status!=='lobby'||r.revision!==revision)throw Error('Convite atualizado ou encerrado. Use Atualizar.');const member=r.members.find(p=>p.id===actor)!;if(member.accepted)throw Error('Você já confirmou. Aguarde os outros participantes.');if(currentDuel(actor))throw Error('Encerre seu duelo 1v1 antes de aceitar.');if(r.rules==='classic-owned')Object.assign(member,activeCards(actor));member.accepted=true;r.revision++;
+export const acceptTag=db.transaction((id:string,actor:string,guild:string,revision:number)=>{const r=getTag(id);authorize(r,actor,guild);if(r.status!=='lobby'||r.revision!==revision)throw Error('Convite atualizado ou encerrado. Use Atualizar.');const member=r.members.find(p=>p.id===actor)!;if(member.accepted)throw Error('Você já confirmou. Aguarde os outros participantes.');available(actor);db.prepare('INSERT INTO tag_members VALUES(?,?)').run(actor,id);if(r.rules==='classic-owned')Object.assign(member,activeCards(actor));member.accepted=true;r.revision++;
  // The lobby deadline never extends when one participant confirms.
  if(r.members.every(p=>p.accepted)){r.state=createTagDuel(r.members.map((p,i)=>({id:p.id,name:p.name,...r.rules==='classic-owned'?{cards:p.cards!,extra:p.extra??[]}:r.rules==='classic-loan'?{cards:[...npcs[i%3].cards],extra:[...npcs[i%3].extra]}:{cards:tagLoanDeck()}})) as Parameters<typeof createTagDuel>[0],{first:randomInt(4),classic:r.rules!=='normal'});r.status='playing';r.updated=Date.now();}return save(r);
 });
@@ -36,7 +36,22 @@ export const quitTag=db.transaction((id:string,actor:string,guild:string,revisio
  r.state=structuredClone(r.state);r.state.core=step(r.state.core,'tag-team-'+team,{kind:'concede'});assertTagDuel(r.state);r.status='finished';
  }else r.status='cancelled';r.revision++;return save(r);});
 export function setTagMessage(id:string,message:string,channel?:string){db.prepare('UPDATE tag_sessions SET message=?,channel=COALESCE(?,channel),public_revision=-1 WHERE id=?').run(message,channel??null,id);}
-export function dueTags(){const rows=db.prepare("SELECT id FROM tag_sessions WHERE status IN ('lobby','playing') OR (message IS NOT NULL AND public_revision<revision)").all() as {id:string}[];return rows.flatMap(p=>{try{const r=getTag(p.id);return (r.public_revision??-1)<r.revision?[r]:[];}catch{console.error('Sessão 2v2 inválida preservada para revisão:',p.id);return [];}});}
+export function dueTags(){const rows=db.prepare("SELECT id FROM tag_sessions WHERE status IN ('lobby','playing') OR (message IS NOT NULL AND public_revision<revision)").all() as {id:string}[];return rows.flatMap(p=>{try{const r=getTag(p.id);return (r.public_revision??-1)<r.revision||isTagBotDecision(r)?[r]:[];}catch{console.error('Sessão 2v2 inválida preservada para revisão:',p.id);return [];}});}
 export function markTagPublished(id:string,revision:number){db.prepare('UPDATE tag_sessions SET public_revision=? WHERE id=? AND revision=?').run(revision,id,revision);}
 export function tagDeadline(r:TagRecord){return r.updated+(r.status==='lobby'?LOBBY_MS:DECISION_TIMEOUT_MS);}
 export {tagDecisionMember};
+
+
+/** Training uses exactly the same saved four-seat state; only the real user occupies a global seat lock. */
+export const createTagTraining=db.transaction((owner:string,guild:string,channel:string,source='yugi'):TagRecord=>{
+ available(owner);const player=getPlayer(owner);if(!player)throw Error('Crie seu perfil com /start.');const id=randomBytes(8).toString('hex');
+ const human=source==='meu_deck'?activeCards(owner):getNPC(source),opponents=[getNPC('kaiba'),getNPC('yugi'),getNPC('joey')];
+ const members:TagRecord['members']=[{id:owner,name:(player.character_name||player.username).slice(0,32),accepted:true,deckSource:source},...opponents.map((p,i)=>({id:`tag-npc-${id}-${i+1}`,name:p.name,accepted:true,automated:true}))];
+ const decks=[human,...opponents];const state=createTagDuel(members.map((p,i)=>({id:p.id,name:p.name,cards:[...decks[i].cards],extra:[...decks[i].extra??[]]})) as Parameters<typeof createTagDuel>[0],{classic:true,first:randomInt(4)});
+ const r:TagRecord={id,guild,channel,message:null,revision:0,updated:Date.now(),status:'playing',members,state,rules:'classic-loan'};
+ db.prepare('INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)').run(id,guild,channel,null,0,r.updated,r.status,JSON.stringify(members),JSON.stringify(state),r.rules);db.prepare('INSERT INTO tag_members VALUES(?,?)').run(owner,id);return r;
+});
+export function isTagBotDecision(r:TagRecord){return r.status==='playing'&&!!r.state&&r.members.some(p=>p.id===tagDecisionMember(r.state!).id&&p.automated===true);}
+export function runTagBots(id:string,limit=300){let r=getTag(id),count=0;while(isTagBotDecision(r)){
+ if(++count>limit)throw Error('O treino chegou ao limite de processamento. Reabra com /dupla ver para continuar.');const s=r.state!,owner=tagDecisionMember(s).id,a=chooseNPC(s.core,s.core.players[decisionPlayer(s.core)].id);if(!a)throw Error('O NPC ficou sem jogada legal. O estado foi preservado.');const index=tagActions(s,owner).findIndex(candidate=>JSON.stringify(candidate)===JSON.stringify(a));if(index<0)throw Error('Decisão de NPC inválida. O estado foi preservado.');r=actTag(r.id,owner,r.guild,r.revision,index);
+ }return r;}
