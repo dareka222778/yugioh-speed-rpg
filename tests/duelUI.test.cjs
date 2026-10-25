@@ -2,7 +2,7 @@ const {test,after}=require('node:test');const assert=require('node:assert/strict
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'duel-ui-'));process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
 const load=Module._load;Module._load=function(name,parent){if(name==='./cardArt'&&parent.filename.endsWith('/dist/duelRenderer.js'))return {getCardArt:async()=>undefined};return load.apply(this,arguments);};
 const {renderDuel}=require('../dist/duelRenderer');Module._load=load;
-const {createDuel,step}=require('../dist/duelEngine');const {publicDuelData,duelPrivateMessage,duelCardMessage,duelPublicMessage,visualDuelPrivate,visualDuelPublic,invitationMessage}=require('../dist/duelUI');const db=require('../dist/database');const {starterContents}=require('../dist/cardCatalog');
+const {createDuel,step}=require('../dist/duelEngine');const {publicDuelData,duelPrivateMessage,duelCardMessage,duelZonesMessage,duelZoneCardMessage,duelPublicMessage,visualDuelPrivate,visualDuelPublic,invitationMessage}=require('../dist/duelUI');const db=require('../dist/database');const {starterContents}=require('../dist/cardCatalog');
 const ids=style=>starterContents[style].flatMap(c=>Array(c.quantity).fill(c.id));
 let s=createDuel([{id:'101',name:'Kise',cards:ids('warrior')},{id:'102',name:'Oponente',cards:ids('spellcaster')}],()=>.5);
 const m={uid:'hidden',id:'15025844',position:'def',faceUp:false,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0};s.players[1].monsters=[m];s.players[1].backrow=[{uid:'set-trap',id:'44209392',setTurn:1,faceUp:false}];
@@ -45,6 +45,17 @@ test('hand inspector is per-card, owner-only, and offers original legal-action i
  const picker=own.components.find(row=>row.toJSON().components[0].custom_id?.startsWith('duel:card:'));
  assert.ok(picker);assert.equal(picker.toJSON().components[0].options.length,hand.length);
 });
+test('hand carousel serializes unique custom IDs for zero through seven cards, including Hane-Hane and Sogen',()=>{
+ for(let count=0;count<=7;count++){
+  const r=structuredClone(record());r.state.players[0].hand=Array.from({length:count},(_,i)=>({uid:'inspect-'+i,id:i%2?'86318356':'07089711'}));
+  if(!count){assert.throws(()=>duelCardMessage(r,'101',0),/mão/);continue;}
+  for(let index=0;index<count;index++){
+   const payload=duelCardMessage(r,'101',index),components=payload.components.flatMap(row=>row.toJSON().components),ids=components.map(c=>c.custom_id);
+   assert.equal(new Set(ids).size,ids.length);assert.ok(ids.every(id=>id.length<=100));payload.embeds.forEach(e=>e.toJSON());
+   assert.equal(payload.components[0].components.length,count===1?1:count===2?2:3);
+  }
+ }
+});
 test('card-by-card controls never expose opponent hidden IDs or cards to other users',()=>{
  const r=record();
  assert.throws(()=>duelCardMessage(r,'intruder',0),/participantes/);
@@ -55,6 +66,17 @@ test('card-by-card controls never expose opponent hidden IDs or cards to other u
  assert.ok(!data.includes('15025844'));assert.ok(!data.includes('44209392'));
  const victim=duelCardMessage(r,'102',0);
  assert.equal(victim.cardId,s.players[1].hand[0].id);
+});
+test('zone inspector opens Sogen, excludes opposing hidden zones and rejects outsiders',()=>{
+ const r=structuredClone(record());r.state.players[0].field={uid:'sogen-field',id:'86318356',faceUp:true,setTurn:1};
+ r.state.players[0].monsters=[{...m,uid:'own-hane',id:'07089711'}];
+ const payload=duelZonesMessage(r,'101'),options=payload.components.flatMap(row=>row.toJSON().components.flatMap(c=>c.options));
+ const cards=options.map(o=>duelZoneCardMessage(r,'101',Number(o.value)).cardId);
+ assert.ok(cards.includes('86318356'));assert.ok(cards.includes('07089711'));assert.ok(!cards.includes('15025844'));assert.ok(!cards.includes('44209392'));
+ assert.equal(duelZonesMessage(r,'stranger').components.length,0);assert.throws(()=>duelZoneCardMessage(r,'stranger',0),/participantes/);
+ assert.throws(()=>duelZoneCardMessage(r,'101',999),/indisponível/);
+ assert.throws(()=>duelZoneCardMessage(r,'101',NaN),/indisponível/);
+ for(const row of payload.components)assert.ok(row.toJSON().components[0].options.length<=25);
 });
 test('new Azure palette satisfies text contrast and preserves public/private renderer isolation',()=>{
  const {azure,contrast,duelLayout}=require('../dist/duelTheme');

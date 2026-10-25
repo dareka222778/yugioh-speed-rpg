@@ -80,10 +80,10 @@ export function duelCardMessage(r:DuelRecord,owner:string,requestedIndex:number)
   .setDescription(`${stats}\n\n${info.summary??'Confira o texto oficial para regras completas.'}\n\n${actions.length?`${actions.length} jogadas disponíveis com esta carta.`:'Nenhuma jogada disponível com esta carta neste momento.'}`)
   .setFooter({text:`Carta da sua mão • Privado • ${s.turn}º turno`});
  const rows:(ActionRowBuilder<ButtonBuilder>|ActionRowBuilder<StringSelectMenuBuilder>)[]=[];
- rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(
-  new ButtonBuilder().setCustomId(`duel:card:${r.id}:${r.revision}:${(requestedIndex-1+p.hand.length)%p.hand.length}`).setLabel('◀ Carta anterior').setStyle(ButtonStyle.Secondary),
-  new ButtonBuilder().setCustomId(`duel:view:${r.id}:${r.revision}:1`).setLabel('Voltar ao painel').setStyle(ButtonStyle.Primary),
-  new ButtonBuilder().setCustomId(`duel:card:${r.id}:${r.revision}:${(requestedIndex+1)%p.hand.length}`).setLabel('Próxima carta ▶').setStyle(ButtonStyle.Secondary)));
+ const navigation=[new ButtonBuilder().setCustomId(`duel:view:${r.id}:${r.revision}:1`).setLabel('Voltar ao painel').setStyle(ButtonStyle.Primary)];
+ if(p.hand.length>2)navigation.unshift(new ButtonBuilder().setCustomId(`duel:card:${r.id}:${r.revision}:${(requestedIndex-1+p.hand.length)%p.hand.length}`).setLabel('◀ Carta anterior').setStyle(ButtonStyle.Secondary));
+ if(p.hand.length>1)navigation.push(new ButtonBuilder().setCustomId(`duel:card:${r.id}:${r.revision}:${(requestedIndex+1)%p.hand.length}`).setLabel('Próxima carta ▶').setStyle(ButtonStyle.Secondary));
+ rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(navigation));
  if(actions.length)rows.push(new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
   new StringSelectMenuBuilder().setCustomId(`duel:act:${r.id}:${r.revision}:1`)
    .setPlaceholder('Jogar esta carta')
@@ -91,7 +91,9 @@ export function duelCardMessage(r:DuelRecord,owner:string,requestedIndex:number)
  return {embeds:[embed],components:rows,attachments:[],allowedMentions:{parse:[] as never[]},cardId:selected.id};
 }
 export async function visualDuelCard(r:DuelRecord,owner:string,index:number){
- const model=duelCardMessage(r,owner,index);
+ return cardArtPayload(duelCardMessage(r,owner,index));
+}
+async function cardArtPayload(model:ReturnType<typeof duelCardMessage>){
  const {cardId,...payload}=model;
  try{
   const art=await getCardArt(cardId);
@@ -114,9 +116,39 @@ export async function visualDuelPrivate(r:DuelRecord,owner:string,page=1){
 }
 export function quitMessage(r:DuelRecord){return {content:'Desistir encerra o duelo. Confirma?',components:[new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:confirm:${r.id}:${r.revision}`).setLabel('Sim, desistir').setStyle(ButtonStyle.Danger),new ButtonBuilder().setCustomId(`duel:open:${r.id}:${r.revision}`).setLabel('Continuar jogando').setStyle(ButtonStyle.Secondary))],allowedMentions:{parse:[] as never[]}};}
 
+function inspectableZoneCards(r:DuelRecord,viewer:string){
+ if(!r.state)throw new Error('O duelo ainda não começou.');
+ if(!r.state.players.some(p=>p.id===viewer))throw new Error('Só participantes podem inspecionar as zonas.');
+ return r.state.players.flatMap(p=>{
+  const zones=[{name:'Monstro',cards:p.monsters.filter(c=>c.faceUp||p.id===viewer)},
+   {name:'Magia/Armadilha',cards:p.backrow.filter(c=>c.faceUp||p.id===viewer)},
+   {name:'Campo',cards:p.field&&(p.field.faceUp||p.id===viewer)?[p.field]:[]},
+   {name:'Cemitério',cards:p.grave},{name:'Banidas',cards:p.banished??[]},
+   {name:'Adicional',cards:p.id===viewer?p.extra??[]:[]}];
+  return zones.flatMap(z=>z.cards.map(card=>({card,zone:z.name,player:p.name})));
+ });
+}
+export function duelZoneCardMessage(r:DuelRecord,viewer:string,index:number){
+ const cards=inspectableZoneCards(r,viewer);
+ if(!Number.isSafeInteger(index)||index<0||index>=cards.length)throw new Error('Carta indisponível. Atualize as zonas.');
+ const selected=cards[index],info=getCard(selected.card.id);
+ if(!info)throw new Error('Carta indisponível no catálogo.');
+ const embed=new EmbedBuilder().setColor(embedColors.private).setTitle(info.name)
+  .setDescription(`${info.kind==='monster'?`ATK ${info.atk} / DEF ${info.defense} • Nível ${info.level}\n\n`:''}${info.summary??'Sem descrição disponível.'}`)
+  .setFooter({text:`${selected.player} • ${selected.zone} • Somente consulta`});
+ return {embeds:[embed],components:[new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId(`duel:zoneback:${r.id}:${r.revision}:0`).setLabel('Voltar às zonas').setStyle(ButtonStyle.Secondary))],attachments:[],allowedMentions:{parse:[] as never[]},cardId:selected.card.id};
+}
+export async function visualDuelZoneCard(r:DuelRecord,viewer:string,index:number){return cardArtPayload(duelZoneCardMessage(r,viewer,index));}
 export function duelZonesMessage(r:DuelRecord,viewer:string){
+ const visible=r.state?.players.some(p=>p.id===viewer)?inspectableZoneCards(r,viewer):[];
  if(!r.state)throw new Error('O duelo ainda não começou.');const embed=new EmbedBuilder().setColor(embedColors.public).setTitle('Cemitério e zonas do duelo');
  const list=(cards:{id:string}[])=>{const counts=new Map<string,number>();for(const c of cards)counts.set(c.id,(counts.get(c.id)??0)+1);return [...counts].map(([id,n])=>`${n}× ${getCard(id)?.name??id}`).join('\n').slice(0,1000)||'Vazio';};
  for(const p of r.state.players){embed.addFields({name:`${p.name} • Cemitério (${p.grave.length})`,value:list(p.grave)},{name:`${p.name} • Magia de Campo`,value:p.field?(p.field.faceUp||p.id===viewer?getCard(p.field.id)!.name:'Carta virada para baixo'):'Zona vazia'},{name:`${p.name} • Deck Adicional (${p.extra?.length??0})`,value:p.id===viewer?list(p.extra??[]):'Identidade das cartas oculta.'},{name:`${p.name} • Banidas (${p.banished?.length??0})`,value:list(p.banished??[])});}
- return {embeds:[embed],components:[],allowedMentions:{parse:[] as never[]}};
+ const components:ActionRowBuilder<StringSelectMenuBuilder>[]=[];
+ for(let offset=0;offset<visible.length&&components.length<5;offset+=25){
+  components.push(new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(new StringSelectMenuBuilder()
+   .setCustomId(`duel:zonecard:${r.id}:${r.revision}:${offset}`).setPlaceholder('Ampliar carta de uma zona')
+   .addOptions(visible.slice(offset,offset+25).map((c,i)=>({label:`${c.zone} • ${getCard(c.card.id)?.name??'Carta'}`.slice(0,100),description:c.player.slice(0,100),value:String(offset+i)})))));
+ }
+ return {embeds:[embed],components,allowedMentions:{parse:[] as never[]}};
 }

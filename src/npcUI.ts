@@ -22,7 +22,7 @@ export function galleryModel(owner:string,now=Date.now(),npcId='joey',view:Galle
  const max=view==='hero'?1:view==='deck'?Math.ceil(cards.length/10):cards.length;
  if(page<0||page>=max)throw new Error('Página inexistente. Abra /npc ver.');
  return {id:npcId,name:npc.name,index:npcs.indexOf(npc),style:npc.style,description:npc.description,
-  won:progress.won.has(npcId),reward:`+${npc.reward.dp} DP  ·  +${npc.reward.xp} XP  ·  Cartas`,
+  won:progress.won.has(npcId),reward:`+${npc.reward.dp} DP  ·  +${npc.reward.xp} XP`,
   daily:event.npc.id===npcId,dailyClaimed:progress.dailyClaimed,cards,page,view,mainCount:npc.cards.length,extraCount:npc.extra.length};
 }
 export function npcLobby(owner:string,now=Date.now(),npcId='joey',view:GalleryView='hero',page=0){
@@ -33,7 +33,7 @@ export function npcLobby(owner:string,now=Date.now(),npcId='joey',view:GalleryVi
  const rows:(ActionRowBuilder<ButtonBuilder>|ActionRowBuilder<StringSelectMenuBuilder>)[]=[];
  if(view==='hero'){
   embed.setDescription(`**${npc.style}**\n${npc.description}\n\n**Deck jogável:** ${npc.cards.length} cartas principais${npc.extra.length?` + ${npc.extra.length} no Adicional`:''}. O deck exibido é exatamente o que este duelista usa contra você.`);
-  embed.addFields({name:m.won?'✓ Primeira vitória recebida':'Primeira vitória',value:m.won?'Revanche livre.':`**${npc.reward.dp} DP + ${npc.reward.xp} XP + ${npc.reward.cards.length} carta(s)**`});
+  embed.addFields({name:m.won?'✓ Primeira vitória recebida':'Primeira vitória',value:m.won?'Revanche livre.':`**${npc.reward.dp} DP + ${npc.reward.xp} XP**`});
   rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(
    btn('◀ Duelista',nav(npcs[(m.index+npcs.length-1)%npcs.length].id,'hero',0)),
    btn(`Duelar com ${npc.name.split(' ')[0]}`,`npc:challenge:${owner}:${npcId}`,ButtonStyle.Primary),

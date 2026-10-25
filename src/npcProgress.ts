@@ -20,14 +20,14 @@ export const settleEncounter=db.transaction((duelId:string,s:DuelState,now=Date.
  const reward:NonNullable<DuelState['reward']>={dp:0,xp:0,cards:[],first:false,daily:false,note:''};
  if(won){
   const first=db.prepare('INSERT OR IGNORE INTO npc_first_wins(discord_id,npc_id,duel_id) VALUES(?,?,?)').run(owner,npc.id,duelId).changes;
-  if(first){reward.first=true;reward.dp+=npc.reward.dp;reward.xp+=npc.reward.xp;reward.cards.push(...npc.reward.cards);}
+  if(first){reward.first=true;reward.dp+=npc.reward.dp;reward.xp+=npc.reward.xp;}
   const daily=dailyEvent(now);
-  if(s.encounter.eventDay===daily.day&&daily.npc.id===npc.id&&db.prepare('INSERT OR IGNORE INTO npc_daily_claims(discord_id,event_day,duel_id) VALUES(?,?,?)').run(owner,daily.day,duelId).changes){reward.daily=true;reward.dp+=daily.dp;reward.xp+=daily.xp;reward.cards.push(...daily.cards);}
+  if(s.encounter.eventDay===daily.day&&daily.npc.id===npc.id&&db.prepare('INSERT OR IGNORE INTO npc_daily_claims(discord_id,event_day,duel_id) VALUES(?,?,?)').run(owner,daily.day,duelId).changes){reward.daily=true;reward.dp+=daily.dp;reward.xp+=daily.xp;}
  }
  const expired=!!s.encounter.eventDay&&s.encounter.eventDay!==eventDay(now);
  reward.note=won?(reward.first||reward.daily?'Recompensas creditadas automaticamente.':s.encounter.eventDay&&s.encounter.eventDay!==eventDay(now)?'O evento virou à meia-noite; bônus diário expirado.':'Primeira vitória e bônus diário já recebidos; revanche sem recompensa.'):'Derrota, desistência ou W.O.: sem recompensa.';
  if(won&&expired&&(reward.first||reward.daily))reward.note+=' Bônus diário expirado na virada de São Paulo.';
  if(reward.dp||reward.xp)db.prepare('UPDATE players SET dp=dp+?,xp=xp+?,duelist_level=MAX(duelist_level,1+CAST((xp+?)/100 AS INTEGER)) WHERE discord_id=?').run(reward.dp,reward.xp,reward.xp,owner);
- const add=db.prepare('INSERT INTO player_cards(discord_id,card_key,quantity) VALUES(?,?,1) ON CONFLICT(discord_id,card_key) DO UPDATE SET quantity=quantity+1');for(const id of reward.cards)add.run(owner,id);
+ // Ordinary encounters never write inventory. Card distribution requires a separate explicit event flow.
  db.prepare('INSERT INTO npc_results(duel_id,discord_id,npc_id,won,result,created_at) VALUES(?,?,?,?,?,?)').run(duelId,owner,npc.id,Number(won),JSON.stringify(reward),now);s.reward=reward;
 });

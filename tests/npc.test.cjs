@@ -20,23 +20,30 @@ test('30 seeded complete games across NPCs terminate and preserve every main/ext
  assert.equal(new Set(global.map(c=>c.uid)).size,20+n.cards.length+n.extra.length);}
  }
 });
-test('start grants nothing; first victory atomically awards exact DP, XP and owned cards once, and survives reopening',()=>{
+test('start grants nothing; first victory awards DP and XP once without changing inventory, and survives reopening',()=>{
  player('201');const before=database.getPlayer('201'),inventory=database.getCollection('201');const r=store.createNPCDuel('201','g','c','joey');assert.deepEqual(database.getCollection('201'),inventory);assert.equal(database.getPlayer('201').dp,before.dp);assert.throws(()=>store.createNPCDuel('201','other','c','yugi'),/já tem/);
- const won=finish(r),reward=content.getNPC('joey').reward;assert.equal(won.status,'finished');assert.equal(won.state.reward.first,true);assert.equal(database.getPlayer('201').dp,before.dp+reward.dp);assert.equal(database.getPlayer('201').xp,before.xp+reward.xp);assert.equal(database.getPlayer('201').duelist_level,2);for(const id of reward.cards)assert.equal(database.getCollection('201').find(c=>c.card_key===id).quantity,(inventory.find(c=>c.card_key===id)?.quantity??0)+1);
+ const won=finish(r),reward=content.getNPC('joey').reward;assert.equal(won.status,'finished');assert.equal(won.state.reward.first,true);assert.equal(database.getPlayer('201').dp,before.dp+reward.dp);assert.equal(database.getPlayer('201').xp,before.xp+reward.xp);assert.equal(database.getPlayer('201').duelist_level,2);assert.deepEqual(won.state.reward.cards,[]);assert.deepEqual(database.getCollection('201'),inventory);
  const stored=JSON.parse(database.db.prepare('SELECT state FROM duels WHERE id=?').get(r.id).state);assert.deepEqual(stored.reward,won.state.reward);for(let n=0;n<3;n++)store.getDuel(r.id);assert.equal(database.getPlayer('201').dp,before.dp+reward.dp);
  const snapshot=database.getPlayer('201');progress.settleEncounter(r.id,won.state);assert.deepEqual(database.getPlayer('201'),snapshot);const again=finish(store.createNPCDuel('201','another-guild','c','joey'));assert.equal(again.state.reward.dp,0);assert.deepEqual(database.getPlayer('201'),snapshot);assert.equal(progress.npcProgress('201').wins,2);
  const text=JSON.stringify(duelUI.duelPublicMessage(won).embeds.map(e=>e.toJSON()));assert.match(text,/Recompensas creditadas/);assert.equal(duelUI.duelPublicMessage(won).components.length,0);
 });
-test('inventory failure rolls back finished state, balances, receipts and first-win marker; retry pays once',()=>{
- player('202');const r=readyToWin(store.createNPCDuel('202','g','c','kaiba')),before=database.getPlayer('202');const index=engine.legalActions(r.state,'202').findIndex(a=>a.kind==='attack');database.db.exec("CREATE TRIGGER fail_reward BEFORE INSERT ON player_cards WHEN NEW.discord_id='202' BEGIN SELECT RAISE(ABORT,'reward storage failed'); END");
+test('receipt failure rolls back finished state, balances, receipts and first-win marker; retry pays once',()=>{
+ player('202');const r=readyToWin(store.createNPCDuel('202','g','c','kaiba')),before=database.getPlayer('202');const index=engine.legalActions(r.state,'202').findIndex(a=>a.kind==='attack');database.db.exec("CREATE TRIGGER fail_reward BEFORE INSERT ON npc_results WHEN NEW.discord_id='202' BEGIN SELECT RAISE(ABORT,'reward storage failed'); END");
  assert.throws(()=>store.performDuelAction(r.id,'202','g',r.revision,index),/reward storage failed/);assert.deepEqual(database.getPlayer('202'),before);assert.equal(store.getDuel(r.id).status,'playing');assert.equal(progress.npcProgress('202').won.size,0);assert.equal(database.db.prepare('SELECT COUNT(*) AS n FROM npc_results WHERE discord_id=?').get('202').n,0);database.db.exec('DROP TRIGGER fail_reward');const win=store.performDuelAction(r.id,'202','g',r.revision,index);assert.equal(win.state.reward.dp,200);
+});
+test('all first victories preserve inventory even if a legacy reward template still contains cards',()=>{
+ for(const npc of content.npcs){
+  const id='legacy-'+npc.id;player(id);const inventory=database.getCollection(id),original=npc.reward.cards;npc.reward.cards=['89631139'];
+  try{const won=finish(store.createNPCDuel(id,'g','c',npc.id));assert.deepEqual(won.state.reward.cards,[]);assert.deepEqual(database.getCollection(id),inventory);}
+  finally{npc.reward.cards=original;}
+ }
 });
 test('loss, surrender, timeout, training and PvP have no encounter payout',()=>{
  player('203');const before=database.getPlayer('203'),inventory=database.getCollection('203');let r=store.createNPCDuel('203','g','c','yugi');r=store.performDuelAction(r.id,'203','g',r.revision,{kind:'concede'});assert.equal(r.state.reward.dp,0);r=store.createNPCDuel('203','g','c','yugi');database.db.prepare('UPDATE duels SET updated=0 WHERE id=?').run(r.id);assert.equal(store.getDuel(r.id).state.reward.dp,0);const train=finish(store.createTraining('203','g','c'));assert.equal(train.state.reward,undefined);assert.deepEqual(database.getPlayer('203'),before);assert.deepEqual(database.getCollection('203'),inventory);
 });
 test('daily event uses Sao Paulo midnight; global once-per-day receipt stacks with first win and rejects expired events',()=>{
  assert.equal(content.eventDay(Date.parse('2026-10-25T02:59:59Z')),'2026-10-24');assert.equal(content.eventDay(Date.parse('2026-10-25T03:00:00Z')),'2026-10-25');
- player('204');const event=content.dailyEvent(),r=finish(store.createNPCDuel('204','g','c','',true));assert.equal(r.state.encounter.npcId,event.npc.id);assert.equal(r.state.reward.dp,event.dp+event.npc.reward.dp);assert.equal(r.state.reward.daily,true);assert.equal(progress.npcProgress('204').dailyClaimed,true);const repeat=finish(store.createNPCDuel('204','other-guild','c','',true));assert.equal(repeat.state.reward.dp,0);assert.equal(repeat.state.reward.daily,false);
+ player('204');const inventory=database.getCollection('204');const event=content.dailyEvent(),r=finish(store.createNPCDuel('204','g','c','',true));assert.equal(r.state.encounter.npcId,event.npc.id);assert.equal(r.state.reward.dp,event.dp+event.npc.reward.dp);assert.equal(r.state.reward.daily,true);assert.deepEqual(r.state.reward.cards,[]);assert.deepEqual(database.getCollection('204'),inventory);assert.equal(progress.npcProgress('204').dailyClaimed,true);const repeat=finish(store.createNPCDuel('204','other-guild','c','',true));assert.equal(repeat.state.reward.dp,0);assert.equal(repeat.state.reward.daily,false);
  player('205');const late=store.createNPCDuel('205','g','c','',true);late.state.encounter.eventDay='2000-01-01';database.db.prepare('UPDATE duels SET state=? WHERE id=?').run(JSON.stringify(late.state),late.id);const result=finish(late);assert.equal(result.state.reward.daily,false);assert.equal(result.state.reward.first,true);
 });
 test('a fresh Node process resumes a persisted encounter and pays only once across restarts',()=>{

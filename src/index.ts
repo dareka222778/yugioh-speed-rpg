@@ -10,7 +10,7 @@ import { getCardArt } from './cardArt';
 import {openDeck,changeDeck,renameDeck,activateDeck,fillInitialDeck} from './decks';
 import {visualDeckMessage,visualDeckCard,getDeckCardIndex} from './deckUI';
 import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChallenge,createTraining,createNPCDuel,currentDuel,getDuel,performDuelAction,setDuelMessage,type DuelRecord} from './duelStore';
-import {visualDuelPublic,visualDuelPrivate,visualDuelCard,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
+import {visualDuelPublic,visualDuelPrivate,visualDuelCard,visualDuelZoneCard,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
 
 import {retryNetwork} from './networkRetry';
 import {visualNPCLobby} from './npcUI';
@@ -139,6 +139,12 @@ async function handleInteraction(i:Interaction) {
       if(action==='open'&&i.isButton()){await i.deferReply({flags:MessageFlags.Ephemeral});await i.editReply(await privatePayload(r,id));return;}
       if(action==='quit'&&i.isButton()){await i.reply({...quitMessage(r),flags:MessageFlags.Ephemeral});return;}
       if(action==='view'&&i.isButton()){await i.deferUpdate();await i.editReply(await privatePayload(r,id,page));return;}
+      if(action==='zoneback'&&i.isButton()){await i.deferUpdate();await i.editReply(duelZonesMessage(r,id));return;}
+      if(action==='zonecard'&&i.isStringSelectMenu()){
+        if(r.revision!==revision)throw new Error('Esse painel ficou antigo. Abra as zonas novamente.');
+        const index=Number(i.values[0]);
+        await i.deferUpdate();await i.editReply(await visualDuelZoneCard(r,id,index));return;
+      }
       if(action==='card'&&(i.isButton()||i.isStringSelectMenu())){
         if(r.revision!==revision)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
         const cardIndex=i.isStringSelectMenu()?Number(i.values[0]):page;
@@ -325,6 +331,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
+ console.log('Release 0.7.3 | E0: cartas automáticas bloqueadas; visualizador corrigido');
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
