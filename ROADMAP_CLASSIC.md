@@ -65,3 +65,9 @@ A próxima entrega reutiliza esse código e corrige a repetição de ataque da I
 A fase 2 acrescenta cenários por carta para os cinco equipamentos, três campos e as exceções Destruição de Cards e Escudo e Espada. Corrige a mensagem de Campo que saiu antes da resolução e valida os tipos dos indicadores de resolução e alvo de equipamento nos estados persistidos. Campos legados sem indicador explícito continuam aceitos. Não muda o efeito de troca repetida de Escudo e Espada, que permanece a adaptação já documentada, nem acrescenta novas cartas.
 
 As referências da certificação e a matriz incorporam a suíte classicPersistentReview. Essa evidência delimita cenários, não encerra a revisão completa das 58 cartas com efeito ou a homologação humana. Próximo lote: custos/alvos e perda de alvo entre elos para as demais famílias; revisar o que já tem evidência antes de criar testes repetidos. O catálogo histórico segue separado e não está liberado.
+
+## 0.17.0 — fase 3 iniciada com importação real
+
+Por solicitação do usuário, avançamos para preparação histórica mantendo as pendências da fase 2 e da homologação humana. O importador isolado reproduz a união de 1962 cartas até 01/10/2004, mantém códigos alternativos e produz relações nominais/produtos/datas/lacunas. Uma projeção factual versionada permite reproduzir as saídas sem depender do ZIP mutável. O cruzamento confirma as 130 cartas atuais nesse recorte sem modificar a admissão.
+
+A entrega técnica da primeira importação é verificável; a auditoria de completude continua aberta pelos produtos vazios e datas ausentes. O catálogo do anime não é inferido. Ver HISTORICAL_IMPORT.md para escopo, comandos, hashes e pendências. O pacote não é carregado pela engine nem pela UI; exibição de catálogo e liberação de cartas pertencem a blocos posteriores.

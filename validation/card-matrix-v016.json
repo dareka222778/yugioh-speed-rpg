@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "release": "0.16.3",
+  "release": "0.17.0",
   "rulesVersion": "speed-rpg-classic-v1",
   "scope": "registered-and-certified-only",
   "warning": "Suite references and literal ID mentions do not prove full effect/timing/combination coverage. Historical availability, official Portuguese wording and Discord behavior require separate reviews.",
