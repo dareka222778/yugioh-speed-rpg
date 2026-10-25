@@ -35,3 +35,8 @@ test('transport acknowledges before mutation, refreshes after private failure, a
  await assert.rejects(handleTagComponent(i,async next=>{refreshed=true;assert.equal(next.revision,r.revision+1);},()=>{}),/network/);assert.ok(ack&&refreshed);
  await assert.rejects(handleTagComponent({...i,customId:`tag:page,someone-else,0:${r.id}:${r.revision}`},async()=>{},()=>{}),/própria/);
 });
+test('private one-card inspection binds owner and keeps canonical legal indices; stale carousel rejects before acknowledgement',async()=>{
+ const r=playing(),actor=tag.tagDecisionMember(r.state).id,p=ui.tagCardMessage(r,actor,0);validateDiscordPayload(p);assert.throws(()=>ui.tagCardMessage(r,'outsider',0),/participa/);assert.throws(()=>ui.tagCardMessage(r,actor,99),/indisponível/);let edited;
+ await handleTagComponent({guildId:'guild',user:{id:actor},customId:`tag:inspect:${r.id}:${r.revision}:${actor}`,values:['0'],deferUpdate:async()=>{},editReply:async p=>{edited=p;}},async()=>{},()=>{});assert.match(edited.embeds[0].toJSON().title,/1\/4/);
+ await assert.rejects(handleTagComponent({guildId:'guild',user:{id:actor},customId:`tag:card,${actor},0:${r.id}:0`,deferUpdate:async()=>{throw Error('must not ack');}},async()=>{},()=>{}),/atualizada/);
+});

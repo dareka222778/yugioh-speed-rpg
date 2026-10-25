@@ -13,6 +13,7 @@ class TestREST{setToken(){return this;}async put(route,payload){assert.equal(cli
 const original=Module._load;
 Module._load=function(name,parent,isMain){
  if(name==='discord.js')return {...discord,Client:TestClient,REST:TestREST};
+ if(name==='./tagUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualTagPublic:async(...args)=>ui.tagPublicMessage(...args),visualTagPrivate:async(...args)=>ui.tagPrivateMessage(...args),visualTagCard:async(...args)=>ui.tagCardMessage(...args)};}
  if(name==='./duelUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDuelPublic:async(...args)=>ui.duelPublicMessage(...args),visualDuelPrivate:async(...args)=>ui.duelPrivateMessage(...args),visualDuelCard:async(...args)=>ui.duelCardMessage(...args)};}
  if(name==='./deckUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualDeckMessage:async(...args)=>ui.deckMessage(...args),visualDeckCard:async(...args)=>ui.deckCardMessage(...args)};}
  if(name==='./npcUI'&&parent.filename.endsWith('/dist/index.js')){const ui=original.apply(this,arguments);return {...ui,visualNPCLobby:async(...args)=>ui.npcLobby(...args)};}

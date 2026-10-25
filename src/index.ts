@@ -1,5 +1,5 @@
 import {createTagLobby,currentTag,getTag,setTagMessage,dueTags,type TagRecord} from './tagStore';
-import {tagPublicMessage,tagPrivateMessage} from './tagUI';
+import {visualTagPublic,visualTagPrivate,visualTagCard,tagPublicMessage,tagPrivateMessage} from './tagUI';
 import {handleTagComponent} from './tagInteraction';
 import 'dotenv/config';
 import {simulateTag,tagSimulationMessage} from './tagSimulation';
@@ -120,7 +120,7 @@ async function refreshArena(record:DuelRecord){
 }
 const tagUpdates=new Map<string,Promise<void>>();
 async function refreshTag(record:TagRecord){
- const previous=tagUpdates.get(record.id)??Promise.resolve();const work=previous.catch(()=>{}).then(async()=>{const r=getTag(record.id);if(!r.message)return;try{const channel=await client.channels.fetch(r.channel);if(!channel||!('messages' in channel))return;const message=await channel.messages.fetch(r.message);if(getTag(r.id).revision===r.revision)await message.edit(tagPublicMessage(r));}catch(error){console.error('Falha ao atualizar equipes; use /dupla ver:',errorSummary(error));}});tagUpdates.set(record.id,work);try{await work;}finally{if(tagUpdates.get(record.id)===work)tagUpdates.delete(record.id);}
+ const previous=tagUpdates.get(record.id)??Promise.resolve();const work=previous.catch(()=>{}).then(async()=>{const r=getTag(record.id);if(!r.message)return;try{const channel=await client.channels.fetch(r.channel);if(!channel||!('messages' in channel))return;const message=await channel.messages.fetch(r.message);if(getTag(r.id).revision===r.revision)await message.edit(await visualTagPublic(r));}catch(error){console.error('Falha ao atualizar equipes; use /dupla ver:',errorSummary(error));}});tagUpdates.set(record.id,work);try{await work;}finally{if(tagUpdates.get(record.id)===work)tagUpdates.delete(record.id);}
 }
 async function handleInteraction(i:Interaction) {
  const correlation=randomUUID().slice(0,8),started=Date.now();
@@ -136,11 +136,11 @@ async function handleInteraction(i:Interaction) {
   const id = i.user.id;
   const avatar = i.user.displayAvatarURL({ size: 256 });
   try {
-    if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('tag:')){await handleTagComponent(i,refreshTag,kind=>{acknowledgment=kind;});return;}
+    if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('tag:')){await handleTagComponent(i,refreshTag,kind=>{acknowledgment=kind;},{public:visualTagPublic,private:visualTagPrivate,card:visualTagCard});return;}
     if(i.isChatInputCommand()&&i.commandName==='dupla'){
       if(!i.guildId||!i.channelId)throw Error('Use o 2v2 dentro do servidor.');const sub=i.options.getSubcommand();await deferReply(sub==='convidar'?{}:{flags:MessageFlags.Ephemeral});
       if(sub==='simular'){await i.editReply(tagSimulationMessage(simulateTag()));return;}
-      if(sub==='ver'){const r=currentTag(id);if(!r)throw Error('Você não possui uma partida 2v2 aberta.');if(r.guild!==i.guildId)throw Error('Abra o 2v2 no servidor de origem.');await i.editReply(r.state?tagPrivateMessage(r,id):tagPublicMessage(r));return;}
+      if(sub==='ver'){const r=currentTag(id);if(!r)throw Error('Você não possui uma partida 2v2 aberta.');if(r.guild!==i.guildId)throw Error('Abra o 2v2 no servidor de origem.');await i.editReply(r.state?await visualTagPrivate(r,id):tagPublicMessage(r));return;}
       const partner=i.options.getUser('parceiro',true),op1=i.options.getUser('oponente1',true),op2=i.options.getUser('oponente2',true);if([partner,op1,op2].some(p=>p.bot))throw Error('Convide três jogadores humanos. Para bots, use /dupla simular.');
       const r=createTagLobby([id,op1.id,partner.id,op2.id],i.guildId,i.channelId);const message=await i.editReply(tagPublicMessage(r));setTagMessage(r.id,message.id);return;
     }
@@ -352,7 +352,7 @@ async function handleInteraction(i:Interaction) {
       await i.editReply({ content: '✦ Personagem atualizado.', ...await profileMessage(getPlayer(id)!, avatar) });
     }
   } catch (error) {
-    console.error('Falha na interação:', {correlation,release:'0.11.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
+    console.error('Falha na interação:', {correlation,release:'0.12.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
     const content = error instanceof Error && !('code' in error) ? error.message : `Não foi possível concluir esta ação. Reabra o painel com /duelo ver ou /npc ver. Código de atendimento: ${correlation}.`;
     try {
       if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:')||i.customId.startsWith('tag:'))&&i.deferred&&acknowledgment==='update') await i.followUp({content,flags:MessageFlags.Ephemeral});
@@ -363,7 +363,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
- console.log('Release 0.11.0 | regras speed-rpg-v2 | comandos azuis | 2v2 humano de homologação normal | 130 cartas 1v1');
+ console.log('Release 0.12.0 | regras speed-rpg-v2 | comandos azuis | 2v2 humano de homologação normal | 130 cartas 1v1');
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
