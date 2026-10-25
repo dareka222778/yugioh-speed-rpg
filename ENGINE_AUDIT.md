@@ -61,11 +61,11 @@ encerramento por W.O. e abertura de partidas antigas também passam pelo contrat
 
 - Instalação limpa com Node 22: concluída.
 - Build e tipagem: aprovados.
-- Suíte completa: **269 testes aprovados, zero falhas**.
-- Auditoria adicional: **1.000 jogos completos**, 49.512 decisões executadas,
-  3.353 restaurações de snapshots JSON, todos os UID/identidades conservados.
-- Neste ambiente, a auditoria levou 6.182,1 ms; mediana de decisão 0,099 ms,
-  p95 0,181 ms. Isso mede execução local da engine, sem rede ou renderização,
+- Suíte completa: **291 testes aprovados, zero falhas**.
+- Auditoria adicional: **1.000 jogos completos**, 49.642 decisões executadas,
+  3.351 restaurações de snapshots JSON, todos os UID/identidades conservados.
+- Neste ambiente, a auditoria levou 6.315,3 ms; mediana de decisão 0,101 ms,
+  p95 0,187 ms. Isso mede execução local da engine, sem rede ou renderização,
   e não prevê o tempo de resposta do Discord ou da hospedagem.
 - Arena: arquivo original inalterado e testes visuais anteriores aprovados.
 
@@ -81,11 +81,13 @@ por criptografia; uma seed isolada não é uma fita de replay determinística.
 A implementação continua na branch de trabalho e no PR em rascunho. Esta revisão
 não foi implantada nem validada por uma partida real no Discord.
 
-Ainda faltam ordenação geral de efeitos simultâneos/SEGOC, replays de ataque
-quando o campo muda, negação arbitrária de efeitos de monstros e outras cartas
-não habilitadas. As correções de Ventríloco cobrem o gatilho obrigatório
-não direcionado já registrado; não substituem todo o sistema de simultaneidade.
-Nenhum desses itens deve ser anunciado como concluído por causa dos testes verdes.
+O fechamento abaixo resolve simultaneidade e replay no escopo registrado.
+Continuam fora da certificação: negação arbitrária de efeitos de monstros,
+novas categorias de efeitos/invocação, fichas e cartas não habilitadas. O catálogo
+contém 121 cartas habilitadas, das quais 12 têm definições de efeito de monstro.
+Isso não equivale a todas as cartas do anime clássico. Adicionar um nome ou
+texto ao catálogo não implementa seu efeito. O aceite de uso real no Discord e
+a implantação continuam pendentes; o PR permanece em rascunho.
 
 ## Referências primárias consultadas
 
@@ -105,3 +107,50 @@ primeiro erro: tipagem sem emissão, build, suíte completa, auditoria e prontid
 O CI mantém cada verificação como uma etapa obrigatória separada. O teste antigo
 de timeout foi ajustado para criar uma escolha válida com alvo real, conservando
 a verificação de que o jogador correto perde por W.O. nessa fase.
+
+## Fechamento funcional — correntes simultâneas e repetição de ataque
+
+Implementação principal: `src/duelEngine.ts`. Contratos serializáveis em
+`src/duelIntegrity.ts`; escolhas da IA em `src/duelStore.ts`.
+Evidência: `tests/duelCompletion.test.cjs` (22 cenários adicionais) e
+atualização de três testes existentes cuja expectativa anterior de timing
+estava incorreta. Nenhum teste foi removido.
+
+- Grupos de gatilhos: obrigatórios do jogador do turno, obrigatórios do rival,
+  opcionais do jogador do turno e opcionais do rival. O controlador ordena seus
+  efeitos; alvos são escolhidos antes de respostas rápidas. A classificação
+  opcional atualmente corresponde ao recrutador Tomate Místico; novas definições
+  não herdam uma classificação correta sem implementação e teste.
+- Sangan e Bruxa em destruição simultânea entram na mesma corrente. A busca
+  pausa a resolução LIFO, conserva os elos restantes e retoma sem conceder
+  janela de resposta entre buscas. Restrição de nome e limite de uso permanecem.
+- Invocação por Tributo agrega os efeitos dos Tributos enviados ao Cemitério
+  aos gatilhos da Invocação; Baixar por Tributo também ativa o gatilho antes
+  de respostas rápidas. Efeitos de custo de Soldado Canhão aguardam sua corrente.
+- FLIP de Invocação-Virar entra na corrente antes de Tributo Torrencial; sair
+  do campo depois da ativação não apaga o efeito.
+- Tomate Místico é aceito ou recusado na ativação. Uma vez ativado, a seleção
+  da Invocação ocorre durante a resolução; não há uma segunda opção de cancelar
+  um efeito já ativado. Snapshots antigos continuam aceitando seu formato legado.
+- O marcador da Etapa de Dano atravessa gatilhos FLIP e recrutadores. Não permite
+  Livro da Lua, Tributo Torrencial ou modificadores comuns fora da janela legal.
+- Quando o conjunto de defensores muda antes do dano, o atacante escolhe novo
+  alvo, ataque direto ou cancelamento. Cancelar consome o ataque; repetir não é
+  uma nova declaração. Trocar apenas a face/posição do defensor não dispara replay.
+- A ordem de gatilhos, uma corrente pausada e a decisão de replay foram
+  gravadas no SQLite, reabertas em outro processo Node e retomadas pela API real
+  de ações. Uma revisão antiga do painel é recusada. W.O. identifica o decisor.
+
+Os testes de replay que introduzem/removem defensores durante a declaração
+montam explicitamente essa alteração de estado: o catálogo atual não oferece
+todas as famílias de efeitos rápidos que poderão produzir tais cenários.
+A auditoria de 1.000 partidas terminou por PV; W.O. e falta de compra são
+verificados em testes específicos da suíte, não atribuídos a essa amostragem.
+
+Referências de ordem e timing: rulebook oficial v10, páginas de Replay Rules e
+Multiple Cards with the Same Timing, e diagrama oficial de efeitos rápidos:
+https://img.yugioh-card.com/en/downloads/rulebook/SD_RuleBook_EN_10.pdf
+https://www.yugioh-card.com/en/play/fast-effect-timing/
+
+A arena e `src/duelUI.ts` não foram alterados. Nenhum banco de jogadores foi
+modificado pela auditoria. Não houve implantação, merge nem publicação no bot.

@@ -65,6 +65,8 @@ test('Sangan can search only once per name per player per turn, even if two copi
  s.players[0].deck=[ref('target1','91152256'),ref('target2','91152256')];
  s=use(s,'a','spell');
  assert.equal(s.phase,'choice');assert.equal(s.players[0].grave.filter(c=>c.id==='26202165').length,2);
+ assert.equal(s.choice.source,'triggerOrder');
+ s=use(s,'a','choose',a=>a.target==='s1');
  s=use(s,'a','choose',a=>a.target==='target1');
  assert.equal(s.phase,'main');
  assert.equal(s.players[0].hand.filter(c=>c.id==='91152256').length,1);

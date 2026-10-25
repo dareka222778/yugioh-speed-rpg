@@ -34,12 +34,12 @@ test('Man-Eater Bug declares a target before chain responses, and destroys the s
  s.players[1].monsters=[m('enemy','91152256',{owner:1,faceUp:true,position:'atk'})];
  s.players[1].backrow=[{uid:'reinforce',id:'17814387',setTurn:1,faceUp:false}];
  s=act(s,'a','position',a=>a.mode==='flip');
- // The ordinary flip-summon response window closes before its FLIP effect is activated.
+ // The FLIP target is selected before fast responses to the Flip Summon.
  if(s.phase==='response')s=act(s,'b','pass');
  assert.equal(s.phase,'choice');assert.deepEqual(new Set(s.choice.targets),new Set(['bug','enemy']));
  assert.throws(()=>step(s,'a',{kind:'choose',target:'not-on-field'}),/inválida/);
  s=act(s,'a','choose',a=>a.target==='enemy');
- assert.equal(s.pending.kind,'monsterEffect');assert.equal(s.pending.target,'enemy');
+ assert.equal(s.pending.kind,'flip');assert.equal(s.chain.at(-1).target,'enemy');
  assert.equal(s.phase,'response');assert.equal(s.priority,1);
  s=act(s,'b','trap',a=>a.target==='enemy');
  assert.equal(s.phase,'main');

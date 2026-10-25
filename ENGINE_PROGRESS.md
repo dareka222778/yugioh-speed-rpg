@@ -8,7 +8,7 @@
 
 | Área | Concluído | Falta |
 | --- | ---: | ---: |
-| Engine clássica adaptada | **87%** | **13%** |
+| Engine clássica adaptada | **92%** | **8%** |
 | Padrão visual compartilhado dos comandos | **47%** | **53%** |
 
 **O campo de duelo original (âmbar) foi restaurado integralmente.** Ele não faz parte do redesign dos comandos e há teste de regressão impedindo que a aparência seja alterada. O padrão visual azul é aplicado aos painéis e comandos do bot, como galeria de NPCs, editor do jogador e controles de cartas. Os **47 pontos representam somente o trabalho já funcional e testado nesses comandos**, não mudanças no campo nem aceite humano.
@@ -20,17 +20,17 @@
 | Formato 4000 PV, três zonas, 20–30 cartas | 10 | 10 | Implementado |
 | Turnos, combate e encerramento | 9 | 9 | Implementado; mais detalhes de timing pendentes |
 | Magias e Armadilhas | 9 | 8 | Bloqueador de Magia, Sete Ferramentas, Pote, Raigeki e Tufão jogáveis; outras cartas faltam |
-| Correntes, prioridades e respostas | 10 | 9 | Magias Rápidas compartilhadas, Livro da Lua e MST em correntes, Bloqueador/Sete Ferramentas; timing completo ainda falta |
-| FLIP e cálculo de dano | 8 | 7 | Efeitos de cinco monstros reais; cenários raros pendentes |
+| Correntes, prioridades e respostas | 10 | 10 | Correntes simultâneas do catálogo atual, escolhas de ordem/alvo antes das respostas, resolução LIFO pausável |
+| FLIP e cálculo de dano | 8 | 8 | Cinco FLIP; declaração e cálculo separados; restrições conservadas na Etapa de Dano |
 | Ignição e custos | 8 | 7 | Cannon Soldier + mecanismo genérico de custo |
-| Cemitério e buscas | 8 | 7 | Sangan/Witch e Tomate Místico; fila de eventos e busca/Invocação-Especial |
-| Gatilhos de invocação e invocações especiais | 7 | 6 | Janelas reativas após Normal, Virar, Fusão, Monster Reborn e recrutamento do Deck; especiais avançadas pendentes |
-| Outros gatilhos de destruição | 7 | 5 | Força do Espelho, Tributo Torrencial, Sakuretsu e banimento do Sem Fundo; causas de destruição distintas |
+| Cemitério e buscas | 8 | 8 | Sangan/Witch e Tomate; grupos obrigatórios/opcionais e buscas em corrente persistida |
+| Gatilhos de invocação e invocações especiais | 7 | 7 | Normal/Virar e Tributo integram os gatilhos; recrutamento durante corrente sem janela intermediária |
+| Outros gatilhos de destruição | 7 | 6 | Causas distintas; efeitos simultâneos do catálogo atual; categorias futuras permanecem fora do registro |
 | Contínuos, rápidos, negações complexas | 8 | 5 | Jinzo, MST Rápido e negações; monstros rápidos e efeitos avançados pendentes |
 | Catálogo de cartas utilizáveis no RPG | 7 | 6 | Registro auditado, quatro novas cartas com regras reais e laboratório com 24; decks de 30 válidos |
 | IA dos NPCs | 4 | 4 | Reações, descarte, recrutamento, Magias Rápidas e decks de 30; heurística não exaustiva |
-| CI, regressão e aceite no Discord | 5 | 4 | Testes de motor/UI e 30 partidas simuladas; aceite humano na hospedagem pendente |
-| **Total** | **100** | **87** | |
+| CI, regressão e aceite no Discord | 5 | 4 | Testes de motor/UI e 1.000 partidas simuladas; aceite humano na hospedagem pendente |
+| **Total** | **100** | **92** | |
 
 O progresso de regras é **deliberadamente independente do total de cartas habilitadas**, pois um catálogo com muitos monstros normais não representa toda a complexidade de efeitos e correntes.
 
@@ -150,3 +150,24 @@ byte a byte inalterada; os decks atuais não foram editados nesta entrega.
 Validação local: 269 testes; 1.000 partidas extras, 49.512 jogadas e 3.353
 restaurações serializadas. Isto não mede latência do Discord/Botkeep.
 Veja [ENGINE_AUDIT.md](ENGINE_AUDIT.md) para escopo, evidências e limitações.
+
+## Fechamento da revisão de correntes e combate
+
+O motor agora monta os gatilhos simultâneos obrigatórios do jogador do turno,
+depois os do rival, seguidos dos opcionais nessa mesma ordem. O controlador
+escolhe a ordem de seus próprios efeitos e os alvos antes de respostas rápidas.
+A classificação opcional cobre Tomate Místico, o único recrutador opcional
+habilitado; novas cartas precisam declarar e testar sua própria categoria.
+Sangan/Witch pausam a resolução para escolha privada e retomam o restante da
+mesma corrente, inclusive após reabrir o SQLite em outro processo. Invocação por
+Tributo agrega o envio dos Tributos ao grupo de gatilhos da Invocação.
+
+Replays conservam o atacante e exigem novo alvo, ataque direto ou cancelamento
+quando o conjunto de defensores muda antes do dano. Cancelar consome o ataque;
+repetir não abre outra janela de declaração para Força do Espelho.
+
+A Etapa de Dano permanece marcada durante FLIP e recrutadores: Livro da Lua,
+Tributo Torrencial e armadilhas comuns não ganham uma janela indevida.
+O layout e os decks dos NPCs continuam inalterados. A engine não é anunciada
+como universal nem implantada; aceite real no Discord e novas categorias/cartas
+continuam sendo trabalho separado. Evidências em ENGINE_AUDIT.md.

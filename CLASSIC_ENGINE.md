@@ -30,12 +30,12 @@ A regra de prontidão para esses decks é calculada por `node scripts/duel-readi
 
 ## Pendências
 
-Efeitos rápidos de monstros, outras categorias de invocação, resolução avançada de eventos simultâneos, várias cartas clássicas adicionais, animações e refinamentos finais da interface. O PR deve continuar em rascunho até aprovação técnica e visual.
+Efeitos rápidos de monstros, outras categorias de invocação, várias cartas clássicas adicionais, animações e refinamentos finais da interface. O PR deve continuar em rascunho até aprovação técnica e visual.
 
 ## Resolução de corrente: Livro da Lua, Tributo Torrencial, Sakuretsu e Sem Fundo
 
 - **Livro da Lua (14087893, Magia Rápida):** seleção de um monstro revelado, que é colocado virado para baixo em Defesa. Pode responder em corrente com Velocidade de Magia 2, mas não no turno em que foi baixado. Bloqueador de Magia pode negar sua ativação. Livro da Lua não é Invocação-Virar nem ativa o FLIP.
-- **Tributo Torrencial (53582587):** pode responder às Invocações Normal, Virar e Especial; destrói todos os monstros, inclusive virados para baixo, por efeito (sem ativar gatilhos que exigem destruição em batalha). Invocação Especial abre resposta após resolução de Polimerização, Monster Reborn e recrutamento do Tomate Místico.
+- **Tributo Torrencial (53582587):** pode responder às Invocações Normal, Virar e Especial; destrói todos os monstros, inclusive virados para baixo, por efeito (sem ativar gatilhos que exigem destruição em batalha). Invocação Especial abre resposta após resolução de Polimerização e Monster Reborn. Recrutamento de Tomate Místico acontece na Etapa de Dano: Tributo Torrencial não pode ser ativado nessa janela.
 - **Armadura Sakuretsu (56120475):** somente na declaração de ataque, seleciona o monstro atacante. Se o alvo sair do campo ou se tornar inválido antes da resolução, o efeito não o destrói; Sete Ferramentas pode negar a Armadilha.
 - **Buraco Armadilha Sem Fundo (29401950):** contra a Invocação do adversário com ATK 1500+, destrói o monstro invocado e o move à zona de banidas de seu **proprietário**. Não envia a carta ao Cemitério e não gera gatilho por envio ao Cemitério. Livro da Lua pode impedir que seu alvo satisfaça as condições na resolução.
 - **Buraco de Armadilha (04206964):** também responde a Invocações-Virar além de Invocações Normais, obedecendo aos 1000+ ATK. Não responde a Invocações-Especiais.
@@ -44,7 +44,7 @@ Efeitos rápidos de monstros, outras categorias de invocação, resolução avan
 
 Testes: `tests/classicSummonResponses.test.cjs`, `tests/classicSakuretsu.test.cjs`, `tests/classicBanishment.test.cjs`, `tests/classicQuickSpells.test.cjs` e `tests/duelExpansion.test.cjs`.
 
-As janelas implementadas cobrem esses efeitos auditados e **não são uma engine TCG completa**; efeitos simultâneos/SEGOC, timing avançado e cartas com outros tipos de efeito continuam pendentes.
+As janelas implementadas cobrem esses efeitos auditados e **não são uma engine TCG completa**; os gatilhos simultâneos do catálogo atual são tratados; timing de outras categorias e cartas com outros tipos de efeito exige implementação própria.
 
 
 ## Auditoria posterior — integridade e janela de cálculo de dano
@@ -61,6 +61,8 @@ são recusados sem serem apagados nem gerar recompensas.
 `npm run audit:engine` executa um teste isolado de 300 partidas após o build.
 O script permite `--games 1000` diretamente. Não usa o banco real do jogador.
 
-A ordenação completa de gatilhos simultâneos, efeitos rápidos arbitrários e
-replays de batalha continuam pendentes. Testes verdes não certificam regras
-universais nem substituem uma partida real no Discord.
+A revisão seguinte implementa ordenação simultânea para os gatilhos habilitados,
+pausa/retomada de correntes em escolhas de busca, gatilhos opcionais e replays
+de ataque. Nenhuma nova carta ou categoria passa a funcionar só por usar
+essa infraestrutura. Testes verdes não certificam regras universais nem
+substituem uma partida real no Discord.

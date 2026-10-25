@@ -18,10 +18,27 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
  if(!Array.isArray(s.players)||s.players.length!==2||!actor(s.current)||!actor(s.priority))fail('participantes ou prioridade');
  if(!integer(s.turn,1)||!phases.has(s.phase)||!['main','battle'].includes(s.resume)||!integer(s.passes)||s.passes>2)fail('turno ou fase');
  if(!object(s.pending)||!pendingKinds.has(s.pending.kind)||!Array.isArray(s.chain)||!Array.isArray(s.log)||s.log.some((x:unknown)=>typeof x!=='string'))fail('resolução pendente');
- for(const link of s.chain)if(!object(link)||!actor(link.actor)||typeof link.card!=='string'||typeof link.target!=='string'||!getCard(link.id)||link.negated!==undefined&&typeof link.negated!=='boolean'||link.monsterEffect!==undefined&&(typeof link.monsterEffect!=='boolean'||link.monsterEffect&&!['quick','onOtherSummon'].includes(getMonsterEffect(link.id)?.trigger??'')))fail('elo de corrente');
+ for(const link of s.chain)if(!object(link)||!actor(link.actor)||typeof link.card!=='string'||typeof link.target!=='string'||!getCard(link.id)||link.negated!==undefined&&typeof link.negated!=='boolean'||link.monsterEffect!==undefined&&(typeof link.monsterEffect!=='boolean'||link.monsterEffect&&!['quick','flip','onSummon','onOtherSummon','onSentToGrave','onBattleDestroyed'].includes(getMonsterEffect(link.id)?.trigger??'')))fail('elo de corrente');
  if(!['none','end','battle'].includes(s.pending.kind)&&(!actor(s.pending.actor)||typeof s.pending.card!=='string'))fail('origem do efeito');
  if(s.pending.kind==='attack'&&!['declare','damage','calculation'].includes(s.pending.stage))fail('etapa de dano');
  for(const queue of ['graveTriggers','summonTriggers'])if(s[queue]!==undefined&&(!Array.isArray(s[queue])||s[queue].some((e:any)=>!object(e)||!actor(e.actor)||typeof e.card!=='string'||!getCard(e.id))))fail('fila de gatilhos');
+ if(s.triggerBuild!==undefined){
+  const build=s.triggerBuild;
+  if(!object(build)||!Array.isArray(build.events))fail('construção de corrente');
+  for(const event of [...build.events,...build.selected?[build.selected]:[]])if(!object(event)||!actor(event.actor)||typeof event.card!=='string'||!getMonsterEffect(event.id))fail('construção de corrente');
+  if(s.phase!=='choice'||!['triggerOrder','triggerTarget','triggerOptional'].includes(s.choice?.source))fail('fase da construção de corrente');
+ }
+ if(s.pending.kind==='attack'&&s.pending.defenders!==undefined&&(!Array.isArray(s.pending.defenders)||s.pending.defenders.some((uid:unknown)=>typeof uid!=='string')||new Set(s.pending.defenders).size!==s.pending.defenders.length))fail('campo de declaração do ataque');
+ if(s.chainRoot!==undefined){
+  const root=s.chainRoot;
+  if(!object(root)||!pendingKinds.has(root.kind)||s.phase!=='choice'||!['monsterSearch','monsterRecruit'].includes(s.choice?.source))fail('continuação da corrente');
+  if(!['none','end','battle'].includes(root.kind)&&(!actor(root.actor)||typeof root.card!=='string'))fail('origem da continuação');
+ }
+ if(s.phase==='choice'&&['triggerOrder','triggerTarget','triggerOptional'].includes(s.choice?.source)){
+  const build=s.triggerBuild;
+  if(!build||s.choice.source!=='triggerOrder'&&(!build.selected||build.selected.actor!==s.choice.actor))fail('escolha do gatilho');
+ }
+ if(s.damageStep!==undefined&&typeof s.damageStep!=='boolean')fail('janela da Etapa de Dano');
  if(s.turnEnding!==undefined&&typeof s.turnEnding!=='boolean')fail('encerramento de turno');
  const ids=new Set<string>(),uids=new Set<string>();
  for(const p of s.players){

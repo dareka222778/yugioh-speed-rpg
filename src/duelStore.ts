@@ -96,6 +96,16 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  }
  if(s.phase==='discard')return [...actions].sort((a,b)=>{const score=(x:Action)=>x.kind==='discard'?(getCard(p.hand.find(c=>c.uid===x.card)!.id)!.atk??0):0;return score(a)-score(b);})[0];
  if(s.phase==='choice'){
+  if(s.choice?.source==='attackReplay'&&s.pending.kind==='attack'){
+   const attackingUid=s.pending.card,attacking=p.monsters.find(m=>m.uid===attackingUid);
+   if(attacking){
+    const options=actions.filter((a):a is Extract<Action,{kind:'choose'}>=>a.kind==='choose');
+    const direct=options.find(a=>a.target==='__direct__');if(direct)return direct;
+    // Hidden defenders get a neutral estimate; never inspect their printed stats.
+    const safe=options.filter(a=>{const m=op.monsters.find(m=>m.uid===a.target);return m&&(m.faceUp?(m.position==='atk'?atk(m,s):def(m,s)):1000)<atk(attacking,s);});
+    return safe[0]??options.find(a=>a.target==='__cancel__');
+   }
+  }
   if(s.choice?.source==='monsterRecruit'){
    const options=actions.filter((a):a is Extract<Action,{kind:'choose'}>=>a.kind==='choose'&&a.target!=='__skip__');
    return options.sort((a,b)=>{
@@ -103,8 +113,8 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
     return (cb?.atk??0)-(ca?.atk??0);
    })[0]??actions[0];
   }
-  if(s.choice?.source==='monsterTarget'&&s.pending.kind==='monsterEffect'){
-   const effect=getMonsterEffect(s.pending.id);
+  if(s.choice?.source==='triggerTarget'||s.choice?.source==='monsterTarget'&&s.pending.kind==='monsterEffect'){
+   const effect=getMonsterEffect(s.choice?.source==='triggerTarget'?s.triggerBuild!.selected!.id:(s.pending as Extract<typeof s.pending,{kind:'monsterEffect'}>).id);
    if(effect?.operation.kind==='destroy'||effect?.operation.kind==='bounce'){
     // Prefer the strongest visible enemy. Never inspect an unrevealed opponent.
     const enemies=actions.filter((a):a is Extract<Action,{kind:'choose'}>=>a.kind==='choose')

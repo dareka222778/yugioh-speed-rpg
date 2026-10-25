@@ -18,9 +18,11 @@ test('destroyed by battle, Mystic Tomato can Special Summon a DARK monster from 
  s.players[0].monsters=[monster('attacker','48305365')];s.players[1].monsters=[monster('tomato','83011277',{owner:1})];
  s.players[1].deck=[ref('dark','11384280'),ref('light','15025844'),ref('strong','48305365'),ref('spell','38199696')];
  s=use(s,'a','attack',a=>a.target==='tomato');
+ assert.equal(s.choice.source,'triggerOptional');
+ s=use(s,'b','choose',a=>a.target==='tomato');
  assert.equal(s.phase,'choice');assert.equal(s.choice.source,'monsterRecruit');assert.equal(s.choice.actor,1);
  assert.equal(s.players[1].lp,3700);
- assert.deepEqual(new Set(s.choice.targets),new Set(['dark','__skip__']));
+ assert.deepEqual(new Set(s.choice.targets),new Set(['dark']));
  assert.ok(s.players[1].grave.some(c=>c.uid==='tomato'));
  assert.throws(()=>step(s,'b',{kind:'choose',target:'strong'}),/inválida/);
  const option=legalActions(s,'b').find(a=>a.target==='dark');
@@ -38,7 +40,7 @@ test('Mystic Tomato has an explicit decline option, never forced by the engine',
  s.players[0].monsters=[monster('attacker','48305365')];s.players[1].monsters=[monster('tomato','83011277',{owner:1})];
  s.players[1].deck=[ref('dark','11384280')];
  s=use(s,'a','attack');assert.equal(s.phase,'choice');
- assert.match(actionLabel(s,'b',{kind:'choose',target:'__skip__'}),/Não Invocar/);
+ assert.match(actionLabel(s,'b',{kind:'choose',target:'__skip__'}),/Não ativar efeito opcional/);
  s=use(s,'b','choose',a=>a.target==='__skip__');
  assert.equal(s.phase,'battle');assert.equal(s.players[1].monsters.length,0);
  assert.ok(s.players[1].deck.some(c=>c.uid==='dark'));
@@ -65,6 +67,8 @@ test('a battle-destroyed opponent-controlled Tomato attempts to recruit to its o
  s.players[1].monsters=[monster('borrowed-tomato','83011277',{owner:0})];
  s.players[0].deck=[ref('owner-target','11384280')];
  s=use(s,'a','attack');
+ assert.equal(s.choice.source,'triggerOptional');
+ s=use(s,'a','choose',a=>a.target==='borrowed-tomato');
  assert.equal(s.phase,'choice');assert.equal(s.choice.actor,0);assert.equal(s.choice.source,'monsterRecruit');
  s=use(s,'a','choose',a=>a.target==='owner-target');
  assert.ok(s.players[0].monsters.some(m=>m.uid==='owner-target'));
