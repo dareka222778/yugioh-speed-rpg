@@ -175,4 +175,8 @@ test('help and rules commands are private, owner-bound and use current hand/rewa
  const select=interaction('select',undefined,{isStringSelectMenu:()=>true,customId:menu.custom_id,values:['rules']});await dispatch(select.i);assert.deepEqual(select.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(JSON.stringify(select.calls[1][1].embeds[0].toJSON()),/Mão de sete/);
  const other=interaction('select',undefined,{isStringSelectMenu:()=>true,customId:menu.custom_id,values:['events'],user:{id:'999',displayAvatarURL:()=>''}});await dispatch(other.i);assert.match(other.calls.at(-1)[1].content,/própria ajuda/);
 });
+test('2v2 laboratory command is explicitly virtual, private and leaves player economy and sessions untouched',async()=>{
+ assert.ok(registered.some(c=>c.name==='dupla'));const inventory=db.getCollection('101'),player=db.getPlayer('101'),sessions=db.db.prepare('SELECT COUNT(*) AS n FROM duels').get().n;
+ const lab=interaction('command','dupla',{options:{getSubcommand:()=> 'simular'}});await dispatch(lab.i);assert.deepEqual(lab.calls.map(c=>c[0]),['defer','edit']);assert.equal(lab.calls[0][1].flags,64);assert.match(JSON.stringify(lab.calls[1][1].embeds[0].toJSON()),/Somente monstros normais/);assert.deepEqual(db.getCollection('101'),inventory);assert.deepEqual(db.getPlayer('101'),player);assert.equal(db.db.prepare('SELECT COUNT(*) AS n FROM duels').get().n,sessions);
+});
 after(()=>{db.db.close();fs.rmSync(temp,{recursive:true,force:true});});

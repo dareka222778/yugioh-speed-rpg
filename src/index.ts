@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import {simulateTag,tagSimulationMessage} from './tagSimulation';
 import {helpMessage} from './commandUI';
 import {renderOwnedCard} from './cardInspector';
 import {handleDuelComponent} from './duelInteraction';
@@ -40,6 +41,7 @@ const commands = [
       .addUserOption(o=>o.setName('jogador').setDescription('Destinatário com perfil criado.').setRequired(true)))
     .addSubcommand(c=>c.setName('encerrar').setDescription('Bloqueia novas entregas deste evento.')
       .addStringOption(o=>o.setName('evento').setDescription('ID do evento.').setRequired(true))),
+  new SlashCommandBuilder().setName('dupla').setDescription('Laboratório inicial de equipes 2v2, sem alterar sua coleção.').addSubcommand(c=>c.setName('simular').setDescription('Simula quatro bots: apenas monstros normais; não é uma partida humana.')),
   new SlashCommandBuilder().setName('ajuda').setDescription('Escolha um assunto e encontre sua próxima jogada.'),
   new SlashCommandBuilder().setName('regras').setDescription('Consulta as regras do duelo e o limite da mão.'),
   new SlashCommandBuilder().setName('ping').setDescription('Testa se o bot está online.'),
@@ -123,6 +125,7 @@ async function handleInteraction(i:Interaction) {
   const id = i.user.id;
   const avatar = i.user.displayAvatarURL({ size: 256 });
   try {
+    if(i.isChatInputCommand()&&i.commandName==='dupla'){await deferReply({flags:MessageFlags.Ephemeral});await i.editReply(tagSimulationMessage(simulateTag()));return;}
     if(i.isChatInputCommand()&&['ajuda','regras'].includes(i.commandName)){await i.reply({...helpMessage(id,i.commandName==='regras'?'rules':'start'),flags:MessageFlags.Ephemeral});return;}
     if(i.isStringSelectMenu()&&i.customId.startsWith('help:page:')){if(i.customId.split(':')[2]!==id)throw new Error('Abra sua própria ajuda com /ajuda.');await deferUpdate();await i.editReply(helpMessage(id,i.values[0]));return;}
     if(i.isChatInputCommand()&&i.commandName==='evento'||i.isButton()&&i.customId.startsWith('cardevent:')){
@@ -231,7 +234,7 @@ async function handleInteraction(i:Interaction) {
         else if(action==='inicial')fillInitialDeck(id,slot);
         await i.editReply(await visualDeckMessage(id,slot,1,selected));return;
       }
-      if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! Versão 0.9.0 • 130 cartas habilitadas • novos duelos: mão de sete.', flags: MessageFlags.Ephemeral }); return; }
+      if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! Versão 0.10.0 • 130 cartas habilitadas • novos duelos: mão de sete.', flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'start') {
         const player = createPlayer(id, i.user.username);
         if (player.starter_deck) { grantStarterCards(id); await deferReply({ flags: MessageFlags.Ephemeral }); await i.editReply(await profileMessage(player, avatar)); return; }
@@ -331,7 +334,7 @@ async function handleInteraction(i:Interaction) {
       await i.editReply({ content: '✦ Personagem atualizado.', ...await profileMessage(getPlayer(id)!, avatar) });
     }
   } catch (error) {
-    console.error('Falha na interação:', {correlation,release:'0.9.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
+    console.error('Falha na interação:', {correlation,release:'0.10.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
     const content = error instanceof Error && !('code' in error) ? error.message : `Não foi possível concluir esta ação. Reabra o painel com /duelo ver ou /npc ver. Código de atendimento: ${correlation}.`;
     try {
       if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:'))&&i.deferred&&acknowledgment==='update') await i.followUp({content,flags:MessageFlags.Ephemeral});
@@ -342,7 +345,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
- console.log('Release 0.9.0 | regras speed-rpg-v2 | comandos azuis | ajuda e regras | 130 cartas');
+ console.log('Release 0.10.0 | regras speed-rpg-v2 | comandos azuis | laboratório 2v2 normal | 130 cartas 1v1');
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};

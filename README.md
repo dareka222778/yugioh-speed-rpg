@@ -1,3 +1,5 @@
+> **0.10.0 — fase 6 iniciada:** `/dupla simular` exercita quatro bots em um laboratório 2v2 com monstros normais. Não inicia partidas humanas nem altera sua coleção. Escopo e próximos gates em [PHASE_6.md](PHASE_6.md). O 1v1 mantém 130 cartas e a arena original.
+
 > **0.9.0 — comandos azuis:** perfil acessível, coleção com resumo, ficha de carta compartilhada e guia privado em `/ajuda` e `/regras`. A arena permanece intacta. Veja [RELEASE_0_9_0.md](RELEASE_0_9_0.md).
 
 > **0.8.1 — gate técnico da engine:** `npm run accept:engine` verifica regras, retomada e o roteamento real dos componentes antes de liberar o trabalho nos comandos. O “92%” antigo fica somente no histórico. Aceite humano e 2v2 têm critérios separados.

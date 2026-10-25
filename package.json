@@ -1,6 +1,6 @@
 {
   "name": "yugioh-speed-rpg",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
   "description": "Discord RPG bot inspired by Yu-Gi-Oh! Speed Duel",
   "main": "dist/index.js",
@@ -14,7 +14,8 @@
     "audit:engine": "node scripts/audit-duel-engine.cjs --games 300",
     "check:cards": "node scripts/check-card-certification.cjs",
     "coverage:engine": "node scripts/engine-coverage.cjs",
-    "accept:engine": "npm run build && node scripts/accept-engine.cjs"
+    "accept:engine": "npm run build && node scripts/accept-engine.cjs",
+    "audit:tag": "npm run build && node scripts/audit-tag.cjs"
   },
   "engines": {
     "node": "22.x"
