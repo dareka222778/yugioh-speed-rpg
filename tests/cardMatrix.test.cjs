@@ -11,6 +11,7 @@ test('certified card matrix has one verifiable row per enabled card and separate
  assert.equal(audit.totals.indirectTestReferences,audit.cards.filter(c=>c.manualEffectReview&&!c.directIdMention).length);
  for(const card of audit.cards){
   assert.ok(card.descriptionCharacters>0);
+  assert.equal(card.descriptionPT.length,card.descriptionCharacters);
   assert.ok(card.suites.length>0);
   assert.ok(card.suites.every(s=>s.file.startsWith('tests/')&&typeof s.mentionsCardId==='boolean'));
   assert.equal(card.evidence,'mechanical-fingerprint-and-referenced-suite');

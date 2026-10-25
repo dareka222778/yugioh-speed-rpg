@@ -26,7 +26,7 @@ function buildCardMatrix(){
    monsterType:card.monsterType??null,effectKind:effect.kind,
    trigger:monster?.effect.trigger??null,
    operation:monster?.effect.operation.kind??null,
-   suites,descriptionCharacters:text.length,source:card.source,
+   suites,descriptionPT:text,descriptionCharacters:text.length,source:card.source,
    evidence:'mechanical-fingerprint-and-referenced-suite',
    directIdMention:suites.some(s=>s.mentionsCardId),
    manualEffectReview:effect.kind!=='normal'&&effect.kind!=='fusion',

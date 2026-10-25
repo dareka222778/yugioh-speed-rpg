@@ -60,6 +60,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Você ganha 800 PV. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 166,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4347&ope=2&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -85,6 +86,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Compre 1 carta(s). A compra resolve normalmente; o limite de seis cartas é verificado na Fase Final do próprio turno. Falta de carta obrigatória causa derrota. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
       "descriptionCharacters": 341,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4546&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -106,6 +108,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 5; ATK 1700; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 407,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4133&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -127,6 +130,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative numa janela de resposta permitida; velocidade 2. Sem custo adicional de ativação. Na resolução, cause 500 de dano de efeito ao oponente por monstro que ele controla naquele momento. Conta monstros com a face para cima ou para baixo. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 401,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4865&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -148,6 +152,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative quando o oponente declara um ataque; velocidade 2. Sem custo adicional de ativação. Destrua o monstro escolhido e elegível. Se o alvo deixar de ser elegível, o efeito não escolhe outro. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 354,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5799&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -169,6 +174,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Zumbi; atributo TREVAS. Nível 4; ATK 1200; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 409,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4247&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -190,6 +196,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 4; ATK 1550; DEF 800. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 410,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4882&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -211,6 +218,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta Alada; atributo VENTO. Nível 4; ATK 1800; DEF 600. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 413,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4980&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -232,6 +240,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 4; ATK 1600; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4883&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -253,6 +262,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta; atributo TERRA. Nível 4; ATK 1500; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4603&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -274,6 +284,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative em resposta à ativação de uma Magia; velocidade 3. Em resposta à ativação de uma Magia: descarte 1 carta como custo; negue a ativação e destrua a Magia. Respeita a prioridade e a velocidade da corrente. O descarte não é devolvido se o efeito for negado ou perder o alvo. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 439,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4862&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -295,6 +306,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro do oponente com a face para cima em Ataque. Mude-o para Defesa com a face para cima, se ainda estiver elegível na resolução. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 290,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4874&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -316,6 +328,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo LUZ. Nível 4; ATK 1600; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 405,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4050&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -341,6 +354,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ao ser enviado do campo ao Cemitério. Sem custo de ativação. Escolha no seu Deck 1 monstro com DEF de até 1500; adicione-o à mão e embaralhe o restante do Deck. Não pode ativar cartas/efeitos de cartas com esse nome no mesmo turno. Uma ativação por nome por turno nesta adaptação. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
       "descriptionCharacters": 424,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4580&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -362,6 +376,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative quando ocorre uma Invocação compatível; velocidade 2. Sem custo adicional de ativação. Destrua o monstro escolhido e elegível. A Invocação deve ter ATK atual de pelo menos 1000. Responde a Invocação-Normal, Invocação-Virar. Se o alvo deixar de ser elegível, o efeito não escolhe outro. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 454,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4836&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -383,6 +398,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative quando ocorre uma Invocação compatível; velocidade 2. Sem custo adicional de ativação. Destrua o monstro escolhido e elegível e bana-o se for destruído. Exige ATK atual de pelo menos 1500. A Invocação deve ter ATK atual de pelo menos 1500. Responde a Invocação-Normal, Invocação-Virar, Invocação-Especial. Se o alvo deixar de ser elegível, o efeito não escolhe outro. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 536,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5400&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -404,6 +420,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal; velocidade 1. Sem custo adicional de ativação. Destrua todos os monstros em ambos os campos. Não escolhe alvos individuais. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 238,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4342&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -425,6 +442,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta-Guerreira; atributo TERRA. Nível 4; ATK 1200; DEF 1500. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 418,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4033&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -446,6 +464,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 6; ATK 2500; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 406,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4028&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -467,6 +486,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dinossauro; atributo TERRA. Nível 3; ATK 1200; DEF 800. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 412,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4065&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -488,6 +508,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta; atributo TERRA. Nível 4; ATK 1300; DEF 1550. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4097&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -509,6 +530,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative quando o oponente declara um ataque; velocidade 2. Sem custo adicional de ativação. Negue o ataque declarado pelo monstro adversário escolhido. A Fase de Batalha continua para os outros atacantes. Cause ao oponente dano de efeito igual ao ATK atual do atacante na resolução. O atacante deve continuar com a face para cima em Ataque sob controle de quem declarou o ataque; se não estiver, o efeito não nega nem causa dano. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 590,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5124&ope=2&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -530,6 +552,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Ambos os jogadores descartam toda a mão e compram o mesmo número de cartas que cada um descartou. A Magia ativada já saiu da mão e não entra nessa contagem. Se faltar compra obrigatória, esse jogador perde; se faltar para ambos, há empate. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 387,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4821&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -551,6 +574,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 4; ATK 1300; DEF 1400. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4012&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -572,6 +596,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Você ganha 1000 PV. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 167,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4348&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -593,6 +618,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Fada; atributo TREVAS. Nível 5; ATK 1600; DEF 1400. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 403,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4117&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -614,6 +640,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 2; ATK 900; DEF 500. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 410,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4201&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -635,6 +662,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo VENTO. Nível 4; ATK 1400; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 409,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4013&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -656,6 +684,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo LUZ. Nível 8; ATK 3000; DEF 2500. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 2 monstros. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 403,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -677,6 +706,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo VENTO. Nível 3; ATK 700; DEF 1300. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4302&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -698,6 +728,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo VENTO. Nível 3; ATK 1200; DEF 700. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4010&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -719,6 +750,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo VENTO. Nível 4; ATK 1200; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 409,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4567&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -740,6 +772,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo TREVAS. Nível 4; ATK 1500; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 410,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4037&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -761,6 +794,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo TREVAS. Nível 7; ATK 2400; DEF 2000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 2 monstros. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 406,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4088&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -782,6 +816,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo TERRA. Nível 5; ATK 1600; DEF 1400. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 404,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4100&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -803,6 +838,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Zumbi; atributo TREVAS. Nível 3; ATK 1600; DEF 0. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 406,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4103&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -824,6 +860,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo LUZ. Nível 4; ATK 800; DEF 2000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 404,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4008&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -845,6 +882,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo LUZ. Nível 4; ATK 1450; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 405,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4439&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -866,6 +904,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima do tipo Demônio. Enquanto estiver equipado e elegível, aplique +300 ATK e +300 DEF. Ocupa uma zona de Magia/Armadilha. Se o monstro sair, ficar com a face para baixo ou perder a elegibilidade, o equipamento vai ao Cemitério. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4309&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -887,6 +926,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Troque o ATK e a DEF originais de todos os monstros com a face para cima até o fim do turno. Bônus de campo, equipamento e outros modificadores continuam aplicados separadamente. Outra resolução no mesmo turno desfaz a troca dos monstros afetados. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 395,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4811&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -908,6 +948,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima de atributo TREVAS. Enquanto estiver equipado e elegível, aplique +400 ATK e -200 DEF. Ocupa uma zona de Magia/Armadilha. Se o monstro sair, ficar com a face para baixo ou perder a elegibilidade, o equipamento vai ao Cemitério. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 414,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4308&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -929,6 +970,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Monstro de Fusão — sem efeito de monstro. Pertence ao Deck Adicional. Materiais exatos: Manipulador de Chamas + Masaki, o Espadachim Lendário. Use Polimerização com materiais da mão/campo e uma zona disponível após consumi-los. Esta adaptação não permite Invocá-lo normalmente nem baixá-lo da mão. Reviver do Cemitério exige uma Invocação-Fusão anterior válida. ATK 1800; DEF 1600.",
       "descriptionCharacters": 381,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4021&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -950,6 +992,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 3; ATK 500; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4759&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -971,6 +1014,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TREVAS. Nível 6; ATK 2000; DEF 1600. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4384&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -992,6 +1036,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Fada; atributo LUZ. Nível 4; ATK 800; DEF 2000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 404,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4176&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1013,6 +1058,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 3; ATK 1000; DEF 800. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 410,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4184&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1034,6 +1080,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Cause 200 de dano de efeito ao oponente. O dano desse grupo é simultâneo; PV de ambos zerados resultam em empate. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 261,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4349&ope=2&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1055,6 +1102,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Zumbi; atributo TREVAS. Nível 4; ATK 1300; DEF 1400. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 409,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4476&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1076,6 +1124,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 4; ATK 1400; DEF 1300. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4142&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1097,6 +1146,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo TREVAS. Nível 4; ATK 1450; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4884&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1118,6 +1168,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Destrua o monstro com a face para cima de menor ATK atual que o oponente controla. Não escolhe alvo na ativação; se houver empate, você escolhe na resolução. Ignora monstros com a face para baixo. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 344,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4835&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1139,6 +1190,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal; velocidade 1. Sem custo adicional de ativação. Cause 1000 de dano de efeito ao oponente e 500 de dano de efeito a você. O dano desse grupo é simultâneo; PV de ambos zerados resultam em empate. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 307,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4353&ope=2&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1160,6 +1212,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative quando o oponente declara um ataque; velocidade 2. Sem custo adicional de ativação. Destrua todos os monstros do oponente em Ataque. Não escolhe alvos individuais. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 332,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4887&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1181,6 +1234,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima de atributo TERRA. Enquanto estiver equipado e elegível, aplique +400 ATK e -200 DEF. Ocupa uma zona de Magia/Armadilha. Se o monstro sair, ficar com a face para baixo ou perder a elegibilidade, o equipamento vai ao Cemitério. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 413,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4330&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1202,6 +1256,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 7; ATK 2300; DEF 2100. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 2 monstros. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4044&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1223,6 +1278,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta-Guerreira; atributo TERRA. Nível 4; ATK 1200; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 418,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4009&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1244,6 +1300,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal; velocidade 1. Sem custo adicional de ativação. Compre 1 carta(s). A compra resolve normalmente; descarte o excedente de seis na Fase Final do próprio turno. Falta de compra obrigatória causa derrota. Depois, O oponente ganha 1000 PV. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 348,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4895&ope=2&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1265,6 +1322,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Rocha; atributo TERRA. Nível 4; ATK 1500; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4460&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1286,6 +1344,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 4; ATK 1400; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 412,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4047&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1307,6 +1366,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 3; ATK 700; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4106&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1328,6 +1388,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TREVAS. Nível 3; ATK 1000; DEF 500. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 412,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4273&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1349,6 +1410,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Fada; atributo LUZ. Nível 6; ATK 1800; DEF 2000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 400,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4096&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1374,6 +1436,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Escolha 1 monstro em qualquer campo, inclusive com a face para baixo; devolva-o à mão do proprietário (Fusão volta ao Adicional). O alvo deve continuar no campo na resolução; não escolha outro se ele sair. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
       "descriptionCharacters": 456,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4547&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1395,6 +1458,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Cause 500 de dano de efeito ao oponente. O dano desse grupo é simultâneo; PV de ambos zerados resultam em empate. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 261,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4350&ope=2&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1416,6 +1480,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 4; ATK 1300; DEF 1100. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 412,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4508&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1437,6 +1502,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo TREVAS. Nível 5; ATK 1200; DEF 2200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 403,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4048&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1462,6 +1528,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Escolha 1 monstro em qualquer campo, inclusive com a face para baixo; destrua-o. O alvo deve continuar no campo na resolução; não escolha outro se ele sair. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
       "descriptionCharacters": 338,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4507&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1483,6 +1550,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative numa janela de resposta permitida; velocidade 2. Sem custo adicional de ativação. Compre 1 carta(s). A compra resolve normalmente; descarte o excedente de seis na Fase Final do próprio turno. Falta de compra obrigatória causa derrota. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 403,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5210&ope=2&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1508,6 +1576,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Enquanto este monstro estiver com a face para cima no campo. Sem custo de ativação. Nenhum jogador pode ativar Armadilhas. Os efeitos de Armadilha no campo são negados enquanto esta carta permanecer com a face para cima. Custos já pagos não são devolvidos. Efeito contínuo; não inicia corrente.",
       "descriptionCharacters": 294,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4758&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1529,6 +1598,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta-Guerreira; atributo TERRA. Nível 5; ATK 1800; DEF 1600. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 413,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4388&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1550,6 +1620,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 4; ATK 1500; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 412,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4072&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1575,6 +1646,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Durante o cálculo de dano de um ataque do oponente. Descarte 1 carta(s) como custo (a própria carta). Você não recebe dano de batalha deste combate. Não impede a destruição do monstro e não protege contra dano de efeito. A ativação inicia corrente; custos são pagos antes das respostas.",
       "descriptionCharacters": 286,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4064&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1596,6 +1668,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 4; ATK 1800; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4385&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1617,6 +1690,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo LUZ. Nível 3; ATK 1100; DEF 800. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 404,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4618&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1638,6 +1712,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Réptil; atributo TERRA. Nível 4; ATK 1500; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 409,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4057&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1659,6 +1734,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo LUZ. Nível 5; ATK 1200; DEF 1700. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 400,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4134&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1680,6 +1756,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative numa janela de resposta permitida; velocidade 2. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima no campo; coloque-o em Defesa com a face para baixo. Limpa modificadores temporários definidos pela engine e rompe equipamentos incompatíveis. Não reinicia o histórico de ataque/Invocação do turno. Da mão, apenas no próprio turno; se baixada, não pode ser usada no mesmo turno. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 490,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5432&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1701,6 +1778,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima do tipo Mago. Enquanto estiver equipado e elegível, aplique +300 ATK e +300 DEF. Ocupa uma zona de Magia/Armadilha. Se o monstro sair, ficar com a face para baixo ou perder a elegibilidade, o equipamento vai ao Cemitério. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4329&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1726,6 +1804,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Escolha 1 Magia no seu Cemitério; adicione-a à mão se ainda estiver lá na resolução. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
       "descriptionCharacters": 335,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4434&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1747,6 +1826,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo TREVAS. Nível 7; ATK 2500; DEF 2100. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 2 monstros. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 404,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4041&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1768,6 +1848,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo TREVAS. Nível 5; ATK 2000; DEF 1500. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 405,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4045&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1789,6 +1870,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo FOGO. Nível 3; ATK 900; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 405,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4148&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1810,6 +1892,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 4; ATK 1100; DEF 1100. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 412,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4299&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1835,6 +1918,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ao ser virado com a face para cima (inclusive antes do cálculo de dano em batalha). Sem custo de ativação. Escolha 1 Armadilha no seu Cemitério; adicione-a à mão se ainda estiver lá na resolução. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
       "descriptionCharacters": 339,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4108&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1856,6 +1940,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Você ganha 400 PV. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 166,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4840&ope=2&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1877,6 +1962,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta; atributo TERRA. Nível 4; ATK 1200; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4254&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1898,6 +1984,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Magia de Campo: ative na sua Fase Principal. Sem custo adicional de ativação. Enquanto estiver com a face para cima e resolvida, todos os monstros Dragão ou Besta Alada ou Trovão dos dois jogadores recebem 200 ATK e 200 DEF. Ocupa sua Zona de Campo; substituí-la envia a anterior ao Cemitério. Os efeitos dos dois campos podem acumular nesta adaptação. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 438,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4338&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1919,6 +2006,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro do oponente e tome seu controle até o fim do turno. Exige zona livre. A face e a posição são mantidas. Ao devolver, se o campo do dono estiver cheio, o monstro vai ao Cemitério do dono. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 351,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4860&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1940,6 +2028,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative numa janela de resposta permitida; velocidade 2. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima no campo; ele ganha 500 DEF até o fim do turno. Pode ser usado na janela antes do cálculo de dano, respeitando a prioridade. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 414,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4850&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1961,6 +2050,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative quando o oponente declara um ataque; velocidade 3. Sem custo adicional de ativação. Negue o ataque declarado pelo monstro adversário escolhido. Encerre a Fase de Batalha; neste formato, segue para o encerramento do turno. O atacante deve continuar com a face para cima em Ataque sob controle de quem declarou o ataque; se não estiver, o efeito não nega nem causa dano. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 537,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4804&ope=2&request_locale=en",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -1982,6 +2072,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Mago; atributo LUZ. Nível 4; ATK 1700; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 405,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4881&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2003,6 +2094,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Peixe; atributo ÁGUA. Nível 4; ATK 1600; DEF 800. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 406,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4066&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2024,6 +2116,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 6; ATK 2200; DEF 1500. Para Invocar normalmente ou baixar em Defesa, exige Tributo de 1 monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 407,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4039&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2045,6 +2138,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta; atributo TERRA. Nível 3; ATK 1200; DEF 800. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 407,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4071&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2066,6 +2160,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta-Guerreira; atributo TERRA. Nível 4; ATK 1200; DEF 1400. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 418,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4293&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2087,6 +2182,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Cause 800 de dano de efeito ao oponente. O dano desse grupo é simultâneo; PV de ambos zerados resultam em empate. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 261,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4352&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2108,6 +2204,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 4; ATK 1500; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4287&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2129,6 +2226,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta Alada; atributo VENTO. Nível 4; ATK 1550; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 414,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4472&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2150,6 +2248,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Peixe; atributo ÁGUA. Nível 4; ATK 1800; DEF 800. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 406,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4446&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2171,6 +2270,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dragão; atributo VENTO. Nível 2; ATK 600; DEF 700. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 407,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4206&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2192,6 +2292,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha o Espadachim das Chamas no seu Deck Adicional e seus materiais exatos (Masaki, o Espadachim Lendário e Manipulador de Chamas), na sua mão e/ou campo. Na resolução, envie os materiais ao Cemitério e faça a Invocação-Fusão em Ataque ou Defesa com a face para cima. Exige espaço no campo após usar os materiais. Materiais ausentes impedem a Fusão. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 500,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4837&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2213,6 +2314,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Compre 2 carta(s). A compra resolve normalmente; descarte o excedente de seis na Fase Final do próprio turno. Falta de compra obrigatória causa derrota. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 300,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4844&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2234,6 +2336,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Guerreiro; atributo TERRA. Nível 4; ATK 1700; DEF 1150. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 412,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4084&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2255,6 +2358,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal; velocidade 1. Sem custo adicional de ativação. Destrua todos os monstros do oponente. Não escolhe alvos individuais. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 231,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4343&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2276,6 +2380,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative numa janela de resposta permitida; velocidade 2. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima no campo; ele ganha 500 ATK até o fim do turno. Pode ser usado na janela antes do cálculo de dano, respeitando a prioridade. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 414,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4849&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2297,6 +2402,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Você ganha 500 PV. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 166,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4345&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2318,6 +2424,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 Armadilha com a face para cima no campo e destrua-a. Não afeta Armadilhas baixadas e não nega efeitos já ativados. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 272,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4838&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2339,6 +2446,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 Magia/Armadilha no campo, incluindo a Zona de Campo. Se for Magia, destrua-a. Uma carta baixada é revelada para verificar o tipo; se não for Magia, não é destruída. Destruir não nega uma ativação. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 354,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4843&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2360,6 +2468,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro em qualquer Cemitério. Se continuar elegível na resolução e houver uma zona livre, Invoque-o por Invocação-Especial sob seu controle, em Ataque ou Defesa com a face para cima. Uma Fusão só pode ser revivida se já tiver sido Invocada corretamente. O proprietário original é preservado. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 450,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4842&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2381,6 +2490,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 3; ATK 1000; DEF 500. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 410,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4011&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2402,6 +2512,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 4; ATK 1600; DEF 1200. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4383&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2427,6 +2538,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ao ser enviado do campo ao Cemitério. Sem custo de ativação. Escolha no seu Deck 1 monstro com ATK de até 1500; adicione-o à mão e embaralhe o restante do Deck. Não pode ativar cartas/efeitos de cartas com esse nome no mesmo turno. Uma ativação por nome por turno nesta adaptação. O limite de seis cartas é verificado na Fase Final do próprio turno. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
       "descriptionCharacters": 424,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4054&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2448,6 +2560,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative em resposta à ativação de uma Armadilha; velocidade 3. Em resposta à ativação de uma Armadilha: pague 1000 PV como custo; negue a ativação e destrua a Armadilha. Você deve ter mais de 1000 PV. O custo não é reembolsado se a resolução falhar. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 410,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4863&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2469,6 +2582,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Magia de Campo: ative na sua Fase Principal. Sem custo adicional de ativação. Enquanto estiver com a face para cima e resolvida, todos os monstros Guerreiro ou Besta-Guerreira dos dois jogadores recebem 200 ATK e 200 DEF. Ocupa sua Zona de Campo; substituí-la envia a anterior ao Cemitério. Os efeitos dos dois campos podem acumular nesta adaptação. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 435,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4339&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2494,6 +2608,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Na sua Fase Principal. Ofereça 1 monstro(s) que você controla como Tributo, inclusive esta carta se desejar. Cause 500 de dano de efeito ao oponente. A ativação inicia corrente; custos são pagos antes das respostas.",
       "descriptionCharacters": 215,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4518&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2515,6 +2630,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Rocha; atributo TERRA. Nível 3; ATK 1300; DEF 2000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 408,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4080&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2536,6 +2652,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Piro; atributo FOGO. Nível 4; ATK 1700; DEF 1150. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 406,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4973&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2557,6 +2674,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Aqua; atributo ÁGUA. Nível 4; ATK 1100; DEF 2000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 406,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5146&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2578,6 +2696,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 4; ATK 1200; DEF 1300. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4200&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2599,6 +2718,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Escolha 1 monstro com a face para cima do tipo Dragão. Enquanto estiver equipado e elegível, aplique +300 ATK e +300 DEF. Ocupa uma zona de Magia/Armadilha. Se o monstro sair, ficar com a face para baixo ou perder a elegibilidade, o equipamento vai ao Cemitério. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 410,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4321&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2620,6 +2740,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Demônio; atributo TREVAS. Nível 4; ATK 1300; DEF 1100. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 411,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4239&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2645,6 +2766,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ao ser destruído em batalha e enviado ao Cemitério. Sem custo de ativação. Você pode escolher no seu Deck 1 monstro TREVAS com ATK de até 1500 e Invocá-lo por Invocação-Especial em Ataque com a face para cima. Exige zona livre; o restante do Deck é embaralhado. É permitido recusar. Ativação opcional; inicia corrente.",
       "descriptionCharacters": 318,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4930&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2666,6 +2788,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Ative na sua Fase Principal. Sem custo adicional de ativação. Devolva todas as Magias e Armadilhas dos dois campos, incluindo Magias de Campo e cartas baixadas, às respectivas mãos. Esta Magia já foi enviada ao Cemitério antes de aplicar o efeito. O limite de seis cartas na mão é verificado na Fase Final do próprio turno. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 409,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4910&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2687,6 +2810,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Besta-Guerreira; atributo TERRA. Nível 4; ATK 1700; DEF 1000. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 418,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4032&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2708,6 +2832,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative quando ocorre uma Invocação compatível; velocidade 2. Sem custo adicional de ativação. Destrua todos os monstros em ambos os campos. Responde a Invocação-Normal, Invocação-Virar, Invocação-Especial. Não escolhe alvos individuais. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 398,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5114&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2729,6 +2854,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Ative numa janela de resposta permitida; velocidade 2. Sem custo adicional de ativação. Escolha 1 Magia/Armadilha no campo, incluindo a Zona de Campo e cartas baixadas; destrua-a se ainda estiver no campo. Destruir a carta não nega sua ativação. Pode ser ativada da mão no próprio turno; depois de baixada, somente em um turno posterior. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 423,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4909&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2750,6 +2876,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Monstro Normal — sem efeito. Tipo: Dinossauro; atributo TERRA. Nível 4; ATK 1500; DEF 800. Para Invocar normalmente ou baixar em Defesa, exige Tributo de nenhum monstro. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.",
       "descriptionCharacters": 412,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4086&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2775,6 +2902,7 @@
           "mentionsCardId": false
         }
       ],
+      "descriptionPT": "Quando outro monstro é Invocado por Invocação-Normal ou Virar. Sem custo de ativação. Ganhe 500 PV. Efeito obrigatório quando houver condições/alvos válidos; inicia corrente.",
       "descriptionCharacters": 174,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4172&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2796,6 +2924,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Armadilha: baixe antes de usar; não pode ativar no turno em que foi baixada. Ative numa janela de resposta permitida; velocidade 2. Sem custo adicional de ativação. Até o fim do turno, você não recebe dano de batalha e seus monstros não são destruídos em batalha. Não impede destruição por efeitos nem dano de efeitos. Esta adaptação não abre sua ativação durante a Etapa de Dano. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 466,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4886&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
@@ -2817,6 +2946,7 @@
           "mentionsCardId": true
         }
       ],
+      "descriptionPT": "Magia de Campo: ative na sua Fase Principal. Sem custo adicional de ativação. Enquanto estiver com a face para cima e resolvida, todos os monstros Demônio ou Mago dos dois jogadores recebem 200 ATK e 200 DEF. Monstros Fada perdem esses mesmos valores. Ocupa sua Zona de Campo; substituí-la envia a anterior ao Cemitério. Os efeitos dos dois campos podem acumular nesta adaptação. A resolução respeita a corrente; remover a carta não nega automaticamente seu efeito.",
       "descriptionCharacters": 465,
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4341&request_locale=pt",
       "evidence": "mechanical-fingerprint-and-referenced-suite",
