@@ -2,12 +2,12 @@
   "scope": "2v2 custom classic rules, 130 enabled definitions; no real human Discord clients",
   "games": 1000,
   "completed": 1000,
-  "decisions": 58507,
+  "decisions": 58508,
   "serializedRestores": 4045,
   "cardConservation": true,
   "definitionsPresent": 130,
   "effectDefinitionsActivated": 47,
-  "replayDigest": "c20a82bec62c5cf1df9d0c3d50b26d3db546b8b0fa94729fc54f85cee373dcb6",
+  "replayDigest": "66a1f01261ce6c23c08dd5ea6841df6db1f4da9bfef23f1e21dd053ed4051fc8",
   "reasons": {
     "pontos de vida": 1000
   },

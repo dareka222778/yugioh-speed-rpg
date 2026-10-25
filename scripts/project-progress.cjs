@@ -7,6 +7,7 @@
  */
 const {enabledCardIds,getEffect,getPlayableCard}=require('../dist/effectRegistry');
 const {npcs}=require('../dist/npcContent');
+const {RULES_PROFILE}=require('../dist/rulesProfile');
 const {getMonsterEffect}=require('../dist/monsterEffects');
 
 const engine=[
@@ -43,16 +44,16 @@ function calculate(items){
  return {complete:items.reduce((s,m)=>s+m.done,0),remaining:100-items.reduce((s,m)=>s+m.done,0),milestones:items};
 }
 const playableNPCDecks=npcs.map(n=>({id:n.id,name:n.name,main:n.cards.length,extra:n.extra.length,
- valid:n.cards.length>=20&&n.cards.length<=30&&n.extra.length<=6&&
+ valid:n.cards.length>=20&&n.cards.length<=30&&n.extra.length<=RULES_PROFILE.extraDeckMax&&
   [...n.cards,...n.extra].every(id=>!!getPlayableCard(id)&&!!getEffect(id))}));
-const report={readiness:{release:require('../package.json').version,historicalMilestoneScores:true,productionAcceptance:'pending Discord validation of v2 hand rules, events and UI',scope:'130 enabled cards; not all classic anime cards'},scope:'Playability of this RPG only; not every TCG/anime card',
+const report={readiness:{release:require('../package.json').version,historicalMilestoneScores:true,productionAcceptance:'pending human Discord validation of Speed RPG Clássico v1 and 2v2',scope:'130 enabled cards; not all classic anime cards'},scope:'Playability of this RPG only; not every TCG/anime card',
  engine:calculate(engine),layout:calculate(layout),playableNPCDecks,
  enabledEngineCards:enabledCardIds.length,playableEffectMonsters:enabledCardIds.filter(id=>!!getMonsterEffect(id)).length};
 if(process.argv.includes('--json'))console.log(JSON.stringify(report,null,2));
 else{
- console.log(`HISTORICAL ENGINE MILESTONES ${report.engine.complete}/100 (not release readiness)`);
- console.log(`COMMAND VISUAL STANDARD ${report.layout.complete}% complete / ${report.layout.remaining}% remaining (original duel field preserved)`);
+ console.log('ENGINE: aggregate completion percentage unavailable; use scoped acceptance reports. Historical milestones remain in --json only.');
+ console.log('LAYOUT: command components implemented; human/mobile acceptance pending; original duel field preserved.');
  console.log(`NPC DECKS ${playableNPCDecks.filter(n=>n.valid).length}/${playableNPCDecks.length} playable in this RPG, ${playableNPCDecks.map(n=>n.main).join('/')} cards in main decks`);
  console.log(`ENGINE CARDS ${report.enabledEngineCards} enabled / ${report.playableEffectMonsters} with monster effect definitions`);
- console.log('Release 0.8.0 still requires real Discord acceptance. Scores above are historical manual assessments, not completion percentages.');
+ console.log(`RULES ${RULES_PROFILE.name}: hand ${RULES_PROFILE.handLimit}, discard End Phase, Extra ${RULES_PROFILE.extraDeckMax}. Historical catalog coverage not yet audited by an importer.`);
 }

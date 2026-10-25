@@ -1,3 +1,4 @@
+import {rulesFor} from './rulesProfile';
 import sharp from 'sharp';
 import {renderTag,tagImageLayout} from './tagRenderer';
 import {renderOwnedCard} from './cardInspector';
@@ -23,6 +24,7 @@ export function tagPublicMessage(r:TagRecord){
 export function tagPrivateMessage(r:TagRecord,owner:string,requested=0){
  if(!r.state||!r.members.some(p=>p.id===owner))throw Error('Somente participantes podem abrir suas mãos.');const s=r.state,hand=tagMemberHand(s,owner),member=s.members.find(p=>p.id===owner)!,actions=tagActions(s,owner),pages=Math.max(1,Math.ceil(actions.length/20)),page=Math.min(pages-1,Math.max(0,Number.isSafeInteger(requested)?requested:0));
  const embed=new EmbedBuilder().setColor(0x1688d8).setTitle(`2v2 • ${escapeMarkdown(member.name)}`).setDescription(`${member.team===0?'Equipe Azul':'Equipe Vermelha'} • Turno ${s.core.turn}\n${r.status!=='playing'?'Partida encerrada.':actions.length?'**Sua vez de decidir.**':'Aguarde '+escapeMarkdown(tagDecisionMember(s).name)+'.'}`).addFields({name:'Sua mão privada',value:hand.map((c,i)=>`${i+1}. ${getCard(c.id)!.name} • ${getCard(c.id)!.kind==='monster'?`ATQ ${getCard(c.id)!.atk} / DEF ${getCard(c.id)!.defense}`:getCard(c.id)!.kind==='trap'?'Armadilha':'Magia'}`).join('\n')||'Sem cartas.'}).setFooter({text:`Jogadas ${page+1}/${pages} • Atualize para acompanhar • Ninguém vê sua mão`});
+ if(s.core.phase==='discard')embed.addFields({name:`Limite de ${rulesFor(s.core).handLimit} cartas`,value:s.core.handFlow?'Partida legada: siga a decisão de descarte pendente.':'Fase Final: o participante da vez descarta até seis antes de passar o turno.'});
  const components:(ActionRowBuilder<ButtonBuilder>|ActionRowBuilder<StringSelectMenuBuilder>)[]=[];
  if(actions.length&&r.status==='playing')components.push(new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(new StringSelectMenuBuilder().setCustomId(`tag:act:${r.id}:${r.revision}:${owner}`).setPlaceholder('Escolha sua jogada').addOptions(actions.slice(page*20,page*20+20).map((a,i)=>({label:actionLabel(s.core,'tag-team-'+member.team,a).slice(0,100),value:String(page*20+i)})))));
  if(hand.length&&r.status==='playing')components.push(new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(new StringSelectMenuBuilder().setCustomId(`tag:inspect:${r.id}:${r.revision}:${owner}`).setPlaceholder('Ampliar uma carta da sua mão').addOptions(hand.slice(0,25).map((c,i)=>({label:`${i+1}. ${getCard(c.id)!.name}`.slice(0,100),value:String(i)})))));

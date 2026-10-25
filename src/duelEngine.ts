@@ -1,7 +1,7 @@
 import {advanceTeamSeats,restoreTeamOverflow,type TeamRotation} from './teamRotation';
 import {drawCards,pauseOverflow,usesSeven,type HandFlow} from './handFlow';
 import {createDuelRandom,randomIndex,shuffleDuel,type DuelRandom} from './duelRandom';
-import {RULES_VERSION,CARD_DEFINITIONS_VERSION,RULES_PROFILE} from './rulesProfile';
+import {RULES_VERSION,CARD_DEFINITIONS_VERSION,RULES_PROFILE,rulesFor,type RulesVersion} from './rulesProfile';
 import {assertDuelState,assertDuelTransition} from './duelIntegrity';
 import {getEffectModel,getDestructionModel,getActivationModel} from './effectModels';
 import {effectActivationAllowed} from './effectTiming';
@@ -28,7 +28,7 @@ export type Action=
  |{kind:'battle'|'end'|'pass'|'concede'};
 export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
 export type TriggerEvent={actor:number;card:string;id:string};
-export type DuelState={version:1;teamRotation?:TeamRotation;rulesVersion?:typeof RULES_VERSION|'speed-rpg-v1';handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -43,7 +43,7 @@ export function createDuel(players:[{id:string;name:string;cards:string[];extra?
  if(first!==0&&first!==1)throw new Error('Primeiro jogador inválido.');
  if(!options||typeof options!=='object'||Array.isArray(options))throw new Error('Opções do duelo inválidas.');
  const random=createDuelRandom(options.randomSeed);
- const ps=players.map((p,index)=>{validateDuelCards(p.cards);if((p.extra?.length??0)>RULES_PROFILE.extraDeckMax)throw new Error('Deck Adicional: máximo de 6 cartas.');const counts=new Map<string,number>();for(const id of p.extra??[]){if(!card(id).fusion||!supported.has(id))throw new Error('Fusão não implementada.');counts.set(id,(counts.get(id)??0)+1);if(counts.get(id)!>RULES_PROFILE.copiesPerCard)throw new Error('Máximo de 3 cópias no Deck Adicional.');}const deck=p.cards.map((id,n)=>({id,uid:`${index}-${n}`}));
+ const ps=players.map((p,index)=>{validateDuelCards(p.cards);if((p.extra?.length??0)>RULES_PROFILE.extraDeckMax)throw new Error(`Deck Adicional: máximo de ${RULES_PROFILE.extraDeckMax} cartas.`);const counts=new Map<string,number>();for(const id of p.extra??[]){if(!card(id).fusion||!supported.has(id))throw new Error('Fusão não implementada.');counts.set(id,(counts.get(id)??0)+1);if(counts.get(id)!>RULES_PROFILE.copiesPerCard)throw new Error('Máximo de 3 cópias no Deck Adicional.');}const deck=p.cards.map((id,n)=>({id,uid:`${index}-${n}`}));
   for(let i=deck.length-1;i>0;i--){const r=rng===Math.random?randomIndex(random,i+1):Math.floor(rng()*(i+1));if(!Number.isInteger(r)||r<0||r>i)throw new Error('Sorteio inválido.');[deck[i],deck[r]]=[deck[r],deck[i]];}
   return {id:p.id,name:p.name.slice(0,32),lp:RULES_PROFILE.startingLP,hand:deck.splice(0,RULES_PROFILE.startingHand),deck,monsters:[],backrow:[],grave:[],extra:(p.extra??[]).map((id,n)=>({id,uid:`${index}-e${n}`})),field:null,banished:[],summoned:false} as DuelPlayer;
  }) as [DuelPlayer,DuelPlayer];
@@ -288,7 +288,7 @@ function endTurn(s:DuelState){
 }
 function completeEndTurn(s:DuelState){
  s.turnEnding=false;
- if(!usesSeven(s)&&s.players[s.current].hand.length>6){s.phase='discard';note(s,'Descarte até ficar com 6 cartas.');return;}
+ if(!usesSeven(s)&&s.players[s.current].hand.length>rulesFor(s).handLimit){s.phase='discard';note(s,'Descarte até ficar com 6 cartas.');return;}
  nextTurn(s);
 }
 function nextTurn(s:DuelState){advanceTeamSeats(s);s.current=1-s.current;s.turn++;s.phase='main';s.players[s.current].summoned=false;
@@ -685,7 +685,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
      if(completed){if(flow.resumeChainRoot)resumeResolvedChain(s);else if(s.phase==='response'&&!pauseOverflow(s))resolve(s);}
     }
    }
-  }else if(p.hand.length<=6)nextTurn(s);
+  }else if(p.hand.length<=rulesFor(s).handLimit)nextTurn(s);
  }
  cleanEquips(s);settle(s);cleanEquips(s);assertDuelTransition(input,s);return s;
 }

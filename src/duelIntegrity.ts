@@ -6,7 +6,7 @@ import {economicOperationIssues} from './economicOperations';
  */
 import {getPlayableCard as getCard} from './effectRegistry';
 import {assertDuelRandom} from './duelRandom';
-import {RULES_VERSION,CARD_DEFINITIONS_VERSION,RULES_PROFILE} from './rulesProfile';
+import {CARD_DEFINITIONS_VERSION,RULES_PROFILE,rulesFor,supportedRulesVersion} from './rulesProfile';
 import {getMonsterEffect} from './monsterEffects';
 import type {CardRef,DuelState} from './duelEngine';
 const phases=new Set(['main','battle','response','choice','discard','finished']);
@@ -19,12 +19,12 @@ export function duelCards(s:DuelState):CardRef[]{return s.players.flatMap(p=>[..
 export function assertDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');
  const s=value as any;
- if(s.rulesVersion!==undefined&&s.rulesVersion!==RULES_VERSION&&s.rulesVersion!=='speed-rpg-v1'||s.cardDefinitionsVersion!==undefined&&s.cardDefinitionsVersion!==CARD_DEFINITIONS_VERSION)fail('versão de regras ou definições incompatível');
+ if(!supportedRulesVersion(s.rulesVersion)||s.cardDefinitionsVersion!==undefined&&s.cardDefinitionsVersion!==CARD_DEFINITIONS_VERSION)fail('versão de regras ou definições incompatível');
  if(s.random!==undefined)assertDuelRandom(s.random);
- if(s.rulesVersion===RULES_VERSION&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
+ if(s.rulesVersion==='speed-rpg-v2'&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
  if(s.handFlow!==undefined){
   const f=s.handFlow;
-  if(!object(f)||s.rulesVersion!==RULES_VERSION||s.phase!=='discard'||!actor(f.actor)||!integer(f.remaining)||f.remaining>30||!['draw','overflow'].includes(f.mode)||!['main','battle','response'].includes(f.returnPhase)||!Array.isArray(f.after)||f.after.length>0&&economicOperationIssues(f.after).length>0||f.resumeChainRoot!==undefined&&typeof f.resumeChainRoot!=='boolean'||f.mode==='draw'&&f.remaining<1||f.mode==='overflow'&&f.remaining!==0||f.resumeChainRoot&&!s.chainRoot)fail('continuação de compra/descarte');
+  if(!object(f)||s.rulesVersion!=='speed-rpg-v2'||s.phase!=='discard'||!actor(f.actor)||!integer(f.remaining)||f.remaining>30||!['draw','overflow'].includes(f.mode)||!['main','battle','response'].includes(f.returnPhase)||!Array.isArray(f.after)||f.after.length>0&&economicOperationIssues(f.after).length>0||f.resumeChainRoot!==undefined&&typeof f.resumeChainRoot!=='boolean'||f.mode==='draw'&&f.remaining<1||f.mode==='overflow'&&f.remaining!==0||f.resumeChainRoot&&!s.chainRoot)fail('continuação de compra/descarte');
  }
 
  if(!Array.isArray(s.players)||s.players.length!==2||!actor(s.current)||!actor(s.priority))fail('participantes ou prioridade');
@@ -61,7 +61,7 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
   for(const zone of ['deck','hand','monsters','backrow','grave','extra','banished']){
    const list=p[zone];if(list===undefined&&['extra','banished'].includes(zone))continue;
    if(!Array.isArray(list))fail('zona ausente');
-   if(zone==='monsters'&&list.length>RULES_PROFILE.monsterZones||zone==='backrow'&&list.length>RULES_PROFILE.spellTrapZones||zone==='extra'&&list.length>RULES_PROFILE.extraDeckMax)fail('limite de zonas');
+   if(zone==='monsters'&&list.length>RULES_PROFILE.monsterZones||zone==='backrow'&&list.length>RULES_PROFILE.spellTrapZones||zone==='extra'&&list.length>rulesFor(s).extraDeckMax)fail('limite de zonas');
    for(const c of list){
     checkRef(c);const info=getCard(c.id)!;
     if(zone==='monsters'){
@@ -80,7 +80,7 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
   if(r.overflowReturn!==undefined&&(!object(r.overflowReturn)||!actor(r.overflowReturn.team)||!integer(r.overflowReturn.seat)||r.overflowReturn.seat>3||r.overflowReturn.seat%2!==r.overflowReturn.team||!r.reserves[r.overflowReturn.seat]))fail('retomada do parceiro');
   if(r.overflowReturn&&s.phase!=='finished'&&(s.phase!=='discard'||s.handFlow?.mode!=='overflow'||s.handFlow?.actor!==r.overflowReturn.team))fail('descarte do parceiro sem continuação');
   if(r.active[s.current]!==r.cursor&&!(r.overflowReturn?.team===s.current&&r.overflowReturn.seat===r.cursor))fail('participante da vez');
-  for(const h of Object.values(r.reserves) as any[]){if(!object(h)||!Array.isArray(h.hand)||!Array.isArray(h.deck)||!Array.isArray(h.extra)||h.extra.length>RULES_PROFILE.extraDeckMax)fail('mão/deck do parceiro');for(const c of [...h.hand,...h.deck]){checkRef(c);if(getCard(c.id)!.fusion)fail('Fusão na mão do parceiro');}for(const c of h.extra){checkRef(c);if(!getCard(c.id)!.fusion)fail('adicional do parceiro');}}
+  for(const h of Object.values(r.reserves) as any[]){if(!object(h)||!Array.isArray(h.hand)||!Array.isArray(h.deck)||!Array.isArray(h.extra)||h.extra.length>rulesFor(s).extraDeckMax)fail('mão/deck do parceiro');for(const c of [...h.hand,...h.deck]){checkRef(c);if(getCard(c.id)!.fusion)fail('Fusão na mão do parceiro');}for(const c of h.extra){checkRef(c);if(!getCard(c.id)!.fusion)fail('adicional do parceiro');}}
   for(const c of duelCards(s))if(!(/^m[0-3]:/).test(c.uid))fail('proprietário físico de equipe');
   for(const [team,p] of s.players.entries())for(const c of [...p.deck,...p.hand,...p.extra??[]])if(!c.uid.startsWith(`m${r.active[team]}:`))fail('zona privada de outro parceiro');
   for(const [seat,h] of Object.entries(r.reserves) as [string,any][])for(const c of [...h.deck,...h.hand,...h.extra])if(!c.uid.startsWith(`m${seat}:`))fail('reserva privada de outro parceiro');

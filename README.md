@@ -1,3 +1,5 @@
+> **0.16.0 — Speed RPG Clássico v1:** novas partidas usam mão de seis, descarte somente na Fase Final do próprio turno e Adicional de até cinco cartas. Compras/buscas/devoluções não são bloqueadas pelo limite de mão. Partidas anteriores mantêm seu perfil salvo. Arena 1v1 preservada. Veja [entrega](RELEASE_0_16_0.md) e [roteiro consolidado](ROADMAP_CLASSIC.md). Os marcos abaixo são históricos.
+
 > **0.15.1 — equipes clássicas e treino solo:** `/dupla convidar` cria uma partida entre quatro pessoas, com decks próprios ou emprestados; `/dupla treino` coloca você e Yugi contra Kaiba e Joey. Há efeitos, correntes, mãos/Adicionais individuais, salvamento e recuperação de arena. Sem alterar coleção ou economia. As 130 cartas são o escopo atual; homologação humana e aceitação visual ainda precisam ser concluídas. Regras em [PHASE_6.md](PHASE_6.md), entrega em [RELEASE_0_15_0.md](RELEASE_0_15_0.md).
 
 > **0.10.0 — fase 6 iniciada:** `/dupla simular` exercita quatro bots em um laboratório 2v2 com monstros normais. Não inicia partidas humanas nem altera sua coleção. Escopo e próximos gates em [PHASE_6.md](PHASE_6.md). O 1v1 mantém 130 cartas e a arena original.

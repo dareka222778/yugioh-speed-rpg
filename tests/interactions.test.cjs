@@ -173,7 +173,7 @@ test('NPC gallery buttons and card selection use the real handler, acknowledge f
 test('help and rules commands are private, owner-bound and use current hand/reward rules',async()=>{
  assert.ok(registered.some(c=>c.name==='ajuda'));assert.ok(registered.some(c=>c.name==='regras'));
  const help=interaction('command','ajuda');await dispatch(help.i);assert.equal(help.calls[0][1].flags,64);const menu=help.calls[0][1].components[0].toJSON().components[0];
- const select=interaction('select',undefined,{isStringSelectMenu:()=>true,customId:menu.custom_id,values:['rules']});await dispatch(select.i);assert.deepEqual(select.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(JSON.stringify(select.calls[1][1].embeds[0].toJSON()),/Mão de sete/);
+ const select=interaction('select',undefined,{isStringSelectMenu:()=>true,customId:menu.custom_id,values:['rules']});await dispatch(select.i);assert.deepEqual(select.calls.map(c=>c[0]),['deferUpdate','edit']);assert.match(JSON.stringify(select.calls[1][1].embeds[0].toJSON()),/Mão de seis/);
  const other=interaction('select',undefined,{isStringSelectMenu:()=>true,customId:menu.custom_id,values:['events'],user:{id:'999',displayAvatarURL:()=>''}});await dispatch(other.i);assert.match(other.calls.at(-1)[1].content,/própria ajuda/);
 });
 test('2v2 laboratory command is explicitly virtual, private and leaves player economy and sessions untouched',async()=>{

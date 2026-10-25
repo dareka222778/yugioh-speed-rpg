@@ -21,6 +21,7 @@ export function drawCards(s:DuelState,actor:number,count:number,service:Economic
  return true;
 }
 export function pauseOverflow(s:DuelState):boolean{
+ normalizeTeamHands(s);
  if(!usesSeven(s)||!['main','battle','response'].includes(s.phase)||s.handFlow)return false;
  prepareTeamOverflow(s);const actor=s.players.findIndex(p=>p.hand.length>7);if(actor<0)return false;
  s.handFlow={actor,remaining:0,mode:'overflow',returnPhase:s.phase as HandFlow['returnPhase'],after:[]};s.phase='discard';

@@ -1,3 +1,4 @@
+import {RULES_PROFILE} from './rulesProfile';
 import sharp from 'sharp';
 import {outlineText as text} from './fontPaths';
 import {getCard} from './collection';
@@ -26,7 +27,7 @@ async function draw(v:DeckCanvas,artProvider:typeof getCardArt){
  const status=deck.active?'DECK ATIVO':deck.errors.length?'RASCUNHO':'PRONTO PARA ATIVAR';
  let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="${azure.navy}"/><stop offset="1" stop-color="${azure.deep}"/></linearGradient><linearGradient id="energy" x2="1" y2="0"><stop stop-color="${azure.primary}"/><stop offset="1" stop-color="${azure.primaryBright}"/></linearGradient></defs><rect width="1200" height="1090" rx="22" fill="url(#bg)"/><rect x="8" y="8" width="1184" height="1074" rx="20" fill="none" stroke="${azure.line}" stroke-opacity=".8" stroke-width="2"/><path d="M32 28H320M880 28H1168M32 1064H320M880 1064H1168" stroke="url(#energy)" stroke-width="4"/>`;
  svg+=text(36,42,'DUEL DECK STUDIO',17,azure.primaryBright,700)+text(36,86,deck.name,34,'#F5FBFF',700,790);
- svg+=text(917,45,`${deck.total} / 30 CARTAS`,23,'#F5FBFF',700)+text(917,103,`ADICIONAL: ${deck.extraTotal??0}/6`,13,'#A9C9E5',700)+text(917,77,status,14,deck.errors.length?'#FFCB78':'#65E2BD',700,245);
+ svg+=text(917,45,`${deck.total} / 30 CARTAS`,23,'#F5FBFF',700)+text(917,103,`ADICIONAL: ${deck.extraTotal??0}/${RULES_PROFILE.extraDeckMax}`,13,'#A9C9E5',700)+text(917,77,status,14,deck.errors.length?'#FFCB78':'#65E2BD',700,245);
  svg+='<path d="M36 110H1164" stroke="#2B648F"/>'+text(36,141,'COLEÇÃO    /    INSPECIONE CADA CARTA',14,'#A9C9E5',700);
  for(const [i,id] of v.visible.entries()){
   const c=getCard(id)!;const x=36+(i%3)*278,y=160+Math.floor(i/3)*421;const selected=id===v.selected;

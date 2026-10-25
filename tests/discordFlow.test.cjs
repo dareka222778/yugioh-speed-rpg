@@ -25,8 +25,8 @@ test('a failed private delivery after a committed move still refreshes the publi
  await assert.rejects(()=>handleDuelComponent(i,{...delivery,refreshArena:async()=>{refreshed++;}}),/network/);assert.equal(refreshed,1);const saved=store.getDuel(r.id);assert.ok(saved.revision>r.revision);
  const recover=interaction(actor,`duel:open:${r.id}:${saved.revision}`);await handleDuelComponent(recover,delivery);assert.equal(store.getDuel(r.id).revision,saved.revision);
 });
-test('hand-limit decisions go through the Discord route and resume persisted draw before another action',async()=>{
- const prior=store.getDuel(r.id);store.performDuelAction(r.id,'101','guild',prior.revision,{kind:'concede'});r=store.challenge('101','102','guild','channel');r=store.acceptChallenge(r.id,'102','guild',r.revision);let s=r.state;s.current=0;s.phase='main';s.chain=[];s.pending={kind:'none'};s.players[1].hand=Array.from({length:7},(_,n)=>({uid:'seven-'+n,id:'91152256'}));s=e.step(s,'101',{kind:'end'});db.db.prepare('UPDATE duels SET state=? WHERE id=?').run(JSON.stringify(s),r.id);
+test('legacy v2 hand-limit decisions still resume through the Discord route',async()=>{
+ const prior=store.getDuel(r.id);store.performDuelAction(r.id,'101','guild',prior.revision,{kind:'concede'});r=store.challenge('101','102','guild','channel');r=store.acceptChallenge(r.id,'102','guild',r.revision);let s=r.state;s.rulesVersion='speed-rpg-v2';s.current=0;s.phase='main';s.chain=[];s.pending={kind:'none'};s.players[1].hand=Array.from({length:7},(_,n)=>({uid:'seven-'+n,id:'91152256'}));s=e.step(s,'101',{kind:'end'});db.db.prepare('UPDATE duels SET state=? WHERE id=?').run(JSON.stringify(s),r.id);
  assert.equal(s.phase,'discard');const actor='102';await handleDuelComponent(interaction(actor,`duel:act:${r.id}:${r.revision}:1`,['0']),delivery);const next=store.getDuel(r.id);assert.equal(next.state.phase,'main');assert.equal(next.state.players[1].hand.length,7);
 });
 test('surrender closes controls; expired sessions reject further actions and remove all decision controls',async()=>{

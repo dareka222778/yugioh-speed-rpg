@@ -1,9 +1,9 @@
 {
   "scope": "100 persisted classic 2v2 matches, four simulated human transports; no real Discord clients",
   "completed": 100,
-  "decisions": 6902,
-  "reloads": 6902,
-  "publications": 6902,
+  "decisions": 7104,
+  "reloads": 7104,
+  "publications": 7104,
   "mainDecksPerGame": 4,
   "cardConservation": true,
   "economyUnchanged": true,

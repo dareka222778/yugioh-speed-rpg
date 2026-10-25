@@ -1,3 +1,4 @@
+import {rulesFor} from './rulesProfile';
 import {renderOwnedCard} from './cardInspector';
 import {cardRulesPT,racePT,attributePT} from './cardText';
 import sharp from 'sharp';
@@ -37,6 +38,7 @@ export function duelPrivateMessage(r:DuelRecord,owner:string,requestedPage=1){
  const s=r.state;const p=s.players.find(p=>p.id===owner)!;const actions=legalActions(s,owner);const pages=Math.max(1,Math.ceil(actions.length/20));const page=Math.min(pages,Math.max(1,Number.isInteger(requestedPage)?requestedPage:1));
  const embed=new EmbedBuilder().setColor(embedColors.public).setTitle(`DUEL PANEL • ${escapeMarkdown(p.name)}`).setDescription(`**${p.lp} PV** • **${p.deck.length} cartas para comprar** • Turno ${s.turn} • ${phaseNames[s.phase]}\n${s.phase==='finished'?s.reason:actions.length?'**Sua vez de decidir.**':'Aguardando o outro jogador.'}`).addFields({name:'Sua mão',value:p.hand.map((c,n)=>`${n+1}. ${getCard(c.id)!.name}`).join('\n')||'Sem cartas.'});
  if(s.phase!=='finished')embed.addFields({name:'Próximo passo',value:actions.length?'Escolha uma jogada no menu. Ela será executada imediatamente.':'Aguarde o outro jogador. Use Atualizar para acompanhar.'});
+ if(s.phase==='discard'&&!s.handFlow)embed.addFields({name:`Limite de ${rulesFor(s).handLimit} cartas`,value:s.current===s.players.indexOf(p)?'Fase Final: descarte o excedente para encerrar seu turno.':'Aguardando o descarte do outro duelista.'});
  if(s.phase==='discard'&&s.handFlow)embed.addFields({name:'Limite de sete cartas',value:s.handFlow.actor===s.players.indexOf(p)?s.handFlow.mode==='draw'?'Escolha uma carta para descartar antes da próxima compra. A compra continuará automaticamente.':'O efeito terminou. Descarte o excedente até ficar com sete cartas.':'Aguardando o descarte do outro duelista.'});
  encounterFields(embed,s);
  embed.setFooter({text:`Ações ${page}/${pages} • ${s.fixedOpening?'Laboratório de efeitos':'Baralho embaralhado • Compra do topo'} • Mão privada`});

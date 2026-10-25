@@ -3,7 +3,7 @@ const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'hand-seven-'));process.env.DATAB
 const e=require('../dist/duelEngine'),{starterContents}=require('../dist/cardCatalog'),integrity=require('../dist/duelIntegrity'),db=require('../dist/database'),store=require('../dist/duelStore');
 const ids=starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id));
 const ref=(uid,id='91152256')=>({uid,id});
-function game(){return e.createDuel([{id:'a',name:'A',cards:ids},{id:'b',name:'B',cards:ids}],()=>.5);}
+function game(){const s=e.createDuel([{id:'a',name:'A',cards:ids},{id:'b',name:'B',cards:ids}],()=>.5);s.rulesVersion='speed-rpg-v2';return s;}
 function hand(s,actor,n){s.players[actor].hand=Array.from({length:n},(_,i)=>ref(`h-${actor}-${i}`));}
 function use(s,id,kind,where=()=>true){const a=e.legalActions(s,id).find(a=>a.kind===kind&&where(a));assert.ok(a,`missing ${kind}: ${s.phase}`);return e.step(s,id,a);}
 const monster=(uid,id)=>({...ref(uid,id),position:'def',faceUp:false,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0});

@@ -13,12 +13,13 @@ test('progress report is internally consistent and anchored to the actual suppor
  }
  const {enabledCardIds,engineCard,getEffect}=require('../dist/effectRegistry');
  const {npcs}=require('../dist/npcContent');
+ const {RULES_PROFILE}=require('../dist/rulesProfile');
  const {getMonsterEffect}=require('../dist/monsterEffects');
  assert.equal(report.playableNPCDecks.length,npcs.length);
  for(const n of report.playableNPCDecks){
   const original=npcs.find(p=>p.id===n.id);
   assert.ok(original);assert.equal(n.main,original.cards.length);assert.equal(n.extra,original.extra.length);
-  assert.equal(n.valid,original.cards.length>=20&&original.cards.length<=30&&original.extra.length<=6&&
+  assert.equal(n.valid,original.cards.length>=20&&original.cards.length<=30&&original.extra.length<=RULES_PROFILE.extraDeckMax&&
    [...original.cards,...original.extra].every(id=>!!engineCard(id)&&!!getEffect(id)));
  }
  assert.equal('classicArchive' in report,false);

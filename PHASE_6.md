@@ -1,4 +1,4 @@
-# Fase 6 — equipes clássicas 2v2, versão 0.15.1
+# Fase 6 — equipes clássicas 2v2, versão 0.16.0
 
 ## Estado atual
 
@@ -18,11 +18,11 @@ Não há apostas, gastos, recompensas ou entrega de cartas. Cartas emprestadas e
 ## Regras da adaptação
 
 - Ordem: Azul 1 → Vermelha 1 → Azul 2 → Vermelha 2, a partir da primeira posição sorteada. O primeiro turno não tem compra nem batalha.
-- Cada equipe compartilha 4000 PV, três zonas de Monstro, três de Magia/Armadilha, Campo, cemitério e banidas. Mãos, decks e Adicionais são individuais: 20–30 cartas principais, até seis no Adicional e até três cópias por carta.
+- Cada equipe compartilha 4000 PV, três zonas de Monstro, três de Magia/Armadilha, Campo, cemitério e banidas. Mãos, decks e Adicionais são individuais: 20–30 cartas principais, até cinco no Adicional e até três cópias por carta.
 - O representante ativo da equipe decide suas respostas usando a própria mão/deck e pode usar o campo compartilhado, inclusive cartas baixadas pelo parceiro. O parceiro inativo não oferece uma segunda janela de resposta. Efeitos sobre as duas mãos/decks afetam os dois representantes ativos. Efeitos de monstros do campo/cemitério são controlados pelo representante ativo da equipe.
 - A troca de parceiro ocorre somente depois das respostas/gatilhos do fim do turno, imediatamente antes da compra do participante que entra. O Adicional também troca nessa transição.
-- Uma carta devolvida à mão ou ao Adicional retorna ao participante que é seu dono físico. O dono inativo escolhe seu próprio descarte se receber cartas acima de sete; a prioridade anterior é restaurada depois. Uma devolução coletiva termina antes dos descartes individuais.
-- Cada pessoa tem limite de sete cartas, com descarte antes da próxima compra. A equipe perde por falha de compra obrigatória, PV, desistência confirmada de qualquer membro ou W.O. de 30 minutos de quem precisa decidir. Falhas simultâneas de compra podem resultar em empate.
+- Uma carta devolvida à mão ou ao Adicional retorna ao participante que é seu dono físico. Nas partidas novas, uma devolução não interrompe o efeito por excesso de mão. Cada participante descarta até seis na Fase Final do próprio turno. As sessões legadas v2 mantêm o descarte imediato do dono e restauram a prioridade anterior.
+- Cada pessoa tem limite de seis cartas, verificado na Fase Final do próprio turno. Compras e buscas resolvem normalmente. Partidas já salvas conservam seu perfil de regras anterior. A equipe perde por falha de compra obrigatória, PV, desistência confirmada de qualquer membro ou W.O. de 30 minutos de quem precisa decidir. Falhas simultâneas de compra podem resultar em empate.
 
 Estas são regras próprias de equipes do Speed RPG, não uma alegação de aderência integral ao Tag Duel oficial.
 
@@ -38,7 +38,7 @@ Publicações têm uma revisão confirmada separada da revisão do jogo. O verif
 
 O arquivo do campo 1v1 permanece idêntico: SHA-256 `01d2253332cae7cf18106979e461af7524eda88794021134d2424755b0fb351c`.
 
-## Evidências desta versão
+## Evidências históricas da versão 0.15.1
 
 | Verificação | Resultado |
 |---|---|
@@ -65,8 +65,12 @@ Reprodução: `npm test`, `npm run accept:engine`, `npm run audit:tag`, `npm run
 
 ## Critério para encerrar a homologação
 
-Uma partida completa com quatro pessoas reais, usando as respostas, a consulta de cartas e a retomada de painel em pelo menos um celular. É preciso conferir também o resultado e os controles desativados ao terminar. Sem essa evidência, não registrar “100% homologado” nem declarar as fases seguintes concluídas.
+Uma partida completa com quatro pessoas reais sob o perfil vigente, usando as respostas, a consulta de cartas e a retomada de painel em pelo menos um celular. É preciso conferir também o resultado e os controles desativados ao terminar. Sem essa evidência, não registrar “100% homologado” nem declarar as fases seguintes concluídas.
 
 ## Patch 0.15.1 — isolamento do executor de testes
 
 O executor cria um SQLite temporário para todo o processo de testes, remove credenciais Discord herdadas e apaga somente seu próprio diretório temporário ao terminar. Cada suíte ainda pode criar seu próprio banco. Um teste de UI do 2v2 foi corrigido para declarar seu banco temporário antes de qualquer importação. Guardas verificam que um caminho de produção sentinela não é tocado, que credenciais não chegam ao worker e que falhas retornam código de saída diferente de zero. Perfis e coleções reais foram comparados ao backup e permaneceram iguais. O log de inicialização também lista os comandos realmente registrados.
+
+## Atualização 0.16.0
+
+O perfil `speed-rpg-classic-v1` centraliza os limites corrigidos. `rulesFor` mantém a interpretação das partidas `speed-rpg-v2`, `speed-rpg-v1` e anteriores sem reescrever estados. O laboratório Normal espera o último descarte antes de trocar o parceiro e comprar do deck correto. A coordenação clássica continua compartilhando o núcleo. Evidências atuais em [RELEASE_0_16_0.md](RELEASE_0_16_0.md); a numeração principal foi consolidada em [ROADMAP_CLASSIC.md](ROADMAP_CLASSIC.md). A antiga “Fase 6” do 2v2 permanece apenas como referência histórica.

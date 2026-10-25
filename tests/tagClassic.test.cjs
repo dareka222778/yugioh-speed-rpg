@@ -1,7 +1,7 @@
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path');process.env.DATABASE_PATH=path.join(fs.mkdtempSync(path.join(os.tmpdir(),'tag-classic-tests-')),'game.sqlite');
 const {test}=require('node:test'),assert=require('node:assert/strict'),t=require('../dist/tagDuel'),e=require('../dist/duelEngine'),{npcs}=require('../dist/npcContent');
 const normal=t.tagNormalCardIds.slice(0,10).flatMap(id=>[id,id]);
-function game(first=0){return t.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'P'+i,cards:normal})),{seed:'classic',classic:true,first});}
+function game(first=0){const s=t.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'P'+i,cards:normal})),{seed:'classic',classic:true,first});s.core.rulesVersion='speed-rpg-v2';return s;}
 const ref=(seat,name,id)=>({uid:`m${seat}:${name}`,id}),mon=(seat,name,id)=>({...ref(seat,name,id),owner:seat%2,position:'atk',faceUp:true,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0}),back=(seat,name,id)=>({...ref(seat,name,id),setTurn:0,faceUp:false});
 function act(s,kind,filter=()=>true){const owner=t.tagDecisionMember(s).id,a=t.tagActions(s,owner).find(a=>a.kind===kind&&filter(a));assert.ok(a,`${owner} needs ${kind} in ${s.core.phase}`);return t.stepTagDuel(s,owner,a);}
 function passes(s){for(let n=0;n<20&&s.core.phase==='response';n++)s=act(s,'pass');return s;}

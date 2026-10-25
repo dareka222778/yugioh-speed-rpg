@@ -1,8 +1,9 @@
 {
-  "release": "0.15.1",
+  "release": "0.16.0",
   "scope": "enabled 1v1 Speed RPG; not every anime/TCG card",
   "enabledCards": 130,
   "criticalSuites": [
+    "tests/classicRulesV1.test.cjs",
     "tests/discordFlow.test.cjs",
     "tests/interactions.test.cjs",
     "tests/handFlow.test.cjs",
@@ -15,14 +16,14 @@
     "tests/cardEvents.test.cjs",
     "tests/cardText.test.cjs"
   ],
-  "criticalTests": 93,
-  "coreFingerprint": "98bd175d67b0b1b13c229e2715389fdfbfa5c8b11610d717846d182c8c7cbcae",
+  "criticalTests": 107,
+  "coreFingerprint": "80287676cce69648a8bc9c55797cec281b7fb6d248e12837cf03a648b7372693",
   "completeGames": 1000,
-  "decisions": 63120,
-  "serializedRestores": 4388,
+  "decisions": 63099,
+  "serializedRestores": 4386,
   "cardConservation": "all physical identities preserved",
   "technicalGate": "passed",
   "readyForCommandUI": true,
   "liveDiscordHumanAcceptance": "not certified by automation",
-  "phase6": "2v2 is a separate engine and does not inherit this acceptance"
+  "phase6": "2v2 shares the rules core; coordination and human acceptance require their own evidence"
 }
