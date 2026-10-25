@@ -1,3 +1,5 @@
+> **0.8.1 — gate técnico da engine:** `npm run accept:engine` verifica regras, retomada e o roteamento real dos componentes antes de liberar o trabalho nos comandos. O “92%” antigo fica somente no histórico. Aceite humano e 2v2 têm critérios separados.
+
 > **Atualização 0.8.0:** regras novas `speed-rpg-v2`, mão de sete com compra interrompível, eventos administrativos, decks revisados e textos operacionais em português. Leia [RELEASE_0_8_0.md](RELEASE_0_8_0.md) para testes, compatibilidade e homologação pendente. Os percentuais antigos de marcos não medem prontidão de lançamento.
 
 # Yu-Gi-Oh! Speed RPG

@@ -1,0 +1,28 @@
+{
+  "release": "0.8.1",
+  "scope": "enabled 1v1 Speed RPG; not every anime/TCG card",
+  "enabledCards": 130,
+  "criticalSuites": [
+    "tests/discordFlow.test.cjs",
+    "tests/interactions.test.cjs",
+    "tests/handFlow.test.cjs",
+    "tests/duelIntegrity.test.cjs",
+    "tests/classicCounterTraps.test.cjs",
+    "tests/classicContinuousEffects.test.cjs",
+    "tests/classicQuickMonsters.test.cjs",
+    "tests/classicGraveTriggers.test.cjs",
+    "tests/classicSummonTriggers.test.cjs",
+    "tests/cardEvents.test.cjs",
+    "tests/cardText.test.cjs"
+  ],
+  "criticalTests": 89,
+  "coreFingerprint": "b138636950ed33677dc653b70cd54f915922583fc021c6247ce5df27e6514919",
+  "completeGames": 1000,
+  "decisions": 63120,
+  "serializedRestores": 4388,
+  "cardConservation": "all physical identities preserved",
+  "technicalGate": "passed",
+  "readyForCommandUI": true,
+  "liveDiscordHumanAcceptance": "not certified by automation",
+  "phase6": "2v2 is a separate engine and does not inherit this acceptance"
+}

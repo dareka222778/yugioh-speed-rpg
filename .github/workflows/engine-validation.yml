@@ -20,6 +20,7 @@ jobs:
       - run: npm run coverage:engine
       - run: npm run progress
       - run: npm run audit:engine
+      - run: npm run accept:engine
       - run: node scripts/render-previews.cjs artifacts/previews
       - name: Publicar prévias visuais
         uses: actions/upload-artifact@v4

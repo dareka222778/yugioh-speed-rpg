@@ -1,3 +1,11 @@
+# Estado atual — engine e comandos
+
+A engine 1v1 das 130 cartas habilitadas tem um gate técnico reproduzível em `npm run accept:engine`. O resultado executado está em `validation/engine-acceptance.json`: contratos de regras, persistência, privacidade, componentes e roteamento usado pelo bot, seguidos de 1000 partidas completas. A homologação humana no Discord é registrada separadamente; automação não a certifica.
+
+O gate técnico permite avançar à padronização dos comandos, preservando a arena âmbar. A fase 6 original (2v2) é uma expansão independente e precisa de testes/aceite próprios. Catálogo completo do anime, regras de torneio e novos efeitos fora das 130 cartas não são declarados concluídos.
+
+## Métrica histórica, substituída pelo gate acima
+
 # Acompanhamento — Engine clássica e padrão visual dos comandos
 
 **Branch de trabalho:** `classic-engine-foundation` (não altera `main`).

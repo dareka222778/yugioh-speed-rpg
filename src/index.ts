@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import {handleDuelComponent} from './duelInteraction';
 import {createCardEvent,activateCardEvent,grantEventCards,closeCardEvent,listCardEvents} from './cardEvents';
 import {randomUUID} from 'node:crypto';
 import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GatewayIntentBits, MessageFlags, ModalBuilder, PermissionFlagsBits, REST, Routes, SlashCommandBuilder, TextInputBuilder, TextInputStyle, type Interaction } from 'discord.js';
@@ -106,6 +107,9 @@ async function refreshArena(record:DuelRecord){
 }
 async function handleInteraction(i:Interaction) {
  const correlation=randomUUID().slice(0,8),started=Date.now();
+ let acknowledgment:'reply'|'update'|undefined;
+ const deferReply=async(options?:any)=>{if(!('deferReply' in i))throw new Error('Interação sem resposta adiada.');await i.deferReply(options);acknowledgment='reply';};
+ const deferUpdate=async()=>{if(!('deferUpdate' in i))throw new Error('Interação sem atualização adiada.');await i.deferUpdate();acknowledgment='update';};
   console.log(`Interação recebida: ${i.type} / ${'commandName' in i ? i.commandName : 'componente'}`);
   if(i.isAutocomplete()) {
     try {const matches=searchCards(String(i.options.getFocused()));const owned=i.commandName==='deck'?new Set(getCollection(i.user.id).map(c=>c.card_key)):null;await i.respond(matches.filter(c=>!owned||owned.has(c.id)).slice(0,25).map(c=>({name:`${c.name} • ${c.id}`.slice(0,100),value:c.id})));} catch(error){console.error('Falha no autocomplete:',errorSummary(error));}
@@ -123,7 +127,7 @@ async function handleInteraction(i:Interaction) {
         const event=activateCardEvent(operator,i.customId.slice('cardevent:'.length));await i.update({content:`Evento ativo: ${event.name}\nID: ${event.id}\nUse /evento entregar. Limite: ${event.quota} participantes. Expira <t:${Math.floor(event.expires/1000)}:R>.`,components:[],allowedMentions:{parse:[]}});return;
       }
       if(!i.isChatInputCommand())return;
-      await i.deferReply({flags:MessageFlags.Ephemeral});const action=i.options.getSubcommand();
+      await deferReply({flags:MessageFlags.Ephemeral});const action=i.options.getSubcommand();
       if(action==='listar'){const events=listCardEvents(operator);await i.editReply({content:events.map(e=>`${e.name} • ${e.status} • ${e.delivered}/${e.quota} entregas\nID: ${e.id} • prazo <t:${Math.floor(e.expires/1000)}:R>`).join('\n\n')||'Nenhum evento criado neste servidor.',allowedMentions:{parse:[]}});return;}
       if(action==='criar'){
         const event=createCardEvent(operator,i.options.getString('nome',true),i.options.getString('cartas',true),i.options.getInteger('participantes',true),i.options.getInteger('horas',true));
@@ -139,7 +143,7 @@ async function handleInteraction(i:Interaction) {
       if(!i.guildId||!i.channelId)throw new Error('Abra os desafios dentro de um servidor.');
       const [,action,owner,npcId,view,page]=i.customId.split(':');if(owner!==id)throw new Error('Abra seus próprios desafios com /npc ver.');
       if(action==='lobby'||action==='gallery'||action==='inspect'){
-        await i.deferUpdate();
+        await deferUpdate();
         const target=action==='lobby'?'joey':npcId;
         // Older published component IDs are redirected into the single playable
         // deck browser. They never expose a second, non-playable card listing.
@@ -150,55 +154,21 @@ async function handleInteraction(i:Interaction) {
         await i.editReply(await visualNPCLobby(id,Date.now(),target,panel as GalleryView,Number(selected)));return;
       }
       if(action!=='challenge'&&action!=='daily')throw new Error('Desafio inválido. Use /npc ver.');
-      const r=createNPCDuel(id,i.guildId,i.channelId,npcId,action==='daily');await i.deferReply();const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
+      await deferReply();const r=createNPCDuel(id,i.guildId,i.channelId,npcId,action==='daily');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
     }
     if(i.isChatInputCommand()&&i.commandName==='npc'){
       if(!i.guildId||!i.channelId)throw new Error('Abra os desafios dentro de um servidor.');const action=i.options.getSubcommand();
-      await i.deferReply(action==='ver'?{flags:MessageFlags.Ephemeral}:{});
+      await deferReply(action==='ver'?{flags:MessageFlags.Ephemeral}:{});
       if(action==='ver'){await i.editReply(await visualNPCLobby(id));return;}
       if(action!=='desafiar'&&action!=='diario')throw new Error('Desafio inválido. Use /npc ver.');
       const r=createNPCDuel(id,i.guildId,i.channelId,action==='diario'?'':i.options.getString('duelista',true),action==='diario');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
     }
     if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('duel:')){
-      if(!i.guildId)throw new Error('Use os duelos dentro de um servidor.');
-      const [,action,duelId,revisionText,pageText]=i.customId.split(':');let r=getDuel(duelId);
-      if(r.guild_id!==i.guildId)throw new Error('Esse duelo pertence a outro servidor.');
-      if(r.state?.phase==='finished'){await i.deferUpdate();await i.editReply(duelPublicMessage(r));return;}
-      if(action==='zones'&&i.isButton()){await i.deferReply({flags:MessageFlags.Ephemeral});await i.editReply(duelZonesMessage(r,id));return;}
-      const revision=Number(revisionText),page=Number(pageText??1);
-      if(!Number.isSafeInteger(revision)||!Number.isSafeInteger(page))throw new Error('Painel inválido. Use /duelo ver.');
-      if(action==='accept'&&i.isButton()){await i.deferUpdate();r=acceptChallenge(duelId,id,i.guildId,revision);await refreshArena(r);await i.followUp({content:'Duelo iniciado! Clique em Abrir meu painel / mão no campo.',flags:MessageFlags.Ephemeral});return;}
-      if(action==='decline'&&i.isButton()){await i.deferUpdate();r=declineChallenge(duelId,id,i.guildId);await refreshArena(r);return;}
-      if(action==='public'&&i.isButton()){await i.deferUpdate();await refreshArena(r);return;}
-      if(!r.state?.players.some(p=>p.id===id))throw new Error('Só participantes podem abrir o painel privado.');
-      if(action==='open'&&i.isButton()){await i.deferReply({flags:MessageFlags.Ephemeral});await i.editReply(await privatePayload(r,id));return;}
-      if(action==='quit'&&i.isButton()){await i.reply({...quitMessage(r),flags:MessageFlags.Ephemeral});return;}
-      if(action==='view'&&i.isButton()){await i.deferUpdate();await i.editReply(await privatePayload(r,id,page));return;}
-      if(action==='zoneback'&&i.isButton()){await i.deferUpdate();await i.editReply(duelZonesMessage(r,id));return;}
-      if(action==='zonecard'&&i.isStringSelectMenu()){
-        if(r.revision!==revision)throw new Error('Esse painel ficou antigo. Abra as zonas novamente.');
-        const index=Number(i.values[0]);
-        await i.deferUpdate();await i.editReply(await visualDuelZoneCard(r,id,index));return;
-      }
-      if(action==='card'&&(i.isButton()||i.isStringSelectMenu())){
-        if(r.revision!==revision)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
-        const cardIndex=i.isStringSelectMenu()?Number(i.values[0]):page;
-        if(!Number.isSafeInteger(cardIndex)||cardIndex<0)throw new Error('Carta inválida.');
-        await i.deferUpdate();await i.editReply(await visualDuelCard(r,id,cardIndex));return;
-      }
-      if(action==='quick'&&i.isButton()){
-        await i.deferUpdate();r=performDuelAction(duelId,id,i.guildId,revision,page);await i.editReply(await privatePayload(r,id));await refreshArena(r);return;
-      }
-      if(action==='act'&&i.isStringSelectMenu()){
-        await i.deferUpdate();const index=Number(i.values[0]);if(!Number.isSafeInteger(index)||index<0)throw new Error('Ação inválida.');
-        r=performDuelAction(duelId,id,i.guildId,revision,index);await i.editReply(await privatePayload(r,id,page));await refreshArena(r);return;
-      }
-      if(action==='confirm'&&i.isButton()){await i.deferUpdate();r=performDuelAction(duelId,id,i.guildId,revision,{kind:'concede'});await i.editReply({content:'Desistência registrada.',components:[]});await refreshArena(r);return;}
-      throw new Error('Ação desconhecida. Use /duelo ver.');
+      await handleDuelComponent(i,{refreshArena,privatePayload,onDefer:kind=>{acknowledgment=kind;}});return;
     }
     if(i.isChatInputCommand()&&i.commandName==='duelo'){
       if(!i.guildId||!i.channelId)throw new Error('Use os duelos dentro de um servidor.');const action=i.options.getSubcommand();
-      await i.deferReply(action==='ver'||action==='sair'?{flags:MessageFlags.Ephemeral}:{});
+      await deferReply(action==='ver'||action==='sair'?{flags:MessageFlags.Ephemeral}:{});
       if(action==='treino'||action==='treino_fusao'||action==='laboratorio'||action==='desafiar'){
         let r:DuelRecord;
         if(action==='treino'||action==='treino_fusao'||action==='laboratorio')r=createTraining(id,i.guildId,i.channelId,action!=='treino');
@@ -221,18 +191,18 @@ async function handleInteraction(i:Interaction) {
         await i.showModal(new ModalBuilder().setCustomId(`deck:save-name:${id}:${slot}:${revision}:${page}:${cardId}`).setTitle('Renomear deck').addComponents(new ActionRowBuilder<TextInputBuilder>().addComponents(field)));return;
       }
       if(action==='save-name'&&i.isModalSubmit()){
-        await i.deferReply({flags:MessageFlags.Ephemeral});renameDeck(id,slot,i.fields.getTextInputValue('name'),revision);await i.editReply(await visualDeckMessage(id,slot,page,cardId,'✦ Nome salvo.'));return;
+        await deferReply({flags:MessageFlags.Ephemeral});renameDeck(id,slot,i.fields.getTextInputValue('name'),revision);await i.editReply(await visualDeckMessage(id,slot,page,cardId,'✦ Nome salvo.'));return;
       }
       if(!i.isButton()&&!i.isStringSelectMenu())return;
       if((action==='inspect'||action==='card')&&i.isButton()){
         const deck=openDeck(id,slot);
         if(deck.revision!==revision)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
         const targetIndex=action==='inspect'?getDeckCardIndex(id,slot,cardId):page;
-        await i.deferUpdate();
+        await deferUpdate();
         await i.editReply(await visualDeckCard(id,slot,targetIndex));
         return;
       }
-      await i.deferUpdate();
+      await deferUpdate();
       let selected=cardId;let targetSlot=slot;
       if(action==='plus'&&i.isButton())changeDeck(id,slot,cardId,1,revision);
       else if(action==='minus'&&i.isButton())changeDeck(id,slot,cardId,-1,revision);
@@ -245,7 +215,7 @@ async function handleInteraction(i:Interaction) {
     }
     if (i.isChatInputCommand()) {
       if(i.commandName==='deck'){
-        await i.deferReply({flags:MessageFlags.Ephemeral});
+        await deferReply({flags:MessageFlags.Ephemeral});
         const slot=i.options.getInteger('espaco')??1;const action=i.options.getSubcommand();let selected:string|undefined;
         if(action==='adicionar'||action==='remover'){
           const query=i.options.getString('carta',true);const card=exactCard(query);if(!card)throw new Error('Use o nome completo ou selecione uma sugestão de carta.');
@@ -255,11 +225,11 @@ async function handleInteraction(i:Interaction) {
         else if(action==='inicial')fillInitialDeck(id,slot);
         await i.editReply(await visualDeckMessage(id,slot,1,selected));return;
       }
-      if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! Versão 0.8.0 • 130 cartas habilitadas • novos duelos: mão de sete.', flags: MessageFlags.Ephemeral }); return; }
+      if (i.commandName === 'ping') { await i.reply({ content: '🏓 Pong! Versão 0.8.1 • 130 cartas habilitadas • novos duelos: mão de sete.', flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'start') {
         const player = createPlayer(id, i.user.username);
-        if (player.starter_deck) { grantStarterCards(id); await i.deferReply({ flags: MessageFlags.Ephemeral }); await i.editReply(await profileMessage(player, avatar)); return; }
-        await i.deferReply({ flags: MessageFlags.Ephemeral });
+        if (player.starter_deck) { grantStarterCards(id); await deferReply({ flags: MessageFlags.Ephemeral }); await i.editReply(await profileMessage(player, avatar)); return; }
+        await deferReply({ flags: MessageFlags.Ephemeral });
         const welcomeImage = new AttachmentBuilder(await renderWelcome(), {name:'primeira-jogada.png'});
         const embed = new EmbedBuilder().setColor(themes.ouro).setAuthor({ name: 'SPEED RPG • PRIMEIRA JOGADA', iconURL: avatar })
           .setTitle('A primeira jogada é sua')
@@ -272,20 +242,20 @@ async function handleInteraction(i:Interaction) {
       if(i.commandName==='carta') {
         const query=i.options.getString('busca',true);
         const exact=exactCard(query);const matches=exact?[exact]:searchCards(query);
-        await i.deferReply({flags:MessageFlags.Ephemeral});
+        await deferReply({flags:MessageFlags.Ephemeral});
         if(matches.length===1){await i.editReply(await showCard(matches[0].id,id));return;}
         await i.editReply({content:matches.length?`Encontrei ${matches.length} cartas. Escolha uma sugestão do comando ou use o ID:\n${matches.slice(0,10).map(c=>`\`${c.id}\` — ${c.name}`).join('\n')}`:'Não encontrei essa carta no catálogo inicial. Use as sugestões de /carta.'});return;
       }
       const player = getPlayer(id);
       if (!player) { await i.reply({ content: 'Crie seu duelista primeiro com `/start`.', flags: MessageFlags.Ephemeral }); return; }
       if(i.commandName==='colecao') {
-        await i.deferReply({flags:MessageFlags.Ephemeral});
+        await deferReply({flags:MessageFlags.Ephemeral});
         grantStarterCards(id);
         await i.editReply(collectionMessage(id,getCollection(id),i.options.getInteger('pagina')??1));return;
       }
       if (i.commandName === 'perfil') {
         const publicProfile = i.options.getBoolean('publico') ?? false;
-        await i.deferReply(publicProfile ? {} : { flags: MessageFlags.Ephemeral });
+        await deferReply(publicProfile ? {} : { flags: MessageFlags.Ephemeral });
         await i.editReply(await profileMessage(player, avatar, !publicProfile)); return;
       }
       if (i.commandName === 'personalizar') {
@@ -296,7 +266,7 @@ async function handleInteraction(i:Interaction) {
         const profile = validateProfile(i.options.getString('nome') ?? (player.character_name || i.user.username), i.options.getString('bio') ?? player.biography, i.options.getString('cor') ?? player.theme);
         busy.add(id);
         try {
-          await i.deferReply({ flags: MessageFlags.Ephemeral });
+          await deferReply({ flags: MessageFlags.Ephemeral });
           if (image) await savePortrait(id, image);
           if (remove) await removePortrait(id);
           updateProfile(id, profile);
@@ -310,7 +280,7 @@ async function handleInteraction(i:Interaction) {
       if (!isStarterDeck(key)) return;
       createPlayer(id, i.user.username);
       const success = chooseStarterDeck(id, key);
-      await i.deferUpdate();
+      await deferUpdate();
       await i.editReply({ attachments: [], content: success ? '✦ Você recebeu suas 20 cartas iniciais! Use /colecao para conferir.' : 'Seu conjunto inicial já foi escolhido. Use /colecao para conferir.', ...await profileMessage(getPlayer(id)!, avatar) }); return;
     }
     if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('collection:')) {
@@ -321,7 +291,7 @@ async function handleInteraction(i:Interaction) {
       if(action==='card'&&i.isStringSelectMenu()){
         const selected=i.values[0];
         if(!getCollection(id).some(row=>row.card_key===selected))throw new Error('Essa carta não está na sua coleção.');
-        await i.deferReply({flags:MessageFlags.Ephemeral});await i.editReply(await showCard(selected,id));return;
+        await deferReply({flags:MessageFlags.Ephemeral});await i.editReply(await showCard(selected,id));return;
       }
       return;
     }
@@ -331,7 +301,7 @@ async function handleInteraction(i:Interaction) {
       const player = getPlayer(id);
       if (!player) throw new Error('Crie seu duelista com /start.');
       if (action === 'help') { await i.reply({ content: help, flags: MessageFlags.Ephemeral }); return; }
-      if (action === 'refresh') { await i.deferUpdate(); await i.editReply({ ...await profileMessage(player, avatar), attachments: [] }); return; }
+      if (action === 'refresh') { await deferUpdate(); await i.editReply({ ...await profileMessage(player, avatar), attachments: [] }); return; }
       if (action === 'edit') {
         const modal = new ModalBuilder().setCustomId(`profile-edit:${id}`).setTitle('Seu personagem');
         for (const [key,label,value,max,style] of [
@@ -351,14 +321,14 @@ async function handleInteraction(i:Interaction) {
       if (!getPlayer(id)) throw new Error('Crie seu duelista com /start.');
       const profile = validateProfile(i.fields.getTextInputValue('name'), i.fields.getTextInputValue('bio'), i.fields.getTextInputValue('theme').trim().toLowerCase());
       updateProfile(id, profile);
-      await i.deferReply({ flags: MessageFlags.Ephemeral });
+      await deferReply({ flags: MessageFlags.Ephemeral });
       await i.editReply({ content: '✦ Personagem atualizado.', ...await profileMessage(getPlayer(id)!, avatar) });
     }
   } catch (error) {
-    console.error('Falha na interação:', {correlation,release:'0.8.0',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
+    console.error('Falha na interação:', {correlation,release:'0.8.1',type:i.type,route:i.isChatInputCommand()?i.commandName:(i.isButton()||i.isStringSelectMenu())?i.customId.split(':').slice(0,2).join(':'):'form',elapsedMs:Date.now()-started,error:errorSummary(error)});
     const content = error instanceof Error && !('code' in error) ? error.message : `Não foi possível concluir esta ação. Reabra o painel com /duelo ver ou /npc ver. Código de atendimento: ${correlation}.`;
     try {
-      if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:'))&&i.deferred) await i.followUp({content,flags:MessageFlags.Ephemeral});
+      if ((i.isButton()||i.isStringSelectMenu())&&(i.customId.startsWith('duel:')||i.customId.startsWith('npc:'))&&i.deferred&&acknowledgment==='update') await i.followUp({content,flags:MessageFlags.Ephemeral});
       else if (i.deferred) await i.editReply({ content, embeds: [], components: [], attachments: [] });
       else if (i.replied) await i.followUp({ content, flags: MessageFlags.Ephemeral });
       else await i.reply({ content, flags: MessageFlags.Ephemeral });
@@ -366,7 +336,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
- console.log('Release 0.8.0 | regras speed-rpg-v2 | mão 7 | NPCs revisados | 130 cartas em português');
+ console.log('Release 0.8.1 | regras speed-rpg-v2 | mão 7 | NPCs revisados | 130 cartas em português');
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
