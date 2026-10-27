@@ -80,3 +80,23 @@ jobs:
           path: artifacts/previews
           if-no-files-found: error
           retention-days: 14
+  extended-soak:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node scripts/verify-resolver-archives.cjs
+      - run: node --expose-gc scripts/soak-mixed-versions.cjs 600
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mixed-version-extended-soak
+          path: artifacts/mixed-version-soak-mission6.json
+          if-no-files-found: error
+          retention-days: 14
