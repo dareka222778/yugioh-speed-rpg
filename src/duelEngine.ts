@@ -13,5 +13,5 @@ export function legalActions(...args:Parameters<typeof current.legalActions>):Re
 export function decisionPlayer(...args:Parameters<typeof current.decisionPlayer>):ReturnType<typeof current.decisionPlayer>{return implementation(args[0]).decisionPlayer(...args);}
 export function timeoutDuel(...args:Parameters<typeof current.timeoutDuel>):ReturnType<typeof current.timeoutDuel>{return implementation(args[0]).timeoutDuel(...args);}
 export function actionLabel(...args:Parameters<typeof current.actionLabel>):ReturnType<typeof current.actionLabel>{return implementation(args[0]).actionLabel(...args);}
-export function atk(...args:Parameters<typeof current.atk>):number{return (args[1]?implementation(args[1]):pinnedCurrent).atk(...args);}
-export function def(...args:Parameters<typeof current.def>):number{return (args[1]?implementation(args[1]):current).def(...args);}
+export function atk(...args:Parameters<typeof current.atk>):number{return args[1]?implementation(args[1]).atk(...args):pinnedCurrent.atk(args[0]);}
+export function def(...args:Parameters<typeof current.def>):number{return args[1]?implementation(args[1]).def(...args):pinnedCurrent.def(args[0]);}

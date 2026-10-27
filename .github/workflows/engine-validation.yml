@@ -18,6 +18,8 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run audit:rea
+      - run: npm run benchmark:recovery
+      - run: npm run audit:historical-batch
       - run: npm run check:cards
       - run: npm run audit:history
       - run: npm run audit:cards:matrix
@@ -36,7 +38,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rea-acceptance-results
-          path: artifacts/rea-acceptance.json
+          path: |
+            artifacts/rea-acceptance.json
+            artifacts/engine-recovery-benchmark.json
           if-no-files-found: ignore
           retention-days: 14
       - name: Publicar prévias visuais
