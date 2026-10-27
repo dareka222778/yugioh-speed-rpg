@@ -1,3 +1,4 @@
+import {transitionEvents as pinnedV3Events} from './resolvers/v3/duelTransitions';
 import {transitionEvents as pinnedV2Events} from './resolvers/v2/duelTransitions';
 import {resolverVersionFor} from './resolverArchive';
 import {transitionEvents as legacyTransitionEvents} from './resolvers/v1/duelTransitions';
@@ -31,7 +32,7 @@ function inventory(s:DuelState){
 }
 export function transitionEvents(before:DuelState,after:DuelState):DuelTransitionEvent[]{
  if(resolverVersionFor(before)==='engine-v1')return legacyTransitionEvents(before as unknown as LegacyDuelState,after as unknown as LegacyDuelState);
- if(!cardMovementTrace(before,after))return pinnedV2Events(before as unknown as Parameters<typeof pinnedV2Events>[0],after as unknown as Parameters<typeof pinnedV2Events>[1]);
+ if(!cardMovementTrace(before,after)){const pinned=resolverVersionFor(before)==='engine-v2'?pinnedV2Events:pinnedV3Events;return (pinned as typeof transitionEvents)(before,after);}
  const trace=cardMovementTrace(before,after),moved=new Set(trace?.map(move=>move.uid));
  const events:DuelTransitionEvent[]=[],old=inventory(before),next=inventory(after);
  for(const [i,p]of after.players.entries()){

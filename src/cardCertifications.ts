@@ -64,6 +64,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/duelEngine.test.cjs"
     ]
   },
+  "15150371": {
+    "fingerprint": "a64e5360bb1cfde4b13d1edc0ca817a9b8a3e5073442e3173917e232d9bc047e",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
   "15303296": {
     "fingerprint": "1410509fe2fd484cb6455444ad42aebbb7c87bab7dd3d3b16d90a6e943c3e9ee",
     "suites": [
@@ -74,6 +80,18 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "094c0e1b1af822f438298f3eddbf179457f3d0827c588f025ad47fe1ebb5528c",
     "suites": [
       "tests/duelEngine.test.cjs"
+    ]
+  },
+  "15507080": {
+    "fingerprint": "1435da21d47fab89977e9b0369403a4aa2a71ff2ca43da085880e5075eff76fd",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
+  "15510988": {
+    "fingerprint": "4b368ed0e8de9b543632117aef82c54a8db40d36fa52b3b253cf7aafb394ab26",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   },
   "16972957": {
@@ -92,6 +110,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "4c99b187a9a3f80aefdd9dd4362d17a57fb6ed887d7833b582d02b515bf605b7",
     "suites": [
       "tests/classicEngine.test.cjs"
+    ]
+  },
+  "18710707": {
+    "fingerprint": "b30dc7e4950bde556c71d5608bbfd10ea00e9d3712762433e79f1d727ab718dc",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   },
   "19159413": {
@@ -116,6 +140,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "dcad82700b57ed2ea174663903a83826218219b16853328c21647ba4d18167a8",
     "suites": [
       "tests/duelEngine.test.cjs"
+    ]
+  },
+  "22026707": {
+    "fingerprint": "ba81237031c2427d864490d540e2e152bdcb725fed15621554c187e928764e3d",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   },
   "23771716": {
@@ -243,10 +273,22 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/classicPersistentReview.test.cjs"
     ]
   },
+  "38142739": {
+    "fingerprint": "48632667b3dd738e3ba24d79e56d77a1210aa344eb6da983588ed56ef92ffca2",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
   "38199696": {
     "fingerprint": "f81b0db113d7469c8b13a6c1137aa9eb5651371e6d4da20288b6de23673a3ee4",
     "suites": [
       "tests/classicEngine.test.cjs"
+    ]
+  },
+  "39175982": {
+    "fingerprint": "280cc52253b29fa979388d872a2410cf914e75fb6d182d3453845b1f6a39fc29",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   },
   "40374923": {
@@ -322,10 +364,22 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/classicExpansionFamilies.test.cjs"
     ]
   },
+  "46457856": {
+    "fingerprint": "2426906526d8770a2966aee32c518bb2eaf03513e318c0a7693a2d7889859238",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
   "46474915": {
     "fingerprint": "09c56354d4743bbe0b925fc23e5738553b2ddf9c2d85a5a84f7f59665f9d5eee",
     "suites": [
       "tests/duelEngine.test.cjs"
+    ]
+  },
+  "46718686": {
+    "fingerprint": "6a2aedd0bedf72d9227dbdc64ff4cb31e2e4f0e1efe98a2a2db65ff0ce96903e",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   },
   "46918794": {
@@ -344,6 +398,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "a6f1500309c291ebd6151809938f79bf439b671527595f37b07ef8e09843dd45",
     "suites": [
       "tests/duelEngine.test.cjs"
+    ]
+  },
+  "47695416": {
+    "fingerprint": "80ade0467259c128bafe26adc4dd46fef91922419a158aee7e46d13192124966",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   },
   "47852924": {
@@ -402,16 +462,34 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/classicPersistentReview.test.cjs"
     ]
   },
+  "52800428": {
+    "fingerprint": "9db9f806ace825bf52e7d39e3bc955fa8648597e69007b38f8e28fa5e97ce5f1",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
   "53129443": {
     "fingerprint": "db39c8e41763deb9b508ee85d67c3bad80cf377ba47fe5583988d07833d923cd",
     "suites": [
       "tests/classicEngine.test.cjs"
     ]
   },
+  "53581214": {
+    "fingerprint": "95327df70a9acaaecfeea6879bd15d6d8dc5b89d259ea1b56527d4918d877702",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
   "53582587": {
     "fingerprint": "bda9d1246a78eeca066cafd0a90be4522a1189cb7f2a3e6495606a2baf4e5f9d",
     "suites": [
       "tests/classicSummonResponses.test.cjs"
+    ]
+  },
+  "53832650": {
+    "fingerprint": "4acfa8add27e3730493a3e396c9bf9230e64373a944da9c19fb0dfbd82e65d69",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   },
   "54098121": {
@@ -477,6 +555,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "72014f58d182178561f2e21d4d34eda88f0ca16c03927ae9d9d106e7d50e0e55",
     "suites": [
       "tests/duelEngine.test.cjs"
+    ]
+  },
+  "64511793": {
+    "fingerprint": "8890ddce65b47995b2a8949d1c2394696f79b6489b4ad3226fdd285e4a6e3179",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   },
   "66672569": {
@@ -559,6 +643,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/duelEngine.test.cjs"
     ]
   },
+  "75889523": {
+    "fingerprint": "fd3dee7c758f44468eccc8d337725fca2eec30a4401f739a0e3cbec7e9d2d61e",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
   "76103675": {
     "fingerprint": "512bd04ea7b46cc062c37fdcd37b4f0cd624739c4813bac9683e1bb415b33680",
     "suites": [
@@ -629,6 +719,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/classicEngine.test.cjs"
     ]
   },
+  "84285623": {
+    "fingerprint": "e5af2b718ca1b3488cf9bf313edb745e6c5294b31b7f5c92454b4c29e7833376",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
   "86318356": {
     "fingerprint": "d8bc328ac0c0b62a69b62cefa16067df5a20d17a8f7ee5f8919dc92567937c39",
     "suites": [
@@ -671,6 +767,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "0325634d894f4eb4fc875c568d6fbaa3581e121c01142d27c36c2b4c016382bc",
     "suites": [
       "tests/duelEngine.test.cjs"
+    ]
+  },
+  "90963488": {
+    "fingerprint": "8bd561dfdc25f9b12f1b4f590867462023f104e0c839a175d0dc647ed70c0f48",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   },
   "91152256": {
@@ -811,6 +913,24 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "55a156b0fbae57d09e7849b831b255cf52e37c886ee64721ab5137984e0cfe98",
     "suites": [
       "tests/duelEngine.test.cjs"
+    ]
+  },
+  "08783685": {
+    "fingerprint": "34e1428d68b519a31ad75dcf3490fead71b0cc71b90a289532a9d984dcf455ec",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
+  "09159938": {
+    "fingerprint": "91704d9a44a98e38f663c1fffe284bc7a406161d2b9ffef2de044dbfcba00c9d",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
+    ]
+  },
+  "09430387": {
+    "fingerprint": "d825ae061c8f0c9ddcf133558e31c1a3c2eb6c1f9bbef8498242c61d6a81e7b1",
+    "suites": [
+      "tests/historicalNormalCertification.test.cjs"
     ]
   }
 };
