@@ -9,8 +9,9 @@ test('REA-P04: phase advancement rejects unresolved response and choice without 
  }
 });
 // Executed gap probes remain TODO, never counted as accepted mechanics.
-test('REA-P03: persisted mandatory Standby choice',{todo:'No Standby phase or certified Standby effect exists'},()=>{
- const s=game();s.phase='standby';s.choice={actor:0,targets:['x']};assert.doesNotThrow(()=>assertDuelState(JSON.parse(JSON.stringify(s))));
+test('REA-P03: Standby uses the persisted choice channel without inventing a second draw',()=>{
+ const {scheduleStandbyTask}=require('../dist/standbyFlow');let s=scheduleStandbyTask(game(),{id:'standby',turn:2,actor:1,optional:false,options:[{id:'gain',label:'Recuperar',operations:[{kind:'gainLP',player:'self',amount:1}]}]});
+ s=e.step(s,'a',{kind:'end'});assert.equal(s.choice.source,'standby');assert.equal(s.players[1].hand.length,5);assertDuelState(JSON.parse(JSON.stringify(s)));
 });
 test('REA-T01: explicit token creation conserves physical and economic cards',{todo:'Tokens are deliberately unsupported; conservation currently rejects creation'},()=>{
  const before=game(),after=structuredClone(before);after.players[0].monsters.push({uid:'token',id:'token',entityKind:'token',position:'atk',faceUp:true,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0});assert.doesNotThrow(()=>assertDuelTransition(before,after));

@@ -38,12 +38,16 @@
       "spec": "SPEC-01",
       "given": "Efeito obrigatório na Espera pede escolha e há restart",
       "expected": "Restauração retorna à mesma escolha, sem pular a fase nem repetir compra.",
-      "expectedGap": "Standby has no supported state/continuation yet",
-      "coverage": "gap",
-      "limitation": null,
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": "Trusted Standby scheduling/continuations are supported; no certified card gains a new Standby effect automatically.",
       "checks": [
         {
-          "file": "tests/reaAcceptanceGaps.test.cjs",
+          "file": "tests/standbyFlow.test.cjs",
+          "pattern": ".*"
+        },
+        {
+          "file": "tests/standbyRecovery.test.cjs",
           "pattern": "REA-P03"
         }
       ]
