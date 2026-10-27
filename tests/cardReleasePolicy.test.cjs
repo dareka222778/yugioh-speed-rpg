@@ -1,0 +1,5 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{enabledCardIds}=require('../dist/effectRegistry'),{cardDistributionAllowed}=require('../dist/cardReleasePolicy'),{historicalNormalBatch}=require('../dist/historicalNormalBatch');
+test('distribution policy blocks all new certificates, unknown cards and synthetic tokens while preserving the original cohort',()=>{
+ const blocked=enabledCardIds.filter(id=>!cardDistributionAllowed(id));assert.deepEqual([...blocked].sort(),historicalNormalBatch.map(c=>c.id).sort());assert.equal(blocked.length,20);assert.equal(enabledCardIds.filter(cardDistributionAllowed).length,130);
+ for(const id of ['token:sheep','00000000','', '71625222'])assert.equal(cardDistributionAllowed(id),false);assert.equal(cardDistributionAllowed('91152256'),true);
+});

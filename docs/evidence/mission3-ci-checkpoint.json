@@ -1,0 +1,252 @@
+{
+  "kind": "verified-intermediate-ci-checkpoint",
+  "commit": "6bbb4d956ac6551ffa4f5fc3de874885e775a92b",
+  "run": 40469130281,
+  "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/40469130281",
+  "conclusion": "success",
+  "tests": {
+    "passed": 599,
+    "failed": 0,
+    "todo": 0,
+    "skipped": 0
+  },
+  "note": "Immutable observed checkpoint, not a substitute for the PR final-head workflow. Later commits add compatibility and distribution policy regressions.",
+  "reports": [
+    {
+      "scope": "headless legal-action selection and state transition; excludes Discord/network/rendering",
+      "node": "v22.23.3",
+      "games": 60,
+      "finished": 60,
+      "moves": 1218,
+      "interruptedReplays": 1218,
+      "latencyMs": {
+        "p50": 0.5100170000000617,
+        "p95": 1.0163479999999936,
+        "p99": 1.4806069999999636,
+        "max": 5.046186999999918,
+        "budget": 1500
+      },
+      "memory": {
+        "gcAvailable": true,
+        "before": {
+          "rss": 67670016,
+          "heapTotal": 16302080,
+          "heapUsed": 7189720,
+          "external": 1768954,
+          "arrayBuffers": 16619
+        },
+        "after": {
+          "rss": 136073216,
+          "heapTotal": 59031552,
+          "heapUsed": 8526296,
+          "external": 1806275,
+          "arrayBuffers": 24811
+        },
+        "heapDelta": 1336576
+      }
+    },
+    {
+      "scope": "32 interleaved headless classic-deck sessions on one event loop, 16 1v1 + 16 2v2; deterministic replay after every action; no SQLite, Discord or rendering",
+      "node": "v22.23.3",
+      "simultaneousSessions": 32,
+      "completed": 32,
+      "moves": 1113,
+      "serializedRestores": 173,
+      "elapsedMs": 1897.5357159999999,
+      "latencyMs": {
+        "p50": 0.6901139999999941,
+        "p95": 1.296904999999981,
+        "p99": 1.8979110000000219,
+        "max": 3.1116779999999835,
+        "budget": 1500
+      },
+      "eventLoopDelayMs": {
+        "p99": 70.057983,
+        "max": 70.057983
+      },
+      "memory": {
+        "gcAvailable": true,
+        "before": {
+          "rss": 67665920,
+          "heapTotal": 16302080,
+          "heapUsed": 7172744,
+          "external": 1760701,
+          "arrayBuffers": 16619
+        },
+        "active": {
+          "rss": 153124864,
+          "heapTotal": 71876608,
+          "heapUsed": 45906696,
+          "external": 1823942,
+          "arrayBuffers": 50731
+        },
+        "after": {
+          "rss": 152965120,
+          "heapTotal": 64536576,
+          "heapUsed": 8876888,
+          "external": 1823942,
+          "arrayBuffers": 24811
+        },
+        "retainedHeapDelta": 1704144
+      },
+      "liveDiscordCertified": false
+    },
+    {
+      "scope": "Current certified catalog only; not all classic/anime cards",
+      "total": 150,
+      "counts": {
+        "normal": 91,
+        "fusion": 1,
+        "monsterDefinition": 12,
+        "economicTemplate": 11,
+        "destructionTemplate": 7,
+        "attackResponseTemplate": 2,
+        "equipTemplate": 5,
+        "fieldTemplate": 3,
+        "namedException": 2,
+        "legacyHandler": 16
+      },
+      "legacyKinds": [
+        "blockAttack",
+        "bookOfMoon",
+        "castleWalls",
+        "changeHeart",
+        "deSpell",
+        "fissure",
+        "giantTrunade",
+        "justDesserts",
+        "magicJammer",
+        "monsterReborn",
+        "mysticalSpaceTyphoon",
+        "polymerization",
+        "reinforcements",
+        "removeTrap",
+        "sevenTools",
+        "waboku"
+      ]
+    },
+    {
+      "scope": "Local isolated engine; not hosting or Discord latency",
+      "deterministicReplay": true,
+      "replayDigest": "cffae2df71c573b07c9c0ee11d690253de56e678ac1a3dc5aa1b1fc69b6f9dde",
+      "games": 300,
+      "moves": 21469,
+      "serializedRestores": 1514,
+      "completed": 300,
+      "cardIntegrity": "all physical identities preserved",
+      "elapsedMs": 6422.3,
+      "decisionMs": {
+        "median": 0.208,
+        "p95": 0.402,
+        "max": 5.392
+      },
+      "reasons": {
+        "pontos de vida": 299,
+        "não conseguiu comprar uma carta": 1
+      }
+    },
+    {
+      "release": "0.17.1",
+      "scope": "enabled 1v1 Speed RPG; not every anime/TCG card",
+      "enabledCards": 150,
+      "criticalSuites": [
+        "tests/classicTargetReview.test.cjs",
+        "tests/historicalImport.test.cjs",
+        "tests/classicPersistentReview.test.cjs",
+        "tests/classicCardReview.test.cjs",
+        "tests/npcStrategy.test.cjs",
+        "tests/classicRulesV1.test.cjs",
+        "tests/discordFlow.test.cjs",
+        "tests/interactions.test.cjs",
+        "tests/handFlow.test.cjs",
+        "tests/duelIntegrity.test.cjs",
+        "tests/classicCounterTraps.test.cjs",
+        "tests/classicContinuousEffects.test.cjs",
+        "tests/classicQuickMonsters.test.cjs",
+        "tests/classicGraveTriggers.test.cjs",
+        "tests/classicSummonTriggers.test.cjs",
+        "tests/cardEvents.test.cjs",
+        "tests/cardText.test.cjs"
+      ],
+      "criticalTests": 179,
+      "coreFingerprint": "92b061ffbd35ab25a408b9f89ec7b57f099877e6e083d9f6e9007e16b5704a5d",
+      "completeGames": 1000,
+      "decisions": 71411,
+      "serializedRestores": 5037,
+      "cardConservation": "all physical identities preserved",
+      "technicalGate": "passed",
+      "readyForCommandUI": true,
+      "liveDiscordHumanAcceptance": "not certified by automation",
+      "phase6": "2v2 shares the rules core; coordination and human acceptance require their own evidence"
+    },
+    {
+      "scope": "Phase 6 isolated Normal-monster 2v2 laboratory; no human Discord match",
+      "games": 100,
+      "completed": 100,
+      "moves": 6680,
+      "serializedRestores": 463,
+      "cardConservation": true,
+      "replayDigest": "1f732eefe0e9b7ada4d4216daef75d878cb8b365910863799469f4d96a254765",
+      "reasons": {
+        "pontos de vida": 100
+      }
+    },
+    {
+      "scope": "100 persisted 2v2 Normal-monster matches, four simulated human transports; no real Discord clients",
+      "completed": 100,
+      "decisions": 2871,
+      "reloads": 2871,
+      "publications": 2871,
+      "mainDecksPerGame": 4,
+      "cardConservation": true,
+      "economyUnchanged": true,
+      "releasedSeats": 400,
+      "reasons": {
+        "pontos de vida": 100
+      },
+      "humanDiscordAcceptance": "not certified"
+    },
+    {
+      "scope": "2v2 custom classic rules, 150 enabled definitions; no real human Discord clients",
+      "games": 1000,
+      "completed": 1000,
+      "decisions": 76948,
+      "serializedRestores": 5475,
+      "cardConservation": true,
+      "definitionsPresent": 150,
+      "effectDefinitionsActivated": 47,
+      "replayDigest": "595cddf1495be0d1151c61328c662fdc7d9c41c317d3a40d5d30f23141ac61c2",
+      "reasons": {
+        "pontos de vida": 1000
+      },
+      "humanDiscordAcceptance": "not certified"
+    },
+    {
+      "scope": "100 persisted classic 2v2 matches, four simulated human transports; no real Discord clients",
+      "completed": 100,
+      "decisions": 7550,
+      "reloads": 7550,
+      "publications": 7550,
+      "mainDecksPerGame": 4,
+      "cardConservation": true,
+      "economyUnchanged": true,
+      "releasedSeats": 400,
+      "reasons": {
+        "pontos de vida": 100
+      },
+      "humanDiscordAcceptance": "not certified"
+    },
+    {
+      "scope": "solo 2v2 training, one simulated human plus three NPCs; exact saved component adapter",
+      "completeGames": 100,
+      "humanDecisions": 2202,
+      "npcDecisions": 6174,
+      "totalDecisions": 8376,
+      "cardConservation": true,
+      "economyUnchanged": true,
+      "releasedHumanSeats": 100,
+      "realDiscordAcceptance": "not certified"
+    }
+  ],
+  "liveDiscordCertified": false
+}
