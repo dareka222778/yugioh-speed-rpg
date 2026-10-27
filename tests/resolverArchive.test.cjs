@@ -13,7 +13,7 @@ test('REA-L02: pending effects retain archived amounts when current definitions 
  function pending(engine){let s=engine.createDuel(players,()=>.5);s.turn=3;s.players[0].hand=[{uid:'heal',id}];s.players[1].backrow=[{uid:'jam',id:'77414722',faceUp:false,setTurn:0}];return engine.step(s,'a',engine.legalActions(s,'a').find(a=>a.kind==='spell'));}
  const old=restore(pending(legacy)),newer=restore(pending(e));assert.equal(old.phase,'response');
  const settle=s=>{for(let n=0;s.phase==='response';n++){assert.ok(n<10);s=e.step(restore(s),s.players[e.decisionPlayer(s)].id,{kind:'pass'});}return s;};
- try{currentEffect.amount=original+123;assert.equal(settle(old).players[0].lp,4000+original);assert.equal(settle(newer).players[0].lp,4000+original+123);
+ try{currentEffect.amount=original+123;assert.equal(settle(old).players[0].lp,4000+original);assert.equal(settle(newer).players[0].lp,4000+original);assert.equal(settle(pending(e)).players[0].lp,4000+original);
   const exposed=legacy.getEffect(id);exposed.amount=99999;assert.equal(legacy.getEffect(id).amount,original);
  }finally{currentEffect.amount=original;}
 });

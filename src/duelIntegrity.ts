@@ -1,3 +1,4 @@
+import {assertDuelState as assertPinnedV2State} from './resolvers/v2/duelIntegrity';
 import {getTokenMetadata,assertTokenLedger,assertTokenTransition} from './tokens';
 import {assertStandbyFlow} from './standbyFlow';
 import {resolverVersionFor} from './resolverArchive';
@@ -24,7 +25,7 @@ export function duelCards(s:DuelState):CardRef[]{return s.players.flatMap(p=>[..
 export function assertDuelState(value:unknown):asserts value is DuelState{
  if(!object(value))fail('estado ausente');
  if(resolverVersionFor(value)==='engine-v1'){assertLegacyState(value);return;}
- assertCurrentDuelState(value);
+ assertPinnedV2State(value);
 }
 function assertCurrentDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');
