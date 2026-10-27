@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+/** Reviewable local closure generator. Refuses existing versions and outside dependencies. */
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+function buildClosure(root,version){
+ if(!/^v[1-9][0-9]*$/.test(version))throw Error('Invalid resolver version');const modules=new Map();
+ function visit(name){if(modules.has(name))return;if(!/^[A-Za-z0-9]+$/.test(name))throw Error('Unpinned dependency '+name);
+  if(name==='resolverIdentity'){modules.set(name,`export const CURRENT_RESOLVER_VERSION='engine-${version}' as const;\nexport type ResolverVersion=typeof CURRENT_RESOLVER_VERSION;\nexport function resolverVersionFor(s:{resolverVersion?:unknown}):ResolverVersion{if(s.resolverVersion!==CURRENT_RESOLVER_VERSION)throw new Error('Incompatible archived resolver');return CURRENT_RESOLVER_VERSION;}\n`);return;}
+  let text=fs.readFileSync(path.join(root,'src',name+'.ts'),'utf8').replaceAll("from './duelEngine'","from './duelEngineCurrent'").replaceAll("from './resolverArchive'","from './resolverIdentity'");
+  if(name==='duelIntegrity')text=text.replace(/^import .*from '\.\/resolvers\/[^']+';\r?\n/gm,'').replace(/export function assertDuelState\(value:unknown\):asserts value is DuelState\{[\s\S]*?\n\}\n(?=function assertCurrentDuelState)/,"export function assertDuelState(value:unknown):asserts value is DuelState{resolverVersionFor(value as {resolverVersion?:unknown});assertCurrentDuelState(value);}\n");
+  if(name==='duelTransitions')text=text.replace(/^import .*from '\.\/resolvers\/[^']+';\r?\n/gm,'').replace(/^import \{resolverVersionFor\}.*\r?\n/m,'').replace(/^ if\(resolverVersionFor\(before\).*\r?\n/m,'').replace(/^ if\(!cardMovementTrace\(before,after\)\).*\r?\n/m,'');
+  modules.set(name,text);for(const m of text.matchAll(/from\s+['"]([^'"]+)['"]/g)){if(m[1].startsWith('node:'))continue;if(!m[1].startsWith('./'))throw Error('External archive dependency '+m[1]);visit(m[1].slice(2));}
+ }visit('duelEngineCurrent');visit('duelTransitions');return [...modules].sort(([a],[b])=>a.localeCompare(b));
+}
+function freeze(root,version,origin){if(!/^[a-f0-9]{40}$/.test(origin))throw Error('Origin SHA required');const out=path.join(root,'src/resolvers',version);if(fs.existsSync(out))throw Error('Existing resolver is immutable');const modules=buildClosure(root,version);fs.mkdirSync(out,{recursive:true});const files=modules.map(([name,text])=>{fs.writeFileSync(path.join(out,name+'.ts'),text,{flag:'wx'});return {path:name+'.ts',sha256:crypto.createHash('sha256').update(text).digest('hex')};});fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify({version:'engine-'+version,originCommit:origin,normalization:'Reviewed working source based on origin: local type imports, historical dispatch removed, identity pinned. Mechanical additions require separate certificates and regression execution.',files},null,2)+'\n',{flag:'wx'});return {version,modules:files.length};}
+if(require.main===module){const [version,origin,mode]=process.argv.slice(2);if(mode!=='--write')throw Error('Usage: freeze-resolver.cjs vN originSHA --write (new version only)');console.log(JSON.stringify(freeze(path.resolve(__dirname,'..'),version,origin)));}
+module.exports={buildClosure,freeze};
