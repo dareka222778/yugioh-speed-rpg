@@ -1,6 +1,8 @@
 /** Portuguese operational descriptions generated from the supported definitions.
  * These explain this RPG's executable adaptation, not a transcription of printed text. */
 import {getPlayableCard,getEffect} from './effectRegistry';
+import {displayCardName} from './cardPresentation';
+import {getTokenMetadata} from './tokens';
 import {getMonsterDefinition} from './monsterEffects';
 import {economicOperations,getActivationModel,getDestructionModel} from './effectModels';
 export const racePT:Record<string,string>={Warrior:'Guerreiro','Beast-Warrior':'Besta-Guerreira',Spellcaster:'Mago',Dragon:'Dragão',Beast:'Besta',Fiend:'Demônio',Fairy:'Fada',Insect:'Inseto',Machine:'Máquina',Plant:'Planta',Fish:'Peixe','Winged Beast':'Besta Alada',Thunder:'Trovão',Pyro:'Piro',Aqua:'Aqua',Reptile:'Réptil',Rock:'Rocha',Dinosaur:'Dinossauro',Zombie:'Zumbi','Sea Serpent':'Serpente Marinha'};
@@ -28,12 +30,13 @@ const specific:Record<string,string>={
  sevenTools:'Em resposta à ativação de uma Armadilha: pague 1000 PV como custo; negue a ativação e destrua a Armadilha. Você deve ter mais de 1000 PV. O custo não é reembolsado se a resolução falhar.'
 };
 export function cardRulesPT(id:string):string{
+ if(getTokenMetadata(id))return 'Ficha: entidade de campo, sempre com a face para cima. Ocupa uma zona de monstro. Ao sair do campo, desaparece; não vira carta no Deck, na mão, no Cemitério ou no banimento. A permissão de Tributo depende do efeito que a criou. Não integra coleção nem recompensa.';
  const c=getPlayableCard(id),e=getEffect(id);if(!c||!e)throw new Error('Carta não habilitada para descrição.');
  if(e.kind==='normal'){
   const tribute=(c.level??0)>=7?'2 monstros':(c.level??0)>=5?'1 monstro':'nenhum monstro';
   return `Monstro Normal — sem efeito. Tipo: ${racePT[c.race??'']??c.race}; atributo ${attributePT[c.attribute??'']??c.attribute}. Nível ${c.level}; ATK ${c.atk}; DEF ${c.defense}. Para Invocar normalmente ou baixar em Defesa, exige Tributo de ${tribute}. Usa sua única Invocação-Normal/baixada do turno. Pode atacar na sua Fase de Batalha, exceto no primeiro turno do duelo. Os valores podem mudar por efeitos de campo e equipamentos. Não há efeito oculto nem habilidade adicional nesta adaptação.`;
  }
- if(e.kind==='fusion')return `Monstro de Fusão — sem efeito de monstro. Pertence ao Deck Adicional. Materiais exatos: ${(c.fusion??[]).map(id=>getPlayableCard(id)?.name??id).join(' + ')}. Use Polimerização com materiais da mão/campo e uma zona disponível após consumi-los. Esta adaptação não permite Invocá-lo normalmente nem baixá-lo da mão. Reviver do Cemitério exige uma Invocação-Fusão anterior válida. ATK ${c.atk}; DEF ${c.defense}.`;
+ if(e.kind==='fusion')return `Monstro de Fusão — sem efeito de monstro. Pertence ao Deck Adicional. Materiais exatos: ${(c.fusion??[]).map(id=>{const material=getPlayableCard(id);return material?displayCardName(material):id;}).join(' + ')}. Use Polimerização com materiais da mão/campo e uma zona disponível após consumi-los. Esta adaptação não permite Invocá-lo normalmente nem baixá-lo da mão. Reviver do Cemitério exige uma Invocação-Fusão anterior válida. ATK ${c.atk}; DEF ${c.defense}.`;
  if(e.kind==='monsterEffect'){
   const d=getMonsterDefinition(id)!;const op=d.effect.operation;
   const cost=d.effect.cost?d.effect.cost.kind==='lp'?`Pague ${d.effect.cost.amount} PV como custo. `:d.effect.cost.kind==='tribute'?`Ofereça ${d.effect.cost.count} monstro(s) que você controla como Tributo, inclusive esta carta se desejar. `:`Descarte ${d.effect.cost.count} carta(s) como custo${d.effect.trigger==='quick'?' (a própria carta)':''}. `:'Sem custo de ativação. ';

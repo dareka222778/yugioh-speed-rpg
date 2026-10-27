@@ -12,4 +12,8 @@ test('token art never starts a network request and token metadata cannot pass de
  const {getCardArt}=require('../dist/cardArt'),{getCard}=require('../dist/collection'),{validateDeck}=require('../dist/decks');const previous=global.fetch;let requests=0;global.fetch=()=>{requests++;throw Error('unexpected network');};
  try{assert.equal((await getCardArt('token:sheep')),undefined);assert.equal(requests,0);assert.equal(getCard('token:sheep').name,'Ficha de Ovelha');assert.ok(validateDeck([{card_key:'token:sheep',quantity:1}],[{card_key:'token:sheep',quantity:1}]).errors.length>0);}finally{global.fetch=previous;}
 });
+test('token inspector reuses the approved visual template with a local fallback and entity description',async()=>{
+ const {renderOwnedCard}=require('../dist/cardInspector'),{cardRulesPT}=require('../dist/cardText');assert.match(cardRulesPT('token:sheep'),/entidade/);
+ const image=await renderOwnedCard({id:'token:sheep',deckName:'Campo',inDeck:0,owned:0,index:0,total:1},async()=>undefined);assert.ok(Buffer.isBuffer(image)&&image.length>1000);
+});
 after(()=>{database.db.close();fs.rmSync(temp,{recursive:true,force:true});});
