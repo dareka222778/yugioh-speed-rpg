@@ -16,6 +16,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm test
+      - run: npm run audit:rea
       - run: npm run check:cards
       - run: npm run audit:history
       - run: npm run audit:cards:matrix

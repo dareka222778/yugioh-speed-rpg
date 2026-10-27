@@ -5,7 +5,7 @@ export type TargetBinding=CardLifetime&{uid:string};
 /** Controller changes within a zone do not create a new game object. Leaving
  * and returning does. Metadata is optional for pre-existing saved duels. */
 export function synchronizeCardLifetimes(s:DuelState):void{
- const lifetimes=s.cardLifetimes??=Object.create(null) as Record<string,CardLifetime>;
+ const lifetimes=s.cardLifetimes??={};
  for(const p of s.players)for(const zone of lifetimeZones){
   const cards=zone==='field'?(p.field?[p.field]:[]):p[zone]??[];
   for(const card of cards){

@@ -31,4 +31,12 @@ test('REA-R02: active unpublished revisions are retried and stale acknowledgment
  assert.ok(store.expireDueDuels().some(r=>r.id===before.id));store.markDuelPublished(before.id,next.revision);
  assert.ok(!store.expireDueDuels().some(r=>r.id===before.id));finish(next);
 });
+test('REA-A01: independent SQLite writers from one revision commit at most one action',async()=>{
+ const before=start(),{spawn}=require('node:child_process');
+ const writer=actor=>new Promise((resolve,reject)=>{const script="const s=require('./dist/duelStore');try{const r=s.performDuelAction(process.argv[1],process.argv[2],'g',Number(process.argv[3]),{kind:'concede'},process.argv[4]);console.log(JSON.stringify({ok:true,revision:r.revision}));}catch(e){console.log(JSON.stringify({ok:false,error:e.message}));}";
+  const child=spawn(process.execPath,['-e',script,before.id,actor,String(before.revision),'race-'+actor],{cwd:path.resolve(__dirname,'..'),env:{...process.env,DATABASE_PATH:path.join(temp,'game.sqlite')},stdio:['ignore','pipe','pipe']});let output='',errors='';child.stdout.on('data',d=>output+=d);child.stderr.on('data',d=>errors+=d);child.on('error',reject);child.on('close',code=>{try{if(code!==0)throw Error(errors);resolve(JSON.parse(output));}catch(e){reject(e);}});
+ });
+ const results=await Promise.all(['recover-a','recover-b'].map(writer));assert.equal(results.filter(r=>r.ok).length,1);assert.equal(store.getDuel(before.id).revision,before.revision+1);
+ assert.equal(database.db.prepare('SELECT COUNT(*) AS n FROM duel_action_receipts WHERE duel_id=?').get(before.id).n,1);
+});
 after(()=>{database.db.close();fs.rmSync(temp,{recursive:true,force:true});});

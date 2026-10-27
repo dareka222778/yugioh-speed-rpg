@@ -1,0 +1,388 @@
+{
+  "kind": "executable-rea-acceptance-matrix",
+  "baselineCommit": "a6ee11d6cf61a30601be8b1cff948b1136dbfea8",
+  "source": "REA V3 acceptance cases, interpreted with V1-V11 limitations; no proprietary code",
+  "cases": [
+    {
+      "id": "P01",
+      "spec": "SPEC-01",
+      "given": "Criar duelo classic-v1, primeiro turno",
+      "expected": "Compra adicional não ocorre; BATTLE e MAIN2 não são oferecidas; partida mantém quatro cartas iniciais.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/duelEngine.test.cjs",
+          "pattern": "four opening cards"
+        }
+      ]
+    },
+    {
+      "id": "P02",
+      "spec": "SPEC-01",
+      "given": "Compra/busca/devolução deixa mão com sete durante MAIN",
+      "expected": "Operação resolve; ajuste para seis só no checkpoint Final devido pelo modo.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/classicRulesV1.test.cjs",
+          "pattern": "a six-card hand|Pot draws twice"
+        }
+      ]
+    },
+    {
+      "id": "P03",
+      "spec": "SPEC-01",
+      "given": "Efeito obrigatório na Espera pede escolha e há restart",
+      "expected": "Restauração retorna à mesma escolha, sem pular a fase nem repetir compra.",
+      "expectedGap": "Standby has no supported state/continuation yet",
+      "coverage": "gap",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/reaAcceptanceGaps.test.cjs",
+          "pattern": "REA-P03"
+        }
+      ]
+    },
+    {
+      "id": "P04",
+      "spec": "SPEC-01",
+      "given": "Pedido de avanço com corrente/escolha pendente",
+      "expected": "Rejeitar; estado, custos e revisão permanecem.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/reaAcceptanceGaps.test.cjs",
+          "pattern": "REA-P04"
+        }
+      ]
+    },
+    {
+      "id": "A01",
+      "spec": "SPEC-02",
+      "given": "Dois atores enviam ações concorrentes da mesma revisão",
+      "expected": "No máximo uma transição confirma; a outra recebe revisão obsoleta.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/duelRecovery.test.cjs",
+          "pattern": "REA-A01"
+        }
+      ]
+    },
+    {
+      "id": "A02",
+      "spec": "SPEC-02",
+      "given": "Parceiro inativo 2v2 ou espectador copia offerId",
+      "expected": "Sem autorização; mão/UID de outro membro não aparecem.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/tagDuel.test.cjs",
+          "pattern": "public projection|out-of-turn actions"
+        },
+        {
+          "file": "tests/tagStore.test.cjs",
+          "pattern": "atomic legal moves|prevents stealing a private panel"
+        }
+      ]
+    },
+    {
+      "id": "A03",
+      "spec": "SPEC-02",
+      "given": "Interação repetida após commit e falha de publicação",
+      "expected": "Recibo retorna resultado confirmado; sem reaplicar efeito/custo.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/duelRecovery.test.cjs",
+          "pattern": "REA-A03"
+        }
+      ]
+    },
+    {
+      "id": "I01",
+      "spec": "SPEC-03",
+      "given": "Monstro do oponente controlado temporariamente é tributado ou destruído",
+      "expected": "UID e dono se conservam; destino e gatilhos seguem proprietário/causa corretos.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/classicGraveTriggers.test.cjs",
+          "pattern": "graveyard effect belongs to the owner"
+        },
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "pattern": "controlled monster used as tribute"
+        }
+      ]
+    },
+    {
+      "id": "I02",
+      "spec": "SPEC-03",
+      "given": "Alvo sai e volta antes de resolver elo",
+      "expected": "Novo zoneEpoch não substitui alvo antigo automaticamente; custo permanece pago.",
+      "expectedGap": null,
+      "coverage": "partial",
+      "limitation": "Zone changes are observed at action/link checkpoints. Effects with multiple intermediate moves must explicitly synchronize; new lifetimes cannot reconstruct pre-upgrade target epochs.",
+      "checks": [
+        {
+          "file": "tests/cardLifetime.test.cjs",
+          "pattern": "REA-I02"
+        }
+      ]
+    },
+    {
+      "id": "I03",
+      "spec": "SPEC-03",
+      "given": "Troca do membro ativo na equipe e retorno de controle em campo cheio",
+      "expected": "Reservas privadas continuam individuais; regra já aprovada de retorno/destino é preservada.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/tagClassic.test.cjs",
+          "pattern": "all four classic starting seats|original inactive member"
+        },
+        {
+          "file": "tests/classicEngine.test.cjs",
+          "pattern": "temporary-control monster is destroyed"
+        }
+      ]
+    },
+    {
+      "id": "T01",
+      "spec": "SPEC-03",
+      "given": "Efeito de ficha gera entidade que depois sai do campo",
+      "expected": "Criação/remoção auditada; nenhuma carta física ou item econômico aparece/desaparece.",
+      "expectedGap": "Tokens have no entity model; no token card enabled",
+      "coverage": "gap",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/reaAcceptanceGaps.test.cjs",
+          "pattern": "REA-T01"
+        }
+      ]
+    },
+    {
+      "id": "C01",
+      "spec": "SPEC-04",
+      "given": "Corrente válida com elos1,2,3",
+      "expected": "Resolver3,2,1; fila de publicação não altera esta ordem.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/chainEngine.test.cjs",
+          "pattern": "reverse activation order"
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "spec": "SPEC-04",
+      "given": "Resposta velocidade2 a elo velocidade3",
+      "expected": "Rejeitar antes de pagar custo.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/classicCounterTraps.test.cjs",
+          "pattern": "ordinary traps cannot answer counter traps"
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "spec": "SPEC-04",
+      "given": "Ativação legal paga custo, alvo é perdido/efeito negado",
+      "expected": "Não reembolsar; sem retarget automático; distinguir destruição de negação.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/classicTargetReview.test.cjs",
+          "pattern": "counter-of-counter|activated Quick-Play resolves after its own card is destroyed|loses its chosen target"
+        }
+      ]
+    },
+    {
+      "id": "E01",
+      "spec": "SPEC-05",
+      "given": "Carta faz campo→cemitério→campo na mesma ação",
+      "expected": "Dois eventos cardMoved causais duráveis, mesmo se before/after tiverem a mesma zona.",
+      "expectedGap": "Before/after notifications omit intermediate moves in one action",
+      "coverage": "gap",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/reaAcceptanceGaps.test.cjs",
+          "pattern": "REA-E01"
+        }
+      ]
+    },
+    {
+      "id": "R01",
+      "spec": "SPEC-06",
+      "given": "Queda após pagar custo/durante escolha/entre elos",
+      "expected": "Mesmo desfecho e próximo decisor sob regras/efeitos/RNG fixados; custo não duplica.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/duelRecovery.test.cjs",
+          "pattern": "REA-R01"
+        },
+        {
+          "file": "tests/duelCompletion.test.cjs",
+          "pattern": "SQLite restart preserves"
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "spec": "SPEC-09",
+      "given": "Queda após resultado gravado e antes de enviar Discord",
+      "expected": "Republicar sem prêmio ou movimento duplicado; auditoria preservada.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/duelRecovery.test.cjs",
+          "pattern": "REA-R02"
+        },
+        {
+          "file": "tests/npc.test.cjs",
+          "pattern": "receipt failure rolls back|fresh Node process resumes"
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "spec": "SPEC-06",
+      "given": "Snapshot aponta definição/continuação desconhecida",
+      "expected": "Quarentena e razão explícita; original preservado; sem fallback silencioso.",
+      "expectedGap": null,
+      "coverage": "partial",
+      "limitation": "Fail-closed validation preserves raw state; no administrative quarantine UI.",
+      "checks": [
+        {
+          "file": "tests/duelIntegrity.test.cjs",
+          "pattern": "invalid saved state|invalid JSON"
+        },
+        {
+          "file": "tests/cardLifetime.test.cjs",
+          "pattern": "unknown choice continuation"
+        }
+      ]
+    },
+    {
+      "id": "L01",
+      "spec": "SPEC-07",
+      "given": "Abrir fixtures legadas com response/choice/discard/chainRoot/handFlow",
+      "expected": "Usar resolver legado ou migrador com equivalência comprovada; não inventar fase MAIN.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/handFlow.test.cjs",
+          "pattern": "SQLite reload|fresh Node process|Sangan search"
+        },
+        {
+          "file": "tests/duelCompletion.test.cjs",
+          "pattern": "SQLite restart preserves"
+        }
+      ]
+    },
+    {
+      "id": "L02",
+      "spec": "SPEC-07",
+      "given": "Atualizar módulo de efeito com duelo antigo pendente",
+      "expected": "Partida antiga mantém versão e comportamento fixados; carta nova usa novo certificado.",
+      "expectedGap": "Archived effect resolver selection is not implemented",
+      "coverage": "gap",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/reaAcceptanceGaps.test.cjs",
+          "pattern": "REA-L02"
+        }
+      ]
+    },
+    {
+      "id": "D01",
+      "spec": "SPEC-08",
+      "given": "Nome PT ausente com identidade e efeito certificados",
+      "expected": "Fallback aprovado; mesma identidade/efeito/posse; sem desabilitar engine por idioma.",
+      "expectedGap": null,
+      "coverage": "partial",
+      "limitation": "Mechanical admission is independent of translated text; presentation fallback is covered only by existing historical-import policy.",
+      "checks": [
+        {
+          "file": "tests/certificationBatch.test.cjs",
+          "pattern": "REA-D01"
+        },
+        {
+          "file": "tests/historicalImport.test.cjs",
+          "pattern": "deduplicates editions"
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "spec": "SPEC-08",
+      "given": "Importar ordinal seed proprietário como se fosse passcode",
+      "expected": "Rejeitar alias sem evidência; namespace de ID é explícito.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/certificationBatch.test.cjs",
+          "pattern": "REA-D02"
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "spec": "SPEC-08",
+      "given": "Certificado está pronto mas carta fora de loja/evento",
+      "expected": "Engine/certificado não concedem carta nem publicam disponibilidade automaticamente.",
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": null,
+      "checks": [
+        {
+          "file": "tests/certificationBatch.test.cjs",
+          "pattern": "REA-D03"
+        },
+        {
+          "file": "tests/cardEvents.test.cjs",
+          "pattern": "drafts do not distribute"
+        }
+      ]
+    }
+  ]
+}
