@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
-for(const [version,origin,count]of [['v1','7802a737212165c9a0100562e37cd8adc734b960',27],['v2','c02e1cdee7f513e5494c579da660795a02341f49',31],['v3','d185c098ec90a69967b92527a1afe3a3c0e50d21',32]]){
+for(const [version,origin,count]of [['v1','7802a737212165c9a0100562e37cd8adc734b960',27],['v2','c02e1cdee7f513e5494c579da660795a02341f49',31],['v3','d185c098ec90a69967b92527a1afe3a3c0e50d21',32],['v4','06388402b1e304ae045b3bbeffd7fa0e9a7644ac',33]]){
 const root=path.resolve(__dirname,'../src/resolvers/'+version),manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest.json'),'utf8'));
 assert.equal(manifest.originCommit,origin);assert.equal(manifest.files.length,count);
 const names=new Set(manifest.files.map(file=>file.path));assert.equal(names.size,count);

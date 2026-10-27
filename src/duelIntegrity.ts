@@ -1,3 +1,4 @@
+import {assertDuelState as assertPinnedV4State} from './resolvers/v4/duelIntegrity';
 import {assertDuelState as assertPinnedV3State} from './resolvers/v3/duelIntegrity';
 import {assertDuelState as assertPinnedV2State} from './resolvers/v2/duelIntegrity';
 import {getTokenMetadata,assertTokenLedger,assertTokenTransition} from './tokens';
@@ -27,7 +28,8 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
  if(!object(value))fail('estado ausente');
  if(resolverVersionFor(value)==='engine-v1'){assertLegacyState(value);return;}
  if(resolverVersionFor(value)==='engine-v2'){assertPinnedV2State(value);return;}
- assertPinnedV3State(value);
+ if(resolverVersionFor(value)==='engine-v3'){assertPinnedV3State(value);return;}
+ assertPinnedV4State(value);
 }
 function assertCurrentDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');

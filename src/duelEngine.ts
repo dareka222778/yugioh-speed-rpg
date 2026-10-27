@@ -3,7 +3,7 @@ import type * as current from './duelEngineCurrent';
 import {getArchivedDefinitionResolver,resolverVersionFor} from './resolverArchive';
 export type * from './duelEngineCurrent';
 export {getArchivedDefinitionResolver} from './resolverArchive';
-const pinnedCurrent=getArchivedDefinitionResolver('engine-v3');
+const pinnedCurrent=getArchivedDefinitionResolver('engine-v4');
 export const IMPLEMENTED_DUEL_CARDS=pinnedCurrent.IMPLEMENTED_DUEL_CARDS;
 export const createDuel=pinnedCurrent.createDuel as typeof current.createDuel;
 export const validateDuelCards=pinnedCurrent.validateDuelCards;
