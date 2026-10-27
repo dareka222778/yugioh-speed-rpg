@@ -1,3 +1,4 @@
+import {lifetimeZones} from './cardLifetime';
 import {teamReserveCards} from './teamRotation';
 import {economicOperationIssues} from './economicOperations';
 /** Runtime contracts for the serialized three-zone game. No UI or database writes.
@@ -21,6 +22,9 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
  const s=value as any;
  if(!supportedRulesVersion(s.rulesVersion)||s.cardDefinitionsVersion!==undefined&&s.cardDefinitionsVersion!==CARD_DEFINITIONS_VERSION)fail('versão de regras ou definições incompatível');
  if(s.random!==undefined)assertDuelRandom(s.random);
+ if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');
+ for(const operation of [s.pending,...Array.isArray(s.chain)?s.chain:[]])if(operation?.targetBinding!==undefined){const b=operation.targetBinding;if(!object(b)||typeof b.uid!=='string'||b.uid!==operation.target||!lifetimeZones.includes(b.zone)||!integer(b.epoch))fail('referencia de alvo');}
+ if(s.choice?.source!==undefined&&!['triggerOptional','triggerOrder','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit'].includes(s.choice.source))fail('continuação de escolha desconhecida');
  if(s.rulesVersion==='speed-rpg-v2'&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
  if(s.handFlow!==undefined){
   const f=s.handFlow;

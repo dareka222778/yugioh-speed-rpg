@@ -2,7 +2,8 @@
  * Costs are paid on activation (outside this resolver); negating a link
  * prevents its effect, but never refunds a previously paid cost.
  */
-export type ChainLink = {actor:number;card:string;id:string;target:string;negated?:boolean;monsterEffect?:boolean};
+import type {TargetBinding} from './cardLifetime';
+export type ChainLink={targetBinding?:TargetBinding;actor:number;card:string;id:string;target:string;negated?:boolean;monsterEffect?:boolean};
 export function resolveChainLinks<T extends ChainLink>(
  links:readonly T[],
  apply:(link:T)=>void,

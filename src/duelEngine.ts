@@ -1,3 +1,4 @@
+import {bindTarget,synchronizeCardLifetimes,targetBindingValid,type TargetBinding,type CardLifetime} from './cardLifetime';
 import {advanceTeamSeats,restoreTeamOverflow,type TeamRotation} from './teamRotation';
 import {drawCards,pauseOverflow,usesSeven,type HandFlow} from './handFlow';
 import {createDuelRandom,randomIndex,shuffleDuel,type DuelRandom} from './duelRandom';
@@ -27,9 +28,9 @@ export type Action=
  |{kind:'monsterEffect';card:string;discards:string[];tributes?:string[];target?:string}
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
-export type Pending={kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'};
+export type Pending=( {kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;position?:'atk'|'def'})&{targetBinding?:TargetBinding};
 export type TriggerEvent={actor:number;card:string;id:string};
-export type DuelState={version:1;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;cardLifetimes?:Record<string,CardLifetime>;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=new Set(IMPLEMENTED_DUEL_CARDS);
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -241,7 +242,7 @@ function beginTriggers(s:DuelState,events:TriggerEvent[]){
 function appendTrigger(s:DuelState,event:TriggerEvent,target=''){
  const e=getMonsterEffect(event.id)!;
  if(e.oncePerTurn){s.monsterNameUsed??=[{},{}];s.monsterNameUsed[event.actor][event.id]=s.turn;}
- s.chain.push({...event,target,monsterEffect:true});
+ s.chain.push({...event,target,targetBinding:bindTarget(s,target),monsterEffect:true});
  note(s,`Efeito de ${card(event.id).name} ativado na corrente.`);
 }
 function selectTrigger(s:DuelState,event:TriggerEvent){
@@ -266,6 +267,7 @@ function resumeResolvedChain(s:DuelState){
  s.pending=s.chainRoot;s.chainRoot=undefined;s.phase='response';resolve(s);
 }
 function response(s:DuelState,pending:Pending,resume:'main'|'battle',priority=1-s.current){
+ if('target' in pending&&pending.kind!=='attack')pending.targetBinding=bindTarget(s,pending.target);
  s.pending=pending;s.pendingNegated=false;s.resume=resume;s.phase='response';s.priority=priority;s.passes=0;s.chain=[];
  // Trigger activations are built before the fast-effect response window.
  if(pending.kind==='summon'||pending.kind==='flip'){
@@ -376,7 +378,10 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
 }
 function resolve(s:DuelState){
  while(s.chain.length){
+ synchronizeCardLifetimes(s);
  const link=s.chain.pop()!;
+ // An invalidated target does not refund costs or cancel unrelated operations.
+ if(!targetBindingValid(s,link.targetBinding))link.target='';
  resolveChainLinks([link],link=>{
   // Jinzo negates Trap effects on the field at the moment each link resolves;
   // costs already paid and cards activated earlier still go to the Graveyard.
@@ -430,12 +435,15 @@ function resolve(s:DuelState){
    else if(count&&effect!.kind==='bottomlessTrapHole')note(s,'Buraco Armadilha Sem Fundo destruiu e baniu o monstro Invocado.');
   }
   discardBackrow(s,link.card);},link=>{if(!link.monsterEffect)discardBackrow(s,link.card);},()=>s.phase==='finished');
+ synchronizeCardLifetimes(s);
  if(s.phase==='choice'||s.phase==='discard')return;
  if(s.phase==='finished')break;
  if(pauseOverflow(s))return;
  }
  s.chain=[];if(s.phase==='finished'){s.pending={kind:'none'};s.pendingNegated=false;return;}
- const pending=s.pending,negated=s.pendingNegated===true;s.pending={kind:'none'};s.pendingNegated=false;s.phase=s.resume;
+ synchronizeCardLifetimes(s);
+ const pending=s.pending,negated=s.pendingNegated===true;
+ if('target' in pending&&pending.kind!=='attack'&&!targetBindingValid(s,pending.targetBinding))pending.target=undefined;s.pending={kind:'none'};s.pendingNegated=false;s.phase=s.resume;
  if(pending.kind==='attack'&&pending.cancelled){
   s.battleFlip=undefined;
   if(pending.endBattle){note(s,'Fase de Batalha encerrada pelo efeito.');response(s,{kind:'end'},'battle',s.current);}
@@ -535,7 +543,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  const index=input.players.findIndex(p=>p.id===actor);if(index<0)throw new Error('Você não participa deste duelo.');
  if(input.phase==='finished')throw new Error('Esse duelo já terminou.');
  if(action.kind!=='concede'&&!legalActions(input,actor).some(a=>JSON.stringify(a)===JSON.stringify(action)))throw new Error('Ação inválida ou fora da sua vez. Atualize o painel.');
- const s=structuredClone(input);const p=s.players[index];
+ const s=structuredClone(input);synchronizeCardLifetimes(s);const p=s.players[index];
  if(action.kind==='concede'){finish(s,1-index,'desistência');assertDuelTransition(input,s);return s;}
  if(action.kind==='pass'){s.passes++;s.priority=1-index;if(s.passes===2)resolve(s);}
  else if(action.kind==='trap'){
@@ -551,7 +559,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    if(p.lp<=1000)throw new Error('PV insuficientes para o custo.');
    p.lp-=1000;note(s,`${p.name} pagou 1000 PV para Sete Ferramentas.`);
   }
-  c.faceUp=true;s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target});s.passes=0;s.priority=1-index;note(s,`${p.name} ativou ${card(c.id).name}.`);
+  c.faceUp=true;s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target,targetBinding:e?.kind==='magicJammer'||e?.kind==='sevenTools'?undefined:bindTarget(s,action.target)});s.passes=0;s.priority=1-index;note(s,`${p.name} ativou ${card(c.id).name}.`);
  }else if(action.kind==='monsterEffect'){
   const held=p.hand.find(c=>c.uid===action.card);
   if(held&&getMonsterEffect(held.id)?.trigger==='quick'){
@@ -595,7 +603,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   note(s,`${p.name} ativou ${card(c.id).name}.`);
   if(s.phase==='response'){
    if(!isQuickPlaySpell(c.id))throw new Error('Só Magias Rápidas podem responder.');
-   s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target??''});s.passes=0;s.priority=1-index;
+   s.chain.push({actor:index,card:c.uid,id:c.id,target:action.target??'',targetBinding:bindTarget(s,action.target)});s.passes=0;s.priority=1-index;
   }else response(s,{kind:'spell',actor:index,card:c.uid,id:c.id,...action.target?{target:action.target}:{},...action.position?{position:action.position}:{}},s.phase==='battle'?'battle':'main');
  }else if(action.kind==='position'){
   const m=p.monsters.find(m=>m.uid===action.card)!;m.faceUp=true;m.position=action.mode==='def'?'def':'atk';m.changed=s.turn;note(s,`${p.name} mudou a posição de ${card(m.id).name}.`);response(s,action.mode==='flip'?{kind:'flip',actor:index,card:m.uid,id:m.id}:{kind:'none'},'main');
@@ -680,7 +688,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    }
   }else if(p.hand.length<=rulesFor(s).handLimit)nextTurn(s);
  }
- cleanEquips(s);settle(s);cleanEquips(s);assertDuelTransition(input,s);return s;
+ cleanEquips(s);settle(s);cleanEquips(s);synchronizeCardLifetimes(s);assertDuelTransition(input,s);return s;
 }
 export function actionLabel(s:DuelState,actor:string,a:Action){
  const p=s.players.find(p=>p.id===actor)!;const all=[...p.hand,...p.deck,...s.players.flatMap(p=>[...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.field?[p.field]:[]])];

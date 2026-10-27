@@ -9,7 +9,7 @@ test('REA-A03/R01: durable receipt survives reopen and returns current state wit
  const before=start(),actor=before.state.players[before.state.current].id;
  const committed=store.performDuelAction(before.id,actor,'g',before.revision,0,'interaction-recovery');
  const events=store.duelEventsAt(before.id,committed.revision);assert.deepEqual(events,committed.events);
- database.db.close();for(const name of ['duelStore','database'])delete require.cache[require.resolve('../dist/'+name)];database=require('../dist/database');store=require('../dist/duelStore');
+ database.db.close();for(const filename of Object.keys(require.cache))if(filename.startsWith(path.resolve(__dirname,'../dist')+path.sep))delete require.cache[filename];database=require('../dist/database');store=require('../dist/duelStore');
  const replay=store.performDuelAction(before.id,actor,'g',before.revision,0,'interaction-recovery');
  assert.equal(replay.receipt.replayed,true);assert.equal(replay.receipt.committedRevision,committed.revision);assert.deepEqual(replay.state,committed.state);assert.equal(replay.revision,committed.revision);
  for(const [who,guild,index] of [['outsider','g',0],[actor,'other',0],[actor,'g',1]])assert.throws(()=>store.performDuelAction(before.id,who,guild,before.revision,index,'interaction-recovery'),/outra solicitação/);
