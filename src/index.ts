@@ -186,14 +186,14 @@ async function handleInteraction(i:Interaction) {
         await i.editReply(await visualNPCLobby(id,Date.now(),target,panel as GalleryView,Number(selected)));return;
       }
       if(action!=='challenge'&&action!=='daily')throw new Error('Desafio inválido. Use /npc ver.');
-      await deferReply();const r=createNPCDuel(id,i.guildId,i.channelId,npcId,action==='daily');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
+      await deferReply();const r=createNPCDuel(id,i.guildId,i.channelId,npcId,action==='daily');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id,r.revision);return;
     }
     if(i.isChatInputCommand()&&i.commandName==='npc'){
       if(!i.guildId||!i.channelId)throw new Error('Abra os desafios dentro de um servidor.');const action=i.options.getSubcommand();
       await deferReply(action==='ver'?{flags:MessageFlags.Ephemeral}:{});
       if(action==='ver'){await i.editReply(await visualNPCLobby(id));return;}
       if(action!=='desafiar'&&action!=='diario')throw new Error('Desafio inválido. Use /npc ver.');
-      const r=createNPCDuel(id,i.guildId,i.channelId,action==='diario'?'':i.options.getString('duelista',true),action==='diario');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
+      const r=createNPCDuel(id,i.guildId,i.channelId,action==='diario'?'':i.options.getString('duelista',true),action==='diario');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id,r.revision);return;
     }
     if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('duel:')){
       await handleDuelComponent(i,{refreshArena,privatePayload,onDefer:kind=>{acknowledgment=kind;}});return;
@@ -205,7 +205,7 @@ async function handleInteraction(i:Interaction) {
         let r:DuelRecord;
         if(action==='treino'||action==='treino_fusao'||action==='laboratorio')r=createTraining(id,i.guildId,i.channelId,action!=='treino');
         else{const other=i.options.getUser('oponente',true);if(other.bot)throw new Error('Para enfrentar o bot, use /duelo treino.');r=challenge(id,other.id,i.guildId,i.channelId);}
-        const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
+        const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id,r.revision);return;
       }
       const r=currentDuel(id);if(!r||r.guild_id!==i.guildId)throw new Error('Você não tem duelo ativo neste servidor. Use /duelo treino ou /duelo desafiar.');
       if(action==='sair'){if(r.status==='pending'){const closed=declineChallenge(r.id,id,i.guildId);await i.editReply({content:'Convite cancelado.'});await refreshArena(closed);}else await i.editReply(quitMessage(r));return;}

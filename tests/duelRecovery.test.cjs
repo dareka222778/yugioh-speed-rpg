@@ -31,6 +31,13 @@ test('REA-R02: active unpublished revisions are retried and stale acknowledgment
  assert.ok(store.expireDueDuels().some(r=>r.id===before.id));store.markDuelPublished(before.id,next.revision);
  assert.ok(!store.expireDueDuels().some(r=>r.id===before.id));finish(next);
 });
+test('REA-R02: binding an older rendered message cannot acknowledge a newer state',()=>{
+ const before=start(),actor=before.state.players[before.state.current].id;
+ const next=store.performDuelAction(before.id,actor,'g',before.revision,0,'render-race-request');
+ store.setDuelMessage(before.id,'c','rendered-before-action',before.revision);
+ assert.equal(store.getDuel(before.id).public_revision,before.revision);assert.ok(store.expireDueDuels().some(r=>r.id===before.id));
+ store.markDuelPublished(before.id,next.revision);assert.ok(!store.expireDueDuels().some(r=>r.id===before.id));finish(next);
+});
 test('REA-R03: incompatible snapshots remain quarantined without blocking unrelated recovery',()=>{
  const before=start(),raw=JSON.stringify({...before.state,cardDefinitionsVersion:999});
  database.db.prepare('INSERT INTO duels(id,guild_id,channel_id,status,revision,updated,state) VALUES(?,?,?,?,?,?,?)').run('quarantined-version','g','c','playing',0,0,raw);

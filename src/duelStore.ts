@@ -207,7 +207,12 @@ export const performDuelAction=db.transaction((id:string,owner:string,guild:stri
  if(requestId)r.receipt=saveActionReceipt('duel',request,r.revision);
  return r;
 });
-export function setDuelMessage(id:string,channel:string,message:string){db.prepare('UPDATE duels SET channel_id=?,message_id=?,public_revision=revision WHERE id=?').run(channel,message,id);}
+export function setDuelMessage(id:string,channel:string,message:string,publishedRevision=-1){
+ if(!Number.isSafeInteger(publishedRevision)||publishedRevision< -1)throw new Error('Revisão de publicação inválida.');
+ // Creating a Discord message may race a state commit. Acknowledge only the
+ // snapshot actually rendered, never whatever revision is current now.
+ db.prepare('UPDATE duels SET channel_id=?,message_id=?,public_revision=CASE WHEN ?>=0 AND ?<=revision THEN ? ELSE -1 END WHERE id=?').run(channel,message,publishedRevision,publishedRevision,publishedRevision,id);
+}
 
 export function expireDueDuels(now=Date.now()):DuelRecord[]{
  const rows=db.prepare("SELECT id FROM duels WHERE (status='pending' AND updated<=?) OR (status='playing' AND updated<=?) LIMIT 100").all(now-120_000,now-DECISION_TIMEOUT_MS) as {id:string}[];
