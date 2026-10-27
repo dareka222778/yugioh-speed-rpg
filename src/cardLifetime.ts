@@ -5,10 +5,10 @@ export type TargetBinding=CardLifetime&{uid:string};
 export type PhysicalMovement={type:'cardMoved';player:string;uid:string;cardId:string;from:CardLifetime['zone'];to:CardLifetime['zone']} & ({visibility:'public'}|{visibility:'private';player:string});
 // Transient execution evidence is converted to durable journal rows by the store.
 // It is never a replay tape and is not attached to public/saved game state.
-const traces=new WeakMap<DuelState,{origin:DuelState;moves:PhysicalMovement[]}>();
-export function beginCardMovementTrace(s:DuelState,origin:DuelState):void{traces.set(s,{origin,moves:[]});}
+const traces=new WeakMap<DuelState,{origin:WeakRef<DuelState>;moves:PhysicalMovement[]}>();
+export function beginCardMovementTrace(s:DuelState,origin:DuelState):void{traces.set(s,{origin:new WeakRef(origin),moves:[]});}
 export function cardMovementTrace(before:DuelState,after:DuelState):readonly PhysicalMovement[]|undefined{
- const trace=traces.get(after);return trace?.origin===before?trace.moves.map(move=>({...move})):undefined;
+ const trace=traces.get(after);return trace?.origin.deref()===before?trace.moves.map(move=>({...move})):undefined;
 }
 /** Controller changes within a zone do not create a new game object. Leaving
  * and returning does. Metadata is optional for pre-existing saved duels. */

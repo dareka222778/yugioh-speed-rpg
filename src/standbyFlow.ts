@@ -15,8 +15,8 @@ export function scheduleStandbyTask(input:DuelState,task:StandbyTask):DuelState{
  flow.tasks.push(structuredClone(task));assertStandbyFlow(s);return s;
 }
 export function assertStandbyFlow(s:DuelState):void{
- const flow=s.standby;if(flow===undefined)return;
  const fail=()=>{throw new Error('Estado da continuação de Espera inválido.');};
+ const flow=s.standby;if(flow===undefined){if(s.choice?.source==='standby'||s.pending.kind==='standby'||s.chainRoot?.kind==='standby')fail();return;}
  if(!flow||s.resolverVersion!=='engine-v2'||s.rulesVersion!=='speed-rpg-classic-v1'||flow.version!==1||!Array.isArray(flow.tasks)||flow.tasks.length>128||!Array.isArray(flow.completed)||flow.completed.length>flow.tasks.length)fail();
  const ids=new Set<string>();for(const task of flow.tasks){
   if(!task||!identifier(task.id)||ids.has(task.id)||!Number.isSafeInteger(task.turn)||task.turn<1||![0,1].includes(task.actor)||typeof task.optional!=='boolean'||task.costLP!==undefined&&(!Number.isSafeInteger(task.costLP)||task.costLP<0)||!Array.isArray(task.options)||!task.options.length||task.options.length>12)fail();ids.add(task.id);
@@ -27,7 +27,9 @@ export function assertStandbyFlow(s:DuelState):void{
  const done=new Set<string>();for(const result of flow.completed){if(!result||!ids.has(result.id)||done.has(result.id)||!['chosen','declined','cancelled'].includes(result.outcome)||result.outcome==='chosen'&&!flow.tasks.find(t=>t.id===result.id)?.options.some(o=>o.id===result.choice))fail();done.add(result.id);}
  if(flow.active){const task=flow.tasks.find(t=>t.id===flow.active!.id);if(!task||done.has(task.id)||!['choosing','responding'].includes(flow.active.status))fail();
   if(flow.active.status==='choosing'&&(s.phase!=='choice'||s.choice?.source!=='standby'||s.choice.actor!==task!.actor))fail();
+  if(flow.active.status==='choosing'&&s.choice?.targets.some(id=>id!=='__skip__'&&!task!.options.some(o=>o.id===id)||id==='__skip__'&&!task!.optional))fail();
   if(flow.active.status==='responding'&&!task!.options.some(o=>o.id===flow.active!.choice))fail();
+  if(flow.active.status==='responding'&&![s.pending,s.chainRoot].some(p=>p?.kind==='standby'&&p.taskId===flow.active!.id&&p.choiceId===flow.active!.choice))fail();
  }
  if(s.choice?.source==='standby'&&flow.active?.status!=='choosing')fail();
  for(const pending of [s.pending,s.chainRoot])if(pending?.kind==='standby'&&(flow.active?.status!=='responding'||flow.active.id!==pending.taskId||flow.active.choice!==pending.choiceId||flow.tasks.find(t=>t.id===pending.taskId)?.actor!==pending.actor))fail();
