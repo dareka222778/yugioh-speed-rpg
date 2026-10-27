@@ -13,3 +13,14 @@ test('v3 definitions remain pinned when mutable development metadata changes',()
   let s=e.createDuel(players,()=>.5);s.players[0].hand[0].id=id;const action=e.legalActions(s,'a').find(x=>x.kind==='summon'&&x.card===s.players[0].hand[0].uid&&x.position==='atk');s=e.step(clone(s),'a',action);assert.equal(e.atk(s.players[0].monsters[0],s),original);assertDuelState(clone(s));
  }finally{card.atk=original;}
 });
+test('approved classical decks keep identical v2/v3 transitions across 12 full seeded games',()=>{
+ const {npcs}=require('../dist/npcContent'),v2=a.getArchivedDefinitionResolver('engine-v2'),v3=a.getArchivedDefinitionResolver('engine-v3');
+ const comparable=s=>{const copy=clone(s);delete copy.resolverVersion;return copy;};
+ for(let seed=0;seed<12;seed++){
+  const ps=[0,1].map((i)=>({id:i?'b':'a',name:npcs[(seed+i)%3].name,cards:npcs[(seed+i)%3].cards,extra:npcs[(seed+i)%3].extra})),options={randomSeed:seed.toString(16).padStart(64,'0')};let old=v2.createDuel(ps,undefined,0,options),next=v3.createDuel(ps,undefined,0,options),steps=0;
+  while(old.phase!=='finished'){
+   assert.ok(++steps<1000);assert.deepEqual(comparable(next),comparable(old));const actor=old.players[v2.decisionPlayer(old)].id,actions=v2.legalActions(old,actor);assert.deepEqual(v3.legalActions(next,actor),actions);
+   const action=actions.find(a=>['pass','choose','discard'].includes(a.kind))??actions.find(a=>a.kind==='summon'&&a.position==='atk')??actions.find(a=>a.kind==='spell')??actions.find(a=>a.kind==='monsterEffect')??actions.find(a=>a.kind==='attack')??actions.find(a=>a.kind==='battle')??actions.find(a=>a.kind==='end')??actions[0];assert.ok(action);old=v2.step(clone(old),actor,action);next=v3.step(clone(next),actor,action);
+  }assert.deepEqual(comparable(next),comparable(old));
+ }
+});
