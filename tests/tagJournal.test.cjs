@@ -10,7 +10,13 @@ test('2v2 causal journal preserves activation moves and private recipient identi
  database.db.exec("CREATE TRIGGER fail_tag_journal BEFORE INSERT ON tag_transition_events BEGIN SELECT RAISE(ABORT,'journal failure'); END");assert.throws(()=>store.actTag(r.id,member.id,'g',r.revision,index,'journal-request'),/journal failure/);assert.equal(store.getTag(r.id).revision,r.revision);assert.deepEqual(store.tagEventsAt(r.id,r.revision+1),[]);
  database.db.exec('DROP TRIGGER fail_tag_journal');const committed=store.actTag(r.id,member.id,'g',r.revision,index,'journal-request'),events=store.tagEventsAt(r.id,committed.revision);
  assert.ok(events.some(e=>e.type==='cardMoved'&&e.uid===uid&&e.from==='hand'&&e.to==='backrow'));
- const privateEvents=events.filter(e=>e.visibility==='private');assert.ok(privateEvents.length>0);assert.ok(privateEvents.every(e=>e.player===member.id));assert.ok(projectTransitionEvents(events,'spectator').every(e=>e.visibility==='public'));
- store.actTag(r.id,member.id,'g',r.revision,index,'journal-request');assert.deepEqual(store.tagEventsAt(r.id,committed.revision),events);store.quitTag(r.id,member.id,'g',committed.revision);
+ store.actTag(r.id,member.id,'g',r.revision,index,'journal-request');assert.deepEqual(store.tagEventsAt(r.id,committed.revision),events);
+ // A randomly dealt Quick-Play may keep the activation waiting for responses.
+ // Draw privacy belongs to the revision that actually resolves Pot, not its emission.
+ let resolved=committed,allEvents=[...events];for(let n=0;resolved.state.core.phase==='response';n++){
+  assert.ok(n<12,'response budget');const actor=tag.tagDecisionMember(resolved.state).id,pass=tag.tagActions(resolved.state,actor).findIndex(a=>a.kind==='pass');assert.ok(pass>=0);resolved=store.actTag(r.id,actor,'g',resolved.revision,pass);allEvents.push(...store.tagEventsAt(r.id,resolved.revision));
+ }
+ const privateEvents=allEvents.filter(e=>e.visibility==='private');assert.ok(privateEvents.length>0);assert.ok(privateEvents.every(e=>e.player===member.id));assert.ok(projectTransitionEvents(allEvents,'spectator').every(e=>e.visibility==='public'));
+ store.quitTag(r.id,member.id,'g',resolved.revision);
 });
 after(()=>{database.db.close();fs.rmSync(dir,{recursive:true,force:true});});
