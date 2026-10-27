@@ -18,6 +18,8 @@ jobs:
       - run: node scripts/check-mission3-integrity.cjs
       - run: npm run check
       - run: npm test
+      - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission4-individual-reviews.json artifacts/certification-executions-mission4.json
+      - run: node scripts/stress-persisted-duels.cjs 50
       - run: npm run audit:rea
       - run: npm run benchmark:recovery
       - run: node --expose-gc scripts/benchmark-concurrent-engine.cjs
@@ -45,6 +47,10 @@ jobs:
             artifacts/engine-recovery-benchmark.json
             artifacts/discord-offline-homologation.json
             artifacts/concurrent-engine-benchmark.json
+            artifacts/certification-pipeline.json
+            artifacts/certification-executions-mission4.json
+            artifacts/discord-full-matches.json
+            artifacts/persisted-duel-stress-50.json
           if-no-files-found: ignore
           retention-days: 14
       - name: Publicar prévias visuais

@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+/** 50 live isolated sessions, four actual SQLite writer processes. No Discord transport. */
+const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict'),{fork}=require('node:child_process'),{performance}=require('node:perf_hooks');
+if(process.argv.includes('--worker')){
+ const d=require('../dist/database'),s=require('../dist/duelStore'),t=require('../dist/tagStore');d.db.pragma('busy_timeout = 100');const cpu=process.cpuUsage();
+ process.on('message',job=>{if(job.stop){process.send({stats:true,pid:process.pid,cpu:process.cpuUsage(cpu),memory:process.memoryUsage()});d.db.close();process.disconnect();return;}
+  const started=performance.now();try{const r=job.mode==='1v1'?s.performDuelAction(job.id,job.actor,'stress',job.revision,job.index,job.requestId):t.actTag(job.id,job.actor,'stress',job.revision,job.index,job.requestId);process.send({job:job.job,ok:true,revision:r.revision,replayed:r.receipt?.replayed===true,ms:performance.now()-started,rss:process.memoryUsage.rss()});}catch(error){process.send({job:job.job,ok:false,error:error.message,code:error.code,ms:performance.now()-started,rss:process.memoryUsage.rss()});}
+ });process.send({ready:true});
+}else{
+ const count=Number(process.argv[2]??50);if(!Number.isSafeInteger(count)||count<2||count>200)throw Error('Use 2..200 isolated sessions');
+ const folder=fs.mkdtempSync(path.join(os.tmpdir(),'speed-rpg-stress-'));process.env.DATABASE_PATH=path.join(folder,'isolated.sqlite');for(const key of ['DISCORD_TOKEN','DISCORD_CLIENT_ID','DISCORD_GUILD_ID'])delete process.env[key];
+ const d=require('../dist/database'),s=require('../dist/duelStore'),t=require('../dist/tagStore'),tag=require('../dist/tagDuel'),e=require('../dist/duelEngine'),decks=require('../dist/decks'),{duelCards,assertDuelState}=require('../dist/duelIntegrity');
+ const sessions=[],workers=[],pending=new Map(),workerStats=[],durations=[],serviceTimes=[],started=performance.now(),cpu=process.cpuUsage(),before=process.memoryUsage();let serial=0,duplicateDeliveries=0,busyErrors=0,rejected=0,commits=0,reopens=0,peakWorkerRSS=0;
+ const balances=()=>JSON.stringify({players:d.db.prepare('SELECT * FROM players ORDER BY discord_id').all(),cards:d.db.prepare('SELECT * FROM player_cards ORDER BY discord_id,card_key').all()});
+ const read=session=>session.mode==='1v1'?s.getDuel(session.id):t.getTag(session.id),inventory=session=>session.mode==='1v1'?duelCards(session.record.state):tag.tagInventory(session.record.state),verify=session=>{session.record=read(session);if(session.mode==='1v1')assertDuelState(JSON.parse(JSON.stringify(session.record.state)));else tag.assertTagDuel(JSON.parse(JSON.stringify(session.record.state)));assert.deepEqual(inventory(session).map(c=>[c.uid,c.id]).sort(),session.identities);};
+ function jobFor(session,prefix='stress'){const r=read(session),core=session.mode==='1v1'?r.state:r.state.core,actor=session.mode==='1v1'?core.players[e.decisionPlayer(core)].id:tag.tagDecisionMember(r.state).id,a=s.chooseNPC(core,core.players[e.decisionPlayer(core)].id),actions=session.mode==='1v1'?e.legalActions(core,actor):tag.tagActions(r.state,actor),index=actions.findIndex(x=>JSON.stringify(x)===JSON.stringify(a));assert.ok(index>=0);return {mode:session.mode,id:session.id,actor,revision:r.revision,index,requestId:prefix+':'+session.id+':'+r.revision};}
+ const send=(worker,job)=>new Promise((resolve,reject)=>{const id=++serial,start=performance.now();pending.set(id,{resolve:r=>{durations.push(performance.now()-start);serviceTimes.push(r.ms);peakWorkerRSS=Math.max(peakWorkerRSS,r.rss??0);resolve(r);},reject});worker.send({...job,job:id});});
+ async function launch(){const worker=fork(__filename,['--worker'],{env:{...process.env},stdio:['ignore','ignore','pipe','ipc']});workers.push(worker);await new Promise((resolve,reject)=>{worker.on('message',r=>{if(r.ready){resolve();return;}if(r.stats){workerStats.push(r);return;}const p=pending.get(r.job);if(p){pending.delete(r.job);p.resolve(r);}});worker.on('error',reject);worker.on('exit',code=>{if(code){reject(Error('writer exited '+code));for(const p of pending.values())p.reject(Error('writer exited '+code));}});});return worker;}
+ async function run(){try{
+  for(let i=0;i<count;i++){const ids=Array.from({length:i%2?4:2},(_,j)=>'stress-'+i+'-'+j);for(const id of ids){d.createPlayer(id,id);if(i%2===0){d.chooseStarterDeck(id,'warrior');decks.openDeck(id);decks.activateDeck(id,1);}}
+   let r;if(i%2){r=t.createTagLobby(ids,'stress','offline','classic-loan');for(const id of ids.slice(1))r=t.acceptTag(r.id,id,'stress',r.revision);}else{r=s.challenge(ids[0],ids[1],'stress','offline');r=s.acceptChallenge(r.id,ids[1],'stress',r.revision);}const session={mode:i%2?'2v2':'1v1',id:r.id,record:r};session.identities=inventory(session).map(c=>[c.uid,c.id]).sort();sessions.push(session);
+  }
+  const economicBefore=balances();for(let i=0;i<4;i++)await launch();
+  // A failed transactional write and a parallel malformed action preserve both sessions.
+  d.db.exec("CREATE TRIGGER stress_fault BEFORE INSERT ON duel_action_receipts WHEN NEW.request_id LIKE 'fault:%' BEGIN SELECT RAISE(ABORT,'injected stress failure'); END");
+  const fault=jobFor(sessions[0],'fault'),revision=read(sessions[0]).revision;const failures=await Promise.all([send(workers[0],fault),send(workers[1],{...jobFor(sessions[1]),index:999999,requestId:'malformed-stress'})]);assert.ok(failures.every(r=>!r.ok));assert.match(failures[0].error,/injected stress failure/);rejected+=2;assert.equal(read(sessions[0]).revision,revision);assert.equal(s.duelEventsAt(fault.id,revision+1).length,0);d.db.exec('DROP TRIGGER stress_fault');
+  for(let round=0;sessions.some(v=>read(v).status==='playing')&&round<2000;round++){
+   const jobs=sessions.flatMap((session,i)=>read(session).status==='playing'?[{session,i,job:jobFor(session)}]:[]);
+   await Promise.all(jobs.map(async({session,i,job})=>{
+    const duplicate=(round+i)%11===0;const requests=[send(workers[i%4],job),...duplicate?[send(workers[(i+1)%4],job)]:[]];if(duplicate)duplicateDeliveries++;
+    const results=await Promise.all(requests);for(const r of results)if(!r.ok){assert.match(r.code??'',/^SQLITE_BUSY/,'unexpected writer error: '+r.error);busyErrors++;}
+    if(!results.some(r=>r.ok)){let retry;for(let attempt=0;attempt<8;attempt++){retry=await send(workers[i%4],job);if(retry.ok)break;assert.match(retry.code??'',/^SQLITE_BUSY/);busyErrors++;}assert.ok(retry.ok,'bounded busy retries exhausted');}
+    const next=read(session);assert.equal(next.revision,job.revision+1);commits++;verify(session);
+   }));
+   // Restart one writer while saved choices/chains remain in SQLite.
+   if(round===4){const worker=workers[0],closed=new Promise(resolve=>worker.once('exit',resolve));worker.send({stop:true});await closed;workers.shift();await launch();reopens++;}
+  }
+  assert.ok(sessions.every(v=>read(v).status==='finished'));assert.equal(balances(),economicBefore);assert.equal(d.db.prepare('SELECT COUNT(*) AS n FROM duel_members').get().n,0);assert.equal(d.db.prepare('SELECT COUNT(*) AS n FROM tag_members').get().n,0);
+  for(const worker of workers){const closed=new Promise(resolve=>worker.once('exit',resolve));worker.send({stop:true});await closed;}workers.length=0;
+  assert.deepEqual(d.db.pragma('integrity_check').map(r=>r.integrity_check),['ok']);assert.deepEqual(d.db.pragma('foreign_key_check'),[]);durations.sort((a,b)=>a-b);serviceTimes.sort((a,b)=>a-b);const quant=(a,p)=>a[Math.floor((a.length-1)*p)];
+  const report={scope:'isolated persistent 1v1/2v2 sessions; four SQLite writer processes; IPC/queue/transaction latency, excludes Discord and PNG',sessions:count,completed:sessions.length,writerProcesses:4,commits,duplicateDeliveries,busyErrors,rejectedInjectedOrInvalid:rejected,writerRestarts:reopens,integrity:'ok',foreignKeys:'ok',cardConservation:true,economyUnchanged:true,elapsedMs:performance.now()-started,latencyMs:{p50:quant(durations,.5),p95:quant(durations,.95),p99:quant(durations,.99),max:durations.at(-1)},transactionMs:{p95:quant(serviceTimes,.95),max:serviceTimes.at(-1)},cpu:{parent:process.cpuUsage(cpu),workers:workerStats.map(s=>({pid:s.pid,cpu:s.cpu}))},memory:{before,after:process.memoryUsage(),peakObservedWriterRSS:peakWorkerRSS,workers:workerStats.map(s=>({pid:s.pid,memory:s.memory}))},liveDiscordCertified:false};fs.mkdirSync('artifacts',{recursive:true});fs.writeFileSync('artifacts/persisted-duel-stress-'+count+'.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+ }finally{for(const worker of workers)worker.kill();d.db.close();assert.ok(path.resolve(folder).startsWith(path.resolve(os.tmpdir())+path.sep));fs.rmSync(folder,{recursive:true,force:true});}}
+ run().catch(error=>{console.error(error);process.exitCode=1;});
+}

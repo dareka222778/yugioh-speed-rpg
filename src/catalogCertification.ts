@@ -41,9 +41,9 @@ export function planHistoricalCatalog(inputs:readonly unknown[],options:{cutoff:
  const duplicateIndexes=new Set<number>();for(const indexes of conflicts.values())if(indexes.length>1)indexes.forEach(i=>duplicateIndexes.add(i));
  const reviews=options.reviews??[],executions=options.executions??[],admissions=options.admissions??[];
  const plan=rows.map((row,i)=>{
-  const raw=inputs[i] as Partial<HistoryInput>|null,id=row.card?.id??(Array.isArray(raw?.passwords)&&typeof raw.passwords[0]==='string'?raw.passwords[0]:null),issues=[...row.issues];if(duplicateIndexes.has(i))issues.push('identity-collision');
+  const raw=inputs[i] as Partial<HistoryInput>|null,aliases=Array.isArray(raw?.passwords)?raw.passwords:[],matches=admissions.filter(a=>aliases.includes(a.id)),admission=matches.length===1?matches[0]:undefined,id=admission?.id??row.card?.id??(typeof aliases[0]==='string'?aliases[0]:null),issues=[...row.issues];if(duplicateIndexes.has(i))issues.push('identity-collision');
   const date=row.dates[options.region],eligible=validCatalogDate(date)&&date<=options.cutoff;if(!eligible)issues.push(date===null?'regional-date-not-recovered':'outside-cutoff');
-  const matches=admissions.filter(a=>a.id===id),admission=matches.length===1?matches[0]:undefined;if(matches.length>1)issues.push('ambiguous-admission');
+  if(matches.length>1)issues.push('ambiguous-admission');
   const rs=reviews.filter(r=>r.id===id),review=rs.length===1?rs[0]:undefined;if(rs.length>1)issues.push('duplicate-review');
   const primary=review?.primaryFacts,card=row.card;
   const reviewed=!!card&&!!review&&!!review.reviewer?.trim()&&validCatalogDate(review.reviewedAt)&&review.canonicalId===row.canonicalId&&review.konamiId===card.konamiId&&review.identityApproved===true&&review.mechanicsApproved===true&&review.primarySource===card.source&&!!primary&&primary.level===card.level&&primary.atk===card.atk&&primary.defense===card.defense&&primary.race===card.race&&primary.attribute===card.attribute&&validCatalogDate(primary.ocgDate)&&primary.ocgDate===row.dates.ocg&&!!admission&&review.mechanicalFingerprint===admission.fingerprint;
