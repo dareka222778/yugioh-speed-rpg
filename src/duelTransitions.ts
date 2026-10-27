@@ -1,10 +1,4 @@
-import {transitionEvents as pinnedV5Events} from './resolvers/v5/duelTransitions';
-import {transitionEvents as pinnedV4Events} from './resolvers/v4/duelTransitions';
-import {transitionEvents as pinnedV3Events} from './resolvers/v3/duelTransitions';
-import {transitionEvents as pinnedV2Events} from './resolvers/v2/duelTransitions';
-import {resolverVersionFor} from './resolverArchive';
-import {transitionEvents as legacyTransitionEvents} from './resolvers/v1/duelTransitions';
-import type {DuelState as LegacyDuelState} from './resolvers/v1/duelEngine';
+import {resolverVersionFor,getArchivedTransitionEvents} from './resolverArchive';
 /** Structured before/after transition notifications, independent of translated logs.
  * These summarize committed state changes; they are not an atomic effect trace
  * or a replay tape. Replay uses state + action + persisted private RNG instead.
@@ -33,8 +27,7 @@ function inventory(s:DuelState){
  return cards;
 }
 export function transitionEvents(before:DuelState,after:DuelState):DuelTransitionEvent[]{
- if(resolverVersionFor(before)==='engine-v1')return legacyTransitionEvents(before as unknown as LegacyDuelState,after as unknown as LegacyDuelState);
- if(!cardMovementTrace(before,after)){const pinned=resolverVersionFor(before)==='engine-v2'?pinnedV2Events:resolverVersionFor(before)==='engine-v3'?pinnedV3Events:resolverVersionFor(before)==='engine-v4'?pinnedV4Events:pinnedV5Events;return (pinned as typeof transitionEvents)(before,after);}
+ if(resolverVersionFor(before)==='engine-v1'||!cardMovementTrace(before,after))return getArchivedTransitionEvents(resolverVersionFor(before))(before,after);
  const trace=cardMovementTrace(before,after),moved=new Set(trace?.map(move=>move.uid));
  const events:DuelTransitionEvent[]=[],old=inventory(before),next=inventory(after);
  for(const [i,p]of after.players.entries()){

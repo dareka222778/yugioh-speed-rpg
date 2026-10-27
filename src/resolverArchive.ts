@@ -1,39 +1,25 @@
-import * as v5 from './resolvers/v5/duelEngineCurrent';
-import {getEffect as effectV5,getPlayableCard as cardV5} from './resolvers/v5/effectRegistry';
-import {assertDuelState as validateV5} from './resolvers/v5/duelIntegrity';
-import * as v4 from './resolvers/v4/duelEngineCurrent';
-import {getEffect as effectV4,getPlayableCard as cardV4} from './resolvers/v4/effectRegistry';
-import {assertDuelState as validateV4} from './resolvers/v4/duelIntegrity';
-import * as v3 from './resolvers/v3/duelEngineCurrent';
-import {getEffect as effectV3,getPlayableCard as cardV3} from './resolvers/v3/effectRegistry';
-import {assertDuelState as validateV3} from './resolvers/v3/duelIntegrity';
-import * as v2 from './resolvers/v2/duelEngineCurrent';
-import {getEffect as effectV2,getPlayableCard as cardV2} from './resolvers/v2/effectRegistry';
-import {assertDuelState as validateV2} from './resolvers/v2/duelIntegrity';
-import * as v1 from './resolvers/v1/duelEngine';
-import {getEffect as effectV1,getPlayableCard as cardV1} from './resolvers/v1/effectRegistry';
-import {assertDuelState as validateV1} from './resolvers/v1/duelIntegrity';
+import {createRequire} from 'node:module';
+import {isAbsolute} from 'node:path';
+/** Synchronous lazy loading: a saved duel loads its pinned implementation, never another version. */
+const requireArchive=createRequire(typeof __filename==='string'&&isAbsolute(__filename)?__filename:process.cwd()+'/src/resolverArchive.ts');
 export const CURRENT_RESOLVER_VERSION='engine-v5' as const;
-export type ResolverVersion='engine-v1'|'engine-v2'|'engine-v3'|'engine-v4'|typeof CURRENT_RESOLVER_VERSION;
-export function resolverVersionFor(state:{resolverVersion?:unknown}):ResolverVersion{
- const version=state.resolverVersion===undefined?'engine-v1':state.resolverVersion;
- if(version!=='engine-v1'&&version!=='engine-v2'&&version!=='engine-v3'&&version!=='engine-v4'&&version!==CURRENT_RESOLVER_VERSION)throw new Error('Versão de resolvedor incompatível. Estado original preservado.');
- return version;
-}
-const archived=Object.freeze({...v1,assertDuelState:validateV1,getEffect:(id:string)=>{const value=effectV1(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV1(id);return value?structuredClone(value):undefined;}});
-const archivedV2=Object.freeze({...v2,assertDuelState:validateV2,getEffect:(id:string)=>{const value=effectV2(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV2(id);return value?structuredClone(value):undefined;}});
-const archivedV3=Object.freeze({...v3,assertDuelState:validateV3,getEffect:(id:string)=>{const value=effectV3(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV3(id);return value?structuredClone(value):undefined;}});
-const archivedV4=Object.freeze({...v4,assertDuelState:validateV4,getEffect:(id:string)=>{const value=effectV4(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV4(id);return value?structuredClone(value):undefined;}});
-const archivedV5=Object.freeze({...v5,assertDuelState:validateV5,getEffect:(id:string)=>{const value=effectV5(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV5(id);return value?structuredClone(value):undefined;}});
-export function getArchivedDefinitionResolver(version:'engine-v5'):typeof archivedV5;
-export function getArchivedDefinitionResolver(version:'engine-v4'):typeof archivedV4;
-export function getArchivedDefinitionResolver(version:'engine-v3'):typeof archivedV3;
-export function getArchivedDefinitionResolver(version:'engine-v1'):typeof archived;
-export function getArchivedDefinitionResolver(version:'engine-v2'):typeof archivedV2;
-export function getArchivedDefinitionResolver(version:ResolverVersion):typeof archived|typeof archivedV2|typeof archivedV3|typeof archivedV4|typeof archivedV5;
-export function getArchivedDefinitionResolver(version:ResolverVersion){if(version==='engine-v5')return archivedV5;if(version==='engine-v4')return archivedV4;if(version==='engine-v3')return archivedV3;if(version==='engine-v1')return archived;if(version==='engine-v2')return archivedV2;throw new Error('Resolvedor histórico não recuperado.');}
-/** Explicit, lossless pinning; the caller retains the original serialized save.
- * Missing versions always mean v1, never "whatever engine is current". */
-export function pinLegacyResolver<T extends {resolverVersion?:ResolverVersion}>(input:T):T&{resolverVersion:ResolverVersion}{
- if(resolverVersionFor(input)!=='engine-v1')throw new Error('Não é permitido rebaixar um resolvedor.');validateV1(input);return {...structuredClone(input),resolverVersion:'engine-v1'};
-}
+export type ResolverVersion='engine-v1'|'engine-v2'|'engine-v3'|'engine-v4'|'engine-v5';
+export function resolverVersionFor(state:{resolverVersion?:unknown}):ResolverVersion{const version=state.resolverVersion===undefined?'engine-v1':state.resolverVersion;if(!['engine-v1','engine-v2','engine-v3','engine-v4','engine-v5'].includes(version as string))throw new Error('Versão de resolvedor incompatível. Estado original preservado.');return version as ResolverVersion;}
+function buildV1(){const core=requireArchive('./resolvers/v1/duelEngine') as typeof import('./resolvers/v1/duelEngine'),registry=requireArchive('./resolvers/v1/effectRegistry') as typeof import('./resolvers/v1/effectRegistry'),integrity=requireArchive('./resolvers/v1/duelIntegrity') as typeof import('./resolvers/v1/duelIntegrity');return Object.freeze({...core,assertDuelState:integrity.assertDuelState,getEffect:(id:string)=>{const value=registry.getEffect(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=registry.getPlayableCard(id);return value?structuredClone(value):undefined;}});}
+function buildV2(){const core=requireArchive('./resolvers/v2/duelEngineCurrent') as typeof import('./resolvers/v2/duelEngineCurrent'),registry=requireArchive('./resolvers/v2/effectRegistry') as typeof import('./resolvers/v2/effectRegistry'),integrity=requireArchive('./resolvers/v2/duelIntegrity') as typeof import('./resolvers/v2/duelIntegrity');return Object.freeze({...core,assertDuelState:integrity.assertDuelState,getEffect:(id:string)=>{const value=registry.getEffect(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=registry.getPlayableCard(id);return value?structuredClone(value):undefined;}});}
+function buildV3(){const core=requireArchive('./resolvers/v3/duelEngineCurrent') as typeof import('./resolvers/v3/duelEngineCurrent'),registry=requireArchive('./resolvers/v3/effectRegistry') as typeof import('./resolvers/v3/effectRegistry'),integrity=requireArchive('./resolvers/v3/duelIntegrity') as typeof import('./resolvers/v3/duelIntegrity');return Object.freeze({...core,assertDuelState:integrity.assertDuelState,getEffect:(id:string)=>{const value=registry.getEffect(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=registry.getPlayableCard(id);return value?structuredClone(value):undefined;}});}
+function buildV4(){const core=requireArchive('./resolvers/v4/duelEngineCurrent') as typeof import('./resolvers/v4/duelEngineCurrent'),registry=requireArchive('./resolvers/v4/effectRegistry') as typeof import('./resolvers/v4/effectRegistry'),integrity=requireArchive('./resolvers/v4/duelIntegrity') as typeof import('./resolvers/v4/duelIntegrity');return Object.freeze({...core,assertDuelState:integrity.assertDuelState,getEffect:(id:string)=>{const value=registry.getEffect(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=registry.getPlayableCard(id);return value?structuredClone(value):undefined;}});}
+function buildV5(){const core=requireArchive('./resolvers/v5/duelEngineCurrent') as typeof import('./resolvers/v5/duelEngineCurrent'),registry=requireArchive('./resolvers/v5/effectRegistry') as typeof import('./resolvers/v5/effectRegistry'),integrity=requireArchive('./resolvers/v5/duelIntegrity') as typeof import('./resolvers/v5/duelIntegrity');return Object.freeze({...core,assertDuelState:integrity.assertDuelState,getEffect:(id:string)=>{const value=registry.getEffect(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=registry.getPlayableCard(id);return value?structuredClone(value):undefined;}});}
+type Archived=ReturnType<typeof buildV1>|ReturnType<typeof buildV2>|ReturnType<typeof buildV3>|ReturnType<typeof buildV4>|ReturnType<typeof buildV5>;
+const cache=new Map<ResolverVersion,Archived>();
+export function getArchivedDefinitionResolver(version:'engine-v1'):ReturnType<typeof buildV1>;
+export function getArchivedDefinitionResolver(version:'engine-v2'):ReturnType<typeof buildV2>;
+export function getArchivedDefinitionResolver(version:'engine-v3'):ReturnType<typeof buildV3>;
+export function getArchivedDefinitionResolver(version:'engine-v4'):ReturnType<typeof buildV4>;
+export function getArchivedDefinitionResolver(version:'engine-v5'):ReturnType<typeof buildV5>;
+export function getArchivedDefinitionResolver(version:ResolverVersion):Archived;
+export function getArchivedDefinitionResolver(version:ResolverVersion):Archived{const found=cache.get(version);if(found)return found;let value:Archived;switch(version){case 'engine-v1':value=buildV1();break;case 'engine-v2':value=buildV2();break;case 'engine-v3':value=buildV3();break;case 'engine-v4':value=buildV4();break;case 'engine-v5':value=buildV5();break;default:throw new Error('Resolvedor histórico não recuperado.');}cache.set(version,value);return value;}
+const transitionPaths:Record<ResolverVersion,string>={'engine-v1':'./resolvers/v1/duelTransitions','engine-v2':'./resolvers/v2/duelTransitions','engine-v3':'./resolvers/v3/duelTransitions','engine-v4':'./resolvers/v4/duelTransitions','engine-v5':'./resolvers/v5/duelTransitions'};
+export function getArchivedTransitionEvents(version:ResolverVersion):typeof import('./duelTransitions').transitionEvents{const file=transitionPaths[version];if(!file)throw new Error('Resolvedor histórico não recuperado.');return requireArchive(file).transitionEvents;}
+/** Lossless pinning: missing versions always mean v1. */
+export function pinLegacyResolver<T extends {resolverVersion?:ResolverVersion}>(input:T):T&{resolverVersion:ResolverVersion}{if(resolverVersionFor(input)!=='engine-v1')throw new Error('Não é permitido rebaixar um resolvedor.');const validate=getArchivedDefinitionResolver('engine-v1').assertDuelState as (v:unknown)=>void;validate(input);return {...structuredClone(input),resolverVersion:'engine-v1'};}

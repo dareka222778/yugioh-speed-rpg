@@ -20,7 +20,12 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission4-individual-reviews.json artifacts/certification-executions-mission4.json
-      - run: node scripts/stress-persisted-duels.cjs 50
+      - run: node scripts/audit-normalization-blockers.cjs
+      - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission5-individual-reviews.json artifacts/certification-executions-mission5.json
+      - run: node scripts/stress-persisted-duels.cjs 50 4 --eager
+      - run: node scripts/stress-persisted-duels.cjs 50 4
+      - run: node scripts/stress-persisted-duels.cjs 50 2
+      - run: node scripts/stress-persisted-duels.cjs 100 2
       - run: npm run audit:rea
       - run: npm run benchmark:recovery
       - run: node --expose-gc scripts/benchmark-concurrent-engine.cjs
@@ -54,7 +59,9 @@ jobs:
             artifacts/certification-pipeline.json
             artifacts/certification-executions-mission4.json
             artifacts/discord-full-matches.json
-            artifacts/persisted-duel-stress-50.json
+            artifacts/persisted-duel-stress-*.json
+            artifacts/certification-executions-mission5.json
+            artifacts/normalization-blockers-mission5.json
           if-no-files-found: ignore
           retention-days: 14
       - name: Publicar prévias visuais

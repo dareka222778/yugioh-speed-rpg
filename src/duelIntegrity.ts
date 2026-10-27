@@ -1,11 +1,6 @@
-import {assertDuelState as assertPinnedV5State} from './resolvers/v5/duelIntegrity';
-import {assertDuelState as assertPinnedV4State} from './resolvers/v4/duelIntegrity';
-import {assertDuelState as assertPinnedV3State} from './resolvers/v3/duelIntegrity';
-import {assertDuelState as assertPinnedV2State} from './resolvers/v2/duelIntegrity';
 import {getTokenMetadata,assertTokenLedger,assertTokenTransition} from './tokens';
 import {assertStandbyFlow} from './standbyFlow';
-import {resolverVersionFor} from './resolverArchive';
-import {assertDuelState as assertLegacyState} from './resolvers/v1/duelIntegrity';
+import {resolverVersionFor,getArchivedDefinitionResolver} from './resolverArchive';
 import {lifetimeZones} from './cardLifetime';
 import {teamReserveCards} from './teamRotation';
 import {economicOperationIssues} from './economicOperations';
@@ -27,11 +22,7 @@ const actor=(n:unknown)=>n===0||n===1;
 export function duelCards(s:DuelState):CardRef[]{return s.players.flatMap(p=>[...p.deck,...p.hand,...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.banished??[],...p.field?[p.field]:[]]).concat(teamReserveCards(s));}
 export function assertDuelState(value:unknown):asserts value is DuelState{
  if(!object(value))fail('estado ausente');
- if(resolverVersionFor(value)==='engine-v1'){assertLegacyState(value);return;}
- if(resolverVersionFor(value)==='engine-v2'){assertPinnedV2State(value);return;}
- if(resolverVersionFor(value)==='engine-v3'){assertPinnedV3State(value);return;}
- if(resolverVersionFor(value)==='engine-v4'){assertPinnedV4State(value);return;}
- assertPinnedV5State(value);
+ (getArchivedDefinitionResolver(resolverVersionFor(value)).assertDuelState as (v:unknown)=>void)(value);
 }
 function assertCurrentDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');

@@ -1,0 +1,8 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{execFileSync}=require('node:child_process'),path=require('node:path');
+test('new games load only v5; opening an old resolver adds only that pinned version',()=>{
+ const code="const a=require('./dist/resolverArchive');require('./dist/duelEngine');require('./dist/duelIntegrity');require('./dist/duelTransitions');const loaded=()=>[...new Set(Object.keys(require.cache).flatMap(p=>{const m=/[\\\\/]resolvers[\\\\/](v[1-5])[\\\\/]/.exec(p);return m?[m[1]]:[];}))].sort();const before=loaded();a.getArchivedDefinitionResolver('engine-v2');a.getArchivedTransitionEvents('engine-v2');console.log(JSON.stringify({before,after:loaded()}));";
+ const out=JSON.parse(execFileSync(process.execPath,[...process.execArgv.filter(a=>!a.startsWith('--test')),'-e',code],{cwd:path.resolve(__dirname,'..'),encoding:'utf8'}));assert.deepEqual(out.before,['v5']);assert.deepEqual(out.after,['v2','v5']);
+});
+test('future closure construction removes lazy dispatcher dependencies and never rewrites existing versions',()=>{
+ const fs=require('node:fs'),root=path.resolve(__dirname,'..'),{buildClosure,freeze}=require('../scripts/freeze-resolver.cjs'),modules=buildClosure(root,'v6');assert.ok(modules.length>30);const integrity=modules.find(([n])=>n==='duelIntegrity')[1];assert.ok(!integrity.includes('getArchivedDefinitionResolver'));const transitions=modules.find(([n])=>n==='duelTransitions')[1];assert.ok(!transitions.includes('getArchivedTransitionEvents'));assert.throws(()=>freeze(root,'v4','6cf78e612a04254a0ddb43bb5752cabe394c2063'),/immutable/);assert.ok(fs.existsSync(path.join(root,'src/resolvers/v4/manifest.json')));
+});
