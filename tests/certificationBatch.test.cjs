@@ -13,7 +13,7 @@ test('historical batch review requires current mechanical fingerprints and regre
  assert.equal(planCertificationBatch([c,c])[1].readyForReview,false);
 });
 test('REA-D03: read-only batch planning cannot enable cards or distribute inventory',()=>{
- const before=[...registry.enabledCardIds];planCertificationBatch([candidate(),{...candidate(),id:'00000000'}]);assert.deepEqual(registry.enabledCardIds,before);assert.equal(before.length,197);
+ const before=[...registry.enabledCardIds];planCertificationBatch([candidate(),{...candidate(),id:'00000000'}]);assert.deepEqual(registry.enabledCardIds,before);assert.equal(before.length,203);
 });
 test('REA-D01: translated presentation is excluded from mechanical certification identity',()=>{
  const id='91152256',card=registry.engineCard(id),effect=registry.getEffect(id),context={monster:getMonsterDefinition,model:getEffectModel};

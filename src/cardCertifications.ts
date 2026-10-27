@@ -430,6 +430,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/classicEngine.test.cjs"
     ]
   },
+  "43716289": {
+    "fingerprint": "705b07479cfe8f5a301c593f750c19cc7e6a30f87cea1cf8e272831af111666f",
+    "suites": [
+      "tests/mechanicalBatch7.test.cjs"
+    ]
+  },
   "44095762": {
     "fingerprint": "e5cf024c9d55949aab36f64e0a19a59152b641b4943651dce4fa63e6ba1e18fd",
     "suites": [
@@ -452,6 +458,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "6947bd89748e1225243767908235314454817cd2a712948a9ee97a774b41874a",
     "suites": [
       "tests/duelEngine.test.cjs"
+    ]
+  },
+  "45141844": {
+    "fingerprint": "b248eb80cec8d8db6c7d60bb08cd6e84d0b06326ba5037f07086520b0a58deaf",
+    "suites": [
+      "tests/mechanicalBatch7.test.cjs"
     ]
   },
   "45231177": {
@@ -762,6 +774,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/duelEngine.test.cjs"
     ]
   },
+  "69579761": {
+    "fingerprint": "ef5dc4a8798f3194b78a31eccf6eadb87923a5cbb9d91d774bf72e429c457df3",
+    "suites": [
+      "tests/mechanicalBatch7.test.cjs"
+    ]
+  },
   "70368879": {
     "fingerprint": "9cb54bb0bec474c34f79c8ca9226a0e6319f96e9a1e25f4683c28616b3633677",
     "suites": [
@@ -848,6 +866,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/classicTargetReview.test.cjs"
     ]
   },
+  "77491079": {
+    "fingerprint": "59796871f1e2c41af853b34636bcada9663ab3881744fc30a5e7532372321bc5",
+    "suites": [
+      "tests/mechanicalBatch7.test.cjs"
+    ]
+  },
   "77585513": {
     "fingerprint": "76f789c4050505220a983dddd38a8c7ff9ad72e2734491530b10216b4c2e8b2b",
     "suites": [
@@ -903,6 +927,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "50cf27da92c0898c476f630ae027013b6b0fbe07f316f745e5856642fdc1be05",
     "suites": [
       "tests/classicExpansionFamilies.test.cjs"
+    ]
+  },
+  "83994646": {
+    "fingerprint": "1a08f1bee854092d0abccfbdbdfdfe376e4558baff5572324102100c78f14888",
+    "suites": [
+      "tests/mechanicalBatch7.test.cjs"
     ]
   },
   "84257639": {
@@ -1002,6 +1032,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "suites": [
       "tests/classicEngine.test.cjs",
       "tests/classicPersistentReview.test.cjs"
+    ]
+  },
+  "91869203": {
+    "fingerprint": "c755d733ae29ea519bd519ba0f54ebba92146f159bd1315885f703f34d55869e",
+    "suites": [
+      "tests/mechanicalBatch7.test.cjs"
     ]
   },
   "91939608": {

@@ -1,0 +1,22 @@
+{
+  "mission": 7,
+  "baseCommit": "02405e4570d180a3aec002a1a4fcc672c69c39cd",
+  "branch": "feat/rea-engine-recovery-20261026",
+  "pr": 12,
+  "status": "candidate-requires-complete-CI",
+  "candidateEngine": "engine-v6",
+  "historicalEnginesPreserved": ["engine-v1","engine-v2","engine-v3","engine-v4","engine-v5"],
+  "candidateCertificatesBefore": 197,
+  "candidateCertificatesAfter": 203,
+  "newCards": ["43716289","45141844","77491079","91869203","69579761","83994646"],
+  "newCardsDistributionAuthorized": false,
+  "localSelectedPureTests": {"passed":156,"failed":0,"node":"24; source stripping, not TypeScript/native-dependency CI"},
+  "requiredCI": ".github/workflows/engine-validation.yml",
+  "individualReviews": "docs/evidence/mission7-individual-reviews.json",
+  "executionsArtifact": "artifacts/certification-executions-mission7.json",
+  "report": "docs/REA-MISSION-7.md",
+  "next": ["complete CI and resolve demonstrated failures","extend target/owner/restore/2v2/transaction regression of this cohort","evaluate next fully implementable family"],
+  "betaTargetPlayers": [20,50],
+  "betaCapacityCertified": false,
+  "forbidden": ["merge","deploy","production","distribution","historical resolver rewrites","unapproved Discord login"]
+}

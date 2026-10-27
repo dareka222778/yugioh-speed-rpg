@@ -345,6 +345,8 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
   if(op.kind==='heal')p.lp+=op.amount;
   else if(op.kind==='burn'){const other=s.players[1-pending.actor];other.lp=Math.max(0,other.lp-op.amount);checkLP(s);}
   else if(op.kind==='burnPerSpellTrap'){const other=s.players[1-pending.actor],count=other.backrow.length+(other.field?1:0);other.lp=Math.max(0,other.lp-op.amount*count);checkLP(s);}
+  else if(op.kind==='burnPerHand'){const other=s.players[1-pending.actor];other.lp=Math.max(0,other.lp-op.amount*other.hand.length);checkLP(s);}
+  else if(op.kind==='destroyByLevel'){const targets=s.players[1-pending.actor].monsters.filter(m=>m.faceUp&&card(m.id).level===op.level).map(m=>m.uid);for(const uid of targets)graveMonster(s,uid);}
   else if(op.kind==='draw'){
    drawCards(s,pending.actor,op.count,{finish,checkLP});
   }else if(op.kind==='destroy'||op.kind==='bounce'){

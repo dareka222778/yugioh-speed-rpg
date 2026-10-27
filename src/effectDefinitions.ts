@@ -1,3 +1,4 @@
+import {mechanicalBatch7} from './mechanicalBatch7';
 import {mechanicalEffects5} from './mechanicalBatch5';
 // Explicit executable definitions, independent from card admission.
 import type {ActivationModel} from './effectModels';
@@ -12,7 +13,7 @@ export type Effect=
  |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
 export const effectDefinitions:Record<string,Effect>={
- ...mechanicalEffects5,
+ ...mechanicalEffects5,...Object.fromEntries(mechanicalBatch7.map(c=>[c.id,{kind:'monsterEffect' as const}])),
  '76103675':{kind:'burn',amount:200},
  '46130346':{kind:'burn',amount:500},
  '20871001':{kind:'heal',amount:400},

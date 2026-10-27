@@ -45,6 +45,8 @@ export function cardRulesPT(id:string):string{
   else if(op.kind==='heal')result=`Ganhe ${op.amount} PV.`;
   else if(op.kind==='burn')result=`Cause ${op.amount} de dano de efeito ao oponente.`;
   else if(op.kind==='burnPerSpellTrap')result=`Na resolução, cause ${op.amount} de dano por Magia/Armadilha adversária, incluindo Campo e cartas baixadas.`;
+  else if(op.kind==='burnPerHand')result=`Na resolução, cause ${op.amount} de dano por carta na mão ativa adversária.`;
+  else if(op.kind==='destroyByLevel')result=`Na resolução, destrua os monstros adversários de nível ${op.level} com a face para cima, sem selecionar alvos.`;
   else if(op.kind==='directAttack')result='Pode atacar diretamente mesmo com monstros adversários; também pode escolher atacar um monstro. Não ganha ataques extras.';
   else if(op.kind==='destroy'||op.kind==='bounce')result=`Escolha 1 monstro ${op.target==='anyMonster'?'em qualquer campo':'no campo adversário'}, inclusive com a face para baixo; ${op.kind==='destroy'?'destrua-o':'devolva-o à mão do proprietário (Fusão volta ao Adicional)'}. O alvo deve continuar no campo na resolução; não escolha outro se ele sair.`;
   else if(op.kind==='recover')result=`Escolha 1 ${op.cardKind==='spell'?'Magia':'Armadilha'} no seu Cemitério; adicione-a à mão se ainda estiver lá na resolução.`;

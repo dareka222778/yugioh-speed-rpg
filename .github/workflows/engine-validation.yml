@@ -22,6 +22,7 @@ jobs:
       - run: npm test
       - run: node scripts/stamp-candidate-build.cjs
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission4-individual-reviews.json artifacts/certification-executions-mission4.json
+      - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission7-individual-reviews.json artifacts/certification-executions-mission7.json
       - run: node scripts/audit-normalization-blockers.cjs
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission5-individual-reviews.json artifacts/certification-executions-mission5.json
       - run: node scripts/stress-persisted-duels.cjs 50 4 --eager
@@ -71,6 +72,7 @@ jobs:
             artifacts/abrupt-recovery-mission6.json
             artifacts/mixed-version-soak-mission6.json
             artifacts/readiness-mission6.json
+            artifacts/certification-executions-mission7.json
           if-no-files-found: ignore
           retention-days: 14
       - name: Publicar prévias visuais
