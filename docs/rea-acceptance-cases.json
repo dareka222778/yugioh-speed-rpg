@@ -337,13 +337,13 @@
       "spec": "SPEC-07",
       "given": "Atualizar módulo de efeito com duelo antigo pendente",
       "expected": "Partida antiga mantém versão e comportamento fixados; carta nova usa novo certificado.",
-      "expectedGap": "Archived effect resolver selection is not implemented",
-      "coverage": "gap",
+      "expectedGap": null,
+      "coverage": "regression",
       "limitation": null,
       "checks": [
         {
-          "file": "tests/reaAcceptanceGaps.test.cjs",
-          "pattern": "REA-L02"
+          "file": "tests/resolverArchive.test.cjs",
+          "pattern": "REA-L02|archived replay|source closure"
         }
       ]
     },

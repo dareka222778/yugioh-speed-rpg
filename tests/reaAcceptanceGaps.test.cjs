@@ -21,6 +21,6 @@ test('REA-E01: shared physical operations expose both causal moves despite equal
  const after=structuredClone(before);beginCardMovementTrace(after,before);assert.equal(sendMonsterToGrave(after,c.uid),true);assert.ok(specialSummonFromPile(after,0,0,'grave',c.uid));assertDuelTransition(before,after);
  assert.deepEqual(transitionEvents(before,after).filter(event=>event.type==='cardMoved'&&event.uid===c.uid).map(move=>[move.from,move.to]),[['monsters','grave'],['grave','monsters']]);
 });
-test('REA-L02: pending snapshots select archived effect definitions after module upgrades',{todo:'Rules versions are supported, but an archive of effect resolvers is not implemented'},()=>{
- assert.equal(typeof require('../dist/effectRegistry').getArchivedDefinitionResolver,'function');
+test('REA-L02: pending snapshots have an explicit immutable archived executable resolver',()=>{
+ const resolver=require('../dist/resolverArchive').getArchivedDefinitionResolver('engine-v1');assert.equal(typeof resolver.step,'function');assert.equal(Object.isFrozen(resolver),true);
 });

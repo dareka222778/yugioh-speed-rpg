@@ -1,3 +1,5 @@
+import {resolverVersionFor} from './resolverArchive';
+import {assertDuelState as assertLegacyState} from './resolvers/v1/duelIntegrity';
 import {lifetimeZones} from './cardLifetime';
 import {teamReserveCards} from './teamRotation';
 import {economicOperationIssues} from './economicOperations';
@@ -18,6 +20,11 @@ const integer=(n:unknown,min=0)=>Number.isSafeInteger(n)&&Number(n)>=min;
 const actor=(n:unknown)=>n===0||n===1;
 export function duelCards(s:DuelState):CardRef[]{return s.players.flatMap(p=>[...p.deck,...p.hand,...p.monsters,...p.backrow,...p.grave,...p.extra??[],...p.banished??[],...p.field?[p.field]:[]]).concat(teamReserveCards(s));}
 export function assertDuelState(value:unknown):asserts value is DuelState{
+ if(!object(value))fail('estado ausente');
+ if(resolverVersionFor(value)==='engine-v1'){assertLegacyState(value);return;}
+ assertCurrentDuelState(value);
+}
+function assertCurrentDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');
  const s=value as any;
  if(!supportedRulesVersion(s.rulesVersion)||s.cardDefinitionsVersion!==undefined&&s.cardDefinitionsVersion!==CARD_DEFINITIONS_VERSION)fail('versão de regras ou definições incompatível');
@@ -102,6 +109,7 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
 }
 export function assertDuelTransition(before:DuelState,after:DuelState):void{
  assertDuelState(before);assertDuelState(after);
+ if(resolverVersionFor(before)!==resolverVersionFor(after))fail('resolvedor alterado durante ação');
  const refs=new Map(duelCards(before).map(c=>[c.uid,c.id]));
  const next=duelCards(after);
  if(next.length!==refs.size||next.some(c=>refs.get(c.uid)!==c.id))fail('uma carta foi perdida, duplicada ou transformada');

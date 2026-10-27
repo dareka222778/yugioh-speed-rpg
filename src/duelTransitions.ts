@@ -1,3 +1,5 @@
+import {resolverVersionFor} from './resolverArchive';
+import {transitionEvents as legacyTransitionEvents} from './resolvers/v1/duelTransitions';
 /** Structured before/after transition notifications, independent of translated logs.
  * These summarize committed state changes; they are not an atomic effect trace
  * or a replay tape. Replay uses state + action + persisted private RNG instead.
@@ -23,6 +25,7 @@ function inventory(s:DuelState){
  return cards;
 }
 export function transitionEvents(before:DuelState,after:DuelState):DuelTransitionEvent[]{
+ if(resolverVersionFor(before)==='engine-v1')return legacyTransitionEvents(before,after);
  const trace=cardMovementTrace(before,after),moved=new Set(trace?.map(move=>move.uid));
  const events:DuelTransitionEvent[]=[],old=inventory(before),next=inventory(after);
  for(const [i,p]of after.players.entries()){
