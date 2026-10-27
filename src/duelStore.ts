@@ -32,7 +32,7 @@ export const DECISION_TIMEOUT_MS=30*60_000;
 export const getDuel=db.transaction((id:string,now=Date.now()):DuelRecord=>{
  const record=read(id);if(!record)throw new Error('Duelo não encontrado.');
  const limit=record.status==='pending'?120_000:DECISION_TIMEOUT_MS;
- if(['pending','playing'].includes(record.status)&&now-record.updated>=limit){record.status=record.state?'finished':'expired';record.revision++;if(record.state)record.state=timeoutDuel(record.state);save(record);}
+ if(['pending','playing'].includes(record.status)&&now-record.updated>=limit){record.status=record.state?'finished':'expired';record.revision++;if(record.state){const before=record.state;record.state=timeoutDuel(before);record.events=transitionEvents(before,record.state);}save(record);if(record.events)db.prepare('INSERT INTO duel_transition_events(duel_id,revision,events_json) VALUES(?,?,?)').run(id,record.revision,JSON.stringify(record.events));}
  return record;
 });
 export function currentDuel(owner:string){const row=db.prepare('SELECT duel_id FROM duel_members WHERE owner=?').get(owner) as {duel_id:string}|undefined;if(!row)return;const duel=getDuel(row.duel_id);return ['pending','playing'].includes(duel.status)?duel:undefined;}

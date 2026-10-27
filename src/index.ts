@@ -1,9 +1,9 @@
+import 'dotenv/config';
 import {RULES_PROFILE,RULES_VERSION} from './rulesProfile';
 const RELEASE_VERSION:string=require('../package.json').version;
 import {createTagLobby,createTagTraining,runTagBots,currentTag,getTag,setTagMessage,markTagPublished,dueTags,type TagRecord} from './tagStore';
 import {visualTagPublic,visualTagPrivate,visualTagCard,tagZonesMessage,visualTagZoneCard,tagPublicMessage,tagPrivateMessage} from './tagUI';
 import {handleTagComponent} from './tagInteraction';
-import 'dotenv/config';
 import {simulateTag,tagSimulationMessage} from './tagSimulation';
 import {helpMessage} from './commandUI';
 import {renderOwnedCard} from './cardInspector';
