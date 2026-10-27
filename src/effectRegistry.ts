@@ -1,3 +1,4 @@
+import {currentCatalog} from './catalogContext';
 import {getTokenMetadata} from './tokens';
 import {presentedCard} from './cardPresentation';
 // Admission is separate from factual registration and executable definitions.
@@ -12,11 +13,12 @@ export type {Effect} from './effectDefinitions';
 export const engineCatalog:readonly Card[]=cardMetadata;
 const registry=buildCardRegistry(cardMetadata,effectDefinitions,cardCertifications,{monster:getMonsterDefinition,model:getEffectModel});
 const enabled=new Set(registry.enabled);
-export function getEffect(id:string):Effect|undefined{return registry.effects.get(id);}
-export function getCardStatus(id:string){return registry.statuses.get(id);}
-export function engineCard(id:string){return registry.metadata.get(id);}
-export function getPlayableCard(id:string){return enabled.has(id)?engineCard(id):undefined;}
+export function getEffect(id:string):Effect|undefined{return (currentCatalog()?.effects??registry.effects).get(id);}
+export function getCardStatus(id:string){return (currentCatalog()?.statuses??registry.statuses).get(id);}
+export function engineCard(id:string){return (currentCatalog()?.metadata??registry.metadata).get(id);}
+export function getPlayableCard(id:string){const c=currentCatalog();return (c?c.statuses.get(id)?.stage==='certified':enabled.has(id))?engineCard(id):undefined;}
 export const enabledCardIds:readonly string[]=registry.enabled;
+export function getEnabledCardIds():readonly string[]{return currentCatalog()?.enabled??enabledCardIds;}
 export function isQuickPlaySpell(id:string):boolean{
  const e=getEffect(id);return engineCard(id)?.kind==='spell'&&!!e&&getEffectModel(e.kind)?.activation.speed===2;
 }

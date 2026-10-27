@@ -21,9 +21,9 @@ for(const card of batch)test(`individual normal certification ${card.id}: ${card
  }
 });
 test('v3 is additive; v1/v2 retain exactly 130 certified cards and preserved pending rules',()=>{
- assert.equal(r.enabledCardIds.length,203);assert.equal(new Set(batch.map(c=>c.id)).size,20);
+ assert.equal(r.enabledCardIds.length,225);assert.equal(new Set(batch.map(c=>c.id)).size,20);
  for(const version of ['engine-v1','engine-v2']){const pinned=archive.getArchivedDefinitionResolver(version),s=pinned.createDuel([{id:'a',name:'A',cards:base},{id:'b',name:'B',cards:base}],()=>.5);assert.equal(pinned.IMPLEMENTED_DUEL_CARDS.length,130);assertDuelState(clone(s));const a=e.legalActions(s,'a')[0];assert.deepEqual(clone(e.step(clone(s),'a',a)),clone(pinned.step(clone(s),'a',a)));}
- assert.equal(game().resolverVersion,'engine-v6');
+ assert.equal(game().resolverVersion,'engine-v7');
 });
 for(const card of batch)test(`ownership and tribute recovery ${card.id}: ${card.englishName}`,()=>{
  function controlled(){let s=game();s.turn=3;const target=s.players[1].hand.shift();target.id=card.id;s.players[1].monsters=[{...target,owner:1,faceUp:true,position:'atk',entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0}];s.players[0].hand[0].id='04031928';s=act(s,'a','spell',a=>a.target===target.uid);assert.equal(s.players[0].monsters.find(m=>m.uid===target.uid).owner,1);return {s:clone(s),uid:target.uid};}

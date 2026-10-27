@@ -1,3 +1,6 @@
+import {mechanicalMonsters8} from './mechanicalBatch8';
+import {continuousRuleIssues,type ContinuousRule} from './continuousRules';
+import {currentCatalog} from './catalogContext';
 import {mechanicalMonsters7} from './mechanicalBatch7';
 import {mechanicalMonsters5} from './mechanicalBatch5';
 /** Audited, declarative classic monster effects.
@@ -7,6 +10,7 @@ import {mechanicalMonsters5} from './mechanicalBatch5';
 export type MonsterTrigger='quick'|'ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onBattleDestroyed'|'onSentToGrave'|'continuous';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard'|'tribute';count:number};
 export type MonsterOperation=
+ |{kind:'continuous';rules:readonly ContinuousRule[]}
  |{kind:'heal'|'burn'|'burnPerSpellTrap'|'burnPerHand';amount:number}
  |{kind:'destroyByLevel';level:number}
  |{kind:'draw';count:number}
@@ -38,6 +42,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...mechanicalMonsters8,
  ...mechanicalMonsters5,...mechanicalMonsters7,
  '40640057':{effect:{trigger:'quick',cost:{kind:'discard',count:1},operation:{kind:'battleShield'}},activation:{policy:'manual',window:'opposingDamageCalculation'}}, // Kuriboh, self-discard during opposing damage calculation
  '54652250':{effect:{trigger:'flip',operation:{kind:'destroy',target:'anyMonster'}},activation:{policy:'mandatory',window:'flip'}}, // Man-Eater Bug
@@ -52,8 +57,8 @@ const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freez
  '54098121':{effect:{trigger:'onOtherSummon',operation:{kind:'heal',amount:500}},activation:{policy:'mandatory',window:'summon'}}, // Mysterious Puppeteer
  '83011277':{effect:{trigger:'onBattleDestroyed',operation:{kind:'specialSummon',attribute:'DARK',maximumAtk:1500}},activation:{policy:'optional',window:'battleDestroyed'}} // Mystic Tomato
 });
-export function getMonsterDefinition(cardId:string):MonsterDefinition|undefined{return monsterDefinitions[cardId];}
-export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return monsterDefinitions[cardId]?.effect;}
+export function getMonsterDefinition(cardId:string):MonsterDefinition|undefined{return currentCatalog()?currentCatalog()!.data.monsters[cardId]:monsterDefinitions[cardId];}
+export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return getMonsterDefinition(cardId)?.effect;}
 
 /** Validate a selected monster instance against the offered legal target UIDs. */
 export function monsterDestructionTarget(effect:MonsterEffect,eligibleMonsterUids:readonly string[],targetUid:string):string{
@@ -66,15 +71,16 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  const {effect:e,activation:a}=value;
  if(!['mandatory','optional','manual','continuous'].includes(a.policy)||!['main','flip','summon','grave','battleDestroyed','opposingDamageCalculation','continuous'].includes(a.window))return ['invalid-monster-activation'];
  if(!['quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'].includes(e.trigger))return ['unsupported-monster-trigger'];
- if(!e.operation||!['heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack'].includes(e.operation.kind))return ['unsupported-monster-operation'];
+ if(!e.operation||!['heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack','continuous'].includes(e.operation.kind))return ['unsupported-monster-operation'];
  if((e.trigger==='quick'||e.trigger==='ignition')&&a.policy!=='manual'||e.trigger==='continuous'&&a.policy!=='continuous')return ['inconsistent-monster-policy'];
  const windows:Partial<Record<MonsterTrigger,MonsterActivation['window']>>={quick:'opposingDamageCalculation',ignition:'main',flip:'flip',onSummon:'summon',onOtherSummon:'summon',onSentToGrave:'grave',onBattleDestroyed:'battleDestroyed',continuous:'continuous'};
  if(windows[e.trigger]!==a.window)return ['inconsistent-monster-window'];
  const op=e.operation;
+ if(op.kind==='continuous')return e.trigger==='continuous'?continuousRuleIssues(op.rules):['invalid-continuous-trigger'];
  if(op.kind==='destroyByLevel'&&(!Number.isSafeInteger(op.level)||op.level<1||op.level>12))return ['invalid-monster-level'];
  if((op.kind==='destroy'||op.kind==='bounce')&&!['opponentMonster','anyMonster'].includes(op.target)||op.kind==='recover'&&!['spell','trap'].includes(op.cardKind))return ['invalid-monster-selector'];
  if(op.kind==='search'&&(!['atk','defense'].includes(op.stat)||!Number.isSafeInteger(op.maximum)||op.maximum<0)||op.kind==='specialSummon'&&(!Number.isSafeInteger(op.maximumAtk)||op.maximumAtk<0||!['DARK','LIGHT','EARTH','WIND','WATER','FIRE','DIVINE'].includes(op.attribute)))return ['invalid-deck-filter'];
- if(e.trigger==='quick'&&(op.kind!=='battleShield'||e.cost?.kind!=='discard'||e.cost.count!==1)||e.trigger==='continuous'&&!['negateTraps','directAttack'].includes(op.kind))return ['unsupported-monster-mechanic'];
+ if(e.trigger==='quick'&&(op.kind!=='battleShield'||e.cost?.kind!=='discard'||e.cost.count!==1)||e.trigger==='continuous'&&!['negateTraps','directAttack','continuous'].includes(op.kind))return ['unsupported-monster-mechanic'];
  if((a.policy==='mandatory'||a.policy==='optional')&&e.cost)return ['unsupported-trigger-cost'];
  if((op.kind==='heal'||op.kind==='burn'||op.kind==='burnPerSpellTrap'||op.kind==='burnPerHand')&&(!Number.isSafeInteger(op.amount)||op.amount<=0)||op.kind==='draw'&&(!Number.isSafeInteger(op.count)||op.count<=0))return ['invalid-monster-amount'];
  if(e.cost&&(e.cost.kind==='lp'?(!Number.isSafeInteger(e.cost.amount)||e.cost.amount<=0):!['tribute','discard'].includes(e.cost.kind)||!Number.isSafeInteger(e.cost.count)||e.cost.count<1))return ['invalid-monster-cost'];

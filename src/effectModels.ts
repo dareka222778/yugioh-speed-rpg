@@ -9,6 +9,7 @@ const main:ActivationModel={speed:1,window:'main',damage:'never'};
 const response=(window:ActivationModel['window']='free',damage:ActivationModel['damage']='never'):ActivationModel=>({speed:2,window,damage});
 const destroy=(scope:DestructionModel['scope'],extra:Partial<DestructionModel>={}):DestructionModel=>({operation:'destroyMonsters',scope,destination:'grave',...extra});
 const models:Partial<Record<Effect['kind'],SpellTrapModel>>={
+ temporaryModifier:{activation:response('free','beforeCalculation')},
  destroySpellTraps:{activation:main},
  darkHole:{activation:main,destruction:destroy('all')},
  raigeki:{activation:main,destruction:destroy('opponent')},
@@ -28,7 +29,7 @@ export function getDestructionModel(kind:Effect['kind']):DestructionModel|undefi
 
 /** Definitions with variable parameters carry their own activation policy. */
 export function getActivationModel(effect:Effect):ActivationModel|undefined{
- return effect.kind==='sequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
+ return effect.kind==='continuous'||effect.kind==='sequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
 }
 
 export function economicOperations(effect:Effect):readonly import('./economicOperations').EconomicOperation[]|undefined{

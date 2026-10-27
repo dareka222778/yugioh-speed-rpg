@@ -35,7 +35,8 @@ export function buildCardRegistry(catalog:readonly Card[],definitions:Readonly<R
    if(c.monsterType==='fusion'&&!c.fusion?.length||c.monsterType!=='fusion'&&c.fusion)issues.push('invalid-fusion-category');
   }
   if(!effect)issues.push('missing-definition');else issues.push(...effectDefinitionIssues(effect));
-  if(effect?.kind==='sequence'||effect?.kind==='attackResponse'){
+  if(effect?.kind==='continuous'){const a=effect.activation;if(!a||a.damage!=='never'||(c.kind==='trap'?(a.speed!==2||a.window!=='free'):(c.kind!=='spell'||a.speed!==1||a.window!=='main')))issues.push('unsupported-continuous-activation');}
+  else if(effect?.kind==='sequence'||effect?.kind==='attackResponse'){
    const a=effect.activation;
    if(!a||a.damage!=='never'||effect.kind==='sequence'&&(c.kind==='spell'&&(a.speed!==1||a.window!=='main')||c.kind==='trap'&&(a.speed!==2||a.window!=='free'))||effect.kind==='attackResponse'&&(c.kind!=='trap'||![2,3].includes(a.speed)||a.window!=='attackDeclared'||a.opponentOnly!==true))issues.push('unsupported-activation-policy');
   }else if(effect&&(c.kind==='spell'&&trapKinds.has(effect.kind)||c.kind==='trap'&&!trapKinds.has(effect.kind)))issues.push('incompatible-spell-trap-kind');

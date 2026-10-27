@@ -1,3 +1,4 @@
+import {mechanicalBatch8} from './mechanicalBatch8';
 import {mechanicalBatch7} from './mechanicalBatch7';
 import {mechanicalBatch5} from './mechanicalBatch5';
 import {historicalNormalBatch4} from './historicalNormalBatch4';
@@ -35,4 +36,4 @@ const supportedClassicSpells:Card[]=[
  {id:'05318639',konamiId:4909,name:'Tufão Espacial Místico',englishName:'Mystical Space Typhoon',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Magia Rápida: escolha 1 Magia/Armadilha no campo; destrua-a. Destruir não significa negar a ativação.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4909&request_locale=pt'},
  {id:'14087893',konamiId:5432,name:'Livro da Lua',englishName:'Book of Moon',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Magia Rápida: escolha 1 monstro com a face para cima no campo; coloque-o com a face para baixo em Posição de Defesa.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5432&request_locale=pt'}
 ];
-export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7];
+export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8];

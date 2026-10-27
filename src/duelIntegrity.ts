@@ -1,3 +1,5 @@
+import {assertContinuousState} from './continuousEffects';
+import {currentCatalog} from './catalogContext';
 import {getTokenMetadata,assertTokenLedger,assertTokenTransition} from './tokens';
 import {assertStandbyFlow} from './standbyFlow';
 import {resolverVersionFor,getArchivedDefinitionResolver} from './resolverArchive';
@@ -27,6 +29,8 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
 function assertCurrentDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');
  const s=value as any;
+ assertContinuousState(s);
+ if(s.resolverVersion==='engine-v7'&&(!/^[a-f0-9]{64}$/.test(s.catalogRevision??'')||currentCatalog()?.id!==s.catalogRevision))fail('revisão do catálogo');
  if(!supportedRulesVersion(s.rulesVersion)||s.cardDefinitionsVersion!==undefined&&s.cardDefinitionsVersion!==CARD_DEFINITIONS_VERSION)fail('versão de regras ou definições incompatível');
  if(s.random!==undefined)assertDuelRandom(s.random);
  if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');
@@ -111,6 +115,7 @@ function assertCurrentDuelState(value:unknown):asserts value is DuelState{
  }
 }
 export function assertDuelTransition(before:DuelState,after:DuelState):void{
+ if(before.catalogRevision!==after.catalogRevision)fail('revisão do catálogo alterada durante a partida');
  assertDuelState(before);assertDuelState(after);
  if(resolverVersionFor(before)!==resolverVersionFor(after))fail('resolvedor alterado durante ação');
  const refs=new Map(duelCards(before).filter(c=>c.entityKind!=='token').map(c=>[c.uid,c.id]));

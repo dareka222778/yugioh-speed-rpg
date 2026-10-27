@@ -1,3 +1,5 @@
+import {mechanicalEffects8} from './mechanicalBatch8';
+import {continuousRuleIssues,countFormulaIssues,type ContinuousRule,type CountFormula} from './continuousRules';
 import {mechanicalBatch7} from './mechanicalBatch7';
 import {mechanicalEffects5} from './mechanicalBatch5';
 // Explicit executable definitions, independent from card admission.
@@ -5,14 +7,17 @@ import type {ActivationModel} from './effectModels';
 import type {EconomicOperation} from './economicOperations';
 import {economicOperationIssues} from './economicOperations';
 export type Effect=
+ |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number}
+ |{kind:'temporaryModifier';atk:number;def:number}
  |{kind:'destroySpellTraps';scope:'all'|'opponent'}
  |{kind:'sequence';activation:ActivationModel;operations:readonly EconomicOperation[]}
  |{kind:'attackResponse';activation:ActivationModel;endBattle:boolean;reflectAttack:boolean}
  |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'bottomlessTrapHole'|'sakuretsuArmor'|'mirrorForce'}
  |{kind:'heal'|'burn';amount:number}
- |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
- |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
+ |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[]}
+ |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number;count?:CountFormula};
 export const effectDefinitions:Record<string,Effect>={
+ ...mechanicalEffects8,
  ...mechanicalEffects5,...Object.fromEntries(mechanicalBatch7.map(c=>[c.id,{kind:'monsterEffect' as const}])),
  '76103675':{kind:'burn',amount:200},
  '46130346':{kind:'burn',amount:500},
@@ -65,6 +70,8 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='continuous')return [...continuousRuleIssues(e.rules),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
+ if(e?.kind==='temporaryModifier')return Number.isSafeInteger(e.atk)&&Number.isSafeInteger(e.def)?[]:['invalid-temporary-modifier'];
  if(e?.kind==='destroySpellTraps')return ['all','opponent'].includes(e.scope)?[]:['invalid-spell-trap-scope'];
  if(!e||typeof e!=='object'||!executableKinds.has(e.kind))return ['unknown-effect-operation'];
  if(e.kind==='sequence')return economicOperationIssues(e.operations);
@@ -75,7 +82,9 @@ export function effectDefinitionIssues(value:unknown):string[]{
   if(e.races!==undefined&&(!Array.isArray(e.races)||e.races.some(x=>typeof x!=='string'||!x)))return ['invalid-race-filter'];
   if(e.kind==='equip'&&e.attribute!==undefined&&(typeof e.attribute!=='string'||!e.attribute))return ['invalid-attribute-filter'];
   if(e.kind==='field'&&e.penaltyRaces!==undefined&&(!Array.isArray(e.penaltyRaces)||e.penaltyRaces.some(x=>typeof x!=='string'||!x)))return ['invalid-penalty-filter'];
-  if(e.kind==='field'&&!e.races?.length)return ['missing-field-filter'];
+  if(e.kind==='equip'&&e.count&&countFormulaIssues(e.count).length)return ['invalid-count-formula'];
+  if(e.kind==='field'&&e.attributes!==undefined&&(!Array.isArray(e.attributes)||e.attributes.some(x=>!['EARTH','WIND','FIRE','WATER','DARK','LIGHT','DIVINE'].includes(x))))return ['invalid-attribute-filter'];
+  if(e.kind==='field'&&!e.races?.length&&!e.attributes?.length)return ['missing-field-filter'];
  }
  return [];
 }
