@@ -1,0 +1,15 @@
+const {test,after}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const temp=fs.mkdtempSync(path.join(os.tmpdir(),'tag-terminal-'));process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
+const {db,createPlayer}=require('../dist/database'),store=require('../dist/tagStore'),tag=require('../dist/tagDuel');
+let serial=0;function start(){const ids=[0,1,2,3].map(i=>'terminal-'+(++serial)+'-'+i);ids.forEach(id=>createPlayer(id,id));let r=store.createTagLobby(ids,'g','c');for(const id of ids.slice(1))r=store.acceptTag(r.id,id,'g',r.revision);return r;}
+const economy=()=>JSON.stringify({players:db.prepare('SELECT * FROM players ORDER BY discord_id').all(),cards:db.prepare('SELECT * FROM player_cards ORDER BY discord_id,card_key').all()});
+for(const kind of ['concede','timeout'])test(`terminal 2v2 ${kind} journals atomically, retries once, releases locks without rewards`,()=>{
+ const before=start(),actor=tag.tagDecisionMember(before.state).id,balances=economy();store.setTagMessage(before.id,'test-publication');
+ const finish=()=>kind==='concede'?store.quitTag(before.id,actor,'g',before.revision):store.getTag(before.id,before.updated+31*60000);
+ db.exec("CREATE TRIGGER fail_terminal BEFORE INSERT ON tag_transition_events BEGIN SELECT RAISE(ABORT,'terminal journal failure'); END");
+ try{assert.throws(finish,/terminal journal failure/);assert.equal(store.getTag(before.id).revision,before.revision);assert.deepEqual(store.getTag(before.id).state,before.state);assert.equal(db.prepare('SELECT COUNT(*) AS n FROM tag_members WHERE session_id=?').get(before.id).n,4);assert.deepEqual(store.tagEventsAt(before.id,before.revision+1),[]);}finally{db.exec('DROP TRIGGER fail_terminal');}
+ const done=finish();assert.equal(done.status,'finished');assert.equal(done.revision,before.revision+1);const events=store.tagEventsAt(done.id,done.revision);assert.equal(events.filter(e=>e.type==='duelFinished').length,1);assert.deepEqual(events,done.events);assert.equal(db.prepare('SELECT COUNT(*) AS n FROM tag_members WHERE session_id=?').get(done.id).n,0);assert.equal(economy(),balances);
+ assert.equal(store.getTag(done.id,before.updated+32*60000).revision,done.revision);assert.equal(db.prepare('SELECT COUNT(*) AS n FROM tag_transition_events WHERE session_id=?').get(done.id).n,1);assert.ok(store.dueTags().some(r=>r.id===done.id));store.markTagPublished(done.id,before.revision);assert.ok(store.dueTags().some(r=>r.id===done.id));store.markTagPublished(done.id,done.revision);assert.ok(!store.dueTags().some(r=>r.id===done.id));
+});
+test('cancelled lobby has no fabricated duel-result event',()=>{const ids=['cancel-a','cancel-b','cancel-c','cancel-d'];ids.forEach(id=>createPlayer(id,id));const r=store.createTagLobby(ids,'g','c'),cancelled=store.quitTag(r.id,ids[0],'g',r.revision);assert.equal(cancelled.status,'cancelled');assert.deepEqual(store.tagEventsAt(r.id,cancelled.revision),[]);});
+after(()=>{db.close();fs.rmSync(temp,{recursive:true,force:true});});
