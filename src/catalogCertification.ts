@@ -1,5 +1,6 @@
 /** Offline factual normalization and evidence gates. Never admits or distributes cards. */
 import type {Card} from './cardCatalog';
+import {definitionFingerprint} from './cardRegistry';
 export const NORMAL_SCENARIOS=['identity','normal-summon','set','destroy','temporary-control','tribute-owner','json-restore','zone-capacity'] as const;
 const races:Record<string,string>={aqua:'Aqua',beast:'Beast',beastwarrior:'Beast-Warrior',dinosaur:'Dinosaur',dragon:'Dragon',fairy:'Fairy',fiend:'Fiend',fish:'Fish',insect:'Insect',machine:'Machine',plant:'Plant',pyro:'Pyro',reptile:'Reptile',rock:'Rock',seaserpent:'Sea Serpent',spellcaster:'Spellcaster',thunder:'Thunder',warrior:'Warrior',wingedbeast:'Winged Beast',zombie:'Zombie'};
 const attributes=new Set(['DARK','LIGHT','EARTH','WATER','FIRE','WIND','DIVINE']);
@@ -49,13 +50,16 @@ export function planHistoricalCatalog(inputs:readonly unknown[],options:{cutoff:
   const rs=reviewIndex.get(id??'')??[],review=rs.length===1?rs[0]:undefined;if(rs.length>1)issues.push('duplicate-review');
   const primary=review?.primaryFacts,card=row.card;
   const reviewed=!!card&&!!review&&!!review.reviewer?.trim()&&validCatalogDate(review.reviewedAt)&&review.canonicalId===row.canonicalId&&review.konamiId===card.konamiId&&review.identityApproved===true&&review.mechanicsApproved===true&&review.primarySource===card.source&&!!primary&&primary.level===card.level&&primary.atk===card.atk&&primary.defense===card.defense&&primary.race===card.race&&primary.attribute===card.attribute&&validCatalogDate(primary.ocgDate)&&primary.ocgDate===row.dates.ocg&&!!admission&&review.mechanicalFingerprint===admission.fingerprint;
-  const regionVerified=reviewed&&(options.region==='ocg'||options.region==='world'||validCatalogDate(review?.tcgDate)&&review?.tcgDate===row.dates.tcg&&typeof review.tcgSource==='string'&&review.tcgSource.startsWith('https://www.db.yugioh-card.com/'));
+  const tcgVerified=!!review&&validCatalogDate(review.tcgDate)&&review.tcgDate===row.dates.tcg&&review.tcgDate<=options.cutoff&&typeof review.tcgSource==='string'&&review.tcgSource.startsWith('https://www.db.yugioh-card.com/');
+  const ocgVerified=!!primary&&validCatalogDate(primary.ocgDate)&&primary.ocgDate<=options.cutoff;
+  const regionVerified=reviewed&&(options.region==='ocg'?ocgVerified:options.region==='tcg'?tcgVerified:ocgVerified||tcgVerified);
   const dependency=admission?.family??row.family,implemented=!!admission,requirements=row.family==='normal-monster'?[...NORMAL_SCENARIOS]:['individual-mechanical-scenarios-required'];
   const es=executionIndex.get(id??'')??[],execution=es.length===1?es[0]:undefined;
   const tested=!!admission&&!!execution&&execution.fingerprint===admission.fingerprint&&execution.failed.length===0&&requirements.every(s=>execution.passed.includes(s));
   const normalized=!!row.card&&!issues.some(s=>s!=='regional-date-not-recovered'&&s!=='outside-cutoff');
-  const ready=normalized&&eligible&&implemented&&reviewed&&regionVerified&&tested;
-  return {id,canonicalId:row.canonicalId??null,family:dependency,cataloged:true,normalized,eligible,implemented,tested,individualReview:reviewed,regionVerified,certified:!!admission?.certified,distributionAuthorized:!!admission?.certified&&!!admission?.distributionAuthorized,readyForIndividualCertification:ready,issues,missingMechanics:implemented?[]:row.family==='normal-monster'?['normal-adapter-admission']:['curated-effect-definition',...(raw?.mechanics??[])],scenarioPlan:requirements,card:row.card};
+  const factsMatchImplementation=row.family!=='normal-monster'||!!card&&!!admission&&definitionFingerprint(card,{kind:'normal'},{})===admission.fingerprint;
+  const ready=normalized&&eligible&&implemented&&reviewed&&regionVerified&&tested&&factsMatchImplementation;
+  return {id,canonicalId:row.canonicalId??null,family:dependency,cataloged:true,normalized,eligible,implemented,tested,individualReview:reviewed,regionVerified,factsMatchImplementation,certified:!!admission?.certified,distributionAuthorized:!!admission?.certified&&!!admission?.distributionAuthorized,readyForIndividualCertification:ready,issues,missingMechanics:implemented?[]:row.family==='normal-monster'?['normal-adapter-admission']:['curated-effect-definition',...(raw?.mechanics??[])],scenarioPlan:requirements,card:row.card};
  });
  const families:Record<string,{cataloged:number;normalized:number;implemented:number;tested:number;certified:number;distributionAuthorized:number}>=Object.create(null);for(const row of plan){const f=families[row.family]??={cataloged:0,normalized:0,implemented:0,tested:0,certified:0,distributionAuthorized:0};for(const stage of Object.keys(f) as (keyof typeof f)[])if(row[stage])f[stage]++;}
  return {kind:'read-only-historical-certification-pipeline',region:options.region,cutoff:options.cutoff,enablesCards:false,grantsInventory:false,automation:{unit:'candidate-card',candidates:plan.length,normalized:plan.filter(r=>r.normalized).length,scenarioPlans:plan.filter(r=>r.normalized&&r.family==='normal-monster').length,individualApprovalsRequired:plan.length,automaticCertifications:0},families,plan};
