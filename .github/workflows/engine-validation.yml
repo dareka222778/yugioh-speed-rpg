@@ -29,6 +29,9 @@ jobs:
       - run: node scripts/stress-persisted-duels.cjs 50 4
       - run: node scripts/stress-persisted-duels.cjs 50 2
       - run: node scripts/stress-persisted-duels.cjs 100 2
+      - run: node scripts/stress-persisted-duels.cjs 8 2 --mixed
+      - run: node scripts/stress-persisted-duels.cjs 16 2 --mixed
+      - run: node scripts/audit-mission7-beta.cjs
       - run: node scripts/stress-persisted-duels.cjs 50 2 --mixed
       - run: node scripts/stress-persisted-duels.cjs 100 2 --mixed
       - run: node --expose-gc scripts/soak-mixed-versions.cjs 120
@@ -73,6 +76,7 @@ jobs:
             artifacts/mixed-version-soak-mission6.json
             artifacts/readiness-mission6.json
             artifacts/certification-executions-mission7.json
+            artifacts/beta-simulation-mission7.json
           if-no-files-found: ignore
           retention-days: 14
       - name: Publicar prévias visuais

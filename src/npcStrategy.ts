@@ -25,6 +25,9 @@ function flipUtility(s:DuelState,id:string,cardId:string){
  if(action.kind==='recover')return p.grave.some(c=>getCard(c.id)?.kind===action.cardKind)?20:0;
  if(action.kind==='draw')return p.deck.length>=action.count?18:0;
  if(action.kind==='burnPerSpellTrap')return (op.backrow.length+Number(!!op.field))*action.amount/40;
+ if(action.kind==='burn')return action.amount/40;
+ if(action.kind==='burnPerHand')return op.hand.length*action.amount/40;
+ if(action.kind==='destroyByLevel')return op.monsters.filter(m=>m.faceUp&&getCard(m.id)?.level===action.level).length*25;
  return 0;
 }
 export function tacticalSummon(s:DuelState,id:string,actions:Action[]):Action|undefined{

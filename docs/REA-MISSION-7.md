@@ -35,6 +35,12 @@ Na primeira execução local, dois testes esperavam a continuação antiga monst
 
 ## Próximas unidades e limites
 
+O primeiro CI executou 993 testes: 972 passaram e 21 falharam. A tipagem passou, mas as listas de versões aceitas em fichas e Espera não incluíam v6. A correção foi feita somente nos helpers correntes e na candidata v6 ainda não homologada, com hashes atualizados; v1–v5 não foram editadas. Três expectativas de contagem e uma expectativa de versão corrente também estavam desatualizadas. A seleção local posterior de 105 testes afetados passou; a suite tagClassic completa depende de Sharp indisponível localmente e deve passar no CI, sem desabilitá-la.
+
+Foram adicionadas sete regressões cruzadas, três de decisão NPC e testes SQLite de rollback/recibo/retomada do efeito com dois Tributos. O NPC considera dano FLIP e vítimas reveladas por nível sem consultar identidades ocultas. Uma fixture 2v2 construída pelo construtor arquivado v5, sem rebatizar v6, verifica replay completo e convivência SQLite com uma partida v6.
+
+As cargas adicionais de oito e 16 sessões correspondem a **24 e 48 participantes simulados**, respectivamente. Os relatórios incluem a contagem de pessoas distintas; isso não é login de pessoas reais nem prova de capacidade do host. O cenário menor exercita cinco versões e o maior seis. Os JSON são consolidados por `audit-mission7-beta.cjs`, sem autorização automática de disponibilidade ou lançamento.
+
 Avançar com regressões cruzadas de alvos, dono/controlador, escolhas/restauração, 2v2 e falhas transacionais do lote; depois avaliar outra família integralmente suportável. Dark Mimic LV1 permanece bloqueada: seu efeito adicional de evolução na Espera exige integração completa antes da certificação; não implementar apenas a compra FLIP.
 
 O beta pretendido é de 20–50 jogadores, não 20–50 duelos nem uma capacidade já homologada. A homologação real exige o ambiente e autorizações do roteiro da Missão 6. Amostras headless/SQLite não comprovam Gateway, rate limits, publicação ou RAM conjunta do host. Não fazer login, distribuição, merge ou deploy automaticamente.
