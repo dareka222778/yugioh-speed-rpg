@@ -151,6 +151,10 @@
         {
           "file": "tests/cardLifetime.test.cjs",
           "pattern": "REA-I02"
+        },
+        {
+          "file": "tests/targetLifetimeRecovery.test.cjs",
+          "pattern": ".*"
         }
       ]
     },
@@ -280,6 +284,10 @@
         {
           "file": "tests/tagRecovery.test.cjs",
           "pattern": "REA-R01"
+        },
+        {
+          "file": "tests/tagJournal.test.cjs",
+          "pattern": ".*"
         }
       ]
     },
@@ -308,8 +316,8 @@
       "given": "Snapshot aponta definição/continuação desconhecida",
       "expected": "Quarentena e razão explícita; original preservado; sem fallback silencioso.",
       "expectedGap": null,
-      "coverage": "partial",
-      "limitation": "Read-only quarantine inspection exposes reasons and preserves raw rows; no administrative repair UI.",
+      "coverage": "regression",
+      "limitation": "Read-only inspection reports incompatible saves and hashes without automatic repair.",
       "checks": [
         {
           "file": "tests/duelIntegrity.test.cjs",
@@ -322,6 +330,10 @@
         {
           "file": "tests/duelRecovery.test.cjs",
           "pattern": "REA-R03"
+        },
+        {
+          "file": "tests/snapshotInspection.test.cjs",
+          "pattern": ".*"
         }
       ]
     },
@@ -365,8 +377,8 @@
       "given": "Nome PT ausente com identidade e efeito certificados",
       "expected": "Fallback aprovado; mesma identidade/efeito/posse; sem desabilitar engine por idioma.",
       "expectedGap": null,
-      "coverage": "partial",
-      "limitation": "Mechanical admission is independent of translated text; presentation fallback is covered only by existing historical-import policy.",
+      "coverage": "regression",
+      "limitation": "Presentation uses Portuguese, English or explicit identity fallback; certification and availability are independent.",
       "checks": [
         {
           "file": "tests/certificationBatch.test.cjs",
@@ -375,6 +387,10 @@
         {
           "file": "tests/historicalImport.test.cjs",
           "pattern": "deduplicates editions"
+        },
+        {
+          "file": "tests/presentationFallback.test.cjs",
+          "pattern": ".*"
         }
       ]
     },

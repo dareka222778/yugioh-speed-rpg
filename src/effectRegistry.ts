@@ -1,4 +1,5 @@
 import {getTokenMetadata} from './tokens';
+import {presentedCard} from './cardPresentation';
 // Admission is separate from factual registration and executable definitions.
 import type {Card} from './cardCatalog';
 import {cardMetadata} from './cardMetadata';
@@ -22,4 +23,4 @@ export function isQuickPlaySpell(id:string):boolean{
 export function equipEligible(effect:Extract<Effect,{kind:'equip'}>,monster:Card){return (!effect.races||effect.races.includes(monster.race??''))&&(!effect.attribute||effect.attribute===monster.attribute);}
 
 /** Duel-only metadata never admits a token to decks, certificates or inventory. */
-export function getDuelCard(id:string){return getPlayableCard(id)??getTokenMetadata(id);}
+export function getDuelCard(id:string){const card=getPlayableCard(id)??getTokenMetadata(id);return card?presentedCard(card):undefined;}

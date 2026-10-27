@@ -14,14 +14,15 @@ export function cardMovementTrace(before:DuelState,after:DuelState):readonly Phy
  * and returning does. Metadata is optional for pre-existing saved duels. */
 export function synchronizeCardLifetimes(s:DuelState):void{
  const lifetimes=s.cardLifetimes??={};
- for(const p of s.players)for(const zone of lifetimeZones){
-  const cards=zone==='field'?(p.field?[p.field]:[]):p[zone]??[];
+ const pools=s.players.flatMap(p=>lifetimeZones.map(zone=>({player:p.id,zone,cards:zone==='field'?(p.field?[p.field]:[]):p[zone]??[]})));
+ for(const [seat,held]of Object.entries(s.teamRotation?.reserves??{}))for(const zone of ['hand','deck','extra'] as const)pools.push({player:s.players[Number(seat)%2].id,zone,cards:held[zone]});
+ for(const {player,zone,cards}of pools){
   for(const card of cards){
    const previous=Object.hasOwn(lifetimes,card.uid)?lifetimes[card.uid]:undefined;
    if(!previous||previous.zone!==zone){
     const epoch=previous?previous.epoch+1:0;if(!Number.isSafeInteger(epoch))throw new Error('Limite de identidade de zona excedido.');
     if(previous){const visible=zone==='grave'||zone==='banished'||['monsters','backrow','field'].includes(zone)&&'faceUp' in card&&card.faceUp===true;
-     traces.get(s)?.moves.push({type:'cardMoved',player:p.id,uid:card.uid,cardId:card.id,from:previous.zone,to:zone,...visible?{visibility:'public'}:{visibility:'private',player:p.id}});
+     traces.get(s)?.moves.push({type:'cardMoved',player,uid:card.uid,cardId:card.id,from:previous.zone,to:zone,...visible?{visibility:'public'}:{visibility:'private',player}});
     }
     Object.defineProperty(lifetimes,card.uid,{value:{zone,epoch},enumerable:true,writable:true,configurable:true});
    }
@@ -30,7 +31,7 @@ export function synchronizeCardLifetimes(s:DuelState):void{
 }
 export function bindTarget(s:DuelState,uid:string|undefined):TargetBinding|undefined{
  if(!uid)return;synchronizeCardLifetimes(s);
- if(!s.players.some(p=>lifetimeZones.some(zone=>(zone==='field'?(p.field?[p.field]:[]):p[zone]??[]).some(c=>c.uid===uid))))return;
+ if(!s.players.some(p=>lifetimeZones.some(zone=>(zone==='field'?(p.field?[p.field]:[]):p[zone]??[]).some(c=>c.uid===uid)))&&!Object.values(s.teamRotation?.reserves??{}).some(h=>[...h.hand,...h.deck,...h.extra].some(c=>c.uid===uid)))return;
  const entry=Object.hasOwn(s.cardLifetimes!,uid)?s.cardLifetimes![uid]:undefined;
  return entry?{uid,...entry}:undefined;
 }

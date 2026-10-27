@@ -25,6 +25,7 @@ function inventory(s:DuelState){
   const list=zone==='field'?p.field?[p.field]:[]:p[zone]??[];
   for(const card of list){const visible=['grave','banished'].includes(zone)||['monsters','backrow','field'].includes(zone)&&'faceUp' in card&&card.faceUp===true;cards.set(card.uid,{card,zone,player:p.id,public:visible});}
  }
+ for(const [seat,held]of Object.entries(s.teamRotation?.reserves??{}))for(const zone of ['hand','deck','extra'] as const)for(const card of held[zone])cards.set(card.uid,{card,zone,player:s.players[Number(seat)%2].id,public:false});
  return cards;
 }
 export function transitionEvents(before:DuelState,after:DuelState):DuelTransitionEvent[]{

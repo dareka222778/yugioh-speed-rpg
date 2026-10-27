@@ -1,4 +1,5 @@
 import {getTokenMetadata} from './tokens';
+import {presentedCard} from './cardPresentation';
 import {renderCommandHeader} from './commandHeader';
 import {cardRulesPT,racePT,attributePT} from './cardText';
 import {ActionRowBuilder,AttachmentBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
@@ -13,13 +14,13 @@ import {getMonsterEffect} from './monsterEffects';
 export const PAGE_SIZE=6;
 const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const byId=new Map(cards.map(c=>[c.id,c]));
-export function getCard(id:string): Card|undefined {return byId.get(id)??getTokenMetadata(id);}
+export function getCard(id:string): Card|undefined {const card=byId.get(id)??getTokenMetadata(id);return card?presentedCard(card):undefined;}
 export function searchCards(query:string): Card[] {
   const q=normalize(query);
-  return cards.filter(c=>c.id.includes(q)||normalize(c.name).includes(q)||normalize(c.englishName).includes(q)).sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));
+  return cards.map(presentedCard).filter(c=>c.id.includes(q)||normalize(c.name).includes(q)||normalize(c.englishName??'').includes(q)).sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));
 }
 export function exactCard(query:string): Card|undefined {
-  return cards.find(c=>c.id===query.trim()||normalize(c.name)===normalize(query)||normalize(c.englishName)===normalize(query));
+  return cards.map(presentedCard).find(c=>c.id===query.trim()||normalize(c.name)===normalize(query)||normalize(c.englishName??'')===normalize(query));
 }
 const attributes=attributePT;
 const races=racePT;

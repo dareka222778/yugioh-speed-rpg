@@ -49,7 +49,7 @@ export function stepTagDuel(input:TagDuel,member:string,action:Action):TagDuel{
   if(s.active[t]!==incoming){const p=s.core.players[t];s.reserves[s.active[t]]={deck:p.deck,hand:p.hand};const next=s.reserves[incoming];p.deck=next.deck;p.hand=next.hand;delete s.reserves[incoming];s.active[t]=incoming;}
   // Cursor advances only after the outgoing member finishes any End Phase discard.
  }
- s.core=step(s.core,teamId(team),action);if(s.mode==='tag-normal-lab'&&s.core.turn>input.core.turn)s.cursor=(input.cursor+1)%4;if(s.core.teamRotation){s.cursor=s.core.teamRotation.cursor;s.active=s.core.teamRotation.active;s.reserves=s.core.teamRotation.reserves;}assertTagDuel(s);const after=tagInventory(s).filter(c=>c.entityKind!=='token');
+ s.core=step(s.mode==='tag-classic'?input.core:s.core,teamId(team),action);if(s.mode==='tag-normal-lab'&&s.core.turn>input.core.turn)s.cursor=(input.cursor+1)%4;if(s.core.teamRotation){s.cursor=s.core.teamRotation.cursor;s.active=s.core.teamRotation.active;s.reserves=s.core.teamRotation.reserves;}assertTagDuel(s);const after=tagInventory(s).filter(c=>c.entityKind!=='token');
  if(after.length!==before.size||after.some(c=>before.get(c.uid)!==c.id))throw Error('Falha de conservação 2v2.');return s;
 }
 export function timeoutTagDuel(input:TagDuel){assertTagDuel(input);const s=structuredClone(input);s.core=timeoutDuel(s.core);assertTagDuel(s);return s;}

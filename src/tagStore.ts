@@ -1,3 +1,4 @@
+import {transitionEvents,type DuelTransitionEvent} from './duelTransitions';
 import {findActionReceipt,saveActionReceipt,type ActionReceipt} from './actionReceipts';
 import {npcs,getNPC} from './npcContent';
 import {step,decisionPlayer} from './duelEngine';
@@ -6,12 +7,20 @@ import {db,getPlayer} from './database';
 import {currentDuel,activeCards,chooseNPC,DECISION_TIMEOUT_MS} from './duelStore';
 import {createTagDuel,assertTagDuel,stepTagDuel,tagActions,tagNormalCardIds,timeoutTagDuel,tagDecisionMember,type TagDuel} from './tagDuel';
 import {getPlayableCard} from './effectRegistry';
-export type TagRecord={receipt?:ActionReceipt;id:string;guild:string;channel:string;message:string|null;revision:number;updated:number;status:'lobby'|'playing'|'finished'|'cancelled'|'expired';members:{id:string;name:string;accepted:boolean;automated?:boolean;deckSource?:string;cards?:string[];extra?:string[]}[];state:TagDuel|null;public_revision?:number;rules?:'normal'|'classic-loan'|'classic-owned'};
+export type TagRecord={events?:DuelTransitionEvent[];receipt?:ActionReceipt;id:string;guild:string;channel:string;message:string|null;revision:number;updated:number;status:'lobby'|'playing'|'finished'|'cancelled'|'expired';members:{id:string;name:string;accepted:boolean;automated?:boolean;deckSource?:string;cards?:string[];extra?:string[]}[];state:TagDuel|null;public_revision?:number;rules?:'normal'|'classic-loan'|'classic-owned'};
 db.exec(`CREATE TABLE IF NOT EXISTS tag_sessions(id TEXT PRIMARY KEY,guild TEXT NOT NULL,channel TEXT NOT NULL,message TEXT,revision INTEGER NOT NULL,updated INTEGER NOT NULL,status TEXT NOT NULL,members TEXT NOT NULL,state TEXT);
 CREATE TABLE IF NOT EXISTS tag_members(owner TEXT PRIMARY KEY,session_id TEXT NOT NULL REFERENCES tag_sessions(id));`);
 db.exec(`CREATE TABLE IF NOT EXISTS tag_action_receipts (
  request_id TEXT PRIMARY KEY,duel_id TEXT NOT NULL REFERENCES tag_sessions(id),actor TEXT NOT NULL,
  guild_id TEXT NOT NULL,expected_revision INTEGER NOT NULL,action_json TEXT NOT NULL,committed_revision INTEGER NOT NULL);`);
+db.exec(`CREATE TABLE IF NOT EXISTS tag_transition_events(session_id TEXT NOT NULL REFERENCES tag_sessions(id),revision INTEGER NOT NULL,events_json TEXT NOT NULL,PRIMARY KEY(session_id,revision));`);
+function tagTransitionEvents(before:TagDuel,after:TagDuel):DuelTransitionEvent[]{return transitionEvents(before.core,after.core).map(event=>{
+ if(event.visibility!=='private')return event;
+ const uid='uid' in event?event.uid:undefined,seat=uid?/^m([0-3]):/.exec(uid):undefined;
+ const team=after.core.players.findIndex(p=>p.id===event.player),member=seat?Number(seat[1]):after.active[team];
+ if(!after.members[member])throw new Error('Destinatário privado de evento inválido.');return {...event,player:after.members[member].id};
+});}
+export function tagEventsAt(id:string,revision:number):DuelTransitionEvent[]{const row=db.prepare('SELECT events_json FROM tag_transition_events WHERE session_id=? AND revision=?').get(id,revision) as {events_json:string}|undefined;return row?JSON.parse(row.events_json):[];}
 const columns=new Set((db.prepare('PRAGMA table_info(tag_sessions)').all() as {name:string}[]).map(c=>c.name));if(!columns.has('public_revision'))db.exec('ALTER TABLE tag_sessions ADD COLUMN public_revision INTEGER NOT NULL DEFAULT -1');
 if(!columns.has('rules'))db.exec("ALTER TABLE tag_sessions ADD COLUMN rules TEXT NOT NULL DEFAULT 'normal'");
 const LOBBY_MS=5*60_000;
@@ -36,7 +45,7 @@ export const acceptTag=db.transaction((id:string,actor:string,guild:string,revis
 export const actTag=db.transaction((id:string,actor:string,guild:string,revision:number,index:number,requestId?:string)=>{
  const request={id,actor,guild,expected:revision,action:index,requestId},receipt=findActionReceipt('tag',request);
  if(receipt){const current=read(id);authorize(current,actor,guild);return {...current,receipt};}
- const r=getTag(id);authorize(r,actor,guild);if(r.status!=='playing'||!r.state||r.revision!==revision)throw Error('Painel desatualizado. Atualize antes de jogar.');const actions=tagActions(r.state,actor);if(!Number.isSafeInteger(index)||index<0||index>=actions.length)throw Error('Jogada indisponível.');r.state=stepTagDuel(r.state,actor,actions[index]);r.revision++;r.updated=Date.now();if(r.state.core.phase==='finished')r.status='finished';save(r);if(requestId)r.receipt=saveActionReceipt('tag',request,r.revision);return r;});
+ const r=getTag(id);authorize(r,actor,guild);if(r.status!=='playing'||!r.state||r.revision!==revision)throw Error('Painel desatualizado. Atualize antes de jogar.');const actions=tagActions(r.state,actor);if(!Number.isSafeInteger(index)||index<0||index>=actions.length)throw Error('Jogada indisponível.');const before=r.state;r.state=stepTagDuel(before,actor,actions[index]);r.events=tagTransitionEvents(before,r.state);r.revision++;r.updated=Date.now();if(r.state.core.phase==='finished')r.status='finished';save(r);db.prepare('INSERT INTO tag_transition_events VALUES(?,?,?)').run(id,r.revision,JSON.stringify(r.events));if(requestId)r.receipt=saveActionReceipt('tag',request,r.revision);return r;});
 export const quitTag=db.transaction((id:string,actor:string,guild:string,revision:number)=>{const r=getTag(id);authorize(r,actor,guild);if(!['lobby','playing'].includes(r.status)||r.revision!==revision)throw Error('Partida atualizada ou encerrada.');if(r.state){
  const team=r.state.members.find(p=>p.id===actor)!.team;
  // Any member can concede for their team, even when the partner must act.
