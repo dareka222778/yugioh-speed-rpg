@@ -9,7 +9,7 @@ export type TokenLedger={next:number;entries:TokenEntry[];events:TokenEvent[]};
 const sheep:Readonly<Card>=Object.freeze({id:'token:sheep',konamiId:0,name:'Ficha de Ovelha',englishName:'Sheep Token',kind:'monster',monsterType:'normal',race:'Beast',attribute:'EARTH',level:1,atk:0,defense:0,summary:'Entidade de campo; não integra o inventário.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4818&request_locale=en'});
 export function getTokenMetadata(id:string):Card|undefined{return id===sheep.id?{...sheep}:undefined;}
 export function createTokenGroup(s:DuelState,controller:0|1,count:number,position:'atk'|'def'='def',policy:TokenPolicy={tributeSummon:false,tributeEffect:true}):Monster[]{
- if(!['engine-v2','engine-v3','engine-v4'].includes(s.resolverVersion??'')||s.phase==='finished'||![0,1].includes(controller)||!Number.isSafeInteger(count)||count<1||count>RULES_PROFILE.monsterZones||!['atk','def'].includes(position)||typeof policy.tributeSummon!=='boolean'||typeof policy.tributeEffect!=='boolean')throw new Error('Criação de fichas inválida.');
+ if(!['engine-v2','engine-v3','engine-v4','engine-v5'].includes(s.resolverVersion??'')||s.phase==='finished'||![0,1].includes(controller)||!Number.isSafeInteger(count)||count<1||count>RULES_PROFILE.monsterZones||!['atk','def'].includes(position)||typeof policy.tributeSummon!=='boolean'||typeof policy.tributeEffect!=='boolean')throw new Error('Criação de fichas inválida.');
  if(s.players[controller].monsters.length+count>RULES_PROFILE.monsterZones)throw new Error('Zonas insuficientes para o grupo completo.');
  if((s.tokenLedger?.next??0)+count>4096)throw new Error('Limite de entidades da partida excedido.');
  const first=s.tokenLedger?.next??0,seat=s.teamRotation?.active[controller];
@@ -32,7 +32,7 @@ export function assertTokenLedger(s:DuelState):void{
  const tokens=s.players.flatMap(p=>p.monsters.filter(m=>m.entityKind==='token')),ledger=s.tokenLedger;
  const fail=():never=>{throw new Error('Estado de fichas inválido.');};
  if(ledger===undefined){if(tokens.length)fail();return;}
- if(!ledger||!['engine-v2','engine-v3','engine-v4'].includes(s.resolverVersion??'')||!Number.isSafeInteger(ledger.next)||ledger.next<0||ledger.next>4096||!Array.isArray(ledger.entries)||ledger.entries.length!==ledger.next||!Array.isArray(ledger.events)||ledger.events.length>ledger.next*2)fail();
+ if(!ledger||!['engine-v2','engine-v3','engine-v4','engine-v5'].includes(s.resolverVersion??'')||!Number.isSafeInteger(ledger.next)||ledger.next<0||ledger.next>4096||!Array.isArray(ledger.entries)||ledger.entries.length!==ledger.next||!Array.isArray(ledger.events)||ledger.events.length>ledger.next*2)fail();
  const uids=new Set<string>();for(const [index,entry]of ledger.entries.entries()){
   if(!entry||typeof entry.uid!=='string'||!(new RegExp('^(?:m[0-3]:)?token:'+(index+1)+'$')).test(entry.uid)||uids.has(entry.uid)||!getTokenMetadata(entry.id)||![0,1].includes(entry.owner)||!Number.isSafeInteger(entry.createdTurn)||entry.createdTurn<1||entry.createdTurn>s.turn||!entry.policy||typeof entry.policy.tributeSummon!=='boolean'||typeof entry.policy.tributeEffect!=='boolean'||!['active','removed'].includes(entry.status))fail();uids.add(entry.uid);
   const monster=tokens.find(t=>t.uid===entry.uid);

@@ -2,8 +2,8 @@ const {test}=require('node:test'),assert=require('node:assert/strict'),fs=requir
 const e=require('../dist/duelEngine'),archive=require('../dist/resolverArchive'),r=require('../dist/effectRegistry'),{starterContents}=require('../dist/cardCatalog'),{assertDuelState,assertDuelTransition}=require('../dist/duelIntegrity');
 const legacy=archive.getArchivedDefinitionResolver('engine-v1'),cards=starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id)),players=[{id:'a',name:'A',cards},{id:'b',name:'B',cards}];
 const restore=s=>JSON.parse(JSON.stringify(s));
-test('REA-L02: legacy saves select archived executable rules, new duels explicitly select v4',()=>{
- const old=legacy.createDuel(players,()=>.5),current=e.createDuel(players,()=>.5);assert.equal(old.resolverVersion,undefined);assert.equal(current.resolverVersion,'engine-v4');
+test('REA-L02: legacy saves select archived executable rules, new duels explicitly select v5',()=>{
+ const old=legacy.createDuel(players,()=>.5),current=e.createDuel(players,()=>.5);assert.equal(old.resolverVersion,undefined);assert.equal(current.resolverVersion,'engine-v5');
  const raw=JSON.stringify(old),pinned=archive.pinLegacyResolver(old);assert.equal(pinned.resolverVersion,'engine-v1');delete pinned.resolverVersion;assert.deepEqual(pinned,old);assert.equal(JSON.stringify(old),raw);
  assert.throws(()=>archive.pinLegacyResolver(current),/rebaixar/);
  const action=e.legalActions(old,'a')[0];assert.deepEqual(e.step(restore(old),'a',action),legacy.step(restore(old),'a',action));

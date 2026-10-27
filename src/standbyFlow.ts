@@ -8,7 +8,7 @@ const identifier=(value:unknown)=>typeof value==='string'&&/^[A-Za-z0-9:_-]{1,80
 /** Trusted scheduling primitive, not a new card activation. No live card is
  * given a Standby effect merely by adding this continuation capability. */
 export function scheduleStandbyTask(input:DuelState,task:StandbyTask):DuelState{
- if(!['engine-v2','engine-v3','engine-v4'].includes(input.resolverVersion??'')||input.rulesVersion!=='speed-rpg-classic-v1'||input.phase==='finished')throw new Error('Agendamento incompatível com este duelo.');
+ if(!['engine-v2','engine-v3','engine-v4','engine-v5'].includes(input.resolverVersion??'')||input.rulesVersion!=='speed-rpg-classic-v1'||input.phase==='finished')throw new Error('Agendamento incompatível com este duelo.');
  const s=structuredClone(input),flow=s.standby??={version:1,tasks:[],completed:[]};
  if(flow.tasks.some(t=>t.id===task.id))throw new Error('Operação de Espera já agendada.');
  if(task.turn<=s.turn)throw new Error('Agende uma Espera futura.');
@@ -17,7 +17,7 @@ export function scheduleStandbyTask(input:DuelState,task:StandbyTask):DuelState{
 export function assertStandbyFlow(s:DuelState):void{
  const fail=()=>{throw new Error('Estado da continuação de Espera inválido.');};
  const flow=s.standby;if(flow===undefined){if(s.choice?.source==='standby'||s.pending.kind==='standby'||s.chainRoot?.kind==='standby')fail();return;}
- if(!flow||!['engine-v2','engine-v3','engine-v4'].includes(s.resolverVersion??'')||s.rulesVersion!=='speed-rpg-classic-v1'||flow.version!==1||!Array.isArray(flow.tasks)||flow.tasks.length>128||!Array.isArray(flow.completed)||flow.completed.length>flow.tasks.length)fail();
+ if(!flow||!['engine-v2','engine-v3','engine-v4','engine-v5'].includes(s.resolverVersion??'')||s.rulesVersion!=='speed-rpg-classic-v1'||flow.version!==1||!Array.isArray(flow.tasks)||flow.tasks.length>128||!Array.isArray(flow.completed)||flow.completed.length>flow.tasks.length)fail();
  const ids=new Set<string>();for(const task of flow.tasks){
   if(!task||!identifier(task.id)||ids.has(task.id)||!Number.isSafeInteger(task.turn)||task.turn<1||![0,1].includes(task.actor)||typeof task.optional!=='boolean'||task.costLP!==undefined&&(!Number.isSafeInteger(task.costLP)||task.costLP<0)||!Array.isArray(task.options)||!task.options.length||task.options.length>12)fail();ids.add(task.id);
   const choices=new Set<string>();for(const option of task.options){if(!option||!identifier(option.id)||option.id==='__skip__'||choices.has(option.id)||typeof option.label!=='string'||!option.label.trim()||option.label.length>100||economicOperationIssues(option.operations).length)fail();choices.add(option.id);

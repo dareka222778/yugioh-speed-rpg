@@ -1,3 +1,4 @@
+import {mechanicalMonsters5} from './mechanicalBatch5';
 /** Audited, declarative classic monster effects.
  * Each registered effect must have a matching card in effectRegistry.ts.
  * Effects with targets choose them on activation, before the response window.
@@ -5,13 +6,13 @@
 export type MonsterTrigger='quick'|'ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onBattleDestroyed'|'onSentToGrave'|'continuous';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard'|'tribute';count:number};
 export type MonsterOperation=
- |{kind:'heal'|'burn';amount:number}
+ |{kind:'heal'|'burn'|'burnPerSpellTrap';amount:number}
  |{kind:'draw';count:number}
  |{kind:'destroy'|'bounce';target:'opponentMonster'|'anyMonster'}
  |{kind:'recover';cardKind:'spell'|'trap'}
  |{kind:'search';stat:'atk'|'defense';maximum:number}
  |{kind:'specialSummon';attribute:string;maximumAtk:number}
- |{kind:'negateTraps'|'battleShield'};
+ |{kind:'negateTraps'|'battleShield'|'directAttack'};
 export type MonsterEffect={trigger:MonsterTrigger;oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean;fieldMonsterCount?:number};
 
@@ -35,6 +36,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...mechanicalMonsters5,
  '40640057':{effect:{trigger:'quick',cost:{kind:'discard',count:1},operation:{kind:'battleShield'}},activation:{policy:'manual',window:'opposingDamageCalculation'}}, // Kuriboh, self-discard during opposing damage calculation
  '54652250':{effect:{trigger:'flip',operation:{kind:'destroy',target:'anyMonster'}},activation:{policy:'mandatory',window:'flip'}}, // Man-Eater Bug
  '07089711':{effect:{trigger:'flip',operation:{kind:'bounce',target:'anyMonster'}},activation:{policy:'mandatory',window:'flip'}}, // Hane-Hane
@@ -62,16 +64,16 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  const {effect:e,activation:a}=value;
  if(!['mandatory','optional','manual','continuous'].includes(a.policy)||!['main','flip','summon','grave','battleDestroyed','opposingDamageCalculation','continuous'].includes(a.window))return ['invalid-monster-activation'];
  if(!['quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'].includes(e.trigger))return ['unsupported-monster-trigger'];
- if(!e.operation||!['heal','burn','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield'].includes(e.operation.kind))return ['unsupported-monster-operation'];
+ if(!e.operation||!['heal','burn','burnPerSpellTrap','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack'].includes(e.operation.kind))return ['unsupported-monster-operation'];
  if((e.trigger==='quick'||e.trigger==='ignition')&&a.policy!=='manual'||e.trigger==='continuous'&&a.policy!=='continuous')return ['inconsistent-monster-policy'];
  const windows:Partial<Record<MonsterTrigger,MonsterActivation['window']>>={quick:'opposingDamageCalculation',ignition:'main',flip:'flip',onSummon:'summon',onOtherSummon:'summon',onSentToGrave:'grave',onBattleDestroyed:'battleDestroyed',continuous:'continuous'};
  if(windows[e.trigger]!==a.window)return ['inconsistent-monster-window'];
  const op=e.operation;
  if((op.kind==='destroy'||op.kind==='bounce')&&!['opponentMonster','anyMonster'].includes(op.target)||op.kind==='recover'&&!['spell','trap'].includes(op.cardKind))return ['invalid-monster-selector'];
  if(op.kind==='search'&&(!['atk','defense'].includes(op.stat)||!Number.isSafeInteger(op.maximum)||op.maximum<0)||op.kind==='specialSummon'&&(!Number.isSafeInteger(op.maximumAtk)||op.maximumAtk<0||!['DARK','LIGHT','EARTH','WIND','WATER','FIRE','DIVINE'].includes(op.attribute)))return ['invalid-deck-filter'];
- if(e.trigger==='quick'&&(op.kind!=='battleShield'||e.cost?.kind!=='discard'||e.cost.count!==1)||e.trigger==='continuous'&&op.kind!=='negateTraps')return ['unsupported-monster-mechanic'];
+ if(e.trigger==='quick'&&(op.kind!=='battleShield'||e.cost?.kind!=='discard'||e.cost.count!==1)||e.trigger==='continuous'&&!['negateTraps','directAttack'].includes(op.kind))return ['unsupported-monster-mechanic'];
  if((a.policy==='mandatory'||a.policy==='optional')&&e.cost)return ['unsupported-trigger-cost'];
- if((op.kind==='heal'||op.kind==='burn')&&(!Number.isSafeInteger(op.amount)||op.amount<=0)||op.kind==='draw'&&(!Number.isSafeInteger(op.count)||op.count<=0))return ['invalid-monster-amount'];
+ if((op.kind==='heal'||op.kind==='burn'||op.kind==='burnPerSpellTrap')&&(!Number.isSafeInteger(op.amount)||op.amount<=0)||op.kind==='draw'&&(!Number.isSafeInteger(op.count)||op.count<=0))return ['invalid-monster-amount'];
  if(e.cost&&(e.cost.kind==='lp'?(!Number.isSafeInteger(e.cost.amount)||e.cost.amount<=0):!['tribute','discard'].includes(e.cost.kind)||!Number.isSafeInteger(e.cost.count)||e.cost.count<1))return ['invalid-monster-cost'];
  return [];
 }

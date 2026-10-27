@@ -1,0 +1,1129 @@
+[
+  {
+    "id": "11868825",
+    "canonicalId": "6190b2fd-ac21-4781-a067-18cdc6064aeb",
+    "name": "Goblin's Secret Remedy",
+    "konamiId": 4346,
+    "family": "heal",
+    "definition": {
+      "kind": "heal",
+      "amount": 600
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "11868825"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 11868825,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4346&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4346&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-27",
+      "world": "1999-03-27"
+    }
+  },
+  {
+    "id": "12472242",
+    "canonicalId": "fac48ddf-0d44-49c3-bc19-1994a2322057",
+    "name": "Leghul",
+    "konamiId": 4403,
+    "family": "direct-attack",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "aliasesPreserved": [
+      "12472242"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 12472242,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4403&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4403&request_locale=ja",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 300,
+      "defense": 350,
+      "race": "Insect",
+      "attribute": "EARTH",
+      "ocgDate": "1999-09-23"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-09-23",
+      "world": "1999-09-23"
+    }
+  },
+  {
+    "id": "18144506",
+    "canonicalId": "4567872b-5f20-4aa2-8167-b7ca0c691552",
+    "name": "Harpie's Feather Duster",
+    "konamiId": 4678,
+    "family": "mass-backrow",
+    "definition": {
+      "kind": "destroySpellTraps",
+      "scope": "opponent"
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "18144506",
+      "18144507"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 18144507,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4678&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4678&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-07-08"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2003-04-15",
+      "ocg": "1999-07-08",
+      "world": "1999-07-08"
+    }
+  },
+  {
+    "id": "19613556",
+    "canonicalId": "6dc25591-4b27-4931-b5c6-57d9b8235328",
+    "name": "Heavy Storm",
+    "konamiId": 4891,
+    "family": "mass-backrow",
+    "definition": {
+      "kind": "destroySpellTraps",
+      "scope": "all"
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "19613556"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 19613556,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4891&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4891&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "2000-03-01"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "2000-03-01",
+      "world": "2000-03-01"
+    }
+  },
+  {
+    "id": "21347810",
+    "canonicalId": "78057833-d255-4f5f-85b6-ffcb54369cab",
+    "name": "Rainbow Flower",
+    "konamiId": 4494,
+    "family": "direct-attack",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "aliasesPreserved": [
+      "21347810"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 21347810,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4494&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4494&request_locale=en",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 400,
+      "defense": 500,
+      "race": "Plant",
+      "attribute": "EARTH",
+      "ocgDate": "1999-09-23"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-09-23",
+      "world": "1999-09-23"
+    }
+  },
+  {
+    "id": "22702055",
+    "canonicalId": "ab4821a3-8f81-4f60-9dac-784496371094",
+    "name": "Umi",
+    "konamiId": 4340,
+    "family": "field",
+    "definition": {
+      "kind": "field",
+      "races": [
+        "Fish",
+        "Sea Serpent",
+        "Thunder",
+        "Aqua"
+      ],
+      "atk": 200,
+      "def": 200,
+      "penaltyRaces": [
+        "Machine",
+        "Pyro"
+      ]
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "22702055"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 22702055,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4340&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4340&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-06"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-06",
+      "world": "1999-03-06"
+    }
+  },
+  {
+    "id": "23424603",
+    "canonicalId": "d64d2866-1c4f-4170-a40a-11ae04eefa50",
+    "name": "Wasteland",
+    "konamiId": 4337,
+    "family": "field",
+    "definition": {
+      "kind": "field",
+      "races": [
+        "Dinosaur",
+        "Zombie",
+        "Rock"
+      ],
+      "atk": 200,
+      "def": 200
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "23424603"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 23424603,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4337&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4337&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-06"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-06",
+      "world": "1999-03-06"
+    }
+  },
+  {
+    "id": "25769732",
+    "canonicalId": "459da2c1-913a-4851-8853-bf22b50ef639",
+    "name": "Machine Conversion Factory",
+    "konamiId": 4331,
+    "family": "equip",
+    "definition": {
+      "kind": "equip",
+      "races": [
+        "Machine"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "25769732"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 25769732,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4331&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4331&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-27",
+      "world": "1999-03-27"
+    }
+  },
+  {
+    "id": "32809211",
+    "canonicalId": "779d8ab8-ed9d-43a7-8c4a-3b148f010892",
+    "name": "Jinzo #7",
+    "konamiId": 4428,
+    "family": "direct-attack",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "aliasesPreserved": [
+      "32809211"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 32809211,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4428&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4428&request_locale=en",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 500,
+      "defense": 400,
+      "race": "Machine",
+      "attribute": "DARK",
+      "ocgDate": "1999-09-23"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-09-23",
+      "world": "1999-09-23"
+    }
+  },
+  {
+    "id": "36607978",
+    "canonicalId": "3138fcb8-6e52-47bc-a5cc-932eae580b30",
+    "name": "Mystical Moon",
+    "konamiId": 4325,
+    "family": "equip",
+    "definition": {
+      "kind": "equip",
+      "races": [
+        "Beast-Warrior"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "36607978"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 36607978,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4325&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4325&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-27"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-05-27",
+      "world": "1999-05-27"
+    }
+  },
+  {
+    "id": "39774685",
+    "canonicalId": "67741dd0-a2bd-4349-8494-ae95686c064e",
+    "name": "Vile Germs",
+    "konamiId": 4316,
+    "family": "equip",
+    "definition": {
+      "kind": "equip",
+      "races": [
+        "Plant"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "39774685"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 39774685,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4316&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4316&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-27",
+      "world": "1999-03-27"
+    }
+  },
+  {
+    "id": "46009906",
+    "canonicalId": "0bf51907-f8ea-43f8-85ad-1f3475d0137a",
+    "name": "Beast Fangs",
+    "konamiId": 4314,
+    "family": "equip",
+    "definition": {
+      "kind": "equip",
+      "races": [
+        "Beast"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "46009906"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 46009906,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4314&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4314&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-02-04"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-02-04",
+      "world": "1999-02-04"
+    }
+  },
+  {
+    "id": "51371017",
+    "canonicalId": "9ccef837-49ba-4ea6-8d15-131bdb63ee28",
+    "name": "Princess of Tsurugi",
+    "konamiId": 4272,
+    "family": "flip-count-burn",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "burnPerSpellTrap",
+          "amount": 500
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "aliasesPreserved": [
+      "51371017"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 51371017,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4272&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4272&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 900,
+      "defense": 700,
+      "race": "Warrior",
+      "attribute": "WIND",
+      "ocgDate": "2000-01-27"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "2000-01-27",
+      "world": "2000-01-27"
+    }
+  },
+  {
+    "id": "57839750",
+    "canonicalId": "b3e95450-c358-42e4-8acd-5bf2de0736ad",
+    "name": "Mother Grizzly",
+    "konamiId": 4926,
+    "family": "battle-recruiter",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "WATER",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "aliasesPreserved": [
+      "57839750"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 57839750,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4926&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4926&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 1000,
+      "race": "Beast-Warrior",
+      "attribute": "WATER",
+      "ocgDate": "2000-07-13"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    }
+  },
+  {
+    "id": "58861941",
+    "canonicalId": "f52bbaa4-8d01-4711-bb2a-4064fcf0c63b",
+    "name": "Ooguchi",
+    "konamiId": 4404,
+    "family": "direct-attack",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "aliasesPreserved": [
+      "58861941"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 58861941,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4404&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4404&request_locale=en",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 300,
+      "defense": 250,
+      "race": "Aqua",
+      "attribute": "WATER",
+      "ocgDate": "1999-09-23"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-09-23",
+      "world": "1999-09-23"
+    }
+  },
+  {
+    "id": "60806437",
+    "canonicalId": "c3ebd236-45e4-4c0c-a130-042e1a880da5",
+    "name": "UFO Turtle",
+    "konamiId": 4917,
+    "family": "battle-recruiter",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "FIRE",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "aliasesPreserved": [
+      "60806437"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 60806437,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4917&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4917&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 1200,
+      "race": "Machine",
+      "attribute": "FIRE",
+      "ocgDate": "2000-07-13"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    }
+  },
+  {
+    "id": "61854111",
+    "canonicalId": "9cf2f89c-4397-4e05-a372-7fa425283b8d",
+    "name": "Legendary Sword",
+    "konamiId": 4307,
+    "family": "equip",
+    "definition": {
+      "kind": "equip",
+      "races": [
+        "Warrior"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "61854111"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 61854111,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4307&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4307&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-02-04"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-02-04",
+      "world": "1999-02-04"
+    }
+  },
+  {
+    "id": "66889139",
+    "canonicalId": "5effb838-8b8c-4bca-ad14-0557a7355e40",
+    "name": "Gaia the Dragon Champion",
+    "konamiId": 4043,
+    "family": "fusion",
+    "definition": {
+      "kind": "fusion"
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "66889139"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 66889139,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4043&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4043&request_locale=en",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2600,
+      "defense": 2100,
+      "race": "Dragon",
+      "attribute": "WIND",
+      "ocgDate": "2000-08-10"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-05-27",
+      "world": "1999-05-27"
+    }
+  },
+  {
+    "id": "73134081",
+    "canonicalId": "45526162-ea5e-472d-bd5d-364c5406a954",
+    "name": "Final Flame",
+    "konamiId": 4351,
+    "family": "burn",
+    "definition": {
+      "kind": "burn",
+      "amount": 600
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "73134081",
+      "73134082"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 73134082,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4351&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4351&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-27",
+      "world": "1999-03-27"
+    }
+  },
+  {
+    "id": "84834865",
+    "canonicalId": "2a687c44-db1d-4ff5-b71c-bcac92bdb3a3",
+    "name": "Flying Kamakiri #1",
+    "konamiId": 4927,
+    "family": "battle-recruiter",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "WIND",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "aliasesPreserved": [
+      "84834865"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 84834865,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4927&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4927&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 900,
+      "race": "Insect",
+      "attribute": "WIND",
+      "ocgDate": "2000-07-13"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    }
+  },
+  {
+    "id": "87430998",
+    "canonicalId": "2981d35a-3e50-4920-80bf-d68927369922",
+    "name": "Forest",
+    "konamiId": 4336,
+    "family": "field",
+    "definition": {
+      "kind": "field",
+      "races": [
+        "Insect",
+        "Beast",
+        "Plant",
+        "Beast-Warrior"
+      ],
+      "atk": 200,
+      "def": 200
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "87430998"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 87430998,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4336&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4336&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-06"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-06",
+      "world": "1999-03-06"
+    }
+  },
+  {
+    "id": "95956346",
+    "canonicalId": "e1d69b9a-dd3f-4446-85de-28d2e770d68b",
+    "name": "Shining Angel",
+    "konamiId": 4924,
+    "family": "battle-recruiter",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "LIGHT",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "aliasesPreserved": [
+      "95956346"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 95956346,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4924&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4924&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 800,
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "ocgDate": "2000-07-13"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    }
+  },
+  {
+    "id": "97017120",
+    "canonicalId": "eb25ba27-a4a0-40a3-9357-79fc32ffd990",
+    "name": "Giant Rat",
+    "konamiId": 4915,
+    "family": "battle-recruiter",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "EARTH",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "aliasesPreserved": [
+      "97017120"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 97017120,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4915&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4915&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 1450,
+      "race": "Beast",
+      "attribute": "EARTH",
+      "ocgDate": "2000-07-13"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2001-06-28",
+      "world": "2001-06-28"
+    }
+  },
+  {
+    "id": "98049915",
+    "canonicalId": "4c263426-e38c-4456-a6e1-ddcc70cc8db4",
+    "name": "Mystic Lamp",
+    "konamiId": 4393,
+    "family": "direct-attack",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "aliasesPreserved": [
+      "98049915"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 98049915,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4393&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4393&request_locale=en",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 400,
+      "defense": 300,
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "ocgDate": "1999-09-23"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-09-23",
+      "world": "1999-09-23"
+    }
+  },
+  {
+    "id": "98252586",
+    "canonicalId": "8327ef25-7906-4b7d-9bf6-8235a6dd53d0",
+    "name": "Follow Wind",
+    "konamiId": 4333,
+    "family": "equip",
+    "definition": {
+      "kind": "equip",
+      "races": [
+        "Winged Beast"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "98252586"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 98252586,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4333&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4333&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-27"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-05-27",
+      "world": "1999-05-27"
+    }
+  },
+  {
+    "id": "05901497",
+    "canonicalId": "ce0135b3-9b9f-48cf-8e5f-e3ad46bfc5a1",
+    "name": "Queen's Double",
+    "konamiId": 4641,
+    "family": "direct-attack",
+    "definition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "aliasesPreserved": [
+      "05901497"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 5901497,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4641&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4641&request_locale=en",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 350,
+      "defense": 300,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-09-23"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-09-23",
+      "world": "1999-09-23"
+    }
+  },
+  {
+    "id": "02370081",
+    "canonicalId": "805f1ef6-17a3-4120-b58f-52ff7ce53493",
+    "name": "Steel Shell",
+    "konamiId": 4315,
+    "family": "equip",
+    "definition": {
+      "kind": "equip",
+      "attribute": "WATER",
+      "atk": 400,
+      "def": -200
+    },
+    "monsterDefinition": null,
+    "aliasesPreserved": [
+      "02370081"
+    ],
+    "publicPasscodeEvidence": {
+      "ygoprodeckId": 2370081,
+      "classification": "Public imported canonical/CID/passcode concordance; official HTML does not expose passcodes"
+    },
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4315&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4315&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-25"
+    },
+    "dateEvidence": "Verified OCG printing before cutoff, not a universal first-release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-09-01",
+      "ocg": "1999-05-25",
+      "world": "1999-05-25"
+    }
+  }
+]

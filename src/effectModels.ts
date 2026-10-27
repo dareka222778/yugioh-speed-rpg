@@ -9,6 +9,7 @@ const main:ActivationModel={speed:1,window:'main',damage:'never'};
 const response=(window:ActivationModel['window']='free',damage:ActivationModel['damage']='never'):ActivationModel=>({speed:2,window,damage});
 const destroy=(scope:DestructionModel['scope'],extra:Partial<DestructionModel>={}):DestructionModel=>({operation:'destroyMonsters',scope,destination:'grave',...extra});
 const models:Partial<Record<Effect['kind'],SpellTrapModel>>={
+ destroySpellTraps:{activation:main},
  darkHole:{activation:main,destruction:destroy('all')},
  raigeki:{activation:main,destruction:destroy('opponent')},
  torrentialTribute:{activation:{...response('summoned'),summonKinds:['summon','flip','specialSummon']},destruction:destroy('all')},

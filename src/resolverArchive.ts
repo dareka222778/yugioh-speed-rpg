@@ -1,3 +1,6 @@
+import * as v5 from './resolvers/v5/duelEngineCurrent';
+import {getEffect as effectV5,getPlayableCard as cardV5} from './resolvers/v5/effectRegistry';
+import {assertDuelState as validateV5} from './resolvers/v5/duelIntegrity';
 import * as v4 from './resolvers/v4/duelEngineCurrent';
 import {getEffect as effectV4,getPlayableCard as cardV4} from './resolvers/v4/effectRegistry';
 import {assertDuelState as validateV4} from './resolvers/v4/duelIntegrity';
@@ -10,23 +13,25 @@ import {assertDuelState as validateV2} from './resolvers/v2/duelIntegrity';
 import * as v1 from './resolvers/v1/duelEngine';
 import {getEffect as effectV1,getPlayableCard as cardV1} from './resolvers/v1/effectRegistry';
 import {assertDuelState as validateV1} from './resolvers/v1/duelIntegrity';
-export const CURRENT_RESOLVER_VERSION='engine-v4' as const;
-export type ResolverVersion='engine-v1'|'engine-v2'|'engine-v3'|typeof CURRENT_RESOLVER_VERSION;
+export const CURRENT_RESOLVER_VERSION='engine-v5' as const;
+export type ResolverVersion='engine-v1'|'engine-v2'|'engine-v3'|'engine-v4'|typeof CURRENT_RESOLVER_VERSION;
 export function resolverVersionFor(state:{resolverVersion?:unknown}):ResolverVersion{
  const version=state.resolverVersion===undefined?'engine-v1':state.resolverVersion;
- if(version!=='engine-v1'&&version!=='engine-v2'&&version!=='engine-v3'&&version!==CURRENT_RESOLVER_VERSION)throw new Error('Versão de resolvedor incompatível. Estado original preservado.');
+ if(version!=='engine-v1'&&version!=='engine-v2'&&version!=='engine-v3'&&version!=='engine-v4'&&version!==CURRENT_RESOLVER_VERSION)throw new Error('Versão de resolvedor incompatível. Estado original preservado.');
  return version;
 }
 const archived=Object.freeze({...v1,assertDuelState:validateV1,getEffect:(id:string)=>{const value=effectV1(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV1(id);return value?structuredClone(value):undefined;}});
 const archivedV2=Object.freeze({...v2,assertDuelState:validateV2,getEffect:(id:string)=>{const value=effectV2(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV2(id);return value?structuredClone(value):undefined;}});
 const archivedV3=Object.freeze({...v3,assertDuelState:validateV3,getEffect:(id:string)=>{const value=effectV3(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV3(id);return value?structuredClone(value):undefined;}});
 const archivedV4=Object.freeze({...v4,assertDuelState:validateV4,getEffect:(id:string)=>{const value=effectV4(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV4(id);return value?structuredClone(value):undefined;}});
+const archivedV5=Object.freeze({...v5,assertDuelState:validateV5,getEffect:(id:string)=>{const value=effectV5(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=cardV5(id);return value?structuredClone(value):undefined;}});
+export function getArchivedDefinitionResolver(version:'engine-v5'):typeof archivedV5;
 export function getArchivedDefinitionResolver(version:'engine-v4'):typeof archivedV4;
 export function getArchivedDefinitionResolver(version:'engine-v3'):typeof archivedV3;
 export function getArchivedDefinitionResolver(version:'engine-v1'):typeof archived;
 export function getArchivedDefinitionResolver(version:'engine-v2'):typeof archivedV2;
-export function getArchivedDefinitionResolver(version:ResolverVersion):typeof archived|typeof archivedV2|typeof archivedV3|typeof archivedV4;
-export function getArchivedDefinitionResolver(version:ResolverVersion){if(version==='engine-v4')return archivedV4;if(version==='engine-v3')return archivedV3;if(version==='engine-v1')return archived;if(version==='engine-v2')return archivedV2;throw new Error('Resolvedor histórico não recuperado.');}
+export function getArchivedDefinitionResolver(version:ResolverVersion):typeof archived|typeof archivedV2|typeof archivedV3|typeof archivedV4|typeof archivedV5;
+export function getArchivedDefinitionResolver(version:ResolverVersion){if(version==='engine-v5')return archivedV5;if(version==='engine-v4')return archivedV4;if(version==='engine-v3')return archivedV3;if(version==='engine-v1')return archived;if(version==='engine-v2')return archivedV2;throw new Error('Resolvedor histórico não recuperado.');}
 /** Explicit, lossless pinning; the caller retains the original serialized save.
  * Missing versions always mean v1, never "whatever engine is current". */
 export function pinLegacyResolver<T extends {resolverVersion?:ResolverVersion}>(input:T):T&{resolverVersion:ResolverVersion}{

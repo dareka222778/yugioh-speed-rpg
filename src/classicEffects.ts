@@ -16,6 +16,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  if(e.kind==='sequence')return canStartEconomicOperations(s,index,e.operations)?[{kind:'spell',card:c.uid}]:[];
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
+  case 'destroySpellTraps':return s.players.some((player,side)=>(e.scope==='all'||side!==index)&&(player.backrow.some(b=>b.uid!==c.uid)||!!player.field))?[{kind:'spell',card:c.uid}]:[];
   case 'equip':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp&&equipEligible(e,getCard(m.id)!)).map(m=>m.uid)));
   case 'monsterReborn':return p.monsters.length>=RULES_PROFILE.monsterZones?[]:s.players.flatMap(p=>p.grave.filter(m=>getCard(m.id)?.kind==='monster'&&(!getCard(m.id)?.fusion||m.properlySummoned)).flatMap(m=>(['atk','def'] as const).map(position=>({kind:'spell',card:c.uid,target:m.uid,position}))));
   case 'changeHeart':return p.monsters.length<RULES_PROFILE.monsterZones?targeted(op.monsters.map(m=>m.uid)):[];
@@ -46,6 +47,11 @@ export function persistentModifier(m:Monster,s:DuelState,stat:'atk'|'def'){
 }
 export function discardBackrow(s:DuelState,uid:string){
  for(const p of s.players){const b=p.backrow.find(b=>b.uid===uid);if(b){p.backrow=p.backrow.filter(b=>b.uid!==uid);p.grave.push({id:b.id,uid:b.uid});return;}if(p.field?.uid===uid){p.grave.push({id:p.field.id,uid:p.field.uid});p.field=null;return;}}
+}
+/** Snapshot the entire group before zone/equipment cleanup. A resolving Normal Spell is already consumed. */
+export function destroySpellTrapGroup(s:DuelState,actor:number,scope:'all'|'opponent',source:string):number{
+ const targets=s.players.flatMap((p,index)=>scope==='opponent'&&index===actor?[]:[...p.backrow.map(b=>b.uid),...p.field?[p.field.uid]:[]]).filter(uid=>uid!==source);
+ for(const uid of targets)discardBackrow(s,uid);return targets.length;
 }
 export function cleanEquips(s:DuelState){
  for(const p of s.players)for(const b of [...p.backrow])if(b.equippedTo){const target=s.players.flatMap(p=>p.monsters).find(m=>m.uid===b.equippedTo);const e=getEffect(b.id);if(!target?.faceUp||e?.kind!=='equip'||!equipEligible(e,getCard(target.id)!))discardBackrow(s,b.uid);}
@@ -78,6 +84,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
  }
 
  switch(e.kind){
+  case 'destroySpellTraps':destroySpellTrapGroup(s,a.actor,e.scope,a.card);service.note(s,'O grupo de Magias/Armadilhas foi destruído.');return true;
   case 'mysticalSpaceTyphoon':
    if(a.target&&s.players.some(p=>p.backrow.some(b=>b.uid===a.target)||p.field?.uid===a.target)){
     discardBackrow(s,a.target);service.note(s,'Tufão Espacial Místico destruiu a Magia/Armadilha escolhida, sem negar sua ativação.');

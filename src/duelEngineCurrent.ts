@@ -218,7 +218,7 @@ export function legalActions(s:DuelState,actor:string):Action[]{
   if(s.turn>1)actions.push({kind:'battle'});
  }else if(s.phase==='battle'){
   for(const m of p.monsters)if(m.faceUp&&m.position==='atk'&&m.attacked<s.turn){
-   if(!op.monsters.length)actions.push({kind:'attack',card:m.uid});else for(const target of op.monsters)actions.push({kind:'attack',card:m.uid,target:target.uid});
+   if(!op.monsters.length||getMonsterEffect(m.id)?.operation.kind==='directAttack')actions.push({kind:'attack',card:m.uid});for(const target of op.monsters)actions.push({kind:'attack',card:m.uid,target:target.uid});
   }
  }
  actions.push({kind:'end'});return actions;
@@ -344,6 +344,7 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
   const op=e.operation;
   if(op.kind==='heal')p.lp+=op.amount;
   else if(op.kind==='burn'){const other=s.players[1-pending.actor];other.lp=Math.max(0,other.lp-op.amount);checkLP(s);}
+  else if(op.kind==='burnPerSpellTrap'){const other=s.players[1-pending.actor],count=other.backrow.length+(other.field?1:0);other.lp=Math.max(0,other.lp-op.amount*count);checkLP(s);}
   else if(op.kind==='draw'){
    drawCards(s,pending.actor,op.count,{finish,checkLP});
   }else if(op.kind==='destroy'||op.kind==='bounce'){
@@ -490,7 +491,7 @@ function resolve(s:DuelState){
   if(pending.stage==='declare'){
    const defenders=s.players[1-pending.actor].monsters.map(m=>m.uid);
    if(pending.defenders&&(pending.defenders.length!==defenders.length||pending.defenders.some(uid=>!defenders.includes(uid)))){
-    s.pending=pending;s.choice={actor:pending.actor,source:'attackReplay',targets:[...defenders.length?defenders:['__direct__'],'__cancel__']};s.phase='choice';note(s,'O campo adversário mudou: escolha o alvo novamente ou cancele o ataque.');return;
+   s.pending=pending;s.choice={actor:pending.actor,source:'attackReplay',targets:[...defenders,...(!defenders.length||getMonsterEffect(a.id)?.operation.kind==='directAttack'?['__direct__']:[]),'__cancel__']};s.phase='choice';note(s,'O campo adversário mudou: escolha o alvo novamente ou cancele o ataque.');return;
    }
    s.damageStep=true;
    if(defender&&!defender.m.faceUp){
@@ -502,7 +503,7 @@ function resolve(s:DuelState){
   }
   if(pending.stage==='damage'){response(s,{...pending,stage:'calculation'},'battle',1-pending.actor);return;}
   const opponent=s.players[1-pending.actor];
-  if(!pending.target){if(opponent.monsters.length)return;const damage=protectedBattleDamage(s,1-pending.actor,a.uid)?0:atk(a,s);opponent.lp=Math.max(0,opponent.lp-damage);note(s,`Ataque direto: ${damage} de dano.`);}
+  if(!pending.target){if(opponent.monsters.length&&getMonsterEffect(a.id)?.operation.kind!=='directAttack')return;const damage=protectedBattleDamage(s,1-pending.actor,a.uid)?0:atk(a,s);opponent.lp=Math.max(0,opponent.lp-damage);note(s,`Ataque direto: ${damage} de dano.`);}
   else if(defender){const d=defender.m;const difference=atk(a,s)-(d.position==='atk'?atk(d,s):def(d,s));
    if(d.position==='atk'){
     if(difference>0){if(opponent.battleProtectedUntil!==s.turn){graveMonster(s,d.uid,true);if(!protectedBattleDamage(s,1-pending.actor,a.uid))opponent.lp=Math.max(0,opponent.lp-difference);}}

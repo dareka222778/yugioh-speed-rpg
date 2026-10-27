@@ -18,7 +18,7 @@ test('headless engine imports neither Discord, collection UI, SQLite nor rendere
  assert.deepEqual(JSON.parse(child.execFileSync(process.execPath,['-e',script],{encoding:'utf8'})),[]);
 });
 test('every enabled card has explicit certification after audited family expansion',()=>{
- assert.equal(registry.enabledCardIds.length,170);assert.equal(registry.enabledCardIds.filter(id=>registry.getEffect(id).kind==='normal').length,111);
+ assert.equal(registry.enabledCardIds.length,197);assert.equal(registry.enabledCardIds.filter(id=>registry.getEffect(id).kind==='normal').length,111);
  for(const id of registry.enabledCardIds)assert.equal(registry.getCardStatus(id).stage,'certified');
  assert.equal(child.spawnSync(process.execPath,['scripts/check-card-certification.cjs'],{encoding:'utf8'}).status,0);
 });

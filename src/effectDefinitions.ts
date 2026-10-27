@@ -1,8 +1,10 @@
+import {mechanicalEffects5} from './mechanicalBatch5';
 // Explicit executable definitions, independent from card admission.
 import type {ActivationModel} from './effectModels';
 import type {EconomicOperation} from './economicOperations';
 import {economicOperationIssues} from './economicOperations';
 export type Effect=
+ |{kind:'destroySpellTraps';scope:'all'|'opponent'}
  |{kind:'sequence';activation:ActivationModel;operations:readonly EconomicOperation[]}
  |{kind:'attackResponse';activation:ActivationModel;endBattle:boolean;reflectAttack:boolean}
  |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'bottomlessTrapHole'|'sakuretsuArmor'|'mirrorForce'}
@@ -10,6 +12,7 @@ export type Effect=
  |{kind:'field';races:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number};
 export const effectDefinitions:Record<string,Effect>={
+ ...mechanicalEffects5,
  '76103675':{kind:'burn',amount:200},
  '46130346':{kind:'burn',amount:500},
  '20871001':{kind:'heal',amount:400},
@@ -61,6 +64,7 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='destroySpellTraps')return ['all','opponent'].includes(e.scope)?[]:['invalid-spell-trap-scope'];
  if(!e||typeof e!=='object'||!executableKinds.has(e.kind))return ['unknown-effect-operation'];
  if(e.kind==='sequence')return economicOperationIssues(e.operations);
  if(e.kind==='attackResponse'&&(typeof e.endBattle!=='boolean'||typeof e.reflectAttack!=='boolean'||!e.endBattle&&!e.reflectAttack))return ['invalid-attack-response'];
