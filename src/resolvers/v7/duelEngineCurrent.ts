@@ -197,7 +197,7 @@ export function legalActions(s:DuelState,actor:string):Action[]{
   if(p.field&&!p.field.faceUp&&!effectNameBlocked(s,index,p.field.id))actions.push({kind:'field',card:p.field.uid});
   for(const c of [...(p.backrow.length<RULES_PROFILE.spellTrapZones?p.hand:[]),...p.backrow.filter(c=>!c.faceUp)])if(card(c.id).kind==='spell'&&!card(c.id).field&&!effectNameBlocked(s,index,c.id)){
     if(c.id==='24094653'){
-      for(const extra of p.extra??[]){const recipe=card(extra.id).fusion!;const pool=[...p.hand,...p.monsters];
+      for(const extra of p.extra??[]){const recipe=card(extra.id).fusion!;const pool=[...p.hand,...p.monsters.filter(m=>canAffectMonster(s,m.uid,'spell'))];
        for(const materials of combos(pool,recipe.length))if([...materials.map(m=>m.id)].sort().join(',')===[...recipe].sort().join(',')&&p.monsters.length-materials.filter(m=>p.monsters.some(n=>n.uid===m.uid)).length<RULES_PROFILE.monsterZones)
         for(const position of ['atk','def'] as const)actions.push({kind:'fusion',card:c.uid,extra:extra.uid,materials:materials.map(m=>m.uid),position});
       }
@@ -479,7 +479,7 @@ function resolve(s:DuelState){
   const p=s.players[pending.actor],poly=p.backrow.find(c=>c.uid===pending.card),fusion=p.extra?.find(c=>c.uid===pending.extra);
   const materials=pending.materials.map(uid=>[...p.hand,...p.monsters].find(c=>c.uid===uid));
   p.backrow=p.backrow.filter(c=>c.uid!==pending.card);if(poly)p.grave.push({uid:poly.uid,id:poly.id});
-  if(fusion&&materials.every(Boolean)){
+  if(fusion&&materials.every(Boolean)&&pending.materials.every(uid=>p.hand.some(c=>c.uid===uid)||canAffectMonster(s,uid,'spell'))){
    for(const uid of pending.materials){const hand=p.hand.find(c=>c.uid===uid);if(hand){p.hand=p.hand.filter(c=>c.uid!==uid);p.grave.push(hand);}else graveMonster(s,uid);}
    p.extra=p.extra!.filter(c=>c.uid!==fusion.uid);p.monsters.push({...fusion,properlySummoned:true,owner:pending.actor,position:pending.position,faceUp:true,entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});
    note(s,`${p.name} fez a Invocação-Fusão de ${card(fusion.id).name}.`);response(s,{kind:'specialSummon',actor:pending.actor,card:fusion.uid,id:fusion.id},'main');
