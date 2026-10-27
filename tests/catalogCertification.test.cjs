@@ -6,7 +6,7 @@ test('normalization preserves leading zeros, structured classification, facts an
 });
 test('calendar, unknown region, malformed stats and numeric passcodes fail closed',()=>{
  for(const date of ['2004-02-30','2003-02-29','2004-13-01','2004-1-01','garbage',null])assert.equal(p.validCatalogDate(date),false);assert.equal(p.validCatalogDate('2004-02-29'),true);
- for(const mutate of [c=>c.passwords=[8944575],c=>c.passwords=['08944575','11111111'],c=>c.atk=-1,c=>c.def=NaN,c=>c.level=0,c=>c.race='invented',c=>c.attribute='void',c=>c.firstObserved.world='1900-01-01']){const c=normal();mutate(c);assert.ok(p.normalizeHistoricalCard(c).issues.length);}
+ for(const mutate of [c=>c.passwords=[8944575],c=>c.passwords=['08944575','11111111'],c=>c.atk=-1,c=>c.def=NaN,c=>c.level=0,c=>c.race='invented',c=>c.race='constructor',c=>c.attribute='void',c=>c.firstObserved.world='1900-01-01']){const c=normal();mutate(c);assert.ok(p.normalizeHistoricalCard(c).issues.length);}
  assert.throws(()=>p.planHistoricalCatalog([], {...options,region:'anime'}));assert.throws(()=>p.planHistoricalCatalog([], {...options,cutoff:'2004-02-31'}));assert.ok(p.normalizeHistoricalCard(null).issues.length);
 });
 for(const field of ['canonical','passcode','konami'])test(`identity collision ${field} blocks both rows instead of selecting the first`,()=>{

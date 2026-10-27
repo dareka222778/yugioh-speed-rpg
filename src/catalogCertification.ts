@@ -21,7 +21,7 @@ export function normalizeHistoricalCard(input:unknown){
  const normal=c.kind==='monster'&&c.normalMainCandidate===true&&categories.length===1&&categories[0]==='normal'&&mechanics.length===0;
  const family=normal?'normal-monster':c.kind==='monster'?'monster:curation-required':c.kind==='spell'?'spell:curation-required':c.kind==='trap'?'trap:curation-required':'unknown';
  if(c.normalMainCandidate===true&&!normal)issues.push('conflicting-normal-classification');
- const race=typeof c.race==='string'?races[key(c.race)]:undefined,attribute=typeof c.attribute==='string'?c.attribute.toUpperCase():undefined;
+ const race=typeof c.race==='string'&&Object.hasOwn(races,key(c.race))?races[key(c.race)]:undefined,attribute=typeof c.attribute==='string'?c.attribute.toUpperCase():undefined;
  if(c.kind==='monster'){
   if(!race)issues.push('unknown-race');if(!attribute||!attributes.has(attribute))issues.push('unknown-attribute');
   if(!Number.isSafeInteger(c.level)||Number(c.level)<1||Number(c.level)>12||!Number.isSafeInteger(c.atk)||Number(c.atk)<0||!Number.isSafeInteger(c.def)||Number(c.def)<0)issues.push('invalid-monster-stats');
@@ -57,6 +57,6 @@ export function planHistoricalCatalog(inputs:readonly unknown[],options:{cutoff:
   const ready=normalized&&eligible&&implemented&&reviewed&&regionVerified&&tested;
   return {id,canonicalId:row.canonicalId??null,family:dependency,cataloged:true,normalized,eligible,implemented,tested,individualReview:reviewed,regionVerified,certified:!!admission?.certified,distributionAuthorized:!!admission?.certified&&!!admission?.distributionAuthorized,readyForIndividualCertification:ready,issues,missingMechanics:implemented?[]:row.family==='normal-monster'?['normal-adapter-admission']:['curated-effect-definition',...(raw?.mechanics??[])],scenarioPlan:requirements,card:row.card};
  });
- const families:Record<string,{cataloged:number;normalized:number;implemented:number;tested:number;certified:number;distributionAuthorized:number}>={};for(const row of plan){const f=families[row.family]??={cataloged:0,normalized:0,implemented:0,tested:0,certified:0,distributionAuthorized:0};for(const stage of Object.keys(f) as (keyof typeof f)[])if(row[stage])f[stage]++;}
+ const families:Record<string,{cataloged:number;normalized:number;implemented:number;tested:number;certified:number;distributionAuthorized:number}>=Object.create(null);for(const row of plan){const f=families[row.family]??={cataloged:0,normalized:0,implemented:0,tested:0,certified:0,distributionAuthorized:0};for(const stage of Object.keys(f) as (keyof typeof f)[])if(row[stage])f[stage]++;}
  return {kind:'read-only-historical-certification-pipeline',region:options.region,cutoff:options.cutoff,enablesCards:false,grantsInventory:false,automation:{unit:'candidate-card',candidates:plan.length,normalized:plan.filter(r=>r.normalized).length,scenarioPlans:plan.filter(r=>r.normalized&&r.family==='normal-monster').length,individualApprovalsRequired:plan.length,automaticCertifications:0},families,plan};
 }

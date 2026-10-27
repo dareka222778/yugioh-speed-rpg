@@ -54,6 +54,8 @@ CONFIRMADO: fatos mecânicos e presença OCG antes do corte nas fontes oficiais.
 
 `tests/helpers/normalCertification.cjs` é o adaptador reutilizável de cenários. Cada carta registra oito testes independentes: identidade, invocação, baixar, destruição, controle temporário, Tributo ao Cemitério do dono, restauração JSON e zonas ocupadas. Só a execução produz `artifacts/certification-executions-mission4.json`. Um plano gerado sem execução não marca a carta como testada. O lote usa a mecânica Normal existente; não foram inventados efeitos para ampliar contagens.
 
+O adaptador calcula os Tributos por nível e distingue zona cheia sem Tributo de zona liberada por Tributo. Duas cartas já certificadas de níveis 5 e 8 exercitam mais 16 cenários do próprio adaptador, sem criar certificados ou revisões históricas novas para elas.
+
 Distribuição das 40 adições das Missões 3–4 permanece bloqueada. As 130 anteriores conservam a política existente. Não há novas concessões, alteração de loja, recompensa, starter, coleção ou deck NPC. A autorização de distribuição não equivale a posse; os demais controles de inventário permanecem.
 
 ## Versionamento e preservação
