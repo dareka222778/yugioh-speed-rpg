@@ -16,6 +16,7 @@ jobs:
       - run: npm ci
       - run: node scripts/verify-resolver-archives.cjs
       - run: node scripts/check-mission3-integrity.cjs
+      - run: node scripts/check-mission4-integrity.cjs
       - run: npm run check
       - run: npm test
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission4-individual-reviews.json artifacts/certification-executions-mission4.json
@@ -23,6 +24,8 @@ jobs:
       - run: npm run audit:rea
       - run: npm run benchmark:recovery
       - run: node --expose-gc scripts/benchmark-concurrent-engine.cjs
+      - run: node --expose-gc scripts/benchmark-concurrent-engine.cjs 50
+      - run: node --expose-gc scripts/benchmark-concurrent-engine.cjs 100
       - run: npm run audit:historical-batch
       - run: npm run check:cards
       - run: npm run audit:history
@@ -47,6 +50,7 @@ jobs:
             artifacts/engine-recovery-benchmark.json
             artifacts/discord-offline-homologation.json
             artifacts/concurrent-engine-benchmark.json
+            artifacts/concurrent-engine-benchmark-*.json
             artifacts/certification-pipeline.json
             artifacts/certification-executions-mission4.json
             artifacts/discord-full-matches.json

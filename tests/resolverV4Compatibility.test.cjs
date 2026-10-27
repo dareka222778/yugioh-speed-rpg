@@ -1,0 +1,8 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{getArchivedDefinitionResolver}=require('../dist/resolverArchive'),{npcs}=require('../dist/npcContent'),{historicalNormalBatch4}=require('../dist/historicalNormalBatch4');
+test('v3 saves retain 150 cards and six complete seeded classical replays agree with v4',()=>{
+ const old=getArchivedDefinitionResolver('engine-v3'),current=getArchivedDefinitionResolver('engine-v4'),clone=s=>JSON.parse(JSON.stringify(s)),comparable=s=>{const copy=clone(s);delete copy.resolverVersion;return copy;};assert.equal(old.IMPLEMENTED_DUEL_CARDS.length,150);assert.equal(current.IMPLEMENTED_DUEL_CARDS.length,170);for(const c of historicalNormalBatch4)assert.equal(old.getPlayableCard(c.id),undefined);
+ for(let seed=0;seed<6;seed++){
+  const players=[0,1].map(i=>({...npcs[(seed+i)%3],id:i?'b':'a'})),options={randomSeed:seed.toString(16).padStart(64,'0')};let a=old.createDuel(players,undefined,0,options),b=current.createDuel(players,undefined,0,options),steps=0;
+  while(a.phase!=='finished'){assert.ok(++steps<1000);assert.deepEqual(comparable(a),comparable(b));const who=a.players[old.decisionPlayer(a)].id,actions=old.legalActions(a,who);assert.deepEqual(current.legalActions(b,who),actions);const action=actions.find(x=>['pass','choose','discard'].includes(x.kind))??actions.find(x=>x.kind==='summon'&&x.position==='atk')??actions.find(x=>x.kind==='spell')??actions.find(x=>x.kind==='attack')??actions.find(x=>x.kind==='battle')??actions.find(x=>x.kind==='end')??actions[0];a=old.step(clone(a),who,action);b=current.step(clone(b),who,action);}assert.deepEqual(comparable(a),comparable(b));
+ }
+});
