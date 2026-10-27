@@ -12,9 +12,17 @@ import {economicOperations} from './effectModels';
 import {getEffect} from './effectRegistry';
 import {getMonsterEffect} from './monsterEffects';
 import {settleEncounter} from './npcProgress';
-export type DuelRecord={events?:DuelTransitionEvent[];id:string;guild_id:string;channel_id:string;message_id:string|null;status:string;revision:number;updated:number;public_revision?:number;state:DuelState|null;invite:{owner:string;opponent:string;name:string;cards:string[];extra?:string[]}|null};
+export type DuelRecord={receipt?:{requestId:string;committedRevision:number;replayed:boolean};events?:DuelTransitionEvent[];id:string;guild_id:string;channel_id:string;message_id:string|null;status:string;revision:number;updated:number;public_revision?:number;state:DuelState|null;invite:{owner:string;opponent:string;name:string;cards:string[];extra?:string[]}|null};
 db.exec(`CREATE TABLE IF NOT EXISTS duels (id TEXT PRIMARY KEY,guild_id TEXT NOT NULL,channel_id TEXT NOT NULL,message_id TEXT,status TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 0,updated INTEGER NOT NULL,state TEXT,invite TEXT);
  CREATE TABLE IF NOT EXISTS duel_members (owner TEXT PRIMARY KEY,duel_id TEXT NOT NULL REFERENCES duels(id) ON DELETE CASCADE);`);
+// Additive tables: old snapshots and membership rows remain unchanged.
+db.exec(`CREATE TABLE IF NOT EXISTS duel_action_receipts (
+ request_id TEXT PRIMARY KEY,duel_id TEXT NOT NULL REFERENCES duels(id),actor TEXT NOT NULL,
+ guild_id TEXT NOT NULL,expected_revision INTEGER NOT NULL,action_json TEXT NOT NULL,
+ committed_revision INTEGER NOT NULL);
+ CREATE TABLE IF NOT EXISTS duel_transition_events (
+ duel_id TEXT NOT NULL REFERENCES duels(id),revision INTEGER NOT NULL,events_json TEXT NOT NULL,
+ PRIMARY KEY(duel_id,revision));`);
 const duelColumns=new Set((db.prepare('PRAGMA table_info(duels)').all() as {name:string}[]).map(c=>c.name));
 if(!duelColumns.has('public_revision'))db.exec('ALTER TABLE duels ADD COLUMN public_revision INTEGER NOT NULL DEFAULT -1');
 function read(id:string):DuelRecord|undefined {const row=db.prepare('SELECT * FROM duels WHERE id=?').get(id) as any;if(!row)return;let state,invite;try{state=row.state?JSON.parse(row.state):null;invite=row.invite?JSON.parse(row.invite):null;}catch{throw new Error('Dados salvos do duelo inválidos. Nenhuma alteração foi gravada.');}if(state)assertDuelState(state);if(row.status==='playing'&&!state)throw new Error('Estado do duelo inválido: partida ativa sem dados. Nenhuma alteração foi gravada.');return {...row,state,invite};}
@@ -187,17 +195,36 @@ export const createNPCDuel=db.transaction((owner:string,guild:string,channel:str
  state.encounter={npcId:npc.id,...daily?{eventDay:event.day}:{}};state=driveNPC(state);
  const r:DuelRecord={id,guild_id:guild,channel_id:channel,message_id:null,status:'playing',revision:0,updated:Date.now(),state,invite:null};insert(r,[owner]);return r;
 });
-export const performDuelAction=db.transaction((id:string,owner:string,guild:string,expected:number,index:number|Action):DuelRecord=>{
+export const performDuelAction=db.transaction((id:string,owner:string,guild:string,expected:number,index:number|Action,requestId?:string):DuelRecord=>{
+ if(requestId!==undefined&&(typeof requestId!=='string'||!requestId.trim()||requestId.length>128))throw new Error('Identificador de ação inválido.');
+ const fingerprint=JSON.stringify(index);
+ if(requestId){
+  const receipt=db.prepare('SELECT * FROM duel_action_receipts WHERE request_id=?').get(requestId) as {duel_id:string;actor:string;guild_id:string;expected_revision:number;action_json:string;committed_revision:number}|undefined;
+  if(receipt){
+   if(receipt.duel_id!==id||receipt.actor!==owner||receipt.guild_id!==guild||receipt.expected_revision!==expected||receipt.action_json!==fingerprint)throw new Error('Identificador de ação já utilizado por outra solicitação.');
+   // Read without timeout side effects: retrying a delivery cannot advance a duel.
+   const current=read(id);if(!current)throw new Error('Duelo não encontrado.');
+   return {...current,receipt:{requestId,committedRevision:receipt.committed_revision,replayed:true}};
+  }
+ }
  const r=getDuel(id);if(r.guild_id!==guild||r.status!=='playing'||!r.state)throw new Error('Esse duelo não está ativo neste servidor.');if(r.revision!==expected)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
  const actions=legalActions(r.state,owner);const action=typeof index==='number'?actions[index]:index;
  if(!action||(typeof index!=='number'&&action.kind!=='concede'))throw new Error('Ação inválida.');
- const before=r.state;r.state=driveNPC(applyDuelAction(before,owner,action).state);r.events=transitionEvents(before,r.state);r.revision++;r.updated=Date.now();if(r.state.phase==='finished')r.status='finished';save(r);return r;
+ const before=r.state;r.state=driveNPC(applyDuelAction(before,owner,action).state);r.events=transitionEvents(before,r.state);r.revision++;r.updated=Date.now();if(r.state.phase==='finished')r.status='finished';save(r);
+ db.prepare('INSERT INTO duel_transition_events(duel_id,revision,events_json) VALUES(?,?,?)').run(id,r.revision,JSON.stringify(r.events));
+ if(requestId){db.prepare('INSERT INTO duel_action_receipts VALUES(?,?,?,?,?,?,?)').run(requestId,id,owner,guild,expected,fingerprint,r.revision);r.receipt={requestId,committedRevision:r.revision,replayed:false};}
+ return r;
 });
 export function setDuelMessage(id:string,channel:string,message:string){db.prepare('UPDATE duels SET channel_id=?,message_id=?,public_revision=revision WHERE id=?').run(channel,message,id);}
 
 export function expireDueDuels(now=Date.now()):DuelRecord[]{
  const rows=db.prepare("SELECT id FROM duels WHERE (status='pending' AND updated<=?) OR (status='playing' AND updated<=?) LIMIT 100").all(now-120_000,now-DECISION_TIMEOUT_MS) as {id:string}[];
- const changed=rows.map(row=>getDuel(row.id,now));const unpublished=db.prepare("SELECT id FROM duels WHERE status IN ('finished','expired','declined') AND message_id IS NOT NULL AND public_revision<revision LIMIT 100").all() as {id:string}[];return [...new Map([...changed,...unpublished.map(row=>getDuel(row.id,now))].map(r=>[r.id,r])).values()];
+ const changed=rows.map(row=>getDuel(row.id,now));const unpublished=db.prepare("SELECT id FROM duels WHERE status IN ('pending','playing','finished','expired','declined') AND message_id IS NOT NULL AND public_revision<revision LIMIT 100").all() as {id:string}[];return [...new Map([...changed,...unpublished.map(row=>getDuel(row.id,now))].map(r=>[r.id,r])).values()];
 }
 
+/** Private events are filtered at delivery by projectTransitionEvents, never broadcast raw. */
+export function duelEventsAt(id:string,revision:number):DuelTransitionEvent[]{
+ const row=db.prepare('SELECT events_json FROM duel_transition_events WHERE duel_id=? AND revision=?').get(id,revision) as {events_json:string}|undefined;
+ return row?JSON.parse(row.events_json):[];
+}
 export function markDuelPublished(id:string,revision:number){db.prepare('UPDATE duels SET public_revision=? WHERE id=? AND revision=?').run(revision,id,revision);}
