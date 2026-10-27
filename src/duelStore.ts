@@ -196,6 +196,7 @@ export const createNPCDuel=db.transaction((owner:string,guild:string,channel:str
  state.encounter={npcId:npc.id,...daily?{eventDay:event.day}:{}};state=driveNPC(state);
  const r:DuelRecord={id,guild_id:guild,channel_id:channel,message_id:null,status:'playing',revision:0,updated:Date.now(),state,invite:null};insert(r,[owner]);return r;
 });
+/** Acquire the writer before reading receipts/state: deferred upgrades can starve under WAL contention. */
 export const performDuelAction=db.transaction((id:string,owner:string,guild:string,expected:number,index:number|Action,requestId?:string):DuelRecord=>{
  const request={id,actor:owner,guild,expected,action:index,requestId},receipt=findActionReceipt('duel',request);
  if(receipt){const current=read(id);if(!current)throw new Error('Duelo inexistente.');return {...current,receipt};}
@@ -206,7 +207,7 @@ export const performDuelAction=db.transaction((id:string,owner:string,guild:stri
  db.prepare('INSERT INTO duel_transition_events(duel_id,revision,events_json) VALUES(?,?,?)').run(id,r.revision,JSON.stringify(r.events));
  if(requestId)r.receipt=saveActionReceipt('duel',request,r.revision);
  return r;
-});
+}).immediate;
 export function setDuelMessage(id:string,channel:string,message:string,publishedRevision=-1){
  if(!Number.isSafeInteger(publishedRevision)||publishedRevision< -1)throw new Error('Revisão de publicação inválida.');
  // Creating a Discord message may race a state commit. Acknowledge only the

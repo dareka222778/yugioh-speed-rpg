@@ -36,20 +36,22 @@ export function normalizeHistoricalCard(input:unknown){
 export function planHistoricalCatalog(inputs:readonly unknown[],options:{cutoff:string;region:'tcg'|'ocg'|'world';admissions?:readonly EngineAdmission[];reviews?:readonly IndividualReview[];executions?:readonly ExecutionEvidence[]}){
  if(!validCatalogDate(options.cutoff)||!['tcg','ocg','world'].includes(options.region))throw new Error('Invalid regional cutoff');
  const rows=inputs.map(normalizeHistoricalCard),conflicts=new Map<string,number[]>();
- const claims=(value:string|number|undefined,prefix:string,i:number)=>{if(value===undefined)return;const k=prefix+value;conflicts.set(k,[...conflicts.get(k)??[],i]);};
+ const claims=(value:string|number|undefined,prefix:string,i:number)=>{if(value===undefined)return;const k=prefix+value,bucket=conflicts.get(k)??[];bucket.push(i);conflicts.set(k,bucket);};
  inputs.forEach((raw,i)=>{const c=raw as Partial<HistoryInput>|null;if(!c||typeof c!=='object')return;claims(c.id,'canonical:',i);if(c.konamiId!=null)claims(c.konamiId,'konami:',i);if(Array.isArray(c.passwords))for(const id of new Set(c.passwords))claims(id,'passcode:',i);});
  const duplicateIndexes=new Set<number>();for(const indexes of conflicts.values())if(indexes.length>1)indexes.forEach(i=>duplicateIndexes.add(i));
  const reviews=options.reviews??[],executions=options.executions??[],admissions=options.admissions??[];
+ function index<T extends {id:string}>(items:readonly T[]){const map=new Map<string,T[]>();for(const item of items){const bucket=map.get(item.id)??[];bucket.push(item);map.set(item.id,bucket);}return map;}
+ const reviewIndex=index(reviews),executionIndex=index(executions),admissionIndex=index(admissions);
  const plan=rows.map((row,i)=>{
-  const raw=inputs[i] as Partial<HistoryInput>|null,aliases=Array.isArray(raw?.passwords)?raw.passwords:[],matches=admissions.filter(a=>aliases.includes(a.id)),admission=matches.length===1?matches[0]:undefined,id=admission?.id??row.card?.id??(typeof aliases[0]==='string'?aliases[0]:null),issues=[...row.issues];if(duplicateIndexes.has(i))issues.push('identity-collision');
+  const raw=inputs[i] as Partial<HistoryInput>|null,aliases=Array.isArray(raw?.passwords)?raw.passwords:[],matches=[...new Set(aliases.flatMap(id=>admissionIndex.get(id)??[]))],admission=matches.length===1?matches[0]:undefined,id=admission?.id??row.card?.id??(typeof aliases[0]==='string'?aliases[0]:null),issues=[...row.issues];if(duplicateIndexes.has(i))issues.push('identity-collision');
   const date=row.dates[options.region],eligible=validCatalogDate(date)&&date<=options.cutoff;if(!eligible)issues.push(date===null?'regional-date-not-recovered':'outside-cutoff');
   if(matches.length>1)issues.push('ambiguous-admission');
-  const rs=reviews.filter(r=>r.id===id),review=rs.length===1?rs[0]:undefined;if(rs.length>1)issues.push('duplicate-review');
+  const rs=reviewIndex.get(id??'')??[],review=rs.length===1?rs[0]:undefined;if(rs.length>1)issues.push('duplicate-review');
   const primary=review?.primaryFacts,card=row.card;
   const reviewed=!!card&&!!review&&!!review.reviewer?.trim()&&validCatalogDate(review.reviewedAt)&&review.canonicalId===row.canonicalId&&review.konamiId===card.konamiId&&review.identityApproved===true&&review.mechanicsApproved===true&&review.primarySource===card.source&&!!primary&&primary.level===card.level&&primary.atk===card.atk&&primary.defense===card.defense&&primary.race===card.race&&primary.attribute===card.attribute&&validCatalogDate(primary.ocgDate)&&primary.ocgDate===row.dates.ocg&&!!admission&&review.mechanicalFingerprint===admission.fingerprint;
   const regionVerified=reviewed&&(options.region==='ocg'||options.region==='world'||validCatalogDate(review?.tcgDate)&&review?.tcgDate===row.dates.tcg&&typeof review.tcgSource==='string'&&review.tcgSource.startsWith('https://www.db.yugioh-card.com/'));
   const dependency=admission?.family??row.family,implemented=!!admission,requirements=row.family==='normal-monster'?[...NORMAL_SCENARIOS]:['individual-mechanical-scenarios-required'];
-  const es=executions.filter(e=>e.id===id),execution=es.length===1?es[0]:undefined;
+  const es=executionIndex.get(id??'')??[],execution=es.length===1?es[0]:undefined;
   const tested=!!admission&&!!execution&&execution.fingerprint===admission.fingerprint&&execution.failed.length===0&&requirements.every(s=>execution.passed.includes(s));
   const normalized=!!row.card&&!issues.some(s=>s!=='regional-date-not-recovered'&&s!=='outside-cutoff');
   const ready=normalized&&eligible&&implemented&&reviewed&&regionVerified&&tested;
