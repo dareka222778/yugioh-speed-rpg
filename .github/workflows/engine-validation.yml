@@ -20,6 +20,7 @@ jobs:
       - run: node scripts/check-mission5-integrity.cjs
       - run: npm run check
       - run: npm test
+      - run: node scripts/stamp-candidate-build.cjs
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission4-individual-reviews.json artifacts/certification-executions-mission4.json
       - run: node scripts/audit-normalization-blockers.cjs
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission5-individual-reviews.json artifacts/certification-executions-mission5.json
@@ -49,6 +50,7 @@ jobs:
       - run: npm run audit:tag-classic-sessions
       - run: npm run audit:tag-training
       - run: node scripts/render-previews.cjs artifacts/previews
+      - run: node scripts/audit-mission6-readiness.cjs
       - name: Preserve executable REA acceptance report
         if: always()
         uses: actions/upload-artifact@v4
@@ -68,6 +70,7 @@ jobs:
             artifacts/normalization-blockers-mission5.json
             artifacts/abrupt-recovery-mission6.json
             artifacts/mixed-version-soak-mission6.json
+            artifacts/readiness-mission6.json
           if-no-files-found: ignore
           retention-days: 14
       - name: Publicar prévias visuais
