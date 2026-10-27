@@ -19,6 +19,7 @@ jobs:
       - run: npm test
       - run: npm run audit:rea
       - run: npm run benchmark:recovery
+      - run: node --expose-gc scripts/benchmark-concurrent-engine.cjs
       - run: npm run audit:historical-batch
       - run: npm run check:cards
       - run: npm run audit:history
@@ -41,6 +42,8 @@ jobs:
           path: |
             artifacts/rea-acceptance.json
             artifacts/engine-recovery-benchmark.json
+            artifacts/discord-offline-homologation.json
+            artifacts/concurrent-engine-benchmark.json
           if-no-files-found: ignore
           retention-days: 14
       - name: Publicar prévias visuais
