@@ -45,4 +45,8 @@ Avançar com regressões cruzadas de alvos, dono/controlador, escolhas/restaura�
 
 O beta pretendido é de 20–50 jogadores, não 20–50 duelos nem uma capacidade já homologada. A homologação real exige o ambiente e autorizações do roteiro da Missão 6. Amostras headless/SQLite não comprovam Gateway, rate limits, publicação ou RAM conjunta do host. Não fazer login, distribuição, merge ou deploy automaticamente.
 
+O manifesto `evidence/mission7-preserved.json` fixa os 162 arquivos históricos v1–v5 (157 módulos e cinco manifestos) ao Git blob do checkpoint remoto e os 197 certificados anteriores a hashes SHA-256. `check-mission7-integrity.cjs` é gate do CI, junto com os verificadores anteriores. A ampliação do catálogo não pode modificar silenciosamente um certificado antigo.
+
+Próxima prioridade mecânica: efeitos contínuos com presença da fonte, múltiplas fontes e limpeza/negação; avaliar um novo lote somente após fontes e testes individuais, sem supor que a v6 contenha essa implementação. Continuar a expansão histórica por famílias, mantendo todas as cartas fora da disponibilidade até autorização específica. Nenhum resultado de 24/48 participantes simulados substitui o aceite do beta real.
+
 Permanecem fora da cobertura completa: catálogo histórico inteiro, mecânicas ainda não implementadas, fatos ausentes, épocas históricas I02, homologação humana/Discord, host com recursos medidos, soak de horas/dias e restauração operacional. Consultar o CI e o PR atuais para resultados do SHA final; não herdar contagens de um candidato intermediário.

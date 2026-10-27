@@ -3,20 +3,136 @@
   "baseCommit": "02405e4570d180a3aec002a1a4fcc672c69c39cd",
   "branch": "feat/rea-engine-recovery-20261026",
   "pr": 12,
-  "status": "candidate-requires-complete-CI",
-  "candidateEngine": "engine-v6",
-  "historicalEnginesPreserved": ["engine-v1","engine-v2","engine-v3","engine-v4","engine-v5"],
-  "candidateCertificatesBefore": 197,
-  "candidateCertificatesAfter": 203,
-  "newCards": ["43716289","45141844","77491079","91869203","69579761","83994646"],
-  "newCardsDistributionAuthorized": false,
-  "localSelectedPureTests": {"passed":156,"failed":0,"node":"24; source stripping, not TypeScript/native-dependency CI"},
-  "requiredCI": ".github/workflows/engine-validation.yml",
-  "individualReviews": "docs/evidence/mission7-individual-reviews.json",
-  "executionsArtifact": "artifacts/certification-executions-mission7.json",
-  "report": "docs/REA-MISSION-7.md",
-  "next": ["complete CI and resolve demonstrated failures","extend target/owner/restore/2v2/transaction regression of this cohort","evaluate next fully implementable family"],
-  "betaTargetPlayers": [20,50],
-  "betaCapacityCertified": false,
-  "forbidden": ["merge","deploy","production","distribution","historical resolver rewrites","unapproved Discord login"]
+  "stage": "implemented-complete-CI-is-required-gate",
+  "engine": "engine-v6",
+  "preservedVersions": [
+    "engine-v1",
+    "engine-v2",
+    "engine-v3",
+    "engine-v4",
+    "engine-v5"
+  ],
+  "sourceModulesByVersion": [
+    27,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "certificates": {
+    "before": 197,
+    "candidateAfter": 203,
+    "newIds": [
+      "43716289",
+      "45141844",
+      "77491079",
+      "91869203",
+      "69579761",
+      "83994646"
+    ],
+    "newDistributionAuthorized": 0,
+    "previouslyBlocked": 67,
+    "candidateTotalBlocked": 73
+  },
+  "normalization": {
+    "unchanged": true,
+    "normalized": 1951,
+    "total": 1962,
+    "blocked": 11
+  },
+  "implemented": [
+    "Six individually reviewed full card effects",
+    "Hand-count damage at resolution",
+    "Non-targeting revealed-level group destruction",
+    "Cross-effect and NPC regression",
+    "Legacy v5 tag restore beside v6",
+    "Two-Tribute rollback/durable receipt/reopen",
+    "24/48 simulated-player persistent load",
+    "Preservation of all 197 prior certificates and 162 archived files"
+  ],
+  "localEvidence": {
+    "selectedPureRegressions156": {
+      "passed": 156,
+      "failed": 0
+    },
+    "affectedPureRegressions105": {
+      "passed": 105,
+      "failed": 0
+    },
+    "npcAdditional": {
+      "passed": 3,
+      "failed": 0
+    },
+    "countsOverlap": true,
+    "nativeDependencies": "SQLite/Sharp/full build verified by CI Node22; not claimed locally"
+  },
+  "ci": {
+    "requiredWorkflow": ".github/workflows/engine-validation.yml",
+    "latestImplementedCodeBeforeThisCheckpoint": "153b9b2e954084d4494c0bd09444608183efe56b",
+    "associatedRun": 40592360146,
+    "policy": "Inspect full success of both jobs on current PR head. Do not inherit intermediate results.",
+    "firstRun": {
+      "id": 40591535651,
+      "total": 993,
+      "passed": 972,
+      "failed": 21,
+      "cause": "v6 missing from token/Standby gates; stale current-card-count/version expectations",
+      "corrected": true
+    }
+  },
+  "proofs": {
+    "individualReviews": "docs/evidence/mission7-individual-reviews.json",
+    "individualExecutionArtifact": "artifacts/certification-executions-mission7.json",
+    "betaArtifact": "artifacts/beta-simulation-mission7.json",
+    "preservation": "docs/evidence/mission7-preserved.json",
+    "report": "docs/REA-MISSION-7.md"
+  },
+  "beta": {
+    "targetPlayers": [
+      20,
+      50
+    ],
+    "simulatedScenarios": [
+      {
+        "sessions": 8,
+        "participants": 24,
+        "resolverVersions": 5
+      },
+      {
+        "sessions": 16,
+        "participants": 48,
+        "resolverVersions": 6
+      }
+    ],
+    "realDiscordCertified": false,
+    "capacityCertified": false
+  },
+  "next": [
+    "Verify current-head complete CI and fix demonstrated failures",
+    "Review continuous-effect families with explicit source/lifetime/negation dependencies",
+    "Keep Dark Mimic LV1 blocked until its entire Standby evolution is implemented",
+    "Continue historical card certification by independent tested cohorts",
+    "Execute real Discord homologation only with dedicated environment/authorization; obtain real host/latency/restore acceptance"
+  ],
+  "preserve": [
+    "historical engines",
+    "saves",
+    "collections",
+    "decks",
+    "profiles",
+    "progress",
+    "economy",
+    "layout",
+    "images",
+    "card backs"
+  ],
+  "forbidden": [
+    "merge",
+    "deploy",
+    "production changes",
+    "automatic card distribution",
+    "unapproved Discord access"
+  ],
+  "resume": "Read docs/REA-MISSION-7.md and this JSON, inspect current PR HEAD/CI and later changes. Never overwrite later work. Complete the next safe independent cohort with primary facts, tests, explicit versioning and persistent evidence."
 }
