@@ -109,6 +109,10 @@
         {
           "file": "tests/duelRecovery.test.cjs",
           "pattern": "REA-A03"
+        },
+        {
+          "file": "tests/tagRecovery.test.cjs",
+          "pattern": "REA-A03"
         }
       ]
     },
@@ -260,6 +264,10 @@
         {
           "file": "tests/duelCompletion.test.cjs",
           "pattern": "SQLite restart preserves"
+        },
+        {
+          "file": "tests/tagRecovery.test.cjs",
+          "pattern": "REA-R01"
         }
       ]
     },
@@ -289,7 +297,7 @@
       "expected": "Quarentena e razão explícita; original preservado; sem fallback silencioso.",
       "expectedGap": null,
       "coverage": "partial",
-      "limitation": "Fail-closed validation preserves raw state; no administrative quarantine UI.",
+      "limitation": "Read-only quarantine inspection exposes reasons and preserves raw rows; no administrative repair UI.",
       "checks": [
         {
           "file": "tests/duelIntegrity.test.cjs",
@@ -298,6 +306,10 @@
         {
           "file": "tests/cardLifetime.test.cjs",
           "pattern": "unknown choice continuation"
+        },
+        {
+          "file": "tests/duelRecovery.test.cjs",
+          "pattern": "REA-R03"
         }
       ]
     },

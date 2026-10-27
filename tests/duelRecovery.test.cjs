@@ -31,6 +31,15 @@ test('REA-R02: active unpublished revisions are retried and stale acknowledgment
  assert.ok(store.expireDueDuels().some(r=>r.id===before.id));store.markDuelPublished(before.id,next.revision);
  assert.ok(!store.expireDueDuels().some(r=>r.id===before.id));finish(next);
 });
+test('REA-R03: incompatible snapshots remain quarantined without blocking unrelated recovery',()=>{
+ const before=start(),raw=JSON.stringify({...before.state,cardDefinitionsVersion:999});
+ database.db.prepare('INSERT INTO duels(id,guild_id,channel_id,status,revision,updated,state) VALUES(?,?,?,?,?,?,?)').run('quarantined-version','g','c','playing',0,0,raw);
+ const inspected=store.inspectSavedDuel('quarantined-version');assert.equal(inspected.status,'quarantined');assert.match(inspected.reason,/incompatível/);
+ database.db.prepare('UPDATE duels SET updated=0 WHERE id=?').run(before.id);
+ assert.ok(store.expireDueDuels().some(row=>row.id===before.id));
+ assert.equal(database.db.prepare('SELECT state FROM duels WHERE id=?').get('quarantined-version').state,raw);
+ assert.equal(store.getDuel(before.id).status,'finished');assert.equal(store.inspectSavedDuel('not-found').status,'missing');
+});
 test('REA-E01: intermediate activation movements are durable and not duplicated by receipt replay',()=>{
  const before=start();before.state.turn=3;before.state.players[before.state.current].hand.push({uid:'causal-pot',id:'55144522'});
  database.db.prepare('UPDATE duels SET state=? WHERE id=?').run(JSON.stringify(before.state),before.id);

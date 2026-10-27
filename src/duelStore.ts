@@ -1,3 +1,4 @@
+import {findActionReceipt,saveActionReceipt,type ActionReceipt} from './actionReceipts';
 import {tacticalSummon,tacticalPosition,tacticalAttack,handCardValue,publicBattleAssessment} from './npcStrategy';
 import {randomBytes,randomInt} from 'node:crypto';
 import {applyDuelAction,transitionEvents,type DuelTransitionEvent} from './duelTransitions';
@@ -12,7 +13,7 @@ import {economicOperations} from './effectModels';
 import {getEffect} from './effectRegistry';
 import {getMonsterEffect} from './monsterEffects';
 import {settleEncounter} from './npcProgress';
-export type DuelRecord={receipt?:{requestId:string;committedRevision:number;replayed:boolean};events?:DuelTransitionEvent[];id:string;guild_id:string;channel_id:string;message_id:string|null;status:string;revision:number;updated:number;public_revision?:number;state:DuelState|null;invite:{owner:string;opponent:string;name:string;cards:string[];extra?:string[]}|null};
+export type DuelRecord={receipt?:ActionReceipt;events?:DuelTransitionEvent[];id:string;guild_id:string;channel_id:string;message_id:string|null;status:string;revision:number;updated:number;public_revision?:number;state:DuelState|null;invite:{owner:string;opponent:string;name:string;cards:string[];extra?:string[]}|null};
 db.exec(`CREATE TABLE IF NOT EXISTS duels (id TEXT PRIMARY KEY,guild_id TEXT NOT NULL,channel_id TEXT NOT NULL,message_id TEXT,status TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 0,updated INTEGER NOT NULL,state TEXT,invite TEXT);
  CREATE TABLE IF NOT EXISTS duel_members (owner TEXT PRIMARY KEY,duel_id TEXT NOT NULL REFERENCES duels(id) ON DELETE CASCADE);`);
 // Additive tables: old snapshots and membership rows remain unchanged.
@@ -196,30 +197,30 @@ export const createNPCDuel=db.transaction((owner:string,guild:string,channel:str
  const r:DuelRecord={id,guild_id:guild,channel_id:channel,message_id:null,status:'playing',revision:0,updated:Date.now(),state,invite:null};insert(r,[owner]);return r;
 });
 export const performDuelAction=db.transaction((id:string,owner:string,guild:string,expected:number,index:number|Action,requestId?:string):DuelRecord=>{
- if(requestId!==undefined&&(typeof requestId!=='string'||!requestId.trim()||requestId.length>128))throw new Error('Identificador de ação inválido.');
- const fingerprint=JSON.stringify(index);
- if(requestId){
-  const receipt=db.prepare('SELECT * FROM duel_action_receipts WHERE request_id=?').get(requestId) as {duel_id:string;actor:string;guild_id:string;expected_revision:number;action_json:string;committed_revision:number}|undefined;
-  if(receipt){
-   if(receipt.duel_id!==id||receipt.actor!==owner||receipt.guild_id!==guild||receipt.expected_revision!==expected||receipt.action_json!==fingerprint)throw new Error('Identificador de ação já utilizado por outra solicitação.');
-   // Read without timeout side effects: retrying a delivery cannot advance a duel.
-   const current=read(id);if(!current)throw new Error('Duelo não encontrado.');
-   return {...current,receipt:{requestId,committedRevision:receipt.committed_revision,replayed:true}};
-  }
- }
+ const request={id,actor:owner,guild,expected,action:index,requestId},receipt=findActionReceipt('duel',request);
+ if(receipt){const current=read(id);if(!current)throw new Error('Duelo inexistente.');return {...current,receipt};}
  const r=getDuel(id);if(r.guild_id!==guild||r.status!=='playing'||!r.state)throw new Error('Esse duelo não está ativo neste servidor.');if(r.revision!==expected)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
  const actions=legalActions(r.state,owner);const action=typeof index==='number'?actions[index]:index;
  if(!action||(typeof index!=='number'&&action.kind!=='concede'))throw new Error('Ação inválida.');
  const before=r.state,applied=applyDuelAction(before,owner,action);r.events=[...applied.events];r.state=driveNPC(applied.state,r.events);r.revision++;r.updated=Date.now();if(r.state.phase==='finished')r.status='finished';save(r);
  db.prepare('INSERT INTO duel_transition_events(duel_id,revision,events_json) VALUES(?,?,?)').run(id,r.revision,JSON.stringify(r.events));
- if(requestId){db.prepare('INSERT INTO duel_action_receipts VALUES(?,?,?,?,?,?,?)').run(requestId,id,owner,guild,expected,fingerprint,r.revision);r.receipt={requestId,committedRevision:r.revision,replayed:false};}
+ if(requestId)r.receipt=saveActionReceipt('duel',request,r.revision);
  return r;
 });
 export function setDuelMessage(id:string,channel:string,message:string){db.prepare('UPDATE duels SET channel_id=?,message_id=?,public_revision=revision WHERE id=?').run(channel,message,id);}
 
 export function expireDueDuels(now=Date.now()):DuelRecord[]{
  const rows=db.prepare("SELECT id FROM duels WHERE (status='pending' AND updated<=?) OR (status='playing' AND updated<=?) LIMIT 100").all(now-120_000,now-DECISION_TIMEOUT_MS) as {id:string}[];
- const changed=rows.map(row=>getDuel(row.id,now));const unpublished=db.prepare("SELECT id FROM duels WHERE status IN ('pending','playing','finished','expired','declined') AND message_id IS NOT NULL AND public_revision<revision LIMIT 100").all() as {id:string}[];return [...new Map([...changed,...unpublished.map(row=>getDuel(row.id,now))].map(r=>[r.id,r])).values()];
+ const unpublished=db.prepare("SELECT id FROM duels WHERE status IN ('pending','playing','finished','expired','declined') AND message_id IS NOT NULL AND public_revision<revision LIMIT 100").all() as {id:string}[];
+ return [...new Set([...rows,...unpublished].map(row=>row.id))].flatMap(id=>{
+  try{return [getDuel(id,now)];}catch(error){console.error('Duelo preservado para revisão:',id,error instanceof Error?error.message:'falha desconhecida');return [];}
+ });
+}
+
+/** Read-only quarantine inspection: never repairs, expires or replaces raw data. */
+export function inspectSavedDuel(id:string){
+ try{const record=read(id);return record?{status:'valid' as const,record}:{status:'missing' as const,id};}
+ catch(error){return {status:'quarantined' as const,id,reason:error instanceof Error?error.message:'Estado ilegível'};}
 }
 
 /** Private events are filtered at delivery by projectTransitionEvents, never broadcast raw. */

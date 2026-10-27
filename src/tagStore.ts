@@ -1,3 +1,4 @@
+import {findActionReceipt,saveActionReceipt,type ActionReceipt} from './actionReceipts';
 import {npcs,getNPC} from './npcContent';
 import {step,decisionPlayer} from './duelEngine';
 import {randomBytes,randomInt} from 'node:crypto';
@@ -5,9 +6,12 @@ import {db,getPlayer} from './database';
 import {currentDuel,activeCards,chooseNPC,DECISION_TIMEOUT_MS} from './duelStore';
 import {createTagDuel,assertTagDuel,stepTagDuel,tagActions,tagNormalCardIds,timeoutTagDuel,tagDecisionMember,type TagDuel} from './tagDuel';
 import {getPlayableCard} from './effectRegistry';
-export type TagRecord={id:string;guild:string;channel:string;message:string|null;revision:number;updated:number;status:'lobby'|'playing'|'finished'|'cancelled'|'expired';members:{id:string;name:string;accepted:boolean;automated?:boolean;deckSource?:string;cards?:string[];extra?:string[]}[];state:TagDuel|null;public_revision?:number;rules?:'normal'|'classic-loan'|'classic-owned'};
+export type TagRecord={receipt?:ActionReceipt;id:string;guild:string;channel:string;message:string|null;revision:number;updated:number;status:'lobby'|'playing'|'finished'|'cancelled'|'expired';members:{id:string;name:string;accepted:boolean;automated?:boolean;deckSource?:string;cards?:string[];extra?:string[]}[];state:TagDuel|null;public_revision?:number;rules?:'normal'|'classic-loan'|'classic-owned'};
 db.exec(`CREATE TABLE IF NOT EXISTS tag_sessions(id TEXT PRIMARY KEY,guild TEXT NOT NULL,channel TEXT NOT NULL,message TEXT,revision INTEGER NOT NULL,updated INTEGER NOT NULL,status TEXT NOT NULL,members TEXT NOT NULL,state TEXT);
 CREATE TABLE IF NOT EXISTS tag_members(owner TEXT PRIMARY KEY,session_id TEXT NOT NULL REFERENCES tag_sessions(id));`);
+db.exec(`CREATE TABLE IF NOT EXISTS tag_action_receipts (
+ request_id TEXT PRIMARY KEY,duel_id TEXT NOT NULL REFERENCES tag_sessions(id),actor TEXT NOT NULL,
+ guild_id TEXT NOT NULL,expected_revision INTEGER NOT NULL,action_json TEXT NOT NULL,committed_revision INTEGER NOT NULL);`);
 const columns=new Set((db.prepare('PRAGMA table_info(tag_sessions)').all() as {name:string}[]).map(c=>c.name));if(!columns.has('public_revision'))db.exec('ALTER TABLE tag_sessions ADD COLUMN public_revision INTEGER NOT NULL DEFAULT -1');
 if(!columns.has('rules'))db.exec("ALTER TABLE tag_sessions ADD COLUMN rules TEXT NOT NULL DEFAULT 'normal'");
 const LOBBY_MS=5*60_000;
@@ -29,7 +33,10 @@ export const acceptTag=db.transaction((id:string,actor:string,guild:string,revis
  // The lobby deadline never extends when one participant confirms.
  if(r.members.every(p=>p.accepted)){r.state=createTagDuel(r.members.map((p,i)=>({id:p.id,name:p.name,...r.rules==='classic-owned'?{cards:p.cards!,extra:p.extra??[]}:r.rules==='classic-loan'?{cards:[...npcs[i%3].cards],extra:[...npcs[i%3].extra]}:{cards:tagLoanDeck()}})) as Parameters<typeof createTagDuel>[0],{first:randomInt(4),classic:r.rules!=='normal'});r.status='playing';r.updated=Date.now();}return save(r);
 });
-export const actTag=db.transaction((id:string,actor:string,guild:string,revision:number,index:number)=>{const r=getTag(id);authorize(r,actor,guild);if(r.status!=='playing'||!r.state||r.revision!==revision)throw Error('Painel desatualizado. Atualize antes de jogar.');const actions=tagActions(r.state,actor);if(!Number.isSafeInteger(index)||index<0||index>=actions.length)throw Error('Jogada indisponível.');r.state=stepTagDuel(r.state,actor,actions[index]);r.revision++;r.updated=Date.now();if(r.state.core.phase==='finished')r.status='finished';return save(r);});
+export const actTag=db.transaction((id:string,actor:string,guild:string,revision:number,index:number,requestId?:string)=>{
+ const request={id,actor,guild,expected:revision,action:index,requestId},receipt=findActionReceipt('tag',request);
+ if(receipt){const current=read(id);authorize(current,actor,guild);return {...current,receipt};}
+ const r=getTag(id);authorize(r,actor,guild);if(r.status!=='playing'||!r.state||r.revision!==revision)throw Error('Painel desatualizado. Atualize antes de jogar.');const actions=tagActions(r.state,actor);if(!Number.isSafeInteger(index)||index<0||index>=actions.length)throw Error('Jogada indisponível.');r.state=stepTagDuel(r.state,actor,actions[index]);r.revision++;r.updated=Date.now();if(r.state.core.phase==='finished')r.status='finished';save(r);if(requestId)r.receipt=saveActionReceipt('tag',request,r.revision);return r;});
 export const quitTag=db.transaction((id:string,actor:string,guild:string,revision:number)=>{const r=getTag(id);authorize(r,actor,guild);if(!['lobby','playing'].includes(r.status)||r.revision!==revision)throw Error('Partida atualizada ou encerrada.');if(r.state){
  const team=r.state.members.find(p=>p.id===actor)!.team;
  // Any member can concede for their team, even when the partner must act.
