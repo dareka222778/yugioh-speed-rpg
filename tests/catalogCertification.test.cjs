@@ -17,11 +17,11 @@ test('TCG, OCG and world eligibility are separate; unknown regional date never b
  const c=normal();c.firstObserved.tcg=null;assert.equal(p.planHistoricalCatalog([c],{...options,region:'tcg'}).plan[0].eligible,false);assert.equal(p.planHistoricalCatalog([c],{...options,region:'ocg'}).plan[0].eligible,true);
  c.firstObserved.tcg='2012-09-27';const row=p.planHistoricalCatalog([c],{...options,region:'tcg'}).plan[0];assert.ok(row.issues.includes('outside-cutoff'));assert.equal(row.normalized,true);
 });
-test('an existing admitted alias stays visible without auto-normalizing an ambiguous new identity',()=>{
- const c=normal();c.passwords=['00000000',...c.passwords];const row=p.planHistoricalCatalog([c],{...options,admissions:[{id:'53293545',family:'normal-monster',fingerprint:'old',certified:true,distributionAuthorized:true}]}).plan[0];assert.equal(row.id,'53293545');assert.equal(row.certified,true);assert.equal(row.normalized,false);assert.equal(row.readyForIndividualCertification,false);assert.ok(row.issues.includes('ambiguous-or-invalid-passcode'));
+test('an existing alias is factually preserved without inventing an engine identity',()=>{
+ const c=normal();c.passwords=['00000000',...c.passwords];const row=p.planHistoricalCatalog([c],{...options,admissions:[{id:'53293545',family:'normal-monster',fingerprint:'old',certified:true,distributionAuthorized:true}]}).plan[0];assert.equal(row.id,'53293545');assert.equal(row.certified,true);assert.equal(row.normalized,true);assert.equal(row.engineProjectionReady,false);assert.equal(row.readyForIndividualCertification,false);assert.ok(row.projectionIssues.includes('ambiguous-or-invalid-passcode'));assert.deepEqual(row.aliases,c.passwords);
 });
 test('effect text and imported classifications do not manufacture implemented mechanics',()=>{
- const c=normal();c.classifications=['effect'];c.normalMainCandidate=false;c.mechanics=['ritual'];c.names.en='Normal monster without effect';const r=p.planHistoricalCatalog([c],options).plan[0];assert.equal(r.normalized,true);assert.equal(r.implemented,false);assert.ok(r.missingMechanics.includes('ritual'));assert.equal(r.family,'monster:curation-required');
+ const c=normal();c.classifications=['effect'];c.normalMainCandidate=false;c.mechanics=['ritual'];c.names.en='Normal monster without effect';const r=p.planHistoricalCatalog([c],options).plan[0];assert.equal(r.normalized,true);assert.equal(r.implemented,false);assert.ok(r.missingMechanics.includes('ritual'));assert.equal(r.family,'ritual:curation-required');
  c.normalMainCandidate=true;assert.ok(p.normalizeHistoricalCard(c).issues.includes('conflicting-normal-classification'));
 });
 test('each reviewed identity, current fingerprint and every executed scenario are required individually',()=>{
