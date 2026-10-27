@@ -31,6 +31,15 @@ test('REA-R02: active unpublished revisions are retried and stale acknowledgment
  assert.ok(store.expireDueDuels().some(r=>r.id===before.id));store.markDuelPublished(before.id,next.revision);
  assert.ok(!store.expireDueDuels().some(r=>r.id===before.id));finish(next);
 });
+test('REA-E01: intermediate activation movements are durable and not duplicated by receipt replay',()=>{
+ const before=start();before.state.turn=3;before.state.players[before.state.current].hand.push({uid:'causal-pot',id:'55144522'});
+ database.db.prepare('UPDATE duels SET state=? WHERE id=?').run(JSON.stringify(before.state),before.id);
+ const actor=before.state.players[before.state.current].id,index=require('../dist/duelEngine').legalActions(before.state,actor).findIndex(a=>a.kind==='spell'&&a.card==='causal-pot');assert.ok(index>=0);
+ const committed=store.performDuelAction(before.id,actor,'g',before.revision,index,'causal-request');
+ const events=store.duelEventsAt(before.id,committed.revision),moves=events.filter(x=>x.type==='cardMoved'&&x.uid==='causal-pot');
+ assert.deepEqual(moves.map(x=>[x.from,x.to]),[['hand','backrow'],['backrow','grave']]);
+ store.performDuelAction(before.id,actor,'g',before.revision,index,'causal-request');assert.deepEqual(store.duelEventsAt(before.id,committed.revision),events);finish(committed);
+});
 test('REA-A01: independent SQLite writers from one revision commit at most one action',async()=>{
  const before=start(),{spawn}=require('node:child_process');
  const writer=actor=>new Promise((resolve,reject)=>{const script="const s=require('./dist/duelStore');try{const r=s.performDuelAction(process.argv[1],process.argv[2],'g',Number(process.argv[3]),{kind:'concede'},process.argv[4]);console.log(JSON.stringify({ok:true,revision:r.revision}));}catch(e){console.log(JSON.stringify({ok:false,error:e.message}));}";

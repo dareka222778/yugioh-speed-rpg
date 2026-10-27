@@ -15,10 +15,11 @@ test('REA-P03: persisted mandatory Standby choice',{todo:'No Standby phase or ce
 test('REA-T01: explicit token creation conserves physical and economic cards',{todo:'Tokens are deliberately unsupported; conservation currently rejects creation'},()=>{
  const before=game(),after=structuredClone(before);after.players[0].monsters.push({uid:'token',id:'token',entityKind:'token',position:'atk',faceUp:true,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0});assert.doesNotThrow(()=>assertDuelTransition(before,after));
 });
-test('REA-E01: same-action leave and return emits two durable causal movements',{todo:'Transition journal persists summaries; intra-action causal movement instrumentation remains required'},()=>{
- const before=game(),after=structuredClone(before),c=after.players[0].hand.shift();before.players[0].hand.shift();const monster={...c,owner:0,position:'atk',faceUp:true,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};before.players[0].monsters.push({...monster});after.players[0].monsters.push({...monster});
- after.players[0].grave.push(after.players[0].monsters.pop());after.players[0].monsters.push(after.players[0].grave.pop());
- assert.equal(transitionEvents(before,after).filter(event=>event.type==='cardMoved'&&event.uid===c.uid).length,2);
+test('REA-E01: shared physical operations expose both causal moves despite equal endpoint zones',()=>{
+ const {beginCardMovementTrace,synchronizeCardLifetimes}=require('../dist/cardLifetime'),{sendMonsterToGrave}=require('../dist/monsterExit'),{specialSummonFromPile}=require('../dist/monsterEntry');
+ const before=game(),c=before.players[0].hand.shift();before.players[0].monsters.push({...c,owner:0,position:'atk',faceUp:true,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0});synchronizeCardLifetimes(before);
+ const after=structuredClone(before);beginCardMovementTrace(after,before);assert.equal(sendMonsterToGrave(after,c.uid),true);assert.ok(specialSummonFromPile(after,0,0,'grave',c.uid));assertDuelTransition(before,after);
+ assert.deepEqual(transitionEvents(before,after).filter(event=>event.type==='cardMoved'&&event.uid===c.uid).map(move=>[move.from,move.to]),[['monsters','grave'],['grave','monsters']]);
 });
 test('REA-L02: pending snapshots select archived effect definitions after module upgrades',{todo:'Rules versions are supported, but an archive of effect resolvers is not implemented'},()=>{
  assert.equal(typeof require('../dist/effectRegistry').getArchivedDefinitionResolver,'function');

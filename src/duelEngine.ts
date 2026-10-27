@@ -1,4 +1,5 @@
-import {bindTarget,synchronizeCardLifetimes,targetBindingValid,type TargetBinding,type CardLifetime} from './cardLifetime';
+import {sendMonsterToGrave as graveMonster} from './monsterExit';
+import {beginCardMovementTrace,bindTarget,synchronizeCardLifetimes,targetBindingValid,type TargetBinding,type CardLifetime} from './cardLifetime';
 import {advanceTeamSeats,restoreTeamOverflow,type TeamRotation} from './teamRotation';
 import {drawCards,pauseOverflow,usesSeven,type HandFlow} from './handFlow';
 import {createDuelRandom,randomIndex,shuffleDuel,type DuelRandom} from './duelRandom';
@@ -58,10 +59,6 @@ export function decisionPlayer(s:DuelState){return s.phase==='response'?s.priori
 export function timeoutDuel(input:DuelState):DuelState{assertDuelState(input);if(input.phase==='finished')return input;const s=structuredClone(input);finish(s,1-decisionPlayer(s),'vitória por W.O.: tempo de decisão esgotado');assertDuelTransition(input,s);return s;}
 function note(s:DuelState,text:string){s.log.push(text);s.log=s.log.slice(-12);}
 function findMonster(s:DuelState,uid:string){for(const p of s.players){const m=p.monsters.find(m=>m.uid===uid);if(m)return {p,m};}}
-function graveMonster(s:DuelState,uid:string,byBattle=false){const found=findMonster(s,uid);if(found){const controller=s.players.indexOf(found.p);const owner=found.m.owner??controller;found.p.monsters=found.p.monsters.filter(m=>m.uid!==uid);s.players[owner].grave.push({uid:found.m.uid,id:found.m.id,...found.m.properlySummoned?{properlySummoned:true}:{}});
-const effect=getMonsterEffect(found.m.id);
-if(effect?.trigger==='onSentToGrave'||(byBattle&&effect?.trigger==='onBattleDestroyed'))(s.graveTriggers??=[]).push({actor:owner,card:found.m.uid,id:found.m.id});
-cleanEquips(s);}}
 /** Destruction that banishes instead of sending to the Graveyard.
  * No field-to-Graveyard/battle trigger is queued, and stolen monsters return
  * to their original owner's banished zone.
@@ -543,7 +540,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  const index=input.players.findIndex(p=>p.id===actor);if(index<0)throw new Error('Você não participa deste duelo.');
  if(input.phase==='finished')throw new Error('Esse duelo já terminou.');
  if(action.kind!=='concede'&&!legalActions(input,actor).some(a=>JSON.stringify(a)===JSON.stringify(action)))throw new Error('Ação inválida ou fora da sua vez. Atualize o painel.');
- const s=structuredClone(input);synchronizeCardLifetimes(s);const p=s.players[index];
+ const s=structuredClone(input);synchronizeCardLifetimes(s);beginCardMovementTrace(s,input);const p=s.players[index];
  if(action.kind==='concede'){finish(s,1-index,'desistência');assertDuelTransition(input,s);return s;}
  if(action.kind==='pass'){s.passes++;s.priority=1-index;if(s.passes===2)resolve(s);}
  else if(action.kind==='trap'){

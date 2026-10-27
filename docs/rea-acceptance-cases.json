@@ -230,12 +230,16 @@
       "spec": "SPEC-05",
       "given": "Carta faz campo→cemitério→campo na mesma ação",
       "expected": "Dois eventos cardMoved causais duráveis, mesmo se before/after tiverem a mesma zona.",
-      "expectedGap": "Before/after notifications omit intermediate moves in one action",
-      "coverage": "gap",
-      "limitation": null,
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": "Current shared monster exit/entry and command activation are instrumented; future compound operations must preserve operation checkpoints.",
       "checks": [
         {
           "file": "tests/reaAcceptanceGaps.test.cjs",
+          "pattern": "REA-E01"
+        },
+        {
+          "file": "tests/duelRecovery.test.cjs",
           "pattern": "REA-E01"
         }
       ]

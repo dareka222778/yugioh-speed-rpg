@@ -183,7 +183,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  const attack=tacticalAttack(s,id,actions);if(attack)return attack;
  return actions.find(a=>a.kind==='battle')??actions.find(a=>a.kind==='end');
 }
-function driveNPC(s:DuelState){let steps=0;while(s.phase!=='finished'){const npc=s.players.find(p=>p.id.startsWith('npc-'));if(!npc)return s;const a=chooseNPC(s,npc.id);if(!a)return s;if(++steps>100)throw new Error('Limite de ações do treino excedido.');s=step(s,npc.id,a);}return s;}
+function driveNPC(s:DuelState,events?:DuelTransitionEvent[]){let steps=0;while(s.phase!=='finished'){const npc=s.players.find(p=>p.id.startsWith('npc-'));if(!npc)return s;const a=chooseNPC(s,npc.id);if(!a)return s;if(++steps>100)throw new Error('Limite de ações do treino excedido.');const before=s;s=step(s,npc.id,a);events?.push(...transitionEvents(before,s));}return s;}
 export const createTraining=db.transaction((owner:string,guild:string,channel:string,laboratory=false):DuelRecord=>{
  available(owner);const id=randomBytes(8).toString('hex');const tutorial=['24094653','34460851','44287299','86318356','54652250','07089711','31560081','28933734','60694662','11384280','26202165','78010363','77585513','54098121','77414722','03819470','83011277','55144522','12580477','05318639','14087893','53582587','56120475','29401950'];const loadout=laboratory?{cards:tutorial,extra:['45231177']}:activeCards(owner);const style=['warrior','spellcaster','dragon'][randomInt(3)];const opponent=starterContents[style].flatMap(c=>Array(c.quantity).fill(c.id));
  const state=driveNPC(createDuel([{id:owner,name:name(owner),...loadout},{id:`npc-${id}`,name:'Duelista de treino',cards:opponent}],laboratory?()=>0.999999:Math.random,laboratory?0:randomInt(2)));state.fixedOpening=laboratory;
@@ -210,7 +210,7 @@ export const performDuelAction=db.transaction((id:string,owner:string,guild:stri
  const r=getDuel(id);if(r.guild_id!==guild||r.status!=='playing'||!r.state)throw new Error('Esse duelo não está ativo neste servidor.');if(r.revision!==expected)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
  const actions=legalActions(r.state,owner);const action=typeof index==='number'?actions[index]:index;
  if(!action||(typeof index!=='number'&&action.kind!=='concede'))throw new Error('Ação inválida.');
- const before=r.state;r.state=driveNPC(applyDuelAction(before,owner,action).state);r.events=transitionEvents(before,r.state);r.revision++;r.updated=Date.now();if(r.state.phase==='finished')r.status='finished';save(r);
+ const before=r.state,applied=applyDuelAction(before,owner,action);r.events=[...applied.events];r.state=driveNPC(applied.state,r.events);r.revision++;r.updated=Date.now();if(r.state.phase==='finished')r.status='finished';save(r);
  db.prepare('INSERT INTO duel_transition_events(duel_id,revision,events_json) VALUES(?,?,?)').run(id,r.revision,JSON.stringify(r.events));
  if(requestId){db.prepare('INSERT INTO duel_action_receipts VALUES(?,?,?,?,?,?,?)').run(requestId,id,owner,guild,expected,fingerprint,r.revision);r.receipt={requestId,committedRevision:r.revision,replayed:false};}
  return r;

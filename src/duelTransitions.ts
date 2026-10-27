@@ -3,6 +3,7 @@
  * or a replay tape. Replay uses state + action + persisted private RNG instead.
  */
 import {step,decisionPlayer,type DuelState,type Action,type CardRef} from './duelEngine';
+import {cardMovementTrace} from './cardLifetime';
 type Zone='deck'|'hand'|'monsters'|'backrow'|'grave'|'extra'|'banished'|'field';
 type Audience={visibility:'public'}|{visibility:'private';player:string};
 export type DuelTransitionEvent=(
@@ -22,6 +23,7 @@ function inventory(s:DuelState){
  return cards;
 }
 export function transitionEvents(before:DuelState,after:DuelState):DuelTransitionEvent[]{
+ const trace=cardMovementTrace(before,after),moved=new Set(trace?.map(move=>move.uid));
  const events:DuelTransitionEvent[]=[],old=inventory(before),next=inventory(after);
  for(const [i,p]of after.players.entries()){
   const prev=before.players[i];if(prev.lp!==p.lp)events.push({type:'lpChanged',player:p.id,before:prev.lp,after:p.lp,visibility:'public'});
@@ -30,7 +32,9 @@ export function transitionEvents(before:DuelState,after:DuelState):DuelTransitio
    const a=count(old),b=count(next);if(a!==b)events.push({type:'zoneCountChanged',player:p.id,zone,before:a,after:b,visibility:'public'});
   }
  }
+ if(trace)events.push(...trace);
  for(const [uid,c]of next){const previous=old.get(uid);if(!previous)continue;
+  if(moved.has(uid))continue;
   if(previous.zone!==c.zone||previous.player!==c.player){
    const audience:Audience=c.public?{visibility:'public'}:{visibility:'private',player:c.player};
    events.push({type:'cardMoved',player:c.player,uid,cardId:c.card.id,from:previous.zone,to:c.zone,...audience});
