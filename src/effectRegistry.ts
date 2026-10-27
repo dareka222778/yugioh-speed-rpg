@@ -1,3 +1,4 @@
+import {getTokenMetadata} from './tokens';
 // Admission is separate from factual registration and executable definitions.
 import type {Card} from './cardCatalog';
 import {cardMetadata} from './cardMetadata';
@@ -19,3 +20,6 @@ export function isQuickPlaySpell(id:string):boolean{
  const e=getEffect(id);return engineCard(id)?.kind==='spell'&&!!e&&getEffectModel(e.kind)?.activation.speed===2;
 }
 export function equipEligible(effect:Extract<Effect,{kind:'equip'}>,monster:Card){return (!effect.races||effect.races.includes(monster.race??''))&&(!effect.attribute||effect.attribute===monster.attribute);}
+
+/** Duel-only metadata never admits a token to decks, certificates or inventory. */
+export function getDuelCard(id:string){return getPlayableCard(id)??getTokenMetadata(id);}

@@ -1,5 +1,6 @@
 import {resolverVersionFor} from './resolverArchive';
 import {transitionEvents as legacyTransitionEvents} from './resolvers/v1/duelTransitions';
+import type {DuelState as LegacyDuelState} from './resolvers/v1/duelEngine';
 /** Structured before/after transition notifications, independent of translated logs.
  * These summarize committed state changes; they are not an atomic effect trace
  * or a replay tape. Replay uses state + action + persisted private RNG instead.
@@ -9,6 +10,8 @@ import {cardMovementTrace} from './cardLifetime';
 type Zone='deck'|'hand'|'monsters'|'backrow'|'grave'|'extra'|'banished'|'field';
 type Audience={visibility:'public'}|{visibility:'private';player:string};
 export type DuelTransitionEvent=(
+ |{type:'tokenCreated';player:string;uid:string;cardId:string}
+ |{type:'tokenRemoved';player:string;uid:string;cardId:string;cause:string}
  |{type:'lpChanged';player:string;before:number;after:number}
  |{type:'zoneCountChanged';player:string;zone:Zone;before:number;after:number}
  |{type:'cardMoved';player:string;uid:string;cardId:string;from:Zone;to:Zone}
@@ -25,7 +28,7 @@ function inventory(s:DuelState){
  return cards;
 }
 export function transitionEvents(before:DuelState,after:DuelState):DuelTransitionEvent[]{
- if(resolverVersionFor(before)==='engine-v1')return legacyTransitionEvents(before,after);
+ if(resolverVersionFor(before)==='engine-v1')return legacyTransitionEvents(before as unknown as LegacyDuelState,after as unknown as LegacyDuelState);
  const trace=cardMovementTrace(before,after),moved=new Set(trace?.map(move=>move.uid));
  const events:DuelTransitionEvent[]=[],old=inventory(before),next=inventory(after);
  for(const [i,p]of after.players.entries()){
@@ -36,6 +39,12 @@ export function transitionEvents(before:DuelState,after:DuelState):DuelTransitio
   }
  }
  if(trace)events.push(...trace);
+ for(const event of (after.tokenLedger?.events??[]).slice(before.tokenLedger?.events.length??0)){
+  const token=after.tokenLedger!.entries.find(t=>t.uid===event.uid)!;
+  const player=after.players[token.owner].id;
+  if(event.kind==='created')events.push({type:'tokenCreated',player,uid:token.uid,cardId:token.id,visibility:'public'});
+  else events.push({type:'tokenRemoved',player,uid:token.uid,cardId:token.id,cause:event.cause!,visibility:'public'});
+ }
  for(const [uid,c]of next){const previous=old.get(uid);if(!previous)continue;
   if(moved.has(uid))continue;
   if(previous.zone!==c.zone||previous.player!==c.player){

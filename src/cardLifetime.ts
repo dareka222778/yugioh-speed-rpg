@@ -30,6 +30,7 @@ export function synchronizeCardLifetimes(s:DuelState):void{
 }
 export function bindTarget(s:DuelState,uid:string|undefined):TargetBinding|undefined{
  if(!uid)return;synchronizeCardLifetimes(s);
+ if(!s.players.some(p=>lifetimeZones.some(zone=>(zone==='field'?(p.field?[p.field]:[]):p[zone]??[]).some(c=>c.uid===uid))))return;
  const entry=Object.hasOwn(s.cardLifetimes!,uid)?s.cardLifetimes![uid]:undefined;
  return entry?{uid,...entry}:undefined;
 }

@@ -1,3 +1,4 @@
+import {getTokenMetadata} from './tokens';
 import {renderCommandHeader} from './commandHeader';
 import {cardRulesPT,racePT,attributePT} from './cardText';
 import {ActionRowBuilder,AttachmentBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
@@ -12,7 +13,7 @@ import {getMonsterEffect} from './monsterEffects';
 export const PAGE_SIZE=6;
 const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const byId=new Map(cards.map(c=>[c.id,c]));
-export function getCard(id:string): Card|undefined {return byId.get(id);}
+export function getCard(id:string): Card|undefined {return byId.get(id)??getTokenMetadata(id);}
 export function searchCards(query:string): Card[] {
   const q=normalize(query);
   return cards.filter(c=>c.id.includes(q)||normalize(c.name).includes(q)||normalize(c.englishName).includes(q)).sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));

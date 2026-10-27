@@ -1,3 +1,4 @@
+import {getTokenMetadata,assertTokenLedger,assertTokenTransition} from './tokens';
 import {assertStandbyFlow} from './standbyFlow';
 import {resolverVersionFor} from './resolverArchive';
 import {assertDuelState as assertLegacyState} from './resolvers/v1/duelIntegrity';
@@ -8,7 +9,7 @@ import {economicOperationIssues} from './economicOperations';
  * The current catalog has no token-generation or card-transformation effect, so
  * each transition must conserve every physical UID and its card identity.
  */
-import {getPlayableCard as getCard} from './effectRegistry';
+import {getDuelCard as getCard} from './effectRegistry';
 import {assertDuelRandom} from './duelRandom';
 import {CARD_DEFINITIONS_VERSION,RULES_PROFILE,rulesFor,supportedRulesVersion} from './rulesProfile';
 import {getMonsterEffect} from './monsterEffects';
@@ -76,7 +77,7 @@ function assertCurrentDuelState(value:unknown):asserts value is DuelState{
    if(!Array.isArray(list))fail('zona ausente');
    if(zone==='monsters'&&list.length>RULES_PROFILE.monsterZones||zone==='backrow'&&list.length>RULES_PROFILE.spellTrapZones||zone==='extra'&&list.length>rulesFor(s).extraDeckMax)fail('limite de zonas');
    for(const c of list){
-    checkRef(c);const info=getCard(c.id)!;
+    checkRef(c);const info=getCard(c.id)!;if(c.entityKind==='token'&&zone!=='monsters')fail('ficha fora do campo');
     if(zone==='monsters'){
      if(info.kind!=='monster'||typeof c.faceUp!=='boolean'||(c.position!=='atk'&&c.position!=='def')||!integer(c.entered)||!integer(c.changed)||!integer(c.attacked)||!integer(c.atkBoost,Number.MIN_SAFE_INTEGER)||!integer(c.defBoost,Number.MIN_SAFE_INTEGER))fail('monstro inválido');
      if(c.owner!==undefined&&!actor(c.owner)||c.returnTo!==undefined&&!actor(c.returnTo))fail('proprietário do monstro');
@@ -89,13 +90,14 @@ function assertCurrentDuelState(value:unknown):asserts value is DuelState{
   }
   if(p.field){checkRef(p.field);if(!getCard(p.field.id)?.field||typeof p.field.faceUp!=='boolean'||!integer(p.field.setTurn)||p.field.resolved!==undefined&&typeof p.field.resolved!=='boolean')fail('Magia de Campo');}
  }
+ assertTokenLedger(s);
  if(s.teamRotation!==undefined){
   const r=s.teamRotation;
   if(!object(r)||r.version!==1||!integer(r.cursor)||r.cursor>3||!Array.isArray(r.active)||r.active.length!==2||r.active.some((i:unknown,t:number)=>!integer(i)||Number(i)>3||Number(i)%2!==t)||!object(r.reserves)||Object.keys(r.reserves).length!==2||Object.keys(r.reserves).some(k=>!(/^[0-3]$/).test(k)||r.active.includes(Number(k)))||s.current!==r.cursor%2||s.players.some((p:any,i:number)=>p.id!==`tag-team-${i}`))fail('rotação de equipes');
   if(r.overflowReturn!==undefined&&(!object(r.overflowReturn)||!actor(r.overflowReturn.team)||!integer(r.overflowReturn.seat)||r.overflowReturn.seat>3||r.overflowReturn.seat%2!==r.overflowReturn.team||!r.reserves[r.overflowReturn.seat]))fail('retomada do parceiro');
   if(r.overflowReturn&&s.phase!=='finished'&&(s.phase!=='discard'||s.handFlow?.mode!=='overflow'||s.handFlow?.actor!==r.overflowReturn.team))fail('descarte do parceiro sem continuação');
   if(r.active[s.current]!==r.cursor&&!(r.overflowReturn?.team===s.current&&r.overflowReturn.seat===r.cursor))fail('participante da vez');
-  for(const h of Object.values(r.reserves) as any[]){if(!object(h)||!Array.isArray(h.hand)||!Array.isArray(h.deck)||!Array.isArray(h.extra)||h.extra.length>rulesFor(s).extraDeckMax)fail('mão/deck do parceiro');for(const c of [...h.hand,...h.deck]){checkRef(c);if(getCard(c.id)!.fusion)fail('Fusão na mão do parceiro');}for(const c of h.extra){checkRef(c);if(!getCard(c.id)!.fusion)fail('adicional do parceiro');}}
+  for(const h of Object.values(r.reserves) as any[]){if(!object(h)||!Array.isArray(h.hand)||!Array.isArray(h.deck)||!Array.isArray(h.extra)||h.extra.length>rulesFor(s).extraDeckMax)fail('mão/deck do parceiro');for(const c of [...h.hand,...h.deck]){if(c.entityKind==='token')fail('ficha fora do campo');checkRef(c);if(getCard(c.id)!.fusion)fail('Fusão na mão do parceiro');}for(const c of h.extra){checkRef(c);if(!getCard(c.id)!.fusion)fail('adicional do parceiro');}}
   for(const c of duelCards(s))if(!(/^m[0-3]:/).test(c.uid))fail('proprietário físico de equipe');
   for(const [team,p] of s.players.entries())for(const c of [...p.deck,...p.hand,...p.extra??[]])if(!c.uid.startsWith(`m${r.active[team]}:`))fail('zona privada de outro parceiro');
   for(const [seat,h] of Object.entries(r.reserves) as [string,any][])for(const c of [...h.deck,...h.hand,...h.extra])if(!c.uid.startsWith(`m${seat}:`))fail('reserva privada de outro parceiro');
@@ -105,6 +107,7 @@ function assertCurrentDuelState(value:unknown):asserts value is DuelState{
  if(s.phase==='choice'&&(!object(s.choice)||!actor(s.choice.actor)||!Array.isArray(s.choice.targets)||!s.choice.targets.length||s.choice.targets.some((id:unknown)=>typeof id!=='string')))fail('escolha pendente');
  function checkRef(c:unknown):asserts c is CardRef & Record<string,unknown>{
   if(!object(c)||typeof c.uid!=='string'||!c.uid||uids.has(c.uid)||typeof c.id!=='string'||!getCard(c.id))fail('identificador de carta ausente, duplicado ou desconhecido');
+  if(getTokenMetadata(c.id)&&c.entityKind!=='token'||c.entityKind!==undefined&&(c.entityKind!=='token'||!getTokenMetadata(c.id)))fail('identidade de ficha');
   if(c.properlySummoned!==undefined&&typeof c.properlySummoned!=='boolean')fail('histórico de Invocação');
   uids.add(c.uid);
  }
@@ -112,8 +115,8 @@ function assertCurrentDuelState(value:unknown):asserts value is DuelState{
 export function assertDuelTransition(before:DuelState,after:DuelState):void{
  assertDuelState(before);assertDuelState(after);
  if(resolverVersionFor(before)!==resolverVersionFor(after))fail('resolvedor alterado durante ação');
- const refs=new Map(duelCards(before).map(c=>[c.uid,c.id]));
- const next=duelCards(after);
+ const refs=new Map(duelCards(before).filter(c=>c.entityKind!=='token').map(c=>[c.uid,c.id]));
+ const next=duelCards(after).filter(c=>c.entityKind!=='token');assertTokenTransition(before,after);
  if(next.length!==refs.size||next.some(c=>refs.get(c.uid)!==c.id))fail('uma carta foi perdida, duplicada ou transformada');
  if(before.players.some((p,i)=>p.id!==after.players[i].id))fail('participante alterado');
 }

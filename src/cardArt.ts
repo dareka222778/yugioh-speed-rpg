@@ -6,7 +6,7 @@ const cache=path.join(path.dirname(process.env.DATABASE_PATH??'./data/game.sqlit
 const pending=new Map<string,Promise<Buffer|undefined>>();
 const failed=new Map<string,number>();
 export async function getCardArt(id:string): Promise<Buffer|undefined> {
-  if(!getCard(id))return;
+  if(!/^\d{8}$/.test(id)||!getCard(id))return;
   try{return await fs.readFile(path.join(cache,`${id}.jpg`));}catch{}
   if((failed.get(id)??0)>Date.now())return;
   if(pending.has(id))return pending.get(id);

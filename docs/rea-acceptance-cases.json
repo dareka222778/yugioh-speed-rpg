@@ -178,13 +178,21 @@
       "spec": "SPEC-03",
       "given": "Efeito de ficha gera entidade que depois sai do campo",
       "expected": "Criação/remoção auditada; nenhuma carta física ou item econômico aparece/desaparece.",
-      "expectedGap": "Tokens have no entity model; no token card enabled",
-      "coverage": "gap",
-      "limitation": null,
+      "expectedGap": null,
+      "coverage": "regression",
+      "limitation": "Entity primitives are supported; no token-producing card is enabled. Scapegoat requires four simultaneous tokens and is not silently adapted to three zones.",
       "checks": [
         {
-          "file": "tests/reaAcceptanceGaps.test.cjs",
-          "pattern": "REA-T01"
+          "file": "tests/tokens.test.cjs",
+          "pattern": ".*"
+        },
+        {
+          "file": "tests/tokenRecovery.test.cjs",
+          "pattern": ".*"
+        },
+        {
+          "file": "tests/tagContinuations.test.cjs",
+          "pattern": ".*"
         }
       ]
     },

@@ -1,5 +1,5 @@
 import {RULES_PROFILE} from './rulesProfile';
-import {getPlayableCard as getCard} from './effectRegistry';
+import {getDuelCard as getCard} from './effectRegistry';
 import type {DuelState,Monster} from './duelEngine';
 import {synchronizeCardLifetimes} from './cardLifetime';
 
@@ -15,7 +15,7 @@ export function specialSummonFromPile(
  if(!destination||!source||destination.length>=RULES_PROFILE.monsterZones)return;
  const index=source.findIndex(c=>c.uid===uid);
  if(index<0)return;
- const ref=source[index],info=getCard(ref.id);
+ const ref=source[index],info=getCard(ref.id);if(ref.entityKind==='token')return;
  if(info?.kind!=='monster'||(info.fusion&&(pile==='deck'||!ref.properlySummoned)))return;
  synchronizeCardLifetimes(s);
  const [card]=source.splice(index,1);

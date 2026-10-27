@@ -18,7 +18,7 @@ export function assertTagDuel(s:TagDuel){
  if(s.mode==='tag-classic'&&(!s.core.teamRotation||JSON.stringify([s.active,s.cursor,s.reserves])!==JSON.stringify([s.core.teamRotation.active,s.core.teamRotation.cursor,s.core.teamRotation.reserves])))throw Error('Estado de equipes fora de sincronia.');
  const keys=Object.keys(s.reserves);if(keys.length!==2||keys.some(k=>!/^\d$/.test(k)||Number(k)>3||s.active.includes(Number(k))))throw Error('Reservas 2v2 inválidas.');
  for(const held of Object.values(s.reserves))if(!held||!Array.isArray(held.deck)||!Array.isArray(held.hand))throw Error('Mão/deck de reserva inválido.');
- const all=tagInventory(s);if(new Set(all.map(c=>c.uid)).size!==all.length||all.some(c=>typeof c.uid!=='string'||!c.uid||!getPlayableCard(c.id)||s.mode==='tag-normal-lab'&&getEffect(c.id)?.kind!=='normal'))throw Error('Carta não admitida neste formato ou identidade física inválida.');
+ const all=tagInventory(s);if(new Set(all.map(c=>c.uid)).size!==all.length||all.some(c=>typeof c.uid!=='string'||!c.uid||!getPlayableCard(c.id)&&c.entityKind!=='token'||s.mode==='tag-normal-lab'&&(c.entityKind==='token'||getEffect(c.id)?.kind!=='normal')))throw Error('Carta não admitida neste formato ou identidade física inválida.');
 }
 export function createTagDuel(players:[{id:string;name:string;cards:string[];extra?:string[]},{id:string;name:string;cards:string[];extra?:string[]},{id:string;name:string;cards:string[];extra?:string[]},{id:string;name:string;cards:string[];extra?:string[]}],options:{seed?:string;first?:number;classic?:boolean}={}):TagDuel{
  if(!Array.isArray(players)||players.length!==4||new Set(players.map(p=>p.id)).size!==4||players.some(p=>!p.id||!p.name||!Array.isArray(p.cards)||p.cards.some(id=>!getPlayableCard(id)||!options.classic&&getEffect(id)?.kind!=='normal')))throw Error(options.classic?'Informe quatro duelistas distintos com cartas habilitadas.':'Informe quatro duelistas distintos; esta etapa 2v2 aceita somente monstros normais.');
@@ -39,7 +39,7 @@ export function tagActions(s:TagDuel,member:string):Action[]{assertTagDuel(s);re
 export function tagMemberHand(s:TagDuel,member:string){assertTagDuel(s);const index=s.members.findIndex(p=>p.id===member);if(index<0)throw Error('Você não participa deste 2v2.');const team=index%2;return structuredClone(s.active[team]===index?s.core.players[team].hand:s.reserves[index].hand);}
 export function stepTagDuel(input:TagDuel,member:string,action:Action):TagDuel{
  assertTagDuel(input);if(input.core.phase==='finished')throw Error('Duelo 2v2 encerrado.');if(tagDecisionMember(input).id!==member)throw Error('Aguarde a vez do participante ativo.');
- const before=new Map(tagInventory(input).map(c=>[c.uid,c.id])),s=structuredClone(input),team=decisionPlayer(s.core);
+ const before=new Map(tagInventory(input).filter(c=>c.entityKind!=='token').map(c=>[c.uid,c.id])),s=structuredClone(input),team=decisionPlayer(s.core);
  const normalTurnEnds=s.mode==='tag-normal-lab'&&(action.kind==='end'&&(rulesFor(s.core).handCheck==='before-draw'||s.core.players[s.core.current].hand.length<=rulesFor(s.core).handLimit)||action.kind==='discard'&&!s.core.handFlow&&s.core.players[s.core.current].hand.length===rulesFor(s.core).handLimit+1);
  if(normalTurnEnds){
   // The Normal laboratory has no responses. Swap only just before the actual
@@ -49,7 +49,7 @@ export function stepTagDuel(input:TagDuel,member:string,action:Action):TagDuel{
   if(s.active[t]!==incoming){const p=s.core.players[t];s.reserves[s.active[t]]={deck:p.deck,hand:p.hand};const next=s.reserves[incoming];p.deck=next.deck;p.hand=next.hand;delete s.reserves[incoming];s.active[t]=incoming;}
   // Cursor advances only after the outgoing member finishes any End Phase discard.
  }
- s.core=step(s.core,teamId(team),action);if(s.mode==='tag-normal-lab'&&s.core.turn>input.core.turn)s.cursor=(input.cursor+1)%4;if(s.core.teamRotation){s.cursor=s.core.teamRotation.cursor;s.active=s.core.teamRotation.active;s.reserves=s.core.teamRotation.reserves;}assertTagDuel(s);const after=tagInventory(s);
+ s.core=step(s.core,teamId(team),action);if(s.mode==='tag-normal-lab'&&s.core.turn>input.core.turn)s.cursor=(input.cursor+1)%4;if(s.core.teamRotation){s.cursor=s.core.teamRotation.cursor;s.active=s.core.teamRotation.active;s.reserves=s.core.teamRotation.reserves;}assertTagDuel(s);const after=tagInventory(s).filter(c=>c.entityKind!=='token');
  if(after.length!==before.size||after.some(c=>before.get(c.uid)!==c.id))throw Error('Falha de conservação 2v2.');return s;
 }
 export function timeoutTagDuel(input:TagDuel){assertTagDuel(input);const s=structuredClone(input);s.core=timeoutDuel(s.core);assertTagDuel(s);return s;}

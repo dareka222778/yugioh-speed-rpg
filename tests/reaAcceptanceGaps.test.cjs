@@ -13,8 +13,8 @@ test('REA-P03: Standby uses the persisted choice channel without inventing a sec
  const {scheduleStandbyTask}=require('../dist/standbyFlow');let s=scheduleStandbyTask(game(),{id:'standby',turn:2,actor:1,optional:false,options:[{id:'gain',label:'Recuperar',operations:[{kind:'gainLP',player:'self',amount:1}]}]});
  s=e.step(s,'a',{kind:'end'});assert.equal(s.choice.source,'standby');assert.equal(s.players[1].hand.length,5);assertDuelState(JSON.parse(JSON.stringify(s)));
 });
-test('REA-T01: explicit token creation conserves physical and economic cards',{todo:'Tokens are deliberately unsupported; conservation currently rejects creation'},()=>{
- const before=game(),after=structuredClone(before);after.players[0].monsters.push({uid:'token',id:'token',entityKind:'token',position:'atk',faceUp:true,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0});assert.doesNotThrow(()=>assertDuelTransition(before,after));
+test('REA-T01: ledger-backed token creation conserves physical and economic cards',()=>{
+ const before=game(),after=structuredClone(before);require('../dist/tokens').createTokenGroup(after,0,1);assert.doesNotThrow(()=>assertDuelTransition(before,after));
 });
 test('REA-E01: shared physical operations expose both causal moves despite equal endpoint zones',()=>{
  const {beginCardMovementTrace,synchronizeCardLifetimes}=require('../dist/cardLifetime'),{sendMonsterToGrave}=require('../dist/monsterExit'),{specialSummonFromPile}=require('../dist/monsterEntry');

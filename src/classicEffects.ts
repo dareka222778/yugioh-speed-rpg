@@ -1,5 +1,5 @@
 import {RULES_PROFILE} from './rulesProfile';
-import {getPlayableCard as getCard} from './effectRegistry';
+import {getDuelCard as getCard} from './effectRegistry';
 import {getEffect,equipEligible,isQuickPlaySpell} from './effectRegistry';
 import type {Action,Backrow,CardRef,DuelState,Monster,Pending} from './duelEngine';
 import {resolveSpellException} from './spellExceptions';
@@ -23,7 +23,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
   // A facedown target's identity must never determine the action menu.
   case 'deSpell':return targeted(s.players.flatMap(p=>[...p.backrow,...p.field?[p.field]:[]].filter(t=>t.uid!==c.uid&&(!t.faceUp||getCard(t.id)?.kind==='spell')).map(t=>t.uid)));
   case 'mysticalSpaceTyphoon':return targeted(s.players.flatMap(p=>[...p.backrow,...p.field?[p.field]:[]].filter(t=>t.uid!==c.uid).map(t=>t.uid)));
-  case 'bookOfMoon':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>m.uid)));
+  case 'bookOfMoon':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp&&!m.entityKind).map(m=>m.uid)));
   case 'removeTrap':return targeted(s.players.flatMap(p=>p.backrow.filter(t=>t.uid!==c.uid&&t.faceUp&&getCard(t.id)?.kind==='trap').map(t=>t.uid)));
   case 'darkHole':return s.players.some(p=>p.monsters.length)?[{kind:'spell',card:c.uid}]:[];
   case 'raigeki':return op.monsters.length?[{kind:'spell',card:c.uid}]:[];
@@ -54,6 +54,7 @@ export function cleanEquips(s:DuelState){
  * not spend the player's manual position change or erase summon/attack history.
  * Ownership, scheduled return of control and proper Fusion status persist. */
 export function turnMonsterFaceDown(m:Monster):void{
+ if(m.entityKind==='token')throw new Error('Fichas não podem ficar com a face para baixo.');
  m.faceUp=false;m.position='def';m.atkBoost=0;m.defBoost=0;
  delete m.swappedUntil;delete m.effectUsedTurn;
 }
@@ -83,7 +84,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
    }else service.note(s,'Tufão Espacial Místico: o alvo já saiu do campo; nenhuma carta foi destruída por este efeito.');
    return true;
   case 'bookOfMoon':
-   if(found?.m.faceUp){turnMonsterFaceDown(found.m);service.note(s,`Livro da Lua colocou ${getCard(found.m.id)!.name} em Defesa com a face para baixo.`);}
+   if(found?.m.faceUp&&!found.m.entityKind){turnMonsterFaceDown(found.m);service.note(s,`Livro da Lua colocou ${getCard(found.m.id)!.name} em Defesa com a face para baixo.`);}
    return true;
   case 'giantTrunade':for(const p of s.players){p.hand.push(...p.backrow.map(b=>({id:b.id,uid:b.uid})));p.backrow=[];if(p.field){p.hand.push({id:p.field.id,uid:p.field.uid});p.field=null;}}service.note(s,'Retorno Gigante devolveu as Magias e Armadilhas às mãos.');return true;
   case 'blockAttack':if(found&&found.index!==a.actor&&found.m.faceUp)found.m.position='def';return true;
