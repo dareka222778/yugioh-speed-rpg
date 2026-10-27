@@ -157,6 +157,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
    if(p.lp<=selfDamage)return false;
   }
   if(effect.kind==='equip')return p.monsters.some(m=>m.uid===a.target);
+  if(effect.kind==='destroySpellTraps'){const enemy=op.backrow.length+Number(!!op.field),own=p.backrow.filter(b=>b.uid!==a.card).length+Number(!!p.field);return enemy>0&&(effect.scope==='opponent'||enemy>=own);}
   if(effect.kind==='darkHole')return op.monsters.length>0&&op.monsters.filter(m=>m.faceUp).reduce((n,m)=>n+atk(m,s),0)>=p.monsters.reduce((n,m)=>n+atk(m,s),0);
   if(effect.kind==='deSpell'||effect.kind==='removeTrap')return op.backrow.some(b=>b.uid===a.target)||op.field?.uid===a.target;
   if(effect.kind==='giantTrunade')return op.backrow.length+Number(!!op.field)>p.backrow.length+Number(!!p.field);

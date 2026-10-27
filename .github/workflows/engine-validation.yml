@@ -17,6 +17,7 @@ jobs:
       - run: node scripts/verify-resolver-archives.cjs
       - run: node scripts/check-mission3-integrity.cjs
       - run: node scripts/check-mission4-integrity.cjs
+      - run: node scripts/check-mission5-integrity.cjs
       - run: npm run check
       - run: npm test
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission4-individual-reviews.json artifacts/certification-executions-mission4.json

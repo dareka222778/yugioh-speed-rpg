@@ -367,7 +367,7 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
    if(targets.length&&(!recruit||p.monsters.length<RULES_PROFILE.monsterZones)){
     s.pending=pending;
     s.choice={actor:pending.actor,targets:recruit&&!fromChain?[...targets,'__skip__']:targets,source:recruit?'monsterRecruit':'monsterSearch'};s.phase='choice';
-    note(s,recruit?'Tomate Místico: escolha um monstro TREVAS de até 1500 ATK ou recuse a Invocação.':'Escolha um monstro elegível do seu Deck.');
+    note(s,recruit&&pending.id!=='83011277'?'Escolha um monstro elegível do seu Deck ou recuse a Invocação.':recruit?'Tomate Místico: escolha um monstro TREVAS de até 1500 ATK ou recuse a Invocação.':'Escolha um monstro elegível do seu Deck.');
     return;
    }
    note(s,'Nenhum monstro elegível no Deck ou nenhuma zona livre.');

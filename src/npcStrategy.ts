@@ -24,6 +24,7 @@ function flipUtility(s:DuelState,id:string,cardId:string){
  if(action.kind==='destroy'||action.kind==='bounce')return op.monsters.length?25:0;
  if(action.kind==='recover')return p.grave.some(c=>getCard(c.id)?.kind===action.cardKind)?20:0;
  if(action.kind==='draw')return p.deck.length>=action.count?18:0;
+ if(action.kind==='burnPerSpellTrap')return (op.backrow.length+Number(!!op.field))*action.amount/40;
  return 0;
 }
 export function tacticalSummon(s:DuelState,id:string,actions:Action[]):Action|undefined{
@@ -43,7 +44,7 @@ export function tacticalSummon(s:DuelState,id:string,actions:Action[]):Action|un
   score-=sacrifice;
   // Breaking a public attack wall is worth spending Tributes; passive bodies are not.
   if(action.position==='atk'&&threat>0&&attack>=threat)score+=30;
-  if(action.position==='atk'&&s.turn>1&&attack>=op.lp&&!op.monsters.length)score+=100;
+  if(action.position==='atk'&&s.turn>1&&attack>=op.lp&&(!op.monsters.length||getMonsterEffect(c.id)?.operation.kind==='directAttack'))score+=100;
   return {action,score};
  });
  candidates.sort((a,b)=>b.score-a.score);
