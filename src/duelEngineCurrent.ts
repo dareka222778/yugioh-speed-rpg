@@ -162,7 +162,8 @@ function quickSpellActions(s:DuelState,index:number):Action[]{
  ];
  // Main Phase and response windows share the same target policy. Timing is
  // checked above; a response must not invent a second set of legal targets.
- return candidates.filter(c=>!s.damageStep||getEffect(c.id)?.kind==='temporaryModifier'&&s.pending.kind==='attack'&&s.pending.stage==='damage').flatMap(c=>spellActions(s,index,c));
+ const damageWindow=s.damageStep||s.pending.kind==='attack'&&s.pending.stage!=='declare';
+ return candidates.filter(c=>!damageWindow||getEffect(c.id)?.kind==='temporaryModifier'&&s.pending.kind==='attack'&&s.pending.stage==='damage').flatMap(c=>spellActions(s,index,c));
 }
 /** Audited hand Quick Effects during damage calculation. Costs are paid
  * before the chain; a Monster effect is neither a Spell nor a Trap activation. */
