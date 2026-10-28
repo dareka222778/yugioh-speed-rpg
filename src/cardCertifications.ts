@@ -4557,4 +4557,66 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "38277918": {
+    "fingerprint": "72931ee16b6d5e6bee99839536a21c07b2981727e4638d4de51fe4e9e45eabda",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  },
+  "38999506": {
+    "fingerprint": "1379e4ed67c6f60cdd7839ac2ac94fe3af76f57accd44869ae36b4cfd53fec5e",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  },
+  "39552864": {
+    "fingerprint": "8a0fe3c6cb7a7da207b30d695ac15e71f0316e8925a0e73a30f069c40daf37c5",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  },
+  "39674352": {
+    "fingerprint": "73aac5b10319934dff04eb86e67ce5bf623ed76a299239a01f982def7856a34b",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  },
+  "59053232": {
+    "fingerprint": "e700a9d56be2771f7b3039c03ba42e825348a2d3f0d6ff8878ca7c55f7db41b6",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  },
+  "59983499": {
+    "fingerprint": "621b075faa991aa9e7d670bcb0147efb7e6a8712c80eb4f94895b96cb3e6b994",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  },
+  "65957473": {
+    "fingerprint": "277b24cb6522fdbc1b6831e2426205748899eb3feffb817a1d2e2314568ab7cd",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  },
+  "66073051": {
+    "fingerprint": "8690b0a2839e0a453cc2353fc864470c78dc8e308fd0b1c6c3da65d662116c5c",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  },
+  "96967123": {
+    "fingerprint": "c544216c8dee60298ff1fba0fe7a00ec9629e59bfab67bf5248ac3ce82af2524",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  },
+  "02468169": {
+    "fingerprint": "99c9937f286459222d7fa3f694d8e6a24420a9971e5445d8445faa0187372618",
+    "suites": [
+      "tests/worldNormalBatch16.test.cjs"
+    ]
+  }
+
 };

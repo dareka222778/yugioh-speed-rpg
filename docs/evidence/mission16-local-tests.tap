@@ -1,308 +1,736 @@
 TAP version 13
-# (node:7412) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (node:148) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
 # (Use `node --trace-warnings ...` to show where the warning was created)
 # Subtest: M16 admission: continuous effects cannot claim ignored activation costs or once-per-turn gates
 ok 1 - M16 admission: continuous effects cannot claim ignored activation costs or once-per-turn gates
   ---
-  duration_ms: 2.7851
+  duration_ms: 2.7644
   type: 'test'
   ...
 # Subtest: M16 admission: passive direct-attack/Trap-negation operations are not ignition commands
 ok 2 - M16 admission: passive direct-attack/Trap-negation operations are not ignition commands
   ---
-  duration_ms: 0.3189
+  duration_ms: 0.3369
   type: 'test'
   ...
 # Subtest: M16 admission: automatic trigger policy must represent a mandatory or optional decision
 ok 3 - M16 admission: automatic trigger policy must represent a mandatory or optional decision
   ---
-  duration_ms: 0.3238
+  duration_ms: 0.3528
   type: 'test'
   ...
 # Subtest: M16 admission: every existing certified monster definition remains valid
 ok 4 - M16 admission: every existing certified monster definition remains valid
   ---
-  duration_ms: 0.7545
+  duration_ms: 0.8006
   type: 'test'
   ...
-# (node:7476) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (node:11908) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
 # (Use `node --trace-warnings ...` to show where the warning was created)
 # Subtest: M16 01434352 Chaos Necromancer: identity
 ok 5 - M16 01434352 Chaos Necromancer: identity
   ---
-  duration_ms: 317.4988
+  duration_ms: 364.3368
   type: 'test'
   ...
 # Subtest: M16 01434352 Chaos Necromancer: mechanic
 ok 6 - M16 01434352 Chaos Necromancer: mechanic
   ---
-  duration_ms: 49.8158
+  duration_ms: 61.0628
   type: 'test'
   ...
 # Subtest: M16 01434352 Chaos Necromancer: negative
 ok 7 - M16 01434352 Chaos Necromancer: negative
   ---
-  duration_ms: 3.845
+  duration_ms: 4.3686
   type: 'test'
   ...
 # Subtest: M16 01434352 Chaos Necromancer: replay
 ok 8 - M16 01434352 Chaos Necromancer: replay
   ---
-  duration_ms: 13.6939
+  duration_ms: 14.674
   type: 'test'
   ...
 # Subtest: M16 01434352 Chaos Necromancer: negation
 ok 9 - M16 01434352 Chaos Necromancer: negation
   ---
-  duration_ms: 5.5717
+  duration_ms: 5.4562
   type: 'test'
   ...
 # Subtest: M16 01434352 Chaos Necromancer: source-loss
 ok 10 - M16 01434352 Chaos Necromancer: source-loss
   ---
-  duration_ms: 3.588
+  duration_ms: 5.2123
   type: 'test'
   ...
 # Subtest: M16 01434352 Chaos Necromancer: dynamic
 ok 11 - M16 01434352 Chaos Necromancer: dynamic
   ---
-  duration_ms: 3.5185
+  duration_ms: 3.7989
   type: 'test'
   ...
 # Subtest: M16 04542651 Yellow Luster Shield: identity
 ok 12 - M16 04542651 Yellow Luster Shield: identity
   ---
-  duration_ms: 0.398
+  duration_ms: 0.4745
   type: 'test'
   ...
 # Subtest: M16 04542651 Yellow Luster Shield: mechanic
 ok 13 - M16 04542651 Yellow Luster Shield: mechanic
   ---
-  duration_ms: 5.94
+  duration_ms: 6.1488
   type: 'test'
   ...
 # Subtest: M16 04542651 Yellow Luster Shield: negative
 ok 14 - M16 04542651 Yellow Luster Shield: negative
   ---
-  duration_ms: 3.5405
+  duration_ms: 3.7972
   type: 'test'
   ...
 # Subtest: M16 04542651 Yellow Luster Shield: replay
 ok 15 - M16 04542651 Yellow Luster Shield: replay
   ---
-  duration_ms: 6.3192
+  duration_ms: 6.6173
   type: 'test'
   ...
 # Subtest: M16 04542651 Yellow Luster Shield: negation
 ok 16 - M16 04542651 Yellow Luster Shield: negation
   ---
-  duration_ms: 6.1119
+  duration_ms: 6.3134
   type: 'test'
   ...
 # Subtest: M16 04542651 Yellow Luster Shield: source-loss
 ok 17 - M16 04542651 Yellow Luster Shield: source-loss
   ---
-  duration_ms: 4.3244
+  duration_ms: 4.5935
   type: 'test'
   ...
 # Subtest: M16 04542651 Yellow Luster Shield: dynamic
 ok 18 - M16 04542651 Yellow Luster Shield: dynamic
   ---
-  duration_ms: 3.9694
+  duration_ms: 4.2158
   type: 'test'
   ...
 # Subtest: M16 78193831 Buster Blader: identity
 ok 19 - M16 78193831 Buster Blader: identity
   ---
-  duration_ms: 0.2579
+  duration_ms: 0.3034
   type: 'test'
   ...
 # Subtest: M16 78193831 Buster Blader: mechanic
 ok 20 - M16 78193831 Buster Blader: mechanic
   ---
-  duration_ms: 3.3857
+  duration_ms: 3.6651
   type: 'test'
   ...
 # Subtest: M16 78193831 Buster Blader: negative
 ok 21 - M16 78193831 Buster Blader: negative
   ---
-  duration_ms: 3.6953
+  duration_ms: 3.7744
   type: 'test'
   ...
 # Subtest: M16 78193831 Buster Blader: replay
 ok 22 - M16 78193831 Buster Blader: replay
   ---
-  duration_ms: 5.2241
+  duration_ms: 5.3041
   type: 'test'
   ...
 # Subtest: M16 78193831 Buster Blader: negation
 ok 23 - M16 78193831 Buster Blader: negation
   ---
-  duration_ms: 3.0606
+  duration_ms: 3.3487
   type: 'test'
   ...
 # Subtest: M16 78193831 Buster Blader: source-loss
 ok 24 - M16 78193831 Buster Blader: source-loss
   ---
-  duration_ms: 2.9648
+  duration_ms: 3.325
   type: 'test'
   ...
 # Subtest: M16 78193831 Buster Blader: dynamic
 ok 25 - M16 78193831 Buster Blader: dynamic
   ---
-  duration_ms: 2.908
+  duration_ms: 3.4157
   type: 'test'
   ...
 # Subtest: M16 Buster: hidden Dragon identities cannot influence its modifier or the public battle estimate
 ok 26 - M16 Buster: hidden Dragon identities cannot influence its modifier or the public battle estimate
   ---
-  duration_ms: 7.5571
+  duration_ms: 7.9292
   type: 'test'
   ...
 # Subtest: M16 continuous sources combine independently and recover after serialization
 ok 27 - M16 continuous sources combine independently and recover after serialization
   ---
-  duration_ms: 6.6263
+  duration_ms: 7.5663
   type: 'test'
   ...
 # Subtest: M16 AI summon: evaluates prospective Buster field source and does not mutate state
 ok 28 - M16 AI summon: evaluates prospective Buster field source and does not mutate state
   ---
-  duration_ms: 6.3494
+  duration_ms: 6.9271
   type: 'test'
   ...
 # Subtest: M16 AI summon: own Graveyard count includes Tributes and ignores opposing hidden identity
 ok 29 - M16 AI summon: own Graveyard count includes Tributes and ignores opposing hidden identity
   ---
-  duration_ms: 3.7693
+  duration_ms: 3.9805
   type: 'test'
   ...
 # Subtest: M16 AI regression: prospective Muka Muka leaves the hand before counting hand modifiers
 ok 30 - M16 AI regression: prospective Muka Muka leaves the hand before counting hand modifiers
   ---
-  duration_ms: 3.2691
+  duration_ms: 3.8827
   type: 'test'
   ...
 # Subtest: M16 Chaos: equipment stacks with live grave count and remains after monster-effect negation
 ok 31 - M16 Chaos: equipment stacks with live grave count and remains after monster-effect negation
   ---
-  duration_ms: 4.7965
+  duration_ms: 5.0485
   type: 'test'
   ...
 # Subtest: M16 Buster: separate copies never multiply one another and follow controller rather than owner
 ok 32 - M16 Buster: separate copies never multiply one another and follow controller rather than owner
   ---
-  duration_ms: 3.5987
+  duration_ms: 3.5159
   type: 'test'
   ...
 # Subtest: M16 Shield: spell immunity prevents its modifier and removal restores the live source
 ok 33 - M16 Shield: spell immunity prevents its modifier and removal restores the live source
   ---
-  duration_ms: 4.6995
+  duration_ms: 4.8818
   type: 'test'
   ...
 # Subtest: M16 AI cross-family: a prospective shared aura also strengthens the opposing public attacker
 ok 34 - M16 AI cross-family: a prospective shared aura also strengthens the opposing public attacker
   ---
-  duration_ms: 3.3813
+  duration_ms: 3.8547
   type: 'test'
   ...
 # Subtest: M16 diagnostics persist each successful attempt with full TAP and source hashes
 ok 35 - M16 diagnostics persist each successful attempt with full TAP and source hashes
   ---
-  duration_ms: 241.8859
+  duration_ms: 242.427
   type: 'test'
   ...
 # Subtest: M16 diagnostics retain failures, stderr and later attempts without claiming success
 ok 36 - M16 diagnostics retain failures, stderr and later attempts without claiming success
   ---
-  duration_ms: 170.5491
+  duration_ms: 154.4051
   type: 'test'
   ...
 # Subtest: M16 diagnostics strip Discord secrets and replace inherited production database path
 ok 37 - M16 diagnostics strip Discord secrets and replace inherited production database path
   ---
-  duration_ms: 85.0737
+  duration_ms: 72.9945
   type: 'test'
   ...
 # Subtest: M16 diagnostics reject empty successful processes and invalid repetition counts
 ok 38 - M16 diagnostics reject empty successful processes and invalid repetition counts
   ---
-  duration_ms: 70.8484
+  duration_ms: 79.6036
   type: 'test'
   ...
 # Subtest: M16 snapshot hash remains SHA-256 compatible for empty, boundary and multi-chunk binary files
 ok 39 - M16 snapshot hash remains SHA-256 compatible for empty, boundary and multi-chunk binary files
   ---
-  duration_ms: 22.3891
+  duration_ms: 26.4118
   type: 'test'
   ...
 # Subtest: M16 snapshot hashing reads a multi-MiB file in bounded chunks without any whole-file read
 ok 40 - M16 snapshot hashing reads a multi-MiB file in bounded chunks without any whole-file read
   ---
-  duration_ms: 67.084
+  duration_ms: 63.9311
   type: 'test'
   ...
 # Subtest: M16 snapshot hash closes its file after I/O failure and does not create missing source files
 ok 41 - M16 snapshot hash closes its file after I/O failure and does not create missing source files
   ---
-  duration_ms: 5.6123
+  duration_ms: 4.1103
   type: 'test'
   ...
 # Subtest: M16 health: consistent per-table counts and payload bytes without modifying game data
 ok 42 - M16 health: consistent per-table counts and payload bytes without modifying game data
   ---
-  duration_ms: 21.7923
+  duration_ms: 21.3791
   type: 'test'
   ...
 # Subtest: M16 health: disk budget alerts are configurable and do not delete receipts
 ok 43 - M16 health: disk budget alerts are configurable and do not delete receipts
   ---
-  duration_ms: 18.3362
+  duration_ms: 20.364
   type: 'test'
   ...
 # Subtest: M16 health: PASSIVE checkpoint preserves committed rows and reports completed frames
 ok 44 - M16 health: PASSIVE checkpoint preserves committed rows and reports completed frames
   ---
-  duration_ms: 16.4521
+  duration_ms: 13.521
   type: 'test'
   ...
 # Subtest: M16 health: pinned reader prevents full checkpoint until released
 ok 45 - M16 health: pinned reader prevents full checkpoint until released
   ---
-  duration_ms: 18.0178
+  duration_ms: 18.0977
   type: 'test'
   ...
 # Subtest: M16 health: uncommitted writer is not observed or committed by diagnostics
 ok 46 - M16 health: uncommitted writer is not observed or committed by diagnostics
   ---
-  duration_ms: 18.3875
+  duration_ms: 17.304
   type: 'test'
   ...
 # Subtest: M16 health: CLI opens existing database read-only and rejects missing/invalid arguments
 ok 47 - M16 health: CLI opens existing database read-only and rejects missing/invalid arguments
   ---
-  duration_ms: 26.9402
+  duration_ms: 42.8012
   type: 'test'
   ...
 # Subtest: M16 health: quoted table/column names and empty tables are supported
 ok 48 - M16 health: quoted table/column names and empty tables are supported
   ---
-  duration_ms: 15.3727
+  duration_ms: 15.1643
   type: 'test'
   ...
 # Subtest: M16 health: rolled-back mutations and persisted state survive checkpoint and reopen
 ok 49 - M16 health: rolled-back mutations and persisted state survive checkpoint and reopen
   ---
-  duration_ms: 15.8207
+  duration_ms: 16.2594
   type: 'test'
   ...
-1..49
-# tests 49
+# (node:7432) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M16 world normal 39552864 Mystical Shine Ball: identity
+ok 50 - M16 world normal 39552864 Mystical Shine Ball: identity
+  ---
+  duration_ms: 265.633
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39552864 Mystical Shine Ball: summon
+ok 51 - M16 world normal 39552864 Mystical Shine Ball: summon
+  ---
+  duration_ms: 60.257
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39552864 Mystical Shine Ball: negative
+ok 52 - M16 world normal 39552864 Mystical Shine Ball: negative
+  ---
+  duration_ms: 4.752
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39552864 Mystical Shine Ball: battle
+ok 53 - M16 world normal 39552864 Mystical Shine Ball: battle
+  ---
+  duration_ms: 5.8355
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39552864 Mystical Shine Ball: movement
+ok 54 - M16 world normal 39552864 Mystical Shine Ball: movement
+  ---
+  duration_ms: 7.1507
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39552864 Mystical Shine Ball: replay
+ok 55 - M16 world normal 39552864 Mystical Shine Ball: replay
+  ---
+  duration_ms: 8.5663
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39552864 Mystical Shine Ball: ai
+ok 56 - M16 world normal 39552864 Mystical Shine Ball: ai
+  ---
+  duration_ms: 4.5487
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38277918 Mikazukinoyaiba: identity
+ok 57 - M16 world normal 38277918 Mikazukinoyaiba: identity
+  ---
+  duration_ms: 0.2864
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38277918 Mikazukinoyaiba: summon
+ok 58 - M16 world normal 38277918 Mikazukinoyaiba: summon
+  ---
+  duration_ms: 4.2458
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38277918 Mikazukinoyaiba: negative
+ok 59 - M16 world normal 38277918 Mikazukinoyaiba: negative
+  ---
+  duration_ms: 3.5804
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38277918 Mikazukinoyaiba: battle
+ok 60 - M16 world normal 38277918 Mikazukinoyaiba: battle
+  ---
+  duration_ms: 4.0766
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38277918 Mikazukinoyaiba: movement
+ok 61 - M16 world normal 38277918 Mikazukinoyaiba: movement
+  ---
+  duration_ms: 4.1004
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38277918 Mikazukinoyaiba: replay
+ok 62 - M16 world normal 38277918 Mikazukinoyaiba: replay
+  ---
+  duration_ms: 6.451
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38277918 Mikazukinoyaiba: ai
+ok 63 - M16 world normal 38277918 Mikazukinoyaiba: ai
+  ---
+  duration_ms: 3.839
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59983499 Dancing Elf: identity
+ok 64 - M16 world normal 59983499 Dancing Elf: identity
+  ---
+  duration_ms: 0.4523
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59983499 Dancing Elf: summon
+ok 65 - M16 world normal 59983499 Dancing Elf: summon
+  ---
+  duration_ms: 3.9638
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59983499 Dancing Elf: negative
+ok 66 - M16 world normal 59983499 Dancing Elf: negative
+  ---
+  duration_ms: 3.7681
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59983499 Dancing Elf: battle
+ok 67 - M16 world normal 59983499 Dancing Elf: battle
+  ---
+  duration_ms: 3.829
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59983499 Dancing Elf: movement
+ok 68 - M16 world normal 59983499 Dancing Elf: movement
+  ---
+  duration_ms: 4.7603
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59983499 Dancing Elf: replay
+ok 69 - M16 world normal 59983499 Dancing Elf: replay
+  ---
+  duration_ms: 5.243
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59983499 Dancing Elf: ai
+ok 70 - M16 world normal 59983499 Dancing Elf: ai
+  ---
+  duration_ms: 3.2243
+  type: 'test'
+  ...
+# Subtest: M16 world normal 02468169 Sealmaster Meisei: identity
+ok 71 - M16 world normal 02468169 Sealmaster Meisei: identity
+  ---
+  duration_ms: 0.3376
+  type: 'test'
+  ...
+# Subtest: M16 world normal 02468169 Sealmaster Meisei: summon
+ok 72 - M16 world normal 02468169 Sealmaster Meisei: summon
+  ---
+  duration_ms: 3.6398
+  type: 'test'
+  ...
+# Subtest: M16 world normal 02468169 Sealmaster Meisei: negative
+ok 73 - M16 world normal 02468169 Sealmaster Meisei: negative
+  ---
+  duration_ms: 3.2747
+  type: 'test'
+  ...
+# Subtest: M16 world normal 02468169 Sealmaster Meisei: battle
+ok 74 - M16 world normal 02468169 Sealmaster Meisei: battle
+  ---
+  duration_ms: 4.1058
+  type: 'test'
+  ...
+# Subtest: M16 world normal 02468169 Sealmaster Meisei: movement
+ok 75 - M16 world normal 02468169 Sealmaster Meisei: movement
+  ---
+  duration_ms: 3.8879
+  type: 'test'
+  ...
+# Subtest: M16 world normal 02468169 Sealmaster Meisei: replay
+ok 76 - M16 world normal 02468169 Sealmaster Meisei: replay
+  ---
+  duration_ms: 4.8827
+  type: 'test'
+  ...
+# Subtest: M16 world normal 02468169 Sealmaster Meisei: ai
+ok 77 - M16 world normal 02468169 Sealmaster Meisei: ai
+  ---
+  duration_ms: 3.3267
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39674352 Gogiga Gagagigo: identity
+ok 78 - M16 world normal 39674352 Gogiga Gagagigo: identity
+  ---
+  duration_ms: 0.3693
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39674352 Gogiga Gagagigo: summon
+ok 79 - M16 world normal 39674352 Gogiga Gagagigo: summon
+  ---
+  duration_ms: 3.6433
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39674352 Gogiga Gagagigo: negative
+ok 80 - M16 world normal 39674352 Gogiga Gagagigo: negative
+  ---
+  duration_ms: 3.0316
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39674352 Gogiga Gagagigo: battle
+ok 81 - M16 world normal 39674352 Gogiga Gagagigo: battle
+  ---
+  duration_ms: 4.0723
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39674352 Gogiga Gagagigo: movement
+ok 82 - M16 world normal 39674352 Gogiga Gagagigo: movement
+  ---
+  duration_ms: 4.0499
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39674352 Gogiga Gagagigo: replay
+ok 83 - M16 world normal 39674352 Gogiga Gagagigo: replay
+  ---
+  duration_ms: 4.8496
+  type: 'test'
+  ...
+# Subtest: M16 world normal 39674352 Gogiga Gagagigo: ai
+ok 84 - M16 world normal 39674352 Gogiga Gagagigo: ai
+  ---
+  duration_ms: 3.2024
+  type: 'test'
+  ...
+# Subtest: M16 world normal 65957473 Metal Armored Bug: identity
+ok 85 - M16 world normal 65957473 Metal Armored Bug: identity
+  ---
+  duration_ms: 0.3254
+  type: 'test'
+  ...
+# Subtest: M16 world normal 65957473 Metal Armored Bug: summon
+ok 86 - M16 world normal 65957473 Metal Armored Bug: summon
+  ---
+  duration_ms: 3.8213
+  type: 'test'
+  ...
+# Subtest: M16 world normal 65957473 Metal Armored Bug: negative
+ok 87 - M16 world normal 65957473 Metal Armored Bug: negative
+  ---
+  duration_ms: 3.6294
+  type: 'test'
+  ...
+# Subtest: M16 world normal 65957473 Metal Armored Bug: battle
+ok 88 - M16 world normal 65957473 Metal Armored Bug: battle
+  ---
+  duration_ms: 3.3782
+  type: 'test'
+  ...
+# Subtest: M16 world normal 65957473 Metal Armored Bug: movement
+ok 89 - M16 world normal 65957473 Metal Armored Bug: movement
+  ---
+  duration_ms: 3.6769
+  type: 'test'
+  ...
+# Subtest: M16 world normal 65957473 Metal Armored Bug: replay
+ok 90 - M16 world normal 65957473 Metal Armored Bug: replay
+  ---
+  duration_ms: 4.8959
+  type: 'test'
+  ...
+# Subtest: M16 world normal 65957473 Metal Armored Bug: ai
+ok 91 - M16 world normal 65957473 Metal Armored Bug: ai
+  ---
+  duration_ms: 3.1932
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38999506 Cosmo Queen: identity
+ok 92 - M16 world normal 38999506 Cosmo Queen: identity
+  ---
+  duration_ms: 0.3427
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38999506 Cosmo Queen: summon
+ok 93 - M16 world normal 38999506 Cosmo Queen: summon
+  ---
+  duration_ms: 3.8585
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38999506 Cosmo Queen: negative
+ok 94 - M16 world normal 38999506 Cosmo Queen: negative
+  ---
+  duration_ms: 2.9313
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38999506 Cosmo Queen: battle
+ok 95 - M16 world normal 38999506 Cosmo Queen: battle
+  ---
+  duration_ms: 3.6491
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38999506 Cosmo Queen: movement
+ok 96 - M16 world normal 38999506 Cosmo Queen: movement
+  ---
+  duration_ms: 3.7364
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38999506 Cosmo Queen: replay
+ok 97 - M16 world normal 38999506 Cosmo Queen: replay
+  ---
+  duration_ms: 4.7138
+  type: 'test'
+  ...
+# Subtest: M16 world normal 38999506 Cosmo Queen: ai
+ok 98 - M16 world normal 38999506 Cosmo Queen: ai
+  ---
+  duration_ms: 3.0772
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59053232 Turu-Purun: identity
+ok 99 - M16 world normal 59053232 Turu-Purun: identity
+  ---
+  duration_ms: 0.3651
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59053232 Turu-Purun: summon
+ok 100 - M16 world normal 59053232 Turu-Purun: summon
+  ---
+  duration_ms: 3.7961
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59053232 Turu-Purun: negative
+ok 101 - M16 world normal 59053232 Turu-Purun: negative
+  ---
+  duration_ms: 3.2679
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59053232 Turu-Purun: battle
+ok 102 - M16 world normal 59053232 Turu-Purun: battle
+  ---
+  duration_ms: 3.2991
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59053232 Turu-Purun: movement
+ok 103 - M16 world normal 59053232 Turu-Purun: movement
+  ---
+  duration_ms: 3.2078
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59053232 Turu-Purun: replay
+ok 104 - M16 world normal 59053232 Turu-Purun: replay
+  ---
+  duration_ms: 4.3866
+  type: 'test'
+  ...
+# Subtest: M16 world normal 59053232 Turu-Purun: ai
+ok 105 - M16 world normal 59053232 Turu-Purun: ai
+  ---
+  duration_ms: 3.8703
+  type: 'test'
+  ...
+# Subtest: M16 world normal 66073051 Warrior of Zera: identity
+ok 106 - M16 world normal 66073051 Warrior of Zera: identity
+  ---
+  duration_ms: 0.4174
+  type: 'test'
+  ...
+# Subtest: M16 world normal 66073051 Warrior of Zera: summon
+ok 107 - M16 world normal 66073051 Warrior of Zera: summon
+  ---
+  duration_ms: 3.3495
+  type: 'test'
+  ...
+# Subtest: M16 world normal 66073051 Warrior of Zera: negative
+ok 108 - M16 world normal 66073051 Warrior of Zera: negative
+  ---
+  duration_ms: 3.032
+  type: 'test'
+  ...
+# Subtest: M16 world normal 66073051 Warrior of Zera: battle
+ok 109 - M16 world normal 66073051 Warrior of Zera: battle
+  ---
+  duration_ms: 3.2554
+  type: 'test'
+  ...
+# Subtest: M16 world normal 66073051 Warrior of Zera: movement
+ok 110 - M16 world normal 66073051 Warrior of Zera: movement
+  ---
+  duration_ms: 3.3329
+  type: 'test'
+  ...
+# Subtest: M16 world normal 66073051 Warrior of Zera: replay
+ok 111 - M16 world normal 66073051 Warrior of Zera: replay
+  ---
+  duration_ms: 5.4868
+  type: 'test'
+  ...
+# Subtest: M16 world normal 66073051 Warrior of Zera: ai
+ok 112 - M16 world normal 66073051 Warrior of Zera: ai
+  ---
+  duration_ms: 3.17
+  type: 'test'
+  ...
+# Subtest: M16 world normal 96967123 Dharma Cannon: identity
+ok 113 - M16 world normal 96967123 Dharma Cannon: identity
+  ---
+  duration_ms: 0.4686
+  type: 'test'
+  ...
+# Subtest: M16 world normal 96967123 Dharma Cannon: summon
+ok 114 - M16 world normal 96967123 Dharma Cannon: summon
+  ---
+  duration_ms: 3.4499
+  type: 'test'
+  ...
+# Subtest: M16 world normal 96967123 Dharma Cannon: negative
+ok 115 - M16 world normal 96967123 Dharma Cannon: negative
+  ---
+  duration_ms: 2.9521
+  type: 'test'
+  ...
+# Subtest: M16 world normal 96967123 Dharma Cannon: battle
+ok 116 - M16 world normal 96967123 Dharma Cannon: battle
+  ---
+  duration_ms: 3.9689
+  type: 'test'
+  ...
+# Subtest: M16 world normal 96967123 Dharma Cannon: movement
+ok 117 - M16 world normal 96967123 Dharma Cannon: movement
+  ---
+  duration_ms: 4.0426
+  type: 'test'
+  ...
+# Subtest: M16 world normal 96967123 Dharma Cannon: replay
+ok 118 - M16 world normal 96967123 Dharma Cannon: replay
+  ---
+  duration_ms: 4.2655
+  type: 'test'
+  ...
+# Subtest: M16 world normal 96967123 Dharma Cannon: ai
+ok 119 - M16 world normal 96967123 Dharma Cannon: ai
+  ---
+  duration_ms: 2.9189
+  type: 'test'
+  ...
+# Subtest: M16 world normals: all ten are admitted in isolated classic 2v2 and restore deterministically
+ok 120 - M16 world normals: all ten are admitted in isolated classic 2v2 and restore deterministically
+  ---
+  duration_ms: 106.6444
+  type: 'test'
+  ...
+1..120
+# tests 120
 # suites 0
-# pass 49
+# pass 120
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 1291.4617
+# duration_ms 2119.2154

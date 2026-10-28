@@ -2,6 +2,8 @@
 
 Base verificada: `8bcc05f9796fdca4cee2562b26a709cd2fa7e691`, engine-v8, 749 certificados e 130 IDs distribuíveis. CI 40640461055 aprovada. PR #12 permanece em rascunho. Os 680 arquivos locais coincidiram com os blobs Git da base antes das alterações.
 
+**Estado corrente em validação: engine-v8, 762 certificados (+13), 130 distribuíveis e 120 testes novos locais aprovados.** As seções abaixo registram os blocos incrementais; a CI final e métricas devem ser consolidadas antes da entrega.
+
 ## Bloco operacional implementado
 
 `scripts/sqlite-health.cjs` mede arquivos principal/WAL/SHM, páginas livres, quantidade de linhas e estimativa de payload por tabela em uma transação de leitura consistente. O orçamento e limiar são configuráveis na API. O relatório distingue payload de espaço físico e não representa todo o disco da hospedagem. A leitura percorre tabelas: executar sob demanda, sem colocar na rota de cada interação.
@@ -59,5 +61,7 @@ node scripts/sqlite-snapshot.cjs restore <pasta-do-snapshot> <destino-novo>
 Usar ambientes isolados até autorização operacional. Restauração rejeita sobrescrever arquivo ou sidecars existentes. Um arquivo principal copiado sem os dados confirmados do WAL não substitui a API de backup. Não ativamos retenção destrutiva; alertas se referem ao orçamento SQLite configurado, que não inclui backups, assets ou o restante do disco. `dbstat`, quando disponível, diferencia páginas de tabelas/índices da estimativa de payload; sua ausência é explicitada.
 
 ## Próximas prioridades
+
+O segundo lote acrescentou dez Normais elegíveis pela união mundial: Mystical Shine Ball, Mikazukinoyaiba, Dancing Elf, Sealmaster Meisei, Gogiga Gagagigo, Metal Armored Bug, Cosmo Queen, Turu-Purun, Warrior of Zera e Dharma Cannon. As fontes oficiais e impressões TCG estão em `mission16-world-normal-reviews.json`. São 70 cenários individuais, mais recuperação 2v2. Nenhum efeito secundário foi omitido: são Monstros Normais; a narrativa não é uma habilidade. A origem TCG demonstrada não é uma recuperação independente da primeira data OCG importada. Rituais e identidades ambíguas permanecem bloqueados.
 
 Concluir os resultados da CI e dos diagnósticos, depois isolar semânticas de resolução simultânea de LP, custo em gatilho e escolhas de jogador no próximo resolver quando necessário. Os demais sistemas do beta, localização integral e testes Discord reais continuam pendentes. Sem merge, deploy, acesso Discord ou distribuição.

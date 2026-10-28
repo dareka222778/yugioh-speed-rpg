@@ -27,6 +27,7 @@ jobs:
       - run: node scripts/audit-mission15.cjs
       - run: node scripts/audit-mechanical-batch15.cjs
       - run: node scripts/audit-mechanical-batch16.cjs
+      - run: node scripts/audit-world-normal16.cjs
       - run: node --expose-gc scripts/simulate-mission16.cjs
       - name: Diagnose critical acceptance before load and generated reports
         run: node scripts/accept-engine.cjs
@@ -109,6 +110,8 @@ jobs:
             artifacts/certification-executions-mission15.json
             artifacts/mission15-mechanical-audit.json
             artifacts/mission16-mechanical-audit.json
+            artifacts/mission16-world-normal-audit.json
+            artifacts/certification-executions-world-normal16.json
             artifacts/mission16-ai-simulation.json
             artifacts/certification-executions-mission16.json
             artifacts/engine-acceptance-failure.tap

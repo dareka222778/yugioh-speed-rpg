@@ -32,3 +32,13 @@ Beta real e capacidade de 20–50 jogadores continuam não homologados. I02 mant
 SHA-256 de snapshots passou a usar leitura limitada a 64 KiB, sem mudar hashes/formato. Testes `snapshotHash16` verificam arquivos binários, ausência de leitura integral e fechamento após I/O inválido. São **48 testes novos locais aprovados** no total; TAP completo persistido em `docs/evidence/mission16-local-tests.tap`.
 
 CI `40706485447` do commit `f7a8d5912669908f3d5e0ff16dd065364ee7cd96` já passou a simulação corrigida de 50/100 sessões; aguardar os resultados completos. A próxima CI incluirá a otimização do hash. Consolidar métricas e HEAD final neste documento após verificar ambos os jobs.
+
+## Lote mundial — estado corrente
+
+O registro local corrente é **762 certificados (+13 desde a base), 130 distribuíveis, engine-v8**. Dez Monstros Normais foram admitidos por impressões TCG oficiais anteriores ao corte: Mystical Shine Ball, Mikazukinoyaiba, Dancing Elf, Sealmaster Meisei, Gogiga Gagagigo, Metal Armored Bug, Cosmo Queen, Turu-Purun, Warrior of Zera e Dharma Cannon. Fonte italiana oficial usada para Dancing Elf após timeout em inglês; não há entrada portuguesa e o nome inglês foi preservado. Não interpretar textos narrativos de Normais como efeitos.
+
+Nova revisão de dados `f580081f728973259ab608d9ccfeca9938278a39708e9f0897e2c4da0946614c`. A revisão de 752 cartas e suas definições/certificados continuam intactas. Os dados importados OCG posteriores não impedem elegibilidade mundial quando há impressão TCG comprovada; não foram reescritos. Rituais, protótipos sem passcode, Vorse Raider com identidade conflitante e Slime Toad com ressalva de nome permanecem fora desse lote.
+
+**120 testes novos locais aprovados**, zero falhas/TODO. Executar também `node scripts/audit-world-normal16.cjs`, consumindo o manifesto real `artifacts/certification-executions-world-normal16.json`. A CI Node 22 completa do novo lote ainda deve concluir. A matriz tem 1.200 registros restantes.
+
+Commits posteriores já registrados: `496fdc84` (diagnóstico), `ec8d92c9` (contínuos/IA), `f7a8d591` (guardas/comparação JSON), `54c2b6fb` (hash limitado), `723aa111` (aura adversária na avaliação). CI `40707211361` aprovou ambos os jobs no código anterior ao último ajuste de aura. Não usar esse resultado como CI do lote mundial.

@@ -1,3 +1,4 @@
+import {worldNormalEffects16} from './worldNormalBatch16';
 import {mechanicalEffects16} from './mechanicalBatch16';
 import {mechanicalEffects15} from './mechanicalBatch15';
 import {destructionFilterIssues,type DestructionFilter} from './destructionRules';
@@ -24,6 +25,7 @@ export type Effect=
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number;count?:CountFormula};
 export const effectDefinitions:Record<string,Effect>={
  ...mechanicalEffects14,
+ ...worldNormalEffects16,
  ...mechanicalEffects16,
  ...mechanicalEffects15,
  ...mechanicalEffects11,
