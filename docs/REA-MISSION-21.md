@@ -12,7 +12,7 @@ Corrigidos: bônus de Banner durante descarte final; limite de três cópias com
 
 ## Evidência e automação
 
-- `tests/mission21ActiveBatch.test.cjs`: 68 testes pela entrada pública de novos duelos, incluindo 66 cenários individuais e duas regressões cruzadas.
+- `tests/mission21ActiveBatch.test.cjs`: 74 testes pela entrada pública de novos duelos, incluindo 72 cenários individuais e duas regressões cruzadas. Os seis monstros de Efeito também são invocados por ações legais com o número correto de Tributos e conservação de UIDs.
 - `docs/evidence/mission21-individual-reviews.json`: revisão do efeito integral, fatos oficiais e impressão regional elegível. `reviewedTextSource` identifica o idioma efetivamente consultado; `primarySource` conserva a referência canônica do catálogo. Datas de impressão verificadas não são alegações de primeira publicação e não reescrevem datas importadas.
 - `scripts/audit-mechanical-batch21.cjs`: cruza revisão, fingerprint, seis cenários por carta, versão ativa e bloqueio de distribuição.
 - `scripts/triage-mission21.cjs`: percorre todos os 1.962 registros; distingue importação, identidade, representação, teste e certificação. Pistas limitadas da M13 continuam identificadas como incompletas.
@@ -26,6 +26,8 @@ O cache público secundário tem 1.180 textos integrais, zero falhas de coleta e
 A CI do commit `c3b009fa` executou Node 22.23.4: tipagem/compilação aprovadas, **5.561 testes aprovados, zero falhas e zero TODO**, mais gate individual M21 aprovado. A execução parou posteriormente no gate de beta M7 por expectativa fixa de oito versões; o conjunto misto agora tem nove. Essa expectativa foi corrigida mantendo as demais asserções. A nova execução completa ainda precisa ser consultada após o próximo commit. Não declarar CI totalmente verde com base apenas na aprovação da suíte.
 
 As falhas iniciais foram reproduzidas e corrigidas: 127 testes na primeira CI de integração, incluindo expectativas v8 e bloqueios reais em fichas/Standby. Os gates de preservação M3–M8 usam normalização delimitada das adições revisadas, mantendo os bytes históricos como referência; nenhuma suíte foi desabilitada.
+
+O auditor REA foi tentado localmente, mas seus 23 casos falharam ao carregar `dist/`, ausente neste ambiente sem build/dependências npm. Seus subprocessos não herdam o hook local; essa execução não comprovou regressões funcionais nem aprovação REA. A avaliação válida dos 23 cenários depende da execução compilada da CI. Os testes locais adicionais do manifesto verificam os sete arquivos do cache e rejeitam adulteração, ausência e lotes extras.
 
 ## Métricas internas disponíveis
 

@@ -34,6 +34,14 @@ for(const c of cards){const row=rows.find(x=>x.id===c.id);function scenario(name
   else if(r.getEffect(c.id).kind==='equip'){s.players[0].monsters=[mon('wrong','91152256')];s.players[0].hand=[ref('new',c.id)];assert.equal(e.legalActions(s,'a').some(a=>a.kind==='spell'&&a.card==='new'),false);}
   else{s.phase='battle';s.players[0].hand=[ref('new',c.id)];assert.equal(e.legalActions(s,'a').some(a=>(a.kind==='spell'||a.kind==='field')&&a.card==='new'),false);}
  });
+ if(c.kind==='monster'&&c.monsterType!=='fusion')scenario('legal-summon',()=>{
+  let s=fixture(c);s.players[0].monsters=[mon('tribute0','91152256'),mon('tribute1','91152256')];s.players[0].hand=[ref('new-monster',c.id)];
+  const count=c.level>=7?2:c.level>=5?1:0,tributes=Array.from({length:count},(_,i)=>'tribute'+i),before=inventory(s);
+  const action=e.legalActions(s,'a').find(a=>a.kind==='summon'&&a.card==='new-monster'&&a.position==='atk'&&JSON.stringify([...a.tributes].sort())===JSON.stringify(tributes));
+  assert.ok(action,c.englishName+' must have a legal summon with the correct Tribute count');
+  s=settle(e.step(s,'a',action));assert.deepEqual(inventory(s),before);assert.ok(s.players[0].monsters.some(m=>m.uid==='new-monster'&&m.id===c.id));
+  for(const uid of tributes)assert.ok(s.players[0].grave.some(c=>c.uid===uid));assert.ok(e.atk(s.players[0].monsters.find(m=>m.uid==='new-monster'),s)>=c.atk);
+ });
  scenario('replay',()=>{let s=fixture(c);if(c.kind==='spell'){s.players[1].hand=[ref('cost','91152256')];s.players[1].backrow=[{uid:'jam',id:'77414722',faceUp:false,setTurn:0}];s=cast(s,c);assert.equal(s.phase,'response');assert.deepEqual(settle(structuredClone(s)),settle(JSON.parse(JSON.stringify(s))));}
   else{const raw=JSON.stringify(s);assert.deepEqual(e.step(s,'a',{kind:'end'}),e.step(JSON.parse(raw),'a',{kind:'end'}));assert.equal(JSON.stringify(s),raw);}
  });

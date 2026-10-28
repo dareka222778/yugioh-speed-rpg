@@ -10,7 +10,7 @@ const {cardDistributionAllowed}=require('../dist/cardReleasePolicy');
 const reviews=require('../docs/evidence/mission21-individual-reviews.json');
 const executions=JSON.parse(fs.readFileSync('artifacts/certification-executions-mission21.json','utf8'));
 const requiredScenarios=['identity','mechanic','negative','replay','negation','source-loss'];
-const admissions=cards.map(card=>({id:card.id,card,family:'m21-active-continuous-equipment-fusion',fingerprint:definitionFingerprint(card,r.getEffect(card.id),{monster:getMonsterDefinition,model:getEffectModel}),requiredScenarios,certified:r.getCardStatus(card.id).stage==='certified',distributionAuthorized:cardDistributionAllowed(card.id)}));
+const admissions=cards.map(card=>({id:card.id,card,family:'m21-active-continuous-equipment-fusion',fingerprint:definitionFingerprint(card,r.getEffect(card.id),{monster:getMonsterDefinition,model:getEffectModel}),requiredScenarios:card.kind==='monster'&&card.monsterType!=='fusion'?[...requiredScenarios,'legal-summon']:requiredScenarios,certified:r.getCardStatus(card.id).stage==='certified',distributionAuthorized:cardDistributionAllowed(card.id)}));
 const result=planHistoricalCatalog(require('../catalog/historical/2004-10-01/cards.json'),{region:'world',cutoff:'2004-09-30',reviews,executions,admissions});
 assert.equal(cards.length,11);assert.equal(new Set(cards.map(c=>c.konamiId)).size,11);
 assert.equal(reviews.length,11);assert.equal(executions.length,11);
