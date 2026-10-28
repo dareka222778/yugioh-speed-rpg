@@ -4,7 +4,14 @@ const file=path.resolve(process.argv[2]),job=JSON.parse(fs.readFileSync(file,'ut
 if(!fs.existsSync(path.join(path.dirname(file),'.fault-injection-authorized'))||path.resolve(process.env.DATABASE_PATH)!==path.join(path.dirname(file),'isolated.sqlite'))throw Error('Isolated fault-injection fixture required');
 for(const key of ['DISCORD_TOKEN','DISCORD_CLIENT_ID','DISCORD_GUILD_ID'])delete process.env[key];
 const {db}=require('../../dist/database'),one=require('../../dist/duelStore'),two=require('../../dist/tagStore');
-const pause=()=>{fs.writeFileSync(job.marker,job.point,{flag:'wx'});Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0);return 0;};
+const pause=()=>{
+ // Publish the marker atomically so the controller never reads a partially written file.
+ const readyFile=job.marker+`.ready-${process.pid}`;
+ fs.writeFileSync(readyFile,job.point,{flag:'wx'});
+ fs.renameSync(readyFile,job.marker);
+ Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0);
+ return 0;
+};
 db.function('m6_crash_barrier',pause);
 const tables=job.mode==='1v1'?{state:['duels','id'],events:['duel_transition_events','duel_id'],receipt:['duel_action_receipts','duel_id']}:{state:['tag_sessions','id'],events:['tag_transition_events','session_id'],receipt:['tag_action_receipts','duel_id']};
 if(!/^[a-f0-9]+$/.test(job.id))throw Error('Unexpected fixture identifier');
