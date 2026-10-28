@@ -95,6 +95,6 @@ test('mission14: all existing v7 revisions and 740 earlier certificates remain p
  const previous=require('../catalog/engine-v7/'+manifest.revisions.at(-2).id+'.json');
  const newest=require('../catalog/engine-v7/'+manifest.current+'.json');
  assert.equal(previous.cards.length,740);assert.equal(newest.cards.length,741);
- assert.equal(r.enabledCardIds.length,767);
+ assert.equal(r.enabledCardIds.length,769);
  for(const oldCard of previous.cards)assert.deepEqual(newest.cards.find(c=>c.id===oldCard.id),oldCard);
 });
