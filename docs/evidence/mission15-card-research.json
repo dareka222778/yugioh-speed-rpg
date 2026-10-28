@@ -184,7 +184,12 @@
       },
       "officialDescriptionSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4668&request_locale=en",
       "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4668&request_locale=ja",
-      "verifiedPrinting": null,
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "1999-07-22",
+        "set": "Vol.4",
+        "firstReleaseClaim": false
+      },
       "operation": {
         "kind": "destroyFiltered",
         "filter": {
@@ -198,9 +203,10 @@
       "remaining": [
         "Individual provenance/admission review",
         "Production-catalog registration and immutable revision",
-        "NPC utility and full-card interaction coverage",
-        "OCG primary printing not recovered in this cycle; Japanese endpoint failed"
-      ]
+        "NPC utility and full-card interaction coverage"
+      ],
+      "additionalPrimarySource": "https://www.db.yugioh-card.com/yugiohdb/card_calendar?dd=22&mm=7&mode=1&ope=1&page=1&request_locale=ja&rp=99999&sess=1&sort=2",
+      "retrievalNote": "Direct Japanese endpoint initially failed; official indexed card page and official card-calendar listing subsequently recovered the printing."
     },
     {
       "id": "95051344",

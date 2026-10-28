@@ -77,6 +77,8 @@ test('v8 candidate: group membership and immunity are snapshotted before any mut
 test('v8 candidate: invalid or unsupported filters fail closed',()=>{
  for(const v of [null,[],{}, {races:[]},{races:['Unknown']},{races:['Fiend','Fiend']},{equipped:false},{races:['Fiend'],attribute:'DARK'}])assert.ok(destructionFilterIssues(v).length,JSON.stringify(v));
  for(const v of [{races:['Fiend']},{equipped:true},{races:['Warrior'],equipped:true}])assert.deepEqual(destructionFilterIssues(v),[]);
+ const {effectDefinitionIssues}=require('../dist/resolvers/v8/effectDefinitions');
+ assert.ok(effectDefinitionIssues({kind:'destroyFiltered',filter:{races:['Fiend']},lpCost:500}).includes('unsupported-destruction-field'));
 });
 test('v8 candidate: Non-Spellcasting Area prevents filtered destruction and removing its source restores susceptibility',()=>run(()=>{
  const s=game('21323861');s.players[1].monsters=[mon('machine',ofRace('Machine'),1)];

@@ -11,7 +11,7 @@ Workspace desta sessão: `C:\Users\Micro\Downloads\speed-rpg-rea-20261026\repo-m
 - Não promover a v8 automaticamente. Faltam integração da IA, revisão/admissão individual, extensão de catálogo e validação 2v2 v8.
 - Backups novos incluem v7/v8; backups de formato 1 apenas v7 continuam suportados. Stores, banco, regras e módulos v1–v7 permanecem byte a byte na base.
 - Auditoria dos decks NPC corrigida para cinco cartas no Adicional e limite de cópias.
-- 37 testes da família, quatro da auditoria NPC e dois testes SQLite novos. Seleção local de 57 testes aprovados no Node 24; não substitui a CI Node 22 nativa.
+- 37 testes da família, quatro da auditoria NPC, dois testes SQLite e um de diagnóstico novos. Seleção local final de 58 testes aprovados no Node 24; não substitui a CI Node 22 nativa.
 
 ## Commits e evidências já observadas
 
@@ -25,6 +25,8 @@ Workspace desta sessão: `C:\Users\Micro\Downloads\speed-rpg-rea-20261026\repo-m
 
 O resultado final de HEADs posteriores deve ser consultado no GitHub. A falha de aceitação acima precisa de diagnóstico efetivo; sucesso da suíte completa não a invalida. A etapa diagnóstica antecipada executa a aceitação antes das cargas/relatórios, mantendo também a execução final existente, para distinguir falha reproduzível de interferência posterior.
 
+Atualização observada: o job principal **122631736846**, CI **40632450832**, commit `843a43ea`, terminou aprovado com **5.221 testes, zero falhas/TODO**, tipagem, aceitação e cargas SQLite de 50/100 sessões com oito versões. A falha anterior não reapareceu; sua causa continua não recuperada. Auditoria REA: 23 passaram, uma cobertura parcial (I02). Métricas e proveniência: `docs/evidence/mission15-validation.json`. Não confundir esse resultado com aprovação automática de commits posteriores; o novo teste de diagnóstico acrescenta uma asserção de teste à suíte seguinte.
+
 ## Retomada verificável
 
 1. Conferir HEAD remoto, PR e todos os jobs da CI mais recente. Não reenviar um tree baseado em SHA antigo. Identificar e preservar qualquer trabalho posterior.
@@ -32,7 +34,7 @@ O resultado final de HEADs posteriores deve ser consultado no GitHub. A falha de
 3. Se `accept:engine` falhar, ler o TAP completo nos logs e `artifacts/engine-acceptance-failure.tap`, identificar o teste concreto, acrescentar regressão e corrigir a causa. Não remover suítes, diminuir expectativas nem declarar a CI verde.
 4. Ambiente Node 22: `npm ci`, `npm run check`, `npm test`, `node scripts/verify-resolver-archives.cjs`, `node scripts/verify-catalog-revisions.cjs`, `node scripts/audit-mission15.cjs`, `npm run accept:engine`. Manter os demais comandos da CI.
 5. Executar `node scripts/stress-persisted-duels.cjs 50 2 --mixed --candidate-v8` e variante `100 2`; conferir oito versões, conservação/economia, duplicatas, reinício e SQLite íntegro. A v8 nesses cenários é 1v1; 2v2 permanece v7. Não confundir benchmark com Discord real.
-6. Fechar a pesquisa regional pendente, principalmente a impressão OCG primária de Eradicating Aerosol e divergências de datas importadas. Não alterar o histórico congelado.
+6. Consolidar a revisão regional individual e as divergências de datas importadas. A impressão OCG de Eradicating Aerosol foi recuperada posteriormente por fonte oficial indexada/calendário (22/07/1999, Vol.4); não repetir a busca já resolvida. Não alterar o histórico congelado.
 7. Implementar avaliação da IA para a nova operação, testar cada carta com suas interações, concluir a admissão real e criar revisão v8 por dados. A lista positiva de distribuição continua fechada. Uma futura atualização legítima dos arquivos correntes de metadados/certificados requer atualizar explicitamente a auditoria da Missão 15, preservando todos os 741 anteriores e os artefatos imutáveis.
 8. Somente depois promover a v8, com saves/ações pendentes e 2v2 cobertos. Avançar pelos grupos da Missão 13. Não criar outra versão de resolver para simples cadastro de efeitos já expressáveis.
 
