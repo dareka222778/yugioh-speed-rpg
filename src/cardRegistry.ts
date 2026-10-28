@@ -14,7 +14,7 @@ function canonical(value:unknown):string{
  return JSON.stringify(value);
 }
 export function definitionFingerprint(c:Card,e:Effect,context:DefinitionContext):string{
- const mechanical={id:c.id,kind:c.kind,monsterType:c.monsterType,level:c.level,atk:c.atk,defense:c.defense,race:c.race,attribute:c.attribute,field:c.field,fusion:c.fusion};
+ const mechanical={id:c.id,kind:c.kind,monsterType:c.monsterType,level:c.level,atk:c.atk,defense:c.defense,race:c.race,attribute:c.attribute,field:c.field,fusion:c.fusion,alwaysTreatedAs:c.alwaysTreatedAs,archetypes:c.archetypes};
  return createHash('sha256').update(canonical({card:mechanical,effect:e,monster:context.monster?.(c.id),model:context.model?.(e.kind)})).digest('hex');
 }
 const trapKinds=new Set<Effect['kind']>(['reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce']);

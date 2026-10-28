@@ -1,4 +1,5 @@
 import {getPlayableCard} from './effectRegistry';
+import {rulesCardName} from './cardIdentity';
 import {RULES_PROFILE} from './rulesProfile';
 import {db,getPlayer,getCollection,grantStarterCards} from './database';
 import {getCard} from './collection';
@@ -28,6 +29,9 @@ export function validateDeck(items:DeckItem[],owned:DeckItem[]) {
   if(!Number.isInteger(item.quantity)||item.quantity<1||item.quantity>RULES_PROFILE.copiesPerCard)errors.push(`Máximo de 3 cópias por carta: ${card?.name??item.card_key}.`);
   if(item.quantity>have)errors.push(`Você possui apenas ${have} cópia(s) de ${card?.name??item.card_key}.`);
  }
+ const byRulesName=new Map<string,number>();
+ for(const item of items){const c=getCard(item.card_key);if(!c||!Number.isInteger(item.quantity)||item.quantity<1)continue;const name=rulesCardName(c);byRulesName.set(name,(byRulesName.get(name)??0)+item.quantity);}
+ for(const [name,amount]of byRulesName)if(amount>RULES_PROFILE.copiesPerCard)errors.push(`Máximo de 3 cópias somando cartas tratadas como ${name}.`);
  return {total,extraTotal,errors};
 }
 function rawDeck(owner:string,slot:number):Deck {

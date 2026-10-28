@@ -1,5 +1,5 @@
 // Factual metadata imported by scripts/import_catalog.py. See CARD_SOURCES.md.
-export type Card = { id:string; konamiId:number; name:string; englishName:string; kind:'monster'|'spell'|'trap'; race:string|null; attribute:string|null; level:number|null; atk:number|null; defense:number|null; summary:string; source:string; monsterType?:'normal'|'effect'|'fusion'; field?:boolean; fusion?:string[] };
+export type Card = { id:string; konamiId:number; name:string; englishName:string; kind:'monster'|'spell'|'trap'; race:string|null; attribute:string|null; level:number|null; atk:number|null; defense:number|null; summary:string; source:string; monsterType?:'normal'|'effect'|'fusion'; field?:boolean; fusion?:string[]; alwaysTreatedAs?:string; archetypes?:readonly string[] };
 export type StarterItem = { id:string; quantity:number };
 export const cards: Card[] = [
   {

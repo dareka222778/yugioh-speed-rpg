@@ -9,6 +9,7 @@ import {getMonsterDefinition} from './monsterEffects';
 import {getEffectModel} from './effectModels';
 import {buildCardRegistry} from './cardRegistry';
 import {cardCertifications} from './cardCertifications';
+import {namedCard} from './cardIdentity';
 export type {Effect} from './effectDefinitions';
 export const engineCatalog:readonly Card[]=cardMetadata;
 const registry=buildCardRegistry(cardMetadata,effectDefinitions,cardCertifications,{monster:getMonsterDefinition,model:getEffectModel});
@@ -22,7 +23,7 @@ export function getEnabledCardIds():readonly string[]{return currentCatalog()?.e
 export function isQuickPlaySpell(id:string):boolean{
  const e=getEffect(id);return engineCard(id)?.kind==='spell'&&!!e&&getEffectModel(e.kind)?.activation.speed===2;
 }
-export function equipEligible(effect:Extract<Effect,{kind:'equip'}>,monster:Card){return (!effect.races||effect.races.includes(monster.race??''))&&(!effect.attribute||effect.attribute===monster.attribute);}
+export function equipEligible(effect:Extract<Effect,{kind:'equip'}>,monster:Card){return (!effect.races||effect.races.includes(monster.race??''))&&(!effect.attribute||effect.attribute===monster.attribute)&&(!effect.names||effect.names.some(n=>namedCard(monster,n)))&&(!effect.monsterType||effect.monsterType===monster.monsterType)&&(!effect.maxLevel||!!monster.level&&monster.level<=effect.maxLevel);}
 
 /** Duel-only metadata never admits a token to decks, certificates or inventory. */
 export function getDuelCard(id:string){const card=getPlayableCard(id)??getTokenMetadata(id);return card?presentedCard(card):undefined;}

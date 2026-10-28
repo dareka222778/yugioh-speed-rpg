@@ -1,4 +1,5 @@
 import {mechanicalMonsters16} from './mechanicalBatch16';
+import {mechanicalMonsters20} from './mechanicalBatch20';
 import {mechanicalMonsters17} from './mechanicalBatch17';
 import {mechanicalMonsters18} from './mechanicalBatch18';
 import {mechanicalMonsters8} from './mechanicalBatch8';
@@ -47,6 +48,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...mechanicalMonsters20,
  ...mechanicalMonsters16,
  ...mechanicalMonsters17,
  ...mechanicalMonsters18,
