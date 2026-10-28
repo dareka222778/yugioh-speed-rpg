@@ -19,7 +19,7 @@ assert.equal(executions.length,31);
 assert.equal(evidence.cards.length,31);
 assert.equal(new Set(reviews.map(x=>x.id)).size,31);
 assert.equal(new Set(executions.map(x=>x.id)).size,31);
-assert.equal(enabledCardIds.length,723);
+assert.ok(enabledCardIds.length>=723,'Mission 10 cohort must remain enabled');
 for(const record of evidence.cards){
  const card=cohort.get(record.id),row=historical.get(record.canonicalId),review=reviews.find(r=>r.id===record.id);
  assert.ok(card&&row&&review,'Missing individual Fusion: '+record.id);
@@ -40,7 +40,7 @@ const planning=audit({reviews,executions,region:'world'}),
  rows=planning.plan.filter(row=>cohort.has(row.id));
 assert.equal(rows.length,31);
 for(const row of rows)assert.equal(row.readyForIndividualCertification,true,JSON.stringify({id:row.id,issues:row.issues,reviewed:row.individualReview,regional:row.regionVerified,tested:row.tested,facts:row.factsMatchImplementation}));
-const report={cohort:'mission10',previousCards:692,newFusions:31,certifiedTotal:723,
+const report={cohort:'mission10',previousCards:692,newFusions:31,certifiedTotal:enabledCardIds.length,
  exactRecipes:31,threeMaterialRecipes:historicalFusionBatch10.filter(c=>c.fusion.length===3).length,
  individualScenarioExecutions:executions.reduce((n,x)=>n+x.passed.length,0),
  failedExecutions:executions.reduce((n,x)=>n+x.failed.length,0),

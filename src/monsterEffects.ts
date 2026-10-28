@@ -1,4 +1,5 @@
 import {mechanicalMonsters8} from './mechanicalBatch8';
+import {mechanicalMonsters11} from './mechanicalBatch11';
 import {continuousRuleIssues,type ContinuousRule} from './continuousRules';
 import {currentCatalog} from './catalogContext';
 import {mechanicalMonsters7} from './mechanicalBatch7';
@@ -42,6 +43,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...mechanicalMonsters11,
  ...mechanicalMonsters8,
  ...mechanicalMonsters5,...mechanicalMonsters7,
  '40640057':{effect:{trigger:'quick',cost:{kind:'discard',count:1},operation:{kind:'battleShield'}},activation:{policy:'manual',window:'opposingDamageCalculation'}}, // Kuriboh, self-discard during opposing damage calculation
