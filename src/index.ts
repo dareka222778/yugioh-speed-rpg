@@ -24,7 +24,6 @@ import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChalle
 import {visualDuelPublic,visualDuelPrivate,visualDuelCard,visualDuelZoneCard,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
 
 import {retryNetwork} from './networkRetry';
-import {parseSandboxGate,sandboxInteractionAllowed,sandboxParticipantAllowed} from './sandboxAccess';
 import {visualNPCLobby} from './npcUI';
 import type {GalleryView} from './npcRenderer';
 import {npcs} from './npcContent';
@@ -33,8 +32,6 @@ const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
 const guildId = process.env.DISCORD_GUILD_ID;
 if (!token || !clientId) throw new Error('Preencha DISCORD_TOKEN e DISCORD_CLIENT_ID no ambiente da hospedagem.');
-const sandboxGate=parseSandboxGate(process.env.SPEED_RPG_SANDBOX_GATE);
-if(sandboxGate&&(clientId!==sandboxGate.applicationId||guildId!==sandboxGate.guildId))throw Error('Discord sandbox gate does not match the configured test application and guild');
 
 const commands = [
   new SlashCommandBuilder().setName('evento').setDescription('Distribuição de cartas autorizada pela administração.').setDefaultMemberPermissions(PermissionFlagsBits.Administrator).setDMPermission(false)
@@ -130,15 +127,6 @@ async function refreshTag(record:TagRecord){
  const previous=tagUpdates.get(record.id)??Promise.resolve();const work=previous.catch(()=>{}).then(async()=>{const r=getTag(record.id);if(!r.message)return;try{const channel=await client.channels.fetch(r.channel);if(!channel||!('messages' in channel))return;const message=await channel.messages.fetch(r.message);const payload=await visualTagPublic(r);if(getTag(r.id).revision===r.revision){await message.edit(payload);markTagPublished(r.id,r.revision);}}catch(error){console.error('Falha ao atualizar equipes; use /dupla ver:',errorSummary(error));}});tagUpdates.set(record.id,work);try{await work;}finally{if(tagUpdates.get(record.id)===work)tagUpdates.delete(record.id);}
 }
 async function handleInteraction(i:Interaction) {
- if(!sandboxInteractionAllowed(sandboxGate,i)){
-  if(i.isAutocomplete()){
-   try{await i.respond([]);}catch(error){console.error('Autocomplete negado pelo sandbox:',errorSummary(error));}
-  }else if(i.isRepliable()){
-   try{await i.reply({content:'Este bot de testes está disponível apenas para os participantes e o canal autorizados.',flags:MessageFlags.Ephemeral});}
-   catch(error){console.error('Interação negada pelo sandbox:',errorSummary(error));}
-  }
-  return;
- }
  const correlation=randomUUID().slice(0,8),started=Date.now();
  let acknowledgment:'reply'|'update'|undefined;
  const deferReply=async(options?:any)=>{if(!('deferReply' in i))throw new Error('Interação sem resposta adiada.');await i.deferReply(options);acknowledgment='reply';};
@@ -159,7 +147,6 @@ async function handleInteraction(i:Interaction) {
       if(sub==='ver'||sub==='campo'){const existing=currentTag(id);if(!existing)throw Error('Você não possui uma partida 2v2 aberta.');if(existing.guild!==i.guildId)throw Error('Abra o 2v2 no servidor de origem.');const r=runTagBots(existing.id);if(r.guild!==i.guildId)throw Error('Abra o 2v2 no servidor de origem.');if(sub==='campo'){const message=await i.editReply(await visualTagPublic(r));setTagMessage(r.id,message.id,i.channelId);markTagPublished(r.id,r.revision);}else await i.editReply(r.state?await visualTagPrivate(r,id):tagPublicMessage(r));return;}
       if(sub==='treino'){const r=runTagBots(createTagTraining(id,i.guildId,i.channelId,i.options.getString?.('deck')??'yugi').id);const message=await i.editReply(await visualTagPublic(r));setTagMessage(r.id,message.id);markTagPublished(r.id,r.revision);return;}
       const partner=i.options.getUser('parceiro',true),op1=i.options.getUser('oponente1',true),op2=i.options.getUser('oponente2',true);if([partner,op1,op2].some(p=>p.bot))throw Error('Convide três jogadores humanos. Para bots, use /dupla simular.');
-      if([partner,op1,op2].some(p=>!sandboxParticipantAllowed(sandboxGate,p.id)))throw Error('O beta só permite convidar participantes autorizados. Use /dupla treino para jogar sozinho.');
       const r=createTagLobby([id,op1.id,partner.id,op2.id],i.guildId,i.channelId,(i.options.getString?.('cartas')??'classic-loan') as NonNullable<TagRecord['rules']>);const message=await i.editReply(tagPublicMessage(r));setTagMessage(r.id,message.id);markTagPublished(r.id,r.revision);return;
     }
     if(i.isChatInputCommand()&&['ajuda','regras'].includes(i.commandName)){await i.reply({...helpMessage(id,i.commandName==='regras'?'rules':'start'),flags:MessageFlags.Ephemeral});return;}
@@ -181,7 +168,7 @@ async function handleInteraction(i:Interaction) {
       }
       const eventId=i.options.getString('evento',true);
       if(action==='encerrar'){closeCardEvent(operator,eventId);await i.editReply({content:'Evento encerrado. Entregas anteriores foram preservadas.'});return;}
-      const user=i.options.getUser('jogador',true);if(user.bot)throw new Error('Escolha um jogador humano.');if(!sandboxParticipantAllowed(sandboxGate,user.id))throw Error('O beta só permite destinatários autorizados.');const result=grantEventCards(operator,eventId,user.id);
+      const user=i.options.getUser('jogador',true);if(user.bot)throw new Error('Escolha um jogador humano.');const result=grantEventCards(operator,eventId,user.id);
       await i.editReply({content:result.duplicate?'Esse jogador já recebeu este pacote. Nenhuma carta foi duplicada.':`Pacote entregue. Recibo: ${eventId} / ${user.id}.`,allowedMentions:{parse:[]}});return;
     }
     if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('npc:')){
@@ -217,7 +204,7 @@ async function handleInteraction(i:Interaction) {
       if(action==='treino'||action==='treino_fusao'||action==='laboratorio'||action==='desafiar'){
         let r:DuelRecord;
         if(action==='treino'||action==='treino_fusao'||action==='laboratorio')r=createTraining(id,i.guildId,i.channelId,action!=='treino');
-        else{const other=i.options.getUser('oponente',true);if(other.bot)throw new Error('Para enfrentar o bot, use /duelo treino.');if(!sandboxParticipantAllowed(sandboxGate,other.id))throw Error('O beta só permite convidar participantes autorizados. Use /duelo treino para jogar sozinho.');r=challenge(id,other.id,i.guildId,i.channelId);}
+        else{const other=i.options.getUser('oponente',true);if(other.bot)throw new Error('Para enfrentar o bot, use /duelo treino.');r=challenge(id,other.id,i.guildId,i.channelId);}
         const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id,r.revision);return;
       }
       const r=currentDuel(id);if(!r||r.guild_id!==i.guildId)throw new Error('Você não tem duelo ativo neste servidor. Use /duelo treino ou /duelo desafiar.');

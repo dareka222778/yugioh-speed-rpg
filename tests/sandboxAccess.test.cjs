@@ -4,7 +4,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const {prepare}=require('../scripts/prepare-discord-sandbox.cjs');
 const {preflight}=require('../scripts/discord-sandbox-preflight.cjs');
 const {launch}=require('../scripts/start-discord-sandbox.cjs');
-const {parseSandboxGate,sandboxInteractionAllowed,sandboxParticipantAllowed}=require('../dist/sandboxAccess.js');
+const {parseSandboxGate,sandboxInteractionDecision,sandboxParticipantAllowed}=require('../scripts/sandbox-access.cjs');
 
 const parent=fs.mkdtempSync(path.join(os.tmpdir(),'test-sandbox-access-'));
 const config=prepare(parent);
@@ -18,6 +18,8 @@ const base={approved:true,dedicatedTestApplication:true,testMode:'solo-ai',aiOnl
 const pre=x=>{fs.writeFileSync(authFile,JSON.stringify(x));return preflight(configFile,authFile);};
 const gateFrom=r=>parseSandboxGate(JSON.stringify({mode:r.testMode,applicationId:r.applicationId,guildId:r.guildId,channelId:r.channelId,consentingUserIds:r.consentingUserIds}));
 const scope=(id=owner,guildId=base.guildId,channelId=base.channelId)=>({user:{id},guildId,channelId});
+const command=(name,sub,ids)=>({...scope(),commandName:name,isChatInputCommand:()=>true,
+ options:{getSubcommand:()=>sub,getUser:k=>ids[k]?{id:ids[k]}:null}});
 
 test('solo AI sandbox accepts a single consenting owner without requiring four users',()=>{
  const result=pre(base);
@@ -42,8 +44,8 @@ test('closed beta is invite-only and can start with one tester before 20–50 sl
  const r=pre(beta);
  assert.equal(r.testMode,'closed-beta');assert.equal(r.participantCap,40);
  assert.equal(gateFrom(r).consentingUserIds.length,1);
- assert.equal(sandboxInteractionAllowed(gateFrom(r),scope()),true);
- assert.equal(sandboxInteractionAllowed(gateFrom(r),scope(second)),false);
+ assert.equal(sandboxInteractionDecision(gateFrom(r),scope()).allowed,true);
+ assert.equal(sandboxInteractionDecision(gateFrom(r),scope(second)).allowed,false);
  const full=Array.from({length:40},(_,i)=>String(10000000000000000n+BigInt(i)));
  assert.equal(pre({...beta,consentingUserIds:full}).consentingUserIds.length,40);
  for(const x of [
@@ -55,19 +57,43 @@ test('closed beta is invite-only and can start with one tester before 20–50 sl
 });
 test('sandbox runtime gate forbids unlisted user, different guild, channel and DM before command dispatch',()=>{
  const g=gateFrom(pre(base));
- assert.equal(sandboxInteractionAllowed(g,scope()),true);
- assert.equal(sandboxInteractionAllowed(g,scope(second)),false);
- assert.equal(sandboxInteractionAllowed(g,scope(owner,base.prohibitedGuildIds[0])),false);
- assert.equal(sandboxInteractionAllowed(g,scope(owner,base.guildId,'55555555555555555')),false);
- assert.equal(sandboxInteractionAllowed(g,scope(owner,null,null)),false);
+ assert.equal(sandboxInteractionDecision(g,scope()).allowed,true);
+ assert.equal(sandboxInteractionDecision(g,scope(second)).allowed,false);
+ assert.equal(sandboxInteractionDecision(g,scope(owner,base.prohibitedGuildIds[0])).allowed,false);
+ assert.equal(sandboxInteractionDecision(g,scope(owner,base.guildId,'55555555555555555')).allowed,false);
+ assert.equal(sandboxInteractionDecision(g,scope(owner,null,null)).allowed,false);
  assert.equal(sandboxParticipantAllowed(g,owner),true);
  assert.equal(sandboxParticipantAllowed(g,second),false);
- assert.equal(sandboxParticipantAllowed(null,second),true);
- assert.equal(sandboxInteractionAllowed(null,scope(second)),true);
+});
+test('solo AI refuses human challenges; closed beta allows only consenting targets',()=>{
+ const solo=gateFrom(pre(base));
+ const duel=command('duelo','desafiar',{oponente:second});
+ const team=command('dupla','convidar',{parceiro:second,oponente1:owner,oponente2:second});
+ const event=command('evento','entregar',{jogador:second});
+ for(const c of [duel,team,event])assert.equal(sandboxInteractionDecision(solo,c).allowed,false);
+ const beta=gateFrom(pre({...base,testMode:'closed-beta',aiOnly:false,participantCap:20,consentingUserIds:[owner,second]}));
+ for(const c of [duel,team,event])assert.equal(sandboxInteractionDecision(beta,c).allowed,true);
+ assert.equal(sandboxInteractionDecision(gateFrom(pre({...base,testMode:'closed-beta',aiOnly:false,participantCap:20,consentingUserIds:[owner]})),duel).allowed,false);
+});
+test('manual sandbox preloader rejects interactions before app event handler sees them',async()=>{
+ const {installSandboxInteractionGuard}=require('../scripts/sandbox-interaction-preload.cjs');
+ const {Client,Events,MessageFlags}=require('discord.js');
+ process.env.DISCORD_CLIENT_ID=base.applicationId;
+ process.env.DISCORD_GUILD_ID=base.guildId;
+ installSandboxInteractionGuard(JSON.stringify(gateFrom(pre(base))));
+ const client=Object.create(Client.prototype);
+ let dispatched=0,denied=null,autocomplete=null;
+ client.on(Events.InteractionCreate,()=>dispatched++);
+ const scopeMethods={isAutocomplete:()=>false,isRepliable:()=>true,reply:async payload=>{denied=payload;}};
+ client.emit(Events.InteractionCreate,{...scope(),...scopeMethods});
+ client.emit(Events.InteractionCreate,{...scope(second),...scopeMethods});
+ assert.equal(dispatched,1);assert.equal(denied.flags,MessageFlags.Ephemeral);
+ client.emit(Events.InteractionCreate,{...scope(second),isAutocomplete:()=>true,respond:async a=>{autocomplete=a;}});
+ assert.equal(dispatched,1);assert.deepEqual(autocomplete,[]);
 });
 test('sandbox runtime gate fails closed for corrupted, duplicate and exaggerated allowlists',()=>{
  const good={mode:'solo-ai',applicationId:base.applicationId,guildId:base.guildId,channelId:base.channelId,consentingUserIds:[owner]};
- assert.equal(parseSandboxGate(undefined),null);
+ assert.throws(()=>parseSandboxGate(undefined));
  for(const x of ['{',JSON.stringify({}),JSON.stringify({...good,consentingUserIds:[owner,second]}),JSON.stringify({...good,consentingUserIds:[owner,owner]}),JSON.stringify({...good,mode:'unknown'}),JSON.stringify({...good,guildId:'n/a'})])assert.throws(()=>parseSandboxGate(x));
 });
 test('four-player legacy sandbox retains four-user minimum',()=>{

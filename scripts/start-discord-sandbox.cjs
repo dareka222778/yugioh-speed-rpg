@@ -10,7 +10,7 @@ function launch(config,authorization,run=false){const result=preflight(config,au
  // Never inherit an arbitrary parent allowlist into the isolated process.
  const gate={mode:result.testMode,applicationId:result.applicationId,guildId:result.guildId,channelId:result.channelId,consentingUserIds:result.consentingUserIds};
  const env={...process.env,DATABASE_PATH:result.databasePath,DOTENV_CONFIG_PATH:path.join(result.root,'empty.env'),SPEED_RPG_SANDBOX_GATE:JSON.stringify(gate)};
- const child=spawnSync(process.execPath,[path.join(root,'dist/index.js')],{cwd:result.root,env,stdio:'inherit'});if(child.error)throw child.error;return {exitCode:child.status,signal:child.signal};
+ const child=spawnSync(process.execPath,['--require',path.join(root,'scripts/sandbox-interaction-preload.cjs'),path.join(root,'dist/index.js')],{cwd:result.root,env,stdio:'inherit'});if(child.error)throw child.error;return {exitCode:child.status,signal:child.signal};
 }
 if(require.main===module){try{const [c,a,flag]=process.argv.slice(2);const r=launch(c,a,flag==='--run');if(!flag)console.log(JSON.stringify(r,null,2));else process.exitCode=r.exitCode??1;}catch(e){console.error(e.message);process.exitCode=1;}}
 module.exports={launch};
