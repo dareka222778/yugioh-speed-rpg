@@ -15,6 +15,15 @@ function strip(file,bytes){let text=bytes.toString('utf8');const once=x=>{assert
  if(file==='src/cardCertifications.ts'&&additions.some(([id])=>text.includes(`"${id}":`))){
   for(const [id,fingerprint] of additions)once(`  "${id}":{"fingerprint":"${fingerprint}","suites":["tests/searchSpellBatch25.test.cjs"]},\n`);
  }
+ if(file==='src/releasedCardIds.ts'&&text.includes('The six M25 search spells')){
+  const oldHeader="/** Explicit historical release allowlist. Certification alone never grants distribution. */\n";
+  const newHeader="/** Explicit test distribution allowlist. Certification alone never grants distribution.\n * The six M25 search spells are permitted for the owner's closed beta. */\n";
+  const oldTail="  \"98374133\"\n]);\n";
+  const newTail="  \"98374133\",\n  // M25: owner-authorized closed beta, each card individually certified.\n  \"73628505\",\n  \"32807846\",\n  \"26902560\",\n  \"95281259\",\n  \"89997728\",\n  \"06390406\"\n]);\n";
+  assert.equal(text.split(newHeader).length,2,`M25 beta header: ${file}`);
+  assert.equal(text.split(newTail).length,2,`M25 beta allowlist: ${file}`);
+  text=text.replace(newHeader,oldHeader).replace(newTail,oldTail);
+ }
  return Buffer.from(text,'utf8');
 }
 module.exports={strip,additions};
