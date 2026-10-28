@@ -129,3 +129,12 @@ test('v8: Breath of Light preserves a properly summoned Fusion identity and revi
  const grave=done.players[1].grave.find(c=>c.uid==='fusion');assert.equal(grave.id,'32751480');assert.equal(grave.properlySummoned,true);
  done.players[0].hand=[{uid:'revive',id:'83764718'}];assert.ok(e.legalActions(done,'a').some(a=>a.kind==='spell'&&a.card==='revive'&&a.target==='fusion'));
 }));
+test('v8: Warrior Elimination does not confuse Warrior with Beast-Warrior',()=>run(()=>{
+ const s=game('90873992');s.players[1].monsters=[mon('warrior',ofRace('Warrior'),1),mon('beast-warrior',ofRace('Beast-Warrior'),1)];
+ const done=settle(activate(s));assert.deepEqual(done.players[1].monsters.map(m=>m.uid),['beast-warrior']);
+}));
+test('v8: Eternal Drought filters Fish, not WATER, Aqua, Sea Serpent or hidden identity',()=>run(()=>{
+ const water=race=>data.cards.find(c=>c.monsterType==='normal'&&c.race===race&&c.attribute==='WATER').id,s=game('56606928');
+ s.players[0].monsters=[mon('hidden-fish',water('Fish'),0,false)];s.players[1].monsters=[mon('fish',water('Fish'),1),mon('aqua',water('Aqua'),1),mon('serpent',water('Sea Serpent'),1)];
+ const done=settle(activate(s));assert.deepEqual(done.players[0].monsters.map(m=>m.uid),['hidden-fish']);assert.deepEqual(done.players[1].monsters.map(m=>m.uid),['aqua','serpent']);
+}));

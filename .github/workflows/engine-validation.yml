@@ -27,8 +27,8 @@ jobs:
       - run: node scripts/audit-mechanical-batch15.cjs
       - name: Diagnose critical acceptance before load and generated reports
         run: node scripts/accept-engine.cjs
-      - run: node scripts/stress-persisted-duels.cjs 50 2 --mixed --candidate-v8
-      - run: node scripts/stress-persisted-duels.cjs 100 2 --mixed --candidate-v8
+      - run: node scripts/stress-persisted-duels.cjs 50 2 --mixed --filtered-spells
+      - run: node scripts/stress-persisted-duels.cjs 100 2 --mixed --filtered-spells
       - run: node --expose-gc scripts/benchmark-v8-candidate15.cjs
       - run: node scripts/stamp-candidate-build.cjs
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission4-individual-reviews.json artifacts/certification-executions-mission4.json
