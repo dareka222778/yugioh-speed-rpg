@@ -55,7 +55,7 @@ for(const card of cards){
   const s=fixture(card),a=e.legalActions(s,'a').find(a=>a.kind==='fusion'&&a.position==='def');assert.ok(a);
   const next=e.step(s,'a',a);assert.deepEqual(clone(next),clone(e.step(clone(s),'a',a)));
   assert.deepEqual(clone(settle(next)),clone(settle(clone(next))));
-  assert.equal(next.resolverVersion,'engine-v8');assert.equal(next.catalogRevision,s.catalogRevision);
+  assert.equal(next.resolverVersion,'engine-v9');assert.equal(next.catalogRevision,s.catalogRevision);
  });
  scenario('zone-capacity',()=>{
   if(card.fusion.some(id=>r.getPlayableCard(id)?.fusion)){

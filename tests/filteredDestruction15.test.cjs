@@ -97,7 +97,7 @@ test('v8 candidate: chained equipment destruction resolves first and Eternal Res
 }));
 test('v8 candidate: archive dispatch restores v8 while default duels use v8 while all previous catalog revisions stay v7',()=>{
  const facade=require('../dist/duelEngine'),archive=require('../dist/resolverArchive');const players=[{id:'a',name:'A',cards:deck},{id:'b',name:'B',cards:deck}];
- assert.equal(facade.createDuel(players).resolverVersion,'engine-v8');
+ assert.equal(facade.createDuel(players).resolverVersion,'engine-v9');
  const s=archive.getArchivedDefinitionResolver('engine-v8').createDuel(players,undefined,0,{randomSeed:'15'.repeat(32)});assert.equal(s.resolverVersion,'engine-v8');
  const action=facade.legalActions(s,'a')[0];assert.deepEqual(facade.step(s,'a',action),facade.step(JSON.parse(JSON.stringify(s)),'a',action));
  assert.equal(archive.getArchivedDefinitionResolver('engine-v7').IMPLEMENTED_DUEL_CARDS.length,741);

@@ -78,8 +78,8 @@ test('mission14: card enters by a legal summon and replays identically after JSO
  assert.ok(action);
  const result=e.step(s,'a',action),replay=e.step(structuredClone(s),'a',action);
  assert.deepEqual(structuredClone(result),structuredClone(replay));
- assert.equal(result.resolverVersion,'engine-v8');
- assert.equal(result.catalogRevision,require('../catalog/engine-v8/manifest.json').current);
+ assert.equal(result.resolverVersion,'engine-v9');
+ assert.equal(result.catalogRevision,require('../catalog/engine-v9/manifest.json').current);
  assert.ok(result.players[0].monsters.some(m=>m.id===id));
  assertDuelState(structuredClone(result));
 });
