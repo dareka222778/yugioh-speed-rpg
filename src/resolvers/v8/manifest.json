@@ -37,7 +37,7 @@
     },
     {
       "path": "catalogRuntime.ts",
-      "sha256": "f2d58bb0c03ebb283b48226972878cf36617417eb9d20ccacdc5b0962f6d3f92"
+      "sha256": "acdff61c8f5d530b4402e2b1ea8c9dc1b5cb011e441323c3c6166a7842c1c802"
     },
     {
       "path": "chainEngine.ts",

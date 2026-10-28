@@ -23,6 +23,8 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: node scripts/verify-catalog-revisions.cjs
+      - run: node scripts/audit-mission15.cjs
+      - run: node --expose-gc scripts/benchmark-v8-candidate15.cjs
       - run: node scripts/stamp-candidate-build.cjs
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission4-individual-reviews.json artifacts/certification-executions-mission4.json
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission7-individual-reviews.json artifacts/certification-executions-mission7.json

@@ -1,0 +1,12 @@
+/** Offline preservation and experimental-catalog gate. Never changes a save. */
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),proof=require('../docs/evidence/mission15-preserved-baseline.json');
+assert.equal(proof.baselineCommit,'2e21d40724341db91bb9a03e3500641fc46f9302');
+for(const f of proof.files){const b=fs.readFileSync(path.join(root,f.path));assert.equal(crypto.createHash('sha256').update(b).digest('hex'),f.sha256,f.path);assert.equal(crypto.createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex'),f.gitBlobSha,f.path);}
+assert.equal(proof.files.filter(f=>/^src\/resolvers\/v[1-7]\//.test(f.path)).length,238);
+const manifest=require('../catalog/engine-v8/manifest.json'),loader=require('../dist/catalogArchive'),runtime=require('../dist/resolvers/v8/catalogRuntime');
+for(const revision of manifest.revisions){const data=loader.getCatalogData(revision.id,'engine-v8');runtime.createCatalogRuntime(revision.id,data);assert.equal(data.cards.length,741);}
+assert.equal(require('../dist/resolverArchive').CURRENT_RESOLVER_VERSION,'engine-v7');
+assert.equal(require('../dist/effectRegistry').enabledCardIds.length,741);
+const allowed=require('../dist/effectRegistry').enabledCardIds.filter(require('../dist/cardReleasePolicy').cardDistributionAllowed);assert.equal(allowed.length,130);
+console.log(JSON.stringify({baseline:proof.baselineCommit,protectedFiles:proof.files.length,historicalArchiveFiles:238,activeResolver:'engine-v7',experimentalResolver:'engine-v8',certified:741,distributionAllowed:130,newCardsCertified:0,fixtureAdmissionIsNotCertification:true}));

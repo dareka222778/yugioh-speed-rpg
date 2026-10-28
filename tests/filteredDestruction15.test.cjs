@@ -8,14 +8,18 @@ const {destructionFilterIssues}=require('../dist/resolvers/v8/destructionRules')
 const manifest=require('../catalog/engine-v8/manifest.json');
 const baseline=require('../catalog/engine-v8/'+manifest.current+'.json');
 // Test-only admission. These fixtures do not register or certify production cards.
-const cases=[['26725158',4869,'Exile of the Wicked','Fiend'],['21323861',4666,'Acid Rain','Machine'],['56606928',4670,'Eternal Drought','Fish'],['20101223',4669,'Breath of Light','Rock'],['90873992',4659,'Warrior Elimination','Warrior'],['94716515',4668,'Eradicating Aerosol','Insect'],['95051344',4662,'Eternal Rest',null],['90330453',4868,'Last Day of Witch','Spellcaster']];
+const {mechanicalCandidates15,mechanicalCandidateEffects15}=require('../dist/mechanicalCandidates15');
+const cases=mechanicalCandidates15.map(c=>[c.id,c.konamiId,c.englishName,mechanicalCandidateEffects15[c.id].filter.races?.[0]??null]);
 const data=structuredClone(baseline);
-for(const [id,cid,name,race] of cases){
- const c={id,konamiId:cid,name,englishName:name,kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Test fixture; not an admission decision.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid='+cid+'&request_locale=en'};
- const effect={kind:'destroyFiltered',filter:race?{races:[race]}:{equipped:true}};
- data.cards.push(c);data.effects[id]=effect;data.certificates[id]={fingerprint:definitionFingerprint(c,effect,{model:getEffectModel}),suites:['tests/filteredDestruction15.test.cjs']};
+for(const c of mechanicalCandidates15){
+ const effect=mechanicalCandidateEffects15[c.id];
+ data.cards.push(c);data.effects[c.id]=effect;data.certificates[c.id]={fingerprint:definitionFingerprint(c,effect,{model:getEffectModel}),suites:['tests/filteredDestruction15.test.cjs']};
 }
 const revision=crypto.createHash('sha256').update(JSON.stringify(data)).digest('hex');
+test('v8 candidate identities match the frozen history but fixtures never grant certification or distribution',()=>{
+ const history=require('../catalog/historical/2004-10-01/cards.json'),registry=require('../dist/effectRegistry'),policy=require('../dist/cardReleasePolicy');assert.equal(cases.length,8);
+ for(const c of mechanicalCandidates15){const h=history.find(h=>h.passwords?.includes(c.id));assert.ok(h,c.id);assert.equal(h.names.en,c.englishName);assert.equal(h.konamiId,c.konamiId);assert.equal(registry.getPlayableCard(c.id),undefined);assert.equal(policy.cardDistributionAllowed(c.id),false);}
+});
 const run=fn=>runCatalog(revision,data,fn);
 const deck=require('../dist/cardCatalog').starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id));
 const mon=(uid,id,owner=0,faceUp=true)=>({uid,id,owner,faceUp,position:faceUp?'atk':'def',entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0});
@@ -82,4 +86,10 @@ test('v8 candidate: archive dispatch restores v8 while default duels and all pre
  const s=archive.getArchivedDefinitionResolver('engine-v8').createDuel(players,undefined,0,{randomSeed:'15'.repeat(32)});assert.equal(s.resolverVersion,'engine-v8');
  const action=facade.legalActions(s,'a')[0];assert.deepEqual(facade.step(s,'a',action),facade.step(JSON.parse(JSON.stringify(s)),'a',action));
  assert.equal(archive.getArchivedDefinitionResolver('engine-v7').IMPLEMENTED_DUEL_CARDS.length,741);
+});
+test('v8 candidate: catalog runtime rejects v7 payloads and neither version accepts the other version revision',()=>{
+ const seven=require('../catalog/engine-v7/manifest.json'),old=require('../catalog/engine-v7/'+seven.current+'.json');
+ assert.throws(()=>require('../dist/resolvers/v8/catalogRuntime').createCatalogRuntime(seven.current,old));
+ const loader=require('../dist/catalogArchive');assert.throws(()=>loader.getCatalogData(seven.current,'engine-v8'));
+ assert.throws(()=>loader.getCatalogData(manifest.current,'engine-v7'));
 });
