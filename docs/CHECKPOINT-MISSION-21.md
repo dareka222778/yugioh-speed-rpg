@@ -27,3 +27,15 @@ Node 24.22.1 com `../local-typescript-hooks.cjs`: 76 testes das suítes M20/M21,
 6. Registrar contagem por identidade canônica, testes reais, CI e progresso `novas / 500`. Manter distribuição em 130; sem merge/deploy/Discord.
 
 Ambiente local sem Git executável nem dependências npm. Operações GitHub usam o conector com atualização condicional da referência. Compilação/SQLite completos devem ser confirmados na CI antes de declarar aprovação.
+
+## Atualização de continuidade
+
+Commits já enviados: `9e66ffb5` (integração), `c3b26c82` (fichas/Standby/recuperação/triagem), `c3b009fa` (admissão individual e pipeline). No último deles, Node 22 compilou e aprovou 5.561 testes, zero falhas/TODO, e o gate individual M21. A CI parou depois na expectativa de oito versões do gate beta M7; esse gate e o de prontidão M6 foram ajustados para o conjunto efetivamente observado de nove. Consultar o HEAD e a CI mais recentes para confirmar integração completa.
+
+As 11 novas passaram pelo gate individual; total 782, +11/500, faltam 489. Ver `docs/REA-MISSION-21.md` e os índices M21. Não certificar outras cartas com base na coleta secundária.
+
+Cache completo dos 1.180 pendentes, sem erros de coleta: `C:\Users\Micro\Downloads\speed-rpg-rea-20261026\mission21-text-cache\batch001.json` até `batch007.json`. SHA-256 dos arquivos e textos no índice `docs/evidence/mission21-full-text-index.json`. Não repetir a coleta: primeiro validar hashes e reutilizar os textos. Origem secundária pública, não substitui o confronto oficial de cada comportamento.
+
+Comandos de retomada após instalar dependências no Node 22: `npm run check`, `npm test`, `node scripts/audit-mechanical-batch21.cjs`, `node scripts/triage-mission21.cjs`, `node scripts/index-full-text21.cjs ../mission21-text-cache`. Relatórios completos regeneráveis em `artifacts/`. A CI executa os dois primeiros gates M21; a indexação do cache é local e não depende de acesso ao Discord.
+
+Próximo bloco: usar o cache completo para revisar grupos por operações compostas; priorizar seletores de busca/recuperação e escolhas de resolução, ou uma implementação completa de Ritual quando as receitas e exceções estiverem verificadas. Não há novas cartas Normais identificadas com identidade suficiente para admissão automática. Preservar os dados de economia/UI e a lista positiva de 130.

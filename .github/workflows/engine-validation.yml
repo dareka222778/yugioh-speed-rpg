@@ -116,6 +116,9 @@ jobs:
             artifacts/certification-executions-world-normal16.json
             artifacts/mission16-ai-simulation.json
             artifacts/certification-executions-mission16.json
+            artifacts/certification-executions-mission21.json
+            artifacts/mission21-admission.json
+            artifacts/mission21-triage.json
             artifacts/engine-acceptance-failure.tap
             artifacts/acceptance16
             artifacts/sqlite-health16-soak.json

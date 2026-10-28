@@ -31,6 +31,6 @@ try{for(const sessions of [50,100]){
  latencies.sort((a,b)=>a-b);scenarios.push({sessions,completed,moves,restores,seen,elapsedMs:performance.now()-start,cpuMicros:process.cpuUsage(cpu),memoryBefore,memoryAfter:process.memoryUsage(),peakRSS,
   latencyMs:{p50:latencies[Math.floor(latencies.length*.5)],p95:latencies[Math.floor(latencies.length*.95)],max:latencies.at(-1)},cardConservation:true,deterministicRecovery:true});
  }
- const report={node:process.version,engine:'engine-v8',scope:'Full AI 1v1 duels with 50/100 interleaved resident sessions, one process. Timings include decision, step, conservation checks and periodic JSON recovery; no persistence writes, rewards, rendering or Discord latency.',scenarios,capacityCertified:false,liveDiscordCertified:false};
+ const report={node:process.version,engine:require('../dist/resolverArchive').CURRENT_RESOLVER_VERSION,scope:'Full AI 1v1 duels with 50/100 interleaved resident sessions, one process. Timings include decision, step, conservation checks and periodic JSON recovery; no persistence writes, rewards, rendering or Discord latency.',scenarios,capacityCertified:false,liveDiscordCertified:false};
  fs.mkdirSync('artifacts',{recursive:true});fs.writeFileSync('artifacts/mission16-ai-simulation.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
 }finally{require('../dist/database').db.close();fs.rmSync(dir,{recursive:true,force:true});}
