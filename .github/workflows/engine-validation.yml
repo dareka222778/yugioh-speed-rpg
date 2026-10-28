@@ -24,6 +24,8 @@ jobs:
       - run: npm test
       - run: node scripts/verify-catalog-revisions.cjs
       - run: node scripts/audit-mission15.cjs
+      - name: Diagnose critical acceptance before load and generated reports
+        run: node scripts/accept-engine.cjs
       - run: node scripts/stress-persisted-duels.cjs 50 2 --mixed --candidate-v8
       - run: node scripts/stress-persisted-duels.cjs 100 2 --mixed --candidate-v8
       - run: node --expose-gc scripts/benchmark-v8-candidate15.cjs
