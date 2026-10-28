@@ -1,5 +1,6 @@
 import {mechanicalEffects8} from './mechanicalBatch8';
 import {mechanicalEffects11} from './mechanicalBatch11';
+import {mechanicalEffects14} from './mechanicalBatch14';
 import {continuousRuleIssues,countFormulaIssues,type ContinuousRule,type CountFormula} from './continuousRules';
 import {mechanicalBatch7} from './mechanicalBatch7';
 import {mechanicalEffects5} from './mechanicalBatch5';
@@ -18,6 +19,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[]}
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number;count?:CountFormula};
 export const effectDefinitions:Record<string,Effect>={
+ ...mechanicalEffects14,
  ...mechanicalEffects11,
  ...mechanicalEffects8,
  ...mechanicalEffects5,...Object.fromEntries(mechanicalBatch7.map(c=>[c.id,{kind:'monsterEffect' as const}])),

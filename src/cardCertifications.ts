@@ -4472,5 +4472,11 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "suites": [
       "tests/mechanicalBatch11.test.cjs"
     ]
+  },
+  "96890582": {
+    "fingerprint": "9b9232cd1383d481d6eca6e50a386612b8ed0abca65f621c72488b98565c333e",
+    "suites": [
+      "tests/mechanicalBatch14.test.cjs"
+    ]
   }
 };

@@ -152,8 +152,8 @@ for(const card of cards){
 }
 test('all 17 new effects remain separate from inherited v7 historic rules',()=>{
  const manifest=require('../catalog/engine-v7/manifest.json');
- assert.equal(manifest.revisions.length,6);const previous=require('../catalog/engine-v7/'+manifest.revisions[4].id+'.json');
+ assert.equal(manifest.revisions.length,7);const previous=require('../catalog/engine-v7/'+manifest.revisions[4].id+'.json');
  assert.equal(previous.cards.length,723);for(const card of cards)assert.ok(!previous.cards.some(c=>c.id===card.id));
- assert.equal(r.enabledCardIds.length,740);
+ assert.equal(r.enabledCardIds.length,741);
 });
 after(()=>{fs.mkdirSync('artifacts',{recursive:true});fs.writeFileSync('artifacts/certification-executions-mission11.json',JSON.stringify(results,null,2)+'\n');});

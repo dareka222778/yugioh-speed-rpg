@@ -16,9 +16,9 @@ const executions=JSON.parse(fs.readFileSync('artifacts/certification-executions-
 const historical=require('../catalog/historical/2004-10-01/cards.json');
 const historicalById=new Map(historical.map(x=>[x.id,x]));
 const required=['identity','mechanic','negative','replay','counter-or-continuous-negation','source-loss-or-cost-recovery'];
-assert.equal(manifest.revisions.length,6);assert.equal(getCatalogData(manifest.revisions[4].id).cards.length,723);
-assert.equal(getCatalogData(manifest.current).cards.length,740);
-assert.equal(enabledCardIds.length,740);assert.equal(cards.length,17);assert.equal(reviews.length,17);assert.equal(executions.length,17);
+assert.ok(manifest.revisions.length>=6);assert.equal(getCatalogData(manifest.revisions[4].id).cards.length,723);
+assert.equal(getCatalogData(manifest.revisions[5].id).cards.length,740);
+assert.equal(enabledCardIds.length,741);assert.equal(cards.length,17);assert.equal(reviews.length,17);assert.equal(executions.length,17);
 assert.equal(crosscheck.cards.length,17);assert.equal(crosscheck.previousCertified,723);
 assert.equal(crosscheck.independentSource.length,2);
 for(const source of crosscheck.independentSource)assert.match(source.sha256,/^[a-f0-9]{64}$/);
@@ -52,6 +52,6 @@ for(const card of cards){
 const report={cohort:'mission11',totalCertified:enabledCardIds.length,previousCards:723,newCertified:17,
  byFamily:{equip:12,spellLifePoints:2,monster:3},individualScenarioExecutions:tested,failedExecutions:0,
  distributionAuthorized:cards.filter(c=>cardDistributionAllowed(c.id)).length,
- previousCatalogRevision:manifest.revisions[4].id,currentCatalogRevision:manifest.current,legacyRevisionsPreserved:true};
+ previousCatalogRevision:manifest.revisions[4].id,currentCatalogRevision:manifest.revisions[5].id,legacyRevisionsPreserved:true};
 fs.writeFileSync('artifacts/mission11-mechanical-audit.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report));

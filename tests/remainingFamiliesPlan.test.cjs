@@ -40,11 +40,11 @@ test('duplicate independent ID is rejected instead of silently overwriting',()=>
   ]),/Duplicate independent card ID/);
 });
 
-test('current immutable catalog is treated as certified baseline',()=>{
+test('mission13 report is pinned to its historical 740-card immutable baseline',()=>{
   const base=path.resolve(__dirname,'..');
   const history=require(path.join(base,'catalog/historical/2004-10-01/cards.json'));
   const manifest=require(path.join(base,'catalog/engine-v7/manifest.json'));
-  const current=require(path.join(base,'catalog/engine-v7',manifest.current+'.json'));
+  const current=require(path.join(base,'catalog/engine-v7',manifest.revisions[5].id+'.json'));
   const out=planRemaining(history,current,[]);
   assert.equal(out.certifiedCount,740);
   assert.equal(out.historicalCount,1897);
