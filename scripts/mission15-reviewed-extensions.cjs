@@ -9,11 +9,12 @@ function removeOnce(text,part){assert.equal(text.split(part).length,2,'Reviewed 
 function baselineBytes(file,bytes){let text=bytes.toString('utf8');
  if(file==='src/duelStore.ts'&&text.includes(aiImport)){text=removeOnce(text,aiImport);text=removeOnce(text,aiHook);}
  if(file==='src/cardMetadata.ts'&&text.includes(metadataImport)){text=removeOnce(text,metadataImport);text=removeOnce(text,',...mechanicalBatch15');}
- if(file==='src/cardCertifications.ts'&&text.includes('/* MISSION15:BEGIN */')){
-  const matches=[...text.matchAll(/\n\/\* MISSION15:BEGIN \*\/\n,([\s\S]*?)\n\/\* MISSION15:END \*\//g)];assert.equal(matches.length,1);
-  const additions=JSON.parse('{'+matches[0][1]+'}');assert.deepEqual(Object.keys(additions).sort(),[...ids].sort());
+ if(file==='src/cardCertifications.ts'){
+  const current=JSON.parse(text.slice(text.indexOf('={')+1,text.lastIndexOf('};')+1));
+  if(!ids.some(id=>Object.hasOwn(current,id)))return bytes;
+  assert.ok(ids.every(id=>Object.hasOwn(current,id)));const additions=Object.fromEntries(ids.map(id=>[id,current[id]]));
   for(const c of Object.values(additions)){assert.deepEqual(Object.keys(c).sort(),['fingerprint','suites']);assert.match(c.fingerprint,/^[a-f0-9]{64}$/);assert.deepEqual(c.suites,['tests/filteredDestruction15.test.cjs','tests/mechanicalBatch15.test.cjs']);}
-  text=text.replace(matches[0][0],'');
+  text=removeOnce(text,'\n,'+JSON.stringify(additions,null,2).slice(1,-1));
  }
  return Buffer.from(text,'utf8');
 }

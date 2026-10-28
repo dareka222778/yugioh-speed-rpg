@@ -4479,7 +4479,6 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/mechanicalBatch14.test.cjs"
     ]
   }
-/* MISSION15:BEGIN */
 ,
   "20101223": {
     "fingerprint": "8bfa1b6dfa26ab7c76fb756998f63a514103a3eafd92bcae9bc43cb3bcce87ea",
@@ -4538,5 +4537,4 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
-/* MISSION15:END */
 };

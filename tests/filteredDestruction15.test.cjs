@@ -118,3 +118,14 @@ test('v8 candidate: Eternal Rest removes equipped tokens without manufacturing a
  const done=settle(activate(s));assert.equal(done.players[1].monsters.length,0);assert.equal(done.players.some(p=>p.grave.some(c=>c.uid===token.uid)),false);assert.ok(done.tokenLedger.events.some(event=>event.kind==='removed'&&event.uid===token.uid&&event.cause==='destroy'));
  assert.ok(done.players[0].grave.some(c=>c.uid==='equip'));
 }));
+test('v8: Exile destroys the whole group before Sangan opens a recoverable search choice',()=>run(()=>{
+ const s=game('26725158');s.players[1].monsters=[mon('sangan','26202165',1),mon('normal',ofRace('Fiend'),1)];
+ const done=settle(activate(s));assert.equal(done.players[1].monsters.length,0);assert.ok(done.players[1].grave.some(c=>c.uid==='sangan'));assert.ok(done.players[1].grave.some(c=>c.uid==='normal'));
+ assert.equal(done.phase,'choice');assert.equal(done.choice.source,'monsterSearch');const action=e.legalActions(done,'b').find(a=>a.kind==='choose');assert.ok(action);
+ assert.deepEqual(JSON.parse(JSON.stringify(e.step(done,'b',action))),JSON.parse(JSON.stringify(e.step(JSON.parse(JSON.stringify(done)),'b',action))));
+}));
+test('v8: Breath of Light preserves a properly summoned Fusion identity and revival eligibility after destruction',()=>run(()=>{
+ const s=game('20101223');s.players[1].monsters=[{...mon('fusion','32751480',1),properlySummoned:true}];const done=settle(activate(s));
+ const grave=done.players[1].grave.find(c=>c.uid==='fusion');assert.equal(grave.id,'32751480');assert.equal(grave.properlySummoned,true);
+ done.players[0].hand=[{uid:'revive',id:'83764718'}];assert.ok(e.legalActions(done,'a').some(a=>a.kind==='spell'&&a.card==='revive'&&a.target==='fusion'));
+}));

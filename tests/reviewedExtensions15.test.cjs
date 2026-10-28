@@ -6,6 +6,6 @@ for(const file of ['src/duelStore.ts','src/cardMetadata.ts','src/cardCertificati
  const changed=Buffer.concat([Buffer.from('// unrelated change\n'),bytes]);assert.notEqual(sha(baselineBytes(file,changed)),expected.sha256);
 });
 test('reviewed certificate boundary cannot hide executable code or unknown admissions',()=>{
- const source=fs.readFileSync('src/cardCertifications.ts','utf8');assert.throws(()=>baselineBytes('src/cardCertifications.ts',Buffer.from(source.replace('/* MISSION15:BEGIN */\n,','/* MISSION15:BEGIN */\n,(() => {})()'))));
- assert.throws(()=>baselineBytes('src/cardCertifications.ts',Buffer.from(source.replace(/(\/\* MISSION15:BEGIN \*\/\n,[\s\S]*?)"20101223"/,'$1"00000000"'))));
+ const source=fs.readFileSync('src/cardCertifications.ts','utf8');assert.throws(()=>baselineBytes('src/cardCertifications.ts',Buffer.from(source.replace('\n,\n','\n,(() => {})(),\n'))));
+ assert.throws(()=>baselineBytes('src/cardCertifications.ts',Buffer.from(source.replace('"20101223"','"00000000"'))));
 });
