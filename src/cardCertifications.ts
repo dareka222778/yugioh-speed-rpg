@@ -2,6 +2,12 @@
 // Fingerprints detect changed mechanics; CI must also execute the referenced suites.
 import type {CardCertificate} from './cardRegistry';
 export const cardCertifications:Readonly<Record<string,CardCertificate>>={
+  "73628505":{"fingerprint":"a59f760372ad8651a81311c763861c92d4de37768f59b34b2109cfe503533851","suites":["tests/searchSpellBatch25.test.cjs"]},
+  "32807846":{"fingerprint":"5af969bfa4a28e4cc73e9280dca281b3eb90718d7f77ed1994f93591ff5778de","suites":["tests/searchSpellBatch25.test.cjs"]},
+  "26902560":{"fingerprint":"d408583b8d2585f85e761a00f9144d3aaddbe3ab64e5ca559d6a770575e32c42","suites":["tests/searchSpellBatch25.test.cjs"]},
+  "95281259":{"fingerprint":"1785aaac21c47b33e856ebe384800e88f39031ee8fdd6551334b5447b869dab8","suites":["tests/searchSpellBatch25.test.cjs"]},
+  "89997728":{"fingerprint":"c9ce54e9346a4bb47ec5479eda8d1ae300fb67c9280a8651f4ab192b717dfa28","suites":["tests/searchSpellBatch25.test.cjs"]},
+  "06390406":{"fingerprint":"37a4601e4dc1953f548239e25484017155338c1d1d223b69d2b914d94f6f0d8f","suites":["tests/searchSpellBatch25.test.cjs"]},
   "99518961":{"fingerprint":"0f942d1998a3dd33089cfd4cc6b4349cb2e0282a9e5d9706d8806185a00cf866","suites":["tests/economicCountBatch24.test.cjs"]},
   "27053506":{"fingerprint":"7b9891c069cfae62aba900a16d36208ede256a05b3a0dff02b3f17cdcd78eacf","suites":["tests/economicCountBatch24.test.cjs"]},
   "51394546":{"fingerprint":"cbe35c4c0b88ff8d7fcbcbc2bde06f828760c3616f26259c97019b68e3d97c8c","suites":["tests/economicCountBatch24.test.cjs"]},

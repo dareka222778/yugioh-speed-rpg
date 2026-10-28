@@ -10,7 +10,7 @@ const additions=[
  ['58074572','5bc33794ffec7b0182e28cdd9d5c74ac1f8c1e8dae482af83a359442f811e44b','economicBatch23'],
  ['08842266','5a4a4786e3c0bd0632bd77810cf3fc15143054140b5e7d66b0d01e77a88835b8','economicBatch23']
 ];
-function strip(file,bytes){let text=bytes.toString('utf8');const once=part=>{assert.equal(text.split(part).length,2,`M24 reviewed addition: ${file}`);text=text.replace(part,'');};
+function strip(file,bytes){bytes=require('./mission25-reviewed-extensions.cjs').strip(file,bytes);let text=bytes.toString('utf8');const once=part=>{assert.equal(text.split(part).length,2,`M24 reviewed addition: ${file}`);text=text.replace(part,'');};
  if(file==='src/cardMetadata.ts'){
   const first="import {economicCountBatch24} from './economicCountBatch24';\n";
   const second="import {economicBatch23} from './economicBatch23';\n";

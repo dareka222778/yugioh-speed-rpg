@@ -6,6 +6,8 @@ import {getEffect,equipEligible,isQuickPlaySpell} from './effectRegistry';
 import type {Action,Backrow,CardRef,DuelState,Monster,Pending} from './duelEngine';
 import {resolveSpellException} from './spellExceptions';
 import {canStartEconomicOperations,executeEconomicOperations} from './economicOperations';
+import {searchZoneTargets} from './searchZoneRules';
+import {shuffleDuel} from './duelRandom';
 import {economicOperations} from './effectModels';
 import {getDestructionModel} from './effectModels';
 import {executeDestruction,destructionTargets} from './effectOperations';
@@ -16,6 +18,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  // Quick-Play cards Set during this turn cannot be activated until a later turn.
  if(isQuickPlaySpell(c.id)&&p.backrow.some(b=>b.uid===c.uid&&b.setTurn===s.turn))return [];
  if(e.kind==='choiceSequence')return e.choices.flatMap((choice,n)=>canStartEconomicOperations(s,index,choice.operations)?[{kind:'spell' as const,card:c.uid,target:`__choice_${n}__`}]:[]);
+ if(e.kind==='searchZone')return searchZoneTargets(s,index,e.rule,getCard).map(m=>({kind:'spell',card:c.uid,target:m.uid}));
  if(e.kind==='sequence')return canStartEconomicOperations(s,index,e.operations)?[{kind:'spell',card:c.uid}]:[];
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
@@ -66,6 +69,13 @@ export function turnMonsterFaceDown(m:Monster):void{
 }
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{
  const e=getEffect(a.id),p=s.players[a.actor],op=s.players[1-a.actor];if(!e)return false;
+ if(e.kind==='searchZone'){
+  const selected=searchZoneTargets(s,a.actor,e.rule,getCard).find(m=>m.uid===a.target);
+  if(selected){const pool=p.deck.some(m=>m.uid===selected.uid)?p.deck:p.grave;const i=pool.findIndex(m=>m.uid===selected.uid);
+   if(i>=0){const [found]=pool.splice(i,1);p.hand.push(found);if(pool===p.deck)shuffleDuel(p.deck,s);service.note(s,`${getCard(a.id)!.name}: carta elegível adicionada à mão.`);}
+  }else service.note(s,`${getCard(a.id)!.name}: o alvo deixou de estar elegível.`);
+  return true;
+ }
  if(e.kind==='choiceSequence'){
   const match=/^__choice_(\d+)__$/.exec(a.target??'');
   const selected=match?e.choices[Number(match[1])]:undefined;

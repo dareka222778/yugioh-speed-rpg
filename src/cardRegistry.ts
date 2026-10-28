@@ -36,6 +36,7 @@ export function buildCardRegistry(catalog:readonly Card[],definitions:Readonly<R
   }
   if(!effect)issues.push('missing-definition');else issues.push(...effectDefinitionIssues(effect));
   if(effect?.kind==='continuous'){const a=effect.activation;if(!a||a.damage!=='never'||(c.kind==='trap'?(a.speed!==2||a.window!=='free'):(c.kind!=='spell'||a.speed!==1||a.window!=='main')))issues.push('unsupported-continuous-activation');}
+  else if(effect?.kind==='searchZone'&&c.kind!=='spell')issues.push('invalid-search-spell-category');
   else if(effect?.kind==='sequence'||effect?.kind==='choiceSequence'||effect?.kind==='attackResponse'){
    const a=effect.activation;
    if(!a||a.damage!=='never'||['sequence','choiceSequence'].includes(effect.kind)&&(c.kind==='spell'&&!(a.speed===1&&a.window==='main'||a.speed===2&&a.window==='free')||c.kind==='trap'&&(a.speed!==2||a.window!=='free'))||effect.kind==='attackResponse'&&(c.kind!=='trap'||![2,3].includes(a.speed)||a.window!=='attackDeclared'||a.opponentOnly!==true))issues.push('unsupported-activation-policy');
