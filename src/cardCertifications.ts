@@ -2,13 +2,13 @@
 // Fingerprints detect changed mechanics; CI must also execute the referenced suites.
 import type {CardCertificate} from './cardRegistry';
 export const cardCertifications:Readonly<Record<string,CardCertificate>>={
-  '99518961':{fingerprint:'0f942d1998a3dd33089cfd4cc6b4349cb2e0282a9e5d9706d8806185a00cf866',suites:['tests/economicCountBatch24.test.cjs']},
-  '27053506':{fingerprint:'7b9891c069cfae62aba900a16d36208ede256a05b3a0dff02b3f17cdcd78eacf',suites:['tests/economicCountBatch24.test.cjs']},
-  '51394546':{fingerprint:'cbe35c4c0b88ff8d7fcbcbc2bde06f828760c3616f26259c97019b68e3d97c8c',suites:['tests/economicCountBatch24.test.cjs']},
-  '98299011':{fingerprint:'9f0da84ed0d0ba609ee57b73d79d0387235ed9bb2331220215307d804366ab32',suites:['tests/economicCountBatch24.test.cjs']},
-  '44472639':{fingerprint:'630d110bb78fff689f4ed5663e51f21b01eb917009d247254ccafd929ee41030',suites:['tests/economicCountBatch24.test.cjs']},
-  '58074572':{fingerprint:'5bc33794ffec7b0182e28cdd9d5c74ac1f8c1e8dae482af83a359442f811e44b',suites:['tests/economicBatch23.test.cjs']},
-  '08842266':{fingerprint:'5a4a4786e3c0bd0632bd77810cf3fc15143054140b5e7d66b0d01e77a88835b8',suites:['tests/economicBatch23.test.cjs']},
+  "99518961":{"fingerprint":"0f942d1998a3dd33089cfd4cc6b4349cb2e0282a9e5d9706d8806185a00cf866","suites":["tests/economicCountBatch24.test.cjs"]},
+  "27053506":{"fingerprint":"7b9891c069cfae62aba900a16d36208ede256a05b3a0dff02b3f17cdcd78eacf","suites":["tests/economicCountBatch24.test.cjs"]},
+  "51394546":{"fingerprint":"cbe35c4c0b88ff8d7fcbcbc2bde06f828760c3616f26259c97019b68e3d97c8c","suites":["tests/economicCountBatch24.test.cjs"]},
+  "98299011":{"fingerprint":"9f0da84ed0d0ba609ee57b73d79d0387235ed9bb2331220215307d804366ab32","suites":["tests/economicCountBatch24.test.cjs"]},
+  "44472639":{"fingerprint":"630d110bb78fff689f4ed5663e51f21b01eb917009d247254ccafd929ee41030","suites":["tests/economicCountBatch24.test.cjs"]},
+  "58074572":{"fingerprint":"5bc33794ffec7b0182e28cdd9d5c74ac1f8c1e8dae482af83a359442f811e44b","suites":["tests/economicBatch23.test.cjs"]},
+  "08842266":{"fingerprint":"5a4a4786e3c0bd0632bd77810cf3fc15143054140b5e7d66b0d01e77a88835b8","suites":["tests/economicBatch23.test.cjs"]},
   "10071456": {
     "fingerprint": "b4f9a0cdce80d9cf807d753366db8a35587dbc8b971f1c6be0fb4ceb8df382bb",
     "suites": [
