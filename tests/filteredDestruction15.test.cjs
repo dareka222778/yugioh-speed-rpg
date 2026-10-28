@@ -6,7 +6,7 @@ const {getEffectModel,getDestructionModel}=require('../dist/resolvers/v8/effectM
 const {destructionTargets,executeDestruction}=require('../dist/resolvers/v8/effectOperations');
 const {destructionFilterIssues}=require('../dist/resolvers/v8/destructionRules');
 const manifest=require('../catalog/engine-v8/manifest.json');
-const baseline=require('../catalog/engine-v8/'+manifest.current+'.json');
+const baseline=require('../catalog/engine-v8/'+manifest.revisions[0].id+'.json');
 // Test-only admission. These fixtures do not register or certify production cards.
 const {mechanicalCandidates15,mechanicalCandidateEffects15}=require('../dist/mechanicalCandidates15');
 const cases=mechanicalCandidates15.map(c=>[c.id,c.konamiId,c.englishName,mechanicalCandidateEffects15[c.id].filter.races?.[0]??null]);
@@ -16,9 +16,9 @@ for(const c of mechanicalCandidates15){
  data.cards.push(c);data.effects[c.id]=effect;data.certificates[c.id]={fingerprint:definitionFingerprint(c,effect,{model:getEffectModel}),suites:['tests/filteredDestruction15.test.cjs']};
 }
 const revision=crypto.createHash('sha256').update(JSON.stringify(data)).digest('hex');
-test('v8 candidate identities match the frozen history but fixtures never grant certification or distribution',()=>{
+test('v8 candidate identities match the frozen history and individual admission never grants distribution',()=>{
  const history=require('../catalog/historical/2004-10-01/cards.json'),registry=require('../dist/effectRegistry'),policy=require('../dist/cardReleasePolicy');assert.equal(cases.length,8);
- for(const c of mechanicalCandidates15){const h=history.find(h=>h.passwords?.includes(c.id));assert.ok(h,c.id);assert.equal(h.names.en,c.englishName);assert.equal(h.konamiId,c.konamiId);assert.equal(registry.getPlayableCard(c.id),undefined);assert.equal(policy.cardDistributionAllowed(c.id),false);}
+ for(const c of mechanicalCandidates15){const h=history.find(h=>h.passwords?.includes(c.id));assert.ok(h,c.id);assert.equal(h.names.en,c.englishName);assert.equal(h.konamiId,c.konamiId);assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(policy.cardDistributionAllowed(c.id),false);}
 });
 const run=fn=>runCatalog(revision,data,fn);
 const deck=require('../dist/cardCatalog').starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id));
@@ -95,9 +95,9 @@ test('v8 candidate: chained equipment destruction resolves first and Eternal Res
  assert.equal(done.players[1].monsters.length,1);assert.ok(done.players[0].grave.some(c=>c.uid==='equipment'));
  assert.deepEqual(done,settle(JSON.parse(JSON.stringify(pending))));
 }));
-test('v8 candidate: archive dispatch restores v8 while default duels and all previous catalog revisions stay v7',()=>{
+test('v8 candidate: archive dispatch restores v8 while default duels use v8 while all previous catalog revisions stay v7',()=>{
  const facade=require('../dist/duelEngine'),archive=require('../dist/resolverArchive');const players=[{id:'a',name:'A',cards:deck},{id:'b',name:'B',cards:deck}];
- assert.equal(facade.createDuel(players).resolverVersion,'engine-v7');
+ assert.equal(facade.createDuel(players).resolverVersion,'engine-v8');
  const s=archive.getArchivedDefinitionResolver('engine-v8').createDuel(players,undefined,0,{randomSeed:'15'.repeat(32)});assert.equal(s.resolverVersion,'engine-v8');
  const action=facade.legalActions(s,'a')[0];assert.deepEqual(facade.step(s,'a',action),facade.step(JSON.parse(JSON.stringify(s)),'a',action));
  assert.equal(archive.getArchivedDefinitionResolver('engine-v7').IMPLEMENTED_DUEL_CARDS.length,741);
@@ -106,7 +106,7 @@ test('v8 candidate: catalog runtime rejects v7 payloads and neither version acce
  const seven=require('../catalog/engine-v7/manifest.json'),old=require('../catalog/engine-v7/'+seven.current+'.json');
  assert.throws(()=>require('../dist/resolvers/v8/catalogRuntime').createCatalogRuntime(seven.current,old));
  const loader=require('../dist/catalogArchive');assert.throws(()=>loader.getCatalogData(seven.current,'engine-v8'));
- assert.throws(()=>loader.getCatalogData(manifest.current,'engine-v7'));
+ assert.throws(()=>loader.getCatalogData(manifest.revisions[0].id,'engine-v7'));
 });
 test('v8 candidate: filtered destruction returns a stolen monster to its original owner graveyard',()=>run(()=>{
  const s=game('90873992');s.players[0].monsters=[{...mon('stolen',ofRace('Warrior'),1),returnTo:1,returnTurn:s.turn}];

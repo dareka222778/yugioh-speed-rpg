@@ -1,0 +1,10 @@
+/** Individual public-source and executed-scenario gate; never authorizes distribution. */
+const fs=require('node:fs'),assert=require('node:assert/strict');
+const {mechanicalBatch15:cards,mechanicalEffects15:effects}=require('../dist/mechanicalBatch15'),r=require('../dist/effectRegistry'),{definitionFingerprint}=require('../dist/cardRegistry'),{getEffectModel}=require('../dist/effectModels'),{planHistoricalCatalog}=require('../dist/catalogCertification');
+const history=require('../catalog/historical/2004-10-01/cards.json'),reviews=require('../docs/evidence/mission15-individual-reviews.json'),executions=JSON.parse(fs.readFileSync('artifacts/certification-executions-mission15.json','utf8'));
+const admissions=cards.map(card=>({id:card.id,card,family:'destroyFiltered',fingerprint:definitionFingerprint(card,effects[card.id],{model:getEffectModel}),certified:r.getCardStatus(card.id)?.stage==='certified',distributionAuthorized:require('../dist/cardReleasePolicy').cardDistributionAllowed(card.id),requiredScenarios:['identity','mechanic','negative','replay','ai']}));
+const plan=planHistoricalCatalog(history,{cutoff:'2004-09-30',region:'world',admissions,reviews,executions});
+assert.equal(cards.length,8);assert.equal(reviews.length,8);assert.equal(executions.length,8);
+for(const c of cards){const row=plan.plan.find(row=>row.id===c.id),execution=executions.find(e=>e.id===c.id);assert.ok(row?.readyForIndividualCertification,JSON.stringify(row));assert.deepEqual(execution.failed,[]);assert.equal(admissions.find(a=>a.id===c.id).distributionAuthorized,false);}
+const report={cohort:'mission15',previousCertified:741,totalCertified:r.enabledCardIds.length,newCertified:8,cards:cards.map(c=>({id:c.id,name:c.englishName,fingerprint:admissions.find(a=>a.id===c.id).fingerprint,passed:executions.find(e=>e.id===c.id).passed})),distributionAuthorized:0,engineVersion:'engine-v8',immutableV8ImplementationReused:true};
+fs.writeFileSync('artifacts/mission15-mechanical-audit.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

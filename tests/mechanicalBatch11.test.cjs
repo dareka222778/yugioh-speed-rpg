@@ -86,7 +86,7 @@ for(const card of cards){
   if(card.kind==='monster')s.players[0].monsters=[];
   const action=e.legalActions(s,'a').find(a=>a.card==='new'&&(a.kind===(card.kind==='monster'?'summon':'spell')));
   assert.ok(action);const snapshot=clone(s),first=e.step(s,'a',action),second=e.step(clone(snapshot),'a',action);
-  assert.deepEqual(clone(first),clone(second));assert.equal(first.resolverVersion,'engine-v7');assert.equal(first.catalogRevision,snapshot.catalogRevision);
+  assert.deepEqual(clone(first),clone(second));assert.equal(first.resolverVersion,'engine-v8');assert.equal(first.catalogRevision,snapshot.catalogRevision);
   assertDuelState(clone(first));
  });
  scenario('counter-or-continuous-negation',()=>{
@@ -154,6 +154,6 @@ test('all 17 new effects remain separate from inherited v7 historic rules',()=>{
  const manifest=require('../catalog/engine-v7/manifest.json');
  assert.equal(manifest.revisions.length,7);const previous=require('../catalog/engine-v7/'+manifest.revisions[4].id+'.json');
  assert.equal(previous.cards.length,723);for(const card of cards)assert.ok(!previous.cards.some(c=>c.id===card.id));
- assert.equal(r.enabledCardIds.length,741);
+ assert.equal(r.enabledCardIds.length,749);
 });
 after(()=>{fs.mkdirSync('artifacts',{recursive:true});fs.writeFileSync('artifacts/certification-executions-mission11.json',JSON.stringify(results,null,2)+'\n');});

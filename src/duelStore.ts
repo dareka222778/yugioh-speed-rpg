@@ -1,3 +1,4 @@
+import {filteredDestructionUtility} from './filteredDestructionStrategy';
 import {findActionReceipt,saveActionReceipt,type ActionReceipt} from './actionReceipts';
 import {tacticalSummon,tacticalPosition,tacticalAttack,handCardValue,publicBattleAssessment} from './npcStrategy';
 import {randomBytes,randomInt} from 'node:crypto';
@@ -156,6 +157,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
    const selfDamage=effect.operations.flatMap(op=>op.kind==='damage'?op.recipients:[]).filter(r=>r.player==='self').reduce((sum,r)=>sum+r.amount,0);
    if(p.lp<=selfDamage)return false;
   }
+  if(effect.kind==='destroyFiltered')return filteredDestructionUtility(s,p===s.players[0]?0:1,effect)>0;
   if(effect.kind==='equip')return p.monsters.some(m=>m.uid===a.target);
   if(effect.kind==='destroySpellTraps'){const enemy=op.backrow.length+Number(!!op.field),own=p.backrow.filter(b=>b.uid!==a.card).length+Number(!!p.field);return enemy>0&&(effect.scope==='opponent'||enemy>=own);}
   if(effect.kind==='darkHole')return op.monsters.length>0&&op.monsters.filter(m=>m.faceUp).reduce((n,m)=>n+atk(m,s),0)>=p.monsters.reduce((n,m)=>n+atk(m,s),0);

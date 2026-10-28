@@ -3,7 +3,7 @@ import {createRequire} from 'node:module';
 import {isAbsolute} from 'node:path';
 /** Synchronous lazy loading: a saved duel loads its pinned implementation, never another version. */
 const requireArchive=createRequire(typeof __filename==='string'&&isAbsolute(__filename)?__filename:process.cwd()+'/src/resolverArchive.ts');
-export const CURRENT_RESOLVER_VERSION='engine-v7' as const;
+export const CURRENT_RESOLVER_VERSION='engine-v8' as const;
 export type ResolverVersion='engine-v1'|'engine-v2'|'engine-v3'|'engine-v4'|'engine-v5'|'engine-v6'|'engine-v7'|'engine-v8';
 export function resolverVersionFor(state:{resolverVersion?:unknown}):ResolverVersion{const version=state.resolverVersion===undefined?'engine-v1':state.resolverVersion;if(!['engine-v1','engine-v2','engine-v3','engine-v4','engine-v5','engine-v6','engine-v7','engine-v8'].includes(version as string))throw new Error('Versão de resolvedor incompatível. Estado original preservado.');return version as ResolverVersion;}
 function buildV1(){const core=requireArchive('./resolvers/v1/duelEngine') as typeof import('./resolvers/v1/duelEngine'),registry=requireArchive('./resolvers/v1/effectRegistry') as typeof import('./resolvers/v1/effectRegistry'),integrity=requireArchive('./resolvers/v1/duelIntegrity') as typeof import('./resolvers/v1/duelIntegrity');return Object.freeze({...core,assertDuelState:integrity.assertDuelState,getEffect:(id:string)=>{const value=registry.getEffect(id);return value?structuredClone(value):undefined;},getPlayableCard:(id:string)=>{const value=registry.getPlayableCard(id);return value?structuredClone(value):undefined;}});}

@@ -1,5 +1,7 @@
 # Missão 15 — operação de destruição filtrada e recuperação da v8 experimental
 
+**Atualização do segundo bloco, em validação:** a branch prepara v8 como padrão, catálogo aditivo de 749 cartas, revisões individuais e integração da IA. Consultar [MISSION15-INTEGRATION-WIP.md](MISSION15-INTEGRATION-WIP.md) e a CI do HEAD. O texto abaixo registra o primeiro bloco validado; não representa aprovação antecipada da integração posterior.
+
 Este ciclo entrega infraestrutura executável e regressões. **A expansão de cartas e a Missão 15 integral permanecem incompletas.** A engine padrão continua v7, com **741 certificados e 130 IDs autorizados para distribuição**. Há uma v8 experimental acessível explicitamente pelo arquivo de resolvedores; ela não foi promovida a padrão. As oito definições candidatas são usadas exclusivamente nos testes e não constam do registro de cartas jogáveis.
 
 ## Base recuperada e correção da Missão 14

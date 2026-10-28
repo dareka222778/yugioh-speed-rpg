@@ -78,8 +78,8 @@ test('mission14: card enters by a legal summon and replays identically after JSO
  assert.ok(action);
  const result=e.step(s,'a',action),replay=e.step(structuredClone(s),'a',action);
  assert.deepEqual(structuredClone(result),structuredClone(replay));
- assert.equal(result.resolverVersion,'engine-v7');
- assert.equal(result.catalogRevision,manifest.current);
+ assert.equal(result.resolverVersion,'engine-v8');
+ assert.equal(result.catalogRevision,require('../catalog/engine-v8/manifest.json').current);
  assert.ok(result.players[0].monsters.some(m=>m.id===id));
  assertDuelState(structuredClone(result));
 });
@@ -95,6 +95,6 @@ test('mission14: all existing v7 revisions and 740 earlier certificates remain p
  const previous=require('../catalog/engine-v7/'+manifest.revisions.at(-2).id+'.json');
  const newest=require('../catalog/engine-v7/'+manifest.current+'.json');
  assert.equal(previous.cards.length,740);assert.equal(newest.cards.length,741);
- assert.equal(r.enabledCardIds.length,741);
+ assert.equal(r.enabledCardIds.length,749);
  for(const oldCard of previous.cards)assert.deepEqual(newest.cards.find(c=>c.id===oldCard.id),oldCard);
 });

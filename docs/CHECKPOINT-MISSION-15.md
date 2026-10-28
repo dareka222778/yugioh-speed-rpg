@@ -1,5 +1,7 @@
 # Checkpoint persistente — Missão 15
 
+**Segundo bloco em validação:** ler primeiro [MISSION15-INTEGRATION-WIP.md](MISSION15-INTEGRATION-WIP.md). A branch agora prepara v8 padrão/749 cartas, com IA, revisões individuais e testes adicionais; os números de aprovação abaixo pertencem ao primeiro bloco. Conferir a CI posterior antes de afirmar certificação concluída.
+
 Branch: `feat/rea-engine-recovery-20261026`; PR #12 deve permanecer em rascunho. Base recebida: `2e21d40724341db91bb9a03e3500641fc46f9302`. Não usar o workspace antigo como fonte de envio.
 
 Workspace desta sessão: `C:\Users\Micro\Downloads\speed-rpg-rea-20261026\repo-mission15-2e21d407`. Ele foi materializado dos blobs remotos e não contém checkout Git utilizável. Os commits foram criados pela API Git Data, com atualização condicional do HEAD e sem force. Em uma nova sessão, preferir checkout/worktree real da branch remota; conferir alterações posteriores antes de aplicar qualquer arquivo local.

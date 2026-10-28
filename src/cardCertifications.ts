@@ -4479,4 +4479,64 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
       "tests/mechanicalBatch14.test.cjs"
     ]
   }
+/* MISSION15:BEGIN */
+,
+  "20101223": {
+    "fingerprint": "8bfa1b6dfa26ab7c76fb756998f63a514103a3eafd92bcae9bc43cb3bcce87ea",
+    "suites": [
+      "tests/filteredDestruction15.test.cjs",
+      "tests/mechanicalBatch15.test.cjs"
+    ]
+  },
+  "21323861": {
+    "fingerprint": "d5b15fe36788289d462dd5fb4cf75730890f374edefc13e7fb59574670aab062",
+    "suites": [
+      "tests/filteredDestruction15.test.cjs",
+      "tests/mechanicalBatch15.test.cjs"
+    ]
+  },
+  "26725158": {
+    "fingerprint": "ffaf47c9ce40851792a13eab04344bdf3d32012b57f3e54a23cca46670ec1237",
+    "suites": [
+      "tests/filteredDestruction15.test.cjs",
+      "tests/mechanicalBatch15.test.cjs"
+    ]
+  },
+  "56606928": {
+    "fingerprint": "31da04e27dc6095c5a777c6ae1f8d2674c1b4706a8ca3ba506cc9ef9a808abb9",
+    "suites": [
+      "tests/filteredDestruction15.test.cjs",
+      "tests/mechanicalBatch15.test.cjs"
+    ]
+  },
+  "90330453": {
+    "fingerprint": "c73c8f4a441e085075f886d39e9b421f183d7e979056ea00d50bb0347fdf807c",
+    "suites": [
+      "tests/filteredDestruction15.test.cjs",
+      "tests/mechanicalBatch15.test.cjs"
+    ]
+  },
+  "90873992": {
+    "fingerprint": "8c5d1ad1c8c027a073ae613be82fceb3c72a035d882e1c3978398b7ed6285dd8",
+    "suites": [
+      "tests/filteredDestruction15.test.cjs",
+      "tests/mechanicalBatch15.test.cjs"
+    ]
+  },
+  "94716515": {
+    "fingerprint": "0d84fb0581b4fe51f991d43fc0a7f32e63508466384c9656e6becf44ecb572c4",
+    "suites": [
+      "tests/filteredDestruction15.test.cjs",
+      "tests/mechanicalBatch15.test.cjs"
+    ]
+  },
+  "95051344": {
+    "fingerprint": "92bc4dd72a4664dc14fd00655025d3f0fffde0c865d2ae048fdbc55f28a1e5b0",
+    "suites": [
+      "tests/filteredDestruction15.test.cjs",
+      "tests/mechanicalBatch15.test.cjs"
+    ]
+  }
+
+/* MISSION15:END */
 };

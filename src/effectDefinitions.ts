@@ -1,3 +1,4 @@
+import {mechanicalEffects15} from './mechanicalBatch15';
 import {destructionFilterIssues,type DestructionFilter} from './destructionRules';
 import {mechanicalEffects8} from './mechanicalBatch8';
 import {mechanicalEffects11} from './mechanicalBatch11';
@@ -22,6 +23,7 @@ export type Effect=
  |{kind:'equip';races?:string[];attribute?:string;atk:number;def:number;count?:CountFormula};
 export const effectDefinitions:Record<string,Effect>={
  ...mechanicalEffects14,
+ ...mechanicalEffects15,
  ...mechanicalEffects11,
  ...mechanicalEffects8,
  ...mechanicalEffects5,...Object.fromEntries(mechanicalBatch7.map(c=>[c.id,{kind:'monsterEffect' as const}])),
