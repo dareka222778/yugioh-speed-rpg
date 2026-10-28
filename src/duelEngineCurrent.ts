@@ -1,3 +1,4 @@
+import {rulesCardName} from './cardIdentity';
 import {syncContinuous,continuousTrapsNegated,monsterEffectsNegated,canAffectMonster,addTemporaryModifier,type ContinuousState} from './continuousEffects';
 import {currentCatalog} from './catalogContext';
 import {removeToken,type TokenPolicy,type TokenLedger} from './tokens';
@@ -42,7 +43,7 @@ const supported=()=>new Set(getEnabledCardIds());
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
 export function validateDuelCards(ids:string[]){
  if(!Array.isArray(ids)||ids.length<RULES_PROFILE.mainDeckMin||ids.length>RULES_PROFILE.mainDeckMax)throw new Error('O duelo exige um deck de 20 a 30 cartas.');
- const counts=new Map<string,number>();for(const id of ids){const c=card(id);if(c.fusion)throw new Error('Fusões pertencem ao Deck Adicional.');counts.set(id,(counts.get(id)??0)+1);if(counts.get(id)!>RULES_PROFILE.copiesPerCard)throw new Error('Máximo de 3 cópias por carta.');if(!supported().has(id))throw new Error(`Efeito não implementado: ${c.name}.`);}
+ const counts=new Map<string,number>();for(const id of ids){const c=card(id);if(c.fusion)throw new Error('Fusões pertencem ao Deck Adicional.');const name=rulesCardName(c);counts.set(name,(counts.get(name)??0)+1);if(counts.get(name)!>RULES_PROFILE.copiesPerCard)throw new Error('Máximo de 3 cópias por carta.');if(!supported().has(id))throw new Error(`Efeito não implementado: ${c.name}.`);}
 }
 export function createDuel(players:[{id:string;name:string;cards:string[];extra?:string[]},{id:string;name:string;cards:string[];extra?:string[]}],rng:()=>number=Math.random,first=0,options:{randomSeed?:string;catalogRevision?:string}={}):DuelState{
  if(!Array.isArray(players)||players.length!==2||players.some(p=>!p||typeof p.id!=='string'||!p.id.trim()||typeof p.name!=='string'||!p.name.trim()||!Array.isArray(p.cards)||p.extra!==undefined&&!Array.isArray(p.extra)))throw new Error('Dados dos duelistas inválidos.');
@@ -288,6 +289,7 @@ function response(s:DuelState,pending:Pending,resume:'main'|'battle',priority=1-
 }
 
 function endTurn(s:DuelState){
+ s.phase='main';s.resume='main';
  for(const p of s.players)for(const m of [...p.monsters]){m.atkBoost=0;m.defBoost=0;if(m.returnTo!==undefined&&m.returnTurn===s.turn){const target=s.players[m.returnTo];if(target!==p){if(target.monsters.length<RULES_PROFILE.monsterZones){p.monsters=p.monsters.filter(c=>c.uid!==m.uid);target.monsters.push(m);}else graveMonster(s,m.uid);}delete m.returnTo;delete m.returnTurn;}}
  s.turnEnding=true;
 }

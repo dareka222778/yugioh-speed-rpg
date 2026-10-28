@@ -26,11 +26,11 @@ export function assertDuelState(value:unknown):asserts value is DuelState{
  if(!object(value))fail('estado ausente');
  (getArchivedDefinitionResolver(resolverVersionFor(value)).assertDuelState as (v:unknown)=>void)(value);
 }
-function assertCurrentDuelState(value:unknown):asserts value is DuelState{
+export function assertCurrentDuelState(value:unknown):asserts value is DuelState{
  if(!object(value)||value.version!==1)fail('versão não reconhecida');
  const s=value as any;
  assertContinuousState(s);
- if(s.resolverVersion==='engine-v8'&&(!/^[a-f0-9]{64}$/.test(s.catalogRevision??'')||currentCatalog()?.id!==s.catalogRevision))fail('revisão do catálogo');
+ if((s.resolverVersion==='engine-v8'||s.resolverVersion==='engine-v9')&&(!/^[a-f0-9]{64}$/.test(s.catalogRevision??'')||currentCatalog()?.id!==s.catalogRevision))fail('revisão do catálogo');
  if(!supportedRulesVersion(s.rulesVersion)||s.cardDefinitionsVersion!==undefined&&s.cardDefinitionsVersion!==CARD_DEFINITIONS_VERSION)fail('versão de regras ou definições incompatível');
  if(s.random!==undefined)assertDuelRandom(s.random);
  if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');

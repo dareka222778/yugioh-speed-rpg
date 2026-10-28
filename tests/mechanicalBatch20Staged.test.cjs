@@ -23,13 +23,13 @@ function game(){return {players:[player(),player()],phase:'main',resume:'main',c
 const mod=(s,m,stat='atk')=>continuousModifier(s,m,stat);
 const withStage=fn=>withCatalog(staged,fn);
 
-test('M20: all 11 distinct identities match the historical registry and are staged only',()=>{
+test('M20: all 11 distinct identities match the historical registry and execute in the active v9 resolver',()=>{
  assert.equal(batch.length,11);assert.equal(new Set(batch.map(c=>c.id)).size,11);
  for(const c of batch){const original=historical.find(x=>x.passwords.includes(c.id));assert.ok(original,`${c.englishName}: historical`);assert.equal(c.konamiId,original.konamiId);assert.equal(c.englishName,original.names.en);assert.equal(c.kind,original.kind);assert.equal(original.firstObserved.world<='2004-09-30',true);
-  assert.equal(registry.getCardStatus(c.id).stage,'validated');assert.equal(cardDistributionAllowed(c.id),false);
+  assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),false);
   assert.equal(getArchivedDefinitionResolver('engine-v8').getPlayableCard(c.id),undefined);
  }
- assert.equal(registry.enabledCardIds.length,771);
+ assert.equal(registry.enabledCardIds.length,782);
 });
 test('M20: card names, archetype identity and filter admission',()=>{
  assert.equal(rulesCardName(cardsById.get('91932350')),'Harpie Lady');

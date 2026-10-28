@@ -1,9 +1,12 @@
-import {resolverVersionFor,getArchivedTransitionEvents} from './resolverArchive';
+import {resolverVersionFor,getArchivedTransitionEvents,getArchivedDefinitionResolver} from './resolverArchive';
 /** Structured before/after transition notifications, independent of translated logs.
  * These summarize committed state changes; they are not an atomic effect trace
  * or a replay tape. Replay uses state + action + persisted private RNG instead.
  */
-import {step,decisionPlayer,type DuelState,type Action,type CardRef} from './duelEngine';
+import type {DuelState,Action,CardRef} from './duelEngine';
+const core=(s:DuelState)=>getArchivedDefinitionResolver(resolverVersionFor(s)) as unknown as {step:(s:DuelState,id:string,a:Action)=>DuelState;decisionPlayer:(s:DuelState)=>number};
+const step=(s:DuelState,id:string,a:Action)=>core(s).step(s,id,a);
+const decisionPlayer=(s:DuelState)=>core(s).decisionPlayer(s);
 import {cardMovementTrace} from './cardLifetime';
 type Zone='deck'|'hand'|'monsters'|'backrow'|'grave'|'extra'|'banished'|'field';
 type Audience={visibility:'public'}|{visibility:'private';player:string};
@@ -26,8 +29,8 @@ function inventory(s:DuelState){
  for(const [seat,held]of Object.entries(s.teamRotation?.reserves??{}))for(const zone of ['hand','deck','extra'] as const)for(const card of held[zone])cards.set(card.uid,{card,zone,player:s.players[Number(seat)%2].id,public:false});
  return cards;
 }
-export function transitionEvents(before:DuelState,after:DuelState):DuelTransitionEvent[]{
- if(resolverVersionFor(before)==='engine-v1'||!cardMovementTrace(before,after))return getArchivedTransitionEvents(resolverVersionFor(before))(before,after);
+export function transitionEvents(before:DuelState,after:DuelState,active=false):DuelTransitionEvent[]{
+ if(!active&&(resolverVersionFor(before)==='engine-v1'||!cardMovementTrace(before,after)))return getArchivedTransitionEvents(resolverVersionFor(before))(before,after);
  const trace=cardMovementTrace(before,after),moved=new Set(trace?.map(move=>move.uid));
  const events:DuelTransitionEvent[]=[],old=inventory(before),next=inventory(after);
  for(const [i,p]of after.players.entries()){

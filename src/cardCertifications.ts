@@ -4655,4 +4655,72 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "fingerprint": "5a842a2e1f403df8948e385d1b74771a3ce9e77b7df19b1bde05e076acaa12c8",
     "suites": ["tests/historicalNormalBatch19.test.cjs"]
   }
+,
+  "10012614": {
+    "fingerprint": "728af32ae1bdb657493a86cfe5329913d27d2117aaed9f79c0ef8c1486d9db59",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "11901678": {
+    "fingerprint": "483c342c4ddd05ac398338c1e3ce3c047e681909fbad77c6751bc1eeba30cbc7",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "20394040": {
+    "fingerprint": "c0e91c4b26b3e60cfe132b90cd822fd9ce1eab4bf6bb8c6f53cf3c4b112f84dd",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "27967615": {
+    "fingerprint": "2dfcfb17f98be85177241ad4f8af7de3e5a459fd4e1006781d8d447cd2b79717",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "38033121": {
+    "fingerprint": "551fe6dd3487924eac186227546e8760ce0ba8a156e141406cf8e5bfd4221434",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "40453765": {
+    "fingerprint": "0255c69e9edb61196ba80a8e5ccad13e03404fdfd8e69481cb1697df4bfd5662",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "47480070": {
+    "fingerprint": "391ddcb07fe88a11a322aa568c228715b8550b9da8963925141498fed2f33c28",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "52040216": {
+    "fingerprint": "8e825db4ac5fc8df7aa59ff0b396b489e009cbc6f02e341d31b0c16b1e8af257",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "63224564": {
+    "fingerprint": "c1472e8788e91ae6b6b3dad33f915332ac40466953a6e2394a24e050f40bee8f",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "81380218": {
+    "fingerprint": "4d7585f91cde747c579ff851915a0959d8b8a9598a87679a249d8e7c8b478558",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  },
+  "91932350": {
+    "fingerprint": "468bf338442cf39be17379484aa766e1a8d62cccfe41a062ddca077ae1ad0376",
+    "suites": [
+      "tests/mission21ActiveBatch.test.cjs"
+    ]
+  }
+
 };

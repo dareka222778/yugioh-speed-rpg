@@ -30,7 +30,7 @@ for(const c of cards){
  });
 }
 test('M15: new v8 games and all eight new spells are admitted in classic 2v2 with deterministic recovery',()=>{
- const t=require('../dist/tagDuel');for(const c of cards){let s=t.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'P'+i,cards:[c.id,...basic.slice(1)]})),{classic:true,seed:c.id});assert.equal(s.core.resolverVersion,'engine-v8');
+ const t=require('../dist/tagDuel');for(const c of cards){let s=t.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'P'+i,cards:[c.id,...basic.slice(1)]})),{classic:true,seed:c.id});assert.equal(s.core.resolverVersion,'engine-v9');
   const actor=t.tagDecisionMember(s).id,action=t.tagActions(s,actor).find(a=>a.kind==='end');assert.ok(action);const a=t.stepTagDuel(s,actor,action),b=t.stepTagDuel(JSON.parse(JSON.stringify(s)),actor,action);assert.deepEqual(a,b);t.assertTagDuel(a);
  }
 });
