@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs=require('node:fs'),path=require('node:path'),{planHistoricalCatalog}=require('../dist/catalogCertification'),registry=require('../dist/effectRegistry'),{definitionFingerprint}=require('../dist/cardRegistry'),{getMonsterDefinition}=require('../dist/monsterEffects'),{getEffectModel}=require('../dist/effectModels'),{cardDistributionAllowed}=require('../dist/cardReleasePolicy');
 function audit({executions=[],reviews=[],region='world'}={}){
- const mechanicalIds=new Set(require('../dist/mechanicalBatch5').mechanicalBatch5.concat(require('../dist/mechanicalBatch7').mechanicalBatch7,require('../dist/mechanicalBatch8').mechanicalBatch8,require('../dist/fusionBatch8').fusionBatch8).map(c=>c.id));
+ const mechanicalIds=new Set(require('../dist/mechanicalBatch5').mechanicalBatch5.concat(require('../dist/mechanicalBatch7').mechanicalBatch7,require('../dist/mechanicalBatch8').mechanicalBatch8,require('../dist/fusionBatch8').fusionBatch8,require('../dist/historicalFusionBatch10').historicalFusionBatch10).map(c=>c.id));
  const history=require('../catalog/historical/2004-10-01/cards.json'),admissions=registry.enabledCardIds.map(id=>({id,family:registry.getEffect(id).kind==='normal'?'normal-monster':registry.getEffect(id).kind,card:registry.engineCard(id),...(mechanicalIds.has(id)?{requiredScenarios:['identity','mechanic','replay','negative']}:{}),fingerprint:definitionFingerprint(registry.engineCard(id),registry.getEffect(id),{monster:getMonsterDefinition,model:getEffectModel}),certified:true,distributionAuthorized:cardDistributionAllowed(id)}));
  return planHistoricalCatalog(history,{cutoff:'2004-09-30',region,admissions,reviews,executions});
 }

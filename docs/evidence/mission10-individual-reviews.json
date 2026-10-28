@@ -1,0 +1,841 @@
+[
+  {
+    "id": "05600127",
+    "canonicalId": "0e512319-2e82-458e-87e1-18cd7bb082c8",
+    "konamiId": 5062,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5062&request_locale=ja",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2200,
+      "defense": 2000,
+      "race": "Aqua",
+      "attribute": "WATER",
+      "ocgDate": "2001-04-19"
+    },
+    "recipeNames": [
+      "Worm Drake",
+      "Humanoid Slime"
+    ],
+    "recipeIds": [
+      "73216412",
+      "46821314"
+    ],
+    "mechanicalFingerprint": "ae0ac28dc540d41e11630e9b9e8ad61da819de2b8e9fb4eaa709c7d433d3d5f3"
+  },
+  {
+    "id": "06840573",
+    "canonicalId": "460db1bd-86f6-45e3-9153-c06b60ba6551",
+    "konamiId": 4092,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4092&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1380,
+      "defense": 1530,
+      "race": "Fiend",
+      "attribute": "DARK",
+      "ocgDate": "1999-05-27"
+    },
+    "recipeNames": [
+      "Frenzied Panda",
+      "Ryu-Kishin"
+    ],
+    "recipeIds": [
+      "98818516",
+      "15303296"
+    ],
+    "mechanicalFingerprint": "6ca14a6bee76732a82d71e2e9d580ca2f718a43513aea0ab876671fb4dc5356e"
+  },
+  {
+    "id": "08327462",
+    "canonicalId": "f85eeb6b-2207-4114-b594-d1ea8dc570fd",
+    "konamiId": 4527,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4527&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 1900,
+      "defense": 1700,
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "ocgDate": "1999-07-05"
+    },
+    "recipeNames": [
+      "Takuhee",
+      "Temple of Skulls"
+    ],
+    "recipeIds": [
+      "03170832",
+      "00732302"
+    ],
+    "mechanicalFingerprint": "07ef2e790e20021bfcb8b14ce99cac3c2cbcdf05ed7d469685de608277717a84"
+  },
+  {
+    "id": "09293977",
+    "canonicalId": "0c189b17-1b21-4f0b-b09b-144d930f30bb",
+    "konamiId": 4415,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4415&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 1850,
+      "defense": 1700,
+      "race": "Machine",
+      "attribute": "WIND",
+      "ocgDate": "1999-05-27"
+    },
+    "recipeNames": [
+      "Steel Ogre Grotto #1",
+      "Lesser Dragon"
+    ],
+    "recipeIds": [
+      "29172562",
+      "55444629"
+    ],
+    "mechanicalFingerprint": "7403938c84d42adb87725aa2dda1e60adc64f70209a60c21c4019d6401c0ff55"
+  },
+  {
+    "id": "09653271",
+    "canonicalId": "d7432aea-c181-4ea8-b32b-4ff0adfdaf08",
+    "konamiId": 4464,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4464&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1900,
+      "defense": 1400,
+      "race": "Thunder",
+      "attribute": "WIND",
+      "ocgDate": "1999-07-22"
+    },
+    "recipeNames": [
+      "Ocubeam",
+      "Mega Thunderball"
+    ],
+    "recipeIds": [
+      "86088138",
+      "21817254"
+    ],
+    "mechanicalFingerprint": "9e88c3430811aa841368e3120d1c40d9d970cc75bb870374263ae9e3fa7805df"
+  },
+  {
+    "id": "15237615",
+    "canonicalId": "35dfcdc4-77ba-4500-b85b-e406b55afea8",
+    "konamiId": 4578,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4578&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2100,
+      "defense": 1700,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-09-23"
+    },
+    "recipeNames": [
+      "Queen's Double",
+      "Hibikime"
+    ],
+    "recipeIds": [
+      "05901497",
+      "64501875"
+    ],
+    "mechanicalFingerprint": "85ba0949a2f023150bf6f87dc414da7c33060d7f440ecf3d9d0c743f58b17941"
+  },
+  {
+    "id": "19066538",
+    "canonicalId": "8a098736-5adc-4966-afd5-96122fb8f9e9",
+    "konamiId": 4229,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4229&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2100,
+      "defense": 1800,
+      "race": "Aqua",
+      "attribute": "WATER",
+      "ocgDate": "1999-09-23"
+    },
+    "recipeNames": [
+      "Mystic Lamp",
+      "Hyosube"
+    ],
+    "recipeIds": [
+      "98049915",
+      "02118022"
+    ],
+    "mechanicalFingerprint": "f049b3a3fec15e8d14df97fda41ed2177fbf85876c97157c6fd11b889c4cfdf5"
+  },
+  {
+    "id": "28593363",
+    "canonicalId": "99b3c775-5191-4541-a095-3dbd9d9b5f5c",
+    "konamiId": 4443,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4443&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1900,
+      "defense": 1600,
+      "race": "Fish",
+      "attribute": "WATER",
+      "ocgDate": "1999-07-22"
+    },
+    "recipeNames": [
+      "Bottom Dweller",
+      "Tongyo"
+    ],
+    "recipeIds": [
+      "81386177",
+      "69572024"
+    ],
+    "mechanicalFingerprint": "281717d785a6623803d7abab15b1dafa7d04fefabe34158c06e9786bfb083489"
+  },
+  {
+    "id": "29929832",
+    "canonicalId": "d1348299-b29e-4c8d-a29f-03afbaeb3b16",
+    "konamiId": 4623,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4623&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1700,
+      "defense": 1600,
+      "race": "Fish",
+      "attribute": "WATER",
+      "ocgDate": "1999-10-17"
+    },
+    "recipeNames": [
+      "Water Magician",
+      "Behegon"
+    ],
+    "recipeIds": [
+      "93343894",
+      "94022093"
+    ],
+    "mechanicalFingerprint": "380c2ebf7a022c606f4fc5c395ca179fea192b2df6528242e7b503104f0848a3"
+  },
+  {
+    "id": "31339260",
+    "canonicalId": "c956dba4-4e19-420d-9280-a23801af35c4",
+    "konamiId": 4036,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4036&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 1200,
+      "defense": 900,
+      "race": "Zombie",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-27"
+    },
+    "recipeNames": [
+      "Skull Servant",
+      "Battle Warrior"
+    ],
+    "recipeIds": [
+      "32274490",
+      "55550921"
+    ],
+    "mechanicalFingerprint": "0e5fb3e142474cc6d04109b50bf1001fe57b538c1b495e8867d7c2b6c49868cb"
+  },
+  {
+    "id": "32355828",
+    "canonicalId": "ac526aa7-6b67-4cb0-a055-933508857a02",
+    "konamiId": 4551,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4551&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 1700,
+      "defense": 1900,
+      "race": "Zombie",
+      "attribute": "DARK",
+      "ocgDate": "1999-12-01"
+    },
+    "recipeNames": [
+      "The Snake Hair",
+      "Blackland Fire Dragon"
+    ],
+    "recipeIds": [
+      "29491031",
+      "87564352"
+    ],
+    "mechanicalFingerprint": "9ce8ed0fde9882a164b9015dcdf87d719b84f86470dd8b7cb66b54f171fc5458"
+  },
+  {
+    "id": "32485271",
+    "canonicalId": "b2436962-6450-4b56-8b15-c498b77ac5e2",
+    "konamiId": 4600,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4600&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2000,
+      "defense": 1800,
+      "race": "Plant",
+      "attribute": "DARK",
+      "ocgDate": "1999-09-23"
+    },
+    "recipeNames": [
+      "Feral Imp",
+      "Snakeyashi"
+    ],
+    "recipeIds": [
+      "41392891",
+      "29802344"
+    ],
+    "mechanicalFingerprint": "e3a62221db74b9d915c2a3bcdf02f97e6329e7521ec2240162e58d7e56021d43"
+  },
+  {
+    "id": "35752363",
+    "canonicalId": "662d2e2f-75e5-475c-a150-2b2358ae4ecc",
+    "konamiId": 4479,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4479&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1900,
+      "defense": 1500,
+      "race": "Pyro",
+      "attribute": "FIRE",
+      "ocgDate": "1999-07-05"
+    },
+    "recipeNames": [
+      "Rhaimundos of the Red Sword",
+      "Fireyarou"
+    ],
+    "recipeIds": [
+      "62403074",
+      "71407486"
+    ],
+    "mechanicalFingerprint": "98dcf16ffd82935304b3d06dc94f2f62d72a12032dcc9e78aef1540ca52bc07c"
+  },
+  {
+    "id": "37421579",
+    "canonicalId": "7b0b8521-da54-4824-b741-311106a9a831",
+    "konamiId": 4139,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4139&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 1100,
+      "defense": 800,
+      "race": "Pyro",
+      "attribute": "FIRE",
+      "ocgDate": "1999-03-06"
+    },
+    "recipeNames": [
+      "Monster Egg",
+      "Hinotama Soul"
+    ],
+    "recipeIds": [
+      "36121917",
+      "96851799"
+    ],
+    "mechanicalFingerprint": "e5986e4fc468748b10243e4223cb8d52ee1d312186b53d677c56fefa5436056a"
+  },
+  {
+    "id": "41544074",
+    "canonicalId": "85870dd6-509c-48d4-a741-5e09543dc050",
+    "konamiId": 4121,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4121&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1300,
+      "defense": 1100,
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-27"
+    },
+    "recipeNames": [
+      "Mystical Elf",
+      "Curtain of the Dark Ones"
+    ],
+    "recipeIds": [
+      "15025844",
+      "22026707"
+    ],
+    "mechanicalFingerprint": "652d27b1560c8930c4d62f6d8aec04324ed31d66d442249dff6f6d60a029a273"
+  },
+  {
+    "id": "46696593",
+    "canonicalId": "d753e4bf-3e6c-4337-b8fe-4bbb2696cf86",
+    "konamiId": 4473,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4473&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2300,
+      "defense": 1800,
+      "race": "Winged Beast",
+      "attribute": "FIRE",
+      "ocgDate": "1999-12-01"
+    },
+    "recipeNames": [
+      "Faith Bird",
+      "Skull Red Bird"
+    ],
+    "recipeIds": [
+      "75582395",
+      "10202894"
+    ],
+    "mechanicalFingerprint": "b636ad64718f6324da9184dfd2ef2001bb5f831ed7d8996be8b381a783720465"
+  },
+  {
+    "id": "51828629",
+    "canonicalId": "c3f9c1f3-cd43-46cd-afb0-592982663106",
+    "konamiId": 4395,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4395&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1850,
+      "defense": 1500,
+      "race": "Warrior",
+      "attribute": "LIGHT",
+      "ocgDate": "1999-11-18"
+    },
+    "recipeNames": [
+      "Guardian of the Labyrinth",
+      "Protector of the Throne"
+    ],
+    "recipeIds": [
+      "89272878",
+      "10071456"
+    ],
+    "mechanicalFingerprint": "a4220f2adad4677050aa0582efa4c0dc6c2a431799d95e1b07c2769b74c49fb4"
+  },
+  {
+    "id": "53539634",
+    "canonicalId": "2cdadd5b-e231-47b4-9ebd-1c8b1001c408",
+    "konamiId": 6128,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6128&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2100,
+      "defense": 1800,
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "ocgDate": "2004-05-27"
+    },
+    "recipeNames": [
+      "Sangan",
+      "Witch of the Black Forest"
+    ],
+    "recipeIds": [
+      "26202165",
+      "78010363"
+    ],
+    "mechanicalFingerprint": "ad904c5747489eee9a0f60d968e984a39a5a9960885b12f4f8d3c5c581aa7cc9"
+  },
+  {
+    "id": "54541900",
+    "canonicalId": "8f724a39-8d65-4b64-aa24-3de90744c134",
+    "konamiId": 4049,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4049&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1500,
+      "defense": 1200,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-03-27"
+    },
+    "recipeNames": [
+      "M-Warrior #1",
+      "M-Warrior #2"
+    ],
+    "recipeIds": [
+      "56342351",
+      "92731455"
+    ],
+    "mechanicalFingerprint": "2a0c78c2f85f7592f0ae5e108f8b7dd2f9fc97a099f134d382e7b54edcdc4960"
+  },
+  {
+    "id": "54622031",
+    "canonicalId": "faa6a6c2-1b03-46ac-98fe-ff43a356cd00",
+    "konamiId": 4570,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4570&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2200,
+      "defense": 1800,
+      "race": "Zombie",
+      "attribute": "DARK",
+      "ocgDate": "1999-10-17"
+    },
+    "recipeNames": [
+      "The Snake Hair",
+      "Dragon Zombie"
+    ],
+    "recipeIds": [
+      "29491031",
+      "66672569"
+    ],
+    "mechanicalFingerprint": "cb7d5c41d37090064442ba57c49c737d003cb4d27a11c2bb7da61b1a902bd00a"
+  },
+  {
+    "id": "56413937",
+    "canonicalId": "b8879be5-640d-4c73-b50a-709f61fbca4c",
+    "konamiId": 4624,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4624&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 1900,
+      "defense": 1700,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-07-05"
+    },
+    "recipeNames": [
+      "Sonic Maid",
+      "Beautiful Headhuntress"
+    ],
+    "recipeIds": [
+      "38942059",
+      "16899564"
+    ],
+    "mechanicalFingerprint": "3662f4eacbd08898194370bee8f74a2722858a3c8d2cf5de4f26ba5511a8a86d"
+  },
+  {
+    "id": "56907389",
+    "canonicalId": "b2aaed80-7aa0-4e89-8b1e-8b2e245f77a9",
+    "konamiId": 4501,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4501&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1750,
+      "defense": 1500,
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "ocgDate": "1999-11-18"
+    },
+    "recipeNames": [
+      "Witch of the Black Forest",
+      "Lady of Faith"
+    ],
+    "recipeIds": [
+      "78010363",
+      "17358176"
+    ],
+    "mechanicalFingerprint": "b8d6c4da8c6c558a0825d32ecfa26e15c4ce572422bd605ed42d0244e040b1be"
+  },
+  {
+    "id": "59036972",
+    "canonicalId": "dbf09e76-f42d-499c-9d7b-f4af8e58fea0",
+    "konamiId": 4278,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4278&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1300,
+      "defense": 900,
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "ocgDate": "1999-03-27"
+    },
+    "recipeNames": [
+      "Tyhone",
+      "Wings of Wicked Flame"
+    ],
+    "recipeIds": [
+      "72842870",
+      "92944626"
+    ],
+    "mechanicalFingerprint": "08d33a3c171bc5cd2e5c6dadc89d1ac2b132b56f31f67de2dbf81a959796cae9"
+  },
+  {
+    "id": "70681994",
+    "canonicalId": "00133a62-8b6d-4ea9-9bb6-79acfa292656",
+    "konamiId": 4300,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4300&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 1200,
+      "defense": 900,
+      "race": "Warrior",
+      "attribute": "WIND",
+      "ocgDate": "1999-03-27"
+    },
+    "recipeNames": [
+      "Armaill",
+      "One-Eyed Shield Dragon"
+    ],
+    "recipeIds": [
+      "53153481",
+      "33064647"
+    ],
+    "mechanicalFingerprint": "2e7b00a6bac27c830ef3ea2a6dcf74f5279c9ce065982890bd6a41b92d117f3e"
+  },
+  {
+    "id": "72869010",
+    "canonicalId": "f43eb0cf-dc6f-48c0-9429-2539152427bb",
+    "konamiId": 4477,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4477&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2200,
+      "defense": 1800,
+      "race": "Fiend",
+      "attribute": "DARK",
+      "ocgDate": "1999-10-17"
+    },
+    "recipeNames": [
+      "Lord of the Lamp",
+      "Invader from Another Dimension"
+    ],
+    "recipeIds": [
+      "99510761",
+      "28450915"
+    ],
+    "mechanicalFingerprint": "f73a1e79059c6469eb7cc8d9bd0f16e2546bdeebb7a32ece9890e1d32d57d720"
+  },
+  {
+    "id": "74703140",
+    "canonicalId": "dbfe59af-cc66-435f-9c6f-ee3d45faf2db",
+    "konamiId": 4471,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4471&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2100,
+      "defense": 1800,
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "ocgDate": "1999-11-18"
+    },
+    "recipeNames": [
+      "Blue-Winged Crown",
+      "Niwatori"
+    ],
+    "recipeIds": [
+      "41396436",
+      "07805359"
+    ],
+    "mechanicalFingerprint": "beaba7c6d696d13dedc39e5fe1abd0e0082e13d88e81db94019cbfc27a1394cc"
+  },
+  {
+    "id": "80516007",
+    "canonicalId": "83d2da7b-e1ec-4aed-9163-4fddad335aac",
+    "konamiId": 4236,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4236&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1500,
+      "defense": 1200,
+      "race": "Fish",
+      "attribute": "WATER",
+      "ocgDate": "1999-05-27"
+    },
+    "recipeNames": [
+      "Fusionist",
+      "Enchanting Mermaid"
+    ],
+    "recipeIds": [
+      "01641882",
+      "75376965"
+    ],
+    "mechanicalFingerprint": "d6bc89249e9dfea2f5bc644809c2918f4dbfaeeed5af690b9ff0f72d076eb76f"
+  },
+  {
+    "id": "80727036",
+    "canonicalId": "e3030567-de79-43b2-97f7-8548e07a837e",
+    "konamiId": 4571,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4571&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 2100,
+      "defense": 1300,
+      "race": "Fish",
+      "attribute": "WATER",
+      "ocgDate": "1999-08-26"
+    },
+    "recipeNames": [
+      "Sea Kamen",
+      "Gruesome Goo",
+      "Amazon of the Seas"
+    ],
+    "recipeIds": [
+      "71746462",
+      "65623423",
+      "17968114"
+    ],
+    "mechanicalFingerprint": "11bfba97e3253181f1bc529561933442233622e71a2a22f7545d823a78b7b276"
+  },
+  {
+    "id": "90660762",
+    "canonicalId": "4c6dcc10-9681-4b30-9f36-43fd2553c8db",
+    "konamiId": 4719,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4719&request_locale=ja",
+    "primaryFacts": {
+      "level": 8,
+      "atk": 3500,
+      "defense": 2000,
+      "race": "Dragon",
+      "attribute": "FIRE",
+      "ocgDate": "1999-08-26"
+    },
+    "recipeNames": [
+      "Red-Eyes Black Dragon",
+      "Meteor Dragon"
+    ],
+    "recipeIds": [
+      "74677422",
+      "64271667"
+    ],
+    "mechanicalFingerprint": "f3d138373e082a7874550505d36b1e2b0a1fcb3640ce303efb523134ba3f32e0"
+  },
+  {
+    "id": "95144193",
+    "canonicalId": "8b2b7ea5-d078-415c-8d25-d418bd6a4d1e",
+    "konamiId": 4539,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4539&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 1900,
+      "defense": 1700,
+      "race": "Insect",
+      "attribute": "EARTH",
+      "ocgDate": "1999-07-05"
+    },
+    "recipeNames": [
+      "Kuwagata α",
+      "Hercules Beetle"
+    ],
+    "recipeIds": [
+      "60802233",
+      "52584282"
+    ],
+    "mechanicalFingerprint": "1035bd50347616961b391028fb12a7c5b5ba41c0ce0835e2569738afc79ea347"
+  },
+  {
+    "id": "99551425",
+    "canonicalId": "fb520bda-c354-4b70-96a9-253bd7260a25",
+    "konamiId": 4376,
+    "reviewer": "Automated independent exact-recipe cross-check; executed mechanics per Fusion",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4376&request_locale=ja",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2400,
+      "defense": 2400,
+      "race": "Machine",
+      "attribute": "DARK",
+      "ocgDate": "2000-01-27"
+    },
+    "recipeNames": [
+      "Giga-Tech Wolf",
+      "Cannon Soldier"
+    ],
+    "recipeIds": [
+      "08471389",
+      "11384280"
+    ],
+    "mechanicalFingerprint": "c6fbc14e17a7f791da488832ceb6bf4ccf3649df932088c6f9797360ab868cf2"
+  }
+]

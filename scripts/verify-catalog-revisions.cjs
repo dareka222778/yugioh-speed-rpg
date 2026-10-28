@@ -3,4 +3,4 @@ let previous;for(const entry of manifest.revisions){assert.equal(entry.file,entr
 assert.equal(manifest.current,manifest.revisions.at(-1).id);
 const old=require('../dist/resolvers/v6/cardCertifications').cardCertifications,current=require('../dist/cardCertifications').cardCertifications;
 assert.equal(Object.keys(old).length,203);for(const [id,certificate]of Object.entries(old))assert.deepEqual(current[id],certificate,'Existing certificate changed: '+id);
-console.log(JSON.stringify({preservedCertificates:Object.keys(old).length,catalogRevisions:manifest.revisions.length,executableVersionsAddedForTwoDataCohorts:0}));
+console.log(JSON.stringify({preservedCertificates:Object.keys(old).length,catalogRevisions:manifest.revisions.length,executableVersionsAddedForDataCohorts:0}));

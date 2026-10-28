@@ -14,7 +14,7 @@ function spell(id,lp=[4000,4000]){let s=game();s.players[0].hand=[ref('spell',id
 function attack(id='62279055'){let s=game();s.phase='battle';s.players[0].monsters=[m('attacker')];s.players[1].backrow=[back('defense',id)];return use(s,'a','attack');}
 
 test('nine classic-era additions have factual IDs, definitions, references and admission',()=>{
- assert.equal(classicExpansionCards.length,9);assert.equal(r.enabledCardIds.length,692);for(const c of classicExpansionCards){assert.ok(c.source.startsWith('https://www.db.yugioh-card.com/'));assert.ok(r.getPlayableCard(c.id));assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(r.engineCard(c.id).name,c.name);}
+ assert.equal(classicExpansionCards.length,9);assert.equal(r.enabledCardIds.length,723);for(const c of classicExpansionCards){assert.ok(c.source.startsWith('https://www.db.yugioh-card.com/'));assert.ok(r.getPlayableCard(c.id));assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(r.engineCard(c.id).name,c.name);}
 });
 for(const [id,delta]of [['76103675',-200],['46130346',-500]])test(`parameterized burn ${id} applies exactly its printed amount`,()=>{const s=spell(id);assert.equal(s.players[0].lp,4000);assert.equal(s.players[1].lp,4000+delta);assert.ok(s.players[0].grave.some(c=>c.id===id));});
 for(const [id,amount]of [['20871001',400],['47852924',800]])test(`parameterized healing ${id} has no artificial 4000 LP cap`,()=>{const s=spell(id);assert.equal(s.players[0].lp,4000+amount);assert.equal(s.players[1].lp,4000);});
