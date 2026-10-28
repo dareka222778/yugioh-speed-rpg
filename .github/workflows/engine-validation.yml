@@ -28,6 +28,7 @@ jobs:
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission7-individual-reviews.json artifacts/certification-executions-mission7.json
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission8-individual-reviews.json artifacts/certification-executions-mission8.json
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission8-fusion-reviews.json artifacts/certification-executions-fusion8.json
+      - run: node scripts/audit-normal-expansion9.cjs
       - run: node scripts/audit-normalization-blockers.cjs
       - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission5-individual-reviews.json artifacts/certification-executions-mission5.json
       - run: node scripts/stress-persisted-duels.cjs 50 4 --eager
@@ -85,6 +86,8 @@ jobs:
             artifacts/certification-executions-mission7.json
             artifacts/certification-executions-mission8.json
             artifacts/certification-executions-fusion8.json
+            artifacts/certification-executions-mission9*.json
+            artifacts/mission9-normal-audit.json
             artifacts/continuous-benchmark-mission8.json
             artifacts/mission8-next-families.json
             artifacts/beta-simulation-mission7.json

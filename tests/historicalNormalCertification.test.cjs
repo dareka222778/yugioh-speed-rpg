@@ -21,7 +21,7 @@ for(const card of batch)test(`individual normal certification ${card.id}: ${card
  }
 });
 test('v3 is additive; v1/v2 retain exactly 130 certified cards and preserved pending rules',()=>{
- assert.equal(r.enabledCardIds.length,243);assert.equal(new Set(batch.map(c=>c.id)).size,20);
+ assert.equal(r.enabledCardIds.length,692);assert.equal(new Set(batch.map(c=>c.id)).size,20);
  for(const version of ['engine-v1','engine-v2']){const pinned=archive.getArchivedDefinitionResolver(version),s=pinned.createDuel([{id:'a',name:'A',cards:base},{id:'b',name:'B',cards:base}],()=>.5);assert.equal(pinned.IMPLEMENTED_DUEL_CARDS.length,130);assertDuelState(clone(s));const a=e.legalActions(s,'a')[0];assert.deepEqual(clone(e.step(clone(s),'a',a)),clone(pinned.step(clone(s),'a',a)));}
  assert.equal(game().resolverVersion,'engine-v7');
 });
