@@ -1,44 +1,41 @@
-# Checkpoint — Missão 16
+# Checkpoint — retomada da Missão 16
 
-Workspace: `C:\Users\Micro\Downloads\speed-rpg-rea-20261026\repo-mission16-8bcc05f9`.
+**Estado consolidado:** engine-v8, **762 certificados (+13)**, **130 distribuíveis**, **5.410 testes aprovados, zero falhas/TODO**. REA 23/23 com limitação histórica I02. Nenhum merge, deploy, acesso Discord ou alteração de produção.
 
-Base remota conferida: `8bcc05f9796fdca4cee2562b26a709cd2fa7e691`. PR #12, branch `feat/rea-engine-recovery-20261026`, rascunho. Não usar o workspace da Missão 15 para enviar alterações. Esta cópia foi materializada de 680 blobs e não possui checkout Git; commits pela API devem usar comparação condicional do HEAD, sem force.
+Último código validado: `4f9f0edfcabb77292b26eca821b74432c0bf7ee4`. [CI 40711583392](https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/40711583392): test e extended-soak aprovados. A consolidação documental pode ter SHA posterior; verificar o HEAD/CI atuais no [PR #12](https://github.com/dareka222778/yugioh-speed-rpg/pull/12), sempre em rascunho. Branch: `feat/rea-engine-recovery-20261026`.
 
-Implementado: diagnóstico SQLite não destrutivo e repetição diagnóstica das 17 suítes de aceitação. Novos testes: `tests/sqliteHealth16.test.cjs` e `tests/repeatAcceptance16.test.cjs`, 12 aprovados localmente em Node 24. A CI Node 22 precisa confirmar o conjunto completo. O soak agora publica composição do banco antes de remover sua fixture isolada.
+Workspace desta sessão: `C:\Users\Micro\Downloads\speed-rpg-rea-20261026\repo-mission16-8bcc05f9`. Foi materializado dos blobs e não é um checkout Git utilizável. Commits pela API usaram comparação condicional do HEAD, sem force. Não usar os workspaces das Missões 15 ou anteriores como fonte de envio. Há estado auxiliar em `../mission16-session.json`; o remoto e este checkpoint prevalecem sobre caches antigos.
 
-Retomar:
+## O que está concluído
 
-1. Conferir HEAD remoto e CI, preservando qualquer mudança posterior. Se falhar, corrigir a causa; não relaxar testes.
-2. Ler relatório desta missão e as evidências da Missão 15. Conferir `artifacts/acceptance16/report.json` e `artifacts/sqlite-health16-soak.json` nos dois jobs.
-3. Conferir a matriz e as três admissões descritas abaixo. Rainbow Flower, Leghul, Ooguchi, Mystic Lamp, Queen's Double, Shadow Ghoul, Amazoness Archer e Cannon Soldier já existiam. Não repetir contabilização. Goblin Thief continua bloqueado.
-4. Usar operações v8 existentes quando semanticamente equivalentes, acrescentando revisão de catálogo por dados. Novas semânticas exigem resolver isolado. Testar negação, movimento, múltiplas fontes, custos, replay e IA conforme aplicável.
-5. Executar Node 22: npm ci, npm run check, npm test, todas as auditorias/preservações e CI completa. Localmente `node --test tests/sqliteHealth16.test.cjs tests/repeatAcceptance16.test.cjs` não depende do bot ou credenciais.
-6. Atualizar relatório/checkpoint/evidências e manter PR rascunho. Sem merge, deploy, distribuição ou acesso Discord real.
+- Três contínuos: Chaos Necromancer, Yellow Luster Shield, Buster Blader.
+- Dez Normais: Mystical Shine Ball, Mikazukinoyaiba, Dancing Elf, Sealmaster Meisei, Gogiga Gagagigo, Metal Armored Bug, Cosmo Queen, Turu-Purun, Warrior of Zera, Dharma Cannon.
+- Sete cenários individuais por carta; regressões de IA, Equipamento/imunidade, controle, fontes, movimento, replay e 2v2. **120 testes novos**.
+- IA avalia estado prospectivo completo: retirada da mão, Tributos no Cemitério do dono, fontes próprias e mudanças de ameaça pública adversária. Não consulta identidades ocultas.
+- Guardas de admissão rejeitam combinações sem execução suportada. Arquivos históricos v1–v8 intactos (277 módulos/oito manifestos).
+- Diagnóstico SQLite não destrutivo, dbstat opcional, orçamento/alerta configuráveis e checkpoint PASSIVE explícito.
+- Hash de backup em blocos de 64 KiB, compatível com manifestos anteriores.
+- Repetição diagnóstica de aceitação (cinco vezes, 179 testes por tentativa), TAP/stderr íntegros.
 
-## Segundo bloco implementado
+Revisão v8 intermediária: `b84222a8334764cb6bc6f6f69c99eb7a4b3925b5dda2c754df8fd92a843e4c95` (752). Corrente: `f580081f728973259ab608d9ccfeca9938278a39708e9f0897e2c4da0946614c` (762). Não reescrever revisões ou executáveis congelados.
 
-Commit remoto `ec8d92c9afa5cb4f2852b739a88e275825196d83`: três admissões individuais (Chaos Necromancer, Yellow Luster Shield, Buster Blader), revisão v8 `b84222a8334764cb6bc6f6f69c99eb7a4b3925b5dda2c754df8fd92a843e4c95`, 752 certificados e 130 distribuíveis. As outras oito cartas da triagem já estavam certificadas; não repetir trabalho. Goblin Thief, Needle Ball e Mooyan Curry permanecem bloqueados por semânticas/decisões específicas.
+## Evidências e limites
 
-CI `40705330464` aprovou tipagem, 5.328 testes e auditorias; falhou no comparador JSON do novo simulador (propriedade undefined omitida). A comparação foi corrigida localmente para a representação persistida. Não atribuir essa falha à engine nem à intermitência antiga. Nova CI deve confirmar o simulador completo.
+Ler integralmente `docs/REA-MISSION-16.md`, `docs/evidence/mission16-validation.json`, as revisões individuais dos dois lotes e `mission16-priority-matrix.json`.
 
-Alterações seguintes: três guardas de admissão contra combinações não executáveis, três regressões cruzadas adicionais, opções CLI de orçamento SQLite e decomposição física via dbstat quando disponível. O relatório do soak também será impresso no log para auditoria. Validação local corrente: 33 testes de cartas/admissão, 12 operacionais; nove comandos de preservação/auditoria aprovados. Duas suítes que importam better-sqlite3 não rodam neste ambiente local sem npm ci; não confundir isso com resultados da CI Node 22.
+Soak final: 8.577 duelos, 509.676 commits, principal ~309 MiB, WAL ~4 MiB, checkpoint completo, conservação/economia/integridade aprovadas. Crescimento explicado nesta reprodução por retenção de eventos/estados/recibos/índices. Não foram removidas linhas nem aplicado VACUUM. Arquivamento com leitura/replay/recibos preservados permanece pendente.
 
-Conferir a CI mais recente antes de iniciar outro lote. Não há suporte comprovado a custos de gatilhos, escolha de jogador ou LP simultâneos só porque o texto usa operações familiares. Não alterar v1–v8; as revisões antigas e os 749 certificados anteriores são comparados integralmente.
+A falha intermitente antiga continua sem causa recuperada; não foi reproduzida. A falha nova do comparador de simulação (undefined versus propriedade ausente em JSON) foi corrigida separadamente. Não confundir os casos.
 
-Beta real e capacidade de 20–50 jogadores continuam não homologados. I02 mantém a limitação histórica legítima.
+Os Normais são elegíveis pela união mundial TCG; não se corrigiu retroativamente a primeira data OCG importada. Não certificar Rituais como Normais. Protótipos sem passcode, Vorse Raider conflitante e Slime Toad com ressalva de identidade/nome continuam fora do lote. Oito candidatos triados no começo já estavam certificados; não recontar.
 
-## Quarto bloco
+## Próxima execução segura
 
-SHA-256 de snapshots passou a usar leitura limitada a 64 KiB, sem mudar hashes/formato. Testes `snapshotHash16` verificam arquivos binários, ausência de leitura integral e fechamento após I/O inválido. São **48 testes novos locais aprovados** no total; TAP completo persistido em `docs/evidence/mission16-local-tests.tap`.
+1. Conferir HEAD/PR/CI e alterações posteriores, preservando trabalho local não registrado.
+2. Node 22: `npm ci`, `npm run check`, `npm test`; todos os checks de preservação, `verify-catalog-revisions`, `audit-mission15`, `audit-mechanical-batch16` e `audit-world-normal16`; depois restante da CI completa.
+3. Executar `scripts/simulate-mission16.cjs`, cargas persistentes 50/100 e soak 600 quando houver mudança de estado/persistência que justifique repetição. Não substituir auditorias por manifests fabricados.
+4. Continuar pelas dependências compartilhadas da matriz (1.200 registros restantes): LP simultâneos, custo em gatilhos opcionais, seleção de jogador, busca/recrutamento por identidade e durações por fase. Goblin Thief não é simplesmente dano seguido de cura; Needle Ball não cabe no gatilho sem custo; Mooyan Curry exige escolha do beneficiário. Novas semânticas exigem resolver isolado, não editar v8.
+5. Projetar arquivamento de eventos terminais publicados com leitura de arquivo e recuperação verificadas, mantendo recibos idempotentes. Não aplicar TTL/purga indiscriminada.
+6. Atualizar evidências, commits e PR em rascunho. Não fazer merge/deploy/distribuição.
 
-CI `40706485447` do commit `f7a8d5912669908f3d5e0ff16dd065364ee7cd96` já passou a simulação corrigida de 50/100 sessões; aguardar os resultados completos. A próxima CI incluirá a otimização do hash. Consolidar métricas e HEAD final neste documento após verificar ambos os jobs.
-
-## Lote mundial — estado corrente
-
-O registro local corrente é **762 certificados (+13 desde a base), 130 distribuíveis, engine-v8**. Dez Monstros Normais foram admitidos por impressões TCG oficiais anteriores ao corte: Mystical Shine Ball, Mikazukinoyaiba, Dancing Elf, Sealmaster Meisei, Gogiga Gagagigo, Metal Armored Bug, Cosmo Queen, Turu-Purun, Warrior of Zera e Dharma Cannon. Fonte italiana oficial usada para Dancing Elf após timeout em inglês; não há entrada portuguesa e o nome inglês foi preservado. Não interpretar textos narrativos de Normais como efeitos.
-
-Nova revisão de dados `f580081f728973259ab608d9ccfeca9938278a39708e9f0897e2c4da0946614c`. A revisão de 752 cartas e suas definições/certificados continuam intactas. Os dados importados OCG posteriores não impedem elegibilidade mundial quando há impressão TCG comprovada; não foram reescritos. Rituais, protótipos sem passcode, Vorse Raider com identidade conflitante e Slime Toad com ressalva de nome permanecem fora desse lote.
-
-**120 testes novos locais aprovados**, zero falhas/TODO. Executar também `node scripts/audit-world-normal16.cjs`, consumindo o manifesto real `artifacts/certification-executions-world-normal16.json`. A CI Node 22 completa do novo lote ainda deve concluir. A matriz tem 1.200 registros restantes.
-
-Commits posteriores já registrados: `496fdc84` (diagnóstico), `ec8d92c9` (contínuos/IA), `f7a8d591` (guardas/comparação JSON), `54c2b6fb` (hash limitado), `723aa111` (aura adversária na avaliação). CI `40707211361` aprovou ambos os jobs no código anterior ao último ajuste de aura. Não usar esse resultado como CI do lote mundial.
+Beta: proprietário sozinho contra IA primeiro; depois convidados e 20–50 usuários. Ambiente Discord isolado e credencial segura ainda dependem de configuração/autorização específica. Benchmarks internos não homologam Discord nem capacidade Starter+.
