@@ -26,6 +26,8 @@ jobs:
       - run: node scripts/repeat-acceptance16.cjs 5
       - run: node scripts/audit-mission15.cjs
       - run: node scripts/audit-mechanical-batch15.cjs
+      - run: node scripts/audit-mechanical-batch16.cjs
+      - run: node --expose-gc scripts/simulate-mission16.cjs
       - name: Diagnose critical acceptance before load and generated reports
         run: node scripts/accept-engine.cjs
       - run: node scripts/stress-persisted-duels.cjs 50 2 --mixed --filtered-spells
@@ -106,6 +108,9 @@ jobs:
             artifacts/benchmark-v8-candidate15.json
             artifacts/certification-executions-mission15.json
             artifacts/mission15-mechanical-audit.json
+            artifacts/mission16-mechanical-audit.json
+            artifacts/mission16-ai-simulation.json
+            artifacts/certification-executions-mission16.json
             artifacts/engine-acceptance-failure.tap
             artifacts/acceptance16
             artifacts/sqlite-health16-soak.json
@@ -137,6 +142,8 @@ jobs:
         if: always()
         with:
           name: mixed-version-extended-soak
-          path: artifacts/mixed-version-soak-mission6.json
+          path: |
+            artifacts/mixed-version-soak-mission6.json
+            artifacts/sqlite-health16-soak.json
           if-no-files-found: error
           retention-days: 14

@@ -4537,4 +4537,24 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "78193831": {
+    "fingerprint": "740e347dd42620f30250214dfa3048c1abdd26dfc2bb35a631c696cb8269f0d9",
+    "suites": [
+      "tests/mechanicalBatch16.test.cjs"
+    ]
+  },
+  "01434352": {
+    "fingerprint": "4663c10121ddcd36bf95ef4f90671ba192094f846cd2ea599a3a8b0e9f6bccda",
+    "suites": [
+      "tests/mechanicalBatch16.test.cjs"
+    ]
+  },
+  "04542651": {
+    "fingerprint": "b9d34ab83a76b18217b41c4e7f8a968678280d915f7b258917d8aa5537761ead",
+    "suites": [
+      "tests/mechanicalBatch16.test.cjs"
+    ]
+  }
+
 };

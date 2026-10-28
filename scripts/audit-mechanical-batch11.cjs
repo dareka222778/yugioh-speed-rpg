@@ -18,7 +18,7 @@ const historicalById=new Map(historical.map(x=>[x.id,x]));
 const required=['identity','mechanic','negative','replay','counter-or-continuous-negation','source-loss-or-cost-recovery'];
 assert.ok(manifest.revisions.length>=6);assert.equal(getCatalogData(manifest.revisions[4].id).cards.length,723);
 assert.equal(getCatalogData(manifest.revisions[5].id).cards.length,740);
-assert.equal(enabledCardIds.length,749);assert.equal(cards.length,17);assert.equal(reviews.length,17);assert.equal(executions.length,17);
+assert.equal(enabledCardIds.length,752);assert.equal(cards.length,17);assert.equal(reviews.length,17);assert.equal(executions.length,17);
 assert.equal(crosscheck.cards.length,17);assert.equal(crosscheck.previousCertified,723);
 assert.equal(crosscheck.independentSource.length,2);
 for(const source of crosscheck.independentSource)assert.match(source.sha256,/^[a-f0-9]{64}$/);

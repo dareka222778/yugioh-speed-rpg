@@ -6,7 +6,7 @@ const registry=require('../dist/effectRegistry');
 
 test('pre-beta release policy grants only 130 explicit historically allowed cards',()=>{
  assert.equal(releasedCardIds.size,130);
- assert.equal(registry.enabledCardIds.length,749);
+ assert.equal(registry.enabledCardIds.length,752);
  const grants=registry.enabledCardIds.filter(cardDistributionAllowed);
  assert.deepEqual(new Set(grants),releasedCardIds);
  assert.equal(grants.length,130);

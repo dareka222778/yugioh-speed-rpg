@@ -37,7 +37,16 @@ export function tacticalSummon(s:DuelState,id:string,actions:Action[]):Action|un
  const candidates=actions.filter((a):a is Extract<Action,{kind:'summon'}>=>a.kind==='summon').map(action=>{
   const c=p.hand.find(c=>c.uid===action.card)!,info=getCard(c.id)!;
   const hypothetical={...c,position:action.position==='set'?'def':'atk',faceUp:true,entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0} as Monster;
-  const attack=atk(hypothetical,s),defense=def(hypothetical,s),flip=getMonsterEffect(c.id)?.trigger==='flip'?Math.max(14,flipUtility(s,id,c.id)):0;
+  // Continuous self-modifiers need the prospective monster to exist on its
+  // controller's field. Include Tributes in their owners' graves without
+  // mutating the real state or inspecting hidden opposing identities.
+  const actor=s.players.indexOf(p),tributes=p.monsters.filter(m=>action.tributes.includes(m.uid));
+  const preview={...s,players:s.players.map((player,index)=>({...player,
+   hand:player.hand.filter(held=>held.uid!==c.uid),
+   monsters:[...player.monsters.filter(m=>!action.tributes.includes(m.uid)),...index===actor?[hypothetical]:[]],
+   grave:[...player.grave,...tributes.filter(m=>(m.owner??actor)===index).map(m=>({uid:m.uid,id:m.id,owner:m.owner??actor}))]
+  }))} as DuelState;
+  const attack=atk(hypothetical,preview),defense=def(hypothetical,preview),flip=getMonsterEffect(c.id)?.trigger==='flip'?Math.max(14,flipUtility(s,id,c.id)):0;
   const sacrifice=action.tributes.reduce((n,uid)=>{const m=p.monsters.find(m=>m.uid===uid)!;return n+Math.max(atk(m,s),def(m,s))/100+(getMonsterEffect(m.id)?5:0);},0);
   const danger=attack<threat;
   // Face-down opponents are not free direct attacks. Evaluate an unknown wall
