@@ -13,6 +13,7 @@ import {economicOperationIssues} from './economicOperations';
 import {getDuelCard as getCard} from './effectRegistry';
 import {assertDuelRandom} from './duelRandom';
 import {CARD_DEFINITIONS_VERSION,RULES_PROFILE,rulesFor,supportedRulesVersion} from './rulesProfile';
+import {assertRitualFlow} from './ritualSummon';
 import {getMonsterEffect} from './monsterEffects';
 import type {CardRef,DuelState} from './duelEngine';
 const phases=new Set(['main','battle','response','choice','discard','finished']);
@@ -35,7 +36,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.random!==undefined)assertDuelRandom(s.random);
  if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');
  for(const operation of [s.pending,...Array.isArray(s.chain)?s.chain:[]])if(operation?.targetBinding!==undefined){const b=operation.targetBinding;if(!object(b)||typeof b.uid!=='string'||b.uid!==operation.target||!lifetimeZones.includes(b.zone)||!integer(b.epoch))fail('referencia de alvo');}
- if(s.choice?.source!==undefined&&!['standby','triggerOptional','triggerOrder','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit'].includes(s.choice.source))fail('continuação de escolha desconhecida');
+ if(s.choice?.source!==undefined&&!['ritual','standby','triggerOptional','triggerOrder','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit'].includes(s.choice.source))fail('continuação de escolha desconhecida');
  if(s.rulesVersion==='speed-rpg-v2'&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
  if(s.handFlow!==undefined){
   const f=s.handFlow;
@@ -68,7 +69,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  }
  if(s.damageStep!==undefined&&typeof s.damageStep!=='boolean')fail('janela da Etapa de Dano');
  if(s.turnEnding!==undefined&&typeof s.turnEnding!=='boolean')fail('encerramento de turno');
- assertStandbyFlow(s);
+ assertStandbyFlow(s);assertRitualFlow(s);
  const ids=new Set<string>(),uids=new Set<string>();
  for(const p of s.players){
   if(!object(p)||typeof p.id!=='string'||!p.id||ids.has(p.id)||typeof p.name!=='string'||!integer(p.lp)||typeof p.summoned!=='boolean')fail('dados do participante');

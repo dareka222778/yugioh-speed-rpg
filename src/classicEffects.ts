@@ -1,3 +1,4 @@
+import {ritualCandidates} from './ritualSummon';
 import {continuousModifier,canAffectMonster,addTemporaryModifier} from './continuousEffects';
 import {RULES_PROFILE} from './rulesProfile';
 import {getDuelCard as getCard} from './effectRegistry';
@@ -17,12 +18,13 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  if(e.kind==='sequence')return canStartEconomicOperations(s,index,e.operations)?[{kind:'spell',card:c.uid}]:[];
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
+  case 'ritualSummon':return ritualCandidates(s,index,e.ritual).length?[{kind:'spell',card:c.uid}]:[];
   case 'destroyFiltered':return destructionTargets(s,index,getDestructionModel(e)!).length?[{kind:'spell',card:c.uid}]:[];
   case 'continuous':return p.lp>(e.lpCost??0)?[{kind:'spell',card:c.uid}]:[];
   case 'temporaryModifier':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>m.uid)));
   case 'destroySpellTraps':return s.players.some((player,side)=>(e.scope==='all'||side!==index)&&(player.backrow.some(b=>b.uid!==c.uid)||!!player.field))?[{kind:'spell',card:c.uid}]:[];
   case 'equip':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp&&equipEligible(e,getCard(m.id)!)).map(m=>m.uid)));
-  case 'monsterReborn':return p.monsters.length>=RULES_PROFILE.monsterZones?[]:s.players.flatMap(p=>p.grave.filter(m=>getCard(m.id)?.kind==='monster'&&(!getCard(m.id)?.fusion||m.properlySummoned)).flatMap(m=>(['atk','def'] as const).map(position=>({kind:'spell',card:c.uid,target:m.uid,position}))));
+  case 'monsterReborn':return p.monsters.length>=RULES_PROFILE.monsterZones?[]:s.players.flatMap(p=>p.grave.filter(m=>getCard(m.id)?.kind==='monster'&&(!(getCard(m.id)?.fusion||getCard(m.id)?.monsterType==='ritual')||m.properlySummoned)).flatMap(m=>(['atk','def'] as const).map(position=>({kind:'spell',card:c.uid,target:m.uid,position}))));
   case 'changeHeart':return p.monsters.length<RULES_PROFILE.monsterZones?targeted(op.monsters.map(m=>m.uid)):[];
   case 'blockAttack':return targeted(op.monsters.filter(m=>m.faceUp&&m.position==='atk').map(m=>m.uid));
   // A facedown target's identity must never determine the action menu.

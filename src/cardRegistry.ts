@@ -30,7 +30,7 @@ export function buildCardRegistry(catalog:readonly Card[],definitions:Readonly<R
   if(!['monster','spell','trap'].includes(c.kind))issues.push('invalid-card-kind');
   if(!/^\d{8}$/.test(c.id))issues.push('invalid-id');
   if(c.kind==='monster'){
-   if(!['normal','effect','fusion'].includes(c.monsterType??''))issues.push('missing-monster-category');
+   if(!['normal','effect','fusion','ritual'].includes(c.monsterType??''))issues.push('missing-monster-category');
    if(!Number.isSafeInteger(c.level)||c.level!<1||c.level!>12||!Number.isSafeInteger(c.atk)||c.atk!<0||!Number.isSafeInteger(c.defense)||c.defense!<0||!c.race||!c.attribute)issues.push('invalid-monster-stats');
    if(c.monsterType==='fusion'&&!c.fusion?.length||c.monsterType!=='fusion'&&c.fusion)issues.push('invalid-fusion-category');
   }
@@ -41,8 +41,10 @@ export function buildCardRegistry(catalog:readonly Card[],definitions:Readonly<R
    if(!a||a.damage!=='never'||effect.kind==='sequence'&&(c.kind==='spell'&&(a.speed!==1||a.window!=='main')||c.kind==='trap'&&(a.speed!==2||a.window!=='free'))||effect.kind==='attackResponse'&&(c.kind!=='trap'||![2,3].includes(a.speed)||a.window!=='attackDeclared'||a.opponentOnly!==true))issues.push('unsupported-activation-policy');
   }else if(effect&&(c.kind==='spell'&&trapKinds.has(effect.kind)||c.kind==='trap'&&!trapKinds.has(effect.kind)))issues.push('incompatible-spell-trap-kind');
   if(effect&&(effect.kind==='field')!==!!c.field)issues.push('incompatible-field-category');
-  if(effect&&c.kind==='monster'&&!['normal','fusion','monsterEffect'].includes(effect.kind))issues.push('invalid-monster-effect-category');
-  if(effect&&c.kind!=='monster'&&['normal','fusion','monsterEffect'].includes(effect.kind))issues.push('invalid-spell-trap-category');
+  if(effect&&c.kind==='monster'&&!['normal','fusion','monsterEffect','ritualMonster'].includes(effect.kind))issues.push('invalid-monster-effect-category');
+  if(effect&&c.kind!=='monster'&&['normal','fusion','monsterEffect','ritualMonster'].includes(effect.kind))issues.push('invalid-spell-trap-category');
+  if(effect?.kind==='ritualMonster'&&(c.kind!=='monster'||c.monsterType!=='ritual'))issues.push('invalid-ritual-monster');
+  if(effect?.kind==='ritualSummon'&&c.kind!=='spell')issues.push('invalid-ritual-spell');
   if(effect?.kind==='normal'&&(c.kind!=='monster'||c.monsterType!=='normal'))issues.push('invalid-normal-definition');
   if(effect?.kind==='monsterEffect'){if(c.monsterType!=='effect')issues.push('invalid-effect-monster-category');issues.push(...monsterDefinitionIssues(context.monster?.(c.id)));}
   if(effect?.kind==='fusion'&&(c.monsterType!=='fusion'||!c.fusion))issues.push('invalid-fusion-definition');

@@ -29,7 +29,7 @@ test('M20: all 11 distinct identities match the historical registry and execute 
   assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),false);
   assert.equal(getArchivedDefinitionResolver('engine-v8').getPlayableCard(c.id),undefined);
  }
- assert.equal(registry.enabledCardIds.length,782);
+ assert.equal(registry.enabledCardIds.length,812);
 });
 test('M20: card names, archetype identity and filter admission',()=>{
  assert.equal(rulesCardName(cardsById.get('91932350')),'Harpie Lady');

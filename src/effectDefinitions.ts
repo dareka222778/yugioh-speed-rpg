@@ -1,3 +1,4 @@
+import {ritualEffects22} from './ritualBatch22';
 import {worldNormalEffects16} from './worldNormalBatch16';
 import {mechanicalEffects20} from './mechanicalBatch20';
 import {mechanicalEffects16} from './mechanicalBatch16';
@@ -15,7 +16,10 @@ import {mechanicalEffects5} from './mechanicalBatch5';
 import type {ActivationModel} from './effectModels';
 import type {EconomicOperation} from './economicOperations';
 import {economicOperationIssues} from './economicOperations';
+import {ritualRuleIssues,type RitualRule} from './ritualRules';
 export type Effect=
+ |{kind:'ritualMonster'}
+ |{kind:'ritualSummon';ritual:RitualRule}
  |{kind:'destroyFiltered';filter:DestructionFilter}
  |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number}
  |{kind:'temporaryModifier';atk:number;def:number}
@@ -27,6 +31,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion';maxLevel?:number;atk:number;def:number;count?:CountFormula};
 export const effectDefinitions:Record<string,Effect>={
+ ...ritualEffects22,
  ...mechanicalEffects20,
  ...mechanicalEffects14,
  ...worldNormalEffects16,
@@ -88,6 +93,8 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='ritualMonster')return Object.keys(e).length===1?[]:['invalid-ritual-monster'];
+ if(e?.kind==='ritualSummon')return Object.keys(e).some(k=>!['kind','ritual'].includes(k))?['unknown-ritual-field']:ritualRuleIssues(e.ritual);
  if(e?.kind==='destroyFiltered')return Object.keys(e).some(k=>!['kind','filter'].includes(k))?['unsupported-destruction-field']:destructionFilterIssues(e.filter);
  if(e?.kind==='continuous')return [...continuousRuleIssues(e.rules),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
  if(e?.kind==='temporaryModifier')return Number.isSafeInteger(e.atk)&&Number.isSafeInteger(e.def)?[]:['invalid-temporary-modifier'];

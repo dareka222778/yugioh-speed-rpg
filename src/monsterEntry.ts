@@ -16,7 +16,7 @@ export function specialSummonFromPile(
  const index=source.findIndex(c=>c.uid===uid);
  if(index<0)return;
  const ref=source[index],info=getCard(ref.id);if(ref.entityKind==='token')return;
- if(info?.kind!=='monster'||(info.fusion&&(pile==='deck'||!ref.properlySummoned)))return;
+ if(info?.kind!=='monster'||((info.fusion||info.monsterType==='ritual')&&(pile==='deck'||!ref.properlySummoned)))return;
  synchronizeCardLifetimes(s);
  const [card]=source.splice(index,1);
  const summoned:Monster={...card,owner:sourceOwner,faceUp:true,position,entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0};
