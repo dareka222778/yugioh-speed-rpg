@@ -61,6 +61,21 @@ test('v8 candidate: invalid or unsupported filters fail closed',()=>{
  for(const v of [null,[],{}, {races:[]},{races:['Unknown']},{races:['Fiend','Fiend']},{equipped:false},{races:['Fiend'],attribute:'DARK'}])assert.ok(destructionFilterIssues(v).length,JSON.stringify(v));
  for(const v of [{races:['Fiend']},{equipped:true},{races:['Warrior'],equipped:true}])assert.deepEqual(destructionFilterIssues(v),[]);
 });
+test('v8 candidate: Non-Spellcasting Area prevents filtered destruction and removing its source restores susceptibility',()=>run(()=>{
+ const s=game('21323861');s.players[1].monsters=[mon('machine',ofRace('Machine'),1)];
+ s.players[0].backrow=[{uid:'immune',id:'20065549',faceUp:true,resolved:true,setTurn:0}];
+ const protectedState=settle(activate(s));assert.equal(protectedState.players[1].monsters.length,1);
+ s.players[0].backrow=[];assert.equal(settle(activate(s)).players[1].monsters.length,0);
+}));
+test('v8 candidate: chained equipment destruction resolves first and Eternal Rest reevaluates the equipped condition',()=>run(()=>{
+ const s=game('95051344');s.players[1].monsters=[mon('equipped',ofRace('Warrior'),1)];
+ s.players[0].backrow=[{uid:'equipment',id:'56747793',faceUp:true,resolved:true,setTurn:0,equippedTo:'equipped'}];
+ s.players[1].backrow=[{uid:'mst',id:'05318639',faceUp:false,setTurn:0}];
+ let pending=activate(s);const response=e.legalActions(pending,'b').find(a=>a.kind==='spell'&&a.card==='mst'&&a.target==='equipment');assert.ok(response);
+ pending=e.step(pending,'b',response);const done=settle(pending);
+ assert.equal(done.players[1].monsters.length,1);assert.ok(done.players[0].grave.some(c=>c.uid==='equipment'));
+ assert.deepEqual(done,settle(JSON.parse(JSON.stringify(pending))));
+}));
 test('v8 candidate: archive dispatch restores v8 while default duels and all previous catalog revisions stay v7',()=>{
  const facade=require('../dist/duelEngine'),archive=require('../dist/resolverArchive');const players=[{id:'a',name:'A',cards:deck},{id:'b',name:'B',cards:deck}];
  assert.equal(facade.createDuel(players).resolverVersion,'engine-v7');
