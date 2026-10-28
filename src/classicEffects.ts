@@ -15,6 +15,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  const e=getEffect(c.id),p=s.players[index],op=s.players[1-index];if(!e)return [];
  // Quick-Play cards Set during this turn cannot be activated until a later turn.
  if(isQuickPlaySpell(c.id)&&p.backrow.some(b=>b.uid===c.uid&&b.setTurn===s.turn))return [];
+ if(e.kind==='choiceSequence')return e.choices.flatMap((choice,n)=>canStartEconomicOperations(s,index,choice.operations)?[{kind:'spell' as const,card:c.uid,target:`__choice_${n}__`}]:[]);
  if(e.kind==='sequence')return canStartEconomicOperations(s,index,e.operations)?[{kind:'spell',card:c.uid}]:[];
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
@@ -65,6 +66,14 @@ export function turnMonsterFaceDown(m:Monster):void{
 }
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{
  const e=getEffect(a.id),p=s.players[a.actor],op=s.players[1-a.actor];if(!e)return false;
+ if(e.kind==='choiceSequence'){
+  const match=/^__choice_(\d+)__$/.exec(a.target??'');
+  const selected=match?e.choices[Number(match[1])]:undefined;
+  if(!selected)throw new Error('Escolha econômica inválida.');
+  executeEconomicOperations(s,a.actor,selected.operations,{...service,cardAttribute:id=>getCard(id)?.attribute??undefined});
+  service.note(s,`Efeito de ${getCard(a.id)!.name} resolvido conforme a escolha anunciada.`);
+  return true;
+ }
  const found=s.players.flatMap((p,index)=>p.monsters.map(m=>({p,m,index}))).find(t=>t.m.uid===a.target);
  const destruction=getDestructionModel(e);
  if(destruction){
@@ -74,7 +83,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
  if(resolveSpellException(s,a,service))return true;
  const operations=economicOperations(e);
  if(operations){
-  const completed=executeEconomicOperations(s,a.actor,operations,service);
+  const completed=executeEconomicOperations(s,a.actor,operations,{...service,cardAttribute:id=>getCard(id)?.attribute??undefined});
   if(e.kind==='heal')service.note(s,`${p.name} recuperou ${e.amount} PV.`);
   else if(e.kind==='burn')service.note(s,`${op.name} recebeu ${e.amount} de dano.`);
   else if(e.kind==='potOfGreed'&&completed)service.note(s,`${p.name} comprou 2 cartas com Pote da Ganância.`);

@@ -1,3 +1,5 @@
+import {economicCountEffects24} from './economicCountBatch24';
+import {economicEffects23} from './economicBatch23';
 import {ritualExtensionEffects22} from './ritualExtensions22';
 import {ritualEffects22} from './ritualBatch22';
 import {worldNormalEffects16} from './worldNormalBatch16';
@@ -20,6 +22,7 @@ import {economicOperationIssues} from './economicOperations';
 import {ritualRuleIssues,type RitualRule} from './ritualRules';
 export type Effect=
  |{kind:'ritualMonster'}
+ |{kind:'choiceSequence';activation:ActivationModel;choices:readonly {operations:readonly EconomicOperation[]}[]}
  |{kind:'ritualSummon';ritual:RitualRule}
  |{kind:'destroyFiltered';filter:DestructionFilter}
  |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number}
@@ -32,6 +35,8 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula};
 export const effectDefinitions:Record<string,Effect>={
+ ...economicCountEffects24,
+ ...economicEffects23,
  ...ritualExtensionEffects22,
  ...ritualEffects22,
  ...mechanicalEffects20,
@@ -95,6 +100,10 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='choiceSequence'){
+  if(Object.keys(e).some(k=>!['kind','activation','choices'].includes(k))||!Array.isArray(e.choices)||e.choices.length<2||e.choices.length>4||e.choices.some(c=>!c||Object.keys(c).some(k=>k!=='operations')||economicOperationIssues(c.operations).length))return ['invalid-economic-choice'];
+  return [];
+ }
  if(e?.kind==='ritualMonster')return Object.keys(e).length===1?[]:['invalid-ritual-monster'];
  if(e?.kind==='ritualSummon')return Object.keys(e).some(k=>!['kind','ritual'].includes(k))?['unknown-ritual-field']:ritualRuleIssues(e.ritual);
  if(e?.kind==='destroyFiltered')return Object.keys(e).some(k=>!['kind','filter'].includes(k))?['unsupported-destruction-field']:destructionFilterIssues(e.filter);

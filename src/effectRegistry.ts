@@ -6,7 +6,7 @@ import type {Card} from './cardCatalog';
 import {cardMetadata} from './cardMetadata';
 import {effectDefinitions,type Effect} from './effectDefinitions';
 import {getMonsterDefinition} from './monsterEffects';
-import {getEffectModel} from './effectModels';
+import {getEffectModel,getActivationModel} from './effectModels';
 import {buildCardRegistry} from './cardRegistry';
 import {cardCertifications} from './cardCertifications';
 import {namedCard} from './cardIdentity';
@@ -21,7 +21,7 @@ export function getPlayableCard(id:string){const c=currentCatalog();return (c?c.
 export const enabledCardIds:readonly string[]=registry.enabled;
 export function getEnabledCardIds():readonly string[]{return currentCatalog()?.enabled??enabledCardIds;}
 export function isQuickPlaySpell(id:string):boolean{
- const e=getEffect(id);return engineCard(id)?.kind==='spell'&&!!e&&getEffectModel(e.kind)?.activation.speed===2;
+ const e=getEffect(id);return engineCard(id)?.kind==='spell'&&!!e&&getActivationModel(e)?.speed===2;
 }
 export function equipEligible(effect:Extract<Effect,{kind:'equip'}>,monster:Card){return (!effect.races||effect.races.includes(monster.race??''))&&(!effect.attribute||effect.attribute===monster.attribute)&&(!effect.names||effect.names.some(n=>namedCard(monster,n)))&&(!effect.monsterType||effect.monsterType===monster.monsterType)&&(!effect.maxLevel||!!monster.level&&monster.level<=effect.maxLevel);}
 
