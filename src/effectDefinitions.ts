@@ -1,5 +1,6 @@
 import {worldNormalEffects16} from './worldNormalBatch16';
 import {mechanicalEffects16} from './mechanicalBatch16';
+import {mechanicalEffects17} from './mechanicalBatch17';
 import {mechanicalEffects15} from './mechanicalBatch15';
 import {destructionFilterIssues,type DestructionFilter} from './destructionRules';
 import {mechanicalEffects8} from './mechanicalBatch8';
@@ -27,6 +28,7 @@ export const effectDefinitions:Record<string,Effect>={
  ...mechanicalEffects14,
  ...worldNormalEffects16,
  ...mechanicalEffects16,
+ ...mechanicalEffects17,
  ...mechanicalEffects15,
  ...mechanicalEffects11,
  ...mechanicalEffects8,

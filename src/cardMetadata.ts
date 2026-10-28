@@ -1,5 +1,6 @@
 import {worldNormalBatch16} from './worldNormalBatch16';
 import {mechanicalBatch16} from './mechanicalBatch16';
+import {mechanicalBatch17} from './mechanicalBatch17';
 import {mechanicalBatch15} from './mechanicalBatch15';
 import {fusionBatch8} from './fusionBatch8';
 import {mechanicalBatch11} from './mechanicalBatch11';
@@ -44,4 +45,4 @@ const supportedClassicSpells:Card[]=[
  {id:'05318639',konamiId:4909,name:'Tufão Espacial Místico',englishName:'Mystical Space Typhoon',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Magia Rápida: escolha 1 Magia/Armadilha no campo; destrua-a. Destruir não significa negar a ativação.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4909&request_locale=pt'},
  {id:'14087893',konamiId:5432,name:'Livro da Lua',englishName:'Book of Moon',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Magia Rápida: escolha 1 monstro com a face para cima no campo; coloque-o com a face para baixo em Posição de Defesa.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5432&request_locale=pt'}
 ];
-export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...worldNormalBatch16];
+export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...worldNormalBatch16];

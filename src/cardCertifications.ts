@@ -4617,6 +4617,26 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "suites": [
       "tests/worldNormalBatch16.test.cjs"
     ]
-  }
+  },
 
+  "45311864": {
+    "fingerprint": "95cb4868a02f890c43823e307825a6f60a56ada730271de153f957055545253f",
+    "suites": ["tests/mechanicalBatch17.test.cjs"]
+  },
+  "46700124": {
+    "fingerprint": "d37d6753f327e2a3ca25621ab4ca0588e018e6f74540e99b98be467121727667",
+    "suites": ["tests/mechanicalBatch17.test.cjs"]
+  },
+  "82108372": {
+    "fingerprint": "edc6469c31e0184ad550f388706654c2adafa8aaa482c947e2222b1be5fb4d12",
+    "suites": ["tests/mechanicalBatch17.test.cjs"]
+  },
+  "18891691": {
+    "fingerprint": "972503e1ea9748f10bb72bd77e6fa44eb633a24037ad8e65a059e282659d3e54",
+    "suites": ["tests/mechanicalBatch17.test.cjs"]
+  },
+  "42883273": {
+    "fingerprint": "c6de597ed7f3df48ead6f64e6d00a9db6344a16df4f897bd8d3ac63092e32f51",
+    "suites": ["tests/mechanicalBatch17.test.cjs"]
+  }
 };

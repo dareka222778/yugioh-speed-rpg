@@ -1,4 +1,5 @@
 import {mechanicalMonsters16} from './mechanicalBatch16';
+import {mechanicalMonsters17} from './mechanicalBatch17';
 import {mechanicalMonsters8} from './mechanicalBatch8';
 import {mechanicalMonsters11} from './mechanicalBatch11';
 import {mechanicalMonsters14} from './mechanicalBatch14';
@@ -46,6 +47,7 @@ export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuou
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
  ...mechanicalMonsters16,
+ ...mechanicalMonsters17,
  ...mechanicalMonsters14,
  ...mechanicalMonsters11,
  ...mechanicalMonsters8,
