@@ -1,7 +1,7 @@
 /** Bounded normalization of reviewed development additions; archives stay byte-exact. */
 const assert=require('node:assert/strict');
 const ids=['91932350','52040216','40453765','20394040','47480070','38033121','11901678','63224564','27967615','81380218','10012614'];
-function strip(file,bytes){bytes=require('./mission22-reviewed-extensions.cjs').strip(file,bytes);let text=bytes.toString('utf8');
+function strip(file,bytes){bytes=require('./mission24-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission22-reviewed-extensions.cjs').strip(file,bytes);let text=bytes.toString('utf8');
  const once=part=>{assert.equal(text.split(part).length,2,`M21 reviewed addition: ${file}`);text=text.replace(part,'');};
  if(file==='src/cardCatalog.ts'&&text.includes('; alwaysTreatedAs?:string'))once('; alwaysTreatedAs?:string; archetypes?:readonly string[]');
  if(file==='src/cardMetadata.ts'&&text.includes("import {mechanicalBatch20}")){once("import {mechanicalBatch20} from './mechanicalBatch20';\n");once(',...mechanicalBatch20');}
