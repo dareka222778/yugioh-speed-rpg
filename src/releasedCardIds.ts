@@ -1,4 +1,5 @@
-/** Explicit historical release allowlist. Certification alone never grants distribution. */
+/** Explicit test distribution allowlist. Certification alone never grants distribution.
+ * The six M25 search spells are permitted for the owner's closed beta. */
 export const releasedCardIds:ReadonlySet<string>=new Set([
   "00756652",
   "01184620",
@@ -129,5 +130,12 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "93221206",
   "97360116",
   "97590747",
-  "98374133"
+  "98374133",
+  // M25: owner-authorized closed beta, each card individually certified.
+  "73628505",
+  "32807846",
+  "26902560",
+  "95281259",
+  "89997728",
+  "06390406"
 ]);

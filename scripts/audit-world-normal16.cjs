@@ -10,6 +10,6 @@ for(const a of admissions){assert.equal(a.distributionAuthorized,false);const ro
 const manifest=require('../catalog/engine-v8/manifest.json'),loader=require('../dist/catalogArchive'),old=loader.getCatalogData(manifest.revisions[2].id,'engine-v8'),latest=loader.getCatalogData(manifest.current,'engine-v8');
 assert.equal(old.cards.length,752);assert.ok(latest.cards.length>=762);
 for(const card of old.cards){assert.deepEqual(latest.cards.find(c=>c.id===card.id),card);for(const section of ['effects','monsters','certificates'])assert.deepEqual(latest[section][card.id],old[section][card.id]);}
-assert.ok(r.enabledCardIds.length>=762);assert.equal(r.enabledCardIds.filter(require('../dist/cardReleasePolicy').cardDistributionAllowed).length,130);
+assert.ok(r.enabledCardIds.length>=762);assert.equal(r.enabledCardIds.filter(require('../dist/cardReleasePolicy').cardDistributionAllowed).length,require('../dist/releasedCardIds').releasedCardIds.size);
 const report={engine:'engine-v8',previousCertified:752,totalCertified:762,newCertified:10,cards:cards.map(c=>({id:c.id,name:c.englishName,passed:executions.find(x=>x.id===c.id).passed})),previousRevisionsUnchanged:true,distributionAuthorized:0,region:'world via verified TCG printings; imported OCG dates not rewritten'};
 fs.writeFileSync('artifacts/mission16-world-normal-audit.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

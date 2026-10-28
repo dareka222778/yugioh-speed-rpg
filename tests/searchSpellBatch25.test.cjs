@@ -17,7 +17,7 @@ function cast(s,id,uid){const available=actions(s,id),action=available.find(a=>a
 const warrior=registry.engineCatalog.find(c=>c.kind==='monster'&&c.race==='Warrior'&&c.level<=4).id;
 test('M25 six unique historical sources with exact runtime certification',()=>{
  assert.equal(searchSpellBatch25.length,6);
- for(const c of searchSpellBatch25){const h=history.find(x=>x.passwords.includes(c.id));assert.ok(h);assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);assert.ok(h.firstObserved.world<='2004-09-30');assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),false);assert.equal(cardCertifications[c.id].fingerprint,definitionFingerprint(c,searchSpellEffects25[c.id],{model:require('../dist/effectModels').getEffectModel}));}
+ for(const c of searchSpellBatch25){const h=history.find(x=>x.passwords.includes(c.id));assert.ok(h);assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);assert.ok(h.firstObserved.world<='2004-09-30');assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),true);assert.equal(cardCertifications[c.id].fingerprint,definitionFingerprint(c,searchSpellEffects25[c.id],{model:require('../dist/effectModels').getEffectModel}));}
 });
 const cases=[
  ['Terraforming','73628505','86318356','deck'],

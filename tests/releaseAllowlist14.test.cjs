@@ -4,12 +4,12 @@ const {releasedCardIds}=require('../dist/releasedCardIds');
 const {cardDistributionAllowed}=require('../dist/cardReleasePolicy');
 const registry=require('../dist/effectRegistry');
 
-test('pre-beta release policy grants only 130 explicit historically allowed cards',()=>{
- assert.equal(releasedCardIds.size,130);
+test('closed beta release policy grants historical 130 plus six individually certified M25 cards',()=>{
+ assert.equal(releasedCardIds.size,136);
  assert.ok(registry.enabledCardIds.length>=769);
  const grants=registry.enabledCardIds.filter(cardDistributionAllowed);
  assert.deepEqual(new Set(grants),releasedCardIds);
- assert.equal(grants.length,130);
+ assert.equal(grants.length,136);
 });
 test('certification alone, unknown IDs and staging cards never imply distribution',()=>{
  assert.equal(registry.getCardStatus('96890582').stage,'certified');
@@ -22,6 +22,6 @@ test('old 740-card catalog keeps precisely the same inherited 130 release IDs',(
  const old=require('../catalog/engine-v7/'+manifest.revisions.at(-2).id+'.json');
  assert.equal(old.cards.length,740);
  const oldIds=new Set(old.cards.map(c=>c.id));
- assert.ok([...releasedCardIds].every(id=>oldIds.has(id)));
+ assert.equal([...releasedCardIds].filter(id=>oldIds.has(id)).length,130);
  assert.equal([...oldIds].filter(cardDistributionAllowed).length,130);
 });

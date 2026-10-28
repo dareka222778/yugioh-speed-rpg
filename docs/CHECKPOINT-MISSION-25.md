@@ -1,6 +1,6 @@
 # Missão 25 — buscas de cartas por fonte e zona
 
-Estado da implementação: `engine-v9`, PR #12. O lote adiciona seis magias historicamente elegíveis e com efeitos executáveis, elevando o catálogo de 822 para **828 cartas certificadas**. O índice anterior do catálogo permanece imutável, com nova revisão de 828 cartas.
+Estado da implementação: `engine-v9`, PR #12. O lote adiciona seis magias historicamente elegíveis e com efeitos executáveis, elevando o catálogo de 822 para **828 cartas certificadas**. O índice anterior do catálogo permanece imutável, com nova revisão de 828 cartas. Por autorização do proprietário, essas seis cartas integram a distribuição de teste: **136 liberadas** (130 históricas + 6 deste lote). As outras 692 seguem bloqueadas na lista de distribuição.
 
 | Carta | Password | Resultado implementado |
 | --- | --- | --- |
@@ -23,7 +23,7 @@ As escolhas são restritas às zonas do próprio jogador, revalidadas durante a 
 ## Próximas ações
 
 1. CI completa no GitHub e relatório do novo SHA.
-2. Autorizar distribuição beta das cartas certificadas, com testes do catálogo e da loja para impedir exposição de entradas ainda não certificadas.
+2. Validar na CI que a distribuição beta de seis novas cartas não expõe nenhuma carta não certificada e preserva os 130 IDs históricos.
 3. Continuar por famílias de efeitos completas e realmente reutilizáveis. A quantidade de cards importados sem efeito não conta como implementação.
 
 Não houve mudança no layout, nem merge ou deploy automático nesta entrega documental.
