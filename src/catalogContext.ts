@@ -3,7 +3,7 @@ import type {Card} from './cardCatalog';
 import type {Effect} from './effectDefinitions';
 import type {MonsterDefinition} from './monsterEffects';
 import type {CardCertificate,CardStatus} from './cardRegistry';
-export type CatalogData={format:1;engineVersion:'engine-v7';cards:Card[];effects:Record<string,Effect>;monsters:Record<string,MonsterDefinition>;certificates:Record<string,CardCertificate>};
+export type CatalogData={format:1;engineVersion:'engine-v7'|'engine-v8';cards:Card[];effects:Record<string,Effect>;monsters:Record<string,MonsterDefinition>;certificates:Record<string,CardCertificate>};
 export type CatalogRuntime={id:string;data:CatalogData;metadata:ReadonlyMap<string,Card>;effects:ReadonlyMap<string,Effect>;statuses:ReadonlyMap<string,CardStatus>;enabled:readonly string[]};
 const context=new AsyncLocalStorage<CatalogRuntime>();
 /** Context belongs to one frozen implementation. Nested calls and async tests

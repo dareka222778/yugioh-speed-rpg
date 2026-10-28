@@ -437,7 +437,7 @@ function resolve(s:DuelState){
   if(target?.faceUp&&canAffectMonster(s,target.uid,'trap')){if(effect?.kind==='reinforcements')target.atkBoost+=500;else if(effect?.kind==='castleWalls')target.defBoost+=500;}
   if(effect?.kind==='waboku')s.players[link.actor].battleProtectedUntil=s.turn;
   if(effect?.kind==='justDesserts'){const op=s.players[1-link.actor];op.lp=Math.max(0,op.lp-500*op.monsters.length);checkLP(s);}
-  const destruction=effect&&getDestructionModel(effect.kind);
+  const destruction=effect&&getDestructionModel(effect);
   if(destruction){
    const count=executeDestruction(s,link.actor,destruction,link.target,{destroy:graveMonster,banish:banishDestroyedMonster,attack:atk,kind:'trap'});
    if(effect!.kind==='torrentialTribute')note(s,`Tributo Torrencial destruiu ${count} monstro(s) no campo.`);

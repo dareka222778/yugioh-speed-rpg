@@ -1,3 +1,4 @@
+import {destructionFilterIssues,type DestructionFilter} from './destructionRules';
 import {mechanicalEffects8} from './mechanicalBatch8';
 import {mechanicalEffects11} from './mechanicalBatch11';
 import {mechanicalEffects14} from './mechanicalBatch14';
@@ -9,6 +10,7 @@ import type {ActivationModel} from './effectModels';
 import type {EconomicOperation} from './economicOperations';
 import {economicOperationIssues} from './economicOperations';
 export type Effect=
+ |{kind:'destroyFiltered';filter:DestructionFilter}
  |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number}
  |{kind:'temporaryModifier';atk:number;def:number}
  |{kind:'destroySpellTraps';scope:'all'|'opponent'}
@@ -74,6 +76,7 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='destroyFiltered')return destructionFilterIssues(e.filter);
  if(e?.kind==='continuous')return [...continuousRuleIssues(e.rules),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
  if(e?.kind==='temporaryModifier')return Number.isSafeInteger(e.atk)&&Number.isSafeInteger(e.def)?[]:['invalid-temporary-modifier'];
  if(e?.kind==='destroySpellTraps')return ['all','opponent'].includes(e.scope)?[]:['invalid-spell-trap-scope'];

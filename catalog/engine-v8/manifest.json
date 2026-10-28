@@ -1,0 +1,12 @@
+{
+  "format": 1,
+  "engineVersion": "engine-v8",
+  "current": "d84815dc2001064ba69b0fec719fc41495f78561d0438f16d6a0ee19357d4ee3",
+  "revisions": [
+    {
+      "id": "d84815dc2001064ba69b0fec719fc41495f78561d0438f16d6a0ee19357d4ee3",
+      "file": "d84815dc2001064ba69b0fec719fc41495f78561d0438f16d6a0ee19357d4ee3.json",
+      "sha256": "4fb6b696e0b67242ac0d0b613cf4ccc89765e3a183078809c2f4d0802a48581e"
+    }
+  ]
+}

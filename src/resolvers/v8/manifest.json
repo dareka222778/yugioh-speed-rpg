@@ -1,0 +1,191 @@
+{
+  "version": "engine-v8",
+  "originCommit": "2e21d40724341db91bb9a03e3500641fc46f9302",
+  "normalization": "Reviewed working source based on origin: local type imports, historical dispatch removed, identity pinned. Mechanical additions require separate certificates and regression execution.",
+  "files": [
+    {
+      "path": "attackResponses.ts",
+      "sha256": "61fb7ff6cf7857bad2ae7b8cc3349ba795264ea4e8c7623a39b70353df5be7ca"
+    },
+    {
+      "path": "cardCatalog.ts",
+      "sha256": "4dda4b4abcdb59225cb6514462d6e42f7c53fc0173c203faebeacf1e4eb1187b"
+    },
+    {
+      "path": "cardCertifications.ts",
+      "sha256": "6fda4b0a10b9680dfd960ab9f3c4692ab9c20329590130536e603dcb6c12f82c"
+    },
+    {
+      "path": "cardLifetime.ts",
+      "sha256": "21ce83e3d038e6893cabafbe561c767c5ecfbb6a9f10609e972cf59a8f38de82"
+    },
+    {
+      "path": "cardMetadata.ts",
+      "sha256": "94b18518c517747140186ee0d7efd52531c608f0372eac97fee08682a40282ea"
+    },
+    {
+      "path": "cardPresentation.ts",
+      "sha256": "f465be882118e0edd3a6d4c3af7f0f1427d5dbee022d51c16123badccd45e2f9"
+    },
+    {
+      "path": "cardRegistry.ts",
+      "sha256": "0ea4b65acd23a5ce60d0ab74822689a523585eb561dfb929922bbaaf4f0d4601"
+    },
+    {
+      "path": "catalogContext.ts",
+      "sha256": "e2a990500c2ce22742c7d8769b4bfa8f5bc0fa5ef70acb9e18e5e140964a259f"
+    },
+    {
+      "path": "catalogRuntime.ts",
+      "sha256": "f2d58bb0c03ebb283b48226972878cf36617417eb9d20ccacdc5b0962f6d3f92"
+    },
+    {
+      "path": "chainEngine.ts",
+      "sha256": "4140550785ef7ceed8a46f07c48e90564c2cf75ce548c6f2b85470a9577f91c1"
+    },
+    {
+      "path": "classicEffects.ts",
+      "sha256": "235afb915ea54e0efe460c167099291895fa41f25903230424728fa15caa4eea"
+    },
+    {
+      "path": "classicEngineCards.ts",
+      "sha256": "a2d7c091ccbb01ca33f1e2982bd902095c08f2526d13b54ebe88dd0039e9a968"
+    },
+    {
+      "path": "classicExpansion.ts",
+      "sha256": "731ac876d62dbf4faebd86be78f158330cad6e77683af6bb9c9f189795d44504"
+    },
+    {
+      "path": "continuousEffects.ts",
+      "sha256": "85e38888f02ec102819e4377391e196690919e104a86ae6b5f0c122710ddb2d4"
+    },
+    {
+      "path": "continuousRules.ts",
+      "sha256": "0762216a7b43c6b0f00c5b9d56449a3795cbdf1649845f30923895396f93b67e"
+    },
+    {
+      "path": "destructionRules.ts",
+      "sha256": "c9cc0694b1dd140106cbaedec11e754c2f85f11f5d981da63c488a9f1714c023"
+    },
+    {
+      "path": "duelEngineCurrent.ts",
+      "sha256": "6d2460ce2b0e0174678ece4751b5cd9857fb5d19279f82eae32916be9f39ad9c"
+    },
+    {
+      "path": "duelIntegrity.ts",
+      "sha256": "0a06686a73b4cb7f0aaf18a01e8c05ffb2918312b4ff2abef32622de860412fa"
+    },
+    {
+      "path": "duelRandom.ts",
+      "sha256": "c88e43b7fd1b18444d8e1900d66709472bcff65f4b5d391e004f239cce0f1468"
+    },
+    {
+      "path": "duelTransitions.ts",
+      "sha256": "9b52b6b790722158931213d7353bf202dcdf85bdefa94919d7f2d050611bfd91"
+    },
+    {
+      "path": "economicOperations.ts",
+      "sha256": "5eff8125dc8b9d1b16dcf4f5d0e884ad50aa9c6329a5fe3f541670fd42cc6581"
+    },
+    {
+      "path": "effectDefinitions.ts",
+      "sha256": "0b47ff063c7e8e049ff673a5902a7273fe6306ed965d90efc78efd6071acec17"
+    },
+    {
+      "path": "effectModels.ts",
+      "sha256": "bdbf13b25048d17a48a7a9d13f87c59226c440a599e805da188d8397084e2f56"
+    },
+    {
+      "path": "effectOperations.ts",
+      "sha256": "ca59c96b7ea2ee422db6a15441aeed3d3d9e874db60ace1fbf8629870a3c7998"
+    },
+    {
+      "path": "effectRegistry.ts",
+      "sha256": "7e7aceff99f626aec0bce6371427555aa5aaf20137acb09fbb7c698d48a4d2bc"
+    },
+    {
+      "path": "effectTiming.ts",
+      "sha256": "17789c7fdce8ff74dde0be94c31d7f2e3e479dff60a2b10a970e331ba3c7856f"
+    },
+    {
+      "path": "fusionBatch8.ts",
+      "sha256": "e515d81aeb0847b5c78385927ecc4486e0446495fad42ac2d3fb9114b0a1603a"
+    },
+    {
+      "path": "handFlow.ts",
+      "sha256": "681923bfba34cf8cdb24bdb678614db83a01dd70c18bd996011bf22e946a3c8b"
+    },
+    {
+      "path": "historicalFusionBatch10.ts",
+      "sha256": "aeccf8d5e6524ab15e96827ca68da7c0e049dce4e34a1c7c33f3e8edc10154a2"
+    },
+    {
+      "path": "historicalNormalBatch.ts",
+      "sha256": "fbc2ed12e412d72ca80d91a94f4451290b52c68374f0256a57620287e85d37d7"
+    },
+    {
+      "path": "historicalNormalBatch4.ts",
+      "sha256": "61f154e0a49cb467195b48ec5e423f4dee30b7b585b2b0ed54977450a7c0e100"
+    },
+    {
+      "path": "historicalNormalBatch9.ts",
+      "sha256": "a418c750b789c2783c7081ac8fce949ce642f551c3c3c11f6bac15b8244e3a0f"
+    },
+    {
+      "path": "mechanicalBatch11.ts",
+      "sha256": "835dd8b20314622771126c82eda540b9be5f60d90655ed5b938007a493ddc556"
+    },
+    {
+      "path": "mechanicalBatch14.ts",
+      "sha256": "c1c0d5429c7d95f1deecbe33772c3384e0a7608415ab9fd8356bbd42e4ba3a6f"
+    },
+    {
+      "path": "mechanicalBatch5.ts",
+      "sha256": "72b45a3488790661896c2ad8e2a8b4d602fdc3ab0d15c4b7da868596bee552da"
+    },
+    {
+      "path": "mechanicalBatch7.ts",
+      "sha256": "a6342c731db02daee2ae01940f3ba58b7836ce9fcffe867723e77662b3babc08"
+    },
+    {
+      "path": "mechanicalBatch8.ts",
+      "sha256": "bdbe43b725525c9db0f40a297e6f6c2ce423e9882a6ca46aa43a9b784c08afcd"
+    },
+    {
+      "path": "monsterEffects.ts",
+      "sha256": "e6b1836ecaf95716f83db289b992770eb75ad8c1d5b124e23c09e46395926def"
+    },
+    {
+      "path": "monsterEntry.ts",
+      "sha256": "f4ed821f550c8667300926d5c5ddace95894a20ada307c52cbc6ad04babe8b5d"
+    },
+    {
+      "path": "monsterExit.ts",
+      "sha256": "775116674c1d12854e09348cd5bc28b68dcb7356df7f0eeef4f11881a3639a09"
+    },
+    {
+      "path": "resolverIdentity.ts",
+      "sha256": "2a2f301b7da4b0b82ce04b29320f10afa23add82ca19c09ddf90d66fec423908"
+    },
+    {
+      "path": "rulesProfile.ts",
+      "sha256": "1033fff5d538989149161aecea99bf10774703533f665893c0352229e6115b3b"
+    },
+    {
+      "path": "spellExceptions.ts",
+      "sha256": "c7802b8c3f7356b3d3bba8c8869acc3fdfc3854c7d9e66937c78792dfef8fba6"
+    },
+    {
+      "path": "standbyFlow.ts",
+      "sha256": "1f69d8f1e741da0aa19f0485daf8a80be47c01abf9a5ad898200ba93a37877bc"
+    },
+    {
+      "path": "teamRotation.ts",
+      "sha256": "5e67eaeab0f0ecdb46a1000c942572bf6e3a0e9fc2a94c150db996abbf9ac199"
+    },
+    {
+      "path": "tokens.ts",
+      "sha256": "60b1aa122e786fc7ec45f0f883f75a8e50378332f2c61e20d23ee5de42034b5a"
+    }
+  ]
+}

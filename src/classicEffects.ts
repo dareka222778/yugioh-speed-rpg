@@ -7,7 +7,7 @@ import {resolveSpellException} from './spellExceptions';
 import {canStartEconomicOperations,executeEconomicOperations} from './economicOperations';
 import {economicOperations} from './effectModels';
 import {getDestructionModel} from './effectModels';
-import {executeDestruction} from './effectOperations';
+import {executeDestruction,destructionTargets} from './effectOperations';
 import {specialSummonFromPile} from './monsterEntry';
 export type EffectServices={destroy:(s:DuelState,uid:string)=>void;attack:(m:Monster,s:DuelState)=>number;note:(s:DuelState,line:string)=>void;finish:(s:DuelState,winner:number|null,reason:string)=>void;checkLP:(s:DuelState)=>void;onSpecialSummon?:(s:DuelState,actor:number,uid:string,id:string)=>void};
 export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
@@ -17,6 +17,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  if(e.kind==='sequence')return canStartEconomicOperations(s,index,e.operations)?[{kind:'spell',card:c.uid}]:[];
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
+  case 'destroyFiltered':return destructionTargets(s,index,getDestructionModel(e)!).length?[{kind:'spell',card:c.uid}]:[];
   case 'continuous':return p.lp>(e.lpCost??0)?[{kind:'spell',card:c.uid}]:[];
   case 'temporaryModifier':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>m.uid)));
   case 'destroySpellTraps':return s.players.some((player,side)=>(e.scope==='all'||side!==index)&&(player.backrow.some(b=>b.uid!==c.uid)||!!player.field))?[{kind:'spell',card:c.uid}]:[];
@@ -63,10 +64,10 @@ export function turnMonsterFaceDown(m:Monster):void{
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{
  const e=getEffect(a.id),p=s.players[a.actor],op=s.players[1-a.actor];if(!e)return false;
  const found=s.players.flatMap((p,index)=>p.monsters.map(m=>({p,m,index}))).find(t=>t.m.uid===a.target);
- const destruction=getDestructionModel(e.kind);
+ const destruction=getDestructionModel(e);
  if(destruction){
   executeDestruction(s,a.actor,destruction,a.target,{...service,kind:'spell'});
-  service.note(s,e.kind==='darkHole'?'Buraco Negro destruiu os monstros do campo.':'Raigeki destruiu os monstros do adversário.');return true;
+  service.note(s,e.kind==='destroyFiltered'?'Filtered destruction resolved.':e.kind==='darkHole'?'Buraco Negro destruiu os monstros do campo.':'Raigeki destruiu os monstros do adversário.');return true;
  }
  if(resolveSpellException(s,a,service))return true;
  const operations=economicOperations(e);
