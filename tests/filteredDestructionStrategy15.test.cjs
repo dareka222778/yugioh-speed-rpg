@@ -13,3 +13,13 @@ test('tactical utility excludes spell-immune public monsters and never reinterpr
  s.players[1].monsters=[mon('immune',id,1)];s.players[0].backrow=[{uid:'area',id:'20065549',faceUp:true,resolved:true,setTurn:0}];assert.equal(utility(s,0,effects['21323861']),0);
  const old=e.getArchivedDefinitionResolver('engine-v7').createDuel(players);assert.equal(utility(old,0,effects['21323861']),0);
 });
+
+test('current v9 AI evaluates the current catalog without feeding it to the archived v8 runtime',()=>{
+ const s=e.createDuel([{id:'a',name:'A',cards:basic},{id:'b',name:'B',cards:basic}]);
+ assert.equal(s.resolverVersion,'engine-v9');
+ const id=r.engineCatalog.find(c=>c.monsterType==='normal'&&c.race==='Machine').id;
+ s.players[1].monsters=[mon('enemy',id,1)];const before=JSON.stringify(s);
+ assert.ok(utility(s,0,effects['21323861'])>0);assert.equal(JSON.stringify(s),before);
+ s.players[0].backrow=[{uid:'area',id:'20065549',faceUp:true,resolved:true,setTurn:0}];
+ assert.equal(utility(s,0,effects['21323861']),0);
+});
