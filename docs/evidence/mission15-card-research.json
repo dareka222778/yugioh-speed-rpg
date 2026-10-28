@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-10-28",
-  "classification": "Public-source research and test candidates; not certification evidence by itself",
+  "classification": "Public-source research, individually admitted through the executed engine-v8 gate; never distribution approval",
   "cards": [
     {
       "id": "26725158",
@@ -28,13 +28,17 @@
           ]
         }
       },
-      "status": "implemented-as-test-fixture-not-certified",
+      "status": "certified-engine-v8-distribution-blocked",
       "distributionAuthorized": false,
       "remaining": [
-        "Individual provenance/admission review",
-        "Production-catalog registration and immutable revision",
-        "NPC utility and full-card interaction coverage"
-      ]
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
     },
     {
       "id": "21323861",
@@ -62,13 +66,17 @@
           ]
         }
       },
-      "status": "implemented-as-test-fixture-not-certified",
+      "status": "certified-engine-v8-distribution-blocked",
       "distributionAuthorized": false,
       "remaining": [
-        "Individual provenance/admission review",
-        "Production-catalog registration and immutable revision",
-        "NPC utility and full-card interaction coverage"
-      ]
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
     },
     {
       "id": "56606928",
@@ -96,13 +104,17 @@
           ]
         }
       },
-      "status": "implemented-as-test-fixture-not-certified",
+      "status": "certified-engine-v8-distribution-blocked",
       "distributionAuthorized": false,
       "remaining": [
-        "Individual provenance/admission review",
-        "Production-catalog registration and immutable revision",
-        "NPC utility and full-card interaction coverage"
-      ]
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
     },
     {
       "id": "20101223",
@@ -130,13 +142,17 @@
           ]
         }
       },
-      "status": "implemented-as-test-fixture-not-certified",
+      "status": "certified-engine-v8-distribution-blocked",
       "distributionAuthorized": false,
       "remaining": [
-        "Individual provenance/admission review",
-        "Production-catalog registration and immutable revision",
-        "NPC utility and full-card interaction coverage"
-      ]
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
     },
     {
       "id": "90873992",
@@ -164,13 +180,17 @@
           ]
         }
       },
-      "status": "implemented-as-test-fixture-not-certified",
+      "status": "certified-engine-v8-distribution-blocked",
       "distributionAuthorized": false,
       "remaining": [
-        "Individual provenance/admission review",
-        "Production-catalog registration and immutable revision",
-        "NPC utility and full-card interaction coverage"
-      ]
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
     },
     {
       "id": "94716515",
@@ -198,15 +218,19 @@
           ]
         }
       },
-      "status": "implemented-as-test-fixture-not-certified",
+      "status": "certified-engine-v8-distribution-blocked",
       "distributionAuthorized": false,
       "remaining": [
-        "Individual provenance/admission review",
-        "Production-catalog registration and immutable revision",
-        "NPC utility and full-card interaction coverage"
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
       ],
       "additionalPrimarySource": "https://www.db.yugioh-card.com/yugiohdb/card_calendar?dd=22&mm=7&mode=1&ope=1&page=1&request_locale=ja&rp=99999&sess=1&sort=2",
-      "retrievalNote": "Direct Japanese endpoint initially failed; official indexed card page and official card-calendar listing subsequently recovered the printing."
+      "retrievalNote": "Direct Japanese endpoint initially failed; official indexed card page and official card-calendar listing subsequently recovered the printing.",
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
     },
     {
       "id": "95051344",
@@ -232,13 +256,17 @@
           "equipped": true
         }
       },
-      "status": "implemented-as-test-fixture-not-certified",
+      "status": "certified-engine-v8-distribution-blocked",
       "distributionAuthorized": false,
       "remaining": [
-        "Individual provenance/admission review",
-        "Production-catalog registration and immutable revision",
-        "NPC utility and full-card interaction coverage"
-      ]
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
     },
     {
       "id": "90330453",
@@ -266,13 +294,17 @@
           ]
         }
       },
-      "status": "implemented-as-test-fixture-not-certified",
+      "status": "certified-engine-v8-distribution-blocked",
       "distributionAuthorized": false,
       "remaining": [
-        "Individual provenance/admission review",
-        "Production-catalog registration and immutable revision",
-        "NPC utility and full-card interaction coverage"
-      ]
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
     }
   ],
   "discrepancies": [

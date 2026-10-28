@@ -1,47 +1,44 @@
 # Checkpoint persistente — Missão 15
 
-**Segundo bloco em validação:** ler primeiro [MISSION15-INTEGRATION-WIP.md](MISSION15-INTEGRATION-WIP.md). A branch agora prepara v8 padrão/749 cartas, com IA, revisões individuais e testes adicionais; os números de aprovação abaixo pertencem ao primeiro bloco. Conferir a CI posterior antes de afirmar certificação concluída.
+Repositório dareka222778/yugioh-speed-rpg, branch feat/rea-engine-recovery-20261026, PR #12 em rascunho. Base recebida: 2e21d40724341db91bb9a03e3500641fc46f9302. **Não restaurar o antigo estado v7 por cima desta integração.**
 
-Branch: `feat/rea-engine-recovery-20261026`; PR #12 deve permanecer em rascunho. Base recebida: `2e21d40724341db91bb9a03e3500641fc46f9302`. Não usar o workspace antigo como fonte de envio.
+O desenvolvimento agora usa engine-v8, 749 certificados e a mesma lista positiva de 130 distribuíveis. Oito cartas foram revistas e executaram cinco cenários individuais cada: Exile of the Wicked, Acid Rain, Eternal Drought, Breath of Light, Warrior Elimination, Eradicating Aerosol, Eternal Rest e Last Day of Witch. Nenhuma foi concedida ou liberada na loja.
 
-Workspace desta sessão: `C:\Users\Micro\Downloads\speed-rpg-rea-20261026\repo-mission15-2e21d407`. Ele foi materializado dos blobs remotos e não contém checkout Git utilizável. Os commits foram criados pela API Git Data, com atualização condicional do HEAD e sem force. Em uma nova sessão, preferir checkout/worktree real da branch remota; conferir alterações posteriores antes de aplicar qualquer arquivo local.
+Workspace desta sessão: C:\Users\Micro\Downloads\speed-rpg-rea-20261026\repo-mission15-2e21d407. Foi materializado dos blobs remotos; não possui checkout Git utilizável. Commits foram criados pela API com atualização condicional do HEAD, sem force. Em outra sessão, preferir checkout/worktree real da branch e conferir alterações posteriores antes de aplicar arquivos locais. Não usar o workspace antigo repo como fonte de envio.
 
-## Estado técnico
+**Estado preservado**
 
-- Ativa: engine-v7; 741 certificados; 130 distribuíveis. Candidata experimental: engine-v8, 46 módulos, revisão inicial `d84815dc2001064ba69b0fec719fc41495f78561d0438f16d6a0ee19357d4ee3`, também com 741 cartas.
-- Oito efeitos novos estão implementados como candidatas declarativas e testados com admissão sintética somente nos testes. **Nenhuma carta nova foi certificada ou distribuída. Não copiar esses certificados de fixtures para o registro real.**
-- Não promover a v8 automaticamente. Faltam integração da IA, revisão/admissão individual, extensão de catálogo e validação 2v2 v8.
-- Backups novos incluem v7/v8; backups de formato 1 apenas v7 continuam suportados. Stores, banco, regras e módulos v1–v7 permanecem byte a byte na base.
-- Auditoria dos decks NPC corrigida para cinco cartas no Adicional e limite de cópias.
-- 37 testes da família, quatro da auditoria NPC, dois testes SQLite e um de diagnóstico novos. Seleção local final de 58 testes aprovados no Node 24; não substitui a CI Node 22 nativa.
+- v1–v7: 231 módulos e sete manifestos; todos os artefatos v7 permanecem intactos.
+- v8: 46 módulos e manifesto congelados no primeiro bloco, conferidos contra 043f93818cc839b4a955c7c84618553183449c06. A admissão posterior não alterou esses arquivos.
+- Catálogo v8 inicial de 741: d84815dc2001064ba69b0fec719fc41495f78561d0438f16d6a0ee19357d4ee3.
+- Catálogo v8 aditivo de 749: e301765da8535ac4462932bbb64d6f5c2d8fe6f15461d236c89bc8325819a8c6.
+- Hooks/dados correntes revisados em duelStore, cardMetadata e cardCertifications. O normalizador confere o restante byte a byte e rejeita alterações arbitrárias. Não remover essa proteção nem regravar revisões imutáveis.
+- Backups v7 antigos e v7/v8 novos continuam suportados. O novo hook do store é apenas tático; persistência/receipts/economia não foram reescritos.
 
-## Commits e evidências já observadas
+**Resultados observados e CI**
 
-1. `d6b73d10`: corrige expectativa obsoleta de distribuição da Missão 14. CI **40629958472** concluída com sucesso, incluindo ambos os jobs; job principal com 5.178 testes, zero falhas/TODO.
-2. `08071cbc`: infraestrutura v8 experimental e primeiros testes de destruição filtrada.
-3. `9658585f`: backup SQLite com catálogos v8 e compatibilidade antiga.
-4. `1b925bb3`: isolamento de schema, candidatos, auditoria NPC, preservação e benchmark. CI **40631948178** aprovou a suíte de 5.203 testes, mas o job principal falhou posteriormente em `accept:engine`. O erro original ocultou o trecho relevante do TAP; isso não foi declarado como CI aprovada.
-5. `7e08350b`: amplia testes individuais para negação/replay, dono e fichas; pesquisa pública e validação estrita do efeito.
-6. `843a43ea`: cargas SQLite opcionais de 50/100 sessões incluindo v8 em 1v1 e preservando as cargas anteriores.
-7. `49fae2f3`: captura e publica TAP completo se a aceitação crítica falhar; preserva todas as verificações.
+d6b73d10 corrigiu a expectativa antiga da Missão 14: CI 40629958472 aprovada, 5.178 testes. O primeiro bloco opt-in teve CI 40633941602 aprovada em ambos os jobs, com 5.222 testes e soak prolongado.
 
-O resultado final de HEADs posteriores deve ser consultado no GitHub. A falha de aceitação acima precisa de diagnóstico efetivo; sucesso da suíte completa não a invalida. A etapa diagnóstica antecipada executa a aceitação antes das cargas/relatórios, mantendo também a execução final existente, para distinguir falha reproduzível de interferência posterior.
+A integração foi consolidada no commit **2fc28f01b664fdd474b1e42cca08fddb6237af36**: **CI 40638667535 aprovada em ambos os jobs, 5.290 testes, zero falhas/TODO**, tipagem, compilação, auditorias e SQLite. As oito cartas passaram a auditoria individual. Os 23 cenários REA passaram com uma cobertura parcial (I02). Cargas de 50/100 sessões ativaram todas as oito cartas; soak com oito versões completou 5.481 duelos em 601,3 segundos. Conferir sempre CI de HEADs posteriores, inclusive commits de consolidação.
 
-Atualização observada: o job principal **122631736846**, CI **40632450832**, commit `843a43ea`, terminou aprovado com **5.221 testes, zero falhas/TODO**, tipagem, aceitação e cargas SQLite de 50/100 sessões com oito versões. A falha anterior não reapareceu; sua causa continua não recuperada. Auditoria REA: 23 passaram, uma cobertura parcial (I02). Métricas e proveniência: `docs/evidence/mission15-validation.json`. Não confundir esse resultado com aprovação automática de commits posteriores; o novo teste de diagnóstico acrescenta uma asserção de teste à suíte seguinte.
+Falhas intermediárias foram corrigidas sem desabilitar testes: formatos de certificados continuaram JSON estrito para auditores anteriores; contratos de novos duelos passaram a v8, mantendo testes explícitos v7; fixtures de resposta receberam descarte disponível para Magic Jammer; contagem de versões da auditoria beta passou a oito; cobertura passou a receber a definição inteira, com filtros. Evidências completas em mission15-validation.json.
 
-## Retomada verificável
+Os diagnósticos de aceitação foram fortalecidos após uma falha intermitente cujo TAP foi truncado. Ela não reapareceu nas aceitações seguintes; sua causa permanece não recuperada. Não declarar esse episódio como resolvido causalmente sem evidência.
 
-1. Conferir HEAD remoto, PR e todos os jobs da CI mais recente. Não reenviar um tree baseado em SHA antigo. Identificar e preservar qualquer trabalho posterior.
-2. Ler `REA-MISSION-15.md`, `docs/evidence/mission15-card-research.json` e `mission15-preserved-baseline.json`.
-3. Se `accept:engine` falhar, ler o TAP completo nos logs e `artifacts/engine-acceptance-failure.tap`, identificar o teste concreto, acrescentar regressão e corrigir a causa. Não remover suítes, diminuir expectativas nem declarar a CI verde.
-4. Ambiente Node 22: `npm ci`, `npm run check`, `npm test`, `node scripts/verify-resolver-archives.cjs`, `node scripts/verify-catalog-revisions.cjs`, `node scripts/audit-mission15.cjs`, `npm run accept:engine`. Manter os demais comandos da CI.
-5. Executar `node scripts/stress-persisted-duels.cjs 50 2 --mixed --candidate-v8` e variante `100 2`; conferir oito versões, conservação/economia, duplicatas, reinício e SQLite íntegro. A v8 nesses cenários é 1v1; 2v2 permanece v7. Não confundir benchmark com Discord real.
-6. Consolidar a revisão regional individual e as divergências de datas importadas. A impressão OCG de Eradicating Aerosol foi recuperada posteriormente por fonte oficial indexada/calendário (22/07/1999, Vol.4); não repetir a busca já resolvida. Não alterar o histórico congelado.
-7. Implementar avaliação da IA para a nova operação, testar cada carta com suas interações, concluir a admissão real e criar revisão v8 por dados. A lista positiva de distribuição continua fechada. Uma futura atualização legítima dos arquivos correntes de metadados/certificados requer atualizar explicitamente a auditoria da Missão 15, preservando todos os 741 anteriores e os artefatos imutáveis.
-8. Somente depois promover a v8, com saves/ações pendentes e 2v2 cobertos. Avançar pelos grupos da Missão 13. Não criar outra versão de resolver para simples cadastro de efeitos já expressáveis.
+Evidências: REA-MISSION-15.md; mission15-card-research.json; mission15-individual-reviews.json; mission15-card-executions.json; mission15-preserved-baseline.json; mission15-v8-implementation-freeze.json; mission15-validation.json, todos sob docs ou docs/evidence.
 
-## Homologação e limites
+**Retomada autônoma**
 
-O fluxo existente aceita proprietário sozinho contra IA, depois convidados e beta fechado. Nenhum login real foi feito. Configuração isolada, autorização específica de SHA/alvos e credencial segura são necessárias antes do acesso real. Referência de hospedagem atual: 2 GB RAM, 100% CPU e 8 GB; nenhuma capacidade real de jogadores foi certificada.
+1. Conferir HEAD remoto, PR e ambos os jobs da CI mais recente. Preservar trabalho posterior. Se houver falha, ler TAP/log completos; não remover suítes nem relaxar regras para obter verde.
+2. Node 22: npm ci; npm run check; npm test; node scripts/verify-resolver-archives.cjs; todas as verificações de preservação; node scripts/verify-catalog-revisions.cjs; node scripts/audit-mission15.cjs; node scripts/audit-mechanical-batch15.cjs; npm run coverage:engine; npm run accept:engine. Manter o restante da CI.
+3. Conferir artifacts/certification-executions-mission15.json: oito linhas, fingerprints corretos, identity/mechanic/negative/replay/ai aprovados. Fixtures isolados nunca substituem esse manifesto de execução real.
+4. Reproduzir cargas: node scripts/stress-persisted-duels.cjs 50 2 --mixed --filtered-spells e variante 100. As cargas normais e o soak agora abrangem oito versões; 2v2 novo usa v8. Conferir ativações por carta, conservação, economia, duplicatas, reinício e integridade. Um contador zero não pode ser relatado como efeito exercitado.
+5. Não repetir pesquisa resolvida: as oito impressões pré-corte estão documentadas; Eradicating Aerosol foi confirmado no calendário oficial. Manter separadas disponibilidade TCG, OCG e união, e preservar divergências importadas.
+6. Prosseguir pela triagem da Missão 13: posição/duração e fontes contínuas dependentes, depois negação/busca/recrutamento/invocações. Reutilizar operações existentes e certificar individualmente. Não editar v8 para mudar semântica já congelada; simples novos dados compatíveis usam outra revisão de catálogo.
+7. Atualizar evidências, checkpoint e PR, mantendo rascunho. Não fazer merge/deploy/distribuição.
 
-Não houve merge, deploy, alterações de produção, distribuição de cartas, mudanças de layout/imagens nem reconstrução artificial dos dados ausentes de I02. Não encerrar a continuidade como catálogo completo: este ciclo entrega uma candidata técnica ainda não promovida.
+**Beta**
+
+Proprietário sozinho contra IA já é o fluxo inicial previsto; não exigir quatro humanos. Teste real depende de configuração isolada validada, SHA aprovado, aplicação/guild/canal de testes, IDs consentidos, bloqueios de produção e credencial por mecanismo seguro com autorização específica. Nenhum login real ocorreu. Referência Starter+: 2 GB, 100% CPU, 8 GB; não extrapolar os benchmarks para capacidade de 20–50 usuários no Discord.
+
+O catálogo clássico não está completo, localização integral permanece pendente e I02 continua limitado pela ausência legítima de dados históricos. Não fabricar registros para fechar esse caso.
