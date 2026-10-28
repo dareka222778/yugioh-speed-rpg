@@ -19,7 +19,9 @@ try{for(const sessions of [50,100]){
    const p=s.players.find(p=>p.id===actor),source='card'in action?[...p.hand,...p.monsters,...p.backrow].find(c=>c.uid===action.card):undefined;
    if(source&&Object.hasOwn(seen,source.id)&&(action.kind==='spell'||action.kind==='summon'))seen[source.id]++;
    const next=e.step(s,actor,action);
-   if(moves%7===0){assert.deepEqual(e.step(JSON.parse(JSON.stringify(s)),actor,action),next);restores++;}
+   // Saves are JSON: optional properties explicitly set to undefined are not
+   // persisted. Compare every persisted field, not transient property presence.
+   if(moves%7===0){assert.deepEqual(JSON.parse(JSON.stringify(e.step(JSON.parse(JSON.stringify(s)),actor,action))),JSON.parse(JSON.stringify(next)));restores++;}
    states[i]=next;assertDuelState(next);assert.deepEqual(identities(next),inventories[i]);
    latencies.push(performance.now()-at);moves++;if(next.phase==='finished')completed++;
    peakRSS=Math.max(peakRSS,process.memoryUsage.rss());

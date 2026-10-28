@@ -8,6 +8,7 @@ test('M16 health: consistent per-table counts and payload bytes without modifyin
  assert.deepEqual(result.tables,[{name:'games',rows:1,payloadBytes:9},{name:'receipts',rows:1,payloadBytes:8}]);
  assert.ok(result.files.wal>0);assert.ok(result.pageSize>0);assert.equal(result.totalBytes,result.files.main+result.files.wal+result.files.shm);
  assert.deepEqual(db.prepare('SELECT * FROM receipts').all(),before);assert.equal(result.warning,false);
+ assert.equal(typeof result.pageUsage.available,'boolean');if(result.pageUsage.available)assert.ok(result.pageUsage.objects.some(o=>o.name==='receipts'&&o.bytes>0));else assert.match(result.pageUsage.reason,/not physical/);
 }));
 test('M16 health: disk budget alerts are configurable and do not delete receipts',()=>fixture((db,file)=>{
  assert.equal(inspectDatabase(db,file,{budgetBytes:1}).budgetExceeded,true);
@@ -39,6 +40,8 @@ test('M16 health: uncommitted writer is not observed or committed by diagnostics
 }));
 test('M16 health: CLI opens existing database read-only and rejects missing/invalid arguments',()=>fixture((db,file)=>{
  assert.equal(main([file]).checkpoint,null);assert.equal(main([file,'--checkpoint-passive']).checkpoint.mode,'PASSIVE');
+ assert.equal(main([file,'--budget-bytes','1','--warning-ratio','0.5']).health.warning,true);
+ assert.throws(()=>main([file,'--budget-bytes','invalid']));assert.throws(()=>main([file,'--warning-ratio','2']));
  assert.throws(()=>main([file+'.missing']));assert.equal(fs.existsSync(file+'.missing'),false);
  assert.throws(()=>main([]));assert.throws(()=>main([file,'--vacuum']));
 }));

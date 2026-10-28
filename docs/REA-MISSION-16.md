@@ -20,4 +20,26 @@ A validação Node 22 completa, tipagem e integração com better-sqlite3 serão
 
 ## Continuidade
 
-Próximas famílias: ataque direto, modificadores por Cemitério e Tributo com dano fixo. Cannon Soldier já existe e não deve ser contabilizado novamente. Conferir efeitos secundários e as fontes completas antes de gerar certificados. Não editar os executáveis v1–v8 nem revisões imutáveis. Sem merge, deploy, acesso Discord ou distribuição.
+## Bloco de catálogo e IA
+
+Registro ampliado de **749 para 752 certificados**, sem mudança de engine-v8 ou dos 130 distribuíveis. Admissão individual: **Chaos Necromancer**, **Yellow Luster Shield** e **Buster Blader**. As definições e certificados foram acrescentados por dados; nova revisão `b84222a8334764cb6bc6f6f69c99eb7a4b3925b5dda2c754df8fd92a843e4c95`. As 749 definições anteriores, seus efeitos, certificados e revisões permanecem idênticos, assim como todos os executáveis históricos.
+
+Fontes oficiais completas e localizadas: [Necromante do Caos](https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5827&request_locale=pt), [Escudo do Brilho Amarelo](https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5161&request_locale=pt) e [Blader Notável](https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4983&request_locale=pt). Os links EN nas revisões documentam impressões TCG anteriores ao corte. Buster tem divergência entre a data importada e a impressão oficial PSV-050 (20/10/2002); o histórico importado não foi reescrito. Não se afirma que essas impressões sejam as primeiras mundiais.
+
+As três cartas reutilizam contagens e modificadores contínuos existentes. Foram executados sete cenários individuais por carta, com negação, movimento, recálculo e replay, além de regressões cruzadas: Equipamento/negação, imunidade a Magias, múltiplas cópias, controle diferente do dono e identidade oculta. Não foi criada operação nova nem resolver v9. Os cinco atacantes diretos antes triados, Cannon Soldier, Amazoness Archer e Shadow Ghoul já estavam certificados; não foram recontados.
+
+Uma falha concreta da IA foi reproduzida: a avaliação de invocação consultava estatísticas sem colocar o monstro prospectivo no campo, perdendo seu próprio efeito contínuo. Dois testes falham com a consulta anterior e passam com a correção (`mission16-ai-before-fix.json`). Agora a simulação inclui a futura presença, remove a carta da mão e coloca Tributos no Cemitério de seu dono. A partida original não é mutada. Há regressão específica para impedir contar Muka Muka ainda na mão.
+
+Também foram reproduzidas três brechas no validador de admissão: contínuos com custo/limite ignorável, operações passivas declaradas como ignição e gatilhos automáticos com política manual. O validador corrente agora os rejeita; todos os monstros já certificados continuam válidos. Isso limita novas admissões, sem editar os validadores ou executáveis congelados.
+
+`scripts/plan-mission16.cjs` gerou matriz dos **1.210 registros históricos ainda não certificados**, a partir do registro corrente. Categorias da Missão 13 são pistas sobrepostas; operações, custos e dependências não revisados permanecem explicitamente desconhecidos. Goblin Thief continua bloqueado: a sequência v8 verifica vitória antes da cura seguinte, e não foi demonstrada equivalência à resolução simultânea. Needle Ball precisa de custo em gatilho opcional, que o validador já rejeitava; Mooyan Curry exige escolha do jogador beneficiado. Não simplificamos esses efeitos para elevar o total.
+
+## Validação em andamento
+
+CI do bloco operacional `40702951689`: Node 22, suíte de 5.302 testes e cinco repetições críticas aprovadas; soak de 600 segundos aprovado. CI do catálogo `40705330464`: **5.328 testes, zero falhas/TODO**, tipagem e auditorias individuais aprovadas, mas o novo simulador falhou ao comparar propriedade opcional `battleFlip: undefined` com sua ausência após JSON. A comparação foi corrigida para confrontar todos os campos efetivamente persistidos, sem alterar a engine ou suprimir divergências reais. A nova CI precisa confirmar simulações completas.
+
+Localmente, o bloco final possui 33 testes de cartas/admissão e 12 operacionais aprovados. A CI completa do HEAD final, métricas das 50/100 sessões e a decomposição do crescimento SQLite ainda devem ser consolidadas. Não equiparar simulação interna à homologação Discord. Meta de 20–50 cartas novas não atingida neste bloco; o ganho certificado é três.
+
+## Próximas prioridades
+
+Concluir os resultados da CI e dos diagnósticos, depois isolar semânticas de resolução simultânea de LP, custo em gatilho e escolhas de jogador no próximo resolver quando necessário. Os demais sistemas do beta, localização integral e testes Discord reais continuam pendentes. Sem merge, deploy, acesso Discord ou distribuição.
