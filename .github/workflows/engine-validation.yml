@@ -24,6 +24,7 @@ jobs:
       - run: npm test
       - run: node scripts/audit-mechanical-batch21.cjs
       - run: node scripts/audit-ritual-batch22.cjs
+      - run: node scripts/audit-ritual-extensions22.cjs
       - run: node scripts/triage-mission21.cjs
       - run: node scripts/verify-catalog-revisions.cjs
       - run: node scripts/repeat-acceptance16.cjs 5
@@ -119,6 +120,8 @@ jobs:
             artifacts/certification-executions-mission16.json
             artifacts/certification-executions-mission21.json
             artifacts/certification-executions-mission22.json
+            artifacts/certification-executions-mission22-extensions.json
+            artifacts/mission22-extensions-admission.json
             artifacts/mission22-ritual-admission.json
             artifacts/mission21-admission.json
             artifacts/mission21-triage.json

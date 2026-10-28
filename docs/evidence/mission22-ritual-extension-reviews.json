@@ -1,0 +1,116 @@
+[
+  {
+    "id": "54351224",
+    "canonicalId": "9a5ec884-ea20-45ba-8355-6b6c330eb6d8",
+    "name": "Ritual Weapon",
+    "konamiId": 6139,
+    "reviewer": "M22 full official text and printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6139&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2004-05-27",
+      "set": "SOD-JP048",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6139&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "f35648b3f7b1b0db971a1e12860aafab2c41bc76056618cd47a50506a8a0cb4a",
+    "mechanicalDefinition": {
+      "kind": "equip",
+      "monsterType": "ritual",
+      "maxLevel": 6,
+      "atk": 1500,
+      "def": 1500
+    },
+    "semanticNotes": "Equipe apenas a um monstro de Ritual de Nível 6 ou menor: ele ganha 1500 ATK/DEF.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "59820352",
+    "canonicalId": "6eb6b070-68a1-4d9b-a6e5-ff93af0309fd",
+    "name": "Earth Chant",
+    "konamiId": 5910,
+    "reviewer": "M22 full official text and printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5910&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2004-03-01",
+      "set": "IOC-099",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5910&request_locale=en",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "7f8816d43cab1b3fcece6d293cee72c10b80641749610dc57fe598b1ad151cf7",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "attribute": "EARTH",
+        "exact": true
+      }
+    },
+    "semanticNotes": "Invoque por Ritual da mão um monstro de TERRA, usando Tributos da mão/campo com Níveis exatamente iguais.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "69035382",
+    "canonicalId": "f3a19b2d-f77d-4674-afac-360d8a474a25",
+    "name": "Contract with the Abyss",
+    "konamiId": 5784,
+    "reviewer": "M22 full official text and printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5784&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2003-12-01",
+      "set": "DCR-086",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5784&request_locale=en",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "0bf90c0a1296964faff6dee03bc96ca4bef0e7f00d62ff31e88c304bb6064baf",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "attribute": "DARK",
+        "exact": true
+      }
+    },
+    "semanticNotes": "Invoque por Ritual da mão um monstro de TREVAS, usando Tributos da mão/campo com Níveis exatamente iguais.",
+    "distributionAuthorized": false
+  }
+]

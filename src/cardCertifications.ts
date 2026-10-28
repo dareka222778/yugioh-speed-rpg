@@ -4905,4 +4905,24 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "54351224": {
+    "fingerprint": "f35648b3f7b1b0db971a1e12860aafab2c41bc76056618cd47a50506a8a0cb4a",
+    "suites": [
+      "tests/ritualExtensions22.test.cjs"
+    ]
+  },
+  "59820352": {
+    "fingerprint": "7f8816d43cab1b3fcece6d293cee72c10b80641749610dc57fe598b1ad151cf7",
+    "suites": [
+      "tests/ritualExtensions22.test.cjs"
+    ]
+  },
+  "69035382": {
+    "fingerprint": "0bf90c0a1296964faff6dee03bc96ca4bef0e7f00d62ff31e88c304bb6064baf",
+    "suites": [
+      "tests/ritualExtensions22.test.cjs"
+    ]
+  }
+
 };

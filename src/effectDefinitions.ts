@@ -1,3 +1,4 @@
+import {ritualExtensionEffects22} from './ritualExtensions22';
 import {ritualEffects22} from './ritualBatch22';
 import {worldNormalEffects16} from './worldNormalBatch16';
 import {mechanicalEffects20} from './mechanicalBatch20';
@@ -29,8 +30,9 @@ export type Effect=
  |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'bottomlessTrapHole'|'sakuretsuArmor'|'mirrorForce'}
  |{kind:'heal'|'burn';amount:number}
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean}
- |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion';maxLevel?:number;atk:number;def:number;count?:CountFormula};
+ |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula};
 export const effectDefinitions:Record<string,Effect>={
+ ...ritualExtensionEffects22,
  ...ritualEffects22,
  ...mechanicalEffects20,
  ...mechanicalEffects14,
@@ -108,7 +110,7 @@ export function effectDefinitionIssues(value:unknown):string[]{
   if(e.races!==undefined&&(!Array.isArray(e.races)||e.races.some(x=>typeof x!=='string'||!x)))return ['invalid-race-filter'];
   if(e.kind==='equip'&&e.attribute!==undefined&&(typeof e.attribute!=='string'||!e.attribute))return ['invalid-attribute-filter'];
   if(e.kind==='equip'&&e.names!==undefined&&(!Array.isArray(e.names)||!e.names.length||e.names.some(x=>typeof x!=='string'||!x)))return ['invalid-name-filter'];
-  if(e.kind==='equip'&&e.monsterType!==undefined&&e.monsterType!=='fusion')return ['invalid-monster-category-filter'];
+  if(e.kind==='equip'&&e.monsterType!==undefined&&!['fusion','ritual'].includes(e.monsterType))return ['invalid-monster-category-filter'];
   if(e.kind==='equip'&&e.maxLevel!==undefined&&(!Number.isSafeInteger(e.maxLevel)||e.maxLevel<1||e.maxLevel>12))return ['invalid-level-filter'];
   if(e.kind==='field'&&e.penaltyRaces!==undefined&&(!Array.isArray(e.penaltyRaces)||e.penaltyRaces.some(x=>typeof x!=='string'||!x)))return ['invalid-penalty-filter'];
   if(e.kind==='equip'&&e.count&&countFormulaIssues(e.count).length)return ['invalid-count-formula'];
