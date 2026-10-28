@@ -32,7 +32,6 @@ function flipUtility(s:DuelState,id:string,cardId:string){
 }
 export function tacticalSummon(s:DuelState,id:string,actions:Action[]):Action|undefined{
  const p=s.players.find(p=>p.id===id)!,op=s.players.find(p=>p.id!==id)!;
- const threat=Math.max(0,...op.monsters.filter(m=>m.faceUp&&m.position==='atk').map(m=>atk(m,s)));
  const unknownDefenders=op.monsters.filter(m=>!m.faceUp).length;
  const candidates=actions.filter((a):a is Extract<Action,{kind:'summon'}>=>a.kind==='summon').map(action=>{
   const c=p.hand.find(c=>c.uid===action.card)!,info=getCard(c.id)!;
@@ -47,6 +46,7 @@ export function tacticalSummon(s:DuelState,id:string,actions:Action[]):Action|un
    grave:[...player.grave,...tributes.filter(m=>(m.owner??actor)===index).map(m=>({uid:m.uid,id:m.id,owner:m.owner??actor}))]
   }))} as DuelState;
   const attack=atk(hypothetical,preview),defense=def(hypothetical,preview),flip=getMonsterEffect(c.id)?.trigger==='flip'?Math.max(14,flipUtility(s,id,c.id)):0;
+  const threat=Math.max(0,...preview.players[1-actor].monsters.filter(m=>m.faceUp&&m.position==='atk').map(m=>atk(m,preview)));
   const sacrifice=action.tributes.reduce((n,uid)=>{const m=p.monsters.find(m=>m.uid===uid)!;return n+Math.max(atk(m,s),def(m,s))/100+(getMonsterEffect(m.id)?5:0);},0);
   const danger=attack<threat;
   // Face-down opponents are not free direct attacks. Evaluate an unknown wall
