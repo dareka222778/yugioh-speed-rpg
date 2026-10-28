@@ -79,7 +79,7 @@ function banishDestroyedMonster(s:DuelState,uid:string):boolean{
  cleanEquips(s);return true;
 }
 
-function finish(s:DuelState,winner:number|null,reason:string){s.ritual=undefined;closeStandby(s);s.phase='finished';s.damageStep=undefined;s.triggerBuild=undefined;s.chainRoot=undefined;s.choice=undefined;s.handFlow=undefined;s.graveTriggers=[];s.summonTriggers=[];s.battleFlip=undefined;s.winner=winner===null?null:s.players[winner].id;s.reason=reason;note(s,`${winner===null?'Empate':`${s.players[winner].name} venceu`}: ${reason}.`);}
+function finish(s:DuelState,winner:number|null,reason:string){delete s.ritual;closeStandby(s);s.phase='finished';s.damageStep=undefined;s.triggerBuild=undefined;s.chainRoot=undefined;s.choice=undefined;s.handFlow=undefined;s.graveTriggers=[];s.summonTriggers=[];s.battleFlip=undefined;s.winner=winner===null?null:s.players[winner].id;s.reason=reason;note(s,`${winner===null?'Empate':`${s.players[winner].name} venceu`}: ${reason}.`);}
 function checkLP(s:DuelState){if(s.players.every(p=>p.lp<=0))finish(s,null,'pontos de vida');else for(let i=0;i<2;i++)if(s.players[i].lp<=0)finish(s,1-i,'pontos de vida');}
 function combos<T>(values:T[],n:number):T[][]{if(n===0)return [[]];return values.flatMap((v,i)=>combos(values.slice(i+1),n-1).map(rest=>[v,...rest]));}
 /** Only activation-time targets may be chosen. Resolution must never retarget. */
@@ -636,7 +636,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    if(result){const f=s.ritual!,ref=p.hand.find(c=>c.uid===result.uid)!;
     for(const uid of f.materials){const i=p.hand.findIndex(c=>c.uid===uid);if(i>=0)p.grave.push(...p.hand.splice(i,1));else graveMonster(s,uid,false,'tribute');}
     p.hand=p.hand.filter(c=>c.uid!==ref.uid);p.monsters.push({...ref,properlySummoned:true,owner:index,faceUp:true,position:action.target==='__ritual_def__'?'def':'atk',entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});
-    s.ritual=undefined;s.choice=undefined;note(s,'Invocação-Ritual concluída.');response(s,{kind:'specialSummon',actor:index,card:ref.uid,id:ref.id},'main');
+    delete s.ritual;delete s.choice;note(s,'Invocação-Ritual concluída.');response(s,{kind:'specialSummon',actor:index,card:ref.uid,id:ref.id},'main');
    }
   }else if(s.choice?.source==='standby'){chooseStandby(s,index,action.target);}
   else if(s.choice?.source==='triggerOptional'){
