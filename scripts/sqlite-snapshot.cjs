@@ -1,6 +1,11 @@
 /** Offline operator utility: never opens the application or migrates a database. */
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+// Databases can be hundreds of MiB: never allocate the whole snapshot just to
+// hash it. The same SHA-256 manifest remains compatible with older backups.
+function hash(file){const fd=fs.openSync(file,'r'),digest=crypto.createHash('sha256'),buffer=Buffer.allocUnsafe(64*1024);
+ try{let count;while((count=fs.readSync(fd,buffer,0,buffer.length,null))>0)digest.update(buffer.subarray(0,count));return digest.digest('hex');}
+ finally{fs.closeSync(fd);}
+}
 function catalogArtifacts(folder,write=false,versions=['engine-v7']){
  if(!Array.isArray(versions)||!versions.length||new Set(versions).size!==versions.length||versions.some(v=>!['engine-v7','engine-v8'].includes(v)))throw Error('Invalid catalog versions');
  const artifacts={};for(const version of versions){
@@ -16,4 +21,4 @@ async function snapshot(source,parent){const Database=require('better-sqlite3'),
 function verify(folder){const root=path.resolve(folder),m=JSON.parse(fs.readFileSync(path.join(root,'manifest.json'),'utf8'));if(m.format!==1||m.database!=='snapshot.sqlite'||!/^[a-f0-9]{64}$/.test(m.sha256))throw Error('Invalid snapshot manifest');if(m.catalogArtifacts!==undefined){const actual=catalogArtifacts(root,false,m.catalogVersions??['engine-v7']);if(JSON.stringify(actual)!==JSON.stringify(m.catalogArtifacts))throw Error('Catalog artifact SHA-256 mismatch');}const file=path.join(root,m.database);if(hash(file)!==m.sha256)throw Error('Snapshot SHA-256 mismatch');return {...check(file),manifest:m};}
 function restore(folder,destination){const result=verify(folder),target=path.resolve(destination);for(const suffix of ['','-wal','-shm'])if(fs.existsSync(target+suffix))throw Error('Destination or SQLite sidecar already exists; overwrite forbidden');fs.copyFileSync(path.join(path.resolve(folder),'snapshot.sqlite'),target,fs.constants.COPYFILE_EXCL);check(target);return {destination:target,...result};}
 if(require.main===module){const [operation,a,b]=process.argv.slice(2);(async()=>{if(operation==='snapshot'&&a&&b)return snapshot(a,b);if(operation==='verify'&&a)return verify(a);if(operation==='restore'&&a&&b)return restore(a,b);throw Error('Use snapshot SOURCE EXISTING_PARENT | verify FOLDER | restore FOLDER NEW_DESTINATION');})().then(r=>console.log(JSON.stringify(r,null,2))).catch(e=>{console.error(e.message);process.exitCode=1;});}
-module.exports={snapshot,verify,restore};
+module.exports={snapshot,verify,restore,hash};

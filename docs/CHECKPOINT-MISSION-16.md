@@ -10,7 +10,7 @@ Retomar:
 
 1. Conferir HEAD remoto e CI, preservando qualquer mudança posterior. Se falhar, corrigir a causa; não relaxar testes.
 2. Ler relatório desta missão e as evidências da Missão 15. Conferir `artifacts/acceptance16/report.json` e `artifacts/sqlite-health16-soak.json` nos dois jobs.
-3. Continuar a revisão de Rainbow Flower, Leghul, Ooguchi, Mystic Lamp, Queen's Double, Shadow Ghoul, Chaos Necromancer, Buster Blader, Amazoness Archer, Yellow Luster Shield e Goblin Thief. Ainda não certificados. Cannon Soldier já existe. Não repetir contabilização.
+3. Conferir a matriz e as três admissões descritas abaixo. Rainbow Flower, Leghul, Ooguchi, Mystic Lamp, Queen's Double, Shadow Ghoul, Amazoness Archer e Cannon Soldier já existiam. Não repetir contabilização. Goblin Thief continua bloqueado.
 4. Usar operações v8 existentes quando semanticamente equivalentes, acrescentando revisão de catálogo por dados. Novas semânticas exigem resolver isolado. Testar negação, movimento, múltiplas fontes, custos, replay e IA conforme aplicável.
 5. Executar Node 22: npm ci, npm run check, npm test, todas as auditorias/preservações e CI completa. Localmente `node --test tests/sqliteHealth16.test.cjs tests/repeatAcceptance16.test.cjs` não depende do bot ou credenciais.
 6. Atualizar relatório/checkpoint/evidências e manter PR rascunho. Sem merge, deploy, distribuição ou acesso Discord real.
@@ -26,3 +26,9 @@ Alterações seguintes: três guardas de admissão contra combinações não exe
 Conferir a CI mais recente antes de iniciar outro lote. Não há suporte comprovado a custos de gatilhos, escolha de jogador ou LP simultâneos só porque o texto usa operações familiares. Não alterar v1–v8; as revisões antigas e os 749 certificados anteriores são comparados integralmente.
 
 Beta real e capacidade de 20–50 jogadores continuam não homologados. I02 mantém a limitação histórica legítima.
+
+## Quarto bloco
+
+SHA-256 de snapshots passou a usar leitura limitada a 64 KiB, sem mudar hashes/formato. Testes `snapshotHash16` verificam arquivos binários, ausência de leitura integral e fechamento após I/O inválido. São **48 testes novos locais aprovados** no total; TAP completo persistido em `docs/evidence/mission16-local-tests.tap`.
+
+CI `40706485447` do commit `f7a8d5912669908f3d5e0ff16dd065364ee7cd96` já passou a simulação corrigida de 50/100 sessões; aguardar os resultados completos. A próxima CI incluirá a otimização do hash. Consolidar métricas e HEAD final neste documento após verificar ambos os jobs.

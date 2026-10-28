@@ -40,6 +40,24 @@ CI do bloco operacional `40702951689`: Node 22, suíte de 5.302 testes e cinco r
 
 Localmente, o bloco final possui 33 testes de cartas/admissão e 12 operacionais aprovados. A CI completa do HEAD final, métricas das 50/100 sessões e a decomposição do crescimento SQLite ainda devem ser consolidadas. Não equiparar simulação interna à homologação Discord. Meta de 20–50 cartas novas não atingida neste bloco; o ganho certificado é três.
 
+## Memória de backup
+
+O utilitário existente `scripts/sqlite-snapshot.cjs` alocava todo o banco em `readFileSync` apenas para calcular SHA-256. A leitura agora usa blocos de **64 KiB**, mantém o formato dos manifestos e fecha o descritor mesmo com erro de I/O. Três testes verificam compatibilidade binária, limites de leitura e falha injetada. Isso limita o buffer do hash; não significa que todo o processo de backup tenha consumo fixo de 64 KiB.
+
+O conjunto novo completo executado localmente tem **48 testes aprovados, zero falhas/TODO** (`docs/evidence/mission16-local-tests.tap`). A compatibilidade do backup e da restauração com SQLite nativo continua coberta pelas suítes existentes na CI.
+
+Operação isolada, sem login no bot:
+
+```text
+node scripts/sqlite-health.cjs <banco-existente> --budget-bytes 8589934592 --warning-ratio 0.8
+node scripts/sqlite-health.cjs <banco-existente> --checkpoint-passive
+node scripts/sqlite-snapshot.cjs snapshot <origem> <diretorio-pai-existente>
+node scripts/sqlite-snapshot.cjs verify <pasta-do-snapshot>
+node scripts/sqlite-snapshot.cjs restore <pasta-do-snapshot> <destino-novo>
+```
+
+Usar ambientes isolados até autorização operacional. Restauração rejeita sobrescrever arquivo ou sidecars existentes. Um arquivo principal copiado sem os dados confirmados do WAL não substitui a API de backup. Não ativamos retenção destrutiva; alertas se referem ao orçamento SQLite configurado, que não inclui backups, assets ou o restante do disco. `dbstat`, quando disponível, diferencia páginas de tabelas/índices da estimativa de payload; sua ausência é explicitada.
+
 ## Próximas prioridades
 
 Concluir os resultados da CI e dos diagnósticos, depois isolar semânticas de resolução simultânea de LP, custo em gatilho e escolhas de jogador no próximo resolver quando necessário. Os demais sistemas do beta, localização integral e testes Discord reais continuam pendentes. Sem merge, deploy, acesso Discord ou distribuição.
