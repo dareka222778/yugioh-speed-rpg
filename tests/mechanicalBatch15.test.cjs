@@ -13,7 +13,8 @@ function activate(s){const a=e.legalActions(s,'a').find(a=>a.kind==='spell'&&a.c
 function settle(s){for(let n=0;s.phase==='response';n++){assert.ok(n<20);s=e.step(s,s.players[e.decisionPlayer(s)].id,{kind:'pass'});}return s;}
 for(const c of cards){
  test(`M15 ${c.id} identity: ${c.englishName} is individually registered, fingerprinted and blocked for distribution`,()=>{
-  const h=history.find(h=>h.passwords?.includes(c.id));assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(engine.getPlayableCard(c.id).id,c.id);assert.equal(cardDistributionAllowed(c.id),false);mark(c.id,'identity');
+  const h=history.find(h=>h.passwords?.includes(c.id));assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(engine.getPlayableCard(c.id).id,c.id);assert.equal(cardDistributionAllowed(c.id),false);
+  const initial=require('../catalog/engine-v8/manifest.json').revisions[0].id;assert.equal(engine.getPlayableCard(c.id,initial),undefined);assert.equal(e.getArchivedDefinitionResolver('engine-v7').getPlayableCard(c.id),undefined);mark(c.id,'identity');
  });
  test(`M15 ${c.id} mechanic: complete Normal Spell effect resolves through the committed catalog`,()=>{
   const done=settle(activate(game(c)));assert.equal(done.players[1].monsters.length,0);assert.ok(done.players[1].grave.some(x=>x.uid==='victim'));assert.ok(done.players[0].grave.some(x=>x.uid==='new'));assert.equal(done.players[0].lp,4000);mark(c.id,'mechanic');
@@ -22,7 +23,7 @@ for(const c of cards){
   const s=game(c);s.players[1].hand=[{uid:'cost',id:'91152256'}];s.players[1].backrow=[{uid:'jam',id:'77414722',faceUp:false,setTurn:0}];let p=activate(s);const a=e.legalActions(p,'b').find(a=>a.kind==='trap'&&a.card==='jam');assert.ok(a);p=e.step(p,'b',a);const done=settle(p);assert.equal(done.players[1].monsters.length,1);assert.ok(done.players[1].grave.some(x=>x.uid==='cost'));mark(c.id,'negative');
  });
  test(`M15 ${c.id} replay: committed revision restores a pending command via the real dispatcher`,()=>{
-  const s=game(c);s.players[1].backrow=[{uid:'jam',id:'77414722',faceUp:false,setTurn:0}];const pending=activate(s);assert.equal(pending.phase,'response');const raw=JSON.stringify(pending);assert.deepEqual(settle(pending),settle(JSON.parse(raw)));assert.equal(JSON.stringify(pending),raw);mark(c.id,'replay');
+  const s=game(c);s.players[1].hand=[{uid:'held-response-cost',id:'91152256'}];s.players[1].backrow=[{uid:'jam',id:'77414722',faceUp:false,setTurn:0}];const pending=activate(s);assert.equal(pending.phase,'response');const raw=JSON.stringify(pending);assert.deepEqual(settle(pending),settle(JSON.parse(raw)));assert.equal(JSON.stringify(pending),raw);mark(c.id,'replay');
  });
  test(`M15 ${c.id} AI: casts beneficial removal and rejects an exclusively harmful destruction`,()=>{
   const good=game(c),bad=game(c,0);assert.equal(chooseNPC(good,'a').kind,'spell');assert.equal(chooseNPC(good,'a').card,'new');const action=chooseNPC(bad,'a');assert.equal(action?.kind==='spell'&&action.card==='new',false);mark(c.id,'ai');
