@@ -67,7 +67,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
  const destruction=getDestructionModel(e);
  if(destruction){
   executeDestruction(s,a.actor,destruction,a.target,{...service,kind:'spell'});
-  service.note(s,e.kind==='destroyFiltered'?'Filtered destruction resolved.':e.kind==='darkHole'?'Buraco Negro destruiu os monstros do campo.':'Raigeki destruiu os monstros do adversário.');return true;
+  service.note(s,e.kind==='destroyFiltered'?'A destruição filtrada foi resolvida.':e.kind==='darkHole'?'Buraco Negro destruiu os monstros do campo.':'Raigeki destruiu os monstros do adversário.');return true;
  }
  if(resolveSpellException(s,a,service))return true;
  const operations=economicOperations(e);

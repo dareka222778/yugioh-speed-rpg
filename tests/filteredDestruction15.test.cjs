@@ -34,6 +34,19 @@ for(const [id,,name,race]of cases)test('v8 candidate: '+name+' selects its compl
  const result=settle(activate(s));assert.deepEqual(result.players[0].monsters.map(m=>m.uid),['hidden']);assert.deepEqual(result.players[1].monsters.map(m=>m.uid),['other']);
  assert.ok(result.players[0].grave.some(c=>c.uid==='own'));assert.ok(result.players[1].grave.some(c=>c.uid==='enemy'));assert.equal(result.players[0].lp,4000);assert.equal(result.players[1].lp,4000);
 }));
+function responsive(id,race){const s=game(id);s.players[1].monsters=[mon('victim',ofRace(race??'Warrior'),1)];
+ s.players[1].backrow=[{uid:'jam',id:'77414722',faceUp:false,setTurn:0}];s.players[1].hand=[{uid:'counter-cost',id:'91152256'}];
+ if(!race)s.players[0].backrow=[{uid:'equip',id:'56747793',faceUp:true,resolved:true,setTurn:0,equippedTo:'victim'}];return s;}
+for(const [id,,name,race]of cases){
+ test('individual v8 fixture: '+name+' restores a pending response and replays identically',()=>run(()=>{
+  const pending=activate(responsive(id,race));assert.equal(pending.phase,'response');const original=JSON.stringify(pending),copy=JSON.parse(original);
+  const a=settle(pending),b=settle(copy);assert.deepEqual(a,b);assert.equal(JSON.stringify(pending),original);assert.equal(a.players[1].monsters.length,0);assert.equal(a.players[0].lp,4000);assert.equal(a.players[1].lp,4000);
+ }));
+ test('individual v8 fixture: '+name+' is wholly prevented by activation negation',()=>run(()=>{
+  let pending=activate(responsive(id,race));const action=e.legalActions(pending,'b').find(a=>a.kind==='trap'&&a.card==='jam');assert.ok(action);
+  pending=e.step(pending,'b',action);const done=settle(pending);assert.equal(done.players[1].monsters[0].uid,'victim');assert.ok(done.players[1].grave.some(c=>c.uid==='counter-cost'));assert.equal(done.players[1].lp,4000);
+ }));
+}
 test('v8 candidate: absent, hidden and nonmatching monsters do not enable activation',()=>run(()=>{
  const s=game('21323861');s.players[1].monsters=[mon('hidden',ofRace('Machine'),1,false),mon('other',ofRace('Dragon'),1)];
  assert.equal(e.legalActions(s,'a').some(a=>a.kind==='spell'&&a.card==='cast'),false);
@@ -93,3 +106,13 @@ test('v8 candidate: catalog runtime rejects v7 payloads and neither version acce
  const loader=require('../dist/catalogArchive');assert.throws(()=>loader.getCatalogData(seven.current,'engine-v8'));
  assert.throws(()=>loader.getCatalogData(manifest.current,'engine-v7'));
 });
+test('v8 candidate: filtered destruction returns a stolen monster to its original owner graveyard',()=>run(()=>{
+ const s=game('90873992');s.players[0].monsters=[{...mon('stolen',ofRace('Warrior'),1),returnTo:1,returnTurn:s.turn}];
+ const done=settle(activate(s));assert.equal(done.players[0].monsters.length,0);assert.ok(done.players[1].grave.some(c=>c.uid==='stolen'));assert.equal(done.players[0].grave.some(c=>c.uid==='stolen'),false);
+}));
+test('v8 candidate: Eternal Rest removes equipped tokens without manufacturing a physical graveyard card',()=>run(()=>{
+ const s=game('95051344'),{createTokenGroup}=require('../dist/resolvers/v8/tokens'),[token]=createTokenGroup(s,1,1);
+ s.players[0].backrow=[{uid:'equip',id:'56747793',faceUp:true,resolved:true,setTurn:0,equippedTo:token.uid}];
+ const done=settle(activate(s));assert.equal(done.players[1].monsters.length,0);assert.equal(done.players.some(p=>p.grave.some(c=>c.uid===token.uid)),false);assert.ok(done.tokenLedger.events.some(event=>event.kind==='removed'&&event.uid===token.uid&&event.cause==='destroy'));
+ assert.ok(done.players[0].grave.some(c=>c.uid==='equip'));
+}));

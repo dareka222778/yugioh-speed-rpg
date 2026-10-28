@@ -45,7 +45,7 @@
     },
     {
       "path": "classicEffects.ts",
-      "sha256": "235afb915ea54e0efe460c167099291895fa41f25903230424728fa15caa4eea"
+      "sha256": "93f193b34f843af75b7c0dc673b499dc1fd9651108c2c73f4b53a3321a39cd6d"
     },
     {
       "path": "classicEngineCards.ts",
@@ -89,7 +89,7 @@
     },
     {
       "path": "effectDefinitions.ts",
-      "sha256": "0b47ff063c7e8e049ff673a5902a7273fe6306ed965d90efc78efd6071acec17"
+      "sha256": "6f7c3648d44c3d6ccb79266cfc0703a819e5354d0167b271c2525fd6ec7d60e2"
     },
     {
       "path": "effectModels.ts",

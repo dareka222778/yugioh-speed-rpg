@@ -76,7 +76,7 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
- if(e?.kind==='destroyFiltered')return destructionFilterIssues(e.filter);
+ if(e?.kind==='destroyFiltered')return Object.keys(e).some(k=>!['kind','filter'].includes(k))?['unsupported-destruction-field']:destructionFilterIssues(e.filter);
  if(e?.kind==='continuous')return [...continuousRuleIssues(e.rules),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
  if(e?.kind==='temporaryModifier')return Number.isSafeInteger(e.atk)&&Number.isSafeInteger(e.def)?[]:['invalid-temporary-modifier'];
  if(e?.kind==='destroySpellTraps')return ['all','opponent'].includes(e.scope)?[]:['invalid-spell-trap-scope'];
