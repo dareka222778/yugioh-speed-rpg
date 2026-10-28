@@ -1,0 +1,24 @@
+[
+  {
+    "id": "68638985",
+    "fingerprint": "61f1b3251f284e61ff22dff8390d847465a6b23962504586645e16a06f9195f3",
+    "passed": [
+      "historical identification, normal type and primary reference",
+      "mechanical fingerprint and certification do not release card to the shop",
+      "new current duel can summon, read true stats and conserve the same UID",
+      "deterministic replay does not reinterpret historical card as an effect"
+    ],
+    "failed": []
+  },
+  {
+    "id": "14898066",
+    "fingerprint": "5a842a2e1f403df8948e385d1b74771a3ce9e77b7df19b1bde05e076acaa12c8",
+    "passed": [
+      "historical identification, normal type and primary reference",
+      "mechanical fingerprint and certification do not release card to the shop",
+      "new current duel can summon, read true stats and conserve the same UID",
+      "deterministic replay does not reinterpret historical card as an effect"
+    ],
+    "failed": []
+  }
+]
