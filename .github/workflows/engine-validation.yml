@@ -23,6 +23,7 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: node scripts/verify-catalog-revisions.cjs
+      - run: node scripts/repeat-acceptance16.cjs 5
       - run: node scripts/audit-mission15.cjs
       - run: node scripts/audit-mechanical-batch15.cjs
       - name: Diagnose critical acceptance before load and generated reports
@@ -106,6 +107,8 @@ jobs:
             artifacts/certification-executions-mission15.json
             artifacts/mission15-mechanical-audit.json
             artifacts/engine-acceptance-failure.tap
+            artifacts/acceptance16
+            artifacts/sqlite-health16-soak.json
             artifacts/mission8-next-families.json
             artifacts/beta-simulation-mission7.json
           if-no-files-found: ignore
