@@ -1,0 +1,762 @@
+{
+  "format": 1,
+  "batch": "combat29",
+  "cards": [
+    {
+      "id": "21015833",
+      "konamiId": 5137,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5137&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "eb07b9c4f849086a06a3296aa8e370417da3c70e8ed70e0b8e9a87a210eb3725",
+      "htmlSHA256": "111caed2a96fa2f2cd3a40f9732470695981dc97e28f0f4d6c807c65af8c4c0e",
+      "verifiedPrinting": {
+        "date": "2002-10-20",
+        "code": "PSV-086"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5137&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "attacks",
+            "maximum": 2
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "82035781",
+      "konamiId": 5923,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5923&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "25007f5711a26ba56b5ac89119be58a3cbb69bdfd695eaaa774195017d7ea594",
+      "htmlSHA256": "edd2f0590820914bfc116e5c2ea43f7cb3db1f792d6d502eff2f05a27b11c463",
+      "verifiedPrinting": {
+        "date": "2004-02-05",
+        "code": "EX3-003"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5923&request_locale=ja",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "attacks",
+            "maximum": 2
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "79870141",
+      "konamiId": 5142,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5142&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "36491699e46e07a4bf6ecd12f5a84cece60ce039fbbd8cd68466d2dd062c44ec",
+      "htmlSHA256": "d124e31d9cc830c083a284aad38bfad8aba1477494f4575ba8192546aebdbdee",
+      "verifiedPrinting": {
+        "date": "2002-10-20",
+        "code": "PSV-091"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5142&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "piercing"
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "65287621",
+      "konamiId": 5887,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5887&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "36491699e46e07a4bf6ecd12f5a84cece60ce039fbbd8cd68466d2dd062c44ec",
+      "htmlSHA256": "40c8e5b4e4feb951f246ac72875fde6cdf6b757d830a2a3617fb077796a91c2c",
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "code": "IOC-073"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5887&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "piercing"
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "63695531",
+      "konamiId": 5512,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5512&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "fd1cf9092d8372ed590fc9ed7d7f7bf8a6c9d6ad61765bcf24f826f968c97165",
+      "htmlSHA256": "e741f7f76e687d8077272a66dd0824665fd37cbc1511822045e89e56c87f26db",
+      "verifiedPrinting": {
+        "date": "2003-07-18",
+        "code": "PGD-062"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5512&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "piercing"
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "54178050",
+      "konamiId": 5347,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5347&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "f46b2cfc6aac1ae025fbfa2fcf1303b4ea856f74dc6440b056188d3f658e5b69",
+      "htmlSHA256": "a960b26701b4a71bda87e038ede0b329f5753ebfcf0e130bc32175fca1d9a615",
+      "verifiedPrinting": {
+        "date": "2003-06-06",
+        "code": "LOD-048"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5347&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "controller": "source",
+            "races": [
+              "Dragon"
+            ]
+          },
+          "rule": {
+            "kind": "piercing"
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "55821894",
+      "konamiId": 5295,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5295&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "fedcad08ea728a03a298ffd43f4891e55f9563d5bf0f5983883e8e112d287e73",
+      "htmlSHA256": "5e7898c52b7c34efbb5c29247f051eb7e7542cb30b0f9009589986a73f3a97f4",
+      "verifiedPrinting": {
+        "date": "2003-10-10",
+        "code": "MFC-060"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5295&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "damage",
+            "mode": "zero",
+            "when": "battle"
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "56433456",
+      "konamiId": 5982,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5982&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "c053f0e88c5e9be8af8b22882b26dcd00b16de87b42f6c93facb7c46dedfdfaa",
+      "htmlSHA256": "4a0dfbc583a5af46c85ebacc2c1754bfd35b3b69ea36d3571abd09ebda824474",
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "code": "AST-042"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5982&request_locale=en",
+      "mechanics": {
+        "kind": "field",
+        "races": [],
+        "atk": 0,
+        "def": 0,
+        "rules": [
+          {
+            "kind": "combat",
+            "filter": {
+              "races": [
+                "Fairy"
+              ]
+            },
+            "rule": {
+              "kind": "damage",
+              "mode": "zero",
+              "when": "battle"
+            }
+          }
+        ]
+      },
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "50823978",
+      "konamiId": 5968,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5968&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "711dbc5200f955ebd9b0c1675bcc60519160cb3512152593d8c5a1ca85bbeec1",
+      "htmlSHA256": "6d8303faa795eaa4dcd1a093ad4285e517ebb4d63529bab82b9d018b5f49fe05",
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "code": "AST-026"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5968&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "damage",
+            "mode": "double",
+            "when": "direct"
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "31812496",
+      "konamiId": 4754,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4754&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "4a611815162701de7371d9be418bdce5013bddd386990c813a0ced23786f68bc",
+      "htmlSHA256": "9e46316b4d8bd8eaa878fec3ad4811aae175c0a0abfcb4d62d7a31f6aefaec73",
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "code": "AST-014"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4754&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "damage",
+            "mode": "double",
+            "when": "defending"
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "52077741",
+      "konamiId": 5244,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5244&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "af1a10f57d32c14cf505c55f2a749e553896d78bb37e1fd70592a701d49b1ec1",
+      "htmlSHA256": "77068fd1a434ec63da51e1a5173e102f7b9be789128cf4598ea67c033f30da07",
+      "verifiedPrinting": {
+        "date": "2004-09-01",
+        "code": "CT1-EN006"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5244&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "indestructible",
+            "opponentAtkAtLeast": 1900
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "60519422",
+      "konamiId": 5612,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5612&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "6934ec6ffd735af4ddb050bcea2fc162fd5cc7a6479310cb78249bdbfbba007e",
+      "htmlSHA256": "25e92fe5366e27a1df5c021346d5911990eb48d58fe2e49fd1a817317a6e4655",
+      "verifiedPrinting": {
+        "date": "2003-10-10",
+        "code": "MFC-038"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5612&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "controller": "source"
+          },
+          "rule": {
+            "kind": "indestructible",
+            "equalAtk": true
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "21417692",
+      "konamiId": 4557,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4557&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "cc7cb8aacd188963917be09800a6919d8993e17bebc98593b3d4546c2dcb29b4",
+      "htmlSHA256": "2d82793fd2fbd21a51a24f4c31be38cc88005e6a3db2c78e0f10ff7b3333e921",
+      "verifiedPrinting": {
+        "date": "2002-06-26",
+        "code": "MRD-113"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4557&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "attackLP",
+            "amount": 1000
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "82003859",
+      "konamiId": 4896,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4896&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "722b417494dd2ec8d02871d599e21ed9ee9f56b68486cab2f7fa0599c11e81d1",
+      "htmlSHA256": "7437360392c699d6e899a9dd15b588cd1b7ef174f9e86dd03bb28842d14708b6",
+      "verifiedPrinting": {
+        "date": "2002-09-16",
+        "code": "MRL-034"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4896&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {},
+          "rule": {
+            "kind": "attackLP",
+            "amount": 500,
+            "playerRule": true
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "07019529",
+      "konamiId": 4484,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4484&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "36db1a34fbc30638d1f8ef9329b06a66db6d45ca97ecba7fdc1398807841a6cd",
+      "htmlSHA256": "16b908e8be197f44e34a5cd4c19c1b5cfa6a1ed32a9d87b84c7c227acf580520",
+      "verifiedPrinting": {
+        "date": "2002-06-26",
+        "code": "MRD-101"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4484&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "stat",
+            "when": "attacking",
+            "attribute": "WIND",
+            "atk": 1000,
+            "def": 0
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "64751286",
+      "konamiId": 6125,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6125&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "b4a3cf9a280800fed11cea5658b1437fce3cb4eaf5c0d4dab3cb208ad1649f55",
+      "htmlSHA256": "8816a2dfd9183b2d1b00e6659055e6adc25ae0841459f50a4906180c22773f47",
+      "verifiedPrinting": {
+        "date": "2004-05-27",
+        "code": "SOD-JP033"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6125&request_locale=ja",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "stat",
+            "when": "battling",
+            "attribute": "LIGHT",
+            "atk": 1000,
+            "def": 0
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "57482479",
+      "konamiId": 5015,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5015&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "bb656b3e1ed4dfb4092ce99d33cafe25259c2548a097fa814c1e020c91e4939e",
+      "htmlSHA256": "1548d553bddca571011256b754add713551795471aad45ebeef3649442020411",
+      "verifiedPrinting": {
+        "date": "2001-10-25",
+        "code": "JY-03"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5015&request_locale=ja",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "stat",
+            "when": "battling",
+            "attribute": "DARK",
+            "atk": 500,
+            "def": 0
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "72520073",
+      "konamiId": 4294,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4294&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "b5e8110468be55f6017e0ae1c06dd4ac40b5185e67f1199ab2cfd4c056f12ab0",
+      "htmlSHA256": "c4feba6bdbf7ee5ec87dca0a7a7dc1c5187b63a03d1c3c480e54744965f34a0a",
+      "verifiedPrinting": {
+        "date": "1999-07-05",
+        "code": ""
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4294&request_locale=ja",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "stat",
+            "when": "defending",
+            "attribute": "LIGHT",
+            "atk": 0,
+            "def": 0,
+            "halfDef": true,
+            "calculationOnly": true
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "09817927",
+      "konamiId": 5713,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5713&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "4b8e79a2d9ad3cdd0cd03fd3f263bde6adb974d8add40672c733a52fa3b9e023",
+      "htmlSHA256": "59efe12e5bae1e76ad075eb545f259715604852ecd8070ce403548322d9f2228",
+      "verifiedPrinting": {
+        "date": "2003-12-01",
+        "code": "DCR-021"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5713&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "modifier",
+          "filter": {
+            "selfOnly": true
+          },
+          "atk": 0,
+          "def": 0,
+          "count": {
+            "zone": "monsters",
+            "controller": "opponent",
+            "atk": 500,
+            "def": 0
+          }
+        },
+        {
+          "kind": "combat",
+          "filter": {
+            "selfOnly": true
+          },
+          "rule": {
+            "kind": "piercing"
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "76909279",
+      "konamiId": 5884,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5884&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "4c2a50c91f734e840a496dd5cf3972179bea82f27660454d5f1994ffdb146be9",
+      "htmlSHA256": "c1e00db20c179bb61873ad9a84c3ac3f3eb42849f8cd5aee2f222f19d8613278",
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "code": "IOC-070"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5884&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "combat",
+          "filter": {
+            "controller": "source",
+            "races": [
+              "Beast",
+              "Beast-Warrior",
+              "Winged Beast"
+            ]
+          },
+          "rule": {
+            "kind": "piercing"
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "05494820",
+      "konamiId": 5270,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5270&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "790e822a07e0446322b11d1adacf081ea1e5864a97d2ce7fb4f06e92cf3dd74f",
+      "htmlSHA256": "9504bfe9cf99494f233f5776e7375ca22d8f8e3785e88471157234a9bc782597",
+      "verifiedPrinting": {
+        "date": "2003-03-01",
+        "code": "LON-095"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5270&request_locale=en",
+      "mechanics": {
+        "kind": "equip",
+        "names": [
+          "Gradius"
+        ],
+        "atk": 300,
+        "def": 0,
+        "combat": [
+          {
+            "kind": "piercing"
+          }
+        ]
+      },
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "95638658",
+      "konamiId": 5725,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5725&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "8053be305b37d0aed4dc74951556ee3f46aac8ad8d01b06756ebf82a314b3354",
+      "htmlSHA256": "00a3016e8c43d9cdc6fa0ba12c9d48e9af96a37bb4031a7ca46cb6266b8cd394",
+      "verifiedPrinting": {
+        "date": "2003-12-01",
+        "code": "DCR-033"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5725&request_locale=en",
+      "mechanics": {
+        "kind": "equip",
+        "atk": -1000,
+        "def": 0,
+        "combat": [
+          {
+            "kind": "direct"
+          }
+        ]
+      },
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "44762290",
+      "konamiId": 5977,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5977&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "06f2e28ea424af7579fb35a7195fa010ca5fc123161d4157f88f18a2b32af01f",
+      "htmlSHA256": "6901bcedcc96b0445d65a419eeee0d58cad76e2ff05c4157a243f67d70164adf",
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "code": "AST-035"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5977&request_locale=en",
+      "mechanics": {
+        "kind": "equip",
+        "maxLevel": 1,
+        "atk": 0,
+        "def": 0,
+        "combat": [
+          {
+            "kind": "direct"
+          }
+        ]
+      },
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "93013676",
+      "konamiId": 4499,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4499&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "3259eee4a02e423cb3e1023c8d87ec0a31988fb54383bfea09fe38d9cefbeb31",
+      "htmlSHA256": "8d74294d4fc1137f84df9445ced1722203cf609e60271841e3c0bb29771c63ce",
+      "verifiedPrinting": {
+        "date": "2002-09-16",
+        "code": "MRL-012"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4499&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "modifier",
+          "filter": {
+            "selfOnly": true
+          },
+          "atk": 0,
+          "def": 0,
+          "count": {
+            "zone": "backrow",
+            "controller": "both",
+            "equippedToSource": true,
+            "atk": 500,
+            "def": 0
+          }
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "51838385",
+      "konamiId": 6025,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6025&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "2fa3ac139620c82745d740b87e4391ea62e37e0e779690581958ef6d99a9f4b1",
+      "htmlSHA256": "28a1be0d8dc677caa46e5c005dd4ac234a9f4427d0aec5cae29b6670a5d902e1",
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "code": "AST-063"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6025&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "modifier",
+          "filter": {
+            "selfOnly": true,
+            "emptySourceHand": true,
+            "emptySourceBackrow": true
+          },
+          "atk": 1500,
+          "def": 0
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "45425051",
+      "konamiId": 5024,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5024&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "325b229209e2dfabe937e53d3507b52f8a11c90b97445806596e25dcbd3d3275",
+      "htmlSHA256": "90e6df6c84e6b4531a38fc422ed556f55fd39994c50499b3acc5f8353ca1a986",
+      "verifiedPrinting": {
+        "date": "2004-02-10",
+        "code": "WC4-001"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5024&request_locale=en",
+      "mechanics": [
+        {
+          "kind": "modifier",
+          "filter": {
+            "controller": "source",
+            "races": [
+              "Plant"
+            ],
+            "sourcePosition": "def"
+          },
+          "atk": 500,
+          "def": 500
+        }
+      ],
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    }
+  ],
+  "held": [
+    "Fairy Meteor Crush: conflicting piercing recipient requires explicit choice",
+    "Amazoness Swords Woman: damage reflection requires separate conflict rules"
+  ],
+  "certificateBlock": "\n,\n  \"21015833\": {\n    \"fingerprint\": \"b3e5813c6b39327cb93bfb151580a16f78134db5fbd71aeedba772fc30ed367f\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"21417692\": {\n    \"fingerprint\": \"682aeea995586526578d41e21e86f21cbdac77a890aafb82b4ea42515d638691\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"31812496\": {\n    \"fingerprint\": \"2210e1f5c863717d0f1ac3afd17c841684d6ee829ae1ad77e6ea9d22f90d9943\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"44762290\": {\n    \"fingerprint\": \"ce3ce0126b281f1d2b2bd54c8fb2ab2d828b6ca0a41eb19639003d4e7fabb3b1\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"45425051\": {\n    \"fingerprint\": \"22159ebebd3ef539a5c78a504bcb3c43366b53eb49e8d72cc79fd79a35b55fc4\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"50823978\": {\n    \"fingerprint\": \"721e405e86683592f76493a17c6cb2fd5de9113834bf286ff91dc2300b222f95\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"51838385\": {\n    \"fingerprint\": \"907aca58eea75322947d24eaa0270e08ff707e4cc602afa65bb76e91b794eed3\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"52077741\": {\n    \"fingerprint\": \"8ce6c96733bf879dc39c9beba009204234a59cdc61e7cc581c9b6e517ad24e6a\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"54178050\": {\n    \"fingerprint\": \"ca6b5533962567ce471ecad03fb565cb16f74de6169962e323290183803aaa7e\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"55821894\": {\n    \"fingerprint\": \"eca59771865d78b1a9a86815166c0314f84ec1ae41705525bbcee69826ae8918\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"56433456\": {\n    \"fingerprint\": \"667bf21923f9d978b510c97bdb3dcce620565b5386206ddc788638b34626c423\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"57482479\": {\n    \"fingerprint\": \"ab26193bfa6ff0ccf8fa467572cdb0c0422dfe61ad5b32d04661d20c160b1a54\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"60519422\": {\n    \"fingerprint\": \"8615d1fe82bca5f4a1bae21f47c5140ec5317792093e0db2ede4a4e831d416e2\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"63695531\": {\n    \"fingerprint\": \"a9454039735cf752405b214e46695486556d2cb64d62f62a184602a5772ea94a\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"64751286\": {\n    \"fingerprint\": \"30cb382558067f02c429c3153b3dceaa709dac162a51a600568ba09c87e09605\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"65287621\": {\n    \"fingerprint\": \"56047301b693118e35bb6f2bc544225655cbb54f67c067fb3a5074289ba2bcfa\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"72520073\": {\n    \"fingerprint\": \"deaabc5502773b2ca85b13c5996f666b960235a7f0bc430f54a882160c765b14\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"76909279\": {\n    \"fingerprint\": \"74f90dd8109796d3e7ce3f22b1ec6b3dce2abc38ba5ccad275c803c7483b2d94\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"79870141\": {\n    \"fingerprint\": \"d8fd44d3e6188172dc1cc1c0a9714cf045a1571ecdeb345d3183ef4092551ca8\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"82003859\": {\n    \"fingerprint\": \"1416bb7e60b4182946e0c2844aec23413044b71e5e6537a11da8017f112da50b\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"82035781\": {\n    \"fingerprint\": \"3ed802b8274e226cbb38270121e7e2a4685c7677447ebd81fb1bc4fc8fb6dc5d\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"93013676\": {\n    \"fingerprint\": \"a03de9b888d35084e7aca3cb6ab07cca59dfd24d27280bd80f8374f97749ea00\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"95638658\": {\n    \"fingerprint\": \"a1cb0a53dafc8d87e05714350a74b6c6413ac307202826608541f71031b93434\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"07019529\": {\n    \"fingerprint\": \"7bbbc5302304637871ec9d3caa977ac8c85cd83eb21b88ccb67bb2a75ed7fb95\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"09817927\": {\n    \"fingerprint\": \"f88320378100ec23cb53f71957f438a5ec38b016a3dab3771745ad8e67ddf974\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  },\n  \"05494820\": {\n    \"fingerprint\": \"e4192101b23007595cb25a882e934432c451c6f5e9634ff59f2f18a02c9c62c3\",\n    \"suites\": [\n      \"tests/combatBatch29.test.cjs\"\n    ]\n  }\n",
+  "certificateBlockSHA256": "0a1500cd906d0c4fbe40959eed3452143dd4414d37e33e6f42a88ae6a3e4a264",
+  "releaseBlock": "// M29 combat: 26 individually tested cards; no inventory grants.\n  \"21015833\",\n  \"82035781\",\n  \"79870141\",\n  \"65287621\",\n  \"63695531\",\n  \"54178050\",\n  \"55821894\",\n  \"56433456\",\n  \"50823978\",\n  \"31812496\",\n  \"52077741\",\n  \"60519422\",\n  \"21417692\",\n  \"82003859\",\n  \"07019529\",\n  \"64751286\",\n  \"57482479\",\n  \"72520073\",\n  \"09817927\",\n  \"76909279\",\n  \"05494820\",\n  \"95638658\",\n  \"44762290\",\n  \"93013676\",\n  \"51838385\",\n  \"45425051\",\n",
+  "releaseBlockSHA256": "2746af54f8dba73405805ea8a1277e20c1f9be39ddaf0a8489664cff3e60f188"
+}

@@ -1,3 +1,15 @@
+# Continuidade — expansão de combate M29
+
+Candidato: 878 cartas, base 852, +26; catálogo `eac6f004c7dd07d8b4312fa22147ce690fa0caa4166dfa521bfe8553f0df46cb`.
+
+- Regras, dados, revisão oficial e 173 testes em `combatRules.ts`, `combatEffects.ts`, `combatBatch29.ts`, `tests/combatBatch29.test.cjs` e `docs/evidence/mission29-combat-review.json`.
+- Gate: compilar; executar suíte completa isolada; `node scripts/audit-combat-batch29.cjs`; verificar preservação e catálogos. CI precisa passar antes da hospedagem.
+- Produção confirmada anteriormente: `55d4a2e5...`, 852. Não confundir candidato/CI com implantação.
+- Continuar sem parar no primeiro grupo: buscas de Equip/Ritual por FLIP/Invocação, seleções múltiplas, descarte/compra e gatilhos de batalha. Faltam 74 para +100 na missão, 393 para 1271; não habilitar cartas só por descrição.
+- Seguir na branch e PR12 existentes, sem merge. Antes de cada deploy, backup consistente do banco, código/configuração no host; não conceder cartas nem restaurar banco automaticamente. Preservar arena e dados.
+
+---
+
 # Checkpoint M29 — implantação e identidade operacional
 
 Repositório: dareka222778/yugioh-speed-rpg. Branch: feat/rea-engine-recovery-20261026. PR #12 em rascunho, sem merge. Base validada b1388611abe6e7be79d33893f5fca5e20effefb9, CI 40825696808 aprovada, 6000 testes; v9 com 852 certificadas/autorizadas. Sempre consultar o HEAD/CI atuais antes de continuar.

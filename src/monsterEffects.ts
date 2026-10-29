@@ -1,3 +1,4 @@
+import {combatMonsters29} from './combatBatch29';
 import {recruitMonsters28} from './recruitBatch28';
 import {monsterSelectorIssues,type MonsterSelector} from './cardSelectors';
 import {mechanicalMonsters16} from './mechanicalBatch16';
@@ -51,6 +52,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...combatMonsters29,
  ...recruitMonsters28,
  ...mechanicalMonsters20,
  ...mechanicalMonsters16,

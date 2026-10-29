@@ -4962,4 +4962,162 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "77044671":{"fingerprint":"80a597df711ad7ee3fd598d04ca985548aa5893514b13a57148d40c0e0e5ae14","suites":["tests/recruitBatch28.test.cjs"]},
   "39191307":{"fingerprint":"e67247ea2fa9769f8ca26c4c395b301d57c0813b2807162861a53456f4d283f0","suites":["tests/recruitBatch28.test.cjs"]},
   "24317029":{"fingerprint":"6cfdcb2fdbe404f7f29b94841b25aec40ef158687ba5ebd9f1dcdf42ed408309","suites":["tests/recruitBatch28.test.cjs"]}
+,
+  "21015833": {
+    "fingerprint": "b3e5813c6b39327cb93bfb151580a16f78134db5fbd71aeedba772fc30ed367f",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "21417692": {
+    "fingerprint": "682aeea995586526578d41e21e86f21cbdac77a890aafb82b4ea42515d638691",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "31812496": {
+    "fingerprint": "2210e1f5c863717d0f1ac3afd17c841684d6ee829ae1ad77e6ea9d22f90d9943",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "44762290": {
+    "fingerprint": "ce3ce0126b281f1d2b2bd54c8fb2ab2d828b6ca0a41eb19639003d4e7fabb3b1",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "45425051": {
+    "fingerprint": "22159ebebd3ef539a5c78a504bcb3c43366b53eb49e8d72cc79fd79a35b55fc4",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "50823978": {
+    "fingerprint": "721e405e86683592f76493a17c6cb2fd5de9113834bf286ff91dc2300b222f95",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "51838385": {
+    "fingerprint": "907aca58eea75322947d24eaa0270e08ff707e4cc602afa65bb76e91b794eed3",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "52077741": {
+    "fingerprint": "8ce6c96733bf879dc39c9beba009204234a59cdc61e7cc581c9b6e517ad24e6a",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "54178050": {
+    "fingerprint": "ca6b5533962567ce471ecad03fb565cb16f74de6169962e323290183803aaa7e",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "55821894": {
+    "fingerprint": "eca59771865d78b1a9a86815166c0314f84ec1ae41705525bbcee69826ae8918",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "56433456": {
+    "fingerprint": "667bf21923f9d978b510c97bdb3dcce620565b5386206ddc788638b34626c423",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "57482479": {
+    "fingerprint": "ab26193bfa6ff0ccf8fa467572cdb0c0422dfe61ad5b32d04661d20c160b1a54",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "60519422": {
+    "fingerprint": "8615d1fe82bca5f4a1bae21f47c5140ec5317792093e0db2ede4a4e831d416e2",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "63695531": {
+    "fingerprint": "a9454039735cf752405b214e46695486556d2cb64d62f62a184602a5772ea94a",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "64751286": {
+    "fingerprint": "30cb382558067f02c429c3153b3dceaa709dac162a51a600568ba09c87e09605",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "65287621": {
+    "fingerprint": "56047301b693118e35bb6f2bc544225655cbb54f67c067fb3a5074289ba2bcfa",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "72520073": {
+    "fingerprint": "deaabc5502773b2ca85b13c5996f666b960235a7f0bc430f54a882160c765b14",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "76909279": {
+    "fingerprint": "74f90dd8109796d3e7ce3f22b1ec6b3dce2abc38ba5ccad275c803c7483b2d94",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "79870141": {
+    "fingerprint": "d8fd44d3e6188172dc1cc1c0a9714cf045a1571ecdeb345d3183ef4092551ca8",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "82003859": {
+    "fingerprint": "1416bb7e60b4182946e0c2844aec23413044b71e5e6537a11da8017f112da50b",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "82035781": {
+    "fingerprint": "3ed802b8274e226cbb38270121e7e2a4685c7677447ebd81fb1bc4fc8fb6dc5d",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "93013676": {
+    "fingerprint": "a03de9b888d35084e7aca3cb6ab07cca59dfd24d27280bd80f8374f97749ea00",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "95638658": {
+    "fingerprint": "a1cb0a53dafc8d87e05714350a74b6c6413ac307202826608541f71031b93434",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "07019529": {
+    "fingerprint": "7bbbc5302304637871ec9d3caa977ac8c85cd83eb21b88ccb67bb2a75ed7fb95",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "09817927": {
+    "fingerprint": "f88320378100ec23cb53f71957f438a5ec38b016a3dab3771745ad8e67ddf974",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  },
+  "05494820": {
+    "fingerprint": "e4192101b23007595cb25a882e934432c451c6f5e9634ff59f2f18a02c9c62c3",
+    "suites": [
+      "tests/combatBatch29.test.cjs"
+    ]
+  }
+
 };

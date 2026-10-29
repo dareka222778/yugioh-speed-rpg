@@ -1,3 +1,4 @@
+import {canAttackDirectly,attackAllowance,attacksDeclared,attackLPCost,combatStatValue,combatOutcome} from './combatEffects';
 import {selectedMovementTargets,movementChoiceTargets,selectMovementTarget,type MovementSelection} from './selectedMovement';
 import {recoveryTargets} from './recoveryRules';
 import {positionTargets,executePositionChange} from './positionOperations';
@@ -28,7 +29,7 @@ import {enabledCardIds,getEnabledCardIds,getEffect,isQuickPlaySpell} from './eff
 import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips,turnMonsterFaceDown} from './classicEffects';
 import {specialSummonFromPile} from './monsterEntry';
 export type CardRef={uid:string;id:string;properlySummoned?:boolean;entityKind?:'token';tokenPolicy?:TokenPolicy};
-export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;lastSummonedTurn?:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
+export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;lastSummonedTurn?:number;changed:number;attacked:number;attackCount?:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
 export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean;equippedTo?:string};
 export type DuelPlayer={id:string;name:string;lp:number;deck:CardRef[];hand:CardRef[];monsters:Monster[];backrow:Backrow[];grave:CardRef[];extra?:CardRef[];field?:Backrow|null;banished?:CardRef[];summoned:boolean;battleProtectedUntil?:number;battleDamageGuard?:{turn:number;attacker:string}};
 export type Action=
@@ -64,8 +65,8 @@ export function createDuel(players:[{id:string;name:string;cards:string[];extra?
  const state:DuelState={version:1,resolverVersion:CURRENT_RESOLVER_VERSION,catalogRevision:currentCatalog()?.id,rulesVersion:RULES_VERSION,cardDefinitionsVersion:CARD_DEFINITIONS_VERSION,random,players:ps,turn:1,current:first,phase:'main',resume:'main',priority:first,passes:0,pending:{kind:'none'},chain:[],winner:null,reason:'',log:[`${ps[first].name} começa. Sem compra ou batalha no primeiro turno.`]};
  assertDuelState(state);return state;
 }
-export function atk(m:Monster,s?:DuelState){return Math.max(0,(s&&m.swappedUntil===s.turn?card(m.id).defense!:card(m.id).atk!)+m.atkBoost+(s?persistentModifier(m,s,'atk'):0));}
-export function def(m:Monster,s?:DuelState){return Math.max(0,(s&&m.swappedUntil===s.turn?card(m.id).atk!:card(m.id).defense!)+m.defBoost+(s?persistentModifier(m,s,'def'):0));}
+export function atk(m:Monster,s?:DuelState){const value=(s&&m.swappedUntil===s.turn?card(m.id).defense!:card(m.id).atk!)+m.atkBoost+(s?persistentModifier(m,s,'atk'):0);return Math.max(0,s?combatStatValue(s,m,'atk',value):value);}
+export function def(m:Monster,s?:DuelState){const value=(s&&m.swappedUntil===s.turn?card(m.id).atk!:card(m.id).defense!)+m.defBoost+(s?persistentModifier(m,s,'def'):0);return Math.max(0,s?combatStatValue(s,m,'def',value):value);}
 export function decisionPlayer(s:DuelState){return s.phase==='response'?s.priority:s.phase==='choice'?s.choice!.actor:s.phase==='discard'&&s.handFlow?s.handFlow.actor:s.current;}
 export function timeoutDuel(input:DuelState):DuelState{assertDuelState(input);if(input.phase==='finished')return input;const s=structuredClone(input);finish(s,1-decisionPlayer(s),'vitória por W.O.: tempo de decisão esgotado');assertDuelTransition(input,s);return s;}
 function note(s:DuelState,text:string){s.log.push(text);s.log=s.log.slice(-12);}
@@ -246,8 +247,8 @@ export function legalActions(s:DuelState,actor:string):Action[]{
   for(const m of p.monsters)if(m.entered<s.turn&&m.changed<s.turn&&m.attacked<s.turn)actions.push({kind:'position',card:m.uid,mode:!m.faceUp?'flip':m.position==='atk'?'def':'atk'});
   if(s.turn>1)actions.push({kind:'battle'});
  }else if(s.phase==='battle'){
-  for(const m of p.monsters)if(m.faceUp&&m.position==='atk'&&m.attacked<s.turn&&continuousAttackAllowed(s,m)){
-   if(!op.monsters.length||getMonsterEffect(m.id)?.operation.kind==='directAttack'&&!monsterEffectsNegated(s,m.uid))actions.push({kind:'attack',card:m.uid});for(const target of op.monsters)actions.push({kind:'attack',card:m.uid,target:target.uid});
+  for(const m of p.monsters)if(m.faceUp&&m.position==='atk'&&attacksDeclared(s,m)<attackAllowance(s,m)&&p.lp>attackLPCost(s,m)&&continuousAttackAllowed(s,m)){
+   if(!op.monsters.length||canAttackDirectly(s,m))actions.push({kind:'attack',card:m.uid});for(const target of op.monsters)actions.push({kind:'attack',card:m.uid,target:target.uid});
   }
  }
  actions.push({kind:'end'});return actions;
@@ -531,9 +532,10 @@ function resolve(s:DuelState){
  if(pending.kind==='attack'){
   const attacking=findMonster(s,pending.card);if(!attacking||attacking.p!==s.players[pending.actor]||!attacking.m.faceUp||attacking.m.position!=='atk')return;const a=attacking.m;if(!continuousAttackAllowed(s,a,true)){note(s,'O ataque foi interrompido por uma restrição contínua.');return;}const defender=pending.target?findMonster(s,pending.target):undefined;
   if(pending.stage==='declare'){
+   if(attacksDeclared(s,a)>attackAllowance(s,a)){note(s,'O ataque adicional foi interrompido porque seu efeito deixou de se aplicar.');return;}
    const defenders=s.players[1-pending.actor].monsters.map(m=>m.uid);
    if(pending.defenders&&(pending.defenders.length!==defenders.length||pending.defenders.some(uid=>!defenders.includes(uid)))){
-   s.pending=pending;s.choice={actor:pending.actor,source:'attackReplay',targets:[...defenders,...(!defenders.length||getMonsterEffect(a.id)?.operation.kind==='directAttack'&&!monsterEffectsNegated(s,a.uid)?['__direct__']:[]),'__cancel__']};s.phase='choice';note(s,'O campo adversário mudou: escolha o alvo novamente ou cancele o ataque.');return;
+   s.pending=pending;s.choice={actor:pending.actor,source:'attackReplay',targets:[...defenders,...(!defenders.length||canAttackDirectly(s,a)?['__direct__']:[]),'__cancel__']};s.phase='choice';note(s,'O campo adversário mudou: escolha o alvo novamente ou cancele o ataque.');return;
    }
    s.damageStep=true;
    if(defender&&!defender.m.faceUp){
@@ -545,15 +547,12 @@ function resolve(s:DuelState){
   }
   if(pending.stage==='damage'){response(s,{...pending,stage:'calculation'},'battle',1-pending.actor);return;}
   const opponent=s.players[1-pending.actor];
-  if(!pending.target){if(opponent.monsters.length&&(getMonsterEffect(a.id)?.operation.kind!=='directAttack'||monsterEffectsNegated(s,a.uid)))return;const damage=protectedBattleDamage(s,1-pending.actor,a.uid)?0:atk(a,s);opponent.lp=Math.max(0,opponent.lp-damage);note(s,`Ataque direto: ${damage} de dano.`);}
-  else if(defender){const d=defender.m;const difference=atk(a,s)-(d.position==='atk'?atk(d,s):def(d,s));
-   if(d.position==='atk'){
-    if(difference>0){if(opponent.battleProtectedUntil!==s.turn){graveMonster(s,d.uid,true);if(!protectedBattleDamage(s,1-pending.actor,a.uid))opponent.lp=Math.max(0,opponent.lp-difference);}}
-    else if(difference<0){if(s.players[pending.actor].battleProtectedUntil!==s.turn){graveMonster(s,a.uid,true);if(!protectedBattleDamage(s,pending.actor,a.uid))s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}}
-    else if(atk(a,s)>0){if(s.players[pending.actor].battleProtectedUntil!==s.turn)graveMonster(s,a.uid,true);if(opponent.battleProtectedUntil!==s.turn)graveMonster(s,d.uid,true);}
-   }else{if(difference>0&&opponent.battleProtectedUntil!==s.turn)graveMonster(s,d.uid,true);else if(difference<0&&s.players[pending.actor].battleProtectedUntil!==s.turn)if(!protectedBattleDamage(s,pending.actor,a.uid))s.players[pending.actor].lp=Math.max(0,s.players[pending.actor].lp+difference);}
-   note(s,`${card(a.id).name} enfrentou ${card(d.id).name}. Diferença: ${Math.abs(difference)}.`);
-  }
+  if(!pending.target&&opponent.monsters.length&&!canAttackDirectly(s,a))return;
+  if(pending.target&&!defender)return;
+  const outcome=combatOutcome(s,pending.actor,a,defender?.m,{attack:atk,defense:def,protected:protectedBattleDamage});
+  for(const uid of outcome.destroy)graveMonster(s,uid,true);
+  for(let player=0;player<2;player++)s.players[player].lp=Math.max(0,s.players[player].lp-outcome.damage[player]);
+  note(s,defender?`${card(a.id).name} enfrentou ${card(defender.m.id).name}. Diferença: ${Math.abs(outcome.difference)}.`:`Ataque direto: ${outcome.damage[1-pending.actor]} de dano.`);
   checkLP(s);
   // FLIP effects revealed by battle are activated after damage calculation,
   // including when the defending monster was destroyed in that battle.
@@ -666,7 +665,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  }else if(action.kind==='battle')response(s,{kind:'battle'},'main');
  else if(action.kind==='end')response(s,{kind:'end'},s.phase as 'main'|'battle');
  else if(action.kind==='attack'){
-  const m=p.monsters.find(m=>m.uid===action.card)!;m.attacked=s.turn;note(s,`${p.name} declarou um ataque com ${card(m.id).name}.`);response(s,{kind:'attack',actor:index,card:m.uid,target:action.target,stage:'declare',defenders:s.players[1-index].monsters.map(m=>m.uid)},'battle');
+  const m=p.monsters.find(m=>m.uid===action.card)!;const cost=attackLPCost(s,m);if(p.lp<=cost)throw Error('PV insuficientes para atacar.');p.lp-=cost;m.attackCount=attacksDeclared(s,m)+1;m.attacked=s.turn;note(s,`${p.name} declarou um ataque com ${card(m.id).name}.${cost?' Custo: '+cost+' PV.':''}`);response(s,{kind:'attack',actor:index,card:m.uid,target:action.target,stage:'declare',defenders:s.players[1-index].monsters.map(m=>m.uid)},'battle');
  }else if(action.kind==='choose'){
   if(s.choice?.source==='selectedMovement'){
    const f=s.movementSelection!;const effect=getEffect(f.id);if(effect?.kind!=='moveSelected')throw Error('Movimento inválido.');

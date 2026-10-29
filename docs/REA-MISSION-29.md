@@ -1,4 +1,24 @@
-# Missão 29 — primeiro bloco operacional: implantação do catálogo aprovado
+# Missão 29 — expansão por famílias e implantação incremental
+
+## Bloco de combate em validação — 29/10/2026
+
+Base operacional confirmada: `55d4a2e5a3889f9c8d1041a232116ae9aece261c`, 852 cartas. Este bloco acrescenta **26 cartas**, levando o candidato a **878 certificadas e autorizadas**, sem conceder inventário. A meta de pelo menos 100 novas cartas nesta missão e as metas de 1271/1962 continuam abertas: faltam 74 para o primeiro lote agregado, 393 para 1271 e 1084 identidades históricas.
+
+O vocabulário de combate agora cobre dois ataques (contagem persistida, sem soma indevida), perfuração, redução/duplicação de dano, proteção de destruição em batalha, custo de PV por ataque, bônus durante a Etapa de Dano/cálculo, ataque direto concedido por equipamento, contagem de equipamentos e condições sobre posição/mão/zonas da fonte. As regras são dados em `combatBatch29.ts`; execução e validação ficam em `combatEffects.ts`, `combatRules.ts` e na camada contínua. A interface continua consumindo ações legais.
+
+Fontes: texto integral atual de cada carta foi conferido no banco oficial da Konami; URLs, hashes e impressão anterior ao corte constam em `docs/evidence/mission29-combat-review.json`. Para cartas exclusivas do OCG no período, também foi conferida a impressão japonesa. A interpretação segue o texto atual na adaptação Speed RPG; o catálogo histórico determina elegibilidade, não uma reprodução do rulings de 2004. Não foi utilizada classificação automática por palavras-chave para conceder certificação. Arquivos brutos de fontes externas não integram a implantação.
+
+Decisões verificadas em perguntas oficiais: Pedágio afeta jogadores e acumula por cópia; Soldados Insectos do Céu ganha ATK somente na Etapa de Dano; negação de ataques múltiplos antes da Etapa de Dano interrompe o ataque adicional, mas negação durante essa etapa não interrompe o combate. As páginas de perguntas são, respectivamente, `faq_search.action?cid=4896&ope=4&request_locale=ja`, `?cid=4484&ope=4&request_locale=ja` e `?ope=5&fid=11046&request_locale=ja`, no banco oficial.
+
+Meteoro Perfurante e Espadachim Amazonesa ficam fora deste lote: conflito de destinatários de perfuração e reflexão exigem regras e testes próprios. Não foram reduzidos a um efeito aproximado. Os esquemas só aceitam as variantes implementadas. Proteção contra dano não impede destruição; proteção contra destruição não zera dano. Os cálculos ocorrem antes de remover fontes/equipamentos destruídos em batalha.
+
+A suíte própria executa 173 testes, com pelo menos seis cenários por carta: identidade, resultado mecânico, restrições, serialização, negação/remoção e ação inválida sem mutação. Também testa acúmulo de custos, imunidade, fontes dos dois jogadores, atributos na revelação, dano zero/perfuração e reabertura de contagem no turno seguinte. A auditoria `audit-combat-batch29.cjs` compara revisão, certificado e resultados reais por fingerprint; é obrigatória na CI. As revisões anteriores do catálogo são preservadas, e o gate de preservação histórica remove apenas as adições delimitadas deste bloco, sem atualizar hashes de referência.
+
+**Estado de implantação deste bloco:** pendente de CI e de verificação na hospedagem. O bot verificado anteriormente continua em 852 até a implantação confirmada. Layout, economia e regras de formato permanecem fora deste bloco.
+
+---
+
+# Histórico do primeiro bloco operacional
 
 Base conferida no GitHub: `b1388611abe6e7be79d33893f5fca5e20effefb9`, PR #12 em rascunho. CI `40825696808` concluída com sucesso. A engine ativa é v9; há 852 cartas certificadas/autorizadas, 1110 identidades históricas pendentes. Esta entrega não certifica novas cartas: a expansão da Missão 29 e a meta 1271 permanecem abertas.
 

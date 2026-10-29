@@ -8,6 +8,7 @@ const baselinePing='`🏓 Pong! Versão ${RELEASE_VERSION} • 130 cartas habili
 const baselineLog='console.log(`Release ${RELEASE_VERSION} | regras ${RULES_VERSION} | mão ${RULES_PROFILE.handLimit}, descarte na Fase Final | Adicional ${RULES_PROFILE.extraDeckMax} | 130 cartas | 1v1 e 2v2`);';
 function replaceOnce(text,from,to){assert.equal(text.split(from).length,2,'M29 identity substitution must occur exactly once');return text.replace(from,to);}
 function strip(file,bytes){
+ bytes=require('./mission29-combat-reviewed.cjs').strip(file,bytes);
  if(file!=='src/index.ts')return bytes;
  let text=bytes.toString('utf8');if(!text.includes(runtimeImport))return bytes;
  assert.ok(text.startsWith("import 'dotenv/config';\n"+runtimeImport),'dotenv must remain first');

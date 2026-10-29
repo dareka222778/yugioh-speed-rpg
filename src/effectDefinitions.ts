@@ -1,3 +1,5 @@
+import {combatEffects29} from './combatBatch29';
+import {combatRuleIssues,type CombatRule} from './combatRules';
 import {attackEffects28} from './attackBatch28';
 import {movementEffects28} from './movementBatch28';
 import {mechanicalEffects28} from './mechanicalBatch28';
@@ -45,9 +47,10 @@ export type Effect=
  |{kind:'attackResponse';activation:ActivationModel;endBattle:boolean;reflectAttack:boolean}
  |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'bottomlessTrapHole'|'sakuretsuArmor'|'mirrorForce'}
  |{kind:'heal'|'burn';amount:number}
- |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean}
- |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula};
+ |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
+ |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...combatEffects29,
  ...positionEffects26,
  ...mechanicalEffects28,
  ...movementEffects28,
@@ -145,10 +148,12 @@ export function effectDefinitionIssues(value:unknown):string[]{
   if(e.kind==='equip'&&e.monsterType!==undefined&&!['fusion','ritual'].includes(e.monsterType))return ['invalid-monster-category-filter'];
   if(e.kind==='equip'&&e.maxLevel!==undefined&&(!Number.isSafeInteger(e.maxLevel)||e.maxLevel<1||e.maxLevel>12))return ['invalid-level-filter'];
   if(e.kind==='field'&&e.penaltyRaces!==undefined&&(!Array.isArray(e.penaltyRaces)||e.penaltyRaces.some(x=>typeof x!=='string'||!x)))return ['invalid-penalty-filter'];
+  if(e.kind==='equip'&&e.combat&&(!Array.isArray(e.combat)||!e.combat.length||e.combat.length>8||e.combat.some(r=>combatRuleIssues(r).length)))return ['invalid-equip-combat'];
   if(e.kind==='equip'&&e.count&&countFormulaIssues(e.count).length)return ['invalid-count-formula'];
   if(e.kind==='field'&&e.attributes!==undefined&&(!Array.isArray(e.attributes)||e.attributes.some(x=>!['EARTH','WIND','FIRE','WATER','DARK','LIGHT','DIVINE'].includes(x))))return ['invalid-attribute-filter'];
   if(e.kind==='field'&&e.defensePositionOnly!==undefined&&typeof e.defensePositionOnly!=='boolean')return ['invalid-position-filter'];
-  if(e.kind==='field'&&!e.races?.length&&!e.attributes?.length&&!e.defensePositionOnly)return ['missing-field-filter'];
+  if(e.kind==='field'&&e.rules&&continuousRuleIssues(e.rules).length)return ['invalid-field-rules'];
+  if(e.kind==='field'&&!e.rules?.length&&!e.races?.length&&!e.attributes?.length&&!e.defensePositionOnly)return ['missing-field-filter'];
  }
  return [];
 }
