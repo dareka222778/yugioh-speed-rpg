@@ -22,6 +22,7 @@ jobs:
       - run: node scripts/check-mission8-integrity.cjs
       - run: npm run check
       - run: npm test
+      - run: node scripts/audit-attack-batch28.cjs
       - run: node scripts/audit-movement-batch28.cjs
       - run: node scripts/family-matrix28.cjs
       - run: node scripts/audit-mechanical-batch28.cjs
@@ -131,6 +132,8 @@ jobs:
             artifacts/mission28-admission.json
             artifacts/certification-executions-movement28.json
             artifacts/mission28-movement-admission.json
+            artifacts/certification-executions-attack28.json
+            artifacts/mission28-attack-admission.json
             artifacts/mission28-family-matrix.json
             artifacts/mission22-ritual-admission.json
             artifacts/mission21-admission.json

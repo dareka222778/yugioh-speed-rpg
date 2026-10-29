@@ -1,3 +1,4 @@
+import {attackEffects28} from './attackBatch28';
 import {movementEffects28} from './movementBatch28';
 import {mechanicalEffects28} from './mechanicalBatch28';
 import {positionEffects26} from './positionBatch26';
@@ -50,6 +51,7 @@ export const effectDefinitions:Record<string,Effect>={
  ...positionEffects26,
  ...mechanicalEffects28,
  ...movementEffects28,
+ ...attackEffects28,
  ...searchSpellEffects25,
  ...economicCountEffects24,
  ...economicEffects23,

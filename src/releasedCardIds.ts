@@ -849,4 +849,8 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "06343408",
   "78864369",
   "36280194",
+  // M28 attack restrictions: owner-authorized, individually certified cohort.
+  "85742772",
+  "23615409",
+  "95220856",
 ]);

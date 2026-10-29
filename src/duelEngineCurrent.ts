@@ -3,7 +3,7 @@ import {recoveryTargets} from './recoveryRules';
 import {positionTargets,executePositionChange} from './positionOperations';
 import {beginRitual,chooseRitual,type RitualFlow} from './ritualSummon';
 import {rulesCardName} from './cardIdentity';
-import {syncContinuous,continuousTrapsNegated,monsterEffectsNegated,canAffectMonster,addTemporaryModifier,type ContinuousState} from './continuousEffects';
+import {syncContinuous,continuousAttackAllowed,continuousTrapsNegated,monsterEffectsNegated,canAffectMonster,addTemporaryModifier,type ContinuousState} from './continuousEffects';
 import {currentCatalog} from './catalogContext';
 import {removeToken,type TokenPolicy,type TokenLedger} from './tokens';
 import {advanceStandby,chooseStandby,resolveStandby,closeStandby,type StandbyFlow} from './standbyFlow';
@@ -27,7 +27,7 @@ import {enabledCardIds,getEnabledCardIds,getEffect,isQuickPlaySpell} from './eff
 import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips,turnMonsterFaceDown} from './classicEffects';
 import {specialSummonFromPile} from './monsterEntry';
 export type CardRef={uid:string;id:string;properlySummoned?:boolean;entityKind?:'token';tokenPolicy?:TokenPolicy};
-export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
+export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;lastSummonedTurn?:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
 export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean;equippedTo?:string};
 export type DuelPlayer={id:string;name:string;lp:number;deck:CardRef[];hand:CardRef[];monsters:Monster[];backrow:Backrow[];grave:CardRef[];extra?:CardRef[];field?:Backrow|null;banished?:CardRef[];summoned:boolean;battleProtectedUntil?:number;battleDamageGuard?:{turn:number;attacker:string}};
 export type Action=
@@ -112,7 +112,6 @@ function trapActions(s:DuelState,index:number):Action[]{
  for(const c of s.players[index].backrow.filter(c=>!c.faceUp&&c.setTurn<s.turn&&card(c.id).kind==='trap')){
   const effect=getEffect(c.id);if(!effect||effectNameBlocked(s,index,c.id))continue;
   const activation=getActivationModel(effect);if(activation&&!effectActivationAllowed(s,index,activation))continue;
-  if(effect.kind==='continuous'){if(s.players[index].lp>(effect.lpCost??0))out.push({kind:'trap',card:c.uid,target:''});continue;}
   if(effect.kind==='magicJammer'){
    if(s.phase==='response'&&!counterWindow){
     const spellTarget=last&&isQuickPlaySpell(last.id)?last.card:!last&&['spell','field','fusion'].includes(s.pending.kind)&&'card' in s.pending?s.pending.card:undefined;
@@ -129,6 +128,7 @@ function trapActions(s:DuelState,index:number):Action[]{
   if(s.damageStep&&!(s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage==='beforeCalculation'))continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='calculation')continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage!=='beforeCalculation')continue;
+  if(effect.kind==='continuous'){if(s.players[index].lp>(effect.lpCost??0))out.push({kind:'trap',card:c.uid,target:''});continue;}
   if(effect.kind==='attackResponse'&&s.pending.kind==='attack'){
    const attacker=findMonster(s,s.pending.card);
    if(!s.pending.cancelled&&attacker?.m.faceUp&&attacker.m.position==='atk'&&attacker.p===s.players[s.pending.actor])out.push({kind:'trap',card:c.uid,target:attacker.m.uid});
@@ -231,7 +231,7 @@ export function legalActions(s:DuelState,actor:string):Action[]{
   for(const m of p.monsters)if(m.entered<s.turn&&m.changed<s.turn&&m.attacked<s.turn)actions.push({kind:'position',card:m.uid,mode:!m.faceUp?'flip':m.position==='atk'?'def':'atk'});
   if(s.turn>1)actions.push({kind:'battle'});
  }else if(s.phase==='battle'){
-  for(const m of p.monsters)if(m.faceUp&&m.position==='atk'&&m.attacked<s.turn){
+  for(const m of p.monsters)if(m.faceUp&&m.position==='atk'&&m.attacked<s.turn&&continuousAttackAllowed(s,m)){
    if(!op.monsters.length||getMonsterEffect(m.id)?.operation.kind==='directAttack'&&!monsterEffectsNegated(s,m.uid))actions.push({kind:'attack',card:m.uid});for(const target of op.monsters)actions.push({kind:'attack',card:m.uid,target:target.uid});
   }
  }
@@ -514,7 +514,7 @@ function resolve(s:DuelState){
   }}else throw new Error('Efeito sem implementação explícita.');return;
  }
  if(pending.kind==='attack'){
-  const attacking=findMonster(s,pending.card);if(!attacking||attacking.p!==s.players[pending.actor]||!attacking.m.faceUp||attacking.m.position!=='atk')return;const a=attacking.m;const defender=pending.target?findMonster(s,pending.target):undefined;
+  const attacking=findMonster(s,pending.card);if(!attacking||attacking.p!==s.players[pending.actor]||!attacking.m.faceUp||attacking.m.position!=='atk')return;const a=attacking.m;if(!continuousAttackAllowed(s,a,true)){note(s,'O ataque foi interrompido por uma restrição contínua.');return;}const defender=pending.target?findMonster(s,pending.target):undefined;
   if(pending.stage==='declare'){
    const defenders=s.players[1-pending.actor].monsters.map(m=>m.uid);
    if(pending.defenders&&(pending.defenders.length!==defenders.length||pending.defenders.some(uid=>!defenders.includes(uid)))){
@@ -647,7 +647,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    s.choice={actor:index,source:'multiTarget',targets:recoveryTargets(s,index,effect.rule,getCard).map(c=>c.uid)};s.phase='choice';
   }else response(s,{kind:'spell',actor:index,card:c.uid,id:c.id,...action.target?{target:action.target}:{},...action.position?{position:action.position}:{}},s.phase==='battle'?'battle':'main');
  }else if(action.kind==='position'){
-  const m=p.monsters.find(m=>m.uid===action.card)!;m.faceUp=true;m.position=action.mode==='def'?'def':'atk';m.changed=s.turn;note(s,`${p.name} mudou a posição de ${card(m.id).name}.`);response(s,action.mode==='flip'?{kind:'flip',actor:index,card:m.uid,id:m.id}:{kind:'none'},'main');
+  const m=p.monsters.find(m=>m.uid===action.card)!;m.faceUp=true;m.position=action.mode==='def'?'def':'atk';m.changed=s.turn;if(action.mode==='flip')m.lastSummonedTurn=s.turn;note(s,`${p.name} mudou a posição de ${card(m.id).name}.`);response(s,action.mode==='flip'?{kind:'flip',actor:index,card:m.uid,id:m.id}:{kind:'none'},'main');
  }else if(action.kind==='battle')response(s,{kind:'battle'},'main');
  else if(action.kind==='end')response(s,{kind:'end'},s.phase as 'main'|'battle');
  else if(action.kind==='attack'){
