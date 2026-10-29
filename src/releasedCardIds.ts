@@ -899,4 +899,8 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "50122883",
   "13409151",
   "42647539",
+// M29 destruction: 3 individually tested spells; no inventory grants.
+  "26412047",
+  "97169186",
+  "30683373",
 ]);

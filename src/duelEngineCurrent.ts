@@ -44,7 +44,7 @@ export type Action=
  |{kind:'battle'|'end'|'pass'|'concede'};
 export type Pending=( {kind:'standby';actor:number;card:string;taskId:string;choiceId:string}|{kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;targets?:string[];targetBindings?:TargetBinding[];position?:'atk'|'def'})&{targetBinding?:TargetBinding};
 export type TriggerEvent={actor:number;card:string;id:string};
-export type DuelState={version:1;movementSelection?:MovementSelection;afterEffectFlips?:Extract<Pending,{kind:'attack'}>;effectFlips?:Array<TriggerEvent&{binding:TargetBinding}>;ritual?:RitualFlow;resolverVersion?:ResolverVersion;catalogRevision?:string;continuousState?:ContinuousState;standby?:StandbyFlow;tokenLedger?:TokenLedger;cardLifetimes?:Record<string,CardLifetime>;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterRecruitPosition'|'selectedMovement'|'multiTarget'|'ritual'|'standby'|'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;movementSelection?:MovementSelection;afterEffectFlips?:Extract<Pending,{kind:'attack'}>;effectFlips?:Array<TriggerEvent&{binding:TargetBinding}>;ritual?:RitualFlow;resolverVersion?:ResolverVersion;catalogRevision?:string;continuousState?:ContinuousState;standby?:StandbyFlow;tokenLedger?:TokenLedger;cardLifetimes?:Record<string,CardLifetime>;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];effectName?:string;source?:'monsterRecruitPosition'|'selectedMovement'|'multiTarget'|'ritual'|'standby'|'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'|'extremeDestroy'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=()=>new Set(getEnabledCardIds());
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -529,6 +529,15 @@ function resolve(s:DuelState){
   if(!['equip','continuous'].includes(getEffect(pending.id)?.kind??'')){p.backrow=p.backrow.filter(c=>c.uid!==pending.card);if(c)p.grave.push({uid:c.uid,id:c.id});}
   if(getEffect(pending.id)?.kind==='ritualSummon'){beginRitual(s,pending.actor,pending.card,pending.id);return;}
   if(resolveClassicSpell(s,pending,{destroy:graveMonster,attack:atk,note,finish,checkLP,onSpecialSummon:(state,actor,uid,id)=>response(state,{kind:'specialSummon',actor,card:uid,id},state.resume,1-actor)}))return;
+  const extreme=getEffect(pending.id);
+  if(extreme?.kind==='destroyExtreme'){
+   const eligible=s.players.flatMap((owner,side)=>(extreme.scope==='all'||side!==pending.actor?owner.monsters:[]).filter(m=>(!extreme.faceUp||m.faceUp)&&(!extreme.position||m.position===extreme.position)));
+   if(!eligible.length){note(s,`${card(pending.id).name}: nenhum monstro elegível permaneceu no campo.`);return;}
+   const highest=Math.max(...eligible.map(m=>extreme.stat==='atk'?atk(m,s):def(m,s)));
+   const targets=eligible.filter(m=>(extreme.stat==='atk'?atk(m,s):def(m,s))===highest).map(m=>m.uid);
+   if(targets.length===1){if(canAffectMonster(s,targets[0],'spell')){note(s,`${card(pending.id).name} destruiu ${card(findMonster(s,targets[0])!.m.id).name}.`);graveMonster(s,targets[0]);}return;}
+   s.choice={actor:pending.actor,source:'extremeDestroy',effectName:card(pending.id).name,targets};s.phase='choice';note(s,`${card(pending.id).name}: escolha um dos monstros empatados no maior ${extreme.stat==='atk'?'ATK':'DEF'} atual.`);return;
+  }
   if(getEffect(pending.id)?.kind==='fissure') {const face=op.monsters.filter(m=>m.faceUp);if(face.length){const min=Math.min(...face.map(m=>atk(m,s)));const targets=face.filter(m=>atk(m,s)===min).map(m=>m.uid);
    if(targets.length===1){if(!canAffectMonster(s,targets[0],'spell'))return;note(s,`Fissura destruiu ${card(findMonster(s,targets[0])!.m.id).name}.`);graveMonster(s,targets[0]);}
    else{s.choice={actor:pending.actor,targets};s.phase='choice';note(s,'Fissura: escolha um dos monstros empatados no menor ATK.');}
@@ -743,6 +752,10 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   }else if(s.choice?.source==='monsterDestroy'){
    // Backwards compatibility for stored duels created by the early prototype.
    note(s,'Efeito de monstro destruiu o alvo.');graveMonster(s,action.target);s.choice=undefined;s.phase=s.resume;
+  }else if(s.choice?.source==='extremeDestroy'){
+   const effectName=s.choice.effectName??'Magia de destruição';
+   if(canAffectMonster(s,action.target,'spell')){const selected=findMonster(s,action.target);if(selected){note(s,`${effectName} destruiu ${card(selected.m.id).name}.`);graveMonster(s,action.target);}}
+   s.choice=undefined;s.phase=s.resume;
   }else{if(canAffectMonster(s,action.target,'spell')){note(s,`Fissura destruiu ${card(findMonster(s,action.target)!.m.id).name}.`);graveMonster(s,action.target);}s.choice=undefined;s.phase=s.resume;}
  }
  else if(action.kind==='discard'){
@@ -792,6 +805,7 @@ export function actionLabel(s:DuelState,actor:string,a:Action){
  if(a.kind==='choose'&&s.choice?.source==='triggerOrder')return `Próximo elo da corrente: ${name(a.target)}`;
  if(a.kind==='choose'&&s.choice?.source==='triggerTarget')return `Alvo do efeito: ${name(a.target)}`;
  if(a.kind==='choose'&&s.choice?.source==='monsterRecruit'&&a.target==='__skip__')return 'Não Invocar (Tomate Místico)';
+ if(a.kind==='choose'&&s.choice?.source==='extremeDestroy')return `${s.choice.effectName??'Magia'}: destruir ${name(a.target)}`;
  if(a.kind==='choose')return `${s.choice?.source==='monsterRecruit'?'Invocar do Deck':s.choice?.source==='monsterSearch'?'Buscar no Deck':s.choice?.source==='monsterTarget'?'Efeito: escolher':s.choice?.source==='monsterDestroy'?'Efeito: destruir':'Fissura: destruir'} ${name(a.target)}`;
  if(a.kind==='discard')return `Descartar: ${name(a.card)}`;
  return {battle:'Entrar na Batalha',end:'Encerrar turno',pass:'Não responder / passar',concede:'Desistir'}[a.kind];

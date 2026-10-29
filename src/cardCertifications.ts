@@ -5194,4 +5194,18 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+, // M29 destruction: 3 certified current-stat and position spells.
+  "26412047": {
+    "fingerprint": "a7ae1b83984e174996145fc64ca7874ecab887d139a9e63d2bfe7ae1e992fb26",
+    "suites": ["tests/destructionBatch29.test.cjs"]
+  },
+  "97169186": {
+    "fingerprint": "c2c9a24126fe06a7696ca2368005eaedae9c03fa42095b1e13ff438a30913d34",
+    "suites": ["tests/destructionBatch29.test.cjs"]
+  },
+  "30683373": {
+    "fingerprint": "ab1efca75b44a98241703d857569dd9928f4836d880761794fa1b34e0754ac8c",
+    "suites": ["tests/destructionBatch29.test.cjs"]
+  }
+
 };

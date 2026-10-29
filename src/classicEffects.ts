@@ -29,6 +29,8 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  if(e.kind==='sequence')return canStartEconomicOperations(s,index,e.operations)?[{kind:'spell',card:c.uid}]:[];
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
+  case 'destroyExtreme':return s.players.some((owner,side)=>(e.scope==='all'||side!==index)&&owner.monsters.some(m=>(!e.faceUp||m.faceUp)&&(!e.position||m.position===e.position)))?[{kind:'spell',card:c.uid}]:[];
+  case 'destroyTargetPosition':return targeted(s.players.flatMap(owner=>owner.monsters.filter(m=>m.position===e.position).map(m=>m.uid)));
   case 'ritualSummon':return ritualCandidates(s,index,e.ritual).length?[{kind:'spell',card:c.uid}]:[];
   case 'destroyFiltered':return destructionTargets(s,index,getDestructionModel(e)!).length?[{kind:'spell',card:c.uid}]:[];
   case 'continuous':return p.lp>(e.lpCost??0)?[{kind:'spell',card:c.uid}]:[];
@@ -98,7 +100,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
  const destruction=getDestructionModel(e);
  if(destruction){
   executeDestruction(s,a.actor,destruction,a.target,{...service,kind:'spell'});
-  service.note(s,e.kind==='destroyFiltered'?'A destruição filtrada foi resolvida.':e.kind==='darkHole'?'Buraco Negro destruiu os monstros do campo.':'Raigeki destruiu os monstros do adversário.');return true;
+  service.note(s,e.kind==='destroyTargetPosition'?'Esmagar com o Escudo: o alvo em Defesa foi destruído, se permaneceu elegível.':e.kind==='destroyFiltered'?'A destruição filtrada foi resolvida.':e.kind==='darkHole'?'Buraco Negro destruiu os monstros do campo.':'Raigeki destruiu os monstros do adversário.');return true;
  }
  if(resolveSpellException(s,a,service))return true;
  const operations=economicOperations(e);

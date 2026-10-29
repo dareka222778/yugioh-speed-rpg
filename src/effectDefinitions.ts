@@ -1,3 +1,4 @@
+import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
 import {combatEffects29} from './combatBatch29';
 import {combatRuleIssues,type CombatRule} from './combatRules';
@@ -33,6 +34,8 @@ import {ritualRuleIssues,type RitualRule} from './ritualRules';
 import {recoveryIssues,type RecoveryRule} from './recoveryRules';
 import {selectedMovementIssues,type SelectedMovementRule} from './selectedMovement';
 export type Effect=
+ |{kind:'destroyExtreme';scope:'all'|'opponent';stat:'atk'|'defense';position?:'atk'|'def';faceUp?:true}
+ |{kind:'destroyTargetPosition';position:'atk'|'def'}
  |{kind:'moveSelected';activation:ActivationModel;rule:SelectedMovementRule}
  |{kind:'recoverMultiple';rule:RecoveryRule}
  |{kind:'positionChange';activation:ActivationModel;rule:PositionRule}
@@ -51,6 +54,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...destructionEffects29,
  ...triggerEffects29,
  ...combatEffects29,
  ...positionEffects26,
@@ -124,6 +128,8 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='destroyExtreme')return Object.keys(e).some(k=>!['kind','scope','stat','position','faceUp'].includes(k))||!['all','opponent'].includes(e.scope)||!['atk','defense'].includes(e.stat)||e.position!==undefined&&!['atk','def'].includes(e.position)||e.faceUp!==undefined&&e.faceUp!==true?['invalid-extreme-destruction']:[];
+ if(e?.kind==='destroyTargetPosition')return Object.keys(e).some(k=>!['kind','position'].includes(k))||!['atk','def'].includes(e.position)?['invalid-position-destruction']:[];
  if(e?.kind==='positionChange')return Object.keys(e).some(k=>!['kind','activation','rule'].includes(k))?['unsupported-position-field']:positionRuleIssues(e.rule);
  if(e?.kind==='moveSelected')return Object.keys(e).some(k=>!['kind','activation','rule'].includes(k))?['unsupported-movement-field']:selectedMovementIssues(e.rule);
  if(e?.kind==='recoverMultiple')return Object.keys(e).some(k=>!['kind','rule'].includes(k))?['unsupported-recovery-field']:recoveryIssues(e.rule);
