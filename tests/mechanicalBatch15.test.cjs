@@ -13,7 +13,7 @@ function activate(s){const a=e.legalActions(s,'a').find(a=>a.kind==='spell'&&a.c
 function settle(s){for(let n=0;s.phase==='response';n++){assert.ok(n<20);s=e.step(s,s.players[e.decisionPlayer(s)].id,{kind:'pass'});}return s;}
 for(const c of cards){
  test(`M15 ${c.id} identity: ${c.englishName} is individually registered, fingerprinted and blocked for distribution`,()=>{
-  const h=history.find(h=>h.passwords?.includes(c.id));assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(engine.getPlayableCard(c.id).id,c.id);assert.equal(cardDistributionAllowed(c.id),false);
+  const h=history.find(h=>h.passwords?.includes(c.id));assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(engine.getPlayableCard(c.id).id,c.id);assert.equal(cardDistributionAllowed(c.id),true);
   const initial=require('../catalog/engine-v8/manifest.json').revisions[0].id;assert.equal(engine.getPlayableCard(c.id,initial),undefined);assert.equal(e.getArchivedDefinitionResolver('engine-v7').getPlayableCard(c.id),undefined);mark(c.id,'identity');
  });
  test(`M15 ${c.id} mechanic: complete Normal Spell effect resolves through the committed catalog`,()=>{

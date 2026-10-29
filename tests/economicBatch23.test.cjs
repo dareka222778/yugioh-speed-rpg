@@ -28,7 +28,7 @@ for(const card of economicBatch23){
  test(`M23 ${card.englishName}: identity, cutoff and exact certification fingerprint`,()=>{
   const h=history.find(v=>v.passwords.includes(card.id));assert.ok(h);assert.equal(h.konamiId,card.konamiId);assert.equal(h.names.en,card.englishName);
   assert.ok(h.firstObserved.tcg<='2004-09-30'||h.firstObserved.ocg<='2004-09-30');
-  assert.equal(registry.getCardStatus(card.id).stage,'certified');assert.equal(cardDistributionAllowed(card.id),false);
+  assert.equal(registry.getCardStatus(card.id).stage,'certified');assert.equal(cardDistributionAllowed(card.id),true);
   assert.equal(cardCertifications[card.id].fingerprint,definitionFingerprint(card,economicEffects23[card.id],{model:getEffectModel}));
  });
  test(`M23 ${card.englishName}: legal action and preservation across serialization`,()=>{

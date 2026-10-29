@@ -31,7 +31,7 @@ for(const card of cards){
   for(const field of ['level','atk','defense','race','attribute'])assert.equal(card[field],review.primaryFacts[field]);
   assert.deepEqual(card.fusion,review.recipeIds);assert.ok(card.fusion.length>=2&&card.fusion.length<=3);
   assert.ok(review.primaryFacts.ocgDate<='2004-09-30');assert.equal(fingerprint,review.mechanicalFingerprint);
-  assert.equal(r.getCardStatus(card.id).stage,'certified');assert.equal(cardDistributionAllowed(card.id),false);
+  assert.equal(r.getCardStatus(card.id).stage,'certified');assert.equal(cardDistributionAllowed(card.id),true);
   for(const material of card.fusion)assert.ok(r.getPlayableCard(material),'Uncertified Fusion material: '+material);
  });
  scenario('mechanic',()=>{

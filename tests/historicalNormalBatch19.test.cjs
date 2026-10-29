@@ -27,7 +27,7 @@ for(const c of cards){
  });
  check(c,'mechanical fingerprint and certification do not release card to the shop',()=>{
   assert.equal(registry.getCardStatus(c.id)?.stage,'certified');assert.deepEqual(registry.getCardStatus(c.id).issues,[]);
-  assert.equal(registry.getEffect(c.id)?.kind,'normal');assert.equal(cardDistributionAllowed(c.id),false);
+  assert.equal(registry.getEffect(c.id)?.kind,'normal');assert.equal(cardDistributionAllowed(c.id),true);
   assert.equal(e.getArchivedDefinitionResolver('engine-v7').getPlayableCard(c.id),undefined);
   assert.equal(e.getArchivedDefinitionResolver('engine-v8').getPlayableCard(c.id,revisions[0].id),undefined);
  });

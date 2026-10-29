@@ -41,7 +41,7 @@ for(const card of cards){
  assert.deepEqual(check.monsterDefinition,monsters[card.id]??null);
  assert.equal(status.stage,'certified');assert.deepEqual(status.issues,[]);
  assert.deepEqual(engineCard(card.id),card);
- assert.equal(cardDistributionAllowed(card.id),false);
+ assert.equal(cardDistributionAllowed(card.id),true);
  const fingerprint=definitionFingerprint(card,definition,{monster:getMonsterDefinition,model:getEffectModel});
  assert.equal(fingerprint,review.mechanicalFingerprint);assert.equal(fingerprint,execution.fingerprint);
  assert.deepEqual(execution.failed,[]);for(const scenario of required)assert.ok(execution.passed.includes(scenario),`${card.id}: ${scenario} not executed`);

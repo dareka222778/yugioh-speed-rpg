@@ -34,7 +34,7 @@ for(const record of evidence.cards){
  assert.deepEqual(record.recipeIds,card.fusion);assert.deepEqual(record.recipeIds,review.recipeIds);
  assert.deepEqual(record.recipeNames,review.recipeNames);
  for(const id of card.fusion)assert.ok(getPlayableCard(id),'Unplayable exact material: '+id);
- assert.equal(cardDistributionAllowed(card.id),false,'Unapproved Fusion distribution: '+card.id);
+ assert.equal(cardDistributionAllowed(card.id),true,'Unapproved Fusion distribution: '+card.id);
 }
 const planning=audit({reviews,executions,region:'world'}),
  rows=planning.plan.filter(row=>cohort.has(row.id));

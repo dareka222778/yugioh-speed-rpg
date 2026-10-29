@@ -31,7 +31,7 @@ test('mission14: historical identity, complete official description and immutabl
  assert.deepEqual(mechanicalEffects14[id],{kind:'monsterEffect'});
  const h=require('../catalog/historical/2004-10-01/cards.json').find(c=>c.passwords?.length===1&&c.passwords[0]===id);
  assert.equal(h.names.en,'Flash Assailant');assert.equal(h.firstObserved.ocg,'2002-06-20');
- assert.equal(r.getCardStatus(id).stage,'certified');assert.equal(cardDistributionAllowed(id),false);
+ assert.equal(r.getCardStatus(id).stage,'certified');assert.equal(cardDistributionAllowed(id),true);
  assert.equal(definitionFingerprint(card,mechanicalEffects14[id],{monster:getMonsterDefinition,model:getEffectModel}),
   '9b9232cd1383d481d6eca6e50a386612b8ed0abca65f621c72488b98565c333e');
  assert.deepEqual(getMonsterDefinition(id),mechanicalMonsters14[id]);

@@ -1,11 +1,17 @@
-const {fusionBatch8}=require('../dist/fusionBatch8');
-const {historicalFusionBatch10}=require('../dist/historicalFusionBatch10');
-const {historicalNormalBatch9}=require('../dist/historicalNormalBatch9');
-const {mechanicalBatch8}=require('../dist/mechanicalBatch8');
-const {mechanicalBatch7}=require('../dist/mechanicalBatch7');
-const {mechanicalBatch5}=require('../dist/mechanicalBatch5');
-const {test}=require('node:test'),assert=require('node:assert/strict'),{enabledCardIds}=require('../dist/effectRegistry'),{cardDistributionAllowed}=require('../dist/cardReleasePolicy'),{historicalNormalBatch}=require('../dist/historicalNormalBatch'),{historicalNormalBatch4}=require('../dist/historicalNormalBatch4');
-test('distribution policy blocks all new certificates, unknown cards and synthetic tokens while preserving the original cohort',()=>{
- const blocked=enabledCardIds.filter(id=>!cardDistributionAllowed(id));assert.deepEqual([...blocked].sort(),[...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...require('../dist/mechanicalBatch11').mechanicalBatch11,...require('../dist/mechanicalBatch14').mechanicalBatch14,...require('../dist/mechanicalBatch15').mechanicalBatch15,...require('../dist/mechanicalBatch16').mechanicalBatch16,...require('../dist/worldNormalBatch16').worldNormalBatch16,...require('../dist/mechanicalBatch17').mechanicalBatch17,...require('../dist/mechanicalBatch18').mechanicalBatch18,...require('../dist/historicalNormalBatch19').historicalNormalBatch19,...require('../dist/mechanicalBatch20').mechanicalBatch20,...require('../dist/ritualBatch22').ritualBatch22,...require('../dist/ritualExtensions22').ritualExtensions22,...require('../dist/economicBatch23').economicBatch23,...require('../dist/economicCountBatch24').economicCountBatch24,...require('../dist/positionBatch26').positionBatch26].map(c=>c.id).sort());assert.equal(blocked.length,696);assert.equal(enabledCardIds.filter(cardDistributionAllowed).length,136);
- for(const id of ['token:sheep','00000000','', '71625222'])assert.equal(cardDistributionAllowed(id),false);assert.equal(cardDistributionAllowed('91152256'),true);
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const {enabledCardIds,engineCatalog,getCardStatus}=require('../dist/effectRegistry');
+const {cardDistributionAllowed}=require('../dist/cardReleasePolicy');
+const {releasedCardIds}=require('../dist/releasedCardIds');
+const proof=require('../docs/evidence/mission27-release.json');
+test('M27 owner-authorized release contains every certified card and no extras',()=>{
+ assert.equal(proof.certifiedCount,832);assert.equal(proof.newReleaseCount,696);
+ assert.equal(releasedCardIds.size,832);assert.deepEqual(new Set(enabledCardIds),releasedCardIds);
+ assert.equal(enabledCardIds.filter(cardDistributionAllowed).length,832);
+ for(const id of releasedCardIds){assert.equal(getCardStatus(id)?.stage,'certified');assert.equal(cardDistributionAllowed(id),true);}
+});
+test('M27 imported-only, unknown, malformed and token identities remain blocked',()=>{
+ const history=require('../catalog/historical/2004-10-01/cards.json');
+ const pending=history.flatMap(c=>c.passwords).filter(id=>!enabledCardIds.includes(id));assert.ok(pending.length>1000);
+ for(const id of [...pending,'token:sheep','00000000','','71625222','82828051:1','82828051 '])assert.equal(cardDistributionAllowed(id),false,id);
+ assert.equal(engineCatalog.filter(c=>getCardStatus(c.id)?.stage!=='certified').length,0);
 });

@@ -29,7 +29,7 @@ for(const card of cards){
   assert.ok(review.historicalOcGDate<='2004-09-30');assert.equal(card.summary,review.expectedText);
   assert.deepEqual(def,review.effect);assert.deepEqual(monster??null,review.monster);
   assert.equal(result.fingerprint,review.mechanicalFingerprint);
-  assert.equal(r.getCardStatus(card.id).stage,'certified');assert.equal(cardDistributionAllowed(card.id),false);
+  assert.equal(r.getCardStatus(card.id).stage,'certified');assert.equal(cardDistributionAllowed(card.id),true);
   assert.equal(e.getArchivedDefinitionResolver('engine-v6').getPlayableCard(card.id),undefined);
  });
  scenario('mechanic',()=>{

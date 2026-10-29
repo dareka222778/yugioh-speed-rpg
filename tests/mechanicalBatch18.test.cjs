@@ -22,7 +22,7 @@ for(const c of cards){
  check(c,'canonical historical identity and complete official card record',()=>{
   const h=historical.find(x=>x.passwords.includes(c.id));assert.ok(h);assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);
   assert.equal(h.firstObserved.ocg<='2004-09-30',true);assert.equal(registry.getCardStatus(c.id).stage,'certified');
-  assert.equal(cardDistributionAllowed(c.id),false);assert.equal(registry.getCardStatus(c.id).issues.length,0);
+  assert.equal(cardDistributionAllowed(c.id),true);assert.equal(registry.getCardStatus(c.id).issues.length,0);
  });
  check(c,'fingerprint, engine and archive independence',()=>{
   assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(registry.getEffect(c.id).kind,c.monsterType==='fusion'?'fusion':'monsterEffect');
@@ -30,7 +30,7 @@ for(const c of cards){
   assert.equal(e.getArchivedDefinitionResolver('engine-v7').getPlayableCard(c.id),undefined);
  });
  check(c,'serialization and no release authorization',()=>{
-  const s=game();assert.deepEqual(JSON.parse(JSON.stringify(s)),s);assert.equal(cardDistributionAllowed(c.id),false);
+  const s=game();assert.deepEqual(JSON.parse(JSON.stringify(s)),s);assert.equal(cardDistributionAllowed(c.id),true);
  });
 }
 

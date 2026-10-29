@@ -7,7 +7,7 @@ function settle(s){for(let n=0;s.phase==='response';n++){assert.ok(n<20);s=act(c
 const results=[];
 for(const card of cards){const proof=reviews.find(p=>p.id===card.id),result={id:card.id,fingerprint:definitionFingerprint(card,r.getEffect(card.id),{monster:getMonsterDefinition,model:getEffectModel}),passed:[],failed:[]};results.push(result);
  function scenario(name,fn){test(`${card.id} ${card.englishName}: ${name}`,()=>{try{fn();result.passed.push(name);}catch(error){result.failed.push(name);throw error;}});}
- scenario('identity',()=>{assert.equal(card.konamiId,proof.konamiId);assert.equal(r.getCardStatus(card.id).stage,'certified');assert.equal(cardDistributionAllowed(card.id),false);assert.ok(proof.primaryFacts.ocgDate<='2004-09-30');assert.equal(require('../dist/resolverArchive').getArchivedDefinitionResolver('engine-v4').getPlayableCard(card.id),undefined);});
+ scenario('identity',()=>{assert.equal(card.konamiId,proof.konamiId);assert.equal(r.getCardStatus(card.id).stage,'certified');assert.equal(cardDistributionAllowed(card.id),true);assert.ok(proof.primaryFacts.ocgDate<='2004-09-30');assert.equal(require('../dist/resolverArchive').getArchivedDefinitionResolver('engine-v4').getPlayableCard(card.id),undefined);});
  scenario('mechanic',()=>{
   let s=game();const effect=r.getEffect(card.id),family=proof.family;
   if(family==='direct-attack'){

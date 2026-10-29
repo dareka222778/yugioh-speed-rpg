@@ -18,7 +18,7 @@ for(const c of mechanicalCandidates15){
 const revision=crypto.createHash('sha256').update(JSON.stringify(data)).digest('hex');
 test('v8 candidate identities match the frozen history and individual admission never grants distribution',()=>{
  const history=require('../catalog/historical/2004-10-01/cards.json'),registry=require('../dist/effectRegistry'),policy=require('../dist/cardReleasePolicy');assert.equal(cases.length,8);
- for(const c of mechanicalCandidates15){const h=history.find(h=>h.passwords?.includes(c.id));assert.ok(h,c.id);assert.equal(h.names.en,c.englishName);assert.equal(h.konamiId,c.konamiId);assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(policy.cardDistributionAllowed(c.id),false);}
+ for(const c of mechanicalCandidates15){const h=history.find(h=>h.passwords?.includes(c.id));assert.ok(h,c.id);assert.equal(h.names.en,c.englishName);assert.equal(h.konamiId,c.konamiId);assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(policy.cardDistributionAllowed(c.id),true);}
 });
 const run=fn=>runCatalog(revision,data,fn);
 const deck=require('../dist/cardCatalog').starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id));

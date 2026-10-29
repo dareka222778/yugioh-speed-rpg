@@ -12,7 +12,7 @@ function field(card){const s=game();s.players[0].monsters=[mon('source',card.kin
  if(card.id==='01434352')s.players[0].grave=[ref('g1','91152256'),ref('g2','89631139'),ref('spell','04542651')];
  if(card.id==='78193831')s.players[1].grave=[ref('g1','89631139'),ref('spell','04542651')];return s;}
 for(const c of cards){const row=rows.find(x=>x.id===c.id);const scenario=(name,fn)=>test(`M16 ${c.id} ${c.englishName}: ${name}`,()=>{try{fn();row.passed.push(name);}catch(error){row.failed.push(name);throw error;}});
- scenario('identity',()=>{const h=history.find(h=>h.passwords.includes(c.id));assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),false);
+ scenario('identity',()=>{const h=history.find(h=>h.passwords.includes(c.id));assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),true);
   assert.equal(e.getArchivedDefinitionResolver('engine-v8').getPlayableCard(c.id,baseline),undefined);assert.equal(e.getArchivedDefinitionResolver('engine-v7').getPlayableCard(c.id),undefined);
  });
  scenario('mechanic',()=>{let s=field(c);if(c.kind==='spell'){s=settle(cast(s,c.id));assert.equal(e.def(s.players[0].monsters[0],s),1500);assert.equal(e.def(s.players[1].monsters[0],s),2500);}

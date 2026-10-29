@@ -14,7 +14,7 @@ for(const c of positionBatch26){
  const h=history.find(v=>v.konamiId===c.konamiId),review=reviews.cards.find(v=>v.id===c.id);
  assert.ok(h?.passwords.includes(c.id));assert.equal(h.names.en,c.englishName);assert.ok(h.firstObserved.world<='2004-09-30');
  assert.equal(review?.source,c.source);assert.equal(review?.fullEffectReviewed,true);
- assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),false);
+ assert.equal(r.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),true);
  assert.equal(cardCertifications[c.id].fingerprint,definitionFingerprint(c,positionEffects26[c.id],{model:getEffectModel}));
  assert.deepEqual(cardCertifications[c.id].suites,['tests/positionBatch26.test.cjs']);
 }

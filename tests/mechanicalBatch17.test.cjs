@@ -22,7 +22,7 @@ function scenario(card,name,fn){const rec=status.find(x=>x.id===card.id);test(`M
 for(const c of cards){
  scenario(c,'independent historical identity and certificate; not distributed',()=>{
   const h=history.find(h=>h.passwords.includes(c.id));assert.ok(h);assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);
-  assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),false);
+  assert.equal(registry.getCardStatus(c.id).stage,'certified');assert.equal(cardDistributionAllowed(c.id),true);
   assert.equal(e.getArchivedDefinitionResolver('engine-v8').getPlayableCard(c.id,baseline),undefined);
   assert.equal(e.getArchivedDefinitionResolver('engine-v7').getPlayableCard(c.id),undefined);
  });

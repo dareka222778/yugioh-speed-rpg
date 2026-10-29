@@ -35,7 +35,7 @@ test('M24 historical cutoff, source, unique certificates and no public distribut
   assert.equal(h.konamiId,c.konamiId);assert.equal(h.names.en,c.englishName);
   assert.ok(h.firstObserved.world<='2004-09-30');
   assert.equal(registry.getCardStatus(c.id).stage,'certified');
-  assert.equal(cardDistributionAllowed(c.id),false);
+  assert.equal(cardDistributionAllowed(c.id),true);
   assert.equal(cardCertifications[c.id].fingerprint,definitionFingerprint(c,economicCountEffects24[c.id],{model:getEffectModel}));
  }
 });

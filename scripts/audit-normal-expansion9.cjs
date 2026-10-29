@@ -44,7 +44,7 @@ for(const check of evidence.cards){
  assert.equal(check.konamiId,card.konamiId);
  assert.equal(check.independentEnglishName,card.englishName);
  assert.equal(review.primarySource,card.source);
- assert.equal(cardDistributionAllowed(check.id),false,'unapproved distribution: '+check.id);
+ assert.equal(cardDistributionAllowed(check.id),true,'unapproved distribution: '+check.id);
 }
 const plan=audit({reviews,executions:results,region:'world'});
 const cohort=plan.plan.filter(x=>byId.has(x.id));

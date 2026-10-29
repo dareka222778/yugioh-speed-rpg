@@ -14,10 +14,10 @@ const admissions=cards.map(card=>({id:card.id,card,family:'m21-active-continuous
 const result=planHistoricalCatalog(require('../catalog/historical/2004-10-01/cards.json'),{region:'world',cutoff:'2004-09-30',reviews,executions,admissions});
 assert.equal(cards.length,11);assert.equal(new Set(cards.map(c=>c.konamiId)).size,11);
 assert.equal(reviews.length,11);assert.equal(executions.length,11);
-for(const c of admissions){assert.equal(c.distributionAuthorized,false);assert.ok(result.plan.find(p=>p.id===c.id)?.readyForIndividualCertification,c.id);assert.equal(engine.getArchivedDefinitionResolver('engine-v9').getPlayableCard(c.id).id,c.id);assert.equal(engine.getArchivedDefinitionResolver('engine-v8').getPlayableCard(c.id),undefined);}
+for(const c of admissions){assert.equal(c.distributionAuthorized,true);assert.ok(result.plan.find(p=>p.id===c.id)?.readyForIndividualCertification,c.id);assert.equal(engine.getArchivedDefinitionResolver('engine-v9').getPlayableCard(c.id).id,c.id);assert.equal(engine.getArchivedDefinitionResolver('engine-v8').getPlayableCard(c.id),undefined);}
 const active=require('../catalog/engine-v9/manifest.json');
 const data=require('../dist/catalogArchive').getCatalogData(active.current,'engine-v9');
 assert.ok(cards.every(c=>data.cards.some(d=>d.id===c.id)));
 assert.equal(r.enabledCardIds.filter(cardDistributionAllowed).length,require('../dist/releasedCardIds').releasedCardIds.size);
-const report={baselineCertified:771,currentCertified:r.enabledCardIds.length,newCertified:11,targetNew:500,remainingToTarget:489,goalProgressPercent:2.2,missionComplete:false,activeResolver:'engine-v9',catalogRevision:active.current,distributionAuthorized:r.enabledCardIds.filter(cardDistributionAllowed).length,individualExecutedScenarios:executions.reduce((n,e)=>n+e.passed.length,0),allIndividualGatesPassed:true};
+const report={baselineCertified:771,currentCertified:r.enabledCardIds.length,individualCohortCertified:11,newCertified:r.enabledCardIds.length-771,targetNew:500,remainingToTarget:Math.max(0,1271-r.enabledCardIds.length),goalProgressPercent:(r.enabledCardIds.length-771)/5,missionComplete:r.enabledCardIds.length>=1271,activeResolver:'engine-v9',catalogRevision:active.current,distributionAuthorized:r.enabledCardIds.filter(cardDistributionAllowed).length,individualExecutedScenarios:executions.reduce((n,e)=>n+e.passed.length,0),allIndividualGatesPassed:true};
 fs.writeFileSync('artifacts/mission21-admission.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
