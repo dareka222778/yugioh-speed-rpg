@@ -92,6 +92,8 @@ jobs:
         with:
           name: rea-acceptance-results
           path: |
+            artifacts/test-results.xml
+            artifacts/test-summary.json
             artifacts/rea-acceptance.json
             artifacts/engine-recovery-benchmark.json
             artifacts/discord-offline-homologation.json

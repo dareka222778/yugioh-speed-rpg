@@ -1,0 +1,57 @@
+{
+  "format": 1,
+  "mission": 28,
+  "baseCommit": "efd7575cab373d24b36633649d2b775fa70c74f6",
+  "engine": "engine-v9",
+  "before": 832,
+  "added": 15,
+  "total": 847,
+  "authorizedDistribution": 847,
+  "baseline500": 771,
+  "accumulatedNew": 76,
+  "remainingToTarget": 424,
+  "targetProgressPercent": 15.2,
+  "historical": 1962,
+  "pending": 1115,
+  "families": [
+    {
+      "name": "effect-flip",
+      "cards": 4
+    },
+    {
+      "name": "exact-recovery",
+      "cards": 2
+    },
+    {
+      "name": "selected-public-zone-movement",
+      "cards": 6
+    },
+    {
+      "name": "continuous-attack-restrictions",
+      "cards": 3
+    }
+  ],
+  "local": {
+    "targetedPassed": 165,
+    "targetedFailed": 0,
+    "historicalPassed": 700,
+    "historicalDependencyLoadFailure": 1,
+    "typecheck": "CI only",
+    "nativeSQLite": "CI only"
+  },
+  "firstBlockCI": {
+    "run": 40821346740,
+    "commit": "d79d3b30c1cc1169f6ce4e8403909f409e531812",
+    "testsPassed": 5858,
+    "status": "success"
+  },
+  "latestImplementationCI": {
+    "run": 40822867051,
+    "commit": "19c77578f1b3222d345434ace46a4aa5935b32e2",
+    "status": "in_progress"
+  },
+  "deployed": false,
+  "merged": false,
+  "inventoryGranted": false,
+  "fullCatalogComplete": false
+}
