@@ -4,13 +4,14 @@ import {canAffectMonster,type EffectKind} from './continuousEffects';
 import {bindTarget} from './cardLifetime';
 import {getMonsterEffect} from './monsterEffects';
 /** Group changes use a resolution-time snapshot; selected changes keep their UID. */
+import {namedCard} from './cardIdentity';
 import type {PositionRule} from './positionRules';
 export function positionTargets(s:DuelState,actor:number,rule:PositionRule,target?:string):Monster[]{
  return s.players.flatMap((p,index)=>(rule.scope==='opponent'||rule.controller==='opponent')&&index===actor||rule.scope==='self'&&index!==actor?[]:p.monsters.filter(m=>
   (rule.mode==='reveal'||rule.mode==='revealAtk'&&rule.controller===undefined?!m.faceUp:rule.mode==='revealDef'?true:m.faceUp||rule.mode==='revealAtk')&&(rule.scope!=='selected'||target===undefined||m.uid===target)&&
   (rule.mode!=='revealAtk'||rule.controller===undefined||m.position==='def')&&
   (rule.mode!=='def'||m.position==='atk')&&(rule.mode!=='set'||m.entityKind!=='token')&&
-  (!rule.races||rule.races.includes(getDuelCard(m.id)?.race??''))));
+  (!rule.races||rule.races.includes(getDuelCard(m.id)?.race??''))&&(!rule.excludeNames?.some(n=>namedCard(getDuelCard(m.id)!,n)))));
 }
 export function executePositionChange(s:DuelState,actor:number,rule:PositionRule,kind:EffectKind,target:string|undefined,setFaceDown:(m:Monster)=>void):number{
  if(rule.scope==='selected'&&!target)return 0;

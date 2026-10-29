@@ -5120,4 +5120,78 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "13409151": {
+    "fingerprint": "e9e88de31315ff7f994ea4f20e98f199c48d057a64aff4b711f1e178c15bbca6",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "23401839": {
+    "fingerprint": "a3a2dddbe921ff53f9c27c5187e0707ad7dd7aa6528ecb31deb6b3553e7a9d24",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "30914564": {
+    "fingerprint": "f8f6283776b5e113e8121e1a52596c68b21474109fb957f9c73eeedfef85d4af",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "42647539": {
+    "fingerprint": "375b6506149b7e652ec701ffde05c9f0fddaf7a1c301aa30d6ed7ee1433e4826",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "50122883": {
+    "fingerprint": "d111eca8c9c4d8530bbec689ef51052d50ca4bea2a1d52e0baed98685c4b8337",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "50712728": {
+    "fingerprint": "7587a2cc4932027dad91305ac95df4fd52f7e4b31d810ec1ccdbada3fc7d37d3",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "57617178": {
+    "fingerprint": "1c968e7b3a08d44bb1a8b889bee9919ce8d482ea5f5be79c253bfaf97d75cd03",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "73431236": {
+    "fingerprint": "e923325e487312f490186894df0e8cee97fff3306780d1daafb60a50762bc037",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "77207191": {
+    "fingerprint": "2b268cdda921062eca111aa67c8c43fda3ebced95f5da796be0fc969b311acef",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "81843628": {
+    "fingerprint": "b29b4edb0bb59e9612cc148eaff8fbe117a8829cc00e60f1d1989db1b7adf3a3",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "85489096": {
+    "fingerprint": "a234ddf9e5a2113b06cbad6499400b4a93e79fd33ca54480ccd77d9c0793bd82",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  },
+  "95492061": {
+    "fingerprint": "99951ccf257df70fe1e3d96a64d235d2b3c0a05d4bed778a40d534b07d907cf3",
+    "suites": [
+      "tests/triggerBatch29.test.cjs"
+    ]
+  }
+
 };

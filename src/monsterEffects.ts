@@ -1,3 +1,6 @@
+import {triggerMonsters29} from './triggerBatch29';
+import {positionRuleIssues,type PositionRule} from './positionRules';
+import {searchZoneIssues,type SearchZoneRule} from './searchZoneRules';
 import {combatMonsters29} from './combatBatch29';
 import {recruitMonsters28} from './recruitBatch28';
 import {monsterSelectorIssues,type MonsterSelector} from './cardSelectors';
@@ -19,6 +22,9 @@ import {mechanicalMonsters5} from './mechanicalBatch5';
 export type MonsterTrigger='quick'|'ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onBattleDestroyed'|'onSentToGrave'|'continuous';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard'|'tribute';count:number};
 export type MonsterOperation=
+ |{kind:'positionChange';rule:PositionRule}
+ |{kind:'searchFiltered';rule:SearchZoneRule}
+ |{kind:'mill';count:number;player:'opponent'|'self'}
  |{kind:'recruit';filter:MonsterSelector;positions:readonly ('atk'|'def')[]}
  |{kind:'continuous';rules:readonly ContinuousRule[]}
  |{kind:'heal'|'burn'|'burnPerSpellTrap'|'burnPerHand';amount:number}
@@ -29,7 +35,7 @@ export type MonsterOperation=
  |{kind:'search';stat:'atk'|'defense';maximum:number}
  |{kind:'specialSummon';attribute:string;maximumAtk:number}
  |{kind:'negateTraps'|'battleShield'|'directAttack'};
-export type MonsterEffect={trigger:MonsterTrigger;oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
+export type MonsterEffect={trigger:MonsterTrigger;summons?:readonly ('normal'|'flip'|'special')[];oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean;fieldMonsterCount?:number};
 
 export function canActivateMonsterEffect(effect:MonsterEffect,ctx:MonsterEffectContext):boolean{
@@ -52,6 +58,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...triggerMonsters29,
  ...combatMonsters29,
  ...recruitMonsters28,
  ...mechanicalMonsters20,
@@ -89,12 +96,16 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  const {effect:e,activation:a}=value;
  if(!['mandatory','optional','manual','continuous'].includes(a.policy)||!['main','flip','summon','grave','battleDestroyed','opposingDamageCalculation','continuous'].includes(a.window))return ['invalid-monster-activation'];
  if(!['quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'].includes(e.trigger))return ['unsupported-monster-trigger'];
- if(!e.operation||!['heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous'].includes(e.operation.kind))return ['unsupported-monster-operation'];
+ if(!e.operation||!['positionChange','searchFiltered','mill','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous'].includes(e.operation.kind))return ['unsupported-monster-operation'];
  if((e.trigger==='quick'||e.trigger==='ignition')&&a.policy!=='manual'||e.trigger==='continuous'&&a.policy!=='continuous')return ['inconsistent-monster-policy'];
  if(!['quick','ignition','continuous'].includes(e.trigger)&&!['mandatory','optional'].includes(a.policy))return ['inconsistent-monster-policy'];
  const windows:Partial<Record<MonsterTrigger,MonsterActivation['window']>>={quick:'opposingDamageCalculation',ignition:'main',flip:'flip',onSummon:'summon',onOtherSummon:'summon',onSentToGrave:'grave',onBattleDestroyed:'battleDestroyed',continuous:'continuous'};
  if(windows[e.trigger]!==a.window)return ['inconsistent-monster-window'];
  const op=e.operation;
+ if(e.summons!==undefined&&(e.trigger!=='onSummon'||!Array.isArray(e.summons)||!e.summons.length||new Set(e.summons).size!==e.summons.length||e.summons.some(t=>!['normal','flip','special'].includes(t))))return ['invalid-summon-event-filter'];
+ if(op.kind==='positionChange')return e.cost!==undefined||!['flip','onSummon'].includes(e.trigger)||Object.keys(op).some(k=>!['kind','rule'].includes(k))||op.rule?.scope!=='selected'||positionRuleIssues(op.rule).length?['invalid-monster-position']:[];
+ if(op.kind==='searchFiltered')return e.cost!==undefined||!['flip','onSummon'].includes(e.trigger)||Object.keys(op).some(k=>!['kind','rule'].includes(k))||op.rule?.from!=='deck'||searchZoneIssues(op.rule).length?['invalid-filtered-monster-search']:[];
+ if(op.kind==='mill')return e.cost!==undefined||e.trigger!=='flip'||Object.keys(op).some(k=>!['kind','count','player'].includes(k))||!Number.isSafeInteger(op.count)||op.count<1||op.count>30||!['opponent','self'].includes(op.player)?['invalid-monster-mill']:[];
  if(op.kind==='recruit')return e.cost!==undefined||Object.keys(op).some(k=>!['kind','filter','positions'].includes(k))||!['flip','onBattleDestroyed'].includes(e.trigger)||monsterSelectorIssues(op.filter).length||!Array.isArray(op.positions)||!op.positions.length||new Set(op.positions).size!==op.positions.length||op.positions.some(p=>!['atk','def'].includes(p))?['invalid-recruit-operation']:[];
  // Admission constraints only: frozen executables never implement paid/pass-
  // limited continuous activations or passive operations as ignition commands.

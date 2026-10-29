@@ -1,3 +1,4 @@
+import {searchZoneTargets} from './searchZoneRules';
 import {canAttackDirectly,attackAllowance,attacksDeclared,attackLPCost,combatStatValue,combatOutcome} from './combatEffects';
 import {selectedMovementTargets,movementChoiceTargets,selectMovementTarget,type MovementSelection} from './selectedMovement';
 import {recoveryTargets} from './recoveryRules';
@@ -91,6 +92,7 @@ function combos<T>(values:T[],n:number):T[][]{if(n===0)return [[]];return values
 function monsterTargets(s:DuelState,actor:number,e:MonsterEffect):string[]|undefined{
  const op=e.operation;
  if(op.kind==='destroy'||op.kind==='bounce')return (op.target==='anyMonster'?s.players:s.players.filter((_,i)=>i!==actor)).flatMap(p=>p.monsters.map(m=>m.uid));
+ if(op.kind==='positionChange')return positionTargets(s,actor,op.rule).map(m=>m.uid);
  if(op.kind==='recover')return s.players[actor].grave.filter(c=>card(c.id).kind===op.cardKind).map(c=>c.uid);
  return undefined;
 }
@@ -261,6 +263,7 @@ function eligibleTrigger(s:DuelState,event:TriggerEvent):boolean{
  if(e.oncePerTurn&&s.monsterNameUsed?.[event.actor]?.[event.id]===s.turn)return false;
  if(e.trigger==='onOtherSummon'&&!s.players[event.actor].monsters.some(m=>m.uid===event.card&&m.faceUp))return false;
  const targets=monsterTargets(s,event.actor,e);if(targets&&!targets.length)return false;
+ if(e.operation.kind==='searchFiltered'&&!searchZoneTargets(s,event.actor,e.operation.rule,getCard,getEffect).length)return false;
  if(e.operation.kind==='search'&&!searchDeckTargets(s,event.actor,e.operation.stat,e.operation.maximum).length)return false;
  if((e.operation.kind==='specialSummon'||e.operation.kind==='recruit'&&getMonsterDefinition(event.id)?.activation.policy==='optional')&&(s.players[event.actor].monsters.length>=RULES_PROFILE.monsterZones||!recruitTargets(s,event.actor,e.operation).length))return false;
  return ['flip','onSummon','onOtherSummon','onSentToGrave','onBattleDestroyed'].includes(e.trigger);
@@ -312,7 +315,7 @@ function response(s:DuelState,pending:Pending,resume:'main'|'battle',priority=1-
    if(m.uid!==pending.card&&m.faceUp&&getMonsterEffect(m.id)?.trigger==='onOtherSummon')events.push({actor,card:m.uid,id:m.id});
   }
   const id=pending.id??findMonster(s,pending.card)?.m.id;
-  if(pending.kind!=='specialSummon'&&id&&getMonsterEffect(id)?.trigger===(pending.kind==='flip'?'flip':'onSummon'))events.push({actor:pending.actor,card:pending.card,id});
+  if(id){const effect=getMonsterEffect(id),mode=pending.kind==='summon'?'normal':pending.kind==='flip'?'flip':'special';if(effect&&(effect.trigger==='flip'&&mode==='flip'||effect.trigger==='onSummon'&&(effect.summons??['normal']).includes(mode))&&!events.some(e=>e.actor===pending.actor&&e.card===pending.card&&e.id===id))events.push({actor:pending.actor,card:pending.card,id});}
   if(events.length)beginTriggers(s,events);
  }
 }
@@ -382,6 +385,8 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
   else if(op.kind==='burnPerSpellTrap'){const other=s.players[1-pending.actor],count=other.backrow.length+(other.field?1:0);other.lp=Math.max(0,other.lp-op.amount*count);checkLP(s);}
   else if(op.kind==='burnPerHand'){const other=s.players[1-pending.actor];other.lp=Math.max(0,other.lp-op.amount*other.hand.length);checkLP(s);}
   else if(op.kind==='destroyByLevel'){const targets=s.players[1-pending.actor].monsters.filter(m=>m.faceUp&&card(m.id).level===op.level&&canAffectMonster(s,m.uid,'monster')).map(m=>m.uid);for(const uid of targets)graveMonster(s,uid);}
+  else if(op.kind==='positionChange'){executePositionChange(s,pending.actor,op.rule,'monster',pending.target,turnMonsterFaceDown);cleanEquips(s);}
+  else if(op.kind==='mill'){const owner=s.players[op.player==='self'?pending.actor:1-pending.actor];owner.grave.push(...owner.deck.splice(0,op.count));note(s,'Cartas do topo do Deck foram enviadas ao Cemitério.');}
   else if(op.kind==='draw'){
    drawCards(s,pending.actor,op.count,{finish,checkLP});
   }else if(op.kind==='destroy'||op.kind==='bounce'){
@@ -398,9 +403,9 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
      cleanEquips(s);note(s,'Efeito devolveu o monstro ao dono.');
     }
    }else note(s,'O alvo do efeito não está mais no campo.');
-  }else if(op.kind==='search'||op.kind==='specialSummon'||op.kind==='recruit'){
-   const recruit=op.kind!=='search';
-   const targets=op.kind!=='search'?recruitTargets(s,pending.actor,op):searchDeckTargets(s,pending.actor,op.stat,op.maximum);
+  }else if(op.kind==='searchFiltered'||op.kind==='search'||op.kind==='specialSummon'||op.kind==='recruit'){
+   const recruit=op.kind==='specialSummon'||op.kind==='recruit';
+   const targets=op.kind==='searchFiltered'?searchZoneTargets(s,pending.actor,op.rule,getCard,getEffect).map(c=>c.uid):op.kind!=='search'?recruitTargets(s,pending.actor,op):searchDeckTargets(s,pending.actor,op.stat,op.maximum);
    if(targets.length&&(!recruit||p.monsters.length<RULES_PROFILE.monsterZones)){
     s.pending=pending;
     s.choice={actor:pending.actor,targets:recruit&&!fromChain&&(op.kind==='specialSummon'||getMonsterDefinition(pending.id)?.activation.policy==='optional')?[...targets,'__skip__']:targets,source:recruit?'monsterRecruit':'monsterSearch'};s.phase='choice';
@@ -718,13 +723,13 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    const pending=s.pending;
    if(pending.kind!=='monsterEffect'||!s.choice.targets.includes(action.target))throw new Error('Busca inválida.');
    const source=getMonsterEffect(pending.id),op=source?.operation;
-   if(op?.kind!=='search')throw new Error('Busca inválida.');
-   const pool=searchDeckTargets(s,index,op.stat,op.maximum);
+   if(op?.kind!=='search'&&op?.kind!=='searchFiltered')throw new Error('Busca inválida.');
+   const pool=op.kind==='searchFiltered'?searchZoneTargets(s,index,op.rule,getCard,getEffect).map(c=>c.uid):searchDeckTargets(s,index,op.stat,op.maximum);
    if(!pool.includes(action.target))throw new Error('Monstro não é elegível para a busca.');
    const deck=p.deck,i=deck.findIndex(c=>c.uid===action.target);
    const [found]=deck.splice(i,1);p.hand.push(found);
    shuffleDuel(deck,s);
-   s.blockedEffectNames??=[{},{}];s.blockedEffectNames[index][found.id]=s.turn;
+   if(op.kind==='search'){s.blockedEffectNames??=[{},{}];s.blockedEffectNames[index][found.id]=s.turn;}
    s.choice=undefined;s.pending={kind:'none'};s.phase=s.resume;
    note(s,`Busca de ${card(pending.id).name}: ${card(found.id).name} foi adicionada à mão.`);
    resumeResolvedChain(s);

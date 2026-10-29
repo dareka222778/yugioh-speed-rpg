@@ -1,5 +1,15 @@
 # Missão 29 — expansão por famílias e implantação incremental
 
+## Segundo bloco: buscas e gatilhos — candidato em validação
+
+Mais **12 cartas**, total **890**, acumulado **+38** desde 852. Faltam 62 para o mínimo agregado de +100, 381 para 1271 e 1072 para o recorte histórico de 1962. O candidato não representa implantação. Foram aprovados **94 testes próprios** e **6273 testes na suíte completa**, sem falhas/cancelados/ignorados/TODO, em Node 22.23.4.
+
+`triggerBatch29.ts` contém Kotetsu, Sonic Bird, Senju, Manju, Berfomet, Arsenal Summoner, Gravekeeper's Curse, Sacred Crane, Needle Worm, Bite Shoes, Desertapir e Ryu-Kishin Clown. Texto integral atual e elegibilidade foram conferidos em fontes oficiais, com impressão japonesa adicional para Berfomet. Evidências por identidade estão em `docs/evidence/mission29-trigger-review.json`; nenhuma descrição parcial recebeu certificação.
+
+Filtros tipados de busca distinguem Equipamento, Magia/Monstro de Ritual, união dos dois, nome e exceções do grupo Guardian. A escolha acontece na resolução e o Deck é embaralhado. Ao contrário de Sangan/Witch, as novas buscas não impõem restrição de ativação à carta obtida. Os gatilhos discriminam Invocação-Normal, Invocação-Virar e Invocação-Especial; uma revelação em batalha não é Invocação-Virar. Invocações por efeitos enfileiram gatilhos sem perder a corrente raiz e sem disparar duas vezes. Compra obrigatória sem carta causa derrota; enviar o topo do Deck ao Cemitério não causa derrota imediata.
+
+Efeitos de posição reutilizam o executor existente, com troca de uma carta selecionada e exclusões por nome; Desertapir exclui todas as suas cópias. O caso antes rejeitado de troca selecionada passa a ser coberto por execução pública real; o teste de combinações não suportadas permanece cobrindo revelação selecionada inválida. Não se removeu um teste para esconder falha. Casos próprios verificam fonte removida por Buraco Armadilha, alvo colocado com face para baixo na corrente, negação, opcionais, filtros vazios, retomada JSON e busca/compra em 2v2 sem alterar mãos/decks do parceiro inativo.
+
 ## Bloco de combate em validação — 29/10/2026
 
 Base operacional confirmada: `55d4a2e5a3889f9c8d1041a232116ae9aece261c`, 852 cartas. Este bloco acrescenta **26 cartas**, levando o candidato a **878 certificadas e autorizadas**, sem conceder inventário. A meta de pelo menos 100 novas cartas nesta missão e as metas de 1271/1962 continuam abertas: faltam 74 para o primeiro lote agregado, 393 para 1271 e 1084 identidades históricas.

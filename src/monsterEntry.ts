@@ -1,3 +1,4 @@
+import {getMonsterEffect} from './monsterEffects';
 import {RULES_PROFILE} from './rulesProfile';
 import {getDuelCard as getCard} from './effectRegistry';
 import type {DuelState,Monster} from './duelEngine';
@@ -21,6 +22,7 @@ export function specialSummonFromPile(
  const [card]=source.splice(index,1);
  const summoned:Monster={...card,owner:sourceOwner,faceUp:true,position,entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0};
  destination.push(summoned);
+ const effect=getMonsterEffect(card.id);if(effect?.trigger==='onSummon'&&effect.summons?.includes('special'))(s.graveTriggers??=[]).push({actor:controller,card:uid,id:card.id});
  synchronizeCardLifetimes(s);
  return summoned;
 }

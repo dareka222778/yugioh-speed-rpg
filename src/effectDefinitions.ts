@@ -1,3 +1,4 @@
+import {triggerEffects29} from './triggerBatch29';
 import {combatEffects29} from './combatBatch29';
 import {combatRuleIssues,type CombatRule} from './combatRules';
 import {attackEffects28} from './attackBatch28';
@@ -50,6 +51,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...triggerEffects29,
  ...combatEffects29,
  ...positionEffects26,
  ...mechanicalEffects28,

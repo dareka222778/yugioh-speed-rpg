@@ -1,3 +1,15 @@
+# Continuidade — segundo bloco M29
+
+Candidato: 890 cartas, +38 desde 852 (+26 combate, +12 buscas/gatilhos). Catálogo `5d886110c38bb1040970ea0cdf7508f8e0b72d37dfb348ad55a9a12531c29c13`. Suíte local: 6273 aprovados, zero falhas; 94 testes novos de gatilhos. Ainda faltam 62 para +100, 381 para 1271.
+
+- Bloco anterior de combate: commit `0a6b1cfb315f30eed7016c3433e02dadbf8b5f73`, CI `40911254801` em execução no momento do checkpoint. Implantar esse commit somente após ambos os jobs aprovados e confirmação no host.
+- Bloco atual: `triggerBatch29.ts`, `tests/triggerBatch29.test.cjs`, `scripts/audit-trigger-batch29.cjs`, revisão oficial individual em `docs/evidence/mission29-trigger-review.json`.
+- A CI anterior `40910661228` passou nos 6179 testes mas falhou em auditoria histórica de distribuição. A correção encaminha a remoção delimitada das novas adições também nessa auditoria; hashes antigos não foram alterados.
+- Produção anteriormente confirmada: 852 em `55d4a2e5...`. Candidato não é deploy.
+- Próximas famílias: eventos de fases e efeitos de batalha, operações selecionadas múltiplas e custos. Continuar sem conceder inventário nem simplificar efeitos para atingir contagem.
+
+---
+
 # Continuidade — expansão de combate M29
 
 Candidato: 878 cartas, base 852, +26; catálogo `eac6f004c7dd07d8b4312fa22147ce690fa0caa4166dfa521bfe8553f0df46cb`.

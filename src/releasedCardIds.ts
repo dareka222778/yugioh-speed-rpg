@@ -886,4 +886,17 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "93013676",
   "51838385",
   "45425051",
+// M29 triggers: 12 individually tested cards; no inventory grants.
+  "73431236",
+  "57617178",
+  "23401839",
+  "95492061",
+  "77207191",
+  "85489096",
+  "50712728",
+  "30914564",
+  "81843628",
+  "50122883",
+  "13409151",
+  "42647539",
 ]);
