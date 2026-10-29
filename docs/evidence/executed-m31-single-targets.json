@@ -1,0 +1,244 @@
+{
+  "format": 1,
+  "batchId": "m31-single-targets",
+  "sandbox": true,
+  "publicEngine": true,
+  "baseRevision": "63098a704e70ebfde80e9bed3b961b1b5bf0c6bc7a4932f6a5ee4c78a3e1940f",
+  "batchSHA256": "36c2f7a6fe821daf37bfb27c91f4562fbbc7cb484cf4306c8a087b7ae99d8b68",
+  "stage": "tested",
+  "sourceHashAtSandboxExecution": "9ce733234b454fdcbf50647000540d3545247b52b412e30a8612d52d94c7c5b4",
+  "executions": [
+    {
+      "id": "09076207",
+      "fingerprint": "b229f54bca9568b8097530272780754d2b8e538d935f34ffcd6264317bdb31b0",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-single-targets.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-single-targets.test.cjs": "71f2be14e884ec5e5002e0ad164648e5e81b9c0c7890ff249ab4554b0b766069"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "no-eligible-target",
+        "source-removed",
+        "activation-restrictions",
+        "set-wrong-type-retained"
+      ],
+      "failed": []
+    },
+    {
+      "id": "14618326",
+      "fingerprint": "b2b48abd3b3dd4cc150c5b1b8a8721d3308740acf5ec4a9a4f58ffd5fa5d3097",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-single-targets.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-single-targets.test.cjs": "71f2be14e884ec5e5002e0ad164648e5e81b9c0c7890ff249ab4554b0b766069"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "no-eligible-target",
+        "source-removed",
+        "activation-restrictions",
+        "set-wrong-type-retained"
+      ],
+      "failed": []
+    },
+    {
+      "id": "33066139",
+      "fingerprint": "ba9eb6b4ed5aff36307db0e1cfd44ac13899198491cef8f7969113e155c22bac",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-single-targets.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-single-targets.test.cjs": "71f2be14e884ec5e5002e0ad164648e5e81b9c0c7890ff249ab4554b0b766069"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "no-eligible-target",
+        "source-removed",
+        "activation-restrictions",
+        "set-wrong-type-retained"
+      ],
+      "failed": []
+    },
+    {
+      "id": "46461247",
+      "fingerprint": "3159a6e3771b2492b4e96c01155afbb1ed8a34a2f628b17a6cb7ea53db8d2cb8",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-single-targets.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-single-targets.test.cjs": "71f2be14e884ec5e5002e0ad164648e5e81b9c0c7890ff249ab4554b0b766069"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "no-eligible-target",
+        "source-removed",
+        "activation-restrictions",
+        "set-wrong-type-retained"
+      ],
+      "failed": []
+    },
+    {
+      "id": "81985784",
+      "fingerprint": "503715b3e2c17305f4edfab6adb08ac2aa8392b71e8c5c4230e5de34950db7e4",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-single-targets.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-single-targets.test.cjs": "71f2be14e884ec5e5002e0ad164648e5e81b9c0c7890ff249ab4554b0b766069"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "no-eligible-target",
+        "source-removed",
+        "activation-restrictions",
+        "fusion-to-extra"
+      ],
+      "failed": []
+    },
+    {
+      "id": "75946257",
+      "fingerprint": "fcd0a1841022c0ba95f37e3744433c6757e2365af47c6bab647b2afc18e8d142",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-single-targets.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-single-targets.test.cjs": "71f2be14e884ec5e5002e0ad164648e5e81b9c0c7890ff249ab4554b0b766069"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "no-eligible-target",
+        "source-removed",
+        "activation-restrictions"
+      ],
+      "failed": []
+    },
+    {
+      "id": "28563545",
+      "fingerprint": "7b13e7afa9ac3c322083d9429f55f91162666686a9cdeceef07ff3bc63df15ae",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-single-targets.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-single-targets.test.cjs": "71f2be14e884ec5e5002e0ad164648e5e81b9c0c7890ff249ab4554b0b766069"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "no-eligible-target",
+        "source-removed",
+        "activation-restrictions"
+      ],
+      "failed": []
+    }
+  ],
+  "candidateCount": 7,
+  "certificateProposals": 7,
+  "inventoryGranted": 0
+}

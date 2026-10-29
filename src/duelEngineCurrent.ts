@@ -1,3 +1,4 @@
+import {singleCardTargets,executeSingleCard} from './singleCardOperation';
 import {searchZoneTargets} from './searchZoneRules';
 import {canAttackDirectly,attackAllowance,attacksDeclared,attackLPCost,combatStatValue,combatOutcome} from './combatEffects';
 import {selectedMovementTargets,movementChoiceTargets,selectMovementTarget,type MovementSelection} from './selectedMovement';
@@ -92,6 +93,7 @@ function combos<T>(values:T[],n:number):T[][]{if(n===0)return [[]];return values
 /** Only activation-time targets may be chosen. Resolution must never retarget. */
 function monsterTargets(s:DuelState,actor:number,e:MonsterEffect):string[]|undefined{
  const op=e.operation;
+ if(op.kind==='singleCard')return singleCardTargets(s,actor,op.rule);
  if(op.kind==='destroy'||op.kind==='bounce')return (op.target==='anyMonster'?s.players:s.players.filter((_,i)=>i!==actor)).flatMap(p=>p.monsters.map(m=>m.uid));
  if(op.kind==='positionChange')return positionTargets(s,actor,op.rule).map(m=>m.uid);
  if(op.kind==='recover')return s.players[actor].grave.filter(c=>card(c.id).kind===op.cardKind).map(c=>c.uid);
@@ -269,7 +271,7 @@ function eligibleTrigger(s:DuelState,event:TriggerEvent):boolean{
  const e=getMonsterEffect(event.id);if(!e||effectNameBlocked(s,event.actor,event.id))return false;
  if(e.oncePerTurn&&s.monsterNameUsed?.[event.actor]?.[event.id]===s.turn)return false;
  if(e.trigger==='onOtherSummon'&&!s.players[event.actor].monsters.some(m=>m.uid===event.card&&m.faceUp))return false;
- const targets=monsterTargets(s,event.actor,e);if(targets&&!targets.length)return false;
+ const targets=monsterTargets(s,event.actor,e);if(targets&&!targets.length&&!(e.operation.kind==='singleCard'&&getMonsterDefinition(event.id)?.activation.policy==='mandatory'))return false;
  if(e.operation.kind==='searchFiltered'&&!searchZoneTargets(s,event.actor,e.operation.rule,getCard,getEffect).length)return false;
  if(e.operation.kind==='search'&&!searchDeckTargets(s,event.actor,e.operation.stat,e.operation.maximum).length)return false;
  if((e.operation.kind==='specialSummon'||e.operation.kind==='recruit'&&getMonsterDefinition(event.id)?.activation.policy==='optional')&&(s.players[event.actor].monsters.length>=RULES_PROFILE.monsterZones||!recruitTargets(s,event.actor,e.operation).length))return false;
@@ -350,7 +352,7 @@ function triggerMonsterEffect(s:DuelState,actor:number,uid:string,trigger:'flip'
  if(!e||e.trigger!==trigger||effectNameBlocked(s,actor,id))return false;
  const p=s.players[actor];
  const targets=monsterTargets(s,actor,e);
- if(targets!==undefined&&!targets.length)return false;
+ if(targets!==undefined&&!targets.length&&!(e.operation.kind==='singleCard'&&getMonsterDefinition(id)?.activation.policy==='mandatory'))return false;
  const ctx={lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,usedThisTurn:m?.effectUsedTurn===s.turn};
  // Mandatory flip draws must be attempted even if the deck is empty.
  const check=e.operation.kind==='draw'&&trigger==='flip'?{...ctx,deckSize:Math.max(p.deck.length,e.operation.count)}:ctx;
@@ -358,7 +360,7 @@ function triggerMonsterEffect(s:DuelState,actor:number,uid:string,trigger:'flip'
  const cost=payMonsterEffectCost(e,check);
  p.lp-=cost.lpPaid;if(m)m.effectUsedTurn=s.turn;
  note(s,`Efeito de ${card(id).name} ativado.`);
- if(targets){
+ if(targets?.length){
   s.pending={kind:'monsterEffect',actor,card:uid,id};
   s.choice={actor,targets,source:'monsterTarget'};s.phase='choice';
  }else response(s,{kind:'monsterEffect',actor,card:uid,id},s.resume,1-actor);
@@ -387,7 +389,8 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
   // Paid costs are never refunded and removing the source does not negate its effect.
   if(!e||monsterEffectsNegated(s,pending.card))return;
   const op=e.operation;
-  if(op.kind==='heal')p.lp+=op.amount;
+  if(op.kind==='singleCard'){executeSingleCard(s,pending.actor,op.rule,pending.target,{destroyMonster:graveMonster,destroyBackrow:discardBackrow,note});}
+  else if(op.kind==='heal')p.lp+=op.amount;
   else if(op.kind==='burn'){const other=s.players[1-pending.actor];other.lp=Math.max(0,other.lp-op.amount);checkLP(s);}
   else if(op.kind==='burnPerSpellTrap'){const other=s.players[1-pending.actor],count=other.backrow.length+(other.field?1:0);other.lp=Math.max(0,other.lp-op.amount*count);checkLP(s);}
   else if(op.kind==='burnPerHand'){const other=s.players[1-pending.actor];other.lp=Math.max(0,other.lp-op.amount*other.hand.length);checkLP(s);}

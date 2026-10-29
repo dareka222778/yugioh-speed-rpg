@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "batchId": "m31-single-targets",
+  "baseRevision": "63098a704e70ebfde80e9bed3b961b1b5bf0c6bc7a4932f6a5ee4c78a3e1940f",
+  "batchSHA256": "36c2f7a6fe821daf37bfb27c91f4562fbbc7cb484cf4306c8a087b7ae99d8b68",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m31_single_targetsCards} from './generated/m31-single-targets';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m31_single_targetsEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m31_single_targetsEffects} from './generated/m31-single-targets';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({",
+      "to": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({\n ...m31_single_targetsMonsters,"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "import {conditionalMonsters30}",
+      "to": "import {monsters as m31_single_targetsMonsters} from './generated/m31-single-targets';\nimport {conditionalMonsters30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"14618326\": {\n    \"fingerprint\": \"b2b48abd3b3dd4cc150c5b1b8a8721d3308740acf5ec4a9a4f58ffd5fa5d3097\",\n    \"suites\": [\n      \"tests/generated-m31-single-targets.test.cjs\"\n    ]\n  },\n  \"28563545\": {\n    \"fingerprint\": \"7b13e7afa9ac3c322083d9429f55f91162666686a9cdeceef07ff3bc63df15ae\",\n    \"suites\": [\n      \"tests/generated-m31-single-targets.test.cjs\"\n    ]\n  },\n  \"33066139\": {\n    \"fingerprint\": \"ba9eb6b4ed5aff36307db0e1cfd44ac13899198491cef8f7969113e155c22bac\",\n    \"suites\": [\n      \"tests/generated-m31-single-targets.test.cjs\"\n    ]\n  },\n  \"46461247\": {\n    \"fingerprint\": \"3159a6e3771b2492b4e96c01155afbb1ed8a34a2f628b17a6cb7ea53db8d2cb8\",\n    \"suites\": [\n      \"tests/generated-m31-single-targets.test.cjs\"\n    ]\n  },\n  \"75946257\": {\n    \"fingerprint\": \"fcd0a1841022c0ba95f37e3744433c6757e2365af47c6bab647b2afc18e8d142\",\n    \"suites\": [\n      \"tests/generated-m31-single-targets.test.cjs\"\n    ]\n  },\n  \"81985784\": {\n    \"fingerprint\": \"503715b3e2c17305f4edfab6adb08ac2aa8392b71e8c5c4230e5de34950db7e4\",\n    \"suites\": [\n      \"tests/generated-m31-single-targets.test.cjs\"\n    ]\n  },\n  \"09076207\": {\n    \"fingerprint\": \"b229f54bca9568b8097530272780754d2b8e538d935f34ffcd6264317bdb31b0\",\n    \"suites\": [\n      \"tests/generated-m31-single-targets.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m31-single-targets: explicit tested release; zero inventory grants.\n  \"09076207\",\n  \"14618326\",\n  \"33066139\",\n  \"46461247\",\n  \"81985784\",\n  \"75946257\",\n  \"28563545\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "09076207",
+    "14618326",
+    "33066139",
+    "46461247",
+    "81985784",
+    "75946257",
+    "28563545"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

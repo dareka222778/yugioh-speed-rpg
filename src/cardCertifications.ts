@@ -5218,5 +5218,57 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
 , "20727787": {"fingerprint":"273afa04c2d88ca1d6b0b9f41499fa6c0c02f6ff8a886805f4c0f2640958cedf","suites":["tests/conditionalBatch30.test.cjs"]}
 , "61044390": {"fingerprint":"b0e7a33fb9d8d75aca7575f6cd9c4a5106304c18ab7c6387d2fcad78186154c1","suites":["tests/conditionalBatch30.test.cjs"]}
 , "81510157": {"fingerprint":"859cddaf347ee42301f39005c5b7bde4031179b1094c9e7739e5ca8ed8d3ee32","suites":["tests/conditionalBatch30.test.cjs"]}
+,
+  "14618326": {
+    "fingerprint": "b2b48abd3b3dd4cc150c5b1b8a8721d3308740acf5ec4a9a4f58ffd5fa5d3097",
+    "suites": [
+      "tests/generated-m31-single-targets.test.cjs"
+    ]
+  },
+  "28563545": {
+    "fingerprint": "7b13e7afa9ac3c322083d9429f55f91162666686a9cdeceef07ff3bc63df15ae",
+    "suites": [
+      "tests/generated-m31-single-targets.test.cjs"
+    ]
+  },
+  "33066139": {
+    "fingerprint": "ba9eb6b4ed5aff36307db0e1cfd44ac13899198491cef8f7969113e155c22bac",
+    "suites": [
+      "tests/generated-m31-single-targets.test.cjs"
+    ]
+  },
+  "46461247": {
+    "fingerprint": "3159a6e3771b2492b4e96c01155afbb1ed8a34a2f628b17a6cb7ea53db8d2cb8",
+    "suites": [
+      "tests/generated-m31-single-targets.test.cjs"
+    ]
+  },
+  "75946257": {
+    "fingerprint": "fcd0a1841022c0ba95f37e3744433c6757e2365af47c6bab647b2afc18e8d142",
+    "suites": [
+      "tests/generated-m31-single-targets.test.cjs"
+    ]
+  },
+  "81985784": {
+    "fingerprint": "503715b3e2c17305f4edfab6adb08ac2aa8392b71e8c5c4230e5de34950db7e4",
+    "suites": [
+      "tests/generated-m31-single-targets.test.cjs"
+    ]
+  },
+  "09076207": {
+    "fingerprint": "b229f54bca9568b8097530272780754d2b8e538d935f34ffcd6264317bdb31b0",
+    "suites": [
+      "tests/generated-m31-single-targets.test.cjs"
+    ]
+  }
+
+,
+  "80316585": {
+    "fingerprint": "3a6c03bc1d55175808cf34b40b1ec3e4c666d6cb678580a66be59f56346b0628",
+    "suites": [
+      "tests/generated-m31-harpie-identity.test.cjs"
+    ]
+  }
+
 
 };

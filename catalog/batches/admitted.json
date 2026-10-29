@@ -1,1 +1,13 @@
-{"format":1,"batches":[]}
+{
+  "format": 1,
+  "batches": [
+    {
+      "id": "m31-single-targets",
+      "proofSHA256": "3d0e667f22ecc60c7f9dcc09bb8cd6ca49c227a613df902e2d94d681e402b12d"
+    },
+    {
+      "id": "m31-harpie-identity",
+      "proofSHA256": "8d21c73ac331e0aae68203391223960381f06ee5c120da8c31eab57d625d3b4e"
+    }
+  ]
+}

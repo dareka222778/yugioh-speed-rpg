@@ -51,7 +51,7 @@ export function buildCardRegistry(catalog:readonly Card[],definitions:Readonly<R
   if(effect?.kind==='ritualMonster'&&(c.kind!=='monster'||c.monsterType!=='ritual'))issues.push('invalid-ritual-monster');
   if(effect?.kind==='ritualSummon'&&c.kind!=='spell')issues.push('invalid-ritual-spell');
   if(effect?.kind==='normal'&&(c.kind!=='monster'||c.monsterType!=='normal'))issues.push('invalid-normal-definition');
-  if(effect?.kind==='monsterEffect'){if(c.monsterType!=='effect')issues.push('invalid-effect-monster-category');issues.push(...monsterDefinitionIssues(context.monster?.(c.id)));}
+  if(effect?.kind==='monsterEffect'){if(c.monsterType!=='effect')issues.push('invalid-effect-monster-category');issues.push(...monsterDefinitionIssues(context.monster?.(c.id)));if(context.monster?.(c.id)?.effect.operation.kind==='identityOnly'&&!c.alwaysTreatedAs)issues.push('missing-rule-identity');}
   if(effect?.kind==='fusion'&&(c.monsterType!=='fusion'||!c.fusion))issues.push('invalid-fusion-definition');
   const certificate=certificates[c.id];
   let stage:CardStatus['stage']=issues.length?'registered':'validated';

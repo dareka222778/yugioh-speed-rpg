@@ -23,6 +23,7 @@ jobs:
       - run: npm run check
       - run: node scripts/card-batch-fast.cjs
       - run: npm test
+      - run: node scripts/audit-generated-batches31.cjs
       - run: node scripts/audit-conditional-batch30.cjs
       - run: node scripts/audit-destruction-batch29.cjs
       - run: node scripts/audit-trigger-batch29.cjs
@@ -99,6 +100,8 @@ jobs:
           name: rea-acceptance-results
           path: |
             artifacts/test-results.xml
+            artifacts/executions-m31-*.json
+            artifacts/mission31-generated-audit.json
             artifacts/test-summary.json
             artifacts/executions-m31-generator-fixture.json
             artifacts/validated-m31-generator-fixture.json
