@@ -2,6 +2,7 @@ import type {Card} from './cardCatalog';
 import type {DuelState,CardRef} from './duelEngine';
 import type {TargetBinding} from './cardLifetime';
 import {bindTarget,targetBindingValid} from './cardLifetime';
+import {ownedPrivateZone} from './teamRotation';
 export type SelectedMovementRule={from:'grave'|'banished';scope:'self'|'opponent'|'both';destination:'hand'|'grave'|'banished'|'deckTop';minimum:number;maximum:number;minimumMonsters?:number;filter:{monster?:true;nonEffect?:true;maxAtk?:number;flip?:true}};
 export type MovementSelection={actor:number;card:string;id:string;kind:'spell'|'trap';returnPhase:'main'|'battle'|'response';targets:string[];bindings:TargetBinding[]};
 export function selectedMovementIssues(v:unknown):string[]{
@@ -25,8 +26,9 @@ export function executeSelectedMovement(s:DuelState,actor:number,r:SelectedMovem
  const legal=new Set(selectedMovementTargets(s,actor,r,getCard,isFlip).map(c=>c.uid));let moved=0;
  for(const uid of targets){const binding=bindings.find(b=>b.uid===uid);if(!binding||!targetBindingValid(s,binding)||!legal.has(uid))continue;
   const player=s.players.find(p=>p[r.from]?.some(c=>c.uid===uid));if(!player)continue;const pool=player[r.from]!,index=pool.findIndex(c=>c.uid===uid),[ref]=pool.splice(index,1);
-  if(['hand','deckTop'].includes(r.destination)&&getCard(ref.id)?.monsterType==='fusion')(player.extra??=[]).push(ref);
-  else if(r.destination==='deckTop')player.deck.unshift(ref);
+  if(['hand','deckTop'].includes(r.destination)&&getCard(ref.id)?.monsterType==='fusion')ownedPrivateZone(s,ref,s.players.indexOf(player),'extra').push(ref);
+  else if(r.destination==='deckTop')ownedPrivateZone(s,ref,s.players.indexOf(player),'deck').unshift(ref);
+  else if(r.destination==='hand')ownedPrivateZone(s,ref,s.players.indexOf(player),'hand').push(ref);
   else (player[r.destination]??=[]).push(ref);moved++;
  }return moved;
 }

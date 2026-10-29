@@ -29,7 +29,7 @@ O seletor genérico de recrutamento recupera trabalho local antigo sem substitui
 ## Validação e limites
 
 - Primeiro bloco `d79d3b30`: **5.858 testes**, zero falhas; CI **40821346740 aprovada integralmente**, incluindo soak de 600 s.
-- Quatro blocos mecânicos, M26 e preservação: **216 testes direcionados e de segurança aprovados localmente**; o resumo estruturado do runner foi exercitado em quatro testes adicionais. Estes números se sobrepõem a testes da suíte global e não devem ser somados como testes exclusivos.
+- Quatro blocos mecânicos, M26 e preservação: **222 testes direcionados e de segurança aprovados localmente**; o resumo estruturado do runner foi exercitado em quatro testes adicionais. Estes números se sobrepõem a testes da suíte global e não devem ser somados como testes exclusivos.
 - Regressão histórica local ampliada: **700 passaram e uma suíte não carregou por falta de better-sqlite3**. Outra tentativa conjunta anterior: 80/81 passaram, uma falha de carregamento de sharp. O hook local remove tipos, sem substituir compilação ou testes nativos.
 - O bloco intermediário teve falhas reais de integração: tipagem do contrato validado; corrupção de acentos no envio de um ajuste via PowerShell; fronteira de quebra de linha do normalizador. Foram corrigidas preservando as asserções. Os testes nativos novos de reabertura SQLite, rollback de recibo, replay idempotente e decisões da IA passaram na CI intermediária.
 - `test-summary.json` e JUnit passam a registrar os contadores nativos do Node em CI, com saída compacta, sem omitir falhas ou desabilitar testes. O resultado integral do HEAD final deve ser consultado; a aprovação do primeiro bloco não aprova automaticamente os seguintes.
@@ -44,3 +44,9 @@ Não há nova medição de Discord real, capacidade de 20–50 usuários ou homo
 Próximas três famílias com reutilização plausível, ainda dependentes de revisão individual: busca FLIP/Invocação com filtros de Equipamento/Ritual; sequências de compra/descarte com escolhas persistidas; eventos de dano/destruição em batalha com operações compostas. As Fusões simples remanescentes têm materiais ainda não certificados: a triagem não encontrou um lote livre de 50 Normais ou Fusões que pudesse ser admitido sem essas dependências.
 
 Hospedagem: **não implantada**. Não há ferramenta de painel autenticado disponível nesta sessão; a M27 registrou necessidade de reconectar a conta. A autorização para preparar a atualização do bot de teste é reconhecida, mas não comprova acesso nem deploy. Usar somente a versão com CI integralmente aprovada, preservar backup verificável do código/configuração/banco e testar restauração antes de substituir a instância. Sem merge, Discord real, inventários concedidos ou produção alterada.
+
+## Correção demonstrada pela auditoria integral
+
+A CI 40824116991 aprovou tipagem e **5.994/5.994 testes**, mas falhou no roteiro de 1.000 duelos clássicos 2v2: Soul Reversal devolvia uma carta do parceiro inativo ao Deck do parceiro ativo. O caso foi reproduzido nas quatro posições e corrigido por `ownedPrivateZone`: mão, Deck e Adicional privados seguem o proprietário físico, sem alterar a ordem do Deck do parceiro. Os quatro cenários e o consolidado de 222 testes passam localmente. A integração completa precisa ser reexecutada após essa correção. O pacote do commit 319b5028 não é aprovado para instalação.
+
+O soak anterior de 600 s passou com integridade, conservação e economia preservadas, mas sua lista explícita de versões 1v1 terminava na v8. O roteiro agora inclui a versão ativa e separa os participantes do 2v2; não se deve citar o resultado anterior como prova de carga 1v1 da v9. A nova execução ainda precisa concluir.

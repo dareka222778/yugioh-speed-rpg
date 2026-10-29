@@ -36,7 +36,7 @@
     }
   ],
   "local": {
-    "targetedPassed": 216,
+    "targetedPassed": 222,
     "targetedFailed": 0,
     "historicalPassed": 700,
     "historicalDependencyLoadFailure": 1,
@@ -50,15 +50,22 @@
     "status": "success"
   },
   "latestImplementationCI": {
-    "run": 40823401719,
-    "commit": "afb57785dc93ea99aa77840d6ca75ef8f742ab7a",
+    "run": 40824116991,
+    "commit": "319b5028cd1c3760d275a46821213347a4ddce52",
     "status": "failed",
-    "testPass": 5945,
-    "testFail": 1,
-    "reason": "Compact reporting hid stdout in a nested explicit safety fixture. Compact mode is now limited to full-suite runs; unchanged safety assertions passed locally."
+    "testPass": 5994,
+    "testFail": 0,
+    "auditFailure": "tag-classic: inactive partner grave card returned to active partner Deck",
+    "reproduction": "Four deterministic seats fail before ownedPrivateZone routing; all four pass after fix."
   },
   "deployed": false,
   "merged": false,
   "inventoryGranted": false,
-  "fullCatalogComplete": false
+  "fullCatalogComplete": false,
+  "pendingValidation": "Full CI of subsequent ownership fix and explicit active-v9 soak.",
+  "sourcePackage": {
+    "oldCommit": "319b5028",
+    "status": "not approved: CI integration failure; do not install",
+    "newPackage": "prepare only for validated replacement commit"
+  }
 }
