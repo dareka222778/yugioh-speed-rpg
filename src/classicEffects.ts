@@ -16,6 +16,7 @@ import {economicOperations} from './effectModels';
 import {getDestructionModel} from './effectModels';
 import {executeDestruction,destructionTargets} from './effectOperations';
 import {specialSummonFromPile} from './monsterEntry';
+import {conditionalTargets} from './conditionalDestruction';
 export type EffectServices={destroy:(s:DuelState,uid:string)=>void;attack:(m:Monster,s:DuelState)=>number;note:(s:DuelState,line:string)=>void;finish:(s:DuelState,winner:number|null,reason:string)=>void;checkLP:(s:DuelState)=>void;onSpecialSummon?:(s:DuelState,actor:number,uid:string,id:string)=>void};
 export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  const e=getEffect(c.id),p=s.players[index],op=s.players[1-index];if(!e)return [];
@@ -27,6 +28,10 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  if(e.kind==='searchZone')return searchZoneTargets(s,index,e.rule,getCard).map(m=>({kind:'spell',card:c.uid,target:m.uid}));
  if(e.kind==='positionChange')return e.rule.scope==='selected'?positionTargets(s,index,e.rule).map(m=>({kind:'spell',card:c.uid,target:m.uid})):positionTargets(s,index,e.rule).length?[{kind:'spell',card:c.uid}]:[];
  if(e.kind==='sequence')return canStartEconomicOperations(s,index,e.operations)?[{kind:'spell',card:c.uid}]:[];
+ if(e.kind==='conditionalDestruction'){
+  const targets=conditionalTargets(s,index,e,c.uid);
+  return e.scope==='selected'?targets.map(target=>({kind:'spell',card:c.uid,target})):targets.length?[{kind:'spell',card:c.uid}]:[];
+ }
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
   case 'destroyExtreme':return s.players.some((owner,side)=>(e.scope==='all'||side!==index)&&owner.monsters.some(m=>(!e.faceUp||m.faceUp)&&(!e.position||m.position===e.position)))?[{kind:'spell',card:c.uid}]:[];
@@ -78,6 +83,20 @@ export function turnMonsterFaceDown(m:Monster):void{
 }
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{
  const e=getEffect(a.id),p=s.players[a.actor],op=s.players[1-a.actor];if(!e)return false;
+ if(e.kind==='conditionalDestruction'){
+  let count=0;
+  if(e.zone==='monsters')count=executeDestruction(s,a.actor,getDestructionModel(e)!,a.target,{...service,kind:getCard(a.id)?.kind==='trap'?'trap':'spell'});
+  else if(e.zone==='backrow')count=destroySpellTrapGroup(s,a.actor,e.scope==='opponent'?'opponent':'all',a.card);
+  else {
+   // Snapshot before removing Equips; removing one Equip can make another invalid.
+   const targets=s.players.flatMap(p=>p.backrow.filter(b=>b.uid!==a.card&&b.faceUp&&getEffect(b.id)?.kind==='equip').map(b=>b.uid));
+   for(const uid of targets)discardBackrow(s,uid);
+   count=targets.length;
+  }
+  if(count&&e.opponentGainOnDestroy)op.lp+=e.opponentGainOnDestroy;
+  service.note(s,`${getCard(a.id)?.name??'Efeito condicionado'}: ${count} carta(s) destruída(s).`);
+  return true;
+ }
  if(e.kind==='positionChange'){executePositionChange(s,a.actor,e.rule,'spell',a.target,turnMonsterFaceDown);service.note(s,'Mudança de posição resolvida.');return true;}
  if(e.kind==='moveSelected'){service.note(s,`Movimentação: ${executeSelectedMovement(s,a.actor,e.rule,a.targets??[],a.targetBindings??[],getCard,id=>getMonsterEffect(id)?.trigger==='flip')} carta(s).`);return true;}
  if(e.kind==='recoverMultiple'){service.note(s,`Recuperação: ${executeRecovery(s,a,e.rule,getCard)} carta(s) adicionada(s) à mão.`);return true;}

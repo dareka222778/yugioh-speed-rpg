@@ -6,7 +6,7 @@ import type {DestructionModel} from './effectModels';
 export type DestructionServices={kind?:EffectKind;destroy:(s:DuelState,uid:string)=>void;banish?:(s:DuelState,uid:string)=>boolean;attack:(m:Monster,s:DuelState)=>number};
 export function destructionTargets(s:DuelState,actor:number,model:DestructionModel,target?:string):string[]{
  return s.players.flatMap((p,index)=>{
-  if(model.scope==='opponent'&&index===actor)return [];
+  if((model.scope==='opponent'||model.controller==='opponent')&&index===actor)return [];
   return p.monsters.filter(m=>(model.scope!=='selected'||m.uid===target)&&(!model.faceUp||m.faceUp)&&(!model.position||m.position===model.position)&&(!model.races||model.races.includes(getDuelCard(m.id)?.race??''))&&(!model.equipped||s.players.some(owner=>owner.backrow.some(b=>b.faceUp&&b.resolved===true&&b.equippedTo===m.uid)))).map(m=>m.uid);
  });
 }

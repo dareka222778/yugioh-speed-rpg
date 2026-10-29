@@ -2,7 +2,7 @@
  * Legacy kind names remain identifiers for API/backwards compatibility only.
  */
 import type {Effect} from './effectDefinitions';
-export type DestructionModel={operation:'destroyMonsters';scope:'all'|'opponent'|'selected';position?:'atk'|'def';faceUp?:boolean;minimumAtk?:number;races?:readonly string[];equipped?:true;destination:'grave'|'banished'};
+export type DestructionModel={operation:'destroyMonsters';scope:'all'|'opponent'|'selected';controller?:'opponent';position?:'atk'|'def';faceUp?:boolean;minimumAtk?:number;races?:readonly string[];equipped?:true;destination:'grave'|'banished'};
 export type ActivationModel={speed:1|2|3;window:'main'|'free'|'attackDeclared'|'summoned'|'spellActivated'|'trapActivated';damage:'never'|'beforeCalculation'|'counter';opponentOnly?:boolean;summonKinds?:readonly ('summon'|'flip'|'specialSummon')[];minimumSummonAtk?:number};
 export type SpellTrapModel={activation:ActivationModel;destruction?:DestructionModel};
 const main:ActivationModel={speed:1,window:'main',damage:'never'};
@@ -27,11 +27,11 @@ const models:Partial<Record<Effect['kind'],SpellTrapModel>>={
  sevenTools:{activation:{speed:3,window:'trapActivated',damage:'counter'}}
 };
 export function getEffectModel(kind:Effect['kind']):SpellTrapModel|undefined{return models[kind];}
-export function getDestructionModel(value:Effect|Effect['kind']):DestructionModel|undefined{if(typeof value!=='string'&&value.kind==='destroyFiltered')return destroy('all',{faceUp:true,...value.filter});if(typeof value!=='string'&&value.kind==='destroyTargetPosition')return destroy('selected',{position:value.position});return models[typeof value==='string'?value:value.kind]?.destruction;}
+export function getDestructionModel(value:Effect|Effect['kind']):DestructionModel|undefined{if(typeof value!=='string'&&value.kind==='conditionalDestruction'&&value.zone==='monsters')return destroy(value.scope,{controller:value.controller,faceUp:value.faceUp,equipped:value.equipped});if(typeof value!=='string'&&value.kind==='destroyFiltered')return destroy('all',{faceUp:true,...value.filter});if(typeof value!=='string'&&value.kind==='destroyTargetPosition')return destroy('selected',{position:value.position});return models[typeof value==='string'?value:value.kind]?.destruction;}
 
 /** Definitions with variable parameters carry their own activation policy. */
 export function getActivationModel(effect:Effect):ActivationModel|undefined{
- return effect.kind==='moveSelected'||effect.kind==='positionChange'||effect.kind==='continuous'||effect.kind==='sequence'||effect.kind==='choiceSequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
+ return effect.kind==='conditionalDestruction'||effect.kind==='moveSelected'||effect.kind==='positionChange'||effect.kind==='continuous'||effect.kind==='sequence'||effect.kind==='choiceSequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
 }
 
 export function economicOperations(effect:Effect):readonly import('./economicOperations').EconomicOperation[]|undefined{
