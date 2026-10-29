@@ -16,4 +16,9 @@ test('M28 selection survives real SQLite reopen and transaction rollback; duplic
 test('M28 actual NPC terminates mandatory multi-target and optional quantity choices',()=>{
  for(const id of ['96947648','90928333','05758500','82542267']){let s=game();s.players[0].hand=[{uid:'source',id}];const water=require('../dist/effectRegistry').engineCatalog.find(c=>c.monsterType==='normal'&&c.attribute==='WATER'&&c.atk<=1500);s.players[0].grave=[{uid:'water1',id:water.id},{uid:'water2',id:water.id}];const a=e.legalActions(s,'m28-a').find(a=>a.kind==='spell');assert.ok(a);s=e.step(s,'m28-a',a);for(let n=0;s.phase==='choice'||s.phase==='response';n++){assert.ok(n<30);const actor=s.players[e.decisionPlayer(s)].id,action=store.chooseNPC(s,actor);assert.ok(action);s=e.step(s,actor,action);}assert.equal(s.phase,'main');assert.equal(s.movementSelection,undefined);}
 });
+test('M28 NPC puts a weak recruited monster in Defense against a stronger visible attacker',()=>{
+ let s=game();s.players[0].hand=[];s.players[0].deck=[{uid:'recruit',id:'24317029'}];s.players[0].monsters=[{uid:'spy',id:'24317029',faceUp:false,position:'def',entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0}];s.players[1].monsters=[{uid:'dragon',id:'89631139',faceUp:true,position:'atk',entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0}];
+ s=e.step(s,'m28-a',e.legalActions(s,'m28-a').find(a=>a.kind==='position'));
+ assert.equal(s.choice.source,'monsterRecruit');s=e.step(s,'m28-a',store.chooseNPC(s,'m28-a'));assert.equal(s.choice.source,'monsterRecruitPosition');const action=store.chooseNPC(s,'m28-a');assert.equal(action.target,'__recruit_def__');s=e.step(s,'m28-a',action);assert.equal(s.players[0].monsters.find(m=>m.uid==='recruit').position,'def');
+});
 after(()=>{d.db.close();fs.rmSync(folder,{recursive:true,force:true});});

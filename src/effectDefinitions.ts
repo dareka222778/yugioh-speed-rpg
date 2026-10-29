@@ -52,6 +52,7 @@ export const effectDefinitions:Record<string,Effect>={
  ...mechanicalEffects28,
  ...movementEffects28,
  ...attackEffects28,
+ '55013285':{kind:'monsterEffect'},'93107608':{kind:'monsterEffect'},'77044671':{kind:'monsterEffect'},'39191307':{kind:'monsterEffect'},'24317029':{kind:'monsterEffect'},
  ...searchSpellEffects25,
  ...economicCountEffects24,
  ...economicEffects23,

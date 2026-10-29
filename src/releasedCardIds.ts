@@ -853,4 +853,10 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "85742772",
   "23615409",
   "95220856",
+  // M28 recruits: owner-authorized, individually certified cohort.
+  "55013285",
+  "93107608",
+  "77044671",
+  "39191307",
+  "24317029",
 ]);

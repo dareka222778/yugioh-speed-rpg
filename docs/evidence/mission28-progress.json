@@ -4,15 +4,15 @@
   "baseCommit": "efd7575cab373d24b36633649d2b775fa70c74f6",
   "engine": "engine-v9",
   "before": 832,
-  "added": 15,
-  "total": 847,
-  "authorizedDistribution": 847,
+  "added": 20,
+  "total": 852,
+  "authorizedDistribution": 852,
   "baseline500": 771,
-  "accumulatedNew": 76,
-  "remainingToTarget": 424,
-  "targetProgressPercent": 15.2,
+  "accumulatedNew": 81,
+  "remainingToTarget": 419,
+  "targetProgressPercent": 16.2,
   "historical": 1962,
-  "pending": 1115,
+  "pending": 1110,
   "families": [
     {
       "name": "effect-flip",
@@ -29,10 +29,14 @@
     {
       "name": "continuous-attack-restrictions",
       "cards": 3
+    },
+    {
+      "name": "filtered-recruitment",
+      "cards": 5
     }
   ],
   "local": {
-    "targetedPassed": 165,
+    "targetedPassed": 216,
     "targetedFailed": 0,
     "historicalPassed": 700,
     "historicalDependencyLoadFailure": 1,
@@ -46,9 +50,12 @@
     "status": "success"
   },
   "latestImplementationCI": {
-    "run": 40822867051,
-    "commit": "19c77578f1b3222d345434ace46a4aa5935b32e2",
-    "status": "in_progress"
+    "run": 40823401719,
+    "commit": "afb57785dc93ea99aa77840d6ca75ef8f742ab7a",
+    "status": "failed",
+    "testPass": 5945,
+    "testFail": 1,
+    "reason": "Compact reporting hid stdout in a nested explicit safety fixture. Compact mode is now limited to full-suite runs; unchanged safety assertions passed locally."
   },
   "deployed": false,
   "merged": false,

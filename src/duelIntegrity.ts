@@ -16,6 +16,7 @@ import {economicOperationIssues} from './economicOperations';
 import {getDuelCard as getCard} from './effectRegistry';
 import {assertDuelRandom} from './duelRandom';
 import {CARD_DEFINITIONS_VERSION,RULES_PROFILE,rulesFor,supportedRulesVersion} from './rulesProfile';
+import {matchesMonsterSelector} from './cardSelectors';
 import {assertRitualFlow} from './ritualSummon';
 import {getMonsterEffect} from './monsterEffects';
 import type {CardRef,DuelState} from './duelEngine';
@@ -39,7 +40,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.random!==undefined)assertDuelRandom(s.random);
  if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');
  for(const operation of [s.pending,...Array.isArray(s.chain)?s.chain:[]])if(operation?.targetBinding!==undefined){const b=operation.targetBinding;if(!object(b)||typeof b.uid!=='string'||b.uid!==operation.target||!lifetimeZones.includes(b.zone)||!integer(b.epoch))fail('referencia de alvo');}
- if(s.choice?.source!==undefined&&!['selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit'].includes(s.choice.source))fail('continuação de escolha desconhecida');
+ if(s.choice?.source!==undefined&&!['monsterRecruitPosition','selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit'].includes(s.choice.source))fail('continuação de escolha desconhecida');
  if(s.rulesVersion==='speed-rpg-v2'&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
  if(s.handFlow!==undefined){
   const f=s.handFlow;
@@ -72,7 +73,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.pending.kind==='attack'&&s.pending.defenders!==undefined&&(!Array.isArray(s.pending.defenders)||s.pending.defenders.some((uid:unknown)=>typeof uid!=='string')||new Set(s.pending.defenders).size!==s.pending.defenders.length))fail('campo de declaração do ataque');
  if(s.chainRoot!==undefined){
   const root=s.chainRoot;
-  if(!object(root)||!pendingKinds.has(root.kind)||!(s.phase==='choice'&&['monsterSearch','monsterRecruit'].includes(s.choice?.source)||s.phase==='discard'&&s.handFlow?.resumeChainRoot))fail('continuação da corrente');
+  if(!object(root)||!pendingKinds.has(root.kind)||!(s.phase==='choice'&&['monsterSearch','monsterRecruit','monsterRecruitPosition'].includes(s.choice?.source)||s.phase==='discard'&&s.handFlow?.resumeChainRoot))fail('continuação da corrente');
   if(!['none','end','battle'].includes(root.kind)&&(!actor(root.actor)||typeof root.card!=='string'))fail('origem da continuação');
  }
  if(s.phase==='choice'&&['triggerOrder','triggerTarget','triggerOptional'].includes(s.choice?.source)){
@@ -105,6 +106,11 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
    }
   }
   if(p.field){checkRef(p.field);if(!getCard(p.field.id)?.field||typeof p.field.faceUp!=='boolean'||!integer(p.field.setTurn)||p.field.resolved!==undefined&&typeof p.field.resolved!=='boolean')fail('Magia de Campo');}
+ }
+ if(s.choice?.source==='monsterRecruitPosition'){
+  const pending=s.pending,op=pending.kind==='monsterEffect'?getMonsterEffect(pending.id)?.operation:undefined;
+  const ref=s.players[s.choice.actor]?.deck.find((c:CardRef)=>c.uid===pending.target),info=ref&&getCard(ref.id);
+  if(!op||op.kind!=='recruit'||!info||info.fusion||info.monsterType==='ritual'||!matchesMonsterSelector(info,op.filter)||pending.targetBinding?.zone!=='deck'||JSON.stringify(s.choice.targets)!==JSON.stringify(op.positions.map(p=>p==='atk'?'__recruit_atk__':'__recruit_def__')))fail('posição de recrutamento');
  }
  assertTokenLedger(s);
  if(s.teamRotation!==undefined){

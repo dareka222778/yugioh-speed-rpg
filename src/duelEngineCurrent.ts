@@ -1,6 +1,7 @@
 import {selectedMovementTargets,movementChoiceTargets,selectMovementTarget,type MovementSelection} from './selectedMovement';
 import {recoveryTargets} from './recoveryRules';
 import {positionTargets,executePositionChange} from './positionOperations';
+import {matchesMonsterSelector} from './cardSelectors';
 import {beginRitual,chooseRitual,type RitualFlow} from './ritualSummon';
 import {rulesCardName} from './cardIdentity';
 import {syncContinuous,continuousAttackAllowed,continuousTrapsNegated,monsterEffectsNegated,canAffectMonster,addTemporaryModifier,type ContinuousState} from './continuousEffects';
@@ -41,7 +42,7 @@ export type Action=
  |{kind:'battle'|'end'|'pass'|'concede'};
 export type Pending=( {kind:'standby';actor:number;card:string;taskId:string;choiceId:string}|{kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;targets?:string[];targetBindings?:TargetBinding[];position?:'atk'|'def'})&{targetBinding?:TargetBinding};
 export type TriggerEvent={actor:number;card:string;id:string};
-export type DuelState={version:1;movementSelection?:MovementSelection;afterEffectFlips?:Extract<Pending,{kind:'attack'}>;effectFlips?:Array<TriggerEvent&{binding:TargetBinding}>;ritual?:RitualFlow;resolverVersion?:ResolverVersion;catalogRevision?:string;continuousState?:ContinuousState;standby?:StandbyFlow;tokenLedger?:TokenLedger;cardLifetimes?:Record<string,CardLifetime>;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'selectedMovement'|'multiTarget'|'ritual'|'standby'|'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
+export type DuelState={version:1;movementSelection?:MovementSelection;afterEffectFlips?:Extract<Pending,{kind:'attack'}>;effectFlips?:Array<TriggerEvent&{binding:TargetBinding}>;ritual?:RitualFlow;resolverVersion?:ResolverVersion;catalogRevision?:string;continuousState?:ContinuousState;standby?:StandbyFlow;tokenLedger?:TokenLedger;cardLifetimes?:Record<string,CardLifetime>;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];source?:'monsterRecruitPosition'|'selectedMovement'|'multiTarget'|'ritual'|'standby'|'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=()=>new Set(getEnabledCardIds());
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -91,6 +92,20 @@ function monsterTargets(s:DuelState,actor:number,e:MonsterEffect):string[]|undef
  if(op.kind==='destroy'||op.kind==='bounce')return (op.target==='anyMonster'?s.players:s.players.filter((_,i)=>i!==actor)).flatMap(p=>p.monsters.map(m=>m.uid));
  if(op.kind==='recover')return s.players[actor].grave.filter(c=>card(c.id).kind===op.cardKind).map(c=>c.uid);
  return undefined;
+}
+function recruitTargets(s:DuelState,actor:number,op:MonsterEffect['operation']):string[]{
+ if(op.kind!=='recruit'&&op.kind!=='specialSummon')return [];
+ return s.players[actor].deck.filter(c=>{const info=card(c.id);if(info.monsterType==='ritual'||info.fusion)return false;return op.kind==='recruit'?matchesMonsterSelector(info,op.filter):info.kind==='monster'&&info.attribute===op.attribute&&typeof info.atk==='number'&&info.atk<=op.maximumAtk;}).map(c=>c.uid);
+}
+function finishRecruit(s:DuelState,index:number,uid:string,position:'atk'|'def'){
+ const pending=s.pending;if(pending.kind!=='monsterEffect')throw Error('Origem de recrutamento inválida.');const op=getMonsterEffect(pending.id)?.operation;
+ if(!op||!['recruit','specialSummon'].includes(op.kind)||uid!=='__skip__'&&(s.players[index].monsters.length>=RULES_PROFILE.monsterZones||!recruitTargets(s,index,op).includes(uid)))throw Error('Recrutamento inválido.');
+ if(op.kind==='recruit'&&!op.positions.includes(position))throw Error('Posição inválida.');
+ if(uid!=='__skip__'){const recruited=specialSummonFromPile(s,index,index,'deck',uid,position);if(!recruited)throw Error('Monstro inelegível.');shuffleDuel(s.players[index].deck,s);note(s,card(pending.id).name+' Invocou '+card(recruited.id).name+' do Deck.');}
+ else note(s,'O jogador recusou a Invocação-Especial.');
+ delete s.choice;s.pending={kind:'none'};s.phase=s.resume;
+ if(s.chainRoot){if(s.chain.length)resumeResolvedChain(s);else{s.pending=s.chainRoot;s.chainRoot=undefined;if(uid!=='__skip__')response(s,{kind:'specialSummon',actor:index,card:uid,id:s.players[index].monsters.find(m=>m.uid===uid)!.id},s.resume,1-index);else resolve(s);}}
+ else if(uid!=='__skip__')response(s,{kind:'specialSummon',actor:index,card:uid,id:s.players[index].monsters.find(m=>m.uid===uid)!.id},s.resume,1-index);
 }
 function effectNameBlocked(s:DuelState,actor:number,id:string):boolean{return s.blockedEffectNames?.[actor]?.[id]===s.turn;}
 function searchDeckTargets(s:DuelState,actor:number,stat:'atk'|'defense',maximum:number,attribute?:string):string[]{
@@ -246,7 +261,7 @@ function eligibleTrigger(s:DuelState,event:TriggerEvent):boolean{
  if(e.trigger==='onOtherSummon'&&!s.players[event.actor].monsters.some(m=>m.uid===event.card&&m.faceUp))return false;
  const targets=monsterTargets(s,event.actor,e);if(targets&&!targets.length)return false;
  if(e.operation.kind==='search'&&!searchDeckTargets(s,event.actor,e.operation.stat,e.operation.maximum).length)return false;
- if(e.operation.kind==='specialSummon'&&(s.players[event.actor].monsters.length>=RULES_PROFILE.monsterZones||!searchDeckTargets(s,event.actor,'atk',e.operation.maximumAtk,e.operation.attribute).length))return false;
+ if((e.operation.kind==='specialSummon'||e.operation.kind==='recruit'&&getMonsterDefinition(event.id)?.activation.policy==='optional')&&(s.players[event.actor].monsters.length>=RULES_PROFILE.monsterZones||!recruitTargets(s,event.actor,e.operation).length))return false;
  return ['flip','onSummon','onOtherSummon','onSentToGrave','onBattleDestroyed'].includes(e.trigger);
 }
 function triggerRank(s:DuelState,e:TriggerEvent){return (getMonsterDefinition(e.id)?.activation.policy==='optional'?2:0)+(e.actor===s.current?0:1);}
@@ -382,12 +397,12 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
      cleanEquips(s);note(s,'Efeito devolveu o monstro ao dono.');
     }
    }else note(s,'O alvo do efeito não está mais no campo.');
-  }else if(op.kind==='search'||op.kind==='specialSummon'){
-   const recruit=op.kind==='specialSummon';
-   const targets=recruit?searchDeckTargets(s,pending.actor,'atk',op.maximumAtk,op.attribute):searchDeckTargets(s,pending.actor,op.stat,op.maximum);
+  }else if(op.kind==='search'||op.kind==='specialSummon'||op.kind==='recruit'){
+   const recruit=op.kind!=='search';
+   const targets=op.kind!=='search'?recruitTargets(s,pending.actor,op):searchDeckTargets(s,pending.actor,op.stat,op.maximum);
    if(targets.length&&(!recruit||p.monsters.length<RULES_PROFILE.monsterZones)){
     s.pending=pending;
-    s.choice={actor:pending.actor,targets:recruit&&!fromChain?[...targets,'__skip__']:targets,source:recruit?'monsterRecruit':'monsterSearch'};s.phase='choice';
+    s.choice={actor:pending.actor,targets:recruit&&!fromChain&&(op.kind==='specialSummon'||getMonsterDefinition(pending.id)?.activation.policy==='optional')?[...targets,'__skip__']:targets,source:recruit?'monsterRecruit':'monsterSearch'};s.phase='choice';
     note(s,recruit&&pending.id!=='83011277'?'Escolha um monstro elegível do seu Deck ou recuse a Invocação.':recruit?'Tomate Místico: escolha um monstro TREVAS de até 1500 ATK ou recuse a Invocação.':'Escolha um monstro elegível do seu Deck.');
     return;
    }
@@ -689,24 +704,17 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    s.choice=undefined;s.phase='battle';
    if(action.target==='__cancel__'){s.pending={kind:'none'};note(s,'Ataque cancelado na repetição; o atacante já usou seu ataque.');}
    else {s.pending={...pending,target:action.target==='__direct__'?undefined:action.target,defenders:s.players[1-index].monsters.map(m=>m.uid),replaying:true};resolve(s);}
+  }else if(s.choice?.source==='monsterRecruitPosition'){
+   const pending=s.pending;if(pending.kind!=='monsterEffect'||!pending.target||!targetBindingValid(s,pending.targetBinding))throw Error('Escolha de posição obsoleta.');
+   finishRecruit(s,index,pending.target,action.target==='__recruit_atk__'?'atk':'def');
   }else if(s.choice?.source==='monsterRecruit'){
-   const pending=s.pending,choice=s.choice;
-   if(pending.kind!=='monsterEffect'||!choice.targets.includes(action.target))throw new Error('Invocação inválida.');
-   const op=getMonsterEffect(pending.id)?.operation;
-   if(op?.kind!=='specialSummon')throw new Error('Invocação inválida.');
-   if(action.target!=='__skip__'){
-    const allowed=searchDeckTargets(s,index,'atk',op.maximumAtk,op.attribute);
-    if(p.monsters.length>=RULES_PROFILE.monsterZones||!allowed.includes(action.target))throw new Error('Monstro inelegível para Invocação-Especial.');
-    const recruited=specialSummonFromPile(s,index,index,'deck',action.target);
-    if(!recruited)throw new Error('Monstro inelegível para Invocação-Especial.');
-    shuffleDuel(p.deck,s);
-    note(s,`Tomate Místico Invocou ${card(recruited.id).name} do Deck.`);
-   }else note(s,'O jogador recusou a Invocação-Especial de Tomate Místico.');
-   s.choice=undefined;s.pending={kind:'none'};s.phase=s.resume;
-   if(s.chainRoot){
-    if(s.chain.length)resumeResolvedChain(s);
-    else {s.pending=s.chainRoot;s.chainRoot=undefined;if(action.target!=='__skip__')response(s,{kind:'specialSummon',actor:index,card:action.target,id:p.monsters.find(m=>m.uid===action.target)!.id},s.resume,1-index);else resolve(s);}
-   }else if(action.target!=='__skip__')response(s,{kind:'specialSummon',actor:index,card:action.target,id:p.monsters.find(m=>m.uid===action.target)!.id},s.resume,1-index);
+   const pending=s.pending,op=pending.kind==='monsterEffect'?getMonsterEffect(pending.id)?.operation:undefined;
+   if(!op||!s.choice.targets.includes(action.target))throw Error('Recrutamento inválido.');
+   if(op.kind==='recruit'&&action.target!=='__skip__'){
+    if(!recruitTargets(s,index,op).includes(action.target))throw Error('Monstro inelegível.');
+    (pending as Extract<Pending,{kind:'monsterEffect'}>).target=action.target;pending.targetBinding=bindTarget(s,action.target);
+    s.choice={actor:index,source:'monsterRecruitPosition',targets:op.positions.map(p=>p==='atk'?'__recruit_atk__':'__recruit_def__')};
+   }else finishRecruit(s,index,action.target,'atk');
   }else if(s.choice?.source==='monsterSearch'){
    const pending=s.pending;
    if(pending.kind!=='monsterEffect'||!s.choice.targets.includes(action.target))throw new Error('Busca inválida.');
@@ -749,7 +757,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    }
   }else if(p.hand.length<=rulesFor(s).handLimit)nextTurn(s);
  }
- cleanEquips(s);settle(s);cleanEquips(s);synchronizeCardLifetimes(s);syncContinuous(s);assertDuelTransition(input,s);return s;
+ cleanEquips(s);settle(s);cleanEquips(s);synchronizeCardLifetimes(s);syncContinuous(s);for(const [key,value]of Object.entries(s))if(value===undefined)Reflect.deleteProperty(s,key);assertDuelTransition(input,s);return s;
 }
 export function actionLabel(s:DuelState,actor:string,a:Action){
  if(a.kind==='choose'&&s.choice?.source==='standby')return a.target==='__skip__'?'Não ativar na Espera':s.standby?.tasks.find(t=>t.id===s.standby?.active?.id)?.options.find(o=>o.id===a.target)?.label??'Escolha de Espera';
@@ -773,6 +781,7 @@ export function actionLabel(s:DuelState,actor:string,a:Action){
  if(a.kind==='position')return `${a.mode==='flip'?'Virar para ATK':`Mudar para ${a.mode.toUpperCase()}`}: ${name(a.card)}`;
  if(a.kind==='attack'){const target=a.target?findMonster(s,a.target):undefined;return `Atacar: ${name(a.card)} → ${target?name(target.m.uid):'direto'}`;}
  if(a.kind==='trap')return `Ativar ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.discards?.length?` | Descartar ${a.discards.map(name).join(' + ')}`:''}`;
+ if(a.kind==='choose'&&s.choice?.source==='monsterRecruitPosition')return a.target==='__recruit_atk__'?'Invocar do Deck em Ataque':'Invocar do Deck em Defesa';
  if(a.kind==='choose'&&s.choice?.source==='ritual')return ({__ritual_atk__:'Invocar em Ataque',__ritual_def__:'Invocar em Defesa',__ritual_commit__:'Confirmar Tributos',__ritual_undo__:'Desfazer último Tributo',__ritual_back__:'Escolher outro Ritual'} as Record<string,string>)[a.target]??`${s.ritual?.stage==='materials'?'Tributar':'Invocar por Ritual'}: ${name(a.target)}`;
  if(a.kind==='choose'&&s.choice?.source==='attackReplay')return a.target==='__cancel__'?'Cancelar ataque':a.target==='__direct__'?'Continuar: ataque direto':`Continuar: atacar ${name(a.target)}`;
  if(a.kind==='choose'&&s.choice?.source==='triggerOptional')return a.target==='__skip__'?'Não ativar efeito opcional':`Ativar efeito opcional: ${name(a.target)}`;

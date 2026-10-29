@@ -1,3 +1,5 @@
+import {recruitMonsters28} from './recruitBatch28';
+import {monsterSelectorIssues,type MonsterSelector} from './cardSelectors';
 import {mechanicalMonsters16} from './mechanicalBatch16';
 import {mechanicalMonsters20} from './mechanicalBatch20';
 import {mechanicalMonsters17} from './mechanicalBatch17';
@@ -16,6 +18,7 @@ import {mechanicalMonsters5} from './mechanicalBatch5';
 export type MonsterTrigger='quick'|'ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onBattleDestroyed'|'onSentToGrave'|'continuous';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard'|'tribute';count:number};
 export type MonsterOperation=
+ |{kind:'recruit';filter:MonsterSelector;positions:readonly ('atk'|'def')[]}
  |{kind:'continuous';rules:readonly ContinuousRule[]}
  |{kind:'heal'|'burn'|'burnPerSpellTrap'|'burnPerHand';amount:number}
  |{kind:'destroyByLevel';level:number}
@@ -48,6 +51,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...recruitMonsters28,
  ...mechanicalMonsters20,
  ...mechanicalMonsters16,
  ...mechanicalMonsters17,
@@ -83,12 +87,13 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  const {effect:e,activation:a}=value;
  if(!['mandatory','optional','manual','continuous'].includes(a.policy)||!['main','flip','summon','grave','battleDestroyed','opposingDamageCalculation','continuous'].includes(a.window))return ['invalid-monster-activation'];
  if(!['quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'].includes(e.trigger))return ['unsupported-monster-trigger'];
- if(!e.operation||!['heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack','continuous'].includes(e.operation.kind))return ['unsupported-monster-operation'];
+ if(!e.operation||!['heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous'].includes(e.operation.kind))return ['unsupported-monster-operation'];
  if((e.trigger==='quick'||e.trigger==='ignition')&&a.policy!=='manual'||e.trigger==='continuous'&&a.policy!=='continuous')return ['inconsistent-monster-policy'];
  if(!['quick','ignition','continuous'].includes(e.trigger)&&!['mandatory','optional'].includes(a.policy))return ['inconsistent-monster-policy'];
  const windows:Partial<Record<MonsterTrigger,MonsterActivation['window']>>={quick:'opposingDamageCalculation',ignition:'main',flip:'flip',onSummon:'summon',onOtherSummon:'summon',onSentToGrave:'grave',onBattleDestroyed:'battleDestroyed',continuous:'continuous'};
  if(windows[e.trigger]!==a.window)return ['inconsistent-monster-window'];
  const op=e.operation;
+ if(op.kind==='recruit')return e.cost!==undefined||Object.keys(op).some(k=>!['kind','filter','positions'].includes(k))||!['flip','onBattleDestroyed'].includes(e.trigger)||monsterSelectorIssues(op.filter).length||!Array.isArray(op.positions)||!op.positions.length||new Set(op.positions).size!==op.positions.length||op.positions.some(p=>!['atk','def'].includes(p))?['invalid-recruit-operation']:[];
  // Admission constraints only: frozen executables never implement paid/pass-
  // limited continuous activations or passive operations as ignition commands.
  if(e.trigger==='continuous'&&(e.cost||e.oncePerTurn))return ['unsupported-continuous-activation'];

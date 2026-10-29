@@ -4956,5 +4956,10 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "36280194":{"fingerprint":"c7e45957ab4a1ed30780db406af7cee314c103124851a8424ec6950d0db0e2ba","suites":["tests/movementBatch28.test.cjs"]},
   "85742772":{"fingerprint":"163f60e07a09980ed7bd82a34b6a07d15104793868349922ffa869f1c6633b8d","suites":["tests/attackBatch28.test.cjs"]},
   "23615409":{"fingerprint":"1270d0d3ab8e4456bc25380a12c5aa15b6e841b72c63147750a888c3562f8b7d","suites":["tests/attackBatch28.test.cjs"]},
-  "95220856":{"fingerprint":"5e6544122374f6ba94d96e07b66026f6e710fe0dfd13a55b56ef6b3295b15f5d","suites":["tests/attackBatch28.test.cjs"]}
+  "95220856":{"fingerprint":"5e6544122374f6ba94d96e07b66026f6e710fe0dfd13a55b56ef6b3295b15f5d","suites":["tests/attackBatch28.test.cjs"]},
+  "55013285":{"fingerprint":"f5f34b30103e335af762ae5b9706164efb7febb249a9e62fe6cae70121fe63cf","suites":["tests/recruitBatch28.test.cjs"]},
+  "93107608":{"fingerprint":"cfbf4d23b5f397d34b1c6cf6729af3f37ef158dcc42a5518d3ec8c496ebf6c61","suites":["tests/recruitBatch28.test.cjs"]},
+  "77044671":{"fingerprint":"80a597df711ad7ee3fd598d04ca985548aa5893514b13a57148d40c0e0e5ae14","suites":["tests/recruitBatch28.test.cjs"]},
+  "39191307":{"fingerprint":"e67247ea2fa9769f8ca26c4c395b301d57c0813b2807162861a53456f4d283f0","suites":["tests/recruitBatch28.test.cjs"]},
+  "24317029":{"fingerprint":"6cfdcb2fdbe404f7f29b94841b25aec40ef158687ba5ebd9f1dcdf42ed408309","suites":["tests/recruitBatch28.test.cjs"]}
 };
