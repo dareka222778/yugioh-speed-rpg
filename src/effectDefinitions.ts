@@ -1,3 +1,4 @@
+import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
 import {combatEffects29} from './combatBatch29';
@@ -34,6 +35,7 @@ import {ritualRuleIssues,type RitualRule} from './ritualRules';
 import {recoveryIssues,type RecoveryRule} from './recoveryRules';
 import {selectedMovementIssues,type SelectedMovementRule} from './selectedMovement';
 export type Effect=
+ |{kind:'conditionalDestruction';activation:ActivationModel;zone:'monsters'|'backrow'|'equipSpells';scope:'all'|'opponent'|'selected';controller?:'opponent';requiredName?:string;minFieldMonsters?:number;minBanished?:number;faceUp?:true;equipped?:true;opponentGainOnDestroy?:number}
  |{kind:'destroyExtreme';scope:'all'|'opponent';stat:'atk'|'defense';position?:'atk'|'def';faceUp?:true}
  |{kind:'destroyTargetPosition';position:'atk'|'def'}
  |{kind:'moveSelected';activation:ActivationModel;rule:SelectedMovementRule}
@@ -54,6 +56,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...conditionalEffects30,
  ...destructionEffects29,
  ...triggerEffects29,
  ...combatEffects29,
@@ -128,6 +131,10 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='conditionalDestruction'){
+  if(Object.keys(e).some(k=>!['kind','activation','zone','scope','controller','requiredName','minFieldMonsters','minBanished','faceUp','equipped','opponentGainOnDestroy'].includes(k))||!['monsters','backrow','equipSpells'].includes(e.zone)||!['all','opponent','selected'].includes(e.scope)||e.scope==='selected'&&e.zone!=='monsters'||e.controller!==undefined&&(e.controller!=='opponent'||e.scope!=='selected')||e.requiredName!==undefined&&(typeof e.requiredName!=='string'||!e.requiredName)||e.minFieldMonsters!==undefined&&(!Number.isSafeInteger(e.minFieldMonsters)||e.minFieldMonsters<1)||e.minBanished!==undefined&&(!Number.isSafeInteger(e.minBanished)||e.minBanished<1)||e.faceUp!==undefined&&(e.faceUp!==true||e.zone!=='monsters')||e.equipped!==undefined&&(e.equipped!==true||e.zone!=='monsters')||e.opponentGainOnDestroy!==undefined&&(!Number.isSafeInteger(e.opponentGainOnDestroy)||e.opponentGainOnDestroy<1||e.zone!=='monsters')||!e.activation||![1,2,3].includes(e.activation.speed)||!['main','free','attackDeclared','summoned','spellActivated','trapActivated'].includes(e.activation.window))return ['invalid-conditional-destruction'];
+  return [];
+ }
  if(e?.kind==='destroyExtreme')return Object.keys(e).some(k=>!['kind','scope','stat','position','faceUp'].includes(k))||!['all','opponent'].includes(e.scope)||!['atk','defense'].includes(e.stat)||e.position!==undefined&&!['atk','def'].includes(e.position)||e.faceUp!==undefined&&e.faceUp!==true?['invalid-extreme-destruction']:[];
  if(e?.kind==='destroyTargetPosition')return Object.keys(e).some(k=>!['kind','position'].includes(k))||!['atk','def'].includes(e.position)?['invalid-position-destruction']:[];
  if(e?.kind==='positionChange')return Object.keys(e).some(k=>!['kind','activation','rule'].includes(k))?['unsupported-position-field']:positionRuleIssues(e.rule);

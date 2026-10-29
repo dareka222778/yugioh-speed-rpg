@@ -903,4 +903,7 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "26412047",
   "97169186",
   "30683373",
+// M30 conditional destruction and Gadget search cards: reviewed admission.
+  "13839120", "41172955", "86445415", "63391643", "02314238",
+  "38411870", "28121403", "20727787", "61044390", "81510157",
 ]);

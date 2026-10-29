@@ -5208,4 +5208,15 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "suites": ["tests/destructionBatch29.test.cjs"]
   }
 
+, "13839120": {"fingerprint":"b877eadb2096e1322089d7569992f8819a24c0ec07355877a468b787c6566de0","suites":["tests/conditionalBatch30.test.cjs"]}
+, "41172955": {"fingerprint":"2112c8080f5c34e1302b4c407b30cc43e0d0cbc73a27ff4dbf7f2dca280111ad","suites":["tests/conditionalBatch30.test.cjs"]}
+, "86445415": {"fingerprint":"ba877ef581cd087f34e1ff18651282bed13970a18eebee5125d146b8b2e7cad8","suites":["tests/conditionalBatch30.test.cjs"]}
+, "63391643": {"fingerprint":"1457e7a1d85cd6ce985718a2077927e0200888866be3c9e576aa7f47c418fac1","suites":["tests/conditionalBatch30.test.cjs"]}
+, "02314238": {"fingerprint":"919b006c225c6169f4a897f7b519c5704a20924ec6ff168600bf5d8693c5e3a9","suites":["tests/conditionalBatch30.test.cjs"]}
+, "38411870": {"fingerprint":"22349ac38a80e09bf9b9754638ba1ea1d7b541e439c57c20d3f8d05a8650cda2","suites":["tests/conditionalBatch30.test.cjs"]}
+, "28121403": {"fingerprint":"a4da138218b3fd3994c42f33765ed8cdb41aa9104be18ff8500993d28af05ea7","suites":["tests/conditionalBatch30.test.cjs"]}
+, "20727787": {"fingerprint":"273afa04c2d88ca1d6b0b9f41499fa6c0c02f6ff8a886805f4c0f2640958cedf","suites":["tests/conditionalBatch30.test.cjs"]}
+, "61044390": {"fingerprint":"b0e7a33fb9d8d75aca7575f6cd9c4a5106304c18ab7c6387d2fcad78186154c1","suites":["tests/conditionalBatch30.test.cjs"]}
+, "81510157": {"fingerprint":"859cddaf347ee42301f39005c5b7bde4031179b1094c9e7739e5ca8ed8d3ee32","suites":["tests/conditionalBatch30.test.cjs"]}
+
 };

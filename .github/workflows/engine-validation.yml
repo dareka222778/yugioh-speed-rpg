@@ -22,6 +22,7 @@ jobs:
       - run: node scripts/check-mission8-integrity.cjs
       - run: npm run check
       - run: npm test
+      - run: node scripts/audit-conditional-batch30.cjs
       - run: node scripts/audit-destruction-batch29.cjs
       - run: node scripts/audit-trigger-batch29.cjs
       - run: node scripts/audit-combat-batch29.cjs
@@ -101,6 +102,7 @@ jobs:
             artifacts/certification-executions-combat29.json
             artifacts/mission29-combat-admission.json
             artifacts/certification-executions-trigger29.json
+            artifacts/certification-executions-conditional30.json
             artifacts/mission29-trigger-admission.json
             artifacts/rea-acceptance.json
             artifacts/engine-recovery-benchmark.json

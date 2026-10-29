@@ -23,6 +23,7 @@ import {effectActivationAllowed} from './effectTiming';
 import {canStartEconomicOperations,executeEconomicOperations} from './economicOperations';
 import {resolveAttackResponse} from './attackResponses';
 import {executeDestruction} from './effectOperations';
+import {conditionalTargets} from './conditionalDestruction';
 import {resolveChainLinks,type ChainLink} from './chainEngine';
 import {getMonsterEffect,getMonsterDefinition,canActivateMonsterEffect,payMonsterEffectCost,monsterDestructionTarget,type MonsterEffect} from './monsterEffects';
 import {getDuelCard as getCard} from './effectRegistry';
@@ -147,6 +148,12 @@ function trapActions(s:DuelState,index:number):Action[]{
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='calculation')continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage!=='beforeCalculation')continue;
   if(effect.kind==='continuous'){if(s.players[index].lp>(effect.lpCost??0))out.push({kind:'trap',card:c.uid,target:''});continue;}
+  if(effect.kind==='conditionalDestruction'){
+   const targets=conditionalTargets(s,index,effect,c.uid);
+   if(effect.scope==='selected')out.push(...targets.map(target=>({kind:'trap' as const,card:c.uid,target})));
+   else if(targets.length)out.push({kind:'trap',card:c.uid,target:''});
+   continue;
+  }
   if(effect.kind==='attackResponse'&&s.pending.kind==='attack'){
    const attacker=findMonster(s,s.pending.card);
    if(!s.pending.cancelled&&attacker?.m.faceUp&&attacker.m.position==='atk'&&attacker.p===s.players[s.pending.actor])out.push({kind:'trap',card:c.uid,target:attacker.m.uid});
@@ -441,6 +448,10 @@ function resolve(s:DuelState){
   if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b?.faceUp)b.resolved=true;return;}
   if(effect?.kind==='temporaryModifier'){if(link.target&&canAffectMonster(s,link.target,'spell'))addTemporaryModifier(s,link.target,effect.atk,effect.def);discardBackrow(s,link.card);return;}
   if(effect?.kind==='positionChange'){executePositionChange(s,link.actor,effect.rule,card(link.id).kind==='spell'?'spell':'trap',link.target,turnMonsterFaceDown);discardBackrow(s,link.card);note(s,'Mudança de posição resolvida.');return;}
+  if(effect?.kind==='conditionalDestruction'){
+   resolveClassicSpell(s,{kind:'spell',actor:link.actor,card:link.card,id:link.id,target:link.target},{destroy:graveMonster,attack:atk,note,finish,checkLP});
+   discardBackrow(s,link.card);return;
+  }
   if(effect?.kind==='sequence'){
    executeEconomicOperations(s,link.actor,effect.operations,{finish,checkLP,cardAttribute:id=>card(id).attribute??undefined});discardBackrow(s,link.card);note(s,'Efeito de compra/PV resolvido.');return;
   }
