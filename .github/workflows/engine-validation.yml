@@ -21,6 +21,7 @@ jobs:
       - run: node scripts/check-mission7-integrity.cjs
       - run: node scripts/check-mission8-integrity.cjs
       - run: npm run check
+      - run: node scripts/card-batch-fast.cjs
       - run: npm test
       - run: node scripts/audit-conditional-batch30.cjs
       - run: node scripts/audit-destruction-batch29.cjs
@@ -99,6 +100,10 @@ jobs:
           path: |
             artifacts/test-results.xml
             artifacts/test-summary.json
+            artifacts/executions-m31-generator-fixture.json
+            artifacts/validated-m31-generator-fixture.json
+            artifacts/fast-m31-generator-fixture.log
+            artifacts/mission31-worklist.json
             artifacts/certification-executions-combat29.json
             artifacts/mission29-combat-admission.json
             artifacts/certification-executions-trigger29.json

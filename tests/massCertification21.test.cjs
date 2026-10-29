@@ -37,8 +37,9 @@ test('mass gate rejects duplicate identities, alias candidates and traversal sui
  const duplicate=fixture();duplicate.candidates.push(structuredClone(duplicate.candidates[0]));assert.ok(planMassCertification(duplicate).rows.every(r=>r.issues.includes('duplicate-candidate-identity')));
  const path=fixture();path.candidates[0].suites=['tests/../massCertification21.test.cjs'];assert.ok(planMassCertification(path).rows[0].issues.includes('invalid-or-missing-test-suites'));
 });
-test('ritual, unknown and undeclared operations remain blocked rather than becoming normal monsters',()=>{
- const x=fixture();x.candidates[0].requirements.push('ritual:monster');assert.ok(planMassCertification(x).rows[0].unsupportedRequirements.includes('ritual:monster'));
+test('unknown and undeclared operations remain blocked and Ritual categories require compatible definitions',()=>{
+ const x=fixture();x.candidates[0].requirements.push('unimplemented:teleport');assert.ok(planMassCertification(x).rows[0].unsupportedRequirements.includes('unimplemented:teleport'));
+ const ritual=fixture();ritual.candidates[0].card.monsterType='ritual';assert.equal(planMassCertification(ritual).rows[0].stages.mechanicallyRepresented,false);
  const y=fixture();y.candidates[0].requirements=[];assert.ok(planMassCertification(y).rows[0].issues.includes('undeclared-definition-capability'));
 });
 test('eligibility requires the reviewed regional printing, not an invented release date',()=>{

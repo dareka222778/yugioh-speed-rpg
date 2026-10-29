@@ -10,24 +10,24 @@ const {getEffectModel}=require('../dist/effectModels');
 const currentRegistry=require('../dist/effectRegistry');
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const dimensions=['activation','conditions','costs','targets','choices','operations','duration','restrictions','negation'];
-const effectKinds=['normal','fusion','monsterEffect','heal','burn','field','equip','continuous','temporaryModifier','destroyFiltered','destroySpellTraps','sequence','attackResponse','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce'];
+const effectKinds=['conditionalDestruction','destroyExtreme','ritualMonster','ritualSummon','searchZone','recoverMultiple','moveSelected','positionChange','choiceSequence','normal','fusion','monsterEffect','heal','burn','field','equip','continuous','temporaryModifier','destroyFiltered','destroySpellTraps','sequence','attackResponse','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce'];
 const triggers=['quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'];
-const monsterOps=['heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack','continuous'];
+const monsterOps=['searchFiltered','mill','positionChange','recruit','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack','continuous'];
 const ACTIVE_CAPABILITIES=Object.freeze({engineVersion:'engine-v9',operations:Object.freeze([
  ...effectKinds.map(k=>'effect:'+k),...triggers.map(k=>'trigger:'+k),...monsterOps.map(k=>'monster-operation:'+k),
- ...['lp','discard','tribute'].map(k=>'cost:'+k),...['draw','gainLP','damage'].map(k=>'economic:'+k),
- ...['modifier','negateMonsters','negateTraps','immune'].map(k=>'continuous:'+k),
- ...['hand','grave','monsters','backrow'].map(k=>'count:'+k),'duration:end-turn'
+ ...['lp','discard','tribute'].map(k=>'cost:'+k),...['draw','gainLP','damage','scaledLP'].map(k=>'economic:'+k),
+ ...['combat','preventAttack','modifier','negateMonsters','negateTraps','immune'].map(k=>'continuous:'+k),
+ ...['hand','grave','monsters','backrow'].map(k=>'count:'+k),'duration:end-turn','choice:ritual-materials','ritualSummonExplicitRecipe','ritualSummonAttributeRecipe','ritual:exact-level-total','ritual:minimum-level-total','ritual:monster'
 ])});
 function inferCapabilities(candidate){
  const effect=candidate?.effect,monster=candidate?.monster,required=new Set();
  if(!effect||typeof effect.kind!=='string')return [];
  required.add('effect:'+effect.kind);
- if(effect.kind==='ritual'||candidate?.card?.monsterType==='ritual')required.add('ritual:monster');
+ if(effect.kind==='ritualMonster'||candidate?.card?.monsterType==='ritual')required.add('ritual:monster');
  if(effect.kind==='ritualSummon'){
   required.add('choice:ritual-materials');
-  required.add(effect.ritual?.ids?.length?'ritualSummonExplicitRecipe':'ritualSummonAttributeRecipe');
-  required.add(effect.ritual?.levelMode==='exact'?'ritual:exact-level-total':'ritual:minimum-level-total');
+  required.add(effect.ritual?.monsterId?'ritualSummonExplicitRecipe':'ritualSummonAttributeRecipe');
+  required.add(effect.ritual?.exact===true?'ritual:exact-level-total':'ritual:minimum-level-total');
  }
  const count=c=>{if(c)required.add('count:'+c.zone);};
  const rules=rs=>{if(Array.isArray(rs))for(const r of rs){required.add('continuous:'+r.kind);count(r.count);}};
@@ -46,7 +46,7 @@ function scenarioPlan(candidate){
  add('json-restore','Restore the actual pending/state representation without losing continuation.');
  add('deterministic-replay','Replay the same action after restoration and compare persisted state/events.');
  if(kind==='normal'){for(const [n,p]of [['normal-summon','Apply the printed Level and required Tributes.'],['set','Set legally without revealing hidden identity.'],['destroy','Move the same entity to its owner grave.'],['tribute-owner','Respect owner when a controlled entity is Tributed.'],['zone-capacity','Reject an occupied destination.']])add(n,p);}
- else if(kind==='ritual')for(const [n,p]of [['ritual-summon','Summon through a compatible actual Ritual Spell.'],['no-normal-summon','Reject ordinary Normal Summon.'],['no-normal-set','Reject ordinary Normal Set.'],['ritual-wrong-recipe','Reject an incompatible Ritual recipe.'],['ritual-recovery','Preserve Ritual summon history and legal revival through recovery.']])add(n,p);
+ else if(kind==='ritualMonster')for(const [n,p]of [['ritual-summon','Summon through a compatible actual Ritual Spell.'],['no-normal-summon','Reject ordinary Normal Summon.'],['no-normal-set','Reject ordinary Normal Set.'],['ritual-wrong-recipe','Reject an incompatible Ritual recipe.'],['ritual-recovery','Preserve Ritual summon history and legal revival through recovery.']])add(n,p);
  else {add('activation','Exercise all activation conditions and timing.');add('resolution','Check an independent oracle for every operation and secondary effect.');add('negation','Prevent resolution under a supported negation window.');}
  if(kind==='ritualSummon'){
   for(const [n,p]of [['ritual-exact-recipe','Only the explicitly named monster is eligible for a named recipe.'],['ritual-level-total','Use minimum or exact Level total as defined, rejecting insufficient/redundant Tributes.'],['ritual-resolution-choice','Select the actual monster/material UIDs during resolution rather than targeting at activation.'],['ritual-negated-no-tribute','Negated activation/resolution must not Tribute materials as an activation cost.'],['ritual-invalid-choice','Reject stale or invalid selections without partially moving cards.'],['ritual-restore-choice','Restore a partially completed Ritual decision and continue deterministically.'],['ritual-material-owner','Send controlled Tributes to the correct owners, with supported Token policy.'],['ritual-zone-capacity','A full field can become legal if resolution Tributes free a zone.']])add(n,p);
@@ -107,7 +107,7 @@ function planMassCertification({history,candidates,reviews=[],executions=[],capa
   if(candidate?.monster?.activation?.policy==='optional')requiredDimensions.add('choices');
   if(effect?.kind==='ritualSummon')requiredDimensions.add('choices');
   if(effect?.duration||effect?.kind==='temporaryModifier')requiredDimensions.add('duration');
-  if(!['normal','ritual'].includes(effect?.kind))requiredDimensions.add('negation');
+  if(!['normal','ritualMonster'].includes(effect?.kind))requiredDimensions.add('negation');
   if([...requiredDimensions].some(d=>coverage?.[d]!=='represented'))issues.push('semantic-dimension-not-represented');
   const raw=imports.length===1?imports[0]:undefined,english=typeof raw?.names?.en==='string'?raw.names.en.trim().normalize('NFC'):null;
   if(card&&raw&&(typeof card.englishName!=='string'||card.englishName.trim().normalize('NFC')!==english))issues.push('english-identity-mismatch');
