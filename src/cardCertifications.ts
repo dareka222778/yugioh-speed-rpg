@@ -4947,5 +4947,11 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "93747864":{"fingerprint":"bdd313088a0f3ddfcba87770bdf8595c3481bbd3b5cc8c7b8da95ea9db9325aa","suites":["tests/mechanicalBatch28.test.cjs"]},
   "45895206":{"fingerprint":"a95cd75eea615f2d3668d844a04db8c8fb160d78c25eee910f5e4cc4ef3c38ef","suites":["tests/mechanicalBatch28.test.cjs"]},
   "96947648":{"fingerprint":"3576b4f88d74afc380b37e0590202ff4924d8c55c152c205f242ee76c761fe7b","suites":["tests/mechanicalBatch28.test.cjs"]},
-  "90928333":{"fingerprint":"d6231659d7d9372011d8395a558ba09a85b216788ec0981a57d382a57e2ea0fd","suites":["tests/mechanicalBatch28.test.cjs"]}
+  "90928333":{"fingerprint":"d6231659d7d9372011d8395a558ba09a85b216788ec0981a57d382a57e2ea0fd","suites":["tests/mechanicalBatch28.test.cjs"]},
+  "24623598":{"fingerprint":"7702ea9d26f968294553b35675ee9207686dc42eff6a3b05c27521cd50136202","suites":["tests/movementBatch28.test.cjs"]},
+  "82542267":{"fingerprint":"e3f4a28f281218c3ed682628adb98bcab333e9cd7a9bd14a6e05ff0b71168e33","suites":["tests/movementBatch28.test.cjs"]},
+  "05758500":{"fingerprint":"e617e5f72621fa2186ca072befb372b052d52c633d31e3c105c91faaf7e709e6","suites":["tests/movementBatch28.test.cjs"]},
+  "06343408":{"fingerprint":"107b648a2ac6f2bf071449afa750bccea1e5346b417a638a35d875cd2ede064d","suites":["tests/movementBatch28.test.cjs"]},
+  "78864369":{"fingerprint":"7dcf89cd21a28e0de90980f53634528f2188d9b01d371105aec4951bc3fe20cd","suites":["tests/movementBatch28.test.cjs"]},
+  "36280194":{"fingerprint":"c7e45957ab4a1ed30780db406af7cee314c103124851a8424ec6950d0db0e2ba","suites":["tests/movementBatch28.test.cjs"]}
 };

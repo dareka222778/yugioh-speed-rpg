@@ -8,7 +8,7 @@ for(const id of enabledCardIds){
  const effect=getEffect(id);if(getCardStatus(id)?.stage!=='certified'||!effect)throw new Error('Uncertified coverage entry '+id);
  const kind=effect.kind;let bucket;
  if(kind==='ritualMonster'||kind==='ritualSummon')bucket='ritualTemplate';else if(kind==='normal')bucket='normal';else if(kind==='fusion')bucket='fusion';else if(kind==='monsterEffect')bucket='monsterDefinition';
- else if(economicOperations(effect)||kind==='choiceSequence')bucket='economicTemplate';else if((kind==='searchZone'||kind==='recoverMultiple'))bucket='searchTemplate';else if(getDestructionModel(effect))bucket='destructionTemplate';else if(kind==='destroySpellTraps')bucket='spellTrapGroupTemplate';else if(kind==='attackResponse')bucket='attackResponseTemplate';
+ else if(economicOperations(effect)||kind==='choiceSequence')bucket='economicTemplate';else if((kind==='searchZone'||kind==='recoverMultiple'||kind==='moveSelected'))bucket='searchTemplate';else if(getDestructionModel(effect))bucket='destructionTemplate';else if(kind==='destroySpellTraps')bucket='spellTrapGroupTemplate';else if(kind==='attackResponse')bucket='attackResponseTemplate';
  else if(kind==='positionChange')bucket='positionTemplate';else if(kind==='continuous')bucket='continuousTemplate';else if(kind==='temporaryModifier')bucket='temporaryModifierTemplate';else if(kind==='equip')bucket='equipTemplate';else if(kind==='field')bucket='fieldTemplate';else if(spellExceptionIds.includes(id))bucket='namedException';else if(legacyKinds.has(kind))bucket='legacyHandler';
  else throw new Error('No audited execution route for '+id+' '+kind);
  buckets[bucket].push(id);

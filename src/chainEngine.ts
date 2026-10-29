@@ -3,7 +3,7 @@
  * prevents its effect, but never refunds a previously paid cost.
  */
 import type {TargetBinding} from './cardLifetime';
-export type ChainLink={targetBinding?:TargetBinding;actor:number;card:string;id:string;target:string;negated?:boolean;monsterEffect?:boolean};
+export type ChainLink={targets?:string[];targetBindings?:TargetBinding[];targetBinding?:TargetBinding;actor:number;card:string;id:string;target:string;negated?:boolean;monsterEffect?:boolean};
 export function resolveChainLinks<T extends ChainLink>(
  links:readonly T[],
  apply:(link:T)=>void,

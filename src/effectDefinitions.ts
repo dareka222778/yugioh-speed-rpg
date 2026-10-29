@@ -1,3 +1,4 @@
+import {movementEffects28} from './movementBatch28';
 import {mechanicalEffects28} from './mechanicalBatch28';
 import {positionEffects26} from './positionBatch26';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -26,7 +27,9 @@ import type {EconomicOperation} from './economicOperations';
 import {economicOperationIssues} from './economicOperations';
 import {ritualRuleIssues,type RitualRule} from './ritualRules';
 import {recoveryIssues,type RecoveryRule} from './recoveryRules';
+import {selectedMovementIssues,type SelectedMovementRule} from './selectedMovement';
 export type Effect=
+ |{kind:'moveSelected';activation:ActivationModel;rule:SelectedMovementRule}
  |{kind:'recoverMultiple';rule:RecoveryRule}
  |{kind:'positionChange';activation:ActivationModel;rule:PositionRule}
  |{kind:'searchZone';rule:SearchZoneRule}
@@ -46,6 +49,7 @@ export type Effect=
 export const effectDefinitions:Record<string,Effect>={
  ...positionEffects26,
  ...mechanicalEffects28,
+ ...movementEffects28,
  ...searchSpellEffects25,
  ...economicCountEffects24,
  ...economicEffects23,
@@ -113,6 +117,7 @@ const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','mons
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
  if(e?.kind==='positionChange')return Object.keys(e).some(k=>!['kind','activation','rule'].includes(k))?['unsupported-position-field']:positionRuleIssues(e.rule);
+ if(e?.kind==='moveSelected')return Object.keys(e).some(k=>!['kind','activation','rule'].includes(k))?['unsupported-movement-field']:selectedMovementIssues(e.rule);
  if(e?.kind==='recoverMultiple')return Object.keys(e).some(k=>!['kind','rule'].includes(k))?['unsupported-recovery-field']:recoveryIssues(e.rule);
  if(e?.kind==='searchZone')return Object.keys(e).some(k=>!['kind','rule'].includes(k))?['unsupported-search-field']:searchZoneIssues(e.rule);
  if(e?.kind==='choiceSequence'){

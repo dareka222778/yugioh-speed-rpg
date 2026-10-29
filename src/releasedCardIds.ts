@@ -842,4 +842,11 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "45895206",
   "96947648",
   "90928333",
+  // M28 movements: owner-authorized, individually certified cohort.
+  "24623598",
+  "82542267",
+  "05758500",
+  "06343408",
+  "78864369",
+  "36280194",
 ]);
