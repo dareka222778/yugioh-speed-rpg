@@ -1,5 +1,5 @@
-import {runtimeStatusLine,runtimePingText} from './runtimeStatus';
 import 'dotenv/config';
+import {runtimeStatusLine,runtimePingText} from './runtimeStatus';
 import {RULES_PROFILE} from './rulesProfile';
 import {createTagLobby,createTagTraining,runTagBots,currentTag,getTag,setTagMessage,markTagPublished,dueTags,type TagRecord} from './tagStore';
 import {visualTagPublic,visualTagPrivate,visualTagCard,tagZonesMessage,visualTagZoneCard,tagPublicMessage,tagPrivateMessage} from './tagUI';
