@@ -1,3 +1,4 @@
+import {mechanicalEffects28} from './mechanicalBatch28';
 import {positionEffects26} from './positionBatch26';
 import {positionRuleIssues,type PositionRule} from './positionRules';
 import {searchSpellEffects25} from './searchSpellBatch25';
@@ -24,7 +25,9 @@ import type {ActivationModel} from './effectModels';
 import type {EconomicOperation} from './economicOperations';
 import {economicOperationIssues} from './economicOperations';
 import {ritualRuleIssues,type RitualRule} from './ritualRules';
+import {recoveryIssues,type RecoveryRule} from './recoveryRules';
 export type Effect=
+ |{kind:'recoverMultiple';rule:RecoveryRule}
  |{kind:'positionChange';activation:ActivationModel;rule:PositionRule}
  |{kind:'searchZone';rule:SearchZoneRule}
  |{kind:'ritualMonster'}
@@ -42,6 +45,7 @@ export type Effect=
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula};
 export const effectDefinitions:Record<string,Effect>={
  ...positionEffects26,
+ ...mechanicalEffects28,
  ...searchSpellEffects25,
  ...economicCountEffects24,
  ...economicEffects23,
@@ -109,6 +113,7 @@ const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','mons
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
  if(e?.kind==='positionChange')return Object.keys(e).some(k=>!['kind','activation','rule'].includes(k))?['unsupported-position-field']:positionRuleIssues(e.rule);
+ if(e?.kind==='recoverMultiple')return Object.keys(e).some(k=>!['kind','rule'].includes(k))?['unsupported-recovery-field']:recoveryIssues(e.rule);
  if(e?.kind==='searchZone')return Object.keys(e).some(k=>!['kind','rule'].includes(k))?['unsupported-search-field']:searchZoneIssues(e.rule);
  if(e?.kind==='choiceSequence'){
   if(Object.keys(e).some(k=>!['kind','activation','choices'].includes(k))||!Array.isArray(e.choices)||e.choices.length<2||e.choices.length>4||e.choices.some(c=>!c||Object.keys(c).some(k=>k!=='operations')||economicOperationIssues(c.operations).length))return ['invalid-economic-choice'];

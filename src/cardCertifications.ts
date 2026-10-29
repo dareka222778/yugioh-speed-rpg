@@ -4940,6 +4940,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "suites": [
       "tests/ritualExtensions22.test.cjs"
     ]
-  }
+  },
 
+  "38699854":{"fingerprint":"8495bd6e655a7a842da721db2a4caf7f488d3cf906d28ed6daaa60aa6f11deaa","suites":["tests/mechanicalBatch28.test.cjs"]},
+  "63102017":{"fingerprint":"26fc43396ac74f0f6692cd59cbd24c757517ef0c89630e2e09d5aabe3ce84468","suites":["tests/mechanicalBatch28.test.cjs"]},
+  "93747864":{"fingerprint":"bdd313088a0f3ddfcba87770bdf8595c3481bbd3b5cc8c7b8da95ea9db9325aa","suites":["tests/mechanicalBatch28.test.cjs"]},
+  "45895206":{"fingerprint":"a95cd75eea615f2d3668d844a04db8c8fb160d78c25eee910f5e4cc4ef3c38ef","suites":["tests/mechanicalBatch28.test.cjs"]},
+  "96947648":{"fingerprint":"3576b4f88d74afc380b37e0590202ff4924d8c55c152c205f242ee76c761fe7b","suites":["tests/mechanicalBatch28.test.cjs"]},
+  "90928333":{"fingerprint":"d6231659d7d9372011d8395a558ba09a85b216788ec0981a57d382a57e2ea0fd","suites":["tests/mechanicalBatch28.test.cjs"]}
 };

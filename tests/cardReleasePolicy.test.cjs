@@ -5,8 +5,8 @@ const {releasedCardIds}=require('../dist/releasedCardIds');
 const proof=require('../docs/evidence/mission27-release.json');
 test('M27 owner-authorized release contains every certified card and no extras',()=>{
  assert.equal(proof.certifiedCount,832);assert.equal(proof.newReleaseCount,696);
- assert.equal(releasedCardIds.size,832);assert.deepEqual(new Set(enabledCardIds),releasedCardIds);
- assert.equal(enabledCardIds.filter(cardDistributionAllowed).length,832);
+ assert.equal(releasedCardIds.size,enabledCardIds.length);assert.deepEqual(new Set(enabledCardIds),releasedCardIds);
+ assert.equal(enabledCardIds.filter(cardDistributionAllowed).length,enabledCardIds.length);
  for(const id of releasedCardIds){assert.equal(getCardStatus(id)?.stage,'certified');assert.equal(cardDistributionAllowed(id),true);}
 });
 test('M27 imported-only, unknown, malformed and token identities remain blocked',()=>{

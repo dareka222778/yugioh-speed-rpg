@@ -9,7 +9,7 @@ const main:ActivationModel={speed:1,window:'main',damage:'never'};
 const response=(window:ActivationModel['window']='free',damage:ActivationModel['damage']='never'):ActivationModel=>({speed:2,window,damage});
 const destroy=(scope:DestructionModel['scope'],extra:Partial<DestructionModel>={}):DestructionModel=>({operation:'destroyMonsters',scope,destination:'grave',...extra});
 const models:Partial<Record<Effect['kind'],SpellTrapModel>>={
- ritualSummon:{activation:main},destroyFiltered:{activation:main},
+ recoverMultiple:{activation:main},ritualSummon:{activation:main},destroyFiltered:{activation:main},
  temporaryModifier:{activation:response('free','beforeCalculation')},
  destroySpellTraps:{activation:main},
  darkHole:{activation:main,destruction:destroy('all')},

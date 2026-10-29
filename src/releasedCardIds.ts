@@ -835,4 +835,11 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "99551425",
   "99721536",
   "99785935",
+  // M28: owner-authorized, individually certified cohort.
+  "38699854",
+  "63102017",
+  "93747864",
+  "45895206",
+  "96947648",
+  "90928333",
 ]);

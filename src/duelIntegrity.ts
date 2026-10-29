@@ -1,3 +1,5 @@
+import {recoveryTargets} from './recoveryRules';
+import {getEffect} from './effectRegistry';
 import {assertContinuousState} from './continuousEffects';
 import {currentCatalog} from './catalogContext';
 import {getTokenMetadata,assertTokenLedger,assertTokenTransition} from './tokens';
@@ -36,7 +38,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.random!==undefined)assertDuelRandom(s.random);
  if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');
  for(const operation of [s.pending,...Array.isArray(s.chain)?s.chain:[]])if(operation?.targetBinding!==undefined){const b=operation.targetBinding;if(!object(b)||typeof b.uid!=='string'||b.uid!==operation.target||!lifetimeZones.includes(b.zone)||!integer(b.epoch))fail('referencia de alvo');}
- if(s.choice?.source!==undefined&&!['ritual','standby','triggerOptional','triggerOrder','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit'].includes(s.choice.source))fail('continuação de escolha desconhecida');
+ if(s.choice?.source!==undefined&&!['multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit'].includes(s.choice.source))fail('continuação de escolha desconhecida');
  if(s.rulesVersion==='speed-rpg-v2'&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
  if(s.handFlow!==undefined){
   const f=s.handFlow;
@@ -50,6 +52,13 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(!['none','end','battle'].includes(s.pending.kind)&&(!actor(s.pending.actor)||typeof s.pending.card!=='string'))fail('origem do efeito');
  if(s.pending.kind==='attack'&&(['cancelled','endBattle'].some(key=>s.pending[key]!==undefined&&typeof s.pending[key]!=='boolean')))fail('negação de ataque');
  if(s.pending.kind==='attack'&&!['declare','damage','calculation'].includes(s.pending.stage))fail('etapa de dano');
+ if(s.afterEffectFlips!==undefined&&(!object(s.afterEffectFlips)||s.afterEffectFlips.kind!=='attack'||!actor(s.afterEffectFlips.actor)||typeof s.afterEffectFlips.card!=='string'||!['declare','damage','calculation'].includes(s.afterEffectFlips.stage)))fail('retomada ap?s FLIP');
+ if(s.effectFlips!==undefined&&(!Array.isArray(s.effectFlips)||s.effectFlips.some((e:any)=>!object(e)||!actor(e.actor)||typeof e.card!=='string'||getMonsterEffect(e.id)?.trigger!=='flip'||!object(e.binding)||e.binding.uid!==e.card||e.binding.zone!=='monsters'||!integer(e.binding.epoch))))fail('fila FLIP');
+ for(const operation of [s.pending,...s.chain])if(operation.targets!==undefined||operation.targetBindings!==undefined){
+  const effect=getEffect(operation.id);if(operation.kind!=='spell'||effect?.kind!=='recoverMultiple'||!Array.isArray(operation.targets)||!Array.isArray(operation.targetBindings)||operation.targets.length!==operation.targetBindings.length||new Set(operation.targets).size!==operation.targets.length||operation.targets.length>effect.rule.count||operation.targetBindings.some((b:any,i:number)=>!object(b)||b.uid!==operation.targets[i]||b.zone!=='grave'||!integer(b.epoch)))fail('alvos múltiplos');
+  if(s.choice?.source!=='multiTarget'&&operation.targets.length!==effect.rule.count)fail('quantidade de alvos');
+ }
+ if(s.choice?.source==='multiTarget'){const p=s.pending,e=getEffect(p.id);if(p.kind!=='spell'||e?.kind!=='recoverMultiple'||!Array.isArray(p.targets)||p.targets.length>=e.rule.count||s.phase!=='choice'||s.choice.actor!==p.actor)fail('seleção múltipla');const legal=recoveryTargets(s,p.actor,e.rule,getCard).filter(c=>!p.targets.includes(c.uid)).map(c=>c.uid);if(JSON.stringify(legal)!==JSON.stringify(s.choice.targets))fail('opções de recuperação');}
  for(const queue of ['graveTriggers','summonTriggers'])if(s[queue]!==undefined&&(!Array.isArray(s[queue])||s[queue].some((e:any)=>!object(e)||!actor(e.actor)||typeof e.card!=='string'||!getCard(e.id))))fail('fila de gatilhos');
  if(s.triggerBuild!==undefined){
   const build=s.triggerBuild;

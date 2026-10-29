@@ -1,0 +1,9 @@
+# Missão 28 — checkpoint de implementação
+
+Base remota conferida: `efd7575cab373d24b36633649d2b775fa70c74f6`, CI `40807995535` aprovada; 832 certificadas/distribuíveis. Cópia anterior com trabalho M22 não registrado preservada. Trabalho atual em `repo-mission28-efd7575` separado, inicialmente conferido pelos hashes dos 788 arquivos remotos.
+
+Primeiro bloco: quatro operações de revelação/posição compartilham a fila de FLIP pós-Corrente; duas recuperações compartilham seleção serializada de exatamente dois alvos, antes da janela de resposta, com revalidação independente por UID/época de zona. Book of Taiyou, Stop Defense, Desert Sunlight, Dark-Piercing Light, Salvage e Dark Factory of Mass Production. Catálogo local: 838; +67/500 desde 771, restam 433. A lista positiva inclui o novo lote por autorização M28, sem concessões de inventário.
+
+Validação local por hook Node 24 de remoção de tipos: 45 cenários M28 e 32 M26 aprovados. O hook não faz tipagem nem prova SQLite/renderização. A execução conjunta de `monsterEffects.test.cjs` encontrou dependência `sharp` indisponível: 80/81 passaram, um falhou no carregamento do renderizador. Nenhum teste removido; validação completa Node 22 deve ser observada na CI do commit. Gates históricos M3/M4/M5/M7/M8 passaram após normalização delimitada das seis adições; arquivos v1–v8 não foram alterados. Fonte oficial e impressões elegíveis: `docs/evidence/mission28-review.json`.
+
+Retomada: conferir HEAD/CI; corrigir falhas antes de dependências novas. Continuar pelas famílias verificadas, ampliar recuperação/seletores para destinos adicionais e FLIP com seletores, sem contar pistas heurísticas como cartas desbloqueadas. A meta +500 e o catálogo completo NÃO foram concluídos. Hospedagem não alterada; checkpoint M27 informa painel sem sessão autenticada.
