@@ -916,4 +916,10 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "28563545",
 // Generated batch m31-harpie-identity: explicit tested release; zero inventory grants.
   "80316585",
+// Generated batch m31-target-groups: explicit tested release; zero inventory grants.
+  "93920745",
+  "28357177",
+  "65878864",
+  "61831093",
+  "71283180",
 ]);

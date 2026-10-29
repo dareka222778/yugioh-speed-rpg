@@ -1,6 +1,8 @@
+import {targetGroupRuleIssues,type TargetGroupRule} from './targetGroupRules';
 import {singleCardRuleIssues,type SingleCardRule} from './singleCardRules';
 import {monsters as m31_single_targetsMonsters} from './generated/m31-single-targets';
 import {monsters as m31_harpie_identityMonsters} from './generated/m31-harpie-identity';
+import {monsters as m31_target_groupsMonsters} from './generated/m31-target-groups';
 import {conditionalMonsters30} from './conditionalBatch30';
 import {triggerMonsters29} from './triggerBatch29';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -26,6 +28,7 @@ import {mechanicalMonsters5} from './mechanicalBatch5';
 export type MonsterTrigger='quick'|'ignition'|'flip'|'onSummon'|'onOtherSummon'|'onDestroy'|'onBattleDestroyed'|'onSentToGrave'|'continuous';
 export type MonsterCost={kind:'lp';amount:number}|{kind:'discard'|'tribute';count:number};
 export type MonsterOperation=
+ |{kind:'targetGroup';rule:TargetGroupRule}
  |{kind:'singleCard';rule:SingleCardRule}
  |{kind:'positionChange';rule:PositionRule}
  |{kind:'searchFiltered';rule:SearchZoneRule}
@@ -63,6 +66,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...m31_target_groupsMonsters,
  ...m31_harpie_identityMonsters,
  ...m31_single_targetsMonsters,
  ...conditionalMonsters30,
@@ -104,12 +108,13 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  const {effect:e,activation:a}=value;
  if(!['mandatory','optional','manual','continuous'].includes(a.policy)||!['main','flip','summon','grave','battleDestroyed','opposingDamageCalculation','continuous'].includes(a.window))return ['invalid-monster-activation'];
  if(!['quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'].includes(e.trigger))return ['unsupported-monster-trigger'];
- if(!e.operation||!['identityOnly','singleCard','positionChange','searchFiltered','mill','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous'].includes(e.operation.kind))return ['unsupported-monster-operation'];
+ if(!e.operation||!['targetGroup','identityOnly','singleCard','positionChange','searchFiltered','mill','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous'].includes(e.operation.kind))return ['unsupported-monster-operation'];
  if((e.trigger==='quick'||e.trigger==='ignition')&&a.policy!=='manual'||e.trigger==='continuous'&&a.policy!=='continuous')return ['inconsistent-monster-policy'];
  if(!['quick','ignition','continuous'].includes(e.trigger)&&!['mandatory','optional'].includes(a.policy))return ['inconsistent-monster-policy'];
  const windows:Partial<Record<MonsterTrigger,MonsterActivation['window']>>={quick:'opposingDamageCalculation',ignition:'main',flip:'flip',onSummon:'summon',onOtherSummon:'summon',onSentToGrave:'grave',onBattleDestroyed:'battleDestroyed',continuous:'continuous'};
  if(windows[e.trigger]!==a.window)return ['inconsistent-monster-window'];
  const op=e.operation;
+ if(op.kind==='targetGroup'&&(e.trigger!=='flip'||e.cost!==undefined||e.oncePerTurn!==undefined||Object.keys(op).some(k=>!['kind','rule'].includes(k))||targetGroupRuleIssues(op.rule).length))return ['invalid-monster-target-group'];
  if(op.kind==='singleCard'&&(e.cost!==undefined||!['flip','onSummon','onBattleDestroyed'].includes(e.trigger)||Object.keys(op).some(k=>!['kind','rule'].includes(k))||singleCardRuleIssues(op.rule).length))return ['invalid-single-card-operation'];
  if(e.summons!==undefined&&(e.trigger!=='onSummon'||!Array.isArray(e.summons)||!e.summons.length||new Set(e.summons).size!==e.summons.length||e.summons.some(t=>!['normal','flip','special'].includes(t))))return ['invalid-summon-event-filter'];
  if(op.kind==='positionChange')return e.cost!==undefined||!['flip','onSummon'].includes(e.trigger)||Object.keys(op).some(k=>!['kind','rule'].includes(k))||op.rule?.scope!=='selected'||positionRuleIssues(op.rule).length?['invalid-monster-position']:[];

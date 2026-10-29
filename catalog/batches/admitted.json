@@ -8,6 +8,10 @@
     {
       "id": "m31-harpie-identity",
       "proofSHA256": "8d21c73ac331e0aae68203391223960381f06ee5c120da8c31eab57d625d3b4e"
+    },
+    {
+      "id": "m31-target-groups",
+      "proofSHA256": "5dc960e1f3a6b5ffba8d179babb8de1c15f9300d1fd6f7c521169632df988185"
     }
   ]
 }

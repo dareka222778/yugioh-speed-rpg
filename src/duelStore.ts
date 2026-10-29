@@ -1,3 +1,4 @@
+import {chooseReviewedTarget} from './targetDecision31';
 import {filteredDestructionUtility} from './filteredDestructionStrategy';
 import {findActionReceipt,saveActionReceipt,type ActionReceipt} from './actionReceipts';
 import {tacticalSummon,tacticalPosition,tacticalAttack,handCardValue,publicBattleAssessment} from './npcStrategy';
@@ -117,6 +118,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  }
  if(s.phase==='discard')return [...actions].sort((a,b)=>{const score=(x:Action)=>x.kind==='discard'?handCardValue(p.hand.find(c=>c.uid===x.card)!.id):0;return score(a)-score(b);})[0];
  if(s.phase==='choice'){
+  const reviewedTarget=chooseReviewedTarget(s,id,actions);if(reviewedTarget)return reviewedTarget;
   if(s.choice?.source==='monsterRecruitPosition'&&s.pending.kind==='monsterEffect'){const pending=s.pending,selected=p.deck.find(c=>c.uid===pending.target),info=selected&&getCard(selected.id);const threat=Math.max(0,...op.monsters.filter(m=>m.faceUp&&m.position==='atk').map(m=>atk(m,s)));const mode=(info?.atk??0)<threat?'__recruit_def__':'__recruit_atk__';return actions.find(a=>a.kind==='choose'&&a.target===mode)??actions[0];}
   if(s.choice?.source==='attackReplay'&&s.pending.kind==='attack'){
    const attackingUid=s.pending.card,attacking=p.monsters.find(m=>m.uid===attackingUid);

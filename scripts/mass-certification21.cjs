@@ -12,7 +12,7 @@ const sha256=value=>createHash('sha256').update(value).digest('hex');
 const dimensions=['activation','conditions','costs','targets','choices','operations','duration','restrictions','negation'];
 const effectKinds=['conditionalDestruction','destroyExtreme','ritualMonster','ritualSummon','searchZone','recoverMultiple','moveSelected','positionChange','choiceSequence','normal','fusion','monsterEffect','heal','burn','field','equip','continuous','temporaryModifier','destroyFiltered','destroySpellTraps','sequence','attackResponse','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce'];
 const triggers=['quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'];
-const monsterOps=['identityOnly','singleCard','searchFiltered','mill','positionChange','recruit','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack','continuous'];
+const monsterOps=['targetGroup','identityOnly','singleCard','searchFiltered','mill','positionChange','recruit','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack','continuous'];
 const ACTIVE_CAPABILITIES=Object.freeze({engineVersion:'engine-v9',operations:Object.freeze([
  ...effectKinds.map(k=>'effect:'+k),...triggers.map(k=>'trigger:'+k),...monsterOps.map(k=>'monster-operation:'+k),
  ...['lp','discard','tribute'].map(k=>'cost:'+k),...['draw','gainLP','damage','scaledLP'].map(k=>'economic:'+k),
@@ -54,7 +54,7 @@ function scenarioPlan(candidate){
  if(kind==='fusion'){for(const n of ['exact-materials','illegal-materials','extra-capacity','zone-capacity','material-owner'])add(n,'Validate exact recipe, ownership and legal destination at activation/resolution.');}
  const cost=monster?.cost??effect.cost;
  if(cost||effect.lpCost){for(const n of ['cost-paid-once','cost-invalid','negation-cost-retained','restore-after-cost','duplicate-delivery'])add(n,'Verify paid cost is atomic, preserved after negation and never charged twice.');}
- const op=monster?.operation??{},targeted=op.kind==='singleCard'||!!op.target||['recover','search','specialSummon'].includes(op.kind)||['equip','fissure','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','mysticalSpaceTyphoon','bookOfMoon'].includes(kind);
+ const op=monster?.operation??{},targeted=['targetGroup','singleCard'].includes(op.kind)||!!op.target||['recover','search','specialSummon'].includes(op.kind)||['equip','fissure','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','mysticalSpaceTyphoon','bookOfMoon'].includes(kind);
  if(targeted)for(const n of ['target-activation','target-resolution','target-zone-change','target-unavailable'])add(n,'Validate target eligibility, lifetime and identity before/after the response chain.');
  if(['search','specialSummon','recover'].includes(op.kind)||['monsterReborn','giantTrunade'].includes(kind))for(const n of ['empty-source','zone-capacity','owner-controller','hidden-information'])add(n,'Exercise movement with missing/occupied destinations and correct public/private observations.');
  if(monster?.trigger&&['flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave'].includes(monster.trigger)){
@@ -103,7 +103,7 @@ function planMassCertification({history,candidates,reviews=[],executions=[],capa
   const requiredDimensions=new Set(['operations']);
   if(effect?.activation||candidate?.monster?.activation&&candidate.monster.effect?.trigger!=='continuous')requiredDimensions.add('activation');
   if(candidate?.monster?.effect?.cost||effect?.cost||effect?.lpCost)requiredDimensions.add('costs');
-  if(candidate?.monster?.effect?.operation?.kind==='singleCard'||candidate?.monster?.effect?.operation?.target||['equip','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','mysticalSpaceTyphoon','bookOfMoon'].includes(effect?.kind))requiredDimensions.add('targets');
+  if(candidate?.monster?.effect?.operation?.kind==='targetGroup'||candidate?.monster?.effect?.operation?.kind==='singleCard'||candidate?.monster?.effect?.operation?.target||['equip','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','mysticalSpaceTyphoon','bookOfMoon'].includes(effect?.kind))requiredDimensions.add('targets');
   if(candidate?.monster?.activation?.policy==='optional')requiredDimensions.add('choices');
   if(effect?.kind==='ritualSummon')requiredDimensions.add('choices');
   if(effect?.duration||effect?.kind==='temporaryModifier')requiredDimensions.add('duration');

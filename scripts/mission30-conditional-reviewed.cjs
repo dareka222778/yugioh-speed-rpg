@@ -3,6 +3,7 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto');
 const proof=require('../docs/evidence/mission30-conditional-review.json');
 const hash=content=>crypto.createHash('sha256').update(content).digest('hex');
 function strip(file,bytes){
+ bytes=require('./mission31-target-reviewed.cjs').strip(file,bytes);
  bytes=require('./generated-batch-reviewed.cjs').strip(file,bytes);
  if(!['src/cardMetadata.ts','src/cardCertifications.ts','src/releasedCardIds.ts'].includes(file))return require('./mission29-destruction-reviewed.cjs').strip(file,bytes);
  let source=bytes.toString('utf8');

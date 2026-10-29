@@ -1,3 +1,4 @@
+import {groupChoices} from './targetGroupOperation';
 import {movementChoiceTargets} from './selectedMovement';
 import {recoveryTargets} from './recoveryRules';
 import {getEffect} from './effectRegistry';
@@ -6,7 +7,7 @@ import {currentCatalog} from './catalogContext';
 import {getTokenMetadata,assertTokenLedger,assertTokenTransition} from './tokens';
 import {assertStandbyFlow} from './standbyFlow';
 import {resolverVersionFor,getArchivedDefinitionResolver} from './resolverArchive';
-import {lifetimeZones} from './cardLifetime';
+import {targetBindingValid,lifetimeZones} from './cardLifetime';
 import {teamReserveCards} from './teamRotation';
 import {economicOperationIssues} from './economicOperations';
 /** Runtime contracts for the serialized three-zone game. No UI or database writes.
@@ -18,7 +19,7 @@ import {assertDuelRandom} from './duelRandom';
 import {CARD_DEFINITIONS_VERSION,RULES_PROFILE,rulesFor,supportedRulesVersion} from './rulesProfile';
 import {matchesMonsterSelector} from './cardSelectors';
 import {assertRitualFlow} from './ritualSummon';
-import {getMonsterEffect} from './monsterEffects';
+import {getMonsterEffect,getMonsterDefinition} from './monsterEffects';
 import type {CardRef,DuelState} from './duelEngine';
 const phases=new Set(['main','battle','response','choice','discard','finished']);
 const pendingKinds=new Set(['standby','none','end','battle','summon','flip','specialSummon','field','fusion','spell','attack','monsterEffect']);
@@ -40,7 +41,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.random!==undefined)assertDuelRandom(s.random);
  if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');
  for(const operation of [s.pending,...Array.isArray(s.chain)?s.chain:[]])if(operation?.targetBinding!==undefined){const b=operation.targetBinding;if(!object(b)||typeof b.uid!=='string'||b.uid!==operation.target||!lifetimeZones.includes(b.zone)||!integer(b.epoch))fail('referencia de alvo');}
- if(s.choice?.source!==undefined&&!['monsterRecruitPosition','selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit','extremeDestroy'].includes(s.choice.source))fail('continuação de escolha desconhecida');
+ if(s.choice?.source!==undefined&&!['monsterRecruitPosition','selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerGroup','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit','extremeDestroy'].includes(s.choice.source))fail('continuação de escolha desconhecida');
  if(s.rulesVersion==='speed-rpg-v2'&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
  if(s.handFlow!==undefined){
   const f=s.handFlow;
@@ -57,6 +58,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.afterEffectFlips!==undefined&&(!object(s.afterEffectFlips)||s.afterEffectFlips.kind!=='attack'||!actor(s.afterEffectFlips.actor)||typeof s.afterEffectFlips.card!=='string'||!['declare','damage','calculation'].includes(s.afterEffectFlips.stage)))fail('retomada ap?s FLIP');
  if(s.effectFlips!==undefined&&(!Array.isArray(s.effectFlips)||s.effectFlips.some((e:any)=>!object(e)||!actor(e.actor)||typeof e.card!=='string'||getMonsterEffect(e.id)?.trigger!=='flip'||!object(e.binding)||e.binding.uid!==e.card||e.binding.zone!=='monsters'||!integer(e.binding.epoch))))fail('fila FLIP');
  for(const operation of [s.pending,...s.chain])if(operation.targets!==undefined||operation.targetBindings!==undefined){
+  const group=getMonsterEffect(operation.id)?.operation;if(group?.kind==='targetGroup'&&(operation.monsterEffect===true||operation.kind==='monsterEffect')){const targets=operation.targets,bindings=operation.targetBindings;if(!Array.isArray(targets)||!Array.isArray(bindings)||targets.length!==bindings.length||new Set(targets).size!==targets.length||targets.length>group.rule.maximum||targets.length>0&&targets.length<group.rule.minimum||targets.length===0&&getMonsterDefinition(operation.id)?.activation.policy!=='mandatory'||bindings.some((b:any,i:number)=>!object(b)||b.uid!==targets[i]||!(group.rule.from==='monsters'?b.zone==='monsters':['backrow','field'].includes(b.zone))||!integer(b.epoch)))fail('grupo de alvos');continue;}
   const effect=getEffect(operation.id);if(!['spell',undefined].includes(operation.kind)||!(effect?.kind==='recoverMultiple'||effect?.kind==='moveSelected')||!Array.isArray(operation.targets)||!Array.isArray(operation.targetBindings)||operation.targets.length!==operation.targetBindings.length||new Set(operation.targets).size!==operation.targets.length||operation.targets.length>(effect.kind==='moveSelected'?effect.rule.maximum:effect.rule.count)||operation.targetBindings.some((b:any,i:number)=>!object(b)||b.uid!==operation.targets[i]||b.zone!==(effect.kind==='moveSelected'?effect.rule.from:'grave')||!integer(b.epoch)))fail('alvos múltiplos');
   if(effect.kind==='recoverMultiple'&&s.choice?.source!=='multiTarget'&&operation.targets.length!==effect.rule.count||effect.kind==='moveSelected'&&operation.targets.length<effect.rule.minimum)fail('quantidade de alvos');
  }
@@ -68,15 +70,16 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
   const build=s.triggerBuild;
   if(!object(build)||!Array.isArray(build.events))fail('construção de corrente');
   for(const event of [...build.events,...build.selected?[build.selected]:[]])if(!object(event)||!actor(event.actor)||typeof event.card!=='string'||!getMonsterEffect(event.id))fail('construção de corrente');
-  if(s.phase!=='choice'||!['triggerOrder','triggerTarget','triggerOptional'].includes(s.choice?.source))fail('fase da construção de corrente');
+  if(s.phase!=='choice'||!['triggerOrder','triggerTarget','triggerGroup','triggerOptional'].includes(s.choice?.source))fail('fase da construção de corrente');
  }
+ if(s.choice?.source==='triggerGroup'){const event=s.triggerBuild?.selected,op=event?getMonsterEffect(event.id)?.operation:undefined;if(!event||op?.kind!=='targetGroup'||!Array.isArray(event.targets)||!Array.isArray(event.targetBindings)||event.targets.length!==event.targetBindings.length||event.targets.length>=op.rule.maximum||new Set(event.targets).size!==event.targets.length||event.targetBindings.some((b:any,i:number)=>!object(b)||b.uid!==event.targets[i]||!(op.rule.from==='monsters'?b.zone==='monsters':['backrow','field'].includes(b.zone))||!targetBindingValid(s,b as import('./cardLifetime').TargetBinding))||JSON.stringify(groupChoices(s,op.rule,event.targets))!==JSON.stringify(s.choice.targets))fail('seleção de grupo');}
  if(s.pending.kind==='attack'&&s.pending.defenders!==undefined&&(!Array.isArray(s.pending.defenders)||s.pending.defenders.some((uid:unknown)=>typeof uid!=='string')||new Set(s.pending.defenders).size!==s.pending.defenders.length))fail('campo de declaração do ataque');
  if(s.chainRoot!==undefined){
   const root=s.chainRoot;
   if(!object(root)||!pendingKinds.has(root.kind)||!(s.phase==='choice'&&['monsterSearch','monsterRecruit','monsterRecruitPosition'].includes(s.choice?.source)||s.phase==='discard'&&s.handFlow?.resumeChainRoot))fail('continuação da corrente');
   if(!['none','end','battle'].includes(root.kind)&&(!actor(root.actor)||typeof root.card!=='string'))fail('origem da continuação');
  }
- if(s.phase==='choice'&&['triggerOrder','triggerTarget','triggerOptional'].includes(s.choice?.source)){
+ if(s.phase==='choice'&&['triggerOrder','triggerTarget','triggerGroup','triggerOptional'].includes(s.choice?.source)){
   const build=s.triggerBuild;
   if(!build||s.choice.source!=='triggerOrder'&&(!build.selected||build.selected.actor!==s.choice.actor))fail('escolha do gatilho');
  }

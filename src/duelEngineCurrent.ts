@@ -1,3 +1,4 @@
+import {groupTargets,groupChoices,executeTargetGroup} from './targetGroupOperation';
 import {singleCardTargets,executeSingleCard} from './singleCardOperation';
 import {searchZoneTargets} from './searchZoneRules';
 import {canAttackDirectly,attackAllowance,attacksDeclared,attackLPCost,combatStatValue,combatOutcome} from './combatEffects';
@@ -44,9 +45,9 @@ export type Action=
  |{kind:'monsterEffect';card:string;discards:string[];tributes?:string[];target?:string}
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
-export type Pending=( {kind:'standby';actor:number;card:string;taskId:string;choiceId:string}|{kind:'monsterEffect';actor:number;card:string;id:string;target?:string}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;targets?:string[];targetBindings?:TargetBinding[];position?:'atk'|'def'})&{targetBinding?:TargetBinding};
-export type TriggerEvent={actor:number;card:string;id:string};
-export type DuelState={version:1;movementSelection?:MovementSelection;afterEffectFlips?:Extract<Pending,{kind:'attack'}>;effectFlips?:Array<TriggerEvent&{binding:TargetBinding}>;ritual?:RitualFlow;resolverVersion?:ResolverVersion;catalogRevision?:string;continuousState?:ContinuousState;standby?:StandbyFlow;tokenLedger?:TokenLedger;cardLifetimes?:Record<string,CardLifetime>;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];effectName?:string;source?:'monsterRecruitPosition'|'selectedMovement'|'multiTarget'|'ritual'|'standby'|'triggerOptional'|'triggerOrder'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'|'extremeDestroy'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
+export type Pending=( {kind:'standby';actor:number;card:string;taskId:string;choiceId:string}|{kind:'monsterEffect';actor:number;card:string;id:string;target?:string;targets?:string[];targetBindings?:TargetBinding[]}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;targets?:string[];targetBindings?:TargetBinding[];position?:'atk'|'def'})&{targetBinding?:TargetBinding};
+export type TriggerEvent={actor:number;card:string;id:string;targets?:string[];targetBindings?:TargetBinding[]};
+export type DuelState={version:1;movementSelection?:MovementSelection;afterEffectFlips?:Extract<Pending,{kind:'attack'}>;effectFlips?:Array<TriggerEvent&{binding:TargetBinding}>;ritual?:RitualFlow;resolverVersion?:ResolverVersion;catalogRevision?:string;continuousState?:ContinuousState;standby?:StandbyFlow;tokenLedger?:TokenLedger;cardLifetimes?:Record<string,CardLifetime>;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];effectName?:string;source?:'monsterRecruitPosition'|'selectedMovement'|'multiTarget'|'ritual'|'standby'|'triggerOptional'|'triggerOrder'|'triggerGroup'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'|'extremeDestroy'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
 const supported=()=>new Set(getEnabledCardIds());
 const card=(id:string)=>{const c=getCard(id);if(!c)throw new Error('Carta não implementada.');return c;};
@@ -93,6 +94,7 @@ function combos<T>(values:T[],n:number):T[][]{if(n===0)return [[]];return values
 /** Only activation-time targets may be chosen. Resolution must never retarget. */
 function monsterTargets(s:DuelState,actor:number,e:MonsterEffect):string[]|undefined{
  const op=e.operation;
+ if(op.kind==='targetGroup'){const targets=groupTargets(s,op.rule);return targets.length>=op.rule.minimum?targets:[];}
  if(op.kind==='singleCard')return singleCardTargets(s,actor,op.rule);
  if(op.kind==='destroy'||op.kind==='bounce')return (op.target==='anyMonster'?s.players:s.players.filter((_,i)=>i!==actor)).flatMap(p=>p.monsters.map(m=>m.uid));
  if(op.kind==='positionChange')return positionTargets(s,actor,op.rule).map(m=>m.uid);
@@ -271,7 +273,7 @@ function eligibleTrigger(s:DuelState,event:TriggerEvent):boolean{
  const e=getMonsterEffect(event.id);if(!e||effectNameBlocked(s,event.actor,event.id))return false;
  if(e.oncePerTurn&&s.monsterNameUsed?.[event.actor]?.[event.id]===s.turn)return false;
  if(e.trigger==='onOtherSummon'&&!s.players[event.actor].monsters.some(m=>m.uid===event.card&&m.faceUp))return false;
- const targets=monsterTargets(s,event.actor,e);if(targets&&!targets.length&&!(e.operation.kind==='singleCard'&&getMonsterDefinition(event.id)?.activation.policy==='mandatory'))return false;
+ const targets=monsterTargets(s,event.actor,e);if(targets&&!targets.length&&!(['singleCard','targetGroup'].includes(e.operation.kind)&&getMonsterDefinition(event.id)?.activation.policy==='mandatory'))return false;
  if(e.operation.kind==='searchFiltered'&&!searchZoneTargets(s,event.actor,e.operation.rule,getCard,getEffect).length)return false;
  if(e.operation.kind==='search'&&!searchDeckTargets(s,event.actor,e.operation.stat,e.operation.maximum).length)return false;
  if((e.operation.kind==='specialSummon'||e.operation.kind==='recruit'&&getMonsterDefinition(event.id)?.activation.policy==='optional')&&(s.players[event.actor].monsters.length>=RULES_PROFILE.monsterZones||!recruitTargets(s,event.actor,e.operation).length))return false;
@@ -288,10 +290,15 @@ function appendTrigger(s:DuelState,event:TriggerEvent,target=''){
  s.chain.push({...event,target,targetBinding:bindTarget(s,target),monsterEffect:true});
  note(s,`Efeito de ${card(event.id).name} ativado na corrente.`);
 }
+function selectGroupTargets(s:DuelState,event:TriggerEvent){
+ const op=getMonsterEffect(event.id)?.operation;if(op?.kind!=='targetGroup')throw Error('Grupo inválido.');
+ event.targets=[];event.targetBindings=[];s.triggerBuild!.selected=event;s.choice={actor:event.actor,targets:groupChoices(s,op.rule,[]),source:'triggerGroup'};s.phase='choice';
+}
 function selectTrigger(s:DuelState,event:TriggerEvent){
  const build=s.triggerBuild!;build.events=build.events.filter(x=>x!==event);
  if(getMonsterDefinition(event.id)?.activation.policy==='optional'){build.selected=event;s.choice={actor:event.actor,targets:[event.card,'__skip__'],source:'triggerOptional'};s.phase='choice';return;}
- const targets=monsterTargets(s,event.actor,getMonsterEffect(event.id)!);
+ const effect=getMonsterEffect(event.id)!;const targets=monsterTargets(s,event.actor,effect);
+ if(effect.operation.kind==='targetGroup'&&targets?.length){selectGroupTargets(s,event);return;}
  if(targets?.length){build.selected=event;s.choice={actor:event.actor,targets,source:'triggerTarget'};s.phase='choice';return;}
  appendTrigger(s,event);advanceTriggers(s);
 }
@@ -350,9 +357,10 @@ function triggerMonsterEffect(s:DuelState,actor:number,uid:string,trigger:'flip'
  if(!sourceId&&(!m||!m.faceUp))return false;
  const id=sourceId??m!.id,e=getMonsterEffect(id);
  if(!e||e.trigger!==trigger||effectNameBlocked(s,actor,id))return false;
+ if(e.operation.kind==='targetGroup'){response(s,{kind:'none'},s.resume);beginTriggers(s,[{actor,card:uid,id}]);return true;}
  const p=s.players[actor];
  const targets=monsterTargets(s,actor,e);
- if(targets!==undefined&&!targets.length&&!(e.operation.kind==='singleCard'&&getMonsterDefinition(id)?.activation.policy==='mandatory'))return false;
+ if(targets!==undefined&&!targets.length&&!(['singleCard','targetGroup'].includes(e.operation.kind)&&getMonsterDefinition(id)?.activation.policy==='mandatory'))return false;
  const ctx={lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,usedThisTurn:m?.effectUsedTurn===s.turn};
  // Mandatory flip draws must be attempted even if the deck is empty.
  const check=e.operation.kind==='draw'&&trigger==='flip'?{...ctx,deckSize:Math.max(p.deck.length,e.operation.count)}:ctx;
@@ -389,7 +397,8 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
   // Paid costs are never refunded and removing the source does not negate its effect.
   if(!e||monsterEffectsNegated(s,pending.card))return;
   const op=e.operation;
-  if(op.kind==='singleCard'){executeSingleCard(s,pending.actor,op.rule,pending.target,{destroyMonster:graveMonster,destroyBackrow:discardBackrow,note});}
+  if(op.kind==='targetGroup'){executeTargetGroup(s,op.rule,pending.targets??[],pending.targetBindings??[],{destroyMonster:graveMonster,destroyBackrow:discardBackrow,cleanEquips});}
+  else if(op.kind==='singleCard'){executeSingleCard(s,pending.actor,op.rule,pending.target,{destroyMonster:graveMonster,destroyBackrow:discardBackrow,note});}
   else if(op.kind==='heal')p.lp+=op.amount;
   else if(op.kind==='burn'){const other=s.players[1-pending.actor];other.lp=Math.max(0,other.lp-op.amount);checkLP(s);}
   else if(op.kind==='burnPerSpellTrap'){const other=s.players[1-pending.actor],count=other.backrow.length+(other.field?1:0);other.lp=Math.max(0,other.lp-op.amount*count);checkLP(s);}
@@ -444,7 +453,7 @@ function resolve(s:DuelState){
   if(link.monsterEffect){
    const operation=getMonsterEffect(link.id)?.operation;
    if(operation?.kind==='battleShield'&&s.pending.kind==='attack'&&s.pending.stage==='calculation'&&s.pending.actor!==link.actor){s.players[link.actor].battleDamageGuard={turn:s.turn,attacker:s.pending.card};note(s,'Kuriboh impediu o dano deste combate.');}
-   else {const root=s.pending;resolveMonsterPending(s,{kind:'monsterEffect',actor:link.actor,card:link.card,id:link.id,...link.target?{target:link.target}:{}},true);if((s as DuelState).phase==='choice')s.chainRoot=root;}
+   else {const root=s.pending;resolveMonsterPending(s,{kind:'monsterEffect',actor:link.actor,card:link.card,id:link.id,...link.target?{target:link.target}:{},...link.targets?{targets:link.targets,targetBindings:link.targetBindings}:{}},true);if((s as DuelState).phase==='choice')s.chainRoot=root;}
    return;
   }
   if(trapsNegated(s)&&card(link.id).kind==='trap'){note(s,'Jinzo negou um efeito de Armadilha.');if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b)b.resolved=true;}else discardBackrow(s,link.card);return;}
@@ -717,12 +726,18 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   }else if(s.choice?.source==='standby'){chooseStandby(s,index,action.target);}
   else if(s.choice?.source==='triggerOptional'){
    const event=s.triggerBuild?.selected;if(!event||event.actor!==index)throw new Error('Gatilho opcional inválido.');
+   if(action.target!=='__skip__'&&getMonsterEffect(event.id)?.operation.kind==='targetGroup'){selectGroupTargets(s,event);assertDuelTransition(input,s);return s;}
    if(action.target!=='__skip__')appendTrigger(s,event);
    else note(s,`O jogador não ativou o efeito opcional de ${card(event.id).name}.`);
    s.triggerBuild!.selected=undefined;s.choice=undefined;advanceTriggers(s);
   }else if(s.choice?.source==='triggerOrder'){
    const event=s.triggerBuild?.events.find(event=>event.card===action.target&&event.actor===index);if(!event)throw new Error('Ordem de gatilho inválida.');
    s.choice=undefined;selectTrigger(s,event);
+  }else if(s.choice?.source==='triggerGroup'){
+   const event=s.triggerBuild?.selected,op=event?getMonsterEffect(event.id)?.operation:undefined;if(!event||event.actor!==index||op?.kind!=='targetGroup'||!event.targets||!event.targetBindings)throw Error('Grupo de alvos inválido.');
+   if(action.target!=='__done__'){const binding=bindTarget(s,action.target);if(!binding||event.targets.includes(action.target)||!groupTargets(s,op.rule).includes(action.target))throw Error('Alvo repetido ou inelegível.');event.targets.push(action.target);event.targetBindings.push(binding);}
+   if(action.target==='__done__'||event.targets.length===op.rule.maximum){if(event.targets.length<op.rule.minimum)throw Error('Quantidade insuficiente de alvos.');appendTrigger(s,event);s.triggerBuild!.selected=undefined;s.choice=undefined;advanceTriggers(s);}
+   else s.choice!.targets=groupChoices(s,op.rule,event.targets);
   }else if(s.choice?.source==='triggerTarget'){
    const event=s.triggerBuild?.selected;if(!event||event.actor!==index)throw new Error('Gatilho inválido.');
    appendTrigger(s,event,action.target);s.triggerBuild!.selected=undefined;s.choice=undefined;advanceTriggers(s);
@@ -808,7 +823,8 @@ export function actionLabel(s:DuelState,actor:string,a:Action){
  if(a.kind==='summon')return `${a.position==='set'?'Baixar DEF':'Invocar ATK'}: ${name(a.card)}${a.tributes.length?` | Tributar ${a.tributes.map(uid=>'M'+(p.monsters.findIndex(m=>m.uid===uid)+1)).join(' + ')}`:''}`;
  if(a.kind==='field')return `Ativar ${name(a.card)} na Zona de Campo`;if(a.kind==='setField')return `Baixar ${name(a.card)} na Zona de Campo`;if(a.kind==='fusion')return `Fusão: Espadachim das Chamas (${a.position.toUpperCase()}) | Materiais: ${a.materials.map(name).join(' + ')}`;
  if(a.kind==='set')return `Baixar: ${name(a.card)}`;if(a.kind==='spell')return `Ativar: ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.position?` (${a.position.toUpperCase()})`:''}`;
- if(a.kind==='choose'&&s.choice?.source==='selectedMovement'&&a.target==='__done__')return 'Confirmar alvos selecionados';
+ if(a.kind==='choose'&&s.choice?.source==='triggerGroup'){const n=s.triggerBuild?.selected?.targets?.length??0;return a.target==='__done__'?`Confirmar ${n} alvo(s)`:`Escolher alvo ${n+1}: ${name(a.target)}`;}
+ if(a.kind==='choose'&&['selectedMovement','triggerGroup'].includes(s.choice?.source??'')&&a.target==='__done__')return 'Confirmar alvos selecionados';
  if(a.kind==='position')return `${a.mode==='flip'?'Virar para ATK':`Mudar para ${a.mode.toUpperCase()}`}: ${name(a.card)}`;
  if(a.kind==='attack'){const target=a.target?findMonster(s,a.target):undefined;return `Atacar: ${name(a.card)} → ${target?name(target.m.uid):'direto'}`;}
  if(a.kind==='trap')return `Ativar ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.discards?.length?` | Descartar ${a.discards.map(name).join(' + ')}`:''}`;

@@ -5270,5 +5270,37 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "28357177": {
+    "fingerprint": "a4b7c32b2bfe281b91a5980cc3e8dac40b3625893fe24fd04deb783f584663d7",
+    "suites": [
+      "tests/generated-m31-target-groups.test.cjs"
+    ]
+  },
+  "61831093": {
+    "fingerprint": "988ca016f7d52b7e1437650a178946005b4ea88233d698436b067cde89eebf09",
+    "suites": [
+      "tests/generated-m31-target-groups.test.cjs"
+    ]
+  },
+  "65878864": {
+    "fingerprint": "59ac4a5509cea09af5a96ffc1ab2102d6dc12357c015f32c5eb37e965df027bf",
+    "suites": [
+      "tests/generated-m31-target-groups.test.cjs"
+    ]
+  },
+  "71283180": {
+    "fingerprint": "7fdaf3e6f301b40f62d0499efdeed41a57ca29e6e0df3762d7eab61e16d61865",
+    "suites": [
+      "tests/generated-m31-target-groups.test.cjs"
+    ]
+  },
+  "93920745": {
+    "fingerprint": "51258e0d8413186595ebfe7c92f6b988a94e7f3b68ec3b908a309bb2f15c57fa",
+    "suites": [
+      "tests/generated-m31-target-groups.test.cjs"
+    ]
+  }
+
 
 };
