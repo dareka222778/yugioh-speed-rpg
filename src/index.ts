@@ -1,6 +1,6 @@
+import {runtimeStatusLine,runtimePingText} from './runtimeStatus';
 import 'dotenv/config';
-import {RULES_PROFILE,RULES_VERSION} from './rulesProfile';
-const RELEASE_VERSION:string=require('../package.json').version;
+import {RULES_PROFILE} from './rulesProfile';
 import {createTagLobby,createTagTraining,runTagBots,currentTag,getTag,setTagMessage,markTagPublished,dueTags,type TagRecord} from './tagStore';
 import {visualTagPublic,visualTagPrivate,visualTagCard,tagZonesMessage,visualTagZoneCard,tagPublicMessage,tagPrivateMessage} from './tagUI';
 import {handleTagComponent} from './tagInteraction';
@@ -257,7 +257,7 @@ async function handleInteraction(i:Interaction) {
         else if(action==='inicial')fillInitialDeck(id,slot);
         await i.editReply(await visualDeckMessage(id,slot,1,selected));return;
       }
-      if (i.commandName === 'ping') { await i.reply({ content: `🏓 Pong! Versão ${RELEASE_VERSION} • 130 cartas habilitadas • ${RULES_PROFILE.name} • mão ${RULES_PROFILE.handLimit}, descarte na Fase Final • Adicional ${RULES_PROFILE.extraDeckMax}.`, flags: MessageFlags.Ephemeral }); return; }
+      if (i.commandName === 'ping') { await i.reply({ content: runtimePingText(), flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'start') {
         const player = createPlayer(id, i.user.username);
         if (player.starter_deck) { grantStarterCards(id); await deferReply({ flags: MessageFlags.Ephemeral }); await i.editReply(await profileMessage(player, avatar)); return; }
@@ -368,7 +368,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
- console.log(`Release ${RELEASE_VERSION} | regras ${RULES_VERSION} | mão ${RULES_PROFILE.handLimit}, descarte na Fase Final | Adicional ${RULES_PROFILE.extraDeckMax} | 130 cartas | 1v1 e 2v2`);
+ console.log(runtimeStatusLine());
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};
