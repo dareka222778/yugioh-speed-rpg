@@ -1,3 +1,4 @@
+import {positionTargets,executePositionChange} from './positionOperations';
 import {beginRitual,chooseRitual,type RitualFlow} from './ritualSummon';
 import {rulesCardName} from './cardIdentity';
 import {syncContinuous,continuousTrapsNegated,monsterEffectsNegated,canAffectMonster,addTemporaryModifier,type ContinuousState} from './continuousEffects';
@@ -21,7 +22,7 @@ import {resolveChainLinks,type ChainLink} from './chainEngine';
 import {getMonsterEffect,getMonsterDefinition,canActivateMonsterEffect,payMonsterEffectCost,monsterDestructionTarget,type MonsterEffect} from './monsterEffects';
 import {getDuelCard as getCard} from './effectRegistry';
 import {enabledCardIds,getEnabledCardIds,getEffect,isQuickPlaySpell} from './effectRegistry';
-import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips} from './classicEffects';
+import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,cleanEquips,turnMonsterFaceDown} from './classicEffects';
 import {specialSummonFromPile} from './monsterEntry';
 export type CardRef={uid:string;id:string;properlySummoned?:boolean;entityKind?:'token';tokenPolicy?:TokenPolicy};
 export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;changed:number;attacked:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
@@ -129,6 +130,10 @@ function trapActions(s:DuelState,index:number):Action[]{
   if(effect.kind==='attackResponse'&&s.pending.kind==='attack'){
    const attacker=findMonster(s,s.pending.card);
    if(!s.pending.cancelled&&attacker?.m.faceUp&&attacker.m.position==='atk'&&attacker.p===s.players[s.pending.actor])out.push({kind:'trap',card:c.uid,target:attacker.m.uid});
+  }else if(effect.kind==='positionChange'){
+   const targets=positionTargets(s,index,effect.rule);
+   if(effect.rule.scope==='selected')out.push(...targets.map(m=>({kind:'trap' as const,card:c.uid,target:m.uid})));
+   else if(targets.length)out.push({kind:'trap',card:c.uid,target:''});
   }else if(effect.kind==='sequence'){if(canStartEconomicOperations(s,index,effect.operations))out.push({kind:'trap',card:c.uid,target:''});}
   else if(effect.kind==='reinforcements'||effect.kind==='castleWalls')out.push(...s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>({kind:'trap',card:c.uid,target:m.uid}) as Action)));
   else if(effect.kind==='waboku')out.push({kind:'trap',card:c.uid,target:''});
@@ -407,6 +412,7 @@ function resolve(s:DuelState){
   if(trapsNegated(s)&&card(link.id).kind==='trap'){note(s,'Jinzo negou um efeito de Armadilha.');if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b)b.resolved=true;}else discardBackrow(s,link.card);return;}
   if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b?.faceUp)b.resolved=true;return;}
   if(effect?.kind==='temporaryModifier'){if(link.target&&canAffectMonster(s,link.target,'spell'))addTemporaryModifier(s,link.target,effect.atk,effect.def);discardBackrow(s,link.card);return;}
+  if(effect?.kind==='positionChange'){executePositionChange(s,link.actor,effect.rule,card(link.id).kind==='spell'?'spell':'trap',link.target,turnMonsterFaceDown);discardBackrow(s,link.card);note(s,'Mudança de posição resolvida.');return;}
   if(effect?.kind==='sequence'){
    executeEconomicOperations(s,link.actor,effect.operations,{finish,checkLP,cardAttribute:id=>card(id).attribute??undefined});discardBackrow(s,link.card);note(s,'Efeito de compra/PV resolvido.');return;
   }

@@ -1,3 +1,4 @@
+import {positionTargets,executePositionChange} from './positionOperations';
 import {ritualCandidates} from './ritualSummon';
 import {continuousModifier,canAffectMonster,addTemporaryModifier} from './continuousEffects';
 import {RULES_PROFILE} from './rulesProfile';
@@ -19,6 +20,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  if(isQuickPlaySpell(c.id)&&p.backrow.some(b=>b.uid===c.uid&&b.setTurn===s.turn))return [];
  if(e.kind==='choiceSequence')return e.choices.flatMap((choice,n)=>canStartEconomicOperations(s,index,choice.operations)?[{kind:'spell' as const,card:c.uid,target:`__choice_${n}__`}]:[]);
  if(e.kind==='searchZone')return searchZoneTargets(s,index,e.rule,getCard).map(m=>({kind:'spell',card:c.uid,target:m.uid}));
+ if(e.kind==='positionChange')return e.rule.scope==='selected'?positionTargets(s,index,e.rule).map(m=>({kind:'spell',card:c.uid,target:m.uid})):positionTargets(s,index,e.rule).length?[{kind:'spell',card:c.uid}]:[];
  if(e.kind==='sequence')return canStartEconomicOperations(s,index,e.operations)?[{kind:'spell',card:c.uid}]:[];
  const targeted=(ids:string[])=>ids.map(target=>({kind:'spell',card:c.uid,target}) as Action);
  switch(e.kind){
@@ -69,6 +71,7 @@ export function turnMonsterFaceDown(m:Monster):void{
 }
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{
  const e=getEffect(a.id),p=s.players[a.actor],op=s.players[1-a.actor];if(!e)return false;
+ if(e.kind==='positionChange'){executePositionChange(s,a.actor,e.rule,'spell',a.target,turnMonsterFaceDown);service.note(s,'Mudança de posição resolvida.');return true;}
  if(e.kind==='searchZone'){
   const selected=searchZoneTargets(s,a.actor,e.rule,getCard).find(m=>m.uid===a.target);
   if(selected){const pool=p.deck.some(m=>m.uid===selected.uid)?p.deck:p.grave;const i=pool.findIndex(m=>m.uid===selected.uid);

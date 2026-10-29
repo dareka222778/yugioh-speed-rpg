@@ -1,3 +1,5 @@
+import {positionEffects26} from './positionBatch26';
+import {positionRuleIssues,type PositionRule} from './positionRules';
 import {searchSpellEffects25} from './searchSpellBatch25';
 import {searchZoneIssues,type SearchZoneRule} from './searchZoneRules';
 import {economicCountEffects24} from './economicCountBatch24';
@@ -23,6 +25,7 @@ import type {EconomicOperation} from './economicOperations';
 import {economicOperationIssues} from './economicOperations';
 import {ritualRuleIssues,type RitualRule} from './ritualRules';
 export type Effect=
+ |{kind:'positionChange';activation:ActivationModel;rule:PositionRule}
  |{kind:'searchZone';rule:SearchZoneRule}
  |{kind:'ritualMonster'}
  |{kind:'choiceSequence';activation:ActivationModel;choices:readonly {operations:readonly EconomicOperation[]}[]}
@@ -38,6 +41,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula};
 export const effectDefinitions:Record<string,Effect>={
+ ...positionEffects26,
  ...searchSpellEffects25,
  ...economicCountEffects24,
  ...economicEffects23,
@@ -104,6 +108,7 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='positionChange')return Object.keys(e).some(k=>!['kind','activation','rule'].includes(k))?['unsupported-position-field']:positionRuleIssues(e.rule);
  if(e?.kind==='searchZone')return Object.keys(e).some(k=>!['kind','rule'].includes(k))?['unsupported-search-field']:searchZoneIssues(e.rule);
  if(e?.kind==='choiceSequence'){
   if(Object.keys(e).some(k=>!['kind','activation','choices'].includes(k))||!Array.isArray(e.choices)||e.choices.length<2||e.choices.length>4||e.choices.some(c=>!c||Object.keys(c).some(k=>k!=='operations')||economicOperationIssues(c.operations).length))return ['invalid-economic-choice'];

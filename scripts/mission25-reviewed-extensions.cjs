@@ -8,7 +8,7 @@ const additions=[
  ['89997728','c9ce54e9346a4bb47ec5479eda8d1ae300fb67c9280a8651f4ab192b717dfa28'],
  ['06390406','37a4601e4dc1953f548239e25484017155338c1d1d223b69d2b914d94f6f0d8f']
 ];
-function strip(file,bytes){let text=bytes.toString('utf8');const once=x=>{assert.equal(text.split(x).length,2,`M25 reviewed addition: ${file}`);text=text.replace(x,'');};
+function strip(file,bytes){bytes=require('./mission26-reviewed-extensions.cjs').strip(file,bytes);let text=bytes.toString('utf8');const once=x=>{assert.equal(text.split(x).length,2,`M25 reviewed addition: ${file}`);text=text.replace(x,'');};
  if(file==='src/cardMetadata.ts'&&text.includes("import {searchSpellBatch25}")){
   once("import {searchSpellBatch25} from './searchSpellBatch25';\n");once(',...searchSpellBatch25');
  }

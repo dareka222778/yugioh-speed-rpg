@@ -22,6 +22,7 @@ jobs:
       - run: node scripts/check-mission8-integrity.cjs
       - run: npm run check
       - run: npm test
+      - run: node scripts/audit-position-batch26.cjs
       - run: node scripts/audit-mechanical-batch21.cjs
       - run: node scripts/audit-ritual-batch22.cjs
       - run: node scripts/audit-ritual-extensions22.cjs
