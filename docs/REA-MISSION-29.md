@@ -6,7 +6,7 @@ Base conferida no GitHub: `b1388611abe6e7be79d33893f5fca5e20effefb9`, PR #12 em 
 
 O código do comando `/ping` e do log de inicialização tinha a expressão literal “130 cartas”, apesar do catálogo com 852. `runtimeStatus.ts` agora obtém a versão do resolvedor e a lista de cartas diretamente da fachada executável ativa, além do identificador do catálogo e da interseção com a lista de distribuição autorizada. As duas mensagens compartilham o mesmo resumo. Uma consulta a um catálogo antigo durante uma partida não pode reduzir os números públicos do processo.
 
-Três cenários próprios verificam identidade real, consistência entre ping/início e independência do contexto histórico. Nenhum efeito, arquivo de resolvedor arquivado, inventário, recompensa ou layout de duelo foi modificado. A versão npm continua 0.17.1, como na base; versão da engine, hash do catálogo e commit são os identificadores desta implantação.
+Seis cenários próprios verificam identidade real, consistência entre ping/início e independência do contexto histórico. Nenhum efeito, arquivo de resolvedor arquivado, inventário, recompensa ou layout de duelo foi modificado. A versão npm continua 0.17.1, como na base; versão da engine, hash do catálogo e commit são os identificadores desta implantação.
 
 ## Procedimento de implantação autorizado
 
@@ -21,3 +21,5 @@ O host é fixado no commit aprovado, sem substituir dados ou configuração. Reg
 852 certificadas, 852 autorizadas, zero concedidas automaticamente por esta entrega. Desde 771: +81; faltam 419 para 1271. As contagens não são progresso de prontidão do beta. A auditoria histórica ainda tem suas lacunas declaradas; 1962 são identidades do recorte observado.
 
 Após a implantação, continuar a Missão 29 a partir da v9, com operações compostas e certificação por família. Candidatos do checkpoint M28: buscas FLIP/Invocação com filtros de Equipamento/Ritual; compras/descartes com escolhas persistidas; gatilhos de dano/destruição em batalha. Quantidade desbloqueável depende de revisão do texto completo e execução no resolvedor, não de palavras-chave. Não recuperar a engine antiga de 130 cartas por cima desta branch.
+
+O gate de preservação da M8 inclui o bootstrap inteiro. A substituição operacional agora é revertida por um normalizador estritamente delimitado, antes da comparação com os hashes históricos originais: importação, duas mensagens e constantes substituídas. Testes verificam reconstrução byte a byte, rejeição de hooks duplicados, dotenv em primeiro lugar, detecção de alterações fora desse escopo e ausência de normalização dos resolvedores arquivados. Nenhum hash de referência foi atualizado.

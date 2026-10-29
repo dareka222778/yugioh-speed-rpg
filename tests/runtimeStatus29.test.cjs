@@ -15,3 +15,11 @@ test('inspecting an archived v7 catalog cannot change the current public runtime
  const expected=runtimeStatus(),revision=currentCatalogRevision('engine-v7');
  runCatalog(revision,getCatalogData(revision,'engine-v7'),()=>assert.deepEqual(runtimeStatus(),expected));assert.deepEqual(runtimeStatus(),expected);
 });
+
+const fs=require('node:fs'),crypto=require('node:crypto'),{strip,runtimeImport}=require('../scripts/mission29-reviewed-extensions.cjs');
+const bootstrap=()=>fs.readFileSync('src/index.ts');
+const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
+const baseline=require('../docs/evidence/mission8-preserved-baseline.json').files.find(f=>f.path==='src/index.ts').sha256;
+test('reviewed identity substitutions reconstruct the exact original bootstrap preservation hash',()=>{assert.equal(hash(strip('src/index.ts',bootstrap())),baseline);});
+test('normalization cannot conceal an unrelated bootstrap edit or touch archived resolvers',()=>{const changed=Buffer.from(bootstrap().toString().replace("setName('ping')","setName('unexpected')"));assert.notEqual(hash(strip('src/index.ts',changed)),baseline);assert.equal(strip('src/resolvers/v8/duelEngineCurrent.ts',changed),changed);});
+test('normalization rejects duplicate hooks and any dependency before dotenv',()=>{const source=bootstrap().toString();assert.throws(()=>strip('src/index.ts',Buffer.from(source.replace(runtimeImport,runtimeImport+runtimeImport))));assert.throws(()=>strip('src/index.ts',Buffer.from(runtimeImport+source.replace(runtimeImport,''))),/dotenv must remain first/);});
