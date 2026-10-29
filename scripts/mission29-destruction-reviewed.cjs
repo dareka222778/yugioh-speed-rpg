@@ -17,7 +17,7 @@ function strip(file,bytes){
   source=source.slice(0,a)+source.slice(finish);
  };
  if(file==='src/cardMetadata.ts'&&source.includes('import {destructionBatch29}')){once("import {destructionBatch29} from './destructionBatch29';\n");once(',...destructionBatch29');}
- if(file==='src/cardCertifications.ts')block('\n, // M29 destruction:', '\n\n};',false,proof.certificateBlockSHA256);
+ if(file==='src/cardCertifications.ts')block('\n,\n  "26412047":', '\n\n};',false,proof.certificateBlockSHA256);
  if(file==='src/releasedCardIds.ts')block('// M29 destruction:', '\n]);',true,proof.releaseBlockSHA256);
  return Buffer.from(source);
 }

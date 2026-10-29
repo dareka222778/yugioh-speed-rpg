@@ -1,7 +1,7 @@
 {
   "scope": "M29: destruction by highest current combat stat and by monster position",
   "historicalCutoff": "2004-09-30",
-  "certificateBlockSHA256": "42fdb1a441919f59fb3154a53593550d4da08e522308396fc9eba7ebf985bd1e",
+  "certificateBlockSHA256": "b18f98d157f7dd25e8f07a14b81c5ab3f1ab04c0017ab535a673e58e4651d5fb",
   "releaseBlockSHA256": "94f2f279442e0c520ba9e99e5eb00a558aa5fbc278df1cff3e9a31d90426518a",
   "suite": "tests/destructionBatch29.test.cjs",
   "cards": [
