@@ -16,7 +16,7 @@ const monsterOps=['targetGroup','identityOnly','singleCard','searchFiltered','mi
 const ACTIVE_CAPABILITIES=Object.freeze({engineVersion:'engine-v9',operations:Object.freeze([
  ...effectKinds.map(k=>'effect:'+k),...triggers.map(k=>'trigger:'+k),...monsterOps.map(k=>'monster-operation:'+k),
  ...['lp','discard','tribute'].map(k=>'cost:'+k),...['draw','gainLP','damage','scaledLP'].map(k=>'economic:'+k),
- ...['combat','preventAttack','modifier','negateMonsters','negateTraps','immune'].map(k=>'continuous:'+k),
+ ...['combat','preventAttack','preventActivation','modifier','negateMonsters','negateTraps','immune'].map(k=>'continuous:'+k),
  ...['hand','grave','monsters','backrow'].map(k=>'count:'+k),'condition:face-up-named-card','duration:end-turn','choice:ritual-materials','ritualSummonExplicitRecipe','ritualSummonAttributeRecipe','ritual:exact-level-total','ritual:minimum-level-total','ritual:monster'
 ])});
 function inferCapabilities(candidate){

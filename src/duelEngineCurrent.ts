@@ -8,7 +8,7 @@ import {positionTargets,executePositionChange} from './positionOperations';
 import {matchesMonsterSelector} from './cardSelectors';
 import {beginRitual,chooseRitual,type RitualFlow} from './ritualSummon';
 import {rulesCardName} from './cardIdentity';
-import {syncContinuous,continuousAttackAllowed,continuousTrapsNegated,monsterEffectsNegated,canAffectMonster,addTemporaryModifier,type ContinuousState} from './continuousEffects';
+import {syncContinuous,cardActivationAllowed,continuousAttackAllowed,continuousTrapsNegated,monsterEffectsNegated,canAffectMonster,addTemporaryModifier,type ContinuousState} from './continuousEffects';
 import {currentCatalog} from './catalogContext';
 import {removeToken,type TokenPolicy,type TokenLedger} from './tokens';
 import {advanceStandby,chooseStandby,resolveStandby,closeStandby,type StandbyFlow} from './standbyFlow';
@@ -127,7 +127,7 @@ function trapsNegated(s:DuelState):boolean{
  return continuousTrapsNegated(s);
 }
 function trapActions(s:DuelState,index:number):Action[]{
- if(trapsNegated(s))return [];
+ if(trapsNegated(s)||!cardActivationAllowed(s,index,'trap'))return [];
  const out:Action[]=[];
  const last=s.phase==='response'?s.chain.at(-1):undefined;
  const lastKind=last?getEffect(last.id)?.kind:undefined;

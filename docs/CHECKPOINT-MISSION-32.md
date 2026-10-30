@@ -34,3 +34,11 @@ Preservados: 277 módulos de resolvers v1–v8, todos os dados persistentes, lay
 A descrição operacional em PT-BR foi corrigida para mostrar a condição de Umi nas cinco cartas; cinco testes verificam essa apresentação sem mudar o layout. Validar a CI do HEAD posterior a a3122dd6, não reutilizar a aprovação de um SHA anterior como prova desse ajuste.
 
 Hospedagem: nenhuma nova implantação. Não há sessão autenticada acessível nem BOTHOSTING_API_KEY configurada. Último relato anterior: c48a64a/916; runtime não observado novamente nesta sessão. Nenhuma concessão de inventário.
+
+## Retomada: restrições de ativação
+
+CI de 9ecea268 aprovada: 6.774 testes sem falhas/TODO e extended-soak aprovado (run 41007215069). Não repetida. Recibo: docs/evidence/mission32-resume-ci.json.
+
+Nova operação preventActivation integrada ao resolver ativo: distingue ativação de Card de negação de efeito; Trap/battle e Quick-Play/all, relativo ao controlador atual. Proposta m32-activation-restrictions: Pitch-Black Warwolf, Mirage Dragon e Invader of Darkness; 51 cenários públicos passaram em sandbox headless local, incluindo fonte virada por Desert Sunlight no elo superior sem negar o elo inferior já ativado. A proposta ainda NÃO conta como certificação. Exigir promoção isolada Node22, suíte completa e importação do bundle validado antes de contar ou distribuir.
+
+277 módulos históricos intocados; Umi e retirada de Cipher Soldier preservados. Hospedagem continua pendente de acesso autenticado.

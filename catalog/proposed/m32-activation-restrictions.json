@@ -1,0 +1,4678 @@
+{
+  "format": 1,
+  "batchId": "m32-activation-restrictions",
+  "engineVersion": "engine-v9",
+  "baseRevision": "40664314907b30712c09656b5c4bba3c29e9989b3ac1dc7477b18bad4bf6aa0c",
+  "candidates": [
+    {
+      "card": {
+        "id": "88975532",
+        "konamiId": 6195,
+        "name": "Lobo de Guerra Negro como Azeviche",
+        "englishName": "Pitch-Black Warwolf",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Beast-Warrior",
+        "attribute": "DARK",
+        "level": 4,
+        "atk": 1600,
+        "defense": 600,
+        "summary": "O oponente não pode ativar Cards de Armadilha durante a Fase de Batalha de qualquer jogador.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6195&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "preventActivation",
+                "cardKind": "trap",
+                "controller": "opponent",
+                "window": "battle"
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "continuous-card-activation-restriction",
+      "textEvidence": {
+        "text": "This monster has one continuous effect while it is face-up in a Monster Zone and its effects are not negated: its controller's opponent cannot activate Trap Cards during either player's Battle Phase. This is a restriction on new card activations, not effect negation. It does not negate any already activated card or effect and does not restrict effects of already face-up cards or effects activated in the Graveyard. Its controller can still activate those card kinds. The restriction follows current control, ends immediately when the source leaves the field, becomes face-down or is negated, and multiple sources apply independently. No activation, cost, target, choice or secondary effect exists.",
+        "sha256": "c59253903acb9d859386d943af97b999410292ac1cb965f3a843a9810688fba5",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6195&request_locale=en"
+      },
+      "cases": {
+        "negative": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "new",
+                    "id": "88975532"
+                  }
+                ],
+                "monsters": []
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "summon",
+                "card": "new",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "new"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "battleProtectedUntil"
+              ],
+              "equals": 3
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "battleProtectedUntil"
+              ],
+              "equals": 3
+            }
+          ]
+        },
+        "source-facedown": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "battleProtectedUntil"
+              ],
+              "equals": 3
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "battle"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "battle"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "controller-restriction": {
+          "fixture": {
+            "current": 0,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "own-card-activation": {
+          "fixture": {
+            "current": 0,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "own",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "own",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "own"
+            }
+          ]
+        },
+        "other-card-kinds": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "normal",
+                    "id": "53129443"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "normal"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "both-turns": {
+          "fixture": {
+            "current": 0,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "spell",
+                    "id": "53129443"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  },
+                  {
+                    "uid": "quick",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "already-activated-not-negated": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "88975532",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "sunlight",
+                    "id": "93747864",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "sunlight",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "battleProtectedUntil"
+              ],
+              "equals": 3
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "controller-restriction",
+        "source-facedown",
+        "other-card-kinds",
+        "own-card-activation",
+        "both-turns",
+        "already-activated-not-negated"
+      ]
+    },
+    {
+      "card": {
+        "id": "15960641",
+        "konamiId": 6196,
+        "name": "Dragão Miragem",
+        "englishName": "Mirage Dragon",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Dragon",
+        "attribute": "LIGHT",
+        "level": 4,
+        "atk": 1600,
+        "defense": 600,
+        "summary": "O oponente não pode ativar Cards de Armadilha durante a Fase de Batalha de qualquer jogador.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6196&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "preventActivation",
+                "cardKind": "trap",
+                "controller": "opponent",
+                "window": "battle"
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "continuous-card-activation-restriction",
+      "textEvidence": {
+        "text": "This monster has one continuous effect while it is face-up in a Monster Zone and its effects are not negated: its controller's opponent cannot activate Trap Cards during either player's Battle Phase. This is a restriction on new card activations, not effect negation. It does not negate any already activated card or effect and does not restrict effects of already face-up cards or effects activated in the Graveyard. Its controller can still activate those card kinds. The restriction follows current control, ends immediately when the source leaves the field, becomes face-down or is negated, and multiple sources apply independently. No activation, cost, target, choice or secondary effect exists.",
+        "sha256": "c59253903acb9d859386d943af97b999410292ac1cb965f3a843a9810688fba5",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6196&request_locale=en"
+      },
+      "cases": {
+        "negative": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "new",
+                    "id": "15960641"
+                  }
+                ],
+                "monsters": []
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "summon",
+                "card": "new",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "new"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "battleProtectedUntil"
+              ],
+              "equals": 3
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "battleProtectedUntil"
+              ],
+              "equals": 3
+            }
+          ]
+        },
+        "source-facedown": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "battleProtectedUntil"
+              ],
+              "equals": 3
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "battle"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "battle"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "controller-restriction": {
+          "fixture": {
+            "current": 0,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "own-card-activation": {
+          "fixture": {
+            "current": 0,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "own",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "own",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "own"
+            }
+          ]
+        },
+        "other-card-kinds": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "normal",
+                    "id": "53129443"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "normal"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "both-turns": {
+          "fixture": {
+            "current": 0,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "spell",
+                    "id": "53129443"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  },
+                  {
+                    "uid": "quick",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "already-activated-not-negated": {
+          "fixture": {
+            "current": 1,
+            "phase": "battle",
+            "resume": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "15960641",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "sunlight",
+                    "id": "93747864",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "blocked",
+                "target": ""
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "sunlight",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "battleProtectedUntil"
+              ],
+              "equals": 3
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "controller-restriction",
+        "source-facedown",
+        "other-card-kinds",
+        "own-card-activation",
+        "both-turns",
+        "already-activated-not-negated"
+      ]
+    },
+    {
+      "card": {
+        "id": "56647086",
+        "konamiId": 5922,
+        "name": "Invasor das Trevas",
+        "englishName": "Invader of Darkness",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Fiend",
+        "attribute": "DARK",
+        "level": 8,
+        "atk": 2900,
+        "defense": 2500,
+        "summary": "O oponente não pode ativar Cards de Magia Rápida.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5922&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "preventActivation",
+                "cardKind": "quickplay",
+                "controller": "opponent",
+                "window": "all"
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "continuous-card-activation-restriction",
+      "textEvidence": {
+        "text": "This monster has one continuous effect while it is face-up in a Monster Zone and its effects are not negated: its controller's opponent cannot activate Quick-Play Spell Cards in any phase. This is a restriction on new card activations, not effect negation. It does not negate any already activated card or effect and does not restrict effects of already face-up cards or effects activated in the Graveyard. Its controller can still activate those card kinds. The restriction follows current control, ends immediately when the source leaves the field, becomes face-down or is negated, and multiple sources apply independently. No activation, cost, target, choice or secondary effect exists.",
+        "sha256": "33e585cac9d9169c39096d968245cb51d41534307b7bd48883e6b453cbe5f710",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5922&request_locale=en"
+      },
+      "cases": {
+        "negative": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "position",
+                "card": "attacker",
+                "mode": "def"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "new",
+                    "id": "56647086"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "tribute1",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "tribute2",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "summon",
+                "card": "new",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "new"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "length": 2
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "position",
+                "card": "attacker",
+                "mode": "def"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "position",
+                "card": "attacker",
+                "mode": "def"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  },
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "target"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  },
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "target"
+            }
+          ]
+        },
+        "source-facedown": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "target"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "controller-restriction": {
+          "fixture": {
+            "current": 0,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "own-card-activation": {
+          "fixture": {
+            "current": 0,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "own",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "own",
+                "target": "target"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "own"
+            }
+          ]
+        },
+        "other-card-kinds": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "normal",
+                    "id": "53129443"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "normal"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "both-turns": {
+          "fixture": {
+            "current": 0,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "hand": [
+                  {
+                    "uid": "spell",
+                    "id": "53129443"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  },
+                  {
+                    "uid": "trap",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "spell"
+              }
+            },
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "backrow"
+              ],
+              "containsUID": "blocked"
+            }
+          ]
+        },
+        "already-activated-not-negated": {
+          "fixture": {
+            "current": 1,
+            "phase": "main",
+            "resume": "main",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "56647086",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "sunlight",
+                    "id": "93747864",
+                    "faceUp": false,
+                    "setTurn": 0
+                  },
+                  {
+                    "uid": "target",
+                    "id": "12607053",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "blocked",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "blocked",
+                "target": "target"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "sunlight",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "blocked"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "target"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "controller-restriction",
+        "source-facedown",
+        "other-card-kinds",
+        "own-card-activation",
+        "both-turns",
+        "already-activated-not-negated"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "88975532",
+      "canonicalId": "d87a522b-7660-4d8b-a3ab-84af79647167",
+      "konamiId": 6195,
+      "reviewer": "Codex: official card details, full effect and FAQ reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6195&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1600,
+        "defense": 600,
+        "race": "Beast-Warrior",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2004-08-05",
+        "set": "RDS-JP026",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6195&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "c59253903acb9d859386d943af97b999410292ac1cb965f3a843a9810688fba5",
+      "timingEvidence": {
+        "source": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?ope=4&cid=6195&request_locale=ja",
+        "classification": "continuous-card-activation-restriction"
+      },
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "15960641",
+      "canonicalId": "19e37dd8-cb93-4707-b5c6-aebe868a67a2",
+      "konamiId": 6196,
+      "reviewer": "Codex: official card details, full effect and FAQ reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6196&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1600,
+        "defense": 600,
+        "race": "Dragon",
+        "attribute": "LIGHT"
+      },
+      "verifiedPrinting": {
+        "date": "2004-08-05",
+        "set": "RDS-JP027",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6196&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "c59253903acb9d859386d943af97b999410292ac1cb965f3a843a9810688fba5",
+      "timingEvidence": {
+        "source": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?ope=4&cid=6196&request_locale=ja",
+        "classification": "continuous-card-activation-restriction"
+      },
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "56647086",
+      "canonicalId": "d37665f6-14a5-4149-91ab-49ceecaf70c3",
+      "konamiId": 5922,
+      "reviewer": "Codex: official card details, full effect and FAQ reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5922&request_locale=en",
+      "primaryFacts": {
+        "level": 8,
+        "atk": 2900,
+        "defense": 2500,
+        "race": "Fiend",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "set": "IOC-111",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5922&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "33e585cac9d9169c39096d968245cb51d41534307b7bd48883e6b453cbe5f710",
+      "timingEvidence": {
+        "source": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?ope=4&cid=5922&request_locale=ja",
+        "classification": "continuous-card-activation-restriction"
+      },
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    }
+  ]
+}

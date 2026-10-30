@@ -3,7 +3,7 @@ import {getMonsterEffect} from './monsterEffects';
 import {recoveryTargets,executeRecovery} from './recoveryRules';
 import {positionTargets,executePositionChange} from './positionOperations';
 import {ritualCandidates} from './ritualSummon';
-import {continuousModifier,canAffectMonster,addTemporaryModifier} from './continuousEffects';
+import {continuousModifier,cardActivationAllowed,canAffectMonster,addTemporaryModifier} from './continuousEffects';
 import {RULES_PROFILE} from './rulesProfile';
 import {getDuelCard as getCard} from './effectRegistry';
 import {getEffect,equipEligible,isQuickPlaySpell} from './effectRegistry';
@@ -21,6 +21,7 @@ export type EffectServices={destroy:(s:DuelState,uid:string)=>void;attack:(m:Mon
 export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  const e=getEffect(c.id),p=s.players[index],op=s.players[1-index];if(!e)return [];
  // Quick-Play cards Set during this turn cannot be activated until a later turn.
+ if(isQuickPlaySpell(c.id)&&!cardActivationAllowed(s,index,'quickplay'))return [];
  if(isQuickPlaySpell(c.id)&&p.backrow.some(b=>b.uid===c.uid&&b.setTurn===s.turn))return [];
  if(e.kind==='choiceSequence')return e.choices.flatMap((choice,n)=>canStartEconomicOperations(s,index,choice.operations)?[{kind:'spell' as const,card:c.uid,target:`__choice_${n}__`}]:[]);
  if(e.kind==='moveSelected')return selectedMovementTargets(s,index,e.rule,getCard,id=>getMonsterEffect(id)?.trigger==='flip',true).length>=e.rule.minimum?[{kind:'spell',card:c.uid}]:[];

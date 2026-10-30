@@ -29,6 +29,8 @@ export function syncContinuous(s:DuelState){const current=sources(s),ledger=s.co
  ledger.temporary=ledger.temporary.filter(t=>{const m=find(s,t.uid)?.m;return !!m?.faceUp&&t.expiresTurn>=s.turn&&(s.cardLifetimes?.[t.uid]?.epoch??0)===t.epoch;});}
 /** A declaration-only prohibition never cancels an attack already declared. */
 export function continuousAttackAllowed(s:DuelState,m:Monster,resolving=false):boolean{return !active(s).some(source=>affected(s,m,source.kind)&&source.rules.some(r=>r.kind==='preventAttack'&&(!resolving||!r.declarationOnly)&&matches(s,source,m,r.filter)));}
+/** Restricts new CARD activations only; never negates a chain link or an existing card's effect. */
+export function cardActivationAllowed(s:DuelState,actor:number,cardKind:'trap'|'quickplay'):boolean{const battle=s.phase==='battle'||s.resume==='battle'&&(s.phase==='response'||s.phase==='choice');return !active(s).some(source=>source.rules.some(r=>r.kind==='preventActivation'&&r.cardKind===cardKind&&(r.controller==='both'||source.controller!==actor)&&(r.window==='all'||battle)));}
 export function continuousTrapsNegated(s:DuelState){return active(s).some(x=>x.rules.some(r=>r.kind==='negateTraps'));}
 export function monsterEffectsNegated(s:DuelState,uid:string){const m=find(s,uid)?.m;if(!m?.faceUp)return false;return active(s).some(x=>x.rules.some(r=>r.kind==='negateMonsters'&&matches(s,x,m,r.filter)));}
 function affected(s:DuelState,m:Monster,kind:EffectKind){return !active(s).some(x=>x.rules.some(r=>r.kind==='immune'&&r.from.includes(kind)&&matches(s,x,m,r.filter)));}
