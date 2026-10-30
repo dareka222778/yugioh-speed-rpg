@@ -1,0 +1,4 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{runCase}=require('../scripts/card-batch-scenarios.cjs');
+const mon={uid:'celtic',id:'91152256',owner:0,faceUp:true,position:'atk',entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
+test('batch stat oracles use the public duel calculation and honor continuous field modifiers',()=>{runCase({fixture:{players:[{monsters:[mon],field:{uid:'field',id:'86318356',faceUp:true,resolved:true,setTurn:0}},{}]},actions:[],assertions:[{statOf:'celtic',stat:'atk',equals:1600},{statOf:'celtic',stat:'def',equals:1400}]});});
+test('stat oracles reject missing instances, unknown calculations and false expected results',()=>{for(const oracle of [{statOf:'absent',stat:'atk',equals:1400},{statOf:'celtic',stat:'arbitraryMethod',equals:1400},{statOf:'celtic',stat:'atk',equals:9999}])assert.throws(()=>runCase({fixture:{players:[{monsters:[mon]},{}]},actions:[],assertions:[oracle]}));});
