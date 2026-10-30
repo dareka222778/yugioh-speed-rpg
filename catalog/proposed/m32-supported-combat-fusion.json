@@ -1913,7 +1913,7 @@
       "reviewer": "Codex: full official card details and regional printing reviewed individually on 2026-10-30",
       "reviewedAt": "2026-10-30",
       "identityApproved": true,
-      "mechanicsApproved": true,
+      "mechanicsApproved": false,
       "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5034&request_locale=en",
       "primaryFacts": {
         "level": 3,
@@ -1930,7 +1930,7 @@
       },
       "fullTextReviewed": true,
       "secondaryEffectsReviewed": true,
-      "exceptionsReviewed": true,
+      "exceptionsReviewed": false,
       "textSha256": "6a8433d522b6ff63dcd6c9acc8cc25195b0d23a28c90497ff11a975f9d418b61",
       "semanticCoverage": {
         "activation": "represented",
@@ -1942,6 +1942,11 @@
         "duration": "represented",
         "restrictions": "represented",
         "negation": "represented"
+      },
+      "withdrawal": {
+        "reason": "Official FAQ identifies a mandatory Trigger Effect during damage calculation. Continuous calculation bonus does not represent its Chain timing.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?ope=4&cid=5034&request_locale=ja",
+        "date": "2026-10-30"
       }
     },
     {

@@ -1,3 +1,5 @@
+> **CORREÇÃO POSTERIOR OBRIGATÓRIA:** a FAQ oficial de Cipher Soldier identifica um efeito desencadeado obrigatório com Corrente no cálculo de dano. Sua modelagem contínua foi incorreta e a admissão foi retirada. As contagens de 923/+7 abaixo descrevem um estado SUPERADO e não representam o catálogo atual. Neste checkpoint de correção, a base ativa retornou a 916; seis candidatas válidas foram reenfileiradas em lotes novos pelos gates originais. Não contar Cipher Soldier. Ver `docs/evidence/mission32-withdrawal.json`.
+
 # Checkpoint da Missão 32
 
 Base remota conferida: `c48a64a42ae57b556ce25f00170bafecb0c03605`, 916 identidades certificadas e autorizadas, 1.046 pendentes. PR #12 continua em rascunho; nenhuma alteração na branch principal.

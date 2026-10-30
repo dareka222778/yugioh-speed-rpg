@@ -12,14 +12,6 @@
     {
       "id": "m31-target-groups",
       "proofSHA256": "5dc960e1f3a6b5ffba8d179babb8de1c15f9300d1fd6f7c521169632df988185"
-    },
-    {
-      "id": "m32-supported-combat-fusion",
-      "proofSHA256": "ded5ec95286b55e0a0a4b639a557c1629df131fd836238a6c951328db12c8c37"
-    },
-    {
-      "id": "m32-umi-presence",
-      "proofSHA256": "baadd68c888fad574f0cc15a49c334aa06b776247cbcf08c38e5f77bedffd28d"
     }
   ]
 }

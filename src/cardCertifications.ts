@@ -5302,51 +5302,5 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
-,
-  "40173854": {
-    "fingerprint": "0a6adebc79b083d019af0b0e95d74eeceb99da741f8b84dbdbe1d658947703f6",
-    "suites": [
-      "tests/generated-m32-supported-combat-fusion.test.cjs"
-    ]
-  },
-  "79853073": {
-    "fingerprint": "d5576f90f65d62357589d3e3e8be6f77c1b5958209930901a73200094506ff81",
-    "suites": [
-      "tests/generated-m32-supported-combat-fusion.test.cjs"
-    ]
-  }
-
-,
-  "24128274": {
-    "fingerprint": "b7d5b67fe460a219e179d669f52df9d4d2463f3ce88be016387aa586c5245abb",
-    "suites": [
-      "tests/generated-m32-umi-presence.test.cjs"
-    ]
-  },
-  "24435369": {
-    "fingerprint": "3e56041f53b7cb4e3cda4621d0d69aab2e94e6f953333e8c7efe752228162956",
-    "suites": [
-      "tests/generated-m32-umi-presence.test.cjs"
-    ]
-  },
-  "64342551": {
-    "fingerprint": "e93f7d7c36292a101fffac6a056c5bb736f3e8e6a914ae43fd0c7e9904612f99",
-    "suites": [
-      "tests/generated-m32-umi-presence.test.cjs"
-    ]
-  },
-  "90337190": {
-    "fingerprint": "9168a04a7c26ee727e66defb567d42fede8e7b1c147ee0b622bc9016f4dd462a",
-    "suites": [
-      "tests/generated-m32-umi-presence.test.cjs"
-    ]
-  },
-  "95614612": {
-    "fingerprint": "a143949c77a65f565ecb23410390d6e641761cb9c61425e338b9b9742a62fa41",
-    "suites": [
-      "tests/generated-m32-umi-presence.test.cjs"
-    ]
-  }
-
 
 };
