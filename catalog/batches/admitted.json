@@ -36,6 +36,10 @@
     {
       "id": "m33-royal-decree",
       "proofSHA256": "f910afba6e125a6adc9986c8f7ed798f9a2a280a73f70f54b9043691d6d28da9"
+    },
+    {
+      "id": "m34-summon-trap-lock",
+      "proofSHA256": "5ee60a8499f1df01735c91cfeecc8c223c3cad65a98259da7018950d07282519"
     }
   ]
 }

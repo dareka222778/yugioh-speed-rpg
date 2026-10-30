@@ -7,6 +7,7 @@ import {effects as m32_activation_restrictionsEffects} from './generated/m32-act
 import {effects as m32_optional_trigger_lpEffects} from './generated/m32-optional-trigger-lp';
 import {effects as m33_piercing_equipEffects} from './generated/m33-piercing-equip';
 import {effects as m33_royal_decreeEffects} from './generated/m33-royal-decree';
+import {effects as m34_summon_trap_lockEffects} from './generated/m34-summon-trap-lock';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -65,6 +66,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m34_summon_trap_lockEffects,
  ...m33_royal_decreeEffects,
  ...m33_piercing_equipEffects,
  ...m32_optional_trigger_lpEffects,

@@ -940,4 +940,9 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "97687912",
 // Generated batch m33-royal-decree: explicit tested release; zero inventory grants.
   "51452091",
+// Generated batch m34-summon-trap-lock: explicit tested release; zero inventory grants.
+  "53693416",
+  "52571838",
+  "26082229",
+  "89698120",
 ]);

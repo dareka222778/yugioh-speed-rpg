@@ -5386,5 +5386,31 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "26082229": {
+    "fingerprint": "d1f03bdd3f535e15b67a5cb572c8c66c40ebb2ba4d84f39262961e5dea0dcdd2",
+    "suites": [
+      "tests/generated-m34-summon-trap-lock.test.cjs"
+    ]
+  },
+  "52571838": {
+    "fingerprint": "953bb338202e6125480453ea359bb83538b45d69d3442b358228157ff580a1d8",
+    "suites": [
+      "tests/generated-m34-summon-trap-lock.test.cjs"
+    ]
+  },
+  "53693416": {
+    "fingerprint": "1e59d78d0b5c77382757c872532d59373ecba0abc5e95bd21666e451f060ae32",
+    "suites": [
+      "tests/generated-m34-summon-trap-lock.test.cjs"
+    ]
+  },
+  "89698120": {
+    "fingerprint": "ef27d4d4bc00ad6c3c5e5f0688608b63f9a7f4d0fefba1dab925958d301fdbb1",
+    "suites": [
+      "tests/generated-m34-summon-trap-lock.test.cjs"
+    ]
+  }
+
 
 };
