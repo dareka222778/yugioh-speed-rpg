@@ -17,7 +17,7 @@ const ACTIVE_CAPABILITIES=Object.freeze({engineVersion:'engine-v9',operations:Ob
  ...effectKinds.map(k=>'effect:'+k),...triggers.map(k=>'trigger:'+k),...monsterOps.map(k=>'monster-operation:'+k),
  ...['lp','discard','tribute'].map(k=>'cost:'+k),...['draw','gainLP','damage','scaledLP'].map(k=>'economic:'+k),
  ...['combat','preventAttack','modifier','negateMonsters','negateTraps','immune'].map(k=>'continuous:'+k),
- ...['hand','grave','monsters','backrow'].map(k=>'count:'+k),'duration:end-turn','choice:ritual-materials','ritualSummonExplicitRecipe','ritualSummonAttributeRecipe','ritual:exact-level-total','ritual:minimum-level-total','ritual:monster'
+ ...['hand','grave','monsters','backrow'].map(k=>'count:'+k),'condition:face-up-named-card','duration:end-turn','choice:ritual-materials','ritualSummonExplicitRecipe','ritualSummonAttributeRecipe','ritual:exact-level-total','ritual:minimum-level-total','ritual:monster'
 ])});
 function inferCapabilities(candidate){
  const effect=candidate?.effect,monster=candidate?.monster,required=new Set();
@@ -30,7 +30,7 @@ function inferCapabilities(candidate){
   required.add(effect.ritual?.exact===true?'ritual:exact-level-total':'ritual:minimum-level-total');
  }
  const count=c=>{if(c)required.add('count:'+c.zone);};
- const rules=rs=>{if(Array.isArray(rs))for(const r of rs){required.add('continuous:'+r.kind);count(r.count);}};
+ const rules=rs=>{if(Array.isArray(rs))for(const r of rs){required.add('continuous:'+r.kind);if(r.filter?.faceUpNames)required.add('condition:face-up-named-card');count(r.count);}};
  if(effect.kind==='monsterEffect'&&monster?.effect){const e=monster.effect;required.add('trigger:'+e.trigger);if(e.operation?.kind){required.add('monster-operation:'+e.operation.kind);rules(e.operation.rules);}if(e.cost?.kind)required.add('cost:'+e.cost.kind);}
  if(effect.kind==='continuous')rules(effect.rules);
  if(effect.kind==='equip')count(effect.count);

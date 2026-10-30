@@ -23,7 +23,7 @@ jobs:
       - run: node --test tests/cardBatchCI.test.cjs
       - run: node scripts/card-batch-ci.cjs
         env:
-          GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
+          CARD_BATCH_BASE_COMMIT: ${{ github.event.pull_request.head.sha }}
       - uses: actions/upload-artifact@v4
         with:
           name: reviewed-admission-changes
