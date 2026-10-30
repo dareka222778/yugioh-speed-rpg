@@ -32,6 +32,10 @@
     {
       "id": "m33-piercing-equip",
       "proofSHA256": "68e1abe9f2576b1d0ee1029b2a72012ff54d46d4e7fccffa91280811afb4381a"
+    },
+    {
+      "id": "m33-royal-decree",
+      "proofSHA256": "f910afba6e125a6adc9986c8f7ed798f9a2a280a73f70f54b9043691d6d28da9"
     }
   ]
 }

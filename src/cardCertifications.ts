@@ -5378,5 +5378,13 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "51452091": {
+    "fingerprint": "b72709a416471b77c2053f8289682c5559d2e53e26b3b4e65214d09f5ad2e6ab",
+    "suites": [
+      "tests/generated-m33-royal-decree.test.cjs"
+    ]
+  }
+
 
 };
