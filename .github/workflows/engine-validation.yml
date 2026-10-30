@@ -25,6 +25,7 @@ jobs:
       - run: npm test
       - run: node scripts/audit-generated-batches31.cjs
       - run: node scripts/audit-generated-games31.cjs
+      - run: node --expose-gc scripts/benchmark-catalog32.cjs 50 250
       - run: node scripts/audit-grave-owner31.cjs
       - run: node scripts/audit-conditional-batch30.cjs
       - run: node scripts/audit-destruction-batch29.cjs
@@ -103,6 +104,8 @@ jobs:
           path: |
             artifacts/test-results.xml
             artifacts/executions-m31-*.json
+            artifacts/executions-m32-*.json
+            artifacts/mission32-engine-benchmark.json
             artifacts/mission31-generated-audit.json
             artifacts/mission31-representative-games.json
             artifacts/mission31-tag-owner.json
