@@ -3,6 +3,7 @@ import {singleCardRuleIssues,type SingleCardRule} from './singleCardRules';
 import {monsters as m31_single_targetsMonsters} from './generated/m31-single-targets';
 import {monsters as m31_harpie_identityMonsters} from './generated/m31-harpie-identity';
 import {monsters as m31_target_groupsMonsters} from './generated/m31-target-groups';
+import {monsters as m32_supported_combat_fusionMonsters} from './generated/m32-supported-combat-fusion';
 import {conditionalMonsters30} from './conditionalBatch30';
 import {triggerMonsters29} from './triggerBatch29';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -66,6 +67,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...m32_supported_combat_fusionMonsters,
  ...m31_target_groupsMonsters,
  ...m31_harpie_identityMonsters,
  ...m31_single_targetsMonsters,

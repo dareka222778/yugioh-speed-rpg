@@ -1,6 +1,7 @@
 import {effects as m31_single_targetsEffects} from './generated/m31-single-targets';
 import {effects as m31_harpie_identityEffects} from './generated/m31-harpie-identity';
 import {effects as m31_target_groupsEffects} from './generated/m31-target-groups';
+import {effects as m32_supported_combat_fusionEffects} from './generated/m32-supported-combat-fusion';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -59,6 +60,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m32_supported_combat_fusionEffects,
  ...m31_target_groupsEffects,
  ...m31_harpie_identityEffects,
  ...m31_single_targetsEffects,
