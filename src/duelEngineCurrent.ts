@@ -271,6 +271,8 @@ export function legalActions(s:DuelState,actor:string):Action[]{
  * Activation targets are fixed before either player may add a fast effect. */
 function eligibleTrigger(s:DuelState,event:TriggerEvent):boolean{
  const e=getMonsterEffect(event.id);if(!e||effectNameBlocked(s,event.actor,event.id))return false;
+ // Trigger costs are paid when their Chain Link is created, never merely when offered.
+ if(e.cost&&(e.cost.kind!=='lp'||s.players[event.actor].lp<=e.cost.amount))return false;
  if(e.oncePerTurn&&s.monsterNameUsed?.[event.actor]?.[event.id]===s.turn)return false;
  if(e.trigger==='onOtherSummon'&&!s.players[event.actor].monsters.some(m=>m.uid===event.card&&m.faceUp))return false;
  const targets=monsterTargets(s,event.actor,e);if(targets&&!targets.length&&!(['singleCard','targetGroup'].includes(e.operation.kind)&&getMonsterDefinition(event.id)?.activation.policy==='mandatory'))return false;
@@ -286,6 +288,7 @@ function beginTriggers(s:DuelState,events:TriggerEvent[]){
 }
 function appendTrigger(s:DuelState,event:TriggerEvent,target=''){
  const e=getMonsterEffect(event.id)!;
+ if(e.cost){if(e.cost.kind!=='lp'||s.players[event.actor].lp<=e.cost.amount)throw Error('Custo de gatilho indisponível.');s.players[event.actor].lp-=e.cost.amount;}
  if(e.oncePerTurn){s.monsterNameUsed??=[{},{}];s.monsterNameUsed[event.actor][event.id]=s.turn;}
  s.chain.push({...event,target,targetBinding:bindTarget(s,target),monsterEffect:true});
  note(s,`Efeito de ${card(event.id).name} ativado na corrente.`);
@@ -357,7 +360,7 @@ function triggerMonsterEffect(s:DuelState,actor:number,uid:string,trigger:'flip'
  if(!sourceId&&(!m||!m.faceUp))return false;
  const id=sourceId??m!.id,e=getMonsterEffect(id);
  if(!e||e.trigger!==trigger||effectNameBlocked(s,actor,id))return false;
- if(e.operation.kind==='targetGroup'){response(s,{kind:'none'},s.resume);beginTriggers(s,[{actor,card:uid,id}]);return true;}
+ if(e.operation.kind==='targetGroup'||e.cost?.kind==='lp'&&getMonsterDefinition(id)?.activation.policy==='optional'){response(s,{kind:'none'},s.resume);beginTriggers(s,[{actor,card:uid,id}]);return true;}
  const p=s.players[actor];
  const targets=monsterTargets(s,actor,e);
  if(targets!==undefined&&!targets.length&&!(['singleCard','targetGroup'].includes(e.operation.kind)&&getMonsterDefinition(id)?.activation.policy==='mandatory'))return false;
@@ -831,7 +834,7 @@ export function actionLabel(s:DuelState,actor:string,a:Action){
  if(a.kind==='choose'&&s.choice?.source==='monsterRecruitPosition')return a.target==='__recruit_atk__'?'Invocar do Deck em Ataque':'Invocar do Deck em Defesa';
  if(a.kind==='choose'&&s.choice?.source==='ritual')return ({__ritual_atk__:'Invocar em Ataque',__ritual_def__:'Invocar em Defesa',__ritual_commit__:'Confirmar Tributos',__ritual_undo__:'Desfazer último Tributo',__ritual_back__:'Escolher outro Ritual'} as Record<string,string>)[a.target]??`${s.ritual?.stage==='materials'?'Tributar':'Invocar por Ritual'}: ${name(a.target)}`;
  if(a.kind==='choose'&&s.choice?.source==='attackReplay')return a.target==='__cancel__'?'Cancelar ataque':a.target==='__direct__'?'Continuar: ataque direto':`Continuar: atacar ${name(a.target)}`;
- if(a.kind==='choose'&&s.choice?.source==='triggerOptional')return a.target==='__skip__'?'Não ativar efeito opcional':`Ativar efeito opcional: ${name(a.target)}`;
+ if(a.kind==='choose'&&s.choice?.source==='triggerOptional'){const cost=s.triggerBuild?.selected&&getMonsterEffect(s.triggerBuild.selected.id)?.cost;return a.target==='__skip__'?'Não ativar efeito opcional':`Ativar efeito opcional: ${name(a.target)}${cost?.kind==='lp'?` | Pagar ${cost.amount} PV`:''}`;}
  if(a.kind==='choose'&&s.choice?.source==='triggerOrder')return `Próximo elo da corrente: ${name(a.target)}`;
  if(a.kind==='choose'&&s.choice?.source==='triggerTarget')return `Alvo do efeito: ${name(a.target)}`;
  if(a.kind==='choose'&&s.choice?.source==='monsterRecruit'&&a.target==='__skip__')return 'Não Invocar (Tomate Místico)';

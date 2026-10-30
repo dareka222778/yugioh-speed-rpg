@@ -134,7 +134,7 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  if((op.kind==='destroy'||op.kind==='bounce')&&!['opponentMonster','anyMonster'].includes(op.target)||op.kind==='recover'&&!['spell','trap'].includes(op.cardKind))return ['invalid-monster-selector'];
  if(op.kind==='search'&&(!['atk','defense'].includes(op.stat)||!Number.isSafeInteger(op.maximum)||op.maximum<0)||op.kind==='specialSummon'&&(!Number.isSafeInteger(op.maximumAtk)||op.maximumAtk<0||!['DARK','LIGHT','EARTH','WIND','WATER','FIRE','DIVINE'].includes(op.attribute)))return ['invalid-deck-filter'];
  if(e.trigger==='quick'&&(op.kind!=='battleShield'||e.cost?.kind!=='discard'||e.cost.count!==1)||e.trigger==='continuous'&&!['identityOnly','negateTraps','directAttack','continuous'].includes(op.kind))return ['unsupported-monster-mechanic'];
- if((a.policy==='mandatory'||a.policy==='optional')&&e.cost)return ['unsupported-trigger-cost'];
+ if((a.policy==='mandatory'||a.policy==='optional')&&e.cost&&!(a.policy==='optional'&&e.trigger==='flip'&&e.cost.kind==='lp'&&['burn','heal'].includes(op.kind)))return ['unsupported-trigger-cost'];
  if((op.kind==='heal'||op.kind==='burn'||op.kind==='burnPerSpellTrap'||op.kind==='burnPerHand')&&(!Number.isSafeInteger(op.amount)||op.amount<=0)||op.kind==='draw'&&(!Number.isSafeInteger(op.count)||op.count<=0))return ['invalid-monster-amount'];
  if(e.cost&&(e.cost.kind==='lp'?(!Number.isSafeInteger(e.cost.amount)||e.cost.amount<=0):!['tribute','discard'].includes(e.cost.kind)||!Number.isSafeInteger(e.cost.count)||e.cost.count<1))return ['invalid-monster-cost'];
  return [];

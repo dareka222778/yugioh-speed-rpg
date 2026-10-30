@@ -46,3 +46,9 @@ Nova operação preventActivation integrada ao resolver ativo: distingue ativaç
 ### Admissão concluída — 925
 
 Lote m32-activation-restrictions admitido pelo gate existente na CI 41079475780, base bc54f7cf: 6.827 testes Node22 aprovados, zero falhas/TODO. Bundle importado somente após validação de SHA-256 de cada conteúdo e do arquivo anterior; catálogo atual 488b7ef1792a32ec4a3758f104de76b1952f5ba4ebe229927f52c0e85bdd6995. Total: 925 certificadas/autorizadas; 1.037 pendentes; faltam 76 para 1.001 e 346 para 1.271. Nenhum inventário concedido. Exigir CI completa do commit de admissão antes de implantação; hospedagem ainda sem acesso autenticado.
+
+### Segundo bloco: gatilho opcional com custo de PV
+
+Correção demonstrada: a construção de gatilhos simultâneos não tinha pagamento de custos e a via legada de revelação em batalha não oferecia a recusa de efeitos FLIP pagos. Agora custos LP são pagos ao criar o elo, não ao oferecer escolha; elegibilidade é recalculada após cada ativação e a recusa não paga. O schema admite somente FLIP opcional com LP e operação não direcionada burn/heal; descarte/Tributo e outros contratos de gatilho permanecem bloqueados.
+
+Needle Ball (94230224, CID4496), OCG Booster 5 de 1999-10-17, texto/FAQ oficiais revistos: proposta m32-optional-trigger-lp, 22 cenários headless aprovados, ainda não certificada. Inclui dois gatilhos quando só há PV para um, batalha após destruição da fonte, negação mantendo o custo e restauração/rejeição de repetição. Submeter à admissão completa antes de contar.
