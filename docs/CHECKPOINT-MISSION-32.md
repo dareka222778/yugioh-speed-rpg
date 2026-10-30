@@ -37,3 +37,21 @@ Não há API de hospedagem configurada nem endpoint de navegador conectado acess
 - A Legendary Ocean exige redução de Nível e regra de nome, além dos modificadores. Não certificar somente como Umi com bônus.
 
 O marco de 1.001 ainda não foi atingido. A meta não autoriza equivalências incompletas.
+
+## Consolidação posterior dos dois lotes
+
+Os dois pacotes descritos acima foram integrados: **923 certificadas/autorizadas, +7 nesta missão, 1.039 pendentes**. Catálogo atual `908b2ae27f7e78820cd7bf591832a99663d50e9eed831dd0250b787d362ac29c`. A fila de propostas está vazia; as cinco cartas de Umi não estão mais em staging. Os 106 cenários individuais passaram nos gates de preparação e localmente pela fachada pública.
+
+Commit de integração do segundo lote: `6a4abf09c8996be360cd39c923c0410bf32b55a9`; validação completa: https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/41003466781 . A verificação também deve ser conferida para o HEAD posterior deste checkpoint. Não inferir implantação a partir de CI verde.
+
+A auditoria de jogos foi corrigida para incluir Fusões no Adicional e seus materiais no Deck Principal, manter limites compartilhados de nomes e observar o UID de Fusão. Os gates não foram removidos. O benchmark da engine está na CI e em `scripts/benchmark-catalog32.cjs`; resultados locais completos preservados em `docs/evidence/mission32-local-benchmark.json`.
+
+A nova fila `scripts/card-batch-family-queue.cjs` conferiu os hashes de todos os arquivos do cache M21: os 1.039 pendentes possuem texto secundário completo disponível; 27 exigem revisão de identidade. Há 1.026 assinaturas exatas de texto/categoria e oito grupos com múltiplos pendentes. Isso não demonstra equivalência mecânica nem dispensa revisão oficial. Gerar novamente com:
+
+```powershell
+node scripts/card-batch-family-queue.cjs C:\Users\Micro\Downloads\speed-rpg-rea-20261026\mission21-text-cache artifacts/mission32-family-queue.json
+```
+
+Maiores grupos ainda não certificados: quatro monstros que impedem respostas de Armadilhas à própria Invocação-Normal; três guardiões que alteram ATK no cálculo de dano; quatro Mensagens Espirituais que dependem da infraestrutura de Destiny Board. Não certificar as Mensagens como Magias Contínuas vazias. Outros próximos blocos reutilizáveis: custos de descarte com movimentos parametrizados; substitutos de Fusão (revisar separadamente os efeitos secundários de King of the Swamp); efeitos contínuos de impedimento de ativações durante a batalha.
+
+Para o próximo lote: colocar somente propostas ainda não admitidas em `catalog/proposed/queue.json`, definir o catálogo-base acima, executar a promoção existente e a CI completa e importar o pacote apenas com hashes de base correspondentes. Nenhuma sessão de hospedagem foi disponibilizada; implantação segue pendente. Faltam **78 novas certificações** para 1.001; não declarar a missão concluída.

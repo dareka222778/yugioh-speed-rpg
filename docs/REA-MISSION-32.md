@@ -45,3 +45,7 @@ Medição **local Node 24**, catálogo candidato com 923 cartas: 50 duelos inter
 - Nenhuma sessão autenticada acessível da hospedagem e nenhuma chave de API configurada. A implantação de 916 consta no relatório anterior; não foi observada novamente nesta sessão. A versão nova não foi implantada e não há contagem online nova comprovada.
 
 Não houve merge, acesso ao Discord real, alteração de layout, economia, inventários ou bancos persistentes. A skill [REA](C:/Users/Micro/.agents/skills/reverse-engineer-anything/SKILL.md) foi usada na tentativa de descoberta da sessão de hospedagem; o endpoint não estava acessível.
+
+## Fila industrial reproduzível
+
+`card-batch-family-queue.cjs` reaproveita o cache M21 e confere os hashes dos arquivos e de cada texto completo antes de agrupar. Os 1.039 pendentes estão cobertos por texto secundário; há 1.026 assinaturas exatas de texto e categoria e oito grupos com mais de um pendente. A assinatura conserva números, condições, custos e efeitos secundários; sua igualdade é somente navegação para revisão individual, nunca admissão automática. Texto primário oficial, definições e testes continuam obrigatórios. Quatro regressões verificam adulteração, duplicação, ausência de texto e separação de estágios. Resumo em `docs/evidence/mission32-family-queue-summary.json`.

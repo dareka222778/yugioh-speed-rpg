@@ -11,17 +11,75 @@
   "remainingTo1271": 348,
   "inventoryGranted": 0,
   "catalogRevision": "908b2ae27f7e78820cd7bf591832a99663d50e9eed831dd0250b787d362ac29c",
-  "cards": ["79853073", "40173854", "24435369", "64342551", "95614612", "90337190", "24128274"],
-  "preparations": [
-    {"run": 41001876289, "checkout": "d22d215224a42e5d129f5a898d1384a07793e361", "added": 2, "publicEngineScenarios": 26, "fullTests": true, "gate": "card-batch-automation.promote"},
-    {"run": 41002652377, "checkout": "4ec5b82db6bbd615ff9d6972cbfdfbcad7af82d5", "added": 5, "publicEngineScenarios": 80, "fullTests": true, "gate": "card-batch-automation.promote"}
+  "cards": [
+    "79853073",
+    "40173854",
+    "24435369",
+    "64342551",
+    "95614612",
+    "90337190",
+    "24128274"
   ],
-  "integrationCI": {"status": "pending-final-commit-validation", "previousRun": 41002652382, "previousSuite": {"node": "v22.23.4", "pass": 6689, "fail": 0, "todo": 0}, "previousFailure": "Representative game deck builder put a generated Fusion in Main Deck; corrected without removing coverage assertion."},
-  "hosting": {"newVersionDeployed": false, "onlineVersionObservedThisSession": false, "priorReport": "c48a64a / 916", "blockedBy": ["No reachable authenticated browser session", "BOTHOSTING_API_KEY is not configured"]},
-  "localEnvironment": {"node": "v24.22.1", "nativeTypeScriptTransformationOnly": true, "fullCompilationAndSQLite": "CI Node 22", "npmOffline": "ENOTCACHED", "npmNetwork": "EACCES"},
-  "benchmarks": {"local": "docs/evidence/mission32-local-benchmark.json", "discordCapacityClaim": false},
+  "preparations": [
+    {
+      "run": 41001876289,
+      "checkout": "d22d215224a42e5d129f5a898d1384a07793e361",
+      "added": 2,
+      "publicEngineScenarios": 26,
+      "fullTests": true,
+      "gate": "card-batch-automation.promote"
+    },
+    {
+      "run": 41002652377,
+      "checkout": "4ec5b82db6bbd615ff9d6972cbfdfbcad7af82d5",
+      "added": 5,
+      "publicEngineScenarios": 80,
+      "fullTests": true,
+      "gate": "card-batch-automation.promote"
+    }
+  ],
+  "integrationCI": {
+    "status": "Consult checks for final checkpoint HEAD; code parent validation run 41003466781",
+    "previousRun": 41002652382,
+    "previousSuite": {
+      "node": "v22.23.4",
+      "pass": 6689,
+      "fail": 0,
+      "todo": 0
+    },
+    "previousFailure": "Representative game deck builder put a generated Fusion in Main Deck; corrected without removing coverage assertion."
+  },
+  "hosting": {
+    "newVersionDeployed": false,
+    "onlineVersionObservedThisSession": false,
+    "priorReport": "c48a64a / 916",
+    "blockedBy": [
+      "No reachable authenticated browser session",
+      "BOTHOSTING_API_KEY is not configured"
+    ]
+  },
+  "localEnvironment": {
+    "node": "v24.22.1",
+    "nativeTypeScriptTransformationOnly": true,
+    "fullCompilationAndSQLite": "CI Node 22",
+    "npmOffline": "ENOTCACHED",
+    "npmNetwork": "EACCES"
+  },
+  "benchmarks": {
+    "local": "docs/evidence/mission32-local-benchmark.json",
+    "discordCapacityClaim": false
+  },
   "goal1001Achieved": false,
   "merge": false,
   "discordAccess": false,
-  "persistentPlayerDataModified": false
+  "persistentPlayerDataModified": false,
+  "familyQueue": {
+    "pending": 1039,
+    "completeSecondaryText": 1039,
+    "identityBlocked": 27,
+    "exactTextGroups": 1026,
+    "groupsWithMultiplePendingIdentities": 8,
+    "automaticCertifications": 0,
+    "summary": "docs/evidence/mission32-family-queue-summary.json"
+  }
 }
