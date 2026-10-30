@@ -24,6 +24,10 @@
     {
       "id": "m32-activation-restrictions",
       "proofSHA256": "36764dffd1d15e89f7a2bb5acc21cdc1e0a843aa70b492336ac3599b659ceb5e"
+    },
+    {
+      "id": "m32-optional-trigger-lp",
+      "proofSHA256": "b0581a6ebdd006cfc7e0b8a7b9d493b374c8f6aa9f203ef399f01e04da847ed8"
     }
   ]
 }

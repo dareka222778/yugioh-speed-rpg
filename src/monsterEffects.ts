@@ -5,6 +5,7 @@ import {monsters as m31_harpie_identityMonsters} from './generated/m31-harpie-id
 import {monsters as m31_target_groupsMonsters} from './generated/m31-target-groups';
 import {monsters as m32_umi_verifiedMonsters} from './generated/m32-umi-verified';
 import {monsters as m32_activation_restrictionsMonsters} from './generated/m32-activation-restrictions';
+import {monsters as m32_optional_trigger_lpMonsters} from './generated/m32-optional-trigger-lp';
 import {conditionalMonsters30} from './conditionalBatch30';
 import {triggerMonsters29} from './triggerBatch29';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -68,6 +69,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...m32_optional_trigger_lpMonsters,
  ...m32_activation_restrictionsMonsters,
  ...m32_umi_verifiedMonsters,
  ...m31_target_groupsMonsters,

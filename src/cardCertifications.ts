@@ -5362,5 +5362,13 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "94230224": {
+    "fingerprint": "a7b605625c69671fc05d2b2b6a7f883d9a077982b850afa2b8ee5c2f1f6933b5",
+    "suites": [
+      "tests/generated-m32-optional-trigger-lp.test.cjs"
+    ]
+  }
+
 
 };
