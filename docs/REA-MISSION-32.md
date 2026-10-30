@@ -29,6 +29,7 @@ O gate adicional calculation-timing-review32.cjs exige revisão oficial específ
 - faceUpNames e a capacidade condition:face-up-named-card acrescentam uma condição ao vocabulário contínuo existente. Consultam identidades públicas em ambos os campos, sem ler cartas ocultas ou estatísticas recursivas. Não habilitam automaticamente outras cartas que mencionam Umi.
 - card-batch-ci.cjs chama o mesmo card-batch-automation.cjs promote --release em checkout descartável, executa suíte completa e gates e produz um pacote com hashes anteriores/posteriores. O job tem somente leitura, não faz commits nem deploy. O HEAD integrado ainda precisa da CI completa Engine validation.
 - Oráculos públicos de ATK/DEF e seletores de propriedades ausentes permitem cenários inequívocos de ataque direto. A worklist distingue certificação de autorização explícita.
+- A descrição operacional em PT-BR agora mostra explicitamente a condição de Umi nas cinco cartas, com cinco regressões próprias; layout e imagens permanecem iguais.
 - card-batch-family-queue.cjs verifica os hashes do cache M21 e de cada texto completo. Os 1.040 pendentes possuem texto secundário verificado; há 1.027 assinaturas exatas de texto/categoria e oito grupos compartilhados. Números, timing e efeitos secundários não são apagados. Igualdade de texto é navegação, nunca certificação ou equivalência mecânica comprovada.
 
 ## Falhas corrigidas

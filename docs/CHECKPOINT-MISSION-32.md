@@ -31,4 +31,6 @@ Workspace: C:\Users\Micro\Downloads\speed-rpg-rea-20261026\repo-mission32-c48a64
 
 Preservados: 277 módulos de resolvers v1–v8, todos os dados persistentes, layout e economia. Os gates locais confirmaram 922 certificadas/autorizadas e zero liberação de carta incompleta. Métricas: mission32-local-benchmark.json (50 duelos) e mission32-headless-1000.json (1.000 sessões intercaladas); não representam latência Discord.
 
+A descrição operacional em PT-BR foi corrigida para mostrar a condição de Umi nas cinco cartas; cinco testes verificam essa apresentação sem mudar o layout. Validar a CI do HEAD posterior a a3122dd6, não reutilizar a aprovação de um SHA anterior como prova desse ajuste.
+
 Hospedagem: nenhuma nova implantação. Não há sessão autenticada acessível nem BOTHOSTING_API_KEY configurada. Último relato anterior: c48a64a/916; runtime não observado novamente nesta sessão. Nenhuma concessão de inventário.
