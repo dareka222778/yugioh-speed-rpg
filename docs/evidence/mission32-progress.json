@@ -3,83 +3,80 @@
   "baselineCommit": "c48a64a42ae57b556ce25f00170bafecb0c03605",
   "engine": "engine-v9",
   "before": 916,
-  "added": 0,
-  "certified": 916,
-  "distributionAuthorized": 916,
-  "remainingHistorical": 1046,
-  "remainingTo1001": 85,
-  "remainingTo1271": 355,
+  "added": 6,
+  "certified": 922,
+  "distributionAuthorized": 922,
+  "remainingHistorical": 1040,
+  "remainingTo1001": 79,
+  "remainingTo1271": 349,
   "inventoryGranted": 0,
-  "catalogRevision": "25267e4092aa0a2b1af7dd884851c59286ccbe780b2d272100756a2bb2385831",
-  "cards": [],
-  "preparations": [
-    {
-      "run": 41001876289,
-      "checkout": "d22d215224a42e5d129f5a898d1384a07793e361",
-      "added": 2,
-      "publicEngineScenarios": 26,
-      "fullTests": true,
-      "gate": "card-batch-automation.promote"
-    },
-    {
-      "run": 41002652377,
-      "checkout": "4ec5b82db6bbd615ff9d6972cbfdfbcad7af82d5",
-      "added": 5,
-      "publicEngineScenarios": 80,
-      "fullTests": true,
-      "gate": "card-batch-automation.promote"
-    }
+  "catalogRevision": "40664314907b30712c09656b5c4bba3c29e9989b3ac1dc7477b18bad4bf6aa0c",
+  "cards": [
+    "40173854",
+    "24435369",
+    "64342551",
+    "95614612",
+    "90337190",
+    "24128274"
   ],
-  "integrationCI": {
-    "status": "Correction and fresh promotion queued; previous 923-card state is superseded",
-    "previousRun": 41002652382,
-    "previousSuite": {
+  "preparation": {
+    "run": 41004657316,
+    "checkout": "6e4419c5013ef38bff0caf081ea7e80672df3161",
+    "publicEngineScenarios": 92,
+    "testSummary": {
       "node": "v22.23.4",
-      "pass": 6689,
+      "tests": 6765,
+      "suites": 0,
+      "pass": 6765,
       "fail": 0,
-      "todo": 0
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "exitCode": 0
     },
-    "previousFailure": "Representative game deck builder put a generated Fusion in Main Deck; corrected without removing coverage assertion."
+    "gate": "card-batch-automation.promote"
+  },
+  "integrationCI": "Consult Engine validation checks on final HEAD; draft PR #12 records the latest verified run.",
+  "withdrawal": {
+    "id": "79853073",
+    "name": "Cipher Soldier",
+    "admitted": false,
+    "reason": "Mandatory Trigger Effect with a Chain at damage calculation; continuous approximation withdrawn",
+    "evidence": "docs/evidence/mission32-withdrawal.json",
+    "supersededCounts": [
+      923,
+      7
+    ]
+  },
+  "familyQueue": {
+    "pending": 1040,
+    "completeSecondaryText": 1040,
+    "identityBlocked": 27,
+    "exactTextGroups": 1027,
+    "groupsWithMultiplePendingIdentities": 8,
+    "automaticCertifications": 0
   },
   "hosting": {
     "newVersionDeployed": false,
-    "onlineVersionObservedThisSession": false,
+    "observedThisSession": false,
     "priorReport": "c48a64a / 916",
     "blockedBy": [
-      "No reachable authenticated browser session",
+      "No accessible authenticated hosting session",
       "BOTHOSTING_API_KEY is not configured"
     ]
   },
   "localEnvironment": {
     "node": "v24.22.1",
-    "nativeTypeScriptTransformationOnly": true,
-    "fullCompilationAndSQLite": "CI Node 22",
+    "typeCheckingAndSQLite": "CI Node 22",
     "npmOffline": "ENOTCACHED",
     "npmNetwork": "EACCES"
   },
-  "benchmarks": {
-    "local": "docs/evidence/mission32-local-benchmark.json",
-    "discordCapacityClaim": false
-  },
+  "benchmarks": [
+    "docs/evidence/mission32-local-benchmark.json",
+    "docs/evidence/mission32-headless-1000.json"
+  ],
   "goal1001Achieved": false,
   "merge": false,
   "discordAccess": false,
-  "persistentPlayerDataModified": false,
-  "familyQueue": {
-    "pending": 1039,
-    "completeSecondaryText": 1039,
-    "identityBlocked": 27,
-    "exactTextGroups": 1026,
-    "groupsWithMultiplePendingIdentities": 8,
-    "automaticCertifications": 0,
-    "summary": "docs/evidence/mission32-family-queue-summary.json"
-  },
-  "superseded": {
-    "certified": 923,
-    "added": 7,
-    "catalogRevision": "908b2ae27f7e78820cd7bf591832a99663d50e9eed831dd0250b787d362ac29c",
-    "reason": "Cipher Soldier mandatory damage-calculation Trigger Effect was modeled incorrectly. Admission withdrawn."
-  },
-  "correctCandidatesQueued": 6,
-  "withdrawal": "docs/evidence/mission32-withdrawal.json"
+  "persistentPlayerDataModified": false
 }

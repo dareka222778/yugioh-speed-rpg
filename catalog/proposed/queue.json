@@ -1,7 +1,4 @@
 {
   "format": 1,
-  "batches": [
-    "catalog/proposed/m32-exact-fusion.json",
-    "catalog/proposed/m32-umi-verified.json"
-  ]
+  "batches": []
 }

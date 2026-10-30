@@ -1,0 +1,6253 @@
+{
+  "format": 1,
+  "batchId": "m32-umi-verified",
+  "engineVersion": "engine-v9",
+  "baseRevision": "d8c4106f2db6459edeebab8e86a138c6bfb62af8fa6649bb208faa06764122f7",
+  "candidates": [
+    {
+      "card": {
+        "id": "24435369",
+        "konamiId": 5967,
+        "name": "Cavaleira Sereia",
+        "englishName": "Mermaid Knight",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Aqua",
+        "attribute": "WATER",
+        "level": 4,
+        "atk": 1500,
+        "defense": 700,
+        "summary": "Enquanto Umi estiver com a face para cima, pode atacar duas vezes em cada Fase de Batalha.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5967&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "combat",
+                "filter": {
+                  "selfOnly": true,
+                  "faceUpNames": [
+                    "Umi"
+                  ]
+                },
+                "rule": {
+                  "kind": "attacks",
+                  "maximum": 2
+                }
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "textEvidence": {
+        "text": "This monster has one continuous effect, active only while a face-up card whose rules name is Umi is present on either field: it may declare at most two attacks per Battle Phase, including direct attacks. This permission is not an extra pair of attacks and does not stack with another two-attack permission. Removing Umi, hiding this monster or negating its effects removes the permission immediately. A face-down Umi is insufficient. The identity requirement is distinct from negating Umi effects. There is no activation cost, target, player selection or secondary effect.",
+        "sha256": "2f73e2e144dc5825f2179552ba4442babc7f2054d7115504b6dd939be4dfa679",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5967&request_locale=en"
+      },
+      "family": "named-presence-combat-permission",
+      "cases": {
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6600
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6600
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6600
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "24435369"
+                  }
+                ],
+                "monsters": []
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "monsterEffect",
+                "card": "source",
+                "discards": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "condition-absent": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8500
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "set-condition-hidden": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": false,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8500
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "opponent-field-condition": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                }
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6600
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8300
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8300
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "battle"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8500
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "battle"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8500
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6600
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "condition-removed-in-chain": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24435369",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "hand": [],
+                "backrow": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8500
+            }
+          ]
+        },
+        "trap-still-affects": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "24435369"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "53582587",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "condition-absent",
+        "opponent-field-condition",
+        "set-condition-hidden",
+        "condition-removed-in-chain",
+        "trap-still-affects"
+      ],
+      "requirements": [
+        "condition:face-up-named-card",
+        "continuous:combat",
+        "effect:monsterEffect",
+        "monster-operation:continuous",
+        "trigger:continuous"
+      ],
+      "fingerprint": "3e56041f53b7cb4e3cda4621d0d69aab2e94e6f953333e8c7efe752228162956",
+      "suites": [
+        "tests/generated-m32-umi-verified.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "64342551",
+        "konamiId": 5893,
+        "name": "Bugroth Anfíbio MK-3",
+        "englishName": "Amphibious Bugroth MK-3",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Machine",
+        "attribute": "WATER",
+        "level": 4,
+        "atk": 1500,
+        "defense": 1300,
+        "summary": "Enquanto Umi estiver com a face para cima, pode atacar diretamente.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5893&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "combat",
+                "filter": {
+                  "selfOnly": true,
+                  "faceUpNames": [
+                    "Umi"
+                  ]
+                },
+                "rule": {
+                  "kind": "direct"
+                }
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "textEvidence": {
+        "text": "This monster has one continuous effect, active only while a face-up card whose rules name is Umi is present on either field: it may declare an attack directly even if the opponent controls monsters. The permission applies only to this monster, without increasing its attack allowance. Removing Umi, hiding this monster or negating its effects removes the permission immediately. A face-down Umi is insufficient. The identity requirement is distinct from negating Umi effects. There is no activation cost, target, player selection or secondary effect.",
+        "sha256": "8b278b7b1472d4f9e273af3f0b93cb7766143d55ccd55f577ccaf481a131dd05",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5893&request_locale=en"
+      },
+      "family": "named-presence-combat-permission",
+      "cases": {
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8700
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8700
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8700
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "64342551"
+                  }
+                ],
+                "monsters": []
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "monsterEffect",
+                "card": "source",
+                "discards": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "condition-absent": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 10000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "set-condition-hidden": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": false,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 10000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "opponent-field-condition": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                }
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8700
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 10000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 10000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "battle"
+              }
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 10000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "battle"
+              }
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 10000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 8700
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "condition-removed-in-chain": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "64342551",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "blocker",
+                    "id": "89631139",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [],
+                "backrow": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle",
+            "resume": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "source"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 10000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "trap-still-affects": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "64342551"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "53582587",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "condition-absent",
+        "opponent-field-condition",
+        "set-condition-hidden",
+        "condition-removed-in-chain",
+        "trap-still-affects"
+      ],
+      "requirements": [
+        "condition:face-up-named-card",
+        "continuous:combat",
+        "effect:monsterEffect",
+        "monster-operation:continuous",
+        "trigger:continuous"
+      ],
+      "fingerprint": "e93f7d7c36292a101fffac6a056c5bb736f3e8e6a914ae43fd0c7e9904612f99",
+      "suites": [
+        "tests/generated-m32-umi-verified.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "95614612",
+        "konamiId": 5897,
+        "name": "Projétil Molusco-Lança",
+        "englishName": "Cannonball Spear Shellfish",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Aqua",
+        "attribute": "WATER",
+        "level": 2,
+        "atk": 1000,
+        "defense": 1000,
+        "summary": "Enquanto Umi estiver com a face para cima, não é afetado por efeitos de Magias.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5897&request_locale=ja"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "immune",
+                "filter": {
+                  "selfOnly": true,
+                  "faceUpNames": [
+                    "Umi"
+                  ]
+                },
+                "from": [
+                  "spell"
+                ]
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "textEvidence": {
+        "text": "This monster has one continuous effect, active only while a face-up card whose rules name is Umi is present on either field: this monster is unaffected by all Spell effects, including friendly modifiers and opposing targeting or non-targeting effects. Trap and monster effects still apply. Removing Umi, hiding this monster or negating its effects removes the permission immediately. A face-down Umi is insufficient. The identity requirement is distinct from negating Umi effects. There is no activation cost, target, player selection or secondary effect.",
+        "sha256": "d5026154abf6aebb142964434576728c4e1624fe83fff930ccc8a8420d4bbd72",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5897&request_locale=ja"
+      },
+      "family": "named-presence-spell-immunity",
+      "cases": {
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "95614612"
+                  }
+                ],
+                "monsters": []
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "monsterEffect",
+                "card": "source",
+                "discards": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "condition-absent": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "set-condition-hidden": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": false,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "opponent-field-condition": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  },
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  },
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "condition-removed-in-chain": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "95614612",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "hand": [],
+                "backrow": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "umi"
+            }
+          ]
+        },
+        "trap-still-affects": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "95614612"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "53582587",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "condition-absent",
+        "opponent-field-condition",
+        "set-condition-hidden",
+        "condition-removed-in-chain",
+        "trap-still-affects"
+      ],
+      "requirements": [
+        "condition:face-up-named-card",
+        "continuous:immune",
+        "effect:monsterEffect",
+        "monster-operation:continuous",
+        "trigger:continuous"
+      ],
+      "fingerprint": "a143949c77a65f565ecb23410390d6e641761cb9c61425e338b9b9742a62fa41",
+      "suites": [
+        "tests/generated-m32-umi-verified.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "90337190",
+        "konamiId": 5894,
+        "name": "Peixe Torpedo",
+        "englishName": "Torpedo Fish",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Fish",
+        "attribute": "WATER",
+        "level": 3,
+        "atk": 1000,
+        "defense": 1000,
+        "summary": "Enquanto Umi estiver com a face para cima, não é afetado por efeitos de Magias.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5894&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "immune",
+                "filter": {
+                  "selfOnly": true,
+                  "faceUpNames": [
+                    "Umi"
+                  ]
+                },
+                "from": [
+                  "spell"
+                ]
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "textEvidence": {
+        "text": "This monster has one continuous effect, active only while a face-up card whose rules name is Umi is present on either field: this monster is unaffected by all Spell effects, including friendly modifiers and opposing targeting or non-targeting effects. Trap and monster effects still apply. Removing Umi, hiding this monster or negating its effects removes the permission immediately. A face-down Umi is insufficient. The identity requirement is distinct from negating Umi effects. There is no activation cost, target, player selection or secondary effect.",
+        "sha256": "d5026154abf6aebb142964434576728c4e1624fe83fff930ccc8a8420d4bbd72",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5894&request_locale=en"
+      },
+      "family": "named-presence-spell-immunity",
+      "cases": {
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "90337190"
+                  }
+                ],
+                "monsters": []
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "monsterEffect",
+                "card": "source",
+                "discards": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "condition-absent": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "set-condition-hidden": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": false,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "opponent-field-condition": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  },
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  },
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1000
+            }
+          ]
+        },
+        "condition-removed-in-chain": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "90337190",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "hand": [],
+                "backrow": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "umi"
+            }
+          ]
+        },
+        "trap-still-affects": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "90337190"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "53582587",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "condition-absent",
+        "opponent-field-condition",
+        "set-condition-hidden",
+        "condition-removed-in-chain",
+        "trap-still-affects"
+      ],
+      "requirements": [
+        "condition:face-up-named-card",
+        "continuous:immune",
+        "effect:monsterEffect",
+        "monster-operation:continuous",
+        "trigger:continuous"
+      ],
+      "fingerprint": "9168a04a7c26ee727e66defb567d42fede8e7b1c147ee0b622bc9016f4dd462a",
+      "suites": [
+        "tests/generated-m32-umi-verified.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "24128274",
+        "konamiId": 4776,
+        "name": "Guerreiro das Profundezas do Mar",
+        "englishName": "Deepsea Warrior",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Warrior",
+        "attribute": "WATER",
+        "level": 5,
+        "atk": 1600,
+        "defense": 1800,
+        "summary": "Enquanto Umi estiver com a face para cima, não é afetado por efeitos de Magias.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4776&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "immune",
+                "filter": {
+                  "selfOnly": true,
+                  "faceUpNames": [
+                    "Umi"
+                  ]
+                },
+                "from": [
+                  "spell"
+                ]
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "textEvidence": {
+        "text": "This monster has one continuous effect, active only while a face-up card whose rules name is Umi is present on either field: this monster is unaffected by all Spell effects, including friendly modifiers and opposing targeting or non-targeting effects. Trap and monster effects still apply. Removing Umi, hiding this monster or negating its effects removes the permission immediately. A face-down Umi is insufficient. The identity requirement is distinct from negating Umi effects. There is no activation cost, target, player selection or secondary effect.",
+        "sha256": "d5026154abf6aebb142964434576728c4e1624fe83fff930ccc8a8420d4bbd72",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4776&request_locale=en"
+      },
+      "family": "named-presence-spell-immunity",
+      "cases": {
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1600
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1600
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1600
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "24128274"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "tribute",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "monsterEffect",
+                "card": "source",
+                "discards": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "condition-absent": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "set-condition-hidden": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": false,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "opponent-field-condition": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": null,
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1600
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  },
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  },
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "hole"
+            },
+            {
+              "statOf": "source",
+              "stat": "atk",
+              "equals": 1600
+            }
+          ]
+        },
+        "condition-removed-in-chain": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "source",
+                    "id": "24128274",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "hand": [],
+                "backrow": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "umi"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "umi"
+            }
+          ]
+        },
+        "trap-still-affects": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "tribute",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "field": {
+                  "uid": "umi",
+                  "id": "22702055",
+                  "faceUp": true,
+                  "resolved": true,
+                  "setTurn": 0
+                },
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "24128274"
+                  }
+                ],
+                "lp": 10000
+              },
+              {
+                "lp": 10000,
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "53582587",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "condition-absent",
+        "opponent-field-condition",
+        "set-condition-hidden",
+        "condition-removed-in-chain",
+        "trap-still-affects"
+      ],
+      "requirements": [
+        "condition:face-up-named-card",
+        "continuous:immune",
+        "effect:monsterEffect",
+        "monster-operation:continuous",
+        "trigger:continuous"
+      ],
+      "fingerprint": "b7d5b67fe460a219e179d669f52df9d4d2463f3ce88be016387aa586c5245abb",
+      "suites": [
+        "tests/generated-m32-umi-verified.test.cjs"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "24435369",
+      "canonicalId": "03e9aeab-792a-47bb-92b5-7b314c773801",
+      "konamiId": 5967,
+      "reviewer": "Codex: complete official EN/JP card text and printing reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5967&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1500,
+        "defense": 700,
+        "race": "Aqua",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "set": "AST-025",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5967&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "2f73e2e144dc5825f2179552ba4442babc7f2054d7115504b6dd939be4dfa679",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "3e56041f53b7cb4e3cda4621d0d69aab2e94e6f953333e8c7efe752228162956"
+    },
+    {
+      "id": "64342551",
+      "canonicalId": "c0a03e1b-ad73-467c-b061-668af96eb395",
+      "konamiId": 5893,
+      "reviewer": "Codex: complete official EN/JP card text and printing reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5893&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1500,
+        "defense": 1300,
+        "race": "Machine",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "set": "IOC-081",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5893&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "8b278b7b1472d4f9e273af3f0b93cb7766143d55ccd55f577ccaf481a131dd05",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "e93f7d7c36292a101fffac6a056c5bb736f3e8e6a914ae43fd0c7e9904612f99"
+    },
+    {
+      "id": "95614612",
+      "canonicalId": "504a453d-1a74-4c06-bbb0-dd0c4736b185",
+      "konamiId": 5897,
+      "reviewer": "Codex: complete official EN/JP card text and printing reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5897&request_locale=ja",
+      "primaryFacts": {
+        "level": 2,
+        "atk": 1000,
+        "defense": 1000,
+        "race": "Aqua",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "2003-07-17",
+        "set": "307-030",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5897&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "d5026154abf6aebb142964434576728c4e1624fe83fff930ccc8a8420d4bbd72",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "a143949c77a65f565ecb23410390d6e641761cb9c61425e338b9b9742a62fa41"
+    },
+    {
+      "id": "90337190",
+      "canonicalId": "baa4f421-b78b-4951-b767-515fc895b071",
+      "konamiId": 5894,
+      "reviewer": "Codex: complete official EN/JP card text and printing reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5894&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 1000,
+        "defense": 1000,
+        "race": "Fish",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "set": "IOC-082",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5894&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "d5026154abf6aebb142964434576728c4e1624fe83fff930ccc8a8420d4bbd72",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "9168a04a7c26ee727e66defb567d42fede8e7b1c147ee0b622bc9016f4dd462a"
+    },
+    {
+      "id": "24128274",
+      "canonicalId": "7c22b270-3ff1-4459-a1d5-8505fa52f06e",
+      "konamiId": 4776,
+      "reviewer": "Codex: complete official EN/JP card text and printing reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4776&request_locale=en",
+      "primaryFacts": {
+        "level": 5,
+        "atk": 1600,
+        "defense": 1800,
+        "race": "Warrior",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "2002-10-20",
+        "set": "PSV-079",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4776&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "d5026154abf6aebb142964434576728c4e1624fe83fff930ccc8a8420d4bbd72",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "b7d5b67fe460a219e179d669f52df9d4d2463f3ce88be016387aa586c5245abb"
+    }
+  ]
+}

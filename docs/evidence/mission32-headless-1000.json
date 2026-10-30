@@ -1,0 +1,40 @@
+{
+  "format": 1,
+  "scope": "Interleaved headless engine simulation in one process; includes validation/serialization overhead. No SQLite, Discord, rendering, network or real-user capacity claim.",
+  "node": "v24.22.1",
+  "certified": 922,
+  "distributable": 922,
+  "catalog": "40664314907b30712c09656b5c4bba3c29e9989b3ac1dc7477b18bad4bf6aa0c",
+  "startupMS": 4068.7235,
+  "games": 1000,
+  "moves": 22722,
+  "finished": 1000,
+  "unfinished": 0,
+  "restores": 3246,
+  "replays": 3246,
+  "cardConservation": true,
+  "failures": 0,
+  "operationMS": {
+    "p50": 0.5394999999998618,
+    "p95": 1.6621000000013737,
+    "maximum": 44.49300000000039
+  },
+  "elapsedMS": 18171.8285,
+  "cpuMS": {
+    "user": 19438,
+    "system": 407
+  },
+  "memoryBytes": {
+    "rssStart": 125870080,
+    "peakRSS": 499802112,
+    "rssAfterGC": 497655808,
+    "heapUsed": 276100136
+  },
+  "familyCardsIncluded": [
+    "24435369",
+    "64342551",
+    "95614612",
+    "90337190",
+    "24128274"
+  ]
+}

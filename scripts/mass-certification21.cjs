@@ -98,6 +98,7 @@ function planMassCertification({history,candidates,reviews=[],executions=[],capa
   if(!text||typeof text.text!=='string'||!text.text.trim()||text.complete!==true||!['official-text','full-rule-paraphrase'].includes(text.format)||!/^([a-f0-9]{64})$/.test(text.sha256??'')||sha256(text.text)!==text.sha256||text.source!==card?.source||!officialCardSource(text.source,card?.konamiId))issues.push('missing-or-invalid-complete-text-evidence');
   if(review?.fullTextReviewed!==true||review.secondaryEffectsReviewed!==true||review.exceptionsReviewed!==true||review.textSha256!==text?.sha256)issues.push('incomplete-full-effect-review');
   if(review?.mechanicsApproved!==true)issues.push('mechanics-review-not-approved');
+  issues.push(...require('./calculation-timing-review32.cjs').calculationTimingIssues(candidate,review));
   const coverage=review?.semanticCoverage;
   if(!coverage||dimensions.some(d=>!['represented','not-applicable'].includes(coverage[d])))issues.push('incomplete-semantic-coverage');
   const requiredDimensions=new Set(['operations']);
@@ -126,7 +127,7 @@ function planMassCertification({history,candidates,reviews=[],executions=[],capa
   const printingRegion=!!printing&&['tcg','ocg'].includes(printing.region)&&validCatalogDate(printing.date)&&printing.date<=cutoff&&typeof printing.set==='string'&&!!printing.set.trim()&&(region==='world'||printing.region===region);
   const identityReviewed=review?.identityApproved===true&&typeof review.reviewer==='string'&&!!review.reviewer.trim()&&validCatalogDate(review.reviewedAt)&&review.canonicalId===raw?.id&&review.konamiId===card?.konamiId&&review.primarySource===card?.source;
   stages.identityVerified=!!historical?.normalized&&!!historical?.eligible&&identityFacts&&primaryFacts&&printingRegion&&identityReviewed&&!issues.some(i=>['duplicate-candidate-identity','english-identity-mismatch','missing-official-regional-printing'].includes(i));
-  stages.mechanicallyRepresented=stages.identityVerified&&registryIssues.length===0&&unsupported.length===0&&inferred.every(x=>requirements.includes(x))&&!issues.some(i=>['invalid-explicit-requirements','incomplete-semantic-coverage','semantic-dimension-not-represented','missing-or-invalid-complete-text-evidence','incomplete-full-effect-review','mechanics-review-not-approved'].includes(i));
+  stages.mechanicallyRepresented=stages.identityVerified&&registryIssues.length===0&&unsupported.length===0&&inferred.every(x=>requirements.includes(x))&&!issues.some(i=>['invalid-explicit-requirements','incomplete-semantic-coverage','semantic-dimension-not-represented','missing-or-invalid-complete-text-evidence','incomplete-full-effect-review','mechanics-review-not-approved','missing-calculation-timing-review','inconsistent-calculation-timing-review','trigger-modeled-as-continuous-combat-stat'].includes(i));
   stages.tested=stages.mechanicallyRepresented&&validExecution&&!!historical?.tested;
   if(!validExecution)issues.push('missing-stale-or-incomplete-execution');
   const ready=stages.tested&&historical?.readyForIndividualCertification===true&&issues.length===0;

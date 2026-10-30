@@ -2,10 +2,10 @@
   "format": 1,
   "scope": "Interleaved headless engine simulation in one process; includes validation/serialization overhead. No SQLite, Discord, rendering, network or real-user capacity claim.",
   "node": "v24.22.1",
-  "certified": 923,
-  "distributable": 923,
-  "catalog": "908b2ae27f7e78820cd7bf591832a99663d50e9eed831dd0250b787d362ac29c",
-  "startupMS": 748.9350999999999,
+  "certified": 922,
+  "distributable": 922,
+  "catalog": "40664314907b30712c09656b5c4bba3c29e9989b3ac1dc7477b18bad4bf6aa0c",
+  "startupMS": 795.2728,
   "games": 50,
   "moves": 1043,
   "finished": 50,
@@ -15,20 +15,20 @@
   "cardConservation": true,
   "failures": 0,
   "operationMS": {
-    "p50": 0.6200999999999794,
-    "p95": 1.7788000000000466,
-    "maximum": 9.521799999999985
+    "p50": 0.6634000000001379,
+    "p95": 1.9471000000000913,
+    "maximum": 9.970100000000002
   },
-  "elapsedMS": 878.6514000000001,
+  "elapsedMS": 936.8383000000001,
   "cpuMS": {
-    "user": 1218,
-    "system": 109
+    "user": 1281,
+    "system": 78
   },
   "memoryBytes": {
-    "rssStart": 102043648,
-    "peakRSS": 134389760,
-    "rssAfterGC": 134389760,
-    "heapUsed": 29381104
+    "rssStart": 101998592,
+    "peakRSS": 134057984,
+    "rssAfterGC": 133578752,
+    "heapUsed": 29380968
   },
   "familyCardsIncluded": [
     "24435369",

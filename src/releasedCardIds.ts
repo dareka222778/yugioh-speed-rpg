@@ -922,4 +922,12 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "65878864",
   "61831093",
   "71283180",
+// Generated batch m32-exact-fusion: explicit tested release; zero inventory grants.
+  "40173854",
+// Generated batch m32-umi-verified: explicit tested release; zero inventory grants.
+  "24435369",
+  "64342551",
+  "95614612",
+  "90337190",
+  "24128274",
 ]);
