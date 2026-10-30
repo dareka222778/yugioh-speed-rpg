@@ -1478,6 +1478,12 @@
         "own-card-activation",
         "both-turns",
         "already-activated-not-negated"
+      ],
+      "requirements": [
+        "continuous:preventActivation",
+        "effect:monsterEffect",
+        "monster-operation:continuous",
+        "trigger:continuous"
       ]
     },
     {
@@ -2954,6 +2960,12 @@
         "own-card-activation",
         "both-turns",
         "already-activated-not-negated"
+      ],
+      "requirements": [
+        "continuous:preventActivation",
+        "effect:monsterEffect",
+        "monster-operation:continuous",
+        "trigger:continuous"
       ]
     },
     {
@@ -4544,6 +4556,12 @@
         "own-card-activation",
         "both-turns",
         "already-activated-not-negated"
+      ],
+      "requirements": [
+        "continuous:preventActivation",
+        "effect:monsterEffect",
+        "monster-operation:continuous",
+        "trigger:continuous"
       ]
     }
   ],
