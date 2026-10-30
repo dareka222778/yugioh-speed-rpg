@@ -28,6 +28,10 @@
     {
       "id": "m32-optional-trigger-lp",
       "proofSHA256": "b0581a6ebdd006cfc7e0b8a7b9d493b374c8f6aa9f203ef399f01e04da847ed8"
+    },
+    {
+      "id": "m33-piercing-equip",
+      "proofSHA256": "68e1abe9f2576b1d0ee1029b2a72012ff54d46d4e7fccffa91280811afb4381a"
     }
   ]
 }

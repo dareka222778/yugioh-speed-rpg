@@ -5370,5 +5370,13 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "97687912": {
+    "fingerprint": "14dcba07b1984c84bfa8a1b6bd2b39915ca361939440ab6286b5969522d95d72",
+    "suites": [
+      "tests/generated-m33-piercing-equip.test.cjs"
+    ]
+  }
+
 
 };

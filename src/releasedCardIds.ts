@@ -936,4 +936,6 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "56647086",
 // Generated batch m32-optional-trigger-lp: explicit tested release; zero inventory grants.
   "94230224",
+// Generated batch m33-piercing-equip: explicit tested release; zero inventory grants.
+  "97687912",
 ]);
