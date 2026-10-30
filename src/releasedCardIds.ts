@@ -930,4 +930,8 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "95614612",
   "90337190",
   "24128274",
+// Generated batch m32-activation-restrictions: explicit tested release; zero inventory grants.
+  "88975532",
+  "15960641",
+  "56647086",
 ]);

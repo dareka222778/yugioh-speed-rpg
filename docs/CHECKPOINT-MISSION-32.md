@@ -42,3 +42,7 @@ CI de 9ecea268 aprovada: 6.774 testes sem falhas/TODO e extended-soak aprovado (
 Nova operação preventActivation integrada ao resolver ativo: distingue ativação de Card de negação de efeito; Trap/battle e Quick-Play/all, relativo ao controlador atual. Proposta m32-activation-restrictions: Pitch-Black Warwolf, Mirage Dragon e Invader of Darkness; 51 cenários públicos passaram em sandbox headless local, incluindo fonte virada por Desert Sunlight no elo superior sem negar o elo inferior já ativado. A proposta ainda NÃO conta como certificação. Exigir promoção isolada Node22, suíte completa e importação do bundle validado antes de contar ou distribuir.
 
 277 módulos históricos intocados; Umi e retirada de Cipher Soldier preservados. Hospedagem continua pendente de acesso autenticado.
+
+### Admissão concluída — 925
+
+Lote m32-activation-restrictions admitido pelo gate existente na CI 41079475780, base bc54f7cf: 6.827 testes Node22 aprovados, zero falhas/TODO. Bundle importado somente após validação de SHA-256 de cada conteúdo e do arquivo anterior; catálogo atual 488b7ef1792a32ec4a3758f104de76b1952f5ba4ebe229927f52c0e85bdd6995. Total: 925 certificadas/autorizadas; 1.037 pendentes; faltam 76 para 1.001 e 346 para 1.271. Nenhum inventário concedido. Exigir CI completa do commit de admissão antes de implantação; hospedagem ainda sem acesso autenticado.

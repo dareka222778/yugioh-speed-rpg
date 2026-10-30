@@ -20,6 +20,10 @@
     {
       "id": "m32-umi-verified",
       "proofSHA256": "a050f2535f9f3611e0288888a8d87398ef1351ee4d8d70af3e19cb1e5e229f39"
+    },
+    {
+      "id": "m32-activation-restrictions",
+      "proofSHA256": "36764dffd1d15e89f7a2bb5acc21cdc1e0a843aa70b492336ac3599b659ceb5e"
     }
   ]
 }

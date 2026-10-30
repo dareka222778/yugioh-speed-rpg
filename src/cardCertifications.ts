@@ -5342,5 +5342,25 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "15960641": {
+    "fingerprint": "21b40654b74d5aae9b5a130836b139f2059dcdd63c0e7b075cc4b38eb566e48f",
+    "suites": [
+      "tests/generated-m32-activation-restrictions.test.cjs"
+    ]
+  },
+  "56647086": {
+    "fingerprint": "9f6af6e71a3fd5d7b6ed2ac19eacfc10d6d4095e12ee13b9fa7188c29575e7c7",
+    "suites": [
+      "tests/generated-m32-activation-restrictions.test.cjs"
+    ]
+  },
+  "88975532": {
+    "fingerprint": "7bfb31dbdc1fec48e88809e015f2fc310d5c0780a70f2d29062f0470800b2f66",
+    "suites": [
+      "tests/generated-m32-activation-restrictions.test.cjs"
+    ]
+  }
+
 
 };
