@@ -1,0 +1,875 @@
+{
+  "format": 1,
+  "batchId": "m33-royal-decree",
+  "engineVersion": "engine-v9",
+  "baseRevision": "4870e6f4362b671cf135d4cfc0eb36fe14175df84b861897b3e3b9dc76d9871e",
+  "candidates": [
+    {
+      "card": {
+        "id": "51452091",
+        "konamiId": 4866,
+        "name": "Decreto Real",
+        "englishName": "Royal Decree",
+        "kind": "trap",
+        "race": null,
+        "attribute": null,
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "summary": "Enquanto esta Armadilha Contínua estiver com a face para cima, negue os efeitos de todas as outras Armadilhas no campo.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4866&request_locale=en"
+      },
+      "effect": {
+        "kind": "continuous",
+        "activation": {
+          "speed": 2,
+          "window": "free",
+          "damage": "never"
+        },
+        "rules": [
+          {
+            "kind": "negateTraps"
+          }
+        ]
+      },
+      "family": "continuous-trap-negation",
+      "requirements": [
+        "continuous:negateTraps",
+        "effect:continuous"
+      ],
+      "textEvidence": {
+        "text": "This Continuous Trap negates the effects of all other Trap Cards on the field while its own continuous effect applies. It does not prevent a Trap Card or Trap effect from being activated; those activations can still form Chain Links and pay their costs, but the field Trap effects resolve negated. Royal Decree does not negate its own effect, and does not impose a cost, damage, summoning restriction, usage limit, or one-time trigger. It ceases to negate effects when no longer face-up and resolved, or while its own effect is negated by an applicable other source. A Trap effect activated before Royal Decree is on the field may resolve negated if Royal Decree applies at that resolution. This negates Trap effects on the field, not arbitrary Graveyard effects.",
+        "sha256": "28a02d6e975d914e855b8055d06fb48ea231a6d2425c013ba8c5117eaaa5792b",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4866&request_locale=en"
+      },
+      "scenarios": [
+        "trap-activation-under-decree",
+        "jinzo-still-blocks-traps"
+      ],
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 3,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "decree",
+                "target": ""
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "decree",
+                "target": ""
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "decree"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "decree",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "decree"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "decree",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "decree"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "target",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "dessert",
+                    "id": "24068492",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "dessert",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "dessert"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "seven",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "decree",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "seven",
+                "target": "decree"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "decree"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "target",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "dessert",
+                    "id": "24068492",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "decree"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "dessert",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3500
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "decree"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "phase": "battle",
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "wall",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "bind",
+                    "id": "85742772",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "wall"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "target",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  },
+                  {
+                    "uid": "decree2",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "dessert",
+                    "id": "24068492",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "decree"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "dessert",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "decree2"
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "target",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "dessert",
+                    "id": "24068492",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "decree"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "dessert",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3500
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "decree"
+            }
+          ]
+        },
+        "trap-activation-under-decree": {
+          "fixture": {
+            "current": 1,
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "target",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "dessert",
+                    "id": "24068492",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "dessert",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "dessert"
+            }
+          ]
+        },
+        "jinzo-still-blocks-traps": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "jinzo",
+                    "id": "77585513",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "expectError": true,
+              "action": {
+                "kind": "trap",
+                "card": "decree",
+                "target": ""
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "decree"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": "51452091",
+      "canonicalId": "a9dbeee4-36e5-41d6-b454-64acbf96e166",
+      "konamiId": 4866,
+      "reviewer": "Codex: official Royal Decree card text and historical printing reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4866&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "1999-10-17",
+        "set": "Booster 5",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4866&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "28a02d6e975d914e855b8055d06fb48ea231a6d2425c013ba8c5117eaaa5792b",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    }
+  ]
+}

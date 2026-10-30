@@ -32,6 +32,9 @@ export function continuousAttackAllowed(s:DuelState,m:Monster,resolving=false):b
 /** Restricts new CARD activations only; never negates a chain link or an existing card's effect. */
 export function cardActivationAllowed(s:DuelState,actor:number,cardKind:'trap'|'quickplay'):boolean{const battle=s.phase==='battle'||s.resume==='battle'&&(s.phase==='response'||s.phase==='choice');return !active(s).some(source=>source.rules.some(r=>r.kind==='preventActivation'&&r.cardKind===cardKind&&(r.controller==='both'||source.controller!==actor)&&(r.window==='all'||battle)));}
 export function continuousTrapsNegated(s:DuelState){return active(s).some(x=>x.rules.some(r=>r.kind==='negateTraps'));}
+/** Jinzo prevents Trap activations, while Royal Decree permits the activation
+ * and only negates its effects. Do not collapse these independent policies. */
+export function continuousTrapActivationsBlocked(s:DuelState){return active(s).some(x=>x.kind==='monster'&&x.rules.some(r=>r.kind==='negateTraps'));}
 export function monsterEffectsNegated(s:DuelState,uid:string){const m=find(s,uid)?.m;if(!m?.faceUp)return false;return active(s).some(x=>x.rules.some(r=>r.kind==='negateMonsters'&&matches(s,x,m,r.filter)));}
 function affected(s:DuelState,m:Monster,kind:EffectKind){return !active(s).some(x=>x.rules.some(r=>r.kind==='immune'&&r.from.includes(kind)&&matches(s,x,m,r.filter)));}
 export function canAffectMonster(s:DuelState,uid:string,kind:EffectKind){const m=find(s,uid)?.m;return !!m&&affected(s,m,kind);}
