@@ -30,7 +30,7 @@ export function syncContinuous(s:DuelState){const current=sources(s),ledger=s.co
 /** A declaration-only prohibition never cancels an attack already declared. */
 export function continuousAttackAllowed(s:DuelState,m:Monster,resolving=false):boolean{return !active(s).some(source=>affected(s,m,source.kind)&&source.rules.some(r=>r.kind==='preventAttack'&&(!resolving||!r.declarationOnly)&&matches(s,source,m,r.filter)));}
 /** Restricts new CARD activations only; never negates a chain link or an existing card's effect. */
-export function cardActivationAllowed(s:DuelState,actor:number,cardKind:'trap'|'quickplay'):boolean{const battle=s.phase==='battle'||s.resume==='battle'&&(s.phase==='response'||s.phase==='choice');return !active(s).some(source=>source.rules.some(r=>r.kind==='preventActivation'&&r.cardKind===cardKind&&(r.controller==='both'||source.controller!==actor)&&(r.window==='all'||battle)));}
+export function cardActivationAllowed(s:DuelState,actor:number,cardKind:'trap'|'quickplay'):boolean{const battle=s.phase==='battle'||s.resume==='battle'&&(s.phase==='response'||s.phase==='choice');return !active(s).some(source=>source.rules.some(r=>r.kind==='preventActivation'&&r.cardKind===cardKind&&(r.controller==='both'||source.controller!==actor)&&(r.window==='all'||r.window==='battle'&&battle||r.window==='ownNormalSummon'&&s.pending.kind==='summon'&&s.pending.card===source.uid)));}
 export function continuousTrapsNegated(s:DuelState){return active(s).some(x=>x.rules.some(r=>r.kind==='negateTraps'));}
 /** Jinzo prevents Trap activations, while Royal Decree permits the activation
  * and only negates its effects. Do not collapse these independent policies. */
