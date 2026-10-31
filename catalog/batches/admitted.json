@@ -52,6 +52,10 @@
     {
       "id": "m36-passive-attack-conditions",
       "proofSHA256": "991c254edb1517d780c5f4b91a4ee84034f765a1a2f8d3bde0d23c38f16575ad"
+    },
+    {
+      "id": "m37-fusion-substitutes",
+      "proofSHA256": "2e502f3377f98fd05e0d5220dc4f1e34340c3570144e3cf0bc2d7a2c14ca3b9d"
     }
   ]
 }

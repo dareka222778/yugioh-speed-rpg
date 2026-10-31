@@ -5454,5 +5454,31 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "30451366": {
+    "fingerprint": "e49f62f4da5e6b1ad05b52fc40cad4f5a639a2c6549d7d35823f66775e8a6dd8",
+    "suites": [
+      "tests/generated-m37-fusion-substitutes.test.cjs"
+    ]
+  },
+  "50259460": {
+    "fingerprint": "b4c3386a53bebbc5ceb732351984a3a15c65869e8ceb37d4bd68eee09990fce2",
+    "suites": [
+      "tests/generated-m37-fusion-substitutes.test.cjs"
+    ]
+  },
+  "53493204": {
+    "fingerprint": "dfa197851ac6536ad802c6282ebbc44d5792c0ceae619b2fa2fbef6f4fa28a10",
+    "suites": [
+      "tests/generated-m37-fusion-substitutes.test.cjs"
+    ]
+  },
+  "99426834": {
+    "fingerprint": "7fbbf94c4a37c814c69540e33666b88d36a0623e53dd93740756c3862114482c",
+    "suites": [
+      "tests/generated-m37-fusion-substitutes.test.cjs"
+    ]
+  }
+
 
 };

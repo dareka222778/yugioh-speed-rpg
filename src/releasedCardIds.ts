@@ -954,4 +954,9 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
 // Generated batch m36-passive-attack-conditions: explicit tested release; zero inventory grants.
   "80233946",
   "03366982",
+// Generated batch m37-fusion-substitutes: explicit tested release; zero inventory grants.
+  "53493204",
+  "50259460",
+  "99426834",
+  "30451366",
 ]);

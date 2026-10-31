@@ -10,6 +10,7 @@ import {monsters as m34_summon_trap_lockMonsters} from './generated/m34-summon-t
 import {monsters as m35_newdoria_battle_targetMonsters} from './generated/m35-newdoria-battle-target';
 import {monsters as m35_conditional_direct_attacksMonsters} from './generated/m35-conditional-direct-attacks';
 import {monsters as m36_passive_attack_conditionsMonsters} from './generated/m36-passive-attack-conditions';
+import {monsters as m37_fusion_substitutesMonsters} from './generated/m37-fusion-substitutes';
 import {conditionalMonsters30} from './conditionalBatch30';
 import {triggerMonsters29} from './triggerBatch29';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -49,7 +50,7 @@ export type MonsterOperation=
  |{kind:'recover';cardKind:'spell'|'trap'}
  |{kind:'search';stat:'atk'|'defense';maximum:number}
  |{kind:'specialSummon';attribute:string;maximumAtk:number}
- |{kind:'identityOnly'|'negateTraps'|'battleShield'|'directAttack'};
+ |{kind:'identityOnly'|'fusionSubstitute'|'negateTraps'|'battleShield'|'directAttack'};
 export type MonsterEffect={trigger:MonsterTrigger;summons?:readonly ('normal'|'flip'|'special')[];oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean;fieldMonsterCount?:number};
 
@@ -73,6 +74,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...m37_fusion_substitutesMonsters,
  ...m36_passive_attack_conditionsMonsters,
  ...m35_conditional_direct_attacksMonsters,
  ...m35_newdoria_battle_targetMonsters,
@@ -122,7 +124,7 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  const {effect:e,activation:a}=value;
  if(!['mandatory','optional','manual','continuous'].includes(a.policy)||!['main','flip','summon','grave','battleDestroyed','opposingDamageCalculation','continuous'].includes(a.window))return ['invalid-monster-activation'];
  if(!['quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'].includes(e.trigger))return ['unsupported-monster-trigger'];
- if(!e.operation||!['targetGroup','identityOnly','singleCard','positionChange','searchFiltered','mill','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous'].includes(e.operation.kind))return ['unsupported-monster-operation'];
+ if(!e.operation||!['targetGroup','identityOnly','fusionSubstitute','singleCard','positionChange','searchFiltered','mill','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous'].includes(e.operation.kind))return ['unsupported-monster-operation'];
  if((e.trigger==='quick'||e.trigger==='ignition')&&a.policy!=='manual'||e.trigger==='continuous'&&a.policy!=='continuous')return ['inconsistent-monster-policy'];
  if(!['quick','ignition','continuous'].includes(e.trigger)&&!['mandatory','optional'].includes(a.policy))return ['inconsistent-monster-policy'];
  const windows:Partial<Record<MonsterTrigger,MonsterActivation['window']>>={quick:'opposingDamageCalculation',ignition:'main',flip:'flip',onSummon:'summon',onOtherSummon:'summon',onSentToGrave:'grave',onBattleDestroyed:'battleDestroyed',continuous:'continuous'};
@@ -138,12 +140,12 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  // Admission constraints only: frozen executables never implement paid/pass-
  // limited continuous activations or passive operations as ignition commands.
  if(e.trigger==='continuous'&&(e.cost||e.oncePerTurn))return ['unsupported-continuous-activation'];
- if(['identityOnly','directAttack','negateTraps'].includes(op.kind)&&e.trigger!=='continuous')return ['unsupported-monster-mechanic'];
+ if(['identityOnly','fusionSubstitute','directAttack','negateTraps'].includes(op.kind)&&e.trigger!=='continuous')return ['unsupported-monster-mechanic'];
  if(op.kind==='continuous')return e.trigger==='continuous'?continuousRuleIssues(op.rules):['invalid-continuous-trigger'];
  if(op.kind==='destroyByLevel'&&(!Number.isSafeInteger(op.level)||op.level<1||op.level>12))return ['invalid-monster-level'];
  if((op.kind==='destroy'||op.kind==='bounce')&&!['opponentMonster','anyMonster'].includes(op.target)||op.kind==='recover'&&!['spell','trap'].includes(op.cardKind))return ['invalid-monster-selector'];
  if(op.kind==='search'&&(!['atk','defense'].includes(op.stat)||!Number.isSafeInteger(op.maximum)||op.maximum<0)||op.kind==='specialSummon'&&(!Number.isSafeInteger(op.maximumAtk)||op.maximumAtk<0||!['DARK','LIGHT','EARTH','WIND','WATER','FIRE','DIVINE'].includes(op.attribute)))return ['invalid-deck-filter'];
- if(e.trigger==='quick'&&(op.kind!=='battleShield'||e.cost?.kind!=='discard'||e.cost.count!==1)||e.trigger==='continuous'&&!['identityOnly','negateTraps','directAttack','continuous'].includes(op.kind))return ['unsupported-monster-mechanic'];
+ if(e.trigger==='quick'&&(op.kind!=='battleShield'||e.cost?.kind!=='discard'||e.cost.count!==1)||e.trigger==='continuous'&&!['identityOnly','fusionSubstitute','negateTraps','directAttack','continuous'].includes(op.kind))return ['unsupported-monster-mechanic'];
  if((a.policy==='mandatory'||a.policy==='optional')&&e.cost&&!(a.policy==='optional'&&e.trigger==='flip'&&e.cost.kind==='lp'&&['burn','heal'].includes(op.kind)))return ['unsupported-trigger-cost'];
  if((op.kind==='heal'||op.kind==='burn'||op.kind==='burnPerSpellTrap'||op.kind==='burnPerHand')&&(!Number.isSafeInteger(op.amount)||op.amount<=0)||op.kind==='draw'&&(!Number.isSafeInteger(op.count)||op.count<=0))return ['invalid-monster-amount'];
  if(e.cost&&(e.cost.kind==='lp'?(!Number.isSafeInteger(e.cost.amount)||e.cost.amount<=0):!['tribute','discard'].includes(e.cost.kind)||!Number.isSafeInteger(e.cost.count)||e.cost.count<1))return ['invalid-monster-cost'];
