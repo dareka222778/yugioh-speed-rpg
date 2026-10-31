@@ -5412,5 +5412,13 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "04335645": {
+    "fingerprint": "413f76055a7bb6d128b4adb084943bb834ceeb4fe51a6fe3fa2ad4512982bdb9",
+    "suites": [
+      "tests/generated-m35-newdoria-battle-target.test.cjs"
+    ]
+  }
+
 
 };

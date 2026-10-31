@@ -40,6 +40,10 @@
     {
       "id": "m34-summon-trap-lock",
       "proofSHA256": "5ee60a8499f1df01735c91cfeecc8c223c3cad65a98259da7018950d07282519"
+    },
+    {
+      "id": "m35-newdoria-battle-target",
+      "proofSHA256": "c4a9b89a2bccd8892da6f24c4f5219d7c370982c0b8484387688017d180ff386"
     }
   ]
 }

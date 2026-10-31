@@ -945,4 +945,6 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "52571838",
   "26082229",
   "89698120",
+// Generated batch m35-newdoria-battle-target: explicit tested release; zero inventory grants.
+  "04335645",
 ]);
