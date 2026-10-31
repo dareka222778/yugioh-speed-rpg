@@ -1,0 +1,177 @@
+{
+  "scope": "Synthetic 64 MiB binary snapshot, isolated child processes, Node24 local Windows. Bulk implementation retained the whole file; streaming implementation is current utility. OS cache/order can affect timing; not a full backup benchmark.",
+  "runs": [
+    {
+      "mode": "bulk",
+      "node": "v24.22.1",
+      "bytes": 67108864,
+      "digest": "3af11df754e3cd0a975dc618b54a07ef8c809bc327119369a90432913f746f6e",
+      "elapsedMs": 226.65179999999998,
+      "cpuMicros": {
+        "user": 188000,
+        "system": 32000
+      },
+      "before": {
+        "rss": 53170176,
+        "heapTotal": 7651328,
+        "heapUsed": 4703456,
+        "external": 2186589,
+        "arrayBuffers": 143631
+      },
+      "after": {
+        "rss": 120508416,
+        "heapTotal": 7651328,
+        "heapUsed": 4734120,
+        "external": 69295473,
+        "arrayBuffers": 67252511
+      },
+      "resource": {
+        "userCPUTime": 281000,
+        "systemCPUTime": 78000,
+        "maxRSS": 117688,
+        "sharedMemorySize": 0,
+        "unsharedDataSize": 0,
+        "unsharedStackSize": 0,
+        "minorPageFault": 0,
+        "majorPageFault": 30185,
+        "swappedOut": 0,
+        "fsRead": 1,
+        "fsWrite": 0,
+        "ipcSent": 0,
+        "ipcReceived": 0,
+        "signalsCount": 0,
+        "voluntaryContextSwitches": 0,
+        "involuntaryContextSwitches": 0
+      }
+    },
+    {
+      "mode": "stream",
+      "node": "v24.22.1",
+      "bytes": 67108864,
+      "digest": "3af11df754e3cd0a975dc618b54a07ef8c809bc327119369a90432913f746f6e",
+      "elapsedMs": 227.0095,
+      "cpuMicros": {
+        "user": 250000,
+        "system": 16000
+      },
+      "before": {
+        "rss": 53215232,
+        "heapTotal": 7651328,
+        "heapUsed": 4703456,
+        "external": 2186589,
+        "arrayBuffers": 143631
+      },
+      "after": {
+        "rss": 54439936,
+        "heapTotal": 8437760,
+        "heapUsed": 5432424,
+        "external": 2265555,
+        "arrayBuffers": 209183
+      },
+      "resource": {
+        "userCPUTime": 312000,
+        "systemCPUTime": 31000,
+        "maxRSS": 53168,
+        "sharedMemorySize": 0,
+        "unsharedDataSize": 0,
+        "unsharedStackSize": 0,
+        "minorPageFault": 0,
+        "majorPageFault": 14208,
+        "swappedOut": 0,
+        "fsRead": 1029,
+        "fsWrite": 0,
+        "ipcSent": 0,
+        "ipcReceived": 0,
+        "signalsCount": 0,
+        "voluntaryContextSwitches": 0,
+        "involuntaryContextSwitches": 0
+      }
+    },
+    {
+      "mode": "stream",
+      "node": "v24.22.1",
+      "bytes": 67108864,
+      "digest": "3af11df754e3cd0a975dc618b54a07ef8c809bc327119369a90432913f746f6e",
+      "elapsedMs": 225.312,
+      "cpuMicros": {
+        "user": 203000,
+        "system": 16000
+      },
+      "before": {
+        "rss": 53145600,
+        "heapTotal": 7651328,
+        "heapUsed": 4703456,
+        "external": 2186589,
+        "arrayBuffers": 143631
+      },
+      "after": {
+        "rss": 54374400,
+        "heapTotal": 8437760,
+        "heapUsed": 5432424,
+        "external": 2265555,
+        "arrayBuffers": 209183
+      },
+      "resource": {
+        "userCPUTime": 265000,
+        "systemCPUTime": 31000,
+        "maxRSS": 53104,
+        "sharedMemorySize": 0,
+        "unsharedDataSize": 0,
+        "unsharedStackSize": 0,
+        "minorPageFault": 0,
+        "majorPageFault": 14150,
+        "swappedOut": 0,
+        "fsRead": 1029,
+        "fsWrite": 0,
+        "ipcSent": 0,
+        "ipcReceived": 0,
+        "signalsCount": 0,
+        "voluntaryContextSwitches": 0,
+        "involuntaryContextSwitches": 0
+      }
+    },
+    {
+      "mode": "bulk",
+      "node": "v24.22.1",
+      "bytes": 67108864,
+      "digest": "3af11df754e3cd0a975dc618b54a07ef8c809bc327119369a90432913f746f6e",
+      "elapsedMs": 223.00900000000001,
+      "cpuMicros": {
+        "user": 203000,
+        "system": 15000
+      },
+      "before": {
+        "rss": 53403648,
+        "heapTotal": 7651328,
+        "heapUsed": 4703456,
+        "external": 2186589,
+        "arrayBuffers": 143631
+      },
+      "after": {
+        "rss": 120680448,
+        "heapTotal": 7651328,
+        "heapUsed": 4734120,
+        "external": 69295473,
+        "arrayBuffers": 67252511
+      },
+      "resource": {
+        "userCPUTime": 296000,
+        "systemCPUTime": 46000,
+        "maxRSS": 117856,
+        "sharedMemorySize": 0,
+        "unsharedDataSize": 0,
+        "unsharedStackSize": 0,
+        "minorPageFault": 0,
+        "majorPageFault": 30096,
+        "swappedOut": 0,
+        "fsRead": 1,
+        "fsWrite": 0,
+        "ipcSent": 0,
+        "ipcReceived": 0,
+        "signalsCount": 0,
+        "voluntaryContextSwitches": 0,
+        "involuntaryContextSwitches": 0
+      }
+    }
+  ]
+}

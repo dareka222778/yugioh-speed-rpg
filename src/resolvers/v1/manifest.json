@@ -1,0 +1,115 @@
+{
+  "version": "engine-v1",
+  "originCommit": "7802a737212165c9a0100562e37cd8adc734b960",
+  "purpose": "Immutable independent RPG resolver closure, not extracted game code",
+  "files": [
+    {
+      "path": "attackResponses.ts",
+      "sha256": "d8e048fec4c6a18c27af080fc33efcf3ab2b17e298121689263f2e6a3dbad94a"
+    },
+    {
+      "path": "cardCatalog.ts",
+      "sha256": "4dda4b4abcdb59225cb6514462d6e42f7c53fc0173c203faebeacf1e4eb1187b"
+    },
+    {
+      "path": "cardCertifications.ts",
+      "sha256": "48a611f7f3d9896bde366a98c76f774005049c3aaf4c426c675d1cd6301b3332"
+    },
+    {
+      "path": "cardLifetime.ts",
+      "sha256": "05d419ef5787d7b2eecee0aa50789b95b500fbf92eb0e8e0fc2e3a1628182b8c"
+    },
+    {
+      "path": "cardMetadata.ts",
+      "sha256": "25e4f02f61c875216f896f6f6c1ead5d287af61f1d045b2560cd9343f0291bec"
+    },
+    {
+      "path": "cardRegistry.ts",
+      "sha256": "0af48be3e184785c07adc2795a8035f5c15ff1804f2f2e76195e015b0bfdddd8"
+    },
+    {
+      "path": "chainEngine.ts",
+      "sha256": "4140550785ef7ceed8a46f07c48e90564c2cf75ce548c6f2b85470a9577f91c1"
+    },
+    {
+      "path": "classicEffects.ts",
+      "sha256": "82f3c98a5c79fd632caa423072c3b9fa7a0acaf3b2bcbe6f35f103e77bfde790"
+    },
+    {
+      "path": "classicEngineCards.ts",
+      "sha256": "a2d7c091ccbb01ca33f1e2982bd902095c08f2526d13b54ebe88dd0039e9a968"
+    },
+    {
+      "path": "classicExpansion.ts",
+      "sha256": "731ac876d62dbf4faebd86be78f158330cad6e77683af6bb9c9f189795d44504"
+    },
+    {
+      "path": "duelEngine.ts",
+      "sha256": "7d736e61f9ff3947eca7b924ae36dba0448c3cb6b8bf3e14109142f88c98b77b"
+    },
+    {
+      "path": "duelIntegrity.ts",
+      "sha256": "30de9af00b7d75d9e2f426594b5ee7ddec68c30a1925384569a8139c9571dd50"
+    },
+    {
+      "path": "duelRandom.ts",
+      "sha256": "c88e43b7fd1b18444d8e1900d66709472bcff65f4b5d391e004f239cce0f1468"
+    },
+    {
+      "path": "duelTransitions.ts",
+      "sha256": "d5521ad12016512aa487d67ef02abeef37b90f990c8cd04d539ecbcc7e758119"
+    },
+    {
+      "path": "economicOperations.ts",
+      "sha256": "0c4503844af02fee57a26c03e7b0d39c7576a55d1182585ac8ae25e4613dc1e6"
+    },
+    {
+      "path": "effectDefinitions.ts",
+      "sha256": "398abce9287a500ee849de8acd2fd8954e6efc5ee015e32557700e3c4021edb4"
+    },
+    {
+      "path": "effectModels.ts",
+      "sha256": "eb8bdddee7bb7508fe381d44c6fe100c1a7d9e06d0d7314423dad97474a5442a"
+    },
+    {
+      "path": "effectOperations.ts",
+      "sha256": "678e9d2a184d83de109bc0a9b23f12bf975ae61ed7edbc5ae091e7887c4a14ce"
+    },
+    {
+      "path": "effectRegistry.ts",
+      "sha256": "a9793c588e747d9aa15ab348ea07fe65561177cf54d34512a88a0f6f6d629227"
+    },
+    {
+      "path": "effectTiming.ts",
+      "sha256": "b15f3d05399c8e7439ee48c4b2072b2baeaecbe666cc7c17e46d0d6977933d85"
+    },
+    {
+      "path": "handFlow.ts",
+      "sha256": "b944b46b00384556b717dc5eb411de2fe4237a82934f4afe1d25ccba6e223490"
+    },
+    {
+      "path": "monsterEffects.ts",
+      "sha256": "74790e738d899fd573bdf82f75cbbd8fbd838434317a799368dc070ac22d92e0"
+    },
+    {
+      "path": "monsterEntry.ts",
+      "sha256": "0bf446ffd9101bb50fdd73bd6f315ff5e0e6c5049129b48dd8648e3bd3ee5081"
+    },
+    {
+      "path": "monsterExit.ts",
+      "sha256": "26977ba882361716752aa1153a4ccdaed6b0a3baacfa7a15d1d8cbfb00e8d6ec"
+    },
+    {
+      "path": "rulesProfile.ts",
+      "sha256": "1033fff5d538989149161aecea99bf10774703533f665893c0352229e6115b3b"
+    },
+    {
+      "path": "spellExceptions.ts",
+      "sha256": "df213cd70803c3fbb3e8757f038b7fccd943c88ccde22bbf4ab3dbf667cdd0df"
+    },
+    {
+      "path": "teamRotation.ts",
+      "sha256": "2bbcc7729b072ff0f5426803d6b96385ba01947c871930e4dfb385b0806610d1"
+    }
+  ]
+}

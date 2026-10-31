@@ -1,3 +1,50 @@
+import {cards as m31_single_targetsCards} from './generated/m31-single-targets';
+import {cards as m31_harpie_identityCards} from './generated/m31-harpie-identity';
+import {cards as m31_target_groupsCards} from './generated/m31-target-groups';
+import {cards as m32_exact_fusionCards} from './generated/m32-exact-fusion';
+import {cards as m32_umi_verifiedCards} from './generated/m32-umi-verified';
+import {cards as m32_activation_restrictionsCards} from './generated/m32-activation-restrictions';
+import {cards as m32_optional_trigger_lpCards} from './generated/m32-optional-trigger-lp';
+import {cards as m33_piercing_equipCards} from './generated/m33-piercing-equip';
+import {cards as m33_royal_decreeCards} from './generated/m33-royal-decree';
+import {cards as m34_summon_trap_lockCards} from './generated/m34-summon-trap-lock';
+import {cards as m35_newdoria_battle_targetCards} from './generated/m35-newdoria-battle-target';
+import {cards as m35_conditional_direct_attacksCards} from './generated/m35-conditional-direct-attacks';
+import {cards as m36_passive_attack_conditionsCards} from './generated/m36-passive-attack-conditions';
+import {cards as m37_fusion_substitutesCards} from './generated/m37-fusion-substitutes';
+import {cards as m38_classic_fusionsCards} from './generated/m38-classic-fusions';
+import {cards as m39_battle_effectsCards} from './generated/m39-battle-effects';
+import {conditionalBatch30} from './conditionalBatch30';
+import {destructionBatch29} from './destructionBatch29';
+import {triggerBatch29} from './triggerBatch29';
+import {combatBatch29} from './combatBatch29';
+import {recruitBatch28} from './recruitBatch28';
+import {attackBatch28} from './attackBatch28';
+import {movementBatch28} from './movementBatch28';
+import {mechanicalBatch28} from './mechanicalBatch28';
+import {positionBatch26} from './positionBatch26';
+import {searchSpellBatch25} from './searchSpellBatch25';
+import {economicCountBatch24} from './economicCountBatch24';
+import {economicBatch23} from './economicBatch23';
+import {ritualExtensions22} from './ritualExtensions22';
+import {ritualBatch22} from './ritualBatch22';
+import {worldNormalBatch16} from './worldNormalBatch16';
+import {mechanicalBatch20} from './mechanicalBatch20';
+import {mechanicalBatch16} from './mechanicalBatch16';
+import {mechanicalBatch17} from './mechanicalBatch17';
+import {mechanicalBatch18} from './mechanicalBatch18';
+import {historicalNormalBatch19} from './historicalNormalBatch19';
+import {mechanicalBatch15} from './mechanicalBatch15';
+import {fusionBatch8} from './fusionBatch8';
+import {mechanicalBatch11} from './mechanicalBatch11';
+import {mechanicalBatch14} from './mechanicalBatch14';
+import {historicalFusionBatch10} from './historicalFusionBatch10';
+import {historicalNormalBatch9} from './historicalNormalBatch9';
+import {mechanicalBatch8} from './mechanicalBatch8';
+import {mechanicalBatch7} from './mechanicalBatch7';
+import {mechanicalBatch5} from './mechanicalBatch5';
+import {historicalNormalBatch4} from './historicalNormalBatch4';
+import {historicalNormalBatch} from './historicalNormalBatch';
 // Bundled factual data; importing this module never imports Discord or the database.
 import {cards as starterCards,type Card} from './cardCatalog';
 import {classicExpansionCards} from './classicExpansion';
@@ -31,4 +78,4 @@ const supportedClassicSpells:Card[]=[
  {id:'05318639',konamiId:4909,name:'Tufão Espacial Místico',englishName:'Mystical Space Typhoon',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Magia Rápida: escolha 1 Magia/Armadilha no campo; destrua-a. Destruir não significa negar a ativação.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4909&request_locale=pt'},
  {id:'14087893',konamiId:5432,name:'Livro da Lua',englishName:'Book of Moon',kind:'spell',race:null,attribute:null,level:null,atk:null,defense:null,summary:'Magia Rápida: escolha 1 monstro com a face para cima no campo; coloque-o com a face para baixo em Posição de Defesa.',source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5432&request_locale=pt'}
 ];
-export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards];
+export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards];

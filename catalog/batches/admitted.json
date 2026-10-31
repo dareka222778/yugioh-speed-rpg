@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "batches": [
+    {
+      "id": "m31-single-targets",
+      "proofSHA256": "3d0e667f22ecc60c7f9dcc09bb8cd6ca49c227a613df902e2d94d681e402b12d"
+    },
+    {
+      "id": "m31-harpie-identity",
+      "proofSHA256": "8d21c73ac331e0aae68203391223960381f06ee5c120da8c31eab57d625d3b4e"
+    },
+    {
+      "id": "m31-target-groups",
+      "proofSHA256": "5dc960e1f3a6b5ffba8d179babb8de1c15f9300d1fd6f7c521169632df988185"
+    },
+    {
+      "id": "m32-exact-fusion",
+      "proofSHA256": "dd063e991990570a3a1acd4c29e06a346999e9c79d70873fd0dacb99b6f67fb1"
+    },
+    {
+      "id": "m32-umi-verified",
+      "proofSHA256": "a050f2535f9f3611e0288888a8d87398ef1351ee4d8d70af3e19cb1e5e229f39"
+    },
+    {
+      "id": "m32-activation-restrictions",
+      "proofSHA256": "36764dffd1d15e89f7a2bb5acc21cdc1e0a843aa70b492336ac3599b659ceb5e"
+    },
+    {
+      "id": "m32-optional-trigger-lp",
+      "proofSHA256": "b0581a6ebdd006cfc7e0b8a7b9d493b374c8f6aa9f203ef399f01e04da847ed8"
+    },
+    {
+      "id": "m33-piercing-equip",
+      "proofSHA256": "68e1abe9f2576b1d0ee1029b2a72012ff54d46d4e7fccffa91280811afb4381a"
+    },
+    {
+      "id": "m33-royal-decree",
+      "proofSHA256": "f910afba6e125a6adc9986c8f7ed798f9a2a280a73f70f54b9043691d6d28da9"
+    },
+    {
+      "id": "m34-summon-trap-lock",
+      "proofSHA256": "5ee60a8499f1df01735c91cfeecc8c223c3cad65a98259da7018950d07282519"
+    },
+    {
+      "id": "m35-newdoria-battle-target",
+      "proofSHA256": "c4a9b89a2bccd8892da6f24c4f5219d7c370982c0b8484387688017d180ff386"
+    },
+    {
+      "id": "m35-conditional-direct-attacks",
+      "proofSHA256": "f60dfc71e9cbc0421facda16bec966fac6bb16a5a7aed1114287c084d844c828"
+    },
+    {
+      "id": "m36-passive-attack-conditions",
+      "proofSHA256": "991c254edb1517d780c5f4b91a4ee84034f765a1a2f8d3bde0d23c38f16575ad"
+    },
+    {
+      "id": "m37-fusion-substitutes",
+      "proofSHA256": "2e502f3377f98fd05e0d5220dc4f1e34340c3570144e3cf0bc2d7a2c14ca3b9d"
+    },
+    {
+      "id": "m38-classic-fusions",
+      "proofSHA256": "9950d4cea0409de49b3c3317e1f824ec22b3365061b9a5237285114cf60081db"
+    },
+    {
+      "id": "m39-battle-effects",
+      "proofSHA256": "6a6254d54cd82f777a243308272d34f7e00f73c0142ee963d7a60ba5dab3a263"
+    }
+  ]
+}

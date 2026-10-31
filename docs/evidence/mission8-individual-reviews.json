@@ -1,0 +1,1325 @@
+[
+  {
+    "id": "16430187",
+    "canonicalId": "96244cfa-4651-416b-bd7e-8cfb5d6896bf",
+    "name": "The Reliable Guardian",
+    "konamiId": 4906,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4906&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4906&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-09-16",
+      "set": "SPELL RULER",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4906&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "16430187"
+      ],
+      "ygoprodeckId": 16430187
+    },
+    "family": "temporary-stat-modifier",
+    "mechanic": {
+      "kind": "temporaryModifier",
+      "atk": 0,
+      "def": 700
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "932c2c8031387be489c109aadd32dbf157373caef7652523fc82f92f8b2223ad"
+  },
+  {
+    "id": "18161786",
+    "canonicalId": "f73b580b-0a4c-47ec-8fec-f3cacdf88ce2",
+    "name": "Mystic Plasma Zone",
+    "konamiId": 4937,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4937&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4937&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-09-16",
+      "set": "SPELL RULER",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4937&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "18161786"
+      ],
+      "ygoprodeckId": 18161786
+    },
+    "family": "attribute-field",
+    "mechanic": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "DARK"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "fd8156d5c2ffb8bc9e904a0fa06c767c7bd21aef20070abe46edd8fd771fdf72"
+  },
+  {
+    "id": "19384334",
+    "canonicalId": "3f20e947-38b9-410f-b143-4e102886ab42",
+    "name": "Molten Destruction",
+    "konamiId": 4934,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4934&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4934&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-09-16",
+      "set": "SPELL RULER",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4934&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "19384334"
+      ],
+      "ygoprodeckId": 19384334
+    },
+    "family": "attribute-field",
+    "mechanic": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "FIRE"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "2d80a194417629be44cccc971be7725c1d776c6c9ba2a07586f2c9716d7ae3e5"
+  },
+  {
+    "id": "20065549",
+    "canonicalId": "07b8bfb0-c4ea-4e05-bd57-9e5b12ed4435",
+    "name": "Non-Spellcasting Area",
+    "konamiId": 5735,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5735&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5735&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2003-12-01",
+      "set": "DARK CRISIS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5735&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2003-12-01",
+      "ocg": "2002-11-21",
+      "world": "2002-11-21"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "20065549"
+      ],
+      "ygoprodeckId": 20065549
+    },
+    "family": "continuous-immunity",
+    "mechanic": {
+      "kind": "continuous",
+      "rules": [
+        {
+          "kind": "immune",
+          "filter": {
+            "nonEffectOnly": true
+          },
+          "from": [
+            "spell"
+          ]
+        }
+      ],
+      "activation": {
+        "speed": 1,
+        "window": "main",
+        "damage": "never"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "329526b0976ba7eed5d1e3db5db4e700d0d6780535da7e17d71e426bb8b2cfd8"
+  },
+  {
+    "id": "28470714",
+    "canonicalId": "b34bfc3d-f470-4484-847f-6122035422a4",
+    "name": "Bladefly",
+    "konamiId": 4615,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4615&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4615&request_locale=en",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 600,
+      "defense": 700,
+      "race": "Insect",
+      "attribute": "WIND"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "METAL RAIDERS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4615&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-11-18",
+      "world": "1999-11-18"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "28470714"
+      ],
+      "ygoprodeckId": 28470714
+    },
+    "family": "attribute-aura",
+    "mechanic": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "WIND"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "EARTH"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "66fc62dee429889c6f3b1bd2b79416dca53b5a285088d8b3e258ed6a841cbc63"
+  },
+  {
+    "id": "30778711",
+    "canonicalId": "f133a849-34fd-464e-b3d5-354ee1e46f3c",
+    "name": "Shadow Ghoul",
+    "konamiId": 4374,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4374&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4374&request_locale=en",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1600,
+      "defense": 1300,
+      "race": "Zombie",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "METAL RAIDERS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4374&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-11-18",
+      "world": "1999-11-18"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "30778711"
+      ],
+      "ygoprodeckId": 30778711
+    },
+    "family": "counted-self-modifier",
+    "mechanic": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "grave",
+                "controller": "source",
+                "atk": 100,
+                "def": 0,
+                "cardKind": "monster"
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "2b57bd998544bea374c155d3de53424c1d9574182782372c13e35faaaa1cc92a"
+  },
+  {
+    "id": "45778932",
+    "canonicalId": "64b78fb1-8702-4fed-bad2-f974d4826349",
+    "name": "Rising Air Current",
+    "konamiId": 4935,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4935&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4935&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-09-16",
+      "set": "SPELL RULER",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4935&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "45778932"
+      ],
+      "ygoprodeckId": 45778932
+    },
+    "family": "attribute-field",
+    "mechanic": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "WIND"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "f3c6a43d0d1cc731233e137cab57275777fb7c9697d10b8e3051240dbb55b906"
+  },
+  {
+    "id": "46657337",
+    "canonicalId": "2003324b-34cb-432b-bb25-0a835717bab5",
+    "name": "Muka Muka",
+    "konamiId": 4522,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4522&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4522&request_locale=en",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 600,
+      "defense": 300,
+      "race": "Rock",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "METAL RAIDERS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4522&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-11-18",
+      "world": "1999-11-18"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "46657337"
+      ],
+      "ygoprodeckId": 46657337
+    },
+    "family": "counted-self-modifier",
+    "mechanic": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "hand",
+                "controller": "source",
+                "atk": 300,
+                "def": 300
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "2f9f4d4012e7a344f9444c1666fb487737d8f091727ca219f0ef18c02f1250c9"
+  },
+  {
+    "id": "56594520",
+    "canonicalId": "25dbff91-581e-4792-8dce-70bdd559b53e",
+    "name": "Gaia Power",
+    "konamiId": 4932,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4932&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4932&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-09-16",
+      "set": "SPELL RULER",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4932&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2001-06-28",
+      "world": "2001-06-28"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "56594520"
+      ],
+      "ygoprodeckId": 56594520
+    },
+    "family": "attribute-field",
+    "mechanic": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "EARTH"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "32f438697ea66842e3e9bdea4eafdf6d4d1b57b7f066e1993fa8629d0125cbb4"
+  },
+  {
+    "id": "56747793",
+    "canonicalId": "7b0f0fca-f6c8-4caa-a664-f3d25b53ddd7",
+    "name": "United We Stand",
+    "konamiId": 5212,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5212&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5212&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2003-03-01",
+      "set": "LABYRINTH OF NIGHTMARE",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5212&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2003-03-01",
+      "ocg": "2001-04-19",
+      "world": "2001-04-19"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "56747793"
+      ],
+      "ygoprodeckId": 56747793
+    },
+    "family": "counted-equip",
+    "mechanic": {
+      "kind": "equip",
+      "atk": 0,
+      "def": 0,
+      "count": {
+        "zone": "monsters",
+        "controller": "source",
+        "atk": 800,
+        "def": 800,
+        "faceUp": true
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "2647b701432276d064f0cd79dd1e7f02afcdb05cec42c44d13647fef67c260d0"
+  },
+  {
+    "id": "67629977",
+    "canonicalId": "d2402a0d-0204-41ae-aa5e-fb0a116f3717",
+    "name": "Hoshiningen",
+    "konamiId": 4498,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4498&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4498&request_locale=en",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 500,
+      "defense": 700,
+      "race": "Fairy",
+      "attribute": "LIGHT"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "METAL RAIDERS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4498&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-11-18",
+      "world": "1999-11-18"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "67629977"
+      ],
+      "ygoprodeckId": 67629977
+    },
+    "family": "attribute-aura",
+    "mechanic": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "LIGHT"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "DARK"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "407bfdba47b6675e509aac63c9365f00e376ac34baf348f4de91e5074361897d"
+  },
+  {
+    "id": "68658728",
+    "canonicalId": "aa08443d-0eed-4343-9f55-321cca83dcba",
+    "name": "Little Chimera",
+    "konamiId": 4604,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4604&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4604&request_locale=en",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 600,
+      "defense": 550,
+      "race": "Beast",
+      "attribute": "FIRE"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "METAL RAIDERS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4604&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-11-18",
+      "world": "1999-11-18"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "68658728"
+      ],
+      "ygoprodeckId": 68658728
+    },
+    "family": "attribute-aura",
+    "mechanic": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "FIRE"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "WATER"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "b9750c186332f6b46136a145a1a8c9e3747f519135115d65a789028cd3976276"
+  },
+  {
+    "id": "70046172",
+    "canonicalId": "0e0a131d-bc45-4bd7-a018-512733ebc1b6",
+    "name": "Rush Recklessly",
+    "konamiId": 4905,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4905&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4905&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2004-06-24",
+      "set": "BE1-JP027",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4905&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "70046172"
+      ],
+      "ygoprodeckId": 70046172
+    },
+    "family": "temporary-stat-modifier",
+    "mechanic": {
+      "kind": "temporaryModifier",
+      "atk": 700,
+      "def": 0
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "8b9ee43b24a9c5d72f077bb14fb2a90336006c73e9a4676ee43a867dcc3f330f"
+  },
+  {
+    "id": "80741828",
+    "canonicalId": "dd87466b-1321-4f47-bae3-526441a0eb20",
+    "name": "Witch's Apprentice",
+    "konamiId": 4634,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4634&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4634&request_locale=en",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 550,
+      "defense": 500,
+      "race": "Spellcaster",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "METAL RAIDERS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4634&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-11-18",
+      "world": "1999-11-18"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "80741828"
+      ],
+      "ygoprodeckId": 80741828
+    },
+    "family": "attribute-aura",
+    "mechanic": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "DARK"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "LIGHT"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "b8f7f0ac8669d40eaaaee7ff1d99a1d99e21277c7de1f252fad1ea4699993436"
+  },
+  {
+    "id": "81777047",
+    "canonicalId": "a3cb54f5-a603-4481-a200-7e848112406a",
+    "name": "Luminous Spark",
+    "konamiId": 4936,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4936&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4936&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-09-16",
+      "set": "SPELL RULER",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4936&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "81777047"
+      ],
+      "ygoprodeckId": 81777047
+    },
+    "family": "attribute-field",
+    "mechanic": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "LIGHT"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "097d704cace55364cd8824187a4159cf4b48390cabe71ad200343057d0ea7826"
+  },
+  {
+    "id": "82732705",
+    "canonicalId": "3707e1c7-e5d9-4bc9-b012-8c2efa8e49d7",
+    "name": "Skill Drain",
+    "konamiId": 5740,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5740&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5740&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2003-12-01",
+      "set": "DARK CRISIS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5740&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2003-12-01",
+      "ocg": "2002-11-21",
+      "world": "2002-11-21"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "82732705"
+      ],
+      "ygoprodeckId": 82732705
+    },
+    "family": "continuous-negation",
+    "mechanic": {
+      "kind": "continuous",
+      "rules": [
+        {
+          "kind": "negateMonsters",
+          "filter": {}
+        }
+      ],
+      "activation": {
+        "speed": 2,
+        "window": "free",
+        "damage": "never"
+      },
+      "lpCost": 1000
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "736d62c31bc10fc520573ab11d6ba26717b21e4c6b1c5b92ae941de725ab89d4"
+  },
+  {
+    "id": "82999629",
+    "canonicalId": "ec7b4e97-1bad-45b8-8df9-04459ccb57d3",
+    "name": "Umiiruka",
+    "konamiId": 4933,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4933&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4933&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-09-16",
+      "set": "SPELL RULER",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4933&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "82999629"
+      ],
+      "ygoprodeckId": 82999629
+    },
+    "family": "attribute-field",
+    "mechanic": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "WATER"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "8c22edb79b83b4c6ce9041efab7d29da2c604e2c2eecc64609f28272491ac007"
+  },
+  {
+    "id": "83746708",
+    "canonicalId": "f18e3d9c-6979-440a-bc70-d5c8f8ddaf2a",
+    "name": "Mage Power",
+    "konamiId": 5213,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5213&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5213&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2003-03-01",
+      "set": "LABYRINTH OF NIGHTMARE",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5213&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2003-03-01",
+      "ocg": "2001-04-19",
+      "world": "2001-04-19"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "83746708"
+      ],
+      "ygoprodeckId": 83746708
+    },
+    "family": "counted-equip",
+    "mechanic": {
+      "kind": "equip",
+      "atk": 0,
+      "def": 0,
+      "count": {
+        "zone": "backrow",
+        "controller": "source",
+        "atk": 500,
+        "def": 500,
+        "includeField": true
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "73ffd8d20f18bec1990cc71250809a53dff1a7337c92757b241973e8bf32514d"
+  },
+  {
+    "id": "91862578",
+    "canonicalId": "7e725036-bd2a-4c27-8217-a60e7301360f",
+    "name": "Enraged Muka Muka",
+    "konamiId": 6123,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6123&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6123&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1200,
+      "defense": 600,
+      "race": "Rock",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2004-05-27",
+      "set": "SOD-JP031",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6123&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2004-10-01",
+      "ocg": "2004-05-27",
+      "world": "2004-05-27"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "91862578"
+      ],
+      "ygoprodeckId": 91862578
+    },
+    "family": "counted-self-modifier",
+    "mechanic": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "hand",
+                "controller": "source",
+                "atk": 400,
+                "def": 400
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "c0a541b6480de3208c7c11ef854e8237781c1b4603de85a6dc7f7d53aecfa32f"
+  },
+  {
+    "id": "07489323",
+    "canonicalId": "4e9a55fa-8e0d-428a-8d7a-75172f0ccc1f",
+    "name": "Milus Radiant",
+    "konamiId": 4533,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4533&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4533&request_locale=en",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 300,
+      "defense": 250,
+      "race": "Beast",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "METAL RAIDERS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4533&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-11-18",
+      "world": "1999-11-18"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "07489323"
+      ],
+      "ygoprodeckId": 7489323
+    },
+    "family": "attribute-aura",
+    "mechanic": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "EARTH"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "WIND"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "a54842a3a0e3d5f082fb4b6870201ceb7da0893211e71bb3bb02ed950459530f"
+  },
+  {
+    "id": "08201910",
+    "canonicalId": "5ee4af28-a64b-45d5-a38f-5dfffeed049a",
+    "name": "Star Boy",
+    "konamiId": 4530,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4530&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4530&request_locale=en",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 550,
+      "defense": 500,
+      "race": "Aqua",
+      "attribute": "WATER"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "METAL RAIDERS",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4530&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "1999-11-18",
+      "world": "1999-11-18"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "08201910"
+      ],
+      "ygoprodeckId": 8201910
+    },
+    "family": "attribute-aura",
+    "mechanic": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "WATER"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "FIRE"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "11ff92a95964e5ddc19995f823f5a2d8766132ee4fe7803fd3e9a8c4f7738b06"
+  },
+  {
+    "id": "00403847",
+    "canonicalId": "78f318af-fed4-4688-a5c1-aeb271f83cc1",
+    "name": "The A. Forces",
+    "konamiId": 5327,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5327&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5327&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2001-09-20",
+      "set": "SC-27",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5327&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff; imported firstObserved remains separate and is not asserted to be the universal first release.",
+    "importedFirstObserved": {
+      "tcg": "2003-06-06",
+      "ocg": "2001-09-20",
+      "world": "2001-09-20"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "00403847"
+      ],
+      "ygoprodeckId": 403847
+    },
+    "family": "counted-team-aura",
+    "mechanic": {
+      "kind": "continuous",
+      "rules": [
+        {
+          "kind": "modifier",
+          "filter": {
+            "controller": "source",
+            "races": [
+              "Warrior"
+            ]
+          },
+          "atk": 0,
+          "def": 0,
+          "count": {
+            "zone": "monsters",
+            "controller": "source",
+            "atk": 200,
+            "def": 0,
+            "races": [
+              "Warrior",
+              "Spellcaster"
+            ],
+            "faceUp": true
+          }
+        }
+      ],
+      "activation": {
+        "speed": 1,
+        "window": "main",
+        "damage": "never"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual primary facts/rules review",
+    "mechanicalFingerprint": "883e15673cfcd19b4ce670f439b47879625fa6e95e288e1be29ba44a5d540dd1"
+  }
+]

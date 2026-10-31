@@ -1,0 +1,541 @@
+{
+  "format": 1,
+  "batchId": "m31-generator-fixture",
+  "engineVersion": "engine-v9",
+  "fixtureOnly": true,
+  "cutoff": "2004-09-30",
+  "region": "world",
+  "candidates": [
+    {
+      "card": {
+        "id": "84257639",
+        "konamiId": 4348,
+        "name": "Dian Keto, Mestre da Cura",
+        "englishName": "Dian Keto the Cure Master",
+        "kind": "spell",
+        "race": null,
+        "attribute": null,
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4348&request_locale=pt"
+      },
+      "effect": {
+        "kind": "heal",
+        "amount": 1000
+      },
+      "family": "existing-certified-unit-fixture",
+      "requirements": [
+        "effect:heal"
+      ],
+      "textEvidence": {
+        "text": "Normal Spell. Activate during your Main Phase, with no activation condition, target or cost. On resolution, your controller gains 1000 Life Points. It has no secondary effect or persistent duration. Negating its activation or effect prevents the gain; removing the consumed source does not inherently negate it.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4348&request_locale=pt",
+        "sha256": "dfc0e2563a2976b08824d17e9bb52a6ed2daba6485e95cb278ebf582c70bca17"
+      },
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "84257639"
+                  }
+                ],
+                "lp": 3000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "cost",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "length": 1
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "84257639"
+                  }
+                ],
+                "lp": 3000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "cost",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "source"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "84257639"
+                  }
+                ],
+                "lp": 3000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "cost",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "84257639"
+                  }
+                ],
+                "lp": 3000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "cost",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "84257639"
+                  }
+                ],
+                "lp": 3000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "cost",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "84257639"
+                  }
+                ],
+                "lp": 3000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "cost",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "source"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "jammer",
+                "discards": [
+                  "cost"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "length": 0
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "lp-victory": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "84257639"
+                  }
+                ],
+                "lp": 3000
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "cost",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "length": 0
+            },
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": null
+            }
+          ]
+        }
+      },
+      "fingerprint": "64ef363bf8100b70b55115aadd69dc9be474e47962ed84e0a2a00c5bbdf0f939",
+      "suites": [
+        "tests/generated-m31-generator-fixture.test.cjs"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "84257639",
+      "canonicalId": "bdac3879-cdee-44cd-a47d-fca8388af25f",
+      "konamiId": 4348,
+      "reviewer": "Existing-certified-card unit fixture; no new certification",
+      "reviewedAt": "2026-10-29",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4348&request_locale=pt",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2002-03-29",
+        "set": "fixture-existing-card",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4348&request_locale=pt"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "dfc0e2563a2976b08824d17e9bb52a6ed2daba6485e95cb278ebf582c70bca17",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "not-applicable",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "not-applicable",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "64ef363bf8100b70b55115aadd69dc9be474e47962ed84e0a2a00c5bbdf0f939"
+    }
+  ],
+  "baseRevision": "63098a704e70ebfde80e9bed3b961b1b5bf0c6bc7a4932f6a5ee4c78a3e1940f"
+}

@@ -3,7 +3,13 @@
 const fs=require('node:fs'),path=require('node:path'),{execFileSync}=require('node:child_process'),{createHash}=require('node:crypto');
 const root=path.resolve(__dirname,'..');process.chdir(root);
 const suites=['classicTargetReview','historicalImport','classicPersistentReview','classicCardReview','npcStrategy','classicRulesV1','discordFlow','interactions','handFlow','duelIntegrity','classicCounterTraps','classicContinuousEffects','classicQuickMonsters','classicGraveTriggers','classicSummonTriggers','cardEvents','cardText'].map(n=>'tests/'+n+'.test.cjs');for(const file of suites)if(!fs.existsSync(file))throw Error('Missing critical suite: '+file);
-const tap=execFileSync(process.execPath,['scripts/run-tests-isolated.cjs','--serial',...suites],{encoding:'utf8',maxBuffer:8*1024*1024});const tests=Number(/# pass (\d+)/.exec(tap)?.[1]);if(!tests||!tap.includes('# fail 0'))throw Error('Acceptance tests did not complete.');
+let tap;try{tap=execFileSync(process.execPath,['scripts/run-tests-isolated.cjs','--serial',...suites],{encoding:'utf8',maxBuffer:8*1024*1024});}catch(error){
+ // Node truncates buffered stdout when inspecting the thrown child-process error.
+ // Preserve the actual failing TAP and stderr rather than losing the diagnosis.
+ fs.mkdirSync('artifacts',{recursive:true});fs.writeFileSync('artifacts/engine-acceptance-failure.tap',error.stdout??'');
+ if(error.stdout)process.stdout.write(error.stdout);if(error.stderr)process.stderr.write(error.stderr);
+ throw Error('Critical acceptance suite failed; full TAP preserved in artifacts/engine-acceptance-failure.tap',{cause:error.code??error.status});
+}const tests=Number(/# pass (\d+)/.exec(tap)?.[1]);if(!tests||!tap.includes('# fail 0'))throw Error('Acceptance tests did not complete.');
 const audit=JSON.parse(execFileSync(process.execPath,['scripts/audit-duel-engine.cjs','--games','1000'],{encoding:'utf8',maxBuffer:1024*1024}));
 const files=['duelEngine','duelIntegrity','handFlow','chainEngine','duelInteraction','discordPayload','effectDefinitions','monsterEffects','teamRotation','economicOperations','effectOperations','classicEffects','spellExceptions','effectModels','effectTiming','attackResponses','duelRandom','rulesProfile','npcStrategy','duelStore','cardText','cardCertifications'].map(n=>'src/'+n+'.ts');const fingerprint=createHash('sha256');for(const file of files)fingerprint.update(file).update(fs.readFileSync(file));
 const {enabledCardIds}=require('../dist/effectRegistry');

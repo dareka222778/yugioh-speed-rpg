@@ -18,7 +18,7 @@ export async function handleTagComponent(i:any,refresh:(r:TagRecord)=>Promise<vo
  }
  if(!['accept','cancel','confirm','act'].includes(action))throw Error('Controle 2v2 inválido.');
  await i.deferUpdate();onDefer('update');
- let next=action==='accept'?acceptTag(id,actor,i.guildId,Number(revision)):action==='act'?actTag(id,actor,i.guildId,Number(revision),Number(i.values?.[0])):quitTag(id,actor,i.guildId,Number(revision));
+ let next=action==='accept'?acceptTag(id,actor,i.guildId,Number(revision)):action==='act'?actTag(id,actor,i.guildId,Number(revision),Number(i.values?.[0]),i.id):quitTag(id,actor,i.guildId,Number(revision));
  // Public refresh still runs if a committed action cannot edit the private response.
  try{if(action==='act')next=runTagBots(next.id);await i.editReply(action==='act'||action==='confirm'?await panels.private(next,actor):await panels.public(next));}finally{await refresh(getTag(id));}
 }

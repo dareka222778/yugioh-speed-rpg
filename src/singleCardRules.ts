@@ -1,0 +1,6 @@
+export type SingleCardRule={from:'monsters'|'backrow'|'grave';controller:'self'|'opponent'|'both';action:'destroy'|'shuffleDeck'|'banish';kind?:'monster'|'spell'|'trap';faceUpOnly?:true;race?:string;inspectSetAs?:'spell'|'trap'};
+export function singleCardRuleIssues(value:unknown):string[]{
+ if(!value||typeof value!=='object'||Array.isArray(value))return ['invalid-single-card-rule'];const r=value as SingleCardRule;
+ if(Object.keys(r).some(k=>!['from','controller','action','kind','faceUpOnly','race','inspectSetAs'].includes(k))||!['monsters','backrow','grave'].includes(r.from)||!['self','opponent','both'].includes(r.controller)||!['destroy','shuffleDeck','banish'].includes(r.action)||r.kind!==undefined&&!['monster','spell','trap'].includes(r.kind)||r.faceUpOnly!==undefined&&(r.faceUpOnly!==true||r.from==='grave')||r.race!==undefined&&(typeof r.race!=='string'||!r.race||r.from!=='monsters'||r.faceUpOnly!==true))return ['invalid-single-card-filter'];
+ if(r.action==='destroy'&&r.from==='grave'||r.action!=='destroy'&&r.from!=='grave'||r.inspectSetAs!==undefined&&(r.from!=='backrow'||r.action!=='destroy'||!['spell','trap'].includes(r.inspectSetAs)||r.kind!==r.inspectSetAs||r.faceUpOnly!==undefined))return ['unsupported-single-card-combination'];return [];
+}

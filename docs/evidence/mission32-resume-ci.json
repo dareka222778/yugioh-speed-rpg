@@ -1,0 +1,12 @@
+{
+  "format": 1,
+  "commit": "9ecea2681f9fb3ff0bc09e7e6eafa82915e0dfaa",
+  "run": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/41007215069",
+  "jobs": {"test": "success", "extended-soak": "success"},
+  "testSummary": {"node": "v22.23.4", "tests": 6774, "pass": 6774, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0, "exitCode": 0},
+  "certified": 922,
+  "released": 922,
+  "longTestsRepeated": false,
+  "deployment": "not performed: authenticated hosting access unavailable",
+  "preserved": ["Umi PT-BR named-presence condition", "Cipher Soldier withdrawal", "player accounts, collections, decks and economy"]
+}

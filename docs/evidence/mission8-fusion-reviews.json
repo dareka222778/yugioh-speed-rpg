@@ -1,0 +1,812 @@
+[
+  {
+    "id": "83464209",
+    "canonicalId": "6af5b63d-9772-44b5-859c-dc03872d2ec7",
+    "name": "Mystical Sheep #2",
+    "konamiId": 4288,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4288&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4288&request_locale=en",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 800,
+      "defense": 1000,
+      "race": "Beast",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-03-08",
+      "set": "LEGEND OF BLUE EYES WHITE DRAGON",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4288&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-06",
+      "world": "1999-03-06"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "83464209"
+      ],
+      "ygoprodeckId": 83464209
+    },
+    "family": "fusion-normal-material",
+    "recipeNames": null,
+    "recipeIds": null,
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "bb2419d33c7149294e28b60d5fbe773ce47effa3b5edd7f819aa944c51aebf7b"
+  },
+  {
+    "id": "32274490",
+    "canonicalId": "bf5beb4b-b666-4b4f-b9ff-7d755c2f7d04",
+    "name": "Skull Servant",
+    "konamiId": 4030,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4030&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4030&request_locale=en",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 300,
+      "defense": 200,
+      "race": "Zombie",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-03-08",
+      "set": "LEGEND OF BLUE EYES WHITE DRAGON",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4030&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-06",
+      "world": "1999-03-06"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "32274490"
+      ],
+      "ygoprodeckId": 32274490
+    },
+    "family": "fusion-normal-material",
+    "recipeNames": null,
+    "recipeIds": null,
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "2bc9ea35366cd7bd5d94dc826f9d1cfe66040a5d9d4201b4b41476a22b053039"
+  },
+  {
+    "id": "40826495",
+    "canonicalId": "5f7ce495-a836-4a8a-9653-7ea92cb47295",
+    "name": "Dissolverock",
+    "konamiId": 4250,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4250&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4250&request_locale=en",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 900,
+      "defense": 1000,
+      "race": "Rock",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-03-08",
+      "set": "LEGEND OF BLUE EYES WHITE DRAGON",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4250&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-06",
+      "world": "1999-03-06"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "40826495"
+      ],
+      "ygoprodeckId": 40826495
+    },
+    "family": "fusion-normal-material",
+    "recipeNames": null,
+    "recipeIds": null,
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "fd3ea52e217013c01885a4f6664ecf86d18978069f449d80fb5006ec76b38768"
+  },
+  {
+    "id": "20315854",
+    "canonicalId": "d64dcd13-9a3a-403b-abc3-c63123a4980d",
+    "name": "Fairy Dragon",
+    "konamiId": 4609,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4609&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4609&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1100,
+      "defense": 1200,
+      "race": "Dragon",
+      "attribute": "WIND"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-08-26",
+      "set": "Booster 4",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4609&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2007-05-15",
+      "ocg": "1999-08-26",
+      "world": "1999-08-26"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "20315854"
+      ],
+      "ygoprodeckId": 20315854
+    },
+    "family": "fusion-normal-material",
+    "recipeNames": null,
+    "recipeIds": null,
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "35c388adfa639cac8900d03d9152b6aeade28ae999b3bc2d912c8ec95202a41b"
+  },
+  {
+    "id": "42348802",
+    "canonicalId": "7384caf5-798d-49d6-ac4e-a714c3e05e71",
+    "name": "Trakodon",
+    "konamiId": 4576,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4576&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4576&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 1300,
+      "defense": 800,
+      "race": "Dinosaur",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-07-22",
+      "set": "Vol.4",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4576&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2006-12-01",
+      "ocg": "1999-07-22",
+      "world": "1999-07-22"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "42348802"
+      ],
+      "ygoprodeckId": 42348802
+    },
+    "family": "fusion-normal-material",
+    "recipeNames": null,
+    "recipeIds": null,
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "57d2206c37950d409c5f4bee4b2607226a741ed47685e62f9bba354c2498f748"
+  },
+  {
+    "id": "02830619",
+    "canonicalId": "7d7523db-c20a-4a48-9b4b-3c0ae0c98f39",
+    "name": "Flame Viper",
+    "konamiId": 4650,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4650&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4650&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 400,
+      "defense": 450,
+      "race": "Pyro",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-07-22",
+      "set": "Vol.4",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4650&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2006-12-01",
+      "ocg": "1999-07-22",
+      "world": "1999-07-22"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "02830619"
+      ],
+      "ygoprodeckId": 2830619
+    },
+    "family": "fusion-normal-material",
+    "recipeNames": null,
+    "recipeIds": null,
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "1613a0678f91a50b6405453c018103046003325746509bfd7c07efd4a2202786"
+  },
+  {
+    "id": "43500484",
+    "canonicalId": "46e17faa-57a5-4bf8-9f1b-8c7b99b3f816",
+    "name": "Darkworld Thorns",
+    "konamiId": 4573,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4573&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4573&request_locale=en",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 1200,
+      "defense": 900,
+      "race": "Plant",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-03-08",
+      "set": "LEGEND OF BLUE EYES WHITE DRAGON",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4573&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-05-27",
+      "world": "1999-05-27"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "43500484"
+      ],
+      "ygoprodeckId": 43500484
+    },
+    "family": "fusion-normal-material",
+    "recipeNames": null,
+    "recipeIds": null,
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "4337f474121a75a21facbcff98447d1d87cb1e7f8b4fa706ec6da32512951fbf"
+  },
+  {
+    "id": "38289717",
+    "canonicalId": "fad5378a-b92c-40f7-a191-c4b625635f1d",
+    "name": "Crawling Dragon #2",
+    "konamiId": 4087,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4087&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4087&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1600,
+      "defense": 1200,
+      "race": "Dinosaur",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-10-01",
+      "set": "TP2-027",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4087&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-10-01",
+      "ocg": "1999-10-17",
+      "world": "1999-10-17"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "38289717"
+      ],
+      "ygoprodeckId": 38289717
+    },
+    "family": "fusion-normal-material",
+    "recipeNames": null,
+    "recipeIds": null,
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "30cd9d64d47036b65dfebf48ba6e7fd2a91f0debe2b973b2803567c7e5116a11"
+  },
+  {
+    "id": "94119974",
+    "canonicalId": "f53c0c32-dbf0-40cc-930e-a7d4c680f202",
+    "name": "Two-Headed King Rex",
+    "konamiId": 4038,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4038&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4038&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1600,
+      "defense": 1200,
+      "race": "Dinosaur",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-10-01",
+      "set": "TP2-025",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4038&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-10-01",
+      "ocg": "1999-10-17",
+      "world": "1999-10-17"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "94119974"
+      ],
+      "ygoprodeckId": 94119974
+    },
+    "family": "fusion-normal-material",
+    "recipeNames": null,
+    "recipeIds": null,
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "ebe31f2d9557504ec17d00e2261f19864963343ec4fbbb67e582d38c3390226d"
+  },
+  {
+    "id": "94905343",
+    "canonicalId": "90ae7b1a-e9f1-4752-853e-d4cc9dd41029",
+    "name": "Rabid Horseman",
+    "konamiId": 4098,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4098&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4098&request_locale=en",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2000,
+      "defense": 1700,
+      "race": "Beast-Warrior",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "MRD-077",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4098&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-06-26",
+      "ocg": "2000-01-27",
+      "world": "2000-01-27"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "94905343"
+      ],
+      "ygoprodeckId": 94905343
+    },
+    "family": "exact-fusion",
+    "recipeNames": [
+      "Battle Ox",
+      "Mystic Horseman"
+    ],
+    "recipeIds": [
+      "05053103",
+      "68516705"
+    ],
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "58aa1fda5470eefc1d8eb68fb5f99da006a0586982f8c96bfb02a5bc3ce5e23c"
+  },
+  {
+    "id": "32751480",
+    "canonicalId": "0738d4a9-acd9-49e6-8424-b301a34b0d8e",
+    "name": "Mystical Sand",
+    "konamiId": 4537,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4537&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4537&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2100,
+      "defense": 1700,
+      "race": "Rock",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-12-01",
+      "set": "Booster 6",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4537&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2012-11-01",
+      "ocg": "1999-12-01",
+      "world": "1999-12-01"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "32751480"
+      ],
+      "ygoprodeckId": 32751480
+    },
+    "family": "exact-fusion",
+    "recipeNames": [
+      "Giant Soldier of Stone",
+      "Ancient Elf"
+    ],
+    "recipeIds": [
+      "13039848",
+      "93221206"
+    ],
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "857f90c150550ae4b2d421bff4f09b6da1e396723f308afc5ac05b5bee142a19"
+  },
+  {
+    "id": "01641882",
+    "canonicalId": "3689dadc-22f8-475b-93e9-f753a8b41e86",
+    "name": "Fusionist",
+    "konamiId": 4195,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4195&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4195&request_locale=en",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 900,
+      "defense": 700,
+      "race": "Beast",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-03-08",
+      "set": "LEGEND OF BLUE EYES WHITE DRAGON",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4195&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-06",
+      "world": "1999-03-06"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "01641882"
+      ],
+      "ygoprodeckId": 1641882
+    },
+    "family": "exact-fusion",
+    "recipeNames": [
+      "Petit Angel",
+      "Mystical Sheep #2"
+    ],
+    "recipeIds": [
+      "38142739",
+      "83464209"
+    ],
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "36c66b304a76d14c8067364f9b96000135a76d611c0142bd97f0dba788fc9e46"
+  },
+  {
+    "id": "58528964",
+    "canonicalId": "00f85656-e4b7-4a01-a6ff-c1e989215e7e",
+    "name": "Flame Ghost",
+    "konamiId": 4221,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4221&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4221&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 1000,
+      "defense": 800,
+      "race": "Zombie",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-05-18",
+      "set": "LB-28",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4221&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-06",
+      "world": "1999-03-06"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "58528964"
+      ],
+      "ygoprodeckId": 58528964
+    },
+    "family": "exact-fusion",
+    "recipeNames": [
+      "Skull Servant",
+      "Dissolverock"
+    ],
+    "recipeIds": [
+      "32274490",
+      "40826495"
+    ],
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "cdcb9a5d66a49d884601bc9ca08f348916785e10a5d68f02e92b410baffd2640"
+  },
+  {
+    "id": "17881964",
+    "canonicalId": "e8511ae0-f67f-4768-93b1-0edc21358db0",
+    "name": "Darkfire Dragon",
+    "konamiId": 4174,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4174&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4174&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1500,
+      "defense": 1250,
+      "race": "Dragon",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-03-08",
+      "set": "LEGEND OF BLUE EYES WHITE DRAGON",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4174&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-03-06",
+      "world": "1999-03-06"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "17881964"
+      ],
+      "ygoprodeckId": 17881964
+    },
+    "family": "exact-fusion",
+    "recipeNames": [
+      "Firegrass",
+      "Petit Dragon"
+    ],
+    "recipeIds": [
+      "53293545",
+      "75356564"
+    ],
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "6a35869312f93e87bb45a2d522ce7e59d054d9dc44035307ad0a245a9ee725c6"
+  },
+  {
+    "id": "94566432",
+    "canonicalId": "6606a360-dae5-4df4-8372-ea2af202f53e",
+    "name": "Kaiser Dragon",
+    "konamiId": 4433,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4433&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4433&request_locale=ja",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2300,
+      "defense": 2000,
+      "race": "Dragon",
+      "attribute": "LIGHT"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-12-01",
+      "set": "Booster 6",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4433&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2006-12-01",
+      "ocg": "1999-12-01",
+      "world": "1999-12-01"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "94566432"
+      ],
+      "ygoprodeckId": 94566432
+    },
+    "family": "exact-fusion",
+    "recipeNames": [
+      "Winged Dragon, Guardian of the Fortress #1",
+      "Fairy Dragon"
+    ],
+    "recipeIds": [
+      "87796900",
+      "20315854"
+    ],
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "a92099eb5ce4e6a6c76b3e6eb212a66c2bfaa9b99e9b006c4c4633d5b00f8d01"
+  },
+  {
+    "id": "33691040",
+    "canonicalId": "2b487866-11cc-48d2-af3f-a0055f2f14ba",
+    "name": "Pragtical",
+    "konamiId": 4488,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4488&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4488&request_locale=ja",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1900,
+      "defense": 1500,
+      "race": "Dinosaur",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-07-22",
+      "set": "Vol.4",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4488&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2006-12-01",
+      "ocg": "1999-07-22",
+      "world": "1999-07-22"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "33691040"
+      ],
+      "ygoprodeckId": 33691040
+    },
+    "family": "exact-fusion",
+    "recipeNames": [
+      "Trakodon",
+      "Flame Viper"
+    ],
+    "recipeIds": [
+      "42348802",
+      "02830619"
+    ],
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "b03d8084943953c833f87cb48a4fd77195df6f826f15b4d24838bd6f929bb4a8"
+  },
+  {
+    "id": "95952802",
+    "canonicalId": "188067c3-469a-4aa9-95a3-699ad35d4ca4",
+    "name": "Flower Wolf",
+    "konamiId": 4493,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4493&request_locale=en",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4493&request_locale=en",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1800,
+      "defense": 1400,
+      "race": "Beast",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-03-08",
+      "set": "LEGEND OF BLUE EYES WHITE DRAGON",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4493&request_locale=en"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-05-27",
+      "world": "1999-05-27"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "95952802"
+      ],
+      "ygoprodeckId": 95952802
+    },
+    "family": "exact-fusion",
+    "recipeNames": [
+      "Silver Fang",
+      "Darkworld Thorns"
+    ],
+    "recipeIds": [
+      "90357090",
+      "43500484"
+    ],
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "d48d71920b20445471e84049be45e09c3d9076bb46e225425c81919d03c65b84"
+  },
+  {
+    "id": "16507828",
+    "canonicalId": "00a6cf08-9f0b-4a74-a45b-c2cf1acfb6dd",
+    "name": "Bracchio-raidus",
+    "konamiId": 4515,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4515&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4515&request_locale=ja",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2200,
+      "defense": 2000,
+      "race": "Dinosaur",
+      "attribute": "WATER"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-11-23",
+      "set": "B3-32",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4515&request_locale=ja"
+    },
+    "dateMeaning": "Verified regional printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2013-10-10",
+      "ocg": "1999-10-17",
+      "world": "1999-10-17"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "16507828"
+      ],
+      "ygoprodeckId": 16507828
+    },
+    "family": "exact-fusion",
+    "recipeNames": [
+      "Two-Headed King Rex",
+      "Crawling Dragon #2"
+    ],
+    "recipeIds": [
+      "94119974",
+      "38289717"
+    ],
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 8 individual exact-recipe and material review",
+    "mechanicalFingerprint": "5e98d7bfafda2860681ebbb232fb4b59c109690c877896cc650cfdbf611ebee2"
+  }
+]

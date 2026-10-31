@@ -1,0 +1,33 @@
+name: Card batch admission preparation
+on:
+  pull_request:
+    branches: [main, classic-engine-foundation]
+    paths:
+      - 'catalog/proposed/**'
+      - 'scripts/card-batch-*.cjs'
+      - '.github/workflows/card-batch-admission.yml'
+permissions:
+  contents: read
+jobs:
+  prepare-admission:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/cardBatchCI.test.cjs
+      - run: node scripts/card-batch-ci.cjs
+        env:
+          CARD_BATCH_BASE_COMMIT: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reviewed-admission-changes
+          path: |
+            artifacts/admission-bundle.json
+            artifacts/admission-tests.log
+          if-no-files-found: error

@@ -1,0 +1,24 @@
+{
+  "scope": "Candidata técnica para homologação isolada; nenhuma autorização de produção",
+  "classifications": ["Aprovado com evidências", "Pendente de teste real", "Reprovado ou bloqueado"],
+  "approvalRule": "Aprovações automatizadas exigem CI completo verde no SHA avaliado; existência de teste não basta.",
+  "rows": [
+    {"area":"Compatibilidade v1–v5 e saves", "status":"Aprovado com evidências", "evidence":["tests/resolverArchive.test.cjs","tests/resolverV3Compatibility.test.cjs","tests/resolverV4Compatibility.test.cjs","tests/mechanicalInteractions5.test.cjs","scripts/verify-resolver-archives.cjs"]},
+    {"area":"Crash de processo dentro da transação e depois do commit", "status":"Aprovado com evidências", "evidence":["tests/abruptRecovery6.test.cjs","artifacts/abrupt-recovery-mission6.json"], "limit":"24 pontos/casos controlados; não é teste de perda física de energia/disco"},
+    {"area":"Duplicatas, concorrência SQLite, recuperação e versões simultâneas", "status":"Aprovado com evidências", "evidence":["scripts/stress-persisted-duels.cjs","tests/duelRecovery.test.cjs","tests/tagRecovery.test.cjs"]},
+    {"area":"Backup consistente de WAL e restauração não destrutiva", "status":"Aprovado com evidências", "evidence":["tests/sqliteSnapshot6.test.cjs","scripts/sqlite-snapshot.cjs"], "limit":"Fixtures locais; restauração do banco real não foi executada"},
+    {"area":"Perfis, coleção, criação/seleção de decks e comandos", "status":"Aprovado com evidências", "evidence":["tests/interactions.test.cjs","tests/decks.test.cjs","tests/discordFlow.test.cjs"]},
+    {"area":"Invocações, efeitos, correntes, escolhas e combate", "status":"Aprovado com evidências", "evidence":["tests/mechanicalBatch5.test.cjs","tests/mechanicalInteractions5.test.cjs","tests/standbyRecovery.test.cjs","tests/classicCounterTraps.test.cjs"]},
+    {"area":"Desistência, timeout, deck-out e recompensas", "status":"Aprovado com evidências", "evidence":["tests/terminalAndBootstrap6.test.cjs","tests/tagTerminalRecovery.test.cjs","tests/npc.test.cjs","tests/handFlow.test.cjs"]},
+    {"area":"Partidas completas 1v1/2v2, menus, renderização e retomada offline", "status":"Aprovado com evidências", "evidence":["tests/discordHomologation.test.cjs","tests/discordFullMatches.test.cjs"], "limit":"Transporte simulado e imagens locais/fallback"},
+    {"area":"197 certificados e política de não distribuição das 67 adições", "status":"Aprovado com evidências", "evidence":["scripts/check-card-certification.cjs","tests/cardReleasePolicy.test.cjs","tests/mechanicalBatch5.test.cjs"]},
+    {"area":"Preflight isolado e procedência do build", "status":"Aprovado com evidências", "evidence":["tests/sandboxPreflight6.test.cjs","tests/buildProvenance6.test.cjs"]},
+    {"area":"Memória prolongada de horas/dias e estabilidade no host de 1 GB", "status":"Pendente de teste real", "evidence":["scripts/soak-mixed-versions.cjs"], "limit":"CI executa 120 e 600 segundos em runners separados; não prova ausência de vazamento nem reserva suficiente para Discord/renderização/SO"},
+    {"area":"Discord real: comandos, consentimentos, imagens e reconexão", "status":"Pendente de teste real", "evidence":["docs/DISCORD-HOMOLOGATION-MISSION-6.md"]},
+    {"area":"Latência real de até 1,5 s e rate limits", "status":"Pendente de teste real", "evidence":["docs/DISCORD-HOMOLOGATION-MISSION-6.md"]},
+    {"area":"Ambiente e autorização para login Discord", "status":"Reprovado ou bloqueado", "reason":"Não fornecidos bot/servidor isolados, autorização, canal e quatro participantes consentidos"},
+    {"area":"Dados históricos ausentes de I02", "status":"Reprovado ou bloqueado", "reason":"Épocas de zona nunca gravadas não podem ser reconstruídas com evidência"},
+    {"area":"11 identidades/passcodes e mecânicas ainda não implementadas", "status":"Reprovado ou bloqueado", "evidence":["docs/evidence/mission5-unresolved-research.json"], "reason":"Não habilitar nem preencher fatos ausentes por suposição"},
+    {"area":"Implantação, merge e distribuição de cartas", "status":"Reprovado ou bloqueado", "reason":"Fora da autorização desta missão; dependem de aceite separado"}
+  ]
+}

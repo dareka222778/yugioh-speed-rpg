@@ -46,7 +46,7 @@ function calculate(items){
 const playableNPCDecks=npcs.map(n=>({id:n.id,name:n.name,main:n.cards.length,extra:n.extra.length,
  valid:n.cards.length>=20&&n.cards.length<=30&&n.extra.length<=RULES_PROFILE.extraDeckMax&&
   [...n.cards,...n.extra].every(id=>!!getPlayableCard(id)&&!!getEffect(id))}));
-const report={readiness:{release:require('../package.json').version,historicalMilestoneScores:true,productionAcceptance:'pending human Discord validation of Speed RPG Clássico v1 and 2v2',scope:'130 enabled cards; not all classic anime cards'},scope:'Playability of this RPG only; not every TCG/anime card',
+const report={readiness:{release:require('../package.json').version,historicalMilestoneScores:true,productionAcceptance:'pending human Discord validation of Speed RPG Clássico v1 and 2v2',scope:enabledCardIds.length+' enabled cards; not all classic anime cards'},scope:'Playability of this RPG only; not every TCG/anime card',
  engine:calculate(engine),layout:calculate(layout),playableNPCDecks,
  enabledEngineCards:enabledCardIds.length,playableEffectMonsters:enabledCardIds.filter(id=>!!getMonsterEffect(id)).length};
 if(process.argv.includes('--json'))console.log(JSON.stringify(report,null,2));

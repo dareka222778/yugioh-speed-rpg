@@ -1,0 +1,111 @@
+{
+  "validatedCommit": "2fc28f01b664fdd474b1e42cca08fddb6237af36",
+  "workflowRun": 40638667535,
+  "job": 122651443324,
+  "scope": "Complete CI passed in both jobs: 5290 tests, individual certification gate, SQLite load, historical preservation and extended soak.",
+  "cohort": "mission15",
+  "previousCertified": 741,
+  "totalCertified": 749,
+  "newCertified": 8,
+  "cards": [
+    {
+      "id": "26725158",
+      "name": "Exile of the Wicked",
+      "fingerprint": "ffaf47c9ce40851792a13eab04344bdf3d32012b57f3e54a23cca46670ec1237",
+      "passed": [
+        "identity",
+        "mechanic",
+        "negative",
+        "replay",
+        "ai"
+      ]
+    },
+    {
+      "id": "21323861",
+      "name": "Acid Rain",
+      "fingerprint": "d5b15fe36788289d462dd5fb4cf75730890f374edefc13e7fb59574670aab062",
+      "passed": [
+        "identity",
+        "mechanic",
+        "negative",
+        "replay",
+        "ai"
+      ]
+    },
+    {
+      "id": "56606928",
+      "name": "Eternal Drought",
+      "fingerprint": "31da04e27dc6095c5a777c6ae1f8d2674c1b4706a8ca3ba506cc9ef9a808abb9",
+      "passed": [
+        "identity",
+        "mechanic",
+        "negative",
+        "replay",
+        "ai"
+      ]
+    },
+    {
+      "id": "20101223",
+      "name": "Breath of Light",
+      "fingerprint": "8bfa1b6dfa26ab7c76fb756998f63a514103a3eafd92bcae9bc43cb3bcce87ea",
+      "passed": [
+        "identity",
+        "mechanic",
+        "negative",
+        "replay",
+        "ai"
+      ]
+    },
+    {
+      "id": "90873992",
+      "name": "Warrior Elimination",
+      "fingerprint": "8c5d1ad1c8c027a073ae613be82fceb3c72a035d882e1c3978398b7ed6285dd8",
+      "passed": [
+        "identity",
+        "mechanic",
+        "negative",
+        "replay",
+        "ai"
+      ]
+    },
+    {
+      "id": "94716515",
+      "name": "Eradicating Aerosol",
+      "fingerprint": "0d84fb0581b4fe51f991d43fc0a7f32e63508466384c9656e6becf44ecb572c4",
+      "passed": [
+        "identity",
+        "mechanic",
+        "negative",
+        "replay",
+        "ai"
+      ]
+    },
+    {
+      "id": "95051344",
+      "name": "Eternal Rest",
+      "fingerprint": "92bc4dd72a4664dc14fd00655025d3f0fffde0c865d2ae048fdbc55f28a1e5b0",
+      "passed": [
+        "identity",
+        "mechanic",
+        "negative",
+        "replay",
+        "ai"
+      ]
+    },
+    {
+      "id": "90330453",
+      "name": "Last Day of Witch",
+      "fingerprint": "c73c8f4a441e085075f886d39e9b421f183d7e979056ea00d50bb0347fdf807c",
+      "passed": [
+        "identity",
+        "mechanic",
+        "negative",
+        "replay",
+        "ai"
+      ]
+    }
+  ],
+  "distributionAuthorized": 0,
+  "engineVersion": "engine-v8",
+  "immutableV8ImplementationReused": true
+}

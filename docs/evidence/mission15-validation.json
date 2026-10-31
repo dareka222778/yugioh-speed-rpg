@@ -1,0 +1,1320 @@
+{
+  "mission": 15,
+  "baselineCommit": "2e21d40724341db91bb9a03e3500641fc46f9302",
+  "activeResolver": "engine-v8",
+  "cards": {
+    "certifiedBefore": 741,
+    "certifiedAfter": 749,
+    "newCertified": 8,
+    "distributionAllowed": 130,
+    "newDistributionAllowed": 0
+  },
+  "catalogRevisions": {
+    "v7": "unchanged; seven historical revisions",
+    "v8Initial741": "d84815dc2001064ba69b0fec719fc41495f78561d0438f16d6a0ee19357d4ee3",
+    "v8Current749": "e301765da8535ac4462932bbb64d6f5c2d8fe6f15461d236c89bc8325819a8c6"
+  },
+  "preservation": {
+    "historicalModulesV1toV7": 231,
+    "historicalFilesV1toV7": 238,
+    "v8Modules": 46,
+    "v8FilesUnchangedDuringAdmission": 47,
+    "v8FrozenAtCommit": "043f93818cc839b4a955c7c84618553183449c06",
+    "baselinePaths": 253,
+    "reviewedAdditivePaths": [
+      "src/duelStore.ts",
+      "src/cardMetadata.ts",
+      "src/cardCertifications.ts"
+    ],
+    "allOtherBaselinePathsExact": true
+  },
+  "individualAdmission": {
+    "cohort": "mission15",
+    "previousCertified": 741,
+    "totalCertified": 749,
+    "newCertified": 8,
+    "cards": [
+      {
+        "id": "26725158",
+        "name": "Exile of the Wicked",
+        "fingerprint": "ffaf47c9ce40851792a13eab04344bdf3d32012b57f3e54a23cca46670ec1237",
+        "passed": [
+          "identity",
+          "mechanic",
+          "negative",
+          "replay",
+          "ai"
+        ]
+      },
+      {
+        "id": "21323861",
+        "name": "Acid Rain",
+        "fingerprint": "d5b15fe36788289d462dd5fb4cf75730890f374edefc13e7fb59574670aab062",
+        "passed": [
+          "identity",
+          "mechanic",
+          "negative",
+          "replay",
+          "ai"
+        ]
+      },
+      {
+        "id": "56606928",
+        "name": "Eternal Drought",
+        "fingerprint": "31da04e27dc6095c5a777c6ae1f8d2674c1b4706a8ca3ba506cc9ef9a808abb9",
+        "passed": [
+          "identity",
+          "mechanic",
+          "negative",
+          "replay",
+          "ai"
+        ]
+      },
+      {
+        "id": "20101223",
+        "name": "Breath of Light",
+        "fingerprint": "8bfa1b6dfa26ab7c76fb756998f63a514103a3eafd92bcae9bc43cb3bcce87ea",
+        "passed": [
+          "identity",
+          "mechanic",
+          "negative",
+          "replay",
+          "ai"
+        ]
+      },
+      {
+        "id": "90873992",
+        "name": "Warrior Elimination",
+        "fingerprint": "8c5d1ad1c8c027a073ae613be82fceb3c72a035d882e1c3978398b7ed6285dd8",
+        "passed": [
+          "identity",
+          "mechanic",
+          "negative",
+          "replay",
+          "ai"
+        ]
+      },
+      {
+        "id": "94716515",
+        "name": "Eradicating Aerosol",
+        "fingerprint": "0d84fb0581b4fe51f991d43fc0a7f32e63508466384c9656e6becf44ecb572c4",
+        "passed": [
+          "identity",
+          "mechanic",
+          "negative",
+          "replay",
+          "ai"
+        ]
+      },
+      {
+        "id": "95051344",
+        "name": "Eternal Rest",
+        "fingerprint": "92bc4dd72a4664dc14fd00655025d3f0fffde0c865d2ae048fdbc55f28a1e5b0",
+        "passed": [
+          "identity",
+          "mechanic",
+          "negative",
+          "replay",
+          "ai"
+        ]
+      },
+      {
+        "id": "90330453",
+        "name": "Last Day of Witch",
+        "fingerprint": "c73c8f4a441e085075f886d39e9b421f183d7e979056ea00d50bb0347fdf807c",
+        "passed": [
+          "identity",
+          "mechanic",
+          "negative",
+          "replay",
+          "ai"
+        ]
+      }
+    ],
+    "distributionAuthorized": 0,
+    "engineVersion": "engine-v8",
+    "immutableV8ImplementationReused": true
+  },
+  "observedIntegration": {
+    "commit": "744af08bec9cee20aaa76c37c3dcd4b28772c178",
+    "runId": 40637693197,
+    "jobId": 122648346964,
+    "node": "v22.23.3",
+    "typecheck": "passed",
+    "completeSuite": {
+      "tests": 5289,
+      "passed": 5289,
+      "failed": 0,
+      "todo": 0
+    },
+    "nativeSQLite": true,
+    "individualGate": "passed",
+    "rea": {
+      "scenarios": 23,
+      "passed": 23,
+      "partialCoverage": 1,
+      "partial": "I02"
+    },
+    "overallJob": "failed later at coverage:engine; kind-only lookup dropped the destruction filter",
+    "fixCommit": "2fc28f01b664fdd474b1e42cca08fddb6237af36",
+    "fixRegression": "tests/engineCoverage15.test.cjs",
+    "latestHeadCaveat": "Consult the CI of HEAD for the complete gate after this fix; success of this test suite does not imply overall CI approval."
+  },
+  "familyStressFirstSample": {
+    "runId": 40637693197,
+    "commit": "744af08bec9cee20aaa76c37c3dcd4b28772c178",
+    "reports": [
+      {
+        "scope": "isolated persistent 1v1/2v2 sessions; configurable SQLite writer processes; IPC/queue/transaction latency, excludes Discord and PNG",
+        "resolverVersions": [
+          "engine-v1",
+          "engine-v2",
+          "engine-v3",
+          "engine-v4",
+          "engine-v5",
+          "engine-v6",
+          "engine-v7",
+          "engine-v8"
+        ],
+        "mixedVersions": true,
+        "filteredSpells": true,
+        "filteredSpellActivationsByCard": {
+          "20101223": 4,
+          "21323861": 9,
+          "26725158": 1,
+          "56606928": 4,
+          "90330453": 7,
+          "90873992": 15,
+          "94716515": 0,
+          "95051344": 12
+        },
+        "v8Included": true,
+        "legacyCandidateFlag": false,
+        "v8Scope": "v8 is current for 2v2; mixed 1v1 includes all eight versions",
+        "simulatedPlayers": 150,
+        "sessions": 50,
+        "completed": 50,
+        "writerProcesses": 2,
+        "resolverLoading": "lazy",
+        "commits": 3546,
+        "duplicateDeliveries": 324,
+        "busyErrors": 1,
+        "rejectedInjectedOrInvalid": 2,
+        "writerRestarts": 1,
+        "integrity": "ok",
+        "foreignKeys": "ok",
+        "cardConservation": true,
+        "economyUnchanged": true,
+        "elapsedMs": 7947.3487239999995,
+        "latencyMs": {
+          "p50": 13.790673999999854,
+          "p95": 73.0417809999999,
+          "p99": 147.9733510000001,
+          "max": 250.44289099999992
+        },
+        "transactionMs": {
+          "p95": 6.222717999999986,
+          "max": 100.748176
+        },
+        "cpu": {
+          "parent": {
+            "user": 4975468,
+            "system": 294149
+          },
+          "workers": [
+            {
+              "pid": 4637,
+              "cpu": {
+                "user": 336022,
+                "system": 35501
+              }
+            },
+            {
+              "pid": 4649,
+              "cpu": {
+                "user": 1959314,
+                "system": 165191
+              }
+            },
+            {
+              "pid": 4662,
+              "cpu": {
+                "user": 3272113,
+                "system": 231047
+              }
+            }
+          ]
+        },
+        "memory": {
+          "referenceBudgetBytes": 2147483648,
+          "peakAggregateSampledRSS": 553021440,
+          "withinReferenceBudget": true,
+          "sampling": "Sum of live writer RSS plus coordinator RSS at IPC responses/start/stop; shared pages counted per-process, short peaks may be missed; not a container/cgroup hard limit",
+          "before": {
+            "rss": 122191872,
+            "heapTotal": 58855424,
+            "heapUsed": 28735776,
+            "external": 3555402,
+            "arrayBuffers": 116613
+          },
+          "after": {
+            "rss": 192069632,
+            "heapTotal": 84340736,
+            "heapUsed": 58878016,
+            "external": 3979274,
+            "arrayBuffers": 223852
+          },
+          "peakObservedWriterRSS": 188813312,
+          "workers": [
+            {
+              "pid": 4637,
+              "memory": {
+                "rss": 160649216,
+                "heapTotal": 75427840,
+                "heapUsed": 43408568,
+                "external": 3851048,
+                "arrayBuffers": 124791
+              }
+            },
+            {
+              "pid": 4649,
+              "memory": {
+                "rss": 180326400,
+                "heapTotal": 78835712,
+                "heapUsed": 49698696,
+                "external": 3860635,
+                "arrayBuffers": 134378
+              }
+            },
+            {
+              "pid": 4662,
+              "memory": {
+                "rss": 173989888,
+                "heapTotal": 77524992,
+                "heapUsed": 55489056,
+                "external": 3857246,
+                "arrayBuffers": 130989
+              }
+            }
+          ]
+        },
+        "liveDiscordCertified": false
+      },
+      {
+        "scope": "isolated persistent 1v1/2v2 sessions; configurable SQLite writer processes; IPC/queue/transaction latency, excludes Discord and PNG",
+        "resolverVersions": [
+          "engine-v1",
+          "engine-v2",
+          "engine-v3",
+          "engine-v4",
+          "engine-v5",
+          "engine-v6",
+          "engine-v7",
+          "engine-v8"
+        ],
+        "mixedVersions": true,
+        "filteredSpells": true,
+        "filteredSpellActivationsByCard": {
+          "20101223": 9,
+          "21323861": 15,
+          "26725158": 3,
+          "56606928": 17,
+          "90330453": 12,
+          "90873992": 31,
+          "94716515": 0,
+          "95051344": 22
+        },
+        "v8Included": true,
+        "legacyCandidateFlag": false,
+        "v8Scope": "v8 is current for 2v2; mixed 1v1 includes all eight versions",
+        "simulatedPlayers": 300,
+        "sessions": 100,
+        "completed": 100,
+        "writerProcesses": 2,
+        "resolverLoading": "lazy",
+        "commits": 7588,
+        "duplicateDeliveries": 695,
+        "busyErrors": 2,
+        "rejectedInjectedOrInvalid": 2,
+        "writerRestarts": 1,
+        "integrity": "ok",
+        "foreignKeys": "ok",
+        "cardConservation": true,
+        "economyUnchanged": true,
+        "elapsedMs": 13642.748281,
+        "latencyMs": {
+          "p50": 23.517447000000175,
+          "p95": 112.57344499999999,
+          "p99": 195.31870100000015,
+          "max": 351.98711500000013
+        },
+        "transactionMs": {
+          "p95": 2.3119219999999814,
+          "max": 109.00029
+        },
+        "cpu": {
+          "parent": {
+            "user": 9205601,
+            "system": 507877
+          },
+          "workers": [
+            {
+              "pid": 4691,
+              "cpu": {
+                "user": 490290,
+                "system": 65653
+              }
+            },
+            {
+              "pid": 4703,
+              "cpu": {
+                "user": 3757490,
+                "system": 317017
+              }
+            },
+            {
+              "pid": 4715,
+              "cpu": {
+                "user": 5768297,
+                "system": 446779
+              }
+            }
+          ]
+        },
+        "memory": {
+          "referenceBudgetBytes": 2147483648,
+          "peakAggregateSampledRSS": 571551744,
+          "withinReferenceBudget": true,
+          "sampling": "Sum of live writer RSS plus coordinator RSS at IPC responses/start/stop; shared pages counted per-process, short peaks may be missed; not a container/cgroup hard limit",
+          "before": {
+            "rss": 125374464,
+            "heapTotal": 57282560,
+            "heapUsed": 33900640,
+            "external": 3555403,
+            "arrayBuffers": 116614
+          },
+          "after": {
+            "rss": 199766016,
+            "heapTotal": 95662080,
+            "heapUsed": 48477520,
+            "external": 3881619,
+            "arrayBuffers": 126197
+          },
+          "peakObservedWriterRSS": 187269120,
+          "workers": [
+            {
+              "pid": 4691,
+              "memory": {
+                "rss": 160870400,
+                "heapTotal": 76214272,
+                "heapUsed": 46753984,
+                "external": 3859514,
+                "arrayBuffers": 133257
+              }
+            },
+            {
+              "pid": 4703,
+              "memory": {
+                "rss": 179748864,
+                "heapTotal": 83292160,
+                "heapUsed": 54317880,
+                "external": 3878959,
+                "arrayBuffers": 152702
+              }
+            },
+            {
+              "pid": 4715,
+              "memory": {
+                "rss": 177868800,
+                "heapTotal": 83554304,
+                "heapUsed": 45445056,
+                "external": 3843885,
+                "arrayBuffers": 117628
+              }
+            }
+          ]
+        },
+        "liveDiscordCertified": false
+      }
+    ],
+    "limitation": "Seven of eight new spells activated in this representative sample; Aerosol had zero. Individual Aerosol activation passed. Virtual fixture strengthened afterward, with no invented later result."
+  },
+  "firstBlockValidated": {
+    "mission": 15,
+    "baselineCommit": "2e21d40724341db91bb9a03e3500641fc46f9302",
+    "activeResolver": "engine-v7",
+    "experimentalResolver": "engine-v8",
+    "promotionApproved": false,
+    "cards": {
+      "certifiedBefore": 741,
+      "certifiedAfter": 741,
+      "distributionAllowed": 130,
+      "candidateDefinitionsImplemented": 8,
+      "newCardsCertified": 0
+    },
+    "preserved": {
+      "files": 253,
+      "historicalArchiveFiles": 238,
+      "sourceModulesV1toV7": 231,
+      "v7CatalogArtifacts": 8,
+      "reproducibleV8ClosureMatches": true
+    },
+    "validations": {
+      "baseline": {
+        "commit": "d6b73d10d03e801b41096b632cda42648a9aecd5",
+        "runId": 40629958472,
+        "bothJobs": "success",
+        "tests": 5178,
+        "failed": 0,
+        "todo": 0
+      },
+      "completeMainJob": {
+        "commit": "843a43ea2bb84de02c9d4455dd2eb6dc4c6982e9",
+        "runId": 40632450832,
+        "jobId": 122631736846,
+        "conclusion": "success",
+        "node": "v22.23.3",
+        "tests": 5221,
+        "failed": 0,
+        "todo": 0,
+        "nativeSQLite": true,
+        "typecheck": true,
+        "acceptance": true
+      },
+      "rea": {
+        "scenarios": 23,
+        "passed": 23,
+        "failed": 0,
+        "partialCoverage": 1,
+        "partial": "I02: absent historical zone epochs remain unrecoverable"
+      },
+      "local": {
+        "node": "v24.22.1",
+        "selectedTestsPassed": 57,
+        "diagnosticRegressionPassedSeparately": 1,
+        "typecheckAvailable": false,
+        "nativeSQLiteAvailable": false
+      },
+      "intermittentFailure": {
+        "commit": "1b925bb3f46f95fda0ae68c10670280517187427",
+        "runId": 40631948178,
+        "stage": "accept:engine after the complete 5203-test suite passed",
+        "cause": "not recovered: child-process error inspection truncated the failing TAP",
+        "status": "not reproduced by subsequent full acceptance; diagnostic preservation added, not claimed as a proven root-cause fix"
+      },
+      "latestHeadCaveat": "Validation applies to the commit explicitly named above. Consult the PR checks for later documentation/diagnostic commits; do not infer their success.",
+      "plannedTestTotalWithDiagnosticRegression": 5222
+    },
+    "benchmark": {
+      "node": "v22.23.3",
+      "resolver": "engine-v8",
+      "scope": "Internal: filtered six-monster mutation with minimal zone service, plus legal actions and a real phase transition; 50/100 interleaved resident fixtures, one process. No trigger/reward/SQLite/render/Discord timing.",
+      "hostingReference": {
+        "ramBytes": 2147483648,
+        "cpuPercent": 100,
+        "storageBytes": 8589934592
+      },
+      "gcAvailable": true,
+      "scenarios": [
+        {
+          "sessions": 50,
+          "operations": 500,
+          "destroyed": 3000,
+          "latencyMs": {
+            "p50": 0.15802700000000414,
+            "p95": 0.42488700000001245,
+            "p99": 0.6268589999999961,
+            "max": 3.424275999999992
+          },
+          "elapsedMs": 179.52761,
+          "cpuMicros": {
+            "user": 280753,
+            "system": 10172
+          },
+          "memory": {
+            "before": {
+              "rss": 79405056,
+              "heapTotal": 19005440,
+              "heapUsed": 9311096,
+              "external": 2363671,
+              "arrayBuffers": 16619
+            },
+            "after": {
+              "rss": 95260672,
+              "heapTotal": 30277632,
+              "heapUsed": 19789360,
+              "external": 1883967,
+              "arrayBuffers": 73979
+            }
+          }
+        },
+        {
+          "sessions": 100,
+          "operations": 1000,
+          "destroyed": 6000,
+          "latencyMs": {
+            "p50": 0.13427100000001246,
+            "p95": 0.2973049999999944,
+            "p99": 0.3978260000000091,
+            "max": 0.536202000000003
+          },
+          "elapsedMs": 274.90207999999996,
+          "cpuMicros": {
+            "user": 409219,
+            "system": 4979
+          },
+          "memory": {
+            "before": {
+              "rss": 95260672,
+              "heapTotal": 29491200,
+              "heapUsed": 11485552,
+              "external": 1883967,
+              "arrayBuffers": 24827
+            },
+            "after": {
+              "rss": 94519296,
+              "heapTotal": 31064064,
+              "heapUsed": 17244400,
+              "external": 1957695,
+              "arrayBuffers": 147707
+            }
+          }
+        }
+      ],
+      "liveDiscordCertified": false,
+      "capacityCertified": false
+    },
+    "sqliteStress": [
+      {
+        "scope": "isolated persistent 1v1/2v2 sessions; configurable SQLite writer processes; IPC/queue/transaction latency, excludes Discord and PNG",
+        "resolverVersions": [
+          "engine-v1",
+          "engine-v2",
+          "engine-v3",
+          "engine-v4",
+          "engine-v5",
+          "engine-v6",
+          "engine-v7",
+          "engine-v8"
+        ],
+        "mixedVersions": true,
+        "experimentalV8Included": true,
+        "v8Scope": "1v1 only; 2v2 remains on approved v7",
+        "simulatedPlayers": 150,
+        "sessions": 50,
+        "completed": 50,
+        "writerProcesses": 2,
+        "resolverLoading": "lazy",
+        "commits": 3316,
+        "duplicateDeliveries": 301,
+        "busyErrors": 1,
+        "rejectedInjectedOrInvalid": 2,
+        "writerRestarts": 1,
+        "integrity": "ok",
+        "foreignKeys": "ok",
+        "cardConservation": true,
+        "economyUnchanged": true,
+        "elapsedMs": 9882.556659,
+        "latencyMs": {
+          "p50": 25.81548500000008,
+          "p95": 103.82639700000027,
+          "p99": 176.9254219999998,
+          "max": 259.752078
+        },
+        "transactionMs": {
+          "p95": 6.945559999999205,
+          "max": 115.38944099999998
+        },
+        "cpu": {
+          "parent": {
+            "user": 7047504,
+            "system": 303003
+          },
+          "workers": [
+            {
+              "pid": 4233,
+              "cpu": {
+                "user": 407703,
+                "system": 41085
+              }
+            },
+            {
+              "pid": 4245,
+              "cpu": {
+                "user": 2466124,
+                "system": 178282
+              }
+            },
+            {
+              "pid": 4257,
+              "cpu": {
+                "user": 5481743,
+                "system": 283809
+              }
+            }
+          ]
+        },
+        "memory": {
+          "referenceBudgetBytes": 2147483648,
+          "peakAggregateSampledRSS": 596582400,
+          "withinReferenceBudget": true,
+          "sampling": "Sum of live writer RSS plus coordinator RSS at IPC responses/start/stop; shared pages counted per-process, short peaks may be missed; not a container/cgroup hard limit",
+          "before": {
+            "rss": 122753024,
+            "heapTotal": 56172544,
+            "heapUsed": 32072960,
+            "external": 3555403,
+            "arrayBuffers": 116614
+          },
+          "after": {
+            "rss": 212832256,
+            "heapTotal": 91418624,
+            "heapUsed": 58369432,
+            "external": 3882635,
+            "arrayBuffers": 127213
+          },
+          "peakObservedWriterRSS": 208617472,
+          "workers": [
+            {
+              "pid": 4233,
+              "memory": {
+                "rss": 158597120,
+                "heapTotal": 75427840,
+                "heapUsed": 48183184,
+                "external": 3850139,
+                "arrayBuffers": 123882
+              }
+            },
+            {
+              "pid": 4245,
+              "memory": {
+                "rss": 180981760,
+                "heapTotal": 81231872,
+                "heapUsed": 51079560,
+                "external": 3862010,
+                "arrayBuffers": 135753
+              }
+            },
+            {
+              "pid": 4257,
+              "memory": {
+                "rss": 197574656,
+                "heapTotal": 81719296,
+                "heapUsed": 45705824,
+                "external": 3860571,
+                "arrayBuffers": 134314
+              }
+            }
+          ]
+        },
+        "liveDiscordCertified": false
+      },
+      {
+        "scope": "isolated persistent 1v1/2v2 sessions; configurable SQLite writer processes; IPC/queue/transaction latency, excludes Discord and PNG",
+        "resolverVersions": [
+          "engine-v1",
+          "engine-v2",
+          "engine-v3",
+          "engine-v4",
+          "engine-v5",
+          "engine-v6",
+          "engine-v7",
+          "engine-v8"
+        ],
+        "mixedVersions": true,
+        "experimentalV8Included": true,
+        "v8Scope": "1v1 only; 2v2 remains on approved v7",
+        "simulatedPlayers": 300,
+        "sessions": 100,
+        "completed": 100,
+        "writerProcesses": 2,
+        "resolverLoading": "lazy",
+        "commits": 6837,
+        "duplicateDeliveries": 624,
+        "busyErrors": 8,
+        "rejectedInjectedOrInvalid": 2,
+        "writerRestarts": 1,
+        "integrity": "ok",
+        "foreignKeys": "ok",
+        "cardConservation": true,
+        "economyUnchanged": true,
+        "elapsedMs": 16561.890238,
+        "latencyMs": {
+          "p50": 51.21885999999995,
+          "p95": 175.18143499999996,
+          "p99": 261.5702490000001,
+          "max": 363.2535869999999
+        },
+        "transactionMs": {
+          "p95": 4.523952999999892,
+          "max": 113.030014
+        },
+        "cpu": {
+          "parent": {
+            "user": 12124645,
+            "system": 571107
+          },
+          "workers": [
+            {
+              "pid": 4284,
+              "cpu": {
+                "user": 636641,
+                "system": 65106
+              }
+            },
+            {
+              "pid": 4296,
+              "cpu": {
+                "user": 4743665,
+                "system": 407225
+              }
+            },
+            {
+              "pid": 4308,
+              "cpu": {
+                "user": 8675302,
+                "system": 540687
+              }
+            }
+          ]
+        },
+        "memory": {
+          "referenceBudgetBytes": 2147483648,
+          "peakAggregateSampledRSS": 595308544,
+          "withinReferenceBudget": true,
+          "sampling": "Sum of live writer RSS plus coordinator RSS at IPC responses/start/stop; shared pages counted per-process, short peaks may be missed; not a container/cgroup hard limit",
+          "before": {
+            "rss": 121696256,
+            "heapTotal": 56172544,
+            "heapUsed": 31886544,
+            "external": 3555403,
+            "arrayBuffers": 116614
+          },
+          "after": {
+            "rss": 193150976,
+            "heapTotal": 91377664,
+            "heapUsed": 52118920,
+            "external": 3874170,
+            "arrayBuffers": 125631
+          },
+          "peakObservedWriterRSS": 208465920,
+          "workers": [
+            {
+              "pid": 4284,
+              "memory": {
+                "rss": 159961088,
+                "heapTotal": 76214272,
+                "heapUsed": 44158400,
+                "external": 3857224,
+                "arrayBuffers": 130967
+              }
+            },
+            {
+              "pid": 4296,
+              "memory": {
+                "rss": 199270400,
+                "heapTotal": 82505728,
+                "heapUsed": 50569320,
+                "external": 3848215,
+                "arrayBuffers": 121958
+              }
+            },
+            {
+              "pid": 4308,
+              "memory": {
+                "rss": 174231552,
+                "heapTotal": 82505728,
+                "heapUsed": 47016016,
+                "external": 3852884,
+                "arrayBuffers": 126627
+              }
+            }
+          ]
+        },
+        "liveDiscordCertified": false
+      }
+    ],
+    "limits": {
+      "liveDiscordCertified": false,
+      "productionAuthorized": false,
+      "capacityCertified": false,
+      "starterPlus": {
+        "ramBytes": 2147483648,
+        "cpuPercent": 100,
+        "storageBytes": 8589934592
+      },
+      "v8TwoVsTwo": "not validated: candidate stress introduces v8 only into 1v1; 2v2 remains on v7",
+      "newCandidateAI": "not integrated; existing chooser behavior preserved",
+      "sources": "docs/evidence/mission15-card-research.json"
+    },
+    "resume": "docs/CHECKPOINT-MISSION-15.md"
+  },
+  "limits": {
+    "liveDiscordCertified": false,
+    "productionAuthorized": false,
+    "capacityCertified": false,
+    "hosting": {
+      "ramBytes": 2147483648,
+      "cpuPercent": 100,
+      "storageBytes": 8589934592
+    },
+    "cpuQuotaEmulated": false,
+    "renderingIncludedInStressLatency": false,
+    "officialPTNamesComplete": false
+  },
+  "resume": "docs/CHECKPOINT-MISSION-15.md",
+  "finalApproved": {
+    "commit": "2fc28f01b664fdd474b1e42cca08fddb6237af36",
+    "workflowRun": 40638667535,
+    "jobs": {
+      "test": {
+        "id": 122651443324,
+        "conclusion": "success"
+      },
+      "extendedSoak": {
+        "id": 122651443721,
+        "conclusion": "success"
+      }
+    },
+    "tests": {
+      "total": 5290,
+      "passed": 5290,
+      "failed": 0,
+      "todo": 0
+    },
+    "typecheck": true,
+    "build": true,
+    "nativeSQLite": true,
+    "historicalIntegrity": true,
+    "individualGate": true,
+    "rea": {
+      "scenarios": 23,
+      "passed": 23,
+      "failed": 0,
+      "partialCoverage": 1,
+      "partial": "I02"
+    },
+    "productionAuthorized": false
+  },
+  "familyStressFinal": {
+    "validatedCommit": "2fc28f01b664fdd474b1e42cca08fddb6237af36",
+    "workflowRun": 40638667535,
+    "reports": [
+      {
+        "scope": "isolated persistent 1v1/2v2 sessions; configurable SQLite writer processes; IPC/queue/transaction latency, excludes Discord and PNG",
+        "resolverVersions": [
+          "engine-v1",
+          "engine-v2",
+          "engine-v3",
+          "engine-v4",
+          "engine-v5",
+          "engine-v6",
+          "engine-v7",
+          "engine-v8"
+        ],
+        "mixedVersions": true,
+        "filteredSpells": true,
+        "filteredSpellActivationsByCard": {
+          "20101223": 2,
+          "21323861": 5,
+          "26725158": 8,
+          "56606928": 3,
+          "90330453": 6,
+          "90873992": 10,
+          "94716515": 2,
+          "95051344": 7
+        },
+        "v8Included": true,
+        "legacyCandidateFlag": false,
+        "v8Scope": "v8 is current for 2v2; mixed 1v1 includes all eight versions",
+        "simulatedPlayers": 150,
+        "sessions": 50,
+        "completed": 50,
+        "writerProcesses": 2,
+        "resolverLoading": "lazy",
+        "commits": 2143,
+        "duplicateDeliveries": 195,
+        "busyErrors": 4,
+        "rejectedInjectedOrInvalid": 2,
+        "writerRestarts": 1,
+        "integrity": "ok",
+        "foreignKeys": "ok",
+        "cardConservation": true,
+        "economyUnchanged": true,
+        "elapsedMs": 9069.496152,
+        "latencyMs": {
+          "p50": 31.03287999999975,
+          "p95": 140.7835240000004,
+          "p99": 294.1204939999998,
+          "max": 449.5550870000002
+        },
+        "transactionMs": {
+          "p95": 5.222765999999865,
+          "max": 124.70132100000006
+        },
+        "cpu": {
+          "parent": {
+            "user": 6124967,
+            "system": 275925
+          },
+          "workers": [
+            {
+              "pid": 4901,
+              "cpu": {
+                "user": 591490,
+                "system": 56218
+              }
+            },
+            {
+              "pid": 4913,
+              "cpu": {
+                "user": 2900156,
+                "system": 178322
+              }
+            },
+            {
+              "pid": 4926,
+              "cpu": {
+                "user": 2952081,
+                "system": 160387
+              }
+            }
+          ]
+        },
+        "memory": {
+          "referenceBudgetBytes": 2147483648,
+          "peakAggregateSampledRSS": 533221376,
+          "withinReferenceBudget": true,
+          "sampling": "Sum of live writer RSS plus coordinator RSS at IPC responses/start/stop; shared pages counted per-process, short peaks may be missed; not a container/cgroup hard limit",
+          "before": {
+            "rss": 124641280,
+            "heapTotal": 57282560,
+            "heapUsed": 33698968,
+            "external": 3555403,
+            "arrayBuffers": 116614
+          },
+          "after": {
+            "rss": 187609088,
+            "heapTotal": 81981440,
+            "heapUsed": 52329224,
+            "external": 3987465,
+            "arrayBuffers": 232043
+          },
+          "peakObservedWriterRSS": 185425920,
+          "workers": [
+            {
+              "pid": 4901,
+              "memory": {
+                "rss": 160268288,
+                "heapTotal": 75964416,
+                "heapUsed": 49171256,
+                "external": 3855442,
+                "arrayBuffers": 129185
+              }
+            },
+            {
+              "pid": 4913,
+              "memory": {
+                "rss": 180629504,
+                "heapTotal": 78573568,
+                "heapUsed": 50172104,
+                "external": 3857663,
+                "arrayBuffers": 131406
+              }
+            },
+            {
+              "pid": 4926,
+              "memory": {
+                "rss": 162562048,
+                "heapTotal": 76738560,
+                "heapUsed": 48697272,
+                "external": 3859426,
+                "arrayBuffers": 133169
+              }
+            }
+          ]
+        },
+        "liveDiscordCertified": false
+      },
+      {
+        "scope": "isolated persistent 1v1/2v2 sessions; configurable SQLite writer processes; IPC/queue/transaction latency, excludes Discord and PNG",
+        "resolverVersions": [
+          "engine-v1",
+          "engine-v2",
+          "engine-v3",
+          "engine-v4",
+          "engine-v5",
+          "engine-v6",
+          "engine-v7",
+          "engine-v8"
+        ],
+        "mixedVersions": true,
+        "filteredSpells": true,
+        "filteredSpellActivationsByCard": {
+          "20101223": 2,
+          "21323861": 11,
+          "26725158": 19,
+          "56606928": 11,
+          "90330453": 16,
+          "90873992": 16,
+          "94716515": 5,
+          "95051344": 11
+        },
+        "v8Included": true,
+        "legacyCandidateFlag": false,
+        "v8Scope": "v8 is current for 2v2; mixed 1v1 includes all eight versions",
+        "simulatedPlayers": 300,
+        "sessions": 100,
+        "completed": 100,
+        "writerProcesses": 2,
+        "resolverLoading": "lazy",
+        "commits": 4508,
+        "duplicateDeliveries": 412,
+        "busyErrors": 10,
+        "rejectedInjectedOrInvalid": 2,
+        "writerRestarts": 1,
+        "integrity": "ok",
+        "foreignKeys": "ok",
+        "cardConservation": true,
+        "economyUnchanged": true,
+        "elapsedMs": 14867.086553000001,
+        "latencyMs": {
+          "p50": 50.6323169999996,
+          "p95": 221.3065120000001,
+          "p99": 392.22230500000023,
+          "max": 598.9694650000001
+        },
+        "transactionMs": {
+          "p95": 3.7303210000000036,
+          "max": 149.49749500000001
+        },
+        "cpu": {
+          "parent": {
+            "user": 11216998,
+            "system": 539452
+          },
+          "workers": [
+            {
+              "pid": 4951,
+              "cpu": {
+                "user": 784818,
+                "system": 76954
+              }
+            },
+            {
+              "pid": 4963,
+              "cpu": {
+                "user": 5364453,
+                "system": 351190
+              }
+            },
+            {
+              "pid": 4975,
+              "cpu": {
+                "user": 4503308,
+                "system": 264478
+              }
+            }
+          ]
+        },
+        "memory": {
+          "referenceBudgetBytes": 2147483648,
+          "peakAggregateSampledRSS": 571494400,
+          "withinReferenceBudget": true,
+          "sampling": "Sum of live writer RSS plus coordinator RSS at IPC responses/start/stop; shared pages counted per-process, short peaks may be missed; not a container/cgroup hard limit",
+          "before": {
+            "rss": 122060800,
+            "heapTotal": 58593280,
+            "heapUsed": 28109720,
+            "external": 3555402,
+            "arrayBuffers": 116613
+          },
+          "after": {
+            "rss": 188989440,
+            "heapTotal": 85807104,
+            "heapUsed": 51376168,
+            "external": 3882273,
+            "arrayBuffers": 126851
+          },
+          "peakObservedWriterRSS": 195104768,
+          "workers": [
+            {
+              "pid": 4951,
+              "memory": {
+                "rss": 161767424,
+                "heapTotal": 76750848,
+                "heapUsed": 52328216,
+                "external": 3857320,
+                "arrayBuffers": 131063
+              }
+            },
+            {
+              "pid": 4963,
+              "memory": {
+                "rss": 184971264,
+                "heapTotal": 81981440,
+                "heapUsed": 50680656,
+                "external": 3887811,
+                "arrayBuffers": 161554
+              }
+            },
+            {
+              "pid": 4975,
+              "memory": {
+                "rss": 189890560,
+                "heapTotal": 80932864,
+                "heapUsed": 48254264,
+                "external": 3958780,
+                "arrayBuffers": 232523
+              }
+            }
+          ]
+        },
+        "liveDiscordCertified": false
+      }
+    ],
+    "allEightSpellsActivatedInBothSamples": true
+  },
+  "benchmarkFinal": {
+    "node": "v22.23.3",
+    "resolver": "engine-v8",
+    "scope": "Internal: filtered six-monster mutation with minimal zone service, plus legal actions and a real phase transition; 50/100 interleaved resident fixtures, one process. No trigger/reward/SQLite/render/Discord timing.",
+    "hostingReference": {
+      "ramBytes": 2147483648,
+      "cpuPercent": 100,
+      "storageBytes": 8589934592
+    },
+    "gcAvailable": true,
+    "scenarios": [
+      {
+        "sessions": 50,
+        "operations": 500,
+        "destroyed": 3000,
+        "latencyMs": {
+          "p50": 0.3362769999999955,
+          "p95": 0.715172999999993,
+          "p99": 1.1138760000000048,
+          "max": 5.0652919999999995
+        },
+        "elapsedMs": 328.61121,
+        "cpuMicros": {
+          "user": 476440,
+          "system": 12412
+        },
+        "memory": {
+          "before": {
+            "rss": 79560704,
+            "heapTotal": 18743296,
+            "heapUsed": 9340528,
+            "external": 2370542,
+            "arrayBuffers": 16619
+          },
+          "after": {
+            "rss": 94687232,
+            "heapTotal": 29753344,
+            "heapUsed": 19034440,
+            "external": 1883967,
+            "arrayBuffers": 73979
+          }
+        }
+      },
+      {
+        "sessions": 100,
+        "operations": 1000,
+        "destroyed": 6000,
+        "latencyMs": {
+          "p50": 0.2789109999999937,
+          "p95": 0.5377320000000054,
+          "p99": 0.6661419999999225,
+          "max": 0.9148959999999988
+        },
+        "elapsedMs": 491.68044900000007,
+        "cpuMicros": {
+          "user": 675162,
+          "system": 5014
+        },
+        "memory": {
+          "before": {
+            "rss": 94818304,
+            "heapTotal": 29491200,
+            "heapUsed": 11503728,
+            "external": 1883967,
+            "arrayBuffers": 24827
+          },
+          "after": {
+            "rss": 94494720,
+            "heapTotal": 31064064,
+            "heapUsed": 17011192,
+            "external": 1957695,
+            "arrayBuffers": 147707
+          }
+        }
+      }
+    ],
+    "liveDiscordCertified": false,
+    "capacityCertified": false
+  },
+  "extendedSoak": {
+    "scope": "bounded mixed v1-v7 persistent single-process soak; not a long-duration leak proof or Discord load",
+    "requestedSeconds": 600,
+    "elapsedMs": 601316.7130580001,
+    "cohorts": 609,
+    "completed": 5481,
+    "commits": 325367,
+    "duplicates": 19139,
+    "versions": [
+      "engine-v1",
+      "engine-v2",
+      "engine-v3",
+      "engine-v4",
+      "engine-v5",
+      "engine-v6",
+      "engine-v7",
+      "engine-v8"
+    ],
+    "cpuMicros": {
+      "user": 1016025252,
+      "system": 30977550
+    },
+    "memory": {
+      "gcAvailable": true,
+      "peakObservedRSS": 239656960,
+      "first": {
+        "elapsedMs": 1298.022403,
+        "cohorts": 1,
+        "completed": 9,
+        "rss": 195969024,
+        "heapUsed": 38903984,
+        "databaseBytes": 450560,
+        "walBytes": 4136512
+      },
+      "last": {
+        "elapsedMs": 600623.771777,
+        "cohorts": 609,
+        "completed": 5481,
+        "rss": 219103232,
+        "heapUsed": 45673400,
+        "databaseBytes": 206815232,
+        "walBytes": 4177712
+      },
+      "samplesRecorded": 609
+    },
+    "latencyMs": {
+      "p95": 2.5818599999984144,
+      "p99": 4.759980999981053,
+      "max": 327.09995000000345
+    },
+    "integrity": "ok",
+    "foreignKeys": "ok",
+    "cardConservation": true,
+    "economyUnchanged": true,
+    "liveDiscordCertified": false,
+    "fullSamplesArtifact": "mixed-version-extended-soak: artifacts/mixed-version-soak-mission6.json in CI 40638667535"
+  },
+  "operationalRisks": [
+    "Bounded 600-second memory test is not proof of day-long stability",
+    "Synthetic soak database reached approximately 197 MiB; design non-destructive retention/archive and disk monitoring before sustained release",
+    "Discord/Sharp/OS memory and real transport latency are not covered by these samples",
+    "Rare earlier acceptance failure root cause not recovered; subsequent acceptances passed and complete diagnostics are now retained"
+  ]
+}

@@ -1,3 +1,5 @@
+import {getPlayableCard} from './effectRegistry';
+import {rulesCardName} from './cardIdentity';
 import {RULES_PROFILE} from './rulesProfile';
 import {db,getPlayer,getCollection,grantStarterCards} from './database';
 import {getCard} from './collection';
@@ -22,11 +24,14 @@ export function validateDeck(items:DeckItem[],owned:DeckItem[]) {
  if(total<RULES_PROFILE.mainDeckMin||total>RULES_PROFILE.mainDeckMax)errors.push(`Use 20 a 30 cartas (atual: ${total}).`);
  for(const item of items){
   const card=getCard(item.card_key);const have=owned.find(c=>c.card_key===item.card_key)?.quantity??0;
-  if(!card)errors.push(`Carta fora do catálogo: ${item.card_key}.`);
+  if(!card||!getPlayableCard(item.card_key))errors.push(`Carta fora do catálogo: ${item.card_key}.`);
   if(seen.has(item.card_key))errors.push(`Carta repetida em registros separados: ${item.card_key}.`);seen.add(item.card_key);
   if(!Number.isInteger(item.quantity)||item.quantity<1||item.quantity>RULES_PROFILE.copiesPerCard)errors.push(`Máximo de 3 cópias por carta: ${card?.name??item.card_key}.`);
   if(item.quantity>have)errors.push(`Você possui apenas ${have} cópia(s) de ${card?.name??item.card_key}.`);
  }
+ const byRulesName=new Map<string,number>();
+ for(const item of items){const c=getCard(item.card_key);if(!c||!Number.isInteger(item.quantity)||item.quantity<1)continue;const name=rulesCardName(c);byRulesName.set(name,(byRulesName.get(name)??0)+item.quantity);}
+ for(const [name,amount]of byRulesName)if(amount>RULES_PROFILE.copiesPerCard)errors.push(`Máximo de 3 cópias somando cartas tratadas como ${name}.`);
  return {total,extraTotal,errors};
 }
 function rawDeck(owner:string,slot:number):Deck {
@@ -57,7 +62,7 @@ export const openDeck=db.transaction((owner:string,slot=1):Deck=>{
 function revisionCheck(deck:Deck,expected?:number){if(expected!==undefined&&expected!==deck.revision)throw new Error('Esse painel ficou antigo. Clique em Atualizar antes de editar.');}
 export const changeDeck=db.transaction((owner:string,slot:number,cardId:string,delta:number,expected?:number):Deck=>{
  const deck=openDeck(owner,slot);revisionCheck(deck,expected);
- if(!getCard(cardId))throw new Error('Escolha uma carta do catálogo.');
+ if(!getPlayableCard(cardId))throw new Error('Escolha uma carta do catálogo.');
  if(!Number.isInteger(delta)||delta===0||Math.abs(delta)>3)throw new Error('Altere de 1 a 3 cópias por vez.');
  const quantity=(deck.items.find(c=>c.card_key===cardId)?.quantity??0)+delta;
  if(quantity<0)throw new Error('Não há essa quantidade no deck.');

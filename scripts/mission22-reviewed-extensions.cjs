@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');
+const ids=["91782219","65393205","77454922","30243636","05405694","33951077","31890399","76792184","30208479","43694075","39399168","99721536","69123138","55761792","81756897","76806714","49064413","94377247","81933259","04849037","90844184","80811661","78577570","62337487","41182875","03627449","54539105","26932788","31066283","43417563"];
+function strip(file,bytes){let text=bytes.toString('utf8');const once=part=>{assert.equal(text.split(part).length,2,'M22 reviewed occurrence '+file);text=text.replace(part,'');};
+ if(file==='src/cardMetadata.ts'&&text.includes("import {ritualExtensions22}")){once("import {ritualExtensions22} from './ritualExtensions22';\n");once(',...ritualExtensions22');}
+ if(file==='src/cardCertifications.ts'){const current=JSON.parse(text.slice(text.indexOf('={')+1,text.lastIndexOf('};')+1)),extra=['54351224','59820352','69035382'];if(extra.some(id=>Object.hasOwn(current,id))){assert.ok(extra.every(id=>Object.hasOwn(current,id)));const added=Object.fromEntries(extra.map(id=>[id,current[id]]));for(const c of Object.values(added)){assert.deepEqual(Object.keys(c).sort(),['fingerprint','suites']);assert.match(c.fingerprint,/^[a-f0-9]{64}$/);assert.deepEqual(c.suites,['tests/ritualExtensions22.test.cjs']);}once('\n,'+JSON.stringify(added,null,2).slice(1,-1));}}
+ if(file==='src/cardCatalog.ts'&&text.includes("'fusion'|'ritual'"))once("|'ritual'");
+ if(file==='src/cardMetadata.ts'&&text.includes("import {ritualBatch22}")){once("import {ritualBatch22} from './ritualBatch22';\n");once(',...ritualBatch22');}
+ if(file==='src/cardCertifications.ts'){const current=JSON.parse(text.slice(text.indexOf('={')+1,text.lastIndexOf('};')+1));if(ids.some(id=>Object.hasOwn(current,id))){assert.ok(ids.every(id=>Object.hasOwn(current,id)));const added=Object.fromEntries(ids.map(id=>[id,current[id]]));for(const c of Object.values(added)){assert.deepEqual(Object.keys(c).sort(),['fingerprint','suites']);assert.match(c.fingerprint,/^[a-f0-9]{64}$/);assert.deepEqual(c.suites,['tests/ritualBatch22.test.cjs']);}once('\n,'+JSON.stringify(added,null,2).slice(1,-1));}}
+ return Buffer.from(text,'utf8');
+}
+module.exports={strip,ids};

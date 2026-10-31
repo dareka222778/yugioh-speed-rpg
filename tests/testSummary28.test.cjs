@@ -1,0 +1,4 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{parseSummary}=require('../scripts/test-summary28.cjs');
+const report=counts=>Object.entries({tests:10,suites:0,pass:9,fail:1,cancelled:0,skipped:0,todo:0,...counts}).map(([k,v])=>'<!-- '+k+' '+v+' -->').join('\n');
+test('CI summary preserves failing, skipped, cancelled and TODO counters',()=>{assert.deepEqual(parseSummary(report({pass:6,fail:1,cancelled:1,skipped:1,todo:1})),{tests:10,suites:0,pass:6,fail:1,cancelled:1,skipped:1,todo:1});});
+test('CI summary rejects truncated, duplicate and unsafe counters instead of reporting success',()=>{for(const raw of ['',report().replace('<!-- fail 1 -->',''),report()+'<!-- tests 10 -->',report().replace('tests 10','tests 999999999999999999999999')])assert.throws(()=>parseSummary(raw));});

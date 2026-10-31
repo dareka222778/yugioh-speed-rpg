@@ -1,0 +1,12 @@
+{
+  "scope": "M29: destruction by highest current combat stat and by monster position",
+  "historicalCutoff": "2004-09-30",
+  "certificateBlockSHA256": "b18f98d157f7dd25e8f07a14b81c5ab3f1ab04c0017ab535a673e58e4651d5fb",
+  "releaseBlockSHA256": "94f2f279442e0c520ba9e99e5eb00a558aa5fbc278df1cff3e9a31d90426518a",
+  "suite": "tests/destructionBatch29.test.cjs",
+  "cards": [
+    {"id":"26412047","konamiId":6130,"englishName":"Hammer Shot","firstObservedWorld":"2004-05-27","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6130&request_locale=en","fullEffectReviewed":true,"rule":"highest current ATK, Attack Position, either controller, choice on tied resolution, no activation target"},
+    {"id":"97169186","konamiId":5905,"englishName":"Smashing Ground","firstObservedWorld":"2004-03-01","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5905&request_locale=en","fullEffectReviewed":true,"rule":"highest current DEF, opposing face-up, choice on tied resolution, no activation target"},
+    {"id":"30683373","konamiId":6003,"englishName":"Shield Crush","firstObservedWorld":"2004-03-11","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6003&request_locale=en","fullEffectReviewed":true,"rule":"target 1 monster in Defense Position, both fields, including facedown; target remains eligible at resolution"}
+  ]
+}

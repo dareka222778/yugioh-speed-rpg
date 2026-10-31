@@ -1,0 +1,5 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{execFileSync}=require('node:child_process');
+const root=path.resolve(__dirname,'..'),sha=execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim();if(!/^[a-f0-9]{40}$/.test(sha))throw Error('Exact checkout required');
+const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),files={};
+function walk(folder){for(const ent of fs.readdirSync(folder,{withFileTypes:true})){const file=path.join(folder,ent.name);if(ent.isDirectory())walk(file);else if(ent.name!=='build-provenance.json')files[path.relative(path.join(root,'dist'),file).replaceAll('\\','/')]=hash(file);}}
+walk(path.join(root,'dist'));const stamp={sha,indexSha256:hash(path.join(root,'dist/index.js')),files,lockfileSha256:hash(path.join(root,'package-lock.json'))};fs.writeFileSync(path.join(root,'dist/build-provenance.json'),JSON.stringify(stamp,null,2)+'\n');console.log(JSON.stringify({sha,compiledFiles:Object.keys(files).length}));

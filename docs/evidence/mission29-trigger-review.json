@@ -1,0 +1,190 @@
+{
+  "format": 1,
+  "batch": "trigger29",
+  "cards": [
+    {
+      "id": "73431236",
+      "konamiId": 5769,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5769&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "5fab6fc3f1301664cca3e203bf4f2c5e35a37d7ca596a8ee9d3c6c1c260c19cf",
+      "htmlSHA256": "d2ff2dbb6b5a4846ceaa72573d6b2f863e9a18f26cb57d1f881365a7030d7915",
+      "verifiedPrinting": {
+        "date": "2003-12-01",
+        "code": "DCR-064"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5769&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "57617178",
+      "konamiId": 4929,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4929&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "99a5b9ff57158699c5f500bc19d9bb25aa67f9faa4e63bba3f98342e6392576b",
+      "htmlSHA256": "4e90310a5399a31be88f96c3c675192626f19099751407a829d1164b2002c94b",
+      "verifiedPrinting": {
+        "date": "2002-09-16",
+        "code": "MRL-093"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4929&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "23401839",
+      "konamiId": 4916,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4916&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "6e7fcf2dcb0c6fdb6817c1098594f1021827f49dd6a6ab174998a4f025800552",
+      "htmlSHA256": "34f386427ff5036107fa3db88015a6ad2db3ef94800f5e4ded3848e5eb4c0854",
+      "verifiedPrinting": {
+        "date": "2002-09-16",
+        "code": "MRL-080"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4916&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "95492061",
+      "konamiId": 5900,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5900&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "17a9db61683e4b3d65ac1253fca17011791b0e3cde3fec54a7eabd352eed5978",
+      "htmlSHA256": "0adc03f4f05093b51a88053c8f92e633d803293d280d4758ca1d737c59e055a0",
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "code": "IOC-088"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5900&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "77207191",
+      "konamiId": 4755,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4755&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "c3fd07624b88624029de6b9b84af3ddf1720d855630782bd5230fe0fe5b853f7",
+      "htmlSHA256": "93230273488da2835e8c15a5877430ae6afe033300c27d2316316b0d286d428a",
+      "verifiedPrinting": {
+        "date": "2000-12-07",
+        "code": "G4-B1"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4755&request_locale=ja",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "85489096",
+      "konamiId": 5703,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5703&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "aee1bf412970cd3543571894a73e4793257bdce2e208750da686bb4937d8a9d8",
+      "htmlSHA256": "dd612f6c1c02f3fb314159f1afded245ccf77cb1fe092f5db16df632423e046f",
+      "verifiedPrinting": {
+        "date": "2003-12-01",
+        "code": "DCR-004"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5703&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "50712728",
+      "konamiId": 5510,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5510&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "5e2c8b89e8bd4e6a1ff9bf8c656654b6ddf3e2ed56a65838000ad4e6ca56ee85",
+      "htmlSHA256": "cef16a39d25fcb59f40f339cf7493ef96bdfa6e15a1c013b0f062ab6982a314c",
+      "verifiedPrinting": {
+        "date": "2003-07-18",
+        "code": "PGD-060"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5510&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "30914564",
+      "konamiId": 5883,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5883&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "9e2e2c45d4f3591b5bce84831f44d117e56b364f46d8bd63ffff60b45b0cd89c",
+      "htmlSHA256": "cf15b9ed19197b20d726312cfa80bd7a557afe8134595c229914ecc1d8e886b4",
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "code": "IOC-069"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5883&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "81843628",
+      "konamiId": 4568,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4568&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "cca97d222034d662f7379fc8ec70ee92204d0bcbe7ab1e3d52cd5f12b790cb33",
+      "htmlSHA256": "1486d64c726803447558eda62f0906b3fc6236881085966f6a83e58eba7520d4",
+      "verifiedPrinting": {
+        "date": "2003-03-01",
+        "code": "TP3-001"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4568&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "50122883",
+      "konamiId": 4777,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4777&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "34b1204a2ffa1a560e8ea768e20ecc3d66b0fd4e4ca4e27bae72dee0f061e016",
+      "htmlSHA256": "db4a756d48c11c4363e4338cc279936d2e1a7dc85e32f7b86afc6fd17c763d36",
+      "verifiedPrinting": {
+        "date": "2002-10-20",
+        "code": "PSV-080"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4777&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "13409151",
+      "konamiId": 6030,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6030&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "3c137d1b69c6c697b947e5bb9de2108e610412200fba190a861cac774d0f1320",
+      "htmlSHA256": "1cb031ea29d626b4edd2e95e9cc4653572e53972cd4140ae7373050549e4ca78",
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "code": "AST-068"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6030&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    },
+    {
+      "id": "42647539",
+      "konamiId": 5307,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5307&request_locale=en",
+      "retrieved": "2026-10-29",
+      "fullEffectReviewed": true,
+      "textSHA256": "9ade908e21d680ede2eb7f79fa4f5965f2219756d7b018d0e676c10881105e66",
+      "htmlSHA256": "dc3a52d59a91b775417442da1181b78f1bc2aaad0d94c214ade7e403ebda8e97",
+      "verifiedPrinting": {
+        "date": "2003-06-06",
+        "code": "LOD-007"
+      },
+      "printingSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5307&request_locale=en",
+      "reviewStatus": "full-text-reviewed-public-engine-tests-passed"
+    }
+  ],
+  "certificateBlock": "\n,\n  \"13409151\": {\n    \"fingerprint\": \"e9e88de31315ff7f994ea4f20e98f199c48d057a64aff4b711f1e178c15bbca6\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"23401839\": {\n    \"fingerprint\": \"a3a2dddbe921ff53f9c27c5187e0707ad7dd7aa6528ecb31deb6b3553e7a9d24\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"30914564\": {\n    \"fingerprint\": \"f8f6283776b5e113e8121e1a52596c68b21474109fb957f9c73eeedfef85d4af\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"42647539\": {\n    \"fingerprint\": \"375b6506149b7e652ec701ffde05c9f0fddaf7a1c301aa30d6ed7ee1433e4826\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"50122883\": {\n    \"fingerprint\": \"d111eca8c9c4d8530bbec689ef51052d50ca4bea2a1d52e0baed98685c4b8337\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"50712728\": {\n    \"fingerprint\": \"7587a2cc4932027dad91305ac95df4fd52f7e4b31d810ec1ccdbada3fc7d37d3\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"57617178\": {\n    \"fingerprint\": \"1c968e7b3a08d44bb1a8b889bee9919ce8d482ea5f5be79c253bfaf97d75cd03\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"73431236\": {\n    \"fingerprint\": \"e923325e487312f490186894df0e8cee97fff3306780d1daafb60a50762bc037\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"77207191\": {\n    \"fingerprint\": \"2b268cdda921062eca111aa67c8c43fda3ebced95f5da796be0fc969b311acef\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"81843628\": {\n    \"fingerprint\": \"b29b4edb0bb59e9612cc148eaff8fbe117a8829cc00e60f1d1989db1b7adf3a3\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"85489096\": {\n    \"fingerprint\": \"a234ddf9e5a2113b06cbad6499400b4a93e79fd33ca54480ccd77d9c0793bd82\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  },\n  \"95492061\": {\n    \"fingerprint\": \"99951ccf257df70fe1e3d96a64d235d2b3c0a05d4bed778a40d534b07d907cf3\",\n    \"suites\": [\n      \"tests/triggerBatch29.test.cjs\"\n    ]\n  }\n",
+  "releaseBlock": "// M29 triggers: 12 individually tested cards; no inventory grants.\n  \"73431236\",\n  \"57617178\",\n  \"23401839\",\n  \"95492061\",\n  \"77207191\",\n  \"85489096\",\n  \"50712728\",\n  \"30914564\",\n  \"81843628\",\n  \"50122883\",\n  \"13409151\",\n  \"42647539\",\n",
+  "certificateBlockSHA256": "2ad3f301d9d357f2b5f62081adaff96b8b16e8030fa4b049bd6892fd995da312",
+  "releaseBlockSHA256": "0dbed1f616469b57945f7cd4433b3d49dd07bb6099a145b3e6b28d447a8e31b9"
+}

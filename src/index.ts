@@ -1,9 +1,9 @@
-import {RULES_PROFILE,RULES_VERSION} from './rulesProfile';
-const RELEASE_VERSION:string=require('../package.json').version;
+import 'dotenv/config';
+import {runtimeStatusLine,runtimePingText} from './runtimeStatus';
+import {RULES_PROFILE} from './rulesProfile';
 import {createTagLobby,createTagTraining,runTagBots,currentTag,getTag,setTagMessage,markTagPublished,dueTags,type TagRecord} from './tagStore';
 import {visualTagPublic,visualTagPrivate,visualTagCard,tagZonesMessage,visualTagZoneCard,tagPublicMessage,tagPrivateMessage} from './tagUI';
 import {handleTagComponent} from './tagInteraction';
-import 'dotenv/config';
 import {simulateTag,tagSimulationMessage} from './tagSimulation';
 import {helpMessage} from './commandUI';
 import {renderOwnedCard} from './cardInspector';
@@ -186,14 +186,14 @@ async function handleInteraction(i:Interaction) {
         await i.editReply(await visualNPCLobby(id,Date.now(),target,panel as GalleryView,Number(selected)));return;
       }
       if(action!=='challenge'&&action!=='daily')throw new Error('Desafio inválido. Use /npc ver.');
-      await deferReply();const r=createNPCDuel(id,i.guildId,i.channelId,npcId,action==='daily');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
+      await deferReply();const r=createNPCDuel(id,i.guildId,i.channelId,npcId,action==='daily');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id,r.revision);return;
     }
     if(i.isChatInputCommand()&&i.commandName==='npc'){
       if(!i.guildId||!i.channelId)throw new Error('Abra os desafios dentro de um servidor.');const action=i.options.getSubcommand();
       await deferReply(action==='ver'?{flags:MessageFlags.Ephemeral}:{});
       if(action==='ver'){await i.editReply(await visualNPCLobby(id));return;}
       if(action!=='desafiar'&&action!=='diario')throw new Error('Desafio inválido. Use /npc ver.');
-      const r=createNPCDuel(id,i.guildId,i.channelId,action==='diario'?'':i.options.getString('duelista',true),action==='diario');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
+      const r=createNPCDuel(id,i.guildId,i.channelId,action==='diario'?'':i.options.getString('duelista',true),action==='diario');const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id,r.revision);return;
     }
     if((i.isButton()||i.isStringSelectMenu())&&i.customId.startsWith('duel:')){
       await handleDuelComponent(i,{refreshArena,privatePayload,onDefer:kind=>{acknowledgment=kind;}});return;
@@ -205,7 +205,7 @@ async function handleInteraction(i:Interaction) {
         let r:DuelRecord;
         if(action==='treino'||action==='treino_fusao'||action==='laboratorio')r=createTraining(id,i.guildId,i.channelId,action!=='treino');
         else{const other=i.options.getUser('oponente',true);if(other.bot)throw new Error('Para enfrentar o bot, use /duelo treino.');r=challenge(id,other.id,i.guildId,i.channelId);}
-        const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id);return;
+        const message=await i.editReply(await arenaPayload(r));setDuelMessage(r.id,message.channelId,message.id,r.revision);return;
       }
       const r=currentDuel(id);if(!r||r.guild_id!==i.guildId)throw new Error('Você não tem duelo ativo neste servidor. Use /duelo treino ou /duelo desafiar.');
       if(action==='sair'){if(r.status==='pending'){const closed=declineChallenge(r.id,id,i.guildId);await i.editReply({content:'Convite cancelado.'});await refreshArena(closed);}else await i.editReply(quitMessage(r));return;}
@@ -257,7 +257,7 @@ async function handleInteraction(i:Interaction) {
         else if(action==='inicial')fillInitialDeck(id,slot);
         await i.editReply(await visualDeckMessage(id,slot,1,selected));return;
       }
-      if (i.commandName === 'ping') { await i.reply({ content: `🏓 Pong! Versão ${RELEASE_VERSION} • 130 cartas habilitadas • ${RULES_PROFILE.name} • mão ${RULES_PROFILE.handLimit}, descarte na Fase Final • Adicional ${RULES_PROFILE.extraDeckMax}.`, flags: MessageFlags.Ephemeral }); return; }
+      if (i.commandName === 'ping') { await i.reply({ content: runtimePingText(), flags: MessageFlags.Ephemeral }); return; }
       if (i.commandName === 'start') {
         const player = createPlayer(id, i.user.username);
         if (player.starter_deck) { grantStarterCards(id); await deferReply({ flags: MessageFlags.Ephemeral }); await i.editReply(await profileMessage(player, avatar)); return; }
@@ -368,7 +368,7 @@ async function handleInteraction(i:Interaction) {
   }
 }
 async function main() {
- console.log(`Release ${RELEASE_VERSION} | regras ${RULES_VERSION} | mão ${RULES_PROFILE.handLimit}, descarte na Fase Final | Adicional ${RULES_PROFILE.extraDeckMax} | 130 cartas | 1v1 e 2v2`);
+ console.log(runtimeStatusLine());
   if(await backupPendingStarterGrants()) console.log('Fase 2: backup de segurança do banco concluído.');
   console.log(`Fase 2: ${grantLegacyStarters()} conjunto(s) inicial(is) entregue(s).`);
   const inventoryAudit=db.prepare('SELECT COALESCE(SUM(quantity),0) AS total FROM player_cards WHERE quantity > 0').get() as {total:number};

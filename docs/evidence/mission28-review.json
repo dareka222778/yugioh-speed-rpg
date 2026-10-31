@@ -1,0 +1,103 @@
+{
+  "format": 1,
+  "reviewDate": "2026-10-29",
+  "baseCommit": "efd7575cab373d24b36633649d2b775fa70c74f6",
+  "baselineCertified": 832,
+  "certificateBlock": "  \"38699854\":{\"fingerprint\":\"8495bd6e655a7a842da721db2a4caf7f488d3cf906d28ed6daaa60aa6f11deaa\",\"suites\":[\"tests/mechanicalBatch28.test.cjs\"]},\n  \"63102017\":{\"fingerprint\":\"26fc43396ac74f0f6692cd59cbd24c757517ef0c89630e2e09d5aabe3ce84468\",\"suites\":[\"tests/mechanicalBatch28.test.cjs\"]},\n  \"93747864\":{\"fingerprint\":\"bdd313088a0f3ddfcba87770bdf8595c3481bbd3b5cc8c7b8da95ea9db9325aa\",\"suites\":[\"tests/mechanicalBatch28.test.cjs\"]},\n  \"45895206\":{\"fingerprint\":\"a95cd75eea615f2d3668d844a04db8c8fb160d78c25eee910f5e4cc4ef3c38ef\",\"suites\":[\"tests/mechanicalBatch28.test.cjs\"]},\n  \"96947648\":{\"fingerprint\":\"3576b4f88d74afc380b37e0590202ff4924d8c55c152c205f242ee76c761fe7b\",\"suites\":[\"tests/mechanicalBatch28.test.cjs\"]},\n  \"90928333\":{\"fingerprint\":\"d6231659d7d9372011d8395a558ba09a85b216788ec0981a57d382a57e2ea0fd\",\"suites\":[\"tests/mechanicalBatch28.test.cjs\"]}\n",
+  "certificateBlockSHA256": "6af401a1c15d8752bed6e42a486a78ab5333dba68c82796e8e1f3828c6239866",
+  "releaseBlock": "  // M28: owner-authorized, individually certified cohort.\n  \"38699854\",\n  \"63102017\",\n  \"93747864\",\n  \"45895206\",\n  \"96947648\",\n  \"90928333\",\n",
+  "releaseAuthorization": "Owner M28: all individually certified cards. No inventory grants.",
+  "timingSource": "https://www.yugioh-card.com/en/play/fast-effect-timing/",
+  "cards": [
+    {
+      "id": "38699854",
+      "konamiId": 5431,
+      "name": "Book of Taiyou",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5431&request_locale=en",
+      "fullEffectReviewed": true,
+      "officialText": "Target 1 face-down monster on the field; change that target to face-up Attack Position.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2003-07-18",
+        "set": "PGD-034",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5431&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "63102017",
+      "konamiId": 4326,
+      "name": "Stop Defense",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4326&request_locale=en",
+      "fullEffectReviewed": true,
+      "officialText": "Target 1 Defense Position monster your opponent controls; change that target to Attack Position.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2002-03-08",
+        "set": "LOB-095",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4326&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "93747864",
+      "konamiId": 6068,
+      "name": "Desert Sunlight",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6068&request_locale=en",
+      "fullEffectReviewed": true,
+      "officialText": "All monsters on your side of the field are changed to face-up Defense Position.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2004-06-01",
+        "set": "AST-106",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6068&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "45895206",
+      "konamiId": 4356,
+      "name": "Dark-Piercing Light",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4356&request_locale=en",
+      "fullEffectReviewed": true,
+      "officialText": "Flip all face-down monsters on your opponent's side of the field face-up.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2002-12-20",
+        "set": "MP1-015",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4356&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "96947648",
+      "konamiId": 5908,
+      "name": "Salvage",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5908&request_locale=en",
+      "fullEffectReviewed": true,
+      "officialText": "Target 2 WATER monsters with 1500 or less ATK in your GY; add those targets to your hand.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2004-03-01",
+        "set": "IOC-096",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5908&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "90928333",
+      "konamiId": 6129,
+      "name": "Dark Factory of Mass Production",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6129&request_locale=en",
+      "fullEffectReviewed": true,
+      "officialText": "Target 2 Normal Monsters in your GY; add them to your hand.",
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "2004-05-27",
+        "set": "SOD-JP037",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6129&request_locale=ja"
+      },
+      "firstPublicationClaim": false
+    }
+  ]
+}
