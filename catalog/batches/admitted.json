@@ -44,6 +44,10 @@
     {
       "id": "m35-newdoria-battle-target",
       "proofSHA256": "c4a9b89a2bccd8892da6f24c4f5219d7c370982c0b8484387688017d180ff386"
+    },
+    {
+      "id": "m35-conditional-direct-attacks",
+      "proofSHA256": "f60dfc71e9cbc0421facda16bec966fac6bb16a5a7aed1114287c084d844c828"
     }
   ]
 }

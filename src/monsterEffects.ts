@@ -8,6 +8,7 @@ import {monsters as m32_activation_restrictionsMonsters} from './generated/m32-a
 import {monsters as m32_optional_trigger_lpMonsters} from './generated/m32-optional-trigger-lp';
 import {monsters as m34_summon_trap_lockMonsters} from './generated/m34-summon-trap-lock';
 import {monsters as m35_newdoria_battle_targetMonsters} from './generated/m35-newdoria-battle-target';
+import {monsters as m35_conditional_direct_attacksMonsters} from './generated/m35-conditional-direct-attacks';
 import {conditionalMonsters30} from './conditionalBatch30';
 import {triggerMonsters29} from './triggerBatch29';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -71,6 +72,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...m35_conditional_direct_attacksMonsters,
  ...m35_newdoria_battle_targetMonsters,
  ...m34_summon_trap_lockMonsters,
  ...m32_optional_trigger_lpMonsters,
