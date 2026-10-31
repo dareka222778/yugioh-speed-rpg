@@ -1,6 +1,6 @@
 /** Declarative combat vocabulary, separate from card identity and UI. */
 export type CombatRule=
- |{kind:'direct'}
+ |{kind:'direct';condition?:'defenseOnly'|'faceUpMinAtk';minimumAtk?:number}
  |{kind:'piercing'}
  |{kind:'attacks';maximum:2}
  |{kind:'damage';mode:'zero'|'double';when:'battle'|'direct'|'defending'}
@@ -10,7 +10,11 @@ export type CombatRule=
 export function combatRuleIssues(value:unknown):string[]{
  if(!value||typeof value!=='object'||Array.isArray(value))return ['invalid-combat-rule'];
  const r=value as CombatRule,k=Object.keys(r),keys=(allowed:string[])=>k.every(key=>allowed.includes(key));
- if(r.kind==='direct')return keys(['kind'])?[]:['invalid-direct-attack'];
+ if(r.kind==='direct')return keys(['kind','condition','minimumAtk'])&&(
+  r.condition===undefined&&r.minimumAtk===undefined||
+  r.condition==='defenseOnly'&&r.minimumAtk===undefined||
+  r.condition==='faceUpMinAtk'&&Number.isSafeInteger(r.minimumAtk)&&r.minimumAtk! >= 0
+ )?[]:['invalid-direct-attack'];
  if(r.kind==='piercing')return keys(['kind'])?[]:['invalid-piercing-rule'];
  if(r.kind==='attacks')return keys(['kind','maximum'])&&r.maximum===2?[]:['invalid-attack-count'];
  if(r.kind==='damage')return keys(['kind','mode','when'])&&(r.mode==='zero'&&r.when==='battle'||r.mode==='double'&&['direct','defending'].includes(r.when))?[]:['invalid-battle-damage-rule'];
@@ -20,7 +24,7 @@ export function combatRuleIssues(value:unknown):string[]{
  return ['unknown-combat-rule'];
 }
 export function combatRuleText(r:CombatRule):string{
- if(r.kind==='direct')return 'Pode atacar diretamente mesmo se o oponente controlar monstros.';
+ if(r.kind==='direct')return r.condition==='defenseOnly'?'Pode atacar diretamente se o oponente controlar apenas monstros em Defesa, sem outras cartas no campo.':r.condition==='faceUpMinAtk'?`Pode atacar diretamente se o oponente controlar apenas monstros com a face para cima e ATK atual de ${r.minimumAtk} ou mais, sem outras cartas no campo.`:'Pode atacar diretamente mesmo se o oponente controlar monstros.';
  if(r.kind==='piercing')return 'Causa dano de batalha perfurante ao atacar um monstro em Defesa.';
  if(r.kind==='attacks')return 'Pode declarar até dois ataques nesta Fase de Batalha; um ataque negado também consome uma declaração.';
  if(r.kind==='attackLP')return `Exige pagar ${r.amount} PV para declarar cada ataque.`;

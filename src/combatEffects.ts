@@ -2,8 +2,24 @@ import {getMonsterEffect} from './monsterEffects';
 import {monsterEffectsNegated} from './continuousEffects';
 import type {DuelState,Monster} from './duelEngine';
 import {getDuelCard} from './effectRegistry';
-import {continuousCombatRules} from './continuousEffects';
-export function canAttackDirectly(s:DuelState,m:Monster):boolean{return getMonsterEffect(m.id)?.operation.kind==='directAttack'&&!monsterEffectsNegated(s,m.uid)||continuousCombatRules(s,m).some(x=>x.rule.kind==='direct');}
+import {continuousCombatRules,continuousModifier} from './continuousEffects';
+/** The defender-only and high-ATK clauses inspect *every* opposing card, not
+ * just monsters, and use public current ATK at declaration time. */
+function opposingCardsMeetDirectCondition(s:DuelState,m:Monster,rule:Extract<import('./combatRules').CombatRule,{kind:'direct'}>):boolean{
+ if(!rule.condition)return true;
+ const controller=s.players.findIndex(p=>p.monsters.some(x=>x.uid===m.uid));if(controller<0)return false;
+ const opponent=s.players[1-controller];
+ if(opponent.backrow.length||opponent.field)return false;
+ if(rule.condition==='defenseOnly')return opponent.monsters.every(x=>x.position==='def');
+ return opponent.monsters.every(x=>{
+  if(!x.faceUp)return false;
+  const info=getDuelCard(x.id);if(!info)return false;
+  const base=x.swappedUntil===s.turn?info.defense:info.atk;
+  const attack=Math.max(0,(base??0)+x.atkBoost+continuousModifier(s,x,'atk'));
+  return attack>=(rule.minimumAtk??Number.MAX_SAFE_INTEGER);
+ });
+}
+export function canAttackDirectly(s:DuelState,m:Monster):boolean{return getMonsterEffect(m.id)?.operation.kind==='directAttack'&&!monsterEffectsNegated(s,m.uid)||continuousCombatRules(s,m).some(x=>x.rule.kind==='direct'&&opposingCardsMeetDirectCondition(s,m,x.rule));}
 export function attackAllowance(s:DuelState,m:Monster):number{return Math.max(1,...continuousCombatRules(s,m).flatMap(x=>x.rule.kind==='attacks'?[x.rule.maximum]:[]));}
 export function attacksDeclared(s:DuelState,m:Monster):number{return m.attacked===s.turn?(m.attackCount??1):0;}
 export function attackLPCost(s:DuelState,m:Monster):number{return continuousCombatRules(s,m).reduce((n,x)=>n+(x.rule.kind==='attackLP'?x.rule.amount:0),0);}
