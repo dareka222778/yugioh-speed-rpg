@@ -959,4 +959,21 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "50259460",
   "99426834",
   "30451366",
+// Generated batch m38-classic-fusions: explicit tested release; zero inventory grants.
+  "89112729",
+  "02504891",
+  "27134689",
+  "86164529",
+  "41462083",
+// Generated batch m39-battle-effects: explicit tested release; zero inventory grants.
+  "13945283",
+  "54878498",
+  "98162242",
+  "52768103",
+  "78658564",
+  "73698349",
+  "31553716",
+  "62340868",
+  "98434877",
+  "25955164",
 ]);

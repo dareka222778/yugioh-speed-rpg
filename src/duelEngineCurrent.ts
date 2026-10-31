@@ -34,7 +34,7 @@ import {spellActions,persistentModifier,resolveClassicSpell,discardBackrow,clean
 import {specialSummonFromPile} from './monsterEntry';
 import {fusionMaterialsMatch} from './fusionMaterials';
 export type CardRef={uid:string;id:string;properlySummoned?:boolean;entityKind?:'token';tokenPolicy?:TokenPolicy};
-export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;lastSummonedTurn?:number;changed:number;attacked:number;attackCount?:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number};
+export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;lastSummonedTurn?:number;changed:number;attacked:number;attackCount?:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number;positionLockedThrough?:number;guardianUsed?:boolean};
 export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean;equippedTo?:string};
 export type DuelPlayer={id:string;name:string;lp:number;deck:CardRef[];hand:CardRef[];monsters:Monster[];backrow:Backrow[];grave:CardRef[];extra?:CardRef[];field?:Backrow|null;banished?:CardRef[];summoned:boolean;battleProtectedUntil?:number;battleDamageGuard?:{turn:number;attacker:string}};
 export type Action=
@@ -46,7 +46,7 @@ export type Action=
  |{kind:'monsterEffect';card:string;discards:string[];tributes?:string[];target?:string}
  |{kind:'choose';target:string}|{kind:'discard';card:string}
  |{kind:'battle'|'end'|'pass'|'concede'};
-export type Pending=( {kind:'standby';actor:number;card:string;taskId:string;choiceId:string}|{kind:'monsterEffect';actor:number;card:string;id:string;target?:string;targets?:string[];targetBindings?:TargetBinding[]}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;targets?:string[];targetBindings?:TargetBinding[];position?:'atk'|'def'})&{targetBinding?:TargetBinding};
+export type Pending=( {kind:'standby';actor:number;card:string;taskId:string;choiceId:string}|{kind:'monsterEffect';actor:number;card:string;id:string;target?:string;targets?:string[];targetBindings?:TargetBinding[]}|{kind:'summon'|'flip'|'specialSummon';actor:number;card:string;id?:string;triggersQueued?:boolean}|{kind:'field';actor:number;card:string}|{kind:'fusion';actor:number;card:string;extra:string;materials:string[];position:'atk'|'def'}|{kind:'none'|'end'|'battle'}|{kind:'attack';actor:number;card:string;target?:string;stage:'declare'|'damage'|'calculation';defenders?:string[];replaying?:boolean;cancelled?:boolean;endBattle?:boolean;zeroedAttacker?:boolean}|{kind:'spell';actor:number;card:string;id:string;target?:string;targets?:string[];targetBindings?:TargetBinding[];position?:'atk'|'def'})&{targetBinding?:TargetBinding};
 export type TriggerEvent={actor:number;card:string;id:string;targets?:string[];targetBindings?:TargetBinding[]};
 export type DuelState={version:1;movementSelection?:MovementSelection;afterEffectFlips?:Extract<Pending,{kind:'attack'}>;effectFlips?:Array<TriggerEvent&{binding:TargetBinding}>;ritual?:RitualFlow;resolverVersion?:ResolverVersion;catalogRevision?:string;continuousState?:ContinuousState;standby?:StandbyFlow;tokenLedger?:TokenLedger;cardLifetimes?:Record<string,CardLifetime>;teamRotation?:TeamRotation;rulesVersion?:RulesVersion;handFlow?:HandFlow;cardDefinitionsVersion?:typeof CARD_DEFINITIONS_VERSION;random?:DuelRandom;encounter?:{npcId:string;eventDay?:string};reward?:{dp:number;xp:number;cards:string[];first:boolean;daily:boolean;note:string};fixedOpening?:boolean;players:[DuelPlayer,DuelPlayer];turn:number;current:number;phase:'main'|'battle'|'response'|'choice'|'discard'|'finished';resume:'main'|'battle';priority:number;passes:number;pending:Pending;pendingNegated?:boolean;chain:ChainLink[];choice?:{actor:number;targets:string[];effectName?:string;source?:'monsterRecruitPosition'|'selectedMovement'|'multiTarget'|'ritual'|'standby'|'triggerOptional'|'triggerOrder'|'triggerGroup'|'triggerTarget'|'attackReplay'|'monsterDestroy'|'monsterTarget'|'monsterSearch'|'monsterRecruit'|'extremeDestroy'};turnEnding?:boolean;damageStep?:boolean;triggerBuild?:{events:TriggerEvent[];selected?:TriggerEvent};chainRoot?:Pending;afterMonsterEffect?:Pending;graveTriggers?:{actor:number;card:string;id:string}[];summonTriggers?:{actor:number;card:string;id:string}[];monsterNameUsed?:[Record<string,number>,Record<string,number>];blockedEffectNames?:[Record<string,number>,Record<string,number>];battleFlip?:{actor:number;card:string;id:string};winner:string|null;reason:string;log:string[]};
 export const IMPLEMENTED_DUEL_CARDS:readonly string[]=enabledCardIds;
@@ -214,7 +214,10 @@ function quickMonsterActions(s:DuelState,index:number):Action[]{
  const attacking=findMonster(s,s.pending.card);
  if(!attacking?.m.faceUp||attacking.p!==s.players[s.pending.actor])return [];
  if(s.pending.target&&!findMonster(s,s.pending.target))return [];
- return s.players[index].hand.filter(c=>getMonsterDefinition(c.id)?.activation.window==='opposingDamageCalculation'&&getMonsterEffect(c.id)?.operation.kind==='battleShield'&&!effectNameBlocked(s,index,c.id)).map(c=>({kind:'monsterEffect',card:c.uid,discards:[c.uid]}));
+ const hand:Action[]=s.players[index].hand.filter(c=>getMonsterDefinition(c.id)?.activation.window==='opposingDamageCalculation'&&getMonsterEffect(c.id)?.operation.kind==='battleShield'&&!effectNameBlocked(s,index,c.id)).map(c=>({kind:'monsterEffect',card:c.uid,discards:[c.uid]}));
+ const attackTarget=s.pending.target;
+ const guardian:Action[]=attackTarget?s.players[index].monsters.filter(m=>m.uid===attackTarget&&m.faceUp&&!m.guardianUsed&&getMonsterEffect(m.id)?.operation.kind==='guardianZeroAttack'&&!monsterEffectsNegated(s,m.uid)&&!effectNameBlocked(s,index,m.id)).map(m=>({kind:'monsterEffect',card:m.uid,discards:[],target:attacking.m.uid})):[];
+ return [...hand,...guardian];
 }
 function protectedBattleDamage(s:DuelState,index:number,attacker:string):boolean{
  const p=s.players[index];return p.battleProtectedUntil===s.turn||p.battleDamageGuard?.turn===s.turn&&p.battleDamageGuard.attacker===attacker;
@@ -258,7 +261,7 @@ export function legalActions(s:DuelState,actor:string):Action[]{
     }
    }
   }
-  for(const m of p.monsters)if(m.entered<s.turn&&m.changed<s.turn&&m.attacked<s.turn)actions.push({kind:'position',card:m.uid,mode:!m.faceUp?'flip':m.position==='atk'?'def':'atk'});
+  for(const m of p.monsters)if(m.entered<s.turn&&m.changed<s.turn&&m.attacked<s.turn&&(m.positionLockedThrough??0)<s.turn)actions.push({kind:'position',card:m.uid,mode:!m.faceUp?'flip':m.position==='atk'?'def':'atk'});
   if(s.turn>1)actions.push({kind:'battle'});
  }else if(s.phase==='battle'){
   for(const m of p.monsters)if(m.faceUp&&m.position==='atk'&&attacksDeclared(s,m)<attackAllowance(s,m)&&p.lp>attackLPCost(s,m)&&continuousAttackAllowed(s,m)){
@@ -341,6 +344,14 @@ function response(s:DuelState,pending:Pending,resume:'main'|'battle',priority=1-
 }
 
 function endTurn(s:DuelState){
+ // This response originated from ending the Battle Phase, not Main Phase.
+ // Effects changing position at this boundary are applied before end-turn cleanup.
+ if(s.resume==='battle')for(const m of s.players[s.current].monsters){
+  if(m.attacked===s.turn&&m.faceUp&&getMonsterEffect(m.id)?.operation.kind==='endBattleDefense'&&!monsterEffectsNegated(s,m.uid)){
+   m.position='def';m.changed=s.turn;m.positionLockedThrough=s.turn+2;
+   note(s,`${card(m.id).name} passou para Defesa até o fim do próximo turno de seu controlador.`);
+  }
+ }
  s.phase='main';s.resume='main';
  for(const p of s.players)for(const m of [...p.monsters]){m.atkBoost=0;m.defBoost=0;if(m.returnTo!==undefined&&m.returnTurn===s.turn){const target=s.players[m.returnTo];if(target!==p){if(target.monsters.length<RULES_PROFILE.monsterZones){p.monsters=p.monsters.filter(c=>c.uid!==m.uid);target.monsters.push(m);}else graveMonster(s,m.uid);}delete m.returnTo;delete m.returnTurn;}}
  s.turnEnding=true;
@@ -457,6 +468,7 @@ function resolve(s:DuelState){
   if(link.monsterEffect){
    const operation=getMonsterEffect(link.id)?.operation;
    if(operation?.kind==='battleShield'&&s.pending.kind==='attack'&&s.pending.stage==='calculation'&&s.pending.actor!==link.actor){s.players[link.actor].battleDamageGuard={turn:s.turn,attacker:s.pending.card};note(s,'Kuriboh impediu o dano deste combate.');}
+   else if(operation?.kind==='guardianZeroAttack'&&s.pending.kind==='attack'&&s.pending.stage==='calculation'&&s.pending.target===link.card&&s.pending.card===link.target&&findMonster(s,link.card)?.m.faceUp){s.pending.zeroedAttacker=true;note(s,`${card(link.id).name} reduziu o ATK do atacante a zero somente neste cálculo de dano.`);}
    else {const root=s.pending;resolveMonsterPending(s,{kind:'monsterEffect',actor:link.actor,card:link.card,id:link.id,...link.target?{target:link.target}:{},...link.targets?{targets:link.targets,targetBindings:link.targetBindings}:{}},true);if((s as DuelState).phase==='choice')s.chainRoot=root;}
    return;
   }
@@ -590,11 +602,29 @@ function resolve(s:DuelState){
   const opponent=s.players[1-pending.actor];
   if(!pending.target&&opponent.monsters.length&&!canAttackDirectly(s,a))return;
   if(pending.target&&!defender)return;
-  const outcome=combatOutcome(s,pending.actor,a,defender?.m,{attack:atk,defense:def,protected:protectedBattleDamage});
+  const bounce=!!defender&&getMonsterEffect(defender.m.id)?.operation.kind==='battleBounceAttacker'&&!monsterEffectsNegated(s,defender.m.uid);
+  const burn=getMonsterEffect(a.id)?.operation.kind==='battleLevelBurn'&&!monsterEffectsNegated(s,a.uid);
+  const targetLevel=defender?card(defender.m.id).level??0:0;
+  const outcome=combatOutcome(s,pending.actor,a,defender?.m,{attack:(m,state)=>pending.zeroedAttacker&&m.uid===pending.card?0:atk(m,state),defense:def,protected:protectedBattleDamage});
   for(const uid of outcome.destroy)graveMonster(s,uid,true);
   for(let player=0;player<2;player++)s.players[player].lp=Math.max(0,s.players[player].lp-outcome.damage[player]);
   note(s,defender?`${card(a.id).name} enfrentou ${card(defender.m.id).name}. Diferença: ${Math.abs(outcome.difference)}.`:`Ataque direto: ${outcome.damage[1-pending.actor]} de dano.`);
   checkLP(s);
+  if((s as DuelState).phase!=='finished'){
+   // A battle-destruction trigger remains eligible even if its source was
+   // also destroyed in that same damage calculation.
+   if(burn&&defender&&outcome.destroy.includes(defender.m.uid)&&s.players.some(p=>p.grave.some(c=>c.uid===defender.m.uid))){
+    const amount=targetLevel*500;s.players[1-pending.actor].lp=Math.max(0,s.players[1-pending.actor].lp-amount);note(s,`${card(a.id).name} causou ${amount} de dano pelo Nível do monstro destruído.`);checkLP(s);
+   }
+   if(bounce&&findMonster(s,a.uid)){
+    const found=findMonster(s,a.uid)!;
+    if(found.m.entityKind==='token'){removeToken(s,a.uid,'return');}
+    else {const owner=found.m.owner??s.players.indexOf(found.p);found.p.monsters=found.p.monsters.filter(m=>m.uid!==a.uid);if(card(a.id).fusion)s.players[owner].extra=[...s.players[owner].extra??[],{uid:a.uid,id:a.id}];else s.players[owner].hand.push({uid:a.uid,id:a.id});}
+    cleanEquips(s);note(s,`${card(defender!.m.id).name} devolveu o atacante ao dono após o cálculo de dano.`);
+   }
+   const survivor=findMonster(s,a.uid)?.m;
+   if(survivor&&survivor.faceUp&&getMonsterEffect(survivor.id)?.operation.kind==='endDamageDefensePiercing'&&!monsterEffectsNegated(s,survivor.uid)){survivor.position='def';survivor.changed=s.turn;note(s,`${card(survivor.id).name} passou para Defesa ao fim da Etapa de Dano.`);}
+  }
   // FLIP effects revealed by battle are activated after damage calculation,
   // including when the defending monster was destroyed in that battle.
   const flip=s.battleFlip;s.battleFlip=undefined;
@@ -660,6 +690,10 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
    note(s,`${p.name} descartou ${card(held.id).name} para ativar seu efeito rápido.`);
   }else{
   const m=p.monsters.find(m=>m.uid===action.card)!;const e=getMonsterEffect(m.id)!;
+  if(e.trigger==='quick'&&e.operation.kind==='guardianZeroAttack'){
+   if(s.pending.kind!=='attack'||s.pending.stage!=='calculation'||!m.faceUp||m.guardianUsed||action.target!==s.pending.card||s.pending.target!==m.uid||monsterEffectsNegated(s,m.uid))throw new Error('Guarda de combate indisponível.');
+   m.guardianUsed=true;s.chain.push({actor:index,card:m.uid,id:m.id,target:action.target,monsterEffect:true});s.passes=0;s.priority=1-index;note(s,`${p.name} ativou ${card(m.id).name} durante o cálculo de dano.`);
+  }else{
   const sourceUid=m.uid,sourceId=m.id;
   const cost=payMonsterEffectCost(e,{lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,fieldMonsterCount:p.monsters.length,usedThisTurn:m.effectUsedTurn===s.turn});
   if(action.discards.length!==cost.cardsDiscarded||new Set(action.discards).size!==action.discards.length)throw new Error('Custo de descarte inválido.');
@@ -672,6 +706,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   for(const uid of tributes)graveMonster(s,uid,false,'tribute');
   note(s,`Efeito de ${card(sourceId).name} ativado: custos pagos.`);
   response(s,{kind:'monsterEffect',actor:index,card:sourceUid,id:sourceId,...action.target?{target:action.target}:{}},'main');
+  }
   }
  }else if(action.kind==='summon'){
   const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);for(const uid of action.tributes)graveMonster(s,uid,false,'tribute');

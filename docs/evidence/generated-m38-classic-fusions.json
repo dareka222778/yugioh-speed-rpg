@@ -1,0 +1,48 @@
+{
+  "format": 1,
+  "batchId": "m38-classic-fusions",
+  "baseRevision": "cc6539b7be7ba13a1d2c770e383c4c77182fd4dfd298ef8d5576bbf27818c840",
+  "batchSHA256": "76b1ddf8dd8b147c7412176562c3ac42f01b8e6043804f5959009b4dc64d00aa",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m38_classic_fusionsCards} from './generated/m38-classic-fusions';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m38_classic_fusionsEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m38_classic_fusionsEffects} from './generated/m38-classic-fusions';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"27134689\": {\n    \"fingerprint\": \"28035653468d5dae710c70b29820987db2d13aa11bc3e3171b1c371734c93998\",\n    \"suites\": [\n      \"tests/generated-m38-classic-fusions.test.cjs\"\n    ]\n  },\n  \"41462083\": {\n    \"fingerprint\": \"4d6817af095cb589369f26d28e3c9aed2fef807c8e850a650a2f3e2e4085364a\",\n    \"suites\": [\n      \"tests/generated-m38-classic-fusions.test.cjs\"\n    ]\n  },\n  \"86164529\": {\n    \"fingerprint\": \"9a20d93e179446860df408d87f61ee604741dbd0be5d4093b4c99cfe7897e290\",\n    \"suites\": [\n      \"tests/generated-m38-classic-fusions.test.cjs\"\n    ]\n  },\n  \"89112729\": {\n    \"fingerprint\": \"0d9261fa2328506988220862276b78abf6ad97ed49a682ea12e184ac48efde4b\",\n    \"suites\": [\n      \"tests/generated-m38-classic-fusions.test.cjs\"\n    ]\n  },\n  \"02504891\": {\n    \"fingerprint\": \"45905ea3fde243d72e0d895d20bdf61742785c56637dfa15c11fff2b27310bad\",\n    \"suites\": [\n      \"tests/generated-m38-classic-fusions.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m38-classic-fusions: explicit tested release; zero inventory grants.\n  \"89112729\",\n  \"02504891\",\n  \"27134689\",\n  \"86164529\",\n  \"41462083\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "89112729",
+    "02504891",
+    "27134689",
+    "86164529",
+    "41462083"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

@@ -56,6 +56,14 @@
     {
       "id": "m37-fusion-substitutes",
       "proofSHA256": "2e502f3377f98fd05e0d5220dc4f1e34340c3570144e3cf0bc2d7a2c14ca3b9d"
+    },
+    {
+      "id": "m38-classic-fusions",
+      "proofSHA256": "9950d4cea0409de49b3c3317e1f824ec22b3365061b9a5237285114cf60081db"
+    },
+    {
+      "id": "m39-battle-effects",
+      "proofSHA256": "6a6254d54cd82f777a243308272d34f7e00f73c0142ee963d7a60ba5dab3a263"
     }
   ]
 }

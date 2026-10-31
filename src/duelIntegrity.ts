@@ -102,6 +102,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
      if(info.kind!=='monster'||typeof c.faceUp!=='boolean'||(c.position!=='atk'&&c.position!=='def')||!integer(c.entered)||!integer(c.changed)||!integer(c.attacked)||!integer(c.atkBoost,Number.MIN_SAFE_INTEGER)||!integer(c.defBoost,Number.MIN_SAFE_INTEGER))fail('monstro inválido');
      if(c.owner!==undefined&&!actor(c.owner)||c.returnTo!==undefined&&!actor(c.returnTo))fail('proprietário do monstro');
      if(c.attackCount!==undefined&&(!integer(c.attackCount,1)||Number(c.attackCount)>1000||!integer(c.attacked,1)))fail('contador de ataques');
+     if(c.positionLockedThrough!==undefined&&!integer(c.positionLockedThrough,1)||c.guardianUsed!==undefined&&typeof c.guardianUsed!=='boolean')fail('marcadores de efeito de batalha');
      if((c.returnTo===undefined)!==(c.returnTurn===undefined)||c.returnTurn!==undefined&&(!integer(c.returnTurn,1)||c.returnTurn!==s.turn))fail('prazo de devolução do controle');
     }
     if(zone==='backrow'&&(info.kind==='monster'||!integer(c.setTurn)||typeof c.faceUp!=='boolean'))fail('Magia/Armadilha inválida');

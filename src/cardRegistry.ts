@@ -14,7 +14,7 @@ function canonical(value:unknown):string{
  return JSON.stringify(value);
 }
 export function definitionFingerprint(c:Card,e:Effect,context:DefinitionContext):string{
- const mechanical={id:c.id,kind:c.kind,monsterType:c.monsterType,level:c.level,atk:c.atk,defense:c.defense,race:c.race,attribute:c.attribute,field:c.field,fusion:c.fusion,alwaysTreatedAs:c.alwaysTreatedAs,archetypes:c.archetypes};
+ const mechanical={id:c.id,kind:c.kind,monsterType:c.monsterType,level:c.level,atk:c.atk,defense:c.defense,race:c.race,attribute:c.attribute,field:c.field,fusion:c.fusion,alwaysTreatedAs:c.alwaysTreatedAs,archetypes:c.archetypes,excludedArchetypes:c.excludedArchetypes};
  return createHash('sha256').update(canonical({card:mechanical,effect:e,monster:context.monster?.(c.id),model:context.model?.(e.kind)})).digest('hex');
 }
 const trapKinds=new Set<Effect['kind']>(['reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce']);
@@ -34,6 +34,7 @@ export function buildCardRegistry(catalog:readonly Card[],definitions:Readonly<R
    if(!Number.isSafeInteger(c.level)||c.level!<1||c.level!>12||!Number.isSafeInteger(c.atk)||c.atk!<0||!Number.isSafeInteger(c.defense)||c.defense!<0||!c.race||!c.attribute)issues.push('invalid-monster-stats');
    if(c.monsterType==='fusion'&&!c.fusion?.length||c.monsterType!=='fusion'&&c.fusion)issues.push('invalid-fusion-category');
   }
+  if(c.excludedArchetypes!==undefined&&(!Array.isArray(c.excludedArchetypes)||!c.excludedArchetypes.length||new Set(c.excludedArchetypes).size!==c.excludedArchetypes.length||c.excludedArchetypes.some(a=>typeof a!=='string'||!a.trim())))issues.push('invalid-archetype-exclusion');
   if(!effect)issues.push('missing-definition');else issues.push(...effectDefinitionIssues(effect));
   if(effect?.kind==='continuous'){const a=effect.activation;if(!a||a.damage!=='never'||(c.kind==='trap'?(a.speed!==2||a.window!=='free'):(c.kind!=='spell'||a.speed!==1||a.window!=='main')))issues.push('unsupported-continuous-activation');}
   else if(effect?.kind==='conditionalDestruction'){

@@ -8,6 +8,6 @@ export function namedCard(card:Pick<Card,'englishName'|'alwaysTreatedAs'>,name:s
  return rulesCardName(card)===name;
 }
 /** Archetype markers are additive (e.g. Black Skull Dragon is an Archfiend card). */
-export function archetypeCard(card:Pick<Card,'englishName'|'alwaysTreatedAs'|'archetypes'>,archetype:string):boolean{
- return !!card.archetypes?.includes(archetype)||rulesCardName(card).includes(archetype);
+export function archetypeCard(card:Pick<Card,'englishName'|'alwaysTreatedAs'|'archetypes'|'excludedArchetypes'>,archetype:string):boolean{
+ return !card.excludedArchetypes?.includes(archetype)&&(!!card.archetypes?.includes(archetype)||rulesCardName(card).includes(archetype));
 }

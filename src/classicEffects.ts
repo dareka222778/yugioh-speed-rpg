@@ -81,6 +81,7 @@ export function turnMonsterFaceDown(m:Monster):void{
  if(m.entityKind==='token')throw new Error('Fichas não podem ficar com a face para baixo.');
  m.faceUp=false;m.position='def';m.atkBoost=0;m.defBoost=0;
  delete m.swappedUntil;delete m.effectUsedTurn;
+ delete m.guardianUsed;
 }
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{
  const e=getEffect(a.id),p=s.players[a.actor],op=s.players[1-a.actor];if(!e)return false;

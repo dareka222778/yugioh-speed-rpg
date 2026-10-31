@@ -5480,5 +5480,99 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "27134689": {
+    "fingerprint": "28035653468d5dae710c70b29820987db2d13aa11bc3e3171b1c371734c93998",
+    "suites": [
+      "tests/generated-m38-classic-fusions.test.cjs"
+    ]
+  },
+  "41462083": {
+    "fingerprint": "4d6817af095cb589369f26d28e3c9aed2fef807c8e850a650a2f3e2e4085364a",
+    "suites": [
+      "tests/generated-m38-classic-fusions.test.cjs"
+    ]
+  },
+  "86164529": {
+    "fingerprint": "9a20d93e179446860df408d87f61ee604741dbd0be5d4093b4c99cfe7897e290",
+    "suites": [
+      "tests/generated-m38-classic-fusions.test.cjs"
+    ]
+  },
+  "89112729": {
+    "fingerprint": "0d9261fa2328506988220862276b78abf6ad97ed49a682ea12e184ac48efde4b",
+    "suites": [
+      "tests/generated-m38-classic-fusions.test.cjs"
+    ]
+  },
+  "02504891": {
+    "fingerprint": "45905ea3fde243d72e0d895d20bdf61742785c56637dfa15c11fff2b27310bad",
+    "suites": [
+      "tests/generated-m38-classic-fusions.test.cjs"
+    ]
+  }
+
+,
+  "13945283": {
+    "fingerprint": "fc2330a67fd775eb843950f28389402bf1f51f2808568a9a9344dc530aa67b24",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  },
+  "25955164": {
+    "fingerprint": "3f881bea3056170387ec5f01833b46b28ca94a071e2aeda58292ad2bf2733b9b",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  },
+  "31553716": {
+    "fingerprint": "4beeae05f78f2d5425432d3d82ab632d4ac5a420aeac7f1e1f774177ae3dd16b",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  },
+  "52768103": {
+    "fingerprint": "644c7e071320b6f46bb3b9bb4f5496cc0b32b6f147666555be5cc8c619455080",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  },
+  "54878498": {
+    "fingerprint": "a3dd98d4ae60f7592a41aa11ef4f46cf50cceef8ace8f164f0a3232e1b630b91",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  },
+  "62340868": {
+    "fingerprint": "08e15f507b10d1aed854e84e35c487cb457696c8a689fffd36ce44bcb30d0f99",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  },
+  "73698349": {
+    "fingerprint": "ba9bb5683853ef458031731444346fb0f1d61849171634c2c993ccd216b5746a",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  },
+  "78658564": {
+    "fingerprint": "1810dd7c2f197d6b51dd39ca12a837ee06b9f170d3791026a0e1d301ed638cd4",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  },
+  "98162242": {
+    "fingerprint": "e300d058ce878543e5c58920191a4bee4038a31bb3c09369dbecf6cd38bdcd0a",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  },
+  "98434877": {
+    "fingerprint": "24fc90274290d5714caec6420f7d64f9a44350f66a0c58348f22d5af8f7aadce",
+    "suites": [
+      "tests/generated-m39-battle-effects.test.cjs"
+    ]
+  }
+
 
 };
