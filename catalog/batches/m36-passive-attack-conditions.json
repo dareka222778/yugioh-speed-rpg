@@ -1,0 +1,2304 @@
+{
+  "format": 1,
+  "batchId": "m36-passive-attack-conditions",
+  "engineVersion": "engine-v9",
+  "baseRevision": "e6fc4b029f0aec2bfab5b2b36d5518ef4bf816d625baf65a0ed42c3436dec09b",
+  "candidates": [
+    {
+      "card": {
+        "id": "80233946",
+        "konamiId": 5411,
+        "name": "Tartaruga Gora",
+        "englishName": "Gora Turtle",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Aqua",
+        "attribute": "WATER",
+        "level": 3,
+        "atk": 1100,
+        "defense": 1100,
+        "summary": "Enquanto esta carta estiver com a face para cima no campo, monstros com 1900 ou mais de ATK não podem declarar ataques.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5411&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "preventAttack",
+                "filter": {
+                  "controller": "both",
+                  "minimumCurrentAtk": 1900
+                },
+                "declarationOnly": true
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "continuous-attack-conditions",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:continuous",
+        "continuous:preventAttack"
+      ],
+      "textEvidence": {
+        "text": "As long as this card remains face-up on the field, monsters with an ATK equal to 1900 or more cannot declare an attack. The persistent, face-up source is required; the effect is disabled by monster-effect negation. Attack declarations are validated against current field state. Previous declared attacks are not retroactively cancelled. The threshold applies to both players using current ATK, including modifications; 1899 ATK can attack and 1900 ATK cannot.",
+        "sha256": "5adc5318d6b2ed2b7a39faf64a20d27f7b50e8c7646d5a0806c4e907d7d15cf3",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5411&request_locale=en"
+      },
+      "scenarios": [
+        "attacking-high-atk",
+        "weak-monster-allowed",
+        "face-down-source",
+        "dynamic-current-atk",
+        "dynamic-threshold-block"
+      ],
+      "cases": {
+        "negative": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "ghost"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "turtle"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2900
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "turtle"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2900
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "strong"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "turtle"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2900
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "strong"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 1000
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "strong",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "strong"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 1000
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "strong"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 1000
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "strong"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 900,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "strong"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "attacking-high-atk": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "strong"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "weak-monster-allowed": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "turtle"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2900
+            }
+          ]
+        },
+        "face-down-source": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "strong"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 1000
+            }
+          ]
+        },
+        "dynamic-current-atk": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 799,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "strong"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2101
+            }
+          ]
+        },
+        "dynamic-threshold-block": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "turtle",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "strong",
+                    "id": "80233946",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 900,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "strong"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        }
+      },
+      "fingerprint": "988e2bcbb2e8fa664f1d63f8d0fde2eb4d534e603adf15c2ae60b016296ff871",
+      "suites": [
+        "tests/generated-m36-passive-attack-conditions.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "03366982",
+        "konamiId": 5003,
+        "name": "Dragão Espada do Jacaré",
+        "englishName": "Alligator's Sword Dragon",
+        "kind": "monster",
+        "monsterType": "fusion",
+        "race": "Dragon",
+        "attribute": "WIND",
+        "level": 5,
+        "atk": 1700,
+        "defense": 1500,
+        "summary": "Fusão de Baby Dragon e Alligator's Sword. Pode atacar diretamente se todos os monstros com a face para cima do oponente forem TERRA, ÁGUA ou FOGO.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5003&request_locale=en",
+        "fusion": [
+          "88819587",
+          "64428736"
+        ]
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "combat",
+                "filter": {
+                  "selfOnly": true
+                },
+                "rule": {
+                  "kind": "direct",
+                  "condition": "faceUpAttributesOnly",
+                  "attributes": [
+                    "EARTH",
+                    "WATER",
+                    "FIRE"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "continuous-attack-conditions",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:continuous",
+        "continuous:combat"
+      ],
+      "textEvidence": {
+        "text": "\"Baby Dragon\" + \"Alligator's Sword\". This card can attack your opponent directly if the only face-up monsters they control are EARTH, WATER, or FIRE. The persistent, face-up source is required; the effect is disabled by monster-effect negation. Attack declarations are validated against current field state. Previous declared attacks are not retroactively cancelled. The exact Fusion Materials are Baby Dragon and Alligator's Sword. Opposing face-down monsters and Spell/Trap Cards do not disqualify a direct attack; only face-up monsters with other Attributes do.",
+        "sha256": "63a66d5a7ba02887869e9456854eb6fddef958783806f5e86be0af3c15fd7fb3",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5003&request_locale=en"
+      },
+      "scenarios": [
+        "face-up-ineligible",
+        "spell-and-hidden-monsters",
+        "no-face-up-opponent",
+        "exact-fusion-materials"
+      ],
+      "cases": {
+        "negative": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "hidden",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "set",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "missing"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "hidden",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "set",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "dragon"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2300
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "hidden",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "set",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "dragon"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2300
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "hidden"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "hidden",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "set",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "dragon"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2300
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "hidden"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "hidden",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "set",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "dragon"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2300
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "hidden"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "dragon"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "drain",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "dragon"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "dragon"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "dragon2",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 10000,
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "dragon"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "dragon2"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6600
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "dark",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "set",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "dragon"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "exact-fusion-materials": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "88819587"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "64428736"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "03366982"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "03366982"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat1"
+            }
+          ]
+        },
+        "face-up-ineligible": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "dark",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "set",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "dragon"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "spell-and-hidden-monsters": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "hidden",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "set",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "dragon"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2300
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "hidden"
+            }
+          ]
+        },
+        "no-face-up-opponent": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "hidden",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "set",
+                    "id": "04206964",
+                    "setTurn": 0,
+                    "faceUp": false
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "dragon"
+              },
+              "absentKeys": [
+                "target"
+              ]
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2300
+            }
+          ]
+        },
+        "face-down-source": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "dragon",
+                    "id": "03366982",
+                    "owner": 0,
+                    "position": "def",
+                    "faceUp": false,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "water",
+                    "id": "80233946",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "attack",
+                "card": "dragon"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        }
+      },
+      "fingerprint": "a305bc7136967d438cf323cf6982212b8892fb0af401d0e4346253f13f5d213c",
+      "suites": [
+        "tests/generated-m36-passive-attack-conditions.test.cjs"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "80233946",
+      "canonicalId": "42722d20-305e-4752-9307-2b3287777bcc",
+      "konamiId": 5411,
+      "reviewer": "Official Konami card details and eligible historical OCG or TCG printing reviewed",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5411&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 1100,
+        "defense": 1100,
+        "race": "Aqua",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "2003-04-24",
+        "region": "ocg",
+        "set": "Duelist Legacy Volume.5",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5411&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "5adc5318d6b2ed2b7a39faf64a20d27f7b50e8c7646d5a0806c4e907d7d15cf3",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "988e2bcbb2e8fa664f1d63f8d0fde2eb4d534e603adf15c2ae60b016296ff871"
+    },
+    {
+      "id": "03366982",
+      "canonicalId": "307bb68b-a6e3-4450-8cb1-4b740d499287",
+      "konamiId": 5003,
+      "reviewer": "Official Konami card details and eligible historical OCG or TCG printing reviewed",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5003&request_locale=en",
+      "primaryFacts": {
+        "level": 5,
+        "atk": 1700,
+        "defense": 1500,
+        "race": "Dragon",
+        "attribute": "WIND"
+      },
+      "verifiedPrinting": {
+        "date": "2000-12-07",
+        "region": "ocg",
+        "set": "Yu-Gi-Oh! Duel Monsters 4: Battle of Great Duelist: Joey Deck promotional cards",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5003&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "63a66d5a7ba02887869e9456854eb6fddef958783806f5e86be0af3c15fd7fb3",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "a305bc7136967d438cf323cf6982212b8892fb0af401d0e4346253f13f5d213c"
+    }
+  ]
+}

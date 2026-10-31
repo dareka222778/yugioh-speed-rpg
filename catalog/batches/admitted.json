@@ -48,6 +48,10 @@
     {
       "id": "m35-conditional-direct-attacks",
       "proofSHA256": "f60dfc71e9cbc0421facda16bec966fac6bb16a5a7aed1114287c084d844c828"
+    },
+    {
+      "id": "m36-passive-attack-conditions",
+      "proofSHA256": "991c254edb1517d780c5f4b91a4ee84034f765a1a2f8d3bde0d23c38f16575ad"
     }
   ]
 }

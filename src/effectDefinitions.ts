@@ -10,6 +10,7 @@ import {effects as m33_royal_decreeEffects} from './generated/m33-royal-decree';
 import {effects as m34_summon_trap_lockEffects} from './generated/m34-summon-trap-lock';
 import {effects as m35_newdoria_battle_targetEffects} from './generated/m35-newdoria-battle-target';
 import {effects as m35_conditional_direct_attacksEffects} from './generated/m35-conditional-direct-attacks';
+import {effects as m36_passive_attack_conditionsEffects} from './generated/m36-passive-attack-conditions';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -68,6 +69,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m36_passive_attack_conditionsEffects,
  ...m35_conditional_direct_attacksEffects,
  ...m35_newdoria_battle_targetEffects,
  ...m34_summon_trap_lockEffects,

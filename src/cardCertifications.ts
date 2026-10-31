@@ -5440,5 +5440,19 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "80233946": {
+    "fingerprint": "988e2bcbb2e8fa664f1d63f8d0fde2eb4d534e603adf15c2ae60b016296ff871",
+    "suites": [
+      "tests/generated-m36-passive-attack-conditions.test.cjs"
+    ]
+  },
+  "03366982": {
+    "fingerprint": "a305bc7136967d438cf323cf6982212b8892fb0af401d0e4346253f13f5d213c",
+    "suites": [
+      "tests/generated-m36-passive-attack-conditions.test.cjs"
+    ]
+  }
+
 
 };
