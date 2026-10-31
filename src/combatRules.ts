@@ -1,6 +1,6 @@
 /** Declarative combat vocabulary, separate from card identity and UI. */
 export type CombatRule=
- |{kind:'direct';condition?:'defenseOnly'|'faceUpMinAtk';minimumAtk?:number}
+ |{kind:'direct';condition?:'defenseOnly'|'faceUpMinAtk'|'faceUpAttributesOnly';minimumAtk?:number;attributes?:readonly string[]}
  |{kind:'piercing'}
  |{kind:'attacks';maximum:2}
  |{kind:'damage';mode:'zero'|'double';when:'battle'|'direct'|'defending'}
@@ -10,10 +10,11 @@ export type CombatRule=
 export function combatRuleIssues(value:unknown):string[]{
  if(!value||typeof value!=='object'||Array.isArray(value))return ['invalid-combat-rule'];
  const r=value as CombatRule,k=Object.keys(r),keys=(allowed:string[])=>k.every(key=>allowed.includes(key));
- if(r.kind==='direct')return keys(['kind','condition','minimumAtk'])&&(
-  r.condition===undefined&&r.minimumAtk===undefined||
-  r.condition==='defenseOnly'&&r.minimumAtk===undefined||
-  r.condition==='faceUpMinAtk'&&Number.isSafeInteger(r.minimumAtk)&&r.minimumAtk! >= 0
+ if(r.kind==='direct')return keys(['kind','condition','minimumAtk','attributes'])&&(
+  r.condition===undefined&&r.minimumAtk===undefined&&r.attributes===undefined||
+  r.condition==='defenseOnly'&&r.minimumAtk===undefined&&r.attributes===undefined||
+  r.condition==='faceUpMinAtk'&&Number.isSafeInteger(r.minimumAtk)&&r.minimumAtk! >= 0&&r.attributes===undefined||
+  r.condition==='faceUpAttributesOnly'&&r.minimumAtk===undefined&&Array.isArray(r.attributes)&&r.attributes.length>0&&new Set(r.attributes).size===r.attributes.length&&r.attributes.every(a=>['EARTH','WATER','FIRE','WIND','DARK','LIGHT','DIVINE'].includes(a))
  )?[]:['invalid-direct-attack'];
  if(r.kind==='piercing')return keys(['kind'])?[]:['invalid-piercing-rule'];
  if(r.kind==='attacks')return keys(['kind','maximum'])&&r.maximum===2?[]:['invalid-attack-count'];
@@ -24,7 +25,7 @@ export function combatRuleIssues(value:unknown):string[]{
  return ['unknown-combat-rule'];
 }
 export function combatRuleText(r:CombatRule):string{
- if(r.kind==='direct')return r.condition==='defenseOnly'?'Pode atacar diretamente se o oponente controlar apenas monstros em Defesa, sem outras cartas no campo.':r.condition==='faceUpMinAtk'?`Pode atacar diretamente se o oponente controlar apenas monstros com a face para cima e ATK atual de ${r.minimumAtk} ou mais, sem outras cartas no campo.`:'Pode atacar diretamente mesmo se o oponente controlar monstros.';
+ if(r.kind==='direct')return r.condition==='defenseOnly'?'Pode atacar diretamente se o oponente controlar apenas monstros em Defesa, sem outras cartas no campo.':r.condition==='faceUpMinAtk'?`Pode atacar diretamente se o oponente controlar apenas monstros com a face para cima e ATK atual de ${r.minimumAtk} ou mais, sem outras cartas no campo.`:r.condition==='faceUpAttributesOnly'?`Pode atacar diretamente se todos os monstros com a face para cima do oponente forem dos Atributos ${r.attributes?.join(', ')}.`:'Pode atacar diretamente mesmo se o oponente controlar monstros.';
  if(r.kind==='piercing')return 'Causa dano de batalha perfurante ao atacar um monstro em Defesa.';
  if(r.kind==='attacks')return 'Pode declarar até dois ataques nesta Fase de Batalha; um ataque negado também consome uma declaração.';
  if(r.kind==='attackLP')return `Exige pagar ${r.amount} PV para declarar cada ataque.`;

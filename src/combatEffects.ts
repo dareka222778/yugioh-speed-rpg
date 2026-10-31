@@ -9,6 +9,7 @@ function opposingCardsMeetDirectCondition(s:DuelState,m:Monster,rule:Extract<imp
  if(!rule.condition)return true;
  const controller=s.players.findIndex(p=>p.monsters.some(x=>x.uid===m.uid));if(controller<0)return false;
  const opponent=s.players[1-controller];
+ if(rule.condition==='faceUpAttributesOnly')return opponent.monsters.filter(x=>x.faceUp).every(x=>{const card=getDuelCard(x.id);return !!card&&!!card.attribute&&!!rule.attributes?.includes(card.attribute);});
  if(opponent.backrow.length||opponent.field)return false;
  if(rule.condition==='defenseOnly')return opponent.monsters.every(x=>x.position==='def');
  return opponent.monsters.every(x=>{
