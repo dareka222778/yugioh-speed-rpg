@@ -5608,5 +5608,19 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "25773409": {
+    "fingerprint": "f350125fa88975b94509da70820e21a72ac6949f239fede85fcb6cebb590d0c2",
+    "suites": [
+      "tests/generated-m42-battle-zone-outcomes.test.cjs"
+    ]
+  },
+  "37043180": {
+    "fingerprint": "d6366857edc3377c6261711f6132255e3bde1f5effc805fa467b10ccaef33a69",
+    "suites": [
+      "tests/generated-m42-battle-zone-outcomes.test.cjs"
+    ]
+  }
+
 
 };

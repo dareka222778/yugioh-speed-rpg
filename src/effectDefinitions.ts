@@ -16,6 +16,7 @@ import {effects as m38_classic_fusionsEffects} from './generated/m38-classic-fus
 import {effects as m39_battle_effectsEffects} from './generated/m39-battle-effects';
 import {effects as m40_battle_banishEffects} from './generated/m40-battle-banish';
 import {effects as m41_battle_identity_destructionEffects} from './generated/m41-battle-identity-destruction';
+import {effects as m42_battle_zone_outcomesEffects} from './generated/m42-battle-zone-outcomes';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -74,6 +75,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m42_battle_zone_outcomesEffects,
  ...m41_battle_identity_destructionEffects,
  ...m40_battle_banishEffects,
  ...m39_battle_effectsEffects,

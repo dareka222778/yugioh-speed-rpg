@@ -72,6 +72,10 @@
     {
       "id": "m41-battle-identity-destruction",
       "proofSHA256": "8fbd0d26b29264f746e40c64e4e83f0e29efa1eb15f2c905ded9458f24130522"
+    },
+    {
+      "id": "m42-battle-zone-outcomes",
+      "proofSHA256": "cb5617f05da20b20a21399d74e335298444262a6b74fce68c766018d96ca61f5"
     }
   ]
 }
