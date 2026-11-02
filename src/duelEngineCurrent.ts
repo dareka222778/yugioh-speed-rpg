@@ -616,6 +616,11 @@ function resolve(s:DuelState){
   };
   const attackerIdentityKill=battleIdentityKill(a,defender?.m,true);
   const defenderIdentityKill=battleIdentityKill(defender?.m,a,false);
+  // These effects apply after normal damage calculation even when the source
+  // would be destroyed in that battle. Capture eligibility before zone exits.
+  const activeBattleRule=(m:Monster|undefined,kind:'battleBanishBoth'|'battleTopDeckAttacker')=>!!m?.faceUp&&getMonsterEffect(m.id)?.operation.kind===kind&&!monsterEffectsNegated(s,m.uid);
+  const banishBoth=!!defender&&(activeBattleRule(a,'battleBanishBoth')||activeBattleRule(defender.m,'battleBanishBoth'));
+  const topDeckAttacker=!!defender&&defender.m.position==='def'&&activeBattleRule(defender.m,'battleTopDeckAttacker');
   const outcome=combatOutcome(s,pending.actor,a,defender?.m,{attack:(m,state)=>pending.zeroedAttacker&&m.uid===pending.card?0:atk(m,state),defense:def,protected:protectedBattleDamage});
   // Snapshot both active sources before either combatant leaves the field.
   // This is a continuous replacement of the destroyed opponent's destination,
@@ -623,7 +628,9 @@ function resolve(s:DuelState){
   // must not accidentally re-route the other combatant to the Graveyard.
   const battleBanisher=(m:Monster|undefined)=>!!m?.faceUp&&getMonsterEffect(m.id)?.operation.kind==='battleBanishVictim'&&!monsterEffectsNegated(s,m.uid);
   const attackingBanisher=battleBanisher(a),defendingBanisher=battleBanisher(defender?.m);
+  if(banishBoth&&defender){banishDestroyedMonster(s,a.uid);banishDestroyedMonster(s,defender.m.uid);}
   for(const uid of outcome.destroy){
+   if(banishBoth)continue;
    const replaced=uid===defender?.m.uid&&attackingBanisher||uid===a.uid&&defendingBanisher;
    if(replaced)banishDestroyedMonster(s,uid);else graveMonster(s,uid,true);
   }
@@ -643,6 +650,17 @@ function resolve(s:DuelState){
    }
    if(defender&&defenderIdentityKill&&findMonster(s,a.uid)){
     graveMonster(s,a.uid,true);note(s,`${card(defender.m.id).name} destruiu o monstro adversário após o cálculo de dano.`);
+   }
+   if(topDeckAttacker&&findMonster(s,a.uid)){
+    const original=findMonster(s,a.uid)!;
+    if(original.m.entityKind==='token')removeToken(s,a.uid,'return');
+    else {
+     const owner=original.m.owner??s.players.indexOf(original.p);
+     original.p.monsters=original.p.monsters.filter(m=>m.uid!==a.uid);
+     if(card(a.id).fusion)(s.players[owner].extra??=[]).push({uid:a.uid,id:a.id});
+     else s.players[owner].deck.unshift({uid:a.uid,id:a.id});
+    }
+    cleanEquips(s);note(s,`${card(defender!.m.id).name} devolveu o atacante ao topo do Deck do dono.`);
    }
    if(bounce&&findMonster(s,a.uid)){
     const found=findMonster(s,a.uid)!;
