@@ -605,6 +605,17 @@ function resolve(s:DuelState){
   const bounce=!!defender&&getMonsterEffect(defender.m.id)?.operation.kind==='battleBounceAttacker'&&!monsterEffectsNegated(s,defender.m.uid);
   const burn=getMonsterEffect(a.id)?.operation.kind==='battleLevelBurn'&&!monsterEffectsNegated(s,a.uid);
   const targetLevel=defender?card(defender.m.id).level??0:0;
+  // The identity-sensitive aftermath is evaluated with battle participants
+  // still on the field; a defeated source may still resolve its effect.
+  const battleIdentityKill=(source:Monster|undefined,target:Monster|undefined,isAttacker:boolean):boolean=>{
+   if(!source?.faceUp||!target||monsterEffectsNegated(s,source.uid))return false;
+   const rule=getMonsterEffect(source.id)?.operation;
+   if(rule?.kind!=='battleDestroyByIdentity'||rule.attackingOnly&&!isAttacker)return false;
+   const info=card(target.id);
+   return !!(rule.races?.includes(info.race??'')||rule.attributes?.includes(info.attribute??''));
+  };
+  const attackerIdentityKill=battleIdentityKill(a,defender?.m,true);
+  const defenderIdentityKill=battleIdentityKill(defender?.m,a,false);
   const outcome=combatOutcome(s,pending.actor,a,defender?.m,{attack:(m,state)=>pending.zeroedAttacker&&m.uid===pending.card?0:atk(m,state),defense:def,protected:protectedBattleDamage});
   // Snapshot both active sources before either combatant leaves the field.
   // This is a continuous replacement of the destroyed opponent's destination,
@@ -624,6 +635,14 @@ function resolve(s:DuelState){
    // also destroyed in that same damage calculation.
    if(burn&&defender&&outcome.destroy.includes(defender.m.uid)&&s.players.some(p=>p.grave.some(c=>c.uid===defender.m.uid))){
     const amount=targetLevel*500;s.players[1-pending.actor].lp=Math.max(0,s.players[1-pending.actor].lp-amount);note(s,`${card(a.id).name} causou ${amount} de dano pelo Nível do monstro destruído.`);checkLP(s);
+   }
+   // End-of-Damage-Step destruction only affects a battle participant that
+   // survived the normal damage calculation; no duplicate Graveyard delivery.
+   if(defender&&attackerIdentityKill&&findMonster(s,defender.m.uid)){
+    graveMonster(s,defender.m.uid,true);note(s,`${card(a.id).name} destruiu o monstro adversário após o cálculo de dano.`);
+   }
+   if(defender&&defenderIdentityKill&&findMonster(s,a.uid)){
+    graveMonster(s,a.uid,true);note(s,`${card(defender.m.id).name} destruiu o monstro adversário após o cálculo de dano.`);
    }
    if(bounce&&findMonster(s,a.uid)){
     const found=findMonster(s,a.uid)!;
