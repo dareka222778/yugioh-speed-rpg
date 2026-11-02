@@ -55,7 +55,8 @@ export type MonsterOperation=
  |{kind:'search';stat:'atk'|'defense';maximum:number}
  |{kind:'specialSummon';attribute:string;maximumAtk:number}
  |{kind:'battleDestroyByIdentity';races?:readonly string[];attributes?:readonly string[];attackingOnly?:true}
- |{kind:'identityOnly'|'fusionSubstitute'|'negateTraps'|'battleShield'|'directAttack'|'battleBounceAttacker'|'battleLevelBurn'|'endBattleDefense'|'endDamageDefensePiercing'|'guardianZeroAttack'|'battleBanishVictim'|'battleBanishBoth'|'battleTopDeckAttacker'};
+ |{kind:'battleBanishBoth';onlyIfDestroyedByBattle?:true}
+ |{kind:'identityOnly'|'fusionSubstitute'|'negateTraps'|'battleShield'|'directAttack'|'battleBounceAttacker'|'battleLevelBurn'|'endBattleDefense'|'endDamageDefensePiercing'|'guardianZeroAttack'|'battleBanishVictim'|'battleTopDeckAttacker'};
 export type MonsterEffect={trigger:MonsterTrigger;summons?:readonly ('normal'|'flip'|'special')[];oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean;fieldMonsterCount?:number};
 
@@ -139,6 +140,7 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  const windows:Partial<Record<MonsterTrigger,MonsterActivation['window']>>={quick:'opposingDamageCalculation',ignition:'main',flip:'flip',onSummon:'summon',onOtherSummon:'summon',onSentToGrave:'grave',onBattleDestroyed:'battleDestroyed',continuous:'continuous'};
  if(windows[e.trigger]!==a.window)return ['inconsistent-monster-window'];
  const op=e.operation;
+ if(op.kind==='battleBanishBoth'&&(Object.keys(op).some(k=>!['kind','onlyIfDestroyedByBattle'].includes(k))||op.onlyIfDestroyedByBattle!==undefined&&op.onlyIfDestroyedByBattle!==true))return ['invalid-battle-banish'];
  if(op.kind==='battleDestroyByIdentity'&&(!Array.isArray(op.races)&&!Array.isArray(op.attributes)||Object.keys(op).some(k=>!['kind','races','attributes','attackingOnly'].includes(k))||op.attackingOnly!==undefined&&op.attackingOnly!==true||[...op.races??[],...op.attributes??[]].some(x=>typeof x!=='string'||!x)||!((op.races?.length??0)+(op.attributes?.length??0))))return ['invalid-battle-identity'];
  if(op.kind==='targetGroup'&&(e.trigger!=='flip'||e.cost!==undefined||e.oncePerTurn!==undefined||Object.keys(op).some(k=>!['kind','rule'].includes(k))||targetGroupRuleIssues(op.rule).length))return ['invalid-monster-target-group'];
  if(op.kind==='singleCard'&&(e.cost!==undefined||!['flip','onSummon','onBattleDestroyed'].includes(e.trigger)||Object.keys(op).some(k=>!['kind','rule'].includes(k))||singleCardRuleIssues(op.rule).length))return ['invalid-single-card-operation'];

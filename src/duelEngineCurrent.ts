@@ -619,9 +619,17 @@ function resolve(s:DuelState){
   // These effects apply after normal damage calculation even when the source
   // would be destroyed in that battle. Capture eligibility before zone exits.
   const activeBattleRule=(m:Monster|undefined,kind:'battleBanishBoth'|'battleTopDeckAttacker')=>!!m?.faceUp&&getMonsterEffect(m.id)?.operation.kind===kind&&!monsterEffectsNegated(s,m.uid);
-  const banishBoth=!!defender&&(activeBattleRule(a,'battleBanishBoth')||activeBattleRule(defender.m,'battleBanishBoth'));
   const topDeckAttacker=!!defender&&defender.m.position==='def'&&activeBattleRule(defender.m,'battleTopDeckAttacker');
   const outcome=combatOutcome(s,pending.actor,a,defender?.m,{attack:(m,state)=>pending.zeroedAttacker&&m.uid===pending.card?0:atk(m,state),defense:def,protected:protectedBattleDamage});
+  // D.D. Warrior always banishes both; D.D. Assailant does so only when it
+  // itself would be destroyed in this particular battle. Evaluate from the
+  // original damage result before cards are removed from the field.
+  const canBanishBoth=(source:Monster|undefined):boolean=>{
+   if(!activeBattleRule(source,'battleBanishBoth'))return false;
+   const operation=getMonsterEffect(source!.id)?.operation;
+   return operation?.kind==='battleBanishBoth'&&(!operation.onlyIfDestroyedByBattle||outcome.destroy.includes(source!.uid));
+  };
+  const banishBoth=!!defender&&(canBanishBoth(a)||canBanishBoth(defender.m));
   // Snapshot both active sources before either combatant leaves the field.
   // This is a continuous replacement of the destroyed opponent's destination,
   // not a Graveyard trigger: losing the duel source in a mutual destruction
