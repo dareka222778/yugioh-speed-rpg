@@ -1,0 +1,54 @@
+{
+  "format": 1,
+  "batchId": "m43-dd-assailant",
+  "baseRevision": "3869cb9baaabf64df48f900715ddeb17376c0fc446ab28f4ac2e1121c1c0e9b1",
+  "batchSHA256": "a1ac420c2a1f2b71319a2883143985f5be5de71c24eb56676d63ebe9b8ee5b82",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m43_dd_assailantCards} from './generated/m43-dd-assailant';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards,...m43_dd_assailantCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m43_dd_assailantEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m43_dd_assailantEffects} from './generated/m43-dd-assailant';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({",
+      "to": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({\n ...m43_dd_assailantMonsters,"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "import {conditionalMonsters30}",
+      "to": "import {monsters as m43_dd_assailantMonsters} from './generated/m43-dd-assailant';\nimport {conditionalMonsters30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"70074904\": {\n    \"fingerprint\": \"c7320e96a35bc14b3089c36c73c9aa861aa43d3594efbe8e98fec05ffd6e9d0b\",\n    \"suites\": [\n      \"tests/generated-m43-dd-assailant.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m43-dd-assailant: explicit tested release; zero inventory grants.\n  \"70074904\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "70074904"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

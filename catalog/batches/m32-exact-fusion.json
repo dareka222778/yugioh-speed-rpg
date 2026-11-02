@@ -1,0 +1,943 @@
+{
+  "format": 1,
+  "batchId": "m32-exact-fusion",
+  "engineVersion": "engine-v9",
+  "baseRevision": "25267e4092aa0a2b1af7dd884851c59286ccbe780b2d272100756a2bb2385831",
+  "candidates": [
+    {
+      "card": {
+        "id": "40173854",
+        "konamiId": 4645,
+        "name": "Bugroth Anfíbio",
+        "englishName": "Amphibious Bugroth",
+        "kind": "monster",
+        "monsterType": "fusion",
+        "race": "Aqua",
+        "attribute": "WATER",
+        "level": 5,
+        "atk": 1850,
+        "defense": 1300,
+        "summary": "Fusão: Bugroth de Ataque Terrestre + Sentinela dos Mares; sem efeito.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4645&request_locale=en",
+        "fusion": [
+          "58314394",
+          "85448931"
+        ]
+      },
+      "effect": {
+        "kind": "fusion"
+      },
+      "textEvidence": {
+        "text": "This non-Effect Fusion Monster requires precisely Ground Attacker Bugroth and the historical Defender of the Sea, whose canonical present identity is Sentinel of the Seas. Its recipe has no additional effect or special summoning restriction. It is Level 5, WATER, Aqua, 1850 ATK and 1300 DEF. Ordinary Fusion, ownership, Extra Deck and properly-summoned revival rules apply; there is no monster effect to activate or negate.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4645&request_locale=en",
+        "sha256": "12b220b93cd80a706c435a239d72c075e03cb37075223d9eefc19c031ee0ba93"
+      },
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "58314394"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "85448931"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "40173854"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "58314394"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "85448931"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "40173854"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            }
+          ]
+        },
+        "exact-materials": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "58314394"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "85448931"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "40173854"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "58314394"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "85448931"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "40173854"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "58314394"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "85448931"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "40173854"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "58314394"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "85448931"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "58314394"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "85448931"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "discard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "jammer"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "mat1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            }
+          ]
+        },
+        "illegal-materials": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "85448931"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "zone-capacity": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "58314394"
+                  },
+                  {
+                    "uid": "mat1",
+                    "id": "85448931"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "f1",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "f2",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "f3",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 3
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "source"
+            }
+          ]
+        },
+        "extra-capacity": {
+          "fixture": {
+            "players": [
+              {},
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "validateDeck": [
+                "40173854"
+              ],
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "length": 0
+            }
+          ]
+        },
+        "material-owner": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "58314394"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "source",
+                    "id": "40173854"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "mat1",
+                    "id": "85448931",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "mat1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "40173854"
+            }
+          ]
+        }
+      },
+      "family": "exact-two-material-non-effect-fusion",
+      "requirements": [
+        "effect:fusion"
+      ],
+      "fingerprint": "0a6adebc79b083d019af0b0e95d74eeceb99da741f8b84dbdbe1d658947703f6",
+      "suites": [
+        "tests/generated-m32-exact-fusion.test.cjs"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "40173854",
+      "canonicalId": "1c222ccc-1312-46e7-8aaa-a9c1012b48c8",
+      "konamiId": 4645,
+      "reviewer": "Codex: full official card details and regional printing reviewed individually on 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4645&request_locale=en",
+      "primaryFacts": {
+        "level": 5,
+        "atk": 1850,
+        "defense": 1300,
+        "race": "Aqua",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "1999-12-01",
+        "set": "Booster 6",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4645&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "12b220b93cd80a706c435a239d72c075e03cb37075223d9eefc19c031ee0ba93",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "0a6adebc79b083d019af0b0e95d74eeceb99da741f8b84dbdbe1d658947703f6"
+    }
+  ]
+}

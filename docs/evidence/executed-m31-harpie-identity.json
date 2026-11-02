@@ -1,0 +1,40 @@
+{
+  "format": 1,
+  "batchId": "m31-harpie-identity",
+  "sandbox": true,
+  "publicEngine": true,
+  "baseRevision": "e65d1299ac99cb821f9a176f5bb94ef0dce390041fe4fdd2885db01ad2cf3b0b",
+  "batchSHA256": "56731ef75b1d9acac3d5791b1f0369c81f13cb0bba6a9eaa21f62cc74efa1812",
+  "stage": "tested",
+  "sourceHashAtSandboxExecution": "fad385841e76443790b20d0cc89fa9646e5f39badaebd981f0aa669cdada54a8",
+  "executions": [
+    {
+      "id": "80316585",
+      "fingerprint": "3a6c03bc1d55175808cf34b40b1ec3e4c666d6cb678580a66be59f56346b0628",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-harpie-identity.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-harpie-identity.test.cjs": "9c4f7200aa8a2b353696a9870bc5e69d7810097010278877daba935d917c5357"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "shared-three-copy-limit"
+      ],
+      "failed": []
+    }
+  ],
+  "candidateCount": 1,
+  "certificateProposals": 1,
+  "inventoryGranted": 0
+}

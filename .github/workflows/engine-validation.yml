@@ -14,11 +14,77 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: node scripts/verify-resolver-archives.cjs
+      - run: node scripts/check-mission3-integrity.cjs
+      - run: node scripts/check-mission4-integrity.cjs
+      - run: node scripts/check-mission5-integrity.cjs
+      - run: node scripts/check-mission7-integrity.cjs
+      - run: node scripts/check-mission8-integrity.cjs
       - run: npm run check
+      - run: node scripts/card-batch-fast.cjs
       - run: npm test
+      - run: node scripts/audit-generated-batches31.cjs
+      - run: node scripts/audit-generated-games31.cjs
+      - run: node --expose-gc scripts/benchmark-catalog32.cjs 50 250
+      - run: node scripts/audit-grave-owner31.cjs
+      - run: node scripts/audit-conditional-batch30.cjs
+      - run: node scripts/audit-destruction-batch29.cjs
+      - run: node scripts/audit-trigger-batch29.cjs
+      - run: node scripts/audit-combat-batch29.cjs
+      - run: node scripts/audit-recruit-batch28.cjs
+      - run: node scripts/audit-attack-batch28.cjs
+      - run: node scripts/audit-movement-batch28.cjs
+      - run: node scripts/family-matrix28.cjs
+      - run: node scripts/audit-mechanical-batch28.cjs
+      - run: node scripts/audit-release27.cjs
+      - run: node scripts/audit-position-batch26.cjs
+      - run: node scripts/audit-mechanical-batch21.cjs
+      - run: node scripts/audit-ritual-batch22.cjs
+      - run: node scripts/audit-ritual-extensions22.cjs
+      - run: node scripts/triage-mission21.cjs
+      - run: node scripts/verify-catalog-revisions.cjs
+      - run: node scripts/repeat-acceptance16.cjs 5
+      - run: node scripts/audit-mission15.cjs
+      - run: node scripts/audit-mechanical-batch15.cjs
+      - run: node scripts/audit-mechanical-batch16.cjs
+      - run: node scripts/audit-world-normal16.cjs
+      - run: node --expose-gc scripts/simulate-mission16.cjs
+      - name: Diagnose critical acceptance before load and generated reports
+        run: node scripts/accept-engine.cjs
+      - run: node scripts/stress-persisted-duels.cjs 50 2 --mixed --filtered-spells
+      - run: node scripts/stress-persisted-duels.cjs 100 2 --mixed --filtered-spells
+      - run: node --expose-gc scripts/benchmark-v8-candidate15.cjs
+      - run: node scripts/stamp-candidate-build.cjs
+      - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission4-individual-reviews.json artifacts/certification-executions-mission4.json
+      - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission7-individual-reviews.json artifacts/certification-executions-mission7.json
+      - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission8-individual-reviews.json artifacts/certification-executions-mission8.json
+      - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission8-fusion-reviews.json artifacts/certification-executions-fusion8.json
+      - run: node scripts/audit-normal-expansion9.cjs
+      - run: node scripts/audit-fusion-expansion10.cjs
+      - run: node scripts/audit-mechanical-batch11.cjs
+      - run: node scripts/audit-normalization-blockers.cjs
+      - run: node scripts/audit-certification-pipeline.cjs docs/evidence/mission5-individual-reviews.json artifacts/certification-executions-mission5.json
+      - run: node scripts/stress-persisted-duels.cjs 50 4 --eager
+      - run: node scripts/stress-persisted-duels.cjs 50 4
+      - run: node scripts/stress-persisted-duels.cjs 50 2
+      - run: node scripts/stress-persisted-duels.cjs 100 2
+      - run: node scripts/stress-persisted-duels.cjs 8 2 --mixed
+      - run: node scripts/stress-persisted-duels.cjs 16 2 --mixed
+      - run: node scripts/audit-mission7-beta.cjs
+      - run: node scripts/stress-persisted-duels.cjs 50 2 --mixed
+      - run: node scripts/stress-persisted-duels.cjs 100 2 --mixed
+      - run: node --expose-gc scripts/soak-mixed-versions.cjs 120
+      - run: npm run audit:rea
+      - run: node --expose-gc scripts/benchmark-continuous8.cjs
+      - run: npm run benchmark:recovery
+      - run: node --expose-gc scripts/benchmark-concurrent-engine.cjs
+      - run: node --expose-gc scripts/benchmark-concurrent-engine.cjs 50
+      - run: node --expose-gc scripts/benchmark-concurrent-engine.cjs 100
+      - run: npm run audit:historical-batch
       - run: npm run check:cards
       - run: npm run audit:history
       - run: npm run audit:cards:matrix
+      - run: node scripts/plan-mission8-followups.cjs
       - run: npm run coverage:engine
       - run: npm run progress
       - run: npm run audit:engine
@@ -29,10 +95,111 @@ jobs:
       - run: npm run audit:tag-classic-sessions
       - run: npm run audit:tag-training
       - run: node scripts/render-previews.cjs artifacts/previews
+      - run: node scripts/audit-mission6-readiness.cjs
+      - name: Preserve executable REA acceptance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rea-acceptance-results
+          path: |
+            artifacts/test-results.xml
+            artifacts/executions-m31-*.json
+            artifacts/executions-m32-*.json
+            artifacts/mission32-engine-benchmark.json
+            artifacts/mission31-generated-audit.json
+            artifacts/mission31-representative-games.json
+            artifacts/mission31-tag-owner.json
+            artifacts/test-summary.json
+            artifacts/executions-m31-generator-fixture.json
+            artifacts/validated-m31-generator-fixture.json
+            artifacts/fast-m31-generator-fixture.log
+            artifacts/mission31-worklist.json
+            artifacts/certification-executions-combat29.json
+            artifacts/mission29-combat-admission.json
+            artifacts/certification-executions-trigger29.json
+            artifacts/certification-executions-conditional30.json
+            artifacts/mission29-trigger-admission.json
+            artifacts/rea-acceptance.json
+            artifacts/engine-recovery-benchmark.json
+            artifacts/discord-offline-homologation.json
+            artifacts/concurrent-engine-benchmark.json
+            artifacts/concurrent-engine-benchmark-*.json
+            artifacts/certification-pipeline.json
+            artifacts/certification-executions-mission4.json
+            artifacts/discord-full-matches.json
+            artifacts/persisted-duel-stress-*.json
+            artifacts/certification-executions-mission5.json
+            artifacts/normalization-blockers-mission5.json
+            artifacts/abrupt-recovery-mission6.json
+            artifacts/mixed-version-soak-mission6.json
+            artifacts/readiness-mission6.json
+            artifacts/certification-executions-mission7.json
+            artifacts/certification-executions-mission8.json
+            artifacts/certification-executions-fusion8.json
+            artifacts/certification-executions-mission9*.json
+            artifacts/mission9-normal-audit.json
+            artifacts/certification-executions-fusion10.json
+            artifacts/mission10-fusion-audit.json
+            artifacts/certification-executions-mission11.json
+            artifacts/mission11-mechanical-audit.json
+            artifacts/continuous-benchmark-mission8.json
+            artifacts/benchmark-v8-candidate15.json
+            artifacts/certification-executions-mission15.json
+            artifacts/mission15-mechanical-audit.json
+            artifacts/mission16-mechanical-audit.json
+            artifacts/mission16-world-normal-audit.json
+            artifacts/certification-executions-world-normal16.json
+            artifacts/mission16-ai-simulation.json
+            artifacts/certification-executions-mission16.json
+            artifacts/certification-executions-mission21.json
+            artifacts/certification-executions-mission22.json
+            artifacts/certification-executions-mission22-extensions.json
+            artifacts/mission22-extensions-admission.json
+            artifacts/certification-executions-mission28.json
+            artifacts/mission28-admission.json
+            artifacts/certification-executions-movement28.json
+            artifacts/mission28-movement-admission.json
+            artifacts/certification-executions-attack28.json
+            artifacts/mission28-attack-admission.json
+            artifacts/certification-executions-recruits28.json
+            artifacts/mission28-recruit-admission.json
+            artifacts/mission28-family-matrix.json
+            artifacts/mission22-ritual-admission.json
+            artifacts/mission21-admission.json
+            artifacts/mission21-triage.json
+            artifacts/engine-acceptance-failure.tap
+            artifacts/acceptance16
+            artifacts/sqlite-health16-soak.json
+            artifacts/mission8-next-families.json
+            artifacts/beta-simulation-mission7.json
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Publicar prévias visuais
         uses: actions/upload-artifact@v4
         with:
           name: speed-rpg-visual-previews
           path: artifacts/previews
+          if-no-files-found: error
+          retention-days: 14
+  extended-soak:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node scripts/verify-resolver-archives.cjs
+      - run: node --expose-gc scripts/soak-mixed-versions.cjs 600
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mixed-version-extended-soak
+          path: |
+            artifacts/mixed-version-soak-mission6.json
+            artifacts/sqlite-health16-soak.json
           if-no-files-found: error
           retention-days: 14

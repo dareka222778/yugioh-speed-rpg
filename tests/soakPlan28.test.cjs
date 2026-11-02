@@ -1,0 +1,3 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{plan}=require('../scripts/soak-plan28.cjs');
+test('soak includes active v9 explicitly and allocates disjoint 1v1/tag identities',()=>{const p=plan('engine-v9');assert.deepEqual(p.versions,Array.from({length:9},(_,i)=>'engine-v'+(i+1)));assert.equal(p.oneVsOne.at(-1).version,'engine-v9');const seats=[...p.oneVsOne.flatMap(s=>s.seats),...p.tagSeats];assert.equal(new Set(seats).size,22);assert.deepEqual([...seats].sort((a,b)=>a-b),Array.from({length:p.playerCount},(_,i)=>i));});
+test('soak rejects missing or malformed resolver versions without silently dropping current coverage',()=>{for(const bad of ['engine-v0','engine-v09','engine-v9x','engine-v100',undefined,null])assert.throws(()=>plan(bad));});

@@ -1,6 +1,7 @@
 /** Named escape hatch for operations not migrated into the shared vocabulary.
  * Handlers receive core services; no Discord, network, DB or text interpreter.
  */
+import {canAffectMonster} from './continuousEffects';
 import type {DuelState,Pending} from './duelEngine';
 import type {EffectServices} from './classicEffects';
 type Handler=(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices)=>void;
@@ -13,7 +14,7 @@ const handlers:Readonly<Record<string,Handler>>={
   else if(failed.some(Boolean))service.finish(s,failed[0]?1:0,'não conseguiu comprar uma carta');
  },
  '52097679':(s,a,service)=>{
-  for(const p of s.players)for(const m of p.monsters)if(m.faceUp)m.swappedUntil=m.swappedUntil===s.turn?undefined:s.turn;
+  for(const p of s.players)for(const m of p.monsters)if(m.faceUp&&canAffectMonster(s,m.uid,'spell'))m.swappedUntil=m.swappedUntil===s.turn?undefined:s.turn;
   service.note(s,'ATK e DEF originais dos monstros revelados foram trocados até o fim do turno.');
  }
 };

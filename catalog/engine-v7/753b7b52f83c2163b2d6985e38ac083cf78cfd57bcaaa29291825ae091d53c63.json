@@ -1,0 +1,6375 @@
+{
+  "format": 1,
+  "engineVersion": "engine-v7",
+  "cards": [
+    {
+      "id": "91152256",
+      "konamiId": 4047,
+      "name": "Guardião Celta",
+      "englishName": "Celtic Guardian",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4047&request_locale=pt"
+    },
+    {
+      "id": "48305365",
+      "konamiId": 4084,
+      "name": "Predador com Machado",
+      "englishName": "Axe Raider",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1700,
+      "defense": 1150,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4084&request_locale=pt"
+    },
+    {
+      "id": "55550921",
+      "konamiId": 4106,
+      "name": "Guerreiro Batalhador",
+      "englishName": "Battle Warrior",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 700,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4106&request_locale=pt"
+    },
+    {
+      "id": "44287299",
+      "konamiId": 4299,
+      "name": "Masaki, o Espadachim Lendário",
+      "englishName": "Masaki the Legendary Swordsman",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1100,
+      "defense": 1100,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4299&request_locale=pt"
+    },
+    {
+      "id": "00756652",
+      "konamiId": 4201,
+      "name": "Doron",
+      "englishName": "Doron",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 900,
+      "defense": 500,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4201&request_locale=pt"
+    },
+    {
+      "id": "03573512",
+      "konamiId": 4759,
+      "name": "Espadachim de Landstar",
+      "englishName": "Swordsman of Landstar",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 500,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4759&request_locale=pt"
+    },
+    {
+      "id": "05053103",
+      "konamiId": 4032,
+      "name": "Touro Guerreiro",
+      "englishName": "Battle Ox",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast-Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1700,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4032&request_locale=pt"
+    },
+    {
+      "id": "48365709",
+      "konamiId": 4133,
+      "name": "Ansatsu",
+      "englishName": "Ansatsu",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 5,
+      "atk": 1700,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4133&request_locale=pt"
+    },
+    {
+      "id": "93221206",
+      "konamiId": 4439,
+      "name": "Elfo Ancião",
+      "englishName": "Ancient Elf",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "level": 4,
+      "atk": 1450,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4439&request_locale=pt"
+    },
+    {
+      "id": "15025844",
+      "konamiId": 4008,
+      "name": "Elfa Mística",
+      "englishName": "Mystical Elf",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "level": 4,
+      "atk": 800,
+      "defense": 2000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4008&request_locale=pt"
+    },
+    {
+      "id": "91939608",
+      "konamiId": 4050,
+      "name": "Boneca Marota",
+      "englishName": "Rogue Doll",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "level": 4,
+      "atk": 1600,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4050&request_locale=pt"
+    },
+    {
+      "id": "50930991",
+      "konamiId": 4881,
+      "name": "Neo, o Espadachim Mágico",
+      "englishName": "Neo the Magic Swordsman",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "level": 4,
+      "atk": 1700,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4881&request_locale=pt"
+    },
+    {
+      "id": "49218300",
+      "konamiId": 4884,
+      "name": "Feiticeiro dos Condenados",
+      "englishName": "Sorcerer of the Doomed",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1450,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4884&request_locale=pt"
+    },
+    {
+      "id": "75850803",
+      "konamiId": 4134,
+      "name": "LaMoon",
+      "englishName": "LaMoon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "level": 5,
+      "atk": 1200,
+      "defense": 1700,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4134&request_locale=pt"
+    },
+    {
+      "id": "17358176",
+      "konamiId": 4618,
+      "name": "Lady da Fé",
+      "englishName": "Lady of Faith",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "level": 3,
+      "atk": 1100,
+      "defense": 800,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4618&request_locale=pt"
+    },
+    {
+      "id": "28546905",
+      "konamiId": 4048,
+      "name": "Ilusionista Sem Rosto",
+      "englishName": "Illusionist Faceless Mage",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 5,
+      "atk": 1200,
+      "defense": 2200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4048&request_locale=pt"
+    },
+    {
+      "id": "88819587",
+      "konamiId": 4010,
+      "name": "Dragão Filhote",
+      "englishName": "Baby Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "WIND",
+      "level": 3,
+      "atk": 1200,
+      "defense": 700,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4010&request_locale=pt"
+    },
+    {
+      "id": "75356564",
+      "konamiId": 4206,
+      "name": "Pequeno Dragão",
+      "englishName": "Petit Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "WIND",
+      "level": 2,
+      "atk": 600,
+      "defense": 700,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4206&request_locale=pt"
+    },
+    {
+      "id": "87796900",
+      "konamiId": 4013,
+      "name": "Dragão Alado, Guardião da Fortaleza No1",
+      "englishName": "Winged Dragon, Guardian of the Fortress #1",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "WIND",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4013&request_locale=pt"
+    },
+    {
+      "id": "55444629",
+      "konamiId": 4567,
+      "name": "Dragão Inferior",
+      "englishName": "Lesser Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "WIND",
+      "level": 4,
+      "atk": 1200,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4567&request_locale=pt"
+    },
+    {
+      "id": "67494157",
+      "konamiId": 4100,
+      "name": "Dragão Rastejante",
+      "englishName": "Crawling Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "EARTH",
+      "level": 5,
+      "atk": 1600,
+      "defense": 1400,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4100&request_locale=pt"
+    },
+    {
+      "id": "28279543",
+      "konamiId": 4045,
+      "name": "Maldição do Dragão",
+      "englishName": "Curse of Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "DARK",
+      "level": 5,
+      "atk": 2000,
+      "defense": 1500,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4045&request_locale=pt"
+    },
+    {
+      "id": "67724379",
+      "konamiId": 4037,
+      "name": "Dragão Koumori",
+      "englishName": "Koumori Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1500,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4037&request_locale=pt"
+    },
+    {
+      "id": "33064647",
+      "konamiId": 4302,
+      "name": "Dragão Escudo de Um Só Olho",
+      "englishName": "One-Eyed Shield Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "WIND",
+      "level": 3,
+      "atk": 700,
+      "defense": 1300,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4302&request_locale=pt"
+    },
+    {
+      "id": "38199696",
+      "konamiId": 4345,
+      "name": "Remédio Vermelho",
+      "englishName": "Red Medicine",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Recuperação de pontos de vida.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4345&request_locale=pt"
+    },
+    {
+      "id": "66788016",
+      "konamiId": 4835,
+      "name": "Fissura",
+      "englishName": "Fissure",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Remoção de monstro do adversário.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4835&request_locale=pt"
+    },
+    {
+      "id": "17814387",
+      "konamiId": 4849,
+      "name": "Reforços",
+      "englishName": "Reinforcements",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Reforço temporário de ataque.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4849&request_locale=pt"
+    },
+    {
+      "id": "44209392",
+      "konamiId": 4850,
+      "name": "Muralhas do Castelo",
+      "englishName": "Castle Walls",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Reforço temporário de defesa.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4850&request_locale=pt"
+    },
+    {
+      "id": "86318356",
+      "konamiId": 4339,
+      "name": "Sogen",
+      "englishName": "Sogen",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Magia de Campo: Guerreiros e Bestas-Guerreiras ganham 200 ATK/DEF.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4339&request_locale=pt",
+      "field": true
+    },
+    {
+      "id": "45231177",
+      "konamiId": 4021,
+      "name": "Espadachim das Chamas",
+      "englishName": "Flame Swordsman",
+      "kind": "monster",
+      "monsterType": "fusion",
+      "race": "Warrior",
+      "attribute": "FIRE",
+      "level": 5,
+      "atk": 1800,
+      "defense": 1600,
+      "summary": "Fusão: Manipulador de Chamas + Masaki, o Espadachim Lendário.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4021&request_locale=pt",
+      "fusion": [
+        "34460851",
+        "44287299"
+      ]
+    },
+    {
+      "id": "34460851",
+      "konamiId": 4148,
+      "name": "Manipulador de Chamas",
+      "englishName": "Flame Manipulator",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "FIRE",
+      "level": 3,
+      "atk": 900,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4148&request_locale=pt"
+    },
+    {
+      "id": "24094653",
+      "konamiId": 4837,
+      "name": "Polimerização",
+      "englishName": "Polymerization",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Fusão de monstros usando materiais da mão ou do campo.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4837&request_locale=pt"
+    },
+    {
+      "id": "89631139",
+      "konamiId": 4007,
+      "name": "Dragão Branco de Olhos Azuis",
+      "englishName": "Blue-Eyes White Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "LIGHT",
+      "level": 8,
+      "atk": 3000,
+      "defense": 2500,
+      "summary": "Monstro Normal: sem efeito. Exige 2 tributos na Invocação-Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007&request_locale=pt"
+    },
+    {
+      "id": "46986414",
+      "konamiId": 4041,
+      "name": "Mago Negro",
+      "englishName": "Dark Magician",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 7,
+      "atk": 2500,
+      "defense": 2100,
+      "summary": "Monstro Normal: sem efeito. Exige 2 tributos na Invocação-Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4041&request_locale=pt"
+    },
+    {
+      "id": "74677422",
+      "konamiId": 4088,
+      "name": "Dragão Negro de Olhos Vermelhos",
+      "englishName": "Red-Eyes Black Dragon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "DARK",
+      "level": 7,
+      "atk": 2400,
+      "defense": 2000,
+      "summary": "Monstro Normal: sem efeito. Exige 2 tributos na Invocação-Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4088&request_locale=pt"
+    },
+    {
+      "id": "41392891",
+      "konamiId": 4012,
+      "name": "Diabrete Selvagem",
+      "englishName": "Feral Imp",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1300,
+      "defense": 1400,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4012&request_locale=pt"
+    },
+    {
+      "id": "70781052",
+      "konamiId": 4028,
+      "name": "Caveira Invocada",
+      "englishName": "Summoned Skull",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 6,
+      "atk": 2500,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4028&request_locale=pt"
+    },
+    {
+      "id": "32452818",
+      "konamiId": 4033,
+      "name": "Castor Guerreiro",
+      "englishName": "Beaver Warrior",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast-Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1200,
+      "defense": 1500,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4033&request_locale=pt"
+    },
+    {
+      "id": "06368038",
+      "konamiId": 4044,
+      "name": "Gaia, o Cavaleiro Impetuoso",
+      "englishName": "Gaia The Fierce Knight",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 7,
+      "atk": 2300,
+      "defense": 2100,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4044&request_locale=pt"
+    },
+    {
+      "id": "40374923",
+      "konamiId": 4065,
+      "name": "Cemitério de Mamutes",
+      "englishName": "Mammoth Graveyard",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dinosaur",
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 1200,
+      "defense": 800,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4065&request_locale=pt"
+    },
+    {
+      "id": "13429800",
+      "konamiId": 4066,
+      "name": "O Grande Branco",
+      "englishName": "Great White",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fish",
+      "attribute": "WATER",
+      "level": 4,
+      "atk": 1600,
+      "defense": 800,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4066&request_locale=pt"
+    },
+    {
+      "id": "90357090",
+      "konamiId": 4071,
+      "name": "O Presa de Prata",
+      "englishName": "Silver Fang",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 1200,
+      "defense": 800,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4071&request_locale=pt"
+    },
+    {
+      "id": "13039848",
+      "konamiId": 4080,
+      "name": "Soldado de Pedra Gigante",
+      "englishName": "Giant Soldier of Stone",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Rock",
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 1300,
+      "defense": 2000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4080&request_locale=pt"
+    },
+    {
+      "id": "66672569",
+      "konamiId": 4103,
+      "name": "Dragão Zumbi",
+      "englishName": "Dragon Zombie",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Zombie",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 1600,
+      "defense": 0,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4103&request_locale=pt"
+    },
+    {
+      "id": "16972957",
+      "konamiId": 4117,
+      "name": "Doma, O Anjo do Silêncio",
+      "englishName": "Doma The Angel of Silence",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fairy",
+      "attribute": "DARK",
+      "level": 5,
+      "atk": 1600,
+      "defense": 1400,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4117&request_locale=pt"
+    },
+    {
+      "id": "36304921",
+      "konamiId": 4142,
+      "name": "Fantasma Sarcástico",
+      "englishName": "Witty Phantom",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1300,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4142&request_locale=pt"
+    },
+    {
+      "id": "41218256",
+      "konamiId": 4184,
+      "name": "Estende Garras",
+      "englishName": "Claw Reacher",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 1000,
+      "defense": 800,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4184&request_locale=pt"
+    },
+    {
+      "id": "47060154",
+      "konamiId": 4287,
+      "name": "Palhaço Místico",
+      "englishName": "Mystic Clown",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1500,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4287&request_locale=pt"
+    },
+    {
+      "id": "37120512",
+      "konamiId": 4308,
+      "name": "Espada Sombria da Destruição",
+      "englishName": "Sword of Dark Destruction",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4308&request_locale=pt"
+    },
+    {
+      "id": "91595718",
+      "konamiId": 4329,
+      "name": "Livro das Artes Secretas",
+      "englishName": "Book of Secret Arts",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4329&request_locale=pt"
+    },
+    {
+      "id": "53129443",
+      "konamiId": 4342,
+      "name": "Buraco Negro",
+      "englishName": "Dark Hole",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4342&request_locale=pt"
+    },
+    {
+      "id": "84257639",
+      "konamiId": 4348,
+      "name": "Dian Keto, Mestre da Cura",
+      "englishName": "Dian Keto the Cure Master",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4348&request_locale=pt"
+    },
+    {
+      "id": "46474915",
+      "konamiId": 4476,
+      "name": "Fantasma Mágico",
+      "englishName": "Magical Ghost",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Zombie",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1300,
+      "defense": 1400,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4476&request_locale=pt"
+    },
+    {
+      "id": "04206964",
+      "konamiId": 4836,
+      "name": "Buraco Armadilha",
+      "englishName": "Trap Hole",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4836&request_locale=pt"
+    },
+    {
+      "id": "19159413",
+      "konamiId": 4843,
+      "name": "Remover Magia",
+      "englishName": "De-Spell",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4843&request_locale=pt"
+    },
+    {
+      "id": "83764718",
+      "konamiId": 4842,
+      "name": "Reviver Monstro",
+      "englishName": "Monster Reborn",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4842&request_locale=pt"
+    },
+    {
+      "id": "04031928",
+      "konamiId": 4860,
+      "name": "Mudança de Opinião",
+      "englishName": "Change of Heart",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4860&request_locale=pt"
+    },
+    {
+      "id": "86325596",
+      "konamiId": 4882,
+      "name": "Barão da Espada Demoníaca",
+      "englishName": "Baron of the Fiend Sword",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1550,
+      "defense": 800,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4882&request_locale=pt"
+    },
+    {
+      "id": "13723605",
+      "konamiId": 4883,
+      "name": "Baú de Tesouros, Devorador de Homens",
+      "englishName": "Man-Eating Treasure Chest",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1600,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4883&request_locale=pt"
+    },
+    {
+      "id": "12607053",
+      "konamiId": 4886,
+      "name": "Waboku",
+      "englishName": "Waboku",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4886&request_locale=pt"
+    },
+    {
+      "id": "72892473",
+      "konamiId": 4821,
+      "name": "Destruição de Cards",
+      "englishName": "Card Destruction",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4821&request_locale=pt"
+    },
+    {
+      "id": "59197169",
+      "konamiId": 4341,
+      "name": "Yami",
+      "englishName": "Yami",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4341&request_locale=pt",
+      "field": true
+    },
+    {
+      "id": "51482758",
+      "konamiId": 4838,
+      "name": "Remover Armadilha",
+      "englishName": "Remove Trap",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4838&request_locale=pt"
+    },
+    {
+      "id": "76184692",
+      "konamiId": 4009,
+      "name": "Gigante Hitotsu-Me",
+      "englishName": "Hitotsu-Me Giant",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast-Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1200,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4009&request_locale=pt"
+    },
+    {
+      "id": "15303296",
+      "konamiId": 4011,
+      "name": "Ryu-Kishin",
+      "englishName": "Ryu-Kishin",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 1000,
+      "defense": 500,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4011&request_locale=pt"
+    },
+    {
+      "id": "30113682",
+      "konamiId": 4039,
+      "name": "O Juiz",
+      "englishName": "Judge Man",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 6,
+      "atk": 2200,
+      "defense": 1500,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4039&request_locale=pt"
+    },
+    {
+      "id": "01184620",
+      "konamiId": 4072,
+      "name": "Kojikocy",
+      "englishName": "Kojikocy",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1500,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4072&request_locale=pt"
+    },
+    {
+      "id": "01784619",
+      "konamiId": 4086,
+      "name": "Uraby",
+      "englishName": "Uraby",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dinosaur",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1500,
+      "defense": 800,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4086&request_locale=pt"
+    },
+    {
+      "id": "31122090",
+      "konamiId": 4096,
+      "name": "Gyakutenno Megami",
+      "englishName": "Gyakutenno Megami",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "level": 6,
+      "atk": 1800,
+      "defense": 2000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4096&request_locale=pt"
+    },
+    {
+      "id": "68516705",
+      "konamiId": 4097,
+      "name": "Centauro Místico",
+      "englishName": "Mystic Horseman",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1300,
+      "defense": 1550,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4097&request_locale=pt"
+    },
+    {
+      "id": "63308047",
+      "konamiId": 4200,
+      "name": "Terra, O Terrível",
+      "englishName": "Terra the Terrible",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1200,
+      "defense": 1300,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4200&request_locale=pt"
+    },
+    {
+      "id": "89494469",
+      "konamiId": 4239,
+      "name": "Titã Negro do Terror",
+      "englishName": "Dark Titan of Terror",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1300,
+      "defense": 1100,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4239&request_locale=pt"
+    },
+    {
+      "id": "41949033",
+      "konamiId": 4247,
+      "name": "Assassino das Trevas",
+      "englishName": "Dark Assailant",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Zombie",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1200,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4247&request_locale=pt"
+    },
+    {
+      "id": "75499502",
+      "konamiId": 4254,
+      "name": "Mestre & Especialista",
+      "englishName": "Master & Expert",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1200,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4254&request_locale=pt"
+    },
+    {
+      "id": "97360116",
+      "konamiId": 4273,
+      "name": "Guerreiro Demoníaco Desconhecido",
+      "englishName": "Unknown Warrior of Fiend",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 1000,
+      "defense": 500,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4273&request_locale=pt"
+    },
+    {
+      "id": "45121025",
+      "konamiId": 4293,
+      "name": "Ogre da Sombra Negra",
+      "englishName": "Ogre of the Black Shadow",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast-Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1200,
+      "defense": 1400,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4293&request_locale=pt"
+    },
+    {
+      "id": "04614116",
+      "konamiId": 4309,
+      "name": "Energia das Trevas",
+      "englishName": "Dark Energy",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4309&request_locale=pt"
+    },
+    {
+      "id": "98374133",
+      "konamiId": 4330,
+      "name": "Fortalecimento",
+      "englishName": "Invigoration",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4330&request_locale=pt"
+    },
+    {
+      "id": "19523799",
+      "konamiId": 4352,
+      "name": "Ookazi",
+      "englishName": "Ookazi",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4352&request_locale=pt"
+    },
+    {
+      "id": "24611934",
+      "konamiId": 4383,
+      "name": "Ryu-Kishin Potencializado",
+      "englishName": "Ryu-Kishin Powered",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1600,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4383&request_locale=pt"
+    },
+    {
+      "id": "50005633",
+      "konamiId": 4384,
+      "name": "Espadachim Sorrateiro",
+      "englishName": "Swordstalker",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "DARK",
+      "level": 6,
+      "atk": 2000,
+      "defense": 1600,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4384&request_locale=pt"
+    },
+    {
+      "id": "97590747",
+      "konamiId": 4385,
+      "name": "La Jinn, o Gênio Místico da Lâmpada",
+      "englishName": "La Jinn the Mystical Genie of the Lamp",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1800,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4385&request_locale=pt"
+    },
+    {
+      "id": "26378150",
+      "konamiId": 4388,
+      "name": "Kaiser Violento",
+      "englishName": "Rude Kaiser",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast-Warrior",
+      "attribute": "EARTH",
+      "level": 5,
+      "atk": 1800,
+      "defense": 1600,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4388&request_locale=pt"
+    },
+    {
+      "id": "73481154",
+      "konamiId": 4460,
+      "name": "Golem Destruidor",
+      "englishName": "Destroyer Golem",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Rock",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1500,
+      "defense": 1000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4460&request_locale=pt"
+    },
+    {
+      "id": "10202894",
+      "konamiId": 4472,
+      "name": "Pássaro da Crista Vermelha",
+      "englishName": "Skull Red Bird",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "level": 4,
+      "atk": 1550,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4472&request_locale=pt"
+    },
+    {
+      "id": "81057959",
+      "konamiId": 4508,
+      "name": "Humano Dragão",
+      "englishName": "D. Human",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1300,
+      "defense": 1100,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4508&request_locale=pt"
+    },
+    {
+      "id": "21263083",
+      "konamiId": 4603,
+      "name": "Besta Pálida",
+      "englishName": "Pale Beast",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1500,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4603&request_locale=pt"
+    },
+    {
+      "id": "24068492",
+      "konamiId": 4865,
+      "name": "Apenas Sobremesas",
+      "englishName": "Just Desserts",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4865&request_locale=pt"
+    },
+    {
+      "id": "80770678",
+      "konamiId": 4176,
+      "name": "Espírito da Harpa",
+      "englishName": "Spirit of the Harp",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "level": 4,
+      "atk": 800,
+      "defense": 2000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4176&request_locale=pt"
+    },
+    {
+      "id": "04042268",
+      "konamiId": 5146,
+      "name": "Tartaruga Ilha",
+      "englishName": "Island Turtle",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Aqua",
+      "attribute": "WATER",
+      "level": 4,
+      "atk": 1100,
+      "defense": 2000,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5146&request_locale=pt"
+    },
+    {
+      "id": "23771716",
+      "konamiId": 4446,
+      "name": "Peixe de 7 Cores",
+      "englishName": "7 Colored Fish",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fish",
+      "attribute": "WATER",
+      "level": 4,
+      "atk": 1800,
+      "defense": 800,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4446&request_locale=pt"
+    },
+    {
+      "id": "15480588",
+      "konamiId": 4057,
+      "name": "Lagarto Encouraçado",
+      "englishName": "Armored Lizard",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Reptile",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1500,
+      "defense": 1200,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4057&request_locale=pt"
+    },
+    {
+      "id": "05388481",
+      "konamiId": 4973,
+      "name": "Soldado do Fogo Negro #1",
+      "englishName": "Darkfire Soldier #1",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Pyro",
+      "attribute": "FIRE",
+      "level": 4,
+      "atk": 1700,
+      "defense": 1150,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4973&request_locale=pt"
+    },
+    {
+      "id": "30532390",
+      "konamiId": 4980,
+      "name": "Batedor Celeste",
+      "englishName": "Sky Scout",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "level": 4,
+      "atk": 1800,
+      "defense": 600,
+      "summary": "Monstro Normal: sem efeito.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4980&request_locale=pt"
+    },
+    {
+      "id": "25880422",
+      "konamiId": 4874,
+      "name": "Bloquear Ataque",
+      "englishName": "Block Attack",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4874&request_locale=pt"
+    },
+    {
+      "id": "42703248",
+      "konamiId": 4910,
+      "name": "Tornado Gigante",
+      "englishName": "Giant Trunade",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4910&request_locale=pt"
+    },
+    {
+      "id": "50913601",
+      "konamiId": 4338,
+      "name": "Montanha",
+      "englishName": "Mountain",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4338&request_locale=pt",
+      "field": true
+    },
+    {
+      "id": "01435851",
+      "konamiId": 4321,
+      "name": "Tesouro do Dragão",
+      "englishName": "Dragon Treasure",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4321&request_locale=pt"
+    },
+    {
+      "id": "52097679",
+      "konamiId": 4811,
+      "name": "Escudo & Espada",
+      "englishName": "Shield & Sword",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Consulte as regras oficiais e o relatório de suporte do motor.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4811&request_locale=pt"
+    },
+    {
+      "id": "40640057",
+      "konamiId": 4064,
+      "name": "Kuriboh",
+      "englishName": "Kuriboh",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 1,
+      "atk": 300,
+      "defense": 200,
+      "summary": "Durante o cálculo de dano de um ataque do oponente: descarte esta carta da mão; você não recebe dano de batalha desse combate. Não impede a destruição do monstro.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4064&request_locale=en"
+    },
+    {
+      "id": "54652250",
+      "konamiId": 4507,
+      "name": "Inseto Devorador de Homens",
+      "englishName": "Man-Eater Bug",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Insect",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 450,
+      "defense": 600,
+      "summary": "VIRAR: escolha 1 monstro no campo; destrua-o.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4507&request_locale=en"
+    },
+    {
+      "id": "07089711",
+      "konamiId": 4547,
+      "name": "Hane-Hane",
+      "englishName": "Hane-Hane",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 450,
+      "defense": 500,
+      "summary": "VIRAR: escolha 1 monstro no campo; devolva-o à mão do dono.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4547&request_locale=en"
+    },
+    {
+      "id": "31560081",
+      "konamiId": 4434,
+      "name": "Mago da Fé",
+      "englishName": "Magician of Faith",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "level": 1,
+      "atk": 300,
+      "defense": 400,
+      "summary": "VIRAR: escolha 1 Magia no seu Cemitério; adicione-a à sua mão.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4434&request_locale=en"
+    },
+    {
+      "id": "28933734",
+      "konamiId": 4108,
+      "name": "Máscara das Trevas",
+      "englishName": "Mask of Darkness",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 900,
+      "defense": 400,
+      "summary": "VIRAR: escolha 1 Armadilha no seu Cemitério; adicione-a à sua mão.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4108&request_locale=en"
+    },
+    {
+      "id": "60694662",
+      "konamiId": 4546,
+      "name": "Anjo Esquelético",
+      "englishName": "Skelengel",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "level": 2,
+      "atk": 900,
+      "defense": 400,
+      "summary": "VIRAR: compre 1 carta.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4546&request_locale=en"
+    },
+    {
+      "id": "11384280",
+      "konamiId": 4518,
+      "name": "Soldado Canhão",
+      "englishName": "Cannon Soldier",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Machine",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1300,
+      "summary": "Ofereça 1 monstro que você controla como Tributo; cause 500 de dano ao oponente.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4518&request_locale=pt"
+    },
+    {
+      "id": "26202165",
+      "konamiId": 4054,
+      "name": "Sangan",
+      "englishName": "Sangan",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 1000,
+      "defense": 600,
+      "summary": "Se enviado do campo ao Cemitério: busque no Deck 1 monstro com até 1500 ATK. Uma vez por turno; não ative cards/efeitos de cards com esse nome neste turno.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4054&request_locale=pt"
+    },
+    {
+      "id": "78010363",
+      "konamiId": 4580,
+      "name": "Bruxa da Floresta Negra",
+      "englishName": "Witch of the Black Forest",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1100,
+      "defense": 1200,
+      "summary": "Se enviada do campo ao Cemitério: busque no Deck 1 monstro com até 1500 DEF. Uma vez por turno; não ative cards/efeitos de cards com esse nome neste turno.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4580&request_locale=pt"
+    },
+    {
+      "id": "77585513",
+      "konamiId": 4758,
+      "name": "Jinzo",
+      "englishName": "Jinzo",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Machine",
+      "attribute": "DARK",
+      "level": 6,
+      "atk": 2400,
+      "defense": 1500,
+      "summary": "Enquanto estiver com a face para cima no campo, nenhum jogador pode ativar Armadilhas. Negue os efeitos de Armadilha no campo.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4758&request_locale=pt"
+    },
+    {
+      "id": "54098121",
+      "konamiId": 4172,
+      "name": "Ventríloco Misterioso",
+      "englishName": "Mysterious Puppeteer",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1000,
+      "defense": 1500,
+      "summary": "Quando outro monstro é Invocado por Invocação-Normal ou Virar: ganhe 500 PV.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4172&request_locale=pt"
+    },
+    {
+      "id": "83011277",
+      "konamiId": 4930,
+      "name": "Tomate Místico",
+      "englishName": "Mystic Tomato",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Plant",
+      "attribute": "DARK",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1100,
+      "summary": "Se for destruído em batalha e enviado ao Cemitério: você pode Invocar por Invocação-Especial 1 monstro TREVAS com até 1500 ATK do Deck em Ataque.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4930&request_locale=pt"
+    },
+    {
+      "id": "77414722",
+      "konamiId": 4862,
+      "name": "Bloqueador de Magia",
+      "englishName": "Magic Jammer",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Quando uma Magia é ativada: descarte 1 carta; negue a ativação e destrua a Magia.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4862&request_locale=pt"
+    },
+    {
+      "id": "03819470",
+      "konamiId": 4863,
+      "name": "Sete Ferramentas do Bandido",
+      "englishName": "Seven Tools of the Bandit",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Quando uma Armadilha é ativada: pague 1000 PV; negue a ativação e destrua a Armadilha.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4863&request_locale=pt"
+    },
+    {
+      "id": "44095762",
+      "konamiId": 4887,
+      "name": "Força do Espelho",
+      "englishName": "Mirror Force",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Quando um monstro do oponente declara um ataque: destrua todos os monstros em Posição de Ataque que o oponente controla.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4887&request_locale=pt"
+    },
+    {
+      "id": "53582587",
+      "konamiId": 5114,
+      "name": "Tributo Torrencial",
+      "englishName": "Torrential Tribute",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Quando um ou mais monstros forem Invocados: destrua todos os monstros no campo.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5114&request_locale=pt"
+    },
+    {
+      "id": "29401950",
+      "konamiId": 5400,
+      "name": "Buraco Armadilha Sem Fundo",
+      "englishName": "Bottomless Trap Hole",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Quando seu oponente Invocar um ou mais monstros com 1500 ou mais de ATK: destrua esses monstros e, se isso acontecer, bana-os.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5400&request_locale=pt"
+    },
+    {
+      "id": "56120475",
+      "konamiId": 5799,
+      "name": "Armadura Sakuretsu",
+      "englishName": "Sakuretsu Armor",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Quando um monstro do oponente declarar um ataque: escolha o monstro atacante; destrua o alvo.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5799&request_locale=pt"
+    },
+    {
+      "id": "55144522",
+      "konamiId": 4844,
+      "name": "Pote da Ganância",
+      "englishName": "Pot of Greed",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Compre 2 cartas.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4844&request_locale=pt"
+    },
+    {
+      "id": "12580477",
+      "konamiId": 4343,
+      "name": "Raigeki",
+      "englishName": "Raigeki",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Destrua todos os monstros que seu oponente controla.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4343&request_locale=pt"
+    },
+    {
+      "id": "05318639",
+      "konamiId": 4909,
+      "name": "Tufão Espacial Místico",
+      "englishName": "Mystical Space Typhoon",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Magia Rápida: escolha 1 Magia/Armadilha no campo; destrua-a. Destruir não significa negar a ativação.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4909&request_locale=pt"
+    },
+    {
+      "id": "14087893",
+      "konamiId": 5432,
+      "name": "Livro da Lua",
+      "englishName": "Book of Moon",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Magia Rápida: escolha 1 monstro com a face para cima no campo; coloque-o com a face para baixo em Posição de Defesa.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5432&request_locale=pt"
+    },
+    {
+      "id": "76103675",
+      "konamiId": 4349,
+      "name": "Faíscas",
+      "englishName": "Sparks",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Cause 200 de dano ao oponente.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4349&ope=2&request_locale=en"
+    },
+    {
+      "id": "46130346",
+      "konamiId": 4350,
+      "name": "Hinotama",
+      "englishName": "Hinotama",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Cause 500 de dano ao oponente.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4350&ope=2&request_locale=en"
+    },
+    {
+      "id": "20871001",
+      "konamiId": 4840,
+      "name": "Medicamento Azul",
+      "englishName": "Blue Medicine",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Recupere 400 PV.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4840&ope=2&request_locale=en"
+    },
+    {
+      "id": "47852924",
+      "konamiId": 4347,
+      "name": "Alma do Puro",
+      "englishName": "Soul of the Pure",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Recupere 800 PV.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4347&ope=2&request_locale=en"
+    },
+    {
+      "id": "46918794",
+      "konamiId": 4353,
+      "name": "Fogo Medonho",
+      "englishName": "Tremendous Fire",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Cause simultaneamente 1000 de dano ao oponente e 500 a você.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4353&ope=2&request_locale=en"
+    },
+    {
+      "id": "70368879",
+      "konamiId": 4895,
+      "name": "Goblin Inexperiente",
+      "englishName": "Upstart Goblin",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Compre 1 carta; depois, o oponente recupera 1000 PV.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4895&ope=2&request_locale=en"
+    },
+    {
+      "id": "83968380",
+      "konamiId": 5210,
+      "name": "Jarra da Ganância",
+      "englishName": "Jar of Greed",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Compre 1 carta.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5210&ope=2&request_locale=en"
+    },
+    {
+      "id": "14315573",
+      "konamiId": 4804,
+      "name": "Negativação de Ataque",
+      "englishName": "Negate Attack",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Na declaração de ataque adversário, escolha o atacante; negue o ataque e, se conseguir, encerre a Fase de Batalha.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4804&ope=2&request_locale=en"
+    },
+    {
+      "id": "62279055",
+      "konamiId": 5124,
+      "name": "Cilindro Mágico",
+      "englishName": "Magic Cylinder",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Na declaração de ataque adversário, escolha o atacante; negue o ataque e, se conseguir, cause dano igual ao ATK dele.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5124&ope=2&request_locale=en"
+    },
+    {
+      "id": "46718686",
+      "konamiId": 4233,
+      "name": "Hitodenchak",
+      "englishName": "Hitodenchak",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Aqua",
+      "attribute": "WATER",
+      "level": 2,
+      "atk": 600,
+      "defense": 700,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4233&request_locale=ja"
+    },
+    {
+      "id": "46457856",
+      "konamiId": 4111,
+      "name": "Tomozaurus",
+      "englishName": "Tomozaurus",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dinosaur",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 500,
+      "defense": 400,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4111&request_locale=ja"
+    },
+    {
+      "id": "15507080",
+      "konamiId": 4274,
+      "name": "Sectarian of Secrets",
+      "englishName": "Sectarian of Secrets",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 700,
+      "defense": 500,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4274&request_locale=ja"
+    },
+    {
+      "id": "64511793",
+      "konamiId": 4191,
+      "name": "Eyearmor",
+      "englishName": "Eyearmor",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 600,
+      "defense": 500,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4191&request_locale=ja"
+    },
+    {
+      "id": "84285623",
+      "konamiId": 4243,
+      "name": "Haniwa",
+      "englishName": "Haniwa",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Rock",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 500,
+      "defense": 500,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4243&request_locale=ja"
+    },
+    {
+      "id": "38142739",
+      "konamiId": 4214,
+      "name": "Petit Angel",
+      "englishName": "Petit Angel",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "level": 3,
+      "atk": 600,
+      "defense": 900,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4214&request_locale=ja"
+    },
+    {
+      "id": "53581214",
+      "konamiId": 4160,
+      "name": "Fire Reaper",
+      "englishName": "Fire Reaper",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Zombie",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 700,
+      "defense": 500,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4160&request_locale=ja"
+    },
+    {
+      "id": "90963488",
+      "konamiId": 4135,
+      "name": "Nemuriko",
+      "englishName": "Nemuriko",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 800,
+      "defense": 700,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4135&request_locale=ja"
+    },
+    {
+      "id": "08783685",
+      "konamiId": 4235,
+      "name": "Hourglass of Life",
+      "englishName": "Hourglass of Life",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4235&request_locale=ja"
+    },
+    {
+      "id": "22026707",
+      "konamiId": 4110,
+      "name": "Curtain of the Dark Ones",
+      "englishName": "Curtain of the Dark Ones",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 600,
+      "defense": 500,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4110&request_locale=ja"
+    },
+    {
+      "id": "53832650",
+      "konamiId": 4218,
+      "name": "Meotoko",
+      "englishName": "Meotoko",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4218&request_locale=ja"
+    },
+    {
+      "id": "09159938",
+      "konamiId": 4119,
+      "name": "Dark Gray",
+      "englishName": "Dark Gray",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 800,
+      "defense": 900,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4119&request_locale=ja"
+    },
+    {
+      "id": "18710707",
+      "konamiId": 4271,
+      "name": "The Furious Sea King",
+      "englishName": "The Furious Sea King",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Aqua",
+      "attribute": "WATER",
+      "level": 3,
+      "atk": 800,
+      "defense": 700,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4271&request_locale=ja"
+    },
+    {
+      "id": "47695416",
+      "konamiId": 4248,
+      "name": "Candle of Fate",
+      "englishName": "Candle of Fate",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 600,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4248&request_locale=ja"
+    },
+    {
+      "id": "75889523",
+      "konamiId": 4208,
+      "name": "Archfiend Marmot of Nefariousness",
+      "englishName": "Archfiend Marmot of Nefariousness",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 400,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4208&request_locale=ja"
+    },
+    {
+      "id": "09430387",
+      "konamiId": 4197,
+      "name": "LaLa Li-oon",
+      "englishName": "LaLa Li-oon",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Thunder",
+      "attribute": "WIND",
+      "level": 2,
+      "atk": 600,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4197&request_locale=ja"
+    },
+    {
+      "id": "52800428",
+      "konamiId": 4141,
+      "name": "Fiend's Hand",
+      "englishName": "Fiend's Hand",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Zombie",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 600,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4141&request_locale=ja"
+    },
+    {
+      "id": "39175982",
+      "konamiId": 4215,
+      "name": "Winged Cleaver",
+      "englishName": "Winged Cleaver",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Insect",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 700,
+      "defense": 700,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4215&request_locale=ja"
+    },
+    {
+      "id": "15150371",
+      "konamiId": 4267,
+      "name": "Archfiend Mirror",
+      "englishName": "Archfiend Mirror",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4267&request_locale=ja"
+    },
+    {
+      "id": "15510988",
+      "konamiId": 4217,
+      "name": "Thunder Kid",
+      "englishName": "Thunder Kid",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Thunder",
+      "attribute": "WIND",
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4217&request_locale=ja"
+    },
+    {
+      "id": "08944575",
+      "konamiId": 4246,
+      "name": "The Drdek",
+      "englishName": "The Drdek",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 700,
+      "defense": 800,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4246&request_locale=ja"
+    },
+    {
+      "id": "53293545",
+      "konamiId": 4163,
+      "name": "Firegrass",
+      "englishName": "Firegrass",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Plant",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4163&request_locale=ja"
+    },
+    {
+      "id": "15401633",
+      "konamiId": 4220,
+      "name": "Kagemusha of the Blue Flame",
+      "englishName": "Kagemusha of the Blue Flame",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 800,
+      "defense": 400,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4220&request_locale=ja"
+    },
+    {
+      "id": "85705804",
+      "konamiId": 4306,
+      "name": "Kurama",
+      "englishName": "Kurama",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "level": 3,
+      "atk": 800,
+      "defense": 800,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4306&request_locale=ja"
+    },
+    {
+      "id": "12829151",
+      "konamiId": 4358,
+      "name": "Kanan the Swordmistress",
+      "englishName": "Kanan the Swordmistress",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1400,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4358&request_locale=ja"
+    },
+    {
+      "id": "99030164",
+      "konamiId": 4204,
+      "name": "Happy Lover",
+      "englishName": "Happy Lover",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "level": 2,
+      "atk": 800,
+      "defense": 500,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4204&request_locale=ja"
+    },
+    {
+      "id": "15042735",
+      "konamiId": 4180,
+      "name": "Hurricail",
+      "englishName": "Hurricail",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "WIND",
+      "level": 2,
+      "atk": 900,
+      "defense": 200,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4180&request_locale=ja"
+    },
+    {
+      "id": "97973387",
+      "konamiId": 4213,
+      "name": "Droll Bird",
+      "englishName": "Droll Bird",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "level": 2,
+      "atk": 600,
+      "defense": 500,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4213&request_locale=ja"
+    },
+    {
+      "id": "64154377",
+      "konamiId": 4260,
+      "name": "Embryonic Beast",
+      "englishName": "Embryonic Beast",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 500,
+      "defense": 750,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4260&request_locale=ja"
+    },
+    {
+      "id": "88435542",
+      "konamiId": 4182,
+      "name": "Fire Eye",
+      "englishName": "Fire Eye",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Pyro",
+      "attribute": "FIRE",
+      "level": 2,
+      "atk": 800,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4182&request_locale=ja"
+    },
+    {
+      "id": "77603950",
+      "konamiId": 4185,
+      "name": "Phantom Dewan",
+      "englishName": "Phantom Dewan",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4185&request_locale=ja"
+    },
+    {
+      "id": "83678433",
+      "konamiId": 4228,
+      "name": "Midnight Fiend",
+      "englishName": "Midnight Fiend",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fiend",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 800,
+      "defense": 600,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4228&request_locale=ja"
+    },
+    {
+      "id": "76704943",
+      "konamiId": 4128,
+      "name": "Yamatano Dragon Scroll",
+      "englishName": "Yamatano Dragon Scroll",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Dragon",
+      "attribute": "WIND",
+      "level": 2,
+      "atk": 900,
+      "defense": 300,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4128&request_locale=ja"
+    },
+    {
+      "id": "03985011",
+      "konamiId": 4189,
+      "name": "Lucky Trinket",
+      "englishName": "Lucky Trinket",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "level": 2,
+      "atk": 600,
+      "defense": 800,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4189&request_locale=ja"
+    },
+    {
+      "id": "29948642",
+      "konamiId": 4165,
+      "name": "Dig Beak",
+      "englishName": "Dig Beak",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 500,
+      "defense": 800,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4165&request_locale=ja"
+    },
+    {
+      "id": "03732747",
+      "konamiId": 4249,
+      "name": "Water Element",
+      "englishName": "Water Element",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Aqua",
+      "attribute": "WATER",
+      "level": 3,
+      "atk": 900,
+      "defense": 700,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4249&request_locale=ja"
+    },
+    {
+      "id": "37243151",
+      "konamiId": 4136,
+      "name": "Weather Control",
+      "englishName": "Weather Control",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "level": 2,
+      "atk": 600,
+      "defense": 400,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4136&request_locale=ja"
+    },
+    {
+      "id": "13193642",
+      "konamiId": 4129,
+      "name": "Dark Plant",
+      "englishName": "Dark Plant",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Plant",
+      "attribute": "DARK",
+      "level": 1,
+      "atk": 300,
+      "defense": 400,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4129&request_locale=ja"
+    },
+    {
+      "id": "61201220",
+      "konamiId": 4209,
+      "name": "Phantom Ghost",
+      "englishName": "Phantom Ghost",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Zombie",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 600,
+      "defense": 800,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4209&request_locale=ja"
+    },
+    {
+      "id": "49258578",
+      "konamiId": 4193,
+      "name": "Gate Deeg",
+      "englishName": "Gate Deeg",
+      "kind": "monster",
+      "monsterType": "normal",
+      "race": "Beast",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 700,
+      "defense": 800,
+      "summary": "Monstro Normal.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4193&request_locale=ja"
+    },
+    {
+      "id": "11868825",
+      "konamiId": 4346,
+      "name": "Goblin's Secret Remedy",
+      "englishName": "Goblin's Secret Remedy",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4346&request_locale=ja"
+    },
+    {
+      "id": "12472242",
+      "konamiId": 4403,
+      "name": "Leghul",
+      "englishName": "Leghul",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Insect",
+      "attribute": "EARTH",
+      "level": 1,
+      "atk": 300,
+      "defense": 350,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4403&request_locale=ja"
+    },
+    {
+      "id": "18144506",
+      "konamiId": 4678,
+      "name": "Harpie's Feather Duster",
+      "englishName": "Harpie's Feather Duster",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4678&request_locale=ja"
+    },
+    {
+      "id": "19613556",
+      "konamiId": 4891,
+      "name": "Heavy Storm",
+      "englishName": "Heavy Storm",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4891&request_locale=ja"
+    },
+    {
+      "id": "21347810",
+      "konamiId": 4494,
+      "name": "Rainbow Flower",
+      "englishName": "Rainbow Flower",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Plant",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 400,
+      "defense": 500,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4494&request_locale=ja"
+    },
+    {
+      "id": "22702055",
+      "konamiId": 4340,
+      "name": "Umi",
+      "englishName": "Umi",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4340&request_locale=ja",
+      "field": true
+    },
+    {
+      "id": "23424603",
+      "konamiId": 4337,
+      "name": "Wasteland",
+      "englishName": "Wasteland",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4337&request_locale=ja",
+      "field": true
+    },
+    {
+      "id": "25769732",
+      "konamiId": 4331,
+      "name": "Machine Conversion Factory",
+      "englishName": "Machine Conversion Factory",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4331&request_locale=ja"
+    },
+    {
+      "id": "32809211",
+      "konamiId": 4428,
+      "name": "Jinzo #7",
+      "englishName": "Jinzo #7",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Machine",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 500,
+      "defense": 400,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4428&request_locale=ja"
+    },
+    {
+      "id": "36607978",
+      "konamiId": 4325,
+      "name": "Mystical Moon",
+      "englishName": "Mystical Moon",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4325&request_locale=ja"
+    },
+    {
+      "id": "39774685",
+      "konamiId": 4316,
+      "name": "Vile Germs",
+      "englishName": "Vile Germs",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4316&request_locale=ja"
+    },
+    {
+      "id": "46009906",
+      "konamiId": 4314,
+      "name": "Beast Fangs",
+      "englishName": "Beast Fangs",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4314&request_locale=ja"
+    },
+    {
+      "id": "51371017",
+      "konamiId": 4272,
+      "name": "Princess of Tsurugi",
+      "englishName": "Princess of Tsurugi",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Warrior",
+      "attribute": "WIND",
+      "level": 3,
+      "atk": 900,
+      "defense": 700,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4272&request_locale=ja"
+    },
+    {
+      "id": "57839750",
+      "konamiId": 4926,
+      "name": "Mother Grizzly",
+      "englishName": "Mother Grizzly",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Beast-Warrior",
+      "attribute": "WATER",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1000,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4926&request_locale=ja"
+    },
+    {
+      "id": "58861941",
+      "konamiId": 4404,
+      "name": "Ooguchi",
+      "englishName": "Ooguchi",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Aqua",
+      "attribute": "WATER",
+      "level": 1,
+      "atk": 300,
+      "defense": 250,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4404&request_locale=ja"
+    },
+    {
+      "id": "60806437",
+      "konamiId": 4917,
+      "name": "UFO Turtle",
+      "englishName": "UFO Turtle",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Machine",
+      "attribute": "FIRE",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1200,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4917&request_locale=ja"
+    },
+    {
+      "id": "61854111",
+      "konamiId": 4307,
+      "name": "Legendary Sword",
+      "englishName": "Legendary Sword",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4307&request_locale=ja"
+    },
+    {
+      "id": "66889139",
+      "konamiId": 4043,
+      "name": "Gaia the Dragon Champion",
+      "englishName": "Gaia the Dragon Champion",
+      "kind": "monster",
+      "monsterType": "fusion",
+      "race": "Dragon",
+      "attribute": "WIND",
+      "level": 7,
+      "atk": 2600,
+      "defense": 2100,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4043&request_locale=ja",
+      "fusion": [
+        "06368038",
+        "28279543"
+      ]
+    },
+    {
+      "id": "73134081",
+      "konamiId": 4351,
+      "name": "Final Flame",
+      "englishName": "Final Flame",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4351&request_locale=ja"
+    },
+    {
+      "id": "84834865",
+      "konamiId": 4927,
+      "name": "Flying Kamakiri #1",
+      "englishName": "Flying Kamakiri #1",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Insect",
+      "attribute": "WIND",
+      "level": 4,
+      "atk": 1400,
+      "defense": 900,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4927&request_locale=ja"
+    },
+    {
+      "id": "87430998",
+      "konamiId": 4336,
+      "name": "Forest",
+      "englishName": "Forest",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4336&request_locale=ja",
+      "field": true
+    },
+    {
+      "id": "95956346",
+      "konamiId": 4924,
+      "name": "Shining Angel",
+      "englishName": "Shining Angel",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "level": 4,
+      "atk": 1400,
+      "defense": 800,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4924&request_locale=ja"
+    },
+    {
+      "id": "97017120",
+      "konamiId": 4915,
+      "name": "Giant Rat",
+      "englishName": "Giant Rat",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1450,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4915&request_locale=ja"
+    },
+    {
+      "id": "98049915",
+      "konamiId": 4393,
+      "name": "Mystic Lamp",
+      "englishName": "Mystic Lamp",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 1,
+      "atk": 400,
+      "defense": 300,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4393&request_locale=ja"
+    },
+    {
+      "id": "98252586",
+      "konamiId": 4333,
+      "name": "Follow Wind",
+      "englishName": "Follow Wind",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4333&request_locale=ja"
+    },
+    {
+      "id": "05901497",
+      "konamiId": 4641,
+      "name": "Queen's Double",
+      "englishName": "Queen's Double",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 1,
+      "atk": 350,
+      "defense": 300,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4641&request_locale=ja"
+    },
+    {
+      "id": "02370081",
+      "konamiId": 4315,
+      "name": "Steel Shell",
+      "englishName": "Steel Shell",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descrição operacional gerada da definição auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4315&request_locale=ja"
+    },
+    {
+      "id": "43716289",
+      "konamiId": 5413,
+      "name": "Poison Mummy",
+      "englishName": "Poison Mummy",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Zombie",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1000,
+      "defense": 1800,
+      "summary": "Descrição operacional gerada da definição individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5413&request_locale=ja"
+    },
+    {
+      "id": "45141844",
+      "konamiId": 5651,
+      "name": "Old Vindictive Magician",
+      "englishName": "Old Vindictive Magician",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 450,
+      "defense": 600,
+      "summary": "Descrição operacional gerada da definição individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5651&request_locale=ja"
+    },
+    {
+      "id": "77491079",
+      "konamiId": 5818,
+      "name": "Gale Lizard",
+      "englishName": "Gale Lizard",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Reptile",
+      "attribute": "WATER",
+      "level": 4,
+      "atk": 1400,
+      "defense": 700,
+      "summary": "Descrição operacional gerada da definição individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5818&request_locale=ja"
+    },
+    {
+      "id": "91869203",
+      "konamiId": 5195,
+      "name": "Amazoness Archer",
+      "englishName": "Amazoness Archer",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1400,
+      "defense": 1000,
+      "summary": "Descrição operacional gerada da definição individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5195&request_locale=ja"
+    },
+    {
+      "id": "69579761",
+      "konamiId": 5661,
+      "name": "Des Koala",
+      "englishName": "Des Koala",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Beast",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 1100,
+      "defense": 1800,
+      "summary": "Descrição operacional gerada da definição individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5661&request_locale=ja"
+    },
+    {
+      "id": "83994646",
+      "konamiId": 5139,
+      "name": "4-Starred Ladybug of Doom",
+      "englishName": "4-Starred Ladybug of Doom",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Insect",
+      "attribute": "WIND",
+      "level": 3,
+      "atk": 800,
+      "defense": 1200,
+      "summary": "Descrição operacional gerada da definição individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5139&request_locale=ja"
+    },
+    {
+      "id": "16430187",
+      "konamiId": 4906,
+      "name": "The Reliable Guardian",
+      "englishName": "The Reliable Guardian",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4906&request_locale=en"
+    },
+    {
+      "id": "18161786",
+      "konamiId": 4937,
+      "name": "Mystic Plasma Zone",
+      "englishName": "Mystic Plasma Zone",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "field": true,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4937&request_locale=en"
+    },
+    {
+      "id": "19384334",
+      "konamiId": 4934,
+      "name": "Molten Destruction",
+      "englishName": "Molten Destruction",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "field": true,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4934&request_locale=en"
+    },
+    {
+      "id": "20065549",
+      "konamiId": 5735,
+      "name": "Non-Spellcasting Area",
+      "englishName": "Non-Spellcasting Area",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5735&request_locale=en"
+    },
+    {
+      "id": "28470714",
+      "konamiId": 4615,
+      "name": "Bladefly",
+      "englishName": "Bladefly",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Insect",
+      "attribute": "WIND",
+      "level": 2,
+      "atk": 600,
+      "defense": 700,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4615&request_locale=en"
+    },
+    {
+      "id": "30778711",
+      "konamiId": 4374,
+      "name": "Shadow Ghoul",
+      "englishName": "Shadow Ghoul",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Zombie",
+      "attribute": "DARK",
+      "level": 5,
+      "atk": 1600,
+      "defense": 1300,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4374&request_locale=en"
+    },
+    {
+      "id": "45778932",
+      "konamiId": 4935,
+      "name": "Rising Air Current",
+      "englishName": "Rising Air Current",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "field": true,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4935&request_locale=en"
+    },
+    {
+      "id": "46657337",
+      "konamiId": 4522,
+      "name": "Muka Muka",
+      "englishName": "Muka Muka",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Rock",
+      "attribute": "EARTH",
+      "level": 2,
+      "atk": 600,
+      "defense": 300,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4522&request_locale=en"
+    },
+    {
+      "id": "56594520",
+      "konamiId": 4932,
+      "name": "Gaia Power",
+      "englishName": "Gaia Power",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "field": true,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4932&request_locale=en"
+    },
+    {
+      "id": "56747793",
+      "konamiId": 5212,
+      "name": "United We Stand",
+      "englishName": "United We Stand",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5212&request_locale=en"
+    },
+    {
+      "id": "67629977",
+      "konamiId": 4498,
+      "name": "Hoshiningen",
+      "englishName": "Hoshiningen",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "level": 2,
+      "atk": 500,
+      "defense": 700,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4498&request_locale=en"
+    },
+    {
+      "id": "68658728",
+      "konamiId": 4604,
+      "name": "Little Chimera",
+      "englishName": "Little Chimera",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Beast",
+      "attribute": "FIRE",
+      "level": 2,
+      "atk": 600,
+      "defense": 550,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4604&request_locale=en"
+    },
+    {
+      "id": "70046172",
+      "konamiId": 4905,
+      "name": "Rush Recklessly",
+      "englishName": "Rush Recklessly",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4905&request_locale=ja"
+    },
+    {
+      "id": "80741828",
+      "konamiId": 4634,
+      "name": "Witch's Apprentice",
+      "englishName": "Witch's Apprentice",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 550,
+      "defense": 500,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4634&request_locale=en"
+    },
+    {
+      "id": "81777047",
+      "konamiId": 4936,
+      "name": "Luminous Spark",
+      "englishName": "Luminous Spark",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "field": true,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4936&request_locale=en"
+    },
+    {
+      "id": "82732705",
+      "konamiId": 5740,
+      "name": "Skill Drain",
+      "englishName": "Skill Drain",
+      "kind": "trap",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5740&request_locale=en"
+    },
+    {
+      "id": "82999629",
+      "konamiId": 4933,
+      "name": "Umiiruka",
+      "englishName": "Umiiruka",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "field": true,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4933&request_locale=en"
+    },
+    {
+      "id": "83746708",
+      "konamiId": 5213,
+      "name": "Mage Power",
+      "englishName": "Mage Power",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5213&request_locale=en"
+    },
+    {
+      "id": "91862578",
+      "konamiId": 6123,
+      "name": "Enraged Muka Muka",
+      "englishName": "Enraged Muka Muka",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Rock",
+      "attribute": "EARTH",
+      "level": 5,
+      "atk": 1200,
+      "defense": 600,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6123&request_locale=ja"
+    },
+    {
+      "id": "07489323",
+      "konamiId": 4533,
+      "name": "Milus Radiant",
+      "englishName": "Milus Radiant",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Beast",
+      "attribute": "EARTH",
+      "level": 1,
+      "atk": 300,
+      "defense": 250,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4533&request_locale=en"
+    },
+    {
+      "id": "08201910",
+      "konamiId": 4530,
+      "name": "Star Boy",
+      "englishName": "Star Boy",
+      "kind": "monster",
+      "monsterType": "effect",
+      "race": "Aqua",
+      "attribute": "WATER",
+      "level": 2,
+      "atk": 550,
+      "defense": 500,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4530&request_locale=en"
+    },
+    {
+      "id": "00403847",
+      "konamiId": 5327,
+      "name": "The A. Forces",
+      "englishName": "The A. Forces",
+      "kind": "spell",
+      "race": null,
+      "attribute": null,
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "summary": "Descricao operacional da definicao individual auditada.",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5327&request_locale=ja"
+    }
+  ],
+  "effects": {
+    "10202894": {
+      "kind": "normal"
+    },
+    "11384280": {
+      "kind": "monsterEffect"
+    },
+    "11868825": {
+      "kind": "heal",
+      "amount": 600
+    },
+    "12472242": {
+      "kind": "monsterEffect"
+    },
+    "12580477": {
+      "kind": "raigeki"
+    },
+    "12607053": {
+      "kind": "waboku"
+    },
+    "12829151": {
+      "kind": "normal"
+    },
+    "13039848": {
+      "kind": "normal"
+    },
+    "13193642": {
+      "kind": "normal"
+    },
+    "13429800": {
+      "kind": "normal"
+    },
+    "13723605": {
+      "kind": "normal"
+    },
+    "14087893": {
+      "kind": "bookOfMoon"
+    },
+    "14315573": {
+      "kind": "attackResponse",
+      "activation": {
+        "speed": 3,
+        "window": "attackDeclared",
+        "damage": "never",
+        "opponentOnly": true
+      },
+      "endBattle": true,
+      "reflectAttack": false
+    },
+    "15025844": {
+      "kind": "normal"
+    },
+    "15042735": {
+      "kind": "normal"
+    },
+    "15150371": {
+      "kind": "normal"
+    },
+    "15303296": {
+      "kind": "normal"
+    },
+    "15401633": {
+      "kind": "normal"
+    },
+    "15480588": {
+      "kind": "normal"
+    },
+    "15507080": {
+      "kind": "normal"
+    },
+    "15510988": {
+      "kind": "normal"
+    },
+    "16430187": {
+      "kind": "temporaryModifier",
+      "atk": 0,
+      "def": 700
+    },
+    "16972957": {
+      "kind": "normal"
+    },
+    "17358176": {
+      "kind": "normal"
+    },
+    "17814387": {
+      "kind": "reinforcements"
+    },
+    "18144506": {
+      "kind": "destroySpellTraps",
+      "scope": "opponent"
+    },
+    "18161786": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "DARK"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "18710707": {
+      "kind": "normal"
+    },
+    "19159413": {
+      "kind": "deSpell"
+    },
+    "19384334": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "FIRE"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "19523799": {
+      "kind": "burn",
+      "amount": 800
+    },
+    "19613556": {
+      "kind": "destroySpellTraps",
+      "scope": "all"
+    },
+    "20065549": {
+      "kind": "continuous",
+      "rules": [
+        {
+          "kind": "immune",
+          "filter": {
+            "nonEffectOnly": true
+          },
+          "from": [
+            "spell"
+          ]
+        }
+      ],
+      "activation": {
+        "speed": 1,
+        "window": "main",
+        "damage": "never"
+      }
+    },
+    "20871001": {
+      "kind": "heal",
+      "amount": 400
+    },
+    "21263083": {
+      "kind": "normal"
+    },
+    "21347810": {
+      "kind": "monsterEffect"
+    },
+    "22026707": {
+      "kind": "normal"
+    },
+    "22702055": {
+      "kind": "field",
+      "races": [
+        "Fish",
+        "Sea Serpent",
+        "Thunder",
+        "Aqua"
+      ],
+      "atk": 200,
+      "def": 200,
+      "penaltyRaces": [
+        "Machine",
+        "Pyro"
+      ]
+    },
+    "23424603": {
+      "kind": "field",
+      "races": [
+        "Dinosaur",
+        "Zombie",
+        "Rock"
+      ],
+      "atk": 200,
+      "def": 200
+    },
+    "23771716": {
+      "kind": "normal"
+    },
+    "24068492": {
+      "kind": "justDesserts"
+    },
+    "24094653": {
+      "kind": "polymerization"
+    },
+    "24611934": {
+      "kind": "normal"
+    },
+    "25769732": {
+      "kind": "equip",
+      "races": [
+        "Machine"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "25880422": {
+      "kind": "blockAttack"
+    },
+    "26202165": {
+      "kind": "monsterEffect"
+    },
+    "26378150": {
+      "kind": "normal"
+    },
+    "28279543": {
+      "kind": "normal"
+    },
+    "28470714": {
+      "kind": "monsterEffect"
+    },
+    "28546905": {
+      "kind": "normal"
+    },
+    "28933734": {
+      "kind": "monsterEffect"
+    },
+    "29401950": {
+      "kind": "bottomlessTrapHole"
+    },
+    "29948642": {
+      "kind": "normal"
+    },
+    "30113682": {
+      "kind": "normal"
+    },
+    "30532390": {
+      "kind": "normal"
+    },
+    "30778711": {
+      "kind": "monsterEffect"
+    },
+    "31122090": {
+      "kind": "normal"
+    },
+    "31560081": {
+      "kind": "monsterEffect"
+    },
+    "32452818": {
+      "kind": "normal"
+    },
+    "32809211": {
+      "kind": "monsterEffect"
+    },
+    "33064647": {
+      "kind": "normal"
+    },
+    "34460851": {
+      "kind": "normal"
+    },
+    "36304921": {
+      "kind": "normal"
+    },
+    "36607978": {
+      "kind": "equip",
+      "races": [
+        "Beast-Warrior"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "37120512": {
+      "kind": "equip",
+      "attribute": "DARK",
+      "atk": 400,
+      "def": -200
+    },
+    "37243151": {
+      "kind": "normal"
+    },
+    "38142739": {
+      "kind": "normal"
+    },
+    "38199696": {
+      "kind": "heal",
+      "amount": 500
+    },
+    "39175982": {
+      "kind": "normal"
+    },
+    "39774685": {
+      "kind": "equip",
+      "races": [
+        "Plant"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "40374923": {
+      "kind": "normal"
+    },
+    "40640057": {
+      "kind": "monsterEffect"
+    },
+    "41218256": {
+      "kind": "normal"
+    },
+    "41392891": {
+      "kind": "normal"
+    },
+    "41949033": {
+      "kind": "normal"
+    },
+    "42703248": {
+      "kind": "giantTrunade"
+    },
+    "43716289": {
+      "kind": "monsterEffect"
+    },
+    "44095762": {
+      "kind": "mirrorForce"
+    },
+    "44209392": {
+      "kind": "castleWalls"
+    },
+    "44287299": {
+      "kind": "normal"
+    },
+    "45121025": {
+      "kind": "normal"
+    },
+    "45141844": {
+      "kind": "monsterEffect"
+    },
+    "45231177": {
+      "kind": "fusion"
+    },
+    "45778932": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "WIND"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "46009906": {
+      "kind": "equip",
+      "races": [
+        "Beast"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "46130346": {
+      "kind": "burn",
+      "amount": 500
+    },
+    "46457856": {
+      "kind": "normal"
+    },
+    "46474915": {
+      "kind": "normal"
+    },
+    "46657337": {
+      "kind": "monsterEffect"
+    },
+    "46718686": {
+      "kind": "normal"
+    },
+    "46918794": {
+      "kind": "sequence",
+      "activation": {
+        "speed": 1,
+        "window": "main",
+        "damage": "never"
+      },
+      "operations": [
+        {
+          "kind": "damage",
+          "recipients": [
+            {
+              "player": "opponent",
+              "amount": 1000
+            },
+            {
+              "player": "self",
+              "amount": 500
+            }
+          ]
+        }
+      ]
+    },
+    "46986414": {
+      "kind": "normal"
+    },
+    "47060154": {
+      "kind": "normal"
+    },
+    "47695416": {
+      "kind": "normal"
+    },
+    "47852924": {
+      "kind": "heal",
+      "amount": 800
+    },
+    "48305365": {
+      "kind": "normal"
+    },
+    "48365709": {
+      "kind": "normal"
+    },
+    "49218300": {
+      "kind": "normal"
+    },
+    "49258578": {
+      "kind": "normal"
+    },
+    "50005633": {
+      "kind": "normal"
+    },
+    "50913601": {
+      "kind": "field",
+      "races": [
+        "Dragon",
+        "Winged Beast",
+        "Thunder"
+      ],
+      "atk": 200,
+      "def": 200
+    },
+    "50930991": {
+      "kind": "normal"
+    },
+    "51371017": {
+      "kind": "monsterEffect"
+    },
+    "51482758": {
+      "kind": "removeTrap"
+    },
+    "52097679": {
+      "kind": "shieldSword"
+    },
+    "52800428": {
+      "kind": "normal"
+    },
+    "53129443": {
+      "kind": "darkHole"
+    },
+    "53293545": {
+      "kind": "normal"
+    },
+    "53581214": {
+      "kind": "normal"
+    },
+    "53582587": {
+      "kind": "torrentialTribute"
+    },
+    "53832650": {
+      "kind": "normal"
+    },
+    "54098121": {
+      "kind": "monsterEffect"
+    },
+    "54652250": {
+      "kind": "monsterEffect"
+    },
+    "55144522": {
+      "kind": "potOfGreed"
+    },
+    "55444629": {
+      "kind": "normal"
+    },
+    "55550921": {
+      "kind": "normal"
+    },
+    "56120475": {
+      "kind": "sakuretsuArmor"
+    },
+    "56594520": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "EARTH"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "56747793": {
+      "kind": "equip",
+      "atk": 0,
+      "def": 0,
+      "count": {
+        "zone": "monsters",
+        "controller": "source",
+        "atk": 800,
+        "def": 800,
+        "faceUp": true
+      }
+    },
+    "57839750": {
+      "kind": "monsterEffect"
+    },
+    "58861941": {
+      "kind": "monsterEffect"
+    },
+    "59197169": {
+      "kind": "field",
+      "races": [
+        "Fiend",
+        "Spellcaster"
+      ],
+      "penaltyRaces": [
+        "Fairy"
+      ],
+      "atk": 200,
+      "def": 200
+    },
+    "60694662": {
+      "kind": "monsterEffect"
+    },
+    "60806437": {
+      "kind": "monsterEffect"
+    },
+    "61201220": {
+      "kind": "normal"
+    },
+    "61854111": {
+      "kind": "equip",
+      "races": [
+        "Warrior"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "62279055": {
+      "kind": "attackResponse",
+      "activation": {
+        "speed": 2,
+        "window": "attackDeclared",
+        "damage": "never",
+        "opponentOnly": true
+      },
+      "endBattle": false,
+      "reflectAttack": true
+    },
+    "63308047": {
+      "kind": "normal"
+    },
+    "64154377": {
+      "kind": "normal"
+    },
+    "64511793": {
+      "kind": "normal"
+    },
+    "66672569": {
+      "kind": "normal"
+    },
+    "66788016": {
+      "kind": "fissure"
+    },
+    "66889139": {
+      "kind": "fusion"
+    },
+    "67494157": {
+      "kind": "normal"
+    },
+    "67629977": {
+      "kind": "monsterEffect"
+    },
+    "67724379": {
+      "kind": "normal"
+    },
+    "68516705": {
+      "kind": "normal"
+    },
+    "68658728": {
+      "kind": "monsterEffect"
+    },
+    "69579761": {
+      "kind": "monsterEffect"
+    },
+    "70046172": {
+      "kind": "temporaryModifier",
+      "atk": 700,
+      "def": 0
+    },
+    "70368879": {
+      "kind": "sequence",
+      "activation": {
+        "speed": 1,
+        "window": "main",
+        "damage": "never"
+      },
+      "operations": [
+        {
+          "kind": "draw",
+          "count": 1
+        },
+        {
+          "kind": "gainLP",
+          "player": "opponent",
+          "amount": 1000
+        }
+      ]
+    },
+    "70781052": {
+      "kind": "normal"
+    },
+    "72892473": {
+      "kind": "cardDestruction"
+    },
+    "73134081": {
+      "kind": "burn",
+      "amount": 600
+    },
+    "73481154": {
+      "kind": "normal"
+    },
+    "74677422": {
+      "kind": "normal"
+    },
+    "75356564": {
+      "kind": "normal"
+    },
+    "75499502": {
+      "kind": "normal"
+    },
+    "75850803": {
+      "kind": "normal"
+    },
+    "75889523": {
+      "kind": "normal"
+    },
+    "76103675": {
+      "kind": "burn",
+      "amount": 200
+    },
+    "76184692": {
+      "kind": "normal"
+    },
+    "76704943": {
+      "kind": "normal"
+    },
+    "77414722": {
+      "kind": "magicJammer"
+    },
+    "77491079": {
+      "kind": "monsterEffect"
+    },
+    "77585513": {
+      "kind": "monsterEffect"
+    },
+    "77603950": {
+      "kind": "normal"
+    },
+    "78010363": {
+      "kind": "monsterEffect"
+    },
+    "80741828": {
+      "kind": "monsterEffect"
+    },
+    "80770678": {
+      "kind": "normal"
+    },
+    "81057959": {
+      "kind": "normal"
+    },
+    "81777047": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "LIGHT"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "82732705": {
+      "kind": "continuous",
+      "rules": [
+        {
+          "kind": "negateMonsters",
+          "filter": {}
+        }
+      ],
+      "activation": {
+        "speed": 2,
+        "window": "free",
+        "damage": "never"
+      },
+      "lpCost": 1000
+    },
+    "82999629": {
+      "kind": "field",
+      "races": [],
+      "attributes": [
+        "WATER"
+      ],
+      "atk": 500,
+      "def": -400
+    },
+    "83011277": {
+      "kind": "monsterEffect"
+    },
+    "83678433": {
+      "kind": "normal"
+    },
+    "83746708": {
+      "kind": "equip",
+      "atk": 0,
+      "def": 0,
+      "count": {
+        "zone": "backrow",
+        "controller": "source",
+        "atk": 500,
+        "def": 500,
+        "includeField": true
+      }
+    },
+    "83764718": {
+      "kind": "monsterReborn"
+    },
+    "83968380": {
+      "kind": "sequence",
+      "activation": {
+        "speed": 2,
+        "window": "free",
+        "damage": "never"
+      },
+      "operations": [
+        {
+          "kind": "draw",
+          "count": 1
+        }
+      ]
+    },
+    "83994646": {
+      "kind": "monsterEffect"
+    },
+    "84257639": {
+      "kind": "heal",
+      "amount": 1000
+    },
+    "84285623": {
+      "kind": "normal"
+    },
+    "84834865": {
+      "kind": "monsterEffect"
+    },
+    "85705804": {
+      "kind": "normal"
+    },
+    "86318356": {
+      "kind": "field",
+      "races": [
+        "Warrior",
+        "Beast-Warrior"
+      ],
+      "atk": 200,
+      "def": 200
+    },
+    "86325596": {
+      "kind": "normal"
+    },
+    "87430998": {
+      "kind": "field",
+      "races": [
+        "Insect",
+        "Beast",
+        "Plant",
+        "Beast-Warrior"
+      ],
+      "atk": 200,
+      "def": 200
+    },
+    "87796900": {
+      "kind": "normal"
+    },
+    "88435542": {
+      "kind": "normal"
+    },
+    "88819587": {
+      "kind": "normal"
+    },
+    "89494469": {
+      "kind": "normal"
+    },
+    "89631139": {
+      "kind": "normal"
+    },
+    "90357090": {
+      "kind": "normal"
+    },
+    "90963488": {
+      "kind": "normal"
+    },
+    "91152256": {
+      "kind": "normal"
+    },
+    "91595718": {
+      "kind": "equip",
+      "races": [
+        "Spellcaster"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "91862578": {
+      "kind": "monsterEffect"
+    },
+    "91869203": {
+      "kind": "monsterEffect"
+    },
+    "91939608": {
+      "kind": "normal"
+    },
+    "93221206": {
+      "kind": "normal"
+    },
+    "95956346": {
+      "kind": "monsterEffect"
+    },
+    "97017120": {
+      "kind": "monsterEffect"
+    },
+    "97360116": {
+      "kind": "normal"
+    },
+    "97590747": {
+      "kind": "normal"
+    },
+    "97973387": {
+      "kind": "normal"
+    },
+    "98049915": {
+      "kind": "monsterEffect"
+    },
+    "98252586": {
+      "kind": "equip",
+      "races": [
+        "Winged Beast"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "98374133": {
+      "kind": "equip",
+      "attribute": "EARTH",
+      "atk": 400,
+      "def": -200
+    },
+    "99030164": {
+      "kind": "normal"
+    },
+    "00756652": {
+      "kind": "normal"
+    },
+    "03573512": {
+      "kind": "normal"
+    },
+    "05053103": {
+      "kind": "normal"
+    },
+    "06368038": {
+      "kind": "normal"
+    },
+    "04206964": {
+      "kind": "trapHole"
+    },
+    "04031928": {
+      "kind": "changeHeart"
+    },
+    "01184620": {
+      "kind": "normal"
+    },
+    "01784619": {
+      "kind": "normal"
+    },
+    "04614116": {
+      "kind": "equip",
+      "races": [
+        "Fiend"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "04042268": {
+      "kind": "normal"
+    },
+    "05388481": {
+      "kind": "normal"
+    },
+    "01435851": {
+      "kind": "equip",
+      "races": [
+        "Dragon"
+      ],
+      "atk": 300,
+      "def": 300
+    },
+    "07089711": {
+      "kind": "monsterEffect"
+    },
+    "03819470": {
+      "kind": "sevenTools"
+    },
+    "05318639": {
+      "kind": "mysticalSpaceTyphoon"
+    },
+    "08783685": {
+      "kind": "normal"
+    },
+    "09159938": {
+      "kind": "normal"
+    },
+    "09430387": {
+      "kind": "normal"
+    },
+    "08944575": {
+      "kind": "normal"
+    },
+    "03985011": {
+      "kind": "normal"
+    },
+    "03732747": {
+      "kind": "normal"
+    },
+    "05901497": {
+      "kind": "monsterEffect"
+    },
+    "02370081": {
+      "kind": "equip",
+      "attribute": "WATER",
+      "atk": 400,
+      "def": -200
+    },
+    "07489323": {
+      "kind": "monsterEffect"
+    },
+    "08201910": {
+      "kind": "monsterEffect"
+    },
+    "00403847": {
+      "kind": "continuous",
+      "rules": [
+        {
+          "kind": "modifier",
+          "filter": {
+            "controller": "source",
+            "races": [
+              "Warrior"
+            ]
+          },
+          "atk": 0,
+          "def": 0,
+          "count": {
+            "zone": "monsters",
+            "controller": "source",
+            "atk": 200,
+            "def": 0,
+            "races": [
+              "Warrior",
+              "Spellcaster"
+            ],
+            "faceUp": true
+          }
+        }
+      ],
+      "activation": {
+        "speed": 1,
+        "window": "main",
+        "damage": "never"
+      }
+    }
+  },
+  "monsters": {
+    "11384280": {
+      "effect": {
+        "trigger": "ignition",
+        "cost": {
+          "kind": "tribute",
+          "count": 1
+        },
+        "operation": {
+          "kind": "burn",
+          "amount": 500
+        }
+      },
+      "activation": {
+        "policy": "manual",
+        "window": "main"
+      }
+    },
+    "12472242": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "21347810": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "26202165": {
+      "effect": {
+        "trigger": "onSentToGrave",
+        "oncePerTurn": true,
+        "operation": {
+          "kind": "search",
+          "stat": "atk",
+          "maximum": 1500
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "grave"
+      }
+    },
+    "28470714": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "WIND"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "EARTH"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "28933734": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "recover",
+          "cardKind": "trap"
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "30778711": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "grave",
+                "controller": "source",
+                "atk": 100,
+                "def": 0,
+                "cardKind": "monster"
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "31560081": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "recover",
+          "cardKind": "spell"
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "32809211": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "40640057": {
+      "effect": {
+        "trigger": "quick",
+        "cost": {
+          "kind": "discard",
+          "count": 1
+        },
+        "operation": {
+          "kind": "battleShield"
+        }
+      },
+      "activation": {
+        "policy": "manual",
+        "window": "opposingDamageCalculation"
+      }
+    },
+    "43716289": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "burn",
+          "amount": 500
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "45141844": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "destroy",
+          "target": "opponentMonster"
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "46657337": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "hand",
+                "controller": "source",
+                "atk": 300,
+                "def": 300
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "51371017": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "burnPerSpellTrap",
+          "amount": 500
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "54098121": {
+      "effect": {
+        "trigger": "onOtherSummon",
+        "operation": {
+          "kind": "heal",
+          "amount": 500
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "summon"
+      }
+    },
+    "54652250": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "destroy",
+          "target": "anyMonster"
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "57839750": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "WATER",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "58861941": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "60694662": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "draw",
+          "count": 1
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "60806437": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "FIRE",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "67629977": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "LIGHT"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "DARK"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "68658728": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "FIRE"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "WATER"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "69579761": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "burnPerHand",
+          "amount": 400
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "77491079": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "bounce",
+          "target": "opponentMonster"
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "77585513": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "negateTraps"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "78010363": {
+      "effect": {
+        "trigger": "onSentToGrave",
+        "oncePerTurn": true,
+        "operation": {
+          "kind": "search",
+          "stat": "defense",
+          "maximum": 1500
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "grave"
+      }
+    },
+    "80741828": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "DARK"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "LIGHT"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "83011277": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "DARK",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "83994646": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "destroyByLevel",
+          "level": 4
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "84834865": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "WIND",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "91862578": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "hand",
+                "controller": "source",
+                "atk": 400,
+                "def": 400
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "91869203": {
+      "effect": {
+        "trigger": "ignition",
+        "cost": {
+          "kind": "tribute",
+          "count": 2
+        },
+        "operation": {
+          "kind": "burn",
+          "amount": 1200
+        }
+      },
+      "activation": {
+        "policy": "manual",
+        "window": "main"
+      }
+    },
+    "95956346": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "LIGHT",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "97017120": {
+      "effect": {
+        "trigger": "onBattleDestroyed",
+        "operation": {
+          "kind": "specialSummon",
+          "attribute": "EARTH",
+          "maximumAtk": 1500
+        }
+      },
+      "activation": {
+        "policy": "optional",
+        "window": "battleDestroyed"
+      }
+    },
+    "98049915": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "07089711": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "bounce",
+          "target": "anyMonster"
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "05901497": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "07489323": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "EARTH"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "WIND"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "08201910": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "WATER"
+                ]
+              },
+              "atk": 500,
+              "def": 0
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "FIRE"
+                ]
+              },
+              "atk": -400,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    }
+  },
+  "certificates": {
+    "10202894": {
+      "fingerprint": "a5213988a81dd120d8291fa521dda7799d0ccb469c867c61d34dda5eceb63067",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "11384280": {
+      "fingerprint": "5e40056686936320fa9e152aec2f2ad79beb09e29fce1f2a324e805fa99e2dbb",
+      "suites": [
+        "tests/classicIgnitionEffects.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "11868825": {
+      "fingerprint": "eb769319944fecdb4aeedf8593482b53312f1cf5a58b1e7bd387f9a4c440ffa1",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "12472242": {
+      "fingerprint": "ee84813a21a7ada1888a0cb510791cc9a506a54d42ec1cdcc31e1bc474452eec",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "12580477": {
+      "fingerprint": "2f3824336d537d8f88a42b71d85b9d2014722a7c1a5db92076132057363675d4",
+      "suites": [
+        "tests/classicSpells.test.cjs"
+      ]
+    },
+    "12607053": {
+      "fingerprint": "f6a74008d95bd3c5b9efff2eff704ed689e281c21c19f77a19d2cfa0c262f9bb",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "12829151": {
+      "fingerprint": "81a114e1b9e7dae0bafd38703113578f5560b52f210ad866d72730755cf84251",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "13039848": {
+      "fingerprint": "fff21d0d1c150df4014bbaecba3e9ff19bebe6a8cc7030052f6963429e72eeb9",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "13193642": {
+      "fingerprint": "888854c521bfd1eaa6ec89ff658d9d01a1e805f2c72e969e20be06d9d9fb695c",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "13429800": {
+      "fingerprint": "bec773ed4e3e5d565aa6be895c98d9f5b55b930b5ee0aa4a73706260a1dbf6c8",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "13723605": {
+      "fingerprint": "36c5f2719c44ebb69040c3026c3cf2b9becf50c9aeff2331906d718ae3c599dd",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "14087893": {
+      "fingerprint": "39278c3f786f1f0279c8e3db1a3f7f4fe62ba6ff0e17dc1cecfe50ed546e443b",
+      "suites": [
+        "tests/classicSummonResponses.test.cjs",
+        "tests/classicTargetReview.test.cjs"
+      ]
+    },
+    "14315573": {
+      "fingerprint": "fe60baa78ea8979959cefe3edf906bcec2e60be405e850efda0f313c05fa40b7",
+      "suites": [
+        "tests/classicExpansionFamilies.test.cjs"
+      ]
+    },
+    "15025844": {
+      "fingerprint": "287128311e86463cc29ad1b674e67d444c2a308b576eceb2f4add494a65eb5af",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "15042735": {
+      "fingerprint": "91fe5e055c5c3574bef18bcdbe037d0c7ac4c13f3a4340ccb7a02416eab64edb",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "15150371": {
+      "fingerprint": "a64e5360bb1cfde4b13d1edc0ca817a9b8a3e5073442e3173917e232d9bc047e",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "15303296": {
+      "fingerprint": "1410509fe2fd484cb6455444ad42aebbb7c87bab7dd3d3b16d90a6e943c3e9ee",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "15401633": {
+      "fingerprint": "2a3f6889a420f8aac29d19acb5a2c499dd13808c3fd5c9a38e520fa333c44b57",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "15480588": {
+      "fingerprint": "094c0e1b1af822f438298f3eddbf179457f3d0827c588f025ad47fe1ebb5528c",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "15507080": {
+      "fingerprint": "1435da21d47fab89977e9b0369403a4aa2a71ff2ca43da085880e5075eff76fd",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "15510988": {
+      "fingerprint": "4b368ed0e8de9b543632117aef82c54a8db40d36fa52b3b253cf7aafb394ab26",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "16430187": {
+      "fingerprint": "932c2c8031387be489c109aadd32dbf157373caef7652523fc82f92f8b2223ad",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "16972957": {
+      "fingerprint": "ac65d585da147aac37365efc72279c55090c135b81e4e69168e5efff4866d50f",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "17358176": {
+      "fingerprint": "2a9eca51fa944482592d7700b79893170af0b3177d50a8dcd9e9f143af4572f5",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "17814387": {
+      "fingerprint": "4c99b187a9a3f80aefdd9dd4362d17a57fb6ed887d7833b582d02b515bf605b7",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "18144506": {
+      "fingerprint": "6d30b80551538d631adc7e81297b0dfe10ac358125b37d20e2141e2dc4c565ed",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "18161786": {
+      "fingerprint": "fd8156d5c2ffb8bc9e904a0fa06c767c7bd21aef20070abe46edd8fd771fdf72",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "18710707": {
+      "fingerprint": "b30dc7e4950bde556c71d5608bbfd10ea00e9d3712762433e79f1d727ab718dc",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "19159413": {
+      "fingerprint": "e0bebb9034111e0393d48e0dfdf1937a26dad6211ef5f294726db2d9556e0684",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "19384334": {
+      "fingerprint": "2d80a194417629be44cccc971be7725c1d776c6c9ba2a07586f2c9716d7ae3e5",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "19523799": {
+      "fingerprint": "34162147ba1f7fab2e3333ae5958990725a3901c5ef25a919b07da8e69475c0d",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "19613556": {
+      "fingerprint": "51ba04b7028ff9debaca6cc1a48d7734d369888e4de31532c8fbf9795389a189",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "20065549": {
+      "fingerprint": "329526b0976ba7eed5d1e3db5db4e700d0d6780535da7e17d71e426bb8b2cfd8",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "20871001": {
+      "fingerprint": "51f4962a5c67956cd31a74081232454291972786db9503acf3005d9a4641eb7a",
+      "suites": [
+        "tests/classicExpansionFamilies.test.cjs"
+      ]
+    },
+    "21263083": {
+      "fingerprint": "dcad82700b57ed2ea174663903a83826218219b16853328c21647ba4d18167a8",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "21347810": {
+      "fingerprint": "f8ddf63517b4e35acd59f37d40828250224fc9ea15158bfab4f2acd5834ba3f2",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "22026707": {
+      "fingerprint": "ba81237031c2427d864490d540e2e152bdcb725fed15621554c187e928764e3d",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "22702055": {
+      "fingerprint": "8e7a86adc1cd83bb06165962eb323f2664a601b1e5fd52a1a4e983b338b711f3",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "23424603": {
+      "fingerprint": "355e49dd42d5610a9d3698466fbbf57f917f833f26a7a273cefcba0265a35a27",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "23771716": {
+      "fingerprint": "7edd7f2180f492a6935d94aca8266ced33718a36c559f6f4de2d20f69a76285c",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "24068492": {
+      "fingerprint": "6d106695d590e6b221f3b5461135b671da249135ab693b91c0e5f9663da32f1b",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "24094653": {
+      "fingerprint": "b1bf130eac464fcfae62c26b8ed5a70c3c6c955406158e619ce78f47c6bfd61c",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicCardReview.test.cjs"
+      ]
+    },
+    "24611934": {
+      "fingerprint": "3f32c5959be98f476e57d136da562395c2f5b6f0fddc22557ebd2cb9773806ea",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "25769732": {
+      "fingerprint": "c4eb8cbcbac934285400c5863fc91590a6a711a424af3b7deac5091466bb2c1a",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "25880422": {
+      "fingerprint": "e4b71ca98c461761f89a166fef7ece6a2c417a19f3960c65bccf8d3de6f43b41",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "26202165": {
+      "fingerprint": "56f4b7c0ea7d5bd0c767294afd3da73478d38b334cb3be0bd60fc7c2d2359982",
+      "suites": [
+        "tests/classicGraveTriggers.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "26378150": {
+      "fingerprint": "ba18ac7c59bd6b5ef6acd498fad6f1f262338890b9b2d189ace12b0cd7c5f089",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "28279543": {
+      "fingerprint": "1584673099b6d6514ea6b54cb6622de941fa8b4be73a33b0f38953e35da50e82",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "28470714": {
+      "fingerprint": "66fc62dee429889c6f3b1bd2b79416dca53b5a285088d8b3e258ed6a841cbc63",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "28546905": {
+      "fingerprint": "a0666a717dc6718caaa7e050f38a0816ddc3aa0fc815d7cbef0170f91944e85c",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "28933734": {
+      "fingerprint": "2edd4ff6ee19568e46966403e79a033203f9d0f74005bead1708d77840ec843e",
+      "suites": [
+        "tests/classicFlipEffects.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "29401950": {
+      "fingerprint": "4b709adbc79576f1f3bcf3119e4f67e5767709236df8653e9526ae7c63033035",
+      "suites": [
+        "tests/classicBanishment.test.cjs"
+      ]
+    },
+    "29948642": {
+      "fingerprint": "bfdbca3765eb6726012c45e0236b4f9d634da3b15206f0cf79625fd7e8f0c5ea",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "30113682": {
+      "fingerprint": "6d696b29e75c4b5dda623b4c1587d33abdb2b90a8ad67a7484ae1196db7f2fff",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "30532390": {
+      "fingerprint": "22cc3345eadc77118d1aac52727d3e54132cbd38c2fc887ab1502e4377703e57",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "30778711": {
+      "fingerprint": "2b57bd998544bea374c155d3de53424c1d9574182782372c13e35faaaa1cc92a",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "31122090": {
+      "fingerprint": "537b2a66f17750c2e6fb917fe02585d45c73d4277da841a96f3ada7afd79b762",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "31560081": {
+      "fingerprint": "7d2a2563efe748044ea91e69c547496302e2fdc169106d99b23e1ced07b217c5",
+      "suites": [
+        "tests/classicFlipEffects.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "32452818": {
+      "fingerprint": "b6fc81808477e490ea17a058ffda3ef95ac824f14c2bc638f6688a77bf75c1a1",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "32809211": {
+      "fingerprint": "7da20beb8de15da16874f3071db8f8442a69ddef5c1976d708d36eea0e6025e4",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "33064647": {
+      "fingerprint": "429a4018b27df209a7ed7c017a9e9d51641a3607aa9cb0ec193f33d494d72a6f",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "34460851": {
+      "fingerprint": "866af6462c506c939ea2173803489f24fb19ec22740c1ca8e7ada6d152d574e2",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "36304921": {
+      "fingerprint": "9c268854b0e59f40748117db91f95c2e294d14c70896f3141480e15f92484932",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "36607978": {
+      "fingerprint": "79d6ac7281f8fa45e679dc8b67b0c775c84d8940358c44ba0bd2d121b84d104c",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "37120512": {
+      "fingerprint": "9f5204457437819afa1ad27f361859b7c9e28fe059ae2eb9ad33a916e7a3f496",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "37243151": {
+      "fingerprint": "179ed7d5fc92ad7a4471a3815019d240e3b772353a15cb1192ff2f227ec18a9b",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "38142739": {
+      "fingerprint": "48632667b3dd738e3ba24d79e56d77a1210aa344eb6da983588ed56ef92ffca2",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "38199696": {
+      "fingerprint": "f81b0db113d7469c8b13a6c1137aa9eb5651371e6d4da20288b6de23673a3ee4",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "39175982": {
+      "fingerprint": "280cc52253b29fa979388d872a2410cf914e75fb6d182d3453845b1f6a39fc29",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "39774685": {
+      "fingerprint": "0130aadc50877652a41afd4f1116b8b8522b67860a2d40b978ef9afd30cd06b7",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "40374923": {
+      "fingerprint": "6d0e0b4c7cc116f0b96403166c1d02651ab4d353eb1755a4b7024d69f1a91b3b",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "40640057": {
+      "fingerprint": "3e177ad44f5a896afc5d6d83370fa1d46331537b8ad89f774da9bb98ffdb5a4e",
+      "suites": [
+        "tests/classicQuickMonsters.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "41218256": {
+      "fingerprint": "45ff6e7e4b90e7d26e6810008752c6b95a04b1333ab647a96eadd1cc94733668",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "41392891": {
+      "fingerprint": "3d99d5bc41f6b7f1e3ba91497a79a780d1dabb8855d3ee86c501720f9a3fc1c4",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "41949033": {
+      "fingerprint": "d3448d7bd7234b683d48d4b465e52cf53fce91c74c453a158a43c1d15b4c9375",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "42703248": {
+      "fingerprint": "01363305752e46c28815b36e6f2714efd5f490ffe2e8ceb5c539bd7418886f81",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "43716289": {
+      "fingerprint": "705b07479cfe8f5a301c593f750c19cc7e6a30f87cea1cf8e272831af111666f",
+      "suites": [
+        "tests/mechanicalBatch7.test.cjs"
+      ]
+    },
+    "44095762": {
+      "fingerprint": "e5cf024c9d55949aab36f64e0a19a59152b641b4943651dce4fa63e6ba1e18fd",
+      "suites": [
+        "tests/classicMirrorForce.test.cjs"
+      ]
+    },
+    "44209392": {
+      "fingerprint": "9d5f942f8d6373ce9a43b80c77461c2ba29e51b44f7e328774aa70d398ec2fbe",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "44287299": {
+      "fingerprint": "2b2f580950d4dde49551cde7253838ba8f9d6948f4b3c3870cfde05d3afc90dd",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "45121025": {
+      "fingerprint": "6947bd89748e1225243767908235314454817cd2a712948a9ee97a774b41874a",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "45141844": {
+      "fingerprint": "b248eb80cec8d8db6c7d60bb08cd6e84d0b06326ba5037f07086520b0a58deaf",
+      "suites": [
+        "tests/mechanicalBatch7.test.cjs"
+      ]
+    },
+    "45231177": {
+      "fingerprint": "5b7a4fde3aeb8d2b66fb079a87c6d8fb6267bf8cb125f705b3db7bf885f01c58",
+      "suites": [
+        "tests/duelExpansion.test.cjs"
+      ]
+    },
+    "45778932": {
+      "fingerprint": "f3c6a43d0d1cc731233e137cab57275777fb7c9697d10b8e3051240dbb55b906",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "46009906": {
+      "fingerprint": "4359669b0fb126f08bf2707597abfd4fc379bbbe0ec290a792b2ea5ca973a17e",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "46130346": {
+      "fingerprint": "c42feabc7ec2a81474f5fb586bf035ba0834c3788142e601e619f58ef0671fa9",
+      "suites": [
+        "tests/classicExpansionFamilies.test.cjs"
+      ]
+    },
+    "46457856": {
+      "fingerprint": "2426906526d8770a2966aee32c518bb2eaf03513e318c0a7693a2d7889859238",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "46474915": {
+      "fingerprint": "09c56354d4743bbe0b925fc23e5738553b2ddf9c2d85a5a84f7f59665f9d5eee",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "46657337": {
+      "fingerprint": "2f9f4d4012e7a344f9444c1666fb487737d8f091727ca219f0ef18c02f1250c9",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "46718686": {
+      "fingerprint": "6a2aedd0bedf72d9227dbdc64ff4cb31e2e4f0e1efe98a2a2db65ff0ce96903e",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "46918794": {
+      "fingerprint": "091ea5bb8048f0347ad6e6a0f136812916fcbe9f992be6c08eedb2f2033e160d",
+      "suites": [
+        "tests/classicExpansionFamilies.test.cjs"
+      ]
+    },
+    "46986414": {
+      "fingerprint": "a05b7305b72031f37457c7f8b52a8d0034edce466c4d8850e536ecaeaeea4172",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "47060154": {
+      "fingerprint": "a6f1500309c291ebd6151809938f79bf439b671527595f37b07ef8e09843dd45",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "47695416": {
+      "fingerprint": "80ade0467259c128bafe26adc4dd46fef91922419a158aee7e46d13192124966",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "47852924": {
+      "fingerprint": "fc4c876e374637f9ad2607213974c8bad1f9c682bff343b3c20bdaf88ee16215",
+      "suites": [
+        "tests/classicExpansionFamilies.test.cjs"
+      ]
+    },
+    "48305365": {
+      "fingerprint": "f9563dbc0dcec699e1c9828ded68ad8b551698b82ba1d9e10931782846c41d13",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "48365709": {
+      "fingerprint": "3c1846cbf731d049a239a7bcfab8ea0d7c58e880c4d003a94204dcfa301896fa",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "49218300": {
+      "fingerprint": "94feed92386bd6f819395741e57c8fde61b720381039828dc36ccbdcac3f0c0f",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "49258578": {
+      "fingerprint": "2bb33a43e604da1bac6bd8eaaf492501d961a4b0dfabbd7ff17ac2e861e8e323",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "50005633": {
+      "fingerprint": "ba22bb91f586579945838816617eaa0a9fc7b4f16fa4a23a25bd3d4a86608715",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "50913601": {
+      "fingerprint": "5a3ee510125d4edb290ff6354591d1c47f7be74a7ab269e4a1ddf110501e8ebe",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "50930991": {
+      "fingerprint": "86cfa3ae0fd3ebbd22495c150d4ae380018d8b65c7ded54657533051d139ecab",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "51371017": {
+      "fingerprint": "b4e635b1d69d9d17e8c6805c69dba6ebcc7da042ec78ab79152bdd0975dce422",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "51482758": {
+      "fingerprint": "3068f5b3f22534e93617185161bf4911de9586b18d53b0080fe7f1e726b9aa30",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "52097679": {
+      "fingerprint": "e9362b2005ba552ae33eb593b29ce847026824c0285b7af958fc741f2ddb522e",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "52800428": {
+      "fingerprint": "9db9f806ace825bf52e7d39e3bc955fa8648597e69007b38f8e28fa5e97ce5f1",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "53129443": {
+      "fingerprint": "db39c8e41763deb9b508ee85d67c3bad80cf377ba47fe5583988d07833d923cd",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "53293545": {
+      "fingerprint": "2fdeb4682d02d1584d004ee9bb3fefe596aefa21fe1957c259ebb4b8523aadd7",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "53581214": {
+      "fingerprint": "95327df70a9acaaecfeea6879bd15d6d8dc5b89d259ea1b56527d4918d877702",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "53582587": {
+      "fingerprint": "bda9d1246a78eeca066cafd0a90be4522a1189cb7f2a3e6495606a2baf4e5f9d",
+      "suites": [
+        "tests/classicSummonResponses.test.cjs"
+      ]
+    },
+    "53832650": {
+      "fingerprint": "4acfa8add27e3730493a3e396c9bf9230e64373a944da9c19fb0dfbd82e65d69",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "54098121": {
+      "fingerprint": "87822f28fcf690c38603ae676f7addd44378de5daf71aed03d75c3278fecbc2d",
+      "suites": [
+        "tests/classicSummonTriggers.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "54652250": {
+      "fingerprint": "1fe072a297cd7f3c9e72832cff565cefe3e95e990974e558aad2ed7f27ffc009",
+      "suites": [
+        "tests/classicFlipEffects.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "55144522": {
+      "fingerprint": "3f5cace2491286d6563f0c73cc79fc2df2eaf9b6d2d52cc8e54efef7eb9b31fe",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicCardReview.test.cjs"
+      ]
+    },
+    "55444629": {
+      "fingerprint": "0b4b4fbe1b8d13d98e293433b843aa541939817325d0f9bbdd332367ddd6e99a",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "55550921": {
+      "fingerprint": "bba2593d06d4c1a6c6f3a3e432fcf599773a378dcaf3c6aafb515a8fbc4de122",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "56120475": {
+      "fingerprint": "b3750f8f181e2e79e21ee3187abbfb4df606495883ef30066e6051429836bf54",
+      "suites": [
+        "tests/classicSakuretsu.test.cjs"
+      ]
+    },
+    "56594520": {
+      "fingerprint": "32f438697ea66842e3e9bdea4eafdf6d4d1b57b7f066e1993fa8629d0125cbb4",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "56747793": {
+      "fingerprint": "2647b701432276d064f0cd79dd1e7f02afcdb05cec42c44d13647fef67c260d0",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "57839750": {
+      "fingerprint": "f750e6a2f9710fcbda1d99a6c500952afc85e2cb39992ee4b0c89f20615d2347",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "58861941": {
+      "fingerprint": "3fe5e42d92e9b4a81e152cb599c897daf2806f7c0e3dc06ff90bfee9aa12c490",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "59197169": {
+      "fingerprint": "56b985586b91ee677008660672887404d42a7595292d6644678bf0e8196d7885",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "60694662": {
+      "fingerprint": "ff32528e464b89d0187a11f5e289ee656d3812eda7a764b2d9309642e35e52b6",
+      "suites": [
+        "tests/classicFlipEffects.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "60806437": {
+      "fingerprint": "904fc92dd093ca751f2f3f619dc7152cc4f14b5ee7c5998ffd868a154edf8835",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "61201220": {
+      "fingerprint": "fc80a9ae5ab30ed502996a6dd0242d37f8fe7da58d231312bddaafcc786e4517",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "61854111": {
+      "fingerprint": "c1cda237225da99c3fe4fccf8dfbf436a0c4ea2be035b6128e8a1f165d812a8f",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "62279055": {
+      "fingerprint": "7e56b2034337cce06e946f042446f33e3b99ce84c1b3297ba5a3cf84bd6da055",
+      "suites": [
+        "tests/classicExpansionFamilies.test.cjs"
+      ]
+    },
+    "63308047": {
+      "fingerprint": "72014f58d182178561f2e21d4d34eda88f0ca16c03927ae9d9d106e7d50e0e55",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "64154377": {
+      "fingerprint": "6d64050e3f8019b582b6e2fddf5b2f24b4de54c4c096f9cc29b8da0ef0f24b0e",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "64511793": {
+      "fingerprint": "8890ddce65b47995b2a8949d1c2394696f79b6489b4ad3226fdd285e4a6e3179",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "66672569": {
+      "fingerprint": "30721d13907bb9ba3c429a7507f360ece81a2055eaed36f8dd42de34e07f8e4d",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "66788016": {
+      "fingerprint": "1f54ab7899bf901a02f4bb6466681787a9836921ac3d263a8addb7d2e49619b3",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicCardReview.test.cjs"
+      ]
+    },
+    "66889139": {
+      "fingerprint": "3aa8c37db635f465b8ae80da250208d6d19cc540cd01f8497177453aa425b177",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "67494157": {
+      "fingerprint": "9038d4d8351fb4abcebf037eb2d62131bacb4f4c14317234e3f35d4ade56f675",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "67629977": {
+      "fingerprint": "407bfdba47b6675e509aac63c9365f00e376ac34baf348f4de91e5074361897d",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "67724379": {
+      "fingerprint": "c62b1c8958b5617472350959670045e72aebaa887450eb0e5d33a52feddc62de",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "68516705": {
+      "fingerprint": "4e8cfabacf5c2bc35eebe4c74e2e0b1892a7df73bf762f90f9627e307ebf6916",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "68658728": {
+      "fingerprint": "b9750c186332f6b46136a145a1a8c9e3747f519135115d65a789028cd3976276",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "69579761": {
+      "fingerprint": "ef5dc4a8798f3194b78a31eccf6eadb87923a5cbb9d91d774bf72e429c457df3",
+      "suites": [
+        "tests/mechanicalBatch7.test.cjs"
+      ]
+    },
+    "70046172": {
+      "fingerprint": "8b9ee43b24a9c5d72f077bb14fb2a90336006c73e9a4676ee43a867dcc3f330f",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "70368879": {
+      "fingerprint": "9cb54bb0bec474c34f79c8ca9226a0e6319f96e9a1e25f4683c28616b3633677",
+      "suites": [
+        "tests/classicExpansionFamilies.test.cjs"
+      ]
+    },
+    "70781052": {
+      "fingerprint": "b74f5f4faa924a2ec060df335fd5f78225c61452bb45149be32d7e4cf294de09",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "72892473": {
+      "fingerprint": "34cffc49c6367b1000b809826852cf54d20de10bbbcde1268c6088149c0cd896",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "73134081": {
+      "fingerprint": "1e67f07c3190fb1506f06e2bc5ecf145447c5279d2cd8c03e7e21044f5ef0b32",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "73481154": {
+      "fingerprint": "75e15451fafb7ab489972563b1b1ddbe635a1804925bbec1640d9491bf842c20",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "74677422": {
+      "fingerprint": "11f420a21069f9a69e66c73dc11ee77a31e3e1dfa2c5398c24d64ea98160f2f5",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "75356564": {
+      "fingerprint": "8888ca482fab66e2a8c87cccf880b719b362359b17854f57d789e1926d973caa",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "75499502": {
+      "fingerprint": "3f7f204873a3ef26849df8fd87d0628f7028eb95093ed2c31fdf006e5d055a8d",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "75850803": {
+      "fingerprint": "36b47f2a8f611d6200ee886da61f78a60adcb50269626391927b8b30700e38c3",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "75889523": {
+      "fingerprint": "fd3dee7c758f44468eccc8d337725fca2eec30a4401f739a0e3cbec7e9d2d61e",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "76103675": {
+      "fingerprint": "512bd04ea7b46cc062c37fdcd37b4f0cd624739c4813bac9683e1bb415b33680",
+      "suites": [
+        "tests/classicExpansionFamilies.test.cjs"
+      ]
+    },
+    "76184692": {
+      "fingerprint": "ab45fbfda67ddcf24256635a12bb4274f6682a117098b85bf08672a11a69f16e",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "76704943": {
+      "fingerprint": "ebf6a8e0ba3bb3edc1e868ba93ace766a4117f1cfa4dd3a2d18901638b847d41",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "77414722": {
+      "fingerprint": "b40eb3632607415d35fc6f63a9d22483867d94fdb17c09186fcf3d8601a83d9b",
+      "suites": [
+        "tests/classicCounterTraps.test.cjs",
+        "tests/classicTargetReview.test.cjs"
+      ]
+    },
+    "77491079": {
+      "fingerprint": "59796871f1e2c41af853b34636bcada9663ab3881744fc30a5e7532372321bc5",
+      "suites": [
+        "tests/mechanicalBatch7.test.cjs"
+      ]
+    },
+    "77585513": {
+      "fingerprint": "76f789c4050505220a983dddd38a8c7ff9ad72e2734491530b10216b4c2e8b2b",
+      "suites": [
+        "tests/classicContinuousEffects.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "77603950": {
+      "fingerprint": "7c6d687881af9098ea4a3043a749011a82868361b3e179200d3aadc53de9c4ea",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "78010363": {
+      "fingerprint": "d4ad8a4c8693bddadcc79fc182f6ba9fcce94290a8b3cddf48555d733e43be19",
+      "suites": [
+        "tests/classicGraveTriggers.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "80741828": {
+      "fingerprint": "b8f7f0ac8669d40eaaaee7ff1d99a1d99e21277c7de1f252fad1ea4699993436",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "80770678": {
+      "fingerprint": "25248c6e5032055407206c281eb632b8d55851aec40d28b60df1931783c64dd3",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "81057959": {
+      "fingerprint": "25a981114f391b3793ad828a56b2787501c9473da14f6ff5cfe990c2dc836162",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "81777047": {
+      "fingerprint": "097d704cace55364cd8824187a4159cf4b48390cabe71ad200343057d0ea7826",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "82732705": {
+      "fingerprint": "736d62c31bc10fc520573ab11d6ba26717b21e4c6b1c5b92ae941de725ab89d4",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "82999629": {
+      "fingerprint": "8c22edb79b83b4c6ce9041efab7d29da2c604e2c2eecc64609f28272491ac007",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "83011277": {
+      "fingerprint": "f8b998d23994e7c1017cfa68b728e2b4f15a8ea279234729682f6408cc47d88b",
+      "suites": [
+        "tests/classicBattleRecruiters.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "83678433": {
+      "fingerprint": "dd75abee783e4a139ec10660bf1e141f2adff6a19b9cf2453f2067f08b99050d",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "83746708": {
+      "fingerprint": "73ffd8d20f18bec1990cc71250809a53dff1a7337c92757b241973e8bf32514d",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "83764718": {
+      "fingerprint": "c2e38ab4134ee2434e1da2a755c60e69710cb5ab5d46f4ceeb0d56b6875db0a0",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "83968380": {
+      "fingerprint": "50cf27da92c0898c476f630ae027013b6b0fbe07f316f745e5856642fdc1be05",
+      "suites": [
+        "tests/classicExpansionFamilies.test.cjs"
+      ]
+    },
+    "83994646": {
+      "fingerprint": "1a08f1bee854092d0abccfbdbdfdfe376e4558baff5572324102100c78f14888",
+      "suites": [
+        "tests/mechanicalBatch7.test.cjs"
+      ]
+    },
+    "84257639": {
+      "fingerprint": "64ef363bf8100b70b55115aadd69dc9be474e47962ed84e0a2a00c5bbdf0f939",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "84285623": {
+      "fingerprint": "e5af2b718ca1b3488cf9bf313edb745e6c5294b31b7f5c92454b4c29e7833376",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "84834865": {
+      "fingerprint": "7ea81906abee8111a13e8d9a51d42e521f7db546ef51fe061b4f7f9762332b95",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "85705804": {
+      "fingerprint": "12af9903982ed165a49ab4e7d2f7122d1724a438b5bad63a0eccf783455cbc7f",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "86318356": {
+      "fingerprint": "d8bc328ac0c0b62a69b62cefa16067df5a20d17a8f7ee5f8919dc92567937c39",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicCardReview.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "86325596": {
+      "fingerprint": "668c54444b86af1a32d19ec636ece100b7ab944c2ca824351e5840ee0d49efe1",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "87430998": {
+      "fingerprint": "5b7b623889999855f8f4c3fdde925110ba36ff56efce764da4a3d9891e742eec",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "87796900": {
+      "fingerprint": "b0a0c8c1d7dbaef43d9a168dd40bf9817cee5e4cf4228267d1f79073c9d7ec11",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "88435542": {
+      "fingerprint": "6286709ffe9927c7ab75875b63c0d20df4af7b069e608ae944041c1576083d4c",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "88819587": {
+      "fingerprint": "13417f59dd8e0b0c609aeda7a206d2b4e1baeb128b3dbd7433f9cd7b6b1b1bd3",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "89494469": {
+      "fingerprint": "cf1ca553c1319dbd3b13d9eefd6a0cb2e434e4083958c3f5e7cb6ddd715fdd25",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "89631139": {
+      "fingerprint": "424f74a723418cfbfb0439940fdf76921e1d712b2d3a7866f5c64e699b2b397b",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "90357090": {
+      "fingerprint": "0325634d894f4eb4fc875c568d6fbaa3581e121c01142d27c36c2b4c016382bc",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "90963488": {
+      "fingerprint": "8bd561dfdc25f9b12f1b4f590867462023f104e0c839a175d0dc647ed70c0f48",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "91152256": {
+      "fingerprint": "d7ac6e71e2c64b5bb2ca7485872bc9c95acf18cf707edbcdc7d741718b8c3ec8",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "91595718": {
+      "fingerprint": "b601e84d2f22953d16573b1d3c7cec64d49accb295b6adfa6aefbfe38800bebb",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "91862578": {
+      "fingerprint": "c0a541b6480de3208c7c11ef854e8237781c1b4603de85a6dc7f7d53aecfa32f",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "91869203": {
+      "fingerprint": "c755d733ae29ea519bd519ba0f54ebba92146f159bd1315885f703f34d55869e",
+      "suites": [
+        "tests/mechanicalBatch7.test.cjs"
+      ]
+    },
+    "91939608": {
+      "fingerprint": "74ddbcb41acaa861a9fc4e0db892921a71ed59296d45ac8aed8a8064a8f42635",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "93221206": {
+      "fingerprint": "ecfd0b88d66457c7e027a9e8ee79b8042f9d0972a8b5df57075176d1869b6203",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "95956346": {
+      "fingerprint": "16703b4a3261548d7d5a23efb0979938d796d3056a255563e0810f96bb854055",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "97017120": {
+      "fingerprint": "40b674a6174e3dc3f5c028d6bf1d3914d7d73fdaaa07079c0c8c5131a6f1fc2f",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "97360116": {
+      "fingerprint": "970ca209d4157be42affac7a428f0ae28f919d4d18656ac641ddf60dd5d71c29",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "97590747": {
+      "fingerprint": "31c78584759c4650a04d7c33a8e9d820d48777cbd7664f11ee388c67eee429db",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "97973387": {
+      "fingerprint": "713b2472268bfb63c51a394fd642ad23f65c92eb07a5b7b1bdb2648117a13149",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "98049915": {
+      "fingerprint": "cadf7249880046f6ba1558936fdc940326f3159fcd899610fb339e1719a293a4",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "98252586": {
+      "fingerprint": "b67ac192c403e4284dc4236664e7f4c0f267499eb20d556daf1d56be2ee449c8",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "98374133": {
+      "fingerprint": "3d5a00d47c53c42380a7541649c12daaf65975b189ea76b282ed4152defca251",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "99030164": {
+      "fingerprint": "0e11f20cd2a336635b66b98b733e6449975412ee44a47ba938bcfb3c9bb85c0c",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "07089711": {
+      "fingerprint": "d6d05f8b69c83200362ce785134e4533f28f93b0f7578be9fa1d48712f1646d2",
+      "suites": [
+        "tests/classicFlipEffects.test.cjs",
+        "tests/engineRefactor.test.cjs"
+      ]
+    },
+    "03819470": {
+      "fingerprint": "7f46aa36ec0cc795d3b9a77b48ab57d2c5982afb1ef2fd3677d247f48adc20b4",
+      "suites": [
+        "tests/classicCounterTraps.test.cjs",
+        "tests/classicTargetReview.test.cjs"
+      ]
+    },
+    "05318639": {
+      "fingerprint": "269697e799f0d073ae6181fe460c12f25dfcd797b48adca707f7ce26ac22dce8",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicCardReview.test.cjs",
+        "tests/classicTargetReview.test.cjs"
+      ]
+    },
+    "04031928": {
+      "fingerprint": "1563fb8a12859b06130ef04d5adee049e20dcc429ad9b9c036b27ead7ab4dce2",
+      "suites": [
+        "tests/classicEngine.test.cjs"
+      ]
+    },
+    "04206964": {
+      "fingerprint": "514a0ed16d1564dade7b75a288f58773f3ec1f4e28576610f336c777def8d6b9",
+      "suites": [
+        "tests/classicSummonResponses.test.cjs"
+      ]
+    },
+    "04614116": {
+      "fingerprint": "0a5b822e1461ff59445c6b8a62c8dcb86e288ac9df3a2ce5f0c0665009096753",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "01435851": {
+      "fingerprint": "2a37131e50b1ba4af8510b3ed231553f36d94d0a46f05fd5ec8ff77357c0693d",
+      "suites": [
+        "tests/classicEngine.test.cjs",
+        "tests/classicPersistentReview.test.cjs"
+      ]
+    },
+    "00756652": {
+      "fingerprint": "f58f73f4522d57ce1441a27fa6f2e522bb1d8582bc10224a00fba3bc0a0b5e5f",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "03573512": {
+      "fingerprint": "16bd9acc342f9452f9880b416f1f6381464d24ca0b1844bf60c45493c96060f7",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "05053103": {
+      "fingerprint": "9f32af48041e3f395cd9b920e64fabda4cfaa86964476268ff1a0d8fc8ec794c",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "06368038": {
+      "fingerprint": "985b6bc6010a3faee75c1a2c0bc55d26776cf2c93315d851aef85cd4e85293cd",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "01184620": {
+      "fingerprint": "975287043a5be6c07cce6d178366c865c8699861a76131fe0b0f50cb42c3b924",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "01784619": {
+      "fingerprint": "a892593886ceb3171e11fb92d9c7bd0d135fe7608533b152b4327400ead3f6bc",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "04042268": {
+      "fingerprint": "97a51c05cbeaea6db6f129611dfbba717a7e241598f8b4d6851dc06f03b6d911",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "05388481": {
+      "fingerprint": "55a156b0fbae57d09e7849b831b255cf52e37c886ee64721ab5137984e0cfe98",
+      "suites": [
+        "tests/duelEngine.test.cjs"
+      ]
+    },
+    "08783685": {
+      "fingerprint": "34e1428d68b519a31ad75dcf3490fead71b0cc71b90a289532a9d984dcf455ec",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "09159938": {
+      "fingerprint": "91704d9a44a98e38f663c1fffe284bc7a406161d2b9ffef2de044dbfcba00c9d",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "09430387": {
+      "fingerprint": "d825ae061c8f0c9ddcf133558e31c1a3c2eb6c1f9bbef8498242c61d6a81e7b1",
+      "suites": [
+        "tests/historicalNormalCertification.test.cjs"
+      ]
+    },
+    "08944575": {
+      "fingerprint": "303254399d542d5d0f1b1bd28ff869a585ef582f46dde10a471ca260e504f0c8",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "03985011": {
+      "fingerprint": "977a334b0a843ce96e8777e6c92428cc9e175c63e0d9ad0f5c0827ffb1643c39",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "03732747": {
+      "fingerprint": "49b2f511db4d9f0632daa78311f2556df72cf45a950ae06135a8d988398136b9",
+      "suites": [
+        "tests/historicalNormalBatch4.test.cjs"
+      ]
+    },
+    "05901497": {
+      "fingerprint": "02fa064f8b6d0d948dec8beede32c6ea798eae4cb378d44525e557e236ec62d0",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "02370081": {
+      "fingerprint": "dfeb22b82a650da91f0423f66331afcc32b4b6978c5c9bca88dd755e3462ed28",
+      "suites": [
+        "tests/mechanicalBatch5.test.cjs"
+      ]
+    },
+    "07489323": {
+      "fingerprint": "a54842a3a0e3d5f082fb4b6870201ceb7da0893211e71bb3bb02ed950459530f",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "08201910": {
+      "fingerprint": "11ff92a95964e5ddc19995f823f5a2d8766132ee4fe7803fd3e9a8c4f7738b06",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    },
+    "00403847": {
+      "fingerprint": "883e15673cfcd19b4ce670f439b47879625fa6e95e288e1be29ba44a5d540dd1",
+      "suites": [
+        "tests/mechanicalBatch8.test.cjs"
+      ]
+    }
+  }
+}

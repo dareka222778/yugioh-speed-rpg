@@ -1,0 +1,597 @@
+[
+  {
+    "id": "10012614",
+    "canonicalId": "27f5fbcc-710b-4819-86cc-7baf54d75829",
+    "name": "Banner of Courage",
+    "konamiId": 5538,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5538&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2003-07-18",
+      "set": "PGD-089",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5538&request_locale=en",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "728af32ae1bdb657493a86cfe5329913d27d2117aaed9f79c0ef8c1486d9db59",
+    "mechanicalDefinition": {
+      "kind": "continuous",
+      "activation": {
+        "speed": 1,
+        "window": "main",
+        "damage": "never"
+      },
+      "rules": [
+        {
+          "kind": "modifier",
+          "filter": {
+            "controller": "source",
+            "phase": "battle",
+            "duringOwnTurn": true
+          },
+          "atk": 200,
+          "def": 0
+        }
+      ]
+    },
+    "monsterDefinition": null,
+    "fullTextReviewed": true,
+    "semanticNotes": "Durante a sua Fase de Batalha, todos os monstros que você controla ganham 200 ATK.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5538&request_locale=en"
+  },
+  {
+    "id": "11901678",
+    "canonicalId": "f9125560-0cd2-46fc-af31-f39f09f4bd93",
+    "name": "Black Skull Dragon",
+    "konamiId": 4223,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4223&request_locale=en",
+    "primaryFacts": {
+      "level": 9,
+      "atk": 3200,
+      "defense": 2500,
+      "race": "Dragon",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "MRD-018",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4223&request_locale=en",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "483c342c4ddd05ac398338c1e3ce3c047e681909fbad77c6751bc1eeba30cbc7",
+    "mechanicalDefinition": {
+      "kind": "fusion"
+    },
+    "monsterDefinition": null,
+    "fullTextReviewed": true,
+    "semanticNotes": "Fusão de Caveira Convocada e Dragão Negro de Olhos Vermelhos; é tratado como card Arquidemônio.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4223&request_locale=en"
+  },
+  {
+    "id": "20394040",
+    "canonicalId": "d3ff62d8-b8ed-430e-b703-5ae71b477026",
+    "name": "Lava Battleguard",
+    "konamiId": 4560,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4560&request_locale=en",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1550,
+      "defense": 1800,
+      "race": "Warrior",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-06-26",
+      "set": "MRD-115",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4560&request_locale=en",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "c0e91c4b26b3e60cfe132b90cd822fd9ce1eab4bf6bb8c6f53cf3c4b112f84dd",
+    "mechanicalDefinition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "monsters",
+                "controller": "source",
+                "names": [
+                  "Swamp Battleguard"
+                ],
+                "faceUp": true,
+                "atk": 500,
+                "def": 0
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "fullTextReviewed": true,
+    "semanticNotes": "Ganha 500 ATK por cada Guarda de Batalha do Pântano que você controla.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4560&request_locale=en"
+  },
+  {
+    "id": "27967615",
+    "canonicalId": "f5cc393e-ce5a-4c84-916f-18ffd7700eca",
+    "name": "Fusion Weapon",
+    "konamiId": 6138,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6138&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2004-05-27",
+      "set": "SOD-JP047",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6138&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "2dfcfb17f98be85177241ad4f8af7de3e5a459fd4e1006781d8d447cd2b79717",
+    "mechanicalDefinition": {
+      "kind": "equip",
+      "monsterType": "fusion",
+      "maxLevel": 6,
+      "atk": 1500,
+      "def": 1500
+    },
+    "monsterDefinition": null,
+    "fullTextReviewed": true,
+    "semanticNotes": "Equipe apenas a um Monstro de Fusão de Nível 6 ou menor. Ele ganha 1500 ATK/DEF.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6138&request_locale=ja"
+  },
+  {
+    "id": "38033121",
+    "canonicalId": "6cb08e9f-e85c-464b-b3ec-71fe7790ceb7",
+    "name": "Dark Magician Girl",
+    "konamiId": 4766,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4766&request_locale=en",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2000,
+      "defense": 1700,
+      "race": "Spellcaster",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2003-10-10",
+      "set": "MFC-000",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4766&request_locale=en",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "551fe6dd3487924eac186227546e8760ce0ba8a156e141406cf8e5bfd4221434",
+    "mechanicalDefinition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "grave",
+                "controller": "both",
+                "names": [
+                  "Dark Magician",
+                  "Magician of Black Chaos"
+                ],
+                "atk": 300,
+                "def": 0
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "fullTextReviewed": true,
+    "semanticNotes": "Ganha 300 ATK por cada Mago Negro ou Mago do Caos Negro nos Cemitérios.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4766&request_locale=en"
+  },
+  {
+    "id": "40453765",
+    "canonicalId": "4c90a514-8493-40f1-9da3-9d4dfb1c882a",
+    "name": "Swamp Battleguard",
+    "konamiId": 4018,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4018&request_locale=en",
+    "primaryFacts": {
+      "level": 5,
+      "atk": 1800,
+      "defense": 1500,
+      "race": "Warrior",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2003-01-23",
+      "set": "DL4-003",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4018&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "0255c69e9edb61196ba80a8e5ccad13e03404fdfd8e69481cb1697df4bfd5662",
+    "mechanicalDefinition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "monsters",
+                "controller": "source",
+                "names": [
+                  "Lava Battleguard"
+                ],
+                "faceUp": true,
+                "atk": 500,
+                "def": 0
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "fullTextReviewed": true,
+    "semanticNotes": "Ganha 500 ATK por cada Guarda de Batalha da Lava que você controla.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4018&request_locale=ja"
+  },
+  {
+    "id": "47480070",
+    "canonicalId": "4f3143cc-7c5f-4b6c-8752-af5ae9578192",
+    "name": "Amazoness Paladin",
+    "konamiId": 5645,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5645&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1700,
+      "defense": 300,
+      "race": "Warrior",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2003-10-10",
+      "set": "MFC-059",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5645&request_locale=en",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "391ddcb07fe88a11a322aa568c228715b8550b9da8963925141498fed2f33c28",
+    "mechanicalDefinition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "monsters",
+                "controller": "source",
+                "archetypes": [
+                  "Amazoness"
+                ],
+                "faceUp": true,
+                "cardKind": "monster",
+                "atk": 100,
+                "def": 0
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "fullTextReviewed": true,
+    "semanticNotes": "Ganha 100 ATK por cada monstro Amazoness que você controla.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5645&request_locale=en"
+  },
+  {
+    "id": "52040216",
+    "canonicalId": "527b061b-b733-4580-9e2d-9e29e3b1d541",
+    "name": "Harpie's Pet Dragon",
+    "konamiId": 4392,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4392&request_locale=en",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2000,
+      "defense": 2500,
+      "race": "Dragon",
+      "attribute": "WIND"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-03-20",
+      "set": "FMR-002",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4392&request_locale=en",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "8e825db4ac5fc8df7aa59ff0b396b489e009cbc6f02e341d31b0c16b1e8af257",
+    "mechanicalDefinition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "monsters",
+                "controller": "both",
+                "names": [
+                  "Harpie Lady"
+                ],
+                "faceUp": true,
+                "atk": 300,
+                "def": 300
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "fullTextReviewed": true,
+    "semanticNotes": "Ganha 300 ATK/DEF por cada Lady Harpia no campo.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4392&request_locale=en"
+  },
+  {
+    "id": "63224564",
+    "canonicalId": "7f97cd49-e70d-43fa-b8b0-026f04f5538d",
+    "name": "Cyber Shield",
+    "konamiId": 4323,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4323&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-07-08",
+      "set": "Duel Monsters II bundled cards",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4323&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "c1472e8788e91ae6b6b3dad33f915332ac40466953a6e2394a24e050f40bee8f",
+    "mechanicalDefinition": {
+      "kind": "equip",
+      "names": [
+        "Harpie Lady",
+        "Harpie Lady Sisters"
+      ],
+      "atk": 500,
+      "def": 0
+    },
+    "monsterDefinition": null,
+    "fullTextReviewed": true,
+    "semanticNotes": "Equipe apenas a Lady Harpia ou Irmãs Lady Harpia. O monstro equipado ganha 500 ATK.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4323&request_locale=ja"
+  },
+  {
+    "id": "81380218",
+    "canonicalId": "d5b10c23-82c9-4e1b-94cf-b0e57656377f",
+    "name": "Chorus of Sanctuary",
+    "konamiId": 4899,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4899&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-09-16",
+      "set": "MRL-037",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4899&request_locale=en",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "4d7585f91cde747c579ff851915a0959d8b8a9598a87679a249d8e7c8b478558",
+    "mechanicalDefinition": {
+      "kind": "field",
+      "races": [],
+      "defensePositionOnly": true,
+      "atk": 0,
+      "def": 500
+    },
+    "monsterDefinition": null,
+    "fullTextReviewed": true,
+    "semanticNotes": "Todos os monstros em Posição de Defesa ganham 500 DEF.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4899&request_locale=en"
+  },
+  {
+    "id": "91932350",
+    "canonicalId": "4a09eeea-d730-4dcb-80e7-fae6aa186792",
+    "name": "Harpie Lady 1",
+    "konamiId": 6186,
+    "reviewer": "M21 official complete text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6186&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1300,
+      "defense": 1400,
+      "race": "Winged Beast",
+      "attribute": "WIND"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2004-08-05",
+      "set": "RDS-JP017",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6186&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "mechanicalFingerprint": "468bf338442cf39be17379484aa766e1a8d62cccfe41a062ddca077ae1ad0376",
+    "mechanicalDefinition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "attributes": [
+                  "WIND"
+                ]
+              },
+              "atk": 300,
+              "def": 0
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "fullTextReviewed": true,
+    "semanticNotes": "Nome sempre tratado como Lady Harpia. Todos os monstros de VENTO no campo ganham 300 ATK.",
+    "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
+    "distributionAuthorized": false,
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6186&request_locale=ja"
+  }
+]

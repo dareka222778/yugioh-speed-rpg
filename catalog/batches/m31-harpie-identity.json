@@ -1,0 +1,502 @@
+{
+  "format": 1,
+  "batchId": "m31-harpie-identity",
+  "engineVersion": "engine-v9",
+  "cutoff": "2004-09-30",
+  "region": "world",
+  "baseRevision": "e65d1299ac99cb821f9a176f5bb94ef0dce390041fe4fdd2885db01ad2cf3b0b",
+  "candidates": [
+    {
+      "card": {
+        "id": "80316585",
+        "konamiId": 5239,
+        "name": "Cyber Lady Harpia",
+        "englishName": "Cyber Harpie Lady",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Winged Beast",
+        "attribute": "WIND",
+        "level": 4,
+        "atk": 1800,
+        "defense": 1300,
+        "alwaysTreatedAs": "Harpie Lady",
+        "summary": "Sempre tratada como Dama Harpia, em todas as zonas, por regra de identidade.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5239&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "identityOnly"
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "non-negatable-rules-identity",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:identityOnly"
+      ],
+      "textEvidence": {
+        "text": "This printed Effect Monster is always named Harpie Lady under the rules, in every zone and outside the Duel. This is a non-negatable name rule, not an activated or continuous effect. The combined Deck copy limit with all cards always named Harpie Lady is three. It has no other monster effect, activation condition, cost, target, choice, duration or once-per-turn restriction. Its printed Level is 4, ATK 1800, DEF 1300, WIND, Winged Beast.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5239&request_locale=en",
+        "sha256": "022d0667e706bd6d47997bb3c6ef08d213d20638db82896ec24309ed83119a8b"
+      },
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "80316585"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "80316585"
+            },
+            {
+              "rulesNameOf": "80316585",
+              "equals": "Harpie Lady"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "position"
+              ],
+              "equals": "atk"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "80316585"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "80316585"
+            },
+            {
+              "rulesNameOf": "80316585",
+              "equals": "Harpie Lady"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "position"
+              ],
+              "equals": "atk"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "80316585"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "80316585"
+            },
+            {
+              "rulesNameOf": "80316585",
+              "equals": "Harpie Lady"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "position"
+              ],
+              "equals": "atk"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "80316585"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "80316585"
+            },
+            {
+              "rulesNameOf": "80316585",
+              "equals": "Harpie Lady"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "position"
+              ],
+              "equals": "atk"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "80316585"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                0,
+                "id"
+              ],
+              "equals": "80316585"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "80316585"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "setTurn": 0,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "source",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "80316585"
+            },
+            {
+              "rulesNameOf": "80316585",
+              "equals": "Harpie Lady"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "position"
+              ],
+              "equals": "atk"
+            }
+          ]
+        },
+        "shared-three-copy-limit": {
+          "fixture": {
+            "players": [
+              {},
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "validateDeck": [
+                "91152256",
+                "91152256",
+                "48305365",
+                "48305365",
+                "55550921",
+                "55550921",
+                "44287299",
+                "44287299",
+                "00756652",
+                "00756652",
+                "03573512",
+                "03573512",
+                "05053103",
+                "05053103",
+                "48365709",
+                "48365709",
+                "38199696",
+                "66788016",
+                "17814387",
+                "44209392",
+                "76812113",
+                "76812113",
+                "80316585",
+                "80316585"
+              ],
+              "expectError": true
+            },
+            {
+              "validateDeck": [
+                "91152256",
+                "91152256",
+                "48305365",
+                "48305365",
+                "55550921",
+                "55550921",
+                "44287299",
+                "44287299",
+                "00756652",
+                "00756652",
+                "03573512",
+                "03573512",
+                "05053103",
+                "05053103",
+                "48365709",
+                "48365709",
+                "38199696",
+                "66788016",
+                "17814387",
+                "44209392",
+                "76812113",
+                "80316585",
+                "80316585"
+              ]
+            }
+          ],
+          "assertions": [
+            {
+              "rulesNameOf": "80316585",
+              "equals": "Harpie Lady"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "shared-three-copy-limit"
+      ],
+      "fingerprint": "3a6c03bc1d55175808cf34b40b1ec3e4c666d6cb678580a66be59f56346b0628",
+      "suites": [
+        "tests/generated-m31-harpie-identity.test.cjs"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "80316585",
+      "canonicalId": "a33ec0ea-e674-4a03-b00f-2cc4160bfbdd",
+      "konamiId": 5239,
+      "reviewer": "Codex: official EN/JP text and printed facts review; real execution required",
+      "reviewedAt": "2026-10-29",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5239&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1800,
+        "defense": 1300,
+        "race": "Winged Beast",
+        "attribute": "WIND"
+      },
+      "verifiedPrinting": {
+        "date": "2001-05-21",
+        "set": "VJ-03",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5239&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "022d0667e706bd6d47997bb3c6ef08d213d20638db82896ec24309ed83119a8b",
+      "primaryTextSHA256": "3cfd7a58882ae7fa3241d298c170ab34a121901bb02c5a7863e7c8dc17d9aadd",
+      "primaryHTMLSHA256": "8f0390219481fa3145ff69ad389b25b1dad214e3cad94c3051ad7d3cca0ab6ec",
+      "printingHTMLSHA256": "bed51b5f383f64598759a6be48555973ce3cb98c7d197de5011ec6af9b87e97a",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "not-applicable",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "3a6c03bc1d55175808cf34b40b1ec3e4c666d6cb678580a66be59f56346b0628"
+    }
+  ]
+}

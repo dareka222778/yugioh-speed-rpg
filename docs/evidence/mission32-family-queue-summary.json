@@ -1,0 +1,200 @@
+{
+  "format": 1,
+  "historical": 1962,
+  "certified": 922,
+  "pending": 1040,
+  "pendingWithCompleteSecondaryText": 1040,
+  "identityBlocked": 27,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "method": "Exact complete text plus card category; preserve costs, numbers, timing, restrictions and secondary effects. Every identity still requires independent official review, executable definitions and real-engine tests.",
+  "families": [
+    {
+      "signature": "296e3a78793515f592bb34ccee343fe7640b3e2980207a37aabb4bd5ba421930",
+      "category": "effect-monster",
+      "pending": [
+        {
+          "id": "53693416",
+          "canonicalId": "0f01c411-9a1b-4d99-9e52-1af0ea8c56d9",
+          "name": "Eagle Eye"
+        },
+        {
+          "id": "52571838",
+          "canonicalId": "1c55d8b4-0dce-4a22-a3c4-98b8190ff96a",
+          "name": "Creeping Doom Manta"
+        },
+        {
+          "id": "26082229",
+          "canonicalId": "aa66a93f-30f1-410a-b87f-7caf19d44492",
+          "name": "Invasion of Flames"
+        },
+        {
+          "id": "89698120",
+          "canonicalId": "b09e2a07-047c-4ed6-92ba-f69d59b1800a",
+          "name": "Tactical Espionage Expert"
+        }
+      ],
+      "certified": [],
+      "identityBlocked": [],
+      "priorityScore": 4,
+      "priorityMeaning": "Navigation only: pending count, doubled when an exact-text certified example exists. No implementation-time or mechanical-equivalence claim."
+    },
+    {
+      "signature": "315908ccdb1dc348ac4805a04769d3ffa1f17add078748f48e7344a2e8ff198c",
+      "category": "spell:continuous",
+      "pending": [
+        {
+          "id": "31893528",
+          "canonicalId": "5bf9e2df-8a71-4337-b6af-bfe1c5cfac46",
+          "name": "Spirit Message \"I\""
+        },
+        {
+          "id": "30170981",
+          "canonicalId": "858e9a68-48e7-4242-a99c-581735609b8a",
+          "name": "Spirit Message \"L\""
+        },
+        {
+          "id": "94772232",
+          "canonicalId": "edd6ea07-7a21-470e-8741-44d8956259ce",
+          "name": "Spirit Message \"A\""
+        },
+        {
+          "id": "67287533",
+          "canonicalId": "f28f4ac3-1dd6-4e53-9154-dd19d307bd85",
+          "name": "Spirit Message \"N\""
+        }
+      ],
+      "certified": [],
+      "identityBlocked": [],
+      "priorityScore": 4,
+      "priorityMeaning": "Navigation only: pending count, doubled when an exact-text certified example exists. No implementation-time or mechanical-equivalence claim."
+    },
+    {
+      "signature": "c12748fb85c1fa040153a88f5c73892b59d690c3b23ac6c3b86d54df825767a0",
+      "category": "effect-monster",
+      "pending": [
+        {
+          "id": "62340868",
+          "canonicalId": "31ef3933-e8fc-4e95-9901-a888fa236fea",
+          "name": "Kazejin"
+        },
+        {
+          "id": "98434877",
+          "canonicalId": "5a11d7d5-5846-41b4-a523-c92a9d53de7b",
+          "name": "Suijin"
+        },
+        {
+          "id": "25955164",
+          "canonicalId": "7c6bae08-a8b7-4631-99cd-bd909d0655c9",
+          "name": "Sanga of the Thunder"
+        }
+      ],
+      "certified": [],
+      "identityBlocked": [],
+      "priorityScore": 3,
+      "priorityMeaning": "Navigation only: pending count, doubled when an exact-text certified example exists. No implementation-time or mechanical-equivalence claim."
+    },
+    {
+      "signature": "086b3b8dd3de9a16338a89e65f1997058164543057585dfc0749e6faed20144c",
+      "category": "effect-monster",
+      "pending": [
+        {
+          "id": "53493204",
+          "canonicalId": "2c244b1e-6cef-4af8-9cb8-c1569f2afbde",
+          "name": "Goddess with the Third Eye"
+        },
+        {
+          "id": "50259460",
+          "canonicalId": "f00d3b5a-2434-4743-8fef-2e767175fa7b",
+          "name": "Versago the Destroyer"
+        }
+      ],
+      "certified": [],
+      "identityBlocked": [],
+      "priorityScore": 2,
+      "priorityMeaning": "Navigation only: pending count, doubled when an exact-text certified example exists. No implementation-time or mechanical-equivalence claim."
+    },
+    {
+      "signature": "2cb5d63445fe21f068b57fb95de80ce99e0ea51239140c32e564b9c811d79cbd",
+      "category": "spell:continuous",
+      "pending": [
+        {
+          "id": "78697395",
+          "canonicalId": "097129df-e0b3-4ab6-9bae-441c5a38e79e",
+          "name": "The Third Sarcophagus"
+        },
+        {
+          "id": "04081094",
+          "canonicalId": "ffea093f-c280-4486-acbe-bfaf2850957c",
+          "name": "The Second Sarcophagus"
+        }
+      ],
+      "certified": [],
+      "identityBlocked": [],
+      "priorityScore": 2,
+      "priorityMeaning": "Navigation only: pending count, doubled when an exact-text certified example exists. No implementation-time or mechanical-equivalence claim."
+    },
+    {
+      "signature": "95e54609a641cfe5c0538ac8335c7665035bfa77fd7c9f602de9d639d1972698",
+      "category": "effect-monster",
+      "pending": [
+        {
+          "id": "15960641",
+          "canonicalId": "19e37dd8-cb93-4707-b5c6-aebe868a67a2",
+          "name": "Mirage Dragon"
+        },
+        {
+          "id": "88975532",
+          "canonicalId": "d87a522b-7660-4d8b-a3ab-84af79647167",
+          "name": "Pitch-Black Warwolf"
+        }
+      ],
+      "certified": [],
+      "identityBlocked": [],
+      "priorityScore": 2,
+      "priorityMeaning": "Navigation only: pending count, doubled when an exact-text certified example exists. No implementation-time or mechanical-equivalence claim."
+    },
+    {
+      "signature": "a2f6a997b942baaf76e580cedd92f8a810566613820860117ae3fed984e03649",
+      "category": "effect-monster",
+      "pending": [
+        {
+          "id": "98162242",
+          "canonicalId": "347b5fe0-e5ab-4111-a6e6-76e28e0f6e5d",
+          "name": "Needle Burrower"
+        },
+        {
+          "id": "52768103",
+          "canonicalId": "96033512-cd72-4566-abe4-2d316a38e399",
+          "name": "KA-2 Des Scissors"
+        }
+      ],
+      "certified": [],
+      "identityBlocked": [],
+      "priorityScore": 2,
+      "priorityMeaning": "Navigation only: pending count, doubled when an exact-text certified example exists. No implementation-time or mechanical-equivalence claim."
+    },
+    {
+      "signature": "f8eb2fa62e5d836a252da39efbdfd1f21ede0b4f0e3e754a6b1f51456f9159a8",
+      "category": "effect-monster",
+      "pending": [
+        {
+          "id": "54878498",
+          "canonicalId": "aa8c4787-b0d5-4bf3-9596-8e4a9b44da59",
+          "name": "Kelbek"
+        },
+        {
+          "id": "13945283",
+          "canonicalId": "d09c37c0-6623-4fb7-8a1c-70b5989d854a",
+          "name": "Wall of Illusion"
+        }
+      ],
+      "certified": [],
+      "identityBlocked": [],
+      "priorityScore": 2,
+      "priorityMeaning": "Navigation only: pending count, doubled when an exact-text certified example exists. No implementation-time or mechanical-equivalence claim."
+    }
+  ],
+  "sourceIndexSHA256": "973e67066073fa8d51b12225774af02f018814a261ffa3b9dfcf290f0e588d30",
+  "scriptSHA256": "ee95824de6a4b9f51c0821bda73093676a87f9d28e50908d5de1bf647625f276"
+}

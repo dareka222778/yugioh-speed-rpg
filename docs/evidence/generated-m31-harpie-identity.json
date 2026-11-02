@@ -1,0 +1,54 @@
+{
+  "format": 1,
+  "batchId": "m31-harpie-identity",
+  "baseRevision": "e65d1299ac99cb821f9a176f5bb94ef0dce390041fe4fdd2885db01ad2cf3b0b",
+  "batchSHA256": "56731ef75b1d9acac3d5791b1f0369c81f13cb0bba6a9eaa21f62cc74efa1812",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m31_harpie_identityCards} from './generated/m31-harpie-identity';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m31_harpie_identityEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m31_harpie_identityEffects} from './generated/m31-harpie-identity';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({",
+      "to": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({\n ...m31_harpie_identityMonsters,"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "import {conditionalMonsters30}",
+      "to": "import {monsters as m31_harpie_identityMonsters} from './generated/m31-harpie-identity';\nimport {conditionalMonsters30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"80316585\": {\n    \"fingerprint\": \"3a6c03bc1d55175808cf34b40b1ec3e4c666d6cb678580a66be59f56346b0628\",\n    \"suites\": [\n      \"tests/generated-m31-harpie-identity.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m31-harpie-identity: explicit tested release; zero inventory grants.\n  \"80316585\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "80316585"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

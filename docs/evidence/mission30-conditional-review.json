@@ -1,0 +1,19 @@
+{
+  "scope": "M30: three Gadget searchers plus conditional monster/equipment/backrow destruction",
+  "historicalCutoff": "2004-09-30",
+  "certificateBlockSHA256": "32f68a23176a4515d67a9f7ccca9ce4d6eac1b0397a5b2df203dc4b6b7b6fbf0",
+  "releaseBlockSHA256": "8c872d5b791f89f86eecd63e75e46c59ef594564d69fedc168813f375bcbb8a2",
+  "suite": "tests/conditionalBatch30.test.cjs",
+  "cards": [
+    {"id":"13839120","konamiId":6156,"englishName":"Yellow Gadget","firstObservedWorld":"2004-05-01","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6156&request_locale=en","fullEffectReviewed":true,"rule":"Optional search of Green Gadget after Normal or Special Summon, excluding Flip Summon"},
+    {"id":"41172955","konamiId":6151,"englishName":"Green Gadget","firstObservedWorld":"2004-05-01","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6151&request_locale=en","fullEffectReviewed":true,"rule":"Optional search of Red Gadget after Normal or Special Summon, excluding Flip Summon"},
+    {"id":"86445415","konamiId":6155,"englishName":"Red Gadget","firstObservedWorld":"2004-05-01","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6155&request_locale=en","fullEffectReviewed":true,"rule":"Optional search of Yellow Gadget after Normal or Special Summon, excluding Flip Summon"},
+    {"id":"63391643","konamiId":5166,"englishName":"Thousand Knives","firstObservedWorld":"2000-12-23","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5166&request_locale=en","fullEffectReviewed":true,"rule":"Face-up Dark Magician owned by caster required at activation; target and destroy an opposing monster, including facedown"},
+    {"id":"02314238","konamiId":6057,"englishName":"Dark Magic Attack","firstObservedWorld":"2004-02-26","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6057&request_locale=en","fullEffectReviewed":true,"rule":"Face-up Dark Magician owned by caster required at activation; destroy all opponent spells and traps, including set and field"},
+    {"id":"38411870","konamiId":5442,"englishName":"Needle Ceiling","firstObservedWorld":"2003-04-24","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5442&request_locale=en","fullEffectReviewed":true,"rule":"Trap speed two; four monsters counted on both fields at activation; destroy all face-up monsters at resolution"},
+    {"id":"28121403","konamiId":5741,"englishName":"Really Eternal Rest","firstObservedWorld":"2002-11-21","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5741&request_locale=en","fullEffectReviewed":true,"rule":"Trap speed two; simultaneously destroy all monsters equipped with resolved face-up Equip Cards"},
+    {"id":"20727787","konamiId":5683,"englishName":"Disarmament","firstObservedWorld":"2002-09-19","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5683&request_locale=en","fullEffectReviewed":true,"rule":"Trap speed two; simultaneously destroy face-up Equip Cards on both fields"},
+    {"id":"61044390","konamiId":5841,"englishName":"Chaos End","firstObservedWorld":"2003-04-24","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5841&request_locale=en","fullEffectReviewed":true,"rule":"Seven own banished cards required at activation; destroy all monsters on both fields, including facedown"},
+    {"id":"81510157","konamiId":5743,"englishName":"Soul Taker","firstObservedWorld":"2003-04-08","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5743&request_locale=en","fullEffectReviewed":true,"rule":"Target face-up opponent monster; destroy on resolution if still eligible; opponent gains 1000 LP only if destroyed"}
+  ]
+}

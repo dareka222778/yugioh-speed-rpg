@@ -1,0 +1,54 @@
+{
+  "format": 1,
+  "batchId": "m32-optional-trigger-lp",
+  "baseRevision": "488b7ef1792a32ec4a3758f104de76b1952f5ba4ebe229927f52c0e85bdd6995",
+  "batchSHA256": "4fc6119fd0cb1029f2349328dcff2751e240566bbe8eecd845bea3649265b2ab",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m32_optional_trigger_lpCards} from './generated/m32-optional-trigger-lp';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m32_optional_trigger_lpEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m32_optional_trigger_lpEffects} from './generated/m32-optional-trigger-lp';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({",
+      "to": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({\n ...m32_optional_trigger_lpMonsters,"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "import {conditionalMonsters30}",
+      "to": "import {monsters as m32_optional_trigger_lpMonsters} from './generated/m32-optional-trigger-lp';\nimport {conditionalMonsters30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"94230224\": {\n    \"fingerprint\": \"a7b605625c69671fc05d2b2b6a7f883d9a077982b850afa2b8ee5c2f1f6933b5\",\n    \"suites\": [\n      \"tests/generated-m32-optional-trigger-lp.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m32-optional-trigger-lp: explicit tested release; zero inventory grants.\n  \"94230224\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "94230224"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

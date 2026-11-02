@@ -1,0 +1,58 @@
+name: Card batch admission preparation
+on:
+  pull_request:
+    branches: [main, classic-engine-foundation]
+    paths:
+      - 'catalog/proposed/**'
+      - 'scripts/card-batch-*.cjs'
+      - 'scripts/apply-reviewed-admission.cjs'
+      - '.github/workflows/card-batch-admission.yml'
+permissions:
+  contents: read
+jobs:
+  prepare-admission:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/cardBatchCI.test.cjs
+      - run: node scripts/card-batch-ci.cjs
+        env:
+          CARD_BATCH_BASE_COMMIT: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reviewed-admission-changes
+          path: |
+            artifacts/admission-bundle.json
+            artifacts/admission-tests.log
+          if-no-files-found: error
+
+  publish-admission:
+    needs: prepare-admission
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: reviewed-admission-changes
+          path: artifacts
+      - name: Apply approved batch only when commit and files match
+        run: node scripts/apply-reviewed-admission.cjs artifacts/admission-bundle.json
+        env:
+          CARD_BATCH_BASE_COMMIT: ${{ github.event.pull_request.head.sha }}
+          CARD_BATCH_BRANCH: ${{ github.head_ref }}

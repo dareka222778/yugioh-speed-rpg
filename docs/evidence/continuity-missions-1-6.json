@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "kind": "persistent-development-handoff",
+  "date": "2026-10-27",
+  "documentationOnly": true,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "branch": "feat/rea-engine-recovery-20261026",
+  "pr": {
+    "number": 12,
+    "draft": true,
+    "base": "classic-engine-foundation",
+    "merged": false
+  },
+  "lastVerifiedCode": {
+    "sha": "30f732e7ba0f97e61919bb87a4a30289e39c6ae7",
+    "tree": "942fecd18310dd91ecdde34f99785cd319b4dd45",
+    "ciRun": 40564035108,
+    "conclusion": "success",
+    "testedMergeSha": "65762c607f5f000789b8295014d8acf0e1901329",
+    "testedTreeEqualsBranch": true,
+    "jobs": [
+      122400382610,
+      122400382935
+    ],
+    "tests": {
+      "passed": 957,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "rea": {
+      "passed": 23,
+      "total": 23,
+      "partial": [
+        "I02"
+      ]
+    }
+  },
+  "catalog": {
+    "historical": 1962,
+    "normalized": 1951,
+    "blockedFacts": 11,
+    "certified": 197,
+    "normalMonsters": 111,
+    "effectMonsters": 24,
+    "fusions": 2,
+    "spellsAndTraps": 60,
+    "additionsDistributionBlocked": 67,
+    "legacyDistributionPolicyCount": 130,
+    "cutoff": "2004-09-30",
+    "source": "catalog/historical/2004-10-01/cards.json",
+    "stages": [
+      "cataloged",
+      "normalized",
+      "implemented",
+      "tested",
+      "certified",
+      "distribution-authorized"
+    ]
+  },
+  "engines": {
+    "current": "engine-v5",
+    "supported": [
+      "engine-v1",
+      "engine-v2",
+      "engine-v3",
+      "engine-v4",
+      "engine-v5"
+    ],
+    "moduleCounts": [
+      27,
+      31,
+      32,
+      33,
+      34
+    ],
+    "immutableModulesTotal": 157,
+    "missingVersionMeans": "engine-v1",
+    "futureSemanticChange": "May require explicit v6; never rewrite v1-v5 or silently upgrade saves"
+  },
+  "mission6Commits": [
+    "f46a350dba27b58d872dbb7bc173e9d46a7aae15",
+    "e7f171b5143cfc6b21042ce3d3078fce45fa6a46",
+    "c6a668e8c7e25f25c5e014669bb5f76cf7bb3b0e",
+    "30f732e7ba0f97e61919bb87a4a30289e39c6ae7"
+  ],
+  "metrics": {
+    "mixed50": {
+      "writers": 2,
+      "peakSampledRSSBytes": 561577984,
+      "p95Ms": 122.853222,
+      "cpuSeconds": 21.024215
+    },
+    "mixed100": {
+      "writers": 2,
+      "peakSampledRSSBytes": 607657984,
+      "p95Ms": 211.34369,
+      "cpuSeconds": 37.648521
+    },
+    "soak": {
+      "elapsedSeconds": 601.314873,
+      "interleavedSessionsPerCohort": 6,
+      "completedGames": 5496,
+      "commits": 333024,
+      "duplicateDeliveries": 19589,
+      "peakRSSBytes": 214917120,
+      "firstPostGCHeapBytes": 27686672,
+      "lastPostGCHeapBytes": 33154952
+    },
+    "limits": [
+      "Not live Discord or host-capacity evidence",
+      "Not hours/days leak or physical power-loss proof",
+      "1 GiB and 384 MiB reserve are planning assumptions"
+    ]
+  },
+  "documents": {
+    "summary": "docs/CHECKPOINT-MISSIONS-1-6.md",
+    "plan": "docs/MISSION-7-PLAN.md",
+    "readiness": "docs/evidence/mission6-readiness.json",
+    "homologation": "docs/DISCORD-HOMOLOGATION-MISSION-6.md",
+    "missions": [
+      "docs/REA-DEVELOPMENT-20261026.md",
+      "docs/REA-MISSION-2.md",
+      "docs/REA-MISSION-3.md",
+      "docs/REA-MISSION-4.md",
+      "docs/REA-MISSION-5.md",
+      "docs/REA-MISSION-6.md"
+    ]
+  },
+  "evidence": {
+    "ci": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/40564035108",
+    "auditArtifactId": 12762288950,
+    "extendedSoakArtifactId": 12763305564,
+    "visualArtifactId": 12761569282,
+    "retentionDays": 14
+  },
+  "mission7": {
+    "status": "planned-not-implemented",
+    "firstUnit": "Verify current HEAD/CI; curate a small activated-monster/FLIP cohort with full semantic equivalence, explicit missing dependencies and individual regression evidence",
+    "lanes": [
+      "Q0 identity/region/facts",
+      "Q1 activated/FLIP monsters",
+      "Q2 Spells and normal/counter Traps",
+      "Q3 equip/field",
+      "Q4 continuous effects and conditional triggers",
+      "Q5 special summons/fusions",
+      "Q6 rituals/multiple material choices",
+      "Q7 dynamic stats/copy/linked entities",
+      "Q8 token generators",
+      "Q9 complex and unclassified effects",
+      "QN Normal monsters in parallel"
+    ],
+    "approval": "Individual primary review, complete effects/conditions, tests, fingerprint and certificate; distribution separate",
+    "blocked": [
+      "11 factual identities/passcodes: see summary and mission5 evidence",
+      "I02 missing historical zone epochs",
+      "Unsupported mechanics: see family dependency plan",
+      "Real Discord environment, authorization and four consenting users",
+      "Measured host budget, real latency, operational restore and hours/days soak",
+      "Explicit beta scope and separate launch/distribution authorization"
+    ]
+  },
+  "constraints": {
+    "preserve": [
+      "engines",
+      "saves",
+      "SQLite",
+      "profiles",
+      "collections",
+      "decks",
+      "progress",
+      "economy",
+      "layout",
+      "images",
+      "card backs",
+      "approved rules"
+    ],
+    "forbidden": [
+      "merge",
+      "deploy",
+      "production access",
+      "main changes",
+      "automatic distribution",
+      "destructive migrations",
+      "proprietary code/data"
+    ],
+    "rules": {
+      "lp": 4000,
+      "initialHand": 4,
+      "endPhaseHandLimit": 6,
+      "mainDeck": [
+        20,
+        30
+      ],
+      "extraDeckMax": 5,
+      "zones": [
+        3,
+        3
+      ],
+      "separateField": true,
+      "mainPhase2": false,
+      "skillsEnabled": false
+    }
+  },
+  "resume": {
+    "workspace": "C:/Users/Micro/Downloads/speed-rpg-rea-20261026/repo",
+    "caveat": "Materialized workspace may lack .git and complete npm dependencies; use an isolated real checkout or GitHub Git Data API with expected-SHA lease. Do not overwrite other changes.",
+    "node": "22.x",
+    "checks": [
+      "npm ci",
+      "npm run check",
+      "npm test",
+      "node scripts/verify-resolver-archives.cjs",
+      "node scripts/check-mission3-integrity.cjs",
+      "node scripts/check-mission4-integrity.cjs",
+      "node scripts/check-mission5-integrity.cjs",
+      "npm run audit:rea"
+    ],
+    "workflow": ".github/workflows/engine-validation.yml",
+    "strictRea": "Intentionally exposes I02 partial coverage; do not suppress",
+    "checkpointSha": "Discover commit containing this file, then inspect later commits; no self-referential SHA",
+    "ciNote": "New documentation commit can trigger CI; do not inherit code-baseline results as if executed on its SHA",
+    "afterEachUnit": [
+      "test and correct failures",
+      "commit",
+      "persist SHA/evidence/next step",
+      "update draft PR",
+      "advance independent safe task if blocked"
+    ]
+  }
+}

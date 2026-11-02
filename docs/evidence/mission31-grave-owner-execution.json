@@ -1,0 +1,19 @@
+{
+  "format": 1,
+  "scope": "actual public classic 2v2 engine, isolated in-memory fixtures, no database or Discord",
+  "rows": [
+    {
+      "scenario": "inactive-owner-card-to-Deck",
+      "passed": true,
+      "restoredPendingChoice": true,
+      "physicalIdentitiesPreserved": true
+    },
+    {
+      "scenario": "inactive-owner-Fusion-to-Extra",
+      "passed": true,
+      "restoredPendingChoice": true,
+      "physicalIdentitiesPreserved": true
+    }
+  ],
+  "inventoryGranted": 0
+}

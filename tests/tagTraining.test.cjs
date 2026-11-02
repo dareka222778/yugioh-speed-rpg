@@ -6,7 +6,12 @@ test('solo 2v2 training plays three NPCs automatically, persists each decision a
  assert.equal(s.currentTag(owner),undefined);assert.deepEqual(getPlayer(owner),before);assert.deepEqual(getCollection(owner),collection);assert.ok(r.revision>steps);}
 });
 test('a restart with a pending NPC decision resumes before the next human panel and never spends player assets',()=>{
- const owner='restart-solo';createPlayer(owner,owner);let r=s.runTagBots(s.createTagTraining(owner,'g','c').id);if(r.status!=='playing')throw Error('Unexpected finish');
+ const owner='restart-solo';createPlayer(owner,owner);let r=s.createTagTraining(owner,'g','c');
+ // This test requires a saved automated decision, not a random full opening.
+ // Other tests cover genuine random openings, including legitimate early wins.
+ const {getNPC}=require('../dist/npcContent'),styles=['yugi','kaiba','yugi','joey'];
+ r.state=t.createTagDuel(r.members.map((p,i)=>({...p,cards:getNPC(styles[i]).cards,extra:getNPC(styles[i]).extra})),{classic:true,first:1,seed:'mission6-pending-npc'});
+ db.prepare('UPDATE tag_sessions SET state=? WHERE id=?').run(JSON.stringify(r.state),r.id);r=s.getTag(r.id);
  // The opening seat and the NPCs' set cards are randomized. Ending the human
  // Main Phase can legitimately open a response window that still needs the
  // human to pass before the next automated decision becomes pending.

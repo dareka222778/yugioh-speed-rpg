@@ -1,0 +1,484 @@
+{
+  "mission": 11,
+  "cohort": "strict-equips-economy-and-direct-attack",
+  "cutoff": "2004-09-30",
+  "previousCertified": 723,
+  "certified": 17,
+  "method": "Independent YGOPRODeck current API full effect-text strict match, identity+release pinned historical YGOJSON, typed mechanical operations and executable individual scenarios; Konami CID pages referenced, not scraped as proof of visits",
+  "independentSource": [
+    {
+      "endpoint": "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Spell%20Card",
+      "sha256": "e527ce063d48b0dd2a694dba02027dd510e5f9efc35ebbdd6ba9c941b8480dcc"
+    },
+    {
+      "endpoint": "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Effect%20Monster",
+      "sha256": "cb0256424a1611db2a57552f78924676d7180e27c1c4b9b212d2741d3c4257a5"
+    }
+  ],
+  "cards": [
+    {
+      "id": "01557499",
+      "canonicalId": "bb0f03d9-1da1-4a76-9cc9-f78e103d0a46",
+      "konamiId": 4318,
+      "englishName": "Silver Bow and Arrow",
+      "description": "A Fairy-Type monster equipped with this card increases its ATK and DEF by 300 points.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-05-27",
+        "world": "1999-05-27"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 300,
+        "def": 300,
+        "races": [
+          "Fairy"
+        ]
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "02792265",
+      "canonicalId": "e5e708a3-39e8-43cd-bc44-75aa76127926",
+      "konamiId": 5043,
+      "englishName": "Servant of Catabolism",
+      "description": "This monster may attack your opponent's Life Points directly.",
+      "category": "Aqua",
+      "type": "Effect Monster",
+      "originalRelease": {
+        "tcg": "2003-07-18",
+        "ocg": "2003-04-24",
+        "world": "2003-04-24"
+      },
+      "statistics": {
+        "level": 3,
+        "atk": 700,
+        "def": 500,
+        "race": "aqua",
+        "attribute": "light"
+      },
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "monsterEffect"
+      },
+      "monsterDefinition": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "directAttack"
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      }
+    },
+    {
+      "id": "03492538",
+      "canonicalId": "5e8e8721-088f-4db4-ba3e-b7d6b5146386",
+      "konamiId": 4312,
+      "englishName": "Insect Armor with Laser Cannon",
+      "description": "Equip only to an Insect monster. It gains 700 ATK.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2013-07-11",
+        "ocg": "1999-07-08",
+        "world": "1999-07-08"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 700,
+        "def": 0,
+        "races": [
+          "Insect"
+        ]
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "15052462",
+      "canonicalId": "41ebf4fc-07a8-4b35-ae2d-e536c4d55a8e",
+      "konamiId": 4328,
+      "englishName": "Violet Crystal",
+      "description": "(This card is not treated as a \"Crystal\" card.)\nEquip only to a Zombie monster. It gains 300 ATK/DEF.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 300,
+        "def": 300,
+        "races": [
+          "Zombie"
+        ]
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "18937875",
+      "canonicalId": "f9aceb7f-c75e-48ad-b5cf-ac21180e4362",
+      "konamiId": 4846,
+      "englishName": "Burning Spear",
+      "description": "A FIRE monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-09-01",
+        "ocg": "1999-05-25",
+        "world": "1999-05-25"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 400,
+        "def": -200,
+        "attribute": "FIRE"
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "21297224",
+      "canonicalId": "e69bb4ee-3505-41fe-b300-9f1fd3644e6e",
+      "konamiId": 5205,
+      "englishName": "Hysteric Fairy",
+      "description": "Tribute 2 monsters on your side of the field to increase your Life Points by 1000 points.",
+      "category": "Fairy",
+      "type": "Effect Monster",
+      "originalRelease": {
+        "tcg": "2003-03-01",
+        "ocg": "2001-04-19",
+        "world": "2001-04-19"
+      },
+      "statistics": {
+        "level": 4,
+        "atk": 1800,
+        "def": 500,
+        "race": "fairy",
+        "attribute": "light"
+      },
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "monsterEffect"
+      },
+      "monsterDefinition": {
+        "effect": {
+          "trigger": "ignition",
+          "cost": {
+            "kind": "tribute",
+            "count": 2
+          },
+          "operation": {
+            "kind": "heal",
+            "amount": 1000
+          }
+        },
+        "activation": {
+          "policy": "manual",
+          "window": "main"
+        }
+      }
+    },
+    {
+      "id": "32268901",
+      "canonicalId": "ca5980f9-ecc4-4be5-af00-bde23a32504f",
+      "konamiId": 4660,
+      "englishName": "Salamandra",
+      "description": "Equip only to a FIRE monster. It gains 700 ATK.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2003-04-17",
+        "ocg": "1999-07-08",
+        "world": "1999-07-08"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 700,
+        "def": 0,
+        "attribute": "FIRE"
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "37820550",
+      "canonicalId": "c6418630-6370-4a3b-9e09-ad9418571091",
+      "konamiId": 4322,
+      "englishName": "Electro-Whip",
+      "description": "Increase the ATK and DEF of a Thunder-Type monster equipped with this card by 300 points.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-05-27",
+        "world": "1999-05-27"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 300,
+        "def": 300,
+        "races": [
+          "Thunder"
+        ]
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "39897277",
+      "canonicalId": "386db81f-eee6-434e-9605-ff5b0d8c7b4d",
+      "konamiId": 4313,
+      "englishName": "Elf's Light",
+      "description": "A LIGHT monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-09-01",
+        "ocg": "1999-05-25",
+        "world": "1999-05-25"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 400,
+        "def": -200,
+        "attribute": "LIGHT"
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "51267887",
+      "canonicalId": "960c4cff-83c4-42c0-8a36-244581648cff",
+      "konamiId": 4332,
+      "englishName": "Raise Body Heat",
+      "description": "Equip only to a Dinosaur monster. It gains 300 ATK/DEF.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-03-27",
+        "world": "1999-03-27"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 300,
+        "def": 300,
+        "races": [
+          "Dinosaur"
+        ]
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "55321970",
+      "canonicalId": "c4c19d9b-7236-4020-ba33-821a9aa2c2ae",
+      "konamiId": 4847,
+      "englishName": "Gust Fan",
+      "description": "A WIND monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-09-01",
+        "ocg": "1999-05-25",
+        "world": "1999-05-25"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 400,
+        "def": -200,
+        "attribute": "WIND"
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "56260110",
+      "canonicalId": "25f6cd37-ee11-4533-a7ca-6cc7075c73b8",
+      "konamiId": 4841,
+      "englishName": "Raimei",
+      "description": "Decrease your opponent's Life Points by 300 points.",
+      "category": "Normal",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-09-01",
+        "ocg": "1999-03-01",
+        "world": "1999-03-01"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "burn",
+        "amount": 300
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "59290628",
+      "canonicalId": "c161db00-5989-4f56-b096-2075672e7726",
+      "konamiId": 5527,
+      "englishName": "Nightmare Horse",
+      "description": "This card can attack your opponent's Life Points directly even if there is a monster on your opponent's side of the field.",
+      "category": "Zombie",
+      "type": "Effect Monster",
+      "originalRelease": {
+        "tcg": "2003-07-18",
+        "ocg": "2002-05-16",
+        "world": "2002-05-16"
+      },
+      "statistics": {
+        "level": 2,
+        "atk": 500,
+        "def": 400,
+        "race": "zombie",
+        "attribute": "dark"
+      },
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "monsterEffect"
+      },
+      "monsterDefinition": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "directAttack"
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      }
+    },
+    {
+      "id": "66719324",
+      "canonicalId": "b2b1cd87-b871-4b39-af72-3d3825c8f52f",
+      "konamiId": 5151,
+      "englishName": "Rain of Mercy",
+      "description": "Increases the Life Points of both players by 1000 points.",
+      "category": "Normal",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-10-20",
+        "ocg": "2000-12-14",
+        "world": "2000-12-14"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "sequence",
+        "activation": {
+          "speed": 1,
+          "window": "main",
+          "damage": "never"
+        },
+        "operations": [
+          {
+            "kind": "gainLP",
+            "player": "self",
+            "amount": 1000
+          },
+          {
+            "kind": "gainLP",
+            "player": "opponent",
+            "amount": 1000
+          }
+        ]
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "77007920",
+      "canonicalId": "ff23054a-2000-45c4-8022-fc19942e790e",
+      "konamiId": 4311,
+      "englishName": "Laser Cannon Armor",
+      "description": "Equip only to an Insect monster. It gains 300 ATK/DEF.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-03-27",
+        "world": "1999-03-27"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 300,
+        "def": 300,
+        "races": [
+          "Insect"
+        ]
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "77027445",
+      "canonicalId": "94868883-03a6-4ee2-b89b-e74224dfa562",
+      "konamiId": 4334,
+      "englishName": "Power of Kaishin",
+      "description": "Equip only to an Aqua monster. It gains 300 ATK/DEF.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 300,
+        "def": 300,
+        "races": [
+          "Aqua"
+        ]
+      },
+      "monsterDefinition": null
+    },
+    {
+      "id": "82878489",
+      "canonicalId": "80ac842f-3bdf-451e-b1ac-9d9848e07e2f",
+      "konamiId": 4674,
+      "englishName": "Shine Palace",
+      "description": "Equip only to a LIGHT monster. It gains 700 ATK.",
+      "category": "Equip",
+      "type": "Spell Card",
+      "originalRelease": {
+        "tcg": "2009-11-12",
+        "ocg": "1999-07-08",
+        "world": "1999-07-08"
+      },
+      "statistics": null,
+      "exactFullTextMatched": true,
+      "mechanicalDefinition": {
+        "kind": "equip",
+        "atk": 700,
+        "def": 0,
+        "attribute": "LIGHT"
+      },
+      "monsterDefinition": null
+    }
+  ]
+}
