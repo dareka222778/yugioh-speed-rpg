@@ -4,6 +4,8 @@ const ids=['91932350','52040216','40453765','20394040','47480070','38033121','11
 function strip(file,bytes){bytes=require('./mission24-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission22-reviewed-extensions.cjs').strip(file,bytes);let text=bytes.toString('utf8');
  const once=part=>{assert.equal(text.split(part).length,2,`M21 reviewed addition: ${file}`);text=text.replace(part,'');};
  if(file==='src/cardCatalog.ts'&&text.includes('; alwaysTreatedAs?:string'))once('; alwaysTreatedAs?:string; archetypes?:readonly string[]');
+ // M39: review-only exclusion of misleading archetype aliases (e.g. Cyber Saurus).
+ if(file==='src/cardCatalog.ts'&&text.includes('; excludedArchetypes?:readonly string[]'))once('; excludedArchetypes?:readonly string[]');
  if(file==='src/cardMetadata.ts'&&text.includes("import {mechanicalBatch20}")){once("import {mechanicalBatch20} from './mechanicalBatch20';\n");once(',...mechanicalBatch20');}
  if(file==='src/decks.ts'&&text.includes("import {rulesCardName}")){
   once("import {rulesCardName} from './cardIdentity';\n");
