@@ -606,7 +606,16 @@ function resolve(s:DuelState){
   const burn=getMonsterEffect(a.id)?.operation.kind==='battleLevelBurn'&&!monsterEffectsNegated(s,a.uid);
   const targetLevel=defender?card(defender.m.id).level??0:0;
   const outcome=combatOutcome(s,pending.actor,a,defender?.m,{attack:(m,state)=>pending.zeroedAttacker&&m.uid===pending.card?0:atk(m,state),defense:def,protected:protectedBattleDamage});
-  for(const uid of outcome.destroy)graveMonster(s,uid,true);
+  // Snapshot both active sources before either combatant leaves the field.
+  // This is a continuous replacement of the destroyed opponent's destination,
+  // not a Graveyard trigger: losing the duel source in a mutual destruction
+  // must not accidentally re-route the other combatant to the Graveyard.
+  const battleBanisher=(m:Monster|undefined)=>!!m?.faceUp&&getMonsterEffect(m.id)?.operation.kind==='battleBanishVictim'&&!monsterEffectsNegated(s,m.uid);
+  const attackingBanisher=battleBanisher(a),defendingBanisher=battleBanisher(defender?.m);
+  for(const uid of outcome.destroy){
+   const replaced=uid===defender?.m.uid&&attackingBanisher||uid===a.uid&&defendingBanisher;
+   if(replaced)banishDestroyedMonster(s,uid);else graveMonster(s,uid,true);
+  }
   for(let player=0;player<2;player++)s.players[player].lp=Math.max(0,s.players[player].lp-outcome.damage[player]);
   note(s,defender?`${card(a.id).name} enfrentou ${card(defender.m.id).name}. Diferença: ${Math.abs(outcome.difference)}.`:`Ataque direto: ${outcome.damage[1-pending.actor]} de dano.`);
   checkLP(s);
