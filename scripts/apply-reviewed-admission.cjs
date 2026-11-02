@@ -25,7 +25,10 @@ function publish(file,expected,branch){
  if(!verify(bundle,expected))return {published:false,reason:'no-submissions'};
  const target=safeBranch(branch);
  assert.equal(run(['rev-parse','HEAD']),expected,'Checked-out head changed');
- assert.equal(run(['status','--porcelain']),'','Dirty checkout');
+ // The downloaded CI attestation is intentionally untracked. Permit only
+ // those two named files; never tolerate modified tracked sources.
+ const dirty=run(['status','--porcelain']).split('\n').filter(Boolean);
+ assert.ok(dirty.every(line=>line==='?? artifacts/admission-bundle.json'||line==='?? artifacts/admission-tests.log'),'Unexpected checkout changes: '+dirty.join('; '));
  for(const f of bundle.files){const dest=path.join(root,f.path);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,f.content);}
  run(['add','--',...bundle.files.map(f=>f.path)]);
  const changed=run(['diff','--cached','--name-only']).split('\n').filter(Boolean);
