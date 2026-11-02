@@ -1356,15 +1356,6 @@
                 "monsters"
               ],
               "containsUID": "victim"
-            },
-            {
-              "path": [
-                "players",
-                0,
-                "deck",
-                0,
-                "uid"
-              ]
             }
           ]
         },
