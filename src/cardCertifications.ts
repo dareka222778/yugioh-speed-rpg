@@ -5588,5 +5588,25 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "21887179": {
+    "fingerprint": "af83383d5513d76ec08640e956d8befaa1d8e3e2beecd5b6cab40708f6dce4e3",
+    "suites": [
+      "tests/generated-m41-battle-identity-destruction.test.cjs"
+    ]
+  },
+  "45688586": {
+    "fingerprint": "cc10656501e7cbf6103bd79f7be8663515b2dd35a0d7e66ff8a84fbee75ceeea",
+    "suites": [
+      "tests/generated-m41-battle-identity-destruction.test.cjs"
+    ]
+  },
+  "57281778": {
+    "fingerprint": "bef6f71a6b8e976c28999fad828049ea4cd2c2b7aad730e9c62d45d90f15bea7",
+    "suites": [
+      "tests/generated-m41-battle-identity-destruction.test.cjs"
+    ]
+  }
+
 
 };

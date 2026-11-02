@@ -68,6 +68,10 @@
     {
       "id": "m40-battle-banish",
       "proofSHA256": "a4ed4a0859d720024b966f425d7dc87f7d95dfe7c31b78b6a145bcfffe24e754"
+    },
+    {
+      "id": "m41-battle-identity-destruction",
+      "proofSHA256": "8fbd0d26b29264f746e40c64e4e83f0e29efa1eb15f2c905ded9458f24130522"
     }
   ]
 }
