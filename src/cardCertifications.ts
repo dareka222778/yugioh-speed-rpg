@@ -5622,5 +5622,13 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "70074904": {
+    "fingerprint": "c7320e96a35bc14b3089c36c73c9aa861aa43d3594efbe8e98fec05ffd6e9d0b",
+    "suites": [
+      "tests/generated-m43-dd-assailant.test.cjs"
+    ]
+  }
+
 
 };

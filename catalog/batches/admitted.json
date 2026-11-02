@@ -76,6 +76,10 @@
     {
       "id": "m42-battle-zone-outcomes",
       "proofSHA256": "cb5617f05da20b20a21399d74e335298444262a6b74fce68c766018d96ca61f5"
+    },
+    {
+      "id": "m43-dd-assailant",
+      "proofSHA256": "057b7b6f36a8e498f32be74ee5c7413c792cbb4217de2cbd5460bedee89dd4d0"
     }
   ]
 }

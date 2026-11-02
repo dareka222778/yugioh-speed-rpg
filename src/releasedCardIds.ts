@@ -986,4 +986,6 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
 // Generated batch m42-battle-zone-outcomes: explicit tested release; zero inventory grants.
   "37043180",
   "25773409",
+// Generated batch m43-dd-assailant: explicit tested release; zero inventory grants.
+  "70074904",
 ]);
