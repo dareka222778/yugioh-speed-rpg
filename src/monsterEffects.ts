@@ -12,6 +12,7 @@ import {monsters as m35_conditional_direct_attacksMonsters} from './generated/m3
 import {monsters as m36_passive_attack_conditionsMonsters} from './generated/m36-passive-attack-conditions';
 import {monsters as m37_fusion_substitutesMonsters} from './generated/m37-fusion-substitutes';
 import {monsters as m39_battle_effectsMonsters} from './generated/m39-battle-effects';
+import {monsters as m40_battle_banishMonsters} from './generated/m40-battle-banish';
 import {conditionalMonsters30} from './conditionalBatch30';
 import {triggerMonsters29} from './triggerBatch29';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -75,6 +76,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...m40_battle_banishMonsters,
  ...m39_battle_effectsMonsters,
  ...m37_fusion_substitutesMonsters,
  ...m36_passive_attack_conditionsMonsters,
