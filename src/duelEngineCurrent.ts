@@ -233,7 +233,13 @@ export function legalActions(s:DuelState,actor:string):Action[]{
  if(s.phase==='main'){
   for(const c of p.hand){const info=card(c.id);
    if(info.kind==='monster'&&info.monsterType!=='ritual'&&!p.summoned){const n=info.level!>=7?2:info.level!>=5?1:0;
-    if(p.monsters.length-n<RULES_PROFILE.monsterZones)for(const tributes of combos(p.monsters.filter(m=>!m.entityKind||m.tokenPolicy?.tributeSummon).map(m=>m.uid),n))for(const position of ['atk','set'] as const)actions.push({kind:'summon',card:c.uid,position,tributes});
+    const eligible=p.monsters.filter(m=>!m.entityKind||m.tokenPolicy?.tributeSummon);
+    const sets=combos(eligible.map(m=>m.uid),n);
+    if(n===2)for(const m of eligible){
+     const rule=getMonsterEffect(m.id)?.operation;
+     if(rule?.kind==='doubleTribute'&&rule.attribute===info.attribute&&!monsterEffectsNegated(s,m.uid))sets.push([m.uid]);
+    }
+    for(const tributes of sets)if(p.monsters.length-tributes.length<RULES_PROFILE.monsterZones)for(const position of ['atk','set'] as const)actions.push({kind:'summon',card:c.uid,position,tributes});
    }else if(info.field){actions.push({kind:'setField',card:c.uid});if(!effectNameBlocked(s,index,c.id))actions.push({kind:'field',card:c.uid});}
    else if(info.kind!=='monster'&&p.backrow.length<RULES_PROFILE.spellTrapZones)actions.push({kind:'set',card:c.uid});
   }
@@ -766,6 +772,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
  }else if(action.kind==='summon'){
   const c=p.hand.find(c=>c.uid===action.card)!;p.hand=p.hand.filter(c=>c.uid!==action.card);for(const uid of action.tributes)graveMonster(s,uid,false,'tribute');
   p.monsters.push({...c,owner:index,position:action.position==='set'?'def':'atk',faceUp:action.position!=='set',entered:s.turn,changed:s.turn,attacked:0,atkBoost:0,defBoost:0});p.summoned=true;
+  if(action.tributes.length===1&&card(c.id).level!>=7)note(s,'Um monstro contou como dois Tributos.');
   note(s,action.position==='set'?`${p.name} baixou um monstro em Defesa.`:`${p.name} invocou ${card(c.id).name}.`);response(s,action.position==='set'?{kind:'none'}:{kind:'summon',actor:index,card:c.uid,id:c.id},'main');
   if(action.position==='set'&&s.graveTriggers?.length)beginTriggers(s,s.graveTriggers.splice(0));
  }else if(action.kind==='set'){
