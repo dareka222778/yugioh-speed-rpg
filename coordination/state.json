@@ -8,7 +8,12 @@
   "nextScheduledAt": "2026-11-08T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
-  "handoffRequest": null,
+  "handoffRequest": {
+    "from": "work-20261108202829",
+    "to": "work-m45-20261108174539",
+    "at": "2026-11-08T20:28:29.134Z",
+    "reason": "Solicitação de transferência em checkpoint seguro. Reserva anterior mantida até liberação explícita."
+  },
   "scope": [
     "src",
     "tests",
