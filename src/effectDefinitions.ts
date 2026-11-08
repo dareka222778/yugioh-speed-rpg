@@ -56,6 +56,7 @@ import {ritualRuleIssues,type RitualRule} from './ritualRules';
 import {recoveryIssues,type RecoveryRule} from './recoveryRules';
 import {selectedMovementIssues,type SelectedMovementRule} from './selectedMovement';
 export type Effect=
+ |{kind:'discardRemoval';mode:import('./discardRemoval').RemovalMode;activation:ActivationModel}
  |{kind:'conditionalDestruction';activation:ActivationModel;zone:'monsters'|'backrow'|'equipSpells';scope:'all'|'opponent'|'selected';controller?:'opponent';requiredName?:string;minFieldMonsters?:number;minBanished?:number;faceUp?:true;equipped?:true;opponentGainOnDestroy?:number}
  |{kind:'destroyExtreme';scope:'all'|'opponent';stat:'atk'|'defense';position?:'atk'|'def';faceUp?:true}
  |{kind:'destroyTargetPosition';position:'atk'|'def'}
@@ -173,6 +174,7 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='discardRemoval')return Object.keys(e).some(k=>!['kind','mode','activation'].includes(k))||!['destroyMonster','destroyCard','banishFaceUp','deckTop','continuousSpells','continuousTraps'].includes(e.mode)||!e.activation?['invalid-discard-removal']:[];
  if(e?.kind==='conditionalDestruction'){
   if(Object.keys(e).some(k=>!['kind','activation','zone','scope','controller','requiredName','minFieldMonsters','minBanished','faceUp','equipped','opponentGainOnDestroy'].includes(k))||!['monsters','backrow','equipSpells'].includes(e.zone)||!['all','opponent','selected'].includes(e.scope)||e.scope==='selected'&&e.zone!=='monsters'||e.controller!==undefined&&(e.controller!=='opponent'||e.scope!=='selected')||e.requiredName!==undefined&&(typeof e.requiredName!=='string'||!e.requiredName)||e.minFieldMonsters!==undefined&&(!Number.isSafeInteger(e.minFieldMonsters)||e.minFieldMonsters<1)||e.minBanished!==undefined&&(!Number.isSafeInteger(e.minBanished)||e.minBanished<1)||e.faceUp!==undefined&&(e.faceUp!==true||e.zone!=='monsters')||e.equipped!==undefined&&(e.equipped!==true||e.zone!=='monsters')||e.opponentGainOnDestroy!==undefined&&(!Number.isSafeInteger(e.opponentGainOnDestroy)||e.opponentGainOnDestroy<1||e.zone!=='monsters')||!e.activation||![1,2,3].includes(e.activation.speed)||!['main','free','attackDeclared','summoned','spellActivated','trapActivated'].includes(e.activation.window))return ['invalid-conditional-destruction'];
   return [];

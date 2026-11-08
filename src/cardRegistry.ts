@@ -37,6 +37,7 @@ export function buildCardRegistry(catalog:readonly Card[],definitions:Readonly<R
   if(c.excludedArchetypes!==undefined&&(!Array.isArray(c.excludedArchetypes)||!c.excludedArchetypes.length||new Set(c.excludedArchetypes).size!==c.excludedArchetypes.length||c.excludedArchetypes.some(a=>typeof a!=='string'||!a.trim())))issues.push('invalid-archetype-exclusion');
   if(!effect)issues.push('missing-definition');else issues.push(...effectDefinitionIssues(effect));
   if(effect?.kind==='continuous'){const a=effect.activation;if(!a||a.damage!=='never'||(c.kind==='trap'?(a.speed!==2||a.window!=='free'):(c.kind!=='spell'||a.speed!==1||a.window!=='main')))issues.push('unsupported-continuous-activation');}
+  else if(effect?.kind==='discardRemoval'){const a=effect.activation;if(!a||Object.keys(a).length!==3||a.damage!=='never'||!(c.kind==='trap'&&a.speed===2&&a.window==='free'||c.kind==='spell'&&(a.speed===1&&a.window==='main'||a.speed===2&&a.window==='free')))issues.push('invalid-discard-removal-activation');}
   else if(effect?.kind==='conditionalDestruction'){
    const a=effect.activation;
    if(a.damage!=='never'||c.kind==='spell'&&(a.speed!==1||a.window!=='main')||c.kind==='trap'&&(a.speed!==2||a.window!=='free')||c.kind==='monster')issues.push('unsupported-conditional-activation');
