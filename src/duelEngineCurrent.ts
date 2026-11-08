@@ -15,7 +15,7 @@ import {advanceStandby,chooseStandby,resolveStandby,closeStandby,type StandbyFlo
 import {CURRENT_RESOLVER_VERSION,type ResolverVersion} from './resolverArchive';
 import {sendMonsterToGrave as graveMonster} from './monsterExit';
 import {beginCardMovementTrace,bindTarget,synchronizeCardLifetimes,targetBindingValid,type TargetBinding,type CardLifetime} from './cardLifetime';
-import {advanceTeamSeats,restoreTeamOverflow,type TeamRotation} from './teamRotation';
+import {advanceTeamSeats,ownedPrivateZone,restoreTeamOverflow,type TeamRotation} from './teamRotation';
 import {drawCards,pauseOverflow,usesSeven,type HandFlow} from './handFlow';
 import {createDuelRandom,randomIndex,shuffleDuel,type DuelRandom} from './duelRandom';
 import {RULES_VERSION,CARD_DEFINITIONS_VERSION,RULES_PROFILE,rulesFor,type RulesVersion} from './rulesProfile';
@@ -665,8 +665,9 @@ function resolve(s:DuelState){
     else {
      const owner=original.m.owner??s.players.indexOf(original.p);
      original.p.monsters=original.p.monsters.filter(m=>m.uid!==a.uid);
-     if(card(a.id).fusion)(s.players[owner].extra??=[]).push({uid:a.uid,id:a.id});
-     else s.players[owner].deck.unshift({uid:a.uid,id:a.id});
+     const ref={uid:a.uid,id:a.id};
+     if(card(a.id).fusion)ownedPrivateZone(s,ref,owner,'extra').push(ref);
+     else ownedPrivateZone(s,ref,owner,'deck').unshift(ref);
     }
     cleanEquips(s);note(s,`${card(defender!.m.id).name} devolveu o atacante ao topo do Deck do dono.`);
    }
