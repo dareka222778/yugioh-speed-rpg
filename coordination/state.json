@@ -1,20 +1,14 @@
 {
   "runId": "work-20261108-1530-m44",
-  "owner": "Work",
+  "owner": null,
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "released",
   "startedAt": "2026-11-08T15:36:27.270Z",
-  "lastActivityAt": "2026-11-08T15:43:48.666Z",
+  "lastActivityAt": "2026-11-08T15:45:28.264Z",
   "nextScheduledAt": "2026-11-08T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "handoffRequest": null,
-  "scope": [
-    "catalog/proposed",
-    "scripts",
-    "tests",
-    "src",
-    "coordination"
-  ],
-  "lastCheckpoint": "coordination/runs/work-20261108-01.json"
+  "scope": [],
+  "lastCheckpoint": "coordination/runs/work-20261108-1530-m44.json"
 }
