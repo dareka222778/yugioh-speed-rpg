@@ -993,4 +993,11 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "44436472",
   "92084010",
   "38479725",
+// Generated batch m46-discard-removal: explicit tested release; zero inventory grants.
+  "79759861",
+  "70231910",
+  "47453433",
+  "04178474",
+  "13626450",
+  "01669772",
 ]);

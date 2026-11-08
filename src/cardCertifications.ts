@@ -5656,5 +5656,43 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "13626450": {
+    "fingerprint": "02f3096a04f5d0b98844e938f5477a1e2e2fcfb8d0326846f9d165d8e47f677d",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "47453433": {
+    "fingerprint": "67a9600c7d96ea42bc803b02d6707142a7da9e28a78460a8cfe38632d12eb8a7",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "70231910": {
+    "fingerprint": "203371e804ce66d79391f71fbff48fd56087d523cd09bae79edc6c03b6bbe56e",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "79759861": {
+    "fingerprint": "327612c78b5b33f201a373a0eb1560bf02efbb1f53427807c2c79e21d4204022",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "04178474": {
+    "fingerprint": "98b09cfc1dfc9982e89bf7b8abc5480f17b352b2eb1fe31ddf8d1af855859d94",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "01669772": {
+    "fingerprint": "3dcc002866237c34e8c2cd1cb784dd08e4b3880360c31b4dbcd7e5e3596fc014",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  }
+
 
 };
