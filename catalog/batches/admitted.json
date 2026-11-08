@@ -80,6 +80,10 @@
     {
       "id": "m43-dd-assailant",
       "proofSHA256": "057b7b6f36a8e498f32be74ee5c7413c792cbb4217de2cbd5460bedee89dd4d0"
+    },
+    {
+      "id": "m44-double-tribute",
+      "proofSHA256": "ab38097d571aa8365b071d9ef3d0de2795229961c2405af8b0d853603e591d7c"
     }
   ]
 }
