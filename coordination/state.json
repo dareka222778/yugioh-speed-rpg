@@ -5,7 +5,7 @@
   "state": "released",
   "startedAt": "2026-11-08T04:20:23.599Z",
   "lastActivityAt": "2026-11-08T04:26:42.359Z",
-  "nextScheduledAt": null,
+  "nextScheduledAt": "2026-11-08T12:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "handoffRequest": null,
