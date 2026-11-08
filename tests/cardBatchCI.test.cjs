@@ -6,3 +6,16 @@ test('admission patches reject deletion and unexpected persistent-data mutations
 test('bundle validation rejects duplicate paths, traversal and changed content',()=>isolated(root=>{const file={path:'src/new.ts',beforeSHA256:null,sha256:hash('new'),content:'new'},bundle={format:1,baseCommit:'a'.repeat(40),files:[file]};assert.equal(validateBundle(bundle,root),true);for(const files of [[file,file],[{...file,path:'../outside'}],[{...file,path:'C:/outside'}],[{...file,content:'forged'}]])assert.throws(()=>validateBundle({...bundle,files},root));}));
 test('snapshots exclude data, credentials, dependencies and generated test artifacts',()=>isolated(root=>{for(const dir of ['data','node_modules','dist','artifacts']){fs.mkdirSync(path.join(root,dir));fs.writeFileSync(path.join(root,dir,'private'),'private');}fs.writeFileSync(path.join(root,'.env'),'private');fs.writeFileSync(path.join(root,'package.json'),'{}');assert.deepEqual(snapshot(root),{'package.json':hash('{}')});}));
 test('an empty queue performs no admissions and never claims full certification tests ran',()=>isolated(root=>{fs.mkdirSync(path.join(root,'catalog/proposed'),{recursive:true});fs.writeFileSync(path.join(root,'catalog/proposed/queue.json'),JSON.stringify({format:1,batches:[]}));const before=snapshot(root),out=require('../scripts/card-batch-ci.cjs').prepare({root,baseCommit:'a'.repeat(40)});assert.equal(out.stage,'no-submissions');assert.equal(out.fullTests,false);assert.deepEqual(out.results,[]);assert.deepEqual(out.files,[]);assert.deepEqual(snapshot(root),before);assert.throws(()=>validateBundle(out,root));}));
+test('publisher refuses attested paths outside admission outputs',()=>isolated(root=>{
+ for(const path of ['.git/config','.github/workflows/extra.yml','coordination/state.json','src/../package.json','src/.env','catalog/proposed/queue.json']){
+  const b={format:1,baseCommit:'a'.repeat(40),files:[{path,beforeSHA256:null,sha256:hash('x'),content:'x'}]};
+  assert.throws(()=>validateBundle(b,root),/Invalid bundle path/);
+ }
+}));
+test('successful publication consumes only a fully matched queue',()=>{
+ const {consumeQueue}=require('../scripts/apply-reviewed-admission.cjs');
+ const queue={format:1,batches:['catalog/proposed/lote-a.json','catalog/proposed/lote-b.json']},results=[{batchId:'lote-a'},{batchId:'lote-b'}];
+ assert.deepEqual(consumeQueue(queue,results),{format:1,batches:[]});
+ for(const wrong of [results.slice(1),results.toReversed(),[results[0],results[0]]])assert.throws(()=>consumeQueue(queue,wrong));
+ assert.equal(queue.batches.length,2);
+});

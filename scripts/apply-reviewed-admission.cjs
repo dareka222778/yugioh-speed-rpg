@@ -20,6 +20,14 @@ function verify(bundle,expected,rootDir=root){
  validateBundle(bundle,rootDir);
  return true;
 }
+// Consume exactly the proposals verified at this HEAD, in the certification commit.
+function consumeQueue(queue,results){
+ assert.equal(queue.format,1);assert.ok(Array.isArray(queue.batches));
+ const expected=results.map(r=>{assert.match(r.batchId,/^[a-z][a-z0-9-]{2,50}$/);return 'catalog/proposed/'+r.batchId+'.json';});
+ assert.equal(new Set(expected).size,expected.length);
+ assert.deepEqual(queue.batches,expected,'Admission queue changed or was only partially verified');
+ return {...queue,batches:[]};
+}
 function publish(file,expected,branch){
  const bundle=JSON.parse(fs.readFileSync(file,'utf8'));
  if(!verify(bundle,expected))return {published:false,reason:'no-submissions'};
@@ -29,10 +37,13 @@ function publish(file,expected,branch){
  // those two named files; never tolerate modified tracked sources.
  const dirty=run(['status','--porcelain']).split('\n').filter(Boolean);
  assert.ok(dirty.every(line=>line==='?? artifacts/admission-bundle.json'||line==='?? artifacts/admission-tests.log'),'Unexpected checkout changes: '+dirty.join('; '));
+ const queuePath='catalog/proposed/queue.json',cleared=consumeQueue(JSON.parse(fs.readFileSync(path.join(root,queuePath),'utf8')),bundle.results);
  for(const f of bundle.files){const dest=path.join(root,f.path);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,f.content);}
- run(['add','--',...bundle.files.map(f=>f.path)]);
+ fs.writeFileSync(path.join(root,queuePath),JSON.stringify(cleared,null,2)+'\n');
+ const staged=[queuePath,...bundle.files.map(f=>f.path)];
+ run(['add','--',...staged]);
  const changed=run(['diff','--cached','--name-only']).split('\n').filter(Boolean);
- assert.deepEqual(changed.sort(),bundle.files.map(f=>f.path).sort(),'Unexpected staged file');
+ assert.deepEqual(changed.sort(),staged.sort(),'Unexpected staged file');
  run(['diff','--cached','--check']);
  run(['config','user.name','github-actions[bot]']);run(['config','user.email','41898282+github-actions[bot]@users.noreply.github.com']);
  run(['commit','-m',`certify(cards): ${bundle.results.reduce((n,r)=>n+r.added,0)} reviewed cards via isolated CI gate`]);
@@ -40,5 +51,5 @@ function publish(file,expected,branch){
  run(['push','origin','HEAD:refs/heads/'+target]);
  return {published:true,commit:run(['rev-parse','HEAD']),added:bundle.results.reduce((n,r)=>n+r.added,0)};
 }
-module.exports={verify,safeBranch,publish};
+module.exports={verify,safeBranch,publish,consumeQueue};
 if(require.main===module){try{const result=publish(process.argv[2]??'artifacts/admission-bundle.json',process.env.CARD_BATCH_BASE_COMMIT,process.env.CARD_BATCH_BRANCH);console.log('ADMISSION_PUBLISH_RESULT '+JSON.stringify(result));}catch(error){console.error('ADMISSION_PUBLISH_BLOCKED',error.message);process.exitCode=1;}}
