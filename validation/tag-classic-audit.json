@@ -1,16 +1,16 @@
 {
-  "scope": "2v2 custom classic rules, 130 enabled definitions; no real human Discord clients",
+  "scope": "2v2 custom classic rules, 965 enabled definitions; no real human Discord clients",
   "games": 1000,
   "completed": 1000,
-  "decisions": 71076,
-  "serializedRestores": 5023,
+  "decisions": 91540,
+  "serializedRestores": 6592,
   "cardConservation": true,
-  "definitionsPresent": 130,
-  "effectDefinitionsActivated": 47,
-  "replayDigest": "3fe24d1a9e3e59bfd82e314cce7fb6de6a50888310bb62b84b23676420ecc95c",
+  "definitionsPresent": 965,
+  "effectDefinitionsActivated": 139,
+  "replayDigest": "27c76a67a5769c267479c3cf75aabf1a4d006fcd131351dc3605d9085370efee",
   "reasons": {
-    "pontos de vida": 999,
-    "não conseguiu comprar uma carta": 1
+    "pontos de vida": 991,
+    "não conseguiu comprar uma carta": 9
   },
   "humanDiscordAcceptance": "not certified"
 }

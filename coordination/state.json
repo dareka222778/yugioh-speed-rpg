@@ -1,18 +1,14 @@
 {
   "runId": "work-20261108-01",
-  "owner": "Work",
+  "owner": null,
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "released",
   "startedAt": "2026-11-08T04:20:23.599Z",
-  "lastActivityAt": "2026-11-08T04:22:19.952Z",
+  "lastActivityAt": "2026-11-08T04:26:42.359Z",
   "nextScheduledAt": null,
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
-  "handoffRequest": "Agentes secundários: ao encontrar este registro ativo, salvem seu checkpoint e cedam os arquivos de duelo 2v2; não publiquem mudanças concorrentes.",
-  "scope": [
-    "src/duelEngineCurrent.ts",
-    "tests/tagBattleOwner.test.cjs",
-    "coordination"
-  ],
-  "lastCheckpoint": "dea316eeded7ce3bb91ef6224242844f0423d627"
+  "handoffRequest": null,
+  "scope": [],
+  "lastCheckpoint": "coordination/runs/work-20261108-01.json"
 }
