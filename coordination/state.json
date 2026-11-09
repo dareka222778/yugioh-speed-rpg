@@ -12,7 +12,9 @@
     "from": "work-20261108202829",
     "to": "work-m45-20261108174539",
     "at": "2026-11-08T20:28:29.134Z",
-    "reason": "Solicitação de transferência em checkpoint seguro. Reserva anterior mantida até liberação explícita."
+    "reason": "Solicitação de transferência em checkpoint seguro. Reserva anterior mantida até liberação explícita.",
+    "alsoRequestedBy": "work-20261109T062716Z",
+    "updatedAt": "2026-11-09T06:28:24.093Z"
   },
   "scope": [
     "src",
