@@ -1,3 +1,4 @@
+import {verifyStandby} from './monsterStandby';
 import {copySearchOptions} from './searchCopies';
 import {groupChoices} from './targetGroupOperation';
 import {movementChoiceTargets} from './selectedMovement';
@@ -23,7 +24,7 @@ import {assertRitualFlow} from './ritualSummon';
 import {getMonsterEffect,getMonsterDefinition} from './monsterEffects';
 import type {CardRef,DuelState} from './duelEngine';
 const phases=new Set(['main','battle','response','choice','discard','finished']);
-const pendingKinds=new Set(['standby','none','end','battle','summon','flip','specialSummon','field','fusion','spell','attack','monsterEffect']);
+const pendingKinds=new Set(['standbyMonster','standby','none','end','battle','summon','flip','specialSummon','field','fusion','spell','attack','monsterEffect']);
 function fail(reason:string):never{throw new Error(`Estado do duelo inválido: ${reason}. Nenhuma ação foi gravada.`);}
 function object(value:unknown):value is Record<string,any>{return !!value&&typeof value==='object'&&!Array.isArray(value);}
 const integer=(n:unknown,min=0)=>Number.isSafeInteger(n)&&Number(n)>=min;
@@ -42,7 +43,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.random!==undefined)assertDuelRandom(s.random);
  if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');
  for(const operation of [s.pending,...Array.isArray(s.chain)?s.chain:[]])if(operation?.targetBinding!==undefined){const b=operation.targetBinding;if(!object(b)||typeof b.uid!=='string'||b.uid!==operation.target||!lifetimeZones.includes(b.zone)||!integer(b.epoch))fail('referencia de alvo');}
- if(s.choice?.source!==undefined&&!['copySearchCount','monsterRecruitPosition','selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerGroup','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit','extremeDestroy'].includes(s.choice.source))fail('continuação de escolha desconhecida');
+ if(s.choice?.source!==undefined&&!['standbyMonsterOrder','copySearchCount','monsterRecruitPosition','selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerGroup','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit','extremeDestroy'].includes(s.choice.source))fail('continuação de escolha desconhecida');
  if(s.rulesVersion==='speed-rpg-v2'&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
  if(s.handFlow!==undefined){
   const f=s.handFlow;
@@ -122,6 +123,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
   const ref=s.players[s.choice.actor]?.deck.find((c:CardRef)=>c.uid===pending.target),info=ref&&getCard(ref.id);
   if(!op||op.kind!=='recruit'||!info||info.fusion||info.monsterType==='ritual'||!matchesMonsterSelector(info,op.filter)||pending.targetBinding?.zone!=='deck'||JSON.stringify(s.choice.targets)!==JSON.stringify(op.positions.map(p=>p==='atk'?'__recruit_atk__':'__recruit_def__')))fail('posição de recrutamento');
  }
+ verifyStandby(s);
  assertTokenLedger(s);
  if(s.teamRotation!==undefined){
   const r=s.teamRotation;
