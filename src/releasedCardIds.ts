@@ -1014,4 +1014,11 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "52090844",
   "57579381",
   "21175632",
+// Generated batch m50-battle-damage: explicit tested release; zero inventory grants.
+  "71107816",
+  "10189126",
+  "15150365",
+  "18036057",
+  "46820049",
+  "77379481",
 ]);

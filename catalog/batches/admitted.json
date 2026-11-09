@@ -100,6 +100,10 @@
     {
       "id": "m49-standby-lp",
       "proofSHA256": "e4d19728561499fbd3a42fc0b19c2f76d790672acaa326f4975c8d25def5b641"
+    },
+    {
+      "id": "m50-battle-damage",
+      "proofSHA256": "5e01a4a5c5bd60bcae6a0ab76e8ae926c03a83672d8626b01725b313a0f6ad71"
     }
   ]
 }

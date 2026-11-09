@@ -5766,5 +5766,43 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "10189126": {
+    "fingerprint": "0b4bf2e28d828fde6a2deef65b3c85de15fe3ded5231e3660ffe8ba10656470e",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "15150365": {
+    "fingerprint": "bb890ccc5ec261e690d63556be73d97ec944dc5dfe47719b00268ecd18703464",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "18036057": {
+    "fingerprint": "72aaa9a2fa2dd8351c1730570682f4249ead1333a18df0832d3a8bedc4e3f87d",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "46820049": {
+    "fingerprint": "c0e59e4b5ee3c2b3e2dc3ac84cac7af7ed6c4b76d988c392cb3159a0470faea0",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "71107816": {
+    "fingerprint": "f4162cd769c3d7bb40d243e90259434cfd5f665bf9c5a5c7f173affcb027a0b3",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "77379481": {
+    "fingerprint": "f01a1d8601b9a55c78d5e8cc16ba6c454471d52370f0965efd4702f3efb12704",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  }
+
 
 };
