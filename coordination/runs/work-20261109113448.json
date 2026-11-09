@@ -3,7 +3,7 @@
   "owner": "Work",
   "priority": "Work",
   "startedAt": "2026-11-09T11:33:40.073Z",
-  "lastActivityAt": "2026-11-09T11:44:28.987Z",
+  "lastActivityAt": "2026-11-09T11:53:30.059Z",
   "state": "active-isolated",
   "branch": "feat/work-m47-20261109",
   "base": "b5c4891d78f875eacf56268aa5cf90ebb86567db",
@@ -20,7 +20,19 @@
         "passed": 7596,
         "failed": 0
       }
+    },
+    {
+      "batch": "M50",
+      "commit": "6dc8f735936a343e30f3ac509717d2d2352751fd",
+      "certified": 992,
+      "localPassed": 7669
+    },
+    {
+      "batch": "M51",
+      "commit": "c5c901ee8832b6bed1b4a73e6e1396704b79a744",
+      "certified": 993,
+      "localPassed": 7683
     }
   ],
-  "inProgress": "M50 combat damage family under isolated testing"
+  "inProgress": "M52 field traps and M53 response thresholds, isolated. Live Discord not tested."
 }
