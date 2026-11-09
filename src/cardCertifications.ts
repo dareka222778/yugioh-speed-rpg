@@ -5714,5 +5714,19 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "31786629": {
+    "fingerprint": "62e27fc43d93fedb47e48f61865dbfa5325c09cf2c49a59d41dd709bc62f503c",
+    "suites": [
+      "tests/generated-m48-thunder-dragon.test.cjs"
+    ]
+  },
+  "54752875": {
+    "fingerprint": "d7e1da75ce3912839cdf50f00c3ae825daea9cb059cd52ab69e2e8ce8d026c93",
+    "suites": [
+      "tests/generated-m48-thunder-dragon.test.cjs"
+    ]
+  }
+
 
 };
