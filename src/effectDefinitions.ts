@@ -28,6 +28,7 @@ import {effects as m51_scaled_standbyEffects} from './generated/m51-scaled-stand
 import {effects as m52_field_trapsEffects} from './generated/m52-field-traps';
 import {effects as m53_name_and_summonEffects} from './generated/m53-name-and-summon';
 import {effects as m54_dice_and_coinsEffects} from './generated/m54-dice-and-coins';
+import {effects as m55_coin_targetsEffects} from './generated/m55-coin-targets';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -90,6 +91,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m55_coin_targetsEffects,
  ...m54_dice_and_coinsEffects,
  ...m53_name_and_summonEffects,
  ...m52_field_trapsEffects,

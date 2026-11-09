@@ -120,6 +120,10 @@
     {
       "id": "m54-dice-and-coins",
       "proofSHA256": "f6b75371cb9b3f743371456fd6fcb5eb76b7badf3dee46f02090f8fc4b9a456c"
+    },
+    {
+      "id": "m55-coin-targets",
+      "proofSHA256": "c530a63e70cd72732b16a8be3979577882fd89b29d191e570831645132f0c870"
     }
   ]
 }
