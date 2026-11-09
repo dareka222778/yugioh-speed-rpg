@@ -116,6 +116,10 @@
     {
       "id": "m53-name-and-summon",
       "proofSHA256": "0b2ad21d48d88fa3f4549313f8a5e720a65a133e68531735f3c91df75114c9aa"
+    },
+    {
+      "id": "m54-dice-and-coins",
+      "proofSHA256": "f6b75371cb9b3f743371456fd6fcb5eb76b7badf3dee46f02090f8fc4b9a456c"
     }
   ]
 }

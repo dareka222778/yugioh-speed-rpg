@@ -5858,5 +5858,31 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "50593156": {
+    "fingerprint": "111ab6874c46aa58ffe124a0373d0aa098e1a40c2bef49e633ef0edfd26fd63d",
+    "suites": [
+      "tests/generated-m54-dice-and-coins.test.cjs"
+    ]
+  },
+  "74137509": {
+    "fingerprint": "989643038f12c99575b0190f014f56dff8361cd4b60931435b1a0e7539e00e8a",
+    "suites": [
+      "tests/generated-m54-dice-and-coins.test.cjs"
+    ]
+  },
+  "00126218": {
+    "fingerprint": "2d274bf9dc8e14cf1027f543e7e722175b1ec700732b3fdb359d4807d8e35492",
+    "suites": [
+      "tests/generated-m54-dice-and-coins.test.cjs"
+    ]
+  },
+  "03549275": {
+    "fingerprint": "a69a6af8f2ac0ed47d27a7e0d25ece958d6c7b655db45dca66d0c79a53b8fdba",
+    "suites": [
+      "tests/generated-m54-dice-and-coins.test.cjs"
+    ]
+  }
+
 
 };

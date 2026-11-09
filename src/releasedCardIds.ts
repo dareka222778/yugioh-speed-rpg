@@ -1032,4 +1032,9 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
 // Generated batch m53-name-and-summon: explicit tested release; zero inventory grants.
   "95132338",
   "42578427",
+// Generated batch m54-dice-and-coins: explicit tested release; zero inventory grants.
+  "74137509",
+  "00126218",
+  "03549275",
+  "50593156",
 ]);
