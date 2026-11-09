@@ -235,6 +235,11 @@ export function legalActions(s:DuelState,actor:string):Action[]{
  if(s.phase==='main'){
   for(const c of p.hand){const info=card(c.id);
    if(info.kind==='monster'&&info.monsterType!=='ritual'&&!p.summoned){const n=info.level!>=7?2:info.level!>=5?1:0;
+    const procedure=getMonsterEffect(c.id)?.operation;
+    if(procedure?.kind==='normalSummonPolicy'){
+     if(procedure.mode==='forbidden')continue;
+     if(procedure.mode==='lastHandFaceUp'&&n>0&&p.hand.length===1&&p.monsters.length<RULES_PROFILE.monsterZones)actions.push({kind:'summon',card:c.uid,position:'atk',tributes:[]});
+    }
     const eligible=p.monsters.filter(m=>!m.entityKind||m.tokenPolicy?.tributeSummon);
     const sets=combos(eligible.map(m=>m.uid),n);
     if(n===2)for(const m of eligible){
@@ -792,6 +797,8 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   note(s,`${p.name} ativou Polimerização.`);response(s,{kind:'fusion',actor:index,card:action.card,extra:action.extra,materials:action.materials,position:action.position},'main');
  }else if(action.kind==='spell'){
   let c=p.hand.find(c=>c.uid===action.card);if(c){p.hand=p.hand.filter(c=>c.uid!==action.card);p.backrow.push({...c,setTurn:s.turn,faceUp:true});}else{const back=p.backrow.find(c=>c.uid===action.card)!;back.faceUp=true;c=back;}
+  const persistent=getEffect(c.id);
+  if(persistent?.kind==='continuous'&&persistent.lpCost){if(p.lp<=persistent.lpCost)throw Error('PV insuficientes.');p.lp-=persistent.lpCost;}
   if(getEffect(c.id)?.kind==='discardRemoval')payDiscard(s,index,c.uid,action.discards);
   note(s,`${p.name} ativou ${card(c.id).name}.`);
   if(getEffect(c.id)?.kind==='moveSelected'){beginMovementSelection(s,index,c.uid,c.id,'spell');assertDuelTransition(input,s);return s;}

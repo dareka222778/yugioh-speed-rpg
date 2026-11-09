@@ -69,7 +69,7 @@ export type Effect=
  |{kind:'choiceSequence';activation:ActivationModel;choices:readonly {operations:readonly EconomicOperation[]}[]}
  |{kind:'ritualSummon';ritual:RitualRule}
  |{kind:'destroyFiltered';filter:DestructionFilter}
- |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number}
+ |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number;presenceOnly?:true}
  |{kind:'temporaryModifier';atk:number;def:number}
  |{kind:'destroySpellTraps';scope:'all'|'opponent'}
  |{kind:'sequence';activation:ActivationModel;operations:readonly EconomicOperation[]}
@@ -194,7 +194,7 @@ export function effectDefinitionIssues(value:unknown):string[]{
  if(e?.kind==='ritualMonster')return Object.keys(e).length===1?[]:['invalid-ritual-monster'];
  if(e?.kind==='ritualSummon')return Object.keys(e).some(k=>!['kind','ritual'].includes(k))?['unknown-ritual-field']:ritualRuleIssues(e.ritual);
  if(e?.kind==='destroyFiltered')return Object.keys(e).some(k=>!['kind','filter'].includes(k))?['unsupported-destruction-field']:destructionFilterIssues(e.filter);
- if(e?.kind==='continuous')return [...continuousRuleIssues(e.rules),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
+ if(e?.kind==='continuous')return [...(e.presenceOnly===undefined?continuousRuleIssues(e.rules):e.presenceOnly===true&&Array.isArray(e.rules)&&!e.rules.length&&e.lpCost!==undefined?[]:['invalid-presence-only-spell']),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
  if(e?.kind==='temporaryModifier')return Number.isSafeInteger(e.atk)&&Number.isSafeInteger(e.def)?[]:['invalid-temporary-modifier'];
  if(e?.kind==='destroySpellTraps')return ['all','opponent'].includes(e.scope)?[]:['invalid-spell-trap-scope'];
  if(!e||typeof e!=='object'||!executableKinds.has(e.kind))return ['unknown-effect-operation'];
