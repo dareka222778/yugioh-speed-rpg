@@ -20,6 +20,7 @@ import {effects as m42_battle_zone_outcomesEffects} from './generated/m42-battle
 import {effects as m43_dd_assailantEffects} from './generated/m43-dd-assailant';
 import {effects as m44_double_tributeEffects} from './generated/m44-double-tribute';
 import {effects as m46_discard_removalEffects} from './generated/m46-discard-removal';
+import {effects as m47_summon_and_presenceEffects} from './generated/m47-summon-and-presence';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -79,6 +80,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m47_summon_and_presenceEffects,
  ...m46_discard_removalEffects,
  ...m44_double_tributeEffects,
  ...m43_dd_assailantEffects,

@@ -88,6 +88,10 @@
     {
       "id": "m46-discard-removal",
       "proofSHA256": "b900f0c4d671f8fcc4f0dbab75a977e8b1e30f61408027b60097b7f98c88e903"
+    },
+    {
+      "id": "m47-summon-and-presence",
+      "proofSHA256": "add4f5feea4a7df27b8227dec97b4b9214c98882ddefe966a634989dd0134e1c"
     }
   ]
 }

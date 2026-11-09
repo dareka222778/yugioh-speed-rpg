@@ -5694,5 +5694,25 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "15259703": {
+    "fingerprint": "31303b748c7d75dbed0bff71e8937a1a5050dfde6099cf886409c45aa7b96c4f",
+    "suites": [
+      "tests/generated-m47-summon-and-presence.test.cjs"
+    ]
+  },
+  "16589042": {
+    "fingerprint": "7236e89cfaf26b40bf6bd70a32cf0d34a7d8efb0ee169653732d3921ad64fdf9",
+    "suites": [
+      "tests/generated-m47-summon-and-presence.test.cjs"
+    ]
+  },
+  "25236056": {
+    "fingerprint": "9359a9484f99303b6fdf911c19f5906a1bfbf06fb7d39d4859ff5d31ef4c51ae",
+    "suites": [
+      "tests/generated-m47-summon-and-presence.test.cjs"
+    ]
+  }
+
 
 };

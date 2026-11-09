@@ -17,6 +17,7 @@ import {monsters as m41_battle_identity_destructionMonsters} from './generated/m
 import {monsters as m42_battle_zone_outcomesMonsters} from './generated/m42-battle-zone-outcomes';
 import {monsters as m43_dd_assailantMonsters} from './generated/m43-dd-assailant';
 import {monsters as m44_double_tributeMonsters} from './generated/m44-double-tribute';
+import {monsters as m47_summon_and_presenceMonsters} from './generated/m47-summon-and-presence';
 import {conditionalMonsters30} from './conditionalBatch30';
 import {triggerMonsters29} from './triggerBatch29';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -84,6 +85,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...m47_summon_and_presenceMonsters,
  ...m44_double_tributeMonsters,
  ...m43_dd_assailantMonsters,
  ...m42_battle_zone_outcomesMonsters,
