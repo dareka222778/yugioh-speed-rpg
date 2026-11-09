@@ -49,6 +49,7 @@ export function cardRulesPT(id:string):string{
  if(e.kind==='monsterEffect'){
   const d=getMonsterDefinition(id)!;const op=d.effect.operation;
   if(op.kind==='battleReward')return c.summary+' Este efeito é obrigatório quando este monstro causa dano de batalha ao oponente. Dano de efeito não o ativa.';
+  if(d.effect.operation.kind==='diceContest'||d.effect.operation.kind==='threeCoins')return c.summary;
   if(d.effect.trigger==='ownStandby')return c.summary+' Este efeito obrigatório é ativado uma vez por cópia em cada Fase de Espera do controlador.';
   if(op.kind==='searchCopiesFromHand')return 'Na sua Fase Principal, descarte esta carta da mão para ativar. Na resolução, escolha adicionar 1 ou 2 cópias do mesmo nome do Deck à mão, revele-as e embaralhe. Não é compra.';
   if(op.kind==='normalSummonPolicy')return op.mode==='forbidden'?'Não pode ser Invocado por Invocação-Normal nem baixado da mão. Pode ser Invocado por Invocação-Especial por um efeito válido.':'Se for a única carta na sua mão, pode ser Invocado por Invocação-Normal com a face para cima sem Tributos. Baixar em Defesa exige os Tributos normais.';
@@ -102,6 +103,7 @@ export function cardRulesPT(id:string):string{
  if(e.kind==='choiceSequence')result=`Escolha um dos efeitos na ativação: ${e.choices.map((choice,i)=>`${i+1}) ${choice.operations.map(op=>op.kind==='draw'?`compre ${op.count} carta(s)`:op.kind==='gainLP'?`${op.player==='self'?'você':'o oponente'} ganha ${op.amount} PV`:op.kind==='scaledLP'?scaledText(op):op.recipients.map(r=>`${r.player==='self'?'você':'o oponente'} recebe ${r.amount} de dano`).join(' e ')).join(' e depois ')}`).join('; ')}. A opção anunciada é mantida durante a corrente.`;
  if(e.kind==='continuous')result=`${e.lpCost?`Pague ${e.lpCost} PV na ativa??o. `:''}${e.rules.map(ruleText).join(' ')} A fonte precisa permanecer com a face para cima e resolvida no campo.`;
  if(e.kind==='summonCeiling')return c.summary;
+ if(e.kind==='statDie')result=c.summary;
  if(e.kind==='fieldTrap')result=c.summary;
  if(e.kind==='temporaryModifier')result=`Escolha 1 monstro com a face para cima; ele recebe ${e.atk>=0?'+':''}${e.atk} ATK e ${e.def>=0?'+':''}${e.def} DEF at? o fim deste turno. Permitida antes do c?lculo de dano, n?o durante o c?lculo. O b?nus n?o retorna ap?s a carta ficar com a face para baixo ou sair do campo.`;
  if(e.kind==='destroySpellTraps')result=`Destrua as Magias/Armadilhas ${e.scope==='all'?'dos dois campos':'do campo adversário'}, incluindo cartas baixadas e Campo. Não escolhe alvos nem nega ativações.`;

@@ -10,6 +10,7 @@ import {getDuelCard as getCard} from './effectRegistry';
 import {getEffect,equipEligible,isQuickPlaySpell} from './effectRegistry';
 import type {Action,Backrow,CardRef,DuelState,Monster,Pending} from './duelEngine';
 import {resolveSpellException} from './spellExceptions';
+import {diceSide,resolveStatDie} from './chanceEffects';
 import {canStartEconomicOperations,executeEconomicOperations} from './economicOperations';
 import {searchZoneTargets} from './searchZoneRules';
 import {shuffleDuel} from './duelRandom';
@@ -42,6 +43,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
   case 'ritualSummon':return ritualCandidates(s,index,e.ritual).length?[{kind:'spell',card:c.uid}]:[];
   case 'destroyFiltered':return destructionTargets(s,index,getDestructionModel(e)!).length?[{kind:'spell',card:c.uid}]:[];
   case 'continuous':return p.lp>(e.lpCost??0)?[{kind:'spell',card:c.uid}]:[];
+  case 'statDie':return diceSide(s,index,e.side).length?[{kind:'spell',card:c.uid}]:[];
   case 'temporaryModifier':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>m.uid)));
   case 'destroySpellTraps':return s.players.some((player,side)=>(e.scope==='all'||side!==index)&&(player.backrow.some(b=>b.uid!==c.uid)||!!player.field))?[{kind:'spell',card:c.uid}]:[];
   case 'equip':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp&&equipEligible(e,getCard(m.id)!)).map(m=>m.uid)));
@@ -139,6 +141,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
 
  switch(e.kind){
   case 'continuous':{const source=p.backrow.find(b=>b.uid===a.card);if(source?.faceUp)source.resolved=true;return true;}
+  case 'statDie':resolveStatDie(s,a.actor,e.side);return true;
   case 'temporaryModifier':if(found&&canAffectMonster(s,found.m.uid,'spell'))addTemporaryModifier(s,found.m.uid,e.atk,e.def);return true;
   case 'destroySpellTraps':destroySpellTrapGroup(s,a.actor,e.scope,a.card);service.note(s,'O grupo de Magias/Armadilhas foi destruído.');return true;
   case 'mysticalSpaceTyphoon':
