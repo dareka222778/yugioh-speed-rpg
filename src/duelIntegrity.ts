@@ -1,3 +1,4 @@
+import {copySearchOptions} from './searchCopies';
 import {groupChoices} from './targetGroupOperation';
 import {movementChoiceTargets} from './selectedMovement';
 import {recoveryTargets} from './recoveryRules';
@@ -41,7 +42,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.random!==undefined)assertDuelRandom(s.random);
  if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');
  for(const operation of [s.pending,...Array.isArray(s.chain)?s.chain:[]])if(operation?.targetBinding!==undefined){const b=operation.targetBinding;if(!object(b)||typeof b.uid!=='string'||b.uid!==operation.target||!lifetimeZones.includes(b.zone)||!integer(b.epoch))fail('referencia de alvo');}
- if(s.choice?.source!==undefined&&!['monsterRecruitPosition','selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerGroup','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit','extremeDestroy'].includes(s.choice.source))fail('continuação de escolha desconhecida');
+ if(s.choice?.source!==undefined&&!['copySearchCount','monsterRecruitPosition','selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerGroup','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit','extremeDestroy'].includes(s.choice.source))fail('continuação de escolha desconhecida');
  if(s.rulesVersion==='speed-rpg-v2'&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
  if(s.handFlow!==undefined){
   const f=s.handFlow;
@@ -111,6 +112,10 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
    }
   }
   if(p.field){checkRef(p.field);if(!getCard(p.field.id)?.field||typeof p.field.faceUp!=='boolean'||!integer(p.field.setTurn)||p.field.resolved!==undefined&&typeof p.field.resolved!=='boolean')fail('Magia de Campo');}
+ }
+ if(s.choice?.source==='copySearchCount'){
+  const p=s.pending,a=s.choice.actor;
+  if(s.phase!=='choice'||p.kind!=='monsterEffect'||p.actor!==a||getMonsterEffect(p.id)?.operation.kind!=='searchCopiesFromHand'||!actor(a)||!s.choice.targets.length||JSON.stringify(s.choice.targets)!==JSON.stringify(copySearchOptions(s.players[a].deck,p.id)))fail('quantidade de cópias da busca');
  }
  if(s.choice?.source==='monsterRecruitPosition'){
   const pending=s.pending,op=pending.kind==='monsterEffect'?getMonsterEffect(pending.id)?.operation:undefined;
