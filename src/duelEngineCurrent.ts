@@ -568,7 +568,8 @@ function resolve(s:DuelState){
  if(pending.kind==='standbyMonster'){
   const effect=getMonsterEffect(pending.id),rule=effect?.standby;
   if(rule&&(!rule.requireSourceAtResolution||matchesStandbySource(s,{id:pending.id,binding:pending.binding}))&&!(rule.zone==='monsters'&&targetBindingValid(s,pending.binding)&&monsterEffectsNegated(s,pending.card))){
-   const op=effect!.operation;if(op.kind==='heal')s.players[pending.actor].lp+=op.amount;
+   const op=effect!.operation;if(op.kind==='healPerControlledMonster')s.players[pending.actor].lp+=op.amount*s.players[pending.actor].monsters.length;
+   if(op.kind==='heal')s.players[pending.actor].lp+=op.amount;
    if(op.kind==='burn'){const rival=s.players[1-pending.actor];rival.lp=Math.max(0,rival.lp-op.amount);checkLP(s);}
   }
   return;
