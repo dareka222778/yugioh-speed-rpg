@@ -4,7 +4,6 @@ import {groupTargets} from './targetGroupOperation';
 import {atk} from './duelEngine';
 /** Choices use only public cards and the acting player's own information. */
 export function chooseReviewedTarget(s:DuelState,id:string,actions:readonly Action[]):Action|undefined{
- if(s.choice?.source==='copySearchCount')return actions.find(a=>a.kind==='choose'&&a.target==='__copies_2__')??actions[0];
  if(s.phase!=='choice'||!['triggerOptional','triggerGroup','triggerTarget','monsterTarget'].includes(s.choice?.source??''))return;
  const source=s.triggerBuild?.selected??(s.pending.kind==='monsterEffect'?s.pending:undefined),op=source?getMonsterEffect(source.id)?.operation:undefined;if(!op||!['targetGroup','singleCard'].includes(op.kind))return;
  const actor=s.players.findIndex(p=>p.id===id),own=s.players[actor],enemy=s.players[1-actor];if(actor<0)return;
