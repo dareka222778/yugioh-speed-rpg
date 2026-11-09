@@ -3,12 +3,24 @@
   "owner": "Work",
   "priority": "Work",
   "startedAt": "2026-11-09T11:33:40.073Z",
-  "lastActivityAt": "2026-11-09T11:34:48.822Z",
+  "lastActivityAt": "2026-11-09T11:44:28.987Z",
   "state": "active-isolated",
   "branch": "feat/work-m47-20261109",
   "base": "b5c4891d78f875eacf56268aa5cf90ebb86567db",
   "previousSharedCheckpoint": "coordination/runs/work-20261108-1530-m44.json",
   "handoffRequestedFrom": "work-m45-20261108174539",
   "scope": "Independent continuation of PR 14; no shared engine or catalog writes.",
-  "nextScheduledAt": "2026-11-09T13:30:00-03:00"
+  "nextScheduledAt": "2026-11-09T13:30:00-03:00",
+  "blocks": [
+    {
+      "batch": "M49",
+      "submission": "aa50a3e7b246ea485ddec55b1b4de7bf542d5a04",
+      "certified": 986,
+      "localTests": {
+        "passed": 7596,
+        "failed": 0
+      }
+    }
+  ],
+  "inProgress": "M50 combat damage family under isolated testing"
 }
