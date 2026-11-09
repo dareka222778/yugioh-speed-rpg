@@ -1,3 +1,4 @@
+import {damageTrigger,applyBattleReward} from './battleRewards';
 import {standbySources,matchesStandbySource,type MonsterStandby,type StandbySource} from './monsterStandby';
 import {copySearchOptions,takeCopies} from './searchCopies';
 import {discardRemovalActions,payDiscard,resolveDiscardRemoval} from './discardRemoval';
@@ -300,7 +301,7 @@ function eligibleTrigger(s:DuelState,event:TriggerEvent):boolean{
  if(e.operation.kind==='searchFiltered'&&!searchZoneTargets(s,event.actor,e.operation.rule,getCard,getEffect).length)return false;
  if(e.operation.kind==='search'&&!searchDeckTargets(s,event.actor,e.operation.stat,e.operation.maximum).length)return false;
  if((e.operation.kind==='specialSummon'||e.operation.kind==='recruit'&&getMonsterDefinition(event.id)?.activation.policy==='optional')&&(s.players[event.actor].monsters.length>=RULES_PROFILE.monsterZones||!recruitTargets(s,event.actor,e.operation).length))return false;
- return ['flip','onSummon','onOtherSummon','onSentToGrave','onBattleDestroyed'].includes(e.trigger);
+ return ['onBattleDamage','flip','onSummon','onOtherSummon','onSentToGrave','onBattleDestroyed'].includes(e.trigger);
 }
 function triggerRank(s:DuelState,e:TriggerEvent){return (getMonsterDefinition(e.id)?.activation.policy==='optional'?2:0)+(e.actor===s.current?0:1);}
 function beginTriggers(s:DuelState,events:TriggerEvent[]){
@@ -430,6 +431,7 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
   // Paid costs are never refunded and removing the source does not negate its effect.
   if(!e||e.operation.kind!=='searchCopiesFromHand'&&monsterEffectsNegated(s,pending.card))return;
   const op=e.operation;
+  if(op.kind==='battleReward'){applyBattleReward(s,pending.actor,op.rule,{finish,checkLP});return;}
   if(op.kind==='searchCopiesFromHand'){
    const targets=copySearchOptions(p.deck,pending.id);
    if(targets.length){s.pending=pending;s.choice={actor:pending.actor,source:'copySearchCount',targets};s.phase='choice';}
@@ -714,7 +716,10 @@ function resolve(s:DuelState){
   // FLIP effects revealed by battle are activated after damage calculation,
   // including when the defending monster was destroyed in that battle.
   const flip=s.battleFlip;s.battleFlip=undefined;
-  if((s as DuelState).phase!=='finished'&&flip)triggerMonsterEffect(s,flip.actor,flip.card,'flip',flip.id);
+  const paid=[...damageTrigger(a,pending.actor,outcome.damage[1-pending.actor]),...damageTrigger(defender?.m,1-pending.actor,outcome.damage[pending.actor])];
+  if((s as DuelState).phase!=='finished'&&paid.length){
+   response(s,{kind:'none'},'battle');beginTriggers(s,[...paid,...flip?[flip]:[]]);
+  }else if((s as DuelState).phase!=='finished'&&flip)triggerMonsterEffect(s,flip.actor,flip.card,'flip',flip.id);
  }
 }
 function openStandbyMonster(s:DuelState,x:StandbySource){

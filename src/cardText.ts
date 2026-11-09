@@ -48,6 +48,7 @@ export function cardRulesPT(id:string):string{
  if(e.kind==='fusion')return `Monstro de Fusão — sem efeito de monstro. Pertence ao Deck Adicional. Materiais exatos: ${(c.fusion??[]).map(id=>{const material=getPlayableCard(id);return material?displayCardName(material):id;}).join(' + ')}. Use Polimerização com materiais da mão/campo e uma zona disponível após consumi-los. Esta adaptação não permite Invocá-lo normalmente nem baixá-lo da mão. Reviver do Cemitério exige uma Invocação-Fusão anterior válida. ATK ${c.atk}; DEF ${c.defense}.`;
  if(e.kind==='monsterEffect'){
   const d=getMonsterDefinition(id)!;const op=d.effect.operation;
+  if(op.kind==='battleReward')return c.summary+' Este efeito é obrigatório quando este monstro causa dano de batalha ao oponente. Dano de efeito não o ativa.';
   if(d.effect.trigger==='ownStandby')return c.summary+' Este efeito obrigatório é ativado uma vez por cópia em cada Fase de Espera do controlador.';
   if(op.kind==='searchCopiesFromHand')return 'Na sua Fase Principal, descarte esta carta da mão para ativar. Na resolução, escolha adicionar 1 ou 2 cópias do mesmo nome do Deck à mão, revele-as e embaralhe. Não é compra.';
   if(op.kind==='normalSummonPolicy')return op.mode==='forbidden'?'Não pode ser Invocado por Invocação-Normal nem baixado da mão. Pode ser Invocado por Invocação-Especial por um efeito válido.':'Se for a única carta na sua mão, pode ser Invocado por Invocação-Normal com a face para cima sem Tributos. Baixar em Defesa exige os Tributos normais.';
