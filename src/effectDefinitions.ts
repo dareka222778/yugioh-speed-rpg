@@ -76,6 +76,7 @@ export type Effect=
  |{kind:'ritualSummon';ritual:RitualRule}
  |{kind:'destroyFiltered';filter:DestructionFilter}
  |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number;presenceOnly?:true}
+ |{kind:'summonCeiling';maximumAtk:number}
  |{kind:'fieldTrap';mode:import('./fieldTraps').FieldTrapMode}
  |{kind:'temporaryModifier';atk:number;def:number}
  |{kind:'destroySpellTraps';scope:'all'|'opponent'}
@@ -208,6 +209,7 @@ export function effectDefinitionIssues(value:unknown):string[]{
  if(e?.kind==='ritualSummon')return Object.keys(e).some(k=>!['kind','ritual'].includes(k))?['unknown-ritual-field']:ritualRuleIssues(e.ritual);
  if(e?.kind==='destroyFiltered')return Object.keys(e).some(k=>!['kind','filter'].includes(k))?['unsupported-destruction-field']:destructionFilterIssues(e.filter);
  if(e?.kind==='continuous')return [...(e.presenceOnly===undefined?continuousRuleIssues(e.rules):e.presenceOnly===true&&Array.isArray(e.rules)&&!e.rules.length&&e.lpCost!==undefined?[]:['invalid-presence-only-spell']),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
+ if(e?.kind==='summonCeiling')return Object.keys(e).length===2&&Number.isSafeInteger(e.maximumAtk)&&e.maximumAtk>=0?[]:['invalid-summon-ceiling'];
  if(e?.kind==='fieldTrap')return Object.keys(e).length===2&&['returnHand','reduceAttacker','reduceDefense','handBoost'].includes(e.mode)?[]:['invalid-field-trap'];
  if(e?.kind==='temporaryModifier')return Number.isSafeInteger(e.atk)&&Number.isSafeInteger(e.def)?[]:['invalid-temporary-modifier'];
  if(e?.kind==='destroySpellTraps')return ['all','opponent'].includes(e.scope)?[]:['invalid-spell-trap-scope'];

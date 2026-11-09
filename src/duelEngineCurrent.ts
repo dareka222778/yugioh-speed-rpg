@@ -158,6 +158,7 @@ function trapActions(s:DuelState,index:number):Action[]{
   if(s.damageStep&&!(s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage==='beforeCalculation'))continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='calculation')continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage!=='beforeCalculation')continue;
+  if(effect.kind==='summonCeiling'&&(s.pending.kind==='summon'||s.pending.kind==='flip')){const m=findMonster(s,s.pending.card)?.m;if(m?.faceUp&&atk(m,s)<=effect.maximumAtk)out.push({kind:'trap',card:c.uid,target:m.uid});continue;}
   if(effect.kind==='fieldTrap'){out.push(...fieldTrapTargets(s,index,effect.mode).map(m=>({kind:'trap' as const,card:c.uid,target:m.uid})));continue;}
   if(effect.kind==='discardRemoval'){out.push(...discardRemovalActions(s,index,c,effect));continue;}
   if(effect.kind==='continuous'){if(s.players[index].lp>(effect.lpCost??0))out.push({kind:'trap',card:c.uid,target:''});continue;}

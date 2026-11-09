@@ -27,10 +27,11 @@ const models:Partial<Record<Effect['kind'],SpellTrapModel>>={
  sevenTools:{activation:{speed:3,window:'trapActivated',damage:'counter'}}
 };
 export function getEffectModel(kind:Effect['kind']):SpellTrapModel|undefined{return models[kind];}
-export function getDestructionModel(value:Effect|Effect['kind']):DestructionModel|undefined{if(typeof value!=='string'&&value.kind==='conditionalDestruction'&&value.zone==='monsters')return destroy(value.scope,{controller:value.controller,faceUp:value.faceUp,equipped:value.equipped});if(typeof value!=='string'&&value.kind==='destroyFiltered')return destroy('all',{faceUp:true,...value.filter});if(typeof value!=='string'&&value.kind==='destroyTargetPosition')return destroy('selected',{position:value.position});return models[typeof value==='string'?value:value.kind]?.destruction;}
+export function getDestructionModel(value:Effect|Effect['kind']):DestructionModel|undefined{if(typeof value!=='string'&&value.kind==='summonCeiling')return destroy('selected',{faceUp:true});if(typeof value!=='string'&&value.kind==='conditionalDestruction'&&value.zone==='monsters')return destroy(value.scope,{controller:value.controller,faceUp:value.faceUp,equipped:value.equipped});if(typeof value!=='string'&&value.kind==='destroyFiltered')return destroy('all',{faceUp:true,...value.filter});if(typeof value!=='string'&&value.kind==='destroyTargetPosition')return destroy('selected',{position:value.position});return models[typeof value==='string'?value:value.kind]?.destruction;}
 
 /** Definitions with variable parameters carry their own activation policy. */
 export function getActivationModel(effect:Effect):ActivationModel|undefined{
+ if(effect.kind==='summonCeiling')return {speed:2,window:'summoned',damage:'never',opponentOnly:true,summonKinds:['summon','flip']};
  if(effect.kind==='fieldTrap')return {speed:2,window:'free',damage:effect.mode==='returnHand'?'never':'beforeCalculation'};
  return effect.kind==='discardRemoval'||effect.kind==='conditionalDestruction'||effect.kind==='moveSelected'||effect.kind==='positionChange'||effect.kind==='continuous'||effect.kind==='sequence'||effect.kind==='choiceSequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
 }

@@ -17,7 +17,7 @@ export function definitionFingerprint(c:Card,e:Effect,context:DefinitionContext)
  const mechanical={id:c.id,kind:c.kind,monsterType:c.monsterType,level:c.level,atk:c.atk,defense:c.defense,race:c.race,attribute:c.attribute,field:c.field,fusion:c.fusion,alwaysTreatedAs:c.alwaysTreatedAs,archetypes:c.archetypes,excludedArchetypes:c.excludedArchetypes};
  return createHash('sha256').update(canonical({card:mechanical,effect:e,monster:context.monster?.(c.id),model:context.model?.(e.kind)})).digest('hex');
 }
-const trapKinds=new Set<Effect['kind']>(['fieldTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce']);
+const trapKinds=new Set<Effect['kind']>(['summonCeiling','fieldTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce']);
 export function buildCardRegistry(catalog:readonly Card[],definitions:Readonly<Record<string,Effect>>,certificates:Readonly<Record<string,CardCertificate>>,context:DefinitionContext={}){
  const metadata=new Map<string,Card>(),effects=new Map<string,Effect>(),statuses=new Map<string,CardStatus>();
  for(const c of catalog){
