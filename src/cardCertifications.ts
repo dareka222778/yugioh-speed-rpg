@@ -5728,5 +5728,43 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "21175632": {
+    "fingerprint": "8b718fbce50f6c1c3f9dff26a0215073db52cdac883af5f2c3483ddd2192aa4c",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "52090844": {
+    "fingerprint": "46a6fd9736d6c42ca92b8f41f77949d36604c586ca7a777aa6992bc702d27197",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "53530069": {
+    "fingerprint": "499fd2c25366bbd0f18521a2d6b4be13df7b1ec4ba41230928073ca94eb2b165",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "57579381": {
+    "fingerprint": "b94fc7d052c8c3c436bacd87673f5e3695ea54198d88d2a386326dcabc477f68",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "85802526": {
+    "fingerprint": "34246167fd9b01168e3eb02c0588ccd3b83365de2dec13f593d70d52dffb7b43",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "90925163": {
+    "fingerprint": "4fea863544f3b08e834a205bd42edc7febbcd2dd6799900c8e3abc82299d3c08",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  }
+
 
 };

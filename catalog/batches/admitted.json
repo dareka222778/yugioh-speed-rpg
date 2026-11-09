@@ -96,6 +96,10 @@
     {
       "id": "m48-thunder-dragon",
       "proofSHA256": "5283d40b75a8066c56f90cad300845946d81e96278e30cec46b7a2f1a1482a14"
+    },
+    {
+      "id": "m49-standby-lp",
+      "proofSHA256": "e4d19728561499fbd3a42fc0b19c2f76d790672acaa326f4975c8d25def5b641"
     }
   ]
 }

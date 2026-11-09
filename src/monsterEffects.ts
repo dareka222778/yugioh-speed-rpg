@@ -19,6 +19,7 @@ import {monsters as m43_dd_assailantMonsters} from './generated/m43-dd-assailant
 import {monsters as m44_double_tributeMonsters} from './generated/m44-double-tribute';
 import {monsters as m47_summon_and_presenceMonsters} from './generated/m47-summon-and-presence';
 import {monsters as m48_thunder_dragonMonsters} from './generated/m48-thunder-dragon';
+import {monsters as m49_standby_lpMonsters} from './generated/m49-standby-lp';
 import {conditionalMonsters30} from './conditionalBatch30';
 import {triggerMonsters29} from './triggerBatch29';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -87,6 +88,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'standby'|'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...m49_standby_lpMonsters,
  ...m48_thunder_dragonMonsters,
  ...m47_summon_and_presenceMonsters,
  ...m44_double_tributeMonsters,

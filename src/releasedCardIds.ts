@@ -1007,4 +1007,11 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
 // Generated batch m48-thunder-dragon: explicit tested release; zero inventory grants.
   "31786629",
   "54752875",
+// Generated batch m49-standby-lp: explicit tested release; zero inventory grants.
+  "85802526",
+  "90925163",
+  "53530069",
+  "52090844",
+  "57579381",
+  "21175632",
 ]);

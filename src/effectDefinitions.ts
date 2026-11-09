@@ -22,6 +22,7 @@ import {effects as m44_double_tributeEffects} from './generated/m44-double-tribu
 import {effects as m46_discard_removalEffects} from './generated/m46-discard-removal';
 import {effects as m47_summon_and_presenceEffects} from './generated/m47-summon-and-presence';
 import {effects as m48_thunder_dragonEffects} from './generated/m48-thunder-dragon';
+import {effects as m49_standby_lpEffects} from './generated/m49-standby-lp';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -81,6 +82,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m49_standby_lpEffects,
  ...m48_thunder_dragonEffects,
  ...m47_summon_and_presenceEffects,
  ...m46_discard_removalEffects,

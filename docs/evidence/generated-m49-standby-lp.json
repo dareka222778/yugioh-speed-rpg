@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "batchId": "m49-standby-lp",
+  "baseRevision": "9314e348d6eb5b31f2052ce3031e07cb34770aede172afa64c3f6447079b51df",
+  "batchSHA256": "8043fba54ba00fe9213dd2bad97e45520841d8fc761a66cd5d36e83ef340f25d",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m49_standby_lpCards} from './generated/m49-standby-lp';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards,...m43_dd_assailantCards,...m44_double_tributeCards,...m46_discard_removalCards,...m47_summon_and_presenceCards,...m48_thunder_dragonCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards,...m43_dd_assailantCards,...m44_double_tributeCards,...m46_discard_removalCards,...m47_summon_and_presenceCards,...m48_thunder_dragonCards,...m49_standby_lpCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m49_standby_lpEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m49_standby_lpEffects} from './generated/m49-standby-lp';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({",
+      "to": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({\n ...m49_standby_lpMonsters,"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "import {conditionalMonsters30}",
+      "to": "import {monsters as m49_standby_lpMonsters} from './generated/m49-standby-lp';\nimport {conditionalMonsters30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"21175632\": {\n    \"fingerprint\": \"8b718fbce50f6c1c3f9dff26a0215073db52cdac883af5f2c3483ddd2192aa4c\",\n    \"suites\": [\n      \"tests/generated-m49-standby-lp.test.cjs\"\n    ]\n  },\n  \"52090844\": {\n    \"fingerprint\": \"46a6fd9736d6c42ca92b8f41f77949d36604c586ca7a777aa6992bc702d27197\",\n    \"suites\": [\n      \"tests/generated-m49-standby-lp.test.cjs\"\n    ]\n  },\n  \"53530069\": {\n    \"fingerprint\": \"499fd2c25366bbd0f18521a2d6b4be13df7b1ec4ba41230928073ca94eb2b165\",\n    \"suites\": [\n      \"tests/generated-m49-standby-lp.test.cjs\"\n    ]\n  },\n  \"57579381\": {\n    \"fingerprint\": \"b94fc7d052c8c3c436bacd87673f5e3695ea54198d88d2a386326dcabc477f68\",\n    \"suites\": [\n      \"tests/generated-m49-standby-lp.test.cjs\"\n    ]\n  },\n  \"85802526\": {\n    \"fingerprint\": \"34246167fd9b01168e3eb02c0588ccd3b83365de2dec13f593d70d52dffb7b43\",\n    \"suites\": [\n      \"tests/generated-m49-standby-lp.test.cjs\"\n    ]\n  },\n  \"90925163\": {\n    \"fingerprint\": \"4fea863544f3b08e834a205bd42edc7febbcd2dd6799900c8e3abc82299d3c08\",\n    \"suites\": [\n      \"tests/generated-m49-standby-lp.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m49-standby-lp: explicit tested release; zero inventory grants.\n  \"85802526\",\n  \"90925163\",\n  \"53530069\",\n  \"52090844\",\n  \"57579381\",\n  \"21175632\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "85802526",
+    "90925163",
+    "53530069",
+    "52090844",
+    "57579381",
+    "21175632"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}
