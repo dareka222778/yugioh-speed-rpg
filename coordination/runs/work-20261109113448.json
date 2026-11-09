@@ -1,16 +1,16 @@
 {
   "id": "work-20261109113448",
-  "owner": "Work",
+  "owner": null,
   "priority": "Work",
   "startedAt": "2026-11-09T11:33:40.073Z",
-  "lastActivityAt": "2026-11-09T11:53:30.059Z",
-  "state": "active-isolated",
+  "lastActivityAt": "2026-11-09T18:26:02.591Z",
+  "state": "released",
   "branch": "feat/work-m47-20261109",
   "base": "b5c4891d78f875eacf56268aa5cf90ebb86567db",
   "previousSharedCheckpoint": "coordination/runs/work-20261108-1530-m44.json",
   "handoffRequestedFrom": "work-m45-20261108174539",
   "scope": "Independent continuation of PR 14; no shared engine or catalog writes.",
-  "nextScheduledAt": "2026-11-09T13:30:00-03:00",
+  "nextScheduledAt": "2026-11-09T18:30:00-03:00",
   "blocks": [
     {
       "batch": "M49",
@@ -32,7 +32,25 @@
       "commit": "c5c901ee8832b6bed1b4a73e6e1396704b79a744",
       "certified": 993,
       "localPassed": 7683
+    },
+    {
+      "batch": "M52",
+      "commit": "64edd14d2e472cfeea4434dfffa89235a8d18edb",
+      "certified": 998,
+      "localPassed": 7733
     }
   ],
-  "inProgress": "M52 field traps and M53 response thresholds, isolated. Live Discord not tested."
+  "inProgress": null,
+  "handoff": {
+    "to": "auxiliary",
+    "status": "available",
+    "at": "2026-11-09T18:26:02.591Z",
+    "baseBranch": "feat/work-m47-20261109",
+    "baseCommit": "64edd14d2e472cfeea4434dfffa89235a8d18edb",
+    "scope": "Branch auxiliar exclusiva a partir deste SHA; PRs 12 e 14 protegidas. Verifique HEAD e coordenação antes de publicar.",
+    "nextTask": "Retomar M53 (Aqua Chorus e Eatgaboon): a proposta não foi publicada. Verificar duplicações, implementar e testar nomes equivalentes, ativação em Invocação-Normal/Virar, exclusão de Invocação-Especial e resposta negada.",
+    "nextWorkAt": "2026-11-09T18:30:00-03:00"
+  },
+  "production": "Sem deploy; sem validação ao vivo no Discord.",
+  "durationNote": "Sessão anterior interrompida após publicar M52; horário exato do encerramento e 60 minutos de atividade não comprovados. A liberação administrativa posterior não conta como desenvolvimento."
 }
