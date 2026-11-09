@@ -118,7 +118,6 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
  }
  if(s.phase==='discard')return [...actions].sort((a,b)=>{const score=(x:Action)=>x.kind==='discard'?handCardValue(p.hand.find(c=>c.uid===x.card)!.id):0;return score(a)-score(b);})[0];
  if(s.phase==='choice'){
-  if(s.choice?.source==='copySearchCount')return actions.find(a=>a.kind==='choose'&&a.target==='__copies_2__')??actions[0];
   const reviewedTarget=chooseReviewedTarget(s,id,actions);if(reviewedTarget)return reviewedTarget;
   if(s.choice?.source==='monsterRecruitPosition'&&s.pending.kind==='monsterEffect'){const pending=s.pending,selected=p.deck.find(c=>c.uid===pending.target),info=selected&&getCard(selected.id);const threat=Math.max(0,...op.monsters.filter(m=>m.faceUp&&m.position==='atk').map(m=>atk(m,s)));const mode=(info?.atk??0)<threat?'__recruit_def__':'__recruit_atk__';return actions.find(a=>a.kind==='choose'&&a.target===mode)??actions[0];}
   if(s.choice?.source==='attackReplay'&&s.pending.kind==='attack'){
@@ -185,7 +184,6 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
    return rating(a)-rating(b);
   });
  if(finishBurn.length)return finishBurn[0];
- const copySearch=actions.find(a=>a.kind==='searchCopiesFromHand');if(copySearch&&p.hand.length<6&&p.deck.length>2)return copySearch;
  const summon=tacticalSummon(s,id,actions);if(summon)return summon;
  const set=actions.find(a=>a.kind==='set');if(set)return set;
  const position=tacticalPosition(s,id,actions);if(position)return position;
