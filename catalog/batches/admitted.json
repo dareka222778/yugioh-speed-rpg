@@ -108,6 +108,10 @@
     {
       "id": "m51-scaled-standby",
       "proofSHA256": "423047ec7cfd8640da69088dd704b469b04c0fd8155fbd029b6518325c57c287"
+    },
+    {
+      "id": "m52-field-traps",
+      "proofSHA256": "65639b4e5c695c91d8ffe65cb965b4a6af682f44ff318a96905e83fb6921a287"
     }
   ]
 }

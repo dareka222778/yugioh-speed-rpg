@@ -1023,4 +1023,10 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "77379481",
 // Generated batch m51-scaled-standby: explicit tested release; zero inventory grants.
   "81383947",
+// Generated batch m52-field-traps: explicit tested release; zero inventory grants.
+  "43250041",
+  "94192409",
+  "00596051",
+  "57882509",
+  "56916805",
 ]);
