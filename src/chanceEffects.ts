@@ -17,9 +17,25 @@ export function resolveDiceContest(s:DuelState,actor:number,checkLP:(s:DuelState
  const high=Math.max(own,other),loser=s.players[own>other?1-actor:actor];
  loser.lp=Math.max(0,loser.lp-(high===6?6000:high*500));checkLP(s);
 }
-export function resolveThreeCoins(s:DuelState,actor:number,destroy:(s:DuelState,uid:string)=>unknown){
+function tossThree(s:DuelState){
  const coins=[roll(s,2),roll(s,2),roll(s,2)];record(s,'Moedas: '+coins.map(v=>v===2?'cara':'coroa').join(', ')+'.');
- const heads=coins.filter(v=>v===2).length;if(heads!==3&&heads!==0)return;
+ return coins.filter(v=>v===2).length;
+}
+export function resolveThreeCoins(s:DuelState,actor:number,destroy:(s:DuelState,uid:string)=>unknown){
+ const heads=tossThree(s);if(heads!==3&&heads!==0)return;
  const affected=s.players[heads===3?1-actor:actor].monsters.filter(m=>canAffectMonster(s,m.uid,'monster')).map(m=>m.uid);
  for(const uid of affected)destroy(s,uid);
+}
+
+export type CoinTargetZone='monster'|'fieldCard';
+export function opposingCoinTargets(s:DuelState,actor:number,zone:CoinTargetZone){
+ const p=s.players[1-actor];return [...p.monsters,...zone==='fieldCard'?[...p.backrow,...p.field?[p.field]:[]]:[]].map(c=>c.uid);
+}
+export function resolveCoinTarget(s:DuelState,actor:number,uid:string|undefined,zone:CoinTargetZone,destroy:(s:DuelState,uid:string)=>unknown,removeBack:(s:DuelState,uid:string)=>unknown){
+ const heads=tossThree(s);
+ if(heads<2||!uid)return;
+ // The UID has already been checked against the activation-time zone lifetime.
+ const all=s.players.flatMap(p=>p.monsters);if(all.some(m=>m.uid===uid)){
+  if(canAffectMonster(s,uid,'monster'))destroy(s,uid);
+ }else if(zone==='fieldCard'&&s.players.some(p=>p.backrow.some(c=>c.uid===uid)||p.field?.uid===uid))removeBack(s,uid);
 }

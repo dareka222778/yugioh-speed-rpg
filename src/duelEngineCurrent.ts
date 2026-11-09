@@ -1,4 +1,4 @@
-import {diceSide,resolveStatDie,resolveDiceContest,resolveThreeCoins} from './chanceEffects';
+import {opposingCoinTargets,resolveCoinTarget,diceSide,resolveStatDie,resolveDiceContest,resolveThreeCoins} from './chanceEffects';
 import {fieldTrapTargets,resolveFieldTrap} from './fieldTraps';
 import {damageTrigger,applyBattleReward} from './battleRewards';
 import {standbySources,matchesStandbySource,type MonsterStandby,type StandbySource} from './monsterStandby';
@@ -103,6 +103,7 @@ function combos<T>(values:T[],n:number):T[][]{if(n===0)return [[]];return values
 function monsterTargets(s:DuelState,actor:number,e:MonsterEffect):string[]|undefined{
  const op=e.operation;
  if(op.kind==='targetGroup'){const targets=groupTargets(s,op.rule);return targets.length>=op.rule.minimum?targets:[];}
+ if(op.kind==='coinTarget')return opposingCoinTargets(s,actor,op.zone);
  if(op.kind==='singleCard')return singleCardTargets(s,actor,op.rule);
  if(op.kind==='destroy'||op.kind==='bounce')return (op.target==='anyMonster'?s.players:s.players.filter((_,i)=>i!==actor)).flatMap(p=>p.monsters.map(m=>m.uid));
  if(op.kind==='positionChange')return positionTargets(s,actor,op.rule).map(m=>m.uid);
@@ -436,6 +437,7 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
   // Paid costs are never refunded and removing the source does not negate its effect.
   if(!e||e.operation.kind!=='searchCopiesFromHand'&&monsterEffectsNegated(s,pending.card))return;
   const op=e.operation;
+  if(op.kind==='coinTarget'){resolveCoinTarget(s,pending.actor,pending.target,op.zone,graveMonster,discardBackrow);return;}
   if(op.kind==='diceContest'){resolveDiceContest(s,pending.actor,checkLP);return;}
   if(op.kind==='threeCoins'){resolveThreeCoins(s,pending.actor,graveMonster);return;}
   if(op.kind==='battleReward'){applyBattleReward(s,pending.actor,op.rule,{finish,checkLP});return;}

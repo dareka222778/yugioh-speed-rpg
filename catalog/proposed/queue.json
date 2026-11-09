@@ -1,4 +1,6 @@
 {
   "format": 1,
-  "batches": []
+  "batches": [
+    "catalog/proposed/m55-coin-targets.json"
+  ]
 }

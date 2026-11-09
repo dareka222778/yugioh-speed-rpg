@@ -64,6 +64,7 @@ export type MonsterOperation=
  |{kind:'search';stat:'atk'|'defense';maximum:number}
  |{kind:'specialSummon';attribute:string;maximumAtk:number}
  |{kind:'battleDestroyByIdentity';races?:readonly string[];attributes?:readonly string[];attackingOnly?:true}
+ |{kind:'coinTarget';zone:import('./chanceEffects').CoinTargetZone}
  |{kind:'diceContest'|'threeCoins'}
  |{kind:'battleReward';rule:import('./battleRewardRules').BattleReward}
  |{kind:'searchCopiesFromHand'}
@@ -156,12 +157,13 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  const {effect:e,activation:a}=value;
  if(!['mandatory','optional','manual','continuous'].includes(a.policy)||!['battleDamage','standby','main','flip','summon','grave','battleDestroyed','opposingDamageCalculation','continuous'].includes(a.window))return ['invalid-monster-activation'];
  if(!['onBattleDamage','ownStandby','quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'].includes(e.trigger))return ['unsupported-monster-trigger'];
- if(!e.operation||!['diceContest','threeCoins','battleReward','searchCopiesFromHand','targetGroup','identityOnly','fusionSubstitute','singleCard','positionChange','searchFiltered','mill','heal','burn','burnPerSpellTrap','burnPerHand','healPerControlledMonster','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous','battleBounceAttacker','battleLevelBurn','endBattleDefense','endDamageDefensePiercing','guardianZeroAttack','battleBanishVictim','battleDestroyByIdentity','normalSummonPolicy','doubleTribute','battleBanishBoth','battleTopDeckAttacker'].includes(e.operation.kind))return ['unsupported-monster-operation'];
+ if(!e.operation||!['coinTarget','diceContest','threeCoins','battleReward','searchCopiesFromHand','targetGroup','identityOnly','fusionSubstitute','singleCard','positionChange','searchFiltered','mill','heal','burn','burnPerSpellTrap','burnPerHand','healPerControlledMonster','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous','battleBounceAttacker','battleLevelBurn','endBattleDefense','endDamageDefensePiercing','guardianZeroAttack','battleBanishVictim','battleDestroyByIdentity','normalSummonPolicy','doubleTribute','battleBanishBoth','battleTopDeckAttacker'].includes(e.operation.kind))return ['unsupported-monster-operation'];
  if((e.trigger==='quick'||e.trigger==='ignition')&&a.policy!=='manual'||e.trigger==='continuous'&&a.policy!=='continuous')return ['inconsistent-monster-policy'];
  if(!['quick','ignition','continuous'].includes(e.trigger)&&!['mandatory','optional'].includes(a.policy))return ['inconsistent-monster-policy'];
  const windows:Partial<Record<MonsterTrigger,MonsterActivation['window']>>={onBattleDamage:'battleDamage',ownStandby:'standby',quick:'opposingDamageCalculation',ignition:'main',flip:'flip',onSummon:'summon',onOtherSummon:'summon',onSentToGrave:'grave',onBattleDestroyed:'battleDestroyed',continuous:'continuous'};
  if(windows[e.trigger]!==a.window)return ['inconsistent-monster-window'];
  const op=e.operation;
+ if(op.kind==='coinTarget'&&(e.trigger!=='ignition'||!e.oncePerTurn||e.cost||Object.keys(op).length!==2||!['monster','fieldCard'].includes(op.zone)))return ['invalid-coin-target'];
  if(op.kind==='diceContest'&&(e.trigger!=='flip'||a.policy!=='mandatory'||e.cost||e.oncePerTurn)||op.kind==='threeCoins'&&(e.trigger!=='ignition'||!e.oncePerTurn||e.cost))return ['invalid-chance-trigger'];
  if(e.trigger==='onBattleDamage'||op.kind==='battleReward'){
   if(e.trigger!=='onBattleDamage'||op.kind!=='battleReward'||Object.keys(op).length!==2||a.policy!=='mandatory'||e.cost||e.oncePerTurn||rewardIssues(op.rule).length)return ['invalid-battle-damage-effect'];
