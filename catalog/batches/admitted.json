@@ -112,6 +112,10 @@
     {
       "id": "m52-field-traps",
       "proofSHA256": "65639b4e5c695c91d8ffe65cb965b4a6af682f44ff318a96905e83fb6921a287"
+    },
+    {
+      "id": "m53-name-and-summon",
+      "proofSHA256": "0b2ad21d48d88fa3f4549313f8a5e720a65a133e68531735f3c91df75114c9aa"
     }
   ]
 }

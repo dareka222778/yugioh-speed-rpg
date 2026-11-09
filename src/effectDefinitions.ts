@@ -26,6 +26,7 @@ import {effects as m49_standby_lpEffects} from './generated/m49-standby-lp';
 import {effects as m50_battle_damageEffects} from './generated/m50-battle-damage';
 import {effects as m51_scaled_standbyEffects} from './generated/m51-scaled-standby';
 import {effects as m52_field_trapsEffects} from './generated/m52-field-traps';
+import {effects as m53_name_and_summonEffects} from './generated/m53-name-and-summon';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -87,6 +88,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m53_name_and_summonEffects,
  ...m52_field_trapsEffects,
  ...m51_scaled_standbyEffects,
  ...m50_battle_damageEffects,
