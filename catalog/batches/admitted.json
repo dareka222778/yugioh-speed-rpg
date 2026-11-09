@@ -104,6 +104,10 @@
     {
       "id": "m50-battle-damage",
       "proofSHA256": "5e01a4a5c5bd60bcae6a0ab76e8ae926c03a83672d8626b01725b313a0f6ad71"
+    },
+    {
+      "id": "m51-scaled-standby",
+      "proofSHA256": "423047ec7cfd8640da69088dd704b469b04c0fd8155fbd029b6518325c57c287"
     }
   ]
 }

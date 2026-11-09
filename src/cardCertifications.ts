@@ -5804,5 +5804,13 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "81383947": {
+    "fingerprint": "0ceb3aba6f7b82f0a785730309267fdf27b8d3ff7adcf4e959f88b8e833a90dc",
+    "suites": [
+      "tests/generated-m51-scaled-standby.test.cjs"
+    ]
+  }
+
 
 };
