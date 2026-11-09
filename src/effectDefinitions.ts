@@ -75,10 +75,11 @@ export type Effect=
  |{kind:'ritualSummon';ritual:RitualRule}
  |{kind:'destroyFiltered';filter:DestructionFilter}
  |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number;presenceOnly?:true}
+ |{kind:'fieldTrap';mode:import('./fieldTraps').FieldTrapMode}
  |{kind:'temporaryModifier';atk:number;def:number}
  |{kind:'destroySpellTraps';scope:'all'|'opponent'}
  |{kind:'sequence';activation:ActivationModel;operations:readonly EconomicOperation[]}
- |{kind:'attackResponse';activation:ActivationModel;endBattle:boolean;reflectAttack:boolean}
+ |{kind:'attackResponse';activation:ActivationModel;endBattle:boolean;reflectAttack:boolean;gainAttack?:true}
  |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'bottomlessTrapHole'|'sakuretsuArmor'|'mirrorForce'}
  |{kind:'heal'|'burn';amount:number}
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
@@ -205,11 +206,12 @@ export function effectDefinitionIssues(value:unknown):string[]{
  if(e?.kind==='ritualSummon')return Object.keys(e).some(k=>!['kind','ritual'].includes(k))?['unknown-ritual-field']:ritualRuleIssues(e.ritual);
  if(e?.kind==='destroyFiltered')return Object.keys(e).some(k=>!['kind','filter'].includes(k))?['unsupported-destruction-field']:destructionFilterIssues(e.filter);
  if(e?.kind==='continuous')return [...(e.presenceOnly===undefined?continuousRuleIssues(e.rules):e.presenceOnly===true&&Array.isArray(e.rules)&&!e.rules.length&&e.lpCost!==undefined?[]:['invalid-presence-only-spell']),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
+ if(e?.kind==='fieldTrap')return Object.keys(e).length===2&&['returnHand','reduceAttacker','reduceDefense','handBoost'].includes(e.mode)?[]:['invalid-field-trap'];
  if(e?.kind==='temporaryModifier')return Number.isSafeInteger(e.atk)&&Number.isSafeInteger(e.def)?[]:['invalid-temporary-modifier'];
  if(e?.kind==='destroySpellTraps')return ['all','opponent'].includes(e.scope)?[]:['invalid-spell-trap-scope'];
  if(!e||typeof e!=='object'||!executableKinds.has(e.kind))return ['unknown-effect-operation'];
  if(e.kind==='sequence')return economicOperationIssues(e.operations);
- if(e.kind==='attackResponse'&&(typeof e.endBattle!=='boolean'||typeof e.reflectAttack!=='boolean'||!e.endBattle&&!e.reflectAttack))return ['invalid-attack-response'];
+ if(e.kind==='attackResponse'&&(typeof e.endBattle!=='boolean'||typeof e.reflectAttack!=='boolean'||e.gainAttack!==undefined&&e.gainAttack!==true||e.gainAttack&&(e.reflectAttack||e.endBattle)||!e.endBattle&&!e.reflectAttack&&!e.gainAttack))return ['invalid-attack-response'];
  if((e.kind==='heal'||e.kind==='burn')&&(!Number.isSafeInteger(e.amount)||e.amount<=0))return ['invalid-effect-amount'];
  if(e.kind==='field'||e.kind==='equip'){
   if(!Number.isSafeInteger(e.atk)||!Number.isSafeInteger(e.def))return ['invalid-modifier'];

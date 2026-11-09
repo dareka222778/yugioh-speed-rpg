@@ -31,6 +31,7 @@ export function getDestructionModel(value:Effect|Effect['kind']):DestructionMode
 
 /** Definitions with variable parameters carry their own activation policy. */
 export function getActivationModel(effect:Effect):ActivationModel|undefined{
+ if(effect.kind==='fieldTrap')return {speed:2,window:'free',damage:effect.mode==='returnHand'?'never':'beforeCalculation'};
  return effect.kind==='discardRemoval'||effect.kind==='conditionalDestruction'||effect.kind==='moveSelected'||effect.kind==='positionChange'||effect.kind==='continuous'||effect.kind==='sequence'||effect.kind==='choiceSequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
 }
 

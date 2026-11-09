@@ -1,3 +1,4 @@
+import {fieldTrapTargets,resolveFieldTrap} from './fieldTraps';
 import {damageTrigger,applyBattleReward} from './battleRewards';
 import {standbySources,matchesStandbySource,type MonsterStandby,type StandbySource} from './monsterStandby';
 import {copySearchOptions,takeCopies} from './searchCopies';
@@ -157,6 +158,7 @@ function trapActions(s:DuelState,index:number):Action[]{
   if(s.damageStep&&!(s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage==='beforeCalculation'))continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='calculation')continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage!=='beforeCalculation')continue;
+  if(effect.kind==='fieldTrap'){out.push(...fieldTrapTargets(s,index,effect.mode).map(m=>({kind:'trap' as const,card:c.uid,target:m.uid})));continue;}
   if(effect.kind==='discardRemoval'){out.push(...discardRemovalActions(s,index,c,effect));continue;}
   if(effect.kind==='continuous'){if(s.players[index].lp>(effect.lpCost??0))out.push({kind:'trap',card:c.uid,target:''});continue;}
   if(effect.kind==='conditionalDestruction'){
@@ -499,6 +501,7 @@ function resolve(s:DuelState){
   if(trapsNegated(s)&&card(link.id).kind==='trap'){note(s,'Jinzo negou um efeito de Armadilha.');if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b)b.resolved=true;}else discardBackrow(s,link.card);return;}
   if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b?.faceUp)b.resolved=true;return;}
   if(effect?.kind==='discardRemoval'){resolveDiscardRemoval(s,effect,card(link.id).kind==='spell'?'spell':'trap',link.target,{destroy:graveMonster,back:discardBackrow,clean:cleanEquips});discardBackrow(s,link.card);return;}
+  if(effect?.kind==='fieldTrap'){resolveFieldTrap(s,link.actor,effect.mode,link.target,link.targetBinding,{destroyMonster:graveMonster,destroyBackrow:discardBackrow,cleanEquips});discardBackrow(s,link.card);return;}
   if(effect?.kind==='temporaryModifier'){if(link.target&&canAffectMonster(s,link.target,'spell'))addTemporaryModifier(s,link.target,effect.atk,effect.def);discardBackrow(s,link.card);return;}
   if(effect?.kind==='positionChange'){executePositionChange(s,link.actor,effect.rule,card(link.id).kind==='spell'?'spell':'trap',link.target,turnMonsterFaceDown);discardBackrow(s,link.card);note(s,'Mudança de posição resolvida.');return;}
   if(effect?.kind==='conditionalDestruction'){
