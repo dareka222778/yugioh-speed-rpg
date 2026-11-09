@@ -1,25 +1,16 @@
 {
-  "runId": "work-20261109113448",
-  "owner": null,
-  "priorityRequestedBy": null,
-  "state": "released",
-  "startedAt": "2026-11-08T17:45:39.246Z",
-  "lastActivityAt": "2026-11-09T18:26:02.591Z",
-  "nextScheduledAt": "2026-11-09T18:30:00-03:00",
+  "runId": "work-20261109T213625Z",
+  "owner": "Work",
+  "priorityRequestedBy": "Work",
+  "state": "active",
+  "startedAt": "2026-11-09T21:36:25Z",
+  "lastActivityAt": "2026-11-09T21:37:21.857Z",
+  "nextScheduledAt": "2026-11-09T23:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "handoffRequest": null,
-  "scope": [],
-  "lastCheckpoint": "coordination/runs/work-20261109113448.json",
-  "previousRunId": "work-m45-20261108174539",
-  "handoff": {
-    "to": "auxiliary",
-    "status": "available",
-    "at": "2026-11-09T18:26:02.591Z",
-    "baseBranch": "feat/work-m47-20261109",
-    "baseCommit": "64edd14d2e472cfeea4434dfffa89235a8d18edb",
-    "scope": "Branch auxiliar exclusiva a partir deste SHA; PRs 12 e 14 protegidas. Verifique HEAD e coordenação antes de publicar.",
-    "nextTask": "Retomar M53 (Aqua Chorus e Eatgaboon): a proposta não foi publicada. Verificar duplicações, implementar e testar nomes equivalentes, ativação em Invocação-Normal/Virar, exclusão de Invocação-Especial e resposta negada.",
-    "nextWorkAt": "2026-11-09T18:30:00-03:00"
-  }
+  "scope": [
+    "feat/work-m47-20261109"
+  ],
+  "lastCheckpoint": "coordination/runs/work-20261109113448.json"
 }
