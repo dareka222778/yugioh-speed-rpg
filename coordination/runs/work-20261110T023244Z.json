@@ -1,0 +1,30 @@
+{
+  "id": "work-20261110T023244Z",
+  "branch": "feat/work-m47-20261109",
+  "base": "b2090ac938d8a5a1518305d6d8b9c89c38f4561d",
+  "startedAt": "2026-11-10T02:32:44Z",
+  "lastActivityAt": "2026-11-10T02:39:28.625Z",
+  "state": "active",
+  "owner": "Work",
+  "nextScheduledAt": "2026-11-10T04:30:00-03:00",
+  "previousRunId": "work-20261109T213625Z",
+  "blocks": [
+    {
+      "commit": "07fdd7e7693f3b991a276253b1ac9a825a810b14",
+      "localPass": 47,
+      "change": "Remove false permanent ban on Time Wizard from audit; preserve independent negative control."
+    },
+    {
+      "submission": "261b56a4d4b8ae686207b1eb5ee25d38593079a7",
+      "batch": "M56",
+      "localPass": 7868,
+      "fail": 0,
+      "skipped": 0,
+      "localCertified": 1008,
+      "remote": "awaiting admission"
+    }
+  ],
+  "baseline": 1006,
+  "nextTask": "M57: skip upcoming draw phases; verify overlapping deadlines. No deployment or player inventory.",
+  "production": "Panel redirected to login. Live Discord and backup not verified."
+}

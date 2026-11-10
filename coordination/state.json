@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-10T02:32:44Z",
-  "lastActivityAt": "2026-11-10T02:33:29.539Z",
+  "lastActivityAt": "2026-11-10T02:39:28.625Z",
   "nextScheduledAt": "2026-11-10T04:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -12,6 +12,14 @@
   "scope": [
     "feat/work-m47-20261109"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261109T213625Z.json",
-  "previousRunId": "work-20261109T213625Z"
+  "lastCheckpoint": "coordination/runs/work-20261110T023244Z.json",
+  "previousRunId": "work-20261109T213625Z",
+  "handoff": {
+    "to": "auxiliary",
+    "status": "on-principal-interruption-only",
+    "baseBranch": "feat/work-m47-20261109",
+    "baseCommit": "261b56a4d4b8ae686207b1eb5ee25d38593079a7",
+    "instructions": "Se esta execução principal for encerrada antes de gravar a liberação final, a autorização para branch auxiliar independente entra em vigor após confirmar o encerramento e conferir HEAD/CI. Não editar a branch do Work nem reservas de terceiros.",
+    "nextWorkAt": "2026-11-10T04:30:00-03:00"
+  }
 }
