@@ -1,6 +1,7 @@
 import {chooseReviewedTarget} from './targetDecision31';
 import {filteredDestructionUtility} from './filteredDestructionStrategy';
 import {findActionReceipt,saveActionReceipt,type ActionReceipt} from './actionReceipts';
+import {filterNpcRemoval} from './npcRemoval';
 import {tacticalSummon,tacticalPosition,tacticalAttack,handCardValue,publicBattleAssessment} from './npcStrategy';
 import {randomBytes,randomInt} from 'node:crypto';
 import {applyDuelAction,transitionEvents,type DuelTransitionEvent} from './duelTransitions';
@@ -53,7 +54,7 @@ export const acceptChallenge=db.transaction((id:string,actor:string,guild:string
 });
 export const declineChallenge=db.transaction((id:string,actor:string,guild:string):DuelRecord=>{const r=getDuel(id);if(r.guild_id!==guild||r.status!=='pending'||![r.invite!.owner,r.invite!.opponent].includes(actor))throw new Error('Não é possível cancelar esse convite.');r.status='declined';r.revision++;r.updated=Date.now();save(r);return r;});
 export function chooseNPC(s:DuelState,id:string):Action|undefined {
- const actions=legalActions(s,id);const p=s.players.find(p=>p.id===id)!;const op=s.players.find(p=>p.id!==id)!;
+ const actions=filterNpcRemoval(s,id,legalActions(s,id));const p=s.players.find(p=>p.id===id)!;const op=s.players.find(p=>p.id!==id)!;
  const source=(a:Extract<Action,{kind:'trap'|'spell'}>)=>[...p.hand,...p.backrow].find(c=>c.uid===a.card);
  const fast=actions.filter((a):a is Extract<Action,{kind:'trap'}>=>a.kind==='trap');
  const useful=fast.filter(a=>{const c=source(a),effect=c&&getEffect(c.id);if(!effect)return false;
@@ -66,6 +67,7 @@ export function chooseNPC(s:DuelState,id:string):Action|undefined {
   }
   if(effect.kind==='attackResponse')return s.pending.kind==='attack'&&s.pending.actor!==s.players.indexOf(p)&&!s.chain.some(link=>link.actor===s.players.indexOf(p)&&getEffect(link.id)?.kind==='attackResponse');
   if(effect.kind==='reinforcements'||effect.kind==='castleWalls')return p.monsters.some(m=>m.uid===a.target&&m.faceUp);
+  if(effect.kind==='discardRemoval')return true; // already scored against its discard cost
   if(effect.kind==='trapHole'||effect.kind==='bottomlessTrapHole')return op.monsters.some(m=>m.uid===a.target);
   if(effect.kind==='torrentialTribute')return op.monsters.length>0&&op.monsters.length>=p.monsters.length;
   if(effect.kind==='sakuretsuArmor')return s.pending.kind==='attack'&&s.players[s.pending.actor].id!==id&&op.monsters.some(m=>m.uid===a.target);
