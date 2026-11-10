@@ -27,6 +27,7 @@ import {monsters as m54_dice_and_coinsMonsters} from './generated/m54-dice-and-c
 import {monsters as m55_coin_targetsMonsters} from './generated/m55-coin-targets';
 import {monsters as m56_called_coinsMonsters} from './generated/m56-called-coins';
 import {monsters as m58_battle_recoveryMonsters} from './generated/m58-battle-recovery';
+import {monsters as m59_control_lockMonsters} from './generated/m59-control-lock';
 import {conditionalMonsters30} from './conditionalBatch30';
 import {triggerMonsters29} from './triggerBatch29';
 import {positionRuleIssues,type PositionRule} from './positionRules';
@@ -99,6 +100,7 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'battleDamage'|'standby'|'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
 export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
+ ...m59_control_lockMonsters,
  ...m58_battle_recoveryMonsters,
  ...m56_called_coinsMonsters,
  ...m55_coin_targetsMonsters,

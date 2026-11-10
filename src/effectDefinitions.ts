@@ -32,6 +32,7 @@ import {effects as m55_coin_targetsEffects} from './generated/m55-coin-targets';
 import {effects as m56_called_coinsEffects} from './generated/m56-called-coins';
 import {effects as m57_skipped_drawsEffects} from './generated/m57-skipped-draws';
 import {effects as m58_battle_recoveryEffects} from './generated/m58-battle-recovery';
+import {effects as m59_control_lockEffects} from './generated/m59-control-lock';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -96,6 +97,7 @@ export type Effect=
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m59_control_lockEffects,
  ...m58_battle_recoveryEffects,
  ...m57_skipped_drawsEffects,
  ...m56_called_coinsEffects,

@@ -136,6 +136,10 @@
     {
       "id": "m58-battle-recovery",
       "proofSHA256": "e685e687472c96f5162edc2d16eae946f36ce44cbeaa8652dbb2bad744ee53b1"
+    },
+    {
+      "id": "m59-control-lock",
+      "proofSHA256": "e74e2c910b2603652573b0b184080859f98fe648bf0c39eb87c2e5412e22fe6a"
     }
   ]
 }
