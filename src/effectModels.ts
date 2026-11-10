@@ -32,6 +32,7 @@ export function getDestructionModel(value:Effect|Effect['kind']):DestructionMode
 /** Definitions with variable parameters carry their own activation policy. */
 export function getActivationModel(effect:Effect):ActivationModel|undefined{
  if(effect.kind==='summonCeiling')return {speed:2,window:'summoned',damage:'never',opponentOnly:true,summonKinds:['summon','flip']};
+ if(effect.kind==='graveWager')return {speed:2,window:'free',damage:'never'};
  if(effect.kind==='statDie')return {speed:2,window:'free',damage:'beforeCalculation'};
  if(effect.kind==='fieldTrap')return {speed:2,window:'free',damage:effect.mode==='returnHand'?'never':'beforeCalculation'};
  return effect.kind==='discardRemoval'||effect.kind==='conditionalDestruction'||effect.kind==='moveSelected'||effect.kind==='positionChange'||effect.kind==='continuous'||effect.kind==='sequence'||effect.kind==='choiceSequence'||effect.kind==='attackResponse'?effect.activation:getEffectModel(effect.kind)?.activation;
