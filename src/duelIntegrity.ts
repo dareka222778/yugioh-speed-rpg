@@ -1,3 +1,4 @@
+import {graveRecoveryTargets} from './battleRecovery';
 import {verifyCoinCall} from './calledCoin';
 import {verifyStandby} from './monsterStandby';
 import {copySearchOptions} from './searchCopies';
@@ -125,6 +126,9 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
   if(!op||op.kind!=='recruit'||!info||info.fusion||info.monsterType==='ritual'||!matchesMonsterSelector(info,op.filter)||pending.targetBinding?.zone!=='deck'||JSON.stringify(s.choice.targets)!==JSON.stringify(op.positions.map(p=>p==='atk'?'__recruit_atk__':'__recruit_def__')))fail('posição de recrutamento');
  }
  for(const player of s.players)if(player.skipDrawPhases!==undefined&&![1,2].includes(player.skipDrawPhases))fail('fases de compra pendentes');
+ if(s.choice?.source==='triggerTarget'){const event=s.triggerBuild?.selected,op=event&&getMonsterEffect(event.id)?.operation;
+  if(op?.kind==='battleRecovery'&&JSON.stringify(s.choice.targets)!==JSON.stringify(graveRecoveryTargets(s,event.actor,op.category)))fail('alvos do Cemitério');
+ }
  verifyCoinCall(s);verifyStandby(s);
  assertTokenLedger(s);
  if(s.teamRotation!==undefined){

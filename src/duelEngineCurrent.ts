@@ -1,3 +1,4 @@
+import {graveRecoveryTargets,recoverToTop} from './battleRecovery';
 import {consumeDrawSkip,skipDraws} from './drawPhaseSkips';
 import {canActivateGraveWager,openCoinCall,resolveCalledCoin} from './calledCoin';
 import {opposingCoinTargets,resolveCoinTarget,diceSide,resolveStatDie,resolveDiceContest,resolveThreeCoins} from './chanceEffects';
@@ -105,6 +106,7 @@ function combos<T>(values:T[],n:number):T[][]{if(n===0)return [[]];return values
 function monsterTargets(s:DuelState,actor:number,e:MonsterEffect):string[]|undefined{
  const op=e.operation;
  if(op.kind==='targetGroup'){const targets=groupTargets(s,op.rule);return targets.length>=op.rule.minimum?targets:[];}
+ if(op.kind==='battleRecovery')return graveRecoveryTargets(s,actor,op.category);
  if(op.kind==='coinTarget')return opposingCoinTargets(s,actor,op.zone);
  if(op.kind==='singleCard')return singleCardTargets(s,actor,op.rule);
  if(op.kind==='destroy'||op.kind==='bounce')return (op.target==='anyMonster'?s.players:s.players.filter((_,i)=>i!==actor)).flatMap(p=>p.monsters.map(m=>m.uid));
@@ -441,6 +443,7 @@ function resolveMonsterPending(s:DuelState,pending:Extract<Pending,{kind:'monste
   // Paid costs are never refunded and removing the source does not negate its effect.
   if(!e||e.operation.kind!=='searchCopiesFromHand'&&monsterEffectsNegated(s,pending.card))return;
   const op=e.operation;
+  if(op.kind==='battleRecovery'){recoverToTop(s,pending.actor,op.category,pending.target);return;}
   if(op.kind==='timeWager'){openCoinCall(s,pending.actor,pending.card,pending.id);return;}
   if(op.kind==='coinTarget'){resolveCoinTarget(s,pending.actor,pending.target,op.zone,graveMonster,discardBackrow);return;}
   if(op.kind==='diceContest'){resolveDiceContest(s,pending.actor,checkLP);return;}
@@ -901,6 +904,11 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   else if(s.choice?.source==='triggerOptional'){
    const event=s.triggerBuild?.selected;if(!event||event.actor!==index)throw new Error('Gatilho opcional inválido.');
    if(action.target!=='__skip__'&&getMonsterEffect(event.id)?.operation.kind==='targetGroup'){selectGroupTargets(s,event);assertDuelTransition(input,s);return s;}
+   const accepted=getMonsterEffect(event.id)?.operation;
+   if(action.target!=='__skip__'&&accepted?.kind==='battleRecovery'){
+    const targets=graveRecoveryTargets(s,event.actor,accepted.category);if(!targets.length)throw Error('Não há alvo válido no Cemitério.');
+    s.choice={actor:event.actor,targets,source:'triggerTarget'};assertDuelTransition(input,s);return s;
+   }
    if(action.target!=='__skip__')appendTrigger(s,event);
    else note(s,`O jogador não ativou o efeito opcional de ${card(event.id).name}.`);
    s.triggerBuild!.selected=undefined;s.choice=undefined;advanceTriggers(s);
