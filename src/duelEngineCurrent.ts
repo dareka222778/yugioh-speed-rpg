@@ -1,4 +1,5 @@
 import {graveRecoveryTargets,recoverToTop} from './battleRecovery';
+import {canChangeControl} from './continuousEffects';
 import {consumeDrawSkip,skipDraws} from './drawPhaseSkips';
 import {canActivateGraveWager,openCoinCall,resolveCalledCoin} from './calledCoin';
 import {opposingCoinTargets,resolveCoinTarget,diceSide,resolveStatDie,resolveDiceContest,resolveThreeCoins} from './chanceEffects';
@@ -383,7 +384,7 @@ function endTurn(s:DuelState){
   }
  }
  s.phase='main';s.resume='main';
- for(const p of s.players)for(const m of [...p.monsters]){m.atkBoost=0;m.defBoost=0;if(m.returnTo!==undefined&&m.returnTurn===s.turn){const target=s.players[m.returnTo];if(target!==p){if(target.monsters.length<RULES_PROFILE.monsterZones){p.monsters=p.monsters.filter(c=>c.uid!==m.uid);target.monsters.push(m);}else graveMonster(s,m.uid);}delete m.returnTo;delete m.returnTurn;}}
+ for(const p of s.players)for(const m of [...p.monsters]){m.atkBoost=0;m.defBoost=0;if(m.returnTo!==undefined&&m.returnTurn===s.turn){const target=s.players[m.returnTo];if(target!==p&&canChangeControl(s,m)){if(target.monsters.length<RULES_PROFILE.monsterZones){p.monsters=p.monsters.filter(c=>c.uid!==m.uid);target.monsters.push(m);}else graveMonster(s,m.uid);}delete m.returnTo;delete m.returnTurn;}}
  s.turnEnding=true;
 }
 function completeEndTurn(s:DuelState){

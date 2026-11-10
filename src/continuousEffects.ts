@@ -37,6 +37,13 @@ export function continuousTrapsNegated(s:DuelState){return active(s).some(x=>x.r
 export function continuousTrapActivationsBlocked(s:DuelState){return active(s).some(x=>x.kind==='monster'&&x.rules.some(r=>r.kind==='negateTraps'));}
 export function monsterEffectsNegated(s:DuelState,uid:string){const m=find(s,uid)?.m;if(!m?.faceUp)return false;return active(s).some(x=>x.rules.some(r=>r.kind==='negateMonsters'&&matches(s,x,m,r.filter)));}
 function affected(s:DuelState,m:Monster,kind:EffectKind){return !active(s).some(x=>x.rules.some(r=>r.kind==='immune'&&r.from.includes(kind)&&matches(s,x,m,r.filter)));}
+export function canChangeControl(s:DuelState,m:Monster){
+ if(!m.faceUp)return true;
+ // A face-down object has no visible continuous rule. Never disclose its name
+ // by filtering the opponent's legal targets while it is Set.
+ const op=getMonsterEffect(m.id)?.operation;
+ return !(op?.kind==='continuous'&&op.rules.some(r=>r.kind==='controlLock')&&!monsterEffectsNegated(s,m.uid));
+}
 export function canAffectMonster(s:DuelState,uid:string,kind:EffectKind){const m=find(s,uid)?.m;return !!m&&affected(s,m,kind);}
 function count(s:DuelState,source:Source,f:CountFormula){const players=f.controller==='both'?s.players:[s.players[f.controller==='source'?source.controller:1-source.controller]];const list=players.flatMap(p=>[...p[f.zone],...f.zone==='backrow'&&f.includeField&&p.field?[p.field]:[]]);return list.filter(c=>{const info=card(c.id);return !!info&&(!f.races?.length||f.races.includes(info.race??''))&&(!f.names?.length||f.names.some(n=>namedCard(info,n)))&&(!f.archetypes?.length||f.archetypes.some(n=>archetypeCard(info,n)))&&(!f.cardKind||info.kind===f.cardKind)&&(!f.faceUp||'faceUp' in c&&c.faceUp===true)&&(!f.equippedToSource||'equippedTo' in c&&c.equippedTo===source.uid);}).length;}
 export function continuousModifier(s:DuelState,m:Monster,stat:'atk'|'def'){if(!m.faceUp)return 0;let value=0;for(const source of active(s)){if(!affected(s,m,source.kind))continue;for(const r of source.rules)if(r.kind==='modifier'){

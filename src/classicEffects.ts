@@ -2,6 +2,7 @@ import {discardRemovalActions,payDiscard,resolveDiscardRemoval} from './discardR
 import {selectedMovementTargets,executeSelectedMovement} from './selectedMovement';
 import {getMonsterEffect} from './monsterEffects';
 import {recoveryTargets,executeRecovery} from './recoveryRules';
+import {canChangeControl} from './continuousEffects';
 import {positionTargets,executePositionChange} from './positionOperations';
 import {ritualCandidates} from './ritualSummon';
 import {continuousModifier,cardActivationAllowed,canAffectMonster,addTemporaryModifier} from './continuousEffects';
@@ -48,7 +49,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
   case 'destroySpellTraps':return s.players.some((player,side)=>(e.scope==='all'||side!==index)&&(player.backrow.some(b=>b.uid!==c.uid)||!!player.field))?[{kind:'spell',card:c.uid}]:[];
   case 'equip':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp&&equipEligible(e,getCard(m.id)!)).map(m=>m.uid)));
   case 'monsterReborn':return p.monsters.length>=RULES_PROFILE.monsterZones?[]:s.players.flatMap(p=>p.grave.filter(m=>getCard(m.id)?.kind==='monster'&&(!(getCard(m.id)?.fusion||getCard(m.id)?.monsterType==='ritual')||m.properlySummoned)).flatMap(m=>(['atk','def'] as const).map(position=>({kind:'spell',card:c.uid,target:m.uid,position}))));
-  case 'changeHeart':return p.monsters.length<RULES_PROFILE.monsterZones?targeted(op.monsters.map(m=>m.uid)):[];
+  case 'changeHeart':return p.monsters.length<RULES_PROFILE.monsterZones?targeted(op.monsters.filter(m=>canChangeControl(s,m)).map(m=>m.uid)):[];
   case 'blockAttack':return targeted(op.monsters.filter(m=>m.faceUp&&m.position==='atk').map(m=>m.uid));
   // A facedown target's identity must never determine the action menu.
   case 'deSpell':return targeted(s.players.flatMap(p=>[...p.backrow,...p.field?[p.field]:[]].filter(t=>t.uid!==c.uid&&(!t.faceUp||getCard(t.id)?.kind==='spell')).map(t=>t.uid)));
@@ -161,7 +162,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
    }
    return true;
   }
-  case 'changeHeart':if(found&&found.index!==a.actor&&p.monsters.length<RULES_PROFILE.monsterZones&&canAffectMonster(s,found.m.uid,'spell')){found.p.monsters=found.p.monsters.filter(m=>m.uid!==found.m.uid);found.m.owner??=found.index;found.m.returnTo=found.index;found.m.returnTurn=s.turn;p.monsters.push(found.m);service.note(s,`${p.name} ganhou o controle temporário de um monstro.`);}return true;
+  case 'changeHeart':if(found&&found.index!==a.actor&&canChangeControl(s,found.m)&&p.monsters.length<RULES_PROFILE.monsterZones&&canAffectMonster(s,found.m.uid,'spell')){found.p.monsters=found.p.monsters.filter(m=>m.uid!==found.m.uid);found.m.owner??=found.index;found.m.returnTo=found.index;found.m.returnTurn=s.turn;p.monsters.push(found.m);service.note(s,`${p.name} ganhou o controle temporário de um monstro.`);}return true;
   case 'deSpell':case 'removeTrap':{
    const b=s.players.flatMap(p=>[...p.backrow,...p.field?[p.field]:[]]).find(b=>b.uid===a.target);if(b&&e.kind==='deSpell'&&!b.faceUp)service.note(s,`Des-Magia revelou ${getCard(b.id)!.name}.`);if(b&&getCard(b.id)?.kind===(e.kind==='deSpell'?'spell':'trap')&&(e.kind==='deSpell'||b.faceUp))discardBackrow(s,b.uid);return true;
   }
