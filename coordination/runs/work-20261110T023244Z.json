@@ -3,7 +3,7 @@
   "branch": "feat/work-m47-20261109",
   "base": "b2090ac938d8a5a1518305d6d8b9c89c38f4561d",
   "startedAt": "2026-11-10T02:32:44Z",
-  "lastActivityAt": "2026-11-10T02:39:28.625Z",
+  "lastActivityAt": "2026-11-10T02:47:33.092Z",
   "state": "active",
   "owner": "Work",
   "nextScheduledAt": "2026-11-10T04:30:00-03:00",
@@ -21,10 +21,28 @@
       "fail": 0,
       "skipped": 0,
       "localCertified": 1008,
-      "remote": "awaiting admission"
+      "remote": "d06b0de2295d3763e6ffa611aeb118abd8b634f0"
+    },
+    {
+      "batch": "M57",
+      "certification": "ec42494bdbf271700d5e2d7ffb246785160e2cd0",
+      "localPass": 7895,
+      "certified": 1010
+    },
+    {
+      "change": "NPC discard removal selection and friendly-fire regression",
+      "commit": "27972b247c29828c068cdacca5c4053990ba03e2",
+      "localPass": 16
+    },
+    {
+      "batch": "M58",
+      "submitted": "48fbdd7de475fd16a23ce0e5e90212835117a351",
+      "localPass": 7919,
+      "localCertified": 1012
     }
   ],
   "baseline": 1006,
-  "nextTask": "M57: skip upcoming draw phases; verify overlapping deadlines. No deployment or player inventory.",
-  "production": "Panel redirected to login. Live Discord and backup not verified."
+  "nextTask": "M59 control locks: Blindly Loyal Goblin and Mataza; M58 remote promotion pending.",
+  "production": "Panel redirected to login. Live Discord and backup not verified.",
+  "discord": "11/11 offline tests (1v1, 2v2, menus). No live test."
 }

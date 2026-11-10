@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-10T02:32:44Z",
-  "lastActivityAt": "2026-11-10T02:39:28.625Z",
+  "lastActivityAt": "2026-11-10T02:47:33.092Z",
   "nextScheduledAt": "2026-11-10T04:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -18,8 +18,9 @@
     "to": "auxiliary",
     "status": "on-principal-interruption-only",
     "baseBranch": "feat/work-m47-20261109",
-    "baseCommit": "261b56a4d4b8ae686207b1eb5ee25d38593079a7",
+    "baseCommit": "48fbdd7de475fd16a23ce0e5e90212835117a351",
     "instructions": "Se esta execução principal for encerrada antes de gravar a liberação final, a autorização para branch auxiliar independente entra em vigor após confirmar o encerramento e conferir HEAD/CI. Não editar a branch do Work nem reservas de terceiros.",
-    "nextWorkAt": "2026-11-10T04:30:00-03:00"
+    "nextWorkAt": "2026-11-10T04:30:00-03:00",
+    "nextTask": "M59 control locks: Blindly Loyal Goblin and Mataza; M58 remote promotion pending."
   }
 }
