@@ -128,6 +128,10 @@
     {
       "id": "m56-called-coins",
       "proofSHA256": "9cd69a0d851d775ed9fdfe138355c1c8fa7bb7a284985102ee8d57c2f6815683"
+    },
+    {
+      "id": "m57-skipped-draws",
+      "proofSHA256": "59a740068bad7ca57263ece04b926948e6a4eace377f039c326d9004e51e2590"
     }
   ]
 }

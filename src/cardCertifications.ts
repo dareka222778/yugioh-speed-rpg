@@ -5912,5 +5912,19 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "35316708": {
+    "fingerprint": "e1424c7a86366dfe0179f039a1f93076eb817898ba44435e8fe04fc355941350",
+    "suites": [
+      "tests/generated-m57-skipped-draws.test.cjs"
+    ]
+  },
+  "37576645": {
+    "fingerprint": "3a5480d19e9291f64dd92391ecc281491c773bcc433e601a088f5ae1173afafd",
+    "suites": [
+      "tests/generated-m57-skipped-draws.test.cjs"
+    ]
+  }
+
 
 };
