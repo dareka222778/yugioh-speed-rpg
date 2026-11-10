@@ -1,4 +1,6 @@
 {
   "format": 1,
-  "batches": []
+  "batches": [
+    "catalog/proposed/m57-skipped-draws.json"
+  ]
 }

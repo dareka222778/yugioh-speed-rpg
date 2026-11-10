@@ -103,6 +103,7 @@ export function cardRulesPT(id:string):string{
  if(e.kind==='choiceSequence')result=`Escolha um dos efeitos na ativação: ${e.choices.map((choice,i)=>`${i+1}) ${choice.operations.map(op=>op.kind==='draw'?`compre ${op.count} carta(s)`:op.kind==='gainLP'?`${op.player==='self'?'você':'o oponente'} ganha ${op.amount} PV`:op.kind==='scaledLP'?scaledText(op):op.recipients.map(r=>`${r.player==='self'?'você':'o oponente'} recebe ${r.amount} de dano`).join(' e ')).join(' e depois ')}`).join('; ')}. A opção anunciada é mantida durante a corrente.`;
  if(e.kind==='continuous')result=`${e.lpCost?`Pague ${e.lpCost} PV na ativa??o. `:''}${e.rules.map(ruleText).join(' ')} A fonte precisa permanecer com a face para cima e resolvida no campo.`;
  if(e.kind==='summonCeiling')return c.summary;
+ if(e.kind==='drawSkip')result=c.summary;
  if(e.kind==='graveWager')result=c.summary;
  if(e.kind==='statDie')result=c.summary;
  if(e.kind==='fieldTrap')result=c.summary;

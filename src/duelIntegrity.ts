@@ -124,6 +124,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
   const ref=s.players[s.choice.actor]?.deck.find((c:CardRef)=>c.uid===pending.target),info=ref&&getCard(ref.id);
   if(!op||op.kind!=='recruit'||!info||info.fusion||info.monsterType==='ritual'||!matchesMonsterSelector(info,op.filter)||pending.targetBinding?.zone!=='deck'||JSON.stringify(s.choice.targets)!==JSON.stringify(op.positions.map(p=>p==='atk'?'__recruit_atk__':'__recruit_def__')))fail('posição de recrutamento');
  }
+ for(const player of s.players)if(player.skipDrawPhases!==undefined&&![1,2].includes(player.skipDrawPhases))fail('fases de compra pendentes');
  verifyCoinCall(s);verifyStandby(s);
  assertTokenLedger(s);
  if(s.teamRotation!==undefined){

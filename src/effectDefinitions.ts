@@ -81,6 +81,7 @@ export type Effect=
  |{kind:'destroyFiltered';filter:DestructionFilter}
  |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number;presenceOnly?:true}
  |{kind:'summonCeiling';maximumAtk:number}
+ |{kind:'drawSkip';mode:'opponent'|'reckless'}
  |{kind:'graveWager'}
  |{kind:'statDie';side:'allies'|'enemies'}
  |{kind:'fieldTrap';mode:import('./fieldTraps').FieldTrapMode}
@@ -220,6 +221,7 @@ export function effectDefinitionIssues(value:unknown):string[]{
  if(e?.kind==='destroyFiltered')return Object.keys(e).some(k=>!['kind','filter'].includes(k))?['unsupported-destruction-field']:destructionFilterIssues(e.filter);
  if(e?.kind==='continuous')return [...(e.presenceOnly===undefined?continuousRuleIssues(e.rules):e.presenceOnly===true&&Array.isArray(e.rules)&&!e.rules.length&&e.lpCost!==undefined?[]:['invalid-presence-only-spell']),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
  if(e?.kind==='summonCeiling')return Object.keys(e).length===2&&Number.isSafeInteger(e.maximumAtk)&&e.maximumAtk>=0?[]:['invalid-summon-ceiling'];
+ if(e?.kind==='drawSkip')return Object.keys(e).length===2&&['reckless','opponent'].includes(e.mode)?[]:['invalid-draw-skip'];
  if(e?.kind==='graveWager')return Object.keys(e).length===1?[]:['invalid-grave-wager'];
  if(e?.kind==='statDie')return Object.keys(e).length===2&&['allies','enemies'].includes(e.side)?[]:['invalid-stat-die'];
  if(e?.kind==='fieldTrap')return Object.keys(e).length===2&&['returnHand','reduceAttacker','reduceDefense','handBoost'].includes(e.mode)?[]:['invalid-field-trap'];

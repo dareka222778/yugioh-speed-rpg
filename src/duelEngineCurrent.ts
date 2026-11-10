@@ -1,3 +1,4 @@
+import {consumeDrawSkip,skipDraws} from './drawPhaseSkips';
 import {canActivateGraveWager,openCoinCall,resolveCalledCoin} from './calledCoin';
 import {opposingCoinTargets,resolveCoinTarget,diceSide,resolveStatDie,resolveDiceContest,resolveThreeCoins} from './chanceEffects';
 import {fieldTrapTargets,resolveFieldTrap} from './fieldTraps';
@@ -43,7 +44,7 @@ import {fusionMaterialsMatch} from './fusionMaterials';
 export type CardRef={uid:string;id:string;properlySummoned?:boolean;entityKind?:'token';tokenPolicy?:TokenPolicy};
 export type Monster=CardRef&{position:'atk'|'def';faceUp:boolean;entered:number;lastSummonedTurn?:number;changed:number;attacked:number;attackCount?:number;atkBoost:number;defBoost:number;owner?:number;returnTo?:number;returnTurn?:number;swappedUntil?:number;effectUsedTurn?:number;positionLockedThrough?:number;guardianUsed?:boolean};
 export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean;equippedTo?:string};
-export type DuelPlayer={id:string;name:string;lp:number;deck:CardRef[];hand:CardRef[];monsters:Monster[];backrow:Backrow[];grave:CardRef[];extra?:CardRef[];field?:Backrow|null;banished?:CardRef[];summoned:boolean;battleProtectedUntil?:number;battleDamageGuard?:{turn:number;attacker:string}};
+export type DuelPlayer={skipDrawPhases?:number;id:string;name:string;lp:number;deck:CardRef[];hand:CardRef[];monsters:Monster[];backrow:Backrow[];grave:CardRef[];extra?:CardRef[];field?:Backrow|null;banished?:CardRef[];summoned:boolean;battleProtectedUntil?:number;battleDamageGuard?:{turn:number;attacker:string}};
 export type Action=
  |{kind:'summon';card:string;position:'atk'|'set';tributes:string[]}
  |{kind:'set';card:string}|{kind:'spell';card:string;target?:string;discards?:string[];position?:'atk'|'def'}|{kind:'field'|'setField';card:string}
@@ -162,6 +163,7 @@ function trapActions(s:DuelState,index:number):Action[]{
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='calculation')continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage!=='beforeCalculation')continue;
   if(effect.kind==='summonCeiling'&&(s.pending.kind==='summon'||s.pending.kind==='flip')){const m=findMonster(s,s.pending.card)?.m;if(m?.faceUp&&atk(m,s)<=effect.maximumAtk)out.push({kind:'trap',card:c.uid,target:m.uid});continue;}
+  if(effect.kind==='drawSkip'){if(effect.mode==='opponent'||s.players[index].deck.length>=2)out.push({kind:'trap',card:c.uid,target:''});continue;}
   if(effect.kind==='graveWager'){if(canActivateGraveWager(s,index))out.push({kind:'trap',card:c.uid,target:''});continue;}
   if(effect.kind==='statDie'){if(diceSide(s,index,effect.side).length)out.push({kind:'trap',card:c.uid,target:''});continue;}
   if(effect.kind==='fieldTrap'){out.push(...fieldTrapTargets(s,index,effect.mode).map(m=>({kind:'trap' as const,card:c.uid,target:m.uid})));continue;}
@@ -388,7 +390,7 @@ function completeEndTurn(s:DuelState){
  nextTurn(s);
 }
 function nextTurn(s:DuelState){advanceTeamSeats(s);s.current=1-s.current;s.turn++;s.phase='main';s.players[s.current].summoned=false;
- const p=s.players[s.current];if(drawCards(s,s.current,1,{finish,checkLP}))note(s,`Turno ${s.turn}: ${p.name} comprou uma carta.`);
+ const p=s.players[s.current];if(consumeDrawSkip(s,s.current))note(s,p.name+' pulou a Fase de Compra.');else if(drawCards(s,s.current,1,{finish,checkLP}))note(s,`Turno ${s.turn}: ${p.name} comprou uma carta.`);
  if((s as DuelState).phase!=='finished'&&standbySources(s).length)s.monsterStandby={turn:s.turn,used:[]};
 }
 /** Triggered effects may resolve after their source left the field (battle FLIP).
@@ -511,6 +513,11 @@ function resolve(s:DuelState){
   if(trapsNegated(s)&&card(link.id).kind==='trap'){note(s,'Jinzo negou um efeito de Armadilha.');if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b)b.resolved=true;}else discardBackrow(s,link.card);return;}
   if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b?.faceUp)b.resolved=true;return;}
   if(effect?.kind==='discardRemoval'){resolveDiscardRemoval(s,effect,card(link.id).kind==='spell'?'spell':'trap',link.target,{destroy:graveMonster,back:discardBackrow,clean:cleanEquips});discardBackrow(s,link.card);return;}
+  if(effect?.kind==='drawSkip'){
+   if(effect.mode==='opponent')skipDraws(s,1-link.actor,1);
+   else if(drawCards(s,link.actor,2,{finish,checkLP})||s.handFlow)skipDraws(s,link.actor,2);
+   discardBackrow(s,link.card);return;
+  }
   if(effect?.kind==='graveWager'){s.chainRoot=s.pending;openCoinCall(s,link.actor,link.card,link.id);return;}
   if(effect?.kind==='statDie'){resolveStatDie(s,link.actor,effect.side);discardBackrow(s,link.card);return;}
   if(effect?.kind==='fieldTrap'){resolveFieldTrap(s,link.actor,effect.mode,link.target,link.targetBinding,{destroyMonster:graveMonster,destroyBackrow:discardBackrow,cleanEquips});discardBackrow(s,link.card);return;}
