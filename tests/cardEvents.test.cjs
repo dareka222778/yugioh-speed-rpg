@@ -1,3 +1,4 @@
+const unadmitted=require('../scripts/unadmitted-example.cjs');
 const {test,after}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'card-events-'));process.env.DATABASE_PATH=path.join(tmp,'game.sqlite');
 const database=require('../dist/database'),events=require('../dist/cardEvents');const admin={guild:'g',actor:'admin',admin:true},now=100000;
@@ -15,7 +16,7 @@ test('quota, expiration and closure block new deliveries without revoking old ca
  const expired=make();assert.throws(()=>events.activateCardEvent(admin,expired.id,now+3600000),/expirado/);const active=make();events.activateCardEvent(admin,active.id,now);assert.throws(()=>events.grantEventCards(admin,active.id,'two',now+3600000),/expirou/);
 });
 test('invalid or unsupported card packages and repeated excess quantities are rejected',()=>{
- for(const text of ['', '89631139:0','89631139:4','07089711:2,07089711:2','71625222:1','89631139','abc:1'])assert.throws(()=>events.parseEventCards(text));assert.deepEqual(events.parseEventCards('07089711:1,07089711:2'),[{id:'07089711',quantity:3}]);
+ for(const text of ['', '89631139:0','89631139:4','07089711:2,07089711:2',unadmitted+':1','89631139','abc:1'])assert.throws(()=>events.parseEventCards(text));assert.deepEqual(events.parseEventCards('07089711:1,07089711:2'),[{id:'07089711',quantity:3}]);
 });
 test('a failed inventory write rolls back every card and the receipt; a retry credits only once',()=>{
  const event=make();events.activateCardEvent(admin,event.id,now);const before=database.getCollection('two');database.db.exec("CREATE TRIGGER fail_event BEFORE INSERT ON player_cards WHEN NEW.discord_id='two' AND NEW.card_key='07089711' BEGIN SELECT RAISE(ABORT,'event write failed'); END");assert.throws(()=>events.grantEventCards(admin,event.id,'two',now),/event write failed/);assert.deepEqual(database.getCollection('two'),before);assert.equal(database.db.prepare('SELECT COUNT(*) AS n FROM card_event_receipts WHERE event_id=?').get(event.id).n,0);database.db.exec('DROP TRIGGER fail_event');assert.equal(events.grantEventCards(admin,event.id,'two',now).duplicate,false);assert.equal(events.grantEventCards(admin,event.id,'two',now).duplicate,true);
@@ -31,7 +32,7 @@ test('M27 formerly withheld certified cards can be delivered once through the re
 });
 test('M27 event parser accepts all released identities and still rejects imported-only cards',()=>{
  const {releasedCardIds}=require('../dist/releasedCardIds');for(const id of releasedCardIds)assert.deepEqual(events.parseEventCards(id+':1'),[{id,quantity:1}]);
- const event=make(),before=database.getCollection('two');database.db.prepare('UPDATE card_events SET cards=? WHERE id=?').run(JSON.stringify([{id:'71625222',quantity:1}]),event.id);
+ const event=make(),before=database.getCollection('two');database.db.prepare('UPDATE card_events SET cards=? WHERE id=?').run(JSON.stringify([{id:unadmitted,quantity:1}]),event.id);
  events.activateCardEvent(admin,event.id,now);assert.throws(()=>events.grantEventCards(admin,event.id,'two',now),/habilitada/);assert.deepEqual(database.getCollection('two'),before);
 });
 
