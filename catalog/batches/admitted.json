@@ -124,6 +124,10 @@
     {
       "id": "m55-coin-targets",
       "proofSHA256": "c530a63e70cd72732b16a8be3979577882fd89b29d191e570831645132f0c870"
+    },
+    {
+      "id": "m56-called-coins",
+      "proofSHA256": "9cd69a0d851d775ed9fdfe138355c1c8fa7bb7a284985102ee8d57c2f6815683"
     }
   ]
 }
