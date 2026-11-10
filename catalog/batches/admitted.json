@@ -132,6 +132,10 @@
     {
       "id": "m57-skipped-draws",
       "proofSHA256": "59a740068bad7ca57263ece04b926948e6a4eace377f039c326d9004e51e2590"
+    },
+    {
+      "id": "m58-battle-recovery",
+      "proofSHA256": "e685e687472c96f5162edc2d16eae946f36ce44cbeaa8652dbb2bad744ee53b1"
     }
   ]
 }

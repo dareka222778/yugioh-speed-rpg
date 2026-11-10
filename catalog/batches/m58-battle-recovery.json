@@ -1,0 +1,2680 @@
+{
+  "format": 1,
+  "batchId": "m58-battle-recovery",
+  "engineVersion": "engine-v9",
+  "baseRevision": "7a3ccbf2dcdfc7cbd5e663f36129e70b5b049b97b4aedd50fe9986d9b83019a2",
+  "reviews": [
+    {
+      "id": "88236094",
+      "canonicalId": "a2372de9-eeb3-4ecd-b53b-6cc7cbd9c462",
+      "konamiId": 6026,
+      "reviewer": "Work: Konami text and TCG printing",
+      "reviewedAt": "2026-11-10",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6026&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 500,
+        "defense": 500,
+        "race": "Fiend",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "set": "AST-064",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6026&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "a751b4d681869dd5ef756f4e16bb4fcddd21d178d8e4de2a1f6aa7bac51a4707",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "3459f5b000f9e758c43d0d80739026ce022d2216aea72a78fa157cbe906eb854"
+    },
+    {
+      "id": "51616747",
+      "canonicalId": "1d2df64f-64be-4d31-985a-56e911022129",
+      "konamiId": 6028,
+      "reviewer": "Work: Konami text and TCG printing",
+      "reviewedAt": "2026-11-10",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6028&request_locale=en",
+      "primaryFacts": {
+        "level": 2,
+        "atk": 500,
+        "defense": 500,
+        "race": "Warrior",
+        "attribute": "FIRE"
+      },
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "set": "AST-066",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6028&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "91cbb6d2e91afd96bed7990cefaa66466e67688c774fa316ab55d53c69b5583c",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "721ecfa66386785f6f7feacd5e0da29a8998f84b291b129a45d55069f90f62af"
+    }
+  ],
+  "candidates": [
+    {
+      "card": {
+        "id": "88236094",
+        "konamiId": 6026,
+        "name": "Aparição de Aswan",
+        "englishName": "Aswan Apparition",
+        "kind": "monster",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6026&request_locale=en",
+        "summary": "Ao causar dano de batalha ao oponente, você pode escolher 1 Armadilha no seu Cemitério e colocá-la no topo do Deck.",
+        "level": 3,
+        "atk": 500,
+        "defense": 500,
+        "race": "Fiend",
+        "attribute": "DARK",
+        "monsterType": "effect"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:onBattleDamage",
+        "monster-operation:battleRecovery"
+      ],
+      "family": "m58-battle-recovery",
+      "textEvidence": {
+        "text": "After this monster itself inflicts positive battle damage to its opponent, its controller may target one Trap in their own graveyard. Decide whether to activate; on acceptance choose the target before the chain resolves. On resolution place only that same card on top of its owner’s Deck, without drawing or shuffling. No cost. Damage in defense position can also qualify. Prevented damage or an invalid graveyard cannot trigger it; a lethal hit ends the duel first.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6026&request_locale=en",
+        "sha256": "a751b4d681869dd5ef756f4e16bb4fcddd21d178d8e4de2a1f6aa7bac51a4707"
+      },
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "choice",
+                "source"
+              ],
+              "equals": "triggerOptional"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "two"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                1,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "one"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "theirs"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "optional-accept": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "two"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                1,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "one"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "theirs"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "decline": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__skip__"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "two"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "choose",
+                "target": "wrong"
+              },
+              "expectError": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "choose",
+                "target": "theirs"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "choice",
+                "targets"
+              ],
+              "equals": [
+                "one",
+                "two"
+              ]
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "two"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                1,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "one"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "theirs"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "two"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                1,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "one"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "theirs"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "no-eligible-target": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "choose",
+                "target": "src"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "two"
+            }
+          ]
+        },
+        "no-damage": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "wab",
+                    "id": "12607053",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "wab"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "choose",
+                "target": "src"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "lethal-first": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "88236094",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "12607053"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "12607053"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ],
+                "lp": 1
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "a"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "optional-accept",
+        "decline",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "no-eligible-target",
+        "negation",
+        "no-damage",
+        "lethal-first"
+      ],
+      "monster": {
+        "effect": {
+          "trigger": "onBattleDamage",
+          "operation": {
+            "kind": "battleRecovery",
+            "category": "trap"
+          }
+        },
+        "activation": {
+          "policy": "optional",
+          "window": "battleDamage"
+        }
+      },
+      "fingerprint": "3459f5b000f9e758c43d0d80739026ce022d2216aea72a78fa157cbe906eb854",
+      "suites": [
+        "tests/generated-m58-battle-recovery.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "51616747",
+        "konamiId": 6028,
+        "name": "Guardião Nubian",
+        "englishName": "Nubian Guard",
+        "kind": "monster",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6028&request_locale=en",
+        "summary": "Ao causar dano de batalha ao oponente, você pode escolher 1 Magia Contínua no seu Cemitério e colocá-la no topo do Deck.",
+        "level": 2,
+        "atk": 500,
+        "defense": 500,
+        "race": "Warrior",
+        "attribute": "FIRE",
+        "monsterType": "effect"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:onBattleDamage",
+        "monster-operation:battleRecovery"
+      ],
+      "family": "m58-battle-recovery",
+      "textEvidence": {
+        "text": "After this monster itself inflicts positive battle damage to its opponent, its controller may target one Continuous Spell in their own graveyard. Decide whether to activate; on acceptance choose the target before the chain resolves. On resolution place only that same card on top of its owner’s Deck, without drawing or shuffling. No cost. Damage in defense position can also qualify. Prevented damage or an invalid graveyard cannot trigger it; a lethal hit ends the duel first.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6028&request_locale=en",
+        "sha256": "91cbb6d2e91afd96bed7990cefaa66466e67688c774fa316ab55d53c69b5583c"
+      },
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "choice",
+                "source"
+              ],
+              "equals": "triggerOptional"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "two"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                1,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "one"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "theirs"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "optional-accept": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "two"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                1,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "one"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "theirs"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "decline": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__skip__"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "two"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "choose",
+                "target": "wrong"
+              },
+              "expectError": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "choose",
+                "target": "theirs"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "choice",
+                "targets"
+              ],
+              "equals": [
+                "one",
+                "two"
+              ]
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "two"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                1,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "one"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "theirs"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "two"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                1,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "one"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "theirs"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "no-eligible-target": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "choose",
+                "target": "src"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "two"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "two"
+            }
+          ]
+        },
+        "no-damage": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "wab",
+                    "id": "12607053",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "wab"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "choose",
+                "target": "src"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "lethal-first": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "51616747",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "one",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "two",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "55144522"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "old",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "theirs",
+                    "id": "15259703"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "theirdeck",
+                    "id": "91152256"
+                  }
+                ],
+                "lp": 1
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "a"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                0,
+                "uid"
+              ],
+              "equals": "old"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "optional-accept",
+        "decline",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "no-eligible-target",
+        "negation",
+        "no-damage",
+        "lethal-first"
+      ],
+      "monster": {
+        "effect": {
+          "trigger": "onBattleDamage",
+          "operation": {
+            "kind": "battleRecovery",
+            "category": "continuousSpell"
+          }
+        },
+        "activation": {
+          "policy": "optional",
+          "window": "battleDamage"
+        }
+      },
+      "fingerprint": "721ecfa66386785f6f7feacd5e0da29a8998f84b291b129a45d55069f90f62af",
+      "suites": [
+        "tests/generated-m58-battle-recovery.test.cjs"
+      ]
+    }
+  ]
+}

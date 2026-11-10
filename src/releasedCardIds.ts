@@ -1046,4 +1046,7 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
 // Generated batch m57-skipped-draws: explicit tested release; zero inventory grants.
   "35316708",
   "37576645",
+// Generated batch m58-battle-recovery: explicit tested release; zero inventory grants.
+  "88236094",
+  "51616747",
 ]);
