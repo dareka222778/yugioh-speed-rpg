@@ -1,0 +1,71 @@
+{
+  "id": "work-20261111T103320Z",
+  "branch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBefore": "092c723fcbe26ba83c12c28675ad686c5eb214ac",
+  "workBranch": "feat/work-m60-20261111",
+  "workBase": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+  "startedAt": "2026-11-11T10:33:20-03:00",
+  "state": "active",
+  "staleLeaseRecovery": {
+    "priorRun": "work-20261111T032930Z",
+    "priorBranch": "feat/work-m47-20261109",
+    "priorHead": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+    "lastHeartbeat": "2026-11-11T03:29:30Z",
+    "lastCommitAt": "2026-11-11T04:15:57Z",
+    "method": "new isolated branch from unchanged HEAD; original branch retained"
+  },
+  "verified": {
+    "workCatalog": {
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52",
+      "uniqueCards": 1014,
+      "certificates": 1014
+    },
+    "pr12": {
+      "state": "open",
+      "draft": true,
+      "head": "092c723fcbe26ba83c12c28675ad686c5eb214ac",
+      "engineValidation": "success",
+      "fastFeedback": "success",
+      "admissionPreparation": "success"
+    },
+    "pr13": {
+      "state": "open",
+      "draft": true,
+      "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
+      "mergeable": false,
+      "comparison": {
+        "aheadBy": 4,
+        "behindBy": 18
+      }
+    },
+    "pr14": {
+      "state": "open",
+      "draft": true,
+      "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+      "mergeable": true,
+      "comparison": {
+        "status": "diverged",
+        "aheadBy": 39,
+        "behindBy": 18
+      },
+      "engineValidation": "success",
+      "fastFeedback": "success",
+      "admissionPreparation": "success"
+    },
+    "m53ToM59": "Already present in work catalog; do not duplicate.",
+    "production": "Not verified; hosting unauthenticated. No deploy."
+  },
+  "changes": {
+    "code": 0,
+    "coordination": 1,
+    "branchCreated": "feat/work-m60-20261111"
+  },
+  "tests": {
+    "executedByThisRun": 0,
+    "externalEvidence": "PR #14's three current workflows completed successfully; engine validation includes full suite and extended soak."
+  },
+  "next": "Implement M60 on isolated branch. Initial candidate family: four flip-cycle monsters (Swarm of Scarabs, Swarm of Locusts, Stealth Bird, Des Lacooda), subject to historical identity and full-text verification.",
+  "noMerge": true,
+  "noDeploy": true,
+  "noInventoryOrDatabaseOperations": true
+}
