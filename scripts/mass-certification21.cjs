@@ -12,7 +12,7 @@ const sha256=value=>createHash('sha256').update(value).digest('hex');
 const dimensions=['activation','conditions','costs','targets','choices','operations','duration','restrictions','negation'];
 const effectKinds=['drawSkip','graveWager','statDie','summonCeiling','fieldTrap','discardRemoval','conditionalDestruction','destroyExtreme','ritualMonster','ritualSummon','searchZone','recoverMultiple','moveSelected','positionChange','choiceSequence','normal','fusion','monsterEffect','heal','burn','field','equip','continuous','temporaryModifier','destroyFiltered','destroySpellTraps','sequence','attackResponse','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce'];
 const triggers=['onBattleDamage','ownStandby','quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'];
-const monsterOps=['battleRecovery','timeWager','coinTarget','diceContest','threeCoins','healPerControlledMonster','battleReward','searchCopiesFromHand','targetGroup','identityOnly','fusionSubstitute','singleCard','searchFiltered','mill','positionChange','recruit','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack','continuous','battleBounceAttacker','battleLevelBurn','endBattleDefense','endDamageDefensePiercing','guardianZeroAttack','battleBanishVictim','battleDestroyByIdentity','normalSummonPolicy','doubleTribute','battleBanishBoth','battleTopDeckAttacker'];
+const monsterOps=['battleRecovery','timeWager','coinTarget','diceContest','threeCoins','healPerControlledMonster','battleReward','searchCopiesFromHand','targetGroup','identityOnly','fusionSubstitute','singleCard','searchFiltered','mill','positionChange','recruit','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack','continuous','battleBounceAttacker','battleLevelBurn','endBattleDefense','endDamageDefensePiercing','guardianZeroAttack','battleBanishVictim','battleDestroyByIdentity','normalSummonPolicy','doubleTribute','battleBanishBoth','battleTopDeckAttacker','setSelfFaceDown'];
 const ACTIVE_CAPABILITIES=Object.freeze({engineVersion:'engine-v9',operations:Object.freeze([
  ...effectKinds.map(k=>'effect:'+k),...triggers.map(k=>'trigger:'+k),...monsterOps.map(k=>'monster-operation:'+k),
  ...['lp','discard','tribute'].map(k=>'cost:'+k),...['draw','gainLP','damage','scaledLP'].map(k=>'economic:'+k),
@@ -31,7 +31,7 @@ function inferCapabilities(candidate){
  }
  const count=c=>{if(c)required.add('count:'+c.zone);};
  const rules=rs=>{if(Array.isArray(rs))for(const r of rs){required.add('continuous:'+r.kind);if(r.filter?.faceUpNames)required.add('condition:face-up-named-card');count(r.count);}};
- if(effect.kind==='monsterEffect'&&monster?.effect){const e=monster.effect;required.add('trigger:'+e.trigger);if(e.operation?.kind){required.add('monster-operation:'+e.operation.kind);rules(e.operation.rules);}if(e.cost?.kind)required.add('cost:'+e.cost.kind);if(e.cost?.kind==='lp'&&e.trigger==='flip'&&monster.activation?.policy==='optional')required.add('trigger-cost:lp-optional-flip');}
+ if(effect.kind==='monsterEffect'&&monster?.effect){for(const [slot,e] of [['primary',monster.effect],['ignition',monster.ignitionEffect?.effect]]){if(!e)continue;required.add('trigger:'+e.trigger);if(e.operation?.kind){required.add('monster-operation:'+e.operation.kind);rules(e.operation.rules);}if(e.cost?.kind)required.add('cost:'+e.cost.kind);const activation=slot==='ignition'?monster.ignitionEffect?.activation:monster.activation;if(e.cost?.kind==='lp'&&e.trigger==='flip'&&activation?.policy==='optional')required.add('trigger-cost:lp-optional-flip');}}
  if(effect.kind==='discardRemoval')required.add('cost:discard');
  if(effect.kind==='continuous')rules(effect.rules);
  if(effect.kind==='equip')count(effect.count);
@@ -40,7 +40,7 @@ function inferCapabilities(candidate){
  return [...required].sort();
 }
 function scenarioPlan(candidate){
- const effect=candidate?.effect??{},monster=candidate?.monster?.effect,kind=effect.kind;
+ const effect=candidate?.effect??{},monster=candidate?.monster?.effect,ignition=candidate?.monster?.ignitionEffect?.effect,kind=effect.kind;
  const scenarios=new Map(),add=(name,purpose)=>scenarios.set(name,{name,purpose,status:'execution-required'});
  add('identity','Verify passcode, canonical identity, official facts and eligible regional printing.');
  add('negative','Reject an invalid action without mutating the duel.');
@@ -62,6 +62,7 @@ function scenarioPlan(candidate){
   add('trigger-timing','Check the precise event and distinguish activation from resolution.');
   if(candidate.monster.activation?.policy==='optional')for(const n of ['optional-accept','optional-decline','restore-choice'])add(n,'Preserve the optional decision and execute only the selected continuation.');
  }
+ if(ignition){add('self-set-activation','Activate the separate ignition effect only while the source is face-up and in Main Phase.');add('self-set-once-per-turn','Preserve the once-per-turn marker through self-setting and a subsequent Flip Summon.');add('self-set-negation','Negation prevents the self-set operation while consuming the activated once-per-turn use.');}
  const economic=effect.operations??[];
  if(op.kind==='draw'||economic.some(o=>o.kind==='draw')||kind==='potOfGreed')for(const n of ['deck-out','hand-overflow'])add(n,'Exercise mandatory/optional drawing and persisted hand-limit decisions.');
  if(['heal','burn'].includes(kind)||['heal','burn','burnPerSpellTrap','burnPerHand'].includes(op.kind)||economic.some(o=>['gainLP','damage'].includes(o.kind)))add('lp-victory','Check effect ordering and victory only at the documented semantic boundary.');
@@ -103,10 +104,11 @@ function planMassCertification({history,candidates,reviews=[],executions=[],capa
   const coverage=review?.semanticCoverage;
   if(!coverage||dimensions.some(d=>!['represented','not-applicable'].includes(coverage[d])))issues.push('incomplete-semantic-coverage');
   const requiredDimensions=new Set(['operations']);
-  if(effect?.activation||candidate?.monster?.activation&&candidate.monster.effect?.trigger!=='continuous')requiredDimensions.add('activation');
+  if(effect?.activation||candidate?.monster?.activation&&candidate.monster.effect?.trigger!=='continuous'||candidate?.monster?.ignitionEffect?.activation)requiredDimensions.add('activation');
   if(candidate?.monster?.effect?.cost||effect?.cost||effect?.lpCost)requiredDimensions.add('costs');
   if(candidate?.monster?.effect?.operation?.kind==='targetGroup'||candidate?.monster?.effect?.operation?.kind==='singleCard'||candidate?.monster?.effect?.operation?.target||['equip','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','mysticalSpaceTyphoon','bookOfMoon'].includes(effect?.kind))requiredDimensions.add('targets');
-  if(candidate?.monster?.activation?.policy==='optional')requiredDimensions.add('choices');
+  if(candidate?.monster?.activation?.policy==='optional'||candidate?.monster?.ignitionEffect?.activation?.policy==='optional')requiredDimensions.add('choices');
+ if(candidate?.monster?.ignitionEffect?.effect?.oncePerTurn)requiredDimensions.add('restrictions');
   if(effect?.kind==='ritualSummon')requiredDimensions.add('choices');
   if(effect?.duration||effect?.kind==='temporaryModifier')requiredDimensions.add('duration');
   if(!['normal','ritualMonster'].includes(effect?.kind))requiredDimensions.add('negation');
