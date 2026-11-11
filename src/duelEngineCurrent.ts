@@ -310,7 +310,7 @@ function eligibleTrigger(s:DuelState,event:TriggerEvent):boolean{
  if(e.cost&&(e.cost.kind!=='lp'||s.players[event.actor].lp<=e.cost.amount))return false;
  if(e.oncePerTurn&&s.monsterNameUsed?.[event.actor]?.[event.id]===s.turn)return false;
  if(e.trigger==='onOtherSummon'&&!s.players[event.actor].monsters.some(m=>m.uid===event.card&&m.faceUp))return false;
- const targets=monsterTargets(s,event.actor,e);if(targets&&!targets.length&&!(['singleCard','targetGroup'].includes(e.operation.kind)&&getMonsterDefinition(event.id)?.activation.policy==='mandatory'))return false;
+ const targets=monsterTargets(s,event.actor,e),noTargetAllowed=e.operation.kind==='targetGroup'&&e.operation.rule.minimum===0&&getMonsterDefinition(event.id)?.activation.policy==='mandatory';if(targets!==undefined&&!targets.length&&!noTargetAllowed)return false;
  if(e.operation.kind==='searchFiltered'&&!searchZoneTargets(s,event.actor,e.operation.rule,getCard,getEffect).length)return false;
  if(e.operation.kind==='search'&&!searchDeckTargets(s,event.actor,e.operation.stat,e.operation.maximum).length)return false;
  if((e.operation.kind==='specialSummon'||e.operation.kind==='recruit'&&getMonsterDefinition(event.id)?.activation.policy==='optional')&&(s.players[event.actor].monsters.length>=RULES_PROFILE.monsterZones||!recruitTargets(s,event.actor,e.operation).length))return false;
@@ -407,7 +407,7 @@ function triggerMonsterEffect(s:DuelState,actor:number,uid:string,trigger:'flip'
  if(e.operation.kind==='targetGroup'||e.cost?.kind==='lp'&&getMonsterDefinition(id)?.activation.policy==='optional'){response(s,{kind:'none'},s.resume);beginTriggers(s,[{actor,card:uid,id}]);return true;}
  const p=s.players[actor];
  const targets=monsterTargets(s,actor,e);
- if(targets!==undefined&&!targets.length&&!(['singleCard','targetGroup'].includes(e.operation.kind)&&getMonsterDefinition(id)?.activation.policy==='mandatory'))return false;
+ const noTargetAllowed=e.operation.kind==='targetGroup'&&e.operation.rule.minimum===0&&getMonsterDefinition(id)?.activation.policy==='mandatory';if(targets!==undefined&&!targets.length&&!noTargetAllowed)return false;
  const ctx={lp:p.lp,handSize:p.hand.length,deckSize:p.deck.length,usedThisTurn:m?.effectUsedTurn===s.turn};
  // Mandatory flip draws must be attempted even if the deck is empty.
  const check=e.operation.kind==='draw'&&trigger==='flip'?{...ctx,deckSize:Math.max(p.deck.length,e.operation.count)}:ctx;
