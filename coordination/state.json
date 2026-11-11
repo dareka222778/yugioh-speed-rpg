@@ -5,7 +5,7 @@
   "state": "active",
   "startedAt": "2026-11-11T03:29:30Z",
   "lastActivityAt": "2026-11-11T03:29:30Z",
-  "nextScheduledAt": "2026-11-11T08:30:00-03:00",
+  "nextScheduledAt": "2026-11-11T10:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "handoffRequest": {
@@ -28,7 +28,7 @@
     "status": "blocked-by-active-work",
     "baseBranch": "feat/aux-m53-validation-20261109",
     "baseCommit": "e3aaf58d1ce8ab98fe9522e271c1d59c6182094e",
-    "nextWorkAt": "2026-11-11T08:30:00-03:00",
+    "nextWorkAt": "2026-11-11T10:30:00-03:00",
     "nextTask": "M53 validation only after Work releases"
   },
   "lastRequestCheckpoint": "coordination/runs/work-20261111T053302Z.json"
