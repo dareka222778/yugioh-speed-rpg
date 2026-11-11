@@ -3,7 +3,7 @@ on:
   push:
     branches: [classic-engine-foundation]
   pull_request:
-    branches: [main, classic-engine-foundation, feat/rea-engine-recovery-20261026]
+    branches: [main, classic-engine-foundation, feat/rea-engine-recovery-20261026, feat/work-m61-ci-base-20261111]
 jobs:
   test:
     runs-on: ubuntu-latest
