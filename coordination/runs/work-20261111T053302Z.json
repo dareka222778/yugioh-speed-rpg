@@ -1,0 +1,66 @@
+{
+  "id": "work-20261111T053302Z",
+  "branch": "feat/rea-engine-recovery-20261026",
+  "sharedHead": "1199e6074fa3cc3592c67f60d1fe18443a2053b4",
+  "sharedTree": "8039a200a91b7d54955452c735c0e9b688aee4cf",
+  "workBranch": "feat/work-m47-20261109",
+  "workHead": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+  "startedAt": "2026-11-11T05:33:02-03:00",
+  "endedAt": "2026-11-11T05:38:00-03:00",
+  "state": "waiting-for-cooperative-handoff",
+  "ownerObserved": "Work",
+  "handoffRequest": {
+    "target": "work-20261111T032930Z",
+    "requestedBy": "work-20261111T053302Z",
+    "requestedAt": "2026-11-11T05:33:02-03:00",
+    "status": "pending",
+    "waitForConsistentCheckpoint": true,
+    "reason": "The existing principal Work reservation remains active and still owns feat/work-m47-20261109. Please checkpoint and release before conflicting implementation."
+  },
+  "verified": {
+    "catalog": {
+      "sharedBranchRevision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+      "sharedBranchUniqueCards": 969,
+      "sharedBranchCertificates": 969,
+      "workBranchRevision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52",
+      "workBranchUniqueCards": 1014,
+      "workBranchCertificates": 1014
+    },
+    "pullRequests": {
+      "12": {
+        "state": "open",
+        "draft": true,
+        "head": "1199e6074fa3cc3592c67f60d1fe18443a2053b4",
+        "checks": "four latest workflow runs successful"
+      },
+      "13": {
+        "state": "open",
+        "draft": true,
+        "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
+        "checks": "three workflows action_required; no jobs returned"
+      },
+      "14": {
+        "state": "open",
+        "draft": true,
+        "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+        "checks": "engine validation, card fast feedback, admission preparation successful; engine validation includes test and extended-soak jobs"
+      }
+    },
+    "production": "Not verified; GitHub deployment endpoint not available through current connector and hosting access is not authenticated."
+  },
+  "changes": {
+    "code": 0,
+    "coordination": 1,
+    "detail": "No feature code or card data changed because the active Work reservation has not been released. This run records a fresh cooperative handoff request and verified repository state."
+  },
+  "tests": {
+    "executedByThisRun": 0,
+    "externalEvidence": "Latest PR #14 engine validation and extended-soak jobs succeeded; PR #12 milestone/admission/fast/engine workflows succeeded. PR #13 workflows are action_required with no jobs."
+  },
+  "durationNote": "This run stopped before the requested 60-minute implementation block because the active Work owner did not release the conflicting branch. Waiting time is not counted as development.",
+  "next": "After explicit release, inspect current HEAD again, preserve the existing M47 work, then continue the next eligible card family in a new isolated branch. M53 Aqua Chorus/Eatgaboon remains unimplemented and uncertified.",
+  "noMerge": true,
+  "noDeploy": true,
+  "noInventoryOrDatabaseOperations": true,
+  "nextScheduledAt": "2026-11-11T08:30:00-03:00"
+}
