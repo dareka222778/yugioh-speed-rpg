@@ -29,7 +29,7 @@
     "baseBranch": "feat/aux-m53-validation-20261109",
     "baseCommit": "e3aaf58d1ce8ab98fe9522e271c1d59c6182094e",
     "nextWorkAt": "2026-11-11T10:30:00-03:00",
-    "nextTask": "M53 validation only after Work releases"
+    "nextTask": "After explicit Work release, inspect catalog triage for the next eligible family after M59 (M60); M53–M59 are already implemented and certified in feat/work-m47-20261109, so do not duplicate them."
   },
   "lastRequestCheckpoint": "coordination/runs/work-20261111T053302Z.json"
 }
