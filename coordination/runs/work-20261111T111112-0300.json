@@ -60,7 +60,7 @@
       "number": 14,
       "state": "open",
       "draft": true,
-      "mergeable": true,
+      "mergeable": false,
       "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
       "ci": {
         "engineValidation": "success",
@@ -72,7 +72,7 @@
       "number": 15,
       "state": "open",
       "draft": true,
-      "mergeable": false,
+      "mergeable": true,
       "head": "7139b101b3586c2d592ada7a8696fe6c333167f8",
       "base": "feat/work-m60-20261111",
       "ci": "not triggered: workflow pull_request branch filters exclude feat/work-m60"
