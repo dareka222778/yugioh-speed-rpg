@@ -1,26 +1,27 @@
 {
-  "runId": "work-20261110T023244Z",
+  "runId": "work-20261111T032930Z",
   "owner": "Work",
   "priorityRequestedBy": "Work",
   "state": "active",
-  "startedAt": "2026-11-10T02:32:44Z",
-  "lastActivityAt": "2026-11-10T02:47:33.092Z",
-  "nextScheduledAt": "2026-11-10T04:30:00-03:00",
+  "startedAt": "2026-11-11T03:29:30Z",
+  "lastActivityAt": "2026-11-11T03:29:30Z",
+  "nextScheduledAt": "2026-11-11T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "handoffRequest": null,
   "scope": [
     "feat/work-m47-20261109"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261110T023244Z.json",
-  "previousRunId": "work-20261109T213625Z",
+  "workBranch": "feat/work-m47-20261109",
+  "workHead": "9938f62b5f0dcfa38d8fb2e2a831d18aff28ba54",
+  "lastCheckpoint": "coordination/runs/work-20261111T032930Z.json",
+  "previousRunId": "work-20261110T023244Z",
   "handoff": {
     "to": "auxiliary",
-    "status": "on-principal-interruption-only",
-    "baseBranch": "feat/work-m47-20261109",
-    "baseCommit": "48fbdd7de475fd16a23ce0e5e90212835117a351",
-    "instructions": "Se esta execução principal for encerrada antes de gravar a liberação final, a autorização para branch auxiliar independente entra em vigor após confirmar o encerramento e conferir HEAD/CI. Não editar a branch do Work nem reservas de terceiros.",
-    "nextWorkAt": "2026-11-10T04:30:00-03:00",
-    "nextTask": "M59 control locks: Blindly Loyal Goblin and Mataza; M58 remote promotion pending."
+    "status": "blocked-by-active-work",
+    "baseBranch": "feat/aux-m53-validation-20261109",
+    "baseCommit": "e3aaf58d1ce8ab98fe9522e271c1d59c6182094e",
+    "nextWorkAt": "2026-11-11T03:30:00-03:00",
+    "nextTask": "M53 validation only after Work releases"
   }
 }
