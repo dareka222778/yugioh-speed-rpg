@@ -5,7 +5,7 @@
   "state": "active",
   "startedAt": "2026-11-11T10:33:20-03:00",
   "lastActivityAt": "2026-11-11T10:33:20-03:00",
-  "nextScheduledAt": "2026-11-11T15:30:00-03:00",
+  "nextScheduledAt": "2026-11-11T20:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -39,7 +39,7 @@
     "status": "blocked-by-active-work",
     "baseBranch": "feat/work-m60-20261111",
     "baseCommit": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
-    "nextWorkAt": "2026-11-11T15:30:00-03:00",
+    "nextWorkAt": "2026-11-11T20:30:00-03:00",
     "nextTask": "Continue M60/M61 only after Work releases; do not touch feat/work-m47-20261109 or PR #12/#13/#14."
   },
   "handoffRequests": [
@@ -51,13 +51,24 @@
       "reason": "Scheduled Work run requests cooperative release or a current heartbeat/scope update. No source/catalog edits will be made on the reserved branch.",
       "checkpoint": "coordination/runs/work-20261111T111112-0300.json",
       "pullRequestComment": 6798168786
+    },
+    {
+      "runId": "work-20261111T155631-0300",
+      "requestedAt": "2026-11-11T15:56:31-03:00",
+      "target": "feat/work-m61-handlimit-ci-20261111 / PR #17",
+      "status": "requested-awaiting-safe-checkpoint",
+      "reason": "Recent commit activity and failing CI indicate active work on the hand-limit regression branch. Work principal requests cooperative checkpoint; no conflicting source edits.",
+      "checkpoint": "coordination/runs/work-20261111T155631-0300.json",
+      "pullRequestComment": 6804652211
     }
   ],
   "lastObserver": {
-    "runId": "work-20261111T111112-0300",
-    "observedAt": "2026-11-11T11:11:12-03:00",
-    "sharedHead": "d7b04925eaac5c455e1b43c3d59f42a499436fae",
-    "codeBranchHead": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
-    "status": "waiting-for-safe-handoff"
-  }
+    "runId": "work-20261111T155631-0300",
+    "observedAt": "2026-11-11T15:56:31-03:00",
+    "sharedHead": "930174a5896646188850907d39dae71cb56020a6",
+    "codeBranchHead": "78aa57851420e0f52211f7267faf1af681847ea3",
+    "status": "active-parallel-work-detected; waiting-for-safe-handoff",
+    "pr17Ci": "engine-validation and fast-feedback failed on TypeScript narrowing; exact logs captured in checkpoint"
+  },
+  "latestObserverCheckpoint": "coordination/runs/work-20261111T155631-0300.json"
 }
