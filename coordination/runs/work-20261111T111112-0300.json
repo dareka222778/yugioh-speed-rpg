@@ -4,7 +4,8 @@
   "recordedAt": "2026-11-11T11:11:12-03:00",
   "state": "waiting-for-safe-handoff",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedHead": "d7b04925eaac5c455e1b43c3d59f42a499436fae",
+  "sharedHeadBefore": "d7b04925eaac5c455e1b43c3d59f42a499436fae",
+  "coordinationCommit": "2f8a27b7592145d3dfcc0ba0389c180ef5d8b1d9",
   "activeWork": {
     "runId": "work-20261111T103320Z",
     "branch": "feat/work-m60-20261111",
