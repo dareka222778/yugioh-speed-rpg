@@ -1,0 +1,113 @@
+{
+  "id": "work-20261111T111112-0300",
+  "startedAt": "2026-11-11T11:11:12-03:00",
+  "recordedAt": "2026-11-11T11:11:12-03:00",
+  "state": "waiting-for-safe-handoff",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHead": "d7b04925eaac5c455e1b43c3d59f42a499436fae",
+  "activeWork": {
+    "runId": "work-20261111T103320Z",
+    "branch": "feat/work-m60-20261111",
+    "reservedBase": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+    "observedBranchHead": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
+    "state": "active",
+    "lastActivityAt": "2026-11-11T10:33:20-03:00",
+    "branchDeltaSinceBase": 20,
+    "deltaScope": "coordination-only files observed; no runtime/catalog code changes in compare"
+  },
+  "handoff": {
+    "requestPostedToPR": 14,
+    "commentId": 6798168786,
+    "status": "awaiting-cooperative-checkpoint",
+    "noConflictingBranchWrites": true
+  },
+  "catalog": {
+    "shared": {
+      "uniqueCards": 969,
+      "certificates": 969,
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
+    },
+    "work": {
+      "uniqueCards": 1014,
+      "certificates": 1014,
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
+    }
+  },
+  "prs": [
+    {
+      "number": 12,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "d7b04925eaac5c455e1b43c3d59f42a499436fae",
+      "ci": {
+        "engineValidation": "success",
+        "admissionPreparation": "success",
+        "fastFeedback": "success",
+        "milestone1000": "success"
+      }
+    },
+    {
+      "number": 13,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
+      "ci": "action_required on fast feedback, engine validation and admission preparation"
+    },
+    {
+      "number": 14,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+      "ci": {
+        "engineValidation": "success",
+        "admissionPreparation": "success",
+        "fastFeedback": "success"
+      }
+    },
+    {
+      "number": 15,
+      "state": "open",
+      "draft": true,
+      "mergeable": false,
+      "head": "7139b101b3586c2d592ada7a8696fe6c333167f8",
+      "base": "feat/work-m60-20261111",
+      "ci": "not triggered: workflow pull_request branch filters exclude feat/work-m60"
+    }
+  ],
+  "changes": {
+    "codeRuntime": 0,
+    "tests": 1,
+    "testBranch": "feat/work-tag-hand-limit-20261111",
+    "testCommit": "7139b101b3586c2d592ada7a8696fe6c333167f8",
+    "pullRequest": 15,
+    "summary": "Added 2 classic 2v2 regressions for six-card End Phase enforcement, private inactive-partner hand, seat rotation and UID conservation after JSON restore."
+  },
+  "rulesAudit": {
+    "currentClassic": {
+      "mainDeck": "20-30",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "extraDeckMax": 5,
+      "handLimit": 6,
+      "handCheck": "end"
+    },
+    "legacyCompatibility": "speed-rpg-v2 retains historical hand limit 7 and Extra Deck 6; no migration or rule change made."
+  },
+  "tests": {
+    "executedByThisRun": 0,
+    "regressionCasesAdded": 2,
+    "status": "not executed; PR15 target branch is outside current workflow filters"
+  },
+  "production": {
+    "status": "not verified",
+    "reason": "No Bot-Hosting.net deployment connector or authenticated host session available; no deploy performed."
+  },
+  "effectiveDevelopmentMinutes": 0,
+  "next": "Wait for active Work run work-20261111T103320Z to publish a safe checkpoint/release. Then run the new tag-classic hand-limit regressions and full suite on a CI-eligible integration branch, review M60, and continue the next card family.",
+  "noMerge": true,
+  "noDeploy": true,
+  "noInventoryOrDatabaseOperations": true
+}
