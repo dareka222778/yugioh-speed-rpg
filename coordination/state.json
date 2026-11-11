@@ -1,74 +1,48 @@
 {
-  "runId": "work-20261111T103320Z",
-  "owner": "Work",
-  "priorityRequestedBy": "Work",
-  "state": "active",
-  "startedAt": "2026-11-11T10:33:20-03:00",
-  "lastActivityAt": "2026-11-11T10:33:20-03:00",
-  "nextScheduledAt": "2026-11-11T20:30:00-03:00",
+  "runId": "work-20261111T203000Z",
+  "owner": null,
+  "priorityRequestedBy": null,
+  "state": "released",
+  "startedAt": "2026-11-11T20:30:00-03:00",
+  "lastActivityAt": "2026-11-11T20:49:33-03:00",
+  "nextScheduledAt": "2026-11-12T01:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
-  "scope": [
-    "feat/work-m60-20261111"
-  ],
-  "workBranch": "feat/work-m60-20261111",
-  "workBase": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
-  "workHead": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
-  "observedBranchHead": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
-  "lastCheckpoint": "coordination/runs/work-20261111T103320Z.json",
-  "previousRunId": "work-20261111T032930Z",
+  "scope": [],
+  "lastCheckpoint": "coordination/runs/work-20261111T203000Z.json",
+  "previousRunId": "work-20261111T103320Z",
   "previousReservation": {
-    "runId": "work-20261111T032930Z",
-    "branch": "feat/work-m47-20261109",
+    "branch": "feat/work-m60-20261111",
     "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
-    "lastActivityAt": "2026-11-11T03:29:30Z",
-    "latestCommitAt": "2026-11-11T04:15:57Z",
     "state": "stale-preserved",
-    "reason": "No branch update after b8200 and no heartbeat for more than six hours. Existing branch is preserved and will not be force-updated."
+    "note": "Branch preserved without edits; no conflicting reservation was released."
   },
+  "activeParallelWork": {
+    "pr": 17,
+    "branch": "feat/work-m61-handlimit-ci-20261111",
+    "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+    "state": "handoff-pending",
+    "note": "PR #17 remains open/draft. Work requested a safe checkpoint and release; no response received. Conflicting files were not edited."
+  },
+  "workBranch": "feat/work-m62-format-guards-20261111",
+  "workBase": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+  "workHead": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
+  "pullRequest": 18,
   "handoffRequest": {
-    "requestedBy": "work-20261111T103320Z",
-    "requestedAt": "2026-11-11T10:33:20-03:00",
-    "target": "work-20261111T032930Z",
-    "reason": "New principal Work run recovered the stale lease into a separate branch; the old branch remains preserved and protected. Any late update to the old branch will be reconciled by SHA, never overwritten.",
-    "status": "stale-lease-recovered-isolated",
-    "waitForCheckpoint": false
+    "requestedBy": "work-20261111T203000Z",
+    "requestedAt": "2026-11-11T20:30:00-03:00",
+    "target": "PR #17 / M61",
+    "status": "awaiting-response",
+    "reason": "Request safe checkpoint and cooperative release before touching overlapping duel/monster engine files."
   },
   "handoff": {
     "to": "auxiliary",
-    "status": "blocked-by-active-work",
-    "baseBranch": "feat/work-m60-20261111",
-    "baseCommit": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
-    "nextWorkAt": "2026-11-11T20:30:00-03:00",
-    "nextTask": "Continue M60/M61 only after Work releases; do not touch feat/work-m47-20261109 or PR #12/#13/#14."
-  },
-  "handoffRequests": [
-    {
-      "runId": "work-20261111T111112-0300",
-      "requestedAt": "2026-11-11T11:11:12-03:00",
-      "target": "work-20261111T103320Z",
-      "status": "requested-awaiting-safe-checkpoint",
-      "reason": "Scheduled Work run requests cooperative release or a current heartbeat/scope update. No source/catalog edits will be made on the reserved branch.",
-      "checkpoint": "coordination/runs/work-20261111T111112-0300.json",
-      "pullRequestComment": 6798168786
-    },
-    {
-      "runId": "work-20261111T155631-0300",
-      "requestedAt": "2026-11-11T15:56:31-03:00",
-      "target": "feat/work-m61-handlimit-ci-20261111 / PR #17",
-      "status": "requested-awaiting-safe-checkpoint",
-      "reason": "Recent commit activity and failing CI indicate active work on the hand-limit regression branch. Work principal requests cooperative checkpoint; no conflicting source edits.",
-      "checkpoint": "coordination/runs/work-20261111T155631-0300.json",
-      "pullRequestComment": 6804652211
-    }
-  ],
-  "lastObserver": {
-    "runId": "work-20261111T155631-0300",
-    "observedAt": "2026-11-11T15:56:31-03:00",
-    "sharedHead": "930174a5896646188850907d39dae71cb56020a6",
-    "codeBranchHead": "78aa57851420e0f52211f7267faf1af681847ea3",
-    "status": "active-parallel-work-detected; waiting-for-safe-handoff",
-    "pr17Ci": "engine-validation and fast-feedback failed on TypeScript narrowing; exact logs captured in checkpoint"
-  },
-  "latestObserverCheckpoint": "coordination/runs/work-20261111T155631-0300.json"
+    "status": "available",
+    "at": "2026-11-11T20:49:33-03:00",
+    "baseBranch": "feat/work-m62-format-guards-20261111",
+    "baseCommit": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
+    "scope": "PR #18 and an isolated research branch only. Do not touch M61-reserved runtime files or PR #17, do not edit the stale M60 branch, do not merge or deploy.",
+    "nextTask": "Monitor PR #18 run 43120759595 to completion. Card batch fast feedback, npm test, and extended soak have passed; the test job is at audit:tag-classic (80/89 steps) with no failures. If it fails, modify only tests/classicFormatBoundaries.test.cjs. In parallel, prepare metadata, official evidence, and case specifications for the four M60 flip-cycle cards in a separate branch without touching src/monsterEffects.ts, src/duelEngineCurrent.ts, src/duelIntegrity.ts, src/classicEffects.ts, or scripts/mass-certification21.cjs. Do not queue the batch or open a PR until M61 releases those files.",
+    "nextWorkAt": "2026-11-12T01:30:00-03:00"
+  }
 }
