@@ -1,6 +1,6 @@
 import {discardRemovalActions,payDiscard,resolveDiscardRemoval} from './discardRemoval';
 import {selectedMovementTargets,executeSelectedMovement} from './selectedMovement';
-import {getMonsterEffect} from './monsterEffects';
+import {getMonsterEffect,getMonsterEffectForTrigger} from './monsterEffects';
 import {recoveryTargets,executeRecovery} from './recoveryRules';
 import {canChangeControl} from './continuousEffects';
 import {positionTargets,executePositionChange} from './positionOperations';
@@ -84,8 +84,9 @@ export function cleanEquips(s:DuelState){
  * Ownership, scheduled return of control and proper Fusion status persist. */
 export function turnMonsterFaceDown(m:Monster):void{
  if(m.entityKind==='token')throw new Error('Fichas não podem ficar com a face para baixo.');
+ const preservesSelfSetUse=getMonsterEffectForTrigger(m.id,'ignition')?.operation.kind==='setSelfFaceDown';
  m.faceUp=false;m.position='def';m.atkBoost=0;m.defBoost=0;
- delete m.swappedUntil;delete m.effectUsedTurn;
+ delete m.swappedUntil;if(!preservesSelfSetUse)delete m.effectUsedTurn;
  delete m.guardianUsed;
 }
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{

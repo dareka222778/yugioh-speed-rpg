@@ -76,6 +76,7 @@ export type MonsterOperation=
  |{kind:'normalSummonPolicy';mode:'forbidden'|'lastHandFaceUp'}
  |{kind:'doubleTribute';attribute:string}
  |{kind:'battleBanishBoth';onlyIfDestroyedByBattle?:true}
+ |{kind:'setSelfFaceDown'}
  |{kind:'identityOnly'|'fusionSubstitute'|'negateTraps'|'battleShield'|'directAttack'|'battleBounceAttacker'|'battleLevelBurn'|'endBattleDefense'|'endDamageDefensePiercing'|'guardianZeroAttack'|'battleBanishVictim'|'battleTopDeckAttacker'};
 export type MonsterEffect={standby?:{zone:'grave'|'monsters';position?:'atk'|'def';requireSourceAtResolution:boolean};trigger:MonsterTrigger;summons?:readonly ('normal'|'flip'|'special')[];oncePerTurn?:boolean;cost?:MonsterCost;operation:MonsterOperation};
 export type MonsterEffectContext={lp:number;handSize:number;deckSize:number;usedThisTurn:boolean;fieldMonsterCount?:number};
@@ -98,7 +99,8 @@ export function monsterEffectOperation(effect:MonsterEffect):MonsterOperation{re
 
 /** Official card texts: Konami card database (CIDs 4507, 4547, 4434, 4108, 4546, 4518). */
 export type MonsterActivation={policy:'mandatory'|'optional'|'manual'|'continuous';window:'battleDamage'|'standby'|'main'|'flip'|'summon'|'grave'|'battleDestroyed'|'opposingDamageCalculation'|'continuous'};
-export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation};
+export type MonsterEffectSlot='primary'|'ignition';
+export type MonsterDefinition={effect:MonsterEffect;activation:MonsterActivation;ignitionEffect?:{effect:MonsterEffect;activation:MonsterActivation}};
 const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({
  ...m59_control_lockMonsters,
  ...m58_battle_recoveryMonsters,
@@ -153,7 +155,18 @@ const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freez
  '83011277':{effect:{trigger:'onBattleDestroyed',operation:{kind:'specialSummon',attribute:'DARK',maximumAtk:1500}},activation:{policy:'optional',window:'battleDestroyed'}} // Mystic Tomato
 });
 export function getMonsterDefinition(cardId:string):MonsterDefinition|undefined{return currentCatalog()?currentCatalog()!.data.monsters[cardId]:monsterDefinitions[cardId];}
-export function getMonsterEffect(cardId:string):MonsterEffect|undefined{return getMonsterDefinition(cardId)?.effect;}
+export function getMonsterEffect(cardId:string,slot:MonsterEffectSlot='primary'):MonsterEffect|undefined{
+ const d=getMonsterDefinition(cardId);
+ return slot==='ignition'?d?.ignitionEffect?.effect??(d?.effect.trigger==='ignition'?d.effect:undefined):d?.effect;
+}
+export function getMonsterEffectForTrigger(cardId:string,trigger:MonsterTrigger):MonsterEffect|undefined{
+ const d=getMonsterDefinition(cardId);
+ return d?.effect.trigger===trigger?d.effect:d?.ignitionEffect?.effect.trigger===trigger?d.ignitionEffect.effect:undefined;
+}
+export function getMonsterEffectSlot(cardId:string,trigger:MonsterTrigger):MonsterEffectSlot|undefined{
+ const d=getMonsterDefinition(cardId);
+ return d?.effect.trigger===trigger?'primary':d?.ignitionEffect?.effect.trigger===trigger?'ignition':undefined;
+}
 
 /** Validate a selected monster instance against the offered legal target UIDs. */
 export function monsterDestructionTarget(effect:MonsterEffect,eligibleMonsterUids:readonly string[],targetUid:string):string{
@@ -166,13 +179,14 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  const {effect:e,activation:a}=value;
  if(!['mandatory','optional','manual','continuous'].includes(a.policy)||!['battleDamage','standby','main','flip','summon','grave','battleDestroyed','opposingDamageCalculation','continuous'].includes(a.window))return ['invalid-monster-activation'];
  if(!['onBattleDamage','ownStandby','quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'].includes(e.trigger))return ['unsupported-monster-trigger'];
- if(!e.operation||!['battleRecovery','timeWager','coinTarget','diceContest','threeCoins','battleReward','searchCopiesFromHand','targetGroup','identityOnly','fusionSubstitute','singleCard','positionChange','searchFiltered','mill','heal','burn','burnPerSpellTrap','burnPerHand','healPerControlledMonster','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous','battleBounceAttacker','battleLevelBurn','endBattleDefense','endDamageDefensePiercing','guardianZeroAttack','battleBanishVictim','battleDestroyByIdentity','normalSummonPolicy','doubleTribute','battleBanishBoth','battleTopDeckAttacker'].includes(e.operation.kind))return ['unsupported-monster-operation'];
+ if(!e.operation||!['battleRecovery','timeWager','coinTarget','diceContest','threeCoins','battleReward','searchCopiesFromHand','targetGroup','identityOnly','fusionSubstitute','singleCard','positionChange','searchFiltered','mill','heal','burn','burnPerSpellTrap','burnPerHand','healPerControlledMonster','destroyByLevel','draw','destroy','bounce','recover','search','recruit','specialSummon','negateTraps','battleShield','directAttack','continuous','battleBounceAttacker','battleLevelBurn','endBattleDefense','endDamageDefensePiercing','guardianZeroAttack','battleBanishVictim','battleDestroyByIdentity','normalSummonPolicy','doubleTribute','battleBanishBoth','battleTopDeckAttacker','setSelfFaceDown'].includes(e.operation.kind))return ['unsupported-monster-operation'];
  if((e.trigger==='quick'||e.trigger==='ignition')&&a.policy!=='manual'||e.trigger==='continuous'&&a.policy!=='continuous')return ['inconsistent-monster-policy'];
  if(!['quick','ignition','continuous'].includes(e.trigger)&&!['mandatory','optional'].includes(a.policy))return ['inconsistent-monster-policy'];
  const windows:Partial<Record<MonsterTrigger,MonsterActivation['window']>>={onBattleDamage:'battleDamage',ownStandby:'standby',quick:'opposingDamageCalculation',ignition:'main',flip:'flip',onSummon:'summon',onOtherSummon:'summon',onSentToGrave:'grave',onBattleDestroyed:'battleDestroyed',continuous:'continuous'};
  if(windows[e.trigger]!==a.window)return ['inconsistent-monster-window'];
  const op=e.operation;
  if(op.kind==='coinTarget'&&(e.trigger!=='ignition'||!e.oncePerTurn||e.cost||Object.keys(op).length!==2||!['monster','fieldCard'].includes(op.zone)))return ['invalid-coin-target'];
+ if(op.kind==='setSelfFaceDown'&&(e.trigger!=='ignition'||!e.oncePerTurn||e.cost||Object.keys(op).length!==1))return ['invalid-self-set-operation'];
  if(op.kind==='diceContest'&&(e.trigger!=='flip'||a.policy!=='mandatory'||e.cost||e.oncePerTurn)||(op.kind==='threeCoins'||op.kind==='timeWager')&&(e.trigger!=='ignition'||!e.oncePerTurn||e.cost))return ['invalid-chance-trigger'];
  if(op.kind==='battleRecovery'){
   if(e.trigger!=='onBattleDamage'||a.policy!=='optional'||e.cost||e.oncePerTurn||Object.keys(op).length!==2||!['trap','continuousSpell'].includes(op.category))return ['invalid-battle-recovery'];
@@ -191,7 +205,7 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  if(op.kind==='battleDestroyByIdentity'&&(!Array.isArray(op.races)&&!Array.isArray(op.attributes)||Object.keys(op).some(k=>!['kind','races','attributes','attackingOnly'].includes(k))||op.attackingOnly!==undefined&&op.attackingOnly!==true||[...op.races??[],...op.attributes??[]].some(x=>typeof x!=='string'||!x)||!((op.races?.length??0)+(op.attributes?.length??0))))return ['invalid-battle-identity'];
  if(op.kind==='targetGroup'&&(e.trigger!=='flip'||e.cost!==undefined||e.oncePerTurn!==undefined||Object.keys(op).some(k=>!['kind','rule'].includes(k))||targetGroupRuleIssues(op.rule).length))return ['invalid-monster-target-group'];
  if(op.kind==='singleCard'&&(e.cost!==undefined||!['flip','onSummon','onBattleDestroyed'].includes(e.trigger)||Object.keys(op).some(k=>!['kind','rule'].includes(k))||singleCardRuleIssues(op.rule).length))return ['invalid-single-card-operation'];
- if(e.summons!==undefined&&(e.trigger!=='onSummon'||!Array.isArray(e.summons)||!e.summons.length||new Set(e.summons).size!==e.summons.length||e.summons.some(t=>!['normal','flip','special'].includes(t))))return ['invalid-summon-event-filter'];
+ if(e.summons!==undefined&&(!['onSummon','flip'].includes(e.trigger)||!Array.isArray(e.summons)||!e.summons.length||new Set(e.summons).size!==e.summons.length||e.summons.some(t=>!['normal','flip','special'].includes(t))||e.trigger==='flip'&&(e.summons.length!==1||e.summons[0]!=='flip')))return ['invalid-summon-event-filter'];
  if(op.kind==='positionChange')return e.cost!==undefined||!['flip','onSummon'].includes(e.trigger)||Object.keys(op).some(k=>!['kind','rule'].includes(k))||op.rule?.scope!=='selected'||positionRuleIssues(op.rule).length?['invalid-monster-position']:[];
  if(op.kind==='searchFiltered')return e.cost!==undefined||!['flip','onSummon'].includes(e.trigger)||Object.keys(op).some(k=>!['kind','rule'].includes(k))||op.rule?.from!=='deck'||searchZoneIssues(op.rule).length?['invalid-filtered-monster-search']:[];
  if(op.kind==='mill')return e.cost!==undefined||e.trigger!=='flip'||Object.keys(op).some(k=>!['kind','count','player'].includes(k))||!Number.isSafeInteger(op.count)||op.count<1||op.count>30||!['opponent','self'].includes(op.player)?['invalid-monster-mill']:[];
@@ -208,5 +222,12 @@ export function monsterDefinitionIssues(value:MonsterDefinition|undefined):strin
  if((a.policy==='mandatory'||a.policy==='optional')&&e.cost&&!(a.policy==='optional'&&e.trigger==='flip'&&e.cost.kind==='lp'&&['burn','heal'].includes(op.kind)))return ['unsupported-trigger-cost'];
  if((op.kind==='heal'||op.kind==='burn'||op.kind==='burnPerSpellTrap'||op.kind==='burnPerHand')&&(!Number.isSafeInteger(op.amount)||op.amount<=0)||op.kind==='draw'&&(!Number.isSafeInteger(op.count)||op.count<=0))return ['invalid-monster-amount'];
  if(e.cost&&(e.cost.kind==='lp'?(!Number.isSafeInteger(e.cost.amount)||e.cost.amount<=0):!['tribute','discard'].includes(e.cost.kind)||!Number.isSafeInteger(e.cost.count)||e.cost.count<1))return ['invalid-monster-cost'];
+ if(value.ignitionEffect){
+  const extra=value.ignitionEffect;
+  if(!extra.effect||!extra.activation||Object.keys(extra).some(k=>!['effect','activation'].includes(k)))return ['invalid-secondary-ignition'];
+  const issues=monsterDefinitionIssues({effect:extra.effect,activation:extra.activation});
+  if(issues.length)return ['invalid-secondary-ignition:'+issues.join(',')];
+  if(e.trigger!=='flip'||a.policy!=='mandatory'||a.window!=='flip'||!Array.isArray(e.summons)||e.summons.length!==1||e.summons[0]!=='flip'||extra.effect.trigger!=='ignition'||extra.effect.operation.kind!=='setSelfFaceDown'||extra.effect.oncePerTurn!==true||extra.effect.cost!==undefined||extra.activation.policy!=='manual'||extra.activation.window!=='main')return ['invalid-repeatable-flip-definition'];
+ }
  return [];
 }
