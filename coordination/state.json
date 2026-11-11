@@ -1,35 +1,44 @@
 {
-  "runId": "work-20261111T032930Z",
+  "runId": "work-20261111T103320Z",
   "owner": "Work",
-  "priorityRequestedBy": "work-20261111T053302Z",
+  "priorityRequestedBy": "Work",
   "state": "active",
-  "startedAt": "2026-11-11T03:29:30Z",
-  "lastActivityAt": "2026-11-11T03:29:30Z",
-  "nextScheduledAt": "2026-11-11T10:30:00-03:00",
+  "startedAt": "2026-11-11T10:33:20-03:00",
+  "lastActivityAt": "2026-11-11T10:33:20-03:00",
+  "nextScheduledAt": "2026-11-11T15:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
-  "handoffRequest": {
-    "requestedBy": "work-20261111T053302Z",
-    "requestedAt": "2026-11-11T05:33:02-03:00",
-    "target": "work-20261111T032930Z",
-    "reason": "A new principal Work session is waiting for the current owner to produce a consistent checkpoint and release feat/work-m47-20261109.",
-    "status": "pending",
-    "waitForCheckpoint": true
-  },
   "scope": [
-    "feat/work-m47-20261109"
+    "feat/work-m60-20261111"
   ],
-  "workBranch": "feat/work-m47-20261109",
+  "workBranch": "feat/work-m60-20261111",
+  "workBase": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
   "workHead": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
-  "lastCheckpoint": "coordination/runs/work-20261111T032930Z.json",
-  "previousRunId": "work-20261110T023244Z",
+  "lastCheckpoint": "coordination/runs/work-20261111T103320Z.json",
+  "previousRunId": "work-20261111T032930Z",
+  "previousReservation": {
+    "runId": "work-20261111T032930Z",
+    "branch": "feat/work-m47-20261109",
+    "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+    "lastActivityAt": "2026-11-11T03:29:30Z",
+    "latestCommitAt": "2026-11-11T04:15:57Z",
+    "state": "stale-preserved",
+    "reason": "No branch update after b8200 and no heartbeat for more than six hours. Existing branch is preserved and will not be force-updated."
+  },
+  "handoffRequest": {
+    "requestedBy": "work-20261111T103320Z",
+    "requestedAt": "2026-11-11T10:33:20-03:00",
+    "target": "work-20261111T032930Z",
+    "reason": "New principal Work run recovered the stale lease into a separate branch; the old branch remains preserved and protected. Any late update to the old branch will be reconciled by SHA, never overwritten.",
+    "status": "stale-lease-recovered-isolated",
+    "waitForCheckpoint": false
+  },
   "handoff": {
     "to": "auxiliary",
     "status": "blocked-by-active-work",
-    "baseBranch": "feat/aux-m53-validation-20261109",
-    "baseCommit": "e3aaf58d1ce8ab98fe9522e271c1d59c6182094e",
-    "nextWorkAt": "2026-11-11T10:30:00-03:00",
-    "nextTask": "After explicit Work release, reconcile the diverged PR #14 (39 commits ahead / 17 behind) and PR #13 (4 ahead / 17 behind) without force-pushing; inspect M60 candidates after confirming the full Work branch. M53–M59 are already certified in the Work branch."
-  },
-  "lastRequestCheckpoint": "coordination/runs/work-20261111T053302Z.json"
+    "baseBranch": "feat/work-m60-20261111",
+    "baseCommit": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+    "nextWorkAt": "2026-11-11T15:30:00-03:00",
+    "nextTask": "Continue M60/M61 only after Work releases; do not touch feat/work-m47-20261109 or PR #12/#13/#14."
+  }
 }
