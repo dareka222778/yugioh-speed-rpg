@@ -1,7 +1,7 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto');
 const {baselineBytes}=require('../scripts/mission16-baseline-normalizer.cjs');
 const proof=require('../docs/evidence/mission16-preserved-baseline.json');
-const gitBlobSha=b=>crypto.createHash('sha1').update('blob '+b.length+'\\0').update(b).digest('hex');
+const gitBlobSha=b=>crypto.createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
 test('M16 normalizer reconstructs the pre-M16 duelStore bytes without erasing M15 AI logic',()=>{
  const source=fs.readFileSync('src/duelStore.ts'),expected=proof.files.find(f=>f.path==='src/duelStore.ts');
  const normalized=baselineBytes('src/duelStore.ts',source),text=normalized.toString('utf8');
@@ -17,6 +17,6 @@ test('M16 normalizer keeps Mission 15 catalog registrations in its historical ba
 });
 test('M16 normalizer leaves unrelated duelStore changes visible',()=>{
  const source=fs.readFileSync('src/duelStore.ts'),expected=proof.files.find(f=>f.path==='src/duelStore.ts');
- const changed=Buffer.concat([Buffer.from('// unrelated unreviewed change\\n'),source]);
+ const changed=Buffer.concat([Buffer.from('// unrelated unreviewed change\n'),source]);
  assert.notEqual(gitBlobSha(baselineBytes('src/duelStore.ts',changed)),expected.sha);
 });
