@@ -23,7 +23,7 @@ import {assertDuelRandom} from './duelRandom';
 import {CARD_DEFINITIONS_VERSION,RULES_PROFILE,rulesFor,supportedRulesVersion} from './rulesProfile';
 import {matchesMonsterSelector} from './cardSelectors';
 import {assertRitualFlow} from './ritualSummon';
-import {getMonsterEffect,getMonsterDefinition} from './monsterEffects';
+import {getMonsterEffect,getMonsterEffectForTrigger,getMonsterDefinition} from './monsterEffects';
 import type {CardRef,DuelState} from './duelEngine';
 const phases=new Set(['main','battle','response','choice','discard','finished']);
 const pendingKinds=new Set(['coinCall','standbyMonster','standby','none','end','battle','summon','flip','specialSummon','field','fusion','spell','attack','monsterEffect']);
@@ -55,12 +55,13 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(!Array.isArray(s.players)||s.players.length!==2||!actor(s.current)||!actor(s.priority))fail('participantes ou prioridade');
  if(!integer(s.turn,1)||!phases.has(s.phase)||!['main','battle'].includes(s.resume)||!integer(s.passes)||s.passes>2)fail('turno ou fase');
  if(!object(s.pending)||!pendingKinds.has(s.pending.kind)||!Array.isArray(s.chain)||!Array.isArray(s.log)||s.log.some((x:unknown)=>typeof x!=='string'))fail('resolução pendente');
+ if(s.pending.kind==='monsterEffect'&&s.pending.effectSlot!==undefined&&(s.pending.effectSlot!=='ignition'||getMonsterEffectForTrigger(s.pending.id,'ignition')?.operation.kind!=='setSelfFaceDown'))fail('slot de efeito de monstro');
  for(const link of s.chain)if(!object(link)||!actor(link.actor)||typeof link.card!=='string'||typeof link.target!=='string'||!getCard(link.id)||link.negated!==undefined&&typeof link.negated!=='boolean'||link.monsterEffect!==undefined&&(typeof link.monsterEffect!=='boolean'||link.monsterEffect&&!['onBattleDamage','quick','flip','onSummon','onOtherSummon','onSentToGrave','onBattleDestroyed'].includes(getMonsterEffect(link.id)?.trigger??'')))fail('elo de corrente');
  if(!['none','end','battle'].includes(s.pending.kind)&&(!actor(s.pending.actor)||typeof s.pending.card!=='string'))fail('origem do efeito');
  if(s.pending.kind==='attack'&&(['cancelled','endBattle'].some(key=>s.pending[key]!==undefined&&typeof s.pending[key]!=='boolean')))fail('negação de ataque');
  if(s.pending.kind==='attack'&&!['declare','damage','calculation'].includes(s.pending.stage))fail('etapa de dano');
  if(s.afterEffectFlips!==undefined&&(!object(s.afterEffectFlips)||s.afterEffectFlips.kind!=='attack'||!actor(s.afterEffectFlips.actor)||typeof s.afterEffectFlips.card!=='string'||!['declare','damage','calculation'].includes(s.afterEffectFlips.stage)))fail('retomada ap?s FLIP');
- if(s.effectFlips!==undefined&&(!Array.isArray(s.effectFlips)||s.effectFlips.some((e:any)=>!object(e)||!actor(e.actor)||typeof e.card!=='string'||getMonsterEffect(e.id)?.trigger!=='flip'||!object(e.binding)||e.binding.uid!==e.card||e.binding.zone!=='monsters'||!integer(e.binding.epoch))))fail('fila FLIP');
+ if(s.effectFlips!==undefined&&(!Array.isArray(s.effectFlips)||s.effectFlips.some((e:any)=>!object(e)||!actor(e.actor)||typeof e.card!=='string'||getMonsterEffect(e.id)?.trigger!=='flip'||getMonsterEffect(e.id)?.summons?.includes('flip')||!object(e.binding)||e.binding.uid!==e.card||e.binding.zone!=='monsters'||!integer(e.binding.epoch))))fail('fila FLIP');
  for(const operation of [s.pending,...s.chain])if(operation.targets!==undefined||operation.targetBindings!==undefined){
   const group=getMonsterEffect(operation.id)?.operation;if(group?.kind==='targetGroup'&&(operation.monsterEffect===true||operation.kind==='monsterEffect')){const targets=operation.targets,bindings=operation.targetBindings;if(!Array.isArray(targets)||!Array.isArray(bindings)||targets.length!==bindings.length||new Set(targets).size!==targets.length||targets.length>group.rule.maximum||targets.length>0&&targets.length<group.rule.minimum||targets.length===0&&getMonsterDefinition(operation.id)?.activation.policy!=='mandatory'||bindings.some((b:any,i:number)=>!object(b)||b.uid!==targets[i]||!(group.rule.from==='monsters'?b.zone==='monsters':['backrow','field'].includes(b.zone))||!integer(b.epoch)))fail('grupo de alvos');continue;}
   const effect=getEffect(operation.id);if(!['spell',undefined].includes(operation.kind)||!(effect?.kind==='recoverMultiple'||effect?.kind==='moveSelected')||!Array.isArray(operation.targets)||!Array.isArray(operation.targetBindings)||operation.targets.length!==operation.targetBindings.length||new Set(operation.targets).size!==operation.targets.length||operation.targets.length>(effect.kind==='moveSelected'?effect.rule.maximum:effect.rule.count)||operation.targetBindings.some((b:any,i:number)=>!object(b)||b.uid!==operation.targets[i]||b.zone!==(effect.kind==='moveSelected'?effect.rule.from:'grave')||!integer(b.epoch)))fail('alvos múltiplos');
@@ -121,7 +122,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
   if(s.phase!=='choice'||p.kind!=='monsterEffect'||p.actor!==a||getMonsterEffect(p.id)?.operation.kind!=='searchCopiesFromHand'||!actor(a)||!s.choice.targets.length||JSON.stringify(s.choice.targets)!==JSON.stringify(copySearchOptions(s.players[a].deck,p.id)))fail('quantidade de cópias da busca');
  }
  if(s.choice?.source==='monsterRecruitPosition'){
-  const pending=s.pending,op=pending.kind==='monsterEffect'?getMonsterEffect(pending.id)?.operation:undefined;
+  const pending=s.pending,op=pending.kind==='monsterEffect'?getMonsterEffect(pending.id,pending.effectSlot)?.operation:undefined;
   const ref=s.players[s.choice.actor]?.deck.find((c:CardRef)=>c.uid===pending.target),info=ref&&getCard(ref.id);
   if(!op||op.kind!=='recruit'||!info||info.fusion||info.monsterType==='ritual'||!matchesMonsterSelector(info,op.filter)||pending.targetBinding?.zone!=='deck'||JSON.stringify(s.choice.targets)!==JSON.stringify(op.positions.map(p=>p==='atk'?'__recruit_atk__':'__recruit_def__')))fail('posição de recrutamento');
  }
