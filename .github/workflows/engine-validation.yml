@@ -1,7 +1,7 @@
 name: Engine validation
 on:
   push:
-    branches: [classic-engine-foundation]
+    branches: [classic-engine-foundation, feat/work-m61-handlimit-regressions-20261111]
   pull_request:
     branches: [main, classic-engine-foundation, feat/rea-engine-recovery-20261026]
 jobs:
