@@ -8,12 +8,19 @@
   "nextScheduledAt": "2026-11-11T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
-  "handoffRequest": null,
+  "handoffRequest": {
+    "requestedBy": "Work principal automation work-20261111T043605Z",
+    "requestedAt": "2026-11-11T04:36:05Z",
+    "target": "work-20261111T043605Z",
+    "reason": "Overlapping scheduled principal session. Please finish the current safe block, record a consistent checkpoint, and release reservations cooperatively.",
+    "status": "pending",
+    "waitForCheckpoint": true
+  },
   "scope": [
     "feat/work-m47-20261109"
   ],
   "workBranch": "feat/work-m47-20261109",
-  "workHead": "9938f62b5f0dcfa38d8fb2e2a831d18aff28ba54",
+  "workHead": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
   "lastCheckpoint": "coordination/runs/work-20261111T032930Z.json",
   "previousRunId": "work-20261110T023244Z",
   "handoff": {
