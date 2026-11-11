@@ -5,7 +5,7 @@
   "state": "waiting-for-safe-handoff",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadBefore": "d7b04925eaac5c455e1b43c3d59f42a499436fae",
-  "coordinationCommit": "2f8a27b7592145d3dfcc0ba0389c180ef5d8b1d9",
+  "latestCoordinationHeadObserved": "e39de426afc516bfc4d722ceb8a5e75079848168",
   "activeWork": {
     "runId": "work-20261111T103320Z",
     "branch": "feat/work-m60-20261111",
@@ -40,11 +40,11 @@
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "head": "d7b04925eaac5c455e1b43c3d59f42a499436fae",
+      "head": "e39de426afc516bfc4d722ceb8a5e75079848168",
       "ci": {
-        "engineValidation": "success",
+        "engineValidation": "in_progress",
+        "fastFeedback": "in_progress",
         "admissionPreparation": "success",
-        "fastFeedback": "success",
         "milestone1000": "success"
       }
     },
@@ -79,7 +79,7 @@
     }
   ],
   "changes": {
-    "codeRuntime": 0,
+    "runtime": 0,
     "tests": 1,
     "testBranch": "feat/work-tag-hand-limit-20261111",
     "testCommit": "7139b101b3586c2d592ada7a8696fe6c333167f8",
@@ -106,7 +106,9 @@
     "status": "not verified",
     "reason": "No Bot-Hosting.net deployment connector or authenticated host session available; no deploy performed."
   },
-  "effectiveDevelopmentMinutes": 0,
+  "effectiveDevelopmentMinutes": null,
+  "minimum60MinutesMet": false,
+  "durationNote": "Elapsed coding minutes were not measured precisely. This run added one isolated test file but did not complete a 60-minute implementation block; it stopped short of the reserved branch while awaiting a cooperative checkpoint.",
   "next": "Wait for active Work run work-20261111T103320Z to publish a safe checkpoint/release. Then run the new tag-classic hand-limit regressions and full suite on a CI-eligible integration branch, review M60, and continue the next card family.",
   "noMerge": true,
   "noDeploy": true,
