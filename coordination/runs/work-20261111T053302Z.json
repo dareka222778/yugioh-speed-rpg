@@ -31,20 +31,35 @@
         "state": "open",
         "draft": true,
         "head": "1199e6074fa3cc3592c67f60d1fe18443a2053b4",
-        "checks": "four latest workflow runs successful"
+        "checks": "four latest workflow runs successful",
+        "mergeable": true
       },
       "13": {
         "state": "open",
         "draft": true,
         "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
-        "checks": "three workflows action_required; no jobs returned"
+        "checks": "three workflows action_required; no jobs returned",
+        "mergeable": false,
+        "comparison": {
+          "status": "diverged",
+          "aheadBy": 4,
+          "behindBy": 17
+        }
       },
       "14": {
         "state": "open",
         "draft": true,
         "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
-        "checks": "engine validation, card fast feedback, admission preparation successful; engine validation includes test and extended-soak jobs"
-      }
+        "checks": "engine validation, card fast feedback, admission preparation successful; engine validation includes test and extended-soak jobs",
+        "mergeable": false,
+        "comparison": {
+          "status": "diverged",
+          "aheadBy": 39,
+          "behindBy": 17,
+          "mergeBase": "5ab16e05fbd66da6ddf459cfae2f7ccd5f99279910"
+        }
+      },
+      "note": "GitHub reports PR #13 and #14 as non-mergeable; compare confirms both branches diverged from the updated base. Do not merge until conflicts/reconciliation are reviewed."
     },
     "production": "Not verified; GitHub deployment endpoint not available through current connector and hosting access is not authenticated.",
     "m53ToM59": {
