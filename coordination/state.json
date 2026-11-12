@@ -1,21 +1,19 @@
 {
-  "runId": "work-20261112T062618-0300",
-  "owner": null,
-  "priorityRequestedBy": "user",
-  "state": "released",
-  "startedAt": "2026-11-12T06:26:18-03:00",
-  "lastActivityAt": "2026-11-12T06:31:00-03:00",
-  "nextScheduledAt": "2026-11-12T11:30:00-03:00",
+  "runId": "work-20261112T113442-0300",
+  "owner": "Work",
+  "priorityRequestedBy": "Work",
+  "state": "active",
+  "startedAt": "2026-11-12T11:34:42-03:00",
+  "lastActivityAt": "2026-11-12T11:34:42-03:00",
+  "nextScheduledAt": "2026-11-12T16:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "scripts/plan-normal-expansion-v9.cjs",
-    "tests/normalExpansionV9Planner.test.cjs",
-    "docs/evidence/m60-flip-cycle-research.json",
+    "feat/work-m63-m60-research-20261112",
     "tests/m60FlipCycleResearch.test.cjs",
     "coordination"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261112T062618-0300.json",
+  "lastCheckpoint": "coordination/runs/work-20261112T113442-0300.json",
   "previousRunId": "work-20261112T025617-0300",
   "previousReservation": {
     "branch": "feat/work-m60-20261111",
@@ -242,5 +240,15 @@
     "minimum60MinutesConfirmed": false,
     "note": "Bloco interrompido pelo limite da janela; não contabilizar espera de CI como trabalho."
   },
-  "nextTask": "Após o handoff M61, corrigir TS2367/TS2339 com CI completa, implementar e testar setSelfFaceDown e marcador once-per-turn persistente; então transformar M60 em lote comportamental, sem admitir Guardian Sphinx até existir operação correta de retorno em massa."
+  "nextTask": "Após o handoff M61, corrigir TS2367/TS2339 com CI completa, implementar e testar setSelfFaceDown e marcador once-per-turn persistente; então transformar M60 em lote comportamental, sem admitir Guardian Sphinx até existir operação correta de retorno em massa.",
+  "activeExecution": {
+    "id": "work-20261112T113442-0300",
+    "branch": "feat/work-m63-m60-research-20261112",
+    "baseHead": "cbb8be6b01d5d26586c4dc268fa315cc0e06e607",
+    "sharedHeadAtClaim": "5115da0ca3a1a8230028f6dda87e487863df0169",
+    "scope": [
+      "tests/m60FlipCycleResearch.test.cjs"
+    ],
+    "note": "Corrigir somente o teste de evidência M60 que compara um resumo de impressão normalizado com o objeto completo do candidato. M61 permanece reservado; nenhum arquivo bloqueado será alterado."
+  }
 }
