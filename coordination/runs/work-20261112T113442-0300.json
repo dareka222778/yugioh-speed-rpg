@@ -1,0 +1,225 @@
+{
+  "runId": "work-20261112T113442-0300",
+  "owner": "Work",
+  "state": "released",
+  "startedAt": "2026-11-12T11:34:42-03:00",
+  "endedAt": "2026-11-12 11:47:05-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtClaim": "5115da0ca3a1a8230028f6dda87e487863df0169",
+  "coordinationClaimCommit": "f7b0f789aa9be631a31b4346dce23c1bbaf98708",
+  "workBranch": "feat/work-m63-m60-research-20261112",
+  "workBranchBase": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+  "workBranchHead": "d8d33cc7bd1715c79c19a0b6189534232fca7f01",
+  "pullRequest": {
+    "number": 19,
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "base": "feat/work-m61-ci-base-20261111",
+    "head": "feat/work-m63-m60-research-20261112"
+  },
+  "changes": [
+    {
+      "commit": "d8d33cc7bd1715c79c19a0b6189534232fca7f01",
+      "message": "test(m60): compare normalized first-print review fields",
+      "files": [
+        "tests/m60FlipCycleResearch.test.cjs"
+      ],
+      "detail": "Corrigida a única falha do npm test no lote M60: review.firstTcgPrinting guarda apenas date/set/setName; o teste comparava indevidamente esse resumo normalizado com card.printing completo (que também inclui region/source). O teste agora compara os três campos normalizados; as verificações de region/source continuam no candidato."
+    }
+  ],
+  "validation": {
+    "cardBatchFast": {
+      "runId": 43239125531,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "engineValidation": {
+      "runId": 43239125265,
+      "status": "in_progress"
+    },
+    "engineValidationJobs": [
+      {
+        "jobId": 131254420872,
+        "name": "test",
+        "status": "in_progress",
+        "completedSteps": {
+          "npmRunCheck": "success",
+          "cardBatchFast": "success",
+          "npmTest": "success"
+        },
+        "activeStep": "npm run audit:tag-sessions"
+      },
+      {
+        "jobId": 131254420025,
+        "name": "extended-soak",
+        "status": "in_progress",
+        "activeStep": "node --expose-gc scripts/soak-mixed-versions.cjs 600"
+      }
+    ],
+    "previousFailure": "Na revisão anterior cbb8be6, npm test falhou em 1 de 7.961 testes por comparação deepStrictEqual incompatível com o formato normalizado. Corrigida no commit d8d33cc; nesta revisão o passo npm test já terminou com sucesso.",
+    "fullEngineValidation": "Ainda não concluída; não declarar CI integral aprovada."
+  },
+  "audit": {
+    "branchesObserved": [
+      "feat/rea-engine-recovery-20261026",
+      "feat/work-m61-handlimit-ci-20261111",
+      "feat/work-m61-ci-base-20261111",
+      "feat/work-m63-m60-research-20261112",
+      "feat/work-m64-catalog-delta-audit-20261112",
+      "feat/work-m65-normal-v9-triage-20261112",
+      "feat/aux-m65-normal-candidate-audit-20261112",
+      "feat/aux-pr19-evidence-shape-audit-20261112"
+    ],
+    "pullRequests": [
+      {
+        "number": 12,
+        "head": "b6929b103972fb9e903fc7de0069875d5fdb5609",
+        "ci": "success",
+        "runs": [
+          43167104621,
+          43167104520,
+          43167104617,
+          43167104604
+        ]
+      },
+      {
+        "number": 13,
+        "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
+        "ci": "failure",
+        "runs": [
+          42521555630,
+          42521555580,
+          42521555598
+        ]
+      },
+      {
+        "number": 14,
+        "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+        "ci": "success",
+        "runs": [
+          42958106938,
+          42958106957,
+          42958106953
+        ]
+      },
+      {
+        "number": 15,
+        "head": "7139b101b3586c2d592ada7a8696fe6c333167f8",
+        "ci": "no-runs-visible"
+      },
+      {
+        "number": 17,
+        "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+        "ci": "failure",
+        "handoff": "awaiting-response"
+      },
+      {
+        "number": 18,
+        "head": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
+        "ci": "success",
+        "runs": [
+          43120759595,
+          43120759584
+        ]
+      },
+      {
+        "number": 19,
+        "head": "d8d33cc7bd1715c79c19a0b6189534232fca7f01",
+        "ci": "fast-success; engine-validation-in-progress",
+        "runs": [
+          43239125531,
+          43239125265
+        ]
+      },
+      {
+        "number": 20,
+        "head": "5d5f9fa52f5825c6edba201e8e7f66dffe141009",
+        "ci": "success",
+        "runs": [
+          43165884034,
+          43165884069
+        ]
+      },
+      {
+        "number": 21,
+        "head": "faded3908e3731edbaec8e8996d0705c2bbd206b",
+        "ci": "success",
+        "runs": [
+          43191997694,
+          43191998106
+        ]
+      }
+    ]
+  },
+  "m61": {
+    "pr": 17,
+    "branch": "feat/work-m61-handlimit-ci-20261111",
+    "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+    "handoffStatus": "awaiting-response",
+    "handoffComment": 6826546827,
+    "noResponseAtCheckpoint": true,
+    "reservedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/classicEffects.ts",
+      "src/duelIntegrity.ts",
+      "scripts/mass-certification21.cjs"
+    ],
+    "ciErrors": [
+      "TS2367",
+      "TS2339"
+    ],
+    "errorLocation": "src/duelEngineCurrent.ts:410",
+    "note": "PR17 altera os arquivos de runtime reservados, além do teste; nenhuma alteração conflitante foi feita."
+  },
+  "catalog": {
+    "shared": {
+      "cards": 969,
+      "certificates": 969,
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
+    },
+    "development": {
+      "cards": 1014,
+      "certificates": 1014,
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
+    },
+    "delta": {
+      "added": 45,
+      "removed": 0,
+      "changedCommonCards": 0,
+      "changedCommonEffects": 0,
+      "changedCommonMonsters": 0,
+      "changedCommonCertificates": 0
+    },
+    "newAdmissionsThisRun": 0,
+    "m60": {
+      "admitted": 0,
+      "certified": 0,
+      "blockedBy": "PR #17 / M61 handoff pending"
+    }
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "hostingStatus": "Não verificado nesta execução. O workflow card-batch-deploy.yml não existe na branch compartilhada; há script de deploy manual e evidência histórica de 29/10, mas não comprova o estado atual do host."
+  },
+  "handoff": {
+    "to": "auxiliary",
+    "status": "available",
+    "baseBranch": "feat/work-m65-normal-v9-triage-20261112",
+    "baseCommit": "faded3908e3731edbaec8e8996d0705c2bbd206b",
+    "scope": "Monitorar a conclusão da CI da PR #19 e pesquisar fontes em branch auxiliar própria. Não editar M63/M64/M65 do Work, nem arquivos/branch M61; sem admissão, certificação, merge ou deploy.",
+    "nextTask": "Acompanhar Engine validation 43239125265 da PR #19; reportar o resultado. Pesquisa independente de candidatos pode continuar em branch própria, sem editar catálogo/certificados.",
+    "nextWorkAt": "2026-11-12T16:30:00-03:00"
+  },
+  "duration": {
+    "elapsedWallMinutes": 12,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "A execução durou menos de 60 minutos; tempo de CI/espera não foi contado como trabalho efetivo."
+  },
+  "nextTask": "Aguardar conclusão da CI integral da PR #19. Após handoff M61, corrigir TS2367/TS2339, implementar e testar setSelfFaceDown com marcador once-per-turn persistente, então transformar M60 em lote comportamental. Não admitir Guardian Sphinx sem operação não-direcionada de retorno em massa."
+}
