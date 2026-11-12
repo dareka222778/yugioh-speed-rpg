@@ -60,3 +60,28 @@ Ambos têm múltiplos passcodes no dataset histórico. A base oficial da Konami 
 A coordenação compartilhada registra handoff `available`, owner `null` e próxima execução do Work às **06:30 (America/Sao_Paulo)**. O campo `lastActivityAt` ainda marca 03:17, embora o commit M65 efetivo tenha sido criado às 03:19:38 e a execução do Work tenha terminado às 03:21:20. Por isso, a branch auxiliar foi baseada no HEAD real atualizado `5129933`, não no `baseCommit` antigo `dc01a68`.
 
 Este arquivo é o único caminho criado por esta auditoria. Não foram alterados scripts, testes, catálogo, runtime, coordenação, inventários, PRs ou produção. Não houve certificação, admissão, merge ou deploy. Revalidar a coordenação antes de qualquer nova alteração, especialmente antes da próxima janela do Work.
+
+## Apêndice — evidência direta da CI (05:31, 12/11/2026)
+
+A execução **Engine validation** da PR #21, associada ao HEAD `5129933809dd7dd56a5e954ba1bd7d35f1fb2784`, terminou com sucesso no run [43167361493](https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/43167361493).
+
+- Job `test` (ID `131012253804`): `success`.
+- Job `extended-soak` (ID `131012253625`): `success`.
+- Artefato `rea-acceptance-results` (ID `13921585172`) contém `test-summary.json` com Node 22.23.4, **7.957 testes aprovados, 0 falhas, 0 cancelados, 0 ignorados e 0 TODO**.
+- O `test-results.xml` do mesmo artefato contém os três casos de `tests/normalExpansionV9Planner.test.cjs` (filtro, validação de snapshot/data e plano real determinístico). Eles aparecem sem elemento de falha, portanto passaram.
+- O runner usa reporter JUnit/dot e o artefato não contém `system-out`; logo, o `console.log` com a contagem não foi preservado como saída textual do job. A contagem **0** deste relatório continua sendo uma reprodução determinística do algoritmo exato sobre os blobs versionados, não uma citação de stdout da CI.
+
+Identificadores das fontes usadas na reprodução:
+- Histórico `catalog/historical/2004-10-01/cards.json`: Git blob `e9ddb6a3cdc5921a26f4ac9c4be703bb34f284e5`.
+- Planner `scripts/plan-normal-expansion-v9.cjs`: Git blob `bfc9a163df87ea733142c53aec10962d58d0d47d`.
+- Snapshot `72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52.json`: Git blob `6ac57935d6131f70835cc6d1b1562ab6037a3430`.
+
+### Matriz atual de CI das PRs 19–21
+
+| PR | Feedback rápido | Engine validation | Resultado |
+|---|---|---|---|
+| #19 / M60 research | Run 43165584813 — success | Run 43165584883 — success | 3 jobs aprovados |
+| #20 / catalog delta | Run 43165884034 — success | Run 43165884069 — success | 3 jobs aprovados |
+| #21 / M65 planner | Run 43167361413 — success | Run 43167361493 — success | 3 jobs aprovados |
+
+As três PRs permanecem abertas, em rascunho e mergeable. A PR #17/M61 permanece fora do escopo e com handoff pendente; nenhum arquivo dela foi tocado.
