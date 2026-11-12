@@ -1,0 +1,565 @@
+{
+  "format": 1,
+  "batchId": "m60-flip-cycle",
+  "engineVersion": "engine-v9",
+  "baseRevision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52",
+  "status": "research-only-blocked-on-m61-runtime",
+  "admissionEligible": false,
+  "certificationState": "not-reviewed-not-certified",
+  "runtimePrerequisite": {
+    "pullRequest": 17,
+    "requiredCapabilities": [
+      "secondary ignition effect slot",
+      "setSelfFaceDown operation",
+      "once-per-turn marker preserved when the source self-sets",
+      "Flip Summon event filter"
+    ],
+    "status": "awaiting-cooperative-handoff",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/classicEffects.ts",
+      "src/duelIntegrity.ts",
+      "scripts/mass-certification21.cjs"
+    ]
+  },
+  "reviews": [
+    {
+      "cardId": "15383415",
+      "konamiId": 5418,
+      "sourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418&request_locale=en",
+      "reviewedAt": "2026-11-12",
+      "sourceStatus": "official-card-facts-and-first-tcg-print-verified",
+      "verifiedFacts": {
+        "name": "Swarm of Scarabs",
+        "attribute": "DARK",
+        "level": 3,
+        "atk": 500,
+        "defense": 1000,
+        "race": "Insect"
+      },
+      "firstTcgPrinting": {
+        "date": "2003-07-18",
+        "set": "PGD-021",
+        "setName": "PHARAONIC GUARDIAN"
+      },
+      "officialCardTextSha256": "bc29ebbf0d73e378896f723dcfc1ddfcaa900ce56475f9e2afebb27eb670d402",
+      "mechanicalStatus": "pending-runtime-and-regression",
+      "certificationStatus": "not-certified"
+    },
+    {
+      "cardId": "41872150",
+      "konamiId": 5419,
+      "sourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5419&request_locale=en",
+      "reviewedAt": "2026-11-12",
+      "sourceStatus": "official-card-facts-and-first-tcg-print-verified",
+      "verifiedFacts": {
+        "name": "Swarm of Locusts",
+        "attribute": "DARK",
+        "level": 3,
+        "atk": 1000,
+        "defense": 500,
+        "race": "Insect"
+      },
+      "firstTcgPrinting": {
+        "date": "2003-07-18",
+        "set": "PGD-022",
+        "setName": "PHARAONIC GUARDIAN"
+      },
+      "officialCardTextSha256": "200d9a372c92037e75da260e89556a17fe41f845176782ceb441e04c60106d48",
+      "mechanicalStatus": "pending-runtime-and-regression",
+      "certificationStatus": "not-certified"
+    },
+    {
+      "cardId": "03510565",
+      "konamiId": 5882,
+      "sourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5882&request_locale=en",
+      "reviewedAt": "2026-11-12",
+      "sourceStatus": "official-card-facts-and-first-tcg-print-verified",
+      "verifiedFacts": {
+        "name": "Stealth Bird",
+        "attribute": "DARK",
+        "level": 3,
+        "atk": 700,
+        "defense": 1700,
+        "race": "Winged Beast"
+      },
+      "firstTcgPrinting": {
+        "date": "2004-03-01",
+        "set": "IOC-068",
+        "setName": "INVASION OF CHAOS"
+      },
+      "officialCardTextSha256": "2c2bd894f1684d9cc69981bd9cea760d454c25644a16adf97c3b95fde11c1d56",
+      "mechanicalStatus": "pending-runtime-and-regression",
+      "certificationStatus": "not-certified"
+    },
+    {
+      "cardId": "02326738",
+      "konamiId": 5427,
+      "sourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5427&request_locale=en",
+      "reviewedAt": "2026-11-12",
+      "sourceStatus": "official-card-facts-and-first-tcg-print-verified",
+      "verifiedFacts": {
+        "name": "Des Lacooda",
+        "attribute": "EARTH",
+        "level": 3,
+        "atk": 500,
+        "defense": 600,
+        "race": "Zombie"
+      },
+      "firstTcgPrinting": {
+        "date": "2003-07-18",
+        "set": "PGD-030",
+        "setName": "PHARAONIC GUARDIAN"
+      },
+      "officialCardTextSha256": "358ae3525c311422afa334204f052f4e336c28abbd880340cb7ca191ab14a624",
+      "mechanicalStatus": "pending-runtime-and-regression",
+      "certificationStatus": "not-certified"
+    },
+    {
+      "cardId": "40659562",
+      "konamiId": 5422,
+      "sourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5422&request_locale=en",
+      "reviewedAt": "2026-11-12",
+      "sourceStatus": "official-card-facts-and-first-tcg-print-verified",
+      "verifiedFacts": {
+        "name": "Guardian Sphinx",
+        "attribute": "EARTH",
+        "level": 5,
+        "atk": 1700,
+        "defense": 2400,
+        "race": "Rock"
+      },
+      "firstTcgPrinting": {
+        "date": "2003-07-18",
+        "set": "PGD-025",
+        "setName": "PHARAONIC GUARDIAN"
+      },
+      "officialCardTextSha256": "0a9273867de0134fd5e1455afe91fca4c7b49ee21cfa94b4d32ca9d7965c5bd9",
+      "mechanicalStatus": "deferred-non-targeting-mass-return",
+      "certificationStatus": "not-certified"
+    }
+  ],
+  "candidates": [
+    {
+      "card": {
+        "id": "15383415",
+        "konamiId": 5418,
+        "name": "Swarm of Scarabs",
+        "englishName": "Swarm of Scarabs",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Insect",
+        "attribute": "DARK",
+        "level": 3,
+        "atk": 500,
+        "defense": 1000,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418&request_locale=en",
+        "summary": "Na Invocação-Virar, destrói 1 monstro que o oponente controla; uma vez por turno, pode se colocar com a face para baixo em Defesa.",
+        "printing": {
+          "date": "2003-07-18",
+          "set": "PGD-021",
+          "setName": "PHARAONIC GUARDIAN",
+          "region": "tcg",
+          "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418&request_locale=en"
+        }
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:flip",
+        "monster-operation:targetGroup",
+        "trigger:ignition",
+        "monster-operation:setSelfFaceDown"
+      ],
+      "family": "m60-flip-cycle",
+      "textEvidence": {
+        "text": "Once each turn, its controller may change it to face-down Defense Position. When Flip Summoned, it targets one monster the opponent controls and destroys that target.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418&request_locale=en",
+        "sha256": "39af945117c57332eb3c087296757f5ed9c409b1faaf2ef950f3b0964c019d7b"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "flip",
+          "summons": [
+            "flip"
+          ],
+          "operation": {
+            "kind": "targetGroup",
+            "rule": {
+              "from": "monsters",
+              "action": "destroy",
+              "minimum": 1,
+              "maximum": 1
+            }
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "flip"
+        },
+        "ignitionEffect": {
+          "effect": {
+            "trigger": "ignition",
+            "oncePerTurn": true,
+            "operation": {
+              "kind": "setSelfFaceDown"
+            }
+          },
+          "activation": {
+            "policy": "manual",
+            "window": "main"
+          }
+        }
+      },
+      "scenarios": [
+        "flip-summon-only",
+        "self-set-main-phase-only",
+        "self-set-once-per-turn",
+        "self-set-negation-consumes-use",
+        "self-set-json-restore",
+        "face-down-is-not-a-flip-trigger",
+        "source-removal-before-resolution",
+        "two-copies-have-independent-use-markers",
+        "target-opponent-monster",
+        "target-revalidated-at-resolution",
+        "no-legal-monster-target",
+        "destroy-only-the-selected-instance"
+      ]
+    },
+    {
+      "card": {
+        "id": "41872150",
+        "konamiId": 5419,
+        "name": "Swarm of Locusts",
+        "englishName": "Swarm of Locusts",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Insect",
+        "attribute": "DARK",
+        "level": 3,
+        "atk": 1000,
+        "defense": 500,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5419&request_locale=en",
+        "summary": "Na Invocação-Virar, destrói 1 Magia/Armadilha que o oponente controla; uma vez por turno, pode se colocar com a face para baixo em Defesa.",
+        "printing": {
+          "date": "2003-07-18",
+          "set": "PGD-022",
+          "setName": "PHARAONIC GUARDIAN",
+          "region": "tcg",
+          "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5419&request_locale=en"
+        }
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:flip",
+        "monster-operation:targetGroup",
+        "trigger:ignition",
+        "monster-operation:setSelfFaceDown"
+      ],
+      "family": "m60-flip-cycle",
+      "textEvidence": {
+        "text": "Once each turn, its controller may change it to face-down Defense Position. When Flip Summoned, it targets one Spell or Trap the opponent controls and destroys that target.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5419&request_locale=en",
+        "sha256": "d5f08b9be5a1f3687ae1d2b4a3b434168eca8f23c2f5d4f9062758eecf15b292"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "flip",
+          "summons": [
+            "flip"
+          ],
+          "operation": {
+            "kind": "targetGroup",
+            "rule": {
+              "from": "backrow",
+              "action": "destroy",
+              "minimum": 1,
+              "maximum": 1
+            }
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "flip"
+        },
+        "ignitionEffect": {
+          "effect": {
+            "trigger": "ignition",
+            "oncePerTurn": true,
+            "operation": {
+              "kind": "setSelfFaceDown"
+            }
+          },
+          "activation": {
+            "policy": "manual",
+            "window": "main"
+          }
+        }
+      },
+      "scenarios": [
+        "flip-summon-only",
+        "self-set-main-phase-only",
+        "self-set-once-per-turn",
+        "self-set-negation-consumes-use",
+        "self-set-json-restore",
+        "face-down-is-not-a-flip-trigger",
+        "source-removal-before-resolution",
+        "two-copies-have-independent-use-markers",
+        "target-opponent-spell-trap",
+        "target-revalidated-at-resolution",
+        "no-legal-backrow-target",
+        "set-card-identity-remains-hidden"
+      ]
+    },
+    {
+      "card": {
+        "id": "03510565",
+        "konamiId": 5882,
+        "name": "Stealth Bird",
+        "englishName": "Stealth Bird",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Winged Beast",
+        "attribute": "DARK",
+        "level": 3,
+        "atk": 700,
+        "defense": 1700,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5882&request_locale=en",
+        "summary": "Na Invocação-Virar, causa 1.000 pontos de dano ao oponente; uma vez por turno, pode se colocar com a face para baixo em Defesa.",
+        "printing": {
+          "date": "2004-03-01",
+          "set": "IOC-068",
+          "setName": "INVASION OF CHAOS",
+          "region": "tcg",
+          "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5882&request_locale=en"
+        }
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:flip",
+        "monster-operation:burn",
+        "trigger:ignition",
+        "monster-operation:setSelfFaceDown"
+      ],
+      "family": "m60-flip-cycle",
+      "textEvidence": {
+        "text": "Once each turn, its controller may change it to face-down Defense Position. When Flip Summoned, it inflicts 1000 damage to the opponent.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5882&request_locale=en",
+        "sha256": "848071bf5eb54df610461d496a16caccf706abdb169bebcae267c8639d0f51d2"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "flip",
+          "summons": [
+            "flip"
+          ],
+          "operation": {
+            "kind": "burn",
+            "amount": 1000
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "flip"
+        },
+        "ignitionEffect": {
+          "effect": {
+            "trigger": "ignition",
+            "oncePerTurn": true,
+            "operation": {
+              "kind": "setSelfFaceDown"
+            }
+          },
+          "activation": {
+            "policy": "manual",
+            "window": "main"
+          }
+        }
+      },
+      "scenarios": [
+        "flip-summon-only",
+        "self-set-main-phase-only",
+        "self-set-once-per-turn",
+        "self-set-negation-consumes-use",
+        "self-set-json-restore",
+        "face-down-is-not-a-flip-trigger",
+        "source-removal-before-resolution",
+        "two-copies-have-independent-use-markers",
+        "exactly-1000-damage",
+        "lethal-flip-damage-ends-duel",
+        "no-damage-on-normal-summon"
+      ]
+    },
+    {
+      "card": {
+        "id": "02326738",
+        "konamiId": 5427,
+        "name": "Des Lacooda",
+        "englishName": "Des Lacooda",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Zombie",
+        "attribute": "EARTH",
+        "level": 3,
+        "atk": 500,
+        "defense": 600,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5427&request_locale=en",
+        "summary": "Na Invocação-Virar, seu controlador compra 1 carta; uma vez por turno, pode se colocar com a face para baixo em Defesa.",
+        "printing": {
+          "date": "2003-07-18",
+          "set": "PGD-030",
+          "setName": "PHARAONIC GUARDIAN",
+          "region": "tcg",
+          "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5427&request_locale=en"
+        }
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:flip",
+        "monster-operation:draw",
+        "trigger:ignition",
+        "monster-operation:setSelfFaceDown"
+      ],
+      "family": "m60-flip-cycle",
+      "textEvidence": {
+        "text": "Once each turn, its controller may change it to face-down Defense Position. When Flip Summoned, its controller draws one card.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5427&request_locale=en",
+        "sha256": "9377ada5e7b214fa979551d33a510cbeee3497d5f3edb081b8ca741d4a217f38"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "flip",
+          "summons": [
+            "flip"
+          ],
+          "operation": {
+            "kind": "draw",
+            "count": 1
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "flip"
+        },
+        "ignitionEffect": {
+          "effect": {
+            "trigger": "ignition",
+            "oncePerTurn": true,
+            "operation": {
+              "kind": "setSelfFaceDown"
+            }
+          },
+          "activation": {
+            "policy": "manual",
+            "window": "main"
+          }
+        }
+      },
+      "scenarios": [
+        "flip-summon-only",
+        "self-set-main-phase-only",
+        "self-set-once-per-turn",
+        "self-set-negation-consumes-use",
+        "self-set-json-restore",
+        "face-down-is-not-a-flip-trigger",
+        "source-removal-before-resolution",
+        "two-copies-have-independent-use-markers",
+        "draw-exactly-one",
+        "empty-deck-draw-causes-deck-out",
+        "hand-limit-is-checked-at-end-phase",
+        "no-draw-on-normal-summon"
+      ]
+    }
+  ],
+  "notes": [
+    "This file is a pre-implementation specification, not a certification batch.",
+    "The four passcodes were absent from the 1,014-card development snapshot when this specification was created.",
+    "Do not add these cards to the enabled catalog or certificate map until M61 runtime support is released, reconciled and behavior-tested.",
+    "Guardian Sphinx (40659562) is historically eligible and shares the self-set ignition, but is deliberately deferred: its Flip Summon effect is a non-targeting mass return and cannot be represented by targetGroup without changing the printed rules.",
+    "Official Konami TCG card-detail pages were checked on 2026-11-12 for all four M60 candidates and deferred Guardian Sphinx. Identity, printed facts, effect-text fingerprint and first TCG printing were recorded. This source review does not certify effects or clear the M61 runtime prerequisite."
+  ],
+  "deferredCandidates": [
+    {
+      "card": {
+        "id": "40659562",
+        "konamiId": 5422,
+        "name": "Guardian Sphinx",
+        "englishName": "Guardian Sphinx",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Rock",
+        "attribute": "EARTH",
+        "level": 5,
+        "atk": 1700,
+        "defense": 2400,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5422&ope=2&request_locale=en",
+        "summary": "Na Invocação-Virar, devolve todos os monstros controlados pelo oponente às mãos de seus donos; uma vez por turno, pode se colocar com a face para baixo em Defesa.",
+        "printing": {
+          "date": "2003-07-18",
+          "set": "PGD-025",
+          "setName": "PHARAONIC GUARDIAN",
+          "region": "tcg",
+          "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5422&ope=2&request_locale=en"
+        }
+      },
+      "textEvidence": {
+        "text": "Once each turn, its controller may change it to face-down Defense Position. If Flip Summoned, it returns every monster controlled by the opponent to its owner's hand without targeting.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5422&ope=2&request_locale=en",
+        "sha256": "8ab758379d4145da1b41a2372b4eee2ccc740cdf9fc7a496e0093705f6bdf63f"
+      },
+      "reusableIgnition": {
+        "effect": {
+          "trigger": "ignition",
+          "oncePerTurn": true,
+          "operation": {
+            "kind": "setSelfFaceDown"
+          }
+        },
+        "activation": {
+          "policy": "manual",
+          "window": "main"
+        }
+      },
+      "primaryEffect": {
+        "trigger": "flip",
+        "summons": [
+          "flip"
+        ],
+        "targeting": false,
+        "operationSemantics": "return-all-opponent-controlled-monsters-to-owner-hands"
+      },
+      "blockedReason": "The Flip Summon effect is non-targeting and returns every monster the opponent controls. The current targetGroup abstraction is target-based and requires at least one selected target; reusing it would incorrectly introduce targeting and fail when the opponent controls no monsters. Defer until a dedicated non-targeting mass-return operation is implemented and tested.",
+      "scenarios": [
+        "zero-opponent-monsters",
+        "multiple-monsters-all-return",
+        "return-to-each-owner-hand",
+        "mixed-ownership-under-opponent-control",
+        "face-down-self-set-then-flip-summon",
+        "json-restore-before-mass-return"
+      ]
+    }
+  ],
+  "sourceReviewDate": "2026-11-12"
+}
