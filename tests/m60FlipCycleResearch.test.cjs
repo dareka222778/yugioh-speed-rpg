@@ -103,6 +103,12 @@ test('Guardian Sphinx is preserved as a deferred non-targeting mass-return case'
  const deferred=spec.deferredCandidates.find(candidate=>candidate.card.id==='40659562');
  assert.ok(deferred);
  assert.equal(deferred.card.konamiId,5422);
+ assert.match(deferred.card.id,/^\\d{8}$/);
+ const source=new URL(deferred.card.source);
+ assert.equal(source.hostname,'www.db.yugioh-card.com');
+ assert.equal(source.searchParams.get('cid'),'5422');
+ assert.equal(source.searchParams.get('ope'),'2');
+ assert.equal(deferred.card.printing.source,deferred.card.source);
  assert.equal(deferred.card.printing.date,'2003-07-18');
  assert.equal(deferred.card.printing.set,'PGD-025');
  assert.equal(deferred.primaryEffect.targeting,false);
