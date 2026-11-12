@@ -119,7 +119,28 @@ test('evidence hashes are bound and the batch cannot be mistaken for admitted ca
  assert.equal(spec.status,'research-only-blocked-on-m61-runtime');
  assert.equal(spec.admissionEligible,false);
  assert.equal(spec.certificationState,'not-reviewed-not-certified');
- assert.deepEqual(spec.reviews,[]);
+ assert.equal(spec.reviews.length,5);
+ const reviews=new Map(spec.reviews.map(review=>[review.cardId,review]));
+ assert.equal(reviews.size,5);
+ for(const candidate of spec.candidates){
+  const review=reviews.get(candidate.card.id);
+  assert.ok(review,candidate.card.name+' has no official source review');
+  assert.equal(review.konamiId,candidate.card.konamiId);
+  assert.equal(review.sourceUrl,candidate.card.source);
+  assert.equal(review.sourceStatus,'official-card-facts-and-first-tcg-print-verified');
+  assert.deepEqual(review.verifiedFacts,{name:candidate.card.name,attribute:candidate.card.attribute,level:candidate.card.level,atk:candidate.card.atk,defense:candidate.card.defense,race:candidate.card.race});
+  assert.deepEqual(review.firstTcgPrinting,candidate.card.printing);
+  assert.match(review.officialCardTextSha256,/^[a-f0-9]{64}$/);
+  assert.equal(review.mechanicalStatus,'pending-runtime-and-regression');
+  assert.equal(review.certificationStatus,'not-certified');
+ }
+ const deferred=reviews.get('40659562');
+ assert.ok(deferred);
+ assert.equal(deferred.konamiId,5422);
+ assert.equal(deferred.verifiedFacts.name,'Guardian Sphinx');
+ assert.equal(deferred.firstTcgPrinting.set,'PGD-025');
+ assert.equal(deferred.mechanicalStatus,'deferred-non-targeting-mass-return');
+ assert.equal(deferred.certificationStatus,'not-certified');
  for(const candidate of spec.candidates){
   const digest=createHash('sha256').update(candidate.textEvidence.text).digest('hex');
   assert.equal(candidate.textEvidence.sha256,digest,candidate.card.name+' text evidence hash');
