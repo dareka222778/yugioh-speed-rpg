@@ -9,6 +9,8 @@ const crypto=require('node:crypto');
 const DEFAULT_CUTOFF='2004-09-30';
 const REVIEW_REQUIREMENTS=[
  'official-identity-and-card-facts',
+ 'canonical-identity-uniqueness',
+ 'official-card-page-uniqueness',
  'historical-tcg-printing',
  'name-and-stat-normalization',
  'mechanical-fingerprint',
@@ -27,11 +29,15 @@ function planNormalExpansion(historical,snapshot,{cutoff=DEFAULT_CUTOFF,sourceSh
  if(!validDate(cutoff))throw new Error('Invalid historical cutoff: '+cutoff);
  const catalogIds=new Set(snapshot.cards.map(card=>card?.id).filter(id=>typeof id==='string'));
  const certificateIds=new Set(Object.keys(snapshot.certificates));
- const passcodeCounts=new Map();
- for(const card of historical)for(const id of Array.isArray(card?.passwords)?card.passwords:[])passcodeCounts.set(id,(passcodeCounts.get(id)??0)+1);
+ const passcodeCounts=new Map(),canonicalIdentityCounts=new Map(),konamiIdentityCounts=new Map();
+ for(const card of historical){
+  for(const id of Array.isArray(card?.passwords)?card.passwords:[])passcodeCounts.set(id,(passcodeCounts.get(id)??0)+1);
+  if(typeof card?.id==='string')canonicalIdentityCounts.set(card.id,(canonicalIdentityCounts.get(card.id)??0)+1);
+  if(Number.isSafeInteger(card?.konamiId)&&card.konamiId>0)konamiIdentityCounts.set(card.konamiId,(konamiIdentityCounts.get(card.konamiId)??0)+1);
+ }
  const excluded={
   missingWorldDate:0,worldAfterCutoff:0,missingTcgDate:0,tcgAfterCutoff:0,
-  ambiguousPasscode:0,invalidPasscode:0,duplicatePasscode:0,alreadyCatalogued:0,invalidMetadata:0
+  ambiguousPasscode:0,invalidPasscode:0,duplicatePasscode:0,duplicateCanonicalIdentity:0,duplicateKonamiId:0,alreadyCatalogued:0,invalidMetadata:0
  };
  const candidates=[];
  let normalCandidateRecords=0;
@@ -47,6 +53,8 @@ function planNormalExpansion(historical,snapshot,{cutoff=DEFAULT_CUTOFF,sourceSh
   const id=card.passwords[0];
   if(!validPasscode(id)){excluded.invalidPasscode++;continue;}
   if(passcodeCounts.get(id)!==1){excluded.duplicatePasscode++;continue;}
+  if(typeof card.id!=='string'||!card.id.trim()){excluded.invalidMetadata++;continue;}
+  if(canonicalIdentityCounts.get(card.id)!==1){excluded.duplicateCanonicalIdentity++;continue;}
   if(catalogIds.has(id)||certificateIds.has(id)){excluded.alreadyCatalogued++;continue;}
   const names=card.names;
   if(card.kind!=='monster'||card.mechanics?.includes('fusion')||!names||typeof names.en!=='string'||!names.en.trim()||
@@ -55,6 +63,7 @@ function planNormalExpansion(historical,snapshot,{cutoff=DEFAULT_CUTOFF,sourceSh
      typeof card.race!=='string'||!card.race.trim()||typeof card.attribute!=='string'||!card.attribute.trim()){
    excluded.invalidMetadata++;continue;
   }
+  if(konamiIdentityCounts.get(card.konamiId)!==1){excluded.duplicateKonamiId++;continue;}
   candidates.push({
    id,
    konamiId:card.konamiId,
