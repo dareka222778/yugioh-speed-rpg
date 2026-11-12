@@ -1,0 +1,126 @@
+{
+  "runId": "work-20261112T012544-0300",
+  "startedAt": "2026-11-12T01:25:44-03:00",
+  "state": "active",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBefore": "e9988017e8ede4109ebf917681094132f7cfc25d",
+  "workBranch": "feat/work-m63-m60-research-20261112",
+  "workBase": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+  "workHead": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+  "scope": [
+    "docs/evidence/m60-flip-cycle-research.json",
+    "tests/m60FlipCycleResearch.test.cjs"
+  ],
+  "coordination": {
+    "activeParallelWork": {
+      "pr": 17,
+      "branch": "feat/work-m61-handlimit-ci-20261111",
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "state": "handoff-pending",
+      "handoffComment": 6814605957
+    },
+    "request": "Awaiting cooperative release; no M61 runtime files will be modified.",
+    "auxiliary": "Paused by Work priority; may resume only after this run releases."
+  },
+  "pullRequests": [
+    {
+      "number": 12,
+      "state": "open",
+      "draft": true,
+      "head": "feat/rea-engine-recovery-20261026",
+      "headSha": "e9988017e8ede4109ebf917681094132f7cfc25d"
+    },
+    {
+      "number": 13,
+      "state": "open",
+      "draft": true,
+      "head": "feat/work-m46-discard-costs-20261108",
+      "headSha": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3"
+    },
+    {
+      "number": 14,
+      "state": "open",
+      "draft": true,
+      "head": "feat/work-m47-20261109",
+      "headSha": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+      "mergeable": false
+    },
+    {
+      "number": 15,
+      "state": "open",
+      "draft": true,
+      "head": "feat/work-tag-hand-limit-20261111",
+      "headSha": "7139b101b3586c2d592ada7a8696fe6c333167f8"
+    },
+    {
+      "number": 17,
+      "state": "open",
+      "draft": true,
+      "head": "feat/work-m61-handlimit-ci-20261111",
+      "headSha": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "mergeable": true,
+      "ci": "failed"
+    },
+    {
+      "number": 18,
+      "state": "open",
+      "draft": true,
+      "head": "feat/work-m62-format-guards-20261111",
+      "headSha": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
+      "mergeable": true,
+      "ci": "success"
+    }
+  ],
+  "ci": {
+    "pr18": {
+      "engineValidation": {
+        "runId": 43120759595,
+        "conclusion": "success"
+      },
+      "cardBatchFast": {
+        "runId": 43120759584,
+        "conclusion": "success"
+      },
+      "extendedSoak": "success",
+      "npmTest": "success",
+      "auditTagClassic": "success"
+    },
+    "pr17": {
+      "engineValidation": {
+        "runId": 43081735774,
+        "conclusion": "failure"
+      },
+      "cardBatchFast": {
+        "runId": 43081735544,
+        "conclusion": "failure"
+      },
+      "failure": "TypeScript build/check at src/duelEngineCurrent.ts:410 (TS2367/TS2339)"
+    }
+  },
+  "catalog": {
+    "shared": {
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+      "uniqueCards": 969,
+      "certificates": 969
+    },
+    "development": {
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52",
+      "uniqueCards": 1014,
+      "certificates": 1014
+    },
+    "m60CardsAbsent": [
+      "15383415",
+      "41872150",
+      "03510565",
+      "02326738"
+    ],
+    "integrationDelta": 45
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "hostingStatus": "not verifiable through the available GitHub connection"
+  },
+  "nextTask": "Prepare an explicitly research-only M60 spec and automated preflight test. Do not admit or certify cards until M61's second-ignition runtime is released, reconciled and validated."
+}

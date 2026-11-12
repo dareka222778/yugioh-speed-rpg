@@ -1,48 +1,51 @@
 {
-  "runId": "work-20261111T203000Z",
-  "owner": null,
-  "priorityRequestedBy": null,
-  "state": "released",
-  "startedAt": "2026-11-11T20:30:00-03:00",
-  "lastActivityAt": "2026-11-11T20:49:33-03:00",
-  "nextScheduledAt": "2026-11-12T01:30:00-03:00",
+  "runId": "work-20261112T012544-0300",
+  "owner": "Work",
+  "priorityRequestedBy": "user",
+  "state": "active",
+  "startedAt": "2026-11-12T01:25:44-03:00",
+  "lastActivityAt": "2026-11-12T01:25:44-03:00",
+  "nextScheduledAt": "2026-11-12T06:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
-  "scope": [],
-  "lastCheckpoint": "coordination/runs/work-20261111T203000Z.json",
-  "previousRunId": "work-20261111T103320Z",
+  "scope": [
+    "docs/evidence/m60-flip-cycle-research.json",
+    "tests/m60FlipCycleResearch.test.cjs"
+  ],
+  "lastCheckpoint": "coordination/runs/work-20261112T012544-0300.json",
+  "previousRunId": "work-20261111T203000Z",
   "previousReservation": {
     "branch": "feat/work-m60-20261111",
-    "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+    "head": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
     "state": "stale-preserved",
-    "note": "Branch preserved without edits; no conflicting reservation was released."
+    "note": "Do not edit the stale M60 branch."
   },
   "activeParallelWork": {
     "pr": 17,
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "note": "PR #17 remains open/draft. Work requested a safe checkpoint and release; no response received. Conflicting files were not edited."
+    "note": "PR #17 includes runtime and certification-script changes; transfer requested again in comment 6814605957. No cooperative release received."
   },
-  "workBranch": "feat/work-m62-format-guards-20261111",
+  "workBranch": "feat/work-m63-m60-research-20261112",
   "workBase": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
-  "workHead": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
-  "pullRequest": 18,
+  "workHead": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+  "pullRequest": null,
   "handoffRequest": {
-    "requestedBy": "work-20261111T203000Z",
-    "requestedAt": "2026-11-11T20:30:00-03:00",
+    "requestedBy": "work-20261112T012544-0300",
+    "requestedAt": "2026-11-12T01:25:44-03:00",
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "reason": "Request safe checkpoint and cooperative release before touching overlapping duel/monster engine files."
+    "commentId": 6814605957,
+    "reason": "Request checkpoint and release before touching overlapping runtime files."
   },
   "handoff": {
     "to": "auxiliary",
-    "status": "available",
-    "at": "2026-11-11T20:49:33-03:00",
-    "baseBranch": "feat/work-m62-format-guards-20261111",
-    "baseCommit": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
-    "scope": "PR #18 and an isolated research branch only. Do not touch M61-reserved runtime files or PR #17, do not edit the stale M60 branch, do not merge or deploy.",
-    "nextTask": "Monitor PR #18 run 43120759595 to completion. Card batch fast feedback, npm test, and extended soak have passed; the test job is at audit:tag-classic (80/89 steps) with no failures. If it fails, modify only tests/classicFormatBoundaries.test.cjs. In parallel, prepare metadata, official evidence, and case specifications for the four M60 flip-cycle cards in a separate branch without touching src/monsterEffects.ts, src/duelEngineCurrent.ts, src/duelIntegrity.ts, src/classicEffects.ts, or scripts/mass-certification21.cjs. Do not queue the batch or open a PR until M61 releases those files.",
-    "nextWorkAt": "2026-11-12T01:30:00-03:00"
+    "status": "paused-by-work",
+    "at": "2026-11-12T01:25:44-03:00",
+    "baseBranch": "feat/work-m63-m60-research-20261112",
+    "baseCommit": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+    "scope": "Work has priority. Auxiliary must remain read-only until this run releases control.",
+    "nextTask": "After release, continue only independent work; do not touch M61 runtime reservation."
   }
 }
