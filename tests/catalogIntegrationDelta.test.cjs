@@ -1,4 +1,5 @@
 'use strict';
+const fs=require('node:fs');
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const path=require('node:path');
