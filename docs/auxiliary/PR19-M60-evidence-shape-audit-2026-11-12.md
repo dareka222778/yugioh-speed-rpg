@@ -85,3 +85,57 @@ Recomendação: fazer o planner publicar o JSON completo ou, no mínimo, `normal
 Este commit adiciona somente este documento. Não altera M63/M64/M65, M61, scripts, testes, catálogo, certificados, inventário, coordenação compartilhada, PRs ou produção. Não houve certificação, admissão, merge ou deploy.
 
 **Próxima janela principal registrada:** 11:30 (America/Sao_Paulo). Revalidar coordenação e CI antes de qualquer nova alteração.
+
+
+## Apêndice — revalidação independente (07:27, 12/11/2026)
+
+### CI atual
+
+A coordenação ainda registra os HEADs M63/M65 e a transferência auxiliar disponível, com próxima execução do Work às 11:30. A comparação Git confirmou que as branches M63 e M65 permanecem nos SHAs indicados no checkpoint; esta auditoria não alterou nenhuma delas.
+
+- **PR #19 / M60:** Card batch fast feedback (43192284375) terminou com sucesso. Em Engine validation (43192284528), extended-soak terminou com sucesso, mas o job test (131094347646) falhou: **7.960/7.961**. A falha é a mesma inconsistência de estrutura já apontada acima, na asserção de tests/m60FlipCycleResearch.test.cjs:132. O objeto de revisão contém apenas date/set/setName, enquanto o objeto de impressão do candidato inclui também region: "tcg" e a URL oficial source. A inspeção do JSON confirma a diferença nos cinco registros de revisão; o teste interrompeu na primeira comparação, portanto houve uma falha observada, não cinco falhas independentes. O job de soak passou.
+- **PR #21 / M65:** Card batch fast feedback (43191998106) e Engine validation (43191997694) terminaram com sucesso. Os jobs test e extended-soak estão aprovados no HEAD faded3908e3731edbaec8e8996d0705c2bbd206b.
+
+### Reprodução integral do planejador M65
+
+Nesta execução foi possível recuperar os blobs Git completos, ao contrário da leitura de arquivo truncada pelo endpoint de conteúdo. Reproduzi em memória os mesmos filtros do planejador atual sobre o histórico e o snapshot apontado pelo manifesto:
+
+- Histórico: catalog/historical/2004-10-01/cards.json, blob e9ddb6a3cdc5921a26f4ac9c4be703bb34f284e5, 1.962 registros.
+- Planejador: scripts/plan-normal-expansion-v9.cjs, blob eabb35d345a7768f2f9f12254dc815fb69c65760.
+- Snapshot: revisão 72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52, blob 6ac57935d6131f70835cc6d1b1562ab6037a3430, 1.014 cartas e 1.014 certificados.
+
+Resultado exato da reprodução do algoritmo do HEAD M65:
+
+| Indicador | Resultado |
+|---|---:|
+| Registros normalMainCandidate | 584 |
+| Candidatos elegíveis | **0** |
+| Sem data TCG | 154 |
+| Primeira impressão TCG após 2004-09-30 | 106 |
+| Passcode ambíguo | 2 |
+| Já no catálogo ou nos certificados | 322 |
+| Outros motivos de exclusão | 0 |
+
+A soma dos motivos de exclusão é 584. O planejador não encontrou identidade ausente que cumpra os critérios de elegibilidade.
+
+### Auditoria ampla da classificação histórica
+
+A leitura completa dos 1.962 registros também permitiu conferir se havia monstros Normal fora do marcador normalMainCandidate:
+
+- 1.297 registros são monstros.
+- 634 estão classificados como Effect.
+- 585 estão classificados como Normal.
+- 584 dos 585 Normal são marcados como candidatos principais.
+- O único Normal não marcado é **Black Luster Soldier**, passcode 05405694, Konami ID 4370, com mechanics: ["ritual"]; portanto, é um Monstro de Ritual, não um Monstro Normal de Invocação-Normal.
+
+A página oficial da Konami confirma expressamente **Warrior / Ritual**, Level 8, 3000 ATK / 2500 DEF e a Invocação-Ritual por "Black Luster Ritual". A página lista a impressão TCG WCS-003 em **27/06/2003**. Entretanto, o registro histórico informa firstObserved.tcg: "2004-01-01". É uma divergência de data no conjunto histórico que merece correção/revisão pelo responsável pela fonte, mas não cria um candidato Normal elegível porque a carta é Ritual.
+
+Fonte oficial: https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4370&request_locale=en
+
+**Conclusão:** o conjunto M65 cobre os 584 Normal principais identificados; não apareceu um candidato adicional fora do marcador. Não se deve tratar mechanics: [] isoladamente como prova de que uma carta é Normal: o histórico contém muitos monstros Effect sem mecânicas normalizadas.
+
+### Limites e coordenação
+
+Nenhuma carta foi criada, certificada, admitida ou concedida a inventário. Nenhum catálogo, certificado, script, teste, runtime, branch do Work, PR ou arquivo de coordenação foi alterado. Esta atualização é documental e mantém a PR #19 bloqueada até que o Work corrija a estrutura da evidência e obtenha uma nova CI verde.
+
+A branch auxiliar continua baseada no HEAD autorizado faded3908e3731edbaec8e8996d0705c2bbd206b; a próxima janela principal registrada é 11:30 (America/Sao_Paulo).
