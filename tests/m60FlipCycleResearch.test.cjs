@@ -129,7 +129,8 @@ test('evidence hashes are bound and the batch cannot be mistaken for admitted ca
   assert.equal(review.sourceUrl,candidate.card.source);
   assert.equal(review.sourceStatus,'official-card-facts-and-first-tcg-print-verified');
   assert.deepEqual(review.verifiedFacts,{name:candidate.card.name,attribute:candidate.card.attribute,level:candidate.card.level,atk:candidate.card.atk,defense:candidate.card.defense,race:candidate.card.race});
-  assert.deepEqual(review.firstTcgPrinting,candidate.card.printing);
+  // The review stores the normalized first-print facts; source/region are asserted on the candidate above.
+  assert.deepEqual(review.firstTcgPrinting,{date:candidate.card.printing.date,set:candidate.card.printing.set,setName:candidate.card.printing.setName});
   assert.match(review.officialCardTextSha256,/^[a-f0-9]{64}$/);
   assert.equal(review.mechanicalStatus,'pending-runtime-and-regression');
   assert.equal(review.certificationStatus,'not-certified');
