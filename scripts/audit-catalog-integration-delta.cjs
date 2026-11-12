@@ -19,8 +19,10 @@ function readSnapshot(root,manifest,revision){
  if(!entry)throw new Error('Revision absent from manifest: '+revision);
  if(entry.file!==revision+'.json')throw new Error('Unexpected revision filename: '+entry.file);
  const filename=path.resolve(root,'catalog','engine-v9',entry.file);
- const catalogRoot=path.resolve(root,'catalog','engine-v9')+path.sep;
+ const catalogDirectory=path.resolve(root,'catalog','engine-v9');
+ const catalogRoot=catalogDirectory+path.sep;
  if(!filename.startsWith(catalogRoot))throw new Error('Catalog revision path escapes catalog root: '+entry.file);
+ if(!fs.existsSync(filename)||!realpathWithin(filename,catalogDirectory))throw new Error('Catalog revision file is missing or escapes catalog root: '+entry.file);
  const bytes=fs.readFileSync(filename);
  if(sha256(bytes)!==entry.sha256)throw new Error('Revision file SHA-256 mismatch: '+revision);
  const data=JSON.parse(bytes.toString('utf8'));
@@ -247,4 +249,4 @@ if(require.main===module){
  console.log(JSON.stringify(report,null,2));
  if(!report.catalogReconciliationReady)process.exitCode=1;
 }
-module.exports={auditCatalogIntegrationDelta,officialSource,safeSuitePath,safeBatchPath,realpathWithin,suiteRegistration};
+module.exports={auditCatalogIntegrationDelta,readSnapshot,officialSource,safeSuitePath,safeBatchPath,realpathWithin,suiteRegistration};
