@@ -115,20 +115,25 @@ function auditCatalogIntegrationDelta({
  if(developmentRevision!==manifest.current)throw new Error('Development revision is no longer manifest.current; re-audit the requested refs.');
  const shared=readSnapshot(root,manifest,sharedRevision);
  const development=readSnapshot(root,manifest,developmentRevision);
- const proposal=JSON.parse(fs.readFileSync(path.join(root,'catalog','proposed','normal-before-2004-09-30.json'),'utf8'));
- if(!Array.isArray(proposal.candidates))throw new Error('Historical normal proposal must contain a candidate array.');
+ const proposalFiles=['catalog/proposed/normal-before-2004-09-30.json','catalog/proposed/normal-next-mission3.json'];
+ const proposals=proposalFiles.map(source=>({source,proposal:JSON.parse(fs.readFileSync(path.join(root,source),'utf8'))}));
+ for(const {source,proposal} of proposals)if(!Array.isArray(proposal.candidates))throw new Error('Historical normal proposal must contain a candidate array: '+source);
  const before=indexCards(shared.cards,'shared snapshot'),after=indexCards(development.cards,'development snapshot');
- const proposalIds=proposal.candidates.map(candidate=>candidate.id);
- const proposalTriage={
-  source:'catalog/proposed/normal-before-2004-09-30.json',cutoff:proposal.cutoff,candidates:proposal.candidates.length,
-  alreadyInShared:proposal.candidates.filter(candidate=>before.has(candidate.id)).length,
-  alreadyCertifiedInShared:proposal.candidates.filter(candidate=>Object.hasOwn(shared.certificates,candidate.id)).length,
-  alreadyInDevelopment:proposal.candidates.filter(candidate=>after.has(candidate.id)).length,
-  alreadyCertifiedInDevelopment:proposal.candidates.filter(candidate=>Object.hasOwn(development.certificates,candidate.id)).length,
-  notInShared:proposal.candidates.filter(candidate=>!before.has(candidate.id)).map(candidate=>candidate.id).sort(),
-  notInDevelopment:proposal.candidates.filter(candidate=>!after.has(candidate.id)).map(candidate=>candidate.id).sort(),
-  duplicateProposalIds:proposalIds.filter((id,index)=>proposalIds.indexOf(id)!==index).sort()
+ const triageProposal=(source,proposal)=>{
+  const proposalIds=proposal.candidates.map(candidate=>candidate.id);
+  return {
+   source,cutoff:proposal.cutoff,candidates:proposal.candidates.length,
+   alreadyInShared:proposal.candidates.filter(candidate=>before.has(candidate.id)).length,
+   alreadyCertifiedInShared:proposal.candidates.filter(candidate=>Object.hasOwn(shared.certificates,candidate.id)).length,
+   alreadyInDevelopment:proposal.candidates.filter(candidate=>after.has(candidate.id)).length,
+   alreadyCertifiedInDevelopment:proposal.candidates.filter(candidate=>Object.hasOwn(development.certificates,candidate.id)).length,
+   notInShared:proposal.candidates.filter(candidate=>!before.has(candidate.id)).map(candidate=>candidate.id).sort(),
+   notInDevelopment:proposal.candidates.filter(candidate=>!after.has(candidate.id)).map(candidate=>candidate.id).sort(),
+   duplicateProposalIds:proposalIds.filter((id,index)=>proposalIds.indexOf(id)!==index).sort()
+  };
  };
+ const proposalTriage=triageProposal(proposals[0].source,proposals[0].proposal);
+ proposalTriage.additionalProposals=proposals.slice(1).map(({source,proposal})=>triageProposal(source,proposal));
  const sharedIds=[...before.keys()],developmentIds=[...after.keys()];
  const sharedSet=new Set(sharedIds),developmentSet=new Set(developmentIds);
  const common=sharedIds.filter(id=>developmentSet.has(id));
@@ -239,7 +244,7 @@ function auditCatalogIntegrationDelta({
   engineMergeReady:false,
   mergeAuthorized:false,
   deployAuthorized:false,
-  limitation:'This audit proves snapshot hashes, eight-digit identity uniqueness, one-to-one card/certificate maps, append-only preservation, card-specific official Konami URLs, safe suite wrappers, referenced batch files, matching candidate/review fingerprints, complete review flags, declared scenario fixtures/assertions and whether the legacy normal proposal is already catalogued. It does not execute the behavioral suites, recompute engine definition fingerprints, prove runtime compatibility, PR mergeability, live Discord behavior or deployment readiness.'
+  limitation:'This audit proves snapshot hashes, eight-digit identity uniqueness, one-to-one card/certificate maps, append-only preservation, card-specific official Konami URLs, safe suite wrappers, referenced batch files, matching candidate/review fingerprints, complete review flags, declared scenario fixtures/assertions and whether the legacy normal proposals are already catalogued. It does not execute the behavioral suites, recompute engine definition fingerprints, prove runtime compatibility, PR mergeability, live Discord behavior or deployment readiness.'
  };
  return result;
 }
