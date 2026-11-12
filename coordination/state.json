@@ -1,25 +1,22 @@
 {
-  "runId": "work-20261112T025617-0300",
+  "runId": "work-20261112T062618-0300",
   "owner": null,
   "priorityRequestedBy": "user",
   "state": "released",
-  "startedAt": "2026-11-12T02:56:17-03:00",
-  "lastActivityAt": "2026-11-12T03:17:19-03:00",
-  "nextScheduledAt": "2026-11-12T06:30:00-03:00",
+  "startedAt": "2026-11-12T06:26:18-03:00",
+  "lastActivityAt": "2026-11-12T06:31:00-03:00",
+  "nextScheduledAt": "2026-11-12T11:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "docs/evidence/m60-flip-cycle-research.json",
-    "tests/m60FlipCycleResearch.test.cjs",
-    "scripts/audit-catalog-integration-delta.cjs",
-    "tests/catalogIntegrationDelta.test.cjs",
     "scripts/plan-normal-expansion-v9.cjs",
     "tests/normalExpansionV9Planner.test.cjs",
-    "package.json",
+    "docs/evidence/m60-flip-cycle-research.json",
+    "tests/m60FlipCycleResearch.test.cjs",
     "coordination"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261112T025617-0300.json",
-  "previousRunId": "work-20261112T012544-0300",
+  "lastCheckpoint": "coordination/runs/work-20261112T062618-0300.json",
+  "previousRunId": "work-20261112T025617-0300",
   "previousReservation": {
     "branch": "feat/work-m60-20261111",
     "head": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
@@ -31,75 +28,73 @@
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6815587086,
-    "noResponse": true
+    "lastRequestComment": 6819899652,
+    "noResponse": true,
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/classicEffects.ts",
+      "src/duelIntegrity.ts",
+      "scripts/mass-certification21.cjs"
+    ]
   },
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
-      "head": "c2c5db1f5d56cbc5ae1450fea0b64ba85da05a40",
-      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "head": "cbb8be6b01d5d26586c4dc268fa315cc0e06e607",
       "pr": 19,
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
       "scope": [
         "docs/evidence/m60-flip-cycle-research.json",
         "tests/m60FlipCycleResearch.test.cjs"
       ],
       "ci": {
-        "cardBatchFast": "success",
+        "cardBatchFast": "in_progress",
+        "runId": 43192284375,
         "engineValidation": "in_progress",
-        "runId": 43165584883
+        "engineRunId": 43192284528
       }
     },
     {
       "branch": "feat/work-m64-catalog-delta-audit-20261112",
       "head": "5d5f9fa52f5825c6edba201e8e7f66dffe141009",
-      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
       "pr": 20,
-      "scope": [
-        "scripts/audit-catalog-integration-delta.cjs",
-        "tests/catalogIntegrationDelta.test.cjs",
-        "package.json"
-      ],
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
       "ci": {
         "cardBatchFast": "success",
-        "engineValidation": "in_progress",
-        "runId": 43165884069
+        "fastRunId": 43165884034,
+        "engineValidation": "success",
+        "engineRunId": 43165884069
       }
     },
     {
       "branch": "feat/work-m65-normal-v9-triage-20261112",
-      "head": "dc01a68d029f9c6c35cbafab24bd9e226bac2a6e",
-      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "head": "faded3908e3731edbaec8e8996d0705c2bbd206b",
       "pr": 21,
-      "scope": [
-        "scripts/plan-normal-expansion-v9.cjs",
-        "tests/normalExpansionV9Planner.test.cjs",
-        "package.json"
-      ],
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
       "ci": {
         "cardBatchFast": "success",
+        "fastRunId": 43191998106,
         "engineValidation": "in_progress",
-        "runId": 43166719821
+        "engineRunId": 43191997694
       }
     }
   ],
   "handoffRequest": {
-    "requestedBy": "work-20261112T025617-0300",
-    "requestedAt": "2026-11-12T02:56:17-03:00",
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "lastCommentId": 6815587086,
-    "reason": "Solicitar checkpoint/liberação antes de editar os arquivos de runtime reservados."
+    "lastCommentId": 6819899652,
+    "reason": "Aguardar checkpoint/liberação antes de editar runtime reservado."
   },
   "handoff": {
     "to": "auxiliary",
     "status": "available",
-    "at": "2026-11-12T03:17:19-03:00",
+    "at": "2026-11-12T06:31:00-03:00",
     "baseBranch": "feat/work-m65-normal-v9-triage-20261112",
-    "baseCommit": "dc01a68d029f9c6c35cbafab24bd9e226bac2a6e",
-    "scope": "O auxiliar pode criar branch própria a partir do checkpoint M65, monitorar CI e fazer pesquisa de candidatos/fontes. Não modificar branches M63/M64/M65 do Work, nem arquivos/branch M61 reservados; sem admission, merge ou deploy.",
-    "nextTask": "Monitorar CI das PRs 19–21. Extrair do teste real do M65 a contagem de candidatos Normal ainda ausentes; iniciar revisão de identidade/impressão oficial em branch auxiliar própria, sem certificar nem admitir até revisão completa.",
-    "nextWorkAt": "2026-11-12T06:30:00-03:00"
+    "baseCommit": "faded3908e3731edbaec8e8996d0705c2bbd206b",
+    "scope": "Branch auxiliar própria somente; pode monitorar CI de PRs 19–21 e fazer pesquisa independente. Não editar branches M63/M64/M65 do Work, nem arquivos/branch M61; sem admissão, certificação, merge ou deploy.",
+    "nextTask": "Monitorar CI das PRs 19 e 21; pesquisar candidatos Normal ausentes em branch auxiliar própria, sem alterar catálogo/certificados; aguardar a próxima janela do Work.",
+    "nextWorkAt": "2026-11-12T11:30:00-03:00"
   },
   "catalog": {
     "shared": {
@@ -123,13 +118,11 @@
     "newAdmissionsThisRun": 0
   },
   "m60": {
-    "researchCandidates": [
+    "officialSourceReviewed": [
       "15383415",
       "41872150",
       "03510565",
-      "02326738"
-    ],
-    "deferred": [
+      "02326738",
       "40659562"
     ],
     "admitted": 0,
@@ -142,72 +135,73 @@
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "ci": "success",
-      "head": "de04801442a7391faa35fe1e5bf47d1234bb9593"
+      "head": "b6929b103972fb9e903fc7de0069875d5fdb5609",
+      "ci": "success"
     },
     {
       "number": 13,
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "ci": "failed",
-      "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3"
+      "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
+      "ci": "failed"
     },
     {
       "number": 14,
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "ci": "success",
-      "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6"
+      "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+      "ci": "success"
     },
     {
       "number": 15,
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "ci": "no-runs-visible",
-      "head": "7139b101b3586c2d592ada7a8696fe6c333167f8"
+      "head": "7139b101b3586c2d592ada7a8696fe6c333167f8",
+      "ci": "no-runs-visible"
     },
     {
       "number": 17,
       "state": "open",
       "draft": true,
       "mergeable": true,
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
       "ci": "failed",
-      "head": "78aa57851420e0f52211f7267faf1af681847ea3"
+      "handoff": "awaiting-response"
     },
     {
       "number": 18,
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "ci": "success",
-      "head": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7"
+      "head": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
+      "ci": "success"
     },
     {
       "number": 19,
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "ci": "fast-success; engine-validation-in-progress",
-      "head": "c2c5db1f5d56cbc5ae1450fea0b64ba85da05a40"
+      "head": "cbb8be6b01d5d26586c4dc268fa315cc0e06e607",
+      "ci": "fast-and-engine-validation-in-progress"
     },
     {
       "number": 20,
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "ci": "fast-success; engine-validation-in-progress",
-      "head": "5d5f9fa52f5825c6edba201e8e7f66dffe141009"
+      "head": "5d5f9fa52f5825c6edba201e8e7f66dffe141009",
+      "ci": "success"
     },
     {
       "number": 21,
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "ci": "fast-success; engine-validation-in-progress",
-      "head": "dc01a68d029f9c6c35cbafab24bd9e226bac2a6e"
+      "head": "faded3908e3731edbaec8e8996d0705c2bbd206b",
+      "ci": "fast-success-engine-validation-in-progress"
     }
   ],
   "ci": {
@@ -240,13 +234,13 @@
     "merge": false,
     "deploy": false,
     "liveDiscordValidation": false,
-    "hostingStatus": "Não verificável; nenhum workflow de deploy encontrado em .github/workflows e o endpoint de deployments não está acessível pela conexão atual."
+    "hostingStatus": "Não verificável nesta execução; nenhum deploy executado."
   },
   "duration": {
-    "elapsedWallMinutes": 21,
+    "elapsedWallMinutes": 5,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Tempo efetivo não foi instrumentado; não contabilizar espera de CI como desenvolvimento."
+    "note": "Bloco interrompido pelo limite da janela; não contabilizar espera de CI como trabalho."
   },
-  "nextTask": "Aguardar CI de PRs 19–21; depois do handoff M61, implementar e certificar M60; em paralelo, revisar candidatos Normal gerados contra engine-v9."
+  "nextTask": "Após o handoff M61, corrigir TS2367/TS2339 com CI completa, implementar e testar setSelfFaceDown e marcador once-per-turn persistente; então transformar M60 em lote comportamental, sem admitir Guardian Sphinx até existir operação correta de retorno em massa."
 }
