@@ -6,6 +6,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const {createHash}=require('node:crypto');
 const {isDeepStrictEqual}=require('node:util');
+const ts=require('typescript');
 
 const DEFAULT_SHARED_REVISION='3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99';
 const DEFAULT_DEVELOPMENT_REVISION='72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52';
@@ -69,8 +70,19 @@ function safeBatchPath(batchPath,root){
 }
 
 function suiteRegistration(source){
- const match=source.match(/registerBatch\(\s*(['"])([^'"]+)\1\s*,\s*(['"])([^'"]+)\3\s*\)/);
- return match?{batchPath:match[2],suite:match[4]}:null;
+ if(typeof source!=='string')return null;
+ const file=ts.createSourceFile('catalog-suite.cjs',source,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
+ if(file.parseDiagnostics.length||file.statements.length!==1)return null;
+ const statement=file.statements[0];
+ if(!ts.isExpressionStatement(statement)||!ts.isCallExpression(statement.expression))return null;
+ const call=statement.expression;
+ if(!ts.isPropertyAccessExpression(call.expression)||call.expression.name.text!=='registerBatch')return null;
+ const loader=call.expression.expression;
+ if(!ts.isCallExpression(loader)||!ts.isIdentifier(loader.expression)||loader.expression.text!=='require'||loader.arguments.length!==1)return null;
+ const modulePath=loader.arguments[0];
+ if(!ts.isStringLiteral(modulePath)||modulePath.text!=='../scripts/card-batch-scenarios.cjs')return null;
+ if(call.arguments.length!==2||!ts.isStringLiteral(call.arguments[0])||!ts.isStringLiteral(call.arguments[1]))return null;
+ return {batchPath:call.arguments[0].text,suite:call.arguments[1].text};
 }
 
 function inspectSnapshot(data){

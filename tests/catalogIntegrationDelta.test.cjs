@@ -84,6 +84,19 @@ test('generated suite registration binds its exact suite path to a batch file',(
  assert.equal(suiteRegistration("console.log('not a suite')"),null);
 });
 
+test('suite registration ignores comments and string literals that merely imitate the wrapper',()=>{
+ assert.equal(suiteRegistration("// require('../scripts/card-batch-scenarios.cjs').registerBatch('catalog/batches/m60.json','tests/m60.test.cjs');"),null);
+ assert.equal(suiteRegistration("const note=\"require('../scripts/card-batch-scenarios.cjs').registerBatch('catalog/batches/m60.json','tests/m60.test.cjs')\";"),null);
+ assert.equal(suiteRegistration("/* registerBatch('catalog/batches/m60.json','tests/m60.test.cjs') */ console.log('not a suite');"),null);
+});
+
+test('suite registration accepts only the exact loader, two literal arguments and a single statement',()=>{
+ assert.equal(suiteRegistration("require('../scripts/other.cjs').registerBatch('catalog/batches/m60.json','tests/m60.test.cjs');"),null);
+ assert.equal(suiteRegistration("require('../scripts/card-batch-scenarios.cjs').registerBatch('catalog/batches/m60.json','tests/m60.test.cjs','extra');"),null);
+ assert.equal(suiteRegistration("require('../scripts/card-batch-scenarios.cjs').registerBatch(`catalog/batches/m60.json`,'tests/m60.test.cjs');"),null);
+ assert.equal(suiteRegistration("require('../scripts/card-batch-scenarios.cjs').registerBatch('catalog/batches/m60.json','tests/m60.test.cjs'); console.log('extra');"),null);
+});
+
 test('official source validation pins the URL to the card-specific Konami ID',()=>{
  assert.equal(officialSource({konamiId:5418,source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418&request_locale=en'}),true);
  assert.equal(officialSource({konamiId:5418,source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5419&request_locale=en'}),false);
