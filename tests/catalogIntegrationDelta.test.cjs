@@ -2,6 +2,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const path=require('node:path');
+const {spawnSync}=require('node:child_process');
 const {auditCatalogIntegrationDelta}=require('../scripts/audit-catalog-integration-delta.cjs');
 
 const report=auditCatalogIntegrationDelta({root:path.resolve(__dirname,'..')});
@@ -53,4 +54,13 @@ test('catalog data is reconcilable, but the audit does not authorize engine merg
  assert.equal(report.mergeAuthorized,false);
  assert.equal(report.deployAuthorized,false);
  assert.match(report.limitation,/runtime compatibility/);
+});
+
+test('npm audit CLI emits the same read-only reconciliation report',()=>{
+ const result=spawnSync(process.execPath,['scripts/audit-catalog-integration-delta.cjs'],{cwd:path.resolve(__dirname,'..'),encoding:'utf8'});
+ assert.equal(result.status,0,result.stderr);
+ const cli=JSON.parse(result.stdout);
+ assert.equal(cli.catalogReconciliationReady,true);
+ assert.equal(cli.summary.addedCards,45);
+ assert.equal(cli.engineMergeReady,false);
 });
