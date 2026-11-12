@@ -27,7 +27,8 @@
     "audit:rea:strict": "npm run build && node scripts/audit-rea-acceptance.cjs --strict",
     "plan:certification": "npm run build && node scripts/plan-certification-batch.cjs",
     "benchmark:recovery": "node --expose-gc scripts/benchmark-engine-recovery.cjs",
-    "audit:historical-batch": "node scripts/prepare-historical-batch.cjs --verify catalog/proposed/normal-before-2004-09-30.json"
+    "audit:historical-batch": "node scripts/prepare-historical-batch.cjs --verify catalog/proposed/normal-before-2004-09-30.json",
+    "audit:catalog-delta": "node scripts/audit-catalog-integration-delta.cjs"
   },
   "engines": {
     "node": "22.x"
