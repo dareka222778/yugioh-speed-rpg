@@ -378,6 +378,70 @@
   "notes": [
     "This file is a pre-implementation specification, not a certification batch.",
     "The four passcodes were absent from the 1,014-card development snapshot when this specification was created.",
-    "Do not add these cards to the enabled catalog or certificate map until M61 runtime support is released, reconciled and behavior-tested."
+    "Do not add these cards to the enabled catalog or certificate map until M61 runtime support is released, reconciled and behavior-tested.",
+    "Guardian Sphinx (40659562) is historically eligible and shares the self-set ignition, but is deliberately deferred: its Flip Summon effect is a non-targeting mass return and cannot be represented by targetGroup without changing the printed rules."
+  ],
+  "deferredCandidates": [
+    {
+      "card": {
+        "id": "40659562",
+        "konamiId": 5422,
+        "name": "Guardian Sphinx",
+        "englishName": "Guardian Sphinx",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Rock",
+        "attribute": "EARTH",
+        "level": 5,
+        "atk": 1700,
+        "defense": 2400,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5422&ope=2&request_locale=en",
+        "summary": "Na Invocação-Virar, devolve todos os monstros controlados pelo oponente às mãos de seus donos; uma vez por turno, pode se colocar com a face para baixo em Defesa.",
+        "printing": {
+          "date": "2003-07-18",
+          "set": "PGD-025",
+          "setName": "PHARAONIC GUARDIAN",
+          "region": "tcg",
+          "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5422&ope=2&request_locale=en"
+        }
+      },
+      "textEvidence": {
+        "text": "Once each turn, its controller may change it to face-down Defense Position. If Flip Summoned, it returns every monster controlled by the opponent to its owner's hand without targeting.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5422&ope=2&request_locale=en",
+        "sha256": "8ab758379d4145da1b41a2372b4eee2ccc740cdf9fc7a496e0093705f6bdf63f"
+      },
+      "reusableIgnition": {
+        "effect": {
+          "trigger": "ignition",
+          "oncePerTurn": true,
+          "operation": {
+            "kind": "setSelfFaceDown"
+          }
+        },
+        "activation": {
+          "policy": "manual",
+          "window": "main"
+        }
+      },
+      "primaryEffect": {
+        "trigger": "flip",
+        "summons": [
+          "flip"
+        ],
+        "targeting": false,
+        "operationSemantics": "return-all-opponent-controlled-monsters-to-owner-hands"
+      },
+      "blockedReason": "The Flip Summon effect is non-targeting and returns every monster the opponent controls. The current targetGroup abstraction is target-based and requires at least one selected target; reusing it would incorrectly introduce targeting and fail when the opponent controls no monsters. Defer until a dedicated non-targeting mass-return operation is implemented and tested.",
+      "scenarios": [
+        "zero-opponent-monsters",
+        "multiple-monsters-all-return",
+        "return-to-each-owner-hand",
+        "mixed-ownership-under-opponent-control",
+        "face-down-self-set-then-flip-summon",
+        "json-restore-before-mass-return"
+      ]
+    }
   ]
 }
