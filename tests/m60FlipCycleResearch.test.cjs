@@ -39,7 +39,12 @@ test('M60 research covers exactly four distinct, source-linked historical cards'
   assert.equal(source.hostname,'www.db.yugioh-card.com');
   assert.equal(source.pathname,'/yugiohdb/card_search.action');
   assert.equal(source.searchParams.get('ope'),'2');
+  assert.equal(source.searchParams.getAll('ope').length,1);
   assert.equal(source.searchParams.get('cid'),fact.sourceCid);
+  assert.equal(source.searchParams.getAll('cid').length,1);
+  assert.equal(source.username,'');
+  assert.equal(source.password,'');
+  assert.equal(source.hash,'');
   assert.equal(card.printing.date,fact.date);
   assert.equal(card.printing.set,fact.set);
   assert.equal(card.printing.region,'tcg');
@@ -67,6 +72,8 @@ test('each definition separates mandatory Flip Summon from the manual Main Phase
   assert.deepEqual(candidate.monster.ignitionEffect.effect,{trigger:'ignition',oncePerTurn:true,operation:{kind:'setSelfFaceDown'}});
   assert.deepEqual(candidate.monster.ignitionEffect.activation,{policy:'manual',window:'main'});
   assert.equal(candidate.monster.ignitionEffect.effect.cost,undefined);
+  assert.equal(new Set(candidate.scenarios).size,candidate.scenarios.length,candidate.card.name+' has duplicate scenario names');
+  assert.equal(new Set(candidate.requirements).size,candidate.requirements.length,candidate.card.name+' has duplicate requirements');
   for(const scenario of commonScenarios)assert.ok(candidate.scenarios.includes(scenario),'missing '+scenario+' for '+candidate.card.name);
   assert.ok(candidate.requirements.includes('trigger:flip'));
   assert.ok(candidate.requirements.includes('trigger:ignition'));
@@ -83,6 +90,25 @@ test('card-specific scenario plans cover target, damage and draw edge cases',()=
  for(const s of ['target-opponent-spell-trap','target-revalidated-at-resolution','no-legal-backrow-target','set-card-identity-remains-hidden'])assert.ok(locusts.includes(s));
  for(const s of ['exactly-1000-damage','lethal-flip-damage-ends-duel','no-damage-on-normal-summon'])assert.ok(stealth.includes(s));
  for(const s of ['draw-exactly-one','empty-deck-draw-causes-deck-out','hand-limit-is-checked-at-end-phase','no-draw-on-normal-summon'])assert.ok(lacooda.includes(s));
+});
+
+test('M60 remains blocked on the exact M61 runtime reservation',()=>{
+ assert.equal(spec.runtimePrerequisite.pullRequest,17);
+ assert.equal(spec.runtimePrerequisite.status,'awaiting-cooperative-handoff');
+ assert.deepEqual(spec.runtimePrerequisite.requiredCapabilities,[
+  'secondary ignition effect slot',
+  'setSelfFaceDown operation',
+  'once-per-turn marker preserved when the source self-sets',
+  'Flip Summon event filter'
+ ]);
+ assert.deepEqual(spec.runtimePrerequisite.blockedFiles,[
+  'src/monsterEffects.ts',
+  'src/duelEngineCurrent.ts',
+  'src/classicEffects.ts',
+  'src/duelIntegrity.ts',
+  'scripts/mass-certification21.cjs'
+ ]);
+ assert.equal(spec.candidates.every(candidate=>candidate.certificate===undefined),true);
 });
 
 test('evidence hashes are bound and the batch cannot be mistaken for admitted cards',()=>{
