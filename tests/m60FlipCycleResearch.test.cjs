@@ -42,6 +42,10 @@ test('M60 research covers exactly four distinct, source-linked historical cards'
   assert.equal(source.searchParams.getAll('ope').length,1);
   assert.equal(source.searchParams.get('cid'),fact.sourceCid);
   assert.equal(source.searchParams.getAll('cid').length,1);
+  assert.equal(source.searchParams.get('request_locale'),'en');
+  assert.equal(source.searchParams.getAll('request_locale').length,1);
+  assert.deepEqual([...source.searchParams.keys()].sort(),['cid','ope','request_locale']);
+  assert.equal(source.port,'');
   assert.equal(source.username,'');
   assert.equal(source.password,'');
   assert.equal(source.hash,'');
@@ -134,6 +138,15 @@ test('Guardian Sphinx is preserved as a deferred non-targeting mass-return case'
  assert.equal(source.hostname,'www.db.yugioh-card.com');
  assert.equal(source.searchParams.get('cid'),'5422');
  assert.equal(source.searchParams.get('ope'),'2');
+ assert.equal(source.searchParams.getAll('cid').length,1);
+ assert.equal(source.searchParams.getAll('ope').length,1);
+ assert.equal(source.searchParams.get('request_locale'),'en');
+ assert.equal(source.searchParams.getAll('request_locale').length,1);
+ assert.deepEqual([...source.searchParams.keys()].sort(),['cid','ope','request_locale']);
+ assert.equal(source.port,'');
+ assert.equal(source.username,'');
+ assert.equal(source.password,'');
+ assert.equal(source.hash,'');
  assert.equal(deferred.card.printing.source,deferred.card.source);
  assert.equal(deferred.card.printing.date,'2003-07-18');
  assert.equal(deferred.card.printing.set,'PGD-025');
