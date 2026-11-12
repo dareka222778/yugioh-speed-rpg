@@ -175,6 +175,20 @@ test('legacy normal proposal is fully stale against both catalog snapshots',()=>
  assert.deepEqual(report.proposalTriage.duplicateProposalIds,[]);
 });
 
+test('the next mission normal proposal is also stale against both catalog snapshots',()=>{
+ const next=report.proposalTriage.additionalProposals.find(item=>item.source==='catalog/proposed/normal-next-mission3.json');
+ assert.ok(next);
+ assert.equal(next.cutoff,'2004-09-30');
+ assert.equal(next.candidates,20);
+ assert.equal(next.alreadyInShared,20);
+ assert.equal(next.alreadyCertifiedInShared,20);
+ assert.equal(next.alreadyInDevelopment,20);
+ assert.equal(next.alreadyCertifiedInDevelopment,20);
+ assert.deepEqual(next.notInShared,[]);
+ assert.deepEqual(next.notInDevelopment,[]);
+ assert.deepEqual(next.duplicateProposalIds,[]);
+});
+
 test('catalog data is reconcilable, but the audit does not authorize engine merge or deployment',()=>{
  assert.equal(report.catalogReconciliationReady,true);
  assert.equal(report.engineMergeReady,false);
@@ -193,6 +207,8 @@ test('npm audit CLI emits the same read-only reconciliation report',()=>{
  assert.equal(cli.batchEvidence.matchedCandidates,45);
  assert.equal(cli.proposalTriage.alreadyInShared,20);
  assert.equal(cli.proposalTriage.notInDevelopment.length,0);
+ assert.equal(cli.proposalTriage.additionalProposals[0].alreadyInDevelopment,20);
+ assert.equal(cli.proposalTriage.additionalProposals[0].notInDevelopment.length,0);
  assert.equal(cli.snapshotIntegrity.development.orphanCertificates.length,0);
  assert.equal(cli.engineMergeReady,false);
 });
