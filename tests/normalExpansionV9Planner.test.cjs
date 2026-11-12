@@ -60,6 +60,23 @@ test('planner returns only unique, current-v9-missing TCG Normal Monsters before
  assert.equal(Object.hasOwn(report.candidates[0],'certificate'),false);
 });
 
+test('planner rejects repeated canonical and Konami identities across the historical source',()=>{
+ const historical=[
+  makeCard('13131313',{id:'shared-canonical'}),
+  makeCard('14141414',{id:'shared-canonical',normalMainCandidate:false}),
+  makeCard('15151515',{id:'konami-a',konamiId:1515}),
+  makeCard('16161616',{id:'konami-b',konamiId:1515,normalMainCandidate:false}),
+  makeCard('17171717',{id:'unique-canonical',konamiId:1717})
+ ];
+ const snapshot={engineVersion:'engine-v9',revision:'a'.repeat(64),cards:[],certificates:{}};
+ const report=planNormalExpansion(historical,snapshot);
+ assert.deepEqual(report.candidates.map(card=>card.id),['17171717']);
+ assert.equal(report.excluded.duplicateCanonicalIdentity,1);
+ assert.equal(report.excluded.duplicateKonamiId,1);
+ assert.equal(new Set(report.candidates.map(card=>card.historicalCanonicalId)).size,report.candidateCount);
+ assert.equal(new Set(report.candidates.map(card=>card.konamiId)).size,report.candidateCount);
+});
+
 test('planner rejects incomplete snapshots and malformed cutoff dates',()=>{
  assert.throws(()=>planNormalExpansion([],{}),/complete engine-v9 catalog snapshot/);
  assert.throws(()=>planNormalExpansion([],{cards:[],certificates:{}},{cutoff:'2004-13-99'}),/Invalid historical cutoff/);
@@ -82,6 +99,8 @@ test('real engine-v9 plan is deterministic and cannot include an enabled or cert
  assert.equal(first.sourceSha256,sourceSha256);
  assert.equal(first.candidateCount,first.candidates.length);
  assert.equal(new Set(first.candidates.map(card=>card.id)).size,first.candidateCount);
+ assert.equal(new Set(first.candidates.map(card=>card.historicalCanonicalId)).size,first.candidateCount);
+ assert.equal(new Set(first.candidates.map(card=>card.konamiId)).size,first.candidateCount);
  assert.ok(first.candidates.every(card=>!enabled.has(card.id)&&!certified.has(card.id)));
  assert.ok(first.candidates.every(card=>card.firstObserved.world<='2004-09-30'&&card.firstObserved.tcg<='2004-09-30'));
  assert.ok(first.candidates.every(card=>card.reviewRequirements.length===REVIEW_REQUIREMENTS.length));
