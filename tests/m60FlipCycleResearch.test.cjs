@@ -98,3 +98,18 @@ test('evidence hashes are bound and the batch cannot be mistaken for admitted ca
   assert.equal(candidate.textEvidence.format,'full-rule-paraphrase');
  }
 });
+
+test('Guardian Sphinx is preserved as a deferred non-targeting mass-return case',()=>{
+ const deferred=spec.deferredCandidates.find(candidate=>candidate.card.id==='40659562');
+ assert.ok(deferred);
+ assert.equal(deferred.card.konamiId,5422);
+ assert.equal(deferred.card.printing.date,'2003-07-18');
+ assert.equal(deferred.card.printing.set,'PGD-025');
+ assert.equal(deferred.primaryEffect.targeting,false);
+ assert.equal(deferred.reusableIgnition.effect.operation.kind,'setSelfFaceDown');
+ assert.match(deferred.blockedReason,/non-targeting/);
+ assert.match(deferred.blockedReason,/at least one selected target/);
+ assert.equal(spec.candidates.some(candidate=>candidate.card.id==='40659562'),false);
+ assert.equal(snapshot.cards.some(card=>card.id==='40659562'),false);
+ assert.equal(deferred.textEvidence.sha256,createHash('sha256').update(deferred.textEvidence.text).digest('hex'));
+});
