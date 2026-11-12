@@ -1,10 +1,10 @@
 {
   "runId": "work-20261112T113442-0300",
-  "owner": "Work",
+  "owner": null,
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "released",
   "startedAt": "2026-11-12T11:34:42-03:00",
-  "lastActivityAt": "2026-11-12T11:34:42-03:00",
+  "lastActivityAt": "2026-11-12T11:47:05-03:00",
   "nextScheduledAt": "2026-11-12T16:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -39,7 +39,7 @@
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
-      "head": "cbb8be6b01d5d26586c4dc268fa315cc0e06e607",
+      "head": "d8d33cc7bd1715c79c19a0b6189534232fca7f01",
       "pr": 19,
       "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
       "scope": [
@@ -47,10 +47,10 @@
         "tests/m60FlipCycleResearch.test.cjs"
       ],
       "ci": {
-        "cardBatchFast": "in_progress",
-        "runId": 43192284375,
+        "cardBatchFast": "success",
+        "runId": 43239125531,
         "engineValidation": "in_progress",
-        "engineRunId": 43192284528
+        "engineRunId": 43239125265
       }
     },
     {
@@ -87,12 +87,12 @@
   "handoff": {
     "to": "auxiliary",
     "status": "available",
-    "at": "2026-11-12T06:31:00-03:00",
+    "at": "2026-11-12T11:47:05-03:00",
     "baseBranch": "feat/work-m65-normal-v9-triage-20261112",
     "baseCommit": "faded3908e3731edbaec8e8996d0705c2bbd206b",
-    "scope": "Branch auxiliar própria somente; pode monitorar CI de PRs 19–21 e fazer pesquisa independente. Não editar branches M63/M64/M65 do Work, nem arquivos/branch M61; sem admissão, certificação, merge ou deploy.",
-    "nextTask": "Monitorar CI das PRs 19 e 21; pesquisar candidatos Normal ausentes em branch auxiliar própria, sem alterar catálogo/certificados; aguardar a próxima janela do Work.",
-    "nextWorkAt": "2026-11-12T11:30:00-03:00"
+    "scope": "Monitorar a conclusão da CI da PR #19 e pesquisar fontes em branch auxiliar própria. Não editar M63/M64/M65 do Work, nem arquivos/branch M61; sem admissão, certificação, merge ou deploy.",
+    "nextTask": "Acompanhar Engine validation 43239125265 da PR #19; reportar o resultado. Pesquisa independente de candidatos pode continuar em branch própria, sem editar catálogo/certificados.",
+    "nextWorkAt": "2026-11-12T16:30:00-03:00"
   },
   "catalog": {
     "shared": {
@@ -166,7 +166,7 @@
       "draft": true,
       "mergeable": true,
       "head": "78aa57851420e0f52211f7267faf1af681847ea3",
-      "ci": "failed",
+      "ci": "failure",
       "handoff": "awaiting-response"
     },
     {
@@ -182,8 +182,8 @@
       "state": "open",
       "draft": true,
       "mergeable": true,
-      "head": "cbb8be6b01d5d26586c4dc268fa315cc0e06e607",
-      "ci": "fast-and-engine-validation-in-progress"
+      "head": "d8d33cc7bd1715c79c19a0b6189534232fca7f01",
+      "ci": "fast-success; engine-validation-in-progress"
     },
     {
       "number": 20,
@@ -206,7 +206,9 @@
     "pr19": {
       "cardBatchFast": "success",
       "engineValidation": "in_progress",
-      "runId": 43165584883
+      "fastRunId": 43239125531,
+      "engineRunId": 43239125265,
+      "npmTest": "success"
     },
     "pr20": {
       "cardBatchFast": "success",
@@ -235,20 +237,11 @@
     "hostingStatus": "Não verificável nesta execução; nenhum deploy executado."
   },
   "duration": {
-    "elapsedWallMinutes": 5,
+    "elapsedWallMinutes": 12,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Bloco interrompido pelo limite da janela; não contabilizar espera de CI como trabalho."
+    "note": "A execução durou 12 minutos de parede; tempo de CI/espera não foi contado como trabalho efetivo. A meta mínima de 60 minutos não foi comprovada."
   },
-  "nextTask": "Após o handoff M61, corrigir TS2367/TS2339 com CI completa, implementar e testar setSelfFaceDown e marcador once-per-turn persistente; então transformar M60 em lote comportamental, sem admitir Guardian Sphinx até existir operação correta de retorno em massa.",
-  "activeExecution": {
-    "id": "work-20261112T113442-0300",
-    "branch": "feat/work-m63-m60-research-20261112",
-    "baseHead": "cbb8be6b01d5d26586c4dc268fa315cc0e06e607",
-    "sharedHeadAtClaim": "5115da0ca3a1a8230028f6dda87e487863df0169",
-    "scope": [
-      "tests/m60FlipCycleResearch.test.cjs"
-    ],
-    "note": "Corrigir somente o teste de evidência M60 que compara um resumo de impressão normalizado com o objeto completo do candidato. M61 permanece reservado; nenhum arquivo bloqueado será alterado."
-  }
+  "nextTask": "Aguardar conclusão da CI integral da PR #19. Após handoff M61, corrigir TS2367/TS2339, implementar e testar setSelfFaceDown com marcador once-per-turn persistente, então transformar M60 em lote comportamental. Não admitir Guardian Sphinx sem operação não-direcionada de retorno em massa.",
+  "sharedHeadBeforeRelease": "790cbacc6b9978eb4b219bcaa32d316e43f1b51d"
 }
