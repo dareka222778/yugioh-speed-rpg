@@ -2,10 +2,11 @@
 const fs=require('node:fs');
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
+const {createHash}=require('node:crypto');
 const path=require('node:path');
 const os=require('node:os');
 const {spawnSync}=require('node:child_process');
-const {auditCatalogIntegrationDelta,officialSource,safeSuitePath,safeBatchPath,realpathWithin,suiteRegistration}=require('../scripts/audit-catalog-integration-delta.cjs');
+const {auditCatalogIntegrationDelta,readSnapshot,officialSource,safeSuitePath,safeBatchPath,realpathWithin,suiteRegistration}=require('../scripts/audit-catalog-integration-delta.cjs');
 
 const root=path.resolve(__dirname,'..');
 const report=auditCatalogIntegrationDelta({root});
@@ -92,6 +93,24 @@ test('realpath containment rejects suite and batch symlinks that escape approved
   assert.equal(realpathWithin(suiteLink,testsRoot),false);
   assert.equal(realpathWithin(insideBatch,batchesRoot),true);
   assert.equal(realpathWithin(batchLink,batchesRoot),false);
+ }finally{fs.rmSync(temp,{recursive:true,force:true});}
+});
+
+test('catalog revision symlinks cannot escape the snapshot root even when their content hash matches',()=>{
+ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'catalog-snapshot-'));
+ try{
+  const repo=path.join(temp,'repo'),catalogRoot=path.join(repo,'catalog','engine-v9'),outside=path.join(temp,'outside.json');
+  fs.mkdirSync(catalogRoot,{recursive:true});
+  const revision='a'.repeat(64);
+  const payload=Buffer.from(JSON.stringify({format:1,engineVersion:'engine-v9',cards:[],effects:{},monsters:{},certificates:{}}));
+  const filename=path.join(catalogRoot,revision+'.json');
+  const manifest={format:1,engineVersion:'engine-v9',revisions:[{id:revision,file:revision+'.json',sha256:createHash('sha256').update(payload).digest('hex')}]};
+  fs.writeFileSync(filename,payload);
+  assert.deepEqual(readSnapshot(repo,manifest,revision),JSON.parse(payload.toString('utf8')));
+  fs.rmSync(filename);
+  fs.writeFileSync(outside,payload);
+  fs.symlinkSync(outside,filename);
+  assert.throws(()=>readSnapshot(repo,manifest,revision),/Catalog revision file is missing or escapes catalog root/);
  }finally{fs.rmSync(temp,{recursive:true,force:true});}
 });
 
