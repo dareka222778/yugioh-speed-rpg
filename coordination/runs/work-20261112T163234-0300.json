@@ -1,0 +1,221 @@
+{
+  "runId": "work-20261112T163234-0300",
+  "owner": "Work",
+  "priority": "Work",
+  "state": "released",
+  "startedAt": "2026-11-12T16:32:34-03:00",
+  "endedAt": "2026-11-12T16:38:22-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtClaim": "86a99bfb5ca07df0816fd0e38d17bfa90f1f78d3",
+  "workBranch": "feat/work-m66-tag-format-boundaries-20261112",
+  "workBranchBase": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+  "workBranchHead": "2af0944c7864a872c4027927fb8a8b7e6faf0941",
+  "pullRequest": {
+    "number": 22,
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "base": "feat/work-m61-ci-base-20261111",
+    "head": "feat/work-m66-tag-format-boundaries-20261112",
+    "headSha": "2af0944c7864a872c4027927fb8a8b7e6faf0941"
+  },
+  "changes": [
+    {
+      "commit": "b56ae16832fdd2263b68a11883d266673ef340c7",
+      "files": [
+        "tests/tagClassicFormatBoundaries.test.cjs"
+      ],
+      "detail": "Quatro cenários de fronteira por assento: decks 20/30 aceitos; 19/31 rejeitados; Extra 5 aceito e 6 rejeitado; apenas Fusões no Extra; conservação das identidades físicas por participante."
+    },
+    {
+      "commit": "2af0944c7864a872c4027927fb8a8b7e6faf0941",
+      "files": [
+        "tests/tagClassicSharedFieldBoundaries.test.cjs"
+      ],
+      "detail": "Três cenários para o campo compartilhado 2v2: exatamente 3 zonas de Monstro + 3 de Magias/Armadilhas aceitas; quarta carta em cada zona rejeitada sem perder a identidade física."
+    }
+  ],
+  "validation": {
+    "typecheck": {
+      "status": "success",
+      "runId": 43292009861,
+      "step": "npm run check"
+    },
+    "cardBatchFast": {
+      "status": "in_progress",
+      "runId": 43292009792
+    },
+    "engineValidation": {
+      "status": "in_progress",
+      "runId": 43292009861
+    },
+    "npmTest": "pending-at-checkpoint",
+    "extendedSoak": "in_progress",
+    "note": "Os dois workflows iniciaram no HEAD final 2af0944. Não declarar os testes novos aprovados até a conclusão."
+  },
+  "audit": {
+    "branchesObserved": [
+      "feat/rea-engine-recovery-20261026",
+      "feat/work-m61-handlimit-ci-20261111",
+      "feat/work-m61-ci-base-20261111",
+      "feat/work-m63-m60-research-20261112",
+      "feat/work-m64-catalog-delta-audit-20261112",
+      "feat/work-m65-normal-v9-triage-20261112",
+      "feat/work-m66-tag-format-boundaries-20261112",
+      "feat/aux-m65-normal-candidate-audit-20261112",
+      "feat/aux-pr19-evidence-shape-audit-20261112"
+    ],
+    "pullRequests": [
+      {
+        "number": 12,
+        "state": "open",
+        "draft": true,
+        "ci": "success"
+      },
+      {
+        "number": 13,
+        "state": "open",
+        "draft": true,
+        "ci": "failure"
+      },
+      {
+        "number": 14,
+        "state": "open",
+        "draft": true,
+        "ci": "success"
+      },
+      {
+        "number": 15,
+        "state": "open",
+        "draft": true,
+        "ci": "no-runs-visible"
+      },
+      {
+        "number": 17,
+        "state": "open",
+        "draft": true,
+        "ci": "failure",
+        "handoff": "awaiting-response"
+      },
+      {
+        "number": 18,
+        "state": "open",
+        "draft": true,
+        "ci": "success"
+      },
+      {
+        "number": 19,
+        "state": "open",
+        "draft": true,
+        "ci": "success"
+      },
+      {
+        "number": 20,
+        "state": "open",
+        "draft": true,
+        "ci": "success"
+      },
+      {
+        "number": 21,
+        "state": "open",
+        "draft": true,
+        "ci": "success"
+      },
+      {
+        "number": 22,
+        "state": "open",
+        "draft": true,
+        "ci": "in_progress"
+      }
+    ],
+    "pr19Runs": [
+      43239125265,
+      43239125531
+    ],
+    "pr20Runs": [
+      43165884034,
+      43165884069
+    ],
+    "pr21Runs": [
+      43191997694,
+      43191998106
+    ],
+    "pr22Runs": [
+      43292009792,
+      43292009861
+    ]
+  },
+  "m61": {
+    "pr": 17,
+    "branch": "feat/work-m61-handlimit-ci-20261111",
+    "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+    "handoffStatus": "awaiting-response",
+    "handoffComment": 6833907240,
+    "noResponseAtCheckpoint": true,
+    "reservedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/classicEffects.ts",
+      "src/duelIntegrity.ts",
+      "scripts/mass-certification21.cjs"
+    ],
+    "ciErrors": [
+      "TS2367",
+      "TS2339"
+    ],
+    "errorLocation": "src/duelEngineCurrent.ts:410",
+    "note": "PR #17 continua com falha de TypeScript; seu diff altera runtime e o script de certificação, embora a descrição da PR afirme que não altera runtime. Nenhum desses arquivos foi modificado nesta sessão."
+  },
+  "catalog": {
+    "shared": {
+      "cards": 969,
+      "certificates": 969,
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
+    },
+    "development": {
+      "cards": 1014,
+      "certificates": 1014,
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
+    },
+    "delta": {
+      "added": 45,
+      "removed": 0,
+      "changedCommonCards": 0,
+      "changedCommonEffects": 0,
+      "changedCommonMonsters": 0,
+      "changedCommonCertificates": 0
+    },
+    "newAdmissionsThisRun": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "workflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "hostingStatus": "Nenhum workflow de deploy está presente na branch compartilhada; o estado do host não pôde ser validado. Nenhum deploy foi executado."
+  },
+  "handoff": {
+    "to": "auxiliary",
+    "status": "available",
+    "at": "2026-11-12T16:38:22-03:00",
+    "baseBranch": "feat/work-m66-tag-format-boundaries-20261112",
+    "baseCommit": "2af0944c7864a872c4027927fb8a8b7e6faf0941",
+    "scope": "Monitorar a CI da PR #22 e pesquisar candidatos em branch própria. Não editar M61 nem a branch M66, M63/M64/M65; sem admissão, certificação, merge ou deploy.",
+    "nextTask": "Acompanhar runs 43292009792 e 43292009861 da PR #22; relatar conclusão sem alterar a branch M66. Pesquisa de cartas somente em branch auxiliar exclusiva.",
+    "nextWorkAt": "2026-11-12T21:30:00-03:00"
+  },
+  "duration": {
+    "elapsedWallMinutes": 5,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Janela de parede aproximada de 5 minutos; houve implementação e publicação de dois arquivos de teste, mas a duração efetiva não foi cronometrada e a meta de 60 minutos não foi comprovada. Espera de CI não foi contabilizada como trabalho."
+  },
+  "nextTask": "Aguardar CI integral da PR #22. Após transferência explícita de M61, corrigir TS2367/TS2339, implementar e testar setSelfFaceDown com marcador once-per-turn persistente, então admitir e certificar comportamentalmente M60. Não admitir Guardian Sphinx sem operação não-direcionada de retorno em massa.",
+  "sharedHeadBeforeRelease": "86a99bfb5ca07df0816fd0e38d17bfa90f1f78d3"
+}

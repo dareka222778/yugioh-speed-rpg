@@ -1,20 +1,21 @@
 {
-  "runId": "work-20261112T113442-0300",
+  "runId": "work-20261112T163234-0300",
   "owner": null,
   "priorityRequestedBy": "Work",
   "state": "released",
-  "startedAt": "2026-11-12T11:34:42-03:00",
-  "lastActivityAt": "2026-11-12T11:47:05-03:00",
-  "nextScheduledAt": "2026-11-12T16:30:00-03:00",
+  "startedAt": "2026-11-12T16:32:34-03:00",
+  "lastActivityAt": "2026-11-12T16:38:22-03:00",
+  "nextScheduledAt": "2026-11-12T21:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "feat/work-m63-m60-research-20261112",
-    "tests/m60FlipCycleResearch.test.cjs",
+    "feat/work-m66-tag-format-boundaries-20261112",
+    "tests/tagClassicFormatBoundaries.test.cjs",
+    "tests/tagClassicSharedFieldBoundaries.test.cjs",
     "coordination"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261112T113442-0300.json",
-  "previousRunId": "work-20261112T025617-0300",
+  "lastCheckpoint": "coordination/runs/work-20261112T163234-0300.json",
+  "previousRunId": "work-20261112T113442-0300",
   "previousReservation": {
     "branch": "feat/work-m60-20261111",
     "head": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
@@ -26,7 +27,7 @@
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6819899652,
+    "lastRequestComment": 6833907240,
     "noResponse": true,
     "blockedFiles": [
       "src/monsterEffects.ts",
@@ -49,7 +50,7 @@
       "ci": {
         "cardBatchFast": "success",
         "runId": 43239125531,
-        "engineValidation": "in_progress",
+        "engineValidation": "success",
         "engineRunId": 43239125265
       }
     },
@@ -73,37 +74,53 @@
       "ci": {
         "cardBatchFast": "success",
         "fastRunId": 43191998106,
-        "engineValidation": "in_progress",
+        "engineValidation": "success",
         "engineRunId": 43191997694
+      }
+    },
+    {
+      "branch": "feat/work-m66-tag-format-boundaries-20261112",
+      "head": "2af0944c7864a872c4027927fb8a8b7e6faf0941",
+      "pr": 22,
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFormatBoundaries.test.cjs",
+        "tests/tagClassicSharedFieldBoundaries.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "fastRunId": 43292009792,
+        "engineValidation": "in_progress",
+        "engineRunId": 43292009861
       }
     }
   ],
   "handoffRequest": {
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "lastCommentId": 6819899652,
+    "lastCommentId": 6833907240,
     "reason": "Aguardar checkpoint/liberação antes de editar runtime reservado."
   },
   "handoff": {
     "to": "auxiliary",
     "status": "available",
-    "at": "2026-11-12T11:47:05-03:00",
-    "baseBranch": "feat/work-m65-normal-v9-triage-20261112",
-    "baseCommit": "faded3908e3731edbaec8e8996d0705c2bbd206b",
-    "scope": "Monitorar a conclusão da CI da PR #19 e pesquisar fontes em branch auxiliar própria. Não editar M63/M64/M65 do Work, nem arquivos/branch M61; sem admissão, certificação, merge ou deploy.",
-    "nextTask": "Acompanhar Engine validation 43239125265 da PR #19; reportar o resultado. Pesquisa independente de candidatos pode continuar em branch própria, sem editar catálogo/certificados.",
-    "nextWorkAt": "2026-11-12T16:30:00-03:00"
+    "at": "2026-11-12T16:38:22-03:00",
+    "baseBranch": "feat/work-m66-tag-format-boundaries-20261112",
+    "baseCommit": "2af0944c7864a872c4027927fb8a8b7e6faf0941",
+    "scope": "Monitorar a CI da PR #22 e pesquisar candidatos em branch própria. Não editar M61 nem a branch M66, M63/M64/M65; sem admissão, certificação, merge ou deploy.",
+    "nextTask": "Acompanhar runs 43292009792 e 43292009861 da PR #22; relatar conclusão sem alterar a branch M66. Pesquisa de cartas somente em branch auxiliar exclusiva.",
+    "nextWorkAt": "2026-11-12T21:30:00-03:00"
   },
   "catalog": {
     "shared": {
-      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
       "cards": 969,
-      "certificates": 969
+      "certificates": 969,
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
     },
     "development": {
-      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52",
       "cards": 1014,
-      "certificates": 1014
+      "certificates": 1014,
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
     },
     "delta": {
       "added": 45,
@@ -132,40 +149,30 @@
       "number": 12,
       "state": "open",
       "draft": true,
-      "mergeable": true,
-      "head": "b6929b103972fb9e903fc7de0069875d5fdb5609",
       "ci": "success"
     },
     {
       "number": 13,
       "state": "open",
       "draft": true,
-      "mergeable": true,
-      "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
-      "ci": "failed"
+      "ci": "failure"
     },
     {
       "number": 14,
       "state": "open",
       "draft": true,
-      "mergeable": true,
-      "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
       "ci": "success"
     },
     {
       "number": 15,
       "state": "open",
       "draft": true,
-      "mergeable": true,
-      "head": "7139b101b3586c2d592ada7a8696fe6c333167f8",
       "ci": "no-runs-visible"
     },
     {
       "number": 17,
       "state": "open",
       "draft": true,
-      "mergeable": true,
-      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
       "ci": "failure",
       "handoff": "awaiting-response"
     },
@@ -173,52 +180,53 @@
       "number": 18,
       "state": "open",
       "draft": true,
-      "mergeable": true,
-      "head": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
       "ci": "success"
     },
     {
       "number": 19,
       "state": "open",
       "draft": true,
-      "mergeable": true,
-      "head": "d8d33cc7bd1715c79c19a0b6189534232fca7f01",
-      "ci": "fast-success; engine-validation-in-progress"
+      "ci": "success"
     },
     {
       "number": 20,
       "state": "open",
       "draft": true,
-      "mergeable": true,
-      "head": "5d5f9fa52f5825c6edba201e8e7f66dffe141009",
       "ci": "success"
     },
     {
       "number": 21,
       "state": "open",
       "draft": true,
-      "mergeable": true,
-      "head": "faded3908e3731edbaec8e8996d0705c2bbd206b",
-      "ci": "fast-success-engine-validation-in-progress"
+      "ci": "success"
+    },
+    {
+      "number": 22,
+      "state": "open",
+      "draft": true,
+      "ci": "in_progress"
     }
   ],
   "ci": {
     "pr19": {
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
+      "engineValidation": "success",
       "fastRunId": 43239125531,
       "engineRunId": 43239125265,
-      "npmTest": "success"
+      "npmTest": "success",
+      "extendedSoak": "success"
     },
     "pr20": {
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
-      "runId": 43165884069
+      "engineValidation": "success",
+      "fastRunId": 43165884034,
+      "engineRunId": 43165884069
     },
     "pr21": {
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
-      "runId": 43166719821
+      "engineValidation": "success",
+      "fastRunId": 43191998106,
+      "engineRunId": 43191997694
     },
     "pr17": {
       "engineValidation": "failure",
@@ -228,20 +236,33 @@
         "TS2339"
       ],
       "file": "src/duelEngineCurrent.ts:410"
+    },
+    "pr22": {
+      "cardBatchFast": "in_progress",
+      "engineValidation": "in_progress",
+      "fastRunId": 43292009792,
+      "engineRunId": 43292009861,
+      "typecheck": "success"
     }
   },
   "production": {
     "merge": false,
     "deploy": false,
     "liveDiscordValidation": false,
-    "hostingStatus": "Não verificável nesta execução; nenhum deploy executado."
+    "workflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "hostingStatus": "Nenhum workflow de deploy está presente na branch compartilhada; o estado do host não pôde ser validado. Nenhum deploy foi executado."
   },
   "duration": {
-    "elapsedWallMinutes": 12,
+    "elapsedWallMinutes": 5,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "A execução durou 12 minutos de parede; tempo de CI/espera não foi contado como trabalho efetivo. A meta mínima de 60 minutos não foi comprovada."
+    "note": "Janela de parede aproximada de 5 minutos; houve implementação e publicação de dois arquivos de teste, mas a duração efetiva não foi cronometrada e a meta de 60 minutos não foi comprovada. Espera de CI não foi contabilizada como trabalho."
   },
-  "nextTask": "Aguardar conclusão da CI integral da PR #19. Após handoff M61, corrigir TS2367/TS2339, implementar e testar setSelfFaceDown com marcador once-per-turn persistente, então transformar M60 em lote comportamental. Não admitir Guardian Sphinx sem operação não-direcionada de retorno em massa.",
-  "sharedHeadBeforeRelease": "790cbacc6b9978eb4b219bcaa32d316e43f1b51d"
+  "nextTask": "Aguardar CI integral da PR #22. Após transferência explícita de M61, corrigir TS2367/TS2339, implementar e testar setSelfFaceDown com marcador once-per-turn persistente, então admitir e certificar comportamentalmente M60. Não admitir Guardian Sphinx sem operação não-direcionada de retorno em massa.",
+  "sharedHeadBeforeRelease": "86a99bfb5ca07df0816fd0e38d17bfa90f1f78d3"
 }
