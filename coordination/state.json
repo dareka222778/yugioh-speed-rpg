@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released",
   "startedAt": "2026-11-12T16:32:34-03:00",
-  "lastActivityAt": "2026-11-12T16:38:22-03:00",
+  "lastActivityAt": "2026-11-12T16:39:12-03:00",
   "nextScheduledAt": "2026-11-12T21:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -88,7 +88,7 @@
         "tests/tagClassicSharedFieldBoundaries.test.cjs"
       ],
       "ci": {
-        "cardBatchFast": "in_progress",
+        "cardBatchFast": "success",
         "fastRunId": 43292009792,
         "engineValidation": "in_progress",
         "engineRunId": 43292009861
@@ -204,7 +204,7 @@
       "number": 22,
       "state": "open",
       "draft": true,
-      "ci": "in_progress"
+      "ci": "fast-success; engine-validation-in-progress"
     }
   ],
   "ci": {
@@ -238,7 +238,7 @@
       "file": "src/duelEngineCurrent.ts:410"
     },
     "pr22": {
-      "cardBatchFast": "in_progress",
+      "cardBatchFast": "success",
       "engineValidation": "in_progress",
       "fastRunId": 43292009792,
       "engineRunId": 43292009861,
