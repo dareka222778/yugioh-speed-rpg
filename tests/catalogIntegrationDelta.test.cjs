@@ -3,7 +3,7 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const path=require('node:path');
 const {spawnSync}=require('node:child_process');
-const {auditCatalogIntegrationDelta,officialSource,safeSuitePath}=require('../scripts/audit-catalog-integration-delta.cjs');
+const {auditCatalogIntegrationDelta,officialSource,safeSuitePath,safeBatchPath,suiteRegistration}=require('../scripts/audit-catalog-integration-delta.cjs');
 
 const root=path.resolve(__dirname,'..');
 const report=auditCatalogIntegrationDelta({root});
@@ -45,8 +45,11 @@ test('both snapshots have one-to-one card/certificate identities and no orphaned
  assert.equal(report.summary.developmentCertificates,report.summary.developmentCards);
 });
 
-test('all 45 additions have card-specific Konami sources, certificate fingerprints and existing regression suites',()=>{
- assert.deepEqual(report.integrity,{missingCertificates:[],missingEffects:[],invalidCardMetadata:[],invalidSources:[],unsafeSuites:[],missingSuites:[]});
+test('all 45 additions have complete reviewed batch evidence behind their certificate and suite',()=>{
+ assert.deepEqual(report.integrity,{
+  missingCertificates:[],missingEffects:[],invalidCardMetadata:[],invalidSources:[],unsafeSuites:[],missingSuites:[],
+  invalidSuites:[],unsafeBatches:[],missingBatches:[],invalidBatches:[],missingBatchEvidence:[],invalidBatchEvidence:[]
+ });
  assert.equal(report.addedCards.length,45);
  for(const card of report.addedCards){
   assert.match(card.id,/^\d{8}$/);
@@ -54,21 +57,31 @@ test('all 45 additions have card-specific Konami sources, certificate fingerprin
   assert.match(card.fingerprint,/^[a-f0-9]{64}$/);
   assert.ok(card.suites.length>0,card.id+' has no behavioral suite');
  }
+ assert.equal(report.batchEvidence.referencedBatches.length,14);
+ assert.equal(report.batchEvidence.matchedCandidates,45);
+ assert.equal(report.batchEvidence.matchedReviews,45);
+ assert.ok(report.batchEvidence.scenarioCases>45);
  assert.deepEqual(report.suiteCounts,expectedSuites);
 });
 
-test('suite references are restricted to normalized test files inside the repository tests directory',()=>{
+test('suite and batch paths are normalized and confined to their repository directories',()=>{
  assert.equal(safeSuitePath('tests/example.test.cjs',root),true);
  for(const candidate of [
-  '../outside.test.cjs',
-  'tests/../../outside.test.cjs',
-  'tests\\outside.test.cjs',
-  '/tmp/outside.test.cjs',
-  'src/outside.test.cjs',
-  'tests/outside.js',
-  'tests//nested.test.cjs',
-  'tests/./nested.test.cjs'
+  '../outside.test.cjs','tests/../../outside.test.cjs','tests\\outside.test.cjs',
+  '/tmp/outside.test.cjs','src/outside.test.cjs','tests/outside.js','tests//nested.test.cjs','tests/./nested.test.cjs'
  ])assert.equal(safeSuitePath(candidate,root),false,candidate);
+ assert.equal(safeBatchPath('catalog/batches/m60.json',root),true);
+ for(const candidate of [
+  '../outside.json','catalog/batches/../../outside.json','catalog/batches\\outside.json',
+  '/tmp/outside.json','docs/outside.json','catalog/batches/outside.txt','catalog/batches//nested.json'
+ ])assert.equal(safeBatchPath(candidate,root),false,candidate);
+});
+
+test('generated suite registration binds its exact suite path to a batch file',()=>{
+ assert.deepEqual(suiteRegistration("require('../scripts/card-batch-scenarios.cjs').registerBatch('catalog/batches/m60.json', \"tests/m60.test.cjs\");"),{
+  batchPath:'catalog/batches/m60.json',suite:'tests/m60.test.cjs'
+ });
+ assert.equal(suiteRegistration("console.log('not a suite')"),null);
 });
 
 test('official source validation pins the URL to the card-specific Konami ID',()=>{
@@ -77,6 +90,7 @@ test('official source validation pins the URL to the card-specific Konami ID',()
  assert.equal(officialSource({konamiId:5418,source:'https://example.com/yugiohdb/card_search.action?ope=2&cid=5418'}),false);
  assert.equal(officialSource({konamiId:5418,source:'http://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418'}),false);
  assert.equal(officialSource({konamiId:0,source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=0'}),false);
+ assert.equal(officialSource({konamiId:5418,source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418&cid=5418'}),false);
 });
 
 test('catalog data is reconcilable, but the audit does not authorize engine merge or deployment',()=>{
@@ -84,7 +98,7 @@ test('catalog data is reconcilable, but the audit does not authorize engine merg
  assert.equal(report.engineMergeReady,false);
  assert.equal(report.mergeAuthorized,false);
  assert.equal(report.deployAuthorized,false);
- assert.match(report.limitation,/does not parse assertion coverage/);
+ assert.match(report.limitation,/does not execute the behavioral suites/);
  assert.match(report.limitation,/runtime compatibility/);
 });
 
@@ -94,6 +108,7 @@ test('npm audit CLI emits the same read-only reconciliation report',()=>{
  const cli=JSON.parse(result.stdout);
  assert.equal(cli.catalogReconciliationReady,true);
  assert.equal(cli.summary.addedCards,45);
+ assert.equal(cli.batchEvidence.matchedCandidates,45);
  assert.equal(cli.snapshotIntegrity.development.orphanCertificates.length,0);
  assert.equal(cli.engineMergeReady,false);
 });
