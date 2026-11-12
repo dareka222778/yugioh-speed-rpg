@@ -93,6 +93,18 @@ test('official source validation pins the URL to the card-specific Konami ID',()
  assert.equal(officialSource({konamiId:5418,source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418&cid=5418'}),false);
 });
 
+test('legacy normal proposal is fully stale against both catalog snapshots',()=>{
+ assert.equal(report.proposalTriage.cutoff,'2004-09-30');
+ assert.equal(report.proposalTriage.candidates,20);
+ assert.equal(report.proposalTriage.alreadyInShared,20);
+ assert.equal(report.proposalTriage.alreadyCertifiedInShared,20);
+ assert.equal(report.proposalTriage.alreadyInDevelopment,20);
+ assert.equal(report.proposalTriage.alreadyCertifiedInDevelopment,20);
+ assert.deepEqual(report.proposalTriage.notInShared,[]);
+ assert.deepEqual(report.proposalTriage.notInDevelopment,[]);
+ assert.deepEqual(report.proposalTriage.duplicateProposalIds,[]);
+});
+
 test('catalog data is reconcilable, but the audit does not authorize engine merge or deployment',()=>{
  assert.equal(report.catalogReconciliationReady,true);
  assert.equal(report.engineMergeReady,false);
@@ -109,6 +121,8 @@ test('npm audit CLI emits the same read-only reconciliation report',()=>{
  assert.equal(cli.catalogReconciliationReady,true);
  assert.equal(cli.summary.addedCards,45);
  assert.equal(cli.batchEvidence.matchedCandidates,45);
+ assert.equal(cli.proposalTriage.alreadyInShared,20);
+ assert.equal(cli.proposalTriage.notInDevelopment.length,0);
  assert.equal(cli.snapshotIntegrity.development.orphanCertificates.length,0);
  assert.equal(cli.engineMergeReady,false);
 });
