@@ -33,7 +33,7 @@ test('M60 research covers exactly four distinct, source-linked historical cards'
   assert.equal(card.level,3);
   assert.equal(card.atk,fact.atk);
   assert.equal(card.defense,fact.defense);
-  assert.match(card.id,/^\\d{8}$/);
+  assert.match(card.id,/^\d{8}$/);
   const source=new URL(card.source);
   assert.equal(source.protocol,'https:');
   assert.equal(source.hostname,'www.db.yugioh-card.com');
