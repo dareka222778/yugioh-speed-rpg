@@ -44,7 +44,7 @@ function officialSource(card){
  if(!card||!Number.isSafeInteger(card.konamiId)||card.konamiId<=0||typeof card.source!=='string')return false;
  try{
   const url=new URL(card.source);
-  return url.protocol==='https:'&&url.hostname==='www.db.yugioh-card.com'&&url.pathname==='/yugiohdb/card_search.action'&&url.searchParams.get('ope')==='2'&&url.searchParams.get('cid')===String(card.konamiId);
+  return url.protocol==='https:'&&url.hostname==='www.db.yugioh-card.com'&&url.pathname==='/yugiohdb/card_search.action'&&url.searchParams.get('ope')==='2'&&url.searchParams.getAll('ope').length===1&&url.searchParams.get('cid')===String(card.konamiId)&&url.searchParams.getAll('cid').length===1&&!url.username&&!url.password&&!url.hash;
  }catch{return false;}
 }
 
@@ -58,7 +58,22 @@ function safeSuitePath(suite,root){
  return resolved.startsWith(testsRoot);
 }
 
-function inspectSnapshot(data,label){
+function safeBatchPath(batchPath,root){
+ if(typeof batchPath!=='string'||batchPath.includes('\\')||batchPath.startsWith('/')||!batchPath.startsWith('catalog/batches/')||!batchPath.endsWith('.json'))return false;
+ const parts=batchPath.split('/');
+ if(parts.some(part=>!part||part==='.'||part==='..'))return false;
+ if(path.posix.normalize(batchPath)!==batchPath)return false;
+ const batchesRoot=path.resolve(root,'catalog','batches')+path.sep;
+ const resolved=path.resolve(root,batchPath);
+ return resolved.startsWith(batchesRoot);
+}
+
+function suiteRegistration(source){
+ const match=source.match(/registerBatch\(\s*(['"])([^'"]+)\1\s*,\s*(['"])([^'"]+)\3\s*\)/);
+ return match?{batchPath:match[2],suite:match[4]}:null;
+}
+
+function inspectSnapshot(data){
  const cardIds=new Set(data.cards.map(card=>card.id));
  const certificateIds=Object.keys(data.certificates);
  return {
@@ -97,11 +112,11 @@ function auditCatalogIntegrationDelta({
  const changedEffects=changed('effects',common);
  const changedMonsters=changed('monsters',common);
  const changedCertificates=changed('certificates',common);
- const snapshotIntegrity={
-  shared:inspectSnapshot(shared,'shared'),
-  development:inspectSnapshot(development,'development')
- };
+ const snapshotIntegrity={shared:inspectSnapshot(shared),development:inspectSnapshot(development)};
  const missingCertificates=[],missingEffects=[],invalidCardMetadata=[],invalidSources=[],unsafeSuites=[],missingSuites=[];
+ const invalidSuites=[],unsafeBatches=[],missingBatches=[],invalidBatches=[],missingBatchEvidence=[],invalidBatchEvidence=[];
+ const suiteCache=new Map(),batchCache=new Map(),referencedBatches=new Set();
+ let matchedCandidates=0,matchedReviews=0,scenarioCases=0;
  const addedCards=addedIds.map(id=>{
   const card=after.get(id),certificate=development.certificates[id];
   if(!certificate||!/^([a-f0-9]{64})$/.test(certificate.fingerprint??'')||!Array.isArray(certificate.suites)||!certificate.suites.length||new Set(certificate.suites).size!==certificate.suites.length)missingCertificates.push(id);
@@ -111,15 +126,54 @@ function auditCatalogIntegrationDelta({
   const suites=Array.isArray(certificate?.suites)?certificate.suites:[];
   for(const suite of suites){
    if(!safeSuitePath(suite,root)){unsafeSuites.push({id,suite});continue;}
-   const filename=path.resolve(root,suite);
-   if(!fs.existsSync(filename)||!fs.statSync(filename).isFile())missingSuites.push({id,suite});
+   const suiteFilename=path.resolve(root,suite);
+   if(!fs.existsSync(suiteFilename)||!fs.statSync(suiteFilename).isFile()){missingSuites.push({id,suite});continue;}
+   let source=suiteCache.get(suite);
+   if(source===undefined){source=fs.readFileSync(suiteFilename,'utf8');suiteCache.set(suite,source);}
+   const registration=suiteRegistration(source);
+   if(!registration||registration.suite!==suite){invalidSuites.push({id,suite,reason:'wrapper-does-not-register-itself'});continue;}
+   if(!safeBatchPath(registration.batchPath,root)){unsafeBatches.push({id,suite,batchPath:registration.batchPath});continue;}
+   referencedBatches.add(registration.batchPath);
+   const batchFilename=path.resolve(root,registration.batchPath);
+   if(!fs.existsSync(batchFilename)||!fs.statSync(batchFilename).isFile()){missingBatches.push({id,suite,batchPath:registration.batchPath});continue;}
+   let batch=batchCache.get(registration.batchPath);
+   if(batch===undefined){
+    try{batch=JSON.parse(fs.readFileSync(batchFilename,'utf8'));batchCache.set(registration.batchPath,batch);}
+    catch{invalidBatches.push({batchPath:registration.batchPath,reason:'invalid-json'});continue;}
+   }
+   if(!isRecord(batch)||batch.format!==manifest.format||batch.engineVersion!==manifest.engineVersion||!manifest.revisions.some(item=>item.id===batch.baseRevision)||!Array.isArray(batch.candidates)||!Array.isArray(batch.reviews)){
+    invalidBatches.push({batchPath:registration.batchPath,reason:'invalid-batch-schema-or-base-revision'});continue;
+   }
+   const candidates=batch.candidates.filter(candidate=>candidate.card?.id===id);
+   const reviews=batch.reviews.filter(review=>review.id===id);
+   if(candidates.length!==1||reviews.length!==1){missingBatchEvidence.push({id,suite,batchPath:registration.batchPath,candidates:candidates.length,reviews:reviews.length});continue;}
+   matchedCandidates++;matchedReviews++;
+   const candidate=candidates[0],review=reviews[0],reasons=[];
+   if(candidate.fingerprint!==certificate.fingerprint||review.mechanicalFingerprint!==certificate.fingerprint)reasons.push('fingerprint-mismatch');
+   if(candidate.card?.konamiId!==card.konamiId||candidate.card?.englishName!==card.englishName||candidate.card?.source!==card.source)reasons.push('candidate-card-mismatch');
+   if(!isDeepStrictEqual(candidate.effect,development.effects[id]))reasons.push('effect-definition-mismatch');
+   if(Object.hasOwn(development.monsters,id)&&!isDeepStrictEqual(candidate.monster,development.monsters[id]))reasons.push('monster-definition-mismatch');
+   if(!Array.isArray(candidate.suites)||!candidate.suites.includes(suite))reasons.push('candidate-suite-mismatch');
+   const evidence=candidate.textEvidence;
+   if(!evidence||typeof evidence.text!=='string'||evidence.complete!==true||evidence.source!==card.source||evidence.sha256!==sha256(Buffer.from(evidence.text,'utf8'))||review.textSha256!==evidence.sha256)reasons.push('text-evidence-mismatch');
+   if(review.konamiId!==card.konamiId||review.primarySource!==card.source||review.identityApproved!==true||review.mechanicsApproved!==true||review.fullTextReviewed!==true||review.secondaryEffectsReviewed!==true||review.exceptionsReviewed!==true||!isRecord(review.semanticCoverage)||Object.values(review.semanticCoverage).some(value=>value!=='represented'))reasons.push('review-incomplete-or-mismatched');
+   if(!Array.isArray(candidate.scenarios)||!candidate.scenarios.length||!isRecord(candidate.cases)||candidate.scenarios.some(name=>!isRecord(candidate.cases[name])||!Array.isArray(candidate.cases[name].actions)||!Array.isArray(candidate.cases[name].assertions)||!candidate.cases[name].assertions.length))reasons.push('scenario-case-missing');
+   else scenarioCases+=candidate.scenarios.length;
+   if(reasons.length)invalidBatchEvidence.push({id,suite,batchPath:registration.batchPath,reasons});
   }
   return {id,name:card.name,englishName:card.englishName,kind:card.kind,konamiId:card.konamiId,fingerprint:certificate?.fingerprint??null,suites,source:card.source};
  });
  const suiteCounts={};
  for(const card of addedCards)for(const suite of card.suites)if(safeSuitePath(suite,root)&&fs.existsSync(path.resolve(root,suite)))suiteCounts[suite]=(suiteCounts[suite]??0)+1;
- const integrity={snapshotIntegrity,missingCertificates,missingEffects,invalidCardMetadata,invalidSources,unsafeSuites,missingSuites};
- const noIntegrityIssues=Object.values(snapshotIntegrity).every(snapshot=>Object.values(snapshot).every(items=>items.length===0))&&Object.entries(integrity).filter(([key])=>key!=='snapshotIntegrity').every(([,items])=>items.length===0);
+ const integrity={missingCertificates,missingEffects,invalidCardMetadata,invalidSources,unsafeSuites,missingSuites,invalidSuites,unsafeBatches,missingBatches,invalidBatches,missingBatchEvidence,invalidBatchEvidence};
+ const noSnapshotIssues=Object.values(snapshotIntegrity).every(snapshot=>Object.values(snapshot).every(items=>items.length===0));
+ const noIntegrityIssues=Object.values(integrity).every(items=>items.length===0);
+ const batchEvidence={
+  referencedBatches:[...referencedBatches].sort(),
+  matchedCandidates,
+  matchedReviews,
+  scenarioCases
+ };
  const result={
   engineVersion:manifest.engineVersion,
   sharedRevision,developmentRevision,
@@ -133,15 +187,16 @@ function auditCatalogIntegrationDelta({
    removedCards:removedIds.length
   },
   preservation:{changedCards,changedEffects,changedMonsters,changedCertificates},
-  integrity:{missingCertificates,missingEffects,invalidCardMetadata,invalidSources,unsafeSuites,missingSuites},
+  integrity,
   snapshotIntegrity,
+  batchEvidence,
   addedCards,
   suiteCounts:Object.fromEntries(Object.entries(suiteCounts).sort(([a],[b])=>a.localeCompare(b))),
-  catalogReconciliationReady:addedIds.length>0&&removedIds.length===0&&changedCards.length===0&&changedEffects.length===0&&changedMonsters.length===0&&changedCertificates.length===0&&noIntegrityIssues,
+  catalogReconciliationReady:addedIds.length>0&&removedIds.length===0&&changedCards.length===0&&changedEffects.length===0&&changedMonsters.length===0&&changedCertificates.length===0&&noSnapshotIssues&&noIntegrityIssues,
   engineMergeReady:false,
   mergeAuthorized:false,
   deployAuthorized:false,
-  limitation:'This audit proves snapshot hashes, eight-digit identity uniqueness, one-to-one card/certificate maps, append-only preservation, card-specific official Konami URLs, safe existing regression-suite paths and certificate metadata shape. It does not parse assertion coverage, recompute engine fingerprints, prove runtime compatibility, PR mergeability, live Discord behavior or deployment readiness.'
+  limitation:'This audit proves snapshot hashes, eight-digit identity uniqueness, one-to-one card/certificate maps, append-only preservation, card-specific official Konami URLs, safe suite wrappers, referenced batch files, matching candidate/review fingerprints, complete review flags and declared scenario fixtures/assertions. It does not execute the behavioral suites, recompute engine definition fingerprints, prove runtime compatibility, PR mergeability, live Discord behavior or deployment readiness.'
  };
  return result;
 }
@@ -151,4 +206,4 @@ if(require.main===module){
  console.log(JSON.stringify(report,null,2));
  if(!report.catalogReconciliationReady)process.exitCode=1;
 }
-module.exports={auditCatalogIntegrationDelta,officialSource,safeSuitePath};
+module.exports={auditCatalogIntegrationDelta,officialSource,safeSuitePath,safeBatchPath,suiteRegistration};
