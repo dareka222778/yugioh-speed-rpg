@@ -114,6 +114,24 @@ test('catalog revision symlinks cannot escape the snapshot root even when their 
  }finally{fs.rmSync(temp,{recursive:true,force:true});}
 });
 
+test('snapshot reader rejects invalid revision IDs, manifest paths, hashes and schemas',()=>{
+ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'catalog-snapshot-integrity-'));
+ try{
+  const repo=path.join(temp,'repo'),catalogRoot=path.join(repo,'catalog','engine-v9');
+  fs.mkdirSync(catalogRoot,{recursive:true});
+  const revision='b'.repeat(64),data={format:1,engineVersion:'engine-v9',cards:[],effects:{},monsters:{},certificates:{}};
+  const bytes=Buffer.from(JSON.stringify(data)),filename=revision+'.json';
+  fs.writeFileSync(path.join(catalogRoot,filename),bytes);
+  const entry={id:revision,file:filename,sha256:createHash('sha256').update(bytes).digest('hex')};
+  const manifest={format:1,engineVersion:'engine-v9',revisions:[entry]};
+  assert.deepEqual(readSnapshot(repo,manifest,revision),data);
+  assert.throws(()=>readSnapshot(repo,manifest,'not-a-sha'),/Invalid catalog revision/);
+  assert.throws(()=>readSnapshot(repo,{...manifest,revisions:[{...entry,file:'../outside.json'}]},revision),/Unexpected revision filename/);
+  assert.throws(()=>readSnapshot(repo,{...manifest,revisions:[{...entry,sha256:'0'.repeat(64)}]},revision),/SHA-256 mismatch/);
+  assert.throws(()=>readSnapshot(repo,{...manifest,format:2},revision),/Revision schema mismatch/);
+ }finally{fs.rmSync(temp,{recursive:true,force:true});}
+});
+
 test('generated suite registration binds its exact suite path to a batch file',()=>{
  assert.deepEqual(suiteRegistration("require('../scripts/card-batch-scenarios.cjs').registerBatch('catalog/batches/m60.json', \"tests/m60.test.cjs\");"),{
   batchPath:'catalog/batches/m60.json',suite:'tests/m60.test.cjs'
