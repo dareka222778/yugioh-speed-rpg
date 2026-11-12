@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released",
   "startedAt": "2026-11-12T16:32:34-03:00",
-  "lastActivityAt": "2026-11-12T16:39:12-03:00",
+  "lastActivityAt": "2026-11-12T16:39:10-03:00",
   "nextScheduledAt": "2026-11-12T21:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -104,7 +104,7 @@
   "handoff": {
     "to": "auxiliary",
     "status": "available",
-    "at": "2026-11-12T16:38:22-03:00",
+    "at": "2026-11-12T16:39:10-03:00",
     "baseBranch": "feat/work-m66-tag-format-boundaries-20261112",
     "baseCommit": "2af0944c7864a872c4027927fb8a8b7e6faf0941",
     "scope": "Monitorar a CI da PR #22 e pesquisar candidatos em branch própria. Não editar M61 nem a branch M66, M63/M64/M65; sem admissão, certificação, merge ou deploy.",
@@ -258,10 +258,10 @@
     "hostingStatus": "Nenhum workflow de deploy está presente na branch compartilhada; o estado do host não pôde ser validado. Nenhum deploy foi executado."
   },
   "duration": {
-    "elapsedWallMinutes": 5,
+    "elapsedWallMinutes": 6,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Janela de parede aproximada de 5 minutos; houve implementação e publicação de dois arquivos de teste, mas a duração efetiva não foi cronometrada e a meta de 60 minutos não foi comprovada. Espera de CI não foi contabilizada como trabalho."
+    "note": "Janela de parede aproximada de 6 minutos; houve implementação e publicação de dois arquivos de teste, mas a duração efetiva não foi cronometrada e a meta de 60 minutos não foi comprovada. Espera de CI não foi contabilizada como trabalho."
   },
   "nextTask": "Aguardar CI integral da PR #22. Após transferência explícita de M61, corrigir TS2367/TS2339, implementar e testar setSelfFaceDown com marcador once-per-turn persistente, então admitir e certificar comportamentalmente M60. Não admitir Guardian Sphinx sem operação não-direcionada de retorno em massa.",
   "sharedHeadBeforeRelease": "86a99bfb5ca07df0816fd0e38d17bfa90f1f78d3"
