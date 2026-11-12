@@ -2,8 +2,9 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const path=require('node:path');
+const os=require('node:os');
 const {spawnSync}=require('node:child_process');
-const {auditCatalogIntegrationDelta,officialSource,safeSuitePath,safeBatchPath,suiteRegistration}=require('../scripts/audit-catalog-integration-delta.cjs');
+const {auditCatalogIntegrationDelta,officialSource,safeSuitePath,safeBatchPath,realpathWithin,suiteRegistration}=require('../scripts/audit-catalog-integration-delta.cjs');
 
 const root=path.resolve(__dirname,'..');
 const report=auditCatalogIntegrationDelta({root});
@@ -77,6 +78,22 @@ test('suite and batch paths are normalized and confined to their repository dire
  ])assert.equal(safeBatchPath(candidate,root),false,candidate);
 });
 
+test('realpath containment rejects suite and batch symlinks that escape approved roots',()=>{
+ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'catalog-delta-'));
+ try{
+  const repo=path.join(temp,'repo'),testsRoot=path.join(repo,'tests'),batchesRoot=path.join(repo,'catalog','batches'),outside=path.join(temp,'outside');
+  fs.mkdirSync(testsRoot,{recursive:true});fs.mkdirSync(batchesRoot,{recursive:true});fs.mkdirSync(outside,{recursive:true});
+  const insideSuite=path.join(testsRoot,'inside.test.cjs'),outsideSuite=path.join(outside,'outside.test.cjs'),suiteLink=path.join(testsRoot,'escape.test.cjs');
+  const insideBatch=path.join(batchesRoot,'inside.json'),outsideBatch=path.join(outside,'outside.json'),batchLink=path.join(batchesRoot,'escape.json');
+  for(const file of [insideSuite,outsideSuite,insideBatch,outsideBatch])fs.writeFileSync(file,'{}');
+  fs.symlinkSync(outsideSuite,suiteLink);fs.symlinkSync(outsideBatch,batchLink);
+  assert.equal(realpathWithin(insideSuite,testsRoot),true);
+  assert.equal(realpathWithin(suiteLink,testsRoot),false);
+  assert.equal(realpathWithin(insideBatch,batchesRoot),true);
+  assert.equal(realpathWithin(batchLink,batchesRoot),false);
+ }finally{fs.rmSync(temp,{recursive:true,force:true});}
+});
+
 test('generated suite registration binds its exact suite path to a batch file',()=>{
  assert.deepEqual(suiteRegistration("require('../scripts/card-batch-scenarios.cjs').registerBatch('catalog/batches/m60.json', \"tests/m60.test.cjs\");"),{
   batchPath:'catalog/batches/m60.json',suite:'tests/m60.test.cjs'
@@ -104,6 +121,8 @@ test('official source validation pins the URL to the card-specific Konami ID',()
  assert.equal(officialSource({konamiId:5418,source:'http://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418'}),false);
  assert.equal(officialSource({konamiId:0,source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=0'}),false);
  assert.equal(officialSource({konamiId:5418,source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418&cid=5418'}),false);
+ assert.equal(officialSource({konamiId:5418,source:'https://www.db.yugioh-card.com:8443/yugiohdb/card_search.action?ope=2&cid=5418'}),false);
+ assert.equal(officialSource({konamiId:5418,source:'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&ope=2&cid=5418'}),false);
 });
 
 test('legacy normal proposal is fully stale against both catalog snapshots',()=>{

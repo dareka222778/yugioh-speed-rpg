@@ -45,7 +45,7 @@ function officialSource(card){
  if(!card||!Number.isSafeInteger(card.konamiId)||card.konamiId<=0||typeof card.source!=='string')return false;
  try{
   const url=new URL(card.source);
-  return url.protocol==='https:'&&url.hostname==='www.db.yugioh-card.com'&&url.pathname==='/yugiohdb/card_search.action'&&url.searchParams.get('ope')==='2'&&url.searchParams.getAll('ope').length===1&&url.searchParams.get('cid')===String(card.konamiId)&&url.searchParams.getAll('cid').length===1&&!url.username&&!url.password&&!url.hash;
+  return url.protocol==='https:'&&url.hostname==='www.db.yugioh-card.com'&&!url.port&&url.pathname==='/yugiohdb/card_search.action'&&url.searchParams.get('ope')==='2'&&url.searchParams.getAll('ope').length===1&&url.searchParams.get('cid')===String(card.konamiId)&&url.searchParams.getAll('cid').length===1&&!url.username&&!url.password&&!url.hash;
  }catch{return false;}
 }
 
@@ -67,6 +67,13 @@ function safeBatchPath(batchPath,root){
  const batchesRoot=path.resolve(root,'catalog','batches')+path.sep;
  const resolved=path.resolve(root,batchPath);
  return resolved.startsWith(batchesRoot);
+}
+
+function realpathWithin(filename,rootDirectory){
+ try{
+  const rootPath=fs.realpathSync(rootDirectory),targetPath=fs.realpathSync(filename);
+  return targetPath.startsWith(rootPath+path.sep);
+ }catch{return false;}
 }
 
 function suiteRegistration(source){
@@ -153,6 +160,7 @@ function auditCatalogIntegrationDelta({
    if(!safeSuitePath(suite,root)){unsafeSuites.push({id,suite});continue;}
    const suiteFilename=path.resolve(root,suite);
    if(!fs.existsSync(suiteFilename)||!fs.statSync(suiteFilename).isFile()){missingSuites.push({id,suite});continue;}
+   if(!realpathWithin(suiteFilename,path.resolve(root,'tests'))){unsafeSuites.push({id,suite,reason:'symlink-escapes-tests-root'});continue;}
    let source=suiteCache.get(suite);
    if(source===undefined){source=fs.readFileSync(suiteFilename,'utf8');suiteCache.set(suite,source);}
    const registration=suiteRegistration(source);
@@ -161,6 +169,7 @@ function auditCatalogIntegrationDelta({
    referencedBatches.add(registration.batchPath);
    const batchFilename=path.resolve(root,registration.batchPath);
    if(!fs.existsSync(batchFilename)||!fs.statSync(batchFilename).isFile()){missingBatches.push({id,suite,batchPath:registration.batchPath});continue;}
+   if(!realpathWithin(batchFilename,path.resolve(root,'catalog','batches'))){unsafeBatches.push({id,suite,batchPath:registration.batchPath,reason:'symlink-escapes-batches-root'});continue;}
    let batch=batchCache.get(registration.batchPath);
    if(batch===undefined){
     try{batch=JSON.parse(fs.readFileSync(batchFilename,'utf8'));batchCache.set(registration.batchPath,batch);}
@@ -175,15 +184,21 @@ function auditCatalogIntegrationDelta({
    matchedCandidates++;matchedReviews++;
    const candidate=candidates[0],review=reviews[0],reasons=[];
    if(candidate.fingerprint!==certificate.fingerprint||review.mechanicalFingerprint!==certificate.fingerprint)reasons.push('fingerprint-mismatch');
-   if(candidate.card?.konamiId!==card.konamiId||candidate.card?.englishName!==card.englishName||candidate.card?.source!==card.source)reasons.push('candidate-card-mismatch');
+   if(!isDeepStrictEqual(candidate.card,card))reasons.push('candidate-card-metadata-mismatch');
+   const effectKind=development.effects[id]?.kind;
+   if(card.kind==='monster'?!['monsterEffect','fusion'].includes(effectKind):['monsterEffect','fusion'].includes(effectKind))reasons.push('card-kind-effect-mismatch');
    if(!isDeepStrictEqual(candidate.effect,development.effects[id]))reasons.push('effect-definition-mismatch');
-   if(Object.hasOwn(development.monsters,id)&&!isDeepStrictEqual(candidate.monster,development.monsters[id]))reasons.push('monster-definition-mismatch');
-   if(!Array.isArray(candidate.suites)||!candidate.suites.includes(suite))reasons.push('candidate-suite-mismatch');
+   const needsMonsterDefinition=effectKind==='monsterEffect',hasMonsterDefinition=Object.hasOwn(development.monsters,id),candidateHasMonsterDefinition=Object.hasOwn(candidate,'monster');
+   if(needsMonsterDefinition!==hasMonsterDefinition||hasMonsterDefinition!==candidateHasMonsterDefinition)reasons.push('monster-definition-presence-mismatch');
+   else if(hasMonsterDefinition&&!isDeepStrictEqual(candidate.monster,development.monsters[id]))reasons.push('monster-definition-mismatch');
+   const candidateSuites=Array.isArray(candidate.suites)?candidate.suites:[];
+   if(new Set(candidateSuites).size!==candidateSuites.length||!isDeepStrictEqual([...candidateSuites].sort(),[...suites].sort()))reasons.push('candidate-suite-set-mismatch');
    const evidence=candidate.textEvidence;
    if(!evidence||typeof evidence.text!=='string'||evidence.complete!==true||evidence.source!==card.source||evidence.sha256!==sha256(Buffer.from(evidence.text,'utf8'))||review.textSha256!==evidence.sha256)reasons.push('text-evidence-mismatch');
    if(review.konamiId!==card.konamiId||review.primarySource!==card.source||review.identityApproved!==true||review.mechanicsApproved!==true||review.fullTextReviewed!==true||review.secondaryEffectsReviewed!==true||review.exceptionsReviewed!==true||!isRecord(review.semanticCoverage)||!Object.values(review.semanticCoverage).some(value=>value==='represented')||Object.values(review.semanticCoverage).some(value=>!['represented','not-applicable'].includes(value)))reasons.push('review-incomplete-or-mismatched');
-   if(!Array.isArray(candidate.scenarios)||!candidate.scenarios.length||!isRecord(candidate.cases)||candidate.scenarios.some(name=>!isRecord(candidate.cases[name])||!Array.isArray(candidate.cases[name].actions)||!Array.isArray(candidate.cases[name].assertions)||!candidate.cases[name].assertions.length))reasons.push('scenario-case-missing');
-   else scenarioCases+=candidate.scenarios.length;
+   const scenarios=Array.isArray(candidate.scenarios)?candidate.scenarios:[];
+   if(!scenarios.length||scenarios.some(name=>typeof name!=='string'||!name)||new Set(scenarios).size!==scenarios.length||!isRecord(candidate.cases)||scenarios.some(name=>!isRecord(candidate.cases[name])||!Array.isArray(candidate.cases[name].actions)||!candidate.cases[name].actions.length||!Array.isArray(candidate.cases[name].assertions)||!candidate.cases[name].assertions.length))reasons.push('scenario-case-missing-or-duplicate');
+   else scenarioCases+=scenarios.length;
    if(reasons.length)invalidBatchEvidence.push({id,suite,batchPath:registration.batchPath,reasons});
   }
   return {id,name:card.name,englishName:card.englishName,kind:card.kind,konamiId:card.konamiId,fingerprint:certificate?.fingerprint??null,suites,source:card.source};
@@ -232,4 +247,4 @@ if(require.main===module){
  console.log(JSON.stringify(report,null,2));
  if(!report.catalogReconciliationReady)process.exitCode=1;
 }
-module.exports={auditCatalogIntegrationDelta,officialSource,safeSuitePath,safeBatchPath,suiteRegistration};
+module.exports={auditCatalogIntegrationDelta,officialSource,safeSuitePath,safeBatchPath,realpathWithin,suiteRegistration};
