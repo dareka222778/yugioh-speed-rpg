@@ -5,6 +5,13 @@ const tag=require('../dist/tagDuel');
 const engine=require('../dist/duelEngine');
 const {getPlayableCard}=require('../dist/effectRegistry');
 
+function testM76(name,run){
+  test(name,(...args)=>{
+    try{return run(...args);}
+    catch(error){console.error('[M76 diagnostic]',name,error?.stack??error);throw error;}
+  });
+}
+
 const normalCards=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
   .filter(entry=>entry.card&&entry.card.level<=4&&Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.def));
@@ -101,7 +108,7 @@ function handUids(state,seat){
   return tag.tagMemberHand(state,member(seat)).map(card=>card.uid).sort();
 }
 
-test('classic 2v2 shares team LP while the same inactive-partner monster can attack on both teammates turns',()=>{
+testM76('classic 2v2 shares team LP while the same inactive-partner monster can attack on both teammates turns',()=>{
   let state=game('m76-shared-team-life-points');
   const before=inventorySnapshot(state);
   const monster=deploy(state,2,attacker.id,'atk');
@@ -151,7 +158,7 @@ test('classic 2v2 shares team LP while the same inactive-partner monster can att
   assertInventoryConserved(state,before);
 });
 
-test('classic 2v2 battle destruction sends an inactive partner physical card to the shared team Graveyard',()=>{
+testM76('classic 2v2 battle destruction sends an inactive partner physical card to the shared team Graveyard',()=>{
   let state=game('m76-shared-team-graveyard');
   const before=inventorySnapshot(state);
   const attacking=deploy(state,0,attacker.id,'atk');
