@@ -40,7 +40,7 @@
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6858094246,
+    "lastRequestComment": 6859057163,
     "noResponse": true,
     "blockedFiles": [
       "src/monsterEffects.ts",
@@ -48,7 +48,8 @@
       "src/classicEffects.ts",
       "src/duelIntegrity.ts",
       "scripts/mass-certification21.cjs"
-    ]
+    ],
+    "lastRequestAt": "2026-11-13T13:40:08-03:00"
   },
   "workBranches": [
     {
@@ -1000,9 +1001,10 @@
   "handoffRequest": {
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "commentId": 6858094246,
+    "commentId": 6859057163,
     "noResponse": true,
-    "lastCommentId": 6858094246
+    "lastCommentId": 6859057163,
+    "lastRequestedAt": "2026-11-13T13:40:08-03:00"
   },
   "handoff": {
     "to": "auxiliary",
@@ -1566,7 +1568,11 @@
         "TS2339"
       ],
       "file": "src/duelEngineCurrent.ts:410",
-      "handoff": "awaiting-response"
+      "handoff": "awaiting-response",
+      "workflowRuns": [
+        43081735774,
+        43081735544
+      ]
     },
     "pr22": {
       "cardBatchFast": "success",
@@ -1771,7 +1777,15 @@
     "pr74": {
       "branch": "M118",
       "head": "53fa62774d428cb04cfd76018495693068a03a5b",
-      "status": "fast-in-progress; milestone-success; npm-test-in-progress; engine-validation-queued"
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "workflowRuns": [
+        43420156255,
+        43420156271,
+        43420156257
+      ],
+      "handoff": "awaiting-response"
     },
     "pr75": {
       "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
@@ -3367,17 +3381,19 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
   "lastParallelActivityAt": "2026-11-13T13:09:11-03:00",
   "sharedHeadAfterCheckpoint": "d010d099032f4b133cc36473e0ba22acb181280d",
-  "sharedHeadBeforeStateUpdate": "d010d099032f4b133cc36473e0ba22acb181280d",
+  "sharedHeadBeforeStateUpdate": "e655f325edf12775a02c55d8bffd3e9ee8f4575e",
   "endedAt": "2026-11-13T13:37:54-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
-    "commentId": 6858094955,
+    "commentId": 6859057742,
     "noResponse": true,
     "blockedFiles": [
       "src/tagDuel.ts",
       "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
-    ]
+    ],
+    "lastCommentId": 6859057742,
+    "lastRequestedAt": "2026-11-13T13:40:08-03:00"
   },
   "m120ValidationComment": 6858001163,
   "releaseToAuxiliary": {
@@ -3547,5 +3563,6 @@
     ],
     "allowed": "Monitorar CI das PRs #102–#105 e corrigir somente os quatro arquivos de teste próprios listados; registrar resultados e devolver checkpoint.",
     "forbidden": "Não fazer merge/deploy; não tocar M61/PR17, M118/PR74 nem branches M140–M145 de terceiros; não alterar runtime, catálogo, certificados, banco ou inventários."
-  }
+  },
+  "lastCoordinationRefreshAt": "2026-11-13T13:40:08-03:00"
 }
