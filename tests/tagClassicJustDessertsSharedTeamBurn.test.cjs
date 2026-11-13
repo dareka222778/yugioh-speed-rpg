@@ -55,6 +55,11 @@ function assertConserved(state,before){
   assert.equal(new Set(cards.map(card=>card.uid)).size,before.size);
   for(const card of cards)assert.equal(before.get(card.uid),card.id,'physical identity changed: '+card.uid);
 }
+function endTurn(state,seat){
+  const action=tag.tagActions(state,member(seat)).find(candidate=>candidate.kind==='end');
+  assert.ok(action,'physical seat '+seat+' must be able to end its turn');
+  return tag.stepTagDuel(state,member(seat),action);
+}
 function settle(state){
   for(let guard=0;state.core.phase==='response';guard++){
     assert.ok(guard<20,'the Just Desserts response chain must terminate');
