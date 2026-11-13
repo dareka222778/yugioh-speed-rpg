@@ -118,11 +118,11 @@ test('classic 2v2 shares team LP while the same inactive-partner monster can att
   const unchanged=JSON.stringify(state);
   for(const seat of [1,2,3]){
     assert.deepEqual(tag.tagActions(state,member(seat)),[],'inactive seat '+seat+' must not receive combat actions');
-    assert.throws(()=>tag.stepTagDuel(state,member(seat),legalAttack),/Aguarde a vez do participante ativo\\./);
+    assert.throws(()=>tag.stepTagDuel(state,member(seat),legalAttack),/Aguarde a vez do participante ativo\./);
     assert.equal(JSON.stringify(state),unchanged,'rejected teammate attack must not mutate the duel');
   }
   assert.deepEqual(tag.tagActions(state,'m76-stranger'),[]);
-  assert.throws(()=>tag.stepTagDuel(state,'m76-stranger',legalAttack),/Aguarde a vez do participante ativo\\./);
+  assert.throws(()=>tag.stepTagDuel(state,'m76-stranger',legalAttack),/Aguarde a vez do participante ativo\./);
   assert.equal(JSON.stringify(state),unchanged,'rejected outsider attack must not mutate the duel');
 
   const liveMonster=state.core.players[0].monsters.find(card=>card.uid===monster.uid);
