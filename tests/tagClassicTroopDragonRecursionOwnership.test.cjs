@@ -3,7 +3,8 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const engine=require('../dist/duelEngine');
-const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
+const {getPlayableCard}=require('../dist/effectRegistry');
+const {getMonsterEffect}=require('../dist/monsterEffects');
 
 const TROOP='55013285';
 const troop=getPlayableCard(TROOP);
