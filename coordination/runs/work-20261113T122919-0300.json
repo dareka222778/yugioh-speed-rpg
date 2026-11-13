@@ -4,7 +4,7 @@
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "state": "completed; released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "endedAt": "2026-11-13T12:37:36-03:00",
+  "endedAt": "2026-11-13T12:40:27-03:00",
   "timezone": "America/Sao_Paulo",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -18,7 +18,8 @@
     "M120: corrigido Card Destruction em src/spellExceptions.ts para percorrer as quatro mãos/decks físicos, devolver descartes aos Cemitérios compartilhados por equipe e agregar falha de compra por equipe; regressões de compra individual e derrota por deck-out; PR #76.",
     "M121: criada regressão de Pot of Greed para compra do Deck físico ativo, preservação da mão/deck do parceiro e permissão de sete cartas durante a Main Phase, sem descarte prematuro; PR #77.",
     "Diagnóstico de M108/PR #64: 7.366 testes passaram e um falhou; a Counter Trap Negate Attack deixou o estado em main em vez de abrir response. Diagnóstico publicado na PR para o auxiliar.",
-    "Confirmação de que PRs #65–#74 agora têm Card batch fast, Engine validation e Milestone 1000 concluídos com sucesso."
+    "Confirmação de que PRs #65–#74 agora têm Card batch fast, Engine validation e Milestone 1000 concluídos com sucesso.",
+    "M120: a primeira Engine validation revelou apenas uma asserção de fixture apontando o Cemitério da equipe errada; corrigida de team 1 para a equipe ativadora team 0 e disparada nova CI no HEAD 8985d429."
   ],
   "changes": [
     {
@@ -34,7 +35,7 @@
     {
       "m": "M120",
       "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-      "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
       "pr": 76,
       "files": [
         "src/spellExceptions.ts",
@@ -98,10 +99,11 @@
       "extendedSoak": "in_progress"
     },
     "pr76": {
-      "cardBatchFast": "success",
+      "cardBatchFast": "in_progress",
       "milestone1000": "success",
       "engineValidation": "in_progress",
-      "extendedSoak": "in_progress"
+      "extendedSoak": "in_progress",
+      "previousHeadFailure": "uma asserção da fixture usava team 1 em vez de team 0; corrigida no HEAD atual"
     },
     "pr77": {
       "cardBatchFast": "success",
@@ -152,7 +154,7 @@
       },
       {
         "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-        "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+        "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
         "pr": 76,
         "scope": [
           "src/spellExceptions.ts",
@@ -174,9 +176,10 @@
   "nextTask": "Auxiliar: monitorar CI das PRs #75–#77 e corrigir falhas somente nas branches próprias; reportar/corrigir M108 (#64) sem tocar nas reservas M61/M118. Work na próxima janela: conferir os três resultados completos, verificar handoffs M61/M118 e, se M61 continuar bloqueado, avançar em outro efeito independente de 2v2.",
   "nextWorkAt": "2026-11-13T13:30:00-03:00",
   "duration": {
-    "elapsedWallMinutes": 8,
+    "elapsedWallMinutes": 11,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "A janela registrada não comprova 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
-  }
+  },
+  "lastActivityAt": "2026-11-13T12:40:27-03:00"
 }
