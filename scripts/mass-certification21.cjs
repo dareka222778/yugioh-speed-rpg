@@ -10,7 +10,7 @@ const {getEffectModel}=require('../dist/effectModels');
 const currentRegistry=require('../dist/effectRegistry');
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const dimensions=['activation','conditions','costs','targets','choices','operations','duration','restrictions','negation'];
-const effectKinds=['conditionalDestruction','destroyExtreme','ritualMonster','ritualSummon','searchZone','recoverMultiple','moveSelected','positionChange','choiceSequence','normal','fusion','monsterEffect','heal','burn','field','equip','continuous','temporaryModifier','destroyFiltered','destroySpellTraps','sequence','attackResponse','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce'];
+const effectKinds=['discardRemoval','conditionalDestruction','destroyExtreme','ritualMonster','ritualSummon','searchZone','recoverMultiple','moveSelected','positionChange','choiceSequence','normal','fusion','monsterEffect','heal','burn','field','equip','continuous','temporaryModifier','destroyFiltered','destroySpellTraps','sequence','attackResponse','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce'];
 const triggers=['quick','ignition','flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave','continuous'];
 const monsterOps=['targetGroup','identityOnly','fusionSubstitute','singleCard','searchFiltered','mill','positionChange','recruit','heal','burn','burnPerSpellTrap','burnPerHand','destroyByLevel','draw','destroy','bounce','recover','search','specialSummon','negateTraps','battleShield','directAttack','continuous','battleBounceAttacker','battleLevelBurn','endBattleDefense','endDamageDefensePiercing','guardianZeroAttack','battleBanishVictim','battleDestroyByIdentity','doubleTribute','battleBanishBoth','battleTopDeckAttacker'];
 const ACTIVE_CAPABILITIES=Object.freeze({engineVersion:'engine-v9',operations:Object.freeze([
@@ -32,6 +32,7 @@ function inferCapabilities(candidate){
  const count=c=>{if(c)required.add('count:'+c.zone);};
  const rules=rs=>{if(Array.isArray(rs))for(const r of rs){required.add('continuous:'+r.kind);if(r.filter?.faceUpNames)required.add('condition:face-up-named-card');count(r.count);}};
  if(effect.kind==='monsterEffect'&&monster?.effect){const e=monster.effect;required.add('trigger:'+e.trigger);if(e.operation?.kind){required.add('monster-operation:'+e.operation.kind);rules(e.operation.rules);}if(e.cost?.kind)required.add('cost:'+e.cost.kind);if(e.cost?.kind==='lp'&&e.trigger==='flip'&&monster.activation?.policy==='optional')required.add('trigger-cost:lp-optional-flip');}
+ if(effect.kind==='discardRemoval')required.add('cost:discard');
  if(effect.kind==='continuous')rules(effect.rules);
  if(effect.kind==='equip')count(effect.count);
  if(effect.kind==='sequence'&&Array.isArray(effect.operations))for(const op of effect.operations)required.add('economic:'+op.kind);
@@ -53,9 +54,9 @@ function scenarioPlan(candidate){
  }
  if(kind==='fusion'){for(const n of ['exact-materials','illegal-materials','extra-capacity','zone-capacity','material-owner'])add(n,'Validate exact recipe, ownership and legal destination at activation/resolution.');}
  const cost=monster?.cost??effect.cost;
- if(cost||effect.lpCost){for(const n of ['cost-paid-once','cost-invalid','negation-cost-retained','restore-after-cost','duplicate-delivery'])add(n,'Verify paid cost is atomic, preserved after negation and never charged twice.');}
+ if(cost||effect.lpCost||kind==='discardRemoval'){for(const n of ['cost-paid-once','cost-invalid','negation-cost-retained','restore-after-cost','duplicate-delivery'])add(n,'Verify paid cost is atomic, preserved after negation and never charged twice.');}
  const op=monster?.operation??{},targeted=['targetGroup','singleCard'].includes(op.kind)||!!op.target||['recover','search','specialSummon'].includes(op.kind)||['equip','fissure','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','mysticalSpaceTyphoon','bookOfMoon'].includes(kind);
- if(targeted)for(const n of ['target-activation','target-resolution','target-zone-change','target-unavailable'])add(n,'Validate target eligibility, lifetime and identity before/after the response chain.');
+ if(targeted||kind==='discardRemoval'&&!['continuousTraps','continuousSpells'].includes(effect.mode))for(const n of ['target-activation','target-resolution','target-zone-change','target-unavailable'])add(n,'Validate target eligibility, lifetime and identity before/after the response chain.');
  if(['search','specialSummon','recover'].includes(op.kind)||['monsterReborn','giantTrunade'].includes(kind))for(const n of ['empty-source','zone-capacity','owner-controller','hidden-information'])add(n,'Exercise movement with missing/occupied destinations and correct public/private observations.');
  if(monster?.trigger&&['flip','onSummon','onOtherSummon','onBattleDestroyed','onSentToGrave'].includes(monster.trigger)){
   add('trigger-timing','Check the precise event and distinguish activation from resolution.');

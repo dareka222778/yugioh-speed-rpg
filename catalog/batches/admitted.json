@@ -84,6 +84,10 @@
     {
       "id": "m44-double-tribute",
       "proofSHA256": "ab38097d571aa8365b071d9ef3d0de2795229961c2405af8b0d853603e591d7c"
+    },
+    {
+      "id": "m46-discard-removal",
+      "proofSHA256": "b900f0c4d671f8fcc4f0dbab75a977e8b1e30f61408027b60097b7f98c88e903"
     }
   ]
 }

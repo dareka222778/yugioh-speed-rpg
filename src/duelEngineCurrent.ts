@@ -1,3 +1,4 @@
+import {discardRemovalActions,payDiscard,resolveDiscardRemoval} from './discardRemoval';
 import {groupTargets,groupChoices,executeTargetGroup} from './targetGroupOperation';
 import {singleCardTargets,executeSingleCard} from './singleCardOperation';
 import {searchZoneTargets} from './searchZoneRules';
@@ -39,7 +40,7 @@ export type Backrow=CardRef&{setTurn:number;faceUp:boolean;resolved?:boolean;equ
 export type DuelPlayer={id:string;name:string;lp:number;deck:CardRef[];hand:CardRef[];monsters:Monster[];backrow:Backrow[];grave:CardRef[];extra?:CardRef[];field?:Backrow|null;banished?:CardRef[];summoned:boolean;battleProtectedUntil?:number;battleDamageGuard?:{turn:number;attacker:string}};
 export type Action=
  |{kind:'summon';card:string;position:'atk'|'set';tributes:string[]}
- |{kind:'set';card:string}|{kind:'spell';card:string;target?:string;position?:'atk'|'def'}|{kind:'field'|'setField';card:string}
+ |{kind:'set';card:string}|{kind:'spell';card:string;target?:string;discards?:string[];position?:'atk'|'def'}|{kind:'field'|'setField';card:string}
  |{kind:'fusion';card:string;extra:string;materials:string[];position:'atk'|'def'}
  |{kind:'position';card:string;mode:'atk'|'def'|'flip'}
  |{kind:'attack';card:string;target?:string}|{kind:'trap';card:string;target:string;discards?:string[]}
@@ -152,6 +153,7 @@ function trapActions(s:DuelState,index:number):Action[]{
   if(s.damageStep&&!(s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage==='beforeCalculation'))continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='calculation')continue;
   if(s.phase==='response'&&s.pending.kind==='attack'&&s.pending.stage==='damage'&&getActivationModel(effect)?.damage!=='beforeCalculation')continue;
+  if(effect.kind==='discardRemoval'){out.push(...discardRemovalActions(s,index,c,effect));continue;}
   if(effect.kind==='continuous'){if(s.players[index].lp>(effect.lpCost??0))out.push({kind:'trap',card:c.uid,target:''});continue;}
   if(effect.kind==='conditionalDestruction'){
    const targets=conditionalTargets(s,index,effect,c.uid);
@@ -480,6 +482,7 @@ function resolve(s:DuelState){
   }
   if(trapsNegated(s)&&card(link.id).kind==='trap'){note(s,'Jinzo negou um efeito de Armadilha.');if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b)b.resolved=true;}else discardBackrow(s,link.card);return;}
   if(effect?.kind==='continuous'){const b=s.players[link.actor].backrow.find(b=>b.uid===link.card);if(b?.faceUp)b.resolved=true;return;}
+  if(effect?.kind==='discardRemoval'){resolveDiscardRemoval(s,effect,card(link.id).kind==='spell'?'spell':'trap',link.target,{destroy:graveMonster,back:discardBackrow,clean:cleanEquips});discardBackrow(s,link.card);return;}
   if(effect?.kind==='temporaryModifier'){if(link.target&&canAffectMonster(s,link.target,'spell'))addTemporaryModifier(s,link.target,effect.atk,effect.def);discardBackrow(s,link.card);return;}
   if(effect?.kind==='positionChange'){executePositionChange(s,link.actor,effect.rule,card(link.id).kind==='spell'?'spell':'trap',link.target,turnMonsterFaceDown);discardBackrow(s,link.card);note(s,'Mudança de posição resolvida.');return;}
   if(effect?.kind==='conditionalDestruction'){
@@ -731,7 +734,8 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   if(s.phase!=='response')response(s,{kind:'none'},s.phase as 'main'|'battle',1-index);
   const c=p.backrow.find(c=>c.uid===action.card)!;
   const e=getEffect(c.id),discards=action.discards??[];
-  if(e?.kind==='magicJammer'){
+  if(e?.kind==='discardRemoval'){payDiscard(s,index,c.uid,discards);}
+  else if(e?.kind==='magicJammer'){
    if(discards.length!==1||!p.hand.some(h=>h.uid===discards[0]))throw new Error('Custo de descarte inválido.');
    const [discarded]=p.hand.splice(p.hand.findIndex(h=>h.uid===discards[0]),1);
    p.grave.push(discarded);note(s,`${p.name} descartou uma carta para ativar Bloqueador de Magia.`);
@@ -788,6 +792,7 @@ export function step(input:DuelState,actor:string,action:Action):DuelState{
   note(s,`${p.name} ativou Polimerização.`);response(s,{kind:'fusion',actor:index,card:action.card,extra:action.extra,materials:action.materials,position:action.position},'main');
  }else if(action.kind==='spell'){
   let c=p.hand.find(c=>c.uid===action.card);if(c){p.hand=p.hand.filter(c=>c.uid!==action.card);p.backrow.push({...c,setTurn:s.turn,faceUp:true});}else{const back=p.backrow.find(c=>c.uid===action.card)!;back.faceUp=true;c=back;}
+  if(getEffect(c.id)?.kind==='discardRemoval')payDiscard(s,index,c.uid,action.discards);
   note(s,`${p.name} ativou ${card(c.id).name}.`);
   if(getEffect(c.id)?.kind==='moveSelected'){beginMovementSelection(s,index,c.uid,c.id,'spell');assertDuelTransition(input,s);return s;}
   if(s.phase==='response'){
@@ -923,7 +928,7 @@ export function actionLabel(s:DuelState,actor:string,a:Action){
  if(a.kind==='monsterEffect')return `Ativar efeito: ${name(a.card)}${a.discards.length?` | Descartar ${a.discards.map(name).join(' + ')}`:''}${a.tributes?.length?` | Tributar ${a.tributes.map(name).join(' + ')}`:''}${a.target?` → ${name(a.target)}`:''}`;
  if(a.kind==='summon')return `${a.position==='set'?'Baixar DEF':'Invocar ATK'}: ${name(a.card)}${a.tributes.length?` | Tributar ${a.tributes.map(uid=>'M'+(p.monsters.findIndex(m=>m.uid===uid)+1)).join(' + ')}`:''}`;
  if(a.kind==='field')return `Ativar ${name(a.card)} na Zona de Campo`;if(a.kind==='setField')return `Baixar ${name(a.card)} na Zona de Campo`;if(a.kind==='fusion')return `Fusão: ${name(a.extra)} (${a.position.toUpperCase()}) | Materiais: ${a.materials.map(name).join(' + ')}`;
- if(a.kind==='set')return `Baixar: ${name(a.card)}`;if(a.kind==='spell')return `Ativar: ${name(a.card)}${a.target?` → ${name(a.target)}`:''}${a.position?` (${a.position.toUpperCase()})`:''}`;
+ if(a.kind==='set')return `Baixar: ${name(a.card)}`;if(a.kind==='spell')return `Ativar: ${name(a.card)}${a.discards?.length?` | Descartar ${a.discards.map(name).join(' + ')}`:''}${a.target?` → ${name(a.target)}`:''}${a.position?` (${a.position.toUpperCase()})`:''}`;
  if(a.kind==='choose'&&s.choice?.source==='triggerGroup'){const n=s.triggerBuild?.selected?.targets?.length??0;return a.target==='__done__'?`Confirmar ${n} alvo(s)`:`Escolher alvo ${n+1}: ${name(a.target)}`;}
  if(a.kind==='choose'&&['selectedMovement','triggerGroup'].includes(s.choice?.source??'')&&a.target==='__done__')return 'Confirmar alvos selecionados';
  if(a.kind==='position')return `${a.mode==='flip'?'Virar para ATK':`Mudar para ${a.mode.toUpperCase()}`}: ${name(a.card)}`;

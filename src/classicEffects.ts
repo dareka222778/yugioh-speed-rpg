@@ -1,3 +1,4 @@
+import {discardRemovalActions,payDiscard,resolveDiscardRemoval} from './discardRemoval';
 import {selectedMovementTargets,executeSelectedMovement} from './selectedMovement';
 import {getMonsterEffect} from './monsterEffects';
 import {recoveryTargets,executeRecovery} from './recoveryRules';
@@ -23,6 +24,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  // Quick-Play cards Set during this turn cannot be activated until a later turn.
  if(isQuickPlaySpell(c.id)&&!cardActivationAllowed(s,index,'quickplay'))return [];
  if(isQuickPlaySpell(c.id)&&p.backrow.some(b=>b.uid===c.uid&&b.setTurn===s.turn))return [];
+ if(e.kind==='discardRemoval')return discardRemovalActions(s,index,c,e);
  if(e.kind==='choiceSequence')return e.choices.flatMap((choice,n)=>canStartEconomicOperations(s,index,choice.operations)?[{kind:'spell' as const,card:c.uid,target:`__choice_${n}__`}]:[]);
  if(e.kind==='moveSelected')return selectedMovementTargets(s,index,e.rule,getCard,id=>getMonsterEffect(id)?.trigger==='flip',true).length>=e.rule.minimum?[{kind:'spell',card:c.uid}]:[];
  if(e.kind==='recoverMultiple')return recoveryTargets(s,index,e.rule,getCard).length>=e.rule.count?[{kind:'spell',card:c.uid}]:[];
@@ -85,6 +87,7 @@ export function turnMonsterFaceDown(m:Monster):void{
 }
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{
  const e=getEffect(a.id),p=s.players[a.actor],op=s.players[1-a.actor];if(!e)return false;
+ if(e.kind==='discardRemoval'){resolveDiscardRemoval(s,e,'spell',a.target,{destroy:service.destroy,back:discardBackrow,clean:cleanEquips});return true;}
  if(e.kind==='conditionalDestruction'){
   let count=0;
   if(e.zone==='monsters')count=executeDestruction(s,a.actor,getDestructionModel(e)!,a.target,{...service,kind:getCard(a.id)?.kind==='trap'?'trap':'spell'});
