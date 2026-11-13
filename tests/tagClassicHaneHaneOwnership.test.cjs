@@ -28,7 +28,7 @@ for(let first=0;first<4;first++)for(let target=0;target<4;target++)test(`Hane-Ha
  t.assertTagDuel(s);
  s=act(s,'position',a=>a.mode==='flip');
  assert.equal(s.core.phase,'choice');
- assert.ok(s.choice.targets.includes(victim.uid),`victim ${victim.uid} was not offered`);
+ assert.ok(s.core.choice.targets.includes(victim.uid),`victim ${victim.uid} was not offered`);
  s=act(s,'choose',a=>a.target===victim.uid);
  s=passes(s);
  assert.ok(!s.core.players[target%2].monsters.some(c=>c.uid===victim.uid),'returned monster remained on shared field');
