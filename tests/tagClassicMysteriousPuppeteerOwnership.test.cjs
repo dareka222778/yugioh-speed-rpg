@@ -8,6 +8,8 @@ const {getMonsterEffect}=require('../dist/monsterEffects');
 const PUPPETEER='54098121';
 const SUMMONED='91152256';
 const TRAP_HOLE='04206964';
+const MONSTER_REBORN='83764718';
+const TORRENTIAL_TRIBUTE='53582587';
 const puppeteer=getPlayableCard(PUPPETEER);
 const summonedCard=getPlayableCard(SUMMONED);
 assert.ok(puppeteer&&puppeteer.kind==='monster');
@@ -18,6 +20,8 @@ assert.deepEqual(getMonsterEffect(PUPPETEER),{
 });
 assert.equal(getPlayableCard(TRAP_HOLE)?.kind,'trap');
 assert.equal(getEffect(TRAP_HOLE)?.kind,'trapHole');
+assert.equal(getEffect(MONSTER_REBORN)?.kind,'monsterReborn');
+assert.equal(getEffect(TORRENTIAL_TRIBUTE)?.kind,'torrentialTribute');
 
 const normalIds=[...new Set(tag.tagNormalCardIds)]
   .filter(id=>getPlayableCard(id)?.kind==='monster');
@@ -77,13 +81,15 @@ function settleResponses(state){
   }
   return state;
 }
-function setup({first,sourceSeat,summonedSeat,withTrapHole,seed}){
+function setup({first,sourceSeat,summonedSeat,withTrapHole,withReborn=false,withTorrential=false,seed}){
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),
     name:'M102 Seat '+seat,
     cards:deck([
       ...(seat===sourceSeat?[PUPPETEER]:[]),
-      ...(seat===3&&withTrapHole?[TRAP_HOLE]:[])
+      ...(seat===3&&withTrapHole?[TRAP_HOLE]:[]),
+      ...(seat===summonedSeat&&withReborn?[MONSTER_REBORN]:[]),
+      ...(seat===0&&withTorrential?[TORRENTIAL_TRIBUTE]:[])
     ])
   }));
   let state=tag.createTagDuel(players,{classic:true,first,seed});
@@ -171,6 +177,57 @@ test('inactive-partner Mysterious Puppeteer reacts to an opponent Normal Summon 
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===summoned.uid));
   assert.deepEqual(tag.tagActions(state,member(0)),[],
     'the inactive physical owner of Puppeteer never receives active-seat actions');
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  assertConserved(state,before);
+});
+
+test('Mysterious Puppeteer does not trigger on an opponent Monster Reborn Special Summon',()=>{
+  let {state,before,source,summoned}=setup({
+    first:1,sourceSeat:0,summonedSeat:1,withTrapHole:false,
+    withReborn:true,withTorrential:true,
+    seed:'m102-puppeteer-special-summon-exclusion'
+  });
+  // Keep the revived monster's physical UID, but place it in the active
+  // summoning team's Graveyard before Monster Reborn is activated.
+  const revived=takeCard(state,1,SUMMONED);
+  state.core.players[1].grave.push(revived);
+  const reborn=ensureInHand(state,1,MONSTER_REBORN);
+  const torrentCard=takeCard(state,0,TORRENTIAL_TRIBUTE);
+  const torrent={...torrentCard,setTurn:0,faceUp:false};
+  state.core.players[0].backrow.push(torrent);
+  state.core.turn=3;
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+
+  const spell=tag.tagActions(state,member(1)).find(action=>
+    action.kind==='spell'&&action.card===reborn.uid&&action.target===revived.uid
+  );
+  assert.ok(spell,'the active opposing seat must be able to activate Monster Reborn');
+  state=tag.stepTagDuel(state,member(1),spell);
+  assert.equal(state.core.phase,'response');
+  assert.equal(state.core.pending.kind,'specialSummon',
+    'Monster Reborn must open a Special Summon response window');
+  assert.equal(tag.tagDecisionMember(state).id,member(2),
+    'the active Puppeteer team member owns the opposing Special Summon response');
+  assert.deepEqual(tag.tagActions(state,member(0)),[],
+    'the inactive physical owner of Puppeteer and Torrential Tribute receives no actions');
+
+  const response=tag.tagActions(state,member(2)).find(action=>
+    action.kind==='trap'&&action.card===torrent.uid
+  );
+  assert.ok(response,'the active teammate can activate Torrential Tribute against the Special Summon');
+  state=settleResponses(tag.stepTagDuel(state,member(2),response));
+
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===revived.uid),
+    'Torrential Tribute destroys the Special Summoned monster');
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===reborn.uid),
+    'Monster Reborn is consumed after resolution');
+  assert.ok(state.core.players[0].grave.some(card=>card.uid===torrent.uid),
+    'the activated Torrential Tribute moves to the shared Graveyard');
+  assert.ok(state.core.players[0].grave.some(card=>card.uid===source.uid),
+    'Torrential Tribute also destroys the face-up Mysterious Puppeteer');
+  assert.equal(state.core.players[0].lp,4000,
+    'Puppeteer only watches Normal/Flip Summons; Special Summon must not grant 500 LP');
+  assert.equal(state.core.players[1].lp,4000);
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
   assertConserved(state,before);
 });
