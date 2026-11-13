@@ -113,12 +113,19 @@ diagnosticTest('Mystic Tomato resolves for the active teammate and recruits from
 
  assert.ok(state.core.players[1].grave.some(card=>card.uid===source.uid),'the destroyed Tomato must enter its shared team Graveyard');
  assert.equal(state.core.phase,'choice');
+ assert.equal(state.core.choice.source,'triggerOptional');
  assert.equal(tag.tagDecisionMember(state).id,member(1),'the active defending teammate resolves the inactive partner trigger');
+ assert.deepEqual(tag.tagActions(state,member(3)),[],'the inactive source owner must not receive the decision');
+ const activate=tag.tagActions(state,member(1)).find(action=>action.kind==='choose'&&action.target===source.uid);
+ assert.ok(activate,'the active teammate must be able to activate the optional Tomato trigger');
+ state=settleResponses(tag.stepTagDuel(state,member(1),activate));
+
+ assert.equal(state.core.phase,'choice');
+ assert.equal(state.core.choice.source,'monsterRecruit');
+ assert.equal(state.core.choice.actor,1);
  const choices=tag.tagActions(state,member(1)).filter(action=>action.kind==='choose');
  assert.ok(choices.some(action=>action.target===activeCandidate.uid),'the active representative own Deck candidate must be offered');
  assert.ok(!choices.some(action=>action.target===inactiveCandidate.uid),'the inactive source owner Deck must not leak into the active representative choices');
- assert.deepEqual(tag.tagActions(state,member(3)),[],'the inactive source owner must not receive the decision');
-
  const chosen=choices.find(action=>action.target===activeCandidate.uid);
  state=settleResponses(tag.stepTagDuel(state,member(1),chosen));
  assert.ok(state.core.players[1].monsters.some(card=>card.uid===activeCandidate.uid&&card.id===KURIBOH),
