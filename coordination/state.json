@@ -1,61 +1,72 @@
 {
-  "runId": "work-20261113T125703-0300",
+  "runId": "work-20261113T132613-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "released-to-auxiliary-monitor-ci",
-  "startedAt": "2026-11-13T12:57:03-03:00",
-  "lastActivityAt": "2026-11-13T13:09:11-03:00",
+  "state": "active",
+  "startedAt": "2026-11-13T13:26:13-03:00",
+  "lastActivityAt": "2026-11-13T13:26:13-03:00",
   "nextScheduledAt": "2026-11-13T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "M119 Dark Hole 2v2 shared-field destruction",
-    "M120 Card Destruction four physical hands/decks",
-    "M121 Pot of Greed physical draw and End Phase hand timing",
+    "M146 Mountain global modifiers across both 2v2 teams",
+    "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs",
     "coordination/state.json",
-    "coordination/runs",
-    "tests/tagClassicUpstartGoblinPhysicalDraw.test.cjs",
-    "tests/tagClassicTremendousFireTeamDamage.test.cjs",
-    "tests/tagClassicJarOfGreedPhysicalDraw.test.cjs",
-    "tests/tagClassicDirectLPEffectsTeamOwnership.test.cjs",
-    "tests/tagClassicMagicCylinderPhysicalOwners.test.cjs",
-    "coordination/runs/work-20261113T125703-0300.json",
-    "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
+    "coordination/runs/work-20261113T132613-0300.json"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
-  "previousRunId": "work-20261113T122919-0300",
+  "lastCheckpoint": "coordination/runs/work-20261113T132613-0300.json",
+  "previousRunId": "work-20261113T125703-0300",
   "previousReservation": {
-    "id": "work-20261113T073019-0300",
+    "id": "work-20261113T125703-0300",
     "owner": "Work",
-    "branch": "feat/work-m101-jinzo-2v2-trap-lock-20261113",
+    "branch": "feat/work-m129-upstart-goblin-2v2-20261113",
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "reservedFiles": [
-      "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs",
-      "tests/tagClassicMysteriousPuppeteerOwnership.test.cjs",
-      "tests/tagClassicMirrorForceOwnership.test.cjs"
-    ],
-    "state": "released-ci-success",
-    "startedAt": "2026-11-13T07:30:19-03:00",
-    "priority": "P0 — M61 handoff pendente; M101 regressão de Jinzo/Royal Decree no 2v2",
-    "head": "37ed8c6a08ccd4465d48dae8f2e282618a54085c",
+    "reservedFiles": [],
+    "state": "released-to-auxiliary-monitor-ci",
+    "startedAt": "2026-11-13T12:57:03-03:00",
+    "lastActivityAt": "2026-11-13T13:09:11-03:00",
+    "completedAt": "2026-11-13T13:09:11-03:00",
+    "head": "282e88ce752c07023d77ee49da491cdb101af791",
+    "pr": 85,
+    "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
     "parallelOwnWork": [
       {
-        "branch": "feat/work-m102-mysterious-puppeteer-tag-20261113",
-        "head": "958a72366199adb8bd9fbf72d2b7f4d9b35f1cc9",
-        "pr": 58,
-        "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
+        "branch": "feat/work-m130-tremendous-fire-2v2-20261113",
+        "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
+        "pr": 86,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "state": "released-to-auxiliary-monitor-ci"
       },
       {
-        "branch": "feat/work-m103-mirror-force-tag-20261113",
-        "head": "d313e2a47e77b771e6bf3881aa8aa1463a086df5",
-        "pr": 59,
-        "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
+        "branch": "feat/work-m131-jar-of-greed-2v2-20261113",
+        "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
+        "pr": 87,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m132-direct-lp-spells-2v2-20261113",
+        "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
+        "pr": 88,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m133-magic-cylinder-2v2-20261113",
+        "head": "6eba9628ec7c3e251be913110add8f69dabede13",
+        "pr": 89,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
+        "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+        "pr": 64,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "state": "released-to-auxiliary-monitor-ci"
       }
-    ],
-    "lastActivityAt": "2026-11-13T07:52:55-03:00",
-    "completedAt": "2026-11-13T08:48:19-03:00",
-    "release": "M101–M103 reservations released after all three CI workflows passed"
+    ]
   },
   "activeParallelWork": {
     "pr": 17,
@@ -968,10 +979,10 @@
   },
   "handoff": {
     "to": "auxiliary",
-    "status": "released",
-    "at": "2026-11-13T13:09:11-03:00",
-    "scope": "Branches próprias Work M108 e M129–M133 liberadas para monitoramento de CI e correções somente nos testes próprios. M61 e M118 continuam bloqueados aguardando handoff explícito.",
-    "nextTask": "Auxiliar: acompanhar CI #64 e #85–#89; corrigir falhas somente nas branches próprias M108 e M129–M133. Work na próxima janela: revalidar #80/#84, confirmar correção M126/#82, verificar handoffs M61/M118 e continuar a próxima família 2v2.",
+    "status": "independent-work-continues",
+    "at": "2026-11-13T13:26:13-03:00",
+    "scope": "Work reservou somente tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs na branch M146. O auxiliar pode continuar exclusivamente nas branches M134–M145 e demais reservas próprias já liberadas; M61/PR17 e M118/PR74 seguem bloqueadas aguardando handoff explícito.",
+    "nextTask": "Auxiliar: continuar monitorando e corrigindo apenas testes das branches próprias M134–M145; não tocar M146 nem arquivos reservados M61/M118.",
     "nextWorkAt": "2026-11-13T17:30:00-03:00"
   },
   "catalog": {
@@ -1824,16 +1835,9 @@
   },
   "nextTask": "Auxiliar: acompanhar CI #64 e #85–#89; corrigir falhas somente nas branches próprias M108 e M129–M133. Work na próxima janela: revalidar #80/#84, confirmar correção M126/#82, verificar handoffs M61/M118 e continuar a próxima família 2v2.",
   "sharedHeadBeforeRelease": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
-  "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
-  "sharedHeadBeforeClaim": "97c622833a72415ea29f5bd0320a8a07f67dc0a5",
-  "releasedOwnReservation": {
-    "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-    "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
-    "pr": 76,
-    "owner": "Work",
-    "state": "released-to-auxiliary-monitor-ci",
-    "releasedAt": "2026-11-13T12:38:12-03:00"
-  },
+  "priority": "P1 — validar Mountain nos três tipos oficiais (Dragon, Winged Beast e Thunder) em ambos os campos 2v2, incluindo ativação por parceiro e conservação de UIDs.",
+  "sharedHeadBeforeClaim": "fbe361b6c11b4040c3518383d74ff959114547ec",
+  "releasedOwnReservation": false,
   "parallelWorkObserved": {
     "branches": [
       "M76",
@@ -2123,56 +2127,21 @@
     }
   ],
   "activeRun": {
-    "id": "work-20261113T125703-0300",
+    "id": "work-20261113T132613-0300",
     "owner": "Work",
-    "branch": "feat/work-m129-upstart-goblin-2v2-20261113",
+    "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "reservedFiles": [],
-    "state": "released-to-auxiliary-monitor-ci",
-    "startedAt": "2026-11-13T12:57:03-03:00",
-    "lastActivityAt": "2026-11-13T13:09:11-03:00",
-    "completedAt": "2026-11-13T13:09:11-03:00",
-    "head": "282e88ce752c07023d77ee49da491cdb101af791",
-    "pr": 85,
-    "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
-    "parallelOwnWork": [
-      {
-        "branch": "feat/work-m130-tremendous-fire-2v2-20261113",
-        "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
-        "pr": 86,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      },
-      {
-        "branch": "feat/work-m131-jar-of-greed-2v2-20261113",
-        "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
-        "pr": 87,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      },
-      {
-        "branch": "feat/work-m132-direct-lp-spells-2v2-20261113",
-        "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
-        "pr": 88,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      },
-      {
-        "branch": "feat/work-m133-magic-cylinder-2v2-20261113",
-        "head": "6eba9628ec7c3e251be913110add8f69dabede13",
-        "pr": 89,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      },
-      {
-        "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
-        "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
-        "pr": 64,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      }
-    ]
+    "reservedFiles": [
+      "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+    ],
+    "state": "active",
+    "startedAt": "2026-11-13T13:26:13-03:00",
+    "lastActivityAt": "2026-11-13T13:26:13-03:00",
+    "completedAt": null,
+    "head": null,
+    "pr": null,
+    "priority": "P1 — validar Mountain nos três tipos oficiais (Dragon, Winged Beast e Thunder) em ambos os campos 2v2, incluindo ativação por parceiro e conservação de UIDs."
   },
   "nextWorkAt": "2026-11-13T17:30:00-03:00",
   "parallelRuns": [
@@ -3267,7 +3236,7 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
   "lastParallelActivityAt": "2026-11-13T13:09:11-03:00",
   "sharedHeadAfterCheckpoint": "49a1adb436ad299b5df9508753adc1a08477f0f4",
-  "sharedHeadBeforeStateUpdate": "49a1adb436ad299b5df9508753adc1a08477f0f4",
+  "sharedHeadBeforeStateUpdate": "fbe361b6c11b4040c3518383d74ff959114547ec",
   "endedAt": "2026-11-13T13:09:11-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
