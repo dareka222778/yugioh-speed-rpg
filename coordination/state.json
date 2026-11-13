@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-13T02:58:33-03:00",
-  "lastActivityAt": "2026-11-13T02:58:33-03:00",
+  "lastActivityAt": "2026-11-13T03:18:00-03:00",
   "nextScheduledAt": "2026-11-13T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -22,7 +22,9 @@
     "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
     "feat/work-m97-tag-troop-dragon-recursion-20261113",
     "tests/tagClassicRecruiterFiltersOwnership.test.cjs",
-    "tests/tagClassicTroopDragonRecursionOwnership.test.cjs"
+    "tests/tagClassicTroopDragonRecursionOwnership.test.cjs",
+    "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+    "tests/tagClassicGravekeepersSpyOwnership.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261113T025833-0300.json",
   "previousRunId": "work-20261113T023036-0300",
@@ -294,6 +296,14 @@
         "tests/tagClassicTroopDragonRecursionOwnership.test.cjs"
       ],
       "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicGravekeepersSpyOwnership.test.cjs"
+      ],
+      "state": "claimed"
     }
   ],
   "handoffRequest": {
@@ -480,27 +490,41 @@
       "state": "open",
       "draft": true,
       "branch": "M92",
-      "ci": "card-batch-fast-success; engine-validation-in-progress"
+      "ci": "fast-success; engine-validation-in-progress; milestone-success"
     },
     {
       "number": 49,
       "state": "open",
       "draft": true,
       "branch": "M93",
-      "ci": "card-batch-fast-success; engine-validation-in-progress"
+      "ci": "fast-success; engine-validation-in-progress; milestone-success"
     },
     {
       "number": 50,
       "state": "open",
       "draft": true,
       "branch": "M94",
-      "ci": "engine-validation-in-progress"
+      "ci": "fast-success; engine-validation-in-progress; milestone-success"
     },
     {
       "number": 51,
       "state": "open",
       "draft": true,
       "branch": "M95",
+      "ci": "rerun-queued; diagnostic-wrapper-added"
+    },
+    {
+      "number": 52,
+      "state": "open",
+      "draft": true,
+      "branch": "M96",
+      "ci": "fast-success; engine-validation-in-progress; milestone-success"
+    },
+    {
+      "number": 53,
+      "state": "open",
+      "draft": true,
+      "branch": "M97",
       "ci": "fast-success; engine-validation-in-progress; milestone-success"
     }
   ],
@@ -604,32 +628,54 @@
       "fastRunId": 43376852634,
       "engineValidation": "in_progress",
       "engineRunId": 43376852578,
-      "milestone1000": "in_progress",
+      "milestone1000": "success",
       "milestoneRunId": 43376852685
     },
     "pr49": {
-      "head": "fee8b8d80de44366d93e350ad8f9785e71a9f677",
+      "head": "060c513c507843f71e8a50cf21c1095f92143e7c",
       "cardBatchFast": "success",
-      "fastRunId": 43376857992,
+      "fastRunId": 43377399808,
       "engineValidation": "in_progress",
-      "engineRunId": 43376858071,
-      "milestone1000": "in_progress",
-      "milestoneRunId": 43376857986
+      "engineRunId": 43377399886,
+      "milestone1000": "success",
+      "milestoneRunId": 43377399898
     },
     "pr50": {
-      "head": "b566abedf4a1d661c56217e784c46df033efe028",
+      "head": "d472c0a2f8e2bcf98313b1ff32fd72987b1ff21c",
+      "cardBatchFast": "success",
+      "fastRunId": 43377406210,
       "engineValidation": "in_progress",
-      "engineRunId": 43376863194,
-      "cardBatchFast": "not-visible"
+      "engineRunId": 43377406204,
+      "milestone1000": "success",
+      "milestoneRunId": 43377406219
     },
     "pr51": {
-      "head": "3aa88770e6b4576fb470123455cad8a3d215c6eb",
+      "head": "0a9382214ef79f1716f5d153e34285e4236f7ace",
+      "cardBatchFast": "queued",
+      "fastRunId": 43378024150,
+      "engineValidation": "queued",
+      "engineRunId": 43378024211,
+      "milestone1000": "in_progress",
+      "milestoneRunId": 43378024074,
+      "previousFailure": "npm test failed on Pyramid Turtle file; diagnostic wrapper added to expose exact assertion"
+    },
+    "pr52": {
+      "head": "d77a57f3a24fe0cb33939314abc704e7cf154467",
       "cardBatchFast": "success",
-      "fastRunId": 43377278202,
+      "fastRunId": 43377835957,
       "engineValidation": "in_progress",
-      "engineRunId": 43377278443,
+      "engineRunId": 43377836059,
       "milestone1000": "success",
-      "milestoneRunId": 43377278259
+      "milestoneRunId": 43377835955
+    },
+    "pr53": {
+      "head": "c352a7c31b01bf6e73e68c17f9e25cbf89fe734c",
+      "cardBatchFast": "success",
+      "fastRunId": 43377839749,
+      "engineValidation": "in_progress",
+      "engineRunId": 43377839877,
+      "milestone1000": "success",
+      "milestoneRunId": 43377839740
     }
   },
   "production": {
@@ -650,7 +696,7 @@
     "minimum60MinutesConfirmed": false,
     "note": "Execução retomada às 02:58:33 BRT; duração efetiva será registrada no checkpoint final, sem contar espera de CI."
   },
-  "nextTask": "M92–M94: corrigir os fixtures de stats de CardRef e aguardar CI dos HEADs corrigidos; M95: concluir a escolha de posição de recrutamento; avançar M96 (Masked Dragon/Howling Insect) e M97 (Troop Dragon obrigatório) em branches próprias.",
+  "nextTask": "M92–M97 em validação; M93/M94 corrigidos com stats do catálogo; M95 recebeu diagnóstico explícito após falha; prosseguir M98 Gravekeeper's Spy, depois fechar falhas e reconsultar CI.",
   "sharedHeadBeforeRelease": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
   "priority": "Work",
   "sharedHeadBeforeClaim": "9ef10595193fed91af747f8c42b3cb9a726a8848",

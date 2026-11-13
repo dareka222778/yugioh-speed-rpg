@@ -4,7 +4,7 @@
   "priority": "Work",
   "state": "active",
   "startedAt": "2026-11-13T02:58:33-03:00",
-  "lastActivityAt": "2026-11-13T02:58:33-03:00",
+  "lastActivityAt": "2026-11-13T03:18:00-03:00",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadBeforeClaim": "9ef10595193fed91af747f8c42b3cb9a726a8848",
   "sharedHeadAfterClaim": null,
@@ -68,6 +68,14 @@
         "tests/tagClassicTroopDragonRecursionOwnership.test.cjs"
       ],
       "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicGravekeepersSpyOwnership.test.cjs"
+      ],
+      "state": "claimed"
     }
   ],
   "handoff": {
@@ -124,6 +132,13 @@
       "pr": 51,
       "file": "tests/tagClassicPyramidTurtleOwnership.test.cjs",
       "detail": "Pyramid Turtle opcional; recruta Zombie com DEF <= 2000 do Deck físico do representante ativo; exclui Deck do parceiro inativo e Kuriboh."
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "head": "0a9382214ef79f1716f5d153e34285e4236f7ace",
+      "pr": 51,
+      "file": "tests/tagClassicPyramidTurtleOwnership.test.cjs",
+      "detail": "Ajustado para resolver a escolha de posição e adicionado diagnóstico de stack após falha em npm test."
     }
   ],
   "production": {
@@ -136,7 +151,7 @@
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false
   },
-  "nextTask": "M92–M94: corrigir os fixtures de stats de CardRef e aguardar CI dos HEADs corrigidos; M95: concluir a escolha de posição de recrutamento; avançar M96 (Masked Dragon/Howling Insect) e M97 (Troop Dragon obrigatório) em branches próprias.",
+  "nextTask": "M92–M97 em validação; M93/M94 corrigidos com stats do catálogo; M95 recebeu diagnóstico explícito após falha; prosseguir M98 Gravekeeper's Spy, depois fechar falhas e reconsultar CI.",
   "nextWorkAt": "2026-11-13T03:30:00-03:00",
   "ci": {
     "pr48": {
@@ -144,29 +159,48 @@
       "runId": 43376852634,
       "engineValidation": "in_progress",
       "engineRunId": 43376852578,
-      "milestone1000": "in_progress",
+      "milestone1000": "success",
       "milestoneRunId": 43376852685
     },
     "pr49": {
       "cardBatchFast": "success",
-      "runId": 43376857992,
+      "runId": 43377399808,
       "engineValidation": "in_progress",
-      "engineRunId": 43376858071,
-      "milestone1000": "in_progress",
-      "milestoneRunId": 43376857986
+      "engineRunId": 43377399886,
+      "milestone1000": "success",
+      "milestoneRunId": 43377399898
     },
     "pr50": {
-      "cardBatchFast": "not-visible",
+      "cardBatchFast": "success",
+      "runId": 43377406210,
       "engineValidation": "in_progress",
-      "engineRunId": 43376863194
+      "engineRunId": 43377406204,
+      "milestone1000": "success",
+      "milestoneRunId": 43377406219
     },
     "pr51": {
+      "cardBatchFast": "queued",
+      "runId": 43378024150,
+      "engineValidation": "queued",
+      "engineRunId": 43378024211,
+      "milestone1000": "in_progress",
+      "milestoneRunId": 43378024074
+    },
+    "pr52": {
       "cardBatchFast": "success",
-      "fastRunId": 43377278202,
+      "runId": 43377835957,
       "engineValidation": "in_progress",
-      "engineRunId": 43377278443,
+      "engineRunId": 43377836059,
       "milestone1000": "success",
-      "milestoneRunId": 43377278259
+      "milestoneRunId": 43377835955
+    },
+    "pr53": {
+      "cardBatchFast": "success",
+      "runId": 43377839749,
+      "engineValidation": "in_progress",
+      "engineRunId": 43377839877,
+      "milestone1000": "success",
+      "milestoneRunId": 43377839740
     }
   }
 }
