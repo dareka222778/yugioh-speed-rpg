@@ -3,7 +3,12 @@ on:
   push:
     branches: [classic-engine-foundation]
   pull_request:
-    branches: [main, classic-engine-foundation]
+    branches:
+      - main
+      - classic-engine-foundation
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+      - 'feat/aux-*'
 jobs:
   test:
     runs-on: ubuntu-latest

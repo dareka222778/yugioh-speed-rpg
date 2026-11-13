@@ -1,7 +1,12 @@
 name: Milestone 1000 - certified-card progress and triage
 on:
   pull_request:
-    branches: [main, classic-engine-foundation]
+    branches:
+      - main
+      - classic-engine-foundation
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+      - 'feat/aux-*'
     paths: ['catalog/**', 'src/**', 'scripts/**', 'tests/**', '.github/workflows/milestone1000.yml']
   workflow_dispatch:
 permissions:
