@@ -1017,11 +1017,13 @@
   "catalog": {
     "shared": {
       "cards": 969,
-      "certificates": 969
+      "certificates": 969,
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
     },
     "development": {
       "cards": 1014,
-      "certificates": 1014
+      "certificates": 1014,
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
     },
     "delta": {
       "added": 45,
@@ -1886,27 +1888,37 @@
     },
     "pr102": {
       "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
-      "cardBatchFast": "queued",
-      "engineValidation": "queued",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "in_progress",
       "milestone1000": "queued"
     },
     "pr103": {
       "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
-      "cardBatchFast": "queued",
+      "cardBatchFast": "success",
       "engineValidation": "queued",
-      "milestone1000": "queued"
+      "milestone1000": "success"
     },
     "pr104": {
       "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
-      "cardBatchFast": "queued",
-      "engineValidation": "queued",
-      "milestone1000": "queued"
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "in_progress"
     },
     "pr105": {
       "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
       "cardBatchFast": "queued",
       "engineValidation": "queued",
-      "milestone1000": "not-returned"
+      "milestone1000": "success"
+    },
+    "pr97": {
+      "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "passedTests": 7369,
+      "failedTests": 1,
+      "failure": "Skelengel fixture expected 6 cards but started with 5; tests/tagClassicFlipRecoveryDrawPhysicalOwnership.test.cjs:138",
+      "commentId": 6859087003
     }
   },
   "production": {
@@ -1934,41 +1946,80 @@
   "sharedHeadBeforeClaim": "fbe361b6c11b4040c3518383d74ff959114547ec",
   "releasedOwnReservation": true,
   "parallelWorkObserved": {
+    "at": "2026-11-13T13:41:32-03:00",
+    "note": "M140–M145 observadas em branches próprias; Work não alterou nem liberou essas reservas.",
     "branches": [
-      "M76",
-      "M77",
-      "M78",
-      "M79",
-      "M80",
-      "M81",
-      "M82",
-      "M83",
-      "M84",
-      "M85",
-      "M86",
-      "M88",
-      "M89",
-      "M90",
-      "M91"
-    ],
-    "prs": [
-      32,
-      33,
-      34,
-      35,
-      36,
-      37,
-      38,
-      39,
-      40,
-      41,
-      42,
-      44,
-      45,
-      46,
-      47
-    ],
-    "ownership": "Branches de outros agentes; não assumidas nem editadas."
+      {
+        "branch": "feat/work-m140-flip-target-monsters-2v2-20261113",
+        "head": "a29764d4ea27ff06dd6b0ea47e02c58a49069412",
+        "pr": 96,
+        "ci": {
+          "head": "a29764d4ea27ff06dd6b0ea47e02c58a49069412",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m141-flip-recovery-draw-2v2-20261113",
+        "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+        "pr": 97,
+        "ci": {
+          "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+          "cardBatchFast": "success",
+          "engineValidation": "failure",
+          "milestone1000": "success",
+          "passedTests": 7369,
+          "failedTests": 1,
+          "failure": "Skelengel fixture expected 6 cards but started with 5; tests/tagClassicFlipRecoveryDrawPhysicalOwnership.test.cjs:138",
+          "commentId": 6859087003
+        }
+      },
+      {
+        "branch": "feat/work-m142-jinzo-team-trap-negation-20261113",
+        "head": "e35902f42bade97be71eb6c88aa0022a3fb6dd28",
+        "pr": 98,
+        "ci": {
+          "head": "e35902f42bade97be71eb6c88aa0022a3fb6dd28",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m143-sangan-witch-2v2-search-owner-20261113",
+        "head": "b9942091d0a695b732a684e4d162353dcf718e19",
+        "pr": 99,
+        "ci": {
+          "head": "b9942091d0a695b732a684e4d162353dcf718e19",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m144-equip-shared-field-2v2-20261113",
+        "head": "d153af18d5ee6e690ce2341c100e8109014f64dc",
+        "pr": 100,
+        "ci": {
+          "head": "d153af18d5ee6e690ce2341c100e8109014f64dc",
+          "cardBatchFast": "success",
+          "engineValidation": "success",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m145-yami-global-2v2-field-modifier-20261113",
+        "head": "55dfb23849316e98a5fd0b70810205d85f6bb02e",
+        "pr": 101,
+        "ci": {
+          "head": "55dfb23849316e98a5fd0b70810205d85f6bb02e",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      }
+    ]
   },
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAfterClaim": "22e39b9c8ca0fadb596748a71eeb50d05b6ea361",
@@ -3381,7 +3432,7 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
   "lastParallelActivityAt": "2026-11-13T13:09:11-03:00",
   "sharedHeadAfterCheckpoint": "d010d099032f4b133cc36473e0ba22acb181280d",
-  "sharedHeadBeforeStateUpdate": "e655f325edf12775a02c55d8bffd3e9ee8f4575e",
+  "sharedHeadBeforeStateUpdate": "f8bc37118daa88413c9603753758ed68588f7da0",
   "endedAt": "2026-11-13T13:37:54-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
@@ -3564,5 +3615,5 @@
     "allowed": "Monitorar CI das PRs #102–#105 e corrigir somente os quatro arquivos de teste próprios listados; registrar resultados e devolver checkpoint.",
     "forbidden": "Não fazer merge/deploy; não tocar M61/PR17, M118/PR74 nem branches M140–M145 de terceiros; não alterar runtime, catálogo, certificados, banco ou inventários."
   },
-  "lastCoordinationRefreshAt": "2026-11-13T13:40:08-03:00"
+  "lastCoordinationRefreshAt": "2026-11-13T13:41:32-03:00"
 }
