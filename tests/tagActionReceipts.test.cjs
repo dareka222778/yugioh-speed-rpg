@@ -51,14 +51,14 @@ test('2v2 action receipts replay once, reject conflicting IDs, survive SQLite re
   assert.notEqual(actionIndex,-1,'the active physical member must be able to end the turn');
   assert.notEqual(conflictingIndex,-1,'the fixture must expose a distinct action for collision testing');
   const expectedRevision=record.revision;
-  const requestId='m75-tag-action-0001';
+  const invalidRetry=invalidRetry;
 
   assert.throws(
-    ()=>store.actTag(record.id,actor,record.guild,expectedRevision,999,'m75-invalid-retry'),
+    ()=>store.actTag(record.id,actor,record.guild,expectedRevision,999,invalidRetry),
     /Jogada indisponível/,
     'an invalid action must roll back without consuming its request ID'
   );
-  const first=store.actTag(record.id,actor,record.guild,expectedRevision,actionIndex,'m75-invalid-retry');
+  const first=store.actTag(record.id,actor,record.guild,expectedRevision,actionIndex,invalidRetry);
   assert.equal(first.receipt.replayed,false);
   assert.equal(first.receipt.committedRevision,first.revision);
   assert.equal(first.revision,expectedRevision+1);
@@ -66,20 +66,20 @@ test('2v2 action receipts replay once, reject conflicting IDs, survive SQLite re
 
   const committed=JSON.stringify(first.state);
   const revision=first.revision;
-  const duplicate=store.actTag(record.id,actor,record.guild,expectedRevision,actionIndex,'m75-invalid-retry');
+  const duplicate=store.actTag(record.id,actor,record.guild,expectedRevision,actionIndex,invalidRetry);
   assert.equal(duplicate.receipt.replayed,true);
   assert.equal(duplicate.receipt.committedRevision,revision);
   assert.equal(duplicate.revision,revision);
   assert.equal(JSON.stringify(duplicate.state),committed,'duplicate delivery must return the committed state without a second turn advance');
 
   assert.throws(
-    ()=>store.actTag(record.id,actor,record.guild,expectedRevision,conflictingIndex,'m75-invalid-retry'),
+    ()=>store.actTag(record.id,actor,record.guild,expectedRevision,conflictingIndex,invalidRetry),
     /Identificador de ação já utilizado/,
     'one request ID cannot be reused for a different action'
   );
   const other=first.members.find(member=>member.id!==actor).id;
   assert.throws(
-    ()=>store.actTag(record.id,other,record.guild,expectedRevision,actionIndex,'m75-invalid-retry'),
+    ()=>store.actTag(record.id,other,record.guild,expectedRevision,actionIndex,invalidRetry),
     /Identificador de ação já utilizado/,
     'one request ID cannot be replayed by another physical participant'
   );
@@ -103,7 +103,7 @@ test('2v2 action receipts replay once, reject conflicting IDs, survive SQLite re
   database=require('../dist/database');
   db=database.db;
   store=require('../dist/tagStore');
-  const replayedAfterRestart=store.actTag(record.id,actor,record.guild,expectedRevision,actionIndex,'m75-invalid-retry');
+  const replayedAfterRestart=store.actTag(record.id,actor,record.guild,expectedRevision,actionIndex,invalidRetry);
   assert.equal(replayedAfterRestart.receipt.replayed,true);
   assert.equal(replayedAfterRestart.revision,revision);
   assert.equal(JSON.stringify(replayedAfterRestart.state),committed,'the receipt and committed state must survive SQLite close/reopen');
