@@ -437,6 +437,24 @@
         "engineRunId": 43412492515,
         "milestoneRunId": 43412492653
       }
+    },
+    {
+      "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+      ],
+      "state": "reserved"
+    },
+    {
+      "branch": "feat/work-m110-seven-tools-2v2-20261113",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSevenToolsOwnership.test.cjs"
+      ],
+      "state": "reserved"
     }
   ],
   "handoffRequest": {
@@ -1060,5 +1078,74 @@
     ],
     "lastActivityAt": "2026-11-13T07:52:55-03:00"
   },
-  "nextWorkAt": "2026-11-13T08:30:00-03:00"
+  "nextWorkAt": "2026-11-13T08:30:00-03:00",
+  "parallelRuns": [
+    {
+      "runId": "work-20261113T082743-0300",
+      "owner": "Work",
+      "priority": "P1 — verificar Tributo Torrencial e Sete Ferramentas no 2v2 sem tocar nas reservas M61/M101–M108",
+      "state": "active",
+      "startedAt": "2026-11-13T08:27:43-03:00",
+      "timezone": "America/Sao_Paulo",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "bd1e9c7c6cffa36f337ab8059cdfec54bd44275f",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "workBranches": [
+        {
+          "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+          ],
+          "state": "reserved"
+        },
+        {
+          "branch": "feat/work-m110-seven-tools-2v2-20261113",
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicSevenToolsOwnership.test.cjs"
+          ],
+          "state": "reserved"
+        }
+      ],
+      "reservedFiles": [
+        "tests/tagClassicTorrentialTributeOwnership.test.cjs",
+        "tests/tagClassicSevenToolsOwnership.test.cjs"
+      ],
+      "blocksCompleted": [
+        "Leitura de coordination/state.json e checkpoint M101; confirmação das reservas e da CI.",
+        "Verificação do HEAD real da branch compartilhada e comparação com o checkpoint anterior.",
+        "Solicitação cooperativa renovada para transferência M61; aguardando resposta."
+      ],
+      "changes": [],
+      "catalog": {
+        "sharedCards": 969,
+        "sharedCertificates": 969,
+        "developmentCards": 1014,
+        "developmentCertificates": 1014,
+        "delta": 45,
+        "newAdmissions": 0,
+        "newCertificates": 0
+      },
+      "handoffRequest": {
+        "target": "PR #17 / M61",
+        "status": "awaiting-response",
+        "commentId": 6851541552
+      },
+      "validation": {},
+      "deployment": {
+        "merge": "none",
+        "deploy": "none",
+        "liveDiscordValidation": false,
+        "hosting": "não verificado"
+      },
+      "nextTask": "Implementar regressões 2v2 de Torrential Tribute e Seven Tools em branches isoladas; executar CI completa; depois escolher próxima família ainda não reservada.",
+      "nextWorkAt": "2026-11-13T13:30:00-03:00"
+    }
+  ],
+  "lastParallelCheckpoint": "coordination/runs/work-20261113T082743-0300.json",
+  "lastParallelActivityAt": "2026-11-13T08:27:43-03:00"
 }
