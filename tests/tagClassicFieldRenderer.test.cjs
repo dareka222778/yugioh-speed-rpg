@@ -6,7 +6,7 @@ const {renderTag,tagImageLayout}=require('../dist/tagRenderer');
 const {npcs}=require('../dist/npcContent');
 const {getPlayableCard}=require('../dist/effectRegistry');
 
-const fieldId='86318356'; // Sogen
+const fieldId='59197169'; // Yami
 assert.equal(getPlayableCard(fieldId)?.field,true);
 
 function game(){
