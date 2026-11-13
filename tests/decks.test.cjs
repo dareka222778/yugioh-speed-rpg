@@ -1,6 +1,6 @@
 const {test,after}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const os=require('node:os');const path=require('node:path');
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'decks-'));process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
-const db=require('../dist/database');let api=require('../dist/decks');const {deckMessage}=require('../dist/deckUI');
+const db=require('../dist/database');let api=require('../dist/decks');const {deckMessage,deckCardMessage,getDeckCardIndex}=require('../dist/deckUI');
 const {starterContents}=require('../dist/cardCatalog');
 for(const [i,type]of ['warrior','spellcaster','dragon'].entries()){db.createPlayer(String(i+1),'Teste');db.chooseStarterDeck(String(i+1),type);}
 test('all starter styles open a valid 20-card deck without consuming inventory or changing profile',()=>{
@@ -36,6 +36,29 @@ test('interactive panels serialize within Discord limits for every page and empt
   const p=deckMessage(id,slot,page);assert.ok(p.components.length<=5);const embed=p.embeds[0].toJSON();assert.ok(embed.fields.length<=6);
   for(const row of p.components){const data=row.toJSON();assert.ok(data.components.length<=5);for(const c of data.components)assert.ok(c.custom_id.length<=100);}
  }
+});
+test('owner-owned cards can be browsed individually with correct effect text and original deck return page',()=>{
+ const cards=db.getCollection('1').filter(c=>c.quantity>0).map(c=>c.card_key);
+ assert.ok(cards.length>6);
+ for(const cardId of cards){
+  const index=getDeckCardIndex('1',1,cardId);
+  const view=deckCardMessage('1',1,index);
+  assert.equal(view.cardId,cardId);
+  assert.equal(view.components.length,1);
+  const controls=view.components[0].toJSON().components;
+  assert.equal(controls.length,3);
+  assert.ok(controls[0].custom_id.startsWith('deck:card:1:1:'));
+  assert.ok(controls[1].custom_id.startsWith('deck:view:1:1:'));
+  assert.ok(controls[2].custom_id.startsWith('deck:card:1:1:'));
+  assert.ok(view.embeds[0].toJSON().description.includes('Na coleção'));
+ }
+ const panel=deckMessage('1');
+ const inspect=panel.components[2].toJSON().components.at(-1);
+ assert.match(inspect.label,/Ver carta/);
+ assert.ok(inspect.custom_id.startsWith('deck:inspect:1:1:'));
+ assert.throws(()=>getDeckCardIndex('1',1,'00000000'),/não pertence/);
+ assert.throws(()=>deckCardMessage('1',1,-1),/inexistente/);
+ assert.throws(()=>deckCardMessage('1',1,999),/inexistente/);
 });
 test('saved decks and active selection survive database reopen; lost ownership invalidates active deck',()=>{
  api.activateDeck('1',2);const before=api.openDeck('1',2);db.db.close();delete require.cache[require.resolve('../dist/database')];delete require.cache[require.resolve('../dist/decks')];api=require('../dist/decks');

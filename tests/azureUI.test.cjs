@@ -1,0 +1,66 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const sharp=require('sharp');
+const fs=require('node:fs'),path=require('node:path'),os=require('node:os');
+const temp=fs.mkdtempSync(path.join(os.tmpdir(),'azure-ui-'));
+process.env.DATABASE_PATH=path.join(temp,'game.sqlite');
+const {azure,contrast,duelLayout,embedColors}=require('../dist/duelTheme');
+const {createDuel}=require('../dist/duelEngine');
+const {renderDuel}=require('../dist/duelRenderer');
+const {renderNPC}=require('../dist/npcRenderer');
+const {renderDeck}=require('../dist/deckRenderer');
+const {starterContents}=require('../dist/cardCatalog');
+const basic=starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id));
+test('azure design tokens pass WCAG AA contrast and maintain one neutral blue UI accent',()=>{
+ assert.ok(contrast(azure.text,azure.deep)>=7);
+ assert.ok(contrast(azure.muted,azure.surface)>=4.5);
+ assert.ok(contrast(azure.primaryBright,azure.navy)>=4.5);
+ assert.deepEqual([duelLayout.width,duelLayout.boardHeight,duelLayout.handHeight,duelLayout.zoneCount],[1400,1020,340,3]);
+ assert.equal(embedColors.deck,embedColors.npc);assert.equal(embedColors.public,embedColors.npc);
+});
+test('duel renderer keeps pre-Azure visual skin while command surfaces use shared blue tokens',()=>{
+ const source=fs.readFileSync(path.resolve(__dirname,'../src/duelRenderer.ts'),'utf8');
+ assert.match(source,/DUEL FIELD/);
+ assert.match(source,/#928785/);
+ assert.match(source,/#fff0bb/);
+ assert.ok(!source.includes("from './duelTheme'"),'visual tokens must not replace the original duel playmat');
+});
+test('original amber duel arena protects hidden card art and does not inherit portrait/gallery redesigns',async()=>{
+ const s=createDuel([{id:'owner',name:'Duelista',cards:basic},{id:'npc-azure',name:'Joey Wheeler',cards:basic}],()=>.5);
+ s.encounter={npcId:'joey'};
+ s.players[1].monsters=[{uid:'enemy-secret',id:'15025844',faceUp:false,position:'def',entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0,owner:1}];
+ s.players[1].backrow=[{uid:'trap-secret',id:'04206964',faceUp:false,setTurn:1}];
+ const requests=[];const provider=async id=>{requests.push(id);return null;};
+ const npc=await renderDuel(s,undefined,provider);const metadata=await sharp(npc).metadata();
+ assert.equal(metadata.width,1400);assert.equal(metadata.height,1020);
+ assert.ok(!requests.includes('15025844')&&!requests.includes('04206964'));
+ const noCharacter=structuredClone(s);delete noCharacter.encounter;
+ const baseline=await renderDuel(noCharacter,undefined,provider);
+ const crop={left:222,top:118,width:64,height:100};
+ const [on,off]=await Promise.all([sharp(npc).extract(crop).raw().toBuffer(),sharp(baseline).extract(crop).raw().toBuffer()]);
+ assert.deepEqual(on,off,'Original duel layout must not introduce NPC portrait overlays');
+});
+test('shared blue command galleries coexist with original amber duel board and private hand image sizes',async()=>{
+ const hero=await renderNPC({id:'kaiba',name:'Seto Kaiba',index:2,style:'Dragões',description:'Poder dos dragões',won:false,reward:'100 DP',daily:false,dailyClaimed:false,cards:[],page:0,view:'hero',mainCount:30,extraCount:0});
+ const deck={name:'Duel Studio',slot:1,active:false,errors:[],total:20,extraTotal:0,items:[],revision:1};
+ const workshop=await renderDeck({deck,visible:['91152256'],selected:'91152256',owned:[],page:1,pages:1},async()=>null);
+ assert.deepEqual([(await sharp(hero).metadata()).width,(await sharp(hero).metadata()).height],[1280,720]);
+ assert.deepEqual([(await sharp(workshop).metadata()).width,(await sharp(workshop).metadata()).height],[1200,1090]);
+ const s=createDuel([{id:'a',name:'A',cards:basic},{id:'b',name:'B',cards:basic}],()=>.5);
+ const privatePNG=await renderDuel(s,'a',async()=>null);
+ assert.equal((await sharp(privatePNG).metadata()).height,1360);
+});
+
+test('original duel field stays pixel-identical when optional profile portrait files are added',async()=>{
+ const {portraitPath}=require('../dist/profile');
+ const s=createDuel([{id:'901',name:'Avatar',cards:basic},{id:'902',name:'Rival',cards:basic}],()=>.5);
+ const portrait=await sharp({create:{width:160,height:160,channels:4,background:'#e53045'}}).png().toBuffer();
+ const provider=async()=>null;
+ const earlier=await renderDuel(s,undefined,provider);
+ const file=portraitPath('901');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,portrait);
+ const later=await renderDuel(s,undefined,provider);
+ assert.deepEqual(later,earlier,'portrait belongs to profile commands, not the original duel field');
+ const hand=await renderDuel(s,'901',provider);
+ assert.deepEqual([(await sharp(hand).metadata()).width,(await sharp(hand).metadata()).height],[1400,1360]);
+});
+require('node:test').after(()=>fs.rmSync(temp,{recursive:true,force:true}));

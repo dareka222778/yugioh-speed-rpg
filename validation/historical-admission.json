@@ -1,0 +1,797 @@
+{
+  "schema": 1,
+  "release": "0.17.1",
+  "scope": "crosswalk of existing admitted engine cards; not historical certification or release authorization",
+  "historicalCards": 1962,
+  "enabledEngineCards": 130,
+  "matchedExistingCards": 130,
+  "uniqueHistoricalMatches": 130,
+  "catalogCardsSHA256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a",
+  "matches": [
+    {
+      "engineId": "91152256",
+      "historicalId": "e003193d-d3f4-46ed-b9c7-c4e0cc9ad559",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "48305365",
+      "historicalId": "5279aa6e-af78-4b0d-86dc-29b9a0a0089e",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "55550921",
+      "historicalId": "4eafebf0-8296-4d53-8b5b-964e15abcd9d",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "44287299",
+      "historicalId": "449a8b35-c5a0-4f8f-a41c-7f7efb8bf636",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "00756652",
+      "historicalId": "28cf0df3-931e-4454-934c-5c59923cacb2",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "03573512",
+      "historicalId": "41094d11-fe36-4633-a973-0275ee6ec475",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "05053103",
+      "historicalId": "c1dda3fd-e5fb-4fac-9f10-96b1fdf525cd",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "48365709",
+      "historicalId": "3f1d0fe1-1de6-46fb-8783-ae1eff0def7b",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "93221206",
+      "historicalId": "477a896a-6ce8-4815-a1b4-473a60c6e4d1",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "15025844",
+      "historicalId": "e8b3499e-9370-43a1-aa44-a9d4eaed4e8e",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "91939608",
+      "historicalId": "4c90e565-7ace-408e-9609-304b630c8c11",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "50930991",
+      "historicalId": "f394d2a1-e71e-4d59-acb5-44add2e12249",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "49218300",
+      "historicalId": "16c6ce48-d1f4-4bea-a007-3469da8d50a6",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "75850803",
+      "historicalId": "2e8726e3-18a5-41cd-82a4-8e9a6b814aec",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "17358176",
+      "historicalId": "bec26fdf-1f9e-4ad1-ad35-8cd84d2bf89c",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "28546905",
+      "historicalId": "5c458e4c-555e-45a1-b629-25f2403c0c15",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "88819587",
+      "historicalId": "a906d7cf-e2a6-4f21-b7d6-7e6b72794a09",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "75356564",
+      "historicalId": "e069339f-dc78-4260-affa-ca97e9d9538d",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "87796900",
+      "historicalId": "095d4c1e-d7b0-4e56-a77d-e04842f2d1e7",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "55444629",
+      "historicalId": "76e38335-7e69-4b33-8fef-beb22252899e",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "67494157",
+      "historicalId": "2181de9d-9802-4a41-8727-4737541c212d",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "28279543",
+      "historicalId": "680c4061-57b9-4117-98c3-0f637c491742",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "67724379",
+      "historicalId": "e7f3cd7f-f536-412c-935d-0b9dee4e12ca",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "33064647",
+      "historicalId": "f7ce5d01-e681-4206-8f45-05c913a100e7",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "38199696",
+      "historicalId": "f76c1f1f-1740-4f1b-b8a6-2a6df3f87dbd",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "66788016",
+      "historicalId": "967ebe38-3c90-4f10-822d-219430d22e94",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "17814387",
+      "historicalId": "81710c69-5147-452a-be6d-440ad96fe5cb",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "44209392",
+      "historicalId": "a3ae8af9-db58-407b-8130-b10ba9e1d27e",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "86318356",
+      "historicalId": "0fd410a2-33fc-4374-acb6-c0ab8efe4d2b",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "45231177",
+      "historicalId": "784af30a-cbda-498e-8fa0-2b97a1495436",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "34460851",
+      "historicalId": "013e6bd6-d197-45c7-b3a3-7292d96b4faf",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "24094653",
+      "historicalId": "6e2e39c1-e5b2-4070-aff4-ee935a14a83e",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "89631139",
+      "historicalId": "e0404755-1ade-4c7c-9a2a-b29b7755d860",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "46986414",
+      "historicalId": "c0285d04-cadd-402d-a865-799a182d7510",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "74677422",
+      "historicalId": "bc4ce584-7451-4d5b-8d25-2557632e4be5",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "41392891",
+      "historicalId": "29fb0fc9-2a2e-46d5-b4f7-cbf1e236a353",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "70781052",
+      "historicalId": "a0265517-063f-4ffa-8b4e-31acd1512992",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "32452818",
+      "historicalId": "11fad113-2680-40bf-ad24-bafef9f44ea6",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "06368038",
+      "historicalId": "e5f94e33-d990-44e5-9615-6b9f6514f263",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "40374923",
+      "historicalId": "37dfcf32-59b3-43b4-a257-6bab862ad0c9",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "13429800",
+      "historicalId": "bab03ded-ecb0-40cb-ae34-fa5ae523b599",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "90357090",
+      "historicalId": "e899f8c2-c7e8-47b6-9fb6-ec0650bfbdfc",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "13039848",
+      "historicalId": "26005535-d60f-4b75-9329-e5bcd1ba43b8",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "66672569",
+      "historicalId": "1293a5af-152c-495e-9ed1-c090b6f1c782",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "16972957",
+      "historicalId": "bdd3fe1d-e340-489a-b292-d05b736397fd",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "36304921",
+      "historicalId": "a42ceacc-6768-4d02-98f0-ce4541be0e48",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "41218256",
+      "historicalId": "fcb0711a-0d49-4367-ab4b-2be49b6062d7",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "47060154",
+      "historicalId": "4fdd58c8-b8c4-4e5d-89ae-04a768f37600",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "37120512",
+      "historicalId": "a56db778-aedd-43ae-87b2-865712190991",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "91595718",
+      "historicalId": "f8e9413b-8d05-49cc-9599-bb28f2b8ee51",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "53129443",
+      "historicalId": "0bae3885-838e-4d5d-88ac-108218510d12",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "84257639",
+      "historicalId": "bdac3879-cdee-44cd-a47d-fca8388af25f",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "46474915",
+      "historicalId": "a0d3ca8f-35a1-4a3f-9fd6-0e24db0f7f55",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "04206964",
+      "historicalId": "37bca14b-fe1a-4018-ae53-bf9a58e7d02c",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "19159413",
+      "historicalId": "6eec20dc-7a04-456f-8349-3e2beae0a586",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "83764718",
+      "historicalId": "08a59d85-df4c-4a8d-a9f6-b07dc21f58b0",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "04031928",
+      "historicalId": "368d3359-2498-4aca-b2f6-ea986d6f23d8",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "86325596",
+      "historicalId": "2db5f30a-154d-40af-b9f5-1cfca7428bd9",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "13723605",
+      "historicalId": "aa89fa27-ce9a-483e-9b08-52d81b215f58",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "12607053",
+      "historicalId": "e40eabef-8f64-49b3-a827-e0959f1d8fb2",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "72892473",
+      "historicalId": "2dc53daa-65da-448b-905d-1dbf7f0b2d8e",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "59197169",
+      "historicalId": "2a232b42-239f-4f0d-91fe-9d052fe53ccd",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "51482758",
+      "historicalId": "c52cfe82-9749-4d0f-b674-fcd1b282c599",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "76184692",
+      "historicalId": "6bfc3150-6122-461d-9d7c-d05ed9b940d0",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "15303296",
+      "historicalId": "c0da4b99-aa00-45b9-8b1f-99b00166d8b6",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "30113682",
+      "historicalId": "ecb7223b-ff89-4fa4-abed-4a3415006892",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "01184620",
+      "historicalId": "a15568d8-0367-4245-9656-042b637b360a",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "01784619",
+      "historicalId": "0de6b15f-4d3f-4fbf-b9d1-3f735eed3777",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "31122090",
+      "historicalId": "a0ed8c60-072e-459f-8a5b-d8ba027abd8a",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "68516705",
+      "historicalId": "d92d01e0-7091-48c0-8051-2905048fe9f9",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "63308047",
+      "historicalId": "e8746d07-56cc-47a7-b866-caf020e1290e",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "89494469",
+      "historicalId": "0027e707-a1ca-4986-bdc9-8d8ea1e3f00b",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "41949033",
+      "historicalId": "cc20370d-3a56-48a1-b9ce-ce43be692252",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "75499502",
+      "historicalId": "1d7ce1e5-4fee-420d-9d68-beca49b0f5a0",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "97360116",
+      "historicalId": "e2f3fe83-0653-45c8-97c9-0ce349580066",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "45121025",
+      "historicalId": "dbc104e1-e84c-4014-a922-5ccb51e44923",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "04614116",
+      "historicalId": "162d5bfb-dbe2-4363-972a-101ddcc7fd7f",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "98374133",
+      "historicalId": "551b7e31-bc6b-4b48-8a5a-f3343e9fff8b",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "19523799",
+      "historicalId": "c49bd456-9bad-4508-b9aa-2bf9939f91dc",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "24611934",
+      "historicalId": "267befc8-710e-43b7-832d-b68cb86f69f4",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "50005633",
+      "historicalId": "0b77e2b3-ed04-4d26-bc6d-2a8a73a984bc",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "97590747",
+      "historicalId": "57d5d30f-8688-4746-b8fb-430fe4c1618a",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "26378150",
+      "historicalId": "f9b1855a-1ec1-4761-90ad-84ba066d738c",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "73481154",
+      "historicalId": "d4a8dc71-cf48-4ef3-bbcc-3310ec9a2e85",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "10202894",
+      "historicalId": "cf90f686-2886-4d3e-8235-8f33d394d4c6",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "81057959",
+      "historicalId": "fb62b2b0-101f-4556-a9ba-0700b47f00b3",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "21263083",
+      "historicalId": "b91bd8f9-23ef-4e03-af5e-a5f464627411",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "24068492",
+      "historicalId": "ef99d113-5aa4-4781-90de-4a516972179d",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "80770678",
+      "historicalId": "f6270573-079c-4b38-b9c8-2782b701c206",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "04042268",
+      "historicalId": "513b3326-8141-4a17-b826-31700b1367fd",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "23771716",
+      "historicalId": "d9f2ad84-edbf-4d46-9427-f14dac5c85ab",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "15480588",
+      "historicalId": "55f44aa2-39d7-4212-ada9-1b1351662341",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "05388481",
+      "historicalId": "e895ad1b-4e6d-4681-9bf7-39b7119ef66f",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "30532390",
+      "historicalId": "897078eb-55d5-46be-87be-6b17f5a152f4",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "25880422",
+      "historicalId": "322864d3-485f-4967-aca9-e40002815e28",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "42703248",
+      "historicalId": "b5ea9957-75b9-4c50-85e1-c4f96d3ea806",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "50913601",
+      "historicalId": "6cd1fb0f-214d-4f27-8b9f-7d0a9439d6e3",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "01435851",
+      "historicalId": "dfe00223-3802-4233-9949-9e5dbdd1b3c0",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "52097679",
+      "historicalId": "d4e72804-caff-4eab-86fd-cba77810bfab",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "40640057",
+      "historicalId": "3313ba06-0fbd-49cd-bc18-62c8d8890c86",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "54652250",
+      "historicalId": "b7f2e06b-4996-4c39-8958-63d93da1769f",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "07089711",
+      "historicalId": "7fbc81c5-7d85-439c-9d23-5c3be08d5a6f",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "31560081",
+      "historicalId": "2fcf077e-ebd0-447a-8802-b47c309d3708",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "28933734",
+      "historicalId": "c3692312-c9e6-42b3-8a20-25e63883c135",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "60694662",
+      "historicalId": "6f70e655-5157-499d-abf9-69d0026a9de1",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "11384280",
+      "historicalId": "c3616ad6-4899-4548-881b-361c97f9a412",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "26202165",
+      "historicalId": "431a6148-ab71-445d-bb82-a18d339701e5",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "78010363",
+      "historicalId": "c68337e1-a9a5-486b-aca5-b7565c571643",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "77585513",
+      "historicalId": "6d9cf67e-c28c-4fb2-a88c-311da15f0577",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "54098121",
+      "historicalId": "15fc7a8c-6ae0-4366-a4da-44f2ef29ca5a",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "83011277",
+      "historicalId": "7e30714f-58c9-41de-b9c8-3fc233599882",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "77414722",
+      "historicalId": "5bbafab3-2e4a-478f-ad1d-ed59c1c873fc",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "03819470",
+      "historicalId": "e6100e20-d56e-488a-96ad-1fed7d700f4a",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "44095762",
+      "historicalId": "0bfcc499-7a45-452e-ad36-d2e2026ad580",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "53582587",
+      "historicalId": "64373eb9-b0d1-4d8b-ac79-3eee973a1de7",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "29401950",
+      "historicalId": "2eb40674-ba15-4f1f-a958-04ca04383dd3",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "56120475",
+      "historicalId": "1448129d-37e7-4218-92c1-54981de56bf2",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "55144522",
+      "historicalId": "3dc62228-c78c-4cbb-9c5a-72962718d2e4",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "12580477",
+      "historicalId": "0aecee88-0143-4c57-9a78-ddaa97e9e378",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "05318639",
+      "historicalId": "d15ea879-903e-481a-9ad1-774823a8518b",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "14087893",
+      "historicalId": "fdf3e4be-d5ae-4d10-bd2d-63275f3bb45b",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "76103675",
+      "historicalId": "c1ae1e66-1a37-47b5-96d6-43830ebab35c",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "46130346",
+      "historicalId": "9756bdd7-deb8-4a72-b94a-ee9f0fd4071b",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "20871001",
+      "historicalId": "aefa41bc-3776-46c9-87c5-41f5a92529ac",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "47852924",
+      "historicalId": "195ef13b-f7ac-40f6-bbe2-c64b2a4995bb",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "46918794",
+      "historicalId": "04294c3c-e8ae-4d27-b7da-36d656b7f642",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "70368879",
+      "historicalId": "0cf75ed7-b8a5-416d-bcb5-824a452bbf33",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "83968380",
+      "historicalId": "276f19bf-7821-4def-8149-0f6f900ca0cb",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "14315573",
+      "historicalId": "13881104-18a3-4b8f-860a-4581510d9b39",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    },
+    {
+      "engineId": "62279055",
+      "historicalId": "97b90b58-0d63-491b-b7e8-6448d6eb1ee9",
+      "matchedBy": "konami-id",
+      "certificationScope": "existing-engine-only"
+    }
+  ],
+  "unmatched": [],
+  "ambiguous": [],
+  "cardsEnabledByImport": 0,
+  "cardsGrantedByImport": 0,
+  "animeCatalog": "not inferred from release dates"
+}
