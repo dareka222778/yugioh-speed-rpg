@@ -1,5 +1,6 @@
 'use strict';
 const {test}=require('node:test');
+const fs=require('node:fs');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
@@ -24,7 +25,7 @@ assert.ok(attackerEntry,'Witch battle fixture needs a Normal Monster above its D
 function diagnosticTest(name,run){
  test(name,(...args)=>{
   try{return run(...args);}
-  catch(error){console.error('[M89 Witch diagnostic]',error?.stack??error);throw error;}
+  catch(error){const detail='[M89 Witch diagnostic] '+(error?.stack??String(error))+'\\n';try{fs.mkdirSync('artifacts',{recursive:true});fs.appendFileSync('artifacts/engine-acceptance-failure.tap',detail);}catch{}process.stderr.write(detail);throw error;}
  });
 }
 function member(seat){return 'm89-seat-'+seat;}
