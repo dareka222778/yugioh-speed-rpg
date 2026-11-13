@@ -115,9 +115,10 @@ function declareAttack(state,attacker,defender){
   );
   assert.ok(attack,'the active attacker must be able to attack the opposing shared-field monster');
   state=tag.stepTagDuel(state,member(0),attack);
-  assert.equal(state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(state).id,member(1),
-    'the active physical defender receives the first response priority');
+  if(state.core.phase==='response')assert.equal(tag.tagDecisionMember(state).id,member(1),
+    'the active physical defender receives response priority when its private hand has a legal effect');
+  else assert.equal(state.core.phase,'battle',
+    'when the defender has no accessible response, the attack resolves without opening a dead response window');
   return state;
 }
 
@@ -128,8 +129,9 @@ test('active physical defender uses Kuriboh at damage calculation: battle damage
   assert.ok(!JSON.stringify(publicBefore).includes(kuribohCard.uid),'the physical hand UID must remain private');
 
   let state=declareAttack(initial,attacker,defender);
-  assert.ok(!tag.tagActions(state,member(1)).some(action=>action.kind==='monsterEffect'&&action.card===kuribohCard.uid),
-    'Kuriboh must not be offered before damage calculation');
+  assert.equal(state.core.phase,'response');
+  assert.equal(state.core.pending.stage,'calculation',
+    'the quick Monster effect is offered only in the damage-calculation response window');
   const window=reachDamageCalculation(state,kuribohCard.uid);
   state=window.state;
   const activate=window.activation;
@@ -171,9 +173,10 @@ test('Kuriboh in the inactive partner private hand is unavailable to the active 
   state=window.state;
   assert.equal(window.activation,undefined,
     'the active defender cannot borrow Kuriboh from the inactive partner private hand');
-  assert.ok(!tag.tagActions(state,member(1)).some(action=>action.kind==='monsterEffect'&&action.card===kuribohCard.uid));
+  assert.equal(state.core.phase,'battle',
+    'with no accessible Kuriboh, the engine resolves the attack without opening a response window');
   assert.deepEqual(tag.tagActions(state,member(3)),[],
-    'the inactive physical hand owner cannot take the response action');
+    'the inactive physical hand owner cannot take a response action');
   const forged={kind:'monsterEffect',card:kuribohCard.uid,discards:[kuribohCard.uid]};
   const unchanged=JSON.stringify(state);
   assert.throws(()=>tag.stepTagDuel(state,member(3),forged),/Aguarde a vez do participante ativo\./);
