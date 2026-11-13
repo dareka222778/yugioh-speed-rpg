@@ -1,21 +1,21 @@
 {
-  "runId": "work-20261112T163234-0300",
-  "owner": null,
+  "runId": "work-20261112T212515-0300",
+  "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "released",
-  "startedAt": "2026-11-12T16:32:34-03:00",
-  "lastActivityAt": "2026-11-12T16:39:10-03:00",
-  "nextScheduledAt": "2026-11-12T21:30:00-03:00",
+  "state": "active",
+  "startedAt": "2026-11-12T21:25:15-03:00",
+  "lastActivityAt": "2026-11-12T21:25:15-03:00",
+  "nextScheduledAt": "2026-11-12T22:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "feat/work-m66-tag-format-boundaries-20261112",
-    "tests/tagClassicFormatBoundaries.test.cjs",
-    "tests/tagClassicSharedFieldBoundaries.test.cjs",
-    "coordination"
+    "feat/work-m67-tag-field-zone-20261112",
+    "tests/tagClassicFieldZone.test.cjs",
+    "coordination/state.json",
+    "coordination/runs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261112T163234-0300.json",
-  "previousRunId": "work-20261112T113442-0300",
+  "previousRunId": "work-20261112T163234-0300",
   "previousReservation": {
     "branch": "feat/work-m60-20261111",
     "head": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
@@ -93,6 +93,19 @@
         "engineValidation": "in_progress",
         "engineRunId": 43292009861
       }
+    },
+    {
+      "branch": "feat/work-m67-tag-field-zone-20261112",
+      "head": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFieldZone.test.cjs"
+      ],
+      "pr": null,
+      "ci": {
+        "cardBatchFast": "pending",
+        "engineValidation": "pending"
+      }
     }
   ],
   "handoffRequest": {
@@ -104,12 +117,12 @@
   "handoff": {
     "to": "auxiliary",
     "status": "available",
-    "at": "2026-11-12T16:39:10-03:00",
-    "baseBranch": "feat/work-m66-tag-format-boundaries-20261112",
-    "baseCommit": "2af0944c7864a872c4027927fb8a8b7e6faf0941",
-    "scope": "Monitorar a CI da PR #22 e pesquisar candidatos em branch própria. Não editar M61 nem a branch M66, M63/M64/M65; sem admissão, certificação, merge ou deploy.",
-    "nextTask": "Acompanhar runs 43292009792 e 43292009861 da PR #22; relatar conclusão sem alterar a branch M66. Pesquisa de cartas somente em branch auxiliar exclusiva.",
-    "nextWorkAt": "2026-11-12T21:30:00-03:00"
+    "at": "2026-11-12T21:25:15-03:00",
+    "baseBranch": "feat/work-m67-tag-field-zone-20261112",
+    "baseCommit": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+    "scope": "Continuar somente em branch própria e independente. Não editar M61, M63/M64/M65/M66 nem M67; sem admissão, certificação, merge ou deploy.",
+    "nextTask": "Monitorar conclusão da CI da PR #22 e pesquisar candidatos em branch auxiliar própria, sem editar a branch M67.",
+    "nextWorkAt": "2026-11-12T22:30:00-03:00"
   },
   "catalog": {
     "shared": {
@@ -204,7 +217,7 @@
       "number": 22,
       "state": "open",
       "draft": true,
-      "ci": "fast-success; engine-validation-in-progress"
+      "ci": "success"
     }
   ],
   "ci": {
@@ -239,9 +252,11 @@
     },
     "pr22": {
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
+      "engineValidation": "success",
       "fastRunId": 43292009792,
       "engineRunId": 43292009861,
+      "npmTest": "success",
+      "extendedSoak": "success",
       "typecheck": "success"
     }
   },
@@ -263,6 +278,8 @@
     "minimum60MinutesConfirmed": false,
     "note": "Janela de parede aproximada de 6 minutos; houve implementação e publicação de dois arquivos de teste, mas a duração efetiva não foi cronometrada e a meta de 60 minutos não foi comprovada. Espera de CI não foi contabilizada como trabalho."
   },
-  "nextTask": "Aguardar CI integral da PR #22. Após transferência explícita de M61, corrigir TS2367/TS2339, implementar e testar setSelfFaceDown com marcador once-per-turn persistente, então admitir e certificar comportamentalmente M60. Não admitir Guardian Sphinx sem operação não-direcionada de retorno em massa.",
-  "sharedHeadBeforeRelease": "86a99bfb5ca07df0816fd0e38d17bfa90f1f78d3"
+  "nextTask": "M67: testar a Zona de Campo compartilhada por equipe no 2v2, substituição do campo por parceiro, isolamento entre equipes, conservação de UID e ocultação de cartas baixadas; em paralelo aguardar handoff M61.",
+  "sharedHeadBeforeRelease": "86a99bfb5ca07df0816fd0e38d17bfa90f1f78d3",
+  "priority": "Work",
+  "sharedHeadBeforeClaim": "65192bade7ca7abf4be0aa1bf2821b8be73edf59"
 }
