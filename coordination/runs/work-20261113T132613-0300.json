@@ -2,9 +2,9 @@
   "runId": "work-20261113T132613-0300",
   "owner": "Work",
   "priority": "P1 — validar Mountain nos três tipos oficiais (Dragon, Winged Beast e Thunder) em ambos os campos 2v2, incluindo ativação por parceiro e conservação de UIDs.",
-  "state": "active",
+  "state": "completed; released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T13:26:13-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-13T13:37:54-03:00",
   "timezone": "America/Sao_Paulo",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "fbe361b6c11b4040c3518383d74ff959114547ec",
@@ -18,10 +18,44 @@
   ],
   "blocksCompleted": [
     "Leitura de coordination/state.json e do checkpoint work-20261113T125703-0300.json.",
-    "Verificação de HEAD real da branch compartilhada e confirmação de M61/M118 como handoff pendente.",
-    "Auditoria das branches M140–M145 e escolha de uma frente independente sem conflito."
+    "Verificação do HEAD compartilhado fbe361b6c11b4040c3518383d74ff959114547ec antes da reserva; base M71 173a0ea6b2df3b79d7d95367f7d8d77284776bcb; main 8f3f1768b1ee1f4b4a96d557eab5926d96525ad2.",
+    "Auditoria das branches M140–M145, PRs #96–#101 e estados de CI; M61/PR17 e M118/PR74 permanecem com handoff pendente e foram preservadas.",
+    "Criação e publicação de M146/PR102: Mountain global modifiers com Dragon, Winged Beast e Thunder em 2v2.",
+    "Criação e publicação de M147/PR103: Dragon Treasure e Dark Energy com filtros de raça e bônus de equipamento.",
+    "Criação e publicação de M148/PR104: Invigoration com filtro EARTH e modificador +400 ATK/-200 DEF.",
+    "Criação e publicação de M149/PR105: substituição Mountain→Yami, descarte do campo anterior e recálculo de modificadores.",
+    "Verificação de que o repositório não contém deploy.yml/deploy.yaml e não apresentou workflow de implantação; hospedagem e Discord ao vivo não foram validados."
   ],
-  "changes": [],
+  "changes": [
+    {
+      "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "pr": 102,
+      "file": "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs",
+      "summary": "Testa Mountain +200 ATK/DEF para Dragon, Winged Beast e Thunder nos dois campos 2v2; parceiro ativa a carta física setada; privacidade, JSON e conservação de 80 UIDs."
+    },
+    {
+      "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "pr": 103,
+      "file": "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs",
+      "summary": "Testa Dragon Treasure (Dragon +300/+300) e Dark Energy (Fiend +300/+300), alvos de parceiro, filtro de raça, stats, JSON e conservação."
+    },
+    {
+      "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "pr": 104,
+      "file": "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs",
+      "summary": "Testa Invigoration (EARTH +400/-200), alvo do parceiro, exclusão de alvo LIGHT, stats, JSON e conservação."
+    },
+    {
+      "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "pr": 105,
+      "file": "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs",
+      "summary": "Testa substituição Mountain→Yami, envio da carta anterior ao Cemitério compartilhado, remoção do bônus antigo e aplicação dos modificadores de Yami em ambos os lados."
+    }
+  ],
   "catalog": {
     "sharedCards": 969,
     "sharedCertificates": 969,
@@ -30,25 +64,212 @@
     "newAdmissions": 0,
     "newCertificates": 0
   },
-  "validation": {},
+  "validation": {
+    "pr102": {
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued",
+      "npmTest": "not-run-locally"
+    },
+    "pr103": {
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued",
+      "npmTest": "not-run-locally"
+    },
+    "pr104": {
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued",
+      "npmTest": "not-run-locally"
+    },
+    "pr105": {
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "not-returned",
+      "npmTest": "not-run-locally"
+    },
+    "priorParallel": {
+      "M140": {
+        "cardBatchFast": "success",
+        "engineValidation": "queued",
+        "milestone1000": "success"
+      },
+      "M141": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      },
+      "M142": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      },
+      "M143": {
+        "cardBatchFast": "queued",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      },
+      "M144": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      },
+      "M145": {
+        "cardBatchFast": "success",
+        "engineValidation": "queued",
+        "milestone1000": "success"
+      }
+    }
+  },
   "handoffRequests": {
-    "m61": "awaiting-response; no files touched",
-    "m118": "awaiting-response; no files touched"
+    "m61": {
+      "pr": 17,
+      "status": "awaiting-response",
+      "filesUntouched": true
+    },
+    "m118": {
+      "pr": 74,
+      "status": "awaiting-response",
+      "filesUntouched": true
+    }
   },
   "deployment": {
     "merge": "none",
     "deploy": "none",
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "deploymentWorkflow": "not found in .github/workflows/deploy.yml or deploy.yaml; repository workflow search returned no deployment workflow",
     "hosting": "not verified",
     "liveDiscordValidation": false
   },
-  "releaseToAuxiliary": null,
-  "nextTask": "Implementar e validar Mountain em ambos os campos 2v2; depois preparar a próxima família de regras globais de campo sem tocar M61/M118.",
+  "releaseToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+        "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+        "pr": 102,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+        "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+        "pr": 103,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+        "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+        "pr": 104,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+        "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+        "pr": 105,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "not-returned"
+        }
+      }
+    ],
+    "allowed": "Monitorar CI das PRs #102–#105 e corrigir somente os quatro arquivos de teste próprios listados; registrar resultados e devolver checkpoint.",
+    "forbidden": "Não fazer merge/deploy; não tocar M61/PR17, M118/PR74 nem branches M140–M145 de terceiros; não alterar runtime, catálogo, certificados, banco ou inventários."
+  },
+  "nextTask": "Auxiliar: acompanhar CI das PRs #102–#105 e corrigir apenas os testes próprios M146–M149 se falharem. Work na próxima janela: revalidar CI e handoffs M61/M118; avançar a próxima família 2v2 sem duplicações.",
   "nextWorkAt": "2026-11-13T17:30:00-03:00",
   "duration": {
-    "elapsedWallMinutes": 0,
+    "elapsedWallMinutes": 12,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Execução em andamento; espera de CI não será contabilizada como trabalho efetivo."
+    "note": "Janela observada de 11m41s (aprox. 12 minutos). Não é possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "sharedHeadAfterReservation": "30ce0b9756820e4ee138a5bfdb9502d5c26454b1"
+  "sharedHeadAfterReservation": "30ce0b9756820e4ee138a5bfdb9502d5c26454b1",
+  "sharedHeadBeforeRelease": "694f8a1dc66e957bddbc8c33155fbd7c8583944c",
+  "sharedHeadBeforeStateUpdate": "694f8a1dc66e957bddbc8c33155fbd7c8583944c",
+  "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+  "pr": 102,
+  "parallelBranches": [
+    {
+      "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "pr": 103,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "pr": 104,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "pr": 105,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "not-returned"
+      }
+    }
+  ]
 }
