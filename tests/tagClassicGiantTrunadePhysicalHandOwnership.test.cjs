@@ -120,6 +120,22 @@ test('Giant Trunade returns every team backrow card to its original physical own
   assert.ok(state.core.players[0].grave.some(card=>card.uid===giant.uid));
   assert.equal(state.core.players[0].lp,4000);
   assert.equal(state.core.players[1].lp,4000);
+  const endFirst=tag.tagActions(state,member(0)).find(action=>action.kind==='end');
+  assert.ok(endFirst,'seat 0 must be able to end the first team turn');
+  state=settle(tag.stepTagDuel(state,member(0),endFirst));
+  assert.equal(tag.tagDecisionMember(state).id,member(1));
+  const endSecond=tag.tagActions(state,member(1)).find(action=>action.kind==='end');
+  assert.ok(endSecond,'seat 1 must be able to end the opposing team turn');
+  state=settle(tag.stepTagDuel(state,member(1),endSecond));
+  assert.equal(tag.tagDecisionMember(state).id,member(2),
+    'the next turn rotates team 0 to physical seat 2');
+  assert.equal(state.active[0],2);
+  assert.ok(tag.tagMemberHand(state,member(2)).some(card=>card.uid===torrential.uid),
+    'the returned card follows physical seat 2 when that partner becomes active');
+  assert.ok(tag.tagMemberHand(state,member(0)).every(card=>!expectedReturned.has(0)||card.uid!==expectedReturned.get(0)),
+    'seat 0 reserve hand does not acquire partner cards during rotation');
+  assert.ok(tag.tagMemberHand(state,member(1)).some(card=>card.uid===trapHole.uid));
+  assert.ok(tag.tagMemberHand(state,member(3)).some(card=>card.uid===bottomless.uid));
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
   assertConserved(state,before);
 });
