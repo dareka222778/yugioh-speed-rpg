@@ -4,6 +4,13 @@ const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
 
+function diagnosticTest(name,run){
+  test(name,(...args)=>{
+    try{return run(...args);}
+    catch(error){console.error('[2v2 FLIP diagnostic]',name,error?.stack??error);throw error;}
+  });
+}
+
 const HANE_HANE='07089711';
 const hane=getPlayableCard(HANE_HANE);
 assert.ok(hane&&hane.kind==='monster','Hane-Hane must be an enabled monster');
@@ -56,7 +63,7 @@ function assertConserved(state,before){
   for(const card of cards)assert.equal(before.get(card.uid),card.id);
 }
 
-test('a face-down inactive-partner FLIP monster resolves after battle and returns the target to its physical owner',()=>{
+diagnosticTest('a face-down inactive-partner FLIP monster resolves after battle and returns the target to its physical owner',()=>{
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),
     name:'M79 Seat '+seat,
