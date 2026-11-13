@@ -13,7 +13,7 @@ const normalCards=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
   .filter(entry=>entry.card&&entry.card.level<=4&&Number.isInteger(entry.card.atk));
 const weak=normalCards
-  .filter(entry=>entry.card.atk>0&&entry.card.atk<(hane.def??0))
+  .filter(entry=>entry.card.atk>0&&entry.card.atk<(hane.defense??0))
   .sort((a,b)=>b.card.atk-a.card.atk)[0];
 assert.ok(weak,'the battle-reveal fixture needs a Normal Monster weaker than Hane-Hane DEF');
 const deckIds=[...new Set([weak.id,...normalCards.map(entry=>entry.id)])].slice(0,7);
