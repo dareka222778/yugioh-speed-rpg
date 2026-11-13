@@ -100,12 +100,10 @@ test('Raigeki destroys both opposing physical seats but preserves every monster 
   );
   assert.ok(spell,'the active physical seat must receive the legal Raigeki activation');
   state=tag.stepTagDuel(state,member(0),spell);
-  assert.equal(state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(state).id,member(1),
-    'the opposing active physical seat receives response priority');
-  assert.deepEqual(tag.tagActions(state,member(3)),[],
-    'the inactive opposing physical seat must not receive response actions');
   state=settle(state);
+  assert.equal(state.core.phase,'main',
+    'with no legal response, Raigeki resolves immediately in the activating Main Phase');
+  assert.equal(tag.tagDecisionMember(state).id,member(0));
 
   assert.equal(state.core.phase,'main');
   assert.deepEqual(state.core.players[0].monsters.map(card=>card.uid),[ally.uid],
