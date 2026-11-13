@@ -4,6 +4,13 @@ const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
 
+function diagnosticTest(name,run){
+  test(name,(...args)=>{
+    try{return run(...args);}
+    catch(error){console.error('[2v2 FLIP diagnostic]',name,error?.stack??error);throw error;}
+  });
+}
+
 const HANE_HANE='07089711';
 const hane=getPlayableCard(HANE_HANE);
 assert.ok(hane&&hane.kind==='monster');
@@ -56,7 +63,7 @@ function assertConserved(state,before){
   for(const card of cards)assert.equal(before.get(card.uid),card.id);
 }
 
-test('a battle-destroyed inactive-partner FLIP source still resolves after damage calculation',()=>{
+diagnosticTest('a battle-destroyed inactive-partner FLIP source still resolves after damage calculation',()=>{
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),
     name:'M80 Seat '+seat,
