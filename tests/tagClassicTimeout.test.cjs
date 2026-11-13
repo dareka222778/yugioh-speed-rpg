@@ -13,10 +13,21 @@ const {
   publicTagDuel,
   assertTagDuel
 }=require('../dist/tagDuel');
+const {getPlayableCard}=require('../dist/effectRegistry');
 
 const FIELD_SPELL='86318356'; // Sogen
-const normalIds=tagNormalCardIds.slice(0,7);
-assert.ok(normalIds.length>=7,'the classic 2v2 fixture needs seven certified Normal Monsters');
+const normalIds=[];
+const seenNames=new Set();
+for(const id of tagNormalCardIds){
+  const card=getPlayableCard(id);
+  const name=card?.englishName??card?.name;
+  if(card&&name&&!seenNames.has(name)){
+    seenNames.add(name);
+    normalIds.push(id);
+  }
+  if(normalIds.length===7)break;
+}
+assert.ok(normalIds.length>=7,'the classic 2v2 fixture needs seven distinct certified Normal Monsters');
 
 function normalDeck(count){
   return Array.from({length:count},(_,index)=>normalIds[index%normalIds.length]);
