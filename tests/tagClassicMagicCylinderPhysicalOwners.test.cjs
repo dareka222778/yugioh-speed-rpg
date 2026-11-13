@@ -79,7 +79,6 @@ test('active 2v2 defender activates an inactive teammate Magic Cylinder against 
   const cylinder={...cylinderCard,setTurn:0,faceUp:false};
   state.core.players[1].backrow.push(cylinder);
   state.core.turn=3;
-  state.core.phase='battle';
   assert.match(attacker.uid,/^m2:/,'the attacking monster belongs physically to inactive seat 2');
   assert.match(cylinder.uid,/^m3:/,'Magic Cylinder belongs physically to inactive seat 3');
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
@@ -88,6 +87,9 @@ test('active 2v2 defender activates an inactive teammate Magic Cylinder against 
   assert.ok(!JSON.stringify(publicBefore).includes(MAGIC_CYLINDER),'the set Trap identity must remain private');
   assert.ok(!JSON.stringify(publicBefore).includes(cylinder.uid),'the set Trap UID must remain private');
 
+  const battle=tag.tagActions(state,member(0)).find(action=>action.kind==='battle');
+  assert.ok(battle,'the active seat must be able to enter the Battle Phase');
+  state=settle(tag.stepTagDuel(state,member(0),battle));
   const attack=tag.tagActions(state,member(0)).find(action=>
     action.kind==='attack'&&action.card===attacker.uid
   );
