@@ -14,13 +14,13 @@ function testM76(name,run){
 
 const normalCards=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
-  .filter(entry=>entry.card&&entry.card.level<=4&&Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.def));
+  .filter(entry=>entry.card&&entry.card.level<=4&&Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
 assert.ok(normalCards.length>=7,'the shared-battle fixture needs seven certified Level 4-or-lower Normal Monsters');
 
 const attacker=normalCards.reduce((best,current)=>current.card.atk>best.card.atk?current:best);
 const defender=normalCards
-  .filter(entry=>entry.id!==attacker.id&&entry.card.def<attacker.card.atk&&entry.card.atk<attacker.card.atk)
-  .sort((a,b)=>a.card.def-b.card.def)[0];
+  .filter(entry=>entry.id!==attacker.id&&entry.card.defense<attacker.card.atk&&entry.card.atk<attacker.card.atk)
+  .sort((a,b)=>a.card.defense-b.card.defense)[0];
 assert.ok(defender,'the battle-destruction fixture needs a Normal Monster whose DEF is below the attacker ATK');
 
 const deckIds=[...new Set([attacker.id,defender.id,...normalCards.map(entry=>entry.id)])].slice(0,7);
