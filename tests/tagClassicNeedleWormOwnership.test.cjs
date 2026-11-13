@@ -4,6 +4,13 @@ const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
 
+function diagnosticTest(name,run){
+  test(name,(...args)=>{
+    try{return run(...args);}
+    catch(error){console.error('[2v2 FLIP diagnostic]',name,error?.stack??error);throw error;}
+  });
+}
+
 const NEEDLE_WORM='81843628';
 const needle=getPlayableCard(NEEDLE_WORM);
 assert.ok(needle&&needle.kind==='monster');
@@ -56,7 +63,7 @@ function assertConserved(state,before){
   for(const card of cards)assert.equal(before.get(card.uid),card.id);
 }
 
-test('Needle Worm mills the active opposing physical Deck, not the inactive partner Deck, in 2v2',()=>{
+diagnosticTest('Needle Worm mills the active opposing physical Deck, not the inactive partner Deck, in 2v2',()=>{
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),
     name:'M81 Seat '+seat,
