@@ -1,32 +1,31 @@
 {
-  "runId": "work-20261112T222244-0300",
+  "runId": "work-20261113T023036-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
   "state": "active",
-  "startedAt": "2026-11-12T22:22:44-03:00",
-  "lastActivityAt": "2026-11-12T22:44:22-03:00",
+  "startedAt": "2026-11-13T02:30:36-03:00",
+  "lastActivityAt": "2026-11-13T02:30:36-03:00",
   "nextScheduledAt": "2026-11-13T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "feat/work-m72-tag-timeout-20261112",
-    "feat/work-m73-tag-timeout-persistence-20261112",
-    "feat/work-m74-tag-seat-authorization-20261112",
-    "feat/work-m75-tag-action-receipts-20261112",
-    "tests/tagClassicTimeout.test.cjs",
-    "tests/tagTimeoutPersistence.test.cjs",
-    "tests/tagClassicSeatAuthorization.test.cjs",
-    "tests/tagActionReceipts.test.cjs",
+    "feat/work-m87-tag-hane-hane-ownership-20261113",
+    "tests/tagClassicHaneHaneOwnership.test.cjs",
     "coordination/state.json",
     "coordination/runs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261112T222244-0300.json",
-  "previousRunId": "work-20261112T212515-0300",
+  "lastCheckpoint": "coordination/runs/work-20261113T023036-0300.json",
+  "previousRunId": "work-20261112T222244-0300",
   "previousReservation": {
-    "branch": "feat/work-m60-20261111",
-    "head": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
-    "state": "stale-preserved",
-    "note": "Do not edit stale M60 branch."
+    "branch": "feat/work-m72-tag-timeout-20261112",
+    "branches": [
+      "feat/work-m72-tag-timeout-20261112",
+      "feat/work-m73-tag-timeout-persistence-20261112",
+      "feat/work-m74-tag-seat-authorization-20261112",
+      "feat/work-m75-tag-action-receipts-20261112"
+    ],
+    "state": "released-ci-success",
+    "note": "As quatro branches tiveram Card batch fast, Engine validation e Milestone 1000 aprovados nos HEADs finais verificados."
   },
   "activeParallelWork": {
     "pr": 17,
@@ -222,22 +221,27 @@
         "engineValidation": "in_progress",
         "extendedSoak": "in_progress"
       }
+    },
+    {
+      "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicHaneHaneOwnership.test.cjs"
+      ],
+      "state": "claimed"
     }
   ],
   "handoffRequest": {
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "lastCommentId": 6840541802,
-    "reason": "M61 continues to reserve src/duelEngineCurrent.ts, src/monsterEffects.ts, src/classicEffects.ts and integrity/turn-flow files; no transfer response was observed. Work did not edit these files."
+    "reason": "Solicitação renovada; nenhum comentário de liberação foi observado. Arquivos reservados permanecem intocados."
   },
   "handoff": {
     "to": "auxiliary",
-    "status": "available",
-    "at": "2026-11-12T22:44:22-03:00",
-    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
-    "baseCommit": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "scope": "Monitorar CI das PRs #28–#31 e pesquisar somente em branch própria; não editar M61, M72, M73, M74 ou M75, não alterar inventários, sem merge ou deploy.",
-    "nextTask": "Acompanhar Engine Validation e extended soak das PRs #28–#31; relatar falhas sem alterar as branches do Work.",
+    "status": "paused-during-Work",
+    "at": "2026-11-13T02:30:36-03:00",
+    "scope": "Somente branches próprias e independentes; não editar M61 nem a branch M87 reservada ao Work.",
+    "nextTask": "Aguardar liberação explícita M61 e monitorar CI de M76–M86 sem editar branches alheias.",
     "nextWorkAt": "2026-11-13T03:30:00-03:00"
   },
   "catalog": {
@@ -461,29 +465,27 @@
     },
     "pr28": {
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
-      "engineRunId": 43345642988,
-      "extendedSoak": "success",
-      "npmTest": "success",
-      "note": "final head fixed response fixture; earlier revision failure retained in history"
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "engineRunId": 43345642988
     },
     "pr29": {
-      "cardBatchFast": "in_progress",
-      "engineValidation": "queued",
-      "engineRunId": 43346959708,
-      "previousFailure": "regex assertion corrected on final head"
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "engineRunId": 43346959708
     },
     "pr30": {
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
-      "engineRunId": 43345489241,
-      "extendedSoak": "success"
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "engineRunId": 43345489241
     },
     "pr31": {
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
-      "engineRunId": 43346641430,
-      "extendedSoak": "in_progress"
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "engineRunId": 43347531738
     }
   },
   "production": {
@@ -518,5 +520,34 @@
     "owner": "Work",
     "state": "completed-ci-success; released for this run",
     "note": "M67 field-zone regression branch and CI completed; no third-party reservation was changed."
+  },
+  "parallelWorkObserved": {
+    "branches": [
+      "M76",
+      "M77",
+      "M78",
+      "M79",
+      "M80",
+      "M81",
+      "M82",
+      "M83",
+      "M84",
+      "M85",
+      "M86"
+    ],
+    "prs": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42
+    ],
+    "ownership": "branches independentes; não assumidas nem editadas por esta execução"
   }
 }
