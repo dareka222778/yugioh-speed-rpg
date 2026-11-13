@@ -3,6 +3,7 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getEffect}=require('../dist/effectRegistry');
+const {getActivationModel}=require('../dist/effectModels');
 
 const NEGATE_ATTACK='14315573';
 const SAKURETSU_ARMOR='56120475';
@@ -18,7 +19,7 @@ assert.equal(counter?.activation?.opponentOnly,true);
 assert.equal(counter?.endBattle,true);
 assert.equal(counter?.reflectAttack,false);
 assert.equal(getEffect(SAKURETSU_ARMOR)?.kind,'sakuretsuArmor');
-assert.equal(getEffect(SAKURETSU_ARMOR)?.activation?.speed,2);
+assert.equal(getActivationModel(getEffect(SAKURETSU_ARMOR))?.speed,2);
 
 const normal=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
