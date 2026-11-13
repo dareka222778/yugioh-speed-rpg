@@ -1,5 +1,6 @@
 'use strict';
 const {test}=require('node:test');
+const fs=require('node:fs');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
@@ -40,6 +41,17 @@ assert.notEqual(getPlayableCard(KURIBOH)?.attribute,'FIRE');
 assert.notEqual(getPlayableCard(KURIBOH)?.attribute,'WATER');
 assert.notEqual(getPlayableCard(KURIBOH)?.attribute,'WIND');
 
+function diagnosticTest(name,run){
+  test(name,(...args)=>{
+    try{return run(...args);}
+    catch(error){
+      const detail='[M99 attribute recruiter diagnostic] '+(error?.stack??String(error))+'\\n';
+      try{fs.mkdirSync('artifacts',{recursive:true});fs.appendFileSync('artifacts/engine-acceptance-failure.tap',detail);}catch{}
+      process.stderr.write(detail);
+      throw error;
+    }
+  });
+}
 function member(seat){return 'm99-seat-'+seat;}
 function deck(required=[]){
   const ids=[...new Set([...required,...tag.tagNormalCardIds])].slice(0,7);
@@ -96,7 +108,7 @@ function assertConserved(state,before){
   for(const card of cards)assert.equal(before.get(card.uid),card.id);
 }
 
-for(const fixture of fixtures)test(fixture.source.name+' recruits only the matching attribute from the active physical teammate Deck in 2v2',()=>{
+for(const fixture of fixtures)diagnosticTest(fixture.source.name+' recruits only the matching attribute from the active physical teammate Deck in 2v2',()=>{
   const {source,sourceCard,candidate:candidateDef,attacker:attackerDef}=fixture;
   const players=[
     {id:member(0),name:'M99 Seat 0',cards:deck([attackerDef.id])},
