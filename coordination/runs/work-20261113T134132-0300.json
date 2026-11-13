@@ -2,9 +2,9 @@
   "runId": "work-20261113T134132-0300",
   "owner": "Work",
   "priority": "P1 — verificar que MST destrói Equip/Field Spells contínuas no 2v2, remove os modificadores imediatamente e preserva o UID físico do parceiro; sem tocar M61/M118.",
-  "state": "active",
+  "state": "completed; released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T13:41:32-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-13T13:44:24-03:00",
   "timezone": "America/Sao_Paulo",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "416678eadc16e9a6b979b406f47b2021cc580d4e",
@@ -18,9 +18,20 @@
   ],
   "blocksCompleted": [
     "Reabertura de um bloco independente após liberação de M146–M149; reserva exclusiva do teste M150.",
-    "Auditoria read-only de M138: MST já atinge backrow e Field Zone; M150 cobrirá remoção de fontes contínuas equip/field."
+    "Auditoria read-only de M138: MST já atinge backrow e Field Zone; M150 cobrirá remoção de fontes contínuas equip/field.",
+    "Inspecionada a implementação existente de MST: os alvos incluem backrow e Field Zone; discardBackrow envia o UID físico ao Cemitério.",
+    "Criada M150/PR106 com dois cenários de remoção de fontes contínuas (Equip Spell e Field Spell) por MST, sem alterar runtime.",
+    "Verificado que M150 alterou somente tests/tagClassicMSTContinuousSourceRemoval2v2.test.cjs; PR #106 aberta em rascunho."
   ],
-  "changes": [],
+  "changes": [
+    {
+      "branch": "feat/work-m150-mst-destroys-equip-field-effects-2v2-20261113",
+      "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
+      "pr": 106,
+      "file": "tests/tagClassicMSTContinuousSourceRemoval2v2.test.cjs",
+      "summary": "Duas regressões: MST destrói Dragon Treasure equipado no monstro do parceiro e remove +300 ATK/DEF; MST destrói Mountain no Field Zone compartilhado e remove +200 ATK/DEF. Ambas verificam Cemitério, UIDs físicos, JSON e conservação das 80 cartas."
+    }
+  ],
   "catalog": {
     "sharedCards": 969,
     "sharedCertificates": 969,
@@ -29,7 +40,66 @@
     "newAdmissions": 0,
     "newCertificates": 0
   },
-  "validation": {},
+  "validation": {
+    "M146": {
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "M147": {
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "M148": {
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "M149": {
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "queued",
+      "milestone1000": "success"
+    },
+    "M150": {
+      "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued"
+    },
+    "M141": {
+      "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "passedTests": 7369,
+      "failedTests": 1,
+      "failure": "Skelengel fixture expected 6 cards but started with 5 at tests/tagClassicFlipRecoveryDrawPhysicalOwnership.test.cjs:138",
+      "auxiliaryCommentId": 6859087003
+    },
+    "M61": {
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "engineValidation": "failure",
+      "cardBatchFast": "failure",
+      "errors": [
+        "TS2367",
+        "TS2339"
+      ],
+      "file": "src/duelEngineCurrent.ts:410",
+      "handoff": "awaiting-response"
+    },
+    "M118": {
+      "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "handoff": "awaiting-response"
+    }
+  },
   "handoffRequests": {
     "m61": {
       "pr": 17,
@@ -50,14 +120,32 @@
     "hosting": "not verified",
     "liveDiscordValidation": false
   },
-  "releaseToAuxiliary": null,
-  "nextTask": "Implementar teste M150: MST destrói Equip Spell e Field Spell contínuos em 2v2, removendo bônus sem alterar o monstro e preservando UIDs.",
+  "releaseToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m150-mst-destroys-equip-field-effects-2v2-20261113",
+        "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
+        "pr": 106,
+        "scope": [
+          "tests/tagClassicMSTContinuousSourceRemoval2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci"
+      }
+    ],
+    "allowed": "Monitorar CI da PR #106 e corrigir somente tests/tagClassicMSTContinuousSourceRemoval2v2.test.cjs se houver falha; M146–M149 permanecem liberadas conforme checkpoint anterior.",
+    "forbidden": "Não fazer merge/deploy; não tocar M61/PR17, M118/PR74, branches M140–M145 ou arquivos de runtime/catalog/inventário."
+  },
+  "nextTask": "Auxiliar: acompanhar PR #106 e continuar monitorando PRs #102–#105 nas branches próprias. Work na próxima janela: revalidar CI, handoffs M61/M118 e continuar a próxima família de efeitos 2v2.",
   "nextWorkAt": "2026-11-13T17:30:00-03:00",
   "duration": {
-    "elapsedWallMinutes": 0,
+    "elapsedWallMinutes": 3,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Execução M150 em andamento; espera de CI não será contabilizada."
+    "note": "Janela observada de 2m52s (aprox. 3 minutos). Não é possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "sharedHeadAfterReservation": "4000e1bf74e1e37de10d21ee7ecdecc66a08908b"
+  "sharedHeadAfterReservation": "4000e1bf74e1e37de10d21ee7ecdecc66a08908b",
+  "sharedHeadBeforeRelease": "b4e49fe199a9b4bf46da6a7b28167904bec834da",
+  "sharedHeadBeforeStateUpdate": "b4e49fe199a9b4bf46da6a7b28167904bec834da",
+  "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
+  "pr": 106
 }
