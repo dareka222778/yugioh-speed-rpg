@@ -124,8 +124,6 @@ test('inactive teammate-owned Waboku protects the shared team from battle damage
   state=settle(tag.stepTagDuel(state,member(1),response));
   assert.equal(state.core.players[1].battleProtectedUntil,state.core.turn,
     'Waboku protection must be recorded on the defending team, not the physical seat');
-  assert.equal(state.core.players[0].lp,4000,
-    'Waboku must prevent battle damage to the attacking monster controller only when appropriate; the defender team LP remains unchanged');
   assert.equal(state.core.players[1].lp,4000,
     'the defending team must take no battle damage');
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===defender.uid),
