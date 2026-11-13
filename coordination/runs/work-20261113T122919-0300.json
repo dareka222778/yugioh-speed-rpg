@@ -4,7 +4,7 @@
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "state": "completed; released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "endedAt": "2026-11-13T12:49:58-03:00",
+  "endedAt": "2026-11-13T12:51:08-03:00",
   "timezone": "America/Sao_Paulo",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -27,7 +27,10 @@
     "M126: criada regressão Waboku para prevenção de dano de batalha no LP compartilhado quando o monstro defensor pertence fisicamente ao assento inativo; PR #82.",
     "M127: criada regressão Block Attack para alvos face-up em Attack Position nos campos compartilhados; Set e Defense Position são excluídos e propriedade física preservada; PR #83.",
     "M119: CI integral agora concluída com sucesso (Card batch fast, Engine validation, Milestone 1000; jobs test e extended-soak verdes).",
-    "M124: primeiro run identificou turno zero inválido na fixture; corrigido para turno positivo 3 no HEAD db639952 e nova CI enfileirada."
+    "M124: primeiro run identificou turno zero inválido na fixture; corrigido para turno positivo 3 no HEAD db639952 e nova CI enfileirada.",
+    "M120: extended-soak 600s agora concluído com sucesso no HEAD corrigido 8985d429; job de teste/auditorias ainda em execução sem falhas no último polling.",
+    "M121: extended-soak 600s concluído com sucesso; job de teste/auditorias ainda em execução sem falhas no último polling.",
+    "M61: nova observação documentada na PR #17 — a legalidade inicial de Card Destruction ainda consulta somente mãos dos assentos ativos em classicEffects.ts; ajuste aguarda handoff explícito."
   ],
   "changes": [
     {
@@ -171,7 +174,7 @@
       "cardBatchFast": "success",
       "milestone1000": "success",
       "engineValidation": "in_progress",
-      "extendedSoak": "in_progress",
+      "extendedSoak": "success",
       "previousHeadFailure": "fixture assertion team 1 vs team 0 corrected on current HEAD"
     },
     "pr77": {
@@ -225,7 +228,8 @@
         "src/classicEffects.ts",
         "src/duelIntegrity.ts",
         "scripts/mass-certification21.cjs"
-      ]
+      ],
+      "lastCommentId": 6857929825
     },
     "m118": {
       "pr": 74,
@@ -323,13 +327,13 @@
     "allowed": "monitorar CI e corrigir falhas somente nas três branches próprias; atualizar checkpoint após nova revisão.",
     "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61 ou M118; não alterar banco/inventários nem conceder cartas."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #75–#83, corrigir falhas somente nas oito branches próprias e reportar M108 (#64). Work na próxima janela: conferir validações completas, handoffs M61/M118 e continuar em uma frente 2v2 independente apenas se não houver conflitos.",
+  "nextTask": "Auxiliar: monitorar CI das PRs #75–#83, corrigir falhas somente nas nove branches próprias e reportar M108 (#64). Work às 13:30: concluir auditorias de #76–#79, validar #80–#83, verificar handoffs M61/M118 e só então escolher integração/novo lote.",
   "nextWorkAt": "2026-11-13T13:30:00-03:00",
   "duration": {
-    "elapsedWallMinutes": 20,
+    "elapsedWallMinutes": 21,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "A janela registrada não comprova 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "lastActivityAt": "2026-11-13T12:49:58-03:00"
+  "lastActivityAt": "2026-11-13T12:51:08-03:00"
 }
