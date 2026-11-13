@@ -4,7 +4,7 @@
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "state": "completed; released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "endedAt": "2026-11-13T12:44:19-03:00",
+  "endedAt": "2026-11-13T12:49:58-03:00",
   "timezone": "America/Sao_Paulo",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -22,7 +22,12 @@
     "M120: a primeira Engine validation revelou apenas uma asserção de fixture apontando o Cemitério da equipe errada; corrigida de team 1 para a equipe ativadora team 0 e disparada nova CI no HEAD 8985d429.",
     "M122: criada regressão Change of Heart 2v2; controla temporariamente monstro do assento físico 3, preserva UID/proprietário e devolve à equipe original na End Phase; PR #78.",
     "M123: criada regressão Shield & Sword 2v2; aplica troca apenas a monstros face-up dos dois campos compartilhados, preserva Set e expira após avanço do turno; PR #79.",
-    "M124: criada regressão Trap Hole 2v2; seat 0 baixa, seat 2 ativa durante a janela de seat 3, preservando UID do Trap e enviando o monstro ao Graveyard da equipe adversária; PR #80."
+    "M124: criada regressão Trap Hole 2v2; seat 0 baixa, seat 2 ativa durante a janela de seat 3, preservando UID do Trap e enviando o monstro ao Graveyard da equipe adversária; PR #80.",
+    "M125: criada regressão Remove Trap para filtro de alvo em backrow compartilhado: somente Trap face-up é elegível; Set Trap permanece privado e Spell face-up não é alvo; PR #81.",
+    "M126: criada regressão Waboku para prevenção de dano de batalha no LP compartilhado quando o monstro defensor pertence fisicamente ao assento inativo; PR #82.",
+    "M127: criada regressão Block Attack para alvos face-up em Attack Position nos campos compartilhados; Set e Defense Position são excluídos e propriedade física preservada; PR #83.",
+    "M119: CI integral agora concluída com sucesso (Card batch fast, Engine validation, Milestone 1000; jobs test e extended-soak verdes).",
+    "M124: primeiro run identificou turno zero inválido na fixture; corrigido para turno positivo 3 no HEAD db639952 e nova CI enfileirada."
   ],
   "changes": [
     {
@@ -79,10 +84,40 @@
     {
       "m": "M124",
       "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-      "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
       "pr": 80,
       "files": [
         "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M125",
+      "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+      "pr": 81,
+      "files": [
+        "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M126",
+      "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+      "pr": 82,
+      "files": [
+        "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M127",
+      "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+      "pr": 83,
+      "files": [
+        "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
       ],
       "codeChange": false
     }
@@ -128,33 +163,52 @@
     "pr75": {
       "cardBatchFast": "success",
       "milestone1000": "success",
-      "engineValidation": "in_progress",
-      "extendedSoak": "in_progress"
+      "engineValidation": "success",
+      "extendedSoak": "success",
+      "test": "success"
     },
     "pr76": {
-      "cardBatchFast": "in_progress",
+      "cardBatchFast": "success",
       "milestone1000": "success",
       "engineValidation": "in_progress",
       "extendedSoak": "in_progress",
-      "previousHeadFailure": "uma asserção da fixture usava team 1 em vez de team 0; corrigida no HEAD atual"
+      "previousHeadFailure": "fixture assertion team 1 vs team 0 corrected on current HEAD"
     },
     "pr77": {
       "cardBatchFast": "success",
       "milestone1000": "success",
       "engineValidation": "in_progress",
-      "extendedSoak": "in_progress"
+      "extendedSoak": "success"
     },
     "pr78": {
       "cardBatchFast": "success",
       "milestone1000": "success",
-      "engineValidation": "in_progress"
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress"
     },
     "pr79": {
       "cardBatchFast": "success",
-      "milestone1000": "queued",
-      "engineValidation": "in_progress"
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress"
     },
     "pr80": {
+      "cardBatchFast": "queued",
+      "milestone1000": "queued",
+      "engineValidation": "queued",
+      "previousHeadFailure": "turn 0 fixture invalid; corrected to turn 3 on current HEAD"
+    },
+    "pr81": {
+      "cardBatchFast": "success",
+      "milestone1000": "queued",
+      "engineValidation": "queued"
+    },
+    "pr82": {
+      "cardBatchFast": "queued",
+      "milestone1000": "queued",
+      "engineValidation": "queued"
+    },
+    "pr83": {
       "cardBatchFast": "queued",
       "milestone1000": "queued",
       "engineValidation": "queued"
@@ -235,23 +289,47 @@
       },
       {
         "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-        "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+        "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
         "pr": 80,
         "scope": [
           "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+        "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+        "pr": 81,
+        "scope": [
+          "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+        "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+        "pr": 82,
+        "scope": [
+          "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+        "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+        "pr": 83,
+        "scope": [
+          "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
         ]
       }
     ],
     "allowed": "monitorar CI e corrigir falhas somente nas três branches próprias; atualizar checkpoint após nova revisão.",
     "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61 ou M118; não alterar banco/inventários nem conceder cartas."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #75–#80, corrigir falhas somente nas seis branches próprias e reportar M108 (#64). Work na próxima janela: conferir resultados completos, handoffs M61/M118 e continuar expansão 2v2 independente se as reservas permanecerem bloqueadas.",
+  "nextTask": "Auxiliar: monitorar CI das PRs #75–#83, corrigir falhas somente nas oito branches próprias e reportar M108 (#64). Work na próxima janela: conferir validações completas, handoffs M61/M118 e continuar em uma frente 2v2 independente apenas se não houver conflitos.",
   "nextWorkAt": "2026-11-13T13:30:00-03:00",
   "duration": {
-    "elapsedWallMinutes": 15,
+    "elapsedWallMinutes": 20,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "A janela registrada não comprova 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "lastActivityAt": "2026-11-13T12:44:19-03:00"
+  "lastActivityAt": "2026-11-13T12:49:58-03:00"
 }
