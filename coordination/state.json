@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "lastActivityAt": "2026-11-13T12:51:18-03:00",
+  "lastActivityAt": "2026-11-13T12:52:55-03:00",
   "nextScheduledAt": "2026-11-13T13:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -718,7 +718,7 @@
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
         "cardBatchFast": "success",
-        "engineValidation": "in_progress",
+        "engineValidation": "success",
         "milestone1000": "success",
         "extendedSoak": "success",
         "fastRunId": 43454171031,
@@ -780,9 +780,9 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": "queued",
-        "engineValidation": "queued",
-        "milestone1000": "queued"
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
       },
       "note": "Turn 0 inválido na primeira fixture; corrigido para turno 3 no HEAD db639952; nova CI queued."
     },
@@ -797,9 +797,9 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": "in_progress",
-        "engineValidation": "queued",
-        "milestone1000": "queued",
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success",
         "fastRunId": 43455960320,
         "engineRunId": 43455960431,
         "milestoneRunId": 43455960325
@@ -818,7 +818,7 @@
       "ci": {
         "cardBatchFast": "queued",
         "engineValidation": "queued",
-        "milestone1000": "queued",
+        "milestone1000": "success",
         "fastRunId": 43456380298,
         "engineRunId": 43456380183,
         "milestoneRunId": 43456380201
@@ -835,12 +835,28 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": "queued",
+        "cardBatchFast": "in_progress",
         "engineValidation": "queued",
-        "milestone1000": "queued",
+        "milestone1000": "success",
         "fastRunId": 43456462631,
         "engineRunId": 43456462746,
         "milestoneRunId": 43456462504
+      }
+    },
+    {
+      "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+      "pr": 84,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "not_returned",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
       }
     }
   ],
@@ -1244,7 +1260,7 @@
       "state": "open",
       "draft": true,
       "branch": "M120",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success; extendedSoak:in_progress; extendedSoak:success",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success; extendedSoak:success",
       "head": "8985d429228971e246cf782f6a09571ec2f2cdc8"
     },
     {
@@ -1252,7 +1268,7 @@
       "state": "open",
       "draft": true,
       "branch": "M121",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success; extendedSoak:success; extendedSoak:success",
+      "ci": "cardBatchFast:success; engineValidation:success; milestone1000:success; extendedSoak:success",
       "head": "202ba319bd5c5c989a0a9819b222195763b104e7"
     },
     {
@@ -1276,7 +1292,7 @@
       "state": "open",
       "draft": true,
       "branch": "M124",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success",
       "head": "db639952b5ddc523fd46c3cef831d53a09b1a883"
     },
     {
@@ -1285,7 +1301,7 @@
       "draft": true,
       "branch": "M125",
       "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
-      "ci": "cardBatchFast:in_progress; engineValidation:queued; milestone1000:queued; fastRunId:43455960320; engineRunId:43455960431; milestoneRunId:43455960325"
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
     },
     {
       "number": 82,
@@ -1293,7 +1309,7 @@
       "draft": true,
       "branch": "M126",
       "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued; fastRunId:43456380298; engineRunId:43456380183; milestoneRunId:43456380201"
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:success"
     },
     {
       "number": 83,
@@ -1301,7 +1317,15 @@
       "draft": true,
       "branch": "M127",
       "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued; fastRunId:43456462631; engineRunId:43456462746; milestoneRunId:43456462504"
+      "ci": "cardBatchFast:in_progress; engineValidation:queued; milestone1000:success"
+    },
+    {
+      "number": 84,
+      "state": "open",
+      "draft": true,
+      "branch": "M128",
+      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+      "ci": "engineValidation:queued; milestone1000:queued"
     }
   ],
   "ci": {
@@ -1560,7 +1584,7 @@
     "pr77": {
       "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
+      "engineValidation": "success",
       "milestone1000": "success",
       "extendedSoak": "success"
     },
@@ -1580,36 +1604,33 @@
     },
     "pr80": {
       "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
-      "cardBatchFast": "queued",
-      "engineValidation": "queued",
-      "milestone1000": "queued"
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
     },
     "pr81": {
       "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
-      "cardBatchFast": "in_progress",
-      "engineValidation": "queued",
-      "milestone1000": "queued",
-      "fastRunId": 43455960320,
-      "engineRunId": 43455960431,
-      "milestoneRunId": 43455960325
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
     },
     "pr82": {
       "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
       "cardBatchFast": "queued",
       "engineValidation": "queued",
-      "milestone1000": "queued",
-      "fastRunId": 43456380298,
-      "engineRunId": 43456380183,
-      "milestoneRunId": 43456380201
+      "milestone1000": "success"
     },
     "pr83": {
       "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
-      "cardBatchFast": "queued",
+      "cardBatchFast": "in_progress",
       "engineValidation": "queued",
-      "milestone1000": "queued",
-      "fastRunId": 43456462631,
-      "engineRunId": 43456462746,
-      "milestoneRunId": 43456462504
+      "milestone1000": "success"
+    },
+    "pr84": {
+      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+      "cardBatchFast": "not_returned",
+      "engineValidation": "queued",
+      "milestone1000": "queued"
     }
   },
   "production": {
@@ -1626,12 +1647,12 @@
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
   },
   "duration": {
-    "elapsedWallMinutes": 21,
+    "elapsedWallMinutes": 23,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #75–#83 e corrigir falhas somente nas nove branches próprias; reportar M108 (#64). Work às 13:30: concluir auditorias de #76–#79, validar #80–#83, verificar handoffs M61/M118 e só então escolher integração/novo lote.",
+  "nextTask": "Auxiliar: monitorar CI das PRs #75–#84 e corrigir falhas somente nas dez branches próprias; reportar M108 (#64). Work às 13:30: concluir auditorias de #76/#78/#79/#80/#81, validar #82–#84, verificar handoffs M61/M118 e então escolher integração/novo lote.",
   "sharedHeadBeforeRelease": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "sharedHeadBeforeClaim": "bd1e9c7c6cffa36f337ab8059cdfec54bd44275f",
@@ -1856,7 +1877,7 @@
       "pr": 75,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:50:21-03:00"
+      "releasedAt": "2026-11-13T12:52:55-03:00"
     },
     {
       "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
@@ -1864,7 +1885,7 @@
       "pr": 76,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:50:21-03:00"
+      "releasedAt": "2026-11-13T12:52:55-03:00"
     },
     {
       "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
@@ -1872,7 +1893,7 @@
       "pr": 77,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:50:21-03:00"
+      "releasedAt": "2026-11-13T12:52:55-03:00"
     },
     {
       "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
@@ -1880,7 +1901,7 @@
       "pr": 78,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:50:21-03:00"
+      "releasedAt": "2026-11-13T12:52:55-03:00"
     },
     {
       "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
@@ -1888,7 +1909,7 @@
       "pr": 79,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:50:21-03:00"
+      "releasedAt": "2026-11-13T12:52:55-03:00"
     },
     {
       "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
@@ -1896,7 +1917,7 @@
       "pr": 80,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:50:21-03:00"
+      "releasedAt": "2026-11-13T12:52:55-03:00"
     },
     {
       "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
@@ -1904,7 +1925,7 @@
       "pr": 81,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:50:21-03:00"
+      "releasedAt": "2026-11-13T12:52:55-03:00"
     },
     {
       "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
@@ -1912,7 +1933,7 @@
       "pr": 82,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:50:21-03:00"
+      "releasedAt": "2026-11-13T12:52:55-03:00"
     },
     {
       "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
@@ -1920,7 +1941,15 @@
       "pr": 83,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:50:21-03:00"
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+      "pr": 84,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
     }
   ],
   "activeRun": {
@@ -1939,12 +1968,13 @@
       "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs",
       "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs",
       "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs",
-      "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
+      "tests/tagClassicBlockAttackSharedTargetScope.test.cjs",
+      "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
     ],
     "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-13T12:29:19-03:00",
-    "lastActivityAt": "2026-11-13T12:51:18-03:00",
-    "completedAt": "2026-11-13T12:51:18-03:00",
+    "lastActivityAt": "2026-11-13T12:52:55-03:00",
+    "completedAt": "2026-11-13T12:52:55-03:00",
     "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
     "pr": 76,
     "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
@@ -2009,6 +2039,14 @@
         "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
         "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
         "pr": 83,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+        "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+        "pr": 84,
         "base": "feat/work-m71-ci-branch-routing-20261112",
         "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
         "state": "released-to-auxiliary-monitor-ci"
@@ -2088,14 +2126,22 @@
           "scope": [
             "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
           ]
+        },
+        {
+          "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+          "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+          "pr": 84,
+          "scope": [
+            "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+          ]
         }
       ],
-      "allowed": "monitorar CI e corrigir falhas somente nas nove branches próprias",
+      "allowed": "monitorar CI e corrigir falhas somente nas dez branches próprias",
       "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61/M118; não alterar bancos ou inventários"
     },
     "nextWorkAt": "2026-11-13T13:30:00-03:00",
     "duration": {
-      "elapsedWallMinutes": 21,
+      "elapsedWallMinutes": 23,
       "effectiveMinutesMeasured": false,
       "minimum60MinutesConfirmed": false
     }
@@ -2704,7 +2750,7 @@
       "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
       "state": "completed; released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-13T12:29:19-03:00",
-      "endedAt": "2026-11-13T12:51:18-03:00",
+      "endedAt": "2026-11-13T12:52:55-03:00",
       "timezone": "America/Sao_Paulo",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -2811,6 +2857,17 @@
             "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
           ],
           "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+          "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+          "pr": 84,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
         }
       ],
       "changes": [
@@ -2895,6 +2952,15 @@
           "files": [
             "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
           ]
+        },
+        {
+          "m": "M128",
+          "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+          "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+          "pr": 84,
+          "files": [
+            "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+          ]
         }
       ],
       "catalog": {
@@ -2922,15 +2988,16 @@
       "validation": {
         "pr64": "one npm test failure; 7366 pass/1 fail; Negate Attack response priority expected response but remained main",
         "pr65to74": "all three workflows success",
-        "pr75": "all three workflows success; test and extended-soak green",
-        "pr76": "fast+milestone success; extended-soak success; test/auditorias em progresso",
-        "pr77": "fast+milestone success; extended-soak success; test/auditorias em progresso",
+        "pr75": "all workflows success; test and extended-soak green",
+        "pr76": "fast+milestone success; extended-soak success; test/auditorias in progress",
+        "pr77": "all workflows success; test and extended-soak green",
         "pr78": "fast+milestone success; engine/soak in progress",
         "pr79": "fast+milestone success; engine/soak in progress",
-        "pr80": "initial test fixture turn=0 failed; corrected head db639952; all workflows queued",
-        "pr81": "fast in progress; engine/milestone queued",
-        "pr82": "all workflows queued",
-        "pr83": "all workflows queued"
+        "pr80": "corrected head db639952; fast+milestone success; engine in progress",
+        "pr81": "fast+milestone success; engine in progress",
+        "pr82": "milestone success; fast+engine queued",
+        "pr83": "milestone success; fast in progress; engine queued",
+        "pr84": "engine+milestone queued; fast not yet returned"
       },
       "deployment": {
         "merge": "none",
@@ -2941,7 +3008,7 @@
       "nextTask": "Auxiliar: monitorar CI das PRs #65–#74, corrigir apenas falhas de teste nas branches liberadas e reportar M108 (#64). Work na próxima janela: verificar resultados finais, obter handoff M61 e, se liberado, corrigir TS2367/TS2339; continuar expansão comportamental sem duplicações.",
       "nextWorkAt": "2026-11-13T13:30:00-03:00",
       "duration": {
-        "elapsedWallMinutes": 21,
+        "elapsedWallMinutes": 23,
         "effectiveMinutesMeasured": false,
         "minimum60MinutesConfirmed": false,
         "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
@@ -3020,6 +3087,14 @@
             "scope": [
               "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
             ]
+          },
+          {
+            "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+            "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+            "pr": 84,
+            "scope": [
+              "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+            ]
           }
         ],
         "allowed": "monitor CI and fix only own branches",
@@ -3028,10 +3103,10 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T122919-0300.json",
-  "lastParallelActivityAt": "2026-11-13T12:51:18-03:00",
-  "sharedHeadAfterCheckpoint": "aae2b65333b8bcd26d6cdcc29ab74e8fcf121333",
-  "sharedHeadBeforeStateUpdate": "aae2b65333b8bcd26d6cdcc29ab74e8fcf121333",
-  "endedAt": "2026-11-13T12:51:18-03:00",
+  "lastParallelActivityAt": "2026-11-13T12:52:55-03:00",
+  "sharedHeadAfterCheckpoint": "11f84ac180f62b8e0707b23d7118cd6506cdb115",
+  "sharedHeadBeforeStateUpdate": "11f84ac180f62b8e0707b23d7118cd6506cdb115",
+  "endedAt": "2026-11-13T12:52:55-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
