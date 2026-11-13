@@ -3,7 +3,8 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const tag=require('../dist/tagDuel');
-const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
+const {getPlayableCard}=require('../dist/effectRegistry');
+const {getMonsterEffect}=require('../dist/monsterEffects');
 
 const PYRAMID_TURTLE='77044671';
 const KURIBOH='40640057';
