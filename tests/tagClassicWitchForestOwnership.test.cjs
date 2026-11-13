@@ -21,6 +21,12 @@ const attackerEntry=normalCards
  .filter(entry=>entry.card.atk>(witch.defense??0))
  .sort((a,b)=>b.card.atk-a.card.atk)[0];
 assert.ok(attackerEntry,'Witch battle fixture needs a Normal Monster above its Defense');
+function diagnosticTest(name,run){
+ test(name,(...args)=>{
+  try{return run(...args);}
+  catch(error){console.error('[M89 Witch diagnostic]',error?.stack??error);throw error;}
+ });
+}
 function member(seat){return 'm89-seat-'+seat;}
 function deck(required=[]){
  const ids=[...new Set([...required,...tag.tagNormalCardIds])].slice(0,7);
@@ -77,7 +83,7 @@ function assertConserved(state,before){
  for(const card of cards)assert.equal(before.get(card.uid),card.id);
 }
 
-test('Witch of the Black Forest resolves for the active teammate and searches by DEF in that physical Deck',()=>{
+diagnosticTest('Witch of the Black Forest resolves for the active teammate and searches by DEF in that physical Deck',()=>{
  const players=[
   {id:member(0),name:'M89 Seat 0',cards:deck([attackerEntry.id])},
   {id:member(1),name:'M89 Seat 1',cards:deck([KURIBOH])},
