@@ -16,30 +16,6 @@ const sources=[
 const normalCards=[...new Set(tag.tagNormalCardIds)]
   .map(id=>getPlayableCard(id))
   .filter(card=>card&&card.kind==='monster'&&Number.isInteger(card.atk));
-const fixtures=sources.map(source=>{
-  const sourceCard=getPlayableCard(source.id);
-  assert.ok(sourceCard&&sourceCard.kind==='monster',source.name+' must be enabled');
-  const candidate=normalCards
-    .filter(card=>card.attribute===source.attribute&&card.atk<=1500)
-    .sort((a,b)=>b.atk-a.atk)[0];
-  const attacker=normalCards
-    .filter(card=>card.atk>(sourceCard.atk??0))
-    .sort((a,b)=>b.atk-a.atk)[0];
-  assert.ok(candidate,source.name+' needs a matching Normal Monster at or below 1500 ATK');
-  assert.ok(attacker,source.name+' needs a stronger Normal Monster attacker');
-  const effect=getMonsterEffect(source.id);
-  assert.equal(effect?.trigger,'onBattleDestroyed');
-  assert.deepEqual(effect?.operation,{kind:'specialSummon',attribute:source.attribute,maximumAtk:1500});
-  assert.equal(candidate.attribute,source.attribute);
-  assert.ok(candidate.atk<=1500);
-  return {source,sourceCard,candidate,attacker};
-});
-assert.ok(getPlayableCard(KURIBOH)?.kind==='monster');
-assert.notEqual(getPlayableCard(KURIBOH)?.attribute,'EARTH');
-assert.notEqual(getPlayableCard(KURIBOH)?.attribute,'LIGHT');
-assert.notEqual(getPlayableCard(KURIBOH)?.attribute,'FIRE');
-assert.notEqual(getPlayableCard(KURIBOH)?.attribute,'WATER');
-assert.notEqual(getPlayableCard(KURIBOH)?.attribute,'WIND');
 
 function diagnosticTest(name,run){
   test(name,(...args)=>{
@@ -108,8 +84,24 @@ function assertConserved(state,before){
   for(const card of cards)assert.equal(before.get(card.uid),card.id);
 }
 
-for(const fixture of fixtures)diagnosticTest(fixture.source.name+' recruits only the matching attribute from the active physical teammate Deck in 2v2',()=>{
-  const {source,sourceCard,candidate:candidateDef,attacker:attackerDef}=fixture;
+for(const source of sources)diagnosticTest(source.name+' recruits only the matching attribute from the active physical teammate Deck in 2v2',()=>{
+  const sourceCard=getPlayableCard(source.id);
+  assert.ok(sourceCard&&sourceCard.kind==='monster',source.name+' must be playable in the current catalog');
+  const candidateDef=normalCards
+    .filter(card=>card.attribute===source.attribute&&card.atk<=1500)
+    .sort((a,b)=>b.atk-a.atk)[0];
+  const attackerDef=normalCards
+    .filter(card=>card.atk>(sourceCard.atk??0))
+    .sort((a,b)=>b.atk-a.atk)[0];
+  assert.ok(candidateDef,source.name+' needs a matching Normal Monster at or below 1500 ATK');
+  assert.ok(attackerDef,source.name+' needs a stronger Normal Monster attacker');
+  const effect=getMonsterEffect(source.id);
+  assert.equal(effect?.trigger,'onBattleDestroyed');
+  assert.deepEqual(effect?.operation,{kind:'specialSummon',attribute:source.attribute,maximumAtk:1500});
+  const kuriboh=getPlayableCard(KURIBOH);
+  assert.ok(kuriboh&&kuriboh.kind==='monster');
+  assert.notEqual(kuriboh.attribute,source.attribute);
+
   const players=[
     {id:member(0),name:'M99 Seat 0',cards:deck([attackerDef.id])},
     {id:member(1),name:'M99 Seat 1',cards:deck([candidateDef.id,KURIBOH])},
@@ -130,7 +122,7 @@ for(const fixture of fixtures)diagnosticTest(fixture.source.name+' recruits only
   assert.match(inactiveCandidate.uid,/^m3:/);
   assert.match(wrongAttribute.uid,/^m1:/);
   assert.equal(candidateDef.attribute,source.attribute);
-  assert.notEqual(getPlayableCard(wrongAttribute.id).attribute,source.attribute);
+  assert.notEqual(kuriboh.attribute,source.attribute);
   assert.ok(attackerDef.atk>sourceCard.atk);
   const before=inventorySnapshot(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
@@ -168,7 +160,7 @@ for(const fixture of fixtures)diagnosticTest(fixture.source.name+' recruits only
   assert.ok(!choices.some(action=>action.target===inactiveCandidate.uid),
     'the inactive partner physical Deck must not leak into the choice list');
   assert.ok(!choices.some(action=>action.target===wrongAttribute.uid),
-    'a monster with the wrong Attribute must be excluded even below 1500 ATK');
+    'a monster with the wrong Attribute must be excluded even below the ATK limit');
   const chosen=choices.find(action=>action.target===activeCandidate.uid);
   state=settleResponses(tag.stepTagDuel(state,member(1),chosen));
 
