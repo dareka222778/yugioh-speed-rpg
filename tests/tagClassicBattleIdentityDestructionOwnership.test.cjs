@@ -103,7 +103,7 @@ for(const [targetId,expected] of [[ryuPositive.id,true],[ryuNegative.id,false]])
   let state=game(1,'m94-ryu-'+targetId);
   const source=deploy(state,0,RYU,'def');
   const target=deploy(state,1,targetId,'atk');
-  assert.ok(target.atk<=2000,'target must survive ordinary battle against Ryu Kokki DEF');
+  assert.ok(getPlayableCard(target.id).atk<=2000,'target must survive ordinary battle against Ryu Kokki DEF');
   const before=snapshot(state);
 
   state=startBattle(state,1);
@@ -117,7 +117,7 @@ for(const [targetId,expected] of [[getsuPositive.id,true],[getsuNegative.id,fals
   let state=game(0,'m94-getsu-'+targetId);
   const source=deploy(state,2,GETSU,'atk');
   const target=deploy(state,1,targetId,'def');
-  assert.ok(target.defense>1700,'target must survive ordinary battle against Getsu Fuhma');
+  assert.ok(getPlayableCard(target.id).defense>1700,'target must survive ordinary battle against Getsu Fuhma');
   const before=snapshot(state);
 
   state=startBattle(state,0);
@@ -131,7 +131,7 @@ for(const [targetId,expected] of [[karakuriDark.id,true],[karakuriLight.id,false
   let state=game(0,'m94-spider-'+targetId);
   const source=deploy(state,2,SPIDER,'atk');
   const target=deploy(state,1,targetId,'def');
-  assert.ok(target.defense>400,'target must survive ordinary battle against Karakuri Spider');
+  assert.ok(getPlayableCard(target.id).defense>400,'target must survive ordinary battle against Karakuri Spider');
   const before=snapshot(state);
 
   state=startBattle(state,0);
