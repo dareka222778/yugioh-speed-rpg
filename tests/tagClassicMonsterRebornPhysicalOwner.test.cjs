@@ -91,9 +91,9 @@ test('Monster Reborn borrows an opposing physical card but Raigeki returns it to
   );
   assert.ok(revive,'the active team must be able to target a monster in the opposing shared Graveyard');
   state=tag.stepTagDuel(state,member(0),revive);
-  assert.equal(state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(state).id,member(1));
   state=settle(state);
+  assert.equal(state.core.phase,'main',
+    'with no legal response, Monster Reborn resolves immediately in the activating Main Phase');
 
   const borrowed=state.core.players[0].monsters.find(card=>card.uid===target.uid);
   assert.ok(borrowed,'Monster Reborn must place the opposing Graveyard monster on the activating team field');
@@ -114,9 +114,9 @@ test('Monster Reborn borrows an opposing physical card but Raigeki returns it to
   );
   assert.ok(destroy,'the original team can use Raigeki to destroy the borrowed monster');
   state=tag.stepTagDuel(state,member(1),destroy);
-  assert.equal(state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(state).id,member(0));
   state=settle(state);
+  assert.equal(state.core.phase,'main',
+    'with no legal response, Raigeki resolves immediately in the activating Main Phase');
 
   assert.ok(state.core.players[1].grave.some(card=>card.uid===target.uid),
     'after destruction, the borrowed monster must return to its original team Graveyard');
