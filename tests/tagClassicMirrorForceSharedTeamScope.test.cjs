@@ -70,37 +70,37 @@ test('active 2v2 defender Mirror Force destroys only opposing Attack Position mo
     id:member(seat),name:'M134 Seat '+seat,
     cards:deck(seat===2?[MIRROR_FORCE]:[])
   }));
-  let state=tag.createTagDuel(players,{classic:true,first:1,seed:'m134-mirror-force-shared-team-scope'});
-  const friendlyTarget=deploy(state,2,normal[0].id);
-  const friendlyAlly=deploy(state,0,normal[1].id);
-  const attacker=deploy(state,3,normal[2].id);
-  const opposingAlly=deploy(state,1,normal[3].id);
-  const opposingDefense=deploy(state,3,normal[4].id,'def');
+  let state=tag.createTagDuel(players,{classic:true,first:3,seed:'m134-mirror-force-shared-team-scope'});
+  const friendlyTarget=deploy(state,0,normal[0].id);
+  const friendlyAlly=deploy(state,2,normal[1].id);
+  const attacker=deploy(state,1,normal[2].id);
+  const opposingAlly=deploy(state,3,normal[3].id);
+  const opposingDefense=deploy(state,1,normal[4].id,'def');
   const mirrorCard=takeCard(state,2,MIRROR_FORCE);
   const mirror={...mirrorCard,setTurn:0,faceUp:false};
   state.core.players[0].backrow.push(mirror);
   state.core.turn=3;
-  assert.match(friendlyTarget.uid,/^m2:/);
-  assert.match(friendlyAlly.uid,/^m0:/);
-  assert.match(attacker.uid,/^m3:/);
-  assert.match(opposingAlly.uid,/^m1:/);
-  assert.match(opposingDefense.uid,/^m3:/);
+  assert.match(friendlyTarget.uid,/^m0:/);
+  assert.match(friendlyAlly.uid,/^m2:/);
+  assert.match(attacker.uid,/^m1:/);
+  assert.match(opposingAlly.uid,/^m3:/);
+  assert.match(opposingDefense.uid,/^m1:/);
   assert.match(mirror.uid,/^m2:/,'Mirror Force must retain inactive teammate seat 2 ownership');
-  assert.equal(tag.tagDecisionMember(state).id,member(1),'team 1 seat 1 starts the turn');
+  assert.equal(tag.tagDecisionMember(state).id,member(3),'team 1 seat 3 starts the turn');
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
   const before=inventorySnapshot(state);
   const publicBefore=tag.publicTagDuel(state);
   assert.ok(!JSON.stringify(publicBefore).includes(MIRROR_FORCE),'the set Trap identity must remain private');
   assert.ok(!JSON.stringify(publicBefore).includes(mirror.uid),'the set Trap UID must remain private');
 
-  const battle=tag.tagActions(state,member(1)).find(action=>action.kind==='battle');
+  const battle=tag.tagActions(state,member(3)).find(action=>action.kind==='battle');
   assert.ok(battle);
-  state=settle(tag.stepTagDuel(state,member(1),battle));
-  const attack=tag.tagActions(state,member(1)).find(action=>
+  state=settle(tag.stepTagDuel(state,member(3),battle));
+  const attack=tag.tagActions(state,member(3)).find(action=>
     action.kind==='attack'&&action.card===attacker.uid&&action.target===friendlyTarget.uid
   );
-  assert.ok(attack,'active seat 1 must attack with its inactive teammate seat 3 monster');
-  state=tag.stepTagDuel(state,member(1),attack);
+  assert.ok(attack,'active seat 3 must attack with its inactive teammate seat 1 monster');
+  state=tag.stepTagDuel(state,member(3),attack);
   assert.equal(state.core.phase,'response');
   assert.equal(tag.tagDecisionMember(state).id,member(0),
     'the active physical defender receives attack-response priority');
