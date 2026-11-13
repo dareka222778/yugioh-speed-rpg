@@ -92,7 +92,7 @@ function settle(state){
 
 for(const entry of [
   {id:MAGICIAN_OF_FAITH,name:'Magician of Faith',recoverId:MST,owner:2},
-  {id:MASK_OF_DARKNESS,name:'Mask of Darkness',recoverId:TORRENTIAL,owner:3}
+  {id:MASK_OF_DARKNESS,name:'Mask of Darkness',recoverId:TORRENTIAL,owner:2}
 ])test(entry.name+' returns a recovered shared-Graveyard card to its physical owner hand',()=>{
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M141 Seat '+seat,
