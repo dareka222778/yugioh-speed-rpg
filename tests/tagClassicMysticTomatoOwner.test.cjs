@@ -18,9 +18,9 @@ const normalCards=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
   .filter(entry=>entry.card&&entry.card.level<=4&&Number.isInteger(entry.card.atk));
 const attackerEntry=normalCards
-  .filter(entry=>entry.card.atk>(tomato.defense??0))
+  .filter(entry=>entry.card.atk>(tomato.atk??0))
   .sort((a,b)=>b.card.atk-a.card.atk)[0];
-assert.ok(attackerEntry,'Mystic Tomato battle fixture needs a Normal Monster above its Defense');
+assert.ok(attackerEntry,'Mystic Tomato battle fixture needs a Normal Monster above its Attack');
 function diagnosticTest(name,run){
  test(name,(...args)=>{
   try{return run(...args);}
@@ -93,7 +93,7 @@ diagnosticTest('Mystic Tomato resolves for the active teammate and recruits from
  let state=tag.createTagDuel(players,{classic:true,first:0,seed:'m88-mystic-tomato-active-deck'});
  const before=inventorySnapshot(state);
  const attacker=deploy(state,0,attackerEntry.id,'atk');
- const source=deploy(state,3,MYSTIC_TOMATO,'def',false);
+ const source=deploy(state,3,MYSTIC_TOMATO,'atk',true);
  const activeCandidate=ensureInDeck(state,1,KURIBOH);
  const inactiveCandidate=ensureInDeck(state,3,SANGAN);
  state.core.turn=3;
@@ -135,7 +135,7 @@ diagnosticTest('Mystic Tomato resolves for the active teammate and recruits from
  assert.ok(!state.core.players[1].deck.some(card=>card.uid===activeCandidate.uid));
  assert.ok(!state.core.players[1].monsters.some(card=>card.uid===inactiveCandidate.uid));
  assert.equal(state.core.players[0].lp,4000);
- assert.equal(state.core.players[1].lp,4000);
+ assert.equal(state.core.players[1].lp,4000-(attackerEntry.card.atk-(tomato.atk??0)));
  assert.doesNotThrow(()=>tag.assertTagDuel(state));
  assertConserved(state,before);
 });
