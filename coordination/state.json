@@ -2,71 +2,38 @@
   "runId": "work-20261113T132613-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T13:26:13-03:00",
-  "lastActivityAt": "2026-11-13T13:26:13-03:00",
+  "lastActivityAt": "2026-11-13T13:37:54-03:00",
   "nextScheduledAt": "2026-11-13T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "M146 Mountain global modifiers across both 2v2 teams",
     "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs",
+    "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs",
+    "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs",
+    "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs",
     "coordination/state.json",
     "coordination/runs/work-20261113T132613-0300.json"
   ],
   "lastCheckpoint": "coordination/runs/work-20261113T132613-0300.json",
-  "previousRunId": "work-20261113T125703-0300",
+  "previousRunId": "work-20261113T132613-0300",
   "previousReservation": {
-    "id": "work-20261113T125703-0300",
+    "id": "work-20261113T132613-0300",
     "owner": "Work",
-    "branch": "feat/work-m129-upstart-goblin-2v2-20261113",
+    "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "reservedFiles": [],
-    "state": "released-to-auxiliary-monitor-ci",
-    "startedAt": "2026-11-13T12:57:03-03:00",
-    "lastActivityAt": "2026-11-13T13:09:11-03:00",
-    "completedAt": "2026-11-13T13:09:11-03:00",
-    "head": "282e88ce752c07023d77ee49da491cdb101af791",
-    "pr": 85,
-    "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
-    "parallelOwnWork": [
-      {
-        "branch": "feat/work-m130-tremendous-fire-2v2-20261113",
-        "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
-        "pr": 86,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      },
-      {
-        "branch": "feat/work-m131-jar-of-greed-2v2-20261113",
-        "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
-        "pr": 87,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      },
-      {
-        "branch": "feat/work-m132-direct-lp-spells-2v2-20261113",
-        "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
-        "pr": 88,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      },
-      {
-        "branch": "feat/work-m133-magic-cylinder-2v2-20261113",
-        "head": "6eba9628ec7c3e251be913110add8f69dabede13",
-        "pr": 89,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      },
-      {
-        "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
-        "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
-        "pr": 64,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "state": "released-to-auxiliary-monitor-ci"
-      }
-    ]
+    "reservedFiles": [
+      "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+    ],
+    "state": "active",
+    "startedAt": "2026-11-13T13:26:13-03:00",
+    "lastActivityAt": "2026-11-13T13:26:13-03:00",
+    "completedAt": null,
+    "head": null,
+    "pr": null,
+    "priority": "P1 — validar Mountain nos três tipos oficiais (Dragon, Winged Beast e Thunder) em ambos os campos 2v2, incluindo ativação por parceiro e conservação de UIDs."
   },
   "activeParallelWork": {
     "pr": 17,
@@ -968,6 +935,66 @@
         "engineValidation": "queued",
         "milestone1000": "queued"
       }
+    },
+    {
+      "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "pr": 102,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "pr": 103,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "pr": 104,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "pr": 105,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "not-returned"
+      }
     }
   ],
   "handoffRequest": {
@@ -979,22 +1006,20 @@
   },
   "handoff": {
     "to": "auxiliary",
-    "status": "independent-work-continues",
-    "at": "2026-11-13T13:26:13-03:00",
-    "scope": "Work reservou somente tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs na branch M146. O auxiliar pode continuar exclusivamente nas branches M134–M145 e demais reservas próprias já liberadas; M61/PR17 e M118/PR74 seguem bloqueadas aguardando handoff explícito.",
-    "nextTask": "Auxiliar: continuar monitorando e corrigindo apenas testes das branches próprias M134–M145; não tocar M146 nem arquivos reservados M61/M118.",
+    "status": "released",
+    "at": "2026-11-13T13:37:54-03:00",
+    "scope": "Monitorar CI das PRs #102–#105 e corrigir somente os quatro arquivos de teste próprios listados; registrar resultados e devolver checkpoint.",
+    "nextTask": "Auxiliar: acompanhar CI das PRs #102–#105 e corrigir apenas os testes próprios M146–M149 se falharem. Work na próxima janela: revalidar CI e handoffs M61/M118; avançar a próxima família 2v2 sem duplicações.",
     "nextWorkAt": "2026-11-13T17:30:00-03:00"
   },
   "catalog": {
     "shared": {
       "cards": 969,
-      "certificates": 969,
-      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
+      "certificates": 969
     },
     "development": {
       "cards": 1014,
-      "certificates": 1014,
-      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
+      "certificates": 1014
     },
     "delta": {
       "added": 45,
@@ -1478,6 +1503,38 @@
       "branch": "M133",
       "head": "6eba9628ec7c3e251be913110add8f69dabede13",
       "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 102,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 103,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 104,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 105,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:not-returned"
     }
   ],
   "ci": {
@@ -1812,6 +1869,30 @@
       "cardBatchFast": "queued",
       "engineValidation": "queued",
       "milestone1000": "queued"
+    },
+    "pr102": {
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued"
+    },
+    "pr103": {
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued"
+    },
+    "pr104": {
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued"
+    },
+    "pr105": {
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "not-returned"
     }
   },
   "production": {
@@ -1824,20 +1905,20 @@
       "engine-validation.yml",
       "milestone1000.yml"
     ],
-    "hostingStatus": "not verified; no deployment workflow found in repository workflow search",
+    "hostingStatus": "not verified; no deployment workflow found",
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
   },
   "duration": {
     "elapsedWallMinutes": 12,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "A janela observada foi de aproximadamente doze minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
+    "note": "Janela observada de 11m41s (aprox. 12 minutos). Não é possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: acompanhar CI #64 e #85–#89; corrigir falhas somente nas branches próprias M108 e M129–M133. Work na próxima janela: revalidar #80/#84, confirmar correção M126/#82, verificar handoffs M61/M118 e continuar a próxima família 2v2.",
-  "sharedHeadBeforeRelease": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
-  "priority": "P1 — validar Mountain nos três tipos oficiais (Dragon, Winged Beast e Thunder) em ambos os campos 2v2, incluindo ativação por parceiro e conservação de UIDs.",
+  "nextTask": "Auxiliar: acompanhar CI das PRs #102–#105 e corrigir apenas os testes próprios M146–M149 se falharem. Work na próxima janela: revalidar CI e handoffs M61/M118; avançar a próxima família 2v2 sem duplicações.",
+  "sharedHeadBeforeRelease": "694f8a1dc66e957bddbc8c33155fbd7c8583944c",
+  "priority": "P1 — completar cobertura comportamental de Magias de Campo e Equipamentos no 2v2 clássico: Mountain, Dragon Treasure, Dark Energy, Invigoration e substituição Mountain→Yami; preservar ownership físico e não invadir M61/M118.",
   "sharedHeadBeforeClaim": "fbe361b6c11b4040c3518383d74ff959114547ec",
-  "releasedOwnReservation": false,
+  "releasedOwnReservation": true,
   "parallelWorkObserved": {
     "branches": [
       "M76",
@@ -2133,15 +2214,65 @@
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
-      "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+      "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs",
+      "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs",
+      "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs",
+      "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
     ],
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-13T13:26:13-03:00",
-    "lastActivityAt": "2026-11-13T13:26:13-03:00",
-    "completedAt": null,
-    "head": null,
-    "pr": null,
-    "priority": "P1 — validar Mountain nos três tipos oficiais (Dragon, Winged Beast e Thunder) em ambos os campos 2v2, incluindo ativação por parceiro e conservação de UIDs."
+    "lastActivityAt": "2026-11-13T13:37:54-03:00",
+    "completedAt": "2026-11-13T13:37:54-03:00",
+    "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+    "pr": 102,
+    "priority": "P1 — completar cobertura comportamental de Magias de Campo e Equipamentos no 2v2 clássico: Mountain, Dragon Treasure, Dark Energy, Invigoration e substituição Mountain→Yami; preservar ownership físico e não invadir M61/M118.",
+    "parallelOwnWork": [
+      {
+        "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+        "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+        "pr": 103,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+        "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+        "pr": 104,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+        "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+        "pr": 105,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "not-returned"
+        }
+      }
+    ]
   },
   "nextWorkAt": "2026-11-13T17:30:00-03:00",
   "parallelRuns": [
@@ -3235,9 +3366,9 @@
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
   "lastParallelActivityAt": "2026-11-13T13:09:11-03:00",
-  "sharedHeadAfterCheckpoint": "49a1adb436ad299b5df9508753adc1a08477f0f4",
-  "sharedHeadBeforeStateUpdate": "fbe361b6c11b4040c3518383d74ff959114547ec",
-  "endedAt": "2026-11-13T13:09:11-03:00",
+  "sharedHeadAfterCheckpoint": "d010d099032f4b133cc36473e0ba22acb181280d",
+  "sharedHeadBeforeStateUpdate": "d010d099032f4b133cc36473e0ba22acb181280d",
+  "endedAt": "2026-11-13T13:37:54-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -3352,9 +3483,69 @@
         "scope": [
           "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
         ]
+      },
+      {
+        "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+        "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+        "pr": 102,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+        "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+        "pr": 103,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+        "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+        "pr": 104,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      },
+      {
+        "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+        "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+        "pr": 105,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "scope": [
+          "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "not-returned"
+        }
       }
     ],
-    "allowed": "monitorar CI das PRs #64 e #85–#89 e corrigir falhas somente nos arquivos de teste das branches próprias M108 e M129–M133; registrar resultados e devolver checkpoint.",
-    "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61/M118 nem nas branches M119–M128 de terceiros; não alterar banco/inventários ou conceder cartas."
+    "allowed": "Monitorar CI das PRs #102–#105 e corrigir somente os quatro arquivos de teste próprios listados; registrar resultados e devolver checkpoint.",
+    "forbidden": "Não fazer merge/deploy; não tocar M61/PR17, M118/PR74 nem branches M140–M145 de terceiros; não alterar runtime, catálogo, certificados, banco ou inventários."
   }
 }
