@@ -16,7 +16,11 @@ const tag=require('../dist/tagDuel');
 const ui=require('../dist/tagUI');
 const {validateDiscordPayload}=require('../dist/discordPayload');
 const {DECISION_TIMEOUT_MS}=require('../dist/duelStore');
-const {getPlayableCard}=require('../dist/effectRegistry');
+const {getPlayableCard,getEffect}=require('../dist/effectRegistry');
+const FIELD_SPELL='86318356'; // Sogen
+const MAGIC_JAMMER='77414722'; // Magic Jammer
+assert.equal(getPlayableCard(FIELD_SPELL)?.field,true);
+assert.equal(getEffect(MAGIC_JAMMER)?.kind,'magicJammer');
 
 const normalIds=[];
 const names=new Set();
@@ -30,6 +34,36 @@ function normalDeck(count){return Array.from({length:count},(_,i)=>normalIds[i%n
 function buildState(){
   const players=[0,1,2,3].map(seat=>({id:'m73-seat-'+seat,name:'M73 Seat '+seat,cards:normalDeck(20)}));
   return tag.createTagDuel(players,{classic:true,first:0,seed:'m73-tag-timeout-persistence'});
+}
+function buildResponseState(){
+  const players=[0,1,2,3].map(seat=>({id:'m73-seat-'+seat,name:'M73 Seat '+seat,cards:normalDeck(20)}));
+  players[0].cards=[FIELD_SPELL,...normalDeck(19)];
+  players[1].cards=[MAGIC_JAMMER,...normalDeck(19)];
+  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m73-tag-response-timeout'});
+  const fieldOwner=state.core.players[0];
+  let field=fieldOwner.hand.find(card=>card.id===FIELD_SPELL);
+  if(!field){
+    const index=fieldOwner.deck.findIndex(card=>card.id===FIELD_SPELL);
+    assert.notEqual(index,-1);
+    field=fieldOwner.deck.splice(index,1)[0];
+    fieldOwner.hand.push(field);
+  }
+  const trapOwner=state.core.players[1];
+  let trap=trapOwner.hand.find(card=>card.id===MAGIC_JAMMER);
+  if(!trap){
+    const index=trapOwner.deck.findIndex(card=>card.id===MAGIC_JAMMER);
+    assert.notEqual(index,-1);
+    trap=trapOwner.deck.splice(index,1)[0];
+  }else trapOwner.hand=trapOwner.hand.filter(card=>card.uid!==trap.uid);
+  trapOwner.backrow.push({...trap,setTurn:0,faceUp:false});
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  const action=tag.tagActions(state,'m73-seat-0').find(item=>item.kind==='field'&&item.card===field.uid);
+  assert.ok(action);
+  const response=tag.stepTagDuel(state,'m73-seat-0',action);
+  assert.equal(response.core.phase,'response');
+  assert.equal(tag.tagDecisionMember(response).id,'m73-seat-1');
+  assert.ok(tag.tagActions(response,'m73-seat-1').some(item=>item.kind==='trap'&&item.card===trap.uid));
+  return response;
 }
 function playerSnapshot(){
   return JSON.stringify({
@@ -50,10 +84,10 @@ function assertInventory(state,before){
   assert.equal(new Set(cards.map(card=>card.uid)).size,80,'persisted timeout must not duplicate physical UIDs');
   for(const card of cards)assert.equal(before.get(card.uid),card.id,'persisted timeout changed physical identity '+card.uid);
 }
-function insertSession(state){
+function insertSession(state,id='m73-timeout-session'){
   const members=state.members.map(member=>({id:member.id,name:member.name,accepted:true}));
   const record={
-    id:'m73-timeout-session',
+    id,
     guild:'m73-guild',
     channel:'m73-channel',
     message:'m73-message',
@@ -131,4 +165,51 @@ test('expired classic 2v2 decision is persisted as one W.O. without touching pla
   assert.equal(db.prepare('SELECT COUNT(*) AS count FROM tag_members WHERE session_id=?').get(record.id).count,0);
   assert.equal(playerSnapshot(),playerDataBefore,'reopening an expired session must not mutate player collections');
   assert.ok(!store.dueTags().some(item=>item.id===record.id),'a published terminal revision must not be re-enqueued after restart');
+});
+
+
+test('automatic SQLite timeout in a real Spell response awards the team that activated the Field Spell',()=>{
+  for(const seat of [0,1,2,3])database.createPlayer('m73-seat-'+seat,'M73 Seat '+seat);
+  const playerDataBefore=playerSnapshot();
+  const state=buildResponseState();
+  const before=inventorySnapshot(state);
+  const record=insertSession(state,'m73-response-timeout-session');
+  assert.equal(record.state.core.phase,'response');
+
+  const expired=store.getTag(record.id,record.updated+DECISION_TIMEOUT_MS);
+  assert.equal(expired.status,'finished');
+  assert.equal(expired.revision,record.revision+1);
+  assert.equal(expired.state.core.phase,'finished');
+  assert.equal(expired.state.core.winner,'tag-team-0','the responding team timed out, so the activating team must win');
+  assert.match(expired.state.core.reason,/W\\.O\\./);
+  assert.doesNotThrow(()=>tag.assertTagDuel(expired.state));
+  assertInventory(expired.state,before);
+  assert.equal(db.prepare('SELECT COUNT(*) AS count FROM tag_members WHERE session_id=?').get(record.id).count,0);
+  assert.equal(playerSnapshot(),playerDataBefore);
+
+  const queued=store.dueTags().find(item=>item.id===record.id);
+  assert.ok(queued,'a response-phase timeout must be queued for Discord publication');
+  const publicMessage=ui.tagPublicMessage(queued);
+  validateDiscordPayload(publicMessage);
+  assert.deepEqual(publicMessage.components,[]);
+  store.markTagPublished(record.id,queued.revision);
+  assert.ok(!store.dueTags().some(item=>item.id===record.id));
+
+  const savedState=JSON.stringify(expired.state);
+  const savedRevision=expired.revision;
+  db.close();
+  delete require.cache[storePath];
+  delete require.cache[databasePath];
+  database=require('../dist/database');
+  db=database.db;
+  store=require('../dist/tagStore');
+  const restored=store.getTag(record.id,record.updated+DECISION_TIMEOUT_MS*2);
+  assert.equal(restored.status,'finished');
+  assert.equal(restored.revision,savedRevision);
+  assert.equal(JSON.stringify(restored.state),savedState);
+  assert.equal(restored.state.core.winner,'tag-team-0');
+  assertInventory(restored.state,before);
+  assert.equal(db.prepare('SELECT COUNT(*) AS count FROM tag_members WHERE session_id=?').get(record.id).count,0);
+  assert.equal(playerSnapshot(),playerDataBefore);
+  assert.ok(!store.dueTags().some(item=>item.id===record.id));
 });
