@@ -1,0 +1,88 @@
+{
+  "id": "work-20261113T025833-0300",
+  "owner": "Work",
+  "priority": "Work",
+  "state": "active",
+  "startedAt": "2026-11-13T02:58:33-03:00",
+  "lastActivityAt": "2026-11-13T02:58:33-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBeforeClaim": "9ef10595193fed91af747f8c42b3cb9a726a8848",
+  "sharedHeadAfterClaim": null,
+  "resumedFrom": "work-20261113T023036-0300",
+  "releasedOwnReservation": {
+    "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
+    "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
+    "pr": 43,
+    "state": "released-ci-success",
+    "ci": {
+      "cardBatchFast": 43373478476,
+      "engineValidation": 43373478203,
+      "milestone1000": 43373478091
+    }
+  },
+  "reservations": [
+    {
+      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicDDAssailantOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBattleBanishVictimOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    }
+  ],
+  "handoff": {
+    "pr": 17,
+    "branch": "feat/work-m61-handlimit-ci-20261111",
+    "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+    "status": "awaiting-response",
+    "commentId": 6845555358
+  },
+  "verified": {
+    "m87": {
+      "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
+      "pr": 43,
+      "ci": "all-success",
+      "runs": [
+        43373478476,
+        43373478203,
+        43373478091
+      ]
+    },
+    "catalog": {
+      "shared": 969,
+      "sharedCertificates": 969,
+      "development": 1014,
+      "developmentCertificates": 1014,
+      "delta": 45
+    }
+  },
+  "changes": [],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscord": false,
+    "inventoryChanges": 0
+  },
+  "duration": {
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false
+  },
+  "nextTask": "Implementar M92 (D.D. Assailant), M93 (banimento de vítima por D.D. Crazy Beast/Lesser Fiend) e M94 (destruição por identidade/atributo) em branches próprias; rodar CI integral e então reconsultar HEAD/coordenação. M61 segue pendente.",
+  "nextWorkAt": "2026-11-13T03:30:00-03:00"
+}

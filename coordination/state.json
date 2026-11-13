@@ -1,38 +1,42 @@
 {
-  "runId": "work-20261113T023036-0300",
+  "runId": "work-20261113T025833-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
   "state": "active",
-  "startedAt": "2026-11-13T02:30:36-03:00",
-  "lastActivityAt": "2026-11-13T02:30:36-03:00",
+  "startedAt": "2026-11-13T02:58:33-03:00",
+  "lastActivityAt": "2026-11-13T02:58:33-03:00",
   "nextScheduledAt": "2026-11-13T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "feat/work-m87-tag-hane-hane-ownership-20261113",
-    "tests/tagClassicHaneHaneOwnership.test.cjs",
+    "feat/work-m92-tag-dd-assailant-ownership-20261113",
+    "feat/work-m93-tag-banish-victim-ownership-20261113",
+    "feat/work-m94-tag-identity-destruction-ownership-20261113",
+    "tests/tagClassicDDAssailantOwnership.test.cjs",
+    "tests/tagClassicBattleBanishVictimOwnership.test.cjs",
+    "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs",
     "coordination/state.json",
     "coordination/runs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261113T023036-0300.json",
-  "previousRunId": "work-20261112T222244-0300",
+  "lastCheckpoint": "coordination/runs/work-20261113T025833-0300.json",
+  "previousRunId": "work-20261113T023036-0300",
   "previousReservation": {
-    "branch": "feat/work-m72-tag-timeout-20261112",
-    "branches": [
-      "feat/work-m72-tag-timeout-20261112",
-      "feat/work-m73-tag-timeout-persistence-20261112",
-      "feat/work-m74-tag-seat-authorization-20261112",
-      "feat/work-m75-tag-action-receipts-20261112"
-    ],
+    "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
+    "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
+    "pr": 43,
     "state": "released-ci-success",
-    "note": "As quatro branches tiveram Card batch fast, Engine validation e Milestone 1000 aprovados nos HEADs finais verificados."
+    "ci": {
+      "cardBatchFast": 43373478476,
+      "engineValidation": 43373478203,
+      "milestone1000": 43373478091
+    }
   },
   "activeParallelWork": {
     "pr": 17,
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6833907240,
+    "lastRequestComment": 6845555358,
     "noResponse": true,
     "blockedFiles": [
       "src/monsterEffects.ts",
@@ -228,20 +232,52 @@
       "scope": [
         "tests/tagClassicHaneHaneOwnership.test.cjs"
       ],
+      "state": "released-ci-success",
+      "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
+      "pr": 43,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success",
+        "milestone1000": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicDDAssailantOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBattleBanishVictimOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs"
+      ],
       "state": "claimed"
     }
   ],
   "handoffRequest": {
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "reason": "Solicitação renovada; nenhum comentário de liberação foi observado. Arquivos reservados permanecem intocados."
+    "lastCommentId": 6845555358,
+    "reason": "Solicitação cooperativa renovada às 02:58 BRT; nenhum checkpoint/liberação explícita recebido. Arquivos reservados permanecem intocados."
   },
   "handoff": {
     "to": "auxiliary",
     "status": "paused-during-Work",
-    "at": "2026-11-13T02:30:36-03:00",
-    "scope": "Somente branches próprias e independentes; não editar M61 nem a branch M87 reservada ao Work.",
-    "nextTask": "Aguardar liberação explícita M61 e monitorar CI de M76–M86 sem editar branches alheias.",
+    "at": "2026-11-13T02:58:33-03:00",
+    "scope": "Somente branches próprias já reservadas M76–M91; não editar M61 nem as branches M88–M91. Work reserva M92–M94 em branches próprias.",
+    "nextTask": "Acompanhar CI das branches independentes existentes sem editar branches alheias; aguardar transferência M61.",
     "nextWorkAt": "2026-11-13T03:30:00-03:00"
   },
   "catalog": {
@@ -401,6 +437,13 @@
       "draft": true,
       "ci": "fast-success; engine-validation-in-progress",
       "branch": "M75"
+    },
+    {
+      "number": 43,
+      "state": "open",
+      "draft": true,
+      "branch": "M87",
+      "ci": "success"
     }
   ],
   "ci": {
@@ -486,6 +529,16 @@
       "engineValidation": "success",
       "milestone1000": "success",
       "engineRunId": 43347531738
+    },
+    "pr43": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43373478476,
+      "engineValidation": "success",
+      "engineRunId": 43373478203,
+      "extendedSoak": "success",
+      "milestone1000": "success",
+      "milestoneRunId": 43373478091,
+      "npmTest": "success"
     }
   },
   "production": {
@@ -498,28 +551,25 @@
       "engine-validation.yml",
       "milestone1000.yml"
     ],
-    "hostingStatus": "Nenhum workflow de deploy está presente na branch compartilhada; o estado do host não pôde ser validado. Nenhum deploy foi executado.",
-    "liveDiscord": "not validated",
-    "hosting": "authentication not available",
-    "deploymentsApi": "not accessible through connected GitHub action; no deploy workflow confirmed in inspected branch"
+    "hostingStatus": "Nenhum workflow de deploy foi confirmado; hospedagem e Discord ao vivo não foram validados."
   },
   "duration": {
-    "elapsedWallMinutes": 22,
+    "elapsedWallMinutes": 0,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Aproximadamente 22 minutos de janela de parede até o checkpoint inicial. Houve quatro blocos de testes independentes; a duração efetiva não foi cronometrada e espera de CI não foi contada como trabalho."
+    "note": "Execução retomada às 02:58:33 BRT; duração efetiva será registrada no checkpoint final, sem contar espera de CI."
   },
-  "nextTask": "Concluir CI das PRs #28–#31 e corrigir falhas reais; em seguida, aguardar handoff M61 para resolver TS2367/TS2339 e implementar o ciclo FLIP. Não editar arquivos M61 sem liberação. Reconciliar os 45 certificados da revisão 72ba com a branch compartilhada somente após validação de runtime e autorização de merge.",
+  "nextTask": "Implementar M92 (D.D. Assailant), M93 (banimento de vítima por D.D. Crazy Beast/Lesser Fiend) e M94 (destruição por identidade/atributo) em branches próprias; rodar CI integral e então reconsultar HEAD/coordenação. M61 segue pendente.",
   "sharedHeadBeforeRelease": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
   "priority": "Work",
-  "sharedHeadBeforeClaim": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
+  "sharedHeadBeforeClaim": "9ef10595193fed91af747f8c42b3cb9a726a8848",
   "releasedOwnReservation": {
-    "branch": "feat/work-m67-tag-field-zone-20261112",
-    "head": "3cf702b4da80ebc166941841756a0420ffc7431b",
-    "pr": 23,
+    "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
+    "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
+    "pr": 43,
     "owner": "Work",
-    "state": "completed-ci-success; released for this run",
-    "note": "M67 field-zone regression branch and CI completed; no third-party reservation was changed."
+    "state": "completed-ci-success; released",
+    "note": "Card batch fast, Engine validation (npm test, auditorias e extended soak 600s) e Milestone 1000 aprovados."
   },
   "parallelWorkObserved": {
     "branches": [
@@ -533,7 +583,11 @@
       "M83",
       "M84",
       "M85",
-      "M86"
+      "M86",
+      "M88",
+      "M89",
+      "M90",
+      "M91"
     ],
     "prs": [
       32,
@@ -546,8 +600,14 @@
       39,
       40,
       41,
-      42
+      42,
+      44,
+      45,
+      46,
+      47
     ],
-    "ownership": "branches independentes; não assumidas nem editadas por esta execução"
-  }
+    "ownership": "Branches de outros agentes; não assumidas nem editadas."
+  },
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAfterClaim": null
 }
