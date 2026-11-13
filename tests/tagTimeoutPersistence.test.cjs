@@ -181,7 +181,7 @@ test('automatic SQLite timeout in a real Spell response awards the team that act
   assert.equal(expired.revision,record.revision+1);
   assert.equal(expired.state.core.phase,'finished');
   assert.equal(expired.state.core.winner,'tag-team-0','the responding team timed out, so the activating team must win');
-  assert.match(expired.state.core.reason,/W\\.O\\./);
+  assert.match(expired.state.core.reason,/W\.O\./);
   assert.doesNotThrow(()=>tag.assertTagDuel(expired.state));
   assertInventory(expired.state,before);
   assert.equal(db.prepare('SELECT COUNT(*) AS count FROM tag_members WHERE session_id=?').get(record.id).count,0);
