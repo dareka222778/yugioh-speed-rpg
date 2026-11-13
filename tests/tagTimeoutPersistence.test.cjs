@@ -86,6 +86,11 @@ test('expired classic 2v2 decision is persisted as one W.O. without touching pla
   assert.equal(expired.state.core.phase,'finished');
   assert.equal(expired.state.core.winner,'tag-team-1','the team opposite the timed-out first seat must win');
   assert.match(expired.state.core.reason,/W\.O\./);
+  assert.throws(
+    ()=>store.actTag(record.id,'m73-seat-0',record.guild,expired.revision,0),
+    /Painel desatualizado/,
+    'a late Discord button action must not mutate a session already closed by timeout'
+  );
   assert.doesNotThrow(()=>tag.assertTagDuel(expired.state));
   assertInventory(expired.state,before);
   assert.equal(db.prepare('SELECT COUNT(*) AS count FROM tag_members WHERE session_id=?').get(record.id).count,0,
