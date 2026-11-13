@@ -104,8 +104,8 @@ function handUids(state,seat){
 test('classic 2v2 shares team LP while the same inactive-partner monster can attack on both teammates turns',()=>{
   let state=game('m76-shared-team-life-points');
   const before=inventorySnapshot(state);
-  const initialHands=[0,1,2,3].map(seat=>handUids(state,seat));
   const monster=deploy(state,2,attacker.id,'atk');
+  const initialHands=[0,1,2,3].map(seat=>handUids(state,seat));
   assert.match(monster.uid,/^m2:/,'the monster must retain the inactive teammate physical UID');
   state.core.turn=3;
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
