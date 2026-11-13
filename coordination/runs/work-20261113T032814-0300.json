@@ -1,0 +1,225 @@
+{
+  "runId": "work-20261113T032814-0300",
+  "owner": "Work",
+  "priority": "Work",
+  "state": "completed",
+  "startedAt": "2026-11-13T03:28:14-03:00",
+  "endedAt": "2026-11-13T03:52:04.547-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "185755b72d688a576556ba004804e468326ef7c4",
+  "baseTreeSha": "cea95d42fd9073389ba55c2c6f929780f6ed7752",
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint anterior; auditoria de HEAD, branches, PRs e Actions.",
+    "Solicitação cooperativa renovada de handoff M61 no PR #17; nenhuma resposta recebida e nenhum arquivo reservado editado.",
+    "M99: adicionada regressão 2v2 para Giant Rat, Shining Angel, UFO Turtle, Mother Grizzly e Flying Kamakiri #1; valida filtro de atributo/ATK, escolha pelo assento ativo, exclusão do Deck físico do parceiro inativo, UID e conservação de inventário.",
+    "M100: adicionada regressão 2v2 para Sangan; valida busca por ATK <=1500, representante ativo, exclusão de cópia no Deck inativo e conservação de UID.",
+    "Diagnóstico e correção do import incorreto de getMonsterEffect nas PRs #95–#98 e M99/M100; função importada de dist/monsterEffects, não de dist/effectRegistry.",
+    "Comentários cooperativos nas PRs #44 e #45 apontando o mesmo erro de import sem editar branches do auxiliar.",
+    "PRs #55 e #56 criadas; Card batch fast feedback e Milestone 1000 aprovados nos HEADs mais recentes; npm test passou nos HEADs M99/M100; Engine validation completa ainda em andamento."
+  ],
+  "changes": [
+    {
+      "branch": "feat/work-m99-attribute-recruiters-ownership-20261113",
+      "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
+      "pr": 55,
+      "files": [
+        "tests/tagClassicAttributeRecruitersOwnership.test.cjs"
+      ],
+      "newBehavioralCertificates": 0
+    },
+    {
+      "branch": "feat/work-m100-sangan-ownership-20261113",
+      "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
+      "pr": 56,
+      "files": [
+        "tests/tagClassicSanganOwnership.test.cjs"
+      ],
+      "newBehavioralCertificates": 0
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "head": "a2b8d577f7770f0fdd937bf000236c6acba5ed7f",
+      "pr": 51,
+      "files": [
+        "tests/tagClassicPyramidTurtleOwnership.test.cjs"
+      ],
+      "change": "corrigido import de getMonsterEffect",
+      "newBehavioralCertificates": 0
+    },
+    {
+      "branch": "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
+      "head": "ea3bffe32aadeeaac9be36dd9c6d8b97fb13e378",
+      "pr": 52,
+      "files": [
+        "tests/tagClassicRecruiterFiltersOwnership.test.cjs"
+      ],
+      "change": "corrigido import de getMonsterEffect",
+      "newBehavioralCertificates": 0
+    },
+    {
+      "branch": "feat/work-m97-tag-troop-dragon-recursion-20261113",
+      "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
+      "pr": 53,
+      "files": [
+        "tests/tagClassicTroopDragonRecursionOwnership.test.cjs"
+      ],
+      "change": "corrigido import de getMonsterEffect",
+      "newBehavioralCertificates": 0
+    },
+    {
+      "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+      "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
+      "pr": 54,
+      "files": [
+        "tests/tagClassicGravekeepersSpyOwnership.test.cjs"
+      ],
+      "change": "corrigido import de getMonsterEffect",
+      "newBehavioralCertificates": 0
+    }
+  ],
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "validation": {
+    "m99": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "passed",
+      "engineValidation": "in_progress",
+      "runId": 43381087797
+    },
+    "m100": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "passed",
+      "engineValidation": "in_progress",
+      "runId": 43381093219
+    },
+    "m95to98": "nova CI em andamento após correção de import",
+    "m92to94": "fast/milestone aprovados; engine validation ainda em andamento",
+    "limits": "extended soak 600s e auditorias finais ainda não concluídos"
+  },
+  "pullRequests": {
+    "created": [
+      55,
+      56
+    ],
+    "openDraft": [
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56
+    ]
+  },
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscordValidation": false,
+    "hosting": "não verificado; não há workflow de deploy entre os quatro workflows observados"
+  },
+  "impediments": {
+    "m61Handoff": "pendente sem resposta; PR #17 comment 6846002238",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/classicEffects.ts",
+      "src/duelIntegrity.ts",
+      "scripts/mass-certification21.cjs"
+    ],
+    "production": "sem acesso autenticado/backup verificável"
+  },
+  "releasedScopeToAuxiliary": [
+    {
+      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "pr": 48,
+      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
+      "scope": [
+        "tests/tagClassicDDAssailantOwnership.test.cjs"
+      ]
+    },
+    {
+      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "pr": 49,
+      "head": "060c513c507843f71e8a50cf21c1095f92143e7c",
+      "scope": [
+        "tests/tagClassicBattleBanishVictimOwnership.test.cjs"
+      ]
+    },
+    {
+      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "pr": 50,
+      "head": "d472c0a2f8e2bcf98313b1ff32fd72987b1ff21c",
+      "scope": [
+        "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs"
+      ]
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "pr": 51,
+      "head": "a2b8d577f7770f0fdd937bf000236c6acba5ed7f",
+      "scope": [
+        "tests/tagClassicPyramidTurtleOwnership.test.cjs"
+      ]
+    },
+    {
+      "branch": "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
+      "pr": 52,
+      "head": "ea3bffe32aadeeaac9be36dd9c6d8b97fb13e378",
+      "scope": [
+        "tests/tagClassicRecruiterFiltersOwnership.test.cjs"
+      ]
+    },
+    {
+      "branch": "feat/work-m97-tag-troop-dragon-recursion-20261113",
+      "pr": 53,
+      "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
+      "scope": [
+        "tests/tagClassicTroopDragonRecursionOwnership.test.cjs"
+      ]
+    },
+    {
+      "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+      "pr": 54,
+      "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
+      "scope": [
+        "tests/tagClassicGravekeepersSpyOwnership.test.cjs"
+      ]
+    },
+    {
+      "branch": "feat/work-m99-attribute-recruiters-ownership-20261113",
+      "pr": 55,
+      "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
+      "scope": [
+        "tests/tagClassicAttributeRecruitersOwnership.test.cjs"
+      ]
+    },
+    {
+      "branch": "feat/work-m100-sangan-ownership-20261113",
+      "pr": 56,
+      "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
+      "scope": [
+        "tests/tagClassicSanganOwnership.test.cjs"
+      ]
+    }
+  ],
+  "nextTask": "Auxiliar: acompanhar CI das PRs #48–#56 e corrigir falhas apenas nas branches próprias M92–M100; validar os novos testes M99/M100; não editar os caminhos reservados M61. Work: próxima sessão deve confirmar CI completa, revisar PRs abertas e retomar M60 somente após handoff explícito M61.",
+  "nextWorkAt": "2026-11-13T08:30:00-03:00",
+  "duration": {
+    "elapsedWallMinutes": 24,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Não contar espera de CI; a sessão não atingiu 60 minutos efetivos."
+  }
+}

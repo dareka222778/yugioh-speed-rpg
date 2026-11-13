@@ -1,33 +1,37 @@
 {
-  "runId": "work-20261113T025833-0300",
+  "runId": "work-20261113T032814-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "active",
-  "startedAt": "2026-11-13T02:58:33-03:00",
-  "lastActivityAt": "2026-11-13T03:18:00-03:00",
-  "nextScheduledAt": "2026-11-13T03:30:00-03:00",
+  "state": "completed",
+  "startedAt": "2026-11-13T03:28:14-03:00",
+  "lastActivityAt": "2026-11-13T03:52:04.547-03:00",
+  "nextScheduledAt": "2026-11-13T08:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
     "feat/work-m92-tag-dd-assailant-ownership-20261113",
     "feat/work-m93-tag-banish-victim-ownership-20261113",
     "feat/work-m94-tag-identity-destruction-ownership-20261113",
+    "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+    "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
+    "feat/work-m97-tag-troop-dragon-recursion-20261113",
+    "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+    "feat/work-m99-attribute-recruiters-ownership-20261113",
+    "feat/work-m100-sangan-ownership-20261113",
     "tests/tagClassicDDAssailantOwnership.test.cjs",
     "tests/tagClassicBattleBanishVictimOwnership.test.cjs",
     "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs",
-    "coordination/state.json",
-    "coordination/runs",
-    "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
     "tests/tagClassicPyramidTurtleOwnership.test.cjs",
-    "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
-    "feat/work-m97-tag-troop-dragon-recursion-20261113",
     "tests/tagClassicRecruiterFiltersOwnership.test.cjs",
     "tests/tagClassicTroopDragonRecursionOwnership.test.cjs",
-    "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
-    "tests/tagClassicGravekeepersSpyOwnership.test.cjs"
+    "tests/tagClassicGravekeepersSpyOwnership.test.cjs",
+    "tests/tagClassicAttributeRecruitersOwnership.test.cjs",
+    "tests/tagClassicSanganOwnership.test.cjs",
+    "coordination/state.json",
+    "coordination/runs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261113T025833-0300.json",
-  "previousRunId": "work-20261113T023036-0300",
+  "lastCheckpoint": "coordination/runs/work-20261113T032814-0300.json",
+  "previousRunId": "work-20261113T025833-0300",
   "previousReservation": {
     "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
     "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
@@ -44,7 +48,7 @@
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6845555358,
+    "lastRequestComment": 6846002238,
     "noResponse": true,
     "blockedFiles": [
       "src/monsterEffects.ts",
@@ -251,74 +255,165 @@
     },
     {
       "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
+      "pr": 48,
       "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicDDAssailantOwnership.test.cjs"
       ],
-      "state": "claimed"
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success"
+      }
     },
     {
       "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "head": "060c513c507843f71e8a50cf21c1095f92143e7c",
+      "pr": 49,
       "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicBattleBanishVictimOwnership.test.cjs"
       ],
-      "state": "claimed"
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success"
+      }
     },
     {
       "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "head": "d472c0a2f8e2bcf98313b1ff32fd72987b1ff21c",
+      "pr": 50,
       "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs"
       ],
-      "state": "claimed"
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success"
+      }
     },
     {
       "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "head": "a2b8d577f7770f0fdd937bf000236c6acba5ed7f",
+      "pr": 51,
       "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicPyramidTurtleOwnership.test.cjs"
       ],
-      "state": "claimed"
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "in_progress",
+        "engine": "in_progress",
+        "milestone": "in_progress",
+        "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      }
     },
     {
       "branch": "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
+      "head": "ea3bffe32aadeeaac9be36dd9c6d8b97fb13e378",
+      "pr": 52,
       "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicRecruiterFiltersOwnership.test.cjs"
       ],
-      "state": "claimed"
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "in_progress",
+        "engine": "in_progress",
+        "milestone": "in_progress",
+        "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      }
     },
     {
       "branch": "feat/work-m97-tag-troop-dragon-recursion-20261113",
+      "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
+      "pr": 53,
       "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicTroopDragonRecursionOwnership.test.cjs"
       ],
-      "state": "claimed"
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "in_progress",
+        "engine": "in_progress",
+        "milestone": "in_progress",
+        "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      }
     },
     {
       "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+      "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
+      "pr": 54,
       "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicGravekeepersSpyOwnership.test.cjs"
       ],
-      "state": "claimed"
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "queued",
+        "engine": "queued",
+        "milestone": "in_progress",
+        "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      }
+    },
+    {
+      "branch": "feat/work-m99-attribute-recruiters-ownership-20261113",
+      "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
+      "pr": 55,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicAttributeRecruitersOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success",
+        "npmTest": "passed",
+        "fastRunId": 43381087783,
+        "engineRunId": 43381087797,
+        "milestoneRunId": 43381087817
+      }
+    },
+    {
+      "branch": "feat/work-m100-sangan-ownership-20261113",
+      "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
+      "pr": 56,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSanganOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success",
+        "npmTest": "passed",
+        "fastRunId": 43381093321,
+        "engineRunId": 43381093219,
+        "milestoneRunId": 43381093250
+      }
     }
   ],
   "handoffRequest": {
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "lastCommentId": 6845555358,
-    "reason": "Solicitação cooperativa renovada às 02:58 BRT; nenhum checkpoint/liberação explícita recebido. Arquivos reservados permanecem intocados."
+    "lastCommentId": 6846002238,
+    "reason": "Solicitação cooperativa renovada às 03:28 BRT; nenhum checkpoint/liberação explícita recebido. Os arquivos M61 permaneceram intocados."
   },
   "handoff": {
     "to": "auxiliary",
-    "status": "paused-during-Work",
-    "at": "2026-11-13T02:58:33-03:00",
-    "scope": "Somente branches próprias já reservadas M76–M91; não editar M61 nem as branches M88–M91. Work reserva M92–M94 em branches próprias.",
-    "nextTask": "Acompanhar CI das branches independentes existentes sem editar branches alheias; aguardar transferência M61.",
-    "nextWorkAt": "2026-11-13T03:30:00-03:00"
+    "status": "released",
+    "at": "2026-11-13T03:52:04.547-03:00",
+    "scope": "Branches próprias Work M92–M100 liberadas para o auxiliar acompanhar CI e corrigir somente testes nas respectivas branches; M61 e seus cinco arquivos reservados permanecem intocados.",
+    "nextTask": "Auxiliar: acompanhar CI das PRs #48–#56 e corrigir falhas apenas nas branches próprias M92–M100; validar os novos testes M99/M100; não editar os caminhos reservados M61. Work: próxima sessão deve confirmar CI completa, revisar PRs abertas e retomar M60 somente após handoff explícito M61.",
+    "nextWorkAt": "2026-11-13T08:30:00-03:00"
   },
   "catalog": {
     "shared": {
@@ -490,42 +585,63 @@
       "state": "open",
       "draft": true,
       "branch": "M92",
-      "ci": "fast-success; engine-validation-in-progress; milestone-success"
+      "ci": "fast:success; engine:in_progress; milestone:success"
     },
     {
       "number": 49,
       "state": "open",
       "draft": true,
       "branch": "M93",
-      "ci": "fast-success; engine-validation-in-progress; milestone-success"
+      "ci": "fast:success; engine:in_progress; milestone:success"
     },
     {
       "number": 50,
       "state": "open",
       "draft": true,
       "branch": "M94",
-      "ci": "fast-success; engine-validation-in-progress; milestone-success"
+      "ci": "fast:success; engine:in_progress; milestone:success"
     },
     {
       "number": 51,
       "state": "open",
       "draft": true,
       "branch": "M95",
-      "ci": "rerun-queued; diagnostic-wrapper-added"
+      "ci": "fast:in_progress; engine:in_progress; milestone:in_progress"
     },
     {
       "number": 52,
       "state": "open",
       "draft": true,
       "branch": "M96",
-      "ci": "fast-success; engine-validation-in-progress; milestone-success"
+      "ci": "fast:in_progress; engine:in_progress; milestone:in_progress"
     },
     {
       "number": 53,
       "state": "open",
       "draft": true,
       "branch": "M97",
-      "ci": "fast-success; engine-validation-in-progress; milestone-success"
+      "ci": "fast:in_progress; engine:in_progress; milestone:in_progress"
+    },
+    {
+      "number": 54,
+      "state": "open",
+      "draft": true,
+      "branch": "M98",
+      "ci": "fast:queued; engine:queued; milestone:in_progress"
+    },
+    {
+      "number": 55,
+      "state": "open",
+      "draft": true,
+      "branch": "M99",
+      "ci": "fast:success; engine:in_progress; milestone:success"
+    },
+    {
+      "number": 56,
+      "state": "open",
+      "draft": true,
+      "branch": "M100",
+      "ci": "fast:success; engine:in_progress; milestone:success"
     }
   ],
   "ci": {
@@ -625,57 +741,68 @@
     "pr48": {
       "head": "958700b229cd8e6e15354a258ae8797999a16e56",
       "cardBatchFast": "success",
-      "fastRunId": 43376852634,
       "engineValidation": "in_progress",
-      "engineRunId": 43376852578,
-      "milestone1000": "success",
-      "milestoneRunId": 43376852685
+      "milestone1000": "success"
     },
     "pr49": {
       "head": "060c513c507843f71e8a50cf21c1095f92143e7c",
       "cardBatchFast": "success",
-      "fastRunId": 43377399808,
       "engineValidation": "in_progress",
-      "engineRunId": 43377399886,
-      "milestone1000": "success",
-      "milestoneRunId": 43377399898
+      "milestone1000": "success"
     },
     "pr50": {
       "head": "d472c0a2f8e2bcf98313b1ff32fd72987b1ff21c",
       "cardBatchFast": "success",
-      "fastRunId": 43377406210,
       "engineValidation": "in_progress",
-      "engineRunId": 43377406204,
-      "milestone1000": "success",
-      "milestoneRunId": 43377406219
+      "milestone1000": "success"
     },
     "pr51": {
-      "head": "0a9382214ef79f1716f5d153e34285e4236f7ace",
-      "cardBatchFast": "queued",
-      "fastRunId": 43378024150,
-      "engineValidation": "queued",
-      "engineRunId": 43378024211,
+      "head": "a2b8d577f7770f0fdd937bf000236c6acba5ed7f",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "in_progress",
       "milestone1000": "in_progress",
-      "milestoneRunId": 43378024074,
-      "previousFailure": "npm test failed on Pyramid Turtle file; diagnostic wrapper added to expose exact assertion"
+      "note": "corrigido import de getMonsterEffect; nova CI em andamento"
     },
     "pr52": {
-      "head": "d77a57f3a24fe0cb33939314abc704e7cf154467",
-      "cardBatchFast": "success",
-      "fastRunId": 43377835957,
+      "head": "ea3bffe32aadeeaac9be36dd9c6d8b97fb13e378",
+      "cardBatchFast": "in_progress",
       "engineValidation": "in_progress",
-      "engineRunId": 43377836059,
-      "milestone1000": "success",
-      "milestoneRunId": 43377835955
+      "milestone1000": "in_progress",
+      "note": "corrigido import de getMonsterEffect; nova CI em andamento"
     },
     "pr53": {
-      "head": "c352a7c31b01bf6e73e68c17f9e25cbf89fe734c",
-      "cardBatchFast": "success",
-      "fastRunId": 43377839749,
+      "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
+      "cardBatchFast": "in_progress",
       "engineValidation": "in_progress",
-      "engineRunId": 43377839877,
+      "milestone1000": "in_progress",
+      "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+    },
+    "pr54": {
+      "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "in_progress",
+      "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+    },
+    "pr55": {
+      "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
       "milestone1000": "success",
-      "milestoneRunId": 43377839740
+      "fastRunId": 43381087783,
+      "engineRunId": 43381087797,
+      "milestoneRunId": 43381087817,
+      "npmTest": "passed"
+    },
+    "pr56": {
+      "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success",
+      "fastRunId": 43381093321,
+      "engineRunId": 43381093219,
+      "milestoneRunId": 43381093250,
+      "npmTest": "passed"
     }
   },
   "production": {
@@ -691,15 +818,15 @@
     "hostingStatus": "Nenhum workflow de deploy foi confirmado; hospedagem e Discord ao vivo não foram validados."
   },
   "duration": {
-    "elapsedWallMinutes": 0,
+    "elapsedWallMinutes": 24,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Execução retomada às 02:58:33 BRT; duração efetiva será registrada no checkpoint final, sem contar espera de CI."
+    "note": "Bloco efetivo registrado em branches independentes; não foi possível confirmar 60 minutos de trabalho ativo. Nenhuma espera de CI foi contabilizada como desenvolvimento."
   },
-  "nextTask": "M92–M97 em validação; M93/M94 corrigidos com stats do catálogo; M95 recebeu diagnóstico explícito após falha; prosseguir M98 Gravekeeper's Spy, depois fechar falhas e reconsultar CI.",
-  "sharedHeadBeforeRelease": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
+  "nextTask": "Auxiliar: acompanhar CI das PRs #48–#56 e corrigir falhas apenas nas branches próprias M92–M100; validar os novos testes M99/M100; não editar os caminhos reservados M61. Work: próxima sessão deve confirmar CI completa, revisar PRs abertas e retomar M60 somente após handoff explícito M61.",
+  "sharedHeadBeforeRelease": "185755b72d688a576556ba004804e468326ef7c4",
   "priority": "Work",
-  "sharedHeadBeforeClaim": "9ef10595193fed91af747f8c42b3cb9a726a8848",
+  "sharedHeadBeforeClaim": "185755b72d688a576556ba004804e468326ef7c4",
   "releasedOwnReservation": {
     "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
     "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
@@ -746,5 +873,70 @@
     "ownership": "Branches de outros agentes; não assumidas nem editadas."
   },
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedHeadAfterClaim": null
+  "sharedHeadAfterClaim": null,
+  "releasedOwnReservations": [
+    {
+      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
+      "pr": 48,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "head": "060c513c507843f71e8a50cf21c1095f92143e7c",
+      "pr": 49,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "head": "d472c0a2f8e2bcf98313b1ff32fd72987b1ff21c",
+      "pr": 50,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "head": "a2b8d577f7770f0fdd937bf000236c6acba5ed7f",
+      "pr": 51,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
+      "head": "ea3bffe32aadeeaac9be36dd9c6d8b97fb13e378",
+      "pr": 52,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m97-tag-troop-dragon-recursion-20261113",
+      "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
+      "pr": 53,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+      "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
+      "pr": 54,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m99-attribute-recruiters-ownership-20261113",
+      "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
+      "pr": 55,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m100-sangan-ownership-20261113",
+      "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
+      "pr": 56,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    }
+  ]
 }
