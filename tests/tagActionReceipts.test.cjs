@@ -82,6 +82,17 @@ test('2v2 action receipts replay once, reject conflicting IDs, survive SQLite re
   const invalidRetry='m75-invalid-retry';
 
   assert.throws(
+    ()=>store.actTag(record.id,actor,record.guild,expectedRevision,actionIndex,''),
+    /Identificador de ação inválido/,
+    'empty request IDs must be rejected before any state change'
+  );
+  assert.throws(
+    ()=>store.actTag(record.id,actor,record.guild,expectedRevision,actionIndex,'x'.repeat(129)),
+    /Identificador de ação inválido/,
+    'oversized request IDs must be rejected before any state change'
+  );
+
+  assert.throws(
     ()=>store.actTag(record.id,actor,record.guild,expectedRevision,999,invalidRetry),
     /Jogada indisponível/,
     'an invalid action must roll back without consuming its request ID'
