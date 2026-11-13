@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "lastActivityAt": "2026-11-13T12:52:55-03:00",
+  "lastActivityAt": "2026-11-13T12:54:18-03:00",
   "nextScheduledAt": "2026-11-13T13:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -55,7 +55,7 @@
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6857929825,
+    "lastRequestComment": 6857994614,
     "noResponse": true,
     "blockedFiles": [
       "src/monsterEffects.ts",
@@ -697,12 +697,13 @@
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
         "cardBatchFast": "success",
-        "engineValidation": "in_progress",
+        "engineValidation": "success",
         "milestone1000": "success",
         "extendedSoak": "success",
         "fastRunId": 43454799650,
         "engineRunId": 43454798944,
-        "milestoneRunId": 43454798835
+        "milestoneRunId": 43454798835,
+        "npmTest": "success"
       },
       "note": "Primeiro run falhou somente por uma asserção da fixture que apontava o Graveyard team 1; corrigida para team 0 no HEAD atual, nova CI em andamento."
     },
@@ -739,12 +740,13 @@
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
         "cardBatchFast": "success",
-        "engineValidation": "in_progress",
+        "engineValidation": "success",
         "milestone1000": "success",
         "fastRunId": 43455248576,
         "engineRunId": 43455248554,
         "milestoneRunId": 43455248477,
-        "extendedSoak": "in_progress"
+        "extendedSoak": "success",
+        "npmTest": "success"
       },
       "note": null
     },
@@ -865,7 +867,7 @@
     "status": "awaiting-response",
     "commentId": 6857487009,
     "noResponse": true,
-    "lastCommentId": 6857929825
+    "lastCommentId": 6857994614
   },
   "handoff": {
     "to": "auxiliary",
@@ -1260,7 +1262,7 @@
       "state": "open",
       "draft": true,
       "branch": "M120",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success; extendedSoak:success",
+      "ci": "all workflows success; npm test, audits and extended soak success",
       "head": "8985d429228971e246cf782f6a09571ec2f2cdc8"
     },
     {
@@ -1276,7 +1278,7 @@
       "state": "open",
       "draft": true,
       "branch": "M122",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success; extendedSoak:in_progress",
+      "ci": "all workflows success; npm test, audits and extended soak success",
       "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c"
     },
     {
@@ -1577,9 +1579,10 @@
     "pr76": {
       "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
+      "engineValidation": "success",
       "milestone1000": "success",
-      "extendedSoak": "success"
+      "extendedSoak": "success",
+      "npmTest": "success"
     },
     "pr77": {
       "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
@@ -1591,9 +1594,10 @@
     "pr78": {
       "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
+      "engineValidation": "success",
       "milestone1000": "success",
-      "extendedSoak": "in_progress"
+      "extendedSoak": "success",
+      "npmTest": "success"
     },
     "pr79": {
       "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
@@ -1647,12 +1651,12 @@
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
   },
   "duration": {
-    "elapsedWallMinutes": 23,
+    "elapsedWallMinutes": 24,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #75–#84 e corrigir falhas somente nas dez branches próprias; reportar M108 (#64). Work às 13:30: concluir auditorias de #76/#78/#79/#80/#81, validar #82–#84, verificar handoffs M61/M118 e então escolher integração/novo lote.",
+  "nextTask": "Auxiliar: monitorar CI das PRs #79–#84, corrigir falhas somente nas próprias branches e reportar M108 (#64). Work às 13:30: concluir #79–#83, validar #84, verificar handoffs M61/M118 e preparar integração apenas após CI e autorização.",
   "sharedHeadBeforeRelease": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "sharedHeadBeforeClaim": "bd1e9c7c6cffa36f337ab8059cdfec54bd44275f",
@@ -1973,8 +1977,8 @@
     ],
     "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-13T12:29:19-03:00",
-    "lastActivityAt": "2026-11-13T12:52:55-03:00",
-    "completedAt": "2026-11-13T12:52:55-03:00",
+    "lastActivityAt": "2026-11-13T12:54:18-03:00",
+    "completedAt": "2026-11-13T12:54:18-03:00",
     "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
     "pr": 76,
     "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
@@ -2141,7 +2145,7 @@
     },
     "nextWorkAt": "2026-11-13T13:30:00-03:00",
     "duration": {
-      "elapsedWallMinutes": 23,
+      "elapsedWallMinutes": 24,
       "effectiveMinutesMeasured": false,
       "minimum60MinutesConfirmed": false
     }
@@ -2750,7 +2754,7 @@
       "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
       "state": "completed; released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-13T12:29:19-03:00",
-      "endedAt": "2026-11-13T12:52:55-03:00",
+      "endedAt": "2026-11-13T12:54:18-03:00",
       "timezone": "America/Sao_Paulo",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -2977,7 +2981,7 @@
           "pr": 17,
           "commentId": 6857487009,
           "status": "awaiting-response",
-          "lastCommentId": 6857929825
+          "lastCommentId": 6857994614
         },
         "m118": {
           "pr": 74,
@@ -2989,9 +2993,9 @@
         "pr64": "one npm test failure; 7366 pass/1 fail; Negate Attack response priority expected response but remained main",
         "pr65to74": "all three workflows success",
         "pr75": "all workflows success; test and extended-soak green",
-        "pr76": "fast+milestone success; extended-soak success; test/auditorias in progress",
+        "pr76": "all workflows success; npm test, audits and extended-soak green",
         "pr77": "all workflows success; test and extended-soak green",
-        "pr78": "fast+milestone success; engine/soak in progress",
+        "pr78": "all workflows success; npm test, audits and extended-soak green",
         "pr79": "fast+milestone success; engine/soak in progress",
         "pr80": "corrected head db639952; fast+milestone success; engine in progress",
         "pr81": "fast+milestone success; engine in progress",
@@ -3008,7 +3012,7 @@
       "nextTask": "Auxiliar: monitorar CI das PRs #65–#74, corrigir apenas falhas de teste nas branches liberadas e reportar M108 (#64). Work na próxima janela: verificar resultados finais, obter handoff M61 e, se liberado, corrigir TS2367/TS2339; continuar expansão comportamental sem duplicações.",
       "nextWorkAt": "2026-11-13T13:30:00-03:00",
       "duration": {
-        "elapsedWallMinutes": 23,
+        "elapsedWallMinutes": 24,
         "effectiveMinutesMeasured": false,
         "minimum60MinutesConfirmed": false,
         "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
@@ -3103,10 +3107,10 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T122919-0300.json",
-  "lastParallelActivityAt": "2026-11-13T12:52:55-03:00",
-  "sharedHeadAfterCheckpoint": "11f84ac180f62b8e0707b23d7118cd6506cdb115",
-  "sharedHeadBeforeStateUpdate": "11f84ac180f62b8e0707b23d7118cd6506cdb115",
-  "endedAt": "2026-11-13T12:52:55-03:00",
+  "lastParallelActivityAt": "2026-11-13T12:54:18-03:00",
+  "sharedHeadAfterCheckpoint": "ec1970f0a3514bddee196c6eeddda1015c143670",
+  "sharedHeadBeforeStateUpdate": "ec1970f0a3514bddee196c6eeddda1015c143670",
+  "endedAt": "2026-11-13T12:54:18-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -3116,5 +3120,6 @@
       "src/tagDuel.ts",
       "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
     ]
-  }
+  },
+  "m120ValidationComment": 6858001163
 }
