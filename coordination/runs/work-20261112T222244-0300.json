@@ -1,0 +1,115 @@
+{
+  "id": "work-20261112T222244-0300",
+  "owner": "Work",
+  "priority": "Work",
+  "state": "active",
+  "startedAt": "2026-11-12T22:22:44-03:00",
+  "lastActivityAt": "2026-11-12T22:44:22-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBeforeClaim": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
+  "sharedHeadAfterClaim": null,
+  "scope": [
+    "M72 timeout/W.O.",
+    "M73 timeout SQLite/Discord",
+    "M74 seat authorization",
+    "M75 action receipt idempotency"
+  ],
+  "blocks": [
+    {
+      "id": "M72",
+      "branch": "feat/work-m72-tag-timeout-20261112",
+      "pr": 28,
+      "files": [
+        "tests/tagClassicTimeout.test.cjs"
+      ],
+      "result": "Cobertura W.O. em Main Phase para quatro assentos e resposta real com Magic Jammer; conserva 80 UIDs, mãos e estado serializado.",
+      "ci": "Card batch fast success; npm test success on final head; engine validation/soak still running."
+    },
+    {
+      "id": "M73",
+      "branch": "feat/work-m73-tag-timeout-persistence-20261112",
+      "pr": 29,
+      "files": [
+        "tests/tagTimeoutPersistence.test.cjs"
+      ],
+      "result": "SQLite timeout, liberação de locks, reentrada em sala, dueTags/markTagPublished, painéis Discord sem botões, late-click rejection, close/reopen; inclui resposta real.",
+      "ci": "Final head queued/running; previous head failed only W.O. regex, corrected."
+    },
+    {
+      "id": "M74",
+      "branch": "feat/work-m74-tag-seat-authorization-20261112",
+      "pr": 30,
+      "files": [
+        "tests/tagClassicSeatAuthorization.test.cjs"
+      ],
+      "result": "Somente assento físico ativo pode agir; rejeita parceiro/inimigo/estranho sem mutação ao longo de A1/B1/A2/B2.",
+      "ci": "Card batch fast success; engine validation/soak running."
+    },
+    {
+      "id": "M75",
+      "branch": "feat/work-m75-tag-action-receipts-20261112",
+      "pr": 31,
+      "files": [
+        "tests/tagActionReceipts.test.cjs"
+      ],
+      "result": "Receipts idempotentes, rollback de ação inválida, colisões, stale revision, SQLite reopen e Magic Jammer response com custo pago uma vez.",
+      "ci": "Card batch fast success; engine validation/soak running."
+    }
+  ],
+  "catalog": {
+    "shared": {
+      "cards": 969,
+      "certificates": 969,
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
+    },
+    "development": {
+      "cards": 1014,
+      "certificates": 1014,
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
+    },
+    "delta": {
+      "added": 45,
+      "removed": 0,
+      "changedCommonCards": 0,
+      "changedCommonEffects": 0,
+      "changedCommonMonsters": 0,
+      "changedCommonCertificates": 0
+    },
+    "newAdmissions": 0
+  },
+  "coordination": {
+    "previousRun": "work-20261112T212515-0300",
+    "ownM67Reservation": "released",
+    "M61": "handoff pending; no response; reserved files untouched",
+    "auxiliary": "available only on independent branch"
+  },
+  "prs": {
+    "openDraft": [
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "noMerge": true
+  },
+  "production": {
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscord": "not validated",
+    "hosting": "not authenticated",
+    "inventoryChanges": 0
+  },
+  "duration": {
+    "elapsedWallMinutes": 22,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "No idle CI time counted."
+  },
+  "nextTask": "Concluir CI M72–M75; aguardar transferência M61; depois corrigir compilação e implementar/certificar FLIP; reconciliar 45 cartas somente após validação e autorização.",
+  "nextWorkAt": "2026-11-13T03:30:00-03:00"
+}

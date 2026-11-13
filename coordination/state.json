@@ -1,21 +1,27 @@
 {
-  "runId": "work-20261112T212515-0300",
+  "runId": "work-20261112T222244-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
   "state": "active",
-  "startedAt": "2026-11-12T21:25:15-03:00",
-  "lastActivityAt": "2026-11-12T21:25:15-03:00",
-  "nextScheduledAt": "2026-11-12T22:30:00-03:00",
+  "startedAt": "2026-11-12T22:22:44-03:00",
+  "lastActivityAt": "2026-11-12T22:44:22-03:00",
+  "nextScheduledAt": "2026-11-13T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "feat/work-m67-tag-field-zone-20261112",
-    "tests/tagClassicFieldZone.test.cjs",
+    "feat/work-m72-tag-timeout-20261112",
+    "feat/work-m73-tag-timeout-persistence-20261112",
+    "feat/work-m74-tag-seat-authorization-20261112",
+    "feat/work-m75-tag-action-receipts-20261112",
+    "tests/tagClassicTimeout.test.cjs",
+    "tests/tagTimeoutPersistence.test.cjs",
+    "tests/tagClassicSeatAuthorization.test.cjs",
+    "tests/tagActionReceipts.test.cjs",
     "coordination/state.json",
     "coordination/runs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261112T163234-0300.json",
-  "previousRunId": "work-20261112T163234-0300",
+  "lastCheckpoint": "coordination/runs/work-20261112T222244-0300.json",
+  "previousRunId": "work-20261112T212515-0300",
   "previousReservation": {
     "branch": "feat/work-m60-20261111",
     "head": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
@@ -96,33 +102,143 @@
     },
     {
       "branch": "feat/work-m67-tag-field-zone-20261112",
-      "head": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "head": "3cf702b4da80ebc166941841756a0420ffc7431b",
       "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
       "scope": [
         "tests/tagClassicFieldZone.test.cjs"
       ],
-      "pr": null,
+      "pr": 23,
       "ci": {
-        "cardBatchFast": "pending",
-        "engineValidation": "pending"
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m68-tag-field-effect-20261112",
+      "head": "758ba2797a513a5a303df02e72ee6e9067f945ea",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFieldEffect.test.cjs"
+      ],
+      "pr": 24,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m69-tag-field-render-20261112",
+      "head": "7e5669076cbc25d875ba2f731dc80b0e58af9fc0",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFieldRender.test.cjs"
+      ],
+      "pr": 25,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m70-tag-field-persistence-20261112",
+      "head": "62d9fc2252fcb0e176cde8d8d82bade44776e83f",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFieldPersistence.test.cjs"
+      ],
+      "pr": 26,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m71-ci-branch-routing-20261112",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "base": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
+      "scope": [
+        ".github/workflows",
+        "tests/ciBranchRouting.test.cjs"
+      ],
+      "pr": 27,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m72-tag-timeout-20261112",
+      "head": "74d3634261455b52ceb1f62dd4a69d9b61f2b91f",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicTimeout.test.cjs"
+      ],
+      "pr": 28,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress",
+        "note": "Earlier head failed because response fixture had no counter-trap; corrected head includes set Magic Jammer."
+      }
+    },
+    {
+      "branch": "feat/work-m73-tag-timeout-persistence-20261112",
+      "head": "67353a5f68a54b40f688f2792c94ef38e7645496",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagTimeoutPersistence.test.cjs"
+      ],
+      "pr": 29,
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "engineValidation": "queued",
+        "note": "Previous head failed only a W.O. regex; corrected final head and expanded response-phase/panel/rejoin checks."
+      }
+    },
+    {
+      "branch": "feat/work-m74-tag-seat-authorization-20261112",
+      "head": "2b3d59d7f6902fc2446cd4e602d514bd92c6c0c9",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSeatAuthorization.test.cjs"
+      ],
+      "pr": 30,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m75-tag-action-receipts-20261112",
+      "head": "1ddf16b9b5e6f5fdbd1c3b7c08a2b1f1e5b42c63",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagActionReceipts.test.cjs"
+      ],
+      "pr": 31,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress"
       }
     }
   ],
   "handoffRequest": {
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "lastCommentId": 6833907240,
-    "reason": "Aguardar checkpoint/liberação antes de editar runtime reservado."
+    "lastCommentId": 6840541802,
+    "reason": "M61 continues to reserve src/duelEngineCurrent.ts, src/monsterEffects.ts, src/classicEffects.ts and integrity/turn-flow files; no transfer response was observed. Work did not edit these files."
   },
   "handoff": {
     "to": "auxiliary",
     "status": "available",
-    "at": "2026-11-12T21:25:15-03:00",
-    "baseBranch": "feat/work-m67-tag-field-zone-20261112",
-    "baseCommit": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
-    "scope": "Continuar somente em branch própria e independente. Não editar M61, M63/M64/M65/M66 nem M67; sem admissão, certificação, merge ou deploy.",
-    "nextTask": "Monitorar conclusão da CI da PR #22 e pesquisar candidatos em branch auxiliar própria, sem editar a branch M67.",
-    "nextWorkAt": "2026-11-12T22:30:00-03:00"
+    "at": "2026-11-12T22:44:22-03:00",
+    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+    "baseCommit": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "scope": "Monitorar CI das PRs #28–#31 e pesquisar somente em branch própria; não editar M61, M72, M73, M74 ou M75, não alterar inventários, sem merge ou deploy.",
+    "nextTask": "Acompanhar Engine Validation e extended soak das PRs #28–#31; relatar falhas sem alterar as branches do Work.",
+    "nextWorkAt": "2026-11-13T03:30:00-03:00"
   },
   "catalog": {
     "shared": {
@@ -218,6 +334,69 @@
       "state": "open",
       "draft": true,
       "ci": "success"
+    },
+    {
+      "number": 23,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M67"
+    },
+    {
+      "number": 24,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M68"
+    },
+    {
+      "number": 25,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M69"
+    },
+    {
+      "number": 26,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M70"
+    },
+    {
+      "number": 27,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M71"
+    },
+    {
+      "number": 28,
+      "state": "open",
+      "draft": true,
+      "ci": "fast-success; engine-validation-in-progress",
+      "branch": "M72"
+    },
+    {
+      "number": 29,
+      "state": "open",
+      "draft": true,
+      "ci": "fast-in-progress; engine-validation-queued",
+      "branch": "M73"
+    },
+    {
+      "number": 30,
+      "state": "open",
+      "draft": true,
+      "ci": "fast-success; engine-validation-in-progress",
+      "branch": "M74"
+    },
+    {
+      "number": 31,
+      "state": "open",
+      "draft": true,
+      "ci": "fast-success; engine-validation-in-progress",
+      "branch": "M75"
     }
   ],
   "ci": {
@@ -248,7 +427,8 @@
         "TS2367",
         "TS2339"
       ],
-      "file": "src/duelEngineCurrent.ts:410"
+      "file": "src/duelEngineCurrent.ts:410",
+      "handoff": "awaiting-response"
     },
     "pr22": {
       "cardBatchFast": "success",
@@ -258,11 +438,57 @@
       "npmTest": "success",
       "extendedSoak": "success",
       "typecheck": "success"
+    },
+    "pr23": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr24": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr25": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr26": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr27": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr28": {
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "engineRunId": 43345642988,
+      "extendedSoak": "success",
+      "npmTest": "success",
+      "note": "final head fixed response fixture; earlier revision failure retained in history"
+    },
+    "pr29": {
+      "cardBatchFast": "in_progress",
+      "engineValidation": "queued",
+      "engineRunId": 43346959708,
+      "previousFailure": "regex assertion corrected on final head"
+    },
+    "pr30": {
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "engineRunId": 43345489241,
+      "extendedSoak": "success"
+    },
+    "pr31": {
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "engineRunId": 43346641430,
+      "extendedSoak": "in_progress"
     }
   },
   "production": {
-    "merge": false,
-    "deploy": false,
+    "merge": "none",
+    "deploy": "none",
     "liveDiscordValidation": false,
     "workflowFiles": [
       "card-batch-admission.yml",
@@ -270,16 +496,27 @@
       "engine-validation.yml",
       "milestone1000.yml"
     ],
-    "hostingStatus": "Nenhum workflow de deploy está presente na branch compartilhada; o estado do host não pôde ser validado. Nenhum deploy foi executado."
+    "hostingStatus": "Nenhum workflow de deploy está presente na branch compartilhada; o estado do host não pôde ser validado. Nenhum deploy foi executado.",
+    "liveDiscord": "not validated",
+    "hosting": "authentication not available",
+    "deploymentsApi": "not accessible through connected GitHub action; no deploy workflow confirmed in inspected branch"
   },
   "duration": {
-    "elapsedWallMinutes": 6,
+    "elapsedWallMinutes": 22,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Janela de parede aproximada de 6 minutos; houve implementação e publicação de dois arquivos de teste, mas a duração efetiva não foi cronometrada e a meta de 60 minutos não foi comprovada. Espera de CI não foi contabilizada como trabalho."
+    "note": "Aproximadamente 22 minutos de janela de parede até o checkpoint inicial. Houve quatro blocos de testes independentes; a duração efetiva não foi cronometrada e espera de CI não foi contada como trabalho."
   },
-  "nextTask": "M67: testar a Zona de Campo compartilhada por equipe no 2v2, substituição do campo por parceiro, isolamento entre equipes, conservação de UID e ocultação de cartas baixadas; em paralelo aguardar handoff M61.",
-  "sharedHeadBeforeRelease": "86a99bfb5ca07df0816fd0e38d17bfa90f1f78d3",
+  "nextTask": "Concluir CI das PRs #28–#31 e corrigir falhas reais; em seguida, aguardar handoff M61 para resolver TS2367/TS2339 e implementar o ciclo FLIP. Não editar arquivos M61 sem liberação. Reconciliar os 45 certificados da revisão 72ba com a branch compartilhada somente após validação de runtime e autorização de merge.",
+  "sharedHeadBeforeRelease": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
   "priority": "Work",
-  "sharedHeadBeforeClaim": "65192bade7ca7abf4be0aa1bf2821b8be73edf59"
+  "sharedHeadBeforeClaim": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
+  "releasedOwnReservation": {
+    "branch": "feat/work-m67-tag-field-zone-20261112",
+    "head": "3cf702b4da80ebc166941841756a0420ffc7431b",
+    "pr": 23,
+    "owner": "Work",
+    "state": "completed-ci-success; released for this run",
+    "note": "M67 field-zone regression branch and CI completed; no third-party reservation was changed."
+  }
 }
