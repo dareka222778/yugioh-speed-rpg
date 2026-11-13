@@ -4,13 +4,15 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-13T07:30:19-03:00",
-  "lastActivityAt": "2026-11-13T07:30:19-03:00",
+  "lastActivityAt": "2026-11-13T07:42:12-03:00",
   "nextScheduledAt": "2026-11-13T08:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
     "feat/work-m101-jinzo-2v2-trap-lock-20261113",
     "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs",
+    "feat/work-m102-mysterious-puppeteer-tag-20261113",
+    "tests/tagClassicMysteriousPuppeteerOwnership.test.cjs",
     "coordination/state.json",
     "coordination/runs"
   ],
@@ -386,12 +388,35 @@
     },
     {
       "branch": "feat/work-m101-jinzo-2v2-trap-lock-20261113",
-      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "head": "37ed8c6a08ccd4465d48dae8f2e282618a54085c",
       "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 57,
       "scope": [
         "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs"
       ],
-      "state": "claimed"
+      "state": "active-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43411039239
+      }
+    },
+    {
+      "branch": "feat/work-m102-mysterious-puppeteer-tag-20261113",
+      "head": "9d23f59d181c12712197f45e95ce41adda60cf19",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 58,
+      "scope": [
+        "tests/tagClassicMysteriousPuppeteerOwnership.test.cjs"
+      ],
+      "state": "active-ci",
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "engineValidation": "in_progress",
+        "milestone1000": "success",
+        "engineRunId": 43411503880
+      }
     }
   ],
   "handoffRequest": {
@@ -635,6 +660,20 @@
       "draft": true,
       "branch": "M100",
       "ci": "fast:success; engine:in_progress; milestone:success"
+    },
+    {
+      "number": 57,
+      "state": "open",
+      "draft": true,
+      "branch": "M101",
+      "ci": "fast-success; milestone-success; engine-validation-in-progress"
+    },
+    {
+      "number": 58,
+      "state": "open",
+      "draft": true,
+      "branch": "M102",
+      "ci": "fast-in-progress; milestone-success; engine-validation-in-progress"
     }
   ],
   "ci": {
@@ -765,37 +804,59 @@
     },
     "pr53": {
       "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
-      "cardBatchFast": "in_progress",
-      "engineValidation": "in_progress",
-      "milestone1000": "in_progress",
-      "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "engineRunId": 43381271908,
+      "extendedSoak": "success",
+      "failure": "Troop Dragon test expected phase choice, actual finished at line 123",
+      "handoffToAuxiliary": true
     },
     "pr54": {
       "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
-      "cardBatchFast": "queued",
-      "engineValidation": "queued",
-      "milestone1000": "in_progress",
-      "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "engineRunId": 43381275604,
+      "extendedSoak": "success",
+      "failure": "Gravekeeper's Spy source expected face-up Defense after Flip Summon; rules require face-up Attack",
+      "handoffToAuxiliary": true
     },
     "pr55": {
       "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
+      "engineValidation": "success",
       "milestone1000": "success",
+      "npmTest": "passed",
       "fastRunId": 43381087783,
       "engineRunId": 43381087797,
-      "milestoneRunId": 43381087817,
-      "npmTest": "passed"
+      "milestoneRunId": 43381087817
     },
     "pr56": {
       "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
+      "engineValidation": "success",
       "milestone1000": "success",
+      "npmTest": "passed",
       "fastRunId": 43381093321,
       "engineRunId": 43381093219,
-      "milestoneRunId": 43381093250,
-      "npmTest": "passed"
+      "milestoneRunId": 43381093250
+    },
+    "pr57": {
+      "head": "37ed8c6a08ccd4465d48dae8f2e282618a54085c",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success",
+      "fastRunId": 43411039148,
+      "engineRunId": 43411039239,
+      "milestoneRunId": 43411039138
+    },
+    "pr58": {
+      "head": "9d23f59d181c12712197f45e95ce41adda60cf19",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "in_progress",
+      "milestone1000": "success",
+      "fastRunId": 43411503767,
+      "engineRunId": 43411503880,
+      "milestoneRunId": 43411503780
     }
   },
   "production": {
@@ -816,7 +877,7 @@
     "minimum60MinutesConfirmed": false,
     "note": "Bloco efetivo registrado em branches independentes; não foi possível confirmar 60 minutos de trabalho ativo. Nenhuma espera de CI foi contabilizada como desenvolvimento."
   },
-  "nextTask": "Work: concluir M101 (Jinzo vs Royal Decree, políticas distintas de ativação/negação em 2v2), executar CI completa e depois avançar para a próxima família independente; retomar M60 apenas após handoff explícito M61. Auxiliar: acompanhar PRs #48–#56 nas branches próprias já liberadas, sem tocar M61/M101.",
+  "nextTask": "Work: concluir CI M101/M102; corrigir apenas arquivos próprios se novos testes falharem; depois abrir próxima família independente. Auxiliar: acompanhar PRs #48–#56; corrigir falhas M97 (#53) e M98 (#54) apenas nas branches próprias; M61 permanece bloqueada até handoff explícito.",
   "sharedHeadBeforeRelease": "185755b72d688a576556ba004804e468326ef7c4",
   "priority": "P0 — M61 handoff pendente; M101 regressão de Jinzo/Royal Decree no 2v2",
   "sharedHeadBeforeClaim": "f061bf516c502310798a0c288b3c9d0afcec132e",
@@ -939,11 +1000,22 @@
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
-      "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs"
+      "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs",
+      "tests/tagClassicMysteriousPuppeteerOwnership.test.cjs"
     ],
     "state": "active",
     "startedAt": "2026-11-13T07:30:19-03:00",
-    "priority": "P0 — M61 handoff pendente; M101 regressão de Jinzo/Royal Decree no 2v2"
+    "priority": "P0 — M61 handoff pendente; M101 regressão de Jinzo/Royal Decree no 2v2",
+    "head": "37ed8c6a08ccd4465d48dae8f2e282618a54085c",
+    "parallelOwnWork": [
+      {
+        "branch": "feat/work-m102-mysterious-puppeteer-tag-20261113",
+        "head": "9d23f59d181c12712197f45e95ce41adda60cf19",
+        "pr": 58,
+        "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
+      }
+    ],
+    "lastActivityAt": "2026-11-13T07:42:12-03:00"
   },
   "nextWorkAt": "2026-11-13T08:30:00-03:00"
 }
