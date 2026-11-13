@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "lastActivityAt": "2026-11-13T12:44:38-03:00",
+  "lastActivityAt": "2026-11-13T12:50:21-03:00",
   "nextScheduledAt": "2026-11-13T13:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -675,9 +675,9 @@
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
         "cardBatchFast": "success",
-        "engineValidation": "in_progress",
+        "engineValidation": "success",
         "milestone1000": "success",
-        "extendedSoak": "in_progress",
+        "extendedSoak": "success",
         "fastRunId": 43453622984,
         "engineRunId": 43453622988,
         "milestoneRunId": 43453623323
@@ -696,7 +696,7 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": "in_progress",
+        "cardBatchFast": "success",
         "engineValidation": "in_progress",
         "milestone1000": "success",
         "extendedSoak": "in_progress",
@@ -720,7 +720,7 @@
         "cardBatchFast": "success",
         "engineValidation": "in_progress",
         "milestone1000": "success",
-        "extendedSoak": "in_progress",
+        "extendedSoak": "success",
         "fastRunId": 43454171031,
         "engineRunId": 43454171027,
         "milestoneRunId": 43454171352
@@ -743,7 +743,8 @@
         "milestone1000": "success",
         "fastRunId": 43455248576,
         "engineRunId": 43455248554,
-        "milestoneRunId": 43455248477
+        "milestoneRunId": 43455248477,
+        "extendedSoak": "in_progress"
       },
       "note": null
     },
@@ -760,16 +761,17 @@
       "ci": {
         "cardBatchFast": "success",
         "engineValidation": "in_progress",
-        "milestone1000": "queued",
+        "milestone1000": "success",
         "fastRunId": 43455398044,
         "engineRunId": 43455398090,
-        "milestoneRunId": 43455397956
+        "milestoneRunId": 43455397956,
+        "extendedSoak": "in_progress"
       },
       "note": null
     },
     {
       "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-      "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
       "pr": 80,
       "base": "feat/work-m71-ci-branch-routing-20261112",
       "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
@@ -782,7 +784,64 @@
         "engineValidation": "queued",
         "milestone1000": "queued"
       },
-      "note": null
+      "note": "Turn 0 inválido na primeira fixture; corrigido para turno 3 no HEAD db639952; nova CI queued."
+    },
+    {
+      "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+      "pr": 81,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "engineValidation": "queued",
+        "milestone1000": "queued",
+        "fastRunId": 43455960320,
+        "engineRunId": 43455960431,
+        "milestoneRunId": 43455960325
+      }
+    },
+    {
+      "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+      "pr": 82,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued",
+        "fastRunId": 43456380298,
+        "engineRunId": 43456380183,
+        "milestoneRunId": 43456380201
+      }
+    },
+    {
+      "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+      "pr": 83,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued",
+        "fastRunId": 43456462631,
+        "engineRunId": 43456462746,
+        "milestoneRunId": 43456462504
+      }
     }
   ],
   "handoffRequest": {
@@ -1176,14 +1235,15 @@
       "state": "open",
       "draft": true,
       "branch": "M119",
-      "ci": "fast-success; milestone-success; engine-validation-in-progress; extended-soak-in-progress"
+      "ci": "cardBatchFast:success; engineValidation:success; milestone1000:success; extendedSoak:success",
+      "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019"
     },
     {
       "number": 76,
       "state": "open",
       "draft": true,
       "branch": "M120",
-      "ci": "fast-in-progress; milestone-success; engine-validation-in-progress; extended-soak-in-progress",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success; extendedSoak:in_progress",
       "head": "8985d429228971e246cf782f6a09571ec2f2cdc8"
     },
     {
@@ -1191,28 +1251,56 @@
       "state": "open",
       "draft": true,
       "branch": "M121",
-      "ci": "fast-success; milestone-success; engine-validation-in-progress; extended-soak-in-progress"
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success; extendedSoak:success",
+      "head": "202ba319bd5c5c989a0a9819b222195763b104e7"
     },
     {
       "number": 78,
       "state": "open",
       "draft": true,
       "branch": "M122",
-      "ci": "fast-success; milestone-success; engine-validation-in-progress"
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success; extendedSoak:in_progress",
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c"
     },
     {
       "number": 79,
       "state": "open",
       "draft": true,
       "branch": "M123",
-      "ci": "fast-success; engine-validation-in-progress; milestone-queued"
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success; extendedSoak:in_progress",
+      "head": "c5436d3035bfde83c41aecd686aec0204addfd20"
     },
     {
       "number": 80,
       "state": "open",
       "draft": true,
       "branch": "M124",
-      "ci": "workflows-queued"
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued",
+      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883"
+    },
+    {
+      "number": 81,
+      "state": "open",
+      "draft": true,
+      "branch": "M125",
+      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+      "ci": "cardBatchFast:in_progress; engineValidation:queued; milestone1000:queued; fastRunId:43455960320; engineRunId:43455960431; milestoneRunId:43455960325"
+    },
+    {
+      "number": 82,
+      "state": "open",
+      "draft": true,
+      "branch": "M126",
+      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued; fastRunId:43456380298; engineRunId:43456380183; milestoneRunId:43456380201"
+    },
+    {
+      "number": 83,
+      "state": "open",
+      "draft": true,
+      "branch": "M127",
+      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued; fastRunId:43456462631; engineRunId:43456462746; milestoneRunId:43456462504"
     }
   ],
   "ci": {
@@ -1457,57 +1545,70 @@
     "pr75": {
       "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
       "cardBatchFast": "success",
-      "engineValidation": "in_progress",
+      "engineValidation": "success",
       "milestone1000": "success",
-      "extendedSoak": "in_progress",
-      "fastRunId": 43453622984,
-      "engineRunId": 43453622988,
-      "milestoneRunId": 43453623323
+      "extendedSoak": "success"
     },
     "pr76": {
       "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
-      "cardBatchFast": "in_progress",
+      "cardBatchFast": "success",
       "engineValidation": "in_progress",
       "milestone1000": "success",
-      "extendedSoak": "in_progress",
-      "fastRunId": 43454799650,
-      "engineRunId": 43454798944,
-      "milestoneRunId": 43454798835,
-      "previousHeadFailure": "fixture assertion used team 1 instead of activating team 0; corrected on current HEAD"
+      "extendedSoak": "in_progress"
     },
     "pr77": {
       "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
       "cardBatchFast": "success",
       "engineValidation": "in_progress",
       "milestone1000": "success",
-      "extendedSoak": "in_progress",
-      "fastRunId": 43454171031,
-      "engineRunId": 43454171027,
-      "milestoneRunId": 43454171352
+      "extendedSoak": "success"
     },
     "pr78": {
       "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
       "cardBatchFast": "success",
       "engineValidation": "in_progress",
       "milestone1000": "success",
-      "fastRunId": 43455248576,
-      "engineRunId": 43455248554,
-      "milestoneRunId": 43455248477
+      "extendedSoak": "in_progress"
     },
     "pr79": {
       "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
       "cardBatchFast": "success",
       "engineValidation": "in_progress",
-      "milestone1000": "queued",
-      "fastRunId": 43455398044,
-      "engineRunId": 43455398090,
-      "milestoneRunId": 43455397956
+      "milestone1000": "success",
+      "extendedSoak": "in_progress"
     },
     "pr80": {
-      "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
       "cardBatchFast": "queued",
       "engineValidation": "queued",
       "milestone1000": "queued"
+    },
+    "pr81": {
+      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "queued",
+      "milestone1000": "queued",
+      "fastRunId": 43455960320,
+      "engineRunId": 43455960431,
+      "milestoneRunId": 43455960325
+    },
+    "pr82": {
+      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued",
+      "fastRunId": 43456380298,
+      "engineRunId": 43456380183,
+      "milestoneRunId": 43456380201
+    },
+    "pr83": {
+      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued",
+      "fastRunId": 43456462631,
+      "engineRunId": 43456462746,
+      "milestoneRunId": 43456462504
     }
   },
   "production": {
@@ -1524,12 +1625,12 @@
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
   },
   "duration": {
-    "elapsedWallMinutes": 15,
+    "elapsedWallMinutes": 20,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #75–#80 e corrigir falhas somente nas seis branches próprias; reportar M108 (#64). Work às 13:30: conferir validações completas, handoffs M61/M118 e continuar em outra família 2v2 independente se as reservas permanecerem bloqueadas.",
+  "nextTask": "Auxiliar: monitorar CI das PRs #75–#83 e corrigir falhas somente nas nove branches próprias; reportar M108 (#64). Work às 13:30: conferir validações completas, handoffs M61/M118 e continuar em outra família 2v2 independente se as reservas permanecerem bloqueadas.",
   "sharedHeadBeforeRelease": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "sharedHeadBeforeClaim": "bd1e9c7c6cffa36f337ab8059cdfec54bd44275f",
@@ -1754,7 +1855,7 @@
       "pr": 75,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:44:38-03:00"
+      "releasedAt": "2026-11-13T12:50:21-03:00"
     },
     {
       "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
@@ -1762,7 +1863,7 @@
       "pr": 76,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:44:38-03:00"
+      "releasedAt": "2026-11-13T12:50:21-03:00"
     },
     {
       "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
@@ -1770,7 +1871,7 @@
       "pr": 77,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:44:38-03:00"
+      "releasedAt": "2026-11-13T12:50:21-03:00"
     },
     {
       "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
@@ -1778,7 +1879,7 @@
       "pr": 78,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:44:38-03:00"
+      "releasedAt": "2026-11-13T12:50:21-03:00"
     },
     {
       "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
@@ -1786,15 +1887,39 @@
       "pr": 79,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:44:38-03:00"
+      "releasedAt": "2026-11-13T12:50:21-03:00"
     },
     {
       "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-      "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
       "pr": 80,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:44:38-03:00"
+      "releasedAt": "2026-11-13T12:50:21-03:00"
+    },
+    {
+      "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+      "pr": 81,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:50:21-03:00"
+    },
+    {
+      "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+      "pr": 82,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:50:21-03:00"
+    },
+    {
+      "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+      "pr": 83,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:50:21-03:00"
     }
   ],
   "activeRun": {
@@ -1810,12 +1935,15 @@
       "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs",
       "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs",
       "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs",
-      "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+      "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs",
+      "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs",
+      "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs",
+      "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
     ],
     "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-13T12:29:19-03:00",
-    "lastActivityAt": "2026-11-13T12:44:38-03:00",
-    "completedAt": "2026-11-13T12:44:38-03:00",
+    "lastActivityAt": "2026-11-13T12:50:21-03:00",
+    "completedAt": "2026-11-13T12:50:21-03:00",
     "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
     "pr": 76,
     "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
@@ -1854,8 +1982,32 @@
       },
       {
         "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-        "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+        "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
         "pr": 80,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+        "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+        "pr": 81,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+        "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+        "pr": 82,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+        "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+        "pr": 83,
         "base": "feat/work-m71-ci-branch-routing-20261112",
         "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
         "state": "released-to-auxiliary-monitor-ci"
@@ -1906,19 +2058,43 @@
         },
         {
           "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-          "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+          "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
           "pr": 80,
           "scope": [
             "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
           ]
+        },
+        {
+          "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+          "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+          "pr": 81,
+          "scope": [
+            "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+          ]
+        },
+        {
+          "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+          "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+          "pr": 82,
+          "scope": [
+            "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+          ]
+        },
+        {
+          "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+          "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+          "pr": 83,
+          "scope": [
+            "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
+          ]
         }
       ],
-      "allowed": "monitorar CI e corrigir falhas somente nas seis branches próprias",
+      "allowed": "monitorar CI e corrigir falhas somente nas nove branches próprias",
       "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61/M118; não alterar bancos ou inventários"
     },
     "nextWorkAt": "2026-11-13T13:30:00-03:00",
     "duration": {
-      "elapsedWallMinutes": 15,
+      "elapsedWallMinutes": 20,
       "effectiveMinutesMeasured": false,
       "minimum60MinutesConfirmed": false
     }
@@ -2527,7 +2703,7 @@
       "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
       "state": "completed; released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-13T12:29:19-03:00",
-      "endedAt": "2026-11-13T12:44:38-03:00",
+      "endedAt": "2026-11-13T12:50:21-03:00",
       "timezone": "America/Sao_Paulo",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -2593,12 +2769,45 @@
         },
         {
           "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-          "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+          "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
           "pr": 80,
           "base": "feat/work-m71-ci-branch-routing-20261112",
           "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
           "scope": [
             "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+          "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+          "pr": 81,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+          "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+          "pr": 82,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+          "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+          "pr": 83,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
           ],
           "state": "released-to-auxiliary-monitor-ci"
         }
@@ -2653,10 +2862,37 @@
         {
           "m": "M124",
           "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-          "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+          "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
           "pr": 80,
           "files": [
             "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+          ]
+        },
+        {
+          "m": "M125",
+          "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+          "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+          "pr": 81,
+          "files": [
+            "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+          ]
+        },
+        {
+          "m": "M126",
+          "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+          "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+          "pr": 82,
+          "files": [
+            "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+          ]
+        },
+        {
+          "m": "M127",
+          "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+          "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+          "pr": 83,
+          "files": [
+            "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
           ]
         }
       ],
@@ -2684,12 +2920,15 @@
       "validation": {
         "pr64": "one npm test failure; 7366 pass/1 fail; Negate Attack response priority expected response but remained main",
         "pr65to74": "all three workflows success",
-        "pr75": "fast+milestone success; engine/soak in progress",
+        "pr75": "all three workflows success; test and extended-soak green",
         "pr76": "corrected head 8985d429; fast+milestone success; engine/soak in progress",
-        "pr77": "fast+milestone success; engine/soak in progress",
-        "pr78": "fast+milestone success; engine in progress",
-        "pr79": "fast success; engine in progress; milestone queued",
-        "pr80": "all workflows queued"
+        "pr77": "fast+milestone success; extended-soak success; engine in progress",
+        "pr78": "fast+milestone success; engine/soak in progress",
+        "pr79": "fast+milestone success; engine/soak in progress",
+        "pr80": "initial test fixture turn=0 failed; corrected head db639952; all workflows queued",
+        "pr81": "fast in progress; engine/milestone queued",
+        "pr82": "all workflows queued",
+        "pr83": "all workflows queued"
       },
       "deployment": {
         "merge": "none",
@@ -2700,7 +2939,7 @@
       "nextTask": "Auxiliar: monitorar CI das PRs #65–#74, corrigir apenas falhas de teste nas branches liberadas e reportar M108 (#64). Work na próxima janela: verificar resultados finais, obter handoff M61 e, se liberado, corrigir TS2367/TS2339; continuar expansão comportamental sem duplicações.",
       "nextWorkAt": "2026-11-13T13:30:00-03:00",
       "duration": {
-        "elapsedWallMinutes": 15,
+        "elapsedWallMinutes": 20,
         "effectiveMinutesMeasured": false,
         "minimum60MinutesConfirmed": false,
         "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
@@ -2750,10 +2989,34 @@
           },
           {
             "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-            "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+            "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
             "pr": 80,
             "scope": [
               "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+            "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+            "pr": 81,
+            "scope": [
+              "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+            "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+            "pr": 82,
+            "scope": [
+              "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+            "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+            "pr": 83,
+            "scope": [
+              "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
             ]
           }
         ],
@@ -2763,10 +3026,10 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T122919-0300.json",
-  "lastParallelActivityAt": "2026-11-13T12:44:38-03:00",
-  "sharedHeadAfterCheckpoint": "53178c3a720dba1a09212a71dc1f3e05f8c42409",
-  "sharedHeadBeforeStateUpdate": "53178c3a720dba1a09212a71dc1f3e05f8c42409",
-  "endedAt": "2026-11-13T12:44:38-03:00",
+  "lastParallelActivityAt": "2026-11-13T12:50:21-03:00",
+  "sharedHeadAfterCheckpoint": "9931124c93360cd325fcfa744bac6df5c58a082a",
+  "sharedHeadBeforeStateUpdate": "9931124c93360cd325fcfa744bac6df5c58a082a",
+  "endedAt": "2026-11-13T12:50:21-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
