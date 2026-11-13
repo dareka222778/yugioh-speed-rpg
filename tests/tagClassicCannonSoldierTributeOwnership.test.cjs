@@ -1,5 +1,6 @@
 'use strict';
 const {test}=require('node:test');
+const fs=require('node:fs');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
@@ -49,6 +50,7 @@ function assertConserved(state,before){
 }
 
 test('Cannon Soldier may Tribute its inactive teammate monster, preserves its physical UID and burns shared opposing LP',()=>{
+ try {
  const players=[
   {id:member(0),name:'M90 Seat 0',cards:deck([CANNON_SOLDIER])},
   {id:member(1),name:'M90 Seat 1',cards:deck()},
@@ -81,4 +83,5 @@ test('Cannon Soldier may Tribute its inactive teammate monster, preserves its ph
  assert.equal(state.core.players[1].lp,3500,'the opposing shared LP must lose exactly 500');
  assert.doesNotThrow(()=>tag.assertTagDuel(state));
  assertConserved(state,before);
+ } catch(error) { const detail='[M90 Cannon Soldier diagnostic] '+(error?.stack??String(error))+'\\n';try{fs.mkdirSync('artifacts',{recursive:true});fs.appendFileSync('artifacts/engine-acceptance-failure.tap',detail);}catch{}process.stderr.write(detail);throw error; }
 });
