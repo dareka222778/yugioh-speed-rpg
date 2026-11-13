@@ -16,7 +16,9 @@
     "tests/tagClassicBattleBanishVictimOwnership.test.cjs",
     "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs",
     "coordination/state.json",
-    "coordination/runs"
+    "coordination/runs",
+    "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+    "tests/tagClassicPyramidTurtleOwnership.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261113T025833-0300.json",
   "previousRunId": "work-20261113T023036-0300",
@@ -264,6 +266,14 @@
         "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs"
       ],
       "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicPyramidTurtleOwnership.test.cjs"
+      ],
+      "state": "claimed"
     }
   ],
   "handoffRequest": {
@@ -444,6 +454,27 @@
       "draft": true,
       "branch": "M87",
       "ci": "success"
+    },
+    {
+      "number": 48,
+      "state": "open",
+      "draft": true,
+      "branch": "M92",
+      "ci": "card-batch-fast-success; engine-validation-in-progress"
+    },
+    {
+      "number": 49,
+      "state": "open",
+      "draft": true,
+      "branch": "M93",
+      "ci": "card-batch-fast-success; engine-validation-in-progress"
+    },
+    {
+      "number": 50,
+      "state": "open",
+      "draft": true,
+      "branch": "M94",
+      "ci": "engine-validation-in-progress"
     }
   ],
   "ci": {
@@ -539,6 +570,30 @@
       "milestone1000": "success",
       "milestoneRunId": 43373478091,
       "npmTest": "success"
+    },
+    "pr48": {
+      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
+      "cardBatchFast": "success",
+      "fastRunId": 43376852634,
+      "engineValidation": "in_progress",
+      "engineRunId": 43376852578,
+      "milestone1000": "in_progress",
+      "milestoneRunId": 43376852685
+    },
+    "pr49": {
+      "head": "fee8b8d80de44366d93e350ad8f9785e71a9f677",
+      "cardBatchFast": "success",
+      "fastRunId": 43376857992,
+      "engineValidation": "in_progress",
+      "engineRunId": 43376858071,
+      "milestone1000": "in_progress",
+      "milestoneRunId": 43376857986
+    },
+    "pr50": {
+      "head": "b566abedf4a1d661c56217e784c46df033efe028",
+      "engineValidation": "in_progress",
+      "engineRunId": 43376863194,
+      "cardBatchFast": "not-visible"
     }
   },
   "production": {
@@ -559,7 +614,7 @@
     "minimum60MinutesConfirmed": false,
     "note": "Execução retomada às 02:58:33 BRT; duração efetiva será registrada no checkpoint final, sem contar espera de CI."
   },
-  "nextTask": "Implementar M92 (D.D. Assailant), M93 (banimento de vítima por D.D. Crazy Beast/Lesser Fiend) e M94 (destruição por identidade/atributo) em branches próprias; rodar CI integral e então reconsultar HEAD/coordenação. M61 segue pendente.",
+  "nextTask": "M92–M94 publicados; CI em andamento. Prosseguir com M95 Pyramid Turtle (recrutamento Zombie por DEF máxima) em branch isolada, depois revisar os resultados e escolher a próxima família sem tocar em M61/M88–M91.",
   "sharedHeadBeforeRelease": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
   "priority": "Work",
   "sharedHeadBeforeClaim": "9ef10595193fed91af747f8c42b3cb9a726a8848",

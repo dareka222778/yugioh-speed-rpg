@@ -44,6 +44,14 @@
         "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs"
       ],
       "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicPyramidTurtleOwnership.test.cjs"
+      ],
+      "state": "claimed"
     }
   ],
   "handoff": {
@@ -72,7 +80,29 @@
       "delta": 45
     }
   },
-  "changes": [],
+  "changes": [
+    {
+      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
+      "pr": 48,
+      "file": "tests/tagClassicDDAssailantOwnership.test.cjs",
+      "detail": "Atacante e defensor de D.D. Assailant em 2v2; todos os assentos físicos; cenário negativo quando sobrevive."
+    },
+    {
+      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "head": "fee8b8d80de44366d93e350ad8f9785e71a9f677",
+      "pr": 49,
+      "file": "tests/tagClassicBattleBanishVictimOwnership.test.cjs",
+      "detail": "D.D. Crazy Beast e Lesser Fiend; vítima banida em vez de Cemitério; sobrevivência negativa."
+    },
+    {
+      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "head": "b566abedf4a1d661c56217e784c46df033efe028",
+      "pr": 50,
+      "file": "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs",
+      "detail": "Ryu Kokki, Getsu Fuhma e Karakuri Spider; filtros de Raça/Atributo com positivos e negativos."
+    }
+  ],
   "production": {
     "merge": false,
     "deploy": false,
@@ -83,6 +113,29 @@
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false
   },
-  "nextTask": "Implementar M92 (D.D. Assailant), M93 (banimento de vítima por D.D. Crazy Beast/Lesser Fiend) e M94 (destruição por identidade/atributo) em branches próprias; rodar CI integral e então reconsultar HEAD/coordenação. M61 segue pendente.",
-  "nextWorkAt": "2026-11-13T03:30:00-03:00"
+  "nextTask": "M92–M94 publicados; CI em andamento. Prosseguir com M95 Pyramid Turtle (recrutamento Zombie por DEF máxima) em branch isolada, depois revisar os resultados e escolher a próxima família sem tocar em M61/M88–M91.",
+  "nextWorkAt": "2026-11-13T03:30:00-03:00",
+  "ci": {
+    "pr48": {
+      "cardBatchFast": "success",
+      "runId": 43376852634,
+      "engineValidation": "in_progress",
+      "engineRunId": 43376852578,
+      "milestone1000": "in_progress",
+      "milestoneRunId": 43376852685
+    },
+    "pr49": {
+      "cardBatchFast": "success",
+      "runId": 43376857992,
+      "engineValidation": "in_progress",
+      "engineRunId": 43376858071,
+      "milestone1000": "in_progress",
+      "milestoneRunId": 43376857986
+    },
+    "pr50": {
+      "cardBatchFast": "not-visible",
+      "engineValidation": "in_progress",
+      "engineRunId": 43376863194
+    }
+  }
 }
