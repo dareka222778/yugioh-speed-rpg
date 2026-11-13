@@ -112,3 +112,37 @@ test('Card Destruction discards and redraws all four physical 2v2 hands independ
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
   assertConserved(state,before);
 });
+
+
+test('Card Destruction awards the duel to the opposing team when one physical teammate cannot redraw',()=>{
+  const {state:initial,spell,handsBefore}=setup();
+  const exhaustedSeat=3;
+  const exhausted=holder(initial,exhaustedSeat);
+  const stranded=exhausted.deck.splice(0);
+  initial.core.players[1].grave.push(...stranded);
+  assert.equal(exhausted.deck.length,0,'the inactive physical seat 3 Deck is intentionally exhausted');
+  assert.doesNotThrow(()=>tag.assertTagDuel(initial));
+  const before=inventorySnapshot(initial);
+
+  const action=tag.tagActions(initial,member(0)).find(candidate=>
+    candidate.kind==='spell'&&candidate.card===spell.uid
+  );
+  assert.ok(action,'the active physical seat must still be able to activate Card Destruction');
+  const state=tag.stepTagDuel(initial,member(0),action);
+  assert.equal(state.core.phase,'finished','a failed redraw ends the duel immediately');
+  assert.equal(state.core.winner,state.core.players[0].id,
+    'the team whose physical seat 3 could not redraw must lose, even though seat 1 had enough cards');
+  assert.equal(tag.tagMemberHand(state,member(3)).length,0,
+    'the exhausted physical seat must not receive cards from its teammate Deck');
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===spell.uid),
+    'Card Destruction remains in the activating team Graveyard');
+  for(const seat of [0,1,2,3]){
+    const team=seat%2;
+    for(const uid of handsBefore.get(seat)){
+      assert.ok(state.core.players[team].grave.some(card=>card.uid===uid),
+        'the discarded hand remains in the correct shared Graveyard: '+uid);
+    }
+  }
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  assertConserved(state,before);
+});
