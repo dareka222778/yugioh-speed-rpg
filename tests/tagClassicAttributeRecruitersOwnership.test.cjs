@@ -3,7 +3,8 @@ const {test}=require('node:test');
 const fs=require('node:fs');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
-const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
+const {getPlayableCard}=require('../dist/effectRegistry');
+const {getMonsterEffect}=require('../dist/monsterEffects');
 
 const KURIBOH='40640057';
 const sources=[
