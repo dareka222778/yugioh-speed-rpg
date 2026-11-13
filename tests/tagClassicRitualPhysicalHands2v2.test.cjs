@@ -15,13 +15,14 @@ assert.equal(getEffect(BLACK_LUSTER_RITUAL)?.kind,'ritualSummon');
 assert.equal(getEffect(BLACK_LUSTER_RITUAL)?.ritual.monsterId,BLACK_LUSTER_SOLDIER);
 assert.equal(getEffect(BLACK_LUSTER_RITUAL)?.ritual.minimumLevel,8);
 
-const levelFour=[...new Set(tag.tagNormalCardIds)]
+const normal=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
-  .filter(entry=>entry.card&&entry.card.kind==='monster'&&entry.card.level===4&&Number.isInteger(entry.card.atk));
+  .filter(entry=>entry.card&&entry.card.kind==='monster'&&Number.isInteger(entry.card.atk));
+const levelFour=normal.filter(entry=>entry.card.level===4);
 assert.ok(levelFour.length>=2,'the fixture needs two certified Level 4 Normal Monsters');
 const [materialA,materialB]=levelFour;
 assert.notEqual(materialA.id,materialB.id);
-const normalIds=[...new Set([materialA.id,materialB.id,...levelFour.map(entry=>entry.id)])].slice(0,7);
+const normalIds=[...new Set([materialA.id,materialB.id,...normal.map(entry=>entry.id)])].slice(0,7);
 assert.equal(normalIds.length,7);
 
 function member(seat){return 'm154-seat-'+seat;}
