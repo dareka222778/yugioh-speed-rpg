@@ -9,7 +9,8 @@ const KURIBOH='40640057';
 const sangan=getPlayableCard(SANGAN);
 assert.ok(sangan&&sangan.kind==='monster');
 assert.equal(getMonsterEffect(SANGAN)?.trigger,'onSentToGrave');
-assert.deepEqual(getMonsterEffect(SANGAN)?.operation,{kind:'search',stat:'atk',maximum:1500,oncePerTurn:true});
+assert.equal(getMonsterEffect(SANGAN)?.oncePerTurn,true);
+assert.deepEqual(getMonsterEffect(SANGAN)?.operation,{kind:'search',stat:'atk',maximum:1500});
 assert.ok(getPlayableCard(KURIBOH)?.kind==='monster');
 
 const normalCards=[...new Set(tag.tagNormalCardIds)]
