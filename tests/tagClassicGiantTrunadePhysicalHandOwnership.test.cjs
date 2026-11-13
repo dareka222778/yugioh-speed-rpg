@@ -132,7 +132,8 @@ test('Giant Trunade returns every team backrow card to its original physical own
   assert.equal(state.active[0],2);
   assert.ok(tag.tagMemberHand(state,member(2)).some(card=>card.uid===torrential.uid),
     'the returned card follows physical seat 2 when that partner becomes active');
-  assert.ok(tag.tagMemberHand(state,member(0)).every(card=>!expectedReturned.has(0)||card.uid!==expectedReturned.get(0)),
+  const returnedUids=new Set([trapHole.uid,torrential.uid,bottomless.uid]);
+  assert.ok(tag.tagMemberHand(state,member(0)).every(card=>!returnedUids.has(card.uid)),
     'seat 0 reserve hand does not acquire partner cards during rotation');
   assert.ok(tag.tagMemberHand(state,member(1)).some(card=>card.uid===trapHole.uid));
   assert.ok(tag.tagMemberHand(state,member(3)).some(card=>card.uid===bottomless.uid));
