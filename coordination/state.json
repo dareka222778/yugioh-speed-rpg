@@ -1,43 +1,45 @@
 {
-  "runId": "work-20261113T134424-0300",
+  "runId": "work-20261113T175911-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "active",
-  "startedAt": "2026-11-13T13:44:24-03:00",
-  "lastActivityAt": "2026-11-13T13:44:24-03:00",
-  "nextScheduledAt": "2026-11-13T17:30:00-03:00",
+  "state": "completed; released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-13T17:59:11-03:00",
+  "lastActivityAt": "2026-11-13T18:05:29-03:00",
+  "nextScheduledAt": "2026-11-13T22:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagClassicPolymerizationSharedFieldFusion.test.cjs",
+    "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs",
+    "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs",
     "coordination/state.json",
-    "coordination/runs/work-20261113T134424-0300.json"
+    "coordination/runs/work-20261113T175911-0300.json"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261113T134424-0300.json",
-  "previousRunId": "work-20261113T134132-0300",
+  "lastCheckpoint": "coordination/runs/work-20261113T175911-0300.json",
+  "previousRunId": "work-20261113T134424-0300",
   "previousReservation": {
-    "id": "work-20261113T134132-0300",
+    "id": "work-20261113T134424-0300",
     "owner": "Work",
-    "branch": "feat/work-m150-mst-destroys-equip-field-effects-2v2-20261113",
+    "branch": "feat/work-m151-polymerization-shared-field-fusion-2v2-20261113",
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
-      "tests/tagClassicMSTContinuousSourceRemoval2v2.test.cjs"
+      "tests/tagClassicPolymerizationSharedFieldFusion.test.cjs"
     ],
-    "state": "released-to-auxiliary-monitor-ci",
-    "startedAt": "2026-11-13T13:41:32-03:00",
-    "lastActivityAt": "2026-11-13T13:44:24-03:00",
-    "completedAt": "2026-11-13T13:44:24-03:00",
-    "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
-    "pr": 106,
-    "priority": "P1 — verificar que MST destrói Equip/Field Spells contínuas no 2v2, remove os modificadores imediatamente e preserva o UID físico do parceiro; sem tocar M61/M118."
+    "state": "handoff-pending-no-response; do-not-edit",
+    "startedAt": "2026-11-13T13:44:24-03:00",
+    "lastActivityAt": "2026-11-13T18:05:29-03:00",
+    "head": "caed37c93b07c12d7b166f12acf0c2b8135901c4",
+    "pr": 107,
+    "priority": "P1 — certificar por comportamento a Fusão 2v2: Polymerization usa monstros do campo compartilhado, preserva UIDs físicos e não acessa a mão privada do parceiro inativo.",
+    "handoffCommentId": 6864266964,
+    "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
   "activeParallelWork": {
     "pr": 17,
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6859057163,
+    "lastRequestComment": 6864486583,
     "noResponse": true,
     "blockedFiles": [
       "src/monsterEffects.ts",
@@ -46,7 +48,7 @@
       "src/duelIntegrity.ts",
       "scripts/mass-certification21.cjs"
     ],
-    "lastRequestAt": "2026-11-13T13:40:08-03:00"
+    "lastRequestAt": "2026-11-13T17:44:55-03:00"
   },
   "workBranches": [
     {
@@ -1008,6 +1010,46 @@
         "engineValidation": "queued",
         "milestone1000": "queued"
       }
+    },
+    {
+      "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "pr": 112,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43506972040,
+        "engineValidation": "in_progress",
+        "engineRunId": 43506972175,
+        "extendedSoak": "in_progress",
+        "milestone1000": "success",
+        "milestoneRunId": 43506972102
+      }
+    },
+    {
+      "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+      "pr": 113,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43507071750,
+        "engineValidation": "in_progress",
+        "engineRunId": 43507071767,
+        "extendedSoak": "in_progress",
+        "milestone1000": "success",
+        "milestoneRunId": 43507071960
+      }
     }
   ],
   "handoffRequest": {
@@ -1021,10 +1063,10 @@
   "handoff": {
     "to": "auxiliary",
     "status": "independent-work-continues",
-    "at": "2026-11-13T13:44:24-03:00",
-    "scope": "Auxiliar continua nas branches já liberadas M146–M150 e nas próprias M140–M145; Work reserva somente M151. M61/PR17 e M118/PR74 seguem aguardando handoff explícito.",
-    "nextTask": "Auxiliar: monitorar/corrigir apenas os arquivos de teste já liberados M146–M150 e branches próprias; não tocar M151 nem M61/M118.",
-    "nextWorkAt": "2026-11-13T17:30:00-03:00"
+    "at": "2026-11-13T18:05:29-03:00",
+    "scope": "Auxiliar monitora apenas M156/PR112 e M157/PR113; M151/PR107 continua handoff pendente; M61/PR17 e M118/PR74 continuam aguardando transferência explícita.",
+    "nextTask": "Auxiliar: monitorar CI das PRs #112 e #113; corrigir apenas os respectivos testes nas branches M156/M157 se necessário. Work: na próxima janela, revalidar CI, solicitar handoff M61/M118/M151 e, com liberação explícita, corrigir o filtro de alvos em trapActions e a falha do ciclo de Fusão.",
+    "nextWorkAt": "2026-11-13T22:30:00-03:00"
   },
   "catalog": {
     "shared": {
@@ -1559,6 +1601,30 @@
       "branch": "feat/work-m150-mst-destroys-equip-field-effects-2v2-20261113",
       "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
       "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 107,
+      "state": "open",
+      "draft": true,
+      "branch": "M151",
+      "head": "caed37c93b07c12d7b166f12acf0c2b8135901c4",
+      "ci": "cardBatchFast:success; engineValidation:failure; milestone1000:success; extendedSoak:success; npmTest:7368/1"
+    },
+    {
+      "number": 112,
+      "state": "open",
+      "draft": true,
+      "branch": "M156",
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 113,
+      "state": "open",
+      "draft": true,
+      "branch": "M157",
+      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
     }
   ],
   "ci": {
@@ -1945,6 +2011,36 @@
       "cardBatchFast": "queued",
       "engineValidation": "queued",
       "milestone1000": "queued"
+    },
+    "pr107": {
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "extendedSoak": "success",
+      "npmTest": {
+        "passed": 7368,
+        "failed": 1
+      },
+      "failure": "tests/tagClassicFusionSubstituteSharedField2v2.test.cjs: deploy(state,0,BEASTKING) embora BEASTKING esteja no assento 2.",
+      "runId": 43466746420
+    },
+    "pr112": {
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress",
+      "milestone1000": "success",
+      "fastRunId": 43506972040,
+      "engineRunId": 43506972175,
+      "milestoneRunId": 43506972102
+    },
+    "pr113": {
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress",
+      "milestone1000": "success",
+      "fastRunId": 43507071750,
+      "engineRunId": 43507071767,
+      "milestoneRunId": 43507071960
     }
   },
   "production": {
@@ -1961,16 +2057,16 @@
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
   },
   "duration": {
-    "elapsedWallMinutes": 3,
+    "elapsedWallMinutes": 6,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Janela observada de 2m52s (aprox. 3 minutos). Não é possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
+    "note": "Janela observada inferior a 60 minutos; o trabalho de implementação foi realizado, mas não há medição confiável de 60 minutos efetivos. Espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: acompanhar PR #106 e continuar monitorando PRs #102–#105 nas branches próprias. Work na próxima janela: revalidar CI, handoffs M61/M118 e continuar a próxima família de efeitos 2v2.",
-  "sharedHeadBeforeRelease": "b4e49fe199a9b4bf46da6a7b28167904bec834da",
-  "priority": "P1 — certificar por comportamento a Fusão 2v2: Polymerization usa monstros do campo compartilhado, preserva UIDs físicos e não acessa a mão privada do parceiro inativo.",
-  "sharedHeadBeforeClaim": "bc307951fff65a3d4645ef3e8d26952ed379af32",
-  "releasedOwnReservation": false,
+  "nextTask": "Auxiliar: monitorar CI das PRs #112 e #113; corrigir apenas os respectivos testes nas branches M156/M157 se necessário. Work: na próxima janela, revalidar CI, solicitar handoff M61/M118/M151 e, com liberação explícita, corrigir o filtro de alvos em trapActions e a falha do ciclo de Fusão.",
+  "sharedHeadBeforeRelease": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
+  "priority": "P1 — ampliar regressões comportamentais 2v2 de armadilhas de resposta e encadeamento: Sakuretsu Armor destrói somente o atacante exato; Book of Moon protege o atacante físico do parceiro sem vazar mãos nem UIDs.",
+  "sharedHeadBeforeClaim": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
+  "releasedOwnReservation": true,
   "parallelWorkObserved": {
     "at": "2026-11-13T13:41:32-03:00",
     "note": "M140–M145 observadas em branches próprias; Work não alterou nem liberou essas reservas.",
@@ -2048,7 +2144,7 @@
     ]
   },
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedHeadAfterClaim": "22e39b9c8ca0fadb596748a71eeb50d05b6ea361",
+  "sharedHeadAfterClaim": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
   "releasedOwnReservations": [
     {
       "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
@@ -2296,26 +2392,52 @@
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
       "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "pr": 112,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T18:05:29-03:00"
+    },
+    {
+      "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+      "pr": 113,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T18:05:29-03:00"
     }
   ],
   "activeRun": {
-    "id": "work-20261113T134424-0300",
+    "id": "work-20261113T175911-0300",
     "owner": "Work",
-    "branch": "feat/work-m151-polymerization-shared-field-fusion-2v2-20261113",
+    "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
-      "tests/tagClassicPolymerizationSharedFieldFusion.test.cjs"
+      "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
     ],
-    "state": "active",
-    "startedAt": "2026-11-13T13:44:24-03:00",
-    "lastActivityAt": "2026-11-13T13:44:24-03:00",
-    "completedAt": null,
-    "head": null,
-    "pr": null,
-    "priority": "P1 — certificar por comportamento a Fusão 2v2: Polymerization usa monstros do campo compartilhado, preserva UIDs físicos e não acessa a mão privada do parceiro inativo."
+    "state": "completed; released-to-auxiliary-monitor-ci",
+    "startedAt": "2026-11-13T17:59:11-03:00",
+    "lastActivityAt": "2026-11-13T18:05:29-03:00",
+    "completedAt": "2026-11-13T18:05:29-03:00",
+    "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+    "pr": 112,
+    "priority": "P1 — ampliar regressões comportamentais 2v2 de armadilhas de resposta e encadeamento: Sakuretsu Armor destrói somente o atacante exato; Book of Moon protege o atacante físico do parceiro sem vazar mãos nem UIDs.",
+    "additionalBranches": [
+      {
+        "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+        "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+        "pr": 113,
+        "reservedFiles": [
+          "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
+        ]
+      }
+    ]
   },
-  "nextWorkAt": "2026-11-13T17:30:00-03:00",
+  "nextWorkAt": "2026-11-13T22:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -3403,13 +3525,49 @@
           "milestone1000": "queued"
         }
       }
+    },
+    {
+      "runId": "work-20261113T134424-0300",
+      "owner": "Work",
+      "state": "handoff-pending-no-response",
+      "branch": "feat/work-m151-polymerization-shared-field-fusion-2v2-20261113",
+      "head": "caed37c93b07c12d7b166f12acf0c2b8135901c4",
+      "pr": 107,
+      "reservedFiles": [
+        "tests/tagClassicPolymerizationSharedFieldFusion.test.cjs"
+      ],
+      "priority": "P1 — certificar por comportamento a Fusão 2v2: Polymerization usa monstros do campo compartilhado, preserva UIDs físicos e não acessa a mão privada do parceiro inativo.",
+      "failure": "Fusion Substitute fixture deploys BEASTKING from physical seat 0 although only seat 2 owns it."
+    },
+    {
+      "runId": "work-20261113T175911-0300",
+      "owner": "Work",
+      "state": "completed; released-to-auxiliary-monitor-ci",
+      "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "pr": 112,
+      "additionalBranches": [
+        {
+          "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+          "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+          "pr": 113
+        }
+      ],
+      "startedAt": "2026-11-13T17:59:11-03:00",
+      "endedAt": "2026-11-13T18:05:29-03:00",
+      "duration": {
+        "elapsedWallMinutes": 6,
+        "effectiveMinutesMeasured": false,
+        "minimum60MinutesConfirmed": false,
+        "note": "Janela observada inferior a 60 minutos; o trabalho de implementação foi realizado, mas não há medição confiável de 60 minutos efetivos. Espera de CI não foi contabilizada."
+      }
     }
   ],
-  "lastParallelCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
-  "lastParallelActivityAt": "2026-11-13T13:09:11-03:00",
+  "lastParallelCheckpoint": "coordination/runs/work-20261113T175911-0300.json",
+  "lastParallelActivityAt": "2026-11-13T18:05:29-03:00",
   "sharedHeadAfterCheckpoint": "b661f92dcc2a9821cced179ef7339dfe8d173c3b",
-  "sharedHeadBeforeStateUpdate": "bc307951fff65a3d4645ef3e8d26952ed379af32",
-  "endedAt": "2026-11-13T13:44:24-03:00",
+  "sharedHeadBeforeStateUpdate": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
+  "endedAt": "2026-11-13T18:05:29-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -3426,179 +3584,86 @@
   "releaseToAuxiliary": {
     "branches": [
       {
-        "branch": "feat/work-m129-upstart-goblin-2v2-20261113",
-        "head": "282e88ce752c07023d77ee49da491cdb101af791",
-        "pr": 85,
+        "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+        "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+        "pr": 112,
         "scope": [
-          "tests/tagClassicUpstartGoblinPhysicalDraw.test.cjs"
-        ]
+          "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43506972040,
+          "engineValidation": "in_progress",
+          "engineRunId": 43506972175,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43506972102
+        }
       },
       {
-        "branch": "feat/work-m130-tremendous-fire-2v2-20261113",
-        "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
-        "pr": 86,
+        "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+        "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+        "pr": 113,
         "scope": [
-          "tests/tagClassicTremendousFireTeamDamage.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m131-jar-of-greed-2v2-20261113",
-        "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
-        "pr": 87,
-        "scope": [
-          "tests/tagClassicJarOfGreedPhysicalDraw.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m132-direct-lp-spells-2v2-20261113",
-        "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
-        "pr": 88,
-        "scope": [
-          "tests/tagClassicDirectLPEffectsTeamOwnership.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m133-magic-cylinder-2v2-20261113",
-        "head": "6eba9628ec7c3e251be913110add8f69dabede13",
-        "pr": 89,
-        "scope": [
-          "tests/tagClassicMagicCylinderPhysicalOwners.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
-        "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
-        "pr": 64,
-        "scope": [
-          "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
-        ]
+          "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43507071750,
+          "engineValidation": "in_progress",
+          "engineRunId": 43507071767,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43507071960
+        }
       }
     ],
-    "allowed": "monitorar CI das PRs #64 e #85–#89 e corrigir falhas somente nos arquivos de teste das branches próprias M108 e M129–M133; registrar resultados e devolver checkpoint.",
-    "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61/M118 nem nas branches M119–M128 de terceiros; não alterar banco/inventários ou conceder cartas."
+    "allowed": "Auxiliar pode monitorar CI das PRs #112 e #113 e corrigir somente os respectivos arquivos de teste nas próprias branches; registrar o resultado e devolver checkpoint.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime, catálogo, certificados, banco/inventários; não fazer merge ou deploy."
   },
   "scopeReleasedToAuxiliary": {
     "branches": [
       {
-        "branch": "feat/work-m129-upstart-goblin-2v2-20261113",
-        "head": "282e88ce752c07023d77ee49da491cdb101af791",
-        "pr": 85,
+        "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+        "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+        "pr": 112,
         "scope": [
-          "tests/tagClassicUpstartGoblinPhysicalDraw.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m130-tremendous-fire-2v2-20261113",
-        "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
-        "pr": 86,
-        "scope": [
-          "tests/tagClassicTremendousFireTeamDamage.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m131-jar-of-greed-2v2-20261113",
-        "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
-        "pr": 87,
-        "scope": [
-          "tests/tagClassicJarOfGreedPhysicalDraw.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m132-direct-lp-spells-2v2-20261113",
-        "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
-        "pr": 88,
-        "scope": [
-          "tests/tagClassicDirectLPEffectsTeamOwnership.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m133-magic-cylinder-2v2-20261113",
-        "head": "6eba9628ec7c3e251be913110add8f69dabede13",
-        "pr": 89,
-        "scope": [
-          "tests/tagClassicMagicCylinderPhysicalOwners.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
-        "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
-        "pr": 64,
-        "scope": [
-          "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
-        "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
-        "pr": 102,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "scope": [
-          "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+          "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
         ],
         "state": "released-to-auxiliary-monitor-ci",
         "ci": {
-          "cardBatchFast": "queued",
-          "engineValidation": "queued",
-          "milestone1000": "queued"
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43506972040,
+          "engineValidation": "in_progress",
+          "engineRunId": 43506972175,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43506972102
         }
       },
       {
-        "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
-        "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
-        "pr": 103,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+        "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+        "pr": 113,
         "scope": [
-          "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs"
+          "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
         ],
         "state": "released-to-auxiliary-monitor-ci",
         "ci": {
-          "cardBatchFast": "queued",
-          "engineValidation": "queued",
-          "milestone1000": "queued"
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43507071750,
+          "engineValidation": "in_progress",
+          "engineRunId": 43507071767,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43507071960
         }
-      },
-      {
-        "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
-        "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
-        "pr": 104,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "scope": [
-          "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "queued",
-          "engineValidation": "queued",
-          "milestone1000": "queued"
-        }
-      },
-      {
-        "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
-        "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
-        "pr": 105,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "scope": [
-          "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "queued",
-          "engineValidation": "queued",
-          "milestone1000": "not-returned"
-        }
-      },
-      {
-        "branch": "feat/work-m150-mst-destroys-equip-field-effects-2v2-20261113",
-        "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
-        "pr": 106,
-        "scope": [
-          "tests/tagClassicMSTContinuousSourceRemoval2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci"
       }
     ],
-    "allowed": "Monitorar CI da PR #106 e corrigir somente tests/tagClassicMSTContinuousSourceRemoval2v2.test.cjs se houver falha; M146–M149 permanecem liberadas conforme checkpoint anterior.",
-    "forbidden": "Não fazer merge/deploy; não tocar M61/PR17, M118/PR74, branches M140–M145 ou arquivos de runtime/catalog/inventário."
+    "allowed": "Auxiliar pode monitorar CI das PRs #112 e #113 e corrigir somente os respectivos arquivos de teste nas próprias branches; registrar o resultado e devolver checkpoint.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime, catálogo, certificados, banco/inventários; não fazer merge ou deploy."
   },
-  "lastCoordinationRefreshAt": "2026-11-13T13:41:32-03:00"
+  "lastCoordinationRefreshAt": "2026-11-13T18:05:29-03:00"
 }
