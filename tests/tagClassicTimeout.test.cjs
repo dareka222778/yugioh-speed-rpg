@@ -13,9 +13,12 @@ const {
   publicTagDuel,
   assertTagDuel
 }=require('../dist/tagDuel');
-const {getPlayableCard}=require('../dist/effectRegistry');
+const {getPlayableCard,getEffect}=require('../dist/effectRegistry');
 
 const FIELD_SPELL='86318356'; // Sogen
+const MAGIC_JAMMER='77414722'; // Magic Jammer
+assert.equal(getPlayableCard(FIELD_SPELL)?.field,true);
+assert.equal(getEffect(MAGIC_JAMMER)?.kind,'magicJammer');
 const normalIds=[];
 const seenNames=new Set();
 for(const id of tagNormalCardIds){
@@ -35,13 +38,17 @@ function normalDeck(count){
 function members(){
   return [0,1,2,3].map(seat=>({id:'m72-seat-'+seat,name:'M72 Seat '+seat,cards:normalDeck(20)}));
 }
-function createGame(first=0,fieldSeat=null){
+function createGame(first=0,fieldSeat=null,trapSeat=null){
   const players=members();
   if(fieldSeat!==null){
     assert.ok(fieldSeat>=0&&fieldSeat<4);
     players[fieldSeat].cards=[FIELD_SPELL,...normalDeck(19)];
   }
-  return createTagDuel(players,{classic:true,first,seed:'m72-tag-timeout-'+first+'-'+fieldSeat});
+  if(trapSeat!==null){
+    assert.ok(trapSeat>=0&&trapSeat<4&&trapSeat!==fieldSeat);
+    players[trapSeat].cards=[MAGIC_JAMMER,...normalDeck(19)];
+  }
+  return createTagDuel(players,{classic:true,first,seed:'m72-tag-timeout-'+first+'-'+fieldSeat+'-'+trapSeat});
 }
 function inventorySnapshot(state){
   const cards=tagInventory(state);
@@ -66,6 +73,18 @@ function moveFieldSpellToHand(state,seat){
     card=owner.deck.splice(index,1)[0];
     owner.hand.push(card);
   }
+  return card.uid;
+}
+function moveTrapToBackrow(state,seat){
+  const team=seat%2;
+  const owner=state.active[team]===seat?state.core.players[team]:state.reserves[seat];
+  let card=owner.hand.find(item=>item.id===MAGIC_JAMMER);
+  if(!card){
+    const index=owner.deck.findIndex(item=>item.id===MAGIC_JAMMER);
+    assert.notEqual(index,-1,'Magic Jammer must remain in its physical owner deck or hand');
+    card=owner.deck.splice(index,1)[0];
+  }else owner.hand=owner.hand.filter(item=>item.uid!==card.uid);
+  owner.backrow.push({...card,setTurn:0,faceUp:false});
   return card.uid;
 }
 function handsByMember(state){
@@ -110,18 +129,23 @@ test('classic 2v2 timeout in Main Phase awards the opposing team for every possi
 
 test('classic 2v2 timeout during a serialized response window awards the team that opened the chain',()=>{
   for(const first of [0,1]){
-    const state=createGame(first,first);
+    const respondingSeat=first%2===0?(first+1)%4:(first+1)%4;
+    const state=createGame(first,first,respondingSeat);
     const before=inventorySnapshot(state);
     const uid=moveFieldSpellToHand(state,first);
+    const trapUid=moveTrapToBackrow(state,respondingSeat);
+    assert.doesNotThrow(()=>assertTagDuel(state));
     const actor='m72-seat-'+first;
     const fieldAction=tagActions(state,actor).find(action=>action.kind==='field'&&action.card===uid);
     assert.ok(fieldAction,'the active physical member must be able to activate Sogen');
 
     const responseState=stepTagDuel(state,actor,fieldAction);
-    assert.equal(responseState.core.phase,'response','Field Spell activation must open a response window');
+    assert.equal(responseState.core.phase,'response','a set Magic Jammer must keep the Spell response window open');
     const respondingTeam=1-(first%2);
-    const respondingSeat=responseState.active[respondingTeam];
+    assert.equal(responseState.active[respondingTeam],respondingSeat);
     assert.equal(tagDecisionMember(responseState).id,'m72-seat-'+respondingSeat);
+    assert.ok(tagActions(responseState,'m72-seat-'+respondingSeat).some(action=>action.kind==='trap'&&action.card===trapUid),
+      'the responding seat must have the legal Magic Jammer response');
     assert.equal(responseState.core.players[first%2].field?.uid,uid,'the activated physical card must remain in the shared team Field Zone');
 
     const responseHands=handsByMember(responseState);
@@ -133,9 +157,14 @@ test('classic 2v2 timeout during a serialized response window awards the team th
     assert.equal(ended.core.winner,'tag-team-'+(first%2),'the responding opponent timed out, so the activating team wins');
     assert.match(ended.core.reason,/W\.O\./);
     assert.equal(ended.core.players[first%2].field?.uid,uid,'timeout must preserve the already activated Field Spell');
+    assert.ok(ended.core.players[respondingTeam].backrow.some(card=>card.uid===trapUid&&!card.faceUp),
+      'the timed-out Magic Jammer must remain face-down and unspent');
     assert.deepEqual(handsByMember(ended),responseHands,'serialization and timeout must preserve all four private hands');
+    const publicState=publicTagDuel(ended);
+    assert.equal(publicState.teams[respondingTeam].backrow.find(card=>!card.faceUp)?.id,null,
+      'the timed-out hidden Trap identity must remain private');
     assertInventoryConserved(ended,before);
     assert.doesNotThrow(()=>assertTagDuel(ended));
-    assert.equal(publicTagDuel(ended).winner,'tag-team-'+(first%2));
+    assert.equal(publicState.winner,'tag-team-'+(first%2));
   }
 });
