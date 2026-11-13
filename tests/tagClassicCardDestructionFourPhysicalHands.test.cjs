@@ -134,7 +134,7 @@ test('Card Destruction awards the duel to the opposing team when one physical te
     'the team whose physical seat 3 could not redraw must lose, even though seat 1 had enough cards');
   assert.equal(tag.tagMemberHand(state,member(3)).length,0,
     'the exhausted physical seat must not receive cards from its teammate Deck');
-  assert.ok(state.core.players[1].grave.some(card=>card.uid===spell.uid),
+  assert.ok(state.core.players[0].grave.some(card=>card.uid===spell.uid),
     'Card Destruction remains in the activating team Graveyard');
   for(const seat of [0,1,2,3]){
     const team=seat%2;
