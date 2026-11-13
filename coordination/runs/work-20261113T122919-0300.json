@@ -4,7 +4,7 @@
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "state": "completed; released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "endedAt": "2026-11-13T12:40:27-03:00",
+  "endedAt": "2026-11-13T12:44:19-03:00",
   "timezone": "America/Sao_Paulo",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -19,7 +19,10 @@
     "M121: criada regressão de Pot of Greed para compra do Deck físico ativo, preservação da mão/deck do parceiro e permissão de sete cartas durante a Main Phase, sem descarte prematuro; PR #77.",
     "Diagnóstico de M108/PR #64: 7.366 testes passaram e um falhou; a Counter Trap Negate Attack deixou o estado em main em vez de abrir response. Diagnóstico publicado na PR para o auxiliar.",
     "Confirmação de que PRs #65–#74 agora têm Card batch fast, Engine validation e Milestone 1000 concluídos com sucesso.",
-    "M120: a primeira Engine validation revelou apenas uma asserção de fixture apontando o Cemitério da equipe errada; corrigida de team 1 para a equipe ativadora team 0 e disparada nova CI no HEAD 8985d429."
+    "M120: a primeira Engine validation revelou apenas uma asserção de fixture apontando o Cemitério da equipe errada; corrigida de team 1 para a equipe ativadora team 0 e disparada nova CI no HEAD 8985d429.",
+    "M122: criada regressão Change of Heart 2v2; controla temporariamente monstro do assento físico 3, preserva UID/proprietário e devolve à equipe original na End Phase; PR #78.",
+    "M123: criada regressão Shield & Sword 2v2; aplica troca apenas a monstros face-up dos dois campos compartilhados, preserva Set e expira após avanço do turno; PR #79.",
+    "M124: criada regressão Trap Hole 2v2; seat 0 baixa, seat 2 ativa durante a janela de seat 3, preservando UID do Trap e enviando o monstro ao Graveyard da equipe adversária; PR #80."
   ],
   "changes": [
     {
@@ -50,6 +53,36 @@
       "pr": 77,
       "files": [
         "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M122",
+      "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+      "pr": 78,
+      "files": [
+        "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M123",
+      "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+      "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+      "pr": 79,
+      "files": [
+        "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M124",
+      "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+      "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+      "pr": 80,
+      "files": [
+        "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
       ],
       "codeChange": false
     }
@@ -110,6 +143,21 @@
       "milestone1000": "success",
       "engineValidation": "in_progress",
       "extendedSoak": "in_progress"
+    },
+    "pr78": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    },
+    "pr79": {
+      "cardBatchFast": "success",
+      "milestone1000": "queued",
+      "engineValidation": "in_progress"
+    },
+    "pr80": {
+      "cardBatchFast": "queued",
+      "milestone1000": "queued",
+      "engineValidation": "queued"
     }
   },
   "handoffRequests": {
@@ -168,18 +216,42 @@
         "scope": [
           "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
         ]
+      },
+      {
+        "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+        "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+        "pr": 78,
+        "scope": [
+          "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+        "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+        "pr": 79,
+        "scope": [
+          "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+        "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+        "pr": 80,
+        "scope": [
+          "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+        ]
       }
     ],
     "allowed": "monitorar CI e corrigir falhas somente nas três branches próprias; atualizar checkpoint após nova revisão.",
     "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61 ou M118; não alterar banco/inventários nem conceder cartas."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #75–#77 e corrigir falhas somente nas branches próprias; reportar/corrigir M108 (#64) sem tocar nas reservas M61/M118. Work na próxima janela: conferir os três resultados completos, verificar handoffs M61/M118 e, se M61 continuar bloqueado, avançar em outro efeito independente de 2v2.",
+  "nextTask": "Auxiliar: monitorar CI das PRs #75–#80, corrigir falhas somente nas seis branches próprias e reportar M108 (#64). Work na próxima janela: conferir resultados completos, handoffs M61/M118 e continuar expansão 2v2 independente se as reservas permanecerem bloqueadas.",
   "nextWorkAt": "2026-11-13T13:30:00-03:00",
   "duration": {
-    "elapsedWallMinutes": 11,
+    "elapsedWallMinutes": 15,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "A janela registrada não comprova 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "lastActivityAt": "2026-11-13T12:40:27-03:00"
+  "lastActivityAt": "2026-11-13T12:44:19-03:00"
 }
