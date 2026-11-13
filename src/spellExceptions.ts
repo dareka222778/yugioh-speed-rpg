@@ -7,11 +7,30 @@ import type {EffectServices} from './classicEffects';
 type Handler=(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices)=>void;
 const handlers:Readonly<Record<string,Handler>>={
  '72892473':(s,a,service)=>{
-  const need=s.players.map(p=>p.hand.length),failed=s.players.map((p,i)=>p.deck.length<need[i]);
-  for(const [i,p]of s.players.entries()){p.grave.push(...p.hand);p.hand=p.deck.splice(0,need[i]);}
-  service.note(s,'Destruição de Cards: as duas mãos foram descartadas e recompradas.');
-  if(failed[0]&&failed[1])service.finish(s,null,'ambos não conseguiram comprar as cartas');
-  else if(failed.some(Boolean))service.finish(s,failed[0]?1:0,'não conseguiu comprar uma carta');
+  // In classic 2v2, each physical participant owns a private hand and Deck.
+  // A team-wide "each player" effect must visit both active seats and both
+  // reserves; only the Graveyard is shared by teammates.
+  const physical=s.teamRotation
+   ?Array.from({length:4},(_,seat)=>{
+    const team=seat%2;
+    const zones=s.teamRotation!.active[team]===seat?s.players[team]:s.teamRotation!.reserves[seat];
+    if(!zones)throw new Error('Reserva física ausente para Destruição de Cards.');
+    return {team,zones};
+   })
+   :s.players.map((zones,team)=>({team,zones}));
+  const needed=physical.map(({zones})=>zones.hand.length);
+  const failed=physical.map(({zones},index)=>zones.deck.length<needed[index]);
+  for(const [index,{team,zones}]of physical.entries()){
+   const discarded=zones.hand.splice(0,zones.hand.length);
+   s.players[team].grave.push(...discarded);
+   zones.hand.push(...zones.deck.splice(0,needed[index]));
+  }
+  const failedTeams=[0,1].map(team=>physical.some((entry,index)=>entry.team===team&&failed[index]));
+  service.note(s,s.teamRotation
+   ?'Destruição de Cards: as quatro mãos físicas foram descartadas e recompradas.'
+   :'Destruição de Cards: as duas mãos foram descartadas e recompradas.');
+  if(failedTeams[0]&&failedTeams[1])service.finish(s,null,'ambos não conseguiram comprar as cartas');
+  else if(failedTeams[0]||failedTeams[1])service.finish(s,failedTeams[0]?1:0,'não conseguiu comprar uma carta');
  },
  '52097679':(s,a,service)=>{
   for(const p of s.players)for(const m of p.monsters)if(m.faceUp&&canAffectMonster(s,m.uid,'spell'))m.swappedUntil=m.swappedUntil===s.turn?undefined:s.turn;
