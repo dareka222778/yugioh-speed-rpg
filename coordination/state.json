@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "lastActivityAt": "2026-11-13T12:40:41-03:00",
+  "lastActivityAt": "2026-11-13T12:44:38-03:00",
   "nextScheduledAt": "2026-11-13T13:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -726,6 +726,63 @@
         "milestoneRunId": 43454171352
       },
       "note": null
+    },
+    {
+      "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+      "pr": 78,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success",
+        "fastRunId": 43455248576,
+        "engineRunId": 43455248554,
+        "milestoneRunId": 43455248477
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+      "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+      "pr": 79,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "queued",
+        "fastRunId": 43455398044,
+        "engineRunId": 43455398090,
+        "milestoneRunId": 43455397956
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+      "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+      "pr": 80,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      },
+      "note": null
     }
   ],
   "handoffRequest": {
@@ -1135,6 +1192,27 @@
       "draft": true,
       "branch": "M121",
       "ci": "fast-success; milestone-success; engine-validation-in-progress; extended-soak-in-progress"
+    },
+    {
+      "number": 78,
+      "state": "open",
+      "draft": true,
+      "branch": "M122",
+      "ci": "fast-success; milestone-success; engine-validation-in-progress"
+    },
+    {
+      "number": 79,
+      "state": "open",
+      "draft": true,
+      "branch": "M123",
+      "ci": "fast-success; engine-validation-in-progress; milestone-queued"
+    },
+    {
+      "number": 80,
+      "state": "open",
+      "draft": true,
+      "branch": "M124",
+      "ci": "workflows-queued"
     }
   ],
   "ci": {
@@ -1406,6 +1484,30 @@
       "fastRunId": 43454171031,
       "engineRunId": 43454171027,
       "milestoneRunId": 43454171352
+    },
+    "pr78": {
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success",
+      "fastRunId": 43455248576,
+      "engineRunId": 43455248554,
+      "milestoneRunId": 43455248477
+    },
+    "pr79": {
+      "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "queued",
+      "fastRunId": 43455398044,
+      "engineRunId": 43455398090,
+      "milestoneRunId": 43455397956
+    },
+    "pr80": {
+      "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued"
     }
   },
   "production": {
@@ -1422,12 +1524,12 @@
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
   },
   "duration": {
-    "elapsedWallMinutes": 11,
+    "elapsedWallMinutes": 15,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: acompanhar CI das PRs #75–#77; no M120, usar o HEAD corrigido 8985d429 e não reverter a correção. Work às 13:30: conferir os três resultados completos, handoffs M61/M118 e continuar em outra frente 2v2 independente se as reservas permanecerem bloqueadas.",
+  "nextTask": "Auxiliar: monitorar CI das PRs #75–#80 e corrigir falhas somente nas seis branches próprias; reportar M108 (#64). Work às 13:30: conferir validações completas, handoffs M61/M118 e continuar em outra família 2v2 independente se as reservas permanecerem bloqueadas.",
   "sharedHeadBeforeRelease": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "sharedHeadBeforeClaim": "bd1e9c7c6cffa36f337ab8059cdfec54bd44275f",
@@ -1652,7 +1754,7 @@
       "pr": 75,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:38:12-03:00"
+      "releasedAt": "2026-11-13T12:44:38-03:00"
     },
     {
       "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
@@ -1660,7 +1762,7 @@
       "pr": 76,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:38:12-03:00"
+      "releasedAt": "2026-11-13T12:44:38-03:00"
     },
     {
       "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
@@ -1668,7 +1770,31 @@
       "pr": 77,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:38:12-03:00"
+      "releasedAt": "2026-11-13T12:44:38-03:00"
+    },
+    {
+      "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+      "pr": 78,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:44:38-03:00"
+    },
+    {
+      "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+      "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+      "pr": 79,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:44:38-03:00"
+    },
+    {
+      "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+      "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+      "pr": 80,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:44:38-03:00"
     }
   ],
   "activeRun": {
@@ -1681,12 +1807,15 @@
       "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs",
       "src/spellExceptions.ts",
       "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs",
-      "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+      "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs",
+      "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs",
+      "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs",
+      "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
     ],
     "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-13T12:29:19-03:00",
-    "lastActivityAt": "2026-11-13T12:40:41-03:00",
-    "completedAt": "2026-11-13T12:40:41-03:00",
+    "lastActivityAt": "2026-11-13T12:44:38-03:00",
+    "completedAt": "2026-11-13T12:44:38-03:00",
     "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
     "pr": 76,
     "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
@@ -1695,13 +1824,41 @@
         "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
         "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
         "pr": 75,
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "state": "released-to-auxiliary-monitor-ci"
       },
       {
         "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
         "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
         "pr": 77,
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+        "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+        "pr": 78,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+        "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+        "pr": 79,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+        "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+        "pr": 80,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "state": "released-to-auxiliary-monitor-ci"
       }
     ],
     "releaseToAuxiliary": {
@@ -1730,14 +1887,38 @@
           "scope": [
             "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
           ]
+        },
+        {
+          "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+          "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+          "pr": 78,
+          "scope": [
+            "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+          ]
+        },
+        {
+          "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+          "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+          "pr": 79,
+          "scope": [
+            "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+          ]
+        },
+        {
+          "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+          "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+          "pr": 80,
+          "scope": [
+            "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+          ]
         }
       ],
-      "allowed": "monitorar CI e corrigir falhas somente nas próprias branches",
+      "allowed": "monitorar CI e corrigir falhas somente nas seis branches próprias",
       "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61/M118; não alterar bancos ou inventários"
     },
     "nextWorkAt": "2026-11-13T13:30:00-03:00",
     "duration": {
-      "elapsedWallMinutes": 11,
+      "elapsedWallMinutes": 15,
       "effectiveMinutesMeasured": false,
       "minimum60MinutesConfirmed": false
     }
@@ -2346,7 +2527,7 @@
       "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
       "state": "completed; released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-13T12:29:19-03:00",
-      "endedAt": "2026-11-13T12:40:41-03:00",
+      "endedAt": "2026-11-13T12:44:38-03:00",
       "timezone": "America/Sao_Paulo",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -2363,16 +2544,7 @@
           "scope": [
             "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci",
-          "ci": {
-            "cardBatchFast": "success",
-            "engineValidation": "in_progress",
-            "milestone1000": "success",
-            "extendedSoak": "in_progress",
-            "fastRunId": 43453622984,
-            "engineRunId": 43453622988,
-            "milestoneRunId": 43453623323
-          }
+          "state": "released-to-auxiliary-monitor-ci"
         },
         {
           "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
@@ -2384,18 +2556,7 @@
             "src/spellExceptions.ts",
             "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci",
-          "ci": {
-            "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
-            "cardBatchFast": "in_progress",
-            "engineValidation": "in_progress",
-            "milestone1000": "success",
-            "extendedSoak": "in_progress",
-            "fastRunId": 43454799650,
-            "engineRunId": 43454798944,
-            "milestoneRunId": 43454798835,
-            "previousHeadFailure": "fixture assertion used team 1 instead of activating team 0; corrected on current HEAD"
-          }
+          "state": "released-to-auxiliary-monitor-ci"
         },
         {
           "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
@@ -2406,16 +2567,40 @@
           "scope": [
             "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci",
-          "ci": {
-            "cardBatchFast": "success",
-            "engineValidation": "in_progress",
-            "milestone1000": "success",
-            "extendedSoak": "in_progress",
-            "fastRunId": 43454171031,
-            "engineRunId": 43454171027,
-            "milestoneRunId": 43454171352
-          }
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+          "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+          "pr": 78,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+          "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+          "pr": 79,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+          "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+          "pr": 80,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
         }
       ],
       "changes": [
@@ -2446,6 +2631,33 @@
           "files": [
             "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
           ]
+        },
+        {
+          "m": "M122",
+          "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+          "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+          "pr": 78,
+          "files": [
+            "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+          ]
+        },
+        {
+          "m": "M123",
+          "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+          "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+          "pr": 79,
+          "files": [
+            "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+          ]
+        },
+        {
+          "m": "M124",
+          "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+          "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+          "pr": 80,
+          "files": [
+            "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+          ]
         }
       ],
       "catalog": {
@@ -2470,11 +2682,14 @@
         }
       },
       "validation": {
-        "pr64": "one npm test failure; 7366 pass/1 fail",
+        "pr64": "one npm test failure; 7366 pass/1 fail; Negate Attack response priority expected response but remained main",
         "pr65to74": "all three workflows success",
         "pr75": "fast+milestone success; engine/soak in progress",
-        "pr76": "nova revisão: Card batch fast, Engine validation e extended soak em andamento; Milestone 1000 aprovado",
-        "pr77": "fast+milestone success; engine/soak in progress"
+        "pr76": "corrected head 8985d429; fast+milestone success; engine/soak in progress",
+        "pr77": "fast+milestone success; engine/soak in progress",
+        "pr78": "fast+milestone success; engine in progress",
+        "pr79": "fast success; engine in progress; milestone queued",
+        "pr80": "all workflows queued"
       },
       "deployment": {
         "merge": "none",
@@ -2485,7 +2700,7 @@
       "nextTask": "Auxiliar: monitorar CI das PRs #65–#74, corrigir apenas falhas de teste nas branches liberadas e reportar M108 (#64). Work na próxima janela: verificar resultados finais, obter handoff M61 e, se liberado, corrigir TS2367/TS2339; continuar expansão comportamental sem duplicações.",
       "nextWorkAt": "2026-11-13T13:30:00-03:00",
       "duration": {
-        "elapsedWallMinutes": 11,
+        "elapsedWallMinutes": 15,
         "effectiveMinutesMeasured": false,
         "minimum60MinutesConfirmed": false,
         "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
@@ -2516,6 +2731,30 @@
             "scope": [
               "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
             ]
+          },
+          {
+            "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+            "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+            "pr": 78,
+            "scope": [
+              "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+            "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+            "pr": 79,
+            "scope": [
+              "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+            "head": "4fe3a12dafc267adb17d7a048333aaa17b5bd2e8",
+            "pr": 80,
+            "scope": [
+              "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+            ]
           }
         ],
         "allowed": "monitor CI and fix only own branches",
@@ -2524,10 +2763,10 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T122919-0300.json",
-  "lastParallelActivityAt": "2026-11-13T12:40:41-03:00",
-  "sharedHeadAfterCheckpoint": "98285b1376787e03230b494de7f965215b81b69e",
-  "sharedHeadBeforeStateUpdate": "98285b1376787e03230b494de7f965215b81b69e",
-  "endedAt": "2026-11-13T12:40:41-03:00",
+  "lastParallelActivityAt": "2026-11-13T12:44:38-03:00",
+  "sharedHeadAfterCheckpoint": "53178c3a720dba1a09212a71dc1f3e05f8c42409",
+  "sharedHeadBeforeStateUpdate": "53178c3a720dba1a09212a71dc1f3e05f8c42409",
+  "endedAt": "2026-11-13T12:44:38-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
