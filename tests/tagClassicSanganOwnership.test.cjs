@@ -1,30 +1,23 @@
 'use strict';
 const {test}=require('node:test');
+const fs=require('node:fs');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
 
 const SANGAN='26202165';
 const KURIBOH='40640057';
-const sangan=getPlayableCard(SANGAN);
-assert.ok(sangan&&sangan.kind==='monster');
-assert.equal(getMonsterEffect(SANGAN)?.trigger,'onSentToGrave');
-assert.equal(getMonsterEffect(SANGAN)?.oncePerTurn,true);
-assert.deepEqual(getMonsterEffect(SANGAN)?.operation,{kind:'search',stat:'atk',maximum:1500});
-assert.ok(getPlayableCard(KURIBOH)?.kind==='monster');
-
-const normalCards=[...new Set(tag.tagNormalCardIds)]
-  .map(id=>({id,card:getPlayableCard(id)}))
-  .filter(entry=>entry.card&&entry.card.level<=4&&Number.isInteger(entry.card.atk));
-const attackerEntry=normalCards
-  .filter(entry=>entry.card.atk>(sangan.atk??0))
-  .sort((a,b)=>b.card.atk-a.card.atk)[0];
-const ineligibleEntry=normalCards
-  .filter(entry=>entry.card.atk>1500)
-  .sort((a,b)=>b.card.atk-a.card.atk)[0];
-assert.ok(attackerEntry,'Sangan battle fixture needs a stronger Normal Monster');
-assert.ok(ineligibleEntry,'Sangan search fixture needs a Normal Monster above 1500 ATK');
-
+function diagnosticTest(name,run){
+  test(name,(...args)=>{
+    try{return run(...args);}
+    catch(error){
+      const detail='[M100 Sangan diagnostic] '+(error?.stack??String(error))+'\\n';
+      try{fs.mkdirSync('artifacts',{recursive:true});fs.appendFileSync('artifacts/engine-acceptance-failure.tap',detail);}catch{}
+      process.stderr.write(detail);
+      throw error;
+    }
+  });
+}
 function member(seat){return 'm100-seat-'+seat;}
 function deck(required=[]){
   const ids=[...new Set([...required,...tag.tagNormalCardIds])].slice(0,7);
@@ -81,7 +74,28 @@ function assertConserved(state,before){
   for(const card of cards)assert.equal(before.get(card.uid),card.id);
 }
 
-test('Sangan searches the active physical teammate Deck by ATK in classic 2v2',()=>{
+diagnosticTest('Sangan searches the active physical teammate Deck by ATK in classic 2v2',()=>{
+  const sangan=getPlayableCard(SANGAN);
+  assert.ok(sangan&&sangan.kind==='monster');
+  const effect=getMonsterEffect(SANGAN);
+  assert.equal(effect?.trigger,'onSentToGrave');
+  assert.equal(effect?.oncePerTurn,true);
+  assert.deepEqual(effect?.operation,{kind:'search',stat:'atk',maximum:1500});
+  const kuriboh=getPlayableCard(KURIBOH);
+  assert.ok(kuriboh&&kuriboh.kind==='monster');
+
+  const normalCards=[...new Set(tag.tagNormalCardIds)]
+    .map(id=>({id,card:getPlayableCard(id)}))
+    .filter(entry=>entry.card&&entry.card.level<=4&&Number.isInteger(entry.card.atk));
+  const attackerEntry=normalCards
+    .filter(entry=>entry.card.atk>(sangan.atk??0))
+    .sort((a,b)=>b.card.atk-a.card.atk)[0];
+  const ineligibleEntry=normalCards
+    .filter(entry=>entry.card.atk>1500)
+    .sort((a,b)=>b.card.atk-a.card.atk)[0];
+  assert.ok(attackerEntry,'Sangan battle fixture needs a stronger Normal Monster');
+  assert.ok(ineligibleEntry,'Sangan search fixture needs a Normal Monster above 1500 ATK');
+
   const players=[
     {id:member(0),name:'M100 Seat 0',cards:deck([attackerEntry.id])},
     {id:member(1),name:'M100 Seat 1',cards:deck([KURIBOH,ineligibleEntry.id])},
