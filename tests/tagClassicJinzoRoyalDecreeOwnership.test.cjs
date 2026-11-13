@@ -129,6 +129,8 @@ test('face-up Jinzo on an inactive teammate blocks Trap activation; turning it f
     'the inactive partner set Trap must remain set and unused');
   assert.ok(!state.core.players[1].grave.some(card=>card.uid===blocked.trap.uid),
     'Jinzo blocks activation rather than consuming the Trap');
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  assertConserved(state,blocked.before);
 
   const restored=setup('monster',JINZO,'m101-jinzo-face-down-restores-trap');
   restored.source.faceUp=false;
