@@ -1,0 +1,63 @@
+{
+  "runId": "work-20261113T134132-0300",
+  "owner": "Work",
+  "priority": "P1 — verificar que MST destrói Equip/Field Spells contínuas no 2v2, remove os modificadores imediatamente e preserva o UID físico do parceiro; sem tocar M61/M118.",
+  "state": "active",
+  "startedAt": "2026-11-13T13:41:32-03:00",
+  "endedAt": null,
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "416678eadc16e9a6b979b406f47b2021cc580d4e",
+  "sharedHeadBeforeReservation": "416678eadc16e9a6b979b406f47b2021cc580d4e",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "branch": "feat/work-m150-mst-destroys-equip-field-effects-2v2-20261113",
+  "headAtStart": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "reservedFiles": [
+    "tests/tagClassicMSTContinuousSourceRemoval2v2.test.cjs"
+  ],
+  "blocksCompleted": [
+    "Reabertura de um bloco independente após liberação de M146–M149; reserva exclusiva do teste M150.",
+    "Auditoria read-only de M138: MST já atinge backrow e Field Zone; M150 cobrirá remoção de fontes contínuas equip/field."
+  ],
+  "changes": [],
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "validation": {},
+  "handoffRequests": {
+    "m61": {
+      "pr": 17,
+      "status": "awaiting-response",
+      "lastCommentId": 6859057163
+    },
+    "m118": {
+      "pr": 74,
+      "status": "awaiting-response",
+      "lastCommentId": 6859057742
+    }
+  },
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "deploymentWorkflow": "not found",
+    "hosting": "not verified",
+    "liveDiscordValidation": false
+  },
+  "releaseToAuxiliary": null,
+  "nextTask": "Implementar teste M150: MST destrói Equip Spell e Field Spell contínuos em 2v2, removendo bônus sem alterar o monstro e preservando UIDs.",
+  "nextWorkAt": "2026-11-13T17:30:00-03:00",
+  "duration": {
+    "elapsedWallMinutes": 0,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Execução M150 em andamento; espera de CI não será contabilizada."
+  },
+  "sharedHeadAfterReservation": "4000e1bf74e1e37de10d21ee7ecdecc66a08908b"
+}
