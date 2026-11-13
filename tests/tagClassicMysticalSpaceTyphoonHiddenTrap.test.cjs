@@ -95,18 +95,9 @@ test('partner-owned Mystical Space Typhoon destroys a Set opposing Trap without 
   assert.equal(JSON.stringify(state),unchanged);
   state=tag.stepTagDuel(state,member(0),action);
 
-  assert.equal(state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(state).id,member(1),
-    'the opposing active physical seat receives response priority');
-  assert.deepEqual(tag.tagActions(state,member(3)),[],
-    'the inactive physical owner of the targeted Set Trap cannot respond');
-  assert.equal(tag.tagActions(state,member(1)).some(candidate=>
-    candidate.kind==='trap'&&candidate.card===torrent.uid
-  ),false,'Torrential Tribute cannot activate outside a successful Summon window');
-  const publicDuring=tag.publicTagDuel(state);
-  assert.ok(!JSON.stringify(publicDuring).includes(TORRENTIAL),
-    'the targeted Set Trap identity remains hidden while the chain is open');
-
+  assert.equal(state.core.phase,'main',
+    'the Set Torrential Tribute has no valid response window and MST resolves immediately');
+  assert.equal(tag.tagDecisionMember(state).id,member(0));
   state=settle(state);
   assert.equal(state.core.phase,'main');
   assert.equal(state.core.players[1].backrow.some(card=>card.uid===torrent.uid),false,
