@@ -11,7 +11,7 @@ const TRAP_HOLE='04206964';
 const puppeteer=getPlayableCard(PUPPETEER);
 const summonedCard=getPlayableCard(SUMMONED);
 assert.ok(puppeteer&&puppeteer.kind==='monster');
-assert.ok(summonedCard&&summonedCard.kind==='monster'&&getEffect(SUMMONED)?.kind==='normal');
+assert.ok(summonedCard&&summonedCard.kind==='monster'&&summonedCard.monsterType==='normal');
 assert.deepEqual(getMonsterEffect(PUPPETEER),{
   trigger:'onOtherSummon',
   operation:{kind:'heal',amount:500}
