@@ -68,7 +68,7 @@ test('Magician of Faith returns a shared-Graveyard Spell to its original inactiv
     id:member(seat),
     name:'M85 Seat '+seat,
     cards:seat===1?[ACTIVE_SPELL,...normalDeck().slice(1)]
-      :seat===3?[MAGICIAN_OF_FAITH,INACTIVE_SPELL,...normalDeck().slice(2)]
+      :seat===3?[MAGICIAN_OF_FAITH,INACTIVE_SPELL,TRAP,...normalDeck().slice(3)]
       :normalDeck()
   }));
   let state=tag.createTagDuel(players,{classic:true,first:0,seed:'m85-magician-of-faith-owner'});
