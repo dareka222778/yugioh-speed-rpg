@@ -1,0 +1,54 @@
+{
+  "runId": "work-20261113T132613-0300",
+  "owner": "Work",
+  "priority": "P1 — validar Mountain nos três tipos oficiais (Dragon, Winged Beast e Thunder) em ambos os campos 2v2, incluindo ativação por parceiro e conservação de UIDs.",
+  "state": "active",
+  "startedAt": "2026-11-13T13:26:13-03:00",
+  "endedAt": null,
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "fbe361b6c11b4040c3518383d74ff959114547ec",
+  "sharedHeadBeforeReservation": "fbe361b6c11b4040c3518383d74ff959114547ec",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+  "headAtStart": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "reservedFiles": [
+    "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e do checkpoint work-20261113T125703-0300.json.",
+    "Verificação de HEAD real da branch compartilhada e confirmação de M61/M118 como handoff pendente.",
+    "Auditoria das branches M140–M145 e escolha de uma frente independente sem conflito."
+  ],
+  "changes": [],
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "validation": {},
+  "handoffRequests": {
+    "m61": "awaiting-response; no files touched",
+    "m118": "awaiting-response; no files touched"
+  },
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "hosting": "not verified",
+    "liveDiscordValidation": false
+  },
+  "releaseToAuxiliary": null,
+  "nextTask": "Implementar e validar Mountain em ambos os campos 2v2; depois preparar a próxima família de regras globais de campo sem tocar M61/M118.",
+  "nextWorkAt": "2026-11-13T17:30:00-03:00",
+  "duration": {
+    "elapsedWallMinutes": 0,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Execução em andamento; espera de CI não será contabilizada como trabalho efetivo."
+  },
+  "sharedHeadAfterReservation": "30ce0b9756820e4ee138a5bfdb9502d5c26454b1"
+}
