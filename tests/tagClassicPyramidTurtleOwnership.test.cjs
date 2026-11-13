@@ -1,6 +1,7 @@
 'use strict';
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
+const fs=require('node:fs');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getMonsterEffect}=require('../dist/effectRegistry');
 
@@ -82,7 +83,19 @@ function assertConserved(state,before){
   for(const card of cards)assert.equal(before.get(card.uid),card.id);
 }
 
-test('Pyramid Turtle owned by inactive seat 3 recruits an eligible Zombie only from active seat 1 Deck',()=>{
+function diagnosticTest(name,run){
+  test(name,(...args)=>{
+    try{return run(...args);}
+    catch(error){
+      const detail='[M95 Pyramid Turtle diagnostic] '+(error?.stack??String(error))+'\\n';
+      try{fs.mkdirSync('artifacts',{recursive:true});fs.appendFileSync('artifacts/engine-acceptance-failure.tap',detail);}catch{}
+      process.stderr.write(detail);
+      throw error;
+    }
+  });
+}
+
+diagnosticTest('Pyramid Turtle owned by inactive seat 3 recruits an eligible Zombie only from active seat 1 Deck',()=>{
   const players=[
     {id:member(0),name:'M95 Seat 0',cards:deck([attackerEntry.id])},
     {id:member(1),name:'M95 Seat 1',cards:deck([zombieCandidate.id,KURIBOH])},
