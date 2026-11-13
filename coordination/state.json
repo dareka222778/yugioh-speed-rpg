@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:57:03-03:00",
-  "lastActivityAt": "2026-11-13T13:06:15-03:00",
+  "lastActivityAt": "2026-11-13T13:07:46-03:00",
   "nextScheduledAt": "2026-11-13T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -1425,7 +1425,7 @@
       "draft": true,
       "branch": "M130",
       "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
-      "ci": "cardBatchFast:in_progress; engineValidation:in_progress; milestone1000:success"
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
     },
     {
       "number": 87,
@@ -1433,7 +1433,7 @@
       "draft": true,
       "branch": "M131",
       "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
-      "ci": "cardBatchFast:success; engineValidation:queued; milestone1000:queued"
+      "ci": "cardBatchFast:success; engineValidation:queued; milestone1000:success"
     },
     {
       "number": 88,
@@ -1441,7 +1441,7 @@
       "draft": true,
       "branch": "M132",
       "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
-      "ci": "cardBatchFast:success; engineValidation:queued; milestone1000:success"
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
     },
     {
       "number": 89,
@@ -1766,7 +1766,7 @@
     },
     "pr86": {
       "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
-      "cardBatchFast": "in_progress",
+      "cardBatchFast": "success",
       "engineValidation": "in_progress",
       "milestone1000": "success"
     },
@@ -1774,12 +1774,12 @@
       "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
       "cardBatchFast": "success",
       "engineValidation": "queued",
-      "milestone1000": "queued"
+      "milestone1000": "success"
     },
     "pr88": {
       "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
       "cardBatchFast": "success",
-      "engineValidation": "queued",
+      "engineValidation": "in_progress",
       "milestone1000": "success"
     },
     "pr89": {
@@ -1803,12 +1803,12 @@
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
   },
   "duration": {
-    "elapsedWallMinutes": 9,
+    "elapsedWallMinutes": 10,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "A janela observada foi de aproximadamente nove minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
+    "note": "A janela observada foi de aproximadamente dez minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: acompanhar CI das PRs #85–#89 e corrigir falhas somente nas cinco branches M129–M133. Work na próxima janela: revalidar #80/#84, confirmar correção M126/#82, verificar handoffs M61/M118 e continuar a próxima família de efeitos 2v2 sem duplicações.",
+  "nextTask": "Auxiliar: acompanhar CI #85–#89; corrigir falhas somente nas branches M129–M133. PR #82/M126 falhou por fixture sem carta 12482652 no Deck físico seat 2; diagnóstico já enviado. Work na próxima janela: revalidar #80/#84, confirmar correção #82, verificar handoffs M61/M118 e continuar a próxima família 2v2.",
   "sharedHeadBeforeRelease": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
   "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
   "sharedHeadBeforeClaim": "97c622833a72415ea29f5bd0320a8a07f67dc0a5",
@@ -2117,8 +2117,8 @@
     "reservedFiles": [],
     "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-13T12:57:03-03:00",
-    "lastActivityAt": "2026-11-13T13:06:15-03:00",
-    "completedAt": "2026-11-13T13:06:15-03:00",
+    "lastActivityAt": "2026-11-13T13:07:46-03:00",
+    "completedAt": "2026-11-13T13:07:46-03:00",
     "head": "282e88ce752c07023d77ee49da491cdb101af791",
     "pr": 85,
     "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
@@ -3114,7 +3114,7 @@
       "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
       "state": "completed; released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-13T12:57:03-03:00",
-      "endedAt": "2026-11-13T13:06:15-03:00",
+      "endedAt": "2026-11-13T13:07:46-03:00",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "97c622833a72415ea29f5bd0320a8a07f67dc0a5",
       "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
@@ -3194,18 +3194,46 @@
       "lastCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
       "nextWorkAt": "2026-11-13T17:30:00-03:00",
       "duration": {
-        "elapsedWallMinutes": 9,
+        "elapsedWallMinutes": 10,
         "effectiveMinutesMeasured": false,
         "minimum60MinutesConfirmed": false,
-        "note": "A janela observada foi de aproximadamente nove minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
+        "note": "A janela observada foi de aproximadamente dez minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
+      },
+      "lastActivityAt": "2026-11-13T13:07:46-03:00",
+      "validation": {
+        "pr85": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "success"
+        },
+        "pr86": {
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        },
+        "pr87": {
+          "cardBatchFast": "success",
+          "engineValidation": "queued",
+          "milestone1000": "success"
+        },
+        "pr88": {
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        },
+        "pr89": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
       }
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
-  "lastParallelActivityAt": "2026-11-13T13:06:15-03:00",
-  "sharedHeadAfterCheckpoint": "ed6499d7cf3bab1357f10b55d0bb24c73aa4fee6",
-  "sharedHeadBeforeStateUpdate": "ed6499d7cf3bab1357f10b55d0bb24c73aa4fee6",
-  "endedAt": "2026-11-13T13:06:15-03:00",
+  "lastParallelActivityAt": "2026-11-13T13:07:46-03:00",
+  "sharedHeadAfterCheckpoint": "10b25ef9d62fc9d615130b2ecba02ea00659c48d",
+  "sharedHeadBeforeStateUpdate": "10b25ef9d62fc9d615130b2ecba02ea00659c48d",
+  "endedAt": "2026-11-13T13:07:46-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
