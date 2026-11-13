@@ -105,7 +105,7 @@ test('an active teammate may answer an attack with the inactive partner hidden S
   assert.ok(response,'the active teammate must be allowed to activate the inactive partner set Trap');
   const unchanged=JSON.stringify(state);
   assert.deepEqual(tag.tagActions(state,member(3)),[],'the inactive physical Trap owner must not receive response actions');
-  assert.throws(()=>tag.stepTagDuel(state,member(3),response),/Aguarde a vez do participante ativo\\./);
+  assert.throws(()=>tag.stepTagDuel(state,member(3),response),/Aguarde a vez do participante ativo\./);
   assert.equal(JSON.stringify(state),unchanged,'an inactive partner response must not mutate the chain');
 
   state=settle(tag.stepTagDuel(state,member(1),response));
