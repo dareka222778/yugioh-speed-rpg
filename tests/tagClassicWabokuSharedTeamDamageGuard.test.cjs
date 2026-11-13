@@ -84,7 +84,7 @@ test('Waboku protects the shared team LP when the opposing teammate attacks an i
   const attacker={...attackerCard,owner:1,position:'atk',faceUp:true,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
   state.core.players[0].monsters.push(target);
   state.core.players[1].monsters.push(attacker);
-  state.core.turn=0;
+  state.core.turn=3;
   const before=inventorySnapshot(state);
   assert.ok(high.card.atk>low.card.atk,'the attack would inflict battle damage without Waboku');
   assert.match(trap.uid,/^m0:/);
