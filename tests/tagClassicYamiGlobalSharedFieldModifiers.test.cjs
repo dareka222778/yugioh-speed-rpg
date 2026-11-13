@@ -64,7 +64,7 @@ function assertConserved(state,before){
 test('Yami field spell modifies eligible monsters on both teams and penalizes Fairy across the shared duel',()=>{
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M145 Seat '+seat,
-    cards:deck(seat===0?[YAMI]:seat===1?[BLUE_EYES,fairy.id]:seat===2?[DARK_MAGICIAN]:seat===3?[SUMMONED_SKULL]:[])
+    cards:deck(seat===0?[YAMI,fairy.id]:seat===1?[BLUE_EYES]:seat===2?[DARK_MAGICIAN]:seat===3?[SUMMONED_SKULL]:[])
   }));
   let state=tag.createTagDuel(players,{classic:true,first:0,seed:'m145-yami-both-teams'});
   const yami=takeCard(state,0,YAMI);
