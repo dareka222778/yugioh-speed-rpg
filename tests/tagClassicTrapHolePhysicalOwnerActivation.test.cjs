@@ -73,7 +73,7 @@ test('Trap Hole set by seat 0 can be activated by seat 2 against a Normal Summon
   let state=tag.createTagDuel(players,{classic:true,first:0,seed:'m124-trap-hole-physical-owner'});
   const trap=ensureInHand(state,0,TRAP_HOLE);
   const target=ensureInHand(state,3,targetCard.id);
-  state.core.turn=0;
+  state.core.turn=3;
   const before=inventorySnapshot(state);
   assert.match(trap.uid,/^m0:/,'Trap Hole must retain seat 0 physical ownership');
   assert.match(target.uid,/^m3:/,'the Normal Summon must retain seat 3 physical ownership');
