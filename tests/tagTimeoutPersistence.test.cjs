@@ -111,6 +111,7 @@ after(()=>{
 test('expired classic 2v2 decision is persisted as one W.O. without touching player collections',()=>{
   database.createPlayer('m73-profile-a','M73 Profile A');
   database.createPlayer('m73-profile-b','M73 Profile B');
+  for(let seat=0;seat<4;seat++)database.createPlayer('m73-seat-'+seat,'M73 Seat '+seat);
   const playerDataBefore=playerSnapshot();
   const state=buildState();
   const before=inventorySnapshot(state);
@@ -139,6 +140,10 @@ test('expired classic 2v2 decision is persisted as one W.O. without touching pla
   assertInventory(expired.state,before);
   assert.equal(db.prepare('SELECT COUNT(*) AS count FROM tag_members WHERE session_id=?').get(record.id).count,0,
     'finished timeout must release all four active seat locks');
+  const replacement=store.createTagLobby(record.members.map(member=>member.id),record.guild,'m73-rejoin-channel','classic-loan');
+  assert.equal(replacement.status,'lobby','the same four players must be able to form a new lobby after timeout cleanup');
+  store.quitTag(replacement.id,record.members[0].id,record.guild,replacement.revision);
+  for(const member of record.members)assert.equal(store.currentTag(member.id),undefined,'no old timeout lock may prevent rejoining');
   assert.equal(playerSnapshot(),playerDataBefore,'automatic timeout must not grant or remove player cards');
 
   const queued=store.dueTags().find(item=>item.id===record.id);
