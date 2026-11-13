@@ -111,3 +111,18 @@ test('Upstart Goblin draws only for the active physical seat and grants 1000 LP 
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
   assertConserved(state,before);
 });
+
+test('Upstart Goblin cannot borrow a teammate Deck when the active physical Deck is empty',()=>{
+  const {state,before}=setup();
+  const active=holder(state,0);
+  state.core.players[0].grave.push(...active.deck.splice(0));
+  assert.equal(active.deck.length,0,'the active physical seat Deck is intentionally exhausted');
+  assert.ok(holder(state,2).deck.length>0,'the inactive teammate still has cards but cannot lend them');
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  const unchanged=JSON.stringify(state);
+  assert.ok(!tag.tagActions(state,member(0)).some(candidate=>
+    candidate.kind==='spell'&&candidate.card===state.core.players[0].hand.find(card=>card.id===UPSTART)?.uid
+  ),'Upstart Goblin must not be legal when only the partner has cards to draw');
+  assert.equal(JSON.stringify(state),unchanged,'an unavailable draw must not mutate any physical zone');
+  assertConserved(state,before);
+});
