@@ -13,6 +13,8 @@ let database=require('../dist/database');
 let db=database.db;
 let store=require('../dist/tagStore');
 const tag=require('../dist/tagDuel');
+const ui=require('../dist/tagUI');
+const {validateDiscordPayload}=require('../dist/discordPayload');
 const {DECISION_TIMEOUT_MS}=require('../dist/duelStore');
 const {getPlayableCard}=require('../dist/effectRegistry');
 
@@ -92,6 +94,14 @@ test('expired classic 2v2 decision is persisted as one W.O. without touching pla
     'a late Discord button action must not mutate a session already closed by timeout'
   );
   assert.doesNotThrow(()=>tag.assertTagDuel(expired.state));
+  const publicMessage=ui.tagPublicMessage(expired);
+  validateDiscordPayload(publicMessage);
+  assert.deepEqual(publicMessage.components,[],'the finished public Discord panel must remove all action buttons');
+  for(const member of expired.members){
+    const privateMessage=ui.tagPrivateMessage(expired,member.id);
+    validateDiscordPayload(privateMessage);
+    assert.deepEqual(privateMessage.components,[],'finished private hand panels must remove all action buttons');
+  }
   assertInventory(expired.state,before);
   assert.equal(db.prepare('SELECT COUNT(*) AS count FROM tag_members WHERE session_id=?').get(record.id).count,0,
     'finished timeout must release all four active seat locks');
