@@ -72,7 +72,7 @@ function settle(state){
 test('Monster Reborn borrows an opposing physical card but Raigeki returns it to its original team Graveyard',()=>{
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M113 Seat '+seat,
-    cards:deck(seat===0?[MONSTER_REBORN]:seat===1?[RAIGEKI]:[])
+    cards:deck(seat===0?[MONSTER_REBORN]:seat===1?[RAIGEKI]:seat===3?[targetEntry.id]:[])
   }));
   let state=tag.createTagDuel(players,{classic:true,first:0,seed:'m113-monster-reborn-original-team-owner'});
   const before=inventorySnapshot(state);
