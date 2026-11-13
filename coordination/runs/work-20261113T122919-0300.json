@@ -4,7 +4,7 @@
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "state": "completed; released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "endedAt": "2026-11-13T12:51:08-03:00",
+  "endedAt": "2026-11-13T12:52:38-03:00",
   "timezone": "America/Sao_Paulo",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -30,7 +30,8 @@
     "M124: primeiro run identificou turno zero inválido na fixture; corrigido para turno positivo 3 no HEAD db639952 e nova CI enfileirada.",
     "M120: extended-soak 600s agora concluído com sucesso no HEAD corrigido 8985d429; job de teste/auditorias ainda em execução sem falhas no último polling.",
     "M121: extended-soak 600s concluído com sucesso; job de teste/auditorias ainda em execução sem falhas no último polling.",
-    "M61: nova observação documentada na PR #17 — a legalidade inicial de Card Destruction ainda consulta somente mãos dos assentos ativos em classicEffects.ts; ajuste aguarda handoff explícito."
+    "M61: nova observação documentada na PR #17 — a legalidade inicial de Card Destruction ainda consulta somente mãos dos assentos ativos em classicEffects.ts; ajuste aguarda handoff explícito.",
+    "M128: criada regressão Just Desserts; conta monstros dos dois assentos físicos da equipe adversária no campo compartilhado e aplica 500 PV por monstro; PR #84."
   ],
   "changes": [
     {
@@ -123,6 +124,16 @@
         "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
       ],
       "codeChange": false
+    },
+    {
+      "m": "M128",
+      "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+      "pr": 84,
+      "files": [
+        "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+      ],
+      "codeChange": false
     }
   ],
   "catalog": {
@@ -180,8 +191,9 @@
     "pr77": {
       "cardBatchFast": "success",
       "milestone1000": "success",
-      "engineValidation": "in_progress",
-      "extendedSoak": "success"
+      "engineValidation": "success",
+      "extendedSoak": "success",
+      "test": "success"
     },
     "pr78": {
       "cardBatchFast": "success",
@@ -196,23 +208,28 @@
       "extendedSoak": "in_progress"
     },
     "pr80": {
-      "cardBatchFast": "queued",
-      "milestone1000": "queued",
-      "engineValidation": "queued",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
       "previousHeadFailure": "turn 0 fixture invalid; corrected to turn 3 on current HEAD"
     },
     "pr81": {
       "cardBatchFast": "success",
-      "milestone1000": "queued",
-      "engineValidation": "queued"
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
     },
     "pr82": {
       "cardBatchFast": "queued",
-      "milestone1000": "queued",
+      "milestone1000": "success",
       "engineValidation": "queued"
     },
     "pr83": {
-      "cardBatchFast": "queued",
+      "cardBatchFast": "in_progress",
+      "milestone1000": "success",
+      "engineValidation": "queued"
+    },
+    "pr84": {
+      "cardBatchFast": "not yet returned",
       "milestone1000": "queued",
       "engineValidation": "queued"
     }
@@ -322,18 +339,26 @@
         "scope": [
           "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
         ]
+      },
+      {
+        "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+        "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+        "pr": 84,
+        "scope": [
+          "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+        ]
       }
     ],
     "allowed": "monitorar CI e corrigir falhas somente nas três branches próprias; atualizar checkpoint após nova revisão.",
     "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61 ou M118; não alterar banco/inventários nem conceder cartas."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #75–#83, corrigir falhas somente nas nove branches próprias e reportar M108 (#64). Work às 13:30: concluir auditorias de #76–#79, validar #80–#83, verificar handoffs M61/M118 e só então escolher integração/novo lote.",
+  "nextTask": "Auxiliar: monitorar CI das PRs #75–#84, corrigir falhas somente nas dez branches próprias e reportar M108 (#64). Work na próxima janela: concluir auditorias de #76/#78/#79/#80/#81, validar #82–#84, verificar handoffs M61/M118 e então escolher integração/novo lote.",
   "nextWorkAt": "2026-11-13T13:30:00-03:00",
   "duration": {
-    "elapsedWallMinutes": 21,
+    "elapsedWallMinutes": 23,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "A janela registrada não comprova 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "lastActivityAt": "2026-11-13T12:51:08-03:00"
+  "lastActivityAt": "2026-11-13T12:52:38-03:00"
 }
