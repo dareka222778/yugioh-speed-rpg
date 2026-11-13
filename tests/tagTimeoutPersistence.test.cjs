@@ -54,7 +54,7 @@ function insertSession(state){
     id:'m73-timeout-session',
     guild:'m73-guild',
     channel:'m73-channel',
-    message:null,
+    message:'m73-message',
     revision:7,
     updated:1_700_000_000_000,
     status:'playing',
@@ -92,6 +92,12 @@ test('expired classic 2v2 decision is persisted as one W.O. without touching pla
     'finished timeout must release all four active seat locks');
   assert.equal(playerSnapshot(),playerDataBefore,'automatic timeout must not grant or remove player cards');
 
+  const queued=store.dueTags().find(item=>item.id===record.id);
+  assert.ok(queued,'the finished timeout must be queued for Discord panel publication');
+  assert.equal(queued.status,'finished');
+  store.markTagPublished(record.id,expired.revision);
+  assert.ok(!store.dueTags().some(item=>item.id===record.id),'publishing the finished revision must clear the pending panel update');
+
   const savedState=JSON.stringify(expired.state);
   const savedRevision=expired.revision;
   db.close();
@@ -109,4 +115,5 @@ test('expired classic 2v2 decision is persisted as one W.O. without touching pla
   assertInventory(restored.state,before);
   assert.equal(db.prepare('SELECT COUNT(*) AS count FROM tag_members WHERE session_id=?').get(record.id).count,0);
   assert.equal(playerSnapshot(),playerDataBefore,'reopening an expired session must not mutate player collections');
+  assert.ok(!store.dueTags().some(item=>item.id===record.id),'a published terminal revision must not be re-enqueued after restart');
 });
