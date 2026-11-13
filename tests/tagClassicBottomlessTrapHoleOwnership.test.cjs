@@ -14,7 +14,7 @@ assert.deepEqual(getActivationModel(getEffect(BOTTOMLESS))?.summonKinds,['summon
 
 const normal=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
-  .filter(entry=>entry.card&&entry.card.kind==='monster'&&Number.isInteger(entry.card.atk));
+  .filter(entry=>entry.card&&entry.card.kind==='monster'&&Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.level)&&entry.card.level<=4);
 assert.ok(normal.length>=7,'the Bottomless fixture needs seven certified Normal Monsters');
 const highEntry=normal.reduce((best,current)=>current.card.atk>best.card.atk?current:best);
 const lowEntry=normal.filter(entry=>entry.card.atk<1500)
@@ -136,13 +136,13 @@ test('inactive teammate-owned Bottomless Trap Hole banishes a qualifying Normal 
 
 test('Bottomless Trap Hole cannot answer a Normal Summon below 1500 ATK',()=>{
   const {state:initial,before,summoned,trap}=setup(lowEntry.id,'m107-bottomless-low-atk');
-  let state=normalSummon(initial,summoned);
-  assert.equal(state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(state).id,member(1));
-  assert.ok(!tag.tagActions(state,member(1)).some(action=>
-    action.kind==='trap'&&action.card===trap.uid
-  ),'the active defender must not receive Bottomless below its printed ATK threshold');
-  state=settle(state);
+  const state=normalSummon(initial,summoned);
+  assert.equal(state.core.phase,'main',
+    'a below-threshold Normal Summon must not open a Bottomless Trap Hole response window');
+  assert.equal(tag.tagDecisionMember(state).id,member(0),
+    'the active summoning seat keeps the turn when no eligible response exists');
+  assert.deepEqual(tag.tagActions(state,member(1)),[],
+    'the defending team must not receive a response decision for an ineligible summon');
   assert.ok(state.core.players[0].monsters.some(card=>card.uid===summoned.uid),
     'the low-ATK Normal Summon must remain on the shared team field');
   assert.ok(state.core.players[1].backrow.some(card=>card.uid===trap.uid&&!card.faceUp),
