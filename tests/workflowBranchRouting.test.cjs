@@ -33,7 +33,9 @@ function readPullRequestBranches(file) {
 
 for (const workflow of [
   '.github/workflows/card-batch-fast.yml',
-  '.github/workflows/engine-validation.yml'
+  '.github/workflows/engine-validation.yml',
+  '.github/workflows/card-batch-admission.yml',
+  '.github/workflows/milestone1000.yml'
 ]) {
   test(`${workflow} runs for isolated Work and auxiliary PR bases`, () => {
     const branches = readPullRequestBranches(workflow);
