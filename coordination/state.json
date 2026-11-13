@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:57:03-03:00",
-  "lastActivityAt": "2026-11-13T13:07:46-03:00",
+  "lastActivityAt": "2026-11-13T13:09:11-03:00",
   "nextScheduledAt": "2026-11-13T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -19,7 +19,8 @@
     "tests/tagClassicJarOfGreedPhysicalDraw.test.cjs",
     "tests/tagClassicDirectLPEffectsTeamOwnership.test.cjs",
     "tests/tagClassicMagicCylinderPhysicalOwners.test.cjs",
-    "coordination/runs/work-20261113T125703-0300.json"
+    "coordination/runs/work-20261113T125703-0300.json",
+    "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
   "previousRunId": "work-20261113T122919-0300",
@@ -941,6 +942,21 @@
         "engineValidation": "queued",
         "milestone1000": "queued"
       }
+    },
+    {
+      "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
+      "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+      "pr": 64,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
     }
   ],
   "handoffRequest": {
@@ -953,9 +969,9 @@
   "handoff": {
     "to": "auxiliary",
     "status": "released",
-    "at": "2026-11-13T13:06:15-03:00",
-    "scope": "Branches próprias Work M129–M133 liberadas para monitoramento de CI e correções somente nos cinco testes próprios. M61 e M118 continuam bloqueados aguardando handoff explícito.",
-    "nextTask": "Auxiliar: acompanhar CI das PRs #85–#89 e corrigir falhas somente nas cinco branches M129–M133. Work na próxima janela: revalidar #80/#84, confirmar correção M126/#82, verificar handoffs M61/M118 e continuar a próxima família de efeitos 2v2 sem duplicações.",
+    "at": "2026-11-13T13:09:11-03:00",
+    "scope": "Branches próprias Work M108 e M129–M133 liberadas para monitoramento de CI e correções somente nos testes próprios. M61 e M118 continuam bloqueados aguardando handoff explícito.",
+    "nextTask": "Auxiliar: acompanhar CI #64 e #85–#89; corrigir falhas somente nas branches próprias M108 e M129–M133. Work na próxima janela: revalidar #80/#84, confirmar correção M126/#82, verificar handoffs M61/M118 e continuar a próxima família 2v2.",
     "nextWorkAt": "2026-11-13T17:30:00-03:00"
   },
   "catalog": {
@@ -1259,7 +1275,8 @@
       "state": "open",
       "draft": true,
       "branch": "M108",
-      "ci": "engine-validation-failure: one npm test expectation; auxiliary notified"
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued; test-only Negate Attack fixture correction",
+      "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83"
     },
     {
       "number": 65,
@@ -1632,14 +1649,11 @@
       "milestone1000": "success"
     },
     "pr64": {
-      "cardBatchFast": "success",
-      "engineValidation": "failure",
-      "milestone1000": "success",
-      "npmTest": "failure",
-      "passedTests": 7366,
-      "failedTests": 1,
-      "extendedSoak": "success",
-      "failure": "Negate Attack test expected response, actual main; auxiliary notified in PR #64."
+      "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued",
+      "commentId": 6858349396
     },
     "pr65": {
       "branch": "M109",
@@ -1803,12 +1817,12 @@
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
   },
   "duration": {
-    "elapsedWallMinutes": 10,
+    "elapsedWallMinutes": 12,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "A janela observada foi de aproximadamente dez minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
+    "note": "A janela observada foi de aproximadamente doze minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: acompanhar CI #85–#89; corrigir falhas somente nas branches M129–M133. PR #82/M126 falhou por fixture sem carta 12482652 no Deck físico seat 2; diagnóstico já enviado. Work na próxima janela: revalidar #80/#84, confirmar correção #82, verificar handoffs M61/M118 e continuar a próxima família 2v2.",
+  "nextTask": "Auxiliar: acompanhar CI #64 e #85–#89; corrigir falhas somente nas branches próprias M108 e M129–M133. Work na próxima janela: revalidar #80/#84, confirmar correção M126/#82, verificar handoffs M61/M118 e continuar a próxima família 2v2.",
   "sharedHeadBeforeRelease": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
   "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
   "sharedHeadBeforeClaim": "97c622833a72415ea29f5bd0320a8a07f67dc0a5",
@@ -2117,8 +2131,8 @@
     "reservedFiles": [],
     "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-13T12:57:03-03:00",
-    "lastActivityAt": "2026-11-13T13:07:46-03:00",
-    "completedAt": "2026-11-13T13:07:46-03:00",
+    "lastActivityAt": "2026-11-13T13:09:11-03:00",
+    "completedAt": "2026-11-13T13:09:11-03:00",
     "head": "282e88ce752c07023d77ee49da491cdb101af791",
     "pr": 85,
     "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
@@ -2148,6 +2162,13 @@
         "branch": "feat/work-m133-magic-cylinder-2v2-20261113",
         "head": "6eba9628ec7c3e251be913110add8f69dabede13",
         "pr": 89,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
+        "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+        "pr": 64,
         "base": "feat/work-m71-ci-branch-routing-20261112",
         "state": "released-to-auxiliary-monitor-ci"
       }
@@ -3114,7 +3135,7 @@
       "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
       "state": "completed; released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-13T12:57:03-03:00",
-      "endedAt": "2026-11-13T13:07:46-03:00",
+      "endedAt": "2026-11-13T13:09:11-03:00",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "97c622833a72415ea29f5bd0320a8a07f67dc0a5",
       "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
@@ -3189,17 +3210,31 @@
             "engineValidation": "queued",
             "milestone1000": "queued"
           }
+        },
+        {
+          "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
+          "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+          "pr": 64,
+          "scope": [
+            "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "queued",
+            "engineValidation": "queued",
+            "milestone1000": "queued"
+          }
         }
       ],
       "lastCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
       "nextWorkAt": "2026-11-13T17:30:00-03:00",
       "duration": {
-        "elapsedWallMinutes": 10,
+        "elapsedWallMinutes": 12,
         "effectiveMinutesMeasured": false,
         "minimum60MinutesConfirmed": false,
-        "note": "A janela observada foi de aproximadamente dez minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
+        "note": "A janela observada foi de aproximadamente doze minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
       },
-      "lastActivityAt": "2026-11-13T13:07:46-03:00",
+      "lastActivityAt": "2026-11-13T13:09:11-03:00",
       "validation": {
         "pr85": {
           "cardBatchFast": "queued",
@@ -3230,10 +3265,10 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
-  "lastParallelActivityAt": "2026-11-13T13:07:46-03:00",
-  "sharedHeadAfterCheckpoint": "10b25ef9d62fc9d615130b2ecba02ea00659c48d",
-  "sharedHeadBeforeStateUpdate": "10b25ef9d62fc9d615130b2ecba02ea00659c48d",
-  "endedAt": "2026-11-13T13:07:46-03:00",
+  "lastParallelActivityAt": "2026-11-13T13:09:11-03:00",
+  "sharedHeadAfterCheckpoint": "49a1adb436ad299b5df9508753adc1a08477f0f4",
+  "sharedHeadBeforeStateUpdate": "49a1adb436ad299b5df9508753adc1a08477f0f4",
+  "endedAt": "2026-11-13T13:09:11-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -3286,9 +3321,17 @@
         "scope": [
           "tests/tagClassicMagicCylinderPhysicalOwners.test.cjs"
         ]
+      },
+      {
+        "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
+        "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+        "pr": 64,
+        "scope": [
+          "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
+        ]
       }
     ],
-    "allowed": "monitorar CI das PRs #85–#89 e corrigir falhas somente nos arquivos de teste das cinco branches M129–M133; registrar resultados e devolver checkpoint.",
+    "allowed": "monitorar CI das PRs #64 e #85–#89 e corrigir falhas somente nos arquivos de teste das branches próprias M108 e M129–M133; registrar resultados e devolver checkpoint.",
     "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61/M118 nem nas branches M119–M128 de terceiros; não alterar banco/inventários ou conceder cartas."
   },
   "scopeReleasedToAuxiliary": {
@@ -3332,9 +3375,17 @@
         "scope": [
           "tests/tagClassicMagicCylinderPhysicalOwners.test.cjs"
         ]
+      },
+      {
+        "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
+        "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+        "pr": 64,
+        "scope": [
+          "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
+        ]
       }
     ],
-    "allowed": "monitorar CI das PRs #85–#89 e corrigir falhas somente nos arquivos de teste das cinco branches M129–M133; registrar resultados e devolver checkpoint.",
+    "allowed": "monitorar CI das PRs #64 e #85–#89 e corrigir falhas somente nos arquivos de teste das branches próprias M108 e M129–M133; registrar resultados e devolver checkpoint.",
     "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61/M118 nem nas branches M119–M128 de terceiros; não alterar banco/inventários ou conceder cartas."
   }
 }
