@@ -20,7 +20,7 @@ const normal=[...new Set(tag.tagNormalCardIds)]
   .filter(entry=>entry.card&&entry.card.kind==='monster'&&Number.isInteger(entry.card.atk));
 assert.ok(normal.length>=7,'the Magic Cylinder fixture needs seven certified Normal Monsters');
 const attackerEntry=normal.reduce((best,current)=>current.card.atk>best.card.atk?current:best);
-const deckIds=[...new Set(normal.map(entry=>entry.id))].slice(0,7);
+const deckIds=[...new Set([attackerEntry.id,...normal.map(entry=>entry.id)])].slice(0,7);
 assert.equal(deckIds.length,7);
 
 function member(seat){return 'm104-seat-'+seat;}
