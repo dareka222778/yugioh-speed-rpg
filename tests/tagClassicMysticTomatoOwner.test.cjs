@@ -21,6 +21,12 @@ const attackerEntry=normalCards
   .filter(entry=>entry.card.atk>(tomato.defense??0))
   .sort((a,b)=>b.card.atk-a.card.atk)[0];
 assert.ok(attackerEntry,'Mystic Tomato battle fixture needs a Normal Monster above its Defense');
+function diagnosticTest(name,run){
+ test(name,(...args)=>{
+  try{return run(...args);}
+  catch(error){console.error('[M88 Mystic Tomato diagnostic]',error?.stack??error);throw error;}
+ });
+}
 function member(seat){return 'm88-seat-'+seat;}
 function deck(required=[]){
  const ids=[...new Set([...required,...tag.tagNormalCardIds])].slice(0,7);
@@ -77,7 +83,7 @@ function assertConserved(state,before){
  for(const card of cards)assert.equal(before.get(card.uid),card.id);
 }
 
-test('Mystic Tomato resolves for the active teammate and recruits from that physical Deck, not the inactive source partner',()=>{
+diagnosticTest('Mystic Tomato resolves for the active teammate and recruits from that physical Deck, not the inactive source partner',()=>{
  const players=[
   {id:member(0),name:'M88 Seat 0',cards:deck([attackerEntry.id])},
   {id:member(1),name:'M88 Seat 1',cards:deck([KURIBOH])},
