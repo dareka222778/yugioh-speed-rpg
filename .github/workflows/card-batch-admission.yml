@@ -1,7 +1,12 @@
 name: Card batch admission preparation
 on:
   pull_request:
-    branches: [main, classic-engine-foundation]
+    branches:
+      - main
+      - classic-engine-foundation
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+      - 'feat/aux-*'
     paths:
       - 'catalog/proposed/**'
       - 'scripts/card-batch-*.cjs'
