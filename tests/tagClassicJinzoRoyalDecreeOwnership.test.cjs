@@ -111,46 +111,47 @@ function declareDirectAttack(state,attacker){
   );
   assert.ok(attack,'the active teammate must be able to declare the direct attack');
   state=tag.stepTagDuel(state,member(0),attack);
-  assert.equal(state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(state).id,member(1),
-    'the active physical member of the defending team owns response priority');
   return state;
 }
 
-test('Jinzo owned by an inactive teammate blocks the active opposing teammate from activating a set Trap',()=>{
-  let {state,before,attacker,source:jinzo,trap}=setup('monster',JINZO,'m101-jinzo-inactive-teammate');
-  const publicBefore=tag.publicTagDuel(state);
+test('face-up Jinzo on an inactive teammate blocks Trap activation; turning it face-down restores the response',()=>{
+  const blocked=setup('monster',JINZO,'m101-jinzo-blocks-inactive-teammate-trap');
+  const publicBefore=tag.publicTagDuel(blocked.state);
   assert.ok(!JSON.stringify(publicBefore).includes(SAKURETSU_ARMOR),
     'the opposing set Trap identity must remain hidden before activation');
-  assert.ok(!JSON.stringify(publicBefore).includes(trap.uid),
+  assert.ok(!JSON.stringify(publicBefore).includes(blocked.trap.uid),
     'the opposing set Trap physical UID must remain hidden before activation');
 
-  state=declareDirectAttack(state,attacker);
-  const blocked=tag.tagActions(state,member(1));
-  assert.ok(blocked.some(action=>action.kind==='pass'));
-  assert.ok(!blocked.some(action=>action.kind==='trap'&&action.card===trap.uid),
-    'face-up Jinzo on the other team must prevent Trap activation, not merely negate resolution');
-  assert.deepEqual(tag.tagActions(state,member(3)),[],
-    'the inactive physical owner of Sakuretsu Armor must not receive response priority');
+  let state=declareDirectAttack(blocked.state,blocked.attacker);
+  assert.equal(state.core.phase,'battle',
+    'with Jinzo face-up, no Trap response window should be opened');
+  assert.ok(state.core.players[1].backrow.some(card=>card.uid===blocked.trap.uid&&!card.faceUp),
+    'the inactive partner set Trap must remain set and unused');
+  assert.ok(!state.core.players[1].grave.some(card=>card.uid===blocked.trap.uid),
+    'Jinzo blocks activation rather than consuming the Trap');
 
-  // A face-down Jinzo is no longer a continuous source. The same pending
-  // attack must immediately expose the legal Trap response, without a stale cache.
-  jinzo.faceUp=false;
-  jinzo.position='def';
-  assert.doesNotThrow(()=>tag.assertTagDuel(state));
-  const restored=tag.tagActions(state,member(1)).find(action=>
-    action.kind==='trap'&&action.card===trap.uid&&action.target===attacker.uid
+  const restored=setup('monster',JINZO,'m101-jinzo-face-down-restores-trap');
+  restored.source.faceUp=false;
+  restored.source.position='def';
+  assert.doesNotThrow(()=>tag.assertTagDuel(restored.state));
+  state=declareDirectAttack(restored.state,restored.attacker);
+  assert.equal(state.core.phase,'response');
+  assert.equal(tag.tagDecisionMember(state).id,member(1),
+    'the active physical member of the defending team owns response priority');
+  const response=tag.tagActions(state,member(1)).find(action=>
+    action.kind==='trap'&&action.card===restored.trap.uid&&action.target===restored.attacker.uid
   );
-  assert.ok(restored,'turning Jinzo face-down must restore the Trap activation window');
-  state=settle(tag.stepTagDuel(state,member(1),restored));
-  assert.ok(state.core.players[0].grave.some(card=>card.uid===attacker.uid),
-    'Sakuretsu Armor must destroy the attacker after Jinzo stops applying');
-  assert.ok(state.core.players[1].grave.some(card=>card.uid===trap.uid),
+  assert.ok(response,'a face-down Jinzo must no longer suppress the Trap activation');
+  assert.deepEqual(tag.tagActions(state,member(3)),[],
+    'the inactive physical owner of Sakuretsu Armor must not receive response actions');
+  state=settle(tag.stepTagDuel(state,member(1),response));
+  assert.ok(state.core.players[0].grave.some(card=>card.uid===restored.attacker.uid),
+    'Sakuretsu Armor must destroy the attacker once Jinzo is face-down');
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===restored.trap.uid),
     'the activated physical Trap must move to the shared team Graveyard');
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
-  assertConserved(state,before);
+  assertConserved(state,restored.before);
 });
-
 test('Royal Decree owned by an inactive teammate allows Trap activation but negates the Trap effect on resolution',()=>{
   let {state,before,attacker,source:royalDecree,trap}=setup('trap',ROYAL_DECREE,'m101-royal-decree-inactive-teammate');
   assert.equal(royalDecree.faceUp,true);
