@@ -1,0 +1,182 @@
+{
+  "runId": "work-20261113T122919-0300",
+  "owner": "Work",
+  "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
+  "state": "completed; released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-13T12:29:19-03:00",
+  "endedAt": "2026-11-13T12:37:36-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e do último checkpoint; verificação do HEAD real da branch compartilhada (2f80f2e), branches, PRs, workflows e situação de produção.",
+    "Handoff cooperativo renovado na PR #17/M61 para os cinco arquivos bloqueados; sem resposta. Nenhum arquivo reservado foi alterado.",
+    "Handoff cooperativo solicitado na PR #74/M118 para src/tagDuel.ts e seu teste; CI do HEAD M118 está verde, mas ainda sem liberação explícita. Nenhum arquivo M118 foi alterado.",
+    "M119: criada regressão 2v2 de Dark Hole, cobrindo destruição dos quatro assentos, monstro baixado, privacidade, backrow intocada, autorização e conservação de 80 UIDs; PR #75.",
+    "M120: corrigido Card Destruction em src/spellExceptions.ts para percorrer as quatro mãos/decks físicos, devolver descartes aos Cemitérios compartilhados por equipe e agregar falha de compra por equipe; regressões de compra individual e derrota por deck-out; PR #76.",
+    "M121: criada regressão de Pot of Greed para compra do Deck físico ativo, preservação da mão/deck do parceiro e permissão de sete cartas durante a Main Phase, sem descarte prematuro; PR #77.",
+    "Diagnóstico de M108/PR #64: 7.366 testes passaram e um falhou; a Counter Trap Negate Attack deixou o estado em main em vez de abrir response. Diagnóstico publicado na PR para o auxiliar.",
+    "Confirmação de que PRs #65–#74 agora têm Card batch fast, Engine validation e Milestone 1000 concluídos com sucesso."
+  ],
+  "changes": [
+    {
+      "m": "M119",
+      "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
+      "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+      "pr": 75,
+      "files": [
+        "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M120",
+      "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+      "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+      "pr": 76,
+      "files": [
+        "src/spellExceptions.ts",
+        "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs"
+      ],
+      "codeChange": "Card Destruction agora descarta/recompra as quatro mãos físicas no 2v2; deck-out de qualquer assento derrota sua equipe."
+    },
+    {
+      "m": "M121",
+      "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
+      "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+      "pr": 77,
+      "files": [
+        "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+      ],
+      "codeChange": false
+    }
+  ],
+  "catalog": {
+    "sharedBranch": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "developmentSnapshot": {
+      "cards": 1014,
+      "certificates": 1014,
+      "merged": false
+    },
+    "deltaToShared": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "validation": {
+    "pr64": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "extendedSoak": "success",
+      "engineValidation": "failure",
+      "npmTest": {
+        "passed": 7366,
+        "failed": 1
+      },
+      "failedTest": "inactive teammate-owned Negate Attack ends the Battle Phase and blocks ordinary Trap chaining",
+      "assertion": "actual phase main; expected response"
+    },
+    "pr17": {
+      "engineValidation": "failure",
+      "build": "failure",
+      "cardBatchFast": "failure",
+      "handoff": "awaiting-response"
+    },
+    "pr65to74": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr75": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr76": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr77": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress"
+    }
+  },
+  "handoffRequests": {
+    "m61": {
+      "pr": 17,
+      "commentId": 6857487009,
+      "status": "awaiting-response",
+      "blockedFiles": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts",
+        "src/classicEffects.ts",
+        "src/duelIntegrity.ts",
+        "scripts/mass-certification21.cjs"
+      ]
+    },
+    "m118": {
+      "pr": 74,
+      "commentId": 6857580108,
+      "status": "awaiting-response",
+      "blockedFiles": [
+        "src/tagDuel.ts",
+        "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+      ]
+    }
+  },
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscordValidation": false,
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "hosting": "not verified; no deployment workflow or authenticated hosting check available in this run"
+  },
+  "releaseToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
+        "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+        "pr": 75,
+        "scope": [
+          "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+        "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+        "pr": 76,
+        "scope": [
+          "src/spellExceptions.ts",
+          "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
+        "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+        "pr": 77,
+        "scope": [
+          "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+        ]
+      }
+    ],
+    "allowed": "monitorar CI e corrigir falhas somente nas três branches próprias; atualizar checkpoint após nova revisão.",
+    "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61 ou M118; não alterar banco/inventários nem conceder cartas."
+  },
+  "nextTask": "Auxiliar: monitorar CI das PRs #75–#77 e corrigir falhas somente nas branches próprias; reportar/corrigir M108 (#64) sem tocar nas reservas M61/M118. Work na próxima janela: conferir os três resultados completos, verificar handoffs M61/M118 e, se M61 continuar bloqueado, avançar em outro efeito independente de 2v2.",
+  "nextWorkAt": "2026-11-13T13:30:00-03:00",
+  "duration": {
+    "elapsedWallMinutes": 8,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "A janela registrada não comprova 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
+  }
+}
