@@ -51,7 +51,7 @@ test('2v2 action receipts replay once, reject conflicting IDs, survive SQLite re
   assert.notEqual(actionIndex,-1,'the active physical member must be able to end the turn');
   assert.notEqual(conflictingIndex,-1,'the fixture must expose a distinct action for collision testing');
   const expectedRevision=record.revision;
-  const invalidRetry=invalidRetry;
+  const invalidRetry='m75-invalid-retry';
 
   assert.throws(
     ()=>store.actTag(record.id,actor,record.guild,expectedRevision,999,invalidRetry),
