@@ -52,6 +52,22 @@
         "tests/tagClassicPyramidTurtleOwnership.test.cjs"
       ],
       "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicRecruiterFiltersOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m97-tag-troop-dragon-recursion-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicTroopDragonRecursionOwnership.test.cjs"
+      ],
+      "state": "claimed"
     }
   ],
   "handoff": {
@@ -101,6 +117,13 @@
       "pr": 50,
       "file": "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs",
       "detail": "Ryu Kokki, Getsu Fuhma e Karakuri Spider; filtros de Raça/Atributo com positivos e negativos."
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "head": "3aa88770e6b4576fb470123455cad8a3d215c6eb",
+      "pr": 51,
+      "file": "tests/tagClassicPyramidTurtleOwnership.test.cjs",
+      "detail": "Pyramid Turtle opcional; recruta Zombie com DEF <= 2000 do Deck físico do representante ativo; exclui Deck do parceiro inativo e Kuriboh."
     }
   ],
   "production": {
@@ -113,7 +136,7 @@
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false
   },
-  "nextTask": "M92–M94 publicados; CI em andamento. Prosseguir com M95 Pyramid Turtle (recrutamento Zombie por DEF máxima) em branch isolada, depois revisar os resultados e escolher a próxima família sem tocar em M61/M88–M91.",
+  "nextTask": "M92–M94: corrigir os fixtures de stats de CardRef e aguardar CI dos HEADs corrigidos; M95: concluir a escolha de posição de recrutamento; avançar M96 (Masked Dragon/Howling Insect) e M97 (Troop Dragon obrigatório) em branches próprias.",
   "nextWorkAt": "2026-11-13T03:30:00-03:00",
   "ci": {
     "pr48": {
@@ -136,6 +159,14 @@
       "cardBatchFast": "not-visible",
       "engineValidation": "in_progress",
       "engineRunId": 43376863194
+    },
+    "pr51": {
+      "cardBatchFast": "success",
+      "fastRunId": 43377278202,
+      "engineValidation": "in_progress",
+      "engineRunId": 43377278443,
+      "milestone1000": "success",
+      "milestoneRunId": 43377278259
     }
   }
 }
