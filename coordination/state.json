@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T12:29:19-03:00",
-  "lastActivityAt": "2026-11-13T12:38:12-03:00",
+  "lastActivityAt": "2026-11-13T12:40:41-03:00",
   "nextScheduledAt": "2026-11-13T13:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -686,7 +686,7 @@
     },
     {
       "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-      "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
       "pr": 76,
       "base": "feat/work-m71-ci-branch-routing-20261112",
       "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
@@ -696,15 +696,15 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": "success",
+        "cardBatchFast": "in_progress",
         "engineValidation": "in_progress",
         "milestone1000": "success",
         "extendedSoak": "in_progress",
-        "fastRunId": 43454013462,
-        "engineRunId": 43454013362,
-        "milestoneRunId": 43454013364
+        "fastRunId": 43454799650,
+        "engineRunId": 43454798944,
+        "milestoneRunId": 43454798835
       },
-      "note": "Runtime fix is isolated to spellExceptions.ts; no M61/M118 paths changed."
+      "note": "Primeiro run falhou somente por uma asserção da fixture que apontava o Graveyard team 1; corrigida para team 0 no HEAD atual, nova CI em andamento."
     },
     {
       "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
@@ -1126,7 +1126,8 @@
       "state": "open",
       "draft": true,
       "branch": "M120",
-      "ci": "fast-success; milestone-success; engine-validation-in-progress; extended-soak-in-progress"
+      "ci": "fast-in-progress; milestone-success; engine-validation-in-progress; extended-soak-in-progress",
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8"
     },
     {
       "number": 77,
@@ -1386,14 +1387,15 @@
       "milestoneRunId": 43453623323
     },
     "pr76": {
-      "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
-      "cardBatchFast": "success",
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+      "cardBatchFast": "in_progress",
       "engineValidation": "in_progress",
       "milestone1000": "success",
       "extendedSoak": "in_progress",
-      "fastRunId": 43454013462,
-      "engineRunId": 43454013362,
-      "milestoneRunId": 43454013364
+      "fastRunId": 43454799650,
+      "engineRunId": 43454798944,
+      "milestoneRunId": 43454798835,
+      "previousHeadFailure": "fixture assertion used team 1 instead of activating team 0; corrected on current HEAD"
     },
     "pr77": {
       "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
@@ -1420,18 +1422,18 @@
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
   },
   "duration": {
-    "elapsedWallMinutes": 8,
+    "elapsedWallMinutes": 11,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
     "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #75–#77 e corrigir falhas somente nas branches próprias; reportar/corrigir M108 (#64) sem tocar nas reservas M61/M118. Work às 13:30: conferir resultados completos, verificar handoffs M61/M118 e continuar em outra frente 2v2 independente se as reservas permanecerem bloqueadas.",
+  "nextTask": "Auxiliar: acompanhar CI das PRs #75–#77; no M120, usar o HEAD corrigido 8985d429 e não reverter a correção. Work às 13:30: conferir os três resultados completos, handoffs M61/M118 e continuar em outra frente 2v2 independente se as reservas permanecerem bloqueadas.",
   "sharedHeadBeforeRelease": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
   "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
   "sharedHeadBeforeClaim": "bd1e9c7c6cffa36f337ab8059cdfec54bd44275f",
   "releasedOwnReservation": {
     "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-    "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+    "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
     "pr": 76,
     "owner": "Work",
     "state": "released-to-auxiliary-monitor-ci",
@@ -1654,7 +1656,7 @@
     },
     {
       "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-      "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
       "pr": 76,
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
@@ -1683,9 +1685,9 @@
     ],
     "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-13T12:29:19-03:00",
-    "lastActivityAt": "2026-11-13T12:38:12-03:00",
-    "completedAt": "2026-11-13T12:38:12-03:00",
-    "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+    "lastActivityAt": "2026-11-13T12:40:41-03:00",
+    "completedAt": "2026-11-13T12:40:41-03:00",
+    "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
     "pr": 76,
     "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
     "parallelOwnWork": [
@@ -1714,7 +1716,7 @@
         },
         {
           "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-          "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+          "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
           "pr": 76,
           "scope": [
             "src/spellExceptions.ts",
@@ -1733,7 +1735,12 @@
       "allowed": "monitorar CI e corrigir falhas somente nas próprias branches",
       "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61/M118; não alterar bancos ou inventários"
     },
-    "nextWorkAt": "2026-11-13T13:30:00-03:00"
+    "nextWorkAt": "2026-11-13T13:30:00-03:00",
+    "duration": {
+      "elapsedWallMinutes": 11,
+      "effectiveMinutesMeasured": false,
+      "minimum60MinutesConfirmed": false
+    }
   },
   "nextWorkAt": "2026-11-13T13:30:00-03:00",
   "parallelRuns": [
@@ -2339,7 +2346,7 @@
       "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
       "state": "completed; released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-13T12:29:19-03:00",
-      "endedAt": "2026-11-13T12:38:12-03:00",
+      "endedAt": "2026-11-13T12:40:41-03:00",
       "timezone": "America/Sao_Paulo",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
@@ -2369,7 +2376,7 @@
         },
         {
           "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-          "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+          "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
           "pr": 76,
           "base": "feat/work-m71-ci-branch-routing-20261112",
           "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
@@ -2379,13 +2386,15 @@
           ],
           "state": "released-to-auxiliary-monitor-ci",
           "ci": {
-            "cardBatchFast": "success",
+            "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+            "cardBatchFast": "in_progress",
             "engineValidation": "in_progress",
             "milestone1000": "success",
             "extendedSoak": "in_progress",
-            "fastRunId": 43454013462,
-            "engineRunId": 43454013362,
-            "milestoneRunId": 43454013364
+            "fastRunId": 43454799650,
+            "engineRunId": 43454798944,
+            "milestoneRunId": 43454798835,
+            "previousHeadFailure": "fixture assertion used team 1 instead of activating team 0; corrected on current HEAD"
           }
         },
         {
@@ -2422,7 +2431,7 @@
         {
           "m": "M120",
           "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-          "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+          "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
           "pr": 76,
           "files": [
             "src/spellExceptions.ts",
@@ -2464,7 +2473,7 @@
         "pr64": "one npm test failure; 7366 pass/1 fail",
         "pr65to74": "all three workflows success",
         "pr75": "fast+milestone success; engine/soak in progress",
-        "pr76": "fast+milestone success; engine/soak in progress",
+        "pr76": "nova revisão: Card batch fast, Engine validation e extended soak em andamento; Milestone 1000 aprovado",
         "pr77": "fast+milestone success; engine/soak in progress"
       },
       "deployment": {
@@ -2476,7 +2485,7 @@
       "nextTask": "Auxiliar: monitorar CI das PRs #65–#74, corrigir apenas falhas de teste nas branches liberadas e reportar M108 (#64). Work na próxima janela: verificar resultados finais, obter handoff M61 e, se liberado, corrigir TS2367/TS2339; continuar expansão comportamental sem duplicações.",
       "nextWorkAt": "2026-11-13T13:30:00-03:00",
       "duration": {
-        "elapsedWallMinutes": 8,
+        "elapsedWallMinutes": 11,
         "effectiveMinutesMeasured": false,
         "minimum60MinutesConfirmed": false,
         "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
@@ -2493,7 +2502,7 @@
           },
           {
             "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-            "head": "7ad27cdcacefbb8b4d135c98322a09881a368149",
+            "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
             "pr": 76,
             "scope": [
               "src/spellExceptions.ts",
@@ -2515,10 +2524,10 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T122919-0300.json",
-  "lastParallelActivityAt": "2026-11-13T12:38:12-03:00",
-  "sharedHeadAfterCheckpoint": "3c76c1555531d539044c6893c972aa27fca74226",
-  "sharedHeadBeforeStateUpdate": "3c76c1555531d539044c6893c972aa27fca74226",
-  "endedAt": "2026-11-13T12:38:12-03:00",
+  "lastParallelActivityAt": "2026-11-13T12:40:41-03:00",
+  "sharedHeadAfterCheckpoint": "98285b1376787e03230b494de7f965215b81b69e",
+  "sharedHeadBeforeStateUpdate": "98285b1376787e03230b494de7f965215b81b69e",
+  "endedAt": "2026-11-13T12:40:41-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
