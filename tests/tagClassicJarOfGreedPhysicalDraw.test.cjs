@@ -117,3 +117,27 @@ test('inactive teammate-owned Jar of Greed draws for the active physical teammat
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
   assertConserved(state,before);
 });
+
+test('Jar of Greed cannot borrow the active teammate Deck when the activating seat is exhausted',()=>{
+  const players=[0,1,2,3].map(seat=>({
+    id:member(seat),name:'M131 Seat '+seat,
+    cards:deck(seat===2?[JAR_OF_GREED]:[])
+  }));
+  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m131-jar-empty-active-deck'});
+  const card=takeCard(state,2,JAR_OF_GREED);
+  const jar={...card,setTurn:0,faceUp:false};
+  state.core.players[0].backrow.push(jar);
+  state.core.turn=3;
+  const active=holder(state,0);
+  state.core.players[0].grave.push(...active.deck.splice(0));
+  assert.equal(active.deck.length,0);
+  assert.ok(holder(state,2).deck.length>0,'the inactive Trap owner has cards but cannot lend them');
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  const before=inventorySnapshot(state);
+  const unchanged=JSON.stringify(state);
+  assert.ok(!tag.tagActions(state,member(0)).some(candidate=>
+    candidate.kind==='trap'&&candidate.card===jar.uid
+  ),'Jar of Greed must not be legal when the active physical seat cannot draw');
+  assert.equal(JSON.stringify(state),unchanged,'the rejected activation must not mutate the duel');
+  assertConserved(state,before);
+});
