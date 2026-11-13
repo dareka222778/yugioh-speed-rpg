@@ -31,6 +31,8 @@ function flipUtility(s:DuelState,id:string,cardId:string){
  return 0;
 }
 export function tacticalSummon(s:DuelState,id:string,actions:Action[]):Action|undefined{
+ const handSearch=actions.find(a=>a.kind==='searchCopiesFromHand'),player=s.players.find(p=>p.id===id);
+ if(handSearch&&player&&player.hand.length<6&&player.deck.length>2)return handSearch;
  const p=s.players.find(p=>p.id===id)!,op=s.players.find(p=>p.id!==id)!;
  const unknownDefenders=op.monsters.filter(m=>!m.faceUp).length;
  const candidates=actions.filter((a):a is Extract<Action,{kind:'summon'}>=>a.kind==='summon').map(action=>{

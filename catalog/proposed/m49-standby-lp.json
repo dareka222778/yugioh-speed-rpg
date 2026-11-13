@@ -1,0 +1,6213 @@
+{
+  "format": 1,
+  "batchId": "m49-standby-lp",
+  "baseRevision": "9314e348d6eb5b31f2052ce3031e07cb34770aede172afa64c3f6447079b51df",
+  "engineVersion": "engine-v9",
+  "reviews": [
+    {
+      "id": "85802526",
+      "canonicalId": "587a3fd2-bafb-4080-8244-c800df1237e4",
+      "konamiId": 5204,
+      "reviewer": "Work: Konami card text and historical printing; source and position requirements reviewed",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5204&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1500,
+        "defense": 800,
+        "race": "Fish",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "2003-03-01",
+        "set": "LON-041",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5204&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "19ab403644ec2e144a46cfc1a1ed217ce13df74c6849c79f5976edc7ff70b4ad",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "90925163",
+      "canonicalId": "4b71556a-051f-47ca-9375-2bd243b986da",
+      "konamiId": 5201,
+      "reviewer": "Work: Konami card text and historical printing; source and position requirements reviewed",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5201&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1700,
+        "defense": 1000,
+        "race": "Fairy",
+        "attribute": "WIND"
+      },
+      "verifiedPrinting": {
+        "date": "2003-03-01",
+        "set": "LON-038",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5201&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "8813e8205c0303f325f5d1fccb38e23b6d2a93bf960362e6b18d15f3bfd85782",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "53530069",
+      "canonicalId": "ea0904d0-1d55-436b-a1cf-aa852ad94184",
+      "konamiId": 5200,
+      "reviewer": "Work: Konami card text and historical printing; source and position requirements reviewed",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5200&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 0,
+        "defense": 1800,
+        "race": "Fairy",
+        "attribute": "WIND"
+      },
+      "verifiedPrinting": {
+        "date": "2003-03-01",
+        "set": "LON-037",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5200&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "8e46ee42ebedb2aaf5cc6ad94a1b0150502c374e714c4e38f39c57a24d2da0cf",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "52090844",
+      "canonicalId": "e27f494d-a2c8-4b1f-b430-0a6d2f272d0f",
+      "konamiId": 5687,
+      "reviewer": "Work: Konami card text and historical printing; source and position requirements reviewed",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5687&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 1300,
+        "defense": 1000,
+        "race": "Machine",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "set": "IOC-029",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5687&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "9111c80dacbe50f9264a6a3ecbea3f4d2d78160631ee48d0ca4453d39ff30005",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "57579381",
+      "canonicalId": "2083c890-3865-4ed8-bcc8-3d328685d792",
+      "konamiId": 5209,
+      "reviewer": "Work: Konami card text and historical printing; source and position requirements reviewed",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5209&request_locale=en",
+      "primaryFacts": {
+        "level": 5,
+        "atk": 1700,
+        "defense": 1200,
+        "race": "Fiend",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2003-03-01",
+        "set": "LON-046",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5209&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "36fef2d7a4fea20da21878c220e958f4ce7c572de1b04bdeae683fe2313ebbe2",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "21175632",
+      "canonicalId": "91336baf-ad40-426f-9d4f-26bc1a60eb70",
+      "konamiId": 5208,
+      "reviewer": "Work: Konami card text and historical printing; source and position requirements reviewed",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5208&request_locale=en",
+      "primaryFacts": {
+        "level": 7,
+        "atk": 2800,
+        "defense": 2000,
+        "race": "Fairy",
+        "attribute": "LIGHT"
+      },
+      "verifiedPrinting": {
+        "date": "2003-03-01",
+        "set": "LON-045",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5208&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "8487e104e3404e0c626490fbecf2fae42782482b65661163c48de41bd7f69cc0",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "card": {
+        "id": "85802526",
+        "konamiId": 5204,
+        "name": "Cure Mermaid",
+        "englishName": "Cure Mermaid",
+        "kind": "monster",
+        "monsterType": "effect",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5204&request_locale=en",
+        "level": 4,
+        "atk": 1500,
+        "defense": 800,
+        "race": "Fish",
+        "attribute": "WATER",
+        "summary": "Com a face para cima, ganhe 800 PV."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "family": "mandatory-standby-lp",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:ownStandby",
+        "monster-operation:heal"
+      ],
+      "textEvidence": {
+        "text": "Cure Mermaid activates a mandatory effect once per eligible copy in its controller’s Standby Phase. The source activates in the Monster Zone. Gain 800 LP. The same source must still be in its required zone at resolution, and face-up if on the field. No cost, targeting or other effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5204&request_locale=en",
+        "sha256": "19ab403644ec2e144a46cfc1a1ed217ce13df74c6849c79f5976edc7ff70b4ad"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "negation",
+        "wrong-zone",
+        "source-moves-before-resolution",
+        "controller-orders-copies",
+        "next-own-standby",
+        "failed-turn-draw-first",
+        "lp-victory"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "pending",
+                "card"
+              ],
+              "equals": "src"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4800
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "monsterEffect",
+                "card": "src",
+                "discards": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4800
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4800
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "wrong-zone": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "source-moves-before-resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "reply",
+                "target": "src"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "controller-orders-copies": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "second"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5600
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "next-own-standby": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5600
+            },
+            {
+              "path": [
+                "turn"
+              ],
+              "equals": 6
+            }
+          ]
+        },
+        "failed-turn-draw-first": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "a"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "finished"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "lp-victory": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": null
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4800
+            }
+          ]
+        }
+      },
+      "monster": {
+        "effect": {
+          "trigger": "ownStandby",
+          "standby": {
+            "zone": "monsters",
+            "requireSourceAtResolution": true
+          },
+          "operation": {
+            "kind": "heal",
+            "amount": 800
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "standby"
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "90925163",
+        "konamiId": 5201,
+        "name": "Dancing Fairy",
+        "englishName": "Dancing Fairy",
+        "kind": "monster",
+        "monsterType": "effect",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5201&request_locale=en",
+        "level": 4,
+        "atk": 1700,
+        "defense": 1000,
+        "race": "Fairy",
+        "attribute": "WIND",
+        "summary": "Com a face para cima em Defesa, ganhe 1000 PV."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "family": "mandatory-standby-lp",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:ownStandby",
+        "monster-operation:heal"
+      ],
+      "textEvidence": {
+        "text": "Dancing Fairy activates a mandatory effect once per eligible copy in its controller’s Standby Phase. It must be face-up in def position at activation and resolution. Gain 1000 LP. The same source must still be in its required zone at resolution, and face-up if on the field. No cost, targeting or other effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5201&request_locale=en",
+        "sha256": "8813e8205c0303f325f5d1fccb38e23b6d2a93bf960362e6b18d15f3bfd85782"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "negation",
+        "wrong-zone",
+        "source-moves-before-resolution",
+        "controller-orders-copies",
+        "next-own-standby",
+        "failed-turn-draw-first",
+        "wrong-position",
+        "lp-victory"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "pending",
+                "card"
+              ],
+              "equals": "src"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "monsterEffect",
+                "card": "src",
+                "discards": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "wrong-zone": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "source-moves-before-resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "reply",
+                "target": "src"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "controller-orders-copies": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "second"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6000
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "next-own-standby": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6000
+            },
+            {
+              "path": [
+                "turn"
+              ],
+              "equals": 6
+            }
+          ]
+        },
+        "failed-turn-draw-first": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "a"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "finished"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "wrong-position": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "lp-victory": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "90925163",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": null
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5000
+            }
+          ]
+        }
+      },
+      "monster": {
+        "effect": {
+          "trigger": "ownStandby",
+          "standby": {
+            "zone": "monsters",
+            "requireSourceAtResolution": true,
+            "position": "def"
+          },
+          "operation": {
+            "kind": "heal",
+            "amount": 1000
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "standby"
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "53530069",
+        "konamiId": 5200,
+        "name": "Spirit of the Breeze",
+        "englishName": "Spirit of the Breeze",
+        "kind": "monster",
+        "monsterType": "effect",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5200&request_locale=en",
+        "level": 3,
+        "atk": 0,
+        "defense": 1800,
+        "race": "Fairy",
+        "attribute": "WIND",
+        "summary": "Com a face para cima em Ataque, ganhe 1000 PV."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "family": "mandatory-standby-lp",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:ownStandby",
+        "monster-operation:heal"
+      ],
+      "textEvidence": {
+        "text": "Spirit of the Breeze activates a mandatory effect once per eligible copy in its controller’s Standby Phase. It must be face-up in atk position at activation and resolution. Gain 1000 LP. The same source must still be in its required zone at resolution, and face-up if on the field. No cost, targeting or other effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5200&request_locale=en",
+        "sha256": "8e46ee42ebedb2aaf5cc6ad94a1b0150502c374e714c4e38f39c57a24d2da0cf"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "negation",
+        "wrong-zone",
+        "source-moves-before-resolution",
+        "controller-orders-copies",
+        "next-own-standby",
+        "failed-turn-draw-first",
+        "wrong-position",
+        "lp-victory"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "pending",
+                "card"
+              ],
+              "equals": "src"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "monsterEffect",
+                "card": "src",
+                "discards": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "wrong-zone": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "source-moves-before-resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "reply",
+                "target": "src"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "controller-orders-copies": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "second"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6000
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "next-own-standby": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6000
+            },
+            {
+              "path": [
+                "turn"
+              ],
+              "equals": 6
+            }
+          ]
+        },
+        "failed-turn-draw-first": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "a"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "finished"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "wrong-position": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "lp-victory": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "53530069",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": null
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5000
+            }
+          ]
+        }
+      },
+      "monster": {
+        "effect": {
+          "trigger": "ownStandby",
+          "standby": {
+            "zone": "monsters",
+            "requireSourceAtResolution": true,
+            "position": "atk"
+          },
+          "operation": {
+            "kind": "heal",
+            "amount": 1000
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "standby"
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "52090844",
+        "konamiId": 5687,
+        "name": "Bowganian",
+        "englishName": "Bowganian",
+        "kind": "monster",
+        "monsterType": "effect",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5687&request_locale=en",
+        "level": 3,
+        "atk": 1300,
+        "defense": 1000,
+        "race": "Machine",
+        "attribute": "DARK",
+        "summary": "Com a face para cima, cause 600 PV de dano ao oponente."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "family": "mandatory-standby-lp",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:ownStandby",
+        "monster-operation:burn"
+      ],
+      "textEvidence": {
+        "text": "Bowganian activates a mandatory effect once per eligible copy in its controller’s Standby Phase. The source activates in the Monster Zone. Inflict 600 damage; once activated the effect does not require Bowganian to stay on the field. No cost, targeting or other effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5687&request_locale=en",
+        "sha256": "9111c80dacbe50f9264a6a3ecbea3f4d2d78160631ee48d0ca4453d39ff30005"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "negation",
+        "wrong-zone",
+        "source-moves-before-resolution",
+        "controller-orders-copies",
+        "next-own-standby",
+        "failed-turn-draw-first",
+        "lp-victory"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "pending",
+                "card"
+              ],
+              "equals": "src"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3400
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "monsterEffect",
+                "card": "src",
+                "discards": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3400
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3400
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "wrong-zone": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "source-moves-before-resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "reply",
+                "target": "src"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3400
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "controller-orders-copies": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "second"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2800
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "next-own-standby": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2800
+            },
+            {
+              "path": [
+                "turn"
+              ],
+              "equals": 6
+            }
+          ]
+        },
+        "failed-turn-draw-first": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "a"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "finished"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "lp-victory": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "lp": 600
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "52090844",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "b"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 0
+            }
+          ]
+        }
+      },
+      "monster": {
+        "effect": {
+          "trigger": "ownStandby",
+          "standby": {
+            "zone": "monsters",
+            "requireSourceAtResolution": false
+          },
+          "operation": {
+            "kind": "burn",
+            "amount": 600
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "standby"
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "57579381",
+        "konamiId": 5209,
+        "name": "Senhora Obscura Maria",
+        "englishName": "Darklord Marie",
+        "kind": "monster",
+        "monsterType": "effect",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5209&request_locale=en",
+        "level": 5,
+        "atk": 1700,
+        "defense": 1200,
+        "race": "Fiend",
+        "attribute": "DARK",
+        "summary": "No seu Cemitério, ganhe 200 PV."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "family": "mandatory-standby-lp",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:ownStandby",
+        "monster-operation:heal"
+      ],
+      "textEvidence": {
+        "text": "Darklord Marie activates a mandatory effect once per eligible copy in its controller’s Standby Phase. The source must be in the Graveyard at activation and resolution. Gain 200 LP. The same source must still be in its required zone at resolution, and face-up if on the field. No cost, targeting or other effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5209&request_locale=en",
+        "sha256": "36fef2d7a4fea20da21878c220e958f4ce7c572de1b04bdeae683fe2313ebbe2"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "negation",
+        "wrong-zone",
+        "source-moves-before-resolution",
+        "controller-orders-copies",
+        "next-own-standby",
+        "failed-turn-draw-first",
+        "lp-victory"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "24623598",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "pending",
+                "card"
+              ],
+              "equals": "src"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4200
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "monsterEffect",
+                "card": "src",
+                "discards": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "24623598",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4200
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4200
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "draw1"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4200
+            }
+          ]
+        },
+        "wrong-zone": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "source-moves-before-resolution": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "reply",
+                    "id": "24623598",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "advanceToPending": "standbyMonster"
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "reply"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "src"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "banished"
+              ],
+              "containsUID": "src"
+            }
+          ]
+        },
+        "controller-orders-copies": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "second",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "second"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4400
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "next-own-standby": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4400
+            },
+            {
+              "path": [
+                "turn"
+              ],
+              "equals": 6
+            }
+          ]
+        },
+        "failed-turn-draw-first": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": []
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "a"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "finished"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "lp-victory": {
+          "fixture": {
+            "players": [
+              {
+                "deck": [
+                  {
+                    "uid": "aa",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "grave": [
+                  {
+                    "uid": "src",
+                    "id": "57579381"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "draw1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "draw2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": null
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4200
+            }
+          ]
+        }
+      },
+      "monster": {
+        "effect": {
+          "trigger": "ownStandby",
+          "standby": {
+            "zone": "grave",
+            "requireSourceAtResolution": true
+          },
+          "operation": {
+            "kind": "heal",
+            "amount": 200
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "standby"
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "21175632",
+        "konamiId": 5208,
+        "name": "St. Joan",
+        "englishName": "St. Joan",
+        "kind": "monster",
+        "monsterType": "fusion",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5208&request_locale=en",
+        "level": 7,
+        "atk": 2800,
+        "defense": 2000,
+        "race": "Fairy",
+        "attribute": "LIGHT",
+        "fusion": [
+          "84080938",
+          "57579381"
+        ],
+        "summary": "Fusão de The Forgiving Maiden e Darklord Marie. Sem efeito."
+      },
+      "effect": {
+        "kind": "fusion"
+      },
+      "family": "named-fusion",
+      "requirements": [
+        "effect:fusion"
+      ],
+      "textEvidence": {
+        "text": "St. Joan is a non-Effect Fusion Monster requiring The Forgiving Maiden and Darklord Marie (formerly Marie the Fallen One). One legal substitute may replace one named material but every other material must be correct. A second copy of Marie cannot replace the Maiden. Use Polymerization and the Extra Deck, preserve the owners of materials, and do not consume materials if Polymerization is negated. No other printed effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5208&request_locale=en",
+        "sha256": "8487e104e3404e0c626490fbecf2fae42782482b65661163c48de41bd7f69cc0"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "negation",
+        "exact-materials",
+        "illegal-materials",
+        "extra-capacity",
+        "zone-capacity",
+        "material-owner",
+        "duplicate-named-material"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "21175632"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "21175632"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "91152256"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk",
+                "materials": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "21175632"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "21175632"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "discard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "jammer"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "sub"
+            }
+          ]
+        },
+        "exact-materials": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "21175632"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "illegal-materials": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  },
+                  {
+                    "uid": "sub2",
+                    "id": "50259460"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk",
+                "materials": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            }
+          ]
+        },
+        "extra-capacity": {
+          "fixture": {
+            "players": [
+              {},
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "validateDeck": [
+                "21175632"
+              ],
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "zone-capacity": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "full0",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "full1",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "full2",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk",
+                "materials": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            }
+          ]
+        },
+        "material-owner": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "mat0",
+                    "id": "57579381",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "21175632"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            }
+          ]
+        },
+        "duplicate-named-material": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "57579381"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "57579381"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "21175632"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk",
+                "materials": [
+                  "mat0",
+                  "wrong"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

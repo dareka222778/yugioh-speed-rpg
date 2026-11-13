@@ -993,4 +993,63 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "44436472",
   "92084010",
   "38479725",
+// Generated batch m46-discard-removal: explicit tested release; zero inventory grants.
+  "79759861",
+  "70231910",
+  "47453433",
+  "04178474",
+  "13626450",
+  "01669772",
+// Generated batch m47-summon-and-presence: explicit tested release; zero inventory grants.
+  "15259703",
+  "25236056",
+  "16589042",
+// Generated batch m48-thunder-dragon: explicit tested release; zero inventory grants.
+  "31786629",
+  "54752875",
+// Generated batch m49-standby-lp: explicit tested release; zero inventory grants.
+  "85802526",
+  "90925163",
+  "53530069",
+  "52090844",
+  "57579381",
+  "21175632",
+// Generated batch m50-battle-damage: explicit tested release; zero inventory grants.
+  "71107816",
+  "10189126",
+  "15150365",
+  "18036057",
+  "46820049",
+  "77379481",
+// Generated batch m51-scaled-standby: explicit tested release; zero inventory grants.
+  "81383947",
+// Generated batch m52-field-traps: explicit tested release; zero inventory grants.
+  "43250041",
+  "94192409",
+  "00596051",
+  "57882509",
+  "56916805",
+// Generated batch m53-name-and-summon: explicit tested release; zero inventory grants.
+  "95132338",
+  "42578427",
+// Generated batch m54-dice-and-coins: explicit tested release; zero inventory grants.
+  "74137509",
+  "00126218",
+  "03549275",
+  "50593156",
+// Generated batch m55-coin-targets: explicit tested release; zero inventory grants.
+  "81480460",
+  "25551951",
+// Generated batch m56-called-coins: explicit tested release; zero inventory grants.
+  "71625222",
+  "81172176",
+// Generated batch m57-skipped-draws: explicit tested release; zero inventory grants.
+  "35316708",
+  "37576645",
+// Generated batch m58-battle-recovery: explicit tested release; zero inventory grants.
+  "88236094",
+  "51616747",
+// Generated batch m59-control-lock: explicit tested release; zero inventory grants.
+  "35215622",
+  "22609617",
 ]);

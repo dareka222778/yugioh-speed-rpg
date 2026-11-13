@@ -11,7 +11,12 @@ test('M27 owner-authorized release contains every certified card and no extras',
 });
 test('M27 imported-only, unknown, malformed and token identities remain blocked',()=>{
  const history=require('../catalog/historical/2004-10-01/cards.json');
- const pending=history.flatMap(c=>c.passwords).filter(id=>!enabledCardIds.includes(id));assert.ok(pending.length>1000);
- for(const id of [...pending,'token:sheep','00000000','','71625222','82828051:1','82828051 '])assert.equal(cardDistributionAllowed(id),false,id);
+ // Verify the entire frozen historical corpus, including aliases. Its pending
+ // count shrinks with every admission; no pending passcode is a permanent fixture.
+ assert.equal(new Set(history.map(c=>c.id)).size,1962);
+ const certified=new Set(enabledCardIds),historical=new Set(history.flatMap(c=>c.passwords));
+ for(const id of certified)assert.ok(historical.has(id),'Certified ID missing from historical corpus: '+id);
+ for(const id of historical)assert.equal(cardDistributionAllowed(id),certified.has(id),id);
+ for(const id of ['token:sheep','00000000','','82828051:1','82828051 '])assert.equal(cardDistributionAllowed(id),false,id);
  assert.equal(engineCatalog.filter(c=>getCardStatus(c.id)?.stage!=='certified').length,0);
 });

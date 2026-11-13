@@ -1,0 +1,1895 @@
+{
+  "format": 1,
+  "batchId": "m53-name-and-summon",
+  "baseRevision": "f65f42d86fd3ae9f174bb2744edf9bacdabbfdd492632222262d781aad8ef4d9",
+  "engineVersion": "engine-v9",
+  "reviews": [
+    {
+      "id": "95132338",
+      "canonicalId": "68caf72b-b563-4b73-a4ec-e724c956119d",
+      "konamiId": 5006,
+      "reviewer": "Work: Konami EN text and TCG printing",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5006&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2004-04-06",
+        "set": "PCK-002",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5006&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "15ed36eccf3fe4fecfa9cfef548146d062abb4efae5f50366a05d751e004766b",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "42578427",
+      "canonicalId": "acce7e3b-15f5-4481-a5bd-a7d682678fb0",
+      "konamiId": 4688,
+      "reviewer": "Work: Konami EN text and TCG printing",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4688&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2002-09-16",
+        "set": "MRL-065",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4688&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "f47d3936a6a847a5c914925df05c379cde116634c5a05d2c7315f7501685a73b",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "card": {
+        "id": "95132338",
+        "konamiId": 5006,
+        "name": "Aquarefrão",
+        "englishName": "Aqua Chorus",
+        "kind": "trap",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5006&request_locale=en",
+        "summary": "Monstros com a face para cima que compartilham o mesmo nome no campo ganham 500 ATK e DEF.",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "continuous",
+        "activation": {
+          "speed": 2,
+          "window": "free",
+          "damage": "never"
+        },
+        "rules": [
+          {
+            "kind": "modifier",
+            "filter": {
+              "sameFaceUpName": true
+            },
+            "atk": 500,
+            "def": 500
+          }
+        ]
+      },
+      "requirements": [
+        "effect:continuous",
+        "continuous:modifier"
+      ],
+      "family": "m53-name-and-summon",
+      "textEvidence": {
+        "text": "While the resolved Trap remains face-up, each face-up monster sharing a rules name with another face-up monster on either field gains 500 ATK and DEF. The bonus applies once per Trap, not per matching partner. Set monsters supply no public name. Separate copies stack. Negation and source removal end the modifier immediately.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5006&request_locale=en",
+        "sha256": "15ed36eccf3fe4fecfa9cfef548146d062abb4efae5f50366a05d751e004766b"
+      },
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 1900
+            },
+            {
+              "statOf": "two",
+              "stat": "def",
+              "equals": 1700
+            },
+            {
+              "statOf": "other",
+              "stat": "atk",
+              "equals": 500
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 1900
+            },
+            {
+              "statOf": "two",
+              "stat": "def",
+              "equals": 1700
+            },
+            {
+              "statOf": "other",
+              "stat": "atk",
+              "equals": 500
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 3,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 1400
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 1400
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "decree",
+                    "id": "51452091",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 1400
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "choir"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "choir"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 1900
+            },
+            {
+              "statOf": "two",
+              "stat": "def",
+              "equals": 1700
+            },
+            {
+              "statOf": "other",
+              "stat": "atk",
+              "equals": 500
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 1900
+            },
+            {
+              "statOf": "two",
+              "stat": "def",
+              "equals": 1700
+            },
+            {
+              "statOf": "other",
+              "stat": "atk",
+              "equals": 500
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  },
+                  {
+                    "uid": "second",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "second"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 2400
+            },
+            {
+              "statOf": "two",
+              "stat": "def",
+              "equals": 2200
+            }
+          ]
+        },
+        "face-down": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 1400
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "new",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "new",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "new",
+              "stat": "atk",
+              "equals": 1900
+            },
+            {
+              "statOf": "one",
+              "stat": "def",
+              "equals": 1700
+            }
+          ]
+        },
+        "alias": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "choir",
+                    "id": "95132338",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "76812113",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "two",
+                    "id": "91932350",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "03573512",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "choir",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "one",
+              "stat": "atk",
+              "equals": 2100
+            },
+            {
+              "statOf": "two",
+              "stat": "atk",
+              "equals": 2100
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "continuous-negation",
+        "source-loss",
+        "json-restore",
+        "deterministic-replay",
+        "multiple-sources",
+        "face-down",
+        "dynamic-recalculation",
+        "alias"
+      ]
+    },
+    {
+      "card": {
+        "id": "42578427",
+        "konamiId": 4688,
+        "name": "Comergaboon",
+        "englishName": "Eatgaboon",
+        "kind": "trap",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4688&request_locale=en",
+        "summary": "Quando o oponente Invoca por Invocação-Normal ou Virar um monstro com 500 ATK ou menos: escolha esse monstro e destrua-o.",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "summonCeiling",
+        "maximumAtk": 500
+      },
+      "requirements": [
+        "effect:summonCeiling"
+      ],
+      "family": "m53-name-and-summon",
+      "textEvidence": {
+        "text": "Only on the opponent’s successful Normal or Flip Summon, select the summoned monster if its current ATK does not exceed 500. Destroy that target on resolution. This does not negate the Summon. A Set or Special Summon cannot activate this Trap. A negated activation leaves the monster on the field.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4688&request_locale=en",
+        "sha256": "f47d3936a6a847a5c914925df05c379cde116634c5a05d2c7315f7501685a73b"
+      },
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "small",
+                    "id": "03573512"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "42578427",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "small",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "small"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "small"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "small",
+                    "id": "03573512"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "42578427",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "small",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "small"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "small"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "small",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "42578427",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "small",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "small"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "small",
+              "stat": "atk",
+              "equals": 1400
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "small",
+                    "id": "03573512"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "42578427",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "small",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "small"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tools",
+                "target": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "small",
+              "stat": "atk",
+              "equals": 500
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "small",
+                    "id": "03573512"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "42578427",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "small",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "small"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "small"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "hole"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "small",
+                    "id": "03573512"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "42578427",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "small",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "small"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "small"
+            }
+          ]
+        },
+        "flip-summon": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [],
+                "monsters": [
+                  {
+                    "uid": "small",
+                    "id": "03573512",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "42578427",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "position",
+                "card": "small",
+                "mode": "flip"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "small"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "small"
+            }
+          ]
+        },
+        "set-excluded": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "small",
+                    "id": "03573512"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "42578427",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "small",
+                "position": "set"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "small"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "special-excluded": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "reb",
+                    "id": "83764718"
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "small",
+                    "id": "03573512"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "hole",
+                    "id": "42578427",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "main"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "reb",
+                "target": "small",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "action": {
+                "kind": "trap",
+                "card": "hole",
+                "target": "small"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "small",
+              "stat": "atk",
+              "equals": 500
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "deterministic-replay",
+        "json-restore",
+        "flip-summon",
+        "set-excluded",
+        "special-excluded"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "batchId": "m47-summon-and-presence",
+  "baseRevision": "7c6655ccda2ce4c2383d24154ac77a083044a3b2e10ac8cd6eec140431e5765d",
+  "batchSHA256": "d3654f79e28b00549528e2f78d553c9de30c0396207793df16e0049232945dcc",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m47_summon_and_presenceCards} from './generated/m47-summon-and-presence';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards,...m43_dd_assailantCards,...m44_double_tributeCards,...m46_discard_removalCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards,...m43_dd_assailantCards,...m44_double_tributeCards,...m46_discard_removalCards,...m47_summon_and_presenceCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m47_summon_and_presenceEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m47_summon_and_presenceEffects} from './generated/m47-summon-and-presence';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({",
+      "to": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({\n ...m47_summon_and_presenceMonsters,"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "import {conditionalMonsters30}",
+      "to": "import {monsters as m47_summon_and_presenceMonsters} from './generated/m47-summon-and-presence';\nimport {conditionalMonsters30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"15259703\": {\n    \"fingerprint\": \"31303b748c7d75dbed0bff71e8937a1a5050dfde6099cf886409c45aa7b96c4f\",\n    \"suites\": [\n      \"tests/generated-m47-summon-and-presence.test.cjs\"\n    ]\n  },\n  \"16589042\": {\n    \"fingerprint\": \"7236e89cfaf26b40bf6bd70a32cf0d34a7d8efb0ee169653732d3921ad64fdf9\",\n    \"suites\": [\n      \"tests/generated-m47-summon-and-presence.test.cjs\"\n    ]\n  },\n  \"25236056\": {\n    \"fingerprint\": \"9359a9484f99303b6fdf911c19f5906a1bfbf06fb7d39d4859ff5d31ef4c51ae\",\n    \"suites\": [\n      \"tests/generated-m47-summon-and-presence.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m47-summon-and-presence: explicit tested release; zero inventory grants.\n  \"15259703\",\n  \"25236056\",\n  \"16589042\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "15259703",
+    "25236056",
+    "16589042"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

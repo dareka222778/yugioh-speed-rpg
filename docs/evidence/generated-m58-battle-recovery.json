@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "batchId": "m58-battle-recovery",
+  "baseRevision": "7a3ccbf2dcdfc7cbd5e663f36129e70b5b049b97b4aedd50fe9986d9b83019a2",
+  "batchSHA256": "a55f46286b61a9d7f615ac4b66fed788cf4c7056d2045cd14bcd6bc1f62c63e3",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m58_battle_recoveryCards} from './generated/m58-battle-recovery';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards,...m43_dd_assailantCards,...m44_double_tributeCards,...m46_discard_removalCards,...m47_summon_and_presenceCards,...m48_thunder_dragonCards,...m49_standby_lpCards,...m50_battle_damageCards,...m51_scaled_standbyCards,...m52_field_trapsCards,...m53_name_and_summonCards,...m54_dice_and_coinsCards,...m55_coin_targetsCards,...m56_called_coinsCards,...m57_skipped_drawsCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards,...m43_dd_assailantCards,...m44_double_tributeCards,...m46_discard_removalCards,...m47_summon_and_presenceCards,...m48_thunder_dragonCards,...m49_standby_lpCards,...m50_battle_damageCards,...m51_scaled_standbyCards,...m52_field_trapsCards,...m53_name_and_summonCards,...m54_dice_and_coinsCards,...m55_coin_targetsCards,...m56_called_coinsCards,...m57_skipped_drawsCards,...m58_battle_recoveryCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m58_battle_recoveryEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m58_battle_recoveryEffects} from './generated/m58-battle-recovery';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({",
+      "to": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({\n ...m58_battle_recoveryMonsters,"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "import {conditionalMonsters30}",
+      "to": "import {monsters as m58_battle_recoveryMonsters} from './generated/m58-battle-recovery';\nimport {conditionalMonsters30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"51616747\": {\n    \"fingerprint\": \"721ecfa66386785f6f7feacd5e0da29a8998f84b291b129a45d55069f90f62af\",\n    \"suites\": [\n      \"tests/generated-m58-battle-recovery.test.cjs\"\n    ]\n  },\n  \"88236094\": {\n    \"fingerprint\": \"3459f5b000f9e758c43d0d80739026ce022d2216aea72a78fa157cbe906eb854\",\n    \"suites\": [\n      \"tests/generated-m58-battle-recovery.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m58-battle-recovery: explicit tested release; zero inventory grants.\n  \"88236094\",\n  \"51616747\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "88236094",
+    "51616747"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

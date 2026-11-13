@@ -7,6 +7,7 @@ export function resolveAttackResponse(s:DuelState,actor:number,target:string,eff
  const attacker=s.players[pending.actor].monsters.find(m=>m.uid===target);
  if(!attacker?.faceUp||attacker.position!=='atk')return false;
  pending.cancelled=true;pending.endBattle=effect.endBattle;
+ if(effect.gainAttack)s.players[actor].lp+=services.attack(attacker,s);
  if(effect.reflectAttack){const p=s.players[pending.actor];p.lp=Math.max(0,p.lp-services.attack(attacker,s));services.checkLP(s);}
  return true;
 }

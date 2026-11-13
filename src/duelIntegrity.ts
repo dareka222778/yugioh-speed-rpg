@@ -1,3 +1,7 @@
+import {graveRecoveryTargets} from './battleRecovery';
+import {verifyCoinCall} from './calledCoin';
+import {verifyStandby} from './monsterStandby';
+import {copySearchOptions} from './searchCopies';
 import {groupChoices} from './targetGroupOperation';
 import {movementChoiceTargets} from './selectedMovement';
 import {recoveryTargets} from './recoveryRules';
@@ -22,7 +26,7 @@ import {assertRitualFlow} from './ritualSummon';
 import {getMonsterEffect,getMonsterDefinition} from './monsterEffects';
 import type {CardRef,DuelState} from './duelEngine';
 const phases=new Set(['main','battle','response','choice','discard','finished']);
-const pendingKinds=new Set(['standby','none','end','battle','summon','flip','specialSummon','field','fusion','spell','attack','monsterEffect']);
+const pendingKinds=new Set(['coinCall','standbyMonster','standby','none','end','battle','summon','flip','specialSummon','field','fusion','spell','attack','monsterEffect']);
 function fail(reason:string):never{throw new Error(`Estado do duelo inválido: ${reason}. Nenhuma ação foi gravada.`);}
 function object(value:unknown):value is Record<string,any>{return !!value&&typeof value==='object'&&!Array.isArray(value);}
 const integer=(n:unknown,min=0)=>Number.isSafeInteger(n)&&Number(n)>=min;
@@ -41,7 +45,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.random!==undefined)assertDuelRandom(s.random);
  if(s.cardLifetimes!==undefined&&(!object(s.cardLifetimes)||Object.values(s.cardLifetimes).some((entry:any)=>!object(entry)||!lifetimeZones.includes(entry.zone)||!integer(entry.epoch))))fail('identidade de zona');
  for(const operation of [s.pending,...Array.isArray(s.chain)?s.chain:[]])if(operation?.targetBinding!==undefined){const b=operation.targetBinding;if(!object(b)||typeof b.uid!=='string'||b.uid!==operation.target||!lifetimeZones.includes(b.zone)||!integer(b.epoch))fail('referencia de alvo');}
- if(s.choice?.source!==undefined&&!['monsterRecruitPosition','selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerGroup','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit','extremeDestroy'].includes(s.choice.source))fail('continuação de escolha desconhecida');
+ if(s.choice?.source!==undefined&&!['coinCall','standbyMonsterOrder','copySearchCount','monsterRecruitPosition','selectedMovement','multiTarget','ritual','standby','triggerOptional','triggerOrder','triggerGroup','triggerTarget','attackReplay','monsterDestroy','monsterTarget','monsterSearch','monsterRecruit','extremeDestroy'].includes(s.choice.source))fail('continuação de escolha desconhecida');
  if(s.rulesVersion==='speed-rpg-v2'&&s.phase==='discard'&&!s.handFlow)fail('descarte sem continuação');
  if(s.handFlow!==undefined){
   const f=s.handFlow;
@@ -51,7 +55,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(!Array.isArray(s.players)||s.players.length!==2||!actor(s.current)||!actor(s.priority))fail('participantes ou prioridade');
  if(!integer(s.turn,1)||!phases.has(s.phase)||!['main','battle'].includes(s.resume)||!integer(s.passes)||s.passes>2)fail('turno ou fase');
  if(!object(s.pending)||!pendingKinds.has(s.pending.kind)||!Array.isArray(s.chain)||!Array.isArray(s.log)||s.log.some((x:unknown)=>typeof x!=='string'))fail('resolução pendente');
- for(const link of s.chain)if(!object(link)||!actor(link.actor)||typeof link.card!=='string'||typeof link.target!=='string'||!getCard(link.id)||link.negated!==undefined&&typeof link.negated!=='boolean'||link.monsterEffect!==undefined&&(typeof link.monsterEffect!=='boolean'||link.monsterEffect&&!['quick','flip','onSummon','onOtherSummon','onSentToGrave','onBattleDestroyed'].includes(getMonsterEffect(link.id)?.trigger??'')))fail('elo de corrente');
+ for(const link of s.chain)if(!object(link)||!actor(link.actor)||typeof link.card!=='string'||typeof link.target!=='string'||!getCard(link.id)||link.negated!==undefined&&typeof link.negated!=='boolean'||link.monsterEffect!==undefined&&(typeof link.monsterEffect!=='boolean'||link.monsterEffect&&!['onBattleDamage','quick','flip','onSummon','onOtherSummon','onSentToGrave','onBattleDestroyed'].includes(getMonsterEffect(link.id)?.trigger??'')))fail('elo de corrente');
  if(!['none','end','battle'].includes(s.pending.kind)&&(!actor(s.pending.actor)||typeof s.pending.card!=='string'))fail('origem do efeito');
  if(s.pending.kind==='attack'&&(['cancelled','endBattle'].some(key=>s.pending[key]!==undefined&&typeof s.pending[key]!=='boolean')))fail('negação de ataque');
  if(s.pending.kind==='attack'&&!['declare','damage','calculation'].includes(s.pending.stage))fail('etapa de dano');
@@ -76,7 +80,7 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
  if(s.pending.kind==='attack'&&s.pending.defenders!==undefined&&(!Array.isArray(s.pending.defenders)||s.pending.defenders.some((uid:unknown)=>typeof uid!=='string')||new Set(s.pending.defenders).size!==s.pending.defenders.length))fail('campo de declaração do ataque');
  if(s.chainRoot!==undefined){
   const root=s.chainRoot;
-  if(!object(root)||!pendingKinds.has(root.kind)||!(s.phase==='choice'&&['monsterSearch','monsterRecruit','monsterRecruitPosition'].includes(s.choice?.source)||s.phase==='discard'&&s.handFlow?.resumeChainRoot))fail('continuação da corrente');
+  if(!object(root)||!pendingKinds.has(root.kind)||!(s.phase==='choice'&&['coinCall','monsterSearch','monsterRecruit','monsterRecruitPosition'].includes(s.choice?.source)||s.phase==='discard'&&s.handFlow?.resumeChainRoot))fail('continuação da corrente');
   if(!['none','end','battle'].includes(root.kind)&&(!actor(root.actor)||typeof root.card!=='string'))fail('origem da continuação');
  }
  if(s.phase==='choice'&&['triggerOrder','triggerTarget','triggerGroup','triggerOptional'].includes(s.choice?.source)){
@@ -112,11 +116,20 @@ export function assertCurrentDuelState(value:unknown):asserts value is DuelState
   }
   if(p.field){checkRef(p.field);if(!getCard(p.field.id)?.field||typeof p.field.faceUp!=='boolean'||!integer(p.field.setTurn)||p.field.resolved!==undefined&&typeof p.field.resolved!=='boolean')fail('Magia de Campo');}
  }
+ if(s.choice?.source==='copySearchCount'){
+  const p=s.pending,a=s.choice.actor;
+  if(s.phase!=='choice'||p.kind!=='monsterEffect'||p.actor!==a||getMonsterEffect(p.id)?.operation.kind!=='searchCopiesFromHand'||!actor(a)||!s.choice.targets.length||JSON.stringify(s.choice.targets)!==JSON.stringify(copySearchOptions(s.players[a].deck,p.id)))fail('quantidade de cópias da busca');
+ }
  if(s.choice?.source==='monsterRecruitPosition'){
   const pending=s.pending,op=pending.kind==='monsterEffect'?getMonsterEffect(pending.id)?.operation:undefined;
   const ref=s.players[s.choice.actor]?.deck.find((c:CardRef)=>c.uid===pending.target),info=ref&&getCard(ref.id);
   if(!op||op.kind!=='recruit'||!info||info.fusion||info.monsterType==='ritual'||!matchesMonsterSelector(info,op.filter)||pending.targetBinding?.zone!=='deck'||JSON.stringify(s.choice.targets)!==JSON.stringify(op.positions.map(p=>p==='atk'?'__recruit_atk__':'__recruit_def__')))fail('posição de recrutamento');
  }
+ for(const player of s.players)if(player.skipDrawPhases!==undefined&&![1,2].includes(player.skipDrawPhases))fail('fases de compra pendentes');
+ if(s.choice?.source==='triggerTarget'){const event=s.triggerBuild?.selected,op=event&&getMonsterEffect(event.id)?.operation;
+  if(op?.kind==='battleRecovery'&&JSON.stringify(s.choice.targets)!==JSON.stringify(graveRecoveryTargets(s,event.actor,op.category)))fail('alvos do Cemitério');
+ }
+ verifyCoinCall(s);verifyStandby(s);
  assertTokenLedger(s);
  if(s.teamRotation!==undefined){
   const r=s.teamRotation;
