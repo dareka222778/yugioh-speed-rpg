@@ -13,7 +13,7 @@ const normalCards=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
   .filter(entry=>entry.card&&entry.card.level<=4&&Number.isInteger(entry.card.atk));
 const strong=normalCards
-  .filter(entry=>entry.card.atk>(hane.def??0))
+  .filter(entry=>entry.card.atk>(hane.defense??0))
   .sort((a,b)=>b.card.atk-a.card.atk)[0];
 assert.ok(strong,'the destroyed-source fixture needs a Normal Monster whose ATK exceeds Hane-Hane DEF');
 const deckIds=[...new Set([strong.id,...normalCards.map(entry=>entry.id)])].slice(0,7);
