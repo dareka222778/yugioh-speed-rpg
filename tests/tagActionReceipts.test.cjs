@@ -222,7 +222,7 @@ test('the responding physical teammate can activate a counter-trap once and its 
   assert.equal(first.receipt.replayed,false);
   assert.ok(first.state.core.players[1].graveyard.some(card=>card.uid===discardUid),'the response cost must be paid exactly once');
   assert.ok(first.state.core.players[1].graveyard.some(card=>card.uid===trap.uid),'the activated counter-trap must resolve to its owner graveyard');
-  assertInventoryConserved(first.state,new Map(before.map(entry=>{const [uid,id]=entry.split(':');return [uid,id];})));
+  assert.deepEqual(inventory(first.state),before,'counter-trap cost and resolution must conserve every physical card UID');
 
   const committed=JSON.stringify(first.state),revision=first.revision;
   const duplicate=store.actTag(record.id,actor,record.guild,record.revision,actionIndex,requestId);
