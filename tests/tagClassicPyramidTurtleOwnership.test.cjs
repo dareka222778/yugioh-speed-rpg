@@ -129,6 +129,10 @@ test('Pyramid Turtle owned by inactive seat 3 recruits an eligible Zombie only f
   assert.ok(!choices.some(action=>action.target===nonZombie.uid),'non-Zombie card must be excluded by the race filter');
   const chosen=choices.find(action=>action.target===activeCandidate.uid);
   state=settleResponses(tag.stepTagDuel(state,member(1),chosen));
+  assert.equal(state.core.choice.source,'monsterRecruitPosition');
+  const position=tag.tagActions(state,member(1)).find(action=>action.kind==='choose'&&action.target==='__recruit_def__');
+  assert.ok(position,'the active representative must choose a legal Special Summon position');
+  state=settleResponses(tag.stepTagDuel(state,member(1),position));
 
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===activeCandidate.uid&&card.id===zombieCandidate.id),
     'the selected Zombie must be Special Summoned to the shared team field with its physical UID');
