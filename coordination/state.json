@@ -1,37 +1,21 @@
 {
-  "runId": "work-20261113T032814-0300",
+  "runId": "work-20261113T073019-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "completed",
-  "startedAt": "2026-11-13T03:28:14-03:00",
-  "lastActivityAt": "2026-11-13T03:52:04.547-03:00",
+  "state": "active",
+  "startedAt": "2026-11-13T07:30:19-03:00",
+  "lastActivityAt": "2026-11-13T07:30:19-03:00",
   "nextScheduledAt": "2026-11-13T08:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "feat/work-m92-tag-dd-assailant-ownership-20261113",
-    "feat/work-m93-tag-banish-victim-ownership-20261113",
-    "feat/work-m94-tag-identity-destruction-ownership-20261113",
-    "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
-    "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
-    "feat/work-m97-tag-troop-dragon-recursion-20261113",
-    "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
-    "feat/work-m99-attribute-recruiters-ownership-20261113",
-    "feat/work-m100-sangan-ownership-20261113",
-    "tests/tagClassicDDAssailantOwnership.test.cjs",
-    "tests/tagClassicBattleBanishVictimOwnership.test.cjs",
-    "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs",
-    "tests/tagClassicPyramidTurtleOwnership.test.cjs",
-    "tests/tagClassicRecruiterFiltersOwnership.test.cjs",
-    "tests/tagClassicTroopDragonRecursionOwnership.test.cjs",
-    "tests/tagClassicGravekeepersSpyOwnership.test.cjs",
-    "tests/tagClassicAttributeRecruitersOwnership.test.cjs",
-    "tests/tagClassicSanganOwnership.test.cjs",
+    "feat/work-m101-jinzo-2v2-trap-lock-20261113",
+    "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs",
     "coordination/state.json",
     "coordination/runs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261113T032814-0300.json",
-  "previousRunId": "work-20261113T025833-0300",
+  "lastCheckpoint": "coordination/runs/work-20261113T073019-0300.json",
+  "previousRunId": "work-20261113T032814-0300",
   "previousReservation": {
     "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
     "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
@@ -48,7 +32,7 @@
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6846002238,
+    "lastRequestComment": 6850403041,
     "noResponse": true,
     "blockedFiles": [
       "src/monsterEffects.ts",
@@ -399,13 +383,22 @@
         "engineRunId": 43381093219,
         "milestoneRunId": 43381093250
       }
+    },
+    {
+      "branch": "feat/work-m101-jinzo-2v2-trap-lock-20261113",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs"
+      ],
+      "state": "claimed"
     }
   ],
   "handoffRequest": {
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "lastCommentId": 6846002238,
-    "reason": "Solicitação cooperativa renovada às 03:28 BRT; nenhum checkpoint/liberação explícita recebido. Os arquivos M61 permaneceram intocados."
+    "lastCommentId": 6850403041,
+    "reason": "Solicitação cooperativa renovada às 07:30 BRT; sem resposta explícita. Os cinco caminhos reservados permanecem intocados."
   },
   "handoff": {
     "to": "auxiliary",
@@ -823,10 +816,10 @@
     "minimum60MinutesConfirmed": false,
     "note": "Bloco efetivo registrado em branches independentes; não foi possível confirmar 60 minutos de trabalho ativo. Nenhuma espera de CI foi contabilizada como desenvolvimento."
   },
-  "nextTask": "Auxiliar: acompanhar CI das PRs #48–#56 e corrigir falhas apenas nas branches próprias M92–M100; validar os novos testes M99/M100; não editar os caminhos reservados M61. Work: próxima sessão deve confirmar CI completa, revisar PRs abertas e retomar M60 somente após handoff explícito M61.",
+  "nextTask": "Work: concluir M101 (Jinzo vs Royal Decree, políticas distintas de ativação/negação em 2v2), executar CI completa e depois avançar para a próxima família independente; retomar M60 apenas após handoff explícito M61. Auxiliar: acompanhar PRs #48–#56 nas branches próprias já liberadas, sem tocar M61/M101.",
   "sharedHeadBeforeRelease": "185755b72d688a576556ba004804e468326ef7c4",
-  "priority": "Work",
-  "sharedHeadBeforeClaim": "185755b72d688a576556ba004804e468326ef7c4",
+  "priority": "P0 — M61 handoff pendente; M101 regressão de Jinzo/Royal Decree no 2v2",
+  "sharedHeadBeforeClaim": "f061bf516c502310798a0c288b3c9d0afcec132e",
   "releasedOwnReservation": {
     "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
     "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
@@ -938,5 +931,19 @@
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci"
     }
-  ]
+  ],
+  "activeRun": {
+    "id": "work-20261113T073019-0300",
+    "owner": "Work",
+    "branch": "feat/work-m101-jinzo-2v2-trap-lock-20261113",
+    "base": "feat/work-m71-ci-branch-routing-20261112",
+    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "reservedFiles": [
+      "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs"
+    ],
+    "state": "active",
+    "startedAt": "2026-11-13T07:30:19-03:00",
+    "priority": "P0 — M61 handoff pendente; M101 regressão de Jinzo/Royal Decree no 2v2"
+  },
+  "nextWorkAt": "2026-11-13T08:30:00-03:00"
 }
