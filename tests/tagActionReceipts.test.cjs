@@ -14,7 +14,11 @@ let database=require('../dist/database');
 let db=database.db;
 let store=require('../dist/tagStore');
 const tag=require('../dist/tagDuel');
-const {getPlayableCard}=require('../dist/effectRegistry');
+const {getPlayableCard,getEffect}=require('../dist/effectRegistry');
+const FIELD_SPELL='86318356'; // Sogen
+const MAGIC_JAMMER='77414722'; // Magic Jammer
+assert.equal(getPlayableCard(FIELD_SPELL)?.field,true);
+assert.equal(getEffect(MAGIC_JAMMER)?.kind,'magicJammer');
 
 const normalIds=[];
 const names=new Set();
@@ -147,5 +151,102 @@ test('2v2 action receipts replay once, reject conflicting IDs, survive SQLite re
   assert.equal(replayedAfterRestart.revision,revision);
   assert.equal(JSON.stringify(replayedAfterRestart.state),committed,'the receipt and committed state must survive SQLite close/reopen');
   assert.deepEqual(inventory(replayedAfterRestart.state),cardsBefore);
+  assert.equal(profiles(),profilesBefore);
+});
+
+
+test('the responding physical teammate can activate a counter-trap once and its receipt survives restart',()=>{
+  const ids=[0,1,2,3].map(seat=>'m75-response-user-'+seat);
+  for(const id of ids)database.createPlayer(id,id);
+  const players=ids.map((id,seat)=>({
+    id,
+    name:'M75 Response User '+seat,
+    cards:Array.from({length:20},(_,index)=>normalIds[index%normalIds.length])
+  }));
+  players[0].cards=[FIELD_SPELL,...Array.from({length:19},(_,index)=>normalIds[index%normalIds.length])];
+  players[1].cards=[MAGIC_JAMMER,...Array.from({length:19},(_,index)=>normalIds[index%normalIds.length])];
+  let state=tag.createTagDuel(players,{classic:true,first:0,seed:'m75-response-receipt'});
+  const before=inventory(state);
+  assert.equal(before.length,80);
+
+  const fieldOwner=state.core.players[0];
+  let field=fieldOwner.hand.find(card=>card.id===FIELD_SPELL);
+  if(!field){
+    const index=fieldOwner.deck.findIndex(card=>card.id===FIELD_SPELL);
+    assert.notEqual(index,-1);
+    field=fieldOwner.deck.splice(index,1)[0];
+    fieldOwner.hand.push(field);
+  }
+  const trapOwner=state.core.players[1];
+  let trap=trapOwner.hand.find(card=>card.id===MAGIC_JAMMER);
+  if(!trap){
+    const index=trapOwner.deck.findIndex(card=>card.id===MAGIC_JAMMER);
+    assert.notEqual(index,-1);
+    trap=trapOwner.deck.splice(index,1)[0];
+  }else trapOwner.hand=trapOwner.hand.filter(card=>card.uid!==trap.uid);
+  trapOwner.backrow.push({...trap,setTurn:0,faceUp:false});
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+
+  const fieldAction=tag.tagActions(state,ids[0]).find(action=>action.kind==='field'&&action.card===field.uid);
+  assert.ok(fieldAction);
+  state=tag.stepTagDuel(state,ids[0],fieldAction);
+  assert.equal(state.core.phase,'response');
+  const actor=tag.tagDecisionMember(state).id;
+  assert.equal(actor,ids[1],'the response window belongs to the opposing physical teammate');
+  const actions=tag.tagActions(state,actor);
+  const actionIndex=actions.findIndex(action=>action.kind==='trap'&&action.card===trap.uid);
+  assert.notEqual(actionIndex,-1,'the responding teammate must receive the legal Magic Jammer action');
+  const discardUid=actions[actionIndex].discards[0];
+  assert.ok(discardUid,'Magic Jammer must expose its one-card discard cost');
+
+  const members=state.members.map(member=>({id:member.id,name:member.name,accepted:true}));
+  const record={
+    id:'m75-response-receipt-session',
+    guild:'m75-response-guild',
+    channel:'m75-response-channel',
+    message:null,
+    revision:0,
+    updated:Date.now(),
+    status:'playing',
+    members,
+    state,
+    rules:'classic-loan'
+  };
+  db.prepare('INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)')
+    .run(record.id,record.guild,record.channel,record.message,record.revision,record.updated,record.status,JSON.stringify(record.members),JSON.stringify(record.state),record.rules);
+  for(const member of members)db.prepare('INSERT INTO tag_members(owner,session_id) VALUES(?,?)').run(member.id,record.id);
+  const profilesBefore=profiles();
+  const requestId='m75-response-action-0001';
+
+  const first=store.actTag(record.id,actor,record.guild,record.revision,actionIndex,requestId);
+  assert.equal(first.receipt.replayed,false);
+  assert.ok(first.state.core.players[1].graveyard.some(card=>card.uid===discardUid),'the response cost must be paid exactly once');
+  assert.ok(first.state.core.players[1].graveyard.some(card=>card.uid===trap.uid),'the activated counter-trap must resolve to its owner graveyard');
+  assertInventoryConserved(first.state,new Map(before.map(entry=>{const [uid,id]=entry.split(':');return [uid,id];})));
+
+  const committed=JSON.stringify(first.state),revision=first.revision;
+  const duplicate=store.actTag(record.id,actor,record.guild,record.revision,actionIndex,requestId);
+  assert.equal(duplicate.receipt.replayed,true);
+  assert.equal(duplicate.revision,revision);
+  assert.equal(JSON.stringify(duplicate.state),committed,'Discord retry must not pay the discard cost or resolve the trap twice');
+  assert.throws(
+    ()=>store.actTag(record.id,ids[0],record.guild,record.revision,actionIndex,requestId),
+    /Identificador de ação já utilizado/,
+    'the turn player cannot replay the responding teammate receipt'
+  );
+  assert.equal(profiles(),profilesBefore);
+  assert.equal(db.prepare('SELECT COUNT(*) AS count FROM tag_members WHERE session_id=?').get(record.id).count,4);
+
+  db.close();
+  delete require.cache[storePath];
+  delete require.cache[receiptsPath];
+  delete require.cache[databasePath];
+  database=require('../dist/database');
+  db=database.db;
+  store=require('../dist/tagStore');
+  const restored=store.actTag(record.id,actor,record.guild,record.revision,actionIndex,requestId);
+  assert.equal(restored.receipt.replayed,true);
+  assert.equal(restored.revision,revision);
+  assert.equal(JSON.stringify(restored.state),committed,'the response receipt and paid cost must survive SQLite reopen');
   assert.equal(profiles(),profilesBefore);
 });
