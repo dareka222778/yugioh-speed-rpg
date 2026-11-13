@@ -128,14 +128,15 @@ test('inactive teammate-owned Negate Attack ends the Battle Phase and blocks ord
   assert.equal(JSON.stringify(state),unchanged,'the inactive Counter Trap owner must not mutate the response chain');
 
   state=tag.stepTagDuel(state,member(1),response);
-  assert.equal(state.core.phase,'response','the Counter Trap must open its own Spell Speed 3 response priority');
+  assert.equal(state.core.phase,'main',
+    'no legal Spell Speed 3 response exists, so Negate Attack resolves immediately and ends the Battle Phase');
   assert.equal(tag.tagDecisionMember(state).id,member(0),
-    'the opposing active physical seat receives the next response priority');
+    'the turn remains with the attacking team after the Battle Phase is ended');
   assert.deepEqual(tag.tagActions(state,member(2)),[],
-    'the inactive physical owner of Sakuretsu Armor must not receive counter-chain actions');
+    'the inactive physical owner of Sakuretsu Armor must not receive actions');
   assert.ok(!tag.tagActions(state,member(0)).some(action=>
     action.kind==='trap'&&action.card===sakuretsuTrap.uid
-  ),'an ordinary Spell Speed 2 Trap must not chain to Negate Attack');
+  ),'the ordinary Spell Speed 2 Trap cannot chain to Negate Attack and is not activatable in Main Phase');
 
   state=settle(state);
   assert.equal(state.core.phase,'main',
