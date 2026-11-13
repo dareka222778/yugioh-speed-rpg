@@ -14,16 +14,42 @@ let database=require('../dist/database');
 let db=database.db;
 let store=require('../dist/tagStore');
 const tag=require('../dist/tagDuel');
+const {getPlayableCard}=require('../dist/effectRegistry');
+
+const normalIds=[];
+const names=new Set();
+for(const id of tag.tagNormalCardIds){
+  const card=getPlayableCard(id),name=card?.englishName??card?.name;
+  if(card&&name&&!names.has(name)){names.add(name);normalIds.push(id);}
+  if(normalIds.length===7)break;
+}
+assert.ok(normalIds.length>=7,'the action-receipt fixture needs seven distinct certified Normal Monsters');
 
 function createPlayingSession(){
   const ids=[0,1,2,3].map(seat=>'m75-user-'+seat);
   for(const id of ids)database.createPlayer(id,id);
-  let record=store.createTagLobby(ids,'m75-guild','m75-channel','classic-loan');
-  for(const member of record.members.filter(member=>!member.accepted)){
-    record=store.acceptTag(record.id,member.id,record.guild,record.revision);
-  }
-  assert.equal(record.status,'playing');
-  assert.equal(record.state.mode,'tag-classic');
+  const players=ids.map((id,seat)=>({
+    id,
+    name:'M75 User '+seat,
+    cards:Array.from({length:20},(_,index)=>normalIds[index%normalIds.length])
+  }));
+  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m75-action-receipts'});
+  const members=state.members.map(member=>({id:member.id,name:member.name,accepted:true}));
+  const record={
+    id:'m75-action-receipt-session',
+    guild:'m75-guild',
+    channel:'m75-channel',
+    message:null,
+    revision:0,
+    updated:Date.now(),
+    status:'playing',
+    members,
+    state,
+    rules:'classic-loan'
+  };
+  db.prepare('INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)')
+    .run(record.id,record.guild,record.channel,record.message,record.revision,record.updated,record.status,JSON.stringify(record.members),JSON.stringify(record.state),record.rules);
+  for(const member of members)db.prepare('INSERT INTO tag_members(owner,session_id) VALUES(?,?)').run(member.id,record.id);
   return record;
 }
 function inventory(state){
@@ -44,12 +70,14 @@ test('2v2 action receipts replay once, reject conflicting IDs, survive SQLite re
   let record=createPlayingSession();
   const profilesBefore=profiles();
   const cardsBefore=inventory(record.state);
+  assert.equal(cardsBefore.length,80);
   const actor=tag.tagDecisionMember(record.state).id;
   const actions=tag.tagActions(record.state,actor);
   const actionIndex=actions.findIndex(action=>action.kind==='end');
-  const conflictingIndex=actions.findIndex(action=>action.kind==='battle');
+  const conflictingIndex=actions.findIndex(action=>action.kind==='summon');
   assert.notEqual(actionIndex,-1,'the active physical member must be able to end the turn');
-  assert.notEqual(conflictingIndex,-1,'the fixture must expose a distinct action for collision testing');
+  assert.notEqual(conflictingIndex,-1,'the all-Normal-Monster fixture must expose a distinct Summon action');
+  assert.notEqual(conflictingIndex,actionIndex);
   const expectedRevision=record.revision;
   const invalidRetry='m75-invalid-retry';
 
