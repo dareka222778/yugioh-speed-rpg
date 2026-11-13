@@ -129,7 +129,9 @@ test('Skelengel draws from the active physical seat Deck and may leave seven car
   }));
   let state=tag.createTagDuel(players,{classic:true,first:0,seed:'m141-skelengel-active-physical-deck'});
   const source=setFlipMonster(state,2,SKELENGEL);
-  const extraHandCard=takeCard(state,0,normalIds[0]);
+  const extraId=normalIds.find(id=>!holder(state,0).hand.some(card=>card.id===id));
+  assert.ok(extraId,'the active physical seat must have one additional Normal Monster in its Deck');
+  const extraHandCard=takeCard(state,0,extraId);
   holder(state,0).hand.push(extraHandCard);
   state.core.turn=3;
   assert.match(source.uid,/^m2:/);
