@@ -109,7 +109,7 @@ for(const sourceDef of sources)test(sourceDef.name+' does not banish a monster t
   const source=deploy(state,2,sourceDef.id,'atk');
   const target=deploy(state,3,highDefense.id,'def');
   const sourceAtk=engine.atk(source,state.core);
-  assert.ok(target.defense>sourceAtk);
+  assert.ok(highDefense.defense>sourceAtk);
   const before=snapshot(state);
 
   state=startBattle(state,0);
@@ -119,7 +119,7 @@ for(const sourceDef of sources)test(sourceDef.name+' does not banish a monster t
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===target.uid));
   assert.ok(!state.core.players[1].banished.some(card=>card.uid===target.uid));
   assert.ok(!state.core.players[1].grave.some(card=>card.uid===target.uid));
-  assert.equal(state.core.players[0].lp,4000-(target.defense-sourceAtk));
+  assert.equal(state.core.players[0].lp,4000-(highDefense.defense-sourceAtk));
   tag.assertTagDuel(state);
   assertConserved(state,before);
 });
