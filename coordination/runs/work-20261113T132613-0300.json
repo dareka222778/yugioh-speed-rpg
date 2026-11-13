@@ -124,17 +124,46 @@
         "engineValidation": "queued",
         "milestone1000": "success"
       }
+    },
+    "m61": {
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "engineValidation": "failure",
+      "cardBatchFast": "failure",
+      "errors": [
+        "TS2367 at src/duelEngineCurrent.ts:410: redundant comparison with targetGroup after narrowing",
+        "TS2339 at src/duelEngineCurrent.ts:410: rule property on never"
+      ],
+      "workflowRuns": [
+        43081735774,
+        43081735544
+      ]
+    },
+    "m118": {
+      "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "workflowRuns": [
+        43420156255,
+        43420156271,
+        43420156257
+      ],
+      "handoff": "awaiting-response"
     }
   },
   "handoffRequests": {
     "m61": {
       "pr": 17,
       "status": "awaiting-response",
+      "lastCommentId": 6859057163,
+      "ci": "engineValidation failure; cardBatchFast failure; TS2367 and TS2339 at src/duelEngineCurrent.ts:410",
       "filesUntouched": true
     },
     "m118": {
       "pr": 74,
       "status": "awaiting-response",
+      "lastCommentId": 6859057742,
+      "ci": "cardBatchFast success; engineValidation success; milestone1000 success",
       "filesUntouched": true
     }
   },
@@ -271,5 +300,6 @@
         "milestone1000": "not-returned"
       }
     }
-  ]
+  ],
+  "statusRefreshAt": "2026-11-13T13:40:08-03:00"
 }
