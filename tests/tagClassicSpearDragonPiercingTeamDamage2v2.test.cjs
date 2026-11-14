@@ -151,8 +151,9 @@ test('Spear Dragon does not pierce when its ATK is lower than the attacked Defen
 
   assert.equal(state.core.players[1].lp,4000,'a losing attack must not inflict piercing damage');
   assert.equal(state.core.players[0].lp,3900,'the attacking team receives only ordinary battle damage of 100');
-  assert.ok(state.core.players[0].grave.some(card=>card.uid===spear.uid&&card.id===SPEAR_DRAGON),
-    'the Spear Dragon is destroyed when its ATK is lower than the defender DEF');
+  const survivingSpear=state.core.players[0].monsters.find(card=>card.uid===spear.uid&&card.id===SPEAR_DRAGON);
+  assert.ok(survivingSpear,'the attacking monster is not destroyed by a stronger Defense Position monster');
+  assert.equal(survivingSpear.position,'def','Spear Dragon still changes to Defense Position after the Damage Step');
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===defender.uid&&card.id===MYSTICAL_ELF),
     'the stronger Defense Position monster survives');
   tag.assertTagDuel(state);
