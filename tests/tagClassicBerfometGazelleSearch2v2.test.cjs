@@ -51,6 +51,15 @@ function takeCard(state,seat,id){
   }
   throw new Error('M206 fixture card missing from physical seat '+seat+': '+id);
 }
+function deployFaceUp(state,seat,id){
+  const card=takeCard(state,seat,id);
+  const monster={
+    ...card,owner:seat%2,position:'atk',faceUp:true,
+    entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0
+  };
+  state.core.players[seat%2].monsters.push(monster);
+  return monster;
+}
 function deployFaceDown(state,seat,id){
   const card=takeCard(state,seat,id);
   const monster={
@@ -83,13 +92,14 @@ function settleResponses(state){
   }
   return state;
 }
-function summonNormal(state,source){
+function summonNormal(state,source,tribute){
   const physical=holder(state,0);
   physical.hand.push(source);
   const action=tag.tagActions(state,member(0)).find(candidate=>
-    candidate.kind==='summon'&&candidate.card===source.uid&&candidate.position==='atk'
+    candidate.kind==='summon'&&candidate.card===source.uid&&candidate.position==='atk'&&
+    Array.isArray(candidate.tributes)&&candidate.tributes.length===1&&candidate.tributes[0]===tribute.uid
   );
-  assert.ok(action,'the active physical owner must receive the Normal Summon action');
+  assert.ok(action,'the Level 5 Berfomet Normal Summon must offer its required one-monster Tribute');
   return tag.stepTagDuel(state,member(0),action);
 }
 function chooseBerfometTrigger(state,source){
@@ -107,13 +117,14 @@ test('Berfomet searches only Gazelle from the active physical Deck after Normal 
   let state=game('m206-normal-search');
   const before=inventorySnapshot(state);
   const source=takeCard(state,0,BERFOMET);
+  const tribute=deployFaceUp(state,0,NORMAL_FODDER);
   const gazelle=holder(state,0).deck.find(card=>card.id===GAZELLE);
   const excluded=holder(state,0).deck.find(card=>card.id===NORMAL_FODDER);
   assert.ok(gazelle&&excluded,'the active physical Deck needs Gazelle and a negative-control monster');
   const partnerGazelle=holder(state,2).deck.find(card=>card.id===GAZELLE);
   assert.ok(partnerGazelle,'the inactive partner must retain an independent Gazelle copy');
 
-  state=summonNormal(state,source);
+  state=summonNormal(state,source,tribute);
   state=chooseBerfometTrigger(state,source);
   const choices=searchTargetChoices(state);
   assert.ok(choices.includes(gazelle.uid),'the exact Gazelle UID in the active Deck must be selectable');
@@ -162,9 +173,10 @@ test('declining Berfomet leaves Gazelle in the active physical Deck',()=>{
   let state=game('m206-decline');
   const before=inventorySnapshot(state);
   const source=takeCard(state,0,BERFOMET);
+  const tribute=deployFaceUp(state,0,NORMAL_FODDER);
   const gazelle=holder(state,0).deck.find(card=>card.id===GAZELLE);
   assert.ok(gazelle);
-  state=summonNormal(state,source);
+  state=summonNormal(state,source,tribute);
   state=settleResponses(state);
   const choices=tag.tagActions(state,member(0)).filter(action=>action.kind==='choose').map(action=>action.target);
   assert.ok(choices.includes(source.uid));
