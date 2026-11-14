@@ -113,7 +113,7 @@ test('Piranha Army doubles direct battle damage to the opposing shared team',()=
   const unchanged=JSON.stringify(state);
   assert.deepEqual(tag.tagActions(state,member(2)),[],
     'the inactive physical owner cannot declare the direct attack');
-  assert.throws(()=>tag.stepTagDuel(state,member(2),action),/Aguarde a vez do participante ativo\\./);
+  assert.throws(()=>tag.stepTagDuel(state,member(2),action),/Aguarde a vez do participante ativo/);
   assert.equal(JSON.stringify(state),unchanged,'a rejected inactive-partner action must not mutate the duel');
   state=settle(tag.stepTagDuel(state,member(0),action));
   assert.equal(state.core.players[1].lp,4000-1600,
