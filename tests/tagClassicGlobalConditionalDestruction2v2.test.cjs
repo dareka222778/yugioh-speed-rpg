@@ -11,6 +11,7 @@ const SOUL_TAKER='81510157';
 const EQUIP='01435851';
 const MIRROR_FORCE='44095762';
 const TORRENTIAL_TRIBUTE='53582587';
+const BLUE_EYES='89631139';
 
 for(const [id,name] of [
   [NEEDLE_CEILING,'Needle Ceiling'],
@@ -159,12 +160,12 @@ test('Needle Ceiling cannot be activated with only three monsters on the shared 
 });
 
 test('Really Eternal Rest destroys equipped monsters from both teams but preserves un-equipped monsters',()=>{
-  let state=game([REALLY_ETERNAL_REST,EQUIP],'m201-really-eternal-rest');
+  let state=game([REALLY_ETERNAL_REST,EQUIP,BLUE_EYES],'m201-really-eternal-rest');
   const source=setBackrow(state,2,REALLY_ETERNAL_REST);
-  const ownEquipped=deploy(state,0,normalIds[0]);
+  const ownEquipped=deploy(state,0,BLUE_EYES);
   const allyUnEquipped=deploy(state,2,normalIds[1]);
   const opponentUnEquipped=deploy(state,1,normalIds[2]);
-  const opponentEquipped=deploy(state,3,normalIds[3]);
+  const opponentEquipped=deploy(state,3,BLUE_EYES);
   const ownEquip=attachEquip(state,0,ownEquipped);
   const opponentEquip=attachEquip(state,3,opponentEquipped);
   const before=inventorySnapshot(state);
@@ -187,10 +188,10 @@ test('Really Eternal Rest destroys equipped monsters from both teams but preserv
 });
 
 test('Disarmament destroys Equip Spells on both teams without destroying their equipped monsters',()=>{
-  let state=game([DISARMAMENT,EQUIP,MIRROR_FORCE,TORRENTIAL_TRIBUTE],'m201-disarmament-global');
+  let state=game([DISARMAMENT,EQUIP,MIRROR_FORCE,TORRENTIAL_TRIBUTE,BLUE_EYES],'m201-disarmament-global');
   const source=setBackrow(state,2,DISARMAMENT);
-  const ownMonster=deploy(state,0,normalIds[0]);
-  const opponentMonster=deploy(state,3,normalIds[1]);
+  const ownMonster=deploy(state,0,BLUE_EYES);
+  const opponentMonster=deploy(state,3,BLUE_EYES);
   const ownEquip=attachEquip(state,0,ownMonster);
   const opponentEquip=attachEquip(state,3,opponentMonster);
   const ownSet=setBackrow(state,0,MIRROR_FORCE);
