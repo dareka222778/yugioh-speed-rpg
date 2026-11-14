@@ -74,9 +74,9 @@ function setup(){
     seat,tag.tagMemberHand(state,member(seat)).map(card=>card.uid)
   ]));
   const expectedDraws=new Map([0,1].map(seat=>[
-    seat,holder(state,seat).deck.slice(0,handsBefore.get(seat).length).map(card=>card.uid)
+    seat,holder(state,seat).deck.slice(0,handsBefore.get(seat).length-(seat===0?1:0)).map(card=>card.uid)
   ]));
-  assert.equal(expectedDraws.get(0).length,handsBefore.get(0).length);
+  assert.equal(expectedDraws.get(0).length,handsBefore.get(0).length-1,'the activating Spell leaves seat 0 hand before Card Destruction counts the remaining cards');
   assert.equal(expectedDraws.get(1).length,handsBefore.get(1).length);
   return {state,spell,before,handsBefore,expectedDraws,exhausted};
 }
