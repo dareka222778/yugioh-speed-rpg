@@ -10,6 +10,7 @@ const GYAKU_GIRE_PANDA='09817927';
 const GIANT_RAT='97017120';
 const AXE_RAIDER='48305365';
 const CELTIC_GUARDIAN='91152256';
+const MYSTICAL_ELF='15025844';
 const DARK_MAGICIAN='46986414';
 
 assert.equal(getPlayableCard(ENRAGED_BATTLE_OX)?.englishName,'Enraged Battle Ox');
@@ -20,6 +21,7 @@ assert.equal(getPlayableCard(GIANT_RAT)?.kind,'monster');
 assert.equal(getPlayableCard(GIANT_RAT)?.race,'Beast');
 assert.equal(getPlayableCard(AXE_RAIDER)?.race,'Warrior');
 assert.equal(getPlayableCard(CELTIC_GUARDIAN)?.defense,1200);
+assert.equal(getPlayableCard(MYSTICAL_ELF)?.defense,2000);
 assert.equal(getPlayableCard(DARK_MAGICIAN)?.atk,2500);
 
 const normal=[...new Set(tag.tagNormalCardIds)]
@@ -108,7 +110,7 @@ test('Enraged Battle Ox grants piercing to a Beast controlled by its active team
   const before=inventorySnapshot(state);
   const source=deploy(state,2,ENRAGED_BATTLE_OX,'atk');
   const ally=deploy(state,0,GIANT_RAT,'atk');
-  const target=deploy(state,3,CELTIC_GUARDIAN,'def');
+  const target=deploy(state,3,MYSTICAL_ELF,'def');
   assert.match(source.uid,/^m2:/,'Enraged Battle Ox must retain inactive partner physical ownership');
   assert.match(ally.uid,/^m0:/,'the Beast ally must retain active teammate physical ownership');
   assert.match(target.uid,/^m3:/,'the defending monster must retain opposing partner physical ownership');
@@ -117,14 +119,14 @@ test('Enraged Battle Ox grants piercing to a Beast controlled by its active team
   assert.equal(state.core.players[1].lp,4000-200,
     'the active teammate Beast receives piercing from the inactive partner-owned Enraged Battle Ox');
   assert.equal(state.core.players[0].lp,4000);
-  assert.ok(state.core.players[1].monsters.some(card=>card.uid===target.uid),
-    'the Defense Position target remains on the field after piercing damage');
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===target.uid&&card.id===CELTIC_GUARDIAN),
+    'the Defense Position target is destroyed by battle while piercing damage reaches the shared team LP');
   tag.assertTagDuel(state);
   assertConserved(state,before);
 });
 
 test('Enraged Battle Ox does not grant piercing to a Warrior teammate',()=>{
-  let state=game([ENRAGED_BATTLE_OX,AXE_RAIDER,CELTIC_GUARDIAN],'m183-battle-ox-warrior-control');
+  let state=game([ENRAGED_BATTLE_OX,AXE_RAIDER,MYSTICAL_ELF],'m183-battle-ox-warrior-control');
   const before=inventorySnapshot(state);
   const source=deploy(state,2,ENRAGED_BATTLE_OX,'atk');
   const ally=deploy(state,0,AXE_RAIDER,'atk');
@@ -135,8 +137,10 @@ test('Enraged Battle Ox does not grant piercing to a Warrior teammate',()=>{
   state=attack(state,ally,target);
   assert.equal(state.core.players[1].lp,4000,
     'a Warrior outside the Beast/Beast-Warrior/Winged Beast filter must not gain piercing');
-  assert.ok(state.core.players[1].monsters.some(card=>card.uid===target.uid),
-    'the target remains in Defense Position without piercing damage');
+  assert.equal(state.core.players[0].lp,4000-300,
+    'Axe Raider takes ordinary 300 battle damage against the 2000 DEF Fairy without piercing');
+  assert.ok(state.core.players[1].monsters.some(card=>card.uid===target.uid&&card.position==='def'),
+    'the 2000 DEF target remains in Defense Position without piercing damage');
   tag.assertTagDuel(state);
   assertConserved(state,before);
 });
@@ -155,8 +159,8 @@ test('Gyaku-Gire Panda counts monsters from both opposing physical seats for its
   assert.equal(state.core.players[1].lp,4000-600,
     'two opposing monsters across seats 1 and 3 give Panda 1800 ATK and 600 piercing damage over 1200 DEF');
   assert.equal(state.core.players[0].lp,4000);
-  assert.ok(state.core.players[1].monsters.some(card=>card.uid===target.uid),
-    'the Defense Position target survives the piercing attack');
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===target.uid&&card.id===CELTIC_GUARDIAN),
+    'the Defense Position target is destroyed by battle while the shared team receives piercing damage');
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===otherOpponent.uid),
     'the second opposing seat monster remains present and contributes to Panda ATK');
   tag.assertTagDuel(state);
