@@ -338,10 +338,7 @@
       "atk": 1700,
       "defense": 300,
       "race": "Warrior",
-      "attribute": "EARTH",
-      "archetypes": [
-        "Amazoness"
-      ]
+      "attribute": "EARTH"
     },
     "verifiedPrinting": {
       "region": "tcg",
@@ -350,7 +347,7 @@
       "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5645&request_locale=en",
       "firstReleaseClaim": false
     },
-    "mechanicalFingerprint": "dfd8d53390631a8ec0acb74fd95979b0e3f4558ca82332e766937eeed8133d64",
+    "mechanicalFingerprint": "391ddcb07fe88a11a322aa568c228715b8550b9da8963925141498fed2f33c28",
     "mechanicalDefinition": {
       "kind": "monsterEffect"
     },
@@ -391,8 +388,7 @@
     "semanticNotes": "Ganha 100 ATK por cada monstro Amazoness que você controla.",
     "passcodeEvidence": "Public imported history matched by canonical identity, official CID, name and statistics. Official HTML does not print passwords. Alternate passwords are not additional cards.",
     "distributionAuthorized": false,
-    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5645&request_locale=en",
-    "archetypeEvidence": "Official card database identity; archetype tag is included in the reviewed mechanical fingerprint."
+    "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5645&request_locale=en"
   },
   {
     "id": "52040216",
