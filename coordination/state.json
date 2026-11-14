@@ -1,21 +1,19 @@
 {
-  "runId": "work-20261114T032516-0300",
+  "runId": "work-20261114T083019-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "released-to-auxiliary-monitor-ci",
-  "startedAt": "2026-11-14T03:25:16-03:00",
-  "lastActivityAt": "2026-11-14T03:39:10-03:00",
-  "nextScheduledAt": "2026-11-14T08:30:00-03:00",
+  "state": "active",
+  "startedAt": "2026-11-14T08:30:19-03:00",
+  "lastActivityAt": "2026-11-14T08:30:19-03:00",
+  "nextScheduledAt": "2026-11-14T13:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
-    "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
+    "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs",
     "coordination/state.json",
-    "coordination/runs/work-20261114T032516-0300.json",
-    "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+    "coordination/runs/work-20261114T083019-0300.json"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261114T032516-0300.json",
+  "lastCheckpoint": "coordination/runs/work-20261114T083019-0300.json",
   "previousRunId": "work-20261113T223304-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
@@ -1183,6 +1181,19 @@
         "engineRunId": 43567105671,
         "extendedSoak": "in_progress"
       }
+    },
+    {
+      "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": null,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
+      ],
+      "state": "active",
+      "runId": "work-20261114T083019-0300",
+      "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs."
     }
   ],
   "handoffRequest": {
@@ -4346,5 +4357,23 @@
     "pr117": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier fixture failure corrected",
     "pr118": "npm run check/npm test/card-batch-fast/milestone pass; stress and extended soak in progress",
     "pr119": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier negative fixture expectation corrected"
-  }
+  },
+  "activeWork": {
+    "id": "work-20261114T083019-0300",
+    "owner": "Work",
+    "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs.",
+    "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+    "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "base": "feat/work-m71-ci-branch-routing-20261112",
+    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "reservedFiles": [
+      "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs",
+      "coordination/state.json",
+      "coordination/runs/work-20261114T083019-0300.json"
+    ],
+    "state": "active",
+    "startedAt": "2026-11-14T08:30:19-03:00",
+    "lastActivityAt": "2026-11-14T08:30:19-03:00"
+  },
+  "sharedHeadAtStart": "ec8cabc985b0368576fb8527429251bbc1aa4e7f"
 }

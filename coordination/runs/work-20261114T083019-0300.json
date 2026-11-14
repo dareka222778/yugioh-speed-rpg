@@ -1,0 +1,41 @@
+{
+  "runId": "work-20261114T083019-0300",
+  "owner": "Work",
+  "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs.",
+  "state": "active",
+  "startedAt": "2026-11-14T08:30:19-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "ec8cabc985b0368576fb8527429251bbc1aa4e7f",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "workBranch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+  "workBranchHeadAtClaim": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "reservedFiles": [
+    "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs",
+    "coordination/state.json",
+    "coordination/runs/work-20261114T083019-0300.json"
+  ],
+  "completedBlocks": [],
+  "handoffs": {
+    "activeAuxiliary": "M156–M163 CI monitoring and test-only fixes on their own branches",
+    "conflictingReservations": [
+      "M61/PR17",
+      "M118/PR74",
+      "M151/PR107",
+      "M153/runtime"
+    ],
+    "action": "No overlapping files selected; no transfer required for this independent test-only scope. Preserve all third-party reservations."
+  },
+  "catalogAtStart": {
+    "sharedCertificates": 969,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingToSharedTarget": 31
+  },
+  "limits": [
+    "No runtime or catalogue changes planned",
+    "No inventory grants or persistent DB writes",
+    "No merge/deploy/live Discord claims"
+  ]
+}
