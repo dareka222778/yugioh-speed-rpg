@@ -10,24 +10,27 @@ const DARK_MAGIC_ATTACK='02314238';
 const MIRROR_FORCE='44095762';
 const TORRENTIAL_TRIBUTE='53582587';
 
-for(const [id,name] of [
-  [DARK_MAGICIAN,'Dark Magician'],
-  [THOUSAND_KNIVES,'Thousand Knives'],
-  [DARK_MAGIC_ATTACK,'Dark Magic Attack'],
-  [MIRROR_FORCE,'Mirror Force'],
-  [TORRENTIAL_TRIBUTE,'Torrential Tribute']
-]){
-  assert.equal(getPlayableCard(id)?.englishName,name);
-}
-assert.equal(getEffect(THOUSAND_KNIVES)?.kind,'conditionalDestruction');
-assert.equal(getEffect(THOUSAND_KNIVES)?.zone,'monsters');
-assert.equal(getEffect(THOUSAND_KNIVES)?.scope,'selected');
-assert.equal(getEffect(THOUSAND_KNIVES)?.controller,'opponent');
-assert.equal(getEffect(THOUSAND_KNIVES)?.requiredName,'Dark Magician');
-assert.equal(getEffect(DARK_MAGIC_ATTACK)?.kind,'conditionalDestruction');
-assert.equal(getEffect(DARK_MAGIC_ATTACK)?.zone,'backrow');
-assert.equal(getEffect(DARK_MAGIC_ATTACK)?.scope,'opponent');
-assert.equal(getEffect(DARK_MAGIC_ATTACK)?.requiredName,'Dark Magician');
+test('M200 card registry and conditional model contract',()=>{
+  for(const [id,name] of [
+    [DARK_MAGICIAN,'Dark Magician'],
+    [THOUSAND_KNIVES,'Thousand Knives'],
+    [DARK_MAGIC_ATTACK,'Dark Magic Attack'],
+    [MIRROR_FORCE,'Mirror Force'],
+    [TORRENTIAL_TRIBUTE,'Torrential Tribute']
+  ]){
+    assert.equal(getPlayableCard(id)?.englishName,name);
+  }
+  assert.equal(getEffect(THOUSAND_KNIVES)?.kind,'conditionalDestruction');
+  assert.equal(getEffect(THOUSAND_KNIVES)?.zone,'monsters');
+  assert.equal(getEffect(THOUSAND_KNIVES)?.scope,'selected');
+  assert.equal(getEffect(THOUSAND_KNIVES)?.controller,'opponent');
+  assert.equal(getEffect(THOUSAND_KNIVES)?.requiredName,'Dark Magician');
+  assert.equal(getEffect(DARK_MAGIC_ATTACK)?.kind,'conditionalDestruction');
+  assert.equal(getEffect(DARK_MAGIC_ATTACK)?.zone,'backrow');
+  assert.equal(getEffect(DARK_MAGIC_ATTACK)?.scope,'opponent');
+  assert.equal(getEffect(DARK_MAGIC_ATTACK)?.requiredName,'Dark Magician');
+  
+});
 
 const normal=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
