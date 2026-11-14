@@ -110,7 +110,7 @@ test('Enraged Battle Ox grants piercing to a Beast controlled by its active team
   const before=inventorySnapshot(state);
   const source=deploy(state,2,ENRAGED_BATTLE_OX,'atk');
   const ally=deploy(state,0,GIANT_RAT,'atk');
-  const target=deploy(state,3,MYSTICAL_ELF,'def');
+  const target=deploy(state,3,CELTIC_GUARDIAN,'def');
   assert.match(source.uid,/^m2:/,'Enraged Battle Ox must retain inactive partner physical ownership');
   assert.match(ally.uid,/^m0:/,'the Beast ally must retain active teammate physical ownership');
   assert.match(target.uid,/^m3:/,'the defending monster must retain opposing partner physical ownership');
@@ -130,7 +130,7 @@ test('Enraged Battle Ox does not grant piercing to a Warrior teammate',()=>{
   const before=inventorySnapshot(state);
   const source=deploy(state,2,ENRAGED_BATTLE_OX,'atk');
   const ally=deploy(state,0,AXE_RAIDER,'atk');
-  const target=deploy(state,3,CELTIC_GUARDIAN,'def');
+  const target=deploy(state,3,MYSTICAL_ELF,'def');
   assert.match(source.uid,/^m2:/);
   assert.match(ally.uid,/^m0:/);
   state=startBattle(state);
