@@ -71,7 +71,13 @@ function arrangeTop(state,count){
   const chosen=normalIds.slice(0,count);
   const top=[];
   for(const id of chosen){
-    const index=physical.deck.findIndex(card=>card.id===id);
+    let index=physical.deck.findIndex(card=>card.id===id);
+    if(index<0){
+      const handIndex=physical.hand.findIndex(card=>card.id===id);
+      assert.ok(handIndex>=0,'each selected top card must originate in the active opposing physical Deck or hand');
+      physical.deck.push(physical.hand.splice(handIndex,1)[0]);
+      index=physical.deck.findIndex(card=>card.id===id);
+    }
     assert.ok(index>=0,'each selected top card must originate in the active opposing physical Deck');
     top.push(physical.deck.splice(index,1)[0]);
   }
