@@ -1,16 +1,16 @@
 {
-  "runId": "work-20261114T133334-0300",
+  "runId": "work-20261114T185556-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
-  "startedAt": "2026-11-14T13:33:34-03:00",
-  "lastActivityAt": "2026-11-14T13:42:20-03:00",
-  "nextScheduledAt": "2026-11-14T18:30:00-03:00",
+  "startedAt": "2026-11-14T18:55:56-03:00",
+  "lastActivityAt": "2026-11-14T19:16:42-03:00",
+  "nextScheduledAt": "2026-11-14T23:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [],
-  "lastCheckpoint": "coordination/runs/work-20261114T133334-0300.json",
-  "previousRunId": "work-20261114T083019-0300",
+  "lastCheckpoint": "coordination/runs/work-20261114T185556-0300.json",
+  "previousRunId": "work-20261114T133334-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -1348,6 +1348,108 @@
       },
       "tests": 6,
       "reservation": "released"
+    },
+    {
+      "mission": "M199",
+      "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
+      "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
+      "pr": 154,
+      "scope": [
+        "tests/tagClassicGadgetSearchChain2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "mission": "M200",
+      "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
+      "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
+      "pr": 155,
+      "scope": [
+        "tests/tagClassicDarkMagicianConditionalSpells2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "in_progress",
+        "milestone": "in_progress",
+        "npmTest": "pending",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      }
+    },
+    {
+      "mission": "M201",
+      "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
+      "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
+      "pr": 156,
+      "scope": [
+        "tests/tagClassicGlobalConditionalDestruction2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      }
+    },
+    {
+      "mission": "M202",
+      "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
+      "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
+      "pr": 157,
+      "scope": [
+        "tests/tagClassicChaosEndSharedBanishedThreshold2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "mission": "M203",
+      "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
+      "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
+      "pr": 158,
+      "scope": [
+        "tests/tagClassicTribalContinuousModifiers2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "mission": "M204",
+      "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
+      "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
+      "pr": 159,
+      "scope": [
+        "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      }
     }
   ],
   "handoffRequest": {
@@ -1386,7 +1488,21 @@
     "newCertificationsThisRun": 0,
     "inventoryGranted": 0,
     "milestoneArtifactId": 14112394839,
-    "milestoneRunId": 43592911763
+    "milestoneRunId": 43592911763,
+    "sharedBranch": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "m71TestBase": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "pr14DevelopmentBranch": {
+      "cards": 1014,
+      "certificates": 1014,
+      "merged": false
+    },
+    "deltaToShared": 45
   },
   "m60": {
     "officialSourceReviewed": [
@@ -1956,6 +2072,105 @@
       "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
       "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
       "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
+    },
+    {
+      "number": 149,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m194-ritual-searchers-trigger-2v2-20261114",
+      "head": "d4243887d4c373a05885d6812805ad7317947421",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast-success; milestone-success; engine-validation-failure"
+    },
+    {
+      "number": 150,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m195-flip-searchers-physical-deck-2v2-20261114",
+      "head": "dda71886e0393e2b5cb8b27776d7d5cf42b22b1c",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast-success; milestone-success; engine-validation-failure"
+    },
+    {
+      "number": 151,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m196-needle-worm-opponent-deck-mill-2v2-20261114",
+      "head": "5e3d68b9aa30fb43517a1412ac77f1ad39d19f95",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast-success; milestone-success; engine-validation-failure"
+    },
+    {
+      "number": 152,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m197-position-change-triggers-2v2-20261114",
+      "head": "2b3f7246db317b56640f2af7e1bea84d1a94bc91",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast-success; milestone-success; engine-validation-failure"
+    },
+    {
+      "number": 153,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m198-summon-burn-draw-triggers-2v2-20261114",
+      "head": "7f0928b53935728a31850fa5f0943cdbbec8495f",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast-success; milestone-success; engine-validation-failure"
+    },
+    {
+      "number": 154,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
+      "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast:success; milestone:success; npmTest:success; extendedSoak:success; engine:success"
+    },
+    {
+      "number": 155,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
+      "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast:in_progress; milestone:in_progress; npmTest:pending; extendedSoak:in_progress; engine:in_progress"
+    },
+    {
+      "number": 156,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
+      "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast:success; milestone:success; npmTest:success; extendedSoak:in_progress; engine:in_progress"
+    },
+    {
+      "number": 157,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
+      "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast:success; milestone:success; npmTest:success; extendedSoak:success; engine:success"
+    },
+    {
+      "number": 158,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
+      "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast:success; milestone:success; npmTest:success; extendedSoak:success; engine:success"
+    },
+    {
+      "number": 159,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
+      "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "fast:success; milestone:success; npmTest:in_progress; extendedSoak:in_progress; engine:in_progress"
     }
   ],
   "ci": {
@@ -2528,7 +2743,56 @@
         "touched": false
       }
     ],
-    "postReleaseCheckedAt": "2026-11-14T09:21:10-03:00"
+    "postReleaseCheckedAt": "2026-11-14T09:21:10-03:00",
+    "pr154": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "extendedSoak": "success",
+      "engineValidation": "success"
+    },
+    "pr155": {
+      "cardBatchFast": "in_progress",
+      "milestone1000": "in_progress",
+      "npmTest": "pending",
+      "extendedSoak": "in_progress",
+      "engineValidation": "in_progress"
+    },
+    "pr156": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "extendedSoak": "in_progress",
+      "engineValidation": "in_progress"
+    },
+    "pr157": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "extendedSoak": "success",
+      "engineValidation": "success"
+    },
+    "pr158": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "extendedSoak": "success",
+      "engineValidation": "success"
+    },
+    "pr159": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "in_progress",
+      "extendedSoak": "in_progress",
+      "engineValidation": "in_progress"
+    },
+    "parallelPRs149to153": {
+      "149": "fast-success; milestone-success; engine-validation-failure",
+      "150": "fast-success; milestone-success; engine-validation-failure",
+      "151": "fast-success; milestone-success; engine-validation-failure",
+      "152": "fast-success; milestone-success; engine-validation-failure",
+      "153": "fast-success; milestone-success; engine-validation-failure"
+    }
   },
   "production": {
     "merge": false,
@@ -2563,16 +2827,16 @@
     "note": "GET .github/workflows on main returned 404; deployments endpoint was not exposed by the GitHub connector."
   },
   "duration": {
-    "startedAt": "2026-11-14T13:33:34-03:00",
-    "endedAt": "2026-11-14T13:42:20-03:00",
-    "elapsedWallMinutes": 9,
-    "effectiveWorkMinutesMeasured": 9,
+    "startedAt": "2026-11-14T18:55:56-03:00",
+    "endedAt": "2026-11-14T19:16:42-03:00",
+    "elapsedWallMinutes": 21,
+    "effectiveWorkMinutesMeasured": 20,
     "minimum60MinutesMet": false,
-    "note": "A execução terminou após aproximadamente 9 minutos medidos; espera da CI não foi contada como trabalho."
+    "note": "A sessão teve cerca de 21 minutos observados e 20 minutos de trabalho efetivo medido; a meta de 60 minutos não foi cumprida. Espera ociosa de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar monitora PRs #130–#133 e pode corrigir somente os quatro testes listados. Próximo Work: confirmar CI integral; obter handoff parcial M61 para src/duelEngineCurrent.ts (face-up Double Tribute) e src/monsterEffects.ts (Atomic Firefly); depois retomar as 31 certificações restantes e reconciliar o delta de 45.",
-  "sharedHeadBeforeRelease": "4359e48a727b66ca5aa44bce6e3fa16d286d309e",
-  "priority": "P1 — certificar por comportamento Newdoria no 2v2: gatilho obrigatório somente após destruição por batalha, escolha de um monstro de qualquer uma das duas equipes, preservação do UID físico, seleção de alvo face-down sem revelar identidade e integridade dos quatro assentos.",
+  "nextTask": "Auxiliar: monitorar PRs #154–#159 e corrigir somente testes nas próprias branches. Work: concluir CI de #155/#156/#159; revisar com o agente responsável as falhas Engine Validation de #149–#153; obter handoff M61; continuar as 31 certificações restantes e reconciliar o delta de 45.",
+  "sharedHeadBeforeRelease": "7ca18a4e2f6f0b0c577c09240ea1583c0f4cf650",
+  "priority": "P1 — ampliar cobertura comportamental 2v2 em buscas Gadget, Magias condicionais de Dark Magician, destruição global condicional, Chaos End, modificadores contínuos tribais e contagem Amazoness; preservar UIDs físicos e integridade dos quatro assentos.",
   "sharedHeadBeforeClaim": "7a2a124107b3d2136a4bf90a88cc65ea22f1c294",
   "releasedOwnReservation": true,
   "parallelWorkObserved": {
@@ -3080,36 +3344,121 @@
     }
   ],
   "activeRun": {
-    "runId": "work-20261114T083019-0300",
+    "runId": "work-20261114T185556-0300",
     "owner": "Work",
     "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadBeforeRelease": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
-    "startedAt": "2026-11-14T08:30:19-03:00",
-    "endedAt": "2026-11-14T09:18:10-03:00",
+    "sharedHeadBeforeRelease": "7ca18a4e2f6f0b0c577c09240ea1583c0f4cf650",
+    "sharedHeadAfterCheckpoint": "44dc873549ceec9cde5290cad559926ff4e1be40",
+    "startedAt": "2026-11-14T18:55:56-03:00",
+    "endedAt": "2026-11-14T19:16:42-03:00",
     "workBranches": [
       {
-        "mission": "M164",
-        "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
-        "head": "403b3f671d9336c8695fd196103768f3422ad324",
-        "pr": 120
+        "mission": "M199",
+        "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
+        "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
+        "pr": 154,
+        "scope": [
+          "tests/tagClassicGadgetSearchChain2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "success",
+          "extendedSoak": "success",
+          "engineValidation": "success"
+        }
       },
       {
-        "mission": "M172",
-        "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
-        "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
-        "pr": 128
+        "mission": "M200",
+        "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
+        "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
+        "pr": 155,
+        "scope": [
+          "tests/tagClassicDarkMagicianConditionalSpells2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "in_progress",
+          "milestone": "in_progress",
+          "npmTest": "pending",
+          "extendedSoak": "in_progress",
+          "engineValidation": "in_progress"
+        }
       },
       {
-        "mission": "M173",
-        "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
-        "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
-        "pr": 129
+        "mission": "M201",
+        "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
+        "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
+        "pr": 156,
+        "scope": [
+          "tests/tagClassicGlobalConditionalDestruction2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "success",
+          "extendedSoak": "in_progress",
+          "engineValidation": "in_progress"
+        }
+      },
+      {
+        "mission": "M202",
+        "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
+        "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
+        "pr": 157,
+        "scope": [
+          "tests/tagClassicChaosEndSharedBanishedThreshold2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "success",
+          "extendedSoak": "success",
+          "engineValidation": "success"
+        }
+      },
+      {
+        "mission": "M203",
+        "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
+        "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
+        "pr": 158,
+        "scope": [
+          "tests/tagClassicTribalContinuousModifiers2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "success",
+          "extendedSoak": "success",
+          "engineValidation": "success"
+        }
+      },
+      {
+        "mission": "M204",
+        "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
+        "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
+        "pr": 159,
+        "scope": [
+          "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "in_progress",
+          "extendedSoak": "in_progress",
+          "engineValidation": "in_progress"
+        }
       }
     ],
     "reservationReleased": true
   },
-  "nextWorkAt": "2026-11-14T13:30:00-03:00",
+  "nextWorkAt": "2026-11-14T23:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -4233,13 +4582,61 @@
         "minimum60MinutesConfirmed": false,
         "note": "Janela observada inferior a 60 minutos; o trabalho de implementação foi realizado, mas não há medição confiável de 60 minutos efetivos. Espera de CI não foi contabilizada."
       }
+    },
+    {
+      "runId": "parallel-m194-m198-20261114",
+      "owner": "other agent",
+      "state": "observed; awaiting cooperative handoff",
+      "branches": [
+        {
+          "mission": "M194",
+          "pr": 149,
+          "branch": "feat/work-m194-ritual-searchers-trigger-2v2-20261114",
+          "head": "d4243887d4c373a05885d6812805ad7317947421",
+          "ci": "fast-success; milestone-success; engine-validation-failure"
+        },
+        {
+          "mission": "M195",
+          "pr": 150,
+          "branch": "feat/work-m195-flip-searchers-physical-deck-2v2-20261114",
+          "head": "dda71886e0393e2b5cb8b27776d7d5cf42b22b1c",
+          "ci": "fast-success; milestone-success; engine-validation-failure"
+        },
+        {
+          "mission": "M196",
+          "pr": 151,
+          "branch": "feat/work-m196-needle-worm-opponent-deck-mill-2v2-20261114",
+          "head": "5e3d68b9aa30fb43517a1412ac77f1ad39d19f95",
+          "ci": "fast-success; milestone-success; engine-validation-failure"
+        },
+        {
+          "mission": "M197",
+          "pr": 152,
+          "branch": "feat/work-m197-position-change-triggers-2v2-20261114",
+          "head": "2b3f7246db317b56640f2af7e1bea84d1a94bc91",
+          "ci": "fast-success; milestone-success; engine-validation-failure"
+        },
+        {
+          "mission": "M198",
+          "pr": 153,
+          "branch": "feat/work-m198-summon-burn-draw-triggers-2v2-20261114",
+          "head": "7f0928b53935728a31850fa5f0943cdbbec8495f",
+          "ci": "fast-success; milestone-success; engine-validation-failure"
+        }
+      ],
+      "handoffComment": {
+        "pr": 153,
+        "commentId": 6884812043,
+        "status": "no response"
+      },
+      "note": "Work did not edit any of these branches or files."
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
   "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
-  "sharedHeadAfterCheckpoint": "5309ebe7e82e7687703a3f7061aac014941dc647",
+  "sharedHeadAfterCheckpoint": "44dc873549ceec9cde5290cad559926ff4e1be40",
   "sharedHeadBeforeStateUpdate": "ccd16eac2db107c8f5c1b2aa2a03fe8b10c215fb",
-  "endedAt": "2026-11-14T13:42:20-03:00",
+  "endedAt": "2026-11-14T19:16:42-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -4450,18 +4847,58 @@
         ],
         "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
         "releasedAt": "2026-11-14T09:18:10-03:00"
+      },
+      {
+        "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
+        "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
+        "pr": 154,
+        "scope": [
+          "tests/tagClassicGadgetSearchChain2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
+        "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
+        "pr": 155,
+        "scope": [
+          "tests/tagClassicDarkMagicianConditionalSpells2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
+        "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
+        "pr": 156,
+        "scope": [
+          "tests/tagClassicGlobalConditionalDestruction2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
+        "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
+        "pr": 157,
+        "scope": [
+          "tests/tagClassicChaosEndSharedBanishedThreshold2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
+        "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
+        "pr": 158,
+        "scope": [
+          "tests/tagClassicTribalContinuousModifiers2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
+        "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
+        "pr": 159,
+        "scope": [
+          "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
+        ]
       }
     ],
-    "allowed": "Auxiliary may monitor and fix only tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs (PR #120), tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs (PR #128), and tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs (PR #129) in their respective branches. No runtime, catalog, certificate, player-data, merge or deployment changes.",
-    "forbidden": [
-      "M61/PR #17 reserved runtime files",
-      "M118/PR #74",
-      "M151/PR #107",
-      "M153/PR #109",
-      "all third-party reservations",
-      "merge/deploy",
-      "inventory grants"
-    ],
+    "allowed": "monitorar CI e corrigir somente testes nas próprias branches M199–M204; M204 permanece test-only.",
+    "forbidden": "não alterar M61/M118/M151/M153 nem branches M194–M198; não fazer merge/deploy; não tocar em banco ou inventários",
     "updatedAt": "2026-11-14T09:18:10-03:00"
   },
   "scopeReleasedToAuxiliary": {
@@ -4505,18 +4942,58 @@
           "tests/tagClassicConditionalDirectAttacksTeamScope2v2.test.cjs"
         ],
         "allowed": "Monitor CI and fix only this test file on this branch; do not edit runtime, catalog, certifications, coordination, or any third-party reservation."
+      },
+      {
+        "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
+        "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
+        "pr": 154,
+        "scope": [
+          "tests/tagClassicGadgetSearchChain2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
+        "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
+        "pr": 155,
+        "scope": [
+          "tests/tagClassicDarkMagicianConditionalSpells2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
+        "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
+        "pr": 156,
+        "scope": [
+          "tests/tagClassicGlobalConditionalDestruction2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
+        "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
+        "pr": 157,
+        "scope": [
+          "tests/tagClassicChaosEndSharedBanishedThreshold2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
+        "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
+        "pr": 158,
+        "scope": [
+          "tests/tagClassicTribalContinuousModifiers2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
+        "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
+        "pr": 159,
+        "scope": [
+          "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
+        ]
       }
     ],
-    "allowed": "Monitor CI for PRs #130–#133 and fix only the four listed test files on their respective branches.",
-    "forbidden": [
-      "M61/PR17 files",
-      "M118/PR74",
-      "M151/PR107",
-      "M153/runtime",
-      "runtime/catalog/certification changes",
-      "merge/deploy",
-      "inventory grants"
-    ]
+    "allowed": "monitorar CI das PRs #154–#159 e corrigir somente arquivos de teste nas próprias branches; não alterar card metadata, evidências, certificados, runtime ou arquivos reservados sem autorização explícita.",
+    "forbidden": "não alterar M61/M118/M151/M153 nem branches M194–M198; não fazer merge/deploy; não tocar em banco ou inventários"
   },
   "lastCoordinationRefreshAt": "2026-11-14T03:39:10-03:00",
   "m151HandoffRequest": {
@@ -4534,45 +5011,212 @@
     "pr116": "engine validation failed: one Discord interaction test queries tagStore with requestId instead of sessionId; auxiliary notified",
     "pr117": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier fixture failure corrected",
     "pr118": "npm run check/npm test/card-batch-fast/milestone pass; stress and extended soak in progress",
-    "pr119": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier negative fixture expectation corrected"
+    "pr119": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier negative fixture expectation corrected",
+    "pr154": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "extendedSoak": "success",
+      "engineValidation": "success"
+    },
+    "pr155": {
+      "cardBatchFast": "in_progress",
+      "milestone1000": "in_progress",
+      "npmTest": "pending",
+      "extendedSoak": "in_progress",
+      "engineValidation": "in_progress"
+    },
+    "pr156": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "extendedSoak": "in_progress",
+      "engineValidation": "in_progress"
+    },
+    "pr157": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "extendedSoak": "success",
+      "engineValidation": "success"
+    },
+    "pr158": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "extendedSoak": "success",
+      "engineValidation": "success"
+    },
+    "pr159": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "in_progress",
+      "extendedSoak": "in_progress",
+      "engineValidation": "in_progress"
+    },
+    "parallelPRs149to153": [
+      {
+        "pr": 149,
+        "mission": "M194",
+        "ci": "fast-success; milestone-success; engine-validation-failure"
+      },
+      {
+        "pr": 150,
+        "mission": "M195",
+        "ci": "fast-success; milestone-success; engine-validation-failure"
+      },
+      {
+        "pr": 151,
+        "mission": "M196",
+        "ci": "fast-success; milestone-success; engine-validation-failure"
+      },
+      {
+        "pr": 152,
+        "mission": "M197",
+        "ci": "fast-success; milestone-success; engine-validation-failure"
+      },
+      {
+        "pr": 153,
+        "mission": "M198",
+        "ci": "fast-success; milestone-success; engine-validation-failure"
+      }
+    ]
   },
   "activeWork": {
-    "runId": "work-20261114T133334-0300",
+    "runId": "work-20261114T185556-0300",
     "owner": "Work",
-    "priority": "P1 — certificar por comportamento Newdoria no 2v2: gatilho obrigatório somente após destruição por batalha, escolha de um monstro de qualquer uma das duas equipes, preservação do UID físico, seleção de alvo face-down sem revelar identidade e integridade dos quatro assentos.",
+    "priority": "P1 — ampliar cobertura comportamental 2v2 em buscas Gadget, Magias condicionais de Dark Magician, destruição global condicional, Chaos End, modificadores contínuos tribais e contagem Amazoness; preservar UIDs físicos e integridade dos quatro assentos.",
     "state": "released-to-auxiliary-monitor-ci",
-    "branch": "feat/work-m175-newdoria-battle-destruction-targets-2v2-20261114",
+    "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "reservedFiles": [
-      "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs",
-      "tests/tagClassicDoubleTributePhysicalOwner2v2.test.cjs",
-      "tests/tagClassicGoraTurtleGlobalAttackLock2v2.test.cjs",
-      "tests/tagClassicConditionalDirectAttacksTeamScope2v2.test.cjs"
+    "reservedFiles": [],
+    "startedAt": "2026-11-14T18:55:56-03:00",
+    "lastActivityAt": "2026-11-14T19:16:42-03:00",
+    "endedAt": "2026-11-14T19:16:42-03:00",
+    "prs": [
+      154,
+      155,
+      156,
+      157,
+      158,
+      159
     ],
-    "startedAt": "2026-11-14T13:33:34-03:00",
-    "lastActivityAt": "2026-11-14T13:42:20-03:00",
-    "pr": 130,
-    "head": "535b7fd9079fdfab31d02fdf9ac88ce4f0acfd1c",
+    "workBranches": [
+      {
+        "mission": "M199",
+        "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
+        "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
+        "pr": 154,
+        "scope": [
+          "tests/tagClassicGadgetSearchChain2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "success",
+          "extendedSoak": "success",
+          "engineValidation": "success"
+        }
+      },
+      {
+        "mission": "M200",
+        "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
+        "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
+        "pr": 155,
+        "scope": [
+          "tests/tagClassicDarkMagicianConditionalSpells2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "in_progress",
+          "milestone": "in_progress",
+          "npmTest": "pending",
+          "extendedSoak": "in_progress",
+          "engineValidation": "in_progress"
+        }
+      },
+      {
+        "mission": "M201",
+        "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
+        "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
+        "pr": 156,
+        "scope": [
+          "tests/tagClassicGlobalConditionalDestruction2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "success",
+          "extendedSoak": "in_progress",
+          "engineValidation": "in_progress"
+        }
+      },
+      {
+        "mission": "M202",
+        "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
+        "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
+        "pr": 157,
+        "scope": [
+          "tests/tagClassicChaosEndSharedBanishedThreshold2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "success",
+          "extendedSoak": "success",
+          "engineValidation": "success"
+        }
+      },
+      {
+        "mission": "M203",
+        "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
+        "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
+        "pr": 158,
+        "scope": [
+          "tests/tagClassicTribalContinuousModifiers2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "success",
+          "extendedSoak": "success",
+          "engineValidation": "success"
+        }
+      },
+      {
+        "mission": "M204",
+        "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
+        "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
+        "pr": 159,
+        "scope": [
+          "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "fast": "success",
+          "milestone": "success",
+          "npmTest": "in_progress",
+          "extendedSoak": "in_progress",
+          "engineValidation": "in_progress"
+        }
+      }
+    ],
     "handoff": {
-      "pr": 17,
-      "commentId": 6880751292,
-      "file": "src/monsterEffects.ts",
-      "status": "awaiting-explicit-release; no edits"
+      "pr": 153,
+      "commentId": 6884812043,
+      "status": "awaiting-explicit-response; no response"
     },
     "limits": [
-      "test-only; no runtime/catalog/certification edits",
+      "test-only; no runtime/catalog/certification edits in final PR diffs",
       "no inventory grants",
       "no merge/deploy",
-      "no edits to M61/M118/M151/M153 reservations"
+      "M61/M118/M151/M153 and M194–M198 reservations untouched"
     ],
-    "prs": [
-      130,
-      131,
-      132,
-      133
-    ],
-    "endedAt": "2026-11-14T13:42:20-03:00",
     "reservation": "released"
   },
   "sharedHeadAtStart": "7a2a124107b3d2136a4bf90a88cc65ea22f1c294",
@@ -4588,87 +5232,7 @@
   "lastCheckpointAt": "2026-11-14T09:18:10-03:00",
   "reservationReleased": true,
   "expectedHeadForCoordinationCommit": "4359e48a727b66ca5aa44bce6e3fa16d286d309e",
-  "lastRunSummary": {
-    "runId": "work-20261114T133334-0300",
-    "priority": "M175 Newdoria battle-destroyed target -> M176 Double Tribute 2v2 ownership -> M177 Gora Turtle global attack lock -> M178 conditional direct attacks",
-    "branches": [
-      {
-        "mission": "M175",
-        "branch": "feat/work-m175-newdoria-battle-destruction-targets-2v2-20261114",
-        "head": "535b7fd9079fdfab31d02fdf9ac88ce4f0acfd1c",
-        "pr": 130,
-        "file": "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "engineValidation": "in_progress",
-          "npmTest": "success",
-          "extendedSoak600": "in_progress"
-        },
-        "tests": 2
-      },
-      {
-        "mission": "M176",
-        "branch": "feat/work-m176-double-tribute-2v2-physical-owner-20261114",
-        "head": "b0510f434822e979497f54beace039e537622e87",
-        "pr": 131,
-        "file": "tests/tagClassicDoubleTributePhysicalOwner2v2.test.cjs",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "engineValidation": "in_progress",
-          "npmTest": "success",
-          "extendedSoak600": "in_progress"
-        },
-        "tests": 7
-      },
-      {
-        "mission": "M177",
-        "branch": "feat/work-m177-gora-turtle-global-attack-lock-2v2-20261114",
-        "head": "24e89ae629a4ded2262d627fc299e12c4af44fda",
-        "pr": 132,
-        "file": "tests/tagClassicGoraTurtleGlobalAttackLock2v2.test.cjs",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "engineValidation": "in_progress",
-          "npmTest": "in_progress",
-          "extendedSoak600": "in_progress"
-        },
-        "tests": 3
-      },
-      {
-        "mission": "M178",
-        "branch": "feat/work-m178-conditional-direct-attacks-2v2-20261114",
-        "head": "6be49470f2b27a10a26c8ae3512bf21f19f5b36f",
-        "pr": 133,
-        "file": "tests/tagClassicConditionalDirectAttacksTeamScope2v2.test.cjs",
-        "ci": {
-          "cardBatchFast": "in_progress",
-          "milestone1000": "success",
-          "engineValidation": "in_progress"
-        },
-        "tests": 6
-      }
-    ],
-    "previousPRsCi": {
-      "120": "success",
-      "128": "success",
-      "129": "success"
-    },
-    "sharedCertificates": 969,
-    "developmentCertificates": 1014,
-    "delta": 45,
-    "remainingTo1000": 31,
-    "newCertifications": 0,
-    "inventoryGranted": 0,
-    "merge": false,
-    "deploy": false,
-    "handoffPending": [
-      17
-    ],
-    "nextWindow": "2026-11-14T18:30:00-03:00"
-  },
+  "lastRunSummary": "M199–M204: seis PRs draft em branches isoladas, 20 cenários comportamentais adicionais. #154, #157 e #158 com CI integral aprovada; #156 com npm test aprovado e soak em andamento; #155 e #159 com CI ainda em execução. Zero novas certificações; catálogo permanece 969 compartilhadas/1.014 desenvolvimento. Sem merge/deploy.",
   "postReleaseCiCheckAt": "2026-11-14T09:21:10-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
   "catalogAtEnd": {
@@ -4698,7 +5262,26 @@
       "file": "src/duelEngineCurrent.ts",
       "mission": "M176 face-up Double Tribute selector",
       "status": "awaiting-explicit-release"
+    },
+    {
+      "pr": 153,
+      "commentId": 6884812043,
+      "mission": "M199 onward / confirm remaining reservations",
+      "status": "awaiting-response",
+      "noResponse": true
     }
   ],
-  "nextWindow": "2026-11-14T18:30:00-03:00"
+  "nextWindow": "2026-11-14T23:30:00-03:00",
+  "lastCheckpointSha": "44dc873549ceec9cde5290cad559926ff4e1be40",
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscordValidation": false,
+    "hosting": "not independently verified",
+    "deploymentWorkflow": "not found in main/shared branch",
+    "mainHeadBeforeRun": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "mainHeadAfterRevert": "713f02afc862ddb17411706c92c67624eaa1803f",
+    "mainCleanupCommit": "713f02afc862ddb17411706c92c67624eaa1803f",
+    "mainCleanupReason": "Arquivo de teste M203 foi criado acidentalmente em main e removido imediatamente; sem alteração de runtime, catálogo ou dados de jogador."
+  }
 }
