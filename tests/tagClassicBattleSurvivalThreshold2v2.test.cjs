@@ -91,7 +91,7 @@ function attack(state,attacker,guard){
   const unchanged=JSON.stringify(state);
   assert.deepEqual(tag.tagActions(state,member(2)),[],
     'the inactive physical attacker owner cannot submit the attack');
-  assert.throws(()=>tag.stepTagDuel(state,member(2),action),/Aguarde a vez do participante ativo\\./);
+  assert.throws(()=>tag.stepTagDuel(state,member(2),action),/Aguarde a vez do participante ativo/);
   assert.equal(JSON.stringify(state),unchanged,'a rejected partner action must not mutate the duel');
   return settle(tag.stepTagDuel(state,member(0),action));
 }
