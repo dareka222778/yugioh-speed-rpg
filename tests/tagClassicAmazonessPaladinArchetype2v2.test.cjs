@@ -16,6 +16,8 @@ for(const id of [AMAZONESS_PALADIN,AMAZONESS_ARCHER]){
   const fingerprint=definitionFingerprint(engineCard(id),getEffect(id),{model:getEffectModel,monster:getMonsterDefinition});
   console.log('M204_CARD_FINGERPRINT',id,fingerprint);
 }
+assert.equal(getCardStatus(AMAZONESS_PALADIN)?.stage,'certified');
+assert.equal(getCardStatus(AMAZONESS_ARCHER)?.stage,'certified');
 assert.ok(engineCard(AMAZONESS_PALADIN)?.archetypes?.includes('Amazoness'),
   'Amazoness Paladin must expose its official archetype to continuous filters');
 assert.ok(engineCard(AMAZONESS_ARCHER)?.archetypes?.includes('Amazoness'),
