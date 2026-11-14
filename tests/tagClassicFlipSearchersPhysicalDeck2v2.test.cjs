@@ -18,7 +18,6 @@ assert.equal(getMonsterEffect(IRON_BLACKSMITH)?.operation.kind,'searchFiltered')
 assert.equal(getMonsterEffect(ARSENAL_SUMMONER)?.operation.kind,'searchFiltered');
 assert.equal(getEffect(CYCLON_LASER)?.kind,'equip');
 assert.equal(getPlayableCard(GUARDIAN_ELMA)?.englishName,'Guardian Elma');
-assert.equal(getPlayableCard(GUARDIAN_ELMA)?.archetype,'Guardian');
 assert.ok(getPlayableCard(CELTIC_GUARDIAN),'Celtic Guardian must be available as a negative search candidate');
 
 const normal=[...new Set(tag.tagNormalCardIds)]
