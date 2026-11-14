@@ -2,19 +2,21 @@
   "runId": "work-20261113T223304-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "completed; released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-13T22:33:04-03:00",
-  "lastActivityAt": "2026-11-13T22:33:04-03:00",
-  "nextScheduledAt": "2026-11-13T22:30:00-03:00",
+  "lastActivityAt": "2026-11-13T22:44:10-03:00",
+  "nextScheduledAt": "2026-11-14T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
     "tests/tagClassicEconomicChoiceSpells2v2.test.cjs",
+    "tests/tagEconomicSpellDiscordMenu.test.cjs",
+    "tests/tagEconomicSpellDiscordInteraction.test.cjs",
     "coordination/state.json",
     "coordination/runs/work-20261113T223304-0300.json"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261113T175911-0300.json",
-  "previousRunId": "work-20261113T134424-0300",
+  "lastCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
+  "previousRunId": "work-20261113T175911-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -38,7 +40,7 @@
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6864486583,
+    "lastRequestComment": 6869460162,
     "noResponse": true,
     "blockedFiles": [
       "src/monsterEffects.ts",
@@ -47,7 +49,7 @@
       "src/duelIntegrity.ts",
       "scripts/mass-certification21.cjs"
     ],
-    "lastRequestAt": "2026-11-13T17:44:55-03:00"
+    "lastRequestAt": "2026-11-13T22:44:10-03:00"
   },
   "workBranches": [
     {
@@ -1052,31 +1054,86 @@
     },
     {
       "branch": "feat/work-m158-economic-spells-2v2-20261113",
-      "head": null,
+      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
       "base": "feat/work-m71-ci-branch-routing-20261112",
       "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
       ],
-      "state": "active",
-      "priority": "P1 — ampliar a validação comportamental 2v2 da família de Magias econômicas: Red Medicine, Mooyan Curry e Poison of the Old Man; conferir escolha de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos e LP compartilhados."
+      "state": "released-to-auxiliary-monitor-ci",
+      "priority": "P1 — ampliar a validação comportamental 2v2 da família de Magias econômicas: Red Medicine, Mooyan Curry e Poison of the Old Man; conferir escolha de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos e LP compartilhados.",
+      "pr": 114,
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43541777615,
+        "milestone1000": "success",
+        "milestoneRunId": 43541777612,
+        "engineValidation": "in_progress",
+        "engineRunId": 43541777726,
+        "testJob": "in_progress",
+        "npmTestStep": "success",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+      "pr": 115,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagEconomicSpellDiscordMenu.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43542034914,
+        "milestone1000": "success",
+        "milestoneRunId": 43542035027,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542035087,
+        "testJob": "in_progress",
+        "npmTestStep": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+      "pr": 116,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "cardBatchFastRunId": 43542328874,
+        "milestone1000": "success",
+        "milestoneRunId": 43542328862,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542328882,
+        "testJob": "in_progress",
+        "extendedSoak": "in_progress"
+      }
     }
   ],
   "handoffRequest": {
     "target": "PR #17 / M61",
     "status": "awaiting-response",
     "commentId": 6869460162,
-    "noResponse": true,
     "lastCommentId": 6869460162,
-    "lastRequestedAt": "2026-11-13T22:33:04-03:00"
+    "noResponse": true,
+    "lastRequestedAt": "2026-11-13T22:44:10-03:00"
   },
   "handoff": {
     "to": "auxiliary",
     "status": "independent-work-continues",
-    "at": "2026-11-13T18:05:29-03:00",
-    "scope": "Auxiliar monitora apenas M156/PR112 e M157/PR113; M151/PR107 continua handoff pendente; M61/PR17 e M118/PR74 continuam aguardando transferência explícita.",
-    "nextTask": "Auxiliar: monitorar CI das PRs #112 e #113; corrigir apenas os respectivos testes nas branches M156/M157 se necessário. Work: na próxima janela, revalidar CI, solicitar handoff M61/M118/M151 e, com liberação explícita, corrigir o filtro de alvos em trapActions e a falha do ciclo de Fusão.",
-    "nextWorkAt": "2026-11-13T22:30:00-03:00"
+    "at": "2026-11-13T22:44:10-03:00",
+    "scope": "Auxiliar monitora CI das PRs #112–#116 e pode corrigir apenas os respectivos arquivos de teste nas branches M156–M160; M61/M118/M151 continuam sem transferência.",
+    "nextTask": "Auxiliar: monitorar CI de M156–M160, corrigir apenas testes próprios e registrar os resultados. Work: próxima janela, revalidar CI e solicitar handoff; se M61 for liberada, corrigir os alvos de Reinforcements/Castle Walls e seguir para FLIP; sem liberação, avançar em uma família independente.",
+    "nextWorkAt": "2026-11-14T03:30:00-03:00"
   },
   "catalog": {
     "shared": {
@@ -1114,7 +1171,18 @@
       },
       "deltaToShared": 45,
       "newAdmissions": 0,
-      "newCertificates": 0
+      "newCertificates": 0,
+      "milestoneWorklist": {
+        "target": 1000,
+        "certified": 969,
+        "remaining": 31,
+        "pending": 993,
+        "identityBlocked": 27,
+        "automaticCertifications": 0,
+        "inventoryGranted": 0,
+        "releaseGranted": 0,
+        "runId": 43541777612
+      }
     },
     "newCertificatesThisRun": 0
   },
@@ -1635,6 +1703,33 @@
       "branch": "M157",
       "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
       "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 114,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m158-economic-spells-2v2-20261113",
+      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 115,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 116,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "cardBatchFast:in_progress; engineValidation:in_progress; milestone1000:success"
     }
   ],
   "ci": {
@@ -2032,25 +2127,70 @@
         "failed": 1
       },
       "failure": "tests/tagClassicFusionSubstituteSharedField2v2.test.cjs: deploy(state,0,BEASTKING) embora BEASTKING esteja no assento 2.",
-      "runId": 43466746420
+      "runId": 43466746420,
+      "workflowRun": 43466746420
     },
     "pr112": {
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
       "cardBatchFast": "success",
       "engineValidation": "in_progress",
-      "extendedSoak": "in_progress",
       "milestone1000": "success",
+      "extendedSoak": "in_progress",
       "fastRunId": 43506972040,
       "engineRunId": 43506972175,
       "milestoneRunId": 43506972102
     },
     "pr113": {
+      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
       "cardBatchFast": "success",
       "engineValidation": "in_progress",
-      "extendedSoak": "in_progress",
       "milestone1000": "success",
+      "extendedSoak": "in_progress",
       "fastRunId": 43507071750,
       "engineRunId": 43507071767,
       "milestoneRunId": 43507071960
+    },
+    "pr114": {
+      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43541777615,
+      "milestone1000": "success",
+      "milestoneRunId": 43541777612,
+      "engineValidation": "in_progress",
+      "engineRunId": 43541777726,
+      "testJob": "in_progress",
+      "npmTestStep": "success",
+      "extendedSoak": "in_progress"
+    },
+    "pr115": {
+      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43542034914,
+      "milestone1000": "success",
+      "milestoneRunId": 43542035027,
+      "engineValidation": "in_progress",
+      "engineRunId": 43542035087,
+      "testJob": "in_progress",
+      "npmTestStep": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr116": {
+      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+      "cardBatchFast": "in_progress",
+      "cardBatchFastRunId": 43542328874,
+      "milestone1000": "success",
+      "milestoneRunId": 43542328862,
+      "engineValidation": "in_progress",
+      "engineRunId": 43542328882,
+      "testJob": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr109": {
+      "head": "b23f3344a9eec6c5e174cf23fca99eda8dbe9a27",
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "engineRunId": 43503878913
     }
   },
   "production": {
@@ -2063,18 +2203,19 @@
       "engine-validation.yml",
       "milestone1000.yml"
     ],
-    "hostingStatus": "not verified; no deployment workflow found",
-    "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
+    "hostingStatus": "not verified; no deployment workflow found among the main-branch workflows",
+    "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "mainRuns": 0
   },
   "duration": {
-    "elapsedWallMinutes": 6,
+    "elapsedWallMinutes": 11,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Janela observada inferior a 60 minutos; o trabalho de implementação foi realizado, mas não há medição confiável de 60 minutos efetivos. Espera de CI não foi contabilizada."
+    "note": "Janela observada de 11 min 06 s. A meta de 60 minutos efetivos não foi cumprida nem comprovada; espera de CI não foi contabilizada."
   },
-  "nextTask": "Work: concluir testes 2v2 das Magias econômicas e verificar CI. Auxiliar: continuar somente as reservas já liberadas M156/M157; não tocar M158 nem M61/M118/M151.",
-  "sharedHeadBeforeRelease": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
-  "priority": "P1 — ampliar a validação comportamental 2v2 da família de Magias econômicas: Red Medicine, Mooyan Curry e Poison of the Old Man; conferir escolha de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos e LP compartilhados.",
+  "nextTask": "Work: conferir o término dos workflows M158–M160; solicitar handoff M61/M118/M151; se M61 liberar os cinco caminhos, corrigir o filtro de alvos adversários e seguir para a família FLIP. Caso contrário, continuar em uma família independente. Auxiliar: monitorar e corrigir somente os três arquivos de teste liberados.",
+  "sharedHeadBeforeRelease": "cc5e4fc4be7406255bddaa908c5e94a4f85a486d",
+  "priority": "P1 — validar a família de Magias econômicas no duelo 2v2 e fechar a cadeia de integração Discord: escolhas de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos, payloads e idempotência de interações.",
   "sharedHeadBeforeClaim": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
   "releasedOwnReservation": true,
   "parallelWorkObserved": {
@@ -2418,6 +2559,71 @@
       "owner": "Work",
       "state": "released-to-auxiliary-monitor-ci",
       "releasedAt": "2026-11-13T18:05:29-03:00"
+    },
+    {
+      "branch": "feat/work-m158-economic-spells-2v2-20261113",
+      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+      "pr": 114,
+      "owner": "Work",
+      "scope": [
+        "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T22:44:10-03:00",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43541777615,
+        "milestone1000": "success",
+        "milestoneRunId": 43541777612,
+        "engineValidation": "in_progress",
+        "engineRunId": 43541777726,
+        "testJob": "in_progress",
+        "npmTestStep": "success",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+      "pr": 115,
+      "owner": "Work",
+      "scope": [
+        "tests/tagEconomicSpellDiscordMenu.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T22:44:10-03:00",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43542034914,
+        "milestone1000": "success",
+        "milestoneRunId": 43542035027,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542035087,
+        "testJob": "in_progress",
+        "npmTestStep": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+      "pr": 116,
+      "owner": "Work",
+      "scope": [
+        "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T22:44:10-03:00",
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "cardBatchFastRunId": 43542328874,
+        "milestone1000": "success",
+        "milestoneRunId": 43542328862,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542328882,
+        "testJob": "in_progress",
+        "extendedSoak": "in_progress"
+      }
     }
   ],
   "activeRun": {
@@ -2427,15 +2633,29 @@
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
-      "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+      "tests/tagClassicEconomicChoiceSpells2v2.test.cjs",
+      "tests/tagEconomicSpellDiscordMenu.test.cjs",
+      "tests/tagEconomicSpellDiscordInteraction.test.cjs"
     ],
-    "state": "active",
+    "state": "completed; released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-13T22:33:04-03:00",
-    "lastActivityAt": "2026-11-13T22:33:04-03:00",
-    "completedAt": null,
-    "head": null,
-    "pr": null,
-    "priority": "P1 — ampliar a validação comportamental 2v2 da família de Magias econômicas: Red Medicine, Mooyan Curry e Poison of the Old Man; conferir escolha de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos e LP compartilhados."
+    "lastActivityAt": "2026-11-13T22:44:10-03:00",
+    "completedAt": "2026-11-13T22:44:10-03:00",
+    "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+    "pr": 114,
+    "additionalBranches": [
+      {
+        "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+        "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+        "pr": 115
+      },
+      {
+        "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+        "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+        "pr": 116
+      }
+    ],
+    "priority": "P1 — validar a família de Magias econômicas no duelo 2v2 e fechar a cadeia de integração Discord: escolhas de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos, payloads e idempotência de interações."
   },
   "nextWorkAt": "2026-11-14T03:30:00-03:00",
   "parallelRuns": [
@@ -3563,18 +3783,18 @@
       }
     }
   ],
-  "lastParallelCheckpoint": "coordination/runs/work-20261113T175911-0300.json",
-  "lastParallelActivityAt": "2026-11-13T18:05:29-03:00",
-  "sharedHeadAfterCheckpoint": "b661f92dcc2a9821cced179ef7339dfe8d173c3b",
-  "sharedHeadBeforeStateUpdate": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
-  "endedAt": "2026-11-13T18:05:29-03:00",
+  "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
+  "lastParallelActivityAt": "2026-11-13T22:44:10-03:00",
+  "sharedHeadAfterCheckpoint": null,
+  "sharedHeadBeforeStateUpdate": "cc5e4fc4be7406255bddaa908c5e94a4f85a486d",
+  "endedAt": "2026-11-13T22:44:10-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
     "commentId": 6869460652,
-    "noResponse": true,
     "lastCommentId": 6869460652,
-    "lastRequestedAt": "2026-11-13T22:33:04-03:00"
+    "noResponse": true,
+    "lastRequestedAt": "2026-11-13T22:44:10-03:00"
   },
   "m120ValidationComment": 6858001163,
   "releaseToAuxiliary": {
@@ -3614,10 +3834,75 @@
           "milestone1000": "success",
           "milestoneRunId": 43507071960
         }
+      },
+      {
+        "branch": "feat/work-m158-economic-spells-2v2-20261113",
+        "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+        "pr": 114,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43541777615,
+          "milestone1000": "success",
+          "milestoneRunId": 43541777612,
+          "engineValidation": "in_progress",
+          "engineRunId": 43541777726,
+          "testJob": "in_progress",
+          "npmTestStep": "success",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+        "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+        "pr": 115,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagEconomicSpellDiscordMenu.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43542034914,
+          "milestone1000": "success",
+          "milestoneRunId": 43542035027,
+          "engineValidation": "in_progress",
+          "engineRunId": 43542035087,
+          "testJob": "in_progress",
+          "npmTestStep": "in_progress",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+        "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+        "pr": 116,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "in_progress",
+          "cardBatchFastRunId": 43542328874,
+          "milestone1000": "success",
+          "milestoneRunId": 43542328862,
+          "engineValidation": "in_progress",
+          "engineRunId": 43542328882,
+          "testJob": "in_progress",
+          "extendedSoak": "in_progress"
+        }
       }
     ],
-    "allowed": "Auxiliar pode monitorar CI das PRs #112 e #113 e corrigir somente os respectivos arquivos de teste nas próprias branches; registrar o resultado e devolver checkpoint.",
-    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime, catálogo, certificados, banco/inventários; não fazer merge ou deploy."
+    "allowed": "Auxiliar pode monitorar CI das PRs #112–#116 e corrigir somente os arquivos de teste liberados M156–M160 em suas próprias branches; preservar logs e devolver checkpoint.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime reservado, catálogo, certificados, bancos/inventários; não fazer merge ou deploy."
   },
   "scopeReleasedToAuxiliary": {
     "branches": [
@@ -3656,18 +3941,83 @@
           "milestone1000": "success",
           "milestoneRunId": 43507071960
         }
+      },
+      {
+        "branch": "feat/work-m158-economic-spells-2v2-20261113",
+        "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+        "pr": 114,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43541777615,
+          "milestone1000": "success",
+          "milestoneRunId": 43541777612,
+          "engineValidation": "in_progress",
+          "engineRunId": 43541777726,
+          "testJob": "in_progress",
+          "npmTestStep": "success",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+        "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+        "pr": 115,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagEconomicSpellDiscordMenu.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43542034914,
+          "milestone1000": "success",
+          "milestoneRunId": 43542035027,
+          "engineValidation": "in_progress",
+          "engineRunId": 43542035087,
+          "testJob": "in_progress",
+          "npmTestStep": "in_progress",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+        "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+        "pr": 116,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "in_progress",
+          "cardBatchFastRunId": 43542328874,
+          "milestone1000": "success",
+          "milestoneRunId": 43542328862,
+          "engineValidation": "in_progress",
+          "engineRunId": 43542328882,
+          "testJob": "in_progress",
+          "extendedSoak": "in_progress"
+        }
       }
     ],
-    "allowed": "Auxiliar pode monitorar CI das PRs #112 e #113 e corrigir somente os respectivos arquivos de teste nas próprias branches; registrar o resultado e devolver checkpoint.",
-    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime, catálogo, certificados, banco/inventários; não fazer merge ou deploy."
+    "allowed": "Auxiliar pode monitorar CI das PRs #112–#116 e corrigir somente os arquivos de teste liberados M156–M160 em suas próprias branches; preservar logs e devolver checkpoint.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime reservado, catálogo, certificados, bancos/inventários; não fazer merge ou deploy."
   },
-  "lastCoordinationRefreshAt": "2026-11-13T22:33:04-03:00",
+  "lastCoordinationRefreshAt": "2026-11-13T22:44:10-03:00",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
     "status": "awaiting-response",
     "commentId": 6869461071,
-    "noResponse": true,
     "lastCommentId": 6869461071,
-    "lastRequestedAt": "2026-11-13T22:33:04-03:00"
+    "noResponse": true,
+    "lastRequestedAt": "2026-11-13T22:44:10-03:00"
   }
 }
