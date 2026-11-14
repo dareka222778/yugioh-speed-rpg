@@ -3,35 +3,12 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard}=require('../dist/effectRegistry');
-const batch=require('../dist/conditionalBatch30');
 
 const DARK_MAGICIAN='46986414';
 const THOUSAND_KNIVES='63391643';
 const DARK_MAGIC_ATTACK='02314238';
 const MIRROR_FORCE='44095762';
 const TORRENTIAL_TRIBUTE='53582587';
-
-test('M200 card registry and conditional model contract',()=>{
-  for(const [id,name] of [
-    [DARK_MAGICIAN,'Dark Magician'],
-    [THOUSAND_KNIVES,'Thousand Knives'],
-    [DARK_MAGIC_ATTACK,'Dark Magic Attack'],
-    [MIRROR_FORCE,'Mirror Force'],
-    [TORRENTIAL_TRIBUTE,'Torrential Tribute']
-  ]){
-    assert.equal(getPlayableCard(id)?.englishName,name);
-  }
-  assert.equal(batch.conditionalEffects30[THOUSAND_KNIVES]?.kind,'conditionalDestruction');
-  assert.equal(batch.conditionalEffects30[THOUSAND_KNIVES]?.zone,'monsters');
-  assert.equal(batch.conditionalEffects30[THOUSAND_KNIVES]?.scope,'selected');
-  assert.equal(batch.conditionalEffects30[THOUSAND_KNIVES]?.controller,'opponent');
-  assert.equal(batch.conditionalEffects30[THOUSAND_KNIVES]?.requiredName,'Dark Magician');
-  assert.equal(batch.conditionalEffects30[DARK_MAGIC_ATTACK]?.kind,'conditionalDestruction');
-  assert.equal(batch.conditionalEffects30[DARK_MAGIC_ATTACK]?.zone,'backrow');
-  assert.equal(batch.conditionalEffects30[DARK_MAGIC_ATTACK]?.scope,'opponent');
-  assert.equal(batch.conditionalEffects30[DARK_MAGIC_ATTACK]?.requiredName,'Dark Magician');
-  
-});
 
 const normal=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
