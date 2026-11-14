@@ -36,9 +36,9 @@ function setup(){
  const record=store.getTag(lobby.id);assert.equal(record.revision,revision);assert.equal(record.state.core.phase,'main');
  return {record,red,mooyan,poison,state};
 }
-function interaction(id,customId,actor,index){
+function interaction(id,customId,actor,index,expectedRevision){
  const calls=[];return {id,guildId:'m160-guild',user:{id:actor},customId,values:[String(index)],isButton:()=>false,isStringSelectMenu:()=>true,
-  deferUpdate:async()=>{calls.push('defer');},
+  deferUpdate:async()=>{assert.equal(store.getTag(id).revision,expectedRevision,'Discord acknowledgement must precede state mutation');calls.push('defer');},
   editReply:async payload=>{calls.push('edit');validateDiscordPayload(payload);},calls};
 }
 test('Discord action handler commits one selected 2v2 Spell choice and makes duplicate interactions idempotent',async()=>{
@@ -47,7 +47,7 @@ test('Discord action handler commits one selected 2v2 Spell choice and makes dup
  assert.ok(selected>=0,'the Discord action list must include Mooyan Curry opponent-team choice');
  const originalRevision=record.revision,requestId='m160-discord-request-1';let refreshes=0;
  async function refresh(next){refreshes++;validateDiscordPayload(tagPublicMessage(next));}
- async function submit(){const i=interaction(requestId,'tag:act:'+record.id+':'+originalRevision+':'+actor,actor,selected);const before=store.getTag(record.id).revision;await handleTagComponent(i,refresh,()=>{});assert.deepEqual(i.calls,['defer','edit']);assert.equal(store.getTag(record.id).revision,before===originalRevision?originalRevision+1:originalRevision+1);}
+ async function submit(){const before=store.getTag(record.id).revision;const i=interaction(requestId,'tag:act:'+record.id+':'+originalRevision+':'+actor,actor,selected,before);await handleTagComponent(i,refresh,()=>{});assert.deepEqual(i.calls,['defer','edit']);const after=store.getTag(record.id).revision;assert.equal(after,before===originalRevision?originalRevision+1:originalRevision,'one Discord delivery may commit at most one revision');}
  await submit();
  let current=store.getTag(record.id);assert.equal(current.revision,originalRevision+1);assert.deepEqual(current.state.core.players.map(p=>p.lp),[4000,4200]);
  assert.ok(current.state.core.players[0].grave.some(card=>card.uid===mooyan.uid),'resolved Spell must retain its physical UID in the shared Graveyard');
