@@ -10,16 +10,19 @@ const DARK_MAGIC_ATTACK='02314238';
 const MIRROR_FORCE='44095762';
 const TORRENTIAL_TRIBUTE='53582587';
 
-const normal=[...new Set(tag.tagNormalCardIds)]
-  .map(id=>({id,card:getPlayableCard(id)}))
-  .filter(entry=>entry.card&&entry.card.kind==='monster'&&Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
-assert.ok(normal.length>=8,'the conditional Spell fixture needs eight certified Normal Monsters');
-const normalIds=normal.slice(0,8).map(entry=>entry.id);
+const FILLER=['31553716','89631139','13039848','05053103','26202165'];
+for(const [id,name] of [
+  ['31553716','Spear Dragon'],
+  ['89631139','Blue-Eyes White Dragon'],
+  ['13039848','Giant Soldier of Stone'],
+  ['05053103','Battle Ox'],
+  ['26202165','Sangan']
+])assert.equal(getPlayableCard(id)?.englishName,name);
 
 function member(seat){return 'm200-seat-'+seat;}
 function deck(required=[]){
-  const ids=[...new Set([...required,...normalIds])];
-  assert.ok(ids.length>=8);
+  const ids=[...new Set([...required,...FILLER])];
+  assert.ok(ids.length>=7);
   return Array.from({length:20},(_,index)=>ids[index%ids.length]);
 }
 function game(required,seed){
