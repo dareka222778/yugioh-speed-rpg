@@ -14,7 +14,7 @@ export const mechanicalBatch20:readonly Card[]=[
  monster('52040216',4392,'Dragão de Estimação da Harpia',"Harpie's Pet Dragon",'Dragon','WIND',7,2000,2500,'Ganha 300 ATK/DEF por cada Lady Harpia no campo.'),
  monster('40453765',4018,'Guarda de Batalha do Pântano','Swamp Battleguard','Warrior','EARTH',5,1800,1500,'Ganha 500 ATK por cada Guarda de Batalha da Lava que você controla.'),
  monster('20394040',4560,'Guarda de Batalha da Lava','Lava Battleguard','Warrior','EARTH',5,1550,1800,'Ganha 500 ATK por cada Guarda de Batalha do Pântano que você controla.'),
- monster('47480070',5645,'Paladino Amazoness','Amazoness Paladin','Warrior','EARTH',4,1700,300,'Ganha 100 ATK por cada monstro Amazoness que você controla.',{archetypes:['Amazoness']}),
+ monster('47480070',5645,'Paladino Amazoness','Amazoness Paladin','Warrior','EARTH',4,1700,300,'Ganha 100 ATK por cada monstro Amazoness que você controla.'),
  monster('38033121',4766,'Pequena Maga Negra','Dark Magician Girl','Spellcaster','DARK',6,2000,1700,'Ganha 300 ATK por cada Mago Negro ou Mago do Caos Negro nos Cemitérios.'),
  monster('11901678',4223,'Dragão Caveira Negro','Black Skull Dragon','Dragon','DARK',9,3200,2500,'Fusão de Caveira Convocada e Dragão Negro de Olhos Vermelhos; é tratado como card Arquidemônio.',{monsterType:'fusion',fusion:['70781052','74677422'],archetypes:['Archfiend']}),
  spell('63224564',4323,'Ciberescudo','Cyber Shield','Equipe apenas a Lady Harpia ou Irmãs Lady Harpia. O monstro equipado ganha 500 ATK.'),
