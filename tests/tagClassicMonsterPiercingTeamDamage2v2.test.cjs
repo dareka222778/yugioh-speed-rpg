@@ -129,8 +129,8 @@ for(const [sourceId,name,atk,targetId,targetName,targetDef] of [
     assert.equal(state.core.players[0].lp,4000,'the attacking team takes no battle damage');
     assert.ok(state.core.players[0].monsters.some(card=>card.uid===source.uid),
       'the piercing source survives its winning battle');
-    assert.ok(state.core.players[1].monsters.some(card=>card.uid===target.uid&&card.position==='def'),
-      'a Defense Position target survives a piercing attack when ATK exceeds DEF');
+    assert.ok(state.core.players[1].grave.some(card=>card.uid===target.uid&&card.id===targetId),
+      'a Defense Position target is destroyed when the piercing attacker has greater ATK; only battle damage differs');
     assert.equal(tag.publicTagDuel(state).teams[1].lp,4000-(atk-targetDef),
       'the public projection must expose the same shared team LP');
     tag.assertTagDuel(state);
