@@ -161,7 +161,7 @@ test('Needle Burrower does not burn when the opposing monster wins the battle',(
   state=attack(state,attacker,target);
 
   assert.equal(state.core.players[1].lp,4000,'the surviving opponent must not receive a battle-level burn');
-  assert.equal(state.core.players[0].lp,4000-(target.atk-attacker.atk),'the attacking team receives only ordinary battle damage');
+  assert.equal(state.core.players[0].lp,4000-(getPlayableCard(SUMMONED_SKULL).atk-getPlayableCard(NEEDLE_BURROWER).atk),'the attacking team receives only ordinary battle damage');
   assert.ok(state.core.players[0].grave.some(card=>card.uid===attacker.uid&&card.id===NEEDLE_BURROWER));
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===target.uid&&card.id===SUMMONED_SKULL));
   tag.assertTagDuel(state);
