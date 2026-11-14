@@ -5,7 +5,6 @@ const tag=require('../dist/tagDuel');
 const {getPlayableCard,getEffect}=require('../dist/effectRegistry');
 
 const SANCTUARY='56433456';
-const MYSTICAL_ELF='15025844';
 const AXE_RAIDER='48305365';
 
 assert.equal(getPlayableCard(SANCTUARY)?.kind,'spell');
@@ -15,7 +14,6 @@ assert.equal(getEffect(SANCTUARY)?.rules[0]?.kind,'combat');
 assert.equal(getEffect(SANCTUARY)?.rules[0]?.rule?.kind,'damage');
 assert.equal(getEffect(SANCTUARY)?.rules[0]?.rule?.mode,'zero');
 assert.equal(getEffect(SANCTUARY)?.rules[0]?.rule?.when,'battle');
-assert.equal(getPlayableCard(MYSTICAL_ELF)?.race,'Fairy');
 assert.equal(getPlayableCard(AXE_RAIDER)?.atk,1700);
 
 const normal=[...new Set(tag.tagNormalCardIds)]
@@ -23,6 +21,8 @@ const normal=[...new Set(tag.tagNormalCardIds)]
   .filter(entry=>entry.card&&entry.card.kind==='monster'&&Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
 assert.ok(normal.length>=8,'the Sanctuary fixture needs eight certified Normal Monsters');
 const normalIds=normal.slice(0,8).map(entry=>entry.id);
+const fairy=normal.find(entry=>entry.card.race==='Fairy'&&entry.card.atk<1700);
+assert.ok(fairy,'the Sanctuary fixture needs a certified Fairy Normal Monster with ATK below Axe Raider');
 
 function member(seat){return 'm187-seat-'+seat;}
 function deck(required=[]){
@@ -33,7 +33,7 @@ function deck(required=[]){
 function game(first,seed){
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M187 Seat '+seat,
-    cards:deck([SANCTUARY,MYSTICAL_ELF,AXE_RAIDER])
+    cards:deck([SANCTUARY,fairy.id,AXE_RAIDER])
   }));
   const state=tag.createTagDuel(players,{classic:true,first,seed});
   state.core.rulesVersion='speed-rpg-v2';
@@ -108,10 +108,10 @@ for(const first of [0,1]){
     const fieldCard=takeCard(state,activeSeat,SANCTUARY);
     holder(state,activeSeat).hand.push(fieldCard);
     const attacker=deploy(state,activeSeat,AXE_RAIDER);
-    const fairy=deploy(state,opposingSeat,MYSTICAL_ELF);
+    const fairyMonster=deploy(state,opposingSeat,fairy.id);
     assert.ok(attacker.uid.startsWith('m'+activeSeat+':'),
       'the attacking monster must retain the active physical seat UID');
-    assert.ok(fairy.uid.startsWith('m'+opposingSeat+':'),
+    assert.ok(fairyMonster.uid.startsWith('m'+opposingSeat+':'),
       'the Fairy target must retain the opposing physical seat UID');
 
     const activation=tag.tagActions(state,member(activeSeat)).find(action=>
@@ -126,13 +126,13 @@ for(const first of [0,1]){
       'The Sanctuary occupies the activating team shared Field Zone');
 
     state=startBattle(state,activeSeat);
-    state=attack(state,activeSeat,attacker,fairy);
+    state=attack(state,activeSeat,attacker,fairyMonster);
     const targetTeam=opposingSeat%2;
     assert.equal(state.core.players[targetTeam].lp,4000,
       'The Sanctuary reduces battle damage involving the opposing Fairy to zero even when that Fairy is destroyed');
     assert.equal(state.core.players[activeSeat%2].lp,4000,
       'the attacking team takes no battle damage from its winning attack');
-    assert.ok(state.core.players[targetTeam].grave.some(card=>card.uid===fairy.uid&&card.id===MYSTICAL_ELF),
+    assert.ok(state.core.players[targetTeam].grave.some(card=>card.uid===fairyMonster.uid&&card.id===fairy.id),
       'the Fairy is still destroyed by battle; only battle damage is prevented');
     assert.ok(state.core.players[activeSeat%2].monsters.some(card=>card.uid===attacker.uid),
       'the attacker survives its winning battle');
