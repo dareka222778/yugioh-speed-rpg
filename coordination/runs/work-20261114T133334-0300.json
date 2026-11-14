@@ -1,0 +1,54 @@
+{
+  "runId": "work-20261114T133334-0300",
+  "owner": "Work",
+  "priority": "P1 — certificar por comportamento Newdoria no 2v2: gatilho obrigatório somente após destruição por batalha, escolha de um monstro de qualquer uma das duas equipes, preservação do UID físico, seleção de alvo face-down sem revelar identidade e integridade dos quatro assentos.",
+  "state": "active",
+  "startedAt": "2026-11-14T13:33:34-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "7a2a124107b3d2136a4bf90a88cc65ea22f1c294",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "workBranch": "feat/work-m175-newdoria-battle-destruction-targets-2v2-20261114",
+  "workBranchHeadAtClaim": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "reservedFiles": [
+    "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs"
+  ],
+  "completedBlocks": [],
+  "handoffs": {
+    "activeParallelWork": "M61 / PR #17 continua reservado; solicitação parcial para src/monsterEffects.ts sem resposta. Nenhuma alteração nesse arquivo.",
+    "conflictingReservations": [
+      "M61/PR17",
+      "M118/PR74",
+      "M151/PR107",
+      "M153/runtime"
+    ],
+    "action": "Prosseguir somente em teste independente; preservar reservas de terceiros."
+  },
+  "catalogAtStart": {
+    "sharedCertificates": 969,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingToSharedTarget": 31
+  },
+  "production": {
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "merge": false,
+    "deploy": false,
+    "hosting": "unverified",
+    "discordLive": false
+  },
+  "limits": [
+    "Nenhuma alteração de runtime, catálogo ou certificados",
+    "Nenhuma concessão de inventário",
+    "Nenhuma alteração em banco persistente",
+    "Sem merge/deploy",
+    "Sem validação Discord ao vivo"
+  ],
+  "handoffRequest": {
+    "pr": 17,
+    "commentId": 6880751292,
+    "file": "src/monsterEffects.ts",
+    "status": "awaiting-explicit-release"
+  }
+}

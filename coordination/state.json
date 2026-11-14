@@ -1,16 +1,18 @@
 {
-  "runId": "work-20261114T083019-0300",
+  "runId": "work-20261114T133334-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "released-to-auxiliary-monitor-ci",
-  "startedAt": "2026-11-14T08:30:19-03:00",
-  "lastActivityAt": "2026-11-14T09:21:10-03:00",
-  "nextScheduledAt": "2026-11-14T13:30:00-03:00",
+  "state": "active",
+  "startedAt": "2026-11-14T13:33:34-03:00",
+  "lastActivityAt": "2026-11-14T13:33:34-03:00",
+  "nextScheduledAt": "2026-11-14T18:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
-  "scope": [],
-  "lastCheckpoint": "coordination/runs/work-20261114T083019-0300.json",
-  "previousRunId": "work-20261113T223304-0300",
+  "scope": [
+    "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs"
+  ],
+  "lastCheckpoint": "coordination/runs/work-20261114T133334-0300.json",
+  "previousRunId": "work-20261114T083019-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -1261,15 +1263,27 @@
       "runId": "work-20261114T083019-0300",
       "reservation": "released-to-auxiliary-monitor-ci",
       "releasedAt": "2026-11-14T09:18:10-03:00"
+    },
+    {
+      "branch": "feat/work-m175-newdoria-battle-destruction-targets-2v2-20261114",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs"
+      ],
+      "state": "active",
+      "runId": "work-20261114T133334-0300",
+      "priority": "P1 — certificar por comportamento Newdoria no 2v2: gatilho obrigatório somente após destruição por batalha, escolha de um monstro de qualquer uma das duas equipes, preservação do UID físico, seleção de alvo face-down sem revelar identidade e integridade dos quatro assentos.",
+      "reservation": "active"
     }
   ],
   "handoffRequest": {
-    "target": "PR #17 / M61",
-    "status": "awaiting-response",
-    "commentId": 6869460162,
-    "lastCommentId": 6869460162,
-    "noResponse": true,
-    "lastRequestedAt": "2026-11-13T22:44:10-03:00"
+    "pr": 17,
+    "commentId": 6880751292,
+    "file": "src/monsterEffects.ts",
+    "mission": "M174 Atomic Firefly",
+    "status": "awaiting-explicit-release"
   },
   "handoff": {
     "to": "auxiliary",
@@ -2481,10 +2495,10 @@
     "minimum60MinutesMet": false,
     "note": "CI waiting was not counted as work; the 60-minute effective-work target was not verified in this execution."
   },
-  "nextTask": "Auxiliary monitors PR #120/#128/#129 and may fix only their three test files. Work next: verify final CI on latest heads; obtain explicit M61 release for src/monsterEffects.ts before proposing Atomic Firefly through catalog/proposed; otherwise continue independent 2v2 tests. Do not alter M118/M151/M153 reservations.",
+  "nextTask": "Implementar e validar Newdoria 2v2 em branch isolada; depois, se a CI permitir, avançar para outra família independente. Não tocar nos arquivos reservados por M61/M118/M151/M153.",
   "sharedHeadBeforeRelease": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
-  "priority": "M164 global backrow 2v2 -> M172 Trap Hole summon/flip threshold -> M173 Card Destruction simultaneous team deck-out; next: monitor CI and await partial M61 handoff for Atomic Firefly",
-  "sharedHeadBeforeClaim": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
+  "priority": "P1 — certificar por comportamento Newdoria no 2v2: gatilho obrigatório somente após destruição por batalha, escolha de um monstro de qualquer uma das duas equipes, preservação do UID físico, seleção de alvo face-down sem revelar identidade e integridade dos quatro assentos.",
+  "sharedHeadBeforeClaim": "7a2a124107b3d2136a4bf90a88cc65ea22f1c294",
   "releasedOwnReservation": true,
   "parallelWorkObserved": {
     "at": "2026-11-14T09:18:10-03:00",
@@ -2612,7 +2626,7 @@
     ]
   },
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedHeadAfterClaim": "9a58808dc5ccaffd0bdce4827022f37cde000466",
+  "sharedHeadAfterClaim": null,
   "releasedOwnReservations": [
     {
       "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
@@ -4609,49 +4623,34 @@
     "pr119": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier negative fixture expectation corrected"
   },
   "activeWork": {
-    "id": "work-20261114T083019-0300",
+    "runId": "work-20261114T133334-0300",
     "owner": "Work",
-    "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs.",
-    "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
-    "head": "403b3f671d9336c8695fd196103768f3422ad324",
-    "base": "feat/work-m71-ci-branch-routing-20261112",
+    "priority": "P1 — certificar por comportamento Newdoria no 2v2: gatilho obrigatório somente após destruição por batalha, escolha de um monstro de qualquer uma das duas equipes, preservação do UID físico, seleção de alvo face-down sem revelar identidade e integridade dos quatro assentos.",
+    "state": "active",
+    "branch": "feat/work-m175-newdoria-battle-destruction-targets-2v2-20261114",
+    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
-      "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs",
-      "coordination/state.json",
-      "coordination/runs/work-20261114T083019-0300.json"
+      "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs"
     ],
-    "state": "released-to-auxiliary-monitor-ci",
-    "startedAt": "2026-11-14T08:30:19-03:00",
-    "lastActivityAt": "2026-11-14T09:18:10-03:00",
-    "releasedAt": "2026-11-14T09:18:10-03:00",
-    "completedBranches": [
-      {
-        "mission": "M164",
-        "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
-        "head": "403b3f671d9336c8695fd196103768f3422ad324",
-        "pr": 120
-      },
-      {
-        "mission": "M172",
-        "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
-        "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
-        "pr": 128
-      },
-      {
-        "mission": "M173",
-        "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
-        "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
-        "pr": 129
-      }
-    ],
-    "releasedFiles": [
-      "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs",
-      "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs",
-      "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+    "startedAt": "2026-11-14T13:33:34-03:00",
+    "lastActivityAt": "2026-11-14T13:33:34-03:00",
+    "pr": null,
+    "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "handoff": {
+      "pr": 17,
+      "commentId": 6880751292,
+      "file": "src/monsterEffects.ts",
+      "status": "awaiting-explicit-release; no edits"
+    },
+    "limits": [
+      "test-only; no runtime/catalog/certification edits",
+      "no inventory grants",
+      "no merge/deploy",
+      "no edits to M61/M118/M151/M153 reservations"
     ]
   },
-  "sharedHeadAtStart": "ec8cabc985b0368576fb8527429251bbc1aa4e7f",
+  "sharedHeadAtStart": "7a2a124107b3d2136a4bf90a88cc65ea22f1c294",
   "partialHandoffRequest": {
     "pr": 17,
     "commentId": 6877118689,
@@ -4662,7 +4661,7 @@
     "scope": "partial file-only handoff; no changes until release"
   },
   "lastCheckpointAt": "2026-11-14T09:18:10-03:00",
-  "reservationReleased": true,
+  "reservationReleased": false,
   "expectedHeadForCoordinationCommit": "ccd16eac2db107c8f5c1b2aa2a03fe8b10c215fb",
   "lastRunSummary": {
     "runId": "work-20261114T083019-0300",
