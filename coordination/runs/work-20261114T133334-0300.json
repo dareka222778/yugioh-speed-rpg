@@ -2,28 +2,108 @@
   "runId": "work-20261114T133334-0300",
   "owner": "Work",
   "priority": "P1 — certificar por comportamento Newdoria no 2v2: gatilho obrigatório somente após destruição por batalha, escolha de um monstro de qualquer uma das duas equipes, preservação do UID físico, seleção de alvo face-down sem revelar identidade e integridade dos quatro assentos.",
-  "state": "active",
+  "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-14T13:33:34-03:00",
+  "endedAt": "2026-11-14T13:42:20-03:00",
   "timezone": "America/Sao_Paulo",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "7a2a124107b3d2136a4bf90a88cc65ea22f1c294",
+  "sharedHeadAfterClaim": "4359e48a727b66ca5aa44bce6e3fa16d286d309e",
+  "sharedHeadBeforeRelease": "4359e48a727b66ca5aa44bce6e3fa16d286d309e",
+  "expectedHeadForCoordinationCommit": "4359e48a727b66ca5aa44bce6e3fa16d286d309e",
   "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
   "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-  "workBranch": "feat/work-m175-newdoria-battle-destruction-targets-2v2-20261114",
-  "workBranchHeadAtClaim": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-  "reservedFiles": [
-    "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs"
+  "workBranches": [
+    {
+      "mission": "M175",
+      "branch": "feat/work-m175-newdoria-battle-destruction-targets-2v2-20261114",
+      "head": "535b7fd9079fdfab31d02fdf9ac88ce4f0acfd1c",
+      "pr": 130,
+      "file": "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "success",
+        "extendedSoak600": "in_progress"
+      },
+      "tests": 2
+    },
+    {
+      "mission": "M176",
+      "branch": "feat/work-m176-double-tribute-2v2-physical-owner-20261114",
+      "head": "b0510f434822e979497f54beace039e537622e87",
+      "pr": 131,
+      "file": "tests/tagClassicDoubleTributePhysicalOwner2v2.test.cjs",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "success",
+        "extendedSoak600": "in_progress"
+      },
+      "tests": 7
+    },
+    {
+      "mission": "M177",
+      "branch": "feat/work-m177-gora-turtle-global-attack-lock-2v2-20261114",
+      "head": "24e89ae629a4ded2262d627fc299e12c4af44fda",
+      "pr": 132,
+      "file": "tests/tagClassicGoraTurtleGlobalAttackLock2v2.test.cjs",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "tests": 3
+    },
+    {
+      "mission": "M178",
+      "branch": "feat/work-m178-conditional-direct-attacks-2v2-20261114",
+      "head": "6be49470f2b27a10a26c8ae3512bf21f19f5b36f",
+      "pr": 133,
+      "file": "tests/tagClassicConditionalDirectAttacksTeamScope2v2.test.cjs",
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "milestone1000": "success",
+        "engineValidation": "in_progress"
+      },
+      "tests": 6
+    }
   ],
-  "completedBlocks": [],
+  "completedBlocks": [
+    {
+      "mission": "M175",
+      "status": "published-CI-partial",
+      "summary": "Newdoria mandatory onBattleDestroyed trigger; target selection across both teams; facedown identity privacy; 2 scenarios."
+    },
+    {
+      "mission": "M176",
+      "status": "published-CI-partial",
+      "summary": "Kaiser Sea Horse, Double Coston and The Trojan Horse matching-attribute Double Tribute; Unshaven Angler mismatch control; physical partner owner; 7 scenarios."
+    },
+    {
+      "mission": "M177",
+      "status": "published-CI-partial",
+      "summary": "Gora Turtle global 1900+ attack lock across both teams; below-threshold exception; face-down source control; 3 scenarios."
+    },
+    {
+      "mission": "M178",
+      "status": "published-CI-partial",
+      "summary": "Black Tyranno/Rocket Jumper defense-only direct attacks and Drillago 1600+ direct attack across both opposing seats; 6 scenarios."
+    }
+  ],
   "handoffs": {
-    "activeParallelWork": "M61 / PR #17 continua reservado; solicitação parcial para src/monsterEffects.ts sem resposta. Nenhuma alteração nesse arquivo.",
+    "activeParallelWork": "M61 / PR #17 permanece sem resposta; pedidos parciais para src/monsterEffects.ts (comentário 6880751292) e src/duelEngineCurrent.ts (comentário 6880802968). Nenhum arquivo reservado foi alterado.",
     "conflictingReservations": [
       "M61/PR17",
       "M118/PR74",
       "M151/PR107",
       "M153/runtime"
     ],
-    "action": "Prosseguir somente em teste independente; preservar reservas de terceiros."
+    "action": "Prosseguir em testes independentes; preservar reservas de terceiros."
   },
   "catalogAtStart": {
     "sharedCertificates": 969,
@@ -31,24 +111,155 @@
     "delta": 45,
     "remainingToSharedTarget": 31
   },
+  "catalogAtEnd": {
+    "sharedCertificates": 969,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "historicalUnique": 1962,
+    "pendingHistorical": 993,
+    "identityBlocked": 27
+  },
+  "ciSummary": {
+    "pr120": "all three workflows success",
+    "pr128": "all three workflows success",
+    "pr129": "all three workflows success",
+    "pr130": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "npmTest": "success",
+      "extendedSoak600": "in_progress"
+    },
+    "pr131": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "npmTest": "success",
+      "extendedSoak600": "in_progress"
+    },
+    "pr132": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "npmTest": "in_progress",
+      "extendedSoak600": "in_progress"
+    },
+    "pr133": {
+      "cardBatchFast": "in_progress",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    }
+  },
+  "prs": [
+    {
+      "number": 130,
+      "head": "535b7fd9079fdfab31d02fdf9ac88ce4f0acfd1c",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "draft": true,
+      "merged": false
+    },
+    {
+      "number": 131,
+      "head": "b0510f434822e979497f54beace039e537622e87",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "draft": true,
+      "merged": false
+    },
+    {
+      "number": 132,
+      "head": "24e89ae629a4ded2262d627fc299e12c4af44fda",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "draft": true,
+      "merged": false
+    },
+    {
+      "number": 133,
+      "head": "6be49470f2b27a10a26c8ae3512bf21f19f5b36f",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "draft": true,
+      "merged": false
+    }
+  ],
+  "limits": [
+    "Somente quatro arquivos de teste adicionados em branches próprias",
+    "Nenhuma alteração de runtime, catálogo ou certificados",
+    "Nenhuma concessão de inventário",
+    "Nenhuma alteração de banco persistente",
+    "Sem merge/deploy",
+    "Sem validação Discord ao vivo"
+  ],
   "production": {
     "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
     "merge": false,
     "deploy": false,
+    "mainDeploymentWorkflowFound": false,
+    "sharedDeploymentWorkflowFound": false,
     "hosting": "unverified",
     "discordLive": false
   },
-  "limits": [
-    "Nenhuma alteração de runtime, catálogo ou certificados",
-    "Nenhuma concessão de inventário",
-    "Nenhuma alteração em banco persistente",
-    "Sem merge/deploy",
-    "Sem validação Discord ao vivo"
-  ],
-  "handoffRequest": {
-    "pr": 17,
-    "commentId": 6880751292,
-    "file": "src/monsterEffects.ts",
-    "status": "awaiting-explicit-release"
+  "scopeReleasedToAuxiliary": {
+    "branches": [
+      {
+        "mission": "M175",
+        "branch": "feat/work-m175-newdoria-battle-destruction-targets-2v2-20261114",
+        "pr": 130,
+        "head": "535b7fd9079fdfab31d02fdf9ac88ce4f0acfd1c",
+        "files": [
+          "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only this test file on this branch."
+      },
+      {
+        "mission": "M176",
+        "branch": "feat/work-m176-double-tribute-2v2-physical-owner-20261114",
+        "pr": 131,
+        "head": "b0510f434822e979497f54beace039e537622e87",
+        "files": [
+          "tests/tagClassicDoubleTributePhysicalOwner2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only this test file on this branch."
+      },
+      {
+        "mission": "M177",
+        "branch": "feat/work-m177-gora-turtle-global-attack-lock-2v2-20261114",
+        "pr": 132,
+        "head": "24e89ae629a4ded2262d627fc299e12c4af44fda",
+        "files": [
+          "tests/tagClassicGoraTurtleGlobalAttackLock2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only this test file on this branch."
+      },
+      {
+        "mission": "M178",
+        "branch": "feat/work-m178-conditional-direct-attacks-2v2-20261114",
+        "pr": 133,
+        "head": "6be49470f2b27a10a26c8ae3512bf21f19f5b36f",
+        "files": [
+          "tests/tagClassicConditionalDirectAttacksTeamScope2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only this test file on this branch."
+      }
+    ],
+    "forbidden": [
+      "M61",
+      "M118",
+      "M151",
+      "M153",
+      "runtime/catalog/certification changes",
+      "merge/deploy",
+      "inventory grants"
+    ]
+  },
+  "reservationReleased": true,
+  "nextTask": "Monitorar PRs #130–#133; obter handoff parcial M61 para corrigir o seletor face-up de Double Tribute e liberar Atomic Firefly; depois continuar as 31 certificações restantes.",
+  "nextWindow": "2026-11-14T18:30:00-03:00",
+  "duration": {
+    "elapsedWallMinutes": 9,
+    "effectiveWorkMinutesMeasured": 9,
+    "minimum60MinutesMet": false,
+    "note": "Espera de CI não contabilizada."
   }
 }
