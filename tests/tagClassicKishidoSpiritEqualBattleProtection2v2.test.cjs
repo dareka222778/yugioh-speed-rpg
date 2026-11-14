@@ -81,13 +81,13 @@ function settle(state){
   return state;
 }
 function activateKishido(state){
-  const spell=takeCard(state,2,KISHIDO_SPIRIT);
-  holder(state,2).hand.push(spell);
-  assert.match(spell.uid,/^m2:/,'Kishido Spirit must retain inactive teammate physical ownership');
+  const spell=takeCard(state,0,KISHIDO_SPIRIT);
+  holder(state,0).hand.push(spell);
+  assert.match(spell.uid,/^m0:/,'Kishido Spirit must retain active physical owner seat 0 identity');
   const action=tag.tagActions(state,member(0)).find(candidate=>
     candidate.kind==='spell'&&candidate.card===spell.uid
   );
-  assert.ok(action,'the active teammate must be able to activate the partner-owned continuous Spell');
+  assert.ok(action,'the active teammate must activate its own continuous Spell to protect the partner-owned monster');
   assert.deepEqual(tag.tagActions(state,member(2)),[],
     'the inactive physical owner cannot execute the Spell activation');
   state=settle(tag.stepTagDuel(state,member(0),action));
