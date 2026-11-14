@@ -2,9 +2,9 @@
   "runId": "work-20261114T032516-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-14T03:25:16-03:00",
-  "lastActivityAt": "2026-11-14T03:33:00-03:00",
+  "lastActivityAt": "2026-11-14T03:39:10-03:00",
   "nextScheduledAt": "2026-11-14T08:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -15,7 +15,7 @@
     "coordination/runs/work-20261114T032516-0300.json",
     "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
+  "lastCheckpoint": "coordination/runs/work-20261114T032516-0300.json",
   "previousRunId": "work-20261113T223304-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
@@ -40,7 +40,7 @@
     "branch": "feat/work-m61-handlimit-ci-20261111",
     "head": "78aa57851420e0f52211f7267faf1af681847ea3",
     "state": "handoff-pending",
-    "lastRequestComment": 6869460162,
+    "lastRequestComment": 6873097667,
     "noResponse": true,
     "blockedFiles": [
       "src/monsterEffects.ts",
@@ -49,7 +49,7 @@
       "src/duelIntegrity.ts",
       "scripts/mass-certification21.cjs"
     ],
-    "lastRequestAt": "2026-11-13T22:44:10-03:00"
+    "lastRequestAt": "2026-11-14T03:25:16-03:00"
   },
   "workBranches": [
     {
@@ -1117,6 +1117,72 @@
         "testJob": "in_progress",
         "extendedSoak": "in_progress"
       }
+    },
+    {
+      "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+      "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+      "pr": 117,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43567000920,
+        "milestone1000": "success",
+        "milestoneRunId": 43567000950,
+        "check": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43567000915,
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+      "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+      "pr": 118,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43566724675,
+        "milestone1000": "success",
+        "milestoneRunId": 43566724677,
+        "check": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43566724653,
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+      "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+      "pr": 119,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43567105635,
+        "milestone1000": "success",
+        "milestoneRunId": 43567105750,
+        "check": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43567105671,
+        "extendedSoak": "in_progress"
+      }
     }
   ],
   "handoffRequest": {
@@ -1136,55 +1202,18 @@
     "nextWorkAt": "2026-11-14T03:30:00-03:00"
   },
   "catalog": {
-    "shared": {
-      "cards": 969,
-      "certificates": 969,
-      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
-    },
-    "development": {
-      "cards": 1014,
-      "certificates": 1014,
-      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
-    },
-    "delta": {
-      "added": 45,
-      "removed": 0,
-      "changedCommonCards": 0,
-      "changedCommonEffects": 0,
-      "changedCommonMonsters": 0,
-      "changedCommonCertificates": 0
-    },
-    "newAdmissionsThisRun": 0,
-    "verifiedCounts": {
-      "sharedBranch": {
-        "cards": 969,
-        "certificates": 969
-      },
-      "m71TestBase": {
-        "cards": 969,
-        "certificates": 969
-      },
-      "pr14DevelopmentBranch": {
-        "cards": 1014,
-        "certificates": 1014,
-        "merged": false
-      },
-      "deltaToShared": 45,
-      "newAdmissions": 0,
-      "newCertificates": 0,
-      "milestoneWorklist": {
-        "target": 1000,
-        "certified": 969,
-        "remaining": 31,
-        "pending": 993,
-        "identityBlocked": 27,
-        "automaticCertifications": 0,
-        "inventoryGranted": 0,
-        "releaseGranted": 0,
-        "runId": 43541777612
-      }
-    },
-    "newCertificatesThisRun": 0
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0
   },
   "m60": {
     "officialSourceReviewed": [
@@ -1730,6 +1759,30 @@
       "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
       "base": "feat/work-m71-ci-branch-routing-20261112",
       "ci": "cardBatchFast:in_progress; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 117,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+      "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+      "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
+    },
+    {
+      "number": 118,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+      "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+      "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
+    },
+    {
+      "number": 119,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+      "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+      "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
     }
   ],
   "ci": {
@@ -2175,15 +2228,12 @@
       "extendedSoak": "in_progress"
     },
     "pr116": {
-      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
-      "cardBatchFast": "in_progress",
-      "cardBatchFastRunId": 43542328874,
-      "milestone1000": "success",
-      "milestoneRunId": 43542328862,
-      "engineValidation": "in_progress",
+      "engineValidation": "failure",
       "engineRunId": 43542328882,
-      "testJob": "in_progress",
-      "extendedSoak": "in_progress"
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "rootCause": "interaction helper usa requestId como sessionId em store.getTag",
+      "auxiliaryCommentId": 6873218837
     },
     "pr109": {
       "head": "b23f3344a9eec6c5e174cf23fca99eda8dbe9a27",
@@ -2191,6 +2241,39 @@
       "engineValidation": "failure",
       "milestone1000": "success",
       "engineRunId": 43503878913
+    },
+    "pr117": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43567000920,
+      "milestone1000": "success",
+      "milestoneRunId": 43567000950,
+      "check": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "engineRunId": 43567000915,
+      "extendedSoak": "in_progress"
+    },
+    "pr118": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43566724675,
+      "milestone1000": "success",
+      "milestoneRunId": 43566724677,
+      "check": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "engineRunId": 43566724653,
+      "extendedSoak": "in_progress"
+    },
+    "pr119": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43567105635,
+      "milestone1000": "success",
+      "milestoneRunId": 43567105750,
+      "check": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "engineRunId": 43567105671,
+      "extendedSoak": "in_progress"
     }
   },
   "production": {
@@ -2203,19 +2286,26 @@
       "engine-validation.yml",
       "milestone1000.yml"
     ],
-    "hostingStatus": "not verified; no deployment workflow found among the main-branch workflows",
+    "hostingStatus": "not verified; main tree contains no .github/workflows and no deployment workflow was found",
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
-    "mainRuns": 0
+    "mainRuns": 0,
+    "mainWorkflowFiles": [],
+    "sharedWorkflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ]
   },
   "duration": {
-    "elapsedWallMinutes": 11,
+    "elapsedWallMinutes": 14,
     "effectiveMinutesMeasured": false,
     "minimum60MinutesConfirmed": false,
-    "note": "Janela observada de 11 min 06 s. A meta de 60 minutos efetivos não foi cumprida nem comprovada; espera de CI não foi contabilizada."
+    "note": "Janela observada de aproximadamente 14 minutos; não foi possível cumprir 60 minutos efetivos. Espera de CI não foi contabilizada."
   },
-  "nextTask": "Work: conferir o término dos workflows M158–M160; solicitar handoff M61/M118/M151; se M61 liberar os cinco caminhos, corrigir o filtro de alvos adversários e seguir para a família FLIP. Caso contrário, continuar em uma família independente. Auxiliar: monitorar e corrigir somente os três arquivos de teste liberados.",
-  "sharedHeadBeforeRelease": "cc5e4fc4be7406255bddaa908c5e94a4f85a486d",
-  "priority": "P1 — validar a família de Magias econômicas no duelo 2v2 e fechar a cadeia de integração Discord: escolhas de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos, payloads e idempotência de interações.",
+  "nextTask": "Auxiliar: monitorar CI das PRs #117–#119 e corrigir somente os três arquivos de teste nas respectivas branches próprias. Work: conferir resultados finais, obter handoff M61/M118/M151 e continuar as 31 certificações pendentes com revisão individual.",
+  "sharedHeadBeforeRelease": "5309ebe7e82e7687703a3f7061aac014941dc647",
+  "priority": "P1 — Mirror Force, Dark Hole e Bottomless Trap Hole: ampliar cobertura comportamental 2v2 sem tocar runtime reservado.",
   "sharedHeadBeforeClaim": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
   "releasedOwnReservation": true,
   "parallelWorkObserved": {
@@ -2295,7 +2385,7 @@
     ]
   },
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedHeadAfterClaim": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
+  "sharedHeadAfterClaim": "9a58808dc5ccaffd0bdce4827022f37cde000466",
   "releasedOwnReservations": [
     {
       "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
@@ -2624,12 +2714,26 @@
         "testJob": "in_progress",
         "extendedSoak": "in_progress"
       }
+    },
+    {
+      "runId": "work-20261114T032516-0300",
+      "branches": [
+        "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+        "feat/work-m162-dark-hole-2v2-global-field-20261114",
+        "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114"
+      ],
+      "files": [
+        "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
+        "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
+        "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+      ],
+      "releasedAt": "2026-11-14T03:39:10-03:00"
     }
   ],
   "activeRun": {
     "runId": "work-20261114T032516-0300",
     "owner": "Work",
-    "priority": "P1 — ampliar a cobertura comportamental 2v2 para destruição de campo por ataque (Mirror Force) e destruição global (Dark Hole), validando equipes, propriedade física, privacidade, resposta e conservação dos 80 UIDs; sem tocar runtime reservado.",
+    "priority": "P1 — Mirror Force, Dark Hole e Bottomless Trap Hole: ampliar cobertura comportamental 2v2 sem tocar runtime reservado.",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadBeforeClaim": "cab1c0a48ef4653de66bcd70ea63b2e967a709ad",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
@@ -2639,14 +2743,107 @@
       "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
       "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
     ],
-    "state": "active; isolated-test-only",
+    "state": "completed; released-to-auxiliary-monitor-ci",
     "handoffsRequested": {
       "m61": 6873097667,
       "m118": 6873098031,
       "m151": 6873098406
-    }
+    },
+    "startedAt": "2026-11-14T03:25:16-03:00",
+    "endedAt": "2026-11-14T03:39:10-03:00",
+    "sharedHeadAfterClaim": "9a58808dc5ccaffd0bdce4827022f37cde000466",
+    "sharedHeadAfterScopeExtension": "b21ea902e5b34825712e383ebba7972355c5337e",
+    "sharedHeadAfterCheckpoint": "5309ebe7e82e7687703a3f7061aac014941dc647",
+    "sharedHeadBeforeFinalStateUpdate": "5309ebe7e82e7687703a3f7061aac014941dc647",
+    "releasedFiles": [
+      "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
+      "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
+      "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+    ],
+    "workBranches": [
+      {
+        "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+        "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+        "pr": 117,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567000920,
+          "milestone1000": "success",
+          "milestoneRunId": 43567000950,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567000915,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+        "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+        "pr": 118,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43566724675,
+          "milestone1000": "success",
+          "milestoneRunId": 43566724677,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43566724653,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+        "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+        "pr": 119,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567105635,
+          "milestone1000": "success",
+          "milestoneRunId": 43567105750,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567105671,
+          "extendedSoak": "in_progress"
+        }
+      }
+    ],
+    "pullRequests": [
+      117,
+      118,
+      119
+    ],
+    "catalog": {
+      "sharedCertificates": 969,
+      "developmentCertificates": 1014,
+      "delta": 45,
+      "remainingTo1000": 31,
+      "newCertificates": 0
+    },
+    "reservationReleased": true,
+    "nextWorkAt": "2026-11-14T08:30:00-03:00"
   },
-  "nextWorkAt": "2026-11-14T03:30:00-03:00",
+  "nextWorkAt": "2026-11-14T08:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -3773,17 +3970,17 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
-  "lastParallelActivityAt": "2026-11-13T22:44:10-03:00",
-  "sharedHeadAfterCheckpoint": null,
-  "sharedHeadBeforeStateUpdate": "cab1c0a48ef4653de66bcd70ea63b2e967a709ad",
-  "endedAt": "2026-11-13T22:44:10-03:00",
+  "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
+  "sharedHeadAfterCheckpoint": "5309ebe7e82e7687703a3f7061aac014941dc647",
+  "sharedHeadBeforeStateUpdate": "5309ebe7e82e7687703a3f7061aac014941dc647",
+  "endedAt": "2026-11-14T03:39:10-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
-    "commentId": 6869460652,
-    "lastCommentId": 6869460652,
+    "commentId": 6873098031,
+    "lastCommentId": 6873098031,
     "noResponse": true,
-    "lastRequestedAt": "2026-11-13T22:44:10-03:00"
+    "lastRequestedAt": "2026-11-14T03:25:16-03:00"
   },
   "m120ValidationComment": 6858001163,
   "releaseToAuxiliary": {
@@ -3888,10 +4085,76 @@
           "testJob": "in_progress",
           "extendedSoak": "in_progress"
         }
+      },
+      {
+        "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+        "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+        "pr": 117,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567000920,
+          "milestone1000": "success",
+          "milestoneRunId": 43567000950,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567000915,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+        "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+        "pr": 118,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43566724675,
+          "milestone1000": "success",
+          "milestoneRunId": 43566724677,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43566724653,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+        "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+        "pr": 119,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567105635,
+          "milestone1000": "success",
+          "milestoneRunId": 43567105750,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567105671,
+          "extendedSoak": "in_progress"
+        }
       }
     ],
-    "allowed": "Auxiliar pode monitorar CI das PRs #112–#116 e corrigir somente os arquivos de teste liberados M156–M160 em suas próprias branches; preservar logs e devolver checkpoint.",
-    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime reservado, catálogo, certificados, bancos/inventários; não fazer merge ou deploy."
+    "allowed": "Auxiliar pode monitorar CI das PRs #112–#119 e corrigir somente os arquivos de teste explicitamente liberados M156–M163 nas próprias branches; preservar logs e devolver checkpoint.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, M153/runtime reservado, branches de terceiros, catálogo, certificados, bancos ou inventários; não fazer merge ou deploy."
   },
   "scopeReleasedToAuxiliary": {
     "branches": [
@@ -3995,18 +4258,93 @@
           "testJob": "in_progress",
           "extendedSoak": "in_progress"
         }
+      },
+      {
+        "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+        "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+        "pr": 117,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567000920,
+          "milestone1000": "success",
+          "milestoneRunId": 43567000950,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567000915,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+        "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+        "pr": 118,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43566724675,
+          "milestone1000": "success",
+          "milestoneRunId": 43566724677,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43566724653,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+        "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+        "pr": 119,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567105635,
+          "milestone1000": "success",
+          "milestoneRunId": 43567105750,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567105671,
+          "extendedSoak": "in_progress"
+        }
       }
     ],
-    "allowed": "Auxiliar pode monitorar CI das PRs #112–#116 e corrigir somente os arquivos de teste liberados M156–M160 em suas próprias branches; preservar logs e devolver checkpoint.",
-    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime reservado, catálogo, certificados, bancos/inventários; não fazer merge ou deploy."
+    "allowed": "Auxiliar pode monitorar CI das PRs #112–#119 e corrigir somente os arquivos de teste explicitamente liberados M156–M163 nas próprias branches; preservar logs e devolver checkpoint.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, M153/runtime reservado, branches de terceiros, catálogo, certificados, bancos ou inventários; não fazer merge ou deploy."
   },
-  "lastCoordinationRefreshAt": "2026-11-13T22:44:10-03:00",
+  "lastCoordinationRefreshAt": "2026-11-14T03:39:10-03:00",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
     "status": "awaiting-response",
-    "commentId": 6869461071,
-    "lastCommentId": 6869461071,
+    "commentId": 6873098406,
+    "lastCommentId": 6873098406,
     "noResponse": true,
-    "lastRequestedAt": "2026-11-13T22:44:10-03:00"
+    "lastRequestedAt": "2026-11-14T03:25:16-03:00"
+  },
+  "sharedHeadAfterScopeExtension": "b21ea902e5b34825712e383ebba7972355c5337e",
+  "validation": {
+    "pr114": "all workflows success",
+    "pr115": "all workflows success",
+    "pr116": "engine validation failed: one Discord interaction test queries tagStore with requestId instead of sessionId; auxiliary notified",
+    "pr117": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier fixture failure corrected",
+    "pr118": "npm run check/npm test/card-batch-fast/milestone pass; stress and extended soak in progress",
+    "pr119": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier negative fixture expectation corrected"
   }
 }
