@@ -63,7 +63,7 @@
         "883a34b6dbfaabd216a43d264015e475d33cd4dd"
       ],
       "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
-      "baseSha": "173a0b9f1e4a2b9d1c5f1a6c7d8e9f0a1b2c3d4e",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "pr": 128,
       "files": [
         "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
@@ -112,7 +112,8 @@
         "milestone1000": "success",
         "engineValidation": "success",
         "extendedSoak": "success"
-      }
+      },
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
     },
     {
       "mission": "M172",
@@ -132,7 +133,8 @@
         "previousHeadMilestone1000": "success",
         "previousHeadEngineValidation": "in-progress",
         "latestHead": "pending"
-      }
+      },
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb"
     },
     {
       "mission": "M173",
@@ -384,5 +386,7 @@
   },
   "notes": [
     "Post-release status refresh: PR #128 latest HEAD has Card Batch Fast and Milestone 1000 green; Engine Validation/npm test and 600s soak are running. PR #129 corrected HEAD has Card Batch Fast and Milestone 1000 green; npm test passed and tag audit/soak are running."
-  ]
+  ],
+  "workBranchBaseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "recordCorrectionAt": "2026-11-14T09:20:22-03:00"
 }

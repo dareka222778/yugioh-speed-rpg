@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-14T08:30:19-03:00",
-  "lastActivityAt": "2026-11-14T09:19:07-03:00",
+  "lastActivityAt": "2026-11-14T09:20:22-03:00",
   "nextScheduledAt": "2026-11-14T13:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -1183,7 +1183,7 @@
       "head": "403b3f671d9336c8695fd196103768f3422ad324",
       "pr": 120,
       "base": "feat/work-m71-ci-branch-routing-20261112",
-      "baseSha": "173a0b9f1e4a2b9d1c5f1a6c7d8e9f0a1b2c3d4e",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
       ],
@@ -1214,7 +1214,7 @@
         "883a34b6dbfaabd216a43d264015e475d33cd4dd"
       ],
       "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
-      "baseSha": "173a0b9f1e4a2b9d1c5f1a6c7d8e9f0a1b2c3d4e",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "pr": 128,
       "files": [
         "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
@@ -4195,7 +4195,7 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
   "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
   "sharedHeadAfterCheckpoint": "5309ebe7e82e7687703a3f7061aac014941dc647",
-  "sharedHeadBeforeStateUpdate": "7190717abc687e5995b0523260adb2c03bcc0db5",
+  "sharedHeadBeforeStateUpdate": "7fca54721923a60d6fb478d3ebc763282f7ebdef",
   "endedAt": "2026-11-14T09:18:10-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
@@ -4709,7 +4709,7 @@
   },
   "lastCheckpointAt": "2026-11-14T09:18:10-03:00",
   "reservationReleased": true,
-  "expectedHeadForCoordinationCommit": "7190717abc687e5995b0523260adb2c03bcc0db5",
+  "expectedHeadForCoordinationCommit": "7fca54721923a60d6fb478d3ebc763282f7ebdef",
   "lastRunSummary": {
     "runId": "work-20261114T083019-0300",
     "priority": "M164 global backrow 2v2 -> M172 Trap Hole summon/flip threshold -> M173 Card Destruction simultaneous team deck-out; next: monitor CI and await partial M61 handoff for Atomic Firefly",
@@ -4772,5 +4772,6 @@
       }
     }
   },
-  "postReleaseCiCheckAt": "2026-11-14T09:19:07-03:00"
+  "postReleaseCiCheckAt": "2026-11-14T09:19:07-03:00",
+  "recordCorrectionAt": "2026-11-14T09:20:22-03:00"
 }
