@@ -156,7 +156,10 @@
       "defense": 1000,
       "race": "Warrior",
       "attribute": "EARTH",
-      "ocgDate": "2001-04-19"
+      "ocgDate": "2001-04-19",
+      "archetypes": [
+        "Amazoness"
+      ]
     },
     "ocgDateEvidence": "verified-printing",
     "dateMeaning": "Verified OCG printing before cutoff, not a universal first release claim",
@@ -193,7 +196,8 @@
     "identityApproved": true,
     "mechanicsApproved": true,
     "reviewer": "Mission 7 individual primary rules/facts review",
-    "mechanicalFingerprint": "c755d733ae29ea519bd519ba0f54ebba92146f159bd1315885f703f34d55869e"
+    "mechanicalFingerprint": "7a61908fed1a93d5d46739ae270a69cb2ee3c6c46c0fd9c69587de850b61674b",
+    "archetypeEvidence": "Official card database identity; archetype tag is included in the reviewed mechanical fingerprint."
   },
   {
     "id": "69579761",
