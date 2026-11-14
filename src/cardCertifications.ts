@@ -3677,7 +3677,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "91869203": {
     "fingerprint": "7a61908fed1a93d5d46739ae270a69cb2ee3c6c46c0fd9c69587de850b61674b",
     "suites": [
-      "tests/mechanicalBatch7.test.cjs"
+      "tests/mechanicalBatch7.test.cjs",
+      "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
     ]
   },
   "91939608": {
@@ -4714,7 +4715,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "47480070": {
     "fingerprint": "dfd8d53390631a8ec0acb74fd95979b0e3f4558ca82332e766937eeed8133d64",
     "suites": [
-      "tests/mission21ActiveBatch.test.cjs"
+      "tests/mission21ActiveBatch.test.cjs",
+      "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
     ]
   },
   "52040216": {
