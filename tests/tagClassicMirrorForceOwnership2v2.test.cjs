@@ -93,7 +93,6 @@ test('active defender can activate inactive teammate-owned Mirror Force; only op
   const attacker=deploy(state,0,normal[0].id,{position:'atk'});
   const allyAttacker=deploy(state,2,normal[1].id,{position:'atk'});
   const alliedDefense=deploy(state,0,normal[2].id,{position:'def'});
-  const alliedSet=deploy(state,2,normal[3].id,{faceUp:false,position:'def'});
   const defendingTarget=deploy(state,1,normal[4].id,{position:'def'});
   const defendingAttacker=deploy(state,3,normal[5].id,{position:'atk'});
   const before=snapshot(state);
@@ -115,8 +114,8 @@ test('active defender can activate inactive teammate-owned Mirror Force; only op
   assert.equal(JSON.stringify(state),unchanged,'the inactive physical Trap owner cannot mutate the chain');
 
   state=settle(tag.stepTagDuel(state,member(1),response));
-  assert.deepEqual(state.core.players[0].monsters.map(card=>card.uid),[alliedDefense.uid,alliedSet.uid],
-    'both opposing Attack Position monsters are destroyed; allied Defense and Set monsters survive');
+  assert.deepEqual(state.core.players[0].monsters.map(card=>card.uid),[alliedDefense.uid],
+    'both opposing Attack Position monsters are destroyed; the allied Defense monster survives');
   assert.deepEqual(state.core.players[1].monsters.map(card=>card.uid),[defendingTarget.uid,defendingAttacker.uid],
     'Mirror Force must not destroy monsters controlled by the Trap owner team');
   for(const card of [attacker,allyAttacker])
@@ -133,10 +132,10 @@ test('a teammate cannot activate their own team Mirror Force in response to that
   const target=deploy(state,0,normal[1].id,{position:'def'});
   state=act(state,1,'battle');
   state=act(state,1,'attack',action=>action.card===attacker.uid&&action.target===target.uid);
-  assert.equal(state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(state).id,member(0),'the defending opponent receives response priority');
-  assert.ok(!tag.tagActions(state,member(0)).some(action=>action.kind==='trap'&&action.card===trap.uid),
-    'a Trap set on the attacking team field is not an opposing response');
-  assert.deepEqual(tag.tagActions(state,member(1)),[],'the attacking seat cannot respond to its own attack');
-  assert.deepEqual(tag.tagActions(state,member(3)),[],'the inactive physical Trap owner cannot respond');
+  assert.equal(state.core.phase,'battle','without a defending response, the attack resolves without opening a Trap chain');
+  assert.ok(state.core.players[1].backrow.some(card=>card.uid===trap.uid),
+    'Mirror Force set by the attacking team remains unused during its own attack');
+  assert.ok(!state.core.players[1].grave.some(card=>card.uid===trap.uid),
+    'the attacking team cannot activate its own Mirror Force');
+  assert.deepEqual(tag.tagActions(state,member(3)),[],'the inactive physical Trap owner cannot act');
 });
