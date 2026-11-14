@@ -117,6 +117,7 @@ test("Harpie's Pet Dragon counts Harpie Lady 1 on both teams, including partner-
   assert.equal(engine.def(pet,state.core),3100,
     'Pet Dragon gets +600 DEF for the two face-up Harpie Lady names on both teams');
   allyHarpie.faceUp=false;
+  allyHarpie.position='def';
   assert.equal(engine.atk(pet,state.core),2600,
     'turning one Harpie Lady face-down removes one global WIND bonus and one name count');
   assert.equal(engine.def(pet,state.core),2800,
