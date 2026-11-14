@@ -167,6 +167,21 @@ test('Trap Hole does not activate against a Normal Summon below 1000 ATK',()=>{
   assertConserved(state,before);
 });
 
+test('Trap Hole cannot be activated during the turn it was Set, even by the active teammate',()=>{
+  let {state,trap,before}=setup('m172-trap-set-this-turn');
+  trap.setTurn=state.core.turn;
+  const summoned=normalSummon(state,high);
+  state=summoned.state;
+  assert.equal(state.core.phase,'main','a Trap Set this turn cannot open a response window');
+  assert.ok(state.core.players[1].backrow.some(card=>card.uid===trap.uid),
+    'the same-turn Trap remains Set');
+  assert.ok(state.core.players[0].monsters.some(card=>card.uid===summoned.monster.uid),
+    'the eligible 1000 ATK Normal Summon resolves normally');
+  assert.deepEqual(tag.tagActions(state,member(1)),[]);
+  tag.assertTagDuel(state);
+  assertConserved(state,before);
+});
+
 test('Trap Hole does not respond to a Special Summon from Monster Reborn',()=>{
   let {state,trap,before}=setup('m172-special-summon-excluded');
   const graveMonster=takeCard(state,0,high.id);
