@@ -33,7 +33,9 @@
         "milestone1000": "success",
         "npmTest": "success",
         "engineValidation": "in_progress",
-        "extendedSoak600": "in_progress"
+        "extendedSoak600": "in_progress",
+        "check": "success",
+        "benchmark": "success"
       },
       "runs": {
         "cardBatchFast": 43649872404,
@@ -53,12 +55,17 @@
       ],
       "scenarios": 3,
       "ci": {
-        "previousHeadNpmTest": "failure (1 incorrect fixture expectation; 7368/7369 passed)",
+        "previousHeadNpmTest": "failure_fixture_expectation_corrected",
         "correctedHeadCardBatchFast": "in_progress",
         "correctedHeadMilestone1000": "in_progress",
         "correctedHeadEngineValidation": "queued",
         "correctedHeadNpmTest": "pending",
-        "extendedSoak600": "in_progress"
+        "extendedSoak600": "in_progress",
+        "correctedHead": "b88cdc7ed21444debd1cec9ee88f366f7c5027c1",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "in_progress",
+        "engineValidation": "in_progress"
       },
       "runs": {
         "previousHeadEngineValidation": 43650075590,
@@ -172,5 +179,27 @@
   ],
   "nextTask": "Auxiliar: monitorar PRs #164 e #165 e corrigir somente os dois arquivos de teste nas respectivas branches. Work: concluir Engine Validation/soak; revisar a falha M207 com o agente; obter handoff M61 para Double Tribute face-up e Atomic Firefly; manter M151 reservado; seguir para a próxima família independente e retomar as 31 certificações quando o handoff permitir.",
   "nextWindow": "2026-11-14T23:30:00-03:00",
-  "reservationReleased": true
+  "reservationReleased": true,
+  "postReleaseCiCheckAt": "2026-11-14T19:54:38.665-03:00",
+  "ciUpdates": {
+    "checkedAt": "2026-11-14T19:54:38.665-03:00",
+    "pr164": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "check": "success",
+      "benchmark": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak600": "in_progress"
+    },
+    "pr165": {
+      "correctedHead": "b88cdc7ed21444debd1cec9ee88f366f7c5027c1",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "in_progress",
+      "engineValidation": "in_progress",
+      "extendedSoak600": "in_progress",
+      "previousHeadNpmTest": "failure_fixture_expectation_corrected"
+    }
+  }
 }

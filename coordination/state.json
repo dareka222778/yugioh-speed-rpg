@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-14T19:41:37-03:00",
-  "lastActivityAt": "2026-11-14T19:53:13.875-03:00",
+  "lastActivityAt": "2026-11-14T19:54:38.665-03:00",
   "nextScheduledAt": "2026-11-14T23:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -2918,18 +2918,19 @@
       "cardBatchFast": "success",
       "milestone1000": "success",
       "npmTest": "success",
+      "check": "success",
+      "benchmark": "success",
       "engineValidation": "in_progress",
       "extendedSoak600": "in_progress"
     },
     "pr165": {
-      "initialHead": "f1e8a33907ce11fcdf741035a12b9d913dde2c26",
-      "initialNpmTest": "failure (face-down Defense target expectation)",
       "correctedHead": "b88cdc7ed21444debd1cec9ee88f366f7c5027c1",
-      "cardBatchFast": "in_progress",
-      "milestone1000": "in_progress",
-      "engineValidation": "queued",
-      "npmTest": "pending",
-      "extendedSoak600": "in_progress"
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "in_progress",
+      "engineValidation": "in_progress",
+      "extendedSoak600": "in_progress",
+      "previousHeadNpmTest": "failure_fixture_expectation_corrected"
     }
   },
   "production": {
@@ -5280,18 +5281,19 @@
       "cardBatchFast": "success",
       "milestone1000": "success",
       "npmTest": "success",
+      "check": "success",
+      "benchmark": "success",
       "engineValidation": "in_progress",
       "extendedSoak600": "in_progress"
     },
     "pr165": {
-      "initialHead": "f1e8a33907ce11fcdf741035a12b9d913dde2c26",
-      "initialNpmTest": "failure (face-down Defense target expectation)",
       "correctedHead": "b88cdc7ed21444debd1cec9ee88f366f7c5027c1",
-      "cardBatchFast": "in_progress",
-      "milestone1000": "in_progress",
-      "engineValidation": "queued",
-      "npmTest": "pending",
-      "extendedSoak600": "in_progress"
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "in_progress",
+      "engineValidation": "in_progress",
+      "extendedSoak600": "in_progress",
+      "previousHeadNpmTest": "failure_fixture_expectation_corrected"
     }
   },
   "activeWork": {
@@ -5306,7 +5308,7 @@
     "sharedHeadAfterCheckpoint": "5fb122e49e383ffa4dd2230f2ea932b0418880fc",
     "reservedFiles": [],
     "startedAt": "2026-11-14T19:41:37-03:00",
-    "lastActivityAt": "2026-11-14T19:53:13.875-03:00",
+    "lastActivityAt": "2026-11-14T19:54:38.665-03:00",
     "endedAt": "2026-11-14T19:53:13.875-03:00",
     "prs": [
       164,
@@ -5383,9 +5385,9 @@
   },
   "lastCheckpointAt": "2026-11-14T19:53:13.875-03:00",
   "reservationReleased": true,
-  "expectedHeadForCoordinationCommit": "5fb122e49e383ffa4dd2230f2ea932b0418880fc",
-  "lastRunSummary": "M209–M210: duas PRs draft e isoladas, 8 cenários comportamentais em três cartas. #164 Card Batch/Milestone/npm test passaram; Engine Validation/soak em andamento. #165 primeiro npm test encontrou uma expectativa incorreta sobre alvo face-down; teste corrigido no HEAD b88cdc7 e nova CI iniciada. M205, M206 e M208 com Engine Validation aprovada; M207 falhou em uma expectativa de Machine King (agente notificado). Zero novas certificações; catálogo permanece 969 compartilhadas/1.014 desenvolvimento. Sem merge/deploy.",
-  "postReleaseCiCheckAt": "2026-11-14T09:21:10-03:00",
+  "expectedHeadForCoordinationCommit": "f08fb477ffa23d126ab669e2f00a448a3088d0d2",
+  "lastRunSummary": "M209–M210: #164 com Card Batch, Milestone, check e npm test aprovados; Engine Validation/soak seguem em execução. #165 teve Card Batch e Milestone aprovados no HEAD corrigido b88cdc7; npm test/Engine Validation/soak seguem em execução. A falha inicial foi uma expectativa errada sobre ataque a monstro face-down, corrigida sem runtime. Zero novas certificações; catálogo 969/1.014; sem merge/deploy.",
+  "postReleaseCiCheckAt": "2026-11-14T19:54:38.665-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
   "catalogAtEnd": {
     "sharedCertificates": 969,
