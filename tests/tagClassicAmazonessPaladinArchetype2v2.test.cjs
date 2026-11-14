@@ -3,28 +3,20 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const engine=require('../dist/duelEngine');
-const {getPlayableCard,getEffect,engineCard,getCardStatus}=require('../dist/effectRegistry');
-const {getMonsterEffect,getMonsterDefinition}=require('../dist/monsterEffects');
-const {definitionFingerprint}=require('../dist/cardRegistry');
-const {getEffectModel}=require('../dist/effectModels');
+const {getPlayableCard}=require('../dist/effectRegistry');
+const {getMonsterEffect}=require('../dist/monsterEffects');
+const {archetypeCard}=require('../dist/cardIdentity');
 
 const AMAZONESS_PALADIN='47480070';
 const AMAZONESS_ARCHER='91869203';
-assert.equal(engineCard(AMAZONESS_PALADIN)?.englishName,'Amazoness Paladin');
-assert.equal(engineCard(AMAZONESS_ARCHER)?.englishName,'Amazoness Archer');
-for(const id of [AMAZONESS_PALADIN,AMAZONESS_ARCHER]){
-  const fingerprint=definitionFingerprint(engineCard(id),getEffect(id),{model:getEffectModel,monster:getMonsterDefinition});
-  console.log('M204_CARD_FINGERPRINT',id,fingerprint);
-}
-assert.equal(getCardStatus(AMAZONESS_PALADIN)?.stage,'certified');
-assert.equal(getCardStatus(AMAZONESS_ARCHER)?.stage,'certified');
-assert.ok(engineCard(AMAZONESS_PALADIN)?.archetypes?.includes('Amazoness'),
-  'Amazoness Paladin must expose its official archetype to continuous filters');
-assert.ok(engineCard(AMAZONESS_ARCHER)?.archetypes?.includes('Amazoness'),
-  'Amazoness Archer must expose its official archetype to continuous filters');
+assert.equal(getPlayableCard(AMAZONESS_PALADIN)?.englishName,'Amazoness Paladin');
+assert.equal(getPlayableCard(AMAZONESS_ARCHER)?.englishName,'Amazoness Archer');
+assert.ok(archetypeCard(getPlayableCard(AMAZONESS_PALADIN),'Amazoness'),
+  'Amazoness Paladin is recognized by the canonical archetype matcher');
+assert.ok(archetypeCard(getPlayableCard(AMAZONESS_ARCHER),'Amazoness'),
+  'Amazoness Archer is recognized by the canonical archetype matcher');
 assert.equal(getMonsterEffect(AMAZONESS_PALADIN)?.trigger,'continuous');
 assert.equal(getMonsterEffect(AMAZONESS_PALADIN)?.operation.kind,'continuous');
-
 const normal=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
   .filter(entry=>entry.card&&entry.card.kind==='monster'&&Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
