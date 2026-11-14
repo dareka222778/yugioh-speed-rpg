@@ -142,7 +142,7 @@ test('Heavy Storm and Harpie\'s Feather Duster are certified Normal Spells with 
 });
 
 test('Heavy Storm destroys both teams shared backrows and Field Zones, preserving monsters and physical UIDs',()=>{
-  const f=fixture(HEAVY_STORM),state=f.state;
+  const f=fixture(HEAVY_STORM);let state=f.state;
   const before=snapshot(state);
   const hidden=[f.alliedSet0,f.opponentSet0,f.alliedSet2,f.opponentSet2];
   assertHidden(JSON.stringify(tag.publicTagDuel(state)),hidden);
@@ -161,7 +161,7 @@ test('Heavy Storm destroys both teams shared backrows and Field Zones, preservin
 });
 
 test('Harpie\'s Feather Duster destroys only the opposing team backrow and Field Zone',()=>{
-  const f=fixture(HARPIE_DUSTER),state=f.state;
+  const f=fixture(HARPIE_DUSTER);let state=f.state;
   const before=snapshot(state);
   const hidden=[f.alliedSet0,f.opponentSet0,f.alliedSet2,f.opponentSet2];
   assertHidden(JSON.stringify(tag.publicTagDuel(state)),hidden);
