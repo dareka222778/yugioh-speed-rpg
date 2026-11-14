@@ -174,8 +174,8 @@ test('a face-down LIGHT monster is not revealed and does not invalidate the face
   const actions=attackActions(state,fusion);
   assert.ok(actions.some(action=>action.target===undefined),
     'the condition examines face-up opposing monsters only and ignores the hidden monster without revealing it');
-  assert.ok(!actions.some(action=>action.target===hidden.uid),
-    'a face-down monster cannot be selected as a normal attack target');
+  assert.ok(actions.some(action=>action.target===hidden.uid),
+    'a face-down Defense monster remains a legal attack target; its identity stays hidden from the public projection');
   assert.ok(actions.some(action=>action.target===earth.uid));
   tag.assertTagDuel(state);
   assertConserved(state,before);
