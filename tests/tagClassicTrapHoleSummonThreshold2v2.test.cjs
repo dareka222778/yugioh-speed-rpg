@@ -15,6 +15,7 @@ const high=normal.filter(entry=>entry.card.atk>=1000).sort((a,b)=>a.card.atk-b.c
 const low=normal.filter(entry=>entry.card.atk<1000).sort((a,b)=>b.card.atk-a.card.atk)[0];
 assert.ok(high,'Trap Hole needs a summonable Normal Monster with at least 1000 ATK');
 assert.ok(low,'the negative fixture needs a summonable Normal Monster below 1000 ATK');
+assert.equal(high.card.atk,1000,'the positive fixture must exercise Trap Hole at the exact 1000 ATK boundary');
 const deckIds=[...new Set([high.id,low.id,...normal.slice(0,8).map(entry=>entry.id)])];
 assert.ok(deckIds.length>=8,'the 2v2 fixture needs eight certified Normal Monsters');
 
