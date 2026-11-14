@@ -333,5 +333,56 @@
   "mergePerformed": false,
   "deployPerformed": false,
   "effectiveWorkMinutesMeasured": false,
-  "minimum60MinutesMet": false
+  "minimum60MinutesMet": false,
+  "postReleaseCiCheckAt": "2026-11-14T09:19:07-03:00",
+  "ciAfterRelease": {
+    "pr128": {
+      "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+      "runs": {
+        "cardBatchFast": {
+          "id": 43594054705,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "milestone1000": {
+          "id": 43594054692,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "engineValidation": {
+          "id": 43594054699,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    "pr129": {
+      "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+      "runs": {
+        "cardBatchFast": {
+          "id": 43593335896,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "milestone1000": {
+          "id": 43593335884,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "engineValidation": {
+          "id": 43593335926,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        "npmTest": "passed-before-audit:tag",
+        "auditTag": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    }
+  },
+  "notes": [
+    "Post-release status refresh: PR #128 latest HEAD has Card Batch Fast and Milestone 1000 green; Engine Validation/npm test and 600s soak are running. PR #129 corrected HEAD has Card Batch Fast and Milestone 1000 green; npm test passed and tag audit/soak are running."
+  ]
 }

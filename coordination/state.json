@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-14T08:30:19-03:00",
-  "lastActivityAt": "2026-11-14T09:18:10-03:00",
+  "lastActivityAt": "2026-11-14T09:19:07-03:00",
   "nextScheduledAt": "2026-11-14T13:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -1219,12 +1219,28 @@
       "files": [
         "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
       ],
-      "status": "implementation-published-latest-head-CI-not-yet-observed",
+      "status": "implementation-published-latest-head-engine-validation-in-progress",
       "ci": {
-        "previousHeadCardBatchFast": "success",
-        "previousHeadMilestone1000": "success",
-        "previousHeadEngineValidation": "in-progress",
-        "latestHead": "pending"
+        "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+        "runs": {
+          "cardBatchFast": {
+            "id": 43594054705,
+            "status": "completed",
+            "conclusion": "success"
+          },
+          "milestone1000": {
+            "id": 43594054692,
+            "status": "completed",
+            "conclusion": "success"
+          },
+          "engineValidation": {
+            "id": 43594054699,
+            "status": "in_progress",
+            "conclusion": null
+          },
+          "npmTest": "in_progress",
+          "extendedSoak": "in_progress"
+        }
       },
       "runId": "work-20261114T083019-0300",
       "reservation": "released-to-auxiliary-monitor-ci",
@@ -1241,13 +1257,29 @@
       "files": [
         "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
       ],
-      "status": "implementation-corrected-head-CI-in-progress",
+      "status": "implementation-corrected-head-engine-validation-in-progress",
       "ci": {
-        "initialHeadEngineValidation": "failed-one-assertion",
-        "correctedHeadCardBatchFast": "success",
-        "correctedHeadMilestone1000": "success",
-        "correctedHeadEngineValidation": "in-progress",
-        "correctedHeadNpmTest": "passed-before-soak"
+        "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+        "runs": {
+          "cardBatchFast": {
+            "id": 43593335896,
+            "status": "completed",
+            "conclusion": "success"
+          },
+          "milestone1000": {
+            "id": 43593335884,
+            "status": "completed",
+            "conclusion": "success"
+          },
+          "engineValidation": {
+            "id": 43593335926,
+            "status": "in_progress",
+            "conclusion": null
+          },
+          "npmTest": "passed-before-audit:tag",
+          "auditTag": "in_progress",
+          "extendedSoak": "in_progress"
+        }
       },
       "runId": "work-20261114T083019-0300",
       "reservation": "released-to-auxiliary-monitor-ci",
@@ -2362,20 +2394,48 @@
     },
     "pr128": {
       "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
-      "previousHead": "883a34b6dbfaabd216a43d264015e475d33cd4dd",
-      "previousHeadCardBatchFast": "success",
-      "previousHeadMilestone1000": "success",
-      "previousHeadEngineValidation": "in-progress",
-      "latestHeadRuns": "not yet observed"
+      "runs": {
+        "cardBatchFast": {
+          "id": 43594054705,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "milestone1000": {
+          "id": 43594054692,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "engineValidation": {
+          "id": 43594054699,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
+      }
     },
     "pr129": {
       "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
-      "initialHead": "4ea5815a762f49552916d7d2938756578f24041b",
-      "initialHeadFailure": "npm test assertion counted the activating Spell in seat 0 draw count",
-      "correctedHeadCardBatchFast": "success",
-      "correctedHeadMilestone1000": "success",
-      "correctedHeadEngineValidation": "in-progress",
-      "correctedHeadNpmTest": "passed-before-soak"
+      "runs": {
+        "cardBatchFast": {
+          "id": 43593335896,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "milestone1000": {
+          "id": 43593335884,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "engineValidation": {
+          "id": 43593335926,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        "npmTest": "passed-before-audit:tag",
+        "auditTag": "in_progress",
+        "extendedSoak": "in_progress"
+      }
     },
     "parallelPRs": [
       {
@@ -2427,7 +2487,8 @@
         "ci": "fast-and-milestone-success-engine-in-progress",
         "touched": false
       }
-    ]
+    ],
+    "postReleaseCheckedAt": "2026-11-14T09:19:07-03:00"
   },
   "production": {
     "merge": "none",
@@ -4134,7 +4195,7 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
   "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
   "sharedHeadAfterCheckpoint": "5309ebe7e82e7687703a3f7061aac014941dc647",
-  "sharedHeadBeforeStateUpdate": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
+  "sharedHeadBeforeStateUpdate": "7190717abc687e5995b0523260adb2c03bcc0db5",
   "endedAt": "2026-11-14T09:18:10-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
@@ -4648,7 +4709,7 @@
   },
   "lastCheckpointAt": "2026-11-14T09:18:10-03:00",
   "reservationReleased": true,
-  "expectedHeadForCoordinationCommit": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
+  "expectedHeadForCoordinationCommit": "7190717abc687e5995b0523260adb2c03bcc0db5",
   "lastRunSummary": {
     "runId": "work-20261114T083019-0300",
     "priority": "M164 global backrow 2v2 -> M172 Trap Hole summon/flip threshold -> M173 Card Destruction simultaneous team deck-out; next: monitor CI and await partial M61 handoff for Atomic Firefly",
@@ -4663,6 +4724,53 @@
     "newCertifications": 0,
     "inventoryGranted": 0,
     "merge": false,
-    "deploy": false
-  }
+    "deploy": false,
+    "postReleaseCiCheckAt": "2026-11-14T09:19:07-03:00",
+    "pr128": {
+      "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+      "runs": {
+        "cardBatchFast": {
+          "id": 43594054705,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "milestone1000": {
+          "id": 43594054692,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "engineValidation": {
+          "id": 43594054699,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    "pr129": {
+      "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+      "runs": {
+        "cardBatchFast": {
+          "id": 43593335896,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "milestone1000": {
+          "id": 43593335884,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "engineValidation": {
+          "id": 43593335926,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        "npmTest": "passed-before-audit:tag",
+        "auditTag": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    }
+  },
+  "postReleaseCiCheckAt": "2026-11-14T09:19:07-03:00"
 }
