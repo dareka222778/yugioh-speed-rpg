@@ -8,6 +8,8 @@ const {getMonsterEffect}=require('../dist/monsterEffects');
 const SONIC_BIRD='57617178';
 const SENJU='23401839';
 const MANJU='95492061';
+const BERFOMET='77207191';
+const GAZELLE='05862189';
 const BLACK_LUSTER_RITUAL='72989439';
 const BLACK_LUSTER_SOLDIER='05405694';
 const FISSURE='66788016';
@@ -18,6 +20,9 @@ assert.equal(getMonsterEffect(MANJU)?.trigger,'onSummon');
 assert.equal(getMonsterEffect(SONIC_BIRD)?.operation.kind,'searchFiltered');
 assert.equal(getMonsterEffect(SENJU)?.operation.kind,'searchFiltered');
 assert.equal(getMonsterEffect(MANJU)?.operation.kind,'searchFiltered');
+assert.equal(getMonsterEffect(BERFOMET)?.trigger,'onSummon');
+assert.equal(getMonsterEffect(BERFOMET)?.operation.kind,'searchFiltered');
+assert.equal(getPlayableCard(GAZELLE)?.englishName,'Gazelle the King of Mythical Beasts');
 assert.equal(getEffect(BLACK_LUSTER_RITUAL)?.kind,'ritualSummon');
 assert.equal(getPlayableCard(BLACK_LUSTER_SOLDIER)?.monsterType,'ritual');
 assert.notEqual(getEffect(FISSURE)?.kind,'ritualSummon');
@@ -177,6 +182,23 @@ test('Manju of the Ten Thousand Hands can search a Ritual Monster on Flip Summon
   state=result.state;
   assert.ok(tag.tagMemberHand(state,member(0)).some(card=>card.uid===result.target.uid&&card.id===BLACK_LUSTER_SOLDIER));
   assert.ok(state.core.players[0].monsters.some(card=>card.uid===source.uid&&card.faceUp));
+  tag.assertTagDuel(state);
+  assertConserved(state,before);
+});
+
+test('Berfomet optionally searches only Gazelle the King of Mythical Beasts on Normal Summon',()=>{
+  let state=game([BERFOMET,GAZELLE,FISSURE],'m194-berfomet-gazelle');
+  const before=inventorySnapshot(state);
+  const source=ensureInHand(state,0,BERFOMET);
+  ensureInDeck(state,0,GAZELLE);
+  ensureInDeck(state,0,FISSURE);
+  state=normalSummon(state,source);
+  const result=resolveOptionalSearch(state,source,GAZELLE);
+  state=result.state;
+  assert.ok(tag.tagMemberHand(state,member(0)).some(card=>card.uid===result.target.uid&&card.id===GAZELLE),
+    'Gazelle the King of Mythical Beasts is added to the active physical hand');
+  assert.match(result.target.uid,/^m0:/,'Gazelle is searched from the active physical Deck');
+  assert.ok(state.core.players[0].monsters.some(card=>card.uid===source.uid));
   tag.assertTagDuel(state);
   assertConserved(state,before);
 });
