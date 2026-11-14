@@ -58,6 +58,7 @@ export const mechanicalBatch7:readonly Card[]=[
     "level": 4,
     "atk": 1400,
     "defense": 1000,
+    "archetypes": ["Amazoness"],
     "summary": "Descrição operacional gerada da definição individual auditada.",
     "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5195&request_locale=ja"
   },
