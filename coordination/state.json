@@ -2,17 +2,13 @@
   "runId": "work-20261114T083019-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-14T08:30:19-03:00",
-  "lastActivityAt": "2026-11-14T08:30:19-03:00",
+  "lastActivityAt": "2026-11-14T09:18:10-03:00",
   "nextScheduledAt": "2026-11-14T13:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
-  "scope": [
-    "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs",
-    "coordination/state.json",
-    "coordination/runs/work-20261114T083019-0300.json"
-  ],
+  "scope": [],
   "lastCheckpoint": "coordination/runs/work-20261114T083019-0300.json",
   "previousRunId": "work-20261113T223304-0300",
   "previousReservation": {
@@ -1184,16 +1180,78 @@
     },
     {
       "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
-      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-      "pr": null,
+      "head": "403b3f671d9336c8695fd196103768f3422ad324",
+      "pr": 120,
       "base": "feat/work-m71-ci-branch-routing-20261112",
-      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "baseSha": "173a0b9f1e4a2b9d1c5f1a6c7d8e9f0a1b2c3d4e",
       "scope": [
         "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
       ],
       "state": "active",
       "runId": "work-20261114T083019-0300",
-      "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs."
+      "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs.",
+      "mission": "M164",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "files": [
+        "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
+      ],
+      "status": "implementation-and-CI-complete",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success",
+        "extendedSoak": "success"
+      },
+      "reservation": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-14T09:18:10-03:00"
+    },
+    {
+      "mission": "M172",
+      "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
+      "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+      "previousHeads": [
+        "e4738d7c7be5c076bee67740f372e4faaf517da7",
+        "883a34b6dbfaabd216a43d264015e475d33cd4dd"
+      ],
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0b9f1e4a2b9d1c5f1a6c7d8e9f0a1b2c3d4e",
+      "pr": 128,
+      "files": [
+        "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
+      ],
+      "status": "implementation-published-latest-head-CI-not-yet-observed",
+      "ci": {
+        "previousHeadCardBatchFast": "success",
+        "previousHeadMilestone1000": "success",
+        "previousHeadEngineValidation": "in-progress",
+        "latestHead": "pending"
+      },
+      "runId": "work-20261114T083019-0300",
+      "reservation": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-14T09:18:10-03:00"
+    },
+    {
+      "mission": "M173",
+      "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
+      "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+      "initialHead": "4ea5815a762f49552916d7d2938756578f24041b",
+      "baseBranch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+      "baseSha": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+      "pr": 129,
+      "files": [
+        "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+      ],
+      "status": "implementation-corrected-head-CI-in-progress",
+      "ci": {
+        "initialHeadEngineValidation": "failed-one-assertion",
+        "correctedHeadCardBatchFast": "success",
+        "correctedHeadMilestone1000": "success",
+        "correctedHeadEngineValidation": "in-progress",
+        "correctedHeadNpmTest": "passed-before-soak"
+      },
+      "runId": "work-20261114T083019-0300",
+      "reservation": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-14T09:18:10-03:00"
     }
   ],
   "handoffRequest": {
@@ -1224,7 +1282,16 @@
     "remaining": 31,
     "historyPending": 993,
     "identityBlocked": 27,
-    "automaticCertifications": 0
+    "automaticCertifications": 0,
+    "remainingTo1000": 31,
+    "historicalUnique": 1962,
+    "pendingHistorical": 993,
+    "fullyUnreviewed": 966,
+    "triageQueue": 31,
+    "newCertificationsThisRun": 0,
+    "inventoryGranted": 0,
+    "milestoneArtifactId": 14112394839,
+    "milestoneRunId": 43592911763
   },
   "m60": {
     "officialSourceReviewed": [
@@ -2285,7 +2352,82 @@
       "engineValidation": "in_progress",
       "engineRunId": 43567105671,
       "extendedSoak": "in_progress"
-    }
+    },
+    "pr120": {
+      "head": "403b3f671d9336c8695fd196103768f3422ad324",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success",
+      "extendedSoak": "success"
+    },
+    "pr128": {
+      "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+      "previousHead": "883a34b6dbfaabd216a43d264015e475d33cd4dd",
+      "previousHeadCardBatchFast": "success",
+      "previousHeadMilestone1000": "success",
+      "previousHeadEngineValidation": "in-progress",
+      "latestHeadRuns": "not yet observed"
+    },
+    "pr129": {
+      "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+      "initialHead": "4ea5815a762f49552916d7d2938756578f24041b",
+      "initialHeadFailure": "npm test assertion counted the activating Spell in seat 0 draw count",
+      "correctedHeadCardBatchFast": "success",
+      "correctedHeadMilestone1000": "success",
+      "correctedHeadEngineValidation": "in-progress",
+      "correctedHeadNpmTest": "passed-before-soak"
+    },
+    "parallelPRs": [
+      {
+        "mission": "M165",
+        "pr": 121,
+        "head": "daea004611e5bcea55a03e7c80e5b96a81655226",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M166",
+        "pr": 122,
+        "head": "d6d6c38e5e246427c27ab878e94bc67625df51ea",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M167",
+        "pr": 123,
+        "head": "38b1f771088623b9d8ee80ce4a6eac25529e37f8",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M168",
+        "pr": 124,
+        "head": "6acf7d47b38d63c14d94ca1e833ab69b431ff221",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M169",
+        "pr": 125,
+        "head": "69165a0fc4a2d8353279724a8f98fd7869412965",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M170",
+        "pr": 126,
+        "head": "d99d2975d5cb36185e4fc7e9b44faa9ca84afc26",
+        "ci": "fast-and-milestone-success-engine-in-progress",
+        "touched": false
+      },
+      {
+        "mission": "M171",
+        "pr": 127,
+        "head": "386ba106988726251594f6bb4927bbf0692043ab",
+        "ci": "fast-and-milestone-success-engine-in-progress",
+        "touched": false
+      }
+    ]
   },
   "production": {
     "merge": "none",
@@ -2297,7 +2439,7 @@
       "engine-validation.yml",
       "milestone1000.yml"
     ],
-    "hostingStatus": "not verified; main tree contains no .github/workflows and no deployment workflow was found",
+    "hostingStatus": "unverified",
     "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
     "mainRuns": 0,
     "mainWorkflowFiles": [],
@@ -2306,22 +2448,32 @@
       "card-batch-fast.yml",
       "engine-validation.yml",
       "milestone1000.yml"
-    ]
+    ],
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "sharedBranchWorkflows": 4,
+    "mainDeploymentWorkflowFound": false,
+    "sharedDeploymentWorkflowFound": false,
+    "githubDeploymentsApiVerified": false,
+    "discordLiveValidation": false
   },
   "duration": {
-    "elapsedWallMinutes": 14,
-    "effectiveMinutesMeasured": false,
-    "minimum60MinutesConfirmed": false,
-    "note": "Janela observada de aproximadamente 14 minutos; não foi possível cumprir 60 minutos efetivos. Espera de CI não foi contabilizada."
+    "startedAt": "2026-11-14T08:30:19-03:00",
+    "endedAt": "2026-11-14T09:18:10-03:00",
+    "elapsedWallMinutes": 48,
+    "effectiveWorkMinutesMeasured": false,
+    "minimum60MinutesMet": false,
+    "note": "CI waiting was not counted as work; the 60-minute effective-work target was not verified in this execution."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #117–#119 e corrigir somente os três arquivos de teste nas respectivas branches próprias. Work: conferir resultados finais, obter handoff M61/M118/M151 e continuar as 31 certificações pendentes com revisão individual.",
-  "sharedHeadBeforeRelease": "5309ebe7e82e7687703a3f7061aac014941dc647",
-  "priority": "P1 — Mirror Force, Dark Hole e Bottomless Trap Hole: ampliar cobertura comportamental 2v2 sem tocar runtime reservado.",
+  "nextTask": "Auxiliary monitors PR #120/#128/#129 and may fix only their three test files. Work next: verify final CI on latest heads; obtain explicit M61 release for src/monsterEffects.ts before proposing Atomic Firefly through catalog/proposed; otherwise continue independent 2v2 tests. Do not alter M118/M151/M153 reservations.",
+  "sharedHeadBeforeRelease": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
+  "priority": "M164 global backrow 2v2 -> M172 Trap Hole summon/flip threshold -> M173 Card Destruction simultaneous team deck-out; next: monitor CI and await partial M61 handoff for Atomic Firefly",
   "sharedHeadBeforeClaim": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
   "releasedOwnReservation": true,
   "parallelWorkObserved": {
-    "at": "2026-11-13T13:41:32-03:00",
-    "note": "M140–M145 observadas em branches próprias; Work não alterou nem liberou essas reservas.",
+    "at": "2026-11-14T09:18:10-03:00",
+    "note": "M165-M171 were observed as independent open PRs; no branch was modified, rebased, merged or released by this Work run.",
     "branches": [
       {
         "branch": "feat/work-m140-flip-target-monsters-2v2-20261113",
@@ -2392,6 +2544,55 @@
           "engineValidation": "in_progress",
           "milestone1000": "success"
         }
+      },
+      {
+        "mission": "M165",
+        "pr": 121,
+        "head": "daea004611e5bcea55a03e7c80e5b96a81655226",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M166",
+        "pr": 122,
+        "head": "d6d6c38e5e246427c27ab878e94bc67625df51ea",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M167",
+        "pr": 123,
+        "head": "38b1f771088623b9d8ee80ce4a6eac25529e37f8",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M168",
+        "pr": 124,
+        "head": "6acf7d47b38d63c14d94ca1e833ab69b431ff221",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M169",
+        "pr": 125,
+        "head": "69165a0fc4a2d8353279724a8f98fd7869412965",
+        "ci": "all-workflows-success",
+        "touched": false
+      },
+      {
+        "mission": "M170",
+        "pr": 126,
+        "head": "d99d2975d5cb36185e4fc7e9b44faa9ca84afc26",
+        "ci": "fast-and-milestone-success-engine-in-progress",
+        "touched": false
+      },
+      {
+        "mission": "M171",
+        "pr": 127,
+        "head": "386ba106988726251594f6bb4927bbf0692043ab",
+        "ci": "fast-and-milestone-success-engine-in-progress",
+        "touched": false
       }
     ]
   },
@@ -2739,122 +2940,72 @@
         "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
       ],
       "releasedAt": "2026-11-14T03:39:10-03:00"
+    },
+    {
+      "mission": "M164",
+      "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+      "pr": 120,
+      "head": "403b3f671d9336c8695fd196103768f3422ad324",
+      "files": [
+        "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
+      ],
+      "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
+      "releasedAt": "2026-11-14T09:18:10-03:00"
+    },
+    {
+      "mission": "M172",
+      "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
+      "pr": 128,
+      "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+      "files": [
+        "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
+      ],
+      "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
+      "releasedAt": "2026-11-14T09:18:10-03:00"
+    },
+    {
+      "mission": "M173",
+      "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
+      "pr": 129,
+      "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+      "files": [
+        "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+      ],
+      "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
+      "releasedAt": "2026-11-14T09:18:10-03:00"
     }
   ],
   "activeRun": {
-    "runId": "work-20261114T032516-0300",
+    "runId": "work-20261114T083019-0300",
     "owner": "Work",
-    "priority": "P1 — Mirror Force, Dark Hole e Bottomless Trap Hole: ampliar cobertura comportamental 2v2 sem tocar runtime reservado.",
-    "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadBeforeClaim": "cab1c0a48ef4653de66bcd70ea63b2e967a709ad",
-    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
-    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "reservedFiles": [
-      "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
-      "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
-      "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
-    ],
-    "state": "completed; released-to-auxiliary-monitor-ci",
-    "handoffsRequested": {
-      "m61": 6873097667,
-      "m118": 6873098031,
-      "m151": 6873098406
-    },
-    "startedAt": "2026-11-14T03:25:16-03:00",
-    "endedAt": "2026-11-14T03:39:10-03:00",
-    "sharedHeadAfterClaim": "9a58808dc5ccaffd0bdce4827022f37cde000466",
-    "sharedHeadAfterScopeExtension": "b21ea902e5b34825712e383ebba7972355c5337e",
-    "sharedHeadAfterCheckpoint": "5309ebe7e82e7687703a3f7061aac014941dc647",
-    "sharedHeadBeforeFinalStateUpdate": "5309ebe7e82e7687703a3f7061aac014941dc647",
-    "releasedFiles": [
-      "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
-      "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
-      "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
-    ],
+    "state": "released-to-auxiliary-monitor-ci",
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadBeforeRelease": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
+    "startedAt": "2026-11-14T08:30:19-03:00",
+    "endedAt": "2026-11-14T09:18:10-03:00",
     "workBranches": [
       {
-        "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
-        "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
-        "pr": 117,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-        "scope": [
-          "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43567000920,
-          "milestone1000": "success",
-          "milestoneRunId": 43567000950,
-          "check": "success",
-          "npmTest": "success",
-          "engineValidation": "in_progress",
-          "engineRunId": 43567000915,
-          "extendedSoak": "in_progress"
-        }
+        "mission": "M164",
+        "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+        "head": "403b3f671d9336c8695fd196103768f3422ad324",
+        "pr": 120
       },
       {
-        "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
-        "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
-        "pr": 118,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-        "scope": [
-          "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43566724675,
-          "milestone1000": "success",
-          "milestoneRunId": 43566724677,
-          "check": "success",
-          "npmTest": "success",
-          "engineValidation": "in_progress",
-          "engineRunId": 43566724653,
-          "extendedSoak": "in_progress"
-        }
+        "mission": "M172",
+        "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
+        "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+        "pr": 128
       },
       {
-        "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
-        "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
-        "pr": 119,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-        "scope": [
-          "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43567105635,
-          "milestone1000": "success",
-          "milestoneRunId": 43567105750,
-          "check": "success",
-          "npmTest": "success",
-          "engineValidation": "in_progress",
-          "engineRunId": 43567105671,
-          "extendedSoak": "in_progress"
-        }
+        "mission": "M173",
+        "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
+        "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+        "pr": 129
       }
     ],
-    "pullRequests": [
-      117,
-      118,
-      119
-    ],
-    "catalog": {
-      "sharedCertificates": 969,
-      "developmentCertificates": 1014,
-      "delta": 45,
-      "remainingTo1000": 31,
-      "newCertificates": 0
-    },
-    "reservationReleased": true,
-    "nextWorkAt": "2026-11-14T08:30:00-03:00"
+    "reservationReleased": true
   },
-  "nextWorkAt": "2026-11-14T08:30:00-03:00",
+  "nextWorkAt": "2026-11-14T13:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -3983,8 +4134,8 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
   "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
   "sharedHeadAfterCheckpoint": "5309ebe7e82e7687703a3f7061aac014941dc647",
-  "sharedHeadBeforeStateUpdate": "5309ebe7e82e7687703a3f7061aac014941dc647",
-  "endedAt": "2026-11-14T03:39:10-03:00",
+  "sharedHeadBeforeStateUpdate": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
+  "endedAt": "2026-11-14T09:18:10-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -4162,10 +4313,52 @@
           "engineRunId": 43567105671,
           "extendedSoak": "in_progress"
         }
+      },
+      {
+        "mission": "M164",
+        "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+        "pr": 120,
+        "head": "403b3f671d9336c8695fd196103768f3422ad324",
+        "files": [
+          "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
+        "releasedAt": "2026-11-14T09:18:10-03:00"
+      },
+      {
+        "mission": "M172",
+        "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
+        "pr": 128,
+        "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+        "files": [
+          "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
+        "releasedAt": "2026-11-14T09:18:10-03:00"
+      },
+      {
+        "mission": "M173",
+        "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
+        "pr": 129,
+        "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+        "files": [
+          "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
+        "releasedAt": "2026-11-14T09:18:10-03:00"
       }
     ],
-    "allowed": "Auxiliar pode monitorar CI das PRs #112–#119 e corrigir somente os arquivos de teste explicitamente liberados M156–M163 nas próprias branches; preservar logs e devolver checkpoint.",
-    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, M153/runtime reservado, branches de terceiros, catálogo, certificados, bancos ou inventários; não fazer merge ou deploy."
+    "allowed": "Auxiliary may monitor and fix only tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs (PR #120), tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs (PR #128), and tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs (PR #129) in their respective branches. No runtime, catalog, certificate, player-data, merge or deployment changes.",
+    "forbidden": [
+      "M61/PR #17 reserved runtime files",
+      "M118/PR #74",
+      "M151/PR #107",
+      "M153/PR #109",
+      "all third-party reservations",
+      "merge/deploy",
+      "inventory grants"
+    ],
+    "updatedAt": "2026-11-14T09:18:10-03:00"
   },
   "scopeReleasedToAuxiliary": {
     "branches": [
@@ -4335,10 +4528,52 @@
           "engineRunId": 43567105671,
           "extendedSoak": "in_progress"
         }
+      },
+      {
+        "mission": "M164",
+        "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+        "pr": 120,
+        "head": "403b3f671d9336c8695fd196103768f3422ad324",
+        "files": [
+          "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
+        "releasedAt": "2026-11-14T09:18:10-03:00"
+      },
+      {
+        "mission": "M172",
+        "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
+        "pr": 128,
+        "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+        "files": [
+          "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
+        "releasedAt": "2026-11-14T09:18:10-03:00"
+      },
+      {
+        "mission": "M173",
+        "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
+        "pr": 129,
+        "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+        "files": [
+          "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
+        "releasedAt": "2026-11-14T09:18:10-03:00"
       }
     ],
-    "allowed": "Auxiliar pode monitorar CI das PRs #112–#119 e corrigir somente os arquivos de teste explicitamente liberados M156–M163 nas próprias branches; preservar logs e devolver checkpoint.",
-    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, M153/runtime reservado, branches de terceiros, catálogo, certificados, bancos ou inventários; não fazer merge ou deploy."
+    "allowed": "Auxiliary may monitor and fix only tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs (PR #120), tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs (PR #128), and tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs (PR #129) in their respective branches. No runtime, catalog, certificate, player-data, merge or deployment changes.",
+    "forbidden": [
+      "M61/PR #17 reserved runtime files",
+      "M118/PR #74",
+      "M151/PR #107",
+      "M153/PR #109",
+      "all third-party reservations",
+      "merge/deploy",
+      "inventory grants"
+    ],
+    "updatedAt": "2026-11-14T09:18:10-03:00"
   },
   "lastCoordinationRefreshAt": "2026-11-14T03:39:10-03:00",
   "m151HandoffRequest": {
@@ -4363,7 +4598,7 @@
     "owner": "Work",
     "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs.",
     "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
-    "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "head": "403b3f671d9336c8695fd196103768f3422ad324",
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
@@ -4371,9 +4606,63 @@
       "coordination/state.json",
       "coordination/runs/work-20261114T083019-0300.json"
     ],
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-14T08:30:19-03:00",
-    "lastActivityAt": "2026-11-14T08:30:19-03:00"
+    "lastActivityAt": "2026-11-14T09:18:10-03:00",
+    "releasedAt": "2026-11-14T09:18:10-03:00",
+    "completedBranches": [
+      {
+        "mission": "M164",
+        "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+        "head": "403b3f671d9336c8695fd196103768f3422ad324",
+        "pr": 120
+      },
+      {
+        "mission": "M172",
+        "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
+        "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+        "pr": 128
+      },
+      {
+        "mission": "M173",
+        "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
+        "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+        "pr": 129
+      }
+    ],
+    "releasedFiles": [
+      "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs",
+      "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs",
+      "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+    ]
   },
-  "sharedHeadAtStart": "ec8cabc985b0368576fb8527429251bbc1aa4e7f"
+  "sharedHeadAtStart": "ec8cabc985b0368576fb8527429251bbc1aa4e7f",
+  "partialHandoffRequest": {
+    "pr": 17,
+    "commentId": 6877118689,
+    "file": "src/monsterEffects.ts",
+    "mission": "M174 Atomic Firefly (87340664 / Konami CID 5966)",
+    "status": "awaiting-explicit-release",
+    "requestedAt": "2026-11-14T09:18:10-03:00",
+    "scope": "partial file-only handoff; no changes until release"
+  },
+  "lastCheckpointAt": "2026-11-14T09:18:10-03:00",
+  "reservationReleased": true,
+  "expectedHeadForCoordinationCommit": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
+  "lastRunSummary": {
+    "runId": "work-20261114T083019-0300",
+    "priority": "M164 global backrow 2v2 -> M172 Trap Hole summon/flip threshold -> M173 Card Destruction simultaneous team deck-out; next: monitor CI and await partial M61 handoff for Atomic Firefly",
+    "endedAt": "2026-11-14T09:18:10-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadBeforeCoordinationCommit": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
+    "prs": [
+      120,
+      128,
+      129
+    ],
+    "newCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false
+  }
 }

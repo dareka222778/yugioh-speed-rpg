@@ -2,7 +2,7 @@
   "runId": "work-20261114T083019-0300",
   "owner": "Work",
   "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs.",
-  "state": "active",
+  "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-14T08:30:19-03:00",
   "timezone": "America/Sao_Paulo",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
@@ -34,8 +34,304 @@
     "remainingToSharedTarget": 31
   },
   "limits": [
-    "No runtime or catalogue changes planned",
-    "No inventory grants or persistent DB writes",
-    "No merge/deploy/live Discord claims"
-  ]
+    "No runtime changes in this run",
+    "No catalog or certificate admission",
+    "No inventory grants or persistent database changes",
+    "No merge or deploy",
+    "No live Discord validation",
+    "M61/M118/M151/M153 reservations untouched"
+  ],
+  "endedAt": "2026-11-14T09:18:10-03:00",
+  "duration": {
+    "startedAt": "2026-11-14T08:30:19-03:00",
+    "endedAt": "2026-11-14T09:18:10-03:00",
+    "elapsedWallMinutes": 48,
+    "effectiveWorkMinutesMeasured": false,
+    "minimum60MinutesMet": false,
+    "note": "Do not count CI waiting as development; 60 minutes of effective work was not verified."
+  },
+  "sharedHeadBeforeRelease": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
+  "expectedHeadForCoordinationCommit": "cb961e34515e4fc8a21eda2695438ddba34bfcd7",
+  "workBranchHeadAtRelease": "403b3f671d9336c8695fd196103768f3422ad324",
+  "additionalWorkBranches": [
+    {
+      "mission": "M172",
+      "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
+      "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+      "previousHeads": [
+        "e4738d7c7be5c076bee67740f372e4faaf517da7",
+        "883a34b6dbfaabd216a43d264015e475d33cd4dd"
+      ],
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0b9f1e4a2b9d1c5f1a6c7d8e9f0a1b2c3d4e",
+      "pr": 128,
+      "files": [
+        "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
+      ],
+      "status": "implementation-published-latest-head-CI-not-yet-observed",
+      "ci": {
+        "previousHeadCardBatchFast": "success",
+        "previousHeadMilestone1000": "success",
+        "previousHeadEngineValidation": "in-progress",
+        "latestHead": "pending"
+      }
+    },
+    {
+      "mission": "M173",
+      "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
+      "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+      "initialHead": "4ea5815a762f49552916d7d2938756578f24041b",
+      "baseBranch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+      "baseSha": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+      "pr": 129,
+      "files": [
+        "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+      ],
+      "status": "implementation-corrected-head-CI-in-progress",
+      "ci": {
+        "initialHeadEngineValidation": "failed-one-assertion",
+        "correctedHeadCardBatchFast": "success",
+        "correctedHeadMilestone1000": "success",
+        "correctedHeadEngineValidation": "in-progress",
+        "correctedHeadNpmTest": "passed-before-soak"
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "mission": "M164",
+      "status": "complete",
+      "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+      "head": "403b3f671d9336c8695fd196103768f3422ad324",
+      "pr": 120,
+      "changes": [
+        "global backrow team-scope regression tests"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success",
+        "extendedSoak": "success"
+      }
+    },
+    {
+      "mission": "M172",
+      "status": "implementation-published-latest-head-CI-pending",
+      "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
+      "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+      "pr": 128,
+      "changes": [
+        "Trap Hole 1000 ATK exact threshold",
+        "Normal Summon and Flip Summon response",
+        "below-threshold and Special Summon exclusions",
+        "same-turn Set restriction",
+        "inactive partner-owned Trap activation"
+      ],
+      "ci": {
+        "previousHeadCardBatchFast": "success",
+        "previousHeadMilestone1000": "success",
+        "previousHeadEngineValidation": "in-progress",
+        "latestHead": "pending"
+      }
+    },
+    {
+      "mission": "M173",
+      "status": "implementation-corrected-head-CI-in-progress",
+      "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
+      "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+      "pr": 129,
+      "baseBranch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+      "changes": [
+        "four physical hands",
+        "per-seat Deck draws",
+        "both teams fail to redraw -> draw",
+        "private hand UIDs and physical card conservation"
+      ],
+      "initialFailure": "first test counted activating Card Destruction among seat 0 cards to redraw; corrected to exclude the activating Spell",
+      "ci": {
+        "initialHeadEngineValidation": "failed-one-assertion",
+        "correctedHeadCardBatchFast": "success",
+        "correctedHeadMilestone1000": "success",
+        "correctedHeadEngineValidation": "in-progress",
+        "correctedHeadNpmTest": "passed-before-soak"
+      }
+    }
+  ],
+  "prs": [
+    {
+      "number": 120,
+      "head": "403b3f671d9336c8695fd196103768f3422ad324",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "draft": true
+    },
+    {
+      "number": 128,
+      "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "draft": true
+    },
+    {
+      "number": 129,
+      "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+      "base": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+      "draft": true
+    }
+  ],
+  "parallelPRs": [
+    {
+      "mission": "M165",
+      "pr": 121,
+      "head": "daea004611e5bcea55a03e7c80e5b96a81655226",
+      "ci": "all-workflows-success",
+      "touched": false
+    },
+    {
+      "mission": "M166",
+      "pr": 122,
+      "head": "d6d6c38e5e246427c27ab878e94bc67625df51ea",
+      "ci": "all-workflows-success",
+      "touched": false
+    },
+    {
+      "mission": "M167",
+      "pr": 123,
+      "head": "38b1f771088623b9d8ee80ce4a6eac25529e37f8",
+      "ci": "all-workflows-success",
+      "touched": false
+    },
+    {
+      "mission": "M168",
+      "pr": 124,
+      "head": "6acf7d47b38d63c14d94ca1e833ab69b431ff221",
+      "ci": "all-workflows-success",
+      "touched": false
+    },
+    {
+      "mission": "M169",
+      "pr": 125,
+      "head": "69165a0fc4a2d8353279724a8f98fd7869412965",
+      "ci": "all-workflows-success",
+      "touched": false
+    },
+    {
+      "mission": "M170",
+      "pr": 126,
+      "head": "d99d2975d5cb36185e4fc7e9b44faa9ca84afc26",
+      "ci": "fast-and-milestone-success-engine-in-progress",
+      "touched": false
+    },
+    {
+      "mission": "M171",
+      "pr": 127,
+      "head": "386ba106988726251594f6bb4927bbf0692043ab",
+      "ci": "fast-and-milestone-success-engine-in-progress",
+      "touched": false
+    }
+  ],
+  "catalogAtEnd": {
+    "sharedCertificates": 969,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "historicalUnique": 1962,
+    "pendingHistorical": 993,
+    "identityBlocked": 27,
+    "fullyUnreviewed": 966,
+    "triageQueue": 31,
+    "automaticCertifications": 0,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "handoffRequests": [
+    {
+      "pr": 17,
+      "commentId": 6877118689,
+      "file": "src/monsterEffects.ts",
+      "mission": "Atomic Firefly",
+      "status": "awaiting-explicit-release"
+    },
+    {
+      "pr": 17,
+      "status": "existing M61 full handoff still unanswered"
+    },
+    {
+      "pr": 74,
+      "status": "M118 handoff unanswered"
+    },
+    {
+      "pr": 107,
+      "status": "M151 handoff unanswered"
+    }
+  ],
+  "production": {
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "merge": false,
+    "deploy": false,
+    "mainDeploymentWorkflowFound": false,
+    "sharedDeploymentWorkflowFound": false,
+    "hosting": "unverified",
+    "discordLive": false
+  },
+  "scopeReleasedToAuxiliary": {
+    "branches": [
+      {
+        "mission": "M164",
+        "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+        "pr": 120,
+        "head": "403b3f671d9336c8695fd196103768f3422ad324",
+        "files": [
+          "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations."
+      },
+      {
+        "mission": "M172",
+        "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
+        "pr": 128,
+        "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+        "files": [
+          "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations."
+      },
+      {
+        "mission": "M173",
+        "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
+        "pr": 129,
+        "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+        "files": [
+          "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+        ],
+        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations."
+      }
+    ],
+    "allowed": "Monitor CI and fix only the three listed test files on their respective branches.",
+    "forbidden": [
+      "M61",
+      "M118",
+      "M151",
+      "M153",
+      "runtime/catalog/certificate changes",
+      "merge/deploy",
+      "inventory grants"
+    ]
+  },
+  "reservationReleased": true,
+  "nextTask": "Auxiliary monitors PR #120/#128/#129 and may fix only their three test files. Work next: verify final CI on latest heads; obtain explicit M61 release for src/monsterEffects.ts before proposing Atomic Firefly through catalog/proposed; otherwise continue independent 2v2 tests. Do not alter M118/M151/M153 reservations.",
+  "nextWindow": "2026-11-14T13:30:00-03:00",
+  "partialHandoffRequest": {
+    "pr": 17,
+    "commentId": 6877118689,
+    "file": "src/monsterEffects.ts",
+    "mission": "M174 Atomic Firefly (87340664 / Konami CID 5966)",
+    "status": "awaiting-explicit-release",
+    "requestedAt": "2026-11-14T09:18:10-03:00",
+    "scope": "partial file-only handoff; no changes until release"
+  },
+  "newCertifications": 0,
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "effectiveWorkMinutesMeasured": false,
+  "minimum60MinutesMet": false
 }
