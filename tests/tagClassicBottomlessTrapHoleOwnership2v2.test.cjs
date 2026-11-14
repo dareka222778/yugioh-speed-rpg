@@ -156,11 +156,7 @@ test('Bottomless Trap Hole cannot activate against a Normal Summon below 1500 AT
   );
   assert.ok(normalSummon);
   state=tag.stepTagDuel(state,member(0),normalSummon);
-  assert.equal(state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(state).id,member(1));
-  assert.ok(!tag.tagActions(state,member(1)).some(action=>action.kind==='trap'&&action.card===trap.uid),
-    'the 1499-or-less ATK summon must not satisfy Bottomless Trap Hole');
-  state=settle(state);
+  assert.equal(state.core.phase,'main','an ineligible summon resolves without opening a response chain');
   assert.ok(state.core.players[0].monsters.some(card=>card.uid===summon.uid),
     'an ineligible summoned monster remains on the field');
   assert.ok(!state.core.players[0].banished.some(card=>card.uid===summon.uid));
