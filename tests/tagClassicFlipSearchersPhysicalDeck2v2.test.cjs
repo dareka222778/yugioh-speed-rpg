@@ -6,7 +6,7 @@ const {getPlayableCard,getEffect}=require('../dist/effectRegistry');
 const {getMonsterEffect}=require('../dist/monsterEffects');
 
 const IRON_BLACKSMITH='73431236';
-const ARSENAL_SUMMONER='94163677';
+const ARSENAL_SUMMONER='85489096';
 const CYCLON_LASER='05494820';
 const GUARDIAN_ELMA='74367458';
 const CELTIC_GUARDIAN='91152256';
@@ -16,6 +16,8 @@ assert.equal(getMonsterEffect(IRON_BLACKSMITH)?.trigger,'flip');
 assert.equal(getMonsterEffect(ARSENAL_SUMMONER)?.trigger,'flip');
 assert.equal(getMonsterEffect(IRON_BLACKSMITH)?.operation.kind,'searchFiltered');
 assert.equal(getMonsterEffect(ARSENAL_SUMMONER)?.operation.kind,'searchFiltered');
+assert.equal(getMonsterEffect(IRON_BLACKSMITH)?.activation?.policy,'mandatory');
+assert.equal(getMonsterEffect(ARSENAL_SUMMONER)?.activation?.policy,'mandatory');
 assert.equal(getEffect(CYCLON_LASER)?.kind,'equip');
 assert.equal(getPlayableCard(GUARDIAN_ELMA)?.englishName,'Guardian Elma');
 assert.ok(getPlayableCard(CELTIC_GUARDIAN),'Celtic Guardian must be available as a negative search candidate');
@@ -93,15 +95,11 @@ function flip(state,source){
   assert.equal(JSON.stringify(state),unchanged,'a rejected inactive-partner Flip Summon must not mutate the duel');
   return tag.stepTagDuel(state,member(0),action);
 }
-function resolveOptionalSearch(state,source,targetId,excludedId){
-  const optional=tag.tagActions(state,member(0)).filter(action=>action.kind==='choose').map(action=>action.target);
-  assert.ok(optional.includes(source.uid),'the optional Flip trigger must include the physical source card');
-  assert.ok(optional.includes('__skip__'),'the optional Flip trigger must allow the player to decline');
-  state=tag.stepTagDuel(state,member(0),{kind:'choose',target:source.uid});
+function resolveMandatorySearch(state,targetId,excludedId){
   const choices=tag.tagActions(state,member(0)).filter(action=>action.kind==='choose').map(action=>action.target);
   const target=holder(state,0).deck.find(card=>card.id===targetId);
   assert.ok(target,'the valid search target must remain in the active physical Deck');
-  assert.ok(choices.includes(target.uid),'the filtered Flip search must include the valid target');
+  assert.ok(choices.includes(target.uid),'the mandatory filtered Flip search must include the valid target');
   if(excludedId){
     const excluded=holder(state,0).deck.filter(card=>card.id===excludedId);
     assert.ok(excluded.length>0,'the negative control must remain in the active Deck');
@@ -119,7 +117,7 @@ test('Iron Blacksmith Kotetsu searches an Equip Spell from the active physical D
   ensureInDeck(state,0,CYCLON_LASER);
   ensureInDeck(state,0,FISSURE);
   state=flip(state,source);
-  const result=resolveOptionalSearch(state,source,CYCLON_LASER,FISSURE);
+  const result=resolveMandatorySearch(state,CYCLON_LASER,FISSURE);
   state=result.state;
   assert.match(result.target.uid,/^m0:/,'the Equip Spell is searched from active physical seat 0 Deck');
   assert.ok(tag.tagMemberHand(state,member(0)).some(card=>card.uid===result.target.uid&&card.id===CYCLON_LASER),
@@ -138,7 +136,7 @@ test('Arsenal Summoner searches a valid Guardian card but excludes Celtic Guardi
   ensureInDeck(state,0,GUARDIAN_ELMA);
   ensureInDeck(state,0,CELTIC_GUARDIAN);
   state=flip(state,source);
-  const result=resolveOptionalSearch(state,source,GUARDIAN_ELMA,CELTIC_GUARDIAN);
+  const result=resolveMandatorySearch(state,GUARDIAN_ELMA,CELTIC_GUARDIAN);
   state=result.state;
   assert.match(result.target.uid,/^m0:/,'Guardian Elma is searched from active physical seat 0 Deck');
   assert.ok(tag.tagMemberHand(state,member(0)).some(card=>card.uid===result.target.uid&&card.id===GUARDIAN_ELMA));
