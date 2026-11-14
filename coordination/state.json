@@ -1,18 +1,17 @@
 {
-  "runId": "work-20261113T175911-0300",
+  "runId": "work-20261113T223304-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "completed; released-to-auxiliary-monitor-ci",
-  "startedAt": "2026-11-13T17:59:11-03:00",
-  "lastActivityAt": "2026-11-13T18:05:29-03:00",
+  "state": "active",
+  "startedAt": "2026-11-13T22:33:04-03:00",
+  "lastActivityAt": "2026-11-13T22:33:04-03:00",
   "nextScheduledAt": "2026-11-13T22:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs",
-    "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs",
+    "tests/tagClassicEconomicChoiceSpells2v2.test.cjs",
     "coordination/state.json",
-    "coordination/runs/work-20261113T175911-0300.json"
+    "coordination/runs/work-20261113T223304-0300.json"
   ],
   "lastCheckpoint": "coordination/runs/work-20261113T175911-0300.json",
   "previousRunId": "work-20261113T134424-0300",
@@ -1050,15 +1049,26 @@
         "milestone1000": "success",
         "milestoneRunId": 43507071960
       }
+    },
+    {
+      "branch": "feat/work-m158-economic-spells-2v2-20261113",
+      "head": null,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+      ],
+      "state": "active",
+      "priority": "P1 — ampliar a validação comportamental 2v2 da família de Magias econômicas: Red Medicine, Mooyan Curry e Poison of the Old Man; conferir escolha de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos e LP compartilhados."
     }
   ],
   "handoffRequest": {
     "target": "PR #17 / M61",
     "status": "awaiting-response",
-    "commentId": 6859057163,
+    "commentId": 6869460162,
     "noResponse": true,
-    "lastCommentId": 6859057163,
-    "lastRequestedAt": "2026-11-13T13:40:08-03:00"
+    "lastCommentId": 6869460162,
+    "lastRequestedAt": "2026-11-13T22:33:04-03:00"
   },
   "handoff": {
     "to": "auxiliary",
@@ -2062,9 +2072,9 @@
     "minimum60MinutesConfirmed": false,
     "note": "Janela observada inferior a 60 minutos; o trabalho de implementação foi realizado, mas não há medição confiável de 60 minutos efetivos. Espera de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar: monitorar CI das PRs #112 e #113; corrigir apenas os respectivos testes nas branches M156/M157 se necessário. Work: na próxima janela, revalidar CI, solicitar handoff M61/M118/M151 e, com liberação explícita, corrigir o filtro de alvos em trapActions e a falha do ciclo de Fusão.",
+  "nextTask": "Work: concluir testes 2v2 das Magias econômicas e verificar CI. Auxiliar: continuar somente as reservas já liberadas M156/M157; não tocar M158 nem M61/M118/M151.",
   "sharedHeadBeforeRelease": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
-  "priority": "P1 — ampliar regressões comportamentais 2v2 de armadilhas de resposta e encadeamento: Sakuretsu Armor destrói somente o atacante exato; Book of Moon protege o atacante físico do parceiro sem vazar mãos nem UIDs.",
+  "priority": "P1 — ampliar a validação comportamental 2v2 da família de Magias econômicas: Red Medicine, Mooyan Curry e Poison of the Old Man; conferir escolha de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos e LP compartilhados.",
   "sharedHeadBeforeClaim": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
   "releasedOwnReservation": true,
   "parallelWorkObserved": {
@@ -2411,33 +2421,23 @@
     }
   ],
   "activeRun": {
-    "id": "work-20261113T175911-0300",
+    "id": "work-20261113T223304-0300",
     "owner": "Work",
-    "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+    "branch": "feat/work-m158-economic-spells-2v2-20261113",
     "base": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
-      "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
+      "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
     ],
-    "state": "completed; released-to-auxiliary-monitor-ci",
-    "startedAt": "2026-11-13T17:59:11-03:00",
-    "lastActivityAt": "2026-11-13T18:05:29-03:00",
-    "completedAt": "2026-11-13T18:05:29-03:00",
-    "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
-    "pr": 112,
-    "priority": "P1 — ampliar regressões comportamentais 2v2 de armadilhas de resposta e encadeamento: Sakuretsu Armor destrói somente o atacante exato; Book of Moon protege o atacante físico do parceiro sem vazar mãos nem UIDs.",
-    "additionalBranches": [
-      {
-        "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
-        "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
-        "pr": 113,
-        "reservedFiles": [
-          "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
-        ]
-      }
-    ]
+    "state": "active",
+    "startedAt": "2026-11-13T22:33:04-03:00",
+    "lastActivityAt": "2026-11-13T22:33:04-03:00",
+    "completedAt": null,
+    "head": null,
+    "pr": null,
+    "priority": "P1 — ampliar a validação comportamental 2v2 da família de Magias econômicas: Red Medicine, Mooyan Curry e Poison of the Old Man; conferir escolha de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos e LP compartilhados."
   },
-  "nextWorkAt": "2026-11-13T22:30:00-03:00",
+  "nextWorkAt": "2026-11-14T03:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -3571,14 +3571,10 @@
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
-    "commentId": 6859057742,
+    "commentId": 6869460652,
     "noResponse": true,
-    "blockedFiles": [
-      "src/tagDuel.ts",
-      "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
-    ],
-    "lastCommentId": 6859057742,
-    "lastRequestedAt": "2026-11-13T13:40:08-03:00"
+    "lastCommentId": 6869460652,
+    "lastRequestedAt": "2026-11-13T22:33:04-03:00"
   },
   "m120ValidationComment": 6858001163,
   "releaseToAuxiliary": {
@@ -3665,5 +3661,13 @@
     "allowed": "Auxiliar pode monitorar CI das PRs #112 e #113 e corrigir somente os respectivos arquivos de teste nas próprias branches; registrar o resultado e devolver checkpoint.",
     "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime, catálogo, certificados, banco/inventários; não fazer merge ou deploy."
   },
-  "lastCoordinationRefreshAt": "2026-11-13T18:05:29-03:00"
+  "lastCoordinationRefreshAt": "2026-11-13T22:33:04-03:00",
+  "m151HandoffRequest": {
+    "target": "PR #107 / M151",
+    "status": "awaiting-response",
+    "commentId": 6869461071,
+    "noResponse": true,
+    "lastCommentId": 6869461071,
+    "lastRequestedAt": "2026-11-13T22:33:04-03:00"
+  }
 }
