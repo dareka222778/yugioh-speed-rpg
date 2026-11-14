@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-14T03:25:16-03:00",
-  "lastActivityAt": "2026-11-14T03:25:16-03:00",
+  "lastActivityAt": "2026-11-14T03:33:00-03:00",
   "nextScheduledAt": "2026-11-14T08:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -12,7 +12,8 @@
     "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
     "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
     "coordination/state.json",
-    "coordination/runs/work-20261114T032516-0300.json"
+    "coordination/runs/work-20261114T032516-0300.json",
+    "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
   "previousRunId": "work-20261113T223304-0300",
@@ -2635,7 +2636,8 @@
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
       "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
-      "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+      "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
+      "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
     ],
     "state": "active; isolated-test-only",
     "handoffsRequested": {
