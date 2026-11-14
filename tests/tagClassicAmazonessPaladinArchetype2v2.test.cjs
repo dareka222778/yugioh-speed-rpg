@@ -3,16 +3,22 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const engine=require('../dist/duelEngine');
-const {getPlayableCard}=require('../dist/effectRegistry');
-const {getMonsterEffect}=require('../dist/monsterEffects');
+const {getPlayableCard,getEffect,engineCard,getCardStatus}=require('../dist/effectRegistry');
+const {getMonsterEffect,getMonsterDefinition}=require('../dist/monsterEffects');
+const {definitionFingerprint}=require('../dist/cardRegistry');
+const {getEffectModel}=require('../dist/effectModels');
 
 const AMAZONESS_PALADIN='47480070';
 const AMAZONESS_ARCHER='91869203';
-assert.equal(getPlayableCard(AMAZONESS_PALADIN)?.englishName,'Amazoness Paladin');
-assert.equal(getPlayableCard(AMAZONESS_ARCHER)?.englishName,'Amazoness Archer');
-assert.ok(getPlayableCard(AMAZONESS_PALADIN)?.archetypes?.includes('Amazoness'),
+assert.equal(engineCard(AMAZONESS_PALADIN)?.englishName,'Amazoness Paladin');
+assert.equal(engineCard(AMAZONESS_ARCHER)?.englishName,'Amazoness Archer');
+for(const id of [AMAZONESS_PALADIN,AMAZONESS_ARCHER]){
+  const fingerprint=definitionFingerprint(engineCard(id),getEffect(id),{model:getEffectModel,monster:getMonsterDefinition});
+  console.log('M204_CARD_FINGERPRINT',id,fingerprint);
+}
+assert.ok(engineCard(AMAZONESS_PALADIN)?.archetypes?.includes('Amazoness'),
   'Amazoness Paladin must expose its official archetype to continuous filters');
-assert.ok(getPlayableCard(AMAZONESS_ARCHER)?.archetypes?.includes('Amazoness'),
+assert.ok(engineCard(AMAZONESS_ARCHER)?.archetypes?.includes('Amazoness'),
   'Amazoness Archer must expose its official archetype to continuous filters');
 assert.equal(getMonsterEffect(AMAZONESS_PALADIN)?.trigger,'continuous');
 assert.equal(getMonsterEffect(AMAZONESS_PALADIN)?.operation.kind,'continuous');
