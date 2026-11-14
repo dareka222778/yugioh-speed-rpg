@@ -1,22 +1,21 @@
 {
-  "runId": "work-20261113T223304-0300",
+  "runId": "work-20261114T032516-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "completed; released-to-auxiliary-monitor-ci",
-  "startedAt": "2026-11-13T22:33:04-03:00",
-  "lastActivityAt": "2026-11-13T22:44:10-03:00",
-  "nextScheduledAt": "2026-11-14T03:30:00-03:00",
+  "state": "active",
+  "startedAt": "2026-11-14T03:25:16-03:00",
+  "lastActivityAt": "2026-11-14T03:25:16-03:00",
+  "nextScheduledAt": "2026-11-14T08:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagClassicEconomicChoiceSpells2v2.test.cjs",
-    "tests/tagEconomicSpellDiscordMenu.test.cjs",
-    "tests/tagEconomicSpellDiscordInteraction.test.cjs",
+    "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
+    "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
     "coordination/state.json",
-    "coordination/runs/work-20261113T223304-0300.json"
+    "coordination/runs/work-20261114T032516-0300.json"
   ],
   "lastCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
-  "previousRunId": "work-20261113T175911-0300",
+  "previousRunId": "work-20261113T223304-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -2627,35 +2626,23 @@
     }
   ],
   "activeRun": {
-    "id": "work-20261113T223304-0300",
+    "runId": "work-20261114T032516-0300",
     "owner": "Work",
-    "branch": "feat/work-m158-economic-spells-2v2-20261113",
-    "base": "feat/work-m71-ci-branch-routing-20261112",
+    "priority": "P1 — ampliar a cobertura comportamental 2v2 para destruição de campo por ataque (Mirror Force) e destruição global (Dark Hole), validando equipes, propriedade física, privacidade, resposta e conservação dos 80 UIDs; sem tocar runtime reservado.",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadBeforeClaim": "cab1c0a48ef4653de66bcd70ea63b2e967a709ad",
+    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
-      "tests/tagClassicEconomicChoiceSpells2v2.test.cjs",
-      "tests/tagEconomicSpellDiscordMenu.test.cjs",
-      "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+      "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
+      "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
     ],
-    "state": "completed; released-to-auxiliary-monitor-ci",
-    "startedAt": "2026-11-13T22:33:04-03:00",
-    "lastActivityAt": "2026-11-13T22:44:10-03:00",
-    "completedAt": "2026-11-13T22:44:10-03:00",
-    "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
-    "pr": 114,
-    "additionalBranches": [
-      {
-        "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
-        "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
-        "pr": 115
-      },
-      {
-        "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
-        "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
-        "pr": 116
-      }
-    ],
-    "priority": "P1 — validar a família de Magias econômicas no duelo 2v2 e fechar a cadeia de integração Discord: escolhas de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos, payloads e idempotência de interações."
+    "state": "active; isolated-test-only",
+    "handoffsRequested": {
+      "m61": 6873097667,
+      "m118": 6873098031,
+      "m151": 6873098406
+    }
   },
   "nextWorkAt": "2026-11-14T03:30:00-03:00",
   "parallelRuns": [
@@ -3786,7 +3773,7 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
   "lastParallelActivityAt": "2026-11-13T22:44:10-03:00",
   "sharedHeadAfterCheckpoint": null,
-  "sharedHeadBeforeStateUpdate": "cc5e4fc4be7406255bddaa908c5e94a4f85a486d",
+  "sharedHeadBeforeStateUpdate": "cab1c0a48ef4653de66bcd70ea63b2e967a709ad",
   "endedAt": "2026-11-13T22:44:10-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
