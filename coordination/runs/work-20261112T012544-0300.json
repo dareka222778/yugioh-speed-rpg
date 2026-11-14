@@ -1,0 +1,193 @@
+{
+  "runId": "work-20261112T012544-0300",
+  "startedAt": "2026-11-12T01:25:44-03:00",
+  "lastActivityAt": "2026-11-12T01:48:44-03:00",
+  "state": "active",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHead": "b7d80e96cfebd39af88f28f45920e0d7eb72d1da",
+  "workBranches": [
+    {
+      "branch": "feat/work-m63-m60-research-20261112",
+      "head": "45beaaa14c20bcb4fc0baa2845005e785b7b5758",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "pr": 19,
+      "scope": [
+        "docs/evidence/m60-flip-cycle-research.json",
+        "tests/m60FlipCycleResearch.test.cjs"
+      ]
+    },
+    {
+      "branch": "feat/work-m64-catalog-delta-audit-20261112",
+      "head": "769bbb8dcb0bc056df1131a4994ff0a6ff1a25d8",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "pr": 20,
+      "scope": [
+        "scripts/audit-catalog-integration-delta.cjs",
+        "tests/catalogIntegrationDelta.test.cjs",
+        "package.json"
+      ]
+    }
+  ],
+  "catalog": {
+    "shared": {
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+      "cards": 969,
+      "certificates": 969
+    },
+    "development": {
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52",
+      "cards": 1014,
+      "certificates": 1014
+    },
+    "delta": {
+      "added": 45,
+      "removed": 0,
+      "changedCommonCards": 0,
+      "changedCommonEffects": 0,
+      "changedCommonMonsters": 0,
+      "changedCommonCertificates": 0,
+      "allAddedHaveCertificate": true,
+      "allAddedHaveEffect": true,
+      "allAddedHaveRegressionSuite": true
+    }
+  },
+  "m60": {
+    "researchCandidates": [
+      "15383415",
+      "41872150",
+      "03510565",
+      "02326738"
+    ],
+    "deferred": [
+      "40659562"
+    ],
+    "deferredReason": "Guardian Sphinx is a non-targeting mass return; targetGroup would mis-model it. A dedicated owner-aware mass-return operation is needed.",
+    "admitted": 0,
+    "certified": 0
+  },
+  "pullRequests": [
+    {
+      "number": 12,
+      "state": "open",
+      "draft": true,
+      "head": "e9988017e8ede4109ebf917681094132f7cfc25d"
+    },
+    {
+      "number": 13,
+      "state": "open",
+      "draft": true,
+      "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
+      "mergeable": false,
+      "ci": "failed"
+    },
+    {
+      "number": 14,
+      "state": "open",
+      "draft": true,
+      "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+      "mergeable": false,
+      "commitsAhead": 39,
+      "commitsBehind": 2,
+      "ci": "success"
+    },
+    {
+      "number": 15,
+      "state": "open",
+      "draft": true,
+      "head": "7139b101b3586c2d592ada7a8696fe6c333167f8"
+    },
+    {
+      "number": 17,
+      "state": "open",
+      "draft": true,
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "mergeable": true,
+      "ci": "failed",
+      "reservation": "M61 runtime"
+    },
+    {
+      "number": 18,
+      "state": "open",
+      "draft": true,
+      "head": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
+      "mergeable": true,
+      "ci": "success"
+    },
+    {
+      "number": 19,
+      "state": "open",
+      "draft": true,
+      "head": "45beaaa14c20bcb4fc0baa2845005e785b7b5758",
+      "mergeable": true,
+      "ci": "latest-head-runs-not-yet-visible"
+    },
+    {
+      "number": 20,
+      "state": "open",
+      "draft": true,
+      "head": "769bbb8dcb0bc056df1131a4994ff0a6ff1a25d8",
+      "mergeable": true,
+      "ci": "card-fast-success; engine-validation-in-progress"
+    }
+  ],
+  "ci": {
+    "pr18": {
+      "engineValidation": "success",
+      "cardBatchFast": "success",
+      "extendedSoak": "success",
+      "npmTest": "success"
+    },
+    "pr19": {
+      "latestHead": "no-runs-visible-at-check",
+      "previousHeadFast": "success",
+      "previousHeadEngine": "in-progress"
+    },
+    "pr20": {
+      "cardBatchFast": {
+        "runId": 43156670012,
+        "conclusion": "success"
+      },
+      "engineValidation": {
+        "runId": 43156670105,
+        "status": "in_progress",
+        "testStep": 33,
+        "totalSteps": 89,
+        "extendedSoak": "in_progress"
+      }
+    },
+    "pr17": {
+      "engineValidation": {
+        "runId": 43081735774,
+        "conclusion": "failure"
+      },
+      "cardBatchFast": {
+        "runId": 43081735544,
+        "conclusion": "failure"
+      },
+      "typeErrors": [
+        "TS2367",
+        "TS2339"
+      ],
+      "line": "src/duelEngineCurrent.ts:410"
+    }
+  },
+  "coordination": {
+    "activeParallelWork": {
+      "pr": 17,
+      "branch": "feat/work-m61-handlimit-ci-20261111",
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "state": "handoff-pending",
+      "lastRequestComment": 6814605957,
+      "noResponse": true
+    },
+    "auxiliary": "paused-by-work",
+    "noConflictingFilesChanged": true
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "hostingStatus": "not verifiable through available GitHub connection"
+  },
+  "nextTask": "Wait for PR #19 and #20 CI; publish the read-only catalog delta report on PR #14 after audit tests pass. Keep M61 runtime files untouched until cooperative handoff. Then implement/test M60 against the released runtime."
+}

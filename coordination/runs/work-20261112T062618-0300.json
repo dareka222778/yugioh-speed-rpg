@@ -1,0 +1,212 @@
+{
+  "runId": "work-20261112T062618-0300",
+  "owner": "Work",
+  "priorityRequestedBy": "user",
+  "state": "released",
+  "startedAt": "2026-11-12T06:26:18-03:00",
+  "lastActivityAt": "2026-11-12T06:31:00-03:00",
+  "nextScheduledAt": "2026-11-12T11:30:00-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBefore": "b6929b103972fb9e903fc7de0069875d5fdb5609",
+  "workBranches": [
+    {
+      "branch": "feat/work-m63-m60-research-20261112",
+      "head": "cbb8be6b01d5d26586c4dc268fa315cc0e06e607",
+      "pr": 19,
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "docs/evidence/m60-flip-cycle-research.json",
+        "tests/m60FlipCycleResearch.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "runId": 43192284375,
+        "engineValidation": "in_progress",
+        "engineRunId": 43192284528
+      }
+    },
+    {
+      "branch": "feat/work-m64-catalog-delta-audit-20261112",
+      "head": "5d5f9fa52f5825c6edba201e8e7f66dffe141009",
+      "pr": 20,
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "ci": {
+        "cardBatchFast": "success",
+        "fastRunId": 43165884034,
+        "engineValidation": "success",
+        "engineRunId": 43165884069
+      }
+    },
+    {
+      "branch": "feat/work-m65-normal-v9-triage-20261112",
+      "head": "faded3908e3731edbaec8e8996d0705c2bbd206b",
+      "pr": 21,
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "ci": {
+        "cardBatchFast": "success",
+        "fastRunId": 43191998106,
+        "engineValidation": "in_progress",
+        "engineRunId": 43191997694
+      }
+    }
+  ],
+  "changes": [
+    "M65: planner agora conta identidades canônicas históricas e Konami IDs em todo o arquivo-fonte e exclui candidatos ambíguos, mesmo quando os passcodes diferem.",
+    "M65: testes adicionados para duplicidade cruzada com registros não candidatos e unicidade dos IDs canônicos/Konami no plano real.",
+    "M63: verificados nas páginas oficiais Konami os fatos impressos e a primeira impressão TCG dos quatro candidatos M60 e de Guardian Sphinx; SHA-256 do texto oficial registrado em docs/evidence.",
+    "M63: testes agora exigem correspondência entre revisão oficial, fatos do candidato e impressão TCG, mantendo todas as cartas explicitamente não certificadas."
+  ],
+  "catalog": {
+    "shared": {
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+      "cards": 969,
+      "certificates": 969
+    },
+    "development": {
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52",
+      "cards": 1014,
+      "certificates": 1014
+    },
+    "delta": {
+      "added": 45,
+      "removed": 0,
+      "changedCommonCards": 0,
+      "changedCommonEffects": 0,
+      "changedCommonMonsters": 0,
+      "changedCommonCertificates": 0
+    },
+    "newAdmissionsThisRun": 0
+  },
+  "m60": {
+    "officialSourceReviewed": [
+      "15383415",
+      "41872150",
+      "03510565",
+      "02326738",
+      "40659562"
+    ],
+    "admitted": 0,
+    "certified": 0,
+    "blockedBy": "PR #17 M61 runtime handoff pending"
+  },
+  "pullRequests": [
+    {
+      "number": 12,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "b6929b103972fb9e903fc7de0069875d5fdb5609",
+      "ci": "success"
+    },
+    {
+      "number": 13,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
+      "ci": "failed"
+    },
+    {
+      "number": 14,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+      "ci": "success"
+    },
+    {
+      "number": 15,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "7139b101b3586c2d592ada7a8696fe6c333167f8",
+      "ci": "no-runs-visible"
+    },
+    {
+      "number": 17,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "ci": "failed",
+      "handoff": "awaiting-response"
+    },
+    {
+      "number": 18,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "5dbaddfed21095cb3d2ad2d5cffbfc92f0986db7",
+      "ci": "success"
+    },
+    {
+      "number": 19,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "cbb8be6b01d5d26586c4dc268fa315cc0e06e607",
+      "ci": "fast-and-engine-validation-in-progress"
+    },
+    {
+      "number": 20,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "5d5f9fa52f5825c6edba201e8e7f66dffe141009",
+      "ci": "success"
+    },
+    {
+      "number": 21,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "faded3908e3731edbaec8e8996d0705c2bbd206b",
+      "ci": "fast-success-engine-validation-in-progress"
+    }
+  ],
+  "activeParallelWork": {
+    "pr": 17,
+    "branch": "feat/work-m61-handlimit-ci-20261111",
+    "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+    "state": "handoff-pending",
+    "lastRequestComment": 6819899652,
+    "noResponse": true,
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/classicEffects.ts",
+      "src/duelIntegrity.ts",
+      "scripts/mass-certification21.cjs"
+    ]
+  },
+  "handoffRequest": {
+    "target": "PR #17 / M61",
+    "status": "awaiting-response",
+    "lastCommentId": 6819899652,
+    "reason": "Aguardar checkpoint/liberação antes de editar runtime reservado."
+  },
+  "handoff": {
+    "to": "auxiliary",
+    "status": "available",
+    "at": "2026-11-12T06:31:00-03:00",
+    "baseBranch": "feat/work-m65-normal-v9-triage-20261112",
+    "baseCommit": "faded3908e3731edbaec8e8996d0705c2bbd206b",
+    "scope": "Branch auxiliar própria somente; pode monitorar CI de PRs 19–21 e fazer pesquisa independente. Não editar branches M63/M64/M65 do Work, nem arquivos/branch M61; sem admissão, certificação, merge ou deploy.",
+    "nextTask": "Monitorar CI das PRs 19 e 21; pesquisar candidatos Normal ausentes em branch auxiliar própria, sem alterar catálogo/certificados; aguardar a próxima janela do Work.",
+    "nextWorkAt": "2026-11-12T11:30:00-03:00"
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "hostingStatus": "Não verificável nesta execução; nenhum deploy executado."
+  },
+  "duration": {
+    "elapsedWallMinutes": 5,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Bloco interrompido pelo limite da janela; não contabilizar espera de CI como trabalho."
+  },
+  "nextTask": "Após o handoff M61, corrigir TS2367/TS2339 com CI completa, implementar e testar setSelfFaceDown e marcador once-per-turn persistente; então transformar M60 em lote comportamental, sem admitir Guardian Sphinx até existir operação correta de retorno em massa."
+}

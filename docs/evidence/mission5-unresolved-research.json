@@ -1,0 +1,18 @@
+{
+  "scope": "Additional bounded primary research; no source snapshot rewritten or card admitted",
+  "symbolicStatistics": [
+    {"name":"Gren Maju Da Eiza","cid":5834,"atk":"?","defense":"?","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5834&request_locale=en","decision":"Preserve symbolic statistics as facts; banished-card multiplier mechanic not implemented or certified."},
+    {"name":"Maju Garzett","cid":5716,"atk":"?","defense":0,"source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5716&request_locale=en","decision":"Preserve symbolic ATK; capture/sum original ATK of two Tribute materials is not implemented or certified."},
+    {"name":"Gradius' Option","cid":5372,"atk":"?","defense":"?","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5372&request_locale=en","decision":"Preserve symbolic statistics; linked Special Summon, live stat copying and linked removal are dependencies, not implemented or certified."}
+  ],
+  "missingPasscodesWithKnownCID": [
+    {"name":"Ulevo","cid":5925,"source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5925&request_locale=en","decision":"Keep missing passcode. Printed three-Tribute/type and Match-winning conditions are not supported. Do not assign a synthetic playable passcode."},
+    {"name":"Meteo the Matchless","cid":5929,"source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5929&request_locale=en","decision":"Keep missing passcode. Printed three-Tribute/type and Match-winning conditions are not supported. Do not assign a synthetic playable passcode."}
+  ],
+  "deferredCandidate": {"name":"Black Skull Dragon","cid":4223,"source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4223&request_locale=en","decision":"Not added: always-treated-as-Archfiend identity condition needs an explicit archetype representation and tests; compatible Fusion materials alone do not certify the whole card."},
+  "reviewedPrimaryPasscodes": [
+    {"cid":4678,"selected":"18144506","retainedAliases":["18144506","18144507"],"secondarySource":"https://duelistlibrary.com/card/4678","decision":"Canonical passcode corroborated separately; imported artwork ID differs and is not substituted for a passcode."},
+    {"cid":4351,"selected":"73134081","retainedAliases":["73134081","73134082"],"secondarySource":"https://ftp.yugipedia.com/wiki/Final_Flame","decision":"Canonical passcode corroborated separately; alternate artwork/source IDs retained."}
+  ],
+  "otherMissingIdentities":"The nine records with absent Konami IDs remain blocked. No modern card with a similar name is substituted. Each original canonical identity is retained in the 116-row audit."
+}

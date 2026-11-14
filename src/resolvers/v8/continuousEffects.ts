@@ -1,0 +1,36 @@
+import type {DuelState,Monster} from './duelEngineCurrent';
+import {getDuelCard as card,getEffect} from './effectRegistry';
+import {getMonsterEffect} from './monsterEffects';
+import type {EffectKind,MonsterFilter,CountFormula,ContinuousRule,ContinuousState} from './continuousRules';
+export type {EffectKind,MonsterFilter,CountFormula,ContinuousRule,ContinuousState} from './continuousRules';
+type Source={uid:string;controller:number;kind:EffectKind;rules:readonly ContinuousRule[]};
+const find=(s:DuelState,uid:string)=>s.players.flatMap((p,controller)=>p.monsters.map(m=>({m,controller}))).find(x=>x.m.uid===uid);
+function matches(s:DuelState,source:Source,m:Monster,f:MonsterFilter){const info=card(m.id),controller=find(s,m.uid)?.controller??s.players.findIndex(p=>p.hand.some(c=>c.uid===m.uid));if(!m.faceUp||!info)return false;return (!f.controller||f.controller==='both'||(controller===source.controller)===(f.controller==='source'))&&(!f.selfOnly||m.uid===source.uid)&&(!f.nonEffectOnly||info.monsterType!=='effect')&&(!f.attributes?.length||f.attributes.includes(info.attribute??''))&&(!f.races?.length||f.races.includes(info.race??''));}
+function sources(s:DuelState):Source[]{const out:Source[]=[];for(const [controller,p]of s.players.entries()){
+ for(const m of p.monsters)if(m.faceUp){const op=getMonsterEffect(m.id)?.operation;if(op?.kind==='continuous')out.push({uid:m.uid,controller,kind:'monster',rules:op.rules});else if(op?.kind==='negateTraps')out.push({uid:m.uid,controller,kind:'monster',rules:[{kind:'negateTraps'}]});}
+ for(const b of [...p.backrow,...p.field?[p.field]:[]])if(b.faceUp){const e=getEffect(b.id),kind=card(b.id)?.kind;if(kind!=='spell'&&kind!=='trap')continue;const rules:ContinuousRule[]=[];
+  if(e?.kind==='field'&&b.resolved!==false){rules.push({kind:'modifier',filter:{races:e.races,attributes:e.attributes},atk:e.atk,def:e.def});if(e.penaltyRaces?.length)rules.push({kind:'modifier',filter:{races:e.penaltyRaces},atk:-e.atk,def:-e.def});}
+  if(e?.kind==='equip'&&b.resolved&&b.equippedTo){const target=find(s,b.equippedTo)?.m;if(target?.faceUp)rules.push({kind:'modifier',filter:{selfOnly:true},atk:e.atk,def:e.def,...e.count?{count:e.count}:{}});}
+  if(e?.kind==='continuous'&&b.resolved)rules.push(...e.rules);
+  if(rules.length)out.push({uid:b.uid,controller,kind,rules});
+ }
+ }return out;}
+function sourceStamp(s:DuelState,source:Source){const value=s.continuousState?.sources[source.uid],epoch=s.cardLifetimes?.[source.uid]?.epoch??0;return value?.epoch===epoch?value.stamp:Number.MAX_SAFE_INTEGER;}
+function ordered(s:DuelState){return sources(s).sort((a,b)=>sourceStamp(s,a)-sourceStamp(s,b)||a.uid.localeCompare(b.uid));}
+/** Negation-only dependency cycles use established activation order. Modifiers
+ * never query computed ATK/DEF, so there is no recursive stat/fixpoint loop. */
+function active(s:DuelState){const all=ordered(s),negators:Source[]=[];const suppressed=(source:Source,by:Source[])=>by.some(n=>n.rules.some(r=>r.kind==='negateTraps'?source.kind==='trap':r.kind==='negateMonsters'&&source.kind==='monster'&&!!find(s,source.uid)&&matches(s,n,find(s,source.uid)!.m,r.filter)));
+ for(const source of all.filter(x=>x.rules.some(r=>r.kind==='negateTraps'||r.kind==='negateMonsters')))if(!suppressed(source,negators))negators.push(source);
+ return all.filter(x=>negators.includes(x)||!suppressed(x,negators));}
+export function syncContinuous(s:DuelState){const current=sources(s),ledger=s.continuousState??={next:0,sources:{},temporary:[]},present=new Set(current.map(x=>x.uid));for(const uid of Object.keys(ledger.sources))if(!present.has(uid))delete ledger.sources[uid];for(const x of current){const epoch=s.cardLifetimes?.[x.uid]?.epoch??0;if(ledger.sources[x.uid]?.epoch!==epoch){if(++ledger.next>1_000_000)throw Error('Limite de fontes contínuas excedido.');Object.defineProperty(ledger.sources,x.uid,{value:{epoch,stamp:ledger.next},enumerable:true,writable:true,configurable:true});}}
+ ledger.temporary=ledger.temporary.filter(t=>{const m=find(s,t.uid)?.m;return !!m?.faceUp&&t.expiresTurn>=s.turn&&(s.cardLifetimes?.[t.uid]?.epoch??0)===t.epoch;});}
+export function continuousTrapsNegated(s:DuelState){return active(s).some(x=>x.rules.some(r=>r.kind==='negateTraps'));}
+export function monsterEffectsNegated(s:DuelState,uid:string){const m=find(s,uid)?.m;if(!m?.faceUp)return false;return active(s).some(x=>x.rules.some(r=>r.kind==='negateMonsters'&&matches(s,x,m,r.filter)));}
+function affected(s:DuelState,m:Monster,kind:EffectKind){return !active(s).some(x=>x.rules.some(r=>r.kind==='immune'&&r.from.includes(kind)&&matches(s,x,m,r.filter)));}
+export function canAffectMonster(s:DuelState,uid:string,kind:EffectKind){const m=find(s,uid)?.m;return !!m&&affected(s,m,kind);}
+function count(s:DuelState,source:Source,f:CountFormula){const p=s.players[f.controller==='source'?source.controller:1-source.controller],list=[...p[f.zone],...f.zone==='backrow'&&f.includeField&&p.field?[p.field]:[]];return list.filter(c=>{const info=card(c.id);return (!f.races?.length||f.races.includes(info?.race??''))&&(!f.cardKind||info?.kind===f.cardKind)&&(!f.faceUp||'faceUp' in c&&c.faceUp===true);}).length;}
+export function continuousModifier(s:DuelState,m:Monster,stat:'atk'|'def'){if(!m.faceUp)return 0;let value=0;for(const source of active(s)){if(!affected(s,m,source.kind))continue;for(const r of source.rules)if(r.kind==='modifier'){
+  const equip=s.players.flatMap(p=>p.backrow).find(b=>b.uid===source.uid&&b.equippedTo);const targetMatches=equip?equip.equippedTo===m.uid:matches(s,source,m,r.filter);if(!targetMatches)continue;value+=r[stat]+(r.count?r.count[stat]*count(s,source,r.count):0);
+ }}for(const t of s.continuousState?.temporary??[])if(t.uid===m.uid&&t.expiresTurn>=s.turn&&(s.cardLifetimes?.[m.uid]?.epoch??0)===t.epoch)value+=t[stat];return value;}
+export function addTemporaryModifier(s:DuelState,uid:string,atk:number,def:number){const m=find(s,uid)?.m;if(!m?.faceUp)return;const ledger=s.continuousState??={next:0,sources:{},temporary:[]};ledger.temporary.push({sequence:++ledger.next,uid,epoch:s.cardLifetimes?.[uid]?.epoch??0,atk,def,expiresTurn:s.turn});}
+export function assertContinuousState(s:DuelState){const l=s.continuousState;if(!l)return;if(!Number.isSafeInteger(l.next)||l.next<0||l.next>1_000_000||!l.sources||typeof l.sources!=='object'||Array.isArray(l.sources)||Object.keys(l.sources).length>14||!Array.isArray(l.temporary)||l.temporary.length>4096)throw Error('Estado contínuo inválido.');const sequences=[...Object.values(l.sources).map(x=>x.stamp),...l.temporary.map(t=>t.sequence)];if(new Set(sequences).size!==sequences.length)throw Error('Sequ?ncia cont?nua duplicada.');for(const x of Object.values(l.sources))if(!Number.isSafeInteger(x.stamp)||x.stamp<1||x.stamp>l.next||!Number.isSafeInteger(x.epoch)||x.epoch<0)throw Error('Ordem contínua inválida.');for(const t of l.temporary)if(typeof t.uid!=='string'||!Number.isSafeInteger(t.epoch)||t.epoch<0||!Number.isSafeInteger(t.atk)||!Number.isSafeInteger(t.def)||!Number.isSafeInteger(t.sequence)||t.sequence<1||t.sequence>l.next||!Number.isSafeInteger(t.expiresTurn)||t.expiresTurn<1)throw Error('Modificador temporário inválido.');}

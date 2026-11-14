@@ -1,0 +1,4379 @@
+{
+  "runId": "work-20261114T083019-0300",
+  "owner": "Work",
+  "priorityRequestedBy": "Work",
+  "state": "active",
+  "startedAt": "2026-11-14T08:30:19-03:00",
+  "lastActivityAt": "2026-11-14T08:30:19-03:00",
+  "nextScheduledAt": "2026-11-14T13:30:00-03:00",
+  "timezone": "America/Sao_Paulo",
+  "intervalHours": 5,
+  "scope": [
+    "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs",
+    "coordination/state.json",
+    "coordination/runs/work-20261114T083019-0300.json"
+  ],
+  "lastCheckpoint": "coordination/runs/work-20261114T083019-0300.json",
+  "previousRunId": "work-20261113T223304-0300",
+  "previousReservation": {
+    "id": "work-20261113T134424-0300",
+    "owner": "Work",
+    "branch": "feat/work-m151-polymerization-shared-field-fusion-2v2-20261113",
+    "base": "feat/work-m71-ci-branch-routing-20261112",
+    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "reservedFiles": [
+      "tests/tagClassicPolymerizationSharedFieldFusion.test.cjs"
+    ],
+    "state": "handoff-pending-no-response; do-not-edit",
+    "startedAt": "2026-11-13T13:44:24-03:00",
+    "lastActivityAt": "2026-11-13T18:05:29-03:00",
+    "head": "caed37c93b07c12d7b166f12acf0c2b8135901c4",
+    "pr": 107,
+    "priority": "P1 — certificar por comportamento a Fusão 2v2: Polymerization usa monstros do campo compartilhado, preserva UIDs físicos e não acessa a mão privada do parceiro inativo.",
+    "handoffCommentId": 6864266964,
+    "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
+  },
+  "activeParallelWork": {
+    "pr": 17,
+    "branch": "feat/work-m61-handlimit-ci-20261111",
+    "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+    "state": "handoff-pending",
+    "lastRequestComment": 6873097667,
+    "noResponse": true,
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/classicEffects.ts",
+      "src/duelIntegrity.ts",
+      "scripts/mass-certification21.cjs"
+    ],
+    "lastRequestAt": "2026-11-14T03:25:16-03:00"
+  },
+  "workBranches": [
+    {
+      "branch": "feat/work-m63-m60-research-20261112",
+      "head": "d8d33cc7bd1715c79c19a0b6189534232fca7f01",
+      "pr": 19,
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "docs/evidence/m60-flip-cycle-research.json",
+        "tests/m60FlipCycleResearch.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "runId": 43239125531,
+        "engineValidation": "success",
+        "engineRunId": 43239125265
+      }
+    },
+    {
+      "branch": "feat/work-m64-catalog-delta-audit-20261112",
+      "head": "5d5f9fa52f5825c6edba201e8e7f66dffe141009",
+      "pr": 20,
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "ci": {
+        "cardBatchFast": "success",
+        "fastRunId": 43165884034,
+        "engineValidation": "success",
+        "engineRunId": 43165884069
+      }
+    },
+    {
+      "branch": "feat/work-m65-normal-v9-triage-20261112",
+      "head": "faded3908e3731edbaec8e8996d0705c2bbd206b",
+      "pr": 21,
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "ci": {
+        "cardBatchFast": "success",
+        "fastRunId": 43191998106,
+        "engineValidation": "success",
+        "engineRunId": 43191997694
+      }
+    },
+    {
+      "branch": "feat/work-m66-tag-format-boundaries-20261112",
+      "head": "2af0944c7864a872c4027927fb8a8b7e6faf0941",
+      "pr": 22,
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFormatBoundaries.test.cjs",
+        "tests/tagClassicSharedFieldBoundaries.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "fastRunId": 43292009792,
+        "engineValidation": "in_progress",
+        "engineRunId": 43292009861
+      }
+    },
+    {
+      "branch": "feat/work-m67-tag-field-zone-20261112",
+      "head": "3cf702b4da80ebc166941841756a0420ffc7431b",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFieldZone.test.cjs"
+      ],
+      "pr": 23,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m68-tag-field-effect-20261112",
+      "head": "758ba2797a513a5a303df02e72ee6e9067f945ea",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFieldEffect.test.cjs"
+      ],
+      "pr": 24,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m69-tag-field-render-20261112",
+      "head": "7e5669076cbc25d875ba2f731dc80b0e58af9fc0",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFieldRender.test.cjs"
+      ],
+      "pr": 25,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m70-tag-field-persistence-20261112",
+      "head": "62d9fc2252fcb0e176cde8d8d82bade44776e83f",
+      "base": "5b9f85abd1f12d23a734ae62fc574b22b6d5aff9",
+      "scope": [
+        "tests/tagClassicFieldPersistence.test.cjs"
+      ],
+      "pr": 26,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m71-ci-branch-routing-20261112",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "base": "0b0ff29b15a58b18598c96a4bd6d1dae48a7ffcf",
+      "scope": [
+        ".github/workflows",
+        "tests/ciBranchRouting.test.cjs"
+      ],
+      "pr": 27,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m72-tag-timeout-20261112",
+      "head": "74d3634261455b52ceb1f62dd4a69d9b61f2b91f",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicTimeout.test.cjs"
+      ],
+      "pr": 28,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress",
+        "note": "Earlier head failed because response fixture had no counter-trap; corrected head includes set Magic Jammer."
+      }
+    },
+    {
+      "branch": "feat/work-m73-tag-timeout-persistence-20261112",
+      "head": "67353a5f68a54b40f688f2792c94ef38e7645496",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagTimeoutPersistence.test.cjs"
+      ],
+      "pr": 29,
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "engineValidation": "queued",
+        "note": "Previous head failed only a W.O. regex; corrected final head and expanded response-phase/panel/rejoin checks."
+      }
+    },
+    {
+      "branch": "feat/work-m74-tag-seat-authorization-20261112",
+      "head": "2b3d59d7f6902fc2446cd4e602d514bd92c6c0c9",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSeatAuthorization.test.cjs"
+      ],
+      "pr": 30,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m75-tag-action-receipts-20261112",
+      "head": "1ddf16b9b5e6f5fdbd1c3b7c08a2b1f1e5b42c63",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagActionReceipts.test.cjs"
+      ],
+      "pr": 31,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicHaneHaneOwnership.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
+      "pr": 43,
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success",
+        "milestone1000": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
+      "pr": 48,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicDDAssailantOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "head": "060c513c507843f71e8a50cf21c1095f92143e7c",
+      "pr": 49,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBattleBanishVictimOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "head": "d472c0a2f8e2bcf98313b1ff32fd72987b1ff21c",
+      "pr": 50,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "head": "a2b8d577f7770f0fdd937bf000236c6acba5ed7f",
+      "pr": 51,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicPyramidTurtleOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "in_progress",
+        "engine": "in_progress",
+        "milestone": "in_progress",
+        "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      }
+    },
+    {
+      "branch": "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
+      "head": "ea3bffe32aadeeaac9be36dd9c6d8b97fb13e378",
+      "pr": 52,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicRecruiterFiltersOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "in_progress",
+        "engine": "in_progress",
+        "milestone": "in_progress",
+        "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      }
+    },
+    {
+      "branch": "feat/work-m97-tag-troop-dragon-recursion-20261113",
+      "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
+      "pr": 53,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicTroopDragonRecursionOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "in_progress",
+        "engine": "in_progress",
+        "milestone": "in_progress",
+        "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      }
+    },
+    {
+      "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+      "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
+      "pr": 54,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicGravekeepersSpyOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "queued",
+        "engine": "queued",
+        "milestone": "in_progress",
+        "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+      }
+    },
+    {
+      "branch": "feat/work-m99-attribute-recruiters-ownership-20261113",
+      "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
+      "pr": 55,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicAttributeRecruitersOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success",
+        "npmTest": "passed",
+        "fastRunId": 43381087783,
+        "engineRunId": 43381087797,
+        "milestoneRunId": 43381087817
+      }
+    },
+    {
+      "branch": "feat/work-m100-sangan-ownership-20261113",
+      "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
+      "pr": 56,
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSanganOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "engine": "in_progress",
+        "milestone": "success",
+        "npmTest": "passed",
+        "fastRunId": 43381093321,
+        "engineRunId": 43381093219,
+        "milestoneRunId": 43381093250
+      }
+    },
+    {
+      "branch": "feat/work-m101-jinzo-2v2-trap-lock-20261113",
+      "head": "37ed8c6a08ccd4465d48dae8f2e282618a54085c",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 57,
+      "scope": [
+        "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success",
+        "milestone1000": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m102-mysterious-puppeteer-tag-20261113",
+      "head": "958a72366199adb8bd9fbf72d2b7f4d9b35f1cc9",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 58,
+      "scope": [
+        "tests/tagClassicMysteriousPuppeteerOwnership.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success",
+        "milestone1000": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m103-mirror-force-tag-20261113",
+      "head": "d313e2a47e77b771e6bf3881aa8aa1463a086df5",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 59,
+      "scope": [
+        "tests/tagClassicMirrorForceOwnership.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success",
+        "milestone1000": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+      "pr": 65,
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m110-seven-tools-2v2-20261113",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSevenToolsOwnership.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+      "pr": 66,
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+      "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+      "pr": 67,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicMagicJammerOwnership.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+      "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+      "pr": 68,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicRaigekiTeamTargeting.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": "Corrigida expectativa: Spell sem resposta legal resolve imediatamente."
+    },
+    {
+      "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+      "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+      "pr": 69,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": "Primeiro run falhou porque a carta-alvo não estava no deck físico de seat 3; fixture corrigida, nova CI em andamento."
+    },
+    {
+      "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+      "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+      "pr": 70,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+      "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+      "pr": 71,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": "Corrigida expectativa para resolução imediata quando Torrential não possui janela válida."
+    },
+    {
+      "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+      "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+      "pr": 72,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicFissureTeamTargeting.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": "Arquivo criado na branch correta; arquivo acidental no main removido por commit 8f3f1768b1ee1f4b4a96d557eab5926d96525ad2; ausência verificada."
+    },
+    {
+      "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+      "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+      "pr": 73,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicDeSpellRevealPolicy.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+      "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+      "pr": 74,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "src/tagDuel.ts",
+        "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "in_progress",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success"
+      },
+      "note": "Todos os workflows concluídos com sucesso; src/tagDuel.ts continua aguardando handoff explícito."
+    },
+    {
+      "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
+      "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+      "pr": 75,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success",
+        "milestone1000": "success",
+        "extendedSoak": "success",
+        "fastRunId": 43453622984,
+        "engineRunId": 43453622988,
+        "milestoneRunId": 43453623323
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+      "pr": 76,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "src/spellExceptions.ts",
+        "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success",
+        "milestone1000": "success",
+        "extendedSoak": "success",
+        "fastRunId": 43454799650,
+        "engineRunId": 43454798944,
+        "milestoneRunId": 43454798835,
+        "npmTest": "success"
+      },
+      "note": "Primeiro run falhou somente por uma asserção da fixture que apontava o Graveyard team 1; corrigida para team 0 no HEAD atual, nova CI em andamento."
+    },
+    {
+      "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
+      "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+      "pr": 77,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success",
+        "milestone1000": "success",
+        "extendedSoak": "success",
+        "fastRunId": 43454171031,
+        "engineRunId": 43454171027,
+        "milestoneRunId": 43454171352
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+      "pr": 78,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "success",
+        "milestone1000": "success",
+        "fastRunId": 43455248576,
+        "engineRunId": 43455248554,
+        "milestoneRunId": 43455248477,
+        "extendedSoak": "success",
+        "npmTest": "success"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+      "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+      "pr": 79,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success",
+        "fastRunId": 43455398044,
+        "engineRunId": 43455398090,
+        "milestoneRunId": 43455397956,
+        "extendedSoak": "in_progress"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
+      "pr": 80,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      },
+      "note": "Turn 0 inválido na primeira fixture; corrigido para turno 3 no HEAD db639952; nova CI queued."
+    },
+    {
+      "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+      "pr": 81,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "in_progress",
+        "milestone1000": "success",
+        "fastRunId": 43455960320,
+        "engineRunId": 43455960431,
+        "milestoneRunId": 43455960325
+      }
+    },
+    {
+      "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+      "pr": 82,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "success",
+        "fastRunId": 43456380298,
+        "engineRunId": 43456380183,
+        "milestoneRunId": 43456380201
+      }
+    },
+    {
+      "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+      "pr": 83,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "engineValidation": "queued",
+        "milestone1000": "success",
+        "fastRunId": 43456462631,
+        "engineRunId": 43456462746,
+        "milestoneRunId": 43456462504
+      }
+    },
+    {
+      "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+      "pr": 84,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "not_returned",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m129-upstart-goblin-2v2-20261113",
+      "head": "282e88ce752c07023d77ee49da491cdb101af791",
+      "pr": 85,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicUpstartGoblinPhysicalDraw.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m130-tremendous-fire-2v2-20261113",
+      "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
+      "pr": 86,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicTremendousFireTeamDamage.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "engineValidation": "in_progress",
+        "milestone1000": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m131-jar-of-greed-2v2-20261113",
+      "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
+      "pr": 87,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicJarOfGreedPhysicalDraw.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m132-direct-lp-spells-2v2-20261113",
+      "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
+      "pr": 88,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicDirectLPEffectsTeamOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "engineValidation": "queued",
+        "milestone1000": "success"
+      }
+    },
+    {
+      "branch": "feat/work-m133-magic-cylinder-2v2-20261113",
+      "head": "6eba9628ec7c3e251be913110add8f69dabede13",
+      "pr": 89,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicMagicCylinderPhysicalOwners.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
+      "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+      "pr": 64,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "pr": 102,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicMountainGlobalSharedFieldModifiers.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "pr": 103,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicDragonTreasureDarkEnergySharedField.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "pr": 104,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicInvigorationEarthEquipSharedField.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "pr": 105,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicFieldSpellReplacementSharedTeam.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "not-returned"
+      }
+    },
+    {
+      "branch": "feat/work-m150-mst-destroys-equip-field-effects-2v2-20261113",
+      "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
+      "pr": 106,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "scope": [
+        "tests/tagClassicMSTContinuousSourceRemoval2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "engineValidation": "queued",
+        "milestone1000": "queued"
+      }
+    },
+    {
+      "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "pr": 112,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43506972040,
+        "engineValidation": "in_progress",
+        "engineRunId": 43506972175,
+        "extendedSoak": "in_progress",
+        "milestone1000": "success",
+        "milestoneRunId": 43506972102
+      }
+    },
+    {
+      "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+      "pr": 113,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43507071750,
+        "engineValidation": "in_progress",
+        "engineRunId": 43507071767,
+        "extendedSoak": "in_progress",
+        "milestone1000": "success",
+        "milestoneRunId": 43507071960
+      }
+    },
+    {
+      "branch": "feat/work-m158-economic-spells-2v2-20261113",
+      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "priority": "P1 — ampliar a validação comportamental 2v2 da família de Magias econômicas: Red Medicine, Mooyan Curry e Poison of the Old Man; conferir escolha de equipe, Quick-Play setada por parceiro, privacidade, UIDs físicos e LP compartilhados.",
+      "pr": 114,
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43541777615,
+        "milestone1000": "success",
+        "milestoneRunId": 43541777612,
+        "engineValidation": "in_progress",
+        "engineRunId": 43541777726,
+        "testJob": "in_progress",
+        "npmTestStep": "success",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+      "pr": 115,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagEconomicSpellDiscordMenu.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43542034914,
+        "milestone1000": "success",
+        "milestoneRunId": 43542035027,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542035087,
+        "testJob": "in_progress",
+        "npmTestStep": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+      "pr": 116,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "cardBatchFastRunId": 43542328874,
+        "milestone1000": "success",
+        "milestoneRunId": 43542328862,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542328882,
+        "testJob": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+      "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+      "pr": 117,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43567000920,
+        "milestone1000": "success",
+        "milestoneRunId": 43567000950,
+        "check": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43567000915,
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+      "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+      "pr": 118,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43566724675,
+        "milestone1000": "success",
+        "milestoneRunId": 43566724677,
+        "check": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43566724653,
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+      "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+      "pr": 119,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43567105635,
+        "milestone1000": "success",
+        "milestoneRunId": 43567105750,
+        "check": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "engineRunId": 43567105671,
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": null,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
+      ],
+      "state": "active",
+      "runId": "work-20261114T083019-0300",
+      "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs."
+    }
+  ],
+  "handoffRequest": {
+    "target": "PR #17 / M61",
+    "status": "awaiting-response",
+    "commentId": 6869460162,
+    "lastCommentId": 6869460162,
+    "noResponse": true,
+    "lastRequestedAt": "2026-11-13T22:44:10-03:00"
+  },
+  "handoff": {
+    "to": "auxiliary",
+    "status": "independent-work-continues",
+    "at": "2026-11-13T22:44:10-03:00",
+    "scope": "Auxiliar monitora CI das PRs #112–#116 e pode corrigir apenas os respectivos arquivos de teste nas branches M156–M160; M61/M118/M151 continuam sem transferência.",
+    "nextTask": "Auxiliar: monitorar CI de M156–M160, corrigir apenas testes próprios e registrar os resultados. Work: próxima janela, revalidar CI e solicitar handoff; se M61 for liberada, corrigir os alvos de Reinforcements/Castle Walls e seguir para FLIP; sem liberação, avançar em uma família independente.",
+    "nextWorkAt": "2026-11-14T03:30:00-03:00"
+  },
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0
+  },
+  "m60": {
+    "officialSourceReviewed": [
+      "15383415",
+      "41872150",
+      "03510565",
+      "02326738",
+      "40659562"
+    ],
+    "admitted": 0,
+    "certified": 0,
+    "blockedBy": "PR #17 M61 runtime handoff pending"
+  },
+  "pullRequests": [
+    {
+      "number": 12,
+      "state": "open",
+      "draft": true,
+      "ci": "success"
+    },
+    {
+      "number": 13,
+      "state": "open",
+      "draft": true,
+      "ci": "failure"
+    },
+    {
+      "number": 14,
+      "state": "open",
+      "draft": true,
+      "ci": "success"
+    },
+    {
+      "number": 15,
+      "state": "open",
+      "draft": true,
+      "ci": "no-runs-visible"
+    },
+    {
+      "number": 17,
+      "state": "open",
+      "draft": true,
+      "ci": "failure",
+      "handoff": "awaiting-response"
+    },
+    {
+      "number": 18,
+      "state": "open",
+      "draft": true,
+      "ci": "success"
+    },
+    {
+      "number": 19,
+      "state": "open",
+      "draft": true,
+      "ci": "success"
+    },
+    {
+      "number": 20,
+      "state": "open",
+      "draft": true,
+      "ci": "success"
+    },
+    {
+      "number": 21,
+      "state": "open",
+      "draft": true,
+      "ci": "success"
+    },
+    {
+      "number": 22,
+      "state": "open",
+      "draft": true,
+      "ci": "success"
+    },
+    {
+      "number": 23,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M67"
+    },
+    {
+      "number": 24,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M68"
+    },
+    {
+      "number": 25,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M69"
+    },
+    {
+      "number": 26,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M70"
+    },
+    {
+      "number": 27,
+      "state": "open",
+      "draft": true,
+      "ci": "success",
+      "branch": "M71"
+    },
+    {
+      "number": 28,
+      "state": "open",
+      "draft": true,
+      "ci": "fast-success; engine-validation-in-progress",
+      "branch": "M72"
+    },
+    {
+      "number": 29,
+      "state": "open",
+      "draft": true,
+      "ci": "fast-in-progress; engine-validation-queued",
+      "branch": "M73"
+    },
+    {
+      "number": 30,
+      "state": "open",
+      "draft": true,
+      "ci": "fast-success; engine-validation-in-progress",
+      "branch": "M74"
+    },
+    {
+      "number": 31,
+      "state": "open",
+      "draft": true,
+      "ci": "fast-success; engine-validation-in-progress",
+      "branch": "M75"
+    },
+    {
+      "number": 43,
+      "state": "open",
+      "draft": true,
+      "branch": "M87",
+      "ci": "success"
+    },
+    {
+      "number": 48,
+      "state": "open",
+      "draft": true,
+      "branch": "M92",
+      "ci": "fast:success; engine:in_progress; milestone:success"
+    },
+    {
+      "number": 49,
+      "state": "open",
+      "draft": true,
+      "branch": "M93",
+      "ci": "fast:success; engine:in_progress; milestone:success"
+    },
+    {
+      "number": 50,
+      "state": "open",
+      "draft": true,
+      "branch": "M94",
+      "ci": "fast:success; engine:in_progress; milestone:success"
+    },
+    {
+      "number": 51,
+      "state": "open",
+      "draft": true,
+      "branch": "M95",
+      "ci": "fast:in_progress; engine:in_progress; milestone:in_progress"
+    },
+    {
+      "number": 52,
+      "state": "open",
+      "draft": true,
+      "branch": "M96",
+      "ci": "fast:in_progress; engine:in_progress; milestone:in_progress"
+    },
+    {
+      "number": 53,
+      "state": "open",
+      "draft": true,
+      "branch": "M97",
+      "ci": "fast:in_progress; engine:in_progress; milestone:in_progress"
+    },
+    {
+      "number": 54,
+      "state": "open",
+      "draft": true,
+      "branch": "M98",
+      "ci": "fast:queued; engine:queued; milestone:in_progress"
+    },
+    {
+      "number": 55,
+      "state": "open",
+      "draft": true,
+      "branch": "M99",
+      "ci": "fast:success; engine:in_progress; milestone:success"
+    },
+    {
+      "number": 56,
+      "state": "open",
+      "draft": true,
+      "branch": "M100",
+      "ci": "fast:success; engine:in_progress; milestone:success"
+    },
+    {
+      "number": 57,
+      "state": "open",
+      "draft": true,
+      "branch": "M101",
+      "ci": "success"
+    },
+    {
+      "number": 58,
+      "state": "open",
+      "draft": true,
+      "branch": "M102",
+      "ci": "success"
+    },
+    {
+      "number": 59,
+      "state": "open",
+      "draft": true,
+      "branch": "M103",
+      "ci": "success"
+    },
+    {
+      "number": 60,
+      "state": "open",
+      "draft": true,
+      "branch": "M104",
+      "ci": "success"
+    },
+    {
+      "number": 61,
+      "state": "open",
+      "draft": true,
+      "branch": "M105",
+      "ci": "success"
+    },
+    {
+      "number": 62,
+      "state": "open",
+      "draft": true,
+      "branch": "M106",
+      "ci": "success"
+    },
+    {
+      "number": 63,
+      "state": "open",
+      "draft": true,
+      "branch": "M107",
+      "ci": "success"
+    },
+    {
+      "number": 64,
+      "state": "open",
+      "draft": true,
+      "branch": "M108",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued; test-only Negate Attack fixture correction",
+      "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83"
+    },
+    {
+      "number": 65,
+      "state": "open",
+      "draft": true,
+      "branch": "M109",
+      "ci": "success"
+    },
+    {
+      "number": 66,
+      "state": "open",
+      "draft": true,
+      "branch": "M110",
+      "ci": "success"
+    },
+    {
+      "number": 67,
+      "state": "open",
+      "draft": true,
+      "branch": "M111",
+      "ci": "success"
+    },
+    {
+      "number": 68,
+      "state": "open",
+      "draft": true,
+      "branch": "M112",
+      "ci": "success"
+    },
+    {
+      "number": 69,
+      "state": "open",
+      "draft": true,
+      "branch": "M113",
+      "ci": "success"
+    },
+    {
+      "number": 70,
+      "state": "open",
+      "draft": true,
+      "branch": "M114",
+      "ci": "success"
+    },
+    {
+      "number": 71,
+      "state": "open",
+      "draft": true,
+      "branch": "M115",
+      "ci": "success"
+    },
+    {
+      "number": 72,
+      "state": "open",
+      "draft": true,
+      "branch": "M116",
+      "ci": "success"
+    },
+    {
+      "number": 73,
+      "state": "open",
+      "draft": true,
+      "branch": "M117",
+      "ci": "success"
+    },
+    {
+      "number": 74,
+      "state": "open",
+      "draft": true,
+      "branch": "M118",
+      "ci": "success"
+    },
+    {
+      "number": 75,
+      "state": "open",
+      "draft": true,
+      "branch": "M119",
+      "ci": "cardBatchFast:success; engineValidation:success; milestone1000:success; extendedSoak:success",
+      "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019"
+    },
+    {
+      "number": 76,
+      "state": "open",
+      "draft": true,
+      "branch": "M120",
+      "ci": "all workflows success; npm test, audits and extended soak success",
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8"
+    },
+    {
+      "number": 77,
+      "state": "open",
+      "draft": true,
+      "branch": "M121",
+      "ci": "cardBatchFast:success; engineValidation:success; milestone1000:success; extendedSoak:success",
+      "head": "202ba319bd5c5c989a0a9819b222195763b104e7"
+    },
+    {
+      "number": 78,
+      "state": "open",
+      "draft": true,
+      "branch": "M122",
+      "ci": "all workflows success; npm test, audits and extended soak success",
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c"
+    },
+    {
+      "number": 79,
+      "state": "open",
+      "draft": true,
+      "branch": "M123",
+      "ci": "success",
+      "head": "c5436d3035bfde83c41aecd686aec0204addfd20"
+    },
+    {
+      "number": 80,
+      "state": "open",
+      "draft": true,
+      "branch": "M124",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success",
+      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883"
+    },
+    {
+      "number": 81,
+      "state": "open",
+      "draft": true,
+      "branch": "M125",
+      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+      "ci": "success"
+    },
+    {
+      "number": 82,
+      "state": "open",
+      "draft": true,
+      "branch": "M126",
+      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+      "ci": "engine-validation-failure: M126 fixture missing card 12482652 in physical seat 2; auxiliary notified"
+    },
+    {
+      "number": 83,
+      "state": "open",
+      "draft": true,
+      "branch": "M127",
+      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+      "ci": "success"
+    },
+    {
+      "number": 84,
+      "state": "open",
+      "draft": true,
+      "branch": "M128",
+      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 85,
+      "state": "open",
+      "draft": true,
+      "branch": "M129",
+      "head": "282e88ce752c07023d77ee49da491cdb101af791",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:success"
+    },
+    {
+      "number": 86,
+      "state": "open",
+      "draft": true,
+      "branch": "M130",
+      "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 87,
+      "state": "open",
+      "draft": true,
+      "branch": "M131",
+      "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
+      "ci": "cardBatchFast:success; engineValidation:queued; milestone1000:success"
+    },
+    {
+      "number": 88,
+      "state": "open",
+      "draft": true,
+      "branch": "M132",
+      "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 89,
+      "state": "open",
+      "draft": true,
+      "branch": "M133",
+      "head": "6eba9628ec7c3e251be913110add8f69dabede13",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 102,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 103,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 104,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 105,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:not-returned"
+    },
+    {
+      "number": 106,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m150-mst-destroys-equip-field-effects-2v2-20261113",
+      "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
+      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
+    },
+    {
+      "number": 107,
+      "state": "open",
+      "draft": true,
+      "branch": "M151",
+      "head": "caed37c93b07c12d7b166f12acf0c2b8135901c4",
+      "ci": "cardBatchFast:success; engineValidation:failure; milestone1000:success; extendedSoak:success; npmTest:7368/1"
+    },
+    {
+      "number": 112,
+      "state": "open",
+      "draft": true,
+      "branch": "M156",
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 113,
+      "state": "open",
+      "draft": true,
+      "branch": "M157",
+      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 114,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m158-economic-spells-2v2-20261113",
+      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 115,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 116,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "ci": "cardBatchFast:in_progress; engineValidation:in_progress; milestone1000:success"
+    },
+    {
+      "number": 117,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+      "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+      "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
+    },
+    {
+      "number": 118,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+      "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+      "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
+    },
+    {
+      "number": 119,
+      "state": "open",
+      "draft": true,
+      "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+      "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+      "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
+    }
+  ],
+  "ci": {
+    "pr19": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "fastRunId": 43239125531,
+      "engineRunId": 43239125265,
+      "npmTest": "success",
+      "extendedSoak": "success"
+    },
+    "pr20": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "fastRunId": 43165884034,
+      "engineRunId": 43165884069
+    },
+    "pr21": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "fastRunId": 43191998106,
+      "engineRunId": 43191997694
+    },
+    "pr17": {
+      "engineValidation": "failure",
+      "cardBatchFast": "failure",
+      "typeErrors": [
+        "TS2367",
+        "TS2339"
+      ],
+      "file": "src/duelEngineCurrent.ts:410",
+      "handoff": "awaiting-response",
+      "workflowRuns": [
+        43081735774,
+        43081735544
+      ]
+    },
+    "pr22": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "fastRunId": 43292009792,
+      "engineRunId": 43292009861,
+      "npmTest": "success",
+      "extendedSoak": "success",
+      "typecheck": "success"
+    },
+    "pr23": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr24": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr25": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr26": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr27": {
+      "cardBatchFast": "success",
+      "engineValidation": "success"
+    },
+    "pr28": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "engineRunId": 43345642988
+    },
+    "pr29": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "engineRunId": 43346959708
+    },
+    "pr30": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "engineRunId": 43345489241
+    },
+    "pr31": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "engineRunId": 43347531738
+    },
+    "pr43": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43373478476,
+      "engineValidation": "success",
+      "engineRunId": 43373478203,
+      "extendedSoak": "success",
+      "milestone1000": "success",
+      "milestoneRunId": 43373478091,
+      "npmTest": "success"
+    },
+    "pr48": {
+      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr49": {
+      "head": "060c513c507843f71e8a50cf21c1095f92143e7c",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr50": {
+      "head": "d472c0a2f8e2bcf98313b1ff32fd72987b1ff21c",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr51": {
+      "head": "a2b8d577f7770f0fdd937bf000236c6acba5ed7f",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "in_progress",
+      "milestone1000": "in_progress",
+      "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+    },
+    "pr52": {
+      "head": "ea3bffe32aadeeaac9be36dd9c6d8b97fb13e378",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "in_progress",
+      "milestone1000": "in_progress",
+      "note": "corrigido import de getMonsterEffect; nova CI em andamento"
+    },
+    "pr53": {
+      "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "engineRunId": 43381271908,
+      "extendedSoak": "success",
+      "failure": "Troop Dragon test expected phase choice, actual finished at line 123",
+      "handoffToAuxiliary": true
+    },
+    "pr54": {
+      "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "engineRunId": 43381275604,
+      "extendedSoak": "success",
+      "failure": "Gravekeeper's Spy source expected face-up Defense after Flip Summon; rules require face-up Attack",
+      "handoffToAuxiliary": true
+    },
+    "pr55": {
+      "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "npmTest": "passed",
+      "fastRunId": 43381087783,
+      "engineRunId": 43381087797,
+      "milestoneRunId": 43381087817
+    },
+    "pr56": {
+      "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "npmTest": "passed",
+      "fastRunId": 43381093321,
+      "engineRunId": 43381093219,
+      "milestoneRunId": 43381093250
+    },
+    "pr57": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr58": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr59": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr64": {
+      "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued",
+      "commentId": 6858349396
+    },
+    "pr65": {
+      "branch": "M109",
+      "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+      "status": "fast-success; milestone-success; npm-test-success; extended-soak-success; engine-validation-in-progress"
+    },
+    "pr66": {
+      "branch": "M110",
+      "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+      "status": "fast-success; milestone-success; npm-test-success; extended-soak-success; engine-validation-in-progress"
+    },
+    "pr67": {
+      "branch": "M111",
+      "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+      "status": "fast-success; milestone-success; npm-test-success; extended-soak-success; engine-validation-in-progress"
+    },
+    "pr68": {
+      "branch": "M112",
+      "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+      "status": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+    },
+    "pr69": {
+      "branch": "M113",
+      "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+      "status": "fast-success; milestone-success; corrected-head; engine-validation-in-progress"
+    },
+    "pr70": {
+      "branch": "M114",
+      "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+      "status": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+    },
+    "pr71": {
+      "branch": "M115",
+      "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+      "status": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+    },
+    "pr72": {
+      "branch": "M116",
+      "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+      "status": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+    },
+    "pr73": {
+      "branch": "M117",
+      "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+      "status": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+    },
+    "pr74": {
+      "branch": "M118",
+      "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "workflowRuns": [
+        43420156255,
+        43420156271,
+        43420156257
+      ],
+      "handoff": "awaiting-response"
+    },
+    "pr75": {
+      "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "extendedSoak": "success"
+    },
+    "pr76": {
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "extendedSoak": "success",
+      "npmTest": "success"
+    },
+    "pr77": {
+      "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "extendedSoak": "success"
+    },
+    "pr78": {
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success",
+      "extendedSoak": "success",
+      "npmTest": "success"
+    },
+    "pr79": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr80": {
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr81": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr82": {
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "extendedSoak": "success",
+      "npmTest": {
+        "passed": 7366,
+        "failed": 1
+      },
+      "failure": "M126 fixture card missing from physical seat 2: 12482652",
+      "auxiliaryComment": 6858271805
+    },
+    "pr83": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr84": {
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr85": {
+      "head": "282e88ce752c07023d77ee49da491cdb101af791",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "success"
+    },
+    "pr86": {
+      "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr87": {
+      "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
+      "cardBatchFast": "success",
+      "engineValidation": "queued",
+      "milestone1000": "success"
+    },
+    "pr88": {
+      "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success"
+    },
+    "pr89": {
+      "head": "6eba9628ec7c3e251be913110add8f69dabede13",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued"
+    },
+    "pr102": {
+      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "in_progress",
+      "milestone1000": "queued"
+    },
+    "pr103": {
+      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
+      "cardBatchFast": "success",
+      "engineValidation": "queued",
+      "milestone1000": "success"
+    },
+    "pr104": {
+      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "in_progress"
+    },
+    "pr105": {
+      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "success"
+    },
+    "pr97": {
+      "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "passedTests": 7369,
+      "failedTests": 1,
+      "failure": "Skelengel fixture expected 6 cards but started with 5; tests/tagClassicFlipRecoveryDrawPhysicalOwnership.test.cjs:138",
+      "commentId": 6859087003
+    },
+    "pr106": {
+      "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
+      "cardBatchFast": "queued",
+      "engineValidation": "queued",
+      "milestone1000": "queued"
+    },
+    "pr107": {
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "extendedSoak": "success",
+      "npmTest": {
+        "passed": 7368,
+        "failed": 1
+      },
+      "failure": "tests/tagClassicFusionSubstituteSharedField2v2.test.cjs: deploy(state,0,BEASTKING) embora BEASTKING esteja no assento 2.",
+      "runId": 43466746420,
+      "workflowRun": 43466746420
+    },
+    "pr112": {
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success",
+      "extendedSoak": "in_progress",
+      "fastRunId": 43506972040,
+      "engineRunId": 43506972175,
+      "milestoneRunId": 43506972102
+    },
+    "pr113": {
+      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "milestone1000": "success",
+      "extendedSoak": "in_progress",
+      "fastRunId": 43507071750,
+      "engineRunId": 43507071767,
+      "milestoneRunId": 43507071960
+    },
+    "pr114": {
+      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43541777615,
+      "milestone1000": "success",
+      "milestoneRunId": 43541777612,
+      "engineValidation": "in_progress",
+      "engineRunId": 43541777726,
+      "testJob": "in_progress",
+      "npmTestStep": "success",
+      "extendedSoak": "in_progress"
+    },
+    "pr115": {
+      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43542034914,
+      "milestone1000": "success",
+      "milestoneRunId": 43542035027,
+      "engineValidation": "in_progress",
+      "engineRunId": 43542035087,
+      "testJob": "in_progress",
+      "npmTestStep": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr116": {
+      "engineValidation": "failure",
+      "engineRunId": 43542328882,
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "rootCause": "interaction helper usa requestId como sessionId em store.getTag",
+      "auxiliaryCommentId": 6873218837
+    },
+    "pr109": {
+      "head": "b23f3344a9eec6c5e174cf23fca99eda8dbe9a27",
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "engineRunId": 43503878913
+    },
+    "pr117": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43567000920,
+      "milestone1000": "success",
+      "milestoneRunId": 43567000950,
+      "check": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "engineRunId": 43567000915,
+      "extendedSoak": "in_progress"
+    },
+    "pr118": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43566724675,
+      "milestone1000": "success",
+      "milestoneRunId": 43566724677,
+      "check": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "engineRunId": 43566724653,
+      "extendedSoak": "in_progress"
+    },
+    "pr119": {
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 43567105635,
+      "milestone1000": "success",
+      "milestoneRunId": 43567105750,
+      "check": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "engineRunId": 43567105671,
+      "extendedSoak": "in_progress"
+    }
+  },
+  "production": {
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscordValidation": false,
+    "workflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "hostingStatus": "not verified; main tree contains no .github/workflows and no deployment workflow was found",
+    "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "mainRuns": 0,
+    "mainWorkflowFiles": [],
+    "sharedWorkflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ]
+  },
+  "duration": {
+    "elapsedWallMinutes": 14,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Janela observada de aproximadamente 14 minutos; não foi possível cumprir 60 minutos efetivos. Espera de CI não foi contabilizada."
+  },
+  "nextTask": "Auxiliar: monitorar CI das PRs #117–#119 e corrigir somente os três arquivos de teste nas respectivas branches próprias. Work: conferir resultados finais, obter handoff M61/M118/M151 e continuar as 31 certificações pendentes com revisão individual.",
+  "sharedHeadBeforeRelease": "5309ebe7e82e7687703a3f7061aac014941dc647",
+  "priority": "P1 — Mirror Force, Dark Hole e Bottomless Trap Hole: ampliar cobertura comportamental 2v2 sem tocar runtime reservado.",
+  "sharedHeadBeforeClaim": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
+  "releasedOwnReservation": true,
+  "parallelWorkObserved": {
+    "at": "2026-11-13T13:41:32-03:00",
+    "note": "M140–M145 observadas em branches próprias; Work não alterou nem liberou essas reservas.",
+    "branches": [
+      {
+        "branch": "feat/work-m140-flip-target-monsters-2v2-20261113",
+        "head": "a29764d4ea27ff06dd6b0ea47e02c58a49069412",
+        "pr": 96,
+        "ci": {
+          "head": "a29764d4ea27ff06dd6b0ea47e02c58a49069412",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m141-flip-recovery-draw-2v2-20261113",
+        "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+        "pr": 97,
+        "ci": {
+          "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
+          "cardBatchFast": "success",
+          "engineValidation": "failure",
+          "milestone1000": "success",
+          "passedTests": 7369,
+          "failedTests": 1,
+          "failure": "Skelengel fixture expected 6 cards but started with 5; tests/tagClassicFlipRecoveryDrawPhysicalOwnership.test.cjs:138",
+          "commentId": 6859087003
+        }
+      },
+      {
+        "branch": "feat/work-m142-jinzo-team-trap-negation-20261113",
+        "head": "e35902f42bade97be71eb6c88aa0022a3fb6dd28",
+        "pr": 98,
+        "ci": {
+          "head": "e35902f42bade97be71eb6c88aa0022a3fb6dd28",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m143-sangan-witch-2v2-search-owner-20261113",
+        "head": "b9942091d0a695b732a684e4d162353dcf718e19",
+        "pr": 99,
+        "ci": {
+          "head": "b9942091d0a695b732a684e4d162353dcf718e19",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m144-equip-shared-field-2v2-20261113",
+        "head": "d153af18d5ee6e690ce2341c100e8109014f64dc",
+        "pr": 100,
+        "ci": {
+          "head": "d153af18d5ee6e690ce2341c100e8109014f64dc",
+          "cardBatchFast": "success",
+          "engineValidation": "success",
+          "milestone1000": "success"
+        }
+      },
+      {
+        "branch": "feat/work-m145-yami-global-2v2-field-modifier-20261113",
+        "head": "55dfb23849316e98a5fd0b70810205d85f6bb02e",
+        "pr": 101,
+        "ci": {
+          "head": "55dfb23849316e98a5fd0b70810205d85f6bb02e",
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        }
+      }
+    ]
+  },
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAfterClaim": "9a58808dc5ccaffd0bdce4827022f37cde000466",
+  "releasedOwnReservations": [
+    {
+      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
+      "pr": 48,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "head": "060c513c507843f71e8a50cf21c1095f92143e7c",
+      "pr": 49,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "head": "d472c0a2f8e2bcf98313b1ff32fd72987b1ff21c",
+      "pr": 50,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "head": "a2b8d577f7770f0fdd937bf000236c6acba5ed7f",
+      "pr": 51,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
+      "head": "ea3bffe32aadeeaac9be36dd9c6d8b97fb13e378",
+      "pr": 52,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m97-tag-troop-dragon-recursion-20261113",
+      "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
+      "pr": 53,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+      "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
+      "pr": 54,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m99-attribute-recruiters-ownership-20261113",
+      "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
+      "pr": 55,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m100-sangan-ownership-20261113",
+      "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
+      "pr": 56,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "branch": "feat/work-m101-jinzo-2v2-trap-lock-20261113",
+      "head": "37ed8c6a08ccd4465d48dae8f2e282618a54085c",
+      "pr": 57,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m102-mysterious-puppeteer-tag-20261113",
+      "head": "958a72366199adb8bd9fbf72d2b7f4d9b35f1cc9",
+      "pr": 58,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m103-mirror-force-tag-20261113",
+      "head": "d313e2a47e77b771e6bf3881aa8aa1463a086df5",
+      "pr": 59,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+      "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+      "pr": 65,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m110-seven-tools-2v2-20261113",
+      "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+      "pr": 66,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+      "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+      "pr": 67,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+      "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+      "pr": 68,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+      "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+      "pr": 69,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+      "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+      "pr": 70,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+      "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+      "pr": 71,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+      "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+      "pr": 72,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+      "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+      "pr": 73,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+      "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+      "pr": 74,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T08:48:19-03:00"
+    },
+    {
+      "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
+      "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+      "pr": 75,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+      "pr": 76,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
+      "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+      "pr": 77,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+      "pr": 78,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+      "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+      "pr": 79,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
+      "pr": 80,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+      "pr": 81,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+      "pr": 82,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+      "pr": 83,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+      "pr": 84,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T12:52:55-03:00"
+    },
+    {
+      "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "pr": 112,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T18:05:29-03:00"
+    },
+    {
+      "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+      "pr": 113,
+      "owner": "Work",
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T18:05:29-03:00"
+    },
+    {
+      "branch": "feat/work-m158-economic-spells-2v2-20261113",
+      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+      "pr": 114,
+      "owner": "Work",
+      "scope": [
+        "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T22:44:10-03:00",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43541777615,
+        "milestone1000": "success",
+        "milestoneRunId": 43541777612,
+        "engineValidation": "in_progress",
+        "engineRunId": 43541777726,
+        "testJob": "in_progress",
+        "npmTestStep": "success",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+      "pr": 115,
+      "owner": "Work",
+      "scope": [
+        "tests/tagEconomicSpellDiscordMenu.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T22:44:10-03:00",
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43542034914,
+        "milestone1000": "success",
+        "milestoneRunId": 43542035027,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542035087,
+        "testJob": "in_progress",
+        "npmTestStep": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+      "pr": 116,
+      "owner": "Work",
+      "scope": [
+        "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-13T22:44:10-03:00",
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "cardBatchFastRunId": 43542328874,
+        "milestone1000": "success",
+        "milestoneRunId": 43542328862,
+        "engineValidation": "in_progress",
+        "engineRunId": 43542328882,
+        "testJob": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "runId": "work-20261114T032516-0300",
+      "branches": [
+        "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+        "feat/work-m162-dark-hole-2v2-global-field-20261114",
+        "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114"
+      ],
+      "files": [
+        "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
+        "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
+        "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+      ],
+      "releasedAt": "2026-11-14T03:39:10-03:00"
+    }
+  ],
+  "activeRun": {
+    "runId": "work-20261114T032516-0300",
+    "owner": "Work",
+    "priority": "P1 — Mirror Force, Dark Hole e Bottomless Trap Hole: ampliar cobertura comportamental 2v2 sem tocar runtime reservado.",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadBeforeClaim": "cab1c0a48ef4653de66bcd70ea63b2e967a709ad",
+    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "reservedFiles": [
+      "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
+      "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
+      "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+    ],
+    "state": "completed; released-to-auxiliary-monitor-ci",
+    "handoffsRequested": {
+      "m61": 6873097667,
+      "m118": 6873098031,
+      "m151": 6873098406
+    },
+    "startedAt": "2026-11-14T03:25:16-03:00",
+    "endedAt": "2026-11-14T03:39:10-03:00",
+    "sharedHeadAfterClaim": "9a58808dc5ccaffd0bdce4827022f37cde000466",
+    "sharedHeadAfterScopeExtension": "b21ea902e5b34825712e383ebba7972355c5337e",
+    "sharedHeadAfterCheckpoint": "5309ebe7e82e7687703a3f7061aac014941dc647",
+    "sharedHeadBeforeFinalStateUpdate": "5309ebe7e82e7687703a3f7061aac014941dc647",
+    "releasedFiles": [
+      "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
+      "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
+      "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+    ],
+    "workBranches": [
+      {
+        "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+        "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+        "pr": 117,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567000920,
+          "milestone1000": "success",
+          "milestoneRunId": 43567000950,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567000915,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+        "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+        "pr": 118,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43566724675,
+          "milestone1000": "success",
+          "milestoneRunId": 43566724677,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43566724653,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+        "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+        "pr": 119,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567105635,
+          "milestone1000": "success",
+          "milestoneRunId": 43567105750,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567105671,
+          "extendedSoak": "in_progress"
+        }
+      }
+    ],
+    "pullRequests": [
+      117,
+      118,
+      119
+    ],
+    "catalog": {
+      "sharedCertificates": 969,
+      "developmentCertificates": 1014,
+      "delta": 45,
+      "remainingTo1000": 31,
+      "newCertificates": 0
+    },
+    "reservationReleased": true,
+    "nextWorkAt": "2026-11-14T08:30:00-03:00"
+  },
+  "nextWorkAt": "2026-11-14T08:30:00-03:00",
+  "parallelRuns": [
+    {
+      "runId": "work-20261113T082743-0300",
+      "owner": "Work",
+      "priority": "P1 — verificar Tributo Torrencial e Sete Ferramentas no 2v2 sem tocar nas reservas M61/M101–M108",
+      "state": "completed; released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-13T08:27:43-03:00",
+      "timezone": "America/Sao_Paulo",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "bd1e9c7c6cffa36f337ab8059cdfec54bd44275f",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "workBranches": [
+        {
+          "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+          "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+          "pr": 65,
+          "scope": [
+            "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "success",
+            "milestone": "success",
+            "npmTest": "success",
+            "extendedSoak": "success",
+            "engineValidation": "in_progress"
+          },
+          "note": null
+        },
+        {
+          "branch": "feat/work-m110-seven-tools-2v2-20261113",
+          "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+          "pr": 66,
+          "scope": [
+            "tests/tagClassicSevenToolsOwnership.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "success",
+            "milestone": "success",
+            "npmTest": "success",
+            "extendedSoak": "success",
+            "engineValidation": "in_progress"
+          },
+          "note": null
+        },
+        {
+          "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+          "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+          "pr": 67,
+          "scope": [
+            "tests/tagClassicMagicJammerOwnership.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "success",
+            "milestone": "success",
+            "npmTest": "success",
+            "extendedSoak": "success",
+            "engineValidation": "in_progress"
+          },
+          "note": null
+        },
+        {
+          "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+          "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+          "pr": 68,
+          "scope": [
+            "tests/tagClassicRaigekiTeamTargeting.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "success",
+            "milestone": "success",
+            "npmTest": "success",
+            "extendedSoak": "in_progress",
+            "engineValidation": "in_progress"
+          },
+          "note": "Corrigida expectativa: Spell sem resposta legal resolve imediatamente."
+        },
+        {
+          "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+          "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+          "pr": 69,
+          "scope": [
+            "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "success",
+            "milestone": "success",
+            "npmTest": "pending_new_run",
+            "extendedSoak": "pending",
+            "engineValidation": "in_progress"
+          },
+          "note": "Primeiro run falhou porque a carta-alvo não estava no deck físico de seat 3; fixture corrigida, nova CI em andamento."
+        },
+        {
+          "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+          "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+          "pr": 70,
+          "scope": [
+            "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "success",
+            "milestone": "success",
+            "npmTest": "success",
+            "extendedSoak": "in_progress",
+            "engineValidation": "in_progress"
+          },
+          "note": null
+        },
+        {
+          "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+          "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+          "pr": 71,
+          "scope": [
+            "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "success",
+            "milestone": "success",
+            "npmTest": "success",
+            "extendedSoak": "in_progress",
+            "engineValidation": "in_progress"
+          },
+          "note": "Corrigida expectativa para resolução imediata quando Torrential não possui janela válida."
+        },
+        {
+          "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+          "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+          "pr": 72,
+          "scope": [
+            "tests/tagClassicFissureTeamTargeting.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "success",
+            "milestone": "success",
+            "npmTest": "success",
+            "extendedSoak": "in_progress",
+            "engineValidation": "in_progress"
+          },
+          "note": "Arquivo criado na branch correta; arquivo acidental no main removido por commit 8f3f1768b1ee1f4b4a96d557eab5926d96525ad2; ausência verificada."
+        },
+        {
+          "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+          "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+          "pr": 73,
+          "scope": [
+            "tests/tagClassicDeSpellRevealPolicy.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "success",
+            "milestone": "success",
+            "npmTest": "success",
+            "extendedSoak": "in_progress",
+            "engineValidation": "in_progress"
+          },
+          "note": null
+        },
+        {
+          "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+          "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+          "pr": 74,
+          "scope": [
+            "src/tagDuel.ts",
+            "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "fast": "in_progress",
+            "milestone": "success",
+            "npmTest": "in_progress",
+            "extendedSoak": "in_progress",
+            "engineValidation": "queued"
+          },
+          "note": "Correção runtime para devolver cartas de zonas compartilhadas à mão do proprietário físico por UID m0–m3; teste inclui rotação de assentos."
+        }
+      ],
+      "reservedFiles": [
+        "tests/tagClassicTorrentialTributeOwnership.test.cjs",
+        "tests/tagClassicSevenToolsOwnership.test.cjs",
+        "tests/tagClassicMagicJammerOwnership.test.cjs",
+        "tests/tagClassicRaigekiTeamTargeting.test.cjs",
+        "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs",
+        "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs",
+        "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs",
+        "tests/tagClassicFissureTeamTargeting.test.cjs",
+        "tests/tagClassicDeSpellRevealPolicy.test.cjs",
+        "src/tagDuel.ts",
+        "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+      ],
+      "blocksCompleted": [
+        "Auditoria de coordination/state.json, checkpoint M101, HEAD compartilhado, branches, PRs, CI e situação de deploy.",
+        "Solicitado novamente handoff cooperativo M61; sem resposta. Não alterados os cinco caminhos reservados.",
+        "Criadas 10 PRs draft (#65–#74) em branches isoladas, com 11 regressões comportamentais 2v2 para Torrential Tribute, Seven Tools, Magic Jammer, Raigeki, Monster Reborn, Book of Moon, Mystical Space Typhoon, Fissure, De-Spell (2 cenários) e Giant Trunade.",
+        "M118: corrigida a redistribuição de cartas devolvidas do campo compartilhado para as mãos físicas, usando UID m0–m3; teste cobre três donos e rotação de assentos.",
+        "Corrigidas expectativas de resolução imediata sem resposta legal em M112 e M115; corrigido deck fixture M113 após falha de teste.",
+        "Diagnóstico M108/PR64: npm test falhou em uma expectativa de Negate Attack; informada a branch responsável sem alterar seus arquivos.",
+        "PRs #57–#59 M101–M103: CI completa confirmada com sucesso; reservas próprias liberadas.",
+        "Arquivo M116 criado por engano no main foi removido imediatamente por commit de reversão; ausência no main e presença na branch M116 verificadas."
+      ],
+      "changes": [
+        {
+          "pr": 65,
+          "m": "M109",
+          "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+          "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+          "files": [
+            "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+          ]
+        },
+        {
+          "pr": 66,
+          "m": "M110",
+          "branch": "feat/work-m110-seven-tools-2v2-20261113",
+          "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+          "files": [
+            "tests/tagClassicSevenToolsOwnership.test.cjs"
+          ]
+        },
+        {
+          "pr": 67,
+          "m": "M111",
+          "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+          "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+          "files": [
+            "tests/tagClassicMagicJammerOwnership.test.cjs"
+          ]
+        },
+        {
+          "pr": 68,
+          "m": "M112",
+          "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+          "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+          "files": [
+            "tests/tagClassicRaigekiTeamTargeting.test.cjs"
+          ]
+        },
+        {
+          "pr": 69,
+          "m": "M113",
+          "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+          "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+          "files": [
+            "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs"
+          ]
+        },
+        {
+          "pr": 70,
+          "m": "M114",
+          "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+          "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+          "files": [
+            "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs"
+          ]
+        },
+        {
+          "pr": 71,
+          "m": "M115",
+          "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+          "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+          "files": [
+            "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs"
+          ]
+        },
+        {
+          "pr": 72,
+          "m": "M116",
+          "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+          "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+          "files": [
+            "tests/tagClassicFissureTeamTargeting.test.cjs"
+          ]
+        },
+        {
+          "pr": 73,
+          "m": "M117",
+          "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+          "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+          "files": [
+            "tests/tagClassicDeSpellRevealPolicy.test.cjs"
+          ]
+        },
+        {
+          "pr": 74,
+          "m": "M118",
+          "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+          "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+          "files": [
+            "src/tagDuel.ts",
+            "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+          ],
+          "codeChange": "restorePhysicalHandOwners"
+        }
+      ],
+      "catalog": {
+        "sharedBranch": {
+          "cards": 969,
+          "certificates": 969
+        },
+        "m71TestBase": {
+          "cards": 969,
+          "certificates": 969
+        },
+        "pr14DevelopmentBranch": {
+          "cards": 1014,
+          "certificates": 1014,
+          "merged": false
+        },
+        "deltaToShared": 45,
+        "newAdmissions": 0,
+        "newCertificates": 0
+      },
+      "handoffRequest": {
+        "target": "PR #17 / M61",
+        "status": "awaiting-response",
+        "commentId": 6851541552,
+        "noResponse": true
+      },
+      "validation": {
+        "pr57": {
+          "fast": "success",
+          "engine": "success",
+          "milestone": "success"
+        },
+        "pr58": {
+          "fast": "success",
+          "engine": "success",
+          "milestone": "success"
+        },
+        "pr59": {
+          "fast": "success",
+          "engine": "success",
+          "milestone": "success"
+        },
+        "pr64": {
+          "fast": "success",
+          "engine": "failure",
+          "milestone": "success",
+          "npmTest": "failure",
+          "failedTests": 1,
+          "passedTests": 7366,
+          "extendedSoak": "success"
+        },
+        "prs": [
+          {
+            "pr": 65,
+            "m": "M109",
+            "ci": "fast-success; milestone-success; npm-test-success; extended-soak-success; engine-validation-in-progress"
+          },
+          {
+            "pr": 66,
+            "m": "M110",
+            "ci": "fast-success; milestone-success; npm-test-success; extended-soak-success; engine-validation-in-progress"
+          },
+          {
+            "pr": 67,
+            "m": "M111",
+            "ci": "fast-success; milestone-success; npm-test-success; extended-soak-success; engine-validation-in-progress"
+          },
+          {
+            "pr": 68,
+            "m": "M112",
+            "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+          },
+          {
+            "pr": 69,
+            "m": "M113",
+            "ci": "fast-success; milestone-success; corrected-head; engine-validation-in-progress"
+          },
+          {
+            "pr": 70,
+            "m": "M114",
+            "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+          },
+          {
+            "pr": 71,
+            "m": "M115",
+            "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+          },
+          {
+            "pr": 72,
+            "m": "M116",
+            "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+          },
+          {
+            "pr": 73,
+            "m": "M117",
+            "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+          },
+          {
+            "pr": 74,
+            "m": "M118",
+            "ci": "fast-in-progress; milestone-success; npm-test-in-progress; engine-validation-queued"
+          }
+        ],
+        "note": "PRs #65–#74 permanecem draft e não mergeáveis; CI completa ainda não terminou em nenhuma revisão nova."
+      },
+      "deployment": {
+        "merge": "none",
+        "deploy": "none",
+        "liveDiscordValidation": false,
+        "hosting": "não verificado",
+        "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
+      },
+      "nextTask": "Auxiliar: monitorar CI das PRs #65–#74, corrigir apenas falhas de teste nas branches liberadas e reportar M108 (#64). Work na próxima janela: verificar resultados finais, obter handoff M61 e, se liberado, corrigir TS2367/TS2339; continuar expansão comportamental sem duplicações.",
+      "nextWorkAt": "2026-11-13T13:30:00-03:00",
+      "endedAt": "2026-11-13T08:48:19-03:00",
+      "sharedHeadBeforeRelease": "22e39b9c8ca0fadb596748a71eeb50d05b6ea361",
+      "releaseToAuxiliary": {
+        "branches": [
+          {
+            "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+            "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+            "pr": 65,
+            "scope": [
+              "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m110-seven-tools-2v2-20261113",
+            "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+            "pr": 66,
+            "scope": [
+              "tests/tagClassicSevenToolsOwnership.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+            "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+            "pr": 67,
+            "scope": [
+              "tests/tagClassicMagicJammerOwnership.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+            "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+            "pr": 68,
+            "scope": [
+              "tests/tagClassicRaigekiTeamTargeting.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+            "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+            "pr": 69,
+            "scope": [
+              "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+            "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+            "pr": 70,
+            "scope": [
+              "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+            "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+            "pr": 71,
+            "scope": [
+              "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+            "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+            "pr": 72,
+            "scope": [
+              "tests/tagClassicFissureTeamTargeting.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+            "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+            "pr": 73,
+            "scope": [
+              "tests/tagClassicDeSpellRevealPolicy.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+            "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+            "pr": 74,
+            "scope": [
+              "src/tagDuel.ts",
+              "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+            ]
+          }
+        ],
+        "allowed": "monitorar CI e corrigir apenas falhas de teste nas próprias branches; M118 runtime somente com transferência explícita",
+        "forbidden": "não alterar M61/M104–M108; não fazer merge/deploy; não tocar em banco ou inventários"
+      },
+      "duration": {
+        "elapsedWallMinutes": 21,
+        "effectiveMinutesMeasured": false,
+        "minimum60MinutesConfirmed": false,
+        "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
+      },
+      "scopeReleasedToAuxiliary": {
+        "branches": [
+          {
+            "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+            "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+            "pr": 65,
+            "scope": [
+              "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m110-seven-tools-2v2-20261113",
+            "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+            "pr": 66,
+            "scope": [
+              "tests/tagClassicSevenToolsOwnership.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+            "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+            "pr": 67,
+            "scope": [
+              "tests/tagClassicMagicJammerOwnership.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+            "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+            "pr": 68,
+            "scope": [
+              "tests/tagClassicRaigekiTeamTargeting.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+            "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+            "pr": 69,
+            "scope": [
+              "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+            "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+            "pr": 70,
+            "scope": [
+              "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+            "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+            "pr": 71,
+            "scope": [
+              "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+            "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+            "pr": 72,
+            "scope": [
+              "tests/tagClassicFissureTeamTargeting.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+            "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+            "pr": 73,
+            "scope": [
+              "tests/tagClassicDeSpellRevealPolicy.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+            "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+            "pr": 74,
+            "scope": [
+              "src/tagDuel.ts",
+              "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+            ]
+          }
+        ],
+        "allowed": "monitorar CI e corrigir apenas falhas de teste nas próprias branches; M118 runtime somente com transferência explícita",
+        "forbidden": "não alterar M61/M104–M108; não fazer merge/deploy; não tocar em banco ou inventários"
+      }
+    },
+    {
+      "runId": "work-20261113T122919-0300",
+      "owner": "Work",
+      "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
+      "state": "completed; released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-13T12:29:19-03:00",
+      "endedAt": "2026-11-13T12:54:18-03:00",
+      "timezone": "America/Sao_Paulo",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
+      "sharedHeadAfterCheckpoint": "3c76c1555531d539044c6893c972aa27fca74226",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "workBranches": [
+        {
+          "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
+          "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+          "pr": 75,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+          "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+          "pr": 76,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "src/spellExceptions.ts",
+            "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
+          "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+          "pr": 77,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+          "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+          "pr": 78,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+          "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+          "pr": 79,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+          "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
+          "pr": 80,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+          "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+          "pr": 81,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+          "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+          "pr": 82,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+          "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+          "pr": 83,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+          "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+          "pr": 84,
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        }
+      ],
+      "changes": [
+        {
+          "m": "M119",
+          "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
+          "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+          "pr": 75,
+          "files": [
+            "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs"
+          ]
+        },
+        {
+          "m": "M120",
+          "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+          "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+          "pr": 76,
+          "files": [
+            "src/spellExceptions.ts",
+            "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs"
+          ]
+        },
+        {
+          "m": "M121",
+          "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
+          "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+          "pr": 77,
+          "files": [
+            "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+          ]
+        },
+        {
+          "m": "M122",
+          "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+          "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+          "pr": 78,
+          "files": [
+            "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+          ]
+        },
+        {
+          "m": "M123",
+          "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+          "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+          "pr": 79,
+          "files": [
+            "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+          ]
+        },
+        {
+          "m": "M124",
+          "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+          "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
+          "pr": 80,
+          "files": [
+            "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+          ]
+        },
+        {
+          "m": "M125",
+          "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+          "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+          "pr": 81,
+          "files": [
+            "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+          ]
+        },
+        {
+          "m": "M126",
+          "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+          "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+          "pr": 82,
+          "files": [
+            "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+          ]
+        },
+        {
+          "m": "M127",
+          "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+          "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+          "pr": 83,
+          "files": [
+            "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
+          ]
+        },
+        {
+          "m": "M128",
+          "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+          "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+          "pr": 84,
+          "files": [
+            "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+          ]
+        }
+      ],
+      "catalog": {
+        "sharedCards": 969,
+        "sharedCertificates": 969,
+        "developmentCards": 1014,
+        "developmentCertificates": 1014,
+        "delta": 45,
+        "newAdmissions": 0,
+        "newCertificates": 0
+      },
+      "handoffRequest": {
+        "m61": {
+          "pr": 17,
+          "commentId": 6857487009,
+          "status": "awaiting-response",
+          "lastCommentId": 6857994614
+        },
+        "m118": {
+          "pr": 74,
+          "commentId": 6857580108,
+          "status": "awaiting-response"
+        }
+      },
+      "validation": {
+        "pr64": "one npm test failure; 7366 pass/1 fail; Negate Attack response priority expected response but remained main",
+        "pr65to74": "all three workflows success",
+        "pr75": "all workflows success; test and extended-soak green",
+        "pr76": "all workflows success; npm test, audits and extended-soak green",
+        "pr77": "all workflows success; test and extended-soak green",
+        "pr78": "all workflows success; npm test, audits and extended-soak green",
+        "pr79": "fast+milestone success; engine/soak in progress",
+        "pr80": "corrected head db639952; fast+milestone success; engine in progress",
+        "pr81": "fast+milestone success; engine in progress",
+        "pr82": "milestone success; fast+engine queued",
+        "pr83": "milestone success; fast in progress; engine queued",
+        "pr84": "engine+milestone queued; fast not yet returned"
+      },
+      "deployment": {
+        "merge": "none",
+        "deploy": "none",
+        "liveDiscordValidation": false,
+        "hosting": "not verified"
+      },
+      "nextTask": "Auxiliar: monitorar CI das PRs #65–#74, corrigir apenas falhas de teste nas branches liberadas e reportar M108 (#64). Work na próxima janela: verificar resultados finais, obter handoff M61 e, se liberado, corrigir TS2367/TS2339; continuar expansão comportamental sem duplicações.",
+      "nextWorkAt": "2026-11-13T13:30:00-03:00",
+      "duration": {
+        "elapsedWallMinutes": 24,
+        "effectiveMinutesMeasured": false,
+        "minimum60MinutesConfirmed": false,
+        "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
+      },
+      "scopeReleasedToAuxiliary": {
+        "branches": [
+          {
+            "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
+            "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+            "pr": 75,
+            "scope": [
+              "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+            "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+            "pr": 76,
+            "scope": [
+              "src/spellExceptions.ts",
+              "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
+            "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+            "pr": 77,
+            "scope": [
+              "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+            "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+            "pr": 78,
+            "scope": [
+              "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+            "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+            "pr": 79,
+            "scope": [
+              "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+            "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
+            "pr": 80,
+            "scope": [
+              "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+            "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+            "pr": 81,
+            "scope": [
+              "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+            "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+            "pr": 82,
+            "scope": [
+              "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+            "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+            "pr": 83,
+            "scope": [
+              "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
+            ]
+          },
+          {
+            "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+            "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+            "pr": 84,
+            "scope": [
+              "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+            ]
+          }
+        ],
+        "allowed": "monitor CI and fix only own branches",
+        "forbidden": "do not touch M61/M118 or production data"
+      }
+    },
+    {
+      "runId": "work-20261113T125703-0300",
+      "owner": "Work",
+      "priority": "P1 — ampliar cobertura comportamental 2v2 de compra, LP compartilhado e respostas de batalha; preservar ownership físico e não invadir M61/M118.",
+      "state": "completed; released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-13T12:57:03-03:00",
+      "endedAt": "2026-11-13T13:09:11-03:00",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "97c622833a72415ea29f5bd0320a8a07f67dc0a5",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "workBranches": [
+        {
+          "branch": "feat/work-m129-upstart-goblin-2v2-20261113",
+          "head": "282e88ce752c07023d77ee49da491cdb101af791",
+          "pr": 85,
+          "scope": [
+            "tests/tagClassicUpstartGoblinPhysicalDraw.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "queued",
+            "engineValidation": "queued",
+            "milestone1000": "success"
+          }
+        },
+        {
+          "branch": "feat/work-m130-tremendous-fire-2v2-20261113",
+          "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
+          "pr": 86,
+          "scope": [
+            "tests/tagClassicTremendousFireTeamDamage.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "in_progress",
+            "engineValidation": "in_progress",
+            "milestone1000": "success"
+          }
+        },
+        {
+          "branch": "feat/work-m131-jar-of-greed-2v2-20261113",
+          "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
+          "pr": 87,
+          "scope": [
+            "tests/tagClassicJarOfGreedPhysicalDraw.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "engineValidation": "queued",
+            "milestone1000": "queued"
+          }
+        },
+        {
+          "branch": "feat/work-m132-direct-lp-spells-2v2-20261113",
+          "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
+          "pr": 88,
+          "scope": [
+            "tests/tagClassicDirectLPEffectsTeamOwnership.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "engineValidation": "queued",
+            "milestone1000": "success"
+          }
+        },
+        {
+          "branch": "feat/work-m133-magic-cylinder-2v2-20261113",
+          "head": "6eba9628ec7c3e251be913110add8f69dabede13",
+          "pr": 89,
+          "scope": [
+            "tests/tagClassicMagicCylinderPhysicalOwners.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "queued",
+            "engineValidation": "queued",
+            "milestone1000": "queued"
+          }
+        },
+        {
+          "branch": "feat/work-m108-negate-attack-counter-2v2-20261113",
+          "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83",
+          "pr": 64,
+          "scope": [
+            "tests/tagClassicNegateAttackCounterOwnership.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "queued",
+            "engineValidation": "queued",
+            "milestone1000": "queued"
+          }
+        }
+      ],
+      "lastCheckpoint": "coordination/runs/work-20261113T125703-0300.json",
+      "nextWorkAt": "2026-11-13T17:30:00-03:00",
+      "duration": {
+        "elapsedWallMinutes": 12,
+        "effectiveMinutesMeasured": false,
+        "minimum60MinutesConfirmed": false,
+        "note": "A janela observada foi de aproximadamente doze minutos; não é possível comprovar 60 minutos de trabalho efetivo. Espera de CI não foi contabilizada."
+      },
+      "lastActivityAt": "2026-11-13T13:09:11-03:00",
+      "validation": {
+        "pr85": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "success"
+        },
+        "pr86": {
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        },
+        "pr87": {
+          "cardBatchFast": "success",
+          "engineValidation": "queued",
+          "milestone1000": "success"
+        },
+        "pr88": {
+          "cardBatchFast": "success",
+          "engineValidation": "in_progress",
+          "milestone1000": "success"
+        },
+        "pr89": {
+          "cardBatchFast": "queued",
+          "engineValidation": "queued",
+          "milestone1000": "queued"
+        }
+      }
+    },
+    {
+      "runId": "work-20261113T134424-0300",
+      "owner": "Work",
+      "state": "handoff-pending-no-response",
+      "branch": "feat/work-m151-polymerization-shared-field-fusion-2v2-20261113",
+      "head": "caed37c93b07c12d7b166f12acf0c2b8135901c4",
+      "pr": 107,
+      "reservedFiles": [
+        "tests/tagClassicPolymerizationSharedFieldFusion.test.cjs"
+      ],
+      "priority": "P1 — certificar por comportamento a Fusão 2v2: Polymerization usa monstros do campo compartilhado, preserva UIDs físicos e não acessa a mão privada do parceiro inativo.",
+      "failure": "Fusion Substitute fixture deploys BEASTKING from physical seat 0 although only seat 2 owns it."
+    },
+    {
+      "runId": "work-20261113T175911-0300",
+      "owner": "Work",
+      "state": "completed; released-to-auxiliary-monitor-ci",
+      "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "pr": 112,
+      "additionalBranches": [
+        {
+          "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+          "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+          "pr": 113
+        }
+      ],
+      "startedAt": "2026-11-13T17:59:11-03:00",
+      "endedAt": "2026-11-13T18:05:29-03:00",
+      "duration": {
+        "elapsedWallMinutes": 6,
+        "effectiveMinutesMeasured": false,
+        "minimum60MinutesConfirmed": false,
+        "note": "Janela observada inferior a 60 minutos; o trabalho de implementação foi realizado, mas não há medição confiável de 60 minutos efetivos. Espera de CI não foi contabilizada."
+      }
+    }
+  ],
+  "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
+  "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
+  "sharedHeadAfterCheckpoint": "5309ebe7e82e7687703a3f7061aac014941dc647",
+  "sharedHeadBeforeStateUpdate": "5309ebe7e82e7687703a3f7061aac014941dc647",
+  "endedAt": "2026-11-14T03:39:10-03:00",
+  "m118HandoffRequest": {
+    "target": "PR #74 / M118",
+    "status": "awaiting-response",
+    "commentId": 6873098031,
+    "lastCommentId": 6873098031,
+    "noResponse": true,
+    "lastRequestedAt": "2026-11-14T03:25:16-03:00"
+  },
+  "m120ValidationComment": 6858001163,
+  "releaseToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+        "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+        "pr": 112,
+        "scope": [
+          "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43506972040,
+          "engineValidation": "in_progress",
+          "engineRunId": 43506972175,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43506972102
+        }
+      },
+      {
+        "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+        "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+        "pr": 113,
+        "scope": [
+          "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43507071750,
+          "engineValidation": "in_progress",
+          "engineRunId": 43507071767,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43507071960
+        }
+      },
+      {
+        "branch": "feat/work-m158-economic-spells-2v2-20261113",
+        "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+        "pr": 114,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43541777615,
+          "milestone1000": "success",
+          "milestoneRunId": 43541777612,
+          "engineValidation": "in_progress",
+          "engineRunId": 43541777726,
+          "testJob": "in_progress",
+          "npmTestStep": "success",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+        "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+        "pr": 115,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagEconomicSpellDiscordMenu.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43542034914,
+          "milestone1000": "success",
+          "milestoneRunId": 43542035027,
+          "engineValidation": "in_progress",
+          "engineRunId": 43542035087,
+          "testJob": "in_progress",
+          "npmTestStep": "in_progress",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+        "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+        "pr": 116,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "in_progress",
+          "cardBatchFastRunId": 43542328874,
+          "milestone1000": "success",
+          "milestoneRunId": 43542328862,
+          "engineValidation": "in_progress",
+          "engineRunId": 43542328882,
+          "testJob": "in_progress",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+        "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+        "pr": 117,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567000920,
+          "milestone1000": "success",
+          "milestoneRunId": 43567000950,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567000915,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+        "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+        "pr": 118,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43566724675,
+          "milestone1000": "success",
+          "milestoneRunId": 43566724677,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43566724653,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+        "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+        "pr": 119,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567105635,
+          "milestone1000": "success",
+          "milestoneRunId": 43567105750,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567105671,
+          "extendedSoak": "in_progress"
+        }
+      }
+    ],
+    "allowed": "Auxiliar pode monitorar CI das PRs #112–#119 e corrigir somente os arquivos de teste explicitamente liberados M156–M163 nas próprias branches; preservar logs e devolver checkpoint.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, M153/runtime reservado, branches de terceiros, catálogo, certificados, bancos ou inventários; não fazer merge ou deploy."
+  },
+  "scopeReleasedToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+        "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+        "pr": 112,
+        "scope": [
+          "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43506972040,
+          "engineValidation": "in_progress",
+          "engineRunId": 43506972175,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43506972102
+        }
+      },
+      {
+        "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+        "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+        "pr": 113,
+        "scope": [
+          "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43507071750,
+          "engineValidation": "in_progress",
+          "engineRunId": 43507071767,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43507071960
+        }
+      },
+      {
+        "branch": "feat/work-m158-economic-spells-2v2-20261113",
+        "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
+        "pr": 114,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43541777615,
+          "milestone1000": "success",
+          "milestoneRunId": 43541777612,
+          "engineValidation": "in_progress",
+          "engineRunId": 43541777726,
+          "testJob": "in_progress",
+          "npmTestStep": "success",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
+        "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
+        "pr": 115,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagEconomicSpellDiscordMenu.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43542034914,
+          "milestone1000": "success",
+          "milestoneRunId": 43542035027,
+          "engineValidation": "in_progress",
+          "engineRunId": 43542035087,
+          "testJob": "in_progress",
+          "npmTestStep": "in_progress",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
+        "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
+        "pr": 116,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagEconomicSpellDiscordInteraction.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "in_progress",
+          "cardBatchFastRunId": 43542328874,
+          "milestone1000": "success",
+          "milestoneRunId": 43542328862,
+          "engineValidation": "in_progress",
+          "engineRunId": 43542328882,
+          "testJob": "in_progress",
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
+        "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
+        "pr": 117,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567000920,
+          "milestone1000": "success",
+          "milestoneRunId": 43567000950,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567000915,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
+        "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
+        "pr": 118,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43566724675,
+          "milestone1000": "success",
+          "milestoneRunId": 43566724677,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43566724653,
+          "extendedSoak": "in_progress"
+        }
+      },
+      {
+        "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
+        "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
+        "pr": 119,
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43567105635,
+          "milestone1000": "success",
+          "milestoneRunId": 43567105750,
+          "check": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "engineRunId": 43567105671,
+          "extendedSoak": "in_progress"
+        }
+      }
+    ],
+    "allowed": "Auxiliar pode monitorar CI das PRs #112–#119 e corrigir somente os arquivos de teste explicitamente liberados M156–M163 nas próprias branches; preservar logs e devolver checkpoint.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, M153/runtime reservado, branches de terceiros, catálogo, certificados, bancos ou inventários; não fazer merge ou deploy."
+  },
+  "lastCoordinationRefreshAt": "2026-11-14T03:39:10-03:00",
+  "m151HandoffRequest": {
+    "target": "PR #107 / M151",
+    "status": "awaiting-response",
+    "commentId": 6873098406,
+    "lastCommentId": 6873098406,
+    "noResponse": true,
+    "lastRequestedAt": "2026-11-14T03:25:16-03:00"
+  },
+  "sharedHeadAfterScopeExtension": "b21ea902e5b34825712e383ebba7972355c5337e",
+  "validation": {
+    "pr114": "all workflows success",
+    "pr115": "all workflows success",
+    "pr116": "engine validation failed: one Discord interaction test queries tagStore with requestId instead of sessionId; auxiliary notified",
+    "pr117": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier fixture failure corrected",
+    "pr118": "npm run check/npm test/card-batch-fast/milestone pass; stress and extended soak in progress",
+    "pr119": "new HEAD npm run check/npm test/card-batch-fast/milestone pass; engine validation and extended soak in progress; earlier negative fixture expectation corrected"
+  },
+  "activeWork": {
+    "id": "work-20261114T083019-0300",
+    "owner": "Work",
+    "priority": "P1 — ampliar a validação comportamental 2v2 da família de destruição global de Magias/Armadilhas: Heavy Storm destrói ambas as equipes; Harpie's Feather Duster destrói somente a equipe adversária. Verificar propriedade física, campo/backrow compartilhados, privacidade e conservação dos 80 UIDs.",
+    "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
+    "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "base": "feat/work-m71-ci-branch-routing-20261112",
+    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "reservedFiles": [
+      "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs",
+      "coordination/state.json",
+      "coordination/runs/work-20261114T083019-0300.json"
+    ],
+    "state": "active",
+    "startedAt": "2026-11-14T08:30:19-03:00",
+    "lastActivityAt": "2026-11-14T08:30:19-03:00"
+  },
+  "sharedHeadAtStart": "ec8cabc985b0368576fb8527429251bbc1aa4e7f"
+}

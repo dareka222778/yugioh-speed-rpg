@@ -1,0 +1,424 @@
+[
+  {
+    "id": "26725158",
+    "canonicalId": "1682470e-c4a1-4b92-841e-17d81f5718c2",
+    "name": "Exile of the Wicked",
+    "konamiId": 4869,
+    "reviewer": "REA Mission 15 individual public-source verification",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4869&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-10-01",
+      "set": "TP2-004",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4869&request_locale=en"
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-10-01",
+      "ocg": "1999-12-01",
+      "world": "1999-12-01"
+    },
+    "mechanicalFingerprint": "ffaf47c9ce40851792a13eab04344bdf3d32012b57f3e54a23cca46670ec1237",
+    "mechanicalDefinition": {
+      "kind": "destroyFiltered",
+      "filter": {
+        "races": [
+          "Fiend"
+        ]
+      }
+    },
+    "effectReview": {
+      "normalSpell": true,
+      "activationSpeed": 1,
+      "cost": null,
+      "chosenTargets": false,
+      "group": "both fields, matching face-up monsters",
+      "selection": "resolution",
+      "equipmentController": "either",
+      "spellImmunity": "respected",
+      "activationNegation": "prevents resolution",
+      "fullDescriptionReviewed": true
+    },
+    "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "21323861",
+    "canonicalId": "31a0a974-b9a0-438d-a9d6-22604ddc5a14",
+    "name": "Acid Rain",
+    "konamiId": 4666,
+    "reviewer": "REA Mission 15 individual public-source verification",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4666&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-07-22",
+      "set": "Vol.4",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4666&request_locale=ja"
+    },
+    "importedFirstObserved": {
+      "tcg": "2005-06-30",
+      "ocg": "1999-07-22",
+      "world": "1999-07-22"
+    },
+    "mechanicalFingerprint": "d5b15fe36788289d462dd5fb4cf75730890f374edefc13e7fb59574670aab062",
+    "mechanicalDefinition": {
+      "kind": "destroyFiltered",
+      "filter": {
+        "races": [
+          "Machine"
+        ]
+      }
+    },
+    "effectReview": {
+      "normalSpell": true,
+      "activationSpeed": 1,
+      "cost": null,
+      "chosenTargets": false,
+      "group": "both fields, matching face-up monsters",
+      "selection": "resolution",
+      "equipmentController": "either",
+      "spellImmunity": "respected",
+      "activationNegation": "prevents resolution",
+      "fullDescriptionReviewed": true
+    },
+    "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "56606928",
+    "canonicalId": "3a159738-9c46-4cd5-83b8-e997b80de393",
+    "name": "Eternal Drought",
+    "konamiId": 4670,
+    "reviewer": "REA Mission 15 individual public-source verification",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4670&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-07-22",
+      "set": "Vol.4",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4670&request_locale=ja"
+    },
+    "importedFirstObserved": {
+      "tcg": "2011-06-21",
+      "ocg": "1999-07-22",
+      "world": "1999-07-22"
+    },
+    "mechanicalFingerprint": "31da04e27dc6095c5a777c6ae1f8d2674c1b4706a8ca3ba506cc9ef9a808abb9",
+    "mechanicalDefinition": {
+      "kind": "destroyFiltered",
+      "filter": {
+        "races": [
+          "Fish"
+        ]
+      }
+    },
+    "effectReview": {
+      "normalSpell": true,
+      "activationSpeed": 1,
+      "cost": null,
+      "chosenTargets": false,
+      "group": "both fields, matching face-up monsters",
+      "selection": "resolution",
+      "equipmentController": "either",
+      "spellImmunity": "respected",
+      "activationNegation": "prevents resolution",
+      "fullDescriptionReviewed": true
+    },
+    "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "20101223",
+    "canonicalId": "629463d3-f248-4437-9e6e-2cdd79d0236d",
+    "name": "Breath of Light",
+    "konamiId": 4669,
+    "reviewer": "REA Mission 15 individual public-source verification",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4669&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-07-22",
+      "set": "Vol.4",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4669&request_locale=ja"
+    },
+    "importedFirstObserved": {
+      "tcg": "2011-08-13",
+      "ocg": "1999-07-22",
+      "world": "1999-07-22"
+    },
+    "mechanicalFingerprint": "8bfa1b6dfa26ab7c76fb756998f63a514103a3eafd92bcae9bc43cb3bcce87ea",
+    "mechanicalDefinition": {
+      "kind": "destroyFiltered",
+      "filter": {
+        "races": [
+          "Rock"
+        ]
+      }
+    },
+    "effectReview": {
+      "normalSpell": true,
+      "activationSpeed": 1,
+      "cost": null,
+      "chosenTargets": false,
+      "group": "both fields, matching face-up monsters",
+      "selection": "resolution",
+      "equipmentController": "either",
+      "spellImmunity": "respected",
+      "activationNegation": "prevents resolution",
+      "fullDescriptionReviewed": true
+    },
+    "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "90873992",
+    "canonicalId": "7959c83c-3d43-4ec4-9998-f1338b9c923a",
+    "name": "Warrior Elimination",
+    "konamiId": 4659,
+    "reviewer": "REA Mission 15 individual public-source verification",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4659&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-07-22",
+      "set": "Vol.4",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4659&request_locale=ja"
+    },
+    "importedFirstObserved": {
+      "tcg": "2005-11-01",
+      "ocg": "1999-07-22",
+      "world": "1999-07-22"
+    },
+    "mechanicalFingerprint": "8c5d1ad1c8c027a073ae613be82fceb3c72a035d882e1c3978398b7ed6285dd8",
+    "mechanicalDefinition": {
+      "kind": "destroyFiltered",
+      "filter": {
+        "races": [
+          "Warrior"
+        ]
+      }
+    },
+    "effectReview": {
+      "normalSpell": true,
+      "activationSpeed": 1,
+      "cost": null,
+      "chosenTargets": false,
+      "group": "both fields, matching face-up monsters",
+      "selection": "resolution",
+      "equipmentController": "either",
+      "spellImmunity": "respected",
+      "activationNegation": "prevents resolution",
+      "fullDescriptionReviewed": true
+    },
+    "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "94716515",
+    "canonicalId": "8d7e4cb4-184a-42a0-af67-22e89c1c787e",
+    "name": "Eradicating Aerosol",
+    "konamiId": 4668,
+    "reviewer": "REA Mission 15 individual public-source verification",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4668&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-07-22",
+      "set": "Vol.4",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4668&request_locale=ja"
+    },
+    "importedFirstObserved": {
+      "tcg": "2011-06-21",
+      "ocg": "1999-07-22",
+      "world": "1999-07-22"
+    },
+    "mechanicalFingerprint": "0d84fb0581b4fe51f991d43fc0a7f32e63508466384c9656e6becf44ecb572c4",
+    "mechanicalDefinition": {
+      "kind": "destroyFiltered",
+      "filter": {
+        "races": [
+          "Insect"
+        ]
+      }
+    },
+    "effectReview": {
+      "normalSpell": true,
+      "activationSpeed": 1,
+      "cost": null,
+      "chosenTargets": false,
+      "group": "both fields, matching face-up monsters",
+      "selection": "resolution",
+      "equipmentController": "either",
+      "spellImmunity": "respected",
+      "activationNegation": "prevents resolution",
+      "fullDescriptionReviewed": true
+    },
+    "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "95051344",
+    "canonicalId": "2af71b41-11eb-4506-9493-5c2ad9605c9c",
+    "name": "Eternal Rest",
+    "konamiId": 4662,
+    "reviewer": "REA Mission 15 individual public-source verification",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4662&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2002-06-20",
+      "set": "DL1-044",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4662&request_locale=ja"
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "mechanicalFingerprint": "92bc4dd72a4664dc14fd00655025d3f0fffde0c865d2ae048fdbc55f28a1e5b0",
+    "mechanicalDefinition": {
+      "kind": "destroyFiltered",
+      "filter": {
+        "equipped": true
+      }
+    },
+    "effectReview": {
+      "normalSpell": true,
+      "activationSpeed": 1,
+      "cost": null,
+      "chosenTargets": false,
+      "group": "both fields, matching face-up monsters",
+      "selection": "resolution",
+      "equipmentController": "either",
+      "spellImmunity": "respected",
+      "activationNegation": "prevents resolution",
+      "fullDescriptionReviewed": true
+    },
+    "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "90330453",
+    "canonicalId": "e4cc35a3-b445-4a5c-875b-89fa885ca378",
+    "name": "Last Day of Witch",
+    "konamiId": 4868,
+    "reviewer": "REA Mission 15 individual public-source verification",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4868&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2003-01-23",
+      "set": "DL4-118",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4868&request_locale=ja"
+    },
+    "importedFirstObserved": {
+      "tcg": "2023-08-24",
+      "ocg": "1999-12-01",
+      "world": "1999-12-01"
+    },
+    "mechanicalFingerprint": "c73c8f4a441e085075f886d39e9b421f183d7e979056ea00d50bb0347fdf807c",
+    "mechanicalDefinition": {
+      "kind": "destroyFiltered",
+      "filter": {
+        "races": [
+          "Spellcaster"
+        ]
+      }
+    },
+    "effectReview": {
+      "normalSpell": true,
+      "activationSpeed": 1,
+      "cost": null,
+      "chosenTargets": false,
+      "group": "both fields, matching face-up monsters",
+      "selection": "resolution",
+      "equipmentController": "either",
+      "spellImmunity": "respected",
+      "activationNegation": "prevents resolution",
+      "fullDescriptionReviewed": true
+    },
+    "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+    "distributionAuthorized": false
+  }
+]

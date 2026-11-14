@@ -1,0 +1,214 @@
+[
+  {
+    "id": "01434352",
+    "canonicalId": "338b9dee-950d-4cab-8a6e-c9a305a415d5",
+    "name": "Chaos Necromancer",
+    "konamiId": 5827,
+    "reviewer": "REA Mission 16 full official EN/PT card text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5827&request_locale=en",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 0,
+      "defense": 0,
+      "race": "Fiend",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2004-03-01",
+      "set": "IOC-017",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5827&request_locale=en"
+    },
+    "importedFirstObserved": {
+      "tcg": "2004-03-01",
+      "ocg": "2003-04-24",
+      "world": "2003-04-24"
+    },
+    "mechanicalFingerprint": "4663c10121ddcd36bf95ef4f90671ba192094f846cd2ea599a3a8b0e9f6bccda",
+    "mechanicalDefinition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "grave",
+                "controller": "source",
+                "cardKind": "monster",
+                "atk": 300,
+                "def": 0
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "fullTextReviewed": true,
+    "localizedSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5827&request_locale=pt",
+    "passcodeEvidence": "Unchanged public imported history matched to official CID/name/stats. Official HTML does not print password.",
+    "distributionAuthorized": false,
+    "semanticNotes": "Zero printed ATK plus 300 per own grave monster using existing continuous count; negation, boosts and hand/grave movement tested. No new stat-setting operation admitted."
+  },
+  {
+    "id": "04542651",
+    "canonicalId": "4a2c4a93-a810-44aa-a8ba-9825dad5a3d9",
+    "name": "Yellow Luster Shield",
+    "konamiId": 5161,
+    "reviewer": "REA Mission 16 full official EN/PT card text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5161&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2004-03-01",
+      "set": "IOC-037",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5161&request_locale=en"
+    },
+    "importedFirstObserved": {
+      "tcg": "2004-03-01",
+      "ocg": "2003-04-24",
+      "world": "2003-04-24"
+    },
+    "mechanicalFingerprint": "b9d34ab83a76b18217b41c4e7f8a968678280d915f7b258917d8aa5537761ead",
+    "mechanicalDefinition": {
+      "kind": "continuous",
+      "activation": {
+        "speed": 1,
+        "window": "main",
+        "damage": "never"
+      },
+      "rules": [
+        {
+          "kind": "modifier",
+          "filter": {
+            "controller": "source"
+          },
+          "atk": 0,
+          "def": 300
+        }
+      ]
+    },
+    "monsterDefinition": null,
+    "fullTextReviewed": true,
+    "localizedSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5161&request_locale=pt",
+    "passcodeEvidence": "Unchanged public imported history matched to official CID/name/stats. Official HTML does not print password.",
+    "distributionAuthorized": false,
+    "semanticNotes": "Continuous +300 DEF for own face-up monsters, including later arrivals; multiple sources stack and source loss removes modifier."
+  },
+  {
+    "id": "78193831",
+    "canonicalId": "6e09fe41-b80c-41a3-a0cb-1f858b7bcd3d",
+    "name": "Buster Blader",
+    "konamiId": 4983,
+    "reviewer": "REA Mission 16 full official EN/PT card text and pre-cut printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4983&request_locale=en",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2600,
+      "defense": 2300,
+      "race": "Warrior",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "tcg",
+      "date": "2002-10-20",
+      "set": "PSV-050",
+      "firstReleaseClaim": false,
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4983&request_locale=en"
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-10-01",
+      "ocg": "2001-06-28",
+      "world": "2001-06-28"
+    },
+    "mechanicalFingerprint": "740e347dd42620f30250214dfa3048c1abdd26dfc2bb35a631c696cb8269f0d9",
+    "mechanicalDefinition": {
+      "kind": "monsterEffect"
+    },
+    "monsterDefinition": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "continuous",
+          "rules": [
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "monsters",
+                "controller": "opponent",
+                "races": [
+                  "Dragon"
+                ],
+                "faceUp": true,
+                "atk": 500,
+                "def": 0
+              }
+            },
+            {
+              "kind": "modifier",
+              "filter": {
+                "selfOnly": true
+              },
+              "atk": 0,
+              "def": 0,
+              "count": {
+                "zone": "grave",
+                "controller": "opponent",
+                "races": [
+                  "Dragon"
+                ],
+                "cardKind": "monster",
+                "atk": 500,
+                "def": 0
+              }
+            }
+          ]
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "fullTextReviewed": true,
+    "localizedSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4983&request_locale=pt",
+    "passcodeEvidence": "Unchanged public imported history matched to official CID/name/stats. Official HTML does not print password.",
+    "distributionAuthorized": false,
+    "semanticNotes": "Two independent counts: opposing face-up Dragons on field and opposing grave Dragon monsters. Hidden identities never read. Imported TCG date 2002-10-01 differs from official pre-cut printing 2002-10-20; import remains untouched."
+  }
+]

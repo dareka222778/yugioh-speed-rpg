@@ -1,0 +1,759 @@
+{
+  "version": 1,
+  "cohort": "mission10-exact-fusions",
+  "cutoff": "2004-09-30",
+  "source": "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Fusion%20Monster",
+  "sourceResponseSha256": "64dadacb12b7419e7d39081426b7334d4f5969b7b30819fae869a882db38ecb4",
+  "sourceCount": 574,
+  "previousCertified": 692,
+  "independentCrosschecked": 31,
+  "method": "Strict automated 2004 OCG date and independent API identity/stats; entire Fusion description must be an exact named-material recipe with all materials already certified. Konami CID URLs are reference pointers, not individual human page visits.",
+  "cards": [
+    {
+      "id": "05600127",
+      "canonicalId": "0e512319-2e82-458e-87e1-18cd7bb082c8",
+      "konamiId": 5062,
+      "historicalEnglishName": "Humanoid Worm Drake",
+      "independentEnglishName": "Humanoid Worm Drake",
+      "type": "Fusion Monster",
+      "description": "\"Worm Drake\" + \"Humanoid Slime\"",
+      "level": 7,
+      "atk": 2200,
+      "defense": 2000,
+      "race": "Aqua",
+      "attribute": "WATER",
+      "ocgDate": "2001-04-19",
+      "recipeNames": [
+        "Worm Drake",
+        "Humanoid Slime"
+      ],
+      "recipeIds": [
+        "73216412",
+        "46821314"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "06840573",
+      "canonicalId": "460db1bd-86f6-45e3-9153-c06b60ba6551",
+      "konamiId": 4092,
+      "historicalEnglishName": "Barox",
+      "independentEnglishName": "Barox",
+      "type": "Fusion Monster",
+      "description": "\"Frenzied Panda\" + \"Ryu-Kishin\"",
+      "level": 5,
+      "atk": 1380,
+      "defense": 1530,
+      "race": "Fiend",
+      "attribute": "DARK",
+      "ocgDate": "1999-05-27",
+      "recipeNames": [
+        "Frenzied Panda",
+        "Ryu-Kishin"
+      ],
+      "recipeIds": [
+        "98818516",
+        "15303296"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "08327462",
+      "canonicalId": "f85eeb6b-2207-4114-b594-d1ea8dc570fd",
+      "konamiId": 4527,
+      "historicalEnglishName": "Skullbird",
+      "independentEnglishName": "Skullbird",
+      "type": "Fusion Monster",
+      "description": "\"Takuhee\" + \"Temple of Skulls\"",
+      "level": 6,
+      "atk": 1900,
+      "defense": 1700,
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "ocgDate": "1999-07-05",
+      "recipeNames": [
+        "Takuhee",
+        "Temple of Skulls"
+      ],
+      "recipeIds": [
+        "03170832",
+        "00732302"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "09293977",
+      "canonicalId": "0c189b17-1b21-4f0b-b09b-144d930f30bb",
+      "konamiId": 4415,
+      "historicalEnglishName": "Metal Dragon",
+      "independentEnglishName": "Metal Dragon",
+      "type": "Fusion Monster",
+      "description": "\"Steel Ogre Grotto #1\" + \"Lesser Dragon\"",
+      "level": 6,
+      "atk": 1850,
+      "defense": 1700,
+      "race": "Machine",
+      "attribute": "WIND",
+      "ocgDate": "1999-05-27",
+      "recipeNames": [
+        "Steel Ogre Grotto #1",
+        "Lesser Dragon"
+      ],
+      "recipeIds": [
+        "29172562",
+        "55444629"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "09653271",
+      "canonicalId": "d7432aea-c181-4ea8-b32b-4ff0adfdaf08",
+      "konamiId": 4464,
+      "historicalEnglishName": "Kaminari Attack",
+      "independentEnglishName": "Kaminari Attack",
+      "type": "Fusion Monster",
+      "description": "\"Ocubeam\" + \"Mega Thunderball\"",
+      "level": 5,
+      "atk": 1900,
+      "defense": 1400,
+      "race": "Thunder",
+      "attribute": "WIND",
+      "ocgDate": "1999-07-22",
+      "recipeNames": [
+        "Ocubeam",
+        "Mega Thunderball"
+      ],
+      "recipeIds": [
+        "86088138",
+        "21817254"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "15237615",
+      "canonicalId": "35dfcdc4-77ba-4500-b85b-e406b55afea8",
+      "konamiId": 4578,
+      "historicalEnglishName": "Empress Judge",
+      "independentEnglishName": "Empress Judge",
+      "type": "Fusion Monster",
+      "description": "\"Queen's Double\" + \"Hibikime\"",
+      "level": 6,
+      "atk": 2100,
+      "defense": 1700,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-09-23",
+      "recipeNames": [
+        "Queen's Double",
+        "Hibikime"
+      ],
+      "recipeIds": [
+        "05901497",
+        "64501875"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "19066538",
+      "canonicalId": "8a098736-5adc-4966-afd5-96122fb8f9e9",
+      "konamiId": 4229,
+      "historicalEnglishName": "Roaring Ocean Snake",
+      "independentEnglishName": "Roaring Ocean Snake",
+      "type": "Fusion Monster",
+      "description": "\"Mystic Lamp\" + \"Hyosube\"",
+      "level": 6,
+      "atk": 2100,
+      "defense": 1800,
+      "race": "Aqua",
+      "attribute": "WATER",
+      "ocgDate": "1999-09-23",
+      "recipeNames": [
+        "Mystic Lamp",
+        "Hyosube"
+      ],
+      "recipeIds": [
+        "98049915",
+        "02118022"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "28593363",
+      "canonicalId": "99b3c775-5191-4541-a095-3dbd9d9b5f5c",
+      "konamiId": 4443,
+      "historicalEnglishName": "Deepsea Shark",
+      "independentEnglishName": "Deepsea Shark",
+      "type": "Fusion Monster",
+      "description": "\"Bottom Dweller\" + \"Tongyo\"",
+      "level": 5,
+      "atk": 1900,
+      "defense": 1600,
+      "race": "Fish",
+      "attribute": "WATER",
+      "ocgDate": "1999-07-22",
+      "recipeNames": [
+        "Bottom Dweller",
+        "Tongyo"
+      ],
+      "recipeIds": [
+        "81386177",
+        "69572024"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "29929832",
+      "canonicalId": "d1348299-b29e-4c8d-a29f-03afbaeb3b16",
+      "konamiId": 4623,
+      "historicalEnglishName": "Marine Beast",
+      "independentEnglishName": "Marine Beast",
+      "type": "Fusion Monster",
+      "description": "\"Water Magician\" + \"Behegon\"",
+      "level": 5,
+      "atk": 1700,
+      "defense": 1600,
+      "race": "Fish",
+      "attribute": "WATER",
+      "ocgDate": "1999-10-17",
+      "recipeNames": [
+        "Water Magician",
+        "Behegon"
+      ],
+      "recipeIds": [
+        "93343894",
+        "94022093"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "31339260",
+      "canonicalId": "c956dba4-4e19-420d-9280-a23801af35c4",
+      "konamiId": 4036,
+      "historicalEnglishName": "Zombie Warrior",
+      "independentEnglishName": "Zombie Warrior",
+      "type": "Fusion Monster",
+      "description": "\"Skull Servant\" + \"Battle Warrior\"",
+      "level": 3,
+      "atk": 1200,
+      "defense": 900,
+      "race": "Zombie",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-27",
+      "recipeNames": [
+        "Skull Servant",
+        "Battle Warrior"
+      ],
+      "recipeIds": [
+        "32274490",
+        "55550921"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "32355828",
+      "canonicalId": "ac526aa7-6b67-4cb0-a055-933508857a02",
+      "konamiId": 4551,
+      "historicalEnglishName": "Skelgon",
+      "independentEnglishName": "Skelgon",
+      "type": "Fusion Monster",
+      "description": "\"The Snake Hair\" + \"Blackland Fire Dragon\"",
+      "level": 6,
+      "atk": 1700,
+      "defense": 1900,
+      "race": "Zombie",
+      "attribute": "DARK",
+      "ocgDate": "1999-12-01",
+      "recipeNames": [
+        "The Snake Hair",
+        "Blackland Fire Dragon"
+      ],
+      "recipeIds": [
+        "29491031",
+        "87564352"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "32485271",
+      "canonicalId": "b2436962-6450-4b56-8b15-c498b77ac5e2",
+      "konamiId": 4600,
+      "historicalEnglishName": "Rose Spectre of Dunn",
+      "independentEnglishName": "Rose Spectre of Dunn",
+      "type": "Fusion Monster",
+      "description": "\"Feral Imp\" + \"Snakeyashi\"",
+      "level": 6,
+      "atk": 2000,
+      "defense": 1800,
+      "race": "Plant",
+      "attribute": "DARK",
+      "ocgDate": "1999-09-23",
+      "recipeNames": [
+        "Feral Imp",
+        "Snakeyashi"
+      ],
+      "recipeIds": [
+        "41392891",
+        "29802344"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "35752363",
+      "canonicalId": "662d2e2f-75e5-475c-a150-2b2358ae4ecc",
+      "konamiId": 4479,
+      "historicalEnglishName": "Vermillion Sparrow",
+      "independentEnglishName": "Vermillion Sparrow",
+      "type": "Fusion Monster",
+      "description": "\"Rhaimundos of the Red Sword\" + \"Fireyarou\"",
+      "level": 5,
+      "atk": 1900,
+      "defense": 1500,
+      "race": "Pyro",
+      "attribute": "FIRE",
+      "ocgDate": "1999-07-05",
+      "recipeNames": [
+        "Rhaimundos of the Red Sword",
+        "Fireyarou"
+      ],
+      "recipeIds": [
+        "62403074",
+        "71407486"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "37421579",
+      "canonicalId": "7b0b8521-da54-4824-b741-311106a9a831",
+      "konamiId": 4139,
+      "historicalEnglishName": "Charubin the Fire Knight",
+      "independentEnglishName": "Charubin the Fire Knight",
+      "type": "Fusion Monster",
+      "description": "\"Monster Egg\" + \"Hinotama Soul\"",
+      "level": 3,
+      "atk": 1100,
+      "defense": 800,
+      "race": "Pyro",
+      "attribute": "FIRE",
+      "ocgDate": "1999-03-06",
+      "recipeNames": [
+        "Monster Egg",
+        "Hinotama Soul"
+      ],
+      "recipeIds": [
+        "36121917",
+        "96851799"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "41544074",
+      "canonicalId": "85870dd6-509c-48d4-a741-5e09543dc050",
+      "konamiId": 4121,
+      "historicalEnglishName": "Kamionwizard",
+      "independentEnglishName": "Kamionwizard",
+      "type": "Fusion Monster",
+      "description": "\"Mystical Elf\" + \"Curtain of the Dark Ones\"",
+      "level": 4,
+      "atk": 1300,
+      "defense": 1100,
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-27",
+      "recipeNames": [
+        "Mystical Elf",
+        "Curtain of the Dark Ones"
+      ],
+      "recipeIds": [
+        "15025844",
+        "22026707"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "46696593",
+      "canonicalId": "d753e4bf-3e6c-4337-b8fe-4bbb2696cf86",
+      "konamiId": 4473,
+      "historicalEnglishName": "Crimson Sunbird",
+      "independentEnglishName": "Crimson Sunbird",
+      "type": "Fusion Monster",
+      "description": "\"Faith Bird\" + \"Skull Red Bird\"",
+      "level": 6,
+      "atk": 2300,
+      "defense": 1800,
+      "race": "Winged Beast",
+      "attribute": "FIRE",
+      "ocgDate": "1999-12-01",
+      "recipeNames": [
+        "Faith Bird",
+        "Skull Red Bird"
+      ],
+      "recipeIds": [
+        "75582395",
+        "10202894"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "51828629",
+      "canonicalId": "c3f9c1f3-cd43-46cd-afb0-592982663106",
+      "konamiId": 4395,
+      "historicalEnglishName": "Giltia the D. Knight",
+      "independentEnglishName": "Giltia the D. Knight",
+      "type": "Fusion Monster",
+      "description": "\"Guardian of the Labyrinth\" + \"Protector of the Throne\"",
+      "level": 5,
+      "atk": 1850,
+      "defense": 1500,
+      "race": "Warrior",
+      "attribute": "LIGHT",
+      "ocgDate": "1999-11-18",
+      "recipeNames": [
+        "Guardian of the Labyrinth",
+        "Protector of the Throne"
+      ],
+      "recipeIds": [
+        "89272878",
+        "10071456"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "53539634",
+      "canonicalId": "2cdadd5b-e231-47b4-9ebd-1c8b1001c408",
+      "konamiId": 6128,
+      "historicalEnglishName": "Sanwitch",
+      "independentEnglishName": "Sanwitch",
+      "type": "Fusion Monster",
+      "description": "\"Sangan\" + \"Witch of the Black Forest\"",
+      "level": 6,
+      "atk": 2100,
+      "defense": 1800,
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "ocgDate": "2004-05-27",
+      "recipeNames": [
+        "Sangan",
+        "Witch of the Black Forest"
+      ],
+      "recipeIds": [
+        "26202165",
+        "78010363"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "54541900",
+      "canonicalId": "8f724a39-8d65-4b64-aa24-3de90744c134",
+      "konamiId": 4049,
+      "historicalEnglishName": "Karbonala Warrior",
+      "independentEnglishName": "Karbonala Warrior",
+      "type": "Fusion Monster",
+      "description": "\"M-Warrior #1\" + \"M-Warrior #2\"",
+      "level": 4,
+      "atk": 1500,
+      "defense": 1200,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-03-27",
+      "recipeNames": [
+        "M-Warrior #1",
+        "M-Warrior #2"
+      ],
+      "recipeIds": [
+        "56342351",
+        "92731455"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "54622031",
+      "canonicalId": "faa6a6c2-1b03-46ac-98fe-ff43a356cd00",
+      "konamiId": 4570,
+      "historicalEnglishName": "Great Mammoth of Goldfine",
+      "independentEnglishName": "Great Mammoth of Goldfine",
+      "type": "Fusion Monster",
+      "description": "\"The Snake Hair\" + \"Dragon Zombie\"",
+      "level": 6,
+      "atk": 2200,
+      "defense": 1800,
+      "race": "Zombie",
+      "attribute": "DARK",
+      "ocgDate": "1999-10-17",
+      "recipeNames": [
+        "The Snake Hair",
+        "Dragon Zombie"
+      ],
+      "recipeIds": [
+        "29491031",
+        "66672569"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "56413937",
+      "canonicalId": "b8879be5-640d-4c73-b50a-709f61fbca4c",
+      "konamiId": 4624,
+      "historicalEnglishName": "Warrior of Tradition",
+      "independentEnglishName": "Warrior of Tradition",
+      "type": "Fusion Monster",
+      "description": "\"Sonic Maid\" + \"Beautiful Headhuntress\"",
+      "level": 6,
+      "atk": 1900,
+      "defense": 1700,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-07-05",
+      "recipeNames": [
+        "Sonic Maid",
+        "Beautiful Headhuntress"
+      ],
+      "recipeIds": [
+        "38942059",
+        "16899564"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "56907389",
+      "canonicalId": "b2aaed80-7aa0-4e89-8b1e-8b2e245f77a9",
+      "konamiId": 4501,
+      "historicalEnglishName": "Musician King",
+      "independentEnglishName": "Musician King",
+      "type": "Fusion Monster",
+      "description": "\"Witch of the Black Forest\" + \"Lady of Faith\"",
+      "level": 5,
+      "atk": 1750,
+      "defense": 1500,
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "ocgDate": "1999-11-18",
+      "recipeNames": [
+        "Witch of the Black Forest",
+        "Lady of Faith"
+      ],
+      "recipeIds": [
+        "78010363",
+        "17358176"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "59036972",
+      "canonicalId": "dbf09e76-f42d-499c-9d7b-f4af8e58fea0",
+      "konamiId": 4278,
+      "historicalEnglishName": "Mavelus",
+      "independentEnglishName": "Mavelus",
+      "type": "Fusion Monster",
+      "description": "\"Tyhone\" + \"Wings of Wicked Flame\"",
+      "level": 4,
+      "atk": 1300,
+      "defense": 900,
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "ocgDate": "1999-03-27",
+      "recipeNames": [
+        "Tyhone",
+        "Wings of Wicked Flame"
+      ],
+      "recipeIds": [
+        "72842870",
+        "92944626"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "70681994",
+      "canonicalId": "00133a62-8b6d-4ea9-9bb6-79acfa292656",
+      "konamiId": 4300,
+      "historicalEnglishName": "Dragoness the Wicked Knight",
+      "independentEnglishName": "Dragoness the Wicked Knight",
+      "type": "Fusion Monster",
+      "description": "\"Armaill\" + \"One-Eyed Shield Dragon\"",
+      "level": 3,
+      "atk": 1200,
+      "defense": 900,
+      "race": "Warrior",
+      "attribute": "WIND",
+      "ocgDate": "1999-03-27",
+      "recipeNames": [
+        "Armaill",
+        "One-Eyed Shield Dragon"
+      ],
+      "recipeIds": [
+        "53153481",
+        "33064647"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "72869010",
+      "canonicalId": "f43eb0cf-dc6f-48c0-9429-2539152427bb",
+      "konamiId": 4477,
+      "historicalEnglishName": "Soul Hunter",
+      "independentEnglishName": "Soul Hunter",
+      "type": "Fusion Monster",
+      "description": "\"Lord of the Lamp\" + \"Invader from Another Dimension\"",
+      "level": 6,
+      "atk": 2200,
+      "defense": 1800,
+      "race": "Fiend",
+      "attribute": "DARK",
+      "ocgDate": "1999-10-17",
+      "recipeNames": [
+        "Lord of the Lamp",
+        "Invader from Another Dimension"
+      ],
+      "recipeIds": [
+        "99510761",
+        "28450915"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "74703140",
+      "canonicalId": "dbfe59af-cc66-435f-9c6f-ee3d45faf2db",
+      "konamiId": 4471,
+      "historicalEnglishName": "Punished Eagle",
+      "independentEnglishName": "Punished Eagle",
+      "type": "Fusion Monster",
+      "description": "\"Blue-Winged Crown\" + \"Niwatori\"",
+      "level": 6,
+      "atk": 2100,
+      "defense": 1800,
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "ocgDate": "1999-11-18",
+      "recipeNames": [
+        "Blue-Winged Crown",
+        "Niwatori"
+      ],
+      "recipeIds": [
+        "41396436",
+        "07805359"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "80516007",
+      "canonicalId": "83d2da7b-e1ec-4aed-9163-4fddad335aac",
+      "konamiId": 4236,
+      "historicalEnglishName": "Rare Fish",
+      "independentEnglishName": "Rare Fish",
+      "type": "Fusion Monster",
+      "description": "\"Fusionist\" + \"Enchanting Mermaid\"",
+      "level": 4,
+      "atk": 1500,
+      "defense": 1200,
+      "race": "Fish",
+      "attribute": "WATER",
+      "ocgDate": "1999-05-27",
+      "recipeNames": [
+        "Fusionist",
+        "Enchanting Mermaid"
+      ],
+      "recipeIds": [
+        "01641882",
+        "75376965"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "80727036",
+      "canonicalId": "e3030567-de79-43b2-97f7-8548e07a837e",
+      "konamiId": 4571,
+      "historicalEnglishName": "Man-eating Black Shark",
+      "independentEnglishName": "Man-Eating Black Shark",
+      "type": "Fusion Monster",
+      "description": "\"Sea Kamen\" + \"Gruesome Goo\" + \"Amazon of the Seas\"",
+      "level": 5,
+      "atk": 2100,
+      "defense": 1300,
+      "race": "Fish",
+      "attribute": "WATER",
+      "ocgDate": "1999-08-26",
+      "recipeNames": [
+        "Sea Kamen",
+        "Gruesome Goo",
+        "Amazon of the Seas"
+      ],
+      "recipeIds": [
+        "71746462",
+        "65623423",
+        "17968114"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "90660762",
+      "canonicalId": "4c6dcc10-9681-4b30-9f36-43fd2553c8db",
+      "konamiId": 4719,
+      "historicalEnglishName": "Meteor Black Dragon",
+      "independentEnglishName": "Meteor Black Dragon",
+      "type": "Fusion Monster",
+      "description": "\"Red-Eyes Black Dragon\" + \"Meteor Dragon\"",
+      "level": 8,
+      "atk": 3500,
+      "defense": 2000,
+      "race": "Dragon",
+      "attribute": "FIRE",
+      "ocgDate": "1999-08-26",
+      "recipeNames": [
+        "Red-Eyes Black Dragon",
+        "Meteor Dragon"
+      ],
+      "recipeIds": [
+        "74677422",
+        "64271667"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "95144193",
+      "canonicalId": "8b2b7ea5-d078-415c-8d25-d418bd6a4d1e",
+      "konamiId": 4539,
+      "historicalEnglishName": "Kwagar Hercules",
+      "independentEnglishName": "Kwagar Hercules",
+      "type": "Fusion Monster",
+      "description": "\"Kuwagata α\" + \"Hercules Beetle\"",
+      "level": 6,
+      "atk": 1900,
+      "defense": 1700,
+      "race": "Insect",
+      "attribute": "EARTH",
+      "ocgDate": "1999-07-05",
+      "recipeNames": [
+        "Kuwagata α",
+        "Hercules Beetle"
+      ],
+      "recipeIds": [
+        "60802233",
+        "52584282"
+      ],
+      "factsMatch": true
+    },
+    {
+      "id": "99551425",
+      "canonicalId": "fb520bda-c354-4b70-96a9-253bd7260a25",
+      "konamiId": 4376,
+      "historicalEnglishName": "Labyrinth Tank",
+      "independentEnglishName": "Labyrinth Tank",
+      "type": "Fusion Monster",
+      "description": "\"Giga-Tech Wolf\" + \"Cannon Soldier\"",
+      "level": 7,
+      "atk": 2400,
+      "defense": 2400,
+      "race": "Machine",
+      "attribute": "DARK",
+      "ocgDate": "2000-01-27",
+      "recipeNames": [
+        "Giga-Tech Wolf",
+        "Cannon Soldier"
+      ],
+      "recipeIds": [
+        "08471389",
+        "11384280"
+      ],
+      "factsMatch": true
+    }
+  ]
+}

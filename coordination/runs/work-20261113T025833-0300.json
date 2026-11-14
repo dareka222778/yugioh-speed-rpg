@@ -1,0 +1,206 @@
+{
+  "id": "work-20261113T025833-0300",
+  "owner": "Work",
+  "priority": "Work",
+  "state": "active",
+  "startedAt": "2026-11-13T02:58:33-03:00",
+  "lastActivityAt": "2026-11-13T03:18:00-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBeforeClaim": "9ef10595193fed91af747f8c42b3cb9a726a8848",
+  "sharedHeadAfterClaim": null,
+  "resumedFrom": "work-20261113T023036-0300",
+  "releasedOwnReservation": {
+    "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
+    "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
+    "pr": 43,
+    "state": "released-ci-success",
+    "ci": {
+      "cardBatchFast": 43373478476,
+      "engineValidation": 43373478203,
+      "milestone1000": 43373478091
+    }
+  },
+  "reservations": [
+    {
+      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicDDAssailantOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBattleBanishVictimOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicPyramidTurtleOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicRecruiterFiltersOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m97-tag-troop-dragon-recursion-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicTroopDragonRecursionOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    },
+    {
+      "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
+      "base": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicGravekeepersSpyOwnership.test.cjs"
+      ],
+      "state": "claimed"
+    }
+  ],
+  "handoff": {
+    "pr": 17,
+    "branch": "feat/work-m61-handlimit-ci-20261111",
+    "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+    "status": "awaiting-response",
+    "commentId": 6845555358
+  },
+  "verified": {
+    "m87": {
+      "head": "88c4ce76cb8d99e12eae24ba4bbc980ad660da36",
+      "pr": 43,
+      "ci": "all-success",
+      "runs": [
+        43373478476,
+        43373478203,
+        43373478091
+      ]
+    },
+    "catalog": {
+      "shared": 969,
+      "sharedCertificates": 969,
+      "development": 1014,
+      "developmentCertificates": 1014,
+      "delta": 45
+    }
+  },
+  "changes": [
+    {
+      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
+      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
+      "pr": 48,
+      "file": "tests/tagClassicDDAssailantOwnership.test.cjs",
+      "detail": "Atacante e defensor de D.D. Assailant em 2v2; todos os assentos físicos; cenário negativo quando sobrevive."
+    },
+    {
+      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
+      "head": "fee8b8d80de44366d93e350ad8f9785e71a9f677",
+      "pr": 49,
+      "file": "tests/tagClassicBattleBanishVictimOwnership.test.cjs",
+      "detail": "D.D. Crazy Beast e Lesser Fiend; vítima banida em vez de Cemitério; sobrevivência negativa."
+    },
+    {
+      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
+      "head": "b566abedf4a1d661c56217e784c46df033efe028",
+      "pr": 50,
+      "file": "tests/tagClassicBattleIdentityDestructionOwnership.test.cjs",
+      "detail": "Ryu Kokki, Getsu Fuhma e Karakuri Spider; filtros de Raça/Atributo com positivos e negativos."
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "head": "3aa88770e6b4576fb470123455cad8a3d215c6eb",
+      "pr": 51,
+      "file": "tests/tagClassicPyramidTurtleOwnership.test.cjs",
+      "detail": "Pyramid Turtle opcional; recruta Zombie com DEF <= 2000 do Deck físico do representante ativo; exclui Deck do parceiro inativo e Kuriboh."
+    },
+    {
+      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
+      "head": "0a9382214ef79f1716f5d153e34285e4236f7ace",
+      "pr": 51,
+      "file": "tests/tagClassicPyramidTurtleOwnership.test.cjs",
+      "detail": "Ajustado para resolver a escolha de posição e adicionado diagnóstico de stack após falha em npm test."
+    }
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscord": false,
+    "inventoryChanges": 0
+  },
+  "duration": {
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false
+  },
+  "nextTask": "M92–M97 em validação; M93/M94 corrigidos com stats do catálogo; M95 recebeu diagnóstico explícito após falha; prosseguir M98 Gravekeeper's Spy, depois fechar falhas e reconsultar CI.",
+  "nextWorkAt": "2026-11-13T03:30:00-03:00",
+  "ci": {
+    "pr48": {
+      "cardBatchFast": "success",
+      "runId": 43376852634,
+      "engineValidation": "in_progress",
+      "engineRunId": 43376852578,
+      "milestone1000": "success",
+      "milestoneRunId": 43376852685
+    },
+    "pr49": {
+      "cardBatchFast": "success",
+      "runId": 43377399808,
+      "engineValidation": "in_progress",
+      "engineRunId": 43377399886,
+      "milestone1000": "success",
+      "milestoneRunId": 43377399898
+    },
+    "pr50": {
+      "cardBatchFast": "success",
+      "runId": 43377406210,
+      "engineValidation": "in_progress",
+      "engineRunId": 43377406204,
+      "milestone1000": "success",
+      "milestoneRunId": 43377406219
+    },
+    "pr51": {
+      "cardBatchFast": "queued",
+      "runId": 43378024150,
+      "engineValidation": "queued",
+      "engineRunId": 43378024211,
+      "milestone1000": "in_progress",
+      "milestoneRunId": 43378024074
+    },
+    "pr52": {
+      "cardBatchFast": "success",
+      "runId": 43377835957,
+      "engineValidation": "in_progress",
+      "engineRunId": 43377836059,
+      "milestone1000": "success",
+      "milestoneRunId": 43377835955
+    },
+    "pr53": {
+      "cardBatchFast": "success",
+      "runId": 43377839749,
+      "engineValidation": "in_progress",
+      "engineRunId": 43377839877,
+      "milestone1000": "success",
+      "milestoneRunId": 43377839740
+    }
+  }
+}

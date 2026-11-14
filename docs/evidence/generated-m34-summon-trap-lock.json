@@ -1,0 +1,57 @@
+{
+  "format": 1,
+  "batchId": "m34-summon-trap-lock",
+  "baseRevision": "e4c9768fe2be1c67f5febcb5471a81f3be983630d57a55be3bb40c5025a54034",
+  "batchSHA256": "bba4a50c12dbb81f97dc4b79f9c049e39ea2bf5999fa661f3e51f4cd4a383039",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m34_summon_trap_lockCards} from './generated/m34-summon-trap-lock';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m34_summon_trap_lockEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m34_summon_trap_lockEffects} from './generated/m34-summon-trap-lock';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({",
+      "to": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({\n ...m34_summon_trap_lockMonsters,"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "import {conditionalMonsters30}",
+      "to": "import {monsters as m34_summon_trap_lockMonsters} from './generated/m34-summon-trap-lock';\nimport {conditionalMonsters30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"26082229\": {\n    \"fingerprint\": \"d1f03bdd3f535e15b67a5cb572c8c66c40ebb2ba4d84f39262961e5dea0dcdd2\",\n    \"suites\": [\n      \"tests/generated-m34-summon-trap-lock.test.cjs\"\n    ]\n  },\n  \"52571838\": {\n    \"fingerprint\": \"953bb338202e6125480453ea359bb83538b45d69d3442b358228157ff580a1d8\",\n    \"suites\": [\n      \"tests/generated-m34-summon-trap-lock.test.cjs\"\n    ]\n  },\n  \"53693416\": {\n    \"fingerprint\": \"1e59d78d0b5c77382757c872532d59373ecba0abc5e95bd21666e451f060ae32\",\n    \"suites\": [\n      \"tests/generated-m34-summon-trap-lock.test.cjs\"\n    ]\n  },\n  \"89698120\": {\n    \"fingerprint\": \"ef27d4d4bc00ad6c3c5e5f0688608b63f9a7f4d0fefba1dab925958d301fdbb1\",\n    \"suites\": [\n      \"tests/generated-m34-summon-trap-lock.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m34-summon-trap-lock: explicit tested release; zero inventory grants.\n  \"53693416\",\n  \"52571838\",\n  \"26082229\",\n  \"89698120\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "53693416",
+    "52571838",
+    "26082229",
+    "89698120"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

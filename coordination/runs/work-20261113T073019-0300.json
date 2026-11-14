@@ -1,0 +1,50 @@
+{
+  "runId": "work-20261113T073019-0300",
+  "owner": "Work",
+  "priority": "P0 — M61 handoff pendente; M101 regressão de Jinzo/Royal Decree no 2v2",
+  "state": "active",
+  "startedAt": "2026-11-13T07:30:19-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "f061bf516c502310798a0c288b3c9d0afcec132e",
+  "workBranch": "feat/work-m101-jinzo-2v2-trap-lock-20261113",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "reservedFiles": [
+    "tests/tagClassicJinzoRoyalDecreeOwnership.test.cjs"
+  ],
+  "blocksCompleted": [
+    "Auditoria inicial de coordenação, HEAD real, branches, PRs e Actions.",
+    "Solicitação cooperativa renovada na PR #17; aguardando liberação M61."
+  ],
+  "changes": [],
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "validation": {},
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscordValidation": false,
+    "hosting": "não verificado"
+  },
+  "impediments": {
+    "m61Handoff": "pendente sem resposta; último comentário 6850403041",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/classicEffects.ts",
+      "src/duelIntegrity.ts",
+      "scripts/mass-certification21.cjs"
+    ]
+  },
+  "releasedScopeToAuxiliary": "Branches próprias Work M92–M100 liberadas para o auxiliar acompanhar CI e corrigir somente testes nas respectivas branches; M61 e seus cinco arquivos reservados permanecem intocados.",
+  "nextTask": "Work: concluir M101 (Jinzo vs Royal Decree, políticas distintas de ativação/negação em 2v2), executar CI completa e depois avançar para a próxima família independente; retomar M60 apenas após handoff explícito M61. Auxiliar: acompanhar PRs #48–#56 nas branches próprias já liberadas, sem tocar M61/M101.",
+  "nextWorkAt": "2026-11-13T08:30:00-03:00"
+}

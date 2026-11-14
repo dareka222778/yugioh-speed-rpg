@@ -1,0 +1,330 @@
+{
+  "reviewedAt": "2026-10-28",
+  "classification": "Public-source research, individually admitted through the executed engine-v8 gate; never distribution approval",
+  "cards": [
+    {
+      "id": "26725158",
+      "name": "Exile of the Wicked",
+      "konamiId": 4869,
+      "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+      "importedDates": {
+        "tcg": "2002-10-01",
+        "ocg": "1999-12-01",
+        "world": "1999-12-01"
+      },
+      "officialDescriptionSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4869&request_locale=en",
+      "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4869&request_locale=ja",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2002-10-01",
+        "set": "TP2-004",
+        "firstReleaseClaim": false
+      },
+      "operation": {
+        "kind": "destroyFiltered",
+        "filter": {
+          "races": [
+            "Fiend"
+          ]
+        }
+      },
+      "status": "certified-engine-v8-distribution-blocked",
+      "distributionAuthorized": false,
+      "remaining": [
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
+    },
+    {
+      "id": "21323861",
+      "name": "Acid Rain",
+      "konamiId": 4666,
+      "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+      "importedDates": {
+        "tcg": "2005-06-30",
+        "ocg": "1999-07-22",
+        "world": "1999-07-22"
+      },
+      "officialDescriptionSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4666&request_locale=en",
+      "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4666&request_locale=ja",
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "1999-07-22",
+        "set": "Vol.4",
+        "firstReleaseClaim": false
+      },
+      "operation": {
+        "kind": "destroyFiltered",
+        "filter": {
+          "races": [
+            "Machine"
+          ]
+        }
+      },
+      "status": "certified-engine-v8-distribution-blocked",
+      "distributionAuthorized": false,
+      "remaining": [
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
+    },
+    {
+      "id": "56606928",
+      "name": "Eternal Drought",
+      "konamiId": 4670,
+      "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+      "importedDates": {
+        "tcg": "2011-06-21",
+        "ocg": "1999-07-22",
+        "world": "1999-07-22"
+      },
+      "officialDescriptionSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4670&request_locale=en",
+      "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4670&request_locale=ja",
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "1999-07-22",
+        "set": "Vol.4",
+        "firstReleaseClaim": false
+      },
+      "operation": {
+        "kind": "destroyFiltered",
+        "filter": {
+          "races": [
+            "Fish"
+          ]
+        }
+      },
+      "status": "certified-engine-v8-distribution-blocked",
+      "distributionAuthorized": false,
+      "remaining": [
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
+    },
+    {
+      "id": "20101223",
+      "name": "Breath of Light",
+      "konamiId": 4669,
+      "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+      "importedDates": {
+        "tcg": "2011-08-13",
+        "ocg": "1999-07-22",
+        "world": "1999-07-22"
+      },
+      "officialDescriptionSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4669&request_locale=en",
+      "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4669&request_locale=ja",
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "1999-07-22",
+        "set": "Vol.4",
+        "firstReleaseClaim": false
+      },
+      "operation": {
+        "kind": "destroyFiltered",
+        "filter": {
+          "races": [
+            "Rock"
+          ]
+        }
+      },
+      "status": "certified-engine-v8-distribution-blocked",
+      "distributionAuthorized": false,
+      "remaining": [
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
+    },
+    {
+      "id": "90873992",
+      "name": "Warrior Elimination",
+      "konamiId": 4659,
+      "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+      "importedDates": {
+        "tcg": "2005-11-01",
+        "ocg": "1999-07-22",
+        "world": "1999-07-22"
+      },
+      "officialDescriptionSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4659&request_locale=en",
+      "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4659&request_locale=ja",
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "1999-07-22",
+        "set": "Vol.4",
+        "firstReleaseClaim": false
+      },
+      "operation": {
+        "kind": "destroyFiltered",
+        "filter": {
+          "races": [
+            "Warrior"
+          ]
+        }
+      },
+      "status": "certified-engine-v8-distribution-blocked",
+      "distributionAuthorized": false,
+      "remaining": [
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
+    },
+    {
+      "id": "94716515",
+      "name": "Eradicating Aerosol",
+      "konamiId": 4668,
+      "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+      "importedDates": {
+        "tcg": "2011-06-21",
+        "ocg": "1999-07-22",
+        "world": "1999-07-22"
+      },
+      "officialDescriptionSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4668&request_locale=en",
+      "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4668&request_locale=ja",
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "1999-07-22",
+        "set": "Vol.4",
+        "firstReleaseClaim": false
+      },
+      "operation": {
+        "kind": "destroyFiltered",
+        "filter": {
+          "races": [
+            "Insect"
+          ]
+        }
+      },
+      "status": "certified-engine-v8-distribution-blocked",
+      "distributionAuthorized": false,
+      "remaining": [
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "additionalPrimarySource": "https://www.db.yugioh-card.com/yugiohdb/card_calendar?dd=22&mm=7&mode=1&ope=1&page=1&request_locale=ja&rp=99999&sess=1&sort=2",
+      "retrievalNote": "Direct Japanese endpoint initially failed; official indexed card page and official card-calendar listing subsequently recovered the printing.",
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
+    },
+    {
+      "id": "95051344",
+      "name": "Eternal Rest",
+      "konamiId": 4662,
+      "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+      "importedDates": {
+        "tcg": "2002-09-16",
+        "ocg": "2002-06-20",
+        "world": "2002-06-20"
+      },
+      "officialDescriptionSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4662&request_locale=en",
+      "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4662&request_locale=ja",
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "2002-06-20",
+        "set": "DL1-044",
+        "firstReleaseClaim": false
+      },
+      "operation": {
+        "kind": "destroyFiltered",
+        "filter": {
+          "equipped": true
+        }
+      },
+      "status": "certified-engine-v8-distribution-blocked",
+      "distributionAuthorized": false,
+      "remaining": [
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
+    },
+    {
+      "id": "90330453",
+      "name": "Last Day of Witch",
+      "konamiId": 4868,
+      "passcodeEvidence": "Concordance with the unchanged imported public history, not a claim that official HTML prints the passcode.",
+      "importedDates": {
+        "tcg": "2023-08-24",
+        "ocg": "1999-12-01",
+        "world": "1999-12-01"
+      },
+      "officialDescriptionSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4868&request_locale=en",
+      "officialOCGSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4868&request_locale=ja",
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "2003-01-23",
+        "set": "DL4-118",
+        "firstReleaseClaim": false
+      },
+      "operation": {
+        "kind": "destroyFiltered",
+        "filter": {
+          "races": [
+            "Spellcaster"
+          ]
+        }
+      },
+      "status": "certified-engine-v8-distribution-blocked",
+      "distributionAuthorized": false,
+      "remaining": [
+        "Distribution requires separate authorization",
+        "Official PT-BR naming review remains separate from mechanical certification"
+      ],
+      "individualExecutionEvidence": {
+        "file": "docs/evidence/mission15-card-executions.json",
+        "validatedCommit": "d83cbe82a12ed246eb4b6028dc44f0317e02013c",
+        "runId": 40636761344
+      }
+    }
+  ],
+  "discrepancies": [
+    {
+      "id": "56606928",
+      "issue": "Imported TCG date differs from official 2011-07-01 printing. Frozen history preserved; no replacement earliest-date claim."
+    },
+    {
+      "id": "20101223",
+      "issue": "Imported TCG date differs from official 2006-04-28 DL10-EN001 printing. Frozen history preserved; no replacement earliest-date claim."
+    },
+    {
+      "id": "90330453",
+      "issue": "Imported TCG date is insufficient evidence of earliest TCG availability; only the verified OCG printing is used here."
+    }
+  ],
+  "mechanicalLimits": [
+    "Race filter reads currently supported public card metadata; type-changing effects are not implemented by this operation.",
+    "Equipped condition uses live face-up resolved equipment links, regardless of controller. Additional Equip-Trap/monster mechanics require their own implementations.",
+    "Face-up restriction avoids hidden-identity leakage. Eternal Rest valid equipped states are face-up in the current engine.",
+    "No cost, targeting, destruction-prevention replacement or generic effect-negation semantics are invented. Existing spell immunity and activation negation are tested."
+  ]
+}

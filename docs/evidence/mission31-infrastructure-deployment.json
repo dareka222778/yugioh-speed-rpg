@@ -1,0 +1,20 @@
+{
+  "format": 1,
+  "commit": "b71c6936d951e63697ea5dadf1ab6bac8e3ea53f",
+  "method": "authenticated Bot-Hosting.net panel, normal stop/stage/start/probe",
+  "fullCI": {"runId": 40957097676, "test": "success", "extended-soak": "success"},
+  "fastCI": {"runId": 40957097778, "conclusion": "success"},
+  "stageCreated": "2026-10-29T21:36:19.559Z",
+  "previous": "0e031fdfca8e4a9a126a2838ea82775c2802c7e3",
+  "backup": "data/deploy-backups/m31-1793309727739",
+  "catalog": "63098a704e70ebfde80e9bed3b961b1b5bf0c6bc7a4932f6a5ee4c78a3e1940f",
+  "certified": 903,
+  "distributable": 903,
+  "sqliteIntegrity": "ok",
+  "protectedTablesIdentical": ["players", "player_cards", "decks", "deck_cards"],
+  "probe1v1": "passed",
+  "probe2v2": "passed",
+  "discordOnlineAfterRestart": "observed",
+  "inventoryGranted": 0,
+  "doesNotProve": "No live Discord interaction or new card effect was tested by this deployment probe."
+}

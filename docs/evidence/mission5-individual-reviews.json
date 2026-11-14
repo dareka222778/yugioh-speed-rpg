@@ -1,0 +1,542 @@
+[
+  {
+    "id": "11868825",
+    "canonicalId": "6190b2fd-ac21-4781-a067-18cdc6064aeb",
+    "konamiId": 4346,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4346&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "eb769319944fecdb4aeedf8593482b53312f1cf5a58b1e7bd387f9a4c440ffa1"
+  },
+  {
+    "id": "12472242",
+    "canonicalId": "fac48ddf-0d44-49c3-bc19-1994a2322057",
+    "konamiId": 4403,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4403&request_locale=ja",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 300,
+      "defense": 350,
+      "race": "Insect",
+      "attribute": "EARTH",
+      "ocgDate": "1999-09-23"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "ee84813a21a7ada1888a0cb510791cc9a506a54d42ec1cdcc31e1bc474452eec"
+  },
+  {
+    "id": "18144506",
+    "canonicalId": "4567872b-5f20-4aa2-8167-b7ca0c691552",
+    "konamiId": 4678,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4678&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-07-08"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "6d30b80551538d631adc7e81297b0dfe10ac358125b37d20e2141e2dc4c565ed"
+  },
+  {
+    "id": "19613556",
+    "canonicalId": "6dc25591-4b27-4931-b5c6-57d9b8235328",
+    "konamiId": 4891,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4891&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "2000-03-01"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "51ba04b7028ff9debaca6cc1a48d7734d369888e4de31532c8fbf9795389a189"
+  },
+  {
+    "id": "21347810",
+    "canonicalId": "78057833-d255-4f5f-85b6-ffcb54369cab",
+    "konamiId": 4494,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4494&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 400,
+      "defense": 500,
+      "race": "Plant",
+      "attribute": "EARTH",
+      "ocgDate": "1999-09-23"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "f8ddf63517b4e35acd59f37d40828250224fc9ea15158bfab4f2acd5834ba3f2"
+  },
+  {
+    "id": "22702055",
+    "canonicalId": "ab4821a3-8f81-4f60-9dac-784496371094",
+    "konamiId": 4340,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4340&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-06"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "8e7a86adc1cd83bb06165962eb323f2664a601b1e5fd52a1a4e983b338b711f3"
+  },
+  {
+    "id": "23424603",
+    "canonicalId": "d64d2866-1c4f-4170-a40a-11ae04eefa50",
+    "konamiId": 4337,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4337&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-06"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "355e49dd42d5610a9d3698466fbbf57f917f833f26a7a273cefcba0265a35a27"
+  },
+  {
+    "id": "25769732",
+    "canonicalId": "459da2c1-913a-4851-8853-bf22b50ef639",
+    "konamiId": 4331,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4331&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "c4eb8cbcbac934285400c5863fc91590a6a711a424af3b7deac5091466bb2c1a"
+  },
+  {
+    "id": "32809211",
+    "canonicalId": "779d8ab8-ed9d-43a7-8c4a-3b148f010892",
+    "konamiId": 4428,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4428&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 500,
+      "defense": 400,
+      "race": "Machine",
+      "attribute": "DARK",
+      "ocgDate": "1999-09-23"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "7da20beb8de15da16874f3071db8f8442a69ddef5c1976d708d36eea0e6025e4"
+  },
+  {
+    "id": "36607978",
+    "canonicalId": "3138fcb8-6e52-47bc-a5cc-932eae580b30",
+    "konamiId": 4325,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4325&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-27"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "79d6ac7281f8fa45e679dc8b67b0c775c84d8940358c44ba0bd2d121b84d104c"
+  },
+  {
+    "id": "39774685",
+    "canonicalId": "67741dd0-a2bd-4349-8494-ae95686c064e",
+    "konamiId": 4316,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4316&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "0130aadc50877652a41afd4f1116b8b8522b67860a2d40b978ef9afd30cd06b7"
+  },
+  {
+    "id": "46009906",
+    "canonicalId": "0bf51907-f8ea-43f8-85ad-1f3475d0137a",
+    "konamiId": 4314,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4314&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-02-04"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "4359669b0fb126f08bf2707597abfd4fc379bbbe0ec290a792b2ea5ca973a17e"
+  },
+  {
+    "id": "51371017",
+    "canonicalId": "9ccef837-49ba-4ea6-8d15-131bdb63ee28",
+    "konamiId": 4272,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4272&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 900,
+      "defense": 700,
+      "race": "Warrior",
+      "attribute": "WIND",
+      "ocgDate": "2000-01-27"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "b4e635b1d69d9d17e8c6805c69dba6ebcc7da042ec78ab79152bdd0975dce422"
+  },
+  {
+    "id": "57839750",
+    "canonicalId": "b3e95450-c358-42e4-8acd-5bf2de0736ad",
+    "konamiId": 4926,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4926&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 1000,
+      "race": "Beast-Warrior",
+      "attribute": "WATER",
+      "ocgDate": "2000-07-13"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "f750e6a2f9710fcbda1d99a6c500952afc85e2cb39992ee4b0c89f20615d2347"
+  },
+  {
+    "id": "58861941",
+    "canonicalId": "f52bbaa4-8d01-4711-bb2a-4064fcf0c63b",
+    "konamiId": 4404,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4404&request_locale=ja",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 300,
+      "defense": 250,
+      "race": "Aqua",
+      "attribute": "WATER",
+      "ocgDate": "1999-09-23"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "3fe5e42d92e9b4a81e152cb599c897daf2806f7c0e3dc06ff90bfee9aa12c490"
+  },
+  {
+    "id": "60806437",
+    "canonicalId": "c3ebd236-45e4-4c0c-a130-042e1a880da5",
+    "konamiId": 4917,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4917&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 1200,
+      "race": "Machine",
+      "attribute": "FIRE",
+      "ocgDate": "2000-07-13"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "904fc92dd093ca751f2f3f619dc7152cc4f14b5ee7c5998ffd868a154edf8835"
+  },
+  {
+    "id": "61854111",
+    "canonicalId": "9cf2f89c-4397-4e05-a372-7fa425283b8d",
+    "konamiId": 4307,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4307&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-02-04"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "c1cda237225da99c3fe4fccf8dfbf436a0c4ea2be035b6128e8a1f165d812a8f"
+  },
+  {
+    "id": "66889139",
+    "canonicalId": "5effb838-8b8c-4bca-ad14-0557a7355e40",
+    "konamiId": 4043,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4043&request_locale=ja",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2600,
+      "defense": 2100,
+      "race": "Dragon",
+      "attribute": "WIND",
+      "ocgDate": "2000-08-10"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "3aa8c37db635f465b8ae80da250208d6d19cc540cd01f8497177453aa425b177"
+  },
+  {
+    "id": "73134081",
+    "canonicalId": "45526162-ea5e-472d-bd5d-364c5406a954",
+    "konamiId": 4351,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4351&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "1e67f07c3190fb1506f06e2bc5ecf145447c5279d2cd8c03e7e21044f5ef0b32"
+  },
+  {
+    "id": "84834865",
+    "canonicalId": "2a687c44-db1d-4ff5-b71c-bcac92bdb3a3",
+    "konamiId": 4927,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4927&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 900,
+      "race": "Insect",
+      "attribute": "WIND",
+      "ocgDate": "2000-07-13"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "7ea81906abee8111a13e8d9a51d42e521f7db546ef51fe061b4f7f9762332b95"
+  },
+  {
+    "id": "87430998",
+    "canonicalId": "2981d35a-3e50-4920-80bf-d68927369922",
+    "konamiId": 4336,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4336&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-06"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "5b7b623889999855f8f4c3fdde925110ba36ff56efce764da4a3d9891e742eec"
+  },
+  {
+    "id": "95956346",
+    "canonicalId": "e1d69b9a-dd3f-4446-85de-28d2e770d68b",
+    "konamiId": 4924,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4924&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 800,
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "ocgDate": "2000-07-13"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "16703b4a3261548d7d5a23efb0979938d796d3056a255563e0810f96bb854055"
+  },
+  {
+    "id": "97017120",
+    "canonicalId": "eb25ba27-a4a0-40a3-9357-79fc32ffd990",
+    "konamiId": 4915,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4915&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 1450,
+      "race": "Beast",
+      "attribute": "EARTH",
+      "ocgDate": "2000-07-13"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "40b674a6174e3dc3f5c028d6bf1d3914d7d73fdaaa07079c0c8c5131a6f1fc2f"
+  },
+  {
+    "id": "98049915",
+    "canonicalId": "4c263426-e38c-4456-a6e1-ddcc70cc8db4",
+    "konamiId": 4393,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4393&request_locale=ja",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 400,
+      "defense": 300,
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "ocgDate": "1999-09-23"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "cadf7249880046f6ba1558936fdc940326f3159fcd899610fb339e1719a293a4"
+  },
+  {
+    "id": "98252586",
+    "canonicalId": "8327ef25-7906-4b7d-9bf6-8235a6dd53d0",
+    "konamiId": 4333,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4333&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-27"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "b67ac192c403e4284dc4236664e7f4c0f267499eb20d556daf1d56be2ee449c8"
+  },
+  {
+    "id": "05901497",
+    "canonicalId": "ce0135b3-9b9f-48cf-8e5f-e3ad46bfc5a1",
+    "konamiId": 4641,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4641&request_locale=ja",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 350,
+      "defense": 300,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-09-23"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "02fa064f8b6d0d948dec8beede32c6ea798eae4cb378d44525e557e236ec62d0"
+  },
+  {
+    "id": "02370081",
+    "canonicalId": "805f1ef6-17a3-4120-b58f-52ff7ce53493",
+    "konamiId": 4315,
+    "reviewer": "REA Mission 5 individual public rules review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4315&request_locale=ja",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-25"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "mechanicalFingerprint": "dfeb22b82a650da91f0423f66331afcc32b4b6978c5c9bca88dd755e3462ed28"
+  }
+]

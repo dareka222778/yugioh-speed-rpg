@@ -98,7 +98,7 @@ function verifySnapshot(folder){
  return {status:'verified',...report.counts,files:expected.length+1,completeness:report.completeness};
 }
 function writeSnapshot(out,result){
- out=path.resolve(out);let ancestor=out;const tail=[];while(!fs.existsSync(ancestor)){tail.unshift(path.basename(ancestor));ancestor=path.dirname(ancestor);}out=path.join(fs.realpathSync(ancestor),...tail);if(out===REPO||['src','data','dist','scripts','tests','node_modules','.git'].some(dir=>out===path.join(REPO,dir)||out.startsWith(path.join(REPO,dir)+path.sep)))throw Error('Protected output path: use separate catalog staging');
+ out=require('./protected-output.cjs').assertStagingOutput(out,REPO);
  const files=outputs(result),manifest={schema:1,source:result.report.source,window:result.report.window,files:Object.fromEntries(Object.entries(files).map(([name,text])=>[name,{sha256:sha(Buffer.from(text)),bytes:Buffer.byteLength(text)}]))};files['manifest.json']=JSON.stringify(manifest,null,2)+'\n';
  if(fs.existsSync(out)){if(Object.keys(files).every(name=>fs.existsSync(path.join(out,name))&&fs.readFileSync(path.join(out,name),'utf8')===files[name]))return {status:'unchanged',out};throw Error('Snapshot differs: choose a new output directory; no overwrite allowed');}
  fs.mkdirSync(path.dirname(out),{recursive:true});const stage=fs.mkdtempSync(path.join(path.dirname(out),'.history-stage-'));

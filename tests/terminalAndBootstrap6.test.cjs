@@ -1,0 +1,17 @@
+const {test,after}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),{spawnSync}=require('node:child_process');
+const folder=fs.mkdtempSync(path.join(os.tmpdir(),'terminal-m6-'));process.env.DATABASE_PATH=path.join(folder,'isolated.sqlite');
+const d=require('../dist/database'),s=require('../dist/duelStore'),decks=require('../dist/decks');
+let serial=0;function start(){const ids=[0,1].map(()=>`terminal6-${++serial}`);for(const id of ids){d.createPlayer(id,id);d.chooseStarterDeck(id,'warrior');decks.openDeck(id);decks.activateDeck(id,1);}let r=s.challenge(...ids,'g','c');return s.acceptChallenge(r.id,ids[1],'g',r.revision);}
+test('1v1 timeout atomically journals one terminal event, releases seats and never repeats settlement',()=>{
+ const r=start(),economic=JSON.stringify(d.db.prepare('SELECT * FROM players ORDER BY discord_id').all());s.setDuelMessage(r.id,'c','arena');
+ const expire=()=>s.getDuel(r.id,r.updated+s.DECISION_TIMEOUT_MS+1);
+ d.db.exec("CREATE TRIGGER m6_fail_timeout BEFORE INSERT ON duel_transition_events BEGIN SELECT RAISE(ABORT,'timeout journal failure'); END");
+ try{assert.throws(expire,/timeout journal failure/);assert.deepEqual(s.getDuel(r.id).state,r.state);assert.equal(s.getDuel(r.id).revision,r.revision);assert.equal(d.db.prepare('SELECT COUNT(*) n FROM duel_members WHERE duel_id=?').get(r.id).n,2);}finally{d.db.exec('DROP TRIGGER m6_fail_timeout');}
+ const done=expire();assert.equal(done.status,'finished');assert.equal(done.revision,r.revision+1);assert.equal(s.duelEventsAt(r.id,done.revision).filter(e=>e.type==='duelFinished').length,1);assert.equal(d.db.prepare('SELECT COUNT(*) n FROM duel_members WHERE duel_id=?').get(r.id).n,0);assert.equal(s.getDuel(r.id,r.updated+s.DECISION_TIMEOUT_MS*2).revision,done.revision);assert.equal(JSON.stringify(d.db.prepare('SELECT * FROM players ORDER BY discord_id').all()),economic);assert.ok(s.expireDueDuels().some(x=>x.id===r.id));
+});
+test('expired 1v1 invitations do not invent a duel-result event',()=>{const ids=['invite6-a','invite6-b'];for(const id of ids){d.createPlayer(id,id);d.chooseStarterDeck(id,'warrior');decks.openDeck(id);decks.activateDeck(id,1);}const r=s.challenge(...ids,'g','c'),expired=s.getDuel(r.id,r.updated+120001);assert.equal(expired.status,'expired');assert.deepEqual(s.duelEventsAt(r.id,expired.revision),[]);});
+test('bootstrap loads dotenv before the first application dependency can open SQLite',()=>{
+ const code=`const M=require('node:module'),load=M._load;delete process.env.DATABASE_PATH;let configured=false;M._load=function(name,parent){if(parent?.filename===require.resolve('./dist/index')){if(name==='dotenv/config'){process.env.DATABASE_PATH='isolated-fixture';configured=true;return {};}if(name.startsWith('./')){if(!configured||process.env.DATABASE_PATH!=='isolated-fixture')throw Error('configuration loaded too late');throw Error('bootstrap-probe-complete');}}return load.apply(this,arguments);};try{require('./dist/index');process.exitCode=1;}catch(e){if(e.message!=='bootstrap-probe-complete')throw e;}`;
+ const env={...process.env};for(const key of ['DISCORD_TOKEN','DISCORD_CLIENT_ID','DISCORD_GUILD_ID'])delete env[key];const result=spawnSync(process.execPath,['-e',code],{cwd:path.resolve(__dirname,'..'),env,encoding:'utf8'});assert.equal(result.status,0,result.stderr);
+});
+after(()=>{d.db.close();fs.rmSync(folder,{recursive:true,force:true});});

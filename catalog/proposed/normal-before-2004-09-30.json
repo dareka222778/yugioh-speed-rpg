@@ -1,0 +1,647 @@
+{
+  "kind": "historical-review-proposal",
+  "cutoff": "2004-09-30",
+  "eligibilityBasis": "world-first-observed; regional release policy still requires review",
+  "source": "catalog/historical/2004-10-01/cards.json",
+  "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a",
+  "enablesCards": false,
+  "grantsInventory": false,
+  "enabledBefore": 130,
+  "enabledAfter": 130,
+  "totalEligibleUncertified": 509,
+  "candidates": [
+    {
+      "namespace": "passcode",
+      "id": "46718686",
+      "publicCanonicalId": "07754cc2-cde8-4377-9233-ba1e43d87b15",
+      "konamiId": 4233,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Hitodenchak",
+          "pt": "Hitodenchak",
+          "ja": "ヒトデンチャク"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 700,
+        "race": "aqua",
+        "attribute": "water"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "46457856",
+      "publicCanonicalId": "086369c6-a82d-4250-832d-44bfbaa1a8ae",
+      "konamiId": 4111,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Tomozaurus",
+          "pt": "Tomozauro",
+          "ja": "トモザウルス"
+        },
+        "level": 2,
+        "atk": 500,
+        "def": 400,
+        "race": "dinosaur",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2013-10-10",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "15507080",
+      "publicCanonicalId": "12252b54-26ce-41d8-b7af-d1f9a61db87a",
+      "konamiId": 4274,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Sectarian of Secrets",
+          "ja": "闇にしたがう者"
+        },
+        "level": 2,
+        "atk": 700,
+        "def": 500,
+        "race": "spellcaster",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": "2006-04-28",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "64511793",
+      "publicCanonicalId": "1b5e6aa7-e1af-45c3-84f2-c647bdfeee04",
+      "konamiId": 4191,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Eyearmor",
+          "ja": "コピックス"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 500,
+        "race": "warrior",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "84285623",
+      "publicCanonicalId": "1beac1b4-5063-470b-a484-e4a6fa8450c8",
+      "konamiId": 4243,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Haniwa",
+          "pt": "Haniwa",
+          "ja": "はにわ"
+        },
+        "level": 2,
+        "atk": 500,
+        "def": 500,
+        "race": "rock",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2005-11-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "38142739",
+      "publicCanonicalId": "1dd65f02-136f-437d-8036-528efaa0035b",
+      "konamiId": 4214,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Petit Angel",
+          "pt": "Pequeno Anjo",
+          "ja": "プチテンシ"
+        },
+        "level": 3,
+        "atk": 600,
+        "def": 900,
+        "race": "fairy",
+        "attribute": "light"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "53581214",
+      "publicCanonicalId": "27c7a9a2-9aee-4638-81e3-1292e710ffc1",
+      "konamiId": 4160,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Fire Reaper",
+          "pt": "Ceifador de Fogo",
+          "ja": "ファイヤー・デビル"
+        },
+        "level": 2,
+        "atk": 700,
+        "def": 500,
+        "race": "zombie",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": "2019-08-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "90963488",
+      "publicCanonicalId": "295512d9-49cf-4d4f-9800-6d83aa789317",
+      "konamiId": 4135,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Nemuriko",
+          "pt": "Nemuriko",
+          "ja": "眠り子"
+        },
+        "level": 3,
+        "atk": 800,
+        "def": 700,
+        "race": "spellcaster",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "08783685",
+      "publicCanonicalId": "3b16b74d-f290-4248-9fc1-eb5230807536",
+      "konamiId": 4235,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Hourglass of Life",
+          "pt": "Ampulheta da Vida",
+          "ja": "命の砂時計"
+        },
+        "level": 2,
+        "atk": 700,
+        "def": 600,
+        "race": "fairy",
+        "attribute": "light"
+      },
+      "firstObserved": {
+        "tcg": "2022-03-17",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "22026707",
+      "publicCanonicalId": "60ea5923-9bda-4ae5-8243-7db1fffd2e97",
+      "konamiId": 4110,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Curtain of the Dark Ones",
+          "pt": "Cortina dos Obscuros",
+          "ja": "黒魔族のカーテン"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 500,
+        "race": "spellcaster",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": "2013-09-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "53832650",
+      "publicCanonicalId": "6132a9aa-3049-44c6-b5ae-8e7bbe6d80bf",
+      "konamiId": 4218,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Meotoko",
+          "pt": "Meotoko",
+          "ja": "バビロン"
+        },
+        "level": 2,
+        "atk": 700,
+        "def": 600,
+        "race": "beast",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2013-10-10",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "09159938",
+      "publicCanonicalId": "7440099f-3aad-4c6b-ad51-ed2faba8d130",
+      "konamiId": 4119,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Dark Gray",
+          "pt": "Cinzento das Trevas",
+          "ja": "ダーク・グレイ"
+        },
+        "level": 3,
+        "atk": 800,
+        "def": 900,
+        "race": "beast",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "18710707",
+      "publicCanonicalId": "85c51e21-5b1e-4c68-a0a2-a0de042e3b4a",
+      "konamiId": 4271,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "The Furious Sea King",
+          "pt": "O Furioso Rei dos Mares",
+          "ja": "怒りの海王"
+        },
+        "level": 3,
+        "atk": 800,
+        "def": 700,
+        "race": "aqua",
+        "attribute": "water"
+      },
+      "firstObserved": {
+        "tcg": "2002-03-08",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "47695416",
+      "publicCanonicalId": "ab2c5b5a-b757-43be-9623-7cd23d3bab2b",
+      "konamiId": 4248,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Candle of Fate",
+          "ja": "運命のろうそく"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 600,
+        "race": "fiend",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "75889523",
+      "publicCanonicalId": "acf383b2-d11f-4347-90e0-1b66a1b50ac4",
+      "konamiId": 4208,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Archfiend Marmot of Nefariousness",
+          "ja": "デーモン・ビーバー"
+        },
+        "level": 2,
+        "atk": 400,
+        "def": 600,
+        "race": "beast",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2005-06-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "09430387",
+      "publicCanonicalId": "b706b634-6fc9-472b-97e5-07c5d7b892b7",
+      "konamiId": 4197,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "LaLa Li-oon",
+          "pt": "LaLa Li-oon",
+          "ja": "ララ・ライウーン"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 600,
+        "race": "thunder",
+        "attribute": "wind"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "52800428",
+      "publicCanonicalId": "bbe01d78-6faf-4aa7-84a9-479cd72c0e20",
+      "konamiId": 4141,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Fiend's Hand",
+          "ja": "死者の腕"
+        },
+        "level": 2,
+        "atk": 600,
+        "def": 600,
+        "race": "zombie",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "39175982",
+      "publicCanonicalId": "bfa26cb8-231d-4aa9-b629-8fff3ad56e70",
+      "konamiId": 4215,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Winged Cleaver",
+          "pt": "Cortador Alado",
+          "ja": "ダークキラー"
+        },
+        "level": 2,
+        "atk": 700,
+        "def": 700,
+        "race": "insect",
+        "attribute": "earth"
+      },
+      "firstObserved": {
+        "tcg": "2019-08-01",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "15150371",
+      "publicCanonicalId": "c2d7378f-f69b-4d83-9fa2-b2baba6ddfc8",
+      "konamiId": 4267,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Archfiend Mirror",
+          "ja": "悪魔の鏡"
+        },
+        "level": 2,
+        "atk": 700,
+        "def": 600,
+        "race": "fiend",
+        "attribute": "dark"
+      },
+      "firstObserved": {
+        "tcg": null,
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    },
+    {
+      "namespace": "passcode",
+      "id": "15510988",
+      "publicCanonicalId": "df1cb02f-81f2-4ab0-8199-bcf8e003ded9",
+      "konamiId": 4217,
+      "family": "normal-monster",
+      "confidence": "INFERIDO: imported factual metadata, not an effect certificate",
+      "facts": {
+        "names": {
+          "en": "Thunder Kid",
+          "ja": "サンダー・キッズ"
+        },
+        "level": 2,
+        "atk": 700,
+        "def": 600,
+        "race": "thunder",
+        "attribute": "wind"
+      },
+      "firstObserved": {
+        "tcg": "2006-11-11",
+        "ocg": "1999-02-04",
+        "world": "1999-02-04"
+      },
+      "requiredReview": [
+        "metadata-normalization",
+        "mechanical-fingerprint",
+        "regression-evidence",
+        "explicit-certificate",
+        "release-authorization"
+      ]
+    }
+  ]
+}

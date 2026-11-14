@@ -1,0 +1,26 @@
+name: Milestone 1000 - certified-card progress and triage
+on:
+  pull_request:
+    branches: [main, classic-engine-foundation]
+    paths: ['catalog/**', 'src/**', 'scripts/**', 'tests/**', '.github/workflows/milestone1000.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verified-catalog-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/milestone1000-plan.test.cjs
+      - run: node scripts/milestone1000-plan.cjs artifacts/milestone1000-plan.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: milestone1000-factual-worklist
+          path: artifacts/milestone1000-plan.json
+          if-no-files-found: error
+          retention-days: 14

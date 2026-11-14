@@ -22,7 +22,12 @@
     "audit:tag-sessions": "npm run build && node scripts/audit-tag-sessions.cjs",
     "audit:tag-classic": "npm run build && node scripts/audit-tag-classic.cjs",
     "audit:tag-classic-sessions": "npm run build && node scripts/audit-tag-sessions.cjs --classic",
-    "audit:tag-training": "npm run build && node scripts/audit-tag-training.cjs"
+    "audit:tag-training": "npm run build && node scripts/audit-tag-training.cjs",
+    "audit:rea": "npm run build && node scripts/audit-rea-acceptance.cjs",
+    "audit:rea:strict": "npm run build && node scripts/audit-rea-acceptance.cjs --strict",
+    "plan:certification": "npm run build && node scripts/plan-certification-batch.cjs",
+    "benchmark:recovery": "node --expose-gc scripts/benchmark-engine-recovery.cjs",
+    "audit:historical-batch": "node scripts/prepare-historical-batch.cjs --verify catalog/proposed/normal-before-2004-09-30.json"
   },
   "engines": {
     "node": "22.x"

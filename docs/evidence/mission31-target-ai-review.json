@@ -1,0 +1,12 @@
+{
+  "format": 1,
+  "scope": "Two bounded NPC delegation hooks for new reviewed single-card and group targets; all prior duelStore source preserved",
+  "hooks": {
+    "src/duelStore.ts": [
+      "import {chooseReviewedTarget} from './targetDecision31';\n",
+      "  const reviewedTarget=chooseReviewedTarget(s,id,actions);if(reviewedTarget)return reviewedTarget;\n"
+    ]
+  },
+  "module": "src/targetDecision31.ts",
+  "moduleSHA256": "0262f91456d335e1c963804e0caa2cf058e43feb962970e0edf604cf80fa5c5e"
+}

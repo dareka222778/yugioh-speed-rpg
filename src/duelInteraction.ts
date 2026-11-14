@@ -2,7 +2,7 @@ import {MessageFlags} from 'discord.js';
 import {getDuel,acceptChallenge,declineChallenge,performDuelAction,type DuelRecord} from './duelStore';
 import {duelPublicMessage,duelZonesMessage,quitMessage,visualDuelPrivate,visualDuelCard as defaultCard,visualDuelZoneCard as defaultZone} from './duelUI';
 import {validateDiscordPayload as checked} from './discordPayload';
-export type DuelComponent={customId:string;guildId:string|null;user:{id:string};values?:string[];isButton():boolean;isStringSelectMenu():boolean;deferReply(options:any):Promise<any>;deferUpdate():Promise<any>;editReply(payload:any):Promise<any>;reply(payload:any):Promise<any>;followUp(payload:any):Promise<any>};
+export type DuelComponent={id?:string;customId:string;guildId:string|null;user:{id:string};values?:string[];isButton():boolean;isStringSelectMenu():boolean;deferReply(options:any):Promise<any>;deferUpdate():Promise<any>;editReply(payload:any):Promise<any>;reply(payload:any):Promise<any>;followUp(payload:any):Promise<any>};
 export type DuelDelivery={refreshArena:(r:DuelRecord)=>Promise<void>;onDefer?:(kind:'reply'|'update')=>void;privatePayload?:(r:DuelRecord,owner:string,page?:number)=>Promise<any>;cardPayload?:(r:DuelRecord,owner:string,index:number)=>Promise<any>;zonePayload?:(r:DuelRecord,owner:string,index:number)=>Promise<any>};
 /** Same route used by live Discord and the isolated integration harness. */
 export async function handleDuelComponent(i:DuelComponent,delivery:DuelDelivery){
@@ -37,13 +37,13 @@ export async function handleDuelComponent(i:DuelComponent,delivery:DuelDelivery)
         await deferUpdate();await edit(await visualDuelCard(r,id,cardIndex));return;
       }
       if(action==='quick'&&i.isButton()){
-        await deferUpdate();r=performDuelAction(duelId,id,i.guildId,revision,page);try{await edit(await privatePayload(r,id));}finally{await refreshArena(r);}return;
+        await deferUpdate();r=performDuelAction(duelId,id,i.guildId,revision,page,i.id);try{await edit(await privatePayload(r,id));}finally{await refreshArena(r);}return;
       }
       if(action==='act'&&i.isStringSelectMenu()){
         await deferUpdate();const index=Number(i.values![0]);if(!Number.isSafeInteger(index)||index<0)throw new Error('Ação inválida.');
-        r=performDuelAction(duelId,id,i.guildId,revision,index);try{await edit(await privatePayload(r,id,page));}finally{await refreshArena(r);}return;
+        r=performDuelAction(duelId,id,i.guildId,revision,index,i.id);try{await edit(await privatePayload(r,id,page));}finally{await refreshArena(r);}return;
       }
-      if(action==='confirm'&&i.isButton()){await deferUpdate();r=performDuelAction(duelId,id,i.guildId,revision,{kind:'concede'});await edit({content:'Desistência registrada.',components:[]});await refreshArena(r);return;}
+      if(action==='confirm'&&i.isButton()){await deferUpdate();r=performDuelAction(duelId,id,i.guildId,revision,{kind:'concede'},i.id);await edit({content:'Desistência registrada.',components:[]});await refreshArena(r);return;}
       throw new Error('Ação desconhecida. Use /duelo ver.');
 
 }

@@ -1,0 +1,127 @@
+{
+  "format": 1,
+  "reviewDate": "2026-10-29",
+  "baselineCertified": 847,
+  "certificateBlock": ",\n  \"55013285\":{\"fingerprint\":\"f5f34b30103e335af762ae5b9706164efb7febb249a9e62fe6cae70121fe63cf\",\"suites\":[\"tests/recruitBatch28.test.cjs\"]},\n  \"93107608\":{\"fingerprint\":\"cfbf4d23b5f397d34b1c6cf6729af3f37ef158dcc42a5518d3ec8c496ebf6c61\",\"suites\":[\"tests/recruitBatch28.test.cjs\"]},\n  \"77044671\":{\"fingerprint\":\"80a597df711ad7ee3fd598d04ca985548aa5893514b13a57148d40c0e0e5ae14\",\"suites\":[\"tests/recruitBatch28.test.cjs\"]},\n  \"39191307\":{\"fingerprint\":\"e67247ea2fa9769f8ca26c4c395b301d57c0813b2807162861a53456f4d283f0\",\"suites\":[\"tests/recruitBatch28.test.cjs\"]},\n  \"24317029\":{\"fingerprint\":\"6cfdcb2fdbe404f7f29b94841b25aec40ef158687ba5ebd9f1dcdf42ed408309\",\"suites\":[\"tests/recruitBatch28.test.cjs\"]}\n",
+  "certificateBlockSHA256": "13f35a420f0c3264ab810917cddf7a3e9f5136264316c01ff92d91f4bcfe6ba3",
+  "releaseBlock": "  // M28 recruits: owner-authorized, individually certified cohort.\n  \"55013285\",\n  \"93107608\",\n  \"77044671\",\n  \"39191307\",\n  \"24317029\",\n",
+  "aiHook": "  if(s.choice?.source==='monsterRecruitPosition'&&s.pending.kind==='monsterEffect'){const pending=s.pending,selected=p.deck.find(c=>c.uid===pending.target),info=selected&&getCard(selected.id);const threat=Math.max(0,...op.monsters.filter(m=>m.faceUp&&m.position==='atk').map(m=>atk(m,s)));const mode=(info?.atk??0)<threat?'__recruit_def__':'__recruit_atk__';return actions.find(a=>a.kind==='choose'&&a.target===mode)??actions[0];}\n",
+  "aiHookSHA256": "1e2c99e04ed9d01e53da6af845897b53c58a15e2fc9a360563b7818c397d10ca",
+  "cards": [
+    {
+      "id": "55013285",
+      "konamiId": 5341,
+      "name": "Troop Dragon",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5341&request_locale=en",
+      "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5341&request_locale=ja",
+      "fullEffectReviewed": true,
+      "semantics": "Mandatory battle-destroyed-and-sent-to-grave trigger; recruit another instance of the exact rules name from own Deck, face-up Attack or Defense.",
+      "primaryFacts": {
+        "attribute": "WIND",
+        "race": "Dragon",
+        "level": 2,
+        "atk": 700,
+        "defense": 800
+      },
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "2001-09-20",
+        "set": "SC-42",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5341&request_locale=ja"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "93107608",
+      "konamiId": 6117,
+      "name": "Howling Insect",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6117&request_locale=en",
+      "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6117&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "Optional battle-destroyed-and-sent-to-grave trigger; Insect, printed ATK at most 1500. Face-up position chosen during resolution.",
+      "primaryFacts": {
+        "attribute": "EARTH",
+        "race": "Insect",
+        "level": 3,
+        "atk": 1200,
+        "defense": 1300
+      },
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "2004-05-27",
+        "set": "SOD-JP025",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6117&request_locale=ja"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "77044671",
+      "konamiId": 5423,
+      "name": "Pyramid Turtle",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5423&request_locale=en",
+      "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5423&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "Optional battle-destroyed-and-sent-to-grave trigger; Zombie, printed DEF at most 2000, without an ATK cap. Face-up position chosen during resolution.",
+      "primaryFacts": {
+        "attribute": "EARTH",
+        "race": "Zombie",
+        "level": 4,
+        "atk": 1200,
+        "defense": 1400
+      },
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2003-07-18",
+        "set": "PGD-026",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5423&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "39191307",
+      "konamiId": 6118,
+      "name": "Masked Dragon",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6118&request_locale=en",
+      "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6118&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "Optional battle-destroyed-and-sent-to-grave trigger; Dragon, printed ATK at most 1500. Face-up position chosen during resolution.",
+      "primaryFacts": {
+        "attribute": "FIRE",
+        "race": "Dragon",
+        "level": 3,
+        "atk": 1400,
+        "defense": 1100
+      },
+      "verifiedPrinting": {
+        "region": "ocg",
+        "date": "2004-05-27",
+        "set": "SOD-JP026",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6118&request_locale=ja"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "24317029",
+      "konamiId": 5509,
+      "name": "Gravekeeper's Spy",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5509&request_locale=en",
+      "reviewedTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5509&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "Mandatory FLIP trigger; recruit a Gravekeeper archetype monster, printed ATK at most 1500. Face-up position chosen during resolution.",
+      "primaryFacts": {
+        "attribute": "DARK",
+        "race": "Spellcaster",
+        "level": 4,
+        "atk": 1200,
+        "defense": 2000
+      },
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2003-07-18",
+        "set": "PGD-059",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5509&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    }
+  ]
+}

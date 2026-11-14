@@ -1,0 +1,210 @@
+{
+  "runId": "work-20261113T175911-0300",
+  "owner": "Work",
+  "priority": "P1 — ampliar regressões comportamentais 2v2 de armadilhas de resposta e encadeamento: Sakuretsu Armor destrói somente o atacante exato; Book of Moon protege o atacante físico do parceiro sem vazar mãos nem UIDs.",
+  "state": "completed; released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-13T17:59:11-03:00",
+  "endedAt": "2026-11-13T18:05:29-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
+  "sharedHeadBeforeStateUpdate": "65f4c69667fd10aa6c54a03af76e2a99288aa8c1",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "branches": [
+    {
+      "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "pr": 112,
+      "scope": [
+        "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43506972040,
+        "engineValidation": "in_progress",
+        "engineRunId": 43506972175,
+        "extendedSoak": "in_progress",
+        "milestone1000": "success",
+        "milestoneRunId": 43506972102
+      }
+    },
+    {
+      "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+      "pr": 113,
+      "scope": [
+        "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 43507071750,
+        "engineValidation": "in_progress",
+        "engineRunId": 43507071767,
+        "extendedSoak": "in_progress",
+        "milestone1000": "success",
+        "milestoneRunId": 43507071960
+      }
+    }
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e do checkpoint M151; conferência do HEAD real, branches, PRs, workflows e main.",
+    "Auditoria da PR #107: npm test 7368 aprovados / 1 falha; erro reproduzido em Fusion Substitute (BEASTKING do assento 2 solicitado ao assento 0). Handoff M151 permanece sem resposta.",
+    "M156: adicionado teste 2v2 de Sakuretsu Armor; Trap do parceiro inativo ativada pelo assento ativo, destruição apenas do atacante declarado, conservação de UIDs e estado JSON.",
+    "M157: adicionado teste de Book of Moon encadeado a Sakuretsu Armor; monstro atacante do parceiro fica face-down em Defesa e invalida o alvo da Trap.",
+    "Publicadas PRs #112 e #113 em branches isoladas sobre M71; nenhuma alteração de runtime, catálogo, inventário ou dados de jogadores.",
+    "Verificado main HEAD 8f3f1768b1ee1f4b4a96d557eab5926d96525ad2; nenhum workflow de deploy ou hospedagem confirmada."
+  ],
+  "changes": [
+    {
+      "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+      "sha": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+      "pr": 112,
+      "path": "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs",
+      "summary": "Regressão comportamental Sakuretsu Armor: ownership físico e alvo exato no 2v2."
+    },
+    {
+      "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+      "sha": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+      "pr": 113,
+      "path": "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs",
+      "summary": "Regressão comportamental Book of Moon em cadeia 2v2 protegendo atacante do parceiro."
+    }
+  ],
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "validation": {
+    "pr107": {
+      "cardBatchFast": "success",
+      "engineValidation": "failure",
+      "milestone1000": "success",
+      "extendedSoak": "success",
+      "npmTest": {
+        "passed": 7368,
+        "failed": 1
+      },
+      "failure": "tests/tagClassicFusionSubstituteSharedField2v2.test.cjs: deploy(state,0,BEASTKING) embora BEASTKING esteja no assento 2.",
+      "runId": 43466746420
+    },
+    "pr112": {
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress",
+      "milestone1000": "success",
+      "fastRunId": 43506972040,
+      "engineRunId": 43506972175,
+      "milestoneRunId": 43506972102
+    },
+    "pr113": {
+      "cardBatchFast": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress",
+      "milestone1000": "success",
+      "fastRunId": 43507071750,
+      "engineRunId": 43507071767,
+      "milestoneRunId": 43507071960
+    },
+    "pr109": {
+      "engineValidation": "failure",
+      "note": "M153 reproduz filtro incorreto de Reinforcements/Castle Walls em src/duelEngineCurrent.ts; evidência adicionada ao handoff M61."
+    }
+  },
+  "handoffRequests": {
+    "m61": {
+      "pr": 17,
+      "status": "awaiting-response",
+      "noResponse": true,
+      "lastCommentId": 6864486583,
+      "blockedFiles": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts",
+        "src/classicEffects.ts",
+        "src/duelIntegrity.ts",
+        "scripts/mass-certification21.cjs"
+      ]
+    },
+    "m118": {
+      "pr": 74,
+      "status": "awaiting-response",
+      "noResponse": true,
+      "lastCommentId": 6859057742,
+      "blockedFiles": [
+        "src/tagDuel.ts",
+        "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+      ]
+    },
+    "m151": {
+      "pr": 107,
+      "status": "awaiting-response",
+      "noResponse": true,
+      "lastCommentId": 6864266964,
+      "branch": "feat/work-m151-polymerization-shared-field-fusion-2v2-20261113",
+      "head": "caed37c93b07c12d7b166f12acf0c2b8135901c4"
+    }
+  },
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "deploymentWorkflow": "not found",
+    "hosting": "not verified",
+    "liveDiscordValidation": false
+  },
+  "scopeReleasedToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
+        "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
+        "pr": 112,
+        "scope": [
+          "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43506972040,
+          "engineValidation": "in_progress",
+          "engineRunId": 43506972175,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43506972102
+        }
+      },
+      {
+        "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
+        "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
+        "pr": 113,
+        "scope": [
+          "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 43507071750,
+          "engineValidation": "in_progress",
+          "engineRunId": 43507071767,
+          "extendedSoak": "in_progress",
+          "milestone1000": "success",
+          "milestoneRunId": 43507071960
+        }
+      }
+    ],
+    "allowed": "Auxiliar pode monitorar CI das PRs #112 e #113 e corrigir somente os respectivos arquivos de teste nas próprias branches; registrar o resultado e devolver checkpoint.",
+    "forbidden": "Não tocar M61/PR17, M118/PR74, M151/PR107, branches de terceiros, runtime, catálogo, certificados, banco/inventários; não fazer merge ou deploy."
+  },
+  "nextTask": "Auxiliar: monitorar CI das PRs #112 e #113; corrigir apenas os respectivos testes nas branches M156/M157 se necessário. Work: na próxima janela, revalidar CI, solicitar handoff M61/M118/M151 e, com liberação explícita, corrigir o filtro de alvos em trapActions e a falha do ciclo de Fusão.",
+  "nextWorkAt": "2026-11-13T22:30:00-03:00",
+  "duration": {
+    "elapsedWallMinutes": 6,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Janela observada inferior a 60 minutos; o trabalho de implementação foi realizado, mas não há medição confiável de 60 minutos efetivos. Espera de CI não foi contabilizada."
+  }
+}

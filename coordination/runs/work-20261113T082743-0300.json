@@ -1,0 +1,596 @@
+{
+  "runId": "work-20261113T082743-0300",
+  "owner": "Work",
+  "priority": "P1 — verificar Tributo Torrencial e Sete Ferramentas no 2v2 sem tocar nas reservas M61/M101–M108",
+  "state": "completed; released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-13T08:27:43-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "bd1e9c7c6cffa36f337ab8059cdfec54bd44275f",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "workBranches": [
+    {
+      "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+      "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+      "pr": 65,
+      "scope": [
+        "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "in_progress"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m110-seven-tools-2v2-20261113",
+      "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+      "pr": 66,
+      "scope": [
+        "tests/tagClassicSevenToolsOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "in_progress"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+      "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+      "pr": 67,
+      "scope": [
+        "tests/tagClassicMagicJammerOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "in_progress"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+      "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+      "pr": 68,
+      "scope": [
+        "tests/tagClassicRaigekiTeamTargeting.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      },
+      "note": "Corrigida expectativa: Spell sem resposta legal resolve imediatamente."
+    },
+    {
+      "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+      "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+      "pr": 69,
+      "scope": [
+        "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "pending_new_run",
+        "extendedSoak": "pending",
+        "engineValidation": "in_progress"
+      },
+      "note": "Primeiro run falhou porque a carta-alvo não estava no deck físico de seat 3; fixture corrigida, nova CI em andamento."
+    },
+    {
+      "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+      "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+      "pr": 70,
+      "scope": [
+        "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+      "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+      "pr": 71,
+      "scope": [
+        "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      },
+      "note": "Corrigida expectativa para resolução imediata quando Torrential não possui janela válida."
+    },
+    {
+      "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+      "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+      "pr": 72,
+      "scope": [
+        "tests/tagClassicFissureTeamTargeting.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      },
+      "note": "Arquivo criado na branch correta; arquivo acidental no main removido por commit 8f3f1768b1ee1f4b4a96d557eab5926d96525ad2; ausência verificada."
+    },
+    {
+      "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+      "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+      "pr": 73,
+      "scope": [
+        "tests/tagClassicDeSpellRevealPolicy.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "npmTest": "success",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      },
+      "note": null
+    },
+    {
+      "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+      "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+      "pr": 74,
+      "scope": [
+        "src/tagDuel.ts",
+        "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "fast": "in_progress",
+        "milestone": "success",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress",
+        "engineValidation": "queued"
+      },
+      "note": "Correção runtime para devolver cartas de zonas compartilhadas à mão do proprietário físico por UID m0–m3; teste inclui rotação de assentos."
+    }
+  ],
+  "reservedFiles": [
+    "tests/tagClassicTorrentialTributeOwnership.test.cjs",
+    "tests/tagClassicSevenToolsOwnership.test.cjs",
+    "tests/tagClassicMagicJammerOwnership.test.cjs",
+    "tests/tagClassicRaigekiTeamTargeting.test.cjs",
+    "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs",
+    "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs",
+    "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs",
+    "tests/tagClassicFissureTeamTargeting.test.cjs",
+    "tests/tagClassicDeSpellRevealPolicy.test.cjs",
+    "src/tagDuel.ts",
+    "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+  ],
+  "blocksCompleted": [
+    "Auditoria de coordination/state.json, checkpoint M101, HEAD compartilhado, branches, PRs, CI e situação de deploy.",
+    "Solicitado novamente handoff cooperativo M61; sem resposta. Não alterados os cinco caminhos reservados.",
+    "Criadas 10 PRs draft (#65–#74) em branches isoladas, com 11 regressões comportamentais 2v2 para Torrential Tribute, Seven Tools, Magic Jammer, Raigeki, Monster Reborn, Book of Moon, Mystical Space Typhoon, Fissure, De-Spell (2 cenários) e Giant Trunade.",
+    "M118: corrigida a redistribuição de cartas devolvidas do campo compartilhado para as mãos físicas, usando UID m0–m3; teste cobre três donos e rotação de assentos.",
+    "Corrigidas expectativas de resolução imediata sem resposta legal em M112 e M115; corrigido deck fixture M113 após falha de teste.",
+    "Diagnóstico M108/PR64: npm test falhou em uma expectativa de Negate Attack; informada a branch responsável sem alterar seus arquivos.",
+    "PRs #57–#59 M101–M103: CI completa confirmada com sucesso; reservas próprias liberadas.",
+    "Arquivo M116 criado por engano no main foi removido imediatamente por commit de reversão; ausência no main e presença na branch M116 verificadas."
+  ],
+  "changes": [
+    {
+      "pr": 65,
+      "m": "M109",
+      "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+      "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+      "files": [
+        "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+      ]
+    },
+    {
+      "pr": 66,
+      "m": "M110",
+      "branch": "feat/work-m110-seven-tools-2v2-20261113",
+      "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+      "files": [
+        "tests/tagClassicSevenToolsOwnership.test.cjs"
+      ]
+    },
+    {
+      "pr": 67,
+      "m": "M111",
+      "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+      "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+      "files": [
+        "tests/tagClassicMagicJammerOwnership.test.cjs"
+      ]
+    },
+    {
+      "pr": 68,
+      "m": "M112",
+      "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+      "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+      "files": [
+        "tests/tagClassicRaigekiTeamTargeting.test.cjs"
+      ]
+    },
+    {
+      "pr": 69,
+      "m": "M113",
+      "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+      "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+      "files": [
+        "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs"
+      ]
+    },
+    {
+      "pr": 70,
+      "m": "M114",
+      "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+      "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+      "files": [
+        "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs"
+      ]
+    },
+    {
+      "pr": 71,
+      "m": "M115",
+      "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+      "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+      "files": [
+        "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs"
+      ]
+    },
+    {
+      "pr": 72,
+      "m": "M116",
+      "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+      "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+      "files": [
+        "tests/tagClassicFissureTeamTargeting.test.cjs"
+      ]
+    },
+    {
+      "pr": 73,
+      "m": "M117",
+      "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+      "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+      "files": [
+        "tests/tagClassicDeSpellRevealPolicy.test.cjs"
+      ]
+    },
+    {
+      "pr": 74,
+      "m": "M118",
+      "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+      "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+      "files": [
+        "src/tagDuel.ts",
+        "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+      ],
+      "codeChange": "restorePhysicalHandOwners"
+    }
+  ],
+  "catalog": {
+    "sharedBranch": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "m71TestBase": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "pr14DevelopmentBranch": {
+      "cards": 1014,
+      "certificates": 1014,
+      "merged": false
+    },
+    "deltaToShared": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "handoffRequest": {
+    "target": "PR #17 / M61",
+    "status": "awaiting-response",
+    "commentId": 6851541552,
+    "noResponse": true
+  },
+  "validation": {
+    "pr57": {
+      "fast": "success",
+      "engine": "success",
+      "milestone": "success"
+    },
+    "pr58": {
+      "fast": "success",
+      "engine": "success",
+      "milestone": "success"
+    },
+    "pr59": {
+      "fast": "success",
+      "engine": "success",
+      "milestone": "success"
+    },
+    "pr64": {
+      "fast": "success",
+      "engine": "failure",
+      "milestone": "success",
+      "npmTest": "failure",
+      "failedTests": 1,
+      "passedTests": 7366,
+      "extendedSoak": "success"
+    },
+    "prs": [
+      {
+        "pr": 65,
+        "m": "M109",
+        "ci": "fast-success; milestone-success; npm-test-success; extended-soak-success; engine-validation-in-progress"
+      },
+      {
+        "pr": 66,
+        "m": "M110",
+        "ci": "fast-success; milestone-success; npm-test-success; extended-soak-success; engine-validation-in-progress"
+      },
+      {
+        "pr": 67,
+        "m": "M111",
+        "ci": "fast-success; milestone-success; npm-test-success; extended-soak-success; engine-validation-in-progress"
+      },
+      {
+        "pr": 68,
+        "m": "M112",
+        "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+      },
+      {
+        "pr": 69,
+        "m": "M113",
+        "ci": "fast-success; milestone-success; corrected-head; engine-validation-in-progress"
+      },
+      {
+        "pr": 70,
+        "m": "M114",
+        "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+      },
+      {
+        "pr": 71,
+        "m": "M115",
+        "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+      },
+      {
+        "pr": 72,
+        "m": "M116",
+        "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+      },
+      {
+        "pr": 73,
+        "m": "M117",
+        "ci": "fast-success; milestone-success; npm-test-success; extended-soak-in-progress; engine-validation-in-progress"
+      },
+      {
+        "pr": 74,
+        "m": "M118",
+        "ci": "fast-in-progress; milestone-success; npm-test-in-progress; engine-validation-queued"
+      }
+    ],
+    "note": "PRs #65–#74 permanecem draft e não mergeáveis; CI completa ainda não terminou em nenhuma revisão nova."
+  },
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscordValidation": false,
+    "hosting": "não verificado",
+    "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2"
+  },
+  "nextTask": "Auxiliar: monitorar CI das PRs #65–#74, corrigir apenas falhas de teste nas branches liberadas e reportar M108 (#64). Work na próxima janela: verificar resultados finais, obter handoff M61 e, se liberado, corrigir TS2367/TS2339; continuar expansão comportamental sem duplicações.",
+  "nextWorkAt": "2026-11-13T13:30:00-03:00",
+  "endedAt": "2026-11-13T08:48:19-03:00",
+  "sharedHeadBeforeRelease": "22e39b9c8ca0fadb596748a71eeb50d05b6ea361",
+  "releaseToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+        "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+        "pr": 65,
+        "scope": [
+          "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m110-seven-tools-2v2-20261113",
+        "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+        "pr": 66,
+        "scope": [
+          "tests/tagClassicSevenToolsOwnership.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+        "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+        "pr": 67,
+        "scope": [
+          "tests/tagClassicMagicJammerOwnership.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+        "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+        "pr": 68,
+        "scope": [
+          "tests/tagClassicRaigekiTeamTargeting.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+        "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+        "pr": 69,
+        "scope": [
+          "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+        "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+        "pr": 70,
+        "scope": [
+          "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+        "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+        "pr": 71,
+        "scope": [
+          "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+        "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+        "pr": 72,
+        "scope": [
+          "tests/tagClassicFissureTeamTargeting.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+        "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+        "pr": 73,
+        "scope": [
+          "tests/tagClassicDeSpellRevealPolicy.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+        "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+        "pr": 74,
+        "scope": [
+          "src/tagDuel.ts",
+          "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+        ]
+      }
+    ],
+    "allowed": "monitorar CI e corrigir apenas falhas de teste nas próprias branches; M118 runtime somente com transferência explícita",
+    "forbidden": "não alterar M61/M104–M108; não fazer merge/deploy; não tocar em banco ou inventários"
+  },
+  "duration": {
+    "elapsedWallMinutes": 21,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Não foi possível comprovar 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
+  },
+  "scopeReleasedToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
+        "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
+        "pr": 65,
+        "scope": [
+          "tests/tagClassicTorrentialTributeOwnership.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m110-seven-tools-2v2-20261113",
+        "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
+        "pr": 66,
+        "scope": [
+          "tests/tagClassicSevenToolsOwnership.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m111-magic-jammer-2v2-20261113",
+        "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
+        "pr": 67,
+        "scope": [
+          "tests/tagClassicMagicJammerOwnership.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
+        "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
+        "pr": 68,
+        "scope": [
+          "tests/tagClassicRaigekiTeamTargeting.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
+        "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
+        "pr": 69,
+        "scope": [
+          "tests/tagClassicMonsterRebornPhysicalOwner.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
+        "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
+        "pr": 70,
+        "scope": [
+          "tests/tagClassicBookOfMoonFlipPrivacy.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
+        "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
+        "pr": 71,
+        "scope": [
+          "tests/tagClassicMysticalSpaceTyphoonHiddenTrap.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
+        "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
+        "pr": 72,
+        "scope": [
+          "tests/tagClassicFissureTeamTargeting.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
+        "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
+        "pr": 73,
+        "scope": [
+          "tests/tagClassicDeSpellRevealPolicy.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
+        "head": "53fa62774d428cb04cfd76018495693068a03a5b",
+        "pr": 74,
+        "scope": [
+          "src/tagDuel.ts",
+          "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+        ]
+      }
+    ],
+    "allowed": "monitorar CI e corrigir apenas falhas de teste nas próprias branches; M118 runtime somente com transferência explícita",
+    "forbidden": "não alterar M61/M104–M108; não fazer merge/deploy; não tocar em banco ou inventários"
+  }
+}

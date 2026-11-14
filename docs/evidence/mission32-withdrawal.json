@@ -1,0 +1,21 @@
+{
+  "format": 1,
+  "card": "79853073",
+  "name": "Cipher Soldier",
+  "reason": "Official FAQ identifies a mandatory Trigger Effect during damage calculation. Continuous calculation bonus does not represent its Chain timing.",
+  "officialFAQ": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?ope=4&cid=5034&request_locale=ja",
+  "incorrectAdmissionWithdrawn": true,
+  "affectedProofBatches": [
+    "m32-supported-combat-fusion",
+    "m32-umi-presence"
+  ],
+  "preservedSupersededCatalogs": [
+    "a0b53f3a9dde3b431d3d4096f2e15b76260e1e29d27a0277a1059fe6817088d1",
+    "908b2ae27f7e78820cd7bf591832a99663d50e9eed831dd0250b787d362ac29c"
+  ],
+  "currentBaseline": "25267e4092aa0a2b1af7dd884851c59286ccbe780b2d272100756a2bb2385831",
+  "baselineCertified": 916,
+  "sixCorrectCandidatesRequireFreshPromotion": true,
+  "inventoryGranted": 0,
+  "deployed": false
+}

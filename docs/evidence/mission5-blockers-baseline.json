@@ -1,0 +1,1733 @@
+{
+  "base": "6cf78e612a04254a0ddb43bb5752cabe394c2063",
+  "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a",
+  "rows": [
+    {
+      "canonicalId": "00133a62-8b6d-4ea9-9bb6-79acfa292656",
+      "name": "Dragoness the Wicked Knight",
+      "passcodes": [
+        "70681994"
+      ],
+      "konamiId": 4300,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "00a6cf08-9f0b-4a74-a45b-c2cf1acfb6dd",
+      "name": "Bracchio-raidus",
+      "passcodes": [
+        "16507828"
+      ],
+      "konamiId": 4515,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "00f85656-e4b7-4a01-a6ff-c1e989215e7e",
+      "name": "Flame Ghost",
+      "passcodes": [
+        "58528964"
+      ],
+      "konamiId": 4221,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "0134ca5b-dee1-4aea-9ec9-5008f492f336",
+      "name": "Crab Turtle",
+      "passcodes": [
+        "91782219"
+      ],
+      "konamiId": 4716,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "01a92517-0769-4b69-9889-0087279f02c2",
+      "name": "Five-Headed Dragon",
+      "passcodes": [
+        "99267150",
+        "99267151"
+      ],
+      "konamiId": 5502,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "0226abd3-78db-44ea-b29c-bac20759ca7f",
+      "name": "Chakra",
+      "passcodes": [
+        "65393205"
+      ],
+      "konamiId": 4715,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "0405e64c-8e65-4dd9-bbd0-dd11d8fe6f94",
+      "name": "Blue-Eyes Ultimate Dragon",
+      "passcodes": [
+        "23995346",
+        "23995348"
+      ],
+      "konamiId": 4386,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "0738d4a9-acd9-49e6-8424-b301a34b0d8e",
+      "name": "Mystical Sand",
+      "passcodes": [
+        "32751480"
+      ],
+      "konamiId": 4537,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "07c12cd5-3f62-4c69-b5a7-1a37e0707d97",
+      "name": "Susa Soldier",
+      "passcodes": [
+        "40473581"
+      ],
+      "konamiId": 5376,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "08a59d85-df4c-4a8d-a9f6-b07dc21f58b0",
+      "name": "Monster Reborn",
+      "passcodes": [
+        "83764718",
+        "83764719"
+      ],
+      "konamiId": 4842,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "092d3c3e-d588-4460-a896-e2330fa5798d",
+      "name": "Inaba White Rabbit",
+      "passcodes": [
+        "77084837"
+      ],
+      "konamiId": 5374,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "0be6856f-51f2-4272-98f8-661b5b84df90",
+      "name": "Maharaghi",
+      "passcodes": [
+        "40695128"
+      ],
+      "konamiId": 5373,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "0c189b17-1b21-4f0b-b09b-144d930f30bb",
+      "name": "Metal Dragon",
+      "passcodes": [
+        "09293977"
+      ],
+      "konamiId": 4415,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "0cb67fa7-2e55-454a-be1b-c00b715691ce",
+      "name": "The Winged Dragon of Ra (original)",
+      "passcodes": [],
+      "konamiId": null,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "invalid-konami-id",
+        "unknown-race",
+        "invalid-monster-stats",
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "0e512319-2e82-458e-87e1-18cd7bb082c8",
+      "name": "Humanoid Worm Drake",
+      "passcodes": [
+        "05600127"
+      ],
+      "konamiId": 5062,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "0f2a4cef-9a0f-4db9-91c3-069fe5da0376",
+      "name": "Dark Dust Spirit",
+      "passcodes": [
+        "89111398"
+      ],
+      "konamiId": 5414,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "11096921-9955-4672-8be2-00402583bac8",
+      "name": "Meteo the Matchless",
+      "passcodes": [],
+      "konamiId": 5929,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "115f7f6b-d6be-4f38-b03a-6d19b6d713e4",
+      "name": "Dramatic Rescue",
+      "passcodes": [
+        "80193355",
+        "80193356"
+      ],
+      "konamiId": 5299,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "188067c3-469a-4aa9-95a3-699ad35d4ca4",
+      "name": "Flower Wolf",
+      "passcodes": [
+        "95952802"
+      ],
+      "konamiId": 4493,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "1995a362-2fd2-4a1e-afb2-26fd2fa0ace7",
+      "name": "Hungry Burger",
+      "passcodes": [
+        "30243636"
+      ],
+      "konamiId": 4708,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "1c222ccc-1312-46e7-8aaa-a9c1012b48c8",
+      "name": "Amphibious Bugroth",
+      "passcodes": [
+        "40173854"
+      ],
+      "konamiId": 4645,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "1c2f8e8f-8f7d-45bd-85c1-fca27135957d",
+      "name": "Taunt",
+      "passcodes": [
+        "90740329",
+        "90740330"
+      ],
+      "konamiId": 6140,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "1c35a99c-265e-4db2-9e37-60fb4ec92eb7",
+      "name": "Black Luster Soldier",
+      "passcodes": [
+        "05405694"
+      ],
+      "konamiId": 4370,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [
+        "normal"
+      ],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "1f1b0d2b-3234-4b09-afa7-b78e1c85e7f1",
+      "name": "Super War-Lion",
+      "passcodes": [
+        "33951077"
+      ],
+      "konamiId": 4362,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "23f66e79-a971-44c7-8a33-69a13bc26091",
+      "name": "Metalmorph",
+      "passcodes": [
+        "68540058",
+        "68540059"
+      ],
+      "konamiId": 4664,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "2807d0f0-c826-4aad-9d56-1d48e4c9a893",
+      "name": "Bickuribox",
+      "passcodes": [
+        "25655502"
+      ],
+      "konamiId": 4391,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "29662b78-c2f4-4de9-bf00-0f6346a57f14",
+      "name": "Cyber Saurus",
+      "passcodes": [
+        "89112729"
+      ],
+      "konamiId": 4514,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "2b487866-11cc-48d2-af3f-a0055f2f14ba",
+      "name": "Pragtical",
+      "passcodes": [
+        "33691040"
+      ],
+      "konamiId": 4488,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "2b5defda-fc67-4a5b-81f1-9b02a7162171",
+      "name": "Tomohiro the Mountain Warrior",
+      "passcodes": [],
+      "konamiId": null,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "invalid-konami-id"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "2cdadd5b-e231-47b4-9ebd-1c8b1001c408",
+      "name": "Sanwitch",
+      "passcodes": [
+        "53539634"
+      ],
+      "konamiId": 6128,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "2fe1ef25-2899-40fe-86c9-45247ca4f7a9",
+      "name": "Otohime",
+      "passcodes": [
+        "39751093",
+        "39751094"
+      ],
+      "konamiId": 5379,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "30695653-138a-4684-a38b-c0cc31c0078d",
+      "name": "Senju of the Thousand Hands",
+      "passcodes": [
+        "23401839",
+        "23401840"
+      ],
+      "konamiId": 4916,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "3089bac0-8a45-4945-be26-d78dd6e0e00f",
+      "name": "Fiend's Mirror",
+      "passcodes": [
+        "31890399"
+      ],
+      "konamiId": 4371,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "35dfcdc4-77ba-4500-b85b-e406b55afea8",
+      "name": "Empress Judge",
+      "passcodes": [
+        "15237615"
+      ],
+      "konamiId": 4578,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "360a4393-aa9c-46bc-8fbb-2667858f929b",
+      "name": "Parasite Paracide",
+      "passcodes": [
+        "27911549",
+        "27911550"
+      ],
+      "konamiId": 4769,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "3689dadc-22f8-475b-93e9-f753a8b41e86",
+      "name": "Fusionist",
+      "passcodes": [
+        "01641882"
+      ],
+      "konamiId": 4195,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "3a00350f-41a4-4f2c-b55b-235bf4c78fe2",
+      "name": "Zera the Mant (Normal)",
+      "passcodes": [],
+      "konamiId": null,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "invalid-konami-id"
+      ],
+      "categories": [
+        "normal"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "3ae0131e-6896-4176-894a-78659b2f4751",
+      "name": "Magician of Black Chaos",
+      "passcodes": [
+        "30208479"
+      ],
+      "konamiId": 4728,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "3b49bbd3-a56a-4a84-946c-14fa2eaa50d4",
+      "name": "Ulevo",
+      "passcodes": [],
+      "konamiId": 5925,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "45526162-ea5e-472d-bd5d-364c5406a954",
+      "name": "Final Flame",
+      "passcodes": [
+        "73134081",
+        "73134082"
+      ],
+      "konamiId": 4351,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "4567872b-5f20-4aa2-8167-b7ca0c691552",
+      "name": "Harpie's Feather Duster",
+      "passcodes": [
+        "18144506",
+        "18144507"
+      ],
+      "konamiId": 4678,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "460db1bd-86f6-45e3-9153-c06b60ba6551",
+      "name": "Barox",
+      "passcodes": [
+        "06840573"
+      ],
+      "konamiId": 4092,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "48351d3c-fc71-474b-9ea2-19c030dfb3a9",
+      "name": "Twin-Headed Thunder Dragon",
+      "passcodes": [
+        "54752875"
+      ],
+      "konamiId": 4619,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "4990221e-5d04-41ad-80a6-ae4ff77058a5",
+      "name": "Dokurorider",
+      "passcodes": [
+        "99721536"
+      ],
+      "konamiId": 4725,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "4c6dcc10-9681-4b30-9f36-43fd2553c8db",
+      "name": "Meteor Black Dragon",
+      "passcodes": [
+        "90660762"
+      ],
+      "konamiId": 4719,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "4c9c7b8b-47ad-43e7-8a21-b5f3f0380616",
+      "name": "Vorse Raider",
+      "passcodes": [
+        "14898066",
+        "14898067"
+      ],
+      "konamiId": 5004,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "normal"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "583999f5-b3d1-49f4-9367-07316c4a5719",
+      "name": "Gren Maju Da Eiza",
+      "passcodes": [
+        "36584821"
+      ],
+      "konamiId": 5834,
+      "issues": [
+        "invalid-monster-stats"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "5effb838-8b8c-4bca-ad14-0557a7355e40",
+      "name": "Gaia the Dragon Champion",
+      "passcodes": [
+        "66889139"
+      ],
+      "konamiId": 4043,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "5f3abdc4-cae4-403a-83ea-5d626acb81f1",
+      "name": "Spellbinding Circle",
+      "passcodes": [
+        "18807108",
+        "18807109"
+      ],
+      "konamiId": 4355,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "618c41f5-6ecf-4b0e-97f7-0ae4a0251e64",
+      "name": "Zera the Mant",
+      "passcodes": [
+        "69123138"
+      ],
+      "konamiId": 4366,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "6606a360-dae5-4df4-8372-ea2af202f53e",
+      "name": "Kaiser Dragon",
+      "passcodes": [
+        "94566432"
+      ],
+      "konamiId": 4433,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "662d2e2f-75e5-475c-a150-2b2358ae4ecc",
+      "name": "Vermillion Sparrow",
+      "passcodes": [
+        "35752363"
+      ],
+      "konamiId": 4479,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "66440e1d-d97e-4528-9794-a13b95dc7b98",
+      "name": "Super War-Lion",
+      "passcodes": [],
+      "konamiId": null,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "invalid-konami-id"
+      ],
+      "categories": [
+        "normal"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "689e9332-fb42-4d59-9100-afb7d58b8a46",
+      "name": "Fiend's Mirror (Normal)",
+      "passcodes": [],
+      "konamiId": null,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "invalid-konami-id"
+      ],
+      "categories": [
+        "normal"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "6a325223-c05d-4861-b2bf-e0cd22b918a4",
+      "name": "Yamata Dragon",
+      "passcodes": [
+        "76862289"
+      ],
+      "konamiId": 5377,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "6b252e93-3d56-4849-b6a9-92c579957779",
+      "name": "The Forgiving Maiden",
+      "passcodes": [
+        "84080938",
+        "84080939"
+      ],
+      "konamiId": 5207,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "6cb08e9f-e85c-464b-b3ec-71fe7790ceb7",
+      "name": "Dark Magician Girl",
+      "passcodes": [
+        "38033121",
+        "38033126"
+      ],
+      "konamiId": 4766,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "6e2e39c1-e5b2-4070-aff4-ee935a14a83e",
+      "name": "Polymerization",
+      "passcodes": [
+        "24094653",
+        "27847700"
+      ],
+      "konamiId": 4837,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "784af30a-cbda-498e-8fa0-2b97a1495436",
+      "name": "Flame Swordsman",
+      "passcodes": [
+        "45231177",
+        "45231178"
+      ],
+      "konamiId": 4021,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "78afdb0c-32a8-45cb-99f0-d205b9b06c99",
+      "name": "Skull Knight",
+      "passcodes": [
+        "02504891"
+      ],
+      "konamiId": 4713,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "7b0b8521-da54-4824-b741-311106a9a831",
+      "name": "Charubin the Fire Knight",
+      "passcodes": [
+        "37421579"
+      ],
+      "konamiId": 4139,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "7e30714f-58c9-41de-b9c8-3fc233599882",
+      "name": "Mystic Tomato",
+      "passcodes": [
+        "83011277",
+        "83011278"
+      ],
+      "konamiId": 4930,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "83d2da7b-e1ec-4aed-9163-4fddad335aac",
+      "name": "Rare Fish",
+      "passcodes": [
+        "80516007"
+      ],
+      "konamiId": 4236,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "855f7d82-22b7-41e1-a192-663fe0455649",
+      "name": "Master of Oz",
+      "passcodes": [
+        "27134689"
+      ],
+      "konamiId": 6127,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "85870dd6-509c-48d4-a741-5e09543dc050",
+      "name": "Kamionwizard",
+      "passcodes": [
+        "41544074"
+      ],
+      "konamiId": 4121,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "85c9ba59-8011-4f23-b02b-e44c1397f8cb",
+      "name": "Ultimate Offering",
+      "passcodes": [
+        "80604091",
+        "80604092"
+      ],
+      "konamiId": 4851,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "88729c3f-ec93-429b-b96f-86b19fbabc17",
+      "name": "Viser Des",
+      "passcodes": [
+        "56043446",
+        "56043447"
+      ],
+      "konamiId": 5292,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "8a098736-5adc-4966-afd5-96122fb8f9e9",
+      "name": "Roaring Ocean Snake",
+      "passcodes": [
+        "19066538"
+      ],
+      "konamiId": 4229,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "8b2b7ea5-d078-415c-8d25-d418bd6a4d1e",
+      "name": "Kwagar Hercules",
+      "passcodes": [
+        "95144193"
+      ],
+      "konamiId": 4539,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "8f724a39-8d65-4b64-aa24-3de90744c134",
+      "name": "Karbonala Warrior",
+      "passcodes": [
+        "54541900"
+      ],
+      "konamiId": 4049,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "90ae7b1a-e9f1-4752-853e-d4cc9dd41029",
+      "name": "Rabid Horseman",
+      "passcodes": [
+        "94905343"
+      ],
+      "konamiId": 4098,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "91336baf-ad40-426f-9d4f-26bc1a60eb70",
+      "name": "St. Joan",
+      "passcodes": [
+        "21175632"
+      ],
+      "konamiId": 5208,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "9185cb2d-65f1-4528-bb00-8232453fb9b5",
+      "name": "Masahiro the Dark Clown",
+      "passcodes": [],
+      "konamiId": null,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "invalid-konami-id"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "931698b8-593e-4c89-befa-4e5916319ec6",
+      "name": "The Masked Beast",
+      "passcodes": [
+        "49064413"
+      ],
+      "konamiId": 5094,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "99b3c775-5191-4541-a095-3dbd9d9b5f5c",
+      "name": "Deepsea Shark",
+      "passcodes": [
+        "28593363"
+      ],
+      "konamiId": 4443,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "a0f0fce8-64d5-4a51-9a56-afc441309dc7",
+      "name": "Performance of Sword",
+      "passcodes": [
+        "04849037"
+      ],
+      "konamiId": 4707,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "a13af004-d11a-438a-b51e-6525e8b3f058",
+      "name": "Garma Sword",
+      "passcodes": [
+        "90844184"
+      ],
+      "konamiId": 4722,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "a3023c91-8cec-479f-b65a-a6ac3f172d75",
+      "name": "Fiend Comedian",
+      "passcodes": [
+        "81172176",
+        "81172177"
+      ],
+      "konamiId": 5405,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "ac526aa7-6b67-4cb0-a055-933508857a02",
+      "name": "Skelgon",
+      "passcodes": [
+        "32355828"
+      ],
+      "konamiId": 4551,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "acc42254-c2c8-4448-94de-6cacc1eeca19",
+      "name": "Offerings to the Doomed",
+      "passcodes": [
+        "19230407",
+        "19230408"
+      ],
+      "konamiId": 5214,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "b2436962-6450-4b56-8b15-c498b77ac5e2",
+      "name": "Rose Spectre of Dunn",
+      "passcodes": [
+        "32485271"
+      ],
+      "konamiId": 4600,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "b2aaed80-7aa0-4e89-8b1e-8b2e245f77a9",
+      "name": "Musician King",
+      "passcodes": [
+        "56907389"
+      ],
+      "konamiId": 4501,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "b67e0407-e194-4829-a277-24f0fba6d847",
+      "name": "Obelisk the Tormentor (original)",
+      "passcodes": [],
+      "konamiId": null,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "invalid-konami-id",
+        "unknown-race",
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "b83f46cc-1772-4a52-b688-59fe2bc5f874",
+      "name": "Great Long Nose",
+      "passcodes": [
+        "02356994"
+      ],
+      "konamiId": 5378,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "b843699f-bd91-4955-af07-75981bd4fdad",
+      "name": "Maju Garzett",
+      "passcodes": [
+        "08794435"
+      ],
+      "konamiId": 5716,
+      "issues": [
+        "invalid-monster-stats"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "b8879be5-640d-4c73-b50a-709f61fbca4c",
+      "name": "Warrior of Tradition",
+      "passcodes": [
+        "56413937"
+      ],
+      "konamiId": 4624,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "bc1c15b5-b9da-47bd-ae19-0a0dfb6c20a6",
+      "name": "Aqua Dragon",
+      "passcodes": [
+        "86164529"
+      ],
+      "konamiId": 4448,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "bc4ce584-7451-4d5b-8d25-2557632e4be5",
+      "name": "Red-Eyes Black Dragon",
+      "passcodes": [
+        "74677422",
+        "74677427"
+      ],
+      "konamiId": 4088,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "normal"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "bdac3879-cdee-44cd-a47d-fca8388af25f",
+      "name": "Dian Keto the Cure Master",
+      "passcodes": [
+        "84257639",
+        "84257640"
+      ],
+      "konamiId": 4348,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "be199368-2f51-4d09-a8d8-d70288095023",
+      "name": "Fushi No Tori",
+      "passcodes": [
+        "38538445"
+      ],
+      "konamiId": 5382,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "c0285d04-cadd-402d-a865-799a182d7510",
+      "name": "Dark Magician",
+      "passcodes": [
+        "36996508",
+        "46986414",
+        "46986420",
+        "46986421"
+      ],
+      "konamiId": 4041,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "normal"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "c3675f97-306a-4f73-bef5-a00987697717",
+      "name": "Thousand Dragon",
+      "passcodes": [
+        "41462083"
+      ],
+      "konamiId": 4075,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "c3e80ebf-927c-474c-9cf9-065e1ba2ae96",
+      "name": "Fortress Whale",
+      "passcodes": [
+        "62337487"
+      ],
+      "konamiId": 4724,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "c3f9c1f3-cd43-46cd-afb0-592982663106",
+      "name": "Giltia the D. Knight",
+      "passcodes": [
+        "51828629"
+      ],
+      "konamiId": 4395,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "c956dba4-4e19-420d-9280-a23801af35c4",
+      "name": "Zombie Warrior",
+      "passcodes": [
+        "31339260"
+      ],
+      "konamiId": 4036,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "d1348299-b29e-4c8d-a29f-03afbaeb3b16",
+      "name": "Marine Beast",
+      "passcodes": [
+        "29929832"
+      ],
+      "konamiId": 4623,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "d440ca13-e0e4-4954-acb4-7777af33ff09",
+      "name": "Slifer the Sky Dragon (original)",
+      "passcodes": [],
+      "konamiId": null,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "invalid-konami-id",
+        "unknown-race",
+        "invalid-monster-stats",
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "d7365b12-52c1-4382-b99a-257816cb6908",
+      "name": "Skull Guardian",
+      "passcodes": [
+        "03627449"
+      ],
+      "konamiId": 4710,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "d7432aea-c181-4ea8-b32b-4ff0adfdaf08",
+      "name": "Kaminari Attack",
+      "passcodes": [
+        "09653271"
+      ],
+      "konamiId": 4464,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "d753e4bf-3e6c-4337-b8fe-4bbb2696cf86",
+      "name": "Crimson Sunbird",
+      "passcodes": [
+        "46696593"
+      ],
+      "konamiId": 4473,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "dbf09e76-f42d-499c-9d7b-f4af8e58fea0",
+      "name": "Mavelus",
+      "passcodes": [
+        "59036972"
+      ],
+      "konamiId": 4278,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "dbfe59af-cc66-435f-9c6f-ee3d45faf2db",
+      "name": "Punished Eagle",
+      "passcodes": [
+        "74703140"
+      ],
+      "konamiId": 4471,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "dd15c86d-c1c9-4493-90d9-251307a2004f",
+      "name": "Gilford the Lightning",
+      "passcodes": [
+        "36354007",
+        "36354008"
+      ],
+      "konamiId": 5451,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "de350237-87f7-4326-a983-c71de43946c1",
+      "name": "Javelin Beetle",
+      "passcodes": [
+        "26932788"
+      ],
+      "konamiId": 4723,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "ritual"
+      ]
+    },
+    {
+      "canonicalId": "e3030567-de79-43b2-97f7-8548e07a837e",
+      "name": "Man-eating Black Shark",
+      "passcodes": [
+        "80727036"
+      ],
+      "konamiId": 4571,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "e8511ae0-f67f-4768-93b1-0edc21358db0",
+      "name": "Darkfire Dragon",
+      "passcodes": [
+        "17881964"
+      ],
+      "konamiId": 4174,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "f187f0c3-b1c0-45cb-8947-48c2f3de6527",
+      "name": "Gradius' Option",
+      "passcodes": [
+        "14291024"
+      ],
+      "konamiId": 5372,
+      "issues": [
+        "invalid-monster-stats"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "f418e45d-2e6c-4495-b8c9-6d5edf362d7d",
+      "name": "Barrel Dragon",
+      "passcodes": [
+        "81480460",
+        "81480461"
+      ],
+      "konamiId": 4749,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "f43eb0cf-dc6f-48c0-9429-2539152427bb",
+      "name": "Soul Hunter",
+      "passcodes": [
+        "72869010"
+      ],
+      "konamiId": 4477,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "f4df82ce-8823-4b10-82df-a1b677933cc9",
+      "name": "Yasushi the Skull Knight",
+      "passcodes": [],
+      "konamiId": null,
+      "issues": [
+        "ambiguous-or-invalid-passcode",
+        "invalid-konami-id",
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "f56f3658-4ab5-47f1-8959-a90b359bc596",
+      "name": "Red-Eyes Black Metal Dragon",
+      "passcodes": [
+        "64335804",
+        "64335805"
+      ],
+      "konamiId": 4748,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [
+        "effect"
+      ],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "f7ead283-68cc-4342-a3f9-8aa81e673c99",
+      "name": "Tragedy",
+      "passcodes": [
+        "35686187",
+        "35686188"
+      ],
+      "konamiId": 4823,
+      "issues": [
+        "ambiguous-or-invalid-passcode"
+      ],
+      "categories": [],
+      "mechanics": []
+    },
+    {
+      "canonicalId": "f85eeb6b-2207-4114-b594-d1ea8dc570fd",
+      "name": "Skullbird",
+      "passcodes": [
+        "08327462"
+      ],
+      "konamiId": 4527,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "f9125560-0cd2-46fc-af31-f39f09f4bd93",
+      "name": "Black Skull Dragon",
+      "passcodes": [
+        "11901678"
+      ],
+      "konamiId": 4223,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "faa6a6c2-1b03-46ac-98fe-ff43a356cd00",
+      "name": "Great Mammoth of Goldfine",
+      "passcodes": [
+        "54622031"
+      ],
+      "konamiId": 4570,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    },
+    {
+      "canonicalId": "fb520bda-c354-4b70-96a9-253bd7260a25",
+      "name": "Labyrinth Tank",
+      "passcodes": [
+        "99551425"
+      ],
+      "konamiId": 4376,
+      "issues": [
+        "monster-category-requires-curation"
+      ],
+      "categories": [],
+      "mechanics": [
+        "fusion"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "work-20261111T032930Z",
+  "branch": "feat/work-m47-20261109",
+  "baseSharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedBase": "769d359256a7bcf47d090bbc687071a396f1422e",
+  "implementationBase": "9938f62b5f0dcfa38d8fb2e2a831d18aff28ba54",
+  "startedAt": "2026-11-11T03:29:30Z",
+  "lastActivityAt": "2026-11-11T03:29:30Z",
+  "state": "active",
+  "owner": "Work",
+  "findings": {
+    "catalogCertified": 1014,
+    "catalogRevision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52",
+    "openDraftPRs": [
+      12,
+      13,
+      14
+    ],
+    "pr14Head": "9938f62b5f0dcfa38d8fb2e2a831d18aff28ba54",
+    "pr14AheadBehindShared": {
+      "ahead": 35,
+      "behind": 11
+    },
+    "ci": {
+      "engineValidation": "action_required on PR14 head; previous run failed only at audit-mechanical-batch16 stale src/duelStore.ts hash; npm test and extended-soak passed",
+      "cardBatchFast": "action_required on PR14 head",
+      "admissionPreparation": "action_required on PR14 head"
+    },
+    "auxiliaryBranch": "feat/aux-m53-validation-20261109",
+    "auxiliaryLatest": "e3aaf58d1ce8ab98fe9522e271c1d59c6182094e",
+    "auxiliaryLastCommitAt": "2026-11-09T19:29:58Z",
+    "production": "not verified; hosting panel unavailable in previous checkpoint"
+  },
+  "nextTask": "Fix stale M16 preserved-baseline audit to normalize the reviewed NPC-removal and AI hooks through mission15-reviewed-extensions.cjs; rerun CI and inspect subsequent gates. Then continue next eligible card family.",
+  "protected": [
+    "feat/rea-engine-recovery-20261026",
+    "PR #12",
+    "PR #13"
+  ],
+  "production": "No merge, deploy, inventory or database operations."
+}

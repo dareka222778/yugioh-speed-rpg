@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "baseCommit": "bc54f7cf43a25d209a8b358d99a456c6b1298f54",
+  "run": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/41079475780",
+  "testSummary": {
+    "node": "v22.23.4",
+    "tests": 6827,
+    "suites": 0,
+    "pass": 6827,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "exitCode": 0
+  },
+  "results": [
+    {
+      "batchId": "m32-activation-restrictions",
+      "stage": "released",
+      "added": 3,
+      "total": 925,
+      "inventoryGranted": 0,
+      "deployed": false
+    }
+  ],
+  "files": [
+    {
+      "path": "catalog/batches/admitted.json",
+      "beforeSHA256": "e06a99aba7a802dddef2217a3d2c7896f6c05ea53fd38a5ee705b6eddf4e6edb",
+      "sha256": "471303ce8525c4ab8e94450a60f74fc96956bbe17229cc000b471c00e6eafe4d"
+    },
+    {
+      "path": "catalog/batches/m32-activation-restrictions.json",
+      "beforeSHA256": null,
+      "sha256": "872196191999fe2b5b76dd6e66cee23be495d798cfb17cf783e30479004eada3"
+    },
+    {
+      "path": "catalog/engine-v9/488b7ef1792a32ec4a3758f104de76b1952f5ba4ebe229927f52c0e85bdd6995.json",
+      "beforeSHA256": null,
+      "sha256": "07c38826a4c6967e9f9bd90e424bd867daed0fa4d2df096bf220cc7d26e65868"
+    },
+    {
+      "path": "catalog/engine-v9/manifest.json",
+      "beforeSHA256": "00e4fc62840830793774a76fc5f3cbe05f32bb2f3700e381f0b1ec5d16423fe0",
+      "sha256": "06607e7bd14637152ccc49b364b2b3c57a626c7fa176412211a1c7095c2d7b2b"
+    },
+    {
+      "path": "docs/evidence/generated-m32-activation-restrictions.json",
+      "beforeSHA256": null,
+      "sha256": "36764dffd1d15e89f7a2bb5acc21cdc1e0a843aa70b492336ac3599b659ceb5e"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "beforeSHA256": "0b4ae9b3e4366814a90fb785a1fb6f2cac797773f21e1681738e01dd9f7b8e23",
+      "sha256": "994f8e5f278fa9048d17a4319e777beee74f2c38affa062442115986f006dfbe"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "beforeSHA256": "acc77edcceb938a262058a2edb0770e8469e741eabb52db38e05262105f8e6af",
+      "sha256": "40bea137a9236a1787683afbee0fbd6e00e179f3cb6c663577ab17ad25ae41d7"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "beforeSHA256": "30b5b1aedbd5ff58244e28f41a4fb348d0026f7d838ed53e43d16b17d1a55cd2",
+      "sha256": "403377b870afd2f3d19c8b03613a8ed9f2b91a69e386d4fa36b6f416cdd0c2fa"
+    },
+    {
+      "path": "src/generated/m32-activation-restrictions.ts",
+      "beforeSHA256": null,
+      "sha256": "e34ff661b4a6ff1e2bb6b2ef18558045ba3c150bf26e3530d2daeca4798eac2b"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "beforeSHA256": "f222cedc19ae46b8cd13677b353dee57587b9fa132e76349878ca5634ae1a1cd",
+      "sha256": "05c9a30fa2df98342941738aa327c29ae43525bdeeea67a77376e7f154d16ad2"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "beforeSHA256": "1aa439d47077babd6231ec6f2e32e9e74fc9fbd4b66d49a3ac87d364012aad7f",
+      "sha256": "44e01a7693ba98b1aaaf19148f30924c31b5f260fc063bbb7701a98bad2b65c6"
+    },
+    {
+      "path": "tests/generated-m32-activation-restrictions.test.cjs",
+      "beforeSHA256": null,
+      "sha256": "24b6b47b170e57702c10dca515d972a11ee692b4bed9f514e92fcbc195cced3f"
+    }
+  ]
+}

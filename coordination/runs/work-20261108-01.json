@@ -1,0 +1,90 @@
+{
+  "id": "work-20261108-01",
+  "branch": "feat/rea-engine-recovery-20261026",
+  "baseline": "dea316eeded7ce3bb91ef6224242844f0423d627",
+  "implementation": "4b1160d4924f6860e9a553837ae6f25f3e8a8112",
+  "recordedAt": "2026-11-08T04:26:42.359Z",
+  "changes": [
+    "Jujitsu Battle Step returns the attacker to its physical owner's Deck or Extra Deck.",
+    "Eight regressions across four seats and both destinations.",
+    "Yield between groups of simulated games so the 1000-match audit completes with the default local Node 22 heap."
+  ],
+  "catalog": {
+    "revision": "6f09a917e46793e2e61311d044344138729462c6c3b10d13a35edcd1b8f56b79",
+    "uniqueEnabled": 965,
+    "matchingCertificates": 965,
+    "to1000": 35,
+    "added": 0
+  },
+  "evidence": {
+    "node": "22.23.4",
+    "baseline": "Four inactive-owner Main Deck cases failed before the fix; saved seed 391 action 75 failed then passed after the fix.",
+    "suite": {
+      "passed": 7312,
+      "failed": 0
+    },
+    "focused": {
+      "passed": 12
+    },
+    "tag": {
+      "scope": "2v2 custom classic rules, 965 enabled definitions; no real human Discord clients",
+      "games": 1000,
+      "completed": 1000,
+      "decisions": 91540,
+      "serializedRestores": 6592,
+      "cardConservation": true,
+      "definitionsPresent": 965,
+      "effectDefinitionsActivated": 139,
+      "replayDigest": "27c76a67a5769c267479c3cf75aabf1a4d006fcd131351dc3605d9085370efee",
+      "reasons": {
+        "pontos de vida": 991,
+        "não conseguiu comprar uma carta": 9
+      },
+      "humanDiscordAcceptance": "not certified"
+    },
+    "tagSessions": {
+      "scope": "100 persisted classic 2v2 matches, four simulated human transports; no real Discord clients",
+      "completed": 100,
+      "decisions": 8052,
+      "reloads": 8052,
+      "publications": 8052,
+      "mainDecksPerGame": 4,
+      "cardConservation": true,
+      "economyUnchanged": true,
+      "releasedSeats": 400,
+      "reasons": {
+        "pontos de vida": 100
+      },
+      "humanDiscordAcceptance": "not certified"
+    },
+    "training": {
+      "scope": "solo 2v2 training, one simulated human plus three NPCs; exact saved component adapter",
+      "completeGames": 100,
+      "humanDecisions": 1853,
+      "npcDecisions": 5769,
+      "totalDecisions": 7622,
+      "cardConservation": true,
+      "economyUnchanged": true,
+      "releasedHumanSeats": 100,
+      "realDiscordAcceptance": "not certified"
+    }
+  },
+  "ci": {
+    "commit": "4b1160d4924f6860e9a553837ae6f25f3e8a8112",
+    "fast": "success",
+    "admission": "success",
+    "milestone": "success",
+    "full": {
+      "id": 42446556551,
+      "status": "in_progress_at_checkpoint"
+    }
+  },
+  "pr": {
+    "number": 12,
+    "draft": true,
+    "merged": false
+  },
+  "production": "Hosting redirected to login; deployed SHA and uptime unverified. No deploy, inventory changes or production DB operations.",
+  "schedule": "First execution time not provided; no automation created.",
+  "next": "Recheck full CI on actual HEAD, then review next pending family against official texts and existing certificates. Do not publish while CI is unresolved."
+}
