@@ -132,15 +132,15 @@ test('Dark Elf cannot declare an attack when its shared team cannot pay 1000 LP'
 test('Toll charges 500 LP to the attacking shared team when an active teammate declares a partner-owned attack',()=>{
   let state=game([TOLL,AXE_RAIDER],'m186-toll-attack-cost');
   const before=inventorySnapshot(state);
-  const toll=takeCard(state,2,TOLL);
-  holder(state,2).hand.push(toll);
+  const toll=takeCard(state,0,TOLL);
+  holder(state,0).hand.push(toll);
   const attacker=deploy(state,2,AXE_RAIDER);
-  assert.match(toll.uid,/^m2:/);
+  assert.match(toll.uid,/^m0:/,'Toll must retain active physical seat 0 ownership');
   assert.match(attacker.uid,/^m2:/);
   const activation=tag.tagActions(state,member(0)).find(candidate=>
     candidate.kind==='spell'&&candidate.card===toll.uid
   );
-  assert.ok(activation,'the active teammate must activate the inactive partner-owned continuous Spell');
+  assert.ok(activation,'the active teammate must activate its own continuous Spell to tax partner-owned attacks');
   state=settle(tag.stepTagDuel(state,member(0),activation));
   assert.ok(state.core.players[0].backrow.some(card=>card.uid===toll.uid&&card.faceUp===true),
     'Toll remains face-up in the shared team backrow');
