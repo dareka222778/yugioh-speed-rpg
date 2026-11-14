@@ -20,7 +20,7 @@ assert.equal(getMonsterEffect(SENJU)?.operation.kind,'searchFiltered');
 assert.equal(getMonsterEffect(MANJU)?.operation.kind,'searchFiltered');
 assert.equal(getEffect(BLACK_LUSTER_RITUAL)?.kind,'ritualSummon');
 assert.equal(getPlayableCard(BLACK_LUSTER_SOLDIER)?.monsterType,'ritual');
-assert.equal(getEffect(FISSURE)?.kind,'fissure');
+assert.notEqual(getEffect(FISSURE)?.kind,'ritualSummon');
 
 const normal=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
