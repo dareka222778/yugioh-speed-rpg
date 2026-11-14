@@ -1,0 +1,176 @@
+{
+  "runId": "work-20261114T194137-0300",
+  "owner": "Work",
+  "priority": "P1 — ampliar a cobertura comportamental 2v2 em duas famílias independentes: forced Defense no fim da Battle Phase (Goblin Attack Force/Giant Orc) e ataque direto condicional de Alligator's Sword Dragon; preservar a propriedade física, os 3+3 espaços e a privacidade.",
+  "state": "checkpoint-created; awaiting coordination release",
+  "startedAt": "2026-11-14T19:41:37-03:00",
+  "endedAt": "2026-11-14T19:53:13.875-03:00",
+  "duration": {
+    "elapsedWallMinutes": 12,
+    "effectiveWorkMinutesMeasured": 12,
+    "minimum60MinutesMet": false,
+    "note": "Duração observada nesta sessão; não contabiliza espera ociosa de CI. A meta de 60 minutos não foi atingida."
+  },
+  "branch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "f556ec8b761831cbcfe0ba7827f0da35167e109b",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "mainHead": "713f02afc862ddb17411706c92c67624eaa1803f",
+  "blocksCompleted": [
+    {
+      "mission": "M209",
+      "branch": "feat/work-m209-goblin-attack-force-giant-orc-2v2-20261114",
+      "pr": 164,
+      "head": "5fbaf548227b2927c82e5e6ae3348ade9ea93af8",
+      "file": "tests/tagClassicForcedBattleDefense2v2.test.cjs",
+      "cards": [
+        "Goblin Attack Force (78658564)",
+        "Giant Orc (73698349)"
+      ],
+      "scenarios": 5,
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "runs": {
+        "cardBatchFast": 43649872404,
+        "milestone1000": 43649872375,
+        "engineValidation": 43649872372
+      }
+    },
+    {
+      "mission": "M210",
+      "branch": "feat/work-m210-alligator-sword-dragon-direct-attack-2v2-20261114",
+      "pr": 165,
+      "initialHead": "f1e8a33907ce11fcdf741035a12b9d913dde2c26",
+      "head": "b88cdc7ed21444debd1cec9ee88f366f7c5027c1",
+      "file": "tests/tagClassicAlligatorSwordDragonDirectAttack2v2.test.cjs",
+      "cards": [
+        "Alligator's Sword Dragon (03366982)"
+      ],
+      "scenarios": 3,
+      "ci": {
+        "previousHeadNpmTest": "failure (1 incorrect fixture expectation; 7368/7369 passed)",
+        "correctedHeadCardBatchFast": "in_progress",
+        "correctedHeadMilestone1000": "in_progress",
+        "correctedHeadEngineValidation": "queued",
+        "correctedHeadNpmTest": "pending",
+        "extendedSoak600": "in_progress"
+      },
+      "runs": {
+        "previousHeadEngineValidation": 43650075590,
+        "cardBatchFast": 43650271970,
+        "milestone1000": 43650271928,
+        "engineValidation": 43650271911
+      },
+      "correction": "Yu-Gi-Oh! face-down Defense monsters remain legal attack targets; corrected the test to preserve targetability while asserting the public projection hides identity and UID."
+    }
+  ],
+  "parallelWorkObserved": [
+    {
+      "mission": "M205",
+      "pr": 160,
+      "branch": "feat/work-m205-cannon-soldier-team-tribute-20261114",
+      "head": "45331c95d1fca0fbe00e2735ee96319e4589a153",
+      "ci": "card-batch-fast success; milestone success; engine validation success"
+    },
+    {
+      "mission": "M206",
+      "pr": 161,
+      "branch": "feat/work-m206-berfomet-gazelle-search-20261114",
+      "head": "8a3c4f8d6ad3a8cf0155e7936fd00a723b8adb16",
+      "ci": "card-batch-fast success; milestone success; engine validation success"
+    },
+    {
+      "mission": "M207",
+      "pr": 162,
+      "branch": "feat/work-m207-machine-king-2v2-continuous-count-20261114",
+      "head": "11dd4e6a3b7778538c453bda949d3ebd574184b5",
+      "ci": "card-batch-fast success; milestone success; engine validation failure; extended soak success",
+      "failure": "tests/tagClassicMachineKingContinuousCount2v2.test.cjs:93 expected 2500, actual 3700; 7367/7368 tests passed",
+      "handoffComment": 6885440960
+    },
+    {
+      "mission": "M208",
+      "pr": 163,
+      "branch": "feat/work-m208-mudora-wodan-2v2-continuous-count-20261114",
+      "head": "9821ba98442cfdb3e71aeb2336f57219d8e453d8",
+      "ci": "card-batch-fast success; milestone success; engine validation success"
+    }
+  ],
+  "handoffRequests": [
+    {
+      "pr": 17,
+      "commentId": 6885378522,
+      "scope": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "status": "awaiting explicit release; no response observed"
+    },
+    {
+      "pr": 107,
+      "commentId": 6885420890,
+      "scope": [
+        "separate Alligator's Sword Dragon test only; M151 reserved file untouched"
+      ],
+      "status": "awaiting response; no response observed"
+    },
+    {
+      "pr": 162,
+      "commentId": 6885440960,
+      "scope": [
+        "diagnosis only; M207 branch untouched"
+      ],
+      "status": "agent notified of failing assertion"
+    }
+  ],
+  "catalogAtEnd": {
+    "sharedCertificates": 969,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "hosting": "not independently verified",
+    "deploymentWorkflow": "not found in main/shared branch; M71 branch contains only card-batch-admission, card-batch-fast, engine-validation and milestone1000 workflows",
+    "mainHead": "713f02afc862ddb17411706c92c67624eaa1803f"
+  },
+  "limits": [
+    "test-only PR diffs; no runtime/catalog/certification changes",
+    "no inventory grants or persistent DB writes",
+    "no merge or deploy",
+    "Discord live not tested",
+    "local execution unavailable; CI is the test evidence",
+    "M61 and M151 handoffs remain pending",
+    "60-minute minimum not met"
+  ],
+  "scopeReleasedToAuxiliary": [
+    {
+      "mission": "M209",
+      "branch": "feat/work-m209-goblin-attack-force-giant-orc-2v2-20261114",
+      "pr": 164,
+      "file": "tests/tagClassicForcedBattleDefense2v2.test.cjs",
+      "allowed": "monitor CI and fix only this test file on its own branch"
+    },
+    {
+      "mission": "M210",
+      "branch": "feat/work-m210-alligator-sword-dragon-direct-attack-2v2-20261114",
+      "pr": 165,
+      "file": "tests/tagClassicAlligatorSwordDragonDirectAttack2v2.test.cjs",
+      "allowed": "monitor CI and fix only this test file on its own branch"
+    }
+  ],
+  "nextTask": "Auxiliar: monitorar PRs #164 e #165 e corrigir somente os dois arquivos de teste nas respectivas branches. Work: concluir Engine Validation/soak; revisar a falha M207 com o agente; obter handoff M61 para Double Tribute face-up e Atomic Firefly; manter M151 reservado; seguir para a próxima família independente e retomar as 31 certificações quando o handoff permitir.",
+  "nextWindow": "2026-11-14T23:30:00-03:00",
+  "reservationReleased": true
+}
