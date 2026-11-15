@@ -203,12 +203,15 @@ for(const guardianSpec of GUARDIANS){
     state=activateGuardian(resetWindow.state,guardian,attackers[1]);
     assert.equal(fieldMonster(state,guardian.uid)?.guardianUsed,true,
       'the second activation consumes the reset face-up use again');
-    assert.ok(state.core.players[0].grave.some(card=>card.uid===attackers[1].uid&&card.id===AXE_RAIDER),
-      'the second zero-ATK attacker is destroyed by battle after the reset effect activates');
-    assert.equal(state.core.players[0].lp,6000-(2*guardianSpec.atk),
-      'the attacking team receives the Guardian battle damage on both successful activations');
+    assert.ok(state.core.players[0].monsters.some(card=>card.uid===attackers[1].uid&&card.id===AXE_RAIDER),
+      'the second attacker survives because the revealed Guardian remains in Defense Position');
+    assert.equal(state.core.players[0].lp,6000-guardianSpec.atk,
+      'attacking the revealed Defense-position Guardian causes no additional battle damage');
     assert.equal(state.core.players[1].lp,6000,'the defending team takes no battle damage');
-    assert.equal(fieldMonster(state,guardian.uid)?.faceUp,true,'the Guardian remains face-up after the second activation');
+    assert.equal(fieldMonster(state,guardian.uid)?.faceUp,true,'the Guardian is revealed during damage calculation');
+    assert.equal(fieldMonster(state,guardian.uid)?.position,'def','a Set Guardian is revealed in Defense Position');
+    assert.ok(state.core.log.some(line=>line.includes('reduziu o ATK do atacante a zero somente neste cálculo de dano')),
+      'the reset Guardian effect must actually resolve and reduce the second attacker to zero');
     assert.doesNotThrow(()=>tag.assertTagDuel(state));
     assertConserved(state,before);
   });
