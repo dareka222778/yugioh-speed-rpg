@@ -172,6 +172,11 @@ function equipAction(state,equip,target){
     action.kind==='spell'&&action.card===equip.uid&&action.target===target.uid
   );
 }
+function startBattle(state){
+  const action=tag.tagActions(state,member(2)).find(candidate=>candidate.kind==='battle');
+  assert.ok(action,'the active physical partner must be able to enter the Battle Phase');
+  return settle(tag.stepTagDuel(state,member(2),action));
+}
 function activateEquip(state,equip,target){
   const action=equipAction(state,equip,target);
   assert.ok(action,'the active partner must receive the Equip Spell action for its teammate-owned monster');
@@ -193,6 +198,7 @@ test('Fairy Meteor Crush equips the inactive partner-owned attacker and applies 
   const expectedDamage=engine.atk(currentAttacker,state.core)-engine.def(currentTarget,state.core);
   assert.ok(expectedDamage>0,'the selected attacker must exceed the defender DEF');
   state=activateEquip(state,fixture.equip,currentAttacker);
+  state=startBattle(state);
   const equipped=state.core.players[0].backrow.find(card=>card.uid===fixture.equip.uid);
   assert.equal(equipped?.equippedTo,fixture.attacker.uid);
   assert.equal(equipped?.resolved,true);
@@ -251,6 +257,7 @@ test('a normal partner-owned attack against Defense deals no piercing damage wit
   const before=inventorySnapshot(fixture.state);
   let state=rotateToSeat2(fixture.state);
   const zones=snapshots(state);
+  state=startBattle(state);
   const attacker=state.core.players[0].monsters.find(card=>card.uid===fixture.attacker.uid);
   const target=state.core.players[1].monsters.find(card=>card.uid===fixture.target.uid);
   assert.ok(attacker&&target);
