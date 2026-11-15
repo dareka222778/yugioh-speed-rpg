@@ -2,7 +2,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
-const {getPlayableCard}=require('../dist/effectRegistry');
+const {getPlayableCard,isQuickPlaySpell}=require('../dist/effectRegistry');
 const {getMonsterDefinition,getMonsterEffect}=require('../dist/monsterEffects');
 
 const SOURCES=[
@@ -13,6 +13,7 @@ const SOURCES=[
 ];
 const TRAP_HOLE='04206964';
 const TORRENTIAL_TRIBUTE='53582587';
+const MYSTICAL_SPACE_TYPHOON='05318639';
 
 const normal=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
@@ -35,6 +36,8 @@ for(const source of SOURCES){
 }
 assert.ok(getPlayableCard(TRAP_HOLE)?.kind==='trap','Trap Hole must be enabled');
 assert.ok(getPlayableCard(TORRENTIAL_TRIBUTE)?.kind==='trap','Torrential Tribute must be enabled');
+assert.ok(getPlayableCard(MYSTICAL_SPACE_TYPHOON)?.kind==='spell'&&isQuickPlaySpell(MYSTICAL_SPACE_TYPHOON),
+  'Mystical Space Typhoon must be an enabled Quick-Play Spell that can keep the response window open');
 
 function member(seat){return 'm231-seat-'+seat;}
 function deck(required=[]){
@@ -66,12 +69,14 @@ function putInHand(state,seat,id){
   holder(state,seat).hand.push(card);
   return card;
 }
-function setTrap(state,seat,id){
+function setBackrow(state,seat,id){
   const card=takeCard(state,seat,id);
-  const trap={...card,setTurn:0,faceUp:false};
-  state.core.players[seat%2].backrow.push(trap);
-  return trap;
+  const setCard={...card,setTurn:0,faceUp:false};
+  state.core.players[seat%2].backrow.push(setCard);
+  return setCard;
 }
+function setTrap(state,seat,id){return setBackrow(state,seat,id);}
+function setQuickPlay(state,seat,id){return setBackrow(state,seat,id);}
 function deploy(state,seat,id){
   const card=takeCard(state,seat,id);
   const monster={
@@ -118,19 +123,23 @@ function settle(state){
 }
 function makeBlockedCase(source,seed){
   const state=tag.createTagDuel(players({
-    0:[TRAP_HOLE],1:[TRAP_HOLE],2:[source.id],3:[TORRENTIAL_TRIBUTE]
+    0:[TRAP_HOLE,MYSTICAL_SPACE_TYPHOON],1:[TRAP_HOLE],2:[source.id],3:[TORRENTIAL_TRIBUTE,MYSTICAL_SPACE_TYPHOON]
   }),{classic:true,first:2,seed});
   state.core.turn=3;
   const sourceCard=putInHand(state,2,source.id);
   const opponentInactiveTrap=setTrap(state,1,TRAP_HOLE);
   const opponentActiveTrap=setTrap(state,3,TORRENTIAL_TRIBUTE);
   const teammateTrap=setTrap(state,0,TRAP_HOLE);
+  const opponentQuickPlay=setQuickPlay(state,3,MYSTICAL_SPACE_TYPHOON);
+  const teammateQuickPlay=setQuickPlay(state,0,MYSTICAL_SPACE_TYPHOON);
   assert.match(sourceCard.uid,/^m2:/,'the source must retain active physical seat 2 ownership');
   assert.match(opponentInactiveTrap.uid,/^m1:/,'the first opposing Trap must retain inactive seat 1 ownership');
   assert.match(opponentActiveTrap.uid,/^m3:/,'the second opposing Trap must retain active seat 3 ownership');
   assert.match(teammateTrap.uid,/^m0:/,'the allied Trap must retain inactive teammate seat 0 ownership');
+  assert.match(opponentQuickPlay.uid,/^m3:/,'the opposing Quick-Play Spell must retain active seat 3 ownership');
+  assert.match(teammateQuickPlay.uid,/^m0:/,'the allied Quick-Play Spell must retain inactive teammate seat 0 ownership');
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
-  return {state,sourceCard,opponentInactiveTrap,opponentActiveTrap,teammateTrap};
+  return {state,sourceCard,opponentInactiveTrap,opponentActiveTrap,teammateTrap,opponentQuickPlay,teammateQuickPlay};
 }
 function makeNarrowCase(source,seed){
   const state=tag.createTagDuel(players({
@@ -149,13 +158,13 @@ function makeNarrowCase(source,seed){
 
 for(const source of SOURCES){
   test(source.name+': blocks Trap responses to its own Normal Summon across both opposing physical seats and its own team',()=>{
-    const {state:initial,sourceCard,opponentInactiveTrap,opponentActiveTrap,teammateTrap}=makeBlockedCase(
+    const {state:initial,sourceCard,opponentInactiveTrap,opponentActiveTrap,teammateTrap,opponentQuickPlay,teammateQuickPlay}=makeBlockedCase(
       source,'m231-own-summon-'+source.id
     );
     const before=inventorySnapshot(initial);
     assert.equal(tag.tagDecisionMember(initial).id,member(2),'seat 2 must be the active summoning teammate');
     const publicBefore=tag.publicTagDuel(initial);
-    for(const trap of [opponentInactiveTrap,opponentActiveTrap,teammateTrap]){
+    for(const trap of [opponentInactiveTrap,opponentActiveTrap,teammateTrap,opponentQuickPlay,teammateQuickPlay]){
       assert.ok(!JSON.stringify(publicBefore).includes(trap.id),'Set Trap identity must remain hidden');
       assert.ok(!JSON.stringify(publicBefore).includes(trap.uid),'Set Trap physical UID must remain hidden');
     }
@@ -166,6 +175,8 @@ for(const source of SOURCES){
       'the active opposing teammate receives the first response priority');
     const opposingActions=tag.tagActions(state,member(3));
     assert.ok(opposingActions.some(action=>action.kind==='pass'));
+    assert.ok(opposingActions.some(action=>action.kind==='spell'&&action.card===opponentQuickPlay.uid),
+      'the Trap lock must not block a Quick-Play Spell; it also keeps the response window open for both teams');
     for(const trap of [opponentInactiveTrap,opponentActiveTrap]){
       assert.ok(!opposingActions.some(action=>action.kind==='trap'&&action.card===trap.uid),
         'neither opposing physical seat may activate a Trap in response to this summon');
@@ -178,6 +189,8 @@ for(const source of SOURCES){
       'response priority must rotate to the active summoning teammate');
     const alliedActions=tag.tagActions(state,member(2));
     assert.ok(alliedActions.some(action=>action.kind==='pass'));
+    assert.ok(alliedActions.some(action=>action.kind==='spell'&&action.card===teammateQuickPlay.uid),
+      'the allied inactive partner Quick-Play Spell remains usable by the active teammate');
     assert.ok(!alliedActions.some(action=>action.kind==='trap'&&action.card===teammateTrap.uid),
       'the restriction also prevents the summoning team from activating its own Trap');
     assert.deepEqual(tag.tagActions(state,member(0)),[],
@@ -190,6 +203,8 @@ for(const source of SOURCES){
     assert.ok(state.core.players[1].backrow.some(card=>card.uid===opponentInactiveTrap.uid&&!card.faceUp));
     assert.ok(state.core.players[1].backrow.some(card=>card.uid===opponentActiveTrap.uid&&!card.faceUp));
     assert.ok(state.core.players[0].backrow.some(card=>card.uid===teammateTrap.uid&&!card.faceUp));
+    assert.ok(state.core.players[1].backrow.some(card=>card.uid===opponentQuickPlay.uid&&!card.faceUp));
+    assert.ok(state.core.players[0].backrow.some(card=>card.uid===teammateQuickPlay.uid&&!card.faceUp));
     assert.doesNotThrow(()=>tag.assertTagDuel(state));
     assertConserved(state,before);
   });
