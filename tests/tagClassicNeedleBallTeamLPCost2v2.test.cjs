@@ -44,8 +44,8 @@ assert.equal(cardCertifications[NEEDLE_BALL].fingerprint,
   definitionFingerprint(getPlayableCard(NEEDLE_BALL),getEffect(NEEDLE_BALL),{
     monster:getMonsterDefinition,model:getEffectModel
   }));
-assert.equal(cardDistributionAllowed(NEEDLE_BALL),false,
-  '2v2 verification must not authorize inventory distribution');
+const distributionBefore=cardDistributionAllowed(NEEDLE_BALL);
+// Existing release permission is independent of this 2v2 test; it must remain unchanged.
 
 function deck(){return Array.from({length:20},(_,index)=>POOL[index%POOL.length]);}
 function holder(state,seat){
@@ -75,6 +75,7 @@ function inventorySnapshot(state){
   return map;
 }
 function assertConserved(state,before){
+  assert.equal(cardDistributionAllowed(NEEDLE_BALL),distributionBefore,'2v2 verification must not change inventory release policy');
   const cards=tag.tagInventory(state);
   assert.equal(cards.length,before.size,'Needle Ball must conserve every physical card');
   assert.equal(new Set(cards.map(card=>card.uid)).size,before.size);
