@@ -5656,5 +5656,6 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
-
+,
+  "94004268":{"fingerprint":"3454107711afb042d987b4f7134ced3681372fe53071db28228fddeff1adca7a","suites":["tests/amazonessSwordsWomanDamageRedirect2v2.test.cjs"]}
 };
