@@ -188,12 +188,12 @@ test('Gift of The Mystical Elf counts monsters from both shared fields, includin
   const fixture=setup(entry,'m218-gift-both-shared-fields',state=>{
     deploy(state,0,normalIds[0],true);
     deploy(state,2,normalIds[1],true);
-    deploy(state,1,normalIds[2],true);
+    deploy(state,2,normalIds[2],false);
     deploy(state,1,normalIds[3],true);
     deploy(state,3,normalIds[4],false);
     deploy(state,3,normalIds[5],true);
-    assert.equal(state.core.players[0].monsters.length,2);
-    assert.equal(state.core.players[1].monsters.length,4-1+1);
+    assert.equal(state.core.players[0].monsters.length,3);
+    assert.equal(state.core.players[1].monsters.length,3);
     assert.equal(state.core.players[0].monsters.length+state.core.players[1].monsters.length,6);
   });
   const resolved=activateAsPartner(fixture,entry);
