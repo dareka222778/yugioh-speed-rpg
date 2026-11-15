@@ -4637,8 +4637,8 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   },
 
   "45311864": {
-    "fingerprint": "95cb4868a02f890c43823e307825a6f60a56ada730271de153f957055545253f",
-    "suites": ["tests/mechanicalBatch17.test.cjs"]
+    "fingerprint": "e241d2575b6e62b102298e8751b55673db785af86f52f2476f740080501bb13d",
+    "suites": ["tests/mechanicalBatch17.test.cjs", "tests/tagClassicGoblinThiefTeamLP2v2.test.cjs"]
   },
   "46700124": {
     "fingerprint": "d37d6753f327e2a3ca25621ab4ca0588e018e6f74540e99b98be467121727667",

@@ -18,8 +18,7 @@ export const mechanicalBatch17:readonly Card[]=[
 
 export const mechanicalEffects17:Readonly<Record<string,Effect>>={
  '45311864':{kind:'sequence',activation:{speed:1,window:'main',damage:'never'},operations:[
-  {kind:'damage',recipients:[{player:'opponent',amount:500}]},
-  {kind:'gainLP',player:'self',amount:500}
+  {kind:'simultaneousLP',changes:[{player:'opponent',direction:'damage',amount:500},{player:'self',direction:'gain',amount:500}]}
  ]},
  '46700124':{kind:'monsterEffect'},
  '82108372':{kind:'monsterEffect'},
