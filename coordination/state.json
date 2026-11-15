@@ -1674,6 +1674,18 @@
       "runId": "work-20261115T003105-0300",
       "priority": "P1 — testar Goblin Thief: -500 LP da equipe adversária e +500 LP da própria equipe, com ativação exclusiva pela mão física ativa e rotação ao parceiro.",
       "reservation": "Work"
+    },
+    {
+      "branch": "feat/work-m218-economic-count-selectors-2v2-20261115",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicEconomicCountSelectors2v2.test.cjs"
+      ],
+      "mission": "M218",
+      "state": "reserved",
+      "pr": null
     }
   ],
   "handoffRequest": {
@@ -5123,6 +5135,24 @@
       "failure": null
     }
   ],
-  "updatedAt": "2026-11-15T00:39:22-03:00",
-  "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837"
+  "updatedAt": "2026-11-15T04:25:26-03:00",
+  "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
+  "concurrentReservations": [
+    {
+      "runId": "work-20261115T042526-0300",
+      "owner": "Work",
+      "priority": "P1 — certificar Gift of The Mystical Elf, Solar Ray e Cemetary Bomb por comportamento no 2v2: contagem dos dois campos compartilhados, filtro LIGHT face-up e Cemitério compartilhado; preservar mãos/Decks físicos.",
+      "state": "active",
+      "startedAt": "2026-11-15T04:25:26-03:00",
+      "branch": "feat/work-m218-economic-count-selectors-2v2-20261115",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "8e8e9273727497fca1739715a0975bc5a6a8ca96",
+      "reservedFiles": [
+        "tests/tagClassicEconomicCountSelectors2v2.test.cjs"
+      ],
+      "conflictPolicy": "Não tocar nas três reservas M215–M217 nem nos arquivos M61/M118/M151; escopo independente."
+    }
+  ]
 }
