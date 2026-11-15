@@ -11,10 +11,11 @@ const LADYBUG='83994646';
 const NOBLEMAN_EATER='65878864';
 const normalCards=engineCatalog.filter(card=>tag.tagNormalCardIds.includes(card.id));
 const LEVEL4=normalCards.find(card=>card.level===4);
+const LEVEL4_ALT=normalCards.find(card=>card.level===4&&card.id!==LEVEL4?.id);
 const LEVEL3=normalCards.find(card=>card.level===3);
 const LEVEL8=normalCards.find(card=>card.level===8);
-const FILLER=normalCards.filter(card=>![LEVEL4?.id,LEVEL3?.id,LEVEL8?.id].includes(card.id)).slice(0,5);
-assert.ok(LEVEL4&&LEVEL3&&LEVEL8&&FILLER.length===5,'the fixture needs Normal Monsters at Levels 3, 4 and 8');
+const FILLER=normalCards.filter(card=>![LEVEL4?.id,LEVEL4_ALT?.id,LEVEL3?.id,LEVEL8?.id].includes(card.id)).slice(0,4);
+assert.ok(LEVEL4&&LEVEL4_ALT&&LEVEL3&&LEVEL8&&FILLER.length===4,'the fixture needs distinct Normal Monsters at Levels 3, 4 and 8');
 assert.equal(getPlayableCard(LADYBUG)?.englishName,'4-Starred Ladybug of Doom');
 assert.deepEqual(getMonsterEffect(LADYBUG),{
   trigger:'flip',operation:{kind:'destroyByLevel',level:4}
@@ -26,7 +27,7 @@ assert.deepEqual(getMonsterEffect(NOBLEMAN_EATER),{
 assert.equal(getEffect(LADYBUG)?.kind,'monsterEffect');
 assert.equal(getEffect(NOBLEMAN_EATER)?.kind,'monsterEffect');
 
-const POOL=[LADYBUG,NOBLEMAN_EATER,LEVEL4.id,LEVEL3.id,LEVEL8.id,...FILLER.map(card=>card.id)];
+const POOL=[LADYBUG,NOBLEMAN_EATER,LEVEL4.id,LEVEL4_ALT.id,LEVEL3.id,LEVEL8.id,...FILLER.map(card=>card.id)];
 assert.equal(POOL.length,10);
 function member(seat){return 'm230-seat-'+seat;}
 function deck(){return Array.from({length:20},(_,index)=>POOL[index%POOL.length]);}
@@ -144,7 +145,7 @@ test('4-Starred Ladybug preserves a face-down Level 4 monster without revealing 
   const alliedLevel4=placeMonster(state,0,LEVEL4.id,true);
   const activeEnemyLevel4=placeMonster(state,1,LEVEL4.id,true);
   const partnerEnemyLevel4=placeMonster(state,3,LEVEL4.id,true);
-  const hiddenEnemyLevel4=placeMonster(state,3,LEVEL4.id,false);
+  const hiddenEnemyLevel4=placeMonster(state,3,LEVEL4_ALT.id,false);
   state=settle(flip(state,source));
   assert.ok(state.core.players[1].grave.some(card=>card.uid===activeEnemyLevel4.uid));
   assert.ok(state.core.players[1].grave.some(card=>card.uid===partnerEnemyLevel4.uid));
