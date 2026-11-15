@@ -154,8 +154,9 @@ function setup(entry,seed,prepare){
 
   for(let guard=0;tag.tagDecisionMember(state).id!==member(2);guard++){
     assert.ok(guard<4,'turn rotation must reach the allied partner seat 2');
-    const activeSeat=state.members.findIndex(player=>player.id===tag.tagDecisionMember(state).id);
-    assert.ok(activeSeat>=0,'the active physical seat must remain registered');
+    const activeId=tag.tagDecisionMember(state).id;
+    const activeSeat=[0,1,2,3].find(candidate=>member(candidate)===activeId);
+    assert.notEqual(activeSeat,undefined,'the active physical seat must remain registered');
     state=endTurn(state,activeSeat);
   }
   assert.equal(tag.tagDecisionMember(state).id,member(2),'the inactive partner seat 2 must receive a later allied turn');
