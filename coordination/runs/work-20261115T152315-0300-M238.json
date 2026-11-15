@@ -4,7 +4,7 @@
   "owner": "Work principal",
   "mission": "M238",
   "priority": "P1 — implementar redirecionamento de dano de batalha da Amazoness Swords Woman para a equipe adversária, em ataques e defesas no 2v2.",
-  "state": "implementation-in-progress",
+  "state": "blocked-awaiting-catalog-admission-handoff",
   "startedAt": "2026-11-15T15:23:15-03:00",
   "branch": "feat/work-m238-amazoness-swords-woman-damage-redirect-2v2-20261115",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
@@ -53,5 +53,44 @@
     "combatOutcome aplica reflexão após prevenção e modificadores, com snapshot e conjunto de equipes para impedir duplicação.",
     "Metadados e definição contínua de Amazoness Swords Woman adicionados.",
     "Certificado comportamental vinculado à suíte 2v2."
-  ]
+  ],
+  "lastUpdatedAt": "2026-11-15T15:43:09-03:00",
+  "currentHead": "21b07270518e188458f884c2162c0de6f01685c6",
+  "pullRequest": {
+    "number": 194,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/194",
+    "draft": true,
+    "mergeable": false
+  },
+  "ci": {
+    "cardBatchFast": {
+      "status": "failure",
+      "reason": "scripts/audit-generated-batches31.cjs:13 — registry 970 vs catalog snapshot 969"
+    },
+    "engineValidation": {
+      "status": "failure",
+      "reason": "same catalog audit; npm test 885/885 passed"
+    },
+    "extendedSoak": {
+      "status": "in_progress"
+    },
+    "milestone1000": {
+      "status": "success",
+      "note": "milestone check passing does not mean the new card was admitted"
+    }
+  },
+  "counts": {
+    "sharedCertified": 969,
+    "branchRegistry": 970,
+    "snapshotCertified": 969,
+    "newlyAdmitted": 0,
+    "inventoryGranted": 0
+  },
+  "limits": [
+    "A card metadata/certificate entry is not an admission; the current catalog snapshot and admitted-batch manifest remain unchanged.",
+    "Active run work-20261115T142521-0300 forbids runtime/catalog/certificate changes; requested handoff on PR #192.",
+    "No merge, deploy, or production verification."
+  ],
+  "nextTask": "After explicit handoff, submit Amazoness Swords Woman through catalog/proposed + official admission workflow and rerun full Engine Validation; retain the new reflect rule only after review.",
+  "release": "No shared reservation acquired; branch remains isolated and draft."
 }
