@@ -2,6 +2,7 @@
 const {test:nodeTest}=require('node:test');
 const fs=require('node:fs');
 function recordFailure(label,error){fs.mkdirSync('artifacts',{recursive:true});fs.appendFileSync('artifacts/engine-acceptance-failure.tap','\\n[M232] '+label+'\\n'+(error?.stack||String(error))+'\\n');}
+process.on('uncaughtExceptionMonitor',error=>recordFailure('module load',error));
 function test(name,fn){nodeTest(name,async t=>{try{return await fn(t);}catch(error){recordFailure(name,error);throw error;}});}
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
