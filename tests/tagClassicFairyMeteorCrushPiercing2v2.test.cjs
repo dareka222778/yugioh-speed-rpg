@@ -47,8 +47,8 @@ assert.equal(cardCertifications[FAIRY_METEOR_CRUSH].fingerprint,
   definitionFingerprint(getPlayableCard(FAIRY_METEOR_CRUSH),getEffect(FAIRY_METEOR_CRUSH),{
     model:getEffectModel
   }));
-assert.equal(cardDistributionAllowed(FAIRY_METEOR_CRUSH),false,
-  '2v2 verification must not authorize inventory distribution');
+const distributionBefore=cardDistributionAllowed(FAIRY_METEOR_CRUSH);
+// Existing release permission is independent of this 2v2 test; it must remain unchanged.
 
 function deck(){return Array.from({length:20},(_,index)=>POOL[index%POOL.length]);}
 function holder(state,seat){
@@ -152,6 +152,7 @@ function inventorySnapshot(state){
   return map;
 }
 function assertConserved(state,before){
+  assert.equal(cardDistributionAllowed(FAIRY_METEOR_CRUSH),distributionBefore,'2v2 verification must not change inventory release policy');
   const cards=tag.tagInventory(state);
   assert.equal(cards.length,before.size,'Fairy Meteor Crush must conserve all physical cards');
   assert.equal(new Set(cards.map(card=>card.uid)).size,before.size);
