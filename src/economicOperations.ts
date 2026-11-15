@@ -8,6 +8,7 @@ export type EconomicOperation=
  |{kind:'draw';count:number}
  |{kind:'gainLP';player:RelativePlayer;amount:number}
  |{kind:'damage';recipients:readonly {player:RelativePlayer;amount:number}[]}
+ |{kind:'simultaneousLP';changes:readonly {player:RelativePlayer;direction:'gain'|'damage';amount:number}[]}
  |{kind:'scaledLP';direction:'gain'|'damage';recipient:RelativePlayer;amountPerCard:number;selectors:readonly EconomicCountSelector[]};
 export type EconomicServices={finish:(s:DuelState,winner:number|null,reason:string)=>void;checkLP:(s:DuelState)=>void;cardAttribute?:(id:string)=>string|undefined};
 const positive=(n:unknown)=>Number.isSafeInteger(n)&&Number(n)>0;
@@ -19,6 +20,8 @@ export function economicOperationIssues(value:unknown):string[]{
   else if(op.kind==='gainLP'){if(!['self','opponent'].includes(op.player)||!positive(op.amount))return ['invalid-lp-gain'];}
   else if(op.kind==='damage'){
    if(!Array.isArray(op.recipients)||!op.recipients.length||op.recipients.length>2||op.recipients.some((r:any)=>!r||!['self','opponent'].includes(r.player)||!positive(r.amount))||new Set(op.recipients.map((r:any)=>r.player)).size!==op.recipients.length)return ['invalid-damage-group'];
+  }else if(op.kind==='simultaneousLP'){
+   if(!Array.isArray(op.changes)||op.changes.length!==2||op.changes.some((change:any)=>!change||!['self','opponent'].includes(change.player)||!['gain','damage'].includes(change.direction)||!positive(change.amount)||Object.keys(change).some(k=>!['player','direction','amount'].includes(k)))||new Set(op.changes.map((change:any)=>change.player)).size!==2||Object.keys(op).some(k=>!['kind','changes'].includes(k)))return ['invalid-simultaneous-lp'];
   }else if(op.kind==='scaledLP'){
    if(!['gain','damage'].includes(op.direction)||!['self','opponent'].includes(op.recipient)||!positive(op.amountPerCard)||!Array.isArray(op.selectors)||!op.selectors.length||op.selectors.length>4)return ['invalid-scaled-lp'];
    for(const selector of op.selectors){
@@ -52,8 +55,14 @@ export function executeEconomicOperations(s:DuelState,actor:number,ops:readonly 
    const player=s.players[op.recipient==='self'?actor:1-actor];
    if(op.direction==='gain')player.lp+=total;
    else{player.lp=Math.max(0,player.lp-total);service.checkLP(s);}
-  }
-  else {
+  }else if(op.kind==='simultaneousLP'){
+   for(const change of op.changes){
+    const player=s.players[change.player==='self'?actor:1-actor];
+    if(change.direction==='gain')player.lp+=change.amount;
+    else player.lp=Math.max(0,player.lp-change.amount);
+   }
+   service.checkLP(s);
+  }else {
    for(const recipient of op.recipients){const p=s.players[recipient.player==='self'?actor:1-actor];p.lp=Math.max(0,p.lp-recipient.amount);}
    service.checkLP(s);
   }
