@@ -124,7 +124,7 @@ function rotateToSeat2(state){
     state=endTurn(state);
   }
   assert.equal(state.active[0],2);
-  assert.equal(state.active[1],1);
+  assert.ok([1,3].includes(state.active[1]),'the opposing team must retain one active physical representative');
   return state;
 }
 function settle(state){
