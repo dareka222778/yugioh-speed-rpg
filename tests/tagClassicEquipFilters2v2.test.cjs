@@ -29,12 +29,20 @@ assert.equal(getPlayableCard(ALLIGATOR_SWORD_DRAGON)?.level,5);
 assert.equal(getPlayableCard(BLUE_EYES_ULTIMATE)?.monsterType,'fusion');
 assert.equal(getPlayableCard(BLUE_EYES_ULTIMATE)?.level,12);
 
+const CORE_IDS=[CYBER_SHIELD,FUSION_WEAPON,POLYMERIZATION,BABY_DRAGON,ALLIGATOR_SWORD,BLUE_EYES,HARPIE_LADY_1,CELTIC_GUARDIAN];
+const FILLER_IDS=[...new Set(tag.tagNormalCardIds)].filter(id=>!CORE_IDS.includes(id)).slice(0,3);
 const DECK_POOL=[
-  CYBER_SHIELD,FUSION_WEAPON,POLYMERIZATION,BABY_DRAGON,ALLIGATOR_SWORD,
-  BLUE_EYES,HARPIE_LADY_1,CELTIC_GUARDIAN,BLUE_EYES,BLUE_EYES,POLYMERIZATION
+  CYBER_SHIELD,CYBER_SHIELD,FUSION_WEAPON,FUSION_WEAPON,
+  POLYMERIZATION,POLYMERIZATION,BABY_DRAGON,BABY_DRAGON,
+  ALLIGATOR_SWORD,ALLIGATOR_SWORD,BLUE_EYES,BLUE_EYES,BLUE_EYES,
+  HARPIE_LADY_1,HARPIE_LADY_1,CELTIC_GUARDIAN,CELTIC_GUARDIAN,
+  ...FILLER_IDS
 ];
+assert.equal(DECK_POOL.length,20,'each physical Deck must contain exactly 20 cards');
+assert.ok(DECK_POOL.every(id=>DECK_POOL.filter(candidate=>candidate===id).length<=3),
+  'no physical Deck may contain more than three copies of a card');
 function member(seat){return 'm226-seat-'+seat;}
-function deck(){return Array.from({length:20},(_,index)=>DECK_POOL[index%DECK_POOL.length]);}
+function deck(){return [...DECK_POOL];}
 function holder(state,seat){
   const team=seat%2;
   return state.active[team]===seat?state.core.players[team]:state.reserves[seat];
