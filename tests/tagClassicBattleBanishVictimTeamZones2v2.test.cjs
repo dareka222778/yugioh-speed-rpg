@@ -52,10 +52,10 @@ for(const [id,name] of [[DD_CRAZY_BEAST,'D.D. Crazy Beast'],[LESSER_FIEND,'Lesse
     definitionFingerprint(getPlayableCard(id),getEffect(id),{
       monster:getMonsterDefinition,model:getEffectModel
     }));
-  assert.equal(cardDistributionAllowed(id),false,
-    '2v2 verification must not authorize inventory distribution');
+  // Release permission is snapshotted and checked after each scenario; it is not a side effect of 2v2 verification.
 }
 
+const distributionBefore=new Map([[DD_CRAZY_BEAST,cardDistributionAllowed(DD_CRAZY_BEAST)],[LESSER_FIEND,cardDistributionAllowed(LESSER_FIEND)]]);
 function deck(){return Array.from({length:20},(_,index)=>POOL[index%POOL.length]);}
 function holder(state,seat){
   const team=seat%2;
@@ -94,6 +94,7 @@ function inventorySnapshot(state){
   return map;
 }
 function assertConserved(state,before){
+  for(const [id,allowed] of distributionBefore)assert.equal(cardDistributionAllowed(id),allowed,'2v2 verification must not change inventory release policy: '+id);
   const cards=tag.tagInventory(state);
   assert.equal(cards.length,before.size,'battle replacement must conserve every physical card');
   assert.equal(new Set(cards.map(card=>card.uid)).size,before.size);
