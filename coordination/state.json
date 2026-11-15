@@ -2,14 +2,17 @@
   "runId": "work-20261114T233246-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-14T23:32:46-03:00",
-  "lastActivityAt": "2026-11-15T00:10:47-03:00",
+  "lastActivityAt": "2026-11-15T00:26:25-03:00",
   "nextScheduledAt": "2026-11-15T04:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+    "tests/tagClassicGuardianZeroAttack2v2.test.cjs",
+    "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs",
+    "tests/tagDianKetoOokaziDiscordIntegration.test.cjs",
+    "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261114T233246-0300.json",
   "previousRunId": "work-20261114T194137-0300",
@@ -1560,11 +1563,16 @@
       "scope": [
         "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
       ],
-      "state": "active; CI re-run after two rules-accurate fixture corrections",
+      "state": "released-ci-success",
       "runId": "work-20261114T233246-0300",
       "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
-      "reservation": "Work",
-      "pr": 166
+      "reservation": "Auxiliary",
+      "pr": 166,
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success"
+      }
     },
     {
       "mission": "M212",
@@ -1574,11 +1582,18 @@
       "scope": [
         "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
       ],
-      "state": "active; CI re-run after turn-start draw snapshot correction",
+      "state": "released-ci-success",
       "base": "feat/work-m71-ci-branch-routing-20261112",
       "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "runId": "work-20261114T233246-0300",
-      "reservation": "Work"
+      "reservation": "Auxiliary",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success",
+        "extendedSoak600": "success",
+        "npmTest": "success"
+      }
     },
     {
       "mission": "M213",
@@ -1588,11 +1603,39 @@
       "scope": [
         "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
       ],
-      "state": "active; Discord handler integration CI in progress",
+      "state": "released-to-auxiliary-fix-requested",
       "base": "feat/work-m71-ci-branch-routing-20261112",
       "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "runId": "work-20261114T233246-0300",
-      "reservation": "Work"
+      "reservation": "Auxiliary",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "failure",
+        "npmTest": "failure",
+        "extendedSoak600": "success"
+      },
+      "failure": "npm test 7367/7368; assertion at tests/tagDianKetoOokaziDiscordIntegration.test.cjs:145 about menu option value/label; handoff requested in PR comment 6888494307"
+    },
+    {
+      "mission": "M214",
+      "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+      "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
+      "pr": 169,
+      "scope": [
+        "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "runId": "work-20261114T233246-0300",
+      "reservation": "Auxiliary"
     }
   ],
   "handoffRequest": {
@@ -3012,15 +3055,16 @@
     "deploymentWorkflow": "not found in main/shared; M71 CI branch lists only card-batch-admission, card-batch-fast, engine-validation, milestone1000"
   },
   "duration": {
-    "startedAt": "2026-11-14T19:41:37-03:00",
-    "endedAt": "2026-11-14T19:53:13.875-03:00",
-    "elapsedWallMinutes": 12,
-    "effectiveWorkMinutesMeasured": 12,
+    "startedAt": "2026-11-14T23:32:46-03:00",
+    "endedAt": "2026-11-15T00:26:25-03:00",
+    "elapsedWallMinutes": 54,
+    "effectiveWorkMinutesMeasured": 7,
+    "effectiveWorkSecondsMeasured": 438,
     "minimum60MinutesMet": false,
-    "note": "Aproximadamente 12 minutos observados e efetivamente utilizados; a meta de 60 minutos não foi atingida. Espera ociosa de CI não foi contabilizada."
+    "note": "Nesta retomada foram medidos 7m18s de trabalho efetivo. O intervalo de parede desde o início do run inclui CI/espera e atividade anterior não mensurável; não foi contado como trabalho."
   },
-  "nextTask": "Work: implementar e validar M211 em branch isolada; auxiliar: não tocar no arquivo reservado enquanto a CI não for publicada e liberada.",
-  "sharedHeadBeforeRelease": "7ca18a4e2f6f0b0c577c09240ea1583c0f4cf650",
+  "nextTask": "Auxiliar: corrigir exclusivamente a asserção do menu privado M213 (#168), monitorar M214 (#169) e manter M211/M212 como CI aprovada. Work na próxima janela: obter handoff M61 para os arquivos de efeito e retomar a fila de 31 identidades com revisão oficial individual.",
+  "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
   "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
   "sharedHeadBeforeClaim": "7a2a124107b3d2136a4bf90a88cc65ea22f1c294",
   "releasedOwnReservation": true,
@@ -3153,379 +3197,44 @@
   "sharedHeadAfterClaim": null,
   "releasedOwnReservations": [
     {
-      "branch": "feat/work-m92-tag-dd-assailant-ownership-20261113",
-      "head": "958700b229cd8e6e15354a258ae8797999a16e56",
-      "pr": 48,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci"
-    },
-    {
-      "branch": "feat/work-m93-tag-banish-victim-ownership-20261113",
-      "head": "060c513c507843f71e8a50cf21c1095f92143e7c",
-      "pr": 49,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci"
-    },
-    {
-      "branch": "feat/work-m94-tag-identity-destruction-ownership-20261113",
-      "head": "d472c0a2f8e2bcf98313b1ff32fd72987b1ff21c",
-      "pr": 50,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci"
-    },
-    {
-      "branch": "feat/work-m95-tag-pyramid-turtle-recruit-20261113",
-      "head": "a2b8d577f7770f0fdd937bf000236c6acba5ed7f",
-      "pr": 51,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci"
-    },
-    {
-      "branch": "feat/work-m96-tag-masked-dragon-howling-insect-20261113",
-      "head": "ea3bffe32aadeeaac9be36dd9c6d8b97fb13e378",
-      "pr": 52,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci"
-    },
-    {
-      "branch": "feat/work-m97-tag-troop-dragon-recursion-20261113",
-      "head": "4e4aa5c5dcaf6a645035fdf02b5af8eeb8dc59d8",
-      "pr": 53,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci"
-    },
-    {
-      "branch": "feat/work-m98-tag-gravekeepers-spy-ownership-20261113",
-      "head": "b35430375d2cff2245b7de0f58aff1a12c6e7f9f",
-      "pr": 54,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci"
-    },
-    {
-      "branch": "feat/work-m99-attribute-recruiters-ownership-20261113",
-      "head": "d8964961338a8e0670a7858e3d098ac10059e83f",
-      "pr": 55,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci"
-    },
-    {
-      "branch": "feat/work-m100-sangan-ownership-20261113",
-      "head": "d7adc0c6ffdf73cec172edcccad7d16fe6ff3cd3",
-      "pr": 56,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci"
-    },
-    {
-      "branch": "feat/work-m101-jinzo-2v2-trap-lock-20261113",
-      "head": "37ed8c6a08ccd4465d48dae8f2e282618a54085c",
-      "pr": 57,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m102-mysterious-puppeteer-tag-20261113",
-      "head": "958a72366199adb8bd9fbf72d2b7f4d9b35f1cc9",
-      "pr": 58,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m103-mirror-force-tag-20261113",
-      "head": "d313e2a47e77b771e6bf3881aa8aa1463a086df5",
-      "pr": 59,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m109-torrential-tribute-2v2-20261113",
-      "head": "7d23c1718a8bbeafff203979e9c07229d10e4124",
-      "pr": 65,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m110-seven-tools-2v2-20261113",
-      "head": "220200cf662b885953fb1b38f80f1aef64e5ddd9",
-      "pr": 66,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m111-magic-jammer-2v2-20261113",
-      "head": "f556e9604332d1f8bf429149a7f1ec55bec9c303",
-      "pr": 67,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m112-raigeki-2v2-team-targeting-20261113",
-      "head": "3df0b49740bd947d72bb4fe0f501d3d5a758b270",
-      "pr": 68,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m113-monster-reborn-owner-return-20261113",
-      "head": "d5a081a6f3e87550f532464c0f1a78a3945daf75",
-      "pr": 69,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m114-book-of-moon-2v2-flip-privacy-20261113",
-      "head": "b97322b313a4cf2ab5d13aca34189867a1196aa7",
-      "pr": 70,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m115-mystical-space-typhoon-2v2-hidden-trap-20261113",
-      "head": "85b7e3e19fa833af44fd7f3dc3c97e2f33c46125",
-      "pr": 71,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m116-fissure-2v2-opponent-team-20261113",
-      "head": "8cd4d6131c280bb8b089295a958df93d5adae261",
-      "pr": 72,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m117-de-spell-2v2-reveal-policy-20261113",
-      "head": "c1c236c2a0b661731214cbd47a6b4cd3427436dd",
-      "pr": 73,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m118-giant-trunade-physical-hand-ownership-20261113",
-      "head": "53fa62774d428cb04cfd76018495693068a03a5b",
-      "pr": 74,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T08:48:19-03:00"
-    },
-    {
-      "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
-      "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
-      "pr": 75,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
-      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
-      "pr": 76,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
-      "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
-      "pr": 77,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
-      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
-      "pr": 78,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
-      "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
-      "pr": 79,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
-      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
-      "pr": 80,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
-      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
-      "pr": 81,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
-      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
-      "pr": 82,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
-      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
-      "pr": 83,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
-      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
-      "pr": 84,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T12:52:55-03:00"
-    },
-    {
-      "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
-      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
-      "pr": 112,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T18:05:29-03:00"
-    },
-    {
-      "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
-      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
-      "pr": 113,
-      "owner": "Work",
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T18:05:29-03:00"
-    },
-    {
-      "branch": "feat/work-m158-economic-spells-2v2-20261113",
-      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
-      "pr": 114,
-      "owner": "Work",
-      "scope": [
-        "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
-      ],
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T22:44:10-03:00",
-      "ci": {
-        "cardBatchFast": "success",
-        "cardBatchFastRunId": 43541777615,
-        "milestone1000": "success",
-        "milestoneRunId": 43541777612,
-        "engineValidation": "in_progress",
-        "engineRunId": 43541777726,
-        "testJob": "in_progress",
-        "npmTestStep": "success",
-        "extendedSoak": "in_progress"
-      }
-    },
-    {
-      "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
-      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
-      "pr": 115,
-      "owner": "Work",
-      "scope": [
-        "tests/tagEconomicSpellDiscordMenu.test.cjs"
-      ],
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T22:44:10-03:00",
-      "ci": {
-        "cardBatchFast": "success",
-        "cardBatchFastRunId": 43542034914,
-        "milestone1000": "success",
-        "milestoneRunId": 43542035027,
-        "engineValidation": "in_progress",
-        "engineRunId": 43542035087,
-        "testJob": "in_progress",
-        "npmTestStep": "in_progress",
-        "extendedSoak": "in_progress"
-      }
-    },
-    {
-      "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
-      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
-      "pr": 116,
-      "owner": "Work",
-      "scope": [
-        "tests/tagEconomicSpellDiscordInteraction.test.cjs"
-      ],
-      "state": "released-to-auxiliary-monitor-ci",
-      "releasedAt": "2026-11-13T22:44:10-03:00",
-      "ci": {
-        "cardBatchFast": "in_progress",
-        "cardBatchFastRunId": 43542328874,
-        "milestone1000": "success",
-        "milestoneRunId": 43542328862,
-        "engineValidation": "in_progress",
-        "engineRunId": 43542328882,
-        "testJob": "in_progress",
-        "extendedSoak": "in_progress"
-      }
-    },
-    {
-      "runId": "work-20261114T032516-0300",
-      "branches": [
-        "feat/work-m161-mirror-force-2v2-team-wide-20261114",
-        "feat/work-m162-dark-hole-2v2-global-field-20261114",
-        "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114"
-      ],
+      "mission": "M211",
+      "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+      "pr": 166,
       "files": [
-        "tests/tagClassicMirrorForceOwnership2v2.test.cjs",
-        "tests/tagClassicDarkHoleGlobalField2v2.test.cjs",
-        "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
+        "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
       ],
-      "releasedAt": "2026-11-14T03:39:10-03:00"
+      "releasedAt": "2026-11-15T00:26:25-03:00",
+      "to": "Auxiliary"
     },
     {
-      "mission": "M164",
-      "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
-      "pr": 120,
-      "head": "403b3f671d9336c8695fd196103768f3422ad324",
+      "mission": "M212",
+      "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+      "pr": 167,
       "files": [
-        "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
+        "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
       ],
-      "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
-      "releasedAt": "2026-11-14T09:18:10-03:00"
+      "releasedAt": "2026-11-15T00:26:25-03:00",
+      "to": "Auxiliary"
     },
     {
-      "mission": "M172",
-      "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
-      "pr": 128,
-      "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+      "mission": "M213",
+      "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+      "pr": 168,
       "files": [
-        "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
+        "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
       ],
-      "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
-      "releasedAt": "2026-11-14T09:18:10-03:00"
+      "releasedAt": "2026-11-15T00:26:25-03:00",
+      "to": "Auxiliary"
     },
     {
-      "mission": "M173",
-      "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
-      "pr": 129,
-      "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+      "mission": "M214",
+      "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+      "pr": 169,
       "files": [
-        "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+        "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
       ],
-      "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
-      "releasedAt": "2026-11-14T09:18:10-03:00"
+      "releasedAt": "2026-11-15T00:26:25-03:00",
+      "to": "Auxiliary"
     }
   ],
   "activeRun": {
@@ -4819,8 +4528,8 @@
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
   "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
-  "sharedHeadAfterCheckpoint": "5fb122e49e383ffa4dd2230f2ea932b0418880fc",
-  "sharedHeadBeforeStateUpdate": "ccd16eac2db107c8f5c1b2aa2a03fe8b10c215fb",
+  "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
+  "sharedHeadBeforeStateUpdate": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "endedAt": "2026-11-14T19:53:13.875-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
@@ -4834,388 +4543,92 @@
   "releaseToAuxiliary": {
     "branches": [
       {
-        "branch": "feat/work-m156-sakuretsu-armor-2v2-physical-owner-20261113",
-        "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
-        "pr": 112,
-        "scope": [
-          "tests/tagClassicSakuretsuArmorPhysicalOwner2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43506972040,
-          "engineValidation": "in_progress",
-          "engineRunId": 43506972175,
-          "extendedSoak": "in_progress",
-          "milestone1000": "success",
-          "milestoneRunId": 43506972102
-        }
-      },
-      {
-        "branch": "feat/work-m157-book-of-moon-2v2-chain-protection-20261113",
-        "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
-        "pr": 113,
-        "scope": [
-          "tests/tagClassicBookOfMoonPhysicalOwnerChain2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43507071750,
-          "engineValidation": "in_progress",
-          "engineRunId": 43507071767,
-          "extendedSoak": "in_progress",
-          "milestone1000": "success",
-          "milestoneRunId": 43507071960
-        }
-      },
-      {
-        "branch": "feat/work-m158-economic-spells-2v2-20261113",
-        "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
-        "pr": 114,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-        "scope": [
-          "tests/tagClassicEconomicChoiceSpells2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43541777615,
-          "milestone1000": "success",
-          "milestoneRunId": 43541777612,
-          "engineValidation": "in_progress",
-          "engineRunId": 43541777726,
-          "testJob": "in_progress",
-          "npmTestStep": "success",
-          "extendedSoak": "in_progress"
-        }
-      },
-      {
-        "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
-        "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
-        "pr": 115,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-        "scope": [
-          "tests/tagEconomicSpellDiscordMenu.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43542034914,
-          "milestone1000": "success",
-          "milestoneRunId": 43542035027,
-          "engineValidation": "in_progress",
-          "engineRunId": 43542035087,
-          "testJob": "in_progress",
-          "npmTestStep": "in_progress",
-          "extendedSoak": "in_progress"
-        }
-      },
-      {
-        "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
-        "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
-        "pr": 116,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-        "scope": [
-          "tests/tagEconomicSpellDiscordInteraction.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "in_progress",
-          "cardBatchFastRunId": 43542328874,
-          "milestone1000": "success",
-          "milestoneRunId": 43542328862,
-          "engineValidation": "in_progress",
-          "engineRunId": 43542328882,
-          "testJob": "in_progress",
-          "extendedSoak": "in_progress"
-        }
-      },
-      {
-        "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
-        "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
-        "pr": 117,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-        "scope": [
-          "tests/tagClassicMirrorForceOwnership2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43567000920,
-          "milestone1000": "success",
-          "milestoneRunId": 43567000950,
-          "check": "success",
-          "npmTest": "success",
-          "engineValidation": "in_progress",
-          "engineRunId": 43567000915,
-          "extendedSoak": "in_progress"
-        }
-      },
-      {
-        "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
-        "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
-        "pr": 118,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-        "scope": [
-          "tests/tagClassicDarkHoleGlobalField2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43566724675,
-          "milestone1000": "success",
-          "milestoneRunId": 43566724677,
-          "check": "success",
-          "npmTest": "success",
-          "engineValidation": "in_progress",
-          "engineRunId": 43566724653,
-          "extendedSoak": "in_progress"
-        }
-      },
-      {
-        "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
-        "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
-        "pr": 119,
-        "base": "feat/work-m71-ci-branch-routing-20261112",
-        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-        "scope": [
-          "tests/tagClassicBottomlessTrapHoleOwnership2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "cardBatchFastRunId": 43567105635,
-          "milestone1000": "success",
-          "milestoneRunId": 43567105750,
-          "check": "success",
-          "npmTest": "success",
-          "engineValidation": "in_progress",
-          "engineRunId": 43567105671,
-          "extendedSoak": "in_progress"
-        }
-      },
-      {
-        "mission": "M164",
-        "branch": "feat/work-m164-global-backrow-team-scope-2v2-20261114",
-        "pr": 120,
-        "head": "403b3f671d9336c8695fd196103768f3422ad324",
+        "mission": "M211",
+        "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+        "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
+        "pr": 166,
         "files": [
-          "tests/tagClassicGlobalBackrowTeamScope2v2.test.cjs"
+          "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
         ],
-        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
-        "releasedAt": "2026-11-14T09:18:10-03:00"
+        "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
       },
       {
-        "mission": "M172",
-        "branch": "feat/work-m172-trap-hole-summon-threshold-2v2-20261114",
-        "pr": 128,
-        "head": "137c2459bda4f5a7b338c90819faa6ddf82dcde9",
+        "mission": "M212",
+        "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+        "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
+        "pr": 167,
         "files": [
-          "tests/tagClassicTrapHoleSummonThreshold2v2.test.cjs"
+          "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
         ],
-        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
-        "releasedAt": "2026-11-14T09:18:10-03:00"
+        "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
       },
       {
-        "mission": "M173",
-        "branch": "feat/work-m173-card-destruction-double-team-deckout-20261114",
-        "pr": 129,
-        "head": "41440d56603b5cf0e9eac6a911f61f8e437527ed",
+        "mission": "M213",
+        "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+        "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
+        "pr": 168,
         "files": [
-          "tests/tagClassicCardDestructionDoubleTeamDeckOut2v2.test.cjs"
+          "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
         ],
-        "allowed": "Monitor CI and fix only the listed test file on this branch; do not modify runtime, catalog, certification or another agent's reservations.",
-        "releasedAt": "2026-11-14T09:18:10-03:00"
+        "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
       },
       {
-        "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
-        "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
-        "pr": 154,
-        "scope": [
-          "tests/tagClassicGadgetSearchChain2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
-        "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
-        "pr": 155,
-        "scope": [
-          "tests/tagClassicDarkMagicianConditionalSpells2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
-        "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
-        "pr": 156,
-        "scope": [
-          "tests/tagClassicGlobalConditionalDestruction2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
-        "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
-        "pr": 157,
-        "scope": [
-          "tests/tagClassicChaosEndSharedBanishedThreshold2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
-        "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
-        "pr": 158,
-        "scope": [
-          "tests/tagClassicTribalContinuousModifiers2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
-        "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
-        "pr": 159,
-        "scope": [
-          "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
-        ]
+        "mission": "M214",
+        "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+        "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
+        "pr": 169,
+        "files": [
+          "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+        ],
+        "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
       }
     ],
-    "allowed": "monitorar CI e corrigir somente testes nas próprias branches M199–M204; M204 permanece test-only.",
-    "forbidden": "não alterar M61/M118/M151/M153 nem branches M194–M198; não fazer merge/deploy; não tocar em banco ou inventários",
-    "updatedAt": "2026-11-14T09:18:10-03:00"
+    "allowed": "Monitorar CI e corrigir somente arquivos de teste nas próprias branches.",
+    "forbidden": "Não alterar M61/M151, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
   },
-  "scopeReleasedToAuxiliary": {
-    "branches": [
-      {
-        "mission": "M175",
-        "branch": "feat/work-m175-newdoria-battle-destruction-targets-2v2-20261114",
-        "pr": 130,
-        "head": "535b7fd9079fdfab31d02fdf9ac88ce4f0acfd1c",
-        "files": [
-          "tests/tagClassicNewdoriaBattleTargetScope2v2.test.cjs"
-        ],
-        "allowed": "Monitor CI and fix only this test file on this branch; do not edit runtime, catalog, certifications, coordination, or any third-party reservation."
-      },
-      {
-        "mission": "M176",
-        "branch": "feat/work-m176-double-tribute-2v2-physical-owner-20261114",
-        "pr": 131,
-        "head": "b0510f434822e979497f54beace039e537622e87",
-        "files": [
-          "tests/tagClassicDoubleTributePhysicalOwner2v2.test.cjs"
-        ],
-        "allowed": "Monitor CI and fix only this test file on this branch; do not edit runtime, catalog, certifications, coordination, or any third-party reservation."
-      },
-      {
-        "mission": "M177",
-        "branch": "feat/work-m177-gora-turtle-global-attack-lock-2v2-20261114",
-        "pr": 132,
-        "head": "24e89ae629a4ded2262d627fc299e12c4af44fda",
-        "files": [
-          "tests/tagClassicGoraTurtleGlobalAttackLock2v2.test.cjs"
-        ],
-        "allowed": "Monitor CI and fix only this test file on this branch; do not edit runtime, catalog, certifications, coordination, or any third-party reservation."
-      },
-      {
-        "mission": "M178",
-        "branch": "feat/work-m178-conditional-direct-attacks-2v2-20261114",
-        "pr": 133,
-        "head": "6be49470f2b27a10a26c8ae3512bf21f19f5b36f",
-        "files": [
-          "tests/tagClassicConditionalDirectAttacksTeamScope2v2.test.cjs"
-        ],
-        "allowed": "Monitor CI and fix only this test file on this branch; do not edit runtime, catalog, certifications, coordination, or any third-party reservation."
-      },
-      {
-        "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
-        "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
-        "pr": 154,
-        "scope": [
-          "tests/tagClassicGadgetSearchChain2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
-        "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
-        "pr": 155,
-        "scope": [
-          "tests/tagClassicDarkMagicianConditionalSpells2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
-        "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
-        "pr": 156,
-        "scope": [
-          "tests/tagClassicGlobalConditionalDestruction2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
-        "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
-        "pr": 157,
-        "scope": [
-          "tests/tagClassicChaosEndSharedBanishedThreshold2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
-        "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
-        "pr": 158,
-        "scope": [
-          "tests/tagClassicTribalContinuousModifiers2v2.test.cjs"
-        ]
-      },
-      {
-        "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
-        "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
-        "pr": 159,
-        "scope": [
-          "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
-        ]
-      },
-      {
-        "mission": "M209",
-        "branch": "feat/work-m209-goblin-attack-force-giant-orc-2v2-20261114",
-        "head": "5fbaf548227b2927c82e5e6ae3348ade9ea93af8",
-        "pr": 164,
-        "scope": [
-          "tests/tagClassicForcedBattleDefense2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "npmTest": "success",
-          "engineValidation": "in_progress",
-          "extendedSoak600": "in_progress"
-        }
-      },
-      {
-        "mission": "M210",
-        "branch": "feat/work-m210-alligator-sword-dragon-direct-attack-2v2-20261114",
-        "head": "b88cdc7ed21444debd1cec9ee88f366f7c5027c1",
-        "pr": 165,
-        "scope": [
-          "tests/tagClassicAlligatorSwordDragonDirectAttack2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "previousHeadNpmTest": "failure_fixture_expectation",
-          "correctedHeadCardBatchFast": "in_progress",
-          "correctedHeadMilestone1000": "in_progress",
-          "correctedHeadEngineValidation": "queued",
-          "correctedHeadNpmTest": "pending",
-          "extendedSoak600": "in_progress"
-        }
-      }
-    ],
-    "allowed": "Auxiliar pode monitorar PRs #164 e #165 e corrigir somente tests/tagClassicForcedBattleDefense2v2.test.cjs e tests/tagClassicAlligatorSwordDragonDirectAttack2v2.test.cjs nas respectivas branches. Não tocar runtime, catálogo, certificados, inventários, bancos, coordenação ou reservas de terceiros.",
-    "forbidden": "não alterar M61/M118/M151/M153 nem branches M194–M198; não fazer merge/deploy; não tocar em banco ou inventários"
-  },
-  "lastCoordinationRefreshAt": "2026-11-14T03:39:10-03:00",
+  "scopeReleasedToAuxiliary": [
+    {
+      "mission": "M211",
+      "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+      "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
+      "pr": 166,
+      "files": [
+        "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
+    },
+    {
+      "mission": "M212",
+      "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+      "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
+      "pr": 167,
+      "files": [
+        "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
+    },
+    {
+      "mission": "M213",
+      "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+      "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
+      "pr": 168,
+      "files": [
+        "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
+    },
+    {
+      "mission": "M214",
+      "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+      "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
+      "pr": 169,
+      "files": [
+        "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
+    }
+  ],
+  "lastCoordinationRefreshAt": "2026-11-15T00:26:25-03:00",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
     "status": "awaiting-response; separate test file only; no response observed",
@@ -5339,25 +4752,48 @@
       "engineValidation": "in_progress",
       "extendedSoak600": "in_progress",
       "previousHeadNpmTest": "failure_fixture_expectation_corrected"
+    },
+    "pr166": {
+      "fast": "success",
+      "milestone": "success",
+      "engine": "success"
+    },
+    "pr167": {
+      "fast": "success",
+      "milestone": "success",
+      "engine": "success",
+      "extendedSoak": "success",
+      "npmTest": "success"
+    },
+    "pr168": {
+      "fast": "success",
+      "milestone": "success",
+      "engine": "failure",
+      "npmTest": "failure",
+      "extendedSoak": "success",
+      "failedTest": "tests/tagDianKetoOokaziDiscordIntegration.test.cjs:145",
+      "handoffCommentId": 6888494307
+    },
+    "pr169": {
+      "fast": "success",
+      "milestone": "success",
+      "engine": "in_progress",
+      "extendedSoak": "in_progress"
     }
   },
   "activeWork": {
     "runId": "work-20261114T233246-0300",
-    "mission": "M211–M213",
+    "mission": "M211–M214",
     "owner": "Work",
-    "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+    "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "reservedFiles": [
-      "tests/tagClassicGuardianZeroAttack2v2.test.cjs",
-      "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs",
-      "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
-    ],
-    "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
+    "reservedFiles": [],
+    "priority": "P1 — concluir validação dos efeitos de Guardião e LP em 2v2, homologar a interação Discord offline e ampliar cobertura contínua de Chaos Necromancer no Cemitério compartilhado.",
     "startedAt": "2026-11-14T23:32:46-03:00",
-    "expectedSharedHead": "b360ed37ee5ea4ff30a3a9b364ac52bb8de7216c",
-    "state": "active",
-    "lastActivityAt": "2026-11-15T00:10:47-03:00",
+    "expectedSharedHead": "a7b78a50df36e1141dbe4b7c05797def884546ef",
+    "state": "released-to-auxiliary-monitor-ci",
+    "lastActivityAt": "2026-11-15T00:26:25-03:00",
     "parallelBranches": [
       {
         "mission": "M211",
@@ -5367,7 +4803,13 @@
         "scope": [
           "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
         ],
-        "state": "active; CI re-run after two rules-accurate fixture corrections"
+        "state": "released-ci-success",
+        "ci": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "engineValidation": "success"
+        },
+        "failure": null
       },
       {
         "mission": "M212",
@@ -5377,7 +4819,15 @@
         "scope": [
           "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
         ],
-        "state": "active; CI re-run after turn-start draw snapshot correction"
+        "state": "released-ci-success",
+        "ci": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "engineValidation": "success",
+          "extendedSoak600": "success",
+          "npmTest": "success"
+        },
+        "failure": null
       },
       {
         "mission": "M213",
@@ -5387,7 +4837,32 @@
         "scope": [
           "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
         ],
-        "state": "active; Discord handler integration CI in progress"
+        "state": "released-to-auxiliary-fix-requested",
+        "ci": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "engineValidation": "failure",
+          "npmTest": "failure",
+          "extendedSoak600": "success"
+        },
+        "failure": "npm test 7367/7368; assertion at tests/tagDianKetoOokaziDiscordIntegration.test.cjs:145 about menu option value/label; handoff requested in PR comment 6888494307"
+      },
+      {
+        "mission": "M214",
+        "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+        "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
+        "pr": 169,
+        "scope": [
+          "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+        ],
+        "state": "released-to-auxiliary-monitor-ci",
+        "ci": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "engineValidation": "in_progress",
+          "extendedSoak600": "in_progress"
+        },
+        "failure": null
       }
     ]
   },
@@ -5401,11 +4876,11 @@
     "requestedAt": "2026-11-14T09:18:10-03:00",
     "scope": "partial file-only handoff; no changes until release"
   },
-  "lastCheckpointAt": "2026-11-14T19:53:13.875-03:00",
-  "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "f08fb477ffa23d126ab669e2f00a448a3088d0d2",
-  "lastRunSummary": "M209–M210: #164 com Card Batch, Milestone, check e npm test aprovados; Engine Validation/soak seguem em execução. #165 teve Card Batch e Milestone aprovados no HEAD corrigido b88cdc7; npm test/Engine Validation/soak seguem em execução. A falha inicial foi uma expectativa errada sobre ataque a monstro face-down, corrigida sem runtime. Zero novas certificações; catálogo 969/1.014; sem merge/deploy.",
-  "postReleaseCiCheckAt": "2026-11-14T19:54:38.665-03:00",
+  "lastCheckpointAt": "2026-11-15T00:26:25-03:00",
+  "reservationReleased": true,
+  "expectedHeadForCoordinationCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
+  "lastRunSummary": "M211 (#166) e M212 (#167) concluíram toda a CI com sucesso; M213 (#168) falhou em uma asserção de menu Discord (7.367/7.368) e recebeu pedido de transferência; M214 (#169) adiciona Chaos Necromancer ao Cemitério compartilhado, com Card Batch e Milestone aprovados e Engine/soak em andamento. Zero novas certificações ou inventários.",
+  "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
   "catalogAtEnd": {
     "sharedCertificates": 969,
@@ -5463,8 +4938,8 @@
       "status": "agent notified"
     }
   ],
-  "nextWindow": "2026-11-14T23:30:00-03:00",
-  "lastCheckpointSha": "5fb122e49e383ffa4dd2230f2ea932b0418880fc",
+  "nextWindow": "2026-11-15T04:30:00-03:00",
+  "lastCheckpointSha": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "deployment": {
     "merge": "none",
     "deploy": "none",
@@ -5539,6 +5014,145 @@
         "milestone1000": "success",
         "engineValidation": "success"
       }
+    },
+    {
+      "mission": "M211",
+      "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+      "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
+      "pr": 166,
+      "scope": [
+        "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success"
+      }
+    },
+    {
+      "mission": "M212",
+      "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+      "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
+      "pr": 167,
+      "scope": [
+        "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success",
+        "extendedSoak600": "success",
+        "npmTest": "success"
+      }
+    },
+    {
+      "mission": "M213",
+      "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+      "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
+      "pr": 168,
+      "scope": [
+        "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
+      ],
+      "state": "released-to-auxiliary-fix-requested",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "failure",
+        "npmTest": "failure",
+        "extendedSoak600": "success"
+      },
+      "failure": "npm test 7367/7368; assertion at tests/tagDianKetoOokaziDiscordIntegration.test.cjs:145 about menu option value/label; handoff requested in PR comment 6888494307"
+    },
+    {
+      "mission": "M214",
+      "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+      "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
+      "pr": 169,
+      "scope": [
+        "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      }
     }
-  ]
+  ],
+  "parallelBranches": [
+    {
+      "mission": "M211",
+      "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+      "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
+      "pr": 166,
+      "scope": [
+        "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success"
+      },
+      "failure": null
+    },
+    {
+      "mission": "M212",
+      "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+      "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
+      "pr": 167,
+      "scope": [
+        "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
+      ],
+      "state": "released-ci-success",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success",
+        "extendedSoak600": "success",
+        "npmTest": "success"
+      },
+      "failure": null
+    },
+    {
+      "mission": "M213",
+      "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+      "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
+      "pr": 168,
+      "scope": [
+        "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
+      ],
+      "state": "released-to-auxiliary-fix-requested",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "failure",
+        "npmTest": "failure",
+        "extendedSoak600": "success"
+      },
+      "failure": "npm test 7367/7368; assertion at tests/tagDianKetoOokaziDiscordIntegration.test.cjs:145 about menu option value/label; handoff requested in PR comment 6888494307"
+    },
+    {
+      "mission": "M214",
+      "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+      "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
+      "pr": 169,
+      "scope": [
+        "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "failure": null
+    }
+  ],
+  "updatedAt": "2026-11-15T00:26:25-03:00",
+  "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837"
 }
