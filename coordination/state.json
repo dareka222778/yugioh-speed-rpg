@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-14T23:32:46-03:00",
-  "lastActivityAt": "2026-11-14T23:32:46-03:00",
+  "lastActivityAt": "2026-11-15T00:10:47-03:00",
   "nextScheduledAt": "2026-11-15T04:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -1554,15 +1554,44 @@
     {
       "mission": "M211",
       "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
-      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
       "base": "feat/work-m71-ci-branch-routing-20261112",
       "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "scope": [
         "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
       ],
-      "state": "active",
+      "state": "active; CI re-run after two rules-accurate fixture corrections",
       "runId": "work-20261114T233246-0300",
       "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
+      "reservation": "Work",
+      "pr": 166
+    },
+    {
+      "mission": "M212",
+      "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+      "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
+      "pr": 167,
+      "scope": [
+        "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
+      ],
+      "state": "active; CI re-run after turn-start draw snapshot correction",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "runId": "work-20261114T233246-0300",
+      "reservation": "Work"
+    },
+    {
+      "mission": "M213",
+      "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+      "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
+      "pr": 168,
+      "scope": [
+        "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
+      ],
+      "state": "active; Discord handler integration CI in progress",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "runId": "work-20261114T233246-0300",
       "reservation": "Work"
     }
   ],
@@ -5314,18 +5343,53 @@
   },
   "activeWork": {
     "runId": "work-20261114T233246-0300",
-    "mission": "M211",
+    "mission": "M211–M213",
     "owner": "Work",
     "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
-      "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+      "tests/tagClassicGuardianZeroAttack2v2.test.cjs",
+      "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs",
+      "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
     ],
     "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
     "startedAt": "2026-11-14T23:32:46-03:00",
     "expectedSharedHead": "b360ed37ee5ea4ff30a3a9b364ac52bb8de7216c",
-    "state": "active"
+    "state": "active",
+    "lastActivityAt": "2026-11-15T00:10:47-03:00",
+    "parallelBranches": [
+      {
+        "mission": "M211",
+        "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+        "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
+        "pr": 166,
+        "scope": [
+          "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+        ],
+        "state": "active; CI re-run after two rules-accurate fixture corrections"
+      },
+      {
+        "mission": "M212",
+        "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+        "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
+        "pr": 167,
+        "scope": [
+          "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
+        ],
+        "state": "active; CI re-run after turn-start draw snapshot correction"
+      },
+      {
+        "mission": "M213",
+        "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+        "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
+        "pr": 168,
+        "scope": [
+          "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
+        ],
+        "state": "active; Discord handler integration CI in progress"
+      }
+    ]
   },
   "sharedHeadAtStart": "b360ed37ee5ea4ff30a3a9b364ac52bb8de7216c",
   "partialHandoffRequest": {

@@ -14,7 +14,41 @@
   "reservedFiles": [
     "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
   ],
-  "blocksCompleted": [],
+  "blocksCompleted": [
+    {
+      "mission": "M211",
+      "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+      "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
+      "pr": 166,
+      "scope": [
+        "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+      ],
+      "summary": "Cobertura reset Guardian Zero Attack para Kazejin, Suijin e Sanga. Corrigidas expectativas de janela de cálculo, revelação de Set em Defesa e dano DEF−0; CI reiniciada no HEAD final.",
+      "status": "CI in_progress"
+    },
+    {
+      "mission": "M212",
+      "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+      "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
+      "pr": 167,
+      "scope": [
+        "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
+      ],
+      "summary": "Dian Keto (+1000) e Ookazi (−800) em 2v2, com ativação pela mão física do assento ativo 0 e do parceiro 2 após rotação; correção da fixture para contabilizar compras normais no início de turno.",
+      "status": "CI in_progress"
+    },
+    {
+      "mission": "M213",
+      "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+      "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
+      "pr": 168,
+      "scope": [
+        "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
+      ],
+      "summary": "Integração offline do handler Discord para Dian Keto/Ookazi: menu privado real, deferUpdate, persistência, painel público, recibo e idempotência; SQLite temporário.",
+      "status": "CI in_progress"
+    }
+  ],
   "parallelWorkObserved": {
     "activeParallelWork": {
       "pr": 17,
@@ -98,7 +132,40 @@
     "Não alterar tests/tagClassicPolymerizationSharedFieldFusion.test.cjs reservados por M151.",
     "Sem merge, deploy, alterações em inventários ou banco persistente."
   ],
-  "nextTask": "Implementar cobertura comportamental de Kazejin, Suijin e Sanga of the Thunder, executar CI e depois liberar somente o arquivo de teste ao auxiliar.",
+  "nextTask": "Concluir CI dos M211–M213; corrigir somente os três arquivos reservados. Depois solicitar handoff M61 para novos efeitos da fila de 31 cartas; M160 e demais reservas permanecem intactas.",
   "nextWindow": "2026-11-15T04:30:00-03:00",
-  "reservationReleased": false
+  "reservationReleased": false,
+  "parallelBranches": [
+    {
+      "mission": "M211",
+      "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+      "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
+      "pr": 166,
+      "scope": [
+        "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+      ],
+      "state": "active; CI re-run after two rules-accurate fixture corrections"
+    },
+    {
+      "mission": "M212",
+      "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+      "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
+      "pr": 167,
+      "scope": [
+        "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
+      ],
+      "state": "active; CI re-run after turn-start draw snapshot correction"
+    },
+    {
+      "mission": "M213",
+      "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+      "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
+      "pr": 168,
+      "scope": [
+        "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
+      ],
+      "state": "active; Discord handler integration CI in progress"
+    }
+  ],
+  "updatedAt": "2026-11-15T00:10:47-03:00"
 }
