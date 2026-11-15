@@ -1,11 +1,11 @@
 {
   "runId": "work-20261114T233246-0300",
   "owner": "Work",
-  "mission": "M211",
-  "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
-  "state": "active",
+  "mission": "M211–M214",
+  "priority": "P1 — concluir validação dos efeitos de Guardião e LP em 2v2, homologar a interação Discord offline e ampliar cobertura contínua de Chaos Necromancer no Cemitério compartilhado.",
+  "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-14T23:32:46-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-15T00:26:25-03:00",
   "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
   "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
   "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
@@ -23,8 +23,8 @@
       "scope": [
         "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
       ],
-      "summary": "Cobertura reset Guardian Zero Attack para Kazejin, Suijin e Sanga. Corrigidas expectativas de janela de cálculo, revelação de Set em Defesa e dano DEF−0; CI reiniciada no HEAD final.",
-      "status": "CI in_progress"
+      "summary": "Kazejin, Suijin e Sanga: reset de guardianUsed após Set, revelação antes do cálculo de dano, redução do ATK atacante a zero somente naquele cálculo e preservação dos UIDs físicos.",
+      "status": "CI completa: Card Batch Fast, Milestone 1000 e Engine Validation aprovados."
     },
     {
       "mission": "M212",
@@ -34,8 +34,8 @@
       "scope": [
         "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
       ],
-      "summary": "Dian Keto (+1000) e Ookazi (−800) em 2v2, com ativação pela mão física do assento ativo 0 e do parceiro 2 após rotação; correção da fixture para contabilizar compras normais no início de turno.",
-      "status": "CI in_progress"
+      "summary": "Dian Keto (+1000 LP) e Ookazi (-800 LP) para equipes 2v2, com mão física do assento ativo e parceiro após rotação.",
+      "status": "CI completa: Card Batch Fast, Milestone 1000, Engine Validation, npm test e soak aprovados."
     },
     {
       "mission": "M213",
@@ -45,8 +45,19 @@
       "scope": [
         "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
       ],
-      "summary": "Integração offline do handler Discord para Dian Keto/Ookazi: menu privado real, deferUpdate, persistência, painel público, recibo e idempotência; SQLite temporário.",
-      "status": "CI in_progress"
+      "summary": "Integração offline do handler Discord para Dian Keto/Ookazi com SQLite temporário, menu privado, persistência, painel, recibo e idempotência.",
+      "status": "CI falhou em uma asserção do menu privado na linha 145; extended soak aprovado; transferência cooperativa solicitada, sem resposta."
+    },
+    {
+      "mission": "M214",
+      "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+      "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
+      "pr": 169,
+      "scope": [
+        "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+      ],
+      "summary": "Chaos Necromancer: ATK 300 por Monster Card no Cemitério compartilhado da própria equipe; inclui cartas do parceiro, exclui Cemitério adversário e Magias, recalcula ao mover cartas e desativa quando Set.",
+      "status": "PR aberta; Card Batch Fast e Milestone 1000 aprovados; Engine Validation e soak ainda em andamento."
     }
   ],
   "parallelWorkObserved": {
@@ -132,9 +143,9 @@
     "Não alterar tests/tagClassicPolymerizationSharedFieldFusion.test.cjs reservados por M151.",
     "Sem merge, deploy, alterações em inventários ou banco persistente."
   ],
-  "nextTask": "Concluir CI dos M211–M213; corrigir somente os três arquivos reservados. Depois solicitar handoff M61 para novos efeitos da fila de 31 cartas; M160 e demais reservas permanecem intactas.",
+  "nextTask": "Auxiliar: corrigir exclusivamente a asserção do menu privado M213 (#168), monitorar M214 (#169) e manter M211/M212 como CI aprovada. Work na próxima janela: obter handoff M61 para os arquivos de efeito e retomar a fila de 31 identidades com revisão oficial individual.",
   "nextWindow": "2026-11-15T04:30:00-03:00",
-  "reservationReleased": false,
+  "reservationReleased": true,
   "parallelBranches": [
     {
       "mission": "M211",
@@ -144,7 +155,13 @@
       "scope": [
         "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
       ],
-      "state": "active; CI re-run after two rules-accurate fixture corrections"
+      "state": "released-ci-success",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success"
+      },
+      "failure": null
     },
     {
       "mission": "M212",
@@ -154,7 +171,15 @@
       "scope": [
         "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
       ],
-      "state": "active; CI re-run after turn-start draw snapshot correction"
+      "state": "released-ci-success",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success",
+        "extendedSoak600": "success",
+        "npmTest": "success"
+      },
+      "failure": null
     },
     {
       "mission": "M213",
@@ -164,8 +189,124 @@
       "scope": [
         "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
       ],
-      "state": "active; Discord handler integration CI in progress"
+      "state": "released-to-auxiliary-fix-requested",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "failure",
+        "npmTest": "failure",
+        "extendedSoak600": "success"
+      },
+      "failure": "npm test 7367/7368; assertion at tests/tagDianKetoOokaziDiscordIntegration.test.cjs:145 about menu option value/label; handoff requested in PR comment 6888494307"
+    },
+    {
+      "mission": "M214",
+      "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+      "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
+      "pr": 169,
+      "scope": [
+        "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "failure": null
     }
   ],
-  "updatedAt": "2026-11-15T00:10:47-03:00"
+  "updatedAt": "2026-11-15T00:26:25-03:00",
+  "releasedFiles": [
+    "tests/tagClassicGuardianZeroAttack2v2.test.cjs",
+    "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs",
+    "tests/tagDianKetoOokaziDiscordIntegration.test.cjs",
+    "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+  ],
+  "scopeReleasedToAuxiliary": [
+    {
+      "mission": "M211",
+      "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+      "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
+      "pr": 166,
+      "files": [
+        "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
+    },
+    {
+      "mission": "M212",
+      "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
+      "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
+      "pr": 167,
+      "files": [
+        "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
+    },
+    {
+      "mission": "M213",
+      "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
+      "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
+      "pr": 168,
+      "files": [
+        "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
+    },
+    {
+      "mission": "M214",
+      "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+      "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
+      "pr": 169,
+      "files": [
+        "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
+    }
+  ],
+  "duration": {
+    "startedAt": "2026-11-14T23:32:46-03:00",
+    "endedAt": "2026-11-15T00:26:25-03:00",
+    "elapsedWallMinutes": 54,
+    "effectiveWorkMinutesMeasured": 7,
+    "effectiveWorkSecondsMeasured": 438,
+    "minimum60MinutesMet": false,
+    "note": "Nesta retomada foram medidos 7m18s de trabalho efetivo. O intervalo de parede desde o início do run inclui CI/espera e atividade anterior não mensurável; não foi contado como trabalho."
+  },
+  "catalogAtEnd": {
+    "sharedCertificates": 969,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "automaticCertifications": 0,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "productionAtEnd": {
+    "mainHead": "713f02afc862ddb17411706c92c67624eaa1803f",
+    "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "discordLiveValidation": false,
+    "hosting": "not independently verified",
+    "deploymentWorkflow": "not found in main/shared branch",
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ]
+  },
+  "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
+  "sharedHeadBeforeStateUpdate": "a7b78a50df36e1141dbe4b7c05797def884546ef",
+  "handoffRequests": [
+    {
+      "pr": 168,
+      "commentId": 6888494307,
+      "scope": "tests/tagDianKetoOokaziDiscordIntegration.test.cjs",
+      "status": "requested; awaiting response"
+    }
+  ]
 }
