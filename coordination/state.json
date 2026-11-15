@@ -1,17 +1,15 @@
 {
-  "runId": "work-20261115T092946-0300",
+  "runId": "work-20261115T142521-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "completed",
-  "startedAt": "2026-11-15T09:29:46-03:00",
-  "lastActivityAt": "2026-11-15T09:52:13-03:00",
-  "nextScheduledAt": "2026-11-15T14:30:00-03:00",
+  "state": "active",
+  "startedAt": "2026-11-15T14:25:21-03:00",
+  "lastActivityAt": "2026-11-15T14:25:21-03:00",
+  "nextScheduledAt": "2026-11-15T19:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
-    "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
-    "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+    "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261115T092946-0300.json",
   "previousRunId": "work-20261115T055534-0300",
@@ -33,7 +31,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem fora do escopo desta execução; nenhuma reserva de terceiro foi liberada.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -1732,6 +1730,19 @@
         "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
       ],
       "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "mission": "M231",
+      "branch": "feat/work-m231-m34-summon-trap-lock-2v2-20261115",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": null,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
+      ],
+      "state": "active",
+      "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação."
     }
   ],
   "handoffRequest": {
@@ -2572,10 +2583,10 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Auxiliar: monitorar as PRs #184–#186 e, se necessário, corrigir somente os três arquivos de teste nas respectivas branches. Próximo Work: revisar M61/handoff e escolher uma das 31 identidades pendentes após liberação do runtime; não alterar reservas de terceiros.",
+  "nextTask": "Work: concluir M231, validar todos os quatro efeitos no 2v2, abrir PR draft e iniciar a CI; durante a CI, auditar a próxima família independente sem tocar em reservas ativas. Auxiliar: continuar monitorando exclusivamente PRs #184–#186.",
   "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
-  "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
-  "sharedHeadBeforeClaim": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
+  "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
+  "sharedHeadBeforeClaim": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
   "releasedOwnReservation": false,
   "parallelWorkObserved": {
     "at": "2026-11-14T09:18:10-03:00",
@@ -2747,121 +2758,27 @@
     }
   ],
   "activeRun": {
-    "runId": "work-20261114T185556-0300",
+    "runId": "work-20261115T142521-0300",
     "owner": "Work",
-    "state": "released-to-auxiliary-monitor-ci",
+    "mission": "M231",
+    "state": "active",
     "branch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadBeforeRelease": "7ca18a4e2f6f0b0c577c09240ea1583c0f4cf650",
-    "sharedHeadAfterCheckpoint": "44dc873549ceec9cde5290cad559926ff4e1be40",
-    "startedAt": "2026-11-14T18:55:56-03:00",
-    "endedAt": "2026-11-14T19:16:42-03:00",
+    "sharedHeadBeforeClaim": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
+    "startedAt": "2026-11-15T14:25:21-03:00",
     "workBranches": [
       {
-        "mission": "M199",
-        "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
-        "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
-        "pr": 154,
+        "mission": "M231",
+        "branch": "feat/work-m231-m34-summon-trap-lock-2v2-20261115",
+        "base": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
         "scope": [
-          "tests/tagClassicGadgetSearchChain2v2.test.cjs"
+          "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
         ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "fast": "success",
-          "milestone": "success",
-          "npmTest": "success",
-          "extendedSoak": "success",
-          "engineValidation": "success"
-        }
-      },
-      {
-        "mission": "M200",
-        "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
-        "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
-        "pr": 155,
-        "scope": [
-          "tests/tagClassicDarkMagicianConditionalSpells2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "fast": "in_progress",
-          "milestone": "in_progress",
-          "npmTest": "pending",
-          "extendedSoak": "in_progress",
-          "engineValidation": "in_progress"
-        }
-      },
-      {
-        "mission": "M201",
-        "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
-        "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
-        "pr": 156,
-        "scope": [
-          "tests/tagClassicGlobalConditionalDestruction2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "fast": "success",
-          "milestone": "success",
-          "npmTest": "success",
-          "extendedSoak": "in_progress",
-          "engineValidation": "in_progress"
-        }
-      },
-      {
-        "mission": "M202",
-        "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
-        "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
-        "pr": 157,
-        "scope": [
-          "tests/tagClassicChaosEndSharedBanishedThreshold2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "fast": "success",
-          "milestone": "success",
-          "npmTest": "success",
-          "extendedSoak": "success",
-          "engineValidation": "success"
-        }
-      },
-      {
-        "mission": "M203",
-        "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
-        "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
-        "pr": 158,
-        "scope": [
-          "tests/tagClassicTribalContinuousModifiers2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "fast": "success",
-          "milestone": "success",
-          "npmTest": "success",
-          "extendedSoak": "success",
-          "engineValidation": "success"
-        }
-      },
-      {
-        "mission": "M204",
-        "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
-        "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
-        "pr": 159,
-        "scope": [
-          "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "fast": "success",
-          "milestone": "success",
-          "npmTest": "in_progress",
-          "extendedSoak": "in_progress",
-          "engineValidation": "in_progress"
-        }
+        "state": "active"
       }
-    ],
-    "reservationReleased": true
+    ]
   },
-  "nextWorkAt": "2026-11-15T04:30:00-03:00",
+  "nextWorkAt": "2026-11-15T19:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -4033,6 +3950,17 @@
         "status": "no response"
       },
       "note": "Work did not edit any of these branches or files."
+    },
+    {
+      "runId": "work-20261115T142521-0300",
+      "owner": "Work",
+      "mission": "M231",
+      "state": "active",
+      "branch": "feat/work-m231-m34-summon-trap-lock-2v2-20261115",
+      "scope": [
+        "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
+      ],
+      "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação."
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
@@ -4290,8 +4218,24 @@
       "extendedSoak": "in_progress"
     }
   },
-  "activeWork": null,
-  "sharedHeadAtStart": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
+  "activeWork": {
+    "runId": "work-20261115T142521-0300",
+    "owner": "Work",
+    "mission": "M231",
+    "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
+    "state": "active",
+    "startedAt": "2026-11-15T14:25:21-03:00",
+    "branch": "feat/work-m231-m34-summon-trap-lock-2v2-20261115",
+    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
+    "reservedFiles": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
+    ],
+    "conflictPolicy": "Somente novo arquivo de teste M231. Não tocar em M215–M220, M225–M227, PRs #184–#186 liberadas ao auxiliar, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+  },
+  "sharedHeadAtStart": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
   "partialHandoffRequest": {
     "pr": 17,
     "commentId": 6877118689,
@@ -4301,9 +4245,9 @@
     "requestedAt": "2026-11-14T09:18:10-03:00",
     "scope": "partial file-only handoff; no changes until release"
   },
-  "lastCheckpointAt": "2026-11-15T09:52:13-03:00",
-  "reservationReleased": true,
-  "expectedHeadForCoordinationCommit": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
+  "lastCheckpointAt": "2026-11-15T14:25:21-03:00",
+  "reservationReleased": false,
+  "expectedHeadForCoordinationCommit": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
   "lastRunSummary": "M211 (#166) e M212 (#167) concluíram toda a CI com sucesso; M213 (#168) falhou em uma asserção de menu Discord (7.367/7.368) e recebeu pedido de transferência; M214 (#169) adiciona Chaos Necromancer ao Cemitério compartilhado, com Card Batch e Milestone aprovados e Engine/soak em andamento. Zero novas certificações ou inventários.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -4364,7 +4308,7 @@
       "status": "agent notified"
     }
   ],
-  "nextWindow": "2026-11-15T14:30:00-03:00",
+  "nextWindow": "2026-11-15T19:30:00-03:00",
   "lastCheckpointSha": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "deployment": {
     "merge": "none",
@@ -4577,9 +4521,19 @@
         "extendedSoak600": "in_progress"
       },
       "failure": null
+    },
+    {
+      "mission": "M231",
+      "branch": "feat/work-m231-m34-summon-trap-lock-2v2-20261115",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
+      ],
+      "state": "active"
     }
   ],
-  "updatedAt": "2026-11-15T09:52:13-03:00",
+  "updatedAt": "2026-11-15T14:25:21-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -4697,62 +4651,56 @@
         }
       ],
       "releasedAt": "2026-11-15T09:52:13-03:00"
+    },
+    {
+      "runId": "work-20261115T142521-0300",
+      "owner": "Work",
+      "mission": "M231",
+      "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
+      "state": "active",
+      "startedAt": "2026-11-15T14:25:21-03:00",
+      "branch": "feat/work-m231-m34-summon-trap-lock-2v2-20261115",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
+      "reservedFiles": [
+        "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente novo arquivo de teste M231. Não tocar em M215–M220, M225–M227, PRs #184–#186 liberadas ao auxiliar, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
     }
   ],
   "previousCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
   "reservation": {
-    "runId": "work-20261115T092946-0300",
+    "runId": "work-20261115T142521-0300",
     "owner": "Work",
-    "mission": "M228",
-    "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
-    "state": "released-to-auxiliary-monitor-ci",
-    "startedAt": "2026-11-15T09:29:46-03:00",
-    "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+    "mission": "M231",
+    "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
+    "state": "active",
+    "startedAt": "2026-11-15T14:25:21-03:00",
+    "branch": "feat/work-m231-m34-summon-trap-lock-2v2-20261115",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtReservation": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
+    "sharedHeadAtReservation": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
     "reservedFiles": [
-      "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
-      "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
-      "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
     ],
-    "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção.",
-    "additionalBranches": [
-      {
-        "mission": "M229",
-        "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
-        "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
-        "pr": 185,
-        "files": [
-          "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
-        ]
-      },
-      {
-        "mission": "M230",
-        "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
-        "head": "afe57af2f562cdfa5e664df45b2725c15af74ba4",
-        "pr": 186,
-        "files": [
-          "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
-        ]
-      }
-    ],
-    "releasedAt": "2026-11-15T09:52:13-03:00"
+    "conflictPolicy": "Somente novo arquivo de teste M231. Não tocar em M215–M220, M225–M227, PRs #184–#186 liberadas ao auxiliar, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
   },
   "runRegistration": {
-    "runId": "work-20261115T092946-0300",
-    "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
-    "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+    "runId": "work-20261115T142521-0300",
+    "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
+    "branch": "feat/work-m231-m34-summon-trap-lock-2v2-20261115",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "expectedSharedHead": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
-    "registeredAt": "2026-11-15T09:29:46-03:00"
+    "expectedSharedHead": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
+    "registeredAt": "2026-11-15T14:25:21-03:00"
   },
   "elapsedSeconds": 1347,
   "elapsedMinutes": 22.45,
-  "effectiveWorkMinutes": 15,
+  "effectiveWorkMinutes": 0,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -4778,12 +4726,12 @@
     "persistentDatabaseChanged": false
   },
   "handoffStatus": {
-    "status": "No conflicting file handoff granted or required for M228–M230; all changes are new test files.",
+    "status": "Nenhuma transferência necessária para M231: o arquivo reservado é novo e não conflita. M61/PR #17, M118/#74, M151/#107 e M153/#109 permanecem handoff-pending; arquivos reservados intocados.",
     "blocked": [
-      "M61 / PR #17: no response to repeated partial handoff requests; reserved runtime files untouched.",
-      "M118 / PR #74: no response; src/tagDuel.ts and its reserved test untouched.",
-      "M151 / PR #107: no response; reserved Fusion tests untouched.",
-      "M153 / PR #109: target-filter runtime fix remains reserved; untouched."
+      "M61/PR #17 — aguardando liberação explícita de src/monsterEffects.ts e arquivos associados.",
+      "M118/PR #74 — aguardando liberação explícita de src/tagDuel.ts e teste reservado.",
+      "M151/PR #107 — aguardando liberação explícita das fixtures de Fusão.",
+      "M153/PR #109 — aguardando liberação explícita do filtro de alvo."
     ]
   }
 }
