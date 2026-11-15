@@ -127,13 +127,13 @@ function settle(state){
   }
   return state;
 }
-function createGame(seed){
+function createGame(seed,first=0){
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),
     name:'M222 Seat '+seat,
     cards:deck()
   }));
-  const state=tag.createTagDuel(players,{classic:true,first:0,seed});
+  const state=tag.createTagDuel(players,{classic:true,first,seed});
   state.core.turn=3;
   const rules=rulesFor(state.core);
   assert.equal(rules.mainDeckMin,20);
@@ -258,20 +258,21 @@ test('Dark-Piercing Light reveals both opposing physical seats while preserving 
   assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(state))));
 });
 
-test('Desert Sunlight Set by seat 0 may be activated by seat 2 and reveals only the allied shared field in Defense',()=>{
-  let state=createGame('m222-desert-sunlight-partner-trap');
-  const trap=ensureInHand(state,0,DESERT_SUNLIGHT);
+test('Desert Sunlight previously Set by inactive seat 0 may be activated by active partner seat 2',()=>{
+  let state=createGame('m222-desert-sunlight-partner-trap',2);
+  const trap=takePhysical(state,0,DESERT_SUNLIGHT);
+  state.core.players[0].backrow.push({...trap,setTurn:0,faceUp:false});
   const allied0=deploy(state,0,normal[0],{faceUp:false,position:'def'});
   const allied2=deploy(state,2,normal[1],{faceUp:false,position:'def'});
   const alliedVisible=deploy(state,0,normal[2],{faceUp:true,position:'atk'});
   const opposing1=deploy(state,1,normal[3],{faceUp:false,position:'def'});
   const opposing3=deploy(state,3,normal[4],{faceUp:false,position:'def'});
   const before=inventorySnapshot(state);
-  state=setTrap(state,0,trap);
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
   const publicAfterSet=JSON.stringify(tag.publicTagDuel(state));
   assert.ok(!publicAfterSet.includes(trap.uid),'the Set Trap UID must remain private');
   assert.ok(!publicAfterSet.includes(DESERT_SUNLIGHT),'the Set Trap identity must remain hidden');
-  state=rotateToSeat2(state);
+  assert.equal(tag.tagDecisionMember(state).id,member(2));
   assertPrivateHands(state);
   state=activatePartnerTrap(state,trap);
   for(const uid of [allied0.uid,allied2.uid]){
