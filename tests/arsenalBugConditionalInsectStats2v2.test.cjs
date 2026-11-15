@@ -65,9 +65,9 @@ function takePhysical(state,seat,id){
   }
   throw new Error('M237 physical card missing from seat '+seat+': '+id);
 }
-function deploy(state,seat,id,position='atk'){
+function deploy(state,seat,id,position='atk',faceUp=true){
   const physical=takePhysical(state,seat,id);
-  const monster={...physical,owner:seat%2,position,faceUp:true,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
+  const monster={...physical,owner:seat%2,position,faceUp,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
   state.core.players[seat%2].monsters.push(monster);
   return monster;
 }
@@ -148,6 +148,8 @@ test('one face-up Insect from either physical teammate restores 2000 ATK/DEF; ex
   assert.equal(opposing.uid.startsWith('m1:'),true);
   assert.deepEqual(stats(state,source.uid),[2000,2000],
     'the partner’s face-up Insect counts through the team-shared field, while the third Insect is capped');
+  assert.deepEqual(stats(state,partnerOne.uid),[2000,2000]);
+  assert.deepEqual(stats(state,partnerTwo.uid),[2000,2000]);
 
   moveToTeamGrave(state,partnerOne.uid);
   assert.deepEqual(stats(state,source.uid),[2000,2000],
@@ -158,6 +160,30 @@ test('one face-up Insect from either physical teammate restores 2000 ATK/DEF; ex
     'when the last other allied Insect leaves, both stats immediately return to 1000');
   assert.ok(state.core.players[1].monsters.some(m=>m.uid===opposing.uid),
     'the opposing team still controls an Insect, but it cannot satisfy the source team condition');
+
+  assertConserved(state,before);
+  assertPrivateHands(state);
+  assertRestorable(state);
+});
+
+
+test('a face-down partner Insect is not counted until it is revealed',()=>{
+  const state=createGame('m237-facedown-partner-insect');
+  const before=inventorySnapshot(state);
+  const source=deploy(state,0,BUG);
+  const hiddenPartner=deploy(state,2,BUG,'def',false);
+  assert.deepEqual(stats(state,source.uid),[1000,1000],
+    'the hidden card type is not used by the continuous condition');
+  const publicState=tag.publicTagDuel(state);
+  assert.ok(publicState.teams[0].monsters.some(m=>m.id===null&&m.position==='def'&&!m.faceUp),
+    'the face-down partner card remains hidden in the public projection');
+
+  hiddenPartner.faceUp=true;
+  assert.deepEqual(stats(state,source.uid),[2000,2000],
+    'revealing the allied Insect immediately satisfies the condition');
+  hiddenPartner.faceUp=false;
+  assert.deepEqual(stats(state,source.uid),[1000,1000],
+    'turning the partner card face-down removes it from the known Insect count');
 
   assertConserved(state,before);
   assertPrivateHands(state);
