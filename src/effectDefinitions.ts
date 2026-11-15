@@ -32,6 +32,7 @@ import {positionRuleIssues,type PositionRule} from './positionRules';
 import {searchSpellEffects25} from './searchSpellBatch25';
 import {searchZoneIssues,type SearchZoneRule} from './searchZoneRules';
 import {economicCountEffects24} from './economicCountBatch24';
+import {economicGroupEffects25} from './economicGroupBatch25';
 import {economicEffects23} from './economicBatch23';
 import {ritualExtensionEffects22} from './ritualExtensions22';
 import {ritualEffects22} from './ritualBatch22';
@@ -109,6 +110,7 @@ export const effectDefinitions:Record<string,Effect>={
  '55013285':{kind:'monsterEffect'},'93107608':{kind:'monsterEffect'},'77044671':{kind:'monsterEffect'},'39191307':{kind:'monsterEffect'},'24317029':{kind:'monsterEffect'},
  ...searchSpellEffects25,
  ...economicCountEffects24,
+ ...economicGroupEffects25,
  ...economicEffects23,
  ...ritualExtensionEffects22,
  ...ritualEffects22,
