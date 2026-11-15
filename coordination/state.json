@@ -9,7 +9,8 @@
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
+    "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+    "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261115T092946-0300.json",
   "previousRunId": "work-20261115T055534-0300",
@@ -1743,6 +1744,19 @@
       ],
       "state": "active",
       "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação."
+    },
+    {
+      "mission": "M232",
+      "branch": "feat/work-m232-m32-activation-restrictions-2v2-20261115",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": null,
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
+      ],
+      "state": "active",
+      "priority": "P1 — ampliar a validação 2v2 do lote M32: Mirage Dragon e Pitch-Black Warwolf devem bloquear Trap Cards do oponente durante ambas as Battle Phases, sem bloquear fora delas; Invader of Darkness deve bloquear Quick-Play Spells do oponente em qualquer janela, preservando a ativação por parceiro e os demais tipos de carta."
     }
   ],
   "handoffRequest": {
@@ -2583,10 +2597,10 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Work: concluir M231, validar todos os quatro efeitos no 2v2, abrir PR draft e iniciar a CI; durante a CI, auditar a próxima família independente sem tocar em reservas ativas. Auxiliar: continuar monitorando exclusivamente PRs #184–#186.",
+  "nextTask": "Work: concluir M231 e M232 em branches isoladas; validar a família M32 durante a CI de M34. Depois auditar M36/M40 sem tocar em reservas ativas. Auxiliar: monitorar somente PRs #184–#186.",
   "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
   "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
-  "sharedHeadBeforeClaim": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
+  "sharedHeadBeforeClaim": "d60d829cdfb74f3434e06f4c75cece08386a7fa5",
   "releasedOwnReservation": false,
   "parallelWorkObserved": {
     "at": "2026-11-14T09:18:10-03:00",
@@ -3961,6 +3975,17 @@
         "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
       ],
       "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação."
+    },
+    {
+      "runId": "work-20261115T142521-0300-M232",
+      "owner": "Work",
+      "mission": "M232",
+      "state": "active",
+      "branch": "feat/work-m232-m32-activation-restrictions-2v2-20261115",
+      "scope": [
+        "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
+      ],
+      "priority": "P1 — ampliar a validação 2v2 do lote M32: Mirage Dragon e Pitch-Black Warwolf devem bloquear Trap Cards do oponente durante ambas as Battle Phases, sem bloquear fora delas; Invader of Darkness deve bloquear Quick-Play Spells do oponente em qualquer janela, preservando a ativação por parceiro e os demais tipos de carta."
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
@@ -4231,9 +4256,38 @@
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
     "reservedFiles": [
-      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
     ],
-    "conflictPolicy": "Somente novo arquivo de teste M231. Não tocar em M215–M220, M225–M227, PRs #184–#186 liberadas ao auxiliar, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    "conflictPolicy": "Somente novo arquivo de teste M231. Não tocar em M215–M220, M225–M227, PRs #184–#186 liberadas ao auxiliar, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção.",
+    "scope": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
+    ],
+    "additionalBranches": [
+      {
+        "mission": "M232",
+        "branch": "feat/work-m232-m32-activation-restrictions-2v2-20261115",
+        "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+        "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+        "scope": [
+          "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
+        ],
+        "state": "active",
+        "priority": "P1 — ampliar a validação 2v2 do lote M32: Mirage Dragon e Pitch-Black Warwolf devem bloquear Trap Cards do oponente durante ambas as Battle Phases, sem bloquear fora delas; Invader of Darkness deve bloquear Quick-Play Spells do oponente em qualquer janela, preservando a ativação por parceiro e os demais tipos de carta."
+      }
+    ],
+    "additionalMissions": [
+      {
+        "mission": "M232",
+        "priority": "P1 — ampliar a validação 2v2 do lote M32: Mirage Dragon e Pitch-Black Warwolf devem bloquear Trap Cards do oponente durante ambas as Battle Phases, sem bloquear fora delas; Invader of Darkness deve bloquear Quick-Play Spells do oponente em qualquer janela, preservando a ativação por parceiro e os demais tipos de carta.",
+        "branch": "feat/work-m232-m32-activation-restrictions-2v2-20261115",
+        "scope": [
+          "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
+        ],
+        "state": "active"
+      }
+    ]
   },
   "sharedHeadAtStart": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
   "partialHandoffRequest": {
@@ -4247,7 +4301,7 @@
   },
   "lastCheckpointAt": "2026-11-15T14:25:21-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "7bfad26b444e69affdac7de270708f3d5e8dc9ee",
+  "expectedHeadForCoordinationCommit": "d60d829cdfb74f3434e06f4c75cece08386a7fa5",
   "lastRunSummary": "M211 (#166) e M212 (#167) concluíram toda a CI com sucesso; M213 (#168) falhou em uma asserção de menu Discord (7.367/7.368) e recebeu pedido de transferência; M214 (#169) adiciona Chaos Necromancer ao Cemitério compartilhado, com Card Batch e Milestone aprovados e Engine/soak em andamento. Zero novas certificações ou inventários.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -4531,6 +4585,16 @@
         "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
       ],
       "state": "active"
+    },
+    {
+      "mission": "M232",
+      "branch": "feat/work-m232-m32-activation-restrictions-2v2-20261115",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
+      ],
+      "state": "active"
     }
   ],
   "updatedAt": "2026-11-15T14:25:21-03:00",
@@ -4668,6 +4732,24 @@
         "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs"
       ],
       "conflictPolicy": "Somente novo arquivo de teste M231. Não tocar em M215–M220, M225–M227, PRs #184–#186 liberadas ao auxiliar, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261115T142521-0300-M232",
+      "runId": "work-20261115T142521-0300",
+      "owner": "Work",
+      "mission": "M232",
+      "priority": "P1 — ampliar a validação 2v2 do lote M32: Mirage Dragon e Pitch-Black Warwolf devem bloquear Trap Cards do oponente durante ambas as Battle Phases, sem bloquear fora delas; Invader of Darkness deve bloquear Quick-Play Spells do oponente em qualquer janela, preservando a ativação por parceiro e os demais tipos de carta.",
+      "state": "active",
+      "startedAt": "2026-11-15T14:25:21-03:00",
+      "branch": "feat/work-m232-m32-activation-restrictions-2v2-20261115",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "d60d829cdfb74f3434e06f4c75cece08386a7fa5",
+      "reservedFiles": [
+        "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente novo arquivo de teste M232. Não tocar em M215–M220, M225–M227, M228–M230 liberadas ao auxiliar, M231, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
     }
   ],
   "previousCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
@@ -4733,5 +4815,25 @@
       "M151/PR #107 — aguardando liberação explícita das fixtures de Fusão.",
       "M153/PR #109 — aguardando liberação explícita do filtro de alvo."
     ]
-  }
+  },
+  "additionalReservations": [
+    {
+      "reservationId": "work-20261115T142521-0300-M232",
+      "runId": "work-20261115T142521-0300",
+      "owner": "Work",
+      "mission": "M232",
+      "priority": "P1 — ampliar a validação 2v2 do lote M32: Mirage Dragon e Pitch-Black Warwolf devem bloquear Trap Cards do oponente durante ambas as Battle Phases, sem bloquear fora delas; Invader of Darkness deve bloquear Quick-Play Spells do oponente em qualquer janela, preservando a ativação por parceiro e os demais tipos de carta.",
+      "state": "active",
+      "startedAt": "2026-11-15T14:25:21-03:00",
+      "branch": "feat/work-m232-m32-activation-restrictions-2v2-20261115",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "d60d829cdfb74f3434e06f4c75cece08386a7fa5",
+      "reservedFiles": [
+        "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente novo arquivo de teste M232. Não tocar em M215–M220, M225–M227, M228–M230 liberadas ao auxiliar, M231, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    }
+  ]
 }
