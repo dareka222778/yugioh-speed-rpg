@@ -1,0 +1,48 @@
+{
+  "runId": "work-20261115T152315-0300-M239",
+  "parentRunId": "work-20261115T152315-0300-M237",
+  "owner": "Work principal",
+  "mission": "M239",
+  "priority": "P2 — ampliar a validação 2v2 de inspeção de backrow oculto e preservação de identidade física com Trap Master, sem alterar runtime/catalog/certificados.",
+  "state": "implementation-in-progress",
+  "startedAt": "2026-11-15T15:23:15-03:00",
+  "branch": "feat/work-m239-trap-master-set-backrow-2v2-20261115",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "e2e2a2d773479dd7038c2769134386713e8c8cdc",
+  "conditionalUpdate": "Branch isolada a partir do SHA explícito; somente novo arquivo de teste e registro de execução, sem alterar reservas ativas.",
+  "scope": [
+    "tests/tagClassicTrapMasterHiddenBackrow2v2.test.cjs"
+  ],
+  "reservedFilesUntouched": [
+    "src/monsterEffects.ts",
+    "src/duelEngineCurrent.ts",
+    "src/classicEffects.ts",
+    "src/duelIntegrity.ts",
+    "scripts/mass-certification21.cjs",
+    "src/cardMetadata.ts",
+    "src/effectDefinitions.ts",
+    "src/cardCertifications.ts",
+    "catalog/engine-v9/**",
+    "catalog/batches/admitted.json"
+  ],
+  "targetCard": {
+    "id": "46461247",
+    "konamiId": 4230,
+    "name": "Trap Master",
+    "certifiedInBaseCatalog": true
+  },
+  "behaviorPlan": [
+    "Flip Summon de Trap Master pertencente fisicamente ao parceiro inativo pelo membro ativo.",
+    "Inspeção de Set Trap e Set Spell na backrow compartilhada sem revelar identidade na projeção pública.",
+    "Trap Master pode selecionar Trap da equipe adversária e destrói o UID físico correto.",
+    "Set Spell selecionada permanece na zona original e sua identidade não vaza.",
+    "Field Zone não é elegível para inspeção de Trap.",
+    "Decks 20, mão 6 com descarte no fim, Extra 5, zonas 3+3, 80 UIDs e restauração JSON."
+  ],
+  "tests": [
+    "tests/tagClassicTrapMasterHiddenBackrow2v2.test.cjs"
+  ],
+  "completedBlocks": [
+    "Nova suíte 2v2 com duas resoluções: destruição de Trap e retenção de Spell Set de tipo incorreto."
+  ]
+}
