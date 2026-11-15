@@ -165,7 +165,7 @@ function activateSpell(state,seat,card,targetUid){
 function setTrap(state,seat,card){
   const action=tag.tagActions(state,member(seat)).find(candidate=>candidate.kind==='set'&&candidate.card===card.uid);
   assert.ok(action,'the physical owner must be able to Set the Trap');
-  return tag.stepTagDuel(state,member(seat),action);
+  return settle(tag.stepTagDuel(state,member(seat),action));
 }
 function activatePartnerTrap(state,trap){
   assert.equal(tag.tagDecisionMember(state).id,member(2));
