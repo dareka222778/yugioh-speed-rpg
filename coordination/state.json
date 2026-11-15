@@ -2,9 +2,9 @@
   "runId": "work-20261115T092946-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "completed",
   "startedAt": "2026-11-15T09:29:46-03:00",
-  "lastActivityAt": "2026-11-15T09:41:19-03:00",
+  "lastActivityAt": "2026-11-15T09:52:13-03:00",
   "nextScheduledAt": "2026-11-15T14:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -33,22 +33,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": {
-    "pr": 17,
-    "branch": "feat/work-m61-handlimit-ci-20261111",
-    "head": "78aa57851420e0f52211f7267faf1af681847ea3",
-    "state": "handoff-pending",
-    "lastRequestComment": 6885378522,
-    "noResponse": true,
-    "blockedFiles": [
-      "src/monsterEffects.ts",
-      "src/duelEngineCurrent.ts",
-      "src/classicEffects.ts",
-      "src/duelIntegrity.ts",
-      "scripts/mass-certification21.cjs"
-    ],
-    "lastRequestAt": "2026-11-14T19:42:00-03:00"
-  },
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem fora do escopo desta execução; nenhuma reserva de terceiro foi liberada.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -1714,14 +1699,14 @@
     {
       "mission": "M228",
       "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
-      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "head": "ff345f04ddfc0ac42c6ec7105a66c9cd0bfdca11",
       "base": "feat/work-m71-ci-branch-routing-20261112",
       "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-      "pr": null,
+      "pr": 184,
       "scope": [
         "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
       ],
-      "state": "active",
+      "state": "released-to-auxiliary-monitor-ci",
       "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs."
     },
     {
@@ -1734,19 +1719,19 @@
       "scope": [
         "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
       ],
-      "state": "active; CI running"
+      "state": "released-to-auxiliary-monitor-ci"
     },
     {
       "mission": "M230",
       "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
-      "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+      "head": "afe57af2f562cdfa5e664df45b2725c15af74ba4",
       "base": "feat/work-m71-ci-branch-routing-20261112",
       "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "pr": 186,
       "scope": [
         "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
       ],
-      "state": "active; CI running"
+      "state": "released-to-auxiliary-monitor-ci"
     }
   ],
   "handoffRequest": {
@@ -1815,659 +1800,73 @@
   },
   "pullRequests": [
     {
-      "number": 12,
-      "state": "open",
-      "draft": true,
-      "ci": "success"
-    },
-    {
-      "number": 13,
-      "state": "open",
-      "draft": true,
-      "ci": "failure"
-    },
-    {
-      "number": 14,
-      "state": "open",
-      "draft": true,
-      "ci": "success"
-    },
-    {
-      "number": 15,
-      "state": "open",
-      "draft": true,
-      "ci": "no-runs-visible"
-    },
-    {
-      "number": 17,
-      "state": "open",
-      "draft": true,
-      "ci": "failure",
-      "handoff": "awaiting-response"
-    },
-    {
-      "number": 18,
-      "state": "open",
-      "draft": true,
-      "ci": "success"
-    },
-    {
-      "number": 19,
-      "state": "open",
-      "draft": true,
-      "ci": "success"
-    },
-    {
-      "number": 20,
-      "state": "open",
-      "draft": true,
-      "ci": "success"
-    },
-    {
-      "number": 21,
-      "state": "open",
-      "draft": true,
-      "ci": "success"
-    },
-    {
-      "number": 22,
-      "state": "open",
-      "draft": true,
-      "ci": "success"
-    },
-    {
-      "number": 23,
-      "state": "open",
-      "draft": true,
-      "ci": "success",
-      "branch": "M67"
-    },
-    {
-      "number": 24,
-      "state": "open",
-      "draft": true,
-      "ci": "success",
-      "branch": "M68"
-    },
-    {
-      "number": 25,
-      "state": "open",
-      "draft": true,
-      "ci": "success",
-      "branch": "M69"
-    },
-    {
-      "number": 26,
-      "state": "open",
-      "draft": true,
-      "ci": "success",
-      "branch": "M70"
-    },
-    {
-      "number": 27,
-      "state": "open",
-      "draft": true,
-      "ci": "success",
-      "branch": "M71"
-    },
-    {
-      "number": 28,
-      "state": "open",
-      "draft": true,
-      "ci": "fast-success; engine-validation-in-progress",
-      "branch": "M72"
-    },
-    {
-      "number": 29,
-      "state": "open",
-      "draft": true,
-      "ci": "fast-in-progress; engine-validation-queued",
-      "branch": "M73"
-    },
-    {
-      "number": 30,
-      "state": "open",
-      "draft": true,
-      "ci": "fast-success; engine-validation-in-progress",
-      "branch": "M74"
-    },
-    {
-      "number": 31,
-      "state": "open",
-      "draft": true,
-      "ci": "fast-success; engine-validation-in-progress",
-      "branch": "M75"
-    },
-    {
-      "number": 43,
-      "state": "open",
-      "draft": true,
-      "branch": "M87",
-      "ci": "success"
-    },
-    {
-      "number": 48,
-      "state": "open",
-      "draft": true,
-      "branch": "M92",
-      "ci": "fast:success; engine:in_progress; milestone:success"
-    },
-    {
-      "number": 49,
-      "state": "open",
-      "draft": true,
-      "branch": "M93",
-      "ci": "fast:success; engine:in_progress; milestone:success"
-    },
-    {
-      "number": 50,
-      "state": "open",
-      "draft": true,
-      "branch": "M94",
-      "ci": "fast:success; engine:in_progress; milestone:success"
-    },
-    {
-      "number": 51,
-      "state": "open",
-      "draft": true,
-      "branch": "M95",
-      "ci": "fast:in_progress; engine:in_progress; milestone:in_progress"
-    },
-    {
-      "number": 52,
-      "state": "open",
-      "draft": true,
-      "branch": "M96",
-      "ci": "fast:in_progress; engine:in_progress; milestone:in_progress"
-    },
-    {
-      "number": 53,
-      "state": "open",
-      "draft": true,
-      "branch": "M97",
-      "ci": "fast:in_progress; engine:in_progress; milestone:in_progress"
-    },
-    {
-      "number": 54,
-      "state": "open",
-      "draft": true,
-      "branch": "M98",
-      "ci": "fast:queued; engine:queued; milestone:in_progress"
-    },
-    {
-      "number": 55,
-      "state": "open",
-      "draft": true,
-      "branch": "M99",
-      "ci": "fast:success; engine:in_progress; milestone:success"
-    },
-    {
-      "number": 56,
-      "state": "open",
-      "draft": true,
-      "branch": "M100",
-      "ci": "fast:success; engine:in_progress; milestone:success"
-    },
-    {
-      "number": 57,
-      "state": "open",
-      "draft": true,
-      "branch": "M101",
-      "ci": "success"
-    },
-    {
-      "number": 58,
-      "state": "open",
-      "draft": true,
-      "branch": "M102",
-      "ci": "success"
-    },
-    {
-      "number": 59,
-      "state": "open",
-      "draft": true,
-      "branch": "M103",
-      "ci": "success"
-    },
-    {
-      "number": 60,
-      "state": "open",
-      "draft": true,
-      "branch": "M104",
-      "ci": "success"
-    },
-    {
-      "number": 61,
-      "state": "open",
-      "draft": true,
-      "branch": "M105",
-      "ci": "success"
-    },
-    {
-      "number": 62,
-      "state": "open",
-      "draft": true,
-      "branch": "M106",
-      "ci": "success"
-    },
-    {
-      "number": 63,
-      "state": "open",
-      "draft": true,
-      "branch": "M107",
-      "ci": "success"
-    },
-    {
-      "number": 64,
-      "state": "open",
-      "draft": true,
-      "branch": "M108",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued; test-only Negate Attack fixture correction",
-      "head": "0c5774fb11a7bf101c491825ba0adaeebd708a83"
-    },
-    {
-      "number": 65,
-      "state": "open",
-      "draft": true,
-      "branch": "M109",
-      "ci": "success"
-    },
-    {
-      "number": 66,
-      "state": "open",
-      "draft": true,
-      "branch": "M110",
-      "ci": "success"
-    },
-    {
-      "number": 67,
-      "state": "open",
-      "draft": true,
-      "branch": "M111",
-      "ci": "success"
-    },
-    {
-      "number": 68,
-      "state": "open",
-      "draft": true,
-      "branch": "M112",
-      "ci": "success"
-    },
-    {
-      "number": 69,
-      "state": "open",
-      "draft": true,
-      "branch": "M113",
-      "ci": "success"
-    },
-    {
-      "number": 70,
-      "state": "open",
-      "draft": true,
-      "branch": "M114",
-      "ci": "success"
-    },
-    {
-      "number": 71,
-      "state": "open",
-      "draft": true,
-      "branch": "M115",
-      "ci": "success"
-    },
-    {
-      "number": 72,
-      "state": "open",
-      "draft": true,
-      "branch": "M116",
-      "ci": "success"
-    },
-    {
-      "number": 73,
-      "state": "open",
-      "draft": true,
-      "branch": "M117",
-      "ci": "success"
-    },
-    {
-      "number": 74,
-      "state": "open",
-      "draft": true,
-      "branch": "M118",
-      "ci": "success"
-    },
-    {
-      "number": 75,
-      "state": "open",
-      "draft": true,
-      "branch": "M119",
-      "ci": "cardBatchFast:success; engineValidation:success; milestone1000:success; extendedSoak:success",
-      "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019"
-    },
-    {
-      "number": 76,
-      "state": "open",
-      "draft": true,
-      "branch": "M120",
-      "ci": "all workflows success; npm test, audits and extended soak success",
-      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8"
-    },
-    {
-      "number": 77,
-      "state": "open",
-      "draft": true,
-      "branch": "M121",
-      "ci": "cardBatchFast:success; engineValidation:success; milestone1000:success; extendedSoak:success",
-      "head": "202ba319bd5c5c989a0a9819b222195763b104e7"
-    },
-    {
-      "number": 78,
-      "state": "open",
-      "draft": true,
-      "branch": "M122",
-      "ci": "all workflows success; npm test, audits and extended soak success",
-      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c"
-    },
-    {
-      "number": 79,
-      "state": "open",
-      "draft": true,
-      "branch": "M123",
-      "ci": "success",
-      "head": "c5436d3035bfde83c41aecd686aec0204addfd20"
-    },
-    {
-      "number": 80,
-      "state": "open",
-      "draft": true,
-      "branch": "M124",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success",
-      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883"
-    },
-    {
-      "number": 81,
-      "state": "open",
-      "draft": true,
-      "branch": "M125",
-      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
-      "ci": "success"
-    },
-    {
-      "number": 82,
-      "state": "open",
-      "draft": true,
-      "branch": "M126",
-      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
-      "ci": "engine-validation-failure: M126 fixture missing card 12482652 in physical seat 2; auxiliary notified"
-    },
-    {
-      "number": 83,
-      "state": "open",
-      "draft": true,
-      "branch": "M127",
-      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
-      "ci": "success"
-    },
-    {
-      "number": 84,
-      "state": "open",
-      "draft": true,
-      "branch": "M128",
-      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
-    },
-    {
-      "number": 85,
-      "state": "open",
-      "draft": true,
-      "branch": "M129",
-      "head": "282e88ce752c07023d77ee49da491cdb101af791",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:success"
-    },
-    {
-      "number": 86,
-      "state": "open",
-      "draft": true,
-      "branch": "M130",
-      "head": "c4baa1dfe6fc253af48d1c05ba25528293277c4d",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
-    },
-    {
-      "number": 87,
-      "state": "open",
-      "draft": true,
-      "branch": "M131",
-      "head": "6e01cf4591e398b7709e64c9adeaf9ab27f47534",
-      "ci": "cardBatchFast:success; engineValidation:queued; milestone1000:success"
-    },
-    {
-      "number": 88,
-      "state": "open",
-      "draft": true,
-      "branch": "M132",
-      "head": "f8c8b5148c1f3c2669bc835763a23dbdcdd66e80",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
-    },
-    {
-      "number": 89,
-      "state": "open",
-      "draft": true,
-      "branch": "M133",
-      "head": "6eba9628ec7c3e251be913110add8f69dabede13",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
-    },
-    {
-      "number": 102,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m146-mountain-global-2v2-field-modifier-20261113",
-      "head": "46c9ae23ed6b4eaab5bd40675312b490abe641f5",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
-    },
-    {
-      "number": 103,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m147-dragon-treasure-dark-energy-2v2-20261113",
-      "head": "2842ce250df53b7886e45b6a74e23d12ccf3c093",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
-    },
-    {
-      "number": 104,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m148-invigoration-earth-equip-2v2-20261113",
-      "head": "3d4ee7edd5858fd50c914323cde6bc8d767f2f50",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
-    },
-    {
-      "number": 105,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m149-field-spell-replacement-2v2-20261113",
-      "head": "4b881526bbe1f3bd1401548a717e051df16b8fa2",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:not-returned"
-    },
-    {
-      "number": 106,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m150-mst-destroys-equip-field-effects-2v2-20261113",
-      "head": "c4203bb3fbbcfc104ce464408f87be7840c9d073",
-      "ci": "cardBatchFast:queued; engineValidation:queued; milestone1000:queued"
-    },
-    {
-      "number": 107,
-      "state": "open",
-      "draft": true,
-      "branch": "M151",
-      "head": "caed37c93b07c12d7b166f12acf0c2b8135901c4",
-      "ci": "cardBatchFast:success; engineValidation:failure; milestone1000:success; extendedSoak:success; npmTest:7368/1"
-    },
-    {
-      "number": 112,
-      "state": "open",
-      "draft": true,
-      "branch": "M156",
-      "head": "6e123701809cd1e4bd2724b642cca54e5cafa4c4",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
-    },
-    {
-      "number": 113,
-      "state": "open",
-      "draft": true,
-      "branch": "M157",
-      "head": "77d8052211cb5fb37aea1a40aa58f6b80fbd3319",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
-    },
-    {
-      "number": 114,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m158-economic-spells-2v2-20261113",
-      "head": "958a1b36d5264b995d96e4f04d595236168c55e5",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
-    },
-    {
-      "number": 115,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m159-economic-spell-discord-ui-20261113",
-      "head": "58c72d2479b630c4ad2198bd23dd331af15ad7ff",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "cardBatchFast:success; engineValidation:in_progress; milestone1000:success"
-    },
-    {
-      "number": 116,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m160-economic-spell-discord-interaction-20261113",
-      "head": "83a2fcff7a8265234c1fcd95a14e5daff4cb4335",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "cardBatchFast:in_progress; engineValidation:in_progress; milestone1000:success"
-    },
-    {
-      "number": 117,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m161-mirror-force-2v2-team-wide-20261114",
-      "head": "6ca3bc11c6a448d76b8e6a9cc728573a0c46e977",
-      "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
-    },
-    {
-      "number": 118,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m162-dark-hole-2v2-global-field-20261114",
-      "head": "0275807d28925ee2fd52d339762b7b6fe41c9d4a",
-      "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
-    },
-    {
-      "number": 119,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m163-bottomless-trap-hole-2v2-physical-owner-20261114",
-      "head": "b933b33a981ab5fd6ce83f9cc7a7dd2eab46f6d5",
-      "ci": "cardBatchFast:success; npmTest:success; milestone1000:success; engineValidation:in_progress"
-    },
-    {
-      "number": 149,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m194-ritual-searchers-trigger-2v2-20261114",
-      "head": "d4243887d4c373a05885d6812805ad7317947421",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast-success; milestone-success; engine-validation-failure"
-    },
-    {
-      "number": 150,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m195-flip-searchers-physical-deck-2v2-20261114",
-      "head": "dda71886e0393e2b5cb8b27776d7d5cf42b22b1c",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast-success; milestone-success; engine-validation-failure"
-    },
-    {
-      "number": 151,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m196-needle-worm-opponent-deck-mill-2v2-20261114",
-      "head": "5e3d68b9aa30fb43517a1412ac77f1ad39d19f95",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast-success; milestone-success; engine-validation-failure"
-    },
-    {
-      "number": 152,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m197-position-change-triggers-2v2-20261114",
-      "head": "2b3f7246db317b56640f2af7e1bea84d1a94bc91",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast-success; milestone-success; engine-validation-failure"
-    },
-    {
-      "number": 153,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m198-summon-burn-draw-triggers-2v2-20261114",
-      "head": "7f0928b53935728a31850fa5f0943cdbbec8495f",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast-success; milestone-success; engine-validation-failure"
-    },
-    {
-      "number": 154,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
-      "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast:success; milestone:success; npmTest:success; extendedSoak:success; engine:success"
-    },
-    {
-      "number": 155,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
-      "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast:in_progress; milestone:in_progress; npmTest:pending; extendedSoak:in_progress; engine:in_progress"
-    },
-    {
-      "number": 156,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
-      "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast:success; milestone:success; npmTest:success; extendedSoak:in_progress; engine:in_progress"
-    },
-    {
-      "number": 157,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
-      "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast:success; milestone:success; npmTest:success; extendedSoak:success; engine:success"
-    },
-    {
-      "number": 158,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
-      "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast:success; milestone:success; npmTest:success; extendedSoak:success; engine:success"
-    },
-    {
-      "number": 159,
-      "state": "open",
-      "draft": true,
-      "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
-      "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
-      "base": "feat/work-m71-ci-branch-routing-20261112",
-      "ci": "fast:success; milestone:success; npmTest:in_progress; extendedSoak:in_progress; engine:in_progress"
+      "mission": "M228",
+      "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+      "head": "ff345f04ddfc0ac42c6ec7105a66c9cd0bfdca11",
+      "pr": 184,
+      "file": "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
+      "cards": [
+        "Amazoness Archer",
+        "Hysteric Fairy"
+      ],
+      "tests": 5,
+      "state": "open",
+      "draft": true,
+      "ci": {
+        "pr": 184,
+        "run": 43715110770,
+        "cardBatchFast": "success",
+        "verifiedCatalogPlan": "success",
+        "npmTest": "passed; later acceptance/audit steps still running",
+        "engineValidation": "in_progress",
+        "extendedSoak": "success"
+      }
+    },
+    {
+      "mission": "M229",
+      "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+      "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+      "pr": 185,
+      "file": "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
+      "cards": [
+        "Old Vindictive Magician",
+        "Gale Lizard"
+      ],
+      "tests": 6,
+      "state": "open",
+      "draft": true,
+      "ci": {
+        "pr": 185,
+        "run": 43715178487,
+        "cardBatchFast": "success",
+        "verifiedCatalogPlan": "success",
+        "npmTest": "passed; later acceptance/audit steps still running",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "mission": "M230",
+      "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+      "head": "afe57af2f562cdfa5e664df45b2725c15af74ba4",
+      "pr": 186,
+      "file": "tests/tagClassicFlipGroupDestruction2v2.test.cjs",
+      "cards": [
+        "4-Starred Ladybug of Doom",
+        "Nobleman-Eater Bug"
+      ],
+      "tests": 3,
+      "state": "open",
+      "draft": true,
+      "ci": {
+        "pr": 186,
+        "run": 43715762042,
+        "cardBatchFast": "success",
+        "verifiedCatalogPlan": "success",
+        "npmTest": "passed; repeat-acceptance/critical-acceptance still running",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress"
+      }
     }
   ],
   "ci": {
@@ -3173,7 +2572,7 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Concluir npm test/Engine Validation/soaks de M228–M230; corrigir somente as próprias fixtures; depois liberar as três branches ao auxiliar.",
+  "nextTask": "Auxiliar: monitorar as PRs #184–#186 e, se necessário, corrigir somente os três arquivos de teste nas respectivas branches. Próximo Work: revisar M61/handoff e escolher uma das 31 identidades pendentes após liberação do runtime; não alterar reservas de terceiros.",
   "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
   "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
   "sharedHeadBeforeClaim": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
@@ -4640,7 +4039,7 @@
   "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
-  "endedAt": "2026-11-14T19:53:13.875-03:00",
+  "endedAt": "2026-11-15T09:52:13-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -4696,48 +4095,48 @@
     "allowed": "Monitorar CI e corrigir somente arquivos de teste nas próprias branches.",
     "forbidden": "Não alterar M61/M151, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
   },
-  "scopeReleasedToAuxiliary": [
-    {
-      "mission": "M211",
-      "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
-      "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
-      "pr": 166,
-      "files": [
-        "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
-      ],
-      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
-    },
-    {
-      "mission": "M212",
-      "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
-      "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
-      "pr": 167,
-      "files": [
-        "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
-      ],
-      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
-    },
-    {
-      "mission": "M213",
-      "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
-      "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
-      "pr": 168,
-      "files": [
-        "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
-      ],
-      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
-    },
-    {
-      "mission": "M214",
-      "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
-      "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
-      "pr": 169,
-      "files": [
-        "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
-      ],
-      "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
-    }
-  ],
+  "scopeReleasedToAuxiliary": {
+    "status": "released-to-auxiliary-monitor-ci",
+    "releasedAt": "2026-11-15T09:52:13-03:00",
+    "allowed": [
+      {
+        "pr": 184,
+        "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+        "files": [
+          "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+        ],
+        "permission": "monitor CI and edit only this test file"
+      },
+      {
+        "pr": 185,
+        "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+        "files": [
+          "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
+        ],
+        "permission": "monitor CI and edit only this test file"
+      },
+      {
+        "pr": 186,
+        "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+        "files": [
+          "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+        ],
+        "permission": "monitor CI and edit only this test file"
+      }
+    ],
+    "prohibited": [
+      "runtime",
+      "catalog batches",
+      "certificates",
+      "coordination reservations of other agents",
+      "player data",
+      "inventories",
+      "persistent database",
+      "main",
+      "merge",
+      "deploy"
+    ]
+  },
   "lastCoordinationRefreshAt": "2026-11-15T06:15:00-03:00",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
@@ -4891,47 +4290,7 @@
       "extendedSoak": "in_progress"
     }
   },
-  "activeWork": {
-    "runId": "work-20261115T092946-0300",
-    "owner": "Work",
-    "mission": "M228",
-    "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
-    "state": "active",
-    "startedAt": "2026-11-15T09:29:46-03:00",
-    "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
-    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
-    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtReservation": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
-    "reservedFiles": [
-      "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
-      "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
-      "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
-    ],
-    "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção.",
-    "additionalBranches": [
-      {
-        "mission": "M229",
-        "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
-        "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
-        "pr": 185,
-        "files": [
-          "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
-        ],
-        "state": "active; CI running"
-      },
-      {
-        "mission": "M230",
-        "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
-        "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
-        "pr": 186,
-        "files": [
-          "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
-        ],
-        "state": "active; CI running"
-      }
-    ]
-  },
+  "activeWork": null,
   "sharedHeadAtStart": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
   "partialHandoffRequest": {
     "pr": 17,
@@ -4942,20 +4301,21 @@
     "requestedAt": "2026-11-14T09:18:10-03:00",
     "scope": "partial file-only handoff; no changes until release"
   },
-  "lastCheckpointAt": "2026-11-15T05:55:34-03:00",
-  "reservationReleased": false,
+  "lastCheckpointAt": "2026-11-15T09:52:13-03:00",
+  "reservationReleased": true,
   "expectedHeadForCoordinationCommit": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
   "lastRunSummary": "M211 (#166) e M212 (#167) concluíram toda a CI com sucesso; M213 (#168) falhou em uma asserção de menu Discord (7.367/7.368) e recebeu pedido de transferência; M214 (#169) adiciona Chaos Necromancer ao Cemitério compartilhado, com Card Batch e Milestone aprovados e Engine/soak em andamento. Zero novas certificações ou inventários.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
   "catalogAtEnd": {
-    "sharedCertificates": 969,
-    "developmentCertificates": 1014,
-    "delta": 45,
-    "remainingTo1000": 31,
-    "automaticCertifications": 0,
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "historical": 1962,
+    "pending": 993,
+    "identityBlocked": 27,
     "newCertifications": 0,
-    "inventoryGranted": 0
+    "automaticCertifications": 0
   },
   "newCertifications": 0,
   "inventoryGranted": 0,
@@ -5219,7 +4579,7 @@
       "failure": null
     }
   ],
-  "updatedAt": "2026-11-15T09:41:19-03:00",
+  "updatedAt": "2026-11-15T09:52:13-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -5303,7 +4663,7 @@
       "owner": "Work",
       "mission": "M228",
       "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
-      "state": "active",
+      "state": "released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-15T09:29:46-03:00",
       "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
       "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
@@ -5324,20 +4684,19 @@
           "pr": 185,
           "files": [
             "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
-          ],
-          "state": "active; CI running"
+          ]
         },
         {
           "mission": "M230",
           "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
-          "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+          "head": "afe57af2f562cdfa5e664df45b2725c15af74ba4",
           "pr": 186,
           "files": [
             "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
-          ],
-          "state": "active; CI running"
+          ]
         }
-      ]
+      ],
+      "releasedAt": "2026-11-15T09:52:13-03:00"
     }
   ],
   "previousCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
@@ -5346,7 +4705,7 @@
     "owner": "Work",
     "mission": "M228",
     "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-15T09:29:46-03:00",
     "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
@@ -5367,20 +4726,19 @@
         "pr": 185,
         "files": [
           "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
-        ],
-        "state": "active; CI running"
+        ]
       },
       {
         "mission": "M230",
         "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
-        "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+        "head": "afe57af2f562cdfa5e664df45b2725c15af74ba4",
         "pr": 186,
         "files": [
           "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
-        ],
-        "state": "active; CI running"
+        ]
       }
-    ]
+    ],
+    "releasedAt": "2026-11-15T09:52:13-03:00"
   },
   "runRegistration": {
     "runId": "work-20261115T092946-0300",
@@ -5391,5 +4749,41 @@
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "expectedSharedHead": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
     "registeredAt": "2026-11-15T09:29:46-03:00"
+  },
+  "elapsedSeconds": 1347,
+  "elapsedMinutes": 22.45,
+  "effectiveWorkMinutes": 15,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "sharedHeadBeforeFinalCheckpointCommit": "0ec27be84ec363406dd1061cfdcc0b89ec0a031f",
+  "mainHeadAtEnd": "713f02afc862ddb17411706c92c67624eaa1803f",
+  "productionAtEnd": {
+    "mainHead": "713f02afc862ddb17411706c92c67624eaa1803f",
+    "sharedHeadBeforeCheckpoint": "0ec27be84ec363406dd1061cfdcc0b89ec0a031f",
+    "mainWorkflowDirectory": "404 Not Found",
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "deploymentWorkflow": "not found",
+    "deploymentsApi": "not available through current GitHub connector allowlist",
+    "hosting": "not independently verified",
+    "discordLiveValidation": false,
+    "merge": false,
+    "deploy": false,
+    "inventoryGrants": 0,
+    "persistentDatabaseChanged": false
+  },
+  "handoffStatus": {
+    "status": "No conflicting file handoff granted or required for M228–M230; all changes are new test files.",
+    "blocked": [
+      "M61 / PR #17: no response to repeated partial handoff requests; reserved runtime files untouched.",
+      "M118 / PR #74: no response; src/tagDuel.ts and its reserved test untouched.",
+      "M151 / PR #107: no response; reserved Fusion tests untouched.",
+      "M153 / PR #109: target-filter runtime fix remains reserved; untouched."
+    ]
   }
 }
