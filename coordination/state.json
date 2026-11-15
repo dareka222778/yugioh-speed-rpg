@@ -12,7 +12,8 @@
     "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
     "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
     "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
-    "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs"
+    "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+    "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261115T092946-0300.json",
   "previousRunId": "work-20261115T055534-0300",
@@ -34,7 +35,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -1783,6 +1784,18 @@
       ],
       "state": "active",
       "priority": "P1 — validar Fairy Meteor Crush no 2v2 clássico: Equip Spell equipada por um participante ativo em monstro fisicamente pertencente ao parceiro, piercing contra Defesa, dano à equipe correta, preservação de UIDs e zonas compartilhadas."
+    },
+    {
+      "mission": "M235",
+      "branch": "feat/work-m235-dd-assailant-banish-2v2-20261115",
+      "head": "98c68f31ffee0169b1143ea5456530b4bfbdd368",
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "98c68f31ffee0169b1143ea5456530b4bfbdd368",
+      "scope": [
+        "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs"
+      ],
+      "state": "active",
+      "priority": "P1 — validar D.D. Assailant no 2v2 clássico: quando destruída por batalha, banir a si e ao atacante de seus respectivos Cemitério/banidos de equipe, preservando UID físico do parceiro inativo; controle negativo quando D.D. Assailant sobrevive."
     }
   ],
   "handoffRequest": {
@@ -2623,7 +2636,7 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Concluir M231/M232 sem tocar em reservas alheias; desenvolver M233 Needle Ball e M234 Fairy Meteor Crush em arquivos de teste novos; acompanhar CI e registrar checkpoint/soltar somente reservas próprias.",
+  "nextTask": "Concluir CI M233/M234; iniciar M235 D.D. Assailant 2v2 em arquivo novo; resolver handoff/CI pendente M231/M232 sem tocar em reservas de terceiros.",
   "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
   "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
   "sharedHeadBeforeClaim": "d60d829cdfb74f3434e06f4c75cece08386a7fa5",
@@ -2833,6 +2846,16 @@
         "baseSha": "fb0d92eb3d88dbdb363006b0262234632152d874",
         "scope": [
           "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs"
+        ],
+        "state": "active"
+      },
+      {
+        "mission": "M235",
+        "branch": "feat/work-m235-dd-assailant-banish-2v2-20261115",
+        "base": "feat/rea-engine-recovery-20261026",
+        "baseSha": "98c68f31ffee0169b1143ea5456530b4bfbdd368",
+        "scope": [
+          "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs"
         ],
         "state": "active"
       }
@@ -4037,7 +4060,7 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
   "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
-  "sharedHeadBeforeStateUpdate": "fb0d92eb3d88dbdb363006b0262234632152d874",
+  "sharedHeadBeforeStateUpdate": "98c68f31ffee0169b1143ea5456530b4bfbdd368",
   "endedAt": "2026-11-15T09:52:13-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
@@ -4347,7 +4370,7 @@
   },
   "lastCheckpointAt": "2026-11-15T14:25:21-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "fb0d92eb3d88dbdb363006b0262234632152d874",
+  "expectedHeadForCoordinationCommit": "98c68f31ffee0169b1143ea5456530b4bfbdd368",
   "lastRunSummary": "M211 (#166) e M212 (#167) concluíram toda a CI com sucesso; M213 (#168) falhou em uma asserção de menu Discord (7.367/7.368) e recebeu pedido de transferência; M214 (#169) adiciona Chaos Necromancer ao Cemitério compartilhado, com Card Batch e Milestone aprovados e Engine/soak em andamento. Zero novas certificações ou inventários.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -4952,6 +4975,24 @@
         "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs"
       ],
       "conflictPolicy": "Somente arquivo de teste novo e independente. Não tocar em M215–M220, M225–M227, M231/M232, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261115T142521-0300-M235",
+      "runId": "work-20261115T142521-0300",
+      "owner": "Work",
+      "mission": "M235",
+      "priority": "P1 — validar D.D. Assailant no 2v2 clássico: quando destruída por batalha, banir a si e ao atacante de seus respectivos Cemitério/banidos de equipe, preservando UID físico do parceiro inativo; controle negativo quando D.D. Assailant sobrevive.",
+      "state": "active",
+      "startedAt": "2026-11-15T14:53:17-03:00",
+      "branch": "feat/work-m235-dd-assailant-banish-2v2-20261115",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "98c68f31ffee0169b1143ea5456530b4bfbdd368",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "98c68f31ffee0169b1143ea5456530b4bfbdd368",
+      "reservedFiles": [
+        "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente novo arquivo de teste M235. Não tocar em M215–M220, M225–M227, M231/M232/M233/M234, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
     }
   ]
 }
