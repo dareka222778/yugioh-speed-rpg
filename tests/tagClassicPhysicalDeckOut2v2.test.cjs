@@ -67,8 +67,10 @@ function endTurn(state){
 }
 function emptyPhysicalDeck(state,seat){
   const physical=holder(state,seat);
+  const startingHand=tag.tagMemberHand(state,member(seat)).length;
+  assert.equal(physical.deck.length+startingHand,20,'the physical participant must begin with exactly twenty cards');
   const exhausted=physical.deck.splice(0);
-  assert.equal(exhausted.length,15,'the starting hand of five leaves exactly fifteen cards in each 20-card Deck');
+  assert.equal(exhausted.length,20-startingHand,'only the physical participant remaining Deck is exhausted');
   state.core.players[seat%2].grave.push(...exhausted);
   assert.equal(holder(state,seat).deck.length,0);
   return exhausted;
