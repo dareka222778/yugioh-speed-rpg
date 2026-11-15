@@ -37,16 +37,18 @@
     "Trap Master pode selecionar Trap da equipe adversária e destrói o UID físico correto.",
     "Set Spell selecionada permanece na zona original e sua identidade não vaza.",
     "Field Zone não é elegível para inspeção de Trap.",
-    "Decks 20, mão 6 com descarte no fim, Extra 5, zonas 3+3, 80 UIDs e restauração JSON."
+    "Decks 20, mão 6 com descarte no fim, Extra 5, zonas 3+3, 80 UIDs e restauração JSON.",
+    "Armed Ninja usa a mesma inspeção oculta para Spell; Set Trap de tipo incorreto deve permanecer face-down sem revelar seu nome na projeção pública."
   ],
   "tests": [
     "tests/tagClassicTrapMasterHiddenBackrow2v2.test.cjs"
   ],
   "completedBlocks": [
-    "Nova suíte 2v2 com duas resoluções: destruição de Trap e retenção de Spell Set de tipo incorreto."
+    "Nova suíte 2v2 com duas resoluções: destruição de Trap e retenção de Spell Set de tipo incorreto.",
+    "Ampliei a regressão para Armed Ninja (inspectSetAs=spell) e identifiquei Crimson Ninja e Reaper of the Cards como consumidores do mesmo caminho de inspeção."
   ],
   "lastUpdatedAt": "2026-11-15T15:43:09-03:00",
-  "currentHead": "82a2a63ec764c308997e761a5a6c2839e3fdbb25",
+  "currentHead": "dac05ffdcabbc99e4e36fffab83e9b170ceb0570",
   "pullRequest": {
     "number": 195,
     "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/195",
@@ -71,7 +73,9 @@
     },
     "milestone1000": {
       "status": "success"
-    }
+    },
+    "latestHead": "dac05ffdcabbc99e4e36fffab83e9b170ceb0570",
+    "latestRunStatus": "in_progress"
   },
   "finding": {
     "severity": "privacy leak",
@@ -80,7 +84,31 @@
       "src/tagDuel.ts:56 copies s.core.log into publicTagDuel"
     ],
     "requestedHandoff": "src/singleCardOperation.ts and only if required private log projection",
-    "fixDirection": "private reveal/event for controller or remove hidden card name from public log until private channel exists"
+    "fixDirection": "private reveal/event for controller or remove hidden card name from public log until private channel exists",
+    "affectedCards": [
+      {
+        "id": "46461247",
+        "name": "Trap Master",
+        "inspectSetAs": "trap"
+      },
+      {
+        "id": "09076207",
+        "name": "Armed Ninja",
+        "inspectSetAs": "spell"
+      },
+      {
+        "id": "14618326",
+        "name": "Crimson Ninja",
+        "inspectSetAs": "trap",
+        "affectedBySamePath": true
+      },
+      {
+        "id": "33066139",
+        "name": "Reaper of the Cards",
+        "inspectSetAs": "trap",
+        "affectedBySamePath": true
+      }
+    ]
   },
   "counts": {
     "sharedCertified": 969,
@@ -92,5 +120,29 @@
     "No merge, deploy, or production verification."
   ],
   "nextTask": "Obtain explicit handoff for singleCardOperation.ts; implement a private inspection event or safe generic public log, then rerun full Engine Validation and soak.",
-  "release": "Only the new test file is in scope; no runtime/catalog/certificate files modified."
+  "release": "Only the new test file is in scope; no runtime/catalog/certificate files modified.",
+  "targetCards": [
+    {
+      "id": "46461247",
+      "name": "Trap Master",
+      "inspectSetAs": "trap"
+    },
+    {
+      "id": "09076207",
+      "name": "Armed Ninja",
+      "inspectSetAs": "spell"
+    },
+    {
+      "id": "14618326",
+      "name": "Crimson Ninja",
+      "inspectSetAs": "trap",
+      "affectedBySamePath": true
+    },
+    {
+      "id": "33066139",
+      "name": "Reaper of the Cards",
+      "inspectSetAs": "trap",
+      "affectedBySamePath": true
+    }
+  ]
 }
