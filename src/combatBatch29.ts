@@ -1,6 +1,7 @@
 import type {Card} from './cardCatalog';
 import type {Effect} from './effectDefinitions';
 import type {MonsterDefinition} from './monsterEffects';
+import {monsters as m46_amazoness_swords_womanMonsters} from './generated/m46-amazoness-swords-woman';
 export const combatBatch29:readonly Card[]=[
   {
     "id": "21015833",
@@ -563,6 +564,7 @@ export const combatEffects29:Record<string,Effect>={
   }
 };
 export const combatMonsters29:Record<string,MonsterDefinition>={
+ ...m46_amazoness_swords_womanMonsters,
   "21015833": {
     "effect": {
       "trigger": "continuous",
