@@ -23,7 +23,7 @@ for(const guardian of GUARDIANS){
   assert.equal(getMonsterDefinition(guardian.id)?.activation.window,'opposingDamageCalculation',
     guardian.name+' must activate during opposing damage calculation');
 }
-assert.equal(getPlayableCard(AXE_RAIDER)?.atk,1700,'Axe Raider must remain weaker than every Guardian');
+assert.equal(getPlayableCard(AXE_RAIDER)?.atk,1700,'Axe Raider must be weaker than every Guardian');
 
 const normalIds=[...new Set(tag.tagNormalCardIds)]
   .filter(id=>id!==AXE_RAIDER&&getPlayableCard(id)?.kind==='monster');
@@ -39,11 +39,14 @@ function game(guardianId,seed){
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),
     name:'M211 Seat '+seat,
-    cards:deck(seat===2?[AXE_RAIDER,AXE_RAIDER,AXE_RAIDER]:seat===3?[guardianId]:[])
+    cards:deck(seat===2?[AXE_RAIDER,AXE_RAIDER]:seat===3?[guardianId]:[])
   }));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed});
   state.core.rulesVersion='speed-rpg-v2';
   state.core.turn=3;
+  // Two successful Guardian activations must be observable without ending the test duel.
+  state.core.players[0].lp=6000;
+  state.core.players[1].lp=6000;
   return state;
 }
 function holder(state,seat){
@@ -105,20 +108,6 @@ function declareAttack(state,attacker,guardian){
   assert.ok(action,'the active teammate must be able to attack the partner-owned Guardian on the shared field');
   return tag.stepTagDuel(state,actor,action);
 }
-function endCurrentTurn(state){
-  const actor=activeMember(state);
-  const action=tag.tagActions(state,actor).find(candidate=>candidate.kind==='end');
-  assert.ok(action,'the active teammate must have a legal End Phase action');
-  return settle(tag.stepTagDuel(state,actor,action));
-}
-function flipSummon(state,guardian){
-  const actor=activeMember(state);
-  const action=tag.tagActions(state,actor).find(candidate=>
-    candidate.kind==='position'&&candidate.card===guardian.uid&&candidate.mode==='flip'
-  );
-  assert.ok(action,'the active teammate must be able to Flip Summon the partner-owned face-down Guardian');
-  return tag.stepTagDuel(state,actor,action);
-}
 function reachGuardianWindow(state,guardianUid){
   const stages=[];
   for(let guard=0;state.core.phase==='response';guard++){
@@ -134,24 +123,24 @@ function reachGuardianWindow(state,guardianUid){
   }
   return {state,activation:undefined,stages};
 }
-function activateGuardian(state,guardian,attacker,expectedDefender){
+function activateGuardian(state,guardian,attacker){
   const window=reachGuardianWindow(state,guardian.uid);
   state=window.state;
   assert.ok(window.activation,'a face-up Guardian must offer its Quick Effect during damage calculation');
   assert.ok(window.stages.includes('calculation'),'the Guardian effect must be restricted to damage calculation');
   assert.equal(state.core.pending.stage,'calculation');
+  assert.equal(fieldMonster(state,guardian.uid)?.faceUp,true,
+    'a Set Guardian is flipped face-up before its damage-calculation Quick Effect is offered');
   const defender=tag.tagDecisionMember(state);
   assert.equal(defender.team,1,'only the defending team receives the Guardian response priority');
-  if(expectedDefender)assert.equal(defender.id,expectedDefender);
+  assert.equal(defender.id,member(1),'the active defender teammate, not the inactive physical owner, receives priority');
   assert.equal(window.activation.target,attacker.uid,'the effect must target the current attacking monster');
   assert.deepEqual(window.activation.discards,[],'Guardian Zero Attack has no discard cost');
-  if(defender.id!==member(3)){
-    assert.deepEqual(tag.tagActions(state,member(3)),[],
-      'the inactive physical owner cannot activate the Guardian for the active teammate');
-    const unchanged=JSON.stringify(state);
-    assert.throws(()=>tag.stepTagDuel(state,member(3),window.activation),/Aguarde a vez do participante ativo\./);
-    assert.equal(JSON.stringify(state),unchanged,'a rejected inactive-seat action must not mutate the battle chain');
-  }
+  assert.deepEqual(tag.tagActions(state,member(3)),[],
+    'the inactive physical owner cannot activate the Guardian for the active teammate');
+  const unchanged=JSON.stringify(state);
+  assert.throws(()=>tag.stepTagDuel(state,member(3),window.activation),/Aguarde a vez do participante ativo\./);
+  assert.equal(JSON.stringify(state),unchanged,'a rejected inactive-seat action must not mutate the battle chain');
   return settle(tag.stepTagDuel(state,defender.id,window.activation));
 }
 function fieldMonster(state,uid){
@@ -161,7 +150,6 @@ function setup(guardianId,seed){
   let state=game(guardianId,seed);
   const before=inventorySnapshot(state);
   const attackers=[
-    deploy(state,2,AXE_RAIDER),
     deploy(state,2,AXE_RAIDER),
     deploy(state,2,AXE_RAIDER)
   ];
@@ -174,25 +162,24 @@ function setup(guardianId,seed){
 }
 
 for(const guardianSpec of GUARDIANS){
-  test(guardianSpec.name+' regains Guardian Zero Attack only after being set and legally Flip Summoned by its active teammate',()=>{
+  test(guardianSpec.name+' resets its once-while-face-up Quick Effect after being Set and attacked again',()=>{
     const {state:initial,before,attackers,guardian}=setup(guardianSpec.id,'m211-reset-'+guardianSpec.id);
     let state=startBattle(initial);
 
-    // First use consumes the face-up activation while the active defender is the Guardian owner's partner.
+    // The first attack consumes the face-up use while seat 1 controls the defending team's response.
     state=declareAttack(state,attackers[0],guardian);
     assert.equal(state.core.phase,'response','the first attack must open a response sequence');
-    state=activateGuardian(state,guardian,attackers[0],member(1));
+    state=activateGuardian(state,guardian,attackers[0]);
     assert.equal(fieldMonster(state,guardian.uid)?.guardianUsed,true,'the first activation must consume the face-up use');
-    assert.equal(state.core.players[0].lp,4000-guardianSpec.atk,
+    assert.equal(state.core.players[0].lp,6000-guardianSpec.atk,
       'the attacking team takes battle damage from the Guardian after its attacker is reduced to zero');
-    assert.equal(state.core.players[1].lp,4000,'the defending team takes no battle damage');
+    assert.equal(state.core.players[1].lp,6000,'the defending team takes no battle damage');
     assert.ok(state.core.players[0].grave.some(card=>card.uid===attackers[0].uid&&card.id===AXE_RAIDER),
       'the zero-ATK partner-owned attacker is destroyed by battle into the correct shared Graveyard');
     assert.ok(fieldMonster(state,guardian.uid),'the Guardian survives its first protected battle');
 
-    // Exercise the exact runtime transition used by Book of Moon and position-changing effects.
+    // This is the exact runtime transition used by Book of Moon and position-changing effects.
     const currentGuardian=fieldMonster(state,guardian.uid);
-    assert.ok(currentGuardian);
     turnMonsterFaceDown(currentGuardian);
     assert.equal(currentGuardian.faceUp,false);
     assert.equal(currentGuardian.position,'def');
@@ -203,44 +190,24 @@ for(const guardianSpec of GUARDIANS){
     assert.ok(!hiddenProjection.includes(guardian.uid),'a Set Guardian UID must remain hidden in the public projection');
     assert.doesNotThrow(()=>tag.assertTagDuel(state));
 
-    // A second attack while Set proves the Quick Effect is unavailable and does not reveal the card.
+    // Attacking a Set monster flips it face-up before damage calculation; the reset Quick Effect is available again.
     state=declareAttack(state,attackers[1],guardian);
-    const hiddenWindow=reachGuardianWindow(state,guardian.uid);
-    assert.ok(hiddenWindow.stages.includes('calculation'));
-    assert.equal(hiddenWindow.activation,undefined,'a face-down Guardian cannot activate its Quick Effect');
-    state=hiddenWindow.state;
-    assert.equal(state.core.phase,'battle','the attack resolves normally without a hidden Guardian activation');
-    assert.equal(fieldMonster(state,guardian.uid)?.faceUp,false,'the Guardian remains Set after the attack');
-    assert.ok(fieldMonster(state,attackers[1].uid),'Axe Raider survives attacking a higher-DEF Set Guardian');
-    assert.equal(state.core.players[0].lp,4000-guardianSpec.atk,'the Set Guardian causes no extra battle damage');
-    assert.equal(state.core.players[1].lp,4000,'the defending team remains undamaged');
-    assert.doesNotThrow(()=>tag.assertTagDuel(state));
-
-    // The next turn belongs to seat 1, which may Flip Summon the physical seat 3 Guardian.
-    state=endCurrentTurn(state);
-    assert.equal(state.core.turn,4);
-    assert.equal(activeMember(state),member(1),'the defending partner must receive the next turn');
-    state=flipSummon(state,guardian);
-    assert.equal(fieldMonster(state,guardian.uid)?.faceUp,true,'the legal Flip Summon reveals the Guardian');
-    assert.equal(fieldMonster(state,guardian.uid)?.position,'atk','Flip Summon places the Guardian face-up in Attack Position');
-    assert.equal(fieldMonster(state,guardian.uid)?.guardianUsed,undefined,
-      'the Guardian remains eligible after the face-down reset and Flip Summon');
-    assert.doesNotThrow(()=>tag.assertTagDuel(state));
-
-    // The opposing active seat rotates to seat 2; it attacks with the third partner-owned Axe Raider.
-    state=endCurrentTurn(state);
-    assert.equal(state.core.turn,5);
-    assert.equal(activeMember(state),member(2));
-    state=startBattle(state);
-    state=declareAttack(state,attackers[2],guardian);
-    state=activateGuardian(state,guardian,attackers[2],member(1));
+    const resetWindow=reachGuardianWindow(state,guardian.uid);
+    assert.ok(resetWindow.stages.includes('calculation'),'the second attack must reach damage calculation');
+    assert.ok(resetWindow.activation,
+      'after the face-down transition, the attacked Guardian is revealed and its reset Quick Effect is available again');
+    assert.equal(fieldMonster(resetWindow.state,guardian.uid)?.faceUp,true,
+      'the Set Guardian is revealed before the damage-calculation response');
+    assert.equal(fieldMonster(resetWindow.state,guardian.uid)?.guardianUsed,undefined,
+      'the face-down transition reset the previous use before the second activation');
+    state=activateGuardian(resetWindow.state,guardian,attackers[1]);
     assert.equal(fieldMonster(state,guardian.uid)?.guardianUsed,true,
-      'the same face-up Guardian can consume its reset use again');
-    assert.ok(state.core.players[0].grave.some(card=>card.uid===attackers[2].uid&&card.id===AXE_RAIDER),
-      'the second zero-ATK attacker is destroyed after the reset effect activates');
-    assert.equal(state.core.players[0].lp,4000-(2*guardianSpec.atk),
+      'the second activation consumes the reset face-up use again');
+    assert.ok(state.core.players[0].grave.some(card=>card.uid===attackers[1].uid&&card.id===AXE_RAIDER),
+      'the second zero-ATK attacker is destroyed by battle after the reset effect activates');
+    assert.equal(state.core.players[0].lp,6000-(2*guardianSpec.atk),
       'the attacking team receives the Guardian battle damage on both successful activations');
-    assert.equal(state.core.players[1].lp,4000,'the defending team takes no battle damage');
+    assert.equal(state.core.players[1].lp,6000,'the defending team takes no battle damage');
     assert.equal(fieldMonster(state,guardian.uid)?.faceUp,true,'the Guardian remains face-up after the second activation');
     assert.doesNotThrow(()=>tag.assertTagDuel(state));
     assertConserved(state,before);
