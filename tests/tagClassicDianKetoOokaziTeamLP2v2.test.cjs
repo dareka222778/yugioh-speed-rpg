@@ -141,13 +141,16 @@ for(const entry of CASES){
 
 for(const entry of CASES){
   test(entry.name+' can also be activated from the rotated active partner physical hand',()=>{
-    const {state:initial,spell,before,hands,decks}=setup(entry,2);
+    const {state:initial,spell,before}=setup(entry,2);
     let state=endCurrentTurn(initial);
     assert.equal(state.core.turn,4);
     assert.equal(tag.tagDecisionMember(state).id,member(1),'the opposing physical seat acts between partners');
     state=endCurrentTurn(state);
     assert.equal(state.core.turn,5);
     assert.equal(tag.tagDecisionMember(state).id,member(2),'the partner seat 2 must receive the next team turn');
+    // Snapshot after normal turn-start draws so only the Spell activation is measured below.
+    const {hands,decks}=snapshots(state);
+    assertPrivateHands(state,hands);
     const action=tag.tagActions(state,member(2)).find(candidate=>
       candidate.kind==='spell'&&candidate.card===spell.uid
     );
