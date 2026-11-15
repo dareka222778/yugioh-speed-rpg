@@ -4,8 +4,8 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-15T14:53:17-03:00",
-  "nextScheduledAt": "2026-11-15T19:30:00-03:00",
+  "lastActivityAt": "2026-11-15T19:04:42.934Z",
+  "nextScheduledAt": "2026-11-15T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -14,7 +14,9 @@
     "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
     "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
     "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
-    "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs"
+    "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+    "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+    "tests/tagClassicSharedZoneCapacity2v2.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261115T092946-0300.json",
   "previousRunId": "work-20261115T055534-0300",
@@ -36,7 +38,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -5034,6 +5036,44 @@
         "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs"
       ],
       "conflictPolicy": "Somente novo arquivo de teste M236. Não tocar em M215–M220, M225–M227, M231–M235, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261115T142521-0300-M240",
+      "runId": "work-20261115T142521-0300",
+      "owner": "Work",
+      "mission": "M240",
+      "priority": "P1 — validar a regra de mão 6 no fim do turno em 2v2 clássico: o assento ativo descarta apenas da própria mão física, o parceiro compra do próprio Deck e descarta no próprio End Phase; validar Deck 20–30, Extra 5, privacidade, UIDs e restauração.",
+      "state": "active",
+      "startedAt": "2026-11-15T16:02:48-03:00",
+      "branch": "feat/work-m240-end-phase-hand-limit-2v2-20261115",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "e2e2a2d773479dd7038c2769134386713e8c8cdc",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "e2e2a2d773479dd7038c2769134386713e8c8cdc",
+      "reservedFiles": [
+        "tests/tagClassicEndPhaseHandLimit2v2.test.cjs"
+      ],
+      "pr": 196,
+      "conflictPolicy": "Somente novo arquivo de teste M240. Não tocar em M231–M239, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261115T142521-0300-M241",
+      "runId": "work-20261115T142521-0300",
+      "owner": "Work",
+      "mission": "M241",
+      "priority": "P1 — validar limites de zona 3+3 no 2v2 clássico: cada equipe compartilha três Monster Zones e três Spell/Trap Zones entre os dois assentos físicos; rejeitar a quarta carta em ambos os campos e preservar UIDs/privacidade.",
+      "state": "active",
+      "startedAt": "2026-11-15T16:04:06-03:00",
+      "branch": "feat/work-m241-shared-zone-capacity-2v2-20261115",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "e2e2a2d773479dd7038c2769134386713e8c8cdc",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "e2e2a2d773479dd7038c2769134386713e8c8cdc",
+      "reservedFiles": [
+        "tests/tagClassicSharedZoneCapacity2v2.test.cjs"
+      ],
+      "pr": 197,
+      "conflictPolicy": "Somente novo arquivo de teste M241. Não tocar em M231–M240, M237–M239, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
     }
   ]
 }
