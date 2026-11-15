@@ -5656,5 +5656,303 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     ]
   }
 
+,
+  "13626450": {
+    "fingerprint": "02f3096a04f5d0b98844e938f5477a1e2e2fcfb8d0326846f9d165d8e47f677d",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "47453433": {
+    "fingerprint": "67a9600c7d96ea42bc803b02d6707142a7da9e28a78460a8cfe38632d12eb8a7",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "70231910": {
+    "fingerprint": "203371e804ce66d79391f71fbff48fd56087d523cd09bae79edc6c03b6bbe56e",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "79759861": {
+    "fingerprint": "327612c78b5b33f201a373a0eb1560bf02efbb1f53427807c2c79e21d4204022",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "04178474": {
+    "fingerprint": "98b09cfc1dfc9982e89bf7b8abc5480f17b352b2eb1fe31ddf8d1af855859d94",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  },
+  "01669772": {
+    "fingerprint": "3dcc002866237c34e8c2cd1cb784dd08e4b3880360c31b4dbcd7e5e3596fc014",
+    "suites": [
+      "tests/generated-m46-discard-removal.test.cjs"
+    ]
+  }
+
+,
+  "15259703": {
+    "fingerprint": "31303b748c7d75dbed0bff71e8937a1a5050dfde6099cf886409c45aa7b96c4f",
+    "suites": [
+      "tests/generated-m47-summon-and-presence.test.cjs"
+    ]
+  },
+  "16589042": {
+    "fingerprint": "7236e89cfaf26b40bf6bd70a32cf0d34a7d8efb0ee169653732d3921ad64fdf9",
+    "suites": [
+      "tests/generated-m47-summon-and-presence.test.cjs"
+    ]
+  },
+  "25236056": {
+    "fingerprint": "9359a9484f99303b6fdf911c19f5906a1bfbf06fb7d39d4859ff5d31ef4c51ae",
+    "suites": [
+      "tests/generated-m47-summon-and-presence.test.cjs"
+    ]
+  }
+
+,
+  "31786629": {
+    "fingerprint": "62e27fc43d93fedb47e48f61865dbfa5325c09cf2c49a59d41dd709bc62f503c",
+    "suites": [
+      "tests/generated-m48-thunder-dragon.test.cjs"
+    ]
+  },
+  "54752875": {
+    "fingerprint": "d7e1da75ce3912839cdf50f00c3ae825daea9cb059cd52ab69e2e8ce8d026c93",
+    "suites": [
+      "tests/generated-m48-thunder-dragon.test.cjs"
+    ]
+  }
+
+,
+  "21175632": {
+    "fingerprint": "8b718fbce50f6c1c3f9dff26a0215073db52cdac883af5f2c3483ddd2192aa4c",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "52090844": {
+    "fingerprint": "46a6fd9736d6c42ca92b8f41f77949d36604c586ca7a777aa6992bc702d27197",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "53530069": {
+    "fingerprint": "499fd2c25366bbd0f18521a2d6b4be13df7b1ec4ba41230928073ca94eb2b165",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "57579381": {
+    "fingerprint": "b94fc7d052c8c3c436bacd87673f5e3695ea54198d88d2a386326dcabc477f68",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "85802526": {
+    "fingerprint": "34246167fd9b01168e3eb02c0588ccd3b83365de2dec13f593d70d52dffb7b43",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  },
+  "90925163": {
+    "fingerprint": "4fea863544f3b08e834a205bd42edc7febbcd2dd6799900c8e3abc82299d3c08",
+    "suites": [
+      "tests/generated-m49-standby-lp.test.cjs"
+    ]
+  }
+
+,
+  "10189126": {
+    "fingerprint": "0b4bf2e28d828fde6a2deef65b3c85de15fe3ded5231e3660ffe8ba10656470e",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "15150365": {
+    "fingerprint": "bb890ccc5ec261e690d63556be73d97ec944dc5dfe47719b00268ecd18703464",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "18036057": {
+    "fingerprint": "72aaa9a2fa2dd8351c1730570682f4249ead1333a18df0832d3a8bedc4e3f87d",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "46820049": {
+    "fingerprint": "c0e59e4b5ee3c2b3e2dc3ac84cac7af7ed6c4b76d988c392cb3159a0470faea0",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "71107816": {
+    "fingerprint": "f4162cd769c3d7bb40d243e90259434cfd5f665bf9c5a5c7f173affcb027a0b3",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  },
+  "77379481": {
+    "fingerprint": "f01a1d8601b9a55c78d5e8cc16ba6c454471d52370f0965efd4702f3efb12704",
+    "suites": [
+      "tests/generated-m50-battle-damage.test.cjs"
+    ]
+  }
+
+,
+  "81383947": {
+    "fingerprint": "0ceb3aba6f7b82f0a785730309267fdf27b8d3ff7adcf4e959f88b8e833a90dc",
+    "suites": [
+      "tests/generated-m51-scaled-standby.test.cjs"
+    ]
+  }
+
+,
+  "43250041": {
+    "fingerprint": "70e190455b0e9a8bb42a594972e156d3335823f2cec9a6ddf150b3ae0a5344c8",
+    "suites": [
+      "tests/generated-m52-field-traps.test.cjs"
+    ]
+  },
+  "56916805": {
+    "fingerprint": "b4347b0a5b5be0541ee5287978b66b851507a692e564b8abe3d852f512e4d752",
+    "suites": [
+      "tests/generated-m52-field-traps.test.cjs"
+    ]
+  },
+  "57882509": {
+    "fingerprint": "0549629710e5f1d3eeee226399e995183eb0798f05a5b1e7ae0c2488c4c0e18a",
+    "suites": [
+      "tests/generated-m52-field-traps.test.cjs"
+    ]
+  },
+  "94192409": {
+    "fingerprint": "f59383b8ee7e9759cbaa2a5c3e178ea3e4e3a3014255ac2372c2ce1be9ab7ee3",
+    "suites": [
+      "tests/generated-m52-field-traps.test.cjs"
+    ]
+  },
+  "00596051": {
+    "fingerprint": "f6da06e7518c6cc986ac9573a8a5010be5381bb655f0924b1363de33b70312c6",
+    "suites": [
+      "tests/generated-m52-field-traps.test.cjs"
+    ]
+  }
+
+,
+  "42578427": {
+    "fingerprint": "b3f2f96f4b3950f774f7e426887815255330ae88506929bc2ae154ffdb788bef",
+    "suites": [
+      "tests/generated-m53-name-and-summon.test.cjs"
+    ]
+  },
+  "95132338": {
+    "fingerprint": "a4c568e6c8da9808fa0a8caa15cc3983c45a0d427cd4e7b2558e3282148c4b7f",
+    "suites": [
+      "tests/generated-m53-name-and-summon.test.cjs"
+    ]
+  }
+
+,
+  "50593156": {
+    "fingerprint": "111ab6874c46aa58ffe124a0373d0aa098e1a40c2bef49e633ef0edfd26fd63d",
+    "suites": [
+      "tests/generated-m54-dice-and-coins.test.cjs"
+    ]
+  },
+  "74137509": {
+    "fingerprint": "989643038f12c99575b0190f014f56dff8361cd4b60931435b1a0e7539e00e8a",
+    "suites": [
+      "tests/generated-m54-dice-and-coins.test.cjs"
+    ]
+  },
+  "00126218": {
+    "fingerprint": "2d274bf9dc8e14cf1027f543e7e722175b1ec700732b3fdb359d4807d8e35492",
+    "suites": [
+      "tests/generated-m54-dice-and-coins.test.cjs"
+    ]
+  },
+  "03549275": {
+    "fingerprint": "a69a6af8f2ac0ed47d27a7e0d25ece958d6c7b655db45dca66d0c79a53b8fdba",
+    "suites": [
+      "tests/generated-m54-dice-and-coins.test.cjs"
+    ]
+  }
+
+,
+  "25551951": {
+    "fingerprint": "7c8261f90e4bf99e44cc586657bee09e2c3110868e7766bb284459526d005d39",
+    "suites": [
+      "tests/generated-m55-coin-targets.test.cjs"
+    ]
+  },
+  "81480460": {
+    "fingerprint": "8af975ee5dfc9bcfa85d3863d2176b2b82ea94d4532ceb55636437059dce1c3e",
+    "suites": [
+      "tests/generated-m55-coin-targets.test.cjs"
+    ]
+  }
+
+,
+  "71625222": {
+    "fingerprint": "b9239a9d648f33579fceeff470d64c74cc3771125db8c5c5aeb06da5a621667e",
+    "suites": [
+      "tests/generated-m56-called-coins.test.cjs"
+    ]
+  },
+  "81172176": {
+    "fingerprint": "e196ff25720c2123783d430fbab2ddab3d3e72fa54457b9a8a3089e78d0e2aff",
+    "suites": [
+      "tests/generated-m56-called-coins.test.cjs"
+    ]
+  }
+
+,
+  "35316708": {
+    "fingerprint": "e1424c7a86366dfe0179f039a1f93076eb817898ba44435e8fe04fc355941350",
+    "suites": [
+      "tests/generated-m57-skipped-draws.test.cjs"
+    ]
+  },
+  "37576645": {
+    "fingerprint": "3a5480d19e9291f64dd92391ecc281491c773bcc433e601a088f5ae1173afafd",
+    "suites": [
+      "tests/generated-m57-skipped-draws.test.cjs"
+    ]
+  }
+
+,
+  "51616747": {
+    "fingerprint": "721ecfa66386785f6f7feacd5e0da29a8998f84b291b129a45d55069f90f62af",
+    "suites": [
+      "tests/generated-m58-battle-recovery.test.cjs"
+    ]
+  },
+  "88236094": {
+    "fingerprint": "3459f5b000f9e758c43d0d80739026ce022d2216aea72a78fa157cbe906eb854",
+    "suites": [
+      "tests/generated-m58-battle-recovery.test.cjs"
+    ]
+  }
+
+,
+  "22609617": {
+    "fingerprint": "b1877336c4d307991dd836d015ea9e7404895fdbee326dd528d3e543807153d6",
+    "suites": [
+      "tests/generated-m59-control-lock.test.cjs"
+    ]
+  },
+  "35215622": {
+    "fingerprint": "dd462240688bddb9e7c55abcc9b7c5d2b86529dfb402ce48ee9485ad93fab192",
+    "suites": [
+      "tests/generated-m59-control-lock.test.cjs"
+    ]
+  }
+
 
 };

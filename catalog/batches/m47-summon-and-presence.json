@@ -1,0 +1,2159 @@
+{
+  "format": 1,
+  "batchId": "m47-summon-and-presence",
+  "engineVersion": "engine-v9",
+  "baseRevision": "7c6655ccda2ce4c2383d24154ac77a083044a3b2e10ac8cd6eec140431e5765d",
+  "candidates": [
+    {
+      "card": {
+        "id": "15259703",
+        "konamiId": 4798,
+        "name": "Mundo Toon",
+        "englishName": "Toon World",
+        "kind": "spell",
+        "summary": "Pague 1.000 PV para ativar esta Magia Contínua.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4798&request_locale=en",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "continuous",
+        "rules": [],
+        "presenceOnly": true,
+        "lpCost": 1000,
+        "activation": {
+          "speed": 1,
+          "window": "main",
+          "damage": "never"
+        }
+      },
+      "family": "spell-presence",
+      "requirements": [
+        "effect:continuous"
+      ],
+      "textEvidence": {
+        "text": "Toon World is a Continuous Spell. Pay 1000 LP when activating it. The cost is paid before either player can respond and is not refunded if the activation is negated or the spell is destroyed. It stays face-up in a Spell/Trap Zone after successful resolution and has no other printed effect. It is not a Field Spell and does not create or give any Toon monster.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4798&request_locale=en",
+        "sha256": "445572e4911ac77e4489ba6b074fd08d2d45bd2f70d916ffd1a064896eff463c"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "cost-paid-once",
+        "cost-invalid",
+        "negation-cost-retained",
+        "restore-after-cost",
+        "duplicate-delivery",
+        "json-restore",
+        "deterministic-replay",
+        "source-loss",
+        "continuous-negation",
+        "multiple-sources",
+        "dynamic-recalculation"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "fee",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "response"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "backrow",
+                0,
+                "resolved"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "field"
+              ],
+              "equals": null
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ],
+                "lp": 999
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "s"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 999
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "s"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "fee",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "jam",
+                "target": "s",
+                "discards": [
+                  "fee"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "s"
+            }
+          ]
+        },
+        "cost-paid-once": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "backrow",
+                0,
+                "resolved"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "field"
+              ],
+              "equals": null
+            }
+          ]
+        },
+        "cost-invalid": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ],
+                "lp": 999
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "s"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 999
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "s"
+            }
+          ]
+        },
+        "negation-cost-retained": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "fee",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "jam",
+                "target": "s",
+                "discards": [
+                  "fee"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "s"
+            }
+          ]
+        },
+        "restore-after-cost": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "fee",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "backrow",
+                0,
+                "resolved"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "duplicate-delivery": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "fee",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "s"
+              },
+              "expectError": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "backrow",
+                0,
+                "resolved"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "fee",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "jam",
+                "target": "s",
+                "discards": [
+                  "fee"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "s"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "backrow",
+                0,
+                "resolved"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "field"
+              ],
+              "equals": null
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "s"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "s"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "backrow",
+                0,
+                "resolved"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "second",
+                    "id": "15259703"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "second"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 2000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "backrow",
+                "length"
+              ],
+              "equals": 2
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "15259703"
+                  },
+                  {
+                    "uid": "mst",
+                    "id": "05318639"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "s"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "s"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "equals": []
+            }
+          ]
+        }
+      },
+      "fingerprint": "31303b748c7d75dbed0bff71e8937a1a5050dfde6099cf886409c45aa7b96c4f",
+      "suites": [
+        "tests/generated-m47-summon-and-presence.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "25236056",
+        "konamiId": 6084,
+        "name": "Dragão Metal Raro",
+        "englishName": "Rare Metal Dragon",
+        "kind": "monster",
+        "summary": "Não pode ser Invocado por Invocação-Normal nem baixado da mão.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6084&request_locale=en",
+        "level": 4,
+        "atk": 2400,
+        "defense": 1200,
+        "race": "Dragon",
+        "attribute": "DARK",
+        "monsterType": "effect"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "family": "normal-summon-procedure",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:normalSummonPolicy"
+      ],
+      "textEvidence": {
+        "text": "Rare Metal Dragon cannot be Normal Summoned or Normal Set. This is a summoning restriction, not an activated effect. A card effect can Special Summon it from a permitted zone without a prior proper summon. Skill Drain on the field does not allow the controller to Normal Summon the card in hand.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6084&request_locale=en",
+        "sha256": "4adfd80ab89f81d9513fe03253a9dfeff58694883f1e05e40335cf84290877b9"
+      },
+      "scenarios": [
+        "activation",
+        "negative",
+        "resolution",
+        "negation",
+        "json-restore",
+        "deterministic-replay",
+        "revival-negated"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "25236056"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              },
+              "expectError": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "summon",
+                "card": "s",
+                "position": "set",
+                "tributes": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "25236056"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "reborn",
+                    "id": "83764718"
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "s",
+                    "id": "25236056"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "reborn",
+                "target": "s",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "25236056"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              },
+              "expectError": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "summon",
+                "card": "s",
+                "position": "set",
+                "tributes": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "reborn",
+                    "id": "83764718"
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "s",
+                    "id": "25236056"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "fee",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "reborn",
+                "target": "s",
+                "position": "atk"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "reborn",
+                    "id": "83764718"
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "s",
+                    "id": "25236056"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "reborn",
+                "target": "s",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "revival-negated": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "reborn",
+                    "id": "83764718"
+                  }
+                ],
+                "grave": [
+                  {
+                    "uid": "s",
+                    "id": "25236056"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "fee",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "reborn",
+                "target": "s",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "jam",
+                "target": "reborn",
+                "discards": [
+                  "fee"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        }
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "normalSummonPolicy",
+            "mode": "forbidden"
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "fingerprint": "9359a9484f99303b6fdf911c19f5906a1bfbf06fb7d39d4859ff5d31ef4c51ae",
+      "suites": [
+        "tests/generated-m47-summon-and-presence.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "16589042",
+        "konamiId": 5243,
+        "name": "Gaia, o Cavaleiro Impetuoso Célere",
+        "englishName": "Swift Gaia the Fierce Knight",
+        "kind": "monster",
+        "summary": "Se for sua única carta na mão, pode Invocá-la normalmente em Ataque sem Tributos.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5243&request_locale=en",
+        "level": 7,
+        "atk": 2300,
+        "defense": 2100,
+        "race": "Warrior",
+        "attribute": "DARK",
+        "monsterType": "effect"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "family": "normal-summon-procedure",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:normalSummonPolicy"
+      ],
+      "textEvidence": {
+        "text": "Swift Gaia the Fierce Knight can be Normal Summoned in Attack Position with no Tributes when it is the only card in its controller’s hand. The procedure does not start a Chain, does not grant an extra summon, and does not permit Set without Tributes. Ordinary Tribute Summon and Tribute Set remain possible. Field effect negation does not negate the choice made from hand.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5243&request_locale=en",
+        "sha256": "c12c3b0cf1b8a8400ce67a3b9e69fec0066960d7bed8d621846d8372ad956289"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "json-restore",
+        "deterministic-replay",
+        "other-hand-card",
+        "full-field",
+        "summon-already-used"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "16589042"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "16589042"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "s",
+                "position": "set",
+                "tributes": [
+                  "one",
+                  "two"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "one"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "two"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "16589042"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "summon",
+                "card": "s",
+                "position": "set",
+                "tributes": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "16589042"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "16589042"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "torr",
+                    "id": "53582587",
+                    "faceUp": false,
+                    "resolved": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "torr"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "16589042"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "other-hand-card": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "16589042"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "full-field": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "16589042"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "one",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "two",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "three",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "s"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": false
+            }
+          ]
+        },
+        "summon-already-used": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "s",
+                    "id": "16589042"
+                  }
+                ],
+                "summoned": true
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "summon",
+                "card": "s",
+                "position": "atk",
+                "tributes": []
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "s"
+            }
+          ]
+        }
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "normalSummonPolicy",
+            "mode": "lastHandFaceUp"
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "fingerprint": "7236e89cfaf26b40bf6bd70a32cf0d34a7d8efb0ee169653732d3921ad64fdf9",
+      "suites": [
+        "tests/generated-m47-summon-and-presence.test.cjs"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "15259703",
+      "canonicalId": "59bdeb8e-a680-4940-befd-e6173faa0c0d",
+      "konamiId": 4798,
+      "reviewer": "Work: reviewed Konami EN card text, regional printing and official summon FAQ",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4798&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2002-09-16",
+        "set": "MRL-076",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4798&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "445572e4911ac77e4489ba6b074fd08d2d45bd2f70d916ffd1a064896eff463c",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "represented",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "31303b748c7d75dbed0bff71e8937a1a5050dfde6099cf886409c45aa7b96c4f"
+    },
+    {
+      "id": "25236056",
+      "canonicalId": "ea97b4de-9740-48bb-bfe9-98a321f5130c",
+      "konamiId": 6084,
+      "reviewer": "Work: reviewed Konami EN card text, regional printing and official summon FAQ",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6084&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 2400,
+        "defense": 1200,
+        "race": "Dragon",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2004-08-01",
+        "set": "EP1-EN004",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6084&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "4adfd80ab89f81d9513fe03253a9dfeff58694883f1e05e40335cf84290877b9",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "9359a9484f99303b6fdf911c19f5906a1bfbf06fb7d39d4859ff5d31ef4c51ae"
+    },
+    {
+      "id": "16589042",
+      "canonicalId": "ca7014f3-1670-43ca-b5a9-133bdfc1a434",
+      "konamiId": 5243,
+      "reviewer": "Work: reviewed Konami EN card text, regional printing and official summon FAQ",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5243&request_locale=en",
+      "primaryFacts": {
+        "level": 7,
+        "atk": 2300,
+        "defense": 2100,
+        "race": "Warrior",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2004-09-01",
+        "set": "CT1-EN004",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5243&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "c12c3b0cf1b8a8400ce67a3b9e69fec0066960d7bed8d621846d8372ad956289",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "7236e89cfaf26b40bf6bd70a32cf0d34a7d8efb0ee169653732d3921ad64fdf9"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "format": 1,
+  "batchId": "m46-discard-removal",
+  "baseRevision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+  "batchSHA256": "13ecdbfc06eb8282b16a9ce895e4e9ac2faf291600eca89a39773f2828ba9447",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m46_discard_removalCards} from './generated/m46-discard-removal';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards,...m43_dd_assailantCards,...m44_double_tributeCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards,...m32_activation_restrictionsCards,...m32_optional_trigger_lpCards,...m33_piercing_equipCards,...m33_royal_decreeCards,...m34_summon_trap_lockCards,...m35_newdoria_battle_targetCards,...m35_conditional_direct_attacksCards,...m36_passive_attack_conditionsCards,...m37_fusion_substitutesCards,...m38_classic_fusionsCards,...m39_battle_effectsCards,...m40_battle_banishCards,...m41_battle_identity_destructionCards,...m42_battle_zone_outcomesCards,...m43_dd_assailantCards,...m44_double_tributeCards,...m46_discard_removalCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m46_discard_removalEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m46_discard_removalEffects} from './generated/m46-discard-removal';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"13626450\": {\n    \"fingerprint\": \"02f3096a04f5d0b98844e938f5477a1e2e2fcfb8d0326846f9d165d8e47f677d\",\n    \"suites\": [\n      \"tests/generated-m46-discard-removal.test.cjs\"\n    ]\n  },\n  \"47453433\": {\n    \"fingerprint\": \"67a9600c7d96ea42bc803b02d6707142a7da9e28a78460a8cfe38632d12eb8a7\",\n    \"suites\": [\n      \"tests/generated-m46-discard-removal.test.cjs\"\n    ]\n  },\n  \"70231910\": {\n    \"fingerprint\": \"203371e804ce66d79391f71fbff48fd56087d523cd09bae79edc6c03b6bbe56e\",\n    \"suites\": [\n      \"tests/generated-m46-discard-removal.test.cjs\"\n    ]\n  },\n  \"79759861\": {\n    \"fingerprint\": \"327612c78b5b33f201a373a0eb1560bf02efbb1f53427807c2c79e21d4204022\",\n    \"suites\": [\n      \"tests/generated-m46-discard-removal.test.cjs\"\n    ]\n  },\n  \"04178474\": {\n    \"fingerprint\": \"98b09cfc1dfc9982e89bf7b8abc5480f17b352b2eb1fe31ddf8d1af855859d94\",\n    \"suites\": [\n      \"tests/generated-m46-discard-removal.test.cjs\"\n    ]\n  },\n  \"01669772\": {\n    \"fingerprint\": \"3dcc002866237c34e8c2cd1cb784dd08e4b3880360c31b4dbcd7e5e3596fc014\",\n    \"suites\": [\n      \"tests/generated-m46-discard-removal.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m46-discard-removal: explicit tested release; zero inventory grants.\n  \"79759861\",\n  \"70231910\",\n  \"47453433\",\n  \"04178474\",\n  \"13626450\",\n  \"01669772\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "79759861",
+    "70231910",
+    "47453433",
+    "04178474",
+    "13626450",
+    "01669772"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

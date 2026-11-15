@@ -1,3 +1,4 @@
+import {piercingFromReward} from './battleRewards';
 import {getMonsterEffect} from './monsterEffects';
 import {monsterEffectsNegated} from './continuousEffects';
 import type {DuelState,Monster} from './duelEngine';
@@ -48,7 +49,7 @@ export function combatOutcome(s:DuelState,actor:number,a:Monster,d:Monster|undef
   else if(attack>0){if(!protectA)destroy.push(a.uid);if(!protectD)destroy.push(d.uid);}
  }else if(difference>0){
   if(!protectD)destroy.push(d.uid);
-  if(ar.some(x=>x.rule.kind==='piercing')||getMonsterEffect(a.id)?.operation.kind==='endDamageDefensePiercing'&&!monsterEffectsNegated(s,a.uid))damage[1-actor]=difference;
+  if(ar.some(x=>x.rule.kind==='piercing')||piercingFromReward(s,a)||getMonsterEffect(a.id)?.operation.kind==='endDamageDefensePiercing'&&!monsterEffectsNegated(s,a.uid))damage[1-actor]=difference;
  }else if(difference<0)damage[actor]=-difference;
  const involved=[{monster:a,owner:actor,rules:ar},...d?[{monster:d,owner:1-actor,rules:dr}]:[]];
  for(let player=0;player<2;player++){

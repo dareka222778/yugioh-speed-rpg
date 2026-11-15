@@ -1,6 +1,8 @@
+import {discardRemovalActions,payDiscard,resolveDiscardRemoval} from './discardRemoval';
 import {selectedMovementTargets,executeSelectedMovement} from './selectedMovement';
 import {getMonsterEffect} from './monsterEffects';
 import {recoveryTargets,executeRecovery} from './recoveryRules';
+import {canChangeControl} from './continuousEffects';
 import {positionTargets,executePositionChange} from './positionOperations';
 import {ritualCandidates} from './ritualSummon';
 import {continuousModifier,cardActivationAllowed,canAffectMonster,addTemporaryModifier} from './continuousEffects';
@@ -9,6 +11,7 @@ import {getDuelCard as getCard} from './effectRegistry';
 import {getEffect,equipEligible,isQuickPlaySpell} from './effectRegistry';
 import type {Action,Backrow,CardRef,DuelState,Monster,Pending} from './duelEngine';
 import {resolveSpellException} from './spellExceptions';
+import {diceSide,resolveStatDie} from './chanceEffects';
 import {canStartEconomicOperations,executeEconomicOperations} from './economicOperations';
 import {searchZoneTargets} from './searchZoneRules';
 import {shuffleDuel} from './duelRandom';
@@ -23,6 +26,7 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
  // Quick-Play cards Set during this turn cannot be activated until a later turn.
  if(isQuickPlaySpell(c.id)&&!cardActivationAllowed(s,index,'quickplay'))return [];
  if(isQuickPlaySpell(c.id)&&p.backrow.some(b=>b.uid===c.uid&&b.setTurn===s.turn))return [];
+ if(e.kind==='discardRemoval')return discardRemovalActions(s,index,c,e);
  if(e.kind==='choiceSequence')return e.choices.flatMap((choice,n)=>canStartEconomicOperations(s,index,choice.operations)?[{kind:'spell' as const,card:c.uid,target:`__choice_${n}__`}]:[]);
  if(e.kind==='moveSelected')return selectedMovementTargets(s,index,e.rule,getCard,id=>getMonsterEffect(id)?.trigger==='flip',true).length>=e.rule.minimum?[{kind:'spell',card:c.uid}]:[];
  if(e.kind==='recoverMultiple')return recoveryTargets(s,index,e.rule,getCard).length>=e.rule.count?[{kind:'spell',card:c.uid}]:[];
@@ -40,11 +44,12 @@ export function spellActions(s:DuelState,index:number,c:CardRef):Action[]{
   case 'ritualSummon':return ritualCandidates(s,index,e.ritual).length?[{kind:'spell',card:c.uid}]:[];
   case 'destroyFiltered':return destructionTargets(s,index,getDestructionModel(e)!).length?[{kind:'spell',card:c.uid}]:[];
   case 'continuous':return p.lp>(e.lpCost??0)?[{kind:'spell',card:c.uid}]:[];
+  case 'statDie':return diceSide(s,index,e.side).length?[{kind:'spell',card:c.uid}]:[];
   case 'temporaryModifier':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp).map(m=>m.uid)));
   case 'destroySpellTraps':return s.players.some((player,side)=>(e.scope==='all'||side!==index)&&(player.backrow.some(b=>b.uid!==c.uid)||!!player.field))?[{kind:'spell',card:c.uid}]:[];
   case 'equip':return targeted(s.players.flatMap(p=>p.monsters.filter(m=>m.faceUp&&equipEligible(e,getCard(m.id)!)).map(m=>m.uid)));
   case 'monsterReborn':return p.monsters.length>=RULES_PROFILE.monsterZones?[]:s.players.flatMap(p=>p.grave.filter(m=>getCard(m.id)?.kind==='monster'&&(!(getCard(m.id)?.fusion||getCard(m.id)?.monsterType==='ritual')||m.properlySummoned)).flatMap(m=>(['atk','def'] as const).map(position=>({kind:'spell',card:c.uid,target:m.uid,position}))));
-  case 'changeHeart':return p.monsters.length<RULES_PROFILE.monsterZones?targeted(op.monsters.map(m=>m.uid)):[];
+  case 'changeHeart':return p.monsters.length<RULES_PROFILE.monsterZones?targeted(op.monsters.filter(m=>canChangeControl(s,m)).map(m=>m.uid)):[];
   case 'blockAttack':return targeted(op.monsters.filter(m=>m.faceUp&&m.position==='atk').map(m=>m.uid));
   // A facedown target's identity must never determine the action menu.
   case 'deSpell':return targeted(s.players.flatMap(p=>[...p.backrow,...p.field?[p.field]:[]].filter(t=>t.uid!==c.uid&&(!t.faceUp||getCard(t.id)?.kind==='spell')).map(t=>t.uid)));
@@ -85,6 +90,7 @@ export function turnMonsterFaceDown(m:Monster):void{
 }
 export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}>,service:EffectServices):boolean{
  const e=getEffect(a.id),p=s.players[a.actor],op=s.players[1-a.actor];if(!e)return false;
+ if(e.kind==='discardRemoval'){resolveDiscardRemoval(s,e,'spell',a.target,{destroy:service.destroy,back:discardBackrow,clean:cleanEquips});return true;}
  if(e.kind==='conditionalDestruction'){
   let count=0;
   if(e.zone==='monsters')count=executeDestruction(s,a.actor,getDestructionModel(e)!,a.target,{...service,kind:getCard(a.id)?.kind==='trap'?'trap':'spell'});
@@ -136,6 +142,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
 
  switch(e.kind){
   case 'continuous':{const source=p.backrow.find(b=>b.uid===a.card);if(source?.faceUp)source.resolved=true;return true;}
+  case 'statDie':resolveStatDie(s,a.actor,e.side);return true;
   case 'temporaryModifier':if(found&&canAffectMonster(s,found.m.uid,'spell'))addTemporaryModifier(s,found.m.uid,e.atk,e.def);return true;
   case 'destroySpellTraps':destroySpellTrapGroup(s,a.actor,e.scope,a.card);service.note(s,'O grupo de Magias/Armadilhas foi destruído.');return true;
   case 'mysticalSpaceTyphoon':
@@ -155,7 +162,7 @@ export function resolveClassicSpell(s:DuelState,a:Extract<Pending,{kind:'spell'}
    }
    return true;
   }
-  case 'changeHeart':if(found&&found.index!==a.actor&&p.monsters.length<RULES_PROFILE.monsterZones&&canAffectMonster(s,found.m.uid,'spell')){found.p.monsters=found.p.monsters.filter(m=>m.uid!==found.m.uid);found.m.owner??=found.index;found.m.returnTo=found.index;found.m.returnTurn=s.turn;p.monsters.push(found.m);service.note(s,`${p.name} ganhou o controle temporário de um monstro.`);}return true;
+  case 'changeHeart':if(found&&found.index!==a.actor&&canChangeControl(s,found.m)&&p.monsters.length<RULES_PROFILE.monsterZones&&canAffectMonster(s,found.m.uid,'spell')){found.p.monsters=found.p.monsters.filter(m=>m.uid!==found.m.uid);found.m.owner??=found.index;found.m.returnTo=found.index;found.m.returnTurn=s.turn;p.monsters.push(found.m);service.note(s,`${p.name} ganhou o controle temporário de um monstro.`);}return true;
   case 'deSpell':case 'removeTrap':{
    const b=s.players.flatMap(p=>[...p.backrow,...p.field?[p.field]:[]]).find(b=>b.uid===a.target);if(b&&e.kind==='deSpell'&&!b.faceUp)service.note(s,`Des-Magia revelou ${getCard(b.id)!.name}.`);if(b&&getCard(b.id)?.kind===(e.kind==='deSpell'?'spell':'trap')&&(e.kind==='deSpell'||b.faceUp))discardBackrow(s,b.uid);return true;
   }

@@ -1,0 +1,2158 @@
+{
+  "format": 1,
+  "batchId": "m48-thunder-dragon",
+  "baseRevision": "dbf68ae53fbf2eedd33e32ed30688b9cc4a88be399f78b3134979b52ae9f2f58",
+  "engineVersion": "engine-v9",
+  "reviews": [
+    {
+      "id": "31786629",
+      "canonicalId": "58f63996-223d-469e-95e1-6177e110062d",
+      "konamiId": 4431,
+      "reviewer": "Work: reviewed Konami official text, MRD printing and FAQ 4431",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4431&request_locale=en",
+      "primaryFacts": {
+        "level": 5,
+        "atk": 1600,
+        "defense": 1500,
+        "race": "Thunder",
+        "attribute": "LIGHT"
+      },
+      "verifiedPrinting": {
+        "date": "2002-06-26",
+        "set": "MRD-097",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4431&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "9758634c7a6cf18feba252202396a9ae33f1f07e9b89f342aa2cf675762f3d4a",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "represented",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "54752875",
+      "canonicalId": "48351d3c-fc71-474b-9ea2-19c030dfb3a9",
+      "konamiId": 4619,
+      "reviewer": "Work: reviewed Konami official text, MRD printing and FAQ 4431",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4619&request_locale=en",
+      "primaryFacts": {
+        "level": 7,
+        "atk": 2800,
+        "defense": 2100,
+        "race": "Thunder",
+        "attribute": "LIGHT"
+      },
+      "verifiedPrinting": {
+        "date": "2002-06-26",
+        "set": "MRD-120",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4619&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "81b1af23ff0c1cf88b30504c56992937064e9921915b5ddbcdd1ac340039dd56",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "card": {
+        "id": "31786629",
+        "konamiId": 4431,
+        "name": "Dragão do Trovão",
+        "englishName": "Thunder Dragon",
+        "kind": "monster",
+        "monsterType": "effect",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4431&request_locale=en",
+        "level": 5,
+        "atk": 1600,
+        "defense": 1500,
+        "race": "Thunder",
+        "attribute": "LIGHT",
+        "summary": "Descarte esta carta da mão. Na resolução, adicione à mão 1 ou 2 Dragões do Trovão do seu Deck e embaralhe."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "family": "hand-copy-search",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:ignition",
+        "monster-operation:searchCopiesFromHand",
+        "cost:discard"
+      ],
+      "textEvidence": {
+        "text": "Thunder Dragon activates an ignition effect in hand by discarding itself as cost. At least one copy in the controller’s Deck is required. At resolution choose one or two copies still available and add them from Deck to hand, reveal the searched identity and shuffle the remainder. It does not draw cards or target, is not once per turn, and cannot activate from the field. Skill Drain on the field cannot negate this hand effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4431&request_locale=en",
+        "sha256": "9758634c7a6cf18feba252202396a9ae33f1f07e9b89f342aa2cf675762f3d4a"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "cost-paid-once",
+        "cost-invalid",
+        "negation-cost-retained",
+        "restore-after-cost",
+        "duplicate-delivery",
+        "json-restore",
+        "deterministic-replay",
+        "select-one-of-two",
+        "only-one-available",
+        "second-copy-can-activate"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "equals": []
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "choice"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_2__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_2__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "cost-paid-once": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_1__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave",
+                "length"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "cost-invalid": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "negation-cost-retained": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_1__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy0"
+            }
+          ]
+        },
+        "restore-after-cost": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_1__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave",
+                "length"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "duplicate-delivery": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_1__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave",
+                "length"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_2__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_2__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "source"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "select-one-of-two": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_1__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck"
+              ],
+              "containsUID": "copy1"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "only-one-available": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "choose",
+                "target": "__copies_2__"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_1__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "second-copy-can-activate": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "source",
+                    "id": "31786629"
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "copy0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "copy1",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "other",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "source"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_1__"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "searchCopiesFromHand",
+                "card": "copy0"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "choose",
+                "target": "__copies_1__"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "copy0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "copy1"
+            }
+          ]
+        }
+      },
+      "monster": {
+        "effect": {
+          "trigger": "ignition",
+          "cost": {
+            "kind": "discard",
+            "count": 1
+          },
+          "operation": {
+            "kind": "searchCopiesFromHand"
+          }
+        },
+        "activation": {
+          "policy": "manual",
+          "window": "main"
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "54752875",
+        "konamiId": 4619,
+        "name": "Dragão do Trovão de Duas Cabeças",
+        "englishName": "Twin-Headed Thunder Dragon",
+        "kind": "monster",
+        "monsterType": "fusion",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4619&request_locale=en",
+        "level": 7,
+        "atk": 2800,
+        "defense": 2100,
+        "race": "Thunder",
+        "attribute": "LIGHT",
+        "fusion": [
+          "31786629",
+          "31786629"
+        ],
+        "summary": "Fusão de dois Dragões do Trovão. Não possui efeito."
+      },
+      "effect": {
+        "kind": "fusion"
+      },
+      "family": "repeated-fusion-material",
+      "requirements": [
+        "effect:fusion"
+      ],
+      "textEvidence": {
+        "text": "Twin-Headed Thunder Dragon is a non-Effect LIGHT Thunder Fusion Monster. The complete printed recipe names Thunder Dragon twice: the two materials must be different physical cards. One legal Fusion substitute may replace only one of the two named monsters. Polymerization, Extra Deck placement, material ownership and proper Fusion Summon status follow the normal Fusion procedure. No secondary effect is printed.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4619&request_locale=en",
+        "sha256": "81b1af23ff0c1cf88b30504c56992937064e9921915b5ddbcdd1ac340039dd56"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "negation",
+        "exact-materials",
+        "illegal-materials",
+        "extra-capacity",
+        "zone-capacity",
+        "material-owner",
+        "same-instance-twice-rejected"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "54752875"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "54752875"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "wrong",
+                    "id": "91152256"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk",
+                "materials": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "54752875"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "54752875"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "discard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "jammer",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "jammer"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "sub"
+            }
+          ]
+        },
+        "exact-materials": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "31786629"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "54752875"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "properlySummoned"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "poly"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        },
+        "illegal-materials": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  },
+                  {
+                    "uid": "sub2",
+                    "id": "50259460"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk",
+                "materials": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            }
+          ]
+        },
+        "extra-capacity": {
+          "fixture": {
+            "players": [
+              {},
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "validateDeck": [
+                "54752875"
+              ],
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "zone-capacity": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "31786629"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "full0",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "full1",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "full2",
+                    "id": "91152256",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk",
+                "materials": []
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            }
+          ]
+        },
+        "material-owner": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "sub",
+                    "id": "53493204"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "mat0",
+                    "id": "31786629",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "id"
+              ],
+              "equals": "54752875"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "mat0"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "sub"
+            }
+          ]
+        },
+        "same-instance-twice-rejected": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "poly",
+                    "id": "24094653"
+                  },
+                  {
+                    "uid": "mat0",
+                    "id": "31786629"
+                  }
+                ],
+                "extra": [
+                  {
+                    "uid": "fusion",
+                    "id": "54752875"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "fusion",
+                "card": "poly",
+                "extra": "fusion",
+                "position": "atk",
+                "materials": [
+                  "mat0",
+                  "mat0"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "fusion"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "mat0"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

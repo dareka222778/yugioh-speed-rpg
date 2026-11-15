@@ -1,0 +1,4771 @@
+{
+  "format": 1,
+  "batchId": "m52-field-traps",
+  "baseRevision": "462201359a8f383d3e281c6b7a8f8e3ea87e9643e05feeccca58a84633aa2076",
+  "engineVersion": "engine-v9",
+  "reviews": [
+    {
+      "id": "43250041",
+      "canonicalId": "49d38190-1f50-4068-8ecb-001b2bac1b21",
+      "konamiId": 5994,
+      "reviewer": "Work: Konami EN text and TCG printing",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5994&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2004-06-01",
+        "set": "AST-054",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5994&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "106909813957c147ab2d587fcc4203290c8af628fbc6253025b10d731ef1e630",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "94192409",
+      "canonicalId": "a24c6422-09bb-4aac-9aa2-ba56baa5fa77",
+      "konamiId": 5914,
+      "reviewer": "Work: Konami EN text and TCG printing",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5914&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "set": "IOC-103",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5914&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "9336c4845d1f019fd204e2699a14c38475ea925dfd2b519ccfe8c337a9cb674a",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "00596051",
+      "canonicalId": "8f6f06b8-5c16-41fe-b653-d9c7ea7f44c6",
+      "konamiId": 4912,
+      "reviewer": "Work: Konami EN text and TCG printing",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4912&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2002-09-16",
+        "set": "MRL-050",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4912&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "3acfa921c4d7b5506c873b4c4356fff294a0154408e2a2b8c9c9bb27dc25e457",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "57882509",
+      "canonicalId": "72cb9218-7730-4337-9a1b-c7d0261d8044",
+      "konamiId": 5102,
+      "reviewer": "Work: Konami EN text and TCG printing",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5102&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2003-03-01",
+        "set": "LON-015",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5102&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "105a3bc9836b384999cda435a0b7308248d8bdda8be32dca07cc2e23e6f6b9ca",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "56916805",
+      "canonicalId": "cf46884f-7b0e-42b9-8e95-6fa066c0881f",
+      "konamiId": 5859,
+      "reviewer": "Work: Konami EN text and TCG printing",
+      "reviewedAt": "2026-11-09",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5859&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "set": "IOC-055",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5859&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "f7cd0f29c92f2c5d006abb0354f0ba324c49a4ede615701b8c19322ca875f50d",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "card": {
+        "id": "43250041",
+        "konamiId": 5994,
+        "name": "Escudo Drenador",
+        "englishName": "Draining Shield",
+        "kind": "trap",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5994&request_locale=en",
+        "summary": "Negue o ataque declarado por um oponente e, se ele for negado, ganhe PV iguais ao ATK atual do atacante.",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "attackResponse",
+        "activation": {
+          "speed": 2,
+          "window": "attackDeclared",
+          "damage": "never",
+          "opponentOnly": true
+        },
+        "endBattle": false,
+        "reflectAttack": false,
+        "gainAttack": true
+      },
+      "family": "selected-field-trap",
+      "requirements": [
+        "effect:attackResponse"
+      ],
+      "textEvidence": {
+        "text": "Draining Shield. On an opposing attack declaration, target its attacker and negate that attack. Only when it actually negates the attack does its controller gain LP equal to the current ATK of that target. It does not end the phase and cannot gain LP a second time for an already negated attack. Normal Trap, no cost. Negating the activation prevents the effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5994&request_locale=en",
+        "sha256": "106909813957c147ab2d587fcc4203290c8af628fbc6253025b10d731ef1e630"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "json-restore",
+        "deterministic-replay",
+        "outside-an-attack",
+        "uses-current-attack",
+        "cannot-negate-twice"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "43250041",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5400
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "43250041",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5400
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "43250041",
+                    "setTurn": 3,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "action": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "43250041",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tools",
+                "target": "tested"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tools"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2600
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "43250041",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5400
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "43250041",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5400
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "outside-an-attack": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "43250041",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "action": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "uses-current-attack": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "boost",
+                    "id": "17814387",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "43250041",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "boost",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5900
+            }
+          ]
+        },
+        "cannot-negate-twice": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "43250041",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  },
+                  {
+                    "uid": "second",
+                    "id": "43250041",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "second",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5400
+            }
+          ]
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "94192409",
+        "konamiId": 5914,
+        "name": "Aparelho de Evacuação Obrigatória",
+        "englishName": "Compulsory Evacuation Device",
+        "kind": "trap",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5914&request_locale=en",
+        "summary": "Escolha um monstro de qualquer lado; devolva-o à mão do dono. Monstros do Deck Adicional voltam para lá.",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "fieldTrap",
+        "mode": "returnHand"
+      },
+      "family": "selected-field-trap",
+      "requirements": [
+        "effect:fieldTrap"
+      ],
+      "textEvidence": {
+        "text": "Compulsory Evacuation Device. Target one monster on either field, including a Set monster, then return that physical card to its owner. A Fusion Monster returns to its owner’s Extra Deck and a Token disappears. A vanished target is not replaced. Normal Trap, no cost. Negating the activation prevents the effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5914&request_locale=en",
+        "sha256": "9336c4845d1f019fd204e2699a14c38475ea925dfd2b519ccfe8c337a9cb674a"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "json-restore",
+        "deterministic-replay",
+        "hidden-destination",
+        "fusion-destination",
+        "borrowed-destination"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "94192409",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "94192409",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "94192409",
+                    "setTurn": 3,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "94192409",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tools",
+                "target": "tested"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tools"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "94192409",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "94192409",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "hidden-destination": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "94192409",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "fusion-destination": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "45231177",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "94192409",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "extra"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "borrowed-destination": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "94192409",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "00596051",
+        "konamiId": 4912,
+        "name": "Presa de Serpente",
+        "englishName": "Snake Fang",
+        "kind": "trap",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4912&request_locale=en",
+        "summary": "Escolha um monstro com a face para cima; ele perde 500 DEF até o fim deste turno.",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "fieldTrap",
+        "mode": "reduceDefense"
+      },
+      "family": "selected-field-trap",
+      "requirements": [
+        "effect:fieldTrap"
+      ],
+      "textEvidence": {
+        "text": "Snake Fang. Target one face-up monster on either field; reduce its DEF by 500 until the end of this turn. It may be used in the Damage Step before damage calculation. Normal Trap, no cost. Negating the activation prevents the effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4912&request_locale=en",
+        "sha256": "3acfa921c4d7b5506c873b4c4356fff294a0154408e2a2b8c9c9bb27dc25e457"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "json-restore",
+        "deterministic-replay",
+        "duration-expiry",
+        "target-turned-down"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "00596051",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 700
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "00596051",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 700
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "00596051",
+                    "setTurn": 3,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "00596051",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tools",
+                "target": "tested"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tools"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "00596051",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 700
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "00596051",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 700
+            }
+          ]
+        },
+        "duration-expiry": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "00596051",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "target-turned-down": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "00596051",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "book",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "book",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "57882509",
+        "konamiId": 5102,
+        "name": "Máscara da Fraqueza",
+        "englishName": "Mask of Weakness",
+        "kind": "trap",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5102&request_locale=en",
+        "summary": "Escolha um monstro que esteja atacando; ele perde 700 ATK até o fim deste turno.",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "fieldTrap",
+        "mode": "reduceAttacker"
+      },
+      "family": "selected-field-trap",
+      "requirements": [
+        "effect:fieldTrap"
+      ],
+      "textEvidence": {
+        "text": "Mask of Weakness. Target one attacking monster of either player. That target loses 700 ATK until the end of the turn. It can be used before damage calculation, and cannot be used without an attacking monster. Normal Trap, no cost. Negating the activation prevents the effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5102&request_locale=en",
+        "sha256": "105a3bc9836b384999cda435a0b7308248d8bdda8be32dca07cc2e23e6f6b9ca"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "json-restore",
+        "deterministic-replay",
+        "outside-an-attack",
+        "duration-expiry",
+        "target-turned-down"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "57882509",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3300
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 700
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "57882509",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3300
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 700
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "57882509",
+                    "setTurn": 3,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "action": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "57882509",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tools",
+                "target": "tested"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tools"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 2600
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "57882509",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3300
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 700
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "57882509",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3300
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 700
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "outside-an-attack": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "57882509",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "action": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "duration-expiry": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "57882509",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "target-turned-down": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "book",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "57882509",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "book",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        }
+      }
+    },
+    {
+      "card": {
+        "id": "56916805",
+        "konamiId": 5859,
+        "name": "Escoar Energia",
+        "englishName": "Energy Drain",
+        "kind": "trap",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5859&request_locale=en",
+        "summary": "Escolha um monstro seu com a face para cima. Ele ganha 200 ATK e DEF por carta que o oponente tiver na mão na resolução, até o fim do turno.",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "fieldTrap",
+        "mode": "handBoost"
+      },
+      "family": "selected-field-trap",
+      "requirements": [
+        "effect:fieldTrap"
+      ],
+      "textEvidence": {
+        "text": "Energy Drain. Target one face-up monster you control. When this effect resolves, use the current number of cards in the opposing hand; the target gains 200 ATK and DEF for each card counted until the end of this turn. Subsequent hand changes do not alter the applied amount. Normal Trap, no cost. Negating the activation prevents the effect.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5859&request_locale=en",
+        "sha256": "f7cd0f29c92f2c5d006abb0354f0ba324c49a4ede615701b8c19322ca875f50d"
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "negative",
+        "negation",
+        "json-restore",
+        "deterministic-replay",
+        "duration-expiry",
+        "target-turned-down",
+        "only-own-target",
+        "empty-opposing-hand"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1800
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1600
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1800
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1600
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 3,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tools",
+                "target": "tested"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3000
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "tools"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1800
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1600
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "tested"
+            },
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1800
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1600
+            }
+          ]
+        },
+        "duration-expiry": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        },
+        "target-turned-down": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "book",
+                    "id": "14087893",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "book",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "only-own-target": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "h1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "h2",
+                    "id": "91152256"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "other",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "other"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "other",
+              "stat": "atk",
+              "equals": 1400
+            }
+          ]
+        },
+        "empty-opposing-hand": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "owncard",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tested",
+                    "id": "56916805",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              },
+              {
+                "hand": []
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "tested",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "statOf": "attacker",
+              "stat": "atk",
+              "equals": 1400
+            },
+            {
+              "statOf": "attacker",
+              "stat": "def",
+              "equals": 1200
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

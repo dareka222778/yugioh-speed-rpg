@@ -19,6 +19,20 @@ import {effects as m41_battle_identity_destructionEffects} from './generated/m41
 import {effects as m42_battle_zone_outcomesEffects} from './generated/m42-battle-zone-outcomes';
 import {effects as m43_dd_assailantEffects} from './generated/m43-dd-assailant';
 import {effects as m44_double_tributeEffects} from './generated/m44-double-tribute';
+import {effects as m46_discard_removalEffects} from './generated/m46-discard-removal';
+import {effects as m47_summon_and_presenceEffects} from './generated/m47-summon-and-presence';
+import {effects as m48_thunder_dragonEffects} from './generated/m48-thunder-dragon';
+import {effects as m49_standby_lpEffects} from './generated/m49-standby-lp';
+import {effects as m50_battle_damageEffects} from './generated/m50-battle-damage';
+import {effects as m51_scaled_standbyEffects} from './generated/m51-scaled-standby';
+import {effects as m52_field_trapsEffects} from './generated/m52-field-traps';
+import {effects as m53_name_and_summonEffects} from './generated/m53-name-and-summon';
+import {effects as m54_dice_and_coinsEffects} from './generated/m54-dice-and-coins';
+import {effects as m55_coin_targetsEffects} from './generated/m55-coin-targets';
+import {effects as m56_called_coinsEffects} from './generated/m56-called-coins';
+import {effects as m57_skipped_drawsEffects} from './generated/m57-skipped-draws';
+import {effects as m58_battle_recoveryEffects} from './generated/m58-battle-recovery';
+import {effects as m59_control_lockEffects} from './generated/m59-control-lock';
 import {conditionalEffects30} from './conditionalBatch30';
 import {destructionEffects29} from './destructionBatch29';
 import {triggerEffects29} from './triggerBatch29';
@@ -56,6 +70,7 @@ import {ritualRuleIssues,type RitualRule} from './ritualRules';
 import {recoveryIssues,type RecoveryRule} from './recoveryRules';
 import {selectedMovementIssues,type SelectedMovementRule} from './selectedMovement';
 export type Effect=
+ |{kind:'discardRemoval';mode:import('./discardRemoval').RemovalMode;activation:ActivationModel}
  |{kind:'conditionalDestruction';activation:ActivationModel;zone:'monsters'|'backrow'|'equipSpells';scope:'all'|'opponent'|'selected';controller?:'opponent';requiredName?:string;minFieldMonsters?:number;minBanished?:number;faceUp?:true;equipped?:true;opponentGainOnDestroy?:number}
  |{kind:'destroyExtreme';scope:'all'|'opponent';stat:'atk'|'defense';position?:'atk'|'def';faceUp?:true}
  |{kind:'destroyTargetPosition';position:'atk'|'def'}
@@ -67,16 +82,35 @@ export type Effect=
  |{kind:'choiceSequence';activation:ActivationModel;choices:readonly {operations:readonly EconomicOperation[]}[]}
  |{kind:'ritualSummon';ritual:RitualRule}
  |{kind:'destroyFiltered';filter:DestructionFilter}
- |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number}
+ |{kind:'continuous';rules:readonly ContinuousRule[];activation:ActivationModel;lpCost?:number;presenceOnly?:true}
+ |{kind:'summonCeiling';maximumAtk:number}
+ |{kind:'drawSkip';mode:'opponent'|'reckless'}
+ |{kind:'graveWager'}
+ |{kind:'statDie';side:'allies'|'enemies'}
+ |{kind:'fieldTrap';mode:import('./fieldTraps').FieldTrapMode}
  |{kind:'temporaryModifier';atk:number;def:number}
  |{kind:'destroySpellTraps';scope:'all'|'opponent'}
  |{kind:'sequence';activation:ActivationModel;operations:readonly EconomicOperation[]}
- |{kind:'attackResponse';activation:ActivationModel;endBattle:boolean;reflectAttack:boolean}
+ |{kind:'attackResponse';activation:ActivationModel;endBattle:boolean;reflectAttack:boolean;gainAttack?:true}
  |{kind:'monsterEffect'|'normal'|'fusion'|'fissure'|'polymerization'|'darkHole'|'cardDestruction'|'giantTrunade'|'shieldSword'|'monsterReborn'|'changeHeart'|'blockAttack'|'deSpell'|'removeTrap'|'reinforcements'|'castleWalls'|'waboku'|'trapHole'|'justDesserts'|'magicJammer'|'sevenTools'|'potOfGreed'|'raigeki'|'mysticalSpaceTyphoon'|'bookOfMoon'|'torrentialTribute'|'bottomlessTrapHole'|'sakuretsuArmor'|'mirrorForce'}
  |{kind:'heal'|'burn';amount:number}
  |{kind:'field';races:string[];attributes?:string[];atk:number;def:number;penaltyRaces?:string[];defensePositionOnly?:boolean;rules?:readonly ContinuousRule[]}
  |{kind:'equip';races?:string[];attribute?:string;names?:string[];monsterType?:'fusion'|'ritual';maxLevel?:number;atk:number;def:number;count?:CountFormula;combat?:readonly CombatRule[]};
 export const effectDefinitions:Record<string,Effect>={
+ ...m59_control_lockEffects,
+ ...m58_battle_recoveryEffects,
+ ...m57_skipped_drawsEffects,
+ ...m56_called_coinsEffects,
+ ...m55_coin_targetsEffects,
+ ...m54_dice_and_coinsEffects,
+ ...m53_name_and_summonEffects,
+ ...m52_field_trapsEffects,
+ ...m51_scaled_standbyEffects,
+ ...m50_battle_damageEffects,
+ ...m49_standby_lpEffects,
+ ...m48_thunder_dragonEffects,
+ ...m47_summon_and_presenceEffects,
+ ...m46_discard_removalEffects,
  ...m44_double_tributeEffects,
  ...m43_dd_assailantEffects,
  ...m42_battle_zone_outcomesEffects,
@@ -173,6 +207,7 @@ export const effectDefinitions:Record<string,Effect>={
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
 export function effectDefinitionIssues(value:unknown):string[]{
  const e=value as Effect;
+ if(e?.kind==='discardRemoval')return Object.keys(e).some(k=>!['kind','mode','activation'].includes(k))||!['destroyMonster','destroyCard','banishFaceUp','deckTop','continuousSpells','continuousTraps'].includes(e.mode)||!e.activation?['invalid-discard-removal']:[];
  if(e?.kind==='conditionalDestruction'){
   if(Object.keys(e).some(k=>!['kind','activation','zone','scope','controller','requiredName','minFieldMonsters','minBanished','faceUp','equipped','opponentGainOnDestroy'].includes(k))||!['monsters','backrow','equipSpells'].includes(e.zone)||!['all','opponent','selected'].includes(e.scope)||e.scope==='selected'&&e.zone!=='monsters'||e.controller!==undefined&&(e.controller!=='opponent'||e.scope!=='selected')||e.requiredName!==undefined&&(typeof e.requiredName!=='string'||!e.requiredName)||e.minFieldMonsters!==undefined&&(!Number.isSafeInteger(e.minFieldMonsters)||e.minFieldMonsters<1)||e.minBanished!==undefined&&(!Number.isSafeInteger(e.minBanished)||e.minBanished<1)||e.faceUp!==undefined&&(e.faceUp!==true||e.zone!=='monsters')||e.equipped!==undefined&&(e.equipped!==true||e.zone!=='monsters')||e.opponentGainOnDestroy!==undefined&&(!Number.isSafeInteger(e.opponentGainOnDestroy)||e.opponentGainOnDestroy<1||e.zone!=='monsters')||!e.activation||![1,2,3].includes(e.activation.speed)||!['main','free','attackDeclared','summoned','spellActivated','trapActivated'].includes(e.activation.window))return ['invalid-conditional-destruction'];
   return [];
@@ -190,12 +225,17 @@ export function effectDefinitionIssues(value:unknown):string[]{
  if(e?.kind==='ritualMonster')return Object.keys(e).length===1?[]:['invalid-ritual-monster'];
  if(e?.kind==='ritualSummon')return Object.keys(e).some(k=>!['kind','ritual'].includes(k))?['unknown-ritual-field']:ritualRuleIssues(e.ritual);
  if(e?.kind==='destroyFiltered')return Object.keys(e).some(k=>!['kind','filter'].includes(k))?['unsupported-destruction-field']:destructionFilterIssues(e.filter);
- if(e?.kind==='continuous')return [...continuousRuleIssues(e.rules),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
+ if(e?.kind==='continuous')return [...(e.presenceOnly===undefined?continuousRuleIssues(e.rules):e.presenceOnly===true&&Array.isArray(e.rules)&&!e.rules.length&&e.lpCost!==undefined?[]:['invalid-presence-only-spell']),...e.lpCost!==undefined&&(!Number.isSafeInteger(e.lpCost)||e.lpCost<1)?['invalid-continuous-cost']:[]];
+ if(e?.kind==='summonCeiling')return Object.keys(e).length===2&&Number.isSafeInteger(e.maximumAtk)&&e.maximumAtk>=0?[]:['invalid-summon-ceiling'];
+ if(e?.kind==='drawSkip')return Object.keys(e).length===2&&['reckless','opponent'].includes(e.mode)?[]:['invalid-draw-skip'];
+ if(e?.kind==='graveWager')return Object.keys(e).length===1?[]:['invalid-grave-wager'];
+ if(e?.kind==='statDie')return Object.keys(e).length===2&&['allies','enemies'].includes(e.side)?[]:['invalid-stat-die'];
+ if(e?.kind==='fieldTrap')return Object.keys(e).length===2&&['returnHand','reduceAttacker','reduceDefense','handBoost'].includes(e.mode)?[]:['invalid-field-trap'];
  if(e?.kind==='temporaryModifier')return Number.isSafeInteger(e.atk)&&Number.isSafeInteger(e.def)?[]:['invalid-temporary-modifier'];
  if(e?.kind==='destroySpellTraps')return ['all','opponent'].includes(e.scope)?[]:['invalid-spell-trap-scope'];
  if(!e||typeof e!=='object'||!executableKinds.has(e.kind))return ['unknown-effect-operation'];
  if(e.kind==='sequence')return economicOperationIssues(e.operations);
- if(e.kind==='attackResponse'&&(typeof e.endBattle!=='boolean'||typeof e.reflectAttack!=='boolean'||!e.endBattle&&!e.reflectAttack))return ['invalid-attack-response'];
+ if(e.kind==='attackResponse'&&(typeof e.endBattle!=='boolean'||typeof e.reflectAttack!=='boolean'||e.gainAttack!==undefined&&e.gainAttack!==true||e.gainAttack&&(e.reflectAttack||e.endBattle)||!e.endBattle&&!e.reflectAttack&&!e.gainAttack))return ['invalid-attack-response'];
  if((e.kind==='heal'||e.kind==='burn')&&(!Number.isSafeInteger(e.amount)||e.amount<=0))return ['invalid-effect-amount'];
  if(e.kind==='field'||e.kind==='equip'){
   if(!Number.isSafeInteger(e.atk)||!Number.isSafeInteger(e.def))return ['invalid-modifier'];

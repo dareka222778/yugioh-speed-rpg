@@ -1,0 +1,3796 @@
+{
+  "format": 1,
+  "batchId": "m57-skipped-draws",
+  "engineVersion": "engine-v9",
+  "baseRevision": "f75d9353f19e1aadcd6188e2700ea49c2d3558f622002ea4e25af2c4d0a14957",
+  "reviews": [
+    {
+      "id": "35316708",
+      "canonicalId": "dcbc3e69-e6ee-4786-9cc5-fbbddb53b9d9",
+      "konamiId": 4984,
+      "reviewer": "Work: Konami text and TCG printing",
+      "reviewedAt": "2026-11-10",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4984&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2002-10-20",
+        "set": "PSV-007",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4984&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "1a76969f6a84e45fec03a7cd466417ee2f127de6f45f98c6bcdbde6290b8b7e2",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    },
+    {
+      "id": "37576645",
+      "canonicalId": "c3417ebf-2760-4bb1-aa14-c8307aac9e22",
+      "konamiId": 5448,
+      "reviewer": "Work: Konami text and TCG printing",
+      "reviewedAt": "2026-11-10",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5448&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2003-07-18",
+        "set": "PGD-051",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5448&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "b8579e58ddac71a3cd4bc4b31316cd355560e759f29b42919a412328c00c3436",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "card": {
+        "id": "35316708",
+        "konamiId": 4984,
+        "name": "Selo Temporal",
+        "englishName": "Time Seal",
+        "kind": "trap",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4984&request_locale=en",
+        "summary": "O oponente pula a próxima Fase de Compra dele.",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "drawSkip",
+        "mode": "opponent"
+      },
+      "requirements": [
+        "effect:drawSkip"
+      ],
+      "family": "m57-skipped-draws",
+      "textEvidence": {
+        "text": "On resolution the opponent skips their next Draw Phase. Two copies applying before that phase both cover the same phase, so the following turn draws normally. The skip concerns only regular turn draws. No deck-out check occurs for a skipped draw, Standby still happens, and unrelated effects can draw. Negation applies no future restriction. No cost or target. State persists across turns and restores.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4984&request_locale=en",
+        "sha256": "1a76969f6a84e45fec03a7cd466417ee2f127de6f45f98c6bcdbde6290b8b7e2"
+      },
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "skipDrawPhases"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 0
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "skip"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "skipDrawPhases"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 0
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "skip"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "skipDrawPhases"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 0
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "skip"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tools",
+                "target": "skip"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "a0"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "b0"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 3,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "single-skip-and-resume": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "hand",
+                "length"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "b0"
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "overlap-not-additive": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  },
+                  {
+                    "uid": "other",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "other",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 2
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "skipped-empty-deck-not-loss": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": []
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": null
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "deck",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "next-required-draw-loses": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": []
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "a"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "finished"
+            }
+          ]
+        },
+        "standby-still-resolves": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "heal",
+                    "id": "85802526",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4800
+            }
+          ]
+        },
+        "effect-draw-unaffected": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "35316708",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "pot",
+                    "id": "55144522"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "pot"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "b0"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "b1"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "deterministic-replay",
+        "negation",
+        "json-restore",
+        "negative",
+        "single-skip-and-resume",
+        "overlap-not-additive",
+        "skipped-empty-deck-not-loss",
+        "next-required-draw-loses",
+        "standby-still-resolves",
+        "effect-draw-unaffected"
+      ]
+    },
+    {
+      "card": {
+        "id": "37576645",
+        "konamiId": 5448,
+        "name": "Ganância Descuidada",
+        "englishName": "Reckless Greed",
+        "kind": "trap",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5448&request_locale=en",
+        "summary": "Compre duas cartas e pule suas próximas duas Fases de Compra.",
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "effect": {
+        "kind": "drawSkip",
+        "mode": "reckless"
+      },
+      "requirements": [
+        "effect:drawSkip"
+      ],
+      "family": "m57-skipped-draws",
+      "textEvidence": {
+        "text": "On resolution draw two cards, then skip your own next two Draw Phases. Requires two cards in your Deck to activate. Multiple activations in one turn draw twice for each successful effect but the same next two phases are skipped. The skip concerns only regular turn draws. No deck-out check occurs for a skipped draw, Standby still happens, and unrelated effects can draw. Negation applies no future restriction. No cost or target. State persists across turns and restores.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5448&request_locale=en",
+        "sha256": "b8579e58ddac71a3cd4bc4b31316cd355560e759f29b42919a412328c00c3436"
+      },
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "skipDrawPhases"
+              ],
+              "equals": 2
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 2
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "skip"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "skipDrawPhases"
+              ],
+              "equals": 2
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 2
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "skip"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "skipDrawPhases"
+              ],
+              "equals": 2
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 2
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "skip"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "trap",
+                "card": "tools",
+                "target": "skip"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "a0"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "b0"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "tools",
+                    "id": "03819470",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 2
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 3,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "two-skips-and-resume": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 3
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "a2"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand"
+              ],
+              "containsUID": "b2"
+            }
+          ]
+        },
+        "cannot-activate-short": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "one",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                "length"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "overlap-not-additive": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  },
+                  {
+                    "uid": "other",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "other",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "length"
+              ],
+              "equals": 5
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "hand",
+                "length"
+              ],
+              "equals": 3
+            }
+          ]
+        },
+        "skipped-empty-deck-not-loss": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": null
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "deck",
+                "length"
+              ],
+              "equals": 0
+            }
+          ]
+        },
+        "next-required-draw-loses": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "winner"
+              ],
+              "equals": "b"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "finished"
+            }
+          ]
+        },
+        "standby-still-resolves": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "heal",
+                    "id": "85802526",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4800
+            }
+          ]
+        },
+        "effect-draw-unaffected": {
+          "fixture": {
+            "players": [
+              {
+                "backrow": [
+                  {
+                    "uid": "skip",
+                    "id": "37576645",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ],
+                "deck": [
+                  {
+                    "uid": "a0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "a8",
+                    "id": "91152256"
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "pot",
+                    "id": "55144522"
+                  }
+                ]
+              },
+              {
+                "deck": [
+                  {
+                    "uid": "b0",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b1",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b2",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b3",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b4",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b5",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b6",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b7",
+                    "id": "91152256"
+                  },
+                  {
+                    "uid": "b8",
+                    "id": "91152256"
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "trap",
+                "card": "skip",
+                "target": ""
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "pot"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "a2"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "a3"
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "activation",
+        "resolution",
+        "deterministic-replay",
+        "negation",
+        "json-restore",
+        "negative",
+        "two-skips-and-resume",
+        "cannot-activate-short",
+        "overlap-not-additive",
+        "skipped-empty-deck-not-loss",
+        "next-required-draw-loses",
+        "standby-still-resolves",
+        "effect-draw-unaffected"
+      ]
+    }
+  ]
+}

@@ -84,6 +84,62 @@
     {
       "id": "m44-double-tribute",
       "proofSHA256": "ab38097d571aa8365b071d9ef3d0de2795229961c2405af8b0d853603e591d7c"
+    },
+    {
+      "id": "m46-discard-removal",
+      "proofSHA256": "b900f0c4d671f8fcc4f0dbab75a977e8b1e30f61408027b60097b7f98c88e903"
+    },
+    {
+      "id": "m47-summon-and-presence",
+      "proofSHA256": "add4f5feea4a7df27b8227dec97b4b9214c98882ddefe966a634989dd0134e1c"
+    },
+    {
+      "id": "m48-thunder-dragon",
+      "proofSHA256": "5283d40b75a8066c56f90cad300845946d81e96278e30cec46b7a2f1a1482a14"
+    },
+    {
+      "id": "m49-standby-lp",
+      "proofSHA256": "e4d19728561499fbd3a42fc0b19c2f76d790672acaa326f4975c8d25def5b641"
+    },
+    {
+      "id": "m50-battle-damage",
+      "proofSHA256": "5e01a4a5c5bd60bcae6a0ab76e8ae926c03a83672d8626b01725b313a0f6ad71"
+    },
+    {
+      "id": "m51-scaled-standby",
+      "proofSHA256": "423047ec7cfd8640da69088dd704b469b04c0fd8155fbd029b6518325c57c287"
+    },
+    {
+      "id": "m52-field-traps",
+      "proofSHA256": "65639b4e5c695c91d8ffe65cb965b4a6af682f44ff318a96905e83fb6921a287"
+    },
+    {
+      "id": "m53-name-and-summon",
+      "proofSHA256": "0b2ad21d48d88fa3f4549313f8a5e720a65a133e68531735f3c91df75114c9aa"
+    },
+    {
+      "id": "m54-dice-and-coins",
+      "proofSHA256": "f6b75371cb9b3f743371456fd6fcb5eb76b7badf3dee46f02090f8fc4b9a456c"
+    },
+    {
+      "id": "m55-coin-targets",
+      "proofSHA256": "c530a63e70cd72732b16a8be3979577882fd89b29d191e570831645132f0c870"
+    },
+    {
+      "id": "m56-called-coins",
+      "proofSHA256": "9cd69a0d851d775ed9fdfe138355c1c8fa7bb7a284985102ee8d57c2f6815683"
+    },
+    {
+      "id": "m57-skipped-draws",
+      "proofSHA256": "59a740068bad7ca57263ece04b926948e6a4eace377f039c326d9004e51e2590"
+    },
+    {
+      "id": "m58-battle-recovery",
+      "proofSHA256": "e685e687472c96f5162edc2d16eae946f36ce44cbeaa8652dbb2bad744ee53b1"
+    },
+    {
+      "id": "m59-control-lock",
+      "proofSHA256": "e74e2c910b2603652573b0b184080859f98fe648bf0c39eb87c2e5412e22fe6a"
     }
   ]
 }

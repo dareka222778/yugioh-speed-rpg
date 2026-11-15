@@ -1,3 +1,4 @@
+const unadmitted=require('../scripts/unadmitted-example.cjs');
 /** Explicit release authorization is separate from mechanical certification. */
 const assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto');
 const r=require('../dist/effectRegistry'),{releasedCardIds}=require('../dist/releasedCardIds'),{cardDistributionAllowed}=require('../dist/cardReleasePolicy');
@@ -6,7 +7,7 @@ assert.equal(p.baselineReleaseCount,136);assert.equal(p.newReleaseCount,696);ass
 assert.ok(manifest.revisions.some(r=>r.id===p.catalogRevision));assert.equal(p.addedIds.length,696);assert.equal(new Set(p.addedIds).size,696);
 assert.deepEqual(new Set(r.enabledCardIds),releasedCardIds);assert.equal(releasedCardIds.size,r.enabledCardIds.length);
 for(const id of releasedCardIds){assert.equal(r.getCardStatus(id)?.stage,'certified');assert.equal(cardDistributionAllowed(id),true);}
-for(const id of ['00000000','71625222','token:sheep'])assert.equal(cardDistributionAllowed(id),false);
+for(const id of ['00000000',unadmitted,'token:sheep'])assert.equal(cardDistributionAllowed(id),false);
 const bytes=fs.readFileSync('src/releasedCardIds.ts');
 const previous=require('./mission27-reviewed-extensions.cjs').strip('src/releasedCardIds.ts',bytes).toString('utf8');
 assert.equal([...previous.matchAll(/"(\d{8})"/g)].length,136);

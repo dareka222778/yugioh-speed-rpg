@@ -1,3 +1,4 @@
+const unadmitted=require('../scripts/unadmitted-example.cjs');
 const {test,after}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'classic-engine-'));process.env.DATABASE_PATH=path.join(temporary,'game.sqlite');
 const e=require('../dist/duelEngine'),r=require('../dist/effectRegistry'),catalog=require('../dist/cardCatalog'),{chooseNPC}=require('../dist/duelStore');
@@ -17,8 +18,8 @@ test('only audited card effects can join a duel, and every Normal monster has an
  const normals=r.engineCatalog.filter(c=>c.kind==='monster'&&c.summary.startsWith('Monstro Normal:'));
  assert.ok(normals.length>=60);
  for(const c of normals)assert.equal(r.getEffect(c.id)?.kind,'normal',c.name);
- assert.equal(r.getEffect('71625222'),undefined);
- assert.throws(()=>e.validateDuelCards([...basic.slice(1),'71625222']),/implementada/);
+ assert.equal(r.getEffect(unadmitted),undefined);
+ assert.throws(()=>e.validateDuelCards([...basic.slice(1),unadmitted]),/implementada/);
  for(const id of e.IMPLEMENTED_DUEL_CARDS)assert.ok(r.engineCard(id)&&r.getEffect(id));
 });
 test('every newly supported Normal monster uses its own printed stats and correct tribute requirement',()=>{

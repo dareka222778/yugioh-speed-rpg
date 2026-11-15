@@ -1,0 +1,2370 @@
+{
+  "format": 1,
+  "batchId": "m59-control-lock",
+  "engineVersion": "engine-v9",
+  "baseRevision": "3e3bbc195f329b4088ec2f1a63cb72c6abae2f3343df2d9b8bad0f402a555380",
+  "reviews": [
+    {
+      "id": "35215622",
+      "canonicalId": "d88cd460-b6f3-4b9b-8100-9852fad05161",
+      "konamiId": 5714,
+      "reviewer": "Work: Konami text and TCG printing",
+      "reviewedAt": "2026-11-10",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5714&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1800,
+        "defense": 1500,
+        "race": "Warrior",
+        "attribute": "EARTH"
+      },
+      "verifiedPrinting": {
+        "date": "2003-12-01",
+        "set": "DCR-022",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5714&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "866d15934829816165e8e52ee1e96db366c8b5073749ec088d2987fc2ee974ed",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "dd462240688bddb9e7c55abcc9b7c5d2b86529dfb402ce48ee9485ad93fab192"
+    },
+    {
+      "id": "22609617",
+      "canonicalId": "85b6e66c-3f46-4873-8ff1-34cbc7817ba3",
+      "konamiId": 5898,
+      "reviewer": "Work: Konami text and TCG printing",
+      "reviewedAt": "2026-11-10",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5898&request_locale=en",
+      "primaryFacts": {
+        "level": 3,
+        "atk": 1300,
+        "defense": 800,
+        "race": "Warrior",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2004-03-01",
+        "set": "IOC-086",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5898&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "b9426cb474902bf0125eeb1267df9f96307384170de20c48615fb4fa194ca931",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "b1877336c4d307991dd836d015ea9e7404895fdbee326dd528d3e543807153d6"
+    }
+  ],
+  "candidates": [
+    {
+      "card": {
+        "id": "35215622",
+        "konamiId": 5714,
+        "name": "Goblin Cegamente Leal",
+        "englishName": "Blindly Loyal Goblin",
+        "kind": "monster",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5714&request_locale=en",
+        "summary": "O controle deste monstro com a face para cima não pode mudar.",
+        "level": 4,
+        "atk": 1800,
+        "defense": 1500,
+        "race": "Warrior",
+        "attribute": "EARTH",
+        "monsterType": "effect"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:continuous",
+        "continuous:controlLock"
+      ],
+      "family": "m59-control-lock",
+      "textEvidence": {
+        "text": "While face-up in the Monster Zone with its effects applying, control of this monster cannot change. A control-changing effect cannot target this visible monster; a Set copy can be targeted. Recheck the lock when resolving an already announced effect and when temporary control would expire. Ownership never changes. The restriction is disabled by monster effect negation and does not protect other monsters.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5714&request_locale=en",
+        "sha256": "866d15934829816165e8e52ee1e96db366c8b5073749ec088d2987fc2ee974ed"
+      },
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "plain"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "plain"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "plain"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "plain"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "hidden-identity-allowed": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "owner"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "position",
+                "card": "lock",
+                "mode": "flip"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "owner"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "position",
+                "card": "lock",
+                "mode": "flip"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "owner"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              },
+              "expectError": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "change",
+                "target": "other"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters",
+                "length"
+              ],
+              "equals": 2
+            }
+          ]
+        },
+        "lock-returns-before-resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "35215622",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  },
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "skill"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "skill"
+            }
+          ]
+        },
+        "attack-allowance": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "35215622",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 8000
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "attack",
+                "card": "src"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6200
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "negative",
+        "activation",
+        "resolution",
+        "deterministic-replay",
+        "negation",
+        "continuous-negation",
+        "source-loss",
+        "hidden-identity-allowed",
+        "dynamic-recalculation",
+        "json-restore",
+        "multiple-sources",
+        "lock-returns-before-resolution",
+        "attack-allowance"
+      ],
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "controlLock",
+                "filter": {
+                  "selfOnly": true
+                }
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "fingerprint": "dd462240688bddb9e7c55abcc9b7c5d2b86529dfb402ce48ee9485ad93fab192",
+      "suites": [
+        "tests/generated-m59-control-lock.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "22609617",
+        "konamiId": 5898,
+        "name": "Mataza, o Surpreendente",
+        "englishName": "Mataza the Zapper",
+        "kind": "monster",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5898&request_locale=en",
+        "summary": "O controle deste monstro com a face para cima não pode mudar. Pode atacar duas vezes em cada Fase de Batalha.",
+        "level": 3,
+        "atk": 1300,
+        "defense": 800,
+        "race": "Warrior",
+        "attribute": "DARK",
+        "monsterType": "effect"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:continuous",
+        "continuous:controlLock",
+        "continuous:combat"
+      ],
+      "family": "m59-control-lock",
+      "textEvidence": {
+        "text": "While face-up in the Monster Zone with its effects applying, control of this monster cannot change. A control-changing effect cannot target this visible monster; a Set copy can be targeted. Recheck the lock when resolving an already announced effect and when temporary control would expire. Ownership never changes. The restriction is disabled by monster effect negation and does not protect other monsters. In addition the same copy can make two attacks each Battle Phase while its effects apply; the maximum does not stack.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5898&request_locale=en",
+        "sha256": "b9426cb474902bf0125eeb1267df9f96307384170de20c48615fb4fa194ca931"
+      },
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "plain"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "plain"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "plain"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "plain"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            }
+          ]
+        },
+        "hidden-identity-allowed": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "owner"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "position",
+                "card": "lock",
+                "mode": "flip"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "owner"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "position",
+                "card": "lock",
+                "mode": "flip"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "end"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "owner"
+              ],
+              "equals": 1
+            },
+            {
+              "path": [
+                "current"
+              ],
+              "equals": 1
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "other",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              },
+              "expectError": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "spell",
+                "card": "change",
+                "target": "other"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters",
+                "length"
+              ],
+              "equals": 2
+            }
+          ]
+        },
+        "lock-returns-before-resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "change",
+                    "id": "04031928"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "lock",
+                    "id": "22609617",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "plain",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "skill",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  },
+                  {
+                    "uid": "mst",
+                    "id": "05318639",
+                    "setTurn": 0,
+                    "faceUp": false,
+                    "resolved": false
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "change",
+                "target": "lock"
+              }
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "spell",
+                "card": "mst",
+                "target": "skill"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "monsters"
+              ],
+              "containsUID": "lock"
+            },
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "skill"
+            }
+          ]
+        },
+        "attack-allowance": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "22609617",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 8000
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "attack",
+                "card": "src"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 5400
+            }
+          ]
+        },
+        "negation-disables-second-attack": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "src",
+                    "id": "22609617",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "lp": 8000,
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "setTurn": 0,
+                    "faceUp": true,
+                    "resolved": true
+                  }
+                ]
+              }
+            ],
+            "randomSeed": "0000000000000000000000000000000000000000000000000000000000000000",
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "src"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "a",
+              "action": {
+                "kind": "attack",
+                "card": "src"
+              },
+              "expectError": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 6700
+            }
+          ]
+        }
+      },
+      "scenarios": [
+        "negative",
+        "activation",
+        "resolution",
+        "deterministic-replay",
+        "negation",
+        "continuous-negation",
+        "source-loss",
+        "hidden-identity-allowed",
+        "dynamic-recalculation",
+        "json-restore",
+        "multiple-sources",
+        "lock-returns-before-resolution",
+        "attack-allowance",
+        "negation-disables-second-attack"
+      ],
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "continuous",
+            "rules": [
+              {
+                "kind": "controlLock",
+                "filter": {
+                  "selfOnly": true
+                }
+              },
+              {
+                "kind": "combat",
+                "filter": {
+                  "selfOnly": true
+                },
+                "rule": {
+                  "kind": "attacks",
+                  "maximum": 2
+                }
+              }
+            ]
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "fingerprint": "b1877336c4d307991dd836d015ea9e7404895fdbee326dd528d3e543807153d6",
+      "suites": [
+        "tests/generated-m59-control-lock.test.cjs"
+      ]
+    }
+  ]
+}
