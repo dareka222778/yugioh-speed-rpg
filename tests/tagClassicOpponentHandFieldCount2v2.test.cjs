@@ -227,7 +227,7 @@ test('Secret Barrel counts the active opposing hand plus both opponents shared f
 
   const setBackrow=tag.tagActions(state,member(1)).find(action=>action.kind==='set'&&action.card===mooyan.uid);
   assert.ok(setBackrow,'opposing seat 1 must be able to Set a Spell in the shared backrow');
-  state=tag.stepTagDuel(state,member(1),setBackrow);
+  state=settle(tag.stepTagDuel(state,member(1),setBackrow));
   assert.ok(state.core.players[1].backrow.some(card=>card.uid===mooyan.uid&&!card.faceUp));
 
   state=endTurn(state,1);
