@@ -31,7 +31,7 @@ for(const source of SOURCES){
   assert.ok(effect?.operation.kind==='continuous'&&effect.operation.rules.some(rule=>
     rule.kind==='preventActivation'&&rule.cardKind==='trap'&&rule.controller==='both'&&rule.window==='ownNormalSummon'
   ),source.name+' must block Trap activation only in response to its own Normal Summon');
-  assert.equal(getMonsterDefinition(source.id)?.activation.window,'continuous');
+  assert.equal(getMonsterDefinition(source.id)?.activation?.window,'continuous');
 }
 assert.ok(getPlayableCard(TRAP_HOLE)?.kind==='trap','Trap Hole must be enabled');
 assert.ok(getPlayableCard(TORRENTIAL_TRIBUTE)?.kind==='trap','Torrential Tribute must be enabled');
@@ -109,9 +109,10 @@ function pass(state,seat){
 function settle(state){
   for(let guard=0;state.core.phase==='response';guard++){
     assert.ok(guard<20,'the response chain must terminate');
-    state=pass(state,tag.tagDecisionMember(state).id==='m231-seat-0'?0:
-      tag.tagDecisionMember(state).id==='m231-seat-1'?1:
-      tag.tagDecisionMember(state).id==='m231-seat-2'?2:3);
+    const actor=tag.tagDecisionMember(state).id;
+    const action=tag.tagActions(state,actor).find(candidate=>candidate.kind==='pass');
+    assert.ok(action,'the active physical responder must receive a legal pass');
+    state=tag.stepTagDuel(state,actor,action);
   }
   return state;
 }
