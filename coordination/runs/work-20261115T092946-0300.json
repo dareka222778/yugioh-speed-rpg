@@ -12,7 +12,9 @@
   "sharedHeadAtStart": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
   "previousCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
   "scope": [
-    "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+    "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
+    "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
+    "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
   ],
   "reservation": {
     "runId": "work-20261115T092946-0300",
@@ -131,5 +133,123 @@
     "liveDiscordValidation": false,
     "hosting": "not independently verified"
   },
-  "status": "Reserva M228 registrada por CAS; implementação em andamento."
+  "status": "Três PRs draft publicadas; CI em andamento. Nenhuma alteração de runtime.",
+  "additionalBranches": [
+    {
+      "mission": "M229",
+      "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+      "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+      "pr": 185,
+      "files": [
+        "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
+      ],
+      "state": "active; CI running"
+    },
+    {
+      "mission": "M230",
+      "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+      "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+      "pr": 186,
+      "files": [
+        "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+      ],
+      "state": "active; CI running"
+    }
+  ],
+  "pullRequests": [
+    {
+      "mission": "M228",
+      "pr": 184,
+      "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+      "head": "ff345f04ddfc0ac42c6ec7105a66c9cd0bfdca11",
+      "cards": [
+        "Amazoness Archer",
+        "Hysteric Fairy"
+      ],
+      "tests": 5,
+      "ci": {
+        "verifiedCatalogPlan": "success",
+        "cardBatchFast": "in_progress",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "mission": "M229",
+      "pr": 185,
+      "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+      "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+      "cards": [
+        "Old Vindictive Magician",
+        "Gale Lizard"
+      ],
+      "tests": 6,
+      "ci": {
+        "verifiedCatalogPlan": "in_progress",
+        "cardBatchFast": "in_progress",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "mission": "M230",
+      "pr": 186,
+      "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+      "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+      "cards": [
+        "4-Starred Ladybug of Doom",
+        "Nobleman-Eater Bug"
+      ],
+      "tests": 2,
+      "ci": {
+        "verifiedCatalogPlan": "success",
+        "cardBatchFast": "in_progress",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    }
+  ],
+  "findings": [
+    "A primeira execução de M228 falhou porque a fixture definiu rulesVersion='speed-rpg-v2', que seleciona legacySeven (handLimit 7, handCheck before-draw, Extra 6). Removida a versão legada nas três fixtures; o perfil padrão atual respeita mão 6, descarte no fim e Extra 5.",
+    "M229: ajuste preventivo para resolver a janela de resposta quando um efeito FLIP obrigatório não tem alvos adversários.",
+    "M230: asserção de rejeição de alvo duplicado usa regex de erro, evitando assinatura inválida de assert.throws."
+  ],
+  "lastActivityAt": "2026-11-15T09:41:19-03:00",
+  "catalogAtCurrentCheck": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "remainingTo1000": 31,
+    "historicalUnique": 1962,
+    "pendingHistorical": 993,
+    "fullyUnreviewed": 966,
+    "triageQueue": 31,
+    "newCertificationsThisRun": 0,
+    "inventoryGranted": 0,
+    "milestoneArtifactId": 14112394839,
+    "milestoneRunId": 43592911763,
+    "sharedBranch": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "m71TestBase": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "pr14DevelopmentBranch": {
+      "cards": 1014,
+      "certificates": 1014,
+      "merged": false
+    },
+    "deltaToShared": 45
+  }
 }

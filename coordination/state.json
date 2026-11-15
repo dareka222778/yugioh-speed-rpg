@@ -4,12 +4,14 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T09:29:46-03:00",
-  "lastActivityAt": "2026-11-15T09:29:46-03:00",
+  "lastActivityAt": "2026-11-15T09:41:19-03:00",
   "nextScheduledAt": "2026-11-15T14:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+    "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
+    "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
+    "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261115T092946-0300.json",
   "previousRunId": "work-20261115T055534-0300",
@@ -1721,6 +1723,30 @@
       ],
       "state": "active",
       "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs."
+    },
+    {
+      "mission": "M229",
+      "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+      "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 185,
+      "scope": [
+        "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
+      ],
+      "state": "active; CI running"
+    },
+    {
+      "mission": "M230",
+      "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+      "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "pr": 186,
+      "scope": [
+        "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+      ],
+      "state": "active; CI running"
     }
   ],
   "handoffRequest": {
@@ -3147,7 +3173,7 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Implementar e validar M228; depois conferir CI, atualizar checkpoint e liberar somente a reserva própria.",
+  "nextTask": "Concluir npm test/Engine Validation/soaks de M228–M230; corrigir somente as próprias fixtures; depois liberar as três branches ao auxiliar.",
   "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
   "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
   "sharedHeadBeforeClaim": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
@@ -4878,9 +4904,33 @@
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
     "reservedFiles": [
-      "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+      "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
+      "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
+      "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
     ],
-    "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção.",
+    "additionalBranches": [
+      {
+        "mission": "M229",
+        "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+        "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+        "pr": 185,
+        "files": [
+          "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
+        ],
+        "state": "active; CI running"
+      },
+      {
+        "mission": "M230",
+        "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+        "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+        "pr": 186,
+        "files": [
+          "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+        ],
+        "state": "active; CI running"
+      }
+    ]
   },
   "sharedHeadAtStart": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
   "partialHandoffRequest": {
@@ -5169,7 +5219,7 @@
       "failure": null
     }
   ],
-  "updatedAt": "2026-11-15T09:29:46-03:00",
+  "updatedAt": "2026-11-15T09:41:19-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -5261,9 +5311,33 @@
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtReservation": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
       "reservedFiles": [
-        "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+        "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
+        "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
+        "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
       ],
-      "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+      "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção.",
+      "additionalBranches": [
+        {
+          "mission": "M229",
+          "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+          "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+          "pr": 185,
+          "files": [
+            "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
+          ],
+          "state": "active; CI running"
+        },
+        {
+          "mission": "M230",
+          "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+          "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+          "pr": 186,
+          "files": [
+            "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+          ],
+          "state": "active; CI running"
+        }
+      ]
     }
   ],
   "previousCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
@@ -5280,9 +5354,33 @@
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
     "reservedFiles": [
-      "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+      "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs",
+      "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs",
+      "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
     ],
-    "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção.",
+    "additionalBranches": [
+      {
+        "mission": "M229",
+        "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
+        "head": "81a9710363f2b62e64aae13b34524ca87c1e727b",
+        "pr": 185,
+        "files": [
+          "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
+        ],
+        "state": "active; CI running"
+      },
+      {
+        "mission": "M230",
+        "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
+        "head": "716b397754d7592047dd6d2fe3a523f75ab68ddf",
+        "pr": 186,
+        "files": [
+          "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
+        ],
+        "state": "active; CI running"
+      }
+    ]
   },
   "runRegistration": {
     "runId": "work-20261115T092946-0300",
