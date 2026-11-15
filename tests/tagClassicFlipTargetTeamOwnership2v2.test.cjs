@@ -166,7 +166,7 @@ for(const cardId of [OLD_VINDICTIVE,GALE_LIZARD]){
     const before=inventorySnapshot(state);
     const source=placeMonster(state,2,cardId,false);
     const ally=placeMonster(state,0,NORMALS[2],true);
-    state=flip(state,source);
+    state=settle(flip(state,source));
     assert.notEqual(state.core.phase,'choice','no opposing monster means no target-selection window');
     assert.ok(!state.core.choice,'no target choice may be created for an allied-only field');
     assert.ok(state.core.players[0].monsters.some(card=>card.uid===source.uid&&card.faceUp));
