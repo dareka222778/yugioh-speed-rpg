@@ -1,0 +1,104 @@
+{
+  "runId": "work-20261114T233246-0300",
+  "owner": "Work",
+  "mission": "M211",
+  "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
+  "state": "active",
+  "startedAt": "2026-11-14T23:32:46-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "b360ed37ee5ea4ff30a3a9b364ac52bb8de7216c",
+  "reservedFiles": [
+    "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+  ],
+  "blocksCompleted": [],
+  "parallelWorkObserved": {
+    "activeParallelWork": {
+      "pr": 17,
+      "branch": "feat/work-m61-handlimit-ci-20261111",
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "state": "handoff-pending",
+      "lastRequestComment": 6885378522,
+      "noResponse": true,
+      "blockedFiles": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts",
+        "src/classicEffects.ts",
+        "src/duelIntegrity.ts",
+        "scripts/mass-certification21.cjs"
+      ],
+      "lastRequestAt": "2026-11-14T19:42:00-03:00"
+    },
+    "previousReservation": {
+      "id": "work-20261113T134424-0300",
+      "owner": "Work",
+      "branch": "feat/work-m151-polymerization-shared-field-fusion-2v2-20261113",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "reservedFiles": [
+        "tests/tagClassicPolymerizationSharedFieldFusion.test.cjs"
+      ],
+      "state": "handoff-pending-no-response; do-not-edit",
+      "startedAt": "2026-11-13T13:44:24-03:00",
+      "lastActivityAt": "2026-11-14T19:53:13.875-03:00",
+      "head": "caed37c93b07c12d7b166f12acf0c2b8135901c4",
+      "pr": 107,
+      "priority": "P1 — certificar por comportamento a Fusão 2v2: Polymerization usa monstros do campo compartilhado, preserva UIDs físicos e não acessa a mão privada do parceiro inativo.",
+      "handoffCommentId": 6885420890,
+      "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
+    }
+  },
+  "catalogAtStart": {
+    "sharedCertificates": 969,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "automaticCertifications": 0,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "productionAtStart": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "workflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "hostingStatus": "unverified",
+    "mainHeadAfterRevert": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "mainRuns": 0,
+    "mainWorkflowFiles": [],
+    "sharedWorkflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "mainHead": "713f02afc862ddb17411706c92c67624eaa1803f",
+    "sharedBranchWorkflows": 4,
+    "mainDeploymentWorkflowFound": false,
+    "sharedDeploymentWorkflowFound": false,
+    "githubDeploymentsApiVerified": false,
+    "discordLiveValidation": false,
+    "hosting": "not independently verified",
+    "discordLive": false,
+    "note": "GET .github/workflows on main returned 404; deployments endpoint was not exposed by the GitHub connector.",
+    "deploymentWorkflow": "not found in main/shared; M71 CI branch lists only card-batch-admission, card-batch-fast, engine-validation, milestone1000"
+  },
+  "limits": [
+    "Não alterar src/monsterEffects.ts, src/duelEngineCurrent.ts, src/classicEffects.ts, src/duelIntegrity.ts, scripts/mass-certification21.cjs reservados por M61.",
+    "Não alterar tests/tagClassicPolymerizationSharedFieldFusion.test.cjs reservados por M151.",
+    "Sem merge, deploy, alterações em inventários ou banco persistente."
+  ],
+  "nextTask": "Implementar cobertura comportamental de Kazejin, Suijin e Sanga of the Thunder, executar CI e depois liberar somente o arquivo de teste ao auxiliar.",
+  "nextWindow": "2026-11-15T04:30:00-03:00",
+  "reservationReleased": false
+}

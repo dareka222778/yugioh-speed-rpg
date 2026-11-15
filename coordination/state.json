@@ -1,16 +1,18 @@
 {
-  "runId": "work-20261114T194137-0300",
+  "runId": "work-20261114T233246-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "released-to-auxiliary-monitor-ci",
-  "startedAt": "2026-11-14T19:41:37-03:00",
-  "lastActivityAt": "2026-11-14T19:54:38.665-03:00",
-  "nextScheduledAt": "2026-11-14T23:30:00-03:00",
+  "state": "active",
+  "startedAt": "2026-11-14T23:32:46-03:00",
+  "lastActivityAt": "2026-11-14T23:32:46-03:00",
+  "nextScheduledAt": "2026-11-15T04:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
-  "scope": [],
-  "lastCheckpoint": "coordination/runs/work-20261114T194137-0300.json",
-  "previousRunId": "work-20261114T185556-0300",
+  "scope": [
+    "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+  ],
+  "lastCheckpoint": "coordination/runs/work-20261114T233246-0300.json",
+  "previousRunId": "work-20261114T194137-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -1548,6 +1550,20 @@
         "correctedHeadNpmTest": "pending",
         "extendedSoak600": "in_progress"
       }
+    },
+    {
+      "mission": "M211",
+      "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
+      ],
+      "state": "active",
+      "runId": "work-20261114T233246-0300",
+      "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
+      "reservation": "Work"
     }
   ],
   "handoffRequest": {
@@ -2974,9 +2990,9 @@
     "minimum60MinutesMet": false,
     "note": "Aproximadamente 12 minutos observados e efetivamente utilizados; a meta de 60 minutos não foi atingida. Espera ociosa de CI não foi contabilizada."
   },
-  "nextTask": "Auxiliar monitora PRs #164/#165 e corrige somente os dois testes liberados. Work: concluir CI; acompanhar correção M207; obter handoff M61 para Double Tribute face-up e Atomic Firefly; manter M151 reservado; seguir para a próxima família independente e depois retomar as 31 certificações pendentes.",
+  "nextTask": "Work: implementar e validar M211 em branch isolada; auxiliar: não tocar no arquivo reservado enquanto a CI não for publicada e liberada.",
   "sharedHeadBeforeRelease": "7ca18a4e2f6f0b0c577c09240ea1583c0f4cf650",
-  "priority": "P1 — ampliar cobertura comportamental 2v2 em buscas Gadget, Magias condicionais de Dark Magician, destruição global condicional, Chaos End, modificadores contínuos tribais e contagem Amazoness; preservar UIDs físicos e integridade dos quatro assentos.",
+  "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
   "sharedHeadBeforeClaim": "7a2a124107b3d2136a4bf90a88cc65ea22f1c294",
   "releasedOwnReservation": true,
   "parallelWorkObserved": {
@@ -3598,7 +3614,7 @@
     ],
     "reservationReleased": true
   },
-  "nextWorkAt": "2026-11-14T23:30:00-03:00",
+  "nextWorkAt": "2026-11-15T04:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -5297,83 +5313,21 @@
     }
   },
   "activeWork": {
-    "runId": "work-20261114T194137-0300",
+    "runId": "work-20261114T233246-0300",
+    "mission": "M211",
     "owner": "Work",
-    "priority": "P1 — validar forced Defense no fim da Battle Phase (Goblin Attack Force/Giant Orc) e ataque direto condicional de Alligator's Sword Dragon no 2v2; manter identidade física e privacidade.",
-    "state": "released-to-auxiliary-monitor-ci",
-    "branch": "feat/work-m209-goblin-attack-force-giant-orc-2v2-20261114",
+    "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "sharedHeadBeforeRelease": "f556ec8b761831cbcfe0ba7827f0da35167e109b",
-    "sharedHeadAfterCheckpoint": "5fb122e49e383ffa4dd2230f2ea932b0418880fc",
-    "reservedFiles": [],
-    "startedAt": "2026-11-14T19:41:37-03:00",
-    "lastActivityAt": "2026-11-14T19:54:38.665-03:00",
-    "endedAt": "2026-11-14T19:53:13.875-03:00",
-    "prs": [
-      164,
-      165
+    "reservedFiles": [
+      "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
     ],
-    "workBranches": [
-      {
-        "mission": "M209",
-        "branch": "feat/work-m209-goblin-attack-force-giant-orc-2v2-20261114",
-        "head": "5fbaf548227b2927c82e5e6ae3348ade9ea93af8",
-        "pr": 164,
-        "scope": [
-          "tests/tagClassicForcedBattleDefense2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "npmTest": "success",
-          "engineValidation": "in_progress",
-          "extendedSoak600": "in_progress"
-        }
-      },
-      {
-        "mission": "M210",
-        "branch": "feat/work-m210-alligator-sword-dragon-direct-attack-2v2-20261114",
-        "head": "b88cdc7ed21444debd1cec9ee88f366f7c5027c1",
-        "pr": 165,
-        "scope": [
-          "tests/tagClassicAlligatorSwordDragonDirectAttack2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "previousHeadNpmTest": "failure_fixture_expectation",
-          "correctedHeadCardBatchFast": "in_progress",
-          "correctedHeadMilestone1000": "in_progress",
-          "correctedHeadEngineValidation": "queued",
-          "correctedHeadNpmTest": "pending",
-          "extendedSoak600": "in_progress"
-        }
-      }
-    ],
-    "handoffs": [
-      {
-        "pr": 17,
-        "commentId": 6885378522,
-        "status": "awaiting explicit release; no response"
-      },
-      {
-        "pr": 107,
-        "commentId": 6885420890,
-        "status": "awaiting response; M151 reserved file untouched"
-      }
-    ],
-    "limits": [
-      "test-only",
-      "no runtime/catalog/certification changes",
-      "no inventory grants",
-      "no merge/deploy",
-      "Discord live not validated",
-      "60-minute minimum not met"
-    ],
-    "reservation": "released"
+    "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
+    "startedAt": "2026-11-14T23:32:46-03:00",
+    "expectedSharedHead": "b360ed37ee5ea4ff30a3a9b364ac52bb8de7216c",
+    "state": "active"
   },
-  "sharedHeadAtStart": "f556ec8b761831cbcfe0ba7827f0da35167e109b",
+  "sharedHeadAtStart": "b360ed37ee5ea4ff30a3a9b364ac52bb8de7216c",
   "partialHandoffRequest": {
     "pr": 17,
     "commentId": 6877118689,
@@ -5384,7 +5338,7 @@
     "scope": "partial file-only handoff; no changes until release"
   },
   "lastCheckpointAt": "2026-11-14T19:53:13.875-03:00",
-  "reservationReleased": true,
+  "reservationReleased": false,
   "expectedHeadForCoordinationCommit": "f08fb477ffa23d126ab669e2f00a448a3088d0d2",
   "lastRunSummary": "M209–M210: #164 com Card Batch, Milestone, check e npm test aprovados; Engine Validation/soak seguem em execução. #165 teve Card Batch e Milestone aprovados no HEAD corrigido b88cdc7; npm test/Engine Validation/soak seguem em execução. A falha inicial foi uma expectativa errada sobre ataque a monstro face-down, corrigida sem runtime. Zero novas certificações; catálogo 969/1.014; sem merge/deploy.",
   "postReleaseCiCheckAt": "2026-11-14T19:54:38.665-03:00",
