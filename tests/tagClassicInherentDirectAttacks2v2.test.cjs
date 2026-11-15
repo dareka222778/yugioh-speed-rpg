@@ -131,10 +131,12 @@ for(const entry of DIRECT_ATTACKERS){
       candidate.kind==='attack'&&candidate.card===source.uid&&candidate.target===undefined
     );
     assert.ok(action,entry.name+' must expose a direct-attack action despite monsters on both opposing seats');
+    const attackingLPBefore=initial.core.players[0].lp;
+    const opposingLPBefore=initial.core.players[1].lp;
     let state=tag.stepTagDuel(initial,member(0),action);
     state=settle(state);
-    assert.equal(state.core.players[0].lp,8000,'the attacking team must not lose LP');
-    assert.equal(state.core.players[1].lp,8000-entry.atk,'direct battle damage must be routed to the opposing shared team');
+    assert.equal(state.core.players[0].lp,attackingLPBefore,'the attacking team must not lose LP');
+    assert.equal(state.core.players[1].lp,opposingLPBefore-entry.atk,'direct battle damage must be routed to the opposing shared team');
     assert.ok(state.core.players[0].monsters.some(card=>card.uid===source.uid),'the partner-owned attacker remains on its shared field');
     assert.ok(state.core.players[1].monsters.some(card=>card.uid===enemyActive.uid),'direct attack must not destroy the active opponent monster');
     assert.ok(state.core.players[1].monsters.some(card=>card.uid===enemyPartner.uid),'direct attack must not destroy the inactive opponent partner monster');
