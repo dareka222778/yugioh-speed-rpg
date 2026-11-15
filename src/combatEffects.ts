@@ -57,5 +57,10 @@ export function combatOutcome(s:DuelState,actor:number,a:Monster,d:Monster|undef
   const doubles=involved.some(x=>x.rules.some(v=>v.rule.kind==='damage'&&v.rule.mode==='double'&&(v.rule.when==='direct'&&!d&&player===1-actor||v.rule.when==='defending'&&x.monster===d&&player===actor)));
   if(doubles)damage[player]*=2;
  }
+ // Replacement is computed from the post-prevention/post-modifier snapshot so
+ // two reflectors cannot recursively redirect the same damage more than once.
+ const damageBeforeReflection:[number,number]=[...damage];
+ const reflectingTeams=new Set(involved.filter(x=>x.rules.some(v=>v.rule.kind==='damage'&&v.rule.mode==='reflect'&&v.rule.when==='battle')).map(x=>x.owner));
+ for(const owner of reflectingTeams)if(damageBeforeReflection[owner]>0){damage[owner]=0;damage[1-owner]+=damageBeforeReflection[owner];}
  return {destroy,damage,difference};
 }
