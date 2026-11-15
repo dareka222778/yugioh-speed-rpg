@@ -33,7 +33,6 @@ function deck(){return Array.from({length:20},(_,index)=>POOL[index%POOL.length]
 function game(seed){
   const players=[0,1,2,3].map(seat=>({id:member(seat),name:'M230 Seat '+seat,cards:deck()}));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed});
-  state.core.rulesVersion='speed-rpg-v2';
   state.core.turn=3;
   const rules=rulesFor(state.core);
   assert.equal(rules.mainDeckMin,20);
