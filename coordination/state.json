@@ -4701,7 +4701,7 @@
       "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
     }
   ],
-  "lastCoordinationRefreshAt": "2026-11-15T06:10:00-03:00",
+  "lastCoordinationRefreshAt": "2026-11-15T06:15:00-03:00",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
     "status": "awaiting-response; separate test file only; no response observed",
@@ -5159,7 +5159,7 @@
       "failure": null
     }
   ],
-  "updatedAt": "2026-11-15T06:10:00-03:00",
+  "updatedAt": "2026-11-15T06:15:00-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -5213,7 +5213,8 @@
       "sharedHeadAtReservation": "57b95a318cc49ae4afd82daba525affbb0bacf59",
       "reservedFiles": [
         "tests/tagClassicMovementOwnership2v2.test.cjs",
-        "tests/tagClassicEquipFilters2v2.test.cjs"
+        "tests/tagClassicEquipFilters2v2.test.cjs",
+        "tests/tagClassicFieldBattleModifiers2v2.test.cjs"
       ],
       "conflictPolicy": "Escopo isolado: somente o novo arquivo de teste. Não tocar nas reservas M215–M220, nas frentes M61/M118/M151/M153, em runtime, catálogo, certificados, banco persistente, inventários ou deploy.",
       "additionalBranches": [
@@ -5225,6 +5226,15 @@
             "tests/tagClassicEquipFilters2v2.test.cjs"
           ],
           "mission": "M226 — Cyber Shield e Fusion Weapon: filtros de alvo, parceiro físico no campo compartilhado e bônus de ATK/DEF."
+        },
+        {
+          "branch": "feat/work-m227-field-battle-modifiers-2v2-20261115",
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicFieldBattleModifiers2v2.test.cjs"
+          ],
+          "mission": "M227 — Chorus of Sanctuary e Banner of Courage: modificadores de campo em Defesa para ambos os lados e bônus de ATK da equipe controladora somente na própria Battle Phase."
         }
       ]
     }
