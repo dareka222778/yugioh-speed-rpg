@@ -1,6 +1,7 @@
 import type {Card} from './cardCatalog';
 import type {Effect} from './effectDefinitions';
 import type {MonsterDefinition} from './monsterEffects';
+import {monsters as m45_arsenal_bugMonsters} from './generated/m45-arsenal-bug';
 
 /** One reviewed cohort; every admission is tested before distribution. */
 export const conditionalBatch30:readonly Card[]=[
@@ -28,6 +29,7 @@ export const conditionalEffects30:Record<string,Effect>={
  '81510157':{kind:'conditionalDestruction',activation:main,zone:'monsters',scope:'selected',controller:'opponent',faceUp:true,opponentGainOnDestroy:1000}
 };
 export const conditionalMonsters30:Record<string,MonsterDefinition>={
+ ...m45_arsenal_bugMonsters,
  '13839120':{effect:{trigger:'onSummon',operation:{kind:'searchFiltered',rule:{from:'deck',filter:{name:'Green Gadget'}}},summons:['normal','special']},activation:{policy:'optional',window:'summon'}},
  '41172955':{effect:{trigger:'onSummon',operation:{kind:'searchFiltered',rule:{from:'deck',filter:{name:'Red Gadget'}}},summons:['normal','special']},activation:{policy:'optional',window:'summon'}},
  '86445415':{effect:{trigger:'onSummon',operation:{kind:'searchFiltered',rule:{from:'deck',filter:{name:'Yellow Gadget'}}},summons:['normal','special']},activation:{policy:'optional',window:'summon'}}
