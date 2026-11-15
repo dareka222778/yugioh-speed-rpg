@@ -157,7 +157,7 @@ test('Nobleman-Eater Bug selects exactly two distinct monsters across both share
   state=choose(state,source.uid);
   assert.ok(!tag.tagActions(state,member(0)).some(action=>action.kind==='choose'&&action.target===source.uid),
     'a selected UID cannot be selected twice');
-  assert.throws(()=>tag.stepTagDuel(state,member(0),{kind:'choose',target:source.uid}),
+  assert.throws(()=>tag.stepTagDuel(state,member(0),{kind:'choose',target:source.uid}),/Alvo repetido ou inelegível/,
     'a forged duplicate target is rejected');
   state=settle(choose(state,partnerEnemy.uid));
   assert.ok(state.core.players[0].grave.some(card=>card.uid===source.uid),
