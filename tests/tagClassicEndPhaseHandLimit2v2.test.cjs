@@ -91,7 +91,7 @@ function discardOne(state,seat){
   assert.deepEqual(tag.tagActions(state,member(partner)),[],
     'the inactive teammate cannot discard the active physical owner hand');
   assert.throws(()=>tag.stepTagDuel(state,member(partner),action),
-    /Aguarde a vez do participante ativo\\./);
+    /Aguarde a vez do participante ativo\./);
   assert.equal(JSON.stringify(state),unchanged,'rejected partner action must not mutate the duel');
   return settle(tag.stepTagDuel(state,member(seat),action));
 }
@@ -155,7 +155,7 @@ test('classic 2v2 enforces the 20–30 Main Deck boundary and rejects a sixth Ex
   const base=players();
   assert.throws(()=>tag.createTagDuel(base.map((player,index)=>index===0?{...player,cards:player.cards.slice(1)}:player),{classic:true,first:0}),
     /deck de 20 a 30 cartas/i);
-  assert.throws(()=>tag.createTagDuel(base.map((player,index)=>index===0?{...player,cards:[...player.cards,NORMALS[0]]}:player),{classic:true,first:0}),
+  assert.throws(()=>tag.createTagDuel(base.map((player,index)=>index===0?{...player,cards:[...player.cards,...Array(11).fill(NORMALS[0])]}:player),{classic:true,first:0}),
     /deck de 20 a 30 cartas/i);
   assert.throws(()=>tag.createTagDuel(base.map((player,index)=>index===0?{...player,extra:Array(6).fill(NORMALS[0])}:player),{classic:true,first:0}),
     /Deck Adicional: máximo de 5 cartas/i);
