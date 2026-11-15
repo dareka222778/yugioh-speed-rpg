@@ -70,42 +70,43 @@ function assertPrivateHands(state,hands){
     assert.ok(!publicState.includes(uid),'private hand UID leaked to public duel: '+uid);
   }
 }
-function setup(entry){
+function setup(entry,activeSeat=0){
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),
     name:'M212 Seat '+seat,
-    cards:deck(seat===0?[entry.id]:[])
+    cards:deck(seat===activeSeat?[entry.id]:[])
   }));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m212-'+entry.id});
-  const spell=takeCard(state,0,entry.id);
-  holder(state,0).hand.push(spell);
+  const spell=takeCard(state,activeSeat,entry.id);
+  holder(state,activeSeat).hand.push(spell);
   state.core.turn=3;
   state.core.players[0].lp=entry.lp[0];
   state.core.players[1].lp=entry.lp[1];
-  assert.match(spell.uid,/^m0:/,entry.name+' must retain active physical seat 0 ownership');
+  assert.match(spell.uid,new RegExp('^m'+activeSeat+':'),entry.name+' must retain active physical seat ownership');
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
   const before=inventorySnapshot(state);
   const {hands,decks}=snapshots(state);
   assertPrivateHands(state,hands);
   return {state,spell,before,hands,decks};
 }
-function assertActiveSeat(state,action,entry){
-  assert.equal(tag.tagDecisionMember(state).id,member(0),'seat 0 must be the active physical player');
-  assert.deepEqual(tag.tagActions(state,member(2)),[],
-    'inactive physical teammate seat 2 cannot execute the shared Main Phase action');
+function assertActiveSeat(state,action,entry,activeSeat=0){
+  assert.equal(tag.tagDecisionMember(state).id,member(activeSeat),'the selected physical seat must be the active player');
+  const partnerSeat=activeSeat===0?2:0;
+  assert.deepEqual(tag.tagActions(state,member(partnerSeat)),[],
+    'the inactive physical teammate cannot execute the shared Main Phase action');
   const unchanged=JSON.stringify(state);
-  assert.throws(()=>tag.stepTagDuel(state,member(2),action),/Aguarde a vez do participante ativo\./,
+  assert.throws(()=>tag.stepTagDuel(state,member(partnerSeat),action),/Aguarde a vez do participante ativo\./,
     entry.name+' must reject an action submitted by the inactive partner');
   assert.equal(JSON.stringify(state),unchanged,'rejected inactive-seat action must not mutate the duel');
 }
-function assertResolved(state,entry,spell,before,hands,decks){
+function assertResolved(state,entry,spell,before,hands,decks,activeSeat=0){
   assert.equal(state.core.phase,'main',entry.name+' resolves immediately without a legal response');
   assert.deepEqual(state.core.players.map(player=>player.lp),entry.expected,
     entry.name+' must change the correct shared team LP by the exact amount');
-  assert.ok(state.core.players[0].grave.some(card=>card.uid===spell.uid&&card.id===entry.id),
+  assert.ok(state.core.players[activeSeat%2].grave.some(card=>card.uid===spell.uid&&card.id===entry.id),
     entry.name+' must enter the activating team Graveyard with its original physical UID');
   for(const seat of [0,1,2,3]){
-    const expectedHand=hands.get(seat).filter(uid=>!(seat===0&&uid===spell.uid));
+    const expectedHand=hands.get(seat).filter(uid=>!(seat===activeSeat&&uid===spell.uid));
     assert.deepEqual(tag.tagMemberHand(state,member(seat)).map(card=>card.uid),expectedHand,
       entry.name+' must not mutate physical seat '+seat+' hand beyond consuming its source');
     assert.deepEqual(holder(state,seat).deck.map(card=>card.uid),decks.get(seat),
@@ -117,6 +118,14 @@ function assertResolved(state,entry,spell,before,hands,decks){
   assertPrivateHands(restored,hands);
   assertConserved(restored,before);
 }
+
+function endCurrentTurn(state){
+  const actor=tag.tagDecisionMember(state).id;
+  const action=tag.tagActions(state,actor).find(candidate=>candidate.kind==='end');
+  assert.ok(action,'the active physical player must be able to end the current turn');
+  return tag.stepTagDuel(state,actor,action);
+}
+
 for(const entry of CASES){
   test(entry.name+' applies its exact LP change to the correct shared 2v2 team',()=>{
     const {state:initial,spell,before,hands,decks}=setup(entry);
@@ -127,5 +136,24 @@ for(const entry of CASES){
     assertActiveSeat(initial,action,entry);
     const state=tag.stepTagDuel(initial,member(0),action);
     assertResolved(state,entry,spell,before,hands,decks);
+  });
+}
+
+for(const entry of CASES){
+  test(entry.name+' can also be activated from the rotated active partner physical hand',()=>{
+    const {state:initial,spell,before,hands,decks}=setup(entry,2);
+    let state=endCurrentTurn(initial);
+    assert.equal(state.core.turn,4);
+    assert.equal(tag.tagDecisionMember(state).id,member(1),'the opposing physical seat acts between partners');
+    state=endCurrentTurn(state);
+    assert.equal(state.core.turn,5);
+    assert.equal(tag.tagDecisionMember(state).id,member(2),'the partner seat 2 must receive the next team turn');
+    const action=tag.tagActions(state,member(2)).find(candidate=>
+      candidate.kind==='spell'&&candidate.card===spell.uid
+    );
+    assert.ok(action,'the rotated active partner may activate the Spell from its own physical hand');
+    assertActiveSeat(state,action,entry,2);
+    const resolved=tag.stepTagDuel(state,member(2),action);
+    assertResolved(resolved,entry,spell,before,hands,decks,2);
   });
 }
