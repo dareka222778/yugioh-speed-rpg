@@ -56,7 +56,7 @@ function ensureInHand(state,seat,id){
   physical.hand.push(card);
   return card;
 }
-function deploy(state,seat,id,{faceUp=false,position='def',uidSuffix='monster'}={}){
+function deploy(state,seat,id,{faceUp=false,position='def'}={}){
   const card=takePhysical(state,seat,id);
   const monster={
     ...card,
@@ -91,11 +91,11 @@ function handsSnapshot(state){
     seat,tag.tagMemberHand(state,member(seat)).map(card=>card.uid)
   ]));
 }
-function assertPrivateHands(state,hands){
+function assertPrivateHands(state){
   const publicState=JSON.stringify(tag.publicTagDuel(state));
-  for(const [seat,uids] of hands){
-    for(const uid of uids){
-      assert.ok(!publicState.includes(uid),'private hand UID leaked for seat '+seat+': '+uid);
+  for(const seat of [0,1,2,3]){
+    for(const card of tag.tagMemberHand(state,member(seat))){
+      assert.ok(!publicState.includes(card.uid),'private hand UID leaked for seat '+seat+': '+card.uid);
     }
   }
 }
@@ -193,7 +193,7 @@ test('Book of Taiyou can reveal a face-down monster owned by the inactive allied
   state=rotateToSeat2(state);
   const before=inventorySnapshot(state);
   const hands=handsSnapshot(state);
-  assertPrivateHands(state,hands);
+  assertPrivateHands(state);
   assert.deepEqual(tag.tagActions(state,member(0)),[],
     'the inactive partner cannot activate a Spell from seat 2 physical hand');
   assert.ok(!spellActions(state,0,spell).length);
