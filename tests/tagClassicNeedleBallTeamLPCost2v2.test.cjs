@@ -232,3 +232,18 @@ test('Needle Ball accepts the strict 2001 LP threshold and retains only 1 LP aft
   state=choose(state,0,fixture.source.uid);
   assertResolved(state,0,fixture.source,fixture.before,fixture.zones,[1,3000]);
 });
+
+
+test('Needle Ball rejects a duplicate optional-trigger delivery after the first cost and burn resolve',()=>{
+  const fixture=setup(2,[4000,4000],'m233-duplicate-delivery');
+  let state=assertOnlyActiveSeatCanFlip(fixture.state,0,fixture.source);
+  state=choose(state,0,fixture.source.uid);
+  const snapshot=JSON.stringify(state);
+  assert.throws(()=>tag.stepTagDuel(state,member(0),{kind:'choose',target:fixture.source.uid}),
+    'a stale choice must not pay the 2000 LP cost or inflict a second 1000 damage');
+  assert.equal(JSON.stringify(state),snapshot,'rejected duplicate delivery must not mutate the duel');
+  assert.deepEqual(state.core.players.map(player=>player.lp),[2000,3000]);
+  assertConserved(state,fixture.before);
+  assertPrivateHands(state);
+  assertRestorable(state);
+});
