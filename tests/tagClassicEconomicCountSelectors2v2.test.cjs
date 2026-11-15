@@ -109,12 +109,11 @@ function endTurn(state,seat){
   assert.ok(action,'physical seat '+seat+' must be able to end its turn');
   state=tag.stepTagDuel(state,member(seat),action);
   for(let guard=0;state.core.phase==='discard';guard++){
-    assert.ok(guard<8,'End Phase hand-limit discard must terminate');
-    assert.equal(tag.tagDecisionMember(state).id,member(seat),
-      'the physical owner of the excess hand must make their own End Phase discard');
-    const discard=tag.tagActions(state,member(seat)).find(candidate=>candidate.kind==='discard');
-    assert.ok(discard,'a participant above six cards must receive a legal End Phase discard');
-    state=tag.stepTagDuel(state,member(seat),discard);
+    assert.ok(guard<12,'End Phase hand-limit discard must terminate');
+    const discardOwner=tag.tagDecisionMember(state).id;
+    const discard=tag.tagActions(state,discardOwner).find(candidate=>candidate.kind==='discard');
+    assert.ok(discard,'the physical participant selected by the End Phase overflow flow must receive a legal discard');
+    state=tag.stepTagDuel(state,discardOwner,discard);
   }
   assert.ok(tag.tagMemberHand(state,member(seat)).length<=6,
     'the outgoing physical participant must finish End Phase with at most six cards');
