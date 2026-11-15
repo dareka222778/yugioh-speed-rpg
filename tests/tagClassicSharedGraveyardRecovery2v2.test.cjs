@@ -18,8 +18,8 @@ assert.deepEqual(getEffect(DARK_FACTORY)?.rule,{count:2,filter:{normal:true}});
 
 const normal=[...new Set(tag.tagNormalCardIds)]
   .filter(id=>getPlayableCard(id)?.kind==='monster'&&getPlayableCard(id)?.monsterType==='normal')
-  .slice(0,8);
-assert.equal(normal.length,8,'the fixture needs eight enabled Normal Monsters');
+  .slice(0,3);
+assert.equal(normal.length,3,'the fixture needs three distinct enabled Normal Monsters');
 const waterEligible=engineCatalog
   .filter(card=>card.kind==='monster'&&card.attribute==='WATER'&&Number.isInteger(card.atk)&&card.atk<=1500)
   .filter(card=>getPlayableCard(card.id))
@@ -168,7 +168,6 @@ test('Dark Factory of Mass Production recovers two Normal Monsters from the shar
   const opponentNormal=moveToGrave(state,1,normal[2]);
   state=rotateToSeat2(state);
   const before=inventorySnapshot(state);
-  const handsBefore=[0,1,2,3].map(seat=>tag.tagMemberHand(state,member(seat)).map(card=>card.uid));
   assertPrivateHands(state);
   const actions=tag.tagActions(state,member(2)).filter(candidate=>candidate.kind==='spell'&&candidate.card===spell.uid);
   assert.equal(actions.length,1,'Dark Factory activates once from the active physical hand');
@@ -187,7 +186,6 @@ test('Dark Factory of Mass Production recovers two Normal Monsters from the shar
   assertConserved(state,before);
   assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(state))));
-  assert.equal(handsBefore.length,4);
 });
 
 test('Salvage filters WATER monsters at 1500 ATK or less and restores each card to its physical owner',()=>{
