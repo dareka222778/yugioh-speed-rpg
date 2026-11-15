@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-15T19:04:42.934Z",
+  "lastActivityAt": "2026-11-15T19:10:39.494Z",
   "nextScheduledAt": "2026-11-15T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -16,7 +16,8 @@
     "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
     "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
     "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
-    "tests/tagClassicSharedZoneCapacity2v2.test.cjs"
+    "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+    "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261115T092946-0300.json",
   "previousRunId": "work-20261115T055534-0300",
@@ -38,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -4454,6 +4455,14 @@
       "commentId": 6885440960,
       "mission": "M207 CI failure diagnosis",
       "status": "agent notified"
+    },
+    {
+      "pr": 17,
+      "commentId": 6899733582,
+      "file": "src/duelEngineCurrent.ts",
+      "mission": "M242 recover physical-owner routing; partial handoff only, keep M176 selector reserved",
+      "status": "awaiting-explicit-release",
+      "noResponse": true
     }
   ],
   "nextWindow": "2026-11-15T19:30:00-03:00",
@@ -5074,6 +5083,25 @@
       ],
       "pr": 197,
       "conflictPolicy": "Somente novo arquivo de teste M241. Não tocar em M231–M240, M237–M239, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261115T142521-0300-M242",
+      "runId": "work-20261115T142521-0300",
+      "owner": "Work",
+      "mission": "M242",
+      "priority": "P1 — validar Magician of Faith e Mask of Darkness no 2v2: recuperar Magias/Armadilhas do Cemitério compartilhado, mas devolver cada carta à mão do dono físico (UID m0–m3), sem transferi-la à mão do parceiro ativo; cobrir controles negativos, privacidade e conservação.",
+      "state": "active",
+      "startedAt": "2026-11-15T16:10:13-03:00",
+      "branch": "feat/work-m242-grave-recovery-physical-owner-2v2-20261115",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "4519103398743132dd8459847cb374566ddd59af",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "4519103398743132dd8459847cb374566ddd59af",
+      "reservedFiles": [
+        "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+      ],
+      "pr": 198,
+      "conflictPolicy": "Somente novo arquivo de teste M242. Não alterar src/duelEngineCurrent.ts até handoff explícito de M61/PR #17; não tocar em M215–M241, M61/M118/M151/M153, catálogo, certificados, banco persistente, inventários, main ou produção."
     }
   ]
 }
