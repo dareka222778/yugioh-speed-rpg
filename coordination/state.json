@@ -4,13 +4,14 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T00:31:05-03:00",
-  "lastActivityAt": "2026-11-15T00:33:07-03:00",
+  "lastActivityAt": "2026-11-15T00:39:22-03:00",
   "nextScheduledAt": "2026-11-15T04:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
     "tests/tagClassicBusterBladerOpponentDragonCount2v2.test.cjs",
-    "tests/tagClassicYellowLusterShieldTeamDefense2v2.test.cjs"
+    "tests/tagClassicYellowLusterShieldTeamDefense2v2.test.cjs",
+    "tests/tagClassicGoblinThiefTeamLP2v2.test.cjs"
   ],
   "lastCheckpoint": "coordination/runs/work-20261115T003105-0300.json",
   "previousRunId": "work-20261114T233246-0300",
@@ -1660,6 +1661,19 @@
       "runId": "work-20261115T003105-0300",
       "priority": "P1 — testar Continuous Spell de DEF em campo compartilhado 2v2, incluindo monstros físicos dos dois aliados e exclusão dos adversários.",
       "reservation": "Work"
+    },
+    {
+      "mission": "M217",
+      "branch": "feat/work-m217-goblin-thief-team-lp-2v2-20261115",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicGoblinThiefTeamLP2v2.test.cjs"
+      ],
+      "state": "active",
+      "runId": "work-20261115T003105-0300",
+      "priority": "P1 — testar Goblin Thief: -500 LP da equipe adversária e +500 LP da própria equipe, com ativação exclusiva pela mão física ativa e rotação ao parceiro.",
+      "reservation": "Work"
     }
   ],
   "handoffRequest": {
@@ -3086,9 +3100,9 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Concluir M215 Buster Blader e M216 Yellow Luster Shield em branches isoladas; verificar CI, 3+3 zonas e conservação de 80 UIDs.",
+  "nextTask": "Implementar regressão M217 para Goblin Thief com ativação real, LP compartilhados por equipe e mãos físicas por assento; depois validar CI M215–M217.",
   "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
-  "priority": "P1 — validar contadores contínuos em 2v2: Buster Blader conta Dragões nas duas zonas adversárias; Yellow Luster Shield concede +300 DEF a todos os monstros da equipe controladora, incluindo o parceiro, sem afetar adversários.",
+  "priority": "P1 — validar efeitos contínuos compartilhados (Buster Blader/Yellow Luster Shield) e LP de equipe (Goblin Thief), preservando mãos físicas dos quatro participantes e rotação 2v2.",
   "sharedHeadBeforeClaim": "b8be5821ef1a14dfd588e4c57d919ba5bc9c10b5",
   "releasedOwnReservation": false,
   "parallelWorkObserved": {
@@ -4806,20 +4820,21 @@
   },
   "activeWork": {
     "runId": "work-20261115T003105-0300",
-    "mission": "M215–M216",
+    "mission": "M215–M217",
     "owner": "Work",
     "branch": "feat/work-m215-buster-blader-dragon-count-2v2-20261115",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
     "reservedFiles": [
       "tests/tagClassicBusterBladerOpponentDragonCount2v2.test.cjs",
-      "tests/tagClassicYellowLusterShieldTeamDefense2v2.test.cjs"
+      "tests/tagClassicYellowLusterShieldTeamDefense2v2.test.cjs",
+      "tests/tagClassicGoblinThiefTeamLP2v2.test.cjs"
     ],
-    "priority": "P1 — validar contadores contínuos em 2v2: Buster Blader conta Dragões nas duas zonas adversárias; Yellow Luster Shield concede +300 DEF a todos os monstros da equipe controladora, incluindo o parceiro, sem afetar adversários.",
+    "priority": "P1 — validar efeitos contínuos compartilhados (Buster Blader/Yellow Luster Shield) e LP de equipe (Goblin Thief), preservando mãos físicas dos quatro participantes e rotação 2v2.",
     "startedAt": "2026-11-15T00:31:05-03:00",
     "expectedSharedHead": "b8be5821ef1a14dfd588e4c57d919ba5bc9c10b5",
     "state": "active",
-    "lastActivityAt": "2026-11-15T00:33:07-03:00"
+    "lastActivityAt": "2026-11-15T00:39:22-03:00"
   },
   "sharedHeadAtStart": "b360ed37ee5ea4ff30a3a9b364ac52bb8de7216c",
   "partialHandoffRequest": {
@@ -5108,6 +5123,6 @@
       "failure": null
     }
   ],
-  "updatedAt": "2026-11-15T00:33:07-03:00",
+  "updatedAt": "2026-11-15T00:39:22-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837"
 }
