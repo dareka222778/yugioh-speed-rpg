@@ -136,6 +136,9 @@ function activateGuardian(state,guardian,attacker){
   assert.equal(JSON.stringify(state),unchanged,'a rejected inactive-seat action must not mutate the battle chain');
   return settle(tag.stepTagDuel(state,member(1),window.activation));
 }
+function fieldMonster(state,uid){
+  return state.core.players.flatMap(team=>team.monsters).find(monster=>monster.uid===uid);
+}
 function setup(guardianId,seed){
   let state=game(guardianId,seed);
   const before=inventorySnapshot(state);
@@ -161,7 +164,7 @@ for(const guardianSpec of GUARDIANS){
       'Guardian Zero Attack must not be offered at attack declaration');
 
     state=activateGuardian(state,guardian,firstAttacker);
-    assert.equal(guardian.guardianUsed,true,'the face-up Guardian must record its one use');
+    assert.equal(fieldMonster(state,guardian.uid)?.guardianUsed,true,'the face-up Guardian must record its one use');
     assert.equal(state.core.players[0].lp,4000-guardianSpec.atk,
       'the attacking team takes battle damage from the Guardian after the attacker is reduced to zero');
     assert.equal(state.core.players[1].lp,4000,'the defending team takes no battle damage');
@@ -194,22 +197,24 @@ for(const guardianSpec of GUARDIANS){
     let state=startBattle(initial);
     state=declareAttack(state,firstAttacker,guardian);
     state=activateGuardian(state,guardian,firstAttacker);
-    assert.equal(guardian.guardianUsed,true,'the first activation must consume the face-up use');
+    assert.equal(fieldMonster(state,guardian.uid)?.guardianUsed,true,'the first activation must consume the face-up use');
 
     // This is the same runtime transition used when Book of Moon or a position effect Sets a monster.
-    turnMonsterFaceDown(guardian);
-    assert.equal(guardian.faceUp,false);
-    assert.equal(guardian.position,'def');
-    assert.equal(Object.hasOwn(guardian,'guardianUsed'),false,
+    const currentGuardian=fieldMonster(state,guardian.uid);
+    assert.ok(currentGuardian,'the partner-owned Guardian must still be on the shared field');
+    turnMonsterFaceDown(currentGuardian);
+    assert.equal(currentGuardian.faceUp,false);
+    assert.equal(currentGuardian.position,'def');
+    assert.equal(Object.hasOwn(currentGuardian,'guardianUsed'),false,
       'turning the Guardian face-down must clear its once-while-face-up use');
     // Simulate a later legal flip-up; the effect is available again while the source is face-up.
-    guardian.faceUp=true;
-    assert.equal(guardian.position,'def','a flipped-up monster remains in Defense Position');
+    currentGuardian.faceUp=true;
+    assert.equal(currentGuardian.position,'def','a flipped-up monster remains in Defense Position');
     assert.doesNotThrow(()=>tag.assertTagDuel(state));
 
     state=declareAttack(state,secondAttacker,guardian);
     state=activateGuardian(state,guardian,secondAttacker);
-    assert.equal(guardian.guardianUsed,true,'the reset Guardian can activate again after being flipped face-up');
+    assert.equal(fieldMonster(state,guardian.uid)?.guardianUsed,true,'the reset Guardian can activate again after being flipped face-up');
     assert.equal(state.core.players[1].monsters.some(card=>card.uid===guardian.uid),true,
       'the face-up Guardian remains on the shared field after the second protected battle');
     assert.equal(state.core.players[0].grave.some(card=>card.uid===secondAttacker.uid),true,
