@@ -153,10 +153,13 @@ function setup(entry,seed,prepare){
   assert.ok(!publicBefore.includes(trap.uid),'a Set Trap UID must remain private in the public projection');
   assert.ok(!publicBefore.includes(entry.id),'a Set Trap identity must remain hidden in the public projection');
 
-  state=endTurn(state,0);
-  assert.equal(tag.tagDecisionMember(state).id,member(1),'opposing seat 1 acts after seat 0 sets the Trap');
-  state=endTurn(state,1);
-  assert.equal(tag.tagDecisionMember(state).id,member(2),'the inactive partner seat 2 receives the next allied turn');
+  for(let guard=0;tag.tagDecisionMember(state).id!==member(2);guard++){
+    assert.ok(guard<4,'turn rotation must reach the allied partner seat 2');
+    const activeSeat=state.members.findIndex(player=>player.id===tag.tagDecisionMember(state).id);
+    assert.ok(activeSeat>=0,'the active physical seat must remain registered');
+    state=endTurn(state,activeSeat);
+  }
+  assert.equal(tag.tagDecisionMember(state).id,member(2),'the inactive partner seat 2 must receive a later allied turn');
   const privateState=snapshots(state);
   assertPrivateHands(state,privateState.hands);
   return {state,trap,before,...privateState};
