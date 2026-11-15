@@ -1,0 +1,135 @@
+{
+  "runId": "work-20261115T092946-0300",
+  "owner": "Work",
+  "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
+  "state": "active",
+  "startedAt": "2026-11-15T09:29:46-03:00",
+  "timezone": "America/Sao_Paulo",
+  "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
+  "previousCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
+  "scope": [
+    "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+  ],
+  "reservation": {
+    "runId": "work-20261115T092946-0300",
+    "owner": "Work",
+    "mission": "M228",
+    "priority": "P1 — validar Amazoness Archer e Hysteric Fairy no 2v2 clássico: custos de dois Tributos no campo compartilhado, fonte física do parceiro, apenas monstros aliados como custo, resolução de dano/recuperação de PV da equipe e conservação de UIDs.",
+    "state": "active",
+    "startedAt": "2026-11-15T09:29:46-03:00",
+    "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
+    "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+    "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "117fe99895ea008b9ad065ceeabdb2e4f772b9e3",
+    "reservedFiles": [
+      "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
+    ],
+    "conflictPolicy": "Somente o novo arquivo de teste; não tocar em M215–M227, M218–M220, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+  },
+  "observedParallelWork": [
+    {
+      "mission": "M215",
+      "pr": 170,
+      "branch": "feat/work-m215-buster-blader-dragon-count-2v2-20261115",
+      "state": "open; independent"
+    },
+    {
+      "mission": "M216",
+      "pr": 171,
+      "branch": "feat/work-m216-yellow-luster-shield-team-defense-2v2-20261115",
+      "state": "open; independent"
+    },
+    {
+      "mission": "M217",
+      "pr": 177,
+      "branch": "feat/work-m217-goblin-thief-atomic-lp-2v2-20261115",
+      "state": "open; independent"
+    },
+    {
+      "mission": "M218",
+      "pr": 172,
+      "branch": "feat/work-m218-economic-count-selectors-2v2-20261115",
+      "state": "open; reserved by concurrent run"
+    },
+    {
+      "mission": "M219",
+      "pr": 173,
+      "branch": "feat/work-m219-opponent-hand-field-count-2v2-20261115",
+      "state": "open; reserved by concurrent run"
+    },
+    {
+      "mission": "M220",
+      "pr": 174,
+      "branch": "feat/work-m220-search-spells-physical-zones-2v2-20261115",
+      "state": "open; reserved by concurrent run"
+    },
+    {
+      "mission": "M225",
+      "pr": 181,
+      "branch": "feat/work-m225-movement-ownership-2v2-20261115",
+      "state": "open; CI success"
+    },
+    {
+      "mission": "M226",
+      "pr": 182,
+      "branch": "feat/work-m226-equip-filters-2v2-20261115",
+      "state": "open; Engine Validation failure"
+    },
+    {
+      "mission": "M227",
+      "pr": 183,
+      "branch": "feat/work-m227-field-battle-modifiers-2v2-20261115",
+      "state": "open; Engine Validation failure"
+    }
+  ],
+  "conflicts": "Nenhum arquivo reservado por esses agentes coincide com o arquivo exclusivo de M228. M61 continua handoff-pending; nenhum arquivo de runtime será tocado.",
+  "catalogAtStart": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "remainingTo1000": 31,
+    "historicalUnique": 1962,
+    "pendingHistorical": 993,
+    "fullyUnreviewed": 966,
+    "triageQueue": 31,
+    "newCertificationsThisRun": 0,
+    "inventoryGranted": 0,
+    "milestoneArtifactId": 14112394839,
+    "milestoneRunId": 43592911763,
+    "sharedBranch": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "m71TestBase": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "pr14DevelopmentBranch": {
+      "cards": 1014,
+      "certificates": 1014,
+      "merged": false
+    },
+    "deltaToShared": 45
+  },
+  "deployment": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "hosting": "not independently verified"
+  },
+  "status": "Reserva M228 registrada por CAS; implementação em andamento."
+}
