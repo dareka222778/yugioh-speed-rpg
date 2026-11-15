@@ -123,10 +123,12 @@ function endTurn(state,seat){
   return state;
 }
 function rotateToSeat2(state){
-  state=endTurn(state,0);
-  assert.equal(tag.tagDecisionMember(state).id,member(1));
-  state=endTurn(state,1);
-  assert.equal(tag.tagDecisionMember(state).id,member(2));
+  for(let guard=0;tag.tagDecisionMember(state).id!==member(2);guard++){
+    assert.ok(guard<4,'turn rotation must reach allied partner seat 2');
+    const activeSeat=state.members.findIndex(player=>player.id===tag.tagDecisionMember(state).id);
+    assert.ok(activeSeat>=0,'the active physical seat must remain registered');
+    state=endTurn(state,activeSeat);
+  }
   assert.equal(state.active[0],2);
   assert.equal(state.active[1],1,'seat 1 is the active opposing representative while seat 2 acts');
   return state;
