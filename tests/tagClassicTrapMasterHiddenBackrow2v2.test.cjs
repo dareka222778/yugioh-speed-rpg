@@ -8,15 +8,19 @@ const {rulesFor}=require('../dist/rulesProfile');
 
 const TRAP_MASTER='46461247';
 const ARMED_NINJA='09076207';
+const CRIMSON_NINJA='14618326';
+const REAPER_OF_THE_CARDS='33066139';
 const TRAP_HOLE='04206964';
 const MYSTICAL_SPACE_TYPHOON='05318639';
 const MOUNTAIN='50913601';
-const CORE_IDS=[TRAP_MASTER,ARMED_NINJA,TRAP_HOLE,MYSTICAL_SPACE_TYPHOON,MOUNTAIN];
-const FILLER_IDS=[...new Set(tag.tagNormalCardIds)].filter(id=>!CORE_IDS.includes(id)).slice(0,15);
+const CORE_IDS=[TRAP_MASTER,ARMED_NINJA,CRIMSON_NINJA,REAPER_OF_THE_CARDS,TRAP_HOLE,MYSTICAL_SPACE_TYPHOON,MOUNTAIN];
+const FILLER_IDS=[...new Set(tag.tagNormalCardIds)].filter(id=>!CORE_IDS.includes(id)).slice(0,13);
 const DECK=[...CORE_IDS,...FILLER_IDS];
 assert.equal(DECK.length,20,'each physical participant must use a legal 20-card Deck');
 assert.equal(getPlayableCard(TRAP_MASTER)?.englishName,'Trap Master');
 assert.equal(getPlayableCard(ARMED_NINJA)?.englishName,'Armed Ninja');
+assert.equal(getPlayableCard(CRIMSON_NINJA)?.englishName,'Crimson Ninja');
+assert.equal(getPlayableCard(REAPER_OF_THE_CARDS)?.englishName,'Reaper of the Cards');
 assert.equal(getEffect(TRAP_MASTER)?.kind,'monsterEffect');
 assert.equal(getEffect(ARMED_NINJA)?.kind,'monsterEffect');
 assert.deepEqual(getMonsterEffect(TRAP_MASTER),{
@@ -31,6 +35,13 @@ assert.deepEqual(getMonsterEffect(ARMED_NINJA),{
   operation:{
     kind:'singleCard',
     rule:{from:'backrow',controller:'both',action:'destroy',kind:'spell',inspectSetAs:'spell'}
+  }
+});
+for(const id of [CRIMSON_NINJA,REAPER_OF_THE_CARDS])assert.deepEqual(getMonsterEffect(id),{
+  trigger:'flip',
+  operation:{
+    kind:'singleCard',
+    rule:{from:'backrow',controller:'both',action:'destroy',kind:'trap',inspectSetAs:'trap'}
   }
 });
 
@@ -181,6 +192,27 @@ test('Trap Master can inspect a hidden Trap on either field and destroys the cor
   assertRestorable(state);
 });
 
+
+
+for(const [id,name] of [[CRIMSON_NINJA,'Crimson Ninja'],[REAPER_OF_THE_CARDS,'Reaper of the Cards']]){
+  test(name+' keeps an inspected Set Spell private in the public projection',()=>{
+    let {state,before,source,trap,spell,field}=setup('m239-'+id+'-set-spell-private',id);
+    state=flip(state,source);
+    assert.equal(state.core.phase,'choice');
+    assert.ok(state.core.choice.targets.includes(spell.uid));
+    state=settle(choose(state,spell.uid));
+    assert.ok(state.core.players[1].backrow.some(card=>card.uid===spell.uid&&!card.faceUp));
+    assert.ok(state.core.players[1].backrow.some(card=>card.uid===trap.uid&&!card.faceUp));
+    const publicState=JSON.stringify(tag.publicTagDuel(state));
+    assert.ok(!publicState.includes(spell.id));
+    assert.ok(!publicState.includes(getPlayableCard(spell.id).name)&&!publicState.includes(getPlayableCard(spell.id).englishName),
+      'the inspected Set Spell identity must remain private');
+    assert.ok(!publicState.includes(field.id));
+    assertConserved(state,before);
+    assertPrivateHands(state);
+    assertRestorable(state);
+  });
+}
 
 test('Armed Ninja inspection of a Set Trap keeps the hidden Trap name private',()=>{
   let {state,before,source,trap,spell,field}=setup('m239-armed-ninja-set-trap',ARMED_NINJA);
