@@ -231,3 +231,35 @@ test('Fairy Meteor Crush does not offer a face-down monster as an Equip target o
   assertRestorable(state);
   assertConserved(state,before);
 });
+
+
+test('a normal partner-owned attack against Defense deals no piercing damage without Fairy Meteor Crush',()=>{
+  const fixture=createGame('m234-no-equip-no-piercing-control');
+  const before=inventorySnapshot(fixture.state);
+  let state=rotateToSeat2(fixture.state);
+  const zones=snapshots(state);
+  const attacker=state.core.players[0].monsters.find(card=>card.uid===fixture.attacker.uid);
+  const target=state.core.players[1].monsters.find(card=>card.uid===fixture.target.uid);
+  assert.ok(attacker&&target);
+  const attack=tag.tagActions(state,member(2)).find(action=>
+    action.kind==='attack'&&action.card===fixture.attacker.uid&&action.target===fixture.target.uid
+  );
+  assert.ok(attack,'the active partner can attack the opposing Defense monster');
+  state=settle(tag.stepTagDuel(state,member(2),attack));
+  assert.equal(state.core.players[1].lp,4000,
+    'without the Equip Spell, attacking Defense must not inflict piercing battle damage');
+  assert.equal(state.core.players[0].lp,4000);
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===fixture.target.uid),
+    'the stronger attacker still destroys the Defense monster without piercing');
+  assert.ok(tag.tagMemberHand(state,member(2)).some(card=>card.uid===fixture.equip.uid),
+    'the unused Equip Spell remains in the active physical partner hand');
+  for(const seat of [0,1,2,3]){
+    assert.deepEqual(tag.tagMemberHand(state,member(seat)).map(card=>card.uid),zones.hands.get(seat));
+    assert.deepEqual(holder(state,seat).deck.map(card=>card.uid),zones.decks.get(seat));
+  }
+  rules(state);
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  assertPrivateHands(state);
+  assertRestorable(state);
+  assertConserved(state,before);
+});
