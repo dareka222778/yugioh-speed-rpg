@@ -134,7 +134,6 @@ function createGame(seed){
     cards:deck()
   }));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed});
-  state.core.rulesVersion='speed-rpg-v2';
   state.core.turn=3;
   const rules=rulesFor(state.core);
   assert.equal(rules.mainDeckMin,20);
