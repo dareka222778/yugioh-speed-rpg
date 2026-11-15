@@ -28,9 +28,12 @@ assert.equal(getPlayableCard(HARPIE_LADY_1)?.kind,'monster');
 assert.equal(getPlayableCard(CELTIC_GUARDIAN)?.kind,'monster');
 assert.equal(getPlayableCard(BLUE_EYES)?.kind,'monster');
 
-const DECK_POOL=[CHORUS,BANNER,HARPIE_LADY_1,CELTIC_GUARDIAN,BLUE_EYES];
+const CORE_IDS=[CHORUS,BANNER,HARPIE_LADY_1,CELTIC_GUARDIAN,BLUE_EYES];
+const FILLER_IDS=[...new Set(tag.tagNormalCardIds)].filter(id=>!CORE_IDS.includes(id)).slice(0,15);
+const DECK_POOL=[...CORE_IDS,...FILLER_IDS];
+assert.equal(DECK_POOL.length,20,'the field fixture must contain exactly 20 distinct enabled cards');
 function member(seat){return 'm227-seat-'+seat;}
-function deck(){return Array.from({length:20},(_,index)=>DECK_POOL[index%DECK_POOL.length]);}
+function deck(){return [...DECK_POOL];}
 function holder(state,seat){
   const team=seat%2;
   return state.active[team]===seat?state.core.players[team]:state.reserves[seat];
