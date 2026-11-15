@@ -1,3 +1,4 @@
+import {effects as m46_amazoness_swords_womanEffects} from './generated/m46-amazoness-swords-woman';
 import {effects as m31_single_targetsEffects} from './generated/m31-single-targets';
 import {effects as m31_harpie_identityEffects} from './generated/m31-harpie-identity';
 import {effects as m31_target_groupsEffects} from './generated/m31-target-groups';
@@ -167,7 +168,8 @@ export const effectDefinitions:Record<string,Effect>={
  '91595718':{kind:'equip',races:['Spellcaster'],atk:300,def:300},
  '04614116':{kind:'equip',races:['Fiend'],atk:300,def:300},
  '98374133':{kind:'equip',attribute:'EARTH',atk:400,def:-200},
- '01435851':{kind:'equip',races:['Dragon'],atk:300,def:300}
+ '01435851':{kind:'equip',races:['Dragon'],atk:300,def:300},
+ ...m46_amazoness_swords_womanEffects
 };
 /** Runtime boundary for imported/staged data, in addition to TypeScript. */
 const executableKinds=new Set<Effect['kind']>(['sequence','attackResponse','monsterEffect','normal','fusion','fissure','polymerization','darkHole','cardDestruction','giantTrunade','shieldSword','monsterReborn','changeHeart','blockAttack','deSpell','removeTrap','reinforcements','castleWalls','waboku','trapHole','justDesserts','magicJammer','sevenTools','potOfGreed','raigeki','mysticalSpaceTyphoon','bookOfMoon','torrentialTribute','bottomlessTrapHole','sakuretsuArmor','mirrorForce','heal','burn','field','equip']);
