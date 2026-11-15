@@ -19,6 +19,7 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
   "44472639":{"fingerprint":"630d110bb78fff689f4ed5663e51f21b01eb917009d247254ccafd929ee41030","suites":["tests/economicCountBatch24.test.cjs"]},
   "58074572":{"fingerprint":"5bc33794ffec7b0182e28cdd9d5c74ac1f8c1e8dae482af83a359442f811e44b","suites":["tests/economicBatch23.test.cjs"]},
   "08842266":{"fingerprint":"5a4a4786e3c0bd0632bd77810cf3fc15143054140b5e7d66b0d01e77a88835b8","suites":["tests/economicBatch23.test.cjs"]},
+  "45311864":{"fingerprint":"e241d2575b6e62b102298e8751b55673db785af86f52f2476f740080501bb13d","suites":["tests/tagClassicGoblinThiefTeamLP2v2.test.cjs"]},
   "10071456": {
     "fingerprint": "b4f9a0cdce80d9cf807d753366db8a35587dbc8b971f1c6be0fb4ceb8df382bb",
     "suites": [
