@@ -137,7 +137,12 @@ test('Trap Master can inspect a hidden Trap on either field and destroys the cor
   let {state,before,source,trap,spell,field}=setup('m239-set-trap-target');
   assert.equal(tag.tagActions(state,member(2)).length,0,'the inactive source owner cannot execute the Flip Summon');
   const beforePublic=JSON.stringify(tag.publicTagDuel(state));
-  for(const hidden of [trap,spell,field])assert.ok(!beforePublic.includes(hidden.id),'a Set card identity must remain hidden before selection');
+  for(const hidden of [trap,spell,field]){
+    assert.ok(!beforePublic.includes(hidden.id),'a Set card identity must remain hidden before selection');
+    const info=getPlayableCard(hidden.id);
+    assert.ok(!beforePublic.includes(info.name)&&!beforePublic.includes(info.englishName),
+      'a Set card name must not leak before selection');
+  }
 
   state=flip(state,source);
   assert.equal(state.core.phase,'choice');
@@ -146,7 +151,12 @@ test('Trap Master can inspect a hidden Trap on either field and destroys the cor
   assert.ok(state.core.choice.targets.includes(spell.uid),'a Set backrow card can be inspected before its type is known');
   assert.ok(!state.core.choice.targets.includes(field.uid),'Trap Master cannot select the Field Zone for a Trap inspection');
   const pendingPublic=JSON.stringify(tag.publicTagDuel(state));
-  for(const hidden of [trap,spell,field])assert.ok(!pendingPublic.includes(hidden.id),'the pending choice must not reveal hidden card identities');
+  for(const hidden of [trap,spell,field]){
+    assert.ok(!pendingPublic.includes(hidden.id),'the pending choice must not reveal hidden card identities');
+    const info=getPlayableCard(hidden.id);
+    assert.ok(!pendingPublic.includes(info.name)&&!pendingPublic.includes(info.englishName),
+      'a pending inspection must not publish the hidden card name');
+  }
 
   state=settle(choose(state,trap.uid));
   assert.ok(state.core.players[0].monsters.some(card=>card.uid===source.uid&&card.faceUp),
@@ -175,6 +185,8 @@ test('Trap Master leaves a selected Set Spell untouched and keeps its identity p
   assert.equal(state.core.players[1].field.uid,field.uid);
   const publicState=JSON.stringify(tag.publicTagDuel(state));
   assert.ok(!publicState.includes(spell.id),'the inspected non-Trap identity must not leak publicly');
+  assert.ok(!publicState.includes(getPlayableCard(spell.id).name)&&!publicState.includes(getPlayableCard(spell.id).englishName),
+    'the inspected non-Trap name must remain private to the inspecting player');
   assert.ok(!publicState.includes(trap.id),'the unselected Set Trap identity remains hidden');
   assert.ok(!publicState.includes(field.id),'the Set Field Spell identity remains hidden');
   assertConserved(state,before);
