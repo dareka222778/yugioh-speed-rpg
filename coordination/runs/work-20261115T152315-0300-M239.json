@@ -4,7 +4,7 @@
   "owner": "Work principal",
   "mission": "M239",
   "priority": "P2 — ampliar a validação 2v2 de inspeção de backrow oculto e preservação de identidade física com Trap Master, sem alterar runtime/catalog/certificados.",
-  "state": "implementation-in-progress",
+  "state": "blocked-on-runtime-privacy-handoff",
   "startedAt": "2026-11-15T15:23:15-03:00",
   "branch": "feat/work-m239-trap-master-set-backrow-2v2-20261115",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
@@ -44,5 +44,53 @@
   ],
   "completedBlocks": [
     "Nova suíte 2v2 com duas resoluções: destruição de Trap e retenção de Spell Set de tipo incorreto."
-  ]
+  ],
+  "lastUpdatedAt": "2026-11-15T15:43:09-03:00",
+  "currentHead": "82a2a63ec764c308997e761a5a6c2839e3fdbb25",
+  "pullRequest": {
+    "number": 195,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/195",
+    "draft": true,
+    "mergeable": false
+  },
+  "ci": {
+    "cardBatchFast": {
+      "status": "success"
+    },
+    "engineValidation": {
+      "status": "failure",
+      "reason": "Trap Master leaves a selected Set Spell untouched and keeps its identity private — assertion at tests/tagClassicTrapMasterHiddenBackrow2v2.test.cjs:188; public projection contains hidden card name."
+    },
+    "tests": {
+      "passed": 7363,
+      "failed": 1,
+      "total": 7364
+    },
+    "extendedSoak": {
+      "status": "in_progress"
+    },
+    "milestone1000": {
+      "status": "success"
+    }
+  },
+  "finding": {
+    "severity": "privacy leak",
+    "evidence": [
+      "src/singleCardOperation.ts:14 logs info.name via service.note",
+      "src/tagDuel.ts:56 copies s.core.log into publicTagDuel"
+    ],
+    "requestedHandoff": "src/singleCardOperation.ts and only if required private log projection",
+    "fixDirection": "private reveal/event for controller or remove hidden card name from public log until private channel exists"
+  },
+  "counts": {
+    "sharedCertified": 969,
+    "newlyCertified": 0,
+    "inventoryGranted": 0
+  },
+  "limits": [
+    "Runtime change is blocked by active run work-20261115T142521-0300; handoff requested on PR #192.",
+    "No merge, deploy, or production verification."
+  ],
+  "nextTask": "Obtain explicit handoff for singleCardOperation.ts; implement a private inspection event or safe generic public log, then rerun full Engine Validation and soak.",
+  "release": "Only the new test file is in scope; no runtime/catalog/certificate files modified."
 }
