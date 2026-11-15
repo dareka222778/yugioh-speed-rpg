@@ -1,5 +1,17 @@
 'use strict';
-const {test}=require('node:test');
+const {test:nodeTest}=require('node:test');
+const fs=require('node:fs');
+function recordFailure(label,error){
+  fs.mkdirSync('artifacts',{recursive:true});
+  fs.appendFileSync('artifacts/engine-acceptance-failure.tap','\\n[M233] '+label+'\\n'+(error?.stack||String(error))+'\\n');
+}
+function test(name,fn){
+  nodeTest(name,async t=>{
+    try{return await fn(t);}
+    catch(error){recordFailure(name,error);throw error;}
+  });
+}
+process.on('uncaughtExceptionMonitor',error=>recordFailure('module initialization',error));
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getEffect,getCardStatus}=require('../dist/effectRegistry');
