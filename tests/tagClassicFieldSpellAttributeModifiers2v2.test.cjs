@@ -138,13 +138,13 @@ for(const field of FIELD_SPELLS){
     assert.ok(state.core.players[0].field?.faceUp);
     assert.equal(state.core.players[0].field.id,field.id);
     assert.equal(engine.atk(liveAlly,state.core),field.atk+500);
-    assert.equal(engine.defense(liveAlly,state.core),field.def-400);
+    assert.equal(engine.def(liveAlly,state.core),field.def-400);
     assert.equal(engine.atk(liveOpponent,state.core),field.atk+500,
       'the Field Spell must affect a matching monster on the opposing shared team');
-    assert.equal(engine.defense(liveOpponent,state.core),field.def-400);
+    assert.equal(engine.def(liveOpponent,state.core),field.def-400);
     assert.equal(engine.atk(liveControl,state.core),3000,
       'a monster of another attribute must not receive the ATK modifier');
-    assert.equal(engine.defense(liveControl,state.core),2500,
+    assert.equal(engine.def(liveControl,state.core),2500,
       'a monster of another attribute must not receive the DEF modifier');
     const publicState=tag.publicTagDuel(state);
     assert.equal(publicState.teams[0].field.id,field.id);
