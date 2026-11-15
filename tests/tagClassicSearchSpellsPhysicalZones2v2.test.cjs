@@ -39,7 +39,7 @@ const normal=[...new Set(tag.tagNormalCardIds)]
   .filter(entry=>entry.card&&entry.card.kind==='monster'&&
     Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
 assert.ok(normal.length>=8,'the four-seat fixture needs at least eight certified Normal Monsters');
-const normalIds=normal.slice(0,10).map(entry=>entry.id);
+const normalIds=normal.slice(0,8).map(entry=>entry.id);
 const nonWarrior=normal.find(entry=>entry.card.race&&entry.card.race!=='Warrior'&&entry.card.level&&entry.card.level<=4);
 assert.ok(nonWarrior,'Reinforcement of the Army needs a non-Warrior Level 4 negative control');
 const fixtureIds=[...new Set([
@@ -50,10 +50,11 @@ const fixtureIds=[...new Set([
 assert.ok(fixtureIds.length<=20,'the search fixture must fit valid 20-card physical Decks');
 
 function member(seat){return 'm220-seat-'+seat;}
-function deck(required=[]){
+function deck(required=[],extraCopies=[]){
   const ids=[...new Set([...required,...fixtureIds])];
-  assert.ok(ids.length>=8&&ids.length<=20);
-  return Array.from({length:20},(_,index)=>ids[index%ids.length]);
+  const pool=[...ids,...extraCopies];
+  assert.ok(pool.length>=8&&pool.length<=20);
+  return Array.from({length:20},(_,index)=>pool[index%pool.length]);
 }
 function holder(state,seat){
   const team=seat%2;
@@ -140,9 +141,9 @@ function settleResponses(state){
   }
   return state;
 }
-function createGame(seed){
+function createGame(seed,extraCopiesBySeat={}){
   const players=[0,1,2,3].map(seat=>({
-    id:member(seat),name:'M220 Seat '+seat,cards:deck()
+    id:member(seat),name:'M220 Seat '+seat,cards:deck([],extraCopiesBySeat[seat]||[])
   }));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed});
   state.core.rulesVersion='speed-rpg-v2';
@@ -254,11 +255,13 @@ test('The Warrior Returning Alive searches the shared team Graveyard but adds th
 });
 
 test('Emblem of Dragon Destroyer searches Buster Blader from the active Deck or shared team Graveyard only',()=>{
-  let state=createGame('m220-emblem-either-owned-deck-shared-grave');
+  let state=createGame('m220-emblem-either-owned-deck-shared-grave',{0:[BUSTER_BLADER]});
   const before=inventorySnapshot(state);
   const spell=ensureInHand(state,2,EMBLEM);
   const ownDeckBuster=holder(state,2).deck.find(card=>card.id===BUSTER_BLADER);
-  const partnerDeckBuster=holder(state,0).deck.find(card=>card.id===BUSTER_BLADER);
+  const partnerCopies=holder(state,0).deck.filter(card=>card.id===BUSTER_BLADER);
+  assert.equal(partnerCopies.length,2,'seat 0 needs separate physical Buster Blader copies for Deck and shared Graveyard controls');
+  const partnerDeckBuster=partnerCopies[1];
   const partnerGraveBuster=moveToGrave(state,0,BUSTER_BLADER);
   assert.ok(ownDeckBuster&&partnerDeckBuster&&partnerGraveBuster);
   state=rotateToSeat2(state);
