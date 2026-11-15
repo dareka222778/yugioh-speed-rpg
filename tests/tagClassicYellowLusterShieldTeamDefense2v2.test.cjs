@@ -81,6 +81,7 @@ test('Yellow Luster Shield increases DEF of both allied physical seats on the sh
   let state=game();
   const before=inventorySnapshot(state);
   const spell=takeCard(state,0,YELLOW_LUSTER_SHIELD);
+  holder(state,0).hand.push(spell);
   const activeAlly=deploy(state,0,normalIds[0]);
   const partnerAlly=deploy(state,2,normalIds[1]);
   const opponent=deploy(state,1,normalIds[2]);
