@@ -1,11 +1,14 @@
 'use strict';
-const {test}=require('node:test');
+const {test:nodeTest}=require('node:test');
+function test(name,fn){nodeTest(name,async t=>{try{return await fn(t);}catch(error){console.error('[M232] '+name+'\\n'+(error?.stack||error));throw error;}});}
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');
 const {getPlayableCard,getEffect,isQuickPlaySpell}=require('../dist/effectRegistry');
 const {getActivationModel}=require('../dist/effectModels');
 const {getMonsterDefinition,getMonsterEffect}=require('../dist/monsterEffects');
 const {turnMonsterFaceDown}=require('../dist/classicEffects');
+
+try{
 
 const MIRAGE_DRAGON='15960641';
 const PITCH_BLACK_WARWOLF='88975532';
@@ -354,3 +357,4 @@ test('Invader of Darkness: does not block a partner-owned Quick-Play Spell contr
   assert.doesNotThrow(()=>tag.assertTagDuel(current));
   assertConserved(current,before);
 });
+}catch(error){console.error('[M232] module initialization failed\\n'+(error?.stack||error));throw error;}
