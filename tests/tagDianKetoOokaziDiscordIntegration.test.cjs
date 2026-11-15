@@ -142,8 +142,11 @@ for(const entry of CASES){
     const menus=rows.flatMap(row=>row.components||[]);
     const menu=menus.find(component=>component.custom_id==='tag:act:'+record.id+':'+record.revision+':'+actor);
     assert.ok(menu,'the private Discord panel must expose the real action select menu');
-    assert.ok(menu.options.some(option=>option.value===String(index)&&option.label.includes(entry.name)),
-      'the private menu must show the exact Spell and action index selected by the engine');
+    const uiName=getPlayableCard(entry.id).name;
+    assert.ok(menu.options.some(option=>option.value===String(index)&&option.label.includes(uiName)),
+      'the private menu must show the localized card name and exact action index selected by the engine');
+    assert.ok(privatePanel.embeds[0].data.fields[0].value.includes(uiName),
+      'the private hand embed must show the localized physical card name');
 
     const originalRevision=record.revision,requestId='m213-request-'+entry.id;
     await submit(record,entry,actor,index,requestId,originalRevision,guild);
