@@ -120,7 +120,6 @@ test('4-Starred Ladybug destroys face-up Level 4 monsters from both opposing phy
   const activeEnemyLevel4=placeMonster(state,1,LEVEL4.id,true);
   const partnerEnemyLevel4=placeMonster(state,3,LEVEL4.id,true);
   const enemyLevel3=placeMonster(state,1,LEVEL3.id,true);
-  const hiddenEnemyLevel4=placeMonster(state,3,LEVEL4.id,false);
   assert.match(source.uid,/^m2:/);
   assert.equal(tag.tagActions(state,member(2)).length,0,'the inactive partner cannot execute the Flip Summon');
   state=settle(flip(state,source));
@@ -133,8 +132,28 @@ test('4-Starred Ladybug destroys face-up Level 4 monsters from both opposing phy
     'the allied Level 4 monster is preserved');
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===enemyLevel3.uid),
     'the opposing Level 3 monster is preserved');
+  assertConserved(state,before);
+  assertPrivateHands(state);
+  assertRestorable(state);
+});
+
+test('4-Starred Ladybug preserves a face-down Level 4 monster without revealing its identity',()=>{
+  let state=game('m230-ladybug-hidden-level-four');
+  const before=inventorySnapshot(state);
+  const source=placeMonster(state,2,LADYBUG,false);
+  const alliedLevel4=placeMonster(state,0,LEVEL4.id,true);
+  const activeEnemyLevel4=placeMonster(state,1,LEVEL4.id,true);
+  const partnerEnemyLevel4=placeMonster(state,3,LEVEL4.id,true);
+  const hiddenEnemyLevel4=placeMonster(state,3,LEVEL4.id,false);
+  state=settle(flip(state,source));
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===activeEnemyLevel4.uid));
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===partnerEnemyLevel4.uid));
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===hiddenEnemyLevel4.uid),
     'the face-down Level 4 monster is not inspected or destroyed');
+  const publicState=JSON.stringify(tag.publicTagDuel(state));
+  assert.ok(!publicState.includes(hiddenEnemyLevel4.id),'the hidden monster identity remains private');
+  assert.ok(state.core.players[0].monsters.some(card=>card.uid===source.uid&&card.faceUp));
+  assert.ok(state.core.players[0].monsters.some(card=>card.uid===alliedLevel4.uid));
   assertConserved(state,before);
   assertPrivateHands(state);
   assertRestorable(state);
@@ -156,7 +175,7 @@ test('Nobleman-Eater Bug selects exactly two distinct monsters across both share
   state=choose(state,source.uid);
   assert.ok(!tag.tagActions(state,member(0)).some(action=>action.kind==='choose'&&action.target===source.uid),
     'a selected UID cannot be selected twice');
-  assert.throws(()=>tag.stepTagDuel(state,member(0),{kind:'choose',target:source.uid}),/Alvo repetido ou inelegível/,
+  assert.throws(()=>tag.stepTagDuel(state,member(0),{kind:'choose',target:source.uid}),/Ação inválida|Alvo repetido ou inelegível/,
     'a forged duplicate target is rejected');
   state=settle(choose(state,partnerEnemy.uid));
   assert.ok(state.core.players[0].grave.some(card=>card.uid===source.uid),
