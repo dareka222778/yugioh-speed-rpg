@@ -86,11 +86,6 @@ function assertConserved(state,before){
   assert.equal(new Set(cards.map(card=>card.uid)).size,before.size);
   for(const card of cards)assert.equal(before.get(card.uid),card.id,'physical identity changed: '+card.uid);
 }
-function handsSnapshot(state){
-  return new Map([0,1,2,3].map(seat=>[
-    seat,tag.tagMemberHand(state,member(seat)).map(card=>card.uid)
-  ]));
-}
 function assertPrivateHands(state){
   const publicState=JSON.stringify(tag.publicTagDuel(state));
   for(const seat of [0,1,2,3]){
@@ -192,7 +187,6 @@ test('Book of Taiyou can reveal a face-down monster owned by the inactive allied
   const opponent=deploy(state,3,normal[1],{faceUp:false,position:'def'});
   state=rotateToSeat2(state);
   const before=inventorySnapshot(state);
-  const hands=handsSnapshot(state);
   assertPrivateHands(state);
   assert.deepEqual(tag.tagActions(state,member(0)),[],
     'the inactive partner cannot activate a Spell from seat 2 physical hand');
@@ -208,7 +202,7 @@ test('Book of Taiyou can reveal a face-down monster owned by the inactive allied
     'the unselected opponent monster remains hidden');
   assert.ok(state.core.players[0].grave.some(card=>card.uid===spell.uid));
   assertConserved(state,before);
-  assertPrivateHands(state,hands);
+  assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(state))));
 });
 
@@ -221,8 +215,7 @@ test('Stop Defense targets either opposing physical seat but never an allied mon
   const attackOpponent=deploy(state,1,normal[3],{faceUp:true,position:'atk'});
   state=rotateToSeat2(state);
   const before=inventorySnapshot(state);
-  const hands=handsSnapshot(state);
-  assertPrivateHands(state,hands);
+  assertPrivateHands(state);
   const offered=spellActions(state,2,spell).map(action=>action.target);
   assert.ok(offered.includes(hiddenOpponent.uid),'the inactive opposing partner face-down Defense monster is a legal target');
   assert.ok(offered.includes(visibleOpponent.uid),'a face-up Defense monster is also a legal target');
@@ -236,7 +229,7 @@ test('Stop Defense targets either opposing physical seat but never an allied mon
   assert.equal(state.core.players[1].monsters.find(monster=>monster.uid===visibleOpponent.uid).position,'def');
   assert.ok(state.core.players[0].grave.some(card=>card.uid===spell.uid));
   assertConserved(state,before);
-  assertPrivateHands(state,hands);
+  assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(state))));
 });
 
@@ -249,8 +242,7 @@ test('Dark-Piercing Light reveals both opposing physical seats while preserving 
   const opposing3=deploy(state,3,normal[3],{faceUp:false,position:'def'});
   state=rotateToSeat2(state);
   const before=inventorySnapshot(state);
-  const hands=handsSnapshot(state);
-  assertPrivateHands(state,hands);
+  assertPrivateHands(state);
   state=activateSpell(state,2,spell);
   for(const uid of [opposing1.uid,opposing3.uid]){
     const monster=state.core.players[1].monsters.find(candidate=>candidate.uid===uid);
@@ -263,7 +255,7 @@ test('Dark-Piercing Light reveals both opposing physical seats while preserving 
   }
   assert.ok(state.core.players[0].grave.some(card=>card.uid===spell.uid));
   assertConserved(state,before);
-  assertPrivateHands(state,hands);
+  assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(state))));
 });
 
@@ -281,8 +273,7 @@ test('Desert Sunlight Set by seat 0 may be activated by seat 2 and reveals only 
   assert.ok(!publicAfterSet.includes(trap.uid),'the Set Trap UID must remain private');
   assert.ok(!publicAfterSet.includes(DESERT_SUNLIGHT),'the Set Trap identity must remain hidden');
   state=rotateToSeat2(state);
-  const hands=handsSnapshot(state);
-  assertPrivateHands(state,hands);
+  assertPrivateHands(state);
   state=activatePartnerTrap(state,trap);
   for(const uid of [allied0.uid,allied2.uid]){
     const monster=state.core.players[0].monsters.find(candidate=>candidate.uid===uid);
@@ -297,6 +288,6 @@ test('Desert Sunlight Set by seat 0 may be activated by seat 2 and reveals only 
   }
   assert.ok(state.core.players[0].grave.some(card=>card.uid===trap.uid));
   assertConserved(state,before);
-  assertPrivateHands(state,hands);
+  assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(state))));
 });
