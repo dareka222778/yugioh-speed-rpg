@@ -89,9 +89,9 @@ function setTrap(state,seat,id){
   state.core.players[seat%2].backrow.push({...card,faceUp:false,setTurn:0});
   return card;
 }
-function createGame(seed){
+function createGame(seed,first=0){
   const players=[0,1,2,3].map(seat=>({id:member(seat),name:'M225 Seat '+seat,cards:deck()}));
-  const state=tag.createTagDuel(players,{classic:true,first:0,seed});
+  const state=tag.createTagDuel(players,{classic:true,first,seed});
   state.core.turn=3;
   const rules=rulesFor(state.core);
   assert.equal(rules.mainDeckMin,20);
@@ -190,7 +190,7 @@ function assertRestorable(state){
 }
 
 test('Disappear set by seat 0 can be activated by partner seat 2 against the opposing shared Graveyard',()=>{
-  let state=createGame('m225-disappear-partner-trap-opponent-grave');
+  let state=createGame('m225-disappear-partner-trap-opponent-grave',2);
   const trap=setTrap(state,0,DISAPPEAR);
   const enemySpell=moveToGrave(state,3,SOUL_RELEASE);
   const alliedCard=moveToGrave(state,0,normalLow[0].id);
@@ -313,7 +313,7 @@ test('Soul Reversal returns a shared-Graveyard Flip Monster to its original phys
 });
 
 test('Backup Soldier set by seat 0 returns eligible non-Effect Monsters to their original physical hands',()=>{
-  let state=createGame('m225-backup-soldier-physical-hand-owners');
+  let state=createGame('m225-backup-soldier-physical-hand-owners',2);
   const trap=setTrap(state,0,BACKUP_SOLDIER);
   const first=moveToGrave(state,0,normalLow[0].id);
   const second=moveToGrave(state,2,normalLow[1].id);
