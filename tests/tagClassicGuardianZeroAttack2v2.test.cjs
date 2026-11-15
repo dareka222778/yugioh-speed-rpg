@@ -8,9 +8,9 @@ const {turnMonsterFaceDown}=require('../dist/classicEffects');
 
 const AXE_RAIDER='48305365';
 const GUARDIANS=[
-  {id:'62340868',name:'Kazejin',atk:2400},
-  {id:'98434877',name:'Suijin',atk:2500},
-  {id:'25955164',name:'Sanga of the Thunder',atk:2600}
+  {id:'62340868',name:'Kazejin',atk:2400,def:2200},
+  {id:'98434877',name:'Suijin',atk:2500,def:2400},
+  {id:'25955164',name:'Sanga of the Thunder',atk:2600,def:2200}
 ];
 
 for(const guardian of GUARDIANS){
@@ -205,8 +205,8 @@ for(const guardianSpec of GUARDIANS){
       'the second activation consumes the reset face-up use again');
     assert.ok(state.core.players[0].monsters.some(card=>card.uid===attackers[1].uid&&card.id===AXE_RAIDER),
       'the second attacker survives because the revealed Guardian remains in Defense Position');
-    assert.equal(state.core.players[0].lp,6000-guardianSpec.atk,
-      'attacking the revealed Defense-position Guardian causes no additional battle damage');
+    assert.equal(state.core.players[0].lp,6000-guardianSpec.atk-guardianSpec.def,
+      'after the reset effect reduces ATK to zero, the attacking team takes the exact DEF-minus-zero battle damage');
     assert.equal(state.core.players[1].lp,6000,'the defending team takes no battle damage');
     assert.equal(fieldMonster(state,guardian.uid)?.faceUp,true,'the Guardian is revealed during damage calculation');
     assert.equal(fieldMonster(state,guardian.uid)?.position,'def','a Set Guardian is revealed in Defense Position');
