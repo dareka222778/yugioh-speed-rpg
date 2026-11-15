@@ -1,0 +1,37 @@
+{
+  "runId": "work-20261115T055534-0300",
+  "owner": "Work",
+  "priority": "P1 — validar seis operações de movimento no 2v2 clássico (Disappear, Gravedigger Ghoul, Soul Release, Miracle Dig, Soul Reversal e Backup Soldier), com alvos nos Cemitérios compartilhados, banimento, recuperação e preservação do dono físico.",
+  "state": "active",
+  "startedAt": "2026-11-15T05:55:34-03:00",
+  "timezone": "America/Sao_Paulo",
+  "branch": "feat/work-m225-movement-ownership-2v2-20261115",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "57b95a318cc49ae4afd82daba525affbb0bacf59",
+  "previousCheckpoint": "coordination/runs/work-20261114T233246-0300.json",
+  "previousCheckpointBlobSha": "8193f99efd235949f8ead0981821dedb7627d338",
+  "staleCheckpointReference": "state.json referenced work-20261115T003105-0300.json, but that path returned 404; latest extant run record is work-20261114T233246-0300.json.",
+  "observedReservations": [
+    {
+      "runId": "work-20261115T003105-0300",
+      "mission": "M215–M217",
+      "state": "active in state.json; files reserved, not modified"
+    },
+    {
+      "runId": "work-20261115T042526-0300",
+      "mission": "M218–M220",
+      "state": "active in state.json; files reserved, not modified"
+    }
+  ],
+  "scope": [
+    "tests/tagClassicMovementOwnership2v2.test.cjs"
+  ],
+  "status": "reservation registered; implementation not yet started",
+  "deployment": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false
+  }
+}

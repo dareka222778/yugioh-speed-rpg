@@ -5,7 +5,7 @@
   "state": "active",
   "startedAt": "2026-11-15T00:31:05-03:00",
   "lastActivityAt": "2026-11-15T00:39:22-03:00",
-  "nextScheduledAt": "2026-11-15T04:30:00-03:00",
+  "nextScheduledAt": "2026-11-15T09:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -13,7 +13,7 @@
     "tests/tagClassicYellowLusterShieldTeamDefense2v2.test.cjs",
     "tests/tagClassicGoblinThiefTeamLP2v2.test.cjs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261115T003105-0300.json",
+  "lastCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
   "previousRunId": "work-20261114T233246-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
@@ -4701,7 +4701,7 @@
       "allowed": "Monitorar CI e corrigir somente o(s) arquivo(s) de teste desta branch; não alterar runtime, catálogo, certificados, banco persistente, inventários ou reservas de terceiros."
     }
   ],
-  "lastCoordinationRefreshAt": "2026-11-15T00:26:25-03:00",
+  "lastCoordinationRefreshAt": "2026-11-15T05:55:34-03:00",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
     "status": "awaiting-response; separate test file only; no response observed",
@@ -4882,7 +4882,7 @@
     "requestedAt": "2026-11-14T09:18:10-03:00",
     "scope": "partial file-only handoff; no changes until release"
   },
-  "lastCheckpointAt": "2026-11-15T00:26:25-03:00",
+  "lastCheckpointAt": "2026-11-15T05:55:34-03:00",
   "reservationReleased": false,
   "expectedHeadForCoordinationCommit": "b8be5821ef1a14dfd588e4c57d919ba5bc9c10b5",
   "lastRunSummary": "M211 (#166) e M212 (#167) concluíram toda a CI com sucesso; M213 (#168) falhou em uma asserção de menu Discord (7.367/7.368) e recebeu pedido de transferência; M214 (#169) adiciona Chaos Necromancer ao Cemitério compartilhado, com Card Batch e Milestone aprovados e Engine/soak em andamento. Zero novas certificações ou inventários.",
@@ -5159,7 +5159,7 @@
       "failure": null
     }
   ],
-  "updatedAt": "2026-11-15T04:40:00-03:00",
+  "updatedAt": "2026-11-15T05:55:34-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -5199,6 +5199,22 @@
           "mission": "M220 — Terraforming, Reinforcement of the Army, Fusion Sage, The Warrior Returning Alive e Emblem of Dragon Destroyer: busca filtrada por Deck próprio/Cemitério compartilhado, sem acesso ao Deck do parceiro."
         }
       ]
+    },
+    {
+      "runId": "work-20261115T055534-0300",
+      "owner": "Work",
+      "priority": "P1 — validar seis operações de movimento no 2v2 clássico (Disappear, Gravedigger Ghoul, Soul Release, Miracle Dig, Soul Reversal e Backup Soldier), com alvos nos Cemitérios compartilhados, banimento, recuperação e preservação do dono físico.",
+      "state": "active",
+      "startedAt": "2026-11-15T05:55:34-03:00",
+      "branch": "feat/work-m225-movement-ownership-2v2-20261115",
+      "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "57b95a318cc49ae4afd82daba525affbb0bacf59",
+      "reservedFiles": [
+        "tests/tagClassicMovementOwnership2v2.test.cjs"
+      ],
+      "conflictPolicy": "Escopo isolado: somente o novo arquivo de teste. Não tocar nas reservas M215–M220, nas frentes M61/M118/M151/M153, em runtime, catálogo, certificados, banco persistente, inventários ou deploy."
     }
   ]
 }
