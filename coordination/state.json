@@ -1698,6 +1698,18 @@
       "mission": "M219",
       "state": "reserved",
       "pr": null
+    },
+    {
+      "branch": "feat/work-m220-search-spells-physical-zones-2v2-20261115",
+      "head": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicSearchSpellsPhysicalZones2v2.test.cjs"
+      ],
+      "mission": "M220",
+      "state": "reserved",
+      "pr": null
     }
   ],
   "handoffRequest": {
@@ -5147,7 +5159,7 @@
       "failure": null
     }
   ],
-  "updatedAt": "2026-11-15T04:34:00-03:00",
+  "updatedAt": "2026-11-15T04:40:00-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -5163,7 +5175,8 @@
       "sharedHeadAtReservation": "8e8e9273727497fca1739715a0975bc5a6a8ca96",
       "reservedFiles": [
         "tests/tagClassicEconomicCountSelectors2v2.test.cjs",
-        "tests/tagClassicOpponentHandFieldCount2v2.test.cjs"
+        "tests/tagClassicOpponentHandFieldCount2v2.test.cjs",
+        "tests/tagClassicSearchSpellsPhysicalZones2v2.test.cjs"
       ],
       "conflictPolicy": "Não tocar nas três reservas M215–M217 nem nos arquivos M61/M118/M151; escopo independente.",
       "additionalBranches": [
@@ -5175,6 +5188,15 @@
             "tests/tagClassicOpponentHandFieldCount2v2.test.cjs"
           ],
           "mission": "M219 — Restructer Revolution e Secret Barrel: mão do oponente ativo versus parceiro inativo, campo compartilhado e zona de Campo."
+        },
+        {
+          "branch": "feat/work-m220-search-spells-physical-zones-2v2-20261115",
+          "base": "feat/work-m71-ci-branch-routing-20261112",
+          "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+          "scope": [
+            "tests/tagClassicSearchSpellsPhysicalZones2v2.test.cjs"
+          ],
+          "mission": "M220 — Terraforming, Reinforcement of the Army, Fusion Sage, The Warrior Returning Alive e Emblem of Dragon Destroyer: busca filtrada por Deck próprio/Cemitério compartilhado, sem acesso ao Deck do parceiro."
         }
       ]
     }
