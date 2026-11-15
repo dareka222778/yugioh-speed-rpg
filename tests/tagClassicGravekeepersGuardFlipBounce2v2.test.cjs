@@ -123,18 +123,18 @@ function activateBookAndChooseGuard(state,spell,guard,target){
   const unchanged=JSON.stringify(state);
   assert.throws(()=>tag.stepTagDuel(state,member(0),action),/Aguarde a vez do participante ativo\./);
   assert.equal(JSON.stringify(state),unchanged,'rejected inactive-owner action must not mutate the duel');
-  state=tag.stepTagDuel(state,member(2),action);
+  state=settle(tag.stepTagDuel(state,member(2),action));
   assert.equal(state.core.phase,'choice','the mandatory FLIP effect must request its target');
   assert.equal(tag.tagDecisionMember(state).id,member(2),'the active team representative resolves its mandatory FLIP effect');
   const choose=tag.tagActions(state,member(2)).find(candidate=>
     candidate.kind==='choose'&&candidate.target===target.uid
   );
-  assert.ok(choose,'Gravekeeper\\'s Guard must offer the selected opposing monster');
+  assert.ok(choose,"Gravekeeper's Guard must offer the selected opposing monster");
   state=tag.stepTagDuel(state,member(2),choose);
   return settle(state);
 }
 
-test('Book of Taiyou triggers partner-owned Gravekeeper\\'s Guard and returns the chosen monster to its physical owner',()=>{
+test("Book of Taiyou triggers partner-owned Gravekeeper's Guard and returns the chosen monster to its physical owner",()=>{
   let state=createGame();
   const spell=ensureInHand(state,2,BOOK_OF_TAIYOU);
   const guard=deploy(state,0,GRAVEKEEPERS_GUARD,{faceUp:false,position:'def'});
