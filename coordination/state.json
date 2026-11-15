@@ -1,21 +1,18 @@
 {
-  "runId": "work-20261114T233246-0300",
+  "runId": "work-20261115T003105-0300",
   "owner": "Work",
   "priorityRequestedBy": "Work",
-  "state": "released-to-auxiliary-monitor-ci",
-  "startedAt": "2026-11-14T23:32:46-03:00",
-  "lastActivityAt": "2026-11-15T00:26:25-03:00",
+  "state": "active",
+  "startedAt": "2026-11-15T00:31:05-03:00",
+  "lastActivityAt": "2026-11-15T00:31:05-03:00",
   "nextScheduledAt": "2026-11-15T04:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagClassicGuardianZeroAttack2v2.test.cjs",
-    "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs",
-    "tests/tagDianKetoOokaziDiscordIntegration.test.cjs",
-    "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
+    "tests/tagClassicBusterBladerOpponentDragonCount2v2.test.cjs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261114T233246-0300.json",
-  "previousRunId": "work-20261114T194137-0300",
+  "lastCheckpoint": "coordination/runs/work-20261115T003105-0300.json",
+  "previousRunId": "work-20261114T233246-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -1636,6 +1633,19 @@
       "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
       "runId": "work-20261114T233246-0300",
       "reservation": "Auxiliary"
+    },
+    {
+      "mission": "M215",
+      "branch": "feat/work-m215-buster-blader-dragon-count-2v2-20261115",
+      "base": "feat/work-m71-ci-branch-routing-20261112",
+      "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+      "scope": [
+        "tests/tagClassicBusterBladerOpponentDragonCount2v2.test.cjs"
+      ],
+      "state": "active",
+      "runId": "work-20261115T003105-0300",
+      "priority": "P1 — validar Buster Blader: +500 ATK por Dragon que cada adversário controla ou possui no Cemitério; contar ambos os assentos adversários, excluir aliados, monstros face-down e não-Dragões, e recalcular sem duplicar ao mover do campo para o Cemitério.",
+      "reservation": "Work"
     }
   ],
   "handoffRequest": {
@@ -3055,19 +3065,18 @@
     "deploymentWorkflow": "not found in main/shared; M71 CI branch lists only card-batch-admission, card-batch-fast, engine-validation, milestone1000"
   },
   "duration": {
-    "startedAt": "2026-11-14T23:32:46-03:00",
-    "endedAt": "2026-11-15T00:26:25-03:00",
-    "elapsedWallMinutes": 54,
-    "effectiveWorkMinutesMeasured": 7,
-    "effectiveWorkSecondsMeasured": 438,
+    "startedAt": "2026-11-15T00:31:05-03:00",
+    "endedAt": null,
+    "elapsedWallMinutes": 0,
+    "effectiveWorkMinutesMeasured": 0,
     "minimum60MinutesMet": false,
-    "note": "Nesta retomada foram medidos 7m18s de trabalho efetivo. O intervalo de parede desde o início do run inclui CI/espera e atividade anterior não mensurável; não foi contado como trabalho."
+    "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Auxiliar: corrigir exclusivamente a asserção do menu privado M213 (#168), monitorar M214 (#169) e manter M211/M212 como CI aprovada. Work na próxima janela: obter handoff M61 para os arquivos de efeito e retomar a fila de 31 identidades com revisão oficial individual.",
+  "nextTask": "Criar regressão M215 para Buster Blader em 2v2 usando o contador contínuo de Dragões no campo/Cemitério das duas equipes adversárias; validar 80 UIDs e CI integral.",
   "sharedHeadBeforeRelease": "a7b78a50df36e1141dbe4b7c05797def884546ef",
-  "priority": "P1 — validar os Quick Effects de Kazejin, Suijin e Sanga of the Thunder no 2v2: ativação apenas durante cálculo de dano ao ser atacado, redução do ATK do atacante a zero somente naquele cálculo, uso único enquanto a fonte permanecer face-up, reset ao ser virada para baixo e preservação do assento físico/UID do parceiro.",
-  "sharedHeadBeforeClaim": "7a2a124107b3d2136a4bf90a88cc65ea22f1c294",
-  "releasedOwnReservation": true,
+  "priority": "P1 — validar Buster Blader: +500 ATK por Dragon que cada adversário controla ou possui no Cemitério; contar ambos os assentos adversários, excluir aliados, monstros face-down e não-Dragões, e recalcular sem duplicar ao mover do campo para o Cemitério.",
+  "sharedHeadBeforeClaim": "b8be5821ef1a14dfd588e4c57d919ba5bc9c10b5",
+  "releasedOwnReservation": false,
   "parallelWorkObserved": {
     "at": "2026-11-14T09:18:10-03:00",
     "note": "M165-M171 were observed as independent open PRs; no branch was modified, rebased, merged or released by this Work run.",
@@ -4782,89 +4791,20 @@
     }
   },
   "activeWork": {
-    "runId": "work-20261114T233246-0300",
-    "mission": "M211–M214",
+    "runId": "work-20261115T003105-0300",
+    "mission": "M215",
     "owner": "Work",
-    "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
+    "branch": "feat/work-m215-buster-blader-dragon-count-2v2-20261115",
     "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
     "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
-    "reservedFiles": [],
-    "priority": "P1 — concluir validação dos efeitos de Guardião e LP em 2v2, homologar a interação Discord offline e ampliar cobertura contínua de Chaos Necromancer no Cemitério compartilhado.",
-    "startedAt": "2026-11-14T23:32:46-03:00",
-    "expectedSharedHead": "a7b78a50df36e1141dbe4b7c05797def884546ef",
-    "state": "released-to-auxiliary-monitor-ci",
-    "lastActivityAt": "2026-11-15T00:26:25-03:00",
-    "parallelBranches": [
-      {
-        "mission": "M211",
-        "branch": "feat/work-m211-guardian-zero-attack-2v2-20261114",
-        "head": "f0307b0d0e718ebcaf6494ab584269cdd8ba86a4",
-        "pr": 166,
-        "scope": [
-          "tests/tagClassicGuardianZeroAttack2v2.test.cjs"
-        ],
-        "state": "released-ci-success",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "engineValidation": "success"
-        },
-        "failure": null
-      },
-      {
-        "mission": "M212",
-        "branch": "feat/work-m212-dian-keto-ookazi-team-lp-2v2-20261114",
-        "head": "651696c63e31d7de88ea69b2f6cd4d28e1ee0499",
-        "pr": 167,
-        "scope": [
-          "tests/tagClassicDianKetoOokaziTeamLP2v2.test.cjs"
-        ],
-        "state": "released-ci-success",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "engineValidation": "success",
-          "extendedSoak600": "success",
-          "npmTest": "success"
-        },
-        "failure": null
-      },
-      {
-        "mission": "M213",
-        "branch": "feat/work-m213-lp-spell-discord-2v2-20261115",
-        "head": "c32caa978491773f7d5f0717baf22ef542a8bdb5",
-        "pr": 168,
-        "scope": [
-          "tests/tagDianKetoOokaziDiscordIntegration.test.cjs"
-        ],
-        "state": "released-to-auxiliary-fix-requested",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "engineValidation": "failure",
-          "npmTest": "failure",
-          "extendedSoak600": "success"
-        },
-        "failure": "npm test 7367/7368; assertion at tests/tagDianKetoOokaziDiscordIntegration.test.cjs:145 about menu option value/label; handoff requested in PR comment 6888494307"
-      },
-      {
-        "mission": "M214",
-        "branch": "feat/work-m214-chaos-necromancer-shared-graveyard-20261115",
-        "head": "0e448d98df1e4beb98d22e5f9697d972250c974b",
-        "pr": 169,
-        "scope": [
-          "tests/tagClassicChaosNecromancerSharedGraveyard2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "engineValidation": "in_progress",
-          "extendedSoak600": "in_progress"
-        },
-        "failure": null
-      }
-    ]
+    "reservedFiles": [
+      "tests/tagClassicBusterBladerOpponentDragonCount2v2.test.cjs"
+    ],
+    "priority": "P1 — validar Buster Blader: +500 ATK por Dragon que cada adversário controla ou possui no Cemitério; contar ambos os assentos adversários, excluir aliados, monstros face-down e não-Dragões, e recalcular sem duplicar ao mover do campo para o Cemitério.",
+    "startedAt": "2026-11-15T00:31:05-03:00",
+    "expectedSharedHead": "b8be5821ef1a14dfd588e4c57d919ba5bc9c10b5",
+    "state": "active",
+    "lastActivityAt": "2026-11-15T00:31:05-03:00"
   },
   "sharedHeadAtStart": "b360ed37ee5ea4ff30a3a9b364ac52bb8de7216c",
   "partialHandoffRequest": {
@@ -4877,8 +4817,8 @@
     "scope": "partial file-only handoff; no changes until release"
   },
   "lastCheckpointAt": "2026-11-15T00:26:25-03:00",
-  "reservationReleased": true,
-  "expectedHeadForCoordinationCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
+  "reservationReleased": false,
+  "expectedHeadForCoordinationCommit": "b8be5821ef1a14dfd588e4c57d919ba5bc9c10b5",
   "lastRunSummary": "M211 (#166) e M212 (#167) concluíram toda a CI com sucesso; M213 (#168) falhou em uma asserção de menu Discord (7.367/7.368) e recebeu pedido de transferência; M214 (#169) adiciona Chaos Necromancer ao Cemitério compartilhado, com Card Batch e Milestone aprovados e Engine/soak em andamento. Zero novas certificações ou inventários.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -5153,6 +5093,6 @@
       "failure": null
     }
   ],
-  "updatedAt": "2026-11-15T00:26:25-03:00",
+  "updatedAt": "2026-11-15T00:31:05-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837"
 }
