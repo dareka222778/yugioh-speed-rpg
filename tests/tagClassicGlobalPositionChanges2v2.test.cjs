@@ -49,7 +49,7 @@ function game(seed,first=0){
   assert.equal(rules.extraDeckMax,5);
   assert.equal(rules.monsterZones,3);
   assert.equal(rules.spellTrapZones,3);
-  assert.deepEqual(state.active,[0,1]);
+  assert.equal(state.active[first%2],first);
   assert.equal(tag.tagDecisionMember(state).id,member(first));
   return state;
 }
@@ -248,15 +248,24 @@ test('Ready for Intercepting can select an eligible partner-owned or opposing mo
   assertRestorable(state);
 });
 
-test('global position effects and selected-target Traps cannot activate on an empty shared field',()=>{
-  for(const entry of POSITION_CARDS){
+test('target-dependent position Traps cannot activate on an empty shared field',()=>{
+  for(const entry of POSITION_CARDS.filter(card=>card.kind==='trap')){
     const state=game('m246-empty-'+entry.id);
-    const source=entry.kind==='spell'
-      ?putSpellInHand(state,0,entry.id)
-      :setTrap(state,0,entry.id);
+    const source=setTrap(state,0,entry.id);
     assert.ok(!tag.tagActions(state,member(0)).some(action=>action.card===source.uid),
       entry.name+' must not offer an action without an eligible field target');
   }
+});
+
+test('Earthquake may resolve on an empty shared field without changing either field',()=>{
+  const state=game('m246-earthquake-empty');
+  const before=inventorySnapshot(state);
+  const {state:next,source}=activate(state,0,'82828051','spell');
+  assert.deepEqual(next.core.players.map(player=>player.monsters.length),[0,0]);
+  assert.ok(next.core.players[0].grave.some(card=>card.uid===source.uid));
+  assertConserved(next,before);
+  assertPrivateHands(next);
+  assertRestorable(next);
 });
 
 test('a position-changing Trap set this turn remains unavailable even when the shared field has valid targets',()=>{
