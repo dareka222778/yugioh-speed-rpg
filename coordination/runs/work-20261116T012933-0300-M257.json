@@ -1,0 +1,74 @@
+{
+  "runId": "work-20261116T012933-0300-M257",
+  "mission": "M257",
+  "owner": "Work",
+  "priority": "P1",
+  "state": "published-draft; CI in progress",
+  "startedAt": "2026-11-16T01:29:33-03:00",
+  "timezone": "America/Sao_Paulo",
+  "branch": "feat/work-m257-direct-attacks-discord-2v2-20261116",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "pr": 213,
+  "head": "7ce8056f2efee91a33d459ca53af7e299ea544bb",
+  "scope": [
+    "tests/tagDirectAttackDiscord2v2.test.cjs"
+  ],
+  "cardsCovered": [
+    "Leghul",
+    "Rainbow Flower",
+    "Ooguchi",
+    "Jinzo #7",
+    "Servant of Catabolism",
+    "Nightmare Horse"
+  ],
+  "behavioralScenarios": 7,
+  "newCertifications": 0,
+  "blocksCompleted": [
+    "Preparou a quarta família independente durante a CI das PRs #210–#212.",
+    "Implementou seis cenários de ataque direto pelo handler Discord real, com atacante fisicamente pertencente ao parceiro inativo e dano aplicado aos PV da equipe compartilhada.",
+    "Adicionou controle negativo de monstro Normal, privacidade, idempotência, conservação de UIDs e regras 2v2.",
+    "Publicou PR draft #213."
+  ],
+  "ci": {
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "npmTest": "pending_in_engine_validation",
+    "extendedSoak": "pending"
+  },
+  "runtimeChanges": [],
+  "catalogChanges": [],
+  "certificationChanges": [],
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "liveDiscordNetwork": false
+  },
+  "stateUpdate": {
+    "status": "withheld",
+    "reason": "M231/M232 ainda estão reservadas em coordination/state.json. Handoff cooperativo solicitado em #187/#188; nenhum arquivo reservado ou estado compartilhado foi sobrescrito.",
+    "comments": [
+      6907379122,
+      6907379553
+    ]
+  },
+  "scopeReleasedToAuxiliary": {
+    "branch": "feat/work-m257-direct-attacks-discord-2v2-20261116",
+    "files": [
+      "tests/tagDirectAttackDiscord2v2.test.cjs"
+    ],
+    "allowed": "monitorar CI e corrigir apenas este arquivo de teste; sem runtime, catálogo, estado compartilhado ou produção"
+  },
+  "nextTask": "Monitorar CI #213; corrigir somente falhas próprias; continuar com outra família de interface 2v2; aguardar handoff M231/M232.",
+  "nextWindow": "2026-11-16T05:30:00-03:00",
+  "duration": {
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Tempo efetivo não é medido com precisão neste ambiente; não declarar 60 minutos sem evidência e excluir espera de CI."
+  }
+}
