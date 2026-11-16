@@ -4,10 +4,10 @@
   "priority": "P1 — ampliar a homologação comportamental 2v2 pelo handler Discord, cobrindo prevenção, multiplicação e duplicação de dano de batalha; manter as reservas paralelas intactas.",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-16T16:28:19-03:00",
-  "endedAt": "2026-11-16T16:41:44-03:00",
+  "endedAt": "2026-11-16T16:44:53-03:00",
   "timezone": "America/Sao_Paulo",
-  "elapsedMinutes": 13.42,
-  "effectiveWorkMinutes": 13.42,
+  "elapsedMinutes": 16.58,
+  "effectiveWorkMinutes": 16.58,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -72,7 +72,8 @@
     "M272 — Stone Statue of the Aztecs: dois cenários Discord 2v2; dano de batalha em Defesa dobrado para 1200 e 600, com atacante fisicamente pertencente ao parceiro inativo.",
     "M273 — Piranha Army: ataque direto via Discord 2v2; 800 ATK causam 1600 de dano; controle Normal de 800 ATK causa 800.",
     "Auditoria de CI de M262–M270 e diagnóstico das falhas M267, M268 e M269; comentários enviados aos responsáveis.",
-    "M274 — Obnoxious Celtic Guard: dois cenários Discord 2v2; proteção contra destruição por ATK >=1900 sem prevenir dano de batalha, e controle abaixo do limiar."
+    "M274 — Obnoxious Celtic Guard: dois cenários Discord 2v2; proteção contra destruição por ATK >=1900 sem prevenir dano de batalha, e controle abaixo do limiar.",
+    "M275 — Gora Turtle: três cenários Discord 2v2; bloqueio global de ataques >=1900 ATK nos dois times, ataque de 1400 ATK permitido e fonte face-down sem efeito."
   ],
   "cardsCovered": [
     {
@@ -102,9 +103,16 @@
       "mission": "M274",
       "scenarios": 2,
       "certificationIncrement": 0
+    },
+    {
+      "name": "Gora Turtle",
+      "id": "80233946",
+      "mission": "M275",
+      "scenarios": 3,
+      "certificationIncrement": 0
     }
   ],
-  "totalBehavioralScenarios": 9,
+  "totalBehavioralScenarios": 12,
   "workBranches": [
     {
       "mission": "M271",
@@ -218,6 +226,23 @@
         "npmTest": "passed; engine test job advanced to card-batch-fast",
         "extendedSoak": "in_progress"
       }
+    },
+    {
+      "mission": "M275",
+      "branch": "feat/work-m275-gora-turtle-discord-2v2-20261116",
+      "head": "4ea31d78669c8c2b4d75b55929998cd11d921f13",
+      "pr": 230,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "e65a4c36d34455aca862b6cbfba552e5964bdf90",
+      "scope": [
+        "tests/tagGoraTurtleDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "milestone1000": "queued",
+        "engineValidation": "queued"
+      }
     }
   ],
   "catalogAtEnd": {
@@ -292,11 +317,12 @@
       "tests/tagAmazonessFighterDiscord2v2.test.cjs on feat/work-m271-amazoness-fighter-discord-2v2-20261116",
       "tests/tagStoneStatueDiscord2v2.test.cjs on feat/work-m272-stone-statue-discord-2v2-20261116",
       "tests/tagPiranhaArmyDiscord2v2.test.cjs on feat/work-m273-piranha-army-discord-2v2-20261116",
-      "tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs on feat/work-m274-obnoxious-celtic-guard-discord-2v2-20261116"
+      "tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs on feat/work-m274-obnoxious-celtic-guard-discord-2v2-20261116",
+      "tests/tagGoraTurtleDiscord2v2.test.cjs on feat/work-m275-gora-turtle-discord-2v2-20261116"
     ],
     "instructions": "Monitor CI and modify only these three test files on their own branches. Do not merge, deploy, modify runtime/catalog/certificates/database/inventory, or touch any third-party reservation."
   },
-  "nextTask": "Monitor Engine Validation/soaks para PRs #226–#229; corrigir somente os quatro arquivos de teste próprios se a CI revelar falhas; aguardar handoff explícito antes de runtime; depois retomar a revisão individual das 31 candidatas.",
+  "nextTask": "Monitorar CI de #226–#230; corrigir somente os cinco arquivos próprios se a CI revelar falhas; aguardar handoff explícito antes de runtime; depois retomar a revisão individual das 31 candidatas.",
   "nextWindow": "2026-11-16T20:30:00-03:00",
-  "sharedHeadAtEnd": "b418cb0e355af983822e1f87b0f170310cc71d70"
+  "sharedHeadAtEnd": "e65a4c36d34455aca862b6cbfba552e5964bdf90"
 }
