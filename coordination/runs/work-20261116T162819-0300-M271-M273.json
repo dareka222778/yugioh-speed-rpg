@@ -4,10 +4,10 @@
   "priority": "P1 — ampliar a homologação comportamental 2v2 pelo handler Discord, cobrindo prevenção, multiplicação e duplicação de dano de batalha; manter as reservas paralelas intactas.",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-16T16:28:19-03:00",
-  "endedAt": "2026-11-16T16:39:05-03:00",
+  "endedAt": "2026-11-16T16:41:44-03:00",
   "timezone": "America/Sao_Paulo",
-  "elapsedMinutes": 10.77,
-  "effectiveWorkMinutes": 10.77,
+  "elapsedMinutes": 13.42,
+  "effectiveWorkMinutes": 13.42,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -71,7 +71,8 @@
     "M271 — correção da própria fixture: custom IDs Discord excediam 100 caracteres; reduzidos os IDs das sessões e publicado novo HEAD.",
     "M272 — Stone Statue of the Aztecs: dois cenários Discord 2v2; dano de batalha em Defesa dobrado para 1200 e 600, com atacante fisicamente pertencente ao parceiro inativo.",
     "M273 — Piranha Army: ataque direto via Discord 2v2; 800 ATK causam 1600 de dano; controle Normal de 800 ATK causa 800.",
-    "Auditoria de CI de M262–M270 e diagnóstico das falhas M267, M268 e M269; comentários enviados aos responsáveis."
+    "Auditoria de CI de M262–M270 e diagnóstico das falhas M267, M268 e M269; comentários enviados aos responsáveis.",
+    "M274 — Obnoxious Celtic Guard: dois cenários Discord 2v2; proteção contra destruição por ATK >=1900 sem prevenir dano de batalha, e controle abaixo do limiar."
   ],
   "cardsCovered": [
     {
@@ -94,9 +95,16 @@
       "mission": "M273",
       "scenarios": 2,
       "certificationIncrement": 0
+    },
+    {
+      "name": "Obnoxious Celtic Guard",
+      "id": "52077741",
+      "mission": "M274",
+      "scenarios": 2,
+      "certificationIncrement": 0
     }
   ],
-  "totalBehavioralScenarios": 7,
+  "totalBehavioralScenarios": 9,
   "workBranches": [
     {
       "mission": "M271",
@@ -122,7 +130,7 @@
           "status": "in_progress",
           "runId": 43941135244
         },
-        "npmTest": "in_progress-at-last-observation",
+        "npmTest": "passed; engine job advanced to critical-acceptance diagnosis",
         "extendedSoak": "in_progress"
       },
       "note": "HEAD anterior falhou por customId >100; correção publicada em 856e008 e nova CI iniciada."
@@ -151,7 +159,7 @@
           "status": "in_progress",
           "runId": 43940532220
         },
-        "npmTest": "passed; engine workflow advanced to persisted-duel stress",
+        "npmTest": "passed; engine job advanced to mixed-version soak 120",
         "extendedSoak": "in_progress"
       }
     },
@@ -179,7 +187,35 @@
           "status": "in_progress",
           "runId": 43941168147
         },
-        "npmTest": "in_progress-at-last-observation",
+        "npmTest": "passed; engine job advanced to persisted-duel stress 50x2",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "mission": "M274",
+      "branch": "feat/work-m274-obnoxious-celtic-guard-discord-2v2-20261116",
+      "head": "cb2e3d0339a0e201c72db8d424a705879fd2f183",
+      "pr": 229,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "b418cb0e355af983822e1f87b0f170310cc71d70",
+      "scope": [
+        "tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": {
+          "status": "in_progress",
+          "runId": 43941911985
+        },
+        "milestone1000": {
+          "status": "success",
+          "runId": 43941912004
+        },
+        "engineValidation": {
+          "status": "in_progress",
+          "runId": 43941911957
+        },
+        "npmTest": "passed; engine test job advanced to card-batch-fast",
         "extendedSoak": "in_progress"
       }
     }
@@ -255,10 +291,12 @@
     "allowed": [
       "tests/tagAmazonessFighterDiscord2v2.test.cjs on feat/work-m271-amazoness-fighter-discord-2v2-20261116",
       "tests/tagStoneStatueDiscord2v2.test.cjs on feat/work-m272-stone-statue-discord-2v2-20261116",
-      "tests/tagPiranhaArmyDiscord2v2.test.cjs on feat/work-m273-piranha-army-discord-2v2-20261116"
+      "tests/tagPiranhaArmyDiscord2v2.test.cjs on feat/work-m273-piranha-army-discord-2v2-20261116",
+      "tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs on feat/work-m274-obnoxious-celtic-guard-discord-2v2-20261116"
     ],
     "instructions": "Monitor CI and modify only these three test files on their own branches. Do not merge, deploy, modify runtime/catalog/certificates/database/inventory, or touch any third-party reservation."
   },
-  "nextTask": "Monitor Engine Validation/soaks for PRs #226–#228; correct only own test fixtures if CI reports failures; wait for explicit handoff before runtime work; then resume individual official-text review and behavioral admission of the 31 remaining candidates.",
-  "nextWindow": "2026-11-16T20:30:00-03:00"
+  "nextTask": "Monitor Engine Validation/soaks para PRs #226–#229; corrigir somente os quatro arquivos de teste próprios se a CI revelar falhas; aguardar handoff explícito antes de runtime; depois retomar a revisão individual das 31 candidatas.",
+  "nextWindow": "2026-11-16T20:30:00-03:00",
+  "sharedHeadAtEnd": "b418cb0e355af983822e1f87b0f170310cc71d70"
 }
