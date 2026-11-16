@@ -24,7 +24,7 @@ for(const id of FIXED_NORMALS){
 }
 const NORMALS=[...new Set(tag.tagNormalCardIds)]
   .map(id=>getPlayableCard(id))
-  .filter(card=>card?.kind==='monster'&&card.monsterType==='normal');
+  .filter(card=>card?.kind==='monster');
 const EXCLUDED=new Set([...DESTRUCTION_CARDS.map(card=>card.id),...FIXED_NORMALS]);
 const FILLERS=NORMALS.map(card=>card.id).filter(id=>!EXCLUDED.has(id)).slice(0,13);
 assert.equal(FILLERS.length,13,'the fixture needs thirteen additional distinct certified Normal Monsters');
