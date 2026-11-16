@@ -226,7 +226,8 @@ test('Really Eternal Rest destroys equipped monsters on both teams and preserves
   const alliedControl=placeMonster(state,2,MYSTICAL_ELF);
   const opposingEquipped=placeMonster(state,3,CELTIC_GUARDIAN);
   const alliedEquip=placeBackrow(state,2,EQUIP_A,{faceUp:true,resolved:true,equippedTo:alliedEquipped.uid});
-  const opposingEquip=placeBackrow(state,1,EQUIP_B,{faceUp:true,resolved:true,equippedTo:opposingEquipped.uid});
+  const opposingEquip=placeBackrow(state,3,EQUIP_A,{faceUp:true,resolved:true,equippedTo:opposingEquipped.uid});
+  assert.ok(state.core.players[1].backrow.some(card=>card.uid===opposingEquip.uid&&card.faceUp&&card.resolved===true&&card.equippedTo===opposingEquipped.uid),'opposing Equip link must be present before resolution');
   const {state:next,source}=activate(state,0,'28121403','trap');
   state=next;
   assert.ok(state.core.players[0].grave.some(card=>card.uid===alliedEquipped.uid));
@@ -246,7 +247,7 @@ test('Disarmament destroys Equip Spells from both teams without destroying equip
   const alliedMonster=placeMonster(state,0,BLUE_EYES);
   const opposingMonster=placeMonster(state,3,CELTIC_GUARDIAN);
   const alliedEquip=placeBackrow(state,2,EQUIP_A,{faceUp:true,resolved:true,equippedTo:alliedMonster.uid});
-  const opposingEquip=placeBackrow(state,3,EQUIP_B,{faceUp:true,resolved:true,equippedTo:opposingMonster.uid});
+  const opposingEquip=placeBackrow(state,3,EQUIP_A,{faceUp:true,resolved:true,equippedTo:opposingMonster.uid});
   const ordinaryTrap=placeBackrow(state,0,MAGIC_JAMMER);
   const {state:next,source}=activate(state,0,'20727787','trap');
   state=next;
@@ -289,11 +290,12 @@ test('Soul Taker grants no LP when the opposing partner turns its target face-do
   );
   assert.ok(activation);
   state=tag.stepTagDuel(state,member(0),activation);
-  const book=placeBackrow(state,1,BOOK_OF_MOON,{faceUp:false,setTurn:1});
-  const response=tag.tagActions(state,member(1)).find(action=>
+  const book=placeBackrow(state,3,BOOK_OF_MOON,{faceUp:false,setTurn:1});
+  const responder=tag.tagDecisionMember(state).id;
+  const response=tag.tagActions(state,responder).find(action=>
     action.kind==='spell'&&action.card===book.uid&&action.target===target.uid
   );
-  assert.ok(response,'the active opposing partner may protect the inactive partner-owned target');
+  assert.ok(response,JSON.stringify({responder,priority:state.core.priority,active:state.active,phase:state.core.phase,backrow:state.core.players[1].backrow,actions:tag.tagActions(state,responder)}));
   state=settle(tag.stepTagDuel(state,member(1),response));
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===target.uid&&card.faceUp===false));
   assert.deepEqual(state.core.players.map(player=>player.lp),initial,
@@ -309,8 +311,9 @@ test('conditional spells requiring Dark Magician remain unavailable when the onl
     const state=game('m249-hidden-magician-'+id);
     placeMonster(state,2,DARK_MAGICIAN,{faceUp:false,position:'def'});
     const source=putSpellInHand(state,0,id);
-    assert.ok(!tag.tagActions(state,member(0)).some(action=>action.card===source.uid),
-      id+' must require a face-up Dark Magician on the activating team');
+    const actions=tag.tagActions(state,member(0));
+    assert.ok(!actions.some(action=>action.card===source.uid),
+      JSON.stringify({id,monster:state.core.players[0].monsters.map(card=>({id:card.id,uid:card.uid,faceUp:card.faceUp,position:card.position})),effect:getEffect(id),actions:actions.filter(action=>action.card===source.uid),decision:tag.tagDecisionMember(state)}));
   }
 });
 
