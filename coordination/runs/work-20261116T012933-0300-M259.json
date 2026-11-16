@@ -1,0 +1,71 @@
+{
+  "runId": "work-20261116T012933-0300-M259",
+  "mission": "M259",
+  "owner": "Work",
+  "priority": "P1",
+  "state": "published-draft; CI in progress",
+  "startedAt": "2026-11-16T01:29:33-03:00",
+  "timezone": "America/Sao_Paulo",
+  "branch": "feat/work-m259-battle-bounce-discord-2v2-20261116",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "pr": 215,
+  "head": "05d20e4f9c75a85d3535b5c846d214146b330b32",
+  "scope": [
+    "tests/tagBattleBounceDiscord2v2.test.cjs"
+  ],
+  "cardsCovered": [
+    "Wall of Illusion",
+    "Kelbek",
+    "Axe Raider"
+  ],
+  "behavioralScenarios": 2,
+  "newCertifications": 0,
+  "blocksCompleted": [
+    "Preparou uma sexta família independente enquanto as validações anteriores permaneciam em execução.",
+    "Implementou duas homologações Discord offline de battleBounceAttacker, com retorno do atacante ao assento físico proprietário após o cálculo de dano, mesmo quando o defensor é destruído.",
+    "Validou dano à equipe, mão privada do parceiro, ausência de vazamento no painel público, idempotência e conservação de UIDs.",
+    "Publicou PR draft #215."
+  ],
+  "ci": {
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "npmTest": "pending_in_engine_validation",
+    "extendedSoak": "pending"
+  },
+  "runtimeChanges": [],
+  "catalogChanges": [],
+  "certificationChanges": [],
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "liveDiscordNetwork": false
+  },
+  "stateUpdate": {
+    "status": "withheld",
+    "reason": "M231/M232 continuam reservadas em coordination/state.json. Handoff cooperativo solicitado em #187/#188; nenhuma reserva de terceiro foi liberada.",
+    "comments": [
+      6907379122,
+      6907379553
+    ]
+  },
+  "scopeReleasedToAuxiliary": {
+    "branch": "feat/work-m259-battle-bounce-discord-2v2-20261116",
+    "files": [
+      "tests/tagBattleBounceDiscord2v2.test.cjs"
+    ],
+    "allowed": "monitorar CI e corrigir apenas este arquivo de teste; sem runtime, catálogo, estado compartilhado ou produção"
+  },
+  "nextTask": "Monitorar CI #215; corrigir apenas a fixture própria; seguir com a próxima família independente e aguardar handoff M231/M232.",
+  "nextWindow": "2026-11-16T05:30:00-03:00",
+  "duration": {
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Tempo efetivo não é medido com precisão; não declarar 60 minutos sem evidência e excluir espera de CI."
+  }
+}
