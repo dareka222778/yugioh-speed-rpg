@@ -190,7 +190,7 @@ test('End Phase Discord menu is private and only the active physical owner can d
   const forged=interaction(id,'m262-forged-partner-discard',
     'tag:act:'+id+':'+current.revision+':'+ids[0],ids[2],discardIndex,current.revision,guild);
   const unchanged=JSON.stringify(current.state);
-  await assert.rejects(handleTagComponent(forged,async()=>{},()=>{}),/Abra sua própria mão no campo\\./);
+  await assert.rejects(handleTagComponent(forged,async()=>{},()=>{}),/Abra sua própria mão no campo\./);
   assert.deepEqual(forged.calls,[],'the unauthorized interaction must be rejected before acknowledgement');
   assert.equal(store.getTag(id).revision,current.revision);
   assert.equal(JSON.stringify(store.getTag(id).state),unchanged,
