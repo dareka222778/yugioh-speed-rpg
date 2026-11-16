@@ -25,31 +25,32 @@ const BATTLE_WARRIOR='55550921';
 const MYSTICAL_ELF='15025844';
 const CELTIC_GUARDIAN='91152256';
 
-for(const [id,name,atk] of [
-  [HAYABUSA_KNIGHT,'Hayabusa Knight',1000],
-  [TWINHEADED_BEAST,'Twinheaded Beast',1700]
-]){
-  assert.equal(getPlayableCard(id)?.englishName,name);
-  assert.equal(getPlayableCard(id)?.atk,atk);
-  assert.equal(getCardStatus(id)?.stage,'certified');
-  assert.equal(getEffect(id)?.kind,'monsterEffect');
-  assert.deepEqual(getMonsterEffect(id)?.operation,{
-    kind:'continuous',
-    rules:[{kind:'combat',filter:{selfOnly:true},rule:{kind:'attacks',maximum:2}}]
-  });
-}
-assert.equal(getPlayableCard(BATTLE_WARRIOR)?.atk,700);
-assert.equal(getPlayableCard(MYSTICAL_ELF)?.atk,800);
-assert.equal(getPlayableCard(CELTIC_GUARDIAN)?.atk,1400);
-
 const fillers=[...new Set(tag.tagNormalCardIds)]
   .filter(id=>![BATTLE_WARRIOR,MYSTICAL_ELF,CELTIC_GUARDIAN].includes(id))
   .map(id=>({id,card:getPlayableCard(id)}))
   .filter(entry=>entry.card&&entry.card.kind==='monster'&&
     Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
-assert.ok(fillers.length>=8,'the isolated multi-attack fixture needs eight certified Normal Monsters');
 const normalIds=fillers.slice(0,8).map(entry=>entry.id);
-
+test('M277 certified multi-attack card and fixture preflight',()=>{
+  for(const [id,name,atk] of [
+    [HAYABUSA_KNIGHT,'Hayabusa Knight',1000],
+    [TWINHEADED_BEAST,'Twinheaded Beast',1700]
+  ]){
+    assert.equal(getPlayableCard(id)?.englishName,name);
+    assert.equal(getPlayableCard(id)?.atk,atk);
+    assert.equal(getCardStatus(id)?.stage,'certified');
+    assert.equal(getEffect(id)?.kind,'monsterEffect');
+    assert.deepEqual(getMonsterEffect(id)?.operation,{
+      kind:'continuous',
+      rules:[{kind:'combat',filter:{selfOnly:true},rule:{kind:'attacks',maximum:2}}]
+    });
+  }
+  assert.equal(getPlayableCard(BATTLE_WARRIOR)?.atk,700);
+  assert.equal(getPlayableCard(MYSTICAL_ELF)?.atk,800);
+  assert.equal(getPlayableCard(CELTIC_GUARDIAN)?.atk,1400);
+  assert.ok(fillers.length>=8,'the isolated multi-attack fixture needs eight certified Normal Monsters');
+  assert.equal(new Set(normalIds).size,8);
+});
 function member(seat){return 'm277-seat-'+seat;}
 function deck(sourceId){
   const ids=[...new Set([sourceId,BATTLE_WARRIOR,MYSTICAL_ELF,CELTIC_GUARDIAN,...normalIds])];
