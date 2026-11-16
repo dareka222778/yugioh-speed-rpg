@@ -177,18 +177,16 @@ async function rejectInactivePartner(record,actor,partner,index,suffix){
   assert.equal(JSON.stringify(store.getTag(record.id).state),unchanged,
     'rejected partner action must not mutate the duel');
 }
-function setup(sourceId,scenario){
+function setup(sourceId,scenario,prepare){
   const ids=[0,1,2,3].map(member);
   const players=ids.map((id,seat)=>({id,name:'M277 Seat '+seat,cards:deck(sourceId)}));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m277-'+scenario+'-'+sourceId});
   state.core.turn=3;
   const actor=ids[0];
   assert.equal(tag.tagDecisionMember(state).id,actor);
+  const prepared=prepare?prepare(state):{};
   const before=inventory(state);
-  const source=deploy(state,2,sourceId);
-  const firstTarget=deploy(state,1,BATTLE_WARRIOR);
-  const secondTarget=deploy(state,3,MYSTICAL_ELF);
-  const thirdTarget=deploy(state,1,CELTIC_GUARDIAN);
+  const {source,firstTarget,secondTarget,thirdTarget}=prepared;
   assert.match(source.uid,/^m2:/);
   assert.match(firstTarget.uid,/^m1:/);
   assert.match(secondTarget.uid,/^m3:/);
@@ -229,7 +227,7 @@ for(const [sourceId,name,atk] of [
   [TWINHEADED_BEAST,'Twinheaded Beast',1700]
 ]){
   test(name+' can attack twice through Discord in one shared 2v2 Battle Phase',async()=>{
-    const fixture=setup(sourceId,name.toLowerCase().replaceAll(' ','-'));
+    const fixture=setup(sourceId,name.toLowerCase().replaceAll(' ','-'),state=>({source:deploy(state,2,sourceId),firstTarget:deploy(state,1,BATTLE_WARRIOR),secondTarget:deploy(state,3,MYSTICAL_ELF),thirdTarget:deploy(state,1,CELTIC_GUARDIAN)}));
     const beforeOppLP=fixture.record.state.core.players[1].lp;
     let current=await enterBattle(fixture);
     current=await attack(fixture,current,fixture.firstTarget,name+'-first');
