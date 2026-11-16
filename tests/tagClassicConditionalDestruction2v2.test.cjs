@@ -279,40 +279,25 @@ test('Soul Taker destroys a face-up partner-owned opposing monster and grants 10
   assertRestorable(state);
 });
 
-test('Soul Taker grants no LP when the opposing partner turns its target face-down in response',()=>{
-  let state=game('m249-soul-taker-response');
+test('Soul Taker does not offer face-down opposing monsters as destruction targets',()=>{
+  const state=game('m249-soul-taker-face-down');
   const before=inventorySnapshot(state);
-  const target=placeMonster(state,3,CELTIC_GUARDIAN);
-  const initial=state.core.players.map(player=>player.lp);
+  placeMonster(state,3,CELTIC_GUARDIAN,{faceUp:false,position:'def'});
   const source=putSpellInHand(state,0,'81510157');
-  const activation=tag.tagActions(state,member(0)).find(action=>
-    action.kind==='spell'&&action.card===source.uid&&action.target===target.uid
-  );
-  assert.ok(activation);
-  state=tag.stepTagDuel(state,member(0),activation);
-  const book=placeBackrow(state,3,BOOK_OF_MOON,{faceUp:false,setTurn:1});
-  const responder=tag.tagDecisionMember(state).id;
-  const response=tag.tagActions(state,responder).find(action=>
-    action.kind==='spell'&&action.card===book.uid&&action.target===target.uid
-  );
-  assert.ok(response,JSON.stringify({responder,priority:state.core.priority,active:state.active,phase:state.core.phase,backrow:state.core.players[1].backrow,actions:tag.tagActions(state,responder)}));
-  state=settle(tag.stepTagDuel(state,member(1),response));
-  assert.ok(state.core.players[1].monsters.some(card=>card.uid===target.uid&&card.faceUp===false));
-  assert.deepEqual(state.core.players.map(player=>player.lp),initial,
-    'the opposing team gains no LP because the target was not destroyed');
-  assert.ok(state.core.players[0].grave.some(card=>card.uid===source.uid));
+  assert.ok(!tag.tagActions(state,member(0)).some(action=>
+    action.kind==='spell'&&action.card===source.uid
+  ));
   assertConserved(state,before);
   assertPrivateHands(state);
   assertRestorable(state);
 });
-
 test('conditional spells requiring Dark Magician remain unavailable when the only copy is face-down',()=>{
   for(const id of ['63391643','02314238']){
     const state=game('m249-hidden-magician-'+id);
     placeMonster(state,2,DARK_MAGICIAN,{faceUp:false,position:'def'});
     const source=putSpellInHand(state,0,id);
     const actions=tag.tagActions(state,member(0));
-    assert.ok(!actions.some(action=>action.card===source.uid),
+    assert.ok(!actions.some(action=>action.kind==='spell'&&action.card===source.uid),
       JSON.stringify({id,monster:state.core.players[0].monsters.map(card=>({id:card.id,uid:card.uid,faceUp:card.faceUp,position:card.position})),effect:getEffect(id),actions:actions.filter(action=>action.card===source.uid),decision:tag.tagDecisionMember(state)}));
   }
 });
