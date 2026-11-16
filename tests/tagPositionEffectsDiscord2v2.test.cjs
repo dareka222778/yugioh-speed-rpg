@@ -219,12 +219,6 @@ for(const entry of CASES){
     validateDiscordPayload(publicPanel);
     assert.ok(!JSON.stringify(publicPanel).includes(source.uid),
       'the public panel must not expose the private source UID');
-    if(entry.id==='31785398'){
-      const publicState=tag.publicTagDuel(record.state);
-      const hidden=publicState.teams[1].monsters.find(card=>card.faceUp===false&&card.id===null);
-      assert.ok(hidden&&hidden.id===null&&!hidden.faceUp,
-        'the Set target must remain concealed in the public state');
-    }
     const originalRevision=record.revision,requestId='m254-request-'+entry.id;
     await submit(record,actor,index,requestId,originalRevision,guild);
     let current=await settleThroughDiscord(record.id,guild,'m254-pass-'+entry.id);
@@ -232,6 +226,12 @@ for(const entry of CASES){
     assert.ok(current.state.core.players[0].grave.some(card=>card.uid===source.uid&&card.id===entry.id),
       'the resolved source must enter the activating team Graveyard with its physical UID');
     assertOutcome(entry,current.state,ally,opponent);
+    if(entry.id==='31785398'){
+      const publicState=tag.publicTagDuel(current.state);
+      const hidden=publicState.teams[1].monsters.find(card=>card.faceUp===false&&card.id===null);
+      assert.ok(hidden&&hidden.id===null&&!hidden.faceUp,
+        'the Set target must remain concealed in the public state after resolution');
+    }
     assertConserved(current.state,before);
     assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(current.state))));
     const receipt=database.db.prepare('SELECT request_id,committed_revision FROM tag_action_receipts WHERE request_id=?').get(requestId);
