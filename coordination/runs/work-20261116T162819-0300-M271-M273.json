@@ -4,10 +4,10 @@
   "priority": "P1 — ampliar a homologação comportamental 2v2 pelo handler Discord, cobrindo prevenção, multiplicação e duplicação de dano de batalha; manter as reservas paralelas intactas.",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-16T16:28:19-03:00",
-  "endedAt": "2026-11-16T16:44:53-03:00",
+  "endedAt": "2026-11-16T16:46:10-03:00",
   "timezone": "America/Sao_Paulo",
-  "elapsedMinutes": 16.58,
-  "effectiveWorkMinutes": 16.58,
+  "elapsedMinutes": 17.85,
+  "effectiveWorkMinutes": 17.85,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -126,19 +126,10 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": {
-          "status": "success",
-          "runId": 43941135365
-        },
-        "milestone1000": {
-          "status": "success",
-          "runId": 43941135331
-        },
-        "engineValidation": {
-          "status": "in_progress",
-          "runId": 43941135244
-        },
-        "npmTest": "passed; engine job advanced to critical-acceptance diagnosis",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed; running repeat acceptance/stress",
         "extendedSoak": "in_progress"
       },
       "note": "HEAD anterior falhou por customId >100; correção publicada em 856e008 e nova CI iniciada."
@@ -155,20 +146,11 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": {
-          "status": "success",
-          "runId": 43940532488
-        },
-        "milestone1000": {
-          "status": "success",
-          "runId": 43940532340
-        },
-        "engineValidation": {
-          "status": "in_progress",
-          "runId": 43940532220
-        },
-        "npmTest": "passed; engine job advanced to mixed-version soak 120",
-        "extendedSoak": "in_progress"
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed; running tag-classic audit",
+        "extendedSoak": "success"
       }
     },
     {
@@ -183,19 +165,10 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": {
-          "status": "success",
-          "runId": 43941168084
-        },
-        "milestone1000": {
-          "status": "success",
-          "runId": 43941167963
-        },
-        "engineValidation": {
-          "status": "in_progress",
-          "runId": 43941168147
-        },
-        "npmTest": "passed; engine job advanced to persisted-duel stress 50x2",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed; running tag audit",
         "extendedSoak": "in_progress"
       }
     },
@@ -211,19 +184,10 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": {
-          "status": "in_progress",
-          "runId": 43941911985
-        },
-        "milestone1000": {
-          "status": "success",
-          "runId": 43941912004
-        },
-        "engineValidation": {
-          "status": "in_progress",
-          "runId": 43941911957
-        },
-        "npmTest": "passed; engine test job advanced to card-batch-fast",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed; running persisted-duel stress",
         "extendedSoak": "in_progress"
       }
     },
@@ -239,9 +203,11 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": "queued",
-        "milestone1000": "queued",
-        "engineValidation": "queued"
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
       }
     }
   ],
@@ -322,7 +288,7 @@
     ],
     "instructions": "Monitor CI and modify only these three test files on their own branches. Do not merge, deploy, modify runtime/catalog/certificates/database/inventory, or touch any third-party reservation."
   },
-  "nextTask": "Monitorar CI de #226–#230; corrigir somente os cinco arquivos próprios se a CI revelar falhas; aguardar handoff explícito antes de runtime; depois retomar a revisão individual das 31 candidatas.",
+  "nextTask": "Monitorar Engine Validation/soaks de #226–#230; corrigir somente os cinco arquivos próprios se a CI revelar falhas; aguardar handoff explícito antes de runtime; depois retomar a revisão individual das 31 candidatas.",
   "nextWindow": "2026-11-16T20:30:00-03:00",
-  "sharedHeadAtEnd": "e65a4c36d34455aca862b6cbfba552e5964bdf90"
+  "sharedHeadAtEnd": "6ae5aeacccc84b46f4d39844a488fd00db0a9a2d"
 }
