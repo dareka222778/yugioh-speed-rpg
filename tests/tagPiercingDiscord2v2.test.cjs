@@ -148,7 +148,7 @@ function interaction(record,userId,index,requestId,actionOwner=userId){
   };
 }
 async function submit(record,actor,index,requestId){
-  const panel=tagPrivateMessage(record,actor,Math.floor(index/20));
+  let panel;try{panel=tagPrivateMessage(record,actor,Math.floor(index/20));}catch(error){throw new Error('M278 tagPrivateMessage failed before action '+requestId+': '+error.message);}
   validateDiscordPayload(panel);
   const components=panel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[]);
   const menu=components.find(component=>
@@ -158,12 +158,12 @@ async function submit(record,actor,index,requestId){
   assert.ok(menu.options.some(option=>option.value===String(index)),
     'the Discord menu must contain the legal action index '+index);
   const i=interaction(record,actor,index,requestId);
-  const selected=tag.tagActions(record.state,actor)[index];
+  let selected;try{selected=tag.tagActions(record.state,actor)[index];}catch(error){throw new Error('M278 tagActions failed before handler '+requestId+': '+error.message);}
   let refreshes=0;
   try{await handleTagComponent(i,async next=>{
     refreshes++;
     validateDiscordPayload(tagPublicMessage(next));
-  },()=>{});}catch(error){console.error('[M278 submit diagnostic]',JSON.stringify({id:record.id,actor,index,requestId,phase:record.state.core.phase,selected,unknown:tag.tagInventory(record.state).filter(card=>!getPlayableCard(card.id)).map(card=>({uid:card.uid,id:card.id})),cards:tag.tagInventory(record.state).map(card=>({uid:card.uid,id:card.id})).slice(-10)},null,2));throw error;}
+  },()=>{});}catch(error){throw new Error('M278 handleTagComponent failed '+requestId+' phase='+record.state.core.phase+' action='+JSON.stringify(selected)+': '+error.message);}
   assert.deepEqual(i.calls,['defer','edit']);
   assert.ok(refreshes>=1);
   return store.getTag(record.id);
@@ -210,17 +210,18 @@ function setup(scenario){
   database.db.prepare(
     'INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)'
   ).run(id,guild,channel,null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
-  return {id,actor,before,record:store.getTag(id)};
+  let record;try{record=store.getTag(id);}catch(error){throw new Error('M278 store.getTag failed after SQLite round-trip for '+id+': '+error.message);}
+  return {id,actor,before,record};
 }
 async function enterBattle(fixture){
-  const actions=tag.tagActions(fixture.record.state,fixture.actor);
+  let actions;try{actions=tag.tagActions(fixture.record.state,fixture.actor);}catch(error){throw new Error('M278 tagActions failed before Battle Phase for '+fixture.id+': '+error.message);}
   const battle=actions.findIndex(action=>action.kind==='battle');
   assert.ok(battle>=0,'the active teammate must see the Battle Phase action in Discord');
   const current=await submit(fixture.record,fixture.actor,battle,'m278-'+fixture.id+'-battle');
   return settleResponses(current,fixture.id+'-battle');
 }
 async function attack(fixture,record,attacker,target,suffix){
-  const actions=tag.tagActions(record.state,fixture.actor);
+  let actions;try{actions=tag.tagActions(record.state,fixture.actor);}catch(error){throw new Error('M278 tagActions failed before attack '+suffix+': '+error.message);}
   const index=actions.findIndex(action=>
     action.kind==='attack'&&action.card===attacker.uid&&action.target===target.uid
   );
