@@ -24,6 +24,13 @@ const GRAVEKEEPERS_CURSE='50712728';
 const SACRED_CRANE='30914564';
 const MONSTER_REBORN='83764718';
 
+const fillers=[...new Set(tag.tagNormalCardIds)]
+  .filter(id=>![GRAVEKEEPERS_CURSE,SACRED_CRANE,MONSTER_REBORN].includes(id))
+  .map(id=>({id,card:getPlayableCard(id)}))
+  .filter(entry=>entry.card&&entry.card.kind==='monster'&&
+    Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
+const normalIds=fillers.slice(0,8).map(entry=>entry.id);
+test('M276 certified summon-trigger card and Deck preflight',()=>{
 assert.equal(getPlayableCard(GRAVEKEEPERS_CURSE)?.englishName,"Gravekeeper's Curse");
 assert.equal(getPlayableCard(GRAVEKEEPERS_CURSE)?.atk,800);
 assert.equal(getCardStatus(GRAVEKEEPERS_CURSE)?.stage,'certified');
@@ -43,13 +50,11 @@ assert.equal(getMonsterEffect(SACRED_CRANE)?.operation.count,1);
 assert.deepEqual(getMonsterEffect(SACRED_CRANE)?.summons,['special']);
 assert.equal(getEffect(MONSTER_REBORN)?.kind,'specialSummon');
 
-const fillers=[...new Set(tag.tagNormalCardIds)]
-  .filter(id=>![GRAVEKEEPERS_CURSE,SACRED_CRANE,MONSTER_REBORN].includes(id))
-  .map(id=>({id,card:getPlayableCard(id)}))
-  .filter(entry=>entry.card&&entry.card.kind==='monster'&&
-    Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
-assert.ok(fillers.length>=8,'the isolated 2v2 fixture needs eight certified Normal Monsters');
 const normalIds=fillers.slice(0,8).map(entry=>entry.id);
+
+  assert.ok(fillers.length>=8,'the isolated 2v2 fixture needs eight certified Normal Monsters');
+  assert.equal(new Set(normalIds).size,8);
+});
 
 function member(seat){return 'm276-seat-'+seat;}
 function deck(){const ids=[...new Set([GRAVEKEEPERS_CURSE,SACRED_CRANE,MONSTER_REBORN,...normalIds])];return Array.from({length:20},(_,index)=>ids[index%ids.length]);}
