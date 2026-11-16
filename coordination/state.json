@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -1812,6 +1812,66 @@
       ],
       "state": "active",
       "priority": "P1 — validar D.D. Crazy Beast e Lesser Fiend no 2v2: banir apenas o monstro destruído por batalha com a fonte face-up, roteando ao banished zone do dono físico; cobrir fonte atacando/defendendo e controle negativo quando a fonte perde."
+    },
+    {
+      "mission": "M271",
+      "branch": "feat/work-m271-amazoness-fighter-discord-2v2-20261116",
+      "head": "856e008e523f48cee922904c219cc3c07ce80581",
+      "pr": 226,
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "scope": [
+        "tests/tagAmazonessFighterDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "fastRunId": 43941135365,
+        "milestone1000": "success",
+        "milestoneRunId": 43941135331,
+        "engineValidation": "in_progress",
+        "engineRunId": 43941135244
+      }
+    },
+    {
+      "mission": "M272",
+      "branch": "feat/work-m272-stone-statue-discord-2v2-20261116",
+      "head": "af4cea77c8e5653b15dbc33b82881a7fea1664e0",
+      "pr": 227,
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "scope": [
+        "tests/tagStoneStatueDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "fastRunId": 43940532488,
+        "milestone1000": "success",
+        "milestoneRunId": 43940532340,
+        "engineValidation": "in_progress",
+        "engineRunId": 43940532220
+      }
+    },
+    {
+      "mission": "M273",
+      "branch": "feat/work-m273-piranha-army-discord-2v2-20261116",
+      "head": "40b60023d79ebb9dc3ae9b767a3bf74eb7909ec4",
+      "pr": 228,
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "scope": [
+        "tests/tagPiranhaArmyDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "fastRunId": 43941168084,
+        "milestone1000": "success",
+        "milestoneRunId": 43941167963,
+        "engineValidation": "in_progress",
+        "engineRunId": 43941168147
+      }
     }
   ],
   "handoffRequest": {
@@ -4164,8 +4224,8 @@
       }
     }
   ],
-  "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
-  "lastParallelActivityAt": "2026-11-16T18:47:10Z",
+  "lastParallelCheckpoint": "coordination/runs/work-20261116T162819-0300-M271-M273.json",
+  "lastParallelActivityAt": "2026-11-16T19:39:05Z",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "b4a43af30c684ec50cb9dbef403dad6287cf1b7d",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -5296,7 +5356,113 @@
         "tests/tagShadowGhoulDiscord2v2.test.cjs"
       ],
       "conflictPolicy": "Somente arquivo novo de teste. Não alterar PR/arquivo M245 já existente, M231–M264, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261116T162819-0300-M271-M273-M271",
+      "runId": "work-20261116T162819-0300-M271-M273",
+      "owner": "Work",
+      "mission": "M271",
+      "priority": "P1 — homologar pelo Discord real as regras de dano 2v2: prevenção por Amazoness Fighter, dano dobrado em Defesa por Stone Statue e dano direto dobrado por Piranha Army.",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-16T16:28:19-03:00",
+      "branch": "feat/work-m271-amazoness-fighter-discord-2v2-20261116",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "reservedFiles": [
+        "tests/tagAmazonessFighterDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente o arquivo de teste novo desta missão; não alterar outras reservas, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261116T162819-0300-M271-M273-M272",
+      "runId": "work-20261116T162819-0300-M271-M273",
+      "owner": "Work",
+      "mission": "M272",
+      "priority": "P1 — homologar pelo Discord real as regras de dano 2v2: prevenção por Amazoness Fighter, dano dobrado em Defesa por Stone Statue e dano direto dobrado por Piranha Army.",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-16T16:28:19-03:00",
+      "branch": "feat/work-m272-stone-statue-discord-2v2-20261116",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "reservedFiles": [
+        "tests/tagStoneStatueDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente o arquivo de teste novo desta missão; não alterar outras reservas, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261116T162819-0300-M271-M273-M273",
+      "runId": "work-20261116T162819-0300-M271-M273",
+      "owner": "Work",
+      "mission": "M273",
+      "priority": "P1 — homologar pelo Discord real as regras de dano 2v2: prevenção por Amazoness Fighter, dano dobrado em Defesa por Stone Statue e dano direto dobrado por Piranha Army.",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-16T16:28:19-03:00",
+      "branch": "feat/work-m273-piranha-army-discord-2v2-20261116",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "reservedFiles": [
+        "tests/tagPiranhaArmyDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente o arquivo de teste novo desta missão; não alterar outras reservas, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
     }
   ],
-  "lastIndependentRun": "work-20261116T153058-0300-M262-M263"
+  "lastIndependentRun": "work-20261116T153058-0300-M262-M263",
+  "parallelIndependentRuns": [
+    {
+      "runId": "work-20261116T162819-0300-M271-M273",
+      "owner": "Work",
+      "priority": "P1 — homologar pelo Discord real as regras de dano 2v2: prevenção por Amazoness Fighter, dano dobrado em Defesa por Stone Statue e dano direto dobrado por Piranha Army.",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-16T16:28:19-03:00",
+      "endedAt": "2026-11-16T16:39:05-03:00",
+      "sharedHeadBeforeCheckpointCommit": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "checkpoint": "coordination/runs/work-20261116T162819-0300-M271-M273.json",
+      "branches": [
+        {
+          "mission": "M271",
+          "branch": "feat/work-m271-amazoness-fighter-discord-2v2-20261116",
+          "head": "856e008e523f48cee922904c219cc3c07ce80581",
+          "pr": 226,
+          "scope": [
+            "tests/tagAmazonessFighterDiscord2v2.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "mission": "M272",
+          "branch": "feat/work-m272-stone-statue-discord-2v2-20261116",
+          "head": "af4cea77c8e5653b15dbc33b82881a7fea1664e0",
+          "pr": 227,
+          "scope": [
+            "tests/tagStoneStatueDiscord2v2.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "mission": "M273",
+          "branch": "feat/work-m273-piranha-army-discord-2v2-20261116",
+          "head": "40b60023d79ebb9dc3ae9b767a3bf74eb7909ec4",
+          "pr": 228,
+          "scope": [
+            "tests/tagPiranhaArmyDiscord2v2.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
+        }
+      ],
+      "effectiveWorkMinutes": 10.77,
+      "targetEffectiveMinutes": 60,
+      "targetMet": false,
+      "nextTask": "Monitor CI de #226–#228 e corrigir somente os três arquivos de teste próprios; aguardar handoff antes de runtime.",
+      "nextWindow": "2026-11-16T20:30:00-03:00"
+    }
+  ],
+  "lastParallelRun": "work-20261116T162819-0300-M271-M273",
+  "nextParallelTask": "Monitorar CI de #226–#228; corrigir apenas os três arquivos próprios; aguardar handoff explícito para runtime.",
+  "nextParallelWindow": "2026-11-16T20:30:00-03:00"
 }
