@@ -4,8 +4,8 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-15T19:10:39.494Z",
-  "nextScheduledAt": "2026-11-15T17:30:00-03:00",
+  "lastActivityAt": "2026-11-16T18:38:30Z",
+  "nextScheduledAt": "2026-11-16T20:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -2887,7 +2887,7 @@
       }
     ]
   },
-  "nextWorkAt": "2026-11-15T19:30:00-03:00",
+  "nextWorkAt": "2026-11-16T20:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -4081,10 +4081,71 @@
         "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
       ],
       "priority": "P1 — ampliar a validação 2v2 do lote M32: Mirage Dragon e Pitch-Black Warwolf devem bloquear Trap Cards do oponente durante ambas as Battle Phases, sem bloquear fora delas; Invader of Darkness deve bloquear Quick-Play Spells do oponente em qualquer janela, preservando a ativação por parceiro e os demais tipos de carta."
+    },
+    {
+      "runId": "work-20261116T153058-0300-M262-M263",
+      "owner": "Work",
+      "state": "active",
+      "startedAt": "2026-11-16T15:30:58-03:00",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+      "workBranches": [
+        {
+          "mission": "M262",
+          "branch": "feat/work-m262-end-phase-discord-hand-limit-2v2-20261116",
+          "head": "781e9ce43393a9eec3ea4140cba83acdf981c725",
+          "pr": 218,
+          "scope": [
+            "tests/tagEndPhaseHandLimitDiscord2v2.test.cjs"
+          ],
+          "ci": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress"
+          }
+        },
+        {
+          "mission": "M263",
+          "branch": "feat/work-m263-shared-zones-discord-2v2-20261116",
+          "head": "09bb6d51fdfc4098da613a3d5f20724d7217fbb1",
+          "pr": 219,
+          "scope": [
+            "tests/tagSharedZoneCapacityDiscord2v2.test.cjs"
+          ],
+          "ci": {
+            "cardBatchFast": "in_progress",
+            "milestone1000": "queued",
+            "engineValidation": "in_progress"
+          }
+        }
+      ],
+      "reservedFiles": [
+        "tests/tagEndPhaseHandLimitDiscord2v2.test.cjs",
+        "tests/tagSharedZoneCapacityDiscord2v2.test.cjs"
+      ],
+      "blocksCompleted": [
+        "M262: teste Discord do descarte End Phase e ownership físico.",
+        "M263: teste Discord de capacidade compartilhada 3+3; primeiro run encontrou fixture com monstros de Nível alto e a fixture foi restringida a monstros normais de Nível 4 ou menos."
+      ],
+      "handoffRequest": {
+        "pr": 17,
+        "commentId": 6925601903,
+        "mission": "M264 battleLevelHeal",
+        "status": "awaiting-explicit-release"
+      },
+      "catalogAtStart": {
+        "sharedCertificates": 969,
+        "sharedCards": 969,
+        "source": "Milestone 1000 factual worklist, workflow run 43750968182"
+      },
+      "ciAtStart": {
+        "m262": "fast success; milestone success; engine in progress",
+        "m263": "revised head; fast in progress; milestone queued; engine in progress"
+      }
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
-  "lastParallelActivityAt": "2026-11-14T03:39:10-03:00",
+  "lastParallelActivityAt": "2026-11-16T18:38:30Z",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "b4a43af30c684ec50cb9dbef403dad6287cf1b7d",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -4185,7 +4246,7 @@
       "deploy"
     ]
   },
-  "lastCoordinationRefreshAt": "2026-11-15T14:53:17-03:00",
+  "lastCoordinationRefreshAt": "2026-11-16T18:38:30Z",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
     "status": "awaiting-response; separate test file only; no response observed",
@@ -4396,7 +4457,7 @@
   },
   "lastCheckpointAt": "2026-11-15T14:25:21-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "b4a43af30c684ec50cb9dbef403dad6287cf1b7d",
+  "expectedHeadForCoordinationCommit": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
   "lastRunSummary": "M211 (#166) e M212 (#167) concluíram toda a CI com sucesso; M213 (#168) falhou em uma asserção de menu Discord (7.367/7.368) e recebeu pedido de transferência; M214 (#169) adiciona Chaos Necromancer ao Cemitério compartilhado, com Card Batch e Milestone aprovados e Engine/soak em andamento. Zero novas certificações ou inventários.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -4463,9 +4524,17 @@
       "mission": "M242 recover physical-owner routing; partial handoff only, keep M176 selector reserved",
       "status": "awaiting-explicit-release",
       "noResponse": true
+    },
+    {
+      "pr": 17,
+      "commentId": 6925601903,
+      "file": "src/monsterEffects.ts; src/duelEngineCurrent.ts",
+      "mission": "M264 Absorbing Kid from the Sky / battleLevelHeal",
+      "status": "awaiting-explicit-release",
+      "noResponse": true
     }
   ],
-  "nextWindow": "2026-11-15T19:30:00-03:00",
+  "nextWindow": "2026-11-16T20:30:00-03:00",
   "lastCheckpointSha": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "deployment": {
     "merge": "none",
@@ -4698,6 +4767,40 @@
         "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs"
       ],
       "state": "active"
+    },
+    {
+      "mission": "M262",
+      "branch": "feat/work-m262-end-phase-discord-hand-limit-2v2-20261116",
+      "head": "781e9ce43393a9eec3ea4140cba83acdf981c725",
+      "pr": 218,
+      "scope": [
+        "tests/tagEndPhaseHandLimitDiscord2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress"
+      },
+      "state": "active",
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94"
+    },
+    {
+      "mission": "M263",
+      "branch": "feat/work-m263-shared-zones-discord-2v2-20261116",
+      "head": "09bb6d51fdfc4098da613a3d5f20724d7217fbb1",
+      "pr": 219,
+      "scope": [
+        "tests/tagSharedZoneCapacityDiscord2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "milestone1000": "queued",
+        "engineValidation": "in_progress"
+      },
+      "state": "active",
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94"
     }
   ],
   "updatedAt": "2026-11-15T14:53:17-03:00",
@@ -5102,6 +5205,43 @@
       ],
       "pr": 198,
       "conflictPolicy": "Somente novo arquivo de teste M242. Não alterar src/duelEngineCurrent.ts até handoff explícito de M61/PR #17; não tocar em M215–M241, M61/M118/M151/M153, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261116T153058-0300-M262-M263-M262",
+      "runId": "work-20261116T153058-0300-M262-M263",
+      "owner": "Work",
+      "mission": "M262",
+      "priority": "P1 — validar o limite de seis cartas no End Phase pela interface real do Discord 2v2, com mão/Deck físicos e descarte privado.",
+      "state": "active",
+      "startedAt": "2026-11-16T15:30:58-03:00",
+      "branch": "feat/work-m262-end-phase-discord-hand-limit-2v2-20261116",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+      "reservedFiles": [
+        "tests/tagEndPhaseHandLimitDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente arquivo novo de teste nesta branch. Não tocar em M231–M242 nem nas reservas de terceiros; M240/M241 mantêm seus arquivos próprios. Não alterar runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261116T153058-0300-M262-M263-M263",
+      "runId": "work-20261116T153058-0300-M262-M263",
+      "owner": "Work",
+      "mission": "M263",
+      "priority": "P1 — validar pela interface real do Discord os limites compartilhados 3 Monster Zones + 3 Spell/Trap Zones por equipe, nos dois lados.",
+      "state": "active",
+      "startedAt": "2026-11-16T15:30:58-03:00",
+      "branch": "feat/work-m263-shared-zones-discord-2v2-20261116",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+      "reservedFiles": [
+        "tests/tagSharedZoneCapacityDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente arquivo novo de teste nesta branch. Não tocar em M231–M242 nem nas reservas de terceiros; M240/M241 mantêm seus arquivos próprios. Não alterar runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
     }
-  ]
+  ],
+  "lastIndependentRun": "work-20261116T153058-0300-M262-M263"
 }

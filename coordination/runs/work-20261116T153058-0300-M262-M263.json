@@ -1,0 +1,104 @@
+{
+  "runId": "work-20261116T153058-0300-M262-M263",
+  "owner": "Work",
+  "priority": "P1 — fechar integração Discord das regras fundamentais 2v2 sem invadir reservas ativas; em paralelo, solicitar M264 para iniciar nova carta certificável.",
+  "state": "in-progress",
+  "startedAt": "2026-11-16T15:30:58-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "latestCheckpointRead": "coordination/runs/work-20261115T092946-0300.json",
+  "stateRead": {
+    "activeRun": "work-20261115T142521-0300",
+    "activeMissions": [
+      "M231",
+      "M232"
+    ],
+    "otherReservations": [
+      "M233",
+      "M234",
+      "M235",
+      "M236",
+      "M240",
+      "M241",
+      "M242"
+    ],
+    "policy": "reservas de terceiros preservadas; arquivos novos independentes"
+  },
+  "workBranches": [
+    {
+      "mission": "M262",
+      "branch": "feat/work-m262-end-phase-discord-hand-limit-2v2-20261116",
+      "head": "781e9ce43393a9eec3ea4140cba83acdf981c725",
+      "pr": 218,
+      "scope": [
+        "tests/tagEndPhaseHandLimitDiscord2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress"
+      }
+    },
+    {
+      "mission": "M263",
+      "branch": "feat/work-m263-shared-zones-discord-2v2-20261116",
+      "head": "09bb6d51fdfc4098da613a3d5f20724d7217fbb1",
+      "pr": 219,
+      "scope": [
+        "tests/tagSharedZoneCapacityDiscord2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "milestone1000": "queued",
+        "engineValidation": "in_progress"
+      }
+    }
+  ],
+  "catalogAtStart": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "source": "milestone1000-factual-worklist.zip from run 43750968182"
+  },
+  "blocksCompleted": [
+    "M262: teste de integração Discord para mão 6/End Phase, privacidade do menu de descarte, rejeição de interação do parceiro, conservação de UIDs e rotação de assentos.",
+    "M263: teste de integração Discord para 3+3 zonas em ambas as equipes; CI inicial identificou fixture com monstros de Nível 5+ que legalmente podiam ser invocados por Tributo; fixture restringida a monstros normais de Nível 4 ou menos.",
+    "M264: pedido de handoff parcial ao M61 para battleLevelHeal / Absorbing Kid from the Sky, sem tocar em arquivos reservados."
+  ],
+  "ciAtCheckpoint": {
+    "m262": {
+      "fast": "success",
+      "milestone": "success",
+      "engine": "in_progress"
+    },
+    "m263": {
+      "fast": "in_progress",
+      "milestone": "queued",
+      "engine": "in_progress"
+    }
+  },
+  "handoff": {
+    "pr": 17,
+    "commentId": 6925601903,
+    "mission": "M264 Absorbing Kid from the Sky",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "status": "awaiting explicit release"
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "certificatesChanged": false,
+    "persistentDatabaseChanged": false,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscord": false
+  },
+  "note": "Estado compartilhado contém execução M231 ativa e reservas independentes. Somente novas branches/arquivos foram reservados; nenhuma reserva de terceiro foi liberada."
+}
