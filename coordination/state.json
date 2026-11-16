@@ -1826,11 +1826,10 @@
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
         "cardBatchFast": "success",
-        "fastRunId": 43941135365,
         "milestone1000": "success",
-        "milestoneRunId": 43941135331,
         "engineValidation": "in_progress",
-        "engineRunId": 43941135244
+        "npmTest": "passed; running repeat acceptance/stress",
+        "extendedSoak": "in_progress"
       }
     },
     {
@@ -1846,11 +1845,10 @@
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
         "cardBatchFast": "success",
-        "fastRunId": 43940532488,
         "milestone1000": "success",
-        "milestoneRunId": 43940532340,
         "engineValidation": "in_progress",
-        "engineRunId": 43940532220
+        "npmTest": "passed; running tag-classic audit",
+        "extendedSoak": "success"
       }
     },
     {
@@ -1866,11 +1864,10 @@
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
         "cardBatchFast": "success",
-        "fastRunId": 43941168084,
         "milestone1000": "success",
-        "milestoneRunId": 43941167963,
         "engineValidation": "in_progress",
-        "engineRunId": 43941168147
+        "npmTest": "passed; running tag audit",
+        "extendedSoak": "in_progress"
       }
     },
     {
@@ -1885,12 +1882,11 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": "in_progress",
-        "fastRunId": 43941911985,
+        "cardBatchFast": "success",
         "milestone1000": "success",
-        "milestoneRunId": 43941912004,
         "engineValidation": "in_progress",
-        "engineRunId": 43941911957
+        "npmTest": "passed; running persisted-duel stress",
+        "extendedSoak": "in_progress"
       }
     },
     {
@@ -1905,9 +1901,11 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "ci": {
-        "cardBatchFast": "queued",
-        "milestone1000": "queued",
-        "engineValidation": "queued"
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
       }
     }
   ],
@@ -4262,7 +4260,7 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261116T162819-0300-M271-M273.json",
-  "lastParallelActivityAt": "2026-11-16T19:44:53Z",
+  "lastParallelActivityAt": "2026-11-16T19:46:10.088Z",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "b4a43af30c684ec50cb9dbef403dad6287cf1b7d",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -5493,7 +5491,7 @@
       "priority": "P1 — homologar pelo Discord real as regras de dano 2v2: prevenção por Amazoness Fighter, dano dobrado em Defesa por Stone Statue e dano direto dobrado por Piranha Army.",
       "state": "released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-16T16:28:19-03:00",
-      "endedAt": "2026-11-16T16:44:53-03:00",
+      "endedAt": "2026-11-16T16:46:10-03:00",
       "sharedHeadBeforeCheckpointCommit": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
       "checkpoint": "coordination/runs/work-20261116T162819-0300-M271-M273.json",
       "branches": [
@@ -5505,7 +5503,14 @@
           "scope": [
             "tests/tagAmazonessFighterDiscord2v2.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci"
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed; running repeat acceptance/stress",
+            "extendedSoak": "in_progress"
+          }
         },
         {
           "mission": "M272",
@@ -5515,7 +5520,14 @@
           "scope": [
             "tests/tagStoneStatueDiscord2v2.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci"
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed; running tag-classic audit",
+            "extendedSoak": "success"
+          }
         },
         {
           "mission": "M273",
@@ -5525,7 +5537,14 @@
           "scope": [
             "tests/tagPiranhaArmyDiscord2v2.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci"
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed; running tag audit",
+            "extendedSoak": "in_progress"
+          }
         },
         {
           "mission": "M274",
@@ -5535,7 +5554,14 @@
           "scope": [
             "tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci"
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed; running persisted-duel stress",
+            "extendedSoak": "in_progress"
+          }
         },
         {
           "mission": "M275",
@@ -5545,10 +5571,17 @@
           "scope": [
             "tests/tagGoraTurtleDiscord2v2.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci"
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "in_progress",
+            "extendedSoak": "in_progress"
+          }
         }
       ],
-      "effectiveWorkMinutes": 16.58,
+      "effectiveWorkMinutes": 17.85,
       "targetEffectiveMinutes": 60,
       "targetMet": false,
       "nextTask": "Monitorar CI de #226–#230; corrigir somente os cinco arquivos próprios; aguardar handoff explícito para runtime.",
@@ -5556,6 +5589,6 @@
     }
   ],
   "lastParallelRun": "work-20261116T162819-0300-M271-M273",
-  "nextParallelTask": "Monitorar CI de #226–#230; corrigir somente os cinco arquivos próprios; aguardar handoff explícito para runtime.",
+  "nextParallelTask": "Monitorar Engine Validation/soaks de #226–#230; corrigir somente os cinco arquivos próprios se a CI revelar falhas; aguardar handoff explícito antes de runtime; depois retomar a revisão individual das 31 candidatas.",
   "nextParallelWindow": "2026-11-16T20:30:00-03:00"
 }
