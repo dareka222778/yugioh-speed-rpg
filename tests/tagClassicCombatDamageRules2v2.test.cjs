@@ -271,7 +271,8 @@ test('The Sanctuary in the Sky does not protect a non-Fairy partner-owned monste
   const before=inventorySnapshot(state);
   const ally=placeMonster(state,2,CELTIC_GUARDIAN);
   const enemy=placeMonster(state,3,BLUE_EYES);
-  activateSanctuary(state).state;
+  const activated=activateSanctuary(state);
+  state=activated.state;
   const field=state.core.players[0].field;
   assert.ok(field?.faceUp);
   state=endTurn(state,0);
