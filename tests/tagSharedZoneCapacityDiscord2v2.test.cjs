@@ -20,7 +20,7 @@ const {rulesFor}=require('../dist/rulesProfile');
 const TRAP_HOLE='04206964';
 const WABOKU='12607053';
 const NORMALS=[...new Set(tag.tagNormalCardIds)]
-  .filter(id=>getPlayableCard(id)?.kind==='monster')
+  .filter(id=>getPlayableCard(id)?.kind==='monster'&&(getPlayableCard(id)?.level??99)<=4)
   .slice(0,8);
 assert.equal(NORMALS.length,8,'four physical Decks need eight enabled Normal Monsters');
 assert.equal(getPlayableCard(TRAP_HOLE)?.kind,'trap');
