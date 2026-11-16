@@ -50,8 +50,6 @@ assert.equal(getMonsterEffect(SACRED_CRANE)?.operation.count,1);
 assert.deepEqual(getMonsterEffect(SACRED_CRANE)?.summons,['special']);
 assert.equal(getEffect(MONSTER_REBORN)?.kind,'specialSummon');
 
-const normalIds=fillers.slice(0,8).map(entry=>entry.id);
-
   assert.ok(fillers.length>=8,'the isolated 2v2 fixture needs eight certified Normal Monsters');
   assert.equal(new Set(normalIds).size,8);
 });
