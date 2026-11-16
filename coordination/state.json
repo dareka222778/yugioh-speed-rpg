@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-16T18:38:30Z",
+  "lastActivityAt": "2026-11-16T18:47:10Z",
   "nextScheduledAt": "2026-11-16T20:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -4117,15 +4117,34 @@
             "milestone1000": "queued",
             "engineValidation": "in_progress"
           }
+        },
+        {
+          "mission": "M265",
+          "branch": "feat/work-m265-shadow-ghoul-discord-2v2-20261116",
+          "head": "487afa492565a1b93d2d75bd96bd93f9b97c97e5",
+          "pr": 220,
+          "scope": [
+            "tests/tagShadowGhoulDiscord2v2.test.cjs"
+          ],
+          "state": "active",
+          "base": "feat/rea-engine-recovery-20261026",
+          "baseSha": "ecd17cb0a1ee79b8bf0bba5f0095df8e88dfafbb",
+          "ci": {
+            "cardBatchFast": "pending",
+            "milestone1000": "pending",
+            "engineValidation": "pending"
+          }
         }
       ],
       "reservedFiles": [
         "tests/tagEndPhaseHandLimitDiscord2v2.test.cjs",
-        "tests/tagSharedZoneCapacityDiscord2v2.test.cjs"
+        "tests/tagSharedZoneCapacityDiscord2v2.test.cjs",
+        "tests/tagShadowGhoulDiscord2v2.test.cjs"
       ],
       "blocksCompleted": [
         "M262: teste Discord do descarte End Phase e ownership físico.",
-        "M263: teste Discord de capacidade compartilhada 3+3; primeiro run encontrou fixture com monstros de Nível alto e a fixture foi restringida a monstros normais de Nível 4 ou menos."
+        "M263: teste Discord de capacidade compartilhada 3+3; primeiro run encontrou fixture com monstros de Nível alto e a fixture foi restringida a monstros normais de Nível 4 ou menos.",
+        "M265: teste Discord de Shadow Ghoul; invocação por Tributo de monstro fisicamente pertencente ao parceiro, ATK 1900 renderizado no embed público e privacidade do painel."
       ],
       "handoffRequest": {
         "pr": 17,
@@ -4140,12 +4159,13 @@
       },
       "ciAtStart": {
         "m262": "fast success; milestone success; engine in progress",
-        "m263": "revised head; fast in progress; milestone queued; engine in progress"
+        "m263": "revised head; fast in progress; milestone queued; engine in progress",
+        "m265": "PR #220 recém-publicada; CI pendente"
       }
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261113T223304-0300.json",
-  "lastParallelActivityAt": "2026-11-16T18:38:30Z",
+  "lastParallelActivityAt": "2026-11-16T18:47:10Z",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "b4a43af30c684ec50cb9dbef403dad6287cf1b7d",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -4246,7 +4266,7 @@
       "deploy"
     ]
   },
-  "lastCoordinationRefreshAt": "2026-11-16T18:38:30Z",
+  "lastCoordinationRefreshAt": "2026-11-16T18:47:10Z",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
     "status": "awaiting-response; separate test file only; no response observed",
@@ -4457,7 +4477,7 @@
   },
   "lastCheckpointAt": "2026-11-15T14:25:21-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "expectedHeadForCoordinationCommit": "ecd17cb0a1ee79b8bf0bba5f0095df8e88dfafbb",
   "lastRunSummary": "M211 (#166) e M212 (#167) concluíram toda a CI com sucesso; M213 (#168) falhou em uma asserção de menu Discord (7.367/7.368) e recebeu pedido de transferência; M214 (#169) adiciona Chaos Necromancer ao Cemitério compartilhado, com Card Batch e Milestone aprovados e Engine/soak em andamento. Zero novas certificações ou inventários.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -4801,6 +4821,23 @@
       "state": "active",
       "base": "feat/rea-engine-recovery-20261026",
       "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94"
+    },
+    {
+      "mission": "M265",
+      "branch": "feat/work-m265-shadow-ghoul-discord-2v2-20261116",
+      "head": "487afa492565a1b93d2d75bd96bd93f9b97c97e5",
+      "pr": 220,
+      "scope": [
+        "tests/tagShadowGhoulDiscord2v2.test.cjs"
+      ],
+      "state": "active",
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "ecd17cb0a1ee79b8bf0bba5f0095df8e88dfafbb",
+      "ci": {
+        "cardBatchFast": "pending",
+        "milestone1000": "pending",
+        "engineValidation": "pending"
+      }
     }
   ],
   "updatedAt": "2026-11-15T14:53:17-03:00",
@@ -5241,6 +5278,24 @@
         "tests/tagSharedZoneCapacityDiscord2v2.test.cjs"
       ],
       "conflictPolicy": "Somente arquivo novo de teste nesta branch. Não tocar em M231–M242 nem nas reservas de terceiros; M240/M241 mantêm seus arquivos próprios. Não alterar runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "reservationId": "work-20261116T153058-0300-M262-M263-M265",
+      "runId": "work-20261116T153058-0300-M262-M263",
+      "owner": "Work",
+      "mission": "M265",
+      "priority": "P1 — validar Shadow Ghoul pela interface real do Discord: ATK dinâmico conta monstros dos dois assentos aliados no Cemitério compartilhado, exclui Magias e Cemitério adversário, e preserva o dono físico do Tributo.",
+      "state": "active",
+      "startedAt": "2026-11-16T15:30:58-03:00",
+      "branch": "feat/work-m265-shadow-ghoul-discord-2v2-20261116",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "ecd17cb0a1ee79b8bf0bba5f0095df8e88dfafbb",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "ecd17cb0a1ee79b8bf0bba5f0095df8e88dfafbb",
+      "reservedFiles": [
+        "tests/tagShadowGhoulDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente arquivo novo de teste. Não alterar PR/arquivo M245 já existente, M231–M264, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
     }
   ],
   "lastIndependentRun": "work-20261116T153058-0300-M262-M263"

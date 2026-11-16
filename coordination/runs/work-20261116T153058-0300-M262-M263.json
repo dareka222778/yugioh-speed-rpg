@@ -53,6 +53,23 @@
         "milestone1000": "queued",
         "engineValidation": "in_progress"
       }
+    },
+    {
+      "mission": "M265",
+      "branch": "feat/work-m265-shadow-ghoul-discord-2v2-20261116",
+      "head": "487afa492565a1b93d2d75bd96bd93f9b97c97e5",
+      "pr": 220,
+      "scope": [
+        "tests/tagShadowGhoulDiscord2v2.test.cjs"
+      ],
+      "state": "active",
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "ecd17cb0a1ee79b8bf0bba5f0095df8e88dfafbb",
+      "ci": {
+        "cardBatchFast": "pending",
+        "milestone1000": "pending",
+        "engineValidation": "pending"
+      }
     }
   ],
   "catalogAtStart": {
@@ -66,7 +83,8 @@
   "blocksCompleted": [
     "M262: teste de integração Discord para mão 6/End Phase, privacidade do menu de descarte, rejeição de interação do parceiro, conservação de UIDs e rotação de assentos.",
     "M263: teste de integração Discord para 3+3 zonas em ambas as equipes; CI inicial identificou fixture com monstros de Nível 5+ que legalmente podiam ser invocados por Tributo; fixture restringida a monstros normais de Nível 4 ou menos.",
-    "M264: pedido de handoff parcial ao M61 para battleLevelHeal / Absorbing Kid from the Sky, sem tocar em arquivos reservados."
+    "M264: pedido de handoff parcial ao M61 para battleLevelHeal / Absorbing Kid from the Sky, sem tocar em arquivos reservados.",
+    "M265: teste Discord de Shadow Ghoul; invocação por Tributo de monstro fisicamente pertencente ao parceiro, ATK 1900 renderizado no embed público e privacidade do painel."
   ],
   "ciAtCheckpoint": {
     "m262": {
@@ -78,6 +96,11 @@
       "fast": "in_progress",
       "milestone": "queued",
       "engine": "in_progress"
+    },
+    "m265": {
+      "fast": "pending",
+      "milestone": "pending",
+      "engine": "pending"
     }
   },
   "handoff": {
