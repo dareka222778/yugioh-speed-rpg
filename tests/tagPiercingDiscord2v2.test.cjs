@@ -1,5 +1,6 @@
 'use strict';
-const {test,after}=require('node:test');
+const {test:nodeTest,after}=require('node:test');
+function test(name,fn){nodeTest(name,async(...args)=>{try{return await fn(...args);}catch(error){console.error('[M278 test diagnostic] '+name+'\n'+(error?.stack||error));throw error;}});}
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const os=require('node:os');
@@ -157,11 +158,12 @@ async function submit(record,actor,index,requestId){
   assert.ok(menu.options.some(option=>option.value===String(index)),
     'the Discord menu must contain the legal action index '+index);
   const i=interaction(record,actor,index,requestId);
+  const selected=tag.tagActions(record.state,actor)[index];
   let refreshes=0;
-  await handleTagComponent(i,async next=>{
+  try{await handleTagComponent(i,async next=>{
     refreshes++;
     validateDiscordPayload(tagPublicMessage(next));
-  },()=>{});
+  },()=>{});}catch(error){console.error('[M278 submit diagnostic]',JSON.stringify({id:record.id,actor,index,requestId,phase:record.state.core.phase,selected,unknown:tag.tagInventory(record.state).filter(card=>!getPlayableCard(card.id)).map(card=>({uid:card.uid,id:card.id})),cards:tag.tagInventory(record.state).map(card=>({uid:card.uid,id:card.id})).slice(-10)},null,2));throw error;}
   assert.deepEqual(i.calls,['defer','edit']);
   assert.ok(refreshes>=1);
   return store.getTag(record.id);
