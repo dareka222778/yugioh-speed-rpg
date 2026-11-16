@@ -993,4 +993,6 @@ export const releasedCardIds:ReadonlySet<string>=new Set([
   "44436472",
   "92084010",
   "38479725",
+// M250 Atomic Firefly: behavior-certified; zero inventory grants.
+  "87340664",
 ]);
