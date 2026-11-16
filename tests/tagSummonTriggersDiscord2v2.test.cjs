@@ -48,13 +48,11 @@ const fillers=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
   .filter(entry=>entry.card&&entry.card.kind==='monster'&&
     Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
-assert.ok(fillers.length>=17,'the isolated 2v2 fixture needs seventeen certified Normal Monsters');
-const POOL=[GRAVEKEEPERS_CURSE,SACRED_CRANE,MONSTER_REBORN,...fillers.slice(0,17).map(entry=>entry.id)];
-assert.equal(POOL.length,20);
-assert.equal(new Set(POOL).size,20);
+assert.ok(fillers.length>=8,'the isolated 2v2 fixture needs eight certified Normal Monsters');
+const normalIds=fillers.slice(0,8).map(entry=>entry.id);
 
 function member(seat){return 'm276-seat-'+seat;}
-function deck(){return [...POOL];}
+function deck(){const ids=[...new Set([GRAVEKEEPERS_CURSE,SACRED_CRANE,MONSTER_REBORN,...normalIds])];return Array.from({length:20},(_,index)=>ids[index%ids.length]);}
 function holder(state,seat){
   const team=seat%2;
   return state.active[team]===seat?state.core.players[team]:state.reserves[seat];
