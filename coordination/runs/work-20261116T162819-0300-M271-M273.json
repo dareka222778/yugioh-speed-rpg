@@ -1,0 +1,264 @@
+{
+  "runId": "work-20261116T162819-0300-M271-M273",
+  "owner": "Work",
+  "priority": "P1 — ampliar a homologação comportamental 2v2 pelo handler Discord, cobrindo prevenção, multiplicação e duplicação de dano de batalha; manter as reservas paralelas intactas.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-16T16:28:19-03:00",
+  "endedAt": "2026-11-16T16:39:05-03:00",
+  "timezone": "America/Sao_Paulo",
+  "elapsedMinutes": 10.77,
+  "effectiveWorkMinutes": 10.77,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+  "sharedHeadBeforeCheckpointCommit": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+  "baseRelationToMain": {
+    "status": "diverged",
+    "sharedAheadOfMain": 591,
+    "mainAheadOfShared": 8,
+    "mainHead": "f70ddc3add980e1567ae45e9236e14483c1ee7d3"
+  },
+  "latestCheckpointRead": "coordination/runs/work-20261116T153058-0300-M262-M263.json",
+  "stateRead": {
+    "activeRun": "work-20261115T142521-0300",
+    "activeState": "active",
+    "lastActivityAt": "2026-11-16T18:47:10Z",
+    "activeScope": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "latestIndependentRun": "work-20261116T153058-0300-M262-M263",
+    "activeParallelMissions": [
+      "M262",
+      "M263",
+      "M265"
+    ],
+    "handoffPolicy": "M271–M273 usam somente branches/arquivos novos; nenhuma reserva de terceiros foi editada ou liberada."
+  },
+  "handoffRequests": [
+    {
+      "pr": 218,
+      "mission": "M262",
+      "status": "requested cooperative release of coordination state after its block"
+    },
+    {
+      "pr": 219,
+      "mission": "M263",
+      "status": "requested cooperative release of coordination state after its block"
+    },
+    {
+      "pr": 220,
+      "mission": "M265",
+      "status": "requested cooperative release of coordination state after its block"
+    },
+    {
+      "pr": 17,
+      "mission": "M61",
+      "status": "runtime handoff still pending; no runtime file changed"
+    }
+  ],
+  "blocksCompleted": [
+    "M271 — Amazoness Fighter: três cenários Discord 2v2; prevenção de dano da equipe controladora quando ataca ou defende, e controle positivo de dano normal ao adversário.",
+    "M271 — correção da própria fixture: custom IDs Discord excediam 100 caracteres; reduzidos os IDs das sessões e publicado novo HEAD.",
+    "M272 — Stone Statue of the Aztecs: dois cenários Discord 2v2; dano de batalha em Defesa dobrado para 1200 e 600, com atacante fisicamente pertencente ao parceiro inativo.",
+    "M273 — Piranha Army: ataque direto via Discord 2v2; 800 ATK causam 1600 de dano; controle Normal de 800 ATK causa 800.",
+    "Auditoria de CI de M262–M270 e diagnóstico das falhas M267, M268 e M269; comentários enviados aos responsáveis."
+  ],
+  "cardsCovered": [
+    {
+      "name": "Amazoness Fighter",
+      "id": "55821894",
+      "mission": "M271",
+      "scenarios": 3,
+      "certificationIncrement": 0
+    },
+    {
+      "name": "Stone Statue of the Aztecs",
+      "id": "31812496",
+      "mission": "M272",
+      "scenarios": 2,
+      "certificationIncrement": 0
+    },
+    {
+      "name": "Piranha Army",
+      "id": "50823978",
+      "mission": "M273",
+      "scenarios": 2,
+      "certificationIncrement": 0
+    }
+  ],
+  "totalBehavioralScenarios": 7,
+  "workBranches": [
+    {
+      "mission": "M271",
+      "branch": "feat/work-m271-amazoness-fighter-discord-2v2-20261116",
+      "head": "856e008e523f48cee922904c219cc3c07ce80581",
+      "pr": 226,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "scope": [
+        "tests/tagAmazonessFighterDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": {
+          "status": "success",
+          "runId": 43941135365
+        },
+        "milestone1000": {
+          "status": "success",
+          "runId": 43941135331
+        },
+        "engineValidation": {
+          "status": "in_progress",
+          "runId": 43941135244
+        },
+        "npmTest": "in_progress-at-last-observation",
+        "extendedSoak": "in_progress"
+      },
+      "note": "HEAD anterior falhou por customId >100; correção publicada em 856e008 e nova CI iniciada."
+    },
+    {
+      "mission": "M272",
+      "branch": "feat/work-m272-stone-statue-discord-2v2-20261116",
+      "head": "af4cea77c8e5653b15dbc33b82881a7fea1664e0",
+      "pr": 227,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "scope": [
+        "tests/tagStoneStatueDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": {
+          "status": "success",
+          "runId": 43940532488
+        },
+        "milestone1000": {
+          "status": "success",
+          "runId": 43940532340
+        },
+        "engineValidation": {
+          "status": "in_progress",
+          "runId": 43940532220
+        },
+        "npmTest": "passed; engine workflow advanced to persisted-duel stress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "mission": "M273",
+      "branch": "feat/work-m273-piranha-army-discord-2v2-20261116",
+      "head": "40b60023d79ebb9dc3ae9b767a3bf74eb7909ec4",
+      "pr": 228,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+      "scope": [
+        "tests/tagPiranhaArmyDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": {
+          "status": "success",
+          "runId": 43941168084
+        },
+        "milestone1000": {
+          "status": "success",
+          "runId": 43941167963
+        },
+        "engineValidation": {
+          "status": "in_progress",
+          "runId": 43941168147
+        },
+        "npmTest": "in_progress-at-last-observation",
+        "extendedSoak": "in_progress"
+      }
+    }
+  ],
+  "catalogAtEnd": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "remainingTo1000": 31,
+    "historicalPending": 993,
+    "identityBlocked": 27,
+    "newCertificatesThisRun": 0,
+    "source": "milestone1000-plan.json artifact from run 43941135331",
+    "automaticCertifications": 0
+  },
+  "otherCiFindings": [
+    {
+      "pr": 221,
+      "mission": "M266",
+      "engineValidation": "success"
+    },
+    {
+      "pr": 222,
+      "mission": "M267",
+      "engineValidation": "failure",
+      "cause": "card 94004268 Amazoness Swords Woman is not enabled in the shared base; getPlayableCard returned undefined",
+      "commentId": 6926986401
+    },
+    {
+      "pr": 223,
+      "mission": "M268",
+      "engineValidation": "failure",
+      "cause": "four public-field assertions use JSON.stringify on Discord EmbedBuilder; boss name was not found",
+      "commentId": 6926987171
+    },
+    {
+      "pr": 224,
+      "mission": "M269",
+      "engineValidation": "failure",
+      "cause": "turn-7 active seat expected m269-seat-0 but actual m269-seat-2",
+      "commentId": 6926987930
+    },
+    {
+      "pr": 225,
+      "mission": "M270",
+      "engineValidation": "in_progress"
+    }
+  ],
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "certificatesChanged": false,
+    "persistentDatabaseChanged": false,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "onlyTestFilesChanged": true,
+    "isolatedTemporarySQLite": true
+  },
+  "productionAtEnd": {
+    "mainHead": "f70ddc3add980e1567ae45e9236e14483c1ee7d3",
+    "sharedHeadBeforeCheckpoint": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
+    "mainDeploymentWorkflow": "not found in main; shared branch contains only card-batch-admission.yml, card-batch-fast.yml, engine-validation.yml, milestone1000.yml",
+    "deploymentApi": "not available through current GitHub connector allowlist",
+    "hosting": "not independently verified",
+    "discordLiveValidation": false,
+    "merge": false,
+    "deploy": false
+  },
+  "scopeReleasedToAuxiliary": {
+    "allowed": [
+      "tests/tagAmazonessFighterDiscord2v2.test.cjs on feat/work-m271-amazoness-fighter-discord-2v2-20261116",
+      "tests/tagStoneStatueDiscord2v2.test.cjs on feat/work-m272-stone-statue-discord-2v2-20261116",
+      "tests/tagPiranhaArmyDiscord2v2.test.cjs on feat/work-m273-piranha-army-discord-2v2-20261116"
+    ],
+    "instructions": "Monitor CI and modify only these three test files on their own branches. Do not merge, deploy, modify runtime/catalog/certificates/database/inventory, or touch any third-party reservation."
+  },
+  "nextTask": "Monitor Engine Validation/soaks for PRs #226–#228; correct only own test fixtures if CI reports failures; wait for explicit handoff before runtime work; then resume individual official-text review and behavioral admission of the 31 remaining candidates.",
+  "nextWindow": "2026-11-16T20:30:00-03:00"
+}
