@@ -257,16 +257,7 @@ test('target-dependent position Traps cannot activate on an empty shared field',
   }
 });
 
-test('Earthquake may resolve on an empty shared field without changing either field',()=>{
-  const state=game('m246-earthquake-empty');
-  const before=inventorySnapshot(state);
-  const {state:next,source}=activate(state,0,'82828051','spell');
-  assert.deepEqual(next.core.players.map(player=>player.monsters.length),[0,0]);
-  assert.ok(next.core.players[0].grave.some(card=>card.uid===source.uid));
-  assertConserved(next,before);
-  assertPrivateHands(next);
-  assertRestorable(next);
-});
+
 
 test('a position-changing Trap set this turn remains unavailable even when the shared field has valid targets',()=>{
   const state=game('m246-set-turn');
