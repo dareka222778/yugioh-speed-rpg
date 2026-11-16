@@ -214,14 +214,14 @@ function setup(scenario){
   return {id,actor,before,record};
 }
 async function enterBattle(fixture){
-  let actions;try{actions=tag.tagActions(fixture.record.state,fixture.actor);}catch(error){throw new Error('M278 tagActions failed before Battle Phase for '+fixture.id+': '+error.message);}
+  let actions;try{actions=tag.tagActions(fixture.record.state,fixture.actor);}catch(error){const cards=tag.tagInventory(fixture.record.state).map(card=>({uid:card.uid,id:card.id,playable:!!getPlayableCard(card.id)}));let stateValid=true;try{tag.assertTagDuel(fixture.record.state);}catch{stateValid=false;}throw new Error('M278 tagActions failed before Battle Phase for '+fixture.id+'; stateValid='+stateValid+'; cards='+JSON.stringify(cards)+'; cause='+error.message);}
   const battle=actions.findIndex(action=>action.kind==='battle');
   assert.ok(battle>=0,'the active teammate must see the Battle Phase action in Discord');
   const current=await submit(fixture.record,fixture.actor,battle,'m278-'+fixture.id+'-battle');
   return settleResponses(current,fixture.id+'-battle');
 }
 async function attack(fixture,record,attacker,target,suffix){
-  let actions;try{actions=tag.tagActions(record.state,fixture.actor);}catch(error){throw new Error('M278 tagActions failed before attack '+suffix+': '+error.message);}
+  let actions;try{actions=tag.tagActions(record.state,fixture.actor);}catch(error){const cards=tag.tagInventory(record.state).map(card=>({uid:card.uid,id:card.id,playable:!!getPlayableCard(card.id)}));let stateValid=true;try{tag.assertTagDuel(record.state);}catch{stateValid=false;}throw new Error('M278 tagActions failed before attack '+suffix+'; stateValid='+stateValid+'; cards='+JSON.stringify(cards)+'; cause='+error.message);}
   const index=actions.findIndex(action=>
     action.kind==='attack'&&action.card===attacker.uid&&action.target===target.uid
   );
