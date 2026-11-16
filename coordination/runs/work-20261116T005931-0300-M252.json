@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "startedAt": "2026-11-16T03:59:31Z",
+  "endedAt": "2026-11-16T04:13:25Z",
+  "elapsedSeconds": 834,
+  "effectiveWorkDuration": "não medido separadamente; o tempo de espera ociosa de CI não foi contado como trabalho",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseHeadObserved": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "coordination": {
+    "sharedStateUpdated": false,
+    "reason": "coordination/state.json ainda registra M231/M232 como ativos; pedidos de handoff em PRs #187 e #188 seguem sem resposta. Nenhum arquivo reservado foi alterado.",
+    "handoffRequests": [
+      "https://github.com/dareka222778/yugioh-speed-rpg/pull/187",
+      "https://github.com/dareka222778/yugioh-speed-rpg/pull/188"
+    ],
+    "reservationsOwnedByOthersReleased": false,
+    "scopeReleasedToAuxiliary": "Somente acompanhar a CI desta PR e, se necessário, editar exclusivamente o novo arquivo de teste nesta mesma branch; não tocar em runtime nem em arquivos reservados."
+  },
+  "deployment": {
+    "merge": false,
+    "deploy": false,
+    "discordLiveValidation": false,
+    "deployWorkflowFound": false,
+    "packageScripts": [
+      "dev",
+      "build",
+      "start",
+      "check",
+      "test",
+      "audit:engine",
+      "audit:tag",
+      "audit:rea"
+    ],
+    "note": "Nenhum script deploy, vercel.json, render.yaml ou Dockerfile foi encontrado na branch consultada."
+  },
+  "counts": {
+    "certified": 969,
+    "target": 1000,
+    "remainingToGoal": 31,
+    "historical": 1962,
+    "pending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "newCertifications": 0
+  },
+  "nextWorkWindow": "2026-11-16T05:30:00-03:00",
+  "runId": "work-20261116T005931-0300-M252",
+  "priority": "P1",
+  "mission": "M252 — battle damage prevention and amplification across classic 2v2",
+  "branch": "feat/work-m252-combat-damage-2v2-20261116",
+  "head": "73c5006f3c16485010253d202c2a0173d09841d1",
+  "pr": {
+    "number": 208,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/208",
+    "state": "open",
+    "draft": true
+  },
+  "files": [
+    "tests/tagClassicCombatDamageRules2v2.test.cjs"
+  ],
+  "cards": [
+    "Amazoness Fighter",
+    "The Sanctuary in the Sky",
+    "Piranha Army",
+    "Stone Statue of the Aztecs",
+    "Obnoxious Celtic Guard"
+  ],
+  "behaviorScenarios": 10,
+  "changes": [
+    "Amazoness Fighter: dano zero à equipe controladora quando o monstro do parceiro ataca ou defende.",
+    "The Sanctuary in the Sky: proteção de Fairy nos dois times; controle negativo com não-Fairy.",
+    "Piranha Army: dano direto duplicado para os PV da equipe.",
+    "Stone Statue of the Aztecs: dano duplicado à equipe atacante ao atingir o monstro em Defesa do parceiro.",
+    "Obnoxious Celtic Guard: limiar de indestrutibilidade 1900 ATK e controle negativo abaixo do limiar.",
+    "Conservação de 80 UIDs, LP compartilhado, mãos privadas, restauração JSON e regras de novo duelo."
+  ],
+  "ci": {
+    "firstRevisionRun": "43802163808 failed npm test in two Sanctuary assertions because Mystical Elf is Spellcaster, not Fairy.",
+    "correction": "Fixture changed to Skelengel (Fairy) in commit 73c5006f3c16485010253d202c2a0173d09841d1.",
+    "cardBatchFast": "in_progress (run 43802504472)",
+    "milestone1000": "success (run 43802504456)",
+    "npmTest": "success (run 43802504448)",
+    "engineValidation": "in_progress",
+    "extendedSoak600s": "in_progress"
+  },
+  "nextTask": "Aguardar conclusão de Card Batch Fast, Engine Validation e soak; se aprovados, solicitar revisão. Em seguida, avançar para uma família de recrutamento 2v2."
+}
