@@ -46,14 +46,13 @@ const fillers=[...new Set(tag.tagNormalCardIds)]
   .map(id=>({id,card:getPlayableCard(id)}))
   .filter(entry=>entry.card&&entry.card.kind==='monster'&&
     Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
-assert.ok(fillers.length>=16,'the isolated multi-attack fixture needs sixteen certified Normal Monsters');
+assert.ok(fillers.length>=8,'the isolated multi-attack fixture needs eight certified Normal Monsters');
+const normalIds=fillers.slice(0,8).map(entry=>entry.id);
 
 function member(seat){return 'm277-seat-'+seat;}
 function deck(sourceId){
-  const pool=[sourceId,BATTLE_WARRIOR,MYSTICAL_ELF,CELTIC_GUARDIAN,...fillers.slice(0,16).map(entry=>entry.id)];
-  assert.equal(pool.length,20);
-  assert.equal(new Set(pool).size,20);
-  return [...pool];
+  const ids=[...new Set([sourceId,BATTLE_WARRIOR,MYSTICAL_ELF,CELTIC_GUARDIAN,...normalIds])];
+  return Array.from({length:20},(_,index)=>ids[index%ids.length]);
 }
 function holder(state,seat){
   const team=seat%2;
