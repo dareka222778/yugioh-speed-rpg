@@ -194,13 +194,14 @@ async function rejectInactivePartner(record,actor,partner,index,suffix){
   assert.equal(JSON.stringify(store.getTag(record.id).state),unchanged,
     'rejected partner action must not mutate the duel');
 }
-function setup(scenario){
+function setup(scenario,prepare){
   const ids=[0,1,2,3].map(member);
   const players=ids.map((id,seat)=>({id,name:'M278 Seat '+seat,cards:deck()}));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m278-piercing-'+scenario});
   state.core.turn=3;
   const actor=ids[0];
   assert.equal(tag.tagDecisionMember(state).id,actor);
+  const prepared=prepare?prepare(state):{};
   const before=inventory(state);
   assertRules(state);
   assertPrivateHands(state);
@@ -211,7 +212,7 @@ function setup(scenario){
     'INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)'
   ).run(id,guild,channel,null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
   let record;try{record=store.getTag(id);}catch(error){throw new Error('M278 store.getTag failed after SQLite round-trip for '+id+': '+error.message);}
-  return {id,actor,before,record};
+  return {id,actor,before,...prepared,record};
 }
 async function enterBattle(fixture){
   let actions;try{actions=tag.tagActions(fixture.record.state,fixture.actor);}catch(error){const cards=tag.tagInventory(fixture.record.state).map(card=>({uid:card.uid,id:card.id,playable:!!getPlayableCard(card.id)}));let stateValid=true;try{tag.assertTagDuel(fixture.record.state);}catch{stateValid=false;}throw new Error('M278 tagActions failed before Battle Phase for '+fixture.id+'; stateValid='+stateValid+'; cards='+JSON.stringify(cards)+'; cause='+error.message);}
@@ -245,9 +246,8 @@ for(const [sourceId,name,atk,targetId,targetName,targetDef] of [
   [GRAVEKEEPERS_SPEAR_SOLDIER,"Gravekeeper's Spear Soldier",1500,CELTIC_GUARDIAN,'Celtic Guardian',1200]
 ]){
   test(name+' inflicts piercing damage through Discord to the shared opposing team',async()=>{
-    const fixture=setup('inherent-'+sourceId);
-    const source=deploy(fixture.record.state,2,sourceId,'atk');
-    const target=deploy(fixture.record.state,3,targetId,'def');
+    const fixture=setup('inherent-'+sourceId,state=>({source:deploy(state,2,sourceId,'atk'),target:deploy(state,3,targetId,'def')}));
+    const {source,target}=fixture;
     assert.match(source.uid,/^m2:/,'the attacker must retain inactive teammate physical ownership');
     assert.match(target.uid,/^m3:/,'the defender must retain opposing partner physical ownership');
     const beforeOwnLP=fixture.record.state.core.players[0].lp;
@@ -265,10 +265,8 @@ for(const [sourceId,name,atk,targetId,targetName,targetDef] of [
 }
 
 test('Enraged Battle Ox grants piercing to a partner-owned Beast ally through Discord',async()=>{
-  const fixture=setup('battle-ox-beast');
-  const source=deploy(fixture.record.state,2,ENRAGED_BATTLE_OX,'atk');
-  const ally=deploy(fixture.record.state,0,GIANT_RAT,'atk');
-  const target=deploy(fixture.record.state,3,CELTIC_GUARDIAN,'def');
+  const fixture=setup('battle-ox-beast',state=>({source:deploy(state,2,ENRAGED_BATTLE_OX,'atk'),ally:deploy(state,0,GIANT_RAT,'atk'),target:deploy(state,3,CELTIC_GUARDIAN,'def')}));
+  const {source,ally,target}=fixture;
   assert.match(source.uid,/^m2:/);
   assert.match(ally.uid,/^m0:/);
   assert.match(target.uid,/^m3:/);
@@ -282,10 +280,8 @@ test('Enraged Battle Ox grants piercing to a partner-owned Beast ally through Di
 });
 
 test('Enraged Battle Ox does not grant piercing to a Warrior teammate',async()=>{
-  const fixture=setup('battle-ox-warrior-control');
-  const source=deploy(fixture.record.state,2,ENRAGED_BATTLE_OX,'atk');
-  const ally=deploy(fixture.record.state,0,AXE_RAIDER,'atk');
-  const target=deploy(fixture.record.state,3,MYSTICAL_ELF,'def');
+  const fixture=setup('battle-ox-warrior-control',state=>({source:deploy(state,2,ENRAGED_BATTLE_OX,'atk'),ally:deploy(state,0,AXE_RAIDER,'atk'),target:deploy(state,3,MYSTICAL_ELF,'def')}));
+  const {source,ally,target}=fixture;
   const beforeOwnLP=fixture.record.state.core.players[0].lp;
   const beforeOppLP=fixture.record.state.core.players[1].lp;
   let current=await enterBattle(fixture);
@@ -299,10 +295,8 @@ test('Enraged Battle Ox does not grant piercing to a Warrior teammate',async()=>
 });
 
 test('Gyaku-Gire Panda counts both opposing seats for ATK and piercing through Discord',async()=>{
-  const fixture=setup('gyaku-gire-both-opponents');
-  const panda=deploy(fixture.record.state,2,GYAKU_GIRE_PANDA,'atk');
-  const target=deploy(fixture.record.state,1,CELTIC_GUARDIAN,'def');
-  const otherOpponent=deploy(fixture.record.state,3,DARK_MAGICIAN,'atk');
+  const fixture=setup('gyaku-gire-both-opponents',state=>({panda:deploy(state,2,GYAKU_GIRE_PANDA,'atk'),target:deploy(state,1,CELTIC_GUARDIAN,'def'),otherOpponent:deploy(state,3,DARK_MAGICIAN,'atk')}));
+  const {panda,target,otherOpponent}=fixture;
   assert.match(panda.uid,/^m2:/);
   assert.match(target.uid,/^m1:/);
   assert.match(otherOpponent.uid,/^m3:/);
