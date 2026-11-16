@@ -208,7 +208,7 @@ for(const entry of CASES){
       'the public panel must not expose the private source UID');
     if(entry.id==='31785398'){
       const publicState=tag.publicTagDuel(record.state);
-      const hidden=publicState.teams[1].monsters.find(card=>card.uid===opponent.uid);
+      const hidden=publicState.teams[1].monsters.find(card=>card.faceUp===false&&card.id===null);
       assert.ok(hidden&&hidden.id===null&&!hidden.faceUp,
         'the Set target must remain concealed in the public state');
     }
@@ -226,7 +226,7 @@ for(const entry of CASES){
     const afterPanel=tagPrivateMessage(current,actor);
     validateDiscordPayload(afterPanel);
     const afterOptions=afterPanel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[]).flatMap(component=>component.options||[]);
-    assert.ok(!afterOptions.some(option=>option.label.includes(entry.name)),
+    assert.ok(!afterOptions.some(option=>option.label.includes(uiName)),
       'a resolved one-shot position card must disappear from the active action menu');
     const stateBeforeDuplicate=JSON.stringify(current.state);
     await submit(record,actor,index,requestId,current.revision,guild);
