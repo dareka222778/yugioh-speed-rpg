@@ -202,7 +202,8 @@ test('Needle Ceiling counts four monsters across both shared fields and destroys
   const alliedActive=placeMonster(state,0,BLUE_EYES);
   const alliedPartner=placeMonster(state,2,CELTIC_GUARDIAN);
   const opposingActive=placeMonster(state,1,MYSTICAL_ELF);
-  const opposingPartnerHidden=placeMonster(state,3,FILLERS[0],{faceUp:false,position:'def'});
+  const opposingPartner=placeMonster(state,3,FILLERS[0]);
+  const opposingPartnerHidden=placeMonster(state,3,FILLERS[1],{faceUp:false,position:'def'});
   assert.match(alliedPartner.uid,/^m2:/);
   assert.match(opposingPartnerHidden.uid,/^m3:/);
   const {state:next,source}=activate(state,0,'38411870','trap');
@@ -210,6 +211,7 @@ test('Needle Ceiling counts four monsters across both shared fields and destroys
   assert.ok(state.core.players[0].grave.some(card=>card.uid===alliedActive.uid));
   assert.ok(state.core.players[0].grave.some(card=>card.uid===alliedPartner.uid));
   assert.ok(state.core.players[1].grave.some(card=>card.uid===opposingActive.uid));
+  assert.ok(state.core.players[1].grave.some(card=>card.uid===opposingPartner.uid));
   assert.ok(state.core.players[1].monsters.some(card=>card.uid===opposingPartnerHidden.uid&&card.faceUp===false));
   assert.ok(state.core.players[0].grave.some(card=>card.uid===source.uid));
   assertConserved(state,before);
@@ -287,7 +289,7 @@ test('Soul Taker grants no LP when the opposing partner turns its target face-do
   );
   assert.ok(activation);
   state=tag.stepTagDuel(state,member(0),activation);
-  const book=putSpellInHand(state,1,BOOK_OF_MOON);
+  const book=placeBackrow(state,1,BOOK_OF_MOON,{faceUp:false,setTurn:1});
   const response=tag.tagActions(state,member(1)).find(action=>
     action.kind==='spell'&&action.card===book.uid&&action.target===target.uid
   );
