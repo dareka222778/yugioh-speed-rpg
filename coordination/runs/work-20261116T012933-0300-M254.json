@@ -1,0 +1,83 @@
+{
+  "owner": "Work",
+  "priority": "P1",
+  "startedAt": "2026-11-16T01:29:33-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "sharedHeadAtCheckpoint": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "stateUpdate": {
+    "status": "withheld",
+    "reason": "coordination/state.json ainda declara M231/M232 ativas; handoff cooperativo solicitado em PRs #187/#188, sem liberação explícita. Nenhuma reserva de terceiros ou estado compartilhado foi sobrescrito.",
+    "comments": [
+      6907379122,
+      6907379553
+    ]
+  },
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "newAdmissions": 0,
+    "newCertificates": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "liveDiscordNetwork": false
+  },
+  "nextWindow": "2026-11-16T05:30:00-03:00",
+  "duration": {
+    "elapsedAtCheckpointMinutes": 10,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Tempo efetivo não é medido com precisão neste ambiente; espera de CI será excluída e não se alegará cumprimento de 60 minutos."
+  },
+  "runId": "work-20261116T012933-0300-M254",
+  "mission": "M254",
+  "state": "published-draft; CI in progress",
+  "branch": "feat/work-m254-position-spells-discord-2v2-20261116",
+  "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "head": "3e753872703c7d0ac9697a986b9ac2eb071e982f",
+  "pr": 210,
+  "scope": [
+    "tests/tagPositionEffectsDiscord2v2.test.cjs"
+  ],
+  "cardsCovered": [
+    "Earthquake",
+    "Windstorm of Etaqua",
+    "Zero Gravity",
+    "Ready for Intercepting"
+  ],
+  "behavioralScenarios": 4,
+  "newCertifications": 0,
+  "blocksCompleted": [
+    "Auditou coordination/state.json, checkpoint, HEAD compartilhado, branches, PRs e regras de CI.",
+    "Solicitou handoff cooperativo M231/M232 sem tocar nos arquivos reservados.",
+    "Implementou quatro homologações Discord offline pelo handler real, com SQLite temporário, menu privado, payload, passes de resposta, idempotência, privacidade e UIDs físicos.",
+    "Publicou PR draft #210; Card Batch Fast, Milestone 1000 e Engine Validation iniciados."
+  ],
+  "ci": {
+    "cardBatchFast": "in_progress",
+    "milestone1000": "in_progress",
+    "engineValidation": "in_progress",
+    "npmTest": "pending_in_engine_validation",
+    "extendedSoak": "pending"
+  },
+  "runtimeChanges": [],
+  "certificationChanges": [],
+  "scopeReleasedToAuxiliary": {
+    "branch": "feat/work-m254-position-spells-discord-2v2-20261116",
+    "files": [
+      "tests/tagPositionEffectsDiscord2v2.test.cjs"
+    ],
+    "allowed": "monitorar CI e corrigir apenas este arquivo de teste; sem runtime/catálogo/estado/produção"
+  },
+  "nextTask": "Monitorar CI #210; se verde, revisar e liberar a branch ao auxiliar. Prosseguir para a família M255 e aguardar handoff M231/M232."
+}
