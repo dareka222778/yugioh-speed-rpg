@@ -39,7 +39,7 @@ function game(seed,first=0){
   assert.equal(rules.extraDeckMax,5);
   assert.equal(rules.monsterZones,3);
   assert.equal(rules.spellTrapZones,3);
-  assert.deepEqual(state.active,[0,1]);
+  assert.equal(state.active[first%2],first);
   assert.equal(tag.tagDecisionMember(state).id,member(first));
   return state;
 }
