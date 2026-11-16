@@ -140,7 +140,7 @@ function setup(scenario){
   const ids=[0,1,2,3].map(member);
   const players=ids.map((id,seat)=>({id,name:'M271 Seat '+seat,cards:deck()}));
   const state=tag.createTagDuel(players,{
-    classic:true,first:scenario.first,seed:'m271-amazoness-fighter-'+scenario.name
+    classic:true,first:scenario.first,seed:'m271-amazoness-fighter-'+scenario.id
   });
   state.core.turn=3;
   const actor=ids[scenario.actorSeat];
@@ -157,7 +157,7 @@ function setup(scenario){
   assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
 
-  const id='m271-amazoness-fighter-'+scenario.name;
+  const id='m271-af-'+scenario.id;
   const guild='m271-guild',channel='m271-channel';
   const members=ids.map((id,seat)=>({id,name:'M271 Seat '+seat,accepted:true}));
   database.db.prepare(
@@ -175,8 +175,8 @@ async function resolveBattle(fixture){
   const actor=fixture.actor;
   const battle=tag.tagActions(current.state,actor).findIndex(action=>action.kind==='battle');
   assert.ok(battle>=0,'the active teammate must be able to enter the Battle Phase');
-  current=await submit(current,actor,battle,'m271-'+fixture.scenario.name+'-battle');
-  current=await settleResponses(current,fixture.scenario.name);
+  current=await submit(current,actor,battle,'m271-'+fixture.scenario.id+'-battle');
+  current=await settleResponses(current,fixture.scenario.id);
 
   const actions=tag.tagActions(current.state,actor);
   const attack=actions.findIndex(action=>
@@ -187,7 +187,7 @@ async function resolveBattle(fixture){
     'the inactive physical partner cannot submit the active teammate attack');
 
   const forged=interaction(current,member(fixture.partnerSeat),attack,
-    'm271-'+fixture.scenario.name+'-forged-partner',actor);
+    'm271-'+fixture.scenario.id+'-forged-partner',actor);
   const unchanged=JSON.stringify(current.state);
   await assert.rejects(
     handleTagComponent(forged,async()=>{},()=>{}),
@@ -198,8 +198,8 @@ async function resolveBattle(fixture){
   assert.equal(JSON.stringify(store.getTag(current.id).state),unchanged,
     'rejected partner action must not mutate the duel');
 
-  current=await submit(current,actor,attack,'m271-'+fixture.scenario.name+'-attack');
-  return settleResponses(current,fixture.scenario.name);
+  current=await submit(current,actor,attack,'m271-'+fixture.scenario.id+'-attack');
+  return settleResponses(current,fixture.scenario.id);
 }
 function assertPublicPayload(state){
   const payload=tagPublicMessage(state);
@@ -239,19 +239,19 @@ function assertFinalState(fixture,current,expected){
 
 const SCENARIOS=[
   {
-    name:'partner-owned attacker loses without damaging its team',
+    id:'attack-loss',name:'partner-owned attacker loses without damaging its team',
     first:2,actorSeat:2,partnerSeat:0,fighterSeat:0,opponentSeat:3,
     opponentCard:AXE_RAIDER,attacker:'fighter',
     expected:{team0Lp:4000,team1Lp:4000,fighterDestroyed:true,opponentDestroyed:false}
   },
   {
-    name:'partner-owned defender prevents damage from the opposing active teammate',
+    id:'defend-loss',name:'partner-owned defender prevents damage from the opposing active teammate',
     first:3,actorSeat:3,partnerSeat:1,fighterSeat:2,opponentSeat:1,
     opponentCard:AXE_RAIDER,attacker:'opponent',
     expected:{team0Lp:4000,team1Lp:4000,fighterDestroyed:true,opponentDestroyed:false}
   },
   {
-    name:'winning attacker still inflicts ordinary damage on the opposing team',
+    id:'attack-win',name:'winning attacker still inflicts ordinary damage on the opposing team',
     first:2,actorSeat:2,partnerSeat:0,fighterSeat:0,opponentSeat:3,
     opponentCard:CELTIC_GUARDIAN,attacker:'fighter',
     expected:{team0Lp:4000,team1Lp:3900,fighterDestroyed:false,opponentDestroyed:true}
