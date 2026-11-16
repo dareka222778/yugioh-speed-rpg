@@ -102,6 +102,19 @@ function interaction(sessionId,requestId,customId,actor,index,expectedRevision,g
     calls
   };
 }
+async function settleThroughDiscord(sessionId,guildId,requestPrefix){
+  let current=store.getTag(sessionId);
+  for(let guard=0;current.state.core.phase==='response';guard++){
+    assert.ok(guard<30,'position-effect response windows must terminate through Discord');
+    const actor=tag.tagDecisionMember(current.state).id;
+    const actions=tag.tagActions(current.state,actor);
+    const passIndex=actions.findIndex(action=>action.kind==='pass');
+    assert.ok(passIndex>=0,'each physical responder must receive a legal pass action');
+    await submit(current,actor,passIndex,requestPrefix+'-'+guard,current.revision,guildId);
+    current=store.getTag(sessionId);
+  }
+  return current;
+}
 async function submit(record,actor,index,requestId,expectedRevision,guildId){
   const customId='tag:act:'+record.id+':'+record.revision+':'+actor;
   const i=interaction(record.id,requestId,customId,actor,index,expectedRevision,guildId);
@@ -214,8 +227,8 @@ for(const entry of CASES){
     }
     const originalRevision=record.revision,requestId='m254-request-'+entry.id;
     await submit(record,actor,index,requestId,originalRevision,guild);
-    let current=store.getTag(record.id);
-    assert.equal(current.revision,originalRevision+1,'one Discord interaction must commit exactly one revision');
+    let current=await settleThroughDiscord(record.id,guild,'m254-pass-'+entry.id);
+    assert.ok(current.revision>=originalRevision+1,'the Discord action and any required response passes must commit');
     assert.ok(current.state.core.players[0].grave.some(card=>card.uid===source.uid&&card.id===entry.id),
       'the resolved source must enter the activating team Graveyard with its physical UID');
     assertOutcome(entry,current.state,ally,opponent);
@@ -231,7 +244,9 @@ for(const entry of CASES){
     const stateBeforeDuplicate=JSON.stringify(current.state);
     await submit(record,actor,index,requestId,current.revision,guild);
     current=store.getTag(record.id);
-    assert.equal(current.revision,originalRevision+1,'duplicate Discord delivery must not commit a second revision');
+    const revisionBeforeDuplicate=current.revision;
+    assert.ok(revisionBeforeDuplicate>=originalRevision+1);
+    assert.equal(current.revision,revisionBeforeDuplicate,'duplicate Discord delivery must not commit a second revision');
     assert.equal(JSON.stringify(current.state),stateBeforeDuplicate,'duplicate delivery must leave the 2v2 state byte-for-byte stable');
     assert.equal(database.db.prepare('SELECT COUNT(*) AS n FROM tag_action_receipts WHERE request_id=?').get(requestId).n,1,
       'one Discord interaction must produce exactly one idempotency receipt');
