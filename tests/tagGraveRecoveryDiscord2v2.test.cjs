@@ -174,9 +174,11 @@ async function chooseThroughDiscord(record,target,actor,guild,requestId,expected
     'the choice menu must preserve the exact action index and localized target name');
   const partnerPanel=tagPrivateMessage(record,expectedOwnerId);
   validateDiscordPayload(partnerPanel);
-  assert.ok(!partnerPanel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[])
-    .some(component=>component.custom_id.startsWith('tag:act:')),
-    'the inactive physical owner must not receive the active teammate choice menu');
+  if(expectedOwnerId!==actor){
+    assert.ok(!partnerPanel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[])
+      .some(component=>component.custom_id.startsWith('tag:act:')),
+      'the inactive physical owner must not receive the active teammate choice menu');
+  }
   await submit(record,actor,index,requestId,record.revision,guild);
   let current=store.getTag(record.id);
   current=await settleThroughDiscord(record.id,guild,requestId+'-pass');
@@ -195,7 +197,7 @@ for(const [sourceId,targetId,name] of [
   [MASK_OF_DARKNESS,TRAP_HOLE,'Mask of Darkness']
 ]){
   test(name+' recovers a shared-Graveyard card to the inactive physical owner through Discord',async()=>{
-    const {record,source,target,before,guild,ids}=setup(sourceId,targetId,sourceId===MAGICIAN_OF_FAITH?2:2,targetId,null);
+    const {record,source,target,before,guild,ids}=setup('positive-'+sourceId,sourceId,2,targetId,null);
     const actor=ids[0],owner=ids[2];
     assertPrivateHands(record.state,ids);
     let current=await flipThroughDiscord(record,source,actor,guild,'m261-flip-'+sourceId);
