@@ -33,13 +33,14 @@ assert.equal(getPlayableCard(DARK_MAGICIAN)?.atk,2500);
 assert.equal(getPlayableCard(SUMMONED_SKULL)?.atk,2500);
 assert.equal(getPlayableCard(CELTIC_GUARDIAN)?.defense,1200);
 
+const CORE=[NEWDORIA,DARK_MAGICIAN,SUMMONED_SKULL,CELTIC_GUARDIAN];
 const normal=[...new Set(tag.tagNormalCardIds)]
+  .filter(id=>!CORE.includes(id))
   .map(id=>({id,card:getPlayableCard(id)}))
   .filter(entry=>entry.card&&entry.card.kind==='monster'&&Number.isInteger(entry.card.atk)&&Number.isInteger(entry.card.defense));
-assert.ok(normal.length>=8,'the Discord fixture needs eight certified Normal Monsters');
+assert.ok(normal.length>=8,'the Discord fixture needs eight certified Normal Monsters outside its core cards');
 const normalIds=normal.slice(0,8).map(entry=>entry.id);
-const CORE=[NEWDORIA,DARK_MAGICIAN,SUMMONED_SKULL,CELTIC_GUARDIAN];
-const POOL=[...new Set([...CORE,...normalIds])];
+const POOL=[...CORE,...normalIds];
 assert.equal(POOL.length,12);
 function member(seat){return 'm266-seat-'+seat;}
 function deck(){return Array.from({length:20},(_,index)=>POOL[index%POOL.length]);}
