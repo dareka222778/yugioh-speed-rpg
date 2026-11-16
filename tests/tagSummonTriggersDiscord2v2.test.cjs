@@ -48,7 +48,7 @@ assert.equal(getMonsterEffect(SACRED_CRANE)?.trigger,'onSummon');
 assert.equal(getMonsterEffect(SACRED_CRANE)?.operation.kind,'draw');
 assert.equal(getMonsterEffect(SACRED_CRANE)?.operation.count,1);
 assert.deepEqual(getMonsterEffect(SACRED_CRANE)?.summons,['special']);
-assert.equal(getEffect(MONSTER_REBORN)?.kind,'specialSummon');
+assert.equal(getEffect(MONSTER_REBORN)?.kind,'monsterReborn');
 
   assert.ok(fillers.length>=8,'the isolated 2v2 fixture needs eight certified Normal Monsters');
   assert.equal(new Set(normalIds).size,8);
@@ -176,13 +176,14 @@ async function rejectInactivePartner(record,actor,partner,index,suffix){
   assert.equal(JSON.stringify(store.getTag(record.id).state),unchanged,
     'rejected partner action must not mutate the duel');
 }
-function setup(scenario){
+function setup(scenario,prepare){
   const ids=[0,1,2,3].map(member);
   const players=ids.map((id,seat)=>({id,name:'M276 Seat '+seat,cards:deck()}));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m276-summon-'+scenario});
   state.core.turn=3;
   const actor=ids[0];
   assert.equal(tag.tagDecisionMember(state).id,actor);
+  const prepared=prepare?prepare(state):{};
   const before=inventory(state);
   assertRules(state);
   assertPrivateHands(state);
@@ -193,13 +194,12 @@ function setup(scenario){
   database.db.prepare(
     'INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)'
   ).run(id,guild,channel,null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
-  return {id,ids,before,actor,record:store.getTag(id)};
+  return {id,ids,before,actor,...prepared,record:store.getTag(id)};
 }
 
 test("Gravekeeper's Curse burns 500 shared-team LP after a partner-controlled Normal Summon",async()=>{
-  const fixture=setup('gravekeepers-normal');
-  const source=takePhysical(fixture.record.state,0,GRAVEKEEPERS_CURSE);
-  holder(fixture.record.state,0).hand.push(source);
+  const fixture=setup('gravekeepers-normal',state=>{const source=takePhysical(state,0,GRAVEKEEPERS_CURSE);holder(state,0).hand.push(source);return {source};});
+  const source=fixture.source;
   assert.match(source.uid,/^m0:/);
   const beforeOwnLP=fixture.record.state.core.players[0].lp;
   const beforeOppLP=fixture.record.state.core.players[1].lp;
@@ -226,8 +226,8 @@ test("Gravekeeper's Curse burns 500 shared-team LP after a partner-controlled No
 });
 
 test("Gravekeeper's Curse burns 500 shared-team LP after a partner-owned Flip Summon",async()=>{
-  const fixture=setup('gravekeepers-flip');
-  const source=placeFaceDown(fixture.record.state,2,GRAVEKEEPERS_CURSE);
+  const fixture=setup('gravekeepers-flip',state=>({source:placeFaceDown(state,2,GRAVEKEEPERS_CURSE)}));
+  const source=fixture.source;
   assert.match(source.uid,/^m2:/);
   assertRules(fixture.record.state);
   const beforeOwnLP=fixture.record.state.core.players[0].lp;
@@ -255,11 +255,8 @@ test("Gravekeeper's Curse burns 500 shared-team LP after a partner-owned Flip Su
 });
 
 test('Sacred Crane draws one card from the active physical Deck when a partner-owned copy is Special Summoned',async()=>{
-  const fixture=setup('sacred-crane-special');
-  const crane=takePhysical(fixture.record.state,2,SACRED_CRANE);
-  fixture.record.state.core.players[0].grave.push(crane);
-  const reborn=takePhysical(fixture.record.state,0,MONSTER_REBORN);
-  holder(fixture.record.state,0).hand.push(reborn);
+  const fixture=setup('sacred-crane-special',state=>{const crane=takePhysical(state,2,SACRED_CRANE);state.core.players[0].grave.push(crane);const reborn=takePhysical(state,0,MONSTER_REBORN);holder(state,0).hand.push(reborn);return {crane,reborn};});
+  const {crane,reborn}=fixture;
   assert.match(crane.uid,/^m2:/);
   assert.match(reborn.uid,/^m0:/);
   const drawUid=fixture.record.state.core.players[0].deck[0].uid;
@@ -296,9 +293,8 @@ test('Sacred Crane draws one card from the active physical Deck when a partner-o
 });
 
 test('Sacred Crane does not draw when it is Normal Summoned through Discord',async()=>{
-  const fixture=setup('sacred-crane-normal-negative');
-  const crane=takePhysical(fixture.record.state,0,SACRED_CRANE);
-  holder(fixture.record.state,0).hand.push(crane);
+  const fixture=setup('sacred-crane-normal-negative',state=>{const crane=takePhysical(state,0,SACRED_CRANE);holder(state,0).hand.push(crane);return {crane};});
+  const crane=fixture.crane;
   const deckBefore=fixture.record.state.core.players[0].deck.length;
   const drawUid=fixture.record.state.core.players[0].deck[0].uid;
   const handBefore=holder(fixture.record.state,0).hand.length;
