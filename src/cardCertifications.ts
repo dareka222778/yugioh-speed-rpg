@@ -5654,7 +5654,12 @@ export const cardCertifications:Readonly<Record<string,CardCertificate>>={
     "suites": [
       "tests/generated-m44-double-tribute.test.cjs"
     ]
+  },
+  "87340664": {
+    "fingerprint": "0c157f1386ad7ae696ea16ce6f4ba3949c92476caa1b8fe2a68c15133c7192fc",
+    "suites": [
+      "tests/combatBatch29.test.cjs",
+      "tests/tagClassicAtomicFirefly2v2.test.cjs"
+    ]
   }
-
-
 };
