@@ -14,11 +14,11 @@ const OBNOXIOUS_CELTIC='52077741';
 const BLUE_EYES='89631139';
 const DARK_MAGICIAN='46986414';
 const CELTIC_GUARDIAN='91152256';
-const MYSTICAL_ELF='15025844';
+const SKELENGEL='60694662';
 
 const FIXED=[
   AMAZONESS_FIGHTER,SANCTUARY,PIRANHA_ARMY,STONE_STATUE,OBNOXIOUS_CELTIC,
-  BLUE_EYES,DARK_MAGICIAN,CELTIC_GUARDIAN,MYSTICAL_ELF
+  BLUE_EYES,DARK_MAGICIAN,CELTIC_GUARDIAN,SKELENGEL
 ];
 for(const id of FIXED)assert.ok(getPlayableCard(id),'M252 card must already be certified and playable: '+id);
 const NORMALS=[...new Set(tag.tagNormalCardIds)]
@@ -229,7 +229,7 @@ test('Amazoness Fighter prevents battle damage when the opponent attacks a partn
 test('The Sanctuary in the Sky protects an allied Fairy controlled by the inactive partner',()=>{
   let state=game('m252-sanctuary-allied-fairy',0);
   const before=inventorySnapshot(state);
-  const fairy=placeMonster(state,2,MYSTICAL_ELF);
+  const fairy=placeMonster(state,2,SKELENGEL);
   const enemy=placeMonster(state,3,BLUE_EYES);
   const activated=activateSanctuary(state);
   state=activated.state;
@@ -250,7 +250,7 @@ test('The Sanctuary in the Sky protects an allied Fairy controlled by the inacti
 test('The Sanctuary in the Sky also protects an opposing Fairy; its rule is not restricted to the Field Spell controller',()=>{
   let state=game('m252-sanctuary-opposing-fairy',0);
   const before=inventorySnapshot(state);
-  const enemyFairy=placeMonster(state,3,MYSTICAL_ELF);
+  const enemyFairy=placeMonster(state,3,SKELENGEL);
   const attacker=placeMonster(state,2,BLUE_EYES);
   const activated=activateSanctuary(state);
   state=activated.state;
