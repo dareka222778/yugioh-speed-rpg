@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -1891,6 +1891,23 @@
         "milestoneRunId": 43941912004,
         "engineValidation": "in_progress",
         "engineRunId": 43941911957
+      }
+    },
+    {
+      "mission": "M275",
+      "branch": "feat/work-m275-gora-turtle-discord-2v2-20261116",
+      "head": "4ea31d78669c8c2b4d75b55929998cd11d921f13",
+      "pr": 230,
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "e65a4c36d34455aca862b6cbfba552e5964bdf90",
+      "scope": [
+        "tests/tagGoraTurtleDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "queued",
+        "milestone1000": "queued",
+        "engineValidation": "queued"
       }
     }
   ],
@@ -4245,7 +4262,7 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261116T162819-0300-M271-M273.json",
-  "lastParallelActivityAt": "2026-11-16T19:41:44Z",
+  "lastParallelActivityAt": "2026-11-16T19:44:53Z",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "b4a43af30c684ec50cb9dbef403dad6287cf1b7d",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -5448,6 +5465,24 @@
         "tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs"
       ],
       "conflictPolicy": "Somente o arquivo de teste novo desta missão; não alterar reservas de terceiros, runtime, catálogo, certificados, banco persistente ou inventários."
+    },
+    {
+      "reservationId": "work-20261116T162819-0300-M271-M273-M275",
+      "runId": "work-20261116T162819-0300-M271-M273",
+      "owner": "Work",
+      "mission": "M275",
+      "priority": "P1 — validar a restrição global de ataques de Gora Turtle pelo painel Discord 2v2.",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-16T16:44:39-03:00",
+      "branch": "feat/work-m275-gora-turtle-discord-2v2-20261116",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "e65a4c36d34455aca862b6cbfba552e5964bdf90",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "e65a4c36d34455aca862b6cbfba552e5964bdf90",
+      "reservedFiles": [
+        "tests/tagGoraTurtleDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente o arquivo de teste novo desta missão; não alterar reservas de terceiros, runtime, catálogo, certificados, banco persistente ou inventários."
     }
   ],
   "lastIndependentRun": "work-20261116T153058-0300-M262-M263",
@@ -5458,7 +5493,7 @@
       "priority": "P1 — homologar pelo Discord real as regras de dano 2v2: prevenção por Amazoness Fighter, dano dobrado em Defesa por Stone Statue e dano direto dobrado por Piranha Army.",
       "state": "released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-16T16:28:19-03:00",
-      "endedAt": "2026-11-16T16:41:44-03:00",
+      "endedAt": "2026-11-16T16:44:53-03:00",
       "sharedHeadBeforeCheckpointCommit": "8ef8caf44051a16cc81cc38f5d3dcc50213efac1",
       "checkpoint": "coordination/runs/work-20261116T162819-0300-M271-M273.json",
       "branches": [
@@ -5501,16 +5536,26 @@
             "tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs"
           ],
           "state": "released-to-auxiliary-monitor-ci"
+        },
+        {
+          "mission": "M275",
+          "branch": "feat/work-m275-gora-turtle-discord-2v2-20261116",
+          "head": "4ea31d78669c8c2b4d75b55929998cd11d921f13",
+          "pr": 230,
+          "scope": [
+            "tests/tagGoraTurtleDiscord2v2.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci"
         }
       ],
-      "effectiveWorkMinutes": 13.42,
+      "effectiveWorkMinutes": 16.58,
       "targetEffectiveMinutes": 60,
       "targetMet": false,
-      "nextTask": "Monitorar CI de #226–#229; corrigir somente os quatro arquivos próprios; aguardar handoff explícito para runtime.",
+      "nextTask": "Monitorar CI de #226–#230; corrigir somente os cinco arquivos próprios; aguardar handoff explícito para runtime.",
       "nextWindow": "2026-11-16T20:30:00-03:00"
     }
   ],
   "lastParallelRun": "work-20261116T162819-0300-M271-M273",
-  "nextParallelTask": "Monitorar CI de #226–#229; corrigir somente os quatro arquivos próprios; aguardar handoff explícito para runtime.",
+  "nextParallelTask": "Monitorar CI de #226–#230; corrigir somente os cinco arquivos próprios; aguardar handoff explícito para runtime.",
   "nextParallelWindow": "2026-11-16T20:30:00-03:00"
 }
