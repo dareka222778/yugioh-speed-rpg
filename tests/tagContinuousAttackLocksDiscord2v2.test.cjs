@@ -46,6 +46,7 @@ assert.equal(ROLE_MONSTERS.length,17);
 const POOL=[...CASES.map(card=>card.id),...ROLE_MONSTERS.map(card=>card.id)];
 assert.equal(POOL.length,20,'each physical participant must use a legal 20-card Deck');
 assert.equal(new Set(POOL).size,20,'the fixture must not duplicate card identities');
+process.stderr.write('M255 diagnostic: module fixtures loaded\\n');
 
 function member(caseKey,seat){return 'm255-'+caseKey+'-seat-'+seat;}
 function deck(){return [...POOL];}
@@ -224,9 +225,11 @@ function assertEffect(entry,state,refs){
 for(const entry of CASES){
   test(entry.name+' activates through the real offline Discord 2v2 handler and preserves its team attack rule',async()=>{
     const {record,source,refs,before,guild,actor,partner}=setup(entry,entry.id);
+    process.stderr.write('M255 diagnostic setup '+entry.id+' phase='+record.state.core.phase+'\\n');
     const actions=tag.tagActions(record.state,actor);
     const index=actions.findIndex(action=>action.kind===entry.kind&&action.card===source.uid);
     assert.ok(index>=0,'the real 2v2 action list must include '+entry.name);
+    process.stderr.write('M255 diagnostic menu '+entry.id+' index='+index+'\\n');
     const page=Math.floor(index/20);
     const privatePanel=tagPrivateMessage(record,actor,page);
     validateDiscordPayload(privatePanel);
@@ -250,12 +253,16 @@ for(const entry of CASES){
     const originalRevision=record.revision,requestId='m255-request-'+entry.id;
     await submit(record,actor,index,requestId,originalRevision,guild);
     let current=await settleThroughDiscord(record.id,guild,'m255-pass-'+entry.id);
+    process.stderr.write('M255 diagnostic settled '+entry.id+' phase='+current.state.core.phase+' revision='+current.revision+'\\n');
     assert.ok(current.revision>=originalRevision+1,'the action and any required response passes must commit');
     const continuous= current.state.core.players[0].backrow.find(card=>card.uid===source.uid);
     assert.ok(continuous&&continuous.faceUp&&continuous.resolved,
       entry.name+' must remain face-up and resolved in the shared team backrow');
+    process.stderr.write('M255 diagnostic effect '+entry.id+'\\n');
     assertEffect(entry,current.state,refs);
+    process.stderr.write('M255 diagnostic effect passed '+entry.id+'\\n');
     assertConserved(current.state,before);
+    process.stderr.write('M255 diagnostic conserved '+entry.id+'\\n');
     assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(current.state))));
     const receipt=database.db.prepare('SELECT request_id,committed_revision FROM tag_action_receipts WHERE request_id=?').get(requestId);
     assert.deepEqual(receipt,{request_id:requestId,committed_revision:originalRevision+1});
