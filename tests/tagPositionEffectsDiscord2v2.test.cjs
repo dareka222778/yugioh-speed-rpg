@@ -241,10 +241,10 @@ for(const entry of CASES){
     const afterOptions=afterPanel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[]).flatMap(component=>component.options||[]);
     assert.ok(!afterOptions.some(option=>option.label.includes(uiName)),
       'a resolved one-shot position card must disappear from the active action menu');
-    const stateBeforeDuplicate=JSON.stringify(current.state);
-    await submit(record,actor,index,requestId,current.revision,guild);
-    current=store.getTag(record.id);
     const revisionBeforeDuplicate=current.revision;
+    const stateBeforeDuplicate=JSON.stringify(current.state);
+    await submit(record,actor,index,requestId,revisionBeforeDuplicate,guild);
+    current=store.getTag(record.id);
     assert.ok(revisionBeforeDuplicate>=originalRevision+1);
     assert.equal(current.revision,revisionBeforeDuplicate,'duplicate Discord delivery must not commit a second revision');
     assert.equal(JSON.stringify(current.state),stateBeforeDuplicate,'duplicate delivery must leave the 2v2 state byte-for-byte stable');
