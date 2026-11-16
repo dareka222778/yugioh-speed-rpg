@@ -14,7 +14,7 @@ const store=require('../dist/tagStore');
 const {handleTagComponent}=require('../dist/tagInteraction');
 const {tagPrivateMessage,tagPublicMessage}=require('../dist/tagUI');
 const {validateDiscordPayload}=require('../dist/discordPayload');
-const {starterContents}=require('../dist/cardCatalog');
+const {starterContents,getCard}=require('../dist/cardCatalog');
 const {getPlayableCard,getEffect}=require('../dist/effectRegistry');
 const {getMonsterEffect}=require('../dist/monsterEffects');
 const {rulesFor}=require('../dist/rulesProfile');
@@ -195,10 +195,12 @@ for(const entry of CASES){
       'the inactive physical partner must not receive the active summon action menu');
     assert.ok(!JSON.stringify(partnerPanel).includes(boss.uid),
       'the partner private panel must not reveal the active seat boss UID');
+    assert.ok(!JSON.stringify(partnerPanel).includes(getCard(entry.boss).name),
+      'the partner private panel must not reveal the active seat boss name');
     const publicBefore=tagPublicMessage(record);
     validateDiscordPayload(publicBefore);
     assert.ok(!JSON.stringify(publicBefore).includes(boss.uid));
-    assert.ok(!JSON.stringify(publicBefore).includes(getPlayableCard(entry.boss).name),
+    assert.ok(!JSON.stringify(publicBefore).includes(getCard(entry.boss).name),
       'the boss must remain private in the active seat hand before summon');
 
     let current=await submit(record,actor,index,'m268-summon-'+entry.donor);
@@ -217,7 +219,7 @@ for(const entry of CASES){
     const publicAfter=tagPublicMessage(current.state);
     validateDiscordPayload(publicAfter);
     const rendered=JSON.stringify(publicAfter);
-    assert.ok(rendered.includes(getPlayableCard(entry.boss).name),
+    assert.ok(rendered.includes(getCard(entry.boss).name),
       'the public Discord field must reveal the successfully summoned boss');
     assert.ok(!rendered.includes(source.uid));
     assert.ok(!rendered.includes(boss.uid));
