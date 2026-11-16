@@ -236,7 +236,7 @@ test('Toll prevents the opposing team from attacking when its shared LP equals t
   const before=inventorySnapshot(state);
   const defender=placeMonster(state,2,CELTIC_GUARDIAN);
   const attacker=placeMonster(state,3,BLUE_EYES);
-  activateToll(state);
+  state=activateToll(state).state;
   state.core.players[1].lp=500;
   state=endTurn(state,0);
   state=startBattle(state,1);
@@ -257,7 +257,7 @@ test('Dark Elf and Toll stack their attack costs; an exact 1500 LP team cannot d
   const before=inventorySnapshot(state);
   const elf=placeMonster(state,2,DARK_ELF);
   placeMonster(state,3,CELTIC_GUARDIAN);
-  activateToll(state);
+  state=activateToll(state).state;
   state=startBattle(state,0);
   const actions=tag.tagActions(state,member(0)).filter(action=>
     action.kind==='attack'&&action.card===elf.uid
