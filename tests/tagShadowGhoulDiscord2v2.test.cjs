@@ -179,7 +179,7 @@ test('Shadow Ghoul Discord field displays shared-team Graveyard ATK while preser
 
   const forged=interaction(current,ids[0],summonIndex,'m265-forged-partner-summon',ids[2]);
   const unchanged=JSON.stringify(current.state);
-  await assert.rejects(handleTagComponent(forged,async()=>{},()=>{}),/Abra sua própria mão no campo\\./);
+  await assert.rejects(handleTagComponent(forged,async()=>{},()=>{}),/Abra sua própria mão no campo\./);
   assert.deepEqual(forged.calls,[]);
   assert.equal(store.getTag(id).revision,current.revision);
   assert.equal(JSON.stringify(store.getTag(id).state),unchanged);
