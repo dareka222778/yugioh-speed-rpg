@@ -196,7 +196,7 @@ for(const first of [0,1]){
 
     const forged=interaction(current,ids[activeSeat],actions.length,'m263-forged-fourth-zone-'+teamName);
     const unchanged=JSON.stringify(current.state);
-    await assert.rejects(handleTagComponent(forged,async()=>{},()=>{}),/Jogada indisponível\\./);
+    await assert.rejects(handleTagComponent(forged,async()=>{},()=>{}),/Jogada indisponível\./);
     assert.deepEqual(forged.calls,['defer'],
       'the Discord adapter may acknowledge the click, but the store must reject the out-of-range action');
     assert.equal(store.getTag(id).revision,current.revision);
