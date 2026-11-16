@@ -91,20 +91,55 @@ function assertPrivateHands(state){
     assert.ok(!publicState.includes(card.uid),'private hand UID leaked for physical seat '+seat);
   }
 }
-function settleResponses(state){
-  for(let guard=0;state.core.phase==='response';guard++){
+function interaction(record,actor,index,requestId,owner=actor){
+  const calls=[];
+  return {
+    id:requestId,guildId:record.guild,user:{id:actor},
+    customId:'tag:act:'+record.id+':'+record.revision+':'+owner,
+    values:[String(index)],isButton:()=>false,isStringSelectMenu:()=>true,
+    deferUpdate:async()=>{
+      assert.equal(store.getTag(record.id).revision,record.revision);
+      calls.push('defer');
+    },
+    editReply:async payload=>{calls.push('edit');validateDiscordPayload(payload);},
+    calls
+  };
+}
+async function submit(record,actor,index,requestId){
+  const page=Math.floor(index/20);
+  const panel=tagPrivateMessage(record,actor,page);
+  validateDiscordPayload(panel);
+  const components=panel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[]);
+  const menu=components.find(component=>component.custom_id==='tag:act:'+record.id+':'+record.revision+':'+actor);
+  assert.ok(menu,'the actual private Discord panel must expose the action menu');
+  assert.ok(menu.options.some(option=>option.value===String(index)),
+    'the Discord menu must contain the legal action index '+index);
+  const i=interaction(record,actor,index,requestId);
+  let refreshes=0;
+  await handleTagComponent(i,async next=>{
+    refreshes++;
+    validateDiscordPayload(tagPublicMessage(next));
+  },()=>{});
+  assert.deepEqual(i.calls,['defer','edit']);
+  assert.ok(refreshes>=1);
+  return store.getTag(record.id);
+}
+async function settleResponses(record,suffix){
+  let current=record;
+  for(let guard=0;current.state.core.phase==='response';guard++){
     assert.ok(guard<40,'the battle and mandatory trigger response chain must terminate');
-    const actor=tag.tagDecisionMember(state).id;
-    const pass=tag.tagActions(state,actor).find(action=>action.kind==='pass');
-    assert.ok(pass,'the current physical responder must receive a legal pass');
-    state=tag.stepTagDuel(state,actor,pass);
+    const actor=tag.tagDecisionMember(current.state).id;
+    const actions=tag.tagActions(current.state,actor);
+    const pass=actions.findIndex(action=>action.kind==='pass');
+    assert.ok(pass>=0,'the current physical responder must receive a legal pass');
+    current=await submit(current,actor,pass,'m266-'+suffix+'-pass-'+guard);
   }
-  return state;
+  return current;
 }
 function setup(suffix){
   const ids=[0,1,2,3].map(member);
   const players=ids.map((id,seat)=>({id,name:'M266 Seat '+seat,cards:deck()}));
-  let state=tag.createTagDuel(players,{classic:true,first:2,seed:'m266-newdoria-'+suffix});
+  const state=tag.createTagDuel(players,{classic:true,first:2,seed:'m266-newdoria-'+suffix});
   state.core.turn=3;
   assert.deepEqual(state.active,[2,3],'the fixture rotates to physical seats 2 and 3');
   const before=inventory(state);
@@ -130,43 +165,22 @@ function setup(suffix){
   ).run(id,guild,channel,null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
   return {id,guild,ids,before,source,ally,hidden,attacker,record:store.getTag(id)};
 }
-function interaction(record,actor,index,requestId,owner=actor){
-  const calls=[];
-  return {
-    id:requestId,guildId:record.guild,user:{id:actor},
-    customId:'tag:act:'+record.id+':'+record.revision+':'+owner,
-    values:[String(index)],isButton:()=>false,isStringSelectMenu:()=>true,
-    deferUpdate:async()=>{
-      assert.equal(store.getTag(record.id).revision,record.revision);
-      calls.push('defer');
-    },
-    editReply:async payload=>{calls.push('edit');validateDiscordPayload(payload);},
-    calls
-  };
-}
-async function submit(record,actor,index,requestId){
-  const i=interaction(record,actor,index,requestId);
-  let refreshes=0;
-  await handleTagComponent(i,async next=>{
-    refreshes++;
-    validateDiscordPayload(tagPublicMessage(next));
-  },()=>{});
-  assert.deepEqual(i.calls,['defer','edit']);
-  assert.ok(refreshes>=1);
-  return store.getTag(record.id);
-}
-function openBattleAndTrigger(fixture){
+async function openBattleAndTrigger(fixture,suffix){
   let current=fixture.record;
   const actor=fixture.ids[2];
   assert.equal(tag.tagDecisionMember(current.state).id,actor);
-  const battle=tag.tagActions(current.state,actor).find(action=>action.kind==='battle');
-  assert.ok(battle,'active teammate must be able to enter the Battle Phase');
-  current={...current,state:settleResponses(tag.stepTagDuel(current.state,actor,battle))};
-  const attack=tag.tagActions(current.state,actor).find(action=>
+  const battle=tag.tagActions(current.state,actor).findIndex(action=>action.kind==='battle');
+  assert.ok(battle>=0,'active teammate must be able to enter the Battle Phase');
+  current=await submit(current,actor,battle,'m266-'+suffix+'-battle');
+  current=await settleResponses(current,suffix);
+
+  const attack=tag.tagActions(current.state,actor).findIndex(action=>
     action.kind==='attack'&&action.card===fixture.source.uid&&action.target===fixture.attacker.uid
   );
-  assert.ok(attack,'active teammate must attack using the inactive partner physical Newdoria');
-  current={...current,state:settleResponses(tag.stepTagDuel(current.state,actor,attack))};
+  assert.ok(attack>=0,'active teammate must attack using the inactive partner physical Newdoria');
+  current=await submit(current,actor,attack,'m266-'+suffix+'-attack');
+  current=await settleResponses(current,suffix);
+
   assert.equal(current.state.core.phase,'choice','battle destruction must open Newdoria mandatory target selection');
   assert.ok(current.state.core.players[0].grave.some(card=>card.uid===fixture.source.uid&&card.id===NEWDORIA));
   assert.equal(current.state.core.players[0].lp,2700,'the Newdoria team receives 1300 battle damage');
@@ -174,7 +188,7 @@ function openBattleAndTrigger(fixture){
   assert.ok(current.state.core.players[1].monsters.some(card=>card.uid===fixture.attacker.uid));
   assert.equal(tag.tagDecisionMember(current.state).id,actor,
     'the active allied physical seat resolves the trigger, not the inactive card owner');
-  return {...fixture,record:store.getTag(fixture.id)};
+  return {...fixture,record:current};
 }
 function choiceIndex(state,targetUid){
   const actor=tag.tagDecisionMember(state).id;
@@ -184,7 +198,7 @@ function choiceIndex(state,targetUid){
   return index;
 }
 function assertMenuOffers(record,actor,index,hidden){
-  const panel=tagPrivateMessage(record,actor);
+  const panel=tagPrivateMessage(record,actor,Math.floor(index/20));
   validateDiscordPayload(panel);
   const rows=panel.components.map(row=>row.toJSON());
   const components=rows.flatMap(row=>row.components||[]);
@@ -213,7 +227,7 @@ for(const scenario of [
   {name:'opposing-face-down',target:'hidden',expectedTeam:1}
 ]){
   test('Newdoria mandatory target selection is private and owner-safe through Discord handlers ('+scenario.name+')',async()=>{
-    const fixture=openBattleAndTrigger(setup(scenario.name));
+    const fixture=await openBattleAndTrigger(setup(scenario.name),scenario.name);
     const {id,ids,before,source,ally,hidden,attacker}=fixture;
     let current=fixture.record;
     const selected=scenario.target==='ally'?ally:hidden;
@@ -235,7 +249,7 @@ for(const scenario of [
 
     const forged=interaction(current,ids[0],index,'m266-forged-inactive-partner',ids[2]);
     const unchanged=JSON.stringify(current.state);
-    await assert.rejects(handleTagComponent(forged,async()=>{},()=>{}),/Abra sua própria mão no campo\\./);
+    await assert.rejects(handleTagComponent(forged,async()=>{},()=>{}),/Abra sua própria mão no campo\./);
     assert.deepEqual(forged.calls,[],'forged inactive-partner interaction must be rejected before defer');
     assert.equal(store.getTag(id).revision,current.revision);
     assert.equal(JSON.stringify(store.getTag(id).state),unchanged);
