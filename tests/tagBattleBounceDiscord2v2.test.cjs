@@ -22,6 +22,7 @@ const {rulesFor}=require('../dist/rulesProfile');
 const BLUE_EYES='89631139';
 const WALL_OF_ILLUSION='13945283';
 const KELBEK='54878498';
+const NORMAL_CONTROL='91152256';
 const attackerInfo=getPlayableCard(BLUE_EYES);
 assert.equal(attackerInfo?.englishName,'Blue-Eyes White Dragon');
 assert.equal(attackerInfo?.monsterType,'normal');
@@ -214,4 +215,26 @@ for(const [name,id,defense] of [
 after(()=>{
   database.db.close();
   fs.rmSync(dir,{recursive:true,force:true});
+});
+
+
+test('a certified Normal Monster does not inherit the battle-bounce operation',async()=>{
+  const fixture=setup(NORMAL_CONTROL,'normal-control');
+  assert.equal(getPlayableCard(NORMAL_CONTROL)?.englishName,'Celtic Guardian');
+  assert.equal(getMonsterEffect(NORMAL_CONTROL),undefined);
+  const current=await battle(fixture.record,fixture.attacker,fixture.defender,'normal-control');
+  const state=current.state;
+  assert.ok(state.core.players[0].grave.some(card=>card.uid===fixture.defender.uid),
+    'the Normal Monster is destroyed by the 3000 ATK attacker');
+  assert.ok(state.core.players[1].monsters.some(card=>card.uid===fixture.attacker.uid),
+    'the attacker remains on the shared field without a battle-bounce effect');
+  assert.ok(!tag.tagMemberHand(state,member(1)).some(card=>card.uid===fixture.attacker.uid));
+  assert.equal(state.core.players[0].lp,4000);
+  assert.equal(state.core.players[1].lp,4000);
+  assertConserved(state,fixture.before);
+  assertPrivateHands(state);
+  assertRules(state);
+  assertPublicPayload(current);
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(state))));
 });
