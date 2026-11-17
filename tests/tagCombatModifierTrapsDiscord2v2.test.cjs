@@ -220,12 +220,12 @@ const specs=[
   {id:CASTLE_WALLS,name:'Castle Walls',boost:'defBoost',target:castleWallsTarget,position:'def'}
 ];
 for(const spec of specs){
-  test(spec.name+' offers only the defending team monster through the Discord response menu',async()=>{
+  test(spec.name+' offers every face-up field monster through the Discord response menu',async()=>{
     const fixture=setup(spec,'target-filter-'+spec.name);
     const current=await beginAttack(fixture,'target-filter-'+spec.name);
-    assert.deepEqual(legalTrapTargets(current,fixture.trap.uid,fixture.actor),[fixture.target.uid],
-      spec.name+' must not offer the opposing attacker as a legal target');
-    assert.ok(!legalTrapTargets(current,fixture.trap.uid,fixture.actor).includes(fixture.attacker.uid));
+    assert.deepEqual(legalTrapTargets(current,fixture.trap.uid,fixture.actor),
+      [fixture.attacker.uid,fixture.target.uid].sort(),
+      spec.name+' follows its field-wide text: both face-up monsters are legal, regardless of physical team');
     assertPrivateHands(current.state);
     assertPublicPayload(current);
     assert.doesNotThrow(()=>tag.assertTagDuel(current.state));
