@@ -151,7 +151,7 @@ function setup(){
   holder(state,0).hand.push(spell);
   const physicalMonsters=MONSTERS.map(spec=>{
     const card=takePhysical(state,spec.seat,spec.id);
-    return {...card,position:spec.faceUp?'atk':'def',faceUp:spec.faceUp};
+    return {id:card.id,uid:card.uid,owner:spec.seat%2,position:spec.faceUp?'atk':'def',faceUp:spec.faceUp,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
   });
   state.core.players[0].monsters.push(physicalMonsters[0],physicalMonsters[2]);
   state.core.players[1].monsters.push(physicalMonsters[1],physicalMonsters[3]);
