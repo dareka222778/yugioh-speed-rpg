@@ -131,6 +131,18 @@ async function submit(record,actor,index,requestId){
   assert.ok(refreshes>=1,'the public duel panel must refresh after the committed action');
   return store.getTag(record.id);
 }
+async function settleResponses(record,suffix){
+  let current=store.getTag(record.id);
+  for(let guard=0;current.state.core.phase==='response';guard++){
+    assert.ok(guard<12,'the Trap response chain must terminate');
+    const actor=tag.tagDecisionMember(current.state).id;
+    const actions=tag.tagActions(current.state,actor);
+    const passIndex=actions.findIndex(action=>action.kind==='pass');
+    assert.ok(passIndex>=0,'the current physical responder must receive a legal pass action');
+    current=await submit(current,actor,passIndex,'m310-'+suffix+'-pass-'+guard);
+  }
+  return current;
+}
 async function rejectInactivePartner(record,actor,partner,index,suffix){
   const forged=interaction(record,partner,index,'m310-'+suffix+'-forged',actor);
   const unchanged=JSON.stringify(record.state);
@@ -250,7 +262,8 @@ test('active seat 0 can activate inactive partner seat 2 Jar of Greed from the s
   assert.deepEqual(tag.tagActions(fixture.record.state,member(2)),[],
     'the inactive physical Trap owner cannot submit the shared-field activation');
   await rejectInactivePartner(fixture.record,actor,member(2),index,'jar');
-  const current=await submit(fixture.record,actor,index,'m310-jar-activate');
+  const activated=await submit(fixture.record,actor,index,'m310-jar-activate');
+  const current=await settleResponses(activated,'jar');
   const state=current.state;
   assert.equal(state.core.phase,'main','Jar of Greed resolves without a legal response');
   assert.deepEqual(tag.tagMemberHand(state,actor).map(card=>card.uid),fixture.activeHandBefore.concat(fixture.activeTop),
