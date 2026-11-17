@@ -160,17 +160,17 @@ async function settleResponses(record,suffix){
 }
 function setup(){
   const ids=[0,1,2,3].map(member);
-  const players=ids.map((id,seat)=>({id,name:'M302 Seat '+seat,cards:deck(seat===2?[JUST_DESSERTS,NORMALS[0].id,NORMALS[1].id]:[])}));
+  const players=ids.map((id,seat)=>({id,name:'M302 Seat '+seat,cards:deck(seat===0?[JUST_DESSERTS,NORMALS[0].id,NORMALS[1].id]:[])}));
   const state=tag.createTagDuel(players,{classic:true,first:1,seed:'m302-just-desserts-discord-team-burn'});
   state.core.turn=3;
   assert.equal(tag.tagDecisionMember(state).id,member(1),'seat 1 must be the active opposing representative');
-  const trapCard=takePhysical(state,2,JUST_DESSERTS);
+  const trapCard=takePhysical(state,0,JUST_DESSERTS);
   const trap={...trapCard,setTurn:0,faceUp:false};
   state.core.players[0].backrow.push(trap);
   const existing=deploy(state,3,NORMALS[0].id);
   const summonCard=ensureInHand(state,1,NORMALS[1].id);
   const before=inventory(state);
-  assert.match(trap.uid,/^m2:/,'the Set Trap retains inactive teammate seat 2 physical ownership');
+  assert.match(trap.uid,/^m0:/,'the Set Trap retains inactive teammate seat 0 physical ownership');
   assert.match(existing.uid,/^m3:/,'the first opposing monster belongs physically to inactive seat 3');
   assert.match(summonCard.uid,/^m1:/,'the second opposing monster belongs physically to active seat 1');
   assertRules(state);
@@ -186,7 +186,7 @@ function setup(){
 test('Just Desserts resolves from the active teammate Discord panel and counts both opposing physical seats',async()=>{
   const fixture=setup();
   let current=fixture.record;
-  const actor=member(0);
+  const actor=member(2);
   assert.equal(tag.tagDecisionMember(current.state).id,member(1),'seat 1 is already the active opponent');
   const summonIndex=tag.tagActions(current.state,member(1)).findIndex(action=>
     action.kind==='summon'&&action.card===fixture.summonCard.uid
@@ -202,7 +202,7 @@ test('Just Desserts resolves from the active teammate Discord panel and counts b
     action.kind==='trap'&&action.card===fixture.trap.uid
   );
   assert.ok(trapIndex>=0,'the active teammate sees the partner-owned Just Desserts response');
-  await rejectInactivePartner(current,actor,member(2),trapIndex);
+  await rejectInactivePartner(current,actor,member(0),trapIndex);
   current=await submit(current,actor,trapIndex,'m302-activate-just-desserts');
   current=await settleResponses(current,'resolve-just-desserts');
   const state=current.state;
