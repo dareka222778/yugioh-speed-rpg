@@ -174,6 +174,11 @@ function register(state,id){
   ).run(id,'m340-guild','m340-channel',null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
   return store.getTag(id);
 }
+function persist(record){
+  database.db.prepare('UPDATE tag_sessions SET state=?,revision=revision+1,updated=? WHERE id=?')
+    .run(JSON.stringify(record.state),Date.now(),record.id);
+  return store.getTag(record.id);
+}
 function setup(){
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M340 Seat '+seat,cards:deck()
@@ -236,7 +241,7 @@ test('partner-owned Theban Nightmare keeps its 1500 ATK bonus in Discord 2v2 onl
   assertRules(record.state);
   assertPrivateHands(record.state);
   assert.doesNotThrow(()=>tag.assertTagDuel(record.state));
-  record=register(record.state,fixture.id);
+  record=persist(record);
   assertPublicATK(record,3000);
 
   // The active teammate, not the inactive physical owner, enters Battle Phase and attacks.
