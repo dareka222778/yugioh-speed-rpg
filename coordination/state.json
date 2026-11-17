@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-17T00:43:44.306Z",
+  "lastActivityAt": "2026-11-17T00:44:57.712Z",
   "nextScheduledAt": "2026-11-16T22:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -4386,7 +4386,7 @@
       "mission": "M286–M289",
       "state": "released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-16T21:30:24-03:00",
-      "endedAt": "2026-11-16T21:43:44.306-03:00",
+      "endedAt": "2026-11-16T21:44:57.712-03:00",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
       "workBranches": [
@@ -4484,13 +4484,75 @@
       "totalBehavioralScenarios": 10,
       "newCertifications": 0,
       "nextTask": "Auxiliar: monitorar CI/soaks de #243–#246 e corrigir somente os quatro arquivos próprios. Work: na próxima janela, verificar resultados finais, reconciliar M231/M232 sem tocar nas reservas e então escolher a próxima família independente; retomar as 31 candidatas somente com revisão individual.",
-      "nextWindow": "2026-11-16T22:30:00-03:00"
+      "nextWindow": "2026-11-16T22:30:00-03:00",
+      "elapsedMinutes": 14.56,
+      "effectiveWorkMinutes": 12,
+      "targetMet": false,
+      "postCheckpointCI": {
+        "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",
+        "workflows": [
+          {
+            "name": "Card batch admission preparation",
+            "run": 43989983993,
+            "status": "in_progress"
+          },
+          {
+            "name": "Card batch fast feedback",
+            "run": 43989983984,
+            "status": "in_progress"
+          },
+          {
+            "name": "Milestone 1000 - certified-card progress and triage",
+            "run": 43989984126,
+            "status": "in_progress"
+          },
+          {
+            "name": "Engine validation",
+            "run": 43989983969,
+            "status": "in_progress"
+          }
+        ],
+        "prs": {
+          "243": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed",
+            "stress": "in_progress",
+            "extendedSoak": "in_progress"
+          },
+          "244": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed",
+            "repeatAcceptance": "passed",
+            "extendedSoak": "in_progress"
+          },
+          "245": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed",
+            "stress": "in_progress",
+            "extendedSoak": "in_progress"
+          },
+          "246": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed",
+            "criticalAcceptance": "in_progress",
+            "extendedSoak": "in_progress"
+          }
+        }
+      }
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261116T213024-0300-M286-M289.json",
-  "lastParallelActivityAt": "2026-11-17T00:43:44.306Z",
+  "lastParallelActivityAt": "2026-11-17T00:44:57.712Z",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
-  "sharedHeadBeforeStateUpdate": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+  "sharedHeadBeforeStateUpdate": "60a723f18481938bfbf0e6165abf683b9c00d70e",
   "endedAt": "2026-11-15T09:52:13-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
@@ -4800,8 +4862,8 @@
   },
   "lastCheckpointAt": "2026-11-15T14:25:21-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
-  "lastRunSummary": "M286–M289: 4 PRs draft (#243–#246), 5 cartas, 10 cenários Discord 2v2; M288 corrigida após falha de expectativa; Card Batch Fast e Milestone 1000 aprovados nos quatro HEADs; Engine Validation/soaks pendentes; zero novas certificações.",
+  "expectedHeadForCoordinationCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
+  "lastRunSummary": "M286–M289: 4 PRs draft (#243–#246), 5 cartas e 10 cenários Discord 2v2. Card Batch Fast, Milestone 1000 e npm test aprovados nos quatro HEADs; stress/acceptance final e Extended Soak pendentes. Nenhuma nova certificação ou alteração de runtime.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
   "catalogAtEnd": {
@@ -5260,7 +5322,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-16T21:43:44.306-03:00",
+  "updatedAt": "2026-11-16T21:44:57.712-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -5991,7 +6053,7 @@
       "mission": "M286–M289",
       "state": "released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-16T21:30:24-03:00",
-      "endedAt": "2026-11-16T21:43:44.306-03:00",
+      "endedAt": "2026-11-16T21:44:57.712-03:00",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
       "workBranches": [
@@ -6000,80 +6062,76 @@
           "branch": "feat/work-m286-cannon-soldier-discord-tribute-2v2-20261116",
           "head": "ffa4f48f6dc23120d9f063f7c3af7e0c123544ad",
           "pr": 243,
-          "baseBranch": "feat/rea-engine-recovery-20261026",
-          "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
           "scope": [
             "tests/tagCannonSoldierDiscordTribute2v2.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci",
-          "priority": "P1 — Discord 2v2 integration; test-only",
           "ci": {
             "cardBatchFast": "success",
             "milestone1000": "success",
             "engineValidation": "in_progress",
             "npmTest": "passed; persisted-duel stress in progress",
             "extendedSoak": "in_progress"
-          }
+          },
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+          "state": "released-to-auxiliary-monitor-ci"
         },
         {
           "mission": "M287",
           "branch": "feat/work-m287-jinzo-discord-trap-negation-2v2-20261116",
           "head": "f78954f5821cd180ef3a66262a0596a125086ff4",
           "pr": 244,
-          "baseBranch": "feat/rea-engine-recovery-20261026",
-          "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
           "scope": [
             "tests/tagJinzoDiscordTrapNegation2v2.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci",
-          "priority": "P1 — Discord 2v2 integration; test-only",
           "ci": {
             "cardBatchFast": "success",
             "milestone1000": "success",
             "engineValidation": "in_progress",
             "npmTest": "passed; repeat acceptance in progress",
             "extendedSoak": "in_progress"
-          }
+          },
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+          "state": "released-to-auxiliary-monitor-ci"
         },
         {
           "mission": "M288",
           "branch": "feat/work-m288-sangan-witch-discord-search-2v2-20261116",
           "head": "173c1942f4927cda54f5462b78dfe4d5c6a13a1a",
           "pr": 245,
-          "baseBranch": "feat/rea-engine-recovery-20261026",
-          "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
           "scope": [
             "tests/tagSanganWitchDiscordSearch2v2.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci",
-          "priority": "P1 — Discord 2v2 integration; test-only",
           "ci": {
             "cardBatchFast": "success",
             "milestone1000": "success",
             "engineValidation": "in_progress",
             "npmTest": "in_progress",
             "extendedSoak": "in_progress"
-          }
+          },
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+          "state": "released-to-auxiliary-monitor-ci"
         },
         {
           "mission": "M289",
           "branch": "feat/work-m289-kuriboh-discord-battle-shield-2v2-20261116",
           "head": "2e4f64de3267b53d12a0aa50f2566df9474afb04",
           "pr": 246,
-          "baseBranch": "feat/rea-engine-recovery-20261026",
-          "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
           "scope": [
             "tests/tagKuribohDiscordBattleShield2v2.test.cjs"
           ],
-          "state": "released-to-auxiliary-monitor-ci",
-          "priority": "P1 — Discord 2v2 integration; test-only",
           "ci": {
             "cardBatchFast": "success",
             "milestone1000": "success",
             "engineValidation": "in_progress",
             "npmTest": "in_progress",
             "extendedSoak": "in_progress"
-          }
+          },
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+          "state": "released-to-auxiliary-monitor-ci"
         }
       ],
       "blocksCompleted": [
@@ -6089,10 +6147,132 @@
       "totalBehavioralScenarios": 10,
       "newCertifications": 0,
       "nextTask": "Auxiliar: monitorar CI/soaks de #243–#246 e corrigir somente os quatro arquivos próprios. Work: na próxima janela, verificar resultados finais, reconciliar M231/M232 sem tocar nas reservas e então escolher a próxima família independente; retomar as 31 candidatas somente com revisão individual.",
-      "nextWindow": "2026-11-16T22:30:00-03:00"
+      "nextWindow": "2026-11-16T22:30:00-03:00",
+      "elapsedMinutes": 14.56,
+      "effectiveWorkMinutes": 12,
+      "targetMet": false,
+      "postCheckpointCI": {
+        "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",
+        "workflows": [
+          {
+            "name": "Card batch admission preparation",
+            "run": 43989983993,
+            "status": "in_progress"
+          },
+          {
+            "name": "Card batch fast feedback",
+            "run": 43989983984,
+            "status": "in_progress"
+          },
+          {
+            "name": "Milestone 1000 - certified-card progress and triage",
+            "run": 43989984126,
+            "status": "in_progress"
+          },
+          {
+            "name": "Engine validation",
+            "run": 43989983969,
+            "status": "in_progress"
+          }
+        ],
+        "prs": {
+          "243": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed",
+            "stress": "in_progress",
+            "extendedSoak": "in_progress"
+          },
+          "244": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed",
+            "repeatAcceptance": "passed",
+            "extendedSoak": "in_progress"
+          },
+          "245": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed",
+            "stress": "in_progress",
+            "extendedSoak": "in_progress"
+          },
+          "246": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "npmTest": "passed",
+            "criticalAcceptance": "in_progress",
+            "extendedSoak": "in_progress"
+          }
+        }
+      }
     }
   ],
   "lastParallelRun": "work-20261116T213024-0300-M286-M289",
   "nextParallelTask": "Auxiliar: monitorar CI/soaks de #243–#246 e corrigir somente os quatro arquivos próprios. Work: na próxima janela, verificar resultados finais, reconciliar M231/M232 sem tocar nas reservas e então escolher a próxima família independente; retomar as 31 candidatas somente com revisão individual.",
-  "nextParallelWindow": "2026-11-16T22:30:00-03:00"
+  "nextParallelWindow": "2026-11-16T22:30:00-03:00",
+  "sharedHeadAfterCheckpointCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
+  "postCheckpointCI": {
+    "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",
+    "workflows": [
+      {
+        "name": "Card batch admission preparation",
+        "run": 43989983993,
+        "status": "in_progress"
+      },
+      {
+        "name": "Card batch fast feedback",
+        "run": 43989983984,
+        "status": "in_progress"
+      },
+      {
+        "name": "Milestone 1000 - certified-card progress and triage",
+        "run": 43989984126,
+        "status": "in_progress"
+      },
+      {
+        "name": "Engine validation",
+        "run": 43989983969,
+        "status": "in_progress"
+      }
+    ],
+    "prs": {
+      "243": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed",
+        "stress": "in_progress",
+        "extendedSoak": "in_progress"
+      },
+      "244": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed",
+        "repeatAcceptance": "passed",
+        "extendedSoak": "in_progress"
+      },
+      "245": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed",
+        "stress": "in_progress",
+        "extendedSoak": "in_progress"
+      },
+      "246": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed",
+        "criticalAcceptance": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    }
+  }
 }

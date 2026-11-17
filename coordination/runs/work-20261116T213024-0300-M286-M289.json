@@ -4,10 +4,10 @@
   "priority": "P1 — ampliar a homologação comportamental pelo handler Discord 2v2 para busca de Cemitério, proteção de dano, Tributo com dano e negação contínua de Armadilhas; manter todas as reservas de terceiros intactas.",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-16T21:30:24-03:00",
-  "endedAt": "2026-11-16T21:43:44.306-03:00",
+  "endedAt": "2026-11-16T21:44:57.712-03:00",
   "timezone": "America/Sao_Paulo",
-  "elapsedMinutes": 13.34,
-  "effectiveWorkMinutes": 10,
+  "elapsedMinutes": 14.56,
+  "effectiveWorkMinutes": 12,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -213,7 +213,7 @@
       "milestoneRun": 43989079015,
       "engineValidation": "in_progress",
       "engineRun": 43989078840,
-      "npmTest": "passed; persisted-duel stress currently running",
+      "npmTest": "passed; persisted-duel stress 50x2 and 100x2 passed; 120s and 600s soaks in progress",
       "extendedSoak": "in_progress"
     },
     "m287": {
@@ -223,7 +223,7 @@
       "milestoneRun": 43989255525,
       "engineValidation": "in_progress",
       "engineRun": 43989255408,
-      "npmTest": "passed; repeat acceptance currently running",
+      "npmTest": "passed; repeat-acceptance16 x5 passed; 600s soak in progress",
       "extendedSoak": "in_progress"
     },
     "m288": {
@@ -233,7 +233,7 @@
       "milestoneRun": 43989527701,
       "engineValidation": "in_progress",
       "engineRun": 43989527670,
-      "npmTest": "in_progress",
+      "npmTest": "passed; persisted-duel stress 50x4 in progress; 600s soak in progress",
       "extendedSoak": "in_progress"
     },
     "m289": {
@@ -243,7 +243,7 @@
       "milestoneRun": 43989531433,
       "engineValidation": "in_progress",
       "engineRun": 43989531292,
-      "npmTest": "in_progress",
+      "npmTest": "passed; critical-acceptance diagnostics in progress; 600s soak in progress",
       "extendedSoak": "in_progress"
     },
     "initialM288Failure": {
@@ -368,5 +368,66 @@
   },
   "nextTask": "Auxiliar: monitorar CI/soaks de #243–#246 e corrigir somente os quatro arquivos próprios. Work: na próxima janela, verificar resultados finais, reconciliar M231/M232 sem tocar nas reservas e então escolher a próxima família independente; retomar as 31 candidatas somente com revisão individual.",
   "nextWindow": "2026-11-16T22:30:00-03:00",
-  "note": "A meta de 60 minutos efetivos não foi atingida; tempo ocioso de CI excluído. Todas as branches são isoladas e baseadas no HEAD compartilhado verificado."
+  "note": "A meta de 60 minutos efetivos não foi atingida; espera ociosa de CI excluída. O npm test passou nos quatro HEADs; os testes de carga e soaks ainda não terminaram.",
+  "sharedHeadAfterCheckpointCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
+  "coordinationRefreshExpectedParent": "60a723f18481938bfbf0e6165abf683b9c00d70e",
+  "postCheckpointCI": {
+    "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",
+    "workflows": [
+      {
+        "name": "Card batch admission preparation",
+        "run": 43989983993,
+        "status": "in_progress"
+      },
+      {
+        "name": "Card batch fast feedback",
+        "run": 43989983984,
+        "status": "in_progress"
+      },
+      {
+        "name": "Milestone 1000 - certified-card progress and triage",
+        "run": 43989984126,
+        "status": "in_progress"
+      },
+      {
+        "name": "Engine validation",
+        "run": 43989983969,
+        "status": "in_progress"
+      }
+    ],
+    "prs": {
+      "243": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed",
+        "stress": "in_progress",
+        "extendedSoak": "in_progress"
+      },
+      "244": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed",
+        "repeatAcceptance": "passed",
+        "extendedSoak": "in_progress"
+      },
+      "245": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed",
+        "stress": "in_progress",
+        "extendedSoak": "in_progress"
+      },
+      "246": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed",
+        "criticalAcceptance": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    }
+  }
 }
