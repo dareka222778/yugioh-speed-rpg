@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -2022,6 +2022,19 @@
       ],
       "state": "reserved",
       "head": "8637493d9d28d89bdfb3503a6237351012a9c20a",
+      "runId": "work-20261117T072813-0300-M319-M320"
+    },
+    {
+      "mission": "M321",
+      "branch": "feat/work-m321-shooting-star-bow-ceal-direct-attack-discord-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "66c930cdc74c7eb6293523fbf3814e622055b3a4",
+      "scope": [
+        "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+      ],
+      "state": "reserved",
+      "priority": "P1 — validar um Equip Spell que reduz ATK e concede ataque direto: o representante ativo deve equipar o monstro fisicamente pertencente ao parceiro, respeitar o turno de instalação e causar dano direto mesmo com monstros adversários, sem conceder ataque direto a monstros não equipados.",
+      "head": "66c930cdc74c7eb6293523fbf3814e622055b3a4",
       "runId": "work-20261117T072813-0300-M319-M320"
     }
   ],
@@ -4635,21 +4648,34 @@
             "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
           ],
           "state": "reserved"
+        },
+        {
+          "mission": "M321",
+          "branch": "feat/work-m321-shooting-star-bow-ceal-direct-attack-discord-2v2-20261117",
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "66c930cdc74c7eb6293523fbf3814e622055b3a4",
+          "scope": [
+            "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+          ],
+          "state": "reserved",
+          "priority": "P1 — validar um Equip Spell que reduz ATK e concede ataque direto: o representante ativo deve equipar o monstro fisicamente pertencente ao parceiro, respeitar o turno de instalação e causar dano direto mesmo com monstros adversários, sem conceder ataque direto a monstros não equipados."
         }
       ],
       "scope": [
         "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
-        "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
+        "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
+        "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
       ],
       "reservedFiles": [
         "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
-        "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
+        "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
+        "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
       ],
       "priority": "P1 — ampliar a homologação Discord 2v2 de efeitos contínuos já certificados: Maha Vailo deve contar Equip Spells dos dois times sem perder propriedade física; efeitos de contagem tribais/atributos devem refletir o campo e os Cemitérios compartilhados sem vazar mãos/UIDs."
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261117T072813-0300-M319-M320.json",
-  "lastParallelActivityAt": "2026-11-17T07:28:13-03:00",
+  "lastParallelActivityAt": "2026-11-17T07:45:59-03:00",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "8637493d9d28d89bdfb3503a6237351012a9c20a",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -5421,7 +5447,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-17T07:28:13-03:00",
+  "updatedAt": "2026-11-17T07:45:59-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -5643,7 +5669,8 @@
       "sharedHeadAtReservation": "8637493d9d28d89bdfb3503a6237351012a9c20a",
       "reservedFiles": [
         "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
-        "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
+        "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
+        "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
       ],
       "additionalBranches": [
         {
@@ -5656,6 +5683,15 @@
           ],
           "state": "reserved",
           "base": "feat/rea-engine-recovery-20261026"
+        },
+        {
+          "mission": "M321",
+          "branch": "feat/work-m321-shooting-star-bow-ceal-direct-attack-discord-2v2-20261117",
+          "base": "feat/rea-engine-recovery-20261026",
+          "baseSha": "66c930cdc74c7eb6293523fbf3814e622055b3a4",
+          "scope": [
+            "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+          ]
         }
       ],
       "conflictPolicy": "Somente os dois novos arquivos de teste. Não tocar em M305–M318, M231/M232, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, dados dos jogadores, main ou produção."
@@ -6419,16 +6455,28 @@
             "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
           ],
           "state": "reserved"
+        },
+        {
+          "mission": "M321",
+          "branch": "feat/work-m321-shooting-star-bow-ceal-direct-attack-discord-2v2-20261117",
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "66c930cdc74c7eb6293523fbf3814e622055b3a4",
+          "scope": [
+            "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+          ],
+          "state": "reserved",
+          "priority": "P1 — validar um Equip Spell que reduz ATK e concede ataque direto: o representante ativo deve equipar o monstro fisicamente pertencente ao parceiro, respeitar o turno de instalação e causar dano direto mesmo com monstros adversários, sem conceder ataque direto a monstros não equipados."
         }
       ],
       "scope": [
         "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
-        "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
+        "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
+        "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
       ]
     }
   ],
   "lastParallelRun": "work-20261117T072813-0300-M319-M320",
-  "nextParallelTask": "Auxiliar: após publicação, monitorar somente as PRs M319/M320 e corrigir apenas os dois arquivos reservados. Work: concluir os testes, revisar CI/soak, atualizar checkpoint e liberar somente as reservas próprias.",
+  "nextParallelTask": "Auxiliar: monitorar apenas os arquivos reservados M319–M321 e corrigir somente essas branches. Work: finalizar M319–M321, revisar CI/soak, registrar checkpoint e liberar reservas próprias.",
   "nextParallelWindow": "2026-11-17T12:30:00-03:00",
   "sharedHeadAfterCheckpointCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
   "postCheckpointCI": {
