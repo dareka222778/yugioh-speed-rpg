@@ -1,4 +1,20 @@
+# Regras atuais — release 0.8.0
+
+- Novas partidas usam `speed-rpg-v2`: 4000 PV, três zonas de Monstro, três de Magia/Armadilha, Campo separado, decks principais de 20–30 e Adicional de até seis.
+- Mão inicial de quatro; o primeiro jogador não compra nem entra em Batalha no primeiro turno. Não há Fase Principal 2.
+- Limite da mão: sete. Antes de cada compra que ultrapassaria sete, o dono descarta para abrir espaço. A carta do topo não é revelada antes dessa decisão. Compras múltiplas podem exigir várias decisões.
+- Busca, recuperação ou devolução: o efeito resolve e então cada dono descarta o excedente até ficar com sete. A corrente e o turno continuam depois dessas decisões. Se ambos excederem, o jogador de índice zero decide primeiro, seguido do outro. Isso é a convenção explícita da adaptação.
+- A decisão pode pertencer ao oponente do jogador do turno. Prioridade, menus privados, NPC e W.O. seguem quem precisa decidir. Reinícios preservam a continuação e a quantidade de compras pendentes.
+- Sem carta para uma compra obrigatória, perde quem deveria comprar. Não é solicitado descarte inútil se o Deck já estiver vazio. Custos pagos e efeitos já resolvidos não são repetidos.
+- Partidas salvas sob `speed-rpg-v1` (ou sem versão) mantêm suas regras anteriores até terminar; não se altera silenciosamente uma partida em andamento. Para testar sete, abra uma partida nova.
+- Vitórias NPC/diários não entregam cartas. O conjunto inicial escolhido em `/start` e a coleção anterior são preservados. Eventos especiais exigem administrador, pacote explícito, confirmação, prazo, quota e recibo por destinatário.
+- As explicações em português descrevem o código habilitado, não transcrevem texto oficial nem prometem suporte a cartas fora das 130 habilitadas. Arte externa pode continuar em inglês.
+
+---
+
 # Fase 4 — Motor básico 1v1 (v0.6)
+
+> **Observação de versão (2026-10-24):** esta seção é o registro histórico do protótipo v0.6, não uma descrição exaustiva da branch atual. Na branch classic-engine-foundation existem efeitos FLIP, Ignição, Cemitério, destruição em batalha, Armadilhas de Resposta, Magias Rápidas, Jinzo, cartas de busca e duelos NPC de 30 cartas. Veja ENGINE_PROGRESS.md e o capítulo atual do README.md. O jogo continua uma **adaptação própria**, não um simulador integral de torneios.
 
 ## Como jogar
 

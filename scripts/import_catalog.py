@@ -19,6 +19,7 @@ for name in sum(groups.values(),[])+shared+['Sogen','Polymerization','Flame Swor
  if name not in shared+['Sogen','Polymerization','Flame Swordsman']: assert c['monster_type_line'].endswith('/ Normal'),name
  cards.append(dict(id=str(c['password']).zfill(8),konamiId=c['konami_id'],name=c['name']['pt'] or name,englishName=name,kind=c['card_type'].lower(),race=(c.get('monster_type_line') or '').split(' / ')[0] or None,attribute=c.get('attribute'),level=c.get('level'),atk=c.get('atk'),defense=c.get('def'),summary=summary.get(name,'Monstro Normal: sem efeito.'),source=f"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid={c['konami_id']}&request_locale=pt"))
 for c in cards:
+ if c['kind']=='monster': c['monsterType']='fusion' if c['englishName']=='Flame Swordsman' else 'normal'
  if c['englishName']=='Dark Magician':c['id']='46986414'
  if c['englishName'] in ['Blue-Eyes White Dragon','Dark Magician','Red-Eyes Black Dragon']:c['summary']='Monstro Normal: sem efeito. Exige 2 tributos na Invocação-Normal.'
  if c['englishName']=='Sogen':c.update(field=True,summary='Magia de Campo: Guerreiros e Bestas-Guerreiras ganham 200 ATK/DEF.')
@@ -27,7 +28,7 @@ for c in cards:
 lookup={c['englishName']:c['id'] for c in cards}
 decks={k:[{'id':lookup[n],'quantity':2} for n in names]+[{'id':lookup[n],'quantity':1} for n in shared] for k,names in groups.items()}
 header="""// Factual metadata imported by scripts/import_catalog.py. See CARD_SOURCES.md.
-export type Card = { id:string; konamiId:number; name:string; englishName:string; kind:'monster'|'spell'|'trap'; race:string|null; attribute:string|null; level:number|null; atk:number|null; defense:number|null; summary:string; source:string; field?:boolean; fusion?:string[] };
+export type Card = { id:string; konamiId:number; name:string; englishName:string; kind:'monster'|'spell'|'trap'; race:string|null; attribute:string|null; level:number|null; atk:number|null; defense:number|null; summary:string; source:string; monsterType?:'normal'|'effect'|'fusion'; field?:boolean; fusion?:string[] };
 export type StarterItem = { id:string; quantity:number };
 """
 Path('src/cardCatalog.ts').write_text(header+'export const cards: Card[] = '+json.dumps(cards,ensure_ascii=False,indent=2)+';\nexport const starterContents: Record<string, StarterItem[]> = '+json.dumps(decks,indent=2)+';\n',encoding='utf8')

@@ -1,0 +1,38 @@
+name: Engine validation
+on:
+  push:
+    branches: [classic-engine-foundation]
+  pull_request:
+    branches: [main, classic-engine-foundation]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run check:cards
+      - run: npm run audit:history
+      - run: npm run audit:cards:matrix
+      - run: npm run coverage:engine
+      - run: npm run progress
+      - run: npm run audit:engine
+      - run: npm run accept:engine
+      - run: npm run audit:tag
+      - run: npm run audit:tag-sessions
+      - run: npm run audit:tag-classic
+      - run: npm run audit:tag-classic-sessions
+      - run: npm run audit:tag-training
+      - run: node scripts/render-previews.cjs artifacts/previews
+      - name: Publicar prévias visuais
+        uses: actions/upload-artifact@v4
+        with:
+          name: speed-rpg-visual-previews
+          path: artifacts/previews
+          if-no-files-found: error
+          retention-days: 14

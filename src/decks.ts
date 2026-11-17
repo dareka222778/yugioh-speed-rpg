@@ -1,8 +1,9 @@
+import {RULES_PROFILE} from './rulesProfile';
 import {db,getPlayer,getCollection,grantStarterCards} from './database';
 import {getCard} from './collection';
 import {starterContents} from './cardCatalog';
 import {isStarterDeck} from './starterDecks';
-export const DECK_RULES={min:20,max:30,copies:3,slots:3} as const;
+export const DECK_RULES={min:RULES_PROFILE.mainDeckMin,max:RULES_PROFILE.mainDeckMax,copies:RULES_PROFILE.copiesPerCard,slots:3} as const;
 export type DeckItem={card_key:string;quantity:number};
 export type Deck={discord_id:string;slot:number;name:string;revision:number;active:number;items:DeckItem[];errors:string[];total:number;extraTotal:number};
 // Additive tables only: collection quantities and player data are never moved or consumed.
@@ -17,13 +18,13 @@ db.exec(`CREATE TABLE IF NOT EXISTS decks (
  PRIMARY KEY(discord_id,slot,card_key),FOREIGN KEY(discord_id,slot) REFERENCES decks(discord_id,slot) ON DELETE CASCADE);`);
 function slotCheck(slot:number){if(!Number.isInteger(slot)||slot<1||slot>3)throw new Error('Escolha um espaço de 1 a 3.');}
 export function validateDeck(items:DeckItem[],owned:DeckItem[]) {
- const errors:string[]=[];const total=items.filter(c=>!getCard(c.card_key)?.fusion).reduce((sum,c)=>sum+c.quantity,0);const seen=new Set<string>();const extraTotal=items.filter(c=>getCard(c.card_key)?.fusion).reduce((n,c)=>n+c.quantity,0);if(extraTotal>6)errors.push('Deck Adicional: máximo de 6 cartas.');
- if(total<20||total>30)errors.push(`Use 20 a 30 cartas (atual: ${total}).`);
+ const errors:string[]=[];const total=items.filter(c=>!getCard(c.card_key)?.fusion).reduce((sum,c)=>sum+c.quantity,0);const seen=new Set<string>();const extraTotal=items.filter(c=>getCard(c.card_key)?.fusion).reduce((n,c)=>n+c.quantity,0);if(extraTotal>RULES_PROFILE.extraDeckMax)errors.push(`Deck Adicional: máximo de ${RULES_PROFILE.extraDeckMax} cartas.`);
+ if(total<RULES_PROFILE.mainDeckMin||total>RULES_PROFILE.mainDeckMax)errors.push(`Use 20 a 30 cartas (atual: ${total}).`);
  for(const item of items){
   const card=getCard(item.card_key);const have=owned.find(c=>c.card_key===item.card_key)?.quantity??0;
   if(!card)errors.push(`Carta fora do catálogo: ${item.card_key}.`);
   if(seen.has(item.card_key))errors.push(`Carta repetida em registros separados: ${item.card_key}.`);seen.add(item.card_key);
-  if(!Number.isInteger(item.quantity)||item.quantity<1||item.quantity>3)errors.push(`Máximo de 3 cópias por carta: ${card?.name??item.card_key}.`);
+  if(!Number.isInteger(item.quantity)||item.quantity<1||item.quantity>RULES_PROFILE.copiesPerCard)errors.push(`Máximo de 3 cópias por carta: ${card?.name??item.card_key}.`);
   if(item.quantity>have)errors.push(`Você possui apenas ${have} cópia(s) de ${card?.name??item.card_key}.`);
  }
  return {total,extraTotal,errors};
@@ -62,7 +63,7 @@ export const changeDeck=db.transaction((owner:string,slot:number,cardId:string,d
  if(quantity<0)throw new Error('Não há essa quantidade no deck.');
  if(quantity>3)throw new Error('Máximo de 3 cópias da mesma carta.');
  if(quantity>(getCollection(owner).find(c=>c.card_key===cardId)?.quantity??0))throw new Error('Você não possui cópias suficientes dessa carta.');
- if(getCard(cardId)?.fusion?deck.extraTotal+delta>6:deck.total+delta>30)throw new Error(getCard(cardId)?.fusion?'Deck Adicional: máximo de 6 cartas.':'O deck pode ter no máximo 30 cartas.');
+ if(delta>0&&(getCard(cardId)?.fusion?deck.extraTotal+delta>RULES_PROFILE.extraDeckMax:deck.total+delta>RULES_PROFILE.mainDeckMax))throw new Error(getCard(cardId)?.fusion?`Deck Adicional: máximo de ${RULES_PROFILE.extraDeckMax} cartas.`:'O deck pode ter no máximo 30 cartas.');
  if(quantity===0)db.prepare('DELETE FROM deck_cards WHERE discord_id=? AND slot=? AND card_key=?').run(owner,slot,cardId);
  else db.prepare('INSERT INTO deck_cards VALUES(?,?,?,?) ON CONFLICT(discord_id,slot,card_key) DO UPDATE SET quantity=excluded.quantity').run(owner,slot,cardId,quantity);
  const valid=rawDeck(owner,slot).errors.length===0;

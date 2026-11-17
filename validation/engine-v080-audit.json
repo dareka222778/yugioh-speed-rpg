@@ -1,0 +1,20 @@
+{
+  "scope": "Local isolated engine; not hosting or Discord latency",
+  "deterministicReplay": true,
+  "replayDigest": "3bdb61aba1feb711b73ed1a71ea8995ac68f10f2043f45a2ff476c540c4f4c49",
+  "games": 1000,
+  "moves": 63120,
+  "serializedRestores": 4388,
+  "completed": 1000,
+  "cardIntegrity": "all physical identities preserved",
+  "elapsedMs": 10244.2,
+  "decisionMs": {
+    "median": 0.114,
+    "p95": 0.224,
+    "max": 4.021
+  },
+  "reasons": {
+    "pontos de vida": 996,
+    "não conseguiu comprar uma carta": 4
+  }
+}

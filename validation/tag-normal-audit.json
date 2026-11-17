@@ -1,0 +1,12 @@
+{
+  "scope": "Phase 6 isolated Normal-monster 2v2 laboratory; no human Discord match",
+  "games": 100,
+  "completed": 100,
+  "moves": 4317,
+  "serializedRestores": 284,
+  "cardConservation": true,
+  "replayDigest": "44a755f40b795eb582fc1bcbac7189e04f308096961cbbbc114387f4c905d3b1",
+  "reasons": {
+    "pontos de vida": 100
+  }
+}

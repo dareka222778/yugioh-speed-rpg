@@ -1,3 +1,23 @@
+> **0.17.1 — alvos e correntes:** Magias Rápidas compartilham seleção e resolução, com regressões de perda de alvo, custos e restauração. 130 cartas jogáveis; catálogo histórico separado. Veja [RELEASE_0_17_1.md](RELEASE_0_17_1.md).
+
+> **0.17.0 — Fase 3:** importador histórico offline, 1962 identidades observadas até 01/10/2004, linha de produtos e reprodução sem rede a partir de projeção factual preservada. As 130 cartas jogáveis continuam separadas; zero novas cartas habilitadas ou concedidas pela importação. Veja [HISTORICAL_IMPORT.md](HISTORICAL_IMPORT.md) e [RELEASE_0_17_0.md](RELEASE_0_17_0.md). A completude histórica e a revisão da fase 2 continuam abertas.
+
+> **0.16.3 — efeitos persistentes e exceções:** regressões dedicadas para os cinco equipamentos, três campos e duas exceções existentes. Corrige a mensagem de Campo destruído em resposta e recusa metadados persistidos malformados. Sem habilitar cartas, alterar regras ou redesenhar a arena. Veja [RELEASE_0_16_3.md](RELEASE_0_16_3.md).
+
+> **0.16.2 — continuidade da auditoria:** reaproveita a melhoria de IA e a matriz da 0.16.1. Unifica a cautela contra defesas ocultas na declaração e repetição do ataque; corrige o texto de timing FLIP; acrescenta cinco cenários de cartas às referências de certificação. Veja [RELEASE_0_16_2.md](RELEASE_0_16_2.md). Mantém 130 cartas e a arena original. A observação histórica sobre indisponibilidade no Botkeep não se aplica à instância verificada do Bot-Hosting.net.
+
+> **0.16.0 — Speed RPG Clássico v1:** novas partidas usam mão de seis, descarte somente na Fase Final do próprio turno e Adicional de até cinco cartas. Compras/buscas/devoluções não são bloqueadas pelo limite de mão. Partidas anteriores mantêm seu perfil salvo. Arena 1v1 preservada. Veja [entrega](RELEASE_0_16_0.md) e [roteiro consolidado](ROADMAP_CLASSIC.md). Os marcos abaixo são históricos.
+
+> **0.15.1 — equipes clássicas e treino solo:** `/dupla convidar` cria uma partida entre quatro pessoas, com decks próprios ou emprestados; `/dupla treino` coloca você e Yugi contra Kaiba e Joey. Há efeitos, correntes, mãos/Adicionais individuais, salvamento e recuperação de arena. Sem alterar coleção ou economia. As 130 cartas são o escopo atual; homologação humana e aceitação visual ainda precisam ser concluídas. Regras em [PHASE_6.md](PHASE_6.md), entrega em [RELEASE_0_15_0.md](RELEASE_0_15_0.md).
+
+> **0.10.0 — fase 6 iniciada:** `/dupla simular` exercita quatro bots em um laboratório 2v2 com monstros normais. Não inicia partidas humanas nem altera sua coleção. Escopo e próximos gates em [PHASE_6.md](PHASE_6.md). O 1v1 mantém 130 cartas e a arena original.
+
+> **0.9.0 — comandos azuis:** perfil acessível, coleção com resumo, ficha de carta compartilhada e guia privado em `/ajuda` e `/regras`. A arena permanece intacta. Veja [RELEASE_0_9_0.md](RELEASE_0_9_0.md).
+
+> **0.8.1 — gate técnico da engine:** `npm run accept:engine` verifica regras, retomada e o roteamento real dos componentes antes de liberar o trabalho nos comandos. O “92%” antigo fica somente no histórico. Aceite humano e 2v2 têm critérios separados.
+
+> **Atualização 0.8.0:** regras novas `speed-rpg-v2`, mão de sete com compra interrompível, eventos administrativos, decks revisados e textos operacionais em português. Leia [RELEASE_0_8_0.md](RELEASE_0_8_0.md) para testes, compatibilidade e homologação pendente. Os percentuais antigos de marcos não medem prontidão de lançamento.
+
 # Yu-Gi-Oh! Speed RPG
 
 Bot de Discord para um RPG de cartas inspirado em Speed Duel.
@@ -12,15 +32,15 @@ Bot de Discord para um RPG de cartas inspirado em Speed Duel.
 
 ## Rodando localmente
 
-1. Instale Node.js 20+.
+1. Instale Node.js 22.x (a versão usada no host e no CI).
 2. Copie `.env.example` para `.env`.
 3. Preencha `DISCORD_TOKEN` e `DISCORD_CLIENT_ID`.
-4. Rode `npm install`.
+4. Rode `npm ci`.
 5. Rode `npm run dev`.
 
 > Nunca envie seu token do Discord para ninguém e nunca coloque o `.env` no GitHub.
 
-## Próximas etapas
+## Plano inicial histórico (não é a numeração atual das fases)
 
 1. Importador de cartas Speed Duel / primeira geração.
 2. Coleção e editor de deck.
@@ -47,7 +67,7 @@ Bot de Discord para um RPG de cartas inspirado em Speed Duel.
 ### Atualizar no Botkeep
 
 1. Faça um backup de `data/` (SQLite e retratos); não use instalação limpa nem apague dados.
-2. Na aba **GitHub**, atualize os arquivos a partir de `main`.
+2. Na aba **GitHub**, confirme a branch de implantação e sincronize `classic-engine-foundation` para receber as versões 0.16.x. Não use `main` por hábito sem verificar a versão/commit exibidos.
 3. Reinicie usando `npm run build && npm start`. Um simples Redeploy pode não buscar os arquivos novos.
 4. Use `/perfil`, personalize e reinicie novamente para verificar persistência.
 
@@ -136,3 +156,89 @@ Próximas etapas são loja e mercado/expansões, e 2v2 após estabilizar o 1v1. 
 Falhas transitórias de DNS/conexão (`ENOTFOUND`, `EAI_AGAIN`, resets, timeout e HTTP 502/503/504) aguardam dentro do processo e repetem após 5, 10, 20 e depois 30 segundos. O login usa um Client novo a cada tentativa, pois discord.js destrói o Client quando o login falha. O registro dos comandos também tenta novamente após falhas transitórias, sem bloquear o cliente já conectado. Token inválido, permissões e erros desconhecidos não entram nessa repetição. Os logs informam apenas operação, código do erro e intervalo, sem corpo de requisição ou credenciais.
 
 Isso evita um ciclo de encerrar/recompilar o bot por uma falha temporária. Não altera DNS do servidor, não ignora TLS e não resolve uma indisponibilidade persistente da rede da hospedagem. Considere o bot conectado somente após o log `online como ...`, e os novos comandos disponíveis após o log de registro.
+
+## Engine clássica — marco de efeitos (branch `classic-engine-foundation`)
+
+Este marco amplia o motor antes de fechar os decks e retratos definitivos dos duelistas. **Não indica suporte integral ao anime ou ao TCG.** O formato adaptado mantém 4000 PV, 3 zonas de monstro, 3 zonas de Magia/Armadilha e 20–30 cartas no Deck Principal, sem Skills.
+
+### Efeitos de monstro efetivamente habilitados
+
+| Carta | Evento | Operação |
+| --- | --- | --- |
+| Man-Eater Bug (54652250) | FLIP | Escolhe um monstro de qualquer lado e destrói |
+| Hane-Hane (07089711) | FLIP | Devolve um monstro ao dono |
+| Magician of Faith (31560081) | FLIP | Recupera Magia do próprio Cemitério |
+| Mask of Darkness (28933734) | FLIP | Recupera Armadilha do próprio Cemitério |
+| Skelengel (60694662) | FLIP | Compra uma carta; falha obrigatória pode causar derrota |
+| Cannon Soldier (11384280) | Ignição | Tributa um monstro (inclusive si mesmo) como custo para causar 500 de dano |
+
+Os alvos são selecionados na ativação, antes da janela de resposta; efeitos não selecionam automaticamente novos alvos depois da resposta. Custos de Tributo são pagos antes da corrente, não reembolsáveis se o efeito não resolver. Em batalha, efeitos FLIP são ativados após o cálculo de dano, inclusive quando o monstro é destruído pelo combate.
+
+### Como experimentar no Discord
+
+Use **`/duelo laboratorio`** com um perfil válido. A partida virtual inclui onze monstros de efeito clássicos (os seis anteriores, Sangan, Bruxa da Floresta Negra, Jinzo, Ventríloco Misterioso e Tomate Místico), além de Bloqueador de Magia, Sete Ferramentas do Bandido, Pote da Ganância, Raigeki, Tufão Espacial Místico, Campo e Polimerização; mantém abertura de Fusão para demonstração. Nenhuma carta é adicionada ou removida da coleção. O comando antigo **`/duelo treino_fusao`** continua disponível com esse mesmo baralho de laboratório.
+
+Para instalar as alterações no bot hospedado, atualize o código da branch aprovada, compile e reinicie o processo, e registre os novos comandos slash no Discord. Commits no GitHub não atualizam automaticamente uma instância em execução.
+
+### Escopo pendente
+
+Ainda faltam diversas outras famílias clássicas de efeitos (sobretudo efeitos rápidos de monstros, casos complexos de corrente, regras de simultaneidade e suporte às cartas restantes). Gatilhos do Cemitério, Magias Rápidas, custos, Armadilhas de Resposta e efeitos contínuos possuem apenas um primeiro conjunto de implementações auditadas. A IA de duelo usa heurísticas e não substitui uma implementação completa das regras. Antes de migrar esta branch para `main`, executar `npm ci`, `npm run check`, `npm test` e aceitar manualmente um duelo com dois clientes Discord, incluindo alvos, cartas ocultas e efeitos em combate.
+
+### Acompanhamento da engine e do próximo layout
+
+O escopo de cada fase e as porcentagens fundamentadas por entrega estão em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md). Após `npm run build`, use `npm run progress` para mostrar percentual concluído/restante da engine e do padrão visual dos comandos, sem redesenhar o campo, além da validação dos decks próprios dos NPCs.
+
+A versão atual incorpora Sangan e Bruxa da Floresta Negra: ao irem **do campo para o Cemitério**, podem buscar um monstro elegível no Deck com ATK/DEF até 1500, com limitação por nome e bloqueio temporário de ativação dos efeitos do card buscado. Há testes de busca depois da corrente, Tributo, batalha, proprietário verdadeiro e privacidade da escolha.
+
+### Efeito contínuo: Jinzo
+
+O Jinzo com face para cima bloqueia a ativação de Armadilhas de ambos os jogadores e nega efeitos de Armadilha no campo durante a resolução de correntes. Seu bloqueio é recalculado conforme o estado do campo; monstros virados para baixo não o aplicam, e a remoção de Jinzo devolve acesso às Armadilhas. O laboratório pode testar esse caso sem conceder cartas. A base está em `src/monsterEffects.ts`, a execução em `src/duelEngine.ts` e os cenários em `tests/classicContinuousEffects.test.cjs`.
+
+### Armadilhas de Resposta e Invocações (marco de engine)
+
+A engine agora admite **Bloqueador de Magia** (custo de descarte, negar ativação de Magia), **Sete Ferramentas do Bandido** (pagar 1000 PV, negar ativação de Armadilha) e correntes que negam outros elos. Armadilhas comuns não podem ser acorrentadas à Velocidade 3, e os custos permanecem pagos quando um elo é negado. **Ventríloco Misterioso** dispara efeito de ganho de PV quando outro monstro é Invocado por Invocação-Normal ou Virar, sem disparar ao próprio entrar em campo ou a um simples virar durante batalha. Os três cards entram no laboratório virtual sem alterar o inventário real.
+
+O escopo e o percentual atualizado por entregas estão documentados em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md). Validação: `tests/classicCounterTraps.test.cjs`, `tests/classicSummonTriggers.test.cjs` e `npm run progress` no GitHub Actions.
+
+### Destruição por batalha e Invocação-Especial do Deck
+
+**Tomate Místico** (83011277) é a primeira carta do laboratório que pode recrutar outro monstro diretamente do Deck quando é destruído por batalha e enviado ao Cemitério. Só permite monstros TREVAS com até 1500 ATK; o jogador também pode recusar. A engine diferencia esta causa de destruição da causada por custos/efeitos e considera o verdadeiro dono da carta. Os cenários em `tests/classicBattleRecruiters.test.cjs` são executados automaticamente. O marco atual está em **85% dos marcos da engine / 15% restantes** e **47% do padrão visual dos comandos / 53% restantes**, conforme [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md).
+
+## Campo original e identidade compartilhada dos comandos — 2026-10-24
+
+A reformulação funcional já está disponível na branch de desenvolvimento:
+
+- **Arena de duelo original preservada:** tabuleiro âmbar anterior à reformulação azul, com três zonas, PV, cartas ocultas, compras e mão privada. O visual do campo não será redesenhado como parte da padronização dos comandos.
+- Retratos e fotos de perfil ficam nos painéis apropriados de personagem e duelista. Cartas ocultas não são incluídas no conjunto público de artes nem divulgadas pelo renderer da arena.
+- A mão pode ser explorada **carta por carta**: imagem grande, nome, ATK/DEF, resumo de efeito, controles anterior/próxima, menu de ações legais da carta e retorno ao painel. A permissão é verificada pelo servidor.
+- Galeria dos NPCs e editor de decks agora usam a mesma linguagem azul. Os decks **próprios** de Joey, Yugi e Kaiba têm **30 cartas** cada, e somente essas cartas aparecem no portal dos duelistas.
+- **Pote da Ganância**, **Raigeki** e **Tufão Espacial Místico** foram acrescentados ao motor e ao laboratório. Tufão é uma Magia Rápida com janela de resposta, e destruir uma Magia/Armadilha já ativada não nega automaticamente seu efeito.
+- O GitHub Actions executa os testes e gera prévias PNG da arena pública e privada, ficha de duelista, carta jogável individual, editor e ficha azul do deck próprio. As prévias são anexadas como artefato **speed-rpg-visual-previews** à execução do workflow de validação. As imagens do catálogo podem aparecer como placeholders na geração offline; a execução normal utiliza o cache de arte de cartas.
+
+### Validação, limitações e implantação
+
+Em [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md) os percentuais representam pesos fixos de entregas e não um percentual de todas as regras TCG/anime. Testes automatizados verificam componentes, regras, partidas simuladas, conservação de cartas, privacidade de mão/deck e renderização, mas **não substituem testes humanos no Discord** e não validam todas as cartas existentes.
+
+A hospedagem não é atualizada por estes commits: é necessário implantar a branch validada, disponibilizar as dependências do projeto, registrar os comandos slash e reiniciar o bot. Não faça merge na main sem validar as interfaces em um servidor de teste.
+
+### Portal de duelistas centrado no nosso RPG
+
+A galeria `/npc ver` passou a mostrar **somente o baralho que o oponente realmente utiliza**: 30 cartas principais e uma carta adicional quando houver Fusão disponível. O jogador pode abrir cada carta para ver imagem, tipo, ATK/DEF e seu efeito adaptado. Os botões e menus não mostram baralhos alternativos. A prontidão dos decks dos NPCs pode ser verificada com `node scripts/duel-readiness.cjs --require-complete`.
+
+As artes são apenas apresentação: os efeitos e a legalidade das cartas continuam determinados exclusivamente pelo nosso motor. Nenhuma coleção é modificada pela navegação. O arquivo [NPC_GALLERY.md](NPC_GALLERY.md) documenta apenas os fluxos atuais.
+
+### Carta individual do seu próprio deck e Força do Espelho
+
+O editor `/deck ver` passou a oferecer **Ver carta** para abrir uma tela própria de 1200×720 pixels: nome, arte, atributo/tipo, ATK/DEF, efeito, quantidade que você possui e quantidade incluída no deck. Botões **Anterior**, **Próxima** e **Voltar ao deck** permitem navegar sem sair do painel privado e verificam dono/revisão para não executar cliques antigos.
+
+**Força do Espelho** (44095762) entrou como carta com efeito real: reage à declaração de ataque, destrói os monstros do adversário em Ataque e pode ser respondida ou negada em corrente. Destruição por efeito não conta como destruição por batalha. O Joey pode utilizá-la em seu próprio deck e entregá-la como recompensa na primeira vitória. Veja `tests/classicMirrorForce.test.cjs` para os casos de interação e `tests/deckRenderer.test.cjs` para a ficha azul.
+
+## Restauração do campo e expansão dos efeitos — atualização
+
+**A arena de duelo permanece com o layout original âmbar.** Restauramos `src/duelRenderer.ts` à versão anterior à reformulação Azure; o fluxo de efeitos, a mão privada e os componentes interativos não foram revertidos junto com a aparência. Existe um teste automático para impedir que mudanças futuras voltem a introduzir os elementos visuais removidos no campo. O azul é uma **identidade comum dos comandos**, sobretudo galeria, editor de decks, inspeção de cartas e painéis informativos.
+
+A engine avançou na interação de correntes e invocações com mais quatro cartas reais: **Livro da Lua**, **Tributo Torrencial**, **Armadura Sakuretsu** e **Buraco Armadilha Sem Fundo**. Magias Rápidas baixadas no turno atual não podem ser ativadas; as Armadilhas reagem às janelas corretas de ataque ou Invocação; Invocação-Fusão, Monster Reborn e Tomate Místico abrem janelas após Invocações-Especiais. O Sem Fundo destrói e **bane** o monstro, respeitando seu dono original e sem disparar efeitos de Cemitério.
+
+O laboratório com `/duelo laboratorio` foi expandido para **24 cartas** para experimentar os novos efeitos. Os decks próprios dos NPCs continuam com 30 cartas, e seus controles de IA conseguem utilizar as novas respostas. Acompanhamento: [ENGINE_PROGRESS.md](ENGINE_PROGRESS.md), [CLASSIC_ENGINE.md](CLASSIC_ENGINE.md).
+
+**Os marcos atuais não equivalem à implementação completa do TCG:** ainda faltam sistemas avançados de timing, novas famílias de cartas, regras simultâneas/SEGOC e revisão humana da jogabilidade hospedada.
