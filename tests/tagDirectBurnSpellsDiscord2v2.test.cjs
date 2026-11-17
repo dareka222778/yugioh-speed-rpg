@@ -162,8 +162,8 @@ function register(id,state){
 }
 function setup(seat,id,seed){
   const ids=[0,1,2,3].map(member);
-  const players=ids.map((id,physicalSeat)=>({
-    id,name:'M312 Seat '+physicalSeat,
+  const players=ids.map((memberId,physicalSeat)=>({
+    id:memberId,name:'M312 Seat '+physicalSeat,
     cards:deck(physicalSeat===seat?[id]:[])
   }));
   let state=tag.createTagDuel(players,{classic:true,first:0,seed});
