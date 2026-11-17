@@ -1987,6 +1987,18 @@
         "npmTest": "in_progress",
         "extendedSoak": "in_progress"
       }
+    },
+    {
+      "mission": "M305",
+      "branch": "feat/work-m305-sanctuary-sky-fairy-damage-2v2-20261117",
+      "head": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+      "scope": [
+        "tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs"
+      ],
+      "state": "reserved",
+      "priority": "P1 — validar The Sanctuary in the Sky no Discord 2v2: dano de batalha zero apenas para o controlador de cada monstro Fada envolvido, em ambos os times, sem impedir a destruição; controle negativo com monstro não-Fada, rotação física, UIDs, privacidade e regras 20–30/6/3+3/Extra 5."
     }
   ],
   "handoffRequest": {
@@ -3104,7 +3116,7 @@
       }
     ]
   },
-  "nextWorkAt": "2026-11-16T22:30:00-03:00",
+  "nextWorkAt": "2026-11-17T08:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -4547,10 +4559,33 @@
           }
         }
       }
+    },
+    {
+      "runId": "work-20261117T063037-0300-M305",
+      "owner": "Work",
+      "mission": "M305",
+      "priority": "P1 — validar The Sanctuary in the Sky no Discord 2v2: dano de batalha zero apenas para o controlador de cada monstro Fada envolvido, em ambos os times, sem impedir a destruição; controle negativo com monstro não-Fada, rotação física, UIDs, privacidade e regras 20–30/6/3+3/Extra 5.",
+      "state": "active",
+      "startedAt": "2026-11-17T06:30:37-03:00",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+      "workBranches": [
+        {
+          "mission": "M305",
+          "branch": "feat/work-m305-sanctuary-sky-fairy-damage-2v2-20261117",
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+          "scope": [
+            "tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs"
+          ],
+          "state": "active",
+          "priority": "P1 — validar The Sanctuary in the Sky no Discord 2v2: dano de batalha zero apenas para o controlador de cada monstro Fada envolvido, em ambos os times, sem impedir a destruição; controle negativo com monstro não-Fada, rotação física, UIDs, privacidade e regras 20–30/6/3+3/Extra 5."
+        }
+      ]
     }
   ],
-  "lastParallelCheckpoint": "coordination/runs/work-20261116T213024-0300-M286-M289.json",
-  "lastParallelActivityAt": "2026-11-17T00:44:57.712Z",
+  "lastParallelCheckpoint": "coordination/runs/work-20261117T063037-0300-M305.json",
+  "lastParallelActivityAt": "2026-11-17T06:30:37-03:00",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "60a723f18481938bfbf0e6165abf683b9c00d70e",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -4862,8 +4897,8 @@
   },
   "lastCheckpointAt": "2026-11-15T14:25:21-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
-  "lastRunSummary": "M286–M289: 4 PRs draft (#243–#246), 5 cartas e 10 cenários Discord 2v2. Card Batch Fast, Milestone 1000 e npm test aprovados nos quatro HEADs; stress/acceptance final e Extended Soak pendentes. Nenhuma nova certificação ou alteração de runtime.",
+  "expectedHeadForCoordinationCommit": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+  "lastRunSummary": "M305 registrado: The Sanctuary in the Sky, teste de integração Discord 2v2 em branch isolada; escopo único tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
   "catalogAtEnd": {
@@ -5322,7 +5357,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-16T21:44:57.712-03:00",
+  "updatedAt": "2026-11-17T06:30:37-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -5511,6 +5546,24 @@
         "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs"
       ],
       "conflictPolicy": "Somente arquivo de teste novo e independente. Não tocar em M215–M220, M225–M227, M231/M232, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "runId": "work-20261117T063037-0300-M305",
+      "reservationId": "work-20261117T063037-0300-M305-M305",
+      "owner": "Work",
+      "mission": "M305",
+      "priority": "P1 — validar The Sanctuary in the Sky no Discord 2v2: dano de batalha zero apenas para o controlador de cada monstro Fada envolvido, em ambos os times, sem impedir a destruição; controle negativo com monstro não-Fada, rotação física, UIDs, privacidade e regras 20–30/6/3+3/Extra 5.",
+      "state": "active",
+      "startedAt": "2026-11-17T06:30:37-03:00",
+      "branch": "feat/work-m305-sanctuary-sky-fairy-damage-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+      "reservedFiles": [
+        "tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente o novo arquivo de teste M305. Não tocar em M231–M304, em arquivos de runtime, catálogo, certificados, banco persistente, inventários, main ou produção; não alterar reservas de terceiros."
     }
   ],
   "previousCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
@@ -5941,6 +5994,24 @@
         "tests/tagKuribohDiscordBattleShield2v2.test.cjs"
       ],
       "conflictPolicy": "Somente o arquivo de teste desta branch. Não tocar em M231–M285, outras reservas, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+    },
+    {
+      "runId": "work-20261117T063037-0300-M305",
+      "reservationId": "work-20261117T063037-0300-M305-M305",
+      "owner": "Work",
+      "mission": "M305",
+      "priority": "P1 — validar The Sanctuary in the Sky no Discord 2v2: dano de batalha zero apenas para o controlador de cada monstro Fada envolvido, em ambos os times, sem impedir a destruição; controle negativo com monstro não-Fada, rotação física, UIDs, privacidade e regras 20–30/6/3+3/Extra 5.",
+      "state": "active",
+      "startedAt": "2026-11-17T06:30:37-03:00",
+      "branch": "feat/work-m305-sanctuary-sky-fairy-damage-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+      "reservedFiles": [
+        "tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente o novo arquivo de teste M305. Não tocar em M231–M304, em arquivos de runtime, catálogo, certificados, banco persistente, inventários, main ou produção; não alterar reservas de terceiros."
     }
   ],
   "lastIndependentRun": "work-20261116T213024-0300-M286-M289",
@@ -6210,11 +6281,25 @@
           }
         }
       }
+    },
+    {
+      "runId": "work-20261117T063037-0300-M305",
+      "owner": "Work",
+      "mission": "M305",
+      "priority": "P1 — validar The Sanctuary in the Sky no Discord 2v2: dano de batalha zero apenas para o controlador de cada monstro Fada envolvido, em ambos os times, sem impedir a destruição; controle negativo com monstro não-Fada, rotação física, UIDs, privacidade e regras 20–30/6/3+3/Extra 5.",
+      "state": "active",
+      "startedAt": "2026-11-17T06:30:37-03:00",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+      "branch": "feat/work-m305-sanctuary-sky-fairy-damage-2v2-20261117",
+      "scope": [
+        "tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs"
+      ]
     }
   ],
-  "lastParallelRun": "work-20261116T213024-0300-M286-M289",
-  "nextParallelTask": "Auxiliar: monitorar CI/soaks de #243–#246 e corrigir somente os quatro arquivos próprios. Work: na próxima janela, verificar resultados finais, reconciliar M231/M232 sem tocar nas reservas e então escolher a próxima família independente; retomar as 31 candidatas somente com revisão individual.",
-  "nextParallelWindow": "2026-11-16T22:30:00-03:00",
+  "lastParallelRun": "work-20261117T063037-0300-M305",
+  "nextParallelTask": "Auxiliar: monitorar somente a CI de M305 após a publicação e corrigir apenas seu arquivo de teste. Work: concluir homologação de The Sanctuary in the Sky, fechar o checkpoint, liberar M305 e continuar para a próxima família independente.",
+  "nextParallelWindow": "2026-11-17T08:30:00-03:00",
   "sharedHeadAfterCheckpointCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
   "postCheckpointCI": {
     "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",

@@ -1,0 +1,35 @@
+{
+  "runId": "work-20261117T063037-0300-M305",
+  "owner": "Work",
+  "mission": "M305",
+  "priority": "P1 — validar The Sanctuary in the Sky no Discord 2v2: dano de batalha zero apenas para o controlador de cada monstro Fada envolvido, em ambos os times, sem impedir a destruição; controle negativo com monstro não-Fada, rotação física, UIDs, privacidade e regras 20–30/6/3+3/Extra 5.",
+  "state": "active",
+  "startedAt": "2026-11-17T06:30:37-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "7fc0f62348a0b8eed4d855b49ca3feee683199d8",
+  "branch": "feat/work-m305-sanctuary-sky-fairy-damage-2v2-20261117",
+  "scope": [
+    "tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs"
+  ],
+  "reservedFiles": [
+    "tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs"
+  ],
+  "conflictPolicy": "Somente o novo arquivo de teste M305. Não tocar em M231–M304, em arquivos de runtime, catálogo, certificados, banco persistente, inventários, main ou produção; não alterar reservas de terceiros.",
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e do checkpoint M286–M289.",
+    "Verificação do HEAD compartilhado por comparação condicional; nenhuma divergência em relação ao SHA 7fc0f623.",
+    "Auditoria de branches/PRs M290–M304 e CI; identificadas falhas de fixture em #251 e #257 e enviados diagnósticos sem alterar branches alheias."
+  ],
+  "catalogAtStart": {
+    "sharedCertified": 969,
+    "remainingTo1000": 31,
+    "developmentCertified": 1014,
+    "newCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false
+}
