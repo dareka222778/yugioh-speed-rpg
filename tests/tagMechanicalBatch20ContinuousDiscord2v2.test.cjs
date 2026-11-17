@@ -20,7 +20,7 @@ const engine=require('../dist/duelEngine');
 const {rulesFor}=require('../dist/rulesProfile');
 
 const HARPIE_LADY_1='91932350';
-const HARPies_PET_DRAGON='52040216';
+const HARPIES_PET_DRAGON='52040216';
 const SWAMP_BATTLEGUARD='40453765';
 const LAVA_BATTLEGUARD='20394040';
 const AMAZONESS_PALADIN='47480070';
@@ -29,10 +29,11 @@ const DARK_MAGICIAN_GIRL='38033121';
 const DARK_MAGICIAN='46986414';
 const SPEAR_DRAGON='31553716';
 const BLUE_EYES='89631139';
+const CELTIC_GUARDIAN='91152256';
 
 const REQUIRED=[
   [HARPIE_LADY_1,'Harpie Lady 1'],
-  [HARPies_PET_DRAGON,"Harpie's Pet Dragon"],
+  [HARPIES_PET_DRAGON,"Harpie's Pet Dragon"],
   [SWAMP_BATTLEGUARD,'Swamp Battleguard'],
   [LAVA_BATTLEGUARD,'Lava Battleguard'],
   [AMAZONESS_PALADIN,'Amazoness Paladin'],
@@ -40,13 +41,14 @@ const REQUIRED=[
   [DARK_MAGICIAN_GIRL,'Dark Magician Girl'],
   [DARK_MAGICIAN,'Dark Magician'],
   [SPEAR_DRAGON,'Spear Dragon'],
-  [BLUE_EYES,'Blue-Eyes White Dragon']
+  [BLUE_EYES,'Blue-Eyes White Dragon'],
+  [CELTIC_GUARDIAN,'Celtic Guardian']
 ];
 for(const [id,name] of REQUIRED){
   assert.equal(getPlayableCard(id)?.englishName,name,'M320 card identity must be canonical: '+id);
   assert.equal(getCardStatus(id)?.stage,'certified','M320 only adds Discord integration for already certified cards');
 }
-for(const id of [HARPIE_LADY_1,HARPies_PET_DRAGON,SWAMP_BATTLEGUARD,LAVA_BATTLEGUARD,AMAZONESS_PALADIN,DARK_MAGICIAN_GIRL]){
+for(const id of [HARPIE_LADY_1,HARPIES_PET_DRAGON,SWAMP_BATTLEGUARD,LAVA_BATTLEGUARD,AMAZONESS_PALADIN,DARK_MAGICIAN_GIRL]){
   assert.equal(getMonsterEffect(id)?.trigger,'continuous');
   assert.equal(getMonsterEffect(id)?.operation.kind,'continuous');
 }
@@ -214,10 +216,10 @@ test('Harpie Lady 1 and Harpie\'s Pet Dragon apply global WIND and name-count mo
   const state=createState([
     [HARPIE_LADY_1,SPEAR_DRAGON],
     [BLUE_EYES],
-    [HARPies_PET_DRAGON],
+    [HARPIES_PET_DRAGON],
     [HARPIE_LADY_1,SPEAR_DRAGON]
   ],'m320-harpie-pet-dragon');
-  const pet=placeMonster(state,2,HARPies_PET_DRAGON);
+  const pet=placeMonster(state,2,HARPIES_PET_DRAGON);
   const allyWind=placeMonster(state,0,SPEAR_DRAGON);
   const opposingHarpie=placeMonster(state,3,HARPIE_LADY_1);
   const opposingWind=placeMonster(state,3,SPEAR_DRAGON);
@@ -263,10 +265,10 @@ test('Amazoness Paladin counts only its own shared team after a Discord Normal S
     [AMAZONESS_PALADIN],
     [],
     [AMAZONESS_ARCHER],
-    [AMAZONESS_ARCHER]
+    [CELTIC_GUARDIAN]
   ],'m320-amazoness-paladin');
   const partnerArcher=placeMonster(state,2,AMAZONESS_ARCHER);
-  const opposingArcher=placeMonster(state,3,AMAZONESS_ARCHER);
+  const opposingNormal=placeMonster(state,3,CELTIC_GUARDIAN);
   const paladinPhysical=takePhysical(state,0,AMAZONESS_PALADIN);
   holder(state,0).hand.push(paladinPhysical);
   const before=inventory(state);
@@ -274,11 +276,11 @@ test('Amazoness Paladin counts only its own shared team after a Discord Normal S
   current=await summonViaDiscord(current,member(0),paladinPhysical.uid,'amazoness');
   let livePaladin=current.state.core.players[0].monsters.find(card=>card.uid===paladinPhysical.uid);
   let livePartner=current.state.core.players[0].monsters.find(card=>card.uid===partnerArcher.uid);
-  const liveOpponent=current.state.core.players[1].monsters.find(card=>card.uid===opposingArcher.uid);
+  const liveOpponent=current.state.core.players[1].monsters.find(card=>card.uid===opposingNormal.uid);
   assert.equal(engine.atk(livePaladin,current.state.core),1900,
     'Paladin counts itself and its partner-owned Amazoness Archer for +200 ATK');
   assert.equal(engine.atk(liveOpponent,current.state.core),1400,
-    'the opposing Archer is excluded from the source team count');
+    'an opposing Normal Monster is excluded from the source team count');
   livePartner.faceUp=false;
   livePartner.position='def';
   current=persistState(current);
@@ -287,7 +289,7 @@ test('Amazoness Paladin counts only its own shared team after a Discord Normal S
     'a face-down partner Amazoness no longer contributes to the count');
   const rendered=assertPublicPayload(current);
   assert.ok(rendered.includes('ATQ 1800'));
-  assert.ok(!rendered.includes(AMAZONESS_ARCHER),
+  assert.ok(!rendered.includes('Amazoness Archer'),
     'the public field must not reveal the identity of the face-down partner monster');
   assertPrivateHands(current.state);
   assertRules(current.state);
