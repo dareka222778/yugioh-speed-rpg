@@ -52,7 +52,7 @@ test('M282 certified Mystic Tomato recruiter and physical Deck fixtures',()=>{
 });
 
 function member(seat){return 'm282-seat-'+seat;}
-function deckFor(seat,includeOwnerTarget){
+function deckFor(seat,includeActiveTarget){
   const special=seat===0?[CANNON_SOLDIER]:seat===2?[MYSTIC_TOMATO,...(includeOwnerTarget?[SANGAN]:[])]:seat===3?[AXE_RAIDER]:[];
   const ids=[...special,...fillerIds.slice(0,20-special.length)];
   assert.equal(ids.length,20,'each physical participant must have a 20-card Deck');
@@ -182,7 +182,8 @@ function setup(scenario,includeOwnerTarget){
   const before=inventory(state);
   assert.match(tomato.uid,/^m2:/);
   assert.match(attacker.uid,/^m3:/);
-  assert.match(teammateCandidate.uid,/^m0:/);
+  assert.match(partnerCandidate.uid,/^m2:/);
+  if(activeCandidate)assert.match(activeCandidate.uid,/^m0:/);
   assertRules(state);
   assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
@@ -191,7 +192,7 @@ function setup(scenario,includeOwnerTarget){
   database.db.prepare(
     'INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)'
   ).run(id,guild,channel,null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
-  return {id,actor,before,tomato,attacker,ownerCandidate,teammateCandidate,record:store.getTag(id)};
+  return {id,actor,before,tomato,attacker,activeCandidate,partnerCandidate,record:store.getTag(id)};
 }
 function assertFinal(fixture,state){
   assertConserved(state,fixture.before);
@@ -237,47 +238,47 @@ async function chooseRecruit(fixture,record,suffix){
   const actor=tag.tagDecisionMember(record.state).id;
   assert.equal(actor,member(0));
   const actions=tag.tagActions(record.state,actor);
-  const ownerIndex=actions.findIndex(action=>action.kind==='choose'&&action.target===fixture.ownerCandidate.uid);
-  assert.ok(ownerIndex>=0,'the recruit menu must expose Sangan from the Tomato physical owner Deck');
-  assert.ok(!actions.some(action=>action.kind==='choose'&&action.target===fixture.teammateCandidate.uid),
-    'the recruit menu must not expose Cannon Soldier from the active teammate private Deck');
-  return submit(record,actor,ownerIndex,'m282-'+suffix+'-recruit');
+  const activeIndex=actions.findIndex(action=>action.kind==='choose'&&action.target===fixture.activeCandidate.uid);
+  assert.ok(activeIndex>=0,'the recruit menu must expose Sangan from the active representative physical Deck');
+  assert.ok(!actions.some(action=>action.kind==='choose'&&action.target===fixture.partnerCandidate.uid),
+    'the recruit menu must not expose Cannon Soldier from the inactive partner private Deck');
+  return submit(record,actor,activeIndex,'m282-'+suffix+'-recruit');
 }
 
-test('battle-destroyed partner-owned Mystic Tomato recruits from its own physical Deck, not the active teammate Deck',async()=>{
-  const fixture=setup('owner-physical-deck-positive',true);
+test('battle-destroyed partner-owned Mystic Tomato recruits from the active representative physical Deck',async()=>{
+  const fixture=setup('active-representative-deck-positive',true);
   const ownBefore=fixture.record.state.core.players[0].lp;
   const opposingBefore=fixture.record.state.core.players[1].lp;
-  let current=await battleAndResolve(fixture,'owner-physical-deck-positive');
+  let current=await battleAndResolve(fixture,'active-representative-deck-positive');
   assert.equal(current.state.core.players[0].lp,ownBefore-300);
   assert.equal(current.state.core.players[1].lp,opposingBefore);
   assert.ok(current.state.core.players[0].grave.some(card=>card.uid===fixture.tomato.uid));
-  current=await chooseTomatoTrigger(fixture,current,'owner-physical-deck-positive');
-  current=await chooseRecruit(fixture,current,'owner-physical-deck-positive');
-  const summoned=current.state.core.players[0].monsters.find(card=>card.uid===fixture.ownerCandidate.uid);
+  current=await chooseTomatoTrigger(fixture,current,'active-representative-deck-positive');
+  current=await chooseRecruit(fixture,current,'active-representative-deck-positive');
+  const summoned=current.state.core.players[0].monsters.find(card=>card.uid===fixture.activeCandidate.uid);
   assert.ok(summoned,'Sangan must enter the shared team field');
   assert.equal(summoned.id,SANGAN);
   assert.equal(summoned.position,'atk');
   assert.equal(summoned.faceUp,true);
-  assert.match(summoned.uid,/^m2:/,'the recruited card retains physical owner seat 2');
-  assert.ok(current.state.core.players[0].deck.some(card=>card.uid===fixture.teammateCandidate.uid),
-    'the active teammate Cannon Soldier remains in its own physical Deck');
-  assert.ok(!current.state.reserves[2].deck.some(card=>card.uid===fixture.ownerCandidate.uid));
+  assert.match(summoned.uid,/^m0:/,'the recruited card retains active representative physical seat 0');
+  assert.ok(current.state.reserves[2].deck.some(card=>card.uid===fixture.partnerCandidate.uid),
+    'the inactive partner Cannon Soldier remains in its own physical Deck');
+  assert.ok(!current.state.core.players[0].deck.some(card=>card.uid===fixture.activeCandidate.uid));
   assertFinal(fixture,current.state);
 });
 
-test('Tomato does not borrow an eligible DARK monster from its teammate when its own physical Deck has none',async()=>{
-  const fixture=setup('owner-physical-deck-negative',false);
+test('Tomato cannot borrow an eligible DARK monster from the inactive partner when the active representative Deck has none',async()=>{
+  const fixture=setup('active-representative-deck-negative',false);
   const ownBefore=fixture.record.state.core.players[0].lp;
   const opposingBefore=fixture.record.state.core.players[1].lp;
-  const current=await battleAndResolve(fixture,'owner-physical-deck-negative');
+  const current=await battleAndResolve(fixture,'active-representative-deck-negative');
   assert.equal(current.state.core.players[0].lp,ownBefore-300);
   assert.equal(current.state.core.players[1].lp,opposingBefore);
   assert.equal(current.state.core.phase,'battle');
-  assert.equal(current.state.core.choice,undefined,'no legal target in the physical owner Deck means no optional recruiter choice');
+  assert.equal(current.state.core.choice,undefined,'no legal target in the active representative Deck means no optional recruiter choice');
   assert.ok(current.state.core.players[0].grave.some(card=>card.uid===fixture.tomato.uid));
-  assert.ok(current.state.core.players[0].deck.some(card=>card.uid===fixture.teammateCandidate.uid),
-    'the active teammate Deck remains untouched');
+  assert.ok(current.state.reserves[2].deck.some(card=>card.uid===fixture.partnerCandidate.uid),
+    'the inactive partner Deck remains untouched and inaccessible to this effect');
   assert.ok(!current.state.core.players[0].monsters.some(card=>card.id===CANNON_SOLDIER));
   assertFinal(fixture,current.state);
 });
