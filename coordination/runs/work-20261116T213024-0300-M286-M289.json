@@ -1,0 +1,372 @@
+{
+  "runId": "work-20261116T213024-0300-M286-M289",
+  "owner": "Work",
+  "priority": "P1 — ampliar a homologação comportamental pelo handler Discord 2v2 para busca de Cemitério, proteção de dano, Tributo com dano e negação contínua de Armadilhas; manter todas as reservas de terceiros intactas.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-16T21:30:24-03:00",
+  "endedAt": "2026-11-16T21:43:44.306-03:00",
+  "timezone": "America/Sao_Paulo",
+  "elapsedMinutes": 13.34,
+  "effectiveWorkMinutes": 10,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+  "sharedHeadBeforeCheckpointCommit": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+  "mainHeadAtStart": "f78f3080b496d2697072b946088309f36e97b60e",
+  "baseRelationToMain": {
+    "status": "diverged",
+    "sharedAheadOfMain": 599,
+    "mainAheadOfShared": 10
+  },
+  "blocksCompleted": [
+    "M286 — Cannon Soldier: quatro cenários via painel Discord; Tributo de monstro do parceiro, ativação de fonte do parceiro, auto-Tributo com resolução e duas ativações na mesma Main Phase.",
+    "M287 — Jinzo: dois cenários via Discord; Trap suprimida com Jinzo face-up e ativação de Sakuretsu Armor quando Jinzo está face-down.",
+    "M288 — Sangan e Witch of the Black Forest: dois cenários via Discord; filtros de ATK/DEF <=1500, busca apenas no Deck físico do representante ativo e exclusão do Deck privado do parceiro.",
+    "M289 — Kuriboh: dois cenários via Discord; Quick Effect em Damage Calculation, prevenção apenas do dano, destruição preservada e cópia do parceiro inacessível.",
+    "Revisão da primeira CI M288: duas falhas eram somente uma expectativa NaN causada por ler ATK de instância física sem estatísticas de catálogo; fixture corrigida para getPlayableCard e nova CI iniciada.",
+    "Identificada colisão de IDs M284/M285 com missões independentes já usadas em PRs #239/#240; trabalho preservado em M288/M289 e PRs duplicadas #241/#242 fechadas sem merge.",
+    "Solicitado handoff cooperativo em #187/#188 para coordenação compartilhada; nenhum arquivo reservado por M231/M232 foi alterado."
+  ],
+  "cardsCovered": [
+    {
+      "name": "Cannon Soldier",
+      "id": "11384280",
+      "mission": "M286",
+      "scenarios": 4,
+      "certificationIncrement": 0
+    },
+    {
+      "name": "Jinzo",
+      "id": "77585513",
+      "mission": "M287",
+      "scenarios": 2,
+      "certificationIncrement": 0
+    },
+    {
+      "name": "Sangan",
+      "id": "26202165",
+      "mission": "M288",
+      "scenarios": 1,
+      "certificationIncrement": 0
+    },
+    {
+      "name": "Witch of the Black Forest",
+      "id": "78010363",
+      "mission": "M288",
+      "scenarios": 1,
+      "certificationIncrement": 0
+    },
+    {
+      "name": "Kuriboh",
+      "id": "40640057",
+      "mission": "M289",
+      "scenarios": 2,
+      "certificationIncrement": 0
+    }
+  ],
+  "totalCardsCovered": 5,
+  "totalBehavioralScenarios": 10,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "workBranches": [
+    {
+      "mission": "M286",
+      "branch": "feat/work-m286-cannon-soldier-discord-tribute-2v2-20261116",
+      "head": "ffa4f48f6dc23120d9f063f7c3af7e0c123544ad",
+      "pr": 243,
+      "scope": [
+        "tests/tagCannonSoldierDiscordTribute2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed; persisted-duel stress in progress",
+        "extendedSoak": "in_progress"
+      },
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "mission": "M287",
+      "branch": "feat/work-m287-jinzo-discord-trap-negation-2v2-20261116",
+      "head": "f78954f5821cd180ef3a66262a0596a125086ff4",
+      "pr": 244,
+      "scope": [
+        "tests/tagJinzoDiscordTrapNegation2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed; repeat acceptance in progress",
+        "extendedSoak": "in_progress"
+      },
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "mission": "M288",
+      "branch": "feat/work-m288-sangan-witch-discord-search-2v2-20261116",
+      "head": "173c1942f4927cda54f5462b78dfe4d5c6a13a1a",
+      "pr": 245,
+      "scope": [
+        "tests/tagSanganWitchDiscordSearch2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
+      },
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+      "state": "released-to-auxiliary-monitor-ci"
+    },
+    {
+      "mission": "M289",
+      "branch": "feat/work-m289-kuriboh-discord-battle-shield-2v2-20261116",
+      "head": "2e4f64de3267b53d12a0aa50f2566df9474afb04",
+      "pr": 246,
+      "scope": [
+        "tests/tagKuribohDiscordBattleShield2v2.test.cjs"
+      ],
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress"
+      },
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+      "state": "released-to-auxiliary-monitor-ci"
+    }
+  ],
+  "pullRequests": [
+    {
+      "pr": 243,
+      "mission": "M286",
+      "state": "open",
+      "draft": true,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/243"
+    },
+    {
+      "pr": 244,
+      "mission": "M287",
+      "state": "open",
+      "draft": true,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/244"
+    },
+    {
+      "pr": 245,
+      "mission": "M288",
+      "state": "open",
+      "draft": true,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/245"
+    },
+    {
+      "pr": 246,
+      "mission": "M289",
+      "state": "open",
+      "draft": true,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/246"
+    },
+    {
+      "pr": 241,
+      "mission": "superseded M284 duplicate ID",
+      "state": "closed",
+      "merged": false,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/241"
+    },
+    {
+      "pr": 242,
+      "mission": "superseded M285 duplicate ID",
+      "state": "closed",
+      "merged": false,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/242"
+    }
+  ],
+  "supersededBranches": [
+    {
+      "branch": "feat/work-m284-sangan-witch-discord-search-2v2-20261116",
+      "supersededBy": "feat/work-m288-sangan-witch-discord-search-2v2-20261116",
+      "pr": 241
+    },
+    {
+      "branch": "feat/work-m285-kuriboh-discord-battle-shield-2v2-20261116",
+      "supersededBy": "feat/work-m289-kuriboh-discord-battle-shield-2v2-20261116",
+      "pr": 242
+    }
+  ],
+  "ci": {
+    "m286": {
+      "cardBatchFast": "success",
+      "cardBatchRun": 43989078968,
+      "milestone1000": "success",
+      "milestoneRun": 43989079015,
+      "engineValidation": "in_progress",
+      "engineRun": 43989078840,
+      "npmTest": "passed; persisted-duel stress currently running",
+      "extendedSoak": "in_progress"
+    },
+    "m287": {
+      "cardBatchFast": "success",
+      "cardBatchRun": 43989255526,
+      "milestone1000": "success",
+      "milestoneRun": 43989255525,
+      "engineValidation": "in_progress",
+      "engineRun": 43989255408,
+      "npmTest": "passed; repeat acceptance currently running",
+      "extendedSoak": "in_progress"
+    },
+    "m288": {
+      "cardBatchFast": "success",
+      "cardBatchRun": 43989527720,
+      "milestone1000": "success",
+      "milestoneRun": 43989527701,
+      "engineValidation": "in_progress",
+      "engineRun": 43989527670,
+      "npmTest": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "m289": {
+      "cardBatchFast": "success",
+      "cardBatchRun": 43989531303,
+      "milestone1000": "success",
+      "milestoneRun": 43989531433,
+      "engineValidation": "in_progress",
+      "engineRun": 43989531292,
+      "npmTest": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "initialM288Failure": {
+      "run": 43988864120,
+      "conclusion": "failure",
+      "failedTests": 2,
+      "passedTests": 7362,
+      "cause": "expected damage used .atk on a physical instance without catalog stats; fixed in 173c1942f4927cda54f5462b78dfe4d5c6a13a1a"
+    }
+  },
+  "catalogAtEnd": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "remainingTo1000": 31,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "newCertificationsThisRun": 0,
+    "inventoryGranted": 0,
+    "source": "milestone1000-plan.json artifact from workflow run 43989527701"
+  },
+  "handoffRequests": [
+    {
+      "pr": 187,
+      "mission": "M231",
+      "commentId": 6933987036,
+      "status": "requested cooperative handoff for shared coordination file only; no reserved test touched; awaiting response"
+    },
+    {
+      "pr": 188,
+      "mission": "M232",
+      "commentId": 6933987606,
+      "status": "requested cooperative handoff for shared coordination file only; no reserved test touched; awaiting response"
+    }
+  ],
+  "handoffStatus": {
+    "status": "awaiting cooperative response on PRs #187/#188; no conflicting file touched",
+    "runtimeHandoff": "M61/PR #17 remains pending; no runtime file changed"
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "certificatesChanged": false,
+    "persistentDatabaseChanged": false,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "onlyNewTestFilesChanged": true,
+    "isolatedTemporarySQLite": true
+  },
+  "productionAtEnd": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadBeforeCheckpoint": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+    "sharedAheadOfMain": 599,
+    "mainAheadOfShared": 10,
+    "mainWorkflowFiles": [],
+    "sharedWorkflowFiles": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "mainDeploymentWorkflowFound": false,
+    "sharedDeploymentWorkflowFound": false,
+    "deploymentsApi": "request not allowed by GitHub connector",
+    "hosting": "not independently verified",
+    "discordLiveValidation": false,
+    "merge": false,
+    "deploy": false
+  },
+  "scopeReleasedToAuxiliary": {
+    "allowed": [
+      {
+        "mission": "M286",
+        "pr": 243,
+        "branch": "feat/work-m286-cannon-soldier-discord-tribute-2v2-20261116",
+        "files": [
+          "tests/tagCannonSoldierDiscordTribute2v2.test.cjs"
+        ],
+        "permission": "monitor CI and modify only this test file on its own branch"
+      },
+      {
+        "mission": "M287",
+        "pr": 244,
+        "branch": "feat/work-m287-jinzo-discord-trap-negation-2v2-20261116",
+        "files": [
+          "tests/tagJinzoDiscordTrapNegation2v2.test.cjs"
+        ],
+        "permission": "monitor CI and modify only this test file on its own branch"
+      },
+      {
+        "mission": "M288",
+        "pr": 245,
+        "branch": "feat/work-m288-sangan-witch-discord-search-2v2-20261116",
+        "files": [
+          "tests/tagSanganWitchDiscordSearch2v2.test.cjs"
+        ],
+        "permission": "monitor CI and modify only this test file on its own branch"
+      },
+      {
+        "mission": "M289",
+        "pr": 246,
+        "branch": "feat/work-m289-kuriboh-discord-battle-shield-2v2-20261116",
+        "files": [
+          "tests/tagKuribohDiscordBattleShield2v2.test.cjs"
+        ],
+        "permission": "monitor CI and modify only this test file on its own branch"
+      }
+    ],
+    "prohibited": [
+      "runtime",
+      "catalog batches",
+      "certificates",
+      "player data",
+      "inventories",
+      "persistent database",
+      "main",
+      "merge",
+      "deploy",
+      "third-party reservations"
+    ]
+  },
+  "nextTask": "Auxiliar: monitorar CI/soaks de #243–#246 e corrigir somente os quatro arquivos próprios. Work: na próxima janela, verificar resultados finais, reconciliar M231/M232 sem tocar nas reservas e então escolher a próxima família independente; retomar as 31 candidatas somente com revisão individual.",
+  "nextWindow": "2026-11-16T22:30:00-03:00",
+  "note": "A meta de 60 minutos efetivos não foi atingida; tempo ocioso de CI excluído. Todas as branches são isoladas e baseadas no HEAD compartilhado verificado."
+}
