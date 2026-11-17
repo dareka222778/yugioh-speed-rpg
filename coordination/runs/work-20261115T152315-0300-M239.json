@@ -1,0 +1,148 @@
+{
+  "runId": "work-20261115T152315-0300-M239",
+  "parentRunId": "work-20261115T152315-0300-M237",
+  "owner": "Work principal",
+  "mission": "M239",
+  "priority": "P2 — ampliar a validação 2v2 de inspeção de backrow oculto e preservação de identidade física com Trap Master, sem alterar runtime/catalog/certificados.",
+  "state": "blocked-on-runtime-privacy-handoff",
+  "startedAt": "2026-11-15T15:23:15-03:00",
+  "branch": "feat/work-m239-trap-master-set-backrow-2v2-20261115",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "e2e2a2d773479dd7038c2769134386713e8c8cdc",
+  "conditionalUpdate": "Branch isolada a partir do SHA explícito; somente novo arquivo de teste e registro de execução, sem alterar reservas ativas.",
+  "scope": [
+    "tests/tagClassicTrapMasterHiddenBackrow2v2.test.cjs"
+  ],
+  "reservedFilesUntouched": [
+    "src/monsterEffects.ts",
+    "src/duelEngineCurrent.ts",
+    "src/classicEffects.ts",
+    "src/duelIntegrity.ts",
+    "scripts/mass-certification21.cjs",
+    "src/cardMetadata.ts",
+    "src/effectDefinitions.ts",
+    "src/cardCertifications.ts",
+    "catalog/engine-v9/**",
+    "catalog/batches/admitted.json"
+  ],
+  "targetCard": {
+    "id": "46461247",
+    "konamiId": 4230,
+    "name": "Trap Master",
+    "certifiedInBaseCatalog": true
+  },
+  "behaviorPlan": [
+    "Flip Summon de Trap Master pertencente fisicamente ao parceiro inativo pelo membro ativo.",
+    "Inspeção de Set Trap e Set Spell na backrow compartilhada sem revelar identidade na projeção pública.",
+    "Trap Master pode selecionar Trap da equipe adversária e destrói o UID físico correto.",
+    "Set Spell selecionada permanece na zona original e sua identidade não vaza.",
+    "Field Zone não é elegível para inspeção de Trap.",
+    "Decks 20, mão 6 com descarte no fim, Extra 5, zonas 3+3, 80 UIDs e restauração JSON.",
+    "Armed Ninja usa a mesma inspeção oculta para Spell; Set Trap de tipo incorreto deve permanecer face-down sem revelar seu nome na projeção pública."
+  ],
+  "tests": [
+    "tests/tagClassicTrapMasterHiddenBackrow2v2.test.cjs"
+  ],
+  "completedBlocks": [
+    "Nova suíte 2v2 com duas resoluções: destruição de Trap e retenção de Spell Set de tipo incorreto.",
+    "Ampliei a regressão para Armed Ninja (inspectSetAs=spell) e identifiquei Crimson Ninja e Reaper of the Cards como consumidores do mesmo caminho de inspeção."
+  ],
+  "lastUpdatedAt": "2026-11-15T15:43:09-03:00",
+  "currentHead": "dac05ffdcabbc99e4e36fffab83e9b170ceb0570",
+  "pullRequest": {
+    "number": 195,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/195",
+    "draft": true,
+    "mergeable": false
+  },
+  "ci": {
+    "cardBatchFast": {
+      "status": "success"
+    },
+    "engineValidation": {
+      "status": "failure",
+      "reason": "Trap Master leaves a selected Set Spell untouched and keeps its identity private — assertion at tests/tagClassicTrapMasterHiddenBackrow2v2.test.cjs:188; public projection contains hidden card name."
+    },
+    "tests": {
+      "passed": 7363,
+      "failed": 1,
+      "total": 7364
+    },
+    "extendedSoak": {
+      "status": "in_progress"
+    },
+    "milestone1000": {
+      "status": "success"
+    },
+    "latestHead": "dac05ffdcabbc99e4e36fffab83e9b170ceb0570",
+    "latestRunStatus": "in_progress"
+  },
+  "finding": {
+    "severity": "privacy leak",
+    "evidence": [
+      "src/singleCardOperation.ts:14 logs info.name via service.note",
+      "src/tagDuel.ts:56 copies s.core.log into publicTagDuel"
+    ],
+    "requestedHandoff": "src/singleCardOperation.ts and only if required private log projection",
+    "fixDirection": "private reveal/event for controller or remove hidden card name from public log until private channel exists",
+    "affectedCards": [
+      {
+        "id": "46461247",
+        "name": "Trap Master",
+        "inspectSetAs": "trap"
+      },
+      {
+        "id": "09076207",
+        "name": "Armed Ninja",
+        "inspectSetAs": "spell"
+      },
+      {
+        "id": "14618326",
+        "name": "Crimson Ninja",
+        "inspectSetAs": "trap",
+        "affectedBySamePath": true
+      },
+      {
+        "id": "33066139",
+        "name": "Reaper of the Cards",
+        "inspectSetAs": "trap",
+        "affectedBySamePath": true
+      }
+    ]
+  },
+  "counts": {
+    "sharedCertified": 969,
+    "newlyCertified": 0,
+    "inventoryGranted": 0
+  },
+  "limits": [
+    "Runtime change is blocked by active run work-20261115T142521-0300; handoff requested on PR #192.",
+    "No merge, deploy, or production verification."
+  ],
+  "nextTask": "Obtain explicit handoff for singleCardOperation.ts; implement a private inspection event or safe generic public log, then rerun full Engine Validation and soak.",
+  "release": "Only the new test file is in scope; no runtime/catalog/certificate files modified.",
+  "targetCards": [
+    {
+      "id": "46461247",
+      "name": "Trap Master",
+      "inspectSetAs": "trap"
+    },
+    {
+      "id": "09076207",
+      "name": "Armed Ninja",
+      "inspectSetAs": "spell"
+    },
+    {
+      "id": "14618326",
+      "name": "Crimson Ninja",
+      "inspectSetAs": "trap",
+      "affectedBySamePath": true
+    },
+    {
+      "id": "33066139",
+      "name": "Reaper of the Cards",
+      "inspectSetAs": "trap",
+      "affectedBySamePath": true
+    }
+  ]
+}
