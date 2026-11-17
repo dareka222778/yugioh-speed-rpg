@@ -147,7 +147,7 @@ function setup(){
   const spell=takePhysical(state,0,CHANGE_OF_HEART);
   holder(state,0).hand.push(spell);
   const stolen=takePhysical(state,3,DARK_MAGICIAN);
-  const target={...stolen,position:'atk',faceUp:true};
+  const target={id:stolen.id,uid:stolen.uid,owner:1,position:'atk',faceUp:true,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
   state.core.players[1].monsters.push(target);
   assert.match(spell.uid,/^m0:/);
   assert.match(target.uid,/^m3:/,'the opponent monster must retain physical seat 3 ownership');
