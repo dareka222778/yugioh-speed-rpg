@@ -235,8 +235,8 @@ test('Upstart Goblin draws from the active physical Deck and grants 1000 LP to t
     'the opponent team gains exactly 1000 LP after the active seat draws');
   assert.ok(tag.tagMemberHand(state,actor).some(card=>card.uid===fixture.top.uid&&card.id===fixture.top.id),
     'the exact top UID of the active physical Deck must be drawn');
-  assert.equal(tag.tagMemberHand(state,actor).length,7,
-    'the Main Phase may temporarily exceed six cards; discard is deferred to End Phase');
+  assert.equal(tag.tagMemberHand(state,actor).length,6,
+    'Upstart Goblin replaces itself with one draw; the six-card limit is not checked prematurely');
   assert.ok(!tag.tagActions(state,actor).some(action=>action.kind==='discard'),
     'the hand limit must not force a premature Main Phase discard');
   assert.ok(state.core.players[0].grave.some(card=>card.uid===fixture.spell.uid),
