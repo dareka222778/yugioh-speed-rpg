@@ -53,7 +53,7 @@ test('M282 certified Mystic Tomato recruiter and physical Deck fixtures',()=>{
 
 function member(seat){return 'm282-seat-'+seat;}
 function deckFor(seat,includeActiveTarget){
-  const special=seat===0?[CANNON_SOLDIER]:seat===2?[MYSTIC_TOMATO,...(includeOwnerTarget?[SANGAN]:[])]:seat===3?[AXE_RAIDER]:[];
+  const special=seat===0?[...(includeActiveTarget?[SANGAN]:[])]:seat===2?[MYSTIC_TOMATO,CANNON_SOLDIER]:seat===3?[AXE_RAIDER]:[];
   const ids=[...special,...fillerIds.slice(0,20-special.length)];
   assert.equal(ids.length,20,'each physical participant must have a 20-card Deck');
   assert.equal(new Set(ids).size,20,'each physical Deck must have unique card identities');
@@ -165,20 +165,20 @@ async function settleResponses(record,suffix){
   }
   return current;
 }
-function setup(scenario,includeOwnerTarget){
+function setup(scenario,includeActiveTarget){
   const ids=[0,1,2,3].map(member);
-  const players=ids.map((id,seat)=>({id,name:'M282 Seat '+seat,cards:deckFor(seat,includeOwnerTarget)}));
+  const players=ids.map((id,seat)=>({id,name:'M282 Seat '+seat,cards:deckFor(seat,includeActiveTarget)}));
   const state=tag.createTagDuel(players,{classic:true,first:1,seed:'m282-'+scenario});
   state.core.turn=3;
   const actor=ids[1];
   assert.equal(tag.tagDecisionMember(state).id,actor);
   const tomato=deploy(state,2,MYSTIC_TOMATO,'atk');
   const attacker=deploy(state,3,AXE_RAIDER,'atk');
-  const ownerCandidate=state.reserves[2].deck.find(card=>card.id===SANGAN);
-  const teammateCandidate=state.core.players[0].deck.find(card=>card.id===CANNON_SOLDIER);
-  assert.ok(teammateCandidate,'the active teammate physical Deck deliberately contains a different eligible DARK target');
-  if(includeOwnerTarget)assert.ok(ownerCandidate,'the Tomato physical owner Deck contains Sangan');
-  else assert.equal(ownerCandidate,undefined,'the Tomato physical owner Deck deliberately has no eligible DARK target');
+  const activeCandidate=state.core.players[0].deck.find(card=>card.id===SANGAN);
+  const partnerCandidate=state.reserves[2].deck.find(card=>card.id===CANNON_SOLDIER);
+  assert.ok(partnerCandidate,'the inactive partner physical Deck deliberately contains a different eligible DARK target');
+  if(includeActiveTarget)assert.ok(activeCandidate,'the active representative physical Deck contains Sangan');
+  else assert.equal(activeCandidate,undefined,'the active representative physical Deck deliberately has no eligible DARK target');
   const before=inventory(state);
   assert.match(tomato.uid,/^m2:/);
   assert.match(attacker.uid,/^m3:/);
