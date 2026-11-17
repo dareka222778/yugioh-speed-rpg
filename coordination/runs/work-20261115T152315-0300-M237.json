@@ -1,0 +1,102 @@
+{
+  "runId": "work-20261115T152315-0300-M237",
+  "owner": "Work principal",
+  "mission": "M237",
+  "priority": "P1 — implementar e certificar Arsenal Bug (42364374) com estatísticas condicionais calculadas sobre o campo compartilhado da equipe 2v2, preservando UIDs e zonas físicas.",
+  "state": "blocked-awaiting-catalog-admission-handoff",
+  "startedAt": "2026-11-15T15:23:15-03:00",
+  "branch": "feat/work-m237-arsenal-bug-conditional-insect-stats-2v2-20261115",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "e2e2a2d773479dd7038c2769134386713e8c8cdc",
+  "initialHead": "e2e2a2d773479dd7038c2769134386713e8c8cdc",
+  "currentHead": "d0dfa49cf9b1597c26e8e6ddd048d22179859d88",
+  "conditionalUpdate": "Branch criada a partir do SHA explícito e2e2a2d773479dd7038c2769134386713e8c8cdc; nenhuma escrita na branch compartilhada enquanto run work-20261115T142521-0300 permanecer ativo.",
+  "scope": [
+    "src/continuousRules.ts",
+    "src/continuousEffects.ts",
+    "src/generated/m45-arsenal-bug.ts",
+    "src/cardMetadata.ts",
+    "src/effectDefinitions.ts",
+    "src/conditionalBatch30.ts",
+    "src/cardCertifications.ts",
+    "tests/arsenalBugConditionalInsectStats2v2.test.cjs"
+  ],
+  "reservedFilesUntouched": [
+    "src/monsterEffects.ts",
+    "src/duelEngineCurrent.ts",
+    "src/classicEffects.ts",
+    "src/duelIntegrity.ts",
+    "scripts/mass-certification21.cjs",
+    "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+    "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+    "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+    "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+    "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+    "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs"
+  ],
+  "concurrency": {
+    "activeRun": "work-20261115T142521-0300",
+    "activeSince": "2026-11-15T14:25:21-03:00",
+    "conflictPolicy": "M237 usa somente arquivos fora das reservas M231-M236 e M61/M118/M151/M153. Handoffs de M232-M235 foram solicitados nas PRs #188-#191; nenhum arquivo reservado será alterado sem liberação explícita."
+  },
+  "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5033&request_locale=en",
+  "targetCard": {
+    "id": "42364374",
+    "konamiId": 5033,
+    "name": "Arsenal Bug"
+  },
+  "behaviorPlan": [
+    "Sem outro Inseto face-up na equipe controladora: ATK/DEF 1000.",
+    "Com ao menos outro Inseto face-up de qualquer parceiro: ATK/DEF 2000.",
+    "Contagem restrita ao campo da equipe controladora, não ao adversário.",
+    "Contagem exclui a própria fonte e é limitada a 1 para impedir empilhamento.",
+    "Remoção do último Inseto aliado recalcula imediatamente os atributos."
+  ],
+  "tests": [
+    "tests/arsenalBugConditionalInsectStats2v2.test.cjs"
+  ],
+  "completedBlocks": [
+    "Extensão validada de CountFormula com excludeSource e cap.",
+    "Contagem contínua agora exclui UID da fonte e aplica limite opcional.",
+    "Definição e metadados oficiais de Arsenal Bug adicionados.",
+    "Certificado comportamental vinculado à suíte 2v2."
+  ],
+  "lastUpdatedAt": "2026-11-15T15:43:09-03:00",
+  "pullRequest": {
+    "number": 193,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/193",
+    "draft": true,
+    "mergeable": false
+  },
+  "ci": {
+    "cardBatchFast": {
+      "status": "failure",
+      "reason": "scripts/audit-generated-batches31.cjs:13 — registry 970 vs catalog snapshot 969"
+    },
+    "engineValidation": {
+      "status": "failure",
+      "reason": "same catalog audit; npm test 885/885 passed"
+    },
+    "extendedSoak": {
+      "status": "success"
+    },
+    "milestone1000": {
+      "status": "success",
+      "note": "milestone check passing does not mean the new card was admitted"
+    }
+  },
+  "counts": {
+    "sharedCertified": 969,
+    "branchRegistry": 970,
+    "snapshotCertified": 969,
+    "newlyAdmitted": 0,
+    "inventoryGranted": 0
+  },
+  "limits": [
+    "A card metadata/certificate entry is not an admission; the current catalog snapshot and admitted-batch manifest remain unchanged.",
+    "Active run work-20261115T142521-0300 forbids runtime/catalog/certificate changes; requested handoff on PR #192.",
+    "No merge, deploy, or production verification."
+  ],
+  "nextTask": "After explicit handoff, remove manual registry/certificate bypass and submit Arsenal Bug through catalog/proposed + official admission workflow, then rerun full Engine Validation.",
+  "release": "No shared reservation acquired; branch remains isolated and draft."
+}

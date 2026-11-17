@@ -2,6 +2,7 @@
 // Fingerprints detect changed mechanics; CI must also execute the referenced suites.
 import type {CardCertificate} from './cardRegistry';
 export const cardCertifications:Readonly<Record<string,CardCertificate>>={
+  "42364374":{"fingerprint":"baa83c7fa06ecdc553932e97980d3469da67a4500abccaa38974613d953e68ea","suites":["tests/arsenalBugConditionalInsectStats2v2.test.cjs"]},
   "82828051":{"fingerprint":"9614382d160247ae3cf9ebdbe8b81e490ef140c379829fd1787f8592cddebc62","suites":["tests/positionBatch26.test.cjs"]},
   "59744639":{"fingerprint":"11a51cd1af09184e27ad504a8e34e558a576b83d84850336d64c1c1853d881a4","suites":["tests/positionBatch26.test.cjs"]},
   "83133491":{"fingerprint":"05746cd06be05aac24881a4247c92a1207ef3f9a2122ec0b3ddd02864a8463b8","suites":["tests/positionBatch26.test.cjs"]},
