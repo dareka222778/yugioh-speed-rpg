@@ -252,7 +252,7 @@ async function chooseSearchResult(fixture,record){
 }
 function assertFinal(fixture,record){
   const state=record.state;
-  const expectedDamage=fixture.attacker.atk-fixture.source.atk;
+  const expectedDamage=getPlayableCard(AXE_RAIDER).atk-getPlayableCard(fixture.entry.id).atk;
   assert.equal(state.core.players[0].lp,4000-expectedDamage,
     'ordinary battle damage must be applied to the source team shared LP');
   assert.equal(state.core.players[1].lp,4000,'the attacking team must not receive battle damage');
