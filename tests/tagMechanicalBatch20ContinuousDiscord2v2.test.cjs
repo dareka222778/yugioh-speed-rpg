@@ -201,6 +201,11 @@ async function summonViaDiscord(record,actor,cardUid,suffix){
   return settle(record,'m320-'+suffix);
 }
 function persistState(record){
+  if(record.state.core.teamRotation){
+    record.state.core.teamRotation.active=[...record.state.active];
+    record.state.core.teamRotation.reserves=structuredClone(record.state.reserves);
+    record.state.core.teamRotation.cursor=record.state.cursor;
+  }
   database.db.prepare('UPDATE tag_sessions SET state=?,revision=revision+1,updated=? WHERE id=?')
     .run(JSON.stringify(record.state),Date.now(),record.id);
   return store.getTag(record.id);
