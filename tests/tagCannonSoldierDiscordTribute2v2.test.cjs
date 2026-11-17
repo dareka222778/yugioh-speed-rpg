@@ -145,6 +145,18 @@ async function rejectInactivePartner(record,actor,partner,index,suffix){
   assert.equal(JSON.stringify(store.getTag(record.id).state),unchanged,
     'a rejected partner action must not mutate the persisted duel');
 }
+async function settleResponses(record,suffix){
+  let current=record;
+  for(let guard=0;current.state.core.phase==='response';guard++){
+    assert.ok(guard<40,'the Cannon Soldier response chain must terminate');
+    const actor=tag.tagDecisionMember(current.state).id;
+    const actions=tag.tagActions(current.state,actor);
+    const pass=actions.findIndex(action=>action.kind==='pass');
+    assert.ok(pass>=0,'the current physical responder must receive a legal pass');
+    current=await submit(current,actor,pass,'m286-'+suffix+'-pass-'+guard);
+  }
+  return current;
+}
 function setup(scenario,sourceSeat,tributeSeats){
   const ids=[0,1,2,3].map(member);
   const players=ids.map((id,seat)=>({id,name:'M286 Seat '+seat,cards:deck([CANNON_SOLDIER,NORMAL_FODDER])}));
@@ -176,7 +188,8 @@ async function activate(record,actor,source,tribute,suffix){
   assert.ok(index>=0,'the private Discord menu must offer the exact legal Cannon Soldier Tribute');
   const partner=actor===member(0)?member(2):member(0);
   await rejectInactivePartner(record,actor,partner,index,suffix);
-  return submit(record,actor,index,'m286-'+suffix+'-activate');
+  const current=await submit(record,actor,index,'m286-'+suffix+'-activate');
+  return settleResponses(current,suffix+'-resolve');
 }
 function assertFinal(fixture,record,expectedBurn,sourceRemains){
   const state=record.state;
@@ -223,7 +236,8 @@ test('Cannon Soldier may Tribute itself through Discord and still resolve its ac
   assert.ok(index>=0,'the private menu must offer Cannon Soldier as its own Tribute');
   await rejectInactivePartner(fixture.record,fixture.actor,member(2),index,'self-tribute');
   const current=await submit(fixture.record,fixture.actor,index,'m286-self-tribute-activate');
-  assertFinal(fixture,current,500,false);
+  const settled=await settleResponses(current,'self-tribute-resolve');
+  assertFinal(fixture,settled,500,false);
 });
 test('Cannon Soldier can activate twice through Discord while legal Tributes remain',async()=>{
   const fixture=setup('repeat-activation',0,[0,2]);
