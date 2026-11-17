@@ -180,6 +180,8 @@ function setup(scenario){
   }));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m343-'+scenario});
   state.core.turn=3;
+  assert.equal(state.active[0],0,'seat 0 must be the active physical representative for its team');
+  assert.equal(state.active[1],1,'seat 1 must be the active physical opponent whose Deck is milled');
   assert.equal(tag.tagDecisionMember(state).id,member(0),
     'seat 0 must be the active representative for the source-owning team');
   const source=deployFaceDown(state,2);
