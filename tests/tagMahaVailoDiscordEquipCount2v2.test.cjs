@@ -199,7 +199,8 @@ async function activateEquip(record,actor,spell,maha,suffix){
 async function endTurn(record,actor){
   const index=tag.tagActions(record.state,actor).findIndex(action=>action.kind==='end');
   assert.ok(index>=0,'the active representative must receive End Phase through the private Discord menu');
-  return submitAction(record,actor,index,'m319-end-turn');
+  record=await submitAction(record,actor,index,'m319-end-turn');
+  return settle(record,'m319-end-phase');
 }
 function test(name,fn){
   nodeTest(name,async(...args)=>{
@@ -211,7 +212,8 @@ function test(name,fn){
 test('Maha Vailo counts Equip Spells controlled by both teams through real Discord action menus',async()=>{
   const fixture=setup();
   let record=fixture.record;
-  assert.equal(engine.atk(fixture.maha,record.state.core),1550,'Maha Vailo starts at its printed ATK');
+  const initialMaha=record.state.core.players[0].monsters.find(card=>card.uid===fixture.maha.uid);
+  assert.equal(engine.atk(initialMaha,record.state.core),1550,'Maha Vailo starts at its printed ATK');
   record=await activateEquip(record,member(0),fixture.ownEquip,fixture.maha,'blue');
   const firstAttached=record.state.core.players[0].backrow.find(card=>card.uid===fixture.ownEquip.uid);
   assert.ok(firstAttached,'the active teammate Equip Spell must remain in the blue shared backrow');
