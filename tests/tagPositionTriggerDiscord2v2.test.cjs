@@ -165,6 +165,7 @@ async function choose(f,c,record){
   assert.equal(actor,f.actor);
   const choices=tag.tagActions(record.state,actor).map((a,i)=>({a,i})).filter(x=>x.a.kind==='choose');
   assert.ok(choices.some(x=>x.a.target===f.target.uid),'face-up opposing monster must be selectable');
+  assert.ok(!choices.some(x=>x.a.target===f.hidden.uid),'face-down opposing monster must not be selectable');
   if(c.id===DESERTAPIR)assert.ok(!choices.some(x=>x.a.target===f.source.uid),'Desertapir cannot target itself');
   return submit(record,actor,choices.find(x=>x.a.target===f.target.uid).i,'m344-'+f.key+'-choose');
 }
