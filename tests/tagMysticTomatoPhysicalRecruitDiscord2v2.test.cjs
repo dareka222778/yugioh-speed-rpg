@@ -168,8 +168,12 @@ async function settleResponses(record,suffix){
 function setup(scenario,includeActiveTarget){
   const ids=[0,1,2,3].map(member);
   const players=ids.map((id,seat)=>({id,name:'M282 Seat '+seat,cards:deckFor(seat,includeActiveTarget)}));
-  const state=tag.createTagDuel(players,{classic:true,first:1,seed:'m282-'+scenario});
+  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m282-'+scenario});
+  state.cursor=1;
   state.core.turn=3;
+  state.core.current=1;
+  state.core.priority=1;
+  state.core.teamRotation.cursor=1;
   const actor=ids[1];
   assert.equal(tag.tagDecisionMember(state).id,actor);
   const tomato=deploy(state,2,MYSTIC_TOMATO,'atk');
