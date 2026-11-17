@@ -30,15 +30,28 @@
         "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
       ],
       "state": "reserved"
+    },
+    {
+      "mission": "M321",
+      "branch": "feat/work-m321-shooting-star-bow-ceal-direct-attack-discord-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "66c930cdc74c7eb6293523fbf3814e622055b3a4",
+      "scope": [
+        "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+      ],
+      "state": "reserved",
+      "priority": "P1 — validar um Equip Spell que reduz ATK e concede ataque direto: o representante ativo deve equipar o monstro fisicamente pertencente ao parceiro, respeitar o turno de instalação e causar dano direto mesmo com monstros adversários, sem conceder ataque direto a monstros não equipados."
     }
   ],
   "scope": [
     "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
-    "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
+    "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
+    "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
   ],
   "reservedFiles": [
     "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
-    "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
+    "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
+    "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
   ],
   "handoffRequests": [
     {
@@ -71,7 +84,8 @@
     "Leitura de coordination/state.json e checkpoint M305; HEAD compartilhado confirmado em 8637493d.",
     "Auditoria das PRs #263–#274; reservas M305–M318 identificadas e preservadas.",
     "Solicitado handoff cooperativo em #263, #187 e #188; nenhum arquivo reservado foi tocado.",
-    "Artefato factual milestone1000 revisado: 969 certificadas, 31 restantes; sem certificação automática."
+    "Artefato factual milestone1000 revisado: 969 certificadas, 31 restantes; sem certificação automática.",
+    "Verificado novo HEAD e coordenação após M319/M320; CI ainda em execução. M321 selecionada como família independente de Equip Spell/ataque direto, sem tocar em M194–M198."
   ],
   "ciAtStart": {
     "sharedHead": "no status contexts reported",
@@ -82,5 +96,16 @@
     "deploy": false,
     "liveDiscordValidation": false,
     "hosting": "not independently verified"
-  }
+  },
+  "missions": [
+    {
+      "mission": "M321",
+      "branch": "feat/work-m321-shooting-star-bow-ceal-direct-attack-discord-2v2-20261117",
+      "scope": [
+        "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+      ],
+      "priority": "P1 — validar um Equip Spell que reduz ATK e concede ataque direto: o representante ativo deve equipar o monstro fisicamente pertencente ao parceiro, respeitar o turno de instalação e causar dano direto mesmo com monstros adversários, sem conceder ataque direto a monstros não equipados."
+    }
+  ],
+  "updatedAt": "2026-11-17T07:45:59-03:00"
 }
