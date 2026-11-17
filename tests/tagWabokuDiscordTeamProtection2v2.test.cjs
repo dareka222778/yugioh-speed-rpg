@@ -151,10 +151,10 @@ function setup(scenario){
   const ids=[0,1,2,3].map(member);
   const required=[WABOKU,attackerEntry.id,targetEntry.id];
   const players=ids.map((id,seat)=>({id,name:'M299 Seat '+seat,cards:deck(seat===2?required:[attackerEntry.id,targetEntry.id])}));
-  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m299-'+scenario});
+  const state=tag.createTagDuel(players,{classic:true,first:1,seed:'m299-'+scenario});
   state.core.turn=3;
   const actor=ids[0];
-  assert.equal(tag.tagDecisionMember(state).id,actor,'seat 0 must be the active representative before the turn passes');
+  assert.equal(tag.tagDecisionMember(state).id,member(1),'seat 1 must be the active attacking representative');
   const targetCard=takePhysical(state,2,targetEntry.id);
   const attackerCard=takePhysical(state,1,attackerEntry.id);
   const trapCard=takePhysical(state,2,WABOKU);
@@ -188,13 +188,11 @@ test('active defender activates partner-owned Waboku through Discord and protect
     action.kind==='trap'&&action.card===fixture.trap.uid
   ),'a previously Set Waboku is available in an open Main Phase; this scenario deliberately waits for the attack response');
   let current=fixture.record;
-  const endIndex=tag.tagActions(current.state,member(0)).findIndex(action=>action.kind==='end');
-  assert.ok(endIndex>=0,'the active representative must be able to end the Main Phase');
-  current=await submit(current,member(0),endIndex,'m299-end-main');
-  assert.equal(tag.tagDecisionMember(current.state).id,member(1),'seat 1 becomes the active opposing representative');
+  assert.equal(tag.tagDecisionMember(current.state).id,member(1),'seat 1 is already the active attacking representative');
   const battleIndex=tag.tagActions(current.state,member(1)).findIndex(action=>action.kind==='battle');
-  assert.ok(battleIndex>=0,'the opposing representative must be able to enter the Battle Phase');
+  assert.ok(battleIndex>=0,'the active opponent must be able to enter the Battle Phase');
   current=await submit(current,member(1),battleIndex,'m299-enter-battle');
+  current=await settleResponses(current,'battle-window');
   const attackIndex=tag.tagActions(current.state,member(1)).findIndex(action=>
     action.kind==='attack'&&action.card===fixture.attacker.uid&&action.target===fixture.target.uid
   );
