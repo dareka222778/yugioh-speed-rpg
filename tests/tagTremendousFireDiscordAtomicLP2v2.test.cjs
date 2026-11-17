@@ -171,7 +171,8 @@ async function resolve(lp,id,expected,phase,winner){
   assert.deepEqual(state.core.players.map(player=>player.lp),expected,
     'both teams must receive their complete damage amounts before the victory check');
   assert.equal(state.core.phase,phase);
-  assert.equal(state.core.winner,winner);
+  const expectedWinner=winner==='team0'?state.core.players[0].id:winner;
+  assert.equal(state.core.winner,expectedWinner);
   assert.ok(state.core.players[0].grave.some(card=>card.uid===fixture.spell.uid),
     'the resolving Spell enters the shared Graveyard with its original physical UID');
   for(const seat of [0,1,2,3]){
@@ -198,8 +199,8 @@ test('Tremendous Fire produces a draw when both teams reach zero in the same Dis
   assert.equal(state.core.winner,null,'simultaneous defeat must not become a false sequential winner');
 });
 test('Tremendous Fire awards victory to the team that survives the grouped Discord damage',async()=>{
-  const state=await resolve([501,1000],'m313-survivor',[1,0],'finished',stateTeam0());
-  function stateTeam0(){return state?.core?.players?.[0]?.id??'tag-team-0';}
+  const state=await resolve([501,1000],'m313-survivor',[1,0],'finished','team0');
+  assert.equal(state.core.winner,state.core.players[0].id);
 });
 after(()=>{
   database.db.close();
