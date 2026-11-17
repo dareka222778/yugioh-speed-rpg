@@ -37,7 +37,7 @@ for(const c of CASES){
 const normals=[...new Set(tag.tagNormalCardIds)]
   .filter(id=>![...CASES.map(c=>c.id)].includes(id))
   .map(id=>({id,card:getPlayableCard(id)}))
-  .filter(x=>x.card?.kind==='monster'&&x.card.monsterType==='normal')
+  .filter(x=>x.card?.kind==='monster'&&Number.isInteger(x.card.atk)&&Number.isInteger(x.card.defense))
   .slice(0,10).map(x=>x.id);
 assert.ok(normals.length>=4);
 
