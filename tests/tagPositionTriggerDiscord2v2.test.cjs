@@ -1,5 +1,7 @@
 'use strict';
-const {test,after}=require('node:test');
+const {test:nodeTest,after}=require('node:test');
+process.on('uncaughtExceptionMonitor',error=>console.error('[M344 uncaught] '+(error?.stack||error)));
+function test(name,fn){nodeTest(name,async(...args)=>{try{return await fn(...args);}catch(error){console.error('[M344 diagnostic] '+name+'\\n'+(error?.stack||error));throw error;}});}
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const os=require('node:os');
