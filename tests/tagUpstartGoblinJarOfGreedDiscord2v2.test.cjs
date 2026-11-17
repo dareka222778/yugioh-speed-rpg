@@ -195,14 +195,16 @@ function setupJar(emptyActiveDeck=false){
   assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
   const before=inventory(state);
-  const activeTop=holder(state,0).deck[0]?.uid;
+  const activeDeckBefore=holder(state,0).deck.map(card=>card.uid);
+  const activeHandBefore=tag.tagMemberHand(state,member(0)).map(card=>card.uid);
+  const activeTop=activeDeckBefore[0];
   const partnerDeck=holder(state,2).deck.map(card=>card.uid);
   const partnerHand=tag.tagMemberHand(state,member(2)).map(card=>card.uid);
   const publicState=JSON.stringify(tag.publicTagDuel(state));
   assert.ok(!publicState.includes(JAR_OF_GREED),'the Set Trap identity must remain hidden');
   assert.ok(!publicState.includes(jar.uid),'the Set Trap physical UID must remain hidden');
   const record=registerSession(emptyActiveDeck?'m310-jar-empty':'m310-jar',state);
-  return {jar,activeTop,partnerDeck,partnerHand,before,record};
+  return {jar,activeTop,activeDeckBefore,activeHandBefore,partnerDeck,partnerHand,before,record};
 }
 
 test('Upstart Goblin draws from the active physical Deck and grants 1000 LP to the opposing team through Discord',async()=>{
@@ -251,10 +253,10 @@ test('active seat 0 can activate inactive partner seat 2 Jar of Greed from the s
   const current=await submit(fixture.record,actor,index,'m310-jar-activate');
   const state=current.state;
   assert.equal(state.core.phase,'main','Jar of Greed resolves without a legal response');
-  assert.ok(tag.tagMemberHand(state,actor).some(card=>card.uid===fixture.activeTop),
-    'the active physical seat draws the exact top UID from its own Deck');
-  assert.deepEqual(holder(state,0).deck.map(card=>card.uid),holder(fixture.record.state,0).deck.map(card=>card.uid),
-    'the persisted source snapshot remains immutable');
+  assert.deepEqual(tag.tagMemberHand(state,actor).map(card=>card.uid),fixture.activeHandBefore.concat(fixture.activeTop),
+    'the active physical seat draws exactly the top UID from its own Deck');
+  assert.deepEqual(holder(state,0).deck.map(card=>card.uid),fixture.activeDeckBefore.slice(1),
+    'only the active physical Deck loses its top card');
   assert.deepEqual(holder(state,2).deck.map(card=>card.uid),fixture.partnerDeck,
     'the inactive Trap owner Deck must not supply the draw');
   assert.deepEqual(tag.tagMemberHand(state,member(2)).map(card=>card.uid),fixture.partnerHand,
