@@ -184,9 +184,9 @@ function setup(scenario){
 test('active defender activates partner-owned Waboku through Discord and protects the shared team',async()=>{
   const fixture=setup('partner-owned-trap');
   assert.equal(fixture.record.state.core.players[0].backrow[0].faceUp,false);
-  assert.equal(tag.tagActions(fixture.record.state,fixture.actor).some(action=>
+  assert.ok(tag.tagActions(fixture.record.state,fixture.actor).some(action=>
     action.kind==='trap'&&action.card===fixture.trap.uid
-  ),false,'Waboku must not be activatable before an attack response window');
+  ),'a previously Set Waboku is available in an open Main Phase; this scenario deliberately waits for the attack response');
   let current=fixture.record;
   const endIndex=tag.tagActions(current.state,member(0)).findIndex(action=>action.kind==='end');
   assert.ok(endIndex>=0,'the active representative must be able to end the Main Phase');
