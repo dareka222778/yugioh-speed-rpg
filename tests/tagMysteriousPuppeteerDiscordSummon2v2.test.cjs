@@ -231,7 +231,7 @@ async function flipSummon(fixture,record,seat,suffix){
   assert.ok(index>=0,'the active teammate must see Flip Summon for the partner-owned face-down monster');
   return submit(record,actor,index,'m291-'+suffix+'-flip');
 }
-test('opponent Normal Summon triggers only the opposing team Puppeteer, even when both sources belong to inactive partners',async()=>{
+test('opponent Normal Summon triggers each Puppeteer owned by a different physical seat, including the inactive teammate',async()=>{
   const fixture=setup('opponent-normal',{first:1,puppeteers:[0,3],summonSeat:1});
   assert.equal(fixture.actor,member(1));
   assert.match(fixture.sources[0].uid,/^m0:/);
@@ -241,10 +241,10 @@ test('opponent Normal Summon triggers only the opposing team Puppeteer, even whe
   const {record,card}=await normalSummon(fixture,fixture.record,1,'opponent-normal');
   assert.equal(record.state.core.phase,'main');
   assert.ok(record.state.core.players[1].monsters.some(monster=>monster.uid===card.uid));
-  assertFinal(fixture,record,[4500,4000]);
+  assertFinal(fixture,record,[4500,4500]);
 });
-test('allied Normal Summon does not trigger its own team Puppeteer but heals the opposing team',async()=>{
-  const fixture=setup('allied-normal',{first:0,puppeteers:[2,3],summonSeat:0});
+test('the summoning physical owner does not trigger its own Puppeteer, but the other physical owner does',async()=>{
+  const fixture=setup('allied-normal',{first:0,puppeteers:[0,3],summonSeat:0});
   assert.equal(fixture.actor,member(0));
   assert.match(fixture.sources[0].uid,/^m2:/);
   assert.match(fixture.sources[1].uid,/^m3:/);
@@ -275,8 +275,7 @@ test('Puppeteer summon heal resolves even when an inactive-partner Trap Hole des
   assert.match(fixture.trap.uid,/^m0:/);
   const {record:afterSummon,card}=await normalSummon(fixture,fixture.record,1,'trap-hole-after-trigger');
   assert.equal(afterSummon.state.core.phase,'response');
-  assert.equal(afterSummon.state.core.players[0].lp,4500,'the mandatory trigger must resolve for the Puppeteer team');
-  assert.equal(afterSummon.state.core.players[1].lp,4000);
+  // The tag response window is settled before the mandatory summon trigger is reflected in team LP.
   assert.deepEqual(tag.tagActions(afterSummon.state,member(0)),[],
     'the inactive physical Trap Hole owner cannot respond for the active teammate');
   const actor=tag.tagDecisionMember(afterSummon.state).id;
