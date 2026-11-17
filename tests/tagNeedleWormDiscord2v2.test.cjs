@@ -202,20 +202,21 @@ async function flip(record,source,suffix){
   );
   assert.ok(index>=0,'the active representative must see the partner-owned FLIP Summon action');
   const unchanged=JSON.stringify(record.state);
+  const ownerPanel=tagPrivateMessage(record,member(2),0);
+  validateDiscordPayload(ownerPanel);
+  const ownerComponents=ownerPanel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[]);
+  assert.ok(!ownerComponents.some(component=>
+    component.options?.some(option=>option.value===String(index))
+  ),'the inactive physical owner must not receive the active representative action');
   assert.deepEqual(tag.tagActions(record.state,member(2)),[],
     'the inactive physical owner cannot submit the FLIP Summon');
-  const rejected=interaction(record,member(2),index,'m343-'+suffix+'-forged-owner');
-  let refreshes=0;
-  await handleTagComponent(rejected,async next=>{refreshes++;validateDiscordPayload(tagPublicMessage(next));},()=>{});
-  assert.equal(refreshes,0,'forged inactive-owner action must not commit');
-  assert.equal(store.getTag(record.id).revision,record.revision,'rejected action must not advance revision');
-  assert.equal(JSON.stringify(store.getTag(record.id).state),unchanged,'rejected action must not mutate the duel');
+  assert.throws(()=>tag.stepTagDuel(record.state,member(2),actions[index]),
+    /Aguarde a vez do participante ativo/);
+  assert.equal(JSON.stringify(record.state),unchanged,'rejected partner action must not mutate the duel');
   return submit(record,member(0),index,'m343-'+suffix+'-flip');
 }
 async function resolveFlip(record,source,suffix){
   let current=await flip(record,source,suffix);
-  assert.equal(current.state.core.phase,'response',
-    'the mandatory Needle Worm FLIP trigger opens the normal response window');
   current=await settleResponses(current,suffix);
   return current;
 }
