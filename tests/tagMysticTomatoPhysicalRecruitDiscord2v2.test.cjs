@@ -71,6 +71,14 @@ function takePhysical(state,seat,id){
   }
   throw new Error('M282 physical card missing from seat '+seat+': '+id);
 }
+function ensureInDeck(state,seat,id){
+  const physical=holder(state,seat);
+  const handIndex=physical.hand.findIndex(card=>card.id===id);
+  if(handIndex>=0)physical.deck.push(physical.hand.splice(handIndex,1)[0]);
+  const found=physical.deck.find(card=>card.id===id);
+  assert.ok(found,'expected eligible card must remain in physical Deck '+seat);
+  return found;
+}
 function deploy(state,seat,id,position='atk'){
   const card=takePhysical(state,seat,id);
   const monster={...card,owner:seat%2,position,faceUp:true,
@@ -178,8 +186,8 @@ function setup(scenario,includeActiveTarget){
   assert.equal(tag.tagDecisionMember(state).id,actor);
   const tomato=deploy(state,2,MYSTIC_TOMATO,'atk');
   const attacker=deploy(state,3,AXE_RAIDER,'atk');
-  const activeCandidate=state.core.players[0].deck.find(card=>card.id===SANGAN);
-  const partnerCandidate=state.reserves[2].deck.find(card=>card.id===CANNON_SOLDIER);
+  const activeCandidate=includeActiveTarget?ensureInDeck(state,0,SANGAN):undefined;
+  const partnerCandidate=ensureInDeck(state,2,CANNON_SOLDIER);
   assert.ok(partnerCandidate,'the inactive partner physical Deck deliberately contains a different eligible DARK target');
   if(includeActiveTarget)assert.ok(activeCandidate,'the active representative physical Deck contains Sangan');
   else assert.equal(activeCandidate,undefined,'the active representative physical Deck deliberately has no eligible DARK target');
