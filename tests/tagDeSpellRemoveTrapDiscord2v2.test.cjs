@@ -148,7 +148,7 @@ function register(id,state){
 function setup(sourceId,targetCards,id){
   const ids=[0,1,2,3].map(member);
   const players=ids.map((memberId,seat)=>({
-    id:memberId,name:'M315 Seat '+seat,cards:deck(seat===0?[sourceId]:[])
+    id:memberId,name:'M315 Seat '+seat,cards:deck(seat===0?[sourceId]:seat===3?targetCards.map(target=>target.id):[])
   }));
   const state=tag.createTagDuel(players,{classic:true,first:0,seed:id});
   state.core.turn=3;
