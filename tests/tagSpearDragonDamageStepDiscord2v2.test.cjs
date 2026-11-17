@@ -229,6 +229,7 @@ test('Spear Dragon pierces lower Defense and changes to Defense immediately afte
   const ownBefore=fixture.record.state.core.players[0].lp;
   const opposingBefore=fixture.record.state.core.players[1].lp;
   const current=await playBattle(fixture,'piercing-and-damage-step-position');
+  assert.equal(current.state.core.phase,'battle','the Damage Step has ended but the Battle Phase is still open');
   assert.equal(current.state.core.players[0].lp,ownBefore);
   assert.equal(current.state.core.players[1].lp,opposingBefore-(1900-1200));
   const sourceAfter=current.state.core.players[0].monsters.find(card=>card.uid===fixture.source.uid);
