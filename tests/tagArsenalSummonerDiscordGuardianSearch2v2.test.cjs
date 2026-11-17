@@ -177,6 +177,18 @@ async function rejectInactivePartner(record,actor,partner,index,suffix){
   assert.equal(store.getTag(record.id).revision,record.revision);
   assert.equal(JSON.stringify(store.getTag(record.id).state),unchanged);
 }
+async function settleResponses(record,suffix){
+  let current=record;
+  for(let guard=0;current.state.core.phase==='response';guard++){
+    assert.ok(guard<40,'the flip response chain must terminate');
+    const actor=tag.tagDecisionMember(current.state).id;
+    const actions=tag.tagActions(current.state,actor);
+    const pass=actions.findIndex(action=>action.kind==='pass');
+    assert.ok(pass>=0,'the current physical responder must receive a legal pass');
+    current=await submit(current,actor,pass,'m297-'+suffix+'-pass-'+guard);
+  }
+  return current;
+}
 function setup(){
   const required=[
     [THRONE_GUARDIAN,METAL_GUARDIAN,...EXCLUDED],
@@ -216,7 +228,8 @@ async function flipThroughDiscord(fixture){
   );
   assert.ok(index>=0,'active physical seat 0 must see Flip Summon for partner-owned Arsenal Summoner');
   await rejectInactivePartner(fixture.record,fixture.actor,member(2),index,'flip');
-  const current=await submit(fixture.record,fixture.actor,index,'m297-arsenal-flip');
+  let current=await submit(fixture.record,fixture.actor,index,'m297-arsenal-flip');
+  current=await settleResponses(current,'arsenal-flip');
   assert.equal(current.state.core.phase,'choice','Arsenal Summoner must open a private search choice after flipping face-up');
   return current;
 }
