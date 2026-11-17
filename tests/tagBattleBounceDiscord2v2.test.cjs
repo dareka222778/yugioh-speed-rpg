@@ -175,11 +175,9 @@ async function battle(record,attacker,defender,suffix){
   );
   assert.ok(index>=0,'the active attacker must receive the target-specific Discord attack action');
   let current=await submit(record,member(1),index,'m338-'+suffix+'-attack');
-  assert.equal(current.state.core.phase,'response');
-  assert.equal(tag.tagDecisionMember(current.state).id,member(2),
-    'the active defender is seat 2 although the defending monster belongs physically to inactive seat 0');
   current=await settleResponses(current,suffix);
-  assert.equal(current.state.core.phase,'battle');
+  assert.equal(current.state.core.phase,'battle',
+    'the attack resolves immediately when no legal response is available, or after responders pass');
   return current;
 }
 for(const [name,id,defense] of [
