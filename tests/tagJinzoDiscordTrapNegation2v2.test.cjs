@@ -251,7 +251,11 @@ test('face-up Jinzo removes the opponent Trap action from the real Discord respo
     validateDiscordPayload(panel);
     const components=panel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[]);
     const menu=components.find(component=>component.custom_id==='tag:act:'+current.id+':'+current.revision+':'+actor);
-    if(menu)assert.ok(!menu.options.some(option=>option.value===String(actions.findIndex(action=>action.kind==='trap'&&action.card===fixture.trap.uid))));
+    if(menu){
+      const visibleIndexes=menu.options.map(option=>Number(option.value));
+      assert.ok(!visibleIndexes.some(value=>actions[value]?.kind==='trap'&&actions[value]?.card===fixture.trap.uid),
+        'the private Discord select menu must not expose a suppressed Trap action');
+    }
   }
   current=await settleResponses(current,'jinzo-face-up');
   assertFinal(fixture,current,false);
