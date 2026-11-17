@@ -216,9 +216,9 @@ test('the active teammate can activate a partner-owned Cannon Soldier and Tribut
   assertFinal(fixture,current,500,true);
 });
 test('Cannon Soldier may Tribute itself through Discord and still resolve its activated burn',async()=>{
-  const fixture=setup('self-tribute',0,[0]);
+  const fixture=setup('self-tribute',0,[]);
   const self=fixture.source;
-  fixture.tributes[0]=self;
+  fixture.tributes.push(self);
   const index=cannonIndex(fixture.record,fixture.actor,self,self);
   assert.ok(index>=0,'the private menu must offer Cannon Soldier as its own Tribute');
   await rejectInactivePartner(fixture.record,fixture.actor,member(2),index,'self-tribute');
