@@ -233,7 +233,9 @@ test('Spear Dragon pierces lower Defense and changes to Defense immediately afte
   assert.equal(current.state.core.players[1].lp,opposingBefore-(1900-1200));
   const sourceAfter=current.state.core.players[0].monsters.find(card=>card.uid===fixture.source.uid);
   assert.equal(sourceAfter?.position,'def','Spear Dragon must switch during the Damage Step, not at Battle Phase end');
-  assert.ok(current.state.core.players[1].monsters.some(card=>card.uid===fixture.target.uid));
+  assert.ok(current.state.core.players[1].grave.some(card=>card.uid===fixture.target.uid),
+    'Spear Dragon destroys the lower-DEF target while inflicting piercing damage');
+  assert.ok(!current.state.core.players[1].monsters.some(card=>card.uid===fixture.target.uid));
   assert.ok(current.state.core.players[1].monsters.some(card=>card.uid===fixture.second.uid),
     'the second target remains available, proving the Battle Phase did not end');
   assert.ok(!tag.tagActions(current.state,fixture.actor).some(action=>
