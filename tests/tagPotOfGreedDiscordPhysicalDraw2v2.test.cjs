@@ -139,6 +139,12 @@ function setup(){
   const pot=takePhysical(state,0,POT_OF_GREED);
   holder(state,0).hand.push(pot);
   const physical=holder(state,0);
+  while(physical.hand.length<6){
+    const [card]=physical.deck.splice(0,1);
+    assert.ok(card,'the active physical Deck must provide a card to prepare the six-card hand');
+    physical.hand.push(card);
+  }
+  assert.equal(physical.hand.length,6,'the active physical player begins at the six-card hand limit');
   const topTwo=physical.deck.slice(0,2).map(card=>({uid:card.uid,id:card.id}));
   assert.equal(topTwo.length,2,'the active physical Deck must have two cards available to draw');
   const partnerDeckBefore=holder(state,2).deck.map(card=>card.uid);
