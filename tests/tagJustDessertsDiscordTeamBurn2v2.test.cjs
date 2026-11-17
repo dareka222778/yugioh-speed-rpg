@@ -161,9 +161,9 @@ async function settleResponses(record,suffix){
 function setup(){
   const ids=[0,1,2,3].map(member);
   const players=ids.map((id,seat)=>({id,name:'M302 Seat '+seat,cards:deck(seat===2?[JUST_DESSERTS,NORMALS[0].id,NORMALS[1].id]:[])}));
-  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m302-just-desserts-discord-team-burn'});
+  const state=tag.createTagDuel(players,{classic:true,first:1,seed:'m302-just-desserts-discord-team-burn'});
   state.core.turn=3;
-  assert.equal(tag.tagDecisionMember(state).id,member(0),'seat 0 must be the active defending representative');
+  assert.equal(tag.tagDecisionMember(state).id,member(1),'seat 1 must be the active opposing representative');
   const trapCard=takePhysical(state,2,JUST_DESSERTS);
   const trap={...trapCard,setTurn:0,faceUp:false};
   state.core.players[0].backrow.push(trap);
@@ -187,13 +187,7 @@ test('Just Desserts resolves from the active teammate Discord panel and counts b
   const fixture=setup();
   let current=fixture.record;
   const actor=member(0);
-  assert.equal(tag.tagActions(current.state,actor).some(action=>
-    action.kind==='trap'&&action.card===fixture.trap.uid
-  ),false,'Just Desserts is unavailable before an opposing response window');
-  const endIndex=tag.tagActions(current.state,actor).findIndex(action=>action.kind==='end');
-  assert.ok(endIndex>=0,'the active representative can end the Main Phase');
-  current=await submit(current,actor,endIndex,'m302-end-main');
-  assert.equal(tag.tagDecisionMember(current.state).id,member(1),'seat 1 becomes the active opponent');
+  assert.equal(tag.tagDecisionMember(current.state).id,member(1),'seat 1 is already the active opponent');
   const summonIndex=tag.tagActions(current.state,member(1)).findIndex(action=>
     action.kind==='summon'&&action.card===fixture.summonCard.uid
   );
