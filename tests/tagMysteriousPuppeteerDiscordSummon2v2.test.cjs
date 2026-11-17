@@ -170,7 +170,7 @@ async function settleResponses(record,suffix){
   }
   return current;
 }
-function setup(scenario,{first=1,puppeteers=[],faceDownPuppeteers=[],trapSeat=null,flipSeat=null}={}){
+function setup(scenario,{first=1,puppeteers=[],faceDownPuppeteers=[],trapSeat=null,flipSeat=null,summonSeat=null}={}){
   const required=[[],[],[],[]];
   for(const seat of puppeteers)required[seat].push(PUPPETEER);
   for(const seat of faceDownPuppeteers)required[seat].push(PUPPETEER);
@@ -185,6 +185,7 @@ function setup(scenario,{first=1,puppeteers=[],faceDownPuppeteers=[],trapSeat=nu
   for(const seat of faceDownPuppeteers)sources.push(placeMonster(state,seat,PUPPETEER,false));
   const flipTarget=flipSeat===null?null:placeMonster(state,flipSeat,SUMMONER.id,false);
   const trap=trapSeat===null?null:setTrap(state,trapSeat,TRAP_HOLE);
+  const summonCard=summonSeat===null?null:putInHand(state,summonSeat,SUMMONER.id);
   const before=inventory(state);
   assertRules(state);
   assertPrivateHands(state);
@@ -194,7 +195,7 @@ function setup(scenario,{first=1,puppeteers=[],faceDownPuppeteers=[],trapSeat=nu
   database.db.prepare(
     'INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)'
   ).run(id,guild,channel,null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
-  return {id,actor:tag.tagDecisionMember(state).id,sources,flipTarget,trap,before,record:store.getTag(id)};
+  return {id,actor:tag.tagDecisionMember(state).id,sources,flipTarget,trap,summonCard,before,record:store.getTag(id)};
 }
 function assertFinal(fixture,record,expectedLP){
   const state=record.state;
@@ -210,7 +211,8 @@ function assertFinal(fixture,record,expectedLP){
 async function normalSummon(fixture,record,seat,suffix){
   const actor=member(seat);
   assert.equal(tag.tagDecisionMember(record.state).id,actor);
-  const card=putInHand(record.state,seat,SUMMONER.id);
+  const card=fixture.summonCard;
+  assert.ok(card&&card.id===SUMMONER.id,'the fixture must persist the summoned card in the active physical hand');
   const actions=tag.tagActions(record.state,actor);
   const index=actions.findIndex(action=>
     action.kind==='summon'&&action.card===card.uid&&action.position==='atk'
@@ -230,7 +232,7 @@ async function flipSummon(fixture,record,seat,suffix){
   return submit(record,actor,index,'m291-'+suffix+'-flip');
 }
 test('opponent Normal Summon triggers only the opposing team Puppeteer, even when both sources belong to inactive partners',async()=>{
-  const fixture=setup('opponent-normal',{first:1,puppeteers:[0,3]});
+  const fixture=setup('opponent-normal',{first:1,puppeteers:[0,3],summonSeat:1});
   assert.equal(fixture.actor,member(1));
   assert.match(fixture.sources[0].uid,/^m0:/);
   assert.match(fixture.sources[1].uid,/^m3:/);
@@ -242,7 +244,7 @@ test('opponent Normal Summon triggers only the opposing team Puppeteer, even whe
   assertFinal(fixture,record,[4500,4000]);
 });
 test('allied Normal Summon does not trigger its own team Puppeteer but heals the opposing team',async()=>{
-  const fixture=setup('allied-normal',{first:0,puppeteers:[2,3]});
+  const fixture=setup('allied-normal',{first:0,puppeteers:[2,3],summonSeat:0});
   assert.equal(fixture.actor,member(0));
   assert.match(fixture.sources[0].uid,/^m2:/);
   assert.match(fixture.sources[1].uid,/^m3:/);
@@ -263,12 +265,12 @@ test('opponent Flip Summon triggers a face-up partner-owned Puppeteer',async()=>
   assertFinal(fixture,record,[4500,4000]);
 });
 test('face-down Puppeteer does not trigger when the opponent Normal Summons',async()=>{
-  const fixture=setup('facedown-puppeteer',{first:1,faceDownPuppeteers:[0]});
+  const fixture=setup('facedown-puppeteer',{first:1,faceDownPuppeteers:[0],summonSeat:1});
   const {record}=await normalSummon(fixture,fixture.record,1,'facedown-puppeteer');
   assertFinal(fixture,record,[4000,4000]);
 });
 test('Puppeteer summon heal resolves even when an inactive-partner Trap Hole destroys the summoned monster',async()=>{
-  const fixture=setup('trap-hole-after-trigger',{first:1,puppeteers:[0],trapSeat:0});
+  const fixture=setup('trap-hole-after-trigger',{first:1,puppeteers:[0],trapSeat:0,summonSeat:1});
   assert.match(fixture.sources[0].uid,/^m0:/);
   assert.match(fixture.trap.uid,/^m0:/);
   const {record:afterSummon,card}=await normalSummon(fixture,fixture.record,1,'trap-hole-after-trigger');
