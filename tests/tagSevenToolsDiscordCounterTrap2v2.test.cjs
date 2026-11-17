@@ -22,6 +22,7 @@ const {rulesFor}=require('../dist/rulesProfile');
 const SEVEN_TOOLS='03819470';
 const TORRENTIAL='53582587';
 const POT_OF_GREED='55144522';
+const MAGIC_JAMMER='77414722';
 for(const [id,name,kind] of [
   [SEVEN_TOOLS,'Seven Tools of the Bandit','sevenTools'],
   [TORRENTIAL,'Torrential Tribute','torrentialTribute'],
@@ -32,6 +33,9 @@ for(const [id,name,kind] of [
   assert.equal(getEffect(id)?.kind,kind);
 }
 assert.equal(getPlayableCard(SEVEN_TOOLS)?.kind,'trap');
+assert.equal(getPlayableCard(MAGIC_JAMMER)?.kind,'trap');
+assert.equal(getCardStatus(MAGIC_JAMMER)?.stage,'certified');
+assert.equal(getEffect(MAGIC_JAMMER)?.kind,'magicJammer');
 assert.equal(getActivationModel(getEffect(SEVEN_TOOLS))?.speed,3);
 assert.equal(getActivationModel(getEffect(SEVEN_TOOLS))?.window,'trapActivated');
 assert.equal(getActivationModel(getEffect(SEVEN_TOOLS))?.damage,'counter');
@@ -222,7 +226,7 @@ function setupPositive(){
 function setupNegative(){
   const required=[
     [POT_OF_GREED],
-    [],
+    [MAGIC_JAMMER],
     [],
     [SEVEN_TOOLS]
   ];
@@ -237,15 +241,17 @@ function setupNegative(){
   });
   assertRules(state,initialDeckSizes);
   const pot=ensureInHand(state,0,POT_OF_GREED);
+  const magicJammer=setBackrow(state,1,MAGIC_JAMMER);
   const seven=setBackrow(state,3,SEVEN_TOOLS);
   const before=inventory(state);
   const deckBefore=holder(state,0).deck.length;
   const handBefore=tag.tagMemberHand(state,member(0)).length;
+  assert.match(magicJammer.uid,/^m1:/);
   assert.match(seven.uid,/^m3:/);
-  assertHidden(JSON.stringify(tag.publicTagDuel(state)),[seven]);
+  assertHidden(JSON.stringify(tag.publicTagDuel(state)),[magicJammer,seven]);
   assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
-  return {pot,seven,before,deckBefore,handBefore,initialDeckSizes,
+  return {pot,magicJammer,seven,before,deckBefore,handBefore,initialDeckSizes,
     record:saveSession(state,'m335-seven-tools-negative')};
 }
 
@@ -303,9 +309,12 @@ test('Seven Tools does not answer a Spell activation and never pays its LP cost 
   const index=actions.findIndex(action=>action.kind==='spell'&&action.card===f.pot.uid);
   assert.ok(index>=0,'the active seat must receive Pot of Greed');
   let current=await submit(f.record,member(0),index,'m335-pot-of-greed');
-  assert.equal(current.state.core.phase,'response');
+  assert.equal(current.state.core.phase,'response',
+    'Magic Jammer supplies a real Spell response window for the negative control');
   assert.equal(tag.tagDecisionMember(current.state).id,member(1));
   const responseActions=tag.tagActions(current.state,member(1));
+  assert.ok(responseActions.some(action=>action.kind==='trap'&&action.card===f.magicJammer.uid),
+    'the control Counter Trap must be available against the Spell activation');
   assert.ok(!responseActions.some(action=>action.kind==='trap'&&action.card===f.seven.uid),
     'Seven Tools must not appear against a Spell activation');
   assert.equal(tag.tagActions(current.state,member(3)).length,0,
@@ -322,7 +331,9 @@ test('Seven Tools does not answer a Spell activation and never pays its LP cost 
   assert.ok(state.core.players[0].grave.some(card=>card.uid===f.pot.uid));
   assert.ok(state.core.players[1].backrow.some(card=>card.uid===f.seven.uid&&!card.faceUp),
     'the unused partner-owned Seven Tools remains Set and hidden');
-  assertHidden(JSON.stringify(tag.publicTagDuel(state)),[f.seven]);
+  assert.ok(state.core.players[1].backrow.some(card=>card.uid===f.magicJammer.uid&&!card.faceUp),
+    'the control Magic Jammer remains Set after being passed');
+  assertHidden(JSON.stringify(tag.publicTagDuel(state)),[f.magicJammer,f.seven]);
   assertConserved(state,f.before);
   assertPrivateHands(state);
   assertRules(state,f.initialDeckSizes);
