@@ -163,10 +163,14 @@ function setup(){
   state.core.turn=3;
   const spell=takePhysical(state,0,SHIELD_SWORD);
   holder(state,0).hand.push(spell);
-  const celtic={...takePhysical(state,0,CELTIC),position:'atk',faceUp:true};
-  const blueEyes={...takePhysical(state,2,BLUE_EYES),position:'atk',faceUp:true};
-  const darkMagician={...takePhysical(state,1,DARK_MAGICIAN),position:'atk',faceUp:true};
-  const mysticalElf={...takePhysical(state,3,MYSTICAL_ELF),position:'def',faceUp:false};
+  const makeMonster=(seat,id,position,faceUp)=>{
+    const card=takePhysical(state,seat,id);
+    return {id:card.id,uid:card.uid,owner:seat%2,position,faceUp,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
+  };
+  const celtic=makeMonster(0,CELTIC,'atk',true);
+  const blueEyes=makeMonster(2,BLUE_EYES,'atk',true);
+  const darkMagician=makeMonster(1,DARK_MAGICIAN,'atk',true);
+  const mysticalElf=makeMonster(3,MYSTICAL_ELF,'def',false);
   state.core.players[0].monsters.push(celtic,blueEyes);
   state.core.players[1].monsters.push(darkMagician,mysticalElf);
   assert.match(spell.uid,/^m0:/);
