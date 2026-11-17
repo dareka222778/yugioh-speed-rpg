@@ -170,11 +170,12 @@ async function settleResponses(record,suffix){
   }
   return current;
 }
-function setup(scenario,{first=1,puppeteers=[],faceDownPuppeteers=[],trapSeat=null,flipSeat=null,summonSeat=null}={}){
+function setup(scenario,{first=1,puppeteers=[],faceDownPuppeteers=[],trapSeat=null,flipSeat=null,summonSeat=null,summonCardId=SUMMONER.id}={}){
   const required=[[],[],[],[]];
   for(const seat of puppeteers)required[seat].push(PUPPETEER);
   for(const seat of faceDownPuppeteers)required[seat].push(PUPPETEER);
   if(trapSeat!==null)required[trapSeat].push(TRAP_HOLE);
+  if(summonSeat!==null)required[summonSeat].push(summonCardId);
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M291 Seat '+seat,cards:deck(required[seat])
   }));
@@ -185,7 +186,7 @@ function setup(scenario,{first=1,puppeteers=[],faceDownPuppeteers=[],trapSeat=nu
   for(const seat of faceDownPuppeteers)sources.push(placeMonster(state,seat,PUPPETEER,false));
   const flipTarget=flipSeat===null?null:placeMonster(state,flipSeat,SUMMONER.id,false);
   const trap=trapSeat===null?null:setTrap(state,trapSeat,TRAP_HOLE);
-  const summonCard=summonSeat===null?null:putInHand(state,summonSeat,SUMMONER.id);
+  const summonCard=summonSeat===null?null:putInHand(state,summonSeat,summonCardId);
   const before=inventory(state);
   assertRules(state);
   assertPrivateHands(state);
@@ -195,7 +196,7 @@ function setup(scenario,{first=1,puppeteers=[],faceDownPuppeteers=[],trapSeat=nu
   database.db.prepare(
     'INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)'
   ).run(id,guild,channel,null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
-  return {id,actor:tag.tagDecisionMember(state).id,sources,flipTarget,trap,summonCard,before,record:store.getTag(id)};
+  return {id,actor:tag.tagDecisionMember(state).id,sources,flipTarget,trap,summonCard,summonCardId,before,record:store.getTag(id)};
 }
 function assertFinal(fixture,record,expectedLP){
   const state=record.state;
@@ -212,7 +213,7 @@ async function normalSummon(fixture,record,seat,suffix){
   const actor=member(seat);
   assert.equal(tag.tagDecisionMember(record.state).id,actor);
   const card=fixture.summonCard;
-  assert.ok(card&&card.id===SUMMONER.id,'the fixture must persist the summoned card in the active physical hand');
+  assert.ok(card&&card.id===fixture.summonCardId,'the fixture must persist the summoned card in the active physical hand');
   const actions=tag.tagActions(record.state,actor);
   const index=actions.findIndex(action=>
     action.kind==='summon'&&action.card===card.uid&&action.position==='atk'
@@ -243,11 +244,10 @@ test('opponent Normal Summon triggers each Puppeteer owned by a different physic
   assert.ok(record.state.core.players[1].monsters.some(monster=>monster.uid===card.uid));
   assertFinal(fixture,record,[4500,4500]);
 });
-test('the summoning physical owner does not trigger its own Puppeteer, but the other physical owner does',async()=>{
-  const fixture=setup('allied-normal',{first:0,puppeteers:[0,3],summonSeat:0});
+test('a Puppeteer does not trigger its own Normal Summon, while a different face-up Puppeteer does',async()=>{
+  const fixture=setup('own-puppeteer-summon',{first:0,puppeteers:[3],summonSeat:0,summonCardId:PUPPETEER});
   assert.equal(fixture.actor,member(0));
-  assert.match(fixture.sources[0].uid,/^m2:/);
-  assert.match(fixture.sources[1].uid,/^m3:/);
+  assert.match(fixture.sources[0].uid,/^m3:/);
   const {record,card}=await normalSummon(fixture,fixture.record,0,'allied-normal');
   assert.equal(record.state.core.phase,'main');
   assert.ok(record.state.core.players[0].monsters.some(monster=>monster.uid===card.uid));
