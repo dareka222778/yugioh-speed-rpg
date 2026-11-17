@@ -41,17 +41,30 @@
       ],
       "state": "reserved",
       "priority": "P1 — validar um Equip Spell que reduz ATK e concede ataque direto: o representante ativo deve equipar o monstro fisicamente pertencente ao parceiro, respeitar o turno de instalação e causar dano direto mesmo com monstros adversários, sem conceder ataque direto a monstros não equipados."
+    },
+    {
+      "mission": "M322",
+      "branch": "feat/work-m322-gyaku-gire-panda-count-piercing-discord-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "33df81d6a2b7e02f82366c7f9508ce359e8d594e",
+      "scope": [
+        "tests/tagGyakuGirePandaCountPiercingDiscord2v2.test.cjs"
+      ],
+      "state": "reserved",
+      "priority": "P1 — homologar o efeito combinado de Gyaku-Gire Panda: +500 ATK por monstro adversário, inclusive face-down, e dano perfurante contra Defesa. A batalha deve ocorrer pelo menu Discord 2v2, preservando propriedade física e privacidade."
     }
   ],
   "scope": [
     "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
     "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
-    "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+    "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs",
+    "tests/tagGyakuGirePandaCountPiercingDiscord2v2.test.cjs"
   ],
   "reservedFiles": [
     "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
     "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
-    "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+    "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs",
+    "tests/tagGyakuGirePandaCountPiercingDiscord2v2.test.cjs"
   ],
   "handoffRequests": [
     {
@@ -85,7 +98,8 @@
     "Auditoria das PRs #263–#274; reservas M305–M318 identificadas e preservadas.",
     "Solicitado handoff cooperativo em #263, #187 e #188; nenhum arquivo reservado foi tocado.",
     "Artefato factual milestone1000 revisado: 969 certificadas, 31 restantes; sem certificação automática.",
-    "Verificado novo HEAD e coordenação após M319/M320; CI ainda em execução. M321 selecionada como família independente de Equip Spell/ataque direto, sem tocar em M194–M198."
+    "Verificado novo HEAD e coordenação após M319/M320; CI ainda em execução. M321 selecionada como família independente de Equip Spell/ataque direto, sem tocar em M194–M198.",
+    "Após M321, consultado o HEAD e a coordenação; M322 escolhido como família independente de contagem de monstros adversários + piercing, sem duplicar PR #233."
   ],
   "ciAtStart": {
     "sharedHead": "no status contexts reported",
@@ -105,7 +119,15 @@
         "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
       ],
       "priority": "P1 — validar um Equip Spell que reduz ATK e concede ataque direto: o representante ativo deve equipar o monstro fisicamente pertencente ao parceiro, respeitar o turno de instalação e causar dano direto mesmo com monstros adversários, sem conceder ataque direto a monstros não equipados."
+    },
+    {
+      "mission": "M322",
+      "branch": "feat/work-m322-gyaku-gire-panda-count-piercing-discord-2v2-20261117",
+      "scope": [
+        "tests/tagGyakuGirePandaCountPiercingDiscord2v2.test.cjs"
+      ],
+      "priority": "P1 — homologar o efeito combinado de Gyaku-Gire Panda: +500 ATK por monstro adversário, inclusive face-down, e dano perfurante contra Defesa. A batalha deve ocorrer pelo menu Discord 2v2, preservando propriedade física e privacidade."
     }
   ],
-  "updatedAt": "2026-11-17T07:45:59-03:00"
+  "updatedAt": "2026-11-17T07:51:52-03:00"
 }
