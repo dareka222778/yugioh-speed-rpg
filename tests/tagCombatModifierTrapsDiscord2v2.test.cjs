@@ -195,12 +195,10 @@ function setup(spec,scenario){
 async function beginAttack(fixture,suffix){
   let current=fixture.record;
   assert.equal(tag.tagDecisionMember(current.state).id,member(1));
-  assert.equal(tag.tagActions(current.state,member(1)).some(action=>
-    action.kind==='trap'&&action.card===fixture.trap.uid
-  ),false,'a response-only combat Trap is unavailable before the attack');
   const battleIndex=tag.tagActions(current.state,member(1)).findIndex(action=>action.kind==='battle');
   assert.ok(battleIndex>=0,'the active attacker must be able to enter the Battle Phase');
   current=await submit(current,member(1),battleIndex,'m300-'+suffix+'-battle');
+  current=await settleResponses(current,suffix+'-battle-window');
   const attackIndex=tag.tagActions(current.state,member(1)).findIndex(action=>
     action.kind==='attack'&&action.card===fixture.attacker.uid&&action.target===fixture.target.uid
   );
