@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -4718,9 +4718,29 @@
         "tests/tagBattleResponseTrapsDiscord2v2.test.cjs"
       ],
       "handoffStatus": "sem conflito; novo arquivo exclusivo"
+    },
+    {
+      "runId": "work-20261117T120018-0300-M330",
+      "owner": "Work",
+      "mission": "M330",
+      "priority": "P1 — homologar Bottomless Trap Hole no Discord 2v2: resposta do defensor ativo a Invocação-Normal adversária de monstro com ATK ≥1500, usando cópia setada pelo parceiro inativo; destruir e banir somente a instância elegível, preservar UID/proprietário físico e demais monstros; controle negativo abaixo de 1500 ATK.",
+      "state": "active",
+      "startedAt": "2026-11-17T12:00:18-03:00",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "968aa1c3b6dcd510ef078321a98334532aee6708",
+      "branch": "feat/work-m330-bottomless-trap-hole-discord-summon-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "968aa1c3b6dcd510ef078321a98334532aee6708",
+      "scope": [
+        "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs"
+      ],
+      "reservedFiles": [
+        "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs"
+      ],
+      "handoffStatus": "sem conflito; arquivo exclusivo"
     }
   ],
-  "lastParallelCheckpoint": "coordination/runs/work-20261117T120018-0300-M327-M329.json",
+  "lastParallelCheckpoint": "coordination/runs/work-20261117T120018-0300-M330.json",
   "lastParallelActivityAt": "2026-11-17T12:00:18-03:00",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "8637493d9d28d89bdfb3503a6237351012a9c20a",
@@ -5501,6 +5521,16 @@
         "tests/tagBattleResponseTrapsDiscord2v2.test.cjs"
       ],
       "state": "active"
+    },
+    {
+      "mission": "M330",
+      "branch": "feat/work-m330-bottomless-trap-hole-discord-summon-2v2-20261117",
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "968aa1c3b6dcd510ef078321a98334532aee6708",
+      "scope": [
+        "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs"
+      ],
+      "state": "active"
     }
   ],
   "updatedAt": "2026-11-17T12:00:18-03:00",
@@ -6212,12 +6242,12 @@
     }
   ],
   "lastIndependentRun": {
-    "runId": "work-20261117T120018-0300-M327-M329",
-    "mission": "M327–M329",
-    "branch": "feat/work-m327-m329-discord-battle-response-traps-2v2-20261117",
-    "baseSha": "eb93b332f5b706d1d16a4056150618486a2b83a7",
+    "runId": "work-20261117T120018-0300-M330",
+    "mission": "M330",
+    "branch": "feat/work-m330-bottomless-trap-hole-discord-summon-2v2-20261117",
+    "baseSha": "968aa1c3b6dcd510ef078321a98334532aee6708",
     "scope": [
-      "tests/tagBattleResponseTrapsDiscord2v2.test.cjs"
+      "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs"
     ],
     "state": "reserved"
   },
@@ -6562,7 +6592,7 @@
       ]
     }
   ],
-  "lastParallelRun": "work-20261117T120018-0300-M327-M329",
+  "lastParallelRun": "work-20261117T120018-0300-M330",
   "nextParallelTask": "Auxiliar: monitorar somente M319–M322 e corrigir apenas os arquivos reservados. Work: concluir os quatro lotes, validar CI/soaks e liberar somente as reservas próprias.",
   "nextParallelWindow": "2026-11-17T12:30:00-03:00",
   "sharedHeadAfterCheckpointCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
