@@ -13,3 +13,10 @@ test('distribution is withheld by default and explicit authorization must be boo
  b.distributionAuthorized=true;assert.equal(a.load(b).distributionAuthorized,true);
  b.distributionAuthorized='true';assert.throws(()=>a.load(b),/distributionAuthorized/);
 });
+
+test('direct promotion cannot bypass explicit owner release authorization',()=>{
+ assert.equal(a.assertReleaseAuthorization({distributionAuthorized:false},false,false),false);
+ assert.throws(()=>a.assertReleaseAuthorization({distributionAuthorized:false},true,true),/distributionAuthorized:true/);
+ assert.throws(()=>a.assertReleaseAuthorization({distributionAuthorized:true},true,false),/owner-authored/);
+ assert.equal(a.assertReleaseAuthorization({distributionAuthorized:true},true,true),true);
+});
