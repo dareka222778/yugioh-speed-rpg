@@ -8,6 +8,9 @@ const {renderTag,tagImageLayout}=require('../dist/tagRenderer');
 const {getPlayableCard}=require('../dist/effectRegistry');
 const {getCard}=require('../dist/collection');
 const {rulesFor}=require('../dist/rulesProfile');
+const trace=message=>process.stderr.write('[M359] '+message+'\\n');
+function debugTest(name,fn){return nodeTest(name,async(...args)=>{try{return await fn(...args);}catch(error){trace(name+' FAILED: '+(error&&error.stack||error));throw error;}});}
+trace('module setup started');
 
 const SAFE_NORMALS=[...new Set(tag.tagNormalCardIds)].filter(id=>{
   const card=getPlayableCard(id);
@@ -52,11 +55,13 @@ function createState(hiddenId,publicId){
   return {state,hidden,publicCard};
 }
 async function render(state,viewer){
+  trace('render start viewer='+(viewer??'public'));
   const calls=[];
   const image=await renderTag(state,viewer,async id=>{
     calls.push(id);
     return null;
   });
+  trace('render complete viewer='+(viewer??'public')+' bytes='+image.length+' calls='+calls.length);
   return {image,calls};
 }
 function name(id){
@@ -65,19 +70,25 @@ function name(id){
   return card.name;
 }
 
+trace('before createBase');
 const base=createBase();
+trace('after createBase');
 const hiddenCandidates=base.reserves[2].deck
   .map(card=>card.id)
   .filter((id,index,array)=>SAFE_NORMALS.includes(id)&&array.indexOf(id)===index)
   .slice(0,2);
+trace('hidden candidate count='+hiddenCandidates.length+' ids='+hiddenCandidates.join(','));
 assert.equal(hiddenCandidates.length,2,'M359 requires two distinct face-down candidates already in the same physical Deck');
 assert.notEqual(name(hiddenCandidates[0]),name(hiddenCandidates[1]),
   'the visual privacy comparison requires distinguishable card identities');
 const publicId=SAFE_NORMALS.find(id=>!hiddenCandidates.includes(id));
 assert.ok(publicId,'M359 requires an independent face-up public card');
 
+trace('before state A');
 const A=createState(hiddenCandidates[0],publicId);
+trace('after state A');
 const B=createState(hiddenCandidates[1],publicId);
+trace('after state B');
 assert.equal(A.hidden.uid.split(':')[0], 'm2');
 assert.equal(B.hidden.uid.split(':')[0], 'm2');
 assert.equal(A.state.reserves[2].deck.length,B.state.reserves[2].deck.length,
@@ -85,7 +96,7 @@ assert.equal(A.state.reserves[2].deck.length,B.state.reserves[2].deck.length,
 assert.equal(A.state.reserves[2].hand.length,B.state.reserves[2].hand.length,
   'the public comparison must not change the inactive partner hand count');
 
-nodeTest('M359 classic 2v2 playmat has stable public/private dimensions and preserves the 3+3 rules contract',async()=>{
+debugTest('M359 classic 2v2 playmat has stable public/private dimensions and preserves the 3+3 rules contract',async()=>{
   const layout=tagImageLayout(A.state);
   assert.deepEqual(layout,{width:1400,fieldHeight:1240,handHeight:340});
   const rules=rulesFor(A.state.core);
@@ -114,7 +125,7 @@ nodeTest('M359 classic 2v2 playmat has stable public/private dimensions and pres
     'the private team renderer may request art for its own hidden field card');
 });
 
-nodeTest('M359 changing a face-down card identity cannot change the public 2v2 playmat pixels',async()=>{
+debugTest('M359 changing a face-down card identity cannot change the public 2v2 playmat pixels',async()=>{
   const publicA=await render(A.state,undefined);
   const publicB=await render(B.state,undefined);
   assert.deepEqual(publicA.image,publicB.image,
@@ -125,7 +136,7 @@ nodeTest('M359 changing a face-down card identity cannot change the public 2v2 p
   assert.ok(!publicB.calls.includes(B.hidden.id));
 });
 
-nodeTest('M359 both physical allies can see their shared hidden field identity in their private visual playmat',async()=>{
+debugTest('M359 both physical allies can see their shared hidden field identity in their private visual playmat',async()=>{
   for(const seat of [0,2]){
     const viewA=await render(A.state,member(seat));
     const viewB=await render(B.state,member(seat));
@@ -137,7 +148,7 @@ nodeTest('M359 both physical allies can see their shared hidden field identity i
   }
 });
 
-nodeTest('M359 neither opposing physical seat can infer a face-down identity from its private playmat',async()=>{
+debugTest('M359 neither opposing physical seat can infer a face-down identity from its private playmat',async()=>{
   for(const seat of [1,3]){
     const viewA=await render(A.state,member(seat));
     const viewB=await render(B.state,member(seat));
