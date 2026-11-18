@@ -33,7 +33,6 @@ for(const id of [...new Set(tag.tagNormalCardIds)]){
   }
 }
 assert.ok(SAFE_NORMALS.length>=3,'M358 requires at least 3 distinct certified Normal Monster names');
-assert.ok(SAFE_NORMALS.length>=3,'M358 requires three distinct certified Normal Monsters');
 assert.ok(enabledCardIds.includes(BOTTOMLESS),'M358 requires the enabled Bottomless Trap Hole identity');
 assert.equal(getPlayableCard(BOTTOMLESS)?.kind,'trap');
 const MAIN_DECK=[...SAFE_NORMALS.slice(0,19),BOTTOMLESS];
