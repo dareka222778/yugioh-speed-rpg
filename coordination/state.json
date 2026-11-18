@@ -5,7 +5,7 @@
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
   "lastActivityAt": "2026-11-18T01:23:13.645Z",
-  "nextScheduledAt": "2026-11-17T22:30:00-03:00",
+  "nextScheduledAt": "2026-11-18T07:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -19,7 +19,7 @@
     "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
     "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261115T092946-0300.json",
+  "lastCheckpoint": "coordination/runs/work-20261118T023025-0300-M353.json",
   "previousRunId": "work-20261115T055534-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -2187,10 +2187,23 @@
       "scope": [
         "tests/tagConditionalDirectAttackDiscord2v2.test.cjs"
       ],
-      "state": "reserved",
+      "state": "released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-18T02:30:25-03:00",
       "priority": "P1 — validar Black Tyranno, Rocket Jumper e Drillago pela interface Discord 2v2: ataques diretos condicionais devem inspecionar os dois assentos adversários, rejeitar condições inválidas e preservar autorização do representante ativo, propriedade física, privacidade e regras 20–30/6/3+3/Extra 5.",
-      "conflictPolicy": "Somente o arquivo de teste novo; não tocar em M352, M338/M339, M305, M319–M322, M347–M351, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+      "conflictPolicy": "Somente o arquivo de teste novo; não tocar em M352, M338/M339, M305, M319–M322, M347–M351, runtime, catálogo, certificados, banco persistente, inventários, main ou produção.",
+      "endedAt": "2026-11-18T02:50:24.039-03:00",
+      "branchHeadSha": "b909b15a571bcc065e715b397bffe442aafa1199",
+      "prNumber": 301,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/301",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600s": "in_progress"
+      },
+      "effectiveWorkMinutes": null,
+      "minimum60MinutesMet": false
     }
   ],
   "handoffRequest": {
@@ -5048,7 +5061,7 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261117T215910-0300-M347-M349.json",
-  "lastParallelActivityAt": "2026-11-18T01:23:13.645Z",
+  "lastParallelActivityAt": "2026-11-18T02:50:24.039-03:00",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "0bb80a318da6ca5a1d697cae4937ed1625354325",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -5107,48 +5120,9 @@
     "allowed": "Monitorar CI e corrigir somente arquivos de teste nas próprias branches.",
     "forbidden": "Não alterar M61/M151, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
   },
-  "scopeReleasedToAuxiliary": {
-    "status": "released-to-auxiliary-monitor-ci",
-    "releasedAt": "2026-11-15T09:52:13-03:00",
-    "allowed": [
-      {
-        "pr": 184,
-        "branch": "feat/work-m228-two-monster-tribute-2v2-20261115",
-        "files": [
-          "tests/tagClassicTwoMonsterTributeTeamOwnership2v2.test.cjs"
-        ],
-        "permission": "monitor CI and edit only this test file"
-      },
-      {
-        "pr": 185,
-        "branch": "feat/work-m229-flip-target-team-ownership-2v2-20261115",
-        "files": [
-          "tests/tagClassicFlipTargetTeamOwnership2v2.test.cjs"
-        ],
-        "permission": "monitor CI and edit only this test file"
-      },
-      {
-        "pr": 186,
-        "branch": "feat/work-m230-flip-group-destruction-2v2-20261115",
-        "files": [
-          "tests/tagClassicFlipGroupDestruction2v2.test.cjs"
-        ],
-        "permission": "monitor CI and edit only this test file"
-      }
-    ],
-    "prohibited": [
-      "runtime",
-      "catalog batches",
-      "certificates",
-      "coordination reservations of other agents",
-      "player data",
-      "inventories",
-      "persistent database",
-      "main",
-      "merge",
-      "deploy"
-    ]
-  },
+  "scopeReleasedToAuxiliary": [
+    "tests/tagConditionalDirectAttackDiscord2v2.test.cjs"
+  ],
   "lastCoordinationRefreshAt": "2026-11-17T16:46:00-03:00",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
@@ -6119,7 +6093,7 @@
       "conflictPolicy": "Somente os dois novos arquivos de teste. Não tocar em M305–M318, M231/M232, M61/M118/M151/M153, runtime, catálogo, certificados, banco persistente, inventários, dados dos jogadores, main ou produção."
     }
   ],
-  "previousCheckpoint": "coordination/runs/work-20261115T055534-0300.json",
+  "previousCheckpoint": "coordination/runs/work-20261115T092946-0300.json",
   "reservation": {
     "runId": "work-20261115T142521-0300",
     "owner": "Work",
@@ -7326,7 +7300,7 @@
     }
   ],
   "lastParallelRun": "work-20261118T023025-0300-M353",
-  "nextParallelTask": "Concluir M353 e validar CI; auxiliar pode monitorar/corrigir somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs após publicação. Work: após handoff explícito de M61, retomar 3-Hump Lacooda e as 31 certificações restantes; preservar M352 e demais reservas.",
+  "nextParallelTask": "Auxiliar: monitorar PR #301 e corrigir somente seu arquivo de teste se CI falhar. Work: solicitar/aguardar handoff explícito de M61 para implementar 3-Hump Lacooda (3 cópias face-up, tributar 2, comprar 3) com ownership físico; se não houver liberação, avançar apenas em frentes independentes.",
   "nextParallelWindow": "2026-11-18T07:30:00-03:00",
   "sharedHeadAfterCheckpointCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
   "postCheckpointCI": {
@@ -7397,9 +7371,23 @@
     "scope": [
       "tests/tagConditionalDirectAttackDiscord2v2.test.cjs"
     ],
-    "state": "reserved",
+    "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-18T02:30:25-03:00",
     "priority": "P1 — validar Black Tyranno, Rocket Jumper e Drillago pela interface Discord 2v2: ataques diretos condicionais devem inspecionar os dois assentos adversários, rejeitar condições inválidas e preservar autorização do representante ativo, propriedade física, privacidade e regras 20–30/6/3+3/Extra 5.",
-    "conflictPolicy": "Somente o arquivo de teste novo; não tocar em M352, M338/M339, M305, M319–M322, M347–M351, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
-  }
+    "conflictPolicy": "Somente o arquivo de teste novo; não tocar em M352, M338/M339, M305, M319–M322, M347–M351, runtime, catálogo, certificados, banco persistente, inventários, main ou produção.",
+    "endedAt": "2026-11-18T02:50:24.039-03:00",
+    "branchHeadSha": "b909b15a571bcc065e715b397bffe442aafa1199",
+    "prNumber": 301,
+    "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/301",
+    "ci": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak600s": "in_progress"
+    },
+    "effectiveWorkMinutes": null,
+    "minimum60MinutesMet": false
+  },
+  "sharedHeadAtLastCheckpoint": "fc99fb5024f8b6d06b5a7c024be8a6b7c4f25b8a"
 }
