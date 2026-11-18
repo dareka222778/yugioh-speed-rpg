@@ -154,7 +154,7 @@ async function rejectInactivePartner(record,actor,partner,index,suffix){
     handleTagComponent(forged,async()=>{},()=>{}),
     /Jogada indisponível\./
   );
-  assert.deepEqual(forged.calls,[],'unauthorized partner interaction must be rejected before Discord acknowledgement');
+  assert.deepEqual(forged.calls,['defer'],'the component is acknowledged but the unauthorized action must never edit or mutate the duel');
   assert.equal(store.getTag(record.id).revision,record.revision);
   assert.equal(JSON.stringify(store.getTag(record.id).state),before);
 }
