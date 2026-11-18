@@ -178,6 +178,14 @@ async function rejectInactivePartner(record,actor,partner,index,suffix){
   assert.equal(store.getTag(record.id).revision,record.revision);
   assert.equal(JSON.stringify(store.getTag(record.id).state),unchanged);
 }
+function ensureInDeck(state,seat,id){
+  const physical=holder(state,seat);
+  const index=physical.hand.findIndex(card=>card.id===id);
+  if(index>=0)physical.deck.push(physical.hand.splice(index,1)[0]);
+  const card=physical.deck.find(card=>card.id===id);
+  assert.ok(card,'required physical Deck card must be moved out of its opening hand: '+id+' seat '+seat);
+  return card;
+}
 function setup(c,key,{includeCandidates=true,includePartnerDecoy=true}={}){
   const required=[[],[],[],[]];
   required[0].push(c.id);
@@ -186,13 +194,12 @@ function setup(c,key,{includeCandidates=true,includePartnerDecoy=true}={}){
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M346 Seat '+seat,cards:deck(required[seat])
   }));
-  const state=tag.createTagDuel(players,{classic:true,first:1,seed:'m346-'+key});
+  const state=tag.createTagDuel(players,{classic:true,first:2,seed:'m346-'+key});
   state.core.turn=3;
-  assert.deepEqual(state.active,[2,1],'turn rotation must make seats 2 and 1 the active representatives');
+  assert.deepEqual(state.active,[2,3],'turn rotation must make seats 2 and 3 the active representatives');
   const source=placeFaceDown(state,0,c.id);
-  const candidates=includeCandidates?c.candidateIds.map(id=>holder(state,2).deck.find(card=>card.id===id)): [];
-  if(includeCandidates)assert.ok(candidates.every(Boolean),'active representative physical Deck must contain every eligible search target');
-  const partnerDecoy=includePartnerDecoy?holder(state,0).deck.find(card=>card.id===c.partnerDecoy):null;
+  const candidates=includeCandidates?c.candidateIds.map(id=>ensureInDeck(state,2,id)): [];
+  const partnerDecoy=includePartnerDecoy?ensureInDeck(state,0,c.partnerDecoy):null;
   if(includePartnerDecoy)assert.ok(partnerDecoy,'inactive partner physical Deck must contain its private decoy');
   assert.match(source.uid,/^m0:/);
   for(const card of candidates)if(card)assert.match(card.uid,/^m2:/);
