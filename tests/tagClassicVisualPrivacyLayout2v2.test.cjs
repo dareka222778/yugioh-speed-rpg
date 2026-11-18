@@ -8,7 +8,7 @@ const {renderTag,tagImageLayout}=require('../dist/tagRenderer');
 const {getPlayableCard}=require('../dist/effectRegistry');
 const {getCard}=require('../dist/collection');
 const {rulesFor}=require('../dist/rulesProfile');
-const trace=message=>process.stderr.write('[M359] '+message+'\\n');
+const trace=message=>fs.writeSync(2,'[M359] '+message+'\\n');
 function debugTest(name,fn){return nodeTest(name,async(...args)=>{try{return await fn(...args);}catch(error){trace(name+' FAILED: '+(error&&error.stack||error));throw error;}});}
 trace('module setup started');
 
