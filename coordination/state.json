@@ -4,8 +4,8 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-17T00:44:57.712Z",
-  "nextScheduledAt": "2026-11-16T22:30:00-03:00",
+  "lastActivityAt": "2026-11-18T01:23:13.645Z",
+  "nextScheduledAt": "2026-11-17T22:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -2107,6 +2107,76 @@
         "tests/tagBattleLevelBurnDiscord2v2.test.cjs"
       ],
       "state": "reserved"
+    },
+    {
+      "mission": "M347",
+      "branch": "feat/work-m347-flip-draw-destroy-discord-2v2-20261117",
+      "head": "a8550aa4310e205c50f40747af0f5297b3107f25",
+      "pr": 296,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "scope": [
+        "tests/tagFlipDrawDestroyDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "cards": [
+        "Skelengel",
+        "Man-Eater Bug"
+      ],
+      "scenarios": 2
+    },
+    {
+      "mission": "M348",
+      "branch": "feat/work-m348-mysterious-puppeteer-discord-trigger-2v2-20261117",
+      "head": "eed6b5be52fb399f86f95298e76c719d9943ef64",
+      "pr": 297,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "scope": [
+        "tests/tagMysteriousPuppeteerDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "cards": [
+        "Mysterious Puppeteer"
+      ],
+      "scenarios": 2
+    },
+    {
+      "mission": "M349",
+      "branch": "feat/work-m349-mystic-tomato-discord-recruit-2v2-20261117",
+      "head": "5a2c46e3907956c2e02c60bdabb3db89c96121a6",
+      "pr": 298,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "scope": [
+        "tests/tagMysticTomatoDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "cards": [
+        "Mystic Tomato"
+      ],
+      "scenarios": 3
     }
   ],
   "handoffRequest": {
@@ -3224,7 +3294,7 @@
       }
     ]
   },
-  "nextWorkAt": "2026-11-17T08:30:00-03:00",
+  "nextWorkAt": "2026-11-17T22:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -4963,8 +5033,8 @@
       "reservationReleased": false
     }
   ],
-  "lastParallelCheckpoint": "coordination/runs/work-20261117T162814-0300-M330-M337-M339.json",
-  "lastParallelActivityAt": "2026-11-17T16:46:00-03:00",
+  "lastParallelCheckpoint": "coordination/runs/work-20261117T215910-0300-M347-M349.json",
+  "lastParallelActivityAt": "2026-11-18T01:23:13.645Z",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "0bb80a318da6ca5a1d697cae4937ed1625354325",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -5365,7 +5435,7 @@
       "status": "requested cooperative handoff for shared coordination file only; no reserved test touched; awaiting response"
     }
   ],
-  "nextWindow": "2026-11-16T20:30:00-03:00",
+  "nextWindow": "2026-11-17T22:30:00-03:00",
   "lastCheckpointSha": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "deployment": {
     "merge": "none",
@@ -6481,151 +6551,75 @@
         "tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs"
       ],
       "conflictPolicy": "Somente o novo arquivo de teste M305. Não tocar em M231–M304, em arquivos de runtime, catálogo, certificados, banco persistente, inventários, main ou produção; não alterar reservas de terceiros."
+    },
+    {
+      "reservationId": "work-20261117T215910-0300-M347-M349-M347",
+      "runId": "work-20261117T215910-0300-M347-M349",
+      "owner": "Work",
+      "mission": "M347",
+      "priority": "P1 — integração Discord 2v2; test-only",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-17T21:59:10-03:00",
+      "endedAt": "2026-11-17T22:23:13.645-03:00",
+      "releasedAt": "2026-11-17T22:23:13.645-03:00",
+      "branch": "feat/work-m347-flip-draw-destroy-discord-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "reservedFiles": [
+        "tests/tagFlipDrawDestroyDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente o arquivo de teste desta branch; não tocar em runtime, catálogo, certificados, banco persistente, inventários, main, produção ou reservas de terceiros."
+    },
+    {
+      "reservationId": "work-20261117T215910-0300-M347-M349-M348",
+      "runId": "work-20261117T215910-0300-M347-M349",
+      "owner": "Work",
+      "mission": "M348",
+      "priority": "P1 — integração Discord 2v2; test-only",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-17T21:59:10-03:00",
+      "endedAt": "2026-11-17T22:23:13.645-03:00",
+      "releasedAt": "2026-11-17T22:23:13.645-03:00",
+      "branch": "feat/work-m348-mysterious-puppeteer-discord-trigger-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "reservedFiles": [
+        "tests/tagMysteriousPuppeteerDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente o arquivo de teste desta branch; não tocar em runtime, catálogo, certificados, banco persistente, inventários, main, produção ou reservas de terceiros."
+    },
+    {
+      "reservationId": "work-20261117T215910-0300-M347-M349-M349",
+      "runId": "work-20261117T215910-0300-M347-M349",
+      "owner": "Work",
+      "mission": "M349",
+      "priority": "P1 — integração Discord 2v2; test-only",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-17T21:59:10-03:00",
+      "endedAt": "2026-11-17T22:23:13.645-03:00",
+      "releasedAt": "2026-11-17T22:23:13.645-03:00",
+      "branch": "feat/work-m349-mystic-tomato-discord-recruit-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "reservedFiles": [
+        "tests/tagMysticTomatoDiscord2v2.test.cjs"
+      ],
+      "conflictPolicy": "Somente o arquivo de teste desta branch; não tocar em runtime, catálogo, certificados, banco persistente, inventários, main, produção ou reservas de terceiros."
     }
   ],
   "lastIndependentRun": {
-    "runId": "work-20261117T162814-0300-M330-M337-M339",
-    "owner": "Work",
-    "mission": "M330–M339",
-    "priority": "P1 — ampliar a homologação comportamental Discord 2v2 sem alterar runtime: Bottomless Trap Hole, Royal Decree, Wall of Illusion/Kelbek e Needle Burrower/KA-2; preservar propriedade física, UIDs, mãos privadas e regras do proprietário.",
-    "state": "active",
-    "startedAt": "2026-11-17T16:28:14-03:00",
-    "lastActivityAt": "2026-11-17T16:46:00-03:00",
-    "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtStart": "0bb80a318da6ca5a1d697cae4937ed1625354325",
-    "scope": [
-      "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs",
-      "tests/tagRoyalDecreeDiscordNegation2v2.test.cjs",
-      "tests/tagBattleBounceDiscord2v2.test.cjs",
-      "tests/tagBattleLevelBurnDiscord2v2.test.cjs"
-    ],
-    "workBranches": [
-      {
-        "mission": "M330",
-        "branch": "feat/work-m330-bottomless-trap-hole-discord-summon-2v2-20261117",
-        "head": "2c572214c2e18842f25fa121f6593a5f9c8f1c49",
-        "pr": 287,
-        "baseBranch": "feat/rea-engine-recovery-20261026",
-        "baseSha": "0bb80a318da6ca5a1d697cae4937ed1625354325",
-        "scope": [
-          "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "engineValidation": "in_progress",
-          "npmTest": "passed; audit:rea in progress",
-          "extendedSoak600": "in_progress"
-        }
-      },
-      {
-        "mission": "M337",
-        "branch": "feat/work-m337-royal-decree-discord-negation-2v2-20261117",
-        "head": "4a8151f31cf9820bcc21e7a7e9e8debbc417d0c2",
-        "pr": 288,
-        "baseBranch": "feat/rea-engine-recovery-20261026",
-        "baseSha": "0bb80a318da6ca5a1d697cae4937ed1625354325",
-        "scope": [
-          "tests/tagRoyalDecreeDiscordNegation2v2.test.cjs"
-        ],
-        "state": "released-to-auxiliary-monitor-ci",
-        "ci": {
-          "cardBatchFast": "success",
-          "milestone1000": "success",
-          "engineValidation": "in_progress",
-          "npmTest": "in_progress",
-          "extendedSoak600": "in_progress"
-        }
-      },
-      {
-        "mission": "M338",
-        "branch": "feat/work-m338-wall-of-illusion-kelbek-battle-bounce-2v2-20261117",
-        "baseBranch": "feat/rea-engine-recovery-20261026",
-        "baseSha": "0bb80a318da6ca5a1d697cae4937ed1625354325",
-        "scope": [
-          "tests/tagBattleBounceDiscord2v2.test.cjs"
-        ],
-        "state": "reserved"
-      },
-      {
-        "mission": "M339",
-        "branch": "feat/work-m339-needle-burrower-ka2-battle-level-burn-2v2-20261117",
-        "baseBranch": "feat/rea-engine-recovery-20261026",
-        "baseSha": "0bb80a318da6ca5a1d697cae4937ed1625354325",
-        "scope": [
-          "tests/tagBattleLevelBurnDiscord2v2.test.cjs"
-        ],
-        "state": "reserved"
-      }
-    ],
-    "blocksCompleted": [
-      "Reauditoria real de coordination/state.json, último checkpoint M330, HEAD, branches, PRs e workflows.",
-      "M330 retomada na branch reservada; PR #287 criada com 273 linhas de teste, 2 cenários e CI em execução.",
-      "M337 criada em branch isolada; PR #288 com 305 linhas e 3 cenários de Royal Decree/Sakuretsu via handler Discord.",
-      "Falha da PR #286 diagnosticada em logs: controle negativo esperava response abaixo do limiar, mas o motor corretamente permanece em main; comentário cooperativo enviado."
-    ],
-    "handoffRequests": [
-      {
-        "pr": 286,
-        "commentId": 6958699674,
-        "status": "diagnóstico enviado; correção permanece com o responsável"
-      }
-    ],
-    "ci": {
-      "pr287": {
-        "cardBatchFast": "success",
-        "milestone1000": "success",
-        "engineValidation": "in_progress",
-        "npmTest": "passed; audit:rea in progress",
-        "extendedSoak600": "in_progress"
-      },
-      "pr288": {
-        "cardBatchFast": "success",
-        "milestone1000": "success",
-        "engineValidation": "in_progress",
-        "npmTest": "in_progress",
-        "extendedSoak600": "in_progress"
-      },
-      "pr286": {
-        "cardBatchFast": "success",
-        "milestone1000": "success",
-        "engineValidation": "failure",
-        "extendedSoak600": "success",
-        "failure": "tests/tagTrapHoleDiscordSummonThreshold2v2.test.cjs:209; expected response for below-1000 summon, actual main"
-      }
-    },
-    "catalogAtStart": {
-      "sharedCards": 969,
-      "sharedCertificates": 969,
-      "developmentCards": 1014,
-      "developmentCertificates": 1014,
-      "delta": 45,
-      "remainingTo1000": 31,
-      "historicalPending": 993,
-      "identityBlocked": 27,
-      "newCertifications": 0,
-      "automaticCertifications": 0,
-      "inventoryGranted": 0
-    },
-    "productionAtStart": {
-      "mergePerformed": false,
-      "deployPerformed": false,
-      "liveDiscordValidation": false,
-      "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
-      "sharedHead": "0bb80a318da6ca5a1d697cae4937ed1625354325",
-      "hosting": "not independently verified",
-      "deploymentWorkflow": "not found in main/shared; only card-batch-admission, card-batch-fast, engine-validation, milestone1000 workflows"
-    },
-    "duration": {
-      "targetEffectiveMinutes": 60,
-      "effectiveWorkMinutes": 0,
-      "ciWaitExcluded": true,
-      "targetMet": false
-    },
-    "nextTask": "Concluir CI/soaks de #287–#288; avançar M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 em branches isoladas; não tocar M231–M236, M319–M322, M327–M329 ou runtime reservado.",
-    "nextWindow": "2026-11-17T17:30:00-03:00",
-    "reservationReleased": false
+    "runId": "work-20261117T215910-0300-M347-M349",
+    "mission": "M347–M349",
+    "state": "released-to-auxiliary-monitor-ci",
+    "checkpoint": "coordination/runs/work-20261117T215910-0300-M347-M349.json",
+    "sharedHead": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+    "endedAt": "2026-11-17T22:23:13.645-03:00"
   },
   "parallelIndependentRuns": [
     {
@@ -7110,11 +7104,216 @@
       "nextTask": "Concluir CI/soaks de #287–#288; avançar M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 em branches isoladas; não tocar M231–M236, M319–M322, M327–M329 ou runtime reservado.",
       "nextWindow": "2026-11-17T17:30:00-03:00",
       "reservationReleased": false
+    },
+    {
+      "runId": "work-20261117T215910-0300-M347-M349",
+      "owner": "Work",
+      "mission": "M347–M349",
+      "priority": "P1 — novas integrações Discord 2v2 em arquivos de teste independentes; sem runtime/catálogo",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-17T21:59:10-03:00",
+      "endedAt": "2026-11-17T22:23:13.645-03:00",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "sharedHeadAtEndBeforeCoordinationCommit": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "workBranches": [
+        {
+          "mission": "M347",
+          "branch": "feat/work-m347-flip-draw-destroy-discord-2v2-20261117",
+          "head": "a8550aa4310e205c50f40747af0f5297b3107f25",
+          "pr": 296,
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+          "scope": [
+            "tests/tagFlipDrawDestroyDiscord2v2.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "npmTest": "success",
+            "engineValidation": "in_progress",
+            "extendedSoak600": "in_progress"
+          },
+          "cards": [
+            "Skelengel",
+            "Man-Eater Bug"
+          ],
+          "scenarios": 2
+        },
+        {
+          "mission": "M348",
+          "branch": "feat/work-m348-mysterious-puppeteer-discord-trigger-2v2-20261117",
+          "head": "eed6b5be52fb399f86f95298e76c719d9943ef64",
+          "pr": 297,
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+          "scope": [
+            "tests/tagMysteriousPuppeteerDiscord2v2.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "npmTest": "success",
+            "engineValidation": "in_progress",
+            "extendedSoak600": "in_progress"
+          },
+          "cards": [
+            "Mysterious Puppeteer"
+          ],
+          "scenarios": 2
+        },
+        {
+          "mission": "M349",
+          "branch": "feat/work-m349-mystic-tomato-discord-recruit-2v2-20261117",
+          "head": "5a2c46e3907956c2e02c60bdabb3db89c96121a6",
+          "pr": 298,
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+          "scope": [
+            "tests/tagMysticTomatoDiscord2v2.test.cjs"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "ci": {
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "npmTest": "success",
+            "engineValidation": "in_progress",
+            "extendedSoak600": "in_progress"
+          },
+          "cards": [
+            "Mystic Tomato"
+          ],
+          "scenarios": 3
+        }
+      ],
+      "blocksCompleted": [
+        "M347: Skelengel — Flip obrigatório compra do Deck físico do representante ativo; fonte pertence ao parceiro inativo.",
+        "M347: Man-Eater Bug — seleção Discord de alvo em qualquer campo compartilhado e destruição com UID/Graveyard corretos; correção da fixture para selecionar o alvo no estágio triggerTarget após CI revelar a semântica real.",
+        "M348: Mysterious Puppeteer — gatilho obrigatório +500 PV compartilhados em Invocações-Normais das duas equipes; fonte pertence ao parceiro inativo.",
+        "M349: Mystic Tomato — gatilho opcional após destruição em batalha; Special Summon DARK até 1500 ATK somente do Deck físico ativo; controle negativo de Deck do parceiro e recusa do efeito.",
+        "Correção de fixture M348: iniciar o turno no representante que efetivamente realiza a Invocação-Normal.",
+        "Triagem cooperativa de CI de PRs #288, #290, #292 e #293; comentários com causas e correções sugeridas, sem modificar branches alheias."
+      ],
+      "ci": {
+        "M347": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "extendedSoak600": "in_progress",
+          "note": "primeira tentativa falhou por confundir triggerTarget com seleção da origem; corrigida a fixture; npm test do novo HEAD passou"
+        },
+        "M348": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "extendedSoak600": "in_progress"
+        },
+        "M349": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "npmTest": "success",
+          "engineValidation": "in_progress",
+          "extendedSoak600": "in_progress"
+        },
+        "otherPRs": {
+          "287": "Card Batch Fast/Milestone success; Engine Validation in progress",
+          "288": "Engine Validation failed; diagnóstico enviado",
+          "289": "Engine Validation success",
+          "290": "Engine Validation failed; diagnóstico enviado",
+          "291": "Engine Validation success",
+          "292": "Engine Validation failed; diagnóstico enviado",
+          "293": "Engine Validation failed; diagnóstico enviado",
+          "294": "Engine Validation success",
+          "295": "Engine Validation success"
+        },
+        "diagnostics": [
+          {
+            "pr": 288,
+            "commentId": 6966055005,
+            "issue": "phase expected response vs main; attackCount:0 violates duelIntegrity"
+          },
+          {
+            "pr": 290,
+            "commentId": 6966055471,
+            "issue": "attack already applied 600 damage during submit; expected LP 3400"
+          },
+          {
+            "pr": 292,
+            "commentId": 6966055915,
+            "issue": "getMonsterEffect does not expose activation.policy; use getMonsterDefinition"
+          },
+          {
+            "pr": 293,
+            "commentId": 6966056330,
+            "issue": "getMonsterEffect does not expose activation.policy; use getMonsterDefinition"
+          }
+        ]
+      },
+      "catalogAtEnd": {
+        "certified": 969,
+        "target": 1000,
+        "remainingToGoal": 31,
+        "historical": 1962,
+        "pending": 993,
+        "identityBlocked": 27,
+        "fullyUnreviewed": 966,
+        "automaticCertifications": 0,
+        "newCertifications": 0,
+        "inventoryGranted": 0,
+        "sourceArtifact": "milestone1000-factual-worklist (run 44214448503)"
+      },
+      "productionAtEnd": {
+        "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+        "sharedHeadBeforeCheckpoint": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+        "sharedAheadOfMain": 611,
+        "sharedBehindMain": 10,
+        "mergePerformed": false,
+        "deployPerformed": false,
+        "deploymentStatus": "não verificável pelo conector disponível; endpoint de deployments não exposto e nenhum workflow de deploy encontrado",
+        "liveDiscordValidation": false
+      },
+      "duration": {
+        "elapsedMinutes": 24.06,
+        "effectiveWorkMinutes": 20.2,
+        "targetEffectiveMinutes": 60,
+        "targetMet": false,
+        "ciWaitExcluded": true
+      },
+      "scopeReleasedToAuxiliary": [
+        {
+          "branch": "feat/work-m347-flip-draw-destroy-discord-2v2-20261117",
+          "pr": 296,
+          "files": [
+            "tests/tagFlipDrawDestroyDiscord2v2.test.cjs"
+          ]
+        },
+        {
+          "branch": "feat/work-m348-mysterious-puppeteer-discord-trigger-2v2-20261117",
+          "pr": 297,
+          "files": [
+            "tests/tagMysteriousPuppeteerDiscord2v2.test.cjs"
+          ]
+        },
+        {
+          "branch": "feat/work-m349-mystic-tomato-discord-recruit-2v2-20261117",
+          "pr": 298,
+          "files": [
+            "tests/tagMysticTomatoDiscord2v2.test.cjs"
+          ]
+        }
+      ],
+      "nextTask": "Auxiliar: monitorar #296–#298 e corrigir apenas os três arquivos de teste próprios se a CI revelar falhas. Work: na próxima janela, concluir Engine Validation/soaks; depois iniciar 3-Hump Lacooda (primeira da triagem) somente após liberação explícita de src/monsterEffects.ts e src/duelEngineCurrent.ts; não tocar em M174/M176/M242/M264 nem nas reservas M305/M338/M339.",
+      "nextWindow": "2026-11-17T22:30:00-03:00",
+      "reservationReleased": true
     }
   ],
-  "lastParallelRun": "work-20261117T120018-0300-M330",
-  "nextParallelTask": "Concluir CI/soaks de #287–#288; avançar M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 em branches isoladas; não tocar M231–M236, M319–M322, M327–M329 ou runtime reservado.",
-  "nextParallelWindow": "2026-11-17T17:30:00-03:00",
+  "lastParallelRun": "work-20261117T215910-0300-M347-M349",
+  "nextParallelTask": "Auxiliar: monitorar #296–#298 e corrigir apenas os três arquivos de teste próprios se a CI revelar falhas. Work: na próxima janela, concluir Engine Validation/soaks; depois iniciar 3-Hump Lacooda (primeira da triagem) somente após liberação explícita de src/monsterEffects.ts e src/duelEngineCurrent.ts; não tocar em M174/M176/M242/M264 nem nas reservas M305/M338/M339.",
+  "nextParallelWindow": "2026-11-17T22:30:00-03:00",
   "sharedHeadAfterCheckpointCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
   "postCheckpointCI": {
     "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",

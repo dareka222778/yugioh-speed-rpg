@@ -1,0 +1,260 @@
+{
+  "format": 1,
+  "runId": "work-20261117T215910-0300-M347-M349",
+  "owner": "Work",
+  "mission": "M347–M349",
+  "priority": "P1 — novas integrações Discord 2v2 em arquivos de teste independentes; sem runtime/catálogo",
+  "state": "completed-with-engine-validation-and-soaks-pending",
+  "startedAt": "2026-11-17T21:59:10-03:00",
+  "endedAt": "2026-11-17T22:23:13.645-03:00",
+  "duration": {
+    "elapsedMinutes": 24.06,
+    "effectiveWorkMinutes": 20.2,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+  "sharedHeadAtEndBeforeCoordinationCommit": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+  "priorCheckpoint": {
+    "path": "coordination/runs/work-20261117T162814-0300-M330-M337-M339.json",
+    "blobSha": "446a095c8bb880d0feefba83e49063626c3db878"
+  },
+  "priorState": {
+    "runId": "work-20261115T142521-0300",
+    "state": "active",
+    "lastActivityAt": "2026-11-17T00:44:57.712Z",
+    "stateBlobSha": "2be8f26f6f87b49609e54bf0320a0a4c76e2cb61"
+  },
+  "workBranches": [
+    {
+      "mission": "M347",
+      "branch": "feat/work-m347-flip-draw-destroy-discord-2v2-20261117",
+      "head": "a8550aa4310e205c50f40747af0f5297b3107f25",
+      "pr": 296,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "scope": [
+        "tests/tagFlipDrawDestroyDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "cards": [
+        "Skelengel",
+        "Man-Eater Bug"
+      ],
+      "scenarios": 2
+    },
+    {
+      "mission": "M348",
+      "branch": "feat/work-m348-mysterious-puppeteer-discord-trigger-2v2-20261117",
+      "head": "eed6b5be52fb399f86f95298e76c719d9943ef64",
+      "pr": 297,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "scope": [
+        "tests/tagMysteriousPuppeteerDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "cards": [
+        "Mysterious Puppeteer"
+      ],
+      "scenarios": 2
+    },
+    {
+      "mission": "M349",
+      "branch": "feat/work-m349-mystic-tomato-discord-recruit-2v2-20261117",
+      "head": "5a2c46e3907956c2e02c60bdabb3db89c96121a6",
+      "pr": 298,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+      "scope": [
+        "tests/tagMysticTomatoDiscord2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600": "in_progress"
+      },
+      "cards": [
+        "Mystic Tomato"
+      ],
+      "scenarios": 3
+    }
+  ],
+  "blocksCompleted": [
+    "M347: Skelengel — Flip obrigatório compra do Deck físico do representante ativo; fonte pertence ao parceiro inativo.",
+    "M347: Man-Eater Bug — seleção Discord de alvo em qualquer campo compartilhado e destruição com UID/Graveyard corretos; correção da fixture para selecionar o alvo no estágio triggerTarget após CI revelar a semântica real.",
+    "M348: Mysterious Puppeteer — gatilho obrigatório +500 PV compartilhados em Invocações-Normais das duas equipes; fonte pertence ao parceiro inativo.",
+    "M349: Mystic Tomato — gatilho opcional após destruição em batalha; Special Summon DARK até 1500 ATK somente do Deck físico ativo; controle negativo de Deck do parceiro e recusa do efeito.",
+    "Correção de fixture M348: iniciar o turno no representante que efetivamente realiza a Invocação-Normal.",
+    "Triagem cooperativa de CI de PRs #288, #290, #292 e #293; comentários com causas e correções sugeridas, sem modificar branches alheias."
+  ],
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remainingToGoal": 31,
+    "historical": 1962,
+    "pending": 993,
+    "identityBlocked": 27,
+    "fullyUnreviewed": 966,
+    "automaticCertifications": 0,
+    "newCertifications": 0,
+    "inventoryGranted": 0,
+    "sourceArtifact": "milestone1000-factual-worklist (run 44214448503)"
+  },
+  "tests": {
+    "newCardsBehaviorallyCovered": 4,
+    "scenarios": 7,
+    "filesAdded": 3,
+    "runtimeFilesChanged": 0,
+    "catalogFilesChanged": 0,
+    "persistentDatabaseChanged": false,
+    "discordLiveValidation": false
+  },
+  "ci": {
+    "M347": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak600": "in_progress",
+      "note": "primeira tentativa falhou por confundir triggerTarget com seleção da origem; corrigida a fixture; npm test do novo HEAD passou"
+    },
+    "M348": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak600": "in_progress"
+    },
+    "M349": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak600": "in_progress"
+    },
+    "otherPRs": {
+      "287": "Card Batch Fast/Milestone success; Engine Validation in progress",
+      "288": "Engine Validation failed; diagnóstico enviado",
+      "289": "Engine Validation success",
+      "290": "Engine Validation failed; diagnóstico enviado",
+      "291": "Engine Validation success",
+      "292": "Engine Validation failed; diagnóstico enviado",
+      "293": "Engine Validation failed; diagnóstico enviado",
+      "294": "Engine Validation success",
+      "295": "Engine Validation success"
+    },
+    "diagnostics": [
+      {
+        "pr": 288,
+        "commentId": 6966055005,
+        "issue": "phase expected response vs main; attackCount:0 violates duelIntegrity"
+      },
+      {
+        "pr": 290,
+        "commentId": 6966055471,
+        "issue": "attack already applied 600 damage during submit; expected LP 3400"
+      },
+      {
+        "pr": 292,
+        "commentId": 6966055915,
+        "issue": "getMonsterEffect does not expose activation.policy; use getMonsterDefinition"
+      },
+      {
+        "pr": 293,
+        "commentId": 6966056330,
+        "issue": "getMonsterEffect does not expose activation.policy; use getMonsterDefinition"
+      }
+    ]
+  },
+  "coordination": {
+    "activeRunPreserved": "work-20261115T142521-0300",
+    "activeReservationsPreserved": [
+      "M305",
+      "M338",
+      "M339",
+      "M174",
+      "M176",
+      "M242",
+      "M264"
+    ],
+    "handoffRequestsStillPending": [
+      {
+        "mission": "M174 Atomic Firefly",
+        "pr": 17,
+        "status": "awaiting-explicit-release"
+      },
+      {
+        "mission": "M176 face-up Double Tribute selector",
+        "pr": 17,
+        "status": "awaiting-explicit-release"
+      },
+      {
+        "mission": "M242 recover physical-owner routing; partial handoff only, keep M176 selector reserved",
+        "pr": 17,
+        "status": "awaiting-explicit-release"
+      },
+      {
+        "mission": "M264 Absorbing Kid from the Sky / battleLevelHeal",
+        "pr": 17,
+        "status": "awaiting-explicit-release"
+      }
+    ],
+    "scopeReleasedToAuxiliary": [
+      {
+        "branch": "feat/work-m347-flip-draw-destroy-discord-2v2-20261117",
+        "pr": 296,
+        "files": [
+          "tests/tagFlipDrawDestroyDiscord2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m348-mysterious-puppeteer-discord-trigger-2v2-20261117",
+        "pr": 297,
+        "files": [
+          "tests/tagMysteriousPuppeteerDiscord2v2.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m349-mystic-tomato-discord-recruit-2v2-20261117",
+        "pr": 298,
+        "files": [
+          "tests/tagMysticTomatoDiscord2v2.test.cjs"
+        ]
+      }
+    ],
+    "reservationReleased": true,
+    "conflictPolicy": "Auxiliar pode apenas monitorar/corrigir os três arquivos de teste nas respectivas branches. Não tocar em runtime, catálogo, certificados, banco persistente, inventários, main, coordenação de terceiros ou produção."
+  },
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadBeforeCheckpoint": "85ab01fce3005f3f245625b1681ff1e09aab15ad",
+    "sharedAheadOfMain": 611,
+    "sharedBehindMain": 10,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "deploymentStatus": "não verificável pelo conector disponível; endpoint de deployments não exposto e nenhum workflow de deploy encontrado",
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Auxiliar: monitorar #296–#298 e corrigir apenas os três arquivos de teste próprios se a CI revelar falhas. Work: na próxima janela, concluir Engine Validation/soaks; depois iniciar 3-Hump Lacooda (primeira da triagem) somente após liberação explícita de src/monsterEffects.ts e src/duelEngineCurrent.ts; não tocar em M174/M176/M242/M264 nem nas reservas M305/M338/M339.",
+  "nextWindow": "2026-11-17T22:30:00-03:00"
+}
