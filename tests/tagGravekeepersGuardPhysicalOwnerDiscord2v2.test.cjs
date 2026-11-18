@@ -226,7 +226,7 @@ test("Gravekeeper's Guard can target only the opposing shared field and returns 
   let current=await flipGuard(fixture);
   current=await settleResponses(current,'guard-flip');
   assert.equal(current.state.core.phase,'choice','the mandatory Flip effect must request its opposing monster target');
-  assert.equal(current.state.core.choice.source,'monsterTarget');
+  assert.equal(current.state.core.choice.source,'triggerTarget');
   const actor=member(2);
   const actions=tag.tagActions(current.state,actor);
   const targetIndex=actions.findIndex(action=>action.kind==='choose'&&action.target===fixture.target.uid);
