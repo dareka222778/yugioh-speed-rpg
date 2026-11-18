@@ -99,11 +99,11 @@ function assertRules(state){
   }
   for(const seat of [0,1,2,3])assert.ok((holder(state,seat).extra??[]).length<=5);
 }
-function inventory(state){
+function inventory(state,expected=80){
   const cards=tag.tagInventory(state);
-  assert.equal(cards.length,80,'four physical twenty-card Decks must contribute exactly eighty cards');
+  assert.equal(cards.length,expected,'inventory must include every physical Main/Extra Deck card exactly once');
   const map=new Map(cards.map(card=>[card.uid,card.id]));
-  assert.equal(map.size,80,'all physical UIDs must be unique');
+  assert.equal(map.size,expected,'all physical UIDs must be unique');
   return map;
 }
 function assertConserved(state,before){
@@ -296,7 +296,7 @@ function setupFusion(){
   assertRules(state);
   assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
-  const before=inventory(state);
+  const before=inventory(state,81);
   const record=register(state,'m366-guard-fusion-owner');
   assertPublicPayload(record);
   return {state,ally,source,target,before,record};
