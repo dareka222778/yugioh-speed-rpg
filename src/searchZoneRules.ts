@@ -54,7 +54,9 @@ export function resolveSearchZoneSelection(
  getEffect?:(id:string)=>{kind:string}|undefined,
  necrovalleyFaceUp=false,
 ):SearchZoneResolution|null{
- const issues=searchZoneIssues(rule);\n if(issues.length)throw new Error('Invalid search rule: '+issues.join(', '));\n if(!searchZoneTargets(s,actor,rule,getCard,getEffect).some(ref=>ref.uid===uid))return null;
+ const issues=searchZoneIssues(rule);
+ if(issues.length)throw new Error('Invalid search rule: '+issues.join(', '));
+ if(!searchZoneTargets(s,actor,rule,getCard,getEffect).some(ref=>ref.uid===uid))return null;
  const p=s.players[actor];
  const sources:('deck'|'grave')[]=rule.from==='deck'?['deck']:rule.from==='grave'?['grave']:['deck','grave'];
  const locations=(['deck','grave'] as const).map(source=>({source,zone:p[source],index:p[source].findIndex(ref=>ref.uid===uid)})).filter(x=>x.index>=0);
