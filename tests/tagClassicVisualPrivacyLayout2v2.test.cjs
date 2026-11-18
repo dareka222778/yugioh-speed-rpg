@@ -12,11 +12,15 @@ const trace=message=>fs.writeSync(2,'[M359] '+message+'\\n');
 function debugTest(name,fn){return nodeTest(name,async(...args)=>{try{return await fn(...args);}catch(error){trace(name+' FAILED: '+(error&&error.stack||error));throw error;}});}
 trace('module setup started');
 
-const SAFE_NORMALS=[...new Set(tag.tagNormalCardIds)].filter(id=>{
-  const card=getPlayableCard(id);
-  return card?.kind==='monster'&&card.monsterType==='normal'&&
-    Number.isInteger(card.atk)&&Number.isInteger(card.defense)&&card.level<=4;
-});
+const SAFE_NORMALS=[];
+const seenNormalNames=new Set();
+for(const id of [...new Set(tag.tagNormalCardIds)]){
+  const card=getPlayableCard(id),name=getCard(id)?.name;
+  if(card?.kind==='monster'&&card.monsterType==='normal'&&Number.isInteger(card.atk)&&Number.isInteger(card.defense)&&card.level<=4&&name&&!seenNormalNames.has(name)){
+    SAFE_NORMALS.push(id);seenNormalNames.add(name);
+  }
+}
+assert.ok(SAFE_NORMALS.length>=20,'M359 requires at least 20 distinct certified Normal Monster names');
 assert.ok(SAFE_NORMALS.length>=20,'M359 requires twenty distinct certified Normal Monsters');
 const DECK=SAFE_NORMALS.slice(0,20);
 assert.equal(new Set(DECK).size,20);
