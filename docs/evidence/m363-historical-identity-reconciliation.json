@@ -815,5 +815,21 @@
       "distributionAuthorized": false,
       "inventoryGranted": 0
     }
-  ]
+  ],
+  "milestonePlanCrosscheck": {
+    "script": "scripts/milestone1000-plan.cjs",
+    "scriptBlobSha": "ba95b51172f9febb8c26b79b3d3ce966a2472122",
+    "manifestBlobSha": "f59955155af85aa94b3a91231ff1a279a1d65f07",
+    "catalogRevision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99",
+    "catalogBlobSha": "1438a9a6a186e7de9374394918c2d1bd03c2c938",
+    "certified": 969,
+    "pending": 993,
+    "remainingToGoal": 31,
+    "identityBlockedTotal": 27,
+    "fullyUnreviewed": 966,
+    "candidatesInPending": 31,
+    "candidateIdentityIssues": 0,
+    "candidatesAlreadyCertified": 0,
+    "interpretation": "The 27 identity-blocked cards are elsewhere in the historical queue; none of these 31 candidates has an identity issue under the actual milestone1000-plan rules."
+  }
 }
