@@ -189,7 +189,7 @@ function setup(key,{includeCandidate=true,includePartnerDecoy=true}={}){
   const required=[[],[],[],[]];
   required[0].push(MYSTIC_TOMATO);
   if(includePartnerDecoy)required[0].push(PARTNER_DECOY);
-  required[2].push(ACTIVE_CANDIDATE);
+  if(includeCandidate)required[2].push(ACTIVE_CANDIDATE);
   required[3].push(AXE_RAIDER);
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M349 Seat '+seat,cards:deck(required[seat])
@@ -252,9 +252,6 @@ async function activateOptional(fixture,record){
     'the optional Tomato trigger must expose a decline action');
   await rejectInactivePartner(record,actor,member(0),index,fixture.key+'-optional');
   return submit(record,actor,index,'m349-'+fixture.key+'-activate');
-}
-async function specialSummon(fixture,record){
-  current=record;
 }
 function assertOutcome(fixture,record,recruited){
   const state=record.state;
