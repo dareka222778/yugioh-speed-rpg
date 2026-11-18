@@ -1,0 +1,170 @@
+{
+  "runId": "work-20261118T132549-0300-M364",
+  "mission": "M364",
+  "owner": "Work",
+  "priority": "P1 — identificar e bloquear vulnerabilidades high/critical na árvore de produção; gerar candidato de correção para sharp sem sobrescrever lockfile nem tocar renderers reservados.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-18T13:25:49-03:00",
+  "endedAt": "2026-11-18T13:33:32-03:00",
+  "duration": {
+    "elapsedMinutes": 7.7,
+    "effectiveWorkMinutes": 7,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "branch": "feat/work-m364-dependency-audit-runtime-20261118",
+  "branchHeadSha": "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "626d6261a1f93675829bb60518333a801369481e",
+  "prNumber": 312,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/312",
+  "draft": true,
+  "mergeable": true,
+  "scope": [
+    ".github/workflows/dependency-audit.yml",
+    ".github/workflows/engine-validation.yml",
+    "scripts/report-dependency-audit.cjs",
+    "tests/dependencyAuditReport.test.cjs"
+  ],
+  "changes": [
+    "Adicionado classificador dos relatórios npm audit completo e --omit=dev, com gate para high/critical em produção.",
+    "Adicionados quatro testes de parser/política; corrigida mensagem de erro após a primeira CI.",
+    "Adicionado workflow dedicado e integração no Engine Validation para coletar evidência e executar o gate depois da suíte de regressão.",
+    "Identificada sharp como dependência direta de produção vulnerável; gerado artefato de package.json/package-lock para sharp 0.35.5 sem alterar os arquivos versionados da PR."
+  ],
+  "validation": {
+    "cardBatchFast": {
+      "runId": 44348553150,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "milestone1000": {
+      "runId": 44348551748,
+      "status": "completed",
+      "conclusion": "success",
+      "certified": 969,
+      "remaining": 31
+    },
+    "engineValidation": {
+      "runId": 44348552606,
+      "status": "in_progress",
+      "npmCi": "success",
+      "npmRunCheck": "success",
+      "npmTest": "in_progress",
+      "extendedSoak600s": "in_progress"
+    },
+    "dependencyAudit": {
+      "runId": 44348554843,
+      "status": "completed",
+      "conclusion": "failure",
+      "parserTests": "success",
+      "productionGate": "blocked",
+      "finding": {
+        "package": "sharp",
+        "directProductionDependency": true,
+        "severity": "high",
+        "range": "<=0.35.5-rc.1",
+        "fixAvailable": "0.35.5",
+        "advisories": [
+          "CVE-2026-33327",
+          "CVE-2026-33328",
+          "CVE-2026-35590",
+          "CVE-2026-35591",
+          "GHSA-g89c-p67h-r497",
+          "GHSA-2jg2-4ch7-h545",
+          "CVE-2026-96889"
+        ]
+      }
+    },
+    "sharp0355Candidate": {
+      "artifactId": 14445989356,
+      "artifactDigest": "sha256:bbe88c9bea99d4e874d50229ea8ae20f68c32612ce127e65e2bc8ea86f8e2cca",
+      "lockfileRegenerated": true,
+      "npmCi": "success",
+      "npmAuditOmitDev": "success; found 0 vulnerabilities",
+      "typecheck": "failed",
+      "reason": "TS2503: namespace sharp no longer resolves at seven annotations across six reserved renderer/inspector files."
+    }
+  },
+  "catalog": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "newBehavioralCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "handoffRequests": [
+    {
+      "pr": 307,
+      "commentId": 6984816717,
+      "files": [
+        "src/tagRenderer.ts"
+      ],
+      "purpose": "sharp 0.35.5 type migration",
+      "status": "awaiting-explicit-release"
+    },
+    {
+      "pr": 308,
+      "commentId": 6984817626,
+      "files": [
+        "src/cardInspector.ts",
+        "src/cardRenderer.ts",
+        "src/deckRenderer.ts",
+        "src/duelRenderer.ts",
+        "src/npcRenderer.ts"
+      ],
+      "purpose": "sharp 0.35.5 type migration",
+      "status": "awaiting-explicit-release"
+    }
+  ],
+  "preservedConcurrentWork": {
+    "activeRunId": "work-20261115T142521-0300",
+    "activeRunState": "active",
+    "untouchedScope": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "thirdPartyReservationsReleased": false,
+    "m61HandoffPr": 17,
+    "m61HandoffStatus": "still awaiting response; no runtime files touched"
+  },
+  "safety": {
+    "runtimeFilesChanged": 0,
+    "catalogFilesChanged": 0,
+    "certificationFilesChanged": 0,
+    "packageFilesChanged": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidated": false
+  },
+  "production": {
+    "deploymentsApi": "not available through the connected GitHub read endpoint; no production change performed"
+  },
+  "nextTask": "Aguardar handoff explícito de M359/M360. Se liberado, migrar apenas os tipos sharp.OverlayOptions nos seis arquivos indicados, aplicar package.json/package-lock do candidato 0.35.5 em PR separada e validar npm ci, npm run check, npm test, audit e soak. Se a liberação não vier, manter o gate bloqueado e não tocar nos renderers.",
+  "auxiliaryScope": {
+    "released": [
+      "monitorar PR #312 e os workflows"
+    ],
+    "allowed": "monitorar resultados e relatar; sem editar arquivos de runtime/renderer, package files ou coordenação de terceiros",
+    "forbidden": [
+      "merge",
+      "deploy",
+      "alterar inventário",
+      "alterar dados de jogadores",
+      "alterar banco persistente",
+      "editar arquivos reservados M359/M360 sem handoff"
+    ]
+  },
+  "nextWindow": "2026-11-18T17:30:00-03:00",
+  "sharedHeadBeforeCheckpointCommit": "626d6261a1f93675829bb60518333a801369481e"
+}

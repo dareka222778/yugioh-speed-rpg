@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-18T15:41:20.066Z",
+  "lastActivityAt": "2026-11-18T16:33:32.000Z",
   "nextScheduledAt": "2026-11-18T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência. M357 reservado em branch independente para revisão oficial dos últimos onze candidatos; somente documentação e teste de evidência. M358 reservado em branch independente para testar confidencialidade de monstros/backrow face-down no painel público e visibilidade por equipe no painel privado; somente tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs, sem alterações em runtime ou reservas existentes. M359 reservado em branch independente para homologar renderTag/tagImageLayout: privacidade visual face-down por equipe, dimensões do playmat clássico e vistas privadas por assento; somente tests/tagClassicVisualPrivacyLayout2v2.test.cjs. M360 reservado em branch independente para verificar isolamento visual da mão física em 2v2: somente o dono vê alterações na própria mão; campo compartilhado permanece igual; somente tests/tagClassicPrivateHandIsolationVisual2v2.test.cjs. M361 reservado em branch independente para um teste de genericidade do executor CI; PR #309; somente tests/ciRunnerGenericity.test.cjs; runner compartilhado intocado. Diagnósticos enviados às PRs #306–#308 após falhas reais de Engine Validation. Handoff parcial M61 solicitado no PR #17, sem resposta. M362 concluído em branch própria, PR #310; 10/10 testes de admissão aprovados, Card Batch Admission/Fast/Milestone aprovados, Engine Validation, npm test, stress e Extended Soak 600s aprovados. Reserva liberada ao auxiliar para sincronização não-forçada e monitoramento da PR; nenhuma reserva de terceiro foi liberada. M363 reservado em branch própria para auditoria de identidade histórica das 31 candidatas; apenas docs/evidence/m363-historical-identity-reconciliation.json e tests/m363HistoricalIdentityReconciliation.test.cjs. A auditoria não certifica cartas nem altera a allowlist.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência. M357 reservado em branch independente para revisão oficial dos últimos onze candidatos; somente documentação e teste de evidência. M358 reservado em branch independente para testar confidencialidade de monstros/backrow face-down no painel público e visibilidade por equipe no painel privado; somente tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs, sem alterações em runtime ou reservas existentes. M359 reservado em branch independente para homologar renderTag/tagImageLayout: privacidade visual face-down por equipe, dimensões do playmat clássico e vistas privadas por assento; somente tests/tagClassicVisualPrivacyLayout2v2.test.cjs. M360 reservado em branch independente para verificar isolamento visual da mão física em 2v2: somente o dono vê alterações na própria mão; campo compartilhado permanece igual; somente tests/tagClassicPrivateHandIsolationVisual2v2.test.cjs. M361 reservado em branch independente para um teste de genericidade do executor CI; PR #309; somente tests/ciRunnerGenericity.test.cjs; runner compartilhado intocado. Diagnósticos enviados às PRs #306–#308 após falhas reais de Engine Validation. Handoff parcial M61 solicitado no PR #17, sem resposta. M362 concluído em branch própria, PR #310; 10/10 testes de admissão aprovados, Card Batch Admission/Fast/Milestone aprovados, Engine Validation, npm test, stress e Extended Soak 600s aprovados. Reserva liberada ao auxiliar para sincronização não-forçada e monitoramento da PR; nenhuma reserva de terceiro foi liberada. M363 concluído: PR #311, 31/31 identidades reconciliadas, CI fast/milestone/engine success; apenas evidência/teste, ainda sem certificação. A auditoria não certifica cartas nem altera a allowlist. M364 em branch própria, PR #312; somente dois workflows, scripts/report-dependency-audit.cjs e tests/dependencyAuditReport.test.cjs. Gate identificou sharp high em produção; candidato 0.35.5 remove vulnerabilidade mas exige handoff de tipos em renderers. Auxiliar apenas monitora.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -2450,10 +2450,48 @@
         "docs/evidence/m363-historical-identity-reconciliation.json",
         "tests/m363HistoricalIdentityReconciliation.test.cjs"
       ],
-      "state": "reserved",
+      "state": "released-ci-success",
       "startedAt": "2026-11-18T13:04:52-03:00",
       "priority": "P1 — reconciliar as 31 identidades pendentes com o snapshot histórico 2004-10-01; comprovar correspondência canônica e datas firstObserved sem confundir presença histórica com certificação comportamental.",
-      "conflictPolicy": "Somente os dois arquivos novos M363. Não editar docs/tests reservados M355–M357; não tocar runtime, catálogo, certificações, inventário, banco, dados de jogadores, main ou produção."
+      "conflictPolicy": "Somente os dois arquivos novos M363. Não editar docs/tests reservados M355–M357; não tocar runtime, catálogo, certificações, inventário, banco, dados de jogadores, main ou produção.",
+      "head": "fb92080994bbeb1f33ccb563d57084ad12b6a328",
+      "pr": 311,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/311",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success",
+        "npmTest": "success"
+      },
+      "endedAt": "2026-11-18T13:16:34-03:00"
+    },
+    {
+      "mission": "M364",
+      "runId": "work-20261118T132549-0300-M364",
+      "branch": "feat/work-m364-dependency-audit-runtime-20261118",
+      "head": "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f",
+      "pr": 312,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/312",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "626d6261a1f93675829bb60518333a801369481e",
+      "scope": [
+        ".github/workflows/dependency-audit.yml",
+        ".github/workflows/engine-validation.yml",
+        "scripts/report-dependency-audit.cjs",
+        "tests/dependencyAuditReport.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-18T13:25:49-03:00",
+      "endedAt": "2026-11-18T13:33:32-03:00",
+      "priority": "P1 — identificar e bloquear vulnerabilidades high/critical na árvore de produção; gerar candidato de correção para sharp sem sobrescrever lockfile nem tocar renderers reservados.",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "dependencyAudit": "failed-high-sharp",
+        "sharp0355ProductionAudit": "success",
+        "sharp0355Typecheck": "failed-awaiting-renderer-handoff"
+      }
     }
   ],
   "handoffRequest": {
@@ -7734,9 +7772,9 @@
       }
     }
   ],
-  "lastParallelRun": "work-20261118T083137-0300-M361",
-  "nextParallelTask": "Auxiliar: monitorar #309, sincronizar a branch com o shared atual por merge não-forçado e corrigir somente tests/ciRunnerGenericity.test.cjs. Work: aguardar resposta ao handoff M61 para 3-Hump Lacooda; após liberação, implementar e testar essa família; em seguida agrupar A Cat of Ill Omen + An Owl of Luck (search-to-top com ramo Necrovalley) e Abyss Soldier somente após handoff de runtime. Não tocar nas reservas M231–M236 ou M354–M360.",
-  "nextParallelWindow": "2026-11-18T13:30:00-03:00",
+  "lastParallelRun": "work-20261118T132549-0300-M364",
+  "nextParallelTask": "Auxiliar: monitorar PR #312 e reportar CI, sem editar renderers nem dependências. Work: aguardar handoff explícito M359/M360 para migrar tipos sharp e publicar atualização 0.35.5; manter o gate de produção bloqueado até a validação integral.",
+  "nextParallelWindow": "2026-11-18T17:30:00-03:00",
   "sharedHeadAfterCheckpointCommit": "a109bc1ec632e5f78171024a3e512e4fd254a295",
   "postCheckpointCI": {
     "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",
@@ -7826,56 +7864,104 @@
   },
   "sharedHeadAtLastCheckpoint": "fc99fb5024f8b6d06b5a7c024be8a6b7c4f25b8a",
   "latestIndependentRun": {
-    "runId": "work-20261118T083137-0300-M361",
-    "mission": "M361",
+    "runId": "work-20261118T132549-0300-M364",
+    "mission": "M364",
     "owner": "Work",
     "state": "released-to-auxiliary-monitor-ci",
-    "branch": "feat/work-m361-ci-runner-genericity-guard-20261118",
-    "baseSha": "808d5f5587a2a5d8e331d16088605bd207e41142",
-    "head": "f35960472637f46146a90c3bc9f850db44f8edc7",
-    "pr": 309,
+    "branch": "feat/work-m364-dependency-audit-runtime-20261118",
+    "baseSha": "626d6261a1f93675829bb60518333a801369481e",
+    "head": "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f",
+    "pr": 312,
     "scope": [
-      "tests/ciRunnerGenericity.test.cjs"
+      ".github/workflows/dependency-audit.yml",
+      ".github/workflows/engine-validation.yml",
+      "scripts/report-dependency-audit.cjs",
+      "tests/dependencyAuditReport.test.cjs"
     ],
-    "priority": "P1 — impedir ramificações por suíte/mission-specific no executor isolado, evitando conflitos de CI entre PRs paralelas e preservando o runner genérico."
+    "priority": "P1 — identificar e bloquear vulnerabilidades high/critical na árvore de produção; gerar candidato de correção para sharp sem sobrescrever lockfile nem tocar renderers reservados."
   },
   "lastParallelRunSummary": {
-    "runId": "work-20261118T083137-0300-M361",
-    "mission": "M361",
-    "branch": "feat/work-m361-ci-runner-genericity-guard-20261118",
-    "branchHead": "f35960472637f46146a90c3bc9f850db44f8edc7",
-    "pr": 309,
-    "sharedHeadBeforeFinalization": "a109bc1ec632e5f78171024a3e512e4fd254a295",
-    "endedAt": "2026-11-18T08:49:18-03:00",
-    "ci": {
-      "cardBatchFast": "success",
-      "milestone1000": "success",
-      "engineValidation": "in_progress",
-      "npmTest": "in_progress within Engine Validation",
-      "extendedSoak600s": "in_progress"
-    },
+    "runId": "work-20261118T132549-0300-M364",
+    "mission": "M364",
+    "branch": "feat/work-m364-dependency-audit-runtime-20261118",
+    "branchHead": "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f",
+    "pr": 312,
+    "sharedHeadBeforeFinalization": "626d6261a1f93675829bb60518333a801369481e",
+    "endedAt": "2026-11-18T13:33:32-03:00",
     "duration": {
-      "elapsedMinutes": 17.7,
-      "effectiveWorkMinutes": 17.7,
+      "elapsedMinutes": 7.7,
+      "effectiveWorkMinutes": 7,
       "targetEffectiveMinutes": 60,
       "targetMet": false,
       "ciWaitExcluded": true
     },
-    "sharedHeadBeforeFinalCheckpointCommit": "319398a8029a3111968b0281ed07d6c302c26a99",
-    "catalogReview": {
-      "reviewed": 31,
-      "unique": 31,
-      "duplicates": 0,
-      "alreadyCertified": 0,
-      "allSourceVerified": true,
-      "allNotCertified": true
+    "ci": {
+      "cardBatchFast": {
+        "runId": 44348553150,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "milestone1000": {
+        "runId": 44348551748,
+        "status": "completed",
+        "conclusion": "success",
+        "certified": 969,
+        "remaining": 31
+      },
+      "engineValidation": {
+        "runId": 44348552606,
+        "status": "in_progress",
+        "npmCi": "success",
+        "npmRunCheck": "success",
+        "npmTest": "in_progress",
+        "extendedSoak600s": "in_progress"
+      },
+      "dependencyAudit": {
+        "runId": 44348554843,
+        "status": "completed",
+        "conclusion": "failure",
+        "parserTests": "success",
+        "productionGate": "blocked",
+        "finding": {
+          "package": "sharp",
+          "directProductionDependency": true,
+          "severity": "high",
+          "range": "<=0.35.5-rc.1",
+          "fixAvailable": "0.35.5",
+          "advisories": [
+            "CVE-2026-33327",
+            "CVE-2026-33328",
+            "CVE-2026-35590",
+            "CVE-2026-35591",
+            "GHSA-g89c-p67h-r497",
+            "GHSA-2jg2-4ch7-h545",
+            "CVE-2026-96889"
+          ]
+        }
+      },
+      "sharp0355Candidate": {
+        "artifactId": 14445989356,
+        "artifactDigest": "sha256:bbe88c9bea99d4e874d50229ea8ae20f68c32612ce127e65e2bc8ea86f8e2cca",
+        "lockfileRegenerated": true,
+        "npmCi": "success",
+        "npmAuditOmitDev": "success; found 0 vulnerabilities",
+        "typecheck": "failed",
+        "reason": "TS2503: namespace sharp no longer resolves at seven annotations across six reserved renderer/inspector files."
+      }
     },
-    "nextTask": "Auxiliar: monitorar #309, sincronizar a branch com o shared atual por merge não-forçado e corrigir somente tests/ciRunnerGenericity.test.cjs. Work: aguardar resposta ao handoff M61 para 3-Hump Lacooda; após liberação, implementar e testar essa família; em seguida agrupar A Cat of Ill Omen + An Owl of Luck (search-to-top com ramo Necrovalley) e Abyss Soldier somente após handoff de runtime. Não tocar nas reservas M231–M236 ou M354–M360."
+    "catalog": {
+      "certified": 969,
+      "remainingTo1000": 31,
+      "newBehavioralCertifications": 0,
+      "automaticCertifications": 0
+    },
+    "blocker": "sharp 0.35.5 removes the high production audit finding, but TypeScript migration requires explicit handoff for six renderer/inspector files reserved by M359/M360."
   },
-  "lastIndependentWorkCheckpoint": "coordination/runs/work-20261118T1229-0300-M362.json",
-  "lastIndependentWorkActivityAt": "2026-11-18T13:14:45-03:00",
+  "lastIndependentWorkCheckpoint": "coordination/runs/work-20261118T132549-0300-M364.json",
+  "lastIndependentWorkActivityAt": "2026-11-18T13:33:32-03:00",
   "nextWorkWindow": "2026-11-18T17:30:00-03:00",
-  "lastIndependentWorkRunId": "work-20261118T1229-0300-M362",
-  "workBranchesUpdatedAt": "2026-11-18T13:14:45-03:00",
-  "lastActiveWorkMission": "M363"
+  "lastIndependentWorkRunId": "work-20261118T132549-0300-M364",
+  "workBranchesUpdatedAt": "2026-11-18T16:33:32.000Z",
+  "lastActiveWorkMission": "M364",
+  "sharedHeadBeforeCheckpointCommit": "626d6261a1f93675829bb60518333a801369481e"
 }
