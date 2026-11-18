@@ -1,0 +1,337 @@
+{
+  "format": 1,
+  "mission": "M356",
+  "reviewedAt": "2026-11-18",
+  "authority": "Konami official Yu-Gi-Oh! TCG Card Database",
+  "worklist": {
+    "workflowRunId": 44288029483,
+    "artifactId": 14419288363,
+    "target": 1000,
+    "certified": 969,
+    "remainingToGoal": 31,
+    "identityBlocked": 27,
+    "automaticCertifications": 0
+  },
+  "purpose": "Source verification and mechanic-family preparation for worklist entries 11–20. This is evidence for future engine work, not runtime support or card certification.",
+  "sourcePolicy": {
+    "cardText": "Descriptions are paraphrases of the official card text; no full effect text is copied.",
+    "historicalCutoff": "Historical eligibility remains pending an OCG/TCG first-publication audit against 2004-09-30. Do not infer OCG eligibility from TCG release dates.",
+    "certification": "All records remain not certified until source identity, runtime behavior, and real-engine tests are independently validated."
+  },
+  "reusableFamilies": [
+    {
+      "family": "battle-damage-routing-and-redirection",
+      "cards": [
+        "94004268",
+        "54912977",
+        "15013468"
+      ],
+      "sharedWork": "Damage recipient routing, attack-target replay, Damage Step timing, and team LP."
+    },
+    {
+      "family": "private-hand-and-deck-operations",
+      "cards": [
+        "29654737",
+        "23927567",
+        "09156135",
+        "40916023"
+      ],
+      "sharedWork": "Private opponent-hand inspection, physical Deck search, hand destination, and GY banish cost."
+    },
+    {
+      "family": "continuous-team-field-restrictions",
+      "cards": [
+        "10979723",
+        "95174353"
+      ],
+      "sharedWork": "Shared-field counting, attack target legality, and control-change triggers."
+    },
+    {
+      "family": "tribute-cost-burn",
+      "cards": [
+        "65064143"
+      ],
+      "sharedWork": "Typed Tribute requirement, physical ownership, and team LP damage."
+    },
+    {
+      "family": "summon-counter-and-recruit",
+      "cards": [
+        "09156135"
+      ],
+      "sharedWork": "Summon trigger, eligible Spell Counter target, and battle-destruction recruit."
+    }
+  ],
+  "cards": [
+    {
+      "canonicalId": "e09d1bf3-9eb8-4279-b20b-7a10a103d33e",
+      "id": "29654737",
+      "konamiId": 5291,
+      "name": "Amazoness Chain Master",
+      "category": "effect-monster",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1500,
+      "def": 1300,
+      "race": "Warrior",
+      "mechanicFamily": "battle-destruction-pay-lp-private-hand-steal",
+      "effectSummary": "When destroyed by battle and sent to the GY, its controller may pay 1500 LP, privately inspect the opponent's hand, and add one monster from that hand to their own hand.",
+      "twoVTwoReviewQuestions": [
+        "The trigger requires battle destruction and a Graveyard destination.",
+        "The LP payment applies to the controller's shared team LP and must be paid before the hand choice.",
+        "The opponent hand is private per physical seat: determine which opposing hand is inspected and never expose the full hand publicly or to the wrong teammate.",
+        "The selected monster must retain its original physical owner metadata while moving to the effect controller's hand, if the project permits this control/ownership distinction."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5291&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "0ea5463d-48d7-4d76-9017-084a0abe64cd",
+      "id": "94004268",
+      "konamiId": 5284,
+      "name": "Amazoness Swords Woman",
+      "category": "effect-monster",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1500,
+      "def": 1600,
+      "race": "Warrior",
+      "mechanicFamily": "battle-damage-recipient-redirection",
+      "effectSummary": "For battles involving this card, battle damage that its controller would take is inflicted to the opponent instead.",
+      "twoVTwoReviewQuestions": [
+        "Redirect only battle damage, not effect damage.",
+        "The damage recipient becomes the opposing team; do not also subtract the same damage from the controller's team.",
+        "Test both attacking and defending cases, including a stronger opposing monster.",
+        "Preserve ordinary battle destruction outcomes independently from damage redirection."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5284&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "39e5b776-33aa-4e2c-aead-4dad813ea989",
+      "id": "10979723",
+      "konamiId": 5647,
+      "name": "Amazoness Tiger",
+      "category": "effect-monster",
+      "attribute": "EARTH",
+      "level": 4,
+      "atk": 1100,
+      "def": 1500,
+      "race": "Beast",
+      "mechanicFamily": "amazoness-shared-field-buff-and-attack-restriction",
+      "effectSummary": "Only one copy may be controlled; it gains 400 ATK per Amazoness monster its controller controls, and opposing monsters cannot attack other Amazoness monsters while it is present.",
+      "twoVTwoReviewQuestions": [
+        "The one-copy restriction is per team field, not per physical partner.",
+        "Count Amazoness monsters across the team's shared Monster Zones.",
+        "Apply the 400 ATK increment to this Tiger only and recalculate when the field changes.",
+        "The attack restriction protects all other Amazoness monsters on the team field, regardless of physical owner."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5647&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "2cc8ce0d-cd9a-497a-987d-53ebcffda737",
+      "id": "95174353",
+      "konamiId": 4490,
+      "name": "Ameba",
+      "category": "effect-monster",
+      "attribute": "WATER",
+      "level": 1,
+      "atk": 300,
+      "def": 350,
+      "race": "Aqua",
+      "mechanicFamily": "face-up-control-change-burn-once",
+      "effectSummary": "When control of this face-up monster shifts to the opponent, inflict 2000 damage to that opponent; the effect can occur only once while it remains face-up.",
+      "twoVTwoReviewQuestions": [
+        "Distinguish physical owner from current controller after a control change.",
+        "The trigger requires the card to remain face-up and must not repeat after it has already resolved once during that face-up period.",
+        "Damage is applied to the team that receives control, not the previous controller's team.",
+        "Turning face-down and face-up again must follow the official once-while-face-up reset behavior."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4490&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "24aa43e4-8426-4cb5-8e13-e62423daad02",
+      "id": "23927567",
+      "konamiId": 5523,
+      "name": "An Owl of Luck",
+      "category": "effect-monster",
+      "attribute": "WIND",
+      "level": 2,
+      "atk": 300,
+      "def": 500,
+      "race": "Winged Beast",
+      "subtype": "Flip",
+      "mechanicFamily": "flip-field-spell-search-topdeck-or-add",
+      "effectSummary": "On Flip, choose a Field Spell from the controller's Deck and place it on top; if Necrovalley is on the field, the chosen Field Spell may be added to the hand instead.",
+      "twoVTwoReviewQuestions": [
+        "Reuse the same search-resolution family as A Cat of Ill Omen while restricting the filter to Field Spells.",
+        "Search the correct physical Deck and preserve the selected card UID.",
+        "Check Necrovalley on the shared field at resolution.",
+        "Without Necrovalley, place the selected Field Spell on top of the Deck rather than adding it to the hand."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5523&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "587e59cc-4f02-45f8-9254-fba19957fd74",
+      "id": "54912977",
+      "konamiId": 5238,
+      "name": "Ancient Lamp",
+      "category": "effect-monster",
+      "attribute": "WIND",
+      "level": 3,
+      "atk": 900,
+      "def": 1400,
+      "race": "Spellcaster",
+      "mechanicFamily": "conditional-hand-summon-and-attack-redirection",
+      "effectSummary": "During the Main Phase, while face-up, it can Special Summon La Jinn from hand; if attacked while face-down at the start of the Damage Step, it may redirect that attack to another opposing monster.",
+      "twoVTwoReviewQuestions": [
+        "The La Jinn summon requires Ancient Lamp to be face-up both when activated and when resolved.",
+        "The attack-redirection trigger depends on its face-down status at the start of the Damage Step, not its later revealed state.",
+        "The new target must be another monster controlled by the attacking opponent's team; the attacker itself is illegal.",
+        "Reopen Damage Calculation for the redirected target without duplicating the original battle or damage."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5238&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "28d22633-9107-4667-a33d-45a39db44b8b",
+      "id": "15013468",
+      "konamiId": 6087,
+      "name": "Andro Sphinx",
+      "category": "effect-monster",
+      "attribute": "LIGHT",
+      "level": 10,
+      "atk": 3000,
+      "def": 2500,
+      "race": "Beast",
+      "mechanicFamily": "field-gated-lp-summon-and-defense-battle-burn",
+      "effectSummary": "While Pyramid of Light is on the field, pay 500 LP to Special Summon it from hand; it cannot attack that turn or be Special Summoned from the GY, and destroying a Defense Position monster by battle causes burn equal to half that monster's ATK.",
+      "twoVTwoReviewQuestions": [
+        "The summon condition checks the shared Field Zone and pays 500 from the team's LP.",
+        "The summon restriction is tied to the turn of the summon and must block attacks even after control rotation.",
+        "The Graveyard Special Summon prohibition is independent of the field condition.",
+        "Battle burn uses half the destroyed Defense monster's ATK, not DEF, and applies only after battle destruction."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6087&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "86b19a33-1b77-40e0-b1b9-fb880ea14efa",
+      "id": "65064143",
+      "konamiId": 5890,
+      "name": "Anti-Aircraft Flower",
+      "category": "effect-monster",
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 0,
+      "def": 1600,
+      "race": "Plant",
+      "mechanicFamily": "typed-tribute-repeatable-burn",
+      "effectSummary": "Tribute one Insect monster the controller has on the field to inflict 800 damage to the opponent.",
+      "twoVTwoReviewQuestions": [
+        "The Tribute must be an Insect monster on the team's shared field; a partner-owned Insect may be a cost only if the 2v2 team rules authorize it.",
+        "The effect has no printed once-per-turn limit; repeated activations still require a legal Insect Tribute each time.",
+        "Apply 800 damage to the opposing team's shared LP exactly once per resolution.",
+        "Keep the source and Tributed monster UIDs and physical owners intact."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5890&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "b593470f-a125-4679-8f7d-6b9a8c2329f0",
+      "id": "09156135",
+      "konamiId": 5650,
+      "name": "Apprentice Magician",
+      "category": "effect-monster",
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 400,
+      "def": 800,
+      "race": "Spellcaster",
+      "mechanicFamily": "summon-spell-counter-and-battle-recruit",
+      "effectSummary": "When Summoned, place one Spell Counter on a face-up card eligible to hold one; when destroyed by battle, it may recruit a Level 2-or-lower Spellcaster from Deck in face-down Defense Position.",
+      "twoVTwoReviewQuestions": [
+        "The first effect triggers on any qualifying Summon and requires an eligible face-up Spell Counter card.",
+        "The second effect requires battle destruction; effect destruction must not trigger it.",
+        "Recruit from the physical Deck of the effect controller and place the monster face-down in Defense Position.",
+        "Respect the shared three Monster Zones and preserve the recruited card's physical owner."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5650&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "f3fbc4b5-09fd-491f-a6fb-9bcff50e2e3d",
+      "id": "40916023",
+      "konamiId": 5253,
+      "name": "Aqua Spirit",
+      "category": "effect-monster",
+      "attribute": "WATER",
+      "level": 4,
+      "atk": 1600,
+      "def": 1200,
+      "race": "Aqua",
+      "mechanicFamily": "graveyard-banish-special-summon-and-opponent-standby-position-lock",
+      "effectSummary": "It cannot be Normal Summoned or Set; Special Summon it from hand by banishing a WATER monster from the GY. Once per turn during the opponent's Standby Phase, it can change a face-up opposing monster's battle position and prevent that monster from changing position again that turn.",
+      "twoVTwoReviewQuestions": [
+        "The Special Summon is from hand only and uses a WATER monster from the team's GY as the banish cost.",
+        "The once-per-turn effect occurs during the opponent's Standby Phase, not the controller's.",
+        "The target must be face-up and controlled by either opposing physical seat.",
+        "The position lock lasts through the rest of the current turn and must not persist into later turns."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5253&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ]
+}
