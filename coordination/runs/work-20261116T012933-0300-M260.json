@@ -1,0 +1,72 @@
+{
+  "runId": "work-20261116T012933-0300-M260",
+  "mission": "M260",
+  "owner": "Work",
+  "priority": "P1",
+  "state": "published-draft; CI pending",
+  "startedAt": "2026-11-16T01:29:33-03:00",
+  "timezone": "America/Sao_Paulo",
+  "branch": "feat/work-m260-guardian-quick-effect-discord-2v2-20261116",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "pr": 216,
+  "head": "86dfb8f925fa9f56b4b8bb232166950fc5b26ea7",
+  "scope": [
+    "tests/tagGuardianQuickEffectDiscord2v2.test.cjs"
+  ],
+  "cardsCovered": [
+    "Sanga of the Thunder",
+    "Suijin",
+    "Kazejin",
+    "Axe Raider"
+  ],
+  "behavioralScenarios": 3,
+  "newCertifications": 0,
+  "blocksCompleted": [
+    "Preparou a sétima família independente durante as validações das PRs anteriores.",
+    "Implementou três homologações de Quick Effect durante Damage Calculation pelo handler Discord real, com ativação do assento ativo para fonte do parceiro inativo.",
+    "Verificou redução do atacante a 0 ATK, dano da equipe, limite de uma utilização face-up, segunda batalha, privacidade e idempotência.",
+    "Publicou PR draft #216."
+  ],
+  "ci": {
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "npmTest": "pending_in_engine_validation",
+    "extendedSoak": "pending"
+  },
+  "runtimeChanges": [],
+  "catalogChanges": [],
+  "certificationChanges": [],
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "liveDiscordNetwork": false
+  },
+  "stateUpdate": {
+    "status": "withheld",
+    "reason": "M231/M232 continuam reservadas em coordination/state.json; handoff solicitado em #187/#188, sem liberação explícita.",
+    "comments": [
+      6907379122,
+      6907379553
+    ]
+  },
+  "scopeReleasedToAuxiliary": {
+    "branch": "feat/work-m260-guardian-quick-effect-discord-2v2-20261116",
+    "files": [
+      "tests/tagGuardianQuickEffectDiscord2v2.test.cjs"
+    ],
+    "allowed": "monitorar CI e corrigir apenas este arquivo de teste; sem runtime, catálogo, estado compartilhado ou produção"
+  },
+  "nextTask": "Monitorar CI #216; corrigir apenas a fixture própria; prosseguir com próxima família independente e aguardar handoff M231/M232.",
+  "nextWindow": "2026-11-16T05:30:00-03:00",
+  "duration": {
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Tempo efetivo não é medido com precisão; espera de CI não conta."
+  }
+}
