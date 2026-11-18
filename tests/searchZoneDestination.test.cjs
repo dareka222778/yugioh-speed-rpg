@@ -129,3 +129,39 @@ test('invalid destination and invalid Necrovalley override combinations are reje
   assert.deepEqual(searchZoneIssues({ from: 'deck', filter: { kind: 'trap' }, necrovalleyHandOverride: true }), ['invalid-search-destination']);
   assert.deepEqual(searchZoneIssues({ from: 'deck', filter: { kind: 'trap' }, destination: 'deck-top', necrovalleyHandOverride: true }), []);
 });
+
+
+test('from either can select a matching Graveyard card and preserve the same physical reference', () => {
+  const s = state();
+  const original = s.players[0].grave[0];
+  const rule = { from: 'either', filter: { kind: 'trap' }, destination: 'deck-top' };
+  const result = resolveSearchZoneSelection(s, 0, 'm0:grave', rule, getCard);
+
+  assert.ok(result);
+  assert.equal(result.source, 'grave');
+  assert.equal(result.card, original);
+  assert.equal(s.players[0].deck[0], original);
+  assert.deepEqual(s.players[0].grave, []);
+});
+
+test('a Graveyard card added to hand does not request a Deck shuffle', () => {
+  const s = state();
+  const rule = { from: 'grave', filter: { kind: 'trap' } };
+  const result = resolveSearchZoneSelection(s, 0, 'm0:grave', rule, getCard);
+
+  assert.ok(result);
+  assert.equal(result.destination, 'hand');
+  assert.equal(result.shuffleDeck, false);
+  assert.equal(s.players[0].hand[0].uid, 'm0:grave');
+});
+
+test('invalid rules fail closed before any card is moved', () => {
+  const s = state();
+  const snapshot = structuredClone(s.players[0]);
+  const invalid = { from: 'deck', filter: { kind: 'trap' }, destination: 'grave' };
+  assert.throws(
+    () => resolveSearchZoneSelection(s, 0, 'm0:selected', invalid, getCard),
+    /Invalid search rule/,
+  );
+  assert.deepEqual(s.players[0], snapshot);
+});
