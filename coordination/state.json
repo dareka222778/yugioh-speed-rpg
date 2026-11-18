@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-18T10:50:00.130Z",
+  "lastActivityAt": "2026-11-18T10:52:56.232Z",
   "nextScheduledAt": "2026-11-18T12:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência. M357 reservado em branch independente para revisão oficial dos últimos onze candidatos; somente documentação e teste de evidência.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -2248,6 +2248,21 @@
       "priority": "P1 — revisar oficialmente os candidatos 11–20 do worklist, agrupar mecânicas reutilizáveis e registrar riscos 2v2 de propriedade/privacidade sem certificar por importação.",
       "startedAt": "2026-11-18T07:50:00-03:00",
       "conflictPolicy": "Somente os dois arquivos M356. Não tocar nas reservas ativas, nos arquivos centrais de runtime M61, nas PRs M351/M353/M354/M355, catálogo, certificações, inventários, banco persistente, main ou produção."
+    },
+    {
+      "mission": "M357",
+      "runId": "work-20261118T075256-0300-M357",
+      "branch": "feat/work-m357-official-text-review-final-eleven-20261118",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "a7727c41f45fdfa1917ab59ca59e99bc52ddda6d",
+      "scope": [
+        "docs/evidence/m357-final-eleven-official-text-review.json",
+        "tests/m357OfficialTextEvidence.test.cjs"
+      ],
+      "state": "reserved",
+      "priority": "P1 — concluir a revisão oficial dos últimos onze candidatos do worklist 969→1000 e agrupar efeitos reaproveitáveis, mantendo todos não certificados até implementação e testes comportamentais.",
+      "startedAt": "2026-11-18T07:52:56-03:00",
+      "conflictPolicy": "Somente os dois arquivos M357. Não tocar nas reservas ativas, nos arquivos centrais de runtime M61, PRs M351/M353/M354/M355/M356, catálogo, certificações, inventários, banco persistente, main ou produção."
     }
   ],
   "handoffRequest": {
@@ -7435,16 +7450,16 @@
   },
   "sharedHeadAtLastCheckpoint": "fc99fb5024f8b6d06b5a7c024be8a6b7c4f25b8a",
   "latestIndependentRun": {
-    "runId": "work-20261118T075000-0300-M356",
-    "mission": "M356",
+    "runId": "work-20261118T075256-0300-M357",
+    "mission": "M357",
     "owner": "Work",
     "state": "reserved",
-    "branch": "feat/work-m356-official-text-review-next-ten-20261118",
-    "baseSha": "b517307f06aa6b95117c2eb577117a88380a244b",
+    "branch": "feat/work-m357-official-text-review-final-eleven-20261118",
+    "baseSha": "a7727c41f45fdfa1917ab59ca59e99bc52ddda6d",
     "scope": [
-      "docs/evidence/m356-next-ten-official-text-review.json",
-      "tests/m356OfficialTextEvidence.test.cjs"
+      "docs/evidence/m357-final-eleven-official-text-review.json",
+      "tests/m357OfficialTextEvidence.test.cjs"
     ],
-    "priority": "P1 — revisar oficialmente os candidatos 11–20 do worklist, agrupar mecânicas reutilizáveis e registrar riscos 2v2 de propriedade/privacidade sem certificar por importação."
+    "priority": "P1 — concluir a revisão oficial dos últimos onze candidatos do worklist 969→1000 e agrupar efeitos reaproveitáveis, mantendo todos não certificados até implementação e testes comportamentais."
   }
 }
