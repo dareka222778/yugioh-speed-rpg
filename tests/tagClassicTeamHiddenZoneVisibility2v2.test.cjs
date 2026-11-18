@@ -24,11 +24,15 @@ function debugTest(name,fn){return nodeTest(name,async(...args)=>{try{return awa
 trace('module setup started');
 
 const BOTTOMLESS='29401950';
-const SAFE_NORMALS=[...new Set(tag.tagNormalCardIds)].filter(id=>{
-  const card=getPlayableCard(id);
-  return card?.kind==='monster'&&card.monsterType==='normal'&&
-    Number.isInteger(card.atk)&&Number.isInteger(card.defense)&&card.level<=4;
-});
+const SAFE_NORMALS=[];
+const seenNormalNames=new Set();
+for(const id of [...new Set(tag.tagNormalCardIds)]){
+  const card=getPlayableCard(id),name=getCard(id)?.name;
+  if(card?.kind==='monster'&&card.monsterType==='normal'&&Number.isInteger(card.atk)&&Number.isInteger(card.defense)&&card.level<=4&&name&&!seenNormalNames.has(name)){
+    SAFE_NORMALS.push(id);seenNormalNames.add(name);
+  }
+}
+assert.ok(SAFE_NORMALS.length>=3,'M358 requires at least 3 distinct certified Normal Monster names');
 assert.ok(SAFE_NORMALS.length>=3,'M358 requires three distinct certified Normal Monsters');
 assert.ok(enabledCardIds.includes(BOTTOMLESS),'M358 requires the enabled Bottomless Trap Hole identity');
 assert.equal(getPlayableCard(BOTTOMLESS)?.kind,'trap');
