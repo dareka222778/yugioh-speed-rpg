@@ -7,6 +7,11 @@ const env={...process.env,DATABASE_PATH:path.join(dir,'game.sqlite')};for(const 
 const compact=process.env.CI==='true'&&requested.length===0,report=path.resolve('artifacts/test-results.xml');
 if(compact)fs.mkdirSync(path.dirname(report),{recursive:true});
 try{
+ if(compact&&files.includes('tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs')){
+  const diagnostic=spawnSync(process.execPath,['--test','--test-reporter=spec','tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs'],{env,stdio:'inherit'});
+  if(diagnostic.error)throw diagnostic.error;
+  if(diagnostic.status!==0)process.stderr.write('M358 targeted diagnostic exited '+diagnostic.status+'; continuing aggregate suite.\n');
+ }
  const reporters=compact?['--test-reporter=dot','--test-reporter-destination=stdout','--test-reporter=junit','--test-reporter-destination='+report]:[];
  const result=spawnSync(process.execPath,['--test',...reporters,...serial?['--test-concurrency=1']:[],...files],{env,stdio:'inherit'});
  if(result.error)throw result.error;process.exitCode=result.status??1;
