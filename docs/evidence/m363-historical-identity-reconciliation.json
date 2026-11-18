@@ -1,0 +1,819 @@
+{
+  "format": 1,
+  "mission": "M363",
+  "reviewedAt": "2026-11-18T16:05:23.731Z",
+  "purpose": "Reconcile canonical identity and historical snapshot presence for the 31 candidate cards without certifying or authorizing distribution.",
+  "cutoffExclusive": "2004-10-01",
+  "historicalCatalog": {
+    "path": "catalog/historical/2004-10-01/cards.json",
+    "blobSha": "e9ddb6a3cdc5921a26f4ac9c4be703bb34f284e5",
+    "recordCount": 1962
+  },
+  "candidateEvidence": [
+    {
+      "mission": "M355",
+      "path": "docs/evidence/m355-first-ten-official-text-review.json",
+      "blobSha": "7e5c616230367a26d10431e3e43f3ddd2484a3e1",
+      "count": 10
+    },
+    {
+      "mission": "M356",
+      "path": "docs/evidence/m356-next-ten-official-text-review.json",
+      "blobSha": "a71abaf86454d33f21d1ae766c365299df889838",
+      "count": 10
+    },
+    {
+      "mission": "M357",
+      "path": "docs/evidence/m357-final-eleven-official-text-review.json",
+      "blobSha": "2e8f053c4eb74be61ebe4dfbfdda991970ac8b55",
+      "count": 11
+    }
+  ],
+  "method": {
+    "identity": "exactly one historical record must match both Konami ID and passcode; English canonical name must match.",
+    "historicalPresence": "at least one firstObserved region (TCG, OCG, or world) must be strictly earlier than 2004-10-01.",
+    "authorityLimit": "firstObserved is metadata in the curated historical catalog, not an independently verified official release date. The official first-release source audit remains pending."
+  },
+  "summary": {
+    "candidates": 31,
+    "uniqueIdentityMatches": 31,
+    "unresolvedIdentities": 0,
+    "unionSnapshotPresent": 31,
+    "tcgBeforeCutoff": 23,
+    "ocgBeforeCutoff": 28,
+    "bothTcgAndOcg": 20,
+    "tcgOnly": 3,
+    "ocgOnly": 8,
+    "afterCutoffInAllRegions": 0
+  },
+  "status": "identity-reconciled; first-release source audit and behavioral certification remain pending",
+  "certificationStatus": "not-certified",
+  "distributionAuthorized": false,
+  "inventoryGranted": 0,
+  "cards": [
+    {
+      "id": "86988864",
+      "konamiId": 6032,
+      "name": "3-Hump Lacooda",
+      "canonicalId": "f8216e4e-f5d0-4629-bf34-66df82ae02ff",
+      "historicalRecordId": "f8216e4e-f5d0-4629-bf34-66df82ae02ff",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-05-01",
+        "ocg": "2004-02-26",
+        "world": "2004-02-26"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6032&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "14261867",
+      "konamiId": 5421,
+      "name": "8-Claws Scorpion",
+      "canonicalId": "acacdd47-589c-4f97-86e2-15c22e14de91",
+      "historicalRecordId": "acacdd47-589c-4f97-86e2-15c22e14de91",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-07-18",
+        "ocg": "2003-04-24",
+        "world": "2003-04-24"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5421&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "24140059",
+      "konamiId": 5520,
+      "name": "A Cat of Ill Omen",
+      "canonicalId": "2904168f-c552-4436-9b30-1144c033f188",
+      "historicalRecordId": "2904168f-c552-4436-9b30-1144c033f188",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-07-18",
+        "ocg": "2002-05-16",
+        "world": "2002-05-16"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5520&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "51351302",
+      "konamiId": 5518,
+      "name": "A Man with Wdjat",
+      "canonicalId": "75b1c443-4f36-44bb-bdfc-a13728588b45",
+      "historicalRecordId": "75b1c443-4f36-44bb-bdfc-a13728588b45",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-07-18",
+        "ocg": "2002-05-16",
+        "world": "2002-05-16"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5518&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "13026402",
+      "konamiId": 6202,
+      "name": "A-Team: Trap Disposal Unit",
+      "canonicalId": "e0097cf5-56db-46ff-9ec7-db557d768140",
+      "historicalRecordId": "e0097cf5-56db-46ff-9ec7-db557d768140",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-11-01",
+        "ocg": "2004-08-05",
+        "world": "2004-08-05"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6202&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "49771608",
+      "konamiId": 6034,
+      "name": "Absorbing Kid from the Sky",
+      "canonicalId": "569f291c-53e6-4560-a197-0dfdfacf07a0",
+      "historicalRecordId": "569f291c-53e6-4560-a197-0dfdfacf07a0",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-05-01",
+        "ocg": "2004-02-26",
+        "world": "2004-02-26"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6034&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "18318842",
+      "konamiId": 5927,
+      "name": "Abyss Soldier",
+      "canonicalId": "6b08a6ce-6c71-414f-b942-277b3b802465",
+      "historicalRecordId": "6b08a6ce-6c71-414f-b942-277b3b802465",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-11-26",
+        "ocg": "2004-07-29",
+        "world": "2004-07-29"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5927&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "16135253",
+      "konamiId": 5366,
+      "name": "Agido",
+      "canonicalId": "1275ec1a-7b05-44e4-9b24-694ddf364cf4",
+      "historicalRecordId": "1275ec1a-7b05-44e4-9b24-694ddf364cf4",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-12-01",
+        "ocg": "2003-02-20",
+        "world": "2003-02-20"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5366&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "18036057",
+      "konamiId": 5023,
+      "name": "Airknight Parshath",
+      "canonicalId": "ee96f25f-090f-4729-ad02-ffd58993beb7",
+      "historicalRecordId": "ee96f25f-090f-4729-ad02-ffd58993beb7",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-06-06",
+        "ocg": "2001-11-29",
+        "world": "2001-11-29"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5023&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "73574678",
+      "konamiId": 5646,
+      "name": "Amazoness Blowpiper",
+      "canonicalId": "c21f364b-e102-4bc0-865a-35044d748cbf",
+      "historicalRecordId": "c21f364b-e102-4bc0-865a-35044d748cbf",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-10-10",
+        "ocg": "2002-09-19",
+        "world": "2002-09-19"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5646&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M355",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "29654737",
+      "konamiId": 5291,
+      "name": "Amazoness Chain Master",
+      "canonicalId": "e09d1bf3-9eb8-4279-b20b-7a10a103d33e",
+      "historicalRecordId": "e09d1bf3-9eb8-4279-b20b-7a10a103d33e",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2005-05-28",
+        "ocg": "2001-07-31",
+        "world": "2001-07-31"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5291&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "94004268",
+      "konamiId": 5284,
+      "name": "Amazoness Swords Woman",
+      "canonicalId": "0ea5463d-48d7-4d76-9017-084a0abe64cd",
+      "historicalRecordId": "0ea5463d-48d7-4d76-9017-084a0abe64cd",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-10-10",
+        "ocg": "2002-09-19",
+        "world": "2002-09-19"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5284&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "10979723",
+      "konamiId": 5647,
+      "name": "Amazoness Tiger",
+      "canonicalId": "39e5b776-33aa-4e2c-aead-4dad813ea989",
+      "historicalRecordId": "39e5b776-33aa-4e2c-aead-4dad813ea989",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-10-10",
+        "ocg": "2002-09-19",
+        "world": "2002-09-19"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5647&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "95174353",
+      "konamiId": 4490,
+      "name": "Ameba",
+      "canonicalId": "2cc8ce0d-cd9a-497a-987d-53ebcffda737",
+      "historicalRecordId": "2cc8ce0d-cd9a-497a-987d-53ebcffda737",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2002-09-16",
+        "ocg": "2002-06-20",
+        "world": "2002-06-20"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4490&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "23927567",
+      "konamiId": 5523,
+      "name": "An Owl of Luck",
+      "canonicalId": "24aa43e4-8426-4cb5-8e13-e62423daad02",
+      "historicalRecordId": "24aa43e4-8426-4cb5-8e13-e62423daad02",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-07-18",
+        "ocg": "2002-05-16",
+        "world": "2002-05-16"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5523&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "54912977",
+      "konamiId": 5238,
+      "name": "Ancient Lamp",
+      "canonicalId": "587e59cc-4f02-45f8-9254-fba19957fd74",
+      "historicalRecordId": "587e59cc-4f02-45f8-9254-fba19957fd74",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2006-02-18",
+        "ocg": "2001-04-01",
+        "world": "2001-04-01"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5238&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "15013468",
+      "konamiId": 6087,
+      "name": "Andro Sphinx",
+      "canonicalId": "28d22633-9107-4667-a33d-45a39db44b8b",
+      "historicalRecordId": "28d22633-9107-4667-a33d-45a39db44b8b",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-08-08",
+        "ocg": "2004-08-05",
+        "world": "2004-08-05"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6087&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "65064143",
+      "konamiId": 5890,
+      "name": "Anti-Aircraft Flower",
+      "canonicalId": "86b19a33-1b77-40e0-b1b9-fb880ea14efa",
+      "historicalRecordId": "86b19a33-1b77-40e0-b1b9-fb880ea14efa",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-03-01",
+        "ocg": "2004-07-15",
+        "world": "2004-03-01"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5890&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "09156135",
+      "konamiId": 5650,
+      "name": "Apprentice Magician",
+      "canonicalId": "b593470f-a125-4679-8f7d-6b9a8c2329f0",
+      "historicalRecordId": "b593470f-a125-4679-8f7d-6b9a8c2329f0",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-10-10",
+        "ocg": "2002-09-19",
+        "world": "2002-09-19"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5650&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "40916023",
+      "konamiId": 5253,
+      "name": "Aqua Spirit",
+      "canonicalId": "f3fbc4b5-09fd-491f-a6fb-9bcff50e2e3d",
+      "historicalRecordId": "f3fbc4b5-09fd-491f-a6fb-9bcff50e2e3d",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-03-01",
+        "ocg": "2002-12-12",
+        "world": "2002-12-12"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5253&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M356",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "55001420",
+      "konamiId": 5971,
+      "name": "Arcane Archer of the Forest",
+      "canonicalId": "b836a9f8-230b-4589-9c2f-098081efcf1d",
+      "historicalRecordId": "b836a9f8-230b-4589-9c2f-098081efcf1d",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-05-01",
+        "ocg": "2004-10-14",
+        "world": "2004-05-01"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5971&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "50287060",
+      "konamiId": 5091,
+      "name": "Archfiend of Gilfer",
+      "canonicalId": "b27233aa-4c52-40e6-a8cc-16fa6bbcb2c9",
+      "historicalRecordId": "b27233aa-4c52-40e6-a8cc-16fa6bbcb2c9",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2009-07-23",
+        "ocg": "2001-02-09",
+        "world": "2001-02-09"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5091&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "18378582",
+      "konamiId": 5976,
+      "name": "Archlord Zerato",
+      "canonicalId": "07f944d2-e466-4e67-aa93-6bf5e8f5f4b0",
+      "historicalRecordId": "07f944d2-e466-4e67-aa93-6bf5e8f5f4b0",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-05-01",
+        "ocg": "2004-10-14",
+        "world": "2004-05-01"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5976&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "00980973",
+      "konamiId": 6105,
+      "name": "Armed Dragon LV3",
+      "canonicalId": "a2ff6977-77f6-4393-b278-1c56691cafc9",
+      "historicalRecordId": "a2ff6977-77f6-4393-b278-1c56691cafc9",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-10-01",
+        "ocg": "2004-05-27",
+        "world": "2004-05-27"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6105&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "46384672",
+      "konamiId": 6106,
+      "name": "Armed Dragon LV5",
+      "canonicalId": "05ce212e-7534-47af-9aa0-e6471d70f756",
+      "historicalRecordId": "05ce212e-7534-47af-9aa0-e6471d70f756",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-10-01",
+        "ocg": "2004-05-27",
+        "world": "2004-05-27"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6106&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "73879377",
+      "konamiId": 6107,
+      "name": "Armed Dragon LV7",
+      "canonicalId": "f81de953-21b6-4c68-bfea-aa9e475cd241",
+      "historicalRecordId": "f81de953-21b6-4c68-bfea-aa9e475cd241",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-10-01",
+        "ocg": "2004-05-27",
+        "world": "2004-05-27"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6107&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "07180418",
+      "konamiId": 5659,
+      "name": "Armor Exe",
+      "canonicalId": "e094a04e-f35e-4bda-bf07-69d662562568",
+      "historicalRecordId": "e094a04e-f35e-4bda-bf07-69d662562568",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-10-10",
+        "ocg": "2002-09-19",
+        "world": "2002-09-19"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5659&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "42364374",
+      "konamiId": 5033,
+      "name": "Arsenal Bug",
+      "canonicalId": "8fd12642-3658-48f9-a7e1-6e65afe084aa",
+      "historicalRecordId": "8fd12642-3658-48f9-a7e1-6e65afe084aa",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-07-18",
+        "ocg": "2003-04-24",
+        "world": "2003-04-24"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5033&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "02134346",
+      "konamiId": 5381,
+      "name": "Asura Priest",
+      "canonicalId": "a8f3dffe-cc89-4677-a039-a306366cfc2b",
+      "historicalRecordId": "a8f3dffe-cc89-4677-a039-a306366cfc2b",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2003-06-06",
+        "ocg": "2001-11-29",
+        "world": "2001-11-29"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5381&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "88236094",
+      "konamiId": 6026,
+      "name": "Aswan Apparition",
+      "canonicalId": "a2372de9-eeb3-4ecd-b53b-6cc7cbd9c462",
+      "historicalRecordId": "a2372de9-eeb3-4ecd-b53b-6cc7cbd9c462",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-05-01",
+        "ocg": "2004-02-26",
+        "world": "2004-02-26"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "ocg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6026&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    },
+    {
+      "id": "87340664",
+      "konamiId": 5966,
+      "name": "Atomic Firefly",
+      "canonicalId": "0763d2ab-fbd4-4129-8133-1724fdba1f4d",
+      "historicalRecordId": "0763d2ab-fbd4-4129-8133-1724fdba1f4d",
+      "matchCount": 1,
+      "firstObserved": {
+        "tcg": "2004-05-01",
+        "ocg": "2004-10-14",
+        "world": "2004-05-01"
+      },
+      "eligibleRegionsBeforeCutoff": [
+        "tcg",
+        "world"
+      ],
+      "presentInUnionSnapshot": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5966&request_locale=en",
+      "officialSourceVerifiedInCandidateReview": true,
+      "sourceReview": "M357",
+      "certificationStatus": "not-certified",
+      "distributionAuthorized": false,
+      "inventoryGranted": 0
+    }
+  ]
+}
