@@ -176,11 +176,13 @@ function setup(){
   const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m366-gravekeepers-guard-owner'});
   state.core.turn=3;
   assert.deepEqual(state.active,[0,1],'seats 0 and 1 must be the active representatives');
+  assert.equal(state.core.resolverVersion,'engine-v9','the test must exercise the current pinned resolver');
   const ally=deploy(state,0,AXE_RAIDER);
   const source=placeFaceDown(state,2,GUARD);
   const target=deploy(state,3,BLUE_EYES);
   assert.match(source.uid,/^m2:/,'the Flip source must retain inactive allied physical seat 2 ownership');
   assert.match(target.uid,/^m3:/,'the target must retain inactive opposing physical seat 3 ownership');
+  assert.equal(target.owner,1,'the public field controller is team 1 while physical ownership remains seat 3 in the UID');
   assert.match(ally.uid,/^m0:/,'the allied control monster must retain active seat 0 ownership');
   assert.equal(tag.tagDecisionMember(state).id,member(0),'active ally seat 0 must execute the Flip Summon');
   assertRules(state);
@@ -230,6 +232,9 @@ test("Gravekeeper's Guard returns a bounced monster to its inactive physical own
 
   current=await settleResponses(current);
   assert.equal(current.state.core.phase,'main','the Flip effect and its response window must resolve');
+  assert.deepEqual(current.state.active,[0,1],'resolving a Flip trigger must not rotate either active representative');
+  assert.deepEqual(current.state.core.teamRotation.active,[0,1],'the engine rotation must still identify seats 0 and 1 as active');
+  assert.equal(tag.tagDecisionMember(current.state).id,member(0),'the same active representative must retain the turn');
   assert.ok(!current.state.core.players[1].monsters.some(card=>card.uid===fixture.target.uid),
     'the selected opposing monster must leave the shared field');
   assert.ok(current.state.core.players[0].monsters.some(card=>card.uid===fixture.ally.uid),
@@ -237,6 +242,10 @@ test("Gravekeeper's Guard returns a bounced monster to its inactive physical own
   assert.ok(current.state.core.players[0].monsters.some(card=>card.uid===fixture.source.uid&&card.faceUp),
     'Gravekeeper’s Guard must remain face-up after its effect resolves');
 
+  assert.ok(!current.state.core.players[1].hand.some(card=>card.uid===fixture.target.uid),
+    'the active team-1 hand array must not absorb a card physically owned by inactive seat 3');
+  assert.ok(current.state.reserves[3].hand.some(card=>card.uid===fixture.target.uid),
+    'the raw physical reserve for seat 3 must receive the bounced card');
   const physicalOwnerHand=tag.tagMemberHand(current.state,member(3));
   const activeOpponentHand=tag.tagMemberHand(current.state,member(1));
   assert.ok(physicalOwnerHand.some(card=>card.uid===fixture.target.uid),
