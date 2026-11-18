@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-18T21:48:00.650Z",
+  "lastActivityAt": "2026-11-18T21:49:04.496Z",
   "nextScheduledAt": "2026-11-18T22:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -3476,7 +3476,7 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Auxiliar: monitorar #315/#316 e corrigir somente arquivos liberados. Work: aguardar handoff M61; integrar M367 e depois M368. Não tocar nas reservas M215–M220, M231–M236, M358–M360 ou M365.",
+  "nextTask": "Auxiliar: monitorar #315/#316 e corrigir somente os arquivos próprios liberados. Work: aguardar handoff M61; após os soaks, sincronizar #315/#316 com a branch compartilhada por operação não-forçada; integrar primeiro 3-Hump Lacooda e depois A Cat of Ill Omen/An Owl of Luck quando src/monsterEffects.ts e src/duelEngineCurrent.ts forem liberados. Não tocar nas reservas de terceiros.",
   "sharedHeadBeforeRelease": "0bb80a318da6ca5a1d697cae4937ed1625354325",
   "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
   "sharedHeadBeforeClaim": "d60d829cdfb74f3434e06f4c75cece08386a7fa5",
@@ -6427,7 +6427,7 @@
       "state": "released-to-auxiliary-monitor-ci"
     }
   ],
-  "updatedAt": "2026-11-18T21:48:00.650Z",
+  "updatedAt": "2026-11-18T21:49:04.496Z",
   "lastCheckpointCommit": "3adb1dcff615bb5da773038fb467c944d439851c",
   "concurrentReservations": [
     {
@@ -8160,7 +8160,7 @@
     }
   ],
   "lastParallelRun": "work-20261118T182801-0300-M367-M368",
-  "nextParallelTask": "Auxiliar: monitorar #315/#316 e corrigir somente arquivos liberados. Work: aguardar handoff M61; integrar M367 e depois M368. Não tocar nas reservas M215–M220, M231–M236, M358–M360 ou M365.",
+  "nextParallelTask": "Auxiliar: monitorar #315/#316 e corrigir somente os arquivos próprios liberados. Work: aguardar handoff M61; após os soaks, sincronizar #315/#316 com a branch compartilhada por operação não-forçada; integrar primeiro 3-Hump Lacooda e depois A Cat of Ill Omen/An Owl of Luck quando src/monsterEffects.ts e src/duelEngineCurrent.ts forem liberados. Não tocar nas reservas de terceiros.",
   "nextParallelWindow": "2026-11-18T22:30:00-03:00",
   "sharedHeadAfterCheckpointCommit": "3adb1dcff615bb5da773038fb467c944d439851c",
   "postCheckpointCI": {
@@ -8251,7 +8251,28 @@
       "tests/searchZoneDestination.test.cjs"
     ],
     "priority": "P1 — primitives isoladas para Tribute por identidade e busca para topo do Deck; integração de cartas aguarda handoff M61.",
-    "conflictPolicy": "Auxiliar pode monitorar e corrigir somente os quatro arquivos próprios; handoff M61 pendente para runtime central."
+    "conflictPolicy": "Auxiliar pode monitorar e corrigir somente os quatro arquivos próprios; handoff M61 pendente para runtime central.",
+    "postCheckpointPrStatus": {
+      "observedAt": "2026-11-18T21:49:04.496Z",
+      "sharedHead": "c6d3cd6838a72f0dd7c676427e813b601abb6338",
+      "prs": {
+        "315": {
+          "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
+          "state": "open",
+          "draft": true,
+          "mergeable": false,
+          "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+        },
+        "316": {
+          "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+          "state": "open",
+          "draft": true,
+          "mergeable": false,
+          "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+        }
+      },
+      "action": "não sincronizar automaticamente nesta sessão; fazer merge/update branch não-forçado após CI e antes da revisão"
+    }
   },
   "lastParallelRunSummary": {
     "runId": "work-20261118T182801-0300-M367-M368",
@@ -8262,8 +8283,8 @@
       "M368": "b700a1e1d8044c7a60721c207becaaa4e575ff07"
     },
     "prs": {
-      "315": "open/draft/mergeable; npm test/check/fast/milestone pass; soak in progress",
-      "316": "open/draft/mergeable; npm test/check/fast/milestone pass; soak in progress"
+      "315": "open/draft; CI base passou até npm test; mergeable:false após dois commits de coordenação compartilhada; sincronizar antes da revisão",
+      "316": "open/draft; npm run check, Card Batch Fast, Milestone 1000 e npm test passaram; soaks em andamento; mergeable:false após dois commits de coordenação compartilhada; sincronizar antes da revisão"
     },
     "sharedHeadBeforeFinalization": "3adb1dcff615bb5da773038fb467c944d439851c",
     "endedAt": "2026-11-18T18:48:00.650-03:00",
@@ -8286,7 +8307,7 @@
   "lastIndependentWorkActivityAt": "2026-11-18T18:48:00.650-03:00",
   "nextWorkWindow": "2026-11-18T22:30:00-03:00",
   "lastIndependentWorkRunId": "work-20261118T182801-0300-M367-M368",
-  "workBranchesUpdatedAt": "2026-11-18T21:48:00.650Z",
+  "workBranchesUpdatedAt": "2026-11-18T21:49:04.496Z",
   "lastActiveWorkMission": "M367–M368",
   "sharedHeadBeforeCheckpointCommit": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
   "lastWorkRunId": "work-20261118T182801-0300-M367-M368",
@@ -8447,5 +8468,47 @@
     },
     "nextTask": "Auxiliar: monitorar #315/#316 e corrigir somente arquivos liberados. Work: aguardar handoff M61; integrar M367 e depois M368. Não tocar nas reservas M215–M220, M231–M236, M358–M360 ou M365.",
     "nextWindow": "2026-11-18T22:30:00-03:00"
+  },
+  "postCheckpointPrStatus": {
+    "observedAt": "2026-11-18T21:49:04.496Z",
+    "sharedHead": "c6d3cd6838a72f0dd7c676427e813b601abb6338",
+    "prs": {
+      "315": {
+        "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+      },
+      "316": {
+        "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+      }
+    },
+    "action": "não sincronizar automaticamente nesta sessão; fazer merge/update branch não-forçado após CI e antes da revisão"
+  },
+  "lastIndependentWorkPostCheckpointStatus": {
+    "observedAt": "2026-11-18T21:49:04.496Z",
+    "sharedHead": "c6d3cd6838a72f0dd7c676427e813b601abb6338",
+    "prs": {
+      "315": {
+        "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+      },
+      "316": {
+        "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+      }
+    },
+    "action": "não sincronizar automaticamente nesta sessão; fazer merge/update branch não-forçado após CI e antes da revisão"
   }
 }
