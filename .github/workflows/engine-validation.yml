@@ -19,6 +19,24 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - name: Collect full and production-only npm audit reports
+        shell: bash
+        run: |
+          mkdir -p artifacts/dependency-audit
+          set +e
+          npm audit --json > artifacts/dependency-audit/all.json
+          echo "$?" > artifacts/dependency-audit/all.exit
+          npm audit --omit=dev --json > artifacts/dependency-audit/production.json
+          echo "$?" > artifacts/dependency-audit/production.exit
+          set -e
+      - name: Enforce production dependency audit gate
+        run: >-
+          node scripts/report-dependency-audit.cjs
+          artifacts/dependency-audit/all.json
+          artifacts/dependency-audit/production.json
+          artifacts/dependency-audit/all.exit
+          artifacts/dependency-audit/production.exit
+          artifacts/dependency-audit/summary.json
       - run: node scripts/verify-resolver-archives.cjs
       - run: node scripts/check-mission3-integrity.cjs
       - run: node scripts/check-mission4-integrity.cjs
@@ -179,6 +197,14 @@ jobs:
             artifacts/beta-simulation-mission7.json
           if-no-files-found: ignore
           retention-days: 14
+      - name: Preserve dependency audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-audit-evidence
+          path: artifacts/dependency-audit
+          if-no-files-found: warn
+          retention-days: 30
       - name: Publicar prévias visuais
         uses: actions/upload-artifact@v4
         with:
