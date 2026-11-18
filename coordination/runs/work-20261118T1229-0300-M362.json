@@ -4,7 +4,7 @@
   "mission": "M362",
   "priority": "P1 — separar certificação comportamental da autorização de distribuição; default sem release, distribuição somente por opt-in explícito em PR do proprietário.",
   "startedAt": "2026-11-18T12:41:20.066-03:00",
-  "endedAt": "2026-11-18T13:02:39-03:00",
+  "endedAt": "2026-11-18T13:14:45-03:00",
   "elapsedSeconds": 1279,
   "effectiveWorkMinutes": null,
   "minimum60MinutesMet": false,
@@ -63,7 +63,7 @@
       "runId": 44342165035,
       "status": "completed",
       "conclusion": "success",
-      "note": "ADMISSION_RESULTS []; nenhum lote pendente; publisher executou sem publicar alterações."
+      "note": "ADMISSION_RESULTS []; nenhum lote pendente; nenhum arquivo de catálogo/release foi publicado."
     },
     "cardBatchFast": {
       "runId": 44342164701,
@@ -79,10 +79,13 @@
     },
     "engineValidation": {
       "runId": 44342165160,
-      "status": "in_progress",
+      "status": "completed",
+      "conclusion": "success",
       "npmCheck": "success",
-      "npmTest": "in_progress",
-      "extendedSoak600s": "in_progress"
+      "npmTest": "success",
+      "checkCards": "success",
+      "extendedSoak600s": "success",
+      "stressTests": "all passed"
     }
   },
   "catalog": {
@@ -159,13 +162,14 @@
     "deploymentEndpoint": "not exposed by the available GitHub connector"
   },
   "blockers": [
-    "Engine Validation e Extended Soak ainda em andamento no HEAD final.",
-    "M61/runtime não transferido; implementação de 3-Hump Lacooda permanece bloqueada.",
-    "31 cartas permanecem até 1.000; 27 identidades continuam marcadas como bloqueadas."
+    "PR #310 continua draft e está atrás de commits de coordenação posteriores ao base SHA; sincronizar por merge não-forçado antes de revisão final.",
+    "31 cartas ainda não certificadas; a fila de admissão estava vazia durante a execução.",
+    "Produção/deploy não verificados; nenhuma implantação executada."
   ],
-  "nextTask": "Aguardar conclusão de Engine Validation/Extended Soak da PR #310; se aprovado, manter draft até revisão/autorização. Em paralelo, obter handoff M61 para 3-Hump Lacooda (3 face-up, tributar exatamente 2, comprar 3), então avançar para 8-Claws Scorpion e as próximas famílias já revisadas.",
+  "nextTask": "Auxiliar: sincronizar a branch M362 com a shared branch por merge não-forçado, confirmar CI após sincronização e manter PR #310 draft até revisão/autorização do proprietário. Work: concluir M363 e, depois, solicitar handoff M61 para 3-Hump Lacooda.",
   "nextWindow": "2026-11-18T17:30:00-03:00",
   "noMerge": true,
   "noDeploy": true,
-  "noInventoryGrant": true
+  "noInventoryGrant": true,
+  "securityWarning": "npm ci informou uma vulnerabilidade high no resumo, mas o log consultado não revelou pacote/aviso detalhado; auditoria npm audit ainda necessária."
 }
