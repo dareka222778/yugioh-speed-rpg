@@ -120,7 +120,7 @@ test('duplicate physical UIDs across source zones are rejected', () => {
   s.players[0].grave.push(ref('m0:selected', 'trap-b'));
   assert.throws(
     () => resolveSearchZoneSelection(s, 0, 'm0:selected', catRule, getCard),
-    /more than one source zone/,
+    /more than once in source zones/,
   );
 });
 
@@ -184,4 +184,14 @@ test('a 2v2 search reads only the active representative Deck, never the inactive
   assert.ok(targets.every(c => !c.uid.startsWith('m2:')));
   assert.equal(resolveSearchZoneSelection(s, 0, 'm2:private-trap', rule, getCard), null);
   assert.deepEqual(s.teamRotation.reserves[2].deck.map(c => c.uid), ['m2:private-trap']);
+});
+
+
+test('duplicate UIDs inside a single source zone are also rejected', () => {
+  const s = state();
+  s.players[0].deck.push(ref('m0:selected', 'trap-b'));
+  assert.throws(
+    () => resolveSearchZoneSelection(s, 0, 'm0:selected', catRule, getCard),
+    /more than once in source zones/,
+  );
 });
