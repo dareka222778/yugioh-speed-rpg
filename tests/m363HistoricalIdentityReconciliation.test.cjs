@@ -12,6 +12,7 @@ test('all 31 candidate identities resolve to exactly one canonical historical re
   const matches=historical.filter(card=>card.konamiId===candidate.konamiId&&card.passwords?.includes(candidate.id));
   assert.equal(matches.length,1,candidate.name+' identity must be unique');
   assert.equal(matches[0].id,candidate.historicalRecordId);
+  assert.equal(matches[0].id,candidate.canonicalId);
   assert.equal(matches[0].names.en,candidate.name);
   assert.deepEqual(matches[0].firstObserved,candidate.firstObserved);
   assert.ok(candidate.presentInUnionSnapshot,candidate.name+' must have a pre-cutoff regional observation');
