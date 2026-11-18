@@ -23,6 +23,7 @@ test('successful publication consumes only a fully matched queue',()=>{
 
 test('distribution is opt-in and requires an owner-authored PR',()=>{
  assert.equal(shouldRelease({}, {releaseAuthorized:false}),false);
+ assert.equal(shouldRelease({}, {releaseAuthorized:true}),false);
  assert.equal(shouldRelease({distributionAuthorized:false},{releaseAuthorized:true}),false);
  assert.equal(shouldRelease({distributionAuthorized:true},{releaseAuthorized:true}),true);
  assert.throws(()=>shouldRelease({distributionAuthorized:true},{releaseAuthorized:false}),/owner-authored/);
