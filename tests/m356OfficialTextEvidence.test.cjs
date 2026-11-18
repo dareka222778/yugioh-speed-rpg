@@ -57,6 +57,6 @@ test('M356 groups reusable mechanics without certifying imported card records',(
 test('M356 preserves the historical-cutoff and certification review gates',()=>{
   assert.match(evidence.authority,/Konami official/);
   assert.match(evidence.sourcePolicy.cardText,/paraphrases/);
-  assert.match(evidence.sourcePolicy.historicalCutoff,/not be used to infer/);
+  assert.match(evidence.sourcePolicy.historicalCutoff,/Do not infer/);
   assert.match(evidence.sourcePolicy.certification,/not certified/);
 });
