@@ -17,6 +17,20 @@ if (!fs.existsSync(tscPath)) {
   throw new Error('TypeScript local não encontrado em node_modules.');
 }
 
+const projectTsconfig = JSON.parse(fs.readFileSync(path.join(root, 'tsconfig.json'), 'utf8'));
+const compatibilityPath = projectTsconfig.compilerOptions?.paths?.sharp?.[0];
+if (compatibilityPath !== 'node_modules/sharp/lib/index.d.ts') {
+  throw new Error('tsconfig deve mapear sharp para a declaração CommonJS compatível: node_modules/sharp/lib/index.d.ts');
+}
+const compatibilityTypesPath = path.join(root, compatibilityPath);
+if (!fs.existsSync(compatibilityTypesPath)) {
+  throw new Error('Declaração CommonJS compatível do sharp não encontrada: ' + compatibilityPath);
+}
+const compatibilityTypes = fs.readFileSync(compatibilityTypesPath, 'utf8');
+if (!/declare namespace sharp/.test(compatibilityTypes) || !/interface OverlayOptions/.test(compatibilityTypes)) {
+  throw new Error('A declaração CommonJS do sharp não oferece a namespace OverlayOptions esperada.');
+}
+
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'sharp-0355-types-'));
 fs.symlinkSync(path.join(root, 'node_modules'), path.join(temp, 'node_modules'),
   process.platform === 'win32' ? 'junction' : 'dir');
@@ -74,7 +88,8 @@ try {
     package: 'sharp',
     version: sharpPackage.version,
     namedOverlayOptionsImport: 'pass',
-    legacyNamespace: 'not-exported',
+    legacyNamespace: 'not-exported-by-esm-entrypoint',
+    projectCompatibilityAlias: compatibilityPath,
     expectedDiagnostic: 'TS2503'
   }, null, 2) + '\n');
 } finally {
