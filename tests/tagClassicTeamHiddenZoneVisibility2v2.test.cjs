@@ -19,7 +19,7 @@ const {enabledCardIds,getPlayableCard}=require('../dist/effectRegistry');
 const {getCard}=require('../dist/collection');
 const {rulesFor}=require('../dist/rulesProfile');
 const {MessageFlags}=require('discord.js');
-const trace=message=>process.stderr.write('[M358] '+message+'\\n');
+const trace=message=>fs.writeSync(2,'[M358] '+message+'\\n');
 function debugTest(name,fn){return nodeTest(name,async(...args)=>{try{return await fn(...args);}catch(error){trace(name+' FAILED: '+(error&&error.stack||error));throw error;}});}
 trace('module setup started');
 
