@@ -1,0 +1,171 @@
+{
+  "format": 1,
+  "runId": "work-20261118T1229-0300-M362",
+  "mission": "M362",
+  "priority": "P1 — separar certificação comportamental da autorização de distribuição; default sem release, distribuição somente por opt-in explícito em PR do proprietário.",
+  "startedAt": "2026-11-18T12:41:20.066-03:00",
+  "endedAt": "2026-11-18T13:02:39-03:00",
+  "elapsedSeconds": 1279,
+  "effectiveWorkMinutes": null,
+  "minimum60MinutesMet": false,
+  "durationNote": "Não houve cronômetro confiável para separar cada minuto ativo. O tempo de espera de CI foi excluído; a meta de 60 minutos não é declarada como cumprida.",
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBeforeCoordinationCommit": "8c7206f8f26178ed587fe289ac27926308835de7",
+  "sharedHeadAtCheckpoint": "8c7206f8f26178ed587fe289ac27926308835de7",
+  "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+  "sharedAheadOfMain": 626,
+  "sharedBehindMain": 10,
+  "branch": "feat/work-m362-certification-without-distribution-20261118",
+  "branchHeadSha": "a1236f9106a4036af3c2b70c2ab6f67403793803",
+  "baseBranchHeadAtPRCreation": "8c7206f8f26178ed587fe289ac27926308835de7",
+  "pr": {
+    "number": 310,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/310",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "headSha": "a1236f9106a4036af3c2b70c2ab6f67403793803",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "8c7206f8f26178ed587fe289ac27926308835de7",
+    "commits": 5,
+    "changedFiles": 8,
+    "additions": 96,
+    "deletions": 17
+  },
+  "commitsPublished": [
+    "867b87baf27bf9067093a3bb8ef9621006ba50d9",
+    "a1236f9106a4036af3c2b70c2ab6f67403793803"
+  ],
+  "changes": {
+    "files": [
+      ".github/workflows/card-batch-admission.yml",
+      "scripts/apply-reviewed-admission.cjs",
+      "scripts/audit-release27.cjs",
+      "scripts/card-batch-automation.cjs",
+      "scripts/card-batch-ci.cjs",
+      "tests/cardBatchAutomation.test.cjs",
+      "tests/cardBatchCI.test.cjs",
+      "tests/cardReleasePolicy.test.cjs"
+    ],
+    "runtimeFilesChanged": 0,
+    "catalogFilesChanged": 0,
+    "certificationFilesChanged": 0,
+    "databaseFilesChanged": 0,
+    "inventoryMutations": 0,
+    "addedPublisherEndToEndTest": 1,
+    "additionalAssertions": 3,
+    "admissionUnitTestsPassed": 10,
+    "admissionUnitTestsFailed": 0
+  },
+  "ci": {
+    "cardBatchAdmission": {
+      "runId": 44342165035,
+      "status": "completed",
+      "conclusion": "success",
+      "note": "ADMISSION_RESULTS []; nenhum lote pendente; publisher executou sem publicar alterações."
+    },
+    "cardBatchFast": {
+      "runId": 44342164701,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "milestone1000": {
+      "runId": 44342165575,
+      "status": "completed",
+      "conclusion": "success",
+      "certified": 969,
+      "remainingTo1000": 31
+    },
+    "engineValidation": {
+      "runId": 44342165160,
+      "status": "in_progress",
+      "npmCheck": "success",
+      "npmTest": "in_progress",
+      "extendedSoak600s": "in_progress"
+    }
+  },
+  "catalog": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "identityBlocked": 27,
+    "newlyCertifiedThisRun": 0,
+    "distributionAllowlist": 832,
+    "certifiedButWithheldByPolicy": 137,
+    "automaticCertifications": 0
+  },
+  "rulesPreserved": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "extraDeckMax": 5,
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "physicalOwnership": "nenhuma alteração em UIDs/donos físicos",
+    "privateHands": "nenhuma alteração",
+    "inventoryGranted": 0
+  },
+  "handoff": {
+    "releasedToAuxiliary": [
+      "scripts/card-batch-ci.cjs",
+      "scripts/card-batch-automation.cjs",
+      "scripts/apply-reviewed-admission.cjs",
+      "scripts/audit-release27.cjs",
+      "tests/cardBatchCI.test.cjs",
+      "tests/cardBatchAutomation.test.cjs",
+      "tests/cardReleasePolicy.test.cjs",
+      ".github/workflows/card-batch-admission.yml"
+    ],
+    "auxiliaryMay": "monitorar CI e corrigir somente os oito arquivos da PR #310 em branch própria, sem merge/deploy.",
+    "forbidden": [
+      "runtime de duelo",
+      "catálogo/certificações",
+      "inventários",
+      "banco persistente",
+      "dados de jogadores",
+      "main",
+      "produção",
+      "reservas de terceiros"
+    ],
+    "otherReservationsReleased": false
+  },
+  "otherAgents": {
+    "activeRunId": "work-20261115T142521-0300",
+    "activeScopePreserved": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "m61Handoff": {
+      "pr": 17,
+      "status": "awaiting-explicit-release",
+      "lastRequestCommentId": 6977352222,
+      "scope": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ]
+    }
+  },
+  "deployment": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "production": "not verified",
+    "deploymentEndpoint": "not exposed by the available GitHub connector"
+  },
+  "blockers": [
+    "Engine Validation e Extended Soak ainda em andamento no HEAD final.",
+    "M61/runtime não transferido; implementação de 3-Hump Lacooda permanece bloqueada.",
+    "31 cartas permanecem até 1.000; 27 identidades continuam marcadas como bloqueadas."
+  ],
+  "nextTask": "Aguardar conclusão de Engine Validation/Extended Soak da PR #310; se aprovado, manter draft até revisão/autorização. Em paralelo, obter handoff M61 para 3-Hump Lacooda (3 face-up, tributar exatamente 2, comprar 3), então avançar para 8-Claws Scorpion e as próximas famílias já revisadas.",
+  "nextWindow": "2026-11-18T17:30:00-03:00",
+  "noMerge": true,
+  "noDeploy": true,
+  "noInventoryGrant": true
+}
