@@ -27,7 +27,7 @@ function normalizeCounts(raw) {
 
 function summarizeReport(report, scope) {
   if (!report || typeof report !== 'object' || !report.metadata) {
-    throw new Error('Relatório npm audit inválido para o escopo ' + scope + '.');
+    throw new Error('Relatório npm audit inválido: metadata ausente para o escopo ' + scope + '.');
   }
   const counts = normalizeCounts(report.metadata.vulnerabilities);
   const vulnerabilities = report.vulnerabilities ?? {};
