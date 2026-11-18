@@ -1,0 +1,258 @@
+'use strict';
+const {test,after}=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const os=require('node:os');
+const path=require('node:path');
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'m366-guard-owner-'));
+process.env.DATABASE_PATH=path.join(dir,'isolated.sqlite');
+for(const key of ['DISCORD_TOKEN','DISCORD_CLIENT_ID','DISCORD_GUILD_ID'])delete process.env[key];
+
+const database=require('../dist/database');
+const store=require('../dist/tagStore');
+const tag=require('../dist/tagDuel');
+const {handleTagComponent}=require('../dist/tagInteraction');
+const {tagPrivateMessage,tagPublicMessage}=require('../dist/tagUI');
+const {validateDiscordPayload}=require('../dist/discordPayload');
+const {getPlayableCard,getCardStatus,getEffect}=require('../dist/effectRegistry');
+const {getMonsterEffect}=require('../dist/monsterEffects');
+const {rulesFor}=require('../dist/rulesProfile');
+
+const GUARD='37101832';
+const BLUE_EYES='89631139';
+const AXE_RAIDER='48305365';
+assert.equal(getPlayableCard(GUARD)?.englishName,"Gravekeeper's Guard");
+assert.equal(getCardStatus(GUARD)?.stage,'certified');
+assert.equal(getEffect(GUARD)?.kind,'monsterEffect');
+assert.deepEqual(getMonsterEffect(GUARD),{
+  trigger:'flip',
+  operation:{kind:'bounce',target:'opponentMonster'}
+});
+assert.equal(getPlayableCard(BLUE_EYES)?.englishName,'Blue-Eyes White Dragon');
+assert.equal(getPlayableCard(AXE_RAIDER)?.englishName,'Axe Raider');
+
+const SAFE_NORMALS=[...new Set(tag.tagNormalCardIds)].filter(id=>{
+  const card=getPlayableCard(id);
+  return card?.kind==='monster'&&card.monsterType==='normal'&&
+    Number.isInteger(card.atk)&&Number.isInteger(card.defense)&&card.level<=4;
+});
+assert.ok(SAFE_NORMALS.length>=20,'four physical Decks require twenty distinct certified Normal Monsters');
+
+function member(seat){return 'm366-seat-'+seat;}
+function deck(required=[]){
+  const ids=[...new Set([...required,...SAFE_NORMALS])];
+  assert.ok(ids.length>=20,'each physical Main Deck must contain at least twenty distinct cards');
+  return ids.slice(0,20);
+}
+function holder(state,seat){
+  const team=seat%2;
+  return state.active[team]===seat?state.core.players[team]:state.reserves[seat];
+}
+function takePhysical(state,seat,id){
+  const physical=holder(state,seat);
+  for(const zone of ['hand','deck']){
+    const index=physical[zone].findIndex(card=>card.id===id);
+    if(index>=0)return physical[zone].splice(index,1)[0];
+  }
+  throw new Error('M366 physical card missing from seat '+seat+': '+id);
+}
+function placeFaceDown(state,seat,id){
+  const card=takePhysical(state,seat,id);
+  const monster={...card,owner:seat%2,position:'def',faceUp:false,
+    entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0,setTurn:0};
+  state.core.players[seat%2].monsters.push(monster);
+  return monster;
+}
+function deploy(state,seat,id){
+  const card=takePhysical(state,seat,id);
+  const monster={...card,owner:seat%2,position:'atk',faceUp:true,
+    entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
+  state.core.players[seat%2].monsters.push(monster);
+  return monster;
+}
+function assertRules(state){
+  const rules=rulesFor(state.core);
+  assert.equal(rules.mainDeckMin,20);
+  assert.equal(rules.mainDeckMax,30);
+  assert.equal(rules.handLimit,6);
+  assert.equal(rules.handCheck,'end');
+  assert.equal(rules.extraDeckMax,5);
+  assert.equal(rules.monsterZones,3);
+  assert.equal(rules.spellTrapZones,3);
+  for(const team of state.core.players){
+    assert.ok(team.monsters.length<=3,'each team shares three Monster Zones');
+    assert.ok(team.backrow.length<=3,'each team shares three Spell/Trap Zones');
+  }
+  for(const seat of [0,1,2,3])assert.ok((holder(state,seat).extra??[]).length<=5);
+}
+function inventory(state){
+  const cards=tag.tagInventory(state);
+  assert.equal(cards.length,80,'four physical twenty-card Decks must contribute exactly eighty cards');
+  const map=new Map(cards.map(card=>[card.uid,card.id]));
+  assert.equal(map.size,80,'all physical UIDs must be unique');
+  return map;
+}
+function assertConserved(state,before){
+  const cards=tag.tagInventory(state);
+  assert.equal(cards.length,before.size,'the Flip bounce must conserve all physical cards');
+  assert.equal(new Set(cards.map(card=>card.uid)).size,before.size);
+  for(const card of cards)assert.equal(before.get(card.uid),card.id,'physical identity changed: '+card.uid);
+}
+function assertPrivateHands(state){
+  const publicState=JSON.stringify(tag.publicTagDuel(state));
+  for(const seat of [0,1,2,3])for(const card of tag.tagMemberHand(state,member(seat))){
+    assert.ok(!publicState.includes(card.uid),'private hand UID leaked for physical seat '+seat);
+  }
+}
+function assertPublicPayload(record){
+  const payload=tagPublicMessage(record);
+  validateDiscordPayload(payload);
+  const rendered=JSON.stringify(payload);
+  for(const card of tag.tagInventory(record.state)){
+    assert.ok(!rendered.includes(card.uid),'public Discord payload leaked physical UID '+card.uid);
+  }
+}
+function interaction(record,userId,index,requestId,actionOwner=userId){
+  const calls=[];
+  return {
+    id:requestId,guildId:record.guild,user:{id:userId},
+    customId:'tag:act:'+record.id+':'+record.revision+':'+actionOwner,
+    values:[String(index)],isButton:()=>false,isStringSelectMenu:()=>true,
+    deferUpdate:async()=>{
+      assert.equal(store.getTag(record.id).revision,record.revision);
+      calls.push('defer');
+    },
+    editReply:async payload=>{calls.push('edit');validateDiscordPayload(payload);},
+    calls
+  };
+}
+async function submit(record,actor,index,requestId){
+  const panel=tagPrivateMessage(record,actor,Math.floor(index/20));
+  validateDiscordPayload(panel);
+  const components=panel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[]);
+  const menu=components.find(component=>
+    component.custom_id==='tag:act:'+record.id+':'+record.revision+':'+actor
+  );
+  assert.ok(menu,'the active representative must receive the private Discord action menu');
+  assert.ok(menu.options.some(option=>option.value===String(index)),
+    'the private Discord menu must expose legal action index '+index);
+  const i=interaction(record,actor,index,requestId);
+  let refreshes=0;
+  await handleTagComponent(i,async next=>{
+    refreshes++;
+    validateDiscordPayload(tagPublicMessage(next));
+  },()=>{});
+  assert.deepEqual(i.calls,['defer','edit']);
+  assert.ok(refreshes>=1,'the committed action must refresh the public Discord panel');
+  return store.getTag(record.id);
+}
+async function settleResponses(record){
+  let current=record;
+  for(let guard=0;current.state.core.phase==='response';guard++){
+    assert.ok(guard<40,'the Discord response chain must terminate');
+    const actor=tag.tagDecisionMember(current.state).id;
+    const pass=tag.tagActions(current.state,actor).findIndex(action=>action.kind==='pass');
+    assert.ok(pass>=0,'the current physical responder must receive a legal Pass action');
+    current=await submit(current,actor,pass,'m366-pass-'+guard);
+  }
+  return current;
+}
+function register(state){
+  const id='m366-guard-owner';
+  const members=[0,1,2,3].map(seat=>({id:member(seat),name:'M366 Seat '+seat,accepted:true}));
+  database.db.prepare(
+    'INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)'
+  ).run(id,'m366-guild','m366-channel',null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
+  return store.getTag(id);
+}
+function setup(){
+  const required=[[],[],[],[]];
+  required[0].push(AXE_RAIDER);
+  required[2].push(GUARD);
+  required[3].push(BLUE_EYES);
+  const players=[0,1,2,3].map(seat=>({
+    id:member(seat),name:'M366 Seat '+seat,cards:deck(required[seat])
+  }));
+  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m366-gravekeepers-guard-owner'});
+  state.core.turn=3;
+  assert.deepEqual(state.active,[0,1],'seats 0 and 1 must be the active representatives');
+  const ally=deploy(state,0,AXE_RAIDER);
+  const source=placeFaceDown(state,2,GUARD);
+  const target=deploy(state,3,BLUE_EYES);
+  assert.match(source.uid,/^m2:/,'the Flip source must retain inactive allied physical seat 2 ownership');
+  assert.match(target.uid,/^m3:/,'the target must retain inactive opposing physical seat 3 ownership');
+  assert.match(ally.uid,/^m0:/,'the allied control monster must retain active seat 0 ownership');
+  assert.equal(tag.tagDecisionMember(state).id,member(0),'active ally seat 0 must execute the Flip Summon');
+  assertRules(state);
+  assertPrivateHands(state);
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  const before=inventory(state);
+  const record=register(state);
+  assertPublicPayload(record);
+  return {ally,source,target,before,record};
+}
+
+test("Gravekeeper's Guard returns a bounced monster to its inactive physical owner's hand",async()=>{
+  const fixture=setup();
+  const flipActions=tag.tagActions(fixture.record.state,member(0));
+  const flipIndex=flipActions.findIndex(action=>
+    action.kind==='position'&&action.card===fixture.source.uid&&action.mode==='flip'
+  );
+  assert.ok(flipIndex>=0,'the active representative must receive the partner-owned Flip Summon action');
+  const partnerPanel=tagPrivateMessage(fixture.record,member(2));
+  validateDiscordPayload(partnerPanel);
+  const partnerRows=partnerPanel.components.map(row=>row.toJSON()).flatMap(row=>row.components||[]);
+  assert.ok(!partnerRows.some(row=>row.custom_id?.startsWith('tag:act:')),
+    'the inactive physical source owner must not receive the active representative action menu');
+  const forged=interaction(fixture.record,member(2),flipIndex,'m366-forged',member(0));
+  const unchanged=JSON.stringify(fixture.record.state);
+  await assert.rejects(
+    handleTagComponent(forged,async()=>{},()=>{}),
+    /Abra sua própria mão no campo\./
+  );
+  assert.deepEqual(forged.calls,[],'the inactive partner must be rejected before acknowledgement');
+  assert.equal(store.getTag(fixture.record.id).revision,fixture.record.revision);
+  assert.equal(JSON.stringify(store.getTag(fixture.record.id).state),unchanged);
+
+  let current=await submit(fixture.record,member(0),flipIndex,'m366-flip');
+  assert.equal(current.state.core.phase,'choice','the mandatory Flip effect must open its opponent-target choice');
+  assert.equal(current.state.core.choice?.source,'triggerTarget');
+  assert.ok(current.state.core.choice.targets.includes(fixture.target.uid),
+    'the inactive opposing partner monster must be a legal bounce target');
+  assert.ok(!current.state.core.choice.targets.includes(fixture.ally.uid),
+    'the effect must not offer a monster controlled by the activating team');
+  const chooseActions=tag.tagActions(current.state,member(0));
+  const targetIndex=chooseActions.findIndex(action=>
+    action.kind==='choose'&&action.target===fixture.target.uid
+  );
+  assert.ok(targetIndex>=0,'the active representative must receive the exact opposing target in its private Discord menu');
+  current=await submit(current,member(0),targetIndex,'m366-select-opponent');
+
+  current=await settleResponses(current);
+  assert.equal(current.state.core.phase,'main','the Flip effect and its response window must resolve');
+  assert.ok(!current.state.core.players[1].monsters.some(card=>card.uid===fixture.target.uid),
+    'the selected opposing monster must leave the shared field');
+  assert.ok(current.state.core.players[0].monsters.some(card=>card.uid===fixture.ally.uid),
+    'the allied monster must remain on the shared field');
+  assert.ok(current.state.core.players[0].monsters.some(card=>card.uid===fixture.source.uid&&card.faceUp),
+    'Gravekeeper’s Guard must remain face-up after its effect resolves');
+
+  const physicalOwnerHand=tag.tagMemberHand(current.state,member(3));
+  const activeOpponentHand=tag.tagMemberHand(current.state,member(1));
+  assert.ok(physicalOwnerHand.some(card=>card.uid===fixture.target.uid),
+    'the bounced card must return to physical owner seat 3, not merely team 1');
+  assert.ok(!activeOpponentHand.some(card=>card.uid===fixture.target.uid),
+    'the active opponent representative must not receive the inactive partner’s card');
+
+  assertConserved(current.state,fixture.before);
+  assertPrivateHands(current.state);
+  assertRules(current.state);
+  assertPublicPayload(current);
+  assert.doesNotThrow(()=>tag.assertTagDuel(current.state));
+  assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(current.state))));
+});
+
+after(()=>{
+  database.db.close();
+  fs.rmSync(dir,{recursive:true,force:true});
+});
