@@ -1,0 +1,70 @@
+{
+  "runId": "work-20261116T012933-0300-M258",
+  "mission": "M258",
+  "owner": "Work",
+  "priority": "P1",
+  "state": "published-draft; CI in progress",
+  "startedAt": "2026-11-16T01:29:33-03:00",
+  "timezone": "America/Sao_Paulo",
+  "branch": "feat/work-m258-battle-level-burn-discord-2v2-20261116",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "pr": 214,
+  "head": "9437a60b146694c5d08a0e35f632c93303a24d7d",
+  "scope": [
+    "tests/tagBattleLevelBurnDiscord2v2.test.cjs"
+  ],
+  "cardsCovered": [
+    "Needle Burrower",
+    "KA-2 Des Scissors"
+  ],
+  "behavioralScenarios": 4,
+  "newCertifications": 0,
+  "blocksCompleted": [
+    "Preparou a quinta família independente durante as validações das PRs #210–#213.",
+    "Implementou quatro homologações de dano de batalha e burn por Nível original através do handler Discord real.",
+    "Cobriu ataque vencedor, alvo em Defesa sem dano de batalha e atacante derrotado sem burn; validou PV por equipe, Cemitério, UIDs e idempotência.",
+    "Publicou PR draft #214."
+  ],
+  "ci": {
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "npmTest": "pending_in_engine_validation",
+    "extendedSoak": "pending"
+  },
+  "runtimeChanges": [],
+  "catalogChanges": [],
+  "certificationChanges": [],
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "liveDiscordNetwork": false
+  },
+  "stateUpdate": {
+    "status": "withheld",
+    "reason": "M231/M232 continuam reservadas no estado compartilhado. Handoff solicitado em #187/#188, sem liberação explícita; nenhum arquivo de terceiro foi alterado.",
+    "comments": [
+      6907379122,
+      6907379553
+    ]
+  },
+  "scopeReleasedToAuxiliary": {
+    "branch": "feat/work-m258-battle-level-burn-discord-2v2-20261116",
+    "files": [
+      "tests/tagBattleLevelBurnDiscord2v2.test.cjs"
+    ],
+    "allowed": "monitorar CI e corrigir apenas este arquivo de teste; sem runtime, catálogo, estado compartilhado ou produção"
+  },
+  "nextTask": "Monitorar CI #214; corrigir somente a fixture própria; prosseguir com outra família independente e aguardar handoff M231/M232.",
+  "nextWindow": "2026-11-16T05:30:00-03:00",
+  "duration": {
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Tempo efetivo não é medido com precisão; não declarar 60 minutos sem evidência e excluir espera de CI."
+  }
+}
