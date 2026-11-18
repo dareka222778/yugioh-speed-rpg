@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "startedAt": "2026-11-16T03:59:31Z",
+  "endedAt": "2026-11-16T04:13:25Z",
+  "elapsedSeconds": 834,
+  "effectiveWorkDuration": "não medido separadamente; o tempo de espera ociosa de CI não foi contado como trabalho",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseHeadObserved": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "coordination": {
+    "sharedStateUpdated": false,
+    "reason": "coordination/state.json ainda registra M231/M232 como ativos; pedidos de handoff em PRs #187 e #188 seguem sem resposta. Nenhum arquivo reservado foi alterado.",
+    "handoffRequests": [
+      "https://github.com/dareka222778/yugioh-speed-rpg/pull/187",
+      "https://github.com/dareka222778/yugioh-speed-rpg/pull/188"
+    ],
+    "reservationsOwnedByOthersReleased": false,
+    "scopeReleasedToAuxiliary": "Somente acompanhar a CI desta PR e, se necessário, editar exclusivamente o novo arquivo de teste nesta mesma branch; não tocar em runtime nem em arquivos reservados."
+  },
+  "deployment": {
+    "merge": false,
+    "deploy": false,
+    "discordLiveValidation": false,
+    "deployWorkflowFound": false,
+    "packageScripts": [
+      "dev",
+      "build",
+      "start",
+      "check",
+      "test",
+      "audit:engine",
+      "audit:tag",
+      "audit:rea"
+    ],
+    "note": "Nenhum script deploy, vercel.json, render.yaml ou Dockerfile foi encontrado na branch consultada."
+  },
+  "counts": {
+    "certified": 969,
+    "target": 1000,
+    "remainingToGoal": 31,
+    "historical": 1962,
+    "pending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "newCertifications": 0
+  },
+  "nextWorkWindow": "2026-11-16T05:30:00-03:00",
+  "runId": "work-20261116T005931-0300-M251",
+  "priority": "P1",
+  "mission": "M251 — current-stat destruction across classic 2v2",
+  "branch": "feat/work-m251-current-stat-destruction-2v2-20261116",
+  "head": "cd52cfdbf7830617d2fbf444522fe8d9dfdc2616",
+  "pr": {
+    "number": 207,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/207",
+    "state": "open",
+    "draft": true
+  },
+  "files": [
+    "tests/tagClassicCurrentStatDestruction2v2.test.cjs"
+  ],
+  "cards": [
+    "Hammer Shot",
+    "Smashing Ground",
+    "Shield Crush"
+  ],
+  "behaviorScenarios": 8,
+  "changes": [
+    "Hammer Shot: maior ATK atual, escopo dos dois times e escolha em empate.",
+    "Smashing Ground: maior DEF atual face-up da equipe adversária, ambos assentos e exclusão de aliados/face-down.",
+    "Shield Crush: alvos em Defesa nos dois campos, incluindo face-down sem revelar identidade pública.",
+    "Conservação de 80 UIDs, mãos privadas, restauração JSON e regras 20–30 / mão 6 End Phase / Extra 5 / zonas 3+3."
+  ],
+  "ci": {
+    "cardBatchFast": "success (run 43802277197)",
+    "milestone1000": "success (run 43802277199)",
+    "npmTest": "success (run 43802277095)",
+    "engineValidation": "in_progress",
+    "extendedSoak600s": "in_progress"
+  },
+  "nextTask": "Aguardar Engine Validation e soak; após aprovação, pedir revisão e seguir para uma família independente de recrutamento, sem tocar nas reservas M231/M232."
+}
