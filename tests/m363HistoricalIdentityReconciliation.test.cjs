@@ -12,7 +12,11 @@ test('all 31 candidate identities resolve to exactly one canonical historical re
   assert.equal(matches[0].names.en,candidate.name);
   assert.deepEqual(matches[0].firstObserved,candidate.firstObserved);
   assert.ok(candidate.presentInUnionSnapshot,candidate.name+' must have a pre-cutoff regional observation');
+  const expectedRegions=['tcg','ocg','world'].filter(region=>matches[0].firstObserved?.[region]&&matches[0].firstObserved[region]<cutoff);
+  assert.deepEqual(candidate.eligibleRegionsBeforeCutoff,expectedRegions);
   assert.ok(candidate.eligibleRegionsBeforeCutoff.length>0);
+  assert.equal(candidate.officialSourceVerifiedInCandidateReview,true);
+  assert.match(candidate.officialSourceUrl,/^https:\/\/www\\.db\\.yugioh-card\\.com\\//);
   assert.equal(candidate.certificationStatus,'not-certified');
   assert.equal(candidate.distributionAuthorized,false);
   assert.equal(candidate.inventoryGranted,0);
