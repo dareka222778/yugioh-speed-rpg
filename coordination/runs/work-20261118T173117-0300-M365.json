@@ -1,0 +1,66 @@
+{
+  "runId": "work-20261118T173117-0300-M365",
+  "mission": "M365",
+  "owner": "Work",
+  "priority": "P1 — verificar e proteger o retorno à mão física de monstros devolvidos por efeitos de Flip em 2v2; Gravekeeper's Guard deve mirar somente a equipe adversária e devolver a carta ao assento físico proprietário, sem alterar mão do representante ativo.",
+  "state": "reserved",
+  "startedAt": "2026-11-18T17:31:17-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "cbb7f9cdd0f82555ff9777b0c7a4a1ca5c41fd7d",
+  "branch": "feat/work-m365-gravekeepers-guard-flip-bounce-owner-discord-2v2-20261118",
+  "scope": [
+    "tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs"
+  ],
+  "conflictPolicy": "Somente o novo arquivo de teste M365. Não editar src/duelEngineCurrent.ts, src/monsterEffects.ts, renderizadores, catálogo, certificações, inventários, banco persistente, dados de jogadores, main, produção ou arquivos reservados do run ativo/M358–M360/M61.",
+  "cards": [
+    "Gravekeeper's Guard (37101832)"
+  ],
+  "expectedBehavior": [
+    "Flip obrigatório via menu privado do representante ativo mesmo quando a fonte pertence ao parceiro inativo.",
+    "A seleção de alvo inclui monstros da equipe adversária e exclui monstros da própria equipe.",
+    "Após resolver o bounce, o UID retorna à mão do assento físico original; não à mão do representante ativo.",
+    "Preservar as 80 identidades, mãos privadas, Decks físicos, zonas 3+3, Main Deck 20–30, mão 6 na End Phase e Extra Deck 5."
+  ],
+  "handoffRequests": [
+    {
+      "pr": 307,
+      "commentId": 6990804111,
+      "files": [
+        "src/duelRenderer.ts",
+        "src/npcRenderer.ts",
+        "src/tagRenderer.ts"
+      ],
+      "purpose": "migração de tipos sharp 0.35.5",
+      "state": "awaiting-explicit-release"
+    },
+    {
+      "pr": 308,
+      "commentId": 6990805001,
+      "files": [
+        "src/cardInspector.ts",
+        "src/cardRenderer.ts",
+        "src/deckRenderer.ts"
+      ],
+      "purpose": "migração de tipos sharp 0.35.5",
+      "state": "awaiting-explicit-release"
+    },
+    {
+      "pr": 17,
+      "commentId": 6990805804,
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "purpose": "3-Hump Lacooda e efeitos 2v2",
+      "state": "awaiting-explicit-release"
+    }
+  ],
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Executar o teste de regressão M365; se confirmar retorno à mão do representante em vez do proprietário físico, manter a evidência e aguardar handoff M61 para corrigir src/duelEngineCurrent.ts. Em paralelo, acompanhar CI de #312 e os pedidos de handoff.",
+  "nextWindow": "2026-11-18T22:30:00-03:00"
+}
