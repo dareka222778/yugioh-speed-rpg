@@ -2317,16 +2317,17 @@
       ],
       "state": "released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-18T08:31:37-03:00",
-      "endedAt": "2026-11-18T08:43:28-03:00",
+      "endedAt": "2026-11-18T08:45:44-03:00",
       "priority": "P1 — impedir ramificações por suíte/mission-specific no executor isolado, evitando conflitos de CI entre PRs paralelas e preservando o runner genérico.",
       "conflictPolicy": "Somente tests/ciRunnerGenericity.test.cjs. Não alterar scripts/run-tests-isolated.cjs, runtime, catálogo, certificações, banco persistente, inventários, dados de jogadores, main ou produção.",
       "ci": {
         "cardBatchFast": "success",
         "milestone1000": "success",
         "engineValidation": "in_progress",
-        "npmTest": "in_progress dentro de Engine Validation",
+        "npmTest": "in_progress within Engine Validation",
         "extendedSoak600s": "in_progress"
-      }
+      },
+      "sharedHeadAfterCheckpointCommit": "a109bc1ec632e5f78171024a3e512e4fd254a295"
     }
   ],
   "handoffRequest": {
@@ -5184,7 +5185,7 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261118T083137-0300-M361.json",
-  "lastParallelActivityAt": "2026-11-18T11:43:28.403Z",
+  "lastParallelActivityAt": "2026-11-18T11:45:44.535Z",
   "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "sharedHeadBeforeStateUpdate": "808d5f5587a2a5d8e331d16088605bd207e41142",
   "endedAt": "2026-11-15T09:52:13-03:00",
@@ -5964,7 +5965,7 @@
       "state": "active"
     }
   ],
-  "updatedAt": "2026-11-18T08:43:28-03:00",
+  "updatedAt": "2026-11-18T08:45:44-03:00",
   "lastCheckpointCommit": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
   "concurrentReservations": [
     {
@@ -7437,7 +7438,7 @@
       "priority": "P1 — impedir ramificações por suíte/mission-specific no executor isolado, evitando conflitos de CI entre PRs paralelas e preservando o runner genérico.",
       "state": "released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-18T08:31:37-03:00",
-      "endedAt": "2026-11-18T08:43:28-03:00",
+      "endedAt": "2026-11-18T08:45:44-03:00",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "808d5f5587a2a5d8e331d16088605bd207e41142",
       "branch": "feat/work-m361-ci-runner-genericity-guard-20261118",
@@ -7457,7 +7458,7 @@
         "cardBatchFast": "success",
         "milestone1000": "success",
         "engineValidation": "in_progress",
-        "npmTest": "in_progress dentro de Engine Validation",
+        "npmTest": "in_progress within Engine Validation",
         "extendedSoak600s": "in_progress"
       },
       "catalogAtStart": {
@@ -7537,20 +7538,21 @@
         "deploymentStatus": "não verificável: endpoint de deployments não foi exposto pelo conector; nenhum workflow de deploy identificado"
       },
       "duration": {
-        "elapsedMinutes": 11.9,
-        "effectiveWorkMinutes": 11.9,
+        "elapsedMinutes": 14.1,
+        "effectiveWorkMinutes": 14.1,
         "targetEffectiveMinutes": 60,
         "targetMet": false,
         "ciWaitExcluded": true
       },
       "nextTask": "Auxiliar: monitorar PR #309 e corrigir somente tests/ciRunnerGenericity.test.cjs. Work: verificar Engine Validation/Soak #309; aguardar resposta ao handoff M61 para 3-Hump Lacooda; não tocar em M231–M236 nem nos escopos M354–M360; após liberação, implementar a primeira família comportamental das 31 pendentes.",
-      "nextWindow": "2026-11-18T13:30:00-03:00"
+      "nextWindow": "2026-11-18T13:30:00-03:00",
+      "sharedHeadAfterCheckpointCommit": "a109bc1ec632e5f78171024a3e512e4fd254a295"
     }
   ],
   "lastParallelRun": "work-20261118T083137-0300-M361",
   "nextParallelTask": "Auxiliar: monitorar PR #309 e corrigir somente tests/ciRunnerGenericity.test.cjs. Work: verificar Engine Validation/Soak #309; aguardar resposta ao handoff M61 para 3-Hump Lacooda; não tocar em M231–M236 nem nos escopos M354–M360; após liberação, implementar a primeira família comportamental das 31 pendentes.",
   "nextParallelWindow": "2026-11-18T13:30:00-03:00",
-  "sharedHeadAfterCheckpointCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
+  "sharedHeadAfterCheckpointCommit": "a109bc1ec632e5f78171024a3e512e4fd254a295",
   "postCheckpointCI": {
     "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",
     "workflows": [
@@ -7651,5 +7653,28 @@
       "tests/ciRunnerGenericity.test.cjs"
     ],
     "priority": "P1 — impedir ramificações por suíte/mission-specific no executor isolado, evitando conflitos de CI entre PRs paralelas e preservando o runner genérico."
+  },
+  "lastParallelRunSummary": {
+    "runId": "work-20261118T083137-0300-M361",
+    "mission": "M361",
+    "branch": "feat/work-m361-ci-runner-genericity-guard-20261118",
+    "branchHead": "f35960472637f46146a90c3bc9f850db44f8edc7",
+    "pr": 309,
+    "sharedHeadBeforeFinalization": "a109bc1ec632e5f78171024a3e512e4fd254a295",
+    "endedAt": "2026-11-18T08:45:44-03:00",
+    "ci": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "npmTest": "in_progress within Engine Validation",
+      "extendedSoak600s": "in_progress"
+    },
+    "duration": {
+      "elapsedMinutes": 14.1,
+      "effectiveWorkMinutes": 14.1,
+      "targetEffectiveMinutes": 60,
+      "targetMet": false,
+      "ciWaitExcluded": true
+    }
   }
 }
