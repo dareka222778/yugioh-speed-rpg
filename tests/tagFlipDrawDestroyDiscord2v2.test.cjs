@@ -268,11 +268,19 @@ test('Man-Eater Bug exposes both teams shared field targets and destroys the sel
   let current=await flipSource(fixture,fixture.record);
   current=await settleResponses(current,'man-eater-flip');
   assert.equal(current.state.core.phase,'choice');
-  assert.equal(current.state.core.choice.source,'monsterTarget');
-  assert.equal(tag.tagDecisionMember(current.state).id,member(2),
-    'the active representative of the source team must receive the mandatory FLIP target choice');
+  assert.equal(current.state.core.choice.source,'triggerTarget',
+    'the mandatory FLIP trigger must first identify its physical source');
+  assert.equal(tag.tagDecisionMember(current.state).id,member(2));
   const actor=member(2);
-  const actions=tag.tagActions(current.state,actor);
+  let actions=tag.tagActions(current.state,actor);
+  const triggerIndex=actions.findIndex(action=>action.kind==='choose'&&action.target===fixture.source.uid);
+  assert.ok(triggerIndex>=0,'the active representative must receive the partner-owned Man-Eater Bug trigger');
+  current=await submit(current,actor,triggerIndex,'m347-man-eater-trigger');
+  current=await settleResponses(current,'man-eater-trigger');
+  assert.equal(current.state.core.phase,'choice');
+  assert.equal(current.state.core.choice.source,'monsterTarget',
+    'after choosing the mandatory FLIP trigger, Discord must expose its monster target selection');
+  actions=tag.tagActions(current.state,actor);
   const targetIndex=actions.findIndex(action=>action.kind==='choose'&&action.target===fixture.target.uid);
   assert.ok(targetIndex>=0,'the opponent monster owned by inactive seat 1 must be a legal target');
   assert.ok(actions.some(action=>action.kind==='choose'&&action.target===fixture.ally.uid),
