@@ -83,6 +83,9 @@ jobs:
           path: |
             package.json
             package-lock.json
+            node_modules/sharp/package.json
+            node_modules/sharp/dist/index.d.mts
+            node_modules/sharp/dist/index.d.cts
             node_modules/sharp/lib/index.d.ts
           if-no-files-found: error
           retention-days: 7
