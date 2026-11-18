@@ -16,7 +16,7 @@ test('all 31 candidate identities resolve to exactly one canonical historical re
   assert.deepEqual(candidate.eligibleRegionsBeforeCutoff,expectedRegions);
   assert.ok(candidate.eligibleRegionsBeforeCutoff.length>0);
   assert.equal(candidate.officialSourceVerifiedInCandidateReview,true);
-  assert.match(candidate.officialSourceUrl,/^https:\/\/www\\.db\\.yugioh-card\\.com\\//);
+  assert.match(candidate.officialSourceUrl,/^https:\/\/www\.db\.yugioh-card\.com\//);
   assert.equal(candidate.certificationStatus,'not-certified');
   assert.equal(candidate.distributionAuthorized,false);
   assert.equal(candidate.inventoryGranted,0);
