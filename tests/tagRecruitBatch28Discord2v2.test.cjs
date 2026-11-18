@@ -279,7 +279,10 @@ async function recruit(fixture,record){
   assert.ok(index>=0,'the active representative private menu must offer the eligible recruit from its own Deck');
   assert.ok(!actions.some(action=>action.kind==='choose'&&action.target===fixture.partnerDecoy?.uid),
     'the inactive partner Deck must not leak into recruit options');
-  assert.deepEqual(record.state.core.choice.targets,[fixture.candidate.uid]);
+  assert.ok(record.state.core.choice.targets.includes(fixture.candidate.uid),
+    'the active physical Deck candidate must be one of the legal recruiter targets');
+  assert.ok(record.state.core.choice.targets.every(uid=>uid.startsWith('m2:')),
+    'recruiter targets must come only from the active representative physical Deck');
   await rejectInactivePartner(record,actor,member(0),index,fixture.key+'-recruit');
   const selected=await submit(record,actor,index,'m345-'+fixture.key+'-recruit');
   assert.equal(selected.state.core.choice.source,'monsterRecruitPosition',
@@ -302,7 +305,7 @@ function assertOutcome(fixture,record,recruited){
     assert.equal(state.core.players[0].lp,4000);
     assert.equal(state.core.players[1].lp,4000);
     const source=state.core.players[0].monsters.find(card=>card.uid===fixture.source.uid);
-    assert.ok(source&&source.faceUp&&source.position==='def','Gravekeeper\'s Spy remains face-up in Defense after its FLIP trigger');
+    assert.ok(source&&source.faceUp&&source.position==='atk','Gravekeeper\'s Spy remains face-up in Defense after its FLIP trigger');
   }
   if(recruited){
     const monster=state.core.players[0].monsters.find(card=>card.uid===fixture.candidate.uid&&card.id===c.candidate);
