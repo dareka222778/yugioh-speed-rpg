@@ -165,3 +165,23 @@ test('invalid rules fail closed before any card is moved', () => {
   );
   assert.deepEqual(s.players[0], snapshot);
 });
+
+
+test('a 2v2 search reads only the active representative Deck, never the inactive partner reserve', () => {
+  const s = state();
+  s.teamRotation = {
+    version: 1,
+    cursor: 0,
+    active: [0, 1],
+    reserves: {
+      2: { hand: [], deck: [ref('m2:private-trap', 'trap-b')], extra: [] },
+      3: { hand: [], deck: [], extra: [] },
+    },
+  };
+  const rule = { from: 'deck', filter: { kind: 'trap' }, destination: 'deck-top' };
+  const targets = searchZoneTargets(s, 0, rule, getCard);
+
+  assert.ok(targets.every(c => !c.uid.startsWith('m2:')));
+  assert.equal(resolveSearchZoneSelection(s, 0, 'm2:private-trap', rule, getCard), null);
+  assert.deepEqual(s.teamRotation.reserves[2].deck.map(c => c.uid), ['m2:private-trap']);
+});
