@@ -89,7 +89,10 @@ function register(state){
   return store.getTag(id);
 }
 function payloadText(payload){
-  return JSON.stringify(payload.embeds.map(embed=>embed.toJSON()));
+  return JSON.stringify({
+    embeds:payload.embeds.map(embed=>embed.toJSON()),
+    components:(payload.components??[]).map(component=>component.toJSON())
+  });
 }
 function cardName(id){
   const card=getCard(id);
