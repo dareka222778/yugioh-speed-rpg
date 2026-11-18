@@ -152,7 +152,7 @@ async function rejectInactivePartner(record,actor,partner,index,suffix){
   const before=JSON.stringify(record.state);
   await assert.rejects(
     handleTagComponent(forged,async()=>{},()=>{}),
-    /Abra sua própria mão no campo\./
+    /Jogada indisponível\./
   );
   assert.deepEqual(forged.calls,[],'unauthorized partner interaction must be rejected before Discord acknowledgement');
   assert.equal(store.getTag(record.id).revision,record.revision);
