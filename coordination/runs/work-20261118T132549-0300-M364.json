@@ -7,8 +7,8 @@
   "startedAt": "2026-11-18T13:25:49-03:00",
   "endedAt": "2026-11-18T13:33:32-03:00",
   "duration": {
-    "elapsedMinutes": 7.7,
-    "effectiveWorkMinutes": 7,
+    "elapsedMinutes": 8.7,
+    "effectiveWorkMinutes": 7.5,
     "targetEffectiveMinutes": 60,
     "targetMet": false,
     "ciWaitExcluded": true
@@ -51,7 +51,7 @@
       "status": "in_progress",
       "npmCi": "success",
       "npmRunCheck": "success",
-      "npmTest": "in_progress",
+      "npmTest": "success",
       "extendedSoak600s": "in_progress"
     },
     "dependencyAudit": {
@@ -83,7 +83,7 @@
       "lockfileRegenerated": true,
       "npmCi": "success",
       "npmAuditOmitDev": "success; found 0 vulnerabilities",
-      "typecheck": "failed",
+      "typecheck": "failed; seven TS2503 annotations in six reserved files",
       "reason": "TS2503: namespace sharp no longer resolves at seven annotations across six reserved renderer/inspector files."
     }
   },
@@ -174,5 +174,6 @@
     "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f"
   ],
   "branchSyncMethod": "Git merge commit, shared as first parent, M364 branch as second parent; update_ref fast-forward with expected SHA; no force",
-  "syncCompletedAt": "2026-11-18T16:34:00Z"
+  "syncCompletedAt": "2026-11-18T16:34:00Z",
+  "lastObservedAt": "2026-11-18T16:34:30Z"
 }
