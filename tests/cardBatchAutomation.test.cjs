@@ -5,3 +5,11 @@ test('invalid batch identities, duplicate cards and traversal paths are rejected
 test('missing behavioral oracles fail rather than generating passing TODO or skipped tests',()=>{const {runCase}=require('../scripts/card-batch-scenarios.cjs');assert.throws(()=>runCase({fixture:{},actions:[],assertions:[]}));assert.throws(()=>runCase({fixture:{},actions:[],assertions:[{path:['__proto__'],equals:1}]}));assert.throws(()=>a.load(JSON.parse('{"format":1,"__proto__":{}}')));});
 test('generated suite calls the shared real public-engine runner and does not contain fabricated results',()=>{const b=a.load(fixture),out=a.sources(b);assert.match(out.suite,/card-batch-scenarios/);assert.ok(!out.suite.includes('passed:'));assert.ok(out.content.includes('export const effects'));assert.ok(!out.content.includes('eval('));});
 test('generator cannot replace a source file edited after generation',()=>{const b=a.load(fixture);a.generate(b);const p='src/generated/'+b.batchId+'.ts',original=fs.readFileSync(p,'utf8');try{fs.appendFileSync(p,'\n// edited');assert.throws(()=>a.generate(b),/Refusing to overwrite/);}finally{fs.writeFileSync(p,original);}});
+
+test('distribution is withheld by default and explicit authorization must be boolean',()=>{
+ const b=structuredClone(fixture);
+ assert.equal(a.load(b).distributionAuthorized,false);
+ b.distributionAuthorized=false;assert.equal(a.load(b).distributionAuthorized,false);
+ b.distributionAuthorized=true;assert.equal(a.load(b).distributionAuthorized,true);
+ b.distributionAuthorized='true';assert.throws(()=>a.load(b),/distributionAuthorized/);
+});
