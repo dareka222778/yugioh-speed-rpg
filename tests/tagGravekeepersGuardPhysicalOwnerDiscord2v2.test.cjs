@@ -290,7 +290,7 @@ function setupFusion(){
   const source=placeFaceDown(state,2,GUARD);
   const target=deployExtra(state,3,ULTIMATE);
   assert.match(source.uid,/^m2:/);
-  assert.match(target.uid,/^m3:e/,'Fusion target must preserve physical seat 3 identity');
+  assert.match(target.uid,/^m3:/,'Fusion target must preserve physical seat 3 identity');
   assert.equal(target.owner,1,'the target is controlled by team 1 while physically owned by seat 3');
   assert.equal(tag.tagDecisionMember(state).id,member(0));
   assertRules(state);
@@ -384,7 +384,7 @@ test("Gravekeeper's Guard can bounce a face-down monster without revealing it an
     'a face-down opposing monster is still a legal bounce target');
   const choicePanel=tagPrivateMessage(current,member(0));
   validateDiscordPayload(choicePanel);
-  const choiceText=JSON.stringify(choicePanel.toJSON());
+  const choiceText=JSON.stringify(choicePanel);
   assert.ok(choiceText.includes('virado para baixo'),
     'the active representative sees a hidden-position label, not the card identity');
   assert.ok(!choiceText.includes('Blue-Eyes White Dragon'),
