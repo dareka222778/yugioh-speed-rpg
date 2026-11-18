@@ -186,6 +186,14 @@ async function settleResponses(record,suffix){
   }
   return current;
 }
+function ensureInDeck(state,seat,id){
+  const physical=holder(state,seat);
+  const index=physical.hand.findIndex(card=>card.id===id);
+  if(index>=0)physical.deck.push(physical.hand.splice(index,1)[0]);
+  const card=physical.deck.find(card=>card.id===id);
+  assert.ok(card,'required physical Deck card must be moved out of its opening hand: '+id+' seat '+seat);
+  return card;
+}
 function setup(c,key,{includeCandidate=true,includePartnerDecoy=true}={}){
   const required=[[],[AXE_RAIDER],[],[]];
   required[0].push(c.id);
@@ -194,13 +202,15 @@ function setup(c,key,{includeCandidate=true,includePartnerDecoy=true}={}){
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M345 Seat '+seat,cards:deck(required[seat])
   }));
-  const state=tag.createTagDuel(players,{classic:true,first:1,seed:'m345-'+key});
+  const first=c.mode==='flip'?2:1;
+  const state=tag.createTagDuel(players,{classic:true,first,seed:'m345-'+key});
   state.core.turn=3;
-  assert.deepEqual(state.active,[2,1],'turn rotation must make seats 2 and 1 the active representatives');
+  assert.equal(state.active[0],2,'seat 2 must be the active representative of the source team');
+  assert.equal(state.active[1],c.mode==='flip'?3:1,'turn rotation must preserve the active opponent');
   const source=placeMonster(state,0,c.id,c.mode==='battle');
   const attacker=c.mode==='battle'?placeMonster(state,1,AXE_RAIDER,true):null;
-  const candidate=includeCandidate?holder(state,2).deck.find(card=>card.id===c.candidate)||null:null;
-  const partnerDecoy=includePartnerDecoy?holder(state,0).deck.find(card=>card.id===c.candidate)||null:null;
+  const candidate=includeCandidate?ensureInDeck(state,2,c.candidate):null;
+  const partnerDecoy=includePartnerDecoy?ensureInDeck(state,0,c.candidate):null;
   if(includeCandidate)assert.ok(candidate,'active representative physical Deck must contain the eligible recruit');
   if(includePartnerDecoy)assert.ok(partnerDecoy,'inactive partner physical Deck must contain its private decoy');
   assert.match(source.uid,/^m0:/,'the source must retain inactive partner physical ownership');
@@ -271,7 +281,13 @@ async function recruit(fixture,record){
     'the inactive partner Deck must not leak into recruit options');
   assert.deepEqual(record.state.core.choice.targets,[fixture.candidate.uid]);
   await rejectInactivePartner(record,actor,member(0),index,fixture.key+'-recruit');
-  return submit(record,actor,index,'m345-'+fixture.key+'-recruit');
+  const selected=await submit(record,actor,index,'m345-'+fixture.key+'-recruit');
+  assert.equal(selected.state.core.choice.source,'monsterRecruitPosition',
+    'recruiting a monster must resolve its legal summon position before entering the field');
+  const positions=tag.tagActions(selected.state,actor);
+  const defense=positions.findIndex(action=>action.kind==='choose'&&action.target==='__recruit_def__');
+  assert.ok(defense>=0,'the active representative must receive the legal Defense Position choice');
+  return submit(selected,actor,defense,'m345-'+fixture.key+'-recruit-defense');
 }
 function assertOutcome(fixture,record,recruited){
   const state=record.state,c=fixture.c;
