@@ -236,6 +236,9 @@ test("Gravekeeper's Guard can target only the opposing shared field and returns 
   current=await submit(current,actor,targetIndex,'m365-guard-select-opponent');
   current=await settleResponses(current,'guard-target');
   assert.equal(current.state.core.phase,'main','the mandatory bounce must resolve before Main Phase resumes');
+  assert.deepEqual(current.state.active,[2,3],'resolving a Flip effect must not rotate the physical representatives');
+  assert.equal(current.state.core.current,0,'the team turn must remain unchanged after the effect');
+  assert.equal(current.state.core.turn,3,'the turn number must remain unchanged after the effect');
   assert.ok(current.state.core.players[1].monsters.every(card=>card.uid!==fixture.target.uid),
     'the selected opposing monster must leave the shared field');
   assert.ok(tag.tagMemberHand(current.state,member(1)).some(card=>card.uid===fixture.target.uid&&card.id===CELTIC_GUARDIAN),
