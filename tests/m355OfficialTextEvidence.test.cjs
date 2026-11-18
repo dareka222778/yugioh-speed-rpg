@@ -53,5 +53,5 @@ test('M355 source review keeps the official source authority and non-certifying 
   assert.match(evidence.authority,/Konami official/);
   assert.match(evidence.sourcePolicy.cardText,/paraphrases/);
   assert.match(evidence.sourcePolicy.historicalCutoff,/not be used to infer/);
-  assert.match(evidence.sourcePolicy.certification,/not certified/);
+  assert.match(evidence.sourcePolicy.certification,/No card is certified/);
 });
