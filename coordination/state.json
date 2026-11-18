@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -2177,6 +2177,20 @@
         "Mystic Tomato"
       ],
       "scenarios": 3
+    },
+    {
+      "mission": "M353",
+      "runId": "work-20261118T023025-0300-M353",
+      "branch": "feat/work-m353-conditional-direct-attacks-discord-2v2-20261118",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "f1d44399fbdcae08493ad17a604123f4286ee5d2",
+      "scope": [
+        "tests/tagConditionalDirectAttackDiscord2v2.test.cjs"
+      ],
+      "state": "reserved",
+      "startedAt": "2026-11-18T02:30:25-03:00",
+      "priority": "P1 — validar Black Tyranno, Rocket Jumper e Drillago pela interface Discord 2v2: ataques diretos condicionais devem inspecionar os dois assentos adversários, rejeitar condições inválidas e preservar autorização do representante ativo, propriedade física, privacidade e regras 20–30/6/3+3/Extra 5.",
+      "conflictPolicy": "Somente o arquivo de teste novo; não tocar em M352, M338/M339, M305, M319–M322, M347–M351, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
     }
   ],
   "handoffRequest": {
@@ -7311,9 +7325,9 @@
       "reservationReleased": true
     }
   ],
-  "lastParallelRun": "work-20261117T215910-0300-M347-M349",
-  "nextParallelTask": "Auxiliar: monitorar #296–#298 e corrigir apenas os três arquivos de teste próprios se a CI revelar falhas. Work: na próxima janela, concluir Engine Validation/soaks; depois iniciar 3-Hump Lacooda (primeira da triagem) somente após liberação explícita de src/monsterEffects.ts e src/duelEngineCurrent.ts; não tocar em M174/M176/M242/M264 nem nas reservas M305/M338/M339.",
-  "nextParallelWindow": "2026-11-17T22:30:00-03:00",
+  "lastParallelRun": "work-20261118T023025-0300-M353",
+  "nextParallelTask": "Concluir M353 e validar CI; auxiliar pode monitorar/corrigir somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs após publicação. Work: após handoff explícito de M61, retomar 3-Hump Lacooda e as 31 certificações restantes; preservar M352 e demais reservas.",
+  "nextParallelWindow": "2026-11-18T07:30:00-03:00",
   "sharedHeadAfterCheckpointCommit": "60a723f18481938bfbf0e6165abf683b9c00d70e",
   "postCheckpointCI": {
     "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",
@@ -7373,5 +7387,19 @@
         "extendedSoak": "in_progress"
       }
     }
+  },
+  "currentWorkReservation": {
+    "mission": "M353",
+    "runId": "work-20261118T023025-0300-M353",
+    "branch": "feat/work-m353-conditional-direct-attacks-discord-2v2-20261118",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "f1d44399fbdcae08493ad17a604123f4286ee5d2",
+    "scope": [
+      "tests/tagConditionalDirectAttackDiscord2v2.test.cjs"
+    ],
+    "state": "reserved",
+    "startedAt": "2026-11-18T02:30:25-03:00",
+    "priority": "P1 — validar Black Tyranno, Rocket Jumper e Drillago pela interface Discord 2v2: ataques diretos condicionais devem inspecionar os dois assentos adversários, rejeitar condições inválidas e preservar autorização do representante ativo, propriedade física, privacidade e regras 20–30/6/3+3/Extra 5.",
+    "conflictPolicy": "Somente o arquivo de teste novo; não tocar em M352, M338/M339, M305, M319–M322, M347–M351, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
   }
 }
