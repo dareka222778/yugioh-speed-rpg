@@ -16,7 +16,6 @@ for(const id of [...new Set(tag.tagNormalCardIds)]){
   }
 }
 assert.ok(SAFE_NORMALS.length>=20,'M360 requires at least 20 distinct certified Normal Monster names');
-assert.ok(SAFE_NORMALS.length>=20,'M360 requires twenty distinct certified Normal Monsters');
 const DECK=SAFE_NORMALS.slice(0,20);
 assert.equal(new Set(DECK).size,20);
 const member=seat=>'m360-seat-'+seat;
