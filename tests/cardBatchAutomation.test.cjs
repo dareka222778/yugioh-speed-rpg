@@ -8,7 +8,7 @@ test('generator cannot replace a source file edited after generation',()=>{const
 
 test('distribution is withheld by default and explicit authorization must be boolean',()=>{
  const b=structuredClone(fixture);
- assert.equal(a.load(b).distributionAuthorized,false);
+ const loaded=a.load(b);assert.equal(loaded.distributionAuthorized,undefined);assert.equal(a.assertReleaseAuthorization(loaded,false,false),false);
  b.distributionAuthorized=false;assert.equal(a.load(b).distributionAuthorized,false);
  b.distributionAuthorized=true;assert.equal(a.load(b).distributionAuthorized,true);
  b.distributionAuthorized='true';assert.throws(()=>a.load(b),/distributionAuthorized/);
