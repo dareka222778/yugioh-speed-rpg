@@ -24,6 +24,7 @@ const DRILLAGO='99050989';
 const DARK_MAGICIAN='46986414';
 const BLUE_EYES='89631139';
 const CELTIC_GUARDIAN='91152256';
+const BOTTOMLESS='29401950';
 
 const CASES=[
   {
@@ -59,6 +60,16 @@ const CASES=[
     direct:false
   },
   {
+    key:'black-tyranno-opponent-backrow',
+    source:BLACK_TYRANNO,
+    opponents:[
+      {seat:1,id:DARK_MAGICIAN,faceUp:true,position:'def'},
+      {seat:3,id:BLUE_EYES,faceUp:true,position:'def'}
+    ],
+    backrow:[{seat:3,id:BOTTOMLESS}],
+    direct:false
+  },
+  {
     key:'drillago-minimum-atk',
     name:'Drillago attacks directly when every face-up opposing monster has at least 1600 ATK',
     source:DRILLAGO,
@@ -77,6 +88,16 @@ const CASES=[
       {seat:1,id:DARK_MAGICIAN,faceUp:true,position:'atk'},
       {seat:3,id:CELTIC_GUARDIAN,faceUp:true,position:'atk'}
     ],
+    direct:false
+  },
+  {
+    key:'drillago-opponent-backrow',
+    source:DRILLAGO,
+    opponents:[
+      {seat:1,id:DARK_MAGICIAN,faceUp:true,position:'atk'},
+      {seat:3,id:BLUE_EYES,faceUp:true,position:'atk'}
+    ],
+    backrow:[{seat:1,id:BOTTOMLESS}],
     direct:false
   },
   {
@@ -106,6 +127,9 @@ for(const [id,name,atk] of [
 assert.equal(getPlayableCard(DARK_MAGICIAN)?.atk,2500);
 assert.equal(getPlayableCard(BLUE_EYES)?.atk,3000);
 assert.equal(getPlayableCard(CELTIC_GUARDIAN)?.atk,1400);
+assert.equal(getPlayableCard(BOTTOMLESS)?.englishName,'Bottomless Trap Hole');
+assert.equal(getPlayableCard(BOTTOMLESS)?.kind,'trap');
+assert.equal(getCardStatus(BOTTOMLESS)?.stage,'certified');
 
 const SAFE_NORMALS=[...new Set(tag.tagNormalCardIds)].filter(id=>{
   const card=getPlayableCard(id);
@@ -140,6 +164,12 @@ function placeMonster(state,seat,id,faceUp=true,position='atk'){
     entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
   state.core.players[seat%2].monsters.push(monster);
   return monster;
+}
+function placeBackrow(state,seat,id){
+  const card=takePhysical(state,seat,id);
+  const trap={...card,faceUp:false,setTurn:0};
+  state.core.players[seat%2].backrow.push(trap);
+  return trap;
 }
 function assertRules(state){
   const rules=rulesFor(state.core);
@@ -254,6 +284,7 @@ function setup(entry){
   const required=[[],[],[],[]];
   required[0].push(entry.source);
   for(const opponent of entry.opponents)required[opponent.seat].push(opponent.id);
+  for(const card of entry.backrow||[])required[card.seat].push(card.id);
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M353 Seat '+seat,cards:deck(required[seat])
   }));
@@ -264,6 +295,7 @@ function setup(entry){
   const opponents=entry.opponents.map(opponent=>
     placeMonster(state,opponent.seat,opponent.id,opponent.faceUp,opponent.position)
   );
+  const backrow=(entry.backrow||[]).map(card=>placeBackrow(state,card.seat,card.id));
   assert.match(source.uid,/^m0:/,'the direct attacker must retain inactive partner seat 0 physical ownership');
   assert.equal(source.owner,0);
   for(let i=0;i<opponents.length;i++){
@@ -277,7 +309,7 @@ function setup(entry){
   const before=inventory(state);
   const record=register(state,entry.key);
   assertPublicPayload(record);
-  return {entry,source,opponents,before,record};
+  return {entry,source,opponents,backrow,before,record};
 }
 async function enterBattle(fixture){
   const actor=member(2);
