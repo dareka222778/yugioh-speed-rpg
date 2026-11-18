@@ -74,6 +74,7 @@ jobs:
         run: |
           npm ci
           npm audit --omit=dev --audit-level=high
+          node scripts/verify-sharp-type-entrypoint.cjs
           npm run check
       - name: Preserve candidate lockfiles for review
         if: always()
