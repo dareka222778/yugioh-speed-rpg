@@ -1,0 +1,175 @@
+{
+  "format": 1,
+  "runId": "work-20261118T023025-0300-M353",
+  "mission": "M353",
+  "priority": "P1 — integração Discord 2v2 para ataques diretos condicionais (Black Tyranno, Rocket Jumper, Drillago).",
+  "startedAt": "2026-11-18T02:30:25-03:00",
+  "endedAt": "2026-11-18T02:50:24.039-03:00",
+  "elapsedSeconds": 1199,
+  "effectiveWorkMinutes": null,
+  "minimum60MinutesMet": false,
+  "durationNote": "Tempo ativo não foi medido por cronômetro confiável. Espera de CI foi excluída; não se afirma que a meta de 60 minutos foi atingida.",
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBeforeRun": "f1d44399fbdcae08493ad17a604123f4286ee5d2",
+  "sharedHeadAfterReservation": "27d2f513c39ec03146665bcf836a638981c33c2f",
+  "sharedHeadAtCheckpoint": "27d2f513c39ec03146665bcf836a638981c33c2f",
+  "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+  "sharedAheadOfMain": 613,
+  "sharedBehindMain": 10,
+  "branch": "feat/work-m353-conditional-direct-attacks-discord-2v2-20261118",
+  "branchHeadSha": "b909b15a571bcc065e715b397bffe442aafa1199",
+  "pr": {
+    "number": 301,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/301",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "27d2f513c39ec03146665bcf836a638981c33c2f"
+  },
+  "changes": {
+    "files": [
+      "tests/tagConditionalDirectAttackDiscord2v2.test.cjs"
+    ],
+    "additions": 379,
+    "deletions": 0,
+    "newCards": 3,
+    "previouslyCertifiedCards": 3,
+    "newlyCertifiedCards": 0,
+    "behaviorScenarios": 8,
+    "runtimeFilesChanged": 0,
+    "catalogFilesChanged": 0,
+    "certificationFilesChanged": 0
+  },
+  "scenarios": [
+    "Black Tyranno e Rocket Jumper: ataque direto permitido quando os dois assentos adversários têm somente monstros em Defesa; inclui monstro face-down em Defesa.",
+    "Black Tyranno: bloqueio se qualquer assento adversário tiver monstro em Ataque.",
+    "Black Tyranno: bloqueio por Armadilha face-down no backrow compartilhado.",
+    "Drillago: ataque direto permitido quando todos os monstros adversários face-up têm ATK >= 1600.",
+    "Drillago: bloqueio por monstro face-up abaixo de 1600 ATK.",
+    "Drillago: bloqueio por monstro face-down cuja ATK não pode ser presumida.",
+    "Drillago: bloqueio por Armadilha face-down no backrow adversário.",
+    "A fonte pertence fisicamente ao parceiro inativo (assento 0), mas o representante ativo (assento 2) executa a ação; interação forjada do parceiro é rejeitada."
+  ],
+  "rulesPreserved": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "extraDeckMax": 5,
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "physicalOwnership": "UIDs e donos físicos preservados; mãos privadas não expostas",
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "cardBatchFast": {
+      "runId": 44246474810,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/44246474810"
+    },
+    "milestone1000": {
+      "runId": 44246474776,
+      "status": "completed",
+      "conclusion": "success",
+      "certified": 969,
+      "remainingTo1000": 31,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/44246474776"
+    },
+    "engineValidation": {
+      "runId": 44246474784,
+      "status": "in_progress",
+      "npmTest": "success",
+      "stress": "in_progress",
+      "extendedSoak600s": "in_progress",
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/44246474784"
+    },
+    "priorEngineValidation": {
+      "runId": 44245583296,
+      "status": "in_progress",
+      "npmTest": "success",
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/44245583296"
+    }
+  },
+  "catalog": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "certificationsAddedThisRun": 0
+  },
+  "otherWork": {
+    "m350": {
+      "pr": 299,
+      "engineValidation": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success"
+    },
+    "m351": {
+      "pr": 300,
+      "engineValidation": "failure",
+      "failedFile": "tests/tagPiercingBattleDamageDiscord2v2.test.cjs",
+      "handoffRequested": true,
+      "handoffGranted": false
+    },
+    "m352": {
+      "branchObserved": true,
+      "touched": false
+    },
+    "m61": {
+      "handoffRequestedFor3HumpLacooda": true,
+      "handoffGranted": false
+    }
+  },
+  "handoff": {
+    "releasedToAuxiliary": [
+      "tests/tagConditionalDirectAttackDiscord2v2.test.cjs"
+    ],
+    "auxiliaryMay": "monitor CI; if needed, edit only this test file and push a safe commit",
+    "forbidden": [
+      "runtime",
+      "catalog",
+      "certifications",
+      "persistent database",
+      "player inventory",
+      "main",
+      "production",
+      "other agents' reservations"
+    ],
+    "otherReservationsReleased": false
+  },
+  "officialSourceFinding": {
+    "card": "3-Hump Lacooda",
+    "id": "86988864",
+    "konamiId": 6032,
+    "text": "If there are 3 face-up '3-Hump Lacooda' cards on your side of the field, Tribute 2 of them to draw 3 cards.",
+    "correction": "The condition requires three face-up copies, but the effect tributes only two, not all three.",
+    "status": "source-reviewed only; no runtime implementation and no certification",
+    "sources": [
+      "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6032&ope=2&request_locale=en",
+      "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6032&ope=2&request_locale=ae"
+    ]
+  },
+  "deployment": {
+    "mainWorkflows": "not found; .github/workflows returned 404 on main",
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "deploymentEndpoint": "not exposed by the available GitHub connector",
+    "production": "not verified; no deploy performed"
+  },
+  "blockers": [
+    "No explicit handoff for M61/runtime files; 3-Hump Lacooda implementation remains blocked.",
+    "M351 PR #300 still has an Engine Validation failure; only the test-file owner may release that scope.",
+    "Engine Validation and 600-second soak for M353 remain in progress at checkpoint."
+  ],
+  "nextTask": "After explicit runtime handoff, implement and test 3-Hump Lacooda (three face-up copies, tribute exactly two, draw three) with physical-owner and shared-field invariants. Until then, auxiliary monitors PR #301 only.",
+  "nextWindow": "2026-11-18T07:30:00-03:00",
+  "noMerge": true,
+  "noDeploy": true,
+  "noInventoryGrant": true
+}
