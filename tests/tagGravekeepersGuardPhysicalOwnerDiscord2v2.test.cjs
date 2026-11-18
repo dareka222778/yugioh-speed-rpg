@@ -408,6 +408,14 @@ test("Gravekeeper's Guard can bounce a face-down monster without revealing it an
     'the bounced face-down card returns to inactive physical owner seat 3');
   assert.ok(!current.state.core.players[1].hand.some(card=>card.uid===fixture.target.uid),
     'the active opponent representative does not receive the partner card');
+  const physicalOwnerPanel=JSON.stringify(tagPrivateMessage(current,member(3)));
+  const activeOpponentPanel=JSON.stringify(tagPrivateMessage(current,member(1)));
+  assert.ok(physicalOwnerPanel.includes('Blue-Eyes White Dragon'),
+    'the physical owner can still see the card in their own private hand');
+  assert.ok(!activeOpponentPanel.includes('Blue-Eyes White Dragon'),
+    'the active teammate cannot inspect the inactive partner private hand');
+  assert.ok(!activeOpponentPanel.includes(fixture.target.uid),
+    'the inactive partner UID must not leak to the active teammate panel');
 
   const finalPublic=JSON.stringify(tagPublicMessage(current));
   assert.ok(!finalPublic.includes(BLUE_EYES),'the public panel must not reveal the returned card identity');
