@@ -19,7 +19,6 @@ const {getMonsterEffect}=require('../dist/monsterEffects');
 const {rulesFor}=require('../dist/rulesProfile');
 
 const GUARD='37101832';
-const CELTIC_GUARDIAN='91152256';
 const BLUE_EYES='89631139';
 const guard=getPlayableCard(GUARD);
 assert.equal(guard?.englishName,"Gravekeeper's Guard");
@@ -29,7 +28,6 @@ assert.deepEqual(getMonsterEffect(GUARD),{
   trigger:'flip',
   operation:{kind:'bounce',target:'opponentMonster'}
 });
-assert.equal(getPlayableCard(CELTIC_GUARDIAN)?.englishName,'Celtic Guardian');
 assert.equal(getPlayableCard(BLUE_EYES)?.englishName,'Blue-Eyes White Dragon');
 
 const SAFE_NORMALS=[...new Set(tag.tagNormalCardIds)].filter(id=>{
@@ -166,10 +164,9 @@ function register(state,key){
   ).run(id,'m365-guild','m365-channel',null,0,Date.now(),'playing',JSON.stringify(members),JSON.stringify(state),'classic-loan');
   return store.getTag(id);
 }
-function setup(key,{includeOpponent=true}={}){
+function setup(key){
   const required=[[],[],[],[]];
   required[0].push(GUARD);
-  if(includeOpponent)required[1].push(CELTIC_GUARDIAN);
   required[2].push(BLUE_EYES);
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),name:'M365 Seat '+seat,cards:deck(required[seat])
@@ -179,10 +176,8 @@ function setup(key,{includeOpponent=true}={}){
   assert.deepEqual(state.active,[2,3],'seats 2 and 3 must be the active team representatives');
   const source=placeFaceDown(state,0,GUARD);
   const ally=deploy(state,2,BLUE_EYES);
-  const target=includeOpponent?deploy(state,1,CELTIC_GUARDIAN):null;
   assert.match(source.uid,/^m0:/,'the Flip source must remain physically owned by inactive allied seat 0');
   assert.match(ally.uid,/^m2:/,'the allied control monster must retain active seat 2 ownership');
-  if(target)assert.match(target.uid,/^m1:/,'the opposing target must remain physically owned by inactive seat 1');
   assert.equal(tag.tagDecisionMember(state).id,member(2));
   assertRules(state);
   assertPrivateHands(state);
@@ -190,7 +185,7 @@ function setup(key,{includeOpponent=true}={}){
   const before=inventory(state);
   const record=register(state,key);
   assertPublicPayload(record);
-  return {key,source,ally,target,before,record};
+  return {key,source,ally,before,record};
 }
 async function flipGuard(fixture){
   const actor=member(2);
@@ -222,7 +217,7 @@ function assertStable(fixture,record){
 }
 
 test("Gravekeeper's Guard cannot target an allied monster when no opposing monster exists",async()=>{
-  const fixture=setup('no-opponent', {includeOpponent:false});
+  const fixture=setup('no-opponent');
   let current=await flipGuard(fixture);
   current=await settleResponses(current,'no-opponent');
   assert.equal(current.state.core.phase,'main','the mandatory Flip effect with no opposing target must finish without opening a choice');
