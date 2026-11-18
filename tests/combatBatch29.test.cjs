@@ -28,6 +28,7 @@ for(const c of b.combatBatch29){const row=rows.find(x=>x.id===c.id);function sce
   else if(c.id==='93013676'){s.players[0].hand=[{uid:'equip',id:'95638658'}];s=settle(act(s,'a','spell',a=>a.target==='source'));assert.equal(e.atk(s.players[0].monsters[0],s),1050);s=battle(s);checkLP(s,10000,8950);}
   else if(c.id==='51838385'){assert.equal(e.atk(s.players[0].monsters[0],s),3000);s=battle(s);checkLP(s,10000,7000);}
   else if(c.id==='45425051'){s.players[0].monsters[0].position='def';assert.equal(e.atk(s.players[0].monsters[0],s),2700);assert.equal(e.def(s.players[0].monsters[0],s),2000);s=act(s,'a','position',a=>a.card==='source'&&a.mode==='atk');assert.equal(e.atk(s.players[0].monsters[0],s),2200);s=battle(s);checkLP(s,10000,7800);}
+  else if(c.id==='87340664'){s.players.reverse();s.players[0].id='a';s.players[1].id='b';s.players[1].monsters[0].owner=1;s.players[0].monsters=[mon('attacker','89631139')];s=battle(s,'attacker','source');checkLP(s,9000,10000);assert.equal(s.players[1].monsters.length,0);}
   else assert.fail('Missing mechanical assertion '+c.id);
  });
  scenario('restore',()=>{const s=fixture(c);s.players[1].monsters=[];assert.deepEqual(clone(battle(clone(s),c.kind==='monster'?'source':'fighter')),clone(battle(structuredClone(s),c.kind==='monster'?'source':'fighter')));});

@@ -385,6 +385,21 @@ export const combatBatch29:readonly Card[]=[
     "summary": "Enquanto este monstro estiver em Defesa, suas Plantas ganham 500 ATK/DEF.",
     "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5024&request_locale=en",
     "monsterType": "effect"
+  },
+  {
+    "id": "87340664",
+    "konamiId": 5966,
+    "name": "Vaga-lume Atômico",
+    "englishName": "Atomic Firefly",
+    "kind": "monster",
+    "race": "Insect",
+    "attribute": "LIGHT",
+    "level": 1,
+    "atk": 100,
+    "defense": 200,
+    "summary": "Quando esta carta com a face para cima no campo ataca ou é atacada e é destruída em batalha, o jogador que a destruiu sofre 1000 pontos de dano.",
+    "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5966&request_locale=en",
+    "monsterType": "effect"
   }
 ];
 export const combatEffects29:Record<string,Effect>={
@@ -559,6 +574,9 @@ export const combatEffects29:Record<string,Effect>={
     "kind": "monsterEffect"
   },
   "45425051": {
+    "kind": "monsterEffect"
+  },
+  "87340664": {
     "kind": "monsterEffect"
   }
 };
@@ -1055,6 +1073,19 @@ export const combatMonsters29:Record<string,MonsterDefinition>={
     "activation": {
       "policy": "continuous",
       "window": "continuous"
+    }
+  },
+  "87340664": {
+    "effect": {
+      "trigger": "onBattleDestroyed",
+      "operation": {
+        "kind": "burn",
+        "amount": 1000
+      }
+    },
+    "activation": {
+      "policy": "mandatory",
+      "window": "battleDestroyed"
     }
   }
 };
