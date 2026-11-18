@@ -338,6 +338,88 @@ test("Gravekeeper's Guard returns a bounced Fusion to its inactive physical owne
   assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(current.state))));
 });
 
+function setupFaceDownTarget(){
+  const required=[[],[],[],[]];
+  required[0].push(AXE_RAIDER);
+  required[2].push(GUARD);
+  required[3].push(BLUE_EYES);
+  const players=[0,1,2,3].map(seat=>({
+    id:member(seat),name:'M366 Seat '+seat,cards:deck(required[seat]),extra:[]
+  }));
+  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m366-gravekeepers-guard-facedown-owner'});
+  state.core.turn=3;
+  assert.deepEqual(state.active,[0,1]);
+  assert.equal(state.core.resolverVersion,'engine-v9');
+  const ally=deploy(state,0,AXE_RAIDER);
+  const source=placeFaceDown(state,2,GUARD);
+  const target=placeFaceDown(state,3,BLUE_EYES);
+  assert.match(source.uid,/^m2:/);
+  assert.match(target.uid,/^m3:/);
+  assert.equal(target.owner,1);
+  assert.equal(target.faceUp,false);
+  assert.equal(tag.tagDecisionMember(state).id,member(0));
+  assertRules(state);
+  assertPrivateHands(state);
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  const before=inventory(state);
+  const record=register(state,'m366-guard-facedown-owner');
+  assertPublicPayload(record);
+  return {state,ally,source,target,before,record};
+}
+
+test("Gravekeeper's Guard can bounce a face-down monster without revealing it and preserves its physical owner",async()=>{
+  const fixture=setupFaceDownTarget();
+  const initialPublic=JSON.stringify(tagPublicMessage(fixture.record));
+  assert.ok(!initialPublic.includes(BLUE_EYES),'the set opposing monster identity must not appear in the public panel');
+  assert.ok(!initialPublic.includes(fixture.target.uid),'the set opposing monster UID must remain private');
+
+  const flipActions=tag.tagActions(fixture.record.state,member(0));
+  const flipIndex=flipActions.findIndex(action=>
+    action.kind==='position'&&action.card===fixture.source.uid&&action.mode==='flip'
+  );
+  assert.ok(flipIndex>=0);
+  let current=await submit(fixture.record,member(0),flipIndex,'m366-facedown-flip');
+  assert.equal(current.state.core.phase,'choice');
+  assert.ok(current.state.core.choice.targets.includes(fixture.target.uid),
+    'a face-down opposing monster is still a legal bounce target');
+  const choicePanel=tagPrivateMessage(current,member(0));
+  validateDiscordPayload(choicePanel);
+  const choiceText=JSON.stringify(choicePanel.toJSON());
+  assert.ok(choiceText.includes('virado para baixo'),
+    'the active representative sees a hidden-position label, not the card identity');
+  assert.ok(!choiceText.includes('Blue-Eyes White Dragon'),
+    'the opponent face-down identity must not leak through the private choice menu');
+
+  const chooseActions=tag.tagActions(current.state,member(0));
+  const targetIndex=chooseActions.findIndex(action=>
+    action.kind==='choose'&&action.target===fixture.target.uid
+  );
+  assert.ok(targetIndex>=0);
+  current=await submit(current,member(0),targetIndex,'m366-facedown-select');
+  current=await settleResponses(current);
+
+  assert.equal(current.state.core.phase,'main');
+  assert.deepEqual(current.state.active,[0,1]);
+  assert.deepEqual(current.state.core.teamRotation.active,[0,1]);
+  assert.ok(!current.state.core.players[1].monsters.some(card=>card.uid===fixture.target.uid));
+  assert.ok(current.state.core.players[0].monsters.some(card=>card.uid===fixture.ally.uid));
+  assert.ok(current.state.core.players[0].monsters.some(card=>card.uid===fixture.source.uid&&card.faceUp));
+  assert.ok(current.state.reserves[3].hand.some(card=>card.uid===fixture.target.uid),
+    'the bounced face-down card returns to inactive physical owner seat 3');
+  assert.ok(!current.state.core.players[1].hand.some(card=>card.uid===fixture.target.uid),
+    'the active opponent representative does not receive the partner card');
+
+  const finalPublic=JSON.stringify(tagPublicMessage(current));
+  assert.ok(!finalPublic.includes(BLUE_EYES),'the public panel must not reveal the returned card identity');
+  assert.ok(!finalPublic.includes(fixture.target.uid),'the public panel must not reveal the returned card UID');
+  assertConserved(current.state,fixture.before);
+  assertPrivateHands(current.state);
+  assertRules(current.state);
+  assertPublicPayload(current);
+  assert.doesNotThrow(()=>tag.assertTagDuel(current.state));
+  assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(current.state))));
+});
+
 after(()=>{
   database.db.close();
   fs.rmSync(dir,{recursive:true,force:true});
