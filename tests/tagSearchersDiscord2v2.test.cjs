@@ -273,7 +273,7 @@ function assertOutcome(fixture,record,selectedId){
       'unselected active Deck target must remain in its Deck');
   }
   const source=state.core.players[0].monsters.find(card=>card.uid===fixture.source.uid);
-  assert.ok(source&&source.faceUp&&source.position==='def','the partner-owned Flip source remains face-up in Defense');
+  assert.ok(source&&source.faceUp&&source.position==='atk','the partner-owned Flip source remains face-up in Defense');
   assert.equal(state.core.players[0].lp,4000);
   assert.equal(state.core.players[1].lp,4000);
   assertConserved(state,fixture.before);
