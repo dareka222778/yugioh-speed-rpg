@@ -1,0 +1,171 @@
+{
+  "runId": "work-20261118T175851-0300-M366",
+  "mission": "M366",
+  "owner": "Work",
+  "priority": "P1 — comprovar o retorno físico de monstros devolvidos por efeitos FLIP em 2v2; a carta deve voltar à mão do assento dono, não à mão do representante ativo da equipe.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-18T17:58:51-03:00",
+  "endedAt": "2026-11-18T18:06:39.348-03:00",
+  "duration": {
+    "elapsedMinutes": 7.8058,
+    "effectiveWorkMinutes": 5,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "304bf9b97a7d50d10d34387a75964d96d33d50b5",
+  "branch": "feat/work-m366-gravekeepers-guard-physical-owner-discord-2v2-20261118",
+  "head": "96755391b539586422d774bb8542907928f8615c",
+  "pr": 314,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/314",
+  "draft": true,
+  "mergeable": true,
+  "scope": [
+    "tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs"
+  ],
+  "cards": [
+    "Gravekeeper's Guard (37101832)"
+  ],
+  "changes": [
+    "Adicionado um teste de integração Discord 2v2 que executa Flip Summon da fonte pertencente ao parceiro aliado inativo.",
+    "O alvo é Blue-Eyes White Dragon pertencente fisicamente ao parceiro adversário inativo; o representante adversário ativo é outra pessoa.",
+    "O teste verifica que o alvo adversário aparece no menu, o monstro aliado não aparece e o UID retornado deve ficar na mão privada do dono físico.",
+    "O teste usa SQLite temporário, handlers reais e payloads Discord validados offline."
+  ],
+  "expectedBehavior": [
+    "Assentos 0/1 ativos; fonte Gravekeeper's Guard fisicamente no assento aliado inativo 2.",
+    "Representante ativo 0 executa Flip Summon pelo painel privado Discord; assento 2 não recebe ação e tentativa forjada é rejeitada antes do ACK.",
+    "A escolha de alvo inclui o monstro adversário do assento físico inativo 3 e exclui o monstro aliado do assento 0.",
+    "Após a corrente, o UID do alvo está na mão privada do assento 3 e ausente da mão do representante ativo 1.",
+    "Preservar 80 UIDs, mãos privadas, payload público sem UIDs, Deck 20–30, mão 6 com descarte na End Phase, zonas 3+3 e Extra Deck 5."
+  ],
+  "observedResolverDefect": {
+    "file": "src/duelEngineCurrent.ts",
+    "behavior": "resolveMonsterPending calcula owner como índice da equipe e faz s.players[owner].hand.push({uid,id}) (ou .extra para Fusion), ignorando o UID físico m0:–m3:.",
+    "expectedFix": "Usar ownedPrivateZone(s,target.m,owner,card(id).fusion?'extra':'hand') para rotear pelo UID físico.",
+    "handoffRequired": true
+  },
+  "results": {
+    "files": [
+      "tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs"
+    ],
+    "runtimeFilesChanged": 0,
+    "catalogFilesChanged": 0,
+    "certificationsAdded": 0,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "scenariosAdded": 1
+  },
+  "ci": {
+    "cardBatchFast": {
+      "runId": 44397306959,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "milestone1000": {
+      "runId": 44397306938,
+      "status": "completed",
+      "conclusion": "success",
+      "artifactId": 14472001475,
+      "certified": 969,
+      "remainingTo1000": 31,
+      "historical": 1962,
+      "identityBlocked": 27,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0,
+      "releaseGranted": 0
+    },
+    "engineValidation": {
+      "runId": 44397306943,
+      "status": "in_progress",
+      "testJob": "in_progress",
+      "extendedSoak600s": "in_progress",
+      "npmRunCheck": "success",
+      "npmTest": "pending"
+    }
+  },
+  "catalog": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "historical": 1962,
+    "pending": 993,
+    "identityBlocked": 27,
+    "fullyUnreviewed": 966,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "releaseGranted": 0
+  },
+  "handoffRequests": [
+    {
+      "pr": 17,
+      "commentId": 6991541817,
+      "files": [
+        "src/duelEngineCurrent.ts"
+      ],
+      "purpose": "corrigir roteamento do bounce para a mão/Extra Deck do proprietário físico usando ownedPrivateZone",
+      "state": "awaiting-explicit-release"
+    }
+  ],
+  "preservedConcurrentWork": {
+    "activeRunId": "work-20261115T142521-0300",
+    "activeRunState": "active",
+    "untouchedScope": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "thirdPartyReservationsReleased": false
+  },
+  "auxiliaryScope": {
+    "releasedToAuxiliary": [
+      "tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs"
+    ],
+    "auxiliaryMay": "monitorar PR #314 e corrigir somente fixture/setup se houver erro anterior à asserção de propriedade; manter a asserção do dono físico.",
+    "forbidden": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts",
+      "renderizadores",
+      "catálogo",
+      "certificações",
+      "inventários",
+      "banco persistente",
+      "dados dos jogadores",
+      "main",
+      "produção",
+      "reservas de terceiros",
+      "merge",
+      "deploy"
+    ]
+  },
+  "parallelFindings": {
+    "m365": {
+      "pr": 313,
+      "ci": "Card Batch Fast, Milestone 1000, npm test e Extended Soak aprovados; Engine Validation ainda finalizando",
+      "releasedToAuxiliary": true
+    },
+    "m364": {
+      "pr": 312,
+      "branchHead": "266187b787584b95637e187445b82aab975f0492",
+      "ci": "npm test/check/soak aprovados; Dependency Audit gate falha por sharp high no lockfile atual",
+      "candidateSharp": "0.35.5 com audit de produção e typecheck aprovados; package manifests ainda não aplicados",
+      "handoffCommentId": 6991573026
+    }
+  },
+  "safety": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidated": false,
+    "productionUpdated": false,
+    "deploymentsApi": "não disponível pela integração conectada"
+  },
+  "nextTask": "Aguardar handoff explícito de src/duelEngineCurrent.ts. Após liberação, substituir o push direto para s.players[owner].hand/extra por ownedPrivateZone(...), adicionar caso Fusion/Extra Deck se seguro, executar npm test e Engine Validation/Soak. Em paralelo, auxiliar monitora #313/#314 e aguarda handoff dos package manifests de #312.",
+  "nextWindow": "2026-11-18T22:30:00-03:00"
+}

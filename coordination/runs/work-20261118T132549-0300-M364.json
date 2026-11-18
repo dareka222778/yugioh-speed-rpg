@@ -14,7 +14,7 @@
     "ciWaitExcluded": true
   },
   "branch": "feat/work-m364-dependency-audit-runtime-20261118",
-  "branchHeadSha": "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f",
+  "branchHeadSha": "266187b787584b95637e187445b82aab975f0492",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "626d6261a1f93675829bb60518333a801369481e",
   "prNumber": 312,
@@ -35,56 +35,40 @@
   ],
   "validation": {
     "cardBatchFast": {
-      "runId": 44348553150,
+      "runId": 44395382651,
       "status": "completed",
       "conclusion": "success"
     },
     "milestone1000": {
-      "runId": 44348551748,
+      "runId": 44395384049,
       "status": "completed",
       "conclusion": "success",
       "certified": 969,
       "remaining": 31
     },
     "engineValidation": {
-      "runId": 44348552606,
-      "status": "in_progress",
+      "runId": 44395382588,
+      "status": "completed",
+      "conclusion": "failure",
       "npmCi": "success",
       "npmRunCheck": "success",
       "npmTest": "success",
-      "extendedSoak600s": "in_progress"
+      "extendedSoak600s": "success",
+      "failedGate": "Enforce production dependency audit gate"
     },
     "dependencyAudit": {
-      "runId": 44348554843,
+      "runId": 44395382333,
       "status": "completed",
       "conclusion": "failure",
-      "parserTests": "success",
-      "productionGate": "blocked",
-      "finding": {
-        "package": "sharp",
-        "directProductionDependency": true,
-        "severity": "high",
-        "range": "<=0.35.5-rc.1",
-        "fixAvailable": "0.35.5",
-        "advisories": [
-          "CVE-2026-33327",
-          "CVE-2026-33328",
-          "CVE-2026-35590",
-          "CVE-2026-35591",
-          "GHSA-g89c-p67h-r497",
-          "GHSA-2jg2-4ch7-h545",
-          "CVE-2026-96889"
-        ]
-      }
+      "finding": "sharp high na árvore de produção atual"
     },
     "sharp0355Candidate": {
-      "artifactId": 14445989356,
+      "artifactId": 14470540138,
       "artifactDigest": "sha256:bbe88c9bea99d4e874d50229ea8ae20f68c32612ce127e65e2bc8ea86f8e2cca",
-      "lockfileRegenerated": true,
       "npmCi": "success",
-      "npmAuditOmitDev": "success; found 0 vulnerabilities",
-      "typecheck": "failed; seven TS2503 annotations in six reserved files",
-      "reason": "TS2503: namespace sharp no longer resolves at seven annotations across six reserved renderer/inspector files."
+      "npmAuditOmitDev": "success; 0 vulnerabilities",
+      "typecheck": "success via tsconfig paths mapping",
+      "packageFilesApplied": false
     }
   },
   "catalog": {
@@ -101,7 +85,7 @@
         "src/tagRenderer.ts"
       ],
       "purpose": "sharp 0.35.5 type migration",
-      "status": "awaiting-explicit-release"
+      "status": "not-required-for-type-fix; tsconfig path mapping validated; reservations preserved"
     },
     {
       "pr": 308,
@@ -114,6 +98,16 @@
         "src/npcRenderer.ts"
       ],
       "purpose": "sharp 0.35.5 type migration",
+      "status": "not-required-for-type-fix; tsconfig path mapping validated; reservations preserved"
+    },
+    {
+      "pr": 312,
+      "commentId": 6991573026,
+      "files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "purpose": "aplicar sharp 0.35.5 e remover a vulnerabilidade high da árvore de produção",
       "status": "awaiting-explicit-release"
     }
   ],
@@ -145,12 +139,15 @@
     "inventoryGranted": 0,
     "merge": false,
     "deploy": false,
-    "liveDiscordValidated": false
+    "liveDiscordValidated": false,
+    "renderersChanged": 0
   },
   "production": {
-    "deploymentsApi": "not available through the connected GitHub read endpoint; no production change performed"
+    "deploymentsApi": "não verificável pela integração conectada",
+    "deployPerformed": false,
+    "productionUpdated": false
   },
-  "nextTask": "Aguardar handoff explícito de M359/M360. Se liberado, migrar apenas os tipos sharp.OverlayOptions nos seis arquivos indicados, aplicar package.json/package-lock do candidato 0.35.5 em PR separada e validar npm ci, npm run check, npm test, audit e soak. Se a liberação não vier, manter o gate bloqueado e não tocar nos renderers.",
+  "nextTask": "Aguardar liberação explícita de package.json e package-lock.json. Depois aplicar o candidato sharp 0.35.5 em PR própria, sincronizar a branch M364 sem force e repetir npm ci, npm audit --omit=dev, npm run check, npm test e Extended Soak.",
   "auxiliaryScope": {
     "released": [
       "monitorar PR #312 e os workflows"
@@ -165,7 +162,7 @@
       "editar arquivos reservados M359/M360 sem handoff"
     ]
   },
-  "nextWindow": "2026-11-18T17:30:00-03:00",
+  "nextWindow": "2026-11-18T22:30:00-03:00",
   "sharedHeadBeforeCheckpointCommit": "626d6261a1f93675829bb60518333a801369481e",
   "branchHeadAfterNonForcedSync": "d7f1e7fb0a7462a39471435eb26095a3aac93875",
   "branchSyncCommit": "d7f1e7fb0a7462a39471435eb26095a3aac93875",
@@ -175,5 +172,14 @@
   ],
   "branchSyncMethod": "Git merge commit, shared as first parent, M364 branch as second parent; update_ref fast-forward with expected SHA; no force",
   "syncCompletedAt": "2026-11-18T16:34:00Z",
-  "lastObservedAt": "2026-11-18T16:34:30Z"
+  "lastObservedAt": "2026-11-18T16:34:30Z",
+  "latestObservedAt": "2026-11-18T21:06:39.348Z",
+  "latestSharedHead": "304bf9b97a7d50d10d34387a75964d96d33d50b5",
+  "branchComparison": {
+    "base": "304bf9b97a7d50d10d34387a75964d96d33d50b5",
+    "aheadBy": 15,
+    "behindBy": 3,
+    "status": "diverged"
+  },
+  "handoffRequestsStatus": "package manifest handoff pending; renderer handoff no longer needed because tsconfig path mapping passed typecheck"
 }
