@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-18T16:33:32.000Z",
+  "lastActivityAt": "2026-11-18T16:34:00.000Z",
   "nextScheduledAt": "2026-11-18T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -2469,7 +2469,7 @@
       "mission": "M364",
       "runId": "work-20261118T132549-0300-M364",
       "branch": "feat/work-m364-dependency-audit-runtime-20261118",
-      "head": "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f",
+      "head": "d7f1e7fb0a7462a39471435eb26095a3aac93875",
       "pr": 312,
       "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/312",
       "baseBranch": "feat/rea-engine-recovery-20261026",
@@ -2491,7 +2491,10 @@
         "dependencyAudit": "failed-high-sharp",
         "sharp0355ProductionAudit": "success",
         "sharp0355Typecheck": "failed-awaiting-renderer-handoff"
-      }
+      },
+      "syncedHeadSha": "d7f1e7fb0a7462a39471435eb26095a3aac93875",
+      "syncMethod": "non-forced merge of shared checkpoint",
+      "needsSyncAfterNextSharedCheckpoint": true
     }
   ],
   "handoffRequest": {
@@ -7870,7 +7873,7 @@
     "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/work-m364-dependency-audit-runtime-20261118",
     "baseSha": "626d6261a1f93675829bb60518333a801369481e",
-    "head": "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f",
+    "head": "d7f1e7fb0a7462a39471435eb26095a3aac93875",
     "pr": 312,
     "scope": [
       ".github/workflows/dependency-audit.yml",
@@ -7878,7 +7881,8 @@
       "scripts/report-dependency-audit.cjs",
       "tests/dependencyAuditReport.test.cjs"
     ],
-    "priority": "P1 — identificar e bloquear vulnerabilidades high/critical na árvore de produção; gerar candidato de correção para sharp sem sobrescrever lockfile nem tocar renderers reservados."
+    "priority": "P1 — identificar e bloquear vulnerabilidades high/critical na árvore de produção; gerar candidato de correção para sharp sem sobrescrever lockfile nem tocar renderers reservados.",
+    "syncedFrom": "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f"
   },
   "lastParallelRunSummary": {
     "runId": "work-20261118T132549-0300-M364",
@@ -7955,10 +7959,12 @@
       "newBehavioralCertifications": 0,
       "automaticCertifications": 0
     },
-    "blocker": "sharp 0.35.5 removes the high production audit finding, but TypeScript migration requires explicit handoff for six renderer/inspector files reserved by M359/M360."
+    "blocker": "sharp 0.35.5 removes the high production audit finding, but TypeScript migration requires explicit handoff for six renderer/inspector files reserved by M359/M360.",
+    "branchHeadAfterSync": "d7f1e7fb0a7462a39471435eb26095a3aac93875",
+    "syncMethod": "non-forced merge; no force"
   },
   "lastIndependentWorkCheckpoint": "coordination/runs/work-20261118T132549-0300-M364.json",
-  "lastIndependentWorkActivityAt": "2026-11-18T13:33:32-03:00",
+  "lastIndependentWorkActivityAt": "2026-11-18T13:34:00-03:00",
   "nextWorkWindow": "2026-11-18T17:30:00-03:00",
   "lastIndependentWorkRunId": "work-20261118T132549-0300-M364",
   "workBranchesUpdatedAt": "2026-11-18T16:33:32.000Z",

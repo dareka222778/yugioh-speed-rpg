@@ -166,5 +166,13 @@
     ]
   },
   "nextWindow": "2026-11-18T17:30:00-03:00",
-  "sharedHeadBeforeCheckpointCommit": "626d6261a1f93675829bb60518333a801369481e"
+  "sharedHeadBeforeCheckpointCommit": "626d6261a1f93675829bb60518333a801369481e",
+  "branchHeadAfterNonForcedSync": "d7f1e7fb0a7462a39471435eb26095a3aac93875",
+  "branchSyncCommit": "d7f1e7fb0a7462a39471435eb26095a3aac93875",
+  "branchSyncParents": [
+    "7ef6837cd6d7bdc1a0a9c46505a03150f853f4b0",
+    "1d9c4a984572a6c602a0b26ab48ab1ba32a3d79f"
+  ],
+  "branchSyncMethod": "Git merge commit, shared as first parent, M364 branch as second parent; update_ref fast-forward with expected SHA; no force",
+  "syncCompletedAt": "2026-11-18T16:34:00Z"
 }
