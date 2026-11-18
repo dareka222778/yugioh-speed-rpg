@@ -57,10 +57,10 @@ export function resolveSearchZoneSelection(
  const issues=searchZoneIssues(rule);\n if(issues.length)throw new Error('Invalid search rule: '+issues.join(', '));\n if(!searchZoneTargets(s,actor,rule,getCard,getEffect).some(ref=>ref.uid===uid))return null;
  const p=s.players[actor];
  const sources:('deck'|'grave')[]=rule.from==='deck'?['deck']:rule.from==='grave'?['grave']:['deck','grave'];
- const locations=sources.map(source=>({source,zone:p[source],index:p[source].findIndex(ref=>ref.uid===uid)})).filter(x=>x.index>=0);
- if(locations.length===0)return null;
+ const locations=(['deck','grave'] as const).map(source=>({source,zone:p[source],index:p[source].findIndex(ref=>ref.uid===uid)})).filter(x=>x.index>=0);
  if(locations.length>1)throw new Error('Search result UID exists in more than one source zone.');
  const location=locations[0];
+ if(!location||!sources.includes(location.source))return null;
  const [found]=location.zone.splice(location.index,1);
  const destination=rule.necrovalleyHandOverride&&necrovalleyFaceUp?'hand':rule.destination??'hand';
  if(destination==='deck-top')p.deck.unshift(found);
