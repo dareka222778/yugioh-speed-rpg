@@ -428,6 +428,72 @@ test("Gravekeeper's Guard can bounce a face-down monster without revealing it an
   assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(current.state))));
 });
 
+function setupActiveOpponentTarget(){
+  const required=[[],[],[],[]];
+  required[0].push(AXE_RAIDER);
+  required[1].push(BLUE_EYES);
+  required[2].push(GUARD);
+  const players=[0,1,2,3].map(seat=>({
+    id:member(seat),name:'M366 Seat '+seat,cards:deck(required[seat]),extra:[]
+  }));
+  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m366-gravekeepers-guard-active-owner'});
+  state.core.turn=3;
+  assert.deepEqual(state.active,[0,1]);
+  assert.equal(state.core.resolverVersion,'engine-v9');
+  const ally=deploy(state,0,AXE_RAIDER);
+  const source=placeFaceDown(state,2,GUARD);
+  const target=deploy(state,1,BLUE_EYES);
+  assert.match(source.uid,/^m2:/);
+  assert.match(target.uid,/^m1:/,'active opponent target must retain physical seat 1 UID');
+  assert.equal(target.owner,1);
+  assert.equal(tag.tagDecisionMember(state).id,member(0));
+  assertRules(state);
+  assertPrivateHands(state);
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  const before=inventory(state);
+  const record=register(state,'m366-guard-active-owner');
+  assertPublicPayload(record);
+  return {state,ally,source,target,before,record};
+}
+
+test("Gravekeeper's Guard keeps a bounced active opponent card in that active owner's hand",async()=>{
+  const fixture=setupActiveOpponentTarget();
+  const flipActions=tag.tagActions(fixture.record.state,member(0));
+  const flipIndex=flipActions.findIndex(action=>
+    action.kind==='position'&&action.card===fixture.source.uid&&action.mode==='flip'
+  );
+  assert.ok(flipIndex>=0);
+  let current=await submit(fixture.record,member(0),flipIndex,'m366-active-owner-flip');
+  assert.equal(current.state.core.phase,'choice');
+  assert.ok(current.state.core.choice.targets.includes(fixture.target.uid));
+  const chooseActions=tag.tagActions(current.state,member(0));
+  const targetIndex=chooseActions.findIndex(action=>
+    action.kind==='choose'&&action.target===fixture.target.uid
+  );
+  assert.ok(targetIndex>=0);
+  current=await submit(current,member(0),targetIndex,'m366-active-owner-select');
+  current=await settleResponses(current);
+
+  assert.equal(current.state.core.phase,'main');
+  assert.deepEqual(current.state.active,[0,1]);
+  assert.deepEqual(current.state.core.teamRotation.active,[0,1]);
+  assert.ok(!current.state.core.players[1].monsters.some(card=>card.uid===fixture.target.uid));
+  assert.ok(current.state.core.players[1].hand.some(card=>card.uid===fixture.target.uid),
+    'an active physical owner keeps the returned card in the active team hand');
+  assert.ok(!current.state.reserves[3].hand.some(card=>card.uid===fixture.target.uid),
+    'an active owner card must not be moved to the inactive partner reserve');
+  const activeOwnerPanel=JSON.stringify(tagPrivateMessage(current,member(1)));
+  const inactivePartnerPanel=JSON.stringify(tagPrivateMessage(current,member(3)));
+  assert.ok(activeOwnerPanel.includes('Blue-Eyes White Dragon'));
+  assert.ok(!inactivePartnerPanel.includes('Blue-Eyes White Dragon'));
+  assertConserved(current.state,fixture.before);
+  assertPrivateHands(current.state);
+  assertRules(current.state);
+  assertPublicPayload(current);
+  assert.doesNotThrow(()=>tag.assertTagDuel(current.state));
+  assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(current.state))));
+});
+
 after(()=>{
   database.db.close();
   fs.rmSync(dir,{recursive:true,force:true});
