@@ -5,10 +5,10 @@
   "priority": "P1 — comprovar o retorno físico de monstros devolvidos por efeitos FLIP em 2v2; a carta deve voltar à mão do assento dono, não à mão do representante ativo da equipe.",
   "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-18T17:58:51-03:00",
-  "endedAt": "2026-11-18T18:06:39.348-03:00",
+  "endedAt": "2026-11-18T18:15:27.413-03:00",
   "duration": {
-    "elapsedMinutes": 7.8058,
-    "effectiveWorkMinutes": 5,
+    "elapsedMinutes": 16.606883333333332,
+    "effectiveWorkMinutes": 12,
     "targetEffectiveMinutes": 60,
     "targetMet": false,
     "ciWaitExcluded": true
@@ -16,7 +16,7 @@
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "304bf9b97a7d50d10d34387a75964d96d33d50b5",
   "branch": "feat/work-m366-gravekeepers-guard-physical-owner-discord-2v2-20261118",
-  "head": "96755391b539586422d774bb8542907928f8615c",
+  "head": "7e22c146e44e583eaad9b3d605f88a40414bc519",
   "pr": 314,
   "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/314",
   "draft": true,
@@ -28,10 +28,10 @@
     "Gravekeeper's Guard (37101832)"
   ],
   "changes": [
-    "Adicionado um teste de integração Discord 2v2 que executa Flip Summon da fonte pertencente ao parceiro aliado inativo.",
-    "O alvo é Blue-Eyes White Dragon pertencente fisicamente ao parceiro adversário inativo; o representante adversário ativo é outra pessoa.",
-    "O teste verifica que o alvo adversário aparece no menu, o monstro aliado não aparece e o UID retornado deve ficar na mão privada do dono físico.",
-    "O teste usa SQLite temporário, handlers reais e payloads Discord validados offline."
+    "Cenário face-up: alvo adversário do parceiro inativo retorna à mão física m3, enquanto os assentos ativos permanecem [0,1].",
+    "Cenário Fusion: Blue-Eyes Ultimate Dragon (23995348) retorna ao Extra Deck físico m3, não ao Extra Deck do representante ativo.",
+    "Cenário face-down: o alvo é legal e retorna à mão física sem revelar nome/UID no painel privado do representante nem no painel público.",
+    "Todos os cenários executam handlers e menus Discord com SQLite temporário e verificam 80 UIDs, privacidade e regras 2v2."
   ],
   "expectedBehavior": [
     "Assentos 0/1 ativos; fonte Gravekeeper's Guard fisicamente no assento aliado inativo 2.",
@@ -56,34 +56,48 @@
     "inventoryGranted": 0,
     "persistentDatabaseChanged": false,
     "playerDataChanged": false,
-    "scenariosAdded": 1
+    "scenariosAdded": 3,
+    "behaviorallyCoveredCards": 1
   },
   "ci": {
-    "cardBatchFast": {
-      "runId": 44397306959,
-      "status": "completed",
-      "conclusion": "success"
+    "initialRun": {
+      "engineValidationRunId": 44397306943,
+      "npmRunCheck": "success",
+      "npmTest": "success",
+      "extendedSoak600s": "in_progress"
     },
-    "milestone1000": {
-      "runId": 44397306938,
-      "status": "completed",
-      "conclusion": "success",
-      "artifactId": 14472001475,
-      "certified": 969,
-      "remainingTo1000": 31,
-      "historical": 1962,
-      "identityBlocked": 27,
-      "automaticCertifications": 0,
-      "inventoryGranted": 0,
-      "releaseGranted": 0
+    "reinforcedRun": {
+      "engineValidationRunId": 44398782737,
+      "status": "in_progress",
+      "npmTest": "pending"
     },
-    "engineValidation": {
-      "runId": 44397306943,
+    "latestRun": {
+      "engineValidationRunId": 44399321187,
       "status": "in_progress",
       "testJob": "in_progress",
       "extendedSoak600s": "in_progress",
+      "npmCi": "success",
       "npmRunCheck": "success",
+      "cardBatchFastStep": "in_progress",
       "npmTest": "pending"
+    },
+    "cardBatchFast": {
+      "runId": 44399321204,
+      "status": "in_progress"
+    },
+    "milestone1000": {
+      "runId": 44399321265,
+      "status": "in_progress",
+      "lastVerifiedArtifact": {
+        "artifactId": 14472001475,
+        "certified": 969,
+        "remainingTo1000": 31,
+        "historical": 1962,
+        "identityBlocked": 27,
+        "automaticCertifications": 0,
+        "inventoryGranted": 0,
+        "releaseGranted": 0
+      }
     }
   },
   "catalog": {
@@ -100,12 +114,8 @@
   "handoffRequests": [
     {
       "pr": 17,
-      "commentId": 6991541817,
-      "files": [
-        "src/duelEngineCurrent.ts"
-      ],
-      "purpose": "corrigir roteamento do bounce para a mão/Extra Deck do proprietário físico usando ownedPrivateZone",
-      "state": "awaiting-explicit-release"
+      "state": "withdrawn",
+      "reason": "normalização física já é aplicada por pauseOverflow -> prepareTeamOverflow -> normalizeTeamHands; nenhum runtime handoff necessário para M366"
     }
   ],
   "preservedConcurrentWork": {
@@ -128,12 +138,12 @@
     "releasedToAuxiliary": [
       "tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs"
     ],
-    "auxiliaryMay": "monitorar PR #314 e corrigir somente fixture/setup se houver erro anterior à asserção de propriedade; manter a asserção do dono físico.",
+    "auxiliaryMay": "monitorar PR #314; corrigir somente fixture/setup/payload assertions se a CI apontar defeito no teste; pode sincronizar a branch com a shared por merge não-forçado após a CI.",
     "forbidden": [
       "src/duelEngineCurrent.ts",
       "src/monsterEffects.ts",
       "renderizadores",
-      "catálogo",
+      "catalogo",
       "certificações",
       "inventários",
       "banco persistente",
@@ -141,7 +151,7 @@
       "main",
       "produção",
       "reservas de terceiros",
-      "merge",
+      "merge da PR",
       "deploy"
     ]
   },
@@ -166,6 +176,29 @@
     "productionUpdated": false,
     "deploymentsApi": "não disponível pela integração conectada"
   },
-  "nextTask": "Aguardar handoff explícito de src/duelEngineCurrent.ts. Após liberação, substituir o push direto para s.players[owner].hand/extra por ownedPrivateZone(...), adicionar caso Fusion/Extra Deck se seguro, executar npm test e Engine Validation/Soak. Em paralelo, auxiliar monitora #313/#314 e aguarda handoff dos package manifests de #312.",
-  "nextWindow": "2026-11-18T22:30:00-03:00"
+  "nextTask": "Monitorar a nova CI de 3 cenários. Se passar, manter PR #314 draft para revisão. Próxima implementação de cartas: 3-Hump Lacooda (86988864), agrupando tributo de duas entre três cópias e compra de três; aguardar handoff explícito já solicitado para src/monsterEffects.ts e src/duelEngineCurrent.ts. Em paralelo, M364 aguarda liberação de package.json/package-lock.json para aplicar sharp 0.35.5.",
+  "nextWindow": "2026-11-18T22:30:00-03:00",
+  "verifiedInvariant": {
+    "resolverVersion": "engine-v9",
+    "observedFlow": "resolveMonsterPending pode inicialmente anexar cartas à zona privada da equipe; pauseOverflow chama prepareTeamOverflow, que chama normalizeTeamHands após cada elo da corrente.",
+    "normalization": "normalizeTeamHands roteia mão e Extra Deck pelo UID físico m0:–m3: para a mão ativa ou reserva do assento proprietário.",
+    "evidence": "O primeiro npm test do M366 passou; a versão reforçada agora afirma explicitamente que os assentos ativos permanecem [0,1], que o alvo m3 não fica em core.players[1].hand/extra e cobre Fusion e face-down.",
+    "runtimeDefectConfirmed": false,
+    "runtimeChangesRequired": false
+  },
+  "handoffWithdrawnComment": "PR #17: pedido de handoff para src/duelEngineCurrent.ts retirado após confirmar o caminho normalizeTeamHands.",
+  "sharedHeadAtRelease": "fdf5cddd6f4bc874ef71ba1b63aaa58edc560b5a",
+  "branchComparison": {
+    "base": "fdf5cddd6f4bc874ef71ba1b63aaa58edc560b5a",
+    "aheadBy": 3,
+    "behindBy": 1,
+    "status": "behind-one-shared-checkpoint"
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidated": false,
+    "productionUpdated": false,
+    "deploymentsApi": "não disponível pela integração conectada"
+  }
 }
