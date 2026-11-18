@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const {
   identityTributeEligibility,
   selectIdentityTributes,
+  payIdentityTributes,
 } = require('../dist/identityScopedTribute.js');
 
 const LACOODa = '86988864';
@@ -116,4 +117,70 @@ test('invalid Tribute rule parameters fail closed', () => {
   assert.throws(() => identityTributeEligibility(field, 'm0:1', LACOODa, 0, 2), /requiredCopies/);
   assert.throws(() => identityTributeEligibility(field, 'm0:1', LACOODa, 3, 0), /tributeCount/);
   assert.throws(() => identityTributeEligibility(field, 'm0:1', LACOODa, 3, 4), /tributeCount/);
+});
+
+
+test('paying the cost moves exactly two selected copies to the shared Graveyard and preserves object identity', () => {
+  const field = threeCopies();
+  const grave = [];
+  const original = [...field];
+  const eligibility = identityTributeEligibility(field, 'm2:1', LACOODa, 3, 2);
+  const paid = payIdentityTributes(field, grave, eligibility, ['m2:1', 'm0:2']);
+
+  assert.ok(paid);
+  assert.deepEqual(field.map(c => c.uid), ['m0:1']);
+  assert.deepEqual(grave.map(c => c.uid), ['m2:1', 'm0:2']);
+  assert.equal(grave[0], original[1]);
+  assert.equal(grave[1], original[2]);
+  assert.deepEqual(grave.map(c => c.marker), ['physical:m2:1', 'physical:m0:2']);
+});
+
+test('paying the cost may leave the activating copy face-up on the shared field', () => {
+  const field = threeCopies();
+  const grave = [];
+  const source = field[1];
+  const eligibility = identityTributeEligibility(field, source.uid, LACOODa, 3, 2);
+  const paid = payIdentityTributes(field, grave, eligibility, ['m0:1', 'm0:2']);
+
+  assert.ok(paid);
+  assert.equal(field.length, 1);
+  assert.equal(field[0], source);
+  assert.deepEqual(grave.map(c => c.uid), ['m0:1', 'm0:2']);
+});
+
+test('a stale eligibility is rejected after the shared field loses one required copy', () => {
+  const field = threeCopies();
+  const grave = [];
+  const eligibility = identityTributeEligibility(field, 'm0:1', LACOODa, 3, 2);
+  field.splice(2, 1);
+  const snapshot = [...field];
+
+  assert.equal(payIdentityTributes(field, grave, eligibility, ['m0:1', 'm2:1']), null);
+  assert.deepEqual(field, snapshot);
+  assert.deepEqual(grave, []);
+});
+
+test('an invalid selection never partially pays the Tribute cost', () => {
+  const field = threeCopies();
+  const grave = [];
+  const eligibility = identityTributeEligibility(field, 'm0:1', LACOODa, 3, 2);
+  const snapshot = [...field];
+
+  assert.equal(payIdentityTributes(field, grave, eligibility, ['m0:1', 'not-on-field']), null);
+  assert.deepEqual(field, snapshot);
+  assert.deepEqual(grave, []);
+});
+
+test('a UID already in the Graveyard is rejected before any Tribute is moved', () => {
+  const field = threeCopies();
+  const grave = [card('m2:1', OTHER)];
+  const eligibility = identityTributeEligibility(field, 'm0:1', LACOODa, 3, 2);
+  const snapshot = [...field];
+
+  assert.throws(
+    () => payIdentityTributes(field, grave, eligibility, ['m0:1', 'm2:1']),
+    /already exists in the Graveyard/,
+  );
+  assert.deepEqual(field, snapshot);
+  assert.deepEqual(grave.map(c => c.uid), ['m2:1']);
 });
