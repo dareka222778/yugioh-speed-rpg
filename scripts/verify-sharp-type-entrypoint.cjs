@@ -18,6 +18,8 @@ if (!fs.existsSync(tscPath)) {
 }
 
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'sharp-0355-types-'));
+fs.symlinkSync(path.join(root, 'node_modules'), path.join(temp, 'node_modules'),
+  process.platform === 'win32' ? 'junction' : 'dir');
 const config = {
   compilerOptions: {
     target: 'ES2022',
@@ -27,7 +29,8 @@ const config = {
     esModuleInterop: true,
     skipLibCheck: true,
     noEmit: true,
-    types: ['node']
+    types: ['node'],
+    typeRoots: [path.join(root, 'node_modules', '@types')]
   }
 };
 
