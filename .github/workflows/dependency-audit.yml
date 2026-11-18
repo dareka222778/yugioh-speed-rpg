@@ -73,8 +73,8 @@ jobs:
       - name: Validate regenerated dependency tree
         run: |
           npm ci
-          npm run check
           npm audit --omit=dev --audit-level=high
+          npm run check
       - name: Preserve candidate lockfiles for review
         if: always()
         uses: actions/upload-artifact@v4
@@ -83,5 +83,6 @@ jobs:
           path: |
             package.json
             package-lock.json
+            node_modules/sharp/lib/index.d.ts
           if-no-files-found: error
           retention-days: 7
