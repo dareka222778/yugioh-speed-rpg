@@ -178,12 +178,17 @@ function setup(key,actorSeat){
   state.core.turn=3;
   state.core.players[0].lp=3500;
   assert.deepEqual(state.active,[2,3],'seats 2 and 3 must be the active team representatives');
+  if(actorSeat===3){
+    state.cursor=3;
+    state.core.current=1;
+    state.core.teamRotation.cursor=3;
+  }
   const source=deploy(state,0,PUPPETEER);
   const summonRef=ensureInHand(state,actorSeat,NORMAL_ID);
   assert.match(source.uid,/^m0:/,'Mysterious Puppeteer must be physically owned by inactive partner seat 0');
   assert.match(summonRef.uid,new RegExp('^m'+actorSeat+':'),
     'the summoned Normal Monster must remain in its physical owner hand');
-  assert.equal(tag.tagDecisionMember(state).id,member(2));
+  assert.equal(tag.tagDecisionMember(state).id,member(actorSeat));
   assertRules(state);
   assertPrivateHands(state);
   assert.doesNotThrow(()=>tag.assertTagDuel(state));
