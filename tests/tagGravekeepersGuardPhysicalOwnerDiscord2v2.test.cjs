@@ -21,6 +21,7 @@ const {rulesFor}=require('../dist/rulesProfile');
 const GUARD='37101832';
 const BLUE_EYES='89631139';
 const AXE_RAIDER='48305365';
+const ULTIMATE='23995348';
 assert.equal(getPlayableCard(GUARD)?.englishName,"Gravekeeper's Guard");
 assert.equal(getCardStatus(GUARD)?.stage,'certified');
 assert.equal(getEffect(GUARD)?.kind,'monsterEffect');
@@ -30,6 +31,9 @@ assert.deepEqual(getMonsterEffect(GUARD),{
 });
 assert.equal(getPlayableCard(BLUE_EYES)?.englishName,'Blue-Eyes White Dragon');
 assert.equal(getPlayableCard(AXE_RAIDER)?.englishName,'Axe Raider');
+assert.equal(getPlayableCard(ULTIMATE)?.englishName,'Blue-Eyes Ultimate Dragon');
+assert.equal(getCardStatus(ULTIMATE)?.stage,'certified');
+assert.equal(getPlayableCard(ULTIMATE)?.monsterType,'fusion');
 
 const SAFE_NORMALS=[...new Set(tag.tagNormalCardIds)].filter(id=>{
   const card=getPlayableCard(id);
@@ -65,6 +69,16 @@ function placeFaceDown(state,seat,id){
 }
 function deploy(state,seat,id){
   const card=takePhysical(state,seat,id);
+  const monster={...card,owner:seat%2,position:'atk',faceUp:true,
+    entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
+  state.core.players[seat%2].monsters.push(monster);
+  return monster;
+}
+function deployExtra(state,seat,id){
+  const physical=holder(state,seat);
+  const index=physical.extra.findIndex(card=>card.id===id);
+  assert.ok(index>=0,'Fusion must begin in the physical owner Extra Deck');
+  const card=physical.extra.splice(index,1)[0];
   const monster={...card,owner:seat%2,position:'atk',faceUp:true,
     entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
   state.core.players[seat%2].monsters.push(monster);
@@ -157,8 +171,7 @@ async function settleResponses(record){
   }
   return current;
 }
-function register(state){
-  const id='m366-guard-owner';
+function register(state,id='m366-guard-owner'){
   const members=[0,1,2,3].map(seat=>({id:member(seat),name:'M366 Seat '+seat,accepted:true}));
   database.db.prepare(
     'INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)'
@@ -253,6 +266,70 @@ test("Gravekeeper's Guard returns a bounced monster to its inactive physical own
   assert.ok(!activeOpponentHand.some(card=>card.uid===fixture.target.uid),
     'the active opponent representative must not receive the inactive partner’s card');
 
+  assertConserved(current.state,fixture.before);
+  assertPrivateHands(current.state);
+  assertRules(current.state);
+  assertPublicPayload(current);
+  assert.doesNotThrow(()=>tag.assertTagDuel(current.state));
+  assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(current.state))));
+});
+
+function setupFusion(){
+  const required=[[],[],[],[]];
+  required[0].push(AXE_RAIDER);
+  required[2].push(GUARD);
+  const players=[0,1,2,3].map(seat=>({
+    id:member(seat),name:'M366 Seat '+seat,cards:deck(required[seat]),
+    extra:seat===3?[ULTIMATE]:[]
+  }));
+  const state=tag.createTagDuel(players,{classic:true,first:0,seed:'m366-gravekeepers-guard-fusion-owner'});
+  state.core.turn=3;
+  assert.deepEqual(state.active,[0,1]);
+  assert.equal(state.core.resolverVersion,'engine-v9');
+  const ally=deploy(state,0,AXE_RAIDER);
+  const source=placeFaceDown(state,2,GUARD);
+  const target=deployExtra(state,3,ULTIMATE);
+  assert.match(source.uid,/^m2:/);
+  assert.match(target.uid,/^m3:e/,'Fusion target must preserve physical seat 3 identity');
+  assert.equal(target.owner,1,'the target is controlled by team 1 while physically owned by seat 3');
+  assert.equal(tag.tagDecisionMember(state).id,member(0));
+  assertRules(state);
+  assertPrivateHands(state);
+  assert.doesNotThrow(()=>tag.assertTagDuel(state));
+  const before=inventory(state);
+  const record=register(state,'m366-guard-fusion-owner');
+  assertPublicPayload(record);
+  return {state,ally,source,target,before,record};
+}
+
+test("Gravekeeper's Guard returns a bounced Fusion to its inactive physical owner's Extra Deck",async()=>{
+  const fixture=setupFusion();
+  const flipActions=tag.tagActions(fixture.record.state,member(0));
+  const flipIndex=flipActions.findIndex(action=>
+    action.kind==='position'&&action.card===fixture.source.uid&&action.mode==='flip'
+  );
+  assert.ok(flipIndex>=0,'the active representative must receive the partner-owned Flip Summon action');
+  let current=await submit(fixture.record,member(0),flipIndex,'m366-fusion-flip');
+  assert.equal(current.state.core.phase,'choice');
+  assert.ok(current.state.core.choice.targets.includes(fixture.target.uid));
+  const chooseActions=tag.tagActions(current.state,member(0));
+  const targetIndex=chooseActions.findIndex(action=>
+    action.kind==='choose'&&action.target===fixture.target.uid
+  );
+  assert.ok(targetIndex>=0,'the active representative must receive the inactive partner Fusion as a legal target');
+  current=await submit(current,member(0),targetIndex,'m366-fusion-select');
+  current=await settleResponses(current);
+
+  assert.equal(current.state.core.phase,'main');
+  assert.deepEqual(current.state.active,[0,1],'resolving the bounce must not rotate active representatives');
+  assert.deepEqual(current.state.core.teamRotation.active,[0,1]);
+  assert.ok(!current.state.core.players[1].monsters.some(card=>card.uid===fixture.target.uid));
+  assert.ok(current.state.core.players[0].monsters.some(card=>card.uid===fixture.ally.uid));
+  assert.ok(current.state.core.players[0].monsters.some(card=>card.uid===fixture.source.uid&&card.faceUp));
+  assert.ok(!current.state.core.players[1].extra.some(card=>card.uid===fixture.target.uid),
+    'the active opponent Extra Deck must not absorb the inactive partner Fusion');
+  assert.ok(current.state.reserves[3].extra.some(card=>card.uid===fixture.target.uid),
+    'the Fusion must return to physical owner seat 3 Extra Deck');
   assertConserved(current.state,fixture.before);
   assertPrivateHands(current.state);
   assertRules(current.state);
