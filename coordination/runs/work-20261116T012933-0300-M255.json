@@ -1,0 +1,81 @@
+{
+  "owner": "Work",
+  "priority": "P1",
+  "startedAt": "2026-11-16T01:29:33-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "sharedHeadAtCheckpoint": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "stateUpdate": {
+    "status": "withheld",
+    "reason": "coordination/state.json ainda declara M231/M232 ativas; handoff cooperativo solicitado em PRs #187/#188, sem liberação explícita. Nenhuma reserva de terceiros ou estado compartilhado foi sobrescrito.",
+    "comments": [
+      6907379122,
+      6907379553
+    ]
+  },
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "newAdmissions": 0,
+    "newCertificates": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "liveDiscordNetwork": false
+  },
+  "nextWindow": "2026-11-16T05:30:00-03:00",
+  "duration": {
+    "elapsedAtCheckpointMinutes": 10,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Tempo efetivo não é medido com precisão neste ambiente; espera de CI será excluída e não se alegará cumprimento de 60 minutos."
+  },
+  "runId": "work-20261116T012933-0300-M255",
+  "mission": "M255",
+  "state": "published-draft; CI in progress",
+  "branch": "feat/work-m255-continuous-attack-locks-discord-2v2-20261116",
+  "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "head": "ab20e0c193c52ee6da474f496d1ff2017320b268",
+  "pr": 211,
+  "scope": [
+    "tests/tagContinuousAttackLocksDiscord2v2.test.cjs"
+  ],
+  "cardsCovered": [
+    "Insect Barrier",
+    "Gravity Bind",
+    "Vengeful Bog Spirit"
+  ],
+  "behavioralScenarios": 3,
+  "newCertifications": 0,
+  "blocksCompleted": [
+    "Preparou uma segunda família independente durante a CI M254.",
+    "Implementou três homologações Discord offline para efeitos contínuos, com resolução de respostas por interações, teste de ataque nos quatro assentos, privacidade, idempotência e conservação de UIDs.",
+    "Publicou PR draft #211; Milestone 1000 iniciou, aguardando demais workflows."
+  ],
+  "ci": {
+    "cardBatchFast": "not_yet_reported",
+    "milestone1000": "in_progress",
+    "engineValidation": "not_yet_reported",
+    "npmTest": "pending_in_engine_validation",
+    "extendedSoak": "pending"
+  },
+  "runtimeChanges": [],
+  "certificationChanges": [],
+  "scopeReleasedToAuxiliary": {
+    "branch": "feat/work-m255-continuous-attack-locks-discord-2v2-20261116",
+    "files": [
+      "tests/tagContinuousAttackLocksDiscord2v2.test.cjs"
+    ],
+    "allowed": "monitorar CI e corrigir apenas este arquivo de teste; sem runtime/catálogo/estado/produção"
+  },
+  "nextTask": "Monitorar CI #211; revisar falhas da própria fixture; continuar a próxima família 2v2 independente."
+}
