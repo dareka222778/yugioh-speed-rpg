@@ -1,0 +1,71 @@
+{
+  "runId": "work-20261116T012933-0300-M256",
+  "mission": "M256",
+  "owner": "Work",
+  "priority": "P1",
+  "state": "published-draft; CI in progress",
+  "startedAt": "2026-11-16T01:29:33-03:00",
+  "timezone": "America/Sao_Paulo",
+  "branch": "feat/work-m256-field-spells-discord-2v2-20261116",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "295ffe4aad86b9aa902963f33be6252ff46e5f94",
+  "pr": 212,
+  "head": "8100c56d6719166b9d152c42a1daa75f69ac5e2a",
+  "scope": [
+    "tests/tagFieldSpellDiscord2v2.test.cjs"
+  ],
+  "cardsCovered": [
+    "Mystic Plasma Zone",
+    "Molten Destruction",
+    "Rising Air Current"
+  ],
+  "behavioralScenarios": 3,
+  "newCertifications": 0,
+  "blocksCompleted": [
+    "Preparou a terceira família independente durante a CI de M254/M255.",
+    "Implementou homologação Discord offline pelo handler real para três Magias de Campo, com passes de resposta, menu privado, painel público, idempotência, privacidade e preservação de UIDs.",
+    "Verificou bônus de atributo nos dois campos compartilhados e controle negativo LIGHT.",
+    "Publicou PR draft #212."
+  ],
+  "ci": {
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "npmTest": "pending_in_engine_validation",
+    "extendedSoak": "pending"
+  },
+  "runtimeChanges": [],
+  "catalogChanges": [],
+  "certificationChanges": [],
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "liveDiscordNetwork": false
+  },
+  "stateUpdate": {
+    "status": "withheld",
+    "reason": "M231/M232 continuam reservadas em coordination/state.json. Handoff cooperativo solicitado em #187/#188; nenhum arquivo reservado foi alterado.",
+    "comments": [
+      6907379122,
+      6907379553
+    ]
+  },
+  "scopeReleasedToAuxiliary": {
+    "branch": "feat/work-m256-field-spells-discord-2v2-20261116",
+    "files": [
+      "tests/tagFieldSpellDiscord2v2.test.cjs"
+    ],
+    "allowed": "monitorar CI e corrigir apenas este arquivo de teste; sem runtime, catálogo, estado compartilhado ou produção"
+  },
+  "nextTask": "Monitorar CI #212; se verde, liberar apenas o teste próprio ao auxiliar. Prosseguir para M257 com outra família independente e aguardar handoff M231/M232.",
+  "nextWindow": "2026-11-16T05:30:00-03:00",
+  "duration": {
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "A sessão permanece em execução; não contar espera de CI como trabalho ativo."
+  }
+}
