@@ -78,7 +78,7 @@ function takePhysical(state,seat,id){
 function placeMonster(state,seat,id,faceUp=true){
   const card=takePhysical(state,seat,id);
   const monster={...card,owner:seat%2,position:faceUp?'atk':'def',faceUp,
-    entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
+    entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0,setTurn:0};
   state.core.players[seat%2].monsters.push(monster);
   return monster;
 }
