@@ -105,3 +105,46 @@ export function selectIdentityTributes<T extends IdentityTributeCard>(
 
   return Object.freeze(selected);
 }
+
+
+/**
+ * Pay a validated identity-scoped Tribute cost by moving the selected physical
+ * cards from the shared team field to that team's shared Graveyard.
+ *
+ * Eligibility is recomputed immediately before mutation so a stale menu
+ * cannot pay a cost after the field has changed. The original objects and
+ * physical UIDs are preserved. Drawing and effect resolution remain the
+ * caller's responsibility.
+ */
+export function payIdentityTributes<T extends IdentityTributeCard>(
+  field: T[],
+  grave: Array<{ readonly uid: string; readonly id: string }>,
+  eligibility: IdentityTributeEligibility<T>,
+  selectedUids: readonly string[],
+): readonly T[] | null {
+  const current = identityTributeEligibility(
+    field,
+    eligibility.sourceUid,
+    eligibility.cardId,
+    eligibility.requiredCopies,
+    eligibility.tributeCount,
+  );
+  if (!current) return null;
+
+  const selected = selectIdentityTributes(current, selectedUids);
+  if (!selected) return null;
+
+  const graveUids = new Set(grave.map(card => card.uid));
+  if (selected.some(card => graveUids.has(card.uid))) {
+    throw new Error('Identity Tribute selected UID already exists in the Graveyard.');
+  }
+
+  for (const uid of selectedUids) {
+    const index = field.findIndex(card => card.uid === uid);
+    if (index < 0) return null;
+    const [card] = field.splice(index, 1);
+    grave.push(card);
+  }
+
+  return selected;
+}
