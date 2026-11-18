@@ -19,6 +19,9 @@ const {enabledCardIds,getPlayableCard}=require('../dist/effectRegistry');
 const {getCard}=require('../dist/collection');
 const {rulesFor}=require('../dist/rulesProfile');
 const {MessageFlags}=require('discord.js');
+const trace=message=>process.stderr.write('[M358] '+message+'\\n');
+function debugTest(name,fn){return nodeTest(name,async(...args)=>{try{return await fn(...args);}catch(error){trace(name+' FAILED: '+(error&&error.stack||error));throw error;}});}
+trace('module setup started');
 
 const BOTTOMLESS='29401950';
 const SAFE_NORMALS=[...new Set(tag.tagNormalCardIds)].filter(id=>{
@@ -94,6 +97,7 @@ function cardName(id){
   return card.name;
 }
 async function openPrivateZones(record,seat){
+  trace('open zones seat '+seat);
   const deferred=[];
   const calls=[];
   let payload;
@@ -112,6 +116,7 @@ async function openPrivateZones(record,seat){
     }
   };
   await handleTagComponent(interaction,async()=>{},kind=>deferred.push(kind));
+  trace('open zones seat '+seat+' completed');
   assert.deepEqual(deferred,['reply'],'opening private zones must use an ephemeral reply');
   assert.equal(calls[0].kind,'reply');
   assert.equal(calls[0].options.flags,MessageFlags.Ephemeral,
@@ -120,14 +125,23 @@ async function openPrivateZones(record,seat){
   return payload;
 }
 
+trace('before createState');
 const state=createState();
+trace('after createState');
 assert.deepEqual(state.active,[0,1],'the initial active representatives are physical seats 0 and 1');
+trace('before hidden team0');
 const hiddenTeam0=placeMonster(state,2,0,SAFE_NORMALS[0],{faceUp:false,position:'def'});
+trace('after hidden team0');
 const hiddenTeam1=placeMonster(state,3,1,SAFE_NORMALS[1],{faceUp:false,position:'def'});
+trace('after hidden team1');
 const publicTeam0=placeMonster(state,0,0,SAFE_NORMALS[2],{faceUp:true,position:'atk'});
+trace('after public team0');
 const hiddenTrapTeam0=placeHiddenTrap(state,0,0);
+trace('after hidden trap team0');
 const hiddenTrapTeam1=placeHiddenTrap(state,1,1);
+trace('after hidden trap team1');
 assert.doesNotThrow(()=>tag.assertTagDuel(state),'M358 fixture must preserve 2v2 invariants');
+trace('tag state validated');
 
 const hiddenTeam0Names=[cardName(hiddenTeam0.id),cardName(hiddenTrapTeam0.id)];
 const hiddenTeam1Names=[cardName(hiddenTeam1.id),cardName(hiddenTrapTeam1.id)];
@@ -155,7 +169,7 @@ function assertRulesAndInventory(){
   }
 }
 
-nodeTest('M358 public projection and public Discord field never reveal face-down card identities',()=>{
+debugTest('M358 public projection and public Discord field never reveal face-down card identities',()=>{
   assertRulesAndInventory();
   const projection=tag.publicTagDuel(state);
   const serializedProjection=JSON.stringify(projection);
@@ -192,7 +206,7 @@ nodeTest('M358 public projection and public Discord field never reveal face-down
   }
 });
 
-nodeTest('M358 both teammates can inspect their own team hidden zones through ephemeral Discord panels',async()=>{
+debugTest('M358 both teammates can inspect their own team hidden zones through ephemeral Discord panels',async()=>{
   const record=register(state);
   for(const seat of [0,2]){
     const payload=await openPrivateZones(record,seat);
@@ -222,7 +236,7 @@ nodeTest('M358 both teammates can inspect their own team hidden zones through ep
   }
 });
 
-nodeTest('M358 a hidden card owned by the inactive partner remains visible to both allies but not to either opponent',async()=>{
+debugTest('M358 a hidden card owned by the inactive partner remains visible to both allies but not to either opponent',async()=>{
   const record=register(state);
   const activeOwner=await openPrivateZones(record,0);
   const inactiveOwner=await openPrivateZones(record,2);
