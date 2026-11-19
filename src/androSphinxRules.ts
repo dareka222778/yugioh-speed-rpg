@@ -93,21 +93,21 @@ const seats: readonly DuelSeat[] = [0, 1, 2, 3];
 const isSeat = (value: unknown): value is DuelSeat =>
   typeof value === 'number' && Number.isInteger(value) && seats.includes(value as DuelSeat);
 
-const requireSeat = (value: unknown, label: string): asserts value is DuelSeat => {
+function requireSeat(value: unknown, label: string): asserts value is DuelSeat {
   if (!isSeat(value)) throw new TypeError(`Invalid ${label}.`);
-};
+}
 
-const requireId = (value: unknown, label: string): asserts value is string => {
+function requireId(value: unknown, label: string): asserts value is string {
   if (typeof value !== 'string' || value.length === 0 || value.length > 128) {
     throw new TypeError(`Invalid ${label}.`);
   }
-};
+}
 
-const requireNonNegativeInteger = (value: unknown, label: string): asserts value is number => {
+function requireNonNegativeInteger(value: unknown, label: string): asserts value is number {
   if (!Number.isSafeInteger(value) || (value as number) < 0 || (value as number) > 1000000000) {
     throw new TypeError(`Invalid ${label}.`);
   }
-};
+}
 
 export function teamOfAndroSphinxSeat(seat: DuelSeat): DuelTeam {
   requireSeat(seat, 'seat');
