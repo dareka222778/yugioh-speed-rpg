@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-19T13:30:15-03:00",
+  "lastActivityAt": "2026-11-19T13:45:02-03:00",
   "nextScheduledAt": "2026-11-19T18:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -2983,8 +2983,18 @@
         "tests/coordinationReservationGuard.test.cjs",
         ".github/workflows/coordination-reservation-guard.yml"
       ],
-      "state": "reserved",
-      "priority": "P1 — validar IDs únicos, HEAD-base, escopos e liberação de reservas próprias sem tocar runtime."
+      "state": "released-to-auxiliary-monitor-ci",
+      "priority": "P1 — validar IDs únicos, HEAD-base, escopos e liberação de reservas próprias sem tocar runtime.",
+      "head": "ff817a43b0d9ef9301e47cb3baa07b4ad49ca0e5",
+      "pr": 346,
+      "endedAt": "2026-11-19T13:45:02-03:00",
+      "effectiveWorkMinutes": 12.5,
+      "releasedFiles": [
+        "scripts/coordination-reservation-guard.cjs",
+        "tests/coordinationReservationGuard.test.cjs",
+        ".github/workflows/coordination-reservation-guard.yml"
+      ],
+      "releaseOwner": "auxiliary-monitor-ci"
     }
   ],
   "handoffRequest": {
@@ -3924,7 +3934,7 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "M397: implementar e testar coordination reservation guard em arquivos novos; depois PR draft, checkpoint final e liberação limitada ao auxiliar.",
+  "nextTask": "Auxiliar acompanha PR #346 e corrige apenas os três arquivos M397 se a CI do HEAD ff817a43 falhar. Work verifica os gates integrais e, após handoff M61, integra 3-Hump Lacooda e as buscas deck-top de A Cat of Ill Omen/An Owl of Luck. Se M61 continuar bloqueado, retomar M398 somente após resposta explícita do M361 sobre os dois novos testes de isolamento.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
   "sharedHeadBeforeClaim": "97983a9e05a84baef74248772e8e5e90c83930e3",
@@ -9088,7 +9098,7 @@
     "blocker": "Handoff M61 de src/monsterEffects.ts e src/duelEngineCurrent.ts aguardando liberação explícita; nenhuma integração/certificação realizada."
   },
   "lastIndependentWorkCheckpoint": "coordination/runs/work-20261119T133015-0300-M397.json",
-  "lastIndependentWorkActivityAt": "2026-11-19T13:30:15-03:00",
+  "lastIndependentWorkActivityAt": "2026-11-19T13:45:02-03:00",
   "nextWorkWindow": "2026-11-19T08:30:00-03:00",
   "lastIndependentWorkRunId": "work-20261119T133015-0300-M397",
   "workBranchesUpdatedAt": "2026-11-19T06:46:09.230Z",
@@ -9097,7 +9107,7 @@
   "lastWorkRunId": "work-20261119T133015-0300-M397",
   "lastWorkMission": "M397",
   "lastWorkBranch": "feat/work-m397-coordination-reservation-guard-20261119",
-  "lastWorkHead": null,
+  "lastWorkHead": "ff817a43b0d9ef9301e47cb3baa07b4ad49ca0e5",
   "lastWorkBranches": [
     {
       "branch": "feat/work-m387-a-team-trap-disposal-negation-20261119",
@@ -9119,8 +9129,19 @@
     "targetMet": false,
     "ciWaitExcluded": true
   },
-  "lastIndependentWorkReservationReleased": false,
-  "lastIndependentWorkScopeReleasedToAuxiliary": [],
+  "lastIndependentWorkReservationReleased": true,
+  "lastIndependentWorkScopeReleasedToAuxiliary": [
+    {
+      "branch": "feat/work-m397-coordination-reservation-guard-20261119",
+      "pr": 346,
+      "files": [
+        "scripts/coordination-reservation-guard.cjs",
+        "tests/coordinationReservationGuard.test.cjs",
+        ".github/workflows/coordination-reservation-guard.yml"
+      ],
+      "permission": "monitor CI and correct only these files"
+    }
+  ],
   "lastIndependentWorkCatalog": {
     "certified": 969,
     "target": 1000,
@@ -9653,6 +9674,37 @@
       "tests/coordinationReservationGuard.test.cjs",
       ".github/workflows/coordination-reservation-guard.yml"
     ],
-    "state": "reserved"
-  }
+    "state": "released-to-auxiliary-monitor-ci",
+    "head": "ff817a43b0d9ef9301e47cb3baa07b4ad49ca0e5",
+    "pr": 346,
+    "releasedFiles": [
+      "scripts/coordination-reservation-guard.cjs",
+      "tests/coordinationReservationGuard.test.cjs",
+      ".github/workflows/coordination-reservation-guard.yml"
+    ],
+    "endedAt": "2026-11-19T13:45:02-03:00"
+  },
+  "lastWorkPR": 346,
+  "lastWorkStatus": "released-to-auxiliary-monitor-ci",
+  "lastWorkDuration": {
+    "elapsedMinutes": 14.78,
+    "effectiveWorkMinutes": 12.5,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true
+  },
+  "lastWorkCatalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "lastWorkProduction": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "lastWorkSharedHeadBeforeFinalStateUpdate": "64ee71fdabedeb4fdd8a362fcf5e5be6e2fc62cf",
+  "thirdPartyReservationsReleased": []
 }
