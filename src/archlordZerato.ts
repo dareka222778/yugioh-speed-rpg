@@ -227,8 +227,12 @@ export function prepareArchlordZeratoSummon(context: ZeratoSummonContext): Zerat
   const uids = new Set<string>();
   const slots = new Set<number>();
   for (const monster of teamMonsterZones) {
-    if (!monster || !isSeat(monster.controllerSeat) ||
+    if (!monster || typeof monster.uid !== 'string' || monster.uid.length === 0 ||
+        typeof monster.cardId !== 'string' || monster.cardId.length === 0 ||
+        !isSeat(monster.physicalOwnerSeat) || !isSeat(monster.controllerSeat) ||
         teamOfZeratoSeat(monster.controllerSeat) !== team ||
+        monster.location !== 'monster' ||
+        typeof monster.faceUp !== 'boolean' ||
         !Number.isInteger(monster.zoneSlot) ||
         monster.zoneSlot < 0 || monster.zoneSlot > 2 ||
         uids.has(monster.uid) || slots.has(monster.zoneSlot)) {
@@ -238,9 +242,15 @@ export function prepareArchlordZeratoSummon(context: ZeratoSummonContext): Zerat
     slots.add(monster.zoneSlot);
   }
   if (uids.has(source.uid)) return { eligible: false, reason: 'duplicate-physical-uid' };
-  if (!uids.has(warrior.uid)) return { eligible: false, reason: 'warrior-not-in-shared-monster-zones' };
-  if (teamMonsterZones.filter(monster => monster.uid === warrior.uid).length !== 1) {
-    return { eligible: false, reason: 'duplicate-physical-uid' };
+  const actualWarrior = teamMonsterZones.find(monster => monster.uid === warrior.uid);
+  if (!actualWarrior) return { eligible: false, reason: 'warrior-not-in-shared-monster-zones' };
+  if (actualWarrior.cardId !== warrior.cardId ||
+      actualWarrior.physicalOwnerSeat !== warrior.physicalOwnerSeat ||
+      actualWarrior.controllerSeat !== warrior.controllerSeat ||
+      actualWarrior.zoneSlot !== warrior.zoneSlot ||
+      actualWarrior.faceUp !== warrior.faceUp ||
+      actualWarrior.location !== warrior.location) {
+    return { eligible: false, reason: 'invalid-shared-monster-zone-state' };
   }
 
   return {
@@ -332,11 +342,13 @@ export function resolveArchlordZeratoWipe(
     alreadyResolvedActivationIds?: readonly string[];
   }> = {},
 ): ZeratoWipeResolution {
-  if (!offer || !offer.activationId || !offer.sourceUid ||
+  if (!offer || !offer.activationId || !offer.sourceUid || !offer.discard ||
+      !offer.discard.uid || !offer.discard.cardId ||
       !isSeat(offer.activeSeat) ||
       offer.sourceTeam !== teamOfZeratoSeat(offer.activeSeat) ||
       offer.discard.cost !== 'one-light-monster' ||
       offer.discard.destination !== 'owner-team-shared-graveyard' ||
+      !isSeat(offer.discard.physicalOwnerSeat) ||
       offer.discard.physicalOwnerSeat !== offer.activeSeat) {
     return { resolved: false, reason: 'stale-activation' };
   }
@@ -359,6 +371,7 @@ export function resolveArchlordZeratoWipe(
     sanctuaryNow.cardId === SANCTUARY_IN_THE_SKY_ID &&
     sanctuaryNow.location === 'field' &&
     sanctuaryNow.faceUp &&
+    isSeat(sanctuaryNow.controllerSeat) &&
     teamOfZeratoSeat(sanctuaryNow.controllerSeat) === offer.sourceTeam;
   if (!sanctuaryIsLive) {
     return {
@@ -379,9 +392,11 @@ export function resolveArchlordZeratoWipe(
   const seenSlots = new Set<number>();
   for (const monster of opponentMonstersNow) {
     if (!monster || typeof monster.uid !== 'string' || monster.uid.length === 0 ||
+        typeof monster.cardId !== 'string' || monster.cardId.length === 0 ||
         !isSeat(monster.physicalOwnerSeat) || !isSeat(monster.controllerSeat) ||
         teamOfZeratoSeat(monster.controllerSeat) === offer.sourceTeam ||
         monster.location !== 'monster' ||
+        typeof monster.faceUp !== 'boolean' ||
         !Number.isInteger(monster.zoneSlot) ||
         monster.zoneSlot < 0 || monster.zoneSlot > 2 ||
         seenUids.has(monster.uid) || seenSlots.has(monster.zoneSlot)) {
