@@ -9759,7 +9759,7 @@
   "latestIndependentWorkActivityAt": "2026-11-19T18:37:35-03:00",
   "latestIndependentWorkPR": 347,
   "latestIndependentWorkCheckpoint": "coordination/runs/work-20261119T182750-0300-M398.json",
-  "latestIndependentWorkCheckpointCommit": "4c6ba5e21409aa91e7bbbfa93f45c324f81dbade",
+  "latestIndependentWorkCheckpointCommit": "a25d531c4869d8f17112f85beb978e3bcd5791b2",
   "latestIndependentWorkStatus": "released-to-auxiliary-monitor-ci",
   "latestIndependentWorkEffectiveMinutes": 8.2,
   "latestIndependentWorkCatalog": {
@@ -9816,10 +9816,11 @@
       "artifact": 14575203596
     }
   ],
-  "latestIndependentWorkSharedHead": "4b834e570a6e7c79c19cf058fc0b78b7adf4da0c",
+  "latestIndependentWorkSharedHead": "4708b55af5e7d231882f663c607282ecfa3962eb",
   "latestIndependentWorkCompare": {
     "ahead": 12,
-    "behind": 3,
-    "status": "diverged"
+    "behind": 5,
+    "status": "diverged",
+    "measuredAgainst": "4708b55af5e7d231882f663c607282ecfa3962eb"
   }
 }
