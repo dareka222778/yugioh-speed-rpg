@@ -1,0 +1,41 @@
+name: Coordination reservation guard
+
+on:
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - scripts/coordination-reservation-guard.cjs
+      - tests/coordinationReservationGuard.test.cjs
+      - .github/workflows/coordination-reservation-guard.yml
+      - coordination/state.json
+      - coordination/runs/**
+  push:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - coordination/state.json
+      - coordination/runs/**
+
+permissions:
+  contents: read
+
+jobs:
+  reservation-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run guard unit tests
+        run: node --test tests/coordinationReservationGuard.test.cjs
+      - name: Validate the latest registered checkpoint
+        shell: bash
+        run: |
+          run_file="$(node -p "require('./coordination/state.json').lastCheckpoint || ''")"
+          test -n "$run_file"
+          test -f "$run_file"
+          node scripts/coordination-reservation-guard.cjs \
+            --state coordination/state.json \
+            --run-file "$run_file"
