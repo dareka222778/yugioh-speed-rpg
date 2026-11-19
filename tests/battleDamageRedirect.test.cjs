@@ -267,15 +267,15 @@ test('Atomic Firefly resolves its 1000 damage through the real duel engine after
       { id: 'p1', name: 'Attacker Team', cards: deckIds },
     ], () => 0, 1, { randomSeed: 'm369-atomic-firefly' });
 
-    const moveToField = (playerIndex, id) => {
-      const player = state.players[playerIndex];
-      const ref = [...player.hand, ...player.deck].find(value => value.id === id);
-      assert.ok(ref, `fixture card ${id} must be in a private zone`);
-      player.hand = player.hand.filter(value => value.uid !== ref.uid);
-      player.deck = player.deck.filter(value => value.uid !== ref.uid);
+    const moveOwnedCardToField = (ownerIndex, controllerIndex, id) => {
+      const owner = state.players[ownerIndex];
+      const ref = [...owner.hand, ...owner.deck].find(value => value.id === id);
+      assert.ok(ref, `fixture card ${id} must be in its owner's private zone`);
+      owner.hand = owner.hand.filter(value => value.uid !== ref.uid);
+      owner.deck = owner.deck.filter(value => value.uid !== ref.uid);
       const monsterRef = {
         ...ref,
-        owner: playerIndex,
+        owner: ownerIndex,
         faceUp: true,
         position: 'atk',
         entered: state.turn,
@@ -284,9 +284,11 @@ test('Atomic Firefly resolves its 1000 damage through the real duel engine after
         atkBoost: 0,
         defBoost: 0,
       };
-      player.monsters.push(monsterRef);
+      state.players[controllerIndex].monsters.push(monsterRef);
       return monsterRef;
     };
+    const moveToField = (playerIndex, id) =>
+      moveOwnedCardToField(playerIndex, playerIndex, id);
 
     const firefly = moveToField(0, ATOMIC_FIREFLY);
     const attacker = moveToField(1, OPPONENT);
@@ -311,5 +313,63 @@ test('Atomic Firefly resolves its 1000 damage through the real duel engine after
     assert.equal(state.players[1].lp, 7000, 'the player who destroyed the Firefly receives 1000 effect damage');
     assert.ok(state.players[0].grave.some(value => value.uid === firefly.uid));
     assert.ok(state.log.some(line => /Atomic Firefly.*ativado|Efeito de Atomic Firefly/.test(line)));
+  });
+});
+
+
+test('Atomic Firefly damages the battle destroyer even when control differs from physical ownership', () => {
+  const catalog = makeCatalog('b'.repeat(64));
+  const deckIds = cards.slice(0, 20).map(value => value.id);
+
+  withCatalog(catalog, () => {
+    let state = createDuel([
+      { id: 'p0', name: 'Physical Owner and Destroyer', cards: deckIds },
+      { id: 'p1', name: 'Temporary Controller', cards: deckIds },
+    ], () => 0, 0, { randomSeed: 'm369-stolen-firefly' });
+
+    const moveOwnedCardToField = (ownerIndex, controllerIndex, id) => {
+      const owner = state.players[ownerIndex];
+      const ref = [...owner.hand, ...owner.deck].find(value => value.id === id);
+      assert.ok(ref, `fixture card ${id} must be in its owner's private zone`);
+      owner.hand = owner.hand.filter(value => value.uid !== ref.uid);
+      owner.deck = owner.deck.filter(value => value.uid !== ref.uid);
+      const monsterRef = {
+        ...ref,
+        owner: ownerIndex,
+        faceUp: true,
+        position: 'atk',
+        entered: state.turn,
+        changed: state.turn,
+        attacked: 0,
+        atkBoost: 0,
+        defBoost: 0,
+      };
+      state.players[controllerIndex].monsters.push(monsterRef);
+      return monsterRef;
+    };
+
+    const firefly = moveOwnedCardToField(0, 1, ATOMIC_FIREFLY);
+    const attacker = moveOwnedCardToField(0, 0, OPPONENT);
+    state.current = 0;
+    state.priority = 0;
+    state.phase = 'battle';
+    state.resume = 'main';
+    state.passes = 0;
+
+    const attack = legalActions(state, 'p0').find(action =>
+      action.kind === 'attack' && action.card === attacker.uid && action.target === firefly.uid);
+    assert.ok(attack, 'the physical owner must be able to attack the monster controlled by the opposing team');
+
+    state = step(state, 'p0', attack);
+    for (let index = 0; index < 20 && state.phase === 'response'; index += 1) {
+      const responder = state.players[state.priority].id;
+      state = step(state, responder, { kind: 'pass' });
+    }
+
+    assert.notEqual(state.phase, 'response', 'all empty response windows should resolve');
+    assert.equal(state.players[0].lp, 7000, 'the battle destroyer receives Atomic Firefly damage');
+    assert.equal(state.players[1].lp, 6100, 'the temporary controller receives battle damage');
+    assert.ok(state.players[0].grave.some(value => value.uid === firefly.uid), 'physical ownership of the Graveyard card is preserved');
+    assert.ok(!state.players[1].grave.some(value => value.uid === firefly.uid));
   });
 });
