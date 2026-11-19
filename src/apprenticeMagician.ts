@@ -29,6 +29,7 @@ export type ApprenticeRecruitContext = Readonly<{
   destroyedByBattle: boolean;
   effectNegated: boolean;
   teamMonsterZonesUsed: number;
+  sourceDeckOwnerSeat: ApprenticeSeat;
   sourceDeck: readonly ApprenticeRecruitCandidate[];
 }>;
 
@@ -111,15 +112,17 @@ function validRecruitContext(context: ApprenticeRecruitContext): boolean {
     Number.isInteger(context.teamMonsterZonesUsed) &&
     context.teamMonsterZonesUsed >= 0 &&
     context.teamMonsterZonesUsed <= 3 &&
+    validSeat(context.sourceDeckOwnerSeat) &&
     Array.isArray(context.sourceDeck);
 }
 
-function validRecruitCandidate(candidate: ApprenticeRecruitCandidate): boolean {
+function validRecruitCandidate(candidate: ApprenticeRecruitCandidate, sourceDeckOwnerSeat: ApprenticeSeat): boolean {
   return typeof candidate.uid === 'string' &&
     candidate.uid.length > 0 &&
     typeof candidate.cardId === 'string' &&
     candidate.cardId.length > 0 &&
     validSeat(candidate.ownerSeat) &&
+    candidate.ownerSeat === sourceDeckOwnerSeat &&
     candidate.zone === 'deck' &&
     Number.isInteger(candidate.level) &&
     candidate.level >= 1 &&
@@ -147,7 +150,7 @@ export function eligibleApprenticeRecruitTargets(
   const seen = new Set<string>();
   const result: string[] = [];
   for (const candidate of context.sourceDeck) {
-    if (!candidate || !validRecruitCandidate(candidate) || seen.has(candidate.uid)) continue;
+    if (!candidate || !validRecruitCandidate(candidate, context.sourceDeckOwnerSeat) || seen.has(candidate.uid)) continue;
     seen.add(candidate.uid);
     result.push(candidate.uid);
   }
@@ -172,7 +175,7 @@ export function prepareApprenticeRecruit(
   }
 
   const candidate = context.sourceDeck.find(item =>
-    item.uid === selectedUid && validRecruitCandidate(item)
+    item.uid === selectedUid && validRecruitCandidate(item, context.sourceDeckOwnerSeat)
   );
   if (!candidate || !eligibleApprenticeRecruitTargets(context).includes(selectedUid)) {
     return { ok: false, reason: 'target-not-eligible' };
