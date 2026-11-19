@@ -91,6 +91,7 @@ function collectReservations(state) {
         reservation.runId ?? '',
         reservation.mission ?? '',
         reservation.branch ?? '',
+        reservation.baseSha ?? '',
         reservation.files.slice().sort().join('|'),
       ].join('::');
       if (!seen.has(key)) {
