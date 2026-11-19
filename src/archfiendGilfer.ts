@@ -226,5 +226,5 @@ export function archfiendGilferAtkDelta(attachedGilferCount: number): number {
   if (!Number.isSafeInteger(attachedGilferCount) || attachedGilferCount < 0) {
     throw new TypeError('Invalid attached Archfiend of Gilfer count.');
   }
-  return -500 * attachedGilferCount;
+  return attachedGilferCount === 0 ? 0 : -500 * attachedGilferCount;
 }
