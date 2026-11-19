@@ -127,6 +127,7 @@ function validRecruitCandidate(candidate: ApprenticeRecruitCandidate, sourceDeck
     Number.isInteger(candidate.level) &&
     candidate.level >= 1 &&
     candidate.level <= 2 &&
+    typeof candidate.race === 'string' &&
     candidate.race.toLowerCase() === 'spellcaster' &&
     candidate.isToken === false &&
     candidate.isExtraDeck === false &&
