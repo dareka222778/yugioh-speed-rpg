@@ -208,7 +208,7 @@ function validateReservation(state, run, options = {}) {
     runId: run.runId,
     branch: run.branch,
     reservedFiles: run.reservedFiles.slice(),
-    protectedReservationsChecked: reservations.length,
+    protectedReservationsChecked: reservations.filter(item => item.runId !== run.runId).length,
     conflicts: 0,
   };
 }
