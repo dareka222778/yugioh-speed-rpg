@@ -1,0 +1,22 @@
+name: M377 focused typed Tribute and backrow regressions
+on:
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/typedTributeOperations.ts'
+      - 'tests/typedTributeOperations.test.cjs'
+      - '.github/workflows/m377-focused-tests.yml'
+jobs:
+  m377-focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node scripts/run-tests-isolated.cjs tests/typedTributeOperations.test.cjs
