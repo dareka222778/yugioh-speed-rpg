@@ -244,8 +244,9 @@ test('final release cannot include files outside this run even when the run is o
     endedAt: '2026-11-19T13:50:00-03:00',
     duration: { elapsedMinutes: 20, effectiveWorkMinutes: 10, targetEffectiveMinutes: 60, ciWaitExcluded: true },
     catalogAtEnd: { certified: 969, newCertifications: 0, automaticCertifications: 0, inventoryGranted: 0 },
+    reservationReleased: true,
     productionAtEnd: { mergePerformed: false, deployPerformed: false },
-    scopeReleasedToAuxiliary: [{ files: ['tests/another-agent.test.cjs'] }],
+    scopeReleasedToAuxiliary: [{ branch: run().branch, files: ['tests/another-agent.test.cjs'] }],
   });
   assert.throws(() => validateFinalCheckpoint(candidate), /third-party reservation/);
 });
