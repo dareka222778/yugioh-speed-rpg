@@ -35,7 +35,7 @@
         "engineValidation": {
           "run": 44480503169,
           "status": "in_progress",
-          "details": "npm run check, npm test e auditorias iniciais concluídos com sucesso; Extended Soak 600s e etapas posteriores ainda em execução."
+          "details": "Extended Soak 600s success; npm run check, npm test and early engine audits success; remaining acceptance/preview steps still running."
         }
       },
       "limit": "Parser ainda não integrado ao roteador por proteção M8 em src/index.ts/deckUI.ts; não certifica carta."
@@ -74,7 +74,7 @@
         "engineValidation": {
           "run": 44481056496,
           "status": "in_progress",
-          "details": "Extended Soak e testes integrais ainda em execução."
+          "details": "Card Batch Fast, Milestone 1000 and focused tests success; Engine Validation and Extended Soak still running."
         }
       },
       "limit": "Helper não integrado ao resolver de combate/registro de efeitos; Asura Priest permanece não certificada."
@@ -105,7 +105,7 @@
         },
         "cardBatchFast": {
           "run": 44481574437,
-          "status": "in_progress"
+          "status": "success"
         },
         "milestone1000": {
           "run": 44481574416,
@@ -113,16 +113,17 @@
         },
         "engineValidation": {
           "run": 44481574609,
-          "status": "in_progress"
+          "status": "in_progress",
+          "details": "Focused tests and Milestone 1000 success; Card Batch Fast now success; Engine Validation and Extended Soak still running."
         }
       },
       "limit": "Helpers ainda não integrados ao resolver/registro; Apprentice Magician permanece não certificada."
     }
   ],
   "startedAt": "2026-11-19T04:22:42-03:00",
-  "endedAt": "2026-11-19T04:42:00-03:00",
-  "elapsedMinutes": 19,
-  "effectiveWorkMinutes": 12,
+  "endedAt": "2026-11-19T04:45:33-03:00",
+  "elapsedMinutes": 23,
+  "effectiveWorkMinutes": 16,
   "base": {
     "branch": "feat/rea-engine-recovery-20261026",
     "sha": "41fa11375d60223fe1ca499b8971112272dc4c31"
@@ -191,6 +192,38 @@
         ".github/workflows/m386-apprentice-magician-focused.yml"
       ],
       "auxiliary": "Pode monitorar/corrigir somente estes três arquivos."
+    }
+  ],
+  "prs": [
+    {
+      "number": 331,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": false,
+      "ahead": 10,
+      "behind": 2,
+      "reason": "branch baseada no HEAD compartilhado 41fa; dois commits de coordenação foram publicados depois do checkpoint; sincronizar sem force antes de revisão"
+    },
+    {
+      "number": 332,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": false,
+      "ahead": 3,
+      "behind": 2,
+      "reason": "branch baseada no HEAD compartilhado 41fa; dois commits de coordenação foram publicados depois do checkpoint; sincronizar sem force antes de revisão"
+    },
+    {
+      "number": 333,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": false,
+      "ahead": 6,
+      "behind": 2,
+      "reason": "branch baseada no HEAD compartilhado 41fa; dois commits de coordenação foram publicados depois do checkpoint; sincronizar sem force antes de revisão"
     }
   ]
 }
