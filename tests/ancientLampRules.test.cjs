@@ -202,6 +202,14 @@ test('the attacker must belong to the opposing team', () => {
   );
 });
 
+test('redirect planning requires the attacker to remain on the shared field', () => {
+  const field = [lamp(), monster('target', 1, 1)];
+  assert.deepEqual(
+    planAncientLampAttackRedirect({ attack: attackSnapshot(), selectedTargetUid: 'target', field }),
+    { allowed: false, reason: 'attacker-not-present' },
+  );
+});
+
 test('the attacking monster cannot be selected as its own redirect target', () => {
   const field = [lamp(), monster('attacker', 1, 0), monster('target', 1, 1)];
   assert.deepEqual(
@@ -272,6 +280,18 @@ test('redirect resolution fails if the attack no longer targets Ancient Lamp', (
       plan: planned.plan, attack: attackSnapshot({ currentTargetUid: 'other' }), field,
     }),
     { redirected: false, reason: 'stale-attack' },
+  );
+});
+
+test('the same attack event cannot be redirected twice', () => {
+  const field = [lamp(), monster('attacker', 1, 0), monster('target', 1, 1)];
+  const planned = planAncientLampAttackRedirect({ attack: attackSnapshot(), selectedTargetUid: 'target', field });
+  assert.equal(planned.allowed, true);
+  const first = resolveAncientLampAttackRedirect({ plan: planned.plan, attack: attackSnapshot(), field });
+  assert.equal(first.redirected, true);
+  assert.deepEqual(
+    resolveAncientLampAttackRedirect({ plan: planned.plan, attack: attackSnapshot(), field, processedEventIds: first.processedEventIds }),
+    { redirected: false, reason: 'duplicate-event' },
   );
 });
 
