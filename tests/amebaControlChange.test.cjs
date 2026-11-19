@@ -4,11 +4,13 @@ const {
   AMEBA_CARD_ID,
   prepareAmebaControlChangeBurn,
   recordAmebaControlChangeEvent,
+  recordAmebaFaceUpSession,
   teamOfAmebaSeat,
 } = require('../dist/amebaControlChange');
 
 const event = (overrides = {}) => ({
   eventId: 'control-change-001',
+  faceUpSessionId: 'ameba-face-up-epoch-7',
   sourceUid: 'm2:ameba',
   cardId: AMEBA_CARD_ID,
   physicalOwnerSeat: 2,
@@ -22,18 +24,19 @@ test('maps physical seats 0/2 and 1/3 to their shared teams', () => {
   assert.deepEqual([0, 1, 2, 3].map(teamOfAmebaSeat), ['even', 'odd', 'even', 'odd']);
 });
 
-test('routes 2000 damage to the team receiving control', () => {
+test('routes 2000 damage to the team receiving control and records face-up epoch', () => {
   const result = prepareAmebaControlChangeBurn(event());
   assert.equal(result.eligible, true);
   assert.deepEqual(result.plan, {
     eventId: 'control-change-001',
+    faceUpSessionId: 'ameba-face-up-epoch-7',
     sourceUid: 'm2:ameba',
     physicalOwnerSeat: 2,
     fromTeam: 'even',
     recipientSeat: 1,
     recipientTeam: 'odd',
     damage: 2000,
-    oncePerTurnLimit: false,
+    oncePerFaceUpPeriod: true,
   });
 });
 
@@ -94,15 +97,26 @@ test('does not treat a partner-to-partner seat handoff as a team control change'
   })), { eligible: false, reason: 'control-remained-within-team' });
 });
 
-test('allows a later, distinct control-change event to trigger again', () => {
+test('only one qualifying control change can resolve during one face-up period', () => {
   const first = prepareAmebaControlChangeBurn(event({ eventId: 'event-a' }));
+  assert.equal(first.eligible, true);
   const second = prepareAmebaControlChangeBurn(event({
     eventId: 'event-b',
     previousControllerSeat: 1,
     newControllerSeat: 2,
-  }));
-  assert.equal(first.eligible, true);
-  assert.equal(second.eligible, true);
+  }), ['event-a'], ['ameba-face-up-epoch-7']);
+  assert.deepEqual(second, { eligible: false, reason: 'already-used-this-face-up-period' });
+});
+
+test('turning face-down and face-up again creates a fresh once-while-face-up period', () => {
+  const nextPeriod = prepareAmebaControlChangeBurn(event({
+    eventId: 'event-c',
+    faceUpSessionId: 'ameba-face-up-epoch-8',
+    previousControllerSeat: 1,
+    newControllerSeat: 2,
+  }), ['event-a'], ['ameba-face-up-epoch-7']);
+  assert.equal(nextPeriod.eligible, true);
+  assert.equal(nextPeriod.plan.faceUpSessionId, 'ameba-face-up-epoch-8');
 });
 
 test('prevents replay of an already processed event ID', () => {
@@ -111,7 +125,7 @@ test('prevents replay of an already processed event ID', () => {
   });
 });
 
-test('records a receipt immutably and idempotently', () => {
+test('records event receipts immutably and idempotently', () => {
   const original = ['event-0'];
   const next = recordAmebaControlChangeEvent(original, 'event-1');
   assert.deepEqual(original, ['event-0']);
@@ -119,24 +133,37 @@ test('records a receipt immutably and idempotently', () => {
   assert.deepEqual(recordAmebaControlChangeEvent(next, 'event-1'), next);
 });
 
-test('rejects a corrupted persisted ledger with duplicate IDs', () => {
-  assert.throws(() => recordAmebaControlChangeEvent(['x', 'x'], 'y'), /Duplicate event/);
+test('records once-per-face-up receipts independently', () => {
+  const original = ['epoch-0'];
+  const next = recordAmebaFaceUpSession(original, 'epoch-1');
+  assert.deepEqual(original, ['epoch-0']);
+  assert.deepEqual(next, ['epoch-0', 'epoch-1']);
+  assert.deepEqual(recordAmebaFaceUpSession(next, 'epoch-1'), next);
 });
 
-test('does not mutate the event or processed-event ledger', () => {
+test('rejects corrupted persisted ledgers with duplicate IDs', () => {
+  assert.throws(() => recordAmebaControlChangeEvent(['x', 'x'], 'y'), /Duplicate entry/);
+  assert.throws(() => recordAmebaFaceUpSession(['x', 'x'], 'y'), /Duplicate entry/);
+});
+
+test('does not mutate the event or either replay ledger', () => {
   const e = event();
-  const ledger = ['prior-event'];
-  const before = structuredClone({ e, ledger });
-  prepareAmebaControlChangeBurn(e, ledger);
-  assert.deepEqual({ e, ledger }, before);
+  const events = ['prior-event'];
+  const sessions = ['prior-session'];
+  const before = structuredClone({ e, events, sessions });
+  prepareAmebaControlChangeBurn(e, events, sessions);
+  assert.deepEqual({ e, events, sessions }, before);
 });
 
 test('rejects malformed seat and missing event identifiers', () => {
   assert.throws(() => prepareAmebaControlChangeBurn(event({ newControllerSeat: 4 })), /new controller/);
   assert.throws(() => prepareAmebaControlChangeBurn(event({ eventId: '' })), /event ID/);
+  assert.throws(() => prepareAmebaControlChangeBurn(event({ faceUpSessionId: '' })), /face-up session ID/);
 });
 
-test('caps the replay ledger to a bounded size', () => {
-  const ledger = Array.from({ length: 4096 }, (_, index) => `event-${index}`);
-  assert.throws(() => recordAmebaControlChangeEvent(ledger, 'event-overflow'), /ledger limit/);
+test('caps both persisted ledgers to a bounded size', () => {
+  const events = Array.from({ length: 4096 }, (_, index) => `event-${index}`);
+  const sessions = Array.from({ length: 4096 }, (_, index) => `session-${index}`);
+  assert.throws(() => recordAmebaControlChangeEvent(events, 'event-overflow'), /ledger limit/);
+  assert.throws(() => recordAmebaFaceUpSession(sessions, 'session-overflow'), /ledger limit/);
 });
