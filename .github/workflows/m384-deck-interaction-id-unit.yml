@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/deckInteractionId.ts'
       - 'tests/deckInteractionIdUnit.test.cjs'
+      - 'tests/deckInteractionIdPayload.test.cjs'
       - '.github/workflows/m384-deck-interaction-id-unit.yml'
 jobs:
   deck-interaction-id-unit:
@@ -19,4 +20,4 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - run: node --test tests/deckInteractionIdUnit.test.cjs
+      - run: node --test tests/deckInteractionIdUnit.test.cjs tests/deckInteractionIdPayload.test.cjs
