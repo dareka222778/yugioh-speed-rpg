@@ -42,7 +42,7 @@
     "primitive": "src/archlordZerato.ts",
     "tests": "tests/archlordZerato.test.cjs",
     "focusedWorkflow": ".github/workflows/m390-archlord-zerato-focused.yml",
-    "testCases": 26,
+    "testCases": 33,
     "runtimeIntegration": "pending explicit M61 handoff; no effect-registry or duel-router edit",
     "behavioralTestStatus": "pending-CI",
     "engineReviewStatus": "pending",
