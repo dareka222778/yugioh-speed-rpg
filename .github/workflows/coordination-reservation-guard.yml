@@ -25,11 +25,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Run guard unit tests
         run: node --test tests/coordinationReservationGuard.test.cjs
+      - name: Verify PR contains the current shared branch HEAD
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+        run: |
+          git fetch origin "$BASE_BRANCH"
+          base_head="$(git rev-parse FETCH_HEAD)"
+          pr_head="$(git rev-parse HEAD^2)"
+          if ! git merge-base --is-ancestor "$base_head" "$pr_head"; then
+            echo "PR branch is behind the current shared branch; synchronize without force."
+            exit 1
+          fi
       - name: Validate the latest registered checkpoint
         shell: bash
         run: |
