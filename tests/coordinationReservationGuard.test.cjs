@@ -80,6 +80,24 @@ test('rejects a reused run ID assigned to another branch', () => {
   );
 });
 
+
+test('rejects conflicting duplicate registrations with a different base SHA', () => {
+  const candidate = run();
+  const own = {
+    runId: candidate.runId,
+    mission: candidate.mission,
+    branch: candidate.branch,
+    baseSha: candidate.sharedHeadAtStart,
+    state: 'reserved',
+    scope: candidate.reservedFiles,
+  };
+  const conflicting = { ...own, baseSha: 'd'.repeat(40) };
+  assert.throws(() => validateReservation({
+    sharedBranch,
+    workBranches: [own, conflicting],
+  }, candidate), /base SHA/);
+});
+
 test('rejects overlap with an active reservation', () => {
   const candidate = run({ reservedFiles: ['tests/shared.test.cjs'] });
   assert.throws(
