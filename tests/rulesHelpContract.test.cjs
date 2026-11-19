@@ -7,6 +7,7 @@ const {validateDiscordPayload}=require('../dist/discordPayload');
 const pageText=page=>JSON.stringify(page);
 const rulesText=pageText(helpPages.rules);
 const teamsText=pageText(helpPages.teams);
+const cardsText=pageText(helpPages.cards);
 
 test('current owner profile fixes the exact classic format boundaries',()=>{
   assert.deepEqual({
@@ -51,7 +52,7 @@ test('Main Deck and Extra Deck help text agree with the owner profile',()=>{
   assert.equal(RULES_PROFILE.extraDeckMax,5);
   assert.match(rulesText,/Principal de 20–30 cartas/);
   assert.match(rulesText,/Adicional de até cinco/);
-  assert.match(rulesText,/Máximo de 3 cópias/);
+  assert.match(cardsText,/Limite de três cópias por carta/);
 });
 
 test('the 2v2 guide separates shared team state from physical private zones',()=>{
