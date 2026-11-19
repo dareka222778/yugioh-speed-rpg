@@ -1,6 +1,8 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const {
+  AQUA_SPIRIT_CARD_ID,
+  aquaSpiritSummonSource,
   payWaterGraveBanish,
   waterGraveBanishCandidates,
 } = require('../dist/waterGraveCost.js');
@@ -161,4 +163,35 @@ test('the banished zone is checked for duplicate UIDs before any movement', () =
   assert.throws(() => payWaterGraveBanish(grave, banished, 0, 'm0:water', lookup), /duplicate physical UID/);
   assert.deepEqual(grave, before);
   assert.equal(grave[0], before[0]);
+});
+
+
+test('Aqua Spirit must come from the active physical player hand supplied to the summon helper', () => {
+  const source = ref('m0:aqua', AQUA_SPIRIT_CARD_ID);
+  assert.equal(aquaSpiritSummonSource([source], source.uid, 0), source);
+});
+
+test('a card present only in the inactive partner hand is not visible to the active-hand helper', () => {
+  const partnerHand = [ref('m2:aqua', AQUA_SPIRIT_CARD_ID)];
+  assert.equal(aquaSpiritSummonSource([], partnerHand[0].uid, 0), null);
+});
+
+test('a forged UID or a different card identity cannot be used as Aqua Spirit', () => {
+  assert.equal(aquaSpiritSummonSource([ref('m0:other', ids.water)], 'm0:other', 0), null);
+  assert.equal(aquaSpiritSummonSource([ref('m0:aqua', AQUA_SPIRIT_CARD_ID)], 'm9:forged', 0), null);
+});
+
+test('Aqua Spirit cannot begin its summon procedure when all three shared Monster Zones are occupied', () => {
+  const source = ref('m0:aqua', AQUA_SPIRIT_CARD_ID);
+  assert.equal(aquaSpiritSummonSource([source], source.uid, 3), null);
+});
+
+test('duplicate physical UIDs in the active physical hand are rejected', () => {
+  assert.throws(
+    () => aquaSpiritSummonSource([
+      ref('m0:aqua', AQUA_SPIRIT_CARD_ID),
+      ref('m0:aqua', AQUA_SPIRIT_CARD_ID),
+    ], 'm0:aqua', 0),
+    /duplicate physical UID/,
+  );
 });
