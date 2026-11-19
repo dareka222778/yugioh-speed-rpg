@@ -113,14 +113,22 @@ test('a second face-up Tiger is rejected across the shared team field', () => {
   assert.deepEqual(result.duplicateFaceUpTigerUids, ['m2:second']);
 });
 
-test('Tiger may attack-lock an opposing Amazoness target without returning hidden identity', () => {
+test('Tiger blocks attacks to a face-up opposing Amazoness without returning identity', () => {
+  const field = board(
+    tiger(),
+    monster({ uid: 'm2:amazoness', physicalOwnerSeat: 2, controllerSeat: 2, faceUp: true, archetypes: ['Amazoness'] }),
+  );
+  const result = amazonessTigerAttackAllowed(1, 'm2:amazoness', field);
+  assert.deepEqual(result, { allowed: false });
+  assert.deepEqual(Object.keys(result), ['allowed']);
+});
+
+test('a face-down monster remains targetable without leaking its hidden archetype', () => {
   const field = board(
     tiger(),
     monster({ uid: 'm2:hidden-amazoness', physicalOwnerSeat: 2, controllerSeat: 2, faceUp: false, archetypes: ['Amazoness'] }),
   );
-  const result = amazonessTigerAttackAllowed(1, 'm2:hidden-amazoness', field);
-  assert.deepEqual(result, { allowed: false });
-  assert.deepEqual(Object.keys(result), ['allowed']);
+  assert.deepEqual(amazonessTigerAttackAllowed(1, 'm2:hidden-amazoness', field), { allowed: true });
 });
 
 test('the Tiger itself remains an attackable exception', () => {
