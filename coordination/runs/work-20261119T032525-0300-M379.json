@@ -1,0 +1,141 @@
+{
+  "runId": "work-20261119T032525-0300-M379",
+  "owner": "Work",
+  "mission": "M379",
+  "priority": "P1 — proteger o contrato do formato clássico no construtor de Deck: Main 20–30, Extra até 5, sem consumo de coleção e sem tocar nas reservas ativas.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-19T03:25:25-03:00",
+  "endedAt": "2026-11-19T03:37:21.987-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "074a7af9e5f87d5442c9c006c06c77f82408206f",
+  "sharedHeadBeforeCheckpointCommit": "074a7af9e5f87d5442c9c006c06c77f82408206f",
+  "workBranches": [
+    {
+      "mission": "M379",
+      "branch": "feat/work-m379-extra-deck-boundaries-20261119",
+      "head": "35ab073970117ed06281f8c9c77b926b7a449c49",
+      "pr": 327,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/327",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "074a7af9e5f87d5442c9c006c06c77f82408206f",
+      "scope": [
+        "tests/deckFormatBoundaries.test.cjs"
+      ],
+      "cards": [],
+      "testCases": 3,
+      "newCertifications": 0,
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "cardBatchFastRunId": 44472872603,
+        "engineValidation": "in_progress",
+        "engineValidationRunId": 44472872648,
+        "milestone1000": "success",
+        "milestoneRunId": 44472872596
+      },
+      "runtimeChanges": [],
+      "integration": "teste de regressão do validador existente; nenhum runtime alterado"
+    }
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint M372–M373; preservado o run ativo work-20261115T142521-0300 e suas nove reservas.",
+    "HEAD compartilhado verificado em 074a7af9e5f87d5442c9c006c06c77f82408206f; o commit posterior ao checkpoint M372–M373 altera apenas coordination/state.json.",
+    "PRs abertas verificadas: #312, #317–#326; #322–#326 correspondem às missões M374–M378. Nenhum arquivo reservado dessas frentes foi alterado.",
+    "M61 continua sem resposta no PR #17, comentário 6997627344; src/monsterEffects.ts e src/duelEngineCurrent.ts permaneceram somente leitura.",
+    "M379: novo teste com três cenários para Main Deck 20 + Extra Deck 5, rejeição atômica da sexta Fusão e contagem independente de Main/Extra; SQLite temporário, sem dados persistentes.",
+    "PR #327 publicada em draft; Card Batch Fast e Engine Validation em execução; Milestone 1000 aprovado.",
+    "Main não contém .github/workflows; branch compartilhada contém quatro workflows de CI. Endpoint de deployments não está exposto pelo conector."
+  ],
+  "concurrentWork": {
+    "activeWorkRunId": "work-20261115T142521-0300",
+    "preservedReservedFiles": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "handoffM61": {
+      "pr": 17,
+      "commentId": 6997627344,
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "status": "awaiting-explicit-release",
+      "noResponse": true
+    },
+    "otherOpenPrs": [
+      312,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      326
+    ]
+  },
+  "catalogAtStart": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "productionAtEnd": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtStart": "074a7af9e5f87d5442c9c006c06c77f82408206f",
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "mainWorkflows": [],
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false,
+    "note": "Deployments API não exposta; nenhum deploy ou teste Discord ao vivo confirmado."
+  },
+  "scopeReleasedToAuxiliary": [
+    {
+      "branch": "feat/work-m379-extra-deck-boundaries-20261119",
+      "pr": 327,
+      "files": [
+        "tests/deckFormatBoundaries.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir exclusivamente tests/deckFormatBoundaries.test.cjs. Não editar runtime, catálogo, certificados, inventários, banco persistente, dados de jogadores, regras do duelo ou produção."
+    }
+  ],
+  "duration": {
+    "elapsedMinutes": 11.9,
+    "effectiveWorkMinutes": 6.5,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Auxiliar: monitorar #327 e corrigir exclusivamente tests/deckFormatBoundaries.test.cjs. Work: verificar os workflows de M379 e corrigir apenas o teste próprio se necessário. Preservar as nove reservas ativas. Retomar integração de cartas somente após handoff explícito M61; não certificar por importação.",
+  "nextWindow": "2026-11-19T08:30:00-03:00"
+}
