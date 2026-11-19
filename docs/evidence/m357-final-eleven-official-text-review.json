@@ -1,0 +1,370 @@
+{
+  "format": 1,
+  "mission": "M357",
+  "reviewedAt": "2026-11-18",
+  "authority": "Konami official Yu-Gi-Oh! TCG Card Database",
+  "worklist": {
+    "workflowRunId": 44288029483,
+    "artifactId": 14419288363,
+    "target": 1000,
+    "certified": 969,
+    "remainingToGoal": 31,
+    "identityBlocked": 27,
+    "automaticCertifications": 0
+  },
+  "purpose": "Source verification and implementation triage for worklist entries 21–31, completing the factual review of all 31 candidates in the current milestone artifact. This is not runtime support or certification.",
+  "sourcePolicy": {
+    "cardText": "Effect descriptions are concise paraphrases of the official card text.",
+    "historicalCutoff": "Historical eligibility remains pending an OCG/TCG first-publication audit against 2004-09-30; a TCG reprint date must not be used to infer original eligibility.",
+    "certification": "No card is certified by source review or import. Behavioral certification requires implemented engine behavior and passing real-engine tests."
+  },
+  "reusableFamilies": [
+    {
+      "family": "armed-dragon-level-chain",
+      "cards": [
+        "00980973",
+        "46384672",
+        "73879377"
+      ],
+      "sharedWork": "Standby/End Phase timing, self-send, hand/Deck Special Summon, typed discard and ATK-threshold destruction."
+    },
+    {
+      "family": "typed-tribute-and-field-gated-removal",
+      "cards": [
+        "55001420",
+        "18378582"
+      ],
+      "sharedWork": "Plant/Warrior tribute identity, shared Field Zone conditions, team-wide opponent targeting."
+    },
+    {
+      "family": "graveyard-trigger-equip",
+      "cards": [
+        "50287060"
+      ],
+      "sharedWork": "On-sent-to-GY trigger, face-up monster target, equip lifetime and ATK modifier."
+    },
+    {
+      "family": "spell-counter-upkeep-and-type-conditions",
+      "cards": [
+        "07180418",
+        "42364374"
+      ],
+      "sharedWork": "Shared field counters, standby upkeep, continuous ATK/DEF recalculation."
+    },
+    {
+      "family": "spirit-multi-attack-and-return",
+      "cards": [
+        "02134346"
+      ],
+      "sharedWork": "Attack-all-monsters permission, no Special Summon, End Phase return."
+    },
+    {
+      "family": "battle-damage-and-destruction-triggers",
+      "cards": [
+        "88236094",
+        "87340664"
+      ],
+      "sharedWork": "Damage-event recipient, battle-destruction actor, Trap recovery to Deck top and fixed burn."
+    }
+  ],
+  "cards": [
+    {
+      "canonicalId": "b836a9f8-230b-4589-9c2f-098081efcf1d",
+      "id": "55001420",
+      "konamiId": 5971,
+      "name": "Arcane Archer of the Forest",
+      "category": "effect-monster",
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 900,
+      "def": 1400,
+      "race": "Warrior",
+      "mechanicFamily": "plant-protection-and-typed-tribute-backrow-destruction",
+      "effectSummary": "While its controller has a Plant monster on the field, it cannot be attacked; it can Tribute one Plant monster to destroy one Spell or Trap on the field.",
+      "twoVTwoReviewQuestions": [
+        "The protection condition counts Plant monsters across the team's shared Monster Zones.",
+        "The Tribute must be a Plant monster on the shared field; physical ownership must be preserved if the partner's monster is used as cost.",
+        "The target may be any Spell/Trap on the field, including the opponent's shared backrow.",
+        "Removing the last Plant must immediately restore attack legality."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5971&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "b27233aa-4c52-40e6-a8cc-16fa6bbcb2c9",
+      "id": "50287060",
+      "konamiId": 5091,
+      "name": "Archfiend of Gilfer",
+      "category": "effect-monster",
+      "attribute": "DARK",
+      "level": 6,
+      "atk": 2200,
+      "def": 2500,
+      "race": "Fiend",
+      "mechanicFamily": "graveyard-trigger-equip-and-attack-reduction",
+      "effectSummary": "When sent to the GY, it may target a face-up monster on the field, equip itself to that monster, and reduce that monster's ATK by 500 while equipped.",
+      "twoVTwoReviewQuestions": [
+        "The trigger is being sent to the GY, not only battle destruction.",
+        "The target can be any face-up monster on either team's shared field.",
+        "The equip relationship must preserve Archfiend of Gilfer's physical owner and the equipped monster's controller.",
+        "The -500 ATK modifier must end when the equip card leaves its equipped state."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5091&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "07f944d2-e466-4e67-aa93-6bf5e8f5f4b0",
+      "id": "18378582",
+      "konamiId": 5976,
+      "name": "Archlord Zerato",
+      "category": "effect-monster",
+      "attribute": "LIGHT",
+      "level": 8,
+      "atk": 2800,
+      "def": 2300,
+      "race": "Fairy",
+      "mechanicFamily": "field-gated-tribute-summon-and-light-discard-wipe",
+      "effectSummary": "It cannot be Normal Summoned/Set and requires Tributing a face-up Warrior of Zera while The Sanctuary in the Sky is on the field; while that Field Spell remains on its controller's side, discarding a LIGHT monster destroys all opposing monsters.",
+      "twoVTwoReviewQuestions": [
+        "The Special Summon requires both the exact face-up Warrior of Zera Tribute and the shared Field Zone condition.",
+        "The destruction effect is inactive unless The Sanctuary in the Sky is on the controller's side of the shared field.",
+        "Discard exactly one LIGHT monster from the activating physical player's hand, not the partner's private hand.",
+        "Destroy all monsters on the opposing team's shared field and respect the three Monster Zone cap after resolution."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5976&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "a2ff6977-77f6-4393-b278-1c56691cafc9",
+      "id": "00980973",
+      "konamiId": 6105,
+      "name": "Armed Dragon LV3",
+      "category": "effect-monster",
+      "attribute": "WIND",
+      "level": 3,
+      "atk": 1200,
+      "def": 900,
+      "race": "Dragon",
+      "mechanicFamily": "armed-dragon-standby-level-up-chain",
+      "effectSummary": "During its controller's Standby Phase, it may send itself to the GY to Special Summon Armed Dragon LV5 from hand or Deck.",
+      "twoVTwoReviewQuestions": [
+        "Offer the effect in the correct controller's Standby Phase only.",
+        "Sending LV3 to the GY is the activation cost and must happen exactly once.",
+        "Special Summon LV5 from the physical controller's hand or Deck, not the inactive partner's private zones.",
+        "Preserve the chain's physical ownership across subsequent team-seat rotations."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6105&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "05ce212e-7534-47af-9aa0-e6471d70f756",
+      "id": "46384672",
+      "konamiId": 6106,
+      "name": "Armed Dragon LV5",
+      "category": "effect-monster",
+      "attribute": "WIND",
+      "level": 5,
+      "atk": 2400,
+      "def": 1700,
+      "race": "Dragon",
+      "mechanicFamily": "typed-discard-atk-threshold-destruction-and-level-up",
+      "effectSummary": "It may discard a monster, then destroy one opposing monster whose ATK does not exceed the discarded monster's ATK; during the End Phase, if it destroyed a monster by battle that turn, it may send itself to the GY to summon Armed Dragon LV7 from hand or Deck.",
+      "twoVTwoReviewQuestions": [
+        "The discarded monster must come from the activating physical player's hand and its ATK determines the legal target threshold.",
+        "Target only an opposing monster; include either opposing physical seat's shared Monster Zone.",
+        "The End Phase level-up requires a battle destruction by this card during the current turn, not an effect destruction.",
+        "The LV7 summon uses the physical controller's hand or Deck and preserves card ownership."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6106&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "f81de953-21b6-4c68-bfea-aa9e475cd241",
+      "id": "73879377",
+      "konamiId": 6107,
+      "name": "Armed Dragon LV7",
+      "category": "effect-monster",
+      "attribute": "WIND",
+      "level": 7,
+      "atk": 2800,
+      "def": 1000,
+      "race": "Dragon",
+      "mechanicFamily": "level-up-only-and-mass-atk-threshold-destruction",
+      "effectSummary": "It cannot be Normal Summoned/Set and must be Special Summoned by Armed Dragon LV5; it may discard a monster to destroy every opposing monster whose ATK does not exceed that discarded monster's ATK.",
+      "twoVTwoReviewQuestions": [
+        "Enforce the LV5-only Special Summon procedure; ordinary Special Summons and Graveyard revival are not legal.",
+        "Discard one monster from the activating physical player's hand and use its ATK as the threshold.",
+        "Apply the threshold to all monsters across the opposing team's shared field, including both physical seats.",
+        "Do not destroy monsters above the threshold and preserve all remaining physical UIDs."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6107&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "e094a04e-f35e-4bda-bf07-69d662562568",
+      "id": "07180418",
+      "konamiId": 5659,
+      "name": "Armor Exe",
+      "category": "effect-monster",
+      "attribute": "LIGHT",
+      "level": 4,
+      "atk": 2400,
+      "def": 1400,
+      "race": "Rock",
+      "mechanicFamily": "summon-turn-attack-lock-and-standby-counter-upkeep",
+      "effectSummary": "It cannot attack during the turn it is Normal, Flip, or Special Summoned; during each player's Standby Phase, its controller must remove one Spell Counter from their side of the field or destroy Armor Exe.",
+      "twoVTwoReviewQuestions": [
+        "The attack lock applies for the summon turn regardless of which physical teammate becomes active later.",
+        "The upkeep occurs during both teams' Standby Phases while the monster remains face-up.",
+        "The Spell Counter must be removed from a legal card on its controller's team field; do not consume the partner's private resource.",
+        "If no Spell Counter is available, destroy Armor Exe before proceeding."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5659&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "8fd12642-3658-48f9-a7e1-6e65afe084aa",
+      "id": "42364374",
+      "konamiId": 5033,
+      "name": "Arsenal Bug",
+      "category": "effect-monster",
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 2000,
+      "def": 2000,
+      "race": "Insect",
+      "mechanicFamily": "continuous-same-type-stat-condition",
+      "effectSummary": "If its controller has no other Insect monsters on the field, its ATK and DEF become 1000 instead of their printed values.",
+      "twoVTwoReviewQuestions": [
+        "Count other Insect monsters across the team's shared Monster Zones.",
+        "Arsenal Bug itself does not satisfy the 'other Insect' condition.",
+        "Recalculate immediately when another Insect enters or leaves the field.",
+        "Restore printed 2000/2000 when the condition becomes false; do not persist a temporary modifier."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5033&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "a8f3dffe-cc89-4677-a039-a306366cfc2b",
+      "id": "02134346",
+      "konamiId": 5381,
+      "name": "Asura Priest",
+      "category": "effect-monster",
+      "attribute": "LIGHT",
+      "level": 4,
+      "atk": 1700,
+      "def": 1200,
+      "race": "Fairy",
+      "subtype": "Spirit",
+      "mechanicFamily": "spirit-end-phase-return-and-multi-monster-attacks",
+      "effectSummary": "It cannot be Special Summoned; at the End Phase of the turn it is Normal Summoned or flipped face-up, it returns to the hand; it may attack each opposing monster once.",
+      "twoVTwoReviewQuestions": [
+        "Reject all Special Summon attempts for this Spirit monster.",
+        "The return trigger is tied to the End Phase of the turn it was Normal Summoned or flipped face-up.",
+        "Its multi-attack allowance covers monsters on both opposing physical seats, each at most once.",
+        "Verify direct-attack legality separately from the text's attack-all-monsters permission; do not infer an extra restriction."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5381&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "a2372de9-eeb3-4ecd-b53b-6cc7cbd9c462",
+      "id": "88236094",
+      "konamiId": 6026,
+      "name": "Aswan Apparition",
+      "category": "effect-monster",
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 500,
+      "def": 500,
+      "race": "Fiend",
+      "mechanicFamily": "battle-damage-trap-recovery-to-deck-top",
+      "effectSummary": "If it inflicts battle damage, its controller may return one Trap from the Graveyard to the top of their Deck.",
+      "twoVTwoReviewQuestions": [
+        "Trigger only when battle damage is actually inflicted; zero damage does not resolve the recovery.",
+        "Select a Trap from the team's shared Graveyard while preserving its physical owner metadata.",
+        "Place it on top of the activating physical player's Deck, not the partner's Deck.",
+        "Resolve the recovery after battle damage and before the next draw."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6026&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "canonicalId": "0763d2ab-fbd4-4129-8133-1724fdba1f4d",
+      "id": "87340664",
+      "konamiId": 5966,
+      "name": "Atomic Firefly",
+      "category": "effect-monster",
+      "attribute": "LIGHT",
+      "level": 1,
+      "atk": 100,
+      "def": 200,
+      "race": "Insect",
+      "mechanicFamily": "battle-destruction-damage-to-destroying-player",
+      "effectSummary": "If this face-up monster attacks or is attacked and is destroyed by battle, the player who destroyed it takes 1000 damage.",
+      "twoVTwoReviewQuestions": [
+        "The source must be face-up when the battle event begins and be destroyed by battle.",
+        "The damage recipient is the player/team that destroyed Atomic Firefly, not automatically the team that controlled it.",
+        "Apply the 1000 damage once, regardless of which physical seat controlled the attacker.",
+        "Do not trigger on effect destruction, face-down destruction, or when Atomic Firefly survives."
+      ],
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5966&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "not-run",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ]
+}
