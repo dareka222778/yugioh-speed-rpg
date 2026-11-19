@@ -1,0 +1,216 @@
+{
+  "runId": "work-20261119T045643-0300-M387-M388",
+  "owner": "Work",
+  "mission": "M387–M388",
+  "priority": "P1 — preparar duas famílias históricas ainda não certificadas (A-Team: Trap Disposal Unit e Ameba) em primitives isoladas com testes comportamentais 2v2, sem tocar nas reservas de runtime.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-19T04:56:43-03:00",
+  "endedAt": "2026-11-19T08:19:32.429Z",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "924f692bd7c41a8a35a2ba3f5763d1d7bed6c4f4",
+  "sharedHeadBeforeCheckpointCommit": "924f692bd7c41a8a35a2ba3f5763d1d7bed6c4f4",
+  "workBranches": [
+    {
+      "mission": "M387",
+      "runId": "work-20261119T045643-0300-M387",
+      "branch": "feat/work-m387-a-team-trap-disposal-negation-20261119",
+      "head": "eb0497f8dcf51f04050a600337d9c5d7961fba1f",
+      "pr": 334,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/334",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "924f692bd7c41a8a35a2ba3f5763d1d7bed6c4f4",
+      "files": [
+        "src/aTeamTrapDisposal.ts",
+        "tests/aTeamTrapDisposal.test.cjs",
+        ".github/workflows/m387-a-team-trap-disposal-focused.yml"
+      ],
+      "testCases": 21,
+      "newCertifications": 0,
+      "ci": {
+        "focused": "success",
+        "focusedRun": 44484830870,
+        "cardBatchFast": "success",
+        "cardBatchFastRun": 44484830750,
+        "milestone1000": "success",
+        "milestoneRun": 44484830730,
+        "engineValidation": "in_progress",
+        "engineRun": 44484830864,
+        "extendedSoak600s": "in_progress"
+      },
+      "notes": "Primeiro build falhou em TS18046 na guarda de seat unknown; corrigido com typeof value === 'number'. HEAD final passou build e 21 testes focados. Card Batch Fast e Milestone 1000 aprovados; Engine Validation/soaks ainda em execução."
+    },
+    {
+      "mission": "M388",
+      "runId": "work-20261119T050700-0300-M388",
+      "branch": "feat/work-m388-ameba-control-change-team-burn-20261119",
+      "head": "29790c0e48c1d979620a1ca954e3b1992ba652b8",
+      "pr": 335,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/335",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "924f692bd7c41a8a35a2ba3f5763d1d7bed6c4f4",
+      "files": [
+        "src/amebaControlChange.ts",
+        "tests/amebaControlChange.test.cjs",
+        ".github/workflows/m388-ameba-control-change-focused.yml"
+      ],
+      "testCases": 18,
+      "newCertifications": 0,
+      "ci": {
+        "focused": "success",
+        "focusedRun": 44485377227,
+        "cardBatchFast": "success",
+        "cardBatchFastRun": 44485377185,
+        "milestone1000": "success",
+        "milestoneRun": 44485377223,
+        "engineValidation": "in_progress",
+        "engineRun": 44485377328,
+        "extendedSoak600s": "in_progress"
+      },
+      "notes": "Texto oficial CID 4490 conferido; implementada regra uma vez por período face-up, com nova época após virar face-down e face-up. Build e 18 testes focados passaram; Card Batch Fast e Milestone 1000 aprovados; Engine Validation/soaks ainda em execução."
+    }
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint M384–M386; preservados run ativo work-20261115T142521-0300, nove reservas e currentIndependentWork M383.",
+    "Verificados shared HEAD 924f692, main HEAD f78f308, branches M387/M388, PRs #334/#335 e workflows reais.",
+    "M387: primitive A-Team para resposta a Trap adversária pendente, tribute próprio, negação/destruição atômica, Spell Speed 2, zonas 3+3, ownership físico e revalidação de activationId/UID; 21 testes.",
+    "M387: falha TS18046 detectada na primeira CI, corrigida e revalidada; focused, Card Batch Fast e Milestone 1000 passaram.",
+    "M388: primitive Ameba para 2000 de dano à equipe que recebe o controle; separação owner/controller, idempotência e cláusula oficial uma vez por período face-up; 18 testes.",
+    "M388: texto oficial Konami CID 4490 conferido; focused, Card Batch Fast e Milestone 1000 passaram.",
+    "M384–M386: Engine Validation e Extended Soak 600s aprovados nas PRs #331–#333; branches seguem abertas em draft, baseadas no SHA 41fa.",
+    "Solicitado handoff cooperativo M61 no PR #17, comentário 7003511609, restrito a monsterEffects.ts e duelEngineCurrent.ts."
+  ],
+  "concurrentWork": {
+    "activeWorkRunId": "work-20261115T142521-0300",
+    "preservedReservedFiles": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "preservedCurrentIndependentWork": {
+      "runId": "work-20261119T041256-0300-M383",
+      "owner": "Work",
+      "mission": "M383",
+      "priority": "P1 — habilitar modificadores temporários de ATK/DEF como opção tipada e validada do StandbyFlow, preparando Amazoness Blowpiper sem tocar no roteador nem nos arquivos M8 protegidos.",
+      "state": "reserved",
+      "startedAt": "2026-11-19T04:12:56-03:00",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "2a37ff19c2a2306484e718006487a1ffc356ca5b",
+      "reservedFiles": [
+        "src/standbyFlow.ts",
+        "src/continuousEffects.ts",
+        "src/amazonessBlowpiper.ts",
+        "tests/amazonessBlowpiper.test.cjs",
+        ".github/workflows/m383-focused-tests.yml"
+      ],
+      "conflictCheck": "Nenhuma PR aberta #312/#317–#329 altera estes arquivos; eles não constam no baseline preservado M8 nem nas nove reservas ativas.",
+      "handoff": "Integração final em monsterEffects/duelEngineCurrent continua dependente do handoff M61; este bloco entrega primitive de Standby reutilizável e testes de motor isolados."
+    },
+    "handoffM61": {
+      "pr": 17,
+      "commentId": 7003511609,
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "status": "awaiting-explicit-release",
+      "noResponse": true
+    },
+    "thirdPartyReservationsReleased": [],
+    "auxiliaryScopeReleased": [
+      {
+        "branch": "feat/work-m387-a-team-trap-disposal-negation-20261119",
+        "pr": 334,
+        "files": [
+          "src/aTeamTrapDisposal.ts",
+          "tests/aTeamTrapDisposal.test.cjs",
+          ".github/workflows/m387-a-team-trap-disposal-focused.yml"
+        ],
+        "allowed": "Monitorar CI e corrigir exclusivamente os três arquivos novos M387; não alterar monsterEffects.ts, duelEngineCurrent.ts, catálogo, certificados, inventários, banco, dados de jogadores, main ou produção."
+      },
+      {
+        "branch": "feat/work-m388-ameba-control-change-team-burn-20261119",
+        "pr": 335,
+        "files": [
+          "src/amebaControlChange.ts",
+          "tests/amebaControlChange.test.cjs",
+          ".github/workflows/m388-ameba-control-change-focused.yml"
+        ],
+        "allowed": "Monitorar CI e corrigir exclusivamente os três arquivos novos M388; não alterar monsterEffects.ts, duelEngineCurrent.ts, catálogo, certificados, inventários, banco, dados de jogadores, main ou produção."
+      }
+    ]
+  },
+  "catalogAtStart": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "productionAtEnd": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtStart": "924f692bd7c41a8a35a2ba3f5763d1d7bed6c4f4",
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "mainWorkflows": [],
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false,
+    "note": "main/.github/workflows/engine-validation.yml não encontrado; API de deployments não exposta pelo conector. Nenhum deploy ou teste Discord ao vivo foi confirmado."
+  },
+  "scopeReleasedToAuxiliary": [
+    {
+      "branch": "feat/work-m387-a-team-trap-disposal-negation-20261119",
+      "pr": 334,
+      "files": [
+        "src/aTeamTrapDisposal.ts",
+        "tests/aTeamTrapDisposal.test.cjs",
+        ".github/workflows/m387-a-team-trap-disposal-focused.yml"
+      ],
+      "allowed": "Monitorar CI e corrigir exclusivamente os três arquivos novos M387; não alterar monsterEffects.ts, duelEngineCurrent.ts, catálogo, certificados, inventários, banco, dados de jogadores, main ou produção."
+    },
+    {
+      "branch": "feat/work-m388-ameba-control-change-team-burn-20261119",
+      "pr": 335,
+      "files": [
+        "src/amebaControlChange.ts",
+        "tests/amebaControlChange.test.cjs",
+        ".github/workflows/m388-ameba-control-change-focused.yml"
+      ],
+      "allowed": "Monitorar CI e corrigir exclusivamente os três arquivos novos M388; não alterar monsterEffects.ts, duelEngineCurrent.ts, catálogo, certificados, inventários, banco, dados de jogadores, main ou produção."
+    }
+  ],
+  "duration": {
+    "elapsedMinutes": 16.8,
+    "effectiveWorkMinutes": 13.2,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Auxiliar: monitorar #334 e #335 e corrigir exclusivamente os seis arquivos novos M387/M388. Work: aguardar Engine Validation/Extended Soak; após handoff M61, integrar as famílias já preparadas. Em paralelo, iniciar a próxima identidade não reservada sem editar arquivos de M383 ou M355–M357.",
+  "nextWindow": "2026-11-19T08:30:00-03:00"
+}
