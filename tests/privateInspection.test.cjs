@@ -176,9 +176,7 @@ test('Amazoness Chain Master grants inspection of one opposing physical hand onl
 });
 
 test('the partner and public view only the opponent hand count, never its card identities', () => {
-  const grant = createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 5,
-  );
+  const grant = chainGrant();
   const hand = [handRef('m1:a', ids.monster, 1), handRef('m1:b', ids.spell, 1)];
   const privateView = projectOpponentHand(grant, 0, hand, lookup);
   assert.equal(privateView.visible, true);
@@ -191,9 +189,7 @@ test('the partner and public view only the opponent hand count, never its card i
 });
 
 test('unauthorized hand projection never calls card lookup', () => {
-  const grant = createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 5,
-  );
+  const grant = chainGrant();
   let called = false;
   const guardedLookup = () => { called = true; return undefined; };
   const result = projectOpponentHand(
@@ -232,9 +228,7 @@ test('Chain Master pays exactly once and does not mutate the supplied team LP', 
 });
 
 test('Chain Master exposes only monsters from the single granted opponent hand', () => {
-  const grant = createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 3, 6,
-  );
+  const grant = chainGrant(0, 3, 6);
   const hand = [
     handRef('m3:monster', ids.monster, 3),
     handRef('m3:spell', ids.spell, 3),
@@ -246,9 +240,7 @@ test('Chain Master exposes only monsters from the single granted opponent hand',
 });
 
 test('Chain Master never merges both opponents or reads the wrong physical hand', () => {
-  const grant = createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 6,
-  );
+  const grant = chainGrant(0, 1, 6);
   const otherOpponentHand = [handRef('m3:monster', ids.monster, 3)];
   assert.throws(() => amazonessChainMasterMonsterCandidates(
     grant, 0, 3, otherOpponentHand, lookup,
@@ -256,9 +248,7 @@ test('Chain Master never merges both opponents or reads the wrong physical hand'
 });
 
 test('the partner cannot use Chain Master grant to inspect the active opponent hand', () => {
-  const grant = createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 6,
-  );
+  const grant = chainGrant(0, 1, 6);
   let called = false;
   const guardedLookup = () => { called = true; return undefined; };
   assert.deepEqual(amazonessChainMasterMonsterCandidates(
@@ -268,9 +258,7 @@ test('the partner cannot use Chain Master grant to inspect the active opponent h
 });
 
 test('Chain Master selection preserves original owner metadata and rejects stale UIDs', () => {
-  const grant = createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 6,
-  );
+  const grant = chainGrant(0, 1, 6);
   const selected = handRef('m1:monster', ids.monster, 1, { marker: 'original-owner' });
   const hand = [selected];
   const result = resolveAmazonessChainMasterSelection(
@@ -289,9 +277,7 @@ test('Chain Master selection preserves original owner metadata and rejects stale
 });
 
 test('Chain Master ignores tokens and does not mutate the opponent hand', () => {
-  const grant = createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 6,
-  );
+  const grant = chainGrant(0, 1, 6);
   const hand = [
     handRef('m1:token', ids.monster, 1, { entityKind: 'token' }),
     handRef('m1:monster', ids.monster, 1),
@@ -312,9 +298,7 @@ test('duplicate Set UIDs and malformed physical hand references fail closed', ()
       setRef('m1:dup', ids.spell, 1, 1),
     ],
   ), /duplicate physical UID/);
-  const grant = createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 6,
-  );
+  const grant = chainGrant(0, 1, 6);
   assert.throws(() => amazonessChainMasterMonsterCandidates(
     grant, 0, 1, [{}], lookup,
   ), /invalid card reference/);
