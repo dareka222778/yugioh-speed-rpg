@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const {
   AQUA_SPIRIT_CARD_ID,
   aquaSpiritSummonSource,
+  prepareAquaSpiritSummon,
   payWaterGraveBanish,
   waterGraveBanishCandidates,
 } = require('../dist/waterGraveCost.js');
@@ -194,4 +195,45 @@ test('duplicate physical UIDs in the active physical hand are rejected', () => {
     ], 'm0:aqua', 0),
     /duplicate physical UID/,
   );
+});
+
+
+test('Aqua Spirit exposes cost choices only after validating the active-hand source and free shared zone', () => {
+  const source = ref('m0:aqua', AQUA_SPIRIT_CARD_ID);
+  const cost = ref('m2:water', ids.water);
+  const plan = prepareAquaSpiritSummon([source], source.uid, [cost], [], 2, lookup);
+
+  assert.equal(plan.source, source);
+  assert.deepEqual(plan.costCandidates, [cost]);
+  assert.equal(plan.costCandidates[0], cost);
+});
+
+test('Aqua Spirit does not expose a cost menu when the active physical hand lacks the source', () => {
+  const cost = ref('m2:water', ids.water);
+  assert.equal(prepareAquaSpiritSummon([], 'm0:aqua', [cost], [], 0, lookup), null);
+});
+
+test('Aqua Spirit does not expose a cost menu when no WATER monster is available', () => {
+  const source = ref('m0:aqua', AQUA_SPIRIT_CARD_ID);
+  assert.equal(prepareAquaSpiritSummon([source], source.uid, [ref('m2:fire', ids.fire)], [], 0, lookup), null);
+});
+
+test('Aqua Spirit does not expose a cost menu when the team field is full', () => {
+  const source = ref('m0:aqua', AQUA_SPIRIT_CARD_ID);
+  const cost = ref('m2:water', ids.water);
+  assert.equal(prepareAquaSpiritSummon([source], source.uid, [cost], [], 3, lookup), null);
+});
+
+test('Aqua Spirit summon planning is read-only until the player confirms the cost', () => {
+  const source = ref('m0:aqua', AQUA_SPIRIT_CARD_ID);
+  const cost = ref('m2:water', ids.water);
+  const hand = [source];
+  const grave = [cost];
+  const plan = prepareAquaSpiritSummon(hand, source.uid, grave, [], 0, lookup);
+
+  assert.ok(plan);
+  assert.equal(hand[0], source);
+  assert.equal(grave[0], cost);
+  assert.deepEqual(hand.map(c => c.uid), ['m0:aqua']);
+  assert.deepEqual(grave.map(c => c.uid), ['m2:water']);
 });
