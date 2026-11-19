@@ -3,7 +3,8 @@ const assert=require('node:assert/strict');
 const {createDuel,legalActions,step,decisionPlayer}=require('../dist/duelEngine');
 const {starterContents,cards}=require('../dist/cardCatalog');
 const {drawCards,pauseOverflow}=require('../dist/handFlow');
-const {duelCards}=require('../dist/duelIntegrity');
+const {duelCards,assertDuelState}=require('../dist/duelIntegrity');
+const {getEnabledCardIds}=require('../dist/effectRegistry');
 
 const deck=starterContents.warrior.flatMap(c=>Array(c.quantity).fill(c.id));
 const services={finish(){throw new Error('unexpected deck-out');},checkLP(){}};
@@ -109,4 +110,42 @@ test('the engine accepts Main Deck boundaries 20 and 30 and rejects 19, 31 and E
     [{id:'a',name:'A',cards:deck,extra:Array(6).fill('invalid')},{id:'b',name:'B',cards:deck}],
     ()=>0.5
   ),/Deck Adicional: máximo de 5 cartas/);
+});
+
+test('three Monster Zones and three Spell/Trap Zones are full while the Field Zone remains separate',()=>{
+  const enabled=new Set(getEnabledCardIds());
+  const fieldCard=cards.find(c=>c.field&&enabled.has(c.id));
+  assert.ok(fieldCard,'expected at least one enabled Field Spell');
+  const fieldId=fieldCard.id;
+  const fieldDeck=[...deck];
+  fieldDeck[0]=fieldId;
+  let s=createDuel(
+    [{id:'a',name:'A',cards:fieldDeck},{id:'b',name:'B',cards:deck}],
+    ()=>0.5
+  );
+  const p=s.players[0];
+  const all=[...p.hand,...p.deck];
+  const byId=new Map(cards.map(c=>[c.id,c]));
+  const monsters=all.filter(ref=>byId.get(ref.id)?.kind==='monster').slice(0,3);
+  const backrow=all.filter(ref=>byId.get(ref.id)?.kind!=='monster'&&ref.id!==fieldId).slice(0,3);
+  const field=all.find(ref=>ref.id===fieldId);
+  assert.equal(monsters.length,3);
+  assert.equal(backrow.length,3);
+  assert.ok(field);
+  const moved=new Set([...monsters,...backrow,field].map(ref=>ref.uid));
+  p.hand=p.hand.filter(ref=>!moved.has(ref.uid));
+  p.deck=p.deck.filter(ref=>!moved.has(ref.uid));
+  p.monsters=monsters.map(ref=>({...ref,position:'atk',faceUp:true,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0}));
+  p.backrow=backrow.map(ref=>({...ref,faceUp:false,setTurn:0}));
+  p.hand.push(field);
+  assertDuelState(s);
+
+  const actions=legalActions(s,'a');
+  assert.equal(actions.filter(a=>a.kind==='summon'&&a.tributes.length===0).length,0);
+  assert.equal(actions.filter(a=>a.kind==='set').length,0);
+  assert.ok(actions.some(a=>a.kind==='field'&&a.card===field.uid));
+  assert.ok(actions.some(a=>a.kind==='setField'&&a.card===field.uid));
+  assert.equal(p.monsters.length,3);
+  assert.equal(p.backrow.length,3);
+  assert.equal(p.field,null);
 });
