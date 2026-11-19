@@ -103,6 +103,6 @@ test('every help page remains valid after the rules contract is fixed',()=>{
 });
 
 test('/regras is registered and routes to the private rules help page',()=>{
-  assert.match(indexSource,/new SlashCommandBuilder\\(\\)\\.setName\\('regras'\\)/);
-  assert.match(indexSource,/i\\.isChatInputCommand\\(\\)&&\\['ajuda','regras'\\]\\.includes\\(i\\.commandName\\).*?helpMessage\\(id,i\\.commandName==='regras'\\?'rules':'start'\\),flags:MessageFlags\\.Ephemeral/s);
+  assert.ok(indexSource.includes("new SlashCommandBuilder().setName('regras')"));
+  assert.ok(indexSource.includes("if(i.isChatInputCommand()&&['ajuda','regras'].includes(i.commandName)){await i.reply({...helpMessage(id,i.commandName==='regras'?'rules':'start'),flags:MessageFlags.Ephemeral});return;}"));
 });
