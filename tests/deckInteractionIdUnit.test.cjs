@@ -90,13 +90,16 @@ test('builder rejects invalid action, owner, slot, revision, page, and card toke
   ];
 
   for (const patch of invalid) {
+    const value = key => Object.prototype.hasOwnProperty.call(patch, key)
+      ? patch[key]
+      : valid[key];
     assert.throws(() => buildDeckInteractionId(
-      patch.action ?? valid.action,
-      patch.owner ?? valid.owner,
-      patch.slot ?? valid.slot,
-      patch.revision ?? valid.revision,
-      patch.page ?? valid.page,
-      patch.cardId ?? valid.cardId
+      value('action'),
+      value('owner'),
+      value('slot'),
+      value('revision'),
+      value('page'),
+      value('cardId')
     ));
   }
 });
