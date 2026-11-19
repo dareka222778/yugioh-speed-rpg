@@ -9,6 +9,9 @@ export interface BattlePositionState {
  */
 export function canChangeBattlePosition(monster: BattlePositionState, turn: number): boolean {
   if (!monster || typeof monster !== 'object') throw new TypeError('Battle position target is required.');
+  if (typeof monster.faceUp !== 'boolean' || !['atk', 'def'].includes(monster.position)) {
+    throw new TypeError('Battle position target state is invalid.');
+  }
   if (!Number.isSafeInteger(turn) || turn < 1) throw new RangeError('Battle position turn is invalid.');
   const lockedThrough = monster.positionLockedThrough;
   if (lockedThrough !== undefined && (!Number.isSafeInteger(lockedThrough) || lockedThrough < 0)) {
