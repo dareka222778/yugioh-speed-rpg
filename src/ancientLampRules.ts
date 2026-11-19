@@ -84,6 +84,7 @@ export type AncientLampRedirectResolution =
       targetTeam: DuelTeam;
       targetFaceUp: boolean;
       processedEventIds: readonly string[];
+      processedEventIds: readonly string[];
     }>;
 
 const seats: readonly DuelSeat[] = [0, 1, 2, 3];
