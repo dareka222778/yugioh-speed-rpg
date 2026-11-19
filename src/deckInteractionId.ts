@@ -1,4 +1,4 @@
-export const DECK_INTERACTION_ACTIONS = [
+export const DECK_INTERACTION_ACTIONS = Object.freeze([
   'rename',
   'save-name',
   'inspect',
@@ -10,7 +10,7 @@ export const DECK_INTERACTION_ACTIONS = [
   'select',
   'slot',
   'view'
-] as const;
+] as const);
 
 export type DeckInteractionAction = typeof DECK_INTERACTION_ACTIONS[number];
 
