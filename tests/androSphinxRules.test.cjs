@@ -14,7 +14,7 @@ const handCard = (uid='andro-hand', seat=0) => ({
   uid, cardId: ANDRO_SPHINX_CARD_ID, physicalOwnerSeat: seat, kind: 'monster', atk: 3000,
 });
 const pyramid = (uid='pyramid', controller=2, faceUp=true) => ({
-  uid, cardId: PYRAMID_OF_LIGHT_CARD_ID, physicalOwnerSeat: 0, controllerSeat: controller,
+  uid, ...(faceUp ? { cardId: PYRAMID_OF_LIGHT_CARD_ID } : {}), physicalOwnerSeat: 0, controllerSeat: controller,
   zone: 'field', faceUp,
 });
 const monster = (uid, controller=0, slot=0, overrides={}) => ({
@@ -176,7 +176,7 @@ test('face-down monsters in the shared field cannot carry a visible card identit
 test('Andro Sphinx cannot attack while face-down or in Defense Position', () => {
   const base = { uid: 'andro', cardId: ANDRO_SPHINX_CARD_ID, physicalOwnerSeat: 0, controllerSeat: 0,
     zone: 'monster', zoneSlot: 0, lastNormalOrSpecialSummonTurn: 1 };
-  assert.equal(canAndroSphinxAttack({ ...base, faceUp: false, position: 'attack' }, 2), false);
+  assert.equal(canAndroSphinxAttack({ ...base, cardId: undefined, faceUp: false, position: 'attack' }, 2), false);
   assert.equal(canAndroSphinxAttack({ ...base, faceUp: true, position: 'defense' }, 2), false);
 });
 
