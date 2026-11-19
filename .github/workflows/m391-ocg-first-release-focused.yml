@@ -1,0 +1,24 @@
+name: M391 OCG first-release evidence focused validation
+
+on:
+  pull_request:
+    paths:
+      - 'docs/evidence/m391-ocg-first-release-audit.json'
+      - 'tests/m391OcgFirstReleaseAudit.test.cjs'
+      - '.github/workflows/m391-ocg-first-release-focused.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/m391OcgFirstReleaseAudit.test.cjs
