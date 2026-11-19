@@ -3934,7 +3934,7 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Auxiliar acompanha PR #346 e corrige apenas os três arquivos M397 se a CI do HEAD ff817a43 falhar. Work verifica os gates integrais e, após handoff M61, integra 3-Hump Lacooda e as buscas deck-top de A Cat of Ill Omen/An Owl of Luck. Se M61 continuar bloqueado, retomar M398 somente após resposta explícita do M361 sobre os dois novos testes de isolamento.",
+  "nextTask": "Auxiliar deve sincronizar PR #346 com a branch compartilhada por merge não-forçado (o branch M397 está 2 commits atrás no instante do checkpoint), depois monitorar CI e corrigir somente os três arquivos M397 se necessário. Work verifica os gates integrais e, após handoff M61, integra 3-Hump Lacooda e as buscas deck-top de A Cat of Ill Omen/An Owl of Luck. Se M61 continuar bloqueado, retomar M398 somente após resposta explícita do M361 sobre os dois novos testes de isolamento.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
   "sharedHeadBeforeClaim": "97983a9e05a84baef74248772e8e5e90c83930e3",
@@ -9139,7 +9139,7 @@
         "tests/coordinationReservationGuard.test.cjs",
         ".github/workflows/coordination-reservation-guard.yml"
       ],
-      "permission": "monitor CI and correct only these files"
+      "permission": "Merge the latest shared branch into this M397 branch without force, then monitor CI and correct only the three M397 files; do not edit state, runtime, catalog, player data, other branches or production."
     }
   ],
   "lastIndependentWorkCatalog": {
@@ -9682,7 +9682,8 @@
       "tests/coordinationReservationGuard.test.cjs",
       ".github/workflows/coordination-reservation-guard.yml"
     ],
-    "endedAt": "2026-11-19T13:45:02-03:00"
+    "endedAt": "2026-11-19T13:45:02-03:00",
+    "auxiliaryPermission": "Merge the latest shared branch into this M397 branch without force, then monitor CI and correct only the three M397 files; do not edit state, runtime, catalog, player data, other branches or production."
   },
   "lastWorkPR": 346,
   "lastWorkStatus": "released-to-auxiliary-monitor-ci",
@@ -9706,5 +9707,6 @@
     "liveDiscordValidation": false
   },
   "lastWorkSharedHeadBeforeFinalStateUpdate": "64ee71fdabedeb4fdd8a362fcf5e5be6e2fc62cf",
-  "thirdPartyReservationsReleased": []
+  "thirdPartyReservationsReleased": [],
+  "nextTaskUpdatedAt": "2026-11-19T13:45:02-03:00"
 }
