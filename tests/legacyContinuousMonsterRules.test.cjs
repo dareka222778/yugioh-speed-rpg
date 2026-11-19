@@ -116,9 +116,9 @@ test('a second face-up Tiger is rejected across the shared team field', () => {
 test('Tiger may attack-lock an opposing Amazoness target without returning hidden identity', () => {
   const field = board(
     tiger(),
-    monster({ uid: 'm1:hidden-amazoness', physicalOwnerSeat: 1, controllerSeat: 1, faceUp: false, archetypes: ['Amazoness'] }),
+    monster({ uid: 'm2:hidden-amazoness', physicalOwnerSeat: 2, controllerSeat: 2, faceUp: false, archetypes: ['Amazoness'] }),
   );
-  const result = amazonessTigerAttackAllowed(1, 'm1:hidden-amazoness', field);
+  const result = amazonessTigerAttackAllowed(1, 'm2:hidden-amazoness', field);
   assert.deepEqual(result, { allowed: false });
   assert.deepEqual(Object.keys(result), ['allowed']);
 });
