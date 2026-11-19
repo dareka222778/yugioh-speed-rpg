@@ -84,7 +84,6 @@ export type AncientLampRedirectResolution =
       targetTeam: DuelTeam;
       targetFaceUp: boolean;
       processedEventIds: readonly string[];
-      processedEventIds: readonly string[];
     }>;
 
 const seats: readonly DuelSeat[] = [0, 1, 2, 3];
@@ -368,5 +367,6 @@ export function resolveAncientLampAttackRedirect(input: Readonly<{
     targetUid: target.uid,
     targetTeam: teamOfAncientLampSeat(target.controllerSeat),
     targetFaceUp: target.faceUp,
+    processedEventIds: [...processed, plan.eventId],
   };
 }
