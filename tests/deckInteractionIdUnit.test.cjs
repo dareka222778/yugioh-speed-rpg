@@ -127,3 +127,29 @@ test('parser returns no partial object when a segment is invalid', () => {
   const invalid = valid.replace(':42:', ':042:');
   assert.equal(parseDeckInteractionId(invalid), null);
 });
+
+test('builder and parser round-trip deterministic numeric and token boundaries', () => {
+  const owners = ['0', 'discord_user', 'owner-123'];
+  const slots = [1, 2, 3];
+  const revisions = [0, 1, Number.MAX_SAFE_INTEGER];
+  const pages = [0, 1, 999];
+  const cardIds = ['', '0', 'card_1-2', '89631139'];
+
+  for (const owner of owners) {
+    for (const slot of slots) {
+      for (const revision of revisions) {
+        for (const page of pages) {
+          for (const cardId of cardIds) {
+            const value = buildDeckInteractionId('view', owner, slot, revision, page, cardId);
+            if (value.length <= 100) {
+              const parsed = parseDeckInteractionId(value);
+              assert.deepEqual(parsed, { action: 'view', owner, slot, revision, page, cardId });
+            } else {
+              assert.throws(() => buildDeckInteractionId('view', owner, slot, revision, page, cardId));
+            }
+          }
+        }
+      }
+    }
+  }
+});
