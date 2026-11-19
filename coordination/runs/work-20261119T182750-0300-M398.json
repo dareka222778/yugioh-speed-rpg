@@ -61,9 +61,8 @@
       {
         "name": "Card batch fast feedback",
         "run": 44620479562,
-        "status": "in_progress",
-        "jobStatus": "in_progress",
-        "npmCi": "passed"
+        "status": "completed",
+        "conclusion": "success"
       },
       {
         "name": "Engine validation",
@@ -100,7 +99,8 @@
     },
     "latestHeadCardBatchFast": {
       "run": 44620479562,
-      "status": "in_progress"
+      "status": "completed",
+      "conclusion": "success"
     },
     "latestHeadEngineValidation": {
       "run": 44620479659,
@@ -108,7 +108,15 @@
     },
     "latestHeadFocused": {
       "run": 44620479540,
-      "status": "pending"
+      "status": "pending",
+      "jobStatus": "queued"
+    },
+    "observedAt": "2026-11-19T18:38:13-03:00",
+    "latestHeadMilestone": {
+      "run": 44620479541,
+      "status": "completed",
+      "conclusion": "success",
+      "artifact": 14575203596
     }
   },
   "catalog": {
