@@ -225,6 +225,6 @@ test('invalid ATK values and duplicate field UIDs fail closed', () => {
 
 test('an invalid discarded ATK or lookup callback cannot expose targets', () => {
   const field = [monster('m1:target', 1, true, 500)];
-  assert.throws(() => armedDragonLv5DestroyCandidates(field, 1, -1, currentAtk, false), /discarded monster ATK/);
+  assert.throws(() => armedDragonLv5DestroyCandidates(field, 1, -1, currentAtk, false), /Discarded monster ATK/);
   assert.throws(() => armedDragonLv7DestroyTargets(field, 1, 1000, null, false), /ATK lookup/);
 });
