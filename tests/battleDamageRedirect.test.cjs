@@ -8,10 +8,11 @@ const { monsterDefinitionIssues } = require('../dist/monsterEffects.js');
 const { withCatalog } = require('../dist/catalogContext.js');
 const { combatOutcome } = require('../dist/combatEffects.js');
 const { battleEffectMonsters45 } = require('../dist/battleEffectBatch45.js');
+const { createDuel, step, legalActions } = require('../dist/duelEngine.js');
 
 const SWORDS_WOMAN = '94004268';
 const ATOMIC_FIREFLY = '87340664';
-const OPPONENT = 'm369-opponent';
+const OPPONENT = '80000001';
 
 function card(id, name, atk, defense, race = 'Warrior') {
   return {
@@ -36,12 +37,15 @@ const cards = [
   card(ATOMIC_FIREFLY, 'Atomic Firefly', 1000, 800, 'Insect'),
   card(OPPONENT, 'M369 Opponent', 2000, 1000, 'Beast'),
 ];
+const fillerCards = Array.from({ length: 18 }, (_, index) =>
+  card(String(80000002 + index), `M369 Filler ${index + 1}`, 1000, 1000));
+cards.push(...fillerCards);
 
-function makeCatalog() {
+function makeCatalog(id = 'm369-battle-effects-isolated') {
   const metadata = new Map(cards.map(value => [value.id, value]));
   const statuses = new Map(cards.map(value => [value.id, { stage: 'certified' }]));
   return {
-    id: 'm369-battle-effects-isolated',
+    id,
     data: {
       format: 1,
       engineVersion: 'engine-v9',
@@ -250,4 +254,62 @@ test('pure redirect helper validates teams, damage and flags', () => {
   assert.throws(() => redirectControllerBattleDamage([0, 1.5], 0, true, false), /non-negative/);
   assert.throws(() => redirectControllerBattleDamage([0, 0], 2, true, false), /team/);
   assert.throws(() => redirectControllerBattleDamage([0, 0], 0, 1, false), /booleans/);
+});
+
+
+test('Atomic Firefly resolves its 1000 damage through the real duel engine after battle destruction', () => {
+  const catalog = makeCatalog('a'.repeat(64));
+  const deckIds = cards.slice(0, 20).map(value => value.id);
+
+  withCatalog(catalog, () => {
+    let state = createDuel([
+      { id: 'p0', name: 'Defender Team', cards: deckIds },
+      { id: 'p1', name: 'Attacker Team', cards: deckIds },
+    ], () => 0, 1, { randomSeed: 'm369-atomic-firefly' });
+
+    const moveToField = (playerIndex, id) => {
+      const player = state.players[playerIndex];
+      const ref = [...player.hand, ...player.deck].find(value => value.id === id);
+      assert.ok(ref, `fixture card ${id} must be in a private zone`);
+      player.hand = player.hand.filter(value => value.uid !== ref.uid);
+      player.deck = player.deck.filter(value => value.uid !== ref.uid);
+      const monsterRef = {
+        ...ref,
+        owner: playerIndex,
+        faceUp: true,
+        position: 'atk',
+        entered: state.turn,
+        changed: state.turn,
+        attacked: 0,
+        atkBoost: 0,
+        defBoost: 0,
+      };
+      player.monsters.push(monsterRef);
+      return monsterRef;
+    };
+
+    const firefly = moveToField(0, ATOMIC_FIREFLY);
+    const attacker = moveToField(1, OPPONENT);
+    state.current = 1;
+    state.priority = 1;
+    state.phase = 'battle';
+    state.resume = 'main';
+    state.passes = 0;
+
+    const attack = legalActions(state, 'p1').find(action =>
+      action.kind === 'attack' && action.card === attacker.uid && action.target === firefly.uid);
+    assert.ok(attack, 'the opponent must be able to attack the face-up Atomic Firefly');
+
+    state = step(state, 'p1', attack);
+    for (let index = 0; index < 20 && state.phase === 'response'; index += 1) {
+      const responder = state.players[state.priority].id;
+      state = step(state, responder, { kind: 'pass' });
+    }
+
+    assert.notEqual(state.phase, 'response', 'all empty response windows should resolve');
+    assert.equal(state.players[0].lp, 6100, 'the Firefly controller receives 1900 battle damage');
+    assert.equal(state.players[1].lp, 7000, 'the player who destroyed the Firefly receives 1000 effect damage');
+    assert.ok(state.players[0].grave.some(value => value.uid === firefly.uid));
+    assert.ok(state.log.some(line => /Atomic Firefly.*ativado|Efeito de Atomic Firefly/.test(line)));
+  });
 });
