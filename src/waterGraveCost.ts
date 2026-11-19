@@ -6,6 +6,8 @@ import { RULES_PROFILE } from './rulesProfile';
  * must first verify that Aqua Spirit is in the active physical player's hand
  * and that the shared team field has an open Monster Zone.
  */
+export const AQUA_SPIRIT_CARD_ID = '40916023';
+
 export interface WaterGraveCard {
   readonly uid: string;
   readonly id: string;
@@ -25,6 +27,27 @@ function assertZone<T extends WaterGraveCard>(zone: readonly T[], label: string)
     seen.add(ref.uid);
   }
   return seen;
+}
+
+/** Validate Aqua Spirit in the active physical player's private hand.
+ * The caller must pass exactly the hand resolved for the active seat (for
+ * 2v2, via ownedPrivateZone); never concatenate the partner's private hand.
+ */
+export function aquaSpiritSummonSource<T extends WaterGraveCard>(
+  activePhysicalHand: readonly T[],
+  sourceUid: string,
+  fieldMonsterCount: number,
+): T | null {
+  assertZone(activePhysicalHand, 'active physical hand');
+  if (!Number.isInteger(fieldMonsterCount) || fieldMonsterCount < 0 ||
+      fieldMonsterCount > RULES_PROFILE.monsterZones) {
+    throw new RangeError('Aqua Spirit shared Monster Zone count is invalid.');
+  }
+  if (fieldMonsterCount >= RULES_PROFILE.monsterZones ||
+      typeof sourceUid !== 'string' || sourceUid.length === 0) return null;
+  const source = activePhysicalHand.find(ref =>
+    ref.uid === sourceUid && ref.id === AQUA_SPIRIT_CARD_ID && ref.entityKind !== 'token');
+  return source ?? null;
 }
 
 function assertWaterGraveInputs<T extends WaterGraveCard>(
