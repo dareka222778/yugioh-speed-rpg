@@ -109,9 +109,8 @@ export function resolveAgidoRecruitSelection<T extends AgidoGraveCard>(
   selectedUid: string | null,
   getCard: (id: string) => Card | undefined,
 ): T | null {
+  const current = agidoRecruitCandidates(graveyard, roll, fieldMonsterCount, getCard);
   if (selectedUid === null) return null;
   if (typeof selectedUid !== 'string' || selectedUid.length === 0) return null;
-
-  const current = agidoRecruitCandidates(graveyard, roll, fieldMonsterCount, getCard);
   return current.find(ref => ref.uid === selectedUid) ?? null;
 }
