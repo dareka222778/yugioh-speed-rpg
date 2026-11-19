@@ -1,0 +1,175 @@
+{
+  "runId": "work-20261119T032525-0300-M379-M380",
+  "owner": "Work",
+  "mission": "M379–M380",
+  "priority": "P1 — proteger os limites de Deck e o contrato de regras clássicas/compatibilidade, enquanto o handoff do resolver 2v2 permanece pendente.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-19T03:25:25-03:00",
+  "endedAt": "2026-11-19T03:42:13.107-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "074a7af9e5f87d5442c9c006c06c77f82408206f",
+  "sharedHeadBeforeCheckpointCommit": "b4893aedbed1939bccd674a164659e14fb451c96",
+  "workBranches": [
+    {
+      "mission": "M379",
+      "branch": "feat/work-m379-extra-deck-boundaries-20261119",
+      "head": "35ab073970117ed06281f8c9c77b926b7a449c49",
+      "pr": 327,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/327",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "074a7af9e5f87d5442c9c006c06c77f82408206f",
+      "scope": [
+        "tests/deckFormatBoundaries.test.cjs"
+      ],
+      "testCases": 3,
+      "newCertifications": 0,
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 44472872603,
+        "engineValidation": "in_progress",
+        "engineValidationRunId": 44472872648,
+        "npmRunCheck": "success",
+        "npmTest": "success",
+        "extendedSoak600s": "in_progress",
+        "milestone1000": "success",
+        "milestoneRunId": 44472872596
+      },
+      "runtimeChanges": []
+    },
+    {
+      "mission": "M380",
+      "branch": "feat/work-m380-rules-profile-owner-contract-20261119",
+      "head": "7811cb3c649424490c19c2de6f427e6248c6c182",
+      "pr": 328,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/328",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "b4893aedbed1939bccd674a164659e14fb451c96",
+      "scope": [
+        "tests/rulesProfileOwnerContract.test.cjs"
+      ],
+      "testCases": 4,
+      "newCertifications": 0,
+      "ci": {
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 44473805703,
+        "engineValidation": "in_progress",
+        "engineValidationRunId": 44473805657,
+        "npmRunCheck": "success",
+        "npmTest": "pending-at-last-check",
+        "extendedSoak600s": "in_progress",
+        "milestone1000": "success",
+        "milestoneRunId": 44473805695
+      },
+      "runtimeChanges": []
+    }
+  ],
+  "blocksCompleted": [
+    "M379: teste de integração do construtor/validador; 20 Main + 5 Extra válidos, sexta Fusão rejeitada atomicamente, contagem de zonas separada; três cenários.",
+    "M379 CI: Card Batch Fast aprovado; Engine Validation executou npm run check e npm test com sucesso; Extended Soak 600s ainda em execução; Milestone 1000 aprovado.",
+    "M380: quatro testes de contrato do RULES_PROFILE clássico e compatibilidade de snapshots speed-rpg-v1/v2, incluindo fallback de saves sem versão.",
+    "M380 CI: Card Batch Fast e Milestone 1000 aprovados; Engine Validation em execução, npm run check aprovado e npm test ainda pendente no último instante consultado.",
+    "Leitura da coordenação preservou o run ativo work-20261115T142521-0300 e suas nove reservas; nenhuma reserva de terceiro liberada.",
+    "M61 no PR #17 continua sem resposta ao comentário 6997627344; nenhum arquivo central foi alterado."
+  ],
+  "concurrentWork": {
+    "activeWorkRunId": "work-20261115T142521-0300",
+    "preservedReservedFiles": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "handoffM61": {
+      "pr": 17,
+      "commentId": 6997627344,
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "status": "awaiting-explicit-release",
+      "noResponse": true
+    },
+    "otherOpenPrs": [
+      312,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      326
+    ]
+  },
+  "catalogAtStart": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "productionAtEnd": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtStart": "b4893aedbed1939bccd674a164659e14fb451c96",
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "mainWorkflows": [],
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false,
+    "note": "Nenhum deploy confirmado; API de deployments não exposta pelo conector."
+  },
+  "scopeReleasedToAuxiliary": [
+    {
+      "branch": "feat/work-m379-extra-deck-boundaries-20261119",
+      "pr": 327,
+      "files": [
+        "tests/deckFormatBoundaries.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir exclusivamente tests/deckFormatBoundaries.test.cjs; sem runtime, catálogo, inventário, banco persistente ou produção."
+    },
+    {
+      "branch": "feat/work-m380-rules-profile-owner-contract-20261119",
+      "pr": 328,
+      "files": [
+        "tests/rulesProfileOwnerContract.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir exclusivamente tests/rulesProfileOwnerContract.test.cjs; sem runtime, catálogo, inventário, banco persistente ou produção."
+    }
+  ],
+  "duration": {
+    "elapsedMinutes": 16.8,
+    "effectiveWorkMinutes": 9,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Auxiliar: monitorar #327 e #328 e corrigir somente os dois arquivos de teste liberados. Work: aguardar npm test/Extended Soak de ambas; sincronizar as PRs com a branch compartilhada por merge não-forçado antes de revisão. Preservar as nove reservas ativas e aguardar handoff M61 antes de integrar efeitos de cartas.",
+  "nextWindow": "2026-11-19T08:30:00-03:00"
+}
