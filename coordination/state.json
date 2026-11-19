@@ -4,8 +4,8 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-19T08:21:33.027Z",
-  "nextScheduledAt": "2026-11-19T08:30:00-03:00",
+  "lastActivityAt": "2026-11-19T13:30:15-03:00",
+  "nextScheduledAt": "2026-11-19T18:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -19,7 +19,7 @@
     "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
     "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261119T045643-0300-M387-M388.json",
+  "lastCheckpoint": "coordination/runs/work-20261119T133015-0300-M397.json",
   "previousRunId": "work-20261115T055534-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
@@ -2971,6 +2971,20 @@
         "engineValidation": "in_progress",
         "extendedSoak600s": "in_progress"
       }
+    },
+    {
+      "mission": "M397",
+      "runId": "work-20261119T133015-0300-M397",
+      "branch": "feat/work-m397-coordination-reservation-guard-20261119",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "97983a9e05a84baef74248772e8e5e90c83930e3",
+      "scope": [
+        "scripts/coordination-reservation-guard.cjs",
+        "tests/coordinationReservationGuard.test.cjs",
+        ".github/workflows/coordination-reservation-guard.yml"
+      ],
+      "state": "reserved",
+      "priority": "P1 — validar IDs únicos, HEAD-base, escopos e liberação de reservas próprias sem tocar runtime."
     }
   ],
   "handoffRequest": {
@@ -3910,10 +3924,10 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Auxiliar: monitorar #320/#321 e corrigir somente os arquivos de teste liberados. Work: concluir Engine Validation/soaks; aguardar handoff M61; integrar M367 (3-Hump Lacooda) e M368 (A Cat/An Owl) quando os arquivos centrais forem liberados; depois registrar Agido e Aqua Spirit no resolver. Corrigir M369/M371 somente pelo responsável; continuar as 31 candidatas sem certificação por importação.",
+  "nextTask": "M397: implementar e testar coordination reservation guard em arquivos novos; depois PR draft, checkpoint final e liberação limitada ao auxiliar.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
-  "sharedHeadBeforeClaim": "d60d829cdfb74f3434e06f4c75cece08386a7fa5",
+  "sharedHeadBeforeClaim": "97983a9e05a84baef74248772e8e5e90c83930e3",
   "releasedOwnReservation": false,
   "parallelWorkObserved": [
     {
@@ -3953,7 +3967,7 @@
     }
   ],
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedHeadAfterClaim": null,
+  "sharedHeadAfterClaim": "348b5a1577671ebc8fbe9782075d4c2611857976",
   "releasedOwnReservations": [
     {
       "mission": "M211",
@@ -4116,7 +4130,7 @@
       }
     ]
   },
-  "nextWorkAt": "2026-11-19T03:30:00-03:00",
+  "nextWorkAt": "2026-11-19T18:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -6564,7 +6578,7 @@
       "requestedAt": "2026-11-18T23:33:50.163-03:00"
     }
   ],
-  "nextWindow": "2026-11-19T03:30:00-03:00",
+  "nextWindow": "2026-11-19T18:30:00-03:00",
   "lastCheckpointSha": "e1c09da2278b86887bac45591a619bfa6926ec5b",
   "deployment": {
     "merge": "none",
@@ -9073,17 +9087,17 @@
     },
     "blocker": "Handoff M61 de src/monsterEffects.ts e src/duelEngineCurrent.ts aguardando liberação explícita; nenhuma integração/certificação realizada."
   },
-  "lastIndependentWorkCheckpoint": "coordination/runs/work-20261119T032525-0300-M379-M380-M381.json",
-  "lastIndependentWorkActivityAt": "2026-11-19T03:46:09.230-03:00",
+  "lastIndependentWorkCheckpoint": "coordination/runs/work-20261119T133015-0300-M397.json",
+  "lastIndependentWorkActivityAt": "2026-11-19T13:30:15-03:00",
   "nextWorkWindow": "2026-11-19T08:30:00-03:00",
-  "lastIndependentWorkRunId": "work-20261119T032525-0300-M379-M380-M381",
+  "lastIndependentWorkRunId": "work-20261119T133015-0300-M397",
   "workBranchesUpdatedAt": "2026-11-19T06:46:09.230Z",
   "lastActiveWorkMission": "M379–M381",
   "sharedHeadBeforeCheckpointCommit": "8d3a273c195be9941dfbaa1e41f86d95e4eb2e3a",
-  "lastWorkRunId": "work-20261119T032525-0300-M379-M380-M381",
-  "lastWorkMission": "M379–M381",
-  "lastWorkBranch": "feat/work-m381-deck-extra-discord-controls-20261119",
-  "lastWorkHead": "e6bcdec210f150301e0552499140c47439c0c49d",
+  "lastWorkRunId": "work-20261119T133015-0300-M397",
+  "lastWorkMission": "M397",
+  "lastWorkBranch": "feat/work-m397-coordination-reservation-guard-20261119",
+  "lastWorkHead": null,
   "lastWorkBranches": [
     {
       "branch": "feat/work-m387-a-team-trap-disposal-negation-20261119",
@@ -9105,29 +9119,8 @@
     "targetMet": false,
     "ciWaitExcluded": true
   },
-  "lastIndependentWorkReservationReleased": true,
-  "lastIndependentWorkScopeReleasedToAuxiliary": [
-    {
-      "branch": "feat/work-m387-a-team-trap-disposal-negation-20261119",
-      "pr": 334,
-      "files": [
-        "src/aTeamTrapDisposal.ts",
-        "tests/aTeamTrapDisposal.test.cjs",
-        ".github/workflows/m387-a-team-trap-disposal-focused.yml"
-      ],
-      "allowed": "Monitorar CI e corrigir exclusivamente os três arquivos novos M387; não alterar monsterEffects.ts, duelEngineCurrent.ts, catálogo, certificados, inventários, banco, dados de jogadores, main ou produção."
-    },
-    {
-      "branch": "feat/work-m388-ameba-control-change-team-burn-20261119",
-      "pr": 335,
-      "files": [
-        "src/amebaControlChange.ts",
-        "tests/amebaControlChange.test.cjs",
-        ".github/workflows/m388-ameba-control-change-focused.yml"
-      ],
-      "allowed": "Monitorar CI e corrigir exclusivamente os três arquivos novos M388; não alterar monsterEffects.ts, duelEngineCurrent.ts, catálogo, certificados, inventários, banco, dados de jogadores, main ou produção."
-    }
-  ],
+  "lastIndependentWorkReservationReleased": false,
+  "lastIndependentWorkScopeReleasedToAuxiliary": [],
   "lastIndependentWorkCatalog": {
     "certified": 969,
     "target": 1000,
@@ -9650,5 +9643,16 @@
     },
     "lesson": "Não modificar arquivos M8 preservados sem procedimento explícito de extensão; a próxima frente evita esses arquivos.",
     "effectiveWorkMinutes": 20
+  },
+  "currentWorkReservationM397": {
+    "runId": "work-20261119T133015-0300-M397",
+    "branch": "feat/work-m397-coordination-reservation-guard-20261119",
+    "baseSha": "97983a9e05a84baef74248772e8e5e90c83930e3",
+    "reservedFiles": [
+      "scripts/coordination-reservation-guard.cjs",
+      "tests/coordinationReservationGuard.test.cjs",
+      ".github/workflows/coordination-reservation-guard.yml"
+    ],
+    "state": "reserved"
   }
 }
