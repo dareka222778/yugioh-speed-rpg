@@ -66,7 +66,7 @@ export type TrapDisposalResolution =
     }>;
 
 function isSeat(value: unknown): value is DuelSeat {
-  return Number.isInteger(value) && value >= 0 && value <= 3;
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value <= 3;
 }
 
 function requireText(value: unknown, field: string): asserts value is string {
