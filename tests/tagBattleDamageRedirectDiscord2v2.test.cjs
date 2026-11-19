@@ -17,7 +17,7 @@ const {handleTagComponent}=require('../dist/tagInteraction');
 const {tagPrivateMessage,tagPublicMessage}=require('../dist/tagUI');
 const {validateDiscordPayload}=require('../dist/discordPayload');
 const {engineCatalog,enabledCardIds,getEffect,getCardStatus}=require('../dist/effectRegistry');
-const {withCatalog}=require('../dist/catalogContext');
+const {withCatalog,currentCatalog}=require('../dist/catalogContext');
 const {battleEffectMonsters45}=require('../dist/battleEffectBatch45');
 const {rulesFor}=require('../dist/rulesProfile');
 
@@ -52,6 +52,23 @@ const catalog={
   },
   metadata,effects,statuses,enabled:[...enabledCardIds,...addedCards.map(card=>card.id)],
 };
+
+// The resolver v9 normally loads immutable catalog revisions from the archive.
+// This file uses an ephemeral, isolated fixture, so route only its synthetic ID
+// through the same catalog context without changing the production archive.
+const catalogArchive=require('../dist/catalogArchive');
+const catalogRuntime=require('../dist/catalogRuntime');
+const originalGetCatalogData=catalogArchive.getCatalogData;
+const originalCurrentCatalogRevision=catalogArchive.currentCatalogRevision;
+const originalRunCatalog=catalogRuntime.runCatalog;
+catalogArchive.getCatalogData=(id,version='engine-v7')=>
+  id===catalog.id&&version==='engine-v9'?catalog.data:originalGetCatalogData(id,version);
+catalogArchive.currentCatalogRevision=(version='engine-v7')=>{
+  const active=currentCatalog();
+  return version==='engine-v9'&&active?.id===catalog.id?catalog.id:originalCurrentCatalogRevision(version);
+};
+catalogRuntime.runCatalog=(id,data,work)=>
+  id===catalog.id?withCatalog(catalog,work):originalRunCatalog(id,data,work);
 
 const SAFE_NORMALS=[...new Set(tag.tagNormalCardIds)].filter(id=>{
   const card=engineCatalog.find(value=>value.id===id);
@@ -334,6 +351,9 @@ test('M371 Atomic Firefly targets the team opposing its current controller, not 
 });
 
 after(()=>{
+  catalogArchive.getCatalogData=originalGetCatalogData;
+  catalogArchive.currentCatalogRevision=originalCurrentCatalogRevision;
+  catalogRuntime.runCatalog=originalRunCatalog;
   database.db.close();
   fs.rmSync(dir,{recursive:true,force:true});
 });
