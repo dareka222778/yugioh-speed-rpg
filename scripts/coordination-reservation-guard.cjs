@@ -108,6 +108,28 @@ function collectReservations(state) {
   return found;
 }
 
+function collectRunReferences(state) {
+  const references = [];
+  function walk(value, source) {
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => walk(item, source + '[' + index + ']'));
+      return;
+    }
+    if (!value || typeof value !== 'object') return;
+    if (typeof value.runId === 'string') {
+      references.push({
+        runId: value.runId,
+        mission: typeof value.mission === 'string' ? value.mission : null,
+        branch: typeof value.branch === 'string' ? value.branch : null,
+        source,
+      });
+    }
+    for (const [key, child] of Object.entries(value)) walk(child, source + '.' + key);
+  }
+  walk(state, 'state');
+  return references;
+}
+
 function validateRunShape(run) {
   if (!run || typeof run !== 'object' || Array.isArray(run)) fail('Run checkpoint must be an object.');
   if (typeof run.runId !== 'string' || !/^work-\d{8}T\d{6}-\d{4}-M\d+(?:-M\d+)*$/.test(run.runId)) {
@@ -140,7 +162,7 @@ function validateReservation(state, run, options = {}) {
   }
 
   const reservations = collectReservations(state);
-  const sameId = reservations.filter(item => item.runId === run.runId);
+  const sameId = collectRunReferences(state).filter(item => item.runId === run.runId);
   for (const item of sameId) {
     if (item.branch && item.branch !== run.branch) fail('Run ID is already reserved by another branch: ' + item.branch);
     if (item.mission && item.mission !== run.mission) fail('Run ID is already assigned to another mission: ' + item.mission);
@@ -214,6 +236,23 @@ function validateFinalCheckpoint(run) {
       (run.catalogAtEnd.inventoryGranted ?? 0) !== 0) {
     fail('Final catalog counters are missing or report automatic certification/inventory grants.');
   }
+  if (run.catalogAtStart && Number.isInteger(run.catalogAtStart.certified) &&
+      run.catalogAtEnd.certified !== run.catalogAtStart.certified + run.catalogAtEnd.newCertifications) {
+    fail('Certified-card delta does not match the reported new certifications.');
+  }
+  if (run.catalogAtEnd.newCertifications > 0) {
+    const evidence = run.behavioralCertificationEvidence;
+    if (!Array.isArray(evidence) || evidence.length !== run.catalogAtEnd.newCertifications ||
+        evidence.some(item => !item || item.behaviorVerified !== true ||
+          typeof item.cardId !== 'string' || !/^\\d{8}$/.test(item.cardId) ||
+          typeof item.testRunId !== 'string' || !item.testRunId.trim())) {
+      fail('Every new certification requires a matching behavioral test-run attestation.');
+    }
+    const ci = run.ciResults ?? run.ci ?? {};
+    for (const key of ['engineValidation', 'cardBatchFast', 'milestone1000']) {
+      if (ci[key] !== 'success') fail('New certifications require successful ' + key + '.');
+    }
+  }
   const production = run.productionAtEnd;
   if (!production || typeof production.mergePerformed !== 'boolean' ||
       typeof production.deployPerformed !== 'boolean') {
@@ -227,7 +266,11 @@ function validateFinalCheckpoint(run) {
       production.backupVerified === true && production.ciComplete === true)) {
     fail('Deploy requires current authorization, verified backup and complete CI.');
   }
+  if (run.reservationReleased !== true) fail('Final checkpoint must explicitly release its own reservation.');
   const releaseEntries = Array.isArray(run.scopeReleasedToAuxiliary) ? run.scopeReleasedToAuxiliary : [];
+  for (const entry of releaseEntries) {
+    if (entry.branch !== run.branch) fail('Auxiliary release must remain on this run branch.');
+  }
   const releasedFiles = releaseEntries.flatMap(entry => Array.isArray(entry.files) ? entry.files : []);
   const release = validateRelease(run, releasedFiles);
   return { final: true, duration, catalog: run.catalogAtEnd, production, release };
@@ -269,6 +312,7 @@ if (require.main === module) {
 
 module.exports = {
   collectReservations,
+  collectRunReferences,
   isProtectedState,
   safeRepositoryPath,
   validateFinalCheckpoint,
