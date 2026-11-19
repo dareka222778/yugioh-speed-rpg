@@ -226,10 +226,10 @@ export function resolveArmorExeStandbyUpkeep(
 ): ArmorExeResolution {
   const current = prepareArmorExeStandbyUpkeep(sourceUid, field, phase);
   if (current.action === 'none') return { resolved: false, reason: current.reason };
+  if (plan.action === 'none') return { resolved: false, reason: 'stale-plan' };
   if (
     plan.phaseEventId !== phase.eventId ||
     plan.sourceUid !== sourceUid ||
-    plan.action === 'none' ||
     plan.controllerTeam !== current.controllerTeam
   ) {
     return { resolved: false, reason: 'stale-plan' };
