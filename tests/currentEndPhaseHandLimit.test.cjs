@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const {createDuel,legalActions,step,decisionPlayer}=require('../dist/duelEngine');
-const {starterContents}=require('../dist/cardCatalog');
+const {starterContents,cards}=require('../dist/cardCatalog');
 const {drawCards,pauseOverflow}=require('../dist/handFlow');
 const {duelCards}=require('../dist/duelIntegrity');
 
@@ -73,4 +73,40 @@ test('two-card excess survives JSON restore and is discarded one action at a tim
   assert.equal(s.players[0].hand.length,6);
   assert.equal(s.players[0].grave.length,2);
   assert.deepEqual(inventory(s),before);
+});
+
+test('the engine accepts Main Deck boundaries 20 and 30 and rejects 19, 31 and Extra Deck 6',()=>{
+  const nameById=new Map(cards.map(c=>[c.id,c.name]));
+  const counts=new Map();
+  for(const id of deck){
+    const name=nameById.get(id);
+    counts.set(name,(counts.get(name)||0)+1);
+  }
+  const extras=[];
+  for(const item of starterContents.warrior){
+    const name=nameById.get(item.id);
+    while((counts.get(name)||0)<3&&extras.length<10){
+      extras.push(item.id);
+      counts.set(name,(counts.get(name)||0)+1);
+    }
+  }
+  assert.equal(extras.length,10);
+  const deck30=[...deck,...extras];
+  assert.equal(deck30.length,30);
+  assert.doesNotThrow(()=>createDuel(
+    [{id:'a',name:'A',cards:deck30},{id:'b',name:'B',cards:deck30}],
+    ()=>0.5
+  ));
+  assert.throws(()=>createDuel(
+    [{id:'a',name:'A',cards:deck.slice(1)},{id:'b',name:'B',cards:deck}],
+    ()=>0.5
+  ),/20 a 30 cartas/);
+  assert.throws(()=>createDuel(
+    [{id:'a',name:'A',cards:[...deck30,'invalid']},{id:'b',name:'B',cards:deck}],
+    ()=>0.5
+  ),/20 a 30 cartas/);
+  assert.throws(()=>createDuel(
+    [{id:'a',name:'A',cards:deck,extra:Array(6).fill('invalid')},{id:'b',name:'B',cards:deck}],
+    ()=>0.5
+  ),/Deck Adicional: máximo de 5 cartas/);
 });
