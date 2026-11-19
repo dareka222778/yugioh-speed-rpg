@@ -71,11 +71,11 @@ export type AncientLampRedirectPlan = Readonly<{
 }>;
 
 export type AncientLampRedirectPlanResult =
-  | Readonly<{ allowed: false; reason: 'wrong-timing' | 'lamp-not-current-target' | 'lamp-was-not-face-down-at-damage-step-start' | 'lamp-not-face-up-now' | 'attacker-not-opponent' | 'invalid-redirect-target' }>
+  | Readonly<{ allowed: false; reason: 'wrong-timing' | 'lamp-not-current-target' | 'lamp-was-not-face-down-at-damage-step-start' | 'lamp-not-face-up-now' | 'attacker-not-opponent' | 'attacker-not-present' | 'invalid-redirect-target' }>
   | Readonly<{ allowed: true; plan: AncientLampRedirectPlan }>;
 
 export type AncientLampRedirectResolution =
-  | Readonly<{ redirected: false; reason: 'stale-attack' | 'attacker-missing' | 'target-missing' | 'target-no-longer-opponent-controlled' | 'lamp-no-longer-current-target' }>
+  | Readonly<{ redirected: false; reason: 'stale-attack' | 'attacker-missing' | 'target-missing' | 'target-no-longer-opponent-controlled' | 'lamp-no-longer-current-target' | 'duplicate-event' }>
   | Readonly<{
       redirected: true;
       eventId: string;
@@ -293,6 +293,11 @@ export function planAncientLampAttackRedirect(input: Readonly<{
   const attackerTeam = teamOfAncientLampSeat(attack.attackerControllerSeat);
   const lampTeam = teamOfAncientLampSeat(lamp.controllerSeat);
   if (attackerTeam === lampTeam) return { allowed: false, reason: 'attacker-not-opponent' };
+  const attacker = findMonster(attack.attackerUid, input.field);
+  if (!attacker) return { allowed: false, reason: 'attacker-not-present' };
+  if (teamOfAncientLampSeat(attacker.controllerSeat) !== attackerTeam) {
+    return { allowed: false, reason: 'attacker-not-opponent' };
+  }
   const target = findMonster(input.selectedTargetUid, input.field);
   if (!target || target.uid === attack.attackerUid || target.uid === lamp.uid ||
       teamOfAncientLampSeat(target.controllerSeat) !== attackerTeam) {
@@ -315,6 +320,7 @@ export function resolveAncientLampAttackRedirect(input: Readonly<{
   plan: AncientLampRedirectPlan;
   attack: AncientLampAttackSnapshot;
   field: readonly AncientLampFieldMonster[];
+  processedEventIds?: readonly string[];
 }>): AncientLampRedirectResolution {
   const plan = input.plan;
   if (!plan || typeof plan !== 'object' || !input.attack || typeof input.attack !== 'object') {
@@ -325,8 +331,13 @@ export function resolveAncientLampAttackRedirect(input: Readonly<{
   requireId(plan.ancientLampUid, 'planned Ancient Lamp UID');
   requireId(plan.targetUid, 'planned target UID');
   validateField(input.field);
+  const processed = input.processedEventIds ?? [];
+  if (!Array.isArray(processed) || processed.length > 10000 ||
+      processed.some(id => typeof id !== 'string' || id.length === 0 || id.length > 128) ||
+      new Set(processed).size !== processed.length) throw new TypeError('Invalid processed attack event ledger.');
 
   const attack = input.attack;
+  if (processed.includes(plan.eventId)) return { redirected: false, reason: 'duplicate-event' };
   if (attack.eventId !== plan.eventId || attack.attackerUid !== plan.attackerUid ||
       attack.ancientLampUid !== plan.ancientLampUid || attack.currentTargetUid !== plan.ancientLampUid ||
       attack.timing !== 'before-damage-calculation' || !attack.wasFaceDownAtDamageStepStart) {
