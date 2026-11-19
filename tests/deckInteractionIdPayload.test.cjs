@@ -18,7 +18,7 @@ test('real Deck editor payload emits only canonical IDs accepted by the strict p
   const message = deckMessage(owner, 1);
   const components = message.components.flatMap(row => row.toJSON().components);
 
-  assert.equal(components.length, 9);
+  assert.equal(components.length, 10);
   for (const component of components) {
     assert.ok(component.custom_id);
     assert.ok(component.custom_id.length <= 100);
