@@ -1,0 +1,34 @@
+{
+  "format": 1,
+  "mission": "M389",
+  "reviewedAt": "2026-11-19",
+  "authority": "Konami Yu-Gi-Oh! TCG Card Database",
+  "card": {
+    "id": "50287060",
+    "konamiDatabaseId": 5091,
+    "name": "Archfiend of Gilfer",
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5091&request_locale=en",
+    "officialText": "When this card is sent to the GY: You can target 1 face-up monster on the field; equip this card to that target. That monster loses 500 ATK while equipped with this card.",
+    "mechanicFamily": "graveyard-trigger-equip-and-attack-reduction"
+  },
+  "twoVTwoReview": [
+    "The optional When trigger is gated by the send-to-GY event being the last event in the chain/event window.",
+    "A face-up monster on either team's shared Monster Zones can be selected; face-down monsters are not exposed or targetable.",
+    "The physical owner of Gilfer is retained even when its teammate is the active effect controller.",
+    "The Equip Card occupies one of the trigger controller team's three shared Spell/Trap Zones, including when the target is controlled by the opposing team.",
+    "The -500 ATK contribution exists only while this physical Equip UID remains attached; detachment removes exactly that contribution.",
+    "The source must still be in the shared Graveyard and the target must still be face-up and equip-legal at resolution."
+  ],
+  "implementation": {
+    "primitive": "src/archfiendGilfer.ts",
+    "tests": "tests/archfiendGilfer.test.cjs",
+    "focusedWorkflow": ".github/workflows/m389-archfiend-gilfer-focused.yml",
+    "testCases": 22,
+    "runtimeIntegration": "pending explicit M61 handoff; no effect-registry or duel-router edit",
+    "behavioralTestStatus": "pending-CI",
+    "engineReviewStatus": "pending",
+    "historicalEligibility": "pending OCG/TCG first-publication audit against 2004-09-30",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false
+  }
+}
