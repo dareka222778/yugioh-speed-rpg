@@ -161,6 +161,18 @@ test('the summoned Andro Sphinx cannot attack in the turn it was Special Summone
   assert.equal(canAndroSphinxAttack(card, 4), true);
 });
 
+test('Andro Sphinx attack legality fails closed when summon-turn history is absent', () => {
+  const card = { uid: 'andro', cardId: ANDRO_SPHINX_CARD_ID, physicalOwnerSeat: 0, controllerSeat: 0,
+    zone: 'monster', zoneSlot: 0, faceUp: true, position: 'attack' };
+  assert.equal(canAndroSphinxAttack(card, 2), false);
+});
+
+test('face-down monsters in the shared field cannot carry a visible card identity', () => {
+  assert.throws(() => planAndroSphinxSpecialSummon({
+    ...basePlanInput(), field: [pyramid(), monster('hidden', 2, 1, { faceUp: false })],
+  }), /Face-down card identity must remain hidden/);
+});
+
 test('Andro Sphinx cannot attack while face-down or in Defense Position', () => {
   const base = { uid: 'andro', cardId: ANDRO_SPHINX_CARD_ID, physicalOwnerSeat: 0, controllerSeat: 0,
     zone: 'monster', zoneSlot: 0, lastNormalOrSpecialSummonTurn: 1 };
