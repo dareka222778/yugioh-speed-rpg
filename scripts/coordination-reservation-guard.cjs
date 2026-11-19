@@ -231,7 +231,16 @@ function validateFinalCheckpoint(run) {
   validateRunShape(run);
   if (!run.endedAt) return { final: false };
   if (!Number.isFinite(Date.parse(run.endedAt))) fail('Invalid endedAt timestamp.');
+  if (!['completed', 'released', 'released-to-auxiliary-monitor-ci', 'interrupted-released'].includes(run.state)) {
+    fail('Final checkpoint must use an explicit completed/released state.');
+  }
+  if (!isSha(run.branchHead)) fail('Final checkpoint must record the full work-branch HEAD.');
+  if (typeof run.nextTask !== 'string' || !run.nextTask.trim() ||
+      typeof run.nextWindow !== 'string' || !Number.isFinite(Date.parse(run.nextWindow))) {
+    fail('Final checkpoint must record a concrete next task and next window.');
+  }
   const duration = run.duration;
+  const measuredElapsed = (Date.parse(run.endedAt) - Date.parse(run.startedAt)) / 60000;
   if (!duration || !Number.isFinite(duration.elapsedMinutes) ||
       !Number.isFinite(duration.effectiveWorkMinutes) ||
       !Number.isFinite(duration.targetEffectiveMinutes) ||
@@ -239,7 +248,9 @@ function validateFinalCheckpoint(run) {
       duration.effectiveWorkMinutes < 0 ||
       duration.effectiveWorkMinutes > duration.elapsedMinutes ||
       duration.targetEffectiveMinutes < 0 ||
-      duration.ciWaitExcluded !== true) {
+      duration.ciWaitExcluded !== true ||
+      measuredElapsed < 0 ||
+      Math.abs(measuredElapsed - duration.elapsedMinutes) > 1.5) {
     fail('Final checkpoint must report honest elapsed/effective duration and exclude CI wait.');
   }
   if (!run.catalogAtEnd || !Number.isInteger(run.catalogAtEnd.certified) ||
