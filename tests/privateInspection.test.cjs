@@ -245,7 +245,7 @@ test('Chain Master never merges both opponents or reads the wrong physical hand'
   const otherOpponentHand = [handRef('m3:monster', ids.monster, 3)];
   assert.throws(() => amazonessChainMasterMonsterCandidates(
     grant, 0, 3, otherOpponentHand, lookup,
-  ), /single opponent physical hand/);
+  ), /granted opponent physical hand/);
 });
 
 test('the partner cannot use Chain Master grant to inspect the active opponent hand', () => {
