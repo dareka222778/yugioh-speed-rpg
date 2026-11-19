@@ -23,12 +23,12 @@ function decimal(value: string): number | null {
   return Number.isSafeInteger(parsed) ? parsed : null;
 }
 
-function validOwner(owner: string): boolean {
-  return owner.length > 0 && owner.length <= MAX_OWNER_LENGTH && !owner.includes(':');
+function validOwner(owner: unknown): owner is string {
+  return typeof owner === 'string' && owner.length > 0 && owner.length <= MAX_OWNER_LENGTH && !owner.includes(':');
 }
 
-function validCardId(cardId: string): boolean {
-  return cardId.length <= MAX_CARD_ID_LENGTH && !cardId.includes(':');
+function validCardId(cardId: unknown): cardId is string {
+  return typeof cardId === 'string' && cardId.length <= MAX_CARD_ID_LENGTH && !cardId.includes(':');
 }
 
 /** Build the one canonical custom-ID shape accepted by the Deck interaction router. */
