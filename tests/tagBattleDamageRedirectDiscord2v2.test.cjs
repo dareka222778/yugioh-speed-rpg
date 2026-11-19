@@ -45,7 +45,7 @@ for(const card of addedCards)statuses.set(card.id,{stage:'certified'});
 const effects=new Map();
 for(const id of enabledCardIds){const effect=getEffect(id);if(effect)effects.set(id,effect);}
 const catalog={
-  id:'m371-'+('a'.repeat(59)),
+  id:'a'.repeat(64),
   data:{
     format:1,engineVersion:'engine-v9',cards,effects:Object.fromEntries(effects),
     monsters:battleEffectMonsters45,certificates:{},
