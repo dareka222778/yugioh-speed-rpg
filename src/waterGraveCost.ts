@@ -50,6 +50,27 @@ export function aquaSpiritSummonSource<T extends WaterGraveCard>(
   return source ?? null;
 }
 
+/** Build the non-mutating summon prompt for one Aqua Spirit copy. A cost
+ * choice is exposed only when that exact copy is in the active physical hand,
+ * the team has a free shared Monster Zone, and a WATER cost exists.
+ */
+export function prepareAquaSpiritSummon<T extends WaterGraveCard>(
+  activePhysicalHand: readonly T[],
+  sourceUid: string,
+  sharedGraveyard: readonly T[],
+  sharedBanished: readonly T[],
+  fieldMonsterCount: number,
+  getCard: (id: string) => Card | undefined,
+): { source: T; costCandidates: readonly T[] } | null {
+  const source = aquaSpiritSummonSource(activePhysicalHand, sourceUid, fieldMonsterCount);
+  if (!source) return null;
+  const costCandidates = waterGraveBanishCandidates(
+    sharedGraveyard, sharedBanished, fieldMonsterCount, getCard,
+  );
+  if (costCandidates.length === 0) return null;
+  return Object.freeze({ source, costCandidates });
+}
+
 function assertWaterGraveInputs<T extends WaterGraveCard>(
   graveyard: readonly T[],
   banished: readonly T[],
