@@ -1,4 +1,5 @@
 import {RULES_PROFILE} from './rulesProfile';
+import {buildDeckInteractionId,type DeckInteractionAction} from './deckInteractionId';
 import {cardRulesPT,racePT,attributePT} from './cardText';
 import {AttachmentBuilder,ActionRowBuilder,ButtonBuilder,ButtonStyle,EmbedBuilder,StringSelectMenuBuilder,escapeMarkdown} from 'discord.js';
 import {getCollection} from './database';
@@ -13,7 +14,7 @@ export function deckMessage(owner:string,slot=1,requestedPage=1,selected?:string
  const visible=ids.slice((page-1)*6,page*6);const choice=selected&&visible.includes(selected)?selected:visible[0];
  const inDeck=(id:string)=>deck.items.find(c=>c.card_key===id)?.quantity??0;
  const have=(id:string)=>owned.find(c=>c.card_key===id)?.quantity??0;
- const key=(action:string,p=page)=>`deck:${action}:${owner}:${slot}:${deck.revision}:${p}:${choice??''}`;
+ const key=(action:DeckInteractionAction,p=page)=>buildDeckInteractionId(action,owner,slot,deck.revision,p,choice??'');
  const embed=new EmbedBuilder().setColor(embedColors.deck).setTitle(`Deck ${slot} • ${escapeMarkdown(deck.name)}`)
  .setDescription(`${notice?`${notice}\n\n`:''}**${deck.total}/30 no Principal • ${deck.extraTotal}/${RULES_PROFILE.extraDeckMax} no Adicional • ${deck.active?'ATIVO':deck.errors.length?'RASCUNHO':'VÁLIDO — pode ativar'}**\n${deck.errors.length?deck.errors.slice(0,3).join('\n'):'Tamanho e cópias conferidos com sua coleção.'}\n\nEdite pelo menu e pelos botões. As cartas continuam na coleção e podem ser usadas em outros decks.`)
  .setFooter({text:`Página ${page}/${pages} • Decks de 20–30 cartas • Até 3 cópias • Duelo básico com /duelo`});
@@ -69,7 +70,7 @@ export function deckCardMessage(owner:string,slot=1,requestedIndex=0){
  const id=ids[requestedIndex],card=getCard(id)!,inventory=getCollection(owner);
  const quantity=deck.items.find(item=>item.card_key===id)?.quantity??0;
  const owned=inventory.find(item=>item.card_key===id)?.quantity??0;
- const key=(action:string,index:number,selected=id)=>`deck:${action}:${owner}:${slot}:${deck.revision}:${index}:${selected}`;
+ const key=(action:DeckInteractionAction,index:number,selected=id)=>buildDeckInteractionId(action,owner,slot,deck.revision,index,selected);
  const embed=new EmbedBuilder().setColor(embedColors.deck)
   .setTitle(`${requestedIndex+1}/${ids.length} • ${escapeMarkdown(card.name)}`)
   .setDescription(`**${kindLabel(card)}**${card.kind==='monster'?` • ${attributePT[card.attribute??'']??'—'} • ${racePT[card.race??'']??'—'}\n**NÍVEL ${card.level}  /  ATK ${card.atk}  /  DEF ${card.defense}**`:''}\n\n${cardRulesPT(card.id)}\n\n**No seu deck:** ${quantity} ×  •  **Na coleção:** ${owned} ×`)

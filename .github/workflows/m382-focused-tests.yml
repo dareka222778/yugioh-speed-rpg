@@ -1,0 +1,24 @@
+name: M382 Deck interaction ID guard
+on:
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/deckInteractionId.ts'
+      - 'src/deckUI.ts'
+      - 'src/index.ts'
+      - 'tests/deckInteractionId.test.cjs'
+      - '.github/workflows/m382-focused-tests.yml'
+jobs:
+  deck-interaction-id:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/deckInteractionId.test.cjs

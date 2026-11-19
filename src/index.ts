@@ -20,6 +20,7 @@ import { collectionMessage, visualCollectionMessage, cardMessage, searchCards, e
 import { getCardArt } from './cardArt';
 import {openDeck,changeDeck,renameDeck,activateDeck,fillInitialDeck} from './decks';
 import {visualDeckMessage,visualDeckCard,getDeckCardIndex} from './deckUI';
+import {buildDeckInteractionId,parseDeckInteractionId} from './deckInteractionId';
 import {markDuelPublished,expireDueDuels,challenge,acceptChallenge,declineChallenge,createTraining,createNPCDuel,currentDuel,getDuel,performDuelAction,setDuelMessage,type DuelRecord} from './duelStore';
 import {visualDuelPublic,visualDuelPrivate,visualDuelCard,visualDuelZoneCard,duelPublicMessage,duelPrivateMessage,duelZonesMessage,invitationMessage,quitMessage} from './duelUI';
 
@@ -212,15 +213,15 @@ async function handleInteraction(i:Interaction) {
       await i.editReply(r.status==='pending'?{content:'Seu convite aguarda resposta.',...invitationMessage(r)}:await privatePayload(r,id));return;
     }
     if((i.isButton()||i.isStringSelectMenu()||i.isModalSubmit())&&i.customId.startsWith('deck:')) {
-      const [,action,owner,slotText,revisionText,pageText,cardId]=i.customId.split(':');
+      const parsed=parseDeckInteractionId(i.customId);
+      if(!parsed)throw new Error('Painel inválido. Abra /deck ver.');
+      const {action,owner,slot,revision,page,cardId}=parsed;
       if(owner!==id){await i.reply({content:'Abra seu próprio editor com /deck ver.',flags:MessageFlags.Ephemeral});return;}
-      const slot=Number(slotText),revision=Number(revisionText),page=Number(pageText);
-      if(!Number.isSafeInteger(revision)||!Number.isSafeInteger(page))throw new Error('Painel inválido. Abra /deck ver.');
       if(action==='rename'&&i.isButton()){
         const deck=openDeck(id,slot);
         if(deck.revision!==revision)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
         const field=new TextInputBuilder().setCustomId('name').setLabel('Nome do deck').setStyle(TextInputStyle.Short).setRequired(true).setMaxLength(32).setValue(deck.name);
-        await i.showModal(new ModalBuilder().setCustomId(`deck:save-name:${id}:${slot}:${revision}:${page}:${cardId}`).setTitle('Renomear deck').addComponents(new ActionRowBuilder<TextInputBuilder>().addComponents(field)));return;
+        await i.showModal(new ModalBuilder().setCustomId(buildDeckInteractionId('save-name',id,slot,revision,page,cardId)).setTitle('Renomear deck').addComponents(new ActionRowBuilder<TextInputBuilder>().addComponents(field)));return;
       }
       if(action==='save-name'&&i.isModalSubmit()){
         await deferReply({flags:MessageFlags.Ephemeral});renameDeck(id,slot,i.fields.getTextInputValue('name'),revision);await i.editReply(await visualDeckMessage(id,slot,page,cardId,'✦ Nome salvo.'));return;
