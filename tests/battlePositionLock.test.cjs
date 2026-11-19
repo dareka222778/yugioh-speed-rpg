@@ -139,14 +139,19 @@ test('an expired lock permits a later effect-driven position change', () => {
 });
 
 test('position locks apply to all shared-field targets without changing the opposing team layout', () => {
-  const lockedBySeat0 = makeMonster('m0:locked', 'atk', { positionLockedThrough: 5 });
-  const openBySeat2 = makeMonster('m2:open', 'atk');
-  const state = makeState(5, [], [lockedBySeat0, openBySeat2]);
+  const lockedBySeat1 = makeMonster('m1:locked', 'atk', { positionLockedThrough: 5 });
+  const openBySeat3 = makeMonster('m3:open', 'atk');
+  const state = makeState(5, [], [lockedBySeat1, openBySeat3]);
 
   const targets = positionTargets(state, 0, { scope: 'opponent', mode: 'def' });
 
-  assert.deepEqual(targets.map(m => m.uid), ['m2:open']);
+  assert.deepEqual(targets.map(m => m.uid), ['m3:open']);
   assert.equal(state.players[1].monsters.length, 2);
-  assert.equal(state.players[1].monsters[0], lockedBySeat0);
-  assert.equal(state.players[1].monsters[1], openBySeat2);
+  assert.equal(state.players[1].monsters[0], lockedBySeat1);
+  assert.equal(state.players[1].monsters[1], openBySeat3);
+});
+
+
+test('malformed target state is rejected instead of silently bypassing the position lock', () => {
+  assert.throws(() => canChangeBattlePosition({ faceUp: true, position: 'unknown' }, 5), /target state is invalid/);
 });
