@@ -8,6 +8,15 @@ const evidence = JSON.parse(fs.readFileSync(
   'utf8',
 ));
 const cutoff = evidence.historicalCutoffInclusive;
+const expectedIds = [
+  '86988864', '14261867', '24140059', '51351302', '13026402',
+  '49771608', '18318842', '16135253', '18036057', '73574678',
+  '29654737', '94004268', '10979723', '95174353', '23927567',
+  '54912977', '15013468', '65064143', '09156135', '40916023',
+  '55001420', '50287060', '18378582', '00980973', '46384672',
+  '73879377', '07180418', '42364374', '02134346', '88236094',
+  '87340664',
+];
 
 test('M392 is a complete 31-identity OCG audit with an explicit inclusive cutoff', () => {
   assert.equal(evidence.mission, 'M392');
@@ -15,6 +24,7 @@ test('M392 is a complete 31-identity OCG audit with an explicit inclusive cutoff
   assert.equal(evidence.authority, 'Konami official Yu-Gi-Oh! OCG Card Database');
   assert.equal(evidence.sourceLocale, 'ja');
   assert.equal(evidence.cards.length, 31);
+  assert.deepEqual(evidence.cards.map(card => card.id).sort(), [...expectedIds].sort());
 });
 
 test('the 31 physical card IDs are unique and preserve leading zeroes', () => {
