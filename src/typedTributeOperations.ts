@@ -1,4 +1,5 @@
 import type { Card } from './cardCatalog';
+import { RULES_PROFILE } from './rulesProfile';
 
 export const ANTI_AIRCRAFT_FLOWER_ID = '65064143';
 export const ARCANE_ARCHER_OF_THE_FOREST_ID = '55001420';
@@ -62,6 +63,19 @@ function assertUniqueFieldUids<T extends { readonly uid: string; readonly id: st
   }
 }
 
+function assertMonsterZoneCapacity<T extends TypedTributeMonster>(monsters: readonly T[]): void {
+  const counts: [number, number] = [0, 0];
+  for (const monster of monsters) {
+    if ((monster.team !== 0 && monster.team !== 1) || typeof monster.faceUp !== 'boolean') {
+      throw new TypeError('Shared Monster Zones contain an invalid team/position reference.');
+    }
+    counts[monster.team] += 1;
+  }
+  if (counts.some(count => count > RULES_PROFILE.monsterZones)) {
+    throw new RangeError('Typed Tribute shared Monster Zone capacity exceeded.');
+  }
+}
+
 /**
  * Shared-field typed Tribute discovery for Anti-Aircraft Flower and Arcane
  * Archer. The active representative may Tribute a monster physically owned
@@ -77,13 +91,9 @@ export function typedTributeCandidates<T extends TypedTributeMonster>(
   assertTeam(controllerTeam);
   assertLookup(getCard);
   assertUniqueFieldUids(sharedMonsters, 'Shared Monster Zones');
+  assertMonsterZoneCapacity(sharedMonsters);
   const race = requiredTributeRace(sourceCardId);
   if (!race) return Object.freeze([]);
-  for (const monster of sharedMonsters) {
-    if ((monster.team !== 0 && monster.team !== 1) || typeof monster.faceUp !== 'boolean') {
-      throw new TypeError('Shared Monster Zones contain an invalid team/position reference.');
-    }
-  }
   return Object.freeze(sharedMonsters.filter(monster => {
     if (monster.team !== controllerTeam) return false;
     const card = getCard(monster.id);
@@ -120,6 +130,7 @@ export function arcaneArcherIsAttackProtected<T extends TypedTributeMonster>(
 ): boolean {
   assertLookup(getCard);
   assertUniqueFieldUids(sharedMonsters, 'Shared Monster Zones');
+  assertMonsterZoneCapacity(sharedMonsters);
   if (!source || source.id !== ARCANE_ARCHER_OF_THE_FOREST_ID ||
       !source.faceUp || (source.team !== 0 && source.team !== 1) ||
       !sharedMonsters.some(monster => monster.uid === source.uid &&
@@ -149,11 +160,24 @@ export function arcaneArcherSpellTrapTargetOptions(
   assertUniqueFieldUids(fieldCards, 'Shared Spell/Trap Zones');
   if (sourceCardId !== ARCANE_ARCHER_OF_THE_FOREST_ID) return Object.freeze([]);
   const options: ArcaneArcherTargetOption[] = [];
+  const backrowCounts: [number, number] = [0, 0];
+  const fieldCounts: [number, number] = [0, 0];
   for (const ref of fieldCards) {
     if ((ref.team !== 0 && ref.team !== 1) ||
         typeof ref.faceUp !== 'boolean' ||
         !['backrow', 'field'].includes(ref.zone)) {
       throw new TypeError('Shared Spell/Trap Zones contain an invalid target reference.');
+    }
+    if (ref.zone === 'backrow') {
+      backrowCounts[ref.team] += 1;
+      if (backrowCounts[ref.team] > RULES_PROFILE.spellTrapZones) {
+        throw new RangeError('Arcane Archer shared Spell/Trap Zone capacity exceeded.');
+      }
+    } else {
+      fieldCounts[ref.team] += 1;
+      if (fieldCounts[ref.team] > 1) {
+        throw new RangeError('Arcane Archer Field Zone capacity exceeded.');
+      }
     }
     if (!ref.faceUp && ref.team !== controllerTeam) {
       options.push(Object.freeze({

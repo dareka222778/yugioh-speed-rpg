@@ -76,6 +76,16 @@ test('opposing team monsters are never offered as Tribute costs', () => {
   assert.deepEqual(typedTributeCandidates(ids.archer, 0, [opponent], lookup), []);
 });
 
+test('typed Tribute refuses a fourth monster in either shared three-zone team field', () => {
+  const field = [
+    ref('m0:a', ids.insect, 0),
+    ref('m2:b', ids.insect, 0),
+    ref('m0:c', ids.insect, 0),
+    ref('m2:d', ids.insect, 0),
+  ];
+  assert.throws(() => typedTributeCandidates(ids.flower, 0, field, lookup), /Monster Zone capacity/);
+});
+
 test('Tribute payment selection returns the exact physical reference and rejects forged UIDs', () => {
   const partner = ref('m2:plant', ids.plant, 0, { ownerSeat: 2, marker: 'physical-owner' });
   const field = [partner];
@@ -163,6 +173,24 @@ test('Arcane Archer target options include all face-up Spell/Traps on both teams
   );
   assert.deepEqual(options.map(x => x.uid), [own.uid, opposing.uid, field.uid]);
   assert.equal(options[1].visibleCardId, ids.trap);
+});
+
+test('Arcane Archer respects three backrow zones and one Field Zone per team', () => {
+  const backrow = [
+    ref('m1:a', ids.trap, 1, { zone: 'backrow' }),
+    ref('m1:b', ids.trap, 1, { zone: 'backrow' }),
+    ref('m1:c', ids.trap, 1, { zone: 'backrow' }),
+    ref('m3:d', ids.trap, 1, { zone: 'backrow' }),
+  ];
+  assert.throws(() => arcaneArcherSpellTrapTargetOptions(
+    ids.archer, 0, backrow, lookup,
+  ), /Spell\/Trap Zone capacity/);
+  assert.throws(() => arcaneArcherSpellTrapTargetOptions(
+    ids.archer, 0, [
+      ref('m1:field-a', ids.spell, 1, { zone: 'field' }),
+      ref('m3:field-b', ids.spell, 1, { zone: 'field' }),
+    ], lookup,
+  ), /Field Zone capacity/);
 });
 
 test('an opponent Set card is targetable but its identity is not exposed in the option', () => {
