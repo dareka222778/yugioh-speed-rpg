@@ -4,9 +4,9 @@
   "mission": "M398",
   "priority": "P1 — fixar o contrato de regras apresentado em /regras e provar no motor os limites de mão, Deck e zonas sem tocar no runtime reservado.",
   "startedAt": "2026-11-19T18:27:50-03:00",
-  "endedAt": "2026-11-19T18:36:43-03:00",
-  "elapsedSeconds": 533,
-  "effectiveWorkMinutes": 7.5,
+  "endedAt": "2026-11-19T18:37:35-03:00",
+  "elapsedSeconds": 585,
+  "effectiveWorkMinutes": 8.2,
   "minimum60MinutesMet": false,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "ec805ef63adc51c4193c4b7bbd6d517fc1f55294",
@@ -55,12 +55,15 @@
       {
         "name": "M398 rules help contract",
         "run": 44620479540,
-        "status": "pending"
+        "status": "pending",
+        "jobStatus": "queued"
       },
       {
         "name": "Card batch fast feedback",
         "run": 44620479562,
-        "status": "queued"
+        "status": "in_progress",
+        "jobStatus": "in_progress",
+        "npmCi": "passed"
       },
       {
         "name": "Engine validation",
@@ -70,7 +73,9 @@
       {
         "name": "Milestone 1000",
         "run": 44620479541,
-        "status": "in_progress"
+        "status": "completed",
+        "conclusion": "success",
+        "artifact": 14575203596
       }
     ],
     "priorHeadCardBatchFast": {
@@ -92,6 +97,18 @@
       "cardBatchFast": "success",
       "milestone1000": "success",
       "reservationGuard": "failure: PR branch omitted current shared HEAD; 18 unit tests passed"
+    },
+    "latestHeadCardBatchFast": {
+      "run": 44620479562,
+      "status": "in_progress"
+    },
+    "latestHeadEngineValidation": {
+      "run": 44620479659,
+      "status": "queued"
+    },
+    "latestHeadFocused": {
+      "run": 44620479540,
+      "status": "pending"
     }
   },
   "catalog": {
@@ -102,7 +119,7 @@
     "pending": 993,
     "identityBlocked": 27,
     "fullyUnreviewed": 966,
-    "source": "Milestone1000 artifact 14576243273 from successful run 44620028870 on prior HEAD 055f2b2",
+    "source": "Milestone1000 artifact 14575203596 from successful run 44620479541 on current HEAD 80e4794",
     "newCertifications": 0,
     "automaticCertifications": 0
   },
@@ -179,8 +196,10 @@
     "Os dois novos testes de fronteira (Deck 20/30/19/31, Extra 6 e 3+3/Field Zone) foram adicionados depois do último sucesso focado; o HEAD 80e4794 ainda aguarda CI.",
     "A validação Discord foi offline por meio de builders/payloads; não houve login nem teste em servidor real.",
     "Nenhuma carta nova foi integrada/certificada; 969 permanece o último total verificado pelo artefato.",
-    "O handoff M61 não foi concedido; nenhum arquivo central foi alterado."
+    "O handoff M61 não foi concedido; nenhum arquivo central foi alterado.",
+    "No HEAD 80e4794, Milestone1000 concluiu com sucesso e confirmou 969/1000; Card Batch Fast está em execução, Engine Validation está na fila e o workflow focado M398 permanece pendente."
   ],
   "nextTask": "Aguardar CI do HEAD 80e4794; se aprovada, sincronizar PR #347 com a branch compartilhada sem força. Em paralelo, obter handoff M61 e integrar 3-Hump Lacooda, depois A Cat of Ill Omen/An Owl of Luck. Se M61 continuar bloqueado, manter trabalho independente sem tocar nos arquivos reservados.",
-  "nextWorkWindow": "2026-11-19T22:30:00-03:00"
+  "nextWorkWindow": "2026-11-19T22:30:00-03:00",
+  "sharedHeadAtFinalCoordination": "4b834e570a6e7c79c19cf058fc0b78b7adf4da0c"
 }
