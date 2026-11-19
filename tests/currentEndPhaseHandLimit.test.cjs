@@ -114,7 +114,7 @@ test('the engine accepts Main Deck boundaries 20 and 30 and rejects 19, 31 and E
 
 test('three Monster Zones and three Spell/Trap Zones are full while the Field Zone remains separate',()=>{
   const enabled=new Set(getEnabledCardIds());
-  const fieldCard=cards.find(c=>c.field&&enabled.has(c.id));
+  const fieldCard=cards.find(c=>c.field&&enabled.has(c.id)&&!deck.includes(c.id));
   assert.ok(fieldCard,'expected at least one enabled Field Spell');
   const fieldId=fieldCard.id;
   const fieldDeck=[...deck];
