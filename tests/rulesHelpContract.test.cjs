@@ -3,6 +3,9 @@ const assert=require('node:assert/strict');
 const {RULES_PROFILE,rulesFor}=require('../dist/rulesProfile');
 const {helpMessage,helpPages}=require('../dist/commandUI');
 const {validateDiscordPayload}=require('../dist/discordPayload');
+const fs=require('node:fs');
+const path=require('node:path');
+const indexSource=fs.readFileSync(path.join(__dirname,'../src/index.ts'),'utf8');
 
 const pageText=page=>JSON.stringify(page);
 const rulesText=pageText(helpPages.rules);
@@ -97,4 +100,9 @@ test('every help page remains valid after the rules contract is fixed',()=>{
     assert.equal(payload.components[0].toJSON().components[0].custom_id,'help:page:398001');
   }
   assert.throws(()=>helpMessage('398001','not-a-page'),/Página de ajuda inválida/);
+});
+
+test('/regras is registered and routes to the private rules help page',()=>{
+  assert.match(indexSource,/new SlashCommandBuilder\\(\\)\\.setName\\('regras'\\)/);
+  assert.match(indexSource,/i\\.isChatInputCommand\\(\\)&&\\['ajuda','regras'\\]\\.includes\\(i\\.commandName\\).*?helpMessage\\(id,i\\.commandName==='regras'\\?'rules':'start'\\),flags:MessageFlags\\.Ephemeral/s);
 });
