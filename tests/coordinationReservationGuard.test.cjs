@@ -160,6 +160,7 @@ test('validates honest final duration, zero automatic certification and explicit
       mergePerformed: false,
       deployPerformed: false,
     },
+    reservationReleased: true,
     scopeReleasedToAuxiliary: [{
       branch: run().branch,
       files: run().reservedFiles,
@@ -173,6 +174,7 @@ test('validates honest final duration, zero automatic certification and explicit
 test('rejects dishonest duration, automatic certification, inventory grant and unauthorized merge', () => {
   const base = run({
     endedAt: '2026-11-19T13:50:00-03:00',
+    reservationReleased: true,
     duration: { elapsedMinutes: 10, effectiveWorkMinutes: 11, targetEffectiveMinutes: 60, ciWaitExcluded: true },
     catalogAtEnd: { certified: 969, newCertifications: 0, automaticCertifications: 0, inventoryGranted: 0 },
     productionAtEnd: { mergePerformed: false, deployPerformed: false },
@@ -193,6 +195,48 @@ test('rejects dishonest duration, automatic certification, inventory grant and u
     duration: { elapsedMinutes: 20, effectiveWorkMinutes: 10, targetEffectiveMinutes: 60, ciWaitExcluded: true },
     productionAtEnd: { mergePerformed: true, deployPerformed: false },
   }), /Merge requires current authorization/);
+});
+
+
+test('rejects reuse of a run ID even when the earlier reservation is historical', () => {
+  const candidate = run();
+  const historical = reservation({
+    runId: candidate.runId,
+    mission: candidate.mission,
+    branch: 'feat/work-previous-use',
+    state: 'completed',
+  });
+  assert.throws(() => validateReservation(state(historical), candidate), /already reserved by another branch/);
+});
+
+test('new certifications require one behavioral attestation per card and successful gates', () => {
+  const candidate = run({
+    endedAt: '2026-11-19T13:50:00-03:00',
+    reservationReleased: true,
+    duration: { elapsedMinutes: 20, effectiveWorkMinutes: 10, targetEffectiveMinutes: 60, ciWaitExcluded: true },
+    catalogAtStart: { certified: 969 },
+    catalogAtEnd: { certified: 970, newCertifications: 1, automaticCertifications: 0, inventoryGranted: 0 },
+    behavioralCertificationEvidence: [{
+      cardId: '12345678',
+      behaviorVerified: true,
+      testRunId: 'engine-run-123',
+    }],
+    ciResults: { engineValidation: 'success', cardBatchFast: 'success', milestone1000: 'success' },
+    productionAtEnd: { mergePerformed: false, deployPerformed: false },
+  });
+  assert.equal(validateFinalCheckpoint(candidate).final, true);
+  assert.throws(() => validateFinalCheckpoint({
+    ...candidate,
+    behavioralCertificationEvidence: [],
+  }), /behavioral test-run attestation/);
+  assert.throws(() => validateFinalCheckpoint({
+    ...candidate,
+    catalogAtEnd: { ...candidate.catalogAtEnd, certified: 971 },
+  }), /Certified-card delta/);
+  assert.throws(() => validateFinalCheckpoint({
+    ...candidate,
+    ciResults: { engineValidation: 'failure', cardBatchFast: 'success', milestone1000: 'success' },
+  }), /successful engineValidation/);
 });
 
 test('final release cannot include files outside this run even when the run is otherwise valid', () => {
