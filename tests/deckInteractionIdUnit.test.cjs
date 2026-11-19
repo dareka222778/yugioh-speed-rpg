@@ -153,3 +153,7 @@ test('builder and parser round-trip deterministic numeric and token boundaries',
     }
   }
 });
+
+test('supported action allowlist is immutable at runtime', () => {
+  assert.equal(Object.isFrozen(DECK_INTERACTION_ACTIONS), true);
+});
