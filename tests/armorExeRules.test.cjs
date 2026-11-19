@@ -75,8 +75,9 @@ test('a face-down Armor Exe cannot attack', () => {
   assert.equal(armorExeCanAttack(armorExe({ faceUp: false }), 2), false);
 });
 
-test('attack helper rejects a different card identity', () => {
+test('attack helper rejects a different card identity and fails closed on missing summon history', () => {
   assert.throws(() => armorExeCanAttack(armorExe({ cardId: '12345678' }), 2), /Wrong Armor Exe/);
+  assert.throws(() => armorExeCanAttack(armorExe({ lastSummonedTurn: undefined }), 2), /missing its last-summoned turn/);
 });
 
 test('Standby upkeep is required in either team turn', () => {
@@ -123,6 +124,13 @@ test('Armor Exe may pay its own Spell Counter', () => {
   const result = resolveArmorExeStandbyUpkeep('m0:armor-exe', field, currentPhase, plan, 'm0:armor-exe');
   assert.equal(result.action, 'remove-counter');
   assert.equal(result.remainingCountersOnSelectedCard, 0);
+});
+
+test('a face-up Field Zone card on the controller team may supply the counter', () => {
+  const field = board(armorExe(), fieldCard({ uid: 'f0:counter', zone: 'field', zoneSlot: undefined }));
+  const plan = prepareArmorExeStandbyUpkeep('m0:armor-exe', field, phase());
+  assert.deepEqual(plan.eligibleCounterUids, ['f0:counter']);
+  assert.equal(resolveArmorExeStandbyUpkeep('m0:armor-exe', field, phase(), plan, 'f0:counter').action, 'remove-counter');
 });
 
 test('no counter on the controller team destroys Armor Exe', () => {
