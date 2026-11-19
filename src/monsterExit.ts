@@ -14,6 +14,12 @@ export function sendMonsterToGrave(s:DuelState,uid:string,byBattle=false,cause:T
  p.monsters=p.monsters.filter(m=>m.uid!==uid);
  s.players[owner].grave.push({uid:monster.uid,id:monster.id,...monster.properlySummoned?{properlySummoned:true}:{}});
  const effect=getMonsterEffect(monster.id);
- if(effect?.trigger==='onSentToGrave'||byBattle&&effect?.trigger==='onBattleDestroyed')(s.graveTriggers??=[]).push({actor:owner,card:monster.uid,id:monster.id});
+ if(effect?.trigger==='onSentToGrave'||byBattle&&effect?.trigger==='onBattleDestroyed'){
+  // Burn-on-battle-destruction targets the team opposing the card's controller
+  // at the moment it left the field (the battle destroyer), not necessarily
+  // the physical owner whose Graveyard receives the card.
+  const triggerActor=byBattle&&effect?.trigger==='onBattleDestroyed'&&effect.operation.kind==='burn'?controller:owner;
+  (s.graveTriggers??=[]).push({actor:triggerActor,card:monster.uid,id:monster.id});
+ }
  cleanEquips(s);synchronizeCardLifetimes(s);return true;
 }
