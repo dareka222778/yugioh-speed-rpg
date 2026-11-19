@@ -68,6 +68,7 @@ function reservationFrom(value, source) {
     mission,
     branch,
     files: files.filter(file => typeof file === 'string'),
+    baseSha: value.baseSha ?? value.sharedHeadAtReservation ?? value.sharedHeadAtStart ?? null,
     state: value.state ?? value.status ?? '',
     source,
   };
@@ -166,6 +167,18 @@ function validateReservation(state, run, options = {}) {
   for (const item of sameId) {
     if (item.branch && item.branch !== run.branch) fail('Run ID is already reserved by another branch: ' + item.branch);
     if (item.mission && item.mission !== run.mission) fail('Run ID is already assigned to another mission: ' + item.mission);
+  }
+
+  const ownRegistrations = reservations.filter(item => item.runId === run.runId && item.branch === run.branch);
+  if (ownRegistrations.length === 0) fail('Run reservation is not registered in coordination state.');
+  const expectedFiles = run.reservedFiles.slice().sort();
+  for (const registration of ownRegistrations) {
+    if (registration.baseSha && registration.baseSha !== run.sharedHeadAtStart) {
+      fail('Registered base SHA does not match the run checkpoint.');
+    }
+    if (registration.files.slice().sort().join('|') !== expectedFiles.join('|')) {
+      fail('Registered scope does not match the run checkpoint.');
+    }
   }
 
   const ownFiles = new Set(run.reservedFiles);
