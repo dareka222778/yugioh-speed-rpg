@@ -265,7 +265,7 @@ test('Atomic Firefly resolves its 1000 damage through the real duel engine after
     let state = createDuel([
       { id: 'p0', name: 'Defender Team', cards: deckIds },
       { id: 'p1', name: 'Attacker Team', cards: deckIds },
-    ], () => 0, 1, { randomSeed: 'm369-atomic-firefly' });
+    ], () => 0, 1, { randomSeed: 'a'.repeat(64) });
 
     const moveOwnedCardToField = (ownerIndex, controllerIndex, id) => {
       const owner = state.players[ownerIndex];
@@ -325,7 +325,7 @@ test('Atomic Firefly damages the battle destroyer even when control differs from
     let state = createDuel([
       { id: 'p0', name: 'Physical Owner and Destroyer', cards: deckIds },
       { id: 'p1', name: 'Temporary Controller', cards: deckIds },
-    ], () => 0, 0, { randomSeed: 'm369-stolen-firefly' });
+    ], () => 0, 0, { randomSeed: 'b'.repeat(64) });
 
     const moveOwnedCardToField = (ownerIndex, controllerIndex, id) => {
       const owner = state.players[ownerIndex];
