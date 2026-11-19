@@ -32,7 +32,7 @@ test('current owner profile fixes the exact classic format boundaries',()=>{
 test('the rules page describes 3+3 shared zones and a separate Field Zone',()=>{
   assert.match(rulesText,/4000 PV/);
   assert.match(rulesText,/três zonas de Monstro/);
-  assert.match(rulesText,/três de Magia\\/Armadilha/);
+  assert.match(rulesText,/três de Magia[/]Armadilha/);
   assert.match(rulesText,/Campo separado/);
   assert.equal(RULES_PROFILE.monsterZones+RULES_PROFILE.spellTrapZones,6);
 });
