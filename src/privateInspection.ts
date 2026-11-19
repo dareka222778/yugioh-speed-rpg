@@ -21,7 +21,10 @@ export interface OpposingSetCard {
 export interface OpponentHandCard {
   readonly uid: string;
   readonly id: string;
+  /** Original physical owner; it may differ after a card changes hands. */
   readonly ownerSeat?: InspectionSeat;
+  /** Current holder of this private hand, when the fixture carries it explicitly. */
+  readonly holderSeat?: InspectionSeat;
   readonly entityKind?: 'token';
 }
 
@@ -110,8 +113,11 @@ function assertOpponentHand<T extends OpponentHandCard>(
         typeof card.id !== 'string' || card.id.length === 0) {
       throw new TypeError('Opponent physical hand contains an invalid card reference.');
     }
-    if (card.ownerSeat !== undefined && card.ownerSeat !== targetSeat) {
-      throw new Error('Opponent hand contains a card from another physical owner.');
+    if (card.ownerSeat !== undefined && !validSeat(card.ownerSeat)) {
+      throw new Error('Opponent hand contains an invalid original physical owner.');
+    }
+    if (card.holderSeat !== undefined && card.holderSeat !== targetSeat) {
+      throw new Error('Opponent hand contains a card held by another physical seat.');
     }
     if (seen.has(card.uid)) throw new Error('Opponent physical hand contains a duplicate UID.');
     seen.add(card.uid);
@@ -331,4 +337,30 @@ export function resolveAmazonessChainMasterSelection<T extends OpponentHandCard>
   );
   if (typeof selectedUid !== 'string' || selectedUid.length === 0) return null;
   return current.find(ref => ref.uid === selectedUid) ?? null;
+}
+
+/** Plan the hand transfer without mutating zones or rewriting the original owner. */
+export function planAmazonessChainMasterTransfer<T extends OpponentHandCard>(
+  grant: PrivateInspectionGrant,
+  viewerSeat: number,
+  physicalHandOwnerSeat: number,
+  hand: readonly T[],
+  selectedUid: string,
+  getCard: (id: string) => Card | undefined,
+): Readonly<{
+  card: T;
+  fromSeat: InspectionSeat;
+  toSeat: InspectionSeat;
+  ownerSeat: InspectionSeat;
+}> | null {
+  const selected = resolveAmazonessChainMasterSelection(
+    grant, viewerSeat, physicalHandOwnerSeat, hand, selectedUid, getCard,
+  );
+  if (!selected || !validSeat(viewerSeat) || !validSeat(physicalHandOwnerSeat)) return null;
+  return Object.freeze({
+    card: selected,
+    fromSeat: physicalHandOwnerSeat,
+    toSeat: viewerSeat,
+    ownerSeat: selected.ownerSeat ?? physicalHandOwnerSeat,
+  });
 }

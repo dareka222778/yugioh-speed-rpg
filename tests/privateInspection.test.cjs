@@ -18,6 +18,7 @@ const {
   payAmazonessChainMasterCost,
   amazonessChainMasterMonsterCandidates,
   resolveAmazonessChainMasterSelection,
+  planAmazonessChainMasterTransfer,
 } = require('../dist/privateInspection.js');
 
 const ids = {
@@ -45,7 +46,7 @@ function chainGrant(viewerSeat = 0, targetSeat = 1, turn = 5, teamLP = 4000) {
 const setRef = (uid, id, physicalOwnerSeat, controllerTeam, zone = 'backrow', faceUp = false) => ({
   uid, id, physicalOwnerSeat, controllerTeam, zone, faceUp,
 });
-const handRef = (uid, id, ownerSeat, extra = {}) => ({ uid, id, ownerSeat, ...extra });
+const handRef = (uid, id, ownerSeat, extra = {}) => ({ uid, id, ownerSeat, holderSeat: ownerSeat, ...extra });
 
 test('physical seats map to the two teams without merging private hands', () => {
   assert.equal(inspectionTeamOfSeat(0), 0);
@@ -274,6 +275,31 @@ test('Chain Master selection preserves original owner metadata and rejects stale
   assert.equal(resolveAmazonessChainMasterSelection(
     grant, 0, 1, hand, selected.uid, lookup,
   ), null);
+});
+
+
+test('Chain Master transfers the selected card to the viewer hand while preserving its original owner', () => {
+  const grant = chainGrant(0, 1, 6);
+  const stolen = handRef('m1:stolen', ids.monster, 3, { holderSeat: 1, marker: 'owner-is-seat-3' });
+  const hand = [stolen];
+  const plan = planAmazonessChainMasterTransfer(
+    grant, 0, 1, hand, stolen.uid, lookup,
+  );
+  assert.equal(plan.card, stolen);
+  assert.equal(plan.fromSeat, 1);
+  assert.equal(plan.toSeat, 0);
+  assert.equal(plan.ownerSeat, 3);
+  assert.equal(stolen.holderSeat, 1);
+  assert.equal(stolen.ownerSeat, 3);
+  assert.equal(hand[0], stolen);
+});
+
+test('Chain Master rejects a hand reference whose explicit holder is another seat', () => {
+  const grant = chainGrant(0, 1, 6);
+  const wrongHolder = handRef('m1:wrong-holder', ids.monster, 1, { holderSeat: 3 });
+  assert.throws(() => amazonessChainMasterMonsterCandidates(
+    grant, 0, 1, [wrongHolder], lookup,
+  ), /held by another physical seat/);
 });
 
 test('Chain Master ignores tokens and does not mutate the opponent hand', () => {
