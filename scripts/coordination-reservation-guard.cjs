@@ -37,7 +37,7 @@ function safeRepositoryPath(value) {
   if (path.posix.isAbsolute(value) || path.win32.isAbsolute(value)) return false;
   if (path.posix.normalize(value) !== value) return false;
   const parts = value.split('/');
-  if (parts.some(part => part.length === 0 || part === '.' || part === '..' || part.startsWith('.'))) return false;
+  if (parts.some(part => part.length === 0 || part === '.' || part === '..' || (part.startsWith('.') && part !== '.github'))) return false;
   return true;
 }
 
