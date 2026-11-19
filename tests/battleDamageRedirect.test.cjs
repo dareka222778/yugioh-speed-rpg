@@ -8,7 +8,7 @@ const { monsterDefinitionIssues } = require('../dist/monsterEffects.js');
 const { withCatalog } = require('../dist/catalogContext.js');
 const { combatOutcome } = require('../dist/combatEffects.js');
 const { battleEffectMonsters45 } = require('../dist/battleEffectBatch45.js');
-const { createDuel, step, legalActions } = require('../dist/duelEngine.js');
+const { createDuel, step, legalActions } = require('../dist/duelEngineCurrent.js');
 
 const SWORDS_WOMAN = '94004268';
 const ATOMIC_FIREFLY = '87340664';
