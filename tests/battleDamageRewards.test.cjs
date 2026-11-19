@@ -216,7 +216,7 @@ test('Absorbing Kid does not trigger for effect destruction or a non-Graveyard d
   ), null);
 });
 
-test('Absorbing Kid ignores tokens, allied destruction, and simultaneous source destruction', () => {
+test('Absorbing Kid ignores tokens and simultaneous source destruction; malformed same-team battles fail closed', () => {
   const token = snapshot({
     destroyedUids: ['m1:defender'],
     battleDestroyedUids: ['m1:defender'],
@@ -238,9 +238,9 @@ test('Absorbing Kid ignores tokens, allied destruction, and simultaneous source 
   assert.equal(absorbingKidBattleHealReward(
     token, 'm0:attacker', ABSORBING_KID_FROM_THE_SKY_ID, 'm1:defender', 4,
   ), null);
-  assert.equal(absorbingKidBattleHealReward(
+  assert.throws(() => absorbingKidBattleHealReward(
     allied, 'm0:attacker', ABSORBING_KID_FROM_THE_SKY_ID, 'm1:defender', 4,
-  ), null);
+  ), /defender identity\/team/);
   assert.equal(absorbingKidBattleHealReward(
     sourceDestroyed, 'm0:attacker', ABSORBING_KID_FROM_THE_SKY_ID, 'm1:defender', 4,
   ), null);
