@@ -287,6 +287,24 @@ test('new certifications require one behavioral attestation per card and success
   }), /successful engineValidation/);
 });
 
+
+test('requires a final branch SHA, next task and parseable next window', () => {
+  const candidate = run({
+    state: 'released-to-auxiliary-monitor-ci',
+    endedAt: '2026-11-19T13:50:00-03:00',
+    reservationReleased: true,
+    branchHead: 'c'.repeat(40),
+    nextTask: 'Continue with the next independent family',
+    nextWindow: '2026-11-19T18:30:00-03:00',
+    duration: { elapsedMinutes: 19.75, effectiveWorkMinutes: 10, targetEffectiveMinutes: 60, ciWaitExcluded: true },
+    catalogAtEnd: { certified: 969, newCertifications: 0, automaticCertifications: 0, inventoryGranted: 0 },
+    productionAtEnd: { mergePerformed: false, deployPerformed: false },
+  });
+  assert.equal(validateFinalCheckpoint(candidate).final, true);
+  assert.throws(() => validateFinalCheckpoint({ ...candidate, branchHead: undefined }), /full work-branch HEAD/);
+  assert.throws(() => validateFinalCheckpoint({ ...candidate, nextWindow: 'later' }), /next task and next window/);
+});
+
 test('final release cannot include files outside this run even when the run is otherwise valid', () => {
   const candidate = run({
     endedAt: '2026-11-19T13:50:00-03:00',
