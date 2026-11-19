@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 
 const { typedDiscardTargets, payTypedDiscardCost } = require('../dist/typedDiscard.js');
 const { fieldCardTargets, returnFieldCardToOwner } = require('../dist/fieldCardReturn.js');
+const { createTokenGroup } = require('../dist/tokens.js');
 const {
   ABYSS_SOLDIER_ID,
   ABYSS_SOLDIER_PLAN,
@@ -187,4 +188,16 @@ test('invalid field target is rejected before any zone is mutated', () => {
   assert.throws(() => returnFieldCardToOwner(s, 'missing', getCard), /não está no campo/);
   assert.deepEqual(s.players[0].monsters, before.players[0].monsters);
   assert.deepEqual(s.players[0].hand, before.players[0].hand);
+});
+
+
+test('a Token targeted by Abyss Soldier leaves the field and is recorded as returned', () => {
+  const s = state();
+  s.resolverVersion = 'engine-v9';
+  const [token] = createTokenGroup(s, 0, 1, 'def');
+  const result = returnFieldCardToOwner(s, token.uid, getCard);
+  assert.equal(result.destination, 'removed');
+  assert.deepEqual(s.players[0].monsters, []);
+  assert.equal(s.tokenLedger.entries[0].status, 'removed');
+  assert.deepEqual(s.tokenLedger.events[1], { kind: 'removed', uid: token.uid, cause: 'return' });
 });
