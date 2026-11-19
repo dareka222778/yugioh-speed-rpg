@@ -1,0 +1,186 @@
+{
+  "format": 1,
+  "runId": "work-20261119T182750-0300-M398",
+  "mission": "M398",
+  "priority": "P1 — fixar o contrato de regras apresentado em /regras e provar no motor os limites de mão, Deck e zonas sem tocar no runtime reservado.",
+  "startedAt": "2026-11-19T18:27:50-03:00",
+  "endedAt": "2026-11-19T18:36:43-03:00",
+  "elapsedSeconds": 533,
+  "effectiveWorkMinutes": 7.5,
+  "minimum60MinutesMet": false,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "ec805ef63adc51c4193c4b7bbd6d517fc1f55294",
+  "sharedHeadAtReservation": "d5fb228322b7f78d354703bf5eadbce7d9114f1f",
+  "sharedHeadAtEndBeforeCheckpoint": "206c80e7beee8696c6564060ac6812e5e99a68bf",
+  "branch": "feat/work-m398-rules-help-contract-20261119",
+  "branchHead": "80e4794d9a71c6ffffb8de414a666892f83d0a71",
+  "pullRequest": {
+    "number": 347,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/347",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "compare": {
+      "ahead": 12,
+      "behind": 1,
+      "status": "diverged"
+    }
+  },
+  "changedFiles": [
+    {
+      "path": "tests/rulesHelpContract.test.cjs",
+      "change": "10 testes: RULES_PROFILE, texto /regras, guia 2v2, compatibilidade de saves, payload Discord e roteamento privado."
+    },
+    {
+      "path": "tests/currentEndPhaseHandLimit.test.cjs",
+      "change": "5 testes: draws acima de seis durante o turno, descarte só na End Phase, restauração JSON, conservação de UIDs, Main Deck 20/30 e rejeição de 19/31, Extra Deck 6, 3+3 zonas e Field Zone separada."
+    },
+    {
+      "path": ".github/workflows/m398-rules-help-contract.yml",
+      "change": "Workflow focado Node 22, npm ci, build e execução dos testes de regras/commandUI."
+    }
+  ],
+  "validation": {
+    "lastFocusedSuccess": {
+      "head": "055f2b29d35047149703596567d8dae58183f8f2",
+      "workflowRun": 44620028817,
+      "job": 135898959805,
+      "build": "passed",
+      "tests": 15,
+      "passed": 15,
+      "failed": 0
+    },
+    "latestHead": "80e4794d9a71c6ffffb8de414a666892f83d0a71",
+    "latestHeadWorkflows": [
+      {
+        "name": "M398 rules help contract",
+        "run": 44620479540,
+        "status": "pending"
+      },
+      {
+        "name": "Card batch fast feedback",
+        "run": 44620479562,
+        "status": "queued"
+      },
+      {
+        "name": "Engine validation",
+        "run": 44620479659,
+        "status": "queued"
+      },
+      {
+        "name": "Milestone 1000",
+        "run": 44620479541,
+        "status": "in_progress"
+      }
+    ],
+    "priorHeadCardBatchFast": {
+      "head": "055f2b29d35047149703596567d8dae58183f8f2",
+      "run": 44620028966,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "priorHeadEngineValidation": {
+      "head": "055f2b29d35047149703596567d8dae58183f8f2",
+      "run": 44620028938,
+      "status": "in_progress",
+      "npmRunCheck": "passed",
+      "extendedSoak600s": "in_progress"
+    },
+    "latestM397": {
+      "head": "ff817a43b0d9ef9301e47cb3baa07b4ad49ca0e5",
+      "engineValidation": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "reservationGuard": "failure: PR branch omitted current shared HEAD; 18 unit tests passed"
+    }
+  },
+  "catalog": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "historical": 1962,
+    "pending": 993,
+    "identityBlocked": 27,
+    "fullyUnreviewed": 966,
+    "source": "Milestone1000 artifact 14576243273 from successful run 44620028870 on prior HEAD 055f2b2",
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "coordination": {
+    "reservationId": "work-20261119T182750-0300-M398",
+    "baseHeadChecked": "206c80e7beee8696c6564060ac6812e5e99a68bf",
+    "reservedFiles": [
+      "tests/rulesHelpContract.test.cjs",
+      "tests/currentEndPhaseHandLimit.test.cjs",
+      ".github/workflows/m398-rules-help-contract.yml"
+    ],
+    "thirdPartyReservationsReleased": [],
+    "scopeReleasedToAuxiliary": {
+      "files": [
+        "tests/rulesHelpContract.test.cjs",
+        "tests/currentEndPhaseHandLimit.test.cjs",
+        ".github/workflows/m398-rules-help-contract.yml"
+      ],
+      "permission": "Monitor PR #347, sync branch with latest shared HEAD by non-forced merge, correct only these three M398 files if CI fails. Do not edit coordination/state.json, runtime, catalog, certificates, player data, inventory, persistent DB, other branches, main or production; no merge/deploy."
+    },
+    "handoffRequests": [
+      {
+        "target": "PR #346",
+        "commentId": 7022726106,
+        "status": "awaiting response",
+        "scope": [
+          "scripts/coordination-reservation-guard.cjs",
+          "tests/coordinationReservationGuard.test.cjs",
+          ".github/workflows/coordination-reservation-guard.yml"
+        ]
+      },
+      {
+        "target": "PR #17",
+        "comments": [
+          6992033577,
+          6992449872,
+          6996892154,
+          6997627344,
+          7003511609,
+          7008791437,
+          7009705891
+        ],
+        "status": "no explicit M61 runtime handoff found",
+        "scope": [
+          "src/monsterEffects.ts",
+          "src/duelEngineCurrent.ts"
+        ]
+      }
+    ]
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "reason": "Nenhum endpoint de deployment acessível nesta integração; nenhum merge/deploy autorizado ou executado."
+  },
+  "preservedRules": {
+    "mainDeck": "20–30",
+    "extraDeckMax": 5,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio jogador",
+    "twoVTwo": "PV/campo/Cemitério compartilhados; mãos/Decks/Extra individuais"
+  },
+  "playerData": {
+    "changed": false,
+    "inventoryGranted": false,
+    "persistentDatabaseChanged": false
+  },
+  "limitations": [
+    "Os dois novos testes de fronteira (Deck 20/30/19/31, Extra 6 e 3+3/Field Zone) foram adicionados depois do último sucesso focado; o HEAD 80e4794 ainda aguarda CI.",
+    "A validação Discord foi offline por meio de builders/payloads; não houve login nem teste em servidor real.",
+    "Nenhuma carta nova foi integrada/certificada; 969 permanece o último total verificado pelo artefato.",
+    "O handoff M61 não foi concedido; nenhum arquivo central foi alterado."
+  ],
+  "nextTask": "Aguardar CI do HEAD 80e4794; se aprovada, sincronizar PR #347 com a branch compartilhada sem força. Em paralelo, obter handoff M61 e integrar 3-Hump Lacooda, depois A Cat of Ill Omen/An Owl of Luck. Se M61 continuar bloqueado, manter trabalho independente sem tocar nos arquivos reservados.",
+  "nextWorkWindow": "2026-11-19T22:30:00-03:00"
+}
