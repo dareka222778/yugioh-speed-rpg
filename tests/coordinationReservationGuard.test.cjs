@@ -34,10 +34,18 @@ const reservation = (patch = {}) => ({
   reservedFiles: ['src/standbyFlow.ts'],
   ...patch,
 });
-const state = (...reservations) => ({
+const stateFor = (candidate, ...reservations) => ({
   sharedBranch,
-  workBranches: reservations,
+  workBranches: [{
+    runId: candidate.runId,
+    mission: candidate.mission,
+    branch: candidate.branch,
+    baseSha: candidate.sharedHeadAtStart,
+    state: candidate.state || 'reserved',
+    scope: candidate.reservedFiles,
+  }, ...reservations],
 });
+const state = (...reservations) => stateFor(run(), ...reservations);
 
 test('accepts a unique reservation with safe new files and a full shared HEAD', () => {
   const candidate = run();
@@ -75,7 +83,7 @@ test('rejects a reused run ID assigned to another branch', () => {
 test('rejects overlap with an active reservation', () => {
   const candidate = run({ reservedFiles: ['tests/shared.test.cjs'] });
   assert.throws(
-    () => validateReservation(state(reservation({ reservedFiles: ['tests/shared.test.cjs'] })), candidate),
+    () => validateReservation(stateFor(candidate, reservation({ reservedFiles: ['tests/shared.test.cjs'] })), candidate),
     /Reservation overlaps protected work/
   );
 });
@@ -83,7 +91,7 @@ test('rejects overlap with an active reservation', () => {
 test('treats auxiliary-owned files as protected until their owner releases them', () => {
   const candidate = run({ reservedFiles: ['src/owned-helper.ts'] });
   assert.throws(
-    () => validateReservation(state(reservation({
+    () => validateReservation(stateFor(candidate, reservation({
       state: 'released-to-auxiliary-monitor-ci',
       reservedFiles: ['src/owned-helper.ts'],
     })), candidate),
@@ -94,7 +102,7 @@ test('treats auxiliary-owned files as protected until their owner releases them'
 test('does not block a new run because of a completed historical reservation', () => {
   const candidate = run({ reservedFiles: ['tests/old.test.cjs'] });
   const historical = reservation({ state: 'completed', reservedFiles: ['tests/old.test.cjs'] });
-  const result = validateReservation(state(historical), candidate);
+  const result = validateReservation(stateFor(candidate, historical), candidate);
   assert.equal(result.valid, true);
   assert.equal(result.protectedReservationsChecked, 0);
 });
@@ -106,6 +114,34 @@ test('rejects traversal, absolute paths, hidden paths and duplicate reservation 
   assert.equal(safeRepositoryPath('.github/workflows/guard.yml'), true);
   assert.throws(() => validateReservation(state(), run({ reservedFiles: ['tests/a.cjs', 'tests/a.cjs'] })), /Duplicate path/);
   assert.throws(() => validateReservation(state(), run({ reservedFiles: ['../outside'] })), /Unsafe repository path/);
+});
+
+
+test('requires a matching registration with the same base SHA and exact file scope', () => {
+  const candidate = run();
+  assert.throws(() => validateReservation({ sharedBranch }, candidate), /not registered/);
+  assert.throws(() => validateReservation({
+    sharedBranch,
+    workBranches: [{
+      runId: candidate.runId,
+      mission: candidate.mission,
+      branch: candidate.branch,
+      baseSha: 'b'.repeat(40),
+      state: 'reserved',
+      scope: candidate.reservedFiles,
+    }],
+  }, candidate), /base SHA/);
+  assert.throws(() => validateReservation({
+    sharedBranch,
+    workBranches: [{
+      runId: candidate.runId,
+      mission: candidate.mission,
+      branch: candidate.branch,
+      baseSha: candidate.sharedHeadAtStart,
+      state: 'reserved',
+      scope: ['src/other.ts'],
+    }],
+  }, candidate), /scope does not match/);
 });
 
 test('rejects a stale HEAD when the caller supplies the actual branch HEAD', () => {
