@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "mission": "M391",
+  "reviewedAt": "2026-11-19",
+  "authority": "Konami official Yu-Gi-Oh! OCG Card Database",
+  "sourceLocale": "ja",
+  "historicalCutoffInclusive": "2004-09-30",
+  "purpose": "Audit the earliest official OCG release dates for the three remaining cards in the 31-card historical worklist that were implemented as isolated M389/M390 primitives. This evidence does not certify runtime behavior.",
+  "method": "Use each official Japanese OCG card-detail page and its listed OCG printings. Select the earliest listed OCG release date; do not infer OCG eligibility from TCG release dates or later reprints.",
+  "cards": [
+    {
+      "id": "10979723",
+      "name": "Amazoness Tiger",
+      "konamiCardDatabaseId": 5647,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5647&ope=2&request_locale=ja",
+      "officialOcgPrintings": [
+        { "releaseDate": "2022-05-21", "setCode": "DP27-JP039", "setName": "Duelist Pack: Duelists of Pyroxene" },
+        { "releaseDate": "2004-09-23", "setCode": "EE1-JP118", "setName": "Expert Edition Volume 1" },
+        { "releaseDate": "2002-09-19", "setCode": "303-009", "setName": "Champion of Black Magic" }
+      ],
+      "earliestOcgRelease": "2002-09-19",
+      "earliestSetCode": "303-009",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "42364374",
+      "name": "Arsenal Bug",
+      "konamiCardDatabaseId": 5033,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5033&ope=2&request_locale=ja",
+      "officialOcgPrintings": [
+        { "releaseDate": "2004-12-09", "setCode": "BE2-JP210", "setName": "Beginner's Edition 2" },
+        { "releaseDate": "2003-04-24", "setCode": "DL5-094", "setName": "Duelist Legacy Volume 5" },
+        { "releaseDate": "2002-03-21", "setCode": "PH-07", "setName": "Pharaonic Guardian" }
+      ],
+      "earliestOcgRelease": "2002-03-21",
+      "earliestSetCode": "PH-07",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "07180418",
+      "name": "Armor Exe",
+      "konamiCardDatabaseId": 5659,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5659&ope=2&request_locale=ja",
+      "officialOcgPrintings": [
+        { "releaseDate": "2004-09-23", "setCode": "EE1-JP130", "setName": "Expert Edition Volume 1" },
+        { "releaseDate": "2002-09-19", "setCode": "303-021", "setName": "Champion of Black Magic" }
+      ],
+      "earliestOcgRelease": "2002-09-19",
+      "earliestSetCode": "303-021",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "summary": {
+    "reviewed": 3,
+    "officialOcgSources": 3,
+    "eligibleAtHistoricalCutoff": 3,
+    "historicalIneligible": 0,
+    "runtimeCertificationsAdded": 0,
+    "automaticCertifications": 0
+  }
+}
