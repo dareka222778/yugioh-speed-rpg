@@ -1,0 +1,22 @@
+name: M376 focused Eight-Claws Scorpion regressions
+on:
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/eightClawsScorpion.ts'
+      - 'tests/eightClawsScorpion.test.cjs'
+      - '.github/workflows/m376-focused-tests.yml'
+jobs:
+  m376-focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node scripts/run-tests-isolated.cjs tests/eightClawsScorpion.test.cjs
