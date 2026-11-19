@@ -183,7 +183,7 @@ export function amazonessTigerAttackAllowed(
     !monster.effectNegated &&
     teamOfLegacySeat(monster.controllerSeat) === targetTeam,
   );
-  if (!protectedByTiger || target.cardId === AMAZONESS_TIGER_CARD_ID || !isAmazoness(target)) {
+  if (!protectedByTiger || target.cardId === AMAZONESS_TIGER_CARD_ID || !target.faceUp || !isAmazoness(target)) {
     return { allowed: true };
   }
   return { allowed: false };
