@@ -23,7 +23,7 @@
     "primitive": "src/archfiendGilfer.ts",
     "tests": "tests/archfiendGilfer.test.cjs",
     "focusedWorkflow": ".github/workflows/m389-archfiend-gilfer-focused.yml",
-    "testCases": 22,
+    "testCases": 24,
     "runtimeIntegration": "pending explicit M61 handoff; no effect-registry or duel-router edit",
     "behavioralTestStatus": "pending-CI",
     "engineReviewStatus": "pending",
