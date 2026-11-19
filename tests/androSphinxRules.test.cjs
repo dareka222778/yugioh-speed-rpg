@@ -119,11 +119,9 @@ test('resolution preserves physical owner, shared controller and chosen position
 });
 
 test('a teammate-owned source cannot be borrowed from the partner private hand', () => {
-  const planned = planAndroSphinxSpecialSummon({
+  assert.throws(() => planAndroSphinxSpecialSummon({
     ...basePlanInput(), activeSeat: 0, hand: [handCard('partner-andro', 2)], sourceUid: 'partner-andro',
-  });
-  assert.equal(planned.allowed, false);
-  assert.equal(planned.reason, 'source-not-in-active-hand');
+  }), /Partner private hand/);
 });
 
 test('resolution fails closed if Pyramid leaves or turns face-down', () => {
