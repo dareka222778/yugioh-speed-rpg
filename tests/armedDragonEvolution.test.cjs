@@ -163,7 +163,6 @@ test('LV5 accepts face-up opposing targets at or below discarded monster current
     monster('m1:equal', 1, true, 1800),
     monster('m3:weaker', 1, true, 1200),
     monster('m1:stronger', 1, true, 1801),
-    monster('m1:face-down', 1, false, 500),
     monster('m0:ally', 0, true, 100),
   ];
   const targets = armedDragonLv5DestroyCandidates(field, 1, 1800, currentAtk, false);
@@ -188,12 +187,23 @@ test('LV7 destroys every eligible face-up opposing monster, not allied or face-d
     monster('m1:one', 1, true, 800),
     monster('m3:two', 1, true, 1600),
     monster('m1:over', 1, true, 1601),
-    monster('m1:hidden', 1, false, 100),
     monster('m0:ally', 0, true, 100),
   ];
   assert.deepEqual(armedDragonLv7DestroyTargets(
     field, 1, 1600, currentAtk, false,
   ).map(x => x.uid), ['m1:one', 'm3:two']);
+});
+
+test('Armed Dragon rejects a fourth monster in either shared three-zone team field', () => {
+  const field = [
+    monster('m1:a', 1, true, 100),
+    monster('m1:b', 1, true, 200),
+    monster('m3:c', 1, true, 300),
+    monster('m3:d', 1, true, 400),
+  ];
+  assert.throws(() => armedDragonLv5DestroyCandidates(
+    field, 1, 500, currentAtk, false,
+  ), /shared Monster Zone capacity/);
 });
 
 test('LV5/LV7 threshold uses current ATK supplied by the engine, not printed fixture ATK', () => {

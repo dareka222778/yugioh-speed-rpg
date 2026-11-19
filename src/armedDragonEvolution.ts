@@ -1,4 +1,5 @@
 import type { Card } from './cardCatalog';
+import { RULES_PROFILE } from './rulesProfile';
 
 export const ARMED_DRAGON_LV3_ID = '00980973';
 export const ARMED_DRAGON_LV5_ID = '46384672';
@@ -183,6 +184,7 @@ function armedDragonEligibleTargets<T extends ArmedDragonFieldMonster>(
   if (typeof currentAtk !== 'function') throw new TypeError('Current ATK lookup must be a function.');
   if (typeof usedThisTurn !== 'boolean') throw new TypeError('Once-per-turn state must be boolean.');
   const seen = new Set<string>();
+  const teamCounts: [number, number] = [0, 0];
   for (const monster of opposingMonsters) {
     if (!monster || typeof monster.uid !== 'string' || monster.uid.length === 0 ||
         typeof monster.id !== 'string' || monster.id.length === 0 ||
@@ -191,6 +193,10 @@ function armedDragonEligibleTargets<T extends ArmedDragonFieldMonster>(
     }
     if (seen.has(monster.uid)) throw new Error('Opposing Monster Zones contain a duplicate physical UID.');
     seen.add(monster.uid);
+    teamCounts[monster.team] += 1;
+  }
+  if (teamCounts.some(count => count > RULES_PROFILE.monsterZones)) {
+    throw new RangeError('Armed Dragon shared Monster Zone capacity exceeded.');
   }
   if (usedThisTurn) return Object.freeze([]);
   return Object.freeze(opposingMonsters.filter(monster => {
