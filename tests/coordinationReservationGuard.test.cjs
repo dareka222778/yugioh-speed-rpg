@@ -180,6 +180,10 @@ test('validates honest final duration, zero automatic certification and explicit
   const candidate = run({
     state: 'released-to-auxiliary-monitor-ci',
     endedAt: '2026-11-19T13:50:00-03:00',
+    state: 'released-to-auxiliary-monitor-ci',
+    branchHead: 'c'.repeat(40),
+    nextTask: 'Continue the next independent development block',
+    nextWindow: '2026-11-19T18:30:00-03:00',
     duration: {
       elapsedMinutes: 20,
       effectiveWorkMinutes: 16,
@@ -210,6 +214,10 @@ test('validates honest final duration, zero automatic certification and explicit
 test('rejects dishonest duration, automatic certification, inventory grant and unauthorized merge', () => {
   const base = run({
     endedAt: '2026-11-19T13:50:00-03:00',
+    state: 'released-to-auxiliary-monitor-ci',
+    branchHead: 'c'.repeat(40),
+    nextTask: 'Continue the next independent development block',
+    nextWindow: '2026-11-19T18:30:00-03:00',
     reservationReleased: true,
     duration: { elapsedMinutes: 10, effectiveWorkMinutes: 11, targetEffectiveMinutes: 60, ciWaitExcluded: true },
     catalogAtEnd: { certified: 969, newCertifications: 0, automaticCertifications: 0, inventoryGranted: 0 },
@@ -248,6 +256,10 @@ test('rejects reuse of a run ID even when the earlier reservation is historical'
 test('new certifications require one behavioral attestation per card and successful gates', () => {
   const candidate = run({
     endedAt: '2026-11-19T13:50:00-03:00',
+    state: 'released-to-auxiliary-monitor-ci',
+    branchHead: 'c'.repeat(40),
+    nextTask: 'Continue the next independent development block',
+    nextWindow: '2026-11-19T18:30:00-03:00',
     reservationReleased: true,
     duration: { elapsedMinutes: 20, effectiveWorkMinutes: 10, targetEffectiveMinutes: 60, ciWaitExcluded: true },
     catalogAtStart: { certified: 969 },
@@ -278,6 +290,10 @@ test('new certifications require one behavioral attestation per card and success
 test('final release cannot include files outside this run even when the run is otherwise valid', () => {
   const candidate = run({
     endedAt: '2026-11-19T13:50:00-03:00',
+    state: 'released-to-auxiliary-monitor-ci',
+    branchHead: 'c'.repeat(40),
+    nextTask: 'Continue the next independent development block',
+    nextWindow: '2026-11-19T18:30:00-03:00',
     duration: { elapsedMinutes: 20, effectiveWorkMinutes: 10, targetEffectiveMinutes: 60, ciWaitExcluded: true },
     catalogAtEnd: { certified: 969, newCertifications: 0, automaticCertifications: 0, inventoryGranted: 0 },
     reservationReleased: true,
