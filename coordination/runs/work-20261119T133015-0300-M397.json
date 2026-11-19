@@ -3,7 +3,7 @@
   "owner": "Work",
   "mission": "M397",
   "priority": "P1 — adicionar um guard de coordenação que valide IDs únicos, HEAD-base, reservas ativas, escopos e liberação somente da própria reserva; sem tocar no runtime do duelo ou nas frentes concorrentes.",
-  "state": "reserved",
+  "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-19T13:30:15-03:00",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "97983a9e05a84baef74248772e8e5e90c83930e3",
@@ -82,11 +82,135 @@
     345
   ],
   "blocksCompleted": [
-    "Lidos coordination/state.json e checkpoint M387–M388; confirmadas as nove reservas ativas, M383 reservado e M61 sem handoff.",
-    "Verificado shared HEAD 97983a9e05a84baef74248772e8e5e90c83930e3, main f78f3080b496d2697072b946088309f36e97b60e; shared 652 commits à frente e 10 atrás.",
-    "Verificadas PRs #334–#345 e workflows de #334–#337, #341–#345; Card Batch Fast, Milestone 1000 e Engine Validation concluídos com sucesso nos HEADs consultados.",
-    "Confirmado que os três arquivos do guard não existem na branch compartilhada e que branch/PR M397 ainda não existem."
+    "Auditou coordination/state.json e checkpoint anterior; preservou M231, M383, M61 e todas as reservas de terceiros.",
+    "Verificou HEAD compartilhado 97983a9e no início, HEAD após registro 43c71c7, main f78f308; shared está 654 commits à frente e 10 atrás de main.",
+    "Revisou PRs #334–#345; Engine Validation, Card Batch Fast e Milestone 1000 concluídos com sucesso nos HEADs consultados.",
+    "Implementou scripts/coordination-reservation-guard.cjs para validar runId histórico, registro exato, branch/SHA-base, escopos ativos, handoffs e caminhos seguros.",
+    "Implementou validação de liberação somente da própria reserva e bloqueios para certificação automática, grants, merge/deploy sem autorização/backup/CI e checkpoints sem duração efetiva.",
+    "Adicionou 18 testes unitários cobrindo colisão, IDs, registro, SHA, path traversal, handoff, release, certificação comportamental e checkpoint final.",
+    "Adicionou workflow Node 22 com teste unitário, validação do último checkpoint e verificação de que a PR contém o HEAD atual da branch compartilhada.",
+    "Publicou PR draft #346; o guard teve sucesso em um HEAD intermediário com 16 testes, mas a validação do HEAD final de 18 testes permanece na fila."
   ],
-  "nextTask": "Implementar guard de reserva/checkpoint, testes unitários para colisão, ID duplicado, path traversal, HEAD base e liberação de terceiros; publicar PR draft; atualizar coordenação e liberar somente os três arquivos próprios ao auxiliar.",
-  "nextWindow": "2026-11-19T18:30:00-03:00"
+  "nextTask": "Auxiliar acompanha PR #346 e corrige apenas os três arquivos M397 se a CI do HEAD ff817a43 falhar. Work verifica os gates integrais e, após handoff M61, integra 3-Hump Lacooda e as buscas deck-top de A Cat of Ill Omen/An Owl of Luck. Se M61 continuar bloqueado, retomar M398 somente após resposta explícita do M361 sobre os dois novos testes de isolamento.",
+  "nextWindow": "2026-11-19T18:30:00-03:00",
+  "endedAt": "2026-11-19T13:45:02-03:00",
+  "branchHead": "ff817a43b0d9ef9301e47cb3baa07b4ad49ca0e5",
+  "branchBaseSha": "43c71c7c25465d4d00810d97f290e9792cf8d197",
+  "sharedHeadAtEnd": "43c71c7c25465d4d00810d97f290e9792cf8d197",
+  "pr": {
+    "number": 346,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/346",
+    "draft": true,
+    "mergeable": true,
+    "state": "open"
+  },
+  "duration": {
+    "elapsedMinutes": 14.78,
+    "effectiveWorkMinutes": 12.5,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true,
+    "notes": "Espera de workflows e filas do GitHub Actions não contabilizadas como trabalho."
+  },
+  "catalogAtEnd": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ciResults": {
+    "currentHead": "ff817a43b0d9ef9301e47cb3baa07b4ad49ca0e5",
+    "coordinationReservationGuard": "queued",
+    "engineValidation": "queued",
+    "cardBatchFast": "queued",
+    "milestone1000": "queued",
+    "previousHead": "d674ca82a4bd2573a0ccc25efb7d87d44cd9d499",
+    "previousHeadCoordinationGuard": "success (16 testes; não substitui validação do HEAD atual)",
+    "failedIntermediateHead": "03cede1b821bcd22b8b20ac8d77cabe296ac7ef6",
+    "failedIntermediateReason": "Dois asserts de contagem incluíam a própria reserva; métrica ajustada para contar somente reservas protegidas de terceiros."
+  },
+  "productionAtEnd": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHead": "43c71c7c25465d4d00810d97f290e9792cf8d197",
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "deploymentStatus": "Não foi possível consultar deployments pela integração disponível.",
+    "backupVerified": false
+  },
+  "observedConcurrentPRResults": {
+    "prNumbers": [
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342,
+      343,
+      344,
+      345
+    ],
+    "engineValidation": "success em todos os HEADs consultados",
+    "cardBatchFast": "success em todos os HEADs consultados",
+    "milestone1000": "success em todos os HEADs consultados",
+    "focusedWorkflows": "success onde presentes",
+    "note": "PRs permanecem abertas; sucesso de CI não equivale a merge, integração no resolver ou certificação."
+  },
+  "scopeReleasedToAuxiliary": [
+    {
+      "branch": "feat/work-m397-coordination-reservation-guard-20261119",
+      "pr": 346,
+      "files": [
+        "scripts/coordination-reservation-guard.cjs",
+        "tests/coordinationReservationGuard.test.cjs",
+        ".github/workflows/coordination-reservation-guard.yml"
+      ],
+      "permission": "monitorar CI e corrigir exclusivamente estes três arquivos na branch M397",
+      "forbidden": [
+        "runtime",
+        "catalog",
+        "certifications",
+        "inventory",
+        "player database",
+        "coordination/state.json",
+        "third-party branches",
+        "main",
+        "production"
+      ]
+    }
+  ],
+  "reservationReleased": true,
+  "thirdPartyReservationsReleased": [],
+  "handoffRequests": [
+    {
+      "pr": 17,
+      "commentId": 7003511609,
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "status": "awaiting-explicit-release"
+    },
+    {
+      "pr": 309,
+      "commentId": 7015662889,
+      "files": [
+        "tests/runTestsIsolation.test.cjs",
+        "tests/fixtures/runTestsIsolationProbe.test.cjs"
+      ],
+      "status": "request-only; no work started"
+    }
+  ],
+  "limitations": [
+    "Nenhuma nova carta foi integrada ao resolver ou certificada nesta execução.",
+    "O handoff M61 para monsterEffects.ts/duelEngineCurrent.ts continua sem resposta.",
+    "A PR #346 ainda aguarda CI integral no HEAD final ff817a43.",
+    "Nenhum merge, deploy ou teste em servidor Discord real foi realizado."
+  ]
 }
