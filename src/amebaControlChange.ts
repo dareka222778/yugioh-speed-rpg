@@ -4,6 +4,7 @@ export type DuelTeam = 'even' | 'odd';
 
 export type AmebaControlChangeEvent = Readonly<{
   eventId: string;
+  faceUpSessionId: string;
   sourceUid: string;
   cardId: string;
   physicalOwnerSeat: DuelSeat;
@@ -19,7 +20,8 @@ export type AmebaBurnReason =
   | 'effect-negated'
   | 'controller-did-not-change'
   | 'control-remained-within-team'
-  | 'duplicate-event';
+  | 'duplicate-event'
+  | 'already-used-this-face-up-period';
 
 export type AmebaBurnEvaluation =
   | Readonly<{ eligible: false; reason: AmebaBurnReason }>
@@ -27,13 +29,14 @@ export type AmebaBurnEvaluation =
       eligible: true;
       plan: Readonly<{
         eventId: string;
+        faceUpSessionId: string;
         sourceUid: string;
         physicalOwnerSeat: DuelSeat;
         fromTeam: DuelTeam;
         recipientSeat: DuelSeat;
         recipientTeam: DuelTeam;
         damage: 2000;
-        oncePerTurnLimit: false;
+        oncePerFaceUpPeriod: true;
       }>;
     }>;
 
@@ -51,6 +54,13 @@ function requireText(value: unknown, name: string): asserts value is string {
   }
 }
 
+function validateLedger(values: readonly string[], name: string): void {
+  if (!Array.isArray(values) || values.some(value => typeof value !== 'string' || value.length === 0)) {
+    throw new TypeError(`Invalid ${name} ledger.`);
+  }
+  if (new Set(values).size !== values.length) throw new TypeError(`Duplicate entry in ${name} ledger.`);
+}
+
 export function teamOfAmebaSeat(seat: DuelSeat): DuelTeam {
   requireSeat(seat, 'seat');
   return seat % 2 === 0 ? 'even' : 'odd';
@@ -59,6 +69,7 @@ export function teamOfAmebaSeat(seat: DuelSeat): DuelTeam {
 function validateEvent(event: AmebaControlChangeEvent): void {
   if (!event || typeof event !== 'object') throw new TypeError('Invalid Ameba control-change event.');
   requireText(event.eventId, 'event ID');
+  requireText(event.faceUpSessionId, 'face-up session ID');
   requireText(event.sourceUid, 'source UID');
   requireText(event.cardId, 'card ID');
   requireSeat(event.physicalOwnerSeat, 'physical owner');
@@ -72,21 +83,24 @@ function validateEvent(event: AmebaControlChangeEvent): void {
 
 /**
  * Ameba inflicts 2000 damage when control of this face-up card changes.
- * In a shared-field 2v2 duel, damage is routed to the team that received
- * control at the event snapshot; physical ownership remains unchanged.
+ * The effect is usable once per face-up period; a new face-up session after
+ * being turned face-down creates a new eligibility epoch.
  */
 export function prepareAmebaControlChangeBurn(
   event: AmebaControlChangeEvent,
   processedEventIds: readonly string[] = [],
+  usedFaceUpSessionIds: readonly string[] = [],
 ): AmebaBurnEvaluation {
   validateEvent(event);
-  if (!Array.isArray(processedEventIds) || processedEventIds.some(id => typeof id !== 'string' || id.length === 0)) {
-    throw new TypeError('Invalid processed-event ledger.');
-  }
+  validateLedger(processedEventIds, 'processed-event');
+  validateLedger(usedFaceUpSessionIds, 'used-face-up-session');
   if (event.cardId !== AMEBA_CARD_ID) return { eligible: false, reason: 'wrong-card' };
   if (!event.faceUpAtChange) return { eligible: false, reason: 'not-face-up-at-control-change' };
   if (event.effectNegated) return { eligible: false, reason: 'effect-negated' };
   if (processedEventIds.includes(event.eventId)) return { eligible: false, reason: 'duplicate-event' };
+  if (usedFaceUpSessionIds.includes(event.faceUpSessionId)) {
+    return { eligible: false, reason: 'already-used-this-face-up-period' };
+  }
   if (event.previousControllerSeat === event.newControllerSeat) {
     return { eligible: false, reason: 'controller-did-not-change' };
   }
@@ -101,13 +115,14 @@ export function prepareAmebaControlChangeBurn(
     eligible: true,
     plan: {
       eventId: event.eventId,
+      faceUpSessionId: event.faceUpSessionId,
       sourceUid: event.sourceUid,
       physicalOwnerSeat: event.physicalOwnerSeat,
       fromTeam,
       recipientSeat: event.newControllerSeat,
       recipientTeam,
       damage: 2000,
-      oncePerTurnLimit: false,
+      oncePerFaceUpPeriod: true,
     },
   };
 }
@@ -117,14 +132,21 @@ export function recordAmebaControlChangeEvent(
   processedEventIds: readonly string[],
   eventId: string,
 ): readonly string[] {
-  if (!Array.isArray(processedEventIds) || processedEventIds.some(id => typeof id !== 'string' || id.length === 0)) {
-    throw new TypeError('Invalid processed-event ledger.');
-  }
+  validateLedger(processedEventIds, 'processed-event');
   requireText(eventId, 'event ID');
-  if (new Set(processedEventIds).size !== processedEventIds.length) {
-    throw new TypeError('Duplicate event in persisted ledger.');
-  }
   if (processedEventIds.includes(eventId)) return processedEventIds;
   if (processedEventIds.length >= 4096) throw new RangeError('Ameba event ledger limit exceeded.');
   return [...processedEventIds, eventId];
+}
+
+/** Tracks the once-while-face-up clause independently from event replay IDs. */
+export function recordAmebaFaceUpSession(
+  usedFaceUpSessionIds: readonly string[],
+  faceUpSessionId: string,
+): readonly string[] {
+  validateLedger(usedFaceUpSessionIds, 'used-face-up-session');
+  requireText(faceUpSessionId, 'face-up session ID');
+  if (usedFaceUpSessionIds.includes(faceUpSessionId)) return usedFaceUpSessionIds;
+  if (usedFaceUpSessionIds.length >= 4096) throw new RangeError('Ameba face-up session ledger limit exceeded.');
+  return [...usedFaceUpSessionIds, faceUpSessionId];
 }
