@@ -127,7 +127,6 @@ function validateField(field: readonly AndroSphinxFieldCard[]): void {
   for (const card of field) {
     if (!card || typeof card !== 'object') throw new TypeError('Invalid field card.');
     requireId(card.uid, 'physical UID');
-    requireId(card.cardId, 'card ID');
     requireSeat(card.physicalOwnerSeat, 'physical owner');
     requireSeat(card.controllerSeat, 'controller');
     if (!['monster', 'backrow', 'field'].includes(card.zone)) throw new TypeError('Invalid field zone.');
