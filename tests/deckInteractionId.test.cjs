@@ -61,6 +61,11 @@ test('builder rejects invalid owner, slot, revision, page, action, and card segm
   ));
 });
 
+test('builder rejects non-string owner and card values without throwing TypeError',()=>{
+  assert.throws(()=>buildDeckInteractionId('view',undefined,1,0,0,''),/Identificador/);
+  assert.throws(()=>buildDeckInteractionId('view','m382-owner',1,0,0,undefined),/Identificador/);
+});
+
 test('builder refuses Discord custom IDs longer than 100 characters',()=>{
   assert.throws(()=>buildDeckInteractionId('view','o'.repeat(64),1,Number.MAX_SAFE_INTEGER,0,'c'.repeat(20)),/100 caracteres/);
 });
