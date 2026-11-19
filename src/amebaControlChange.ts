@@ -1,0 +1,130 @@
+export const AMEBA_CARD_ID = '95174353' as const;
+export type DuelSeat = 0 | 1 | 2 | 3;
+export type DuelTeam = 'even' | 'odd';
+
+export type AmebaControlChangeEvent = Readonly<{
+  eventId: string;
+  sourceUid: string;
+  cardId: string;
+  physicalOwnerSeat: DuelSeat;
+  previousControllerSeat: DuelSeat;
+  newControllerSeat: DuelSeat;
+  faceUpAtChange: boolean;
+  effectNegated?: boolean;
+}>;
+
+export type AmebaBurnReason =
+  | 'wrong-card'
+  | 'not-face-up-at-control-change'
+  | 'effect-negated'
+  | 'controller-did-not-change'
+  | 'control-remained-within-team'
+  | 'duplicate-event';
+
+export type AmebaBurnEvaluation =
+  | Readonly<{ eligible: false; reason: AmebaBurnReason }>
+  | Readonly<{
+      eligible: true;
+      plan: Readonly<{
+        eventId: string;
+        sourceUid: string;
+        physicalOwnerSeat: DuelSeat;
+        fromTeam: DuelTeam;
+        recipientSeat: DuelSeat;
+        recipientTeam: DuelTeam;
+        damage: 2000;
+        oncePerTurnLimit: false;
+      }>;
+    }>;
+
+function isSeat(value: unknown): value is DuelSeat {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value <= 3;
+}
+
+function requireSeat(value: unknown, name: string): asserts value is DuelSeat {
+  if (!isSeat(value)) throw new TypeError(`Invalid ${name}.`);
+}
+
+function requireText(value: unknown, name: string): asserts value is string {
+  if (typeof value !== 'string' || value.length === 0 || value.length > 128) {
+    throw new TypeError(`Invalid ${name}.`);
+  }
+}
+
+export function teamOfAmebaSeat(seat: DuelSeat): DuelTeam {
+  requireSeat(seat, 'seat');
+  return seat % 2 === 0 ? 'even' : 'odd';
+}
+
+function validateEvent(event: AmebaControlChangeEvent): void {
+  if (!event || typeof event !== 'object') throw new TypeError('Invalid Ameba control-change event.');
+  requireText(event.eventId, 'event ID');
+  requireText(event.sourceUid, 'source UID');
+  requireText(event.cardId, 'card ID');
+  requireSeat(event.physicalOwnerSeat, 'physical owner');
+  requireSeat(event.previousControllerSeat, 'previous controller');
+  requireSeat(event.newControllerSeat, 'new controller');
+  if (typeof event.faceUpAtChange !== 'boolean') throw new TypeError('Invalid face-up snapshot.');
+  if (event.effectNegated !== undefined && typeof event.effectNegated !== 'boolean') {
+    throw new TypeError('Invalid effect-negation snapshot.');
+  }
+}
+
+/**
+ * Ameba inflicts 2000 damage when control of this face-up card changes.
+ * In a shared-field 2v2 duel, damage is routed to the team that received
+ * control at the event snapshot; physical ownership remains unchanged.
+ */
+export function prepareAmebaControlChangeBurn(
+  event: AmebaControlChangeEvent,
+  processedEventIds: readonly string[] = [],
+): AmebaBurnEvaluation {
+  validateEvent(event);
+  if (!Array.isArray(processedEventIds) || processedEventIds.some(id => typeof id !== 'string' || id.length === 0)) {
+    throw new TypeError('Invalid processed-event ledger.');
+  }
+  if (event.cardId !== AMEBA_CARD_ID) return { eligible: false, reason: 'wrong-card' };
+  if (!event.faceUpAtChange) return { eligible: false, reason: 'not-face-up-at-control-change' };
+  if (event.effectNegated) return { eligible: false, reason: 'effect-negated' };
+  if (processedEventIds.includes(event.eventId)) return { eligible: false, reason: 'duplicate-event' };
+  if (event.previousControllerSeat === event.newControllerSeat) {
+    return { eligible: false, reason: 'controller-did-not-change' };
+  }
+
+  const fromTeam = teamOfAmebaSeat(event.previousControllerSeat);
+  const recipientTeam = teamOfAmebaSeat(event.newControllerSeat);
+  // A seat handoff between partners does not change the controlling team or
+  // the team's shared LP. It must not manufacture an Ameba damage trigger.
+  if (fromTeam === recipientTeam) return { eligible: false, reason: 'control-remained-within-team' };
+
+  return {
+    eligible: true,
+    plan: {
+      eventId: event.eventId,
+      sourceUid: event.sourceUid,
+      physicalOwnerSeat: event.physicalOwnerSeat,
+      fromTeam,
+      recipientSeat: event.newControllerSeat,
+      recipientTeam,
+      damage: 2000,
+      oncePerTurnLimit: false,
+    },
+  };
+}
+
+/** Returns a new replay ledger; it never mutates the caller's persisted array. */
+export function recordAmebaControlChangeEvent(
+  processedEventIds: readonly string[],
+  eventId: string,
+): readonly string[] {
+  if (!Array.isArray(processedEventIds) || processedEventIds.some(id => typeof id !== 'string' || id.length === 0)) {
+    throw new TypeError('Invalid processed-event ledger.');
+  }
+  requireText(eventId, 'event ID');
+  if (new Set(processedEventIds).size !== processedEventIds.length) {
+    throw new TypeError('Duplicate event in persisted ledger.');
+  }
+  if (processedEventIds.includes(eventId)) return processedEventIds;
+  if (processedEventIds.length >= 4096) throw new RangeError('Ameba event ledger limit exceeded.');
+  return [...processedEventIds, eventId];
+}
