@@ -34,6 +34,7 @@ function recruitContext(patch = {}) {
     destroyedByBattle: true,
     effectNegated: false,
     teamMonsterZonesUsed: 1,
+    sourceDeckOwnerSeat: 0,
     sourceDeck: deck,
     ...patch
   };
@@ -80,7 +81,7 @@ test('recruitment is available only after battle destruction and while not negat
 test('recruitment filters only Level 1–2 Spellcasters from the supplied physical Deck', () => {
   assert.deepEqual(
     eligibleApprenticeRecruitTargets(recruitContext()),
-    ['spellcaster-l1', 'spellcaster-l2', 'partner-deck-card']
+    ['spellcaster-l1', 'spellcaster-l2']
   );
 });
 
@@ -109,12 +110,12 @@ test('selection is revalidated by UID after the source Deck changes', () => {
 });
 
 test('successful selection preserves physical UID and owner and prepares face-down Defense', () => {
-  const result = prepareApprenticeRecruit(recruitContext(), 'partner-deck-card');
+  const result = prepareApprenticeRecruit(recruitContext(), 'spellcaster-l2');
   assert.deepEqual(result, {
     ok: true,
-    uid: 'partner-deck-card',
-    cardId: '10000008',
-    ownerSeat: 2,
+    uid: 'spellcaster-l2',
+    cardId: '10000002',
+    ownerSeat: 0,
     destination: 'monster-zone',
     position: 'def',
     faceUp: false
@@ -127,8 +128,17 @@ test('duplicate physical UIDs are exposed only once', () => {
   });
   assert.deepEqual(
     eligibleApprenticeRecruitTargets(duplicated),
-    ['spellcaster-l1', 'spellcaster-l2', 'partner-deck-card']
+    ['spellcaster-l1', 'spellcaster-l2']
   );
+});
+
+test('a candidate from the partner physical Deck is rejected even if injected into the supplied list', () => {
+  const mixed = recruitContext();
+  assert.ok(!eligibleApprenticeRecruitTargets(mixed).includes('partner-deck-card'));
+  assert.deepEqual(prepareApprenticeRecruit(mixed, 'partner-deck-card'), {
+    ok: false,
+    reason: 'target-not-eligible'
+  });
 });
 
 test('no automatic summon or Deck mutation occurs when merely enumerating candidates', () => {
