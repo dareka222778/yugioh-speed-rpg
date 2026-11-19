@@ -48,7 +48,7 @@ const board = (...cards) => {
   const next = { even: 0, odd: 0 };
   return cards.map(card => {
     const team = card.controllerSeat % 2 === 0 ? 'even' : 'odd';
-    return { ...card, zoneSlot: card.zoneSlot ?? next[team]++ };
+    return { ...card, zoneSlot: next[team]++ };
   });
 };
 
@@ -203,6 +203,7 @@ test('control, not physical ownership, determines Arsenal Bug team counts', () =
 });
 
 test('shared Monster Field rejects duplicate UIDs and duplicate team slots', () => {
-  assert.throws(() => validateLegacyMonsterField(board(tiger(), monster({ uid: 'm0:dup', controllerSeat: 2, physicalOwnerSeat: 2, zoneSlot: 0 }))), /slot is occupied/);
+  const valid = board(tiger(), monster({ uid: 'm0:second', controllerSeat: 2, physicalOwnerSeat: 2 }));
+  assert.throws(() => validateLegacyMonsterField([valid[0], { ...valid[1], zoneSlot: 0 }]), /slot is occupied/);
   assert.throws(() => validateLegacyMonsterField(board(tiger(), tiger({ uid: 'm0:tiger' }))), /Duplicate physical UID/);
 });
