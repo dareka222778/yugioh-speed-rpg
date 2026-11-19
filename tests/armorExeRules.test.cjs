@@ -171,12 +171,17 @@ test('a counter on the opposing team cannot be selected', () => {
   assert.deepEqual(resolveArmorExeStandbyUpkeep('m0:armor-exe', field, currentPhase, plan, 's1:opponent-counter').action, 'destroy');
 });
 
-test('a selected counter that moved teams after the offer is rejected as stale', () => {
+test('if the offered counter leaves the team and none remain, Armor Exe is destroyed', () => {
   const offeredField = board(armorExe(), fieldCard({ uid: 's0:counter' }));
   const plan = prepareArmorExeStandbyUpkeep('m0:armor-exe', offeredField, phase());
   const changedField = board(armorExe(), fieldCard({ uid: 's0:counter', controllerSeat: 1, physicalOwnerSeat: 1 }));
   assert.deepEqual(resolveArmorExeStandbyUpkeep('m0:armor-exe', changedField, phase(), plan, 's0:counter'), {
-    resolved: false, reason: 'stale-plan',
+    resolved: true,
+    action: 'destroy',
+    sourceUid: 'm0:armor-exe',
+    sourcePhysicalOwnerSeat: 0,
+    controllerTeam: 'even',
+    phaseEventId: phase().eventId,
   });
 });
 
@@ -204,14 +209,15 @@ test('phase ledger is immutable and idempotent', () => {
 });
 
 test('field validation enforces three Monster and three backrow slots per team', () => {
-  const field = board(
+  const valid = board(
     armorExe(),
     armorExe({ uid: 'm0:second', controllerSeat: 2, physicalOwnerSeat: 2 }),
     armorExe({ uid: 'm0:third', controllerSeat: 0 }),
   );
-  assert.throws(() => validateArmorExeField(field), /slot is occupied/);
-  const valid = board(armorExe(), fieldCard());
   assert.doesNotThrow(() => validateArmorExeField(valid));
+  assert.throws(() => validateArmorExeField([valid[0], { ...valid[1], zoneSlot: 0 }, valid[2]]), /slot is occupied/);
+  const validBackrow = board(armorExe(), fieldCard());
+  assert.doesNotThrow(() => validateArmorExeField(validBackrow));
 });
 
 test('field validation rejects duplicate physical UIDs', () => {
