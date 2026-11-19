@@ -9,7 +9,7 @@ export type FieldZone = 'monster' | 'backrow' | 'field';
 
 export type AndroSphinxFieldCard = Readonly<{
   uid: string;
-  cardId: string;
+  cardId?: string;
   physicalOwnerSeat: DuelSeat;
   controllerSeat: DuelSeat;
   zone: FieldZone;
@@ -132,6 +132,8 @@ function validateField(field: readonly AndroSphinxFieldCard[]): void {
     requireSeat(card.controllerSeat, 'controller');
     if (!['monster', 'backrow', 'field'].includes(card.zone)) throw new TypeError('Invalid field zone.');
     if (typeof card.faceUp !== 'boolean') throw new TypeError('Invalid face-up state.');
+    if (card.faceUp) requireId(card.cardId, 'face-up card ID');
+    else if (card.cardId !== undefined) throw new TypeError('Face-down card identity must remain hidden.');
     if (card.position !== undefined && card.position !== 'attack' && card.position !== 'defense') {
       throw new TypeError('Invalid monster position.');
     }
@@ -312,10 +314,9 @@ export function canAndroSphinxAttack(card: AndroSphinxFieldCard, turn: number): 
   requireNonNegativeInteger(turn, 'turn');
   if (turn < 1) throw new TypeError('Invalid turn.');
   if (!card || typeof card !== 'object') throw new TypeError('Invalid monster.');
-  requireId(card.uid, 'physical UID');
-  requireId(card.cardId, 'card ID');
+  validateField([card]);
   if (card.cardId !== ANDRO_SPHINX_CARD_ID || card.zone !== 'monster' || !card.faceUp ||
-      card.position !== 'attack') return false;
+      card.position !== 'attack' || card.lastNormalOrSpecialSummonTurn === undefined) return false;
   return card.lastNormalOrSpecialSummonTurn !== turn;
 }
 
