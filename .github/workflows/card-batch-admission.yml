@@ -1,12 +1,16 @@
 name: Card batch admission preparation
 on:
   pull_request:
-    branches: [main, classic-engine-foundation]
+    branches: [main, classic-engine-foundation, feat/rea-engine-recovery-20261026]
     paths:
       - 'catalog/proposed/**'
       - 'scripts/card-batch-*.cjs'
       - 'scripts/apply-reviewed-admission.cjs'
       - '.github/workflows/card-batch-admission.yml'
+      - 'scripts/audit-release27.cjs'
+      - 'tests/cardBatchCI.test.cjs'
+      - 'tests/cardBatchAutomation.test.cjs'
+      - 'tests/cardReleasePolicy.test.cjs'
 permissions:
   contents: read
 jobs:
@@ -25,6 +29,7 @@ jobs:
       - run: node scripts/card-batch-ci.cjs
         env:
           CARD_BATCH_BASE_COMMIT: ${{ github.event.pull_request.head.sha }}
+          CARD_BATCH_RELEASE_AUTHORIZED: ${{ github.event.pull_request.user.login == 'dareka222778' }}
       - uses: actions/upload-artifact@v4
         with:
           name: reviewed-admission-changes
@@ -55,4 +60,5 @@ jobs:
         run: node scripts/apply-reviewed-admission.cjs artifacts/admission-bundle.json
         env:
           CARD_BATCH_BASE_COMMIT: ${{ github.event.pull_request.head.sha }}
+          CARD_BATCH_RELEASE_AUTHORIZED: ${{ github.event.pull_request.user.login == 'dareka222778' }}
           CARD_BATCH_BRANCH: ${{ github.head_ref }}

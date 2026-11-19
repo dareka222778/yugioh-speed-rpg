@@ -7,15 +7,23 @@
 const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),assert=require('node:assert/strict');
 const {validateBundle}=require('./card-batch-ci.cjs');
 const root=path.resolve(__dirname,'..');
+function verifyResult(result,releaseAuthorized=process.env.CARD_BATCH_RELEASE_AUTHORIZED==='true'){
+ assert.ok(result&&['certified','released'].includes(result.stage),'Invalid admission stage');
+ assert.equal(typeof result.distributionAuthorized,'boolean','Explicit distribution decision required');
+ assert.equal(result.distributionAuthorized,result.stage==='released','Stage and distribution authorization disagree');
+ if(result.distributionAuthorized)assert.equal(releaseAuthorized,true,'Only an owner-authored PR may authorize distribution');
+ assert.ok(Number.isInteger(result.added)&&result.added>0);
+ assert.equal(result.inventoryGranted,0);assert.equal(result.deployed,false);return true;
+}
 function run(args){return cp.execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();}
 function safeBranch(branch){assert.match(branch??'',/^[A-Za-z0-9][A-Za-z0-9_./-]*$/);assert.ok(!branch.includes('..')&&!branch.startsWith('/')&&!branch.endsWith('/')&&!branch.includes('//')&&!branch.endsWith('.lock'));return branch;}
-function verify(bundle,expected,rootDir=root){
+function verify(bundle,expected,rootDir=root,{releaseAuthorized=process.env.CARD_BATCH_RELEASE_AUTHORIZED==='true'}={}){
  assert.match(expected??'',/^[a-f0-9]{40}$/);
  assert.equal(bundle.baseCommit,expected,'Stale admission bundle base');
  assert.equal(bundle.fullTests,bundle.results?.length>0,'Only a genuinely completed batch can be published');
  if(!bundle.results?.length){assert.equal(bundle.stage,'no-submissions');assert.deepEqual(bundle.files,[]);return false;}
  assert.equal(bundle.gate,'card-batch-automation.promote');
- for(const result of bundle.results){assert.equal(result.stage,'released');assert.ok(Number.isInteger(result.added)&&result.added>0);assert.equal(result.inventoryGranted,0);assert.equal(result.deployed,false);}
+ for(const result of bundle.results)verifyResult(result,releaseAuthorized);
  assert.ok(bundle.testSummary?.fail===0&&bundle.testSummary?.pass>0&&bundle.testSummary?.exitCode===0,'Missing clean complete test summary');
  validateBundle(bundle,rootDir);
  return true;
@@ -51,5 +59,5 @@ function publish(file,expected,branch){
  run(['push','origin','HEAD:refs/heads/'+target]);
  return {published:true,commit:run(['rev-parse','HEAD']),added:bundle.results.reduce((n,r)=>n+r.added,0)};
 }
-module.exports={verify,safeBranch,publish,consumeQueue};
+module.exports={verify,verifyResult,safeBranch,publish,consumeQueue};
 if(require.main===module){try{const result=publish(process.argv[2]??'artifacts/admission-bundle.json',process.env.CARD_BATCH_BASE_COMMIT,process.env.CARD_BATCH_BRANCH);console.log('ADMISSION_PUBLISH_RESULT '+JSON.stringify(result));}catch(error){console.error('ADMISSION_PUBLISH_BLOCKED',error.message);process.exitCode=1;}}
