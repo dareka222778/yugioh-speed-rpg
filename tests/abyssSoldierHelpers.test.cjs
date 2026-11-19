@@ -137,7 +137,7 @@ test('field-card target enumeration covers both teams and all three field zones'
   assert.equal(abyssSoldierFieldTargets(s).length, 5);
 });
 
-test('ordinary monster returns to its physical owner's active hand', () => {
+test("ordinary monster returns to its physical owner's active hand", () => {
   const s = state();
   s.players[0].monsters.push({ uid: 'm0:monster', id: 'normal', owner: 0, faceUp: true, position: 'atk', entered: 1, changed: 1, attacked: 0, atkBoost: 0, defBoost: 0 });
   const result = returnFieldCardToOwner(s, 'm0:monster', getCard);
@@ -146,7 +146,7 @@ test('ordinary monster returns to its physical owner's active hand', () => {
   assert.deepEqual(s.players[0].monsters, []);
 });
 
-test('stolen monster returns to the inactive physical owner's reserved hand', () => {
+test("stolen monster returns to the inactive physical owner's reserved hand", () => {
   const s = state();
   s.players[1].monsters.push({ uid: 'm2:stolen', id: 'normal', owner: 0, faceUp: true, position: 'atk', entered: 1, changed: 1, attacked: 0, atkBoost: 0, defBoost: 0 });
   const result = resolveAbyssSoldierTarget(s, 'm2:stolen', getCard);
@@ -156,7 +156,7 @@ test('stolen monster returns to the inactive physical owner's reserved hand', ()
   assert.deepEqual(s.players[1].monsters, []);
 });
 
-test('Fusion monster returns to its physical owner's Extra Deck', () => {
+test("Fusion monster returns to its physical owner's Extra Deck", () => {
   const s = state();
   s.players[1].monsters.push({ uid: 'm3:fusion', id: 'fusion', owner: 1, faceUp: true, position: 'atk', entered: 1, changed: 1, attacked: 0, atkBoost: 0, defBoost: 0 });
   const result = returnFieldCardToOwner(s, 'm3:fusion', getCard);
