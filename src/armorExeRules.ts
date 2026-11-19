@@ -288,6 +288,7 @@ export function recordArmorExeStandbyPhase(
 export function armorExeCanAttack(source: ArmorExeFieldCard, currentTurn: number): boolean {
   validateFieldCard(source);
   if (source.cardId !== ARMOR_EXE_CARD_ID) throw new TypeError('Wrong Armor Exe source.');
+  if (source.lastSummonedTurn === undefined) throw new TypeError('Armor Exe is missing its last-summoned turn.');
   if (!Number.isSafeInteger(currentTurn) || currentTurn < 1) throw new TypeError('Invalid current turn.');
   return source.zone === 'monster' && source.faceUp && source.lastSummonedTurn !== currentTurn;
 }
