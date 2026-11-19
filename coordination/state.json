@@ -4,8 +4,8 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-18T21:49:04.496Z",
-  "nextScheduledAt": "2026-11-18T22:30:00-03:00",
+  "lastActivityAt": "2026-11-19T02:33:50.163Z",
+  "nextScheduledAt": "2026-11-19T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -19,7 +19,7 @@
     "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
     "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261118T182801-0300-M367-M368.json",
+  "lastCheckpoint": "coordination/runs/work-20261118T231306-0300-M372-M373.json",
   "previousRunId": "work-20261115T055534-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência. M357 reservado em branch independente para revisão oficial dos últimos onze candidatos; somente documentação e teste de evidência. M358 reservado em branch independente para testar confidencialidade de monstros/backrow face-down no painel público e visibilidade por equipe no painel privado; somente tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs, sem alterações em runtime ou reservas existentes. M359 reservado em branch independente para homologar renderTag/tagImageLayout: privacidade visual face-down por equipe, dimensões do playmat clássico e vistas privadas por assento; somente tests/tagClassicVisualPrivacyLayout2v2.test.cjs. M360 reservado em branch independente para verificar isolamento visual da mão física em 2v2: somente o dono vê alterações na própria mão; campo compartilhado permanece igual; somente tests/tagClassicPrivateHandIsolationVisual2v2.test.cjs. M361 reservado em branch independente para um teste de genericidade do executor CI; PR #309; somente tests/ciRunnerGenericity.test.cjs; runner compartilhado intocado. Diagnósticos enviados às PRs #306–#308 após falhas reais de Engine Validation. Handoff parcial M61 solicitado no PR #17, sem resposta. M362 concluído em branch própria, PR #310; 10/10 testes de admissão aprovados, Card Batch Admission/Fast/Milestone aprovados, Engine Validation, npm test, stress e Extended Soak 600s aprovados. Reserva liberada ao auxiliar para sincronização não-forçada e monitoramento da PR; nenhuma reserva de terceiro foi liberada. M363 concluído: PR #311, 31/31 identidades reconciliadas, CI fast/milestone/engine success; apenas evidência/teste, ainda sem certificação. A auditoria não certifica cartas nem altera a allowlist. M364 PR #312: branch 266187b divergiu 15 commits à frente/3 atrás; check, npm test e soak passaram, mas Dependency Audit/Engine Validation falharam porque o lockfile atual ainda contém sharp high. Candidato sharp 0.35.5 passou audit de produção (0 vulnerabilidades) e typecheck via tsconfig paths; package.json/package-lock ainda não aplicados. Handoff desses dois manifestos solicitado (comentário 6991573026), aguardando liberação; auxiliar apenas monitora. M365 concluído em branch própria, PR #313: tests/tagGravekeepersGuardNoOpponentTargetDiscord2v2.test.cjs; sem alvo adversário, Gravekeeper's Guard não oferece monstros aliados. Card Batch Fast, Milestone 1000, npm test e Extended Soak aprovados; Engine Validation finalizando. Reserva liberada ao auxiliar apenas para monitorar/corrigir o arquivo de teste. M366 cobre separadamente o retorno ao proprietário físico. M366 PR #314: somente tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs, 3 cenários (face-up, Fusion/Extra Deck e face-down/privacidade); runtime sem handoff porque pauseOverflow normaliza mão/Extra por UID físico; CI reforçada em andamento; auxiliar apenas monitora/corrige o teste.ts solicitado no PR #17, sem runtime antes da liberação; auxiliar pode apenas monitorar/corrigir fixture do teste. M367 e M368: branches próprias #315/#316, primitives isoladas + 30 testes unitários; liberadas ao auxiliar somente para monitorar/corrigir os quatro arquivos próprios. Runtime do duelo e catálogo aguardam handoff M61; nenhuma carta certificada.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência. M357 reservado em branch independente para revisão oficial dos últimos onze candidatos; somente documentação e teste de evidência. M358 reservado em branch independente para testar confidencialidade de monstros/backrow face-down no painel público e visibilidade por equipe no painel privado; somente tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs, sem alterações em runtime ou reservas existentes. M359 reservado em branch independente para homologar renderTag/tagImageLayout: privacidade visual face-down por equipe, dimensões do playmat clássico e vistas privadas por assento; somente tests/tagClassicVisualPrivacyLayout2v2.test.cjs. M360 reservado em branch independente para verificar isolamento visual da mão física em 2v2: somente o dono vê alterações na própria mão; campo compartilhado permanece igual; somente tests/tagClassicPrivateHandIsolationVisual2v2.test.cjs. M361 reservado em branch independente para um teste de genericidade do executor CI; PR #309; somente tests/ciRunnerGenericity.test.cjs; runner compartilhado intocado. Diagnósticos enviados às PRs #306–#308 após falhas reais de Engine Validation. Handoff parcial M61 solicitado no PR #17, sem resposta. M362 concluído em branch própria, PR #310; 10/10 testes de admissão aprovados, Card Batch Admission/Fast/Milestone aprovados, Engine Validation, npm test, stress e Extended Soak 600s aprovados. Reserva liberada ao auxiliar para sincronização não-forçada e monitoramento da PR; nenhuma reserva de terceiro foi liberada. M363 concluído: PR #311, 31/31 identidades reconciliadas, CI fast/milestone/engine success; apenas evidência/teste, ainda sem certificação. A auditoria não certifica cartas nem altera a allowlist. M364 PR #312: branch 266187b divergiu 15 commits à frente/3 atrás; check, npm test e soak passaram, mas Dependency Audit/Engine Validation falharam porque o lockfile atual ainda contém sharp high. Candidato sharp 0.35.5 passou audit de produção (0 vulnerabilidades) e typecheck via tsconfig paths; package.json/package-lock ainda não aplicados. Handoff desses dois manifestos solicitado (comentário 6991573026), aguardando liberação; auxiliar apenas monitora. M365 concluído em branch própria, PR #313: tests/tagGravekeepersGuardNoOpponentTargetDiscord2v2.test.cjs; sem alvo adversário, Gravekeeper's Guard não oferece monstros aliados. Card Batch Fast, Milestone 1000, npm test e Extended Soak aprovados; Engine Validation finalizando. Reserva liberada ao auxiliar apenas para monitorar/corrigir o arquivo de teste. M366 cobre separadamente o retorno ao proprietário físico. M366 PR #314: somente tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs, 3 cenários (face-up, Fusion/Extra Deck e face-down/privacidade); runtime sem handoff porque pauseOverflow normaliza mão/Extra por UID físico; CI reforçada em andamento; auxiliar apenas monitora/corrige o teste.ts solicitado no PR #17, sem runtime antes da liberação; auxiliar pode apenas monitorar/corrigir fixture do teste. M367 e M368: branches próprias #315/#316, primitives isoladas + 30 testes unitários; liberadas ao auxiliar somente para monitorar/corrigir os quatro arquivos próprios. Runtime do duelo e catálogo aguardam handoff M61; nenhuma carta certificada. M372 Agido PR #320 e M373 Aqua Spirit PR #321 concluídas em branches próprias; auxiliares liberados somente para monitorar/corrigir testes próprios; M61 handoff continua pendente. M369–M371 permanecem ativos em PRs próprias; diagnósticos M369/M371 enviados sem editar suas reservas.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -2634,6 +2634,71 @@
       ],
       "testCases": 14,
       "newCertifications": 0
+    },
+    {
+      "mission": "M372",
+      "runId": "work-20261118T231306-0300-M372-M373",
+      "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+      "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+      "pr": 320,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/320",
+      "scope": [
+        "src/agidoRecruit.ts",
+        "tests/agidoRecruit.test.cjs",
+        ".github/workflows/m372-focused-tests.yml"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-18T23:13:06-03:00",
+      "endedAt": "2026-11-18T23:33:50.163-03:00",
+      "priority": "P1 — Agido: rolagem 1–6 persistida e recrutamento Fairy do Cemitério compartilhado, preservando UID físico.",
+      "ci": {
+        "focused": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600s": "in_progress"
+      },
+      "cards": [
+        "Agido"
+      ],
+      "testCases": 18,
+      "newCertifications": 0
+    },
+    {
+      "mission": "M373",
+      "runId": "work-20261118T231306-0300-M372-M373",
+      "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+      "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+      "pr": 321,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/321",
+      "scope": [
+        "src/waterGraveCost.ts",
+        "src/battlePositionLock.ts",
+        "src/positionOperations.ts",
+        "tests/waterGraveCost.test.cjs",
+        "tests/battlePositionLock.test.cjs",
+        ".github/workflows/m373-focused-tests.yml"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-18T23:22:00-03:00",
+      "endedAt": "2026-11-18T23:33:50.163-03:00",
+      "priority": "P1 — Aqua Spirit: custo WATER por UID, mão física ativa e bloqueio de posição até o fim do turno.",
+      "ci": {
+        "priorFocused": "success 31/31",
+        "latestFocused": "in_progress 36 cases",
+        "cardBatchFast": "in_progress",
+        "milestone1000": "success",
+        "engineValidation": "in_progress"
+      },
+      "cards": [
+        "Aqua Spirit"
+      ],
+      "testCases": 36,
+      "newCertifications": 0
     }
   ],
   "handoffRequest": {
@@ -2686,7 +2751,8 @@
       "certificates": 1014,
       "merged": false
     },
-    "deltaToShared": 45
+    "deltaToShared": 45,
+    "newCertifications": 0
   },
   "m60": {
     "officialSourceReviewed": [
@@ -2768,6 +2834,46 @@
         "npmTest": "passed; repeat-acceptance/critical-acceptance still running",
         "engineValidation": "in_progress",
         "extendedSoak": "in_progress"
+      }
+    },
+    {
+      "mission": "M372",
+      "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+      "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+      "pr": 320,
+      "file": "tests/agidoRecruit.test.cjs",
+      "cards": [
+        "Agido"
+      ],
+      "tests": 18,
+      "state": "open",
+      "draft": true,
+      "ci": {
+        "focused": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak600s": "in_progress"
+      }
+    },
+    {
+      "mission": "M373",
+      "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+      "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+      "pr": 321,
+      "file": "src/positionOperations.ts + new helpers/tests",
+      "cards": [
+        "Aqua Spirit"
+      ],
+      "tests": 36,
+      "state": "open",
+      "draft": true,
+      "ci": {
+        "priorFocused": "success 31/31",
+        "latestFocused": "in_progress 36 cases",
+        "cardBatchFast": "in_progress",
+        "milestone1000": "success",
+        "engineValidation": "in_progress"
       }
     }
   ],
@@ -3431,6 +3537,58 @@
       "engineValidation": "in_progress",
       "extendedSoak600": "in_progress",
       "previousHeadNpmTest": "failure_fixture_expectation_corrected"
+    },
+    "pr317": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "failure",
+      "engineRunId": 44439845295,
+      "extendedSoak": "success",
+      "failure": "Catalog revision not recovered in two Atomic Firefly tests",
+      "diagnosticComment": 6997827783
+    },
+    "pr318": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success",
+      "engineRunId": 44439794202,
+      "focused": "success",
+      "focusedRunId": 44439794029
+    },
+    "pr319": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "failure",
+      "engineRunId": 44442020734,
+      "extendedSoak": "success",
+      "discordFocused": "success",
+      "discordFocusedRunId": 44442020744,
+      "failure": "Inherited M369 catalog fixture mismatch",
+      "diagnosticComment": 6997828150
+    },
+    "pr320": {
+      "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+      "cardBatchFast": "success",
+      "cardBatchFastRunId": 44443529275,
+      "milestone1000": "success",
+      "milestoneRunId": 44443529290,
+      "focused": "success",
+      "focusedRunId": 44443529614,
+      "engineValidation": "in_progress",
+      "engineRunId": 44443529362,
+      "extendedSoak600s": "in_progress"
+    },
+    "pr321": {
+      "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+      "cardBatchFast": "in_progress",
+      "cardBatchFastRunId": 44444741535,
+      "milestone1000": "success",
+      "milestoneRunId": 44444741555,
+      "focusedPriorHead": "success 31/31",
+      "focused": "in_progress 36 cases",
+      "focusedRunId": 44444741536,
+      "engineValidation": "in_progress",
+      "engineRunId": 44444741532
     }
   },
   "production": {
@@ -3463,10 +3621,14 @@
     "discordLiveValidation": false,
     "hosting": "not independently verified",
     "discordLive": false,
-    "note": "GET .github/workflows on main returned 404; deployments endpoint was not exposed by the GitHub connector.",
+    "note": "Quatro workflows de CI na branch compartilhada; nenhum workflow de deploy em main/shared; endpoint de deployments não exposto pelo conector.",
     "deploymentWorkflow": "not found in main/shared; M71 CI branch lists only card-batch-admission, card-batch-fast, engine-validation, milestone1000",
-    "sharedHead": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
-    "sharedBranch": "feat/rea-engine-recovery-20261026"
+    "sharedHead": "ea907a31daf5c5cafb521e99053a5763483558c5",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtEnd": "ea907a31daf5c5cafb521e99053a5763483558c5",
+    "sharedAheadOfMain": 638,
+    "sharedBehindMain": 10,
+    "deploymentWorkflowFound": false
   },
   "duration": {
     "startedAt": "2026-11-15T00:31:05-03:00",
@@ -3476,136 +3638,48 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Auxiliar: monitorar #315/#316 e corrigir somente os arquivos próprios liberados. Work: aguardar handoff M61; após os soaks, sincronizar #315/#316 com a branch compartilhada por operação não-forçada; integrar primeiro 3-Hump Lacooda e depois A Cat of Ill Omen/An Owl of Luck quando src/monsterEffects.ts e src/duelEngineCurrent.ts forem liberados. Não tocar nas reservas de terceiros.",
-  "sharedHeadBeforeRelease": "0bb80a318da6ca5a1d697cae4937ed1625354325",
+  "nextTask": "Auxiliar: monitorar #320/#321 e corrigir somente os arquivos de teste liberados. Work: concluir Engine Validation/soaks; aguardar handoff M61; integrar M367 (3-Hump Lacooda) e M368 (A Cat/An Owl) quando os arquivos centrais forem liberados; depois registrar Agido e Aqua Spirit no resolver. Corrigir M369/M371 somente pelo responsável; continuar as 31 candidatas sem certificação por importação.",
+  "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
   "sharedHeadBeforeClaim": "d60d829cdfb74f3434e06f4c75cece08386a7fa5",
   "releasedOwnReservation": false,
-  "parallelWorkObserved": {
-    "at": "2026-11-14T09:18:10-03:00",
-    "note": "M165-M171 were observed as independent open PRs; no branch was modified, rebased, merged or released by this Work run.",
-    "branches": [
-      {
-        "branch": "feat/work-m140-flip-target-monsters-2v2-20261113",
-        "head": "a29764d4ea27ff06dd6b0ea47e02c58a49069412",
-        "pr": 96,
-        "ci": {
-          "head": "a29764d4ea27ff06dd6b0ea47e02c58a49069412",
-          "cardBatchFast": "success",
-          "engineValidation": "in_progress",
-          "milestone1000": "success"
-        }
-      },
-      {
-        "branch": "feat/work-m141-flip-recovery-draw-2v2-20261113",
-        "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
-        "pr": 97,
-        "ci": {
-          "head": "0b61325a518e1296825d8ad1c30554d72c57a15d",
-          "cardBatchFast": "success",
-          "engineValidation": "failure",
-          "milestone1000": "success",
-          "passedTests": 7369,
-          "failedTests": 1,
-          "failure": "Skelengel fixture expected 6 cards but started with 5; tests/tagClassicFlipRecoveryDrawPhysicalOwnership.test.cjs:138",
-          "commentId": 6859087003
-        }
-      },
-      {
-        "branch": "feat/work-m142-jinzo-team-trap-negation-20261113",
-        "head": "e35902f42bade97be71eb6c88aa0022a3fb6dd28",
-        "pr": 98,
-        "ci": {
-          "head": "e35902f42bade97be71eb6c88aa0022a3fb6dd28",
-          "cardBatchFast": "success",
-          "engineValidation": "in_progress",
-          "milestone1000": "success"
-        }
-      },
-      {
-        "branch": "feat/work-m143-sangan-witch-2v2-search-owner-20261113",
-        "head": "b9942091d0a695b732a684e4d162353dcf718e19",
-        "pr": 99,
-        "ci": {
-          "head": "b9942091d0a695b732a684e4d162353dcf718e19",
-          "cardBatchFast": "success",
-          "engineValidation": "in_progress",
-          "milestone1000": "success"
-        }
-      },
-      {
-        "branch": "feat/work-m144-equip-shared-field-2v2-20261113",
-        "head": "d153af18d5ee6e690ce2341c100e8109014f64dc",
-        "pr": 100,
-        "ci": {
-          "head": "d153af18d5ee6e690ce2341c100e8109014f64dc",
-          "cardBatchFast": "success",
-          "engineValidation": "success",
-          "milestone1000": "success"
-        }
-      },
-      {
-        "branch": "feat/work-m145-yami-global-2v2-field-modifier-20261113",
-        "head": "55dfb23849316e98a5fd0b70810205d85f6bb02e",
-        "pr": 101,
-        "ci": {
-          "head": "55dfb23849316e98a5fd0b70810205d85f6bb02e",
-          "cardBatchFast": "success",
-          "engineValidation": "in_progress",
-          "milestone1000": "success"
-        }
-      },
-      {
-        "mission": "M165",
-        "pr": 121,
-        "head": "daea004611e5bcea55a03e7c80e5b96a81655226",
-        "ci": "all-workflows-success",
-        "touched": false
-      },
-      {
-        "mission": "M166",
-        "pr": 122,
-        "head": "d6d6c38e5e246427c27ab878e94bc67625df51ea",
-        "ci": "all-workflows-success",
-        "touched": false
-      },
-      {
-        "mission": "M167",
-        "pr": 123,
-        "head": "38b1f771088623b9d8ee80ce4a6eac25529e37f8",
-        "ci": "all-workflows-success",
-        "touched": false
-      },
-      {
-        "mission": "M168",
-        "pr": 124,
-        "head": "6acf7d47b38d63c14d94ca1e833ab69b431ff221",
-        "ci": "all-workflows-success",
-        "touched": false
-      },
-      {
-        "mission": "M169",
-        "pr": 125,
-        "head": "69165a0fc4a2d8353279724a8f98fd7869412965",
-        "ci": "all-workflows-success",
-        "touched": false
-      },
-      {
-        "mission": "M170",
-        "pr": 126,
-        "head": "d99d2975d5cb36185e4fc7e9b44faa9ca84afc26",
-        "ci": "fast-and-milestone-success-engine-in-progress",
-        "touched": false
-      },
-      {
-        "mission": "M171",
-        "pr": 127,
-        "head": "386ba106988726251594f6bb4927bbf0692043ab",
-        "ci": "fast-and-milestone-success-engine-in-progress",
-        "touched": false
-      }
-    ]
-  },
+  "parallelWorkObserved": [
+    {
+      "mission": "M369",
+      "pr": 317,
+      "branch": "feat/work-m369-battle-damage-redirect-atomic-firefly-20261118",
+      "state": "open-draft",
+      "mergeable": true,
+      "engineValidation": "failure",
+      "run": 44439845295,
+      "failure": "Catalog revision not recovered in two Atomic Firefly tests; synthetic withCatalog IDs are absent from catalog/engine-v9/manifest.json",
+      "diagnosticComment": 6997827783
+    },
+    {
+      "mission": "M370",
+      "pr": 318,
+      "branch": "feat/work-m370-abyss-soldier-typed-discard-bounce-20261118",
+      "state": "open-draft",
+      "mergeable": true,
+      "engineValidation": "success",
+      "run": 44439794202,
+      "focused": "success",
+      "focusedRun": 44439794029
+    },
+    {
+      "mission": "M371",
+      "pr": 319,
+      "branch": "feat/work-m371-battle-damage-redirect-discord-2v2-20261118",
+      "state": "open-draft",
+      "mergeable": true,
+      "engineValidation": "failure",
+      "run": 44442020734,
+      "failure": "Same inherited M369 catalog fixture mismatch",
+      "diagnosticComment": 6997828150,
+      "discordFocused": "success",
+      "discordFocusedRun": 44442020744
+    }
+  ],
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAfterClaim": null,
   "releasedOwnReservations": [
@@ -3688,6 +3762,25 @@
       ],
       "releasedAt": "2026-11-16T21:43:44.306-03:00",
       "to": "Auxiliary"
+    },
+    {
+      "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+      "pr": 320,
+      "files": [
+        "tests/agidoRecruit.test.cjs"
+      ],
+      "releasedAt": "2026-11-18T23:33:50.163-03:00",
+      "to": "Auxiliary"
+    },
+    {
+      "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+      "pr": 321,
+      "files": [
+        "tests/waterGraveCost.test.cjs",
+        "tests/battlePositionLock.test.cjs"
+      ],
+      "releasedAt": "2026-11-18T23:33:50.163-03:00",
+      "to": "Auxiliary"
     }
   ],
   "activeRun": {
@@ -3751,7 +3844,7 @@
       }
     ]
   },
-  "nextWorkAt": "2026-11-18T17:30:00-03:00",
+  "nextWorkAt": "2026-11-19T03:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -5585,13 +5678,181 @@
       },
       "nextTask": "Auxiliar: monitorar #315/#316 e corrigir somente arquivos liberados. Work: aguardar handoff M61; integrar M367 e depois M368. Não tocar nas reservas M215–M220, M231–M236, M358–M360 ou M365.",
       "nextWindow": "2026-11-18T22:30:00-03:00"
+    },
+    {
+      "runId": "work-20261118T231306-0300-M372-M373",
+      "owner": "Work",
+      "mission": "M372–M373",
+      "priority": "P1 — Agido/Aqua Spirit helper work and generic position lock correction.",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-18T23:13:06-03:00",
+      "lastActivityAt": "2026-11-19T02:33:50.163Z",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "7d3318bfd1ba38d501c76495aa180958f820a373",
+      "scope": [
+        "src/agidoRecruit.ts",
+        "tests/agidoRecruit.test.cjs",
+        ".github/workflows/m372-focused-tests.yml",
+        "src/waterGraveCost.ts",
+        "src/battlePositionLock.ts",
+        "src/positionOperations.ts",
+        "tests/waterGraveCost.test.cjs",
+        "tests/battlePositionLock.test.cjs",
+        ".github/workflows/m373-focused-tests.yml"
+      ],
+      "workBranches": [
+        {
+          "mission": "M372",
+          "runId": "work-20261118T231306-0300-M372-M373",
+          "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+          "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+          "pr": 320,
+          "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/320",
+          "scope": [
+            "src/agidoRecruit.ts",
+            "tests/agidoRecruit.test.cjs",
+            ".github/workflows/m372-focused-tests.yml"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "startedAt": "2026-11-18T23:13:06-03:00",
+          "endedAt": "2026-11-18T23:33:50.163-03:00",
+          "priority": "P1 — Agido: rolagem 1–6 persistida e recrutamento Fairy do Cemitério compartilhado, preservando UID físico.",
+          "ci": {
+            "focused": "success",
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "extendedSoak600s": "in_progress"
+          },
+          "cards": [
+            "Agido"
+          ],
+          "testCases": 18,
+          "newCertifications": 0
+        },
+        {
+          "mission": "M373",
+          "runId": "work-20261118T231306-0300-M372-M373",
+          "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+          "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+          "pr": 321,
+          "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/321",
+          "scope": [
+            "src/waterGraveCost.ts",
+            "src/battlePositionLock.ts",
+            "src/positionOperations.ts",
+            "tests/waterGraveCost.test.cjs",
+            "tests/battlePositionLock.test.cjs",
+            ".github/workflows/m373-focused-tests.yml"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "startedAt": "2026-11-18T23:22:00-03:00",
+          "endedAt": "2026-11-18T23:33:50.163-03:00",
+          "priority": "P1 — Aqua Spirit: custo WATER por UID, mão física ativa e bloqueio de posição até o fim do turno.",
+          "ci": {
+            "priorFocused": "success 31/31",
+            "latestFocused": "in_progress 36 cases",
+            "cardBatchFast": "in_progress",
+            "milestone1000": "success",
+            "engineValidation": "in_progress"
+          },
+          "cards": [
+            "Aqua Spirit"
+          ],
+          "testCases": 36,
+          "newCertifications": 0
+        }
+      ],
+      "blocksCompleted": [
+        "M372 Agido: helper + 18 testes, PR #320; focused/card-batch/milestone passaram; Engine Validation/soaks em execução.",
+        "M373 Aqua Spirit: helpers de mão física/custo WATER/posição + correção positionOperations, 36 testes, PR #321; primeiro focused 31/31 passou; nova CI para HEAD de 36 testes em execução.",
+        "Diagnóstico de M369/M371: fixture com revisão de catálogo sintética não arquivada; comentários enviados aos responsáveis."
+      ],
+      "handoffRequests": [
+        {
+          "pr": 17,
+          "commentId": 6997627344,
+          "status": "awaiting-explicit-release"
+        }
+      ],
+      "ci": {
+        "pr320": {
+          "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 44443529275,
+          "milestone1000": "success",
+          "milestoneRunId": 44443529290,
+          "focused": "success",
+          "focusedRunId": 44443529614,
+          "engineValidation": "in_progress",
+          "engineRunId": 44443529362,
+          "extendedSoak600s": "in_progress"
+        },
+        "pr321": {
+          "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+          "cardBatchFast": "in_progress",
+          "cardBatchFastRunId": 44444741535,
+          "milestone1000": "success",
+          "milestoneRunId": 44444741555,
+          "focusedPriorHead": "success 31/31",
+          "focused": "in_progress 36 cases",
+          "focusedRunId": 44444741536,
+          "engineValidation": "in_progress",
+          "engineRunId": 44444741532
+        }
+      },
+      "catalogAtStart": {
+        "certified": 969,
+        "target": 1000,
+        "remaining": 31,
+        "historyPending": 993,
+        "identityBlocked": 27,
+        "newCertifications": 0,
+        "automaticCertifications": 0,
+        "inventoryGranted": 0
+      },
+      "catalogAtEnd": {
+        "certified": 969,
+        "target": 1000,
+        "remaining": 31,
+        "historyPending": 993,
+        "identityBlocked": 27,
+        "newCertifications": 0,
+        "automaticCertifications": 0,
+        "inventoryGranted": 0
+      },
+      "productionAtEnd": {
+        "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+        "sharedHeadAtStart": "7d3318bfd1ba38d501c76495aa180958f820a373",
+        "sharedHeadBeforeStateUpdate": "ea907a31daf5c5cafb521e99053a5763483558c5",
+        "sharedAheadOfMain": 638,
+        "sharedBehindMain": 10,
+        "mergePerformed": false,
+        "deployPerformed": false,
+        "liveDiscordValidation": false,
+        "deploymentWorkflowFound": false,
+        "deploymentsApiExposed": false
+      },
+      "duration": {
+        "elapsedMinutes": 18.19,
+        "effectiveWorkMinutes": 16.5,
+        "targetEffectiveMinutes": 60,
+        "targetMet": false,
+        "ciWaitExcluded": true
+      },
+      "nextTask": "Auxiliar: monitorar #320/#321 e corrigir somente os arquivos de teste liberados. Work: concluir Engine Validation/soaks; aguardar handoff M61; integrar M367 (3-Hump Lacooda) e M368 (A Cat/An Owl) quando os arquivos centrais forem liberados; depois registrar Agido e Aqua Spirit no resolver. Corrigir M369/M371 somente pelo responsável; continuar as 31 candidatas sem certificação por importação.",
+      "nextWindow": "2026-11-19T03:30:00-03:00"
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261118T083137-0300-M361.json",
   "lastParallelActivityAt": "2026-11-18T21:48:00.650Z",
-  "sharedHeadAfterCheckpoint": "9c7cdc3758c493c82e0a7d7917313604a92ba837",
-  "sharedHeadBeforeStateUpdate": "3adb1dcff615bb5da773038fb467c944d439851c",
-  "endedAt": "2026-11-15T09:52:13-03:00",
+  "sharedHeadAfterCheckpoint": "ea907a31daf5c5cafb521e99053a5763483558c5",
+  "sharedHeadBeforeStateUpdate": "ea907a31daf5c5cafb521e99053a5763483558c5",
+  "endedAt": "2026-11-18T23:33:50.163-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -5664,6 +5925,27 @@
           "tests/searchZoneDestination.test.cjs"
         ],
         "allowed": "Monitorar CI e corrigir somente estes arquivos na própria branch; sem monsterEffects.ts, duelEngineCurrent.ts, catálogo, certificados, inventários, banco, merge ou deploy."
+      },
+      {
+        "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+        "pr": 320,
+        "files": [
+          "tests/agidoRecruit.test.cjs"
+        ],
+        "releasedAt": "2026-11-18T23:33:50.163-03:00",
+        "to": "Auxiliary",
+        "allowed": "Monitorar CI e corrigir somente os arquivos de teste listados; não alterar runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
+      },
+      {
+        "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+        "pr": 321,
+        "files": [
+          "tests/waterGraveCost.test.cjs",
+          "tests/battlePositionLock.test.cjs"
+        ],
+        "releasedAt": "2026-11-18T23:33:50.163-03:00",
+        "to": "Auxiliary",
+        "allowed": "Monitorar CI e corrigir somente os arquivos de teste listados; não alterar runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
       }
     ],
     "allowed": "Monitorar CI e corrigir somente arquivos de teste nas próprias branches.",
@@ -5674,9 +5956,12 @@
     "src/identityScopedTribute.ts",
     "tests/identityScopedTribute.test.cjs",
     "src/searchZoneRules.ts",
-    "tests/searchZoneDestination.test.cjs"
+    "tests/searchZoneDestination.test.cjs",
+    "tests/agidoRecruit.test.cjs",
+    "tests/waterGraveCost.test.cjs",
+    "tests/battlePositionLock.test.cjs"
   ],
-  "lastCoordinationRefreshAt": "2026-11-17T16:46:00-03:00",
+  "lastCoordinationRefreshAt": "2026-11-19T02:33:50.163Z",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
     "status": "awaiting-response; separate test file only; no response observed",
@@ -5885,9 +6170,9 @@
     "requestedAt": "2026-11-14T09:18:10-03:00",
     "scope": "partial file-only handoff; no changes until release"
   },
-  "lastCheckpointAt": "2026-11-18T21:48:00.650Z",
+  "lastCheckpointAt": "2026-11-19T02:33:50.163Z",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "3adb1dcff615bb5da773038fb467c944d439851c",
+  "expectedHeadForCoordinationCommit": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "lastRunSummary": "M305 registrado: The Sanctuary in the Sky, teste de integração Discord 2v2 em branch isolada; escopo único tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -5993,22 +6278,34 @@
       "mission": "M367 3-Hump Lacooda e M368 A Cat of Ill Omen/An Owl of Luck",
       "status": "awaiting-explicit-release",
       "noResponse": true
+    },
+    {
+      "pr": 17,
+      "commentId": 6997627344,
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "mission": "M61 — integração M367/M368 e sequência M372/M373",
+      "status": "awaiting-explicit-release",
+      "noResponse": true,
+      "requestedAt": "2026-11-18T23:33:50.163-03:00"
     }
   ],
-  "nextWindow": "2026-11-18T13:30:00-03:00",
-  "lastCheckpointSha": "48ef570c2e657012a8e75cc13740f27cb4f0c556",
+  "nextWindow": "2026-11-19T03:30:00-03:00",
+  "lastCheckpointSha": "e1c09da2278b86887bac45591a619bfa6926ec5b",
   "deployment": {
     "merge": "none",
     "deploy": "none",
     "liveDiscordValidation": false,
     "hosting": "not independently verified",
-    "deploymentWorkflow": "not found in main; shared branch contains only four CI workflows",
+    "deploymentWorkflow": "not found in main/shared; deployments API not exposed",
     "mainHeadBeforeRun": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
     "mainHeadAfterRevert": "713f02afc862ddb17411706c92c67624eaa1803f",
     "mainCleanupCommit": "713f02afc862ddb17411706c92c67624eaa1803f",
     "mainCleanupReason": "Arquivo de teste M203 foi criado acidentalmente em main e removido imediatamente; sem alteração de runtime, catálogo ou dados de jogador.",
     "mainHeadAtEnd": "f78f3080b496d2697072b946088309f36e97b60e",
-    "sharedHeadAtEnd": "d37144534f31f729578d1a8d4693e6b5223d8aa4",
+    "sharedHeadAtEnd": "ea907a31daf5c5cafb521e99053a5763483558c5",
     "mainDeploymentWorkflowFound": false,
     "sharedDeploymentWorkflowFound": false,
     "githubDeploymentsApiVerified": false
@@ -6427,8 +6724,8 @@
       "state": "released-to-auxiliary-monitor-ci"
     }
   ],
-  "updatedAt": "2026-11-18T21:49:04.496Z",
-  "lastCheckpointCommit": "3adb1dcff615bb5da773038fb467c944d439851c",
+  "updatedAt": "2026-11-19T02:33:50.163Z",
+  "lastCheckpointCommit": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "concurrentReservations": [
     {
       "runId": "work-20261115T042526-0300",
@@ -6721,7 +7018,7 @@
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "sharedHeadBeforeFinalCheckpointCommit": "3adb1dcff615bb5da773038fb467c944d439851c",
+  "sharedHeadBeforeFinalCheckpointCommit": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "mainHeadAtEnd": "f78f3080b496d2697072b946088309f36e97b60e",
   "productionAtEnd": {
     "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
@@ -6743,7 +7040,7 @@
     "merge": false,
     "deploy": false
   },
-  "handoffStatus": "M367/M368: aguardando liberação explícita de src/monsterEffects.ts e src/duelEngineCurrent.ts; M364: aguardando package.json/package-lock.json.",
+  "handoffStatus": "awaiting-explicit-release",
   "additionalReservations": [
     {
       "reservationId": "work-20261115T142521-0300-M232",
@@ -7188,13 +7485,13 @@
     }
   ],
   "lastIndependentRun": {
-    "runId": "work-20261118T083137-0300-M361",
-    "mission": "M361",
+    "runId": "work-20261118T231306-0300-M372-M373",
+    "mission": "M372–M373",
     "state": "released-to-auxiliary-monitor-ci",
-    "checkpoint": "coordination/runs/work-20261118T083137-0300-M361.json",
-    "sharedHead": "808d5f5587a2a5d8e331d16088605bd207e41142",
-    "branchHead": "f35960472637f46146a90c3bc9f850db44f8edc7",
-    "endedAt": "2026-11-18T08:43:28-03:00"
+    "checkpoint": "coordination/runs/work-20261118T231306-0300-M372-M373.json",
+    "sharedHead": "ea907a31daf5c5cafb521e99053a5763483558c5",
+    "branchHead": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+    "endedAt": "2026-11-18T23:33:50.163-03:00"
   },
   "parallelIndependentRuns": [
     {
@@ -8157,68 +8454,235 @@
       },
       "nextTask": "Auxiliar: monitorar #315/#316 e corrigir somente arquivos liberados. Work: aguardar handoff M61; integrar M367 e depois M368. Não tocar nas reservas M215–M220, M231–M236, M358–M360 ou M365.",
       "nextWindow": "2026-11-18T22:30:00-03:00"
+    },
+    {
+      "runId": "work-20261118T231306-0300-M372-M373",
+      "owner": "Work",
+      "mission": "M372–M373",
+      "priority": "P1 — Agido/Aqua Spirit helper work and generic position lock correction.",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-18T23:13:06-03:00",
+      "endedAt": "2026-11-18T23:33:50.163-03:00",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "7d3318bfd1ba38d501c76495aa180958f820a373",
+      "sharedHeadBeforeStateUpdate": "ea907a31daf5c5cafb521e99053a5763483558c5",
+      "workBranches": [
+        {
+          "mission": "M372",
+          "runId": "work-20261118T231306-0300-M372-M373",
+          "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+          "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+          "pr": 320,
+          "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/320",
+          "scope": [
+            "src/agidoRecruit.ts",
+            "tests/agidoRecruit.test.cjs",
+            ".github/workflows/m372-focused-tests.yml"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "startedAt": "2026-11-18T23:13:06-03:00",
+          "endedAt": "2026-11-18T23:33:50.163-03:00",
+          "priority": "P1 — Agido: rolagem 1–6 persistida e recrutamento Fairy do Cemitério compartilhado, preservando UID físico.",
+          "ci": {
+            "focused": "success",
+            "cardBatchFast": "success",
+            "milestone1000": "success",
+            "engineValidation": "in_progress",
+            "extendedSoak600s": "in_progress"
+          },
+          "cards": [
+            "Agido"
+          ],
+          "testCases": 18,
+          "newCertifications": 0
+        },
+        {
+          "mission": "M373",
+          "runId": "work-20261118T231306-0300-M372-M373",
+          "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+          "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+          "pr": 321,
+          "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/321",
+          "scope": [
+            "src/waterGraveCost.ts",
+            "src/battlePositionLock.ts",
+            "src/positionOperations.ts",
+            "tests/waterGraveCost.test.cjs",
+            "tests/battlePositionLock.test.cjs",
+            ".github/workflows/m373-focused-tests.yml"
+          ],
+          "state": "released-to-auxiliary-monitor-ci",
+          "startedAt": "2026-11-18T23:22:00-03:00",
+          "endedAt": "2026-11-18T23:33:50.163-03:00",
+          "priority": "P1 — Aqua Spirit: custo WATER por UID, mão física ativa e bloqueio de posição até o fim do turno.",
+          "ci": {
+            "priorFocused": "success 31/31",
+            "latestFocused": "in_progress 36 cases",
+            "cardBatchFast": "in_progress",
+            "milestone1000": "success",
+            "engineValidation": "in_progress"
+          },
+          "cards": [
+            "Aqua Spirit"
+          ],
+          "testCases": 36,
+          "newCertifications": 0
+        }
+      ],
+      "blocksCompleted": [
+        "M372 Agido: helper + 18 testes, PR #320; focused/card-batch/milestone passaram; Engine Validation/soaks em execução.",
+        "M373 Aqua Spirit: helpers de mão física/custo WATER/posição + correção positionOperations, 36 testes, PR #321; primeiro focused 31/31 passou; nova CI para HEAD de 36 testes em execução.",
+        "Diagnóstico de M369/M371: fixture com revisão de catálogo sintética não arquivada; comentários enviados aos responsáveis."
+      ],
+      "ci": {
+        "pr320": {
+          "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+          "cardBatchFast": "success",
+          "cardBatchFastRunId": 44443529275,
+          "milestone1000": "success",
+          "milestoneRunId": 44443529290,
+          "focused": "success",
+          "focusedRunId": 44443529614,
+          "engineValidation": "in_progress",
+          "engineRunId": 44443529362,
+          "extendedSoak600s": "in_progress"
+        },
+        "pr321": {
+          "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+          "cardBatchFast": "in_progress",
+          "cardBatchFastRunId": 44444741535,
+          "milestone1000": "success",
+          "milestoneRunId": 44444741555,
+          "focusedPriorHead": "success 31/31",
+          "focused": "in_progress 36 cases",
+          "focusedRunId": 44444741536,
+          "engineValidation": "in_progress",
+          "engineRunId": 44444741532
+        },
+        "pr317": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "engineValidation": "failure",
+          "engineRunId": 44439845295,
+          "extendedSoak": "success",
+          "failure": "Catalog revision not recovered in two Atomic Firefly tests",
+          "diagnosticComment": 6997827783
+        },
+        "pr318": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "engineValidation": "success",
+          "engineRunId": 44439794202,
+          "focused": "success",
+          "focusedRunId": 44439794029
+        },
+        "pr319": {
+          "cardBatchFast": "success",
+          "milestone1000": "success",
+          "engineValidation": "failure",
+          "engineRunId": 44442020734,
+          "extendedSoak": "success",
+          "discordFocused": "success",
+          "discordFocusedRunId": 44442020744,
+          "failure": "Inherited M369 catalog fixture mismatch",
+          "diagnosticComment": 6997828150
+        }
+      },
+      "catalogAtEnd": {
+        "certified": 969,
+        "target": 1000,
+        "remaining": 31,
+        "historyPending": 993,
+        "identityBlocked": 27,
+        "newCertifications": 0,
+        "automaticCertifications": 0,
+        "inventoryGranted": 0
+      },
+      "productionAtEnd": {
+        "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+        "sharedHeadAtStart": "7d3318bfd1ba38d501c76495aa180958f820a373",
+        "sharedHeadBeforeStateUpdate": "ea907a31daf5c5cafb521e99053a5763483558c5",
+        "sharedAheadOfMain": 638,
+        "sharedBehindMain": 10,
+        "mergePerformed": false,
+        "deployPerformed": false,
+        "liveDiscordValidation": false,
+        "deploymentWorkflowFound": false,
+        "deploymentsApiExposed": false
+      },
+      "duration": {
+        "elapsedMinutes": 18.19,
+        "effectiveWorkMinutes": 16.5,
+        "targetEffectiveMinutes": 60,
+        "targetMet": false,
+        "ciWaitExcluded": true
+      },
+      "nextTask": "Auxiliar: monitorar #320/#321 e corrigir somente os arquivos de teste liberados. Work: concluir Engine Validation/soaks; aguardar handoff M61; integrar M367 (3-Hump Lacooda) e M368 (A Cat/An Owl) quando os arquivos centrais forem liberados; depois registrar Agido e Aqua Spirit no resolver. Corrigir M369/M371 somente pelo responsável; continuar as 31 candidatas sem certificação por importação.",
+      "nextWindow": "2026-11-19T03:30:00-03:00"
     }
   ],
   "lastParallelRun": "work-20261118T182801-0300-M367-M368",
-  "nextParallelTask": "Auxiliar: monitorar #315/#316 e corrigir somente os arquivos próprios liberados. Work: aguardar handoff M61; após os soaks, sincronizar #315/#316 com a branch compartilhada por operação não-forçada; integrar primeiro 3-Hump Lacooda e depois A Cat of Ill Omen/An Owl of Luck quando src/monsterEffects.ts e src/duelEngineCurrent.ts forem liberados. Não tocar nas reservas de terceiros.",
-  "nextParallelWindow": "2026-11-18T22:30:00-03:00",
-  "sharedHeadAfterCheckpointCommit": "3adb1dcff615bb5da773038fb467c944d439851c",
+  "nextParallelTask": "Auxiliar: #320 apenas tests/agidoRecruit.test.cjs; #321 apenas tests/waterGraveCost.test.cjs e tests/battlePositionLock.test.cjs. Não editar runtime, catálogo, effect registry, inventários, banco, main ou produção.",
+  "nextParallelWindow": "2026-11-19T03:30:00-03:00",
+  "sharedHeadAfterCheckpointCommit": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "postCheckpointCI": {
-    "sharedHead": "60a723f18481938bfbf0e6165abf683b9c00d70e",
-    "workflows": [
-      {
-        "name": "Card batch admission preparation",
-        "run": 43989983993,
-        "status": "in_progress"
-      },
-      {
-        "name": "Card batch fast feedback",
-        "run": 43989983984,
-        "status": "in_progress"
-      },
-      {
-        "name": "Milestone 1000 - certified-card progress and triage",
-        "run": 43989984126,
-        "status": "in_progress"
-      },
-      {
-        "name": "Engine validation",
-        "run": 43989983969,
-        "status": "in_progress"
-      }
-    ],
+    "sharedHead": "ea907a31daf5c5cafb521e99053a5763483558c5",
     "prs": {
-      "243": {
+      "317": {
         "cardBatchFast": "success",
         "milestone1000": "success",
-        "engineValidation": "in_progress",
-        "npmTest": "passed",
-        "stress": "in_progress",
-        "extendedSoak": "in_progress"
+        "engineValidation": "failure",
+        "engineRunId": 44439845295,
+        "extendedSoak": "success",
+        "failure": "Catalog revision not recovered in two Atomic Firefly tests",
+        "diagnosticComment": 6997827783
       },
-      "244": {
+      "318": {
         "cardBatchFast": "success",
         "milestone1000": "success",
-        "engineValidation": "in_progress",
-        "npmTest": "passed",
-        "repeatAcceptance": "passed",
-        "extendedSoak": "in_progress"
+        "engineValidation": "success",
+        "engineRunId": 44439794202,
+        "focused": "success",
+        "focusedRunId": 44439794029
       },
-      "245": {
+      "319": {
         "cardBatchFast": "success",
         "milestone1000": "success",
-        "engineValidation": "in_progress",
-        "npmTest": "passed",
-        "stress": "in_progress",
-        "extendedSoak": "in_progress"
+        "engineValidation": "failure",
+        "engineRunId": 44442020734,
+        "extendedSoak": "success",
+        "discordFocused": "success",
+        "discordFocusedRunId": 44442020744,
+        "failure": "Inherited M369 catalog fixture mismatch",
+        "diagnosticComment": 6997828150
       },
-      "246": {
+      "320": {
+        "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
         "cardBatchFast": "success",
+        "cardBatchFastRunId": 44443529275,
         "milestone1000": "success",
+        "milestoneRunId": 44443529290,
+        "focused": "success",
+        "focusedRunId": 44443529614,
         "engineValidation": "in_progress",
-        "npmTest": "passed",
-        "criticalAcceptance": "in_progress",
-        "extendedSoak": "in_progress"
+        "engineRunId": 44443529362,
+        "extendedSoak600s": "in_progress"
+      },
+      "321": {
+        "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+        "cardBatchFast": "in_progress",
+        "cardBatchFastRunId": 44444741535,
+        "milestone1000": "success",
+        "milestoneRunId": 44444741555,
+        "focusedPriorHead": "success 31/31",
+        "focused": "in_progress 36 cases",
+        "focusedRunId": 44444741536,
+        "engineValidation": "in_progress",
+        "engineRunId": 44444741532
       }
     }
   },
@@ -8236,42 +8700,76 @@
     "priority": "P1 — verificar e proteger o retorno à mão física de monstros devolvidos por efeitos de Flip em 2v2; Gravekeeper's Guard deve mirar somente a equipe adversária e devolver a carta ao assento físico proprietário, sem alterar mão do representante ativo.",
     "conflictPolicy": "Somente o novo arquivo de teste M365. Não editar src/duelEngineCurrent.ts, src/monsterEffects.ts, renderizadores, catálogo, certificações, inventários, banco persistente, dados de jogadores, main, produção ou arquivos reservados do run ativo/M358–M360/M61."
   },
-  "sharedHeadAtLastCheckpoint": "3adb1dcff615bb5da773038fb467c944d439851c",
+  "sharedHeadAtLastCheckpoint": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "latestIndependentRun": {
-    "runId": "work-20261118T182801-0300-M367-M368",
-    "mission": "M367–M368",
+    "runId": "work-20261118T231306-0300-M372-M373",
+    "mission": "M372–M373",
     "owner": "Work",
     "state": "released-to-auxiliary-monitor-ci",
-    "branch": "M367/M368 isolated branches",
-    "baseSha": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
+    "branch": "M372/M373 isolated branches",
+    "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+    "checkpoint": "coordination/runs/work-20261118T231306-0300-M372-M373.json",
     "scope": [
-      "src/identityScopedTribute.ts",
-      "tests/identityScopedTribute.test.cjs",
-      "src/searchZoneRules.ts",
-      "tests/searchZoneDestination.test.cjs"
+      "src/agidoRecruit.ts",
+      "tests/agidoRecruit.test.cjs",
+      ".github/workflows/m372-focused-tests.yml",
+      "src/waterGraveCost.ts",
+      "src/battlePositionLock.ts",
+      "src/positionOperations.ts",
+      "tests/waterGraveCost.test.cjs",
+      "tests/battlePositionLock.test.cjs",
+      ".github/workflows/m373-focused-tests.yml"
     ],
-    "priority": "P1 — primitives isoladas para Tribute por identidade e busca para topo do Deck; integração de cartas aguarda handoff M61.",
-    "conflictPolicy": "Auxiliar pode monitorar e corrigir somente os quatro arquivos próprios; handoff M61 pendente para runtime central.",
+    "priority": "P1 — Agido/Aqua Spirit primitives and position-lock rule correction; integration waits for M61 handoff.",
+    "conflictPolicy": "Auxiliary may monitor and fix only listed test files; no runtime/catalog/central resolver changes without explicit handoff.",
     "postCheckpointPrStatus": {
-      "observedAt": "2026-11-18T21:49:04.496Z",
-      "sharedHead": "c6d3cd6838a72f0dd7c676427e813b601abb6338",
+      "observedAt": "2026-11-19T02:33:50.163Z",
+      "sharedHead": "ea907a31daf5c5cafb521e99053a5763483558c5",
       "prs": {
-        "315": {
-          "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
+        "317": {
+          "head": "5917bbcde46f31b084cafce5cceafecea2d17c14",
           "state": "open",
           "draft": true,
-          "mergeable": false,
-          "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+          "mergeable": true,
+          "engineValidation": "failure",
+          "run": 44439845295,
+          "diagnosticComment": 6997827783
         },
-        "316": {
-          "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+        "318": {
+          "head": "bed8ccf6f783599eaf243b9a3b78e3e9a03750cc",
           "state": "open",
           "draft": true,
-          "mergeable": false,
-          "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+          "mergeable": true,
+          "engineValidation": "success",
+          "run": 44439794202
+        },
+        "319": {
+          "head": "cb489a0596ee539cca607e82d1e2ea05559683bb",
+          "state": "open",
+          "draft": true,
+          "mergeable": true,
+          "engineValidation": "failure",
+          "run": 44442020734,
+          "diagnosticComment": 6997828150
+        },
+        "320": {
+          "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+          "state": "open",
+          "draft": true,
+          "mergeable": true,
+          "engineValidation": "in_progress",
+          "run": 44443529362
+        },
+        "321": {
+          "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+          "state": "open",
+          "draft": true,
+          "mergeable": true,
+          "engineValidation": "in_progress",
+          "run": 44444741532
         }
       },
-      "action": "não sincronizar automaticamente nesta sessão; fazer merge/update branch não-forçado após CI e antes da revisão"
+      "action": "Não fazer merge/deploy. Auxiliar monitora somente os testes liberados. Aguardar handoff M61."
     }
   },
   "lastParallelRunSummary": {
@@ -8303,32 +8801,32 @@
     },
     "blocker": "Handoff M61 de src/monsterEffects.ts e src/duelEngineCurrent.ts aguardando liberação explícita; nenhuma integração/certificação realizada."
   },
-  "lastIndependentWorkCheckpoint": "coordination/runs/work-20261118T182801-0300-M367-M368.json",
-  "lastIndependentWorkActivityAt": "2026-11-18T18:48:00.650-03:00",
-  "nextWorkWindow": "2026-11-18T22:30:00-03:00",
-  "lastIndependentWorkRunId": "work-20261118T182801-0300-M367-M368",
-  "workBranchesUpdatedAt": "2026-11-18T21:49:04.496Z",
-  "lastActiveWorkMission": "M367–M368",
-  "sharedHeadBeforeCheckpointCommit": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
-  "lastWorkRunId": "work-20261118T182801-0300-M367-M368",
-  "lastWorkMission": "M367–M368",
-  "lastWorkBranch": "feat/work-m368-search-deck-top-destination-20261118",
-  "lastWorkHead": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+  "lastIndependentWorkCheckpoint": "coordination/runs/work-20261118T231306-0300-M372-M373.json",
+  "lastIndependentWorkActivityAt": "2026-11-19T02:33:50.163Z",
+  "nextWorkWindow": "2026-11-19T03:30:00-03:00",
+  "lastIndependentWorkRunId": "work-20261118T231306-0300-M372-M373",
+  "workBranchesUpdatedAt": "2026-11-19T02:33:50.163Z",
+  "lastActiveWorkMission": "M372–M373",
+  "sharedHeadBeforeCheckpointCommit": "7d3318bfd1ba38d501c76495aa180958f820a373",
+  "lastWorkRunId": "work-20261118T231306-0300-M372-M373",
+  "lastWorkMission": "M372–M373",
+  "lastWorkBranch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+  "lastWorkHead": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
   "lastWorkBranches": [
     {
-      "branch": "feat/work-m367-identity-scoped-tribute-primitive-20261118",
-      "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
-      "pr": 315
+      "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+      "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+      "pr": 320
     },
     {
-      "branch": "feat/work-m368-search-deck-top-destination-20261118",
-      "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
-      "pr": 316
+      "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+      "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+      "pr": 321
     }
   ],
   "lastIndependentWorkDuration": {
-    "elapsedMinutes": 19.99,
-    "effectiveWorkMinutes": 15.6,
+    "elapsedMinutes": 18.19,
+    "effectiveWorkMinutes": 16.5,
     "targetEffectiveMinutes": 60,
     "targetMet": false,
     "ciWaitExcluded": true
@@ -8336,19 +8834,18 @@
   "lastIndependentWorkReservationReleased": true,
   "lastIndependentWorkScopeReleasedToAuxiliary": [
     {
-      "branch": "feat/work-m367-identity-scoped-tribute-primitive-20261118",
-      "pr": 315,
+      "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+      "pr": 320,
       "scope": [
-        "src/identityScopedTribute.ts",
-        "tests/identityScopedTribute.test.cjs"
+        "tests/agidoRecruit.test.cjs"
       ]
     },
     {
-      "branch": "feat/work-m368-search-deck-top-destination-20261118",
-      "pr": 316,
+      "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+      "pr": 321,
       "scope": [
-        "src/searchZoneRules.ts",
-        "tests/searchZoneDestination.test.cjs"
+        "tests/waterGraveCost.test.cjs",
+        "tests/battlePositionLock.test.cjs"
       ]
     }
   ],
@@ -8356,159 +8853,281 @@
     "certified": 969,
     "target": 1000,
     "remaining": 31,
-    "identityBlocked": 27,
     "historyPending": 993,
+    "identityBlocked": 27,
     "newCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0
   },
   "lastIndependentWorkProduction": {
     "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
-    "sharedHead": "3adb1dcff615bb5da773038fb467c944d439851c",
-    "sharedAheadOfMain": 635,
+    "sharedHeadAtStart": "7d3318bfd1ba38d501c76495aa180958f820a373",
+    "sharedHeadBeforeStateUpdate": "ea907a31daf5c5cafb521e99053a5763483558c5",
+    "sharedAheadOfMain": 638,
     "sharedBehindMain": 10,
     "mergePerformed": false,
     "deployPerformed": false,
     "liveDiscordValidation": false,
-    "deploymentStatus": "não verificável pelo conector; nenhum workflow de deploy identificado"
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false
   },
   "lastIndependentWorkRunSummary": {
-    "runId": "work-20261118T182801-0300-M367-M368",
+    "runId": "work-20261118T231306-0300-M372-M373",
     "owner": "Work",
-    "mission": "M367–M368",
-    "priority": "P1 — primitives isoladas para Tribute por identidade e busca para topo do Deck; integração de cartas aguarda handoff M61.",
+    "mission": "M372–M373",
+    "priority": "P1 — primitives Agido/Aqua Spirit e correção genérica de position lock sem tocar arquivos centrais reservados.",
     "state": "released-to-auxiliary-monitor-ci",
-    "startedAt": "2026-11-18T18:28:01-03:00",
-    "endedAt": "2026-11-18T18:48:00.650-03:00",
+    "startedAt": "2026-11-18T23:13:06-03:00",
+    "endedAt": "2026-11-18T23:33:50.163-03:00",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtStart": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
+    "sharedHeadAtStart": "7d3318bfd1ba38d501c76495aa180958f820a373",
+    "checkpoint": "coordination/runs/work-20261118T231306-0300-M372-M373.json",
+    "checkpointCommit": "ea907a31daf5c5cafb521e99053a5763483558c5",
     "workBranches": [
       {
-        "mission": "M367",
-        "runId": "work-20261118T182801-0300-M367-M368",
-        "branch": "feat/work-m367-identity-scoped-tribute-primitive-20261118",
-        "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
-        "pr": 315,
+        "mission": "M372",
+        "runId": "work-20261118T231306-0300-M372-M373",
+        "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
         "baseBranch": "feat/rea-engine-recovery-20261026",
-        "baseSha": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
+        "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+        "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+        "pr": 320,
+        "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/320",
         "scope": [
-          "src/identityScopedTribute.ts",
-          "tests/identityScopedTribute.test.cjs"
+          "src/agidoRecruit.ts",
+          "tests/agidoRecruit.test.cjs",
+          ".github/workflows/m372-focused-tests.yml"
         ],
         "state": "released-to-auxiliary-monitor-ci",
-        "priority": "P1 — 3-Hump Lacooda: elegibilidade por identidade, Tribute exato de duas entre três cópias face-up e preservação de UIDs físicos.",
+        "startedAt": "2026-11-18T23:13:06-03:00",
+        "endedAt": "2026-11-18T23:33:50.163-03:00",
+        "priority": "P1 — Agido: rolagem 1–6 persistida e recrutamento Fairy do Cemitério compartilhado, preservando UID físico.",
         "ci": {
+          "focused": "success",
           "cardBatchFast": "success",
           "milestone1000": "success",
-          "npmRunCheck": "success",
-          "npmTest": "success",
           "engineValidation": "in_progress",
-          "soak120": "pending",
-          "extendedSoak600": "in_progress"
+          "extendedSoak600s": "in_progress"
         },
         "cards": [
-          "3-Hump Lacooda"
+          "Agido"
         ],
-        "testCases": 16,
+        "testCases": 18,
         "newCertifications": 0
       },
       {
-        "mission": "M368",
-        "runId": "work-20261118T182801-0300-M367-M368",
-        "branch": "feat/work-m368-search-deck-top-destination-20261118",
-        "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
-        "pr": 316,
+        "mission": "M373",
+        "runId": "work-20261118T231306-0300-M372-M373",
+        "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
         "baseBranch": "feat/rea-engine-recovery-20261026",
-        "baseSha": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
+        "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+        "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+        "pr": 321,
+        "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/321",
         "scope": [
-          "src/searchZoneRules.ts",
-          "tests/searchZoneDestination.test.cjs"
+          "src/waterGraveCost.ts",
+          "src/battlePositionLock.ts",
+          "src/positionOperations.ts",
+          "tests/waterGraveCost.test.cjs",
+          "tests/battlePositionLock.test.cjs",
+          ".github/workflows/m373-focused-tests.yml"
         ],
         "state": "released-to-auxiliary-monitor-ci",
-        "priority": "P1 — A Cat of Ill Omen/An Owl of Luck: busca com destino topo do Deck e ramo Necrovalley, sem ler o Deck privado do parceiro.",
+        "startedAt": "2026-11-18T23:22:00-03:00",
+        "endedAt": "2026-11-18T23:33:50.163-03:00",
+        "priority": "P1 — Aqua Spirit: custo WATER por UID, mão física ativa e bloqueio de posição até o fim do turno.",
         "ci": {
-          "cardBatchFast": "success",
+          "priorFocused": "success 31/31",
+          "latestFocused": "in_progress 36 cases",
+          "cardBatchFast": "in_progress",
           "milestone1000": "success",
-          "npmRunCheck": "success",
-          "npmTest": "success",
-          "engineValidation": "in_progress",
-          "soak120": "pending",
-          "extendedSoak600": "in_progress"
+          "engineValidation": "in_progress"
         },
         "cards": [
-          "A Cat of Ill Omen",
-          "An Owl of Luck"
+          "Aqua Spirit"
         ],
-        "testCases": 14,
+        "testCases": 36,
         "newCertifications": 0
       }
     ],
     "blocksCompleted": [
-      "M367: primitive de elegibilidade/seleção/pagamento de Tribute por identidade, 16 testes.",
-      "M368: destino hand/deck-top, ramo Necrovalley e resolução com preservação de UID, 14 testes.",
-      "Diagnóstico e correção de falha inicial M368; HEAD final passou check, Card Batch Fast e npm test.",
-      "Handoff cooperativo atualizado em PR #17; nenhuma edição em arquivos centrais reservados."
+      "M372 Agido: helper + 18 testes, PR #320; focused/card-batch/milestone passaram; Engine Validation/soaks em execução.",
+      "M373 Aqua Spirit: helpers de mão física/custo WATER/posição + correção positionOperations, 36 testes, PR #321; primeiro focused 31/31 passou; nova CI para HEAD de 36 testes em execução.",
+      "Diagnóstico de M369/M371: fixture com revisão de catálogo sintética não arquivada; comentários enviados aos responsáveis."
     ],
     "catalogAtEnd": {
       "certified": 969,
       "target": 1000,
       "remaining": 31,
-      "identityBlocked": 27,
       "historyPending": 993,
+      "identityBlocked": 27,
       "newCertifications": 0,
       "automaticCertifications": 0,
       "inventoryGranted": 0
     },
     "duration": {
-      "elapsedMinutes": 19.99,
-      "effectiveWorkMinutes": 15.6,
+      "elapsedMinutes": 18.19,
+      "effectiveWorkMinutes": 16.5,
       "targetEffectiveMinutes": 60,
       "targetMet": false,
       "ciWaitExcluded": true
     },
-    "nextTask": "Auxiliar: monitorar #315/#316 e corrigir somente arquivos liberados. Work: aguardar handoff M61; integrar M367 e depois M368. Não tocar nas reservas M215–M220, M231–M236, M358–M360 ou M365.",
-    "nextWindow": "2026-11-18T22:30:00-03:00"
+    "nextTask": "Auxiliar: monitorar #320/#321 e corrigir somente os arquivos de teste liberados. Work: concluir Engine Validation/soaks; aguardar handoff M61; integrar M367 (3-Hump Lacooda) e M368 (A Cat/An Owl) quando os arquivos centrais forem liberados; depois registrar Agido e Aqua Spirit no resolver. Corrigir M369/M371 somente pelo responsável; continuar as 31 candidatas sem certificação por importação.",
+    "nextWindow": "2026-11-19T03:30:00-03:00"
   },
   "postCheckpointPrStatus": {
-    "observedAt": "2026-11-18T21:49:04.496Z",
-    "sharedHead": "c6d3cd6838a72f0dd7c676427e813b601abb6338",
+    "observedAt": "2026-11-19T02:33:50.163Z",
+    "sharedHead": "ea907a31daf5c5cafb521e99053a5763483558c5",
     "prs": {
-      "315": {
-        "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
+      "317": {
+        "head": "5917bbcde46f31b084cafce5cceafecea2d17c14",
         "state": "open",
         "draft": true,
-        "mergeable": false,
-        "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+        "mergeable": true,
+        "engineValidation": "failure",
+        "run": 44439845295,
+        "diagnosticComment": 6997827783
       },
-      "316": {
-        "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+      "318": {
+        "head": "bed8ccf6f783599eaf243b9a3b78e3e9a03750cc",
         "state": "open",
         "draft": true,
-        "mergeable": false,
-        "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+        "mergeable": true,
+        "engineValidation": "success",
+        "run": 44439794202
+      },
+      "319": {
+        "head": "cb489a0596ee539cca607e82d1e2ea05559683bb",
+        "state": "open",
+        "draft": true,
+        "mergeable": true,
+        "engineValidation": "failure",
+        "run": 44442020734,
+        "diagnosticComment": 6997828150
+      },
+      "320": {
+        "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+        "state": "open",
+        "draft": true,
+        "mergeable": true,
+        "engineValidation": "in_progress",
+        "run": 44443529362
+      },
+      "321": {
+        "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+        "state": "open",
+        "draft": true,
+        "mergeable": true,
+        "engineValidation": "in_progress",
+        "run": 44444741532
       }
     },
-    "action": "não sincronizar automaticamente nesta sessão; fazer merge/update branch não-forçado após CI e antes da revisão"
+    "action": "Não fazer merge/deploy. Auxiliar monitora somente os testes liberados. Aguardar handoff M61."
   },
   "lastIndependentWorkPostCheckpointStatus": {
-    "observedAt": "2026-11-18T21:49:04.496Z",
-    "sharedHead": "c6d3cd6838a72f0dd7c676427e813b601abb6338",
+    "observedAt": "2026-11-19T02:33:50.163Z",
+    "sharedHead": "ea907a31daf5c5cafb521e99053a5763483558c5",
     "prs": {
-      "315": {
-        "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
+      "317": {
+        "head": "5917bbcde46f31b084cafce5cceafecea2d17c14",
         "state": "open",
         "draft": true,
-        "mergeable": false,
-        "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+        "mergeable": true,
+        "engineValidation": "failure",
+        "run": 44439845295,
+        "diagnosticComment": 6997827783
       },
-      "316": {
-        "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+      "318": {
+        "head": "bed8ccf6f783599eaf243b9a3b78e3e9a03750cc",
         "state": "open",
         "draft": true,
-        "mergeable": false,
-        "reason": "shared branch advanced after the PR base by the two coordination commits; synchronize before review"
+        "mergeable": true,
+        "engineValidation": "success",
+        "run": 44439794202
+      },
+      "319": {
+        "head": "cb489a0596ee539cca607e82d1e2ea05559683bb",
+        "state": "open",
+        "draft": true,
+        "mergeable": true,
+        "engineValidation": "failure",
+        "run": 44442020734,
+        "diagnosticComment": 6997828150
+      },
+      "320": {
+        "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+        "state": "open",
+        "draft": true,
+        "mergeable": true,
+        "engineValidation": "in_progress",
+        "run": 44443529362
+      },
+      "321": {
+        "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+        "state": "open",
+        "draft": true,
+        "mergeable": true,
+        "engineValidation": "in_progress",
+        "run": 44444741532
       }
     },
-    "action": "não sincronizar automaticamente nesta sessão; fazer merge/update branch não-forçado após CI e antes da revisão"
-  }
+    "action": "Não fazer merge/deploy. Auxiliar monitora somente os testes liberados. Aguardar handoff M61."
+  },
+  "latestHandoffRequest": {
+    "pr": 17,
+    "commentId": 6997627344,
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "status": "awaiting-explicit-release",
+    "noResponse": true
+  },
+  "m61HandoffRequest": {
+    "pr": 17,
+    "commentId": 6997627344,
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "status": "awaiting-explicit-release",
+    "noResponse": true
+  },
+  "observedConcurrentPullRequests": [
+    {
+      "mission": "M369",
+      "pr": 317,
+      "branch": "feat/work-m369-battle-damage-redirect-atomic-firefly-20261118",
+      "state": "open-draft",
+      "mergeable": true,
+      "engineValidation": "failure",
+      "run": 44439845295,
+      "failure": "Catalog revision not recovered in two Atomic Firefly tests; synthetic withCatalog IDs are absent from catalog/engine-v9/manifest.json",
+      "diagnosticComment": 6997827783
+    },
+    {
+      "mission": "M370",
+      "pr": 318,
+      "branch": "feat/work-m370-abyss-soldier-typed-discard-bounce-20261118",
+      "state": "open-draft",
+      "mergeable": true,
+      "engineValidation": "success",
+      "run": 44439794202,
+      "focused": "success",
+      "focusedRun": 44439794029
+    },
+    {
+      "mission": "M371",
+      "pr": 319,
+      "branch": "feat/work-m371-battle-damage-redirect-discord-2v2-20261118",
+      "state": "open-draft",
+      "mergeable": true,
+      "engineValidation": "failure",
+      "run": 44442020734,
+      "failure": "Same inherited M369 catalog fixture mismatch",
+      "diagnosticComment": 6997828150,
+      "discordFocused": "success",
+      "discordFocusedRun": 44442020744
+    }
+  ]
 }
