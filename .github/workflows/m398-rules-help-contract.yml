@@ -25,4 +25,4 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - run: node --test tests/rulesHelpContract.test.cjs tests/commandUI.test.cjs
+      - run: node --test tests/rulesHelpContract.test.cjs tests/currentEndPhaseHandLimit.test.cjs tests/commandUI.test.cjs
