@@ -37,6 +37,11 @@ function card(id, kind) {
     summary: 'private inspection fixture', source: 'https://www.db.yugioh-card.com/' };
 }
 const lookup = id => metadata.get(id);
+function chainGrant(viewerSeat = 0, targetSeat = 1, turn = 5, teamLP = 4000) {
+  return createAmazonessChainMasterHandGrant(
+    AMAZONESS_CHAIN_MASTER_ID, viewerSeat, targetSeat, turn, teamLP, true, true,
+  )?.grant;
+}
 const setRef = (uid, id, physicalOwnerSeat, controllerTeam, zone = 'backrow', faceUp = false) => ({
   uid, id, physicalOwnerSeat, controllerTeam, zone, faceUp,
 });
@@ -146,20 +151,27 @@ test('stale Set card grant cannot inspect a card that moved or changed controlle
 });
 
 test('Amazoness Chain Master grants inspection of one opposing physical hand only', () => {
-  const grant = createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 5,
+  const result = createAmazonessChainMasterHandGrant(
+    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 5, 4000, true, true,
   );
-  assert.equal(grant.scope, 'opponent-hand');
-  assert.equal(grant.targetSeat, 1);
-  assert.equal(grant.targetTeam, 1);
+  assert.equal(result.grant.scope, 'opponent-hand');
+  assert.equal(result.grant.targetSeat, 1);
+  assert.equal(result.grant.targetTeam, 1);
+  assert.equal(result.teamLP, 2500);
   assert.equal(createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 3, 5,
-  ).targetSeat, 3);
+    AMAZONESS_CHAIN_MASTER_ID, 0, 3, 5, 4000, true, true,
+  ).grant.targetSeat, 3);
   assert.equal(createAmazonessChainMasterHandGrant(
-    AMAZONESS_CHAIN_MASTER_ID, 0, 2, 5,
+    AMAZONESS_CHAIN_MASTER_ID, 0, 2, 5, 4000, true, true,
   ), null);
   assert.equal(createAmazonessChainMasterHandGrant(
-    'other', 0, 1, 5,
+    'other', 0, 1, 5, 4000, true, true,
+  ), null);
+  assert.equal(createAmazonessChainMasterHandGrant(
+    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 5, 1500, true, true,
+  ), null);
+  assert.equal(createAmazonessChainMasterHandGrant(
+    AMAZONESS_CHAIN_MASTER_ID, 0, 1, 5, 4000, false, true,
   ), null);
 });
 

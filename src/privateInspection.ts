@@ -212,6 +212,7 @@ export function restoreSetCardAfterInspection(
   field: readonly OpposingSetCard[],
 ): OpposingSetCard | null {
   if (!grant || grant.scope !== 'set-card') return null;
+  assertSetCardList(field);
   const current = field.find(card => card.uid === grant.targetUid);
   if (!current || current.faceUp || current.controllerTeam !== grant.targetTeam ||
       current.physicalOwnerSeat !== grant.targetSeat) return null;
@@ -224,17 +225,26 @@ export function createAmazonessChainMasterHandGrant(
   viewerSeat: number,
   targetSeat: number,
   turn: number,
-): PrivateInspectionGrant | null {
+  teamLP: number,
+  destroyedByBattle: boolean,
+  sentToGrave: boolean,
+): Readonly<{ grant: PrivateInspectionGrant; teamLP: number }> | null {
   assertTurn(turn);
   if (sourceCardId !== AMAZONESS_CHAIN_MASTER_ID ||
       !validSeat(viewerSeat) || !validSeat(targetSeat) ||
-      inspectionTeamOfSeat(viewerSeat) === inspectionTeamOfSeat(targetSeat)) return null;
+      inspectionTeamOfSeat(viewerSeat) === inspectionTeamOfSeat(targetSeat) ||
+      !amazonessChainMasterCanPay(sourceCardId, destroyedByBattle, sentToGrave, teamLP)) {
+    return null;
+  }
   return Object.freeze({
-    scope: 'opponent-hand',
-    viewerSeat,
-    targetTeam: inspectionTeamOfSeat(targetSeat),
-    targetSeat,
-    turn,
+    grant: Object.freeze({
+      scope: 'opponent-hand',
+      viewerSeat,
+      targetTeam: inspectionTeamOfSeat(targetSeat),
+      targetSeat,
+      turn,
+    }),
+    teamLP: teamLP - AMAZONESS_CHAIN_MASTER_LP_COST,
   });
 }
 
