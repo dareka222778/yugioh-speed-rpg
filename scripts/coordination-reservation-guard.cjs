@@ -244,7 +244,7 @@ function validateFinalCheckpoint(run) {
     const evidence = run.behavioralCertificationEvidence;
     if (!Array.isArray(evidence) || evidence.length !== run.catalogAtEnd.newCertifications ||
         evidence.some(item => !item || item.behaviorVerified !== true ||
-          typeof item.cardId !== 'string' || /^\d{8}$/.test(item.cardId) ||
+          typeof item.cardId !== 'string' || !/^\d{8}$/.test(item.cardId) ||
           typeof item.testRunId !== 'string' || !item.testRunId.trim())) {
       fail('Every new certification requires a matching behavioral test-run attestation.');
     }
