@@ -1,0 +1,92 @@
+{
+  "runId": "work-20261119T133015-0300-M397",
+  "owner": "Work",
+  "mission": "M397",
+  "priority": "P1 — adicionar um guard de coordenação que valide IDs únicos, HEAD-base, reservas ativas, escopos e liberação somente da própria reserva; sem tocar no runtime do duelo ou nas frentes concorrentes.",
+  "state": "reserved",
+  "startedAt": "2026-11-19T13:30:15-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "97983a9e05a84baef74248772e8e5e90c83930e3",
+  "branch": "feat/work-m397-coordination-reservation-guard-20261119",
+  "reservedFiles": [
+    "scripts/coordination-reservation-guard.cjs",
+    "tests/coordinationReservationGuard.test.cjs",
+    ".github/workflows/coordination-reservation-guard.yml"
+  ],
+  "conflictCheck": "Escopo novo e independente. Não sobrepõe as nove reservas do run work-20261115T142521-0300, os cinco arquivos de M383, M61 (monsterEffects.ts/duelEngineCurrent.ts), arquivos M355–M357, arquivos M387–M396, nem o baseline M8 protegido.",
+  "preservedConcurrentWork": {
+    "activeRun": "work-20261115T142521-0300",
+    "activeReservedFiles": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "currentIndependentWork": {
+      "runId": "work-20261119T041256-0300-M383",
+      "state": "reserved",
+      "reservedFiles": [
+        "src/standbyFlow.ts",
+        "src/continuousEffects.ts",
+        "src/amazonessBlowpiper.ts",
+        "tests/amazonessBlowpiper.test.cjs",
+        ".github/workflows/m383-focused-tests.yml"
+      ]
+    },
+    "m61Handoff": {
+      "pr": 17,
+      "commentId": 7003511609,
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "status": "awaiting-explicit-release",
+      "noResponse": true
+    },
+    "thirdPartyReservationsReleased": []
+  },
+  "catalogAtStart": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "productionAtStart": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHead": "97983a9e05a84baef74248772e8e5e90c83930e3",
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "observedConcurrentPRs": [
+    334,
+    335,
+    336,
+    337,
+    338,
+    339,
+    340,
+    341,
+    342,
+    343,
+    344,
+    345
+  ],
+  "blocksCompleted": [
+    "Lidos coordination/state.json e checkpoint M387–M388; confirmadas as nove reservas ativas, M383 reservado e M61 sem handoff.",
+    "Verificado shared HEAD 97983a9e05a84baef74248772e8e5e90c83930e3, main f78f3080b496d2697072b946088309f36e97b60e; shared 652 commits à frente e 10 atrás.",
+    "Verificadas PRs #334–#345 e workflows de #334–#337, #341–#345; Card Batch Fast, Milestone 1000 e Engine Validation concluídos com sucesso nos HEADs consultados.",
+    "Confirmado que os três arquivos do guard não existem na branch compartilhada e que branch/PR M397 ainda não existem."
+  ],
+  "nextTask": "Implementar guard de reserva/checkpoint, testes unitários para colisão, ID duplicado, path traversal, HEAD base e liberação de terceiros; publicar PR draft; atualizar coordenação e liberar somente os três arquivos próprios ao auxiliar.",
+  "nextWindow": "2026-11-19T18:30:00-03:00"
+}
