@@ -1,0 +1,86 @@
+{
+  "format": 1,
+  "mission": "M430",
+  "runId": "work-20261120T195356-0300-M430",
+  "owner": "Work principal",
+  "startedAt": "2026-11-20T19:53:56-03:00",
+  "endedAt": "2026-11-20T20:05:04-03:00",
+  "elapsedMinutes": 11.13,
+  "sharedSessionEffectiveMinutes": 10,
+  "countedInCombinedSession": true,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "priority": "P1 — validar Jar of Greed 2v2: Trap Set por parceiro, janela legal, Deck físico do representante ativo e privacidade Discord.",
+  "branch": "feat/work-m430-jar-of-greed-discord-2v2-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+  "head": "a01e749887fe666743f9bb4127b4d9afb79f4a2e",
+  "pr": 378,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/378",
+  "state": "released-to-auxiliary-monitor-ci",
+  "files": [
+    "tests/tagClassicJarOfGreedDiscord2v2.test.cjs",
+    "docs/evidence/m430-jar-of-greed-discord-2v2.json",
+    ".github/workflows/m430-jar-of-greed-discord-2v2.yml"
+  ],
+  "cards": [
+    "Jar of Greed"
+  ],
+  "blocksCompleted": [
+    "Fixture 2v2 com Jar of Greed fisicamente pertencente ao assento 2 e compartilhado na backrow da equipe 0.",
+    "Verificada rejeição de ativação no mesmo turno e abertura da janela após Normal Summon adversário.",
+    "Ativação pelo representante ativo seat 0; compra do Deck físico seat 0, não do Deck do dono físico seat 2.",
+    "Verificados UID m2 no Cemitério compartilhado, mão privada, payload público e conservação de 80 UIDs.",
+    "Corrigido erro do teste: nome do helper assertInventoryConserved -> assertConserved; HEAD final 1/1 focado aprovado."
+  ],
+  "initialFailure": {
+    "cause": "ReferenceError: assertInventoryConserved is not defined",
+    "resolution": "corrigido o call site para assertConserved; rerun focado aprovado"
+  },
+  "ci": {
+    "focused": {
+      "run": 44834003494,
+      "status": "success"
+    },
+    "cardBatchFast": {
+      "run": 44834003544,
+      "status": "in_progress"
+    },
+    "milestone1000": {
+      "run": 44834003563,
+      "status": "job-success-artifact-produced",
+      "artifact": 14676519389
+    },
+    "engineValidation": {
+      "run": 44834003611,
+      "status": "in_progress"
+    }
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false
+  },
+  "scopeReleasedToAuxiliary": [
+    "tests/tagClassicJarOfGreedDiscord2v2.test.cjs",
+    "docs/evidence/m430-jar-of-greed-discord-2v2.json",
+    ".github/workflows/m430-jar-of-greed-discord-2v2.yml"
+  ],
+  "auxiliaryAuthorization": "Monitorar CI, sincronizar por merge não-forçado e corrigir somente os três arquivos M430; não tocar runtime, catálogo, certificados, coordenação, dados ou produção.",
+  "limitations": [
+    "Handler Discord executado offline; nenhum gateway/servidor real.",
+    "Jar of Greed já era certificado; nenhuma nova certificação.",
+    "Card Batch Fast e Engine Validation ainda em execução; Extended Soak pendente."
+  ],
+  "nextTask": "Auxiliar monitora M430; Work retoma handoff M61 e integração de runtime após liberação."
+}
