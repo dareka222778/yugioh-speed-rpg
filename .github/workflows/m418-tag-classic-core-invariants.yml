@@ -34,3 +34,4 @@ jobs:
           tests/tagClassicEndPhaseHandLimit2v2.test.cjs
           tests/tagClassicSharedZoneCapacity2v2.test.cjs
           tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs
+          tests/tagClassicFieldZoneSeparateFromBackrow2v2.test.cjs

@@ -15,6 +15,7 @@
     "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
     "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
     "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs",
+    "tests/tagClassicFieldZoneSeparateFromBackrow2v2.test.cjs",
     ".github/workflows/m418-tag-classic-core-invariants.yml"
   ],
   "behavioralCoverage": [
@@ -25,6 +26,7 @@
     "D.D. Crazy Beast banishes only the battle-destroyed victim to the opposing team zone",
     "Current classic rules allow seven during the turn and require End Phase discard to six",
     "3 Monster Zones and 3 Spell/Trap Zones are shared within each team",
+    "Field Zone is independent from the three shared Spell/Trap Zones",
     "Magician of Faith returns an ally-owned Spell to the physical owner's hand"
   ],
   "blocked": [
