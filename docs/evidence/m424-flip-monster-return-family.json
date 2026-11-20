@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "mission": "M424",
+  "runId": "work-20261120T160001-0300-M424",
+  "authority": "Konami official TCG/OCG Card Database",
+  "reviewedAt": "2026-11-20",
+  "historicalCutoffInclusive": "2004-09-30",
+  "scope": "isolated behavioral primitives and focused tests only; no resolver registration or certification",
+  "cards": [
+    {
+      "name": "Penguin Soldier",
+      "passcode": "93920745",
+      "konamiCardDatabaseId": 4608,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4608&ope=2&request_locale=en",
+      "officialText": "FLIP: You can target up to 2 monsters on the field; return those targets to the hand.",
+      "firstTcgPrinting": "2003-03-30",
+      "firstTcgSetCode": "SDJ-022",
+      "historicalEligibility": "TCG printing is before the inclusive 2004-09-30 cutoff",
+      "targeting": true,
+      "selectionTiming": "activation",
+      "maximumTargets": 2,
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "name": "Hade-Hane",
+      "passcode": "28357177",
+      "konamiCardDatabaseId": 6124,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6124&ope=2&request_locale=ja",
+      "officialText": "FLIP: You can return up to 3 monsters on the field to the owner's hand.",
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP032",
+      "firstTcgPrinting": "2004-10-01",
+      "historicalEligibility": "TCG printing is one day after the cutoff, but the official OCG printing is before the inclusive cutoff and qualifies under the project's TCG/OCG union.",
+      "targeting": false,
+      "selectionTiming": "resolution",
+      "maximumTargets": 3,
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "twoVTwoAdaptation": {
+    "teamMapping": "seat 0/2 = team 0; seat 1/3 = team 1",
+    "monsterZonesPerTeam": 3,
+    "fieldZone": "separate and never treated as a monster target",
+    "controllerAndOwner": "control team determines who resolves the FLIP effect; every returned monster goes to the private hand of its physical owner seat",
+    "penguinSoldier": "target UIDs are fixed at activation; a target that leaves the field before resolution is not returned",
+    "hadeHane": "non-targeting choices are made from the current field at resolution, up to three",
+    "privacy": "face-down target identities are visible only to the physical owner; public and other-seat projections show a generic face-down label and never expose physical UIDs",
+    "handLimit": "returned cards are added without immediate discard; the six-card hand limit is enforced only at that player's End Phase by the existing turn flow"
+  },
+  "validation": {
+    "focusedTests": 34,
+    "engineRegistration": "pending cooperative M61 resolver handoff",
+    "discordLiveValidation": false,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "mergePerformed": false,
+    "deployPerformed": false
+  },
+  "limits": [
+    "Helpers do not mutate the duel state or private hands.",
+    "No runtime/catalog/certification/Discord command files are changed.",
+    "Real 2v2 certification requires registration in the shared resolver and Discord handler tests after explicit handoff."
+  ]
+}
