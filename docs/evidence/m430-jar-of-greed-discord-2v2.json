@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "mission": "M430",
+  "runId": "work-20261120T195356-0300-M430",
+  "owner": "Work principal",
+  "priority": "P1 — validar Jar of Greed em 2v2: Trap Set por parceiro inativo, janela de ativação, compra no Deck do representante ativo e privacidade das mãos.",
+  "cards": [
+    {
+      "name": "Jar of Greed",
+      "id": "83968380",
+      "konamiCid": 5210,
+      "effect": "Draw 1 card",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5210&ope=2&request_locale=en"
+    }
+  ],
+  "scenario": {
+    "setByPhysicalSeat": 2,
+    "activeTeamRepresentative": 0,
+    "opponentSummonSeat": 1,
+    "drawFromPhysicalSeat": 0,
+    "mainDecks": [
+      20,
+      20,
+      20,
+      20
+    ],
+    "extraDecks": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "rulesPreserved": {
+    "mainDeckMinimum": 20,
+    "mainDeckMaximum": 30,
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMaximum": 5
+  },
+  "validation": {
+    "testCases": 1,
+    "realDiscordHandler": "handleTagComponent offline; no live gateway",
+    "sameTurnActivationRejected": true,
+    "physicalUIDConservation": true,
+    "privateHandsChecked": true,
+    "publicSetIdentityHidden": true,
+    "inventoryGranted": 0,
+    "automaticCertifications": 0,
+    "newCertifications": 0,
+    "persistentDatabase": "isolated temporary SQLite only",
+    "runtimeFilesChanged": [],
+    "catalogChanged": false,
+    "certificatesChanged": false,
+    "allowlistChanged": false,
+    "playerDataChanged": false,
+    "productionChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false
+  },
+  "limitations": [
+    "Offline Discord handler and payload validation only; no live Discord gateway/server test.",
+    "Jar of Greed was already certified; no new certification.",
+    "No runtime or catalog changes."
+  ]
+}
