@@ -6,7 +6,7 @@ const aiImport="import {filteredDestructionUtility} from './filteredDestructionS
 const aiHook="  if(effect.kind==='destroyFiltered')return filteredDestructionUtility(s,p===s.players[0]?0:1,effect)>0;\n";
 const metadataImport="import {mechanicalBatch15} from './mechanicalBatch15';\n";
 const flipMetadataImportPattern=/^[ \t]*import \{cards as m424_m426_flip_cards\} from '\.\/generated\/m424-m426-flip-cards';\r?\n?/m;
-const flipMetadataSpreadPattern=/,...m424_m426_flip_cards(?=\])/g;
+const flipMetadataSpreadPattern=/,\.\.\.m424_m426_flip_cards(?=\])/g;
 function removeOnce(text,part){assert.equal(text.split(part).length,2,'Reviewed extension must occur exactly once');return text.replace(part,'');}
 function baselineBytes(file,bytes){bytes=require('./mission29-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission21-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission19-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission18-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission17-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission16-reviewed-extensions.cjs').strip(file,bytes);let text=bytes.toString('utf8');
  if(file==='src/duelStore.ts'&&text.includes(aiImport)){text=removeOnce(text,aiImport);text=removeOnce(text,aiHook);}
