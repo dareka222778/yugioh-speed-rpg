@@ -1,0 +1,306 @@
+{
+  "format": 1,
+  "runId": "work-20261119T232908-0300-M399-M401",
+  "missions": [
+    "M399",
+    "M400",
+    "M401"
+  ],
+  "owner": "Work principal",
+  "priority": "P1 — avançar três famílias históricas independentes com helpers reutilizáveis e testes, sem contornar o handoff M61 nem certificar sem integração ao resolver.",
+  "startedAt": "2026-11-19T23:29:08-03:00",
+  "endedAt": "2026-11-19T23:48:32.028-03:00",
+  "duration": {
+    "elapsedMinutes": 19.4,
+    "effectiveWorkMinutes": 15,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "note": "O ambiente desta execução encerrou antes de 60 minutos efetivos. Houve trabalho de código, correção e auditoria; o tempo de espera dos workflows não foi contado."
+  },
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtStart": "49f1ad475225a4bc665b66b7e1f936b14460c04b",
+    "headBeforeCheckpoint": "4d417ab328c14042631f1fcd2bab8ae63a214bc7",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "aheadBy": 669,
+    "behindBy": 10,
+    "priorCheckpoint": "coordination/runs/work-20261119T182750-0300-M398.json",
+    "priorCheckpointSha": "4b834e570a6e7c79c19cf058fc0b78b7adf4da0c"
+  },
+  "work": [
+    {
+      "mission": "M399",
+      "runId": "work-20261119T232908-0300-M399",
+      "branch": "feat/work-m399-battle-damage-family-20261119",
+      "head": "93520b5a0b951fa5349c06f5fde93d3c2063278a",
+      "pr": 348,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/348",
+      "baseSha": "35e8283cd5e7a14f93f72dfbe7653b1e6c37dd8a",
+      "state": "open-draft; focused and fast checks pass; engine validation still running",
+      "files": [
+        "src/battleDamageFamily.ts",
+        "tests/battleDamageFamily.test.cjs",
+        "docs/evidence/m399-battle-damage-family.json",
+        ".github/workflows/m399-battle-damage-family.yml"
+      ],
+      "cards": [
+        "Amazoness Swords Woman (94004268)",
+        "Airknight Parshath (18036057; Konami CID 5023)",
+        "Aswan Apparition (88236094)",
+        "Atomic Firefly (87340664)"
+      ],
+      "tests": {
+        "focused": 20,
+        "passed": 20,
+        "failed": 0
+      },
+      "ci": {
+        "firstFocusedRun": {
+          "id": 44662172497,
+          "conclusion": "failure",
+          "reason": "regressão esperava exceção para entrada sem overflow; corrigida para exercitar overflow real"
+        },
+        "focusedRerun": {
+          "id": 44662591505,
+          "conclusion": "success"
+        },
+        "cardBatchFast": {
+          "id": 44662591536,
+          "conclusion": "success"
+        },
+        "milestone1000": {
+          "id": 44662591560,
+          "conclusion": "success"
+        },
+        "engineValidation": {
+          "id": 44662591595,
+          "status": "in_progress"
+        },
+        "extendedSoak": "600s em andamento"
+      },
+      "newCertifications": 0
+    },
+    {
+      "mission": "M400",
+      "runId": "work-20261119T234000-0300-M400",
+      "branch": "feat/work-m400-eight-claws-scorpion-20261119",
+      "head": "385511250b62adc6b4b43ed4893547019f865d2f",
+      "pr": 349,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/349",
+      "baseSha": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
+      "state": "open-draft; focused and fast checks pass; engine validation still running",
+      "files": [
+        "src/eightClawsScorpion.ts",
+        "tests/eightClawsScorpion.test.cjs",
+        "docs/evidence/m400-eight-claws-scorpion.json",
+        ".github/workflows/m400-eight-claws-scorpion.yml"
+      ],
+      "cards": [
+        "8-Claws Scorpion (14261867)"
+      ],
+      "tests": {
+        "focused": 14,
+        "passed": 14,
+        "failed": 0
+      },
+      "ci": {
+        "focused": {
+          "id": 44662460543,
+          "conclusion": "success"
+        },
+        "cardBatchFast": {
+          "id": 44662460461,
+          "conclusion": "success"
+        },
+        "milestone1000": {
+          "id": 44662460592,
+          "conclusion": "success"
+        },
+        "engineValidation": {
+          "id": 44662460728,
+          "status": "in_progress"
+        },
+        "extendedSoak": "600s em andamento"
+      },
+      "newCertifications": 0
+    },
+    {
+      "mission": "M401",
+      "runId": "work-20261119T235000-0300-M401",
+      "branch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+      "head": "e9762ff0a4ad524dbc6f7913501de5f9c15316a1",
+      "pr": 350,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/350",
+      "baseSha": "4d417ab328c14042631f1fcd2bab8ae63a214bc7",
+      "state": "open-draft; focused, Card Batch Fast and Milestone 1000 pass; Engine Validation running",
+      "files": [
+        "src/privateSetInspection.ts",
+        "tests/privateSetInspection.test.cjs",
+        "docs/evidence/m401-wdjat-private-set-inspection.json",
+        ".github/workflows/m401-private-set-inspection.yml"
+      ],
+      "cards": [
+        "A Man with Wdjat (51351302)"
+      ],
+      "tests": {
+        "focused": 16,
+        "passed": 16,
+        "failed": 0
+      },
+      "ci": {
+        "earlierFailures": [
+          {
+            "id": 44662864014,
+            "conclusion": "failure",
+            "reason": "TypeScript narrowing de resolverSeat"
+          },
+          {
+            "id": 44662963430,
+            "conclusion": "failure",
+            "reason": "TypeScript narrowing de physicalOwnerSeat"
+          }
+        ],
+        "focused": {
+          "id": 44663100223,
+          "conclusion": "success"
+        },
+        "cardBatchFast": {
+          "id": 44663100486,
+          "conclusion": "success"
+        },
+        "milestone1000": {
+          "id": 44663100146,
+          "conclusion": "success"
+        },
+        "engineValidation": {
+          "id": 44663100205,
+          "status": "in_progress"
+        }
+      },
+      "newCertifications": 0
+    }
+  ],
+  "catalog": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "newCertificationsThisRun": 0
+  },
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint M398; auditoria de HEAD, main, PRs, branches, workflows e handoff M61.",
+    "Reserva CAS M399 e implementação de operações puras de dano de batalha para quatro cartas; 20 testes focados.",
+    "Diagnóstico e correção da primeira falha M399; segunda execução 20/20.",
+    "Reserva CAS M400 e implementação do flip/ATK temporário de 8-Claws Scorpion; 14 testes focados.",
+    "Reserva CAS M401 e implementação da inspeção privada de Set para A Man with Wdjat; duas falhas TypeScript corrigidas e 16/16 testes focados.",
+    "Auditoria de Milestone 1000 em três branches: 969 certificadas, 31 restantes, zero certificações automáticas.",
+    "Atualização final de coordenação e liberação das três reservas ao auxiliar para monitoramento/correções limitadas."
+  ],
+  "handoff": {
+    "pr": 17,
+    "commentId": 7009705891,
+    "status": "awaiting-explicit-release",
+    "noResponse": true,
+    "requestedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "changedFiles": []
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationFilesChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "ownerRulesPreserved": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "endPhaseDiscard": true,
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "extraDeck": 5
+    },
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "realDiscordServerValidated": false,
+    "productionDeploymentHistory": "Não verificável pela integração disponível; nenhum workflow de deploy aparece na branch compartilhada."
+  },
+  "pullRequests": {
+    "348": {
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "93520b5a0b951fa5349c06f5fde93d3c2063278a",
+      "base": "35e8283cd5e7a14f93f72dfbe7653b1e6c37dd8a",
+      "changedFiles": 4,
+      "additions": 614
+    },
+    "349": {
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "385511250b62adc6b4b43ed4893547019f865d2f",
+      "base": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
+      "changedFiles": 4,
+      "additions": 289
+    },
+    "350": {
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "e9762ff0a4ad524dbc6f7913501de5f9c15316a1",
+      "base": "4d417ab328c14042631f1fcd2bab8ae63a214bc7",
+      "changedFiles": 4,
+      "additions": 365
+    }
+  },
+  "auxiliaryScope": [
+    {
+      "mission": "M399",
+      "branch": "feat/work-m399-battle-damage-family-20261119",
+      "files": [
+        "src/battleDamageFamily.ts",
+        "tests/battleDamageFamily.test.cjs",
+        "docs/evidence/m399-battle-damage-family.json",
+        ".github/workflows/m399-battle-damage-family.yml"
+      ],
+      "allowed": "monitorar CI, sincronizar branch com merge não forçado e corrigir apenas estes arquivos"
+    },
+    {
+      "mission": "M400",
+      "branch": "feat/work-m400-eight-claws-scorpion-20261119",
+      "files": [
+        "src/eightClawsScorpion.ts",
+        "tests/eightClawsScorpion.test.cjs",
+        "docs/evidence/m400-eight-claws-scorpion.json",
+        ".github/workflows/m400-eight-claws-scorpion.yml"
+      ],
+      "allowed": "monitorar CI, sincronizar branch com merge não forçado e corrigir apenas estes arquivos"
+    },
+    {
+      "mission": "M401",
+      "branch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+      "files": [
+        "src/privateSetInspection.ts",
+        "tests/privateSetInspection.test.cjs",
+        "docs/evidence/m401-wdjat-private-set-inspection.json",
+        ".github/workflows/m401-private-set-inspection.yml"
+      ],
+      "allowed": "monitorar CI, sincronizar branch com merge não forçado e corrigir apenas estes arquivos"
+    }
+  ],
+  "thirdPartyReservationsReleased": [],
+  "nextTask": "Obter handoff explícito M61. Com a liberação, integrar em sequência M367/M368 e depois M399/M400/M401 ao resolver 2v2 e validar Discord real. Se o handoff continuar pendente, avançar M402 com Absorbing Kid from the Sky sem tocar nos arquivos reservados.",
+  "nextWindow": "2026-11-20T03:30:00-03:00",
+  "limitations": [
+    "As seis cartas continuam não certificadas: os helpers ainda não estão registrados no resolver principal.",
+    "Engine Validation/Extended Soak de M399, M400 e M401 permanecem em execução; aprovação focada não substitui CI integral.",
+    "Não houve integração ao servidor Discord real.",
+    "Não foi possível verificar deployments pela integração disponível."
+  ]
+}
