@@ -4,7 +4,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {
   ABSORBING_KID_FROM_THE_SKY_CARD_ID,
+  GUARDIAN_ANGEL_JOAN_CARD_ID,
   resolveAbsorbingKidFromTheSkyBattleGain,
+  resolveGuardianAngelJoanBattleGain,
 } = require('../dist/absorbingKidFromTheSky.js');
 
 const evidence = JSON.parse(fs.readFileSync(
@@ -268,6 +270,174 @@ test('M402 evidence is official-source-linked and remains uncertified', () => {
   assert.match(evidence.card.officialSourceUrl, /cid=6034/);
   assert.equal(evidence.card.firstTcgRelease, '2004-06-01');
   assert.equal(evidence.card.historicalEligibility, 'eligible-before-2004-09-30');
+  assert.equal(evidence.validation.certificationStatus, 'not-certified');
+  assert.equal(evidence.validation.automaticCertification, false);
+});
+
+const joanInput = (overrides = {}) => ({
+  ...input({
+    sourceCardId: GUARDIAN_ANGEL_JOAN_CARD_ID,
+    sourceUid: 's0:joan-1',
+    destroyedMonsterUid: 's1:destroyed-joan-target',
+    destroyerUid: 's0:joan-1',
+  }),
+  destroyedMonsterOriginalAtk: 1800,
+  ...overrides,
+});
+
+test('Guardian Angel Joan gains the destroyed monster original ATK after battle destruction to the Graveyard', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput());
+  assert.equal(result.triggered, true);
+  assert.equal(result.gainAmount, 1800);
+  assert.deepEqual(result.teamLifePoints, [5800, 4000]);
+});
+
+test('Guardian Angel Joan uses original ATK rather than a temporary current ATK', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({
+    destroyedMonsterOriginalAtk: 2500,
+    destroyedMonsterCurrentAtk: 400,
+  }));
+  assert.equal(result.gainAmount, 2500);
+});
+
+test('Guardian Angel Joan may trigger for a monster with 0 original ATK', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({ destroyedMonsterOriginalAtk: 0 }));
+  assert.equal(result.triggered, true);
+  assert.equal(result.gainAmount, 0);
+  assert.equal(result.recipientTeam, 0);
+  assert.deepEqual(result.teamLifePoints, [4000, 4000]);
+});
+
+test('Guardian Angel Joan routes recovery to team 0 only', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({
+    sourceControllerTeam: 0,
+    teamLifePoints: [3100, 2900],
+  }));
+  assert.deepEqual(result.teamLifePoints, [4900, 2900]);
+});
+
+test('Guardian Angel Joan routes recovery to team 1 only', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({
+    sourceControllerTeam: 1,
+    teamLifePoints: [3100, 2900],
+  }));
+  assert.deepEqual(result.teamLifePoints, [3100, 4700]);
+  assert.equal(result.recipientTeam, 1);
+});
+
+test('Guardian Angel Joan uses controller team rather than the physical owner seat', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({
+    sourcePhysicalOwnerSeat: 0,
+    sourceControllerTeam: 1,
+    teamLifePoints: [4000, 2000],
+  }));
+  assert.equal(result.sourcePhysicalOwnerSeat, 0);
+  assert.deepEqual(result.teamLifePoints, [4000, 3800]);
+});
+
+test('Guardian Angel Joan can recover when it is the defending monster that destroys the attacker', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({ sourceBattleRole: 'defender' }));
+  assert.equal(result.triggered, true);
+  assert.equal(result.sourceBattleRole, 'defender');
+});
+
+test('a Set Guardian Angel Joan that is face-up when battle destruction is established can trigger', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({
+    sourceBattleRole: 'defender',
+    sourceFaceUpWhenDestroying: true,
+    wasSetAtBattleStart: true,
+  }));
+  assert.equal(result.triggered, true);
+});
+
+test('Guardian Angel Joan does not trigger while it is still face-down at destruction', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({ sourceFaceUpWhenDestroying: false }));
+  assert.equal(result.triggered, false);
+  assert.equal(result.reason, 'source-not-face-up');
+  assert.deepEqual(result.teamLifePoints, [4000, 4000]);
+});
+
+test('Guardian Angel Joan does not trigger for effect destruction', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({ destroyedByBattle: false }));
+  assert.equal(result.triggered, false);
+  assert.equal(result.reason, 'not-destroyed-by-battle');
+});
+
+test('Guardian Angel Joan does not trigger if another monster destroyed the target', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({ destroyerUid: 's2:other' }));
+  assert.equal(result.triggered, false);
+  assert.equal(result.reason, 'different-destroyer');
+});
+
+test('Guardian Angel Joan does not trigger if the destroyed monster was banished', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({ destination: 'banished' }));
+  assert.equal(result.triggered, false);
+  assert.equal(result.reason, 'not-sent-to-graveyard');
+});
+
+test('Guardian Angel Joan does not trigger if the destroyed monster was returned to the hand', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({ destination: 'hand' }));
+  assert.equal(result.triggered, false);
+});
+
+test('Guardian Angel Joan has no once-per-turn restriction across distinct battle events', () => {
+  const first = resolveGuardianAngelJoanBattleGain(joanInput({ destroyedMonsterUid: 's1:first' }));
+  const second = resolveGuardianAngelJoanBattleGain(joanInput({
+    destroyedMonsterUid: 's1:second',
+    teamLifePoints: first.teamLifePoints,
+  }));
+  assert.deepEqual(second.teamLifePoints, [7600, 4000]);
+});
+
+test('Guardian Angel Joan does not mutate the input team Life Points tuple', () => {
+  const teamLifePoints = [4000, 2500];
+  const before = [...teamLifePoints];
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({ teamLifePoints }));
+  assert.deepEqual(teamLifePoints, before);
+  assert.notEqual(result.teamLifePoints, teamLifePoints);
+});
+
+test('Guardian Angel Joan rejects a different card ID', () => {
+  assert.throws(
+    () => resolveGuardianAngelJoanBattleGain(joanInput({ sourceCardId: ABSORBING_KID_FROM_THE_SKY_CARD_ID })),
+    /68007326/,
+  );
+});
+
+test('Guardian Angel Joan rejects negative, fractional, or unsafe original ATK', () => {
+  for (const destroyedMonsterOriginalAtk of [-1, 1.5, Number.NaN, Number.MAX_SAFE_INTEGER + 1]) {
+    assert.throws(
+      () => resolveGuardianAngelJoanBattleGain(joanInput({ destroyedMonsterOriginalAtk })),
+      /non-negative safe integer/,
+    );
+  }
+});
+
+test('Guardian Angel Joan preserves the physical owner seat and target UID', () => {
+  const result = resolveGuardianAngelJoanBattleGain(joanInput({
+    sourcePhysicalOwnerSeat: 3,
+    destroyedMonsterUid: 's1:physical-target-uid',
+  }));
+  assert.equal(result.sourcePhysicalOwnerSeat, 3);
+  assert.equal(result.destroyedMonsterUid, 's1:physical-target-uid');
+});
+
+test('Guardian Angel Joan rejects unsafe resulting team Life Points', () => {
+  assert.throws(
+    () => resolveGuardianAngelJoanBattleGain(joanInput({
+      destroyedMonsterOriginalAtk: 2000,
+      teamLifePoints: [Number.MAX_SAFE_INTEGER - 100, 4000],
+    })),
+    /safe integer range/,
+  );
+});
+
+test('M402 evidence includes Guardian Angel Joan with official CID and no certification', () => {
+  assert.equal(evidence.relatedCards[0].id, '68007326');
+  assert.equal(evidence.relatedCards[0].konamiDatabaseCid, 5899);
+  assert.equal(evidence.relatedCards[0].officialTextVerified, true);
+  assert.match(evidence.relatedCards[0].officialSourceUrl, /cid=5899/);
+  assert.equal(evidence.relatedCards[0].firstTcgRelease, '2004-03-01');
   assert.equal(evidence.validation.certificationStatus, 'not-certified');
   assert.equal(evidence.validation.automaticCertification, false);
 });
