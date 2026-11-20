@@ -1,10 +1,13 @@
 export type DuelSeat = 0 | 1 | 2 | 3;
 export type DuelTeam = 0 | 1;
-export type RecruitAttribute = 'EARTH' | 'LIGHT';
+export type RecruitAttribute = 'EARTH' | 'LIGHT' | 'FIRE' | 'WATER' | 'WIND';
 
 export const ATTRIBUTE_BATTLE_RECRUIT_CARDS = {
   giantRat: { id: '97017120', konamiId: 4915, attribute: 'EARTH', maximumAtk: 1500 },
   shiningAngel: { id: '95956346', konamiId: 4924, attribute: 'LIGHT', maximumAtk: 1500 },
+  ufoTurtle: { id: '60806437', konamiId: 4917, attribute: 'FIRE', maximumAtk: 1500 },
+  motherGrizzly: { id: '57839750', konamiId: 4926, attribute: 'WATER', maximumAtk: 1500 },
+  flyingKamakiri1: { id: '96501677', konamiId: 4927, attribute: 'WIND', maximumAtk: 1500 },
 } as const;
 
 export interface DestroyedRecruitSource {
@@ -68,6 +71,9 @@ function validTeam(value: number): value is DuelTeam { return value === 0 || val
 function cardRule(id: string) {
   if (id === ATTRIBUTE_BATTLE_RECRUIT_CARDS.giantRat.id) return ATTRIBUTE_BATTLE_RECRUIT_CARDS.giantRat;
   if (id === ATTRIBUTE_BATTLE_RECRUIT_CARDS.shiningAngel.id) return ATTRIBUTE_BATTLE_RECRUIT_CARDS.shiningAngel;
+  if (id === ATTRIBUTE_BATTLE_RECRUIT_CARDS.ufoTurtle.id) return ATTRIBUTE_BATTLE_RECRUIT_CARDS.ufoTurtle;
+  if (id === ATTRIBUTE_BATTLE_RECRUIT_CARDS.motherGrizzly.id) return ATTRIBUTE_BATTLE_RECRUIT_CARDS.motherGrizzly;
+  if (id === ATTRIBUTE_BATTLE_RECRUIT_CARDS.flyingKamakiri1.id) return ATTRIBUTE_BATTLE_RECRUIT_CARDS.flyingKamakiri1;
   return undefined;
 }
 function uniqueUids(cards: readonly { uid: string }[]): boolean {
