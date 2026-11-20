@@ -16,11 +16,6 @@
   },
   "scenarios": [
     {
-      "card": "Man-Eater Bug",
-      "id": "54652250",
-      "behavior": "Flip Summon targets and destroys one opposing-team monster; the physical UID remains in the opposing shared GY; face-down opponent identity stays hidden from public and opposing team panels; own teammate can inspect own face-down card."
-    },
-    {
       "card": "Magician of Faith",
       "id": "31560081",
       "behavior": "Flip Summon retrieves only a Spell from the shared team GY to the active representative's private hand; the inactive partner hand remains isolated; public Discord panel does not expose physical UIDs."
@@ -31,11 +26,6 @@
       "behavior": "Flip Summon selects only a Trap from the shared team GY and returns it to the active representative's private hand; a Spell remains in the GY and the inactive partner panel does not reveal the recovered card."
     },
     {
-      "card": "Skelengel",
-      "id": "60694662",
-      "behavior": "The FLIP draw removes one card from the active representative's deck, adds it to that representative's private hand, leaves the inactive partner deck untouched, and does not disclose the drawn physical UID through the public Discord payload."
-    },
-    {
       "card": "Hane-Hane",
       "id": "07089711",
       "behavior": "FLIP bounce returns a partner-owned Fusion to the original physical seat's Extra Deck, not the controlling team's or opponent's Extra Deck; tagZonesMessage exposes the Extra Deck only to its physical owner.",
@@ -43,7 +33,7 @@
     }
   ],
   "validation": {
-    "testCases": 5,
+    "testCases": 3,
     "expectedNewCertifications": 0,
     "actualNewCertifications": 0,
     "inventoryGranted": 0,
@@ -57,11 +47,12 @@
     "mergePerformed": false,
     "deployPerformed": false,
     "inventoryConservation": "Every scenario snapshots the full tagInventory UID/card-ID multiset before effect resolution and asserts exact equality afterward; fixture duplicates are moved between the same partner's hand/deck, never removed.",
-    "fixtureCorrection": "All four players' Extra Decks use certified Fusion Cyber Saurus (89112729); unsupported, uncertified ID 91152256 was removed after CI exposed the invalid fixture."
+    "fixtureCorrection": "All four players' Extra Decks use certified Fusion Cyber Saurus (89112729); unsupported, uncertified ID 91152256 was removed after CI exposed the invalid fixture.",
+    "duplicateCoverageAvoided": "Man-Eater Bug and Skelengel are already exercised through the actual Discord handler in PR #296 (M347); M428 intentionally limits its cases to the three additional certified FLIP effects."
   },
   "limitations": [
     "This is an integration test against the local 2v2 duel and Discord payload builders; it is not a live Discord gateway/server test.",
-    "The two cards were already registered/certified in the shared engine; M428 adds no card certification.",
-    "No command registration or runtime effect code was changed."
+    "No command registration or runtime effect code was changed.",
+    "Man-Eater Bug and Skelengel were excluded to avoid duplicating existing PR #296/M347 integration coverage."
   ]
 }
