@@ -23,10 +23,10 @@ export const FLIP_MONSTER_RETURN_CARDS = {
 export interface FieldMonster {
   uid: string;
   id: string;
-  physicalOwnerSeat: number;
-  controllerTeam: number;
+  physicalOwnerSeat: DuelSeat;
+  controllerTeam: DuelTeam;
   zone: 'monster';
-  monsterZoneIndex: number;
+  monsterZoneIndex: 0 | 1 | 2;
   position: MonsterPosition;
 }
 
@@ -222,11 +222,11 @@ export function resolveFlipMonsterReturn(input: {
     return fail('flip-source-identity-or-controller-changed');
   }
 
-  const currentByUid = new Map(fieldAtResolution.map(card => [card.uid, card]));
+  const currentByUid = new Map<string, FieldMonster>(fieldAtResolution.map(card => [card.uid, card] as const));
   const returned: ReturnedMonster[] = [];
 
   if (plan.selectionMode === 'targeted-at-activation') {
-    const activationByUid = new Map(fieldAtActivation.map(card => [card.uid, card]));
+    const activationByUid = new Map<string, FieldMonster>(fieldAtActivation.map(card => [card.uid, card] as const));
     for (const uid of selectedUids) {
       const targetAtActivation = activationByUid.get(uid);
       if (!targetAtActivation) return fail('target-not-on-field-at-activation');

@@ -153,6 +153,17 @@ test('Hade-Hane can select monsters that entered after its activation', () => {
   assert.equal(result.ok, true);
   assert.equal(result.value.returned[0].uid, 'new');
 });
+
+test('Hade-Hane returns a stolen monster to its physical owner, not its current controller', () => {
+  const activation = [source({ id: FLIP_MONSTER_RETURN_CARDS.hadeHane.id })];
+  const resolution = [monster('stolen', '88888888', 3, 0, 1)];
+  const result = resolve(FLIP_MONSTER_RETURN_CARDS.hadeHane.id, { activation, resolution, selected: ['stolen'] });
+  assert.equal(result.ok, true);
+  assert.equal(result.value.returned[0].physicalOwnerSeat, 3);
+  assert.equal(result.value.returned[0].fromControllerTeam, 0);
+  assert.equal(projectFlipMonsterReturnForViewer(result.value, 3).cards[0].destination, 'your-hand');
+  assert.equal(projectFlipMonsterReturnForViewer(result.value, 0).cards[0].destination, 'owners-hand');
+});
 test('Hade-Hane rejects four selected monsters', () => {
   const activation = [source({ id: FLIP_MONSTER_RETURN_CARDS.hadeHane.id })];
   const resolution = [
