@@ -82,7 +82,7 @@ export function inspectOpponentSetCard(
   if (!["monster", "backrow", "field"].includes(target.zone)) throw new Error("invalid target zone.");
   if (!Number.isSafeInteger(target.index) || target.index < 0) throw new Error("target zone index must be non-negative.");
   if (request.triggerWindow !== "normalSummon" && request.triggerWindow !== "controllerStandby") return null;
-  if (target.faceUp || target.controllerTeam === request.resolverTeam) return null;
+  if (target.faceUp !== false || target.controllerTeam === request.resolverTeam) return null;
   if (target.zone === "monster" && target.position !== "def") return null;
 
   return {
