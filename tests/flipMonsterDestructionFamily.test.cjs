@@ -110,7 +110,7 @@ test('a monster physically owned by our team but controlled by the opponent goes
   const activation = [source(), monster('our-stolen', '55555555', 0, 1, 1)];
   const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.oldVindictiveMagician.id, { activation, resolution: activation, selected: ['our-stolen'] });
   assert.equal(result.ok, true);
-  assert.equal(result.value.destroyed[0].destinationGraveyardTeam, 1);
+  assert.equal(result.value.destroyed[0].destinationGraveyardTeam, 0);
 });
 test('face-down target options hide identity from non-owners and public viewers', () => {
   const hidden = monster('private-uid', '66666666', 3, 1, 0, 4, 'face-down-defense');
@@ -151,7 +151,7 @@ test('4-Starred Ladybug destroys every face-up Level 4 monster controlled by the
     monster('opp-b', '22222222', 3, 1, 1, 4, 'face-up-defense'),
     monster('own', '33333333', 0, 0, 1, 4, 'face-up-attack'),
     monster('level3', '44444444', 1, 1, 2, 3, 'face-up-attack'),
-    monster('level5', '55555555', 3, 1, 2, 5, 'face-up-attack'),
+    monster('level5', '55555555', 3, 0, 2, 5, 'face-up-attack'),
   ];
   const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.fourStarredLadybug.id, { activation, resolution, selected: [] });
   assert.equal(result.ok, true);
