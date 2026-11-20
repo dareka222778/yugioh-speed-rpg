@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "mission": "M416",
+  "reviewedAt": "2026-11-20",
+  "authority": "Konami official Yu-Gi-Oh! OCG Card Database and OCG supplementary rulings",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "id": "22567609",
+      "name": "Nimble Momonga",
+      "konamiCardDatabaseId": 4922,
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4922&ope=2&request_locale=ae",
+      "officialOcgFaqUrl": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=4922&ope=4&request_locale=ja",
+      "officialText": "If this card is destroyed by battle and sent to the GY: Gain 1000 LP, then you can Special Summon any number of \"Nimble Momonga\" from your Deck in face-down Defense Position.",
+      "officialRuling": "Mandatory GY trigger at the end of the Damage Step; not targeting. Gain 1000 LP first, then optionally Special Summon any number from the Deck in face-down Defense Position. These operations are not simultaneous.",
+      "earliestOcgRelease": "2002-10-24",
+      "earliestOcgSet": "Spell Ruler (MRL-086)",
+      "historicalArchiveFirstObserved": "2002-06-20",
+      "historicalArchiveDateConflict": true,
+      "eligibilityBasis": "Official Konami OCG set date",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "95178994",
+      "name": "Giant Germ",
+      "konamiCardDatabaseId": 4921,
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4921&ope=2&request_locale=ae",
+      "officialOcgFaqUrl": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=4921&ope=4&request_locale=ja",
+      "officialText": "When this card is destroyed by battle and sent to the GY: Inflict 500 damage to your opponent, then you can Special Summon any number of \"Giant Germs\" from your Deck in face-up Attack Position.",
+      "officialRuling": "Mandatory GY trigger at the end of the Damage Step; not targeting. Inflict 500 damage first, then optionally Special Summon any number from the Deck in face-up Attack Position. These operations are not simultaneous.",
+      "earliestOcgRelease": "2002-10-24",
+      "earliestOcgSet": "Spell Ruler (MRL-085)",
+      "historicalArchiveFirstObserved": "2002-06-20",
+      "historicalArchiveDateConflict": true,
+      "eligibilityBasis": "Official Konami OCG set date",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "implementationNotes": [
+    "Only battle destruction followed by sending to the GY triggers; destruction by effect or banishment does not.",
+    "The trigger is mandatory and activates in the GY at the end of the Damage Step; it does not target.",
+    "The LP gain/damage is resolved before the optional summon operation; the two operations are not simultaneous.",
+    "The optional summon count is any number, bounded by matching copies in the effect controller's own Deck and the remaining shared three Monster Zones.",
+    "Nimble Momonga summons face-down Defense Position; Giant Germ summons face-up Attack Position.",
+    "The physical owner of the destroyed trigger card is preserved separately from the effect controller. The LP team and Deck used for summons follow the effect controller at destruction; summoned copies retain the physical ownership of that controller seat."
+  ],
+  "scope": "Isolated battle-destruction trigger planner, tests, official evidence and focused workflow only. No registry, catalog, certification, Discord command, persistent state or live duel integration.",
+  "certificationGate": "Do not certify until the trigger is integrated into the Damage Step chain and the selected Deck cards are physically moved into the team's shared 3-zone field in complete 2v2 tests."
+}
