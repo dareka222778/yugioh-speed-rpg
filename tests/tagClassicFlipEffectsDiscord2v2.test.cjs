@@ -8,7 +8,7 @@ const {getCard}=require('../dist/collection');
 const {validateDiscordPayload}=require('../dist/discordPayload');
 
 const normalIds=tag.tagNormalCardIds.slice(0,10);
-const deckIds=[...normalIds.flatMap(id=>[id,id]),'54652250','31560081','14087893'];
+const deckIds=[...normalIds.flatMap(id=>[id,id]),'54652250','31560081','14087893','28933734','12607053'];
 assert.ok(deckIds.length>=20&&deckIds.length<=30,'fixture deck must respect the 20–30 main-deck rule');
 
 function game(seed){
@@ -104,4 +104,30 @@ test('Magician of Faith returns a shared-GY Spell to the active representative h
   assert.ok(p0Text.includes(spellName),'active representative sees the recovered Spell in their own private hand');
   assert.ok(!p2Text.includes(spellName),'inactive partner cannot see the active representative private hand');
   assert.ok(!publicText.includes(spellUid),'public Discord panel never serializes physical card UIDs');
+});
+
+test('Mask of Darkness retrieves only a Trap from the shared GY into the active representative private hand',()=>{
+  let s=game('m428-mask-of-darkness');
+  const source=take(s,2,'28933734');
+  const trap=take(s,0,'12607053');
+  const spell=take(s,0,'14087893');
+  s.core.turn=3;
+  s.core.players[0].monsters=[monster(source,0,false)];
+  s.core.players[0].grave=[{...trap,owner:0},{...spell,owner:0}];
+  s.reserves[2].hand=s.reserves[2].hand.filter(card=>card.id!==trap.id);
+  tag.assertTagDuel(s);
+  const trapUid=trap.uid,spellUid=spell.uid,trapName=getCard(trap.id).name;
+  s=act(s,'position',action=>action.mode==='flip');
+  assert.equal(s.core.phase,'choice');
+  assert.deepEqual(s.core.choice.targets,[trapUid]);
+  s=act(s,'choose',action=>action.target===trapUid);
+  assert.ok(tag.tagMemberHand(s,'p0').some(card=>card.uid===trapUid));
+  assert.ok(!tag.tagMemberHand(s,'p2').some(card=>card.uid===trapUid));
+  assert.ok(s.core.players[0].grave.some(card=>card.uid===spellUid),'a Spell is not a legal Mask of Darkness target');
+  assertInventoryUnique(s);
+  const r=record(s,'m428-mask-of-darkness');
+  const publicPayload=ui.tagPublicMessage(r),p0Private=ui.tagPrivateMessage(r,'p0'),p2Private=ui.tagPrivateMessage(r,'p2');
+  for(const payload of [publicPayload,p0Private,p2Private])validateDiscordPayload(payload);
+  assert.ok(JSON.stringify(p0Private).includes(trapName));
+  assert.ok(!JSON.stringify(p2Private).includes(trapName));
 });

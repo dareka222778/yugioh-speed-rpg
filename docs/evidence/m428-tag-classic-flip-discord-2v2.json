@@ -24,10 +24,15 @@
       "card": "Magician of Faith",
       "id": "31560081",
       "behavior": "Flip Summon retrieves only a Spell from the shared team GY to the active representative's private hand; the inactive partner hand remains isolated; public Discord panel does not expose physical UIDs."
+    },
+    {
+      "card": "Mask of Darkness",
+      "id": "28933734",
+      "behavior": "Flip Summon selects only a Trap from the shared team GY and returns it to the active representative's private hand; a Spell remains in the GY and the inactive partner panel does not reveal the recovered card."
     }
   ],
   "validation": {
-    "testCases": 2,
+    "testCases": 3,
     "expectedNewCertifications": 0,
     "actualNewCertifications": 0,
     "inventoryGranted": 0,
