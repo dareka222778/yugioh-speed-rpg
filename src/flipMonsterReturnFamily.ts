@@ -213,12 +213,13 @@ export function resolveFlipMonsterReturn(input: {
     selectedSet.add(uid);
   }
 
+  // A FLIP effect still resolves if battle destruction sends its source to the GY
+  // after the flip event but before the trigger is placed on the Chain.
   const sourceAtActivation = fieldAtActivation.find(card => card.uid === plan.sourceUid);
-  if (!sourceAtActivation) return fail('flip-source-missing-from-activation-field');
-  if (sourceAtActivation.id !== plan.sourceCardId
+  if (sourceAtActivation && (sourceAtActivation.id !== plan.sourceCardId
     || sourceAtActivation.physicalOwnerSeat !== plan.sourcePhysicalOwnerSeat
     || sourceAtActivation.controllerTeam !== plan.controllerTeam
-    || sourceAtActivation.position === 'face-down-defense') {
+    || sourceAtActivation.position === 'face-down-defense')) {
     return fail('flip-source-identity-or-controller-changed');
   }
 

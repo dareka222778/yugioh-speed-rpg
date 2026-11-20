@@ -47,10 +47,11 @@
     "penguinSoldier": "target UIDs are fixed at activation; a target that leaves the field before resolution is not returned",
     "hadeHane": "non-targeting choices are made from the current field at resolution, up to three",
     "privacy": "face-down target identities are visible only to the physical owner; public and other-seat projections show a generic face-down label and never expose physical UIDs",
-    "handLimit": "returned cards are added without immediate discard; the six-card hand limit is enforced only at that player's End Phase by the existing turn flow"
+    "handLimit": "returned cards are added without immediate discard; the six-card hand limit is enforced only at that player's End Phase by the existing turn flow",
+    "sourceMayLeaveFieldAfterFlip": "A FLIP trigger remains valid if battle destruction removes its source after it is flipped face-up but before the trigger is activated; only the selected monsters must still satisfy their own timing rules."
   },
   "validation": {
-    "focusedTests": 34,
+    "focusedTests": 35,
     "engineRegistration": "pending cooperative M61 resolver handoff",
     "discordLiveValidation": false,
     "newCertifications": 0,

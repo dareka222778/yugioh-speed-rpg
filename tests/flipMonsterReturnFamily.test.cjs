@@ -101,6 +101,14 @@ test('Penguin Soldier rejects more than two targets', () => {
   assert.equal(result.ok, false);
   assert.equal(result.reason, 'too-many-selected-monsters');
 });
+
+test('a FLIP effect still resolves if battle destruction removes its source before activation', () => {
+  const activation = [monster('target', '11111111', 2, 0, 1)];
+  const resolution = [monster('target', '11111111', 2, 0, 1)];
+  const result = resolve(FLIP_MONSTER_RETURN_CARDS.penguinSoldier.id, { activation, resolution, selected: ['target'] });
+  assert.equal(result.ok, true);
+  assert.equal(result.value.returned[0].uid, 'target');
+});
 test('Penguin Soldier requires each chosen target to exist at activation', () => {
   const activation = [source()];
   const result = resolve(FLIP_MONSTER_RETURN_CARDS.penguinSoldier.id, { activation, resolution: activation, selected: ['missing'] });
