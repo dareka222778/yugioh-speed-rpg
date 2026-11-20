@@ -92,6 +92,12 @@ test('trigger rejects an empty physical UID', () => {
   });
 });
 
+test('trigger UID cannot collide with a physical UID in the opponent hand', () => {
+  assert.deepEqual(makePlan({
+    opponentHandAtActivation: [handCard('chain-master-uid')]
+  }), { ok: false, reason: 'duplicate-or-invalid-physical-uid' });
+});
+
 test('the inspected opponent seat must belong to the opposing team', () => {
   assert.deepEqual(makePlan({ opponentSeat: 2 }), {
     ok: false, reason: 'selected-opponent-is-not-opposing-team'
@@ -205,6 +211,18 @@ test('if no monster remains at resolution, the already-paid cost is not refunded
   assert.equal(resolution.value.teamLifePointsAfter, 2500);
   assert.equal(resolution.value.transferred, null);
   assert.equal(resolution.value.noMonsterAvailableAtResolution, true);
+});
+
+test('current hand cannot reuse the trigger card physical UID', () => {
+  const plan = makePlan();
+  assert.equal(plan.ok, true);
+  const collision = [handCard('chain-master-uid')];
+  assert.deepEqual(projectAmazonessChainMasterInspection(plan.value, 0, collision), {
+    ok: false, reason: 'duplicate-or-invalid-physical-uid'
+  });
+  assert.deepEqual(resolveAmazonessChainMasterEffect(plan.value, collision, 'chain-master-uid'), {
+    ok: false, reason: 'duplicate-or-invalid-physical-uid'
+  });
 });
 
 test('duplicate hand UIDs are rejected before inspection or transfer', () => {
