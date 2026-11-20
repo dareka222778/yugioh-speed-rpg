@@ -257,12 +257,12 @@ test('battle-damage helpers reject malformed totals and invalid physical seats',
     opposingTeam: 1,
   }), /non-negative/);
   assert.throws(() => applyAtomicFireflyBattleRetaliation({
-    battleDamageByTeam: [0, 0],
+    battleDamageByTeam: [0, Number.MAX_SAFE_INTEGER],
     sourceFaceUpAtBattleStart: true,
     destroyedByBattle: true,
     sourceControllerTeam: 0,
     destroyingTeam: 1,
-  }), /safe integer/);
+  }), /safe integer range/);
   assert.throws(() => resolveAirknightParshathDraw({
     damageKind: 'battle',
     battleDamageInflicted: 100,
