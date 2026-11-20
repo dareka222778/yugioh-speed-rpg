@@ -3,7 +3,7 @@
   "runId": "work-20261120T043227-0300-M402",
   "owner": "Work principal",
   "mission": "M402",
-  "priority": "P1 — preparar o efeito de Absorbing Kid from the Sky com evento de destruição por batalha, destino efetivo ao Cemitério e recuperação de LP da equipe controladora, preservando assento físico e sem tocar no resolver central reservado.",
+  "priority": "P1 — implementar a família reutilizável de recuperação de LP por destruição em batalha, cobrindo Absorbing Kid from the Sky (Nível × 300) e Guardian Angel Joan (ATK original), com destino efetivo ao Cemitério e LP da equipe controladora.",
   "state": "reserved",
   "startedAt": "2026-11-20T04:32:27-03:00",
   "shared": {
@@ -70,8 +70,22 @@
   },
   "blocksCompleted": [
     "Coordination/state.json e checkpoint M399-M401 lidos; HEAD compartilhado e main comparados; CI final de M399-M401 confirmada; handoff M61 continua sem resposta.",
-    "M402 verificada sem branch ou PR preexistente; quatro arquivos novos reservados sem sobreposição com as reservas ativas."
+    "M402 verificada sem branch ou PR preexistente; quatro arquivos novos reservados sem sobreposição com as reservas ativas.",
+    "Extensão da família M402 para Guardian Angel Joan, sem duplicação: branch/PR e os manifestos admitted/proposed/engine-v9 não contêm o ID 68007326; texto e primeira impressão TCG verificados no banco oficial Konami."
   ],
   "nextTask": "Implementar helper puro de recuperação de LP por destruição em batalha, testes de elegibilidade/destino/equipe/UID/overflow, evidência oficial e workflow focado. Aguardar handoff M61 para qualquer integração ao resolver.",
-  "nextWindow": "2026-11-20T08:30:00-03:00"
+  "nextWindow": "2026-11-20T08:30:00-03:00",
+  "relatedCards": [
+    {
+      "name": "Guardian Angel Joan",
+      "id": "68007326",
+      "konamiDatabaseCid": 5899,
+      "level": 7,
+      "attribute": "LIGHT",
+      "type": "Fairy/Effect",
+      "officialTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5899&ope=2&request_locale=en",
+      "firstTcgRelease": "2004-03-01",
+      "firstTcgSet": "Invasion of Chaos (IOC-087)"
+    }
+  ]
 }
