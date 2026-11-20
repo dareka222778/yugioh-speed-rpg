@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "mission": "M400",
+  "reviewedAt": "2026-11-19",
+  "authority": "Konami official Yu-Gi-Oh! TCG Card Database",
+  "purpose": "Preparação comportamental de 8-Claws Scorpion; helper unitário não é integração ao motor nem certificação.",
+  "card": {
+    "id": "14261867",
+    "konamiId": 5421,
+    "name": "8-Claws Scorpion",
+    "mechanicFamily": "position-toggle-and-damage-calculation-modifier",
+    "effectSummary": "Uma vez por turno pode virar para face-down Defense; ao atacar um monstro face-down em Defesa, seu ATK passa a 2400 somente durante Damage Calculation.",
+    "twoVTwoReviewQuestions": [
+      "A mudança de posição deve respeitar a janela legal do motor e o uso uma vez por turno.",
+      "O ATK 2400 só se aplica quando esta carta ataca um monstro face-down em Defesa.",
+      "O valor temporário não pode persistir em stats públicos, saves ou batalhas posteriores.",
+      "A propriedade física e o UID da carta permanecem inalterados."
+    ],
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5421&request_locale=en",
+    "sourceVerified": true,
+    "historicalEligibility": "pending OCG/TCG first-release audit",
+    "engineReviewStatus": "pending",
+    "behavioralTestStatus": "helper-unit-only; engine integration pending",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false
+  },
+  "integrationBlockers": [
+    "src/monsterEffects.ts",
+    "src/duelEngineCurrent.ts"
+  ],
+  "notes": [
+    "Não altera posição nem stats persistentes do duelo.",
+    "O resolver ainda precisa chamar o helper no momento correto após handoff M61.",
+    "Nenhum catálogo, certificado, inventário ou dado persistente foi modificado."
+  ]
+}

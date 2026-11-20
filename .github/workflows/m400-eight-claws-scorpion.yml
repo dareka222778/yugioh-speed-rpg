@@ -1,0 +1,23 @@
+name: M400 8-Claws Scorpion
+on:
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/eightClawsScorpion.ts'
+      - 'tests/eightClawsScorpion.test.cjs'
+      - 'docs/evidence/m400-eight-claws-scorpion.json'
+      - '.github/workflows/m400-eight-claws-scorpion.yml'
+jobs:
+  m400-focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node scripts/run-tests-isolated.cjs tests/eightClawsScorpion.test.cjs
