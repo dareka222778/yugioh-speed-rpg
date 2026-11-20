@@ -1,0 +1,28 @@
+name: M426 Swarm Flip Summon and Self Set
+on:
+  pull_request:
+    paths:
+      - 'src/flipSummonInsectDestruction.ts'
+      - 'tests/flipSummonInsectDestruction.test.cjs'
+      - 'docs/evidence/m426-flip-summon-insect-destruction.json'
+      - '.github/workflows/m426-flip-summon-insect-destruction.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  swarm-flip-summon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run Swarm Flip Summon and self-set behavior tests
+        run: node --test tests/flipSummonInsectDestruction.test.cjs

@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "mission": "M426",
+  "runId": "work-20261120T160001-0300-M426",
+  "reviewedAt": "2026-11-20",
+  "authority": "Konami official TCG/OCG Card Database",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "name": "Swarm of Scarabs",
+      "passcode": "15383415",
+      "konamiCardDatabaseId": 5418,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5418&ope=2&request_locale=en",
+      "officialText": "Once per turn: You can change this card to face-down Defense Position. If this card is Flip Summoned: Target 1 monster your opponent controls; destroy that target.",
+      "firstOcgPrinting": "2002-03-21",
+      "firstOcgSetCode": "PH-21",
+      "firstTcgPrinting": "2003-07-18",
+      "firstTcgSetCode": "PGD-021",
+      "historicalEligibility": "Both OCG and TCG printings precede the cutoff"
+    },
+    {
+      "name": "Swarm of Locusts",
+      "passcode": "41872150",
+      "konamiCardDatabaseId": 5419,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5419&ope=2&request_locale=en",
+      "officialText": "Once per turn: You can change this card to face-down Defense Position. If this card is Flip Summoned: Target 1 Spell/Trap your opponent controls; destroy that target.",
+      "firstOcgPrinting": "2002-03-21",
+      "firstOcgSetCode": "PH-22",
+      "firstTcgPrinting": "2003-07-18",
+      "firstTcgSetCode": "PGD-022",
+      "historicalEligibility": "Both OCG and TCG printings precede the cutoff"
+    }
+  ],
+  "twoVTwoAdaptation": {
+    "teamMapping": "seat 0/2 = team 0; seat 1/3 = team 1",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate one-slot Field Zone per team; targetable by Swarm of Locusts, never treated as a normal Spell/Trap zone slot",
+    "flipSummon": "the destruction trigger occurs only after a true Flip Summon, not when another effect merely turns the card face-up",
+    "scarabs": "targets exactly one monster controlled by the opposing team at activation",
+    "locusts": "targets exactly one Spell/Trap or Field Zone card controlled by the opposing team at activation",
+    "targetResolution": "a target that leaves the field before resolution is not destroyed; face-down targets are selected by slot without revealing identity",
+    "ownership": "destroyed cards enter the shared Graveyard of the team belonging to the physical owner seat, not the current controller team",
+    "selfSet": "separate ignition effect, usable in either Main Phase of the controller team's turn once per physical UID per turn; caller persists the usage ledger",
+    "privacy": "face-down target options hide card IDs and physical UIDs; destroyed cards become public in the Graveyard",
+    "sourceDeparture": "Flip Summon destruction trigger can resolve if the source is removed after the Flip Summon trigger is generated"
+  },
+  "validation": {
+    "focusedTests": 31,
+    "engineRegistration": "pending cooperative M61 resolver handoff",
+    "discordLiveValidation": false,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "mergePerformed": false,
+    "deployPerformed": false
+  },
+  "limits": [
+    "Pure helpers return instructions and do not mutate field, Spell/Trap, Field Zone, or Graveyard state.",
+    "Self-set once-per-turn usage must be persisted by the runtime keyed to the physical card UID; not yet integrated.",
+    "No runtime/catalog/certification/Discord command files changed.",
+    "Actual card certification requires registration in the shared resolver and live 2v2/Discord integration tests."
+  ]
+}
