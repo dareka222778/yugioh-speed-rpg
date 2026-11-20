@@ -248,7 +248,7 @@ test('Jar of Greed set by an inactive partner draws from the active representati
     assert.deepEqual(holder(resolved,seat).deck.map(card=>card.uid),expected,
       'only active representative seat 0 Deck may supply the draw');
   }
-  assertInventoryConserved(resolved,before);
+  assertConserved(resolved,before);
   assertRules(resolved);
   tag.assertTagDuel(resolved);
   tag.assertTagDuel(JSON.parse(JSON.stringify(resolved)));
