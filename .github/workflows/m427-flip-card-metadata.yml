@@ -1,0 +1,29 @@
+name: M427 Flip Card Metadata
+on:
+  pull_request:
+    paths:
+      - 'src/generated/m424-m426-flip-cards.ts'
+      - 'src/cardMetadata.ts'
+      - 'tests/m424m426FlipMetadata.test.cjs'
+      - 'docs/evidence/m427-flip-card-metadata.json'
+      - '.github/workflows/m427-flip-card-metadata.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flip-card-metadata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Verify FLIP metadata delta, certification and distribution boundaries
+        run: node --test tests/m424m426FlipMetadata.test.cjs

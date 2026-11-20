@@ -1,0 +1,178 @@
+{
+  "format": 1,
+  "mission": "M427",
+  "runId": "work-20261120T160001-0300-M427",
+  "reviewedAt": "2026-11-20",
+  "authority": "Konami official TCG/OCG Card Database",
+  "historicalCutoffInclusive": "2004-09-30",
+  "scope": "factual Card metadata only; no effect definitions, resolver registration, certification, allowlist change, inventory grant, database write or player-data mutation",
+  "metadataDelta": {
+    "added": [
+      "15383415",
+      "41872150"
+    ],
+    "alreadyPresent": [
+      {
+        "id": "93920745",
+        "sourceModule": "src/generated/m31-target-groups.ts",
+        "certificateSuite": "tests/generated-m31-target-groups.test.cjs"
+      },
+      {
+        "id": "28357177",
+        "sourceModule": "src/generated/m31-target-groups.ts",
+        "certificateSuite": "tests/generated-m31-target-groups.test.cjs"
+      },
+      {
+        "id": "65878864",
+        "sourceModule": "src/generated/m31-target-groups.ts",
+        "certificateSuite": "tests/generated-m31-target-groups.test.cjs"
+      },
+      {
+        "id": "45141844",
+        "sourceModule": "src/mechanicalBatch7.ts",
+        "certificateSuite": "tests/mechanicalBatch7.test.cjs"
+      },
+      {
+        "id": "83994646",
+        "sourceModule": "src/mechanicalBatch7.ts",
+        "certificateSuite": "tests/mechanicalBatch7.test.cjs"
+      }
+    ],
+    "duplicatePolicy": "Do not re-add the five existing identities. M427 adds only the two absent metadata records."
+  },
+  "cards": [
+    {
+      "name": "Penguin Soldier",
+      "passcode": "93920745",
+      "konamiCardDatabaseId": 4608,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4608&request_locale=pt",
+      "metadataPresentBeforeM427": true,
+      "metadataName": "Soldado Pinguim",
+      "attribute": "WATER",
+      "race": "Aqua",
+      "level": 2,
+      "atk": 750,
+      "defense": 500,
+      "firstTcgPrinting": "2003-03-30",
+      "firstTcgSetCode": "SDJ-022"
+    },
+    {
+      "name": "Hade-Hane",
+      "passcode": "28357177",
+      "konamiCardDatabaseId": 6124,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6124&request_locale=pt",
+      "metadataPresentBeforeM427": true,
+      "metadataName": "Hade-Hane",
+      "attribute": "EARTH",
+      "race": "Beast",
+      "level": 5,
+      "atk": 900,
+      "defense": 1000,
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP032",
+      "firstTcgPrinting": "2004-10-01"
+    },
+    {
+      "name": "Old Vindictive Magician",
+      "passcode": "45141844",
+      "konamiCardDatabaseId": 5651,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5651&request_locale=pt",
+      "metadataPresentBeforeM427": true,
+      "metadataName": "Velho Vingativo e Mágico",
+      "attribute": "DARK",
+      "race": "Spellcaster",
+      "level": 2,
+      "atk": 450,
+      "defense": 600,
+      "firstTcgPrinting": "2003-10-10",
+      "firstTcgSetCode": "MFC-067"
+    },
+    {
+      "name": "4-Starred Ladybug of Doom",
+      "passcode": "83994646",
+      "konamiCardDatabaseId": 5139,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5139&request_locale=pt",
+      "metadataPresentBeforeM427": true,
+      "metadataName": "Ladybug de 4 Estrelas da Condenação",
+      "attribute": "WIND",
+      "race": "Insect",
+      "level": 3,
+      "atk": 800,
+      "defense": 1200,
+      "firstTcgPrinting": "2002-10-20",
+      "firstTcgSetCode": "PSV-088"
+    },
+    {
+      "name": "Nobleman-Eater Bug",
+      "passcode": "65878864",
+      "konamiCardDatabaseId": 6122,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6122&request_locale=pt",
+      "metadataPresentBeforeM427": true,
+      "metadataName": "Inseto Comedor de Nobres",
+      "attribute": "EARTH",
+      "race": "Insect",
+      "level": 5,
+      "atk": 900,
+      "defense": 1200,
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP030",
+      "firstTcgPrinting": "2004-10-01"
+    },
+    {
+      "name": "Swarm of Scarabs",
+      "passcode": "15383415",
+      "konamiCardDatabaseId": 5418,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5418&request_locale=ja",
+      "metadataPresentBeforeM427": false,
+      "metadataName": "Swarm of Scarabs",
+      "attribute": "DARK",
+      "race": "Insect",
+      "level": 3,
+      "atk": 500,
+      "defense": 1000,
+      "firstOcgPrinting": "2002-03-21",
+      "firstOcgSetCode": "PH-21",
+      "firstTcgPrinting": "2003-07-18",
+      "firstTcgSetCode": "PGD-021",
+      "namePolicy": "Canonical English name retained because the official Portuguese database did not return a localized card record."
+    },
+    {
+      "name": "Swarm of Locusts",
+      "passcode": "41872150",
+      "konamiCardDatabaseId": 5419,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5419&request_locale=ja",
+      "metadataPresentBeforeM427": false,
+      "metadataName": "Swarm of Locusts",
+      "attribute": "DARK",
+      "race": "Insect",
+      "level": 3,
+      "atk": 1000,
+      "defense": 500,
+      "firstOcgPrinting": "2002-03-21",
+      "firstOcgSetCode": "PH-22",
+      "firstTcgPrinting": "2003-07-18",
+      "firstTcgSetCode": "PGD-022",
+      "namePolicy": "Canonical English name retained because the official Portuguese database did not return a localized card record."
+    }
+  ],
+  "validation": {
+    "focusedTests": 4,
+    "metadataRecordsAsserted": 7,
+    "newMetadataRecords": 2,
+    "preexistingMetadataRecords": 5,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "distributionAllowlistChanged": false,
+    "engineRegistration": "not performed; two new records remain registered-only until separate behavior certification",
+    "discordLiveValidation": false,
+    "mergePerformed": false,
+    "deployPerformed": false
+  },
+  "limits": [
+    "M427 does not implement or certify the effects; M424-M426 own the behavior primitives and their tests.",
+    "Five of seven identities already had metadata, certificates and distribution entries before M427; only two absent Swarm metadata records are added.",
+    "The new Swarm records intentionally have no Effect/MonsterDefinition and remain unavailable through getPlayableCard/cardDistributionAllowed.",
+    "No live Discord server, persistent database, player inventory or production deployment was touched."
+  ]
+}
