@@ -157,6 +157,31 @@ test('4-Starred Ladybug destroys every face-up Level 4 monster controlled by the
   assert.equal(result.ok, true);
   assert.deepEqual(result.value.destroyed.map(card => card.uid), ['opp-a', 'opp-b']);
 });
+
+test('Old Vindictive Magician rejects two distinct targets', () => {
+  const activation = [source(), monster('a', '11111111', 1, 1, 0), monster('b', '22222222', 3, 1, 1)];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.oldVindictiveMagician.id, { activation, resolution: activation, selected: ['a', 'b'] });
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, 'old-vindictive-requires-exactly-one-target');
+});
+test('Old Vindictive Magician cannot select a target that was absent at activation', () => {
+  const activation = [source()];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.oldVindictiveMagician.id, { activation, resolution: activation, selected: ['missing'] });
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, 'target-not-on-field-at-activation');
+});
+test('4-Starred Ladybug routes each destroyed monster to its physical owner team Graveyard', () => {
+  const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.fourStarredLadybug.id })];
+  const resolution = [
+    monster('stolen-by-opponent', '11111111', 0, 1, 0, 4, 'face-up-attack'),
+    monster('opponent-owned', '22222222', 3, 1, 1, 4, 'face-up-defense'),
+    monster('opponent-owned-but-ours', '33333333', 3, 0, 1, 4, 'face-up-attack'),
+  ];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.fourStarredLadybug.id, { activation, resolution, selected: [] });
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.value.destroyed.map(card => card.uid), ['stolen-by-opponent', 'opponent-owned']);
+  assert.deepEqual(result.value.destroyed.map(card => card.destinationGraveyardTeam), [0, 1]);
+});
 test('4-Starred Ladybug ignores face-down Level 4 monsters per the official OCG text', () => {
   const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.fourStarredLadybug.id })];
   const resolution = [
