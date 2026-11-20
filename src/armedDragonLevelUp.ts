@@ -305,7 +305,7 @@ export function resolveArmedDragonDiscardEffect(
   };
 }
 
-/** LV7 cannot be Normal Summoned/Set and must be Special Summoned by LV5. */
+/** LV7 cannot be Normal Summoned/Set; Level Up! may bypass its LV5 summon condition from hand/Deck. */
 export function canSummonArmedDragonLv7(method: SummonMethod, sourceZone: SummonSourceZone | "grave" | "banished"): boolean {
   if (sourceZone !== "hand" && sourceZone !== "deck") return false;
   return method === "armed-dragon-lv5" || method === "level-up";
