@@ -1,0 +1,42 @@
+{
+  "format": 1,
+  "mission": "M428",
+  "runId": "work-20261120T193627-0300-M428",
+  "owner": "Work principal",
+  "branch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+  "sharedHeadAtReservation": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+  "state": "reserved",
+  "startedAt": "2026-11-20T19:36:27-03:00",
+  "priority": "P1 — validar a resolução real de efeitos FLIP clássicos em 2v2 e a projeção Discord pública/privada, preservando assento físico, Cemitério compartilhado e mãos privadas.",
+  "reservedFiles": [
+    "tests/tagClassicFlipEffectsDiscord2v2.test.cjs",
+    "docs/evidence/m428-tag-classic-flip-discord-2v2.json",
+    ".github/workflows/m428-tag-classic-flip-discord-2v2.yml"
+  ],
+  "scope": "Somente teste de integração 2v2, evidência e workflow Node 22. Sem alterações em runtime, catálogo, certificados, allowlist, banco, inventário, dados de jogadores ou produção.",
+  "conflictCheck": {
+    "preserved": [
+      "M61",
+      "M418",
+      "M424",
+      "M425",
+      "M426",
+      "M427",
+      "M402-M417",
+      "M408",
+      "M411"
+    ],
+    "overlap": false,
+    "note": "Usa tagDuel/tagUI existentes; não modifica tagDuel.ts, tagUI.ts, tagInteraction.ts, tagStore.ts nem helpers reservados por M418."
+  },
+  "cards": [
+    "Man-Eater Bug",
+    "Magician of Faith"
+  ],
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "nextTask": "Construir fixtures 2v2 com cartas físicas de parceiros inativos, testar FLIP destruction e Spell recovery, validar payloads públicos/privados e visibilidade de zonas, executar CI."
+}

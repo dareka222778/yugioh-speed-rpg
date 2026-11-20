@@ -4,8 +4,8 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-20T16:00:01-03:00",
-  "nextScheduledAt": "2026-11-20T17:30:00-03:00",
+  "lastActivityAt": "2026-11-20T19:36:27-03:00",
+  "nextScheduledAt": "2026-11-20T22:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -15,7 +15,7 @@
     "docs/evidence/m427-flip-card-metadata.json",
     ".github/workflows/m427-flip-card-metadata.yml"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261120T160001-0300-M427.json",
+  "lastCheckpoint": "coordination/runs/work-20261120T193627-0300-M428.json",
   "previousRunId": "work-20261115T055534-0300",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
@@ -35,7 +35,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência. M357 reservado em branch independente para revisão oficial dos últimos onze candidatos; somente documentação e teste de evidência. M358 reservado em branch independente para testar confidencialidade de monstros/backrow face-down no painel público e visibilidade por equipe no painel privado; somente tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs, sem alterações em runtime ou reservas existentes. M359 reservado em branch independente para homologar renderTag/tagImageLayout: privacidade visual face-down por equipe, dimensões do playmat clássico e vistas privadas por assento; somente tests/tagClassicVisualPrivacyLayout2v2.test.cjs. M360 reservado em branch independente para verificar isolamento visual da mão física em 2v2: somente o dono vê alterações na própria mão; campo compartilhado permanece igual; somente tests/tagClassicPrivateHandIsolationVisual2v2.test.cjs. M361 reservado em branch independente para um teste de genericidade do executor CI; PR #309; somente tests/ciRunnerGenericity.test.cjs; runner compartilhado intocado. Diagnósticos enviados às PRs #306–#308 após falhas reais de Engine Validation. Handoff parcial M61 solicitado no PR #17, sem resposta. M362 concluído em branch própria, PR #310; 10/10 testes de admissão aprovados, Card Batch Admission/Fast/Milestone aprovados, Engine Validation, npm test, stress e Extended Soak 600s aprovados. Reserva liberada ao auxiliar para sincronização não-forçada e monitoramento da PR; nenhuma reserva de terceiro foi liberada. M363 concluído: PR #311, 31/31 identidades reconciliadas, CI fast/milestone/engine success; apenas evidência/teste, ainda sem certificação. A auditoria não certifica cartas nem altera a allowlist. M364 PR #312: branch 266187b divergiu 15 commits à frente/3 atrás; check, npm test e soak passaram, mas Dependency Audit/Engine Validation falharam porque o lockfile atual ainda contém sharp high. Candidato sharp 0.35.5 passou audit de produção (0 vulnerabilidades) e typecheck via tsconfig paths; package.json/package-lock ainda não aplicados. Handoff desses dois manifestos solicitado (comentário 6991573026), aguardando liberação; auxiliar apenas monitora. M365 concluído em branch própria, PR #313: tests/tagGravekeepersGuardNoOpponentTargetDiscord2v2.test.cjs; sem alvo adversário, Gravekeeper's Guard não oferece monstros aliados. Card Batch Fast, Milestone 1000, npm test e Extended Soak aprovados; Engine Validation finalizando. Reserva liberada ao auxiliar apenas para monitorar/corrigir o arquivo de teste. M366 cobre separadamente o retorno ao proprietário físico. M366 PR #314: somente tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs, 3 cenários (face-up, Fusion/Extra Deck e face-down/privacidade); runtime sem handoff porque pauseOverflow normaliza mão/Extra por UID físico; CI reforçada em andamento; auxiliar apenas monitora/corrige o teste.ts solicitado no PR #17, sem runtime antes da liberação; auxiliar pode apenas monitorar/corrigir fixture do teste. M367 e M368: branches próprias #315/#316, primitives isoladas + 30 testes unitários; liberadas ao auxiliar somente para monitorar/corrigir os quatro arquivos próprios. Runtime do duelo e catálogo aguardam handoff M61; nenhuma carta certificada. M372 Agido PR #320 e M373 Aqua Spirit PR #321 concluídas em branches próprias; auxiliares liberados somente para monitorar/corrigir testes próprios; M61 handoff continua pendente. M369–M371 permanecem ativos em PRs próprias; diagnósticos M369/M371 enviados sem editar suas reservas. M379 PR #327: auxiliar liberado somente para monitorar/corrigir tests/deckFormatBoundaries.test.cjs; runtime e reservas ativas preservados. M379 #327 e M380 #328: auxiliares liberados apenas para monitorar/corrigir seus respectivos arquivos de teste; nenhum runtime ou reserva ativa tocado. M379 #327, M380 #328 e M381 #329: auxiliares liberados apenas para monitorar/corrigir seus arquivos de teste; runtime e reservas ativas preservados. M382 liberado sem merge após o gate M8 detectar arquivos protegidos; PR #330 fechada.  M383 reservado em branch própria, base 2a37ff19; StandbyFlow modifier + Amazoness Blowpiper task builder, testes isolados; somente src/standbyFlow.ts, src/continuousEffects.ts, src/amazonessBlowpiper.ts, tests/amazonessBlowpiper.test.cjs e workflow M383. M384 branch feat/work-m384-deck-interaction-id-parser-20261119 PR #331: parser strict custom IDs + payload real Deck UI; auxiliary may monitor/correct only four new files; no index.ts/deckUI.ts integration. M385 branch feat/work-m385-asura-priest-spirit-multiattack-20261119 PR #332: Asura Priest multi-attack/Spirit primitives, auxiliary only own three files. M386 branch feat/work-m386-apprentice-magician-counter-recruit-20261119 PR #333: Spell Counter/recruit primitives, auxiliary only own three files. All three remain draft; integration and certification pending. M383 active reservations preserved; M61 handoff still pending. CI final status refresh 2026-11-19 04:45 BRT: M384 focused/CardBatch/Milestone success; Engine Validation still running, Extended Soak success. M385 focused/CardBatch/Milestone success; Engine Validation/Soak running. M386 focused/CardBatch/Milestone/CardBatch success; Engine Validation/Soak running. PRs #331–#333 open draft, 2 commits behind shared checkpoint; no merge. M387 PR #334 A-Team Trap Disposal e M388 PR #335 Ameba: branches próprias, três arquivos novos cada, 21/18 testes focados; auxiliar liberado apenas para monitorar/corrigir os seis arquivos próprios. Nenhum runtime/catálogo/certificado alterado. M387 focused/Card Batch Fast/Milestone success; Engine Validation/soaks em andamento. M388 focused/Card Batch Fast/Milestone success; Engine Validation/soaks em andamento. M61 handoff renovado no PR #17 comentário 7003511609, aguardando liberação explícita. Pós-checkpoint 08:19 BRT: #334/#335 continuam open-draft, 4/5 commits à frente e 2 atrás do shared HEAD f0487; mergeable=false no momento da consulta. Não fazer merge; sincronizar sem force após CI integral.; M398 reservado em branch própria: contrato automatizado de /regras, somente tests/rulesHelpContract.test.cjs e .github/workflows/m398-rules-help-contract.yml. M398 scope extended to one independent 1v1 current End Phase hand-limit behavior test; no overlap with the active 2v2 hand-limit test reservation.; M398 concluído, PR #347 publicada em draft, reserva própria liberada ao auxiliar apenas para CI/sync/correções nos três arquivos.; M399 reservado em branch própria: família de dano de batalha (Amazoness Swords Woman, Airknight Parshath, Aswan Apparition, Atomic Firefly); somente quatro novos arquivos, sem runtime central; handoff M61 permanece pendente.; M400 reservado: 8-Claws Scorpion face-down battle calculation, somente quatro arquivos novos; sem alteração de positionOperations.ts ou arquivos centrais M61.; M401 reservado: inspeção privada de Set para A Man with Wdjat, somente quatro arquivos novos; sem tocar nos arquivos centrais reservados.; M399/M400/M401 finalizados pelo Work e liberados ao auxiliar para monitorar CI e corrigir somente os quatro arquivos de cada branch; nenhuma reserva de terceiro liberada. M402 battle LP recovery (4 new files, PR #351); M403 Fire Princess LP-gain trigger (4 new files, branch feat/work-m403-fire-princess-lp-gain-burn-20261120). M404 GY LP recovery (4 new files, branch feat/work-m404-gy-sent-lp-recovery-20261120). M405 Dancing Fairy standby LP: quatro caminhos novos em branch própria; M402–M404 e M61 preservados. M406 Solemn Wishes draw LP: quatro caminhos novos em branch própria; M402–M405 e M61 preservados. M407 The Immortal of Thunder LP swing: quatro caminhos novos em branch própria; M402–M406 e M61 preservados.; M408 reservado (work-20261120T052926-0300-M408) em feat/work-m408-giant-trunade-discord-2v2-20261120; base 5bff6f212ed0578b8e4bca59deea658938133c7a; somente tests/tagClassicGiantTrunadeDiscord2v2.test.cjs, docs/evidence/m408-giant-trunade-discord-2v2.json, .github/workflows/m408-giant-trunade-discord-2v2.yml. Integração Discord 2v2 de Giant Trunade por teste novo; não toca runtime, catálogo, certificados, dados ou reservas M61/M402–M407/M355–M360 nem o scope primário existente. M411 reservado em branch própria; somente quatro arquivos novos de typed tribute; M402–M410, M61 e nove arquivos do Work principal preservados.; M418 concluído em branch própria feat/work-m418-tag-classic-core-invariants-20261120, PR #366; testes focados HEAD final 9 pass/1 skipped/0 fail. Controle liberado ao auxiliar somente para monitorar CI e corrigir os caminhos M418. Nenhuma reserva de terceiros ou M61 liberada. M424 reservado em branch independente para Penguin Soldier/Hade-Hane: flip bounce com distinção entre seleção por alvo na ativação e seleção não-direcionada na resolução; somente quatro arquivos novos; M61, M402–M423 e reservas de terceiros preservados. M425 reservado em branch independente para Old Vindictive Magician/4-Starred Ladybug of Doom: destruição direcionada de um monstro adversário versus destruição não-direcionada de todos os monstros face-up de Nível 4 da equipe adversária; somente quatro arquivos novos; M61 e M402–M424 preservados. M426 reservado em branch independente para Swarm of Scarabs/Swarm of Locusts: Flip Summon específico, alvo único por zona (Monster vs Spell/Trap/Field), destruição e efeito separado de virar a si mesma para face-down uma vez por turno; somente quatro arquivos novos; M61 e M402–M425 preservados. M427 reservado para registrar metadata factual dos sete cards M424–M426 em módulo gerado e cardMetadata, com testes que confirmam ausência no allowlist de distribuição; não altera releasedCardIds nem concede inventário. M61 e reservas M402–M426 preservados.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência. M357 reservado em branch independente para revisão oficial dos últimos onze candidatos; somente documentação e teste de evidência. M358 reservado em branch independente para testar confidencialidade de monstros/backrow face-down no painel público e visibilidade por equipe no painel privado; somente tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs, sem alterações em runtime ou reservas existentes. M359 reservado em branch independente para homologar renderTag/tagImageLayout: privacidade visual face-down por equipe, dimensões do playmat clássico e vistas privadas por assento; somente tests/tagClassicVisualPrivacyLayout2v2.test.cjs. M360 reservado em branch independente para verificar isolamento visual da mão física em 2v2: somente o dono vê alterações na própria mão; campo compartilhado permanece igual; somente tests/tagClassicPrivateHandIsolationVisual2v2.test.cjs. M361 reservado em branch independente para um teste de genericidade do executor CI; PR #309; somente tests/ciRunnerGenericity.test.cjs; runner compartilhado intocado. Diagnósticos enviados às PRs #306–#308 após falhas reais de Engine Validation. Handoff parcial M61 solicitado no PR #17, sem resposta. M362 concluído em branch própria, PR #310; 10/10 testes de admissão aprovados, Card Batch Admission/Fast/Milestone aprovados, Engine Validation, npm test, stress e Extended Soak 600s aprovados. Reserva liberada ao auxiliar para sincronização não-forçada e monitoramento da PR; nenhuma reserva de terceiro foi liberada. M363 concluído: PR #311, 31/31 identidades reconciliadas, CI fast/milestone/engine success; apenas evidência/teste, ainda sem certificação. A auditoria não certifica cartas nem altera a allowlist. M364 PR #312: branch 266187b divergiu 15 commits à frente/3 atrás; check, npm test e soak passaram, mas Dependency Audit/Engine Validation falharam porque o lockfile atual ainda contém sharp high. Candidato sharp 0.35.5 passou audit de produção (0 vulnerabilidades) e typecheck via tsconfig paths; package.json/package-lock ainda não aplicados. Handoff desses dois manifestos solicitado (comentário 6991573026), aguardando liberação; auxiliar apenas monitora. M365 concluído em branch própria, PR #313: tests/tagGravekeepersGuardNoOpponentTargetDiscord2v2.test.cjs; sem alvo adversário, Gravekeeper's Guard não oferece monstros aliados. Card Batch Fast, Milestone 1000, npm test e Extended Soak aprovados; Engine Validation finalizando. Reserva liberada ao auxiliar apenas para monitorar/corrigir o arquivo de teste. M366 cobre separadamente o retorno ao proprietário físico. M366 PR #314: somente tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs, 3 cenários (face-up, Fusion/Extra Deck e face-down/privacidade); runtime sem handoff porque pauseOverflow normaliza mão/Extra por UID físico; CI reforçada em andamento; auxiliar apenas monitora/corrige o teste.ts solicitado no PR #17, sem runtime antes da liberação; auxiliar pode apenas monitorar/corrigir fixture do teste. M367 e M368: branches próprias #315/#316, primitives isoladas + 30 testes unitários; liberadas ao auxiliar somente para monitorar/corrigir os quatro arquivos próprios. Runtime do duelo e catálogo aguardam handoff M61; nenhuma carta certificada. M372 Agido PR #320 e M373 Aqua Spirit PR #321 concluídas em branches próprias; auxiliares liberados somente para monitorar/corrigir testes próprios; M61 handoff continua pendente. M369–M371 permanecem ativos em PRs próprias; diagnósticos M369/M371 enviados sem editar suas reservas. M379 PR #327: auxiliar liberado somente para monitorar/corrigir tests/deckFormatBoundaries.test.cjs; runtime e reservas ativas preservados. M379 #327 e M380 #328: auxiliares liberados apenas para monitorar/corrigir seus respectivos arquivos de teste; nenhum runtime ou reserva ativa tocado. M379 #327, M380 #328 e M381 #329: auxiliares liberados apenas para monitorar/corrigir seus arquivos de teste; runtime e reservas ativas preservados. M382 liberado sem merge após o gate M8 detectar arquivos protegidos; PR #330 fechada.  M383 reservado em branch própria, base 2a37ff19; StandbyFlow modifier + Amazoness Blowpiper task builder, testes isolados; somente src/standbyFlow.ts, src/continuousEffects.ts, src/amazonessBlowpiper.ts, tests/amazonessBlowpiper.test.cjs e workflow M383. M384 branch feat/work-m384-deck-interaction-id-parser-20261119 PR #331: parser strict custom IDs + payload real Deck UI; auxiliary may monitor/correct only four new files; no index.ts/deckUI.ts integration. M385 branch feat/work-m385-asura-priest-spirit-multiattack-20261119 PR #332: Asura Priest multi-attack/Spirit primitives, auxiliary only own three files. M386 branch feat/work-m386-apprentice-magician-counter-recruit-20261119 PR #333: Spell Counter/recruit primitives, auxiliary only own three files. All three remain draft; integration and certification pending. M383 active reservations preserved; M61 handoff still pending. CI final status refresh 2026-11-19 04:45 BRT: M384 focused/CardBatch/Milestone success; Engine Validation still running, Extended Soak success. M385 focused/CardBatch/Milestone success; Engine Validation/Soak running. M386 focused/CardBatch/Milestone/CardBatch success; Engine Validation/Soak running. PRs #331–#333 open draft, 2 commits behind shared checkpoint; no merge. M387 PR #334 A-Team Trap Disposal e M388 PR #335 Ameba: branches próprias, três arquivos novos cada, 21/18 testes focados; auxiliar liberado apenas para monitorar/corrigir os seis arquivos próprios. Nenhum runtime/catálogo/certificado alterado. M387 focused/Card Batch Fast/Milestone success; Engine Validation/soaks em andamento. M388 focused/Card Batch Fast/Milestone success; Engine Validation/soaks em andamento. M61 handoff renovado no PR #17 comentário 7003511609, aguardando liberação explícita. Pós-checkpoint 08:19 BRT: #334/#335 continuam open-draft, 4/5 commits à frente e 2 atrás do shared HEAD f0487; mergeable=false no momento da consulta. Não fazer merge; sincronizar sem force após CI integral.; M398 reservado em branch própria: contrato automatizado de /regras, somente tests/rulesHelpContract.test.cjs e .github/workflows/m398-rules-help-contract.yml. M398 scope extended to one independent 1v1 current End Phase hand-limit behavior test; no overlap with the active 2v2 hand-limit test reservation.; M398 concluído, PR #347 publicada em draft, reserva própria liberada ao auxiliar apenas para CI/sync/correções nos três arquivos.; M399 reservado em branch própria: família de dano de batalha (Amazoness Swords Woman, Airknight Parshath, Aswan Apparition, Atomic Firefly); somente quatro novos arquivos, sem runtime central; handoff M61 permanece pendente.; M400 reservado: 8-Claws Scorpion face-down battle calculation, somente quatro arquivos novos; sem alteração de positionOperations.ts ou arquivos centrais M61.; M401 reservado: inspeção privada de Set para A Man with Wdjat, somente quatro arquivos novos; sem tocar nos arquivos centrais reservados.; M399/M400/M401 finalizados pelo Work e liberados ao auxiliar para monitorar CI e corrigir somente os quatro arquivos de cada branch; nenhuma reserva de terceiro liberada. M402 battle LP recovery (4 new files, PR #351); M403 Fire Princess LP-gain trigger (4 new files, branch feat/work-m403-fire-princess-lp-gain-burn-20261120). M404 GY LP recovery (4 new files, branch feat/work-m404-gy-sent-lp-recovery-20261120). M405 Dancing Fairy standby LP: quatro caminhos novos em branch própria; M402–M404 e M61 preservados. M406 Solemn Wishes draw LP: quatro caminhos novos em branch própria; M402–M405 e M61 preservados. M407 The Immortal of Thunder LP swing: quatro caminhos novos em branch própria; M402–M406 e M61 preservados.; M408 reservado (work-20261120T052926-0300-M408) em feat/work-m408-giant-trunade-discord-2v2-20261120; base 5bff6f212ed0578b8e4bca59deea658938133c7a; somente tests/tagClassicGiantTrunadeDiscord2v2.test.cjs, docs/evidence/m408-giant-trunade-discord-2v2.json, .github/workflows/m408-giant-trunade-discord-2v2.yml. Integração Discord 2v2 de Giant Trunade por teste novo; não toca runtime, catálogo, certificados, dados ou reservas M61/M402–M407/M355–M360 nem o scope primário existente. M411 reservado em branch própria; somente quatro arquivos novos de typed tribute; M402–M410, M61 e nove arquivos do Work principal preservados.; M418 concluído em branch própria feat/work-m418-tag-classic-core-invariants-20261120, PR #366; testes focados HEAD final 9 pass/1 skipped/0 fail. Controle liberado ao auxiliar somente para monitorar CI e corrigir os caminhos M418. Nenhuma reserva de terceiros ou M61 liberada. M424 reservado em branch independente para Penguin Soldier/Hade-Hane: flip bounce com distinção entre seleção por alvo na ativação e seleção não-direcionada na resolução; somente quatro arquivos novos; M61, M402–M423 e reservas de terceiros preservados. M425 reservado em branch independente para Old Vindictive Magician/4-Starred Ladybug of Doom: destruição direcionada de um monstro adversário versus destruição não-direcionada de todos os monstros face-up de Nível 4 da equipe adversária; somente quatro arquivos novos; M61 e M402–M424 preservados. M426 reservado em branch independente para Swarm of Scarabs/Swarm of Locusts: Flip Summon específico, alvo único por zona (Monster vs Spell/Trap/Field), destruição e efeito separado de virar a si mesma para face-down uma vez por turno; somente quatro arquivos novos; M61 e M402–M425 preservados. M427 reservado para registrar metadata factual dos sete cards M424–M426 em módulo gerado e cardMetadata, com testes que confirmam ausência no allowlist de distribuição; não altera releasedCardIds nem concede inventário. M61 e reservas M402–M426 preservados. M427 concluído e liberado ao auxiliar somente para monitorar CI/sincronizar seis arquivos próprios na PR #375; M428 reservado em branch independente para teste 2v2 FLIP/Discord, somente três arquivos novos; M61 e reservas M402-M426 preservadas.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -3341,8 +3341,8 @@
       "branch": "feat/work-m427-flip-card-metadata-20261120",
       "baseBranch": "feat/rea-engine-recovery-20261026",
       "baseSha": "b574cf70c6d735b43fafc3a6397d1433cfa9f0af",
-      "head": "b574cf70c6d735b43fafc3a6397d1433cfa9f0af",
-      "pr": null,
+      "head": "ea532e5243b96a6b4852beca7b7040b6a928ce90",
+      "pr": 375,
       "scope": [
         "src/generated/m424-m426-flip-cards.ts",
         "src/cardMetadata.ts",
@@ -3355,9 +3355,10 @@
         "src/cardMetadata.ts",
         "tests/m424m426FlipMetadata.test.cjs",
         "docs/evidence/m427-flip-card-metadata.json",
-        ".github/workflows/m427-flip-card-metadata.yml"
+        ".github/workflows/m427-flip-card-metadata.yml",
+        "scripts/mission15-reviewed-extensions.cjs"
       ],
-      "state": "active",
+      "state": "released-to-auxiliary-monitor-ci",
       "startedAt": "2026-11-20T16:00:01-03:00",
       "priority": "P2 — publicar metadata oficial (nomes, atributos, stats, texto e Konami CIDs) para os sete cards M424–M426 sem tocar no allowlist de distribuição ou certificar comportamento.",
       "cards": [
@@ -3369,6 +3370,64 @@
         "Swarm of Scarabs",
         "Swarm of Locusts"
       ],
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0,
+      "endedAt": "2026-11-20T19:36:27-03:00",
+      "effectiveWorkMinutes": 12.5,
+      "scopeReleasedToAuxiliary": [
+        "src/generated/m424-m426-flip-cards.ts",
+        "src/cardMetadata.ts",
+        "tests/m424m426FlipMetadata.test.cjs",
+        "docs/evidence/m427-flip-card-metadata.json",
+        ".github/workflows/m427-flip-card-metadata.yml",
+        "scripts/mission15-reviewed-extensions.cjs"
+      ],
+      "ci": {
+        "focused": "success on initial head",
+        "focusedRun": 44829606042,
+        "cardBatchFast": "initial baseline failure; exact M427 normalizer fix pushed; current-head rerun in progress",
+        "cardBatchFastRun": 44830064197,
+        "milestone1000": "in_progress",
+        "milestoneRun": 44830064151,
+        "engineValidation": "in_progress",
+        "engineRun": 44830064164
+      },
+      "newMetadataRecords": 2,
+      "preexistingMetadataRecords": 5
+    },
+    {
+      "mission": "M428",
+      "runId": "work-20261120T193627-0300-M428",
+      "branch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+      "head": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+      "pr": null,
+      "state": "reserved",
+      "startedAt": "2026-11-20T19:36:27-03:00",
+      "priority": "P1 — validar a resolução real de efeitos FLIP clássicos em 2v2 e a projeção Discord pública/privada, preservando assento físico, Cemitério compartilhado e mãos privadas.",
+      "reservedFiles": [
+        "tests/tagClassicFlipEffectsDiscord2v2.test.cjs",
+        "docs/evidence/m428-tag-classic-flip-discord-2v2.json",
+        ".github/workflows/m428-tag-classic-flip-discord-2v2.yml"
+      ],
+      "scope": "Somente teste de integração 2v2, evidência e workflow Node 22. Sem alterações em runtime, catálogo, certificados, allowlist, banco, inventário, dados de jogadores ou produção.",
+      "conflictCheck": {
+        "preserved": [
+          "M61",
+          "M418",
+          "M424",
+          "M425",
+          "M426",
+          "M427",
+          "M402-M417",
+          "M408",
+          "M411"
+        ],
+        "overlap": false,
+        "note": "Usa tagDuel/tagUI existentes; não modifica tagDuel.ts, tagUI.ts, tagInteraction.ts, tagStore.ts nem helpers reservados por M418."
+      },
       "newCertifications": 0,
       "automaticCertifications": 0,
       "inventoryGranted": 0
@@ -4311,7 +4370,7 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "Obter handoff M61 e integrar ao resolver 2v2 as primitives M367/M368 e M399/M400/M401; se não houver liberação, iniciar M402 Absorbing Kid from the Sky em arquivos novos e sem tocar reservas centrais.",
+  "nextTask": "Auxiliar monitora M427 #375 (somente seis arquivos próprios) e sincroniza sem force; Work executa M428 em três arquivos novos, sem runtime.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
   "sharedHeadBeforeClaim": "97983a9e05a84baef74248772e8e5e90c83930e3",
@@ -7076,7 +7135,7 @@
     "requestedAt": "2026-11-14T09:18:10-03:00",
     "scope": "partial file-only handoff; no changes until release"
   },
-  "lastCheckpointAt": "2026-11-19T23:48:32.028-03:00",
+  "lastCheckpointAt": "2026-11-20T19:36:27-03:00",
   "reservationReleased": false,
   "expectedHeadForCoordinationCommit": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "lastRunSummary": "M305 registrado: The Sanctuary in the Sky, teste de integração Discord 2v2 em branch isolada; escopo único tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs.",
@@ -7199,7 +7258,7 @@
     }
   ],
   "nextWindow": "2026-11-19T18:30:00-03:00",
-  "lastCheckpointSha": "ea81a0467a974aa8cccfe172b67b007fe945c962",
+  "lastCheckpointSha": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
   "deployment": {
     "merge": "none",
     "deploy": "none",
@@ -7631,7 +7690,7 @@
     }
   ],
   "updatedAt": "2026-11-20T02:48:32.028Z",
-  "lastCheckpointCommit": "ea907a31daf5c5cafb521e99053a5763483558c5",
+  "lastCheckpointCommit": "ea532e5243b96a6b4852beca7b7040b6a928ce90",
   "concurrentReservations": [
     {
       "runId": "work-20261115T042526-0300",
@@ -9709,15 +9768,15 @@
   },
   "lastIndependentWorkCheckpoint": "coordination/runs/work-20261119T133015-0300-M397.json",
   "lastIndependentWorkActivityAt": "2026-11-19T23:48:32.028-03:00",
-  "nextWorkWindow": "2026-11-20T03:30:00-03:00",
+  "nextWorkWindow": "2026-11-20T22:30:00-03:00",
   "lastIndependentWorkRunId": "work-20261120T045650-0300-M404",
-  "workBranchesUpdatedAt": "2026-11-19T06:46:09.230Z",
+  "workBranchesUpdatedAt": "2026-11-20T19:36:27-03:00",
   "lastActiveWorkMission": "M379–M381",
   "sharedHeadBeforeCheckpointCommit": "8d3a273c195be9941dfbaa1e41f86d95e4eb2e3a",
-  "lastWorkRunId": "work-20261119T133015-0300-M397",
-  "lastWorkMission": "M397",
-  "lastWorkBranch": "feat/work-m397-coordination-reservation-guard-20261119",
-  "lastWorkHead": "ff817a43b0d9ef9301e47cb3baa07b4ad49ca0e5",
+  "lastWorkRunId": "work-20261120T193627-0300-M428",
+  "lastWorkMission": "M428",
+  "lastWorkBranch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
+  "lastWorkHead": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
   "lastWorkBranches": [
     {
       "branch": "feat/work-m387-a-team-trap-disposal-negation-20261119",
@@ -9741,16 +9800,12 @@
   },
   "lastIndependentWorkReservationReleased": true,
   "lastIndependentWorkScopeReleasedToAuxiliary": [
-    {
-      "branch": "feat/work-m397-coordination-reservation-guard-20261119",
-      "pr": 346,
-      "files": [
-        "scripts/coordination-reservation-guard.cjs",
-        "tests/coordinationReservationGuard.test.cjs",
-        ".github/workflows/coordination-reservation-guard.yml"
-      ],
-      "permission": "Merge the latest shared branch into this M397 branch without force, then monitor CI and correct only the three M397 files; do not edit state, runtime, catalog, player data, other branches or production."
-    }
+    "src/generated/m424-m426-flip-cards.ts",
+    "src/cardMetadata.ts",
+    "tests/m424m426FlipMetadata.test.cjs",
+    "docs/evidence/m427-flip-card-metadata.json",
+    ".github/workflows/m427-flip-card-metadata.yml",
+    "scripts/mission15-reviewed-extensions.cjs"
   ],
   "lastIndependentWorkCatalog": {
     "target": 1000,
@@ -9778,51 +9833,7 @@
     "deploymentsApiExposed": false,
     "note": "main/.github/workflows/engine-validation.yml não encontrado; API de deployments não exposta pelo conector. Nenhum deploy ou teste Discord ao vivo foi confirmado."
   },
-  "lastIndependentWorkRunSummary": {
-    "runId": "work-20261119T232908-0300-M399-M401",
-    "checkpoint": "coordination/runs/work-20261119T232908-0300-M399-M401.json",
-    "checkpointCommitSha": "ea81a0467a974aa8cccfe172b67b007fe945c962",
-    "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtCheckpoint": "ea81a0467a974aa8cccfe172b67b007fe945c962",
-    "branches": [
-      {
-        "mission": "M399",
-        "branch": "feat/work-m399-battle-damage-family-20261119",
-        "head": "93520b5a0b951fa5349c06f5fde93d3c2063278a",
-        "pr": 348
-      },
-      {
-        "mission": "M400",
-        "branch": "feat/work-m400-eight-claws-scorpion-20261119",
-        "head": "385511250b62adc6b4b43ed4893547019f865d2f",
-        "pr": 349
-      },
-      {
-        "mission": "M401",
-        "branch": "feat/work-m401-wdjat-private-set-inspection-20261119",
-        "head": "e9762ff0a4ad524dbc6f7913501de5f9c15316a1",
-        "pr": 350
-      }
-    ],
-    "tests": {
-      "M399": "20/20 focused",
-      "M400": "14/14 focused",
-      "M401": "16/16 focused"
-    },
-    "catalog": {
-      "certified": 969,
-      "remaining": 31,
-      "newCertifications": 0
-    },
-    "handoffM61": "awaiting explicit release; no central runtime files modified",
-    "production": {
-      "merge": false,
-      "deploy": false,
-      "realDiscordValidation": false
-    },
-    "effectiveWorkMinutes": 15,
-    "targetEffectiveMinutes": 60
-  },
+  "lastIndependentWorkRunSummary": "M427 PR #375: apenas dois registros de metadata ausentes; cinco identidades já certificadas. Correção de baseline M15 publicada; CI atual em andamento.",
   "postCheckpointPrStatus": {
     "observedAt": "2026-11-19T02:33:50.163Z",
     "sharedHead": "ea907a31daf5c5cafb521e99053a5763483558c5",
@@ -10002,43 +10013,58 @@
     "noResponse": true
   },
   "currentIndependentWork": {
-    "runId": "work-20261119T041256-0300-M383",
-    "owner": "Work",
-    "mission": "M383",
-    "priority": "P1 — habilitar modificadores temporários de ATK/DEF como opção tipada e validada do StandbyFlow, preparando Amazoness Blowpiper sem tocar no roteador nem nos arquivos M8 protegidos.",
-    "state": "reserved",
-    "startedAt": "2026-11-19T04:12:56-03:00",
+    "format": 1,
+    "mission": "M428",
+    "runId": "work-20261120T193627-0300-M428",
+    "owner": "Work principal",
+    "branch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
     "baseBranch": "feat/rea-engine-recovery-20261026",
-    "baseSha": "2a37ff19c2a2306484e718006487a1ffc356ca5b",
+    "baseSha": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+    "sharedHeadAtReservation": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+    "state": "reserved",
+    "startedAt": "2026-11-20T19:36:27-03:00",
+    "priority": "P1 — validar a resolução real de efeitos FLIP clássicos em 2v2 e a projeção Discord pública/privada, preservando assento físico, Cemitério compartilhado e mãos privadas.",
     "reservedFiles": [
-      "src/standbyFlow.ts",
-      "src/continuousEffects.ts",
-      "src/amazonessBlowpiper.ts",
-      "tests/amazonessBlowpiper.test.cjs",
-      ".github/workflows/m383-focused-tests.yml"
+      "tests/tagClassicFlipEffectsDiscord2v2.test.cjs",
+      "docs/evidence/m428-tag-classic-flip-discord-2v2.json",
+      ".github/workflows/m428-tag-classic-flip-discord-2v2.yml"
     ],
-    "conflictCheck": "Nenhuma PR aberta #312/#317–#329 altera estes arquivos; eles não constam no baseline preservado M8 nem nas nove reservas ativas.",
-    "handoff": "Integração final em monsterEffects/duelEngineCurrent continua dependente do handoff M61; este bloco entrega primitive de Standby reutilizável e testes de motor isolados."
+    "scope": "Somente teste de integração 2v2, evidência e workflow Node 22. Sem alterações em runtime, catálogo, certificados, allowlist, banco, inventário, dados de jogadores ou produção.",
+    "conflictCheck": {
+      "preserved": [
+        "M61",
+        "M418",
+        "M424",
+        "M425",
+        "M426",
+        "M427",
+        "M402-M417",
+        "M408",
+        "M411"
+      ],
+      "overlap": false,
+      "note": "Usa tagDuel/tagUI existentes; não modifica tagDuel.ts, tagUI.ts, tagInteraction.ts, tagStore.ts nem helpers reservados por M418."
+    },
+    "cards": [
+      "Man-Eater Bug",
+      "Magician of Faith"
+    ],
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "nextTask": "Construir fixtures 2v2 com cartas físicas de parceiros inativos, testar FLIP destruction e Spell recovery, validar payloads públicos/privados e visibilidade de zonas, executar CI."
   },
   "previousIndependentWork": {
-    "runId": "work-20261119T035253-0300-M382",
-    "mission": "M382",
-    "state": "closed-blocked",
-    "startedAt": "2026-11-19T03:52:53-03:00",
-    "endedAt": "2026-11-19T04:12:56-03:00",
-    "branch": "feat/work-m382-deck-interaction-id-guard-20261119",
-    "head": "42c168ef71a1959dd4654326ce6a195369549b8d",
-    "pr": 330,
-    "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/330",
-    "result": "PR fechada sem merge. O workflow focado passou após ajuste de fixture, mas Card Batch Fast e Engine Validation falharam no check-mission8-integrity porque src/index.ts e src/deckUI.ts são arquivos protegidos pelo baseline M8.",
-    "verified": {
-      "focusedWorkflow": "success",
-      "milestone1000": "success",
-      "cardBatchFast": "failure",
-      "engineValidation": "failure"
-    },
-    "lesson": "Não modificar arquivos M8 preservados sem procedimento explícito de extensão; a próxima frente evita esses arquivos.",
-    "effectiveWorkMinutes": 20
+    "mission": "M427",
+    "runId": "work-20261120T160001-0300-M427",
+    "branch": "feat/work-m427-flip-card-metadata-20261120",
+    "head": "ea532e5243b96a6b4852beca7b7040b6a928ce90",
+    "pr": 375,
+    "state": "released-to-auxiliary-monitor-ci",
+    "newMetadataRecords": 2,
+    "preexistingMetadataRecords": 5,
+    "newCertifications": 0,
+    "effectiveWorkMinutes": 12.5
   },
   "currentWorkReservationM397": {
     "runId": "work-20261119T133015-0300-M397",
@@ -10061,12 +10087,12 @@
     "auxiliaryPermission": "Merge the latest shared branch into this M397 branch without force, then monitor CI and correct only the three M397 files; do not edit state, runtime, catalog, player data, other branches or production."
   },
   "lastWorkPR": 346,
-  "lastWorkStatus": "released-to-auxiliary-monitor-ci",
+  "lastWorkStatus": "reserved",
   "lastWorkDuration": {
-    "elapsedMinutes": 14.78,
-    "effectiveWorkMinutes": 12.5,
+    "elapsedMinutes": 0,
+    "effectiveWorkMinutes": 0,
     "targetEffectiveMinutes": 60,
-    "ciWaitExcluded": true
+    "targetMet": false
   },
   "lastWorkCatalog": {
     "certified": 969,
@@ -10109,14 +10135,14 @@
     "minimum60MinutesMet": false,
     "auxiliaryPermission": "Monitor PR #347, sync branch with latest shared HEAD by non-forced merge, correct only these three M398 files if CI fails. Do not edit coordination/state.json, runtime, catalog, certificates, player data, inventory, persistent DB, other branches, main or production; no merge/deploy."
   },
-  "latestIndependentWorkRunId": "work-20261120T051939-0300-M407",
-  "latestIndependentWorkBranch": "feat/work-m407-immortal-of-thunder-lp-swing-20261120",
-  "latestIndependentWorkHead": "e9762ff0a4ad524dbc6f7913501de5f9c15316a1",
+  "latestIndependentWorkRunId": "work-20261120T193627-0300-M428",
+  "latestIndependentWorkBranch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
+  "latestIndependentWorkHead": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
   "latestIndependentWorkReservationReleased": false,
-  "latestIndependentWorkActivityAt": "2026-11-20T05:19:39-03:00",
-  "latestIndependentWorkPR": 347,
-  "latestIndependentWorkCheckpoint": "coordination/runs/work-20261119T232908-0300-M399-M401.json",
-  "latestIndependentWorkCheckpointCommit": "a25d531c4869d8f17112f85beb978e3bcd5791b2",
+  "latestIndependentWorkActivityAt": "2026-11-20T19:36:27-03:00",
+  "latestIndependentWorkPR": null,
+  "latestIndependentWorkCheckpoint": "coordination/runs/work-20261120T193627-0300-M428.json",
+  "latestIndependentWorkCheckpointCommit": "pending",
   "latestIndependentWorkStatus": "reserved",
   "latestIndependentWorkEffectiveMinutes": 0,
   "latestIndependentWorkCatalog": {
@@ -10126,8 +10152,8 @@
     "newCertifications": 0,
     "automaticCertifications": 0
   },
-  "nextIndependentWorkTask": "Concluir M407 e revisar as CI de M405/M406; depois aguardar handoff M61 para integração dos produtores de LP e o consumidor Fire Princess.",
-  "nextIndependentWorkWindow": "2026-11-20T08:30:00-03:00",
+  "nextIndependentWorkTask": "M428: integração 2v2 FLIP/Discord de Man-Eater Bug e Magician of Faith; depois retomar handoff M61 para integrar M402-M426.",
+  "nextIndependentWorkWindow": "2026-11-20T22:30:00-03:00",
   "releasedReservations": [
     {
       "runId": "work-20261119T182750-0300-M398",
@@ -10139,35 +10165,46 @@
       "at": "2026-11-19T18:36:43-03:00",
       "owner": "Work",
       "thirdParty": false
+    },
+    {
+      "runId": "work-20261120T160001-0300-M427",
+      "files": [
+        "src/generated/m424-m426-flip-cards.ts",
+        "src/cardMetadata.ts",
+        "tests/m424m426FlipMetadata.test.cjs",
+        "docs/evidence/m427-flip-card-metadata.json",
+        ".github/workflows/m427-flip-card-metadata.yml",
+        "scripts/mission15-reviewed-extensions.cjs"
+      ],
+      "at": "2026-11-20T19:36:27-03:00",
+      "owner": "Work",
+      "thirdParty": false,
+      "scope": "auxiliary-monitor-ci-only"
     }
   ],
   "latestIndependentWorkCI": [
     {
-      "name": "M398 rules help contract",
-      "run": 44620479540,
-      "status": "pending",
-      "jobStatus": "queued"
+      "name": "M427 Flip Card Metadata",
+      "run": 44830064223,
+      "status": "in_progress"
     },
     {
-      "name": "Card batch fast feedback",
-      "run": 44620479562,
-      "status": "completed",
-      "conclusion": "success"
-    },
-    {
-      "name": "Engine validation",
-      "run": 44620479659,
-      "status": "queued"
+      "name": "Card Batch Fast Feedback",
+      "run": 44830064197,
+      "status": "in_progress"
     },
     {
       "name": "Milestone 1000",
-      "run": 44620479541,
-      "status": "completed",
-      "conclusion": "success",
-      "artifact": 14575203596
+      "run": 44830064151,
+      "status": "in_progress"
+    },
+    {
+      "name": "Engine validation",
+      "run": 44830064164,
+      "status": "in_progress"
     }
   ],
-  "latestIndependentWorkSharedHead": "93a91430b27bd91a563d098e8e56797c2bb0b536",
+  "latestIndependentWorkSharedHead": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
   "latestIndependentWorkCompare": {
     "ahead": 12,
     "behind": 6,
@@ -10221,9 +10258,9 @@
       ".github/workflows/m399-battle-damage-family.yml"
     ]
   },
-  "lastIndependentWorkMission": "M404",
-  "lastIndependentWorkBranch": "feat/work-m404-gy-sent-lp-recovery-20261120",
-  "lastIndependentWorkHead": "52ba26917541589742c998d99aaa4e201d1819fd",
+  "lastIndependentWorkMission": "M427",
+  "lastIndependentWorkBranch": "feat/work-m427-flip-card-metadata-20261120",
+  "lastIndependentWorkHead": "ea532e5243b96a6b4852beca7b7040b6a928ce90",
   "currentWorkReservationM400": {
     "runId": "work-20261119T234000-0300-M400",
     "owner": "Work",
@@ -10298,7 +10335,7 @@
       ".github/workflows/m401-private-set-inspection.yml"
     ]
   },
-  "lastCheckpointCommitSha": "ea81a0467a974aa8cccfe172b67b007fe945c962",
+  "lastCheckpointCommitSha": "ea532e5243b96a6b4852beca7b7040b6a928ce90",
   "lastIndependentWorkStatus": "released-to-auxiliary-monitor-ci",
   "currentWorkReservationM402": {
     "runId": "work-20261120T043227-0300-M402",
@@ -10365,7 +10402,7 @@
     ],
     "cardFamily": "battle-destruction-life-point-recovery"
   },
-  "latestIndependentWorkPriority": "P1 — modelar os dois efeitos oficiais de The Immortal of Thunder (84926738): ganho de 3000 LP no Flip e perda de 5000 LP quando enviado do campo ao Cemitério, com roteamento pela equipe controladora no evento, ownership físico e idempotência.",
+  "latestIndependentWorkPriority": "P1 — validar a resolução real de efeitos FLIP clássicos em 2v2 e a projeção Discord pública/privada, preservando assento físico, Cemitério compartilhado e mãos privadas.",
   "currentWorkReservationM403": {
     "runId": "work-20261120T045103-0300-M403",
     "owner": "Work principal",
@@ -10624,5 +10661,90 @@
       "firstTcgSet": "Metal Raiders (MRD-099)"
     },
     "thirdPartyReservationsReleased": []
+  },
+  "lastIndependentWorkEffectiveMinutes": 12.5,
+  "currentWorkReservationM427": {
+    "runId": "work-20261120T160001-0300-M427",
+    "owner": "Work principal",
+    "mission": "M427",
+    "priority": "P2 — metadata factual M424-M426 sem alterar certificados/allowlist.",
+    "state": "released-to-auxiliary-monitor-ci",
+    "branch": "feat/work-m427-flip-card-metadata-20261120",
+    "head": "ea532e5243b96a6b4852beca7b7040b6a928ce90",
+    "pr": 375,
+    "reservedFiles": [
+      "src/generated/m424-m426-flip-cards.ts",
+      "src/cardMetadata.ts",
+      "tests/m424m426FlipMetadata.test.cjs",
+      "docs/evidence/m427-flip-card-metadata.json",
+      ".github/workflows/m427-flip-card-metadata.yml",
+      "scripts/mission15-reviewed-extensions.cjs"
+    ],
+    "scopeReleasedToAuxiliary": [
+      "src/generated/m424-m426-flip-cards.ts",
+      "src/cardMetadata.ts",
+      "tests/m424m426FlipMetadata.test.cjs",
+      "docs/evidence/m427-flip-card-metadata.json",
+      ".github/workflows/m427-flip-card-metadata.yml",
+      "scripts/mission15-reviewed-extensions.cjs"
+    ],
+    "ci": {
+      "focused": "success on initial head",
+      "focusedRun": 44829606042,
+      "cardBatchFast": "initial baseline failure; exact M427 normalizer fix pushed; current-head rerun in progress",
+      "cardBatchFastRun": 44830064197,
+      "milestone1000": "in_progress",
+      "milestoneRun": 44830064151,
+      "engineValidation": "in_progress",
+      "engineRun": 44830064164
+    },
+    "newMetadataRecords": 2,
+    "preexistingMetadataRecords": 5,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "endedAt": "2026-11-20T19:36:27-03:00"
+  },
+  "currentWorkReservationM428": {
+    "format": 1,
+    "mission": "M428",
+    "runId": "work-20261120T193627-0300-M428",
+    "owner": "Work principal",
+    "branch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+    "sharedHeadAtReservation": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+    "state": "reserved",
+    "startedAt": "2026-11-20T19:36:27-03:00",
+    "priority": "P1 — validar a resolução real de efeitos FLIP clássicos em 2v2 e a projeção Discord pública/privada, preservando assento físico, Cemitério compartilhado e mãos privadas.",
+    "reservedFiles": [
+      "tests/tagClassicFlipEffectsDiscord2v2.test.cjs",
+      "docs/evidence/m428-tag-classic-flip-discord-2v2.json",
+      ".github/workflows/m428-tag-classic-flip-discord-2v2.yml"
+    ],
+    "scope": "Somente teste de integração 2v2, evidência e workflow Node 22. Sem alterações em runtime, catálogo, certificados, allowlist, banco, inventário, dados de jogadores ou produção.",
+    "conflictCheck": {
+      "preserved": [
+        "M61",
+        "M418",
+        "M424",
+        "M425",
+        "M426",
+        "M427",
+        "M402-M417",
+        "M408",
+        "M411"
+      ],
+      "overlap": false,
+      "note": "Usa tagDuel/tagUI existentes; não modifica tagDuel.ts, tagUI.ts, tagInteraction.ts, tagStore.ts nem helpers reservados por M418."
+    },
+    "cards": [
+      "Man-Eater Bug",
+      "Magician of Faith"
+    ],
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "nextTask": "Construir fixtures 2v2 com cartas físicas de parceiros inativos, testar FLIP destruction e Spell recovery, validar payloads públicos/privados e visibilidade de zonas, executar CI."
   }
 }
