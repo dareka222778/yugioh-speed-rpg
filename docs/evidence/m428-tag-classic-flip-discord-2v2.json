@@ -1,0 +1,49 @@
+{
+  "format": 1,
+  "mission": "M428",
+  "runId": "work-20261120T193627-0300-M428",
+  "reviewedAt": "2026-11-20",
+  "scope": "2v2 classic Flip integration and Discord payload contract only",
+  "rulesPreserved": {
+    "mainDeckMinimum": 20,
+    "mainDeckMaximum": 30,
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMaximum": 5
+  },
+  "scenarios": [
+    {
+      "card": "Man-Eater Bug",
+      "id": "54652250",
+      "behavior": "Flip Summon targets and destroys one opposing-team monster; the physical UID remains in the opposing shared GY; face-down opponent identity stays hidden from public and opposing team panels; own teammate can inspect own face-down card."
+    },
+    {
+      "card": "Magician of Faith",
+      "id": "31560081",
+      "behavior": "Flip Summon retrieves only a Spell from the shared team GY to the active representative's private hand; the inactive partner hand remains isolated; public Discord panel does not expose physical UIDs."
+    }
+  ],
+  "validation": {
+    "testCases": 2,
+    "expectedNewCertifications": 0,
+    "actualNewCertifications": 0,
+    "inventoryGranted": 0,
+    "databaseWrites": "only isolated temporary SQLite path used by tagUI/tagStore module initialization; no player records or production database touched",
+    "runtimeFilesChanged": [],
+    "cardMetadataChanged": false,
+    "effectRegistryChanged": false,
+    "releaseAllowlistChanged": false,
+    "certificateRegistryChanged": false,
+    "liveDiscordServerTest": false,
+    "mergePerformed": false,
+    "deployPerformed": false
+  },
+  "limitations": [
+    "This is an integration test against the local 2v2 duel and Discord payload builders; it is not a live Discord gateway/server test.",
+    "The two cards were already registered/certified in the shared engine; M428 adds no card certification.",
+    "No command registration or runtime effect code was changed."
+  ]
+}
