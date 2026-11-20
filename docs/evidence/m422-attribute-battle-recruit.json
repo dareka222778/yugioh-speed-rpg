@@ -27,6 +27,45 @@
       "certificationStatus": "not-certified",
       "behavioralTestStatus": "focused-passing; engine integration pending",
       "automaticCertification": false
+    },
+    {
+      "name": "UFO Turtle",
+      "passcode": "60806437",
+      "konamiId": 4917,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4917&ope=2&request_locale=en",
+      "firstPrinting": "Spell Ruler (MRL-081), TCG 2002-09-16; OCG 2002-10-24",
+      "effectParaphrase": "When destroyed by battle and sent to the Graveyard, its physical owner may Special Summon one FIRE monster with 1500 or less ATK from that owner's Deck in face-up Attack Position.",
+      "sourceVerified": true,
+      "historicalEligibility": "pre-2004-09-30 printing verified",
+      "certificationStatus": "not-certified",
+      "behavioralTestStatus": "focused-passing; engine integration pending",
+      "automaticCertification": false
+    },
+    {
+      "name": "Mother Grizzly",
+      "passcode": "57839750",
+      "konamiId": 4926,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4926&ope=2&request_locale=en",
+      "firstPrinting": "Spell Ruler (MRL-090), TCG 2002-09-16; OCG 2002-10-24",
+      "effectParaphrase": "When destroyed by battle and sent to the Graveyard, its physical owner may Special Summon one WATER monster with 1500 or less ATK from that owner's Deck in face-up Attack Position.",
+      "sourceVerified": true,
+      "historicalEligibility": "pre-2004-09-30 printing verified",
+      "certificationStatus": "not-certified",
+      "behavioralTestStatus": "focused-passing; engine integration pending",
+      "automaticCertification": false
+    },
+    {
+      "name": "Flying Kamakiri #1",
+      "passcode": "96501677",
+      "konamiId": 4927,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4927&ope=2&request_locale=en",
+      "firstPrinting": "Spell Ruler (MRL-091), TCG 2002-09-16; OCG 2002-10-24",
+      "effectParaphrase": "When destroyed by battle and sent to the Graveyard, its physical owner may Special Summon one WIND monster with 1500 or less ATK from that owner's Deck in face-up Attack Position.",
+      "sourceVerified": true,
+      "historicalEligibility": "pre-2004-09-30 printing verified",
+      "certificationStatus": "not-certified",
+      "behavioralTestStatus": "focused-passing; engine integration pending",
+      "automaticCertification": false
     }
   ],
   "sharedFieldRules": {
@@ -36,7 +75,8 @@
     "deckSource": "physical owner's private Deck only",
     "summonCount": 1,
     "summonPosition": "face-up-attack",
-    "physicalOwnerGetsTriggerWhenControlWasStolen": "owner-based behavior corroborated by 2003 tournament ruling mirror; not a current official Konami ruling source"
+    "physicalOwnerGetsTriggerWhenControlWasStolen": "owner-based behavior corroborated by 2003 tournament ruling mirror; not a current official Konami ruling source",
+    "existingRelatedSupport": "Mystic Tomato DARK recruiter is already present in the project; it is not re-counted in M422"
   },
   "officialRulingReference": {
     "url": "https://ms.yugipedia.com/a/a1/2003_tournament_rulings.pdf",
