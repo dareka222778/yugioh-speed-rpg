@@ -68,7 +68,8 @@ function assertTeam(value: number, label: string): asserts value is DuelTeam {
 export function inspectOpponentSetCard(
   request: PrivateSetInspectionRequest,
 ): PrivateSetInspectionResult | null {
-  assertSeat(request.resolverSeat, "resolverSeat");
+  const resolverSeat = request.resolverSeat;
+  assertSeat(resolverSeat, "resolverSeat");
   assertTeam(request.resolverTeam, "resolverTeam");
   const target = request.target;
   if (!target || typeof target.uid !== "string" || !target.uid.trim()) {
@@ -85,7 +86,7 @@ export function inspectOpponentSetCard(
   if (target.zone === "monster" && target.position !== "def") return null;
 
   return {
-    resolverSeat: request.resolverSeat,
+    resolverSeat,
     target: { ...target },
   };
 }
