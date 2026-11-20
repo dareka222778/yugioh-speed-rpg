@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "runId": "work-20261120T052926-0300-M408",
+  "owner": "Work principal",
+  "mission": "M408",
+  "priority": "P1 — validar Giant Trunade (42703248) pelo handler real de componentes Discord 2v2: devolver o backrow compartilhado aos quatro proprietários físicos, conservar UIDs e aplicar o descarte de End Phase até seis cartas por participante.",
+  "state": "active",
+  "startedAt": "2026-11-20T05:29:26-03:00",
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtStart": "5bff6f212ed0578b8e4bca59deea658938133c7a",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m408-giant-trunade-discord-2v2-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "5bff6f212ed0578b8e4bca59deea658938133c7a",
+  "reservedFiles": [
+    "tests/tagClassicGiantTrunadeDiscord2v2.test.cjs",
+    "docs/evidence/m408-giant-trunade-discord-2v2.json",
+    ".github/workflows/m408-giant-trunade-discord-2v2.yml"
+  ],
+  "objective": "Exercitar Giant Trunade no fluxo de ações do 2v2 via handleTagComponent, sem chamar stepTagDuel diretamente para a ação testada; comprovar retorno do backrow aos assentos físicos 0–3, conservação dos UIDs, mãos privadas, painel público sem vazamento e descarte End Phase de sete para seis por participante.",
+  "card": {
+    "name": "Giant Trunade",
+    "id": "42703248",
+    "status": "já certificada no catálogo congelado",
+    "existingCertificationSuite": "tests/classicEngine.test.cjs",
+    "newCertification": false
+  },
+  "audit": {
+    "pr351": "open-draft; focused/Card Batch Fast/Milestone/Engine Validation success; mergeable false",
+    "pr352": "open-draft; focused/Card Batch Fast/Milestone/Engine Validation success; mergeable false",
+    "pr353": "open-draft; focused/Card Batch Fast/Milestone/Engine Validation success; mergeable false",
+    "pr354": "open-draft; focused/Card Batch Fast/Milestone/Engine Validation success; mergeable false",
+    "pr355": "open-draft; Card Batch Fast/Milestone success; focused and Engine Validation fail; Extended Soak success",
+    "m404": "reservation exists in state/run file but branch ref and PR not found at audit time",
+    "handoffM61": "PR #17 open; no explicit release for monsterEffects.ts/duelEngineCurrent.ts"
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidated": false
+  },
+  "blocksCompleted": [
+    "Coordination/state.json e checkpoint M399–M401 lidos; HEAD compartilhado 5bff6f212ed0578b8e4bca59deea658938133c7a e main f78f3080b496d2697072b946088309f36e97b60e verificados.",
+    "M402, M403, M405 e M406 têm workflows focados/Card Batch Fast/Milestone/Engine Validation concluídos com sucesso; M407 tem falhas no teste focado e no job test do Engine Validation; Extended Soak passou.",
+    "M404 permanece reservado e foi preservado apesar de branch/PR ainda não encontrados; nenhuma reserva de terceiro foi alterada.",
+    "M408 reservado em branch isolada, com três caminhos novos e sem sobreposição."
+  ],
+  "nextTask": "Implementar o teste de integração Discord 2v2 para Giant Trunade e o workflow focado; executar CI no HEAD final; corrigir apenas o novo teste/fixtures se necessário.",
+  "nextWindow": "2026-11-20T08:30:00-03:00",
+  "limitations": [
+    "O ambiente local não possui acesso de rede para clonar o repositório; validação executável será feita por GitHub Actions após publicar a branch.",
+    "Nenhuma nova certificação será reivindicada: Giant Trunade já possui certificado e esta missão adiciona integração 2v2."
+  ]
+}
