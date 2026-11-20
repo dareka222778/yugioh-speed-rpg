@@ -18,10 +18,16 @@ function resolve(id, o = {}) {
 test('passcodes and Konami CIDs are exact', () => assert.deepEqual(ATTRIBUTE_BATTLE_RECRUIT_CARDS, {
   giantRat: { id: '97017120', konamiId: 4915, attribute: 'EARTH', maximumAtk: 1500 },
   shiningAngel: { id: '95956346', konamiId: 4924, attribute: 'LIGHT', maximumAtk: 1500 },
+  ufoTurtle: { id: '60806437', konamiId: 4917, attribute: 'FIRE', maximumAtk: 1500 },
+  motherGrizzly: { id: '57839750', konamiId: 4926, attribute: 'WATER', maximumAtk: 1500 },
+  flyingKamakiri1: { id: '96501677', konamiId: 4927, attribute: 'WIND', maximumAtk: 1500 },
 }));
 test('2v2 seats map to the correct shared teams', () => { assert.equal(teamOfSeat(0),0); assert.equal(teamOfSeat(2),0); assert.equal(teamOfSeat(1),1); assert.equal(teamOfSeat(3),1); assert.equal(teamOfSeat(4),undefined); });
 test('Giant Rat plan searches EARTH up to 1500 ATK', () => { const p=makePlan(ATTRIBUTE_BATTLE_RECRUIT_CARDS.giantRat.id); assert.equal(p.ok,true); assert.equal(p.value.attribute,'EARTH'); assert.equal(p.value.maximumAtk,1500); });
 test('Shining Angel plan searches LIGHT up to 1500 ATK', () => { const p=makePlan(ATTRIBUTE_BATTLE_RECRUIT_CARDS.shiningAngel.id); assert.equal(p.ok,true); assert.equal(p.value.attribute,'LIGHT'); assert.equal(p.value.maximumAtk,1500); });
+test('UFO Turtle plan searches FIRE up to 1500 ATK', () => { const p=makePlan(ATTRIBUTE_BATTLE_RECRUIT_CARDS.ufoTurtle.id); assert.equal(p.ok,true); assert.equal(p.value.attribute,'FIRE'); });
+test('Mother Grizzly plan searches WATER up to 1500 ATK', () => { const p=makePlan(ATTRIBUTE_BATTLE_RECRUIT_CARDS.motherGrizzly.id); assert.equal(p.ok,true); assert.equal(p.value.attribute,'WATER'); });
+test('Flying Kamakiri #1 plan searches WIND up to 1500 ATK', () => { const p=makePlan(ATTRIBUTE_BATTLE_RECRUIT_CARDS.flyingKamakiri1.id); assert.equal(p.ok,true); assert.equal(p.value.attribute,'WIND'); });
 test('physical owner gets the trigger when Giant Rat was stolen', () => { const p=makePlan(ATTRIBUTE_BATTLE_RECRUIT_CARDS.giantRat.id,{owner:2,controller:1,graveyardTeam:0}); assert.equal(p.ok,true); assert.equal(p.value.ownerTeam,0); assert.equal(p.value.controllerTeamAtDestruction,1); });
 test('physical owner gets the trigger when Shining Angel was stolen', () => { const p=makePlan(ATTRIBUTE_BATTLE_RECRUIT_CARDS.shiningAngel.id,{owner:3,controller:0,graveyardTeam:1}); assert.equal(p.ok,true); assert.equal(p.value.ownerTeam,1); assert.equal(p.value.controllerTeamAtDestruction,0); });
 test('must be destroyed by battle and sent to Graveyard', () => { assert.equal(makePlan(ATTRIBUTE_BATTLE_RECRUIT_CARDS.giantRat.id,{destroyed:false}).ok,false); assert.equal(makePlan(ATTRIBUTE_BATTLE_RECRUIT_CARDS.giantRat.id,{sent:false}).ok,false); });
@@ -30,6 +36,9 @@ test('invalid source owner/controller/Graveyard identities are rejected', () => 
 test('unknown source card is rejected', () => assert.equal(makePlan('00000000').reason,'unsupported-card-id'));
 test('Giant Rat summons an EARTH monster at the 1500 ATK boundary face-up Attack', () => { const id=ATTRIBUTE_BATTLE_RECRUIT_CARDS.giantRat.id; const r=resolve(id,{deck:[card('earth-1500','EARTH',1500)],selected:'earth-1500'}); assert.equal(r.ok,true); assert.deepEqual(r.value.summoned,{uid:'earth-1500',id:'00000001',physicalOwnerSeat:0,controllerTeam:0,monsterZoneIndex:0,position:'face-up-attack'}); });
 test('Shining Angel summons a LIGHT monster at the 1500 ATK boundary', () => { const id=ATTRIBUTE_BATTLE_RECRUIT_CARDS.shiningAngel.id; const r=resolve(id,{deck:[card('light-1500','LIGHT',1500)],selected:'light-1500'}); assert.equal(r.ok,true); assert.equal(r.value.summoned.uid,'light-1500'); });
+test('UFO Turtle recruits FIRE at the 1500 ATK boundary', () => { const id=ATTRIBUTE_BATTLE_RECRUIT_CARDS.ufoTurtle.id; const r=resolve(id,{deck:[card('fire-1500','FIRE',1500)],selected:'fire-1500'}); assert.equal(r.ok,true); assert.equal(r.value.summoned.uid,'fire-1500'); });
+test('Mother Grizzly recruits WATER at the 1500 ATK boundary', () => { const id=ATTRIBUTE_BATTLE_RECRUIT_CARDS.motherGrizzly.id; const r=resolve(id,{deck:[card('water-1500','WATER',1500)],selected:'water-1500'}); assert.equal(r.ok,true); assert.equal(r.value.summoned.uid,'water-1500'); });
+test('Flying Kamakiri #1 recruits WIND at the 1500 ATK boundary', () => { const id=ATTRIBUTE_BATTLE_RECRUIT_CARDS.flyingKamakiri1.id; const r=resolve(id,{deck:[card('wind-1500','WIND',1500)],selected:'wind-1500'}); assert.equal(r.ok,true); assert.equal(r.value.summoned.uid,'wind-1500'); });
 test('ATK 1501 is not eligible', () => { const id=ATTRIBUTE_BATTLE_RECRUIT_CARDS.giantRat.id; assert.equal(resolve(id,{deck:[card('strong','EARTH',1501)],selected:'strong'}).reason,'selected-card-does-not-match-attribute-and-atk-filter'); });
 test('wrong attribute is not eligible even when ATK is low', () => { const id=ATTRIBUTE_BATTLE_RECRUIT_CARDS.giantRat.id; assert.equal(resolve(id,{deck:[card('light','LIGHT',100)],selected:'light'}).reason,'selected-card-does-not-match-attribute-and-atk-filter'); });
 test('selection is optional and can resolve without a summon', () => { const id=ATTRIBUTE_BATTLE_RECRUIT_CARDS.shiningAngel.id; const r=resolve(id,{deck:[card('light','LIGHT',1000)]}); assert.equal(r.ok,true); assert.equal(r.value.summoned,null); });
