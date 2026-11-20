@@ -8,11 +8,11 @@ const {getCard}=require('../dist/collection');
 const {validateDiscordPayload}=require('../dist/discordPayload');
 
 const normalIds=tag.tagNormalCardIds.slice(0,10);
-const deckIds=[...normalIds.flatMap(id=>[id,id]),'54652250','31560081','14087893','28933734','12607053','60694662'];
+const deckIds=[...normalIds.flatMap(id=>[id,id]),'54652250','31560081','14087893','28933734','12607053','60694662','07089711'];
 assert.ok(deckIds.length>=20&&deckIds.length<=30,'fixture deck must respect the 20–30 main-deck rule');
 
 function game(seed){
-  return tag.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'Jogador '+i,cards:deckIds})),{seed,classic:true,first:0});
+  return tag.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'Jogador '+i,cards:deckIds,extra:['91152256']})),{seed,classic:true,first:0});
 }
 function held(s,seat){
   const team=seat%2;
@@ -25,6 +25,11 @@ function take(s,seat,id){
     if(index>=0)return h[zone].splice(index,1)[0];
   }
   throw new Error('Card '+id+' unavailable in physical seat '+seat);
+}
+function takeExtra(s,seat,id){
+  const h=held(s,seat),index=(h.extra??[]).findIndex(card=>card.id===id);
+  if(index<0)throw new Error('Extra Deck card '+id+' unavailable in physical seat '+seat);
+  return h.extra.splice(index,1)[0];
 }
 function monster(card,team,faceUp=false){
   return {...card,owner:team,position:faceUp?'atk':'def',faceUp,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0};
@@ -186,4 +191,31 @@ test('Skelengel draws from the active representative deck into only that private
   assert.ok(JSON.stringify(p0Private).includes(drawnName));
   assert.ok(!JSON.stringify(p2Private).includes(drawnName));
   assert.ok(!JSON.stringify(publicPayload).includes(drawn.uid),'public Discord payload must not expose the drawn physical UID');
+});
+
+test('Hane-Hane returns a partner-owned Fusion to that physical seat Extra Deck and keeps it private in Discord zones',()=>{
+  let s=game('m428-hane-hane');
+  const source=take(s,0,'07089711');
+  const fusion=takeExtra(s,2,'91152256');
+  s.core.turn=3;
+  s.core.players[0].monsters=[monster(source,0,false)];
+  s.core.players[1].monsters=[{...monster(fusion,1,true),properlySummoned:true}];
+  tag.assertTagDuel(s);
+  const inventoryBefore=inventorySnapshot(s),fusionUid=fusion.uid,fusionName=getCard(fusion.id).name;
+  s=act(s,'position',action=>action.mode==='flip');
+  s=passResponse(s);
+  assert.equal(s.core.phase,'choice');
+  s=act(s,'choose',action=>action.target===fusionUid);
+  s=passResponse(s);
+  assert.notEqual(s.core.phase,'response');
+  assert.ok(s.reserves[2].extra.some(card=>card.uid===fusionUid),'Fusion must return to the inactive physical owner Extra Deck');
+  assert.ok(!s.core.players[1].extra?.some(card=>card.uid===fusionUid));
+  assert.ok(!s.reserves[3].extra.some(card=>card.uid===fusionUid));
+  assertInventoryConserved(s,inventoryBefore);
+  const r=record(s,'m428-hane-hane');
+  const publicPayload=ui.tagPublicMessage(r),p0Zones=ui.tagZonesMessage(r,'p0'),p2Zones=ui.tagZonesMessage(r,'p2'),p3Zones=ui.tagZonesMessage(r,'p3');
+  for(const payload of [publicPayload,p0Zones,p2Zones,p3Zones])validateDiscordPayload(payload);
+  assert.ok(JSON.stringify(p2Zones).includes(fusionName),'physical owner can inspect their own Extra Deck');
+  assert.ok(!JSON.stringify(p0Zones).includes(fusionName),'teammate cannot inspect another physical seat Extra Deck');
+  assert.ok(!JSON.stringify(p3Zones).includes(fusionName),'opposing team cannot inspect the physical owner Extra Deck');
 });

@@ -34,10 +34,15 @@
       "card": "Skelengel",
       "id": "60694662",
       "behavior": "The FLIP draw removes one card from the active representative's deck, adds it to that representative's private hand, leaves the inactive partner deck untouched, and does not disclose the drawn physical UID through the public Discord payload."
+    },
+    {
+      "card": "Hane-Hane",
+      "id": "07089711",
+      "behavior": "FLIP bounce returns a partner-owned Fusion to the original physical seat's Extra Deck, not the controlling team's or opponent's Extra Deck; tagZonesMessage exposes the Extra Deck only to its physical owner."
     }
   ],
   "validation": {
-    "testCases": 4,
+    "testCases": 5,
     "expectedNewCertifications": 0,
     "actualNewCertifications": 0,
     "inventoryGranted": 0,
