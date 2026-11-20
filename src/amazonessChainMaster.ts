@@ -123,6 +123,7 @@ export function planAmazonessChainMasterEffect(input: {
   if (teamOfSeat(sourceCard.physicalOwnerSeat) !== effectTeam) {
     return error("trigger-card-not-owned-by-effect-team");
   }
+  if (!validUids([sourceCard])) return error("invalid-trigger-card-uid");
   if (sourceCard.sentToGyByBattle !== true || sourceCard.destroyedByBattleTurn !== turn) {
     return error("trigger-not-destroyed-by-battle-this-turn");
   }
@@ -247,7 +248,7 @@ export function projectAmazonessChainMasterTransfer(
   viewerSeat: DuelSeat
 ): RuleResult<TransferProjection> {
   if (teamOfSeat(viewerSeat) === undefined) return error("invalid-viewer-seat");
-  if (!transfer || (viewerSeat !== plan.effectPlayerSeat && viewerSeat !== plan.opponentSeat)) {
+  if (!plan.active || !transfer || (viewerSeat !== plan.effectPlayerSeat && viewerSeat !== plan.opponentSeat)) {
     return { ok: true, value: { visible: false, viewerSeat } };
   }
   return {
@@ -267,5 +268,5 @@ export function projectAmazonessChainMasterTransfer(
 }
 
 export function amazonessChainMasterPublicSummary(): string {
-  return "Amazoness Chain Master: um monstro foi transferido da mão adversária para a mão do resolvedor.";
+  return "Amazoness Chain Master: efeito resolvido; identidades de cartas privadas não são exibidas publicamente.";
 }
