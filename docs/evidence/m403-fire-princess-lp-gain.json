@@ -1,0 +1,46 @@
+{
+  "format": 1,
+  "mission": "M403",
+  "card": {
+    "id": "64752646",
+    "name": "Fire Princess",
+    "konamiDatabaseCid": 5197,
+    "attribute": "FIRE",
+    "monsterType": "Pyro",
+    "level": 4,
+    "atk": 1300,
+    "def": 1500,
+    "officialTextVerified": true,
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5197&ope=2&request_locale=en",
+    "officialTextSummary": "Whenever the controller's team actually gains Life Points, each eligible face-up copy inflicts 500 damage to the opposing team.",
+    "firstTcgRelease": "2003-03-01",
+    "firstTcgSet": "Labyrinth of Nightmare (LON-034)",
+    "historicalEligibility": "eligible-before-2004-09-30",
+    "cardPasswordSource": "https://ftp.yugipedia.com/wiki/Fire_Princess",
+    "cardPasswordCrossCheck": "64752646"
+  },
+  "behavior": {
+    "trigger": "One trigger per positive LP gain event for each face-up Fire Princess controlled by the gaining team.",
+    "fixedDamage": 500,
+    "amountScaling": "The 500 damage is per eligible copy and per LP gain event, not per 500 LP gained.",
+    "teamRouting": "Damage is applied to the opposing team's shared Life Points.",
+    "eligibility": ["card ID 64752646", "monster zone", "face-up", "effect not negated", "controller team equals gaining team"],
+    "idempotency": "The caller supplies eventId and processedEventIds so a retried event is not applied twice.",
+    "oncePerTurn": false,
+    "physicalOwnership": "UID and physical owner seat are retained for audit; controller team determines effect routing."
+  },
+  "validation": {
+    "focusedTestFile": "tests/firePrincessLpGain.test.cjs",
+    "expectedFocusedCases": 29,
+    "runtimeIntegration": "pending-explicit-M61-handoff",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "This primitive is not registered in monsterEffects.ts or duelEngineCurrent.ts.",
+    "No live Discord server interaction was performed.",
+    "Historical first TCG release is verified from the official database; regional OCG/TCG date reconciliation remains separate.",
+    "The caller must pass a single complete LP gain event and all current Fire Princess field snapshots."
+  ]
+}
