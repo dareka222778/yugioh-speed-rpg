@@ -80,6 +80,12 @@ test('trigger rejects another card identity and a card owned by the opposing tea
   });
 });
 
+test('trigger rejects an empty physical UID', () => {
+  assert.deepEqual(makePlan({ sourceCard: sourceCard({ uid: '' }) }), {
+    ok: false, reason: 'invalid-trigger-card-uid'
+  });
+});
+
 test('the inspected opponent seat must belong to the opposing team', () => {
   assert.deepEqual(makePlan({ opponentSeat: 2 }), {
     ok: false, reason: 'selected-opponent-is-not-opposing-team'
@@ -231,7 +237,17 @@ test('public summary does not reveal the stolen card ID or private hand contents
   const summary = amazonessChainMasterPublicSummary();
   assert.equal(summary.includes('12345678'), false);
   assert.equal(summary.includes('opponent-monster-a'), false);
-  assert.match(summary, /um monstro foi transferido/);
+  assert.match(summary, /identidades de cartas privadas não são exibidas/);
+});
+
+test('a declined trigger cannot project a private hand or transferred card', () => {
+  const plan = makePlan({ acceptEffect: false });
+  assert.equal(plan.ok, true);
+  const handView = projectAmazonessChainMasterInspection(plan.value, 0, [handCard('secret')]);
+  assert.deepEqual(handView, { ok: false, reason: 'effect-was-declined' });
+  const transferView = projectAmazonessChainMasterTransfer(plan.value, null, 0);
+  assert.equal(transferView.ok, true);
+  assert.equal(transferView.value.visible, false);
 });
 
 test('inputs remain unchanged because the helper only returns a transfer plan', () => {
