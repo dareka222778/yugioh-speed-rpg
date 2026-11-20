@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "mission": "M413",
+  "reviewedAt": "2026-11-20",
+  "authority": "Konami official Yu-Gi-Oh! OCG Card Database",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "id": "06285791",
+      "name": "The Wicked Worm Beast",
+      "konamiCardDatabaseId": 4029,
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4029&ope=2&request_locale=ae",
+      "officialText": "Once per turn, during your End Phase: Return this face-up card to the hand.",
+      "type": "Effect Monster",
+      "attribute": "EARTH",
+      "race": "Beast",
+      "level": 3,
+      "atk": 1400,
+      "def": 700,
+      "earliestOcgReleaseListed": "2002-08-08",
+      "earliestOcgSetCodeListed": "SDK-004",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "implementationNotes": [
+    "The End Phase return is planned only while the card remains face-up in a Monster Zone and the current team turn matches the current controller's team.",
+    "Physical owner and controller are independent. The return destination is always the physical owner's hand, even after control changes.",
+    "A per-turn UID ledger makes repeated resolver calls idempotent. The helper returns a movement plan and does not mutate DuelState."
+  ],
+  "scope": "Isolated behavior primitive, tests, official evidence and focused workflow only. No effect registry, catalog, certification, Discord handler or persistence integration.",
+  "certificationGate": "Do not certify until registered in the production resolver and exercised through a complete 2v2 End Phase/Discord handler flow."
+}
