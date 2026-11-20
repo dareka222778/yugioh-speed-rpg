@@ -1,0 +1,26 @@
+name: M410 Dark Hole Discord 2v2
+on:
+  push:
+    branches:
+      - feat/work-m410-dark-hole-discord-2v2-20261120
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/tagClassicDarkHoleDiscord2v2.test.cjs
+      - run: node scripts/check-card-certification.cjs
