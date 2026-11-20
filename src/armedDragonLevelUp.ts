@@ -2,7 +2,7 @@ export type DuelSeat = 0 | 1 | 2 | 3;
 export type DuelTeam = 0 | 1;
 export type ArmedDragonPhase = "standby" | "main1" | "main2" | "end";
 export type SummonSourceZone = "hand" | "deck";
-export type SummonMethod = "normal" | "set" | "other-special" | "armed-dragon-lv5";
+export type SummonMethod = "normal" | "set" | "other-special" | "armed-dragon-lv5" | "level-up";
 
 export const ARMED_DRAGON_IDS = {
   lv3: "00980973",
@@ -34,7 +34,7 @@ export interface ArmedDragonDiscardedMonster {
   physicalOwnerSeat: DuelSeat;
   zone: "hand";
   kind: "monster";
-  atk: number;
+  originalAtk: number;
 }
 
 export interface ArmedDragonOpponentMonster {
@@ -44,7 +44,7 @@ export interface ArmedDragonOpponentMonster {
   controllerTeam: DuelTeam;
   zone: "monster";
   faceUp: boolean;
-  atk: number;
+  currentAtk: number;
 }
 
 export type RuleResult<T> =
@@ -73,7 +73,7 @@ export interface ArmedDragonDiscardPlan {
   sourcePhysicalOwnerSeat: DuelSeat;
   discardedMonsterUid: string;
   discardedMonsterId: string;
-  discardedMonsterAtk: number;
+  discardedMonsterOriginalAtk: number;
   discardGraveyardTeam: DuelTeam;
   targeting: "single" | "all-current";
   selectedTargetUid?: string;
@@ -122,8 +122,8 @@ function isOpposingFaceUpMonster(
   return monster.zone === "monster"
     && monster.controllerTeam !== controllerTeam
     && monster.faceUp === true
-    && validAtk(monster.atk)
-    && monster.atk <= threshold
+    && validAtk(monster.currentAtk)
+    && monster.currentAtk <= threshold
     && teamOfSeat(monster.physicalOwnerSeat) !== undefined;
 }
 
@@ -229,7 +229,7 @@ export function prepareArmedDragonDiscardEffect(input: {
   if (discardedMonster.physicalOwnerSeat !== effectPlayerSeat) {
     return resultError("discard-cost-not-in-effect-player-private-hand");
   }
-  if (!validAtk(discardedMonster.atk)) return resultError("invalid-discarded-monster-atk");
+  if (!validAtk(discardedMonster.originalAtk)) return resultError("invalid-discarded-monster-atk");
   if (!uniqueNonEmptyUids([sourceCard, discardedMonster, ...opposingMonstersAtActivation])) {
     return resultError("duplicate-or-invalid-uid");
   }
@@ -238,7 +238,7 @@ export function prepareArmedDragonDiscardEffect(input: {
   if (isLv5) {
     if (!selectedTargetUid) return resultError("lv5-requires-one-target");
     const target = opposingMonstersAtActivation.find(item => item.uid === selectedTargetUid);
-    if (!target || !isOpposingFaceUpMonster(target, effectTeam, discardedMonster.atk)) {
+    if (!target || !isOpposingFaceUpMonster(target, effectTeam, discardedMonster.originalAtk)) {
       return resultError("lv5-target-not-eligible");
     }
   } else if (selectedTargetUid !== undefined) {
@@ -255,7 +255,7 @@ export function prepareArmedDragonDiscardEffect(input: {
       sourcePhysicalOwnerSeat: sourceCard.physicalOwnerSeat,
       discardedMonsterUid: discardedMonster.uid,
       discardedMonsterId: discardedMonster.id,
-      discardedMonsterAtk: discardedMonster.atk,
+      discardedMonsterOriginalAtk: discardedMonster.originalAtk,
       discardGraveyardTeam: effectTeam,
       targeting: isLv5 ? "single" : "all-current",
       ...(isLv5 ? { selectedTargetUid } : {})
@@ -276,7 +276,7 @@ export function resolveArmedDragonDiscardEffect(
   const destroyed: ArmedDragonDestroyedCard[] = [];
   if (plan.targeting === "single") {
     const target = currentMonsters.find(item => item.uid === plan.selectedTargetUid);
-    if (target && isOpposingFaceUpMonster(target, plan.controllerTeam, plan.discardedMonsterAtk)) {
+    if (target && isOpposingFaceUpMonster(target, plan.controllerTeam, plan.discardedMonsterOriginalAtk)) {
       destroyed.push({
         uid: target.uid,
         physicalOwnerSeat: target.physicalOwnerSeat,
@@ -285,7 +285,7 @@ export function resolveArmedDragonDiscardEffect(
     }
   } else {
     for (const monster of currentMonsters) {
-      if (isOpposingFaceUpMonster(monster, plan.controllerTeam, plan.discardedMonsterAtk)) {
+      if (isOpposingFaceUpMonster(monster, plan.controllerTeam, plan.discardedMonsterOriginalAtk)) {
         destroyed.push({
           uid: monster.uid,
           physicalOwnerSeat: monster.physicalOwnerSeat,
@@ -306,6 +306,7 @@ export function resolveArmedDragonDiscardEffect(
 }
 
 /** LV7 cannot be Normal Summoned/Set and must be Special Summoned by LV5. */
-export function canSummonArmedDragonLv7(method: SummonMethod): boolean {
-  return method === "armed-dragon-lv5";
+export function canSummonArmedDragonLv7(method: SummonMethod, sourceZone: SummonSourceZone | "grave" | "banished"): boolean {
+  if (sourceZone !== "hand" && sourceZone !== "deck") return false;
+  return method === "armed-dragon-lv5" || method === "level-up";
 }
