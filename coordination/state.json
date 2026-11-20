@@ -4,8 +4,8 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-19T23:48:32.028-03:00",
-  "nextScheduledAt": "2026-11-20T03:30:00-03:00",
+  "lastActivityAt": "2026-11-20T04:32:27-03:00",
+  "nextScheduledAt": "2026-11-20T08:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -9429,7 +9429,7 @@
   "lastIndependentWorkCheckpoint": "coordination/runs/work-20261119T133015-0300-M397.json",
   "lastIndependentWorkActivityAt": "2026-11-19T23:48:32.028-03:00",
   "nextWorkWindow": "2026-11-20T03:30:00-03:00",
-  "lastIndependentWorkRunId": "work-20261119T232908-0300-M399-M401",
+  "lastIndependentWorkRunId": "work-20261120T043227-0300-M402",
   "workBranchesUpdatedAt": "2026-11-19T06:46:09.230Z",
   "lastActiveWorkMission": "M379–M381",
   "sharedHeadBeforeCheckpointCommit": "8d3a273c195be9941dfbaa1e41f86d95e4eb2e3a",
@@ -9828,15 +9828,15 @@
     "minimum60MinutesMet": false,
     "auxiliaryPermission": "Monitor PR #347, sync branch with latest shared HEAD by non-forced merge, correct only these three M398 files if CI fails. Do not edit coordination/state.json, runtime, catalog, certificates, player data, inventory, persistent DB, other branches, main or production; no merge/deploy."
   },
-  "latestIndependentWorkRunId": "work-20261119T235000-0300-M401",
-  "latestIndependentWorkBranch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+  "latestIndependentWorkRunId": "work-20261120T043227-0300-M402",
+  "latestIndependentWorkBranch": "feat/work-m402-absorbing-kid-battle-lp-20261120",
   "latestIndependentWorkHead": "e9762ff0a4ad524dbc6f7913501de5f9c15316a1",
-  "latestIndependentWorkReservationReleased": true,
-  "latestIndependentWorkActivityAt": "2026-11-19T18:38:13-03:00",
+  "latestIndependentWorkReservationReleased": false,
+  "latestIndependentWorkActivityAt": "2026-11-20T04:32:27-03:00",
   "latestIndependentWorkPR": 347,
   "latestIndependentWorkCheckpoint": "coordination/runs/work-20261119T232908-0300-M399-M401.json",
   "latestIndependentWorkCheckpointCommit": "a25d531c4869d8f17112f85beb978e3bcd5791b2",
-  "latestIndependentWorkStatus": "released-to-auxiliary-monitor-ci; M399/M400/M401",
+  "latestIndependentWorkStatus": "reserved",
   "latestIndependentWorkEffectiveMinutes": 8.2,
   "latestIndependentWorkCatalog": {
     "target": 1000,
@@ -9850,8 +9850,8 @@
     "newCertifications": 0,
     "automaticCertifications": 0
   },
-  "nextIndependentWorkTask": "Obter handoff M61 e integrar ao resolver 2v2 as primitives M367/M368 e M399/M400/M401; se não houver liberação, iniciar M402 Absorbing Kid from the Sky em arquivos novos e sem tocar reservas centrais.",
-  "nextIndependentWorkWindow": "2026-11-20T03:30:00-03:00",
+  "nextIndependentWorkTask": "Implementar helper puro de recuperação de LP por destruição em batalha, testes de elegibilidade/destino/equipe/UID/overflow, evidência oficial e workflow focado. Aguardar handoff M61 para qualquer integração ao resolver.",
+  "nextIndependentWorkWindow": "2026-11-20T08:30:00-03:00",
   "releasedReservations": [
     {
       "runId": "work-20261119T182750-0300-M398",
@@ -9945,9 +9945,9 @@
       ".github/workflows/m399-battle-damage-family.yml"
     ]
   },
-  "lastIndependentWorkMission": "M399-M401",
-  "lastIndependentWorkBranch": "feat/work-m401-wdjat-private-set-inspection-20261119",
-  "lastIndependentWorkHead": "e9762ff0a4ad524dbc6f7913501de5f9c15316a1",
+  "lastIndependentWorkMission": "M402",
+  "lastIndependentWorkBranch": "feat/work-m402-absorbing-kid-battle-lp-20261120",
+  "lastIndependentWorkHead": "3199a0b0c4511519c3769d99beaf9f54f3d234ca",
   "currentWorkReservationM400": {
     "runId": "work-20261119T234000-0300-M400",
     "owner": "Work",
@@ -10023,5 +10023,57 @@
     ]
   },
   "lastCheckpointCommitSha": "ea81a0467a974aa8cccfe172b67b007fe945c962",
-  "lastIndependentWorkStatus": "released-to-auxiliary-monitor-ci"
+  "lastIndependentWorkStatus": "released-to-auxiliary-monitor-ci",
+  "currentWorkReservationM402": {
+    "runId": "work-20261120T043227-0300-M402",
+    "owner": "Work principal",
+    "mission": "M402",
+    "priority": "P1 — preparar o efeito de Absorbing Kid from the Sky com evento de destruição por batalha, destino efetivo ao Cemitério e recuperação de LP da equipe controladora, preservando assento físico e sem tocar no resolver central reservado.",
+    "state": "reserved",
+    "startedAt": "2026-11-20T04:32:27-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "3199a0b0c4511519c3769d99beaf9f54f3d234ca",
+    "branch": "feat/work-m402-absorbing-kid-battle-lp-20261120",
+    "baseSha": "3199a0b0c4511519c3769d99beaf9f54f3d234ca",
+    "reservedFiles": [
+      "src/absorbingKidFromTheSky.ts",
+      "tests/absorbingKidFromTheSky.test.cjs",
+      "docs/evidence/m402-absorbing-kid-from-the-sky.json",
+      ".github/workflows/m402-absorbing-kid-from-the-sky.yml"
+    ],
+    "conflictCheck": {
+      "activePrimaryRun": "work-20261115T142521-0300",
+      "preservedReservations": [
+        "M231-M236",
+        "M215-M220",
+        "M225-M227",
+        "M305-M305",
+        "M319-M322",
+        "M383",
+        "M61"
+      ],
+      "note": "Somente quatro caminhos novos; nenhum deles consta nas reservas ou nas PRs M399-M401. monsterEffects.ts e duelEngineCurrent.ts permanecem fora do escopo."
+    },
+    "handoff": {
+      "pr": 17,
+      "status": "awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "changedFiles": []
+    },
+    "card": {
+      "name": "Absorbing Kid from the Sky",
+      "id": "49771608",
+      "konamiDatabaseCid": 6034,
+      "level": 4,
+      "attribute": "LIGHT",
+      "type": "Fairy/Effect",
+      "officialTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6034&ope=2&request_locale=en",
+      "firstTcgRelease": "2004-06-01"
+    },
+    "thirdPartyReservationsReleased": []
+  },
+  "latestIndependentWorkPriority": "P1 — preparar o efeito de Absorbing Kid from the Sky com evento de destruição por batalha, destino efetivo ao Cemitério e recuperação de LP da equipe controladora, preservando assento físico e sem tocar no resolver central reservado."
 }
