@@ -67,7 +67,7 @@
   },
   "tests": {
     "file": "tests/armedDragonLevelUp.test.cjs",
-    "expectedCases": 27,
+    "expectedCases": 28,
     "behavioralGroups": [
       "official identities and leading-zero preservation",
       "four-seat team mapping",
