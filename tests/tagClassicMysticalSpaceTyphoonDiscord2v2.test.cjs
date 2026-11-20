@@ -162,7 +162,7 @@ test('Mystical Space Typhoon resolves through the Discord 2v2 handler and destro
  assert.ok(!publicText.includes(getCard(opposingTarget.id).name),'public panel must not reveal the set card name');
  const privateBefore=ui.tagPrivateMessage(r,ids[0]);
  validateDiscordPayload(privateBefore);
- assert.ok(!JSON.stringify(privateBefore).includes(getCard(opposingTarget.id).name),'the active player's private hand panel must not reveal a rival set card');
+ assert.ok(!JSON.stringify(privateBefore).includes(getCard(opposingTarget.id).name),"the active player's private hand panel must not reveal a rival set card");
 
  const revisionBefore=store.getTag(r.id).revision;
  await assert.rejects(handleTagComponent({
