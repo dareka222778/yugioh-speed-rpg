@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "mission": "M410",
+  "runId": "work-20261120T094342-0300-M410",
+  "priority": "P1 — validar Dark Hole pelo handler real de componentes Discord 2v2, destruindo monstros de quatro assentos físicos nas duas equipes e preservando UID/propriedade física no Cemitério compartilhado.",
+  "card": {
+    "name": "Dark Hole",
+    "id": "53129443",
+    "konamiCardDatabaseId": 4342,
+    "existingCertification": "certified",
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4342&ope=2&request_locale=en",
+    "officialText": "Destroy all monsters on the field.",
+    "firstTcgRelease": "2002-03-08",
+    "firstTcgSet": "Legend of Blue Eyes White Dragon (LOB-052)"
+  },
+  "scope": "Discord 2v2 integration regression for an already certified card; no new admission or certification.",
+  "test": "tests/tagClassicDarkHoleDiscord2v2.test.cjs",
+  "behaviors": [
+    "Uses handleTagComponent → tagStore.actTag → tagDuel/duelEngine; does not call stepTagDuel directly for the action under test.",
+    "Starts with the active physical seat 1 and monsters physically supplied by seats 0, 1, 2 and 3 across the two shared team fields.",
+    "Dark Hole destroys all four monsters on both teams, not only the opposing team.",
+    "Each destroyed monster reaches its controller team's shared Graveyard with the original physical UID and card ID.",
+    "The resolving Dark Hole reaches its controller team's Graveyard.",
+    "The inactive partner cannot submit the team's action.",
+    "All 120 Main Deck UIDs/identities, all four Extra Decks and the other three private hands are conserved; only Dark Hole leaves the active player's hand.",
+    "Discord public/private payload builders pass validateDiscordPayload.",
+    "Persistent players and player_cards tables remain unchanged."
+  ],
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "extraDeckMax": 5,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "handLimit": 6,
+    "handCheck": "end"
+  },
+  "certification": {
+    "existingCertification": "certified",
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Discord is exercised offline through the production component handler, store, duel engine and payload builders; no live guild/token is used.",
+    "This is an integration regression for an already certified card, not a new card certification.",
+    "The test uses temporary SQLite and borrowed NPC decks; persistent player inventory is not modified."
+  ]
+}
