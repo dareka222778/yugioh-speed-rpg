@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-20T04:32:27-03:00",
+  "lastActivityAt": "2026-11-20T04:50:00-03:00",
   "nextScheduledAt": "2026-11-20T08:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -9850,7 +9850,7 @@
     "newCertifications": 0,
     "automaticCertifications": 0
   },
-  "nextIndependentWorkTask": "Implementar helper puro de recuperação de LP por destruição em batalha, testes de elegibilidade/destino/equipe/UID/overflow, evidência oficial e workflow focado. Aguardar handoff M61 para qualquer integração ao resolver.",
+  "nextIndependentWorkTask": "Concluir M402 com Absorbing Kid from the Sky e Guardian Angel Joan no mesmo resolver de recuperação de LP; validar CI focada e Engine Validation; depois avançar para próxima família não reservada.",
   "nextIndependentWorkWindow": "2026-11-20T08:30:00-03:00",
   "releasedReservations": [
     {
@@ -10028,7 +10028,7 @@
     "runId": "work-20261120T043227-0300-M402",
     "owner": "Work principal",
     "mission": "M402",
-    "priority": "P1 — preparar o efeito de Absorbing Kid from the Sky com evento de destruição por batalha, destino efetivo ao Cemitério e recuperação de LP da equipe controladora, preservando assento físico e sem tocar no resolver central reservado.",
+    "priority": "P1 — implementar a família reutilizável de recuperação de LP por destruição em batalha, cobrindo Absorbing Kid from the Sky (Nível × 300) e Guardian Angel Joan (ATK original), com destino efetivo ao Cemitério e LP da equipe controladora.",
     "state": "reserved",
     "startedAt": "2026-11-20T04:32:27-03:00",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
@@ -10073,7 +10073,21 @@
       "officialTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6034&ope=2&request_locale=en",
       "firstTcgRelease": "2004-06-01"
     },
-    "thirdPartyReservationsReleased": []
+    "thirdPartyReservationsReleased": [],
+    "relatedCards": [
+      {
+        "name": "Guardian Angel Joan",
+        "id": "68007326",
+        "konamiDatabaseCid": 5899,
+        "level": 7,
+        "attribute": "LIGHT",
+        "type": "Fairy/Effect",
+        "officialTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5899&ope=2&request_locale=en",
+        "firstTcgRelease": "2004-03-01",
+        "firstTcgSet": "Invasion of Chaos (IOC-087)"
+      }
+    ],
+    "cardFamily": "battle-destruction-life-point-recovery"
   },
-  "latestIndependentWorkPriority": "P1 — preparar o efeito de Absorbing Kid from the Sky com evento de destruição por batalha, destino efetivo ao Cemitério e recuperação de LP da equipe controladora, preservando assento físico e sem tocar no resolver central reservado."
+  "latestIndependentWorkPriority": "P1 — implementar a família reutilizável de recuperação de LP por destruição em batalha, cobrindo Absorbing Kid from the Sky (Nível × 300) e Guardian Angel Joan (ATK original), com destino efetivo ao Cemitério e LP da equipe controladora."
 }
