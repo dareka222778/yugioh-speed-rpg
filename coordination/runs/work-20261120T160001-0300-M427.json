@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "runId": "work-20261120T160001-0300-M427",
+  "mission": "M427",
+  "owner": "Work principal",
+  "priority": "P2 — adicionar metadata factual para sete cartas já modeladas em M424–M426, sem alterar allowlist de distribuição, inventário ou certificações.",
+  "state": "active",
+  "startedAt": "2026-11-20T16:00:01-03:00",
+  "endedAt": null,
+  "elapsedMinutes": null,
+  "effectiveWorkMinutes": 0,
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtStart": "b574cf70c6d735b43fafc3a6397d1433cfa9f0af",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m427-flip-card-metadata-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b574cf70c6d735b43fafc3a6397d1433cfa9f0af",
+  "head": "b574cf70c6d735b43fafc3a6397d1433cfa9f0af",
+  "reservedFiles": [
+    "src/generated/m424-m426-flip-cards.ts",
+    "src/cardMetadata.ts",
+    "tests/m424m426FlipMetadata.test.cjs",
+    "docs/evidence/m427-flip-card-metadata.json",
+    ".github/workflows/m427-flip-card-metadata.yml"
+  ],
+  "objective": "Adicionar módulo gerado de Card metadata para 7 cartas e importá-lo em cardMetadata; testar dados oficiais e confirmar que nenhum ID entrou em releasedCardIds.",
+  "blocksCompleted": [
+    "Inspecionados Card/metadata schemas e imports gerados existentes.",
+    "Confirmado que src/cardMetadata.ts não está reservado por terceiros; nenhum dos sete IDs aparece em cardMetadata, classicEngineCards ou classicExpansion.",
+    "Verificado que releasedCardIds é allowlist explícita de distribuição beta, não histórico completo; não será alterada.",
+    "Conferidas stats/textos/fontes oficiais Konami para Penguin Soldier, Hade-Hane, Old Vindictive Magician, 4-Starred Ladybug, Nobleman-Eater Bug, Swarm of Scarabs e Swarm of Locusts.",
+    "Criada branch M427 isolada a partir do HEAD compartilhado b574cf70."
+  ],
+  "cards": [
+    "93920745",
+    "28357177",
+    "45141844",
+    "83994646",
+    "65878864",
+    "15383415",
+    "41872150"
+  ],
+  "tests": {
+    "planned": 6,
+    "passed": null,
+    "failed": null
+  },
+  "certification": {
+    "newCertifications": 0,
+    "verifiedAtStart": 969,
+    "remainingAtStart": 31,
+    "automaticCertifications": 0
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "distributionAllowlistChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "realDiscordValidated": false
+  },
+  "handoff": {
+    "pr": 17,
+    "latestCommentId": 7048152993,
+    "status": "pending",
+    "requestedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "changedFiles": []
+  },
+  "production": {
+    "deploymentCheck": "GitHub deployments collection is not exposed by the connector; no production/deploy claim."
+  },
+  "scopeReleasedToAuxiliary": [],
+  "auxiliaryAuthorization": "No authorization until final checkpoint; if released, monitor/correct only the five M427 files.",
+  "nextTask": "Create generated Card[] metadata module, wire it into cardMetadata.ts, add metadata/allowlist tests and Node 22 CI.",
+  "nextWindow": "2026-11-20T17:30:00-03:00",
+  "limitations": [
+    "Metadata does not register runtime effects or certify card behavior.",
+    "Distribution allowlist intentionally remains unchanged."
+  ]
+}
