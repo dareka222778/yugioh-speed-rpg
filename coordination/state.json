@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-15T14:25:21-03:00",
-  "lastActivityAt": "2026-11-19T23:39:19.460-03:00",
+  "lastActivityAt": "2026-11-19T23:42:06.689-03:00",
   "nextScheduledAt": "2026-11-20T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -39,7 +39,7 @@
     "handoffCommentId": 6885420890,
     "blocker": "Engine validation falhou: fixture BEASTKING pertence ao assento 2, mas deploy foi chamado para o assento 0; handoff solicitado, sem resposta."
   },
-  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência. M357 reservado em branch independente para revisão oficial dos últimos onze candidatos; somente documentação e teste de evidência. M358 reservado em branch independente para testar confidencialidade de monstros/backrow face-down no painel público e visibilidade por equipe no painel privado; somente tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs, sem alterações em runtime ou reservas existentes. M359 reservado em branch independente para homologar renderTag/tagImageLayout: privacidade visual face-down por equipe, dimensões do playmat clássico e vistas privadas por assento; somente tests/tagClassicVisualPrivacyLayout2v2.test.cjs. M360 reservado em branch independente para verificar isolamento visual da mão física em 2v2: somente o dono vê alterações na própria mão; campo compartilhado permanece igual; somente tests/tagClassicPrivateHandIsolationVisual2v2.test.cjs. M361 reservado em branch independente para um teste de genericidade do executor CI; PR #309; somente tests/ciRunnerGenericity.test.cjs; runner compartilhado intocado. Diagnósticos enviados às PRs #306–#308 após falhas reais de Engine Validation. Handoff parcial M61 solicitado no PR #17, sem resposta. M362 concluído em branch própria, PR #310; 10/10 testes de admissão aprovados, Card Batch Admission/Fast/Milestone aprovados, Engine Validation, npm test, stress e Extended Soak 600s aprovados. Reserva liberada ao auxiliar para sincronização não-forçada e monitoramento da PR; nenhuma reserva de terceiro foi liberada. M363 concluído: PR #311, 31/31 identidades reconciliadas, CI fast/milestone/engine success; apenas evidência/teste, ainda sem certificação. A auditoria não certifica cartas nem altera a allowlist. M364 PR #312: branch 266187b divergiu 15 commits à frente/3 atrás; check, npm test e soak passaram, mas Dependency Audit/Engine Validation falharam porque o lockfile atual ainda contém sharp high. Candidato sharp 0.35.5 passou audit de produção (0 vulnerabilidades) e typecheck via tsconfig paths; package.json/package-lock ainda não aplicados. Handoff desses dois manifestos solicitado (comentário 6991573026), aguardando liberação; auxiliar apenas monitora. M365 concluído em branch própria, PR #313: tests/tagGravekeepersGuardNoOpponentTargetDiscord2v2.test.cjs; sem alvo adversário, Gravekeeper's Guard não oferece monstros aliados. Card Batch Fast, Milestone 1000, npm test e Extended Soak aprovados; Engine Validation finalizando. Reserva liberada ao auxiliar apenas para monitorar/corrigir o arquivo de teste. M366 cobre separadamente o retorno ao proprietário físico. M366 PR #314: somente tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs, 3 cenários (face-up, Fusion/Extra Deck e face-down/privacidade); runtime sem handoff porque pauseOverflow normaliza mão/Extra por UID físico; CI reforçada em andamento; auxiliar apenas monitora/corrige o teste.ts solicitado no PR #17, sem runtime antes da liberação; auxiliar pode apenas monitorar/corrigir fixture do teste. M367 e M368: branches próprias #315/#316, primitives isoladas + 30 testes unitários; liberadas ao auxiliar somente para monitorar/corrigir os quatro arquivos próprios. Runtime do duelo e catálogo aguardam handoff M61; nenhuma carta certificada. M372 Agido PR #320 e M373 Aqua Spirit PR #321 concluídas em branches próprias; auxiliares liberados somente para monitorar/corrigir testes próprios; M61 handoff continua pendente. M369–M371 permanecem ativos em PRs próprias; diagnósticos M369/M371 enviados sem editar suas reservas. M379 PR #327: auxiliar liberado somente para monitorar/corrigir tests/deckFormatBoundaries.test.cjs; runtime e reservas ativas preservados. M379 #327 e M380 #328: auxiliares liberados apenas para monitorar/corrigir seus respectivos arquivos de teste; nenhum runtime ou reserva ativa tocado. M379 #327, M380 #328 e M381 #329: auxiliares liberados apenas para monitorar/corrigir seus arquivos de teste; runtime e reservas ativas preservados. M382 liberado sem merge após o gate M8 detectar arquivos protegidos; PR #330 fechada.  M383 reservado em branch própria, base 2a37ff19; StandbyFlow modifier + Amazoness Blowpiper task builder, testes isolados; somente src/standbyFlow.ts, src/continuousEffects.ts, src/amazonessBlowpiper.ts, tests/amazonessBlowpiper.test.cjs e workflow M383. M384 branch feat/work-m384-deck-interaction-id-parser-20261119 PR #331: parser strict custom IDs + payload real Deck UI; auxiliary may monitor/correct only four new files; no index.ts/deckUI.ts integration. M385 branch feat/work-m385-asura-priest-spirit-multiattack-20261119 PR #332: Asura Priest multi-attack/Spirit primitives, auxiliary only own three files. M386 branch feat/work-m386-apprentice-magician-counter-recruit-20261119 PR #333: Spell Counter/recruit primitives, auxiliary only own three files. All three remain draft; integration and certification pending. M383 active reservations preserved; M61 handoff still pending. CI final status refresh 2026-11-19 04:45 BRT: M384 focused/CardBatch/Milestone success; Engine Validation still running, Extended Soak success. M385 focused/CardBatch/Milestone success; Engine Validation/Soak running. M386 focused/CardBatch/Milestone/CardBatch success; Engine Validation/Soak running. PRs #331–#333 open draft, 2 commits behind shared checkpoint; no merge. M387 PR #334 A-Team Trap Disposal e M388 PR #335 Ameba: branches próprias, três arquivos novos cada, 21/18 testes focados; auxiliar liberado apenas para monitorar/corrigir os seis arquivos próprios. Nenhum runtime/catálogo/certificado alterado. M387 focused/Card Batch Fast/Milestone success; Engine Validation/soaks em andamento. M388 focused/Card Batch Fast/Milestone success; Engine Validation/soaks em andamento. M61 handoff renovado no PR #17 comentário 7003511609, aguardando liberação explícita. Pós-checkpoint 08:19 BRT: #334/#335 continuam open-draft, 4/5 commits à frente e 2 atrás do shared HEAD f0487; mergeable=false no momento da consulta. Não fazer merge; sincronizar sem force após CI integral.; M398 reservado em branch própria: contrato automatizado de /regras, somente tests/rulesHelpContract.test.cjs e .github/workflows/m398-rules-help-contract.yml. M398 scope extended to one independent 1v1 current End Phase hand-limit behavior test; no overlap with the active 2v2 hand-limit test reservation.; M398 concluído, PR #347 publicada em draft, reserva própria liberada ao auxiliar apenas para CI/sync/correções nos três arquivos.; M399 reservado em branch própria: família de dano de batalha (Amazoness Swords Woman, Airknight Parshath, Aswan Apparition, Atomic Firefly); somente quatro novos arquivos, sem runtime central; handoff M61 permanece pendente.; M400 reservado: 8-Claws Scorpion face-down battle calculation, somente quatro arquivos novos; sem alteração de positionOperations.ts ou arquivos centrais M61.",
+  "activeParallelWork": "M215–M220 e M225–M227 permanecem reservadas por execuções paralelas; M228–M230 foram liberadas ao auxiliar. M231 usa arquivo novo e independente.; M233 Needle Ball LP e M234 Fairy Meteor Crush em arquivos novos e independentes.; M235 D.D. Assailant battle-banish em novo arquivo independente.; M236 D.D. Crazy Beast/Lesser Fiend battle-banish-victim em novo arquivo independente.; M240 mão 6/End Phase e M241 zonas 3+3 registrados em branches independentes e PRs #196/#197.; M242 grave recovery physical-owner registrado em branch independente; runtime aguardando handoff parcial M61.; work-20261116T153058-0300-M262-M263 M262 End Phase hand-limit Discord integration e M263 shared 3+3 zone Discord integration em branches próprias, somente arquivos novos.; M265 Shadow Ghoul Discord integration em branch própria, arquivo novo; PR #220.; M271–M273 registradas em branches próprias e liberadas ao auxiliar somente para monitorar/corrigir seus três arquivos de teste.; M274 adicionada em branch própria; somente o arquivo tests/tagObnoxiousCelticGuardDiscord2v2.test.cjs foi liberado ao auxiliar para CI.; M275 adicionada em branch própria; somente tests/tagGoraTurtleDiscord2v2.test.cjs liberado ao auxiliar para CI. M286 Cannon Soldier, M287 Jinzo, M288 Sangan/Witch e M289 Kuriboh: branches próprias, arquivos novos, liberadas ao auxiliar somente para monitorar/corrigir CI.; M319 Maha Vailo Discord equip-count e M320 mechanicalBatch20 continuous modifiers: dois arquivos novos, branches isoladas; nenhuma reserva de M305–M318 tocada.; M321 Shooting Star Bow - Ceal: novo arquivo Discord 2v2, branch isolada; M305–M320 e M194–M198 preservados.; M322 Gyaku-Gire Panda: novo arquivo de teste Discord para contagem de monstros adversários (inclui face-down) e piercing; escopo isolado. M327–M329: novo arquivo tests/tagBattleResponseTrapsDiscord2v2.test.cjs em branch própria; não toca nas reservas existentes. M330: reservado tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs em branch independente. Work independente work-20261117T162814-0300-M330-M337-M339: M330 PR #287 e M337 PR #288 liberadas ao auxiliar apenas para monitorar/corrigir seus arquivos; M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 reservadas em arquivos novos. M353: branch independente, reservado somente tests/tagConditionalDirectAttackDiscord2v2.test.cjs; nenhum arquivo de runtime/catálogo compartilhado será alterado. M353 finalizado; reserva liberada ao auxiliar apenas para monitorar/corrigir tests/tagConditionalDirectAttackDiscord2v2.test.cjs. Nenhuma reserva de terceiro foi liberada. M354 reservado em branch independente; somente tests/tagClassicExtraDeckOwnership2v2.test.cjs; runtime e reservas de terceiros preservados. M355 reservado em branch própria: pesquisa factual dos dez primeiros candidatos do worklist e teste de integridade da evidência; nenhum runtime/catálogo/certificado alterado. M356 reservado em branch independente para pesquisa oficial dos candidatos 11–20; somente documentação/teste de evidência. M357 reservado em branch independente para revisão oficial dos últimos onze candidatos; somente documentação e teste de evidência. M358 reservado em branch independente para testar confidencialidade de monstros/backrow face-down no painel público e visibilidade por equipe no painel privado; somente tests/tagClassicTeamHiddenZoneVisibility2v2.test.cjs, sem alterações em runtime ou reservas existentes. M359 reservado em branch independente para homologar renderTag/tagImageLayout: privacidade visual face-down por equipe, dimensões do playmat clássico e vistas privadas por assento; somente tests/tagClassicVisualPrivacyLayout2v2.test.cjs. M360 reservado em branch independente para verificar isolamento visual da mão física em 2v2: somente o dono vê alterações na própria mão; campo compartilhado permanece igual; somente tests/tagClassicPrivateHandIsolationVisual2v2.test.cjs. M361 reservado em branch independente para um teste de genericidade do executor CI; PR #309; somente tests/ciRunnerGenericity.test.cjs; runner compartilhado intocado. Diagnósticos enviados às PRs #306–#308 após falhas reais de Engine Validation. Handoff parcial M61 solicitado no PR #17, sem resposta. M362 concluído em branch própria, PR #310; 10/10 testes de admissão aprovados, Card Batch Admission/Fast/Milestone aprovados, Engine Validation, npm test, stress e Extended Soak 600s aprovados. Reserva liberada ao auxiliar para sincronização não-forçada e monitoramento da PR; nenhuma reserva de terceiro foi liberada. M363 concluído: PR #311, 31/31 identidades reconciliadas, CI fast/milestone/engine success; apenas evidência/teste, ainda sem certificação. A auditoria não certifica cartas nem altera a allowlist. M364 PR #312: branch 266187b divergiu 15 commits à frente/3 atrás; check, npm test e soak passaram, mas Dependency Audit/Engine Validation falharam porque o lockfile atual ainda contém sharp high. Candidato sharp 0.35.5 passou audit de produção (0 vulnerabilidades) e typecheck via tsconfig paths; package.json/package-lock ainda não aplicados. Handoff desses dois manifestos solicitado (comentário 6991573026), aguardando liberação; auxiliar apenas monitora. M365 concluído em branch própria, PR #313: tests/tagGravekeepersGuardNoOpponentTargetDiscord2v2.test.cjs; sem alvo adversário, Gravekeeper's Guard não oferece monstros aliados. Card Batch Fast, Milestone 1000, npm test e Extended Soak aprovados; Engine Validation finalizando. Reserva liberada ao auxiliar apenas para monitorar/corrigir o arquivo de teste. M366 cobre separadamente o retorno ao proprietário físico. M366 PR #314: somente tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs, 3 cenários (face-up, Fusion/Extra Deck e face-down/privacidade); runtime sem handoff porque pauseOverflow normaliza mão/Extra por UID físico; CI reforçada em andamento; auxiliar apenas monitora/corrige o teste.ts solicitado no PR #17, sem runtime antes da liberação; auxiliar pode apenas monitorar/corrigir fixture do teste. M367 e M368: branches próprias #315/#316, primitives isoladas + 30 testes unitários; liberadas ao auxiliar somente para monitorar/corrigir os quatro arquivos próprios. Runtime do duelo e catálogo aguardam handoff M61; nenhuma carta certificada. M372 Agido PR #320 e M373 Aqua Spirit PR #321 concluídas em branches próprias; auxiliares liberados somente para monitorar/corrigir testes próprios; M61 handoff continua pendente. M369–M371 permanecem ativos em PRs próprias; diagnósticos M369/M371 enviados sem editar suas reservas. M379 PR #327: auxiliar liberado somente para monitorar/corrigir tests/deckFormatBoundaries.test.cjs; runtime e reservas ativas preservados. M379 #327 e M380 #328: auxiliares liberados apenas para monitorar/corrigir seus respectivos arquivos de teste; nenhum runtime ou reserva ativa tocado. M379 #327, M380 #328 e M381 #329: auxiliares liberados apenas para monitorar/corrigir seus arquivos de teste; runtime e reservas ativas preservados. M382 liberado sem merge após o gate M8 detectar arquivos protegidos; PR #330 fechada.  M383 reservado em branch própria, base 2a37ff19; StandbyFlow modifier + Amazoness Blowpiper task builder, testes isolados; somente src/standbyFlow.ts, src/continuousEffects.ts, src/amazonessBlowpiper.ts, tests/amazonessBlowpiper.test.cjs e workflow M383. M384 branch feat/work-m384-deck-interaction-id-parser-20261119 PR #331: parser strict custom IDs + payload real Deck UI; auxiliary may monitor/correct only four new files; no index.ts/deckUI.ts integration. M385 branch feat/work-m385-asura-priest-spirit-multiattack-20261119 PR #332: Asura Priest multi-attack/Spirit primitives, auxiliary only own three files. M386 branch feat/work-m386-apprentice-magician-counter-recruit-20261119 PR #333: Spell Counter/recruit primitives, auxiliary only own three files. All three remain draft; integration and certification pending. M383 active reservations preserved; M61 handoff still pending. CI final status refresh 2026-11-19 04:45 BRT: M384 focused/CardBatch/Milestone success; Engine Validation still running, Extended Soak success. M385 focused/CardBatch/Milestone success; Engine Validation/Soak running. M386 focused/CardBatch/Milestone/CardBatch success; Engine Validation/Soak running. PRs #331–#333 open draft, 2 commits behind shared checkpoint; no merge. M387 PR #334 A-Team Trap Disposal e M388 PR #335 Ameba: branches próprias, três arquivos novos cada, 21/18 testes focados; auxiliar liberado apenas para monitorar/corrigir os seis arquivos próprios. Nenhum runtime/catálogo/certificado alterado. M387 focused/Card Batch Fast/Milestone success; Engine Validation/soaks em andamento. M388 focused/Card Batch Fast/Milestone success; Engine Validation/soaks em andamento. M61 handoff renovado no PR #17 comentário 7003511609, aguardando liberação explícita. Pós-checkpoint 08:19 BRT: #334/#335 continuam open-draft, 4/5 commits à frente e 2 atrás do shared HEAD f0487; mergeable=false no momento da consulta. Não fazer merge; sincronizar sem force após CI integral.; M398 reservado em branch própria: contrato automatizado de /regras, somente tests/rulesHelpContract.test.cjs e .github/workflows/m398-rules-help-contract.yml. M398 scope extended to one independent 1v1 current End Phase hand-limit behavior test; no overlap with the active 2v2 hand-limit test reservation.; M398 concluído, PR #347 publicada em draft, reserva própria liberada ao auxiliar apenas para CI/sync/correções nos três arquivos.; M399 reservado em branch própria: família de dano de batalha (Amazoness Swords Woman, Airknight Parshath, Aswan Apparition, Atomic Firefly); somente quatro novos arquivos, sem runtime central; handoff M61 permanece pendente.; M400 reservado: 8-Claws Scorpion face-down battle calculation, somente quatro arquivos novos; sem alteração de positionOperations.ts ou arquivos centrais M61.; M401 reservado: inspeção privada de Set para A Man with Wdjat, somente quatro arquivos novos; sem tocar nos arquivos centrais reservados.",
   "workBranches": [
     {
       "branch": "feat/work-m63-m60-research-20261112",
@@ -3051,6 +3051,25 @@
       "head": "35e8283cd5e7a14f93f72dfbe7653b1e6c37dd8a",
       "pr": null,
       "newCertifications": 0
+    },
+    {
+      "mission": "M401",
+      "runId": "work-20261119T235000-0300-M401",
+      "branch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
+      "reservedFiles": [
+        "src/privateSetInspection.ts",
+        "tests/privateSetInspection.test.cjs",
+        "docs/evidence/m401-wdjat-private-set-inspection.json",
+        ".github/workflows/m401-private-set-inspection.yml"
+      ],
+      "state": "reserved",
+      "priority": "P1 — preparar A Man with Wdjat: inspeção privada de carta Set no campo adversário, revelando identidade somente ao assento resolvedor e preservando UID, zona, posição face-down e proprietário físico.",
+      "startedAt": "2026-11-19T23:42:06.689-03:00",
+      "head": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
+      "pr": null,
+      "newCertifications": 0
     }
   ],
   "handoffRequest": {
@@ -3990,7 +4009,7 @@
     "minimum60MinutesMet": false,
     "note": "Bloco M215 iniciado; medir trabalho efetivo e não contar espera de CI."
   },
-  "nextTask": "M400: implementar e testar 8-Claws Scorpion face-down position flip e ATK temporário 2400 somente contra face-down Defense; integrar depois do handoff M61.",
+  "nextTask": "M401: implementar projeção privada de inspeção de Set para A Man with Wdjat; identidade somente para o assento resolvedor, sem vazamento público/parceiro.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1 — ampliar a validação 2v2 do lote M34 (Eagle Eye, Creeping Doom Manta, Invasion of Flames e Tactical Espionage Expert): provar que Trap Cards não podem responder à Invocação-Normal da própria fonte, em ambos os times e assentos físicos, e que a restrição não bloqueia respostas a outra Invocação.",
   "sharedHeadBeforeClaim": "97983a9e05a84baef74248772e8e5e90c83930e3",
@@ -6309,6 +6328,64 @@
         "targetEffectiveMinutes": 60,
         "ciWaitExcluded": true
       }
+    },
+    {
+      "runId": "work-20261119T235000-0300-M401",
+      "owner": "Work",
+      "mission": "M401",
+      "priority": "P1 — preparar A Man with Wdjat: inspeção privada de carta Set no campo adversário, revelando identidade somente ao assento resolvedor e preservando UID, zona, posição face-down e proprietário físico.",
+      "state": "reserved",
+      "startedAt": "2026-11-19T23:42:06.689-03:00",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtStart": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
+      "branch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+      "reservedFiles": [
+        "src/privateSetInspection.ts",
+        "tests/privateSetInspection.test.cjs",
+        "docs/evidence/m401-wdjat-private-set-inspection.json",
+        ".github/workflows/m401-private-set-inspection.yml"
+      ],
+      "thirdPartyReservationsReleased": [],
+      "handoffM61": {
+        "pr": 17,
+        "status": "awaiting-explicit-release",
+        "files": [
+          "src/monsterEffects.ts",
+          "src/duelEngineCurrent.ts"
+        ]
+      },
+      "note": "Escopo independente em quatro novos arquivos; não altera tagRenderer, tagDuel, monsterEffects ou duelEngineCurrent.",
+      "scope": [
+        "src/privateSetInspection.ts",
+        "tests/privateSetInspection.test.cjs",
+        "docs/evidence/m401-wdjat-private-set-inspection.json",
+        ".github/workflows/m401-private-set-inspection.yml"
+      ],
+      "workBranches": [
+        {
+          "mission": "M401",
+          "branch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+          "baseBranch": "feat/rea-engine-recovery-20261026",
+          "baseSha": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
+          "scope": [
+            "src/privateSetInspection.ts",
+            "tests/privateSetInspection.test.cjs",
+            "docs/evidence/m401-wdjat-private-set-inspection.json",
+            ".github/workflows/m401-private-set-inspection.yml"
+          ],
+          "state": "reserved"
+        }
+      ],
+      "blocksCompleted": [
+        "Conferidos os estados de M399 e M400; foco M399 20/20 e M400 14/14; nenhum caminho reservado colidiu."
+      ],
+      "duration": {
+        "effectiveWorkMinutes": 0,
+        "targetEffectiveMinutes": 60,
+        "ciWaitExcluded": true
+      }
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261118T083137-0300-M361.json",
@@ -7187,7 +7264,7 @@
       "state": "released-to-auxiliary-monitor-ci"
     }
   ],
-  "updatedAt": "2026-11-20T02:39:19.460Z",
+  "updatedAt": "2026-11-20T02:42:06.689Z",
   "lastCheckpointCommit": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "concurrentReservations": [
     {
@@ -9901,9 +9978,9 @@
     "minimum60MinutesMet": false,
     "auxiliaryPermission": "Monitor PR #347, sync branch with latest shared HEAD by non-forced merge, correct only these three M398 files if CI fails. Do not edit coordination/state.json, runtime, catalog, certificates, player data, inventory, persistent DB, other branches, main or production; no merge/deploy."
   },
-  "latestIndependentWorkRunId": "work-20261119T234000-0300-M400",
-  "latestIndependentWorkBranch": "feat/work-m400-eight-claws-scorpion-20261119",
-  "latestIndependentWorkHead": "35e8283cd5e7a14f93f72dfbe7653b1e6c37dd8a",
+  "latestIndependentWorkRunId": "work-20261119T235000-0300-M401",
+  "latestIndependentWorkBranch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+  "latestIndependentWorkHead": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
   "latestIndependentWorkReservationReleased": true,
   "latestIndependentWorkActivityAt": "2026-11-19T18:38:13-03:00",
   "latestIndependentWorkPR": 347,
@@ -9923,7 +10000,7 @@
     "newCertifications": 0,
     "automaticCertifications": 0
   },
-  "nextIndependentWorkTask": "M400: implementar e testar 8-Claws Scorpion face-down position flip e ATK temporário 2400 somente contra face-down Defense; integrar depois do handoff M61.",
+  "nextIndependentWorkTask": "M401: implementar projeção privada de inspeção de Set para A Man with Wdjat; identidade somente para o assento resolvedor, sem vazamento público/parceiro.",
   "nextIndependentWorkWindow": "2026-11-20T03:30:00-03:00",
   "releasedReservations": [
     {
@@ -9976,7 +10053,7 @@
     "owner": "Work",
     "mission": "M399",
     "priority": "P1 — preparar uma família reutilizável de eventos de dano de batalha para Amazoness Swords Woman, Airknight Parshath, Aswan Apparition e Atomic Firefly, preservando LP por equipe, UID/proprietário físico e o Deck do resolvedor ativo; sem alterar os arquivos centrais reservados M61.",
-    "state": "active-ci",
+    "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-19T23:29:08-03:00",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtStart": "49f1ad475225a4bc665b66b7e1f936b14460c04b",
@@ -10000,14 +10077,15 @@
       "noResponse": true
     },
     "note": "Escopo independente: novos arquivos de helper/teste/evidência/workflow. Nenhum arquivo de runtime reservado será editado.",
-    "head": "b2e2a81fe92abe193686542e74f8a2934ba7b951",
+    "head": "93520b5a0b951fa5349c06f5fde93d3c2063278a",
     "pr": 348,
     "lastActivityAt": "2026-11-19T23:39:19.460-03:00",
     "ci": {
-      "focused": "failure on first attempt; fix committed; rerun pending",
-      "cardBatchFast": "in_progress",
+      "focused": "success 20/20 on 93520b5",
+      "cardBatchFast": "success on 93520b5",
+      "milestone1000": "success; 969 certified/31 remaining",
       "engineValidation": "in_progress",
-      "milestone1000": "success"
+      "extendedSoak": "in_progress"
     }
   },
   "lastIndependentWorkMission": "M399",
@@ -10018,7 +10096,7 @@
     "owner": "Work",
     "mission": "M400",
     "priority": "P1 — preparar 8-Claws Scorpion: virar para face-down Defense uma vez por turno e aplicar 2400 ATK somente durante Damage Calculation contra alvo face-down em Defesa, sem persistir modificadores.",
-    "state": "reserved",
+    "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-19T23:39:19.460-03:00",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtStart": "35e8283cd5e7a14f93f72dfbe7653b1e6c37dd8a",
@@ -10032,6 +10110,43 @@
       ".github/workflows/m400-eight-claws-scorpion.yml"
     ],
     "thirdPartyReservationsReleased": [],
-    "note": "Escopo independente em novos arquivos; não toca positionOperations.ts, monsterEffects.ts ou duelEngineCurrent.ts."
+    "note": "Escopo independente em novos arquivos; não toca positionOperations.ts, monsterEffects.ts ou duelEngineCurrent.ts.",
+    "head": "385511250b62adc6b4b43ed4893547019f865d2f",
+    "pr": 349,
+    "ci": {
+      "focused": "success 14/14 on 3855112",
+      "milestone1000": "success; 969 certified/31 remaining",
+      "cardBatchFast": "in_progress",
+      "engineValidation": "in_progress"
+    }
+  },
+  "currentWorkReservationM401": {
+    "runId": "work-20261119T235000-0300-M401",
+    "owner": "Work",
+    "mission": "M401",
+    "priority": "P1 — preparar A Man with Wdjat: inspeção privada de carta Set no campo adversário, revelando identidade somente ao assento resolvedor e preservando UID, zona, posição face-down e proprietário físico.",
+    "state": "reserved",
+    "startedAt": "2026-11-19T23:42:06.689-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtStart": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "1001c4a5ce0ad127777461f77b0ccd8e1439b06a",
+    "branch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+    "reservedFiles": [
+      "src/privateSetInspection.ts",
+      "tests/privateSetInspection.test.cjs",
+      "docs/evidence/m401-wdjat-private-set-inspection.json",
+      ".github/workflows/m401-private-set-inspection.yml"
+    ],
+    "thirdPartyReservationsReleased": [],
+    "handoffM61": {
+      "pr": 17,
+      "status": "awaiting-explicit-release",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ]
+    },
+    "note": "Escopo independente em quatro novos arquivos; não altera tagRenderer, tagDuel, monsterEffects ou duelEngineCurrent."
   }
 }
