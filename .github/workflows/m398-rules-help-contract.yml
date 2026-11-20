@@ -1,0 +1,29 @@
+name: M398 rules help contract
+on:
+  pull_request:
+    paths:
+      - 'src/rulesProfile.ts'
+      - 'src/commandUI.ts'
+      - 'src/index.ts'
+      - 'tests/commandUI.test.cjs'
+      - 'tests/rulesHelpContract.test.cjs'
+      - 'tests/currentEndPhaseHandLimit.test.cjs'
+      - '.github/workflows/m398-rules-help-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m398-rules-help-contract-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  rules-help-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/rulesHelpContract.test.cjs tests/currentEndPhaseHandLimit.test.cjs tests/commandUI.test.cjs
