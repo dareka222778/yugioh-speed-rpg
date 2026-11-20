@@ -37,6 +37,21 @@
       "condition": "all face-up Level 4 monsters controlled by the opposing team",
       "historicalEligibility": "TCG and OCG first printings are before 2004-09-30",
       "certificationStatus": "not-certified"
+    },
+    {
+      "name": "Nobleman-Eater Bug",
+      "passcode": "65878864",
+      "konamiCardDatabaseId": 6122,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6122&ope=2&request_locale=ja",
+      "officialOcgText": "リバース：フィールド上のモンスター２体を破壊する。",
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP030",
+      "firstTcgPrinting": "2004-10-01",
+      "targeting": false,
+      "selectionTiming": "resolution",
+      "exactTargets": 2,
+      "historicalEligibility": "TCG printing is after the cutoff, but official OCG printing is before 2004-09-30; qualifies in the TCG/OCG union.",
+      "certificationStatus": "not-certified"
     }
   ],
   "twoVTwoAdaptation": {
@@ -49,10 +64,11 @@
     "physicalOwnership": "destroyed monsters enter the shared Graveyard of the team belonging to the physical owner seat, not the current controller team",
     "protection": "destructionProtected input models applicable destruction protection/replacement; protected monsters remain on field and do not release their zones",
     "privacy": "target option projections hide face-down card IDs and never expose physical UIDs; destroyed cards become public when placed in the shared Graveyard",
-    "sourceDeparture": "FLIP trigger remains valid if battle destruction removes its source after the flip event and before trigger activation"
+    "sourceDeparture": "FLIP trigger remains valid if battle destruction removes its source after the flip event and before trigger activation",
+    "noblemanEaterBug": "No targets; choose exactly two current monsters at resolution, regardless of team or face-up state; if fewer than two remain, resolves without effect; each destroyed monster goes to the physical owner's team Graveyard."
   },
   "validation": {
-    "focusedTests": 32,
+    "focusedTests": 41,
     "engineRegistration": "pending cooperative M61 resolver handoff",
     "discordLiveValidation": false,
     "newCertifications": 0,

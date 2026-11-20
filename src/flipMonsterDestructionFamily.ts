@@ -18,6 +18,13 @@ export const FLIP_MONSTER_DESTRUCTION_CARDS = {
     selectionMode: 'non-targeting-at-resolution',
     maxTargets: 0,
   },
+  noblemanEaterBug: {
+    id: '65878864',
+    konamiCardDatabaseId: 6122,
+    name: 'Nobleman-Eater Bug',
+    selectionMode: 'non-targeting-at-resolution',
+    maxTargets: 2,
+  },
 } as const;
 
 export interface FieldMonster {
@@ -45,7 +52,7 @@ export interface FlipDestructionPlan {
   resolverSeat: DuelSeat;
   triggerTurn: number;
   selectionMode: FlipDestructionSelectionMode;
-  maxTargets: 0 | 1;
+  maxTargets: 0 | 1 | 2;
 }
 
 export interface DestroyedMonster {
@@ -123,6 +130,7 @@ export function teamOfSeat(seat: number): DuelTeam | undefined {
 function getCardRule(id: string) {
   if (id === FLIP_MONSTER_DESTRUCTION_CARDS.oldVindictiveMagician.id) return FLIP_MONSTER_DESTRUCTION_CARDS.oldVindictiveMagician;
   if (id === FLIP_MONSTER_DESTRUCTION_CARDS.fourStarredLadybug.id) return FLIP_MONSTER_DESTRUCTION_CARDS.fourStarredLadybug;
+  if (id === FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id) return FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug;
   return undefined;
 }
 
@@ -211,8 +219,8 @@ function destroyedRecord(card: FieldMonster): DestroyedMonster {
 
 /**
  * Old Vindictive Magician locks one opposing-team monster at activation.
- * 4-Starred Ladybug of Doom selects no targets and destroys all face-up Level 4 monsters
- * currently controlled by the opposing team at resolution.
+ * 4-Starred Ladybug of Doom destroys all face-up Level 4 opposing-team monsters at resolution.
+ * Nobleman-Eater Bug selects exactly two monsters, without targeting, at resolution.
  */
 export function resolveFlipMonsterDestruction(input: {
   plan: FlipDestructionPlan;
@@ -278,7 +286,7 @@ export function resolveFlipMonsterDestruction(input: {
     attemptedUids.push(targetNow.uid);
     if (targetNow.destructionProtected === true) protectedUids.push(targetNow.uid);
     else destroyed.push(destroyedRecord(targetNow));
-  } else {
+  } else if (plan.sourceCardId === FLIP_MONSTER_DESTRUCTION_CARDS.fourStarredLadybug.id) {
     if (selectedUids.length !== 0) return fail('non-targeting-effect-does-not-accept-targets');
     const affected = fieldAtResolution.filter(card =>
       card.controllerTeam !== plan.controllerTeam
@@ -289,6 +297,20 @@ export function resolveFlipMonsterDestruction(input: {
       attemptedUids.push(card.uid);
       if (card.destructionProtected === true) protectedUids.push(card.uid);
       else destroyed.push(destroyedRecord(card));
+    }
+  } else {
+    // Nobleman-Eater Bug chooses exactly two current monsters at resolution; it does not target.
+    if (fieldAtResolution.length < 2) {
+      if (selectedUids.length !== 0) return fail('nobleman-insufficient-monsters-on-field');
+    } else {
+      if (selectedUids.length !== 2) return fail('nobleman-requires-exactly-two-monsters');
+      for (const uid of selectedUids) {
+        const card = currentByUid.get(uid);
+        if (!card) return fail('nobleman-selection-not-on-field-at-resolution');
+        attemptedUids.push(card.uid);
+        if (card.destructionProtected === true) protectedUids.push(card.uid);
+        else destroyed.push(destroyedRecord(card));
+      }
     }
   }
 

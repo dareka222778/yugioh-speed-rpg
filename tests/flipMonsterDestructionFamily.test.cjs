@@ -47,6 +47,7 @@ test('official identities and card-specific selection semantics are fixed', () =
   assert.deepEqual(FLIP_MONSTER_DESTRUCTION_CARDS, {
     oldVindictiveMagician: { id: '45141844', konamiCardDatabaseId: 5651, name: 'Old Vindictive Magician', selectionMode: 'targeted-at-activation', maxTargets: 1 },
     fourStarredLadybug: { id: '83994646', konamiCardDatabaseId: 5139, name: '4-Starred Ladybug of Doom', selectionMode: 'non-targeting-at-resolution', maxTargets: 0 },
+    noblemanEaterBug: { id: '65878864', konamiCardDatabaseId: 6122, name: 'Nobleman-Eater Bug', selectionMode: 'non-targeting-at-resolution', maxTargets: 2 },
   });
 });
 test('2v2 seat mapping is shared by opposite seats', () => {
@@ -136,6 +137,84 @@ test('destruction protection prevents the target from leaving the field', () => 
   assert.equal(result.value.destroyed.length, 0);
   assert.deepEqual(result.value.protectedUids, ['protected']);
   assert.equal(result.value.releasedMonsterZones.length, 0);
+});
+
+test('Nobleman-Eater Bug has its official identity and exact-two non-targeting semantics', () => {
+  assert.deepEqual(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug, {
+    id: '65878864',
+    konamiCardDatabaseId: 6122,
+    name: 'Nobleman-Eater Bug',
+    selectionMode: 'non-targeting-at-resolution',
+    maxTargets: 2,
+  });
+});
+test('Nobleman-Eater Bug chooses exactly two monsters at resolution', () => {
+  const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id })];
+  const resolution = [
+    monster('a', '11111111', 0, 0, 0),
+    monster('b', '22222222', 3, 1, 0),
+    monster('c', '33333333', 2, 0, 1),
+  ];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id, { activation, resolution, selected: ['a', 'b'] });
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.value.destroyed.map(card => card.uid), ['a', 'b']);
+});
+test('Nobleman-Eater Bug may destroy monsters from either team, including face-down cards', () => {
+  const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id })];
+  const resolution = [
+    monster('hidden-a', '11111111', 0, 0, 0, 2, 'face-down-defense'),
+    monster('hidden-b', '22222222', 3, 1, 0, 5, 'face-down-defense'),
+  ];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id, { activation, resolution, selected: ['hidden-a', 'hidden-b'] });
+  assert.equal(result.ok, true);
+  assert.equal(result.value.destroyed.length, 2);
+  assert.equal(projectFlipDestructionTargetOption(resolution[0], 'public').cardId, undefined);
+});
+test('Nobleman-Eater Bug resolves without effect when fewer than two monsters remain', () => {
+  const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id })];
+  const resolution = [monster('only-one', '11111111', 1, 1, 0)];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id, { activation, resolution, selected: [] });
+  assert.equal(result.ok, true);
+  assert.equal(result.value.destroyed.length, 0);
+});
+test('Nobleman-Eater Bug requires exactly two distinct selections when two or more remain', () => {
+  const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id })];
+  const resolution = [monster('a', '11111111', 0, 0, 0), monster('b', '22222222', 1, 1, 0)];
+  assert.equal(resolve(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id, { activation, resolution, selected: ['a'] }).reason, 'nobleman-requires-exactly-two-monsters');
+  assert.equal(resolve(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id, { activation, resolution, selected: ['a', 'b', 'a'] }).reason, 'duplicate-selected-monster-uid');
+});
+test('Nobleman-Eater Bug selection is validated against the resolution field', () => {
+  const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id })];
+  const resolution = [monster('a', '11111111', 0, 0, 0), monster('b', '22222222', 1, 1, 0)];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id, { activation, resolution, selected: ['a', 'missing'] });
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, 'nobleman-selection-not-on-field-at-resolution');
+});
+test('Nobleman-Eater Bug applies destruction protection per selected monster', () => {
+  const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id })];
+  const resolution = [
+    monster('protected', '11111111', 0, 0, 0, 4, 'face-up-attack', { destructionProtected: true }),
+    monster('unprotected', '22222222', 1, 1, 0),
+  ];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id, { activation, resolution, selected: ['protected', 'unprotected'] });
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.value.protectedUids, ['protected']);
+  assert.deepEqual(result.value.destroyed.map(card => card.uid), ['unprotected']);
+});
+test('Nobleman-Eater Bug routes each destroyed card to its physical owner team Graveyard', () => {
+  const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id })];
+  const resolution = [
+    monster('stolen-a', '11111111', 0, 1, 0),
+    monster('stolen-b', '22222222', 3, 0, 1),
+  ];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id, { activation, resolution, selected: ['stolen-a', 'stolen-b'] });
+  assert.deepEqual(result.value.destroyed.map(card => card.destinationGraveyardTeam), [0, 1]);
+});
+test('Nobleman-Eater Bug can destroy its own source if it remains on the field', () => {
+  const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id }), monster('other', '11111111', 1, 1, 0)];
+  const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.noblemanEaterBug.id, { activation, resolution: activation, selected: ['flip-source', 'other'] });
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.value.destroyed.map(card => card.uid), ['flip-source', 'other']);
 });
 test('4-Starred Ladybug is non-targeting and rejects selected UIDs', () => {
   const activation = [source({ id: FLIP_MONSTER_DESTRUCTION_CARDS.fourStarredLadybug.id })];
