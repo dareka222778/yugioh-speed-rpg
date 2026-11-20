@@ -1,4 +1,5 @@
 export const ABSORBING_KID_FROM_THE_SKY_CARD_ID = "49771608" as const;
+export const GUARDIAN_ANGEL_JOAN_CARD_ID = "68007326" as const;
 
 export type DuelTeam = 0 | 1;
 export type PhysicalSeat = 0 | 1 | 2 | 3;
@@ -11,7 +12,7 @@ export type BattleDestination =
   | "extraDeck"
   | "field";
 
-export interface AbsorbingKidBattleGainInput {
+export interface BattleLifePointRecoveryBaseInput {
   sourceCardId: string;
   sourceUid: string;
   sourcePhysicalOwnerSeat: number;
@@ -19,23 +20,30 @@ export interface AbsorbingKidBattleGainInput {
   sourceFaceUpWhenDestroying: boolean;
   sourceBattleRole: BattleRole;
   destroyedMonsterUid: string;
-  destroyedMonsterLevel: number;
   destroyerUid: string;
   destroyedByBattle: boolean;
   destination: BattleDestination;
   teamLifePoints: readonly [number, number];
 }
 
-export type AbsorbingKidTriggerReason =
+export interface AbsorbingKidBattleGainInput extends BattleLifePointRecoveryBaseInput {
+  destroyedMonsterLevel: number;
+}
+
+export interface GuardianAngelJoanBattleGainInput extends BattleLifePointRecoveryBaseInput {
+  destroyedMonsterOriginalAtk: number;
+}
+
+export type BattleLifePointTriggerReason =
   | "resolved"
   | "source-not-face-up"
   | "not-destroyed-by-battle"
   | "different-destroyer"
   | "not-sent-to-graveyard";
 
-export interface AbsorbingKidBattleGainResult {
+export interface BattleLifePointRecoveryResult {
   triggered: boolean;
-  reason: AbsorbingKidTriggerReason;
+  reason: BattleLifePointTriggerReason;
   gainAmount: number;
   recipientTeam: DuelTeam | null;
   teamLifePoints: [number, number];
@@ -80,26 +88,13 @@ function assertDestination(value: string): asserts value is BattleDestination {
   }
 }
 
-/**
- * Resolve Absorbing Kid from the Sky after a battle-destruction event.
- *
- * The effect is eligible when this card was face-up at the point it destroyed
- * the opposing monster, the destruction was by battle, and the destroyed
- * monster was actually sent to the Graveyard. It can trigger while attacking
- * or defending; the source need not remain on the field after the battle.
- *
- * In a 2v2 duel, Life Points belong to the source's current controller team.
- * Physical ownership is retained for audit/UI purposes and never determines
- * which team's Life Points receive the recovery.
- *
- * There is no once-per-turn clause. The caller must invoke this once for each
- * distinct resolved battle event and must not replay the same event.
- */
-export function resolveAbsorbingKidFromTheSkyBattleGain(
-  input: AbsorbingKidBattleGainInput,
-): AbsorbingKidBattleGainResult {
-  if (input.sourceCardId !== ABSORBING_KID_FROM_THE_SKY_CARD_ID) {
-    throw new Error("sourceCardId must identify Absorbing Kid from the Sky (49771608).");
+function resolveBattleLifePointRecovery(
+  input: BattleLifePointRecoveryBaseInput,
+  expectedCardId: string,
+  requestedGain: number,
+): BattleLifePointRecoveryResult {
+  if (input.sourceCardId !== expectedCardId) {
+    throw new Error("sourceCardId must identify the expected battle Life Point recovery card (" + expectedCardId + ").");
   }
   assertUid(input.sourceUid, "sourceUid");
   assertUid(input.destroyedMonsterUid, "destroyedMonsterUid");
@@ -119,22 +114,20 @@ export function resolveAbsorbingKidFromTheSkyBattleGain(
   if (typeof input.destroyedByBattle !== "boolean") {
     throw new Error("destroyedByBattle must be boolean.");
   }
-  if (!Number.isInteger(input.destroyedMonsterLevel)
-    || input.destroyedMonsterLevel < 1
-    || input.destroyedMonsterLevel > 12) {
-    throw new Error("destroyedMonsterLevel must be an integer from 1 to 12.");
+  if (!Number.isSafeInteger(requestedGain) || requestedGain < 0) {
+    throw new Error("requested Life Point gain must be a non-negative safe integer.");
   }
   assertDestination(input.destination);
 
   const teamLifePoints = assertTeamLifePoints(input.teamLifePoints);
-  let reason: AbsorbingKidTriggerReason = "resolved";
+  let reason: BattleLifePointTriggerReason = "resolved";
   if (!input.sourceFaceUpWhenDestroying) reason = "source-not-face-up";
   else if (!input.destroyedByBattle) reason = "not-destroyed-by-battle";
   else if (input.destroyerUid !== input.sourceUid) reason = "different-destroyer";
   else if (input.destination !== "graveyard") reason = "not-sent-to-graveyard";
 
   const triggered = reason === "resolved";
-  const gainAmount = triggered ? input.destroyedMonsterLevel * 300 : 0;
+  const gainAmount = triggered ? requestedGain : 0;
   const recipientTeam = triggered ? input.sourceControllerTeam : null;
 
   if (recipientTeam !== null) {
@@ -155,4 +148,42 @@ export function resolveAbsorbingKidFromTheSkyBattleGain(
     sourceBattleRole: input.sourceBattleRole,
     destroyedMonsterUid: input.destroyedMonsterUid,
   };
+}
+
+/**
+ * Absorbing Kid from the Sky recovers 300 LP per Level of the monster it
+ * destroyed by battle, but only if that monster actually reached the GY.
+ * A face-up attacker or defender can qualify; a Set defender that flips face-up
+ * before battle destruction is established can therefore qualify as well.
+ */
+export function resolveAbsorbingKidFromTheSkyBattleGain(
+  input: AbsorbingKidBattleGainInput,
+): BattleLifePointRecoveryResult {
+  if (!Number.isInteger(input.destroyedMonsterLevel)
+    || input.destroyedMonsterLevel < 1
+    || input.destroyedMonsterLevel > 12) {
+    throw new Error("destroyedMonsterLevel must be an integer from 1 to 12.");
+  }
+  return resolveBattleLifePointRecovery(
+    input,
+    ABSORBING_KID_FROM_THE_SKY_CARD_ID,
+    input.destroyedMonsterLevel * 300,
+  );
+}
+
+/**
+ * Guardian Angel Joan recovers the destroyed monster's original ATK, not its
+ * current ATK. Both cards share the same battle/GY gate and team LP routing.
+ */
+export function resolveGuardianAngelJoanBattleGain(
+  input: GuardianAngelJoanBattleGainInput,
+): BattleLifePointRecoveryResult {
+  if (!Number.isSafeInteger(input.destroyedMonsterOriginalAtk) || input.destroyedMonsterOriginalAtk < 0) {
+    throw new Error("destroyedMonsterOriginalAtk must be a non-negative safe integer.");
+  }
+  return resolveBattleLifePointRecovery(
+    input,
+    GUARDIAN_ANGEL_JOAN_CARD_ID,
+    input.destroyedMonsterOriginalAtk,
+  );
 }
