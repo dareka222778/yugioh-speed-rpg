@@ -340,3 +340,286 @@ test('M405 evidence matches the official Konami card text and remains uncertifie
   assert.equal(evidence.validation.automaticCertification, false);
   assert.equal(DANCING_FAIRY_STANDBY_GAIN, 1000);
 });
+
+
+const {
+  DARKLORD_MARIE_CARD_ID,
+  DARKLORD_MARIE_STANDBY_GAIN,
+  resolveDarklordMarieStandbyGain,
+} = require('../dist/dancingFairyStandby.js');
+
+const marie = (overrides = {}) => ({
+  uid: 's0:grave:darklord-marie-1',
+  cardId: DARKLORD_MARIE_CARD_ID,
+  physicalOwnerSeat: 0,
+  ownerTeam: 0,
+  zoneAtActivation: 'graveyard',
+  zoneAtResolution: 'graveyard',
+  effectNegated: false,
+  ...overrides,
+});
+
+const marieInput = (overrides = {}) => ({
+  eventId: 'turn-1:team-0:standby',
+  activeTeam: 0,
+  turnNumber: 1,
+  teamLifePointsBefore: [4000, 4000],
+  darklordMaries: [marie()],
+  processedEventIds: [],
+  processedTurnCardKeys: [],
+  ...overrides,
+});
+
+test('Darklord Marie gains 200 LP only when the physical card is in the Graveyard at activation and resolution', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput());
+  assert.equal(result.triggered, true);
+  assert.equal(result.gainAmount, 200);
+  assert.equal(result.recipientTeam, 0);
+  assert.deepEqual(result.teamLifePointsAfter, [4200, 4000]);
+  assert.deepEqual(result.processedTurnCardKeys, ['1:s0:grave:darklord-marie-1']);
+});
+
+test('Darklord Marie routes recovery to team 1', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    activeTeam: 1,
+    teamLifePointsBefore: [2600, 3500],
+    darklordMaries: [marie({ physicalOwnerSeat: 1, ownerTeam: 1 })],
+  }));
+  assert.equal(result.recipientTeam, 1);
+  assert.deepEqual(result.teamLifePointsAfter, [2600, 3700]);
+});
+
+test('multiple physical copies in the same team Graveyard each recover 200 LP', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    darklordMaries: [
+      marie({ uid: 'seat-0-copy', physicalOwnerSeat: 0 }),
+      marie({ uid: 'seat-2-copy', physicalOwnerSeat: 2 }),
+    ],
+  }));
+  assert.equal(result.triggerCount, 2);
+  assert.equal(result.gainAmount, 400);
+  assert.deepEqual(result.teamLifePointsAfter, [4400, 4000]);
+});
+
+test('uses explicit owner team separately from physical owner seat', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    darklordMaries: [marie({ physicalOwnerSeat: 2, ownerTeam: 0 })],
+  }));
+  assert.equal(result.triggerSources[0].physicalOwnerSeat, 2);
+  assert.equal(result.triggerSources[0].ownerTeam, 0);
+  assert.equal(result.recipientTeam, 0);
+});
+
+test('does not trigger for a card owned by the opposing team', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    darklordMaries: [marie({ physicalOwnerSeat: 1, ownerTeam: 1 })],
+  }));
+  assert.equal(result.triggered, false);
+  assert.equal(result.reason, 'no-eligible-copy');
+});
+
+test('does not activate if the card was not in the Graveyard when the Standby effect was activated', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    darklordMaries: [marie({ zoneAtActivation: 'hand' })],
+  }));
+  assert.equal(result.triggered, false);
+});
+
+test('does not resolve if the card leaves the Graveyard after activation', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    darklordMaries: [marie({ zoneAtResolution: 'banished' })],
+  }));
+  assert.equal(result.triggered, false);
+});
+
+test('does not trigger while the Graveyard effect is negated', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    darklordMaries: [marie({ effectNegated: true })],
+  }));
+  assert.equal(result.triggered, false);
+});
+
+test('does not replay a duplicate Standby Phase event', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    processedEventIds: ['turn-1:team-0:standby'],
+  }));
+  assert.equal(result.triggered, false);
+  assert.equal(result.reason, 'duplicate-event');
+  assert.deepEqual(result.teamLifePointsAfter, [4000, 4000]);
+});
+
+test('prevents the same physical copy from resolving twice in one turn even with a new event ID', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    eventId: 'turn-1:team-0:standby-retry',
+    processedTurnCardKeys: ['1:s0:grave:darklord-marie-1'],
+  }));
+  assert.equal(result.triggered, false);
+  assert.equal(result.reason, 'already-used-this-turn');
+});
+
+test('one copy already used this turn does not suppress another physical copy', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    darklordMaries: [
+      marie({ uid: 'already-used' }),
+      marie({ uid: 'fresh-copy', physicalOwnerSeat: 2 }),
+    ],
+    processedTurnCardKeys: ['1:already-used'],
+  }));
+  assert.equal(result.triggerCount, 1);
+  assert.equal(result.gainAmount, 200);
+  assert.deepEqual(result.teamLifePointsAfter, [4200, 4000]);
+  assert.deepEqual(result.processedTurnCardKeys, ['1:already-used', '1:fresh-copy']);
+});
+
+test('the same physical copy can trigger again on a later turn', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    eventId: 'turn-3:team-0:standby',
+    turnNumber: 3,
+    processedEventIds: ['turn-1:team-0:standby'],
+    processedTurnCardKeys: ['1:s0:grave:darklord-marie-1'],
+  }));
+  assert.equal(result.triggered, true);
+  assert.equal(result.gainAmount, 200);
+});
+
+test('does not cap Life Points at 8000', () => {
+  const result = resolveDarklordMarieStandbyGain(marieInput({
+    teamLifePointsBefore: [7900, 4000],
+  }));
+  assert.deepEqual(result.teamLifePointsAfter, [8100, 4000]);
+});
+
+test('does not mutate the input LP tuple or Graveyard snapshots', () => {
+  const teamLifePointsBefore = [4000, 3000];
+  const darklordMaries = [marie()];
+  const beforeLP = [...teamLifePointsBefore];
+  const beforeCards = JSON.stringify(darklordMaries);
+  const result = resolveDarklordMarieStandbyGain(marieInput({ teamLifePointsBefore, darklordMaries }));
+  assert.deepEqual(teamLifePointsBefore, beforeLP);
+  assert.equal(JSON.stringify(darklordMaries), beforeCards);
+  assert.notEqual(result.teamLifePointsAfter, teamLifePointsBefore);
+});
+
+test('rejects an incorrect Darklord Marie card ID', () => {
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({
+      darklordMaries: [marie({ cardId: '00000000' })],
+    })),
+    /57579381/,
+  );
+});
+
+test('rejects duplicate physical UIDs in the Graveyard snapshot', () => {
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({
+      darklordMaries: [marie(), marie({ physicalOwnerSeat: 2 })],
+    })),
+    /duplicate physical UID/,
+  );
+});
+
+test('rejects invalid owner seat or owner team', () => {
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({
+      darklordMaries: [marie({ physicalOwnerSeat: 4 })],
+    })),
+    /seat from 0 to 3/,
+  );
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({
+      darklordMaries: [marie({ ownerTeam: 2 })],
+    })),
+    /team 0 or 1/,
+  );
+});
+
+test('rejects invalid activation or resolution zones', () => {
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({
+      darklordMaries: [marie({ zoneAtActivation: 'field' })],
+    })),
+    /activation zone/,
+  );
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({
+      darklordMaries: [marie({ zoneAtResolution: 'field' })],
+    })),
+    /resolution zone/,
+  );
+});
+
+test('rejects a non-boolean negation flag', () => {
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({
+      darklordMaries: [marie({ effectNegated: 0 })],
+    })),
+    /negation flag must be boolean/,
+  );
+});
+
+test('rejects invalid turn numbers and malformed LP tuples', () => {
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({ turnNumber: 0 })),
+    /positive safe integer/,
+  );
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({ teamLifePointsBefore: [4000] })),
+    /exactly two team totals/,
+  );
+});
+
+test('rejects negative, fractional, or unsafe team LP and safe-integer overflow', () => {
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({ teamLifePointsBefore: [-1, 4000] })),
+    /non-negative safe integer/,
+  );
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({ teamLifePointsBefore: [4000.5, 4000] })),
+    /non-negative safe integer/,
+  );
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({
+      teamLifePointsBefore: [Number.MAX_SAFE_INTEGER - 100, 4000],
+    })),
+    /safe integer range/,
+  );
+});
+
+test('rejects more than 120 physical copies in the four 30-card Main Deck Graveyards', () => {
+  const darklordMaries = Array.from({ length: 121 }, (_, index) => marie({
+    uid: 'copy-' + index,
+    physicalOwnerSeat: index % 4,
+  }));
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({ darklordMaries })),
+    /at most 120/,
+  );
+});
+
+test('rejects invalid processed event and turn/card key lists', () => {
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({ processedEventIds: 'turn-1' })),
+    /processedEventIds must be an array/,
+  );
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({ processedTurnCardKeys: '1:uid' })),
+    /processedTurnCardKeys must be an array/,
+  );
+  assert.throws(
+    () => resolveDarklordMarieStandbyGain(marieInput({
+      processedTurnCardKeys: ['1:uid', '1:uid'],
+    })),
+    /must not contain duplicates/,
+  );
+});
+
+test('M405 Darklord Marie evidence matches official Konami text and first TCG printing', () => {
+  assert.equal(evidence.additionalCards[0].id, DARKLORD_MARIE_CARD_ID);
+  assert.equal(evidence.additionalCards[0].konamiDatabaseCid, 5209);
+  assert.equal(evidence.additionalCards[0].officialTextVerified, true);
+  assert.match(evidence.additionalCards[0].officialSourceUrl, /cid=5209/);
+  assert.equal(evidence.additionalCards[0].firstTcgRelease, '2003-03-01');
+  assert.equal(evidence.validation.certificationStatus, 'not-certified');
+  assert.equal(evidence.validation.automaticCertification, false);
+  assert.equal(DARKLORD_MARIE_STANDBY_GAIN, 200);
+});
