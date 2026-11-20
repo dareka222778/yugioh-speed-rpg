@@ -24,7 +24,7 @@ const flipInput = (overrides = {}) => ({
   zoneAtFlip: 'monster',
   wasFaceDown: true,
   becameFaceUp: true,
-  effectNegated: false,
+  effectNegatedAtResolutionAtResolution: false,
   teamLifePointsBefore: [4000, 4000],
   processedEventIds: [],
   ...overrides,
@@ -38,7 +38,7 @@ const sendInput = (overrides = {}) => ({
   controllerTeamAtSend: 0,
   sourceZone: 'monster',
   destinationZone: 'graveyard',
-  effectNegated: false,
+  effectNegatedAtResolutionAtResolution: false,
   teamLifePointsBefore: [4000, 4000],
   processedEventIds: [],
   ...overrides,
@@ -85,7 +85,7 @@ test('does not trigger when the card never becomes face-up', () => {
 });
 
 test('does not trigger when the FLIP effect is negated', () => {
-  const result = resolveImmortalOfThunderFlipGain(flipInput({ effectNegated: true }));
+  const result = resolveImmortalOfThunderFlipGain(flipInput({ effectNegatedAtResolutionAtResolution: true }));
   assert.equal(result.triggered, false);
   assert.equal(result.reason, 'negated');
 });
@@ -214,7 +214,7 @@ test('does not trigger when the source was not a field zone', () => {
 });
 
 test('does not trigger when the send-to-Graveyard effect is negated', () => {
-  const result = resolveImmortalOfThunderFieldToGraveyardLoss(sendInput({ effectNegated: true }));
+  const result = resolveImmortalOfThunderFieldToGraveyardLoss(sendInput({ effectNegatedAtResolutionAtResolution: true }));
   assert.equal(result.triggered, false);
   assert.equal(result.reason, 'negated');
 });
@@ -261,14 +261,15 @@ test('rejects a wrong card ID or blank UID for the send event', () => {
 test('rejects invalid send controller team, owner seat, and negation flag', () => {
   assert.throws(() => resolveImmortalOfThunderFieldToGraveyardLoss(sendInput({ controllerTeamAtSend: 2 })), /team 0 or 1/);
   assert.throws(() => resolveImmortalOfThunderFieldToGraveyardLoss(sendInput({ physicalOwnerSeat: 4 })), /seat from 0 to 3/);
-  assert.throws(() => resolveImmortalOfThunderFieldToGraveyardLoss(sendInput({ effectNegated: 0 })), /effectNegated must be boolean/);
+  assert.throws(() => resolveImmortalOfThunderFieldToGraveyardLoss(sendInput({ effectNegatedAtResolutionAtResolution: 0 })), /effectNegatedAtResolution must be boolean/);
 });
 
-test('rejects malformed send LP tuples and safe-integer underflow', () => {
+test('rejects malformed send LP tuples and applies the full loss from zero LP without clamping', () => {
   assert.throws(() => resolveImmortalOfThunderFieldToGraveyardLoss(sendInput({ teamLifePointsBefore: [4000] })), /exactly two/);
-  assert.throws(() => resolveImmortalOfThunderFieldToGraveyardLoss(sendInput({
-    teamLifePointsBefore: [Number.MIN_SAFE_INTEGER + 100, 4000],
-  })), /safe integer range/);
+  const result = resolveImmortalOfThunderFieldToGraveyardLoss(sendInput({
+    teamLifePointsBefore: [0, 4000],
+  }));
+  assert.deepEqual(result.teamLifePointsAfterLoss, [-5000, 4000]);
 });
 
 test('rejects invalid send event IDs and duplicate processed event IDs', () => {

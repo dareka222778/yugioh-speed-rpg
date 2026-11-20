@@ -15,7 +15,7 @@ export interface ImmortalOfThunderFlipInput {
   zoneAtFlip: FieldZone;
   wasFaceDown: boolean;
   becameFaceUp: boolean;
-  effectNegated: boolean;
+  effectNegatedAtResolution: boolean;
   teamLifePointsBefore: readonly [number, number];
   processedEventIds?: readonly string[];
 }
@@ -28,7 +28,7 @@ export interface ImmortalOfThunderSentToGraveyardInput {
   controllerTeamAtSend: DuelTeam;
   sourceZone: FieldZone;
   destinationZone: "graveyard" | "hand" | "deck" | "banished";
-  effectNegated: boolean;
+  effectNegatedAtResolution: boolean;
   teamLifePointsBefore: readonly [number, number];
   processedEventIds?: readonly string[];
 }
@@ -130,7 +130,7 @@ export function resolveImmortalOfThunderFlipGain(
   validateSource(input.cardId, input.uid, input.physicalOwnerSeat);
   assertTeam(input.controllerTeamAtActivation, "controllerTeamAtActivation");
   if (input.zoneAtFlip !== "monster") throw new Error("Flip effect must originate in the Monster Zone.");
-  if (typeof input.wasFaceDown !== "boolean" || typeof input.becameFaceUp !== "boolean" || typeof input.effectNegated !== "boolean") {
+  if (typeof input.wasFaceDown !== "boolean" || typeof input.becameFaceUp !== "boolean" || typeof input.effectNegatedAtResolution !== "boolean") {
     throw new Error("flip and negation flags must be boolean.");
   }
   const teamLifePoints = copyTeamLifePoints(input.teamLifePointsBefore);
@@ -158,7 +158,7 @@ export function resolveImmortalOfThunderFlipGain(
   if (!input.wasFaceDown || !input.becameFaceUp) {
     return { ...base, processedEventIds, triggered: false, reason: "not-flipped" };
   }
-  if (input.effectNegated) {
+  if (input.effectNegatedAtResolution) {
     return { ...base, processedEventIds, triggered: false, reason: "negated" };
   }
 
@@ -195,7 +195,7 @@ export function resolveImmortalOfThunderFieldToGraveyardLoss(
   if (!["graveyard", "hand", "deck", "banished"].includes(input.destinationZone)) {
     throw new Error("invalid destination zone.");
   }
-  if (typeof input.effectNegated !== "boolean") throw new Error("effectNegated must be boolean.");
+  if (typeof input.effectNegatedAtResolution !== "boolean") throw new Error("effectNegatedAtResolution must be boolean.");
   const teamLifePoints = copyTeamLifePoints(input.teamLifePointsBefore);
   const processed = copyProcessedEvents(input.processedEventIds);
   const opposingTeam = (1 - input.controllerTeamAtSend) as DuelTeam;
@@ -221,7 +221,7 @@ export function resolveImmortalOfThunderFieldToGraveyardLoss(
   if (input.destinationZone !== "graveyard") {
     return { ...base, processedEventIds, triggered: false, reason: "not-sent-from-field-to-graveyard" };
   }
-  if (input.effectNegated) {
+  if (input.effectNegatedAtResolution) {
     return { ...base, processedEventIds, triggered: false, reason: "negated" };
   }
 
