@@ -42,8 +42,14 @@ function makePlan(options = {}) {
     teamLifePoints: options.teamLifePoints ?? 4000,
     acceptEffect: options.acceptEffect ?? true,
     opponentHandAtActivation: options.opponentHandAtActivation || [
-      handCard('opponent-monster-a'),
-      handCard('opponent-spell', 'spell')
+      handCard('opponent-monster-a', 'monster', {
+        physicalOwnerSeat: options.opponentSeat ?? 1,
+        holderSeat: options.opponentSeat ?? 1
+      }),
+      handCard('opponent-spell', 'spell', {
+        physicalOwnerSeat: options.opponentSeat ?? 1,
+        holderSeat: options.opponentSeat ?? 1
+      })
     ]
   });
 }
