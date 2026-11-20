@@ -24,14 +24,20 @@
     "fixedDamage": 500,
     "amountScaling": "The 500 damage is per eligible copy and per LP gain event, not per 500 LP gained.",
     "teamRouting": "Damage is applied to the opposing team's shared Life Points.",
-    "eligibility": ["card ID 64752646", "monster zone", "face-up", "effect not negated", "controller team equals gaining team"],
+    "eligibility": [
+      "card ID 64752646",
+      "monster zone",
+      "face-up",
+      "effect not negated",
+      "controller team equals gaining team"
+    ],
     "idempotency": "The caller supplies eventId and processedEventIds so a retried event is not applied twice.",
     "oncePerTurn": false,
     "physicalOwnership": "UID and physical owner seat are retained for audit; controller team determines effect routing."
   },
   "validation": {
     "focusedTestFile": "tests/firePrincessLpGain.test.cjs",
-    "expectedFocusedCases": 29,
+    "expectedFocusedCases": 28,
     "runtimeIntegration": "pending-explicit-M61-handoff",
     "certificationStatus": "not-certified",
     "automaticCertification": false,
