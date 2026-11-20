@@ -1,0 +1,95 @@
+{
+  "format": 1,
+  "runId": "work-20261120T160001-0300-M424",
+  "mission": "M424",
+  "owner": "Work principal",
+  "priority": "P1 — implementar e testar a família de retorno de monstros por FLIP em 2v2, com seleção temporal correta, zonas compartilhadas e retorno à mão do proprietário físico.",
+  "state": "active",
+  "startedAt": "2026-11-20T16:00:01-03:00",
+  "endedAt": null,
+  "elapsedMinutes": null,
+  "effectiveWorkMinutes": 0,
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtStart": "ba01d88097f688ec66e5ed196bf2427436ef78e3",
+    "headAtReservation": null,
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m424-flip-monster-return-2v2-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "ba01d88097f688ec66e5ed196bf2427436ef78e3",
+  "head": "ba01d88097f688ec66e5ed196bf2427436ef78e3",
+  "reservedFiles": [
+    "src/flipMonsterReturnFamily.ts",
+    "tests/flipMonsterReturnFamily.test.cjs",
+    "docs/evidence/m424-flip-monster-return-family.json",
+    ".github/workflows/m424-flip-monster-return-family.yml"
+  ],
+  "objective": "Modelar Penguin Soldier e Hade-Hane sem tocar no resolver central M61; distinguir targets escolhidos na ativação de seleção não-direcionada na resolução; devolver cada monstro à mão do proprietário físico.",
+  "blocksCompleted": [
+    "Lido coordination/state.json e checkpoint M418; verificado HEAD compartilhado, main, PRs e workflows M418–M423.",
+    "Confirmado que M61 permanece sem handoff explícito; pedido cooperativo renovado no PR #17, comentário 7048152993.",
+    "Verificado que os quatro caminhos M424 não existem e não sobrepõem os escopos reservados conhecidos.",
+    "Criada branch isolada a partir do HEAD compartilhado ba01d880."
+  ],
+  "cards": [
+    {
+      "name": "Penguin Soldier",
+      "passcode": "93920745",
+      "konamiCardDatabaseId": 4608,
+      "selection": "targeted-at-activation",
+      "maxTargets": 2
+    },
+    {
+      "name": "Hade-Hane",
+      "passcode": "28357177",
+      "konamiCardDatabaseId": 6124,
+      "selection": "non-targeting-at-resolution",
+      "maxTargets": 3
+    }
+  ],
+  "tests": {
+    "planned": 24,
+    "passed": null,
+    "failed": null
+  },
+  "certification": {
+    "newCertifications": 0,
+    "verifiedAtStart": 969,
+    "remainingAtStart": 31,
+    "automaticCertifications": 0
+  },
+  "handoff": {
+    "pr": 17,
+    "latestCommentId": 7048152993,
+    "status": "pending",
+    "requestedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "changedFiles": []
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationFilesChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "realDiscordValidated": false
+  },
+  "production": {
+    "deploymentCheck": "GitHub deployments endpoint not available through the connector; no production/deploy claim."
+  },
+  "scopeReleasedToAuxiliary": [],
+  "auxiliaryAuthorization": "No authorization until PR and final checkpoint; if released, monitor/correct only the four M424 files.",
+  "nextTask": "Implement the pure FLIP return resolver and tests; then run focused Node 22 CI, Card Batch Fast, Milestone 1000 and Engine Validation.",
+  "nextWindow": "2026-11-20T17:30:00-03:00",
+  "limitations": [
+    "Helpers remain isolated until M61 resolver handoff.",
+    "No certification until registered and exercised through the real duel/Discord path."
+  ]
+}
