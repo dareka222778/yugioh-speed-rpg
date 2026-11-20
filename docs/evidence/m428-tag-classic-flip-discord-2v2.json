@@ -29,10 +29,15 @@
       "card": "Mask of Darkness",
       "id": "28933734",
       "behavior": "Flip Summon selects only a Trap from the shared team GY and returns it to the active representative's private hand; a Spell remains in the GY and the inactive partner panel does not reveal the recovered card."
+    },
+    {
+      "card": "Skelengel",
+      "id": "60694662",
+      "behavior": "The FLIP draw removes one card from the active representative's deck, adds it to that representative's private hand, leaves the inactive partner deck untouched, and does not disclose the drawn physical UID through the public Discord payload."
     }
   ],
   "validation": {
-    "testCases": 3,
+    "testCases": 4,
     "expectedNewCertifications": 0,
     "actualNewCertifications": 0,
     "inventoryGranted": 0,
@@ -45,7 +50,7 @@
     "liveDiscordServerTest": false,
     "mergePerformed": false,
     "deployPerformed": false,
-    "inventoryConservation": "Each scenario snapshots the full tagInventory UID/card-ID multiset before effect resolution and asserts exact equality afterward; duplicate fixture cards in partner hands are moved back to that partner's deck, never removed from inventory."
+    "inventoryConservation": "Every scenario snapshots the full tagInventory UID/card-ID multiset before effect resolution and asserts exact equality afterward; fixture duplicates are moved between the same partner's hand/deck, never removed."
   },
   "limitations": [
     "This is an integration test against the local 2v2 duel and Discord payload builders; it is not a live Discord gateway/server test.",

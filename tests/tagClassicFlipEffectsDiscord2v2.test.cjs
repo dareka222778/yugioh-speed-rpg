@@ -8,7 +8,7 @@ const {getCard}=require('../dist/collection');
 const {validateDiscordPayload}=require('../dist/discordPayload');
 
 const normalIds=tag.tagNormalCardIds.slice(0,10);
-const deckIds=[...normalIds.flatMap(id=>[id,id]),'54652250','31560081','14087893','28933734','12607053'];
+const deckIds=[...normalIds.flatMap(id=>[id,id]),'54652250','31560081','14087893','28933734','12607053','60694662'];
 assert.ok(deckIds.length>=20&&deckIds.length<=30,'fixture deck must respect the 20–30 main-deck rule');
 
 function game(seed){
@@ -153,4 +153,37 @@ test('Mask of Darkness retrieves only a Trap from the shared GY into the active 
   for(const payload of [publicPayload,p0Private,p2Private])validateDiscordPayload(payload);
   assert.ok(JSON.stringify(p0Private).includes(trapName));
   assert.ok(!JSON.stringify(p2Private).includes(trapName));
+});
+
+test('Skelengel draws from the active representative deck into only that private hand',()=>{
+  let s=game('m428-skelengel');
+  const source=take(s,0,'60694662');
+  s.core.turn=3;
+  s.core.players[0].monsters=[monster(source,0,false)];
+  tag.assertTagDuel(s);
+  const inventoryBefore=inventorySnapshot(s);
+  const activeDeckBefore=s.core.players[0].deck.map(card=>({uid:card.uid,id:card.id}));
+  const partnerDeckBefore=s.reserves[2].deck.map(card=>card.uid).sort();
+  s=act(s,'position',action=>action.mode==='flip');
+  s=passResponse(s);
+  assert.notEqual(s.core.phase,'response');
+  const drawn=activeDeckBefore.find(card=>!s.core.players[0].deck.some(candidate=>candidate.uid===card.uid));
+  assert.ok(drawn,'Skelengel must remove exactly one card from the active team's deck');
+  assert.equal(s.core.players[0].deck.length,activeDeckBefore.length-1);
+  assert.deepEqual(s.reserves[2].deck.map(card=>card.uid).sort(),partnerDeckBefore,'inactive partner deck must not be drawn from');
+  assert.ok(tag.tagMemberHand(s,'p0').some(card=>card.uid===drawn.uid));
+  assert.ok(!tag.tagMemberHand(s,'p2').some(card=>card.uid===drawn.uid));
+  // Avoid a same-name duplicate in the partner's private hand so the payload
+  // assertion tests the physical drawn card rather than a second copy.
+  const partnerCopies=s.reserves[2].hand.filter(card=>card.id===drawn.id);
+  s.reserves[2].hand=s.reserves[2].hand.filter(card=>card.id!==drawn.id);
+  s.reserves[2].deck.push(...partnerCopies);
+  assertInventoryConserved(s,inventoryBefore);
+  const r=record(s,'m428-skelengel');
+  const publicPayload=ui.tagPublicMessage(r),p0Private=ui.tagPrivateMessage(r,'p0'),p2Private=ui.tagPrivateMessage(r,'p2');
+  for(const payload of [publicPayload,p0Private,p2Private])validateDiscordPayload(payload);
+  const drawnName=getCard(drawn.id).name;
+  assert.ok(JSON.stringify(p0Private).includes(drawnName));
+  assert.ok(!JSON.stringify(p2Private).includes(drawnName));
+  assert.ok(!JSON.stringify(publicPayload).includes(drawn.uid),'public Discord payload must not expose the drawn physical UID');
 });
