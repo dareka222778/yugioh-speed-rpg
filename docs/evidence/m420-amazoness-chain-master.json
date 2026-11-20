@@ -1,0 +1,52 @@
+{
+  "format": 1,
+  "mission": "M420",
+  "runId": "work-20261120T145632-0300-M419-M420",
+  "authority": "Konami official OCG Card Database",
+  "reviewedAt": "2026-11-20",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "name": "Amazoness Chain Master",
+      "id": "29654737",
+      "konamiCardDatabaseId": 5291,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5291&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "effectSummary": "When destroyed by battle and sent to the GY, its controller may pay 1500 LP, inspect the opponent's hand, and add one monster from that hand to their own hand.",
+      "firstOcgPrinting": "2001-07-31",
+      "firstOcgSetCode": "WJ-02",
+      "officialTextLineRange": [89, 91],
+      "firstPrintingLineRange": [152, 156],
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "twoVTwoAdaptation": {
+    "teamMapping": "seat % 2",
+    "lifePoints": "1500 is deducted from the resolving team's shared LP",
+    "opponentSeat": "passed explicitly from the battle event as the seat controlling the monster that destroyed Amazoness Chain Master; no opponent hand is inferred",
+    "handPrivacy": "full opponent hand projection is visible only to effectPlayerSeat; the selected card identity is visible only to effectPlayerSeat and opponentSeat; team partners and public output receive no card identity",
+    "physicalOwnership": "the stolen card keeps physicalOwnerSeat; only holderSeat changes to effectPlayerSeat",
+    "edgeCases": "source cards whose physical owner team differs from the resolving team are rejected; stolen-control trigger ownership needs a separate rules decision before integration"
+  },
+  "tests": {
+    "file": "tests/amazonessChainMaster.test.cjs",
+    "expectedCases": 21,
+    "behavioralGroups": [
+      "battle-destruction trigger and current-turn validation",
+      "optional 1500 team LP payment and decline/insufficient LP",
+      "explicit 2v2 opponent seat and private hand ownership",
+      "resolver-only full-hand projection",
+      "single monster transfer with physical owner preservation",
+      "transfer identity visibility restricted to the two directly involved seats",
+      "stale UID, duplicate UID, no-monster-at-resolution and no-mutation guards"
+    ]
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "runtimeIntegrated": false,
+  "discordLiveValidated": false
+}
