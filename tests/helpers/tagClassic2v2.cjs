@@ -80,5 +80,5 @@ function normalCard(predicate) {
 }
 module.exports = {
   tag, atk, def, createGame, addToHand, deployMonster, setBackrow, putInGrave,
-  act, actCurrent, passAll, normalCard, normalIds
+  act, actCurrent, passAll, normalCard, normalIds, tagMemberHand: tag.tagMemberHand
 };
