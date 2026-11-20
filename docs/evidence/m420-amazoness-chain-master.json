@@ -33,7 +33,7 @@
   },
   "tests": {
     "file": "tests/amazonessChainMaster.test.cjs",
-    "expectedCases": 23,
+    "expectedCases": 25,
     "behavioralGroups": [
       "battle-destruction trigger and current-turn validation",
       "optional 1500 team LP payment and decline/insufficient LP",
