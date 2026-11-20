@@ -166,3 +166,7 @@ test('inspection rejects invalid resolver and viewer seats', () => {
   assert.ok(result);
   assert.throws(() => projectPrivateSetInspection(result, { kind: 'seat', seat: 4 }), /seat from 0 to 3/);
 });
+
+test('inspection fails closed when face-up state is missing', () => {
+  assert.equal(inspectOpponentSetCard(request({ target: target({ faceUp: undefined }) })), null);
+});
