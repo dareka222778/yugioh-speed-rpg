@@ -133,6 +133,7 @@ export function planAmazonessChainMasterEffect(input: {
   }
   const handError = validateOpponentHand(opponentHandAtActivation, opponentSeat);
   if (handError) return error(handError);
+  if (!validUids([sourceCard, ...opponentHandAtActivation])) return error("duplicate-or-invalid-physical-uid");
 
   if (!acceptEffect) {
     return {
@@ -179,6 +180,7 @@ export function projectAmazonessChainMasterInspection(
   if (teamOfSeat(viewerSeat) === undefined) return error("invalid-viewer-seat");
   const handError = validateOpponentHand(currentOpponentHand, plan.opponentSeat);
   if (handError) return error(handError);
+  if (!validUids([{ uid: plan.triggerCardUid }, ...currentOpponentHand])) return error("duplicate-or-invalid-physical-uid");
   if (viewerSeat !== plan.effectPlayerSeat) {
     return {
       ok: true,
@@ -208,6 +210,7 @@ export function resolveAmazonessChainMasterEffect(
   if (!plan.active || !plan.costPaid) return error("effect-not-activated");
   const handError = validateOpponentHand(currentOpponentHand, plan.opponentSeat);
   if (handError) return error(handError);
+  if (!validUids([{ uid: plan.triggerCardUid }, ...currentOpponentHand])) return error("duplicate-or-invalid-physical-uid");
   const eligibleMonsters = currentOpponentHand.filter(card => card.kind === "monster");
   if (eligibleMonsters.length === 0) {
     return {
