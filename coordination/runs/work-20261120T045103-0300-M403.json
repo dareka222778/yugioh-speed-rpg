@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "runId": "work-20261120T045103-0300-M403",
+  "owner": "Work principal",
+  "mission": "M403",
+  "priority": "P1 — implementar o gatilho contínuo de Fire Princess: para cada evento real de ganho de LP da equipe controladora, cada cópia face-up e não negada em Zona de Monstros causa 500 de dano à equipe adversária; uma ativação por cópia/evento, não por bloco de LP.",
+  "state": "reserved",
+  "startedAt": "2026-11-20T04:51:03-03:00",
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtReservation": "aa7c7404ba4e09d49ad5fe90113a562445724471",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m403-fire-princess-lp-gain-burn-20261120",
+  "reservedFiles": [
+    "src/firePrincessLpGain.ts",
+    "tests/firePrincessLpGain.test.cjs",
+    "docs/evidence/m403-fire-princess-lp-gain.json",
+    ".github/workflows/m403-fire-princess-lp-gain.yml"
+  ],
+  "conflictCheck": {
+    "activePrimaryRun": "work-20261115T142521-0300",
+    "preservedReservations": [
+      "M231-M236",
+      "M215-M220",
+      "M225-M227",
+      "M305-M305",
+      "M319-M322",
+      "M383",
+      "M61",
+      "M402"
+    ],
+    "note": "Quatro caminhos novos; busca de branches, PRs, admitted, proposed e engine-v9 não encontrou Fire Princess (64752646). Nenhum arquivo reservado de M402 ou de terceiros é tocado."
+  },
+  "handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "changedFiles": []
+  },
+  "card": {
+    "name": "Fire Princess",
+    "id": "64752646",
+    "konamiDatabaseCid": 5197,
+    "level": 4,
+    "attribute": "FIRE",
+    "type": "Pyro/Effect",
+    "officialTextSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5197&ope=2&request_locale=en",
+    "firstTcgRelease": "2003-03-01",
+    "firstTcgSet": "Labyrinth of Nightmare (LON-034)"
+  },
+  "catalogAtStart": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "blocksCompleted": [
+    "M402 ampliado para Guardian Angel Joan; 51/51 testes focados passaram e Card Batch Fast passou; Engine Validation/Extended Soak seguem em andamento.",
+    "Fire Princess verificada sem branch/PR duplicada e ausente dos manifestos admitted/proposed/engine-v9; fonte oficial Konami CID 5197 e primeira impressão TCG 2003-03-01 conferidas."
+  ],
+  "nextTask": "Implementar helper puro para gatilho Fire Princess por evento de LP gain, dano 500 por cópia elegível, roteamento por equipe, ownership físico, privacidade/UID, limite de LP zero e testes de múltiplas cópias/efeito negado.",
+  "nextWindow": "2026-11-20T08:30:00-03:00"
+}
