@@ -12,7 +12,7 @@ const deckIds=[...normalIds.flatMap(id=>[id,id]),'54652250','31560081','14087893
 assert.ok(deckIds.length>=20&&deckIds.length<=30,'fixture deck must respect the 20–30 main-deck rule');
 
 function game(seed){
-  return tag.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'Jogador '+i,cards:deckIds,extra:['91152256']})),{seed,classic:true,first:0});
+  return tag.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'Jogador '+i,cards:deckIds,extra:['89112729']})),{seed,classic:true,first:0});
 }
 function held(s,seat){
   const team=seat%2;
@@ -196,7 +196,7 @@ test('Skelengel draws from the active representative deck into only that private
 test('Hane-Hane returns a partner-owned Fusion to that physical seat Extra Deck and keeps it private in Discord zones',()=>{
   let s=game('m428-hane-hane');
   const source=take(s,0,'07089711');
-  const fusion=takeExtra(s,2,'91152256');
+  const fusion=takeExtra(s,2,'89112729');
   s.core.turn=3;
   s.core.players[0].monsters=[monster(source,0,false)];
   s.core.players[1].monsters=[{...monster(fusion,1,true),properlySummoned:true}];
