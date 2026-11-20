@@ -38,7 +38,8 @@
     {
       "card": "Hane-Hane",
       "id": "07089711",
-      "behavior": "FLIP bounce returns a partner-owned Fusion to the original physical seat's Extra Deck, not the controlling team's or opponent's Extra Deck; tagZonesMessage exposes the Extra Deck only to its physical owner."
+      "behavior": "FLIP bounce returns a partner-owned Fusion to the original physical seat's Extra Deck, not the controlling team's or opponent's Extra Deck; tagZonesMessage exposes the Extra Deck only to its physical owner.",
+      "returnTarget": "Cyber Saurus (89112729), a currently certified Fusion used to verify physical-owner Extra Deck routing."
     }
   ],
   "validation": {
@@ -55,7 +56,8 @@
     "liveDiscordServerTest": false,
     "mergePerformed": false,
     "deployPerformed": false,
-    "inventoryConservation": "Every scenario snapshots the full tagInventory UID/card-ID multiset before effect resolution and asserts exact equality afterward; fixture duplicates are moved between the same partner's hand/deck, never removed."
+    "inventoryConservation": "Every scenario snapshots the full tagInventory UID/card-ID multiset before effect resolution and asserts exact equality afterward; fixture duplicates are moved between the same partner's hand/deck, never removed.",
+    "fixtureCorrection": "All four players' Extra Decks use certified Fusion Cyber Saurus (89112729); unsupported, uncertified ID 91152256 was removed after CI exposed the invalid fixture."
   },
   "limitations": [
     "This is an integration test against the local 2v2 duel and Discord payload builders; it is not a live Discord gateway/server test.",
