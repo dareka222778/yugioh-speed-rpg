@@ -1,0 +1,22 @@
+name: M408 Giant Trunade Discord 2v2
+on:
+  push:
+    branches:
+      - feat/work-m408-giant-trunade-discord-2v2-20261120
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/tagClassicGiantTrunadeDiscord2v2.test.cjs
+      - run: node scripts/check-card-certification.cjs
