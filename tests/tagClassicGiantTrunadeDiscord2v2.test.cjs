@@ -24,7 +24,7 @@ let request=0;
 function snapshot(){
  return JSON.stringify({
   players:db.prepare('SELECT * FROM players ORDER BY discord_id').all(),
-  cards:db.prepare('SELECT * FROM player_cards ORDER BY owner,card_key').all()
+  cards:db.prepare('SELECT * FROM player_cards').all()
  });
 }
 function held(s,seat){return seat<2?s.core.players[seat]:s.reserves[seat];}
