@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "mission": "M428",
+  "runId": "work-20261120T193627-0300-M428",
+  "reviewedAt": "2026-11-20",
+  "scope": "2v2 classic Flip integration and Discord payload contract only",
+  "rulesPreserved": {
+    "mainDeckMinimum": 20,
+    "mainDeckMaximum": 30,
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMaximum": 5
+  },
+  "scenarios": [
+    {
+      "card": "Magician of Faith",
+      "id": "31560081",
+      "behavior": "Flip Summon retrieves only a Spell from the shared team GY to the active representative's private hand; the inactive partner hand remains isolated; public Discord panel does not expose physical UIDs."
+    },
+    {
+      "card": "Mask of Darkness",
+      "id": "28933734",
+      "behavior": "Flip Summon selects only a Trap from the shared team GY and returns it to the active representative's private hand; a Spell remains in the GY and the inactive partner panel does not reveal the recovered card."
+    },
+    {
+      "card": "Hane-Hane",
+      "id": "07089711",
+      "behavior": "FLIP bounce returns a partner-owned Fusion to the original physical seat's Extra Deck, not the controlling team's or opponent's Extra Deck; tagZonesMessage exposes the Extra Deck only to its physical owner.",
+      "returnTarget": "Cyber Saurus (89112729), a currently certified Fusion used to verify physical-owner Extra Deck routing."
+    }
+  ],
+  "validation": {
+    "testCases": 3,
+    "expectedNewCertifications": 0,
+    "actualNewCertifications": 0,
+    "inventoryGranted": 0,
+    "databaseWrites": "only isolated temporary SQLite path used by tagUI/tagStore module initialization; no player records or production database touched",
+    "runtimeFilesChanged": [],
+    "cardMetadataChanged": false,
+    "effectRegistryChanged": false,
+    "releaseAllowlistChanged": false,
+    "certificateRegistryChanged": false,
+    "liveDiscordServerTest": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "inventoryConservation": "Every scenario snapshots the full tagInventory UID/card-ID multiset before effect resolution and asserts exact equality afterward; fixture duplicates are moved between the same partner's hand/deck, never removed.",
+    "fixtureCorrection": "All four players' Extra Decks use certified Fusion Cyber Saurus (89112729); unsupported, uncertified ID 91152256 was removed after CI exposed the invalid fixture.",
+    "duplicateCoverageAvoided": "Man-Eater Bug and Skelengel are already exercised through the actual Discord handler in PR #296 (M347); M428 intentionally limits its cases to the three additional certified FLIP effects.",
+    "extraDeckFixture": "Only physical seat 2 has one certified Cyber Saurus (89112729); seats 0, 1 and 3 have empty Extra Decks, so the teammate visibility assertion is unambiguous."
+  },
+  "limitations": [
+    "This is an integration test against the local 2v2 duel and Discord payload builders; it is not a live Discord gateway/server test.",
+    "No command registration or runtime effect code was changed.",
+    "Man-Eater Bug and Skelengel were excluded to avoid duplicating existing PR #296/M347 integration coverage."
+  ]
+}
