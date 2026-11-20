@@ -270,3 +270,16 @@ test('battle-damage helpers reject malformed totals and invalid physical seats',
     sourcePhysicalOwnerSeat: 0,
   }), /seat from 0 to 3/);
 });
+
+test('M399 evidence keeps all four candidates source-linked and explicitly uncertified', () => {
+  assert.equal(evidence.mission, 'M399');
+  assert.equal(evidence.cards.length, 4);
+  for (const card of evidence.cards) {
+    assert.equal(card.sourceVerified, true);
+    assert.match(card.officialSourceUrl, /^https:\/\/www\.db\.yugioh-card\.com\//);
+    assert.equal(card.historicalEligibility, 'pending OCG/TCG first-release audit');
+    assert.equal(card.certificationStatus, 'not-certified');
+    assert.equal(card.automaticCertification, false);
+    assert.match(card.behavioralTestStatus, /engine integration pending/);
+  }
+});
