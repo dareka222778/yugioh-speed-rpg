@@ -102,6 +102,8 @@ export function projectPrivateSetInspection(
 ): InspectionProjection {
   if (viewer.kind === "seat") {
     assertSeat(viewer.seat, "viewer.seat");
+    const physicalOwnerSeat = result.target.physicalOwnerSeat;
+    assertSeat(physicalOwnerSeat, "physicalOwnerSeat");
     if (viewer.seat === result.resolverSeat) {
       return {
         inspected: true,
@@ -110,7 +112,7 @@ export function projectPrivateSetInspection(
         targetUid: result.target.uid,
         cardId: result.target.id,
         cardName: result.target.name,
-        physicalOwnerSeat: result.target.physicalOwnerSeat,
+        physicalOwnerSeat,
         revealedToViewer: true,
       };
     }
