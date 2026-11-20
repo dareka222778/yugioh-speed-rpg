@@ -1,0 +1,85 @@
+{
+  "format": 1,
+  "mission": "M425",
+  "runId": "work-20261120T160001-0300-M425",
+  "reviewedAt": "2026-11-20",
+  "authority": "Konami official TCG/OCG Card Database",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "name": "Old Vindictive Magician",
+      "passcode": "45141844",
+      "konamiCardDatabaseId": 5651,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5651&ope=2",
+      "officialText": "FLIP: Target 1 monster your opponent controls; destroy that target.",
+      "firstTcgPrinting": "2003-10-10",
+      "firstTcgSetCode": "MFC-067",
+      "targeting": true,
+      "selectionTiming": "activation",
+      "maxTargets": 1,
+      "historicalEligibility": "TCG first printing is before 2004-09-30",
+      "certificationStatus": "not-certified"
+    },
+    {
+      "name": "4-Starred Ladybug of Doom",
+      "passcode": "83994646",
+      "konamiCardDatabaseId": 5139,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5139&ope=2&request_locale=ja",
+      "officialOcgText": "リバース：相手フィールド上に表側表示で存在するレベル４モンスターを全て破壊する。",
+      "officialText": "FLIP: Destroy all Level 4 monsters your opponent controls.",
+      "firstTcgPrinting": "2002-10-20",
+      "firstTcgSetCode": "PSV-088",
+      "firstOcgPrinting": "2000-12-14",
+      "firstOcgSetCode": "TB-38",
+      "targeting": false,
+      "selectionTiming": "resolution",
+      "maxTargets": 0,
+      "condition": "all face-up Level 4 monsters controlled by the opposing team",
+      "historicalEligibility": "TCG and OCG first printings are before 2004-09-30",
+      "certificationStatus": "not-certified"
+    },
+    {
+      "name": "Nobleman-Eater Bug",
+      "passcode": "65878864",
+      "konamiCardDatabaseId": 6122,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6122&ope=2&request_locale=ja",
+      "officialOcgText": "リバース：フィールド上のモンスター２体を破壊する。",
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP030",
+      "firstTcgPrinting": "2004-10-01",
+      "targeting": false,
+      "selectionTiming": "resolution",
+      "exactTargets": 2,
+      "historicalEligibility": "TCG printing is after the cutoff, but official OCG printing is before 2004-09-30; qualifies in the TCG/OCG union.",
+      "certificationStatus": "not-certified"
+    }
+  ],
+  "twoVTwoAdaptation": {
+    "teamMapping": "seat 0/2 = team 0; seat 1/3 = team 1",
+    "monsterZonesPerTeam": 3,
+    "fieldZone": "separate and never a monster target",
+    "effectController": "the team controlling the source when it flips resolves the effect; resolver seat must belong to that team",
+    "oldVindictive": "target exactly one monster controlled by the opposing team at activation; face-down monsters can be targeted by slot without revealing their identity; if target leaves the field before resolution, it is not destroyed",
+    "ladybug": "no targets; at resolution destroy every face-up Level 4 monster currently controlled by the opposing team; face-down Level 4 monsters are excluded by the official OCG wording",
+    "physicalOwnership": "destroyed monsters enter the shared Graveyard of the team belonging to the physical owner seat, not the current controller team",
+    "protection": "destructionProtected input models applicable destruction protection/replacement; protected monsters remain on field and do not release their zones",
+    "privacy": "target option projections hide face-down card IDs and never expose physical UIDs; destroyed cards become public when placed in the shared Graveyard",
+    "sourceDeparture": "FLIP trigger remains valid if battle destruction removes its source after the flip event and before trigger activation",
+    "noblemanEaterBug": "No targets; choose exactly two current monsters at resolution, regardless of team or face-up state; if fewer than two remain, resolves without effect; each destroyed monster goes to the physical owner's team Graveyard."
+  },
+  "validation": {
+    "focusedTests": 41,
+    "engineRegistration": "pending cooperative M61 resolver handoff",
+    "discordLiveValidation": false,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "mergePerformed": false,
+    "deployPerformed": false
+  },
+  "limits": [
+    "Pure helpers do not mutate field or Graveyard state.",
+    "No runtime/catalog/certification/Discord command files changed.",
+    "Actual card certification requires registration in the shared resolver and real 2v2/Discord integration tests."
+  ]
+}
