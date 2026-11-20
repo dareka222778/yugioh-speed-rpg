@@ -40,8 +40,8 @@
   "automaticCertifications": 0,
   "inventoryGranted": 0,
   "nextTask": "Auxiliar monitora Engine Validation/Extended Soak e sincroniza sem force; Work continua M61 handoff e integração de efeitos apenas após liberação.",
-  "endedAt": "2026-11-20T20:05:04-03:00",
-  "elapsedMinutes": 28.62,
+  "endedAt": "2026-11-20T20:11:02.362-03:00",
+  "elapsedMinutes": 34.59,
   "effectiveWorkMinutes": 10,
   "effectiveMinutesThisExecution": 10,
   "pr": 376,
@@ -96,5 +96,8 @@
     "As três cartas já eram certificadas; nenhum novo certificado.",
     "Engine Validation e Extended Soak ainda estavam em execução no checkpoint."
   ],
-  "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62"
+  "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "sharedSessionEffectiveMinutes": 13,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false
 }

@@ -3,9 +3,9 @@
   "runId": "work-20261120T195356-0300-M428-M430",
   "owner": "Work principal",
   "startedAt": "2026-11-20T19:53:56-03:00",
-  "endedAt": "2026-11-20T20:05:04-03:00",
-  "elapsedMinutes": 11.13,
-  "effectiveWorkMinutes": 10,
+  "endedAt": "2026-11-20T20:11:02.362-03:00",
+  "elapsedMinutes": 17.11,
+  "effectiveWorkMinutes": 13,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -482,5 +482,54 @@
   "nextWindow": "2026-11-20T22:30:00-03:00",
   "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "sharedHeadAfterCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
-  "stateUpdateBaseSha": "93d914f6a97b31a165fd2758f156e97dfc231c62"
+  "stateUpdateBaseSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "sharedSessionEffectiveMinutes": 13,
+  "postCheckpointAudit": {
+    "at": "2026-11-20T20:11:02.362-03:00",
+    "sharedHead": "8fc21e40d878f58ce20cb78767274f067d425c3d",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "compare": {
+      "status": "diverged",
+      "aheadBy": 692,
+      "behindBy": 10
+    },
+    "pullRequests": [
+      {
+        "number": 376,
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "merged": false
+      },
+      {
+        "number": 377,
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "merged": false
+      },
+      {
+        "number": 378,
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "merged": false
+      }
+    ],
+    "auxiliaryHandoffComments": [
+      7052836460,
+      7052836947,
+      7052837485
+    ],
+    "ci": {
+      "M428": "focused/Card Batch Fast/Milestone success; Engine Validation + Extended Soak in progress",
+      "M429": "focused/Card Batch Fast/Milestone success; Engine Validation + Extended Soak in progress",
+      "M430": "focused/Card Batch Fast/Milestone success; Engine Validation + Extended Soak in progress"
+    }
+  },
+  "auxiliaryHandoffComments": [
+    7052836460,
+    7052836947,
+    7052837485
+  ]
 }
