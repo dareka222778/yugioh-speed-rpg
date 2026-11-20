@@ -48,7 +48,8 @@
     "deployPerformed": false,
     "inventoryConservation": "Every scenario snapshots the full tagInventory UID/card-ID multiset before effect resolution and asserts exact equality afterward; fixture duplicates are moved between the same partner's hand/deck, never removed.",
     "fixtureCorrection": "All four players' Extra Decks use certified Fusion Cyber Saurus (89112729); unsupported, uncertified ID 91152256 was removed after CI exposed the invalid fixture.",
-    "duplicateCoverageAvoided": "Man-Eater Bug and Skelengel are already exercised through the actual Discord handler in PR #296 (M347); M428 intentionally limits its cases to the three additional certified FLIP effects."
+    "duplicateCoverageAvoided": "Man-Eater Bug and Skelengel are already exercised through the actual Discord handler in PR #296 (M347); M428 intentionally limits its cases to the three additional certified FLIP effects.",
+    "extraDeckFixture": "Only physical seat 2 has one certified Cyber Saurus (89112729); seats 0, 1 and 3 have empty Extra Decks, so the teammate visibility assertion is unambiguous."
   },
   "limitations": [
     "This is an integration test against the local 2v2 duel and Discord payload builders; it is not a live Discord gateway/server test.",
