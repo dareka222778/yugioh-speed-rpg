@@ -1,0 +1,24 @@
+name: M392 complete OCG cutoff evidence focused validation
+
+on:
+  pull_request:
+    paths:
+      - 'docs/evidence/m392-full-ocg-cutoff-audit.json'
+      - 'tests/m392FullOcgCutoffAudit.test.cjs'
+      - '.github/workflows/m392-ocg-cutoff-focused.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/m392FullOcgCutoffAudit.test.cjs
