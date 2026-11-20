@@ -41,12 +41,12 @@
     "locusts": "targets exactly one Spell/Trap or Field Zone card controlled by the opposing team at activation",
     "targetResolution": "a target that leaves the field before resolution is not destroyed; face-down targets are selected by slot without revealing identity",
     "ownership": "destroyed cards enter the shared Graveyard of the team belonging to the physical owner seat, not the current controller team",
-    "selfSet": "separate ignition effect, usable in either Main Phase of the controller team's turn once per physical UID per turn; caller persists the usage ledger",
+    "selfSet": "separate ignition effect, usable in either Main Phase of the controller team's turn once per physical UID per turn; caller persists the usage ledger A successfully resolved activation consumes that physical copy's once-per-turn usage even if the source left the field or is no longer face-up when the Chain resolves; an activation negated before resolution is handled by the caller's chain ledger.",
     "privacy": "face-down target options hide card IDs and physical UIDs; destroyed cards become public in the Graveyard",
     "sourceDeparture": "Flip Summon destruction trigger can resolve if the source is removed after the Flip Summon trigger is generated"
   },
   "validation": {
-    "focusedTests": 31,
+    "focusedTests": 32,
     "engineRegistration": "pending cooperative M61 resolver handoff",
     "discordLiveValidation": false,
     "newCertifications": 0,

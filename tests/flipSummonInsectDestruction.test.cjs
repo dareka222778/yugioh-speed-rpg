@@ -216,6 +216,13 @@ test('self-set is once per turn per physical card UID', () => {
   assert.equal(planSelfSet(SWARM_INSECT_CARDS.scarabs.id, { lastSelfSetTurn: TURN }).reason, 'self-set-already-used-this-turn');
   assert.equal(planSelfSet(SWARM_INSECT_CARDS.scarabs.id, { lastSelfSetTurn: TURN - 1 }).ok, true);
 });
+
+test('self-set usage is tracked per physical card UID rather than globally by card name', () => {
+  const usedCopy = planSelfSet(SWARM_INSECT_CARDS.scarabs.id, { card: { uid: 'copy-a' }, lastSelfSetTurn: TURN });
+  const freshCopy = planSelfSet(SWARM_INSECT_CARDS.scarabs.id, { card: { uid: 'copy-b' }, lastSelfSetTurn: null });
+  assert.equal(usedCopy.ok, false);
+  assert.equal(freshCopy.ok, true);
+});
 test('self-set requires a face-up source in one of the shared Monster Zones', () => {
   assert.equal(planSelfSet(SWARM_INSECT_CARDS.scarabs.id, { card: { position: 'face-down-defense' } }).reason, 'self-set-source-not-face-up');
   assert.equal(planSelfSet(SWARM_INSECT_CARDS.scarabs.id, { card: { zone: 'field' } }).reason, 'self-set-source-not-in-monster-zone');
@@ -237,6 +244,7 @@ test('self-set resolves without effect if the source leaves the field', () => {
   assert.equal(result.ok, true);
   assert.equal(result.value.changed, false);
   assert.equal(result.value.reason, 'source-left-field');
+  assert.equal(result.value.consumedTurn, TURN);
 });
 test('self-set does not change a source that is already face-down', () => {
   const plan = planSelfSet(SWARM_INSECT_CARDS.scarabs.id);
@@ -245,6 +253,7 @@ test('self-set does not change a source that is already face-down', () => {
   assert.equal(result.ok, true);
   assert.equal(result.value.changed, false);
   assert.equal(result.value.reason, 'source-not-face-up');
+  assert.equal(result.value.consumedTurn, TURN);
 });
 test('self-set can be used on the same turn as a Flip Summon because it is a card effect', () => {
   const plan = planSelfSet(SWARM_INSECT_CARDS.scarabs.id);

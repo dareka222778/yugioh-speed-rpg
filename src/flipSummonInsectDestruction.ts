@@ -405,18 +405,19 @@ export function resolveSwarmSelfSet(input: {
   if (!validSeat(plan.sourcePhysicalOwnerSeat) || !validTeam(plan.controllerTeam) || !validSeat(plan.resolverSeat)
     || teamOfSeat(plan.resolverSeat) !== plan.controllerTeam) return fail('invalid-self-set-plan-ownership');
   if (!Number.isInteger(plan.turn) || currentTurn !== plan.turn) return fail('self-set-resolution-turn-mismatch');
+  if (plan.lastSelfSetTurn !== null && (!Number.isInteger(plan.lastSelfSetTurn) || plan.lastSelfSetTurn > currentTurn)) return fail('invalid-self-set-usage-ledger');
   if (plan.lastSelfSetTurn === currentTurn) return fail('self-set-already-used-this-turn');
   const fieldError = validateFieldSnapshot(fieldAtResolution);
   if (fieldError) return fail('resolution-' + fieldError);
   const sourceNow = fieldAtResolution.find(card => card.uid === plan.sourceUid);
   if (!sourceNow) {
-    return { ok: true, value: { sourceUid: plan.sourceUid, changed: false, nextPosition: null, consumedTurn: null, reason: 'source-left-field' } };
+    return { ok: true, value: { sourceUid: plan.sourceUid, changed: false, nextPosition: null, consumedTurn: currentTurn, reason: 'source-left-field' } };
   }
   if (sourceNow.id !== plan.sourceCardId || sourceNow.physicalOwnerSeat !== plan.sourcePhysicalOwnerSeat || sourceNow.zone !== 'monster') {
     return fail('self-set-source-identity-changed');
   }
   if (sourceNow.position === 'face-down-defense') {
-    return { ok: true, value: { sourceUid: plan.sourceUid, changed: false, nextPosition: null, consumedTurn: null, reason: 'source-not-face-up' } };
+    return { ok: true, value: { sourceUid: plan.sourceUid, changed: false, nextPosition: null, consumedTurn: currentTurn, reason: 'source-not-face-up' } };
   }
   return {
     ok: true,
