@@ -159,3 +159,10 @@ test('M401 evidence remains source-linked and explicitly uncertified', () => {
   assert.equal(evidence.card.certificationStatus, 'not-certified');
   assert.equal(evidence.card.automaticCertification, false);
 });
+
+test('inspection rejects invalid resolver and viewer seats', () => {
+  assert.throws(() => inspectOpponentSetCard(request({ resolverSeat: 4 })), /seat from 0 to 3/);
+  const result = inspectOpponentSetCard(request());
+  assert.ok(result);
+  assert.throws(() => projectPrivateSetInspection(result, { kind: 'seat', seat: 4 }), /seat from 0 to 3/);
+});
