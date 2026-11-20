@@ -268,6 +268,6 @@ test('M402 evidence is official-source-linked and remains uncertified', () => {
   assert.match(evidence.card.officialSourceUrl, /cid=6034/);
   assert.equal(evidence.card.firstTcgRelease, '2004-06-01');
   assert.equal(evidence.card.historicalEligibility, 'eligible-before-2004-09-30');
-  assert.equal(evidence.card.certificationStatus, 'not-certified');
-  assert.equal(evidence.card.automaticCertification, false);
+  assert.equal(evidence.validation.certificationStatus, 'not-certified');
+  assert.equal(evidence.validation.automaticCertification, false);
 });
