@@ -12,7 +12,7 @@ const deckIds=[...normalIds.flatMap(id=>[id,id]),'31560081','14087893','28933734
 assert.ok(deckIds.length>=20&&deckIds.length<=30,'fixture deck must respect the 20–30 main-deck rule');
 
 function game(seed){
-  return tag.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'Jogador '+i,cards:deckIds,extra:['89112729']})),{seed,classic:true,first:0});
+  return tag.createTagDuel([0,1,2,3].map(i=>({id:'p'+i,name:'Jogador '+i,cards:deckIds,extra:i===2?['89112729']:[]})),{seed,classic:true,first:0});
 }
 function held(s,seat){
   const team=seat%2;
