@@ -44,7 +44,8 @@
     "certificateRegistryChanged": false,
     "liveDiscordServerTest": false,
     "mergePerformed": false,
-    "deployPerformed": false
+    "deployPerformed": false,
+    "inventoryConservation": "Each scenario snapshots the full tagInventory UID/card-ID multiset before effect resolution and asserts exact equality afterward; duplicate fixture cards in partner hands are moved back to that partner's deck, never removed from inventory."
   },
   "limitations": [
     "This is an integration test against the local 2v2 duel and Discord payload builders; it is not a live Discord gateway/server test.",

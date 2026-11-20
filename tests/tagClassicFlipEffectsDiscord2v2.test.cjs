@@ -39,10 +39,13 @@ function record(s,id){
   return {id,guild:'guild-fixture',channel:'channel-fixture',message:'message-fixture',revision:7,updated:Date.now(),status:'playing',
     members:s.members.map(member=>({id:member.id,name:member.name,accepted:true})),state:s,rules:'classic-owned'};
 }
-function assertInventoryUnique(s){
-  const inventory=tag.tagInventory(s);
-  assert.equal(new Set(inventory.map(card=>card.uid)).size,inventory.length);
-  return inventory;
+function inventorySnapshot(s){
+  return tag.tagInventory(s).map(card=>card.uid+':'+card.id).sort();
+}
+function assertInventoryConserved(s,before){
+  const after=inventorySnapshot(s);
+  assert.deepEqual(after,before,'2v2 FLIP resolution must conserve every physical UID and card ID');
+  assert.equal(new Set(after.map(entry=>entry.split(':')[0])).size,after.length);
 }
 
 test('Man-Eater Bug resolves a FLIP destruction across teams and Discord hides the opposing set identity',()=>{
@@ -54,6 +57,7 @@ test('Man-Eater Bug resolves a FLIP destruction across teams and Discord hides t
   s.core.players[0].monsters=[monster(source,0,false)];
   s.core.players[1].monsters=[monster(target,1,true),monster(hidden,1,false)];
   tag.assertTagDuel(s);
+  const inventoryBefore=inventorySnapshot(s);
   const targetUid=target.uid,hiddenUid=hidden.uid,hiddenName=getCard(hidden.id).name;
   s=act(s,'position',action=>action.mode==='flip');
   assert.equal(s.core.phase,'choice');
@@ -61,7 +65,7 @@ test('Man-Eater Bug resolves a FLIP destruction across teams and Discord hides t
   assert.ok(s.core.players[1].grave.some(card=>card.uid===targetUid),'destroyed target remains in the shared opposing GY with its physical UID');
   assert.ok(!s.core.players[1].monsters.some(card=>card.uid===targetUid));
   assert.ok(s.core.players[1].monsters.some(card=>card.uid===hiddenUid&&card.faceUp===false));
-  assertInventoryUnique(s);
+  assertInventoryConserved(s,inventoryBefore);
 
   const publicPayload=ui.tagPublicMessage(record(s,'m428-man-eater'));
   const p0Zones=ui.tagZonesMessage(record(s,'m428-man-eater'),'p0');
@@ -83,8 +87,11 @@ test('Magician of Faith returns a shared-GY Spell to the active representative h
   s.core.players[0].grave=[{...spell,owner:0}];
   // Remove any same-name copy from the inactive partner hand so the privacy
   // assertion can distinguish the physical seat's private projection.
+  const partnerSpellCopies=s.reserves[2].hand.filter(card=>card.id===spell.id);
   s.reserves[2].hand=s.reserves[2].hand.filter(card=>card.id!==spell.id);
+  s.reserves[2].deck.push(...partnerSpellCopies);
   tag.assertTagDuel(s);
+  const inventoryBefore=inventorySnapshot(s);
   const spellUid=spell.uid,spellName=getCard(spell.id).name;
   s=act(s,'position',action=>action.mode==='flip');
   assert.equal(s.core.phase,'choice');
@@ -92,7 +99,7 @@ test('Magician of Faith returns a shared-GY Spell to the active representative h
   s=act(s,'choose',action=>action.target===spellUid);
   assert.ok(tag.tagMemberHand(s,'p0').some(card=>card.uid===spellUid));
   assert.ok(!tag.tagMemberHand(s,'p2').some(card=>card.uid===spellUid));
-  assertInventoryUnique(s);
+  assertInventoryConserved(s,inventoryBefore);
 
   const r=record(s,'m428-magician-of-faith');
   const publicPayload=ui.tagPublicMessage(r);
@@ -114,8 +121,11 @@ test('Mask of Darkness retrieves only a Trap from the shared GY into the active 
   s.core.turn=3;
   s.core.players[0].monsters=[monster(source,0,false)];
   s.core.players[0].grave=[{...trap,owner:0},{...spell,owner:0}];
+  const partnerTrapCopies=s.reserves[2].hand.filter(card=>card.id===trap.id);
   s.reserves[2].hand=s.reserves[2].hand.filter(card=>card.id!==trap.id);
+  s.reserves[2].deck.push(...partnerTrapCopies);
   tag.assertTagDuel(s);
+  const inventoryBefore=inventorySnapshot(s);
   const trapUid=trap.uid,spellUid=spell.uid,trapName=getCard(trap.id).name;
   s=act(s,'position',action=>action.mode==='flip');
   assert.equal(s.core.phase,'choice');
@@ -124,7 +134,7 @@ test('Mask of Darkness retrieves only a Trap from the shared GY into the active 
   assert.ok(tag.tagMemberHand(s,'p0').some(card=>card.uid===trapUid));
   assert.ok(!tag.tagMemberHand(s,'p2').some(card=>card.uid===trapUid));
   assert.ok(s.core.players[0].grave.some(card=>card.uid===spellUid),'a Spell is not a legal Mask of Darkness target');
-  assertInventoryUnique(s);
+  assertInventoryConserved(s,inventoryBefore);
   const r=record(s,'m428-mask-of-darkness');
   const publicPayload=ui.tagPublicMessage(r),p0Private=ui.tagPrivateMessage(r,'p0'),p2Private=ui.tagPrivateMessage(r,'p2');
   for(const payload of [publicPayload,p0Private,p2Private])validateDiscordPayload(payload);
