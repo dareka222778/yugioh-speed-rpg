@@ -1,0 +1,50 @@
+{
+  "mission": "M418",
+  "runId": "work-20261120T142909-0300-M418",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "33faee91c7f01605adaa427a2169302859d2a75d",
+  "branch": "feat/work-m418-tag-classic-core-invariants-20261120",
+  "scope": [
+    "tests/helpers/tagClassic2v2.cjs",
+    "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+    "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+    "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+    "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+    "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+    "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+    "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+    "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+    "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs",
+    ".github/workflows/m418-tag-classic-core-invariants.yml"
+  ],
+  "behavioralCoverage": [
+    "Eagle Eye blocks Trap Hole and Torrential Tribute responses across both teams",
+    "Cannon Soldier ignition is not offered in Battle Phase",
+    "Fairy Meteor Crush applies piercing damage to the opposing team through the shared field",
+    "D.D. Assailant banishes both battle-destroyed monsters to their team zones",
+    "D.D. Crazy Beast banishes only the battle-destroyed victim to the opposing team zone",
+    "Current classic rules allow seven during the turn and require End Phase discard to six",
+    "3 Monster Zones and 3 Spell/Trap Zones are shared within each team",
+    "Magician of Faith returns an ally-owned Spell to the physical owner's hand"
+  ],
+  "blocked": [
+    {
+      "card": "Needle Ball",
+      "passcode": "94230224",
+      "reason": "Not present in getPlayableCard/allowlist at the shared base. The required flip LP-cost registration touches M61-protected monsterEffects.ts and duelEngineCurrent.ts. The focused test is explicitly skipped until a cooperative handoff and real behavior are available."
+    }
+  ],
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "certificationFilesChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "realDiscordValidated": false
+  }
+}
