@@ -168,7 +168,7 @@ test('Skelengel draws from the active representative deck into only that private
   s=passResponse(s);
   assert.notEqual(s.core.phase,'response');
   const drawn=activeDeckBefore.find(card=>!s.core.players[0].deck.some(candidate=>candidate.uid===card.uid));
-  assert.ok(drawn,'Skelengel must remove exactly one card from the active team's deck');
+  assert.ok(drawn,"Skelengel must remove exactly one card from the active team deck");
   assert.equal(s.core.players[0].deck.length,activeDeckBefore.length-1);
   assert.deepEqual(s.reserves[2].deck.map(card=>card.uid).sort(),partnerDeckBefore,'inactive partner deck must not be drawn from');
   assert.ok(tag.tagMemberHand(s,'p0').some(card=>card.uid===drawn.uid));
