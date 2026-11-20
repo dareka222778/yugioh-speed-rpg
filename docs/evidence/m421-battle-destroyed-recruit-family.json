@@ -1,0 +1,57 @@
+{
+  "mission": "M421",
+  "family": "battle-destroyed-same-name-recruit",
+  "cards": [
+    {
+      "name": "Giant Germ",
+      "passcode": "95178994",
+      "konamiId": 4921,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4921&ope=2&request_locale=en",
+      "firstPrinting": {
+        "tcg": "Spell Ruler (MRL-085), 2002-09-16",
+        "ocg": "Spell Ruler (MRL-085), 2002-10-24"
+      },
+      "effectParaphrase": "When destroyed by battle and sent to the Graveyard, inflict 500 damage to the opposing player/team, then optionally Special Summon any number of Giant Germs from the physical owner's Deck in face-up Attack Position.",
+      "sourceVerified": true,
+      "historicalEligibility": "pre-2004-09-30 printing verified; admission review still required",
+      "certificationStatus": "not-certified",
+      "behavioralTestStatus": "focused-passing; engine integration pending",
+      "automaticCertification": false
+    },
+    {
+      "name": "Nimble Momonga",
+      "passcode": "22567609",
+      "konamiId": 4922,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4922&ope=2&request_locale=en",
+      "firstPrinting": {
+        "tcg": "Spell Ruler (MRL-086), 2002-09-16",
+        "ocg": "Spell Ruler (MRL-086), 2002-10-24"
+      },
+      "effectParaphrase": "If destroyed by battle and sent to the Graveyard, gain 1000 LP, then optionally Special Summon any number of Nimble Momongas from the physical owner's Deck in face-down Defense Position.",
+      "sourceVerified": true,
+      "historicalEligibility": "pre-2004-09-30 printing verified; admission review still required",
+      "certificationStatus": "not-certified",
+      "behavioralTestStatus": "focused-passing; engine integration pending",
+      "automaticCertification": false
+    }
+  ],
+  "sharedFieldRules": {
+    "teamMapping": "seat 0/2 = team 0; seat 1/3 = team 1",
+    "monsterZonesPerTeam": 3,
+    "fieldZoneIsSeparate": true,
+    "deckSource": "physical owner's private Deck only",
+    "physicalOwnerGetsTriggerWhenControlWasStolen": "historical 2003 tournament ruling mirror corroborates owner-based trigger; this helper preserves physical owner and does not infer controller ownership",
+    "lpIsTeamShared": true
+  },
+  "officialRulingReference": {
+    "url": "https://ms.yugipedia.com/a/a1/2003_tournament_rulings.pdf",
+    "status": "secondary archival mirror; corroborative only, not a current official Konami source"
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "engineRegistration": "pending M61 cooperative handoff",
+  "discordLiveValidation": false,
+  "mergePerformed": false,
+  "deployPerformed": false
+}
