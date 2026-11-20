@@ -375,11 +375,15 @@ test('LV7 rejects a selected target because its effect does not target', () => {
   assert.deepEqual(result, { ok: false, reason: 'lv7-effect-does-not-target' });
 });
 
-test('LV7 cannot be Normal Summoned, Set, or Special Summoned by another method', () => {
-  assert.equal(canSummonArmedDragonLv7('normal'), false);
-  assert.equal(canSummonArmedDragonLv7('set'), false);
-  assert.equal(canSummonArmedDragonLv7('other-special'), false);
-  assert.equal(canSummonArmedDragonLv7('armed-dragon-lv5'), true);
+test('LV7 cannot be Normal Summoned/Set; LV5 and Level Up! hand/Deck summons are valid', () => {
+  assert.equal(canSummonArmedDragonLv7('normal', 'hand'), false);
+  assert.equal(canSummonArmedDragonLv7('set', 'hand'), false);
+  assert.equal(canSummonArmedDragonLv7('other-special', 'hand'), false);
+  assert.equal(canSummonArmedDragonLv7('armed-dragon-lv5', 'deck'), true);
+  assert.equal(canSummonArmedDragonLv7('level-up', 'hand'), true);
+  assert.equal(canSummonArmedDragonLv7('level-up', 'deck'), true);
+  assert.equal(canSummonArmedDragonLv7('level-up', 'grave'), false);
+  assert.equal(canSummonArmedDragonLv7('level-up', 'banished'), false);
 });
 
 test('discard effect rejects duplicate UIDs across source, cost and field', () => {
