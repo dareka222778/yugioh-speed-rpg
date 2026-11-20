@@ -4,9 +4,9 @@
   "runId": "work-20261120T195356-0300-M430",
   "owner": "Work principal",
   "startedAt": "2026-11-20T19:53:56-03:00",
-  "endedAt": "2026-11-20T20:11:02.362-03:00",
-  "elapsedMinutes": 17.11,
-  "sharedSessionEffectiveMinutes": 13,
+  "endedAt": "2026-11-20T20:13:33.420-03:00",
+  "elapsedMinutes": 19.62,
+  "sharedSessionEffectiveMinutes": 14,
   "countedInCombinedSession": true,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
@@ -44,15 +44,18 @@
     },
     "cardBatchFast": {
       "run": 44834003544,
-      "status": "in_progress"
+      "status": "success"
     },
     "milestone1000": {
       "run": 44834003563,
-      "status": "job-success-artifact-produced",
+      "status": "success",
       "artifact": 14676519389
     },
     "engineValidation": {
       "run": 44834003611,
+      "status": "in_progress"
+    },
+    "extendedSoak": {
       "status": "in_progress"
     }
   },

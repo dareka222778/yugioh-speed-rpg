@@ -3,9 +3,9 @@
   "runId": "work-20261120T195356-0300-M428-M430",
   "owner": "Work principal",
   "startedAt": "2026-11-20T19:53:56-03:00",
-  "endedAt": "2026-11-20T20:11:02.362-03:00",
-  "elapsedMinutes": 17.11,
-  "effectiveWorkMinutes": 13,
+  "endedAt": "2026-11-20T20:13:33.420-03:00",
+  "elapsedMinutes": 19.62,
+  "effectiveWorkMinutes": 14,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -424,9 +424,9 @@
     "source": "Artifacts Milestone 1000: 14677008129, 14676737112, 14676519389"
   },
   "ciSummary": {
-    "M428": "focused/Card Batch Fast/Milestone success; Engine Validation + Extended Soak in progress",
-    "M429": "focused/Card Batch Fast/Milestone success; Engine Validation + Extended Soak in progress",
-    "M430": "focused success; Milestone plan artifact produced; Card Batch Fast/Engine Validation in progress"
+    "M428": "focused, Card Batch Fast, Milestone 1000, Engine Validation e Extended Soak concluídos com sucesso",
+    "M429": "focused, Card Batch Fast, Milestone 1000 e Extended Soak concluídos com sucesso; Engine Validation ainda em execução",
+    "M430": "focused, Card Batch Fast e Milestone 1000 concluídos com sucesso; Engine Validation/Extended Soak ainda em execução"
   },
   "handoffM61": {
     "requested": true,
@@ -478,19 +478,19 @@
       "permission": "Monitor CI; non-forced sync; correct only M430 files."
     }
   ],
-  "nextTask": "Auxiliar acompanha CI/Extended Soak e sincroniza somente branches M428–M430 sem force. Work retoma a integração do resolver após handoff M61; se não houver liberação, inicia a próxima família em arquivos independentes.",
+  "nextTask": "Auxiliar sincroniza M428–M430 por merge não-forçado a partir do HEAD compartilhado mais recente e acompanha CI restante. Work retoma integração de runtime após handoff M61; M407 responsável corrige o typo apontado no comentário 7052902781. Nenhuma reserva de terceiro foi alterada.",
   "nextWindow": "2026-11-20T22:30:00-03:00",
   "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "sharedHeadAfterCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "stateUpdateBaseSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "sharedSessionEffectiveMinutes": 13,
   "postCheckpointAudit": {
-    "at": "2026-11-20T20:11:02.362-03:00",
-    "sharedHead": "8fc21e40d878f58ce20cb78767274f067d425c3d",
+    "at": "2026-11-20T20:13:33.420-03:00",
+    "sharedHead": "21d56e57f9bbbaeed8eaf15aaec1311be979af1c",
     "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
     "compare": {
       "status": "diverged",
-      "aheadBy": 692,
+      "aheadBy": 693,
       "behindBy": 10
     },
     "pullRequests": [
@@ -499,37 +499,133 @@
         "state": "open",
         "draft": true,
         "mergeable": false,
-        "merged": false
+        "merged": false,
+        "ahead": 13,
+        "behind": 3
       },
       {
         "number": 377,
         "state": "open",
         "draft": true,
         "mergeable": false,
-        "merged": false
+        "merged": false,
+        "ahead": 1,
+        "behind": 3
       },
       {
         "number": 378,
         "state": "open",
         "draft": true,
         "mergeable": false,
-        "merged": false
+        "merged": false,
+        "ahead": 3,
+        "behind": 3
       }
     ],
     "auxiliaryHandoffComments": [
       7052836460,
       7052836947,
-      7052837485
+      7052837485,
+      7052884393,
+      7052884810,
+      7052885288
     ],
+    "handoffM61": {
+      "pr": 17,
+      "commentId": 7052779359,
+      "status": "no response"
+    },
     "ci": {
-      "M428": "focused/Card Batch Fast/Milestone success; Engine Validation + Extended Soak in progress",
-      "M429": "focused/Card Batch Fast/Milestone success; Engine Validation + Extended Soak in progress",
-      "M430": "focused/Card Batch Fast/Milestone success; Engine Validation + Extended Soak in progress"
+      "M428": {
+        "focused": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success",
+        "extendedSoak": "success",
+        "runs": {
+          "focused": 44833214993,
+          "cardBatchFast": 44833215101,
+          "milestone1000": 44833215070,
+          "engineValidation": 44833215028
+        }
+      },
+      "M429": {
+        "focused": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "success",
+        "runs": {
+          "focused": 44833477657,
+          "cardBatchFast": 44833477702,
+          "milestone1000": 44833477542,
+          "engineValidation": 44833477681
+        }
+      },
+      "M430": {
+        "focused": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress",
+        "runs": {
+          "focused": 44834003494,
+          "cardBatchFast": 44834003544,
+          "milestone1000": 44834003563,
+          "engineValidation": 44834003611
+        }
+      }
     }
   },
   "auxiliaryHandoffComments": [
     7052836460,
     7052836947,
     7052837485
+  ],
+  "parallelAuditM402M407": [
+    {
+      "mission": "M402",
+      "pr": 351,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    {
+      "mission": "M403",
+      "pr": 352,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    {
+      "mission": "M405",
+      "pr": 353,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    {
+      "mission": "M406",
+      "pr": 354,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    {
+      "mission": "M407",
+      "pr": 355,
+      "focused": "failure",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "failure",
+      "extendedSoak": "success",
+      "diagnosis": "tests/immortalOfThunder.test.cjs uses effectNegatedAtResolutionAtResolution instead of required effectNegatedAtResolution in flipInput/sendInput and negation overrides; 25 failures cascade from missing boolean.",
+      "commentId": 7052902781,
+      "filesModifiedByWorkPrincipal": false
+    }
   ]
 }
