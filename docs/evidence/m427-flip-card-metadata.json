@@ -167,12 +167,29 @@
     "engineRegistration": "not performed; two new records remain registered-only until separate behavior certification",
     "discordLiveValidation": false,
     "mergePerformed": false,
-    "deployPerformed": false
+    "deployPerformed": false,
+    "cardBatchFastInitialFailure": {
+      "runId": 44829605868,
+      "failingTest": "reviewed append-only extension preserves the entire original file: src/cardMetadata.ts",
+      "cause": "M15 baseline normalizer did not yet recognize the new M427 import/spread pair.",
+      "correctionCommit": "7c202ad5151446d345aaa4c38309cfd45596f966",
+      "corrected": "Exact import and spread normalization added; rerun triggered by the updated PR head."
+    }
   },
   "limits": [
     "M427 does not implement or certify the effects; M424-M426 own the behavior primitives and their tests.",
     "Five of seven identities already had metadata, certificates and distribution entries before M427; only two absent Swarm metadata records are added.",
     "The new Swarm records intentionally have no Effect/MonsterDefinition and remain unavailable through getPlayableCard/cardDistributionAllowed.",
     "No live Discord server, persistent database, player inventory or production deployment was touched."
-  ]
+  ],
+  "reservedFiles": [
+    "scripts/mission15-reviewed-extensions.cjs"
+  ],
+  "baselineProtection": {
+    "file": "src/cardMetadata.ts",
+    "baselineProof": "docs/evidence/mission15-preserved-baseline.json",
+    "normalizer": "scripts/mission15-reviewed-extensions.cjs",
+    "allowedDelta": "The normalizer removes only the exact M427 import and array spread before comparing the preserved baseline bytes.",
+    "intent": "Keep the existing reviewed append-only invariant intact; no baseline bytes outside the explicit M427 extension are changed."
+  }
 }

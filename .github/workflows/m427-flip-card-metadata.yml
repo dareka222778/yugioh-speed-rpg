@@ -6,6 +6,7 @@ on:
       - 'src/cardMetadata.ts'
       - 'tests/m424m426FlipMetadata.test.cjs'
       - 'docs/evidence/m427-flip-card-metadata.json'
+      - 'scripts/mission15-reviewed-extensions.cjs'
       - '.github/workflows/m427-flip-card-metadata.yml'
   workflow_dispatch:
 
