@@ -82,5 +82,6 @@
     "Jar of Greed já era certificado; nenhuma nova certificação.",
     "Card Batch Fast e Engine Validation ainda em execução; Extended Soak pendente."
   ],
-  "nextTask": "Auxiliar monitora M430; Work retoma handoff M61 e integração de runtime após liberação."
+  "nextTask": "Auxiliar monitora M430; Work retoma handoff M61 e integração de runtime após liberação.",
+  "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62"
 }

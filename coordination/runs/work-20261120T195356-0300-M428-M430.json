@@ -479,5 +479,8 @@
     }
   ],
   "nextTask": "Auxiliar acompanha CI/Extended Soak e sincroniza somente branches M428–M430 sem force. Work retoma a integração do resolver após handoff M61; se não houver liberação, inicia a próxima família em arquivos independentes.",
-  "nextWindow": "2026-11-20T22:30:00-03:00"
+  "nextWindow": "2026-11-20T22:30:00-03:00",
+  "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "sharedHeadAfterCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "stateUpdateBaseSha": "93d914f6a97b31a165fd2758f156e97dfc231c62"
 }

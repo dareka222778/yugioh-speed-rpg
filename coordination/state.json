@@ -7690,7 +7690,7 @@
     }
   ],
   "updatedAt": "2026-11-20T02:48:32.028Z",
-  "lastCheckpointCommit": "pending",
+  "lastCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "concurrentReservations": [
     {
       "runId": "work-20261115T042526-0300",
@@ -10151,7 +10151,7 @@
   "latestIndependentWorkActivityAt": "2026-11-20T20:05:04-03:00",
   "latestIndependentWorkPR": 378,
   "latestIndependentWorkCheckpoint": "coordination/runs/work-20261120T195356-0300-M428-M430.json",
-  "latestIndependentWorkCheckpointCommit": "pending",
+  "latestIndependentWorkCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "latestIndependentWorkStatus": "released-to-auxiliary-monitor-ci",
   "latestIndependentWorkEffectiveMinutes": 10,
   "latestIndependentWorkCatalog": {
@@ -10424,7 +10424,7 @@
       ".github/workflows/m401-private-set-inspection.yml"
     ]
   },
-  "lastCheckpointCommitSha": "pending",
+  "lastCheckpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "lastIndependentWorkStatus": "released-to-auxiliary-monitor-ci",
   "currentWorkReservationM402": {
     "runId": "work-20261120T043227-0300-M402",
@@ -10962,5 +10962,7 @@
     "auxiliaryAuthorization": "Monitorar CI, sincronizar por merge não-forçado e corrigir somente os três arquivos M430; não tocar runtime, catálogo, certificados, coordenação, dados ou produção."
   },
   "lastIndependentWorkPR": 378,
-  "lastIndependentWorkCheckpointCommit": "pending"
+  "lastIndependentWorkCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "lastWorkCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62"
 }

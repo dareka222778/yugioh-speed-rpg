@@ -83,5 +83,6 @@
     "As seis cartas já eram certificadas; M429 não adiciona certificações.",
     "Engine Validation/Extended Soak ainda em execução."
   ],
-  "nextTask": "Auxiliar monitora M429; Work segue para integração de runtime somente após handoff M61."
+  "nextTask": "Auxiliar monitora M429; Work segue para integração de runtime somente após handoff M61.",
+  "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62"
 }
