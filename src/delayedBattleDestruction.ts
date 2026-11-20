@@ -1,6 +1,7 @@
 export const DELAYED_BATTLE_DESTRUCTION_CARD_IDS = Object.freeze([
   '86100785',
-  '85255550'
+  '85255550',
+  '13599884'
 ] as const);
 
 export type DelayedBattleDestructionCardId =
@@ -16,12 +17,40 @@ export type DelayedBattleZone =
   | 'grave'
   | 'banished'
   | 'extra';
+export type DelayedBattleTriggerRole = 'attacker' | 'defender';
+export type DelayedBattleTurnCountMode = 'all-turns-fifth' | 'opponent-turn-third';
+
+type CardRule = Readonly<{
+  triggerRole: DelayedBattleTriggerRole;
+  turnCountMode: DelayedBattleTurnCountMode;
+  requiresNonMachineTarget: boolean;
+}>;
+
+const CARD_RULES: Readonly<Record<DelayedBattleDestructionCardId, CardRule>> = Object.freeze({
+  '86100785': Object.freeze({
+    triggerRole: 'attacker',
+    turnCountMode: 'all-turns-fifth',
+    requiresNonMachineTarget: false
+  }),
+  '85255550': Object.freeze({
+    triggerRole: 'attacker',
+    turnCountMode: 'all-turns-fifth',
+    requiresNonMachineTarget: false
+  }),
+  '13599884': Object.freeze({
+    triggerRole: 'defender',
+    turnCountMode: 'opponent-turn-third',
+    requiresNonMachineTarget: true
+  })
+});
 
 export type DelayedBattleDestructionEvent = Readonly<{
   eventId: string;
   sourceCardId: DelayedBattleDestructionCardId;
   sourceUid: string;
-  attackerTeam: DelayedBattleTeam;
+  sourceTeam: DelayedBattleTeam;
+  triggerRole: DelayedBattleTriggerRole;
+  turnCountMode: DelayedBattleTurnCountMode;
   targetUid: string;
   targetEpoch: number;
   targetPhysicalOwnerSeat: DelayedBattleSeat;
@@ -35,14 +64,16 @@ export type ScheduleDelayedBattleDestructionInput = Readonly<{
   eventId: string;
   sourceCardId: string;
   sourceUid: string;
-  attackerTeam: DelayedBattleTeam;
+  sourceTeam: DelayedBattleTeam;
   targetUid: string;
   targetEpoch: number;
   targetPhysicalOwnerSeat: DelayedBattleSeat;
   targetControllerSeat: DelayedBattleSeat;
+  targetRace?: string;
   attackTurn: number;
   phase: string;
   targetWasMonsterAtAttack: boolean;
+  sourceEffectWasFaceUp: boolean;
   sourceDestroyedByBattle?: boolean;
   effectNegated?: boolean;
 }>;
@@ -57,7 +88,9 @@ export type ScheduleDelayedBattleDestructionResult =
         | 'wrong-window'
         | 'target-not-opponent-monster'
         | 'duplicate-event'
-        | 'effect-negated';
+        | 'effect-negated'
+        | 'source-not-face-up'
+        | 'steel-scorpion-requires-non-machine-target';
     }>;
 
 export type DelayedBattleTargetSnapshot = Readonly<{
@@ -110,18 +143,20 @@ function isSupportedCard(value: string): value is DelayedBattleDestructionCardId
 }
 
 function validEvent(event: DelayedBattleDestructionEvent): boolean {
-  return !!event &&
-    validId(event.eventId) &&
-    isSupportedCard(event.sourceCardId) &&
+  if (!event || !isSupportedCard(event.sourceCardId)) return false;
+  const rule = CARD_RULES[event.sourceCardId];
+  return validId(event.eventId) &&
     validId(event.sourceUid) &&
-    isTeam(event.attackerTeam) &&
+    isTeam(event.sourceTeam) &&
+    event.triggerRole === rule.triggerRole &&
+    event.turnCountMode === rule.turnCountMode &&
     validId(event.targetUid) &&
     Number.isSafeInteger(event.targetEpoch) &&
     event.targetEpoch >= 0 &&
     isSeat(event.targetPhysicalOwnerSeat) &&
     event.targetPhysicalOwnerTeam === teamOfSeat(event.targetPhysicalOwnerSeat) &&
     isTeam(event.targetControllerTeamAtAttack) &&
-    event.targetControllerTeamAtAttack !== event.attackerTeam &&
+    event.targetControllerTeamAtAttack !== event.sourceTeam &&
     Number.isSafeInteger(event.attackTurn) &&
     event.attackTurn >= 1 &&
     Number.isSafeInteger(event.dueTurn) &&
@@ -129,9 +164,14 @@ function validEvent(event: DelayedBattleDestructionEvent): boolean {
 }
 
 /**
- * Schedule the non-targeting delayed destruction after damage calculation.
- * The attack turn is turn 1; both players' turns count, so the fifth turn is
- * attackTurn + 4. The source may already have been destroyed by battle.
+ * Schedule a non-targeting delayed battle destruction after damage calculation.
+ * Zone Eater/Swordsman count the attack turn as turn 1 and count all turns.
+ * Steel Scorpion counts the attack turn as the opponent's first turn and waits
+ * for the opponent's third turn. With alternating team turns, both windows
+ * map to the global turn index attackTurn + 4.
+ *
+ * The source may already have been destroyed by battle; its trigger still
+ * resolves if the effect was available and not negated.
  */
 export function scheduleDelayedBattleDestruction(
   input: ScheduleDelayedBattleDestructionInput,
@@ -140,7 +180,7 @@ export function scheduleDelayedBattleDestruction(
   if (!isSupportedCard(input.sourceCardId)) return { ok: false, reason: 'unsupported-source' };
   if (!validId(input.eventId) ||
       !validId(input.sourceUid) ||
-      !isTeam(input.attackerTeam) ||
+      !isTeam(input.sourceTeam) ||
       !validId(input.targetUid) ||
       !Number.isSafeInteger(input.targetEpoch) ||
       input.targetEpoch < 0 ||
@@ -150,17 +190,30 @@ export function scheduleDelayedBattleDestruction(
       input.attackTurn < 1 ||
       !Array.isArray(existingEvents) ||
       input.targetWasMonsterAtAttack !== true ||
+      typeof input.sourceEffectWasFaceUp !== 'boolean' ||
       (input.sourceDestroyedByBattle !== undefined && typeof input.sourceDestroyedByBattle !== 'boolean') ||
-      (input.effectNegated !== undefined && typeof input.effectNegated !== 'boolean')) {
+      (input.effectNegated !== undefined && typeof input.effectNegated !== 'boolean') ||
+      (input.targetRace !== undefined && typeof input.targetRace !== 'string')) {
     return { ok: false, reason: 'invalid-context' };
   }
   if (input.effectNegated === true) return { ok: false, reason: 'effect-negated' };
+  if (!input.sourceEffectWasFaceUp) return { ok: false, reason: 'source-not-face-up' };
   if (input.phase !== 'damage-calculation-complete') {
     return { ok: false, reason: 'wrong-window' };
   }
 
+  const rule = CARD_RULES[input.sourceCardId];
+  if (rule.requiresNonMachineTarget) {
+    if (!input.targetRace || input.targetRace.trim().length === 0) {
+      return { ok: false, reason: 'invalid-context' };
+    }
+    if (input.targetRace.trim().toLowerCase() === 'machine') {
+      return { ok: false, reason: 'steel-scorpion-requires-non-machine-target' };
+    }
+  }
+
   const targetControllerTeamAtAttack = teamOfSeat(input.targetControllerSeat);
-  if (targetControllerTeamAtAttack === input.attackerTeam) {
+  if (targetControllerTeamAtAttack === input.sourceTeam) {
     return { ok: false, reason: 'target-not-opponent-monster' };
   }
   if (existingEvents.some(event => event?.eventId === input.eventId)) {
@@ -174,7 +227,9 @@ export function scheduleDelayedBattleDestruction(
     eventId: input.eventId,
     sourceCardId: input.sourceCardId,
     sourceUid: input.sourceUid,
-    attackerTeam: input.attackerTeam,
+    sourceTeam: input.sourceTeam,
+    triggerRole: rule.triggerRole,
+    turnCountMode: rule.turnCountMode,
     targetUid: input.targetUid,
     targetEpoch: input.targetEpoch,
     targetPhysicalOwnerSeat: input.targetPhysicalOwnerSeat,
@@ -187,7 +242,7 @@ export function scheduleDelayedBattleDestruction(
 }
 
 /**
- * Resolve the delayed destruction during the fifth turn's End Phase.
+ * Resolve the delayed destruction at the scheduled End Phase.
  * The target is tracked by physical UID + epoch, not by its former zone or
  * controller. A card that left and re-entered the field is a new instance.
  * The destruction does not create a chain block and routes to the physical

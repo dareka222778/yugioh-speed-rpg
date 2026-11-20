@@ -34,22 +34,42 @@
       "behaviorStatus": "not-certified",
       "certificationStatus": "not-certified",
       "automaticCertification": false
+    },
+    {
+      "id": "13599884",
+      "name": "Steel Scorpion",
+      "konamiCardDatabaseId": 4400,
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4400&ope=2&request_locale=ae",
+      "officialOcgFaqUrl": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=4400&ope=4&request_locale=ja",
+      "officialText": "A non-Machine monster attacking Steel Scorpion is destroyed at the End Phase of its opponent's 2nd turn after the attack.",
+      "officialRuling": "The attack turn is the opponent's first counted turn; count only the opponent's turns; destroy at the End Phase of the opponent's third turn; the effect triggers after damage calculation even if Steel Scorpion is destroyed by battle; no chain block is created by the destruction processing.",
+      "earliestOcgRelease": "2002-10-24",
+      "earliestOcgSet": "Metal Raiders (MRD-029)",
+      "historicalArchiveFirstObserved": "1999-07-22",
+      "historicalArchiveDateConflict": true,
+      "eligibilityBasis": "Official Konami OCG database date, not the conflicting archive firstObserved date",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
     }
   ],
   "sharedRuling": {
-    "attackTurnCountsAs": 1,
-    "dueTurnOffset": 4,
-    "countBothPlayersTurns": true,
-    "destructionWindow": "End Phase of the fifth turn",
-    "chainBlockCreated": false,
+    "nonTargeting": true,
     "sourceMayBeDestroyedByBattleBeforeEffectActivation": true,
-    "targeting": false
+    "destructionProcessingCreatesChainBlock": false,
+    "globalTurnOffsetWithAlternatingTeams": 4,
+    "turnCountingModes": {
+      "Zone Eater and Swordsman from a Distant Land": "attack turn is turn 1; count both players' turns; fifth turn End Phase",
+      "Steel Scorpion": "attack turn is opponent's first counted turn; count opponent turns only; opponent's third turn End Phase"
+    }
   },
   "implementationNotes": [
     "The event is captured after damage calculation from the attack snapshot; the source monster does not need to remain on the field.",
-    "The attacked monster is tracked by physical UID and epoch. Leaving and re-entering the field creates a different instance and prevents stale destruction.",
+    "The delayed target is tracked by physical UID and epoch. Leaving and re-entering the field creates a different instance and prevents stale destruction.",
     "Control may change before the due End Phase; if the same physical card remains in the Monster Zone, it is still destroyed.",
-    "The destination Graveyard follows the physical owner's team, not the controller at resolution."
+    "The destination Graveyard follows the physical owner's team, not the controller at resolution.",
+    "Steel Scorpion's historical archive firstObserved date conflicts with Konami's OCG database. The official 2002-10-24 date is used for cutoff eligibility."
   ],
   "scope": "Isolated delayed battle-destruction primitive, tests, official evidence and focused workflow only. No card registry, catalog, certification, Discord handler or persistent duel-state integration.",
   "certificationGate": "Do not certify until integrated into the live battle/End Phase resolver and validated in complete 2v2 matches."

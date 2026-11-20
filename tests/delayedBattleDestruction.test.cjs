@@ -11,7 +11,7 @@ function schedule(overrides = {}) {
     eventId: 'event-01',
     sourceCardId: '86100785',
     sourceUid: 'source-uid',
-    attackerTeam: 0,
+    sourceTeam: 0,
     targetUid: 'target-uid',
     targetEpoch: 3,
     targetPhysicalOwnerSeat: 1,
@@ -19,6 +19,7 @@ function schedule(overrides = {}) {
     attackTurn: 7,
     phase: 'damage-calculation-complete',
     targetWasMonsterAtAttack: true,
+    sourceEffectWasFaceUp: true,
     ...overrides
   };
 }
@@ -41,16 +42,31 @@ function target(overrides = {}) {
   };
 }
 
-test('both Zone Eater and Swordsman from a Distant Land share the OCG delayed-destruction schedule', () => {
-  assert.deepEqual(DELAYED_BATTLE_DESTRUCTION_CARD_IDS, ['86100785', '85255550']);
-  for (const sourceCardId of DELAYED_BATTLE_DESTRUCTION_CARD_IDS) {
+test('Zone Eater and Swordsman share the fifth-turn all-turns schedule', () => {
+  assert.deepEqual(DELAYED_BATTLE_DESTRUCTION_CARD_IDS, ['86100785', '85255550', '13599884']);
+  for (const sourceCardId of ['86100785', '85255550']) {
     const result = scheduleDelayedBattleDestruction(schedule({ sourceCardId }));
     assert.equal(result.ok, true);
     assert.equal(result.event.dueTurn, 11);
+    assert.equal(result.event.turnCountMode, 'all-turns-fifth');
+    assert.equal(result.event.triggerRole, 'attacker');
   }
 });
 
-test('the attack turn is counted as turn one, so the fifth turn is attackTurn + 4', () => {
+test('Steel Scorpion counts the attack turn as the opponent first turn and resolves on the opponent third turn', () => {
+  const result = scheduleDelayedBattleDestruction(schedule({
+    sourceCardId: '13599884',
+    sourceTeam: 0,
+    targetControllerSeat: 1,
+    targetRace: 'Warrior'
+  }));
+  assert.equal(result.ok, true);
+  assert.equal(result.event.dueTurn, 11);
+  assert.equal(result.event.turnCountMode, 'opponent-turn-third');
+  assert.equal(result.event.triggerRole, 'defender');
+});
+
+test('the attack turn is counted as the first turn in the global sequence', () => {
   const result = scheduleDelayedBattleDestruction(schedule({ attackTurn: 20 }));
   assert.equal(result.ok, true);
   assert.equal(result.event.dueTurn, 24);
@@ -76,7 +92,7 @@ test('the attack snapshot must identify a monster target', () => {
   );
 });
 
-test('the attacked monster must have been controlled by the opposing team', () => {
+test('the target must be controlled by the opposing team', () => {
   assert.deepEqual(
     scheduleDelayedBattleDestruction(schedule({ targetControllerSeat: 2 })),
     { ok: false, reason: 'target-not-opponent-monster' }
@@ -91,6 +107,41 @@ test('control ownership and physical ownership are kept separate', () => {
   assert.equal(result.ok, true);
   assert.equal(result.event.targetControllerTeamAtAttack, 1);
   assert.equal(result.event.targetPhysicalOwnerTeam, 0);
+});
+
+test('Steel Scorpion does not schedule against a Machine attacker', () => {
+  assert.deepEqual(
+    scheduleDelayedBattleDestruction(schedule({
+      sourceCardId: '13599884',
+      targetControllerSeat: 1,
+      targetRace: 'Machine'
+    })),
+    { ok: false, reason: 'steel-scorpion-requires-non-machine-target' }
+  );
+});
+
+test('Steel Scorpion requires the attacking monster race for its non-Machine condition', () => {
+  assert.deepEqual(
+    scheduleDelayedBattleDestruction(schedule({
+      sourceCardId: '13599884',
+      targetControllerSeat: 1
+    })),
+    { ok: false, reason: 'invalid-context' }
+  );
+});
+
+test('the source effect must have been face-up at its trigger window', () => {
+  assert.deepEqual(
+    scheduleDelayedBattleDestruction(schedule({ sourceEffectWasFaceUp: false })),
+    { ok: false, reason: 'source-not-face-up' }
+  );
+});
+
+test('a negated source effect does not schedule delayed destruction', () => {
+  assert.deepEqual(
+    scheduleDelayedBattleDestruction(schedule({ effectNegated: true })),
+    { ok: false, reason: 'effect-negated' }
+  );
 });
 
 test('unsupported card identities are rejected', () => {
@@ -109,7 +160,7 @@ test('duplicate event IDs cannot schedule the same attack twice', () => {
   );
 });
 
-test('a pending event waits before its fifth turn', () => {
+test('a pending event waits before its due turn', () => {
   assert.deepEqual(
     resolveDelayedBattleDestruction(event(), 10, 'end', target()),
     { status: 'waiting' }
@@ -212,11 +263,4 @@ test('scheduling and resolution do not mutate the attack snapshot, event or targ
   resolveDelayedBattleDestruction(pending, 11, 'end', current);
   assert.deepEqual(pending, beforeEvent);
   assert.deepEqual(current, beforeTarget);
-});
-
-test('a negated source effect does not schedule delayed destruction', () => {
-  assert.deepEqual(
-    scheduleDelayedBattleDestruction(schedule({ effectNegated: true })),
-    { ok: false, reason: 'effect-negated' }
-  );
 });
