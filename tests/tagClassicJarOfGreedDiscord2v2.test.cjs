@@ -183,16 +183,15 @@ test('Jar of Greed set by an inactive partner draws from the active representati
   state.core.turn=3;
   state.core.players[0].lp=4000;
   state.core.players[1].lp=4000;
+  const initialDeckSizes=[0,1,2,3].map(seat=>holder(state,seat).deck.length+holder(state,seat).hand.length);
+  assert.deepEqual(initialDeckSizes,[20,20,20,20],'all four physical Main Decks begin at the owner minimum');
   const summoned=ensureInHand(state,1,normalIds[0]);
   const jar=setBackrow(state,2,JAR_OF_GREED);
   const drawn=ensureTopDeck(state,0,normalIds[1]);
   assert.match(jar.uid,/^m2:/,'the shared Set Trap must preserve physical owner seat 2');
   assert.match(drawn.uid,/^m0:/,'the deterministic draw belongs to active representative seat 0');
-  assert.equal(holder(state,0).deck.length+holder(state,0).hand.length,20);
-  assert.equal(holder(state,1).deck.length+holder(state,1).hand.length,20);
-  assert.equal(holder(state,2).deck.length+holder(state,2).hand.length,19,
-    'the partner-owned Trap is now in the shared backrow, not the physical hand or Deck');
-  assert.equal(holder(state,3).deck.length+holder(state,3).hand.length,20);
+  assert.ok(state.core.players[0].backrow.some(card=>card.uid===jar.uid&&!card.faceUp),
+    'the physical seat 2 Trap is stored in the shared team-0 backrow');
   assertRules(state);
   tag.assertTagDuel(state);
   const publicBefore=JSON.stringify(tag.publicTagDuel(state));
@@ -206,6 +205,7 @@ test('Jar of Greed set by an inactive partner draws from the active representati
   const end=tag.tagActions(state,member(0)).find(action=>action.kind==='end');
   assert.ok(end,'seat 0 must be able to end its turn');
   state=tag.stepTagDuel(state,member(0),end);
+  assert.equal(state.core.turn,4);
   assert.equal(tag.tagDecisionMember(state).id,member(1),'opposing physical seat 1 acts next');
 
   const summonAction=tag.tagActions(state,member(1)).find(action=>
