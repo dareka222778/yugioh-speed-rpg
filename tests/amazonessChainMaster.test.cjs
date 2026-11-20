@@ -13,7 +13,7 @@ const {
 
 function sourceCard(options = {}) {
   return {
-    uid: options.uid || 'chain-master-uid',
+    uid: options.uid ?? 'chain-master-uid',
     id: options.id || AMAZONESS_CHAIN_MASTER_ID,
     physicalOwnerSeat: options.physicalOwnerSeat ?? 0,
     zone: options.zone || 'grave',
