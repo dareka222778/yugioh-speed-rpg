@@ -39,7 +39,7 @@ function monster(uid, atk, options = {}) {
     controllerTeam: options.controllerTeam ?? 1,
     zone: 'monster',
     faceUp: options.faceUp ?? true,
-    atk
+    currentAtk: atk
   };
 }
 
@@ -50,7 +50,7 @@ function discarded(atk = 1800, options = {}) {
     physicalOwnerSeat: options.physicalOwnerSeat ?? 0,
     zone: 'hand',
     kind: 'monster',
-    atk
+    originalAtk: atk
   };
 }
 
