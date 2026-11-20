@@ -1,0 +1,48 @@
+{
+  "format": 1,
+  "mission": "M405",
+  "runId": "work-20261120T045946-0300-M405",
+  "card": {
+    "name": "Dancing Fairy",
+    "portugueseName": "Fada Dançarina",
+    "id": "90925163",
+    "konamiDatabaseCid": 5201,
+    "attribute": "WIND",
+    "type": "Fairy/Effect",
+    "level": 4,
+    "atk": 1700,
+    "def": 1000,
+    "officialText": "As long as this card remains in face-up Defense Position on your side of the field, increase your Life Points by 1000 points during each of your Standby Phases.",
+    "officialTextVerified": true,
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5201&ope=2&request_locale=en",
+    "firstTcgRelease": "2003-03-01",
+    "firstTcgSet": "Labyrinth of Nightmare (LON-038)",
+    "firstTcgReleaseVerifiedByOfficialDatabase": true,
+    "historicalCutoff": "2004-09-30",
+    "eligibleByFirstTcgRelease": true
+  },
+  "behavior": {
+    "gainPerEligibleCopyPerStandbyPhase": 1000,
+    "eligibleOnlyWhen": [
+      "the resolving Standby Phase belongs to the card's current controller team",
+      "the physical card remains in a Monster Zone",
+      "the card is face-up",
+      "the card is in Defense Position",
+      "the effect is not negated"
+    ],
+    "teamLifePointsAreShared": true,
+    "physicalOwnerSeatIsPreservedSeparatelyFromControllerTeam": true,
+    "multipleEligibleCopiesStack": true,
+    "sameEventIdIsIdempotent": true,
+    "distinctStandbyPhaseEventIdsCanResolveAgain": true,
+    "lifePointsAreNotCappedAt8000": true
+  },
+  "validation": {
+    "implementation": "isolated pure helper with focused unit tests",
+    "integrationStatus": "not-registered-in-main-resolver",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  }
+}
