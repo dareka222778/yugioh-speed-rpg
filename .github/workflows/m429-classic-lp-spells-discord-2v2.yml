@@ -1,0 +1,27 @@
+name: M429 Classic LP Spells Discord 2v2
+on:
+  pull_request:
+    paths:
+      - 'tests/tagClassicLpSpellsDiscord2v2.test.cjs'
+      - 'docs/evidence/m429-classic-lp-spells-discord-2v2.json'
+      - '.github/workflows/m429-classic-lp-spells-discord-2v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  classic-lp-spells-discord-2v2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Verify classic LP spell ownership and Discord idempotency in 2v2
+        run: node --test tests/tagClassicLpSpellsDiscord2v2.test.cjs

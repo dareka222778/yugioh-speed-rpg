@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "mission": "M429",
+  "runId": "work-20261120T195356-0300-M429",
+  "owner": "Work principal",
+  "priority": "P1 — validar seis Magias de LP já certificadas no handler Discord 2v2, com roteamento de equipe, Deck/mão físicos, idempotência de sessão e privacidade.",
+  "reviewedAt": "2026-11-20",
+  "scope": "Six already-certified classic LP spells through actual 2v2 Discord interaction handler",
+  "cards": [
+    {
+      "name": "Sparks",
+      "id": "76103675",
+      "konamiCid": 4349,
+      "effect": "burn 200 LP to opposing team",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4349&ope=2&request_locale=en"
+    },
+    {
+      "name": "Hinotama",
+      "id": "46130346",
+      "konamiCid": 4350,
+      "effect": "burn 500 LP to opposing team",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4350&ope=2&request_locale=en"
+    },
+    {
+      "name": "Blue Medicine",
+      "id": "20871001",
+      "konamiCid": 4840,
+      "effect": "recover 400 LP for activating team",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4840&ope=2&request_locale=en"
+    },
+    {
+      "name": "Soul of the Pure",
+      "id": "47852924",
+      "konamiCid": 4347,
+      "effect": "recover 800 LP for activating team",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4347&ope=2&request_locale=en"
+    },
+    {
+      "name": "Tremendous Fire",
+      "id": "46918794",
+      "konamiCid": 4353,
+      "effect": "deal 1000 damage to opponent and 500 to controller",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4353&ope=2&request_locale=en"
+    },
+    {
+      "name": "Upstart Goblin",
+      "id": "70368879",
+      "konamiCid": 4895,
+      "effect": "draw 1 from active physical Deck, then opponent team gains 1000 LP",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4895&ope=2&request_locale=en"
+    }
+  ],
+  "rulesPreserved": {
+    "mainDeckMinimum": 20,
+    "mainDeckMaximum": 30,
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMaximum": 5
+  },
+  "validation": {
+    "testCases": 6,
+    "realDiscordHandler": "handleTagComponent offline; no gateway or live server",
+    "payloads": [
+      "tagPrivateMessage",
+      "tagPublicMessage"
+    ],
+    "physicalOwnership": "m0–m3 UID prefix and four separate private hands/decks",
+    "idempotency": "session revision increments once for each action",
+    "inventoryGranted": 0,
+    "automaticCertifications": 0,
+    "newCertifications": 0,
+    "persistentDatabase": "isolated temporary SQLite only",
+    "runtimeFilesChanged": [],
+    "catalogChanged": false,
+    "certificatesChanged": false,
+    "allowlistChanged": false,
+    "playerDataChanged": false,
+    "productionChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false
+  },
+  "limitations": [
+    "This is an offline Discord interaction-handler integration, not a live Discord gateway/server test.",
+    "All six cards were already certified; M429 adds no new certification.",
+    "No runtime or effect registry changes are included."
+  ]
+}
