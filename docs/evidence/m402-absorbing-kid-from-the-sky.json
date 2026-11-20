@@ -25,13 +25,16 @@
     "destination": "The destroyed monster must actually reach the Graveyard; banish, hand, Deck, Extra Deck, or remaining on the field do not qualify.",
     "gainFormula": "destroyedMonsterLevel * 300",
     "recipient": "The source's current controller team, not its physical owner seat.",
-    "battleRoles": ["attacker", "defender"],
+    "battleRoles": [
+      "attacker",
+      "defender"
+    ],
     "oncePerTurn": false,
     "2v2": "Apply recovery to one shared team Life Point total while retaining physical owner seat and UIDs for identity/audit."
   },
   "validation": {
     "focusedTestFile": "tests/absorbingKidFromTheSky.test.cjs",
-    "expectedFocusedCases": 28,
+    "expectedFocusedCases": 31,
     "runtimeIntegration": "pending-explicit-M61-handoff",
     "certificationStatus": "not-certified",
     "automaticCertification": false,
