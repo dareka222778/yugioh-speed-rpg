@@ -1,0 +1,80 @@
+{
+  "format": 1,
+  "mission": "M399",
+  "reviewedAt": "2026-11-19",
+  "authority": "Konami official Yu-Gi-Oh! TCG Card Database",
+  "purpose": "Preparação comportamental de uma família de eventos de dano de batalha. Esta evidência e os helpers unitários não constituem integração ao resolver nem certificação.",
+  "sourcePolicy": {
+    "cardText": "Resumos concisos em paráfrase do texto oficial.",
+    "historicalCutoff": "Elegibilidade histórica OCG/TCG até 2004-09-30 permanece pendente; não inferir elegibilidade OCG a partir de reimpressão TCG.",
+    "certification": "Nenhuma carta é certificada por esta preparação. Exigir registro no motor, integração Discord 2v2 e regressões reais antes de alterar certificados."
+  },
+  "family": "battle-damage-routing-and-post-damage-triggers",
+  "cards": [
+    {
+      "id": "94004268",
+      "konamiId": 5284,
+      "name": "Amazoness Swords Woman",
+      "mechanic": "battle-damage-recipient-redirection",
+      "effectSummary": "Em batalhas envolvendo esta carta, o dano de batalha que seu controlador receberia é redirecionado ao oponente.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5284&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "helper-unit-only; engine integration pending",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "5023",
+      "konamiId": 4507,
+      "name": "Airknight Parshath",
+      "mechanic": "piercing-and-battle-damage-draw",
+      "effectSummary": "Causa dano perfurante ao atacar Defesa e compra uma carta quando efetivamente causa dano de batalha.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4507&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "helper-unit-only; engine integration pending",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "88236094",
+      "konamiId": 6026,
+      "name": "Aswan Apparition",
+      "mechanic": "battle-damage-trap-recovery-to-deck-top",
+      "effectSummary": "Depois de causar dano de batalha, pode devolver uma Armadilha do Cemitério ao topo do Deck.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6026&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "helper-unit-only; engine integration pending",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "87340664",
+      "konamiId": 5966,
+      "name": "Atomic Firefly",
+      "mechanic": "battle-destruction-damage-to-destroying-player",
+      "effectSummary": "Se esta carta face-up for destruída por batalha, causa 1000 de dano ao jogador que a destruiu.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5966&request_locale=en",
+      "sourceVerified": true,
+      "historicalEligibility": "pending OCG/TCG first-release audit",
+      "engineReviewStatus": "pending",
+      "behavioralTestStatus": "helper-unit-only; engine integration pending",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "integrationBlockers": [
+    "src/monsterEffects.ts",
+    "src/duelEngineCurrent.ts"
+  ],
+  "notes": [
+    "As operações recebem o time controlador separadamente do proprietário físico.",
+    "Compras/recuperações usam o assento físico que resolve o efeito, preservando a identidade do dono original.",
+    "Nenhum catálogo, allowlist, certificado, inventário ou dado persistente é alterado."
+  ]
+}
