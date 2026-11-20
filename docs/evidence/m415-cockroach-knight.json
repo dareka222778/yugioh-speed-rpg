@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "mission": "M415",
+  "reviewedAt": "2026-11-20",
+  "authority": "Konami official Yu-Gi-Oh! OCG Card Database and OCG supplementary rules",
+  "historicalCutoffInclusive": "2004-09-30",
+  "card": {
+    "id": "33413638",
+    "name": "Cockroach Knight",
+    "konamiCardDatabaseId": 4485,
+    "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4485&ope=2&request_locale=ja",
+    "officialOcgFaqUrl": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=4485&ope=4&request_locale=ja",
+    "officialTextJa": "このカードが墓地へ送られた時、このカードはデッキの一番上に戻る。",
+    "officialSupplementaryRuling": "The effect is a mandatory trigger effect that activates in the Graveyard, does not target, and also activates when the card is sent from the hand or Deck. It can activate during the Damage Step.",
+    "earliestOcgRelease": "1999-08-26",
+    "earliestOcgSet": "Booster 4",
+    "otherOfficialOcgPrints": [
+      {"date":"2000-09-09","set":"Booster R2"},
+      {"date":"2001-08-30","set":"Booster Chronicle"},
+      {"date":"2003-01-23","set":"Duelist Legacy Volume 4"}
+    ],
+    "eligibleAtHistoricalCutoff": true,
+    "behaviorStatus": "not-certified",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false
+  },
+  "implementationNotes": [
+    "The trigger is activated in the Graveyard; this is not a replacement effect and creates a chain link.",
+    "The card is returned to the top of the Deck belonging to its physical owner, not the controller at the time it was sent.",
+    "The helper requires the same physical UID and graveyard epoch to remain in the GY at resolution; it emits a move plan without mutating duel state.",
+    "The top-deck operation does not shuffle the Deck."
+  ],
+  "scope": "Isolated behavior primitive, focused tests, official evidence and workflow only. No effect registry, catalog, certification, command, persistence or live Discord integration.",
+  "certificationGate": "Do not certify until integrated into the real GY trigger queue, chain resolution, and physical-owner Deck movement in complete 2v2 tests."
+}
