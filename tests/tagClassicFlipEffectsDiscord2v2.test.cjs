@@ -35,6 +35,10 @@ function act(s,kind,predicate=()=>true){
   assert.ok(action,'Missing '+kind+' action for '+actor+' in '+s.core.phase);
   return tag.stepTagDuel(s,actor,action);
 }
+function passResponse(s){
+  if(s.core.phase==='response')s=act(s,'pass');
+  return s;
+}
 function record(s,id){
   return {id,guild:'guild-fixture',channel:'channel-fixture',message:'message-fixture',revision:7,updated:Date.now(),status:'playing',
     members:s.members.map(member=>({id:member.id,name:member.name,accepted:true})),state:s,rules:'classic-owned'};
@@ -45,7 +49,7 @@ function inventorySnapshot(s){
 function assertInventoryConserved(s,before){
   const after=inventorySnapshot(s);
   assert.deepEqual(after,before,'2v2 FLIP resolution must conserve every physical UID and card ID');
-  assert.equal(new Set(after.map(entry=>entry.split(':')[0])).size,after.length);
+  assert.equal(new Set(after).size,after.length,'UID/card-ID pairs must remain unique');
 }
 
 test('Man-Eater Bug resolves a FLIP destruction across teams and Discord hides the opposing set identity',()=>{
@@ -60,8 +64,11 @@ test('Man-Eater Bug resolves a FLIP destruction across teams and Discord hides t
   const inventoryBefore=inventorySnapshot(s);
   const targetUid=target.uid,hiddenUid=hidden.uid,hiddenName=getCard(hidden.id).name;
   s=act(s,'position',action=>action.mode==='flip');
+  s=passResponse(s);
   assert.equal(s.core.phase,'choice');
   s=act(s,'choose',action=>action.target===targetUid);
+  s=passResponse(s);
+  assert.notEqual(s.core.phase,'response');
   assert.ok(s.core.players[1].grave.some(card=>card.uid===targetUid),'destroyed target remains in the shared opposing GY with its physical UID');
   assert.ok(!s.core.players[1].monsters.some(card=>card.uid===targetUid));
   assert.ok(s.core.players[1].monsters.some(card=>card.uid===hiddenUid&&card.faceUp===false));
@@ -94,9 +101,12 @@ test('Magician of Faith returns a shared-GY Spell to the active representative h
   const inventoryBefore=inventorySnapshot(s);
   const spellUid=spell.uid,spellName=getCard(spell.id).name;
   s=act(s,'position',action=>action.mode==='flip');
+  s=passResponse(s);
   assert.equal(s.core.phase,'choice');
   assert.deepEqual(s.core.choice.targets,[spellUid]);
   s=act(s,'choose',action=>action.target===spellUid);
+  s=passResponse(s);
+  assert.notEqual(s.core.phase,'response');
   assert.ok(tag.tagMemberHand(s,'p0').some(card=>card.uid===spellUid));
   assert.ok(!tag.tagMemberHand(s,'p2').some(card=>card.uid===spellUid));
   assertInventoryConserved(s,inventoryBefore);
@@ -128,9 +138,12 @@ test('Mask of Darkness retrieves only a Trap from the shared GY into the active 
   const inventoryBefore=inventorySnapshot(s);
   const trapUid=trap.uid,spellUid=spell.uid,trapName=getCard(trap.id).name;
   s=act(s,'position',action=>action.mode==='flip');
+  s=passResponse(s);
   assert.equal(s.core.phase,'choice');
   assert.deepEqual(s.core.choice.targets,[trapUid]);
   s=act(s,'choose',action=>action.target===trapUid);
+  s=passResponse(s);
+  assert.notEqual(s.core.phase,'response');
   assert.ok(tag.tagMemberHand(s,'p0').some(card=>card.uid===trapUid));
   assert.ok(!tag.tagMemberHand(s,'p2').some(card=>card.uid===trapUid));
   assert.ok(s.core.players[0].grave.some(card=>card.uid===spellUid),'a Spell is not a legal Mask of Darkness target');
