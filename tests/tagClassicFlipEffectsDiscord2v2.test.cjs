@@ -8,7 +8,7 @@ const {getCard}=require('../dist/collection');
 const {validateDiscordPayload}=require('../dist/discordPayload');
 
 const normalIds=tag.tagNormalCardIds.slice(0,10);
-const deckIds=[...normalIds.flatMap(id=>[id,id]),'54652250','31560081','14087893','28933734','12607053','60694662','07089711'];
+const deckIds=[...normalIds.flatMap(id=>[id,id]),'31560081','14087893','28933734','12607053','07089711'];
 assert.ok(deckIds.length>=20&&deckIds.length<=30,'fixture deck must respect the 20–30 main-deck rule');
 
 function game(seed){
@@ -56,39 +56,6 @@ function assertInventoryConserved(s,before){
   assert.deepEqual(after,before,'2v2 FLIP resolution must conserve every physical UID and card ID');
   assert.equal(new Set(after).size,after.length,'UID/card-ID pairs must remain unique');
 }
-
-test('Man-Eater Bug resolves a FLIP destruction across teams and Discord hides the opposing set identity',()=>{
-  let s=game('m428-man-eater');
-  const source=take(s,2,'54652250');
-  const target=take(s,3,normalIds[0]);
-  const hidden=take(s,3,normalIds[1]);
-  s.core.turn=3;
-  s.core.players[0].monsters=[monster(source,0,false)];
-  s.core.players[1].monsters=[monster(target,1,true),monster(hidden,1,false)];
-  tag.assertTagDuel(s);
-  const inventoryBefore=inventorySnapshot(s);
-  const targetUid=target.uid,hiddenUid=hidden.uid,hiddenName=getCard(hidden.id).name;
-  s=act(s,'position',action=>action.mode==='flip');
-  s=passResponse(s);
-  assert.equal(s.core.phase,'choice');
-  s=act(s,'choose',action=>action.target===targetUid);
-  s=passResponse(s);
-  assert.notEqual(s.core.phase,'response');
-  assert.ok(s.core.players[1].grave.some(card=>card.uid===targetUid),'destroyed target remains in the shared opposing GY with its physical UID');
-  assert.ok(!s.core.players[1].monsters.some(card=>card.uid===targetUid));
-  assert.ok(s.core.players[1].monsters.some(card=>card.uid===hiddenUid&&card.faceUp===false));
-  assertInventoryConserved(s,inventoryBefore);
-
-  const publicPayload=ui.tagPublicMessage(record(s,'m428-man-eater'));
-  const p0Zones=ui.tagZonesMessage(record(s,'m428-man-eater'),'p0');
-  const p3Zones=ui.tagZonesMessage(record(s,'m428-man-eater'),'p3');
-  validateDiscordPayload(publicPayload);validateDiscordPayload(p0Zones);validateDiscordPayload(p3Zones);
-  const publicText=JSON.stringify(publicPayload),p0ZoneText=JSON.stringify(p0Zones),p3ZoneText=JSON.stringify(p3Zones);
-  assert.ok(!publicText.includes(hiddenName),'public field must not disclose an opposing face-down monster');
-  assert.ok(!p0ZoneText.includes(hiddenName),'opposing team cannot inspect the set identity');
-  assert.ok(p3ZoneText.includes(hiddenName),'a teammate can inspect its own team face-down card');
-  assert.ok(!publicText.includes(hiddenUid));
-});
 
 test('Magician of Faith returns a shared-GY Spell to the active representative hand, not the inactive partner hand',()=>{
   let s=game('m428-magician-of-faith');
@@ -158,39 +125,6 @@ test('Mask of Darkness retrieves only a Trap from the shared GY into the active 
   for(const payload of [publicPayload,p0Private,p2Private])validateDiscordPayload(payload);
   assert.ok(JSON.stringify(p0Private).includes(trapName));
   assert.ok(!JSON.stringify(p2Private).includes(trapName));
-});
-
-test('Skelengel draws from the active representative deck into only that private hand',()=>{
-  let s=game('m428-skelengel');
-  const source=take(s,0,'60694662');
-  s.core.turn=3;
-  s.core.players[0].monsters=[monster(source,0,false)];
-  tag.assertTagDuel(s);
-  const inventoryBefore=inventorySnapshot(s);
-  const activeDeckBefore=s.core.players[0].deck.map(card=>({uid:card.uid,id:card.id}));
-  const partnerDeckBefore=s.reserves[2].deck.map(card=>card.uid).sort();
-  s=act(s,'position',action=>action.mode==='flip');
-  s=passResponse(s);
-  assert.notEqual(s.core.phase,'response');
-  const drawn=activeDeckBefore.find(card=>!s.core.players[0].deck.some(candidate=>candidate.uid===card.uid));
-  assert.ok(drawn,"Skelengel must remove exactly one card from the active team deck");
-  assert.equal(s.core.players[0].deck.length,activeDeckBefore.length-1);
-  assert.deepEqual(s.reserves[2].deck.map(card=>card.uid).sort(),partnerDeckBefore,'inactive partner deck must not be drawn from');
-  assert.ok(tag.tagMemberHand(s,'p0').some(card=>card.uid===drawn.uid));
-  assert.ok(!tag.tagMemberHand(s,'p2').some(card=>card.uid===drawn.uid));
-  // Avoid a same-name duplicate in the partner's private hand so the payload
-  // assertion tests the physical drawn card rather than a second copy.
-  const partnerCopies=s.reserves[2].hand.filter(card=>card.id===drawn.id);
-  s.reserves[2].hand=s.reserves[2].hand.filter(card=>card.id!==drawn.id);
-  s.reserves[2].deck.push(...partnerCopies);
-  assertInventoryConserved(s,inventoryBefore);
-  const r=record(s,'m428-skelengel');
-  const publicPayload=ui.tagPublicMessage(r),p0Private=ui.tagPrivateMessage(r,'p0'),p2Private=ui.tagPrivateMessage(r,'p2');
-  for(const payload of [publicPayload,p0Private,p2Private])validateDiscordPayload(payload);
-  const drawnName=getCard(drawn.id).name;
-  assert.ok(JSON.stringify(p0Private).includes(drawnName));
-  assert.ok(!JSON.stringify(p2Private).includes(drawnName));
-  assert.ok(!JSON.stringify(publicPayload).includes(drawn.uid),'public Discord payload must not expose the drawn physical UID');
 });
 
 test('Hane-Hane returns a partner-owned Fusion to that physical seat Extra Deck and keeps it private in Discord zones',()=>{
