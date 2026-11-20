@@ -106,8 +106,8 @@ test('destroyed stolen monsters go to the physical owner team Graveyard', () => 
   assert.equal(result.value.destroyed[0].fromControllerTeam, 1);
   assert.equal(result.value.destroyed[0].destinationGraveyardTeam, 0);
 });
-test('a monster owned by the opposing team goes to that owner team Graveyard even when controlled by us', () => {
-  const activation = [source(), monster('our-stolen', '55555555', 3, 0, 1)];
+test('a monster physically owned by our team but controlled by the opponent goes to our team Graveyard', () => {
+  const activation = [source(), monster('our-stolen', '55555555', 0, 1, 1)];
   const result = resolve(FLIP_MONSTER_DESTRUCTION_CARDS.oldVindictiveMagician.id, { activation, resolution: activation, selected: ['our-stolen'] });
   assert.equal(result.ok, true);
   assert.equal(result.value.destroyed[0].destinationGraveyardTeam, 1);
