@@ -283,3 +283,10 @@ test('M399 evidence keeps all four candidates source-linked and explicitly uncer
     assert.match(card.behavioralTestStatus, /engine integration pending/);
   }
 });
+
+test('Airknight Parshath evidence uses the canonical card ID and Konami CID', () => {
+  const card = evidence.cards.find(entry => entry.name === 'Airknight Parshath');
+  assert.equal(card.id, '18036057');
+  assert.equal(card.konamiId, 5023);
+  assert.match(card.officialSourceUrl, /cid=5023/);
+});
