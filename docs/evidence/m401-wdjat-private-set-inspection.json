@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "mission": "M401",
+  "reviewedAt": "2026-11-19",
+  "authority": "Konami official Yu-Gi-Oh! TCG Card Database",
+  "purpose": "Preparação da inspeção privada de Set de A Man with Wdjat. O helper não integra o resolver nem certifica a carta.",
+  "card": {
+    "id": "51351302",
+    "konamiId": 5518,
+    "name": "A Man with Wdjat",
+    "mechanicFamily": "summon-and-standby-set-card-peek",
+    "effectSummary": "Ao ser Invocado por Invocação-Normal e durante cada Fase de Apoio do controlador, pode inspecionar privadamente uma carta Set do campo adversário, restaurando sua posição original.",
+    "twoVTwoReviewQuestions": [
+      "O alvo pode estar em qualquer zona Set do campo adversário, incluindo monstros face-down em Defesa.",
+      "A identidade revelada é exclusiva do assento físico que resolve o efeito.",
+      "O parceiro do resolvedor e o payload público do Discord não podem receber ID, nome ou UID do alvo.",
+      "A inspeção não vira, move ou altera o UID, proprietário físico, zona, índice ou posição da carta."
+    ],
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5518&request_locale=en",
+    "sourceVerified": true,
+    "historicalEligibility": "pending OCG/TCG first-release audit",
+    "engineReviewStatus": "pending",
+    "behavioralTestStatus": "helper-unit-only; engine integration pending",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false
+  },
+  "integrationBlockers": [
+    "src/monsterEffects.ts",
+    "src/duelEngineCurrent.ts"
+  ],
+  "notes": [
+    "A projeção é privada por assento; nenhuma identidade é emitida para público ou parceiro.",
+    "O resolver Discord ainda precisa chamar o helper após handoff M61.",
+    "Nenhum catálogo, certificado, inventário, banco persistente ou dado de jogador foi modificado."
+  ]
+}
