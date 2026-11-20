@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "mission": "M414",
+  "reviewedAt": "2026-11-20",
+  "authority": "Konami official Yu-Gi-Oh! OCG Card Database and OCG FAQ",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "id": "86100785",
+      "name": "Zone Eater",
+      "konamiCardDatabaseId": 4399,
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4399&ope=2&request_locale=ja",
+      "officialOcgFaqUrl": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=4399&ope=4&request_locale=ja",
+      "officialTextJa": "「ゾーン・イーター」の攻撃を受けたモンスターは、５ターン後に破壊される。",
+      "officialRuling": "The attack turn is turn 1; count both players' turns; destroy during the End Phase of turn 5; no chain block is created by the destruction processing.",
+      "earliestOcgRelease": "1999-08-26",
+      "earliestOcgSet": "Booster 4",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "85255550",
+      "name": "Swordsman from a Distant Land",
+      "konamiCardDatabaseId": 4405,
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4405&ope=2&request_locale=ja",
+      "officialOcgFaqUrl": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=4405&ope=4&request_locale=ja",
+      "officialTextJa": "「異国の剣士」の攻撃を受けたモンスターは、５ターン後に破壊される。",
+      "officialRuling": "The attack turn is turn 1; count both players' turns; destroy during the End Phase of turn 5; no chain block is created by the destruction processing.",
+      "earliestOcgRelease": "1999-08-26",
+      "earliestOcgSet": "Booster 4",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "sharedRuling": {
+    "attackTurnCountsAs": 1,
+    "dueTurnOffset": 4,
+    "countBothPlayersTurns": true,
+    "destructionWindow": "End Phase of the fifth turn",
+    "chainBlockCreated": false,
+    "sourceMayBeDestroyedByBattleBeforeEffectActivation": true,
+    "targeting": false
+  },
+  "implementationNotes": [
+    "The event is captured after damage calculation from the attack snapshot; the source monster does not need to remain on the field.",
+    "The attacked monster is tracked by physical UID and epoch. Leaving and re-entering the field creates a different instance and prevents stale destruction.",
+    "Control may change before the due End Phase; if the same physical card remains in the Monster Zone, it is still destroyed.",
+    "The destination Graveyard follows the physical owner's team, not the controller at resolution."
+  ],
+  "scope": "Isolated delayed battle-destruction primitive, tests, official evidence and focused workflow only. No card registry, catalog, certification, Discord handler or persistent duel-state integration.",
+  "certificationGate": "Do not certify until integrated into the live battle/End Phase resolver and validated in complete 2v2 matches."
+}
