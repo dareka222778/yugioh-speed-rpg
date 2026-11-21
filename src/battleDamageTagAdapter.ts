@@ -34,7 +34,7 @@ export type BattleDamageTagSnapshot=Readonly<{
   sourceFaceUpAtBattleStart:true;
 }>;
 
-export type BattleDamageTagGraveCard=SharedGraveyardCard & Readonly<{
+export type BattleDamageTagGraveCard=Omit<SharedGraveyardCard,'physicalOwnerSeat'> & Readonly<{
   physicalOwnerSeat:BattleDamageTagSeat;
 }>;
 
@@ -225,11 +225,12 @@ export function resolveTagAswanApparitionRecovery(
     const index=player.grave.findIndex(card=>card.uid===selectedUid);
     if(index<0)return {resolved:false,reason:'no-target'};
     const [card]=player.grave.splice(index,1);
-    if(physicalSeatFromBattleDamageUid(card.uid)!==selection.card.physicalOwnerSeat)
+    const selectedPhysicalOwnerSeat=physicalSeatFromBattleDamageUid(card.uid);
+    if(selectedPhysicalOwnerSeat===null||selectedPhysicalOwnerSeat!==selection.card.physicalOwnerSeat)
       return {resolved:false,reason:'invalid-state'};
     player.deck.unshift(card);
     const nextGame:TagDuel={...game,core:nextCore};
-    return {resolved:true,noOp:false,card:selection.card,deckTopSeat:snapshot.activeSeat,
+    return {resolved:true,noOp:false,card:{...selection.card,physicalOwnerSeat:selectedPhysicalOwnerSeat},deckTopSeat:snapshot.activeSeat,
       nextGame,processedEventIds:[...processedEventIds,snapshot.eventId]};
   }catch{return {resolved:false,reason:'invalid-state'};}
 }
