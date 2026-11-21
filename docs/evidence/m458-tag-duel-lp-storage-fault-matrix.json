@@ -1,0 +1,65 @@
+{
+  "mission": "M458",
+  "runId": "work-20261121T121700-0300-M458",
+  "status": "implementation-complete-ci-pending",
+  "title": "TagDuel LP atomic storage fault-injection matrix",
+  "base": {
+    "branch": "feat/work-m457-tag-lp-pipeline-seat-matrix-20261121",
+    "sha": "aff11da959201d38af0314abd45e188e50c83d3c"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagDuelLpStorageFaultMatrix.test.cjs",
+      "docs/evidence/m458-tag-duel-lp-storage-fault-matrix.json",
+      ".github/workflows/m458-tag-duel-lp-storage-fault-matrix.yml"
+    ],
+    "scenarioCount": 6,
+    "scenarios": [
+      "Malformed persisted source/Fire Princess ledger JSON is rejected without changing the session.",
+      "A source-only partial ledger is rejected; no missing Fire Princess event is written.",
+      "A stale LP snapshot is rejected before revision, LP or ledger changes.",
+      "Tampered next-source ledger arrays are rejected before commit.",
+      "A SQLite BEFORE INSERT trigger aborts ledger persistence; the prior LP/revision UPDATE must roll back atomically.",
+      "A duplicate plan without both persisted ledger entries is rejected rather than treated as a replay."
+    ]
+  },
+  "invariants": {
+    "sqliteTransactionAtomicity": true,
+    "malformedLedgerFailClosed": true,
+    "partialLedgerFailClosed": true,
+    "staleSnapshotRejected": true,
+    "planLedgerIntegrity": true,
+    "duplicateRequiresPersistedLedgerPair": true,
+    "ownerRulesPreserved": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "The suite tests the M454/M452 storage contract in an isolated SQLite database; no live Discord session or production DB is used.",
+    "No card certification is added; central resolver integration remains blocked by M61 handoff."
+  ]
+}
