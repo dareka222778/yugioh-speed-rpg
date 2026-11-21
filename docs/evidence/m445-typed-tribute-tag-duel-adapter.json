@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "mission": "M445",
+  "runId": "work-20261121T065915-0300-M445",
+  "reviewedAt": "2026-11-21",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "id": "65064143",
+      "name": "Anti-Aircraft Flower",
+      "konamiCardDatabaseId": 5890,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5890&ope=2&request_locale=en",
+      "officialText": "By tributing 1 Insect-Type monster on your side of the field, inflict 800 points of damage to your opponent's Life Points.",
+      "earliestOcgRelease": "2003-07-17",
+      "earliestOcgSetCode": "307-021"
+    },
+    {
+      "id": "55001420",
+      "name": "Arcane Archer of the Forest",
+      "konamiCardDatabaseId": 5971,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5971&ope=2&request_locale=en",
+      "officialText": "While there is a Plant-Type monster on your side of the field, this card cannot be attacked. By tributing 1 Plant-Type monster on your side of the field, destroy 1 Spell or Trap Card on the field.",
+      "earliestOcgRelease": "2003-11-20",
+      "earliestOcgSetCode": "308-029"
+    }
+  ],
+  "implementation": {
+    "file": "src/typedTributeTagDuelAdapter.ts",
+    "basePrimitive": "src/typedTributeEffects.ts",
+    "behavior": [
+      "maps all four physical seats to two shared teams while retaining physical owner seat separately from controller team",
+      "reads monster Type from engine metadata, with explicit source Type mapping for the two not-yet-admitted source cards",
+      "allows face-down monsters to be selected for typed Tribute costs",
+      "routes Tribute destination to physical-owner team Graveyard",
+      "routes Anti-Aircraft Flower's 800 damage to the opposing controller team",
+      "captures Arcane Archer's exact target UID at activation and rechecks the same physical identity at resolution",
+      "does not replace a target that leaves before resolution; the Tribute remains paid in the returned plan",
+      "checks Arcane Archer attack protection from Plant presence on its controller's shared field, including face-down Plants",
+      "returns only a boolean/reason for public attack restriction; private UIDs remain in server-side plans",
+      "adds action-ID idempotency without introducing a once-per-turn restriction absent from card text",
+      "returns read-only plans; caller must atomically commit Tribute movement, damage/destruction and the action ledger"
+    ],
+    "validation": {
+      "sharedMonsterZones": 3,
+      "sharedSpellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeckMax": 5,
+      "physicalInventoryUidUniqueness": true
+    }
+  },
+  "tests": {
+    "file": "tests/typedTributeTagDuelAdapter.test.cjs",
+    "expectedCases": 20,
+    "groups": [
+      "Anti-Aircraft Flower exact 800 damage and typed Tribute eligibility",
+      "stolen Tribute physical-owner routing",
+      "opposing-team Tribute rejection",
+      "face-up activation requirement",
+      "no artificial once-per-turn restriction and action retry idempotency",
+      "Arcane Archer face-down Trap and separate Field Zone targets",
+      "target departure and physical identity replacement",
+      "Plant-based attack protection, including face-down Plant",
+      "team ownership, active physical representative and private identity checks",
+      "input immutability and public-safe summary"
+    ]
+  },
+  "certification": {
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "runtimeIntegrated": false
+  },
+  "production": {
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "liveDiscordValidated": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false
+  },
+  "limits": [
+    "The adapter does not register either effect in the central resolver or Discord command handler.",
+    "The returned plan is not a persisted transaction; the caller must atomically commit all physical movements and LP/destruction changes.",
+    "Effective monster-Type changes are not currently projected by TagDuel metadata; only printed Types and the two source Types are mapped.",
+    "Anti-Aircraft Flower and Arcane Archer remain outside the certified/playable catalog until separate admission and resolver integration."
+  ]
+}
