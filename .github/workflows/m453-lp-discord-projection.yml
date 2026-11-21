@@ -1,0 +1,36 @@
+name: M453 TagDuel LP Discord projection
+on:
+  push:
+    branches:
+      - feat/work-m453-lp-discord-projection-2v2-20261121
+    paths:
+      - 'tests/tagDuelLpGainDiscordProjection.test.cjs'
+      - 'docs/evidence/m453-lp-discord-projection.json'
+      - '.github/workflows/m453-lp-discord-projection.yml'
+  pull_request:
+    paths:
+      - 'tests/tagDuelLpGainDiscordProjection.test.cjs'
+      - 'docs/evidence/m453-lp-discord-projection.json'
+      - '.github/workflows/m453-lp-discord-projection.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-duel-lp-discord-projection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m453-lp-discord-projection.json', 'utf8'))"
+      - name: Run Discord LP projection integration tests
+        run: node --test tests/tagDuelLpGainDiscordProjection.test.cjs
