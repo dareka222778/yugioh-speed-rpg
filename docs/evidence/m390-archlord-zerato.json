@@ -1,0 +1,53 @@
+{
+  "format": 1,
+  "mission": "M390",
+  "reviewedAt": "2026-11-19",
+  "authority": "Konami Yu-Gi-Oh! TCG Card Database",
+  "card": {
+    "id": "18378582",
+    "konamiDatabaseId": 5976,
+    "name": "Archlord Zerato",
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5976&request_locale=en",
+    "officialText": "This card cannot be Normal Summoned or Set. This card cannot be Special Summoned except by Tributing 1 face-up Warrior of Zera on your side of the field while The Sanctuary in the Sky is on the field. If The Sanctuary in the Sky is on your side of the field, by discarding 1 LIGHT Monster Card from your hand to the Graveyard, destroy all monsters on your opponent's side of the field.",
+    "mechanicFamily": "field-gated-tribute-summon-and-light-discard-wipe"
+  },
+  "supportingCards": [
+    {
+      "id": "66073051",
+      "konamiDatabaseId": 5947,
+      "name": "Warrior of Zera",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5947&request_locale=en"
+    },
+    {
+      "id": "56433456",
+      "konamiDatabaseId": 5982,
+      "name": "The Sanctuary in the Sky",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5982&request_locale=en"
+    }
+  ],
+  "twoVTwoReview": [
+    "The summon procedure is a non-chain Special Summon from the active physical player's hand only; Normal Summon/Set and alternative Special Summon procedures are rejected.",
+    "Tribute exactly one face-up Warrior of Zera controlled by the shared team; the partner may physically own it, and that physical owner is preserved in the shared Graveyard.",
+    "The Sanctuary in the Sky must be face-up on the team's Field Zone for the summon procedure.",
+    "The wipe cost is exactly one LIGHT Monster Card from the activating physical player's own hand; the inactive partner's private hand is never read.",
+    "The wipe is non-targeting and evaluates the opposing team's shared three Monster Zones at resolution, including face-down monsters and monsters summoned in the chain.",
+    "A monster protected from card-effect destruction is not placed in the destroyed set; every destroyed card retains physical owner metadata and is sent to its owner's team Graveyard.",
+    "The official text has no once-per-turn clause; repeated activations with separate costs remain possible."
+  ],
+  "rulingNotes": {
+    "sanctuaryAtResolution": "The implementation requires The Sanctuary in the Sky to remain on the activating team's field at resolution; historical rulings report that removing it in the chain causes the effect not to apply. Verify against current Konami rulings before certification.",
+    "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5976&request_locale=en"
+  },
+  "implementation": {
+    "primitive": "src/archlordZerato.ts",
+    "tests": "tests/archlordZerato.test.cjs",
+    "focusedWorkflow": ".github/workflows/m390-archlord-zerato-focused.yml",
+    "testCases": 33,
+    "runtimeIntegration": "pending explicit M61 handoff; no effect-registry or duel-router edit",
+    "behavioralTestStatus": "pending-CI",
+    "engineReviewStatus": "pending",
+    "historicalEligibility": "pending OCG/TCG first-publication audit against 2004-09-30",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false
+  }
+}
