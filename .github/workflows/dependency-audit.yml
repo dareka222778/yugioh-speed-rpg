@@ -1,0 +1,92 @@
+name: Dependency audit
+on:
+  pull_request:
+    branches:
+      - main
+      - feat/rea-engine-recovery-20261026
+  push:
+    branches:
+      - feat/rea-engine-recovery-20261026
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependency-audit-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Collect full and production-only audit reports
+        shell: bash
+        run: |
+          mkdir -p artifacts/dependency-audit
+          set +e
+          npm audit --json > artifacts/dependency-audit/all.json
+          echo "$?" > artifacts/dependency-audit/all.exit
+          npm audit --omit=dev --json > artifacts/dependency-audit/production.json
+          echo "$?" > artifacts/dependency-audit/production.exit
+          set -e
+      - name: Run report parser regression tests
+        run: node --test tests/dependencyAuditReport.test.cjs
+      - name: Summarize findings and enforce production gate
+        run: >-
+          node scripts/report-dependency-audit.cjs
+          artifacts/dependency-audit/all.json
+          artifacts/dependency-audit/production.json
+          artifacts/dependency-audit/all.exit
+          artifacts/dependency-audit/production.exit
+          artifacts/dependency-audit/summary.json
+      - name: Preserve audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-audit-report
+          path: artifacts/dependency-audit
+          if-no-files-found: warn
+          retention-days: 30
+
+  prepare-sharp-upgrade-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Regenerate lockfile for audited sharp fix
+        run: npm install --package-lock-only --ignore-scripts sharp@0.35.5
+      - name: Validate regenerated dependency tree
+        run: |
+          npm ci
+          npm audit --omit=dev --audit-level=high
+          node scripts/verify-sharp-type-entrypoint.cjs
+          npm run check
+      - name: Preserve candidate lockfiles for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sharp-0.35.5-lockfile-candidate
+          path: |
+            package.json
+            package-lock.json
+            node_modules/sharp/package.json
+            node_modules/sharp/dist/index.d.mts
+            node_modules/sharp/dist/index.d.cts
+            node_modules/sharp/lib/index.d.ts
+          if-no-files-found: error
+          retention-days: 7
