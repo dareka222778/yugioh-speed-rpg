@@ -227,7 +227,7 @@ test('an inactive physical partner can confirm team concession through Discord w
   const inactivePartner = ids[(activeSeat + 2) % 4];
   assert.notEqual(inactivePartner, activeMember);
 
-  const beforeUids = collectUids(record.state);
+  const beforeUids = tag.tagInventory(record.state).map(card => card.uid).sort();
   assert.ok(beforeUids.length > 0);
   assert.equal(new Set(beforeUids).size, beforeUids.length);
   const beforeLp = record.state.core.players.map(team => team.lp);
@@ -258,7 +258,7 @@ test('an inactive physical partner can confirm team concession through Discord w
   assert.equal(finished.status, 'finished');
   assert.equal(finished.state.core.phase, 'finished');
   assert.equal(finished.revision, record.revision + 1);
-  assert.deepEqual(collectUids(finished.state), beforeUids);
+  assert.deepEqual(tag.tagInventory(finished.state).map(card => card.uid).sort(), beforeUids);
   assert.deepEqual(finished.state.core.players.map(team => team.lp), beforeLp);
   assert.equal(publicRefreshes.length, 1);
   assertNoHandUids(finished, confirmInteraction.replies[0], 'conceding partner private response');
