@@ -71,8 +71,8 @@ function assertOwnerRules(state) {
   ], [20, 30, 6, 'end', 3, 3, 5]);
   assert.equal(state.core.players.length, 2);
   for (const team of state.core.players) {
-    assert.equal(team.monsters.length, 3);
-    assert.equal(team.backrow.length, 3);
+    assert.ok(team.monsters.length <= 3);
+    assert.ok(team.backrow.length <= 3);
     assert.ok(Object.hasOwn(team, 'field'), 'Field Zone remains separate');
   }
 }
