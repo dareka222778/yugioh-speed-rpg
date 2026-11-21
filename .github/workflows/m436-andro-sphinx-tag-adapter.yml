@@ -1,0 +1,26 @@
+name: M436 Andro Sphinx TagDuel adapter
+
+on:
+  pull_request:
+    paths:
+      - 'src/androSphinxTagAdapter.ts'
+      - 'src/androSphinxRules.ts'
+      - 'tests/androSphinxTagAdapter.test.cjs'
+      - '.github/workflows/m436-andro-sphinx-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/androSphinxTagAdapter.test.cjs
