@@ -1,19 +1,20 @@
 {
-  "runId": "work-20261121T112504-0300-M455",
+  "runId": "work-20261121T115829-0300-M455-M456-followup",
   "owner": "Work principal",
   "priorityRequestedBy": "Work",
-  "state": "active",
-  "startedAt": "2026-11-21T11:25:04-03:00",
-  "lastActivityAt": "2026-11-21T11:25:04-03:00",
-  "nextScheduledAt": "2026-11-21T15:55:00-03:00",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-21T11:58:29-03:00",
+  "lastActivityAt": "2026-11-21T12:10:54.153-03:00",
+  "nextScheduledAt": "2026-11-21T16:58:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
     "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
     "docs/evidence/m455-standby-lp-atomic-commit.json",
-    ".github/workflows/m455-standby-lp-atomic-commit.yml"
+    "tests/solemnWishesFirePrincessPipeline.test.cjs",
+    "docs/evidence/m456-solemn-wishes-fire-princess.json"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261121T112504-0300-M455.json",
+  "lastCheckpoint": "coordination/runs/work-20261121T115829-0300-M455-M456-followup.json",
   "previousRunId": "work-20261121T105500-0300-M450",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
@@ -3539,8 +3540,8 @@
     },
     {
       "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
-      "head": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
-      "pr": null,
+      "head": "48c3088859742efdb7aaa58f12345f1d7ed974ae",
+      "pr": 403,
       "base": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
       "baseBranch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
       "scope": [
@@ -3550,12 +3551,13 @@
       ],
       "owner": "Work principal",
       "runId": "work-20261121T112504-0300-M455",
-      "state": "active"
+      "state": "released-to-auxiliary-monitor-ci",
+      "lastActivityAt": "2026-11-21T12:10:54.153-03:00"
     },
     {
       "branch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
-      "head": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
-      "pr": null,
+      "head": "29f4ad75ee92b2ff1860b03c8e6d8e8edca8a8cb",
+      "pr": 404,
       "base": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
       "baseBranch": "feat/work-m455-standby-lp-atomic-commit-20261121",
       "scope": [
@@ -3565,7 +3567,8 @@
       ],
       "owner": "Work principal",
       "runId": "work-20261121T112504-0300-M456",
-      "state": "active"
+      "state": "released-to-auxiliary-monitor-ci",
+      "lastActivityAt": "2026-11-21T12:10:54.153-03:00"
     }
   ],
   "handoffRequest": {
@@ -4508,7 +4511,7 @@
   },
   "nextTask": "Implementar três testes end-to-end da cadeia Standby→Fire Princess→SQLite: Fairy, Marie, retry idempotente e rejeição de revisão obsoleta; executar CI e reavaliar o handoff M450/M61.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
-  "priority": "P1 — validar o encadeamento real Dancing Fairy/Darklord Marie Standby → Fire Princess → commit SQLite atômico, com idempotência e proteção de revisão 2v2.",
+  "priority": "P1 — corrigir as falhas de fixture dos pipelines Standby/Solemn Wishes → Fire Princess, reforçar idempotência/privacidade 2v2 e fechar a CI sem alterar o resolver reservado.",
   "sharedHeadBeforeClaim": "916558e0a56cbd6bcd490d4f2a09e7ec5926f8dc",
   "releasedOwnReservation": false,
   "parallelWorkObserved": [
@@ -4674,7 +4677,7 @@
       }
     ]
   },
-  "nextWorkAt": "2026-11-21T15:55:00-03:00",
+  "nextWorkAt": "2026-11-21T16:58:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -6949,7 +6952,7 @@
   "lastParallelActivityAt": "2026-11-21T11:25:04-03:00",
   "sharedHeadAfterCheckpoint": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "sharedHeadBeforeStateUpdate": "8e079356720eab7518e196cf36bb8ca816c6b604",
-  "endedAt": "2026-11-18T23:33:50.163-03:00",
+  "endedAt": "2026-11-21T12:10:54.153-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -7702,8 +7705,8 @@
     {
       "mission": "M455",
       "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
-      "head": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
-      "pr": null,
+      "head": "48c3088859742efdb7aaa58f12345f1d7ed974ae",
+      "pr": 403,
       "baseBranch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
       "baseSha": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
       "scope": [
@@ -7711,14 +7714,15 @@
         "docs/evidence/m455-standby-lp-atomic-commit.json",
         ".github/workflows/m455-standby-lp-atomic-commit.yml"
       ],
-      "state": "active",
-      "priority": "P1 — validar o encadeamento real Dancing Fairy/Darklord Marie Standby → Fire Princess → commit SQLite atômico, com idempotência e proteção de revisão 2v2."
+      "state": "released-to-auxiliary-monitor-ci",
+      "priority": "P1 — validar o encadeamento real Dancing Fairy/Darklord Marie Standby → Fire Princess → commit SQLite atômico, com idempotência e proteção de revisão 2v2.",
+      "lastActivityAt": "2026-11-21T12:10:54.153-03:00"
     },
     {
       "mission": "M456",
       "branch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
-      "head": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
-      "pr": null,
+      "head": "29f4ad75ee92b2ff1860b03c8e6d8e8edca8a8cb",
+      "pr": 404,
       "baseBranch": "feat/work-m455-standby-lp-atomic-commit-20261121",
       "baseSha": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
       "scope": [
@@ -7726,8 +7730,9 @@
         "docs/evidence/m456-solemn-wishes-fire-princess.json",
         ".github/workflows/m456-solemn-wishes-fire-princess.yml"
       ],
-      "state": "active",
-      "priority": "P1 — validar Solemn Wishes em eventos de compra física 2v2: 500 LP por cópia elegível por evento, não por carta comprada; dono físico, equipe controladora, negação por cópia e composição com Fire Princess."
+      "state": "released-to-auxiliary-monitor-ci",
+      "priority": "P1 — validar Solemn Wishes em eventos de compra física 2v2: 500 LP por cópia elegível por evento, não por carta comprada; dono físico, equipe controladora, negação por cópia e composição com Fire Princess.",
+      "lastActivityAt": "2026-11-21T12:10:54.153-03:00"
     }
   ],
   "updatedAt": "2026-11-20T02:48:32.028Z",
@@ -9806,53 +9811,30 @@
   "workBranchesUpdatedAt": "2026-11-20T19:36:27-03:00",
   "lastActiveWorkMission": "M379–M381",
   "sharedHeadBeforeCheckpointCommit": "aea48819344b899f4fd550ce3873246104d483ec",
-  "lastWorkRunId": "work-20261121T112504-0300-M455",
-  "lastWorkMission": "M455",
+  "lastWorkRunId": "work-20261121T115829-0300-M455-M456-followup",
+  "lastWorkMission": "M455–M456 follow-up",
   "lastWorkBranch": "feat/work-m455-standby-lp-atomic-commit-20261121",
-  "lastWorkHead": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
+  "lastWorkHead": "48c3088859742efdb7aaa58f12345f1d7ed974ae",
   "lastWorkBranches": [
     {
-      "branch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
-      "head": "1f922f19b1cd21c6ffffb8de414a666892f83d0a71",
-      "pr": 376,
-      "base": "75dc1403897b135dc63fb003387af9a09fab84e5"
-    },
-    {
-      "branch": "feat/work-m429-classic-lp-spells-discord-2v2-20261120",
-      "head": "d206b9e43781c47a288042b1d461e14b73a4eb78",
-      "pr": 377,
-      "base": "75dc1403897b135dc63fb003387af9a09fab84e5"
-    },
-    {
-      "branch": "feat/work-m430-jar-of-greed-discord-2v2-20261120",
-      "head": "a01e749887fe666743f9bb4127b4d9afb79f4a2e",
-      "pr": 378,
-      "base": "75dc1403897b135dc63fb003387af9a09fab84e5"
-    },
-    {
       "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
-      "head": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
-      "pr": null,
+      "head": "48c3088859742efdb7aaa58f12345f1d7ed974ae",
+      "pr": 403,
       "baseBranch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
-      "baseSha": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
       "scope": [
         "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
-        "docs/evidence/m455-standby-lp-atomic-commit.json",
-        ".github/workflows/m455-standby-lp-atomic-commit.yml"
+        "docs/evidence/m455-standby-lp-atomic-commit.json"
       ]
     },
     {
       "branch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
-      "head": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
-      "pr": null,
+      "head": "29f4ad75ee92b2ff1860b03c8e6d8e8edca8a8cb",
+      "pr": 404,
       "baseBranch": "feat/work-m455-standby-lp-atomic-commit-20261121",
-      "baseSha": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
       "scope": [
         "tests/solemnWishesFirePrincessPipeline.test.cjs",
-        "docs/evidence/m456-solemn-wishes-fire-princess.json",
-        ".github/workflows/m456-solemn-wishes-fire-princess.yml"
-      ],
-      "mission": "M456"
+        "docs/evidence/m456-solemn-wishes-fire-princess.json"
+      ]
     }
   ],
   "lastIndependentWorkDuration": {
@@ -10140,19 +10122,18 @@
     "endedAt": "2026-11-19T13:45:02-03:00",
     "auxiliaryPermission": "Merge the latest shared branch into this M397 branch without force, then monitor CI and correct only the three M397 files; do not edit state, runtime, catalog, player data, other branches or production."
   },
-  "lastWorkPR": 378,
+  "lastWorkPR": 403,
   "lastWorkStatus": "released-to-auxiliary-monitor-ci",
   "lastWorkDuration": {
-    "elapsedMinutes": 19.62,
-    "effectiveWorkMinutes": 14,
+    "elapsedMinutes": 12.4,
+    "effectiveWorkMinutes": 9.5,
     "targetEffectiveMinutes": 60,
     "targetMet": false,
-    "ciWaitExcluded": true,
-    "priorM428WorkUnmeasured": true
+    "ciWaitExcluded": true
   },
   "lastWorkCatalog": {
-    "target": 1000,
     "certified": 969,
+    "target": 1000,
     "remaining": 31,
     "newCertifications": 0,
     "automaticCertifications": 0,
@@ -10161,10 +10142,11 @@
   "lastWorkProduction": {
     "mergePerformed": false,
     "deployPerformed": false,
+    "backupVerified": false,
     "liveDiscordValidation": false,
     "deploymentsApiExposed": false
   },
-  "lastWorkSharedHeadBeforeFinalStateUpdate": "75dc1403897b135dc63fb003387af9a09fab84e5",
+  "lastWorkSharedHeadBeforeFinalStateUpdate": "4fa2959a588bf963e7a3646d3f7aaf277cd16794",
   "thirdPartyReservationsReleased": [],
   "nextTaskUpdatedAt": "2026-11-19T13:45:02-03:00",
   "currentWorkReservationM398": {
@@ -10192,23 +10174,23 @@
     "minimum60MinutesMet": false,
     "auxiliaryPermission": "Monitor PR #347, sync branch with latest shared HEAD by non-forced merge, correct only these three M398 files if CI fails. Do not edit coordination/state.json, runtime, catalog, certificates, player data, inventory, persistent DB, other branches, main or production; no merge/deploy."
   },
-  "latestIndependentWorkRunId": "work-20261121T112504-0300-M456",
+  "latestIndependentWorkRunId": "work-20261121T115829-0300-M455-M456-followup",
   "latestIndependentWorkBranch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
-  "latestIndependentWorkHead": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
-  "latestIndependentWorkReservationReleased": false,
-  "latestIndependentWorkActivityAt": "2026-11-21T01:01:16-03:00",
-  "latestIndependentWorkPR": null,
-  "latestIndependentWorkCheckpoint": "coordination/runs/work-20261121T112504-0300-M456.json",
-  "latestIndependentWorkCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
-  "latestIndependentWorkStatus": "active",
-  "latestIndependentWorkEffectiveMinutes": 0,
+  "latestIndependentWorkHead": "29f4ad75ee92b2ff1860b03c8e6d8e8edca8a8cb",
+  "latestIndependentWorkReservationReleased": true,
+  "latestIndependentWorkActivityAt": "2026-11-21T12:10:54.153-03:00",
+  "latestIndependentWorkPR": 404,
+  "latestIndependentWorkCheckpoint": "coordination/runs/work-20261121T115829-0300-M455-M456-followup.json",
+  "latestIndependentWorkCheckpointCommit": "8fa2b4639eaf278d69652d623e65ed92d10f5bc9",
+  "latestIndependentWorkStatus": "released-to-auxiliary-monitor-ci",
+  "latestIndependentWorkEffectiveMinutes": 9.5,
   "latestIndependentWorkCatalog": {
     "certified": 969,
     "newCertifications": 0,
     "inventoryGranted": 0
   },
-  "nextIndependentWorkTask": "Criar cenários Solemn Wishes: compra física do parceiro, duas cartas no mesmo evento, duas cópias e negação individual, time oposto sem gatilho, UID de assento inválido e replay idempotente.",
-  "nextIndependentWorkWindow": "2026-11-21T15:55:00-03:00",
+  "nextIndependentWorkTask": "Auxiliar acompanha Engine Validation/Extended Soak de #403 e #404; corrige somente os seis arquivos liberados se necessário. Work principal aguarda handoff M61; após liberação, integra os pipelines ao resolver e executa partidas 2v2 reais. Não certificar as cartas enquanto não houver admissão comportamental pelo resolver.",
+  "nextIndependentWorkWindow": "2026-11-21T16:58:00-03:00",
   "releasedReservations": [
     {
       "runId": "work-20261119T182750-0300-M398",
@@ -10271,88 +10253,92 @@
       "owner": "Work principal",
       "thirdParty": false,
       "scope": "auxiliary-monitor-ci-only"
+    },
+    {
+      "runId": "work-20261121T115829-0300-M455-M456-followup",
+      "files": [
+        "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
+        "docs/evidence/m455-standby-lp-atomic-commit.json",
+        ".github/workflows/m455-standby-lp-atomic-commit.yml",
+        "tests/solemnWishesFirePrincessPipeline.test.cjs",
+        "docs/evidence/m456-solemn-wishes-fire-princess.json",
+        ".github/workflows/m456-solemn-wishes-fire-princess.yml"
+      ],
+      "at": "2026-11-21T12:10:54.153-03:00",
+      "owner": "Work principal",
+      "thirdParty": false,
+      "scope": "auxiliary-monitor-ci-only"
     }
   ],
   "latestIndependentWorkCI": [
     {
-      "name": "M428 focused",
-      "run": 44833214993,
-      "status": "success"
-    },
-    {
-      "name": "M428 Card Batch Fast",
-      "run": 44833215101,
-      "status": "success"
-    },
-    {
-      "name": "M428 Milestone 1000",
-      "run": 44833215070,
+      "name": "M455 Standby LP atomic commit",
+      "run": 44916963603,
       "status": "success",
-      "artifact": 14677008129
+      "focusedTests": "3/3",
+      "mission": "M455"
     },
     {
-      "name": "M428 Engine Validation",
-      "run": 44833215028,
-      "status": "success"
-    },
-    {
-      "name": "M428 Extended Soak",
-      "status": "success"
-    },
-    {
-      "name": "M429 focused",
-      "run": 44833477657,
-      "status": "success"
-    },
-    {
-      "name": "M429 Card Batch Fast",
-      "run": 44833477702,
-      "status": "success"
-    },
-    {
-      "name": "M429 Milestone 1000",
-      "run": 44833477542,
+      "name": "Card Batch Fast",
+      "run": 44916963624,
       "status": "success",
-      "artifact": 14676737112
+      "mission": "M455"
     },
     {
-      "name": "M429 Extended Soak",
-      "status": "success"
-    },
-    {
-      "name": "M429 Engine Validation",
-      "run": 44833477681,
-      "status": "in_progress"
-    },
-    {
-      "name": "M430 focused",
-      "run": 44834003494,
-      "status": "success"
-    },
-    {
-      "name": "M430 Card Batch Fast",
-      "run": 44834003544,
-      "status": "success"
-    },
-    {
-      "name": "M430 Milestone 1000",
-      "run": 44834003563,
+      "name": "Milestone 1000",
+      "run": 44916963611,
       "status": "success",
-      "artifact": 14676519389
+      "certified": 969,
+      "remaining": 31,
+      "mission": "M455"
     },
     {
-      "name": "M430 Engine Validation",
-      "run": 44834003611,
-      "status": "in_progress"
+      "name": "Engine Validation",
+      "run": 44916963604,
+      "status": "in_progress",
+      "activeJobs": [
+        "npm test",
+        "Extended Soak 600s"
+      ],
+      "failures": 0,
+      "mission": "M455"
     },
     {
-      "name": "M430 Extended Soak",
-      "status": "in_progress"
+      "name": "M456 Solemn Wishes Fire Princess pipeline",
+      "run": 44917374118,
+      "status": "success",
+      "focusedTests": "6/6",
+      "mission": "M456"
+    },
+    {
+      "name": "Card Batch Fast",
+      "run": 44917374105,
+      "status": "success",
+      "mission": "M456"
+    },
+    {
+      "name": "Milestone 1000",
+      "run": 44917374086,
+      "status": "success",
+      "certified": 969,
+      "remaining": 31,
+      "mission": "M456"
+    },
+    {
+      "name": "Engine Validation",
+      "run": 44917374101,
+      "status": "in_progress",
+      "activeJobs": [
+        "npm test",
+        "Extended Soak 600s"
+      ],
+      "failures": 0,
+      "mission": "M456"
     }
   ],
-  "latestIndependentWorkSharedHead": "21d56e57f9bbbaeed8eaf15aaec1311be979af1c",
+  "latestIndependentWorkSharedHead": "4fa2959a588bf963e7a3646d3f7aaf277cd16794",
   "latestIndependentWorkCompare": {
-    "ahead": 693,
+    "ahead": 707,
     "behind": 10,
     "status": "diverged",
     "measuredAgainst": "main"
@@ -10548,7 +10534,7 @@
     ],
     "cardFamily": "battle-destruction-life-point-recovery"
   },
-  "latestIndependentWorkPriority": "P1 — validar regras clássicas 2v2 e privacidade Discord em três famílias: FLIP, LP Spell e Trap draw.",
+  "latestIndependentWorkPriority": "P1 — corrigir as falhas de fixture dos pipelines Standby/Solemn Wishes → Fire Princess, reforçar idempotência/privacidade 2v2 e fechar a CI sem alterar o resolver reservado.",
   "currentWorkReservationM403": {
     "runId": "work-20261120T045103-0300-M403",
     "owner": "Work principal",
@@ -11020,36 +11006,27 @@
   },
   "lastIndependentWorkPR": 378,
   "lastIndependentWorkCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
-  "lastWorkCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "lastWorkCheckpointCommit": "8fa2b4639eaf278d69652d623e65ed92d10f5bc9",
   "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "lastWorkSharedHeadAtPostCheckpointAudit": "7f720745073a64a8b5ff05c5d8323d5aa4e767c0",
   "latestIndependentWorkPostCheckpointPrStatus": [
     {
-      "number": 376,
+      "number": 403,
       "state": "open",
       "draft": true,
-      "mergeable": false,
+      "mergeable": true,
       "merged": false,
-      "ahead": 13,
-      "behind": 3
+      "head": "48c3088859742efdb7aaa58f12345f1d7ed974ae",
+      "engineValidation": "in_progress"
     },
     {
-      "number": 377,
+      "number": 404,
       "state": "open",
       "draft": true,
-      "mergeable": false,
+      "mergeable": true,
       "merged": false,
-      "ahead": 1,
-      "behind": 3
-    },
-    {
-      "number": 378,
-      "state": "open",
-      "draft": true,
-      "mergeable": false,
-      "merged": false,
-      "ahead": 3,
-      "behind": 3
+      "head": "29f4ad75ee92b2ff1860b03c8e6d8e8edca8a8cb",
+      "engineValidation": "in_progress"
     }
   ],
   "auxiliaryHandoffComments": [
@@ -11478,7 +11455,7 @@
     "mission": "M455",
     "runId": "work-20261121T112504-0300-M455",
     "owner": "Work principal",
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
     "baseBranch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
     "baseSha": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
@@ -11503,13 +11480,48 @@
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "head": "48c3088859742efdb7aaa58f12345f1d7ed974ae",
+    "pr": 403,
+    "lastActivityAt": "2026-11-21T12:10:54.153-03:00",
+    "releasedAt": "2026-11-21T12:10:54.153-03:00",
+    "ci": [
+      {
+        "name": "M455 Standby LP atomic commit",
+        "run": 44916963603,
+        "status": "success",
+        "focusedTests": "3/3"
+      },
+      {
+        "name": "Card Batch Fast",
+        "run": 44916963624,
+        "status": "success"
+      },
+      {
+        "name": "Milestone 1000",
+        "run": 44916963611,
+        "status": "success",
+        "certified": 969,
+        "remaining": 31
+      },
+      {
+        "name": "Engine Validation",
+        "run": 44916963604,
+        "status": "in_progress",
+        "activeJobs": [
+          "npm test",
+          "Extended Soak 600s"
+        ],
+        "failures": 0
+      }
+    ],
+    "nextTask": "Auxiliar monitora CI e corrige apenas os arquivos reservados."
   },
   "currentWorkReservationM456": {
     "mission": "M456",
     "runId": "work-20261121T112504-0300-M456",
     "owner": "Work principal",
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
     "baseBranch": "feat/work-m455-standby-lp-atomic-commit-20261121",
     "baseSha": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
@@ -11535,6 +11547,42 @@
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
-  }
+    "inventoryGranted": 0,
+    "head": "29f4ad75ee92b2ff1860b03c8e6d8e8edca8a8cb",
+    "pr": 404,
+    "lastActivityAt": "2026-11-21T12:10:54.153-03:00",
+    "releasedAt": "2026-11-21T12:10:54.153-03:00",
+    "ci": [
+      {
+        "name": "M456 Solemn Wishes Fire Princess pipeline",
+        "run": 44917374118,
+        "status": "success",
+        "focusedTests": "6/6"
+      },
+      {
+        "name": "Card Batch Fast",
+        "run": 44917374105,
+        "status": "success"
+      },
+      {
+        "name": "Milestone 1000",
+        "run": 44917374086,
+        "status": "success",
+        "certified": 969,
+        "remaining": 31
+      },
+      {
+        "name": "Engine Validation",
+        "run": 44917374101,
+        "status": "in_progress",
+        "activeJobs": [
+          "npm test",
+          "Extended Soak 600s"
+        ],
+        "failures": 0
+      }
+    ],
+    "nextTask": "Auxiliar monitora CI e corrige apenas os arquivos reservados."
+  },
+  "nextWorkTask": "Auxiliar acompanha Engine Validation/Extended Soak de #403 e #404; corrige somente os seis arquivos liberados se necessário. Work principal aguarda handoff M61; após liberação, integra os pipelines ao resolver e executa partidas 2v2 reais. Não certificar as cartas enquanto não houver admissão comportamental pelo resolver."
 }
