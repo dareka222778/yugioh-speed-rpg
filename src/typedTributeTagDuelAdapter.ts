@@ -105,7 +105,7 @@ function validateTagDuel(game: TagDuel): string | undefined {
 function cardType(id: string): string | undefined {
   if (id === ANTI_AIRCRAFT_FLOWER_CARD_ID) return 'Plant';
   if (id === ARCANE_ARCHER_OF_THE_FOREST_CARD_ID) return 'Warrior';
-  return engineCard(id)?.monsterType;
+  return engineCard(id)?.race ?? undefined;
 }
 
 function fieldMonsters(game: TagDuel): FieldMonster[] {
