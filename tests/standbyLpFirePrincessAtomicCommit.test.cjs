@@ -13,6 +13,7 @@ const database = require('../dist/database');
 const store = require('../dist/tagStore');
 const tag = require('../dist/tagDuel');
 const { rulesFor } = require('../dist/rulesProfile');
+const { advanceStandby, chooseStandby } = require('../dist/standbyFlow');
 const {
   captureDarklordMarieActivationUids,
   resolveTagStandbyLpRecovery
@@ -105,22 +106,10 @@ function openStandbyTask(game, team = game.core.current) {
       optional: false,
       options: [{ id: 'resolve', label: 'Resolver recuperação de LP', operations: [] }]
     }],
-    completed: [],
-    active: { id: taskId, status: 'responding', choice: 'resolve' }
+    completed: []
   };
-  game.core.phase = 'response';
-  game.core.resume = 'main';
-  game.core.pending = {
-    kind: 'standby',
-    actor: team,
-    card: 'standby:' + taskId,
-    taskId,
-    choiceId: 'resolve'
-  };
-  game.core.priority = 1 - team;
-  game.core.passes = 0;
-  game.core.chain = [];
-  delete game.core.choice;
+  assert.equal(advanceStandby(game.core), true, 'the real Standby scheduler must open the active task');
+  chooseStandby(game.core, team, 'resolve');
   return {
     eventId: taskId + ':resolution',
     taskId,
