@@ -22,6 +22,8 @@ export interface TagStandbyRecoveryEvent {
   readonly activeTeam: Team;
   /** Captured from the active team's shared Graveyard when the task is opened. */
   readonly activationDarklordMarieUids: readonly string[];
+  /** Per-card effect-negation results committed by the resolving chain, if any. */
+  readonly negatedSourceUids?: readonly string[];
 }
 
 export interface TagStandbyRecoveryResult {
@@ -135,6 +137,7 @@ function validateEvent(
   game: TagDuel,
   event: TagStandbyRecoveryEvent,
   activationUids: readonly string[],
+  negatedUids: readonly string[],
 ): string | undefined {
   if (!event || !validIdentifier(event.taskId) || !validIdentifier(event.eventId)) return 'invalid-standby-event-id';
   if (event.activeTeam !== 0 && event.activeTeam !== 1) return 'invalid-active-team';
@@ -190,6 +193,17 @@ function validateEvent(
       return 'activation-snapshot-contains-foreign-owner';
     }
   }
+  if (!Array.isArray(negatedUids) || negatedUids.length > 120) return 'invalid-negated-source-uid-snapshot';
+  const negatedSeen = new Set<string>();
+  for (const uid of negatedUids) {
+    if (!validIdentifier(uid) || negatedSeen.has(uid)) return 'invalid-negated-source-uid';
+    negatedSeen.add(uid);
+    const matches = inventory.filter(card => card.uid === uid);
+    if (matches.length !== 1
+      || (matches[0].id !== DANCING_FAIRY_CARD_ID && matches[0].id !== DARKLORD_MARIE_CARD_ID)) {
+      return 'negated-source-uid-is-not-a-standby-recovery-card';
+    }
+  }
   return undefined;
 }
 
@@ -213,7 +227,7 @@ export function resolveTagStandbyLpRecovery(
     if (!game || game.mode !== 'tag-classic') return fail('classic-tag-duel-required');
     const stateIssue = validateTagDuelShape(game);
     if (stateIssue) return fail(stateIssue);
-    const eventIssue = validateEvent(game, event, event.activationDarklordMarieUids);
+    const eventIssue = validateEvent(game, event, event.activationDarklordMarieUids, event.negatedSourceUids ?? []);
     if (eventIssue) return fail(eventIssue);
     if (
       !Array.isArray(processedEventIds) || processedEventIds.length > 4096
@@ -225,6 +239,7 @@ export function resolveTagStandbyLpRecovery(
       game.core.players[1].lp,
     ];
     const turnKeys = new Set(processedTurnCardKeys);
+    const negatedSourceUids = new Set(event.negatedSourceUids ?? []);
     const dancingFairies: DancingFairySnapshot[] = [];
     for (const [controllerTeam, player] of game.core.players.entries()) {
       for (const monster of player.monsters) {
@@ -242,7 +257,8 @@ export function resolveTagStandbyLpRecovery(
           zone: 'monster',
           faceUp: monster.faceUp,
           position: monster.position === 'atk' ? 'attack' : 'defense',
-          effectNegated: game.core.pendingNegated === true || monsterEffectsNegated(game.core, monster.uid),
+          effectNegated: game.core.pendingNegated === true || negatedSourceUids.has(monster.uid)
+            || monsterEffectsNegated(game.core, monster.uid),
         });
       }
     }
@@ -287,7 +303,7 @@ export function resolveTagStandbyLpRecovery(
           ownerTeam: graveyardTeam as Team,
           zoneAtActivation: 'graveyard',
           zoneAtResolution: 'graveyard',
-          effectNegated: game.core.pendingNegated === true,
+          effectNegated: game.core.pendingNegated === true || negatedSourceUids.has(card.uid),
         });
       }
     }
