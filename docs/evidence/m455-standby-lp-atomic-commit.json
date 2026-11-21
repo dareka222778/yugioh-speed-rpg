@@ -1,0 +1,99 @@
+{
+  "mission": "M455",
+  "runId": "work-20261121T112504-0300-M455",
+  "status": "implementation-complete-ci-pending",
+  "title": "Dancing Fairy / Darklord Marie Standby recovery → Fire Princess → atomic TagDuel session commit",
+  "base": {
+    "branch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
+    "sha": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb"
+  },
+  "dependencies": {
+    "m450Pr": 398,
+    "m451Pr": 399,
+    "m452Pr": 400,
+    "m453Pr": 401,
+    "m454Pr": 402,
+    "m444Pr": 392,
+    "m446Pr": 394
+  },
+  "implementation": {
+    "files": [
+      "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
+      "docs/evidence/m455-standby-lp-atomic-commit.json",
+      ".github/workflows/m455-standby-lp-atomic-commit.yml"
+    ],
+    "sourceAdapters": [
+      "resolveTagStandbyLpRecovery",
+      "planTagDuelLpGainFirePrincessPipeline",
+      "commitTagDuelLpGainPipelinePlan"
+    ],
+    "scenarioCount": 3,
+    "scenarios": [
+      "Dancing Fairy 1000 LP to team 0, partner physical owner seat 2, followed by one Fire Princess 500 damage to team 1; both event ledgers, LP tuple and revision committed together.",
+      "Darklord Marie 200 LP to team 1 from activation-time UID snapshot, partner physical owner seat 3, followed by Fire Princess 500 damage to team 0.",
+      "A committed replay is idempotent; a distinct event planned from the new LP snapshot is rejected when committed with the stale session revision."
+    ]
+  },
+  "cardIdentities": [
+    {
+      "name": "Dancing Fairy",
+      "cardId": "90925163",
+      "role": "Standby LP recovery"
+    },
+    {
+      "name": "Fire Princess",
+      "cardId": "64752646",
+      "role": "500 LP damage after positive LP gain"
+    },
+    {
+      "name": "Darklord Marie",
+      "identity": "Imported from the existing shared card constant",
+      "role": "Standby Graveyard recovery"
+    }
+  ],
+  "invariants": {
+    "physicalUidConservation": true,
+    "physicalOwnerSeatPreserved": true,
+    "sharedTeamLifePoints": true,
+    "atomicFields": [
+      "both team LP totals",
+      "source event ledger",
+      "Fire Princess event ledger",
+      "one TagDuel session revision"
+    ],
+    "duplicateReplayIdempotent": true,
+    "staleRevisionRejected": true,
+    "plannerReadOnly": true,
+    "rules": {
+      "mainDeckMin": 20,
+      "mainDeckMax": 30,
+      "handLimit": 6,
+      "handCheck": "end",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZoneSeparate": true,
+      "extraDeckMax": 5
+    }
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Test integration only; no central resolver registration because M61 handoff remains pending.",
+    "No live Discord credentials or production session are used.",
+    "Upstream Engine Validation for M451-M454 was still running at reservation time."
+  ]
+}
