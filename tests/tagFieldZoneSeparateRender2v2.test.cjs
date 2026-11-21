@@ -41,10 +41,12 @@ function makeGame(first) {
     };
     const field = take(fieldId);
     field.faceUp = true;
+    field.setTurn = state.core.turn;
     physical.field = field;
     physical.backrow = trapIds.map(id => {
       const card = take(id);
       card.faceUp = false;
+      card.setTurn = state.core.turn;
       return card;
     });
     assert.equal(physical.backrow.length, 3);
