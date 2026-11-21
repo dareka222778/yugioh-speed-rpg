@@ -29,7 +29,7 @@
   },
   "validation": {
     "focusedTestFile": "tests/firePrincessTagDuelAdapter.test.cjs",
-    "expectedFocusedCases": 22,
+    "expectedFocusedCases": 24,
     "node": "22",
     "build": "npm run check && npm run build",
     "discord": "offline TagDuel adapter contract only; no live gateway test",

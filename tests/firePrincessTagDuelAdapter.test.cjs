@@ -238,7 +238,7 @@ test('duplicate physical UIDs anywhere in the four-seat inventory are rejected',
   const event = commitGain(game, 0, 500, 'm446:lp:duplicate-uid');
   assert.deepEqual(resolveTagFirePrincessLpGain(game, event), {
     ok: false,
-    reason: 'invalid-tag-duel-core-or-zone-capacity'
+    reason: 'tag-duel-physical-inventory-is-not-unique'
   });
 });
 
@@ -295,6 +295,7 @@ test('the separate Field Zone does not consume a shared backrow slot', () => {
 
 test('the adapter rejects an Extra Deck larger than five', () => {
   const game = makeGame();
+  game.core.players[0].extra ??= [];
   for (let i = 0; i < 6; i++) {
     const physical = takeCard(game, 0);
     game.core.players[0].extra.push(physical);

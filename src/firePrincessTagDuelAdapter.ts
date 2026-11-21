@@ -92,7 +92,7 @@ function validateTagDuelShape(game: TagDuel): string | undefined {
       || !Array.isArray(player.hand)
       || !Array.isArray(player.monsters) || player.monsters.length > 3
       || !Array.isArray(player.backrow) || player.backrow.length > 3
-      || !Array.isArray(player.grave) || !Array.isArray(player.extra) || player.extra.length > 5
+      || !Array.isArray(player.grave) || (player.extra ?? []).length > 5
       || !Array.isArray(player.banished)
       || !Number.isSafeInteger(player.lp) || player.lp < 0)
     || game.core.current !== game.cursor % 2
