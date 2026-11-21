@@ -1,0 +1,522 @@
+[
+  {
+    "id": "08944575",
+    "name": "The Drdek",
+    "primary": {
+      "cid": 4246,
+      "level": 3,
+      "atk": 700,
+      "defense": 800,
+      "raceJA": "悪魔族",
+      "attributeJA": "闇",
+      "ocgDate": "1999-02-04",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4246&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-02-04",
+      "world": "1999-02-04"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "53293545",
+    "name": "Firegrass",
+    "primary": {
+      "cid": 4163,
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "raceJA": "植物族",
+      "attributeJA": "地",
+      "ocgDate": "1999-02-04",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4163&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-02-04",
+      "world": "1999-02-04"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "15401633",
+    "name": "Kagemusha of the Blue Flame",
+    "primary": {
+      "cid": 4220,
+      "level": 2,
+      "atk": 800,
+      "defense": 400,
+      "raceJA": "戦士族",
+      "attributeJA": "地",
+      "ocgDate": "1999-02-04",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4220&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-02-04",
+      "world": "1999-02-04"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "85705804",
+    "name": "Kurama",
+    "primary": {
+      "cid": 4306,
+      "level": 3,
+      "atk": 800,
+      "defense": 800,
+      "raceJA": "鳥獣族",
+      "attributeJA": "風",
+      "ocgDate": "1999-02-04",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4306&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": "2002-03-08",
+      "ocg": "1999-02-04",
+      "world": "1999-02-04"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "12829151",
+    "name": "Kanan the Swordmistress",
+    "primary": {
+      "cid": 4358,
+      "level": 4,
+      "atk": 1400,
+      "defense": 1400,
+      "raceJA": "戦士族",
+      "attributeJA": "地",
+      "ocgDate": "1999-02-21",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4358&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": "2012-09-27",
+      "ocg": "1999-02-21",
+      "world": "1999-02-21"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "99030164",
+    "name": "Happy Lover",
+    "primary": {
+      "cid": 4204,
+      "level": 2,
+      "atk": 800,
+      "defense": 500,
+      "raceJA": "天使族",
+      "attributeJA": "光",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4204&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": "2007-02-06",
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "15042735",
+    "name": "Hurricail",
+    "primary": {
+      "cid": 4180,
+      "level": 2,
+      "atk": 900,
+      "defense": 200,
+      "raceJA": "魔法使い族",
+      "attributeJA": "風",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4180&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "97973387",
+    "name": "Droll Bird",
+    "primary": {
+      "cid": 4213,
+      "level": 2,
+      "atk": 600,
+      "defense": 500,
+      "raceJA": "鳥獣族",
+      "attributeJA": "風",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4213&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": "2011-08-13",
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "64154377",
+    "name": "Embryonic Beast",
+    "primary": {
+      "cid": 4260,
+      "level": 2,
+      "atk": 500,
+      "defense": 750,
+      "raceJA": "悪魔族",
+      "attributeJA": "闇",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4260&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "88435542",
+    "name": "Fire Eye",
+    "primary": {
+      "cid": 4182,
+      "level": 2,
+      "atk": 800,
+      "defense": 600,
+      "raceJA": "炎族",
+      "attributeJA": "炎",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4182&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "77603950",
+    "name": "Phantom Dewan",
+    "primary": {
+      "cid": 4185,
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "raceJA": "魔法使い族",
+      "attributeJA": "闇",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4185&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "83678433",
+    "name": "Midnight Fiend",
+    "primary": {
+      "cid": 4228,
+      "level": 2,
+      "atk": 800,
+      "defense": 600,
+      "raceJA": "悪魔族",
+      "attributeJA": "闇",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4228&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "76704943",
+    "name": "Yamatano Dragon Scroll",
+    "primary": {
+      "cid": 4128,
+      "level": 2,
+      "atk": 900,
+      "defense": 300,
+      "raceJA": "ドラゴン族",
+      "attributeJA": "風",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4128&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "03985011",
+    "name": "Lucky Trinket",
+    "primary": {
+      "cid": 4189,
+      "level": 2,
+      "atk": 600,
+      "defense": 800,
+      "raceJA": "魔法使い族",
+      "attributeJA": "光",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4189&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "29948642",
+    "name": "Dig Beak",
+    "primary": {
+      "cid": 4165,
+      "level": 2,
+      "atk": 500,
+      "defense": 800,
+      "raceJA": "獣族",
+      "attributeJA": "地",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4165&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": "2005-11-01",
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "03732747",
+    "name": "Water Element",
+    "primary": {
+      "cid": 4249,
+      "level": 3,
+      "atk": 900,
+      "defense": 700,
+      "raceJA": "水族",
+      "attributeJA": "水",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4249&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "37243151",
+    "name": "Weather Control",
+    "primary": {
+      "cid": 4136,
+      "level": 2,
+      "atk": 600,
+      "defense": 400,
+      "raceJA": "天使族",
+      "attributeJA": "光",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4136&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "13193642",
+    "name": "Dark Plant",
+    "primary": {
+      "cid": 4129,
+      "level": 1,
+      "atk": 300,
+      "defense": 400,
+      "raceJA": "植物族",
+      "attributeJA": "闇",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4129&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "61201220",
+    "name": "Phantom Ghost",
+    "primary": {
+      "cid": 4209,
+      "level": 2,
+      "atk": 600,
+      "defense": 800,
+      "raceJA": "アンデット族",
+      "attributeJA": "闇",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4209&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  },
+  {
+    "id": "49258578",
+    "name": "Gate Deeg",
+    "primary": {
+      "cid": 4193,
+      "level": 3,
+      "atk": 700,
+      "defense": 800,
+      "raceJA": "獣族",
+      "attributeJA": "闇",
+      "ocgDate": "1999-03-01",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4193&request_locale=ja"
+    },
+    "passcodeProvenance": {
+      "classification": "INFERIDO: imported public canonical/passcode/CID crosswalk, not extracted from official HTML",
+      "source": "catalog/historical/2004-10-01/cards.json",
+      "sourceSha256": "b1e9d62dba087153912e3b5f7e4752a16f16dd7590767a9337918d493582ec1a"
+    },
+    "firstObserved": {
+      "tcg": null,
+      "ocg": "1999-03-01",
+      "world": "1999-03-01"
+    },
+    "tcgStatus": "Imported observation; primary TCG minimum not independently verified; no TCG-specific certification",
+    "classification": "Normal status and mechanical stats CONFIRMADO in official OCG database"
+  }
+]

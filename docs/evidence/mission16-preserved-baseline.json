@@ -1,0 +1,1269 @@
+{
+  "baselineCommit": "8bcc05f9796fdca4cee2562b26a709cd2fa7e691",
+  "files": [
+    {
+      "path": "catalog/engine-v7/39f4b3444af225d08bf86375c299a2260bcb8171a7fe0e57f4d46dbdb49a24bd.json",
+      "sha": "f2e0b4ff78a8dcb5b8e6f945e6ba19c481d39b95"
+    },
+    {
+      "path": "catalog/engine-v7/753b7b52f83c2163b2d6985e38ac083cf78cfd57bcaaa29291825ae091d53c63.json",
+      "sha": "0f38d56f063a0744c700aaa7d1e2b68ded76ea03"
+    },
+    {
+      "path": "catalog/engine-v7/9169f3159010d2072acde99f0c1d4bee7e3a0bb94cd51885f127c6c3c9571b65.json",
+      "sha": "e98954be2fba9dfa5dd1060d427fadf2c8280b0a"
+    },
+    {
+      "path": "catalog/engine-v7/9894de8bf0cdfc4bd56f87def3670542465924f75ca86d83da4a9265d504dc83.json",
+      "sha": "90ea3e7d1f5c6fccca8ab3efdbf9ba4cdad94876"
+    },
+    {
+      "path": "catalog/engine-v7/b4aff6aef433f583d8468a2ef43433b7614898842cdf1a44e9214359b7274917.json",
+      "sha": "c50ca41666b009db50cc2e5a1c36684d8d9a9003"
+    },
+    {
+      "path": "catalog/engine-v7/f2b22722e7e54f619363ecd4c9276253f55095971b1da3d99e704b0cde0704fa.json",
+      "sha": "c1231b15a41ae73af3f1e4feb1a647481d525f10"
+    },
+    {
+      "path": "catalog/engine-v7/fcd636d23c6240a047a2e2594b9521182f9a9c89d91adac8a4e2b525702ad9b9.json",
+      "sha": "c76ace614202a23ab7784373e708208960256f50"
+    },
+    {
+      "path": "catalog/engine-v7/manifest.json",
+      "sha": "1456efc4b881a0fe5f1608c9c9f1e71775dc706a"
+    },
+    {
+      "path": "catalog/engine-v8/d84815dc2001064ba69b0fec719fc41495f78561d0438f16d6a0ee19357d4ee3.json",
+      "sha": "ac88829cc5eade503af0744665a95df1759d9236"
+    },
+    {
+      "path": "catalog/engine-v8/e301765da8535ac4462932bbb64d6f5c2d8fe6f15461d236c89bc8325819a8c6.json",
+      "sha": "abfc8ab4e9ee935b33ea61e5708c44ecca849d2d"
+    },
+    {
+      "path": "catalog/historical/2004-10-01/audit.json",
+      "sha": "f9f2d36f5f401b9dfc4ce42bfbbdbb1a03cfab7a"
+    },
+    {
+      "path": "catalog/historical/2004-10-01/cards.csv",
+      "sha": "9d9b98f9de745a142a343ca0b42b9f21973d5a31"
+    },
+    {
+      "path": "catalog/historical/2004-10-01/cards.json",
+      "sha": "e9ddb6a3cdc5921a26f4ac9c4be703bb34f284e5"
+    },
+    {
+      "path": "catalog/historical/2004-10-01/manifest.json",
+      "sha": "e1faa525c5f5eaf927f0cb3692ea582b4f8efc3a"
+    },
+    {
+      "path": "catalog/historical/2004-10-01/releases.csv",
+      "sha": "57a13bdea066b29cfef8ec5f827f3afadd4e5870"
+    },
+    {
+      "path": "catalog/historical/2004-10-01/releases.json",
+      "sha": "8256210023dce77d22f9b211d2bd39822f5f76e3"
+    },
+    {
+      "path": "catalog/historical/replay-2004-10-01/manifest.json",
+      "sha": "4ab892bb733f1c8325f72a88288c35e3da6c905f"
+    },
+    {
+      "path": "catalog/historical/replay-2004-10-01/source.json.gz.b64",
+      "sha": "097007d635187e70968a7ee44bc7f52e6408ce9c"
+    },
+    {
+      "path": "catalog/proposed/normal-before-2004-09-30.json",
+      "sha": "704ffe5a1f2bcf11952fa1cf3ade13a1dc97c017"
+    },
+    {
+      "path": "catalog/proposed/normal-next-mission3.json",
+      "sha": "4848c3ec5dfbd040a0303bbe70a8528674e8e41a"
+    },
+    {
+      "path": "src/cardBackAsset.ts",
+      "sha": "803eb2d93ef7d3f60458b1e540a07dade896e376"
+    },
+    {
+      "path": "src/cardReleasePolicy.ts",
+      "sha": "3fc1b9efbd4997d5c62896e3751931d0b6f61b87"
+    },
+    {
+      "path": "src/collection.ts",
+      "sha": "6b4099d49312aef18d3b788ffbce5c902034a273"
+    },
+    {
+      "path": "src/database.ts",
+      "sha": "77f91d8a43b7952c93e58e91b37c2ccda078e3c0"
+    },
+    {
+      "path": "src/decks.ts",
+      "sha": "8b17930244681f6d7e7f194cd8f75254b6dc809d"
+    },
+    {
+      "path": "src/duelRenderer.ts",
+      "sha": "41522ef56a7f421c792de94ee3a5864ab17316b8"
+    },
+    {
+      "path": "src/duelStore.ts",
+      "sha": "8881b99a32aa14b9ee54a6cc08d3ea76f3b8c74f"
+    },
+    {
+      "path": "src/duelUI.ts",
+      "sha": "82f876c12547fd92b109311161b8a8b48214fe5d"
+    },
+    {
+      "path": "src/profile.ts",
+      "sha": "5ba84ba9b5623c6f26fe681f21f353b4e9e97b19"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "sha": "a0f18d78915b81073d9a6809a4ee95dbd3b336ee"
+    },
+    {
+      "path": "src/resolvers/v1/attackResponses.ts",
+      "sha": "1bfcc8fed84abb343acb65b6938ba30bca87f470"
+    },
+    {
+      "path": "src/resolvers/v1/cardCatalog.ts",
+      "sha": "cabf19dc4f23742ad5437bc23a381cd3bb33f025"
+    },
+    {
+      "path": "src/resolvers/v1/cardCertifications.ts",
+      "sha": "812f35eb3961dcb5301ed813ee1d805df4e6e1e3"
+    },
+    {
+      "path": "src/resolvers/v1/cardLifetime.ts",
+      "sha": "dc19b90fb9f1851e9f533ab85db757414a8ba3ac"
+    },
+    {
+      "path": "src/resolvers/v1/cardMetadata.ts",
+      "sha": "7ae770d137aaa5a9cde7b1b7653f5f7cc71dbe2d"
+    },
+    {
+      "path": "src/resolvers/v1/cardRegistry.ts",
+      "sha": "c151c75041ed7b0781188a3f9a8992165bc303a7"
+    },
+    {
+      "path": "src/resolvers/v1/chainEngine.ts",
+      "sha": "b2f4a7597113d8e2744e605528a987ce9de7e784"
+    },
+    {
+      "path": "src/resolvers/v1/classicEffects.ts",
+      "sha": "7ba034b662226f5b67e0a531b6b2b18bc3160594"
+    },
+    {
+      "path": "src/resolvers/v1/classicEngineCards.ts",
+      "sha": "09f3448cce8fea52977d7f145aea4c275cce323b"
+    },
+    {
+      "path": "src/resolvers/v1/classicExpansion.ts",
+      "sha": "5798ceff6c3722bfd6f450bead0a1db608637fb9"
+    },
+    {
+      "path": "src/resolvers/v1/duelEngine.ts",
+      "sha": "3f8b7d1530df17e04d33c3b8faa07775810509b9"
+    },
+    {
+      "path": "src/resolvers/v1/duelIntegrity.ts",
+      "sha": "8a76ee20c0db8116e6b604ba2532ae20681e6803"
+    },
+    {
+      "path": "src/resolvers/v1/duelRandom.ts",
+      "sha": "fc7d7cb8a3f2a6de9a2e95ef48c05aa127a570ae"
+    },
+    {
+      "path": "src/resolvers/v1/duelTransitions.ts",
+      "sha": "eb4f92097af2c4edcdedd3ba9204f11f89e54bb0"
+    },
+    {
+      "path": "src/resolvers/v1/economicOperations.ts",
+      "sha": "c1ba0bd99443402db5b91f5b188c4ba8706d2d60"
+    },
+    {
+      "path": "src/resolvers/v1/effectDefinitions.ts",
+      "sha": "03cf4b506d5a7c4b1eacb1055877e9a8cee03027"
+    },
+    {
+      "path": "src/resolvers/v1/effectModels.ts",
+      "sha": "23415ea0968726005d9778ebe9a30ff596d1cbae"
+    },
+    {
+      "path": "src/resolvers/v1/effectOperations.ts",
+      "sha": "f5638843cbd5f90e55442b877013f07ce3202b35"
+    },
+    {
+      "path": "src/resolvers/v1/effectRegistry.ts",
+      "sha": "88707bb08e00a90e2e80233aaa597dd396d8c671"
+    },
+    {
+      "path": "src/resolvers/v1/effectTiming.ts",
+      "sha": "fb6db5c0a58f2eb0fc3ad90e8bc8e9b77b70007d"
+    },
+    {
+      "path": "src/resolvers/v1/handFlow.ts",
+      "sha": "2f73fa25f22a837025c212841b4011579be386e6"
+    },
+    {
+      "path": "src/resolvers/v1/manifest.json",
+      "sha": "fa080da38957f7322bd9caad7bde3c0e2ac09bca"
+    },
+    {
+      "path": "src/resolvers/v1/monsterEffects.ts",
+      "sha": "93d0426060415080cbba99550e57bd23af9a201c"
+    },
+    {
+      "path": "src/resolvers/v1/monsterEntry.ts",
+      "sha": "cd11ad8fa9bc2348c0bef2a0f0bb7d8eb8894f19"
+    },
+    {
+      "path": "src/resolvers/v1/monsterExit.ts",
+      "sha": "69e5410d9915ffa0339a5e9e9094926947f82921"
+    },
+    {
+      "path": "src/resolvers/v1/rulesProfile.ts",
+      "sha": "eb3449a7f3293680577c25681e007b0295dd42d9"
+    },
+    {
+      "path": "src/resolvers/v1/spellExceptions.ts",
+      "sha": "7a80ba2c5e94af3aa87fc7d72b3c0413875aab3a"
+    },
+    {
+      "path": "src/resolvers/v1/teamRotation.ts",
+      "sha": "aa539fe7d002ef9f2d72c77334a8468d5c80a4bd"
+    },
+    {
+      "path": "src/resolvers/v2/attackResponses.ts",
+      "sha": "fb64535db46dcbcfd02331f3564ac179ca1eac94"
+    },
+    {
+      "path": "src/resolvers/v2/cardCatalog.ts",
+      "sha": "cabf19dc4f23742ad5437bc23a381cd3bb33f025"
+    },
+    {
+      "path": "src/resolvers/v2/cardCertifications.ts",
+      "sha": "812f35eb3961dcb5301ed813ee1d805df4e6e1e3"
+    },
+    {
+      "path": "src/resolvers/v2/cardLifetime.ts",
+      "sha": "c4699e2ea357370fe85501811d043d19276686cf"
+    },
+    {
+      "path": "src/resolvers/v2/cardMetadata.ts",
+      "sha": "7ae770d137aaa5a9cde7b1b7653f5f7cc71dbe2d"
+    },
+    {
+      "path": "src/resolvers/v2/cardPresentation.ts",
+      "sha": "0e6e3386a7d19e3dd09f92bd96d712d6406b8e4a"
+    },
+    {
+      "path": "src/resolvers/v2/cardRegistry.ts",
+      "sha": "c151c75041ed7b0781188a3f9a8992165bc303a7"
+    },
+    {
+      "path": "src/resolvers/v2/chainEngine.ts",
+      "sha": "b2f4a7597113d8e2744e605528a987ce9de7e784"
+    },
+    {
+      "path": "src/resolvers/v2/classicEffects.ts",
+      "sha": "0a4f9b33ac81c8e685b3adb45ffd78e96d72c549"
+    },
+    {
+      "path": "src/resolvers/v2/classicEngineCards.ts",
+      "sha": "09f3448cce8fea52977d7f145aea4c275cce323b"
+    },
+    {
+      "path": "src/resolvers/v2/classicExpansion.ts",
+      "sha": "5798ceff6c3722bfd6f450bead0a1db608637fb9"
+    },
+    {
+      "path": "src/resolvers/v2/duelEngineCurrent.ts",
+      "sha": "6c1eec23abfbca97f38b3760e418de86eb07c5a5"
+    },
+    {
+      "path": "src/resolvers/v2/duelIntegrity.ts",
+      "sha": "5b2dc8ebfc1c7222529b05a1c2b6c8d6c2ba4369"
+    },
+    {
+      "path": "src/resolvers/v2/duelRandom.ts",
+      "sha": "fc7d7cb8a3f2a6de9a2e95ef48c05aa127a570ae"
+    },
+    {
+      "path": "src/resolvers/v2/duelTransitions.ts",
+      "sha": "01c35e416e091e55b55bf6a853f8e24f5e9cee89"
+    },
+    {
+      "path": "src/resolvers/v2/economicOperations.ts",
+      "sha": "5b8a789738903d52bb1302edbc021f0cc819fd4b"
+    },
+    {
+      "path": "src/resolvers/v2/effectDefinitions.ts",
+      "sha": "03cf4b506d5a7c4b1eacb1055877e9a8cee03027"
+    },
+    {
+      "path": "src/resolvers/v2/effectModels.ts",
+      "sha": "23415ea0968726005d9778ebe9a30ff596d1cbae"
+    },
+    {
+      "path": "src/resolvers/v2/effectOperations.ts",
+      "sha": "f83dd5d7d8a8f1f9070847eb5b7262cf4ceb157a"
+    },
+    {
+      "path": "src/resolvers/v2/effectRegistry.ts",
+      "sha": "713767601d8b631ca44bbdb6fe43cced09fa7a6b"
+    },
+    {
+      "path": "src/resolvers/v2/effectTiming.ts",
+      "sha": "5748a980b12940c20c78b4bbfb3eb0059c7fbc5b"
+    },
+    {
+      "path": "src/resolvers/v2/handFlow.ts",
+      "sha": "93eacaf2eb17c469b8e079498e1ee62c26100041"
+    },
+    {
+      "path": "src/resolvers/v2/manifest.json",
+      "sha": "d9a7c75904a2e48785bc6752b1b72bc8edf8fdcf"
+    },
+    {
+      "path": "src/resolvers/v2/monsterEffects.ts",
+      "sha": "93d0426060415080cbba99550e57bd23af9a201c"
+    },
+    {
+      "path": "src/resolvers/v2/monsterEntry.ts",
+      "sha": "5700908cd6c32097a545235d6a2a5c326fe9b27f"
+    },
+    {
+      "path": "src/resolvers/v2/monsterExit.ts",
+      "sha": "1d597dc5ad7c51d8acb3f9c5df955ef9a10c8a74"
+    },
+    {
+      "path": "src/resolvers/v2/resolverIdentity.ts",
+      "sha": "cd0b24b690ae8796ceedf0efa09394b05ef27398"
+    },
+    {
+      "path": "src/resolvers/v2/rulesProfile.ts",
+      "sha": "eb3449a7f3293680577c25681e007b0295dd42d9"
+    },
+    {
+      "path": "src/resolvers/v2/spellExceptions.ts",
+      "sha": "40773827e0be0d1bdbe511661ba4b88f17cd7514"
+    },
+    {
+      "path": "src/resolvers/v2/standbyFlow.ts",
+      "sha": "3814d1f9b9312c01e004ce6f95344a2b1a0b95d3"
+    },
+    {
+      "path": "src/resolvers/v2/teamRotation.ts",
+      "sha": "750ef7d1359252e79917aba34aeca6d51930dd6a"
+    },
+    {
+      "path": "src/resolvers/v2/tokens.ts",
+      "sha": "ec77e8347bf0a8e9e13e3ddd80988018ef557299"
+    },
+    {
+      "path": "src/resolvers/v3/attackResponses.ts",
+      "sha": "fb64535db46dcbcfd02331f3564ac179ca1eac94"
+    },
+    {
+      "path": "src/resolvers/v3/cardCatalog.ts",
+      "sha": "cabf19dc4f23742ad5437bc23a381cd3bb33f025"
+    },
+    {
+      "path": "src/resolvers/v3/cardCertifications.ts",
+      "sha": "0be64e0380fd52502834edc5d564fddc5714b9db"
+    },
+    {
+      "path": "src/resolvers/v3/cardLifetime.ts",
+      "sha": "c4699e2ea357370fe85501811d043d19276686cf"
+    },
+    {
+      "path": "src/resolvers/v3/cardMetadata.ts",
+      "sha": "e8fef0720471bbf2088ebf6fbd12566837b93095"
+    },
+    {
+      "path": "src/resolvers/v3/cardPresentation.ts",
+      "sha": "0e6e3386a7d19e3dd09f92bd96d712d6406b8e4a"
+    },
+    {
+      "path": "src/resolvers/v3/cardRegistry.ts",
+      "sha": "c151c75041ed7b0781188a3f9a8992165bc303a7"
+    },
+    {
+      "path": "src/resolvers/v3/chainEngine.ts",
+      "sha": "b2f4a7597113d8e2744e605528a987ce9de7e784"
+    },
+    {
+      "path": "src/resolvers/v3/classicEffects.ts",
+      "sha": "0a4f9b33ac81c8e685b3adb45ffd78e96d72c549"
+    },
+    {
+      "path": "src/resolvers/v3/classicEngineCards.ts",
+      "sha": "09f3448cce8fea52977d7f145aea4c275cce323b"
+    },
+    {
+      "path": "src/resolvers/v3/classicExpansion.ts",
+      "sha": "5798ceff6c3722bfd6f450bead0a1db608637fb9"
+    },
+    {
+      "path": "src/resolvers/v3/duelEngineCurrent.ts",
+      "sha": "6c1eec23abfbca97f38b3760e418de86eb07c5a5"
+    },
+    {
+      "path": "src/resolvers/v3/duelIntegrity.ts",
+      "sha": "27a463d15ac1e935b521fffe4dd9dced62eba4fd"
+    },
+    {
+      "path": "src/resolvers/v3/duelRandom.ts",
+      "sha": "fc7d7cb8a3f2a6de9a2e95ef48c05aa127a570ae"
+    },
+    {
+      "path": "src/resolvers/v3/duelTransitions.ts",
+      "sha": "01c35e416e091e55b55bf6a853f8e24f5e9cee89"
+    },
+    {
+      "path": "src/resolvers/v3/economicOperations.ts",
+      "sha": "5b8a789738903d52bb1302edbc021f0cc819fd4b"
+    },
+    {
+      "path": "src/resolvers/v3/effectDefinitions.ts",
+      "sha": "03cf4b506d5a7c4b1eacb1055877e9a8cee03027"
+    },
+    {
+      "path": "src/resolvers/v3/effectModels.ts",
+      "sha": "23415ea0968726005d9778ebe9a30ff596d1cbae"
+    },
+    {
+      "path": "src/resolvers/v3/effectOperations.ts",
+      "sha": "f83dd5d7d8a8f1f9070847eb5b7262cf4ceb157a"
+    },
+    {
+      "path": "src/resolvers/v3/effectRegistry.ts",
+      "sha": "713767601d8b631ca44bbdb6fe43cced09fa7a6b"
+    },
+    {
+      "path": "src/resolvers/v3/effectTiming.ts",
+      "sha": "5748a980b12940c20c78b4bbfb3eb0059c7fbc5b"
+    },
+    {
+      "path": "src/resolvers/v3/handFlow.ts",
+      "sha": "93eacaf2eb17c469b8e079498e1ee62c26100041"
+    },
+    {
+      "path": "src/resolvers/v3/historicalNormalBatch.ts",
+      "sha": "694e1b37e66e20f6fb1fff772d3cc62980c6c8af"
+    },
+    {
+      "path": "src/resolvers/v3/manifest.json",
+      "sha": "3f0c7618c9f5f1b9c8278d7389ca60f76961b707"
+    },
+    {
+      "path": "src/resolvers/v3/monsterEffects.ts",
+      "sha": "93d0426060415080cbba99550e57bd23af9a201c"
+    },
+    {
+      "path": "src/resolvers/v3/monsterEntry.ts",
+      "sha": "5700908cd6c32097a545235d6a2a5c326fe9b27f"
+    },
+    {
+      "path": "src/resolvers/v3/monsterExit.ts",
+      "sha": "1d597dc5ad7c51d8acb3f9c5df955ef9a10c8a74"
+    },
+    {
+      "path": "src/resolvers/v3/resolverIdentity.ts",
+      "sha": "acf15c05ab70e359cf959533e09d557b70ebddd7"
+    },
+    {
+      "path": "src/resolvers/v3/rulesProfile.ts",
+      "sha": "eb3449a7f3293680577c25681e007b0295dd42d9"
+    },
+    {
+      "path": "src/resolvers/v3/spellExceptions.ts",
+      "sha": "40773827e0be0d1bdbe511661ba4b88f17cd7514"
+    },
+    {
+      "path": "src/resolvers/v3/standbyFlow.ts",
+      "sha": "a5863619f28a137bcfe8a1734f883cf08288516b"
+    },
+    {
+      "path": "src/resolvers/v3/teamRotation.ts",
+      "sha": "750ef7d1359252e79917aba34aeca6d51930dd6a"
+    },
+    {
+      "path": "src/resolvers/v3/tokens.ts",
+      "sha": "7a317c57b33c64ee0238f734a332fce3fef38bd5"
+    },
+    {
+      "path": "src/resolvers/v4/attackResponses.ts",
+      "sha": "fb64535db46dcbcfd02331f3564ac179ca1eac94"
+    },
+    {
+      "path": "src/resolvers/v4/cardCatalog.ts",
+      "sha": "cabf19dc4f23742ad5437bc23a381cd3bb33f025"
+    },
+    {
+      "path": "src/resolvers/v4/cardCertifications.ts",
+      "sha": "b04f69cf0e6341cd501d4169196a58dd2015c589"
+    },
+    {
+      "path": "src/resolvers/v4/cardLifetime.ts",
+      "sha": "c4699e2ea357370fe85501811d043d19276686cf"
+    },
+    {
+      "path": "src/resolvers/v4/cardMetadata.ts",
+      "sha": "2920e5ed25cd24408911e1145e6d5ed42aa343ed"
+    },
+    {
+      "path": "src/resolvers/v4/cardPresentation.ts",
+      "sha": "0e6e3386a7d19e3dd09f92bd96d712d6406b8e4a"
+    },
+    {
+      "path": "src/resolvers/v4/cardRegistry.ts",
+      "sha": "c151c75041ed7b0781188a3f9a8992165bc303a7"
+    },
+    {
+      "path": "src/resolvers/v4/chainEngine.ts",
+      "sha": "b2f4a7597113d8e2744e605528a987ce9de7e784"
+    },
+    {
+      "path": "src/resolvers/v4/classicEffects.ts",
+      "sha": "0a4f9b33ac81c8e685b3adb45ffd78e96d72c549"
+    },
+    {
+      "path": "src/resolvers/v4/classicEngineCards.ts",
+      "sha": "09f3448cce8fea52977d7f145aea4c275cce323b"
+    },
+    {
+      "path": "src/resolvers/v4/classicExpansion.ts",
+      "sha": "5798ceff6c3722bfd6f450bead0a1db608637fb9"
+    },
+    {
+      "path": "src/resolvers/v4/duelEngineCurrent.ts",
+      "sha": "6c1eec23abfbca97f38b3760e418de86eb07c5a5"
+    },
+    {
+      "path": "src/resolvers/v4/duelIntegrity.ts",
+      "sha": "caa15b359a5a3d4ac1ac446ef5da330d1705b6e3"
+    },
+    {
+      "path": "src/resolvers/v4/duelRandom.ts",
+      "sha": "fc7d7cb8a3f2a6de9a2e95ef48c05aa127a570ae"
+    },
+    {
+      "path": "src/resolvers/v4/duelTransitions.ts",
+      "sha": "01c35e416e091e55b55bf6a853f8e24f5e9cee89"
+    },
+    {
+      "path": "src/resolvers/v4/economicOperations.ts",
+      "sha": "5b8a789738903d52bb1302edbc021f0cc819fd4b"
+    },
+    {
+      "path": "src/resolvers/v4/effectDefinitions.ts",
+      "sha": "03cf4b506d5a7c4b1eacb1055877e9a8cee03027"
+    },
+    {
+      "path": "src/resolvers/v4/effectModels.ts",
+      "sha": "23415ea0968726005d9778ebe9a30ff596d1cbae"
+    },
+    {
+      "path": "src/resolvers/v4/effectOperations.ts",
+      "sha": "f83dd5d7d8a8f1f9070847eb5b7262cf4ceb157a"
+    },
+    {
+      "path": "src/resolvers/v4/effectRegistry.ts",
+      "sha": "713767601d8b631ca44bbdb6fe43cced09fa7a6b"
+    },
+    {
+      "path": "src/resolvers/v4/effectTiming.ts",
+      "sha": "5748a980b12940c20c78b4bbfb3eb0059c7fbc5b"
+    },
+    {
+      "path": "src/resolvers/v4/handFlow.ts",
+      "sha": "93eacaf2eb17c469b8e079498e1ee62c26100041"
+    },
+    {
+      "path": "src/resolvers/v4/historicalNormalBatch.ts",
+      "sha": "694e1b37e66e20f6fb1fff772d3cc62980c6c8af"
+    },
+    {
+      "path": "src/resolvers/v4/historicalNormalBatch4.ts",
+      "sha": "b442b32018444befb760df9e938b2bf48a63c51b"
+    },
+    {
+      "path": "src/resolvers/v4/manifest.json",
+      "sha": "f32137dc2eb03fd19e4f6e3c2169b03ceb325746"
+    },
+    {
+      "path": "src/resolvers/v4/monsterEffects.ts",
+      "sha": "93d0426060415080cbba99550e57bd23af9a201c"
+    },
+    {
+      "path": "src/resolvers/v4/monsterEntry.ts",
+      "sha": "5700908cd6c32097a545235d6a2a5c326fe9b27f"
+    },
+    {
+      "path": "src/resolvers/v4/monsterExit.ts",
+      "sha": "1d597dc5ad7c51d8acb3f9c5df955ef9a10c8a74"
+    },
+    {
+      "path": "src/resolvers/v4/resolverIdentity.ts",
+      "sha": "8dbce38513bbf2ce940f3e32ef40a951a8a78490"
+    },
+    {
+      "path": "src/resolvers/v4/rulesProfile.ts",
+      "sha": "eb3449a7f3293680577c25681e007b0295dd42d9"
+    },
+    {
+      "path": "src/resolvers/v4/spellExceptions.ts",
+      "sha": "40773827e0be0d1bdbe511661ba4b88f17cd7514"
+    },
+    {
+      "path": "src/resolvers/v4/standbyFlow.ts",
+      "sha": "01d4a9ae7faf8a2834be057c22587ed152ab7019"
+    },
+    {
+      "path": "src/resolvers/v4/teamRotation.ts",
+      "sha": "750ef7d1359252e79917aba34aeca6d51930dd6a"
+    },
+    {
+      "path": "src/resolvers/v4/tokens.ts",
+      "sha": "b8b8e24358dc29beb40f1c6bd7e47ba4cfd4cb33"
+    },
+    {
+      "path": "src/resolvers/v5/attackResponses.ts",
+      "sha": "fb64535db46dcbcfd02331f3564ac179ca1eac94"
+    },
+    {
+      "path": "src/resolvers/v5/cardCatalog.ts",
+      "sha": "cabf19dc4f23742ad5437bc23a381cd3bb33f025"
+    },
+    {
+      "path": "src/resolvers/v5/cardCertifications.ts",
+      "sha": "432d4e673c2ba938e9628fae4feca4e97f7af4dd"
+    },
+    {
+      "path": "src/resolvers/v5/cardLifetime.ts",
+      "sha": "c4699e2ea357370fe85501811d043d19276686cf"
+    },
+    {
+      "path": "src/resolvers/v5/cardMetadata.ts",
+      "sha": "6aa554c653167797ab853aee08a8ede3a5ab6955"
+    },
+    {
+      "path": "src/resolvers/v5/cardPresentation.ts",
+      "sha": "0e6e3386a7d19e3dd09f92bd96d712d6406b8e4a"
+    },
+    {
+      "path": "src/resolvers/v5/cardRegistry.ts",
+      "sha": "c151c75041ed7b0781188a3f9a8992165bc303a7"
+    },
+    {
+      "path": "src/resolvers/v5/chainEngine.ts",
+      "sha": "b2f4a7597113d8e2744e605528a987ce9de7e784"
+    },
+    {
+      "path": "src/resolvers/v5/classicEffects.ts",
+      "sha": "1822a542066cc5824e059227f0fdd1f3b31f0215"
+    },
+    {
+      "path": "src/resolvers/v5/classicEngineCards.ts",
+      "sha": "09f3448cce8fea52977d7f145aea4c275cce323b"
+    },
+    {
+      "path": "src/resolvers/v5/classicExpansion.ts",
+      "sha": "5798ceff6c3722bfd6f450bead0a1db608637fb9"
+    },
+    {
+      "path": "src/resolvers/v5/duelEngineCurrent.ts",
+      "sha": "d71aa9928e38aef713a54e5f9da8c3cd4e9e85e6"
+    },
+    {
+      "path": "src/resolvers/v5/duelIntegrity.ts",
+      "sha": "caa15b359a5a3d4ac1ac446ef5da330d1705b6e3"
+    },
+    {
+      "path": "src/resolvers/v5/duelRandom.ts",
+      "sha": "fc7d7cb8a3f2a6de9a2e95ef48c05aa127a570ae"
+    },
+    {
+      "path": "src/resolvers/v5/duelTransitions.ts",
+      "sha": "01c35e416e091e55b55bf6a853f8e24f5e9cee89"
+    },
+    {
+      "path": "src/resolvers/v5/economicOperations.ts",
+      "sha": "5b8a789738903d52bb1302edbc021f0cc819fd4b"
+    },
+    {
+      "path": "src/resolvers/v5/effectDefinitions.ts",
+      "sha": "2e9f1976ba669c341fdfd777084340e44f120b16"
+    },
+    {
+      "path": "src/resolvers/v5/effectModels.ts",
+      "sha": "1e9ca5e3620edf34aac650b2a7175ec9a2c69f19"
+    },
+    {
+      "path": "src/resolvers/v5/effectOperations.ts",
+      "sha": "f83dd5d7d8a8f1f9070847eb5b7262cf4ceb157a"
+    },
+    {
+      "path": "src/resolvers/v5/effectRegistry.ts",
+      "sha": "713767601d8b631ca44bbdb6fe43cced09fa7a6b"
+    },
+    {
+      "path": "src/resolvers/v5/effectTiming.ts",
+      "sha": "5748a980b12940c20c78b4bbfb3eb0059c7fbc5b"
+    },
+    {
+      "path": "src/resolvers/v5/handFlow.ts",
+      "sha": "93eacaf2eb17c469b8e079498e1ee62c26100041"
+    },
+    {
+      "path": "src/resolvers/v5/historicalNormalBatch.ts",
+      "sha": "694e1b37e66e20f6fb1fff772d3cc62980c6c8af"
+    },
+    {
+      "path": "src/resolvers/v5/historicalNormalBatch4.ts",
+      "sha": "b442b32018444befb760df9e938b2bf48a63c51b"
+    },
+    {
+      "path": "src/resolvers/v5/manifest.json",
+      "sha": "fa803181d09ef352eccb1ca4f44550e1f9ea836b"
+    },
+    {
+      "path": "src/resolvers/v5/mechanicalBatch5.ts",
+      "sha": "8a139a442b798bb2ab9b2cb6a736a51b3fa37bad"
+    },
+    {
+      "path": "src/resolvers/v5/monsterEffects.ts",
+      "sha": "a3de9c3d8f87cebb9dc6fd84072bbd08141a34c7"
+    },
+    {
+      "path": "src/resolvers/v5/monsterEntry.ts",
+      "sha": "5700908cd6c32097a545235d6a2a5c326fe9b27f"
+    },
+    {
+      "path": "src/resolvers/v5/monsterExit.ts",
+      "sha": "1d597dc5ad7c51d8acb3f9c5df955ef9a10c8a74"
+    },
+    {
+      "path": "src/resolvers/v5/resolverIdentity.ts",
+      "sha": "e95e0da1adb484e0b8047550fd457c09f012e4dc"
+    },
+    {
+      "path": "src/resolvers/v5/rulesProfile.ts",
+      "sha": "eb3449a7f3293680577c25681e007b0295dd42d9"
+    },
+    {
+      "path": "src/resolvers/v5/spellExceptions.ts",
+      "sha": "40773827e0be0d1bdbe511661ba4b88f17cd7514"
+    },
+    {
+      "path": "src/resolvers/v5/standbyFlow.ts",
+      "sha": "fc46f92bd5505d5660fa3e31295a2cb62a99d0c7"
+    },
+    {
+      "path": "src/resolvers/v5/teamRotation.ts",
+      "sha": "750ef7d1359252e79917aba34aeca6d51930dd6a"
+    },
+    {
+      "path": "src/resolvers/v5/tokens.ts",
+      "sha": "18235f5062e717479e7790533e1fd90437d7eb23"
+    },
+    {
+      "path": "src/resolvers/v6/attackResponses.ts",
+      "sha": "fb64535db46dcbcfd02331f3564ac179ca1eac94"
+    },
+    {
+      "path": "src/resolvers/v6/cardCatalog.ts",
+      "sha": "cabf19dc4f23742ad5437bc23a381cd3bb33f025"
+    },
+    {
+      "path": "src/resolvers/v6/cardCertifications.ts",
+      "sha": "ea76f15159fde93d34ad22eb492df9649c637b7e"
+    },
+    {
+      "path": "src/resolvers/v6/cardLifetime.ts",
+      "sha": "c4699e2ea357370fe85501811d043d19276686cf"
+    },
+    {
+      "path": "src/resolvers/v6/cardMetadata.ts",
+      "sha": "4cb52357a2b39176720a2736c8193121aec64605"
+    },
+    {
+      "path": "src/resolvers/v6/cardPresentation.ts",
+      "sha": "0e6e3386a7d19e3dd09f92bd96d712d6406b8e4a"
+    },
+    {
+      "path": "src/resolvers/v6/cardRegistry.ts",
+      "sha": "c151c75041ed7b0781188a3f9a8992165bc303a7"
+    },
+    {
+      "path": "src/resolvers/v6/chainEngine.ts",
+      "sha": "b2f4a7597113d8e2744e605528a987ce9de7e784"
+    },
+    {
+      "path": "src/resolvers/v6/classicEffects.ts",
+      "sha": "1822a542066cc5824e059227f0fdd1f3b31f0215"
+    },
+    {
+      "path": "src/resolvers/v6/classicEngineCards.ts",
+      "sha": "09f3448cce8fea52977d7f145aea4c275cce323b"
+    },
+    {
+      "path": "src/resolvers/v6/classicExpansion.ts",
+      "sha": "5798ceff6c3722bfd6f450bead0a1db608637fb9"
+    },
+    {
+      "path": "src/resolvers/v6/duelEngineCurrent.ts",
+      "sha": "bd3a415d4887cbf3458104bbc3c5395021f841c9"
+    },
+    {
+      "path": "src/resolvers/v6/duelIntegrity.ts",
+      "sha": "caa15b359a5a3d4ac1ac446ef5da330d1705b6e3"
+    },
+    {
+      "path": "src/resolvers/v6/duelRandom.ts",
+      "sha": "fc7d7cb8a3f2a6de9a2e95ef48c05aa127a570ae"
+    },
+    {
+      "path": "src/resolvers/v6/duelTransitions.ts",
+      "sha": "01c35e416e091e55b55bf6a853f8e24f5e9cee89"
+    },
+    {
+      "path": "src/resolvers/v6/economicOperations.ts",
+      "sha": "5b8a789738903d52bb1302edbc021f0cc819fd4b"
+    },
+    {
+      "path": "src/resolvers/v6/effectDefinitions.ts",
+      "sha": "4818c075dd656705d56b1c95c24432d136929b71"
+    },
+    {
+      "path": "src/resolvers/v6/effectModels.ts",
+      "sha": "1e9ca5e3620edf34aac650b2a7175ec9a2c69f19"
+    },
+    {
+      "path": "src/resolvers/v6/effectOperations.ts",
+      "sha": "f83dd5d7d8a8f1f9070847eb5b7262cf4ceb157a"
+    },
+    {
+      "path": "src/resolvers/v6/effectRegistry.ts",
+      "sha": "713767601d8b631ca44bbdb6fe43cced09fa7a6b"
+    },
+    {
+      "path": "src/resolvers/v6/effectTiming.ts",
+      "sha": "5748a980b12940c20c78b4bbfb3eb0059c7fbc5b"
+    },
+    {
+      "path": "src/resolvers/v6/handFlow.ts",
+      "sha": "93eacaf2eb17c469b8e079498e1ee62c26100041"
+    },
+    {
+      "path": "src/resolvers/v6/historicalNormalBatch.ts",
+      "sha": "694e1b37e66e20f6fb1fff772d3cc62980c6c8af"
+    },
+    {
+      "path": "src/resolvers/v6/historicalNormalBatch4.ts",
+      "sha": "b442b32018444befb760df9e938b2bf48a63c51b"
+    },
+    {
+      "path": "src/resolvers/v6/manifest.json",
+      "sha": "05938268bcdaba1d205c80618853a5a51f0e1777"
+    },
+    {
+      "path": "src/resolvers/v6/mechanicalBatch5.ts",
+      "sha": "8a139a442b798bb2ab9b2cb6a736a51b3fa37bad"
+    },
+    {
+      "path": "src/resolvers/v6/mechanicalBatch7.ts",
+      "sha": "84ff99d284fd6927c123489aa4cc70c6d2fbe9d7"
+    },
+    {
+      "path": "src/resolvers/v6/monsterEffects.ts",
+      "sha": "4c9046ddc0e4bfbd7c20626d1fa95549d6e4d063"
+    },
+    {
+      "path": "src/resolvers/v6/monsterEntry.ts",
+      "sha": "5700908cd6c32097a545235d6a2a5c326fe9b27f"
+    },
+    {
+      "path": "src/resolvers/v6/monsterExit.ts",
+      "sha": "1d597dc5ad7c51d8acb3f9c5df955ef9a10c8a74"
+    },
+    {
+      "path": "src/resolvers/v6/resolverIdentity.ts",
+      "sha": "89315a80310ae4080176820f65ae27d0d50e4f52"
+    },
+    {
+      "path": "src/resolvers/v6/rulesProfile.ts",
+      "sha": "eb3449a7f3293680577c25681e007b0295dd42d9"
+    },
+    {
+      "path": "src/resolvers/v6/spellExceptions.ts",
+      "sha": "40773827e0be0d1bdbe511661ba4b88f17cd7514"
+    },
+    {
+      "path": "src/resolvers/v6/standbyFlow.ts",
+      "sha": "5c7116412eb2478b544299498319f6584afb4bb3"
+    },
+    {
+      "path": "src/resolvers/v6/teamRotation.ts",
+      "sha": "750ef7d1359252e79917aba34aeca6d51930dd6a"
+    },
+    {
+      "path": "src/resolvers/v6/tokens.ts",
+      "sha": "5c7e510aaaca8955cb8072d92ba7d983574e431a"
+    },
+    {
+      "path": "src/resolvers/v7/attackResponses.ts",
+      "sha": "fb64535db46dcbcfd02331f3564ac179ca1eac94"
+    },
+    {
+      "path": "src/resolvers/v7/cardCatalog.ts",
+      "sha": "cabf19dc4f23742ad5437bc23a381cd3bb33f025"
+    },
+    {
+      "path": "src/resolvers/v7/cardCertifications.ts",
+      "sha": "ea76f15159fde93d34ad22eb492df9649c637b7e"
+    },
+    {
+      "path": "src/resolvers/v7/cardLifetime.ts",
+      "sha": "c4699e2ea357370fe85501811d043d19276686cf"
+    },
+    {
+      "path": "src/resolvers/v7/cardMetadata.ts",
+      "sha": "4cb52357a2b39176720a2736c8193121aec64605"
+    },
+    {
+      "path": "src/resolvers/v7/cardPresentation.ts",
+      "sha": "0e6e3386a7d19e3dd09f92bd96d712d6406b8e4a"
+    },
+    {
+      "path": "src/resolvers/v7/cardRegistry.ts",
+      "sha": "1d2a9b3d68cd8880ce3d3f0ace55e6a711e9caa9"
+    },
+    {
+      "path": "src/resolvers/v7/catalogContext.ts",
+      "sha": "f53cdcc7087af5b3aaf0195fabe848a14d61851b"
+    },
+    {
+      "path": "src/resolvers/v7/catalogRuntime.ts",
+      "sha": "07ff5147785badd5614a713e8be9849128c63b37"
+    },
+    {
+      "path": "src/resolvers/v7/chainEngine.ts",
+      "sha": "b2f4a7597113d8e2744e605528a987ce9de7e784"
+    },
+    {
+      "path": "src/resolvers/v7/classicEffects.ts",
+      "sha": "ac56e98aa68a2f368a51efd9f6a3a68c89cd876a"
+    },
+    {
+      "path": "src/resolvers/v7/classicEngineCards.ts",
+      "sha": "09f3448cce8fea52977d7f145aea4c275cce323b"
+    },
+    {
+      "path": "src/resolvers/v7/classicExpansion.ts",
+      "sha": "5798ceff6c3722bfd6f450bead0a1db608637fb9"
+    },
+    {
+      "path": "src/resolvers/v7/continuousEffects.ts",
+      "sha": "ee1a609b65e2072a4e6b18d383a30b835ec5db88"
+    },
+    {
+      "path": "src/resolvers/v7/continuousRules.ts",
+      "sha": "0ff487bf30d730bf3e6a822d32d7e54f1bce58a0"
+    },
+    {
+      "path": "src/resolvers/v7/duelEngineCurrent.ts",
+      "sha": "bba9096695a7f7060f618989dead69aab5fd1178"
+    },
+    {
+      "path": "src/resolvers/v7/duelIntegrity.ts",
+      "sha": "4e314f2375e9d5e5b87e5a33721c751de07ea959"
+    },
+    {
+      "path": "src/resolvers/v7/duelRandom.ts",
+      "sha": "fc7d7cb8a3f2a6de9a2e95ef48c05aa127a570ae"
+    },
+    {
+      "path": "src/resolvers/v7/duelTransitions.ts",
+      "sha": "01c35e416e091e55b55bf6a853f8e24f5e9cee89"
+    },
+    {
+      "path": "src/resolvers/v7/economicOperations.ts",
+      "sha": "5b8a789738903d52bb1302edbc021f0cc819fd4b"
+    },
+    {
+      "path": "src/resolvers/v7/effectDefinitions.ts",
+      "sha": "6db2c2734ea77552eec5e7747b652262d0889b14"
+    },
+    {
+      "path": "src/resolvers/v7/effectModels.ts",
+      "sha": "baf6e3668988f2fe56f48bfda91247e61d826d9d"
+    },
+    {
+      "path": "src/resolvers/v7/effectOperations.ts",
+      "sha": "ed45dc53f58bbf4511e2a4aea110f14cc286d787"
+    },
+    {
+      "path": "src/resolvers/v7/effectRegistry.ts",
+      "sha": "9ba78c049870e181af9269571725e42df4b2a122"
+    },
+    {
+      "path": "src/resolvers/v7/effectTiming.ts",
+      "sha": "5748a980b12940c20c78b4bbfb3eb0059c7fbc5b"
+    },
+    {
+      "path": "src/resolvers/v7/handFlow.ts",
+      "sha": "93eacaf2eb17c469b8e079498e1ee62c26100041"
+    },
+    {
+      "path": "src/resolvers/v7/historicalNormalBatch.ts",
+      "sha": "694e1b37e66e20f6fb1fff772d3cc62980c6c8af"
+    },
+    {
+      "path": "src/resolvers/v7/historicalNormalBatch4.ts",
+      "sha": "b442b32018444befb760df9e938b2bf48a63c51b"
+    },
+    {
+      "path": "src/resolvers/v7/manifest.json",
+      "sha": "9300c8fcb357dad78b861387653e36e107e39d01"
+    },
+    {
+      "path": "src/resolvers/v7/mechanicalBatch5.ts",
+      "sha": "8a139a442b798bb2ab9b2cb6a736a51b3fa37bad"
+    },
+    {
+      "path": "src/resolvers/v7/mechanicalBatch7.ts",
+      "sha": "84ff99d284fd6927c123489aa4cc70c6d2fbe9d7"
+    },
+    {
+      "path": "src/resolvers/v7/monsterEffects.ts",
+      "sha": "9b79ac32bb56c6bb8c66c9b045e4322e5847a2dd"
+    },
+    {
+      "path": "src/resolvers/v7/monsterEntry.ts",
+      "sha": "5700908cd6c32097a545235d6a2a5c326fe9b27f"
+    },
+    {
+      "path": "src/resolvers/v7/monsterExit.ts",
+      "sha": "1d597dc5ad7c51d8acb3f9c5df955ef9a10c8a74"
+    },
+    {
+      "path": "src/resolvers/v7/resolverIdentity.ts",
+      "sha": "cf77228ff7f76a12e7a0410a85587afb5f873495"
+    },
+    {
+      "path": "src/resolvers/v7/rulesProfile.ts",
+      "sha": "eb3449a7f3293680577c25681e007b0295dd42d9"
+    },
+    {
+      "path": "src/resolvers/v7/spellExceptions.ts",
+      "sha": "73b9addeeebdfc2761b3bf4d80c641c46bdda9a2"
+    },
+    {
+      "path": "src/resolvers/v7/standbyFlow.ts",
+      "sha": "478dbc1c1b3e8bdd22b47569620de7acfe65df0c"
+    },
+    {
+      "path": "src/resolvers/v7/teamRotation.ts",
+      "sha": "750ef7d1359252e79917aba34aeca6d51930dd6a"
+    },
+    {
+      "path": "src/resolvers/v7/tokens.ts",
+      "sha": "cfbc0fe71a36c7b9a4ac4d4ba29c30f77f5d9434"
+    },
+    {
+      "path": "src/resolvers/v8/attackResponses.ts",
+      "sha": "fb64535db46dcbcfd02331f3564ac179ca1eac94"
+    },
+    {
+      "path": "src/resolvers/v8/cardCatalog.ts",
+      "sha": "cabf19dc4f23742ad5437bc23a381cd3bb33f025"
+    },
+    {
+      "path": "src/resolvers/v8/cardCertifications.ts",
+      "sha": "6b5f82d52ad1bb4eba0658be00d5462f6a2cb89e"
+    },
+    {
+      "path": "src/resolvers/v8/cardLifetime.ts",
+      "sha": "c4699e2ea357370fe85501811d043d19276686cf"
+    },
+    {
+      "path": "src/resolvers/v8/cardMetadata.ts",
+      "sha": "0ae777bba64ee0e6b8af76a26a51fa8decdc18fb"
+    },
+    {
+      "path": "src/resolvers/v8/cardPresentation.ts",
+      "sha": "0e6e3386a7d19e3dd09f92bd96d712d6406b8e4a"
+    },
+    {
+      "path": "src/resolvers/v8/cardRegistry.ts",
+      "sha": "1d2a9b3d68cd8880ce3d3f0ace55e6a711e9caa9"
+    },
+    {
+      "path": "src/resolvers/v8/catalogContext.ts",
+      "sha": "cc7dc6b0ae29403e7c6c9f32d56583fc58539521"
+    },
+    {
+      "path": "src/resolvers/v8/catalogRuntime.ts",
+      "sha": "30fc14f314b883030c2b4799f09dbb3e612cc7f8"
+    },
+    {
+      "path": "src/resolvers/v8/chainEngine.ts",
+      "sha": "b2f4a7597113d8e2744e605528a987ce9de7e784"
+    },
+    {
+      "path": "src/resolvers/v8/classicEffects.ts",
+      "sha": "17ee63966eb3ade4055feca03a17190a3008f396"
+    },
+    {
+      "path": "src/resolvers/v8/classicEngineCards.ts",
+      "sha": "09f3448cce8fea52977d7f145aea4c275cce323b"
+    },
+    {
+      "path": "src/resolvers/v8/classicExpansion.ts",
+      "sha": "5798ceff6c3722bfd6f450bead0a1db608637fb9"
+    },
+    {
+      "path": "src/resolvers/v8/continuousEffects.ts",
+      "sha": "ee1a609b65e2072a4e6b18d383a30b835ec5db88"
+    },
+    {
+      "path": "src/resolvers/v8/continuousRules.ts",
+      "sha": "0ff487bf30d730bf3e6a822d32d7e54f1bce58a0"
+    },
+    {
+      "path": "src/resolvers/v8/destructionRules.ts",
+      "sha": "6215340974cfe9673e19b8c9768be197fe3f39ca"
+    },
+    {
+      "path": "src/resolvers/v8/duelEngineCurrent.ts",
+      "sha": "8494e8483ce9cc60fdf6912a2c71f9aae2c8cd29"
+    },
+    {
+      "path": "src/resolvers/v8/duelIntegrity.ts",
+      "sha": "a66b92e825b7a2038b7fbd32579df1d35001edf8"
+    },
+    {
+      "path": "src/resolvers/v8/duelRandom.ts",
+      "sha": "fc7d7cb8a3f2a6de9a2e95ef48c05aa127a570ae"
+    },
+    {
+      "path": "src/resolvers/v8/duelTransitions.ts",
+      "sha": "01c35e416e091e55b55bf6a853f8e24f5e9cee89"
+    },
+    {
+      "path": "src/resolvers/v8/economicOperations.ts",
+      "sha": "5b8a789738903d52bb1302edbc021f0cc819fd4b"
+    },
+    {
+      "path": "src/resolvers/v8/effectDefinitions.ts",
+      "sha": "8ae0b5cad70a3d3c381be3951bcc8a22800ffbd1"
+    },
+    {
+      "path": "src/resolvers/v8/effectModels.ts",
+      "sha": "70d0027181f3d668470310aa2675b8d2933bd306"
+    },
+    {
+      "path": "src/resolvers/v8/effectOperations.ts",
+      "sha": "535bdc78c945023b08d609067949146ceb613c2c"
+    },
+    {
+      "path": "src/resolvers/v8/effectRegistry.ts",
+      "sha": "9ba78c049870e181af9269571725e42df4b2a122"
+    },
+    {
+      "path": "src/resolvers/v8/effectTiming.ts",
+      "sha": "5748a980b12940c20c78b4bbfb3eb0059c7fbc5b"
+    },
+    {
+      "path": "src/resolvers/v8/fusionBatch8.ts",
+      "sha": "7699b02b91f525395fc9e3f5c2400e70fd2c00ad"
+    },
+    {
+      "path": "src/resolvers/v8/handFlow.ts",
+      "sha": "93eacaf2eb17c469b8e079498e1ee62c26100041"
+    },
+    {
+      "path": "src/resolvers/v8/historicalFusionBatch10.ts",
+      "sha": "3c3fc8d4d04b6c6447d91a51e21dc78660746a27"
+    },
+    {
+      "path": "src/resolvers/v8/historicalNormalBatch.ts",
+      "sha": "694e1b37e66e20f6fb1fff772d3cc62980c6c8af"
+    },
+    {
+      "path": "src/resolvers/v8/historicalNormalBatch4.ts",
+      "sha": "b442b32018444befb760df9e938b2bf48a63c51b"
+    },
+    {
+      "path": "src/resolvers/v8/historicalNormalBatch9.ts",
+      "sha": "8b47407df2342ef6ac4a63d57a0cfce2c51721e7"
+    },
+    {
+      "path": "src/resolvers/v8/manifest.json",
+      "sha": "d2eb60e3bd4d32fdec7a6084aee065ed172c7b93"
+    },
+    {
+      "path": "src/resolvers/v8/mechanicalBatch11.ts",
+      "sha": "e9df843c7d3362638d9f1700f00afa1aa3fad053"
+    },
+    {
+      "path": "src/resolvers/v8/mechanicalBatch14.ts",
+      "sha": "0a6ab3d1eea8e772922e7eaf6349b37ba6ca5408"
+    },
+    {
+      "path": "src/resolvers/v8/mechanicalBatch5.ts",
+      "sha": "8a139a442b798bb2ab9b2cb6a736a51b3fa37bad"
+    },
+    {
+      "path": "src/resolvers/v8/mechanicalBatch7.ts",
+      "sha": "84ff99d284fd6927c123489aa4cc70c6d2fbe9d7"
+    },
+    {
+      "path": "src/resolvers/v8/mechanicalBatch8.ts",
+      "sha": "a3591ce4ae5c0db009d7aa9e027f30b13ae26990"
+    },
+    {
+      "path": "src/resolvers/v8/monsterEffects.ts",
+      "sha": "2cbe13e526a06e0185baae055d8e755ef968ece7"
+    },
+    {
+      "path": "src/resolvers/v8/monsterEntry.ts",
+      "sha": "5700908cd6c32097a545235d6a2a5c326fe9b27f"
+    },
+    {
+      "path": "src/resolvers/v8/monsterExit.ts",
+      "sha": "1d597dc5ad7c51d8acb3f9c5df955ef9a10c8a74"
+    },
+    {
+      "path": "src/resolvers/v8/resolverIdentity.ts",
+      "sha": "d6edfa514f96e5f82e9ee843b27340afed9b04d3"
+    },
+    {
+      "path": "src/resolvers/v8/rulesProfile.ts",
+      "sha": "eb3449a7f3293680577c25681e007b0295dd42d9"
+    },
+    {
+      "path": "src/resolvers/v8/spellExceptions.ts",
+      "sha": "73b9addeeebdfc2761b3bf4d80c641c46bdda9a2"
+    },
+    {
+      "path": "src/resolvers/v8/standbyFlow.ts",
+      "sha": "9b5ea69a4cc0f2d3629d7a844b7ccc84288f3bc8"
+    },
+    {
+      "path": "src/resolvers/v8/teamRotation.ts",
+      "sha": "750ef7d1359252e79917aba34aeca6d51930dd6a"
+    },
+    {
+      "path": "src/resolvers/v8/tokens.ts",
+      "sha": "ddd91284a351fe49c9af453010140fa29c64267f"
+    },
+    {
+      "path": "src/tagStore.ts",
+      "sha": "e7af3d2029efd4cb88179ed50c853f3f7f12c990"
+    }
+  ]
+}

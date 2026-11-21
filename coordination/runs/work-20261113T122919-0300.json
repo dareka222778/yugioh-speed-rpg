@@ -1,0 +1,368 @@
+{
+  "runId": "work-20261113T122919-0300",
+  "owner": "Work",
+  "priority": "P0 — corrigir integridade de mãos/decks físicos no 2v2 sem invadir reservas M61/M118; M119 Dark Hole, M120 Card Destruction, M121 Pot of Greed.",
+  "state": "completed; released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-13T12:29:19-03:00",
+  "endedAt": "2026-11-13T12:54:05-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "2f80f2e885a262b46642fbdaa8967183ac10a8ad",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e do último checkpoint; verificação do HEAD real da branch compartilhada (2f80f2e), branches, PRs, workflows e situação de produção.",
+    "Handoff cooperativo renovado na PR #17/M61 para os cinco arquivos bloqueados; sem resposta. Nenhum arquivo reservado foi alterado.",
+    "Handoff cooperativo solicitado na PR #74/M118 para src/tagDuel.ts e seu teste; CI do HEAD M118 está verde, mas ainda sem liberação explícita. Nenhum arquivo M118 foi alterado.",
+    "M119: criada regressão 2v2 de Dark Hole, cobrindo destruição dos quatro assentos, monstro baixado, privacidade, backrow intocada, autorização e conservação de 80 UIDs; PR #75.",
+    "M120: corrigido Card Destruction em src/spellExceptions.ts para percorrer as quatro mãos/decks físicos, devolver descartes aos Cemitérios compartilhados por equipe e agregar falha de compra por equipe; regressões de compra individual e derrota por deck-out; PR #76.",
+    "M121: criada regressão de Pot of Greed para compra do Deck físico ativo, preservação da mão/deck do parceiro e permissão de sete cartas durante a Main Phase, sem descarte prematuro; PR #77.",
+    "Diagnóstico de M108/PR #64: 7.366 testes passaram e um falhou; a Counter Trap Negate Attack deixou o estado em main em vez de abrir response. Diagnóstico publicado na PR para o auxiliar.",
+    "Confirmação de que PRs #65–#74 agora têm Card batch fast, Engine validation e Milestone 1000 concluídos com sucesso.",
+    "M120: a primeira Engine validation revelou apenas uma asserção de fixture apontando o Cemitério da equipe errada; corrigida de team 1 para a equipe ativadora team 0 e disparada nova CI no HEAD 8985d429.",
+    "M122: criada regressão Change of Heart 2v2; controla temporariamente monstro do assento físico 3, preserva UID/proprietário e devolve à equipe original na End Phase; PR #78.",
+    "M123: criada regressão Shield & Sword 2v2; aplica troca apenas a monstros face-up dos dois campos compartilhados, preserva Set e expira após avanço do turno; PR #79.",
+    "M124: criada regressão Trap Hole 2v2; seat 0 baixa, seat 2 ativa durante a janela de seat 3, preservando UID do Trap e enviando o monstro ao Graveyard da equipe adversária; PR #80.",
+    "M125: criada regressão Remove Trap para filtro de alvo em backrow compartilhado: somente Trap face-up é elegível; Set Trap permanece privado e Spell face-up não é alvo; PR #81.",
+    "M126: criada regressão Waboku para prevenção de dano de batalha no LP compartilhado quando o monstro defensor pertence fisicamente ao assento inativo; PR #82.",
+    "M127: criada regressão Block Attack para alvos face-up em Attack Position nos campos compartilhados; Set e Defense Position são excluídos e propriedade física preservada; PR #83.",
+    "M119: CI integral agora concluída com sucesso (Card batch fast, Engine validation, Milestone 1000; jobs test e extended-soak verdes).",
+    "M124: primeiro run identificou turno zero inválido na fixture; corrigido para turno positivo 3 no HEAD db639952 e nova CI enfileirada.",
+    "M120: extended-soak 600s agora concluído com sucesso no HEAD corrigido 8985d429; job de teste/auditorias ainda em execução sem falhas no último polling.",
+    "M121: extended-soak 600s concluído com sucesso; job de teste/auditorias ainda em execução sem falhas no último polling.",
+    "M61: nova observação documentada na PR #17 — a legalidade inicial de Card Destruction ainda consulta somente mãos dos assentos ativos em classicEffects.ts; ajuste aguarda handoff explícito.",
+    "M128: criada regressão Just Desserts; conta monstros dos dois assentos físicos da equipe adversária no campo compartilhado e aplica 500 PV por monstro; PR #84.",
+    "M120: CI integral concluída com sucesso no HEAD corrigido 8985d429; Card batch fast, Engine validation, Milestone 1000, npm test, auditorias e extended-soak verdes.",
+    "M122: CI integral concluída com sucesso; teste de controle temporário e retorno de Change of Heart validado no 2v2.",
+    "M61: documentados dois pontos adicionais que exigem handoff: menu de Card Destruction ignora mãos dos parceiros inativos; Reinforcements/Castle Walls oferecem alvos do campo adversário."
+  ],
+  "changes": [
+    {
+      "m": "M119",
+      "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
+      "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+      "pr": 75,
+      "files": [
+        "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M120",
+      "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+      "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+      "pr": 76,
+      "files": [
+        "src/spellExceptions.ts",
+        "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs"
+      ],
+      "codeChange": "Card Destruction agora descarta/recompra as quatro mãos físicas no 2v2; deck-out de qualquer assento derrota sua equipe."
+    },
+    {
+      "m": "M121",
+      "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
+      "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+      "pr": 77,
+      "files": [
+        "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M122",
+      "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+      "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+      "pr": 78,
+      "files": [
+        "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M123",
+      "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+      "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+      "pr": 79,
+      "files": [
+        "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M124",
+      "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+      "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
+      "pr": 80,
+      "files": [
+        "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M125",
+      "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+      "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+      "pr": 81,
+      "files": [
+        "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M126",
+      "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+      "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+      "pr": 82,
+      "files": [
+        "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M127",
+      "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+      "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+      "pr": 83,
+      "files": [
+        "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
+      ],
+      "codeChange": false
+    },
+    {
+      "m": "M128",
+      "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+      "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+      "pr": 84,
+      "files": [
+        "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+      ],
+      "codeChange": false
+    }
+  ],
+  "catalog": {
+    "sharedBranch": {
+      "cards": 969,
+      "certificates": 969
+    },
+    "developmentSnapshot": {
+      "cards": 1014,
+      "certificates": 1014,
+      "merged": false
+    },
+    "deltaToShared": 45,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "validation": {
+    "pr64": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "extendedSoak": "success",
+      "engineValidation": "failure",
+      "npmTest": {
+        "passed": 7366,
+        "failed": 1
+      },
+      "failedTest": "inactive teammate-owned Negate Attack ends the Battle Phase and blocks ordinary Trap chaining",
+      "assertion": "actual phase main; expected response"
+    },
+    "pr17": {
+      "engineValidation": "failure",
+      "build": "failure",
+      "cardBatchFast": "failure",
+      "handoff": "awaiting-response"
+    },
+    "pr65to74": {
+      "cardBatchFast": "success",
+      "engineValidation": "success",
+      "milestone1000": "success"
+    },
+    "pr75": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success",
+      "extendedSoak": "success",
+      "test": "success"
+    },
+    "pr76": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success",
+      "extendedSoak": "success",
+      "test": "success"
+    },
+    "pr77": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success",
+      "extendedSoak": "success",
+      "test": "success"
+    },
+    "pr78": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success",
+      "extendedSoak": "success",
+      "test": "success"
+    },
+    "pr79": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress"
+    },
+    "pr80": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "previousHeadFailure": "turn 0 fixture invalid; corrected to turn 3 on current HEAD"
+    },
+    "pr81": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    },
+    "pr82": {
+      "cardBatchFast": "queued",
+      "milestone1000": "success",
+      "engineValidation": "queued"
+    },
+    "pr83": {
+      "cardBatchFast": "in_progress",
+      "milestone1000": "success",
+      "engineValidation": "queued"
+    },
+    "pr84": {
+      "cardBatchFast": "not yet returned",
+      "milestone1000": "queued",
+      "engineValidation": "queued"
+    }
+  },
+  "handoffRequests": {
+    "m61": {
+      "pr": 17,
+      "commentId": 6857487009,
+      "status": "awaiting-response",
+      "blockedFiles": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts",
+        "src/classicEffects.ts",
+        "src/duelIntegrity.ts",
+        "scripts/mass-certification21.cjs"
+      ],
+      "lastCommentId": 6857994614
+    },
+    "m118": {
+      "pr": 74,
+      "commentId": 6857580108,
+      "status": "awaiting-response",
+      "blockedFiles": [
+        "src/tagDuel.ts",
+        "tests/tagClassicGiantTrunadePhysicalHandOwnership.test.cjs"
+      ]
+    }
+  },
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscordValidation": false,
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "hosting": "not verified; no deployment workflow or authenticated hosting check available in this run"
+  },
+  "releaseToAuxiliary": {
+    "branches": [
+      {
+        "branch": "feat/work-m119-dark-hole-2v2-team-wipe-20261113",
+        "head": "caf3d5b1e31ebc8f3321de7a3d405b96de1eb019",
+        "pr": 75,
+        "scope": [
+          "tests/tagClassicDarkHoleSharedFieldOwnership.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m120-card-destruction-four-seat-hands-20261113",
+        "head": "8985d429228971e246cf782f6a09571ec2f2cdc8",
+        "pr": 76,
+        "scope": [
+          "src/spellExceptions.ts",
+          "tests/tagClassicCardDestructionFourPhysicalHands.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m121-pot-of-greed-physical-draw-20261113",
+        "head": "202ba319bd5c5c989a0a9819b222195763b104e7",
+        "pr": 77,
+        "scope": [
+          "tests/tagClassicPotOfGreedPhysicalHandOwnership.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m122-change-of-heart-2v2-owner-return-20261113",
+        "head": "fc652a0f704e208027a3261f7c1f1e40cd5a424c",
+        "pr": 78,
+        "scope": [
+          "tests/tagClassicChangeOfHeartPhysicalOwnerReturn.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m123-shield-sword-2v2-faceup-scope-20261113",
+        "head": "c5436d3035bfde83c41aecd686aec0204addfd20",
+        "pr": 79,
+        "scope": [
+          "tests/tagClassicShieldSwordSharedFaceUpScope.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m124-trap-hole-2v2-physical-owner-20261113",
+        "head": "db639952b5ddc523fd46c3cef831d53a09b1a883",
+        "pr": 80,
+        "scope": [
+          "tests/tagClassicTrapHolePhysicalOwnerActivation.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m125-remove-trap-2v2-target-filter-20261113",
+        "head": "27bd0867005e186b490035478b3db4ef3e6bbf36",
+        "pr": 81,
+        "scope": [
+          "tests/tagClassicRemoveTrapSharedTargetFilter.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m126-waboku-2v2-team-damage-guard-20261113",
+        "head": "b6b8bbfdf740499f55ea012a566bdafd1d4a73f0",
+        "pr": 82,
+        "scope": [
+          "tests/tagClassicWabokuSharedTeamDamageGuard.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m127-block-attack-2v2-target-scope-20261113",
+        "head": "8e38c59614a036f7ee604868a45d5ae88b82f932",
+        "pr": 83,
+        "scope": [
+          "tests/tagClassicBlockAttackSharedTargetScope.test.cjs"
+        ]
+      },
+      {
+        "branch": "feat/work-m128-just-desserts-2v2-team-burn-20261113",
+        "head": "9a2deda97dde99785dd7ab2812ae2866c0fee8ba",
+        "pr": 84,
+        "scope": [
+          "tests/tagClassicJustDessertsSharedTeamBurn.test.cjs"
+        ]
+      }
+    ],
+    "allowed": "monitorar CI e corrigir falhas somente nas três branches próprias; atualizar checkpoint após nova revisão.",
+    "forbidden": "não fazer merge/deploy; não tocar nos arquivos M61 ou M118; não alterar banco/inventários nem conceder cartas."
+  },
+  "nextTask": "Auxiliar: monitorar CI das PRs #79–#84, corrigir falhas somente nas próprias branches e reportar M108 (#64). Work às 13:30: concluir #79–#83, validar #84, verificar handoffs M61/M118 e preparar integração apenas após CI e autorização.",
+  "nextWorkAt": "2026-11-13T13:30:00-03:00",
+  "duration": {
+    "elapsedWallMinutes": 24,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "A janela registrada não comprova 60 minutos de trabalho efetivo; espera de CI não foi contabilizada."
+  },
+  "lastActivityAt": "2026-11-13T12:54:05-03:00"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "work-20261109T062716Z",
+  "priority": "Work",
+  "startedAt": "2026-11-09T06:27:16Z",
+  "lastActivityAt": "2026-11-09T06:28:24.093Z",
+  "owner": "Work",
+  "status": "active-isolated",
+  "branch": "feat/work-m47-20261109",
+  "sharedBase": "5d739f8a69243f4a43fc37770134946ab0f750ab",
+  "isolatedBase": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
+  "pendingTransfer": "work-m45-20261108174539",
+  "nextScheduledAt": "2026-11-09T08:30:00-03:00"
+}

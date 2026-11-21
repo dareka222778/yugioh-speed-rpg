@@ -1,0 +1,144 @@
+{
+  "runId": "work-20261117T162814-0300-M330-M337-M339",
+  "owner": "Work",
+  "mission": "M330–M339",
+  "priority": "P1 — ampliar a homologação comportamental Discord 2v2 sem alterar runtime: Bottomless Trap Hole, Royal Decree, Wall of Illusion/Kelbek e Needle Burrower/KA-2; preservar propriedade física, UIDs, mãos privadas e regras do proprietário.",
+  "state": "active",
+  "startedAt": "2026-11-17T16:28:14-03:00",
+  "lastActivityAt": "2026-11-17T16:46:00-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "0bb80a318da6ca5a1d697cae4937ed1625354325",
+  "scope": [
+    "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs",
+    "tests/tagRoyalDecreeDiscordNegation2v2.test.cjs",
+    "tests/tagBattleBounceDiscord2v2.test.cjs",
+    "tests/tagBattleLevelBurnDiscord2v2.test.cjs"
+  ],
+  "workBranches": [
+    {
+      "mission": "M330",
+      "branch": "feat/work-m330-bottomless-trap-hole-discord-summon-2v2-20261117",
+      "head": "2c572214c2e18842f25fa121f6593a5f9c8f1c49",
+      "pr": 287,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "0bb80a318da6ca5a1d697cae4937ed1625354325",
+      "scope": [
+        "tests/tagBottomlessTrapHoleDiscordSummon2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "passed; audit:rea in progress",
+        "extendedSoak600": "in_progress"
+      }
+    },
+    {
+      "mission": "M337",
+      "branch": "feat/work-m337-royal-decree-discord-negation-2v2-20261117",
+      "head": "4a8151f31cf9820bcc21e7a7e9e8debbc417d0c2",
+      "pr": 288,
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "0bb80a318da6ca5a1d697cae4937ed1625354325",
+      "scope": [
+        "tests/tagRoyalDecreeDiscordNegation2v2.test.cjs"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmTest": "in_progress",
+        "extendedSoak600": "in_progress"
+      }
+    },
+    {
+      "mission": "M338",
+      "branch": "feat/work-m338-wall-of-illusion-kelbek-battle-bounce-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "0bb80a318da6ca5a1d697cae4937ed1625354325",
+      "scope": [
+        "tests/tagBattleBounceDiscord2v2.test.cjs"
+      ],
+      "state": "reserved"
+    },
+    {
+      "mission": "M339",
+      "branch": "feat/work-m339-needle-burrower-ka2-battle-level-burn-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "0bb80a318da6ca5a1d697cae4937ed1625354325",
+      "scope": [
+        "tests/tagBattleLevelBurnDiscord2v2.test.cjs"
+      ],
+      "state": "reserved"
+    }
+  ],
+  "blocksCompleted": [
+    "Reauditoria real de coordination/state.json, último checkpoint M330, HEAD, branches, PRs e workflows.",
+    "M330 retomada na branch reservada; PR #287 criada com 273 linhas de teste, 2 cenários e CI em execução.",
+    "M337 criada em branch isolada; PR #288 com 305 linhas e 3 cenários de Royal Decree/Sakuretsu via handler Discord.",
+    "Falha da PR #286 diagnosticada em logs: controle negativo esperava response abaixo do limiar, mas o motor corretamente permanece em main; comentário cooperativo enviado."
+  ],
+  "handoffRequests": [
+    {
+      "pr": 286,
+      "commentId": 6958699674,
+      "status": "diagnóstico enviado; correção permanece com o responsável"
+    }
+  ],
+  "ci": {
+    "pr287": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "npmTest": "passed; audit:rea in progress",
+      "extendedSoak600": "in_progress"
+    },
+    "pr288": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "npmTest": "in_progress",
+      "extendedSoak600": "in_progress"
+    },
+    "pr286": {
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "failure",
+      "extendedSoak600": "success",
+      "failure": "tests/tagTrapHoleDiscordSummonThreshold2v2.test.cjs:209; expected response for below-1000 summon, actual main"
+    }
+  },
+  "catalogAtStart": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "historicalPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "productionAtStart": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHead": "0bb80a318da6ca5a1d697cae4937ed1625354325",
+    "hosting": "not independently verified",
+    "deploymentWorkflow": "not found in main/shared; only card-batch-admission, card-batch-fast, engine-validation, milestone1000 workflows"
+  },
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "ciWaitExcluded": true,
+    "targetMet": false
+  },
+  "nextTask": "Concluir CI/soaks de #287–#288; avançar M338 Wall of Illusion/Kelbek e M339 Needle Burrower/KA-2 em branches isoladas; não tocar M231–M236, M319–M322, M327–M329 ou runtime reservado.",
+  "nextWindow": "2026-11-17T17:30:00-03:00",
+  "reservationReleased": false
+}

@@ -1,0 +1,280 @@
+{
+  "runId": "work-20261118T182801-0300-M367-M368",
+  "owner": "Work",
+  "priority": "P1 — preparar primitives reutilizáveis para duas famílias historicamente pendentes, sem tocar nos arquivos centrais reservados; avançar M367 (3-Hump Lacooda) e M368 (A Cat of Ill Omen / An Owl of Luck) em branches isoladas.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-18T18:28:01-03:00",
+  "endedAt": "2026-11-18T18:47:19.605-03:00",
+  "observedAt": "2026-11-18T21:47:19.605Z",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
+  "sharedHeadBeforeCheckpointCommit": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
+  "branches": [
+    {
+      "mission": "M367",
+      "runId": "work-20261118T182801-0300-M367",
+      "branch": "feat/work-m367-identity-scoped-tribute-primitive-20261118",
+      "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
+      "pr": 315,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/315",
+      "state": "released-to-auxiliary-monitor-ci",
+      "scope": [
+        "src/identityScopedTribute.ts",
+        "tests/identityScopedTribute.test.cjs"
+      ],
+      "additions": 336,
+      "deletions": 0,
+      "testCases": 16,
+      "cards": [
+        "3-Hump Lacooda (86988864)"
+      ],
+      "blocksCompleted": [
+        "Primitive de elegibilidade por identidade: exige fonte face-up e pelo menos três cópias face-up no campo compartilhado da equipe.",
+        "Seleção de exatamente duas cópias elegíveis por UID físico; a cópia ativadora pode ser tributada ou permanecer no campo.",
+        "Pagamento revalida a elegibilidade imediatamente antes da mutação, move exatamente duas cartas do campo ao Cemitério compartilhado e preserva os objetos/UIDs físicos.",
+        "Proteções contra UIDs duplicados no campo/Cemitério, seleção obsoleta, seleção parcial e parâmetros inválidos."
+      ],
+      "ci": {
+        "milestone1000": {
+          "runId": 44404412870,
+          "status": "success",
+          "certified": 969,
+          "remaining": 31,
+          "identityBlocked": 27,
+          "automaticCertifications": 0
+        },
+        "cardBatchFast": {
+          "runId": 44404412844,
+          "status": "success"
+        },
+        "engineValidation": {
+          "runId": 44404412679,
+          "status": "in_progress",
+          "npmRunCheck": "success",
+          "cardBatchFastStep": "success",
+          "npmTest": "success",
+          "soak120": "pending",
+          "checkCards": "pending",
+          "extendedSoak600": "in_progress"
+        }
+      },
+      "integrationStatus": "primitive-only; não conectada ao operation registry/resolver; não certifica 3-Hump Lacooda"
+    },
+    {
+      "mission": "M368",
+      "runId": "work-20261118T182801-0300-M368",
+      "branch": "feat/work-m368-search-deck-top-destination-20261118",
+      "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
+      "pr": 316,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/316",
+      "state": "released-to-auxiliary-monitor-ci",
+      "scope": [
+        "src/searchZoneRules.ts",
+        "tests/searchZoneDestination.test.cjs"
+      ],
+      "additions": 243,
+      "deletions": 2,
+      "testCases": 14,
+      "cards": [
+        "A Cat of Ill Omen (24140059)",
+        "An Owl of Luck (23927567)"
+      ],
+      "blocksCompleted": [
+        "SearchZoneRule agora admite destino hand/deck-top, mantendo hand como padrão legado.",
+        "Ramo opcional Necrovalley converte deck-top em adição à mão; a resolução informa quando o Deck precisa ser embaralhado.",
+        "Resolução valida regra/UID, move a mesma referência física do Deck/Cemitério ao topo ou à mão e rejeita UIDs duplicados dentro/entre zonas.",
+        "Testes verificam filtros Trap e Field Spell, destino deck-top, ramo Necrovalley, fonte Cemitério, from:either e isolamento do Deck privado do parceiro inativo."
+      ],
+      "ci": {
+        "milestone1000": {
+          "runId": 44403946828,
+          "status": "success",
+          "certified": 969,
+          "remaining": 31,
+          "identityBlocked": 27,
+          "automaticCertifications": 0
+        },
+        "cardBatchFast": {
+          "runId": 44403946729,
+          "status": "success"
+        },
+        "engineValidation": {
+          "runId": 44403946886,
+          "status": "in_progress",
+          "npmRunCheck": "success",
+          "cardBatchFastStep": "success",
+          "npmTest": "success",
+          "soak120": "pending",
+          "checkCards": "pending",
+          "extendedSoak600": "in_progress"
+        }
+      },
+      "integrationStatus": "primitive-only; não conectada ao operation registry/resolver; não certifica A Cat of Ill Omen nem An Owl of Luck"
+    }
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint M366; confirmação do HEAD compartilhado, main, divergência, branches, PRs e workflows.",
+    "M367: criação de primitive genérica para elegibilidade, seleção e pagamento de Tribute por identidade, com 16 testes unitários.",
+    "M368: extensão de SearchZoneRule e resolução de destino deck-top/Necrovalley, com 14 testes unitários.",
+    "Diagnóstico do primeiro CI M368 (1/7371 falha por UID duplicado não detectado entre zonas); correção para validar Deck e Cemitério e também duplicações dentro da mesma zona.",
+    "Correção de erro de patch de quebra de linha literal detectado por TypeScript; HEAD final M368 passou npm run check, Card Batch Fast e npm test.",
+    "Comentários cooperativos nas PRs #314, #316 e #17; nenhuma reserva de terceiros alterada."
+  ],
+  "ciHistory": {
+    "M367": {
+      "latestHead": "9765ff20f192372c950a4a7012005776bbf4eb74",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmRunCheck": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "soak120": "pending",
+      "extendedSoak600": "in_progress"
+    },
+    "M368": {
+      "initialHead": "a39820b30ce6de834ab42e87f06f29803bed1499",
+      "initialNpmTest": "failure; 1/7371 — duplicate UID fixture exposed missing integrity check",
+      "intermediateSyntaxIssue": "literal escaped newline in searchZoneRules.ts detected as TS1127/TS1434; corrected before latest HEAD",
+      "latestHead": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "npmRunCheck": "success",
+      "npmTest": "success",
+      "engineValidation": "in_progress",
+      "soak120": "pending",
+      "extendedSoak600": "in_progress"
+    },
+    "M366": {
+      "pr": 314,
+      "engineValidation": "failure; 2 assertions in npm test (7364/7366 pass)",
+      "extendedSoak600": "success",
+      "diagnosticComments": [
+        6992319561
+      ]
+    },
+    "M365": {
+      "pr": 313,
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    "M364": {
+      "pr": 312,
+      "dependencyAudit": "failure on current package-lock sharp 0.34.5",
+      "candidateSharp0355": "npm audit --omit=dev zero vulnerabilities; type-entrypoint and check candidate validated in artifacts/comments",
+      "handoff": "package.json/package-lock.json release still pending; no manifest changed"
+    }
+  },
+  "catalogAtStart": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0
+  },
+  "catalogAtEnd": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newBehavioralCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "Milestone 1000 artifacts 14473852980 (M367) and 14473483276 (M368)"
+  },
+  "coordination": {
+    "activeRunPreserved": "work-20261115T142521-0300",
+    "activeRunScopePreserved": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "currentWorkReservationPreserved": "M365 — tests/tagGravekeepersGuardPhysicalOwnerDiscord2v2.test.cjs",
+    "handoffRequests": [
+      {
+        "pr": 17,
+        "commentId": 6992449872,
+        "files": [
+          "src/monsterEffects.ts",
+          "src/duelEngineCurrent.ts"
+        ],
+        "status": "awaiting-explicit-release",
+        "scope": "integrar M367 e depois M368; nenhum desses arquivos foi alterado"
+      },
+      {
+        "pr": 312,
+        "commentId": 6991573026,
+        "files": [
+          "package.json",
+          "package-lock.json"
+        ],
+        "status": "awaiting-explicit-release"
+      }
+    ],
+    "scopeReleasedToAuxiliary": [
+      {
+        "branch": "feat/work-m367-identity-scoped-tribute-primitive-20261118",
+        "pr": 315,
+        "files": [
+          "src/identityScopedTribute.ts",
+          "tests/identityScopedTribute.test.cjs"
+        ],
+        "allowed": "Monitorar CI e corrigir somente estes dois arquivos na própria branch; sem runtime central, catálogo, certificados, inventários, banco, merge ou deploy."
+      },
+      {
+        "branch": "feat/work-m368-search-deck-top-destination-20261118",
+        "pr": 316,
+        "files": [
+          "src/searchZoneRules.ts",
+          "tests/searchZoneDestination.test.cjs"
+        ],
+        "allowed": "Monitorar CI e corrigir somente estes dois arquivos na própria branch; sem monsterEffects.ts, duelEngineCurrent.ts, catálogo, certificados, inventários, banco, merge ou deploy."
+      }
+    ]
+  },
+  "productionAtEnd": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadBeforeCheckpoint": "93eaa1fdac24ead60306770cdbc8c5a6816e5734",
+    "sharedAheadOfMain": 635,
+    "sharedBehindMain": 10,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "deploymentStatus": "não verificável: o conector rejeitou o endpoint público de deployments; main não expõe workflow de deploy; shared tem somente card-batch-admission, card-batch-fast, engine-validation e milestone1000.",
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0
+  },
+  "ownerRulesPreserved": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handDiscardTiming": "End Phase",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "extraDeckLimit": 5,
+    "changed": false
+  },
+  "duration": {
+    "elapsedMinutes": 19.31,
+    "effectiveWorkMinutes": 15.6,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "note": "Tempo efetivo conservador; espera de CI não contabilizada. A sessão não atingiu 60 minutos."
+  },
+  "nextTask": "Auxiliar: monitorar #315 e #316 e corrigir somente os quatro arquivos liberados nas próprias branches. Work: aguardar handoff explícito M61 de src/monsterEffects.ts e src/duelEngineCurrent.ts; integrar primeiro 3-Hump Lacooda usando M367, depois A Cat of Ill Omen/An Owl of Luck usando M368; retomar Abyss Soldier somente após escopo liberado. Corrigir M366 apenas na branch de teste liberada ao auxiliar. Não tocar em reservas M215–M220, M231–M236, M358–M360, M365 ou M61.",
+  "nextWindow": "2026-11-18T22:30:00-03:00",
+  "noMergeOrDeployReason": "PRs em draft e CI/soaks ainda em execução; nenhuma autorização de merge/deploy nem backup de produção verificável."
+}

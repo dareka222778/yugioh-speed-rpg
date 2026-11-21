@@ -1,0 +1,631 @@
+{
+  "format": 1,
+  "runId": "work-20261120T195356-0300-M428-M430",
+  "owner": "Work principal",
+  "startedAt": "2026-11-20T19:53:56-03:00",
+  "endedAt": "2026-11-20T20:13:33.420-03:00",
+  "elapsedMinutes": 19.62,
+  "effectiveWorkMinutes": 14,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "75dc1403897b135dc63fb003387af9a09fab84e5",
+  "sharedHeadBeforeCheckpointCommit": "75dc1403897b135dc63fb003387af9a09fab84e5",
+  "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+  "mainCompare": {
+    "status": "diverged",
+    "aheadBy": 690,
+    "behindBy": 10
+  },
+  "blocksCompleted": [
+    "M428: 3 testes FLIP 2v2/Discord passaram após duas correções de fixture e remoção de cobertura duplicada.",
+    "M429: 6 testes de Magias de LP via handler Discord 2v2 passaram.",
+    "M430: 1 teste de Jar of Greed, janela de Trap e Deck físico do representante ativo passou após corrigir nome de helper.",
+    "Criadas três PRs draft independentes (#376–#378), cada uma com teste, evidência e workflow próprio.",
+    "Renovado pedido cooperativo de handoff M61; comentário #7052779359, sem resposta no checkpoint."
+  ],
+  "missions": [
+    {
+      "format": 1,
+      "mission": "M428",
+      "runId": "work-20261120T193627-0300-M428",
+      "owner": "Work principal",
+      "branch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+      "sharedHeadAtReservation": "2bdf2b7c0224c5525d036a7364099ce11cb949e3",
+      "state": "released-to-auxiliary-monitor-ci",
+      "startedAt": "2026-11-20T19:36:27-03:00",
+      "priority": "P1 — validar a resolução real de efeitos FLIP clássicos em 2v2 e a projeção Discord pública/privada, preservando assento físico, Cemitério compartilhado e mãos privadas.",
+      "reservedFiles": [
+        "tests/tagClassicFlipEffectsDiscord2v2.test.cjs",
+        "docs/evidence/m428-tag-classic-flip-discord-2v2.json",
+        ".github/workflows/m428-tag-classic-flip-discord-2v2.yml"
+      ],
+      "scope": "Somente teste de integração 2v2, evidência e workflow Node 22. Sem alterações em runtime, catálogo, certificados, allowlist, banco, inventário, dados de jogadores ou produção.",
+      "conflictCheck": {
+        "preserved": [
+          "M61",
+          "M418",
+          "M424",
+          "M425",
+          "M426",
+          "M427",
+          "M402-M417",
+          "M408",
+          "M411"
+        ],
+        "overlap": false,
+        "note": "Usa tagDuel/tagUI existentes; não modifica tagDuel.ts, tagUI.ts, tagInteraction.ts, tagStore.ts nem helpers reservados por M418."
+      },
+      "cards": [
+        "Magician of Faith",
+        "Mask of Darkness",
+        "Hane-Hane"
+      ],
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0,
+      "nextTask": "Auxiliar monitora Engine Validation/Extended Soak e sincroniza sem force; Work continua M61 handoff e integração de efeitos apenas após liberação.",
+      "endedAt": "2026-11-20T20:05:04-03:00",
+      "elapsedMinutes": 28.62,
+      "effectiveWorkMinutes": 10,
+      "effectiveMinutesThisExecution": 10,
+      "pr": 376,
+      "prBaseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "head": "1f922f19b1cd21c6ffffb8de414a666892f83d0a71",
+      "sharedHeadAtCheckpoint": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "testCases": 3,
+      "blocksCompleted": [
+        "Corrigido o fixture de Extra Deck: substituído o ID 91152256 (não era uma Fusão suportada) por Cyber Saurus 89112729, certificado.",
+        "Removidos Man-Eater Bug e Skelengel para evitar duplicação da cobertura real de Discord já existente na PR #296.",
+        "Isolada a Fusão no Extra Deck físico do assento 2; os demais Extra Decks ficaram vazios para tornar a asserção de privacidade inequívoca.",
+        "3 testes focados passaram no HEAD final; npm run check/build passaram."
+      ],
+      "initialFailures": [
+        {
+          "cause": "ID 91152256 era uma carta Normal, não uma Fusão suportada pelo fixture",
+          "resolution": "usar Cyber Saurus 89112729"
+        },
+        {
+          "cause": "a asserção por nome encontrava Cyber Saurus também nos Extra Decks dos outros assentos",
+          "resolution": "somente seat 2 recebe a Fusão"
+        }
+      ],
+      "ci": {
+        "focused": {
+          "run": 44833214993,
+          "status": "success"
+        },
+        "cardBatchFast": {
+          "run": 44833215101,
+          "status": "success"
+        },
+        "milestone1000": {
+          "run": 44833215070,
+          "status": "success",
+          "artifact": 14677008129
+        },
+        "engineValidation": {
+          "run": 44833215028,
+          "status": "in_progress"
+        }
+      },
+      "scopeReleasedToAuxiliary": [
+        "tests/tagClassicFlipEffectsDiscord2v2.test.cjs",
+        "docs/evidence/m428-tag-classic-flip-discord-2v2.json",
+        ".github/workflows/m428-tag-classic-flip-discord-2v2.yml"
+      ],
+      "auxiliaryAuthorization": "Monitorar CI, sincronizar com a branch compartilhada por merge não-forçado e corrigir somente estes três arquivos M428; não alterar runtime, catálogo, certificados, coordenação, dados de jogadores ou produção.",
+      "nextWindow": "2026-11-20T22:30:00-03:00",
+      "limitations": [
+        "Integração offline do estado 2v2 e dos builders Discord; não foi executado gateway/servidor Discord ao vivo.",
+        "As três cartas já eram certificadas; nenhum novo certificado.",
+        "Engine Validation e Extended Soak ainda estavam em execução no checkpoint."
+      ]
+    },
+    {
+      "format": 1,
+      "mission": "M429",
+      "runId": "work-20261120T195356-0300-M429",
+      "owner": "Work principal",
+      "startedAt": "2026-11-20T19:53:56-03:00",
+      "endedAt": "2026-11-20T20:05:04-03:00",
+      "elapsedMinutes": 11.13,
+      "sharedSessionEffectiveMinutes": 10,
+      "countedInCombinedSession": true,
+      "targetEffectiveMinutes": 60,
+      "targetMet": false,
+      "priority": "P1 — validar seis Magias clássicas de LP no handler Discord 2v2, com roteamento de equipe, mãos/Decks físicos e privacidade.",
+      "branch": "feat/work-m429-classic-lp-spells-discord-2v2-20261120",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "head": "d206b9e43781c47a288042b1d461e14b73a4eb78",
+      "pr": 377,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/377",
+      "state": "released-to-auxiliary-monitor-ci",
+      "files": [
+        "tests/tagClassicLpSpellsDiscord2v2.test.cjs",
+        "docs/evidence/m429-classic-lp-spells-discord-2v2.json",
+        ".github/workflows/m429-classic-lp-spells-discord-2v2.yml"
+      ],
+      "cards": [
+        "Sparks",
+        "Hinotama",
+        "Blue Medicine",
+        "Soul of the Pure",
+        "Tremendous Fire",
+        "Upstart Goblin"
+      ],
+      "blocksCompleted": [
+        "6 cenários executados pelo handleTagComponent offline.",
+        "Verificados valores exatos de LP para burn/heal e sequência Tremendous Fire.",
+        "Upstart Goblin compra do Deck físico do representante ativo e concede 1000 LP à equipe adversária.",
+        "Verificadas mãos privadas, Decks por assento, UID físico no Cemitério, payloads Discord e restauração JSON.",
+        "npm run check/build e 6 testes focados aprovados."
+      ],
+      "ci": {
+        "focused": {
+          "run": 44833477657,
+          "status": "success"
+        },
+        "cardBatchFast": {
+          "run": 44833477702,
+          "status": "success"
+        },
+        "milestone1000": {
+          "run": 44833477542,
+          "status": "success",
+          "artifact": 14676737112
+        },
+        "engineValidation": {
+          "run": 44833477681,
+          "status": "in_progress"
+        }
+      },
+      "catalog": {
+        "certified": 969,
+        "target": 1000,
+        "remaining": 31,
+        "newCertifications": 0,
+        "automaticCertifications": 0,
+        "inventoryGranted": 0
+      },
+      "production": {
+        "merge": false,
+        "deploy": false,
+        "liveDiscordValidation": false,
+        "persistentDatabaseChanged": false,
+        "playerDataChanged": false
+      },
+      "scopeReleasedToAuxiliary": [
+        "tests/tagClassicLpSpellsDiscord2v2.test.cjs",
+        "docs/evidence/m429-classic-lp-spells-discord-2v2.json",
+        ".github/workflows/m429-classic-lp-spells-discord-2v2.yml"
+      ],
+      "auxiliaryAuthorization": "Monitorar CI, sincronizar por merge não-forçado e corrigir somente os três arquivos M429; não tocar runtime, catálogo, certificados, coordenação, dados ou produção.",
+      "limitations": [
+        "Handler Discord executado offline; nenhum gateway/servidor real.",
+        "As seis cartas já eram certificadas; M429 não adiciona certificações.",
+        "Engine Validation/Extended Soak ainda em execução."
+      ],
+      "nextTask": "Auxiliar monitora M429; Work segue para integração de runtime somente após handoff M61."
+    },
+    {
+      "format": 1,
+      "mission": "M430",
+      "runId": "work-20261120T195356-0300-M430",
+      "owner": "Work principal",
+      "startedAt": "2026-11-20T19:53:56-03:00",
+      "endedAt": "2026-11-20T20:05:04-03:00",
+      "elapsedMinutes": 11.13,
+      "sharedSessionEffectiveMinutes": 10,
+      "countedInCombinedSession": true,
+      "targetEffectiveMinutes": 60,
+      "targetMet": false,
+      "priority": "P1 — validar Jar of Greed 2v2: Trap Set por parceiro, janela legal, Deck físico do representante ativo e privacidade Discord.",
+      "branch": "feat/work-m430-jar-of-greed-discord-2v2-20261120",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "head": "a01e749887fe666743f9bb4127b4d9afb79f4a2e",
+      "pr": 378,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/378",
+      "state": "released-to-auxiliary-monitor-ci",
+      "files": [
+        "tests/tagClassicJarOfGreedDiscord2v2.test.cjs",
+        "docs/evidence/m430-jar-of-greed-discord-2v2.json",
+        ".github/workflows/m430-jar-of-greed-discord-2v2.yml"
+      ],
+      "cards": [
+        "Jar of Greed"
+      ],
+      "blocksCompleted": [
+        "Fixture 2v2 com Jar of Greed fisicamente pertencente ao assento 2 e compartilhado na backrow da equipe 0.",
+        "Verificada rejeição de ativação no mesmo turno e abertura da janela após Normal Summon adversário.",
+        "Ativação pelo representante ativo seat 0; compra do Deck físico seat 0, não do Deck do dono físico seat 2.",
+        "Verificados UID m2 no Cemitério compartilhado, mão privada, payload público e conservação de 80 UIDs.",
+        "Corrigido erro do teste: nome do helper assertInventoryConserved -> assertConserved; HEAD final 1/1 focado aprovado."
+      ],
+      "initialFailure": {
+        "cause": "ReferenceError: assertInventoryConserved is not defined",
+        "resolution": "corrigido o call site para assertConserved; rerun focado aprovado"
+      },
+      "ci": {
+        "focused": {
+          "run": 44834003494,
+          "status": "success"
+        },
+        "cardBatchFast": {
+          "run": 44834003544,
+          "status": "in_progress"
+        },
+        "milestone1000": {
+          "run": 44834003563,
+          "status": "job-success-artifact-produced",
+          "artifact": 14676519389
+        },
+        "engineValidation": {
+          "run": 44834003611,
+          "status": "in_progress"
+        }
+      },
+      "catalog": {
+        "certified": 969,
+        "target": 1000,
+        "remaining": 31,
+        "newCertifications": 0,
+        "automaticCertifications": 0,
+        "inventoryGranted": 0
+      },
+      "production": {
+        "merge": false,
+        "deploy": false,
+        "liveDiscordValidation": false,
+        "persistentDatabaseChanged": false,
+        "playerDataChanged": false
+      },
+      "scopeReleasedToAuxiliary": [
+        "tests/tagClassicJarOfGreedDiscord2v2.test.cjs",
+        "docs/evidence/m430-jar-of-greed-discord-2v2.json",
+        ".github/workflows/m430-jar-of-greed-discord-2v2.yml"
+      ],
+      "auxiliaryAuthorization": "Monitorar CI, sincronizar por merge não-forçado e corrigir somente os três arquivos M430; não tocar runtime, catálogo, certificados, coordenação, dados ou produção.",
+      "limitations": [
+        "Handler Discord executado offline; nenhum gateway/servidor real.",
+        "Jar of Greed já era certificado; nenhuma nova certificação.",
+        "Card Batch Fast e Engine Validation ainda em execução; Extended Soak pendente."
+      ],
+      "nextTask": "Auxiliar monitora M430; Work retoma handoff M61 e integração de runtime após liberação."
+    }
+  ],
+  "branches": [
+    {
+      "mission": "M428",
+      "branch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
+      "head": "1f922f19b1cd21c6ffffb8de414a666892f83d0a71",
+      "pr": 376,
+      "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "tests": "3/3 focused integration tests passed",
+      "ci": {
+        "focused": {
+          "run": 44833214993,
+          "status": "success"
+        },
+        "cardBatchFast": {
+          "run": 44833215101,
+          "status": "success"
+        },
+        "milestone1000": {
+          "run": 44833215070,
+          "status": "success",
+          "artifact": 14677008129
+        },
+        "engineValidation": {
+          "run": 44833215028,
+          "status": "in_progress"
+        }
+      }
+    },
+    {
+      "mission": "M429",
+      "branch": "feat/work-m429-classic-lp-spells-discord-2v2-20261120",
+      "head": "d206b9e43781c47a288042b1d461e14b73a4eb78",
+      "pr": 377,
+      "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "tests": "6/6 focused integration tests passed",
+      "ci": {
+        "focused": {
+          "run": 44833477657,
+          "status": "success"
+        },
+        "cardBatchFast": {
+          "run": 44833477702,
+          "status": "success"
+        },
+        "milestone1000": {
+          "run": 44833477542,
+          "status": "success",
+          "artifact": 14676737112
+        },
+        "engineValidation": {
+          "run": 44833477681,
+          "status": "in_progress"
+        }
+      }
+    },
+    {
+      "mission": "M430",
+      "branch": "feat/work-m430-jar-of-greed-discord-2v2-20261120",
+      "head": "a01e749887fe666743f9bb4127b4d9afb79f4a2e",
+      "pr": 378,
+      "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "tests": "1/1 focused integration test passed after one fixture-helper correction",
+      "ci": {
+        "focused": {
+          "run": 44834003494,
+          "status": "success"
+        },
+        "cardBatchFast": {
+          "run": 44834003544,
+          "status": "in_progress"
+        },
+        "milestone1000": {
+          "run": 44834003563,
+          "status": "job-success-artifact-produced",
+          "artifact": 14676519389
+        },
+        "engineValidation": {
+          "run": 44834003611,
+          "status": "in_progress"
+        }
+      }
+    }
+  ],
+  "pullRequests": [
+    {
+      "number": 376,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "merged": false,
+      "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "head": "1f922f19b1cd21c6ffffb8de414a666892f83d0a71"
+    },
+    {
+      "number": 377,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "merged": false,
+      "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "head": "d206b9e43781c47a288042b1d461e14b73a4eb78"
+    },
+    {
+      "number": 378,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "merged": false,
+      "baseSha": "75dc1403897b135dc63fb003387af9a09fab84e5",
+      "head": "a01e749887fe666743f9bb4127b4d9afb79f4a2e"
+    }
+  ],
+  "catalog": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "historical": 1962,
+    "pending": 993,
+    "identityBlocked": 27,
+    "automaticCertifications": 0,
+    "newCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "Artifacts Milestone 1000: 14677008129, 14676737112, 14676519389"
+  },
+  "ciSummary": {
+    "M428": "focused, Card Batch Fast, Milestone 1000, Engine Validation e Extended Soak concluídos com sucesso",
+    "M429": "focused, Card Batch Fast, Milestone 1000 e Extended Soak concluídos com sucesso; Engine Validation ainda em execução",
+    "M430": "focused, Card Batch Fast e Milestone 1000 concluídos com sucesso; Engine Validation/Extended Soak ainda em execução"
+  },
+  "handoffM61": {
+    "requested": true,
+    "pr": 17,
+    "commentId": 7052779359,
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "status": "no explicit release/response; files untouched"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "deploymentsApiExposed": false,
+    "reason": "GitHub deployments collection is not exposed by the connector; no production claim."
+  },
+  "thirdPartyReservationsReleased": [],
+  "scopeReleasedToAuxiliary": [
+    {
+      "branch": "feat/work-m428-tag-classic-flip-discord-2v2-20261120",
+      "pr": 376,
+      "files": [
+        "tests/tagClassicFlipEffectsDiscord2v2.test.cjs",
+        "docs/evidence/m428-tag-classic-flip-discord-2v2.json",
+        ".github/workflows/m428-tag-classic-flip-discord-2v2.yml"
+      ],
+      "permission": "Monitor CI; non-forced sync; correct only M428 files."
+    },
+    {
+      "branch": "feat/work-m429-classic-lp-spells-discord-2v2-20261120",
+      "pr": 377,
+      "files": [
+        "tests/tagClassicLpSpellsDiscord2v2.test.cjs",
+        "docs/evidence/m429-classic-lp-spells-discord-2v2.json",
+        ".github/workflows/m429-classic-lp-spells-discord-2v2.yml"
+      ],
+      "permission": "Monitor CI; non-forced sync; correct only M429 files."
+    },
+    {
+      "branch": "feat/work-m430-jar-of-greed-discord-2v2-20261120",
+      "pr": 378,
+      "files": [
+        "tests/tagClassicJarOfGreedDiscord2v2.test.cjs",
+        "docs/evidence/m430-jar-of-greed-discord-2v2.json",
+        ".github/workflows/m430-jar-of-greed-discord-2v2.yml"
+      ],
+      "permission": "Monitor CI; non-forced sync; correct only M430 files."
+    }
+  ],
+  "nextTask": "Auxiliar sincroniza M428–M430 por merge não-forçado a partir do HEAD compartilhado mais recente e acompanha CI restante. Work retoma integração de runtime após handoff M61; M407 responsável corrige o typo apontado no comentário 7052902781. Nenhuma reserva de terceiro foi alterada.",
+  "nextWindow": "2026-11-20T22:30:00-03:00",
+  "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "sharedHeadAfterCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "stateUpdateBaseSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
+  "sharedSessionEffectiveMinutes": 13,
+  "postCheckpointAudit": {
+    "at": "2026-11-20T20:13:33.420-03:00",
+    "sharedHead": "21d56e57f9bbbaeed8eaf15aaec1311be979af1c",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "compare": {
+      "status": "diverged",
+      "aheadBy": 693,
+      "behindBy": 10
+    },
+    "pullRequests": [
+      {
+        "number": 376,
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "merged": false,
+        "ahead": 13,
+        "behind": 3
+      },
+      {
+        "number": 377,
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "merged": false,
+        "ahead": 1,
+        "behind": 3
+      },
+      {
+        "number": 378,
+        "state": "open",
+        "draft": true,
+        "mergeable": false,
+        "merged": false,
+        "ahead": 3,
+        "behind": 3
+      }
+    ],
+    "auxiliaryHandoffComments": [
+      7052836460,
+      7052836947,
+      7052837485,
+      7052884393,
+      7052884810,
+      7052885288
+    ],
+    "handoffM61": {
+      "pr": 17,
+      "commentId": 7052779359,
+      "status": "no response"
+    },
+    "ci": {
+      "M428": {
+        "focused": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "success",
+        "extendedSoak": "success",
+        "runs": {
+          "focused": 44833214993,
+          "cardBatchFast": 44833215101,
+          "milestone1000": 44833215070,
+          "engineValidation": 44833215028
+        }
+      },
+      "M429": {
+        "focused": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "success",
+        "runs": {
+          "focused": 44833477657,
+          "cardBatchFast": 44833477702,
+          "milestone1000": 44833477542,
+          "engineValidation": 44833477681
+        }
+      },
+      "M430": {
+        "focused": "success",
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "extendedSoak": "in_progress",
+        "runs": {
+          "focused": 44834003494,
+          "cardBatchFast": 44834003544,
+          "milestone1000": 44834003563,
+          "engineValidation": 44834003611
+        }
+      }
+    }
+  },
+  "auxiliaryHandoffComments": [
+    7052836460,
+    7052836947,
+    7052837485
+  ],
+  "parallelAuditM402M407": [
+    {
+      "mission": "M402",
+      "pr": 351,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    {
+      "mission": "M403",
+      "pr": 352,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    {
+      "mission": "M405",
+      "pr": 353,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    {
+      "mission": "M406",
+      "pr": 354,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    {
+      "mission": "M407",
+      "pr": 355,
+      "focused": "failure",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "failure",
+      "extendedSoak": "success",
+      "diagnosis": "tests/immortalOfThunder.test.cjs uses effectNegatedAtResolutionAtResolution instead of required effectNegatedAtResolution in flipInput/sendInput and negation overrides; 25 failures cascade from missing boolean.",
+      "commentId": 7052902781,
+      "filesModifiedByWorkPrincipal": false
+    }
+  ]
+}

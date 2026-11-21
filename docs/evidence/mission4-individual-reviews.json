@@ -1,0 +1,382 @@
+[
+  {
+    "id": "08944575",
+    "canonicalId": "ebbab031-0fdf-4085-b02a-c4d0cb61d44c",
+    "konamiId": 4246,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4246&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 700,
+      "defense": 800,
+      "race": "Fiend",
+      "attribute": "DARK",
+      "ocgDate": "1999-02-04"
+    },
+    "mechanicalFingerprint": "303254399d542d5d0f1b1bd28ff869a585ef582f46dde10a471ca260e504f0c8"
+  },
+  {
+    "id": "53293545",
+    "canonicalId": "f2a4c75f-9f25-4a4f-94ba-2f120554a0aa",
+    "konamiId": 4163,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4163&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "race": "Plant",
+      "attribute": "EARTH",
+      "ocgDate": "1999-02-04"
+    },
+    "mechanicalFingerprint": "2fdeb4682d02d1584d004ee9bb3fefe596aefa21fe1957c259ebb4b8523aadd7"
+  },
+  {
+    "id": "15401633",
+    "canonicalId": "f4bce751-0e79-4868-a005-20f0e8d25638",
+    "konamiId": 4220,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4220&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 800,
+      "defense": 400,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-02-04"
+    },
+    "mechanicalFingerprint": "2a3f6889a420f8aac29d19acb5a2c499dd13808c3fd5c9a38e520fa333c44b57"
+  },
+  {
+    "id": "85705804",
+    "canonicalId": "f943e901-e9bc-41fa-93bb-a6750932c9ea",
+    "konamiId": 4306,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4306&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 800,
+      "defense": 800,
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "ocgDate": "1999-02-04"
+    },
+    "mechanicalFingerprint": "12af9903982ed165a49ab4e7d2f7122d1724a438b5bad63a0eccf783455cbc7f"
+  },
+  {
+    "id": "12829151",
+    "canonicalId": "22d33c51-2125-4045-a608-2400ea879ada",
+    "konamiId": 4358,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4358&request_locale=ja",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 1400,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "1999-02-21"
+    },
+    "mechanicalFingerprint": "81a114e1b9e7dae0bafd38703113578f5560b52f210ad866d72730755cf84251"
+  },
+  {
+    "id": "99030164",
+    "canonicalId": "202f8b99-13e5-481f-99e3-c27e510d9a65",
+    "konamiId": 4204,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4204&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 800,
+      "defense": 500,
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "0e11f20cd2a336635b66b98b733e6449975412ee44a47ba938bcfb3c9bb85c0c"
+  },
+  {
+    "id": "15042735",
+    "canonicalId": "314b9988-4492-4b3d-bb7b-70239659d92c",
+    "konamiId": 4180,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4180&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 900,
+      "defense": 200,
+      "race": "Spellcaster",
+      "attribute": "WIND",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "91fe5e055c5c3574bef18bcdbe037d0c7ac4c13f3a4340ccb7a02416eab64edb"
+  },
+  {
+    "id": "97973387",
+    "canonicalId": "37737533-ea49-4d8b-86fe-968721a7f4d3",
+    "konamiId": 4213,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4213&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 600,
+      "defense": 500,
+      "race": "Winged Beast",
+      "attribute": "WIND",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "713b2472268bfb63c51a394fd642ad23f65c92eb07a5b7b1bdb2648117a13149"
+  },
+  {
+    "id": "64154377",
+    "canonicalId": "37ad9f61-412f-463b-89db-239552711a78",
+    "konamiId": 4260,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4260&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 500,
+      "defense": 750,
+      "race": "Fiend",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "6d64050e3f8019b582b6e2fddf5b2f24b4de54c4c096f9cc29b8da0ef0f24b0e"
+  },
+  {
+    "id": "88435542",
+    "canonicalId": "3a847dde-69ad-4d3e-815c-1facbca9a24a",
+    "konamiId": 4182,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4182&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 800,
+      "defense": 600,
+      "race": "Pyro",
+      "attribute": "FIRE",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "6286709ffe9927c7ab75875b63c0d20df4af7b069e608ae944041c1576083d4c"
+  },
+  {
+    "id": "77603950",
+    "canonicalId": "506336b7-1107-4463-b065-48d69cbe30dc",
+    "konamiId": 4185,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4185&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 700,
+      "defense": 600,
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "7c6d687881af9098ea4a3043a749011a82868361b3e179200d3aadc53de9c4ea"
+  },
+  {
+    "id": "83678433",
+    "canonicalId": "564e1ac2-9375-4db7-8b0e-6ca48ea7f99c",
+    "konamiId": 4228,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4228&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 800,
+      "defense": 600,
+      "race": "Fiend",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "dd75abee783e4a139ec10660bf1e141f2adff6a19b9cf2453f2067f08b99050d"
+  },
+  {
+    "id": "76704943",
+    "canonicalId": "5915b832-7221-422f-86a6-3c7b012da80a",
+    "konamiId": 4128,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4128&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 900,
+      "defense": 300,
+      "race": "Dragon",
+      "attribute": "WIND",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "ebf6a8e0ba3bb3edc1e868ba93ace766a4117f1cfa4dd3a2d18901638b847d41"
+  },
+  {
+    "id": "03985011",
+    "canonicalId": "7187f09d-a48a-4bfd-8ff1-0508e7951072",
+    "konamiId": 4189,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4189&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 600,
+      "defense": 800,
+      "race": "Spellcaster",
+      "attribute": "LIGHT",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "977a334b0a843ce96e8777e6c92428cc9e175c63e0d9ad0f5c0827ffb1643c39"
+  },
+  {
+    "id": "29948642",
+    "canonicalId": "7bfd9f25-68a1-40fe-9c33-7af1db22cb5b",
+    "konamiId": 4165,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4165&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 500,
+      "defense": 800,
+      "race": "Beast",
+      "attribute": "EARTH",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "bfdbca3765eb6726012c45e0236b4f9d634da3b15206f0cf79625fd7e8f0c5ea"
+  },
+  {
+    "id": "03732747",
+    "canonicalId": "84100711-3c68-4304-b40c-cc370de4c0e2",
+    "konamiId": 4249,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4249&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 900,
+      "defense": 700,
+      "race": "Aqua",
+      "attribute": "WATER",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "49b2f511db4d9f0632daa78311f2556df72cf45a950ae06135a8d988398136b9"
+  },
+  {
+    "id": "37243151",
+    "canonicalId": "8594414a-e3df-4093-8e56-b001f8873a8f",
+    "konamiId": 4136,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4136&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 600,
+      "defense": 400,
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "179ed7d5fc92ad7a4471a3815019d240e3b772353a15cb1192ff2f227ec18a9b"
+  },
+  {
+    "id": "13193642",
+    "canonicalId": "8f4edd18-574a-4715-9596-75432d041bb7",
+    "konamiId": 4129,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4129&request_locale=ja",
+    "primaryFacts": {
+      "level": 1,
+      "atk": 300,
+      "defense": 400,
+      "race": "Plant",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "888854c521bfd1eaa6ec89ff658d9d01a1e805f2c72e969e20be06d9d9fb695c"
+  },
+  {
+    "id": "61201220",
+    "canonicalId": "99495a4d-e537-4240-a63a-77e74553351a",
+    "konamiId": 4209,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4209&request_locale=ja",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 600,
+      "defense": 800,
+      "race": "Zombie",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "fc80a9ae5ab30ed502996a6dd0242d37f8fe7da58d231312bddaafcc786e4517"
+  },
+  {
+    "id": "49258578",
+    "canonicalId": "a173afb3-e465-40aa-a1ec-6b8ad36f8b48",
+    "konamiId": 4193,
+    "reviewer": "REA Mission 4 individual static card review",
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4193&request_locale=ja",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 700,
+      "defense": 800,
+      "race": "Beast",
+      "attribute": "DARK",
+      "ocgDate": "1999-03-01"
+    },
+    "mechanicalFingerprint": "2bb33a43e604da1bac6bd8eaaf492501d961a4b0dfabbd7ff17ac2e861e8e323"
+  }
+]

@@ -1,0 +1,3718 @@
+{
+  "format": 1,
+  "batchId": "m44-double-tribute",
+  "engineVersion": "engine-v9",
+  "baseRevision": "6f09a917e46793e2e61311d044344138729462c6c3b10d13a35edcd1b8f56b79",
+  "candidates": [
+    {
+      "card": {
+        "id": "17444133",
+        "konamiId": 5409,
+        "name": "Cavalo-marinho de Kaiser",
+        "englishName": "Kaiser Sea Horse",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Sea Serpent",
+        "attribute": "LIGHT",
+        "level": 4,
+        "atk": 1700,
+        "defense": 1650,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5409&request_locale=en",
+        "summary": "Pode valer por dois Tributos para Invocar por Tributo ou baixar um monstro de atributo LIGHT."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "doubleTribute",
+            "attribute": "LIGHT"
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "attribute-double-tribute",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:doubleTribute"
+      ],
+      "textEvidence": {
+        "text": "Kaiser Sea Horse may count as two Tributes for a Tribute Summon or Tribute Set of a LIGHT monster. Its controller can instead count it as one ordinary Tribute. This procedure does not start a Chain, target anything, or double the cost of another effect. A face-down copy can supply two Tributes; Skill Drain prevents this use of a face-up copy but does not negate the face-down one. Only one physical card goes to its owner’s Graveyard when supplying both Tributes.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5409&request_locale=en",
+        "sha256": "f6b604012aa51caf9ee74b267744091cddbb4480af32d377736d3837a48d88c1"
+      },
+      "scenarios": [
+        "tribute-set",
+        "face-down-under-drain",
+        "optional-single-value",
+        "physical-owner"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "third",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                2,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "donor"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "set",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "donor"
+            }
+          ]
+        },
+        "tribute-set": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "set",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "face-down-under-drain": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "optional-single-value": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor",
+                  "second"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "physical-owner": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "17444133",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        }
+      },
+      "fingerprint": "8a33689556c17cc8ad81eb0f2b7feec03b94e7ff667545ae76f287757b7a1fb8",
+      "suites": [
+        "tests/generated-m44-double-tribute.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "44436472",
+        "konamiId": 6040,
+        "name": "Coston em Dobro",
+        "englishName": "Double Coston",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Zombie",
+        "attribute": "DARK",
+        "level": 4,
+        "atk": 1700,
+        "defense": 1650,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6040&request_locale=en",
+        "summary": "Pode valer por dois Tributos para Invocar por Tributo ou baixar um monstro de atributo DARK."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "doubleTribute",
+            "attribute": "DARK"
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "attribute-double-tribute",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:doubleTribute"
+      ],
+      "textEvidence": {
+        "text": "Double Coston may count as two Tributes for a Tribute Summon or Tribute Set of a DARK monster. Its controller can instead count it as one ordinary Tribute. This procedure does not start a Chain, target anything, or double the cost of another effect. A face-down copy can supply two Tributes; Skill Drain prevents this use of a face-up copy but does not negate the face-down one. Only one physical card goes to its owner’s Graveyard when supplying both Tributes.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6040&request_locale=en",
+        "sha256": "6ab0abeb4c5167f2029a5f9fcdfe5a4492ac89562c8dc154b28be6213c977c21"
+      },
+      "scenarios": [
+        "tribute-set",
+        "face-down-under-drain",
+        "optional-single-value",
+        "physical-owner"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "third",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                2,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "89631139"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "donor"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "set",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "donor"
+            }
+          ]
+        },
+        "tribute-set": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "set",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "face-down-under-drain": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "optional-single-value": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor",
+                  "second"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "physical-owner": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "44436472",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        }
+      },
+      "fingerprint": "45bf7349f3683ccd0fd3c88effb4b18857a3ac80d063687b78df6ce9893a5eea",
+      "suites": [
+        "tests/generated-m44-double-tribute.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "92084010",
+        "konamiId": 6120,
+        "name": "Xarroco Barbudo",
+        "englishName": "Unshaven Angler",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Fish",
+        "attribute": "WATER",
+        "level": 4,
+        "atk": 1500,
+        "defense": 1600,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6120&request_locale=en",
+        "summary": "Pode valer por dois Tributos para Invocar por Tributo ou baixar um monstro de atributo WATER."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "doubleTribute",
+            "attribute": "WATER"
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "attribute-double-tribute",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:doubleTribute"
+      ],
+      "textEvidence": {
+        "text": "Unshaven Angler may count as two Tributes for a Tribute Summon or Tribute Set of a WATER monster. Its controller can instead count it as one ordinary Tribute. This procedure does not start a Chain, target anything, or double the cost of another effect. A face-down copy can supply two Tributes; Skill Drain prevents this use of a face-up copy but does not negate the face-down one. Only one physical card goes to its owner’s Graveyard when supplying both Tributes.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6120&request_locale=en",
+        "sha256": "a218c61e11ca1c06b46b8cc8758f27b5ce67a0879183340d6c037b6796e1e15b"
+      },
+      "scenarios": [
+        "tribute-set",
+        "face-down-under-drain",
+        "optional-single-value",
+        "physical-owner"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "39674352"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "39674352"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "third",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                2,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "donor"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "39674352"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "39674352"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "set",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "39674352"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "donor"
+            }
+          ]
+        },
+        "tribute-set": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "39674352"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "set",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "face-down-under-drain": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "39674352"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "optional-single-value": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "39674352"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor",
+                  "second"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "physical-owner": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "39674352"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "92084010",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        }
+      },
+      "fingerprint": "dda38b4e5754411ebfafd870d31d0912660c78f51929e59cc7ed3d7642dfa689",
+      "suites": [
+        "tests/generated-m44-double-tribute.test.cjs"
+      ]
+    },
+    {
+      "card": {
+        "id": "38479725",
+        "konamiId": 6121,
+        "name": "O Cavalo de Troia",
+        "englishName": "The Trojan Horse",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Beast",
+        "attribute": "EARTH",
+        "level": 4,
+        "atk": 1600,
+        "defense": 1200,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6121&request_locale=en",
+        "summary": "Pode valer por dois Tributos para Invocar por Tributo ou baixar um monstro de atributo EARTH."
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "continuous",
+          "operation": {
+            "kind": "doubleTribute",
+            "attribute": "EARTH"
+          }
+        },
+        "activation": {
+          "policy": "continuous",
+          "window": "continuous"
+        }
+      },
+      "family": "attribute-double-tribute",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:continuous",
+        "monster-operation:doubleTribute"
+      ],
+      "textEvidence": {
+        "text": "The Trojan Horse may count as two Tributes for a Tribute Summon or Tribute Set of a EARTH monster. Its controller can instead count it as one ordinary Tribute. This procedure does not start a Chain, target anything, or double the cost of another effect. A face-down copy can supply two Tributes; Skill Drain prevents this use of a face-up copy but does not negate the face-down one. Only one physical card goes to its owner’s Graveyard when supplying both Tributes.",
+        "format": "full-rule-paraphrase",
+        "complete": true,
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6121&request_locale=en",
+        "sha256": "73e95a3dc10fe556ddb92afa8c935ef5d996be6a6150392a4b3b7c6ec4386160"
+      },
+      "scenarios": [
+        "tribute-set",
+        "face-down-under-drain",
+        "optional-single-value",
+        "physical-owner"
+      ],
+      "cases": {
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "06368038"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "06368038"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "third",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                2,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "46986414"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "donor"
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "06368038"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "restore": true
+            },
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "06368038"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "set",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "06368038"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "expectError": true,
+              "action": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "donor"
+            }
+          ]
+        },
+        "tribute-set": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "06368038"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "set",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": false
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "face-down-under-drain": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "06368038"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 0,
+                    "faceUp": false,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "backrow": [
+                  {
+                    "uid": "sd",
+                    "id": "82732705",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "optional-single-value": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "06368038"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  },
+                  {
+                    "uid": "second",
+                    "id": "91152256",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor",
+                  "second"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "physical-owner": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "boss",
+                    "id": "06368038"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "donor",
+                    "id": "38479725",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "summon",
+                "card": "boss",
+                "position": "atk",
+                "tributes": [
+                  "donor"
+                ]
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "donor"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters",
+                0,
+                "faceUp"
+              ],
+              "equals": true
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "containsUID": "boss"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "summoned"
+              ],
+              "equals": true
+            }
+          ]
+        }
+      },
+      "fingerprint": "d4b094b7350eb8fe02c3c7ea350d4a0bd7674c351ad7acd4464d38b22fed5169",
+      "suites": [
+        "tests/generated-m44-double-tribute.test.cjs"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "17444133",
+      "canonicalId": "e4061114-6300-4be9-ac56-1ceb6fc53c30",
+      "konamiId": 5409,
+      "reviewer": "Work: Konami card DB (EN/JP); Konami FAQ 12812 and card FAQ 5409",
+      "reviewedAt": "2026-11-08",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5409&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1700,
+        "defense": 1650,
+        "race": "Sea Serpent",
+        "attribute": "LIGHT"
+      },
+      "verifiedPrinting": {
+        "date": "2002-01-24",
+        "set": "KA-01",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5409&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "f6b604012aa51caf9ee74b267744091cddbb4480af32d377736d3837a48d88c1",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "8a33689556c17cc8ad81eb0f2b7feec03b94e7ff667545ae76f287757b7a1fb8"
+    },
+    {
+      "id": "44436472",
+      "canonicalId": "cc1ae3cf-70a8-455d-ab78-a9c9f4b6f806",
+      "konamiId": 6040,
+      "reviewer": "Work: Konami card DB (EN/JP); Konami FAQ 12812 and card FAQ 5409",
+      "reviewedAt": "2026-11-08",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6040&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1700,
+        "defense": 1650,
+        "race": "Zombie",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2004-02-26",
+        "set": "309-023",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6040&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "6ab0abeb4c5167f2029a5f9fcdfe5a4492ac89562c8dc154b28be6213c977c21",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "45bf7349f3683ccd0fd3c88effb4b18857a3ac80d063687b78df6ce9893a5eea"
+    },
+    {
+      "id": "92084010",
+      "canonicalId": "70653bf9-a38d-46df-bf07-a1ae5cf33106",
+      "konamiId": 6120,
+      "reviewer": "Work: Konami card DB (EN/JP); Konami FAQ 12812 and card FAQ 5409",
+      "reviewedAt": "2026-11-08",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6120&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1500,
+        "defense": 1600,
+        "race": "Fish",
+        "attribute": "WATER"
+      },
+      "verifiedPrinting": {
+        "date": "2004-05-27",
+        "set": "SOD-JP028",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6120&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "a218c61e11ca1c06b46b8cc8758f27b5ce67a0879183340d6c037b6796e1e15b",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "dda38b4e5754411ebfafd870d31d0912660c78f51929e59cc7ed3d7642dfa689"
+    },
+    {
+      "id": "38479725",
+      "canonicalId": "72d413ba-5b01-4b15-94c5-4e44450af81e",
+      "konamiId": 6121,
+      "reviewer": "Work: Konami card DB (EN/JP); Konami FAQ 12812 and card FAQ 5409",
+      "reviewedAt": "2026-11-08",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6121&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1600,
+        "defense": 1200,
+        "race": "Beast",
+        "attribute": "EARTH"
+      },
+      "verifiedPrinting": {
+        "date": "2004-05-27",
+        "set": "SOD-JP029",
+        "region": "ocg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6121&request_locale=ja"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "73e95a3dc10fe556ddb92afa8c935ef5d996be6a6150392a4b3b7c6ec4386160",
+      "semanticCoverage": {
+        "activation": "not-applicable",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "not-applicable",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      },
+      "mechanicalFingerprint": "d4b094b7350eb8fe02c3c7ea350d4a0bd7674c351ad7acd4464d38b22fed5169"
+    }
+  ]
+}

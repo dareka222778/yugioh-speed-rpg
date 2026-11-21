@@ -20,4 +20,19 @@ test('invalid or unsupported card packages and repeated excess quantities are re
 test('a failed inventory write rolls back every card and the receipt; a retry credits only once',()=>{
  const event=make();events.activateCardEvent(admin,event.id,now);const before=database.getCollection('two');database.db.exec("CREATE TRIGGER fail_event BEFORE INSERT ON player_cards WHEN NEW.discord_id='two' AND NEW.card_key='07089711' BEGIN SELECT RAISE(ABORT,'event write failed'); END");assert.throws(()=>events.grantEventCards(admin,event.id,'two',now),/event write failed/);assert.deepEqual(database.getCollection('two'),before);assert.equal(database.db.prepare('SELECT COUNT(*) AS n FROM card_event_receipts WHERE event_id=?').get(event.id).n,0);database.db.exec('DROP TRIGGER fail_event');assert.equal(events.grantEventCards(admin,event.id,'two',now).duplicate,false);assert.equal(events.grantEventCards(admin,event.id,'two',now).duplicate,true);
 });
+test('M27 formerly withheld certified cards can be delivered once through the real event path',()=>{
+ const {historicalNormalBatch}=require('../dist/historicalNormalBatch');
+ for(const card of historicalNormalBatch)assert.deepEqual(events.parseEventCards(card.id+':1'),[{id:card.id,quantity:1}]);
+ const card=historicalNormalBatch[0],event=events.createCardEvent(admin,'M27 release',card.id+':1',2,1,now);
+ const before=database.getCollection('two').find(c=>c.card_key===card.id)?.quantity??0;
+ events.activateCardEvent(admin,event.id,now);assert.equal(events.grantEventCards(admin,event.id,'two',now).duplicate,false);
+ assert.equal(events.grantEventCards(admin,event.id,'two',now).duplicate,true);
+ assert.equal(database.getCollection('two').find(c=>c.card_key===card.id).quantity,before+1);
+});
+test('M27 event parser accepts all released identities and still rejects imported-only cards',()=>{
+ const {releasedCardIds}=require('../dist/releasedCardIds');for(const id of releasedCardIds)assert.deepEqual(events.parseEventCards(id+':1'),[{id,quantity:1}]);
+ const event=make(),before=database.getCollection('two');database.db.prepare('UPDATE card_events SET cards=? WHERE id=?').run(JSON.stringify([{id:'71625222',quantity:1}]),event.id);
+ events.activateCardEvent(admin,event.id,now);assert.throws(()=>events.grantEventCards(admin,event.id,'two',now),/habilitada/);assert.deepEqual(database.getCollection('two'),before);
+});
+
 after(()=>{database.db.close();fs.rmSync(tmp,{recursive:true,force:true});});

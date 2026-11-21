@@ -1,0 +1,70 @@
+{
+  "runId": "work-20261121T122100-0300-M459",
+  "mission": "M459",
+  "owner": "Work principal",
+  "status": "recovered-incomplete-ci-blocked",
+  "startedAt": "2026-11-21T12:21:49.090-03:00",
+  "endedAt": null,
+  "durationMinutes": null,
+  "durationNote": "O checkpoint originalmente referenciado estava ausente. Este registro foi reconstruído a partir do branch, PR #407, comentários e execuções reais; não se infere duração de trabalho.",
+  "branch": "feat/work-m459-tag-lp-discord-seat-matrix-20261121",
+  "head": "771a29a60554b544f626a06e11960657c78d6daa",
+  "baseBranch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
+  "baseSha": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "0d8d84af5e58a0f9ff48de1d56673ef1e9008abd",
+  "pr": 407,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/407",
+  "ci": [
+    {
+      "name": "M459 TagDuel LP Discord seat matrix",
+      "run": 44935860468,
+      "status": "success"
+    },
+    {
+      "name": "Card Batch Fast",
+      "run": 44935860501,
+      "status": "success"
+    },
+    {
+      "name": "Milestone 1000",
+      "run": 44935860425,
+      "status": "success",
+      "certified": 969,
+      "remaining": 31
+    },
+    {
+      "name": "Engine Validation",
+      "run": 44935860452,
+      "status": "failure",
+      "failedJob": 136942209157
+    },
+    {
+      "name": "Extended Soak 600s",
+      "run": 44935860452,
+      "status": "success",
+      "job": 136942209501
+    }
+  ],
+  "blocker": {
+    "file": "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
+    "lines": [
+      200,
+      230
+    ],
+    "expected": "/Carta não admitida/",
+    "actual": "Estado da continuação de Espera inválido.",
+    "ownerHandoff": "Solicitado em PRs #404–#406; sem resposta confirmada."
+  },
+  "scopeReleasedToAuxiliary": [
+    "tests/tagDuelLpDiscordSeatMatrix.test.cjs",
+    "docs/evidence/m459-tag-duel-lp-discord-seat-matrix.json",
+    ".github/workflows/m459-tag-duel-lp-discord-seat-matrix.yml"
+  ],
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "merge": false,
+  "deploy": false,
+  "note": "PR #407 permanece draft e aberta. Não editar arquivo herdado nem arquivos de M455–M458 sem transferência explícita."
+}

@@ -1,0 +1,2 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{cardRulesPT}=require('../dist/cardText');
+for(const id of ['24435369','64342551','95614612','90337190','24128274'])test('operational PT-BR text preserves the Umi condition for '+id,()=>{const text=cardRulesPT(id);assert.match(text,/somente enquanto Umi estiver com a face para cima em qualquer campo/);assert.match(text,/Efeito contínuo/);if(['95614612','90337190','24128274'].includes(id))assert.match(text,/Magias/);});

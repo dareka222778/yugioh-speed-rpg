@@ -1,0 +1,133 @@
+{
+  "runId": "work-20261117T072813-0300-M319-M320",
+  "owner": "Work",
+  "mission": "M319–M320",
+  "priority": "P1 — ampliar a homologação Discord 2v2 de efeitos contínuos já certificados: Maha Vailo deve contar Equip Spells dos dois times sem perder propriedade física; efeitos de contagem tribais/atributos devem refletir o campo e os Cemitérios compartilhados sem vazar mãos/UIDs.",
+  "state": "active",
+  "startedAt": "2026-11-17T07:28:13-03:00",
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "8637493d9d28d89bdfb3503a6237351012a9c20a",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "8637493d9d28d89bdfb3503a6237351012a9c20a",
+  "workBranches": [
+    {
+      "mission": "M319",
+      "branch": "feat/work-m319-maha-vailo-discord-equip-count-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8637493d9d28d89bdfb3503a6237351012a9c20a",
+      "scope": [
+        "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs"
+      ],
+      "state": "reserved"
+    },
+    {
+      "mission": "M320",
+      "branch": "feat/work-m320-mechanical-batch20-continuous-discord-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "8637493d9d28d89bdfb3503a6237351012a9c20a",
+      "scope": [
+        "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs"
+      ],
+      "state": "reserved"
+    },
+    {
+      "mission": "M321",
+      "branch": "feat/work-m321-shooting-star-bow-ceal-direct-attack-discord-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "66c930cdc74c7eb6293523fbf3814e622055b3a4",
+      "scope": [
+        "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+      ],
+      "state": "reserved",
+      "priority": "P1 — validar um Equip Spell que reduz ATK e concede ataque direto: o representante ativo deve equipar o monstro fisicamente pertencente ao parceiro, respeitar o turno de instalação e causar dano direto mesmo com monstros adversários, sem conceder ataque direto a monstros não equipados."
+    },
+    {
+      "mission": "M322",
+      "branch": "feat/work-m322-gyaku-gire-panda-count-piercing-discord-2v2-20261117",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "33df81d6a2b7e02f82366c7f9508ce359e8d594e",
+      "scope": [
+        "tests/tagGyakuGirePandaCountPiercingDiscord2v2.test.cjs"
+      ],
+      "state": "reserved",
+      "priority": "P1 — homologar o efeito combinado de Gyaku-Gire Panda: +500 ATK por monstro adversário, inclusive face-down, e dano perfurante contra Defesa. A batalha deve ocorrer pelo menu Discord 2v2, preservando propriedade física e privacidade."
+    }
+  ],
+  "scope": [
+    "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
+    "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
+    "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs",
+    "tests/tagGyakuGirePandaCountPiercingDiscord2v2.test.cjs"
+  ],
+  "reservedFiles": [
+    "tests/tagMahaVailoDiscordEquipCount2v2.test.cjs",
+    "tests/tagMechanicalBatch20ContinuousDiscord2v2.test.cjs",
+    "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs",
+    "tests/tagGyakuGirePandaCountPiercingDiscord2v2.test.cjs"
+  ],
+  "handoffRequests": [
+    {
+      "pr": 263,
+      "mission": "M305",
+      "commentId": 6945458234,
+      "status": "requested; no conflicting file touched"
+    },
+    {
+      "pr": 187,
+      "mission": "M231",
+      "commentId": 6945459026,
+      "status": "requested; no conflicting file touched"
+    },
+    {
+      "pr": 188,
+      "mission": "M232",
+      "commentId": 6945459920,
+      "status": "requested; no conflicting file touched"
+    }
+  ],
+  "catalogAtStart": {
+    "sharedCertified": 969,
+    "remainingTo1000": 31,
+    "developmentCertified": 1014,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e checkpoint M305; HEAD compartilhado confirmado em 8637493d.",
+    "Auditoria das PRs #263–#274; reservas M305–M318 identificadas e preservadas.",
+    "Solicitado handoff cooperativo em #263, #187 e #188; nenhum arquivo reservado foi tocado.",
+    "Artefato factual milestone1000 revisado: 969 certificadas, 31 restantes; sem certificação automática.",
+    "Verificado novo HEAD e coordenação após M319/M320; CI ainda em execução. M321 selecionada como família independente de Equip Spell/ataque direto, sem tocar em M194–M198.",
+    "Após M321, consultado o HEAD e a coordenação; M322 escolhido como família independente de contagem de monstros adversários + piercing, sem duplicar PR #233."
+  ],
+  "ciAtStart": {
+    "sharedHead": "no status contexts reported",
+    "catalogWorklistArtifact": 14286383831
+  },
+  "deployment": {
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "hosting": "not independently verified"
+  },
+  "missions": [
+    {
+      "mission": "M321",
+      "branch": "feat/work-m321-shooting-star-bow-ceal-direct-attack-discord-2v2-20261117",
+      "scope": [
+        "tests/tagShootingStarBowCealDirectAttackDiscord2v2.test.cjs"
+      ],
+      "priority": "P1 — validar um Equip Spell que reduz ATK e concede ataque direto: o representante ativo deve equipar o monstro fisicamente pertencente ao parceiro, respeitar o turno de instalação e causar dano direto mesmo com monstros adversários, sem conceder ataque direto a monstros não equipados."
+    },
+    {
+      "mission": "M322",
+      "branch": "feat/work-m322-gyaku-gire-panda-count-piercing-discord-2v2-20261117",
+      "scope": [
+        "tests/tagGyakuGirePandaCountPiercingDiscord2v2.test.cjs"
+      ],
+      "priority": "P1 — homologar o efeito combinado de Gyaku-Gire Panda: +500 ATK por monstro adversário, inclusive face-down, e dano perfurante contra Defesa. A batalha deve ocorrer pelo menu Discord 2v2, preservando propriedade física e privacidade."
+    }
+  ],
+  "updatedAt": "2026-11-17T07:51:52-03:00"
+}

@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "mission": "M431",
+  "runId": "work-20261121T010116-0300-M431",
+  "owner": "Work principal",
+  "state": "active",
+  "startedAt": "2026-11-21T01:01:16-03:00",
+  "priority": "P1 — preparar e testar o adaptador específico de FLIP para A Cat of Ill Omen e An Owl of Luck, reutilizando a primitive M368; preservar a escolha opcional entre topo do Deck e mão somente com Necrovalley face-up, UIDs físicos e isolamento do Deck do parceiro.",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "8e079356720eab7518e196cf36bb8ca816c6b604",
+  "branch": "feat/work-m431-flip-search-cards-20261121",
+  "baseBranch": "feat/work-m368-search-deck-top-destination-20261118",
+  "baseSha": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+  "reservedFiles": [
+    "src/flipSearchCards.ts",
+    "tests/flipSearchCards.test.cjs",
+    "docs/evidence/m431-flip-search-cards.json",
+    ".github/workflows/m431-flip-search-cards.yml"
+  ],
+  "cards": [
+    {
+      "name": "A Cat of Ill Omen",
+      "id": "24140059",
+      "konamiCid": 5520,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5520&ope=2&request_locale=en"
+    },
+    {
+      "name": "An Owl of Luck",
+      "id": "23927567",
+      "konamiCid": 5523,
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5523&ope=2&request_locale=en"
+    }
+  ],
+  "dependency": {
+    "pr": 316,
+    "branch": "feat/work-m368-search-deck-top-destination-20261118",
+    "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07",
+    "status": "open-draft; focused/CardBatch/Milestone/Engine Validation success",
+    "reason": "M368 owns the generic search destination primitive; M431 adds only card-specific rules and optional-choice adapter."
+  },
+  "handoffM61": {
+    "pr": 17,
+    "commentId": 7056919457,
+    "status": "awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "touched": false
+  },
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M61",
+      "M402-M407",
+      "M424-M430",
+      "M368 existing files"
+    ],
+    "note": "M431 writes only four new paths. It does not edit M368's src/searchZoneRules.ts/tests/searchZoneDestination.test.cjs or central resolver files."
+  },
+  "catalogAtStart": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "blocksCompleted": [
+    "Coordination/state.json e checkpoint anterior lidos; HEAD compartilhado, main, PRs #376–#378, PR #17, PR #316 e CI revalidados.",
+    "Identificado que M368 fornece a primitive genérica necessária; M431 será empilhada sobre a branch M368 para evitar duplicar ou editar arquivos já reservados."
+  ],
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "ciWaitExcluded": true,
+    "targetMet": false
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "work-20261113T023036-0300",
+  "owner": "Work",
+  "priority": "Work",
+  "state": "active",
+  "startedAt": "2026-11-13T02:30:36-03:00",
+  "lastActivityAt": "2026-11-13T02:30:36-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBeforeClaim": "79f9be5709b6628266df4ce67e6848e073d4f5b1",
+  "sharedHeadAfterClaim": null,
+  "branch": "feat/work-m87-tag-hane-hane-ownership-20261113",
+  "branchBase": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "scope": [
+    "M87 — regressão 2v2 Hane-Hane: retorno de monstro principal ao dono físico, todos os quatro assentos"
+  ],
+  "coordination": {
+    "previousRun": "work-20261112T222244-0300",
+    "releasedOwnReservations": [
+      "feat/work-m72-tag-timeout-20261112",
+      "feat/work-m73-tag-timeout-persistence-20261112",
+      "feat/work-m74-tag-seat-authorization-20261112",
+      "feat/work-m75-tag-action-receipts-20261112"
+    ],
+    "M61": "handoff pendente; arquivos reservados intocados",
+    "parallelM76M86": "observados em branches/PRs próprias; sem interferência"
+  },
+  "verified": {
+    "sharedHead": "79f9be5709b6628266df4ce67e6848e073d4f5b1",
+    "latestSharedCommit": "79f9be5709b6628266df4ce67e6848e073d4f5b1",
+    "catalog": {
+      "shared": 969,
+      "sharedCertificates": 969,
+      "development": 1014,
+      "developmentCertificates": 1014,
+      "delta": 45
+    },
+    "m72m75CI": "success nos quatro HEADs finais"
+  },
+  "plannedChanges": [
+    "tests/tagClassicHaneHaneOwnership.test.cjs"
+  ],
+  "results": [],
+  "production": {
+    "merge": "none",
+    "deploy": "none",
+    "liveDiscord": "not validated",
+    "inventoryChanges": 0
+  },
+  "duration": {
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Duração será registrada ao encerrar; espera de CI não será contabilizada."
+  },
+  "nextTask": "Implementar e validar M87 sem tocar em arquivos reservados; depois reconsultar HEAD e coordenação e escolher uma família ainda não coberta.",
+  "nextWorkAt": "2026-11-13T03:30:00-03:00"
+}

@@ -1,0 +1,243 @@
+{
+  "runId": "work-20261118T231306-0300-M372-M373",
+  "owner": "Work",
+  "mission": "M372–M373",
+  "priority": "P1 — avançar duas famílias históricas sem invadir arquivos centrais reservados: Agido (rolagem/recrutamento Fairy) e Aqua Spirit (custo WATER/lock de posição); corrigir a regra geral de posição para respeitar bloqueios por turno.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-18T23:13:06-03:00",
+  "endedAt": "2026-11-18T23:31:17.602-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "7d3318bfd1ba38d501c76495aa180958f820a373",
+  "sharedHeadBeforeCheckpointCommit": "7d3318bfd1ba38d501c76495aa180958f820a373",
+  "workBranches": [
+    {
+      "mission": "M372",
+      "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+      "head": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+      "pr": 320,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/320",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+      "scope": [
+        "src/agidoRecruit.ts",
+        "tests/agidoRecruit.test.cjs",
+        ".github/workflows/m372-focused-tests.yml"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "cards": [
+        "Agido"
+      ],
+      "testCases": 18,
+      "ci": {
+        "focused": "success",
+        "focusedRunId": 44443529614,
+        "cardBatchFast": "success",
+        "cardBatchFastRunId": 44443529275,
+        "milestone1000": "success",
+        "milestoneRunId": 44443529290,
+        "engineValidation": "in_progress",
+        "engineRunId": 44443529362,
+        "extendedSoak600s": "in_progress",
+        "npmTestSoak120s": "in_progress"
+      },
+      "integration": "not integrated into monsterEffects/duel resolver; primitive only",
+      "newCertifications": 0
+    },
+    {
+      "mission": "M373",
+      "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+      "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951",
+      "pr": 321,
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/321",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373",
+      "scope": [
+        "src/waterGraveCost.ts",
+        "src/battlePositionLock.ts",
+        "src/positionOperations.ts",
+        "tests/waterGraveCost.test.cjs",
+        "tests/battlePositionLock.test.cjs",
+        ".github/workflows/m373-focused-tests.yml"
+      ],
+      "state": "released-to-auxiliary-monitor-ci",
+      "cards": [
+        "Aqua Spirit"
+      ],
+      "testCases": 36,
+      "ci": {
+        "priorHeadFocused": "success",
+        "priorHeadFocusedRunId": 44444444080,
+        "priorHeadFocusedTests": 31,
+        "latestHeadFocused": "in_progress",
+        "latestHeadFocusedRunId": 44444741536,
+        "cardBatchFast": "in_progress",
+        "cardBatchFastRunId": 44444741535,
+        "milestone1000": "success",
+        "milestoneRunId": 44444741555,
+        "engineValidation": "in_progress",
+        "engineRunId": 44444741532
+      },
+      "integration": "WATER cost/position-lock primitives plus generic positionOperations lock enforcement; Aqua Spirit effect registration and Standby Phase trigger not integrated",
+      "newCertifications": 0
+    }
+  ],
+  "blocksCompleted": [
+    "Leitura de coordination/state.json e do checkpoint M367–M368; confirmação do HEAD compartilhado 7d3318bfd1ba38d501c76495aa180958f820a373, branches e PRs.",
+    "Solicitação de handoff M61 no PR #17, comentário 6997627344, para src/monsterEffects.ts e src/duelEngineCurrent.ts; sem resposta até o encerramento. Nenhum dos dois arquivos foi alterado.",
+    "M372: helper Agido com rolagem 1–6 no RNG persistido, seleção de Fairy no Cemitério compartilhado, Level 1–5 exato/6+ e preservação de UID físico; 18 testes; PR #320.",
+    "M373: helpers Aqua Spirit para validar cópia na mão física ativa, preparar custo, banir WATER do Cemitério compartilhado e preservar UID; 23 testes de custo/summon planning.",
+    "M373: helper de posição com lock até o fim do turno e correção em positionOperations para impedir que efeitos contornem positionLockedThrough; 13 testes; total 36; PR #321.",
+    "Diagnóstico de M369/M371: duas falhas herdadas de Catalog revision not recovered porque os testes usam IDs sintéticos de withCatalog que não existem no catalog/engine-v9/manifest.json; comentários 6997827783 (#317) e 6997828150 (#319).",
+    "Auditoria concorrente: M369 #317 e M371 #319 Engine Validation falharam no fixture de arquivo; M370 #318 Engine Validation e focused helper passaram.",
+    "Verificação do Milestone 1000: 969 certificadas, 31 restantes, 993 históricas pendentes, 27 bloqueadas por identidade, zero certificações automáticas.",
+    "Verificação de produção: main 638 commits à frente/10 atrás da branch compartilhada; quatro workflows de CI na compartilhada, nenhum workflow de deploy encontrado em main/shared e endpoint de deployments não exposto."
+  ],
+  "handoffRequests": [
+    {
+      "pr": 17,
+      "commentId": 6997627344,
+      "mission": "M61 — integrar M367/M368 e permitir integração subsequente M372/M373",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "status": "awaiting-explicit-release",
+      "noResponse": true
+    }
+  ],
+  "concurrentWork": [
+    {
+      "mission": "M369",
+      "pr": 317,
+      "branch": "feat/work-m369-battle-damage-redirect-atomic-firefly-20261118",
+      "state": "open-draft",
+      "engineValidation": "failure",
+      "engineRunId": 44439845295,
+      "extendedSoak600s": "success",
+      "diagnosticComment": 6997827783
+    },
+    {
+      "mission": "M370",
+      "pr": 318,
+      "branch": "feat/work-m370-abyss-soldier-typed-discard-bounce-20261118",
+      "state": "open-draft",
+      "engineValidation": "success",
+      "engineRunId": 44439794202,
+      "focused": "success",
+      "focusedRunId": 44439794029
+    },
+    {
+      "mission": "M371",
+      "pr": 319,
+      "branch": "feat/work-m371-battle-damage-redirect-discord-2v2-20261118",
+      "state": "open-draft",
+      "engineValidation": "failure",
+      "engineRunId": 44442020734,
+      "extendedSoak600s": "success",
+      "discordFocused": "success",
+      "discordFocusedRunId": 44442020744,
+      "diagnosticComment": 6997828150
+    }
+  ],
+  "pullRequests": [
+    {
+      "pr": 317,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373"
+    },
+    {
+      "pr": 318,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "baseSha": "7d3318bfd1ba38d501c76495aa180958f820a373"
+    },
+    {
+      "pr": 319,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "baseSha": "5917bbcde46f31b084cafce5cceafecea2d17c14"
+    },
+    {
+      "pr": 320,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "169db040e3ffad023852f1c0a08d00cbfce932c2"
+    },
+    {
+      "pr": 321,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "9c17ba5fde0fc292c50998fcc2f6895b2fb54951"
+    }
+  ],
+  "catalogAtStart": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27
+  },
+  "catalogAtEnd": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "productionAtEnd": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtStart": "7d3318bfd1ba38d501c76495aa180958f820a373",
+    "sharedAheadOfMain": 638,
+    "sharedBehindMain": 10,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "mainWorkflows": [],
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false,
+    "hosting": "not independently verified"
+  },
+  "scopeReleasedToAuxiliary": [
+    {
+      "branch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+      "pr": 320,
+      "files": [
+        "tests/agidoRecruit.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente o arquivo de teste; não editar src/agidoRecruit.ts, catálogo, resolver, inventários, banco, main ou produção."
+    },
+    {
+      "branch": "feat/work-m373-aqua-spirit-banish-position-lock-20261118",
+      "pr": 321,
+      "files": [
+        "tests/waterGraveCost.test.cjs",
+        "tests/battlePositionLock.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir somente os dois arquivos de teste; não editar src/waterGraveCost.ts, src/battlePositionLock.ts, src/positionOperations.ts, effect registry, catálogo, inventários, banco, main ou produção."
+    }
+  ],
+  "duration": {
+    "elapsedMinutes": 18.19,
+    "effectiveWorkMinutes": 16.5,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Auxiliar: monitorar #320/#321 e corrigir apenas os arquivos de teste liberados. Work: concluir Engine Validation/soaks de M372 e M373; aguardar handoff explícito M61; após liberação, integrar primeiro M367 3-Hump Lacooda, depois M368 A Cat/An Owl, e então registrar Agido/Aqua Spirit no resolver; acompanhar correção do fixture de M369/M371; continuar fila histórica sem certificar por importação.",
+  "nextWindow": "2026-11-19T03:30:00-03:00"
+}

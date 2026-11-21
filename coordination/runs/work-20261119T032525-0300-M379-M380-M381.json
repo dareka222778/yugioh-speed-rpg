@@ -1,0 +1,197 @@
+{
+  "runId": "work-20261119T032525-0300-M379-M380-M381",
+  "owner": "Work",
+  "mission": "M379–M381",
+  "priority": "P1 — proteger limites de Deck e payloads Discord do editor, além da compatibilidade das regras clássicas, sem tocar nas reservas de runtime.",
+  "state": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-19T03:25:25-03:00",
+  "endedAt": "2026-11-19T03:46:09.230-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "074a7af9e5f87d5442c9c006c06c77f82408206f",
+  "sharedHeadBeforeCheckpointCommit": "8d3a273c195be9941dfbaa1e41f86d95e4eb2e3a",
+  "workBranches": [
+    {
+      "mission": "M379",
+      "branch": "feat/work-m379-extra-deck-boundaries-20261119",
+      "head": "35ab073970117ed06281f8c9c77b926b7a449c49",
+      "pr": 327,
+      "baseSha": "074a7af9e5f87d5442c9c006c06c77f82408206f",
+      "files": [
+        "tests/deckFormatBoundaries.test.cjs"
+      ],
+      "testCases": 3,
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmRunCheck": "success",
+        "npmTest": "success",
+        "extendedSoak600s": "success"
+      },
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/327",
+      "newCertifications": 0,
+      "runtimeChanges": []
+    },
+    {
+      "mission": "M380",
+      "branch": "feat/work-m380-rules-profile-owner-contract-20261119",
+      "head": "7811cb3c649424490c19c2de6f427e6248c6c182",
+      "pr": 328,
+      "baseSha": "b4893aedbed1939bccd674a164659e14fb451c96",
+      "files": [
+        "tests/rulesProfileOwnerContract.test.cjs"
+      ],
+      "testCases": 4,
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "engineValidation": "in_progress",
+        "npmRunCheck": "success",
+        "npmTest": "success",
+        "extendedSoak600s": "in_progress"
+      },
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/328",
+      "newCertifications": 0,
+      "runtimeChanges": []
+    },
+    {
+      "mission": "M381",
+      "branch": "feat/work-m381-deck-extra-discord-controls-20261119",
+      "head": "e6bcdec210f150301e0552499140c47439c0c49d",
+      "pr": 329,
+      "baseSha": "8d3a273c195be9941dfbaa1e41f86d95e4eb2e3a",
+      "files": [
+        "tests/deckExtraDeckDiscordControls.test.cjs"
+      ],
+      "testCases": 2,
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "milestone1000": "in_progress",
+        "engineValidation": "in_progress"
+      },
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/329",
+      "newCertifications": 0,
+      "runtimeChanges": []
+    }
+  ],
+  "blocksCompleted": [
+    "M379: três testes do construtor/validador; 20 Main + 5 Extra, sexta Fusão rejeitada atomicamente e inventário temporário preservado.",
+    "M379 CI: Card Batch Fast/Milestone/npm run check/npm test aprovados; Extended Soak 600s aprovado; Engine Validation ainda executa auditorias finais.",
+    "M380: quatro testes do perfil clássico e compatibilidade de snapshots speed-rpg-v1/v2, incluindo saves sem versão.",
+    "M380 CI: Card Batch Fast/Milestone/npm run check/npm test aprovados; Extended Soak 600s e Engine Validation ainda em execução.",
+    "M381: dois testes de payload Discord.js; bloqueio do botão da sexta Fusão e manutenção do botão Main Deck quando Extra está cheio; CI iniciada.",
+    "Coordenação condicionada ao HEAD; run ativo work-20261115T142521-0300 e suas nove reservas preservados."
+  ],
+  "concurrentWork": {
+    "activeWorkRunId": "work-20261115T142521-0300",
+    "preservedReservedFiles": [
+      "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+      "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+      "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+      "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+      "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+      "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+      "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+      "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+      "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs"
+    ],
+    "handoffM61": {
+      "pr": 17,
+      "commentId": 6997627344,
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ],
+      "status": "awaiting-explicit-release",
+      "noResponse": true
+    },
+    "otherOpenPrs": [
+      312,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      326
+    ]
+  },
+  "catalogAtStart": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "historyPending": 993,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "productionAtEnd": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtStart": "8d3a273c195be9941dfbaa1e41f86d95e4eb2e3a",
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false,
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "mainWorkflows": [],
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false,
+    "note": "Nenhum deploy confirmado; API de deployments não exposta pelo conector."
+  },
+  "scopeReleasedToAuxiliary": [
+    {
+      "branch": "feat/work-m379-extra-deck-boundaries-20261119",
+      "pr": 327,
+      "files": [
+        "tests/deckFormatBoundaries.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir exclusivamente tests/deckFormatBoundaries.test.cjs; sem runtime, catálogo, certificados, inventário persistente, banco ou produção."
+    },
+    {
+      "branch": "feat/work-m380-rules-profile-owner-contract-20261119",
+      "pr": 328,
+      "files": [
+        "tests/rulesProfileOwnerContract.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir exclusivamente tests/rulesProfileOwnerContract.test.cjs; sem runtime, catálogo, certificados, inventário persistente, banco ou produção."
+    },
+    {
+      "branch": "feat/work-m381-deck-extra-discord-controls-20261119",
+      "pr": 329,
+      "files": [
+        "tests/deckExtraDeckDiscordControls.test.cjs"
+      ],
+      "allowed": "Monitorar CI e corrigir exclusivamente tests/deckExtraDeckDiscordControls.test.cjs; sem runtime, catálogo, certificados, inventário persistente, banco ou produção."
+    }
+  ],
+  "duration": {
+    "elapsedMinutes": 20.7,
+    "effectiveWorkMinutes": 12,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Auxiliar: monitorar #327–#329 e corrigir somente os três arquivos de teste liberados. Work: aguardar Engine Validation/soaks, sincronizar PRs por merge não-forçado antes de revisão; manter as nove reservas ativas e aguardar handoff M61 antes de integrar 3-Hump Lacooda, A Cat of Ill Omen e An Owl of Luck.",
+  "nextWindow": "2026-11-19T08:30:00-03:00"
+}

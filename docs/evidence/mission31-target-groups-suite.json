@@ -1,0 +1,14 @@
+{
+  "node": "v22.23.4",
+  "tests": 6649,
+  "suites": 0,
+  "pass": 6649,
+  "fail": 0,
+  "cancelled": 0,
+  "skipped": 0,
+  "todo": 0,
+  "exitCode": 0,
+  "catalog": "25267e4092aa0a2b1af7dd884851c59286ccbe780b2d272100756a2bb2385831",
+  "scope": "Complete local isolated Node 22 suite after admission of 916 cards",
+  "junitSHA256": "80093dd09f4415524b4c1e18c317c8651420df7846a12730a7b70bb7e387f090"
+}

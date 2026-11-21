@@ -1,0 +1,207 @@
+{
+  "format": 1,
+  "batchId": "m31-target-groups",
+  "sandbox": true,
+  "publicEngine": true,
+  "baseRevision": "53752fee6f0dfcf2bdbb65627d3f376545d4351f6c461ac425d09177ada6960f",
+  "batchSHA256": "010e4df058c17c8ab6ac8d4248565a5e556770c9c8c4dcf6cdd2c083617a9abb",
+  "stage": "tested",
+  "sourceHashAtSandboxExecution": "f7a40693774fae224a01f7bf6a2849363ccc4da396561586ac8f6a9ac9e7f80d",
+  "executions": [
+    {
+      "id": "93920745",
+      "fingerprint": "51258e0d8413186595ebfe7c92f6b988a94e7f3b68ec3b908a309bb2f15c57fa",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-target-groups.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-target-groups.test.cjs": "1603f940a392c75c9098cf0726c6821b8c9f5acda661e592d1c0a69d3a5d1697"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "optional-accept",
+        "optional-decline",
+        "restore-choice",
+        "partial-target-loss",
+        "duplicate-target",
+        "restore-partial-selection",
+        "cardinality",
+        "source-removed",
+        "normal-summon-no-flip",
+        "one-target-early-confirm",
+        "battle-destroyed-flip"
+      ],
+      "failed": []
+    },
+    {
+      "id": "28357177",
+      "fingerprint": "a4b7c32b2bfe281b91a5980cc3e8dac40b3625893fe24fd04deb783f584663d7",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-target-groups.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-target-groups.test.cjs": "1603f940a392c75c9098cf0726c6821b8c9f5acda661e592d1c0a69d3a5d1697"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "optional-accept",
+        "optional-decline",
+        "restore-choice",
+        "partial-target-loss",
+        "duplicate-target",
+        "restore-partial-selection",
+        "cardinality",
+        "source-removed",
+        "normal-summon-no-flip",
+        "one-target-early-confirm",
+        "battle-destroyed-flip"
+      ],
+      "failed": []
+    },
+    {
+      "id": "65878864",
+      "fingerprint": "59ac4a5509cea09af5a96ffc1ab2102d6dc12357c015f32c5eb37e965df027bf",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-target-groups.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-target-groups.test.cjs": "1603f940a392c75c9098cf0726c6821b8c9f5acda661e592d1c0a69d3a5d1697"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "partial-target-loss",
+        "duplicate-target",
+        "restore-partial-selection",
+        "cardinality",
+        "source-removed",
+        "normal-summon-no-flip",
+        "insufficient-mandatory-still-activates",
+        "battle-destroyed-flip"
+      ],
+      "failed": []
+    },
+    {
+      "id": "61831093",
+      "fingerprint": "988ca016f7d52b7e1437650a178946005b4ea88233d698436b067cde89eebf09",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-target-groups.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-target-groups.test.cjs": "1603f940a392c75c9098cf0726c6821b8c9f5acda661e592d1c0a69d3a5d1697"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "partial-target-loss",
+        "duplicate-target",
+        "restore-partial-selection",
+        "cardinality",
+        "source-removed",
+        "normal-summon-no-flip",
+        "insufficient-mandatory-still-activates",
+        "turned-face-up-target-survives",
+        "battle-destroyed-flip"
+      ],
+      "failed": []
+    },
+    {
+      "id": "71283180",
+      "fingerprint": "7fdaf3e6f301b40f62d0499efdeed41a57ca29e6e0df3762d7eab61e16d61865",
+      "resolverVersion": "engine-v9",
+      "activePublicEngine": true,
+      "sandboxAdmission": true,
+      "exitCode": 0,
+      "suites": [
+        "tests/generated-m31-target-groups.test.cjs"
+      ],
+      "suiteHashes": {
+        "tests/generated-m31-target-groups.test.cjs": "1603f940a392c75c9098cf0726c6821b8c9f5acda661e592d1c0a69d3a5d1697"
+      },
+      "passed": [
+        "identity",
+        "negative",
+        "json-restore",
+        "deterministic-replay",
+        "activation",
+        "resolution",
+        "negation",
+        "target-activation",
+        "target-resolution",
+        "target-zone-change",
+        "target-unavailable",
+        "trigger-timing",
+        "partial-target-loss",
+        "duplicate-target",
+        "restore-partial-selection",
+        "cardinality",
+        "source-removed",
+        "normal-summon-no-flip",
+        "insufficient-mandatory-still-activates",
+        "battle-destroyed-flip"
+      ],
+      "failed": []
+    }
+  ],
+  "candidateCount": 5,
+  "certificateProposals": 5,
+  "inventoryGranted": 0
+}

@@ -1,0 +1,1088 @@
+{
+  "format": 1,
+  "batchId": "m33-piercing-equip",
+  "engineVersion": "engine-v9",
+  "baseRevision": "d577b46208ea562f9475ca25e788f06d0ef7e25e2777af6e73054eef986a4acb",
+  "candidates": [
+    {
+      "card": {
+        "id": "97687912",
+        "konamiId": 5128,
+        "name": "Queda do Meteoro Angelical",
+        "englishName": "Fairy Meteor Crush",
+        "kind": "spell",
+        "race": null,
+        "attribute": null,
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "summary": "Equipe a um monstro com a face para cima. Quando ele atacar um monstro em Defesa, cause ao oponente dano de batalha perfurante.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5128&request_locale=en"
+      },
+      "effect": {
+        "kind": "equip",
+        "atk": 0,
+        "def": 0,
+        "combat": [
+          {
+            "kind": "piercing"
+          }
+        ]
+      },
+      "family": "equip-piercing",
+      "requirements": [
+        "effect:equip"
+      ],
+      "textEvidence": {
+        "text": "This Equip Spell has one effect: while it stays face-up and is equipped to a legal face-up monster, that monster inflicts piercing battle damage when attacking a Defense Position monster. The damage is the positive ATK minus DEF difference and is dealt to the opponent of the attacking monster controller. It grants no ATK or DEF modifier and creates no activated effect, cost, target on attack, once-per-turn limit, special restriction, additional operation, or post-destruction trigger. Its initial equip selects one face-up monster; it leaves the field under ordinary equip rules if its target becomes invalid. A nonpositive difference deals no piercing damage.",
+        "sha256": "0161caeda3439860ad65b66c6c22d1f3b9ba8d7b5d9592dd4f760f968e1c8713",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5128&request_locale=en"
+      },
+      "scenarios": [
+        "piercing-damage-calculation",
+        "no-piercing-without-positive-difference"
+      ],
+      "cases": {
+        "negative": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "equip",
+                "target": "unknown"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "equip",
+                "target": "attacker"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "equip",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "equip",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0,
+                    "equippedTo": "attacker"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "wall",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "wall"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "cost",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "equip",
+                "target": "attacker"
+              }
+            },
+            {
+              "match": {
+                "kind": "trap",
+                "card": "jam",
+                "target": "equip",
+                "discards": [
+                  "cost"
+                ]
+              },
+              "actor": "b"
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "target-activation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "equip",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "target-resolution": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "equip",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "target-zone-change": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0,
+                    "equippedTo": "attacker"
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "book",
+                    "id": "14087893"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "book",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "equals": []
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "target-unavailable": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "expectError": true,
+              "action": {
+                "kind": "spell",
+                "card": "equip",
+                "target": "attacker"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "hand",
+                "0",
+                "id"
+              ],
+              "equals": "97687912"
+            }
+          ]
+        },
+        "source-loss": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0,
+                    "equippedTo": "attacker"
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "book",
+                    "id": "14087893"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "book",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "equals": []
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "continuous-negation": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912"
+                  }
+                ],
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "hand": [
+                  {
+                    "uid": "cost",
+                    "id": "91152256"
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "jam",
+                    "id": "77414722",
+                    "faceUp": false,
+                    "setTurn": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "equip",
+                "target": "attacker"
+              }
+            },
+            {
+              "match": {
+                "kind": "trap",
+                "card": "jam",
+                "target": "equip",
+                "discards": [
+                  "cost"
+                ]
+              },
+              "actor": "b"
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "multiple-sources": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0,
+                    "equippedTo": "attacker"
+                  },
+                  {
+                    "uid": "equip2",
+                    "id": "97687912",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0,
+                    "equippedTo": "attacker"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "wall",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "wall"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "dynamic-recalculation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0,
+                    "equippedTo": "attacker"
+                  }
+                ],
+                "hand": [
+                  {
+                    "uid": "book",
+                    "id": "14087893"
+                  }
+                ]
+              },
+              {}
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "spell",
+                "card": "book",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "backrow"
+              ],
+              "equals": []
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "equip"
+            }
+          ]
+        },
+        "piercing-damage-calculation": {
+          "fixture": {
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "48305365",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0,
+                    "equippedTo": "attacker"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "wall",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ],
+            "phase": "battle"
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "wall"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 3500
+            }
+          ]
+        },
+        "no-piercing-without-positive-difference": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "55550921",
+                    "owner": 0,
+                    "faceUp": true,
+                    "position": "atk",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ],
+                "backrow": [
+                  {
+                    "uid": "equip",
+                    "id": "97687912",
+                    "faceUp": true,
+                    "resolved": true,
+                    "setTurn": 0,
+                    "equippedTo": "attacker"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "wall",
+                    "id": "91152256",
+                    "owner": 1,
+                    "faceUp": true,
+                    "position": "def",
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "wall"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": "97687912",
+      "canonicalId": "af61d758-2265-4b08-aa8b-612f434fdd4f",
+      "konamiId": 5128,
+      "reviewer": "Codex: official Fairy Meteor Crush card text and historical printing reviewed 2026-10-30",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5128&request_locale=en",
+      "primaryFacts": {
+        "level": null,
+        "atk": null,
+        "defense": null,
+        "race": null,
+        "attribute": null
+      },
+      "verifiedPrinting": {
+        "date": "2002-10-20",
+        "set": "Pharaoh's Servant",
+        "region": "tcg",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5128&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "0161caeda3439860ad65b66c6c22d1f3b9ba8d7b5d9592dd4f760f968e1c8713",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "not-applicable",
+        "operations": "represented",
+        "duration": "represented",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    }
+  ]
+}

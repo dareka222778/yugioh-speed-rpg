@@ -1,0 +1,56 @@
+{
+  "runId": "work-20261119T035253-0300-M382",
+  "mission": "M382",
+  "priority": "P1",
+  "startedAt": "2026-11-19T03:52:53-03:00",
+  "endedAt": "2026-11-19T04:12:56-03:00",
+  "elapsedMinutes": 20,
+  "effectiveWorkMinutes": 20,
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "2a37ff19c2a2306484e718006487a1ffc356ca5b"
+  },
+  "branch": "feat/work-m382-deck-interaction-id-guard-20261119",
+  "head": "42c168ef71a1959dd4654326ce6a195369549b8d",
+  "changes": [
+    "Criados parser/gerador de custom IDs e 97 linhas de testes; integração experimental em index.ts e deckUI.ts."
+  ],
+  "pr": {
+    "number": 330,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/330",
+    "state": "closed",
+    "merged": false
+  },
+  "ci": {
+    "focused": "success após correção do fixture",
+    "milestone1000": "success",
+    "cardBatchFast": "failure",
+    "engineValidation": "failure no check-mission8-integrity; arquivos src/index.ts e src/deckUI.ts pertencem ao baseline preservado M8."
+  },
+  "cardCertification": {
+    "certified": 969,
+    "remaining": 31,
+    "newlyCertified": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "discordLiveValidation": false
+  },
+  "blockers": [
+    "Arquivos index.ts e deckUI.ts são protegidos pelo baseline M8; não há procedimento autorizado para alterar o baseline."
+  ],
+  "releasedScope": [
+    "src/index.ts",
+    "src/deckUI.ts",
+    "src/deckInteractionId.ts",
+    "tests/deckInteractionId.test.cjs",
+    ".github/workflows/m382-focused-tests.yml"
+  ],
+  "next": {
+    "mission": "M383",
+    "branch": "feat/work-m383-standby-targeted-modifier-20261119",
+    "task": "Adicionar opção tipada de modificador temporário ao StandbyFlow e preparar Amazoness Blowpiper sem alterar arquivos M8 protegidos.",
+    "handoff": "M61 permanece aguardando liberação para integração em monsterEffects/duelEngineCurrent."
+  }
+}

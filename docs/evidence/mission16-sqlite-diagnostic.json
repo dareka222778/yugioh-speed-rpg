@@ -1,0 +1,644 @@
+{
+  "classification": "CONFIRMADO for sample measurements; INFERIDO for mechanism extrapolation",
+  "samples": [
+    {
+      "commit": "f7a8d5912669908f3d5e0ff16dd065364ee7cd96",
+      "ci": 40706485447,
+      "scope": "isolated Node22 extended soak, not production",
+      "completed": 5211,
+      "commits": 308770,
+      "duplicateRequests": 18162,
+      "health": {
+        "pageSize": 4096,
+        "pageCount": 47996,
+        "freePages": 1,
+        "tables": [
+          {
+            "name": "deck_cards",
+            "rows": 240,
+            "payloadBytes": 4200
+          },
+          {
+            "name": "decks",
+            "rows": 20,
+            "payloadBytes": 550
+          },
+          {
+            "name": "duel_action_receipts",
+            "rows": 264467,
+            "payloadBytes": 14830476
+          },
+          {
+            "name": "duel_members",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "duel_transition_events",
+            "rows": 264467,
+            "payloadBytes": 84266123
+          },
+          {
+            "name": "duels",
+            "rows": 4632,
+            "payloadBytes": 19423473
+          },
+          {
+            "name": "npc_daily_claims",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "npc_first_wins",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "npc_results",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "player_cards",
+            "rows": 240,
+            "payloadBytes": 4572
+          },
+          {
+            "name": "players",
+            "rows": 20,
+            "payloadBytes": 1100
+          },
+          {
+            "name": "starter_grants",
+            "rows": 20,
+            "payloadBytes": 690
+          },
+          {
+            "name": "tag_action_receipts",
+            "rows": 44303,
+            "payloadBytes": 2526747
+          },
+          {
+            "name": "tag_members",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "tag_sessions",
+            "rows": 579,
+            "payloadBytes": 7405716
+          },
+          {
+            "name": "tag_transition_events",
+            "rows": 44303,
+            "payloadBytes": 15816776
+          }
+        ],
+        "pageUsage": {
+          "available": true,
+          "objects": [
+            {
+              "name": "duel_transition_events",
+              "bytes": 92291072,
+              "payloadBytes": 85347327
+            },
+            {
+              "name": "duels",
+              "bytes": 33406976,
+              "payloadBytes": 19437065
+            },
+            {
+              "name": "duel_action_receipts",
+              "bytes": 18325504,
+              "payloadBytes": 16467826
+            },
+            {
+              "name": "tag_transition_events",
+              "bytes": 17448960,
+              "payloadBytes": 15993985
+            },
+            {
+              "name": "sqlite_autoindex_duel_action_receipts_1",
+              "bytes": 10543104,
+              "payloadBytes": 7873177
+            },
+            {
+              "name": "tag_sessions",
+              "bytes": 9490432,
+              "payloadBytes": 7409103
+            },
+            {
+              "name": "sqlite_autoindex_duel_transition_events_1",
+              "bytes": 8523776,
+              "payloadBytes": 6316699
+            },
+            {
+              "name": "tag_action_receipts",
+              "bytes": 3080192,
+              "payloadBytes": 2794429
+            },
+            {
+              "name": "sqlite_autoindex_tag_action_receipts_1",
+              "bytes": 1765376,
+              "payloadBytes": 1296398
+            },
+            {
+              "name": "sqlite_autoindex_tag_transition_events_1",
+              "bytes": 1425408,
+              "payloadBytes": 1031903
+            },
+            {
+              "name": "sqlite_autoindex_duels_1",
+              "bytes": 122880,
+              "payloadBytes": 97144
+            },
+            {
+              "name": "sqlite_autoindex_tag_sessions_1",
+              "bytes": 20480,
+              "payloadBytes": 12031
+            },
+            {
+              "name": "sqlite_schema",
+              "bytes": 12288,
+              "payloadBytes": 5485
+            },
+            {
+              "name": "sqlite_autoindex_player_cards_1",
+              "bytes": 12288,
+              "payloadBytes": 5032
+            },
+            {
+              "name": "sqlite_autoindex_deck_cards_1",
+              "bytes": 12288,
+              "payloadBytes": 5272
+            },
+            {
+              "name": "player_cards",
+              "bytes": 12288,
+              "payloadBytes": 5080
+            },
+            {
+              "name": "deck_cards",
+              "bytes": 12288,
+              "payloadBytes": 5080
+            },
+            {
+              "name": "tag_members",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "starter_grants",
+              "bytes": 4096,
+              "payloadBytes": 770
+            },
+            {
+              "name": "sqlite_sequence",
+              "bytes": 4096,
+              "payloadBytes": 17
+            },
+            {
+              "name": "sqlite_autoindex_tag_members_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_starter_grants_1",
+              "bytes": 4096,
+              "payloadBytes": 229
+            },
+            {
+              "name": "sqlite_autoindex_players_1",
+              "bytes": 4096,
+              "payloadBytes": 229
+            },
+            {
+              "name": "sqlite_autoindex_npc_results_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_npc_first_wins_2",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_npc_first_wins_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_npc_daily_claims_2",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_npc_daily_claims_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_duel_members_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_decks_1",
+              "bytes": 4096,
+              "payloadBytes": 249
+            },
+            {
+              "name": "players",
+              "bytes": 4096,
+              "payloadBytes": 1240
+            },
+            {
+              "name": "one_active_deck",
+              "bytes": 4096,
+              "payloadBytes": 229
+            },
+            {
+              "name": "npc_results",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "npc_first_wins",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "npc_daily_claims",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "duel_members",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "decks",
+              "bytes": 4096,
+              "payloadBytes": 630
+            }
+          ]
+        },
+        "files": {
+          "main": 196562944,
+          "wal": 4190072,
+          "shm": 32768
+        },
+        "totalBytes": 200785784,
+        "budgetBytes": 8589934592,
+        "warningRatio": 0.8,
+        "budgetExceeded": false,
+        "warning": false,
+        "payloadEstimateOnly": true,
+        "capacityScope": "SQLite files only; excludes backups, assets, OS and other processes",
+        "sampledAt": "2026-10-28T14:40:13.331Z",
+        "retention": "No rows removed. Receipts and unfinished games must remain available for recovery/idempotence."
+      },
+      "checkpoint": {
+        "mode": "PASSIVE",
+        "busy": 0,
+        "logFrames": 520,
+        "checkpointedFrames": 520,
+        "complete": true
+      },
+      "observedMainBytesPerCommit": 636.599876931049
+    },
+    {
+      "commit": "4f9f0edfcabb77292b26eca821b74432c0bf7ee4",
+      "ci": 40711583392,
+      "scope": "isolated Node22 extended soak, not production",
+      "completed": 8577,
+      "commits": 509676,
+      "duplicateRequests": 29980,
+      "health": {
+        "pageSize": 4096,
+        "pageCount": 79124,
+        "freePages": 1,
+        "tables": [
+          {
+            "name": "deck_cards",
+            "rows": 240,
+            "payloadBytes": 4200
+          },
+          {
+            "name": "decks",
+            "rows": 20,
+            "payloadBytes": 550
+          },
+          {
+            "name": "duel_action_receipts",
+            "rows": 436076,
+            "payloadBytes": 24453876
+          },
+          {
+            "name": "duel_members",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "duel_transition_events",
+            "rows": 436076,
+            "payloadBytes": 138886640
+          },
+          {
+            "name": "duels",
+            "rows": 7624,
+            "payloadBytes": 31974788
+          },
+          {
+            "name": "npc_daily_claims",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "npc_first_wins",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "npc_results",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "player_cards",
+            "rows": 240,
+            "payloadBytes": 4572
+          },
+          {
+            "name": "players",
+            "rows": 20,
+            "payloadBytes": 1100
+          },
+          {
+            "name": "starter_grants",
+            "rows": 20,
+            "payloadBytes": 690
+          },
+          {
+            "name": "tag_action_receipts",
+            "rows": 73600,
+            "payloadBytes": 4197507
+          },
+          {
+            "name": "tag_members",
+            "rows": 0,
+            "payloadBytes": 0
+          },
+          {
+            "name": "tag_sessions",
+            "rows": 953,
+            "payloadBytes": 12190622
+          },
+          {
+            "name": "tag_transition_events",
+            "rows": 73600,
+            "payloadBytes": 26294526
+          }
+        ],
+        "pageUsage": {
+          "available": true,
+          "objects": [
+            {
+              "name": "duel_transition_events",
+              "bytes": 152129536,
+              "payloadBytes": 140669608
+            },
+            {
+              "name": "duels",
+              "bytes": 54927360,
+              "payloadBytes": 31997171
+            },
+            {
+              "name": "duel_action_receipts",
+              "bytes": 30224384,
+              "payloadBytes": 27154205
+            },
+            {
+              "name": "tag_transition_events",
+              "bytes": 29020160,
+              "payloadBytes": 26588923
+            },
+            {
+              "name": "sqlite_autoindex_duel_action_receipts_1",
+              "bytes": 17358848,
+              "payloadBytes": 13003187
+            },
+            {
+              "name": "tag_sessions",
+              "bytes": 15618048,
+              "payloadBytes": 12196199
+            },
+            {
+              "name": "sqlite_autoindex_duel_transition_events_1",
+              "bytes": 14020608,
+              "payloadBytes": 10436973
+            },
+            {
+              "name": "tag_action_receipts",
+              "bytes": 5124096,
+              "payloadBytes": 4642339
+            },
+            {
+              "name": "sqlite_autoindex_tag_action_receipts_1",
+              "bytes": 2932736,
+              "payloadBytes": 2175385
+            },
+            {
+              "name": "sqlite_autoindex_tag_transition_events_1",
+              "bytes": 2351104,
+              "payloadBytes": 1736041
+            },
+            {
+              "name": "sqlite_autoindex_duels_1",
+              "bytes": 204800,
+              "payloadBytes": 159976
+            },
+            {
+              "name": "sqlite_autoindex_tag_sessions_1",
+              "bytes": 32768,
+              "payloadBytes": 19885
+            },
+            {
+              "name": "sqlite_schema",
+              "bytes": 12288,
+              "payloadBytes": 5485
+            },
+            {
+              "name": "sqlite_autoindex_player_cards_1",
+              "bytes": 12288,
+              "payloadBytes": 5032
+            },
+            {
+              "name": "sqlite_autoindex_deck_cards_1",
+              "bytes": 12288,
+              "payloadBytes": 5272
+            },
+            {
+              "name": "player_cards",
+              "bytes": 12288,
+              "payloadBytes": 5080
+            },
+            {
+              "name": "deck_cards",
+              "bytes": 12288,
+              "payloadBytes": 5080
+            },
+            {
+              "name": "tag_members",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "starter_grants",
+              "bytes": 4096,
+              "payloadBytes": 770
+            },
+            {
+              "name": "sqlite_sequence",
+              "bytes": 4096,
+              "payloadBytes": 17
+            },
+            {
+              "name": "sqlite_autoindex_tag_members_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_starter_grants_1",
+              "bytes": 4096,
+              "payloadBytes": 229
+            },
+            {
+              "name": "sqlite_autoindex_players_1",
+              "bytes": 4096,
+              "payloadBytes": 229
+            },
+            {
+              "name": "sqlite_autoindex_npc_results_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_npc_first_wins_2",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_npc_first_wins_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_npc_daily_claims_2",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_npc_daily_claims_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_duel_members_1",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "sqlite_autoindex_decks_1",
+              "bytes": 4096,
+              "payloadBytes": 249
+            },
+            {
+              "name": "players",
+              "bytes": 4096,
+              "payloadBytes": 1240
+            },
+            {
+              "name": "one_active_deck",
+              "bytes": 4096,
+              "payloadBytes": 229
+            },
+            {
+              "name": "npc_results",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "npc_first_wins",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "npc_daily_claims",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "duel_members",
+              "bytes": 4096,
+              "payloadBytes": 0
+            },
+            {
+              "name": "decks",
+              "bytes": 4096,
+              "payloadBytes": 630
+            }
+          ]
+        },
+        "files": {
+          "main": 324059136,
+          "wal": 4202432,
+          "shm": 32768
+        },
+        "totalBytes": 328294336,
+        "budgetBytes": 8589934592,
+        "warningRatio": 0.8,
+        "budgetExceeded": false,
+        "warning": false,
+        "payloadEstimateOnly": true,
+        "capacityScope": "SQLite files only; excludes backups, assets, OS and other processes",
+        "sampledAt": "2026-10-28T15:10:54.651Z",
+        "retention": "No rows removed. Receipts and unfinished games must remain available for recovery/idempotence."
+      },
+      "checkpoint": {
+        "mode": "PASSIVE",
+        "busy": 0,
+        "logFrames": 644,
+        "checkpointedFrames": 644,
+        "complete": true
+      },
+      "observedMainBytesPerCommit": 635.8139994820239
+    }
+  ],
+  "findings": [
+    {
+      "classification": "CONFIRMADO",
+      "claim": "Each measured commit has one retained receipt and one event row across 1v1/2v2; repeated deliveries did not add rows beyond committed revisions in these samples."
+    },
+    {
+      "classification": "CONFIRMADO",
+      "claim": "WAL remained about 4 MiB and explicit PASSIVE checkpoint completed. Main database is dominated by retained tables/indexes; freelist is one page in each sample."
+    },
+    {
+      "classification": "INFERIDO",
+      "claim": "The reproduced disk growth is primarily retention proportional to commits. Similar size per commit across samples is not a capacity guarantee or proof of the original deleted M15 database contents."
+    },
+    {
+      "classification": "NAO RECUPERADO",
+      "claim": "Safe archival/read-through policy preserving replay, publication, recovery and indefinite receipt idempotence is not implemented."
+    }
+  ],
+  "actions": {
+    "deletedRows": 0,
+    "vacuum": false,
+    "automaticCheckpoint": false,
+    "passiveCheckpointExplicit": true,
+    "productionTouched": false
+  }
+}

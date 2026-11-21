@@ -1,0 +1,249 @@
+{
+  "runId": "work-20261114T185556-0300",
+  "owner": "Work principal",
+  "priority": "P1 — ampliar cobertura comportamental 2v2 em buscas Gadget, Magias condicionais de Dark Magician, destruição global condicional, Chaos End, modificadores contínuos tribais e contagem Amazoness; preservar UIDs físicos e integridade dos quatro assentos.",
+  "state": "completed; released-to-auxiliary-monitor-ci",
+  "timezone": "America/Sao_Paulo",
+  "startedAt": "2026-11-14T18:55:56-03:00",
+  "endedAt": "2026-11-14T19:16:42-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "7ca18a4e2f6f0b0c577c09240ea1583c0f4cf650",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "workBranches": [
+    {
+      "mission": "M199",
+      "branch": "feat/work-m199-gadget-search-chain-2v2-20261114",
+      "head": "fa527b4c36d49b79dd55f618c03923e18e73b118",
+      "pr": 154,
+      "files": [
+        "tests/tagClassicGadgetSearchChain2v2.test.cjs"
+      ],
+      "scenarios": 4,
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success"
+      },
+      "state": "draft; all workflows success"
+    },
+    {
+      "mission": "M200",
+      "branch": "feat/work-m200-dark-magician-conditional-spells-2v2-20261114",
+      "head": "0dc71153f012bb698129f1832688a94fe43e64f1",
+      "pr": 155,
+      "files": [
+        "tests/tagClassicDarkMagicianConditionalSpells2v2.test.cjs"
+      ],
+      "scenarios": 3,
+      "ci": {
+        "cardBatchFast": "in_progress",
+        "milestone1000": "in_progress",
+        "npmTest": "pending",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      },
+      "state": "draft; prior test-file load failure addressed by removing conditionalBatch30 import; fresh CI running"
+    },
+    {
+      "mission": "M201",
+      "branch": "feat/work-m201-global-conditional-destruction-2v2-20261114",
+      "head": "9a19dba28710a4d02bfd1413559c0e9c30822a8c",
+      "pr": 156,
+      "files": [
+        "tests/tagClassicGlobalConditionalDestruction2v2.test.cjs"
+      ],
+      "scenarios": 5,
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      },
+      "state": "draft; test passed; 600-second soak still running"
+    },
+    {
+      "mission": "M202",
+      "branch": "feat/work-m202-chaos-end-shared-banish-threshold-2v2-20261114",
+      "head": "68ac211437bb25d9b81b016e238ee5ad28e1cf56",
+      "pr": 157,
+      "files": [
+        "tests/tagClassicChaosEndSharedBanishedThreshold2v2.test.cjs"
+      ],
+      "scenarios": 2,
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success"
+      },
+      "state": "draft; all workflows success"
+    },
+    {
+      "mission": "M203",
+      "branch": "feat/work-m203-tribal-continuous-modifiers-2v2-20261114",
+      "head": "d2714b1415146c7df0efafe6cfdf67d19babaa82",
+      "pr": 158,
+      "files": [
+        "tests/tagClassicTribalContinuousModifiers2v2.test.cjs"
+      ],
+      "scenarios": 4,
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "success",
+        "extendedSoak": "success",
+        "engineValidation": "success"
+      },
+      "state": "draft; all workflows success"
+    },
+    {
+      "mission": "M204",
+      "branch": "feat/work-m204-amazoness-archetype-count-2v2-20261114",
+      "head": "270e64c9df5475a85420dcd5fca6748658f1d683",
+      "pr": 159,
+      "files": [
+        "tests/tagClassicAmazonessPaladinArchetype2v2.test.cjs"
+      ],
+      "scenarios": 2,
+      "ci": {
+        "cardBatchFast": "success",
+        "milestone1000": "success",
+        "npmTest": "in_progress",
+        "extendedSoak": "in_progress",
+        "engineValidation": "in_progress"
+      },
+      "state": "draft; final diff test-only; certification/evidence files preserved"
+    }
+  ],
+  "parallelWorkObserved": [
+    {
+      "mission": "M194",
+      "pr": 149,
+      "branch": "feat/work-m194-ritual-searchers-trigger-2v2-20261114",
+      "head": "d4243887d4c373a05885d6812805ad7317947421",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "engine": "failure"
+      }
+    },
+    {
+      "mission": "M195",
+      "pr": 150,
+      "branch": "feat/work-m195-flip-searchers-physical-deck-2v2-20261114",
+      "head": "dda71886e0393e2b5cb8b27776d7d5cf42b22b1c",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "engine": "failure"
+      }
+    },
+    {
+      "mission": "M196",
+      "pr": 151,
+      "branch": "feat/work-m196-needle-worm-opponent-deck-mill-2v2-20261114",
+      "head": "5e3d68b9aa30fb43517a1412ac77f1ad39d19f95",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "engine": "failure"
+      }
+    },
+    {
+      "mission": "M197",
+      "pr": 152,
+      "branch": "feat/work-m197-position-change-triggers-2v2-20261114",
+      "head": "2b3f7246db317b56640f2af7e1bea84d1a94bc91",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "engine": "failure"
+      }
+    },
+    {
+      "mission": "M198",
+      "pr": 153,
+      "branch": "feat/work-m198-summon-burn-draw-triggers-2v2-20261114",
+      "head": "7f0928b53935728a31850fa5f0943cdbbec8495f",
+      "ci": {
+        "fast": "success",
+        "milestone": "success",
+        "engine": "failure"
+      }
+    }
+  ],
+  "blocksCompleted": [
+    "M199: quatro cenários da cadeia Yellow/Green/Red Gadget, incluindo Green Gadget fisicamente pertencente ao parceiro e Special Summon do Cemitério compartilhado; busca usa Deck/mão físicos do participante ativo.",
+    "M200: três cenários para Thousand Knives e Dark Magic Attack, incluindo condição Dark Magician controlado pelo parceiro, seleção nas duas posições físicas adversárias, backrow compartilhado e condição negativa; removida importação de batch que causava falha de carregamento do teste; CI atual ainda pendente.",
+    "M201: cinco cenários para Needle Ceiling, Really Eternal Rest, Disarmament e Soul Taker. Corrigida a fixture para usar Blue-Eyes White Dragon com o Equip Spell Dragon-only; npm test passou.",
+    "M202: dois cenários para Chaos End no limiar exato de sete cartas banidas compartilhadas, contribuídas por ambos os parceiros, e controle negativo com seis; CI integral aprovada.",
+    "M203: quatro cenários para Harpie Lady 1, Harpie's Pet Dragon, Swamp/Lava Battleguard e Dark Magician Girl, com contagens por equipe, face-down e Cemitérios compartilhados; CI integral aprovada.",
+    "M204: dois cenários para Amazoness Paladin. A tentativa de alterar card metadata e certificados foi revertida após a política append-only rejeitar mudanças em src/cardCertifications.ts; PR final é test-only e verifica o matcher canônico existente.",
+    "Publicadas PRs draft #154–#159 em branches isoladas; nenhuma branch M194–M198 ou arquivo reservado foi alterado.",
+    "Detectado e corrigido imediatamente um arquivo de teste criado acidentalmente em main por omissão do parâmetro de branch; o arquivo foi removido por commit separado, sem alteração de runtime ou dados."
+  ],
+  "scenariosAdded": 20,
+  "newCertifications": 0,
+  "newAdmissions": 0,
+  "inventoryGranted": 0,
+  "catalogAtEnd": {
+    "sharedCertified": 969,
+    "developmentCertified": 1014,
+    "delta": 45,
+    "remainingTo1000": 31,
+    "automaticCertifications": 0
+  },
+  "ciSummary": {
+    "pr154": "all success",
+    "pr155": "fresh CI running; previous npm test failed at test-file load and was addressed; no fresh npm test result yet",
+    "pr156": "card-batch and milestone success; npm test success; 600-second soak/engine still running",
+    "pr157": "all success",
+    "pr158": "all success",
+    "pr159": "card-batch and milestone success; npm test/engine/soak in progress",
+    "parallelPRs149to153": "all card-batch and milestone success; all five Engine Validation workflows failed; no handoff response"
+  },
+  "handoff": {
+    "pr": 153,
+    "commentId": 6884812043,
+    "status": "awaiting-explicit-response; no response observed"
+  },
+  "deployment": {
+    "mainHeadBeforeRun": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "mainHeadAfterCleanup": "713f02afc862ddb17411706c92c67624eaa1803f",
+    "cleanupCommit": "713f02afc862ddb17411706c92c67624eaa1803f",
+    "cleanupReason": "Accidental M203 test file was added to main and immediately deleted; no runtime, card data or player data changed.",
+    "merge": "none",
+    "deploy": "none",
+    "deploymentWorkflow": "not found in main/shared branch",
+    "hosting": "not independently verified",
+    "liveDiscordValidation": false
+  },
+  "limits": [
+    "Todas as seis PRs são draft e não foram mergeadas.",
+    "Nenhuma nova certificação ou admissão; 1.000 não foi atingido na branch compartilhada.",
+    "Nenhum inventário, banco persistente ou dado de jogador foi alterado.",
+    "Sem deploy e sem validação de Discord ao vivo.",
+    "M61/M118/M151/M153 e branches M194–M198 preservadas; handoff cooperativo solicitado, sem resposta."
+  ],
+  "reservedFiles": [],
+  "reservationReleased": true,
+  "scopeReleasedToAuxiliary": {
+    "allowed": "monitorar CI das PRs #154–#159 e corrigir somente os arquivos de teste nas próprias branches; não alterar card metadata, evidências, certificados, runtime ou arquivos reservados sem autorização explícita.",
+    "forbidden": "não alterar M61/M118/M151/M153 nem branches M194–M198; não fazer merge/deploy; não tocar em banco ou inventários."
+  },
+  "nextTask": "Auxiliar: monitorar PRs #154–#159; corrigir apenas testes próprios. Work: concluir CI de #155/#156/#159; revisar com o agente responsável as falhas Engine Validation de #149–#153; obter handoff M61; continuar as 31 certificações restantes e reconciliar o delta de 45.",
+  "nextWindow": "2026-11-14T23:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-14T18:55:56-03:00",
+    "endedAt": "2026-11-14T19:16:42-03:00",
+    "elapsedWallMinutes": 21,
+    "effectiveWorkMinutesMeasured": 20,
+    "minimum60MinutesMet": false,
+    "note": "A sessão teve cerca de 21 minutos observados e 20 minutos de trabalho efetivo medido; a meta de 60 minutos não foi cumprida. Espera ociosa de CI não foi contabilizada."
+  }
+}

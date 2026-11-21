@@ -1,0 +1,53 @@
+{
+  "runId": "work-20261121T062517-0300-M441",
+  "mission": "M441",
+  "owner": "Work",
+  "priority": 1,
+  "status": "active",
+  "startedAt": "2026-11-21T06:25:17-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "cf47c7edfe8162e0a3d1c2505447d8fee8dd811a",
+  "baseBranch": "feat/work-m420-amazoness-chain-master-private-hand-20261120",
+  "baseSha": "e66fa19a9bd05b08c37ec37284aa19007d132853",
+  "branch": "feat/work-m441-amazoness-chain-master-tag-adapter-20261121",
+  "reservedFiles": [
+    "src/amazonessChainMasterTagDuelAdapter.ts",
+    "tests/amazonessChainMasterTagDuelAdapter.test.cjs",
+    "docs/evidence/m441-amazoness-chain-master-tag-duel-adapter.json",
+    ".github/workflows/m441-amazoness-chain-master-tag-duel-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel 2v2 para Amazoness Chain Master (29654737): vincular gatilho de destruição por batalha ao Cemitério compartilhado, escolher explicitamente o assento adversário, ler a mão física correta e produzir projeções privadas sem alterar estado.",
+  "coordination": {
+    "m61Handoff": "pending",
+    "handoffRequestPr": 17,
+    "conflictingFilesUntouched": true,
+    "thirdPartyReservationsReleased": []
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "not-run",
+    "cardBatchFast": "not-run",
+    "milestone1000": "not-run",
+    "engineValidation": "not-run",
+    "extendedSoak": "not-run"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "duration": {
+    "effectiveMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Concluir adapter M441 com testes contra estado TagDuel 2v2; depois revisar M442/M443 e aguardar handoff para qualquer integração no resolver."
+}

@@ -1,0 +1,1053 @@
+{
+  "format": 1,
+  "batchId": "m35-newdoria-battle-target",
+  "engineVersion": "engine-v9",
+  "baseRevision": "590555e93cce8d1f548b2345cc54050840fd04848aaca2ae557f840cc04a5cf4",
+  "candidates": [
+    {
+      "card": {
+        "id": "04335645",
+        "konamiId": 5484,
+        "name": "Newdoria",
+        "englishName": "Newdoria",
+        "kind": "monster",
+        "monsterType": "effect",
+        "race": "Fiend",
+        "attribute": "DARK",
+        "level": 4,
+        "atk": 1200,
+        "defense": 800,
+        "summary": "Se for destruído por batalha e enviado ao Cemitério: escolha 1 monstro no campo como alvo; destrua-o.",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5484&request_locale=en"
+      },
+      "effect": {
+        "kind": "monsterEffect"
+      },
+      "monster": {
+        "effect": {
+          "trigger": "onBattleDestroyed",
+          "operation": {
+            "kind": "singleCard",
+            "rule": {
+              "from": "monsters",
+              "controller": "both",
+              "action": "destroy",
+              "kind": "monster"
+            }
+          }
+        },
+        "activation": {
+          "policy": "mandatory",
+          "window": "battleDestroyed"
+        }
+      },
+      "family": "battle-destruction-target",
+      "requirements": [
+        "effect:monsterEffect",
+        "trigger:onBattleDestroyed",
+        "monster-operation:singleCard"
+      ],
+      "textEvidence": {
+        "text": "After this monster is destroyed specifically by battle and placed in its owner Graveyard, its mandatory Trigger Effect activates in a separate post-damage chain. Its owner selects exactly one currently legal monster anywhere on the field as the target at activation. When the effect resolves, if the target is still the same physical monster in the same legal zone, destroy it and send it to its physical owner Graveyard. The effect does not trigger on effect destruction, has no activation cost, is not optional, and does not need Newdoria to remain on the field. Monster-effect negation on the field (e.g. Skill Drain) does not negate a monster effect activated in the Graveyard; destruction immunity can still protect a target. The source has no other effect.",
+        "complete": true,
+        "format": "full-rule-paraphrase",
+        "sha256": "d6fca01eacb2a30a9b9ef3b47af5981e4b9a50310270a38e7767adb267131f0d",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5484&request_locale=en"
+      },
+      "scenarios": [
+        "no-battle-no-trigger"
+      ],
+      "cases": {
+        "negative": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "b",
+              "expectError": true,
+              "action": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "lp"
+              ],
+              "equals": 4000
+            }
+          ]
+        },
+        "json-restore": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "newdoria"
+              }
+            },
+            {
+              "restore": true
+            },
+            {
+              "settle": true
+            },
+            {
+              "restore": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "attacker"
+            }
+          ]
+        },
+        "deterministic-replay": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "newdoria"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "newdoria"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "activation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "newdoria"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "newdoria"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "resolution": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "newdoria"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "newdoria"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "negation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "newdoria"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "newdoria"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "target-activation": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "newdoria"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "newdoria"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "target-resolution": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "newdoria"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "newdoria"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "target-zone-change": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "newdoria"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "newdoria"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "target-unavailable": {
+          "fixture": {
+            "phase": "battle",
+            "players": [
+              {
+                "monsters": [
+                  {
+                    "uid": "attacker",
+                    "id": "89631139",
+                    "owner": 0,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "attack",
+                "card": "attacker",
+                "target": "newdoria"
+              }
+            },
+            {
+              "settle": true
+            },
+            {
+              "actor": "b",
+              "match": {
+                "kind": "choose",
+                "target": "attacker"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "newdoria"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "grave"
+              ],
+              "containsUID": "attacker"
+            },
+            {
+              "path": [
+                "players",
+                0,
+                "monsters"
+              ],
+              "equals": []
+            }
+          ]
+        },
+        "trigger-timing": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "players",
+                1,
+                "grave"
+              ],
+              "containsUID": "newdoria"
+            },
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        },
+        "no-battle-no-trigger": {
+          "fixture": {
+            "players": [
+              {
+                "hand": [
+                  {
+                    "uid": "hole",
+                    "id": "53129443"
+                  }
+                ]
+              },
+              {
+                "monsters": [
+                  {
+                    "uid": "newdoria",
+                    "id": "04335645",
+                    "owner": 1,
+                    "position": "atk",
+                    "faceUp": true,
+                    "entered": 0,
+                    "changed": 0,
+                    "attacked": 0,
+                    "atkBoost": 0,
+                    "defBoost": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "actor": "a",
+              "match": {
+                "kind": "spell",
+                "card": "hole"
+              }
+            },
+            {
+              "settle": true
+            }
+          ],
+          "assertions": [
+            {
+              "path": [
+                "phase"
+              ],
+              "equals": "main"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": "04335645",
+      "canonicalId": "35cbca9a-8de1-4d7a-8567-39c355707b85",
+      "konamiId": 5484,
+      "reviewer": "Konami official card details; Newdoria post-battle mandatory trigger verified",
+      "reviewedAt": "2026-10-30",
+      "identityApproved": true,
+      "mechanicsApproved": true,
+      "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5484&request_locale=en",
+      "primaryFacts": {
+        "level": 4,
+        "atk": 1200,
+        "defense": 800,
+        "race": "Fiend",
+        "attribute": "DARK"
+      },
+      "verifiedPrinting": {
+        "date": "2002-05-16",
+        "region": "ocg",
+        "set": "Pharaonic Guardian",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5484&request_locale=en"
+      },
+      "fullTextReviewed": true,
+      "secondaryEffectsReviewed": true,
+      "exceptionsReviewed": true,
+      "textSha256": "d6fca01eacb2a30a9b9ef3b47af5981e4b9a50310270a38e7767adb267131f0d",
+      "semanticCoverage": {
+        "activation": "represented",
+        "conditions": "represented",
+        "costs": "not-applicable",
+        "targets": "represented",
+        "choices": "represented",
+        "operations": "represented",
+        "duration": "not-applicable",
+        "restrictions": "represented",
+        "negation": "represented"
+      }
+    }
+  ]
+}

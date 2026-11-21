@@ -1,0 +1,53 @@
+{
+  "runId": "work-20261121T063655-0300-M442",
+  "mission": "M442",
+  "owner": "Work",
+  "priority": 1,
+  "status": "active",
+  "startedAt": "2026-11-21T06:36:55-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "db6b0d28550c878987831dddbe9abe09efcd43eb",
+  "baseBranch": "feat/work-m419-armed-dragon-level-up-20261120",
+  "baseSha": "b7032dab0e0b94f5e38c88ab793afa9311a3c329",
+  "branch": "feat/work-m442-armed-dragon-tag-duel-adapter-20261121",
+  "reservedFiles": [
+    "src/armedDragonTagDuelAdapter.ts",
+    "tests/armedDragonTagDuelAdapter.test.cjs",
+    "docs/evidence/m442-armed-dragon-tag-duel-adapter.json",
+    ".github/workflows/m442-armed-dragon-tag-duel-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel 2v2 para Armed Dragon LV3/LV5/LV7: janelas Standby/End Phase, summon candidates da mão/Deck físico ativo, descarte de monstro da mão privada, ATK atual do campo adversário compartilhado e roteamento ao Cemitério pelo proprietário físico.",
+  "coordination": {
+    "m61Handoff": "pending",
+    "handoffRequestPr": 17,
+    "conflictingFilesUntouched": true,
+    "thirdPartyReservationsReleased": []
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "not-run",
+    "cardBatchFast": "not-run",
+    "milestone1000": "not-run",
+    "engineValidation": "not-run",
+    "extendedSoak": "not-run"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "duration": {
+    "effectiveMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Implementar adapter M442 sobre a primitive M419, testar janelas Standby/End Phase e efeitos LV5/LV7 contra estado TagDuel 2v2 sem mutação."
+}

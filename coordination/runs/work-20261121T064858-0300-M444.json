@@ -1,0 +1,53 @@
+{
+  "runId": "work-20261121T064858-0300-M444",
+  "mission": "M444",
+  "owner": "Work",
+  "priority": 1,
+  "status": "active",
+  "startedAt": "2026-11-21T06:48:58-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "a92f5bf111a64966eceb55c2f8851ff7d8fe4605",
+  "baseBranch": "feat/work-m405-dancing-fairy-standby-lp-20261120",
+  "baseSha": "ca2fc4ff1ca590e4d5521bc8568c0938968f208f",
+  "branch": "feat/work-m444-standby-lp-recovery-tag-duel-adapter-20261121",
+  "reservedFiles": [
+    "src/standbyLpRecoveryTagDuelAdapter.ts",
+    "tests/standbyLpRecoveryTagDuelAdapter.test.cjs",
+    "docs/evidence/m444-standby-lp-recovery-tag-duel-adapter.json",
+    ".github/workflows/m444-standby-lp-recovery-tag-duel-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel 2v2 para Dancing Fairy e Darklord Marie: validar tarefa Standby ativa, cópias no campo/Cemitério compartilhado, negação de efeito, dono físico versus equipe controladora, LP compartilhados e deduplicação por evento e por UID/turno.",
+  "coordination": {
+    "m61Handoff": "pending",
+    "handoffRequestPr": 17,
+    "conflictingFilesUntouched": true,
+    "thirdPartyReservationsReleased": []
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "not-run",
+    "cardBatchFast": "not-run",
+    "milestone1000": "not-run",
+    "engineValidation": "not-run",
+    "extendedSoak": "not-run"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "duration": {
+    "effectiveMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Implementar adapter Standby 2v2 com snapshot real de campo/Cemitério, task ativa e ledgers idempotentes."
+}

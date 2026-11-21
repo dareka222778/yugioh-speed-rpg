@@ -1,0 +1,197 @@
+{
+  "format": 1,
+  "runId": "work-20261120T142909-0300-M418",
+  "mission": "M418",
+  "owner": "Work principal",
+  "priority": "P1 — validar em 2v2 o contrato real de regras clássicas: bloqueio de resposta a summon, janelas de ativação, dano perfurante, banimento por batalha, limite 6 na End Phase, zonas 3+3 + Field Zone e recuperação para o proprietário físico.",
+  "state": "completed-with-ci-pending",
+  "startedAt": "2026-11-20T14:29:09-03:00",
+  "endedAt": "2026-11-20T14:43:12-03:00",
+  "elapsedMinutes": 14.05,
+  "effectiveWorkMinutes": 12.5,
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtStart": "33faee91c7f01605adaa427a2169302859d2a75d",
+    "headAtEnd": "33faee91c7f01605adaa427a2169302859d2a75d",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m418-tag-classic-core-invariants-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "33faee91c7f01605adaa427a2169302859d2a75d",
+  "head": "4d754a0e13c45b2d6d1b3added51e0b3f2c54b04",
+  "reservedFiles": [
+    "tests/helpers/tagClassic2v2.cjs",
+    "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+    "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+    "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+    "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+    "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+    "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+    "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+    "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+    "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs",
+    "tests/tagClassicFieldZoneSeparateFromBackrow2v2.test.cjs",
+    ".github/workflows/m418-tag-classic-core-invariants.yml",
+    "docs/evidence/m418-tag-classic-core-invariants.json"
+  ],
+  "objective": "Adicionar testes executáveis de integração do motor Tag Classic 2v2 sem tocar no runtime central reservado; documentar Needle Ball como bloqueado até handoff M61.",
+  "blocksCompleted": [
+    "Lido coordination/state.json e o checkpoint M411; confirmada reserva M61 em src/monsterEffects.ts e src/duelEngineCurrent.ts.",
+    "Verificados HEAD compartilhado 33faee91 e main f78f3080; PRs abertas M411–M418 e workflows recentes.",
+    "Criado helper de fixtures 2v2 preservando UIDs e proprietário físico.",
+    "Adicionados testes para Eagle Eye, Cannon Soldier, Fairy Meteor Crush, D.D. Assailant, D.D. Crazy Beast, Magician of Faith, limite de mão e zonas 3+3.",
+    "Corrigidas duas falhas reais na primeira CI: export do helper tagMemberHand e expectativa incorreta de janela de resposta bloqueada por Eagle Eye.",
+    "Adicionado teste de Field Zone independente das três zonas Spell/Trap.",
+    "Criado workflow Node 22 e PR #366."
+  ],
+  "tests": {
+    "total": 10,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 1,
+    "skippedReason": "Needle Ball 94230224 não está registrado no HEAD-base; teste fica explicitamente skipped até transferência M61 e integração real do custo de LP."
+  },
+  "cardsCovered": [
+    {
+      "name": "Eagle Eye",
+      "id": "53693416",
+      "behavior": "impede abrir janela de resposta de Armadilha para ambos os times no Normal Summon"
+    },
+    {
+      "name": "Cannon Soldier",
+      "id": "11384280",
+      "behavior": "efeito de ignição não aparece na Battle Phase"
+    },
+    {
+      "name": "Fairy Meteor Crush",
+      "id": "97687912",
+      "behavior": "dano perfurante em campo compartilhado"
+    },
+    {
+      "name": "D.D. Assailant",
+      "id": "70074904",
+      "behavior": "ambos os monstros destruídos por batalha são banidos para as zonas das equipes"
+    },
+    {
+      "name": "D.D. Crazy Beast",
+      "id": "48148828",
+      "behavior": "somente a vítima destruída por batalha é banida para a equipe adversária"
+    },
+    {
+      "name": "Magician of Faith",
+      "id": "31560081",
+      "behavior": "Magia do Cemitério compartilhado retorna à mão do proprietário físico"
+    }
+  ],
+  "ci": {
+    "focusedInitial": {
+      "run": 44785094324,
+      "head": "e5b461004ab0125547b20a011dc7eb0347f3a943",
+      "result": "failure",
+      "reason": "helper tagMemberHand não exportado; teste Eagle Eye esperava response embora o lock suprima a janela."
+    },
+    "focusedIntermediate": {
+      "run": 44785326685,
+      "head": "aced2fbe58eb317a2c20f9a5bebc2a3decf9cf20",
+      "result": "success",
+      "summary": "9 testes: 8 pass, 1 skipped, 0 fail"
+    },
+    "focusedFinal": {
+      "run": 44785677416,
+      "head": "4d754a0e13c45b2d6d1b3added51e0b3f2c54b04",
+      "result": "success",
+      "summary": "10 testes: 9 pass, 1 skipped, 0 fail"
+    },
+    "cardBatchFast": {
+      "run": 44785326647,
+      "head": "aced2fbe58eb317a2c20f9a5bebc2a3decf9cf20",
+      "result": "success"
+    },
+    "milestone1000": {
+      "run": 44785326618,
+      "head": "aced2fbe58eb317a2c20f9a5bebc2a3decf9cf20",
+      "result": "success",
+      "target": 1000,
+      "certified": 969,
+      "remaining": 31,
+      "historyPending": 993,
+      "identityBlocked": 27,
+      "automaticCertifications": 0
+    },
+    "engineValidation": {
+      "run": 44785327068,
+      "head": "aced2fbe58eb317a2c20f9a5bebc2a3decf9cf20",
+      "result": "in_progress",
+      "jobs": [
+        "test",
+        "extended-soak"
+      ]
+    },
+    "finalHeadLimit": "A validação focada do HEAD final passou; Engine Validation/Card Batch Fast/Milestone 1000 ainda não foram confirmados novamente no HEAD 4d754a0e."
+  },
+  "certification": {
+    "newCertifications": 0,
+    "verifiedAtIntermediateHead": 969,
+    "remainingAtIntermediateHead": 31,
+    "automaticCertifications": 0
+  },
+  "pr": {
+    "number": 366,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/366",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "head": "4d754a0e13c45b2d6d1b3added51e0b3f2c54b04",
+    "base": "33faee91c7f01605adaa427a2169302859d2a75d"
+  },
+  "handoff": {
+    "pr": 17,
+    "latestKnownComment": 7041087239,
+    "status": "pending",
+    "requestedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "changedFiles": []
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationFilesChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "realDiscordValidated": false
+  },
+  "production": {
+    "deploymentCheck": "GitHub deployments endpoint was not accessible through the available connector; no deployment or production health claim made."
+  },
+  "scopeReleasedToAuxiliary": [
+    "tests/helpers/tagClassic2v2.cjs",
+    "tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs",
+    "tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs",
+    "tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs",
+    "tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs",
+    "tests/tagClassicDDAssailantBanishBoth2v2.test.cjs",
+    "tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs",
+    "tests/tagClassicEndPhaseHandLimit2v2.test.cjs",
+    "tests/tagClassicSharedZoneCapacity2v2.test.cjs",
+    "tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs",
+    "tests/tagClassicFieldZoneSeparateFromBackrow2v2.test.cjs",
+    ".github/workflows/m418-tag-classic-core-invariants.yml",
+    "docs/evidence/m418-tag-classic-core-invariants.json"
+  ],
+  "auxiliaryAuthorization": "Monitor M418 CI and make corrections only within these files on feat/work-m418-tag-classic-core-invariants-20261120; no merge/deploy, no shared-branch edits, no M61 or third-party files.",
+  "nextTask": "Aguardar handoff cooperativo M61. Depois integrar Needle Ball e validar o custo de 1000 LP no resolver; enquanto isso, monitorar Engine Validation M418 e preservar M408/M411 e M402–M417.",
+  "nextWindow": "2026-11-20T17:30:00-03:00",
+  "limitations": [
+    "Needle Ball segue sem definição executável; teste explicitamente skipped.",
+    "M418 testa o motor Tag Classic offline; não valida um servidor Discord real.",
+    "Nenhuma nova carta foi certificada nesta execução.",
+    "Engine Validation completa ainda estava em execução na última consulta.",
+    "Nenhum deployment foi verificado."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "runId": "work-20261113T134424-0300",
+  "owner": "Work",
+  "priority": "P1 — certificar por comportamento a Fusão 2v2: Polymerization usa monstros do campo compartilhado, preserva UIDs físicos e não acessa a mão privada do parceiro inativo.",
+  "state": "active",
+  "startedAt": "2026-11-13T13:44:24-03:00",
+  "endedAt": null,
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "bc307951fff65a3d4645ef3e8d26952ed379af32",
+  "sharedHeadBeforeReservation": "bc307951fff65a3d4645ef3e8d26952ed379af32",
+  "baseBranch": "feat/work-m71-ci-branch-routing-20261112",
+  "baseSha": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "branch": "feat/work-m151-polymerization-shared-field-fusion-2v2-20261113",
+  "headAtStart": "173a0ea6b2df3b79d7d95367f7d8d77284776bcb",
+  "reservedFiles": [
+    "tests/tagClassicPolymerizationSharedFieldFusion.test.cjs"
+  ],
+  "blocksCompleted": [
+    "Reabertura de bloco independente M151 após liberação M150; leitura do checkpoint e reserva exclusiva do teste de Fusão 2v2.",
+    "Auditoria de fusionBatch8 e effectRegistry: Mystical Sand é Fusão certificada com receita Giant Soldier of Stone + Ancient Elf; Polymerization usa a mão do assento ativo e o campo compartilhado."
+  ],
+  "changes": [],
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "developmentCards": 1014,
+    "developmentCertificates": 1014,
+    "newAdmissions": 0,
+    "newCertificates": 0
+  },
+  "validation": {},
+  "handoffRequests": {
+    "m61": {
+      "pr": 17,
+      "status": "awaiting-response",
+      "lastCommentId": 6859057163
+    },
+    "m118": {
+      "pr": 74,
+      "status": "awaiting-response",
+      "lastCommentId": 6859057742
+    }
+  },
+  "deployment": {
+    "merge": "none",
+    "deploy": "none",
+    "mainHead": "8f3f1768b1ee1f4b4a96d557eab5926d96525ad2",
+    "deploymentWorkflow": "not found",
+    "hosting": "not verified",
+    "liveDiscordValidation": false
+  },
+  "releaseToAuxiliary": null,
+  "nextTask": "Implementar teste M151: Polymerization com materiais no campo compartilhado, incluindo material do parceiro, sem consumir a mão privada do parceiro; verificar Extra Deck e UIDs.",
+  "nextWorkAt": "2026-11-13T17:30:00-03:00",
+  "duration": {
+    "elapsedWallMinutes": 0,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Execução M151 em andamento; espera de CI não será contabilizada."
+  },
+  "sharedHeadAfterReservation": "f501f1b87c96f4b1ef8b210551b23826db542cc1"
+}

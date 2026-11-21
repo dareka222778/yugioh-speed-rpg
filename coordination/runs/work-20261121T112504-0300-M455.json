@@ -1,0 +1,102 @@
+{
+  "runId": "work-20261121T112504-0300-M455",
+  "mission": "M455",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "active",
+  "startedAt": "2026-11-21T11:25:04-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "916558e0a56cbd6bcd490d4f2a09e7ec5926f8dc",
+  "baseBranch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
+  "baseSha": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
+  "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
+  "head": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
+  "pr": null,
+  "reservedFiles": [
+    "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
+    "docs/evidence/m455-standby-lp-atomic-commit.json",
+    ".github/workflows/m455-standby-lp-atomic-commit.yml"
+  ],
+  "scope": "Integração isolada de adapters M444/M446, planner M452 e store M454: calcular recuperação de Standby, planejar Fire Princess sobre o snapshot pós-ganho, persistir LPs/ledgers/revisão em uma transação SQLite e provar retry/rejeição de snapshot obsoleto. Somente teste, evidência e workflow; sem runtime central ou dados reais.",
+  "dependencies": {
+    "m450Pr": 398,
+    "m451Pr": 399,
+    "m452Pr": 400,
+    "m453Pr": 401,
+    "m454Pr": 402,
+    "m444Pr": 392,
+    "m446Pr": 394,
+    "m61HandoffPr": 17
+  },
+  "coordination": {
+    "m450HandoffRequestPr": 398,
+    "m450HandoffCommentId": 7064094352,
+    "m450HandoffStatus": "awaiting-explicit-release",
+    "m61Handoff": "pending",
+    "m61HandoffRequestPr": 17,
+    "conflictingFilesUntouched": true,
+    "thirdPartyReservationsReleased": []
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "upstreamCI": {
+    "m450": {
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success",
+      "extendedSoak": "not-reported"
+    },
+    "m451": {
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    },
+    "m452": {
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    },
+    "m453": {
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    },
+    "m454": {
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    }
+  },
+  "ci": {
+    "focused": "not-started",
+    "cardBatchFast": "not-started",
+    "milestone1000": "not-started",
+    "engineValidation": "not-started",
+    "extendedSoak": "not-started"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "duration": {
+    "startedAt": "2026-11-21T11:25:04-03:00",
+    "endedAt": null,
+    "effectiveMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Implementar três testes end-to-end da cadeia Standby→Fire Princess→SQLite: Fairy, Marie, retry idempotente e rejeição de revisão obsoleta; executar CI e reavaliar o handoff M450/M61."
+}

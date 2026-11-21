@@ -1,0 +1,567 @@
+[
+  {
+    "id": "01557499",
+    "konamiId": 4318,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-05-27",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4318&request_locale=pt",
+    "englishName": "Silver Bow and Arrow",
+    "expectedText": "A Fairy-Type monster equipped with this card increases its ATK and DEF by 300 points.",
+    "effect": {
+      "kind": "equip",
+      "atk": 300,
+      "def": 300,
+      "races": [
+        "Fairy"
+      ]
+    },
+    "monster": null,
+    "mechanicalFingerprint": "736be19fb6b73de12194329f5059197abb8f6c7efac2e8ee3ee495b4270178c1",
+    "canonicalId": "bb0f03d9-1da1-4a76-9cc9-f78e103d0a46",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-27"
+    }
+  },
+  {
+    "id": "02792265",
+    "konamiId": 5043,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "2003-04-24",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5043&request_locale=pt",
+    "englishName": "Servant of Catabolism",
+    "expectedText": "This monster may attack your opponent's Life Points directly.",
+    "effect": {
+      "kind": "monsterEffect"
+    },
+    "monster": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "mechanicalFingerprint": "c9010b19951f5e47b79fd633a85b7207828b4104dbce65a465c7fe750fb7d513",
+    "canonicalId": "e5e708a3-39e8-43cd-bc44-75aa76127926",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": 3,
+      "atk": 700,
+      "defense": 500,
+      "race": "Aqua",
+      "attribute": "LIGHT",
+      "ocgDate": "2003-04-24"
+    }
+  },
+  {
+    "id": "03492538",
+    "konamiId": 4312,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-07-08",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4312&request_locale=pt",
+    "englishName": "Insect Armor with Laser Cannon",
+    "expectedText": "Equip only to an Insect monster. It gains 700 ATK.",
+    "effect": {
+      "kind": "equip",
+      "atk": 700,
+      "def": 0,
+      "races": [
+        "Insect"
+      ]
+    },
+    "monster": null,
+    "mechanicalFingerprint": "fd7856a0059dff4b5bed154b2dfd7bfc9c053c2e5ca6e57a12b6b9b2cf0a82f5",
+    "canonicalId": "5e8e8721-088f-4db4-ba3e-b7d6b5146386",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-07-08"
+    }
+  },
+  {
+    "id": "15052462",
+    "konamiId": 4328,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-02-04",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4328&request_locale=pt",
+    "englishName": "Violet Crystal",
+    "expectedText": "(This card is not treated as a \"Crystal\" card.)\nEquip only to a Zombie monster. It gains 300 ATK/DEF.",
+    "effect": {
+      "kind": "equip",
+      "atk": 300,
+      "def": 300,
+      "races": [
+        "Zombie"
+      ]
+    },
+    "monster": null,
+    "mechanicalFingerprint": "59810ed274fb820061a6226c1649ffea15a02dad178a198ed338406ac7f63bc3",
+    "canonicalId": "41ebf4fc-07a8-4b35-ae2d-e536c4d55a8e",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-02-04"
+    }
+  },
+  {
+    "id": "18937875",
+    "konamiId": 4846,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-05-25",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4846&request_locale=pt",
+    "englishName": "Burning Spear",
+    "expectedText": "A FIRE monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.",
+    "effect": {
+      "kind": "equip",
+      "atk": 400,
+      "def": -200,
+      "attribute": "FIRE"
+    },
+    "monster": null,
+    "mechanicalFingerprint": "5f94c296b840f2207c843807789e189dcc2c53d095067664ead1f4c8f3fa314f",
+    "canonicalId": "f9aceb7f-c75e-48ad-b5cf-ac21180e4362",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-25"
+    }
+  },
+  {
+    "id": "21297224",
+    "konamiId": 5205,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "2001-04-19",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5205&request_locale=pt",
+    "englishName": "Hysteric Fairy",
+    "expectedText": "Tribute 2 monsters on your side of the field to increase your Life Points by 1000 points.",
+    "effect": {
+      "kind": "monsterEffect"
+    },
+    "monster": {
+      "effect": {
+        "trigger": "ignition",
+        "cost": {
+          "kind": "tribute",
+          "count": 2
+        },
+        "operation": {
+          "kind": "heal",
+          "amount": 1000
+        }
+      },
+      "activation": {
+        "policy": "manual",
+        "window": "main"
+      }
+    },
+    "mechanicalFingerprint": "dbf99725ee3326c8d98cd6a9c0d7734d737a1149000b7dc5f0440e2bac5266ab",
+    "canonicalId": "e69bb4ee-3505-41fe-b300-9f1fd3644e6e",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1800,
+      "defense": 500,
+      "race": "Fairy",
+      "attribute": "LIGHT",
+      "ocgDate": "2001-04-19"
+    }
+  },
+  {
+    "id": "32268901",
+    "konamiId": 4660,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-07-08",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4660&request_locale=pt",
+    "englishName": "Salamandra",
+    "expectedText": "Equip only to a FIRE monster. It gains 700 ATK.",
+    "effect": {
+      "kind": "equip",
+      "atk": 700,
+      "def": 0,
+      "attribute": "FIRE"
+    },
+    "monster": null,
+    "mechanicalFingerprint": "a4ab31deb3f25d91d17c6ba56d80ee8043d9bf3139694440b5a946ee53ab0d56",
+    "canonicalId": "ca5980f9-ecc4-4be5-af00-bde23a32504f",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-07-08"
+    }
+  },
+  {
+    "id": "37820550",
+    "konamiId": 4322,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-05-27",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4322&request_locale=pt",
+    "englishName": "Electro-Whip",
+    "expectedText": "Increase the ATK and DEF of a Thunder-Type monster equipped with this card by 300 points.",
+    "effect": {
+      "kind": "equip",
+      "atk": 300,
+      "def": 300,
+      "races": [
+        "Thunder"
+      ]
+    },
+    "monster": null,
+    "mechanicalFingerprint": "5b542d988bebe0acf93c4e09918634589abc80d81cf3fd242a8368d8d565cf40",
+    "canonicalId": "c6418630-6370-4a3b-9e09-ad9418571091",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-27"
+    }
+  },
+  {
+    "id": "39897277",
+    "konamiId": 4313,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-05-25",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4313&request_locale=pt",
+    "englishName": "Elf's Light",
+    "expectedText": "A LIGHT monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.",
+    "effect": {
+      "kind": "equip",
+      "atk": 400,
+      "def": -200,
+      "attribute": "LIGHT"
+    },
+    "monster": null,
+    "mechanicalFingerprint": "afbc8c8f3d6176f41e4165099d0c420d0188bc82d6d20a3ce86e477b05adcd8d",
+    "canonicalId": "386db81f-eee6-434e-9605-ff5b0d8c7b4d",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-25"
+    }
+  },
+  {
+    "id": "51267887",
+    "konamiId": 4332,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-03-27",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4332&request_locale=pt",
+    "englishName": "Raise Body Heat",
+    "expectedText": "Equip only to a Dinosaur monster. It gains 300 ATK/DEF.",
+    "effect": {
+      "kind": "equip",
+      "atk": 300,
+      "def": 300,
+      "races": [
+        "Dinosaur"
+      ]
+    },
+    "monster": null,
+    "mechanicalFingerprint": "536fd0074a1790d742b9170de11f385cf37d5bc16900ddc85a14986941c449e7",
+    "canonicalId": "960c4cff-83c4-42c0-8a36-244581648cff",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    }
+  },
+  {
+    "id": "55321970",
+    "konamiId": 4847,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-05-25",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4847&request_locale=pt",
+    "englishName": "Gust Fan",
+    "expectedText": "A WIND monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.",
+    "effect": {
+      "kind": "equip",
+      "atk": 400,
+      "def": -200,
+      "attribute": "WIND"
+    },
+    "monster": null,
+    "mechanicalFingerprint": "936a439ad65bbad1a1b07d283d0fad2e23c7c237aabba079614fec85bc2ca67a",
+    "canonicalId": "c4c19d9b-7236-4020-ba33-821a9aa2c2ae",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-05-25"
+    }
+  },
+  {
+    "id": "56260110",
+    "konamiId": 4841,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-03-01",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4841&request_locale=pt",
+    "englishName": "Raimei",
+    "expectedText": "Decrease your opponent's Life Points by 300 points.",
+    "effect": {
+      "kind": "burn",
+      "amount": 300
+    },
+    "monster": null,
+    "mechanicalFingerprint": "f5214ed8b572fe7657232ba1e5c12a48d16543e57b918ef2e047132a72b855f2",
+    "canonicalId": "25f6cd37-ee11-4533-a7ca-6cc7075c73b8",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-01"
+    }
+  },
+  {
+    "id": "59290628",
+    "konamiId": 5527,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "2002-05-16",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5527&request_locale=pt",
+    "englishName": "Nightmare Horse",
+    "expectedText": "This card can attack your opponent's Life Points directly even if there is a monster on your opponent's side of the field.",
+    "effect": {
+      "kind": "monsterEffect"
+    },
+    "monster": {
+      "effect": {
+        "trigger": "continuous",
+        "operation": {
+          "kind": "directAttack"
+        }
+      },
+      "activation": {
+        "policy": "continuous",
+        "window": "continuous"
+      }
+    },
+    "mechanicalFingerprint": "0b7110f3d449eb1013d1c9e57b0b0573a44d9d8d24bb79a993cec826b8759787",
+    "canonicalId": "c161db00-5989-4f56-b096-2075672e7726",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": 2,
+      "atk": 500,
+      "defense": 400,
+      "race": "Zombie",
+      "attribute": "DARK",
+      "ocgDate": "2002-05-16"
+    }
+  },
+  {
+    "id": "66719324",
+    "konamiId": 5151,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "2000-12-14",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5151&request_locale=pt",
+    "englishName": "Rain of Mercy",
+    "expectedText": "Increases the Life Points of both players by 1000 points.",
+    "effect": {
+      "kind": "sequence",
+      "activation": {
+        "speed": 1,
+        "window": "main",
+        "damage": "never"
+      },
+      "operations": [
+        {
+          "kind": "gainLP",
+          "player": "self",
+          "amount": 1000
+        },
+        {
+          "kind": "gainLP",
+          "player": "opponent",
+          "amount": 1000
+        }
+      ]
+    },
+    "monster": null,
+    "mechanicalFingerprint": "ed1b6c3efec7dce9f7f538e4095fd5efebe68cceec3752a9a18050bbaf453520",
+    "canonicalId": "b2b1cd87-b871-4b39-af72-3d3825c8f52f",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "2000-12-14"
+    }
+  },
+  {
+    "id": "77007920",
+    "konamiId": 4311,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-03-27",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4311&request_locale=pt",
+    "englishName": "Laser Cannon Armor",
+    "expectedText": "Equip only to an Insect monster. It gains 300 ATK/DEF.",
+    "effect": {
+      "kind": "equip",
+      "atk": 300,
+      "def": 300,
+      "races": [
+        "Insect"
+      ]
+    },
+    "monster": null,
+    "mechanicalFingerprint": "0e498ed283f35cc0513f1e11ea9e4a2d2157179354925387e59a610a7d948b28",
+    "canonicalId": "ff23054a-2000-45c4-8022-fc19942e790e",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-03-27"
+    }
+  },
+  {
+    "id": "77027445",
+    "konamiId": 4334,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-02-04",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4334&request_locale=pt",
+    "englishName": "Power of Kaishin",
+    "expectedText": "Equip only to an Aqua monster. It gains 300 ATK/DEF.",
+    "effect": {
+      "kind": "equip",
+      "atk": 300,
+      "def": 300,
+      "races": [
+        "Aqua"
+      ]
+    },
+    "monster": null,
+    "mechanicalFingerprint": "67ceb886aa8f2d74aca99d3dd066a2d98aa8284a916ba35d95a7a9d830d404fb",
+    "canonicalId": "94868883-03a6-4ee2-b89b-e74224dfa562",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-02-04"
+    }
+  },
+  {
+    "id": "82878489",
+    "konamiId": 4674,
+    "reviewedAt": "2026-10-27",
+    "reviewMethod": "Independent complete rules-text match with explicit per-card typed executable effect; individual runtime scenarios required",
+    "historicalOcGDate": "1999-07-08",
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4674&request_locale=pt",
+    "englishName": "Shine Palace",
+    "expectedText": "Equip only to a LIGHT monster. It gains 700 ATK.",
+    "effect": {
+      "kind": "equip",
+      "atk": 700,
+      "def": 0,
+      "attribute": "LIGHT"
+    },
+    "monster": null,
+    "mechanicalFingerprint": "053b925afc69b1b5015e577c3434e8f12bd206048b515db1da0e3abdf787aa15",
+    "canonicalId": "80ac842f-3bdf-451e-b1ac-9d9848e07e2f",
+    "reviewer": "Typed-rule selection and independent full-text cross-check; six executable scenarios per card",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null,
+      "ocgDate": "1999-07-08"
+    }
+  }
+]

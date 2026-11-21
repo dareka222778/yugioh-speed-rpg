@@ -1,0 +1,1232 @@
+[
+  {
+    "id": "91782219",
+    "canonicalId": "0134ca5b-dee1-4aea-9ec9-5008f492f336",
+    "name": "Crab Turtle",
+    "konamiId": 4716,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4716&request_locale=en",
+    "primaryFacts": {
+      "level": 8,
+      "atk": 2550,
+      "defense": 2500,
+      "race": "Aqua",
+      "attribute": "WATER"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2002-06-20",
+      "set": "DL1-053",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4716&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "mechanicalFingerprint": "8c49df035c9ac33cedcfc3a92453afce5852df813be224750760c5eede0de7eb",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "65393205",
+    "canonicalId": "0226abd3-78db-44ea-b29c-bac20759ca7f",
+    "name": "Chakra",
+    "konamiId": 4715,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4715&request_locale=en",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2450,
+      "defense": 2000,
+      "race": "Fiend",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4715&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2013-07-11",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "61cc9213670ec1290be02b96af4a0ac7f5c8684c56610be6aad908d92eecdeb4",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "77454922",
+    "canonicalId": "148fac17-da0b-4340-8dae-633b9a4e3156",
+    "name": "Fortress Whale's Oath",
+    "konamiId": 4706,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4706&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4706&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2005-11-01",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "e8a553d7838f397737180764dcef5eba544551cb02f2b539cb87e2d3a99d409d",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "62337487",
+        "minimumLevel": 7
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "30243636",
+    "canonicalId": "1995a362-2fd2-4a1e-afb2-26fd2fa0ace7",
+    "name": "Hungry Burger",
+    "konamiId": 4708,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4708&request_locale=en",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2000,
+      "defense": 1850,
+      "race": "Warrior",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2002-06-20",
+      "set": "DL1-052",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4708&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "mechanicalFingerprint": "4d889f28db89756caece707dfc6d19ea2d6a0ade97195946b280a2b83ed20a09",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "05405694",
+    "canonicalId": "1c35a99c-265e-4db2-9e37-60fb4ec92eb7",
+    "name": "Black Luster Soldier",
+    "konamiId": 4370,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4370&request_locale=en",
+    "primaryFacts": {
+      "level": 8,
+      "atk": 3000,
+      "defense": 2500,
+      "race": "Warrior",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4370&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2004-01-01",
+      "ocg": "1999-02-21",
+      "world": "1999-02-21"
+    },
+    "mechanicalFingerprint": "8bec3946eec3e3fd158bcf7a3ff36cdd48427b43bb71f2b2fbc0e3e6e21e191e",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "33951077",
+    "canonicalId": "1f1b0d2b-3234-4b09-afa7-b78e1c85e7f1",
+    "name": "Super War-Lion",
+    "konamiId": 4362,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4362&request_locale=en",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2300,
+      "defense": 2100,
+      "race": "Beast",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4362&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2019-12-05",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "368dbdcdd1c51e328a9cfdc6e71bd8cc9c5bd89421bb1d1d801487f6e83a22ec",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "31890399",
+    "canonicalId": "3089bac0-8a45-4945-be26-d78dd6e0e00f",
+    "name": "Fiend's Mirror",
+    "konamiId": 4371,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4371&request_locale=en",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 2100,
+      "defense": 1800,
+      "race": "Fiend",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4371&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2012-03-15",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "ae296bb6ad1cdbfe237b90dc8875c8810e4c16cba03cdd4e124a24504895a3e9",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "76792184",
+    "canonicalId": "3625b745-fa82-4faa-8469-0c479162bc35",
+    "name": "Black Magic Ritual",
+    "konamiId": 4727,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4727&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-08-10",
+      "set": "P3-10",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4727&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2012-09-27",
+      "ocg": "1999-12-09",
+      "world": "1999-12-09"
+    },
+    "mechanicalFingerprint": "32a50191d1821e5dcee8900ccbf26227aacb5ef8406ee3a51b8cc8bdcea270bc",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "30208479",
+        "minimumLevel": 8
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "30208479",
+    "canonicalId": "3ae0131e-6896-4176-894a-78659b2f4751",
+    "name": "Magician of Black Chaos",
+    "konamiId": 4728,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4728&request_locale=en",
+    "primaryFacts": {
+      "level": 8,
+      "atk": 2800,
+      "defense": 2600,
+      "race": "Spellcaster",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-08-10",
+      "set": "P3-07",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4728&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2012-09-27",
+      "ocg": "2000-08-10",
+      "world": "2000-08-10"
+    },
+    "mechanicalFingerprint": "4aa3edcff620dbc77e926df0f033f0cca96d71e1d43d75de81a647accdbb784e",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "43694075",
+    "canonicalId": "3b0450f0-ce3b-43da-a65f-2959c759dc6f",
+    "name": "Novox's Prayer",
+    "konamiId": 4685,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4685&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4685&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-10-01",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "21ea9ca377a87ac7edb97b59a694271acc3d6d29608435b7862c86b9f99bf3fa",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "03627449",
+        "minimumLevel": 7
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "39399168",
+    "canonicalId": "3cd674e7-2084-4303-8e8c-5c3e71c77b04",
+    "name": "Resurrection of Chakra",
+    "konamiId": 4700,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4700&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4700&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2013-07-11",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "bded7ec889a01a1b47fc6294fc35f2fbe117a2ac4c5a73f797d3167fb3eada01",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "65393205",
+        "minimumLevel": 7
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "99721536",
+    "canonicalId": "4990221e-5d04-41ad-80a6-ae4ff77058a5",
+    "name": "Dokurorider",
+    "konamiId": 4725,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4725&request_locale=en",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 1900,
+      "defense": 1850,
+      "race": "Zombie",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-08-20",
+      "set": "The Valuable Book 1 bundled cards",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4725&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-10-01",
+      "ocg": "1999-08-20",
+      "world": "1999-08-20"
+    },
+    "mechanicalFingerprint": "135d6da8c7de2a5b64212e13218a715c980c6a324b2024a715b80a051d772bfc",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "69123138",
+    "canonicalId": "618c41f5-6ecf-4b0e-97f7-0ae4a0251e64",
+    "name": "Zera the Mant",
+    "konamiId": 4366,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4366&request_locale=en",
+    "primaryFacts": {
+      "level": 8,
+      "atk": 2800,
+      "defense": 2300,
+      "race": "Fiend",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4366&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2023-08-24",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "39d7fcc04c87de8befc95f9158c81fcecb74f57d4c614c2c8f3b3cff2a80ea19",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "55761792",
+    "canonicalId": "64e4d89f-bcd6-4039-bd5e-df67e02d93d4",
+    "name": "Black Luster Ritual",
+    "konamiId": 4676,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4676&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4676&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2004-01-01",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "5f39cdba31cd9639556aa6229cc1712d9e871fa87cb3ee23914aee25e57701f5",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "05405694",
+        "minimumLevel": 8
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "81756897",
+    "canonicalId": "6be15bad-eabb-4eb3-b0f5-46e9cea84ff4",
+    "name": "Zera Ritual",
+    "konamiId": 4677,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4677&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4677&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2023-08-24",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "4d5aa6f23c2388d491c283a7915d0ca194eb01764177f1c31ff4526aa92704d0",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "69123138",
+        "minimumLevel": 8
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "76806714",
+    "canonicalId": "8040c9cf-cdbe-4215-8199-cabe7115284e",
+    "name": "Turtle Oath",
+    "konamiId": 4698,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4698&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2002-06-20",
+      "set": "DL1-050",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4698&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "mechanicalFingerprint": "de070eb199b753fc252b82a6b8d2e7b93f511159dd186c96ce5ccbb7bd5fd572",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "91782219",
+        "minimumLevel": 8
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "49064413",
+    "canonicalId": "931698b8-593e-4c89-befa-4e5916319ec6",
+    "name": "The Masked Beast",
+    "konamiId": 5094,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5094&request_locale=en",
+    "primaryFacts": {
+      "level": 8,
+      "atk": 3200,
+      "defense": 1800,
+      "race": "Fiend",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2004-06-24",
+      "set": "BE1-JP214",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5094&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2003-03-01",
+      "ocg": "2001-04-19",
+      "world": "2001-04-19"
+    },
+    "mechanicalFingerprint": "9b0a7383cc8a7b9fa7bd73be5701c960ea32156d2a0fda1ae93c3f60bfb1c8c8",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "94377247",
+    "canonicalId": "988bae92-d24d-4a38-9327-733b3489272f",
+    "name": "Curse of the Masked Beast",
+    "konamiId": 5103,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5103&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2001-04-19",
+      "set": "SM-15",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5103&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2003-03-01",
+      "ocg": "2001-04-19",
+      "world": "2001-04-19"
+    },
+    "mechanicalFingerprint": "5a28b2a01004405a42bc4448ebac426009e174706b69ab7bc076db3f2121458e",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "49064413",
+        "minimumLevel": 8
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "81933259",
+    "canonicalId": "9b390d67-9d29-4363-b8c5-5f2d1b3e35dc",
+    "name": "Beastly Mirror Ritual",
+    "konamiId": 4680,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4680&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4680&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2012-03-15",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "30d12efda853af92379603c54431b4ec1b8e2cd512d1744830d090bf680842d5",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "31890399",
+        "minimumLevel": 6
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "04849037",
+    "canonicalId": "a0f0fce8-64d5-4a51-9a56-afc441309dc7",
+    "name": "Performance of Sword",
+    "konamiId": 4707,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4707&request_locale=en",
+    "primaryFacts": {
+      "level": 6,
+      "atk": 1950,
+      "defense": 1850,
+      "race": "Warrior",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2002-06-20",
+      "set": "DL1-051",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4707&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "mechanicalFingerprint": "e2a621a96a05b6f94f2e5288d252b89fcc46eeb519f6e628d5f0f2a4b907e802",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "90844184",
+    "canonicalId": "a13af004-d11a-438a-b51e-6525e8b3f058",
+    "name": "Garma Sword",
+    "konamiId": 4722,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4722&request_locale=en",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2550,
+      "defense": 2150,
+      "race": "Warrior",
+      "attribute": "DARK"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-07-13",
+      "set": "G3-06",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4722&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2006-04-28",
+      "ocg": "2000-07-13",
+      "world": "2000-07-13"
+    },
+    "mechanicalFingerprint": "b99aaddef8fc412400a02fe495abe90733227c23969b0365d68a5f9ec1309e4f",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "80811661",
+    "canonicalId": "a977ecbc-a174-4c39-b4bd-0a747611562e",
+    "name": "Hamburger Recipe",
+    "konamiId": 4683,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4683&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2002-06-20",
+      "set": "DL1-047",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4683&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "mechanicalFingerprint": "5955e2a4860322e7ea1ac6192fe86743866387c3be55b542efdf1379542b4db1",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "30243636",
+        "minimumLevel": 6
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "78577570",
+    "canonicalId": "b45d2e28-5f43-4a3d-b4dc-50d4ac631ced",
+    "name": "Garma Sword Oath",
+    "konamiId": 4703,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4703&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-07-13",
+      "set": "G3-05",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4703&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2006-04-28",
+      "ocg": "2000-07-13",
+      "world": "2000-07-13"
+    },
+    "mechanicalFingerprint": "f5756ce941c35189f53581267f1928b7510a08770ab76bbb8d84fca848bc2ac8",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "90844184",
+        "minimumLevel": 7
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "62337487",
+    "canonicalId": "c3e80ebf-927c-474c-9cf9-065e1ba2ae96",
+    "name": "Fortress Whale",
+    "konamiId": 4724,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4724&request_locale=en",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2350,
+      "defense": 2150,
+      "race": "Fish",
+      "attribute": "WATER"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4724&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2005-11-01",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "20effe17e329efac4fdaa32e0785ee403207cb80b8a034db6ee2fd9e85e5ca41",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "41182875",
+    "canonicalId": "c8f2c48c-db33-4f0c-8a1f-ba73b656fefb",
+    "name": "Javelin Beetle Pact",
+    "konamiId": 4702,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4702&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4702&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": null,
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "9c68b248c5b9f206bf895d7580b298681186a477ce12a3a7fdb7c10d6c9b16f0",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "26932788",
+        "minimumLevel": 8
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "03627449",
+    "canonicalId": "d7365b12-52c1-4382-b99a-257816cb6908",
+    "name": "Skull Guardian",
+    "konamiId": 4710,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4710&request_locale=en",
+    "primaryFacts": {
+      "level": 7,
+      "atk": 2050,
+      "defense": 2500,
+      "race": "Warrior",
+      "attribute": "LIGHT"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4710&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-10-01",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "b42819713a9e93e0de078e01bd34583303c9f348a2d54440604c1e9194b5580e",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "54539105",
+    "canonicalId": "da9d79c2-6a37-4258-9d6b-0b658db41c5a",
+    "name": "War-Lion Ritual",
+    "konamiId": 4679,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4679&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4679&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2019-12-05",
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "93cb07926ce7f40cecc49197e79f372c2aa7b4aaa475d7b3733ac3b87748e285",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "33951077",
+        "minimumLevel": 7
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "26932788",
+    "canonicalId": "de350237-87f7-4326-a983-c71de43946c1",
+    "name": "Javelin Beetle",
+    "konamiId": 4723,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4723&request_locale=en",
+    "primaryFacts": {
+      "level": 8,
+      "atk": 2450,
+      "defense": 2550,
+      "race": "Insect",
+      "attribute": "EARTH"
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2000-03-23",
+      "set": "DARK CEREMONY EDITION",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4723&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": null,
+      "ocg": "2000-03-23",
+      "world": "2000-03-23"
+    },
+    "mechanicalFingerprint": "850111c0128c36a40037276324a983095727cfb2ec37fbc9d50a9e66e9219d74",
+    "mechanicalDefinition": {
+      "kind": "ritualMonster"
+    },
+    "semanticNotes": "Ritual body without any additional monster effect; cannot Normal Summon/Set; revival requires previous proper Ritual Summon.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "31066283",
+    "canonicalId": "dfe55431-3425-4e7a-981c-4c8a89f7b970",
+    "name": "Revival of Dokurorider",
+    "konamiId": 4705,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4705&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "1999-08-20",
+      "set": "The Valuable Book 1 bundled cards",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4705&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-10-01",
+      "ocg": "1999-08-20",
+      "world": "1999-08-20"
+    },
+    "mechanicalFingerprint": "cdbab65062e40f0c71750f348fc4efe220a620590fde0b394c32605caec4404d",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "99721536",
+        "minimumLevel": 6
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  },
+  {
+    "id": "43417563",
+    "canonicalId": "ec4b16bb-8249-43b3-b83b-5c46f94d1e36",
+    "name": "Commencement Dance",
+    "konamiId": 4682,
+    "reviewer": "M22 individual complete EN text plus independent JA printing review",
+    "reviewedAt": "2026-10-28",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "fullTextReviewed": true,
+    "secondaryEffectsReviewed": true,
+    "exceptionsReviewed": true,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4682&request_locale=en",
+    "primaryFacts": {
+      "level": null,
+      "atk": null,
+      "defense": null,
+      "race": null,
+      "attribute": null
+    },
+    "verifiedPrinting": {
+      "region": "ocg",
+      "date": "2002-06-20",
+      "set": "DL1-046",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4682&request_locale=ja",
+      "firstReleaseClaim": false
+    },
+    "importedFirstObserved": {
+      "tcg": "2002-09-16",
+      "ocg": "2002-06-20",
+      "world": "2002-06-20"
+    },
+    "mechanicalFingerprint": "11bb3bc5cece44dd8491b7cc563b2bd53beadcc4090618e9100efecb3e0d3577",
+    "mechanicalDefinition": {
+      "kind": "ritualSummon",
+      "ritual": {
+        "monsterId": "04849037",
+        "minimumLevel": 6
+      }
+    },
+    "semanticNotes": "Named Ritual Monster from hand; minimal sufficient Level total; Tributes from own hand/field occur during effect resolution, not activation. Negation prevents payment.",
+    "distributionAuthorized": false
+  }
+]

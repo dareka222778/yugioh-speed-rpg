@@ -1,0 +1,58 @@
+{
+  "format": 1,
+  "batchId": "m32-umi-verified",
+  "baseRevision": "d8c4106f2db6459edeebab8e86a138c6bfb62af8fa6649bb208faa06764122f7",
+  "batchSHA256": "6c2f81a9fd1f7f9f8c5be0e5baebc8690e588fc4ca3a539a94267cf5b0f5db42",
+  "hooks": [
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "import {conditionalBatch30}",
+      "to": "import {cards as m32_umi_verifiedCards} from './generated/m32-umi-verified';\nimport {conditionalBatch30}"
+    },
+    {
+      "path": "src/cardMetadata.ts",
+      "from": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards];\n",
+      "to": "export const cardMetadata:readonly Card[]=[...starterCards,...classicEngineCards.filter(c=>!starterCards.some(s=>s.id===c.id)),...supportedEffectMonsters,...supportedCounterTraps,...supportedClassicSpells,...classicExpansionCards,...historicalNormalBatch,...historicalNormalBatch4,...mechanicalBatch5,...mechanicalBatch7,...mechanicalBatch8,...fusionBatch8,...historicalNormalBatch9,...historicalFusionBatch10,...mechanicalBatch11,...mechanicalBatch14,...mechanicalBatch15,...mechanicalBatch16,...mechanicalBatch17,...mechanicalBatch18,...worldNormalBatch16,...historicalNormalBatch19,...mechanicalBatch20,...ritualBatch22,...ritualExtensions22,...economicBatch23,...economicCountBatch24,...searchSpellBatch25,...positionBatch26,...mechanicalBatch28,...movementBatch28,...attackBatch28,...recruitBatch28,...combatBatch29,...triggerBatch29,...destructionBatch29,...conditionalBatch30,...m31_single_targetsCards,...m31_harpie_identityCards,...m31_target_groupsCards,...m32_exact_fusionCards,...m32_umi_verifiedCards];\n"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "export const effectDefinitions:Record<string,Effect>={",
+      "to": "export const effectDefinitions:Record<string,Effect>={\n ...m32_umi_verifiedEffects,"
+    },
+    {
+      "path": "src/effectDefinitions.ts",
+      "from": "import {conditionalEffects30}",
+      "to": "import {effects as m32_umi_verifiedEffects} from './generated/m32-umi-verified';\nimport {conditionalEffects30}"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({",
+      "to": "const monsterDefinitions:Readonly<Record<string,MonsterDefinition>>=Object.freeze({\n ...m32_umi_verifiedMonsters,"
+    },
+    {
+      "path": "src/monsterEffects.ts",
+      "from": "import {conditionalMonsters30}",
+      "to": "import {monsters as m32_umi_verifiedMonsters} from './generated/m32-umi-verified';\nimport {conditionalMonsters30}"
+    },
+    {
+      "path": "src/cardCertifications.ts",
+      "from": "\n\n};\n",
+      "to": "\n,\n  \"24128274\": {\n    \"fingerprint\": \"b7d5b67fe460a219e179d669f52df9d4d2463f3ce88be016387aa586c5245abb\",\n    \"suites\": [\n      \"tests/generated-m32-umi-verified.test.cjs\"\n    ]\n  },\n  \"24435369\": {\n    \"fingerprint\": \"3e56041f53b7cb4e3cda4621d0d69aab2e94e6f953333e8c7efe752228162956\",\n    \"suites\": [\n      \"tests/generated-m32-umi-verified.test.cjs\"\n    ]\n  },\n  \"64342551\": {\n    \"fingerprint\": \"e93f7d7c36292a101fffac6a056c5bb736f3e8e6a914ae43fd0c7e9904612f99\",\n    \"suites\": [\n      \"tests/generated-m32-umi-verified.test.cjs\"\n    ]\n  },\n  \"90337190\": {\n    \"fingerprint\": \"9168a04a7c26ee727e66defb567d42fede8e7b1c147ee0b622bc9016f4dd462a\",\n    \"suites\": [\n      \"tests/generated-m32-umi-verified.test.cjs\"\n    ]\n  },\n  \"95614612\": {\n    \"fingerprint\": \"a143949c77a65f565ecb23410390d6e641761cb9c61425e338b9b9742a62fa41\",\n    \"suites\": [\n      \"tests/generated-m32-umi-verified.test.cjs\"\n    ]\n  }\n\n\n};\n"
+    },
+    {
+      "path": "src/releasedCardIds.ts",
+      "from": "\n]);\n",
+      "to": "\n// Generated batch m32-umi-verified: explicit tested release; zero inventory grants.\n  \"24435369\",\n  \"64342551\",\n  \"95614612\",\n  \"90337190\",\n  \"24128274\",\n]);\n"
+    }
+  ],
+  "ids": [
+    "24435369",
+    "64342551",
+    "95614612",
+    "90337190",
+    "24128274"
+  ],
+  "certification": "real public-engine executions in isolated admission catalog",
+  "distributionAuthorized": true,
+  "inventoryGranted": 0
+}

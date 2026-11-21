@@ -1,0 +1,62 @@
+{
+  "runId": "work-20261121T112504-0300-M456",
+  "mission": "M456",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "active",
+  "startedAt": "2026-11-21T11:25:04-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "aea48819344b899f4fd550ce3873246104d483ec",
+  "baseBranch": "feat/work-m455-standby-lp-atomic-commit-20261121",
+  "baseSha": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
+  "branch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
+  "head": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
+  "pr": null,
+  "reservedFiles": [
+    "tests/solemnWishesFirePrincessPipeline.test.cjs",
+    "docs/evidence/m456-solemn-wishes-fire-princess.json",
+    ".github/workflows/m456-solemn-wishes-fire-princess.yml"
+  ],
+  "scope": "Somente teste de integração, evidência e workflow. Compor resolveTagSolemnWishesDrawGain com o planner Fire Princess; provar compra por parceiro, múltiplas cartas em um evento, cópias negadas, roteamento por equipe e rejeição segura na fronteira de persistência enquanto as cartas não forem admitidas.",
+  "dependencies": {
+    "m451Pr": 399,
+    "m452Pr": 400,
+    "m454Pr": 402,
+    "m455Pr": 403
+  },
+  "coordination": {
+    "m455ParentRun": "work-20261121T112504-0300-M455",
+    "m450Handoff": "awaiting-explicit-release",
+    "m61Handoff": "pending",
+    "conflictingFilesUntouched": true,
+    "thirdPartyReservationsReleased": []
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "not-started",
+    "cardBatchFast": "not-started",
+    "milestone1000": "not-started",
+    "engineValidation": "not-started"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "duration": {
+    "startedAt": "2026-11-21T11:25:04-03:00",
+    "endedAt": null,
+    "effectiveMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Criar cenários Solemn Wishes: compra física do parceiro, duas cartas no mesmo evento, duas cópias e negação individual, time oposto sem gatilho, UID de assento inválido e replay idempotente."
+}

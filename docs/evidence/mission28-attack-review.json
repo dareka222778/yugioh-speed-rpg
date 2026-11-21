@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "reviewDate": "2026-10-29",
+  "baselineCertified": 844,
+  "certificateBlock": ",\n  \"85742772\":{\"fingerprint\":\"163f60e07a09980ed7bd82a34b6a07d15104793868349922ffa869f1c6633b8d\",\"suites\":[\"tests/attackBatch28.test.cjs\"]},\n  \"23615409\":{\"fingerprint\":\"1270d0d3ab8e4456bc25380a12c5aa15b6e841b72c63147750a888c3562f8b7d\",\"suites\":[\"tests/attackBatch28.test.cjs\"]},\n  \"95220856\":{\"fingerprint\":\"5e6544122374f6ba94d96e07b66026f6e710fe0dfd13a55b56ef6b3295b15f5d\",\"suites\":[\"tests/attackBatch28.test.cjs\"]}\n",
+  "certificateBlockSHA256": "1f55e88e449c05050ccd12748d6d2b6625a81771a05137bd4c91b0c17202fed0",
+  "releaseBlock": "  // M28 attack restrictions: owner-authorized, individually certified cohort.\n  \"85742772\",\n  \"23615409\",\n  \"95220856\",\n",
+  "cards": [
+    {
+      "id": "85742772",
+      "konamiId": 5134,
+      "name": "Gravity Bind",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5134&request_locale=en",
+      "fullEffectReviewed": true,
+      "officialText": "Level 4 or higher monsters cannot attack.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2002-10-20",
+        "set": "PSV-073",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5134&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "23615409",
+      "konamiId": 4832,
+      "name": "Insect Barrier",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4832&request_locale=en",
+      "fullEffectReviewed": true,
+      "officialText": "Insect monsters your opponent controls cannot declare an attack.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2002-10-20",
+        "set": "PSV-102",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4832&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "95220856",
+      "konamiId": 5281,
+      "name": "Vengeful Bog Spirit",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5281&request_locale=en",
+      "fullEffectReviewed": true,
+      "officialText": "Monsters cannot attack the turn they are Summoned.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2003-03-01",
+        "set": "LON-103",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5281&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    }
+  ]
+}

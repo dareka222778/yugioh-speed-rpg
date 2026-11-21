@@ -1,0 +1,62 @@
+{
+  "runId": "work-20261121T105500-0300-M449",
+  "mission": "M449",
+  "owner": "Work",
+  "priority": 1,
+  "status": "active",
+  "startedAt": "2026-11-21T10:55:00-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "d2abce2786587e9aee34b99799b1135e49af956f",
+  "baseBranch": "feat/work-m448-lp-gain-tag-duel-pipeline-20261121",
+  "baseSha": "41b8b7712a9b0e86d6e8177d4c411c4136b83aa7",
+  "branch": "feat/work-m449-battle-lp-fire-princess-pipeline-20261121",
+  "head": "4b935a0a58ce456a576238063b61451a4517a910",
+  "pr": 397,
+  "reservedFiles": [
+    "tests/battleLpFirePrincessPipeline.test.cjs",
+    "docs/evidence/m449-battle-lp-fire-princess-pipeline.json",
+    ".github/workflows/m449-battle-lp-fire-princess-pipeline.yml"
+  ],
+  "scope": "Pipeline comportamental Absorbing Kid/Guardian Angel Joan → ganho compartilhado de LP → Fire Princess: evento de batalha confiável, commits atômicos do caller, roteamento por equipe controladora, propriedade física, cópias múltiplas, negação por UID, ledgers independentes e replay seguro.",
+  "dependencies": {
+    "m402Pr": 351,
+    "m443Pr": 391,
+    "m403Pr": 352,
+    "m446Pr": 394,
+    "m448Pr": 396
+  },
+  "coordination": {
+    "m61Handoff": "pending",
+    "handoffRequestPr": 17,
+    "conflictingFilesUntouched": true,
+    "thirdPartyReservationsReleased": []
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "in_progress",
+    "runId": 44911592355,
+    "cardBatchFast": "not-run",
+    "milestone1000": "not-run",
+    "engineValidation": "not-run",
+    "extendedSoak": "not-run"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "duration": {
+    "effectiveMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Durante a CI, preparar a próxima integração independente de evento de recuperação de LP; depois revisar novo HEAD e coordenação antes de iniciar outra família."
+}

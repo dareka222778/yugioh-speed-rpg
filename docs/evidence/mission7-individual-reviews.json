@@ -1,0 +1,294 @@
+[
+  {
+    "id": "43716289",
+    "canonicalId": "1ba2f0b5-5f5e-49d7-b8ca-5c87251f7ad0",
+    "name": "Poison Mummy",
+    "konamiId": 5413,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5413&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5413&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1000,
+      "defense": 1800,
+      "race": "Zombie",
+      "attribute": "EARTH",
+      "ocgDate": "2002-03-21"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "dateMeaning": "Verified OCG printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2003-07-18",
+      "ocg": "2003-10-23",
+      "world": "2003-07-18"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "43716289"
+      ],
+      "ygoprodeckId": 43716289
+    },
+    "mechanic": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "burn",
+          "amount": 500
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 7 individual primary rules/facts review",
+    "mechanicalFingerprint": "705b07479cfe8f5a301c593f750c19cc7e6a30f87cea1cf8e272831af111666f"
+  },
+  {
+    "id": "45141844",
+    "canonicalId": "788a339e-b925-41ce-b2f2-dbd3b3e2cbcd",
+    "name": "Old Vindictive Magician",
+    "konamiId": 5651,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5651&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5651&request_locale=en",
+    "primaryFacts": {
+      "level": 2,
+      "atk": 450,
+      "defense": 600,
+      "race": "Spellcaster",
+      "attribute": "DARK",
+      "ocgDate": "2002-09-19"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "dateMeaning": "Verified OCG printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2003-10-10",
+      "ocg": "2002-09-19",
+      "world": "2002-09-19"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "45141844"
+      ],
+      "ygoprodeckId": 45141844
+    },
+    "mechanic": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "destroy",
+          "target": "opponentMonster"
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 7 individual primary rules/facts review",
+    "mechanicalFingerprint": "b248eb80cec8d8db6c7d60bb08cd6e84d0b06326ba5037f07086520b0a58deaf"
+  },
+  {
+    "id": "77491079",
+    "canonicalId": "dfd7bb89-fb51-40d2-9637-894a8e2305a3",
+    "name": "Gale Lizard",
+    "konamiId": 5818,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5818&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5818&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 700,
+      "race": "Reptile",
+      "attribute": "WATER",
+      "ocgDate": "2003-04-24"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "dateMeaning": "Verified OCG printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2004-03-01",
+      "ocg": "2003-04-24",
+      "world": "2003-04-24"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "77491079"
+      ],
+      "ygoprodeckId": 77491079
+    },
+    "mechanic": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "bounce",
+          "target": "opponentMonster"
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 7 individual primary rules/facts review",
+    "mechanicalFingerprint": "59796871f1e2c41af853b34636bcada9663ab3881744fc30a5e7532372321bc5"
+  },
+  {
+    "id": "91869203",
+    "canonicalId": "d4f2c3ad-5d07-41f1-858b-f1940eb0f6d3",
+    "name": "Amazoness Archer",
+    "konamiId": 5195,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5195&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5195&request_locale=en",
+    "primaryFacts": {
+      "level": 4,
+      "atk": 1400,
+      "defense": 1000,
+      "race": "Warrior",
+      "attribute": "EARTH",
+      "ocgDate": "2001-04-19"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "dateMeaning": "Verified OCG printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2003-03-01",
+      "ocg": "2001-04-19",
+      "world": "2001-04-19"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "91869203"
+      ],
+      "ygoprodeckId": 91869203
+    },
+    "mechanic": {
+      "effect": {
+        "trigger": "ignition",
+        "cost": {
+          "kind": "tribute",
+          "count": 2
+        },
+        "operation": {
+          "kind": "burn",
+          "amount": 1200
+        }
+      },
+      "activation": {
+        "policy": "manual",
+        "window": "main"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 7 individual primary rules/facts review",
+    "mechanicalFingerprint": "c755d733ae29ea519bd519ba0f54ebba92146f159bd1315885f703f34d55869e"
+  },
+  {
+    "id": "69579761",
+    "canonicalId": "ae9418fa-4305-45fa-ae69-9fb8cd2f40a8",
+    "name": "Des Koala",
+    "konamiId": 5661,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5661&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5661&request_locale=en",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 1100,
+      "defense": 1800,
+      "race": "Beast",
+      "attribute": "DARK",
+      "ocgDate": "2002-09-19"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "dateMeaning": "Verified OCG printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2003-10-10",
+      "ocg": "2002-09-19",
+      "world": "2002-09-19"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "69579761"
+      ],
+      "ygoprodeckId": 69579761
+    },
+    "mechanic": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "burnPerHand",
+          "amount": 400
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 7 individual primary rules/facts review",
+    "mechanicalFingerprint": "ef5dc4a8798f3194b78a31eccf6eadb87923a5cbb9d91d774bf72e429c457df3"
+  },
+  {
+    "id": "83994646",
+    "canonicalId": "8dd1ac1f-3c0b-43d0-89d5-45a3a1af0665",
+    "name": "4-Starred Ladybug of Doom",
+    "konamiId": 5139,
+    "primarySource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5139&request_locale=ja",
+    "rulesSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5139&request_locale=en",
+    "primaryFacts": {
+      "level": 3,
+      "atk": 800,
+      "defense": 1200,
+      "race": "Insect",
+      "attribute": "WIND",
+      "ocgDate": "2000-12-14"
+    },
+    "ocgDateEvidence": "verified-printing",
+    "dateMeaning": "Verified OCG printing before cutoff, not a universal first release claim",
+    "importedFirstObserved": {
+      "tcg": "2002-10-20",
+      "ocg": "2000-12-14",
+      "world": "2000-12-14"
+    },
+    "passcodeEvidence": {
+      "classification": "Public snapshot CID/passcode concordance; official HTML does not expose passcodes",
+      "aliases": [
+        "83994646"
+      ],
+      "ygoprodeckId": 83994646
+    },
+    "mechanic": {
+      "effect": {
+        "trigger": "flip",
+        "operation": {
+          "kind": "destroyByLevel",
+          "level": 4
+        }
+      },
+      "activation": {
+        "policy": "mandatory",
+        "window": "flip"
+      }
+    },
+    "reviewedAt": "2026-10-27",
+    "identityApproved": true,
+    "mechanicsApproved": true,
+    "reviewer": "Mission 7 individual primary rules/facts review",
+    "mechanicalFingerprint": "1a08f1bee854092d0abccfbdbdfdfe376e4558baff5572324102100c78f14888"
+  }
+]

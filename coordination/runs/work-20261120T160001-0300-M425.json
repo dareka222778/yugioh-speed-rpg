@@ -1,0 +1,94 @@
+{
+  "format": 1,
+  "runId": "work-20261120T160001-0300-M425",
+  "mission": "M425",
+  "owner": "Work principal",
+  "priority": "P1 — modelar Old Vindictive Magician e 4-Starred Ladybug of Doom como efeitos FLIP em 2v2, distinguindo alvo único na ativação de limpeza não-direcionada face-up Level 4 na resolução; enviar destruídos ao Cemitério compartilhado da equipe do proprietário físico.",
+  "state": "active",
+  "startedAt": "2026-11-20T16:00:01-03:00",
+  "endedAt": null,
+  "elapsedMinutes": null,
+  "effectiveWorkMinutes": 0,
+  "shared": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "headAtStart": "c2e55ef844fa217eba5b0cd2d4dd1bb2dc0f2c27",
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "branch": "feat/work-m425-flip-destruction-family-20261120",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c2e55ef844fa217eba5b0cd2d4dd1bb2dc0f2c27",
+  "head": "c2e55ef844fa217eba5b0cd2d4dd1bb2dc0f2c27",
+  "reservedFiles": [
+    "src/flipMonsterDestructionFamily.ts",
+    "tests/flipMonsterDestructionFamily.test.cjs",
+    "docs/evidence/m425-flip-destruction-family.json",
+    ".github/workflows/m425-flip-destruction-family.yml"
+  ],
+  "objective": "Implementar a família de destruição por FLIP sem alterar o resolver central reservado M61; respeitar equipe controladora, seleção temporal, face-up Level 4 e proprietário físico do Cemitério.",
+  "blocksCompleted": [
+    "Lida coordenação M424 e atualizado seu HEAD/PR após a correção de fonte FLIP destruída por batalha.",
+    "Verificadas identidades 45141844 e 83994646 no conjunto histórico releasedCardIds; ausentes do cardMetadata/effectDefinitions atuais.",
+    "Conferidas fontes oficiais Konami: Old Vindictive Magician CID5651, MFC-067 em 2003-10-10; 4-Starred Ladybug CID5139, PSV-088 em 2002-10-20; OCG confirma face-up Level 4.",
+    "Criada branch M425 isolada a partir do HEAD compartilhado c2e55ef."
+  ],
+  "cards": [
+    {
+      "name": "Old Vindictive Magician",
+      "passcode": "45141844",
+      "konamiCardDatabaseId": 5651,
+      "selection": "targeted-at-activation",
+      "maxTargets": 1
+    },
+    {
+      "name": "4-Starred Ladybug of Doom",
+      "passcode": "83994646",
+      "konamiCardDatabaseId": 5139,
+      "selection": "non-targeting-at-resolution",
+      "condition": "face-up Level 4 monsters controlled by opposing team"
+    }
+  ],
+  "tests": {
+    "planned": 32,
+    "passed": null,
+    "failed": null
+  },
+  "certification": {
+    "newCertifications": 0,
+    "verifiedAtStart": 969,
+    "remainingAtStart": 31,
+    "automaticCertifications": 0
+  },
+  "handoff": {
+    "pr": 17,
+    "latestCommentId": 7048152993,
+    "status": "pending",
+    "requestedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "changedFiles": []
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationFilesChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "realDiscordValidated": false
+  },
+  "production": {
+    "deploymentCheck": "GitHub deployments collection is not exposed by the connector; no production/deploy claim."
+  },
+  "scopeReleasedToAuxiliary": [],
+  "auxiliaryAuthorization": "No authorization until the PR and final checkpoint; if released, monitor/correct only the four M425 files.",
+  "nextTask": "Implement the pure FLIP destruction resolver, owner-team GY routing, face-down target projection, and 32 focused behavior tests; run Node 22 CI.",
+  "nextWindow": "2026-11-20T17:30:00-03:00",
+  "limitations": [
+    "Helpers remain isolated until M61 resolver handoff.",
+    "No certification until registered and exercised through the real duel/Discord path."
+  ]
+}

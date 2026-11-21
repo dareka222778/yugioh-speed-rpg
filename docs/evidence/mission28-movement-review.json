@@ -1,0 +1,100 @@
+{
+  "format": 1,
+  "reviewDate": "2026-10-29",
+  "baselineCertified": 838,
+  "certificateBlock": ",\n  \"24623598\":{\"fingerprint\":\"7702ea9d26f968294553b35675ee9207686dc42eff6a3b05c27521cd50136202\",\"suites\":[\"tests/movementBatch28.test.cjs\"]},\n  \"82542267\":{\"fingerprint\":\"e3f4a28f281218c3ed682628adb98bcab333e9cd7a9bd14a6e05ff0b71168e33\",\"suites\":[\"tests/movementBatch28.test.cjs\"]},\n  \"05758500\":{\"fingerprint\":\"e617e5f72621fa2186ca072befb372b052d52c633d31e3c105c91faaf7e709e6\",\"suites\":[\"tests/movementBatch28.test.cjs\"]},\n  \"06343408\":{\"fingerprint\":\"107b648a2ac6f2bf071449afa750bccea1e5346b417a638a35d875cd2ede064d\",\"suites\":[\"tests/movementBatch28.test.cjs\"]},\n  \"78864369\":{\"fingerprint\":\"7dcf89cd21a28e0de90980f53634528f2188d9b01d371105aec4951bc3fe20cd\",\"suites\":[\"tests/movementBatch28.test.cjs\"]},\n  \"36280194\":{\"fingerprint\":\"c7e45957ab4a1ed30780db406af7cee314c103124851a8424ec6950d0db0e2ba\",\"suites\":[\"tests/movementBatch28.test.cjs\"]}\n",
+  "certificateBlockSHA256": "b5c90131be1e3a15ca25d67e723210c12666580acf7676f2ffeffa89f197cd68",
+  "releaseBlock": "  // M28 movements: owner-authorized, individually certified cohort.\n  \"24623598\",\n  \"82542267\",\n  \"05758500\",\n  \"06343408\",\n  \"78864369\",\n  \"36280194\",\n",
+  "cards": [
+    {
+      "id": "24623598",
+      "konamiId": 5397,
+      "name": "Disappear",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5397&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "Remove from play 1 card from your opponent's Graveyard.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2003-06-06",
+        "set": "LOD-089",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5397&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "82542267",
+      "konamiId": 4845,
+      "name": "Gravedigger Ghoul",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4845&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "Target up to 2 monsters in your opponent's Graveyard; banish them.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2002-03-08",
+        "set": "LOB-065",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4845&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "05758500",
+      "konamiId": 4857,
+      "name": "Soul Release",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4857&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "Target up to 5 cards in any GY(s); banish them.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2002-06-26",
+        "set": "MRD-058",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4857&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "06343408",
+      "konamiId": 5278,
+      "name": "Miracle Dig",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5278&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "If at least 5 of your monsters are banished: Target 3 of them; return them to the GY.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2003-03-01",
+        "set": "LON-100",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5278&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "78864369",
+      "konamiId": 6050,
+      "name": "Soul Reversal",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6050&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "Return 1 Flip Effect Monster from your Graveyard to the top of your Deck.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2004-06-01",
+        "set": "AST-088",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6050&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    },
+    {
+      "id": "36280194",
+      "konamiId": 4953,
+      "name": "Backup Soldier",
+      "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4953&request_locale=en",
+      "fullEffectReviewed": true,
+      "semantics": "Activation requires five monsters in own graveyard; select one to three non-Effect monsters, each printed ATK at most 1500, and recover surviving targets. Fusion returns to Extra Deck.",
+      "verifiedPrinting": {
+        "region": "tcg",
+        "date": "2002-10-20",
+        "set": "PSV-028",
+        "source": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4953&request_locale=en"
+      },
+      "firstPublicationClaim": false
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "id": "work-20261111T155631-0300",
+  "startedAt": "2026-11-11T15:56:31-03:00",
+  "recordedAt": "2026-11-11T15:56:31-03:00",
+  "state": "waiting-for-safe-handoff",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadBefore": "930174a5896646188850907d39dae71cb56020a6",
+  "coordinationOnly": true,
+  "reservationAcquired": false,
+  "activeWorkObserved": {
+    "runId": "work-20261111T103320Z",
+    "reservedBranch": "feat/work-m60-20261111",
+    "reservedBase": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+    "observedBranchHead": "d59caf101d79d837d36d1772edfddb46fc6b14a7",
+    "stateInCoordination": "active",
+    "lastHeartbeatInCoordination": "2026-11-11T10:33:20-03:00",
+    "separateRecentWork": {
+      "pullRequest": 17,
+      "branch": "feat/work-m61-handlimit-ci-20261111",
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "lastPushObserved": "2026-11-11T18:51:32Z",
+      "comparisonToBase": {
+        "base": "b8e895b97d0af50dfa558f4fd8d25b404b17feb1",
+        "aheadBy": 7,
+        "behindBy": 0
+      },
+      "changedFiles": [
+        "scripts/mass-certification21.cjs",
+        "src/classicEffects.ts",
+        "src/duelEngineCurrent.ts",
+        "src/duelIntegrity.ts",
+        "src/monsterEffects.ts",
+        "tests/tagClassicHandLimit.test.cjs"
+      ]
+    }
+  },
+  "catalog": {
+    "sharedBranch": {
+      "uniqueCards": 969,
+      "certificates": 969,
+      "revision": "3af4ee461ba728be019de373b6c9652c3a7fd21b94fd475aac6af22b5127ca99"
+    },
+    "developmentSnapshot": {
+      "uniqueCards": 1014,
+      "certificates": 1014,
+      "revision": "72ba4830f7e62ceaff795c1fa5b7b5b690ee5ef1f675eaedb9b7ed7da5675b52"
+    }
+  },
+  "pullRequests": [
+    {
+      "number": 12,
+      "state": "open",
+      "draft": true,
+      "head": "930174a5896646188850907d39dae71cb56020a6",
+      "base": "classic-engine-foundation"
+    },
+    {
+      "number": 13,
+      "state": "open",
+      "draft": true,
+      "head": "3effd4c9c1aa85104b5aca3535b93e52a3a456c3",
+      "base": "feat/rea-engine-recovery-20261026"
+    },
+    {
+      "number": 14,
+      "state": "open",
+      "draft": true,
+      "head": "b8200e90217ee500ab11d7a5861bcd9c2756d0e6",
+      "base": "feat/rea-engine-recovery-20261026"
+    },
+    {
+      "number": 15,
+      "state": "open",
+      "draft": true,
+      "head": "7139b101b3586c2d592ada7a8696fe6c333167f8",
+      "base": "feat/work-m60-20261111"
+    },
+    {
+      "number": 17,
+      "state": "open",
+      "draft": true,
+      "head": "78aa57851420e0f52211f7267faf1af681847ea3",
+      "base": "feat/work-m61-ci-base-20261111"
+    }
+  ],
+  "ci": {
+    "pr17Head": "78aa57851420e0f52211f7267faf1af681847ea3",
+    "engineValidation": {
+      "runId": 43081735774,
+      "conclusion": "failure",
+      "failedAt": "src/duelEngineCurrent.ts(410,24) TS2367; (410,70) TS2339"
+    },
+    "fastFeedback": {
+      "runId": 43081735544,
+      "conclusion": "failure",
+      "failedAt": "scripts/card-batch-fast.cjs -> TypeScript compile"
+    },
+    "cause": "Line 407 returns for operation.kind targetGroup; line 410 compares the same narrowed operation kind to targetGroup and accesses rule on never. Preserve any required singleCard optional-target exception while removing/restructuring the unreachable targetGroup check.",
+    "priorEngineValidation": {
+      "runId": 43078906550,
+      "conclusion": "success",
+      "sha": "b8db9ddefc33c4e6691ae78c43b3a92075aaf535"
+    }
+  },
+  "handoff": {
+    "requestedFrom": "PR #17 / feat/work-m61-handlimit-ci-20261111",
+    "status": "requested-awaiting-safe-checkpoint",
+    "commentId": 6804652211,
+    "noConflictingWrites": true,
+    "nextTask": "After release, resolve the TypeScript narrowing failure, run npm run check, build, targeted tag hand-limit tests and full CI; then resume M60/M61 card-family expansion."
+  },
+  "production": {
+    "status": "not verified",
+    "reason": "GitHub deployment endpoint was not accessible through the connected GitHub API surface; hosting credentials/session were not available. No deploy performed."
+  },
+  "changes": {
+    "source": 0,
+    "catalog": 0,
+    "tests": 0,
+    "coordination": 1,
+    "action": "Read-only audit plus cooperative checkpoint request on PR #17; no source/catalog files changed."
+  },
+  "tests": {
+    "executedByThisRun": 0,
+    "externalCIObserved": "PR #17 engine validation and card batch fast feedback failed on TypeScript check."
+  },
+  "effectiveDevelopmentMinutes": 0,
+  "minimum60MinutesMet": false,
+  "nextScheduledAt": "2026-11-11T20:30:00-03:00",
+  "next": "Wait for safe checkpoint/transfer from the active M61 work. Do not edit its engine files. After release, fix the exact TypeScript narrowing error, rerun targeted and full CI, then continue the next certified-card family. Reconcile 1,014-card development snapshot with the 969-card shared branch only after review and CI.",
+  "noMerge": true,
+  "noDeploy": true,
+  "noInventoryOrDatabaseOperations": true
+}

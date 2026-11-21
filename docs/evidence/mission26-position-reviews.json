@@ -1,0 +1,11 @@
+{
+  "format": 1,
+  "reviewDate": "2026-10-28",
+  "scope": "Full official English effect reviewed against the existing historical identity catalog. Imported firstObserved dates establish eligibility only; they are not asserted to be first publication dates. No automated textual matching or new release authorization.",
+  "cards": [
+    {"id":"82828051","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5983&request_locale=en","fullEffectReviewed":true,"semantics":"Normal Spell. Both controllers' face-up Attack Position monsters change to Defense. No targets; facedown monsters stay hidden. Respect Spell immunity."},
+    {"id":"59744639","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5001&request_locale=en","fullEffectReviewed":true,"semantics":"Normal Trap. Opposing face-up monsters switch between Attack and Defense at resolution. No activation target list. Respect Trap negation and immunity."},
+    {"id":"83133491","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5857&request_locale=en","fullEffectReviewed":true,"semantics":"Normal Trap. Face-up monsters on both fields switch battle position at resolution. Face-down monsters are unaffected. Respect Trap negation and immunity."},
+    {"id":"31785398","source":"https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5331&request_locale=en","fullEffectReviewed":true,"semantics":"Normal Trap targeting a Warrior or Spellcaster on either field. Set that target in Defense. Hidden type identities cannot be used to offer targets, and Tokens cannot be Set. Revalidate the target UID, zone lifetime, face and Type at resolution; never choose a replacement. Reuse Book of Moon reset and equipment cleanup semantics."}
+  ]
+}
