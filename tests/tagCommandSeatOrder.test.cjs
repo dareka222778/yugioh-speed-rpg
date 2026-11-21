@@ -74,12 +74,14 @@ test('the command seat order is the same order persisted by tagStore and creates
     opponent2Id: ids[3],
     rules: 'normal'
   });
-  const record = store.createTagLobby(invite.members, 'm468-guild', 'm468-channel', invite.rules);
+  let record = store.createTagLobby(invite.members, 'm468-guild', 'm468-channel', invite.rules);
   assert.deepEqual(record.members.map(member => member.id), invite.members);
-  assert.deepEqual(record.members.map(member => member.team), [0, 1, 0, 1]);
-  assert.equal(record.members[0].team, record.members[2].team);
-  assert.equal(record.members[1].team, record.members[3].team);
-  assert.notEqual(record.members[0].team, record.members[1].team);
+  for (const id of ids.slice(1)) record = store.acceptTag(record.id, id, record.guild, record.revision);
+  assert.equal(record.status, 'playing');
+  assert.deepEqual(record.state.members.map(member => member.team), [0, 1, 0, 1]);
+  assert.equal(record.state.members[0].team, record.state.members[2].team);
+  assert.equal(record.state.members[1].team, record.state.members[3].team);
+  assert.notEqual(record.state.members[0].team, record.state.members[1].team);
   assert.deepEqual({
     cards: db.prepare('SELECT COUNT(*) AS n FROM player_cards').get().n,
     grants: db.prepare('SELECT COUNT(*) AS n FROM starter_grants').get().n,
