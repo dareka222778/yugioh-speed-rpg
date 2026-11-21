@@ -14,6 +14,8 @@ import {
   resolveAncientLampLaJinnSummon,
 } from './ancientLampRules';
 
+export {ANCIENT_LAMP_CARD_ID,LA_JINN_CARD_ID};
+
 export type TagLampTeam=0|1;
 export type TagLampSeat=0|1|2|3;
 type TagPlayer=TagDuel['core']['players'][number];

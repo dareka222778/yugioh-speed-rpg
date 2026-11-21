@@ -75,17 +75,6 @@ test('projection uses the active physical hand and both shared Monster Fields',(
   addLamp(game,0,0,true);
   addMonster(game,1,1,tagNormalCardIds[2]);
   const projection=projectAncientLampTagState(game);
-  if(!projection){
-    const noHand=structuredClone(game);noHand.core.players[0].hand=[];
-    const noField=structuredClone(game);for(const player of noField.core.players)player.monsters=[];
-    console.log('M437-DIAGNOSTIC',JSON.stringify({
-      mode:game.mode,current:game.core.current,turn:game.core.turn,active:game.active,
-      hand:game.core.players[0].hand.map(card=>({uid:card.uid,id:card.id})),
-      fields:game.core.players.map(player=>player.monsters.map(card=>({uid:card.uid,id:card.id,faceUp:card.faceUp,position:card.position}))),
-      emptyHandProjection:!!projectAncientLampTagState(noHand),
-      emptyFieldProjection:!!projectAncientLampTagState(noField)
-    }));
-  }
   assert.ok(projection);
   assert.equal(projection.team,0);
   assert.equal(projection.activeSeat,2);
