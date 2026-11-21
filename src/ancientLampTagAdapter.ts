@@ -89,29 +89,39 @@ function phaseOf(game:TagDuel):AncientLampTagProjection['phase']{
 }
 
 function handProjection(hand:TagPlayer['hand'],activeSeat:TagLampSeat):AncientLampHandCard[]|null{
+  if(!Array.isArray(hand))return null;
   const result:AncientLampHandCard[]=[];
+  const seenUids=new Set<string>();
   for(const card of hand){
+    if(!card||typeof card!=='object'||typeof card.uid!=='string'||typeof card.id!=='string')return null;
     const physicalOwnerSeat=physicalSeatFromAncientLampUid(card.uid);
-    if(physicalOwnerSeat===null||physicalOwnerSeat!==activeSeat)return null;
+    if(physicalOwnerSeat===null||physicalOwnerSeat!==activeSeat||seenUids.has(card.uid))return null;
     const kind=card.id===LA_JINN_CARD_ID||card.id===ANCIENT_LAMP_CARD_ID?'monster':getDuelCard(card.id)?.kind;
     if(kind!=='monster'&&kind!=='spell'&&kind!=='trap')return null;
+    seenUids.add(card.uid);
     result.push({uid:card.uid,cardId:card.id,physicalOwnerSeat,kind});
   }
   return result;
 }
 
 function fieldProjection(game:TagDuel,effectSourceUid?:string,effectNegated=false):AncientLampFieldMonster[]|null{
+  if(!game||!game.core||!Array.isArray(game.core.players)||game.core.players.length!==2||
+    !Array.isArray(game.active)||game.active.length!==2)return null;
   const field:AncientLampFieldMonster[]=[];
+  const seenUids=new Set<string>();
   for(const team of [0,1] as const){
     const controllerSeat=game.active[team];
     const player=game.core.players[team];
-    if(!isSeat(controllerSeat)||controllerSeat%2!==team||player.monsters.length>3)return null;
+    if(!isSeat(controllerSeat)||controllerSeat%2!==team||!player||
+      !Array.isArray(player.monsters)||player.monsters.length>3)return null;
     for(let index=0;index<player.monsters.length;index++){
       const card:TagMonster=player.monsters[index];
+      if(!card||typeof card!=='object'||typeof card.uid!=='string'||typeof card.id!=='string')return null;
       const physicalOwnerSeat=physicalSeatFromAncientLampUid(card.uid);
-      if(physicalOwnerSeat===null||typeof card.faceUp!=='boolean')return null;
+      if(physicalOwnerSeat===null||seenUids.has(card.uid)||typeof card.faceUp!=='boolean')return null;
       const position=card.position==='atk'?'attack':card.position==='def'?'defense':null;
       if(!position)return null;
+      seenUids.add(card.uid);
       field.push({
         uid:card.uid,
         ...(card.faceUp?{cardId:card.id}:{}),
@@ -175,14 +185,19 @@ export function resolveTagAncientLampSummon(
 
 /** Capture the server-known face-down target before the engine reveals it. No card identity is returned. */
 export function captureTagAncientLampAttackStart(game:TagDuel,eventId:string):AncientLampAttackStartSnapshot|null{
-  if(!game||game.mode!=='tag-classic'||typeof eventId!=='string'||!eventId.trim()||eventId.length>128)return null;
+  if(!game||game.mode!=='tag-classic'||!game.core||!Array.isArray(game.core.players)||
+    game.core.players.length!==2||!Array.isArray(game.active)||game.active.length!==2||
+    typeof eventId!=='string'||!eventId.trim()||eventId.length>128)return null;
   const pending=game.core.pending;
-  if(pending.kind!=='attack'||pending.stage!=='declare'||pending.target===undefined||
+  if(!pending||typeof pending!=='object'||pending.kind!=='attack'||pending.stage!=='declare'||pending.target===undefined||
     !isTeam(pending.actor)||game.core.current!==pending.actor||
     !['battle','response'].includes(game.core.phase))return null;
-  const attacker=game.core.players[pending.actor].monsters.find(card=>card.uid===pending.card);
+  const attackerPlayer=game.core.players[pending.actor];
   const lampTeam=(1-pending.actor) as TagLampTeam;
-  const lamp=game.core.players[lampTeam].monsters.find(card=>card.uid===pending.target);
+  const lampPlayer=game.core.players[lampTeam];
+  if(!attackerPlayer||!Array.isArray(attackerPlayer.monsters)||!lampPlayer||!Array.isArray(lampPlayer.monsters))return null;
+  const attacker=attackerPlayer.monsters.find(card=>card&&card.uid===pending.card);
+  const lamp=lampPlayer.monsters.find(card=>card&&card.uid===pending.target);
   if(!attacker||!attacker.faceUp||!lamp||lamp.id!==ANCIENT_LAMP_CARD_ID||lamp.faceUp!==false||
     physicalSeatFromAncientLampUid(attacker.uid)===null||
     physicalSeatFromAncientLampUid(lamp.uid)===null)return null;
@@ -197,10 +212,15 @@ export function captureTagAncientLampAttackStart(game:TagDuel,eventId:string):An
 function attackSnapshot(
   game:TagDuel,snapshot:AncientLampAttackStartSnapshot,sourceEffectNegated:boolean
 ):{attack:AncientLampAttackSnapshot;field:AncientLampFieldMonster[]}|null{
-  if(!game||game.mode!=='tag-classic'||!snapshot||typeof snapshot!=='object'||
+  if(!game||game.mode!=='tag-classic'||!game.core||!Array.isArray(game.core.players)||
+    game.core.players.length!==2||!Array.isArray(game.active)||game.active.length!==2||
+    !snapshot||typeof snapshot!=='object'||typeof snapshot.eventId!=='string'||
+    !snapshot.eventId.trim()||snapshot.eventId.length>128||
+    typeof snapshot.attackerUid!=='string'||typeof snapshot.lampUid!=='string'||
     typeof sourceEffectNegated!=='boolean'||!snapshot.wasFaceDownAtDamageStepStart||
     !isTeam(snapshot.attackerTeam)||!isTeam(snapshot.lampTeam)||snapshot.lampTeam!==1-snapshot.attackerTeam||
     !Number.isSafeInteger(snapshot.turn)||snapshot.turn!==game.core.turn||
+    !game.core.pending||typeof game.core.pending!=='object'||
     game.core.pending.kind!=='attack'||game.core.pending.stage!=='damage'||
     game.core.pending.actor!==snapshot.attackerTeam||game.core.pending.card!==snapshot.attackerUid||
     game.core.pending.target!==snapshot.lampUid||game.core.damageStep!==true)return null;

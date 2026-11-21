@@ -280,3 +280,40 @@ test('a face-down redirect target remains identity-redacted in the projection',(
   assert.equal(hidden.faceUp,false);
   assert.equal(hidden.cardId,undefined);
 });
+
+test('projection rejects a missing partner field instead of throwing',()=>{
+  const game=makeGame();
+  game.core.players[1]=undefined;
+  assert.equal(projectAncientLampTagState(game),null);
+});
+
+test('projection rejects malformed private hand and malformed monster arrays',()=>{
+  const badHand=makeGame();
+  badHand.core.players[0].hand=null;
+  assert.equal(projectAncientLampTagState(badHand),null);
+  const badField=makeGame();
+  badField.core.players[1].monsters=null;
+  assert.equal(projectAncientLampTagState(badField),null);
+});
+
+test('projection rejects duplicate physical UIDs across shared team fields',()=>{
+  const game=makeGame();
+  const original=addMonster(game,0,0,tagNormalCardIds[0]);
+  game.core.players[1].monsters.push({...original,owner:1});
+  assert.equal(projectAncientLampTagState(game),null);
+});
+
+test('attack snapshot safely rejects a missing pending attack record',()=>{
+  const game=makeGame();
+  delete game.core.pending;
+  assert.equal(captureTagAncientLampAttackStart(game,'m437-no-pending'),null);
+});
+
+test('attack snapshot safely rejects a missing opponent monster collection',()=>{
+  const game=makeGame();
+  const attacker=addMonster(game,0,2,tagNormalCardIds[0]);
+  game.core.phase='battle';
+  game.core.pending={kind:'attack',actor:0,card:attacker.uid,target:'m1:missing',stage:'declare'};
+  game.core.players[1].monsters=null;
+  assert.equal(captureTagAncientLampAttackStart(game,'m437-no-opponent-field'),null);
+});
