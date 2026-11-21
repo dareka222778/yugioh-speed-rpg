@@ -1,0 +1,42 @@
+{
+  "format": 1,
+  "mission": "M448",
+  "runId": "work-20261121T102656-0300-M448",
+  "priority": "P1",
+  "branches": {
+    "solemnWishes": "feat/work-m447-solemn-wishes-tag-duel-adapter-20261121",
+    "firePrincess": "feat/work-m446-fire-princess-tag-duel-adapter-20261121"
+  },
+  "pipeline": [
+    "trusted draw event with physical drawing seat and drawn-card UIDs",
+    "Solemn Wishes resolves 500 LP per eligible copy and returns a committed LP-gain event",
+    "caller atomically commits the gain and draw-event ledger",
+    "Fire Princess consumes the positive LP-gain event and returns 500 damage per eligible copy",
+    "caller atomically commits damage and a separate LP-gain event ledger"
+  ],
+  "invariants": {
+    "eventLedgers": "Draw-event and LP-gain-event ledgers are separate even when they share the same stable eventId.",
+    "idempotency": "Retries after both commits do not grant LP or inflict damage twice.",
+    "ownership": "Physical owner seat and current controller team remain distinct.",
+    "privacy": "Drawn-card UIDs are internal and never included in public summaries.",
+    "mutation": "Both adapters are read-only; caller owns atomic LP/ledger commits.",
+    "zoneRules": "3+3 shared zones, separate Field Zone, Extra Deck 5, Deck 20–30 at construction, hand 6 with End Phase discard."
+  },
+  "validation": {
+    "focusedTestFile": "tests/lpGainTagDuelPipeline.test.cjs",
+    "expectedFocusedCases": 9,
+    "node": "22",
+    "runtimeRegistration": "pending-explicit-M61-handoff",
+    "certificationStatus": "no-new-certifications",
+    "automaticCertification": false,
+    "inventoryGranted": 0,
+    "liveDiscordGateway": false,
+    "production": false
+  },
+  "limitations": [
+    "The trusted resolver must emit draw and LP-gain events with correct physical UIDs and event boundaries.",
+    "This integration test does not register either trigger in the central resolver or Discord command handler.",
+    "Solemn Wishes and Fire Princess remain outside the certified/playable catalog pending approved admission.",
+    "No merge, deploy, persistent DB write or player-data change."
+  ]
+}
