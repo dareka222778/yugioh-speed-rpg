@@ -1,0 +1,225 @@
+{
+  "runId": "work-20261121T115829-0300-M455-M456-followup",
+  "mission": "M455–M456 follow-up",
+  "owner": "Work principal",
+  "priority": "P1 — corrigir as falhas de fixture dos pipelines Standby/Solemn Wishes → Fire Princess, reforçar idempotência/privacidade 2v2 e fechar a CI sem alterar o resolver reservado.",
+  "status": "released-to-auxiliary-monitor-ci",
+  "startedAt": "2026-11-21T11:58:29-03:00",
+  "endedAt": "2026-11-21T12:10:54.153-03:00",
+  "elapsedMinutes": 12.4,
+  "effectiveWorkMinutes": 9.5,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "4fa2959a588bf963e7a3646d3f7aaf277cd16794",
+  "sharedHeadBeforeCheckpointCommit": "4fa2959a588bf963e7a3646d3f7aaf277cd16794",
+  "branches": [
+    {
+      "mission": "M455",
+      "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
+      "head": "48c3088859742efdb7aaa58f12345f1d7ed974ae",
+      "baseBranch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
+      "pr": 403,
+      "prState": "open",
+      "draft": true,
+      "mergeable": true,
+      "changedFiles": [
+        "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
+        "docs/evidence/m455-standby-lp-atomic-commit.json"
+      ],
+      "changes": [
+        "Separado o snapshot in-memory de planejamento Standby ativo do snapshot limpo usado no teste de persistência.",
+        "Asserção alinhada ao erro real de duel-integrity para IDs de cartas não admitidos.",
+        "Evidência atualizada para documentar o bloqueio fail-closed e ausência de escrita parcial."
+      ],
+      "ci": [
+        {
+          "name": "M455 Standby LP atomic commit",
+          "run": 44916963603,
+          "status": "success",
+          "focusedTests": "3/3"
+        },
+        {
+          "name": "Card Batch Fast",
+          "run": 44916963624,
+          "status": "success"
+        },
+        {
+          "name": "Milestone 1000",
+          "run": 44916963611,
+          "status": "success",
+          "certified": 969,
+          "remaining": 31
+        },
+        {
+          "name": "Engine Validation",
+          "run": 44916963604,
+          "status": "in_progress",
+          "activeJobs": [
+            "npm test",
+            "Extended Soak 600s"
+          ],
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "mission": "M456",
+      "branch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
+      "head": "29f4ad75ee92b2ff1860b03c8e6d8e8edca8a8cb",
+      "baseBranch": "feat/work-m455-standby-lp-atomic-commit-20261121",
+      "pr": 404,
+      "prState": "open",
+      "draft": true,
+      "mergeable": true,
+      "changedFiles": [
+        "tests/solemnWishesFirePrincessPipeline.test.cjs",
+        "docs/evidence/m456-solemn-wishes-fire-princess.json"
+      ],
+      "changes": [
+        "Asserção alinhada ao erro real de identidade de carta não admitida.",
+        "Schema tag_sessions inicializado no SQLite isolado via import de tagStore.",
+        "Adicionado sexto cenário: negação por cópia física de Fire Princess, preservando a cópia do parceiro e um único dano de 500 LP."
+      ],
+      "ci": [
+        {
+          "name": "M456 Solemn Wishes Fire Princess pipeline",
+          "run": 44917374118,
+          "status": "success",
+          "focusedTests": "6/6"
+        },
+        {
+          "name": "Card Batch Fast",
+          "run": 44917374105,
+          "status": "success"
+        },
+        {
+          "name": "Milestone 1000",
+          "run": 44917374086,
+          "status": "success",
+          "certified": 969,
+          "remaining": 31
+        },
+        {
+          "name": "Engine Validation",
+          "run": 44917374101,
+          "status": "in_progress",
+          "activeJobs": [
+            "npm test",
+            "Extended Soak 600s"
+          ],
+          "failures": 0
+        }
+      ]
+    }
+  ],
+  "upstreamPRs": [
+    {
+      "number": 398,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "engineValidation": "success"
+    },
+    {
+      "number": 399,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "engineValidation": "success"
+    },
+    {
+      "number": 400,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "engineValidation": "success"
+    },
+    {
+      "number": 401,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "engineValidation": "success"
+    },
+    {
+      "number": 402,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "engineValidation": "success"
+    }
+  ],
+  "comparisonToMain": {
+    "status": "diverged",
+    "ahead": 707,
+    "behind": 10,
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e"
+  },
+  "sharedCombinedStatus": [],
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "rulesVerifiedInFocusedTests": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "allowlistChanged": false,
+    "playerDataChanged": false,
+    "productionDatabaseTouched": false,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false,
+    "isolatedSqlite": true,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "deploymentApiAvailable": false
+  },
+  "handoff": {
+    "pr": 17,
+    "commentId": 7064591588,
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "status": "awaiting-explicit-release",
+    "modified": false
+  },
+  "scopeReleasedToAuxiliary": {
+    "M455": {
+      "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
+      "files": [
+        "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
+        "docs/evidence/m455-standby-lp-atomic-commit.json",
+        ".github/workflows/m455-standby-lp-atomic-commit.yml"
+      ],
+      "permission": "monitor CI and fix only these files; no runtime/catalog/resolver changes"
+    },
+    "M456": {
+      "branch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
+      "files": [
+        "tests/solemnWishesFirePrincessPipeline.test.cjs",
+        "docs/evidence/m456-solemn-wishes-fire-princess.json",
+        ".github/workflows/m456-solemn-wishes-fire-princess.yml"
+      ],
+      "permission": "monitor CI and fix only these files; no runtime/catalog/resolver changes"
+    }
+  },
+  "nextTask": "Auxiliar acompanha Engine Validation/Extended Soak de #403 e #404; corrige somente os seis arquivos liberados se necessário. Work principal aguarda handoff M61; após liberação, integra os pipelines ao resolver e executa partidas 2v2 reais. Não certificar as cartas enquanto não houver admissão comportamental pelo resolver.",
+  "nextWindow": "2026-11-21T16:58:00-03:00"
+}
