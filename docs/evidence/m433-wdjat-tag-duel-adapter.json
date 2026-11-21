@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "mission": "M433",
+  "runId": "work-20261121T012347-0300-M433",
+  "card": {
+    "name": "A Man with Wdjat",
+    "passcode": "51351302",
+    "konamiCid": 5518,
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5518&ope=2&request_locale=en",
+    "dependency": "M401 privateSetInspection.ts"
+  },
+  "implementation": {
+    "file": "src/wdjatTagDuelAdapter.ts",
+    "sourceCardValidation": "requires a face-up A Man with Wdjat in the resolving team's shared Monster Zones and a physical-seat UID; current team field establishes control, while UID prefix preserves physical ownership even after control change",
+    "resolverSeat": "active[core.current], not the source card's physical owner",
+    "targets": [
+      "opposing face-down backrow",
+      "opposing face-down Field Zone card",
+      "opposing face-down Defense Position monster"
+    ],
+    "publicSlotList": "zone/index only; no UID, card ID, name or physical owner",
+    "staleSelection": "expected UID held server-side and revalidated against the current slot before inspection",
+    "privacy": "M401 projectPrivateSetInspection exposes identity only to resolverSeat; partner, public and target owner are redacted",
+    "triggerWindows": [
+      "Normal Summon: exact pending.kind=summon, actor=core.current, card=source UID and id=51351302",
+      "Controller Standby: exact active standby-flow choice for task wdjat:<sourceUid>:<turn>, with matching actor/turn; never checks a nonexistent phase='standby'"
+    ]
+  },
+  "tests": {
+    "file": "tests/wdjatTagDuelAdapter.test.cjs",
+    "expected": 28,
+    "coverage": [
+      "TagDuel active representative mapping",
+      "source card validation",
+      "opposing set slot filtering",
+      "no identity in public slot descriptors",
+      "stale slot UID revalidation",
+      "physical owner from UID prefix",
+      "resolver-only projection",
+      "partner/public/target-owner redaction",
+      "no state mutation",
+      "restore exact card snapshot",
+      "actual createTagDuel state with inactive source owner seat 0 and active resolver seat 2",
+      "actual TagDuel reserves/core.players mapping and target physical owner seat 1",
+      "Normal Summon event must match pending kind, actor, source UID and card ID",
+      "Standby inspection must match the exact task, turn and choice actor",
+      "unrelated Standby tasks cannot borrow Wdjat inspection",
+      "controlled Wdjat remains valid when physical owner differs from controller team"
+    ]
+  },
+  "limitations": [
+    "Adapter over M401 privateSetInspection helper; still not registered in monsterEffects.ts or duelEngineCurrent.ts.",
+    "M61 handoff remains pending; no command handler or live Discord gateway test.",
+    "No card certification, catalog admission, inventory grant or production change."
+  ]
+}
