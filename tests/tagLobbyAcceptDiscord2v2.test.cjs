@@ -120,8 +120,8 @@ test('four-human TagDuel lobby accepts through Discord and starts without granti
   assertOwnerRules(record.state);
   assert.equal(tag.tagDecisionMember(record.state).id.length > 0, true);
   assert.equal(new Set(tag.tagInventory(record.state).map(card => card.uid)).size, tag.tagInventory(record.state).length);
-  assert.equal(record.members.filter(member => member.team === 0).length, 2);
-  assert.equal(record.members.filter(member => member.team === 1).length, 2);
+  assert.equal(record.state.members.filter(member => member.team === 0).length, 2);
+  assert.equal(record.state.members.filter(member => member.team === 1).length, 2);
   assert.equal(database.db.prepare('SELECT COUNT(*) AS n FROM tag_members WHERE tag_id=?').get(record.id).n, 4);
 
   const publicPanel = ui.tagPublicMessage(record);
