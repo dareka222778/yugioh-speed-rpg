@@ -31,7 +31,7 @@
   },
   "tests": {
     "file": "tests/amazonessChainMasterTagDuelAdapter.test.cjs",
-    "expectedCases": 18,
+    "expectedCases": 22,
     "behavioralGroups": [
       "actual four-seat TagDuel state and active representatives",
       "battle-destruction event and shared Graveyard validation",
@@ -41,7 +41,8 @@
       "private inspection and transfer projections",
       "physical owner preservation when holder changes",
       "resolution-time monster availability and stale UID rejection",
-      "turn, active-seat, LP and duplicate-UID stale guards"
+      "turn, active-seat, LP and duplicate-UID stale guards",
+      "forged-plan binding rejection and active-seat rotation"
     ]
   },
   "newCertifications": 0,

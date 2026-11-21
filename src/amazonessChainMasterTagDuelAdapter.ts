@@ -148,6 +148,14 @@ function readPlanHand(
   game: TagDuel,
   plan: TagAmazonessChainMasterPlan,
 ): RuleResult<PrivateHandCard[]> {
+  if (!plan || !plan.effect || (plan.team !== 0 && plan.team !== 1) ||
+      !isSeat(plan.effectPlayerSeat) || !isSeat(plan.opponentSeat) ||
+      plan.effect.effectPlayerSeat !== plan.effectPlayerSeat ||
+      plan.effect.opponentSeat !== plan.opponentSeat ||
+      !plan.effect.triggerCardUid.trim() ||
+      teamOfSeat(plan.effect.triggerPhysicalOwnerSeat) !== plan.team) {
+    return fail('invalid-chain-master-plan');
+  }
   if (!game || game.mode !== 'tag-classic' || !game.core || !Array.isArray(game.core.players) ||
       game.core.players.length !== 2 || !Array.isArray(game.active) || game.active.length !== 2) {
     return fail('classic-tag-duel-required');

@@ -230,6 +230,15 @@ test('turn and active representative changes invalidate the plan', () => {
   assert.deepEqual(projectTagAmazonessChainMasterInspection(game, plan.value, 2), {
     ok: false, reason: 'stale-chain-master-turn'
   });
+
+  const rotated = makeGame();
+  const rotatedPlan = makePlan(rotated);
+  assert.equal(rotatedPlan.ok, true);
+  rotated.active[0] = 0;
+  rotated.cursor = 0;
+  assert.deepEqual(projectTagAmazonessChainMasterInspection(rotated, rotatedPlan.value, 2), {
+    ok: false, reason: 'stale-chain-master-resolver-seat'
+  });
 });
 
 test('unknown hand-card metadata fails closed', () => {
@@ -291,4 +300,14 @@ test('public summary never includes card identities or private hand data', () =>
   const summary = tagAmazonessChainMasterPublicSummary();
   assert.match(summary, /identidades de cartas privadas não são exibidas publicamente/i);
   assert.equal(summary.includes(AMAZONESS_CHAIN_MASTER_ID), false);
+});
+
+test('a forged plan cannot change the resolver or opponent seat bindings', () => {
+  const game = makeGame();
+  const plan = makePlan(game);
+  assert.equal(plan.ok, true);
+  const forged = { ...plan.value, opponentSeat: 1 };
+  assert.deepEqual(projectTagAmazonessChainMasterInspection(game, forged, 2), {
+    ok: false, reason: 'invalid-chain-master-plan'
+  });
 });
