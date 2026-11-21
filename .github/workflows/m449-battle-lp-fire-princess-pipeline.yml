@@ -1,0 +1,34 @@
+name: M449 Battle LP to Fire Princess TagDuel pipeline
+on:
+  push:
+    branches:
+      - feat/work-m449-battle-lp-fire-princess-pipeline-20261121
+    paths:
+      - 'tests/battleLpFirePrincessPipeline.test.cjs'
+      - 'docs/evidence/m449-battle-lp-fire-princess-pipeline.json'
+      - '.github/workflows/m449-battle-lp-fire-princess-pipeline.yml'
+  pull_request:
+    paths:
+      - 'tests/battleLpFirePrincessPipeline.test.cjs'
+      - 'docs/evidence/m449-battle-lp-fire-princess-pipeline.json'
+      - '.github/workflows/m449-battle-lp-fire-princess-pipeline.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  battle-lp-fire-princess-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run battle LP to Fire Princess pipeline behavior tests
+        run: node --test tests/battleLpFirePrincessPipeline.test.cjs

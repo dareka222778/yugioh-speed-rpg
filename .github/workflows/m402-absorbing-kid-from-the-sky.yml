@@ -1,0 +1,29 @@
+name: M402 Absorbing Kid from the Sky
+
+on:
+  push:
+    branches:
+      - feat/work-m402-absorbing-kid-battle-lp-20261120
+  pull_request:
+    paths:
+      - "src/absorbingKidFromTheSky.ts"
+      - "tests/absorbingKidFromTheSky.test.cjs"
+      - "docs/evidence/m402-absorbing-kid-from-the-sky.json"
+      - ".github/workflows/m402-absorbing-kid-from-the-sky.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/absorbingKidFromTheSky.test.cjs

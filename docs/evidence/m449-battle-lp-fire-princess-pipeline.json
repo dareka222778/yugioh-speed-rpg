@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "mission": "M449",
+  "runId": "work-20261121T105500-0300-M449",
+  "reviewedAt": "2026-11-21",
+  "purpose": "Behavioral integration of the M402/M443 battle-destruction LP recovery adapters with the M403/M446 Fire Princess LP-gain adapter in TagDuel 2v2.",
+  "upstream": {
+    "battleRecovery": "M402/M443 — Absorbing Kid from the Sky and Guardian Angel Joan",
+    "lpGainBurn": "M403/M446 — Fire Princess",
+    "pipelineReference": "M448 — Solemn Wishes to Fire Princess"
+  },
+  "cards": [
+    {
+      "name": "Absorbing Kid from the Sky",
+      "id": "49771608",
+      "konamiDatabaseCid": 6034,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6034&ope=2&request_locale=en"
+    },
+    {
+      "name": "Guardian Angel Joan",
+      "id": "68007326",
+      "konamiDatabaseCid": 5899,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5899&ope=2&request_locale=en"
+    },
+    {
+      "name": "Fire Princess",
+      "id": "64752646",
+      "sourceEvidence": "M403 official card evidence; not newly admitted or certified"
+    }
+  ],
+  "contract": [
+    "A trusted battle-destruction event is resolved against the physical inventory and actual destination.",
+    "Battle LP recovery is committed to the source controller team's shared LP.",
+    "Fire Princess consumes the positive LP-gain event after the gain commit.",
+    "Fire Princess damage is committed separately to the opposing team's shared LP.",
+    "Physical owner seats remain distinct from current controller teams.",
+    "Battle and LP-gain idempotency ledgers are independent, even when they share an event ID."
+  ],
+  "tests": {
+    "file": "tests/battleLpFirePrincessPipeline.test.cjs",
+    "expectedCases": 10,
+    "groups": [
+      "Absorbing Kid Level-based recovery to Fire Princess",
+      "Guardian Angel Joan original-ATK recovery to Fire Princess",
+      "controller-team routing versus physical owner seat",
+      "multiple Fire Princess copies",
+      "replacement destination and zero-gain suppression",
+      "per-copy chain negation",
+      "separate battle and LP ledgers with replay safety",
+      "read-only adapters before caller commits",
+      "public summary privacy",
+      "shared LP overkill handling"
+    ]
+  },
+  "ownerRules": {
+    "mainDeck": "20-30",
+    "monsterZones": 3,
+    "backrowZones": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "extraDeck": 5
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "catalogChanged": false,
+  "centralResolverIntegrated": false,
+  "discordLiveValidated": false,
+  "persistentPlayerDataChanged": false,
+  "productionChanged": false,
+  "limitations": [
+    "This verifies the adapter-to-adapter event contract, not registration in the central resolver.",
+    "The trusted battle resolver must provide the committed battle event; this test simulates the caller's atomic LP commits.",
+    "No live Discord gateway or production database was exercised."
+  ]
+}

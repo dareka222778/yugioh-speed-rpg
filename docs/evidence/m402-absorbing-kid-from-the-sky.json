@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "mission": "M402",
+  "card": {
+    "id": "49771608",
+    "name": "Absorbing Kid from the Sky",
+    "konamiDatabaseCid": 6034,
+    "attribute": "LIGHT",
+    "monsterType": "Fairy",
+    "level": 4,
+    "atk": 1300,
+    "def": 1000,
+    "officialTextVerified": true,
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6034&ope=2&request_locale=en",
+    "officialTextSummary": "After this monster destroys another monster by battle and that monster is sent to the Graveyard, its controller gains 300 Life Points for each Level of the destroyed monster.",
+    "firstTcgRelease": "2004-06-01",
+    "firstTcgSet": "Ancient Sanctuary (AST-072)",
+    "historicalEligibility": "eligible-before-2004-09-30",
+    "cardPasswordSource": "https://ftp.yugipedia.com/wiki/Absorbing_Kid_from_the_Sky",
+    "cardPasswordCrossCheck": "49771608"
+  },
+  "behavior": {
+    "trigger": "The source card itself must be the monster that destroyed the target by battle.",
+    "sourceVisibility": "The source must be face-up when the battle destruction is established; a Set monster that flips face-up during the Damage Step may qualify.",
+    "destination": "The destroyed monster must actually reach the Graveyard; banish, hand, Deck, Extra Deck, or remaining on the field do not qualify.",
+    "gainFormula": "destroyedMonsterLevel * 300",
+    "recipient": "The source's current controller team, not its physical owner seat.",
+    "battleRoles": [
+      "attacker",
+      "defender"
+    ],
+    "oncePerTurn": false,
+    "2v2": "Apply recovery to one shared team Life Point total while retaining physical owner seat and UIDs for identity/audit.",
+    "sharedGate": "Both cards require the source card to be the destroyer, battle destruction, face-up status at the destruction event, and actual destination in the Graveyard.",
+    "cardSpecificFormula": {
+      "49771608": "destroyedMonsterLevel * 300",
+      "68007326": "destroyedMonsterOriginalAtk"
+    }
+  },
+  "validation": {
+    "focusedTestFile": "tests/absorbingKidFromTheSky.test.cjs",
+    "expectedFocusedCases": 51,
+    "runtimeIntegration": "pending-explicit-M61-handoff",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "This primitive is not registered in monsterEffects.ts or duelEngineCurrent.ts.",
+    "No live Discord server interaction was performed.",
+    "Historical first TCG release is verified from the official database; OCG regional first-release reconciliation remains separate.",
+    "The helper resolves one already-established battle event; the duel engine must invoke it exactly once per distinct event."
+  ],
+  "relatedCards": [
+    {
+      "name": "Guardian Angel Joan",
+      "id": "68007326",
+      "konamiDatabaseCid": 5899,
+      "attribute": "LIGHT",
+      "monsterType": "Fairy",
+      "level": 7,
+      "atk": 2800,
+      "def": 2000,
+      "officialTextVerified": true,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5899&ope=2&request_locale=en",
+      "officialTextSummary": "When this monster destroys another monster by battle and sends it to the Graveyard, it recovers LP equal to that monster's original ATK in the Graveyard.",
+      "firstTcgRelease": "2004-03-01",
+      "firstTcgSet": "Invasion of Chaos (IOC-087)",
+      "cardPasswordSource": "https://ftp.yugipedia.com/wiki/Guardian_Angel_Joan",
+      "cardPasswordCrossCheck": "68007326",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "family": "battle-destruction-life-point-recovery"
+}
