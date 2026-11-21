@@ -63,7 +63,8 @@ export function commitTagDuelLpGainPipelinePlan(
     return fail('invalid-expected-session-revision');
   }
   if (!plan || !validId(plan.eventId) || !validId(plan.firePrincessEventId)
-    || plan.firePrincessEventId !== plan.eventId + ':fire-princess') {
+    || plan.firePrincessEventId !== plan.eventId + ':fire-princess'
+    || !['ready', 'duplicate-event'].includes(plan.status)) {
     return fail('invalid-lp-pipeline-plan');
   }
   const before = tuple(plan.teamLifePointsBefore);
@@ -109,7 +110,14 @@ export function commitTagDuelLpGainPipelinePlan(
 
     const expectedSource = [...ledger.source, plan.eventId];
     const expectedFire = [...ledger.fire, plan.firePrincessEventId];
-    if (!sameIds(plan.nextSourceProcessedEventIds, expectedSource)
+    if (expectedSource.length > 4096 || expectedFire.length > 4096) {
+      return fail('lp-event-ledger-limit-reached');
+    }
+    const fireAfter = plan.firePrincess && tuple(plan.firePrincess.teamLifePointsAfterDamage);
+    if (plan.status !== 'ready' || !plan.firePrincess
+      || plan.firePrincess.eventId !== plan.firePrincessEventId
+      || !fireAfter || !same(fireAfter, after)
+      || !sameIds(plan.nextSourceProcessedEventIds, expectedSource)
       || !sameIds(plan.nextFirePrincessProcessedEventIds, expectedFire)) {
       return fail('lp-pipeline-plan-ledger-does-not-match-persisted-state');
     }
