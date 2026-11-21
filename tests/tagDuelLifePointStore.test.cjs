@@ -90,7 +90,18 @@ test('a new event with a stale Discord/session revision cannot overwrite the new
   const first = commitTagDuelLpGainPipelinePlan(record.id, record.revision, firstPlan.value);
   assert.equal(first.status, 'committed');
   const persisted = store.getTag(record.id);
-  const secondPlan = makePlan(persisted.state, 'm454:second', [4500, 4000], [5000, 4000]);
+  const saved = ledger(record.id);
+  const sourceIds = JSON.parse(saved.source_event_ids);
+  const fireIds = JSON.parse(saved.fire_princess_event_ids);
+  const secondPlan = planTagDuelLpGainFirePrincessPipeline(
+    persisted.state,
+    {
+      eventId: 'm454:second', gainingTeam: 0, lpGained: 500,
+      teamLifePointsBefore: [4500, 4000], teamLifePointsAfterGain: [5000, 4000]
+    },
+    sourceIds,
+    fireIds
+  );
   assert.equal(secondPlan.ok, true);
   assert.deepEqual(commitTagDuelLpGainPipelinePlan(record.id, record.revision, secondPlan.value), {
     ok: false, reason: 'stale-session-revision'
@@ -108,6 +119,10 @@ test('rejects a stale LP snapshot even when the session revision matches', () =>
     status: 'ready', teamLifePointsBefore: [4000, 4000], teamLifePointsAfter: [4500, 4000],
     nextSourceProcessedEventIds: ['m454:stale-lp'],
     nextFirePrincessProcessedEventIds: ['m454:stale-lp:fire-princess'], firePrincess: null
+  };
+  forged.firePrincess = {
+    eventId: forged.firePrincessEventId,
+    teamLifePointsAfterDamage: [4500, 4000]
   };
   assert.deepEqual(commitTagDuelLpGainPipelinePlan(record.id, record.revision, forged), {
     ok: false, reason: 'stale-team-life-point-snapshot'
@@ -156,7 +171,9 @@ test('finished sessions reject new LP transactions without changing the stored s
   assert.deepEqual(commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan.value), {
     ok: false, reason: 'tag-session-not-playing'
   });
-  assert.equal(store.getTag(record.id).revision, 7);
+  const stored = database.db.prepare('SELECT revision,state FROM tag_sessions WHERE id=?').get(record.id);
+  assert.equal(stored.revision, 7);
+  assert.equal(JSON.parse(stored.state).core.phase, 'main');
 });
 
 after(() => {
