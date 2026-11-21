@@ -8,19 +8,39 @@ export type DuelTeam=0|1;
 export type PhysicalCardRef={readonly uid:string;readonly id:string};
 export type ThreeHumpFieldCard=PhysicalCardRef&{readonly faceUp:boolean;readonly owner:DuelTeam};
 export type ThreeHumpSeatZones={readonly deck:PhysicalCardRef[];readonly hand:PhysicalCardRef[]};
-export type ThreeHumpState={
-  readonly field:ThreeHumpFieldCard[];
-  readonly grave:PhysicalCardRef[];
-  /** Adapt core.players[team] for active seats and reserves[seat] for inactive seats. */
-  readonly seats:Readonly<Record<PhysicalSeat,ThreeHumpSeatZones>>;
-  readonly activeSeat:PhysicalSeat;
-  readonly activeTeam:DuelTeam;
+export type ThreeHumpState={readonly field:ThreeHumpFieldCard[];readonly grave:PhysicalCardRef[];readonly seats:Readonly<Record<PhysicalSeat,ThreeHumpSeatZones>>;readonly activeSeat:PhysicalSeat;readonly activeTeam:DuelTeam};
+export type TagDuelLike={
+  readonly mode:'tag-classic';readonly active:readonly [number,number];readonly cursor:number;
+  readonly reserves:Readonly<Record<string,{readonly deck:PhysicalCardRef[];readonly hand:PhysicalCardRef[]}>>;
+  readonly core:{readonly current:number;readonly players:readonly [
+    {readonly monsters:ThreeHumpFieldCard[];readonly grave:PhysicalCardRef[];readonly deck:PhysicalCardRef[];readonly hand:PhysicalCardRef[]},
+    {readonly monsters:ThreeHumpFieldCard[];readonly grave:PhysicalCardRef[];readonly deck:PhysicalCardRef[];readonly hand:PhysicalCardRef[]}
+  ]};
 };
 export type ThreeHumpActivation={readonly sourceUid:string;readonly activeSeat:PhysicalSeat;readonly activeTeam:DuelTeam;readonly eligibleUids:readonly string[]};
 export type ThreeHumpPaidCost={readonly sourceUid:string;readonly activeSeat:PhysicalSeat;readonly activeTeam:DuelTeam;readonly tributedUids:readonly string[];status:'paid'|'resolved'};
 export type ThreeHumpDrawResolution={readonly activeSeat:PhysicalSeat;readonly drawn:readonly PhysicalCardRef[];readonly deckOut:boolean;readonly negated:boolean;readonly deckSizeAfter:number;readonly handSizeAfter:number;readonly costPaid:true};
-function isSeat(value:number):value is PhysicalSeat{return Number.isInteger(value)&&value>=0&&value<=3;}
+function isSeat(v:number):v is PhysicalSeat{return Number.isInteger(v)&&v>=0&&v<=3;}
 function physicalSeatFromUid(uid:string):PhysicalSeat|null{const m=/^m([0-3]):/.exec(uid);return m?Number(m[1]) as PhysicalSeat:null;}
+
+/** Project the real TagDuel shape: core.players[team] belongs to active[team],
+ * while inactive physical seats live in reserves[seat]. The active player is
+ * active[core.current], not cursor when an overflow-return seat is pending. */
+export function threeHumpStateFromTagDuel(s:TagDuelLike):ThreeHumpState{
+  if(!s||s.mode!=='tag-classic'||!Array.isArray(s.active)||!s.reserves||!s.core||!Array.isArray(s.core.players)||s.core.players.length!==2)throw new TypeError('3-Hump Lacooda requires a classic TagDuel state.');
+  const team=s.core.current;
+  if((team!==0&&team!==1)||s.cursor%2!==team)throw new Error('3-Hump Lacooda TagDuel team/cursor is inconsistent.');
+  const activeSeat=s.active[team];
+  if(!isSeat(activeSeat)||activeSeat%2!==team)throw new Error('3-Hump Lacooda active representative is invalid.');
+  const seats={} as Record<PhysicalSeat,ThreeHumpSeatZones>;
+  for(const seat of [0,1,2,3] as const){
+    const t=(seat%2) as DuelTeam;
+    const held=s.active[t]===seat?s.core.players[t]:s.reserves[String(seat)];
+    if(!held||!Array.isArray(held.deck)||!Array.isArray(held.hand))throw new Error('3-Hump Lacooda cannot resolve physical seat '+seat+' zones.');
+    seats[seat]={deck:held.deck,hand:held.hand};
+  }
+  return {field:s.core.players[team].monsters,grave:s.core.players[team].grave,seats,activeSeat,activeTeam:team};
+}
 function assertState(state:ThreeHumpState):void{
   if(!state||!Array.isArray(state.field)||!Array.isArray(state.grave)||!state.seats)throw new TypeError('3-Hump Lacooda state is incomplete.');
   if(!isSeat(state.activeSeat)||(state.activeTeam!==0&&state.activeTeam!==1))throw new RangeError('3-Hump Lacooda active seat/team is invalid.');
@@ -29,7 +49,7 @@ function assertState(state:ThreeHumpState):void{
   const add=(card:PhysicalCardRef,zone:string,expectedOwner?:PhysicalSeat):void=>{
     if(!card||typeof card.uid!=='string'||!card.uid||typeof card.id!=='string'||!card.id)throw new TypeError('3-Hump Lacooda '+zone+' contains an invalid physical card.');
     const owner=physicalSeatFromUid(card.uid);
-    if(owner===null)throw new Error('3-Hump Lacooda card UID has no physical seat prefix.');
+    if(expectedOwner!==undefined&&owner===null)throw new Error('3-Hump Lacooda card UID has no physical seat prefix.');
     if(expectedOwner!==undefined&&owner!==expectedOwner)throw new Error('3-Hump Lacooda '+zone+' contains a card owned by another physical seat.');
     if(seen.has(card.uid))throw new Error('3-Hump Lacooda state contains a duplicate physical UID.');
     seen.add(card.uid);
@@ -48,6 +68,7 @@ export function prepareThreeHumpLacooda(state:ThreeHumpState,sourceUid:string):T
   if(state.seats[state.activeSeat].deck.length<THREE_HUMP_LACOODA_DRAW_COUNT)return null;
   const e=identityTributeEligibility(state.field,sourceUid,THREE_HUMP_LACOODA_ID,THREE_HUMP_LACOODA_REQUIRED_COPIES,THREE_HUMP_LACOODA_TRIBUTE_COUNT);
   if(!e)return null;
+  if(e.candidates.some(c=>physicalSeatFromUid(c.uid)===null))throw new Error('3-Hump Lacooda field copy has no physical seat UID.');
   return Object.freeze({sourceUid,activeSeat:state.activeSeat,activeTeam:state.activeTeam,eligibleUids:Object.freeze(e.candidates.map(c=>c.uid))});
 }
 export function payThreeHumpLacoodaCost(state:ThreeHumpState,activation:ThreeHumpActivation,selectedUids:readonly string[]):ThreeHumpPaidCost|null{
