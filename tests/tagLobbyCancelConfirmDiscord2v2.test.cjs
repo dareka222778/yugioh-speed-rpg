@@ -127,6 +127,7 @@ function assertOwnerRules(state) {
   for (const team of state.core.players) {
     assert.ok(team.monsters.length <= 3);
     assert.ok(team.backrow.length <= 3);
+    assert.ok(Object.prototype.hasOwnProperty.call(team, 'field'), 'Field Zone must remain separate from the three backrow slots');
   }
 }
 
