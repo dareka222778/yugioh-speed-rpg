@@ -1,0 +1,38 @@
+name: M452 TagDuel LP gain to Fire Princess pipeline
+on:
+  push:
+    branches:
+      - feat/work-m452-lp-gain-fire-princess-pipeline-20261121
+    paths:
+      - 'src/tagDuelLpGainFirePrincessPipeline.ts'
+      - 'tests/tagDuelLpGainFirePrincessPipeline.test.cjs'
+      - 'docs/evidence/m452-lp-gain-fire-princess-pipeline.json'
+      - '.github/workflows/m452-lp-gain-fire-princess-pipeline.yml'
+  pull_request:
+    paths:
+      - 'src/tagDuelLpGainFirePrincessPipeline.ts'
+      - 'tests/tagDuelLpGainFirePrincessPipeline.test.cjs'
+      - 'docs/evidence/m452-lp-gain-fire-princess-pipeline.json'
+      - '.github/workflows/m452-lp-gain-fire-princess-pipeline.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lp-gain-fire-princess-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m452-lp-gain-fire-princess-pipeline.json', 'utf8'))"
+      - name: Run LP gain to Fire Princess pipeline behavior tests
+        run: node --test tests/tagDuelLpGainFirePrincessPipeline.test.cjs

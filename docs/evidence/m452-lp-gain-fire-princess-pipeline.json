@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "mission": "M452",
+  "runId": "work-20261121T105500-0300-M452",
+  "reviewedAt": "2026-11-21",
+  "purpose": "Generic, read-only TagDuel pipeline that composes any committed positive LP-gain event with the Fire Princess trigger and returns one final LP tuple plus two idempotency ledgers.",
+  "upstream": [
+    "M403/M446 Fire Princess adapter",
+    "M451 optimistic LP transaction planner",
+    "M448 draw, M449 battle and M450 Standby source pipelines"
+  ],
+  "contract": [
+    "Validates that the declared LP gain equals the gaining team's before/after tuple delta.",
+    "Plans the source LP tuple against the current session snapshot.",
+    "Projects the post-gain LP tuple into a read-only TagDuel view for Fire Princess resolution.",
+    "Plans the Fire Princess damage tuple under a distinct namespaced event ID.",
+    "Returns the final LP tuple and both ledgers together without mutating game or player state.",
+    "Rejects partial ledger commits so a retry cannot apply a duplicate burn.",
+    "Duplicate retries return the current LP tuple unchanged.",
+    "Allows a source event to also change the opposing team's LP before Fire Princess resolves."
+  ],
+  "tests": {
+    "file": "tests/tagDuelLpGainFirePrincessPipeline.test.cjs",
+    "expectedCases": 14,
+    "groups": [
+      "gain then Fire Princess burn",
+      "no eligible copy",
+      "zero gain idempotency",
+      "multiple Fire Princess copies",
+      "team 1 routing",
+      "per-copy negation",
+      "full retry deduplication",
+      "partial source ledger rejection",
+      "partial Fire Princess ledger rejection",
+      "stale snapshot rejection",
+      "gain delta consistency",
+      "two-team source LP change",
+      "event ID namespace length",
+      "public privacy summary"
+    ]
+  },
+  "ownerRules": {
+    "mainDeck": "20-30",
+    "monsterZones": 3,
+    "backrowZones": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "extraDeck": 5
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "catalogChanged": false,
+  "centralResolverIntegrated": false,
+  "discordLiveValidated": false,
+  "persistentPlayerDataChanged": false,
+  "productionChanged": false,
+  "limitations": [
+    "This is a reusable adapter pipeline, not central resolver registration or a database transaction implementation.",
+    "The trusted session layer must atomically persist the final LP tuple and both returned event ledgers.",
+    "No live Discord gateway, production database, merge or deployment is exercised."
+  ]
+}
