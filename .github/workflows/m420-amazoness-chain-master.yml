@@ -1,0 +1,29 @@
+name: M420 Amazoness Chain Master focused validation
+
+on:
+  pull_request:
+    paths:
+      - 'src/amazonessChainMaster.ts'
+      - 'tests/amazonessChainMaster.test.cjs'
+      - 'docs/evidence/m420-amazoness-chain-master.json'
+      - '.github/workflows/m420-amazoness-chain-master.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  amazoness-chain-master:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run Amazoness Chain Master behavior tests
+        run: node --test tests/amazonessChainMaster.test.cjs
