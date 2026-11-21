@@ -1,0 +1,58 @@
+{
+  "format": 1,
+  "mission": "M447",
+  "runId": "work-20261121T102656-0300-M447",
+  "priority": "P1",
+  "base": {
+    "branch": "feat/work-m406-solemn-wishes-draw-lp-20261120",
+    "sha": "f34e980085b4089f6e78a6601ac46914f68950b3"
+  },
+  "card": {
+    "id": "35346968",
+    "name": "Solemn Wishes",
+    "portugueseName": "Desejos Solenes",
+    "konamiDatabaseCid": 5125,
+    "type": "Continuous Trap",
+    "officialText": "Each time you draw a card(s), you gain 500 LP.",
+    "officialTextVerified": true,
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5125&ope=2",
+    "firstTcgRelease": "2002-10-20",
+    "firstTcgSet": "Pharaoh's Servant (PSV-055)",
+    "historicalEligibility": "eligible-before-2004-09-30"
+  },
+  "behavior": {
+    "trigger": "One committed draw event for one physical drawing seat.",
+    "gain": "500 LP per eligible face-up copy; drawing multiple cards in one event does not multiply gain per card.",
+    "eligibility": "Current controller team equals drawing team, card remains face-up in shared backrow, and Trap effects are not negated.",
+    "negation": "Checks continuous Trap negation through continuousTrapsNegated and per-copy chain-negation UIDs from trusted chain context.",
+    "ownership": "Physical owner seat is derived from the stable m0..m3 UID; current controller team determines LP routing.",
+    "eventIdentity": "The same draw event ID is idempotent; distinct draw events can resolve again in the same turn.",
+    "downstreamContract": "Result retains eventId, gainingTeam, opposingTeam, lpGained and teamLifePointsAfterGain for the M403 Fire Princess consumer.",
+    "mutation": "Read-only adapter; caller atomically commits LP and event ledger."
+  },
+  "validation": {
+    "focusedTestFile": "tests/solemnWishesTagDuelAdapter.test.cjs",
+    "expectedFocusedCases": 26,
+    "node": "22",
+    "build": "npm ci && npm run check && npm run build",
+    "discord": "offline TagDuel event/visibility contract; no live gateway test",
+    "runtimeRegistration": "pending-explicit-M61-handoff",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "The trusted resolver must provide the physical drawing seat and drawn-card UIDs; the adapter does not invent draw events.",
+    "This PR does not register the draw trigger in the central resolver or Discord command handler.",
+    "Solemn Wishes remains outside the certified/playable catalog until approved admission and resolver integration.",
+    "No persistent DB write, player-data change, inventory grant, certification, live Discord test, merge or deployment."
+  ],
+  "ownerRules": {
+    "deck": "20–30 cards at construction; adapter rejects a live Deck above 30 but does not impose a minimum after draws",
+    "handLimit": "6 with discard at End Phase",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "extraDeckLimit": 5
+  }
+}
