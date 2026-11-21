@@ -1,0 +1,34 @@
+name: M431 Flip Search Cards
+on:
+  push:
+    branches:
+      - feat/work-m431-flip-search-cards-20261121
+    paths:
+      - "src/flipSearchCards.ts"
+      - "tests/flipSearchCards.test.cjs"
+      - "docs/evidence/m431-flip-search-cards.json"
+      - ".github/workflows/m431-flip-search-cards.yml"
+  pull_request:
+    branches:
+      - feat/work-m368-search-deck-top-destination-20261118
+    paths:
+      - "src/flipSearchCards.ts"
+      - "tests/flipSearchCards.test.cjs"
+      - "docs/evidence/m431-flip-search-cards.json"
+      - ".github/workflows/m431-flip-search-cards.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/flipSearchCards.test.cjs
