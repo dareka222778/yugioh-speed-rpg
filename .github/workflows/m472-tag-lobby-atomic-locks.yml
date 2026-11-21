@@ -1,0 +1,36 @@
+name: M472 TagDuel lobby atomic lock invariants
+on:
+  push:
+    branches:
+      - feat/work-m472-tag-lobby-atomic-locks-20261121
+    paths:
+      - 'tests/tagLobbyAtomicLocks2v2.test.cjs'
+      - 'docs/evidence/m472-tag-lobby-atomic-locks.json'
+      - '.github/workflows/m472-tag-lobby-atomic-locks.yml'
+  pull_request:
+    paths:
+      - 'tests/tagLobbyAtomicLocks2v2.test.cjs'
+      - 'docs/evidence/m472-tag-lobby-atomic-locks.json'
+      - '.github/workflows/m472-tag-lobby-atomic-locks.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-lobby-atomic-locks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m472-tag-lobby-atomic-locks.json', 'utf8'))"
+      - name: Run TagDuel lobby atomic lock tests
+        run: node --test tests/tagLobbyAtomicLocks2v2.test.cjs
