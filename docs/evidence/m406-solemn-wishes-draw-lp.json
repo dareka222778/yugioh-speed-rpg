@@ -1,0 +1,44 @@
+{
+  "format": 1,
+  "mission": "M406",
+  "runId": "work-20261120T051139-0300-M406",
+  "card": {
+    "name": "Solemn Wishes",
+    "portugueseName": "Desejos Solenes",
+    "id": "35346968",
+    "konamiDatabaseCid": 5125,
+    "type": "Continuous Trap",
+    "officialText": "Each time you draw a card(s), you gain 500 LP.",
+    "officialTextVerified": true,
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5125&ope=2",
+    "firstTcgRelease": "2002-10-20",
+    "firstTcgSet": "Pharaoh's Servant (PSV-055)",
+    "firstTcgReleaseVerifiedByOfficialDatabase": true,
+    "historicalCutoff": "2004-09-30",
+    "eligibleByFirstTcgRelease": true
+  },
+  "behavior": {
+    "gainPerEligibleCopyPerDrawEvent": 500,
+    "cardDrawCountDoesNotMultiplyGainWithinOneEvent": true,
+    "eligibleOnlyWhen": [
+      "at least one card is drawn in the event",
+      "the draw event belongs to the card's current controller team",
+      "the card remains face-up in the Spell/Trap Zone at resolution",
+      "the effect is not negated"
+    ],
+    "multipleEligibleCopiesStack": true,
+    "physicalOwnerSeatIsPreservedSeparatelyFromControllerTeam": true,
+    "sameEventIdIsIdempotent": true,
+    "distinctDrawEventIdsCanResolveAgain": true,
+    "resultMatchesFirePrincessLpGainEventContract": true,
+    "lifePointsAreNotCappedAt8000": true
+  },
+  "validation": {
+    "implementation": "isolated pure helper with focused unit tests",
+    "integrationStatus": "not-registered-in-main-resolver",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  }
+}
