@@ -1,0 +1,28 @@
+name: M407 The Immortal of Thunder LP Swing
+on:
+  push:
+    branches:
+      - feat/work-m407-immortal-of-thunder-lp-swing-20261120
+  pull_request:
+    paths:
+      - "src/immortalOfThunder.ts"
+      - "tests/immortalOfThunder.test.cjs"
+      - "docs/evidence/m407-immortal-of-thunder.json"
+      - ".github/workflows/m407-immortal-of-thunder.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/immortalOfThunder.test.cjs
