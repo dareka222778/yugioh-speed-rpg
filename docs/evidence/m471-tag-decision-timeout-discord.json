@@ -75,5 +75,9 @@
     "merge": false,
     "deploy": false,
     "backupVerified": false
+  },
+  "synchronization": {
+    "sharedHeadIncluded": "211fa04e0f034dc7f654dd124c51dfff1777f18f",
+    "method": "merge commit with shared branch as first parent and previous M471 HEAD as second parent; force-with-lease expected the previous branch SHA"
   }
 }
