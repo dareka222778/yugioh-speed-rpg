@@ -1,0 +1,36 @@
+name: M457 TagDuel LP pipeline seat matrix
+on:
+  push:
+    branches:
+      - feat/work-m457-tag-lp-pipeline-seat-matrix-20261121
+    paths:
+      - 'tests/tagDuelLpPipelineSeatMatrix.test.cjs'
+      - 'docs/evidence/m457-tag-duel-lp-pipeline-seat-matrix.json'
+      - '.github/workflows/m457-tag-duel-lp-pipeline-seat-matrix.yml'
+  pull_request:
+    paths:
+      - 'tests/tagDuelLpPipelineSeatMatrix.test.cjs'
+      - 'docs/evidence/m457-tag-duel-lp-pipeline-seat-matrix.json'
+      - '.github/workflows/m457-tag-duel-lp-pipeline-seat-matrix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tagduel-lp-seat-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m457-tag-duel-lp-pipeline-seat-matrix.json', 'utf8'))"
+      - name: Run TagDuel 4x4 physical-seat matrix
+        run: node --test tests/tagDuelLpPipelineSeatMatrix.test.cjs
