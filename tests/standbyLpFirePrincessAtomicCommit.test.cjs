@@ -13,7 +13,7 @@ const database = require('../dist/database');
 const store = require('../dist/tagStore');
 const tag = require('../dist/tagDuel');
 const { rulesFor } = require('../dist/rulesProfile');
-const { advanceStandby, chooseStandby, resolveStandby } = require('../dist/standbyFlow');
+const { advanceStandby, chooseStandby } = require('../dist/standbyFlow');
 const {
   captureDarklordMarieActivationUids,
   resolveTagStandbyLpRecovery
@@ -119,16 +119,6 @@ function openStandbyTask(game, team = game.core.current) {
   };
 }
 
-function completeStandbyTask(game, event) {
-  resolveStandby(game.core, event.taskId, 'resolve', {});
-  game.core.pending = { kind: 'none' };
-  game.core.phase = 'main';
-  game.core.resume = 'main';
-  game.core.priority = game.core.current;
-  game.core.passes = 0;
-  game.core.chain = [];
-}
-
 function currentLP(game) {
   return [game.core.players[0].lp, game.core.players[1].lp];
 }
@@ -206,10 +196,18 @@ test('Dancing Fairy and Fire Princess plan correct 2v2 LP, but unadmitted cards 
   assert.equal(plan.firePrincess.triggerSources[0].uid, princess.uid);
   assert.deepEqual(plan.teamLifePointsAfter, [5000, 3500]);
   assert.equal(JSON.stringify(game), beforeGame, 'both planners must remain read-only');
-  completeStandbyTask(game, event);
-
-  assert.throws(() => tag.assertTagDuel(game), /Carta não admitida/);
-  const record = register(game, 'm455-fairy-fire-gate');
+  // The planner input intentionally remains an active, unpersisted Standby
+  // continuation. Exercise the persistence gate with a clean session snapshot
+  // containing the same candidate cards, so the failure isolates admission
+  // rather than an unrelated continuation-state invariant.
+  const persisted = makeGame(0);
+  addFairy(persisted, 2, 0);
+  addPrincess(persisted, 0, 0);
+  assert.throws(
+    () => tag.assertTagDuel(persisted),
+    /Estado do duelo inválido: identificador de carta ausente, duplicado ou desconhecido/
+  );
+  const record = register(persisted, 'm455-fairy-fire-gate');
   assert.deepEqual(commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan), {
     ok: false,
     reason: 'invalid-tag-session-state'
@@ -237,10 +235,16 @@ test('Darklord Marie activation snapshot and Fire Princess team routing are plan
   assert.equal(plan.firePrincess.triggerSources[0].uid, princess.uid);
   assert.deepEqual(plan.teamLifePointsAfter, [3500, 4200]);
   assert.equal(JSON.stringify(game), beforeGame);
-  completeStandbyTask(game, event);
-
-  assert.throws(() => tag.assertTagDuel(game), /Carta não admitida/);
-  const record = register(game, 'm455-marie-fire-gate');
+  // Use a separate clean persisted snapshot to isolate the card-admission
+  // boundary from the in-flight Standby continuation used by the planner.
+  const persisted = makeGame(1);
+  addMarie(persisted, 3, 1);
+  addPrincess(persisted, 1, 1);
+  assert.throws(
+    () => tag.assertTagDuel(persisted),
+    /Estado do duelo inválido: identificador de carta ausente, duplicado ou desconhecido/
+  );
+  const record = register(persisted, 'm455-marie-fire-gate');
   assert.deepEqual(commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan), {
     ok: false,
     reason: 'invalid-tag-session-state'
