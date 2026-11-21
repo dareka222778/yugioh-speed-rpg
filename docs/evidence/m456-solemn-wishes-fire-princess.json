@@ -1,7 +1,7 @@
 {
   "mission": "M456",
   "runId": "work-20261121T112504-0300-M456",
-  "status": "implementation-complete-ci-pending",
+  "status": "test-assertion-corrected-ci-pending",
   "title": "Solemn Wishes physical draw event → Fire Princess 2v2 LP pipeline",
   "base": {
     "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
@@ -41,7 +41,7 @@
     }
   ],
   "admissionGate": {
-    "observed": "Solemn Wishes and Fire Princess are absent from the M455 base certification registry; persisted state must remain rejected until normal behavioral admission.",
+    "observed": "Solemn Wishes and Fire Princess are absent from the M455 base playable-card registry. The current duel-integrity boundary rejects the persisted candidate state with the unknown-card-identity validation error; the storage adapter maps this to invalid-tag-session-state before changing LPs, revision or ledgers.",
     "expectedStoreResult": "invalid-tag-session-state",
     "noPartialWrite": true
   },
