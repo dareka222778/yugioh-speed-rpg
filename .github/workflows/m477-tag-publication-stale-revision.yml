@@ -1,0 +1,36 @@
+name: M477 TagDuel stale Discord publication revision
+on:
+  push:
+    branches:
+      - feat/work-m477-tag-publication-stale-revision-20261121
+    paths:
+      - 'tests/tagPublicationStaleRevision2v2.test.cjs'
+      - 'docs/evidence/m477-tag-publication-stale-revision.json'
+      - '.github/workflows/m477-tag-publication-stale-revision.yml'
+  pull_request:
+    paths:
+      - 'tests/tagPublicationStaleRevision2v2.test.cjs'
+      - 'docs/evidence/m477-tag-publication-stale-revision.json'
+      - '.github/workflows/m477-tag-publication-stale-revision.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-publication-stale-revision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m477-tag-publication-stale-revision.json', 'utf8'))"
+      - name: Run TagDuel stale publication revision test
+        run: node --test tests/tagPublicationStaleRevision2v2.test.cjs
