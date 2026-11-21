@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "id": "work-20261121T013025-0300-M434",
+  "mission": "M434",
+  "priority": "P1",
+  "status": "reserved",
+  "startedAt": "2026-11-21T01:30:25-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m434-amazoness-blowpiper-standby-20261121",
+  "baseRef": "feat/rea-engine-recovery-20261026",
+  "baseSha": null,
+  "headSha": null,
+  "expectedSharedHead": null,
+  "scope": {
+    "card": "Amazoness Blowpiper",
+    "cardId": "73574678",
+    "konamiCid": 5646,
+    "files": [
+      "src/amazonessBlowpiperStandby.ts",
+      "tests/amazonessBlowpiperStandby.test.cjs",
+      "docs/evidence/m434-amazoness-blowpiper.json",
+      ".github/workflows/m434-amazoness-blowpiper.yml"
+    ],
+    "reservedFiles": [
+      "src/amazonessBlowpiperStandby.ts",
+      "tests/amazonessBlowpiperStandby.test.cjs",
+      "docs/evidence/m434-amazoness-blowpiper.json",
+      ".github/workflows/m434-amazoness-blowpiper.yml"
+    ]
+  },
+  "workBlocks": [],
+  "effectiveWorkMinutes": 0,
+  "certifiedBefore": 969,
+  "certifiedAfter": null,
+  "newBehavioralCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "pr": null,
+  "ci": {
+    "status": "not-started",
+    "runs": []
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "blockers": [
+    "M61 resolver handoff remains pending; this mission is a standalone behavior adapter and test, not central engine registration."
+  ],
+  "nextTask": "Implement exact Standby-window adapter for the 500 ATK reduction; test actual TagDuel state, physical seats, target revalidation and End Phase expiry.",
+  "nextWorkWindow": "2026-11-21T06:30:00-03:00",
+  "releasedToAuxiliary": false
+}
