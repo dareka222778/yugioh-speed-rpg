@@ -184,6 +184,7 @@ function sourceSnapshot(
   if (!validId(sourceUid)) throw new Error('invalid source UID.');
   const source = monsters.find(monster => monster.uid === sourceUid);
   if (!source || source.cardId !== expectedCardId) throw new Error('typed Tribute source is not on the shared field.');
+  if (!source.faceUp) throw new Error('typed Tribute ignition source must be face-up at activation.');
   if (source.controllerTeam !== game.core.current || game.active[source.controllerTeam] !== game.cursor) {
     throw new Error('only the active physical representative may activate this effect.');
   }
