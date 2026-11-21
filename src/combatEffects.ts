@@ -3,6 +3,7 @@ import {monsterEffectsNegated} from './continuousEffects';
 import type {DuelState,Monster} from './duelEngine';
 import {getDuelCard} from './effectRegistry';
 import {continuousCombatRules,continuousModifier} from './continuousEffects';
+import {redirectControllerBattleDamage} from './battleDamageRedirect';
 /** The defender-only and high-ATK clauses inspect *every* opposing card, not
  * just monsters, and use public current ATK at declaration time. */
 function opposingCardsMeetDirectCondition(s:DuelState,m:Monster,rule:Extract<import('./combatRules').CombatRule,{kind:'direct'}>):boolean{
@@ -57,5 +58,12 @@ export function combatOutcome(s:DuelState,actor:number,a:Monster,d:Monster|undef
   const doubles=involved.some(x=>x.rules.some(v=>v.rule.kind==='damage'&&v.rule.mode==='double'&&(v.rule.when==='direct'&&!d&&player===1-actor||v.rule.when==='defending'&&x.monster===d&&player===actor)));
   if(doubles)damage[player]*=2;
  }
+ const redirectedDamage=redirectControllerBattleDamage(
+  damage,
+  actor as 0|1,
+  ar.some(x=>x.controller===actor&&x.rule.kind==='redirectControllerDamage'),
+  dr.some(x=>x.controller===1-actor&&x.rule.kind==='redirectControllerDamage'),
+ );
+ damage[0]=redirectedDamage[0];damage[1]=redirectedDamage[1];
  return {destroy,damage,difference};
 }
