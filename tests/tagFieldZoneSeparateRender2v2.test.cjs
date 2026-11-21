@@ -36,7 +36,7 @@ function makeGame(first) {
       let index = physical.hand.findIndex(card => card.id === id);
       if (index >= 0) return physical.hand.splice(index, 1)[0];
       index = physical.deck.findIndex(card => card.id === id);
-      assert.ok(index >= 0, 'required card must remain in this team's physical Deck or hand: ' + id);
+      assert.ok(index >= 0, "required card must remain in this team's physical Deck or hand: " + id);
       return physical.deck.splice(index, 1)[0];
     };
     const field = take(fieldId);
