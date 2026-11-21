@@ -40,14 +40,15 @@
   ],
   "tests": {
     "file": "tests/standbyLpFirePrincessPipeline.test.cjs",
-    "expectedCases": 10,
+    "expectedCases": 11,
     "groups": [
       "Dancing Fairy to Fire Princess",
       "Darklord Marie activation UID snapshot to Fire Princess",
       "combined Dancing Fairy and Darklord Marie gain",
       "team 1 routing",
       "multiple Fire Princess copies",
-      "per-copy negation at both stages",
+      "per-copy Standby source negation within the three-Monster-Zone limit",
+      "per-copy Fire Princess negation within the three-Monster-Zone limit",
       "zero-gain suppression",
       "independent ledgers and retry idempotency",
       "read-only adapters before caller commits",
