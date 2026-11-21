@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "mission": "M443",
+  "runId": "work-20261121T064413-0300-M443",
+  "reviewedAt": "2026-11-21",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "name": "Absorbing Kid from the Sky",
+      "id": "49771608",
+      "konamiDatabaseCid": 6034,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6034&ope=2&request_locale=en",
+      "effectSummary": "After this monster destroys another monster by battle and that monster is sent to the Graveyard, its controller gains 300 Life Points for each Level of the destroyed monster.",
+      "firstTcgRelease": "2004-06-01",
+      "firstTcgSet": "Ancient Sanctuary (AST-072)"
+    },
+    {
+      "name": "Guardian Angel Joan",
+      "id": "68007326",
+      "konamiDatabaseCid": 5899,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5899&ope=2&request_locale=en",
+      "effectSummary": "When this monster destroys another monster by battle and sends it to the Graveyard, it recovers Life Points equal to that monster's original ATK in the Graveyard.",
+      "firstTcgRelease": "2004-03-01",
+      "firstTcgSet": "Invasion of Chaos (IOC-087)"
+    }
+  ],
+  "tagDuelAdapter": {
+    "eventSource": "trusted committed battle-destruction snapshot; not inferred from translated logs",
+    "sourceController": "recipient is the source's controller team at the battle event, not physical owner seat",
+    "physicalOwnership": "UID-derived source and destroyed-card physical owner seats are preserved; destroyed card must reach the physical owner's team Graveyard to qualify",
+    "levelAndAtk": "destroyed monster Level and original ATK are read from certified catalog metadata",
+    "destination": "replacement destinations are validated against actual inventory zones and do not trigger recovery",
+    "deduplication": "eventId ledger rejects replays and returns a new immutable processed-event list",
+    "stateMutation": "none; returns new shared team LP totals for an atomic caller commit"
+  },
+  "tests": {
+    "file": "tests/battleLifePointRecoveryTagDuelAdapter.test.cjs",
+    "expectedCases": 19,
+    "behavioralGroups": [
+      "Absorbing Kid Level x 300 recovery",
+      "Guardian Angel Joan original ATK recovery",
+      "attacker and defender battle roles",
+      "source controller team versus physical owner seat",
+      "actual physical-owner team Graveyard destination",
+      "replacement destination, battle and destroyer gates",
+      "event identity, duplicate UID and replay protection",
+      "immutable LP/zones and overflow safety",
+      "source identity/controller snapshot binding",
+      "actual destination-to-zone matching",
+      "catalog-backed destroyed monster stats",
+      "processed event ledger validation"
+    ]
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "runtimeIntegrated": false,
+  "discordLiveValidated": false,
+  "productionChanged": false
+}
