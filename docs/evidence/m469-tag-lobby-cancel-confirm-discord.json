@@ -1,0 +1,80 @@
+{
+  "mission": "M469",
+  "runId": "work-20261121T162433-0300-M469",
+  "status": "implementation-complete-ci-pending",
+  "priority": "P1 — validate TagDuel lobby cancellation and confirmed team concession through the actual Discord component handler, preserving locks, physical card identity, LP and private hands.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+  "implementation": {
+    "files": [
+      "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
+      "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
+      ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
+    ],
+    "topLevelTests": 3,
+    "handlerInteractions": 12,
+    "lobbyCancellationCases": 2,
+    "negativeInteractions": 4,
+    "teamConcessionCases": 1,
+    "behavior": [
+      "An invited non-host can refuse a partially accepted lobby; the session becomes cancelled, revision increments, all tag_members locks are released and currentTag becomes empty for every participant.",
+      "Nonparticipants and wrong-guild interactions are rejected before Discord acknowledgement; stale duplicate cancellation and stale confirmation cannot mutate the saved session.",
+      "An inactive physical partner can open the quit confirmation and concede for their team; confirmation finishes the duel, releases seat locks, preserves all physical card UIDs and shared LP, and does not reveal private hand UIDs."
+    ],
+    "validation": "The test invokes createTagLobby, acceptTag, tagPublicMessage, tagPrivateMessage and handleTagComponent with real Discord.js builders, validateDiscordPayload and a temporary SQLite database."
+  },
+  "invariants": {
+    "partialLobbyCancellationReleasesAllLocks": true,
+    "nonHostInviteeMayCancel": true,
+    "nonparticipantRejectedBeforeAck": true,
+    "wrongGuildRejectedBeforeAck": true,
+    "staleCancelRejected": true,
+    "inactivePartnerCanConcede": true,
+    "explicitQuitConfirmationRequired": true,
+    "staleConfirmationRejected": true,
+    "physicalCardUidsConserved": true,
+    "sharedLifePointsConserved": true,
+    "privateHandUidsHidden": true,
+    "inactivePartnerActionMenuHidden": true,
+    "inventoryTablesUnchanged": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "realPlayerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "allowlistChanged": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Discord component handlers and payload builders are exercised offline; no live guild, bot token or real Discord API call.",
+    "SQLite and player profiles are temporary fixtures; no production player, collection, deck or database is modified.",
+    "This is a test/evidence/workflow change only; no runtime command, card effect, catalogue, certification or allowlist change."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}
