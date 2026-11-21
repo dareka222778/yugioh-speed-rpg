@@ -70,6 +70,9 @@ function makeInteraction(record, actor, index, requestId, expectedRevision = rec
     isButton: () => false,
     isStringSelectMenu: () => true,
     deferUpdate: async () => {
+      if (store.getTag(record.id).revision !== expectedRevision) {
+        throw new Error('stale revision before Discord acknowledgement');
+      }
       calls.push('defer');
     },
     editReply: async payload => {
