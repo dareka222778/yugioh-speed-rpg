@@ -55,7 +55,7 @@ test('duplicate invite IDs are rejected before any additional lobby or seat lock
   };
   assert.throws(
     () => store.createTagLobby(['same', 'opponent-1', 'same', 'opponent-2'], 'm468-guild', 'm468-channel', 'normal'),
-    /quatro jogadores diferentes/
+    /Escolha quatro humanos diferentes/
   );
   assert.deepEqual({
     sessions: db.prepare('SELECT COUNT(*) AS n FROM tag_sessions').get().n,
