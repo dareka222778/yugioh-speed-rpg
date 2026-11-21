@@ -1,0 +1,85 @@
+{
+  "runId": "work-20261121T121100-0300-M457",
+  "mission": "M457",
+  "owner": "Work principal",
+  "priority": "P1 — exercitar as 16 permutações de assento inicial e assento de compra no pipeline Solemn Wishes → Fire Princess, preservando dono físico, equipe controladora, compra por parceiro e roteamento de LP em 2v2.",
+  "status": "implementation-complete-ci-pending",
+  "startedAt": "2026-11-21T12:11:00-03:00",
+  "lastActivityAt": "2026-11-21T12:16:28.264-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "38c5aff3cfdc8fe395767c38eeac04b08e51962a",
+  "sharedHeadBeforeCheckpointCommit": "73381ea6cb5c7e43137ad37750ebcd2c75f7d0c4",
+  "branch": "feat/work-m457-tag-lp-pipeline-seat-matrix-20261121",
+  "head": "aff11da959201d38af0314abd45e188e50c83d3c",
+  "baseBranch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
+  "baseSha": "29f4ad75ee92b2ff1860b03c8e6d8e8edca8a8cb",
+  "pr": 405,
+  "prState": "open",
+  "draft": true,
+  "mergeable": true,
+  "files": [
+    "tests/tagDuelLpPipelineSeatMatrix.test.cjs",
+    "docs/evidence/m457-tag-duel-lp-pipeline-seat-matrix.json",
+    ".github/workflows/m457-tag-duel-lp-pipeline-seat-matrix.yml"
+  ],
+  "changes": [
+    "Criada matriz 4×4 (first seat × drawing seat) cobrindo os 16 pares de assentos físicos.",
+    "Verifica ganho de 500 LP por Solemn Wishes somente quando a equipe 0 compra e Fire Princess apenas após ganho positivo.",
+    "Verifica physicalOwnerSeat do parceiro em ambos os efeitos e rejeita UID de compra pertencente a outro assento.",
+    "Verifica read-only dos planners e invariantes de Deck 20–30, mão 6/End Phase, campo 3+3 e Extra 5."
+  ],
+  "testDesign": {
+    "permutations": 16,
+    "additionalWrongPhysicalUidScenario": 1,
+    "expectedFocusedAssertions": "16 subtests + 1 teste negativo",
+    "localExecution": "não executada; ambiente sem acesso de rede para instalar dependências; CI GitHub aguardando"
+  },
+  "ci": {
+    "focused": "not-yet-observed",
+    "cardBatchFast": "not-yet-observed",
+    "milestone1000": "not-yet-observed",
+    "engineValidation": "not-yet-observed"
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "allowlistChanged": false,
+    "playerDataChanged": false,
+    "productionDatabaseTouched": false,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false
+  },
+  "handoff": {
+    "pr": 17,
+    "commentId": 7064591588,
+    "status": "awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "modified": false
+  },
+  "nextTask": "Aguardar CI focada/Card Batch/Milestone/Engine Validation; corrigir apenas os três arquivos M457 se houver falha. Depois monitorar M455/M456 e aguardar handoff M61 para integração real.",
+  "nextWindow": "2026-11-21T16:58:00-03:00"
+}
