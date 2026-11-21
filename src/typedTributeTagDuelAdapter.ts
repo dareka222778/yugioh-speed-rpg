@@ -237,7 +237,7 @@ export function planTagAntiAircraftFlower(
         actionId,
         turnNumber: game.core.turn,
         sourceUid,
-        sourcePhysicalOwnerSeat: source.physicalOwnerSeat,
+        sourcePhysicalOwnerSeat: source.physicalOwnerSeat as PhysicalSeat,
         sourceControllerTeam: source.controllerTeam,
         selectedTributeUid,
         processedActionIds: processed,
