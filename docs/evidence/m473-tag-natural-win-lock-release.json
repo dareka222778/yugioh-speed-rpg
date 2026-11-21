@@ -5,13 +5,14 @@
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "testFile": "tests/tagDuelNaturalWinLockRelease2v2.test.cjs",
   "testCount": 1,
-  "scenario": "Quatro participantes aceitam um lobby clássico emprestado; o teste reduz somente o LP adversário no fixture SQLite e executa Invocação-Normal, Battle Phase e ataque direto através de handleTagComponent. A vitória normal deve persistir duelFinished, terminar o duelo, liberar os quatro locks e preservar UIDs/coleção.",
+  "scenario": "Quatro participantes aceitam um lobby clássico emprestado; o fixture SQLite define 100 LP para a equipe adversária. O teste executa Invocação-Normal no primeiro turno, confirma que Battle Phase não é oferecida no turno 1, encerra os dois turnos iniciais e então executa Battle Phase + ataque direto pela próxima representante física da mesma equipe através de handleTagComponent. A vitória normal deve persistir duelFinished, terminar a partida, liberar os quatro locks e preservar UIDs/coleção.",
   "invariants": [
     "Deck 20–30, mão 6 com checagem na End Phase, três Monster Zones, três Spell/Trap Zones e Extra Deck 5 continuam no perfil.",
     "A equipe ativa vence por dano direto normal; não é timeout nem concessão.",
     "Os quatro locks tag_members são removidos quando status passa a finished.",
     "tag_transition_events persiste duelFinished público.",
-    "UIDs físicos são conservados e a coleção/starter grants permanecem idênticos."
+    "UIDs físicos são conservados e a coleção/starter grants permanecem idênticos.",
+    "A restrição de não atacar no primeiro turno é respeitada; a Battle Phase aparece no turno 3 para o próximo assento físico da equipe."
   ],
   "certification": {
     "baseline": 969,

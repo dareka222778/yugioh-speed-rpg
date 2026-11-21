@@ -113,9 +113,20 @@ test('a normal direct-attack victory finishes through the Discord handler and re
 
   record = await actThroughDiscord(record, actor, action => action.kind === 'summon' && action.position === 'atk');
   assert.equal(record.status, 'playing');
-  record = await actThroughDiscord(record, actor, action => action.kind === 'battle');
+  assert.equal(record.state.core.turn, 1);
+  assert.equal(tag.tagActions(record.state, actor).some(action => action.kind === 'battle'), false,
+    'the first player cannot enter Battle Phase on turn one');
+  record = await actThroughDiscord(record, actor, action => action.kind === 'end');
+  const opponentActor = tag.tagDecisionMember(record.state).id;
+  record = await actThroughDiscord(record, opponentActor, action => action.kind === 'end');
+  const battleActor = tag.tagDecisionMember(record.state).id;
+  assert.equal(record.state.core.turn, 3);
+  assert.equal(record.state.members.find(member => member.id === battleActor).team, team);
+  assert.ok(tag.tagActions(record.state, battleActor).some(action => action.kind === 'battle'),
+    'Battle Phase becomes available to the next physical teammate after the first opposing turn');
+  record = await actThroughDiscord(record, battleActor, action => action.kind === 'battle');
   assert.equal(record.status, 'playing');
-  record = await actThroughDiscord(record, actor, action => action.kind === 'attack');
+  record = await actThroughDiscord(record, battleActor, action => action.kind === 'attack');
 
   assert.equal(record.status, 'finished');
   assert.equal(record.state.core.phase, 'finished');
