@@ -1,0 +1,57 @@
+{
+  "runId": "work-20261121T162433-0300-M469",
+  "mission": "M469",
+  "owner": "Work principal",
+  "status": "active",
+  "startedAt": "2026-11-21T16:24:33-03:00",
+  "endedAt": null,
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+  "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+  "baseSha": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+  "priority": "P1 — validar o cancelamento de lobby e a desistência confirmada em TagDuel 2v2 pelo handler Discord real, com liberação atômica de locks, rejeição de interações forjadas/obsoletas, privacidade e conservação de UIDs físicos.",
+  "reservedFiles": [
+    "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
+    "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
+    ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M459 three reserved files released to auxiliary monitor only",
+      "M460–M468 branches and PRs",
+      "M455–M458 storage/LP branches and their reserved files",
+      "M61 central resolver files",
+      "all third-party reservations"
+    ],
+    "note": "M469 usa três caminhos novos, sem runtime, catálogo, allowlist, dados persistentes ou arquivos reservados por outros agentes."
+  },
+  "blocks": [
+    {
+      "at": "2026-11-21T16:24:33-03:00",
+      "description": "Auditoria de state.json, checkpoint M459 ausente, HEAD/branches/PRs/CI; M459 liberada ao auxiliar apenas para monitoramento."
+    }
+  ],
+  "ci": {
+    "status": "not-started"
+  },
+  "certification": {
+    "baseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "nextTask": "Após M469: auditar os resultados M460–M468, obter handoff de M455–M458 para a correção herdada da validação M459 e então iniciar a próxima matriz de comando TagDuel sem sobrepor reservas.",
+  "nextWindow": "2026-11-21T17:30:00-03:00",
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true
+}

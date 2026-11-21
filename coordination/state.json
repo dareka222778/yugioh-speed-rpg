@@ -1,20 +1,20 @@
 {
-  "runId": "work-20261121T122100-0300-M459",
+  "runId": "work-20261121T162433-0300-M469",
   "owner": "Work principal",
   "priorityRequestedBy": "Work",
   "state": "active",
-  "startedAt": "2026-11-21T12:21:49.090-03:00",
-  "lastActivityAt": "2026-11-21T12:21:49.090-03:00",
-  "nextScheduledAt": "2026-11-21T16:58:00-03:00",
+  "startedAt": "2026-11-21T16:24:33-03:00",
+  "lastActivityAt": "2026-11-21T16:24:33-03:00",
+  "nextScheduledAt": "2026-11-21T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagDuelLpDiscordSeatMatrix.test.cjs",
-    "docs/evidence/m459-tag-duel-lp-discord-seat-matrix.json",
-    ".github/workflows/m459-tag-duel-lp-discord-seat-matrix.yml"
+    "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
+    "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
+    ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261121T122100-0300-M459.json",
-  "previousRunId": "work-20261121T105500-0300-M450",
+  "lastCheckpoint": "coordination/runs/work-20261121T162433-0300-M469.json",
+  "previousRunId": "work-20261121T122100-0300-M459",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -4701,23 +4701,23 @@
     }
   ],
   "activeRun": {
-    "runId": "work-20261121T112504-0300-M455",
+    "runId": "work-20261121T162433-0300-M469",
     "owner": "Work principal",
-    "mission": "M455",
+    "mission": "M469",
     "state": "active",
     "branch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadBeforeClaim": "916558e0a56cbd6bcd490d4f2a09e7ec5926f8dc",
-    "startedAt": "2026-11-21T11:25:04-03:00",
+    "sharedHeadBeforeClaim": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+    "startedAt": "2026-11-21T16:24:33-03:00",
     "workBranches": [
       {
-        "mission": "M455",
-        "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
-        "baseBranch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
-        "baseSha": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
+        "mission": "M469",
+        "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+        "baseBranch": "feat/rea-engine-recovery-20261026",
+        "baseSha": "69581c21e372faa33de36ff45cc3b72ad6182ded",
         "scope": [
-          "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
-          "docs/evidence/m455-standby-lp-atomic-commit.json",
-          ".github/workflows/m455-standby-lp-atomic-commit.yml"
+          "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
+          "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
+          ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
         ],
         "state": "active"
       }
@@ -6997,7 +6997,7 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261121T112504-0300-M456.json",
   "lastParallelActivityAt": "2026-11-21T11:25:04-03:00",
   "sharedHeadAfterCheckpoint": "ea907a31daf5c5cafb521e99053a5763483558c5",
-  "sharedHeadBeforeStateUpdate": "8e079356720eab7518e196cf36bb8ca816c6b604",
+  "sharedHeadBeforeStateUpdate": "69581c21e372faa33de36ff45cc3b72ad6182ded",
   "endedAt": "2026-11-21T12:10:54.153-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
@@ -7346,7 +7346,7 @@
   },
   "lastCheckpointAt": "2026-11-21T01:01:16-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "aea48819344b899f4fd550ce3873246104d483ec",
+  "expectedHeadForCoordinationCommit": "69581c21e372faa33de36ff45cc3b72ad6182ded",
   "lastRunSummary": "M305 registrado: The Sanctuary in the Sky, teste de integração Discord 2v2 em branch isolada; escopo único tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -9899,7 +9899,7 @@
   "lastParallelRunSummary": "M456 reservado: Solemn Wishes draw event → Fire Princess, validação 2v2 e gate de admissão.",
   "lastIndependentWorkCheckpoint": "coordination/runs/work-20261120T195356-0300-M428-M430.json",
   "lastIndependentWorkActivityAt": "2026-11-21T01:01:16-03:00",
-  "nextWorkWindow": "2026-11-21T16:58:00-03:00",
+  "nextWorkWindow": "2026-11-21T17:30:00-03:00",
   "lastIndependentWorkRunId": "work-20261121T010116-0300-M431",
   "workBranchesUpdatedAt": "2026-11-20T19:36:27-03:00",
   "lastActiveWorkMission": "M379–M381",
@@ -10145,31 +10145,33 @@
   },
   "currentIndependentWork": {
     "format": 1,
-    "mission": "M455",
-    "runId": "work-20261121T112504-0300-M455",
+    "mission": "M469",
+    "runId": "work-20261121T162433-0300-M469",
     "owner": "Work principal",
     "state": "active",
-    "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
-    "baseBranch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
-    "baseSha": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
+    "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "69581c21e372faa33de36ff45cc3b72ad6182ded",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtReservation": "916558e0a56cbd6bcd490d4f2a09e7ec5926f8dc",
-    "priority": "P1 — validar o encadeamento real Dancing Fairy/Darklord Marie Standby → Fire Princess → commit SQLite atômico, com idempotência e proteção de revisão 2v2.",
+    "sharedHeadAtReservation": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+    "startedAt": "2026-11-21T16:24:33-03:00",
+    "priority": "P1 — validar o cancelamento de lobby e a desistência confirmada em TagDuel 2v2 pelo handler Discord real, com liberação atômica de locks, rejeição de interações forjadas/obsoletas, privacidade e conservação de UIDs físicos.",
     "reservedFiles": [
-      "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
-      "docs/evidence/m455-standby-lp-atomic-commit.json",
-      ".github/workflows/m455-standby-lp-atomic-commit.yml"
+      "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
+      "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
+      ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
     ],
-    "scope": "Integração isolada de adapters M444/M446, planner M452 e store M454: calcular recuperação de Standby, planejar Fire Princess sobre o snapshot pós-ganho, persistir LPs/ledgers/revisão em uma transação SQLite e provar retry/rejeição de snapshot obsoleto. Somente teste, evidência e workflow; sem runtime central ou dados reais.",
+    "scope": "Somente teste/evidência/workflow. Exercitar botão Recusar/cancelar em lobby parcialmente aceito, liberação de tag_members, ausência de grants/decks/cartas, rejeição de não participante e retry obsoleto; depois, testar o fluxo Desistir→Confirmar de um parceiro inativo, encerramento da equipe, UIDs físicos, LP e payloads privados/públicos.",
     "conflictCheck": {
       "overlap": false,
       "preserved": [
-        "M450 reserved paths pending explicit handoff",
-        "M451-M454 branches and PRs",
+        "M459 three reserved files released to auxiliary monitor only",
+        "M460–M468 branches and PRs",
+        "M455–M458 storage/LP branches and their reserved files",
         "M61 central resolver files",
         "all third-party reservations"
       ],
-      "note": "M455 adiciona três caminhos inéditos; não modifica nenhum arquivo reservado por M450-M454 ou terceiros."
+      "note": "M469 usa três caminhos novos, sem runtime, catálogo, allowlist, dados persistentes ou arquivos reservados por outros agentes."
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
@@ -10259,9 +10261,9 @@
     "minimum60MinutesMet": false,
     "auxiliaryPermission": "Monitor PR #347, sync branch with latest shared HEAD by non-forced merge, correct only these three M398 files if CI fails. Do not edit coordination/state.json, runtime, catalog, certificates, player data, inventory, persistent DB, other branches, main or production; no merge/deploy."
   },
-  "latestIndependentWorkRunId": "work-20261121T122100-0300-M459",
-  "latestIndependentWorkBranch": "feat/work-m459-tag-lp-discord-seat-matrix-20261121",
-  "latestIndependentWorkHead": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
+  "latestIndependentWorkRunId": "work-20261121T162433-0300-M469",
+  "latestIndependentWorkBranch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+  "latestIndependentWorkHead": null,
   "latestIndependentWorkReservationReleased": false,
   "latestIndependentWorkActivityAt": "2026-11-21T12:21:49.090-03:00",
   "latestIndependentWorkPR": null,
@@ -10554,7 +10556,7 @@
     ],
     "cardFamily": "battle-destruction-life-point-recovery"
   },
-  "latestIndependentWorkPriority": "P1 — validar a projeção Discord do LP compartilhado em todas as quatro rotações iniciais 2v2, com menu privado somente para o representante ativo, privacidade de mãos e continuidade de revisão após End Phase.",
+  "latestIndependentWorkPriority": "P1 — validar o cancelamento de lobby e a desistência confirmada em TagDuel 2v2 pelo handler Discord real, com liberação atômica de locks, rejeição de interações forjadas/obsoletas, privacidade e conservação de UIDs físicos.",
   "currentWorkReservationM403": {
     "runId": "work-20261120T045103-0300-M403",
     "owner": "Work principal",
@@ -11409,37 +11411,7 @@
     "handoff": "M61 permanece pendente; src/monsterEffects.ts, src/duelEngineCurrent.ts e standbyFlow.ts intocados.",
     "releaseToAuxiliary": "Somente os quatro caminhos novos M444, após publicação da PR."
   },
-  "currentReservation": {
-    "mission": "M455",
-    "runId": "work-20261121T112504-0300-M455",
-    "owner": "Work principal",
-    "state": "active",
-    "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
-    "baseBranch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
-    "baseSha": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb",
-    "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtReservation": "916558e0a56cbd6bcd490d4f2a09e7ec5926f8dc",
-    "priority": "P1 — validar o encadeamento real Dancing Fairy/Darklord Marie Standby → Fire Princess → commit SQLite atômico, com idempotência e proteção de revisão 2v2.",
-    "reservedFiles": [
-      "tests/standbyLpFirePrincessAtomicCommit.test.cjs",
-      "docs/evidence/m455-standby-lp-atomic-commit.json",
-      ".github/workflows/m455-standby-lp-atomic-commit.yml"
-    ],
-    "scope": "Integração isolada de adapters M444/M446, planner M452 e store M454: calcular recuperação de Standby, planejar Fire Princess sobre o snapshot pós-ganho, persistir LPs/ledgers/revisão em uma transação SQLite e provar retry/rejeição de snapshot obsoleto. Somente teste, evidência e workflow; sem runtime central ou dados reais.",
-    "conflictCheck": {
-      "overlap": false,
-      "preserved": [
-        "M450 reserved paths pending explicit handoff",
-        "M451-M454 branches and PRs",
-        "M61 central resolver files",
-        "all third-party reservations"
-      ],
-      "note": "M455 adiciona três caminhos inéditos; não modifica nenhum arquivo reservado por M450-M454 ou terceiros."
-    },
-    "newCertifications": 0,
-    "automaticCertifications": 0,
-    "inventoryGranted": 0
-  },
+  "currentReservation": "M469",
   "completedOwnRuns": [
     {
       "runId": "work-20261121T105500-0300-M449",
@@ -11604,7 +11576,7 @@
     ],
     "nextTask": "Auxiliar monitora CI e corrige apenas os arquivos reservados."
   },
-  "nextWorkTask": "Implementar a matriz de projeção Discord por rotação inicial e validar a interação End Phase em SQLite temporário.",
+  "nextWorkTask": "Após M469: auditar os resultados M460–M468, obter handoff de M455–M458 para a correção herdada da validação M459 e então iniciar a próxima matriz de comando TagDuel sem sobrepor reservas.",
   "currentWorkReservationM457": {
     "mission": "M457",
     "runId": "work-20261121T121100-0300-M457",
@@ -11730,7 +11702,7 @@
     "mission": "M459",
     "runId": "work-20261121T122100-0300-M459",
     "owner": "Work principal",
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/work-m459-tag-lp-discord-seat-matrix-20261121",
     "baseBranch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
     "baseSha": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
@@ -11753,6 +11725,80 @@
         "all third-party reservations"
       ],
       "note": "M459 adiciona três caminhos novos e não altera os arquivos de teste já liberados ou qualquer runtime."
+    },
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "head": "771a29a60554b544f626a06e11960657c78d6daa",
+    "pr": 407,
+    "releasedAt": "2026-11-21T16:24:33-03:00",
+    "ci": [
+      {
+        "name": "M459 focused",
+        "run": 44935860468,
+        "status": "success"
+      },
+      {
+        "name": "Card Batch Fast",
+        "run": 44935860501,
+        "status": "success"
+      },
+      {
+        "name": "Milestone 1000",
+        "run": 44935860425,
+        "status": "success",
+        "certified": 969,
+        "remaining": 31
+      },
+      {
+        "name": "Engine Validation",
+        "run": 44935860452,
+        "status": "failure",
+        "failedJob": 136942209157
+      },
+      {
+        "name": "Extended Soak 600s",
+        "run": 44935860452,
+        "status": "success",
+        "job": 136942209501
+      }
+    ],
+    "blocker": "Engine Validation falha em duas asserções herdadas de tests/standbyLpFirePrincessAtomicCommit.test.cjs (linhas 200 e 230): esperado /Carta não admitida/, recebido 'Estado da continuação de Espera inválido.'. A correção existe na branch M455, mas não foi transferida para M456–M458. Handoff solicitado nos PRs #404–#406; sem resposta.",
+    "nextTask": "Auxiliar pode apenas monitorar e corrigir os três arquivos M459. Não alterar a suíte M455 herdada; aguardar transferência explícita do responsável M455/M458.",
+    "releaseToAuxiliary": [
+      "tests/tagDuelLpDiscordSeatMatrix.test.cjs",
+      "docs/evidence/m459-tag-duel-lp-discord-seat-matrix.json",
+      ".github/workflows/m459-tag-duel-lp-discord-seat-matrix.yml"
+    ]
+  },
+  "currentWorkReservationM469": {
+    "mission": "M469",
+    "runId": "work-20261121T162433-0300-M469",
+    "owner": "Work principal",
+    "state": "active",
+    "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+    "startedAt": "2026-11-21T16:24:33-03:00",
+    "priority": "P1 — validar o cancelamento de lobby e a desistência confirmada em TagDuel 2v2 pelo handler Discord real, com liberação atômica de locks, rejeição de interações forjadas/obsoletas, privacidade e conservação de UIDs físicos.",
+    "reservedFiles": [
+      "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
+      "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
+      ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
+    ],
+    "scope": "Somente teste/evidência/workflow. Exercitar botão Recusar/cancelar em lobby parcialmente aceito, liberação de tag_members, ausência de grants/decks/cartas, rejeição de não participante e retry obsoleto; depois, testar o fluxo Desistir→Confirmar de um parceiro inativo, encerramento da equipe, UIDs físicos, LP e payloads privados/públicos.",
+    "conflictCheck": {
+      "overlap": false,
+      "preserved": [
+        "M459 three reserved files released to auxiliary monitor only",
+        "M460–M468 branches and PRs",
+        "M455–M458 storage/LP branches and their reserved files",
+        "M61 central resolver files",
+        "all third-party reservations"
+      ],
+      "note": "M469 usa três caminhos novos, sem runtime, catálogo, allowlist, dados persistentes ou arquivos reservados por outros agentes."
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
