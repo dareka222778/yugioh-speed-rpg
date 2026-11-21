@@ -254,5 +254,5 @@ export function resolveTagFirePrincessLpGain(
 }
 
 export function firePrincessTagDuelPublicSummary(): string {
-  return 'Fire Princess: dano de 500 LP por cópia após ganho real de LP; identidades físicas, UIDs e mãos privadas não são exibidos publicamente.';
+  return 'Fire Princess: dano de 500 LP por cópia após ganho real de LP; UIDs, mãos privadas e identidades físicas não são exibidos publicamente.';
 }
