@@ -244,3 +244,49 @@ test('LP overflow is rejected without mutating the duel state', () => {
   assert.match(result.reason, /safe integer range/);
   assert.equal(JSON.stringify(game), before);
 });
+
+test('source card identity and shared-field controller must match the battle snapshot', () => {
+  const game = makeGame();
+  const source = addSource(game, ABSORBING_KID_FROM_THE_SKY_CARD_ID, 0, 0);
+  const destroyed = addDestroyedMonster(game, 1);
+  assert.deepEqual(resolveTagBattleLifePointRecovery(game, battleEvent(source, destroyed, {
+    sourceCardId: GUARDIAN_ANGEL_JOAN_CARD_ID
+  })), { ok: false, reason: 'battle-source-not-found-or-identity-mismatch' });
+  assert.deepEqual(resolveTagBattleLifePointRecovery(game, battleEvent(source, destroyed, {
+    eventId: 'turn-1:wrong-controller', sourceControllerTeam: 1
+  })), { ok: false, reason: 'source-controller-team-does-not-match-current-shared-field' });
+});
+
+test('destroyed destination snapshot must match the physical inventory zone', () => {
+  const game = makeGame();
+  const source = addSource(game, ABSORBING_KID_FROM_THE_SKY_CARD_ID);
+  const destroyed = addDestroyedMonster(game, 1, 'banished');
+  assert.deepEqual(resolveTagBattleLifePointRecovery(game, battleEvent(source, destroyed, {
+    destination: 'graveyard'
+  })), { ok: false, reason: 'destroyed-monster-destination-mismatch' });
+});
+
+test('destroyed monster must have certified monster metadata for Level or original ATK', () => {
+  const game = makeGame();
+  const source = addSource(game, ABSORBING_KID_FROM_THE_SKY_CARD_ID);
+  const destroyed = addDestroyedMonster(game, 1);
+  const grave = game.core.players[1].grave;
+  const index = grave.findIndex(card => card.uid === destroyed.uid);
+  grave[index] = { ...grave[index], id: '00000000' };
+  assert.deepEqual(resolveTagBattleLifePointRecovery(game, battleEvent(source, destroyed)), {
+    ok: false, reason: 'destroyed-monster-not-in-certified-catalog'
+  });
+});
+
+test('processed event ledger rejects malformed or duplicated entries', () => {
+  const game = makeGame();
+  const source = addSource(game, ABSORBING_KID_FROM_THE_SKY_CARD_ID);
+  const destroyed = addDestroyedMonster(game, 1);
+  const event = battleEvent(source, destroyed);
+  assert.deepEqual(resolveTagBattleLifePointRecovery(game, event, ['bad event id']), {
+    ok: false, reason: 'invalid-processed-battle-event-ledger'
+  });
+  assert.deepEqual(resolveTagBattleLifePointRecovery(game, event, ['same', 'same']), {
+    ok: false, reason: 'invalid-processed-battle-event-ledger'
+  });
+});

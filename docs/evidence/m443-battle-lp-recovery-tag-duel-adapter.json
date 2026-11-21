@@ -35,7 +35,7 @@
   },
   "tests": {
     "file": "tests/battleLifePointRecoveryTagDuelAdapter.test.cjs",
-    "expectedCases": 14,
+    "expectedCases": 19,
     "behavioralGroups": [
       "Absorbing Kid Level x 300 recovery",
       "Guardian Angel Joan original ATK recovery",
@@ -44,7 +44,11 @@
       "actual physical-owner team Graveyard destination",
       "replacement destination, battle and destroyer gates",
       "event identity, duplicate UID and replay protection",
-      "immutable LP/zones and overflow safety"
+      "immutable LP/zones and overflow safety",
+      "source identity/controller snapshot binding",
+      "actual destination-to-zone matching",
+      "catalog-backed destroyed monster stats",
+      "processed event ledger validation"
     ]
   },
   "newCertifications": 0,
