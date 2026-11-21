@@ -228,7 +228,7 @@ export function planTagAntiAircraftFlower(
     const source = sourceSnapshot(game, sourceUid, ANTI_AIRCRAFT_FLOWER_CARD_ID, monsters);
     const result = resolveAntiAircraftFlower({
       source,
-      fieldMonstersAtActivation: monsters.filter(monster => monster.faceUp),
+      fieldMonstersAtActivation: monsters,
       selectedTributeUid,
     });
     return {
@@ -265,8 +265,7 @@ export function captureTagArcaneArcherActivation(
     const monsters = fieldMonsters(game);
     const cards = fieldSpellTraps(game);
     const source = sourceSnapshot(game, sourceUid, ARCANE_ARCHER_OF_THE_FOREST_CARD_ID, monsters);
-    const faceUpMonsters = monsters.filter(monster => monster.faceUp);
-    if (!eligibleTypedTributeUids(faceUpMonsters, source.controllerTeam, 'Plant').includes(selectedTributeUid)) {
+    if (!eligibleTypedTributeUids(monsters, source.controllerTeam, 'Plant').includes(selectedTributeUid)) {
       return fail('selected Tribute must be one controlled Plant monster.');
     }
     if (!cards.some(card => card.uid === selectedTargetUid)) {
@@ -281,7 +280,7 @@ export function captureTagArcaneArcherActivation(
         sourcePhysicalOwnerSeat: source.physicalOwnerSeat as PhysicalSeat,
         sourceControllerTeam: source.controllerTeam,
         source,
-        fieldMonstersAtActivation: faceUpMonsters,
+        fieldMonstersAtActivation: monsters,
         fieldCardsAtActivation: cards,
         selectedTributeUid,
         selectedTargetUid,
