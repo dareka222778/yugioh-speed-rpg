@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "mission": "M432",
+  "runId": "work-20261121T011126-0300-M432",
+  "owner": "Work principal",
+  "state": "active",
+  "startedAt": "2026-11-21T01:11:26-03:00",
+  "priority": "P1 — adaptar 3-Hump Lacooda à primitive M367: três cópias face-up no campo compartilhado, Tribute exato de duas como custo e compra de três cartas do Deck privado do assento físico ativo, sem descarte imediato da mão (limite 6 apenas na End Phase).",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "e501fbb7614bb8114a960415abdeefbc7508f5c5",
+  "branch": "feat/work-m432-three-hump-lacooda-draw-2v2-20261121",
+  "baseBranch": "feat/work-m367-identity-scoped-tribute-primitive-20261118",
+  "baseSha": "9765ff20f192372c950a4a7012005776bbf4eb74",
+  "reservedFiles": [
+    "src/threeHumpLacooda.ts",
+    "tests/threeHumpLacooda.test.cjs",
+    "docs/evidence/m432-three-hump-lacooda.json",
+    ".github/workflows/m432-three-hump-lacooda.yml"
+  ],
+  "card": {
+    "name": "3-Hump Lacooda",
+    "id": "86988864",
+    "konamiCid": 6032,
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6032&ope=2&request_locale=en",
+    "firstTcgSet": "Ancient Sanctuary (AST-070)",
+    "firstTcgRelease": "2004-06-01"
+  },
+  "dependency": {
+    "pr": 315,
+    "branch": "feat/work-m367-identity-scoped-tribute-primitive-20261118",
+    "head": "9765ff20f192372c950a4a7012005776bbf4eb74",
+    "status": "open-draft; focused/CardBatch/Milestone/Engine Validation success",
+    "reason": "M367 owns the generic identity-scoped Tribute eligibility/payment primitive; M432 adds only card-specific draw/seat adapter."
+  },
+  "handoffM61": {
+    "pr": 17,
+    "commentId": 7056919457,
+    "status": "awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "touched": false
+  },
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M61",
+      "M367 existing files",
+      "M431 four new paths",
+      "M402-M430"
+    ],
+    "note": "M432 writes only four new paths on a branch stacked on M367. No central resolver, card catalog, certificates or third-party reservations are touched."
+  },
+  "catalogAtStart": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "blocksCompleted": [
+    "M431 branch and tests already published; M368 dependency CI was verified green on its exact head.",
+    "Selected M367 identity-scoped Tribute primitive as the non-duplicating base for the next card-specific family; PR #315 has focused, Card Batch Fast, Milestone 1000 and Engine Validation success."
+  ],
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "ciWaitExcluded": true,
+    "targetMet": false
+  }
+}
