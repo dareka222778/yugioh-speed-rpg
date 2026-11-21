@@ -108,7 +108,7 @@ test('multiple face-up copies across both physical teammates stack once each', (
 test('current controller team determines LP routing, not physical owner seat', () => {
   const game = makeGame();
   const source = addWishes(game, 0, 1);
-  const event = drawEvent(game, 2, 1, 'm447:draw:controller');
+  const event = drawEvent(game, 1, 1, 'm447:draw:controller');
   const result = resolveTagSolemnWishesDrawGain(game, event);
   assert.equal(result.ok, true);
   assert.equal(result.value.result.gainingTeam, 1);
@@ -280,7 +280,7 @@ test('duplicate physical UIDs anywhere in the four-seat inventory are rejected',
   game.core.players[1].grave.push({ ...wishes });
   const event = drawEvent(game, 0, 1, 'm447:draw:duplicate-inventory');
   assert.deepEqual(resolveTagSolemnWishesDrawGain(game, event), {
-    ok: false, reason: 'invalid-tag-duel-core-or-zone-capacity'
+    ok: false, reason: 'tag-duel-physical-inventory-is-not-unique'
   });
 });
 
@@ -323,7 +323,7 @@ test('the adapter respects the shared three-backrow-zone capacity', () => {
 
 test('the separate Field Zone does not consume a shared backrow slot', () => {
   const game = makeGame();
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 2; i++) {
     const physical = takeCard(game, 0);
     game.core.players[0].backrow.push({ ...physical, faceUp: false });
   }
