@@ -3,9 +3,9 @@
   "id": "work-20261121T013025-0300-M434",
   "mission": "M434",
   "priority": "P1",
-  "status": "reserved",
+  "status": "aborted-conflict",
   "startedAt": "2026-11-21T01:30:25-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-21T01:48:00-03:00",
   "branch": "feat/work-m434-amazoness-blowpiper-standby-20261121",
   "baseRef": "feat/rea-engine-recovery-20261026",
   "baseSha": null,
@@ -47,9 +47,15 @@
     "discordLiveTest": false
   },
   "blockers": [
-    "M61 resolver handoff remains pending; this mission is a standalone behavior adapter and test, not central engine registration."
+    "Conflito com a reserva ativa M383 para Amazoness Blowpiper; escopo abandonado preventivamente."
   ],
-  "nextTask": "Implement exact Standby-window adapter for the 500 ATK reduction; test actual TagDuel state, physical seats, target revalidation and End Phase expiry.",
+  "nextTask": "Selecionar e implementar uma família não reservada; preservar M383.",
   "nextWorkWindow": "2026-11-21T06:30:00-03:00",
-  "releasedToAuxiliary": false
+  "releasedToAuxiliary": false,
+  "blocksCompleted": [
+    "Reserva criada e PR #382 aberta para obter o HEAD exato da branch compartilhada.",
+    "Auditoria da coordenação detectou M383 já reservando Amazoness Blowpiper e os arquivos centrais de Standby; nenhuma implementação foi iniciada.",
+    "PR #382 fechada sem merge; escopo liberado integralmente, sem alterar a reserva de M383."
+  ],
+  "releasedAt": "2026-11-21T01:48:00-03:00"
 }
