@@ -1,0 +1,71 @@
+{
+  "mission": "M460",
+  "runId": "work-20261121T152737-0300-M460",
+  "status": "implementation-complete-ci-pending",
+  "title": "TagDuel End Phase hand-limit Discord integration",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagDuelEndPhaseDiscardDiscord2v2.test.cjs",
+      "docs/evidence/m460-tag-end-phase-discord-discard.json",
+      ".github/workflows/m460-tag-end-phase-discord-discard.yml"
+    ],
+    "initialSeatRotations": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scenarios": 4,
+    "successfulInteractions": 8,
+    "rejectedForgedInteractions": 8,
+    "behavior": "For each initial seat rotation, the outgoing representative ends the turn; the incoming physical seat with seven cards must discard before its next draw. Only that incoming representative receives the private discard menu. The inactive partner and outgoing opponent cannot submit the discard action. The next deck card is drawn only after the discard, the same incoming representative retains the turn, and the partner's private hand remains unchanged.",
+    "validation": "Actual TagDuel state transitions, SQLite tag_sessions persistence, tagPrivateMessage/tagPublicMessage builders, handleTagComponent and Discord payload validation run offline."
+  },
+  "invariants": {
+    "discardOnlyAtEndPhase": true,
+    "incomingSeatDiscardsBeforeDraw": true,
+    "drawWaitsForDiscard": true,
+    "activeRepresentativeOnlyMenu": true,
+    "inactivePartnerCannotDiscard": true,
+    "outgoingOpponentCannotDiscard": true,
+    "partnerPrivateHandUnchanged": true,
+    "physicalUidConservation": true,
+    "sharedFieldPreserved": true,
+    "fourSeatRotations": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Offline Discord builders/handler; no live guild or bot token.",
+    "Uses a deterministic temporary SQLite session; no production database or player records.",
+    "This validates an existing rules behavior and does not add or certify a card."
+  ]
+}
