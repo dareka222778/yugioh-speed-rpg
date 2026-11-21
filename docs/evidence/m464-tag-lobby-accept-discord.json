@@ -1,0 +1,65 @@
+{
+  "mission": "M464",
+  "runId": "work-20261121T152737-0300-M464",
+  "status": "implementation-complete-ci-pending",
+  "title": "TagDuel four-human lobby and Discord acceptance without inventory grants",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagLobbyAcceptDiscord2v2.test.cjs",
+      "docs/evidence/m464-tag-lobby-accept-discord.json",
+      ".github/workflows/m464-tag-lobby-accept-discord.yml"
+    ],
+    "lobbyScenarios": 2,
+    "acceptanceActions": 3,
+    "privatePanelOpens": 4,
+    "behavior": "Create a four-human classic-loan lobby using temporary player profiles with empty collections; accept the three invitations through the actual handleTagComponent button route; start a valid 2v2 state; open ephemeral private hands for all four players and expose an action menu only to the active physical representative. Reject a nonparticipant and wrong-guild action before acknowledgement.",
+    "validation": "Temporary SQLite, createTagLobby/acceptTag/getTag, tagPublicMessage/tagPrivateMessage, handleTagComponent, validateDiscordPayload, TagDuel integrity and rules profile."
+  },
+  "invariants": {
+    "fourDistinctHumans": true,
+    "allFourAcceptRequired": true,
+    "correctTwoTeams": true,
+    "currentRepresentativeOnlyActionMenu": true,
+    "privateHandsEphemeral": true,
+    "wrongGuildRejectedBeforeAck": true,
+    "nonparticipantRejectedBeforeAck": true,
+    "collectionUnchanged": true,
+    "noPlayerCardsGranted": true,
+    "noStarterGrantReceipts": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Discord interaction adapter and builders are exercised offline; no live guild or token.",
+    "Player profiles are temporary fixtures; no real player collection or persistent database is changed.",
+    "This validates the 2v2 lobby path and does not certify a new card."
+  ]
+}
