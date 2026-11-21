@@ -166,6 +166,37 @@ test('a negated resolving Standby task suppresses both LP recovery effects', () 
   assert.deepEqual(result.value.teamLifePointsAfter, [4000, 4000]);
 });
 
+test('per-copy negation suppresses only the selected Dancing Fairy UID', () => {
+  const game = makeGame(2);
+  const negated = addFairy(game, 0, 0);
+  const eligible = addFairy(game, 2, 0);
+  const event = { ...openTask(game), negatedSourceUids: [negated.uid] };
+  const result = resolveTagStandbyLpRecovery(game, event);
+  assert.equal(result.ok, true);
+  assert.equal(result.value.dancingFairy.triggerCount, 1);
+  assert.equal(result.value.dancingFairy.triggerSources[0].uid, eligible.uid);
+  assert.equal(result.value.requestedGain, 1000);
+});
+
+test('per-copy negation suppresses only the selected Darklord Marie UID', () => {
+  const game = makeGame(2);
+  const negated = addMarie(game, 0, 0);
+  const eligible = addMarie(game, 2, 0);
+  const event = { ...openTask(game), negatedSourceUids: [negated.uid] };
+  const result = resolveTagStandbyLpRecovery(game, event);
+  assert.equal(result.ok, true);
+  assert.equal(result.value.darklordMarie.triggerCount, 1);
+  assert.equal(result.value.darklordMarie.triggerSources[0].uid, eligible.uid);
+  assert.equal(result.value.requestedGain, 200);
+});
+
+test('rejects a per-card negation UID that is not a physical Standby recovery card', () => {
+  const game = makeGame(2);
+  const event = { ...openTask(game), negatedSourceUids: ['m0:missing'] };
+  const result = resolveTagStandbyLpRecovery(game, event);
+  assert.deepEqual(result, { ok: false, reason: 'negated-source-uid-is-not-a-standby-recovery-card' });
+});
+
 test('Darklord Marie recovers 200 LP only if the same physical UID was in the shared Graveyard at activation and resolution', () => {
   const game = makeGame(2);
   const marie = addMarie(game, 0, 0);
