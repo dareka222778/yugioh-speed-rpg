@@ -1,0 +1,36 @@
+name: M471 TagDuel decision timeout Discord contract
+on:
+  push:
+    branches:
+      - feat/work-m471-tag-decision-timeout-discord-20261121
+    paths:
+      - 'tests/tagDecisionTimeoutDiscord2v2.test.cjs'
+      - 'docs/evidence/m471-tag-decision-timeout-discord.json'
+      - '.github/workflows/m471-tag-decision-timeout-discord.yml'
+  pull_request:
+    paths:
+      - 'tests/tagDecisionTimeoutDiscord2v2.test.cjs'
+      - 'docs/evidence/m471-tag-decision-timeout-discord.json'
+      - '.github/workflows/m471-tag-decision-timeout-discord.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-decision-timeout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m471-tag-decision-timeout-discord.json', 'utf8'))"
+      - name: Run TagDuel decision timeout tests
+        run: node --test tests/tagDecisionTimeoutDiscord2v2.test.cjs
