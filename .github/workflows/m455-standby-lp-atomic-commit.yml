@@ -1,0 +1,36 @@
+name: M455 Standby LP atomic commit
+on:
+  push:
+    branches:
+      - feat/work-m455-standby-lp-atomic-commit-20261121
+    paths:
+      - 'tests/standbyLpFirePrincessAtomicCommit.test.cjs'
+      - 'docs/evidence/m455-standby-lp-atomic-commit.json'
+      - '.github/workflows/m455-standby-lp-atomic-commit.yml'
+  pull_request:
+    paths:
+      - 'tests/standbyLpFirePrincessAtomicCommit.test.cjs'
+      - 'docs/evidence/m455-standby-lp-atomic-commit.json'
+      - '.github/workflows/m455-standby-lp-atomic-commit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  standby-lp-atomic-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m455-standby-lp-atomic-commit.json', 'utf8'))"
+      - name: Run isolated SQLite Standby-to-Fire-Princess transaction tests
+        run: node --test tests/standbyLpFirePrincessAtomicCommit.test.cjs
