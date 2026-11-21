@@ -1,0 +1,66 @@
+{
+  "mission": "M459",
+  "runId": "work-20261121T122100-0300-M459",
+  "status": "implementation-complete-ci-pending",
+  "title": "TagDuel LP Discord projection seat matrix",
+  "base": {
+    "branch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
+    "sha": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagDuelLpDiscordSeatMatrix.test.cjs",
+      "docs/evidence/m459-tag-duel-lp-discord-seat-matrix.json",
+      ".github/workflows/m459-tag-duel-lp-discord-seat-matrix.yml"
+    ],
+    "initialSeatRotations": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scenarios": 4,
+    "behavior": "For each initial active seat, the public Discord payload shows the shared team LP totals [4500,3500], all four physical hands remain UID-private, only the current representative receives the action menu, the partner sees no action menu, and an End Phase action is processed through handleTagComponent with a revision increment and unchanged shared LP.",
+    "validation": "Discord builders and handler are exercised offline with payload validation and an isolated SQLite database; no live bot session."
+  },
+  "invariants": {
+    "publicLpShared": true,
+    "privateHandUidIsolation": true,
+    "activeRepresentativeOnlyActionMenu": true,
+    "partnerActionMenuHidden": true,
+    "revisionOptimisticCheck": true,
+    "endPhaseInteraction": true,
+    "allFourInitialSeatRotations": true,
+    "ownerRulesPreserved": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "The test exercises Discord payload builders and handleTagComponent offline; it does not connect to a live Discord guild.",
+    "LP values are seeded from a trusted pipeline result; no new card is registered or certified."
+  ]
+}
