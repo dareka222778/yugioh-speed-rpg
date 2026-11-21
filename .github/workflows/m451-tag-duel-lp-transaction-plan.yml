@@ -32,5 +32,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m451-tag-duel-lp-transaction-plan.json', 'utf8'))"
       - name: Run TagDuel LP transaction behavior tests
         run: node --test tests/tagDuelLifePointTransaction.test.cjs
