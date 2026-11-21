@@ -16,8 +16,9 @@
     "topLevelTests": 1,
     "consentSnapshots": 4,
     "postConsentDeckEdits": 2,
-    "behavior": "The host loadout is captured at lobby creation; seat 1's loadout is captured at acceptance; seat 2 edits before acceptance and the new loadout is captured; seat 3 accepts without edits. After the final consent, the actual TagDuel inventory is compared as a multiset against each seat's saved consent snapshot, while current active decks for seats 0/1 intentionally differ. All physical UIDs remain m0–m3 and player/collection/deck rows remain unchanged by TagDuel.",
-    "validation": "Temporary SQLite; createPlayer/chooseStarterDeck; decks.openDeck/changeDeck; createTagLobby/acceptTag; physical seat extraction from core/reserves; TagDuel inventory conservation; Discord public/private payload builders."
+    "behavior": "The host loadout is captured at lobby creation; seat 1's loadout is captured at acceptance; seat 2 edits before acceptance and the new loadout is captured; seat 3 accepts without edits. After the final consent, the actual TagDuel inventory is compared as a multiset against each seat's saved consent snapshot, while current active decks for seats 0/1 intentionally differ. All physical UIDs remain m0–m3 and player/collection/deck rows remain unchanged by TagDuel. The persisted TagDuel JSON is then reloaded through a fresh tagStore module instance; all four consent snapshots, physical UID inventory and seat ownership must survive restoration unchanged.",
+    "validation": "Temporary SQLite; createPlayer/chooseStarterDeck; decks.openDeck/changeDeck; createTagLobby/acceptTag; physical seat extraction from core/reserves; TagDuel inventory conservation; Discord public/private payload builders.",
+    "persistenceReload": true
   },
   "invariants": {
     "hostSnapshotAtLobbyCreation": true,
@@ -28,7 +29,9 @@
     "physicalUidPrefixesPreserved": true,
     "noTagDuelInventoryGrant": true,
     "noCollectionConsumption": true,
-    "privateHandsRemainPrivate": true
+    "privateHandsRemainPrivate": true,
+    "persistenceReloadPreservesState": true,
+    "persistenceReloadPreservesConsentSnapshots": true
   },
   "rules": {
     "mainDeckMin": 20,

@@ -172,6 +172,25 @@ test('classic-owned TagDuel snapshots each active deck at creation/consent time,
     }
     validateDiscordPayload(ui.tagPrivateMessage(record, id));
   }
+
+  const persistedState = JSON.parse(JSON.stringify(record.state));
+  const persistedDeckSnapshots = record.members.map(member => ({
+    cards: [...member.cards],
+    extra: [...(member.extra ?? [])]
+  }));
+  delete require.cache[require.resolve('../dist/tagStore')];
+  const reopened = require('../dist/tagStore').getTag(record.id);
+  assert.ok(reopened);
+  assert.deepEqual(reopened.state, persistedState,
+    'the four-seat physical deck/hand snapshot must survive SQLite JSON restoration');
+  assert.deepEqual(reopened.members.map(member => ({
+    cards: [...member.cards],
+    extra: [...(member.extra ?? [])]
+  })), persistedDeckSnapshots);
+  assert.deepEqual(
+    tag.tagInventory(reopened.state).map(card => card.uid).sort(),
+    inventory.map(card => card.uid).sort()
+  );
 });
 
 after(() => {
