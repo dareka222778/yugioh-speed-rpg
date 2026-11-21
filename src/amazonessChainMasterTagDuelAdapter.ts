@@ -18,6 +18,7 @@ import {
   type TransferProjection,
 } from './amazonessChainMaster';
 
+export { AMAZONESS_CHAIN_MASTER_ID };
 export const AMAZONESS_CHAIN_MASTER_TAG_ID = AMAZONESS_CHAIN_MASTER_ID;
 export type TagPhysicalSeat = DuelSeat;
 export type TagDuelTeam = 0 | 1;
