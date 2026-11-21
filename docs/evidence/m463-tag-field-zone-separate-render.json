@@ -1,0 +1,67 @@
+{
+  "mission": "M463",
+  "runId": "work-20261121T152737-0300-M463",
+  "status": "implementation-complete-ci-pending",
+  "title": "TagDuel 2v2 separate Field Zone and three-slot backrow visual integrity",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagFieldZoneSeparateRender2v2.test.cjs",
+      "docs/evidence/m463-tag-field-zone-separate-render.json",
+      ".github/workflows/m463-tag-field-zone-separate-render.yml"
+    ],
+    "initialSeatRotations": 4,
+    "viewerSeats": 4,
+    "publicRenders": 4,
+    "privateRenders": 16,
+    "scenarios": 20,
+    "behavior": "For all four initial rotations, both teams hold a face-up certified Field Spell in the dedicated field property while all three Spell/Trap slots contain face-down Traps. PublicTagDuel exposes the Field Spell but only hidden backrow counts; renderTag fetches public Field Spell art and, in private views, only the selected physical viewer's hand. Set Trap identities and other hands are never requested."
+  },
+  "invariants": {
+    "fieldZoneSeparate": true,
+    "allThreeBackrowSlotsRemainUsable": true,
+    "publicBackrowIdentityHidden": true,
+    "privateBackrowIdentityHidden": true,
+    "publicFieldSpellVisible": true,
+    "privateHandOnlyForViewer": true,
+    "fourInitialSeatRotations": true,
+    "fourPhysicalViewers": true,
+    "classicWidth": 1400,
+    "classicFieldHeight": 1240,
+    "classicPrivateHeight": 1580
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedDeterministicFixtures": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Offline renderer/provider; no external art fetch or live Discord guild.",
+    "Uses certified Sogen and certified Trap definitions in deterministic temporary state; no production data.",
+    "This validates layout/privacy and does not certify a new card."
+  ]
+}
