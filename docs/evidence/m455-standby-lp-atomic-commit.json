@@ -1,7 +1,7 @@
 {
   "mission": "M455",
   "runId": "work-20261121T112504-0300-M455",
-  "status": "implementation-complete-ci-pending",
+  "status": "test-fixture-corrected-ci-pending",
   "title": "Standby LP → Fire Princess planning and fail-closed atomic persistence gate",
   "base": {
     "branch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
@@ -24,13 +24,13 @@
     ],
     "scenarioCount": 3,
     "scenarios": [
-      "Dancing Fairy (1000 LP) + Fire Princess (500 damage): M444/M452 planners compute the exact team-0 result while preserving the physical owner seat, but M454 storage rejects the state as invalid-tag-session-state because these cards are not yet admitted; session revision, LP and ledgers remain unchanged.",
-      "Darklord Marie (200 LP) + Fire Princess (500 damage): activation-time UID snapshot and team-1 routing are correct; storage fails closed for the same admission gate, without partial writes.",
+      "Dancing Fairy (1000 LP) + Fire Princess (500 damage): the active Standby planner computes the exact team-0 result while preserving physical owner seat; a separate clean persisted snapshot with the same unadmitted candidates is rejected by duel integrity before storage, and the store returns invalid-tag-session-state with revision, LP and ledgers unchanged.",
+      "Darklord Marie (200 LP) + Fire Princess (500 damage): activation-time UID snapshot and team-1 routing are correct; a separate clean persisted snapshot containing the unadmitted candidates is rejected at the duel-integrity boundary before any partial storage write.",
       "A certified-only TagDuel state accepts a generic M452 LP plan; M454 commits both LP totals and both ledgers atomically, duplicate retry is idempotent, and a stale session revision is rejected."
     ]
   },
   "admissionGate": {
-    "observed": "The current M454 base card certification registry does not include the Standby/Fire Princess candidate IDs; assertTagDuel rejects these states before storage mutation.",
+    "observed": "The current M454 base catalog does not admit the Standby/Fire Princess candidate IDs. A clean TagDuel snapshot containing those IDs is rejected by duel integrity as an unknown card identity; the storage boundary maps that validation failure to invalid-tag-session-state before changing revision, LP totals or ledgers.",
     "expectedStoreResult": "invalid-tag-session-state",
     "noPartialWrite": true,
     "nextRequirement": "Complete card admission/certification through the normal behavioral gate before allowing these source cards into a persisted TagDuel session."
@@ -92,9 +92,9 @@
     "inventoryGranted": 0
   },
   "limitations": [
-    "The two new Standby/Fire Princess source combinations are not yet admitted in the M454 base, so the storage layer correctly rejects their persisted states.",
     "The successful atomic commit case uses a certified-only state and a generic LP gain with no Fire Princess on the field.",
     "No central resolver registration; M61 handoff remains pending.",
-    "No live Discord credentials or production session are used."
+    "No live Discord credentials or production session are used.",
+    "The planner scenarios run with an active in-memory Standby continuation; persistence rejection is exercised against a separate clean snapshot containing the same unadmitted card candidates, isolating admission from continuation validation."
   ]
 }
