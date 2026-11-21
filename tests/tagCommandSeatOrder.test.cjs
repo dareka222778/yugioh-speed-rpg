@@ -48,13 +48,19 @@ test('the command seat order persisted by tagStore places host+partner together 
   }, before);
 });
 
-test('duplicate invite IDs are rejected before any lobby or seat lock is created', () => {
+test('duplicate invite IDs are rejected before any additional lobby or seat lock is created', () => {
+  const before = {
+    sessions: db.prepare('SELECT COUNT(*) AS n FROM tag_sessions').get().n,
+    members: db.prepare('SELECT COUNT(*) AS n FROM tag_members').get().n
+  };
   assert.throws(
     () => store.createTagLobby(['same', 'opponent-1', 'same', 'opponent-2'], 'm468-guild', 'm468-channel', 'normal'),
     /quatro jogadores diferentes/
   );
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM tag_sessions').get().n, 0);
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM tag_members').get().n, 0);
+  assert.deepEqual({
+    sessions: db.prepare('SELECT COUNT(*) AS n FROM tag_sessions').get().n,
+    members: db.prepare('SELECT COUNT(*) AS n FROM tag_members').get().n
+  }, before);
 });
 
 after(() => {
