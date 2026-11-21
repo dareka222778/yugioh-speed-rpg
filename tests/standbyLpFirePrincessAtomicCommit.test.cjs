@@ -134,7 +134,7 @@ function currentLP(game) {
   return [game.core.players[0].lp, game.core.players[1].lp];
 }
 
-function makePipelinePlan(game, event, sourceLedger = [], fireLedger = [], negatedFirePrincessUids = []) {
+function makeStandbyPlan(game, event) {
   const before = currentLP(game);
   const standby = resolveTagStandbyLpRecovery(game, event);
   assert.equal(standby.ok, true, standby.reason || 'Standby adapter must resolve');
@@ -143,9 +143,8 @@ function makePipelinePlan(game, event, sourceLedger = [], fireLedger = [], negat
     gainingTeam: event.activeTeam,
     lpGained: standby.value.requestedGain,
     teamLifePointsBefore: before,
-    teamLifePointsAfterGain: standby.value.teamLifePointsAfter,
-    negatedFirePrincessUids
-  }, sourceLedger, fireLedger);
+    teamLifePointsAfterGain: standby.value.teamLifePointsAfter
+  });
   assert.equal(plan.ok, true, plan.reason || 'LP pipeline must plan');
   return { standby: standby.value, plan: plan.value };
 }
@@ -162,7 +161,8 @@ function register(state, id) {
     id, 'm455-guild', 'm455-channel', 'm455-message', 7, Date.now(),
     'playing', JSON.stringify(members), JSON.stringify(state), 'classic-loan'
   );
-  return store.getTag(id);
+  // Do not call getTag here: it validates admission before the tested commit boundary.
+  return { id, revision: 7 };
 }
 
 function ledger(sessionId) {
@@ -171,18 +171,11 @@ function ledger(sessionId) {
   ).get(sessionId);
 }
 
-function inventory(state) {
-  return new Map(tag.tagInventory(state).map(card => [card.uid, card.id]));
-}
-
-function assertConserved(state, before) {
-  const current = inventory(state);
-  assert.equal(current.size, before.size);
-  for (const [uid, id] of before) assert.equal(current.get(uid), id, 'physical card identity changed: ' + uid);
-}
-
-function assertOwnerUid(uid, seat) {
-  assert.match(uid, new RegExp('^m' + seat + ':'));
+function rawSession(sessionId) {
+  const row = database.db.prepare(
+    'SELECT revision,state FROM tag_sessions WHERE id=?'
+  ).get(sessionId);
+  return { revision: row.revision, state: JSON.parse(row.state) };
 }
 
 function assertOwnerRules(state) {
@@ -198,120 +191,121 @@ function assertOwnerRules(state) {
   ], [20, 30, 6, 'end', 3, 3, 5]);
 }
 
-test('Dancing Fairy recovery feeds Fire Princess and both ledgers commit with the shared LP tuple', () => {
+test('Dancing Fairy and Fire Princess plan correct 2v2 LP, but unadmitted cards cannot cross the storage boundary', () => {
   const game = makeGame(0);
-  const fairy = addFairy(game, 2, 0); // partner-owned physical card, controlled by team 0
+  const fairy = addFairy(game, 2, 0);
   const princess = addPrincess(game, 0, 0);
   const event = openStandbyTask(game, 0);
   const beforeGame = JSON.stringify(game);
-  const beforeInventory = inventory(game);
 
-  const { standby, plan } = makePipelinePlan(game, event);
+  const { standby, plan } = makeStandbyPlan(game, event);
   assert.equal(standby.requestedGain, 1000);
   assert.equal(standby.dancingFairy.triggerCount, 1);
   assert.equal(standby.dancingFairy.triggerSources[0].uid, fairy.uid);
   assert.equal(standby.dancingFairy.triggerSources[0].physicalOwnerSeat, 2);
   assert.equal(plan.firePrincess.triggerCount, 1);
   assert.equal(plan.firePrincess.triggerSources[0].uid, princess.uid);
-  assert.deepEqual(plan.teamLifePointsBefore, [4000, 4000]);
   assert.deepEqual(plan.teamLifePointsAfter, [5000, 3500]);
-  assert.equal(JSON.stringify(game), beforeGame, 'planning must not mutate the live duel');
+  assert.equal(JSON.stringify(game), beforeGame, 'both planners must remain read-only');
 
-  const record = register(game, 'm455-fairy-fire');
-  const committed = commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan);
-  assert.deepEqual(committed, {
-    ok: true,
-    status: 'committed',
-    revision: 8,
-    teamLifePoints: [5000, 3500]
+  assert.throws(() => tag.assertTagDuel(game), /Carta não admitida/);
+  const record = register(game, 'm455-fairy-fire-gate');
+  assert.deepEqual(commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan), {
+    ok: false,
+    reason: 'invalid-tag-session-state'
   });
 
-  const persisted = store.getTag(record.id);
-  assert.equal(persisted.revision, 8);
-  assert.deepEqual(currentLP(persisted.state), [5000, 3500]);
-  assertOwnerUid(fairy.uid, 2);
-  assertOwnerUid(princess.uid, 0);
-  assertConserved(persisted.state, beforeInventory);
-  tag.assertTagDuel(persisted.state);
-  assertOwnerRules(persisted.state);
-
-  const saved = ledger(record.id);
-  assert.deepEqual(JSON.parse(saved.source_event_ids), [event.eventId]);
-  assert.deepEqual(JSON.parse(saved.fire_princess_event_ids), [event.eventId + ':fire-princess']);
+  const unchanged = rawSession(record.id);
+  assert.equal(unchanged.revision, 7);
+  assert.deepEqual(currentLP(unchanged.state), [4000, 4000]);
+  assert.equal(ledger(record.id), undefined, 'no partial source or Fire Princess ledger may be written');
 });
 
-test('Darklord Marie activation snapshot feeds the opposing Fire Princess burn for team 1', () => {
+test('Darklord Marie activation snapshot and Fire Princess team routing are planned, then fail closed before persistence', () => {
   const game = makeGame(1);
-  const marie = addMarie(game, 3, 1); // partner-owned physical copy in team 1 shared Graveyard
+  const marie = addMarie(game, 3, 1);
   const princess = addPrincess(game, 1, 1);
   const event = openStandbyTask(game, 1);
-  const beforeInventory = inventory(game);
+  const beforeGame = JSON.stringify(game);
 
   assert.deepEqual(event.activationDarklordMarieUids, [marie.uid]);
-  const { standby, plan } = makePipelinePlan(game, event);
+  const { standby, plan } = makeStandbyPlan(game, event);
   assert.equal(standby.darklordMarie.triggerCount, 1);
   assert.equal(standby.darklordMarie.triggerSources[0].uid, marie.uid);
   assert.equal(standby.requestedGain, 200);
   assert.equal(plan.firePrincess.triggerCount, 1);
   assert.equal(plan.firePrincess.triggerSources[0].uid, princess.uid);
   assert.deepEqual(plan.teamLifePointsAfter, [3500, 4200]);
+  assert.equal(JSON.stringify(game), beforeGame);
 
-  const record = register(game, 'm455-marie-fire');
-  const committed = commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan);
-  assert.deepEqual(committed, {
+  assert.throws(() => tag.assertTagDuel(game), /Carta não admitida/);
+  const record = register(game, 'm455-marie-fire-gate');
+  assert.deepEqual(commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan), {
+    ok: false,
+    reason: 'invalid-tag-session-state'
+  });
+  const unchanged = rawSession(record.id);
+  assert.equal(unchanged.revision, 7);
+  assert.deepEqual(currentLP(unchanged.state), [4000, 4000]);
+  assert.equal(ledger(record.id), undefined);
+});
+
+test('certified-only LP plan commits atomically, duplicate replay is idempotent and stale revision is rejected', () => {
+  const game = makeGame(0);
+  const beforeInventory = new Map(tag.tagInventory(game).map(card => [card.uid, card.id]));
+  const plan = planTagDuelLpGainFirePrincessPipeline(game, {
+    eventId: 'm455:generic-lp-gain',
+    gainingTeam: 0,
+    lpGained: 500,
+    teamLifePointsBefore: [4000, 4000],
+    teamLifePointsAfterGain: [4500, 4000]
+  });
+  assert.equal(plan.ok, true);
+  assert.equal(plan.value.firePrincess.reason, 'no-eligible-fire-princess');
+  assert.deepEqual(plan.value.teamLifePointsAfter, [4500, 4000]);
+
+  const record = register(game, 'm455-certified-only');
+  const first = commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan.value);
+  assert.deepEqual(first, {
     ok: true,
     status: 'committed',
     revision: 8,
-    teamLifePoints: [3500, 4200]
+    teamLifePoints: [4500, 4000]
   });
-  const persisted = store.getTag(record.id);
-  assert.deepEqual(currentLP(persisted.state), [3500, 4200]);
-  assertOwnerUid(marie.uid, 3);
-  assertOwnerUid(princess.uid, 1);
-  assertConserved(persisted.state, beforeInventory);
-  tag.assertTagDuel(persisted.state);
-  assertOwnerRules(persisted.state);
-});
 
-test('committed replay is idempotent and a new event with stale session revision cannot overwrite it', () => {
-  const game = makeGame(0);
-  addFairy(game, 0, 0);
-  addPrincess(game, 2, 0);
-  const event = openStandbyTask(game, 0);
-  const { plan } = makePipelinePlan(game, event);
-  const record = register(game, 'm455-idempotency');
-  const first = commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan);
-  assert.equal(first.status, 'committed');
-
-  const duplicate = commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan);
+  const duplicate = commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan.value);
   assert.deepEqual(duplicate, {
     ok: true,
     status: 'duplicate-event',
     revision: 8,
-    teamLifePoints: [5000, 3500]
+    teamLifePoints: [4500, 4000]
   });
 
   const persisted = store.getTag(record.id);
+  assert.equal(persisted.revision, 8);
+  assert.deepEqual(currentLP(persisted.state), [4500, 4000]);
+  assert.deepEqual(new Map(tag.tagInventory(persisted.state).map(card => [card.uid, card.id])), beforeInventory);
+  tag.assertTagDuel(persisted.state);
+  assertOwnerRules(persisted.state);
   const saved = ledger(record.id);
-  const sourceIds = JSON.parse(saved.source_event_ids);
-  const fireIds = JSON.parse(saved.fire_princess_event_ids);
+  assert.deepEqual(JSON.parse(saved.source_event_ids), ['m455:generic-lp-gain']);
+  assert.deepEqual(JSON.parse(saved.fire_princess_event_ids), ['m455:generic-lp-gain:fire-princess']);
+
   const secondPlan = planTagDuelLpGainFirePrincessPipeline(persisted.state, {
     eventId: 'm455:second-event',
     gainingTeam: 0,
     lpGained: 500,
-    teamLifePointsBefore: [5000, 3500],
-    teamLifePointsAfterGain: [5500, 3500]
-  }, sourceIds, fireIds);
-  assert.equal(secondPlan.ok, true, secondPlan.reason || 'second event must plan from persisted snapshot');
-
+    teamLifePointsBefore: [4500, 4000],
+    teamLifePointsAfterGain: [5000, 4000]
+  }, JSON.parse(saved.source_event_ids), JSON.parse(saved.fire_princess_event_ids));
+  assert.equal(secondPlan.ok, true);
   assert.deepEqual(commitTagDuelLpGainPipelinePlan(record.id, record.revision, secondPlan.value), {
     ok: false,
     reason: 'stale-session-revision'
   });
   const after = store.getTag(record.id);
   assert.equal(after.revision, 8);
-  assert.deepEqual(currentLP(after.state), [5000, 3500]);
-  assert.deepEqual(JSON.parse(ledger(record.id).source_event_ids), [event.eventId]);
+  assert.deepEqual(currentLP(after.state), [4500, 4000]);
 });
 
 after(() => {

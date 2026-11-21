@@ -2,7 +2,7 @@
   "mission": "M455",
   "runId": "work-20261121T112504-0300-M455",
   "status": "implementation-complete-ci-pending",
-  "title": "Dancing Fairy / Darklord Marie Standby recovery → Fire Princess → atomic TagDuel session commit",
+  "title": "Standby LP → Fire Princess planning and fail-closed atomic persistence gate",
   "base": {
     "branch": "feat/work-m454-tag-duel-lp-session-commit-20261121",
     "sha": "8a91d5d4a81540975a95bdb1f5aed0b3e45a5adb"
@@ -22,17 +22,18 @@
       "docs/evidence/m455-standby-lp-atomic-commit.json",
       ".github/workflows/m455-standby-lp-atomic-commit.yml"
     ],
-    "sourceAdapters": [
-      "resolveTagStandbyLpRecovery",
-      "planTagDuelLpGainFirePrincessPipeline",
-      "commitTagDuelLpGainPipelinePlan"
-    ],
     "scenarioCount": 3,
     "scenarios": [
-      "Dancing Fairy 1000 LP to team 0, partner physical owner seat 2, followed by one Fire Princess 500 damage to team 1; both event ledgers, LP tuple and revision committed together.",
-      "Darklord Marie 200 LP to team 1 from activation-time UID snapshot, partner physical owner seat 3, followed by Fire Princess 500 damage to team 0.",
-      "A committed replay is idempotent; a distinct event planned from the new LP snapshot is rejected when committed with the stale session revision."
+      "Dancing Fairy (1000 LP) + Fire Princess (500 damage): M444/M452 planners compute the exact team-0 result while preserving the physical owner seat, but M454 storage rejects the state as invalid-tag-session-state because these cards are not yet admitted; session revision, LP and ledgers remain unchanged.",
+      "Darklord Marie (200 LP) + Fire Princess (500 damage): activation-time UID snapshot and team-1 routing are correct; storage fails closed for the same admission gate, without partial writes.",
+      "A certified-only TagDuel state accepts a generic M452 LP plan; M454 commits both LP totals and both ledgers atomically, duplicate retry is idempotent, and a stale session revision is rejected."
     ]
+  },
+  "admissionGate": {
+    "observed": "The current M454 base card certification registry does not include the Standby/Fire Princess candidate IDs; assertTagDuel rejects these states before storage mutation.",
+    "expectedStoreResult": "invalid-tag-session-state",
+    "noPartialWrite": true,
+    "nextRequirement": "Complete card admission/certification through the normal behavioral gate before allowing these source cards into a persisted TagDuel session."
   },
   "cardIdentities": [
     {
@@ -47,8 +48,7 @@
     },
     {
       "name": "Darklord Marie",
-      "identity": "Imported from the existing shared card constant",
-      "role": "Standby Graveyard recovery"
+      "role": "Standby Graveyard recovery; imported from shared card constant"
     }
   ],
   "invariants": {
@@ -92,8 +92,9 @@
     "inventoryGranted": 0
   },
   "limitations": [
-    "Test integration only; no central resolver registration because M61 handoff remains pending.",
-    "No live Discord credentials or production session are used.",
-    "Upstream Engine Validation for M451-M454 was still running at reservation time."
+    "The two new Standby/Fire Princess source combinations are not yet admitted in the M454 base, so the storage layer correctly rejects their persisted states.",
+    "The successful atomic commit case uses a certified-only state and a generic LP gain with no Fire Princess on the field.",
+    "No central resolver registration; M61 handoff remains pending.",
+    "No live Discord credentials or production session are used."
   ]
 }
