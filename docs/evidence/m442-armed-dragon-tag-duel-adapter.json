@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "mission": "M442",
+  "runId": "work-20261121T063655-0300-M442",
+  "priority": "P1",
+  "authority": "Konami official OCG Card Database",
+  "reviewedAt": "2026-11-21",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "name": "Armed Dragon LV3",
+      "id": "00980973",
+      "konamiCardDatabaseId": 6105,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6105&ope=2&request_locale=ja",
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP013",
+      "effectSummary": "Optional Standby Phase transition: send this face-up card to the GY and Special Summon Armed Dragon LV5 from the resolving physical player's hand or Deck."
+    },
+    {
+      "name": "Armed Dragon LV5",
+      "id": "46384672",
+      "konamiCardDatabaseId": 6106,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6106&ope=2&request_locale=ja",
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP014",
+      "effectSummary": "Discard one monster from the resolving physical player's hand to target one face-up opposing monster whose current ATK is no greater than the discarded monster's original ATK; separately, during the End Phase after it destroyed a monster by battle this turn, it may send itself to the GY and summon LV7 from that player's hand or Deck."
+    },
+    {
+      "name": "Armed Dragon LV7",
+      "id": "73879377",
+      "konamiCardDatabaseId": 6107,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6107&ope=2&request_locale=ja",
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP015",
+      "effectSummary": "Discard one monster from the resolving physical player's hand to destroy all currently face-up opposing monsters whose current ATK is no greater than the discarded monster's original ATK; it does not target."
+    }
+  ],
+  "tagDuelAdapter": {
+    "teamMapping": "seat % 2",
+    "activeRepresentative": "effect player is game.active[team], and game.cursor must match",
+    "lv3Standby": "requires a current active StandbyFlow choice keyed by armed-dragon-lv3:<sourceUid>:<turn>",
+    "lv5EndPhase": "requires turnEnding=true and an explicit same-turn battle-destruction record supplied by the battle resolver; current core does not persist this marker yet",
+    "privateZones": "summon candidates and discard cost are read only from the active physical seat hand/Deck; inactive partner reserves are excluded",
+    "sharedField": "opposing monsters are read from the other team's shared Monster Zone list",
+    "attackComparison": "discarded monster original ATK comes from certified card metadata; opposing current ATK is computed through the active resolver and continuous modifiers",
+    "physicalOwnership": "source and destroyed monsters retain UID-derived physicalOwnerSeat; destroyed targets route to the physical owner's team GY",
+    "lv5Targeting": "one face-up opposing target is selected at activation and revalidated at resolution",
+    "lv7Targeting": "no target UID is accepted; all currently eligible face-up opposing monsters are evaluated at resolution",
+    "summonRestriction": "LV7 rejects Normal Summon/Set and Graveyard/banished Level Up sources"
+  },
+  "tests": {
+    "file": "tests/armedDragonTagDuelAdapter.test.cjs",
+    "expectedCases": 22,
+    "behavioralGroups": [
+      "four-seat active representative and shared field",
+      "LV3 StandbyFlow continuation and active private Deck/hand",
+      "LV5 End Phase battle-destruction event contract",
+      "LV5 single-target original-ATK threshold using live current ATK",
+      "LV7 non-targeting resolution over the live opposing field",
+      "physical owner routing for source and destroyed monsters",
+      "private hand/deck isolation from inactive partner reserves",
+      "stale turn/seat and no-mutation guarantees",
+      "LV7 summon restriction and public privacy"
+    ]
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "runtimeIntegrated": false,
+  "discordLiveValidated": false,
+  "productionChanged": false
+}
