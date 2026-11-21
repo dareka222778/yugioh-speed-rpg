@@ -1,0 +1,36 @@
+name: M458 TagDuel LP storage fault matrix
+on:
+  push:
+    branches:
+      - feat/work-m458-tag-lp-storage-fault-matrix-20261121
+    paths:
+      - 'tests/tagDuelLpStorageFaultMatrix.test.cjs'
+      - 'docs/evidence/m458-tag-duel-lp-storage-fault-matrix.json'
+      - '.github/workflows/m458-tag-duel-lp-storage-fault-matrix.yml'
+  pull_request:
+    paths:
+      - 'tests/tagDuelLpStorageFaultMatrix.test.cjs'
+      - 'docs/evidence/m458-tag-duel-lp-storage-fault-matrix.json'
+      - '.github/workflows/m458-tag-duel-lp-storage-fault-matrix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tagduel-lp-storage-fault-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m458-tag-duel-lp-storage-fault-matrix.json', 'utf8'))"
+      - name: Run isolated TagDuel LP storage fault matrix
+        run: node --test tests/tagDuelLpStorageFaultMatrix.test.cjs
