@@ -135,6 +135,41 @@ async function submit(record, actor, index, requestId) {
   return store.getTag(record.id);
 }
 
+
+async function openPrivate(record, actor, requestId) {
+  const calls = [];
+  const deferKinds = [];
+  let payload;
+  const interaction = {
+    id: requestId,
+    guildId: record.guild,
+    user: { id: actor },
+    customId: 'tag:open:' + record.id + ':' + record.revision,
+    deferReply: async options => {
+      calls.push('deferReply');
+      assert.ok(options.flags, 'private panel must use an ephemeral reply');
+    },
+    editReply: async value => {
+      calls.push('edit');
+      payload = value;
+      validateDiscordPayload(value);
+    }
+  };
+  await handleTagComponent(interaction, async () => {
+    throw new Error('opening a private panel must not refresh the public board');
+  }, kind => deferKinds.push(kind));
+  assert.deepEqual(calls, ['deferReply', 'edit']);
+  assert.deepEqual(deferKinds, ['reply']);
+  return assertNoHandUids(record, payload, 'ephemeral open panel');
+}
+
+function panelHasActionMenu(record, actor, payload) {
+  const components = payload.components.map(row => row.toJSON()).flatMap(row => row.components || []);
+  return components.some(component =>
+    component.custom_id === 'tag:act:' + record.id + ':' + record.revision + ':' + actor
+  );
+}
+
 async function rejectForgedAction(record, actor, index, requestId) {
   const before = store.getTag(record.id);
   const snapshot = JSON.stringify(before.state);
@@ -213,6 +248,12 @@ test('TagDuel checks the incoming physical hand at End Phase and discards before
       assert.ok(publicPanel.embeds.length > 0);
       const nextMenu = actionMenu(afterDiscard, incoming);
       assert.ok(nextMenu, 'incoming representative receives the next turn after the discard and draw');
+      const incomingPanel = await openPrivate(afterDiscard, incoming, 'm460-open-incoming-' + first);
+      assert.equal(panelHasActionMenu(afterDiscard, incoming, incomingPanel), true);
+      const partnerPanel = await openPrivate(afterDiscard, inactivePartner, 'm460-open-partner-' + first);
+      assert.equal(panelHasActionMenu(afterDiscard, inactivePartner, partnerPanel), false);
+      const outgoingPanel = await openPrivate(afterDiscard, outgoing, 'm460-open-outgoing-' + first);
+      assert.equal(panelHasActionMenu(afterDiscard, outgoing, outgoingPanel), false);
     });
   }
 });
@@ -276,6 +317,12 @@ test('an eight-card hand requires two sequential End Phase discards before the n
       assertOwnerRules(afterSecondDiscard.state);
       assertNoHandUids(afterSecondDiscard, ui.tagPublicMessage(afterSecondDiscard), 'eight-card final public panel');
       assert.ok(actionMenu(afterSecondDiscard, incoming));
+      const incomingPanel = await openPrivate(afterSecondDiscard, incoming, 'm460-eight-open-incoming-' + first);
+      assert.equal(panelHasActionMenu(afterSecondDiscard, incoming, incomingPanel), true);
+      const partnerPanel = await openPrivate(afterSecondDiscard, inactivePartner, 'm460-eight-open-partner-' + first);
+      assert.equal(panelHasActionMenu(afterSecondDiscard, inactivePartner, partnerPanel), false);
+      const outgoingPanel = await openPrivate(afterSecondDiscard, outgoing, 'm460-eight-open-outgoing-' + first);
+      assert.equal(panelHasActionMenu(afterSecondDiscard, outgoing, outgoingPanel), false);
     });
   }
 });
@@ -314,6 +361,12 @@ test('an exact six-card hand skips discard and advances directly to the incoming
       assertNoHandUids(afterEnd, ui.tagPublicMessage(afterEnd), 'six-card public panel');
       assert.equal(actionMenu(afterEnd, outgoing), undefined);
       assert.ok(actionMenu(afterEnd, incoming), 'incoming seat receives the next turn without an unnecessary discard');
+      const incomingPanel = await openPrivate(afterEnd, incoming, 'm460-six-open-incoming-' + first);
+      assert.equal(panelHasActionMenu(afterEnd, incoming, incomingPanel), true);
+      const partnerPanel = await openPrivate(afterEnd, partner, 'm460-six-open-partner-' + first);
+      assert.equal(panelHasActionMenu(afterEnd, partner, partnerPanel), false);
+      const outgoingPanel = await openPrivate(afterEnd, outgoing, 'm460-six-open-outgoing-' + first);
+      assert.equal(panelHasActionMenu(afterEnd, outgoing, outgoingPanel), false);
     });
   }
 });
