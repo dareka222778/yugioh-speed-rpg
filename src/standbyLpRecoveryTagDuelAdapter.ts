@@ -1,5 +1,5 @@
 import type { TagDuel } from './tagDuel';
-import { assertTagDuel, tagInventory } from './tagDuel';
+import { tagInventory } from './tagDuel';
 import { monsterEffectsNegated } from './continuousEffects';
 import {
   DANCING_FAIRY_CARD_ID,
@@ -56,6 +56,47 @@ function validIdentifier(value: unknown): value is string {
   return typeof value === 'string' && /^[A-Za-z0-9:_-]{1,120}$/.test(value);
 }
 
+/** Validate TagDuel structure without requiring an unadmitted card to be playable.
+ * M444 is an adapter preparation layer; certification/admission remains separate. */
+function validateTagDuelShape(game: TagDuel): string | undefined {
+  if (!game || game.version !== 1 || game.mode !== 'tag-classic') return 'classic-tag-duel-required';
+  if (
+    !Array.isArray(game.members) || game.members.length !== 4
+    || game.members.some((member, index) => !member || !member.id || member.team !== index % 2)
+    || new Set(game.members.map(member => member.id)).size !== 4
+    || !Array.isArray(game.active) || game.active.length !== 2
+    || !Number.isInteger(game.cursor) || game.cursor < 0 || game.cursor > 3
+    || game.active[0] % 2 !== 0 || game.active[1] % 2 !== 1
+    || game.active[game.cursor % 2] !== game.cursor
+  ) return 'invalid-tag-duel-seats';
+  if (
+    !game.core || !Array.isArray(game.core.players) || game.core.players.length !== 2
+    || game.core.players.some((player, team) => !player || player.id !== 'tag-team-' + team
+      || !Array.isArray(player.monsters) || !Array.isArray(player.backrow)
+      || !Array.isArray(player.grave) || (player.extra ?? []).length > 5
+      || player.monsters.length > 3 || player.backrow.length > 3)
+    || game.core.current !== game.cursor % 2
+    || !game.core.teamRotation || game.core.teamRotation.version !== 1
+    || game.core.teamRotation.cursor !== game.cursor
+    || JSON.stringify([game.active, game.cursor, game.reserves])
+      !== JSON.stringify([game.core.teamRotation.active, game.core.teamRotation.cursor, game.core.teamRotation.reserves])
+  ) return 'invalid-tag-duel-core-or-zone-capacity';
+  const reserveSeats = Object.keys(game.reserves ?? {});
+  if (reserveSeats.length !== 2 || reserveSeats.some(key => {
+    const seat = Number(key);
+    const held = game.reserves[key];
+    return !/^[0-3]$/.test(key) || game.active.includes(seat)
+      || !held || !Array.isArray(held.deck) || !Array.isArray(held.hand)
+      || !Array.isArray(held.extra) || held.extra.length > 5;
+  })) return 'invalid-tag-duel-private-reserves';
+  const inventory = tagInventory(game);
+  if (!Array.isArray(inventory) || inventory.some(card => !card || typeof card.uid !== 'string' || !card.uid)
+    || new Set(inventory.map(card => card.uid)).size !== inventory.length) {
+    return 'tag-duel-physical-inventory-is-not-unique';
+  }
+  return undefined;
+}
+
 /**
  * Capture the Darklord Marie activation condition before the Standby task is
  * opened. Only the current team's shared Graveyard is inspected. The returned
@@ -65,7 +106,8 @@ export function captureDarklordMarieActivationUids(
   game: TagDuel,
   activeTeam: Team,
 ): string[] {
-  assertTagDuel(game);
+  const stateIssue = validateTagDuelShape(game);
+  if (stateIssue) throw new Error(stateIssue);
   if (game.mode !== 'tag-classic') throw new Error('Duelo Tag Classic 2v2 obrigatório.');
   if (activeTeam !== 0 && activeTeam !== 1) throw new Error('Equipe ativa inválida.');
   if (
@@ -169,7 +211,8 @@ export function resolveTagStandbyLpRecovery(
 ): { ok: true; value: TagStandbyRecoveryResult } | { ok: false; reason: string } {
   try {
     if (!game || game.mode !== 'tag-classic') return fail('classic-tag-duel-required');
-    assertTagDuel(game);
+    const stateIssue = validateTagDuelShape(game);
+    if (stateIssue) return fail(stateIssue);
     const eventIssue = validateEvent(game, event, event.activationDarklordMarieUids);
     if (eventIssue) return fail(eventIssue);
     if (
