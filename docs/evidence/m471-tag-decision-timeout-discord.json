@@ -1,0 +1,83 @@
+{
+  "mission": "M471",
+  "runId": "work-20261121T163746-0300-M471",
+  "status": "implementation-complete-ci-pending",
+  "priority": "P1 — validate the 30-minute TagDuel decision timeout, opposing-team walkover, persisted public transition event, lock release and rejection of stale actions.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "5dc132241fae3b2d9938022ccddb7e2c20750661"
+  },
+  "branch": "feat/work-m471-tag-decision-timeout-discord-20261121",
+  "implementation": {
+    "files": [
+      "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
+      "docs/evidence/m471-tag-decision-timeout-discord.json",
+      ".github/workflows/m471-tag-decision-timeout-discord.yml"
+    ],
+    "timeoutMs": 1800000,
+    "topLevelTests": 2,
+    "handlerInteractions": 7,
+    "behavior": [
+      "A playing TagDuel remains active one millisecond before DECISION_TIMEOUT_MS and finishes exactly at the 30-minute boundary.",
+      "Timeout produces a W.O. winner for the team opposite decisionPlayer, records the reason and persists a public duelFinished transition event at the new revision.",
+      "All four tag_members locks are released, currentTag is cleared, LP and canonical physical UIDs remain unchanged, and the finished public board is queued until markTagPublished.",
+      "A stale action menu from the active physical representative is rejected after timeout without a second revision or card mutation."
+    ],
+    "validation": "Four-human classic-loan lobby accepted through handleTagComponent; temporary SQLite; tagPrivateMessage/tagPublicMessage; validateDiscordPayload; getTag(id, now); tagEventsAt; dueTags; markTagPublished; canonical tagInventory."
+  },
+  "invariants": {
+    "exactThirtyMinuteBoundary": true,
+    "oneMillisecondBeforeStillPlaying": true,
+    "timeoutWinnerIsOpposingTeam": true,
+    "publicDuelFinishedEventPersisted": true,
+    "allFourSeatLocksReleased": true,
+    "currentTagCleared": true,
+    "canonicalPhysicalUidsConserved": true,
+    "sharedLifePointsConserved": true,
+    "privateHandUidsHidden": true,
+    "staleActionRejected": true,
+    "finishedBoardRefreshQueued": true,
+    "publishedRevisionNotRequeued": true,
+    "inventoryTablesUnchanged": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "realPlayerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "allowlistChanged": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Discord handlers and payload builders run offline; no live guild, bot token or Discord API call.",
+    "Temporary SQLite/player fixtures only; no persistent player, deck, collection or production state is changed.",
+    "Test/evidence/workflow only; no runtime, card resolver, catalogue, certification or allowlist changes."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "synchronization": {
+    "sharedHeadIncluded": "211fa04e0f034dc7f654dd124c51dfff1777f18f",
+    "method": "merge commit with shared branch as first parent and previous M471 HEAD as second parent; force-with-lease expected the previous branch SHA"
+  }
+}
