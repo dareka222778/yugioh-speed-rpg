@@ -79,7 +79,7 @@ function addField(game, cardId, ownerSeat, controllerTeam, faceUp = true) {
 test('Anti-Aircraft Flower Tributes a controlled Insect and routes 800 damage to the opposing team', () => {
   const game = makeGame(2);
   const source = addMonster(game, ANTI_AIRCRAFT_FLOWER_CARD_ID, 0, 0);
-  const insect = addMonster(game, insectId, 2, 0, false);
+  const insect = addMonster(game, insectId, 2, 0);
   const before = JSON.stringify(game);
   const result = planTagAntiAircraftFlower(game, 'turn1:flower:1', source.uid, insect.uid);
   assert.equal(result.ok, true);
@@ -90,6 +90,16 @@ test('Anti-Aircraft Flower Tributes a controlled Insect and routes 800 damage to
   assert.equal(result.value.result.tribute.physicalOwnerSeat, 2);
   assert.deepEqual(result.value.processedActionIds, ['turn1:flower:1']);
   assert.equal(JSON.stringify(game), before);
+});
+
+
+test('a face-down Insect cannot be paid as Anti-Aircraft Flower typed Tribute cost', () => {
+  const game = makeGame(2);
+  const source = addMonster(game, ANTI_AIRCRAFT_FLOWER_CARD_ID, 0, 0);
+  const hiddenInsect = addMonster(game, insectId, 2, 0, false);
+  const result = planTagAntiAircraftFlower(game, 'turn1:flower:hidden', source.uid, hiddenInsect.uid);
+  assert.equal(result.ok, false);
+  assert.match(result.reason, /controlled Insect/);
 });
 
 test('a stolen Insect is paid to its physical-owner Graveyard while damage follows the controller team', () => {
@@ -151,7 +161,7 @@ test('Anti-Aircraft Flower rejects duplicate action IDs without mutating invento
 test('Arcane Archer Tributes a Plant and destroys an exact opposing face-down Trap', () => {
   const game = makeGame(2);
   const source = addMonster(game, ARCANE_ARCHER_OF_THE_FOREST_CARD_ID, 0, 0);
-  const plant = addMonster(game, plantId, 2, 0, false);
+  const plant = addMonster(game, plantId, 2, 0);
   const target = addBackrow(game, trapId, 3, 1, false);
   const activation = captureTagArcaneArcherActivation(
     game, 'turn1:archer:1', source.uid, plant.uid, target.uid
@@ -164,6 +174,27 @@ test('Arcane Archer Tributes a Plant and destroys an exact opposing face-down Tr
   assert.equal(result.value.result.targetDestroyed, true);
   assert.equal(result.value.result.targetDestinationTeam, 1);
   assert.equal(result.value.result.targetPhysicalOwnerSeat, 3);
+});
+
+
+test('a face-down Plant cannot be paid as Arcane Archer typed Tribute cost', () => {
+  const game = makeGame(2);
+  const source = addMonster(game, ARCANE_ARCHER_OF_THE_FOREST_CARD_ID, 0, 0);
+  const hiddenPlant = addMonster(game, plantId, 2, 0, false);
+  const target = addBackrow(game, trapId, 3, 1);
+  const result = captureTagArcaneArcherActivation(
+    game, 'turn1:archer:hidden-plant', source.uid, hiddenPlant.uid, target.uid
+  );
+  assert.equal(result.ok, false);
+  assert.match(result.reason, /controlled Plant/);
+});
+
+test('a face-down Plant does not satisfy Arcane Archer continuous attack protection', () => {
+  const game = makeGame(2);
+  const source = addMonster(game, ARCANE_ARCHER_OF_THE_FOREST_CARD_ID, 0, 0);
+  addMonster(game, plantId, 2, 0, false);
+  const result = tagArcaneArcherAttackRestriction(game, source.uid);
+  assert.deepEqual(result, { ok: true, value: { cannotBeAttacked: false, reason: 'no-plant' } });
 });
 
 test('Arcane Archer can target a Spell in the separate Field Zone', () => {
@@ -214,10 +245,10 @@ test('Arcane Archer rejects replacement of the target physical identity', () => 
   assert.match(result.reason, /physical identity changed/);
 });
 
-test('Arcane Archer attack protection follows a Plant controlled by its team, including face-down', () => {
+test('Arcane Archer attack protection follows a face-up Plant controlled by its team', () => {
   const game = makeGame(2);
   const source = addMonster(game, ARCANE_ARCHER_OF_THE_FOREST_CARD_ID, 0, 0);
-  addMonster(game, plantId, 2, 0, false);
+  addMonster(game, plantId, 2, 0, true);
   const result = tagArcaneArcherAttackRestriction(game, source.uid);
   assert.deepEqual(result, { ok: true, value: { cannotBeAttacked: true, reason: 'plant-present' } });
 });
