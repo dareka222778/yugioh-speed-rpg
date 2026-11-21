@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "id": "work-20261121T015019-0300-M435",
+  "mission": "M435",
+  "priority": "P1",
+  "status": "reserved",
+  "startedAt": "2026-11-21T01:50:19-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m435-archfiend-gilfer-tag-adapter-20261121",
+  "baseRef": "feat/work-m389-archfiend-gilfer-gy-equip-20261119",
+  "baseSha": "279b71d9d612e1f016e2d85a3aa928d761180db5",
+  "headSha": null,
+  "expectedSharedHead": null,
+  "scope": {
+    "card": "Archfiend of Gilfer",
+    "cardId": "50287060",
+    "konamiDatabaseId": 5091,
+    "files": [
+      "src/archfiendGilferTagAdapter.ts",
+      "tests/archfiendGilferTagAdapter.test.cjs",
+      "docs/evidence/m435-archfiend-gilfer-tag-adapter.json",
+      ".github/workflows/m435-archfiend-gilfer-tag-adapter.yml"
+    ],
+    "reservedFiles": [
+      "src/archfiendGilferTagAdapter.ts",
+      "tests/archfiendGilferTagAdapter.test.cjs",
+      "docs/evidence/m435-archfiend-gilfer-tag-adapter.json",
+      ".github/workflows/m435-archfiend-gilfer-tag-adapter.yml"
+    ]
+  },
+  "workBlocks": [],
+  "effectiveWorkMinutes": 0,
+  "certifiedBefore": 969,
+  "certifiedAfter": null,
+  "newBehavioralCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "pr": null,
+  "ci": {
+    "status": "not-started",
+    "runs": []
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "blockers": [
+    "M61 handoff remains pending for central monster-effect registration; M389 helper is a non-mutating primitive."
+  ],
+  "nextTask": "Adapt the M389 Archfiend of Gilfer GY-trigger/equip plan to actual TagDuel physical-seat, shared Graveyard and shared Spell/Trap Zone state; validate last-event timing and stale targets.",
+  "nextWorkWindow": "2026-11-21T06:30:00-03:00",
+  "releasedToAuxiliary": false
+}
