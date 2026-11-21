@@ -1,0 +1,65 @@
+{
+  "mission": "M468",
+  "runId": "work-20261121T161200-0300-M468",
+  "status": "implementation-complete-ci-pending",
+  "priority": "P1 — make the Discord /dupla convidar seat order explicit and testable so host+partner are always the same team and the two opponents are the other team.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "src/tagCommand.ts",
+      "src/index.ts",
+      "tests/tagCommandSeatOrder.test.cjs",
+      "docs/evidence/m468-tag-command-seat-order.json",
+      ".github/workflows/m468-tag-command-seat-order.yml"
+    ],
+    "topLevelTests": 4,
+    "behavior": "The command handler now delegates invite field normalization to buildTagInvite. The helper emits [host, opponent1, partner, opponent2], matching tagStore's alternating team assignment [0,1,0,1], preserves classic-loan/classic-owned/normal modes, defaults to classic-loan and rejects duplicate/blank IDs or unknown modes before creating a lobby.",
+    "integration": "src/index.ts /dupla convidar now calls buildTagInvite and passes the validated seat order/rules to createTagLobby. A temporary SQLite integration test verifies the exact member/team order and confirms that creating a normal-mode lobby does not create player_cards, starter_grants or decks."
+  },
+  "invariants": {
+    "hostAndPartnerSameTeam": true,
+    "opponentsSameTeam": true,
+    "teamsOpposed": true,
+    "defaultClassicLoan": true,
+    "explicitModesPreserved": true,
+    "duplicateIdsRejectedBeforeLobby": true,
+    "blankIdsRejectedBeforeLobby": true,
+    "unknownModeRejected": true,
+    "noInventoryGrant": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false,
+    "merge": false,
+    "deploy": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "The slash command's pure seat-order builder and tagStore integration are tested offline; no live Discord interaction or deployment.",
+    "This is command routing and team-seat correctness, not a new card effect or certification."
+  ]
+}

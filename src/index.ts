@@ -2,6 +2,7 @@ import 'dotenv/config';
 import {runtimeStatusLine,runtimePingText} from './runtimeStatus';
 import {RULES_PROFILE} from './rulesProfile';
 import {createTagLobby,createTagTraining,runTagBots,currentTag,getTag,setTagMessage,markTagPublished,dueTags,type TagRecord} from './tagStore';
+import { buildTagInvite } from './tagCommand';
 import {visualTagPublic,visualTagPrivate,visualTagCard,tagZonesMessage,visualTagZoneCard,tagPublicMessage,tagPrivateMessage} from './tagUI';
 import {handleTagComponent} from './tagInteraction';
 import {simulateTag,tagSimulationMessage} from './tagSimulation';
@@ -147,7 +148,7 @@ async function handleInteraction(i:Interaction) {
       if(sub==='ver'||sub==='campo'){const existing=currentTag(id);if(!existing)throw Error('Você não possui uma partida 2v2 aberta.');if(existing.guild!==i.guildId)throw Error('Abra o 2v2 no servidor de origem.');const r=runTagBots(existing.id);if(r.guild!==i.guildId)throw Error('Abra o 2v2 no servidor de origem.');if(sub==='campo'){const message=await i.editReply(await visualTagPublic(r));setTagMessage(r.id,message.id,i.channelId);markTagPublished(r.id,r.revision);}else await i.editReply(r.state?await visualTagPrivate(r,id):tagPublicMessage(r));return;}
       if(sub==='treino'){const r=runTagBots(createTagTraining(id,i.guildId,i.channelId,i.options.getString?.('deck')??'yugi').id);const message=await i.editReply(await visualTagPublic(r));setTagMessage(r.id,message.id);markTagPublished(r.id,r.revision);return;}
       const partner=i.options.getUser('parceiro',true),op1=i.options.getUser('oponente1',true),op2=i.options.getUser('oponente2',true);if([partner,op1,op2].some(p=>p.bot))throw Error('Convide três jogadores humanos. Para bots, use /dupla simular.');
-      const r=createTagLobby([id,op1.id,partner.id,op2.id],i.guildId,i.channelId,(i.options.getString?.('cartas')??'classic-loan') as NonNullable<TagRecord['rules']>);const message=await i.editReply(tagPublicMessage(r));setTagMessage(r.id,message.id);markTagPublished(r.id,r.revision);return;
+      const invite=buildTagInvite({hostId:id,partnerId:partner.id,opponent1Id:op1.id,opponent2Id:op2.id,rules:i.options.getString?.('cartas')});const r=createTagLobby(invite.members,i.guildId,i.channelId,invite.rules);const message=await i.editReply(tagPublicMessage(r));setTagMessage(r.id,message.id);markTagPublished(r.id,message.id,i.channelId);markTagPublished(r.id,r.revision);return;
     }
     if(i.isChatInputCommand()&&['ajuda','regras'].includes(i.commandName)){await i.reply({...helpMessage(id,i.commandName==='regras'?'rules':'start'),flags:MessageFlags.Ephemeral});return;}
     if(i.isStringSelectMenu()&&i.customId.startsWith('help:page:')){if(i.customId.split(':')[2]!==id)throw new Error('Abra sua própria ajuda com /ajuda.');await deferUpdate();await i.editReply(helpMessage(id,i.values[0]));return;}
