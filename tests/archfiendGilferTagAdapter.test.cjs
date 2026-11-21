@@ -22,7 +22,8 @@ const eventFor = (sourceUid, patch = {}) => ({
   ...patch,
 });
 function takePhysical(game, seat, id) {
-  const held = game.reserves[String(seat)];
+  const team = seat % 2;
+  const held = game.active[team] === seat ? game.core.players[team] : game.reserves[String(seat)];
   for (const zone of ['deck', 'hand']) {
     const index = held[zone].findIndex(card => card.id === id);
     if (index >= 0) return held[zone].splice(index, 1)[0];
