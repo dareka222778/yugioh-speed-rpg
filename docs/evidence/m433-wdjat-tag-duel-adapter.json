@@ -1,0 +1,50 @@
+{
+  "format": 1,
+  "mission": "M433",
+  "runId": "work-20261121T012347-0300-M433",
+  "card": {
+    "name": "A Man with Wdjat",
+    "passcode": "51351302",
+    "konamiCid": 5518,
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5518&ope=2&request_locale=en",
+    "dependency": "M401 privateSetInspection.ts"
+  },
+  "implementation": {
+    "file": "src/wdjatTagDuelAdapter.ts",
+    "sourceCardValidation": "requires face-up A Man with Wdjat on the resolving team's shared Monster Zones",
+    "resolverSeat": "active[core.current], not the source card's physical owner",
+    "targets": [
+      "opposing face-down backrow",
+      "opposing face-down Field Zone card",
+      "opposing face-down Defense Position monster"
+    ],
+    "publicSlotList": "zone/index only; no UID, card ID, name or physical owner",
+    "staleSelection": "expected UID held server-side and revalidated against the current slot before inspection",
+    "privacy": "M401 projectPrivateSetInspection exposes identity only to resolverSeat; partner, public and target owner are redacted",
+    "triggerWindows": [
+      "Normal Summon event supplied by resolver",
+      "controller Standby Phase requires core.phase=standby"
+    ]
+  },
+  "tests": {
+    "file": "tests/wdjatTagDuelAdapter.test.cjs",
+    "expected": 22,
+    "coverage": [
+      "TagDuel active representative mapping",
+      "source card validation",
+      "opposing set slot filtering",
+      "no identity in public slot descriptors",
+      "stale slot UID revalidation",
+      "physical owner from UID prefix",
+      "resolver-only projection",
+      "partner/public/target-owner redaction",
+      "no state mutation",
+      "restore exact card snapshot"
+    ]
+  },
+  "limitations": [
+    "Adapter over M401 generic helper; not registered in monsterEffects.ts or duelEngineCurrent.ts.",
+    "M61 handoff remains pending; no command handler or live Discord gateway test.",
+    "No card certification, catalog admission, inventory grant or production change."
+  ]
+}
