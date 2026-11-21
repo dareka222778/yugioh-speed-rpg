@@ -10,6 +10,7 @@ process.env.DATABASE_PATH = path.join(dir, 'isolated.sqlite');
 for (const key of ['DISCORD_TOKEN', 'DISCORD_CLIENT_ID', 'DISCORD_GUILD_ID']) delete process.env[key];
 
 const database = require('../dist/database');
+require('../dist/tagStore'); // initialize tag_sessions schema in the isolated SQLite database
 const tag = require('../dist/tagDuel');
 const { rulesFor } = require('../dist/rulesProfile');
 const { resolveTagSolemnWishesDrawGain } = require('../dist/solemnWishesTagDuelAdapter');
