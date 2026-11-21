@@ -228,7 +228,7 @@ export function planTagAntiAircraftFlower(
     const source = sourceSnapshot(game, sourceUid, ANTI_AIRCRAFT_FLOWER_CARD_ID, monsters);
     const result = resolveAntiAircraftFlower({
       source,
-      fieldMonstersAtActivation: monsters,
+      fieldMonstersAtActivation: monsters.filter(monster => monster.faceUp),
       selectedTributeUid,
     });
     return {
@@ -265,7 +265,8 @@ export function captureTagArcaneArcherActivation(
     const monsters = fieldMonsters(game);
     const cards = fieldSpellTraps(game);
     const source = sourceSnapshot(game, sourceUid, ARCANE_ARCHER_OF_THE_FOREST_CARD_ID, monsters);
-    if (!eligibleTypedTributeUids(monsters, source.controllerTeam, 'Plant').includes(selectedTributeUid)) {
+    const faceUpMonsters = monsters.filter(monster => monster.faceUp);
+    if (!eligibleTypedTributeUids(faceUpMonsters, source.controllerTeam, 'Plant').includes(selectedTributeUid)) {
       return fail('selected Tribute must be one controlled Plant monster.');
     }
     if (!cards.some(card => card.uid === selectedTargetUid)) {
@@ -280,7 +281,7 @@ export function captureTagArcaneArcherActivation(
         sourcePhysicalOwnerSeat: source.physicalOwnerSeat as PhysicalSeat,
         sourceControllerTeam: source.controllerTeam,
         source,
-        fieldMonstersAtActivation: monsters,
+        fieldMonstersAtActivation: faceUpMonsters,
         fieldCardsAtActivation: cards,
         selectedTributeUid,
         selectedTargetUid,
@@ -332,7 +333,15 @@ export function tagArcaneArcherAttackRestriction(
   try {
     const issue = validateTagDuel(game);
     if (issue) return fail(issue);
-    return { ok: true, value: arcaneArcherAttackRestriction(sourceUid, fieldMonsters(game)) };
+    const monsters = fieldMonsters(game);
+    const source = monsters.find(monster => monster.uid === sourceUid);
+    if (!source || source.cardId !== ARCANE_ARCHER_OF_THE_FOREST_CARD_ID) {
+      return fail('Arcane Archer source is not present in the Monster Zones.');
+    }
+    if (!source.faceUp) {
+      return { ok: true, value: { cannotBeAttacked: false, reason: 'source-face-down' } };
+    }
+    return { ok: true, value: arcaneArcherAttackRestriction(sourceUid, monsters.filter(monster => monster.faceUp)) };
   } catch (error) {
     return fail(error instanceof Error ? error.message : 'arcane-archer-tag-restriction-invalid');
   }
