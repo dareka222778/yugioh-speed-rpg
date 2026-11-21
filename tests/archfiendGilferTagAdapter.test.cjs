@@ -38,10 +38,10 @@ function makeActualTagDuel() {
     { id: 's1', name: 'Seat 1', cards: [...normals] },
     { id: 's2', name: 'Seat 2', cards: [...normals] },
     { id: 's3', name: 'Seat 3', cards: [...normals] },
-  ], { seed: 'm435-actual-tag-state', first: 0, classic: true });
+  ], { seed: 'm435-actual-tag-state', first: 3, classic: true });
   assertTagDuel(game);
   const sourceRef = takePhysical(game, 2, normals[0]);
-  const targetRef = takePhysical(game, 3, normals[1]);
+  const targetRef = takePhysical(game, 1, normals[1]);
   const source = { uid: sourceRef.uid, id: ARCHFIEND_OF_GILFER_ID };
   const target = {
     ...targetRef,
@@ -78,14 +78,14 @@ test('seats 0/2 and 1/3 map to the two shared teams', () => {
 });
 test('actual TagDuel state maps inactive physical owner seat 2 to active controller seat 0', () => {
   const { game, source, target, event, offers } = actualOffers();
-  assert.deepEqual(game.active, [0, 1]);
+  assert.deepEqual(game.active, [0, 3]);
   assert.equal(source.uid.slice(0, 2), 'm2');
-  assert.equal(target.uid.slice(0, 2), 'm3');
+  assert.equal(target.uid.slice(0, 2), 'm1');
   assert.equal(offers.length, 1);
   assert.equal(offers[0].offer.triggerControllerSeat, 0);
   assert.equal(offers[0].offer.sourceTeam, 'even');
-  assert.equal(offers[0].targetPhysicalOwnerSeat, 3);
-  assert.equal(offers[0].targetControllerSeat, 1);
+  assert.equal(offers[0].targetPhysicalOwnerSeat, 1);
+  assert.equal(offers[0].targetControllerSeat, 3);
 });
 test('resolution preserves physical source and target owners while the trigger team controls Gilfer', () => {
   const { game, source, target, event, offers } = actualOffers();
@@ -97,8 +97,8 @@ test('resolution preserves physical source and target owners while the trigger t
     controllerSeat: 0,
     controllerTeam: 'even',
     targetUid: target.uid,
-    targetPhysicalOwnerSeat: 3,
-    targetControllerSeat: 1,
+    targetPhysicalOwnerSeat: 1,
+    targetControllerSeat: 3,
     atkDelta: -500,
     modifierLifetime: 'while-equipped',
     oncePerTurnLimit: false,
@@ -156,10 +156,12 @@ test('wrong card ID in the shared Graveyard cannot use Gilfer adapter', () => {
   game.core.grave[0].id = '00000000';
   assert.deepEqual(listArchfiendGilferTagOffers(game, source.uid, event, canEquip), []);
 });
-test('source team must own the trigger window', () => {
-  const { game, source, event } = actualOffers();
-  game.core.current = 1;
-  assert.deepEqual(listArchfiendGilferTagOffers(game, source.uid, event, canEquip), []);
+test('a GY trigger on the opponent turn is controlled by the source owner team active seat', () => {
+  const { game, source, event, offers } = actualOffers();
+  assert.equal(game.core.current, 1);
+  assert.equal(gilferTeamOfSeat(2), 0);
+  assert.equal(offers.length, 1);
+  assert.equal(offers[0].offer.triggerControllerSeat, 0);
 });
 test('send-to-GY must be the last event and match the exact physical source UID', () => {
   const { game, source } = actualOffers();
