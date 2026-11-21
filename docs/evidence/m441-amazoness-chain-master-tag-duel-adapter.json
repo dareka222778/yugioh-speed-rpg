@@ -1,0 +1,53 @@
+{
+  "format": 1,
+  "mission": "M441",
+  "runId": "work-20261121T062517-0300-M441",
+  "priority": "P1",
+  "authority": "Konami official OCG Card Database",
+  "reviewedAt": "2026-11-21",
+  "historicalCutoffInclusive": "2004-09-30",
+  "card": {
+    "name": "Amazoness Chain Master",
+    "id": "29654737",
+    "konamiCardDatabaseId": 5291,
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5291&ope=2&request_locale=ja",
+    "effectSummary": "When destroyed by battle and sent to the GY, its controller may pay 1500 LP, inspect the opponent's hand, and add one monster from that hand to their own hand.",
+    "firstOcgPrinting": "2001-07-31",
+    "firstOcgSetCode": "WJ-02",
+    "tcgFirstReleaseAudited": false,
+    "certificationStatus": "not-certified",
+    "behaviorStatus": "adapter-tested-not-runtime-integrated"
+  },
+  "tagDuelAdaptation": {
+    "teamMapping": "seat % 2",
+    "effectPlayer": "active physical representative of the team whose Chain Master is in the shared Graveyard",
+    "opponentSeat": "must be supplied explicitly by the battle event and equal the active physical representative of the opposing team",
+    "handSource": "only the selected opponent active representative's physical hand; inactive partner reserves are never merged",
+    "lp": "1500 is planned against shared team LP; this adapter does not commit the cost",
+    "physicalOwnership": "selected card UID prefix determines physicalOwnerSeat; transfer changes holderSeat only",
+    "privacy": "full inspected hand visible only to effectPlayerSeat; selected monster identity visible only to effectPlayerSeat and opponentSeat; partners and public output receive redacted projections",
+    "resolution": "re-reads the opponent hand at resolution; if no monster remains, cost stays paid and the effect is a no-op",
+    "staleGuards": "turn, active representatives, shared LP and current physical hand are revalidated"
+  },
+  "tests": {
+    "file": "tests/amazonessChainMasterTagDuelAdapter.test.cjs",
+    "expectedCases": 18,
+    "behavioralGroups": [
+      "actual four-seat TagDuel state and active representatives",
+      "battle-destruction event and shared Graveyard validation",
+      "explicit opponent controller seat",
+      "shared team LP cost planning without mutation",
+      "active opponent physical hand versus inactive partner reserve",
+      "private inspection and transfer projections",
+      "physical owner preservation when holder changes",
+      "resolution-time monster availability and stale UID rejection",
+      "turn, active-seat, LP and duplicate-UID stale guards"
+    ]
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "runtimeIntegrated": false,
+  "discordLiveValidated": false,
+  "productionChanged": false
+}
