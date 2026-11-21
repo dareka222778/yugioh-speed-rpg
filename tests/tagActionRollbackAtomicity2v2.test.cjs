@@ -12,9 +12,11 @@ for (const key of ['DISCORD_TOKEN', 'DISCORD_CLIENT_ID', 'DISCORD_GUILD_ID']) de
 const database = require('../dist/database');
 const store = require('../dist/tagStore');
 const tag = require('../dist/tagDuel');
-const ids = [0, 1, 2, 3].map(seat => 'm478-seat-' + seat);
+let duelSerial = 0;
 
 function createPlayingDuel() {
+  const run = ++duelSerial;
+  const ids = [0, 1, 2, 3].map(seat => 'm478-duel-' + run + '-seat-' + seat);
   for (const id of ids) database.createPlayer(id, id);
   let record = store.createTagLobby(ids, 'm478-guild', 'm478-channel', 'classic-loan');
   for (const id of ids.slice(1)) {
