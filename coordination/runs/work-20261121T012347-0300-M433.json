@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "mission": "M433",
+  "runId": "work-20261121T012347-0300-M433",
+  "owner": "Work principal",
+  "state": "active",
+  "startedAt": "2026-11-21T01:23:47-03:00",
+  "priority": "P1 — adaptar a inspeção privada de A Man with Wdjat ao TagDuel real: resolver pelo representante ativo, enumerar apenas slots Set adversários sem revelar UID/ID/nome, revalidar a carta no clique e projetar identidade exclusivamente ao assento resolvedor.",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "4dc97a1c26485b8885c3ffbd2cf6b9bba0751058",
+  "branch": "feat/work-m433-wdjat-tag-duel-adapter-20261121",
+  "baseBranch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+  "baseSha": "e9762ff0a4ad524dbc6f7913501de5f9c15316a1",
+  "reservedFiles": [
+    "src/wdjatTagDuelAdapter.ts",
+    "tests/wdjatTagDuelAdapter.test.cjs",
+    "docs/evidence/m433-wdjat-tag-duel-adapter.json",
+    ".github/workflows/m433-wdjat-tag-duel-adapter.yml"
+  ],
+  "card": {
+    "name": "A Man with Wdjat",
+    "id": "51351302",
+    "konamiCid": 5518,
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5518&ope=2&request_locale=en"
+  },
+  "dependency": {
+    "pr": 350,
+    "branch": "feat/work-m401-wdjat-private-set-inspection-20261119",
+    "head": "e9762ff0a4ad524dbc6f7913501de5f9c15316a1",
+    "status": "open-draft; focused/CardBatch/Milestone/Engine Validation success",
+    "reason": "M401 owns generic private inspection/projection; M433 adds TagDuel slot adapter only."
+  },
+  "handoffM61": {
+    "pr": 17,
+    "commentId": 7056919457,
+    "status": "awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "touched": false
+  },
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M61",
+      "M401 src/privateSetInspection.ts and tests",
+      "M431",
+      "M432",
+      "M402-M430"
+    ],
+    "note": "M433 writes four new paths on a child branch of M401; no shared runtime or Discord command files touched."
+  },
+  "catalogAtStart": {
+    "target": 1000,
+    "certified": 969,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "blocksCompleted": [
+    "M431: card-specific optional Necrovalley choice adapter and 19 tests; custom CI, Card Batch Fast and Milestone 1000 approved on latest HEAD.",
+    "M432: 3-Hump Lacooda cost/draw adapter, TagDuel physical-seat projection, 26 tests; focused workflow, Card Batch Fast and Milestone 1000 approved on prior HEAD; latest Engine Validation still running.",
+    "M433 selected as an independent child of M401; no edits to M401 helper or central resolver."
+  ],
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "ciWaitExcluded": true,
+    "targetMet": false
+  }
+}
