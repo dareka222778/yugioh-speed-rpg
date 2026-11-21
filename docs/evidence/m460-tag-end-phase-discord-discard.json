@@ -19,11 +19,16 @@
       2,
       3
     ],
-    "scenarios": 4,
-    "successfulInteractions": 8,
-    "rejectedForgedInteractions": 8,
-    "behavior": "For each initial seat rotation, the outgoing physical representative ends the turn with seven cards and must discard to six before the incoming seat draws. Only the outgoing representative receives the private discard menu. The inactive partner and incoming opponent cannot submit the discard action. After the discard, the incoming physical seat draws exactly once; UIDs and the partner's hand remain unchanged.",
-    "validation": "Actual TagDuel state transitions, SQLite tag_sessions persistence, tagPrivateMessage/tagPublicMessage builders, handleTagComponent and Discord payload validation run offline."
+    "scenarios": 12,
+    "successfulInteractions": 24,
+    "rejectedForgedInteractions": 16,
+    "behavior": "For each initial seat rotation, the outgoing physical representative ends the turn with seven cards and must discard to six before the incoming seat draws. Only the outgoing representative receives the private discard menu. The inactive partner and incoming opponent cannot submit the discard action. After the discard, the incoming physical seat draws exactly once; UIDs and the partner's hand remain unchanged. Additional boundary coverage: exactly six cards skip discard; eight cards require two sequential discards while the same physical seat remains responsible, and the incoming draw waits until both are complete.",
+    "validation": "Actual TagDuel state transitions, SQLite tag_sessions persistence, tagPrivateMessage/tagPublicMessage builders, handleTagComponent and Discord payload validation run offline.",
+    "handSizes": [
+      6,
+      7,
+      8
+    ]
   },
   "invariants": {
     "discardOnlyAtEndPhase": true,
@@ -39,7 +44,10 @@
     "outgoingSeatDiscardsToSix": true,
     "incomingDrawWaitsForDiscard": true,
     "outgoingSeatRemainsDecisionOwnerUntilDiscard": true,
-    "incomingSeatDrawsOnceAfterDiscard": true
+    "incomingSeatDrawsOnceAfterDiscard": true,
+    "exactSixSkipsDiscard": true,
+    "eightCardsRequireTwoDiscards": true,
+    "sameSeatOwnsSequentialDiscards": true
   },
   "rules": {
     "mainDeckMin": 20,

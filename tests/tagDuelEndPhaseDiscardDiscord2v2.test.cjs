@@ -19,7 +19,7 @@ const { rulesFor } = require('../dist/rulesProfile');
 
 const member = seat => 'm460-seat-' + seat;
 
-function makeGame(first) {
+function makeGame(first, handSize = 7) {
   const deck = tag.tagNormalCardIds.slice(0, 20);
   const players = [0, 1, 2, 3].map(seat => ({
     id: member(seat),
@@ -34,7 +34,7 @@ function makeGame(first) {
   const incomingSeat = (first + 1) % 4;
   const outgoingTeam = first % 2;
   const outgoingPhysical = game.core.players[outgoingTeam];
-  while (outgoingPhysical.hand.length < 7) {
+  while (outgoingPhysical.hand.length < handSize) {
     const card = outgoingPhysical.deck.pop();
     assert.ok(card, 'outgoing physical seat must have cards to reach seven');
     outgoingPhysical.hand.push(card);
@@ -213,6 +213,107 @@ test('TagDuel checks the incoming physical hand at End Phase and discards before
       assert.ok(publicPanel.embeds.length > 0);
       const nextMenu = actionMenu(afterDiscard, incoming);
       assert.ok(nextMenu, 'incoming representative receives the next turn after the discard and draw');
+    });
+  }
+});
+
+
+test('an eight-card hand requires two sequential End Phase discards before the next seat draws', async t => {
+  for (const first of [0, 1, 2, 3]) {
+    await t.test('first=' + first, async () => {
+      const { game, incomingSeat, outgoingTeam, incomingTeam } = makeGame(first, 8);
+      const outgoing = member(first);
+      const incoming = member(incomingSeat);
+      const inactivePartner = member((first + 2) % 4);
+      const record = register(game, 'm460-eight-' + first);
+      const partnerHandBefore = tag.tagMemberHand(record.state, inactivePartner).map(card => card.uid);
+      const incomingDeckBefore = record.state.core.players[incomingTeam].deck.length;
+      const nextDrawUid = record.state.core.players[incomingTeam].deck[0].uid;
+      const beforeInventory = new Map(tag.tagInventory(record.state).map(card => [card.uid, card.id]));
+      assert.equal(tag.tagMemberHand(record.state, outgoing).length, 8);
+
+      const endIndex = tag.tagActions(record.state, outgoing).findIndex(action => action.kind === 'end');
+      assert.ok(endIndex >= 0);
+      const afterEnd = await submit(record, outgoing, endIndex, 'm460-eight-end-' + first);
+      assert.equal(afterEnd.state.core.phase, 'discard');
+      assert.equal(tag.tagDecisionMember(afterEnd.state).id, outgoing);
+      assert.equal(tag.tagMemberHand(afterEnd.state, outgoing).length, 8);
+      assert.equal(afterEnd.state.core.players[incomingTeam].deck.length, incomingDeckBefore);
+      assert.equal(afterEnd.state.core.players[incomingTeam].deck[0].uid, nextDrawUid);
+
+      const firstDiscardIndex = tag.tagActions(afterEnd.state, outgoing).findIndex(action => action.kind === 'discard');
+      assert.ok(firstDiscardIndex >= 0);
+      const firstDiscardUid = tag.tagActions(afterEnd.state, outgoing)[firstDiscardIndex].card;
+      await rejectForgedAction(afterEnd, inactivePartner, firstDiscardIndex, 'm460-eight-partner-' + first);
+      await rejectForgedAction(afterEnd, incoming, firstDiscardIndex, 'm460-eight-opponent-' + first);
+
+      const afterFirstDiscard = await submit(afterEnd, outgoing, firstDiscardIndex, 'm460-eight-discard-one-' + first);
+      assert.equal(afterFirstDiscard.state.core.phase, 'discard');
+      assert.equal(tag.tagDecisionMember(afterFirstDiscard.state).id, outgoing);
+      assert.equal(tag.tagMemberHand(afterFirstDiscard.state, outgoing).length, 7);
+      assert.equal(afterFirstDiscard.state.core.players[incomingTeam].deck.length, incomingDeckBefore);
+      assert.equal(afterFirstDiscard.state.core.players[incomingTeam].deck[0].uid, nextDrawUid);
+      assert.ok(afterFirstDiscard.state.core.players[outgoingTeam].grave.some(card => card.uid === firstDiscardUid));
+      assert.ok(actionMenu(afterFirstDiscard, outgoing), 'same physical seat receives the second discard menu');
+
+      const secondDiscardIndex = tag.tagActions(afterFirstDiscard.state, outgoing).findIndex(action => action.kind === 'discard');
+      assert.ok(secondDiscardIndex >= 0);
+      const secondDiscardUid = tag.tagActions(afterFirstDiscard.state, outgoing)[secondDiscardIndex].card;
+      assert.notEqual(secondDiscardUid, firstDiscardUid);
+      const afterSecondDiscard = await submit(afterFirstDiscard, outgoing, secondDiscardIndex, 'm460-eight-discard-two-' + first);
+      assert.equal(afterSecondDiscard.state.core.phase, 'main');
+      assert.equal(afterSecondDiscard.state.core.turn, record.state.core.turn + 1);
+      assert.equal(tag.tagDecisionMember(afterSecondDiscard.state).id, incoming);
+      assert.equal(tag.tagMemberHand(afterSecondDiscard.state, outgoing).length, 6);
+      assert.equal(afterSecondDiscard.state.core.players[incomingTeam].deck.length, incomingDeckBefore - 1);
+      assert.ok(tag.tagMemberHand(afterSecondDiscard.state, incoming).some(card => card.uid === nextDrawUid));
+      assert.ok(afterSecondDiscard.state.core.players[outgoingTeam].grave.some(card => card.uid === firstDiscardUid));
+      assert.ok(afterSecondDiscard.state.core.players[outgoingTeam].grave.some(card => card.uid === secondDiscardUid));
+      assert.deepEqual(tag.tagMemberHand(afterSecondDiscard.state, inactivePartner).map(card => card.uid), partnerHandBefore);
+      const inventory = tag.tagInventory(afterSecondDiscard.state);
+      assert.equal(inventory.length, beforeInventory.size);
+      assert.ok(inventory.every(card => beforeInventory.get(card.uid) === card.id));
+      assertOwnerRules(afterSecondDiscard.state);
+      assertNoHandUids(afterSecondDiscard, ui.tagPublicMessage(afterSecondDiscard), 'eight-card final public panel');
+      assert.ok(actionMenu(afterSecondDiscard, incoming));
+    });
+  }
+});
+
+test('an exact six-card hand skips discard and advances directly to the incoming draw', async t => {
+  for (const first of [0, 1, 2, 3]) {
+    await t.test('first=' + first, async () => {
+      const { game, incomingSeat, incomingTeam } = makeGame(first, 6);
+      const outgoing = member(first);
+      const incoming = member(incomingSeat);
+      const partner = member((first + 2) % 4);
+      const record = register(game, 'm460-six-' + first);
+      const outgoingHandBefore = tag.tagMemberHand(record.state, outgoing).map(card => card.uid);
+      const partnerHandBefore = tag.tagMemberHand(record.state, partner).map(card => card.uid);
+      const incomingDeckBefore = record.state.core.players[incomingTeam].deck.length;
+      const nextDrawUid = record.state.core.players[incomingTeam].deck[0].uid;
+      const beforeInventory = new Map(tag.tagInventory(record.state).map(card => [card.uid, card.id]));
+      assert.equal(outgoingHandBefore.length, 6);
+      assert.equal(tag.tagActions(record.state, outgoing).some(action => action.kind === 'discard'), false);
+
+      const endIndex = tag.tagActions(record.state, outgoing).findIndex(action => action.kind === 'end');
+      assert.ok(endIndex >= 0);
+      const afterEnd = await submit(record, outgoing, endIndex, 'm460-six-end-' + first);
+      assert.equal(afterEnd.state.core.phase, 'main');
+      assert.equal(afterEnd.state.core.handFlow, undefined);
+      assert.equal(afterEnd.state.core.turn, record.state.core.turn + 1);
+      assert.equal(tag.tagDecisionMember(afterEnd.state).id, incoming);
+      assert.equal(tag.tagMemberHand(afterEnd.state, outgoing).length, 6);
+      assert.equal(afterEnd.state.core.players[incomingTeam].deck.length, incomingDeckBefore - 1);
+      assert.ok(tag.tagMemberHand(afterEnd.state, incoming).some(card => card.uid === nextDrawUid));
+      assert.deepEqual(tag.tagMemberHand(afterEnd.state, partner).map(card => card.uid), partnerHandBefore);
+      const inventory = tag.tagInventory(afterEnd.state);
+      assert.equal(inventory.length, beforeInventory.size);
+      assert.ok(inventory.every(card => beforeInventory.get(card.uid) === card.id));
+      assertOwnerRules(afterEnd.state);
+      assertNoHandUids(afterEnd, ui.tagPublicMessage(afterEnd), 'six-card public panel');
+      assert.equal(actionMenu(afterEnd, outgoing), undefined);
+      assert.ok(actionMenu(afterEnd, incoming), 'incoming seat receives the next turn without an unnecessary discard');
     });
   }
 });
