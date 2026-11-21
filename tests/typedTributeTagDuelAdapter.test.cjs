@@ -14,8 +14,8 @@ const {
 const { createTagDuel, tagNormalCardIds } = require('../dist/tagDuel');
 const { engineCatalog } = require('../dist/effectRegistry');
 
-const insectId = engineCatalog.find(card => card.kind === 'monster' && card.monsterType === 'Insect')?.id;
-const plantId = engineCatalog.find(card => card.kind === 'monster' && card.monsterType === 'Plant')?.id;
+const insectId = engineCatalog.find(card => card.kind === 'monster' && card.race === 'Insect')?.id;
+const plantId = engineCatalog.find(card => card.kind === 'monster' && card.race === 'Plant')?.id;
 const trapId = engineCatalog.find(card => card.kind === 'trap')?.id;
 const spellId = engineCatalog.find(card => card.kind === 'spell')?.id;
 assert.ok(insectId, 'catalog must include a typed Insect fixture');
