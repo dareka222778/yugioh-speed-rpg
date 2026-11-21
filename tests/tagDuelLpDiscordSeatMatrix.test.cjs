@@ -163,6 +163,49 @@ test('all four initial-seat rotations render shared LP and keep action menus pri
   }
 });
 
+
+test('forged partner actions and stale revisions cannot mutate the persisted duel', async t => {
+  for (const first of [0, 1, 2, 3]) {
+    await t.test('first=' + first, async () => {
+      const game = makeGame(first);
+      const record = register(game, 'm459-guard-' + first);
+      const actor = tag.tagDecisionMember(record.state).id;
+      const actorSeat = Number(actor.split('-').at(-1));
+      const partner = member((actorSeat + 2) % 4);
+      const endIndex = tag.tagActions(record.state, actor).findIndex(action => action.kind === 'end');
+      assert.ok(endIndex >= 0);
+      const before = JSON.stringify(record.state);
+
+      const forgedPartner = makeInteraction(record, partner, endIndex, 'm459-forged-partner-' + first);
+      let refreshes = 0;
+      await assert.rejects(
+        handleTagComponent(forgedPartner, async () => { refreshes++; }, () => {}),
+        /Jogada indisponível/
+      );
+      assert.deepEqual(forgedPartner.calls, ['defer']);
+      const afterPartner = store.getTag(record.id);
+      assert.equal(afterPartner.revision, record.revision);
+      assert.equal(JSON.stringify(afterPartner.state), before);
+
+      // Simulate another valid action committing after this panel was rendered.
+      database.db.prepare('UPDATE tag_sessions SET revision=revision+1 WHERE id=?').run(record.id);
+      const stale = makeInteraction(record, actor, endIndex, 'm459-stale-' + first);
+      stale.customId = 'tag:act:' + record.id + ':' + record.revision + ':' + actor;
+      stale.deferUpdate = async () => { stale.calls.push('defer'); };
+      await assert.rejects(
+        handleTagComponent(stale, async () => { refreshes++; }, () => {}),
+        /Painel desatualizado/
+      );
+      assert.deepEqual(stale.calls, ['defer']);
+      const afterStale = store.getTag(record.id);
+      assert.equal(afterStale.revision, record.revision + 1);
+      assert.equal(JSON.stringify(afterStale.state), before);
+      assert.equal(refreshes, 0);
+      assertOwnerRules(afterStale.state);
+    });
+  }
+});
+
 after(() => {
   database.db.close();
   fs.rmSync(dir, { recursive: true, force: true });
