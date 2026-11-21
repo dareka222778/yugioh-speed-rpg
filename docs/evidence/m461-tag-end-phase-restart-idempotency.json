@@ -1,0 +1,67 @@
+{
+  "mission": "M461",
+  "runId": "work-20261121T152737-0300-M461",
+  "status": "implementation-complete-ci-pending",
+  "title": "TagDuel End Phase persistence and restart idempotency",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagDuelEndPhaseRestartIdempotency2v2.test.cjs",
+      "docs/evidence/m461-tag-end-phase-restart-idempotency.json",
+      ".github/workflows/m461-tag-end-phase-restart-idempotency.yml"
+    ],
+    "initialSeatRotations": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scenarios": 4,
+    "behavior": "Each rotation persists a seven-card incoming physical hand in End Phase discard, starts a fresh Node process against the same temporary SQLite database, restores the correct active physical seat, commits exactly one discard and the delayed draw, then retries the identical action receipt without a second mutation.",
+    "validation": "Parent and child processes use isolated temporary SQLite; the child reopens the saved TagDuel session, validates rules and physical ownership, executes actTag and retries the same request ID."
+  },
+  "invariants": {
+    "persistedDiscardPhaseRestored": true,
+    "correctPhysicalSeatResumes": true,
+    "discardBeforeDraw": true,
+    "nextDeckUidDrawnOnce": true,
+    "partnerHandUnchanged": true,
+    "physicalUidConservation": true,
+    "duplicateRequestIdIdempotent": true,
+    "fourSeatRotations": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "The restart is a child Node process using temporary SQLite, not a production process restart.",
+    "No live Discord guild, token, production database, or player record is used.",
+    "This validates a rules/persistence path and does not certify a new card."
+  ]
+}
