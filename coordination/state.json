@@ -1,20 +1,20 @@
 {
-  "runId": "work-20261121T162433-0300-M469",
+  "runId": "work-20261121T163500-0300-M470",
   "owner": "Work principal",
   "priorityRequestedBy": "Work",
   "state": "active",
-  "startedAt": "2026-11-21T16:24:33-03:00",
-  "lastActivityAt": "2026-11-21T16:24:33-03:00",
+  "startedAt": "2026-11-21T16:34:23.447-03:00",
+  "lastActivityAt": "2026-11-21T16:34:23.447-03:00",
   "nextScheduledAt": "2026-11-21T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
-    "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
-    ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
+    "tests/tagLobbyExpiryDiscord2v2.test.cjs",
+    "docs/evidence/m470-tag-lobby-expiry-discord.json",
+    ".github/workflows/m470-tag-lobby-expiry-discord.yml"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261121T162433-0300-M469.json",
-  "previousRunId": "work-20261121T122100-0300-M459",
+  "lastCheckpoint": "coordination/runs/work-20261121T163500-0300-M470.json",
+  "previousRunId": "work-20261121T162433-0300-M469",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -4701,23 +4701,23 @@
     }
   ],
   "activeRun": {
-    "runId": "work-20261121T162433-0300-M469",
+    "runId": "work-20261121T163500-0300-M470",
     "owner": "Work principal",
-    "mission": "M469",
+    "mission": "M470",
     "state": "active",
     "branch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadBeforeClaim": "69581c21e372faa33de36ff45cc3b72ad6182ded",
-    "startedAt": "2026-11-21T16:24:33-03:00",
+    "sharedHeadBeforeClaim": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+    "startedAt": "2026-11-21T16:34:23.447-03:00",
     "workBranches": [
       {
-        "mission": "M469",
-        "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+        "mission": "M470",
+        "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
         "baseBranch": "feat/rea-engine-recovery-20261026",
-        "baseSha": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+        "baseSha": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
         "scope": [
-          "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
-          "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
-          ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
+          "tests/tagLobbyExpiryDiscord2v2.test.cjs",
+          "docs/evidence/m470-tag-lobby-expiry-discord.json",
+          ".github/workflows/m470-tag-lobby-expiry-discord.yml"
         ],
         "state": "active"
       }
@@ -6997,7 +6997,7 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261121T112504-0300-M456.json",
   "lastParallelActivityAt": "2026-11-21T11:25:04-03:00",
   "sharedHeadAfterCheckpoint": "ea907a31daf5c5cafb521e99053a5763483558c5",
-  "sharedHeadBeforeStateUpdate": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+  "sharedHeadBeforeStateUpdate": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
   "endedAt": "2026-11-21T12:10:54.153-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
@@ -7346,7 +7346,7 @@
   },
   "lastCheckpointAt": "2026-11-21T01:01:16-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+  "expectedHeadForCoordinationCommit": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
   "lastRunSummary": "M305 registrado: The Sanctuary in the Sky, teste de integração Discord 2v2 em branch isolada; escopo único tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -10145,33 +10145,33 @@
   },
   "currentIndependentWork": {
     "format": 1,
-    "mission": "M469",
-    "runId": "work-20261121T162433-0300-M469",
+    "mission": "M470",
+    "runId": "work-20261121T163500-0300-M470",
     "owner": "Work principal",
     "state": "active",
-    "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+    "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
     "baseBranch": "feat/rea-engine-recovery-20261026",
-    "baseSha": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+    "baseSha": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtReservation": "69581c21e372faa33de36ff45cc3b72ad6182ded",
-    "startedAt": "2026-11-21T16:24:33-03:00",
-    "priority": "P1 — validar o cancelamento de lobby e a desistência confirmada em TagDuel 2v2 pelo handler Discord real, com liberação atômica de locks, rejeição de interações forjadas/obsoletas, privacidade e conservação de UIDs físicos.",
+    "sharedHeadAtReservation": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+    "startedAt": "2026-11-21T16:34:23.447-03:00",
+    "priority": "P1 — validar expiração de lobby TagDuel no limite exato de cinco minutos, liberação de locks físicos e publicação do estado expirado, rejeitando aceitações tardias sem mutação ou concessão.",
     "reservedFiles": [
-      "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
-      "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
-      ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
+      "tests/tagLobbyExpiryDiscord2v2.test.cjs",
+      "docs/evidence/m470-tag-lobby-expiry-discord.json",
+      ".github/workflows/m470-tag-lobby-expiry-discord.yml"
     ],
-    "scope": "Somente teste/evidência/workflow. Exercitar botão Recusar/cancelar em lobby parcialmente aceito, liberação de tag_members, ausência de grants/decks/cartas, rejeição de não participante e retry obsoleto; depois, testar o fluxo Desistir→Confirmar de um parceiro inativo, encerramento da equipe, UIDs físicos, LP e payloads privados/públicos.",
+    "scope": "Somente teste/evidência/workflow. Exercitar getTag no limite LOBBY_MS, preservar lobby antes do deadline, expirar exatamente no limite, remover tag_members de host/participante aceito, incluir sessão em dueTags para atualização pública, marcar revisão publicada e rejeitar clique Accept obsoleto via handleTagComponent. Sem runtime, catálogo, inventário ou dados reais.",
     "conflictCheck": {
       "overlap": false,
       "preserved": [
-        "M459 three reserved files released to auxiliary monitor only",
-        "M460–M468 branches and PRs",
-        "M455–M458 storage/LP branches and their reserved files",
+        "M459 released to auxiliary monitor only",
+        "M460–M469 branches and PRs",
+        "M455–M458 storage/LP branches and reserved files",
         "M61 central resolver files",
         "all third-party reservations"
       ],
-      "note": "M469 usa três caminhos novos, sem runtime, catálogo, allowlist, dados persistentes ou arquivos reservados por outros agentes."
+      "note": "M470 adiciona três caminhos novos, independentes de M459–M469 e de todas as reservas de terceiros."
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
@@ -10261,8 +10261,8 @@
     "minimum60MinutesMet": false,
     "auxiliaryPermission": "Monitor PR #347, sync branch with latest shared HEAD by non-forced merge, correct only these three M398 files if CI fails. Do not edit coordination/state.json, runtime, catalog, certificates, player data, inventory, persistent DB, other branches, main or production; no merge/deploy."
   },
-  "latestIndependentWorkRunId": "work-20261121T162433-0300-M469",
-  "latestIndependentWorkBranch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+  "latestIndependentWorkRunId": "work-20261121T163500-0300-M470",
+  "latestIndependentWorkBranch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
   "latestIndependentWorkHead": null,
   "latestIndependentWorkReservationReleased": false,
   "latestIndependentWorkActivityAt": "2026-11-21T12:21:49.090-03:00",
@@ -10556,7 +10556,7 @@
     ],
     "cardFamily": "battle-destruction-life-point-recovery"
   },
-  "latestIndependentWorkPriority": "P1 — validar o cancelamento de lobby e a desistência confirmada em TagDuel 2v2 pelo handler Discord real, com liberação atômica de locks, rejeição de interações forjadas/obsoletas, privacidade e conservação de UIDs físicos.",
+  "latestIndependentWorkPriority": "P1 — validar expiração de lobby TagDuel no limite exato de cinco minutos, liberação de locks físicos e publicação do estado expirado, rejeitando aceitações tardias sem mutação ou concessão.",
   "currentWorkReservationM403": {
     "runId": "work-20261120T045103-0300-M403",
     "owner": "Work principal",
@@ -11411,7 +11411,7 @@
     "handoff": "M61 permanece pendente; src/monsterEffects.ts, src/duelEngineCurrent.ts e standbyFlow.ts intocados.",
     "releaseToAuxiliary": "Somente os quatro caminhos novos M444, após publicação da PR."
   },
-  "currentReservation": "M469",
+  "currentReservation": "M470",
   "completedOwnRuns": [
     {
       "runId": "work-20261121T105500-0300-M449",
@@ -11576,7 +11576,7 @@
     ],
     "nextTask": "Auxiliar monitora CI e corrige apenas os arquivos reservados."
   },
-  "nextWorkTask": "Após M469: auditar os resultados M460–M468, obter handoff de M455–M458 para a correção herdada da validação M459 e então iniciar a próxima matriz de comando TagDuel sem sobrepor reservas.",
+  "nextWorkTask": "Após M470: verificar CI final de M469/M470, corrigir somente escopos próprios e continuar a próxima matriz de comando/lobby TagDuel sem sobrepor reservas.",
   "currentWorkReservationM457": {
     "mission": "M457",
     "runId": "work-20261121T121100-0300-M457",
@@ -11775,7 +11775,7 @@
     "mission": "M469",
     "runId": "work-20261121T162433-0300-M469",
     "owner": "Work principal",
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "69581c21e372faa33de36ff45cc3b72ad6182ded",
@@ -11799,6 +11799,76 @@
         "all third-party reservations"
       ],
       "note": "M469 usa três caminhos novos, sem runtime, catálogo, allowlist, dados persistentes ou arquivos reservados por outros agentes."
+    },
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99",
+    "pr": 417,
+    "releasedAt": "2026-11-21T16:34:23.447-03:00",
+    "ci": [
+      {
+        "name": "M469 focused",
+        "run": 44941509864,
+        "status": "in_progress",
+        "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99"
+      },
+      {
+        "name": "Engine Validation",
+        "run": 44941509890,
+        "status": "in_progress",
+        "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99"
+      },
+      {
+        "name": "Card Batch Fast",
+        "run": 44941509892,
+        "status": "in_progress",
+        "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99"
+      },
+      {
+        "name": "Milestone 1000",
+        "run": 44941509925,
+        "status": "success",
+        "certified": 969,
+        "remaining": 31
+      }
+    ],
+    "lastActivityAt": "2026-11-21T16:34:23.447-03:00",
+    "nextTask": "Auxiliar acompanha o HEAD final 4842a885; o primeiro focused run falhou somente na contagem duplicada de UIDs do espelho core.teamRotation.reserves; a suíte agora usa tag.tagInventory() como fonte canônica. Corrigir apenas os três arquivos M469 se o novo focused/Engine Validation apontar falha própria; não editar M455–M458.",
+    "releaseToAuxiliary": [
+      "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
+      "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
+      ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
+    ]
+  },
+  "currentWorkReservationM470": {
+    "mission": "M470",
+    "runId": "work-20261121T163500-0300-M470",
+    "owner": "Work principal",
+    "state": "active",
+    "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+    "startedAt": "2026-11-21T16:34:23.447-03:00",
+    "priority": "P1 — validar expiração de lobby TagDuel no limite exato de cinco minutos, liberação de locks físicos e publicação do estado expirado, rejeitando aceitações tardias sem mutação ou concessão.",
+    "reservedFiles": [
+      "tests/tagLobbyExpiryDiscord2v2.test.cjs",
+      "docs/evidence/m470-tag-lobby-expiry-discord.json",
+      ".github/workflows/m470-tag-lobby-expiry-discord.yml"
+    ],
+    "scope": "Somente teste/evidência/workflow. Exercitar getTag no limite LOBBY_MS, preservar lobby antes do deadline, expirar exatamente no limite, remover tag_members de host/participante aceito, incluir sessão em dueTags para atualização pública, marcar revisão publicada e rejeitar clique Accept obsoleto via handleTagComponent. Sem runtime, catálogo, inventário ou dados reais.",
+    "conflictCheck": {
+      "overlap": false,
+      "preserved": [
+        "M459 released to auxiliary monitor only",
+        "M460–M469 branches and PRs",
+        "M455–M458 storage/LP branches and reserved files",
+        "M61 central resolver files",
+        "all third-party reservations"
+      ],
+      "note": "M470 adiciona três caminhos novos, independentes de M459–M469 e de todas as reservas de terceiros."
     },
     "newCertifications": 0,
     "automaticCertifications": 0,

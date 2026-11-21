@@ -2,56 +2,62 @@
   "runId": "work-20261121T162433-0300-M469",
   "mission": "M469",
   "owner": "Work principal",
-  "status": "active",
+  "status": "implementation-complete-ci-pending",
   "startedAt": "2026-11-21T16:24:33-03:00",
   "endedAt": null,
-  "timezone": "America/Sao_Paulo",
-  "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedHeadAtStart": "69581c21e372faa33de36ff45cc3b72ad6182ded",
+  "durationMinutes": null,
+  "durationNote": "A execução permaneceu ativa durante a implementação M470; CI pendente foi transferida ao auxiliar para monitoramento. Nenhum tempo de espera é contado como trabalho efetivo.",
   "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+  "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "69581c21e372faa33de36ff45cc3b72ad6182ded",
-  "priority": "P1 — validar o cancelamento de lobby e a desistência confirmada em TagDuel 2v2 pelo handler Discord real, com liberação atômica de locks, rejeição de interações forjadas/obsoletas, privacidade e conservação de UIDs físicos.",
-  "reservedFiles": [
+  "pr": 417,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/417",
+  "changes": [
+    "Teste de cancelamento de lobby parcial por participante não-host, com liberação dos locks.",
+    "Rejeição de não participante, guild incorreta e retry obsoleto.",
+    "Fluxo Desistir→Confirmar por parceiro físico inativo; conserva LP e UIDs via tag.tagInventory() canônico.",
+    "Evidência JSON e workflow focado."
+  ],
+  "firstFocusedRun": {
+    "run": 44941399785,
+    "status": "failure",
+    "failedAssertion": "A coleta recursiva contou duas vezes os UIDs espelhados em core.teamRotation.reserves; 2/3 testes passaram."
+  },
+  "correction": "Substituída coleta recursiva pela API canônica tag.tagInventory(), que exclui o espelho de metadados e retorna as cartas físicas uma única vez.",
+  "ci": [
+    {
+      "name": "M469 focused",
+      "run": 44941509864,
+      "status": "in_progress"
+    },
+    {
+      "name": "Engine Validation",
+      "run": 44941509890,
+      "status": "in_progress"
+    },
+    {
+      "name": "Card Batch Fast",
+      "run": 44941509892,
+      "status": "in_progress"
+    },
+    {
+      "name": "Milestone 1000",
+      "run": 44941509925,
+      "status": "success",
+      "certified": 969,
+      "remaining": 31
+    }
+  ],
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "merge": false,
+  "deploy": false,
+  "auxiliaryScope": [
     "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
     "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
     ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
   ],
-  "conflictCheck": {
-    "overlap": false,
-    "preserved": [
-      "M459 three reserved files released to auxiliary monitor only",
-      "M460–M468 branches and PRs",
-      "M455–M458 storage/LP branches and their reserved files",
-      "M61 central resolver files",
-      "all third-party reservations"
-    ],
-    "note": "M469 usa três caminhos novos, sem runtime, catálogo, allowlist, dados persistentes ou arquivos reservados por outros agentes."
-  },
-  "blocks": [
-    {
-      "at": "2026-11-21T16:24:33-03:00",
-      "description": "Auditoria de state.json, checkpoint M459 ausente, HEAD/branches/PRs/CI; M459 liberada ao auxiliar apenas para monitoramento."
-    }
-  ],
-  "ci": {
-    "status": "not-started"
-  },
-  "certification": {
-    "baseline": 969,
-    "newCertifications": 0,
-    "automaticCertifications": 0,
-    "inventoryGranted": 0
-  },
-  "production": {
-    "merge": false,
-    "deploy": false,
-    "backupVerified": false,
-    "liveDiscord": false
-  },
-  "nextTask": "Após M469: auditar os resultados M460–M468, obter handoff de M455–M458 para a correção herdada da validação M459 e então iniciar a próxima matriz de comando TagDuel sem sobrepor reservas.",
-  "nextWindow": "2026-11-21T17:30:00-03:00",
-  "effectiveWorkMinutes": 0,
-  "targetEffectiveMinutes": 60,
-  "targetMet": false,
-  "ciWaitExcluded": true
+  "blocker": "Aguardar conclusão das validações no HEAD 4842a885. Não editar M455–M458."
 }
