@@ -30,15 +30,15 @@ function makeGame(first) {
     seed: 'm461-tag-end-phase-restart-' + first
   });
   const incomingSeat = (first + 1) % 4;
-  const incomingTeam = incomingSeat % 2;
-  const physical = game.core.players[incomingTeam];
+  const outgoingTeam = first % 2;
+  const physical = game.core.players[outgoingTeam];
   while (physical.hand.length < 7) {
     const card = physical.deck.pop();
     assert.ok(card);
     physical.hand.push(card);
   }
   tag.assertTagDuel(game);
-  return { game, incomingSeat, incomingTeam };
+  return { game, incomingSeat, outgoingTeam, incomingTeam: incomingSeat % 2 };
 }
 
 function register(state, id) {
@@ -78,7 +78,7 @@ const childScript = String.raw`
 const database = require('./dist/database');
 const store = require('./dist/tagStore');
 const tag = require('./dist/tagDuel');
-const [id, actor, partner, guild, nextDrawUid, partnerHandJson, inventoryJson] = process.argv.slice(1);
+const [id, actor, partner, incoming, guild, incomingTeamRaw, nextDrawUid, partnerHandJson, inventoryJson] = process.argv.slice(1);
 const partnerHandBefore = JSON.parse(partnerHandJson);
 const inventoryBefore = new Map(JSON.parse(inventoryJson));
 const record = store.getTag(id);
@@ -88,8 +88,9 @@ const actions = tag.tagActions(record.state, actor);
 const discardIndex = actions.findIndex(action => action.kind === 'discard');
 if (discardIndex < 0) throw new Error('Restored session has no legal discard action');
 const discardUid = actions[discardIndex].card;
-const team = record.state.members.find(member => member.id === actor).team;
-const deckBefore = record.state.core.players[team].deck.length;
+const outgoingTeam = record.state.members.find(member => member.id === actor).team;
+const incomingTeam = Number(incomingTeamRaw);
+const deckBefore = record.state.core.players[incomingTeam].deck.length;
 const revisionBefore = record.revision;
 const requestId = 'm461-restart-discard:' + id;
 const committed = store.actTag(id, actor, guild, revisionBefore, discardIndex, requestId);
@@ -110,10 +111,12 @@ const output = {
   phase: final.state.core.phase,
   turn: final.state.core.turn,
   handCount: tag.tagMemberHand(final.state, actor).length,
-  deckCount: final.state.core.players[team].deck.length,
+  incomingHandCount: tag.tagMemberHand(final.state, incoming).length,
+  incomingDecision: tag.tagDecisionMember(final.state).id,
+  deckCount: final.state.core.players[incomingTeam].deck.length,
   deckBefore,
-  nextDrawPresent: tag.tagMemberHand(final.state, actor).some(card => card.uid === nextDrawUid),
-  discardInGrave: final.state.core.players[team].grave.some(card => card.uid === discardUid),
+  nextDrawPresent: tag.tagMemberHand(final.state, incoming).some(card => card.uid === nextDrawUid),
+  discardInGrave: final.state.core.players[outgoingTeam].grave.some(card => card.uid === discardUid),
   partnerHandUnchanged: JSON.stringify(partnerHandAfter) === JSON.stringify(partnerHandBefore),
   inventoryPreserved
 };
@@ -124,18 +127,19 @@ database.db.close();
 test('a persisted End Phase discard resumes in a fresh process and duplicate interaction is idempotent', async t => {
   for (const first of [0, 1, 2, 3]) {
     await t.test('first=' + first, () => {
-      const { game, incomingSeat, incomingTeam } = makeGame(first);
+      const { game, incomingSeat, outgoingTeam, incomingTeam } = makeGame(first);
       const outgoing = member(first);
       const incoming = member(incomingSeat);
-      const partner = member((incomingSeat + 2) % 4);
+      const partner = member((first + 2) % 4);
       const id = 'm461-restart-' + first;
       const record = register(game, id);
       assertOwnerRules(record.state);
 
-      const incomingHand = tag.tagMemberHand(record.state, incoming);
-      assert.equal(incomingHand.length, 7);
+      const outgoingHand = tag.tagMemberHand(record.state, outgoing);
+      assert.equal(outgoingHand.length, 7);
       const partnerHandBefore = tag.tagMemberHand(record.state, partner).map(card => card.uid);
       const nextDrawUid = record.state.core.players[incomingTeam].deck[0].uid;
+      const incomingDeckBefore = record.state.core.players[incomingTeam].deck.length;
       const inventoryBefore = tag.tagInventory(record.state).map(card => [card.uid, card.id]);
       const endIndex = tag.tagActions(record.state, outgoing).findIndex(action => action.kind === 'end');
       assert.ok(endIndex >= 0);
@@ -143,9 +147,9 @@ test('a persisted End Phase discard resumes in a fresh process and duplicate int
       const afterEnd = store.actTag(id, outgoing, record.guild, record.revision, endIndex, 'm461-end:' + first);
       assert.equal(afterEnd.revision, record.revision + 1);
       assert.equal(afterEnd.state.core.phase, 'discard');
-      assert.ok(afterEnd.state.core.handFlow);
-      assert.equal(tag.tagDecisionMember(afterEnd.state).id, incoming);
-      assert.equal(tag.tagMemberHand(afterEnd.state, incoming).length, 7);
+      assert.equal(tag.tagDecisionMember(afterEnd.state).id, outgoing);
+      assert.equal(tag.tagMemberHand(afterEnd.state, outgoing).length, 7);
+      assert.equal(afterEnd.state.core.players[incomingTeam].deck.length, incomingDeckBefore);
       assert.equal(afterEnd.state.core.players[incomingTeam].deck[0].uid, nextDrawUid);
       assertOwnerRules(afterEnd.state);
 
@@ -153,9 +157,11 @@ test('a persisted End Phase discard resumes in a fresh process and duplicate int
         '-e',
         childScript,
         id,
-        incoming,
+        outgoing,
         partner,
+        incoming,
         record.guild,
+        String(incomingTeam),
         nextDrawUid,
         JSON.stringify(partnerHandBefore),
         JSON.stringify(inventoryBefore)
@@ -172,7 +178,9 @@ test('a persisted End Phase discard resumes in a fresh process and duplicate int
       assert.equal(result.retryIdempotent, true);
       assert.equal(result.phase, 'main');
       assert.equal(result.turn, record.state.core.turn + 1);
-      assert.equal(result.handCount, 7);
+      assert.equal(result.handCount, 6);
+      assert.ok(result.incomingHandCount > 0);
+      assert.equal(result.incomingDecision, incoming);
       assert.equal(result.deckCount, result.deckBefore - 1);
       assert.equal(result.nextDrawPresent, true);
       assert.equal(result.discardInGrave, true);
