@@ -92,15 +92,14 @@ export function gilferTeamOfSeat(seat: GilferSeat): 0 | 1 {
 function isSeat(value: unknown): value is GilferSeat {
   return Number.isInteger(value) && Number(value) >= 0 && Number(value) <= 3;
 }
-function stateContext(state: GilferTagState): { team: 0 | 1; controllerSeat: GilferSeat } | null {
+function stateContext(state: GilferTagState): { activeSeats: readonly [GilferSeat, GilferSeat] } | null {
   if (!state || state.mode !== 'tag-classic' || !Array.isArray(state.active) || state.active.length !== 2 ||
       !state.core || !Array.isArray(state.core.players) || state.core.players.length !== 2 ||
       !Array.isArray(state.core.grave) || (state.core.current !== 0 && state.core.current !== 1) ||
       !Number.isSafeInteger(state.core.turn) || state.core.turn < 1) return null;
-  const team = state.core.current as 0 | 1;
-  const controllerSeat = state.active[team];
-  if (!isSeat(controllerSeat) || gilferTeamOfSeat(controllerSeat) !== team) return null;
-  return { team, controllerSeat };
+  const seat0 = state.active[0], seat1 = state.active[1];
+  if (!isSeat(seat0) || !isSeat(seat1) || gilferTeamOfSeat(seat0) !== 0 || gilferTeamOfSeat(seat1) !== 1) return null;
+  return { activeSeats: [seat0, seat1] };
 }
 function validEvent(event: GilferSendEvent, sourceUid: string): boolean {
   return !!event && event.kind === 'sendToGy' && event.sourceUid === sourceUid &&
@@ -133,7 +132,7 @@ function buildContext(
   const sourceSeat = gilferPhysicalSeatFromUid(sourceUid);
   if (sourceSeat === null) return 'invalid-physical-uid';
   const sourceTeam = gilferTeamOfSeat(sourceSeat);
-  if (sourceTeam !== active.team) return 'trigger-controller-outside-owner-team';
+  const triggerControllerSeat = active.activeSeats[sourceTeam];
   const source = state.core.grave.find(card => card.uid === sourceUid && card.id === ARCHFIEND_OF_GILFER_ID);
   if (!source) return 'source-not-in-shared-graveyard';
   const found = findTarget(state, targetUid);
@@ -160,15 +159,15 @@ function buildContext(
         uid: found.monster.uid,
         cardId: found.monster.id,
         physicalOwnerSeat: targetSeat,
-        controllerSeat: state.active[found.team],
+        controllerSeat: active.activeSeats[found.team],
         location: 'monster',
         zoneSlot: found.slot,
         faceUp: found.monster.faceUp,
         canBeEquipped,
       },
-      triggerControllerSeat: active.controllerSeat,
+      triggerControllerSeat,
       activationId: event.activationId,
-      teamSpellTrapZonesUsed: state.core.players[active.team].backrow.length,
+      teamSpellTrapZonesUsed: state.core.players[sourceTeam].backrow.length,
       existingEquipUids: existingEquipUids(state),
     },
   };
@@ -187,7 +186,7 @@ export function listArchfiendGilferTagOffers(
   const active = stateContext(state);
   if (!active || !validEvent(event, sourceUid) || event.effectNegated) return [];
   const sourceSeat = gilferPhysicalSeatFromUid(sourceUid);
-  if (sourceSeat === null || gilferTeamOfSeat(sourceSeat) !== active.team) return [];
+  if (sourceSeat === null) return [];
   const source = state.core.grave.find(card => card.uid === sourceUid && card.id === ARCHFIEND_OF_GILFER_ID);
   if (!source) return [];
   const out: GilferTagOffer[] = [];
@@ -204,7 +203,7 @@ export function listArchfiendGilferTagOffers(
         offer: evaluation.offer,
         targetCardId: monster.id,
         targetPhysicalOwnerSeat: targetSeat,
-        targetControllerSeat: state.active[team],
+        targetControllerSeat: active.activeSeats[team],
         targetZoneSlot: built.targetSlot,
       });
     }
