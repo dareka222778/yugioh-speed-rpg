@@ -122,7 +122,7 @@ function currentSnapshot(game:TagDuel,snapshot:FlipSearchTagSnapshot):boolean{
 export function projectTagFlipSearchState(
   game:TagDuel,snapshot:FlipSearchTagSnapshot,
   getCard:(id:string)=>Card|undefined=getDuelCard,
-  getEffect?:(id:string)=>{kind:string}|undefined=getDuelEffect
+  getEffect:(id:string)=>{kind:string}|undefined=getDuelEffect
 ):FlipSearchTagProjection|null{
   if(!currentSnapshot(game,snapshot))return null;
   const refs=flipSearchTargets(game.core,snapshot.team,snapshot.cardId,getCard,getEffect);
@@ -147,7 +147,7 @@ export function resolveTagFlipSearch(
   game:TagDuel,snapshot:FlipSearchTagSnapshot,selectedUid:string|null,
   choice:FlipSearchDestinationChoice,processedEventIds:readonly string[]=[],
   getCard:(id:string)=>Card|undefined=getDuelCard,
-  getEffect?:(id:string)=>{kind:string}|undefined=getDuelEffect
+  getEffect:(id:string)=>{kind:string}|undefined=getDuelEffect
 ):FlipSearchTagResolution{
   if(!game||game.mode!=='tag-classic')return {resolved:false,reason:'not-tag-classic'};
   if(!Array.isArray(processedEventIds)||processedEventIds.length>10000||
