@@ -1,0 +1,47 @@
+{
+  "format": 1,
+  "mission": "M453",
+  "runId": "work-20261121T105500-0300-M453",
+  "reviewedAt": "2026-11-21",
+  "purpose": "Discord presentation and interaction validation for a committed TagDuel LP-gain/Fire Princess pipeline result.",
+  "tests": {
+    "file": "tests/tagDuelLpGainDiscordProjection.test.cjs",
+    "expectedCases": 2,
+    "groups": [
+      "public shared LP projection and private hand isolation",
+      "real handleTagComponent End Phase interaction and revision persistence",
+      "stale Discord interaction rejection without LP overwrite",
+      "Discord payload validation for public and private panels"
+    ]
+  },
+  "contract": [
+    "The M452 plan is applied only by the trusted test caller to the two shared team LP totals.",
+    "The public Discord embed displays the exact committed team LP totals.",
+    "Public payloads contain no physical UIDs or private hand identities.",
+    "Private panels expose the active representative's action menu only.",
+    "A real handleTagComponent action is acknowledged before mutation and refreshes the public panel.",
+    "A stale revision cannot overwrite the newer persisted session."
+  ],
+  "ownerRules": {
+    "mainDeck": "20-30",
+    "monsterZones": 3,
+    "backrowZones": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "extraDeck": 5
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "catalogChanged": false,
+  "persistentPlayerDataChanged": false,
+  "productionChanged": false,
+  "discordLiveValidated": false,
+  "discordHandlerOfflineValidated": true,
+  "limitations": [
+    "Uses an isolated SQLite database and the real Discord interaction handler/payload builders without a live Discord gateway.",
+    "The fixture has no Fire Princess copy, so it validates LP display after a positive source gain without testing a live trigger.",
+    "No production session or player inventory is modified."
+  ]
+}
