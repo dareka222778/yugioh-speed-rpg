@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "mission": "M451",
+  "runId": "work-20261121T105500-0300-M451",
+  "reviewedAt": "2026-11-21",
+  "purpose": "Shared optimistic LP commit planner for TagDuel event adapters. It returns one immutable patch containing both team LP totals and the next idempotency ledger so the trusted session layer can persist them atomically.",
+  "consumers": [
+    "M443 battle LP recovery",
+    "M444 Standby LP recovery",
+    "M447 Solemn Wishes draw LP gain",
+    "M449 battle-to-Fire-Princess pipeline",
+    "M450 Standby-to-Fire-Princess pipeline"
+  ],
+  "contract": [
+    "Requires a TagDuel with exactly two shared team LP containers.",
+    "Validates stable event IDs, safe non-negative LP integers and unique bounded event ledgers.",
+    "Rejects a stale before-snapshot rather than overwriting a newer concurrent commit.",
+    "Duplicate retries return the current shared LP tuple unchanged, even if the original before-snapshot is stale.",
+    "Returns teamLifePointsAfter and nextProcessedEventIds together as one commit patch.",
+    "Does not mutate the duel, player records, inventory, or caller ledger.",
+    "Allows LP above 8000 and records zero-delta events for replay safety."
+  ],
+  "tests": {
+    "file": "tests/tagDuelLifePointTransaction.test.cjs",
+    "expectedCases": 13,
+    "groups": [
+      "positive gain, damage and simultaneous team LP changes",
+      "optimistic stale-snapshot rejection",
+      "duplicate-event retry safety",
+      "bounded and unique ledger validation",
+      "safe integer and non-negative LP validation",
+      "no artificial 8000 LP cap",
+      "zero-delta event idempotency",
+      "TagDuel structure validation",
+      "M443 battle adapter contract",
+      "M444 Standby adapter contract",
+      "M447 Solemn Wishes adapter contract",
+      "read-only plan behavior",
+      "public summary privacy"
+    ]
+  },
+  "ownerRules": {
+    "mainDeck": "20-30",
+    "monsterZones": 3,
+    "backrowZones": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "extraDeck": 5
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "catalogChanged": false,
+  "centralResolverIntegrated": false,
+  "discordLiveValidated": false,
+  "persistentPlayerDataChanged": false,
+  "productionChanged": false,
+  "limitations": [
+    "This is a planning primitive; the caller must persist the returned LP tuple and ledger in one actual storage transaction.",
+    "No central resolver registration, Discord command integration, live gateway validation, merge or deployment is performed."
+  ]
+}
