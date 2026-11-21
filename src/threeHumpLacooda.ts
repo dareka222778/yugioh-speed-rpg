@@ -6,7 +6,7 @@ export const THREE_HUMP_LACOODA_TRIBUTE_COUNT=2;
 export type PhysicalSeat=0|1|2|3;
 export type DuelTeam=0|1;
 export type PhysicalCardRef={readonly uid:string;readonly id:string};
-export type ThreeHumpFieldCard=PhysicalCardRef&{readonly faceUp:boolean;readonly owner:DuelTeam};
+export type ThreeHumpFieldCard=PhysicalCardRef&{readonly faceUp:boolean;readonly owner?:number};
 export type ThreeHumpSeatZones={readonly deck:PhysicalCardRef[];readonly hand:PhysicalCardRef[]};
 export type ThreeHumpState={readonly field:ThreeHumpFieldCard[];readonly grave:PhysicalCardRef[];readonly seats:Readonly<Record<PhysicalSeat,ThreeHumpSeatZones>>;readonly activeSeat:PhysicalSeat;readonly activeTeam:DuelTeam};
 export type TagDuelLike={
@@ -54,7 +54,7 @@ function assertState(state:ThreeHumpState):void{
     if(seen.has(card.uid))throw new Error('3-Hump Lacooda state contains a duplicate physical UID.');
     seen.add(card.uid);
   };
-  for(const card of state.field){add(card,'field');if(typeof card.faceUp!=='boolean'||card.owner!==state.activeTeam)throw new Error('3-Hump Lacooda field must contain only this team controlled Monster Zones.');}
+  for(const card of state.field){add(card,'field');if(typeof card.faceUp!=='boolean'||(card.owner!==undefined&&card.owner!==state.activeTeam))throw new Error('3-Hump Lacooda field must contain only this team controlled Monster Zones.');}
   for(const card of state.grave)add(card,'Graveyard');
   for(const seat of [0,1,2,3] as const){
     const zones=state.seats[seat];
