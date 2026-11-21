@@ -32,6 +32,16 @@ function makeGame(first = 0) {
   return createTagDuel(players, { seed: 'm451-lp-transaction', first, classic: true });
 }
 
+function makeSolemnGame() {
+  const deck = tagNormalCardIds.slice(0, 20);
+  const players = [0, 1, 2, 3].map(seat => ({
+    id: 'seat-' + seat,
+    name: 'Seat ' + seat,
+    cards: [...deck]
+  }));
+  return createTagDuel(players, { seed: 'm447-solemn-wishes', first: 0, classic: true });
+}
+
 function takeCard(game, seat) {
   const team = seat % 2;
   const held = game.active[team] === seat ? game.core.players[team] : game.reserves[String(seat)];
@@ -274,9 +284,11 @@ test('consumes the M444 Standby recovery tuple while preserving its task and UID
 });
 
 test('consumes the M447 Solemn Wishes draw-gain tuple for the physical drawing team', () => {
-  const game = makeGame(0);
+  // Reuse M447's verified seed so the top physical draw UID belongs to seat 0.
+  const game = makeSolemnGame();
   addSolemnWishes(game, 0, 0);
   const event = makeDrawEvent(game, 0, 'm451:solemn-wishes');
+  assert.equal(event.drawnCardUids[0].startsWith('m0:'), true);
   const draw = resolveTagSolemnWishesDrawGain(game, event);
   assert.equal(draw.ok, true, JSON.stringify(draw));
   const plan = planTagDuelLifePointCommit(game, {
