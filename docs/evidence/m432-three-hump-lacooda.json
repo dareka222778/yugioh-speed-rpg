@@ -29,11 +29,13 @@
     "negation": "The two Tributes remain paid if the effect is negated; no draw is performed.",
     "handLimit": "No immediate discard; hand size may exceed six until End Phase.",
     "ownership": "Field/Graveyard are team-shared; each seat's Deck and hand remain private; ownerSeat and original object references are preserved.",
-    "teamMapping": "Seats 0/2 are team 0; seats 1/3 are team 1."
+    "teamMapping": "Seats 0/2 are team 0; seats 1/3 are team 1.",
+    "tagDuelProjection": "threeHumpStateFromTagDuel maps core.players[team] for active[team] and reserves[seat] for inactive seats; uses active[core.current] rather than cursor when an overflow-return seat is pending.",
+    "physicalIdentity": "Physical ownership is derived from the existing TagDuel m0:–m3: UID prefix; field owner remains the controlling team."
   },
   "tests": {
     "file": "tests/threeHumpLacooda.test.cjs",
-    "expected": 23,
+    "expected": 26,
     "coverage": [
       "three face-up identity copies",
       "mixed physical owners on shared field",
@@ -47,7 +49,10 @@
       "cost persists through effect negation",
       "short Deck at resolution reports deck-out",
       "single resolution guard",
-      "duplicate UID and owner/team integrity"
+      "duplicate UID and owner/team integrity",
+      "projection from actual TagDuel core.players/active/reserves shape",
+      "active representative selected from active[team], including overflow-return cursor case",
+      "physical owner derived from TagDuel m0:–m3: UID prefix, no invented ownerSeat field"
     ]
   }
 }
