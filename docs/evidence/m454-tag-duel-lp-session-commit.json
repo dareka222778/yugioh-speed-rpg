@@ -1,0 +1,48 @@
+{
+  "format": 1,
+  "mission": "M454",
+  "runId": "work-20261121T105500-0300-M454",
+  "reviewedAt": "2026-11-21",
+  "purpose": "SQLite transaction boundary for M452 LP gain → Fire Princess plans, persisting both team LP totals, both idempotency ledgers and the TagDuel session revision in one transaction.",
+  "contract": [
+    "Checks expected revision and exact before-LP snapshot.",
+    "Persists both shared team LP totals and both source/Fire Princess event ledgers in one SQLite transaction.",
+    "Updates one session revision only after all validations pass.",
+    "Fully committed retries are idempotent even with the original stale revision.",
+    "Rejects partial ledgers, stale snapshots, stale revisions, malformed plans and finished sessions.",
+    "Validates the resulting TagDuel state and preserves physical inventory."
+  ],
+  "tests": {
+    "file": "tests/tagDuelLifePointStore.test.cjs",
+    "expectedCases": 7,
+    "groups": [
+      "atomic LP tuple + two-ledger + revision commit",
+      "duplicate retry idempotency",
+      "stale session revision rejection",
+      "stale LP snapshot rejection",
+      "partial persisted ledger rejection",
+      "plan-ledger consistency",
+      "finished session rejection and no-write guarantee"
+    ]
+  },
+  "ownerRules": {
+    "mainDeck": "20-30",
+    "monsterZones": 3,
+    "backrowZones": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "extraDeck": 5
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "catalogChanged": false,
+  "persistentPlayerDataChanged": false,
+  "productionChanged": false,
+  "limitations": [
+    "The module is not yet called by tagStore/duelEngineCurrent; central resolver integration remains blocked by M61 handoff.",
+    "Tests use a disposable SQLite database; no production session, player profile or inventory is touched.",
+    "No live Discord gateway, merge or deployment is performed."
+  ]
+}
