@@ -1,0 +1,63 @@
+{
+  "mission": "M439",
+  "runId": "work-20261121T055523-0300-M439",
+  "branch": "feat/work-m439-cat-owl-tag-adapter-20261121",
+  "baseBranch": "feat/work-m431-flip-search-cards-20261121",
+  "baseSha": "06492ee7493ccbea428631569278283c116b9bde",
+  "cards": [
+    {
+      "name": "A Cat of Ill Omen",
+      "cardId": "24140059",
+      "konamiCid": 5520
+    },
+    {
+      "name": "An Owl of Luck",
+      "cardId": "23927567",
+      "konamiCid": 5523
+    }
+  ],
+  "implementation": {
+    "primitive": "src/flipSearchCards.ts (M431 dependency)",
+    "adapter": "src/flipSearchTagAdapter.ts",
+    "behavior": [
+      "capture only a genuine face-down to face-up FLIP event",
+      "select at resolution from the active physical seat's own Deck",
+      "Cat searches Trap Cards only; Owl searches Field Spell Cards only",
+      "check Necrovalley on either team's Field Zone at resolution",
+      "with Necrovalley, hand is optional and deck-top remains legal",
+      "without Necrovalley, only deck-top is legal",
+      "preserve selected UID and physical owner",
+      "clone TagDuel core and return next state without mutating input",
+      "partner reserves remain untouched",
+      "stale source/selection and duplicate event are rejected",
+      "mandatory effect with no target resolves as a no-op"
+    ]
+  },
+  "tests": {
+    "file": "tests/flipSearchTagAdapter.test.cjs",
+    "count": 13,
+    "command": "npm run build && node --test tests/flipSearchTagAdapter.test.cjs"
+  },
+  "constraints": {
+    "deckMinimum": 20,
+    "deckMaximum": 30,
+    "monsterZonesPerTeam": 3,
+    "sharedMonsterZones": 6,
+    "handLimit": 6,
+    "handDiscardTiming": "End Phase",
+    "extraDeckMaximum": 5,
+    "privateHandsAndDecks": true
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "newCertifications": 0,
+    "certifiedAfter": 969,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "immutable adapter only; central resolver registration remains blocked by M61 handoff",
+    "no live Discord/gateway test",
+    "no certification or production mutation"
+  ]
+}
