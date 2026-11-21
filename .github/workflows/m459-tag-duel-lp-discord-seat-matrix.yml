@@ -1,0 +1,36 @@
+name: M459 TagDuel LP Discord seat matrix
+on:
+  push:
+    branches:
+      - feat/work-m459-tag-lp-discord-seat-matrix-20261121
+    paths:
+      - 'tests/tagDuelLpDiscordSeatMatrix.test.cjs'
+      - 'docs/evidence/m459-tag-duel-lp-discord-seat-matrix.json'
+      - '.github/workflows/m459-tag-duel-lp-discord-seat-matrix.yml'
+  pull_request:
+    paths:
+      - 'tests/tagDuelLpDiscordSeatMatrix.test.cjs'
+      - 'docs/evidence/m459-tag-duel-lp-discord-seat-matrix.json'
+      - '.github/workflows/m459-tag-duel-lp-discord-seat-matrix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tagduel-lp-discord-seat-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m459-tag-duel-lp-discord-seat-matrix.json', 'utf8'))"
+      - name: Run TagDuel LP Discord seat matrix
+        run: node --test tests/tagDuelLpDiscordSeatMatrix.test.cjs
