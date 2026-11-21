@@ -1,0 +1,36 @@
+name: M474 TagDuel draw lock release
+on:
+  push:
+    branches:
+      - feat/work-m474-tag-draw-lock-release-20261121
+    paths:
+      - 'tests/tagDuelDrawLockRelease2v2.test.cjs'
+      - 'docs/evidence/m474-tag-draw-lock-release.json'
+      - '.github/workflows/m474-tag-draw-lock-release.yml'
+  pull_request:
+    paths:
+      - 'tests/tagDuelDrawLockRelease2v2.test.cjs'
+      - 'docs/evidence/m474-tag-draw-lock-release.json'
+      - '.github/workflows/m474-tag-draw-lock-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-draw-lock-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m474-tag-draw-lock-release.json', 'utf8'))"
+      - name: Run TagDuel simultaneous draw lifecycle test
+        run: node --test tests/tagDuelDrawLockRelease2v2.test.cjs
