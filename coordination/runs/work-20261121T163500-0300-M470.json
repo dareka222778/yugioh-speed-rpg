@@ -2,56 +2,54 @@
   "runId": "work-20261121T163500-0300-M470",
   "mission": "M470",
   "owner": "Work principal",
-  "status": "active",
+  "status": "implementation-complete-ci-pending",
   "startedAt": "2026-11-21T16:34:23.447-03:00",
-  "endedAt": null,
-  "timezone": "America/Sao_Paulo",
-  "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedHeadAtStart": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+  "endedAt": "2026-11-21T16:37:46.548-03:00",
   "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
+  "head": "80285daebd7503e0a89cb4080997bcb867965930",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
-  "priority": "P1 — validar expiração de lobby TagDuel no limite exato de cinco minutos, liberação de locks físicos e publicação do estado expirado, rejeitando aceitações tardias sem mutação ou concessão.",
-  "reservedFiles": [
+  "pr": 418,
+  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/418",
+  "changes": [
+    "Teste do limite exato de cinco minutos e um milissegundo antes.",
+    "Expiração remove locks de host e parceiro aceito e incrementa revisão uma única vez.",
+    "dueTags agenda a mensagem pública expirada até markTagPublished.",
+    "Botão Accept obsoleto é rejeitado pelo handler sem readquirir lock."
+  ],
+  "ci": [
+    {
+      "name": "M470 focused",
+      "run": 44941761403,
+      "status": "success"
+    },
+    {
+      "name": "Card Batch Fast",
+      "run": 44941761393,
+      "status": "success"
+    },
+    {
+      "name": "Milestone 1000",
+      "run": 44941761388,
+      "status": "success",
+      "certified": 969,
+      "remaining": 31
+    },
+    {
+      "name": "Engine Validation",
+      "run": 44941761437,
+      "status": "in_progress"
+    }
+  ],
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "merge": false,
+  "deploy": false,
+  "auxiliaryScope": [
     "tests/tagLobbyExpiryDiscord2v2.test.cjs",
     "docs/evidence/m470-tag-lobby-expiry-discord.json",
     ".github/workflows/m470-tag-lobby-expiry-discord.yml"
   ],
-  "conflictCheck": {
-    "overlap": false,
-    "preserved": [
-      "M459 released to auxiliary monitor only",
-      "M460–M469 branches and PRs",
-      "M455–M458 storage/LP branches and reserved files",
-      "M61 central resolver files",
-      "all third-party reservations"
-    ],
-    "note": "M470 adiciona três caminhos novos, independentes de M459–M469 e de todas as reservas de terceiros."
-  },
-  "blocks": [
-    {
-      "at": "2026-11-21T16:34:23.447-03:00",
-      "description": "Auditoria de getTag/LOBBY_MS/dueTags/markTagPublished e reserva isolada de teste de expiração."
-    }
-  ],
-  "ci": {
-    "status": "not-started"
-  },
-  "certification": {
-    "baseline": 969,
-    "newCertifications": 0,
-    "automaticCertifications": 0,
-    "inventoryGranted": 0
-  },
-  "production": {
-    "merge": false,
-    "deploy": false,
-    "backupVerified": false,
-    "liveDiscord": false
-  },
-  "nextTask": "Após M470: verificar CI final de M469/M470, corrigir somente escopos próprios e continuar a próxima matriz de comando/lobby TagDuel sem sobrepor reservas.",
-  "nextWindow": "2026-11-21T17:30:00-03:00",
-  "effectiveWorkMinutes": 0,
-  "targetEffectiveMinutes": 60,
-  "targetMet": false,
-  "ciWaitExcluded": true
+  "blocker": "Aguardar Engine Validation/Extended Soak; sem alteração de runtime ou produção."
 }

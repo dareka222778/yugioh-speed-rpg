@@ -1,20 +1,20 @@
 {
-  "runId": "work-20261121T163500-0300-M470",
+  "runId": "work-20261121T163746-0300-M471",
   "owner": "Work principal",
   "priorityRequestedBy": "Work",
   "state": "active",
-  "startedAt": "2026-11-21T16:34:23.447-03:00",
-  "lastActivityAt": "2026-11-21T16:34:23.447-03:00",
+  "startedAt": "2026-11-21T16:37:46.548-03:00",
+  "lastActivityAt": "2026-11-21T16:37:46.548-03:00",
   "nextScheduledAt": "2026-11-21T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
-    "tests/tagLobbyExpiryDiscord2v2.test.cjs",
-    "docs/evidence/m470-tag-lobby-expiry-discord.json",
-    ".github/workflows/m470-tag-lobby-expiry-discord.yml"
+    "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
+    "docs/evidence/m471-tag-decision-timeout-discord.json",
+    ".github/workflows/m471-tag-decision-timeout-discord.yml"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261121T163500-0300-M470.json",
-  "previousRunId": "work-20261121T162433-0300-M469",
+  "lastCheckpoint": "coordination/runs/work-20261121T163746-0300-M471.json",
+  "previousRunId": "work-20261121T163500-0300-M470",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -4701,23 +4701,23 @@
     }
   ],
   "activeRun": {
-    "runId": "work-20261121T163500-0300-M470",
+    "runId": "work-20261121T163746-0300-M471",
     "owner": "Work principal",
-    "mission": "M470",
+    "mission": "M471",
     "state": "active",
     "branch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadBeforeClaim": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
-    "startedAt": "2026-11-21T16:34:23.447-03:00",
+    "sharedHeadBeforeClaim": "5dc132241fae3b2d9938022ccddb7e2c20750661",
+    "startedAt": "2026-11-21T16:37:46.548-03:00",
     "workBranches": [
       {
-        "mission": "M470",
-        "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
+        "mission": "M471",
+        "branch": "feat/work-m471-tag-decision-timeout-discord-20261121",
         "baseBranch": "feat/rea-engine-recovery-20261026",
-        "baseSha": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+        "baseSha": "5dc132241fae3b2d9938022ccddb7e2c20750661",
         "scope": [
-          "tests/tagLobbyExpiryDiscord2v2.test.cjs",
-          "docs/evidence/m470-tag-lobby-expiry-discord.json",
-          ".github/workflows/m470-tag-lobby-expiry-discord.yml"
+          "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
+          "docs/evidence/m471-tag-decision-timeout-discord.json",
+          ".github/workflows/m471-tag-decision-timeout-discord.yml"
         ],
         "state": "active"
       }
@@ -6997,7 +6997,7 @@
   "lastParallelCheckpoint": "coordination/runs/work-20261121T112504-0300-M456.json",
   "lastParallelActivityAt": "2026-11-21T11:25:04-03:00",
   "sharedHeadAfterCheckpoint": "ea907a31daf5c5cafb521e99053a5763483558c5",
-  "sharedHeadBeforeStateUpdate": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+  "sharedHeadBeforeStateUpdate": "5dc132241fae3b2d9938022ccddb7e2c20750661",
   "endedAt": "2026-11-21T12:10:54.153-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
@@ -7346,7 +7346,7 @@
   },
   "lastCheckpointAt": "2026-11-21T01:01:16-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+  "expectedHeadForCoordinationCommit": "5dc132241fae3b2d9938022ccddb7e2c20750661",
   "lastRunSummary": "M305 registrado: The Sanctuary in the Sky, teste de integração Discord 2v2 em branch isolada; escopo único tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -10145,33 +10145,33 @@
   },
   "currentIndependentWork": {
     "format": 1,
-    "mission": "M470",
-    "runId": "work-20261121T163500-0300-M470",
+    "mission": "M471",
+    "runId": "work-20261121T163746-0300-M471",
     "owner": "Work principal",
     "state": "active",
-    "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
+    "branch": "feat/work-m471-tag-decision-timeout-discord-20261121",
     "baseBranch": "feat/rea-engine-recovery-20261026",
-    "baseSha": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
+    "baseSha": "5dc132241fae3b2d9938022ccddb7e2c20750661",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtReservation": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
-    "startedAt": "2026-11-21T16:34:23.447-03:00",
-    "priority": "P1 — validar expiração de lobby TagDuel no limite exato de cinco minutos, liberação de locks físicos e publicação do estado expirado, rejeitando aceitações tardias sem mutação ou concessão.",
+    "sharedHeadAtReservation": "5dc132241fae3b2d9938022ccddb7e2c20750661",
+    "startedAt": "2026-11-21T16:37:46.548-03:00",
+    "priority": "P1 — validar o timeout de decisão de 30 minutos em TagDuel 2v2, vitória por W.O. da equipe oposta, persistência de evento público, liberação dos quatro locks e rejeição de jogadas obsoletas.",
     "reservedFiles": [
-      "tests/tagLobbyExpiryDiscord2v2.test.cjs",
-      "docs/evidence/m470-tag-lobby-expiry-discord.json",
-      ".github/workflows/m470-tag-lobby-expiry-discord.yml"
+      "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
+      "docs/evidence/m471-tag-decision-timeout-discord.json",
+      ".github/workflows/m471-tag-decision-timeout-discord.yml"
     ],
-    "scope": "Somente teste/evidência/workflow. Exercitar getTag no limite LOBBY_MS, preservar lobby antes do deadline, expirar exatamente no limite, remover tag_members de host/participante aceito, incluir sessão em dueTags para atualização pública, marcar revisão publicada e rejeitar clique Accept obsoleto via handleTagComponent. Sem runtime, catálogo, inventário ou dados reais.",
+    "scope": "Somente teste/evidência/workflow. Criar partida 2v2 por quatro aceitações Discord, verificar um milissegundo antes e no limite DECISION_TIMEOUT_MS, confirmar W.O. para a equipe oposta, persistência duelFinished em tag_transition_events, dueTags/markTagPublished, liberação de locks, conservação de LP/UIDs e rejeição de menu de jogada antigo. Sem runtime, catálogo, inventário ou dados reais.",
     "conflictCheck": {
       "overlap": false,
       "preserved": [
-        "M459 released to auxiliary monitor only",
+        "M459 and M470 released to auxiliary monitor only",
         "M460–M469 branches and PRs",
         "M455–M458 storage/LP branches and reserved files",
         "M61 central resolver files",
         "all third-party reservations"
       ],
-      "note": "M470 adiciona três caminhos novos, independentes de M459–M469 e de todas as reservas de terceiros."
+      "note": "M471 adiciona três caminhos novos, independentes dos testes de lobby M469/M470 e de todas as reservas de terceiros."
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
@@ -10261,8 +10261,8 @@
     "minimum60MinutesMet": false,
     "auxiliaryPermission": "Monitor PR #347, sync branch with latest shared HEAD by non-forced merge, correct only these three M398 files if CI fails. Do not edit coordination/state.json, runtime, catalog, certificates, player data, inventory, persistent DB, other branches, main or production; no merge/deploy."
   },
-  "latestIndependentWorkRunId": "work-20261121T163500-0300-M470",
-  "latestIndependentWorkBranch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
+  "latestIndependentWorkRunId": "work-20261121T163746-0300-M471",
+  "latestIndependentWorkBranch": "feat/work-m471-tag-decision-timeout-discord-20261121",
   "latestIndependentWorkHead": null,
   "latestIndependentWorkReservationReleased": false,
   "latestIndependentWorkActivityAt": "2026-11-21T12:21:49.090-03:00",
@@ -10556,7 +10556,7 @@
     ],
     "cardFamily": "battle-destruction-life-point-recovery"
   },
-  "latestIndependentWorkPriority": "P1 — validar expiração de lobby TagDuel no limite exato de cinco minutos, liberação de locks físicos e publicação do estado expirado, rejeitando aceitações tardias sem mutação ou concessão.",
+  "latestIndependentWorkPriority": "P1 — validar o timeout de decisão de 30 minutos em TagDuel 2v2, vitória por W.O. da equipe oposta, persistência de evento público, liberação dos quatro locks e rejeição de jogadas obsoletas.",
   "currentWorkReservationM403": {
     "runId": "work-20261120T045103-0300-M403",
     "owner": "Work principal",
@@ -11411,7 +11411,7 @@
     "handoff": "M61 permanece pendente; src/monsterEffects.ts, src/duelEngineCurrent.ts e standbyFlow.ts intocados.",
     "releaseToAuxiliary": "Somente os quatro caminhos novos M444, após publicação da PR."
   },
-  "currentReservation": "M470",
+  "currentReservation": "M471",
   "completedOwnRuns": [
     {
       "runId": "work-20261121T105500-0300-M449",
@@ -11576,7 +11576,7 @@
     ],
     "nextTask": "Auxiliar monitora CI e corrige apenas os arquivos reservados."
   },
-  "nextWorkTask": "Após M470: verificar CI final de M469/M470, corrigir somente escopos próprios e continuar a próxima matriz de comando/lobby TagDuel sem sobrepor reservas.",
+  "nextWorkTask": "Após M471: monitorar M469–M471, solicitar transferência dos arquivos centrais M61 e priorizar integração de efeitos/cartas no resolver principal; sem handoff, continuar testes de lifecycle Discord em escopo isolado.",
   "currentWorkReservationM457": {
     "mission": "M457",
     "runId": "work-20261121T121100-0300-M457",
@@ -11845,7 +11845,7 @@
     "mission": "M470",
     "runId": "work-20261121T163500-0300-M470",
     "owner": "Work principal",
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "6d936254a80ec2a3c39af2077295d8f1f44177b5",
@@ -11869,6 +11869,77 @@
         "all third-party reservations"
       ],
       "note": "M470 adiciona três caminhos novos, independentes de M459–M469 e de todas as reservas de terceiros."
+    },
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "head": "80285daebd7503e0a89cb4080997bcb867965930",
+    "pr": 418,
+    "releasedAt": "2026-11-21T16:37:46.548-03:00",
+    "ci": [
+      {
+        "name": "M470 focused",
+        "run": 44941761403,
+        "status": "success",
+        "head": "80285daebd7503e0a89cb4080997bcb867965930"
+      },
+      {
+        "name": "Card Batch Fast",
+        "run": 44941761393,
+        "status": "success",
+        "head": "80285daebd7503e0a89cb4080997bcb867965930"
+      },
+      {
+        "name": "Milestone 1000",
+        "run": 44941761388,
+        "status": "success",
+        "head": "80285daebd7503e0a89cb4080997bcb867965930",
+        "certified": 969,
+        "remaining": 31
+      },
+      {
+        "name": "Engine Validation",
+        "run": 44941761437,
+        "status": "in_progress",
+        "head": "80285daebd7503e0a89cb4080997bcb867965930"
+      }
+    ],
+    "lastActivityAt": "2026-11-21T16:37:46.548-03:00",
+    "nextTask": "Auxiliar acompanha Engine Validation/Extended Soak no HEAD 80285da; o focused M470 e Card Batch/Milestone passaram. Corrigir apenas os três arquivos M470 se a validação focada falhar; sincronizar a branch sem force após novas atualizações compartilhadas.",
+    "releaseToAuxiliary": [
+      "tests/tagLobbyExpiryDiscord2v2.test.cjs",
+      "docs/evidence/m470-tag-lobby-expiry-discord.json",
+      ".github/workflows/m470-tag-lobby-expiry-discord.yml"
+    ]
+  },
+  "currentWorkReservationM471": {
+    "mission": "M471",
+    "runId": "work-20261121T163746-0300-M471",
+    "owner": "Work principal",
+    "state": "active",
+    "branch": "feat/work-m471-tag-decision-timeout-discord-20261121",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "5dc132241fae3b2d9938022ccddb7e2c20750661",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "5dc132241fae3b2d9938022ccddb7e2c20750661",
+    "startedAt": "2026-11-21T16:37:46.548-03:00",
+    "priority": "P1 — validar o timeout de decisão de 30 minutos em TagDuel 2v2, vitória por W.O. da equipe oposta, persistência de evento público, liberação dos quatro locks e rejeição de jogadas obsoletas.",
+    "reservedFiles": [
+      "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
+      "docs/evidence/m471-tag-decision-timeout-discord.json",
+      ".github/workflows/m471-tag-decision-timeout-discord.yml"
+    ],
+    "scope": "Somente teste/evidência/workflow. Criar partida 2v2 por quatro aceitações Discord, verificar um milissegundo antes e no limite DECISION_TIMEOUT_MS, confirmar W.O. para a equipe oposta, persistência duelFinished em tag_transition_events, dueTags/markTagPublished, liberação de locks, conservação de LP/UIDs e rejeição de menu de jogada antigo. Sem runtime, catálogo, inventário ou dados reais.",
+    "conflictCheck": {
+      "overlap": false,
+      "preserved": [
+        "M459 and M470 released to auxiliary monitor only",
+        "M460–M469 branches and PRs",
+        "M455–M458 storage/LP branches and reserved files",
+        "M61 central resolver files",
+        "all third-party reservations"
+      ],
+      "note": "M471 adiciona três caminhos novos, independentes dos testes de lobby M469/M470 e de todas as reservas de terceiros."
     },
     "newCertifications": 0,
     "automaticCertifications": 0,

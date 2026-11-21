@@ -1,0 +1,57 @@
+{
+  "runId": "work-20261121T163746-0300-M471",
+  "mission": "M471",
+  "owner": "Work principal",
+  "status": "active",
+  "startedAt": "2026-11-21T16:37:46.548-03:00",
+  "endedAt": null,
+  "timezone": "America/Sao_Paulo",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "5dc132241fae3b2d9938022ccddb7e2c20750661",
+  "branch": "feat/work-m471-tag-decision-timeout-discord-20261121",
+  "baseSha": "5dc132241fae3b2d9938022ccddb7e2c20750661",
+  "priority": "P1 — validar o timeout de decisão de 30 minutos em TagDuel 2v2, vitória por W.O. da equipe oposta, persistência de evento público, liberação dos quatro locks e rejeição de jogadas obsoletas.",
+  "reservedFiles": [
+    "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
+    "docs/evidence/m471-tag-decision-timeout-discord.json",
+    ".github/workflows/m471-tag-decision-timeout-discord.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M459 and M470 released to auxiliary monitor only",
+      "M460–M469 branches and PRs",
+      "M455–M458 storage/LP branches and reserved files",
+      "M61 central resolver files",
+      "all third-party reservations"
+    ],
+    "note": "M471 adiciona três caminhos novos, independentes dos testes de lobby M469/M470 e de todas as reservas de terceiros."
+  },
+  "blocks": [
+    {
+      "at": "2026-11-21T16:37:46.548-03:00",
+      "description": "Auditoria de DECISION_TIMEOUT_MS=30 minutos, getTag/timeoutTagDuel e persistência de duelFinished; reserva isolada M471."
+    }
+  ],
+  "ci": {
+    "status": "not-started"
+  },
+  "certification": {
+    "baseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "nextTask": "Após M471: monitorar M469–M471, solicitar transferência dos arquivos centrais M61 e priorizar integração de efeitos/cartas no resolver principal; sem handoff, continuar testes de lifecycle Discord em escopo isolado.",
+  "nextWindow": "2026-11-21T17:30:00-03:00",
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true
+}
