@@ -55,7 +55,7 @@
   },
   "tests": {
     "file": "tests/flipSearchCards.test.cjs",
-    "expected": 18,
+    "expected": 19,
     "coverage": [
       "both card-specific filters",
       "mandatory FLIP/resolution timing contract",
@@ -68,7 +68,8 @@
       "2v2 partner reserve isolation",
       "physical UID/object identity",
       "duplicate UID integrity",
-      "invalid actor/card/choice"
+      "invalid actor/card/choice",
+      "invalid destination choice"
     ]
   },
   "limitations": [
