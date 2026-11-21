@@ -32,5 +32,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m444-standby-lp-recovery-tag-duel-adapter.json', 'utf8'))"
       - name: Run Standby LP TagDuel adapter behavior tests
         run: node --test tests/standbyLpRecoveryTagDuelAdapter.test.cjs
