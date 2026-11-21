@@ -1,0 +1,36 @@
+name: M475 TagDuel action receipt replay
+on:
+  push:
+    branches:
+      - feat/work-m475-tag-action-receipt-replay-20261121
+    paths:
+      - 'tests/tagActionReceiptReplay2v2.test.cjs'
+      - 'docs/evidence/m475-tag-action-receipt-replay.json'
+      - '.github/workflows/m475-tag-action-receipt-replay.yml'
+  pull_request:
+    paths:
+      - 'tests/tagActionReceiptReplay2v2.test.cjs'
+      - 'docs/evidence/m475-tag-action-receipt-replay.json'
+      - '.github/workflows/m475-tag-action-receipt-replay.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-action-receipt-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m475-tag-action-receipt-replay.json', 'utf8'))"
+      - name: Run TagDuel action receipt replay test
+        run: node --test tests/tagActionReceiptReplay2v2.test.cjs
