@@ -289,7 +289,7 @@ test('rejects wrong task identity, turn, team and phase without mutating the gam
 test('rejects a Darklord Marie stored in the wrong physical-owner team Graveyard', () => {
   const game = makeGame(2);
   addMarie(game, 1, 0);
-  assert.throws(() => captureDarklordMarieActivationUids(game, 0), /physical-owner team/);
+  assert.throws(() => captureDarklordMarieActivationUids(game, 0), /equipe proprietária/);
 });
 
 test('does not cap shared team LP at 8000', () => {
