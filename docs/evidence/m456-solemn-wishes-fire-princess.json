@@ -1,0 +1,92 @@
+{
+  "mission": "M456",
+  "runId": "work-20261121T112504-0300-M456",
+  "status": "test-assertion-corrected-ci-pending",
+  "title": "Solemn Wishes physical draw event → Fire Princess 2v2 LP pipeline",
+  "base": {
+    "branch": "feat/work-m455-standby-lp-atomic-commit-20261121",
+    "sha": "e39d198f09d78f06de706f0e71c4a0899b2760a2"
+  },
+  "dependencies": {
+    "m451Pr": 399,
+    "m452Pr": 400,
+    "m454Pr": 402,
+    "m455Pr": 403
+  },
+  "implementation": {
+    "files": [
+      "tests/solemnWishesFirePrincessPipeline.test.cjs",
+      "docs/evidence/m456-solemn-wishes-fire-princess.json",
+      ".github/workflows/m456-solemn-wishes-fire-princess.yml"
+    ],
+    "scenarioCount": 6,
+    "scenarios": [
+      "Two-card draw by inactive partner seat 2: one of two Solemn Wishes copies is negated; only the eligible copy grants 500 LP, then Fire Princess plans 500 damage.",
+      "Two eligible Solemn Wishes copies grant 1000 LP once each for one multi-card draw event, not 500 per card drawn; Fire Princess plans one 500 LP burn.",
+      "A draw by team 1 does not trigger team 0's Solemn Wishes or Fire Princess.",
+      "A drawn UID whose physical owner seat differs from the declared drawing seat is rejected even when both seats share a team.",
+      "Source and Fire Princess event ledgers together make a replay idempotent.",
+      "Fire Princess negation is evaluated per physical copy: the negated copy owned by seat 0 is skipped, while the partner-owned copy at seat 2 applies exactly one 500 LP burn after a positive Solemn Wishes draw gain."
+    ]
+  },
+  "cardIdentities": [
+    {
+      "name": "Solemn Wishes",
+      "cardId": "35346968",
+      "role": "500 LP per eligible copy for one draw event"
+    },
+    {
+      "name": "Fire Princess",
+      "cardId": "64752646",
+      "role": "500 LP damage per eligible copy after positive LP gain"
+    }
+  ],
+  "admissionGate": {
+    "observed": "Solemn Wishes and Fire Princess are absent from the M455 base playable-card registry. The current duel-integrity boundary rejects the persisted candidate state with the unknown-card-identity validation error; the storage adapter maps this to invalid-tag-session-state before changing LPs, revision or ledgers.",
+    "expectedStoreResult": "invalid-tag-session-state",
+    "noPartialWrite": true
+  },
+  "invariants": {
+    "physicalDrawingSeatVerified": true,
+    "physicalOwnerSeatPreserved": true,
+    "teamDerivedFromPhysicalSeat": true,
+    "multiCardDrawCountsAsOneEvent": true,
+    "perCopyNegation": true,
+    "sharedTeamLifePoints": true,
+    "duplicateReplayIdempotent": true,
+    "plannerReadOnly": true,
+    "rules": {
+      "mainDeckMin": 20,
+      "mainDeckMax": 30,
+      "handLimit": 6,
+      "handCheck": "end",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZoneSeparate": true,
+      "extraDeckMax": 5
+    },
+    "firePrincessPerCopyNegation": true,
+    "firePrincessPhysicalOwnerPreserved": true
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Solemn Wishes and Fire Princess are not admitted in the current base; storage correctly rejects their state.",
+    "No central resolver registration; M61 handoff remains pending.",
+    "No live Discord credentials or production session are used."
+  ]
+}

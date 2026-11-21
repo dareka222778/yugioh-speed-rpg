@@ -1,0 +1,36 @@
+name: M456 Solemn Wishes Fire Princess pipeline
+on:
+  push:
+    branches:
+      - feat/work-m456-solemn-wishes-fire-princess-20261121
+    paths:
+      - 'tests/solemnWishesFirePrincessPipeline.test.cjs'
+      - 'docs/evidence/m456-solemn-wishes-fire-princess.json'
+      - '.github/workflows/m456-solemn-wishes-fire-princess.yml'
+  pull_request:
+    paths:
+      - 'tests/solemnWishesFirePrincessPipeline.test.cjs'
+      - 'docs/evidence/m456-solemn-wishes-fire-princess.json'
+      - '.github/workflows/m456-solemn-wishes-fire-princess.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  solemn-wishes-fire-princess:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m456-solemn-wishes-fire-princess.json', 'utf8'))"
+      - name: Run isolated Solemn Wishes and Fire Princess 2v2 tests
+        run: node --test tests/solemnWishesFirePrincessPipeline.test.cjs
