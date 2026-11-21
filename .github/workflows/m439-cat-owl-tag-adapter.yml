@@ -1,0 +1,36 @@
+name: M439 Cat Owl TagDuel adapter
+
+on:
+  push:
+    branches:
+      - feat/work-m439-cat-owl-tag-adapter-20261121
+    paths:
+      - 'src/flipSearchTagAdapter.ts'
+      - 'src/flipSearchCards.ts'
+      - 'tests/flipSearchTagAdapter.test.cjs'
+      - 'docs/evidence/m439-cat-owl-tag-adapter.json'
+      - '.github/workflows/m439-cat-owl-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/flipSearchTagAdapter.ts'
+      - 'src/flipSearchCards.ts'
+      - 'tests/flipSearchTagAdapter.test.cjs'
+      - 'docs/evidence/m439-cat-owl-tag-adapter.json'
+      - '.github/workflows/m439-cat-owl-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/flipSearchTagAdapter.test.cjs
