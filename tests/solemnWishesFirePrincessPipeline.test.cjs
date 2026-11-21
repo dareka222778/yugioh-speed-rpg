@@ -163,7 +163,7 @@ test('a two-card draw by the inactive partner triggers only the unnegated Solemn
   assert.deepEqual(plan.teamLifePointsAfter, [4500, 3500]);
   assert.equal(JSON.stringify(game), beforePlan, 'source and Fire Princess planners must not mutate the drawn state');
 
-  assert.throws(() => tag.assertTagDuel(game), /Carta não admitida/);
+  assert.throws(() => tag.assertTagDuel(game), /Estado do duelo inválido: identificador de carta ausente, duplicado ou desconhecido/);
   const record = register(game, 'm456-wishes-admission-gate');
   assert.deepEqual(commitTagDuelLpGainPipelinePlan(record.id, record.revision, plan), {
     ok: false,
