@@ -1,0 +1,36 @@
+name: M467 TagDuel owned-deck consent snapshot
+on:
+  push:
+    branches:
+      - feat/work-m467-tag-owned-deck-consent-snapshot-20261121
+    paths:
+      - 'tests/tagOwnedDeckConsentSnapshot2v2.test.cjs'
+      - 'docs/evidence/m467-tag-owned-deck-consent-snapshot.json'
+      - '.github/workflows/m467-tag-owned-deck-consent-snapshot.yml'
+  pull_request:
+    paths:
+      - 'tests/tagOwnedDeckConsentSnapshot2v2.test.cjs'
+      - 'docs/evidence/m467-tag-owned-deck-consent-snapshot.json'
+      - '.github/workflows/m467-tag-owned-deck-consent-snapshot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  owned-deck-consent-snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m467-tag-owned-deck-consent-snapshot.json', 'utf8'))"
+      - name: Run classic-owned TagDuel consent snapshot test
+        run: node --test tests/tagOwnedDeckConsentSnapshot2v2.test.cjs
