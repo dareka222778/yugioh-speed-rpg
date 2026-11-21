@@ -1,0 +1,89 @@
+{
+  "mission": "M457",
+  "runId": "work-20261121T121100-0300-M457",
+  "status": "implementation-complete-ci-pending",
+  "title": "TagDuel LP pipeline 4x4 physical-seat matrix",
+  "base": {
+    "branch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
+    "sha": "29f4ad75ee92b2ff1860b03c8e6d8e8edca8a8cb"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagDuelLpPipelineSeatMatrix.test.cjs",
+      "docs/evidence/m457-tag-duel-lp-pipeline-seat-matrix.json",
+      ".github/workflows/m457-tag-duel-lp-pipeline-seat-matrix.yml"
+    ],
+    "matrix": {
+      "firstSeat": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "drawingSeat": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "permutations": 16,
+      "additionalWrongPhysicalUidScenario": 1
+    },
+    "behavior": "For each initial active seat and each physical drawing seat, the test resolves one Solemn Wishes copy controlled by team 0 and one Fire Princess owned by the other physical teammate. Team 0 draws gain 500 LP then plan one 500 LP burn; team 1 draws do not trigger team 0 copies. The source and burn preserve physical owner seats and the planners do not mutate the drawn game snapshot.",
+    "rules": {
+      "mainDeckMin": 20,
+      "mainDeckMax": 30,
+      "handLimit": 6,
+      "handCheck": "end",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZoneSeparate": true,
+      "extraDeckMax": 5
+    }
+  },
+  "cardIdentities": [
+    {
+      "name": "Solemn Wishes",
+      "cardId": "35346968",
+      "role": "500 LP per eligible copy for one draw event"
+    },
+    {
+      "name": "Fire Princess",
+      "cardId": "64752646",
+      "role": "500 LP burn after positive LP gain"
+    }
+  ],
+  "invariants": {
+    "allFirstSeatsCovered": true,
+    "allDrawingSeatsCovered": true,
+    "physicalDrawingSeatVerified": true,
+    "physicalOwnerSeatPreserved": true,
+    "teamDerivedFromPhysicalSeat": true,
+    "opposingTeamDoesNotTrigger": true,
+    "oneDrawEventOneTriggerPerCopy": true,
+    "firePrincessOnlyAfterPositiveGain": true,
+    "sharedTeamLifePoints": true,
+    "plannerReadOnly": true,
+    "wrongPhysicalUidRejected": true
+  },
+  "safety": {
+    "isolatedInMemoryTagDuel": true,
+    "discordCredentialsUsed": false,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Solemn Wishes and Fire Princess remain unadmitted in the current resolver catalog; this matrix validates the independent TagDuel adapters/planners only.",
+    "No central resolver registration or live Discord interaction; M61 handoff remains pending."
+  ]
+}
