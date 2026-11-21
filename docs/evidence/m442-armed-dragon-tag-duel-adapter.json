@@ -50,7 +50,7 @@
   },
   "tests": {
     "file": "tests/armedDragonTagDuelAdapter.test.cjs",
-    "expectedCases": 22,
+    "expectedCases": 23,
     "behavioralGroups": [
       "four-seat active representative and shared field",
       "LV3 StandbyFlow continuation and active private Deck/hand",
@@ -60,7 +60,9 @@
       "physical owner routing for source and destroyed monsters",
       "private hand/deck isolation from inactive partner reserves",
       "stale turn/seat and no-mutation guarantees",
-      "LV7 summon restriction and public privacy"
+      "LV7 summon restriction and public privacy",
+      "three shared Monster Zone capacity and hidden face-down ATK isolation",
+      "active representative rotation invalidation"
     ]
   },
   "newCertifications": 0,

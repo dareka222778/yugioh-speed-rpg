@@ -238,7 +238,7 @@ function readOpposingMonsters(
   for (const monster of game.core.players[opponentTeam].monsters) {
     const physicalOwnerSeat = physicalSeatFromUid(monster.uid);
     if (physicalOwnerSeat === null) return fail('opposing-monster-without-physical-owner');
-    const currentAtk = atk(monster as Monster, game.core);
+    const currentAtk = monster.faceUp ? atk(monster as Monster, game.core) : 0;
     if (!Number.isSafeInteger(currentAtk) || currentAtk < 0 || currentAtk > 99999) {
       return fail('invalid-opposing-current-atk');
     }

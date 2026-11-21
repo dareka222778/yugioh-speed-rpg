@@ -46,7 +46,7 @@ function addSource(game, id, ownerSeat = 0) {
     atkBoost: 0,
     defBoost: 0
   };
-  game.core.players[0].monsters.push(source);
+  game.core.players[ownerSeat % 2].monsters.push(source);
   return source;
 }
 
@@ -354,6 +354,18 @@ test('stale turn or active-seat changes invalidate discard resolution', () => {
   assert.deepEqual(resolveTagArmedDragonDiscardEffect(game, plan.value), {
     ok: false, reason: 'stale-armed-dragon-discard-plan'
   });
+
+  const rotated = makeGame();
+  const rotatedSource = addSource(rotated, ARMED_DRAGON_IDS.lv7);
+  const rotatedDiscard = activeDiscard(rotated);
+  rotated.core.phase = 'main';
+  const rotatedPlan = prepareTagArmedDragonDiscardEffect(rotated, rotatedSource.uid, rotatedDiscard.uid);
+  assert.equal(rotatedPlan.ok, true);
+  rotated.active[0] = 0;
+  rotated.cursor = 0;
+  assert.deepEqual(resolveTagArmedDragonDiscardEffect(rotated, rotatedPlan.value), {
+    ok: false, reason: 'stale-armed-dragon-discard-plan'
+  });
 });
 
 test('LV7 summon restriction matches the physical Hand/Deck-only Level Up exception', () => {
@@ -370,4 +382,35 @@ test('public summary never exposes physical UIDs or private hand contents', () =
   const summary = armedDragonTagPublicSummary();
   assert.match(summary, /identidades privadas e alvos ocultos não são exibidos publicamente/i);
   assert.equal(summary.includes(ARMED_DRAGON_IDS.lv3), false);
+});
+
+test('LV3 level-up respects the three shared Monster Zones after the source leaves', () => {
+  const game = makeGame();
+  const source = addSource(game, ARMED_DRAGON_IDS.lv3);
+  const candidate = addCandidate(game, 2, ARMED_DRAGON_IDS.lv5);
+  for (let i = 0; i < 3; i++) {
+    const card = takePhysicalCard(game, 0, 'deck');
+    game.core.players[0].monsters.push({
+      ...card, id: tagNormalCardIds[i], position: 'atk', faceUp: true,
+      entered: game.core.turn, changed: game.core.turn, attacked: 0, atkBoost: 0, defBoost: 0
+    });
+  }
+  activateLv3Standby(game, source);
+  assert.deepEqual(planTagArmedDragonLevelUp(game, source.uid, candidate.uid), {
+    ok: false, reason: 'invalid-shared-monster-zone-count'
+  });
+});
+
+test('face-down opposing monsters are excluded without reading their hidden ATK', () => {
+  const game = makeGame();
+  const source = addSource(game, ARMED_DRAGON_IDS.lv7);
+  const discard = activeDiscard(game);
+  const hidden = addOpponentMonster(game, 1, { id: discard.id, faceUp: false, atkBoost: 9999 });
+  game.core.phase = 'main';
+  const plan = prepareTagArmedDragonDiscardEffect(game, source.uid, discard.uid);
+  assert.equal(plan.ok, true);
+  game.core.phase = 'response';
+  const result = resolveTagArmedDragonDiscardEffect(game, plan.value);
+  assert.equal(result.ok, true);
+  assert.equal(result.value.destroyed.some(card => card.uid === hidden.uid), false);
 });
