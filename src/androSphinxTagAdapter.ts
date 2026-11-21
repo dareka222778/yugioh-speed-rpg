@@ -36,6 +36,8 @@ export type AndroSphinxTagPlan = Readonly<{
 
 type PlanFailure = Extract<ReturnType<typeof planAndroSphinxSpecialSummon>, {allowed:false}>['reason'];
 type ResolveFailure = Extract<ReturnType<typeof resolveAndroSphinxSpecialSummon>, {resolved:false}>['reason'];
+type BattleFailure = Extract<AndroSphinxBattleDamageResult, {applied:false}>;
+type BattleApplied = Extract<AndroSphinxBattleDamageResult, {applied:true}>;
 
 export type AndroSphinxTagPlanResult =
   | Readonly<{allowed:false;reason:'not-tag-classic'|'wrong-phase'|'invalid-tag-state'|PlanFailure}>
@@ -62,8 +64,8 @@ export type AndroSphinxTagBattleInput =
     'sourceCardId'|'sourcePhysicalOwnerSeat'|'sourceControllerSeat'|'destroyedPhysicalOwnerSeat'>;
 
 export type AndroSphinxTagBattleResult =
-  | AndroSphinxBattleDamageResult
-  | Readonly<{applied:true;damagedTeamIndex:TagTeamIndex;eventId:string;damage:number;damagedTeam:'even'|'odd';sourcePhysicalOwnerSeat:TagPhysicalSeat;sourceControllerSeat:TagPhysicalSeat;destroyedPhysicalOwnerSeat:TagPhysicalSeat;processedEventIds:readonly string[]}>
+  | BattleFailure
+  | (BattleApplied & Readonly<{damagedTeamIndex:TagTeamIndex}>)
   | null;
 
 const isSeat=(value:unknown):value is TagPhysicalSeat=>
@@ -141,13 +143,12 @@ export function projectAndroSphinxTagState(game:TagDuel):AndroSphinxTagProjectio
   const teamIndex=game.core.current;
   const activeSeat=game.active[teamIndex];
   if(!isSeat(activeSeat)||activeSeat%2!==teamIndex)return null;
-  const hand=handProjection(game.core.players[teamIndex].hand,activeSeat);
+  const player=game.core.players[teamIndex];
+  if(!player||!Number.isSafeInteger(player.lp)||player.lp<0)return null;
+  const hand=handProjection(player.hand,activeSeat);
   const field=fieldProjection(game);
   if(!hand||!field)return null;
-  return {
-    teamIndex,activeSeat,teamLP:game.core.players[teamIndex].lp,
-    turn:game.core.turn,hand,field
-  };
+  return {teamIndex,activeSeat,teamLP:player.lp,turn:game.core.turn,hand,field};
 }
 
 export function planTagAndroSphinxSummon(game:TagDuel,sourceUid:string):AndroSphinxTagPlanResult{
@@ -169,8 +170,9 @@ export function resolveTagAndroSphinxSummon(
 ):AndroSphinxTagSummonResult{
   if(!game||game.mode!=='tag-classic')return {resolved:false,reason:'not-tag-classic'};
   if(game.core.phase!=='main')return {resolved:false,reason:'wrong-phase'};
+  if(!plan||!plan.primitive||!isTeam(plan.teamIndex))return {resolved:false,reason:'invalid-tag-state'};
   const context=projectAndroSphinxTagState(game);
-  if(!context||!plan||plan.teamIndex!==context.teamIndex||
+  if(!context||plan.teamIndex!==context.teamIndex||
     plan.primitive.activeSeat!==context.activeSeat)return {resolved:false,reason:'invalid-tag-state'};
   const result=resolveAndroSphinxSpecialSummon({
     plan:plan.primitive,activeSeat:context.activeSeat,teamLP:context.teamLP,
@@ -198,7 +200,7 @@ export function canTagAndroSphinxAttack(game:TagDuel,sourceUid:string):boolean{
 export function resolveTagAndroSphinxBattleDamage(
   game:TagDuel,input:AndroSphinxTagBattleInput,processedEventIds:readonly string[]=[]
 ):AndroSphinxTagBattleResult{
-  if(!game||game.mode!=='tag-classic')return null;
+  if(!game||game.mode!=='tag-classic'||!input||typeof input!=='object')return null;
   const field=fieldProjection(game);
   if(!field)return null;
   const source=field.find(card=>card.uid===input.sourceUid&&card.zone==='monster');
