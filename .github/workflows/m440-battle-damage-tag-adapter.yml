@@ -1,0 +1,35 @@
+name: M440 Battle Damage TagDuel adapter
+
+on:
+  push:
+    branches:
+      - feat/work-m440-battle-damage-tag-adapter-20261121
+    paths:
+      - 'src/battleDamageTagAdapter.ts'
+      - 'src/battleDamageFamily.ts'
+      - 'tests/battleDamageTagAdapter.test.cjs'
+      - 'docs/evidence/m440-battle-damage-tag-adapter.json'
+      - '.github/workflows/m440-battle-damage-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/battleDamageTagAdapter.ts'
+      - 'src/battleDamageFamily.ts'
+      - 'tests/battleDamageTagAdapter.test.cjs'
+      - 'docs/evidence/m440-battle-damage-tag-adapter.json'
+      - '.github/workflows/m440-battle-damage-tag-adapter.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/battleDamageTagAdapter.test.cjs

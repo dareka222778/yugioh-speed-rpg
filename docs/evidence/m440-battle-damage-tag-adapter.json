@@ -1,0 +1,70 @@
+{
+  "mission": "M440",
+  "runId": "work-20261121T055523-0300-M440",
+  "branch": "feat/work-m440-battle-damage-tag-adapter-20261121",
+  "baseBranch": "feat/work-m399-battle-damage-family-20261119",
+  "baseSha": "93520b5a0b951fa5349c06f5fde93d3c2063278a",
+  "cards": [
+    {
+      "name": "Amazoness Swords Woman",
+      "cardId": "94004268",
+      "konamiCid": 5284
+    },
+    {
+      "name": "Airknight Parshath",
+      "cardId": "18036057",
+      "konamiCid": 5023
+    },
+    {
+      "name": "Aswan Apparition",
+      "cardId": "88236094",
+      "konamiCid": 6026
+    },
+    {
+      "name": "Atomic Firefly",
+      "cardId": "87340664",
+      "konamiCid": 5966
+    }
+  ],
+  "implementation": {
+    "primitive": "src/battleDamageFamily.ts (M399 dependency)",
+    "adapter": "src/battleDamageTagAdapter.ts",
+    "behavior": [
+      "capture face-up battle-start source with physical owner and active team seat",
+      "redirect Amazoness Swords Woman battle damage while conserving team damage total",
+      "apply Atomic Firefly's 1000 retaliation to the destroying team",
+      "plan Airknight draw from the active physical seat Deck only after positive battle damage",
+      "offer Aswan recovery only after positive battle damage from the shared Graveyard",
+      "place selected Trap on active physical Deck top preserving UID/owner",
+      "reject wrong trigger/source, stale turn and duplicate event IDs"
+    ]
+  },
+  "tests": {
+    "file": "tests/battleDamageTagAdapter.test.cjs",
+    "count": 13,
+    "command": "npm run build && node --test tests/battleDamageTagAdapter.test.cjs"
+  },
+  "constraints": {
+    "deckMinimum": 20,
+    "deckMaximum": 30,
+    "monsterZonesPerTeam": 3,
+    "sharedMonsterZones": 6,
+    "handLimit": 6,
+    "handDiscardTiming": "End Phase",
+    "extraDeckMaximum": 5,
+    "privateDecksByPhysicalSeat": true
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "newCertifications": 0,
+    "certifiedAfter": 969,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "adapter/plan layer only; central battle resolver registration remains blocked by M61 handoff",
+    "Airknight draw plan returns the physical Deck top; resolver must perform draw and deck-out handling",
+    "no live Discord/gateway test",
+    "no certification or production mutation"
+  ]
+}
