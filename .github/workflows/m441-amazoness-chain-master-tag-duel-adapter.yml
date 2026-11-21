@@ -1,0 +1,26 @@
+name: M441 Amazoness Chain Master TagDuel adapter
+on:
+  pull_request:
+    paths:
+      - 'src/amazonessChainMasterTagDuelAdapter.ts'
+      - 'tests/amazonessChainMasterTagDuelAdapter.test.cjs'
+      - 'docs/evidence/m441-amazoness-chain-master-tag-duel-adapter.json'
+      - '.github/workflows/m441-amazoness-chain-master-tag-duel-adapter.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  amazoness-chain-master-tag-adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run Amazoness Chain Master TagDuel adapter behavior tests
+        run: node --test tests/amazonessChainMasterTagDuelAdapter.test.cjs
