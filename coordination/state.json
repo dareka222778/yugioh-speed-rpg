@@ -3583,12 +3583,12 @@
       "owner": "Work principal",
       "runId": "work-20261121T121100-0300-M457",
       "state": "implementation-complete-ci-pending",
-      "lastActivityAt": "2026-11-21T12:16:28.264-03:00"
+      "lastActivityAt": "2026-11-21T12:21:12.918-03:00"
     },
     {
       "branch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
-      "head": "aff11da959201d38af0314abd45e188e50c83d3c",
-      "pr": null,
+      "head": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
+      "pr": 406,
       "base": "aff11da959201d38af0314abd45e188e50c83d3c",
       "baseBranch": "feat/work-m457-tag-lp-pipeline-seat-matrix-20261121",
       "scope": [
@@ -3598,7 +3598,8 @@
       ],
       "owner": "Work principal",
       "runId": "work-20261121T121700-0300-M458",
-      "state": "active"
+      "state": "implementation-complete-ci-pending",
+      "lastActivityAt": "2026-11-21T12:21:12.918-03:00"
     }
   ],
   "handoffRequest": {
@@ -7778,13 +7779,13 @@
       ],
       "state": "implementation-complete-ci-pending",
       "priority": "P1 — exercitar as 16 permutações de assento inicial e assento de compra no pipeline Solemn Wishes → Fire Princess, preservando dono físico, equipe controladora, compra por parceiro e roteamento de LP em 2v2.",
-      "lastActivityAt": "2026-11-21T12:16:28.264-03:00"
+      "lastActivityAt": "2026-11-21T12:21:12.918-03:00"
     },
     {
       "mission": "M458",
       "branch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
-      "head": "aff11da959201d38af0314abd45e188e50c83d3c",
-      "pr": null,
+      "head": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
+      "pr": 406,
       "baseBranch": "feat/work-m457-tag-lp-pipeline-seat-matrix-20261121",
       "baseSha": "aff11da959201d38af0314abd45e188e50c83d3c",
       "scope": [
@@ -7792,8 +7793,9 @@
         "docs/evidence/m458-tag-duel-lp-storage-fault-matrix.json",
         ".github/workflows/m458-tag-duel-lp-storage-fault-matrix.yml"
       ],
-      "state": "active",
-      "priority": "P1 — validar falhas de ledger, snapshots obsoletos e rollback transacional do commit atômico LP 2v2, sem alterar o store compartilhado."
+      "state": "implementation-complete-ci-pending",
+      "priority": "P1 — validar falhas de ledger, snapshots obsoletos e rollback transacional do commit atômico LP 2v2, sem alterar o store compartilhado.",
+      "lastActivityAt": "2026-11-21T12:21:12.918-03:00"
     }
   ],
   "updatedAt": "2026-11-20T02:48:32.028Z",
@@ -9875,19 +9877,19 @@
   "lastWorkRunId": "work-20261121T121700-0300-M458",
   "lastWorkMission": "M458",
   "lastWorkBranch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
-  "lastWorkHead": "aff11da959201d38af0314abd45e188e50c83d3c",
+  "lastWorkHead": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
   "lastWorkBranches": [
     {
-      "branch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
+      "branch": "feat/work-m457-tag-lp-pipeline-seat-matrix-20261121",
       "head": "aff11da959201d38af0314abd45e188e50c83d3c",
-      "pr": null,
-      "baseBranch": "feat/work-m457-tag-lp-pipeline-seat-matrix-20261121",
-      "baseSha": "aff11da959201d38af0314abd45e188e50c83d3c",
-      "scope": [
-        "tests/tagDuelLpStorageFaultMatrix.test.cjs",
-        "docs/evidence/m458-tag-duel-lp-storage-fault-matrix.json",
-        ".github/workflows/m458-tag-duel-lp-storage-fault-matrix.yml"
-      ]
+      "pr": 405,
+      "baseBranch": "feat/work-m456-solemn-wishes-fire-princess-20261121"
+    },
+    {
+      "branch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
+      "head": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
+      "pr": 406,
+      "baseBranch": "feat/work-m457-tag-lp-pipeline-seat-matrix-20261121"
     }
   ],
   "lastIndependentWorkDuration": {
@@ -10175,8 +10177,8 @@
     "endedAt": "2026-11-19T13:45:02-03:00",
     "auxiliaryPermission": "Merge the latest shared branch into this M397 branch without force, then monitor CI and correct only the three M397 files; do not edit state, runtime, catalog, player data, other branches or production."
   },
-  "lastWorkPR": null,
-  "lastWorkStatus": "active",
+  "lastWorkPR": 406,
+  "lastWorkStatus": "implementation-complete-ci-pending",
   "lastWorkDuration": {
     "elapsedMinutes": 0,
     "effectiveWorkMinutes": 0,
@@ -10185,8 +10187,8 @@
     "ciWaitExcluded": true
   },
   "lastWorkCatalog": {
-    "target": 1000,
     "certified": 969,
+    "target": 1000,
     "remaining": 31,
     "newCertifications": 0,
     "automaticCertifications": 0,
@@ -10199,7 +10201,7 @@
     "liveDiscordValidation": false,
     "deploymentsApiExposed": false
   },
-  "lastWorkSharedHeadBeforeFinalStateUpdate": "8ba1987b82126d1936a74590c0c7d677f676ec24",
+  "lastWorkSharedHeadBeforeFinalStateUpdate": "91207c40596d397ac66db68756a44c4dc5990262",
   "thirdPartyReservationsReleased": [],
   "nextTaskUpdatedAt": "2026-11-19T13:45:02-03:00",
   "currentWorkReservationM398": {
@@ -10229,20 +10231,20 @@
   },
   "latestIndependentWorkRunId": "work-20261121T121700-0300-M458",
   "latestIndependentWorkBranch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
-  "latestIndependentWorkHead": "aff11da959201d38af0314abd45e188e50c83d3c",
+  "latestIndependentWorkHead": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
   "latestIndependentWorkReservationReleased": false,
-  "latestIndependentWorkActivityAt": "2026-11-21T12:18:20.655-03:00",
-  "latestIndependentWorkPR": null,
+  "latestIndependentWorkActivityAt": "2026-11-21T12:21:12.918-03:00",
+  "latestIndependentWorkPR": 406,
   "latestIndependentWorkCheckpoint": "coordination/runs/work-20261121T121700-0300-M458.json",
-  "latestIndependentWorkCheckpointCommit": null,
-  "latestIndependentWorkStatus": "active",
+  "latestIndependentWorkCheckpointCommit": "f3f12d2f1217978c6bf339d21918c4d95e7fb595",
+  "latestIndependentWorkStatus": "implementation-complete-ci-pending",
   "latestIndependentWorkEffectiveMinutes": 0,
   "latestIndependentWorkCatalog": {
     "certified": 969,
     "newCertifications": 0,
     "inventoryGranted": 0
   },
-  "nextIndependentWorkTask": "Implementar fault matrix SQLite para o commit LP 2v2; validar rollback, snapshots e ledgers sem alterar runtime.",
+  "nextIndependentWorkTask": "Acompanhar Engine Validation/Extended Soak de M458; se passar, liberar os três arquivos ao auxiliar para monitoramento. Work principal segue com M459 de projeção Discord por rotação de assento, sem tocar M61.",
   "nextIndependentWorkWindow": "2026-11-21T16:58:00-03:00",
   "releasedReservations": [
     {
@@ -10323,8 +10325,57 @@
       "scope": "auxiliary-monitor-ci-only"
     }
   ],
-  "latestIndependentWorkCI": [],
-  "latestIndependentWorkSharedHead": "8ba1987b82126d1936a74590c0c7d677f676ec24",
+  "latestIndependentWorkCI": [
+    {
+      "name": "Engine validation",
+      "run": 44918238296,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "name": "Milestone 1000 - certified-card progress and triage",
+      "run": 44918238187,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Card batch fast feedback",
+      "run": 44918238226,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "M457 TagDuel LP pipeline seat matrix",
+      "run": 44918238223,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Engine validation",
+      "run": 44918541198,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "name": "Milestone 1000 - certified-card progress and triage",
+      "run": 44918541196,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "M458 TagDuel LP storage fault matrix",
+      "run": 44918541240,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Card batch fast feedback",
+      "run": 44918541184,
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "latestIndependentWorkSharedHead": "91207c40596d397ac66db68756a44c4dc5990262",
   "latestIndependentWorkCompare": {
     "ahead": 712,
     "behind": 10,
@@ -10994,7 +11045,7 @@
   },
   "lastIndependentWorkPR": 378,
   "lastIndependentWorkCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
-  "lastWorkCheckpointCommit": "87b4c9e756a85724a9993657835786de66558a08",
+  "lastWorkCheckpointCommit": "f3f12d2f1217978c6bf339d21918c4d95e7fb595",
   "checkpointCommitSha": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "lastWorkSharedHeadAtPostCheckpointAudit": "c6e05c4380beff1dd0bfb72053e4787a334b8348",
   "latestIndependentWorkPostCheckpointPrStatus": [
@@ -11572,7 +11623,7 @@
     ],
     "nextTask": "Auxiliar monitora CI e corrige apenas os arquivos reservados."
   },
-  "nextWorkTask": "Implementar fault matrix SQLite para o commit LP 2v2; validar rollback, snapshots e ledgers sem alterar runtime.",
+  "nextWorkTask": "Acompanhar Engine Validation/Extended Soak de M458; se passar, liberar os três arquivos ao auxiliar para monitoramento. Work principal segue com M459 de projeção Discord por rotação de assento, sem tocar M61.",
   "currentWorkReservationM457": {
     "mission": "M457",
     "runId": "work-20261121T121100-0300-M457",
@@ -11605,13 +11656,41 @@
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "head": "aff11da959201d38af0314abd45e188e50c83d3c",
+    "pr": 405,
+    "ci": {
+      "focused": {
+        "run": 44918238223,
+        "status": "success",
+        "tests": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "cardBatchFast": {
+        "run": 44918238226,
+        "status": "success"
+      },
+      "milestone1000": {
+        "run": 44918238187,
+        "status": "success",
+        "certified": 969,
+        "remaining": 31,
+        "automaticCertifications": 0,
+        "artifactId": 14712262414
+      },
+      "engineValidation": {
+        "run": 44918238296,
+        "status": "in_progress",
+        "failures": 0
+      }
+    }
   },
   "currentWorkReservationM458": {
     "mission": "M458",
     "runId": "work-20261121T121700-0300-M458",
     "owner": "Work principal",
-    "state": "active",
+    "state": "implementation-complete-ci-pending",
     "branch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
     "baseBranch": "feat/work-m457-tag-lp-pipeline-seat-matrix-20261121",
     "baseSha": "aff11da959201d38af0314abd45e188e50c83d3c",
@@ -11636,6 +11715,34 @@
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "head": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
+    "pr": 406,
+    "ci": {
+      "focused": {
+        "run": 44918541240,
+        "status": "success",
+        "tests": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      "cardBatchFast": {
+        "run": 44918541184,
+        "status": "success"
+      },
+      "milestone1000": {
+        "run": 44918541196,
+        "status": "success",
+        "certified": 969,
+        "remaining": 31,
+        "automaticCertifications": 0,
+        "artifactId": 14711739838
+      },
+      "engineValidation": {
+        "run": 44918541198,
+        "status": "in_progress",
+        "failures": 0
+      }
+    }
   }
 }
