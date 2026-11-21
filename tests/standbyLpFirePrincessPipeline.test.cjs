@@ -245,10 +245,33 @@ test('two Fire Princess copies stack once each for one combined Standby LP event
   assert.equal(game.core.players[1].lp, 3000);
 });
 
-test('per-copy negation is applied independently to Standby sources and Fire Princess copies', () => {
+test('per-copy Standby negation suppresses only the selected Dancing Fairy UID', () => {
   const game = makeGame(2);
   const negatedFairy = addFairy(game, 0, 0);
   const eligibleFairy = addFairy(game, 2, 0);
+  addPrincess(game, 0, 0);
+  const event = openStandbyTask(game);
+
+  const result = resolveStandbyFirePrincessPipeline(
+    game,
+    event,
+    [],
+    [],
+    [],
+    [negatedFairy.uid],
+    []
+  );
+  assert.equal(result.ok, true);
+  assert.equal(result.standby.dancingFairy.triggerCount, 1);
+  assert.equal(result.standby.dancingFairy.triggerSources[0].uid, eligibleFairy.uid);
+  assert.equal(result.standby.requestedGain, 1000);
+  assert.equal(result.firePrincess.result.triggerCount, 1);
+  assert.equal(result.firePrincess.result.requestedDamage, 500);
+});
+
+test('per-copy Fire Princess negation suppresses only the selected Fire Princess UID', () => {
+  const game = makeGame(2);
+  addFairy(game, 0, 0);
   const negatedPrincess = addPrincess(game, 0, 0);
   const eligiblePrincess = addPrincess(game, 2, 0);
   const event = openStandbyTask(game);
@@ -259,12 +282,10 @@ test('per-copy negation is applied independently to Standby sources and Fire Pri
     [],
     [],
     [],
-    [negatedFairy.uid],
+    [],
     [negatedPrincess.uid]
   );
   assert.equal(result.ok, true);
-  assert.equal(result.standby.dancingFairy.triggerCount, 1);
-  assert.equal(result.standby.dancingFairy.triggerSources[0].uid, eligibleFairy.uid);
   assert.equal(result.standby.requestedGain, 1000);
   assert.equal(result.firePrincess.result.triggerCount, 1);
   assert.equal(result.firePrincess.result.triggerSources[0].uid, eligiblePrincess.uid);
