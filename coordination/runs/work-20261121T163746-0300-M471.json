@@ -2,44 +2,73 @@
   "runId": "work-20261121T163746-0300-M471",
   "mission": "M471",
   "owner": "Work principal",
-  "status": "active",
+  "status": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-21T16:37:46.548-03:00",
-  "endedAt": null,
-  "timezone": "America/Sao_Paulo",
+  "endedAt": "2026-11-21T16:48:08.301-03:00",
+  "durationMinutes": 10.4,
+  "effectiveWorkMinutes": 7,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "sharedHeadAtStart": "5dc132241fae3b2d9938022ccddb7e2c20750661",
+  "sharedHeadAtRelease": "211fa04e0f034dc7f654dd124c51dfff1777f18f",
   "branch": "feat/work-m471-tag-decision-timeout-discord-20261121",
-  "baseSha": "5dc132241fae3b2d9938022ccddb7e2c20750661",
-  "priority": "P1 — validar o timeout de decisão de 30 minutos em TagDuel 2v2, vitória por W.O. da equipe oposta, persistência de evento público, liberação dos quatro locks e rejeição de jogadas obsoletas.",
-  "reservedFiles": [
-    "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
-    "docs/evidence/m471-tag-decision-timeout-discord.json",
-    ".github/workflows/m471-tag-decision-timeout-discord.yml"
+  "head": "152b7658f7728868f52e5a88c21530f1aa451a80",
+  "baseSha": "211fa04e0f034dc7f654dd124c51dfff1777f18f",
+  "pr": 419,
+  "changes": [
+    "Timeout de decisão 30 min, exato no limite; 1 ms antes mantém jogo ativo.",
+    "W.O. para equipe oposta, evento público duelFinished persistido.",
+    "Liberação de quatro locks; LP/UIDs físicos conservados; board final entra em dueTags.",
+    "Menu de jogada obsoleto rejeitado."
   ],
-  "conflictCheck": {
-    "overlap": false,
-    "preserved": [
-      "M459 and M470 released to auxiliary monitor only",
-      "M460–M469 branches and PRs",
-      "M455–M458 storage/LP branches and reserved files",
-      "M61 central resolver files",
-      "all third-party reservations"
-    ],
-    "note": "M471 adiciona três caminhos novos, independentes dos testes de lobby M469/M470 e de todas as reservas de terceiros."
-  },
-  "blocks": [
+  "ci": [
     {
-      "at": "2026-11-21T16:37:46.548-03:00",
-      "description": "Auditoria de DECISION_TIMEOUT_MS=30 minutos, getTag/timeoutTagDuel e persistência de duelFinished; reserva isolada M471."
+      "name": "M471 focused push",
+      "run": 44942182445,
+      "status": "success",
+      "tests": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "name": "M471 focused PR",
+      "run": 44942188113,
+      "status": "success",
+      "tests": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "name": "Card Batch Fast",
+      "run": 44942188081,
+      "status": "success"
+    },
+    {
+      "name": "Milestone 1000",
+      "run": 44942188106,
+      "status": "success",
+      "certified": 969,
+      "remaining": 31,
+      "automaticCertifications": 0
+    },
+    {
+      "name": "Engine Validation",
+      "run": 44942188122,
+      "status": "in_progress"
+    },
+    {
+      "name": "Extended Soak 600s",
+      "run": 44942188122,
+      "status": "in_progress",
+      "job": 136961613439
     }
   ],
-  "ci": {
-    "status": "not-started"
-  },
   "certification": {
     "baseline": 969,
-    "newCertifications": 0,
-    "automaticCertifications": 0,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0,
     "inventoryGranted": 0
   },
   "production": {
@@ -48,10 +77,25 @@
     "backupVerified": false,
     "liveDiscord": false
   },
-  "nextTask": "Após M471: monitorar M469–M471, solicitar transferência dos arquivos centrais M61 e priorizar integração de efeitos/cartas no resolver principal; sem handoff, continuar testes de lifecycle Discord em escopo isolado.",
+  "blockers": [
+    "M61 sem handoff explícito para src/monsterEffects.ts e src/duelEngineCurrent.ts.",
+    "PR #407 M459 antigo herda duas falhas de fixture M455; M455 corrigido em #403, mas M456–M458 não sincronizados.",
+    "M369 #317/M371 #319 usam IDs sintéticos de catálogo ausentes do manifest; handoff solicitado para catálogo versionado.",
+    "npm ci reportou uma vulnerabilidade high severity; PR #312 M364 continua aberta."
+  ],
+  "scopeReleasedToAuxiliary": [
+    "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
+    "docs/evidence/m471-tag-decision-timeout-discord.json",
+    ".github/workflows/m471-tag-decision-timeout-discord.yml"
+  ],
+  "nextTask": "Auxiliar monitora e sincroniza #417–#419 sem force; Work aguarda transferência explícita M61 (src/monsterEffects.ts e src/duelEngineCurrent.ts) e definição do responsável pelo catálogo versionado. Com handoff, integrar 3-Hump Lacooda e a próxima família de cartas no snapshot/resolver e executar testes reais; sem handoff, continuar somente em novos escopos independentes.",
   "nextWindow": "2026-11-21T17:30:00-03:00",
-  "effectiveWorkMinutes": 0,
-  "targetEffectiveMinutes": 60,
-  "targetMet": false,
-  "ciWaitExcluded": true
+  "session": {
+    "startedAt": "2026-11-21T16:24:33-03:00",
+    "endedAt": "2026-11-21T16:48:08.301-03:00",
+    "durationMinutes": 23.6,
+    "effectiveWorkMinutes": 17,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false
+  }
 }

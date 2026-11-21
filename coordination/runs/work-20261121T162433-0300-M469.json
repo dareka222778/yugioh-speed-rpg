@@ -2,62 +2,74 @@
   "runId": "work-20261121T162433-0300-M469",
   "mission": "M469",
   "owner": "Work principal",
-  "status": "implementation-complete-ci-pending",
+  "status": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-21T16:24:33-03:00",
-  "endedAt": null,
-  "durationMinutes": null,
-  "durationNote": "A execução permaneceu ativa durante a implementação M470; CI pendente foi transferida ao auxiliar para monitoramento. Nenhum tempo de espera é contado como trabalho efetivo.",
+  "endedAt": "2026-11-21T16:34:23.447-03:00",
+  "durationMinutes": 9.8,
+  "effectiveWorkMinutes": 7,
   "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
   "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99",
+  "pr": 417,
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "69581c21e372faa33de36ff45cc3b72ad6182ded",
-  "pr": 417,
-  "prUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/417",
   "changes": [
-    "Teste de cancelamento de lobby parcial por participante não-host, com liberação dos locks.",
-    "Rejeição de não participante, guild incorreta e retry obsoleto.",
-    "Fluxo Desistir→Confirmar por parceiro físico inativo; conserva LP e UIDs via tag.tagInventory() canônico.",
-    "Evidência JSON e workflow focado."
+    "Cancelamento de lobby parcial por não-host e liberação de locks",
+    "Rejeição de outsider/guild errada/retry obsoleto",
+    "Desistência confirmada por parceiro inativo; conserva UIDs e LP",
+    "Workflow/evidência"
   ],
-  "firstFocusedRun": {
-    "run": 44941399785,
-    "status": "failure",
-    "failedAssertion": "A coleta recursiva contou duas vezes os UIDs espelhados em core.teamRotation.reserves; 2/3 testes passaram."
-  },
-  "correction": "Substituída coleta recursiva pela API canônica tag.tagInventory(), que exclui o espelho de metadados e retorna as cartas físicas uma única vez.",
+  "firstFailure": "Primeiro focused run falhou por contar duas vezes os UIDs espelhados em core.teamRotation.reserves; corrigido usando tag.tagInventory() canônico.",
   "ci": [
     {
       "name": "M469 focused",
       "run": 44941509864,
-      "status": "in_progress"
-    },
-    {
-      "name": "Engine Validation",
-      "run": 44941509890,
-      "status": "in_progress"
+      "status": "success",
+      "tests": 3,
+      "passed": 3,
+      "failed": 0
     },
     {
       "name": "Card Batch Fast",
       "run": 44941509892,
-      "status": "in_progress"
+      "status": "success"
     },
     {
       "name": "Milestone 1000",
       "run": 44941509925,
       "status": "success",
       "certified": 969,
-      "remaining": 31
+      "remaining": 31,
+      "automaticCertifications": 0
+    },
+    {
+      "name": "Engine Validation",
+      "run": 44941509890,
+      "status": "success"
+    },
+    {
+      "name": "Extended Soak 600s",
+      "run": 44941509890,
+      "status": "success",
+      "job": 136959513056
     }
   ],
-  "newCertifications": 0,
-  "automaticCertifications": 0,
-  "inventoryGranted": 0,
-  "merge": false,
-  "deploy": false,
-  "auxiliaryScope": [
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "scopeReleasedToAuxiliary": [
     "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
     "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
     ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
   ],
-  "blocker": "Aguardar conclusão das validações no HEAD 4842a885. Não editar M455–M458."
+  "nextTask": "Auxiliar sincroniza a branch com o HEAD compartilhado atual por merge não-forçado/lease e mantém a PR #417 em draft até revisão. Não alterar runtime nem outros escopos."
 }

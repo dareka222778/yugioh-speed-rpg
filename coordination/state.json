@@ -2,9 +2,9 @@
   "runId": "work-20261121T163746-0300-M471",
   "owner": "Work principal",
   "priorityRequestedBy": "Work",
-  "state": "active",
+  "state": "released-to-auxiliary-monitor-ci",
   "startedAt": "2026-11-21T16:37:46.548-03:00",
-  "lastActivityAt": "2026-11-21T16:37:46.548-03:00",
+  "lastActivityAt": "2026-11-21T16:48:08.301-03:00",
   "nextScheduledAt": "2026-11-21T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -4704,22 +4704,32 @@
     "runId": "work-20261121T163746-0300-M471",
     "owner": "Work principal",
     "mission": "M471",
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadBeforeClaim": "5dc132241fae3b2d9938022ccddb7e2c20750661",
-    "startedAt": "2026-11-21T16:37:46.548-03:00",
+    "sharedHeadAtRelease": "211fa04e0f034dc7f654dd124c51dfff1777f18f",
+    "startedAt": "2026-11-21T16:24:33-03:00",
+    "endedAt": "2026-11-21T16:48:08.301-03:00",
     "workBranches": [
+      {
+        "mission": "M469",
+        "branch": "feat/work-m469-tag-lobby-cancel-confirm-20261121",
+        "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99",
+        "pr": 417,
+        "state": "released-to-auxiliary-monitor-ci"
+      },
+      {
+        "mission": "M470",
+        "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
+        "head": "80285daebd7503e0a89cb4080997bcb867965930",
+        "pr": 418,
+        "state": "released-to-auxiliary-monitor-ci"
+      },
       {
         "mission": "M471",
         "branch": "feat/work-m471-tag-decision-timeout-discord-20261121",
-        "baseBranch": "feat/rea-engine-recovery-20261026",
-        "baseSha": "5dc132241fae3b2d9938022ccddb7e2c20750661",
-        "scope": [
-          "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
-          "docs/evidence/m471-tag-decision-timeout-discord.json",
-          ".github/workflows/m471-tag-decision-timeout-discord.yml"
-        ],
-        "state": "active"
+        "head": "152b7658f7728868f52e5a88c21530f1aa451a80",
+        "pr": 419,
+        "state": "released-to-auxiliary-monitor-ci"
       }
     ]
   },
@@ -6998,7 +7008,7 @@
   "lastParallelActivityAt": "2026-11-21T11:25:04-03:00",
   "sharedHeadAfterCheckpoint": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "sharedHeadBeforeStateUpdate": "5dc132241fae3b2d9938022ccddb7e2c20750661",
-  "endedAt": "2026-11-21T12:10:54.153-03:00",
+  "endedAt": "2026-11-21T16:48:08.301-03:00",
   "m118HandoffRequest": {
     "target": "PR #74 / M118",
     "status": "awaiting-response",
@@ -7097,44 +7107,23 @@
     "allowed": "Monitorar CI e corrigir somente arquivos de teste nas próprias branches.",
     "forbidden": "Não alterar M61/M151, runtime, catálogo, certificados, banco persistente, inventários, main ou produção."
   },
-  "scopeReleasedToAuxiliary": [
-    {
-      "mission": "M399",
-      "branch": "feat/work-m399-battle-damage-family-20261119",
-      "pr": 348,
-      "files": [
-        "src/battleDamageFamily.ts",
-        "tests/battleDamageFamily.test.cjs",
-        "docs/evidence/m399-battle-damage-family.json",
-        ".github/workflows/m399-battle-damage-family.yml"
-      ],
-      "allowed": "monitorar CI, sincronizar branch com merge não forçado e corrigir exclusivamente os arquivos listados"
-    },
-    {
-      "mission": "M400",
-      "branch": "feat/work-m400-eight-claws-scorpion-20261119",
-      "pr": 349,
-      "files": [
-        "src/eightClawsScorpion.ts",
-        "tests/eightClawsScorpion.test.cjs",
-        "docs/evidence/m400-eight-claws-scorpion.json",
-        ".github/workflows/m400-eight-claws-scorpion.yml"
-      ],
-      "allowed": "monitorar CI, sincronizar branch com merge não forçado e corrigir exclusivamente os arquivos listados"
-    },
-    {
-      "mission": "M401",
-      "branch": "feat/work-m401-wdjat-private-set-inspection-20261119",
-      "pr": 350,
-      "files": [
-        "src/privateSetInspection.ts",
-        "tests/privateSetInspection.test.cjs",
-        "docs/evidence/m401-wdjat-private-set-inspection.json",
-        ".github/workflows/m401-private-set-inspection.yml"
-      ],
-      "allowed": "monitorar CI, sincronizar branch com merge não forçado e corrigir exclusivamente os arquivos listados"
-    }
-  ],
+  "scopeReleasedToAuxiliary": {
+    "M469": [
+      "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
+      "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
+      ".github/workflows/m469-tag-lobby-cancel-confirm-discord.yml"
+    ],
+    "M470": [
+      "tests/tagLobbyExpiryDiscord2v2.test.cjs",
+      "docs/evidence/m470-tag-lobby-expiry-discord.json",
+      ".github/workflows/m470-tag-lobby-expiry-discord.yml"
+    ],
+    "M471": [
+      "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
+      "docs/evidence/m471-tag-decision-timeout-discord.json",
+      ".github/workflows/m471-tag-decision-timeout-discord.yml"
+    ]
+  },
   "lastCoordinationRefreshAt": "2026-11-19T02:33:50.163Z",
   "m151HandoffRequest": {
     "target": "PR #107 / M151",
@@ -7346,7 +7335,7 @@
   },
   "lastCheckpointAt": "2026-11-21T01:01:16-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "5dc132241fae3b2d9938022ccddb7e2c20750661",
+  "expectedHeadForCoordinationCommit": "211fa04e0f034dc7f654dd124c51dfff1777f18f",
   "lastRunSummary": "M305 registrado: The Sanctuary in the Sky, teste de integração Discord 2v2 em branch isolada; escopo único tests/tagSanctuaryInTheSkyDiscordFairyDamage2v2.test.cjs.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
@@ -8118,7 +8107,7 @@
   },
   "elapsedSeconds": 1347,
   "elapsedMinutes": 22.45,
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 17,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -9906,8 +9895,8 @@
   "sharedHeadBeforeCheckpointCommit": "aea48819344b899f4fd550ce3873246104d483ec",
   "lastWorkRunId": "work-20261121T122100-0300-M459",
   "lastWorkMission": "M459",
-  "lastWorkBranch": "feat/work-m459-tag-lp-discord-seat-matrix-20261121",
-  "lastWorkHead": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
+  "lastWorkBranch": "feat/work-m471-tag-decision-timeout-discord-20261121",
+  "lastWorkHead": "152b7658f7728868f52e5a88c21530f1aa451a80",
   "lastWorkBranches": [
     {
       "branch": "feat/work-m459-tag-lp-discord-seat-matrix-20261121",
@@ -10148,7 +10137,7 @@
     "mission": "M471",
     "runId": "work-20261121T163746-0300-M471",
     "owner": "Work principal",
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/work-m471-tag-decision-timeout-discord-20261121",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "5dc132241fae3b2d9938022ccddb7e2c20750661",
@@ -10175,7 +10164,10 @@
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "head": "152b7658f7728868f52e5a88c21530f1aa451a80",
+    "pr": 419,
+    "releasedAt": "2026-11-21T16:48:08.301-03:00"
   },
   "previousIndependentWork": {
     "mission": "M427",
@@ -10263,7 +10255,7 @@
   },
   "latestIndependentWorkRunId": "work-20261121T163746-0300-M471",
   "latestIndependentWorkBranch": "feat/work-m471-tag-decision-timeout-discord-20261121",
-  "latestIndependentWorkHead": null,
+  "latestIndependentWorkHead": "152b7658f7728868f52e5a88c21530f1aa451a80",
   "latestIndependentWorkReservationReleased": false,
   "latestIndependentWorkActivityAt": "2026-11-21T12:21:49.090-03:00",
   "latestIndependentWorkPR": null,
@@ -11411,7 +11403,7 @@
     "handoff": "M61 permanece pendente; src/monsterEffects.ts, src/duelEngineCurrent.ts e standbyFlow.ts intocados.",
     "releaseToAuxiliary": "Somente os quatro caminhos novos M444, após publicação da PR."
   },
-  "currentReservation": "M471",
+  "currentReservation": "M471 released to auxiliary monitor",
   "completedOwnRuns": [
     {
       "runId": "work-20261121T105500-0300-M449",
@@ -11576,7 +11568,7 @@
     ],
     "nextTask": "Auxiliar monitora CI e corrige apenas os arquivos reservados."
   },
-  "nextWorkTask": "Após M471: monitorar M469–M471, solicitar transferência dos arquivos centrais M61 e priorizar integração de efeitos/cartas no resolver principal; sem handoff, continuar testes de lifecycle Discord em escopo isolado.",
+  "nextWorkTask": "Auxiliar monitora e sincroniza #417–#419 sem force; Work aguarda transferência explícita M61 (src/monsterEffects.ts e src/duelEngineCurrent.ts) e definição do responsável pelo catálogo versionado. Com handoff, integrar 3-Hump Lacooda e a próxima família de cartas no snapshot/resolver e executar testes reais; sem handoff, continuar somente em novos escopos independentes.",
   "currentWorkReservationM457": {
     "mission": "M457",
     "runId": "work-20261121T121100-0300-M457",
@@ -11810,31 +11802,38 @@
       {
         "name": "M469 focused",
         "run": 44941509864,
-        "status": "in_progress",
-        "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99"
-      },
-      {
-        "name": "Engine Validation",
-        "run": 44941509890,
-        "status": "in_progress",
-        "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99"
+        "status": "success",
+        "tests": 3,
+        "passed": 3,
+        "failed": 0
       },
       {
         "name": "Card Batch Fast",
         "run": 44941509892,
-        "status": "in_progress",
-        "head": "4842a885dd0a221973e31c2d71a08c7cc6d25e99"
+        "status": "success"
       },
       {
         "name": "Milestone 1000",
         "run": 44941509925,
         "status": "success",
         "certified": 969,
-        "remaining": 31
+        "remaining": 31,
+        "automaticCertifications": 0
+      },
+      {
+        "name": "Engine Validation",
+        "run": 44941509890,
+        "status": "success"
+      },
+      {
+        "name": "Extended Soak 600s",
+        "run": 44941509890,
+        "status": "success",
+        "job": 136959513056
       }
     ],
-    "lastActivityAt": "2026-11-21T16:34:23.447-03:00",
-    "nextTask": "Auxiliar acompanha o HEAD final 4842a885; o primeiro focused run falhou somente na contagem duplicada de UIDs do espelho core.teamRotation.reserves; a suíte agora usa tag.tagInventory() como fonte canônica. Corrigir apenas os três arquivos M469 se o novo focused/Engine Validation apontar falha própria; não editar M455–M458.",
+    "lastActivityAt": "2026-11-21T16:48:08.301-03:00",
+    "nextTask": "Auxiliar sincroniza a branch com o HEAD compartilhado atual por merge não-forçado/lease e mantém a PR #417 em draft até revisão. Não alterar runtime nem outros escopos.",
     "releaseToAuxiliary": [
       "tests/tagLobbyCancelConfirmDiscord2v2.test.cjs",
       "docs/evidence/m469-tag-lobby-cancel-confirm-discord.json",
@@ -11881,31 +11880,37 @@
         "name": "M470 focused",
         "run": 44941761403,
         "status": "success",
-        "head": "80285daebd7503e0a89cb4080997bcb867965930"
+        "tests": 2,
+        "passed": 2,
+        "failed": 0
       },
       {
         "name": "Card Batch Fast",
         "run": 44941761393,
-        "status": "success",
-        "head": "80285daebd7503e0a89cb4080997bcb867965930"
+        "status": "success"
       },
       {
         "name": "Milestone 1000",
         "run": 44941761388,
         "status": "success",
-        "head": "80285daebd7503e0a89cb4080997bcb867965930",
         "certified": 969,
-        "remaining": 31
+        "remaining": 31,
+        "automaticCertifications": 0
       },
       {
-        "name": "Engine Validation",
+        "name": "Engine Validation test job",
         "run": 44941761437,
-        "status": "in_progress",
-        "head": "80285daebd7503e0a89cb4080997bcb867965930"
+        "status": "in_progress"
+      },
+      {
+        "name": "Extended Soak 600s",
+        "run": 44941761437,
+        "status": "success",
+        "job": 136960289071
       }
     ],
-    "lastActivityAt": "2026-11-21T16:37:46.548-03:00",
-    "nextTask": "Auxiliar acompanha Engine Validation/Extended Soak no HEAD 80285da; o focused M470 e Card Batch/Milestone passaram. Corrigir apenas os três arquivos M470 se a validação focada falhar; sincronizar a branch sem force após novas atualizações compartilhadas.",
+    "lastActivityAt": "2026-11-21T16:48:08.301-03:00",
+    "nextTask": "Auxiliar acompanha o job test da Engine Validation, sincroniza a branch com o HEAD compartilhado atual por merge não-forçado/lease e mantém a PR #418 em draft. Corrigir somente os três arquivos M470.",
     "releaseToAuxiliary": [
       "tests/tagLobbyExpiryDiscord2v2.test.cjs",
       "docs/evidence/m470-tag-lobby-expiry-discord.json",
@@ -11916,7 +11921,7 @@
     "mission": "M471",
     "runId": "work-20261121T163746-0300-M471",
     "owner": "Work principal",
-    "state": "active",
+    "state": "released-to-auxiliary-monitor-ci",
     "branch": "feat/work-m471-tag-decision-timeout-discord-20261121",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "5dc132241fae3b2d9938022ccddb7e2c20750661",
@@ -11943,6 +11948,138 @@
     },
     "newCertifications": 0,
     "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "head": "152b7658f7728868f52e5a88c21530f1aa451a80",
+    "pr": 419,
+    "releasedAt": "2026-11-21T16:48:08.301-03:00",
+    "ci": [
+      {
+        "name": "M471 focused push",
+        "run": 44942182445,
+        "status": "success",
+        "tests": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "name": "M471 focused PR",
+        "run": 44942188113,
+        "status": "success",
+        "tests": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "name": "Card Batch Fast",
+        "run": 44942188081,
+        "status": "success"
+      },
+      {
+        "name": "Milestone 1000",
+        "run": 44942188106,
+        "status": "success",
+        "certified": 969,
+        "remaining": 31,
+        "automaticCertifications": 0
+      },
+      {
+        "name": "Engine Validation",
+        "run": 44942188122,
+        "status": "in_progress"
+      },
+      {
+        "name": "Extended Soak 600s",
+        "run": 44942188122,
+        "status": "in_progress",
+        "job": 136961613439
+      }
+    ],
+    "lastActivityAt": "2026-11-21T16:48:08.301-03:00",
+    "releaseToAuxiliary": [
+      "tests/tagDecisionTimeoutDiscord2v2.test.cjs",
+      "docs/evidence/m471-tag-decision-timeout-discord.json",
+      ".github/workflows/m471-tag-decision-timeout-discord.yml"
+    ],
+    "nextTask": "Auxiliar monitora Engine Validation/Extended Soak no HEAD 152b765; focused 2/2, Card Batch e Milestone passaram. Corrigir apenas os três arquivos M471 se a CI apontar falha própria; sincronizar por merge não-forçado após o próximo checkpoint compartilhado."
+  },
+  "lastWorkCompletedAt": "2026-11-21T16:48:08.301-03:00",
+  "sharedHeadBeforeFinalization": "211fa04e0f034dc7f654dd124c51dfff1777f18f",
+  "durationMinutes": 23.6,
+  "cardCertificationStatus": {
+    "certified": 969,
+    "remaining": 31,
+    "newThisRun": 0,
+    "automaticCertifications": 0,
     "inventoryGranted": 0
+  },
+  "productionAudit": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false,
+    "sharedWorkflows": [
+      "card-batch-admission.yml",
+      "card-batch-fast.yml",
+      "engine-validation.yml",
+      "milestone1000.yml"
+    ],
+    "deployWorkflowFound": false,
+    "deploymentRegistryAccessible": false
+  },
+  "catalogExtensionAudit": {
+    "foundHook": "catalogRuntime.runCatalog(id,data,work) / catalogContext.withCatalog",
+    "productionConstraint": "resolverArchive v9 calls catalogArchive.getCatalogData and requires a revision in catalog/engine-v9/manifest.json",
+    "concurrentBlockers": [
+      "M369 PR #317 and M371 PR #319 have synthetic catalog IDs absent from manifest"
+    ],
+    "handoffComment": 7068257162,
+    "filesNotModified": [
+      "catalog/engine-v9/manifest.json",
+      "src/catalogRuntime.ts",
+      "src/catalogArchive.ts",
+      "src/catalogContext.ts",
+      "src/effectRegistry.ts",
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ]
+  },
+  "dependencyAudit": {
+    "npmCiHighSeverity": 1,
+    "warning": "npm ci reported 1 high severity vulnerability; existing M364 PR #312 remains open/draft; no dependency files changed."
+  },
+  "sessionSummary": {
+    "startedAt": "2026-11-21T16:24:33-03:00",
+    "endedAt": "2026-11-21T16:48:08.301-03:00",
+    "durationMinutes": 23.6,
+    "effectiveWorkMinutes": 17,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "blocks": [
+      {
+        "mission": "M469",
+        "startedAt": "2026-11-21T16:24:33-03:00",
+        "endedAt": "2026-11-21T16:34:23.447-03:00",
+        "effectiveMinutes": 7,
+        "tests": "3/3",
+        "pr": 417
+      },
+      {
+        "mission": "M470",
+        "startedAt": "2026-11-21T16:34:23.447-03:00",
+        "endedAt": "2026-11-21T16:37:46.548-03:00",
+        "effectiveMinutes": 3,
+        "tests": "2/2",
+        "pr": 418
+      },
+      {
+        "mission": "M471",
+        "startedAt": "2026-11-21T16:37:46.548-03:00",
+        "endedAt": "2026-11-21T16:48:08.301-03:00",
+        "effectiveMinutes": 7,
+        "tests": "2/2",
+        "pr": 419
+      }
+    ],
+    "note": "Tempo de CI/Extended Soak não foi contado como trabalho efetivo. Meta de 60 minutos não atingida; sessão liberada com CI pendente em M470/M471."
   }
 }
