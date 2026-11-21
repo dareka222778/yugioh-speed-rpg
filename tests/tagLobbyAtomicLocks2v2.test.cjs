@@ -110,6 +110,7 @@ test('two invitations may coexist, but one participant can acquire only one acti
   const b = [member('m472-b', 0), member('m472-shared', 1), member('m472-b', 2), member('m472-b', 3)];
   createPlayers([...a, ...b]);
   const beforeEconomy = economySnapshot();
+  const sessionsBefore = tableCount('tag_sessions');
 
   const lobbyA = store.createTagLobby(a, 'm472-guild', 'm472-channel', 'classic-loan');
   const lobbyB = store.createTagLobby(b, 'm472-guild', 'm472-channel', 'classic-loan');
@@ -139,7 +140,7 @@ test('two invitations may coexist, but one participant can acquire only one acti
   assert.equal(acceptedB.members[1].accepted, true);
   assert.equal(store.currentTag(b[1]).id, lobbyB.id);
   assert.deepEqual(lockOwners(lobbyB.id), [b[0], b[1]]);
-  assert.equal(tableCount('tag_sessions'), 2, 'the failed cross-lobby accept must not create a duplicate session');
+  assert.equal(tableCount('tag_sessions'), sessionsBefore + 2, 'the failed cross-lobby accept must not create a duplicate session');
   assert.deepEqual(economySnapshot(), beforeEconomy, 'locks and consents must never grant collection cards');
 });
 
