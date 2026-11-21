@@ -35,7 +35,7 @@
   },
   "tests": {
     "file": "tests/flipSearchTagAdapter.test.cjs",
-    "count": 13,
+    "count": 14,
     "command": "npm run build && node --test tests/flipSearchTagAdapter.test.cjs"
   },
   "constraints": {
