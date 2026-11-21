@@ -22,7 +22,7 @@
     "scenarios": 4,
     "successfulInteractions": 8,
     "rejectedForgedInteractions": 8,
-    "behavior": "For each initial seat rotation, the outgoing representative ends the turn; the incoming physical seat with seven cards must discard before its next draw. Only that incoming representative receives the private discard menu. The inactive partner and outgoing opponent cannot submit the discard action. The next deck card is drawn only after the discard, the same incoming representative retains the turn, and the partner's private hand remains unchanged.",
+    "behavior": "For each initial seat rotation, the outgoing physical representative ends the turn with seven cards and must discard to six before the incoming seat draws. Only the outgoing representative receives the private discard menu. The inactive partner and incoming opponent cannot submit the discard action. After the discard, the incoming physical seat draws exactly once; UIDs and the partner's hand remain unchanged.",
     "validation": "Actual TagDuel state transitions, SQLite tag_sessions persistence, tagPrivateMessage/tagPublicMessage builders, handleTagComponent and Discord payload validation run offline."
   },
   "invariants": {
@@ -35,7 +35,11 @@
     "partnerPrivateHandUnchanged": true,
     "physicalUidConservation": true,
     "sharedFieldPreserved": true,
-    "fourSeatRotations": true
+    "fourSeatRotations": true,
+    "outgoingSeatDiscardsToSix": true,
+    "incomingDrawWaitsForDiscard": true,
+    "outgoingSeatRemainsDecisionOwnerUntilDiscard": true,
+    "incomingSeatDrawsOnceAfterDiscard": true
   },
   "rules": {
     "mainDeckMin": 20,

@@ -32,15 +32,15 @@ function makeGame(first) {
     seed: 'm460-tag-end-phase-discard-' + first
   });
   const incomingSeat = (first + 1) % 4;
-  const incomingTeam = incomingSeat % 2;
-  const incomingPhysical = game.core.players[incomingTeam];
-  while (incomingPhysical.hand.length < 7) {
-    const card = incomingPhysical.deck.pop();
-    assert.ok(card, 'incoming physical seat must have cards to reach seven');
-    incomingPhysical.hand.push(card);
+  const outgoingTeam = first % 2;
+  const outgoingPhysical = game.core.players[outgoingTeam];
+  while (outgoingPhysical.hand.length < 7) {
+    const card = outgoingPhysical.deck.pop();
+    assert.ok(card, 'outgoing physical seat must have cards to reach seven');
+    outgoingPhysical.hand.push(card);
   }
   tag.assertTagDuel(game);
-  return { game, incomingSeat, incomingTeam };
+  return { game, incomingSeat, outgoingTeam, incomingTeam: incomingSeat % 2 };
 }
 
 function register(state, id) {
@@ -154,16 +154,16 @@ async function rejectForgedAction(record, actor, index, requestId) {
 test('TagDuel checks the incoming physical hand at End Phase and discards before its next draw in all four rotations', async t => {
   for (const first of [0, 1, 2, 3]) {
     await t.test('first=' + first, async () => {
-      const { game, incomingSeat, incomingTeam } = makeGame(first);
+      const { game, incomingSeat, outgoingTeam, incomingTeam } = makeGame(first);
       const outgoing = member(first);
       const incoming = member(incomingSeat);
-      const inactivePartner = member((incomingSeat + 2) % 4);
+      const inactivePartner = member((first + 2) % 4);
       const record = register(game, 'm460-end-phase-' + first);
       assertOwnerRules(record.state);
 
-      const incomingHandBefore = tag.tagMemberHand(record.state, incoming).map(card => card.uid);
+      const outgoingHandBefore = tag.tagMemberHand(record.state, outgoing).map(card => card.uid);
       const partnerHandBefore = tag.tagMemberHand(record.state, inactivePartner).map(card => card.uid);
-      assert.equal(incomingHandBefore.length, 7);
+      assert.equal(outgoingHandBefore.length, 7);
       const incomingDeckBefore = record.state.core.players[incomingTeam].deck.length;
       const nextDrawUid = record.state.core.players[incomingTeam].deck[0].uid;
       const beforeInventory = new Map(tag.tagInventory(record.state).map(card => [card.uid, card.id]));
@@ -175,37 +175,35 @@ test('TagDuel checks the incoming physical hand at End Phase and discards before
       const afterEnd = await submit(record, outgoing, endIndex, 'm460-end-' + first);
       assert.equal(afterEnd.revision, record.revision + 1);
       assert.equal(afterEnd.state.core.phase, 'discard');
-      assert.ok(afterEnd.state.core.handFlow, 'overflow decision must be persisted');
-      assert.equal(tag.tagDecisionMember(afterEnd.state).id, incoming);
-      assert.equal(tag.tagMemberHand(afterEnd.state, incoming).length, 7);
-      assert.equal(afterEnd.state.core.players[incomingTeam].deck.length, incomingDeckBefore, 'draw must wait until the discard is paid');
+      assert.equal(tag.tagDecisionMember(afterEnd.state).id, outgoing);
+      assert.equal(tag.tagMemberHand(afterEnd.state, outgoing).length, 7);
+      assert.equal(afterEnd.state.core.players[incomingTeam].deck.length, incomingDeckBefore, 'incoming draw must wait until outgoing discard is paid');
       assert.equal(afterEnd.state.core.players[incomingTeam].deck[0].uid, nextDrawUid);
       assertOwnerRules(afterEnd.state);
 
-      const discardActions = tag.tagActions(afterEnd.state, incoming).filter(action => action.kind === 'discard');
-      assert.ok(discardActions.length > 0, 'incoming representative must receive a discard choice');
-      const discardIndex = tag.tagActions(afterEnd.state, incoming).findIndex(action => action.kind === 'discard');
-      const discardUid = tag.tagActions(afterEnd.state, incoming)[discardIndex].card;
-      const incomingMenu = actionMenu(afterEnd, incoming);
-      assert.ok(incomingMenu.options.some(option => option.value === String(discardIndex)));
+      const discardActions = tag.tagActions(afterEnd.state, outgoing).filter(action => action.kind === 'discard');
+      assert.ok(discardActions.length > 0, 'outgoing representative must receive a discard choice');
+      const discardIndex = tag.tagActions(afterEnd.state, outgoing).findIndex(action => action.kind === 'discard');
+      const discardUid = tag.tagActions(afterEnd.state, outgoing)[discardIndex].card;
+      const outgoingMenu = actionMenu(afterEnd, outgoing);
+      assert.ok(outgoingMenu.options.some(option => option.value === String(discardIndex)));
       assert.equal(actionMenu(afterEnd, inactivePartner), undefined, 'inactive physical partner must not receive the discard menu');
-      assert.equal(actionMenu(afterEnd, outgoing), undefined, 'outgoing opponent must not receive the discard menu');
+      assert.equal(actionMenu(afterEnd, incoming), undefined, 'incoming opponent must not receive the discard menu');
 
       await rejectForgedAction(afterEnd, inactivePartner, discardIndex, 'm460-forged-partner-' + first);
-      await rejectForgedAction(afterEnd, outgoing, discardIndex, 'm460-forged-opponent-' + first);
+      await rejectForgedAction(afterEnd, incoming, discardIndex, 'm460-forged-opponent-' + first);
 
-      const afterDiscard = await submit(afterEnd, incoming, discardIndex, 'm460-discard-' + first);
+      const afterDiscard = await submit(afterEnd, outgoing, discardIndex, 'm460-discard-' + first);
       assert.equal(afterDiscard.revision, afterEnd.revision + 1);
       assert.equal(afterDiscard.state.core.phase, 'main');
       assert.equal(afterDiscard.state.core.handFlow, undefined);
       assert.equal(afterDiscard.state.core.turn, record.state.core.turn + 1);
       assert.equal(tag.tagDecisionMember(afterDiscard.state).id, incoming);
-      assert.equal(tag.tagMemberHand(afterDiscard.state, incoming).length, 7, 'six-card limit is applied before the draw, so the draw restores seven');
+      assert.equal(tag.tagMemberHand(afterDiscard.state, outgoing).length, 6, 'outgoing player must finish the turn at six cards');
       assert.equal(afterDiscard.state.core.players[incomingTeam].deck.length, incomingDeckBefore - 1);
       assert.ok(tag.tagMemberHand(afterDiscard.state, incoming).some(card => card.uid === nextDrawUid));
-      assert.ok(afterDiscard.state.core.players[incomingTeam].grave.some(card => card.uid === discardUid));
+      assert.ok(afterDiscard.state.core.players[outgoingTeam].grave.some(card => card.uid === discardUid));
       assert.deepEqual(tag.tagMemberHand(afterDiscard.state, inactivePartner).map(card => card.uid), partnerHandBefore);
-      assert.equal(incomingHandBefore.length, 7);
       assertOwnerRules(afterDiscard.state);
 
       const afterInventory = tag.tagInventory(afterDiscard.state);
@@ -214,7 +212,7 @@ test('TagDuel checks the incoming physical hand at End Phase and discards before
       const publicPanel = assertNoHandUids(afterDiscard, ui.tagPublicMessage(afterDiscard), 'final public panel');
       assert.ok(publicPanel.embeds.length > 0);
       const nextMenu = actionMenu(afterDiscard, incoming);
-      assert.ok(nextMenu, 'incoming representative retains the turn after paying overflow and drawing');
+      assert.ok(nextMenu, 'incoming representative receives the next turn after the discard and draw');
     });
   }
 });
