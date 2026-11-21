@@ -19,13 +19,14 @@
       "docs/evidence/m456-solemn-wishes-fire-princess.json",
       ".github/workflows/m456-solemn-wishes-fire-princess.yml"
     ],
-    "scenarioCount": 5,
+    "scenarioCount": 6,
     "scenarios": [
       "Two-card draw by inactive partner seat 2: one of two Solemn Wishes copies is negated; only the eligible copy grants 500 LP, then Fire Princess plans 500 damage.",
       "Two eligible Solemn Wishes copies grant 1000 LP once each for one multi-card draw event, not 500 per card drawn; Fire Princess plans one 500 LP burn.",
       "A draw by team 1 does not trigger team 0's Solemn Wishes or Fire Princess.",
       "A drawn UID whose physical owner seat differs from the declared drawing seat is rejected even when both seats share a team.",
-      "Source and Fire Princess event ledgers together make a replay idempotent."
+      "Source and Fire Princess event ledgers together make a replay idempotent.",
+      "Fire Princess negation is evaluated per physical copy: the negated copy owned by seat 0 is skipped, while the partner-owned copy at seat 2 applies exactly one 500 LP burn after a positive Solemn Wishes draw gain."
     ]
   },
   "cardIdentities": [
@@ -63,7 +64,9 @@
       "spellTrapZones": 3,
       "fieldZoneSeparate": true,
       "extraDeckMax": 5
-    }
+    },
+    "firePrincessPerCopyNegation": true,
+    "firePrincessPhysicalOwnerPreserved": true
   },
   "safety": {
     "isolatedSqlite": true,
