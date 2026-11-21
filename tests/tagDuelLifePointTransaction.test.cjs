@@ -290,7 +290,8 @@ test('consumes the M447 Solemn Wishes draw-gain tuple for the physical drawing t
   const event = makeDrawEvent(game, 0, 'm451:solemn-wishes');
   assert.equal(event.drawnCardUids[0].startsWith('m0:'), true);
   const draw = resolveTagSolemnWishesDrawGain(game, event);
-  assert.equal(draw.ok, true, JSON.stringify(draw));
+  if (!draw.ok) console.error('M451_DRAW_DEBUG', draw);
+  assert.ok(draw.ok, JSON.stringify(draw));
   const plan = planTagDuelLifePointCommit(game, {
     eventId: event.eventId,
     teamLifePointsBefore: draw.value.result.teamLifePointsBefore,
