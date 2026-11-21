@@ -1,0 +1,22 @@
+name: M372 focused Agido recruitment regression
+on:
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/agidoRecruit.ts'
+      - 'tests/agidoRecruit.test.cjs'
+      - '.github/workflows/m372-focused-tests.yml'
+jobs:
+  m372-focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node scripts/run-tests-isolated.cjs tests/agidoRecruit.test.cjs
