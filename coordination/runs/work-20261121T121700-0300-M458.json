@@ -1,0 +1,99 @@
+{
+  "runId": "work-20261121T121700-0300-M458",
+  "mission": "M458",
+  "owner": "Work principal",
+  "priority": "P1 — validar falhas de ledger, snapshots obsoletos e rollback transacional do commit atômico LP 2v2, sem alterar o store compartilhado.",
+  "status": "implementation-complete-ci-pending",
+  "startedAt": "2026-11-21T12:17:00-03:00",
+  "lastActivityAt": "2026-11-21T12:21:12.918-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "8ba1987b82126d1936a74590c0c7d677f676ec24",
+  "sharedHeadBeforeCheckpointCommit": "91207c40596d397ac66db68756a44c4dc5990262",
+  "branch": "feat/work-m458-tag-lp-storage-fault-matrix-20261121",
+  "head": "eb3f6a7bad95b87e714976e9f617c19fb2b88d94",
+  "baseBranch": "feat/work-m457-tag-lp-pipeline-seat-matrix-20261121",
+  "baseSha": "aff11da959201d38af0314abd45e188e50c83d3c",
+  "pr": 406,
+  "prState": "open",
+  "draft": true,
+  "mergeable": true,
+  "files": [
+    "tests/tagDuelLpStorageFaultMatrix.test.cjs",
+    "docs/evidence/m458-tag-duel-lp-storage-fault-matrix.json",
+    ".github/workflows/m458-tag-duel-lp-storage-fault-matrix.yml"
+  ],
+  "changes": [
+    "Criada fault matrix com seis cenários de falha de ledger/snapshot.",
+    "Incluído trigger SQLite que força abort do INSERT do ledger para verificar rollback do UPDATE de LP/revisão.",
+    "Nenhum arquivo de runtime/storage compartilhado foi alterado."
+  ],
+  "tests": {
+    "focused": {
+      "run": 44918541240,
+      "status": "success",
+      "tests": 6,
+      "passed": 6,
+      "failed": 0
+    },
+    "cardBatchFast": {
+      "run": 44918541184,
+      "status": "success"
+    },
+    "milestone1000": {
+      "run": 44918541196,
+      "status": "success",
+      "certified": 969,
+      "remaining": 31,
+      "automaticCertifications": 0,
+      "artifactId": 14711739838
+    },
+    "engineValidation": {
+      "run": 44918541198,
+      "status": "in_progress",
+      "failures": 0
+    }
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordValidation": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "allowlistChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false
+  },
+  "handoff": {
+    "pr": 17,
+    "commentId": 7064591588,
+    "status": "awaiting-explicit-release",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "modified": false
+  },
+  "nextTask": "Acompanhar Engine Validation/Extended Soak de M458; se passar, liberar os três arquivos ao auxiliar para monitoramento. Work principal segue com M459 de projeção Discord por rotação de assento, sem tocar M61.",
+  "nextWindow": "2026-11-21T16:58:00-03:00"
+}
