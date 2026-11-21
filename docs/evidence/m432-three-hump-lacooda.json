@@ -1,0 +1,58 @@
+{
+  "format": 1,
+  "mission": "M432",
+  "runId": "work-20261121T011126-0300-M432",
+  "card": {
+    "name": "3-Hump Lacooda",
+    "passcode": "86988864",
+    "konamiCid": 6032,
+    "attribute": "EARTH",
+    "level": 3,
+    "atk": 500,
+    "def": 1500,
+    "race": "Beast",
+    "type": "Effect Monster",
+    "officialText": "If there are 3 face-up \"3-Hump Lacooda\" cards on your side of the field, Tribute 2 of them to draw 3 cards.",
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6032&ope=2&request_locale=en",
+    "firstTcgPrinting": "AST-070 / Ancient Sanctuary / 2004-06-01"
+  },
+  "implementation": {
+    "file": "src/threeHumpLacooda.ts",
+    "dependency": {
+      "pr": 315,
+      "branch": "feat/work-m367-identity-scoped-tribute-primitive-20261118",
+      "head": "9765ff20f192372c950a4a7012005776bbf4eb74"
+    },
+    "activation": "Ignition effect; requires three face-up copies on the controlling team's shared Monster Zones and at least three cards in the active physical seat's Deck.",
+    "cost": "Tribute exactly two eligible physical UIDs at activation; source copy may be selected or remain.",
+    "resolution": "Draw three from the Deck captured for the active physical seat; if a chain link reduces the Deck below three before resolution, draw what remains and report deckOut=true for the duel engine.",
+    "negation": "The two Tributes remain paid if the effect is negated; no draw is performed.",
+    "handLimit": "No immediate discard; hand size may exceed six until End Phase.",
+    "ownership": "Field/Graveyard are team-shared; each seat's Deck and hand remain private; ownerSeat and original object references are preserved.",
+    "teamMapping": "Seats 0/2 are team 0; seats 1/3 are team 1.",
+    "tagDuelProjection": "threeHumpStateFromTagDuel maps core.players[team] for active[team] and reserves[seat] for inactive seats; uses active[core.current] rather than cursor when an overflow-return seat is pending.",
+    "physicalIdentity": "Physical ownership is derived from the existing TagDuel m0:–m3: UID prefix; field owner remains the controlling team."
+  },
+  "tests": {
+    "file": "tests/threeHumpLacooda.test.cjs",
+    "expected": 26,
+    "coverage": [
+      "three face-up identity copies",
+      "mixed physical owners on shared field",
+      "source may be Tributed or remain",
+      "exact two distinct eligible UIDs",
+      "stale selection rejection",
+      "active physical seat Deck draw",
+      "partner/opponent Deck isolation",
+      "physical UID/object/owner preservation",
+      "six-card hand limit deferred to End Phase",
+      "cost persists through effect negation",
+      "short Deck at resolution reports deck-out",
+      "single resolution guard",
+      "duplicate UID and owner/team integrity",
+      "projection from actual TagDuel core.players/active/reserves shape",
+      "active representative selected from active[team], including overflow-return cursor case",
+      "physical owner derived from TagDuel m0:–m3: UID prefix, no invented ownerSeat field"
+    ]
+  }
+}
