@@ -189,7 +189,7 @@ test('hand alternative is rejected when Necrovalley is absent at resolution',()=
   const snap=snapshot(game,0,cat);
   assert.ok(snap);
   if(!snap)return;
-  assert.deepEqual(resolveTagFlipSearch(game,snap,selected.uid,'hand'),{resolved:false,reason:'invalid-choice'});
+  assert.deepEqual(resolveTagFlipSearch(game,snap,selected.uid,'hand',[],getCard),{resolved:false,reason:'invalid-choice'});
 });
 
 test('a stale source or stale Deck UID cannot resolve after the state changes',()=>{
