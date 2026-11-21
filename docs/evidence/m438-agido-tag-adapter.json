@@ -1,0 +1,53 @@
+{
+  "mission": "M438",
+  "runId": "work-20261121T055523-0300-M438",
+  "branch": "feat/work-m438-agido-tag-adapter-20261121",
+  "baseBranch": "feat/work-m372-agido-dice-fairy-recruit-20261118",
+  "baseSha": "169db040e3ffad023852f1c0a08d00cbfce932c2",
+  "card": {
+    "name": "Agido",
+    "cardId": "16135253",
+    "konamiId": 5366
+  },
+  "implementation": {
+    "primitive": "src/agidoRecruit.ts (M372, dependency)",
+    "adapter": "src/agidoTagAdapter.ts",
+    "behavior": [
+      "capture only battle-destroyed Agido already sent to the team's shared Graveyard",
+      "roll six-sided die using cloned persisted private random state",
+      "rolls 1–5 require exact Fairy Level; roll 6 accepts Level 6+",
+      "search shared Graveyard across both physical teammates",
+      "preserve physical owner UID when Special Summoning to the active team's shared Monster Field",
+      "allow Agido itself as Level 4 candidate",
+      "revalidate stale selection, active seat, turn, field capacity and event idempotency",
+      "optional decline leaves all physical cards unmoved"
+    ]
+  },
+  "tests": {
+    "file": "tests/agidoTagAdapter.test.cjs",
+    "count": 14,
+    "command": "npm run build && node --test tests/agidoTagAdapter.test.cjs"
+  },
+  "constraints": {
+    "deckMinimum": 20,
+    "deckMaximum": 30,
+    "monsterZonesPerTeam": 3,
+    "sharedMonsterZones": 6,
+    "handLimit": 6,
+    "handDiscardTiming": "End Phase",
+    "extraDeckMaximum": 5,
+    "privateHandsAndDecksUntouched": true
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "newCertifications": 0,
+    "certifiedAfter": 969,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "immutable adapter only; does not mutate TagDuel runtime or register the effect in the central resolver",
+    "M61 resolver handoff remains pending",
+    "no live Discord test"
+  ]
+}

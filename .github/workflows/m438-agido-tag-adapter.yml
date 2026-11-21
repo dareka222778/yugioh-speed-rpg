@@ -1,0 +1,27 @@
+name: M438 Agido TagDuel adapter
+
+on:
+  pull_request:
+    paths:
+      - 'src/agidoTagAdapter.ts'
+      - 'src/agidoRecruit.ts'
+      - 'tests/agidoTagAdapter.test.cjs'
+      - 'docs/evidence/m438-agido-tag-adapter.json'
+      - '.github/workflows/m438-agido-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/agidoTagAdapter.test.cjs
