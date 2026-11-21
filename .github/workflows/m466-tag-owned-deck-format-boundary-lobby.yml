@@ -1,0 +1,36 @@
+name: M466 TagDuel owned-deck format boundary lobby
+on:
+  push:
+    branches:
+      - feat/work-m466-tag-owned-deck-format-boundary-lobby-20261121
+    paths:
+      - 'tests/tagOwnedDeckFormatBoundaryLobby2v2.test.cjs'
+      - 'docs/evidence/m466-tag-owned-deck-format-boundary-lobby.json'
+      - '.github/workflows/m466-tag-owned-deck-format-boundary-lobby.yml'
+  pull_request:
+    paths:
+      - 'tests/tagOwnedDeckFormatBoundaryLobby2v2.test.cjs'
+      - 'docs/evidence/m466-tag-owned-deck-format-boundary-lobby.json'
+      - '.github/workflows/m466-tag-owned-deck-format-boundary-lobby.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  owned-deck-format-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m466-tag-owned-deck-format-boundary-lobby.json', 'utf8'))"
+      - name: Run classic-owned TagDuel format boundary integration
+        run: node --test tests/tagOwnedDeckFormatBoundaryLobby2v2.test.cjs
