@@ -113,6 +113,7 @@ test('classic-owned TagDuel snapshots each active deck at creation/consent time,
   // Seat 3 accepts without an intervening edit.
   record = store.getTag(record.id);
   const seat3Current = deckLoadout(ids[3]);
+  const beforeMatchStart = snapshotPlayerDeckData();
   record = store.acceptTag(record.id, ids[3], record.guild, record.revision);
   assert.equal(record.status, 'playing');
   assert.equal(record.state.mode, 'tag-classic');
@@ -133,7 +134,6 @@ test('classic-owned TagDuel snapshots each active deck at creation/consent time,
   assert.deepEqual(counts([...deckLoadout(ids[2]).main, ...deckLoadout(ids[2]).extra]), snapshots[2]);
   assert.deepEqual(counts([...deckLoadout(ids[3]).main, ...deckLoadout(ids[3]).extra]), snapshots[3]);
 
-  const beforeMatchStart = snapshotPlayerDeckData();
   const inventory = tag.tagInventory(record.state);
   assert.equal(inventory.length, 80);
   assert.equal(new Set(inventory.map(card => card.uid)).size, inventory.length);
