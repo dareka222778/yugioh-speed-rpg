@@ -1,0 +1,55 @@
+{
+  "mission": "M437",
+  "runId": "work-20261121T054453-0300-M437",
+  "branch": "feat/work-m437-ancient-lamp-tag-adapter-20261121",
+  "baseBranch": "feat/work-m396-ancient-lamp-20261119",
+  "baseSha": "437bca4a8c063ba604ee04bcaef8104f8b3985c8",
+  "card": {
+    "name": "Ancient Lamp",
+    "cardId": "54912977",
+    "relatedCard": {
+      "name": "La Jinn the Mystical Genie of the Lamp",
+      "cardId": "97590747"
+    }
+  },
+  "implementation": {
+    "adapter": "src/ancientLampTagAdapter.ts",
+    "behavior": [
+      "project only active physical hand and both shared Monster Fields",
+      "Special Summon La Jinn from active physical hand during legal Main Phase",
+      "capture face-down Ancient Lamp at attack declaration without exposing identity",
+      "revalidate pre-Damage Calculation redirect after Lamp is flipped face-up",
+      "preserve physical UID and seat ownership",
+      "reject malformed/missing team zones, duplicate UIDs, malformed hands and stale attack snapshots"
+    ]
+  },
+  "tests": {
+    "file": "tests/ancientLampTagAdapter.test.cjs",
+    "count": 25,
+    "added": 5,
+    "command": "npm run build && node --test tests/ancientLampTagAdapter.test.cjs"
+  },
+  "constraints": {
+    "monsterZonesPerTeam": 3,
+    "sharedMonsterZones": 6,
+    "deckMinimum": 20,
+    "deckMaximum": 30,
+    "handLimit": 6,
+    "handDiscardTiming": "End Phase",
+    "extraDeckMaximum": 5,
+    "privateHandsPerSeat": true,
+    "publicFaceDownIdentity": false
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "newCertifications": 0,
+    "certifiedAfter": 969,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "adapter returns immutable plans/results and does not mutate TagDuel runtime",
+    "not registered in central effect resolver pending cooperative M61 handoff",
+    "no live Discord session test"
+  ]
+}
