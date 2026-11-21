@@ -1,0 +1,27 @@
+name: M373 focused Aqua Spirit rule regression
+on:
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/waterGraveCost.ts'
+      - 'src/battlePositionLock.ts'
+      - 'src/positionOperations.ts'
+      - 'tests/waterGraveCost.test.cjs'
+      - 'tests/battlePositionLock.test.cjs'
+      - '.github/workflows/m373-focused-tests.yml'
+jobs:
+  m373-focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run check
+      - run: node scripts/run-tests-isolated.cjs tests/waterGraveCost.test.cjs
+      - run: node scripts/run-tests-isolated.cjs tests/battlePositionLock.test.cjs
