@@ -31,8 +31,7 @@ function makeGame() {
   return tag.createTagDuel(players, { classic: true, first: 0, seed: 'm453-lp-discord-projection' });
 }
 
-function register(state) {
-  const id = 'm453-lp-discord';
+function register(state, id = 'm453-lp-discord') {
   const members = [0, 1, 2, 3].map(seat => ({
     id: member(seat),
     name: 'M453 Seat ' + seat,
@@ -167,7 +166,7 @@ test('LP pipeline result renders safely in public/private Discord panels and sur
 test('stale Discord action revision cannot overwrite a newer LP session', async () => {
   const game = makeGame();
   game.core.players[0].lp = 4500;
-  const record = register(game);
+  const record = register(game, 'm453-lp-discord-stale');
   const endIndex = tag.tagActions(record.state, member(0)).findIndex(action => action.kind === 'end');
   assert.ok(endIndex >= 0);
   const next = await submit(record, member(0), endIndex, 'm453-stale-seed');
