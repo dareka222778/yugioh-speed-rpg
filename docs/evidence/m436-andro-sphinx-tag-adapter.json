@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "mission": "M436",
+  "title": "Andro Sphinx TagDuel 2v2 adapter",
+  "card": {
+    "name": "Andro Sphinx",
+    "passcode": "15013468"
+  },
+  "supportCard": {
+    "name": "Pyramid of Light",
+    "passcode": "53569894"
+  },
+  "parentPrimitive": {
+    "pr": 344,
+    "branch": "feat/work-m395-andro-sphinx-20261119",
+    "head": "3e33c409e187069daecac259fd24a4b9226fc9d7"
+  },
+  "branch": "feat/work-m436-andro-sphinx-tag-adapter-20261121",
+  "baseBranch": "feat/work-m395-andro-sphinx-20261119",
+  "scope": [
+    "Project only the active physical representative's private hand.",
+    "Project both shared team fields with 3 Monster Zones, 3 Spell/Trap Zones and a separate Field Zone.",
+    "Keep physical owner UID distinct from team controller seat.",
+    "Plan and revalidate the 500 shared-LP Special Summon while the team's Pyramid of Light is face-up.",
+    "Enforce the no-attack turn after Normal/Special Summon.",
+    "Resolve the half-ATK battle damage trigger from an immutable event snapshot, with duplicate-event protection."
+  ],
+  "implementation": {
+    "source": "src/androSphinxTagAdapter.ts",
+    "tests": "tests/androSphinxTagAdapter.test.cjs",
+    "workflow": ".github/workflows/m436-andro-sphinx-tag-adapter.yml",
+    "evidence": "docs/evidence/m436-andro-sphinx-tag-adapter.json",
+    "noMutation": true,
+    "resolverIntegrated": false,
+    "reason": "src/monsterEffects.ts and src/duelEngineCurrent.ts remain under M61 handoff; this PR exposes a tested adapter contract without editing reserved runtime files."
+  },
+  "testPlan": {
+    "command": "npm run build && node --test tests/androSphinxTagAdapter.test.cjs",
+    "expectedFocusedTests": 18,
+    "cases": [
+      "four-seat UID parsing",
+      "active physical hand isolation",
+      "shared LP and Field Zone mapping",
+      "hidden identity redaction",
+      "team ownership and controller separation",
+      "500 LP summon cost and stale-plan revalidation",
+      "3+3 shared zones",
+      "same-turn attack restriction",
+      "battle damage to opposing team",
+      "wrong-position, non-battle, friendly, negated and duplicate-event rejection",
+      "input immutability"
+    ]
+  },
+  "catalog": {
+    "certifiedBefore": 969,
+    "certifiedAfter": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "note": "Adapter tests are not card certification. The card is not added to the executable registry or distribution allowlist."
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordTest": false
+  },
+  "createdAt": "2026-11-21T05:27:30-03:00"
+}
