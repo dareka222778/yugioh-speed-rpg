@@ -24,7 +24,7 @@ function createPlayingDuel() {
   }
   assert.equal(record.status, 'playing');
   const active = tag.tagDecisionMember(record.state);
-  const inactivePartner = record.members.find(member =>
+  const inactivePartner = record.state.members.find(member =>
     member.team === active.team && member.id !== active.id
   );
   assert.ok(inactivePartner, 'the active teammate must have an inactive physical partner');
