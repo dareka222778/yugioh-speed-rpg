@@ -1,0 +1,80 @@
+{
+  "format": 1,
+  "mission": "M431",
+  "runId": "work-20261121T010116-0300-M431",
+  "cards": [
+    {
+      "name": "A Cat of Ill Omen",
+      "passcode": "24140059",
+      "konamiCid": 5520,
+      "attribute": "DARK",
+      "level": 2,
+      "atk": 500,
+      "def": 300,
+      "race": "Beast",
+      "types": [
+        "Flip",
+        "Effect"
+      ],
+      "officialText": "FLIP: Choose 1 Trap from your Deck and place it on top of your Deck, or, if \"Necrovalley\" is on the field, you can add that Trap to your hand instead.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5520&ope=2&request_locale=en",
+      "officialTcgPrinting": "PGD-070 / Pharaonic Guardian / 2003-07-18"
+    },
+    {
+      "name": "An Owl of Luck",
+      "passcode": "23927567",
+      "konamiCid": 5523,
+      "attribute": "WIND",
+      "level": 2,
+      "atk": 300,
+      "def": 500,
+      "race": "Winged Beast",
+      "types": [
+        "Flip",
+        "Effect"
+      ],
+      "officialText": "FLIP: Select 1 Field Spell Card from your Deck and place it on top of your Deck. If \"Necrovalley\" is on the field, you can add the selected Field Spell Card to your hand instead.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5523&ope=2&request_locale=en",
+      "officialTcgPrinting": "PGD-073 / Pharaonic Guardian / 2003-07-18"
+    }
+  ],
+  "implementation": {
+    "file": "src/flipSearchCards.ts",
+    "dependency": {
+      "pr": 316,
+      "branch": "feat/work-m368-search-deck-top-destination-20261118",
+      "head": "b700a1e1d8044c7a60721c207becaaa4e575ff07"
+    },
+    "trigger": "mandatory FLIP",
+    "selectionTiming": "resolution, not target selection at activation",
+    "destination": "deck-top by default",
+    "necrovalleyAlternative": "optional hand choice only when Necrovalley is face-up at resolution; deck-top remains a legal choice",
+    "shuffle": "caller receives shuffleDeck=true only for a Deck-to-hand move",
+    "privacy": "searches only the active physical seat's Deck; partner reserves are not read",
+    "identity": "moves original CardRef object and preserves physical UID"
+  },
+  "tests": {
+    "file": "tests/flipSearchCards.test.cjs",
+    "expected": 19,
+    "coverage": [
+      "both card-specific filters",
+      "mandatory FLIP/resolution timing contract",
+      "deck-top ordering",
+      "optional Necrovalley hand branch for both cards",
+      "retaining deck-top option with Necrovalley",
+      "Necrovalley absence at resolution",
+      "no matching card/no-op",
+      "stale and ineligible UID",
+      "2v2 partner reserve isolation",
+      "physical UID/object identity",
+      "duplicate UID integrity",
+      "invalid actor/card/choice",
+      "invalid destination choice"
+    ]
+  },
+  "limitations": [
+    "This is a card-specific adapter over M368's generic primitive, not yet registered in monsterEffects.ts or duelEngineCurrent.ts.",
+    "M61 handoff remains pending; no resolver integration, catalog admission, certification, distribution allowlist, inventory or production changes.",
+    "Discord/gateway is not invoked by this unit layer."
+  ]
+}
