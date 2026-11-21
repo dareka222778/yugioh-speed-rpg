@@ -11,25 +11,51 @@ export type DuelTeam=0|1;
 export type SetCardSlot={readonly zone:SetCardZone;readonly index:number};
 type TagSetCard={readonly uid:string;readonly id:string;readonly faceUp:boolean;readonly position?:'atk'|'def';readonly owner?:number};
 type TagSetPlayer={readonly monsters:TagSetCard[];readonly backrow:TagSetCard[];readonly field?:TagSetCard|null};
+type WdjatPendingView={readonly kind:string;readonly actor:number;readonly card?:string;readonly id?:string};
+type WdjatChoiceView={readonly actor:number;readonly source?:string;readonly targets?:readonly string[]};
+type WdjatStandbyTaskView={readonly id:string;readonly turn:number;readonly actor:number;readonly optional:boolean};
+type WdjatStandbyView={
+  readonly tasks:readonly WdjatStandbyTaskView[];
+  readonly active?:{readonly id:string;readonly status:'choosing'|'responding'};
+};
 export type TagDuelSetView={
   readonly mode:'tag-classic';
   readonly active:readonly [number,number];
-  readonly core:{readonly current:number;readonly phase?:string;readonly players:readonly [TagSetPlayer,TagSetPlayer]};
+  readonly core:{
+    readonly current:number;readonly phase?:string;readonly turn?:number;
+    readonly pending?:WdjatPendingView;readonly choice?:WdjatChoiceView;readonly standby?:WdjatStandbyView;
+    readonly players:readonly [TagSetPlayer,TagSetPlayer];
+  };
 };
 type TriggerWindow='normalSummon'|'controllerStandby';
 type CardNameLookup=(id:string)=>string|undefined;
 function isSeat(value:number):value is PhysicalSeat{return Number.isInteger(value)&&value>=0&&value<=3;}
 function physicalSeatFromUid(uid:string):PhysicalSeat|null{const m=/^m([0-3]):/.exec(uid);return m?Number(m[1]) as PhysicalSeat:null;}
+export function wdjatStandbyTaskId(sourceUid:string,turn:number):string|null{
+  if(physicalSeatFromUid(sourceUid)===null||!Number.isSafeInteger(turn)||turn<1)return null;
+  return `wdjat:${sourceUid}:${turn}`;
+}
 function context(s:TagDuelSetView,sourceUid:string,trigger:TriggerWindow):{team:DuelTeam;resolverSeat:PhysicalSeat;opponent:TagSetPlayer}|null{
   if(!s||s.mode!=='tag-classic'||!Array.isArray(s.active)||!s.core||!Array.isArray(s.core.players)||s.core.players.length!==2)return null;
   const team=s.core.current;
   if(team!==0&&team!==1)return null;
   if(trigger!=='normalSummon'&&trigger!=='controllerStandby')return null;
-  if(trigger==='controllerStandby'&&s.core.phase!=='standby')return null;
   const resolverSeat=s.active[team];
   if(!isSeat(resolverSeat)||resolverSeat%2!==team)return null;
   const source=s.core.players[team].monsters.find(card=>card.uid===sourceUid);
-  if(!source||source.id!==A_MAN_WITH_WDJAT_ID||source.faceUp!==true||(source.owner!==undefined&&source.owner!==team))return null;
+  // The monster's current team field establishes its controller. Its m0:–m3:
+  // UID still records physical ownership, which may differ after control change.
+  if(!source||source.id!==A_MAN_WITH_WDJAT_ID||source.faceUp!==true||physicalSeatFromUid(sourceUid)===null)return null;
+  if(trigger==='normalSummon'){
+    const pending=s.core.pending;
+    if(!pending||pending.kind!=='summon'||pending.actor!==team||pending.card!==sourceUid||pending.id!==A_MAN_WITH_WDJAT_ID)return null;
+  }else{
+    const turn=s.core.turn,taskId=wdjatStandbyTaskId(sourceUid,turn??0);
+    const task=taskId?s.core.standby?.tasks.find(item=>item.id===taskId):undefined;
+    const active=s.core.standby?.active;
+    if(!task||!active||active.id!==taskId||active.status!=='choosing'||task.turn!==turn||task.actor!==team||task.optional!==false||
+      s.core.phase!=='choice'||s.core.choice?.source!=='standby'||s.core.choice.actor!==team||!s.core.choice.targets?.length)return null;
+  }
   return {team,resolverSeat,opponent:s.core.players[1-team]};
 }
 function readSlot(player:TagSetPlayer,slot:SetCardSlot):TagSetCard|null{
