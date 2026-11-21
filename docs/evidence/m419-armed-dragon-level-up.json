@@ -1,0 +1,97 @@
+{
+  "format": 1,
+  "mission": "M419",
+  "runId": "work-20261120T145632-0300-M419",
+  "authority": "Konami official OCG Card Database",
+  "reviewedAt": "2026-11-20",
+  "historicalCutoffInclusive": "2004-09-30",
+  "scope": "behavioral primitives and focused tests only; no engine registration or certification",
+  "cards": [
+    {
+      "name": "Armed Dragon LV3",
+      "id": "00980973",
+      "konamiCardDatabaseId": 6105,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6105&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "effectSummary": "During its controller's Standby Phase, it may send itself from the field to the GY to Special Summon Armed Dragon LV5 from that player's hand or Deck.",
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP013",
+      "officialTextLineRange": [89, 91],
+      "firstPrintingLineRange": [188, 192],
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "name": "Armed Dragon LV5",
+      "id": "46384672",
+      "konamiCardDatabaseId": 6106,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6106&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "effectSummary": "It may send a monster from its controller's hand to the GY, then target one face-up opposing monster whose current ATK is no greater than the sent monster's original ATK and destroy it. During the End Phase, if it destroyed a monster by battle that turn, it may send itself to the GY to Special Summon Armed Dragon LV7 from that player's hand or Deck.",
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP014",
+      "officialTextLineRange": [89, 91],
+      "firstPrintingLineRange": [187, 191],
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "name": "Armed Dragon LV7",
+      "id": "73879377",
+      "konamiCardDatabaseId": 6107,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6107&ope=2&request_locale=ja",
+      "sourceLocale": "ja",
+      "effectSummary": "Cannot be Normal Summoned/Set and must be Special Summoned by Armed Dragon LV5. It may send a monster from its controller's hand to the GY to destroy all face-up opposing monsters whose current ATK is no greater than the sent monster's original ATK.",
+      "firstOcgPrinting": "2004-05-27",
+      "firstOcgSetCode": "SOD-JP015",
+      "officialTextLineRange": [87, 91],
+      "firstPrintingLineRange": [188, 192],
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "twoVTwoAdaptation": {
+    "teamMapping": "seat % 2",
+    "privateHandAndDeck": "only the resolving physical seat supplies discard and summon candidates",
+    "sharedField": "the opposing team includes both opposing seats; the helper filters by controllerTeam",
+    "physicalOwnership": "field cards sent to the GY retain physical owner routing; opponent monsters destroyed by effect route to their physical owner's team GY",
+    "nonTargeting": "LV7 computes the eligible opposing field at resolution; it does not store target UIDs",
+    "attackComparison": "discarded monster original/printed ATK is the threshold; opposing monsters current ATK is compared",
+    "summonCondition": "LV7 is summoned by LV5; Level Up! may bypass the summon condition from hand/Deck, but the helper rejects Graveyard/banished sources"
+  },
+  "tests": {
+    "file": "tests/armedDragonLevelUp.test.cjs",
+    "expectedCases": 28,
+    "behavioralGroups": [
+      "official identities and leading-zero preservation",
+      "four-seat team mapping",
+      "LV3 Standby Phase transition from Hand/Deck",
+      "LV5 End Phase transition only after same-turn battle destruction",
+      "private Hand/Deck ownership and physical owner routing",
+      "LV5 discard cost and single-target ATK threshold",
+      "LV5 target revalidation after activation while retaining paid cost",
+      "LV7 summon restriction and non-targeting board wipe",
+      "UID uniqueness and stale/invalid state rejection"
+    ]
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "rulingReference": {
+    "authority": "archived Edison format individual card rulings; historical reference, not current Konami-issued ruling authority",
+    "url": "https://www.edisonformat.com/rulings/individual-rulings-a-c",
+    "notes": [
+      "LV5 targets a face-up monster and uses current ATK for the target check.",
+      "LV7 does not destroy face-down monsters and compares current opposing ATK with the discarded monster's original printed ATK.",
+      "Level Up! can bypass LV7's summoning condition from hand or Deck."
+    ]
+  },
+  "inventoryGranted": 0,
+  "runtimeIntegrated": false,
+  "discordLiveValidated": false
+}

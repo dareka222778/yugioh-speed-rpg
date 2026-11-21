@@ -1,0 +1,29 @@
+name: M419 Armed Dragon LV progression focused validation
+
+on:
+  pull_request:
+    paths:
+      - 'src/armedDragonLevelUp.ts'
+      - 'tests/armedDragonLevelUp.test.cjs'
+      - 'docs/evidence/m419-armed-dragon-level-up.json'
+      - '.github/workflows/m419-armed-dragon-level-up.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  armed-dragon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run Armed Dragon behavior tests
+        run: node --test tests/armedDragonLevelUp.test.cjs
