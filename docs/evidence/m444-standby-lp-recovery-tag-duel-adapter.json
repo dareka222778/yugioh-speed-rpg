@@ -58,13 +58,14 @@
   },
   "tests": {
     "file": "tests/standbyLpRecoveryTagDuelAdapter.test.cjs",
-    "expectedCases": 19,
+    "expectedCases": 22,
     "behavioralGroups": [
       "Dancing Fairy 1000 LP and shared-team routing",
       "physical owner versus current controller",
       "face-up Defense and effect-negation gates",
       "Darklord Marie activation and resolution Graveyard snapshots",
       "multiple copies and independent per-UID once-per-turn keys",
+      "per-copy negation for Dancing Fairy and Darklord Marie",
       "team 1 active-seat routing",
       "event and per-copy retry idempotency",
       "active StandbyFlow task, task identity, turn, team and phase guards",
@@ -99,6 +100,7 @@
   "limits": [
     "The adapter does not schedule the StandbyFlow task or register the card triggers in the central resolver.",
     "The activation UID snapshot must be captured by the future resolver at task opening and persisted to resolution.",
+    "Per-card negatedSourceUids must come from the trusted resolving-chain context; the adapter validates physical identity but cannot independently prove the negation event."
     "The caller must atomically commit the returned LP tuple and ledgers; this module deliberately does not mutate TagDuel state.",
     "The cards remain outside the certified/playable catalog until a separate approved admission and resolver integration."
   ]
