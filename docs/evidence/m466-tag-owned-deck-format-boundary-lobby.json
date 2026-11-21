@@ -1,0 +1,69 @@
+{
+  "mission": "M466",
+  "runId": "work-20261121T160332-0300-M466",
+  "status": "implementation-complete-ci-pending",
+  "priority": "P1 — enforce the owner's 20–30 Main Deck and 5-card Extra Deck limits at the actual classic-owned 2v2 lobby acceptance boundary, with atomic rollback.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagOwnedDeckFormatBoundaryLobby2v2.test.cjs",
+      "docs/evidence/m466-tag-owned-deck-format-boundary-lobby.json",
+      ".github/workflows/m466-tag-owned-deck-format-boundary-lobby.yml"
+    ],
+    "topLevelTests": 1,
+    "invalidBoundaryCases": 3,
+    "acceptedBoundaryCases": 3,
+    "behavior": "A real classic-owned TagDuel lobby rejects an active 19-card Main Deck, a 31-card Main Deck and a 6-card Extra Deck. Each failed consent must roll back tag_members, lobby revision, automatic deck deactivation and all player/collection/grant/deck writes. After repairing to exact valid boundaries (20, 30 and 5), all four members accept and the TagDuel starts with each physical seat's own UIDs and deck contents.",
+    "validation": "Temporary SQLite; active deck creation; isolated player_cards/deck_cards fixture rows; createTagLobby/acceptTag/getTag; deck validation and atomic rollback; TagDuel inventory/physical-seat ownership; Discord public/private payload validation."
+  },
+  "invariants": {
+    "mainDeck19Rejected": true,
+    "mainDeck31Rejected": true,
+    "extraDeck6Rejected": true,
+    "exactMainDeck20Accepted": true,
+    "exactMainDeck30Accepted": true,
+    "exactExtraDeck5Accepted": true,
+    "failedConsentRollsBackMembershipLock": true,
+    "failedConsentRollsBackLobbyRevision": true,
+    "failedConsentRollsBackDeckDeactivation": true,
+    "noTagDuelInventoryGrant": true,
+    "physicalSeatUidsPreserved": true,
+    "privateHandsRemainPrivate": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false,
+    "merge": false,
+    "deploy": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Extra non-starter cards are inserted only as fixture rows in a temporary SQLite database to construct the 31-card and 6-Extra invalid cases; no live player or production collection is accessed.",
+    "The test validates the lobby/deck acceptance boundary and Discord payload builders offline; it does not connect to a live Discord guild.",
+    "No new card effect is implemented or certified."
+  ]
+}
