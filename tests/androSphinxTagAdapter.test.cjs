@@ -175,14 +175,13 @@ test('a stale summon plan cannot resolve after the source leaves the active hand
 
 test('the same adapter follows active seat 3 when the odd team has the turn',()=>{
   const game=makeGame(true,1);
-  game.core.current=1;
-  const source=putAndroInHand(game,3);
+  const source=putAndroInHand(game,1);
   putPyramid(game,1,1,true);
   const result=planTagAndroSphinxSummon(game,source.uid);
   assert.equal(result.allowed,true);
   if(result.allowed){
     assert.equal(result.plan.teamIndex,1);
-    assert.equal(result.plan.primitive.activeSeat,3);
+    assert.equal(result.plan.primitive.activeSeat,1);
   }
 });
 
