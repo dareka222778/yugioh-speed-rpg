@@ -5,7 +5,7 @@
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "testFile": "tests/tagDuelNaturalWinLockRelease2v2.test.cjs",
   "testCount": 1,
-  "scenario": "Quatro participantes aceitam um lobby clássico emprestado; o fixture SQLite define 100 LP para a equipe adversária. O teste executa Invocação-Normal no primeiro turno, confirma que Battle Phase não é oferecida no turno 1, encerra os dois turnos iniciais e então executa Battle Phase + ataque direto pela próxima representante física da mesma equipe através de handleTagComponent. A vitória normal deve persistir duelFinished, terminar a partida, liberar os quatro locks e preservar UIDs/coleção.",
+  "scenario": "Fixture determinístico com quatro decks clássicos de 20 Monstros Normais certificados e primeiro assento fixo 0. O teste executa Invocação-Normal no turno 1, confirma a proibição de Battle Phase, passa os dois primeiros turnos pela interação Discord e permite que o parceiro físico ataque diretamente no turno 3. A vitória deve persistir duelFinished, encerrar a partida, liberar quatro locks e conservar UIDs/coleção.",
   "invariants": [
     "Deck 20–30, mão 6 com checagem na End Phase, três Monster Zones, três Spell/Trap Zones e Extra Deck 5 continuam no perfil.",
     "A equipe ativa vence por dano direto normal; não é timeout nem concessão.",
@@ -30,7 +30,8 @@
   "limits": [
     "Interações Discord são simuladas offline com handleTagComponent e validateDiscordPayload; nenhum servidor real é usado.",
     "SQLite é temporário e descartado após o teste.",
-    "O teste valida ciclo de vida do duelo, não certifica cartas novas."
+    "O teste valida ciclo de vida do duelo, não certifica cartas novas.",
+    "O primeiro assento é fixado em 0 para eliminar a variação aleatória da ordem inicial no teste de integração completa."
   ],
   "command": "npm run check && npm run build && node --test tests/tagDuelNaturalWinLockRelease2v2.test.cjs",
   "ciStatus": "pending"

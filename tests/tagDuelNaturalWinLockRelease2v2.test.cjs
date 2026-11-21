@@ -16,6 +16,7 @@ const ui = require('../dist/tagUI');
 const { handleTagComponent } = require('../dist/tagInteraction');
 const { validateDiscordPayload } = require('../dist/discordPayload');
 const { rulesFor } = require('../dist/rulesProfile');
+const { getPlayableCard } = require('../dist/effectRegistry');
 
 let interactionSequence = 0;
 function createPlayers(ids) {
@@ -79,10 +80,21 @@ test('a normal direct-attack victory finishes through the Discord handler and re
   createPlayers(ids);
   const beforeEconomy = inventorySnapshot();
 
-  let record = store.createTagLobby(ids, 'm473-guild', 'm473-channel', 'classic-loan');
-  for (const actor of ids.slice(1)) {
-    record = store.acceptTag(record.id, actor, record.guild, record.revision);
-  }
+  const normalDeck = tag.tagNormalCardIds
+    .filter(id => (getPlayableCard(id)?.level ?? 0) <= 4 && (getPlayableCard(id)?.atk ?? 0) >= 1400)
+    .slice(0, 10).flatMap(id => [id, id]);
+  assert.equal(normalDeck.length, 20, 'the deterministic fixture needs twenty certified Normal Monsters');
+  const state = tag.createTagDuel(ids.map((id, seat) => ({
+    id, name: 'M473 Seat ' + seat, cards: [...normalDeck]
+  })), { classic: true, first: 0, seed: 'm473-natural-win-fixed-first-seat' });
+  const members = ids.map((id, seat) => ({ id, name: 'M473 Seat ' + seat, accepted: true }));
+  const recordId = 'm473-natural-win';
+  database.db.prepare(
+    'INSERT INTO tag_sessions(id,guild,channel,message,revision,updated,status,members,state,rules) VALUES(?,?,?,?,?,?,?,?,?,?)'
+  ).run(recordId, 'm473-guild', 'm473-channel', 'm473-message', 0, Date.now(),
+    'playing', JSON.stringify(members), JSON.stringify(state), 'classic-loan');
+  for (const id of ids) database.db.prepare('INSERT INTO tag_members VALUES(?,?)').run(id, recordId);
+  let record = store.getTag(recordId);
   assert.equal(record.status, 'playing');
   assert.ok(record.state);
   tag.assertTagDuel(record.state);
