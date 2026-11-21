@@ -102,7 +102,8 @@ function planDrawPipeline(game, event, processedSourceIds = [], processedFireIds
     gainingTeam: source.value.result.gainingTeam,
     lpGained: source.value.result.lpGained,
     teamLifePointsBefore: before,
-    teamLifePointsAfterGain: source.value.result.teamLifePointsAfterGain
+    teamLifePointsAfterGain: source.value.result.teamLifePointsAfterGain,
+    negatedFirePrincessUids: event.negatedFirePrincessUids
   }, processedSourceIds, processedFireIds);
   assert.equal(plan.ok, true, plan.reason || 'Fire Princess pipeline must plan');
   return { source: source.value, plan: plan.value };
@@ -142,6 +143,22 @@ function assertOwnerRules(state) {
     rules.extraDeckMax
   ], [20, 30, 6, 'end', 3, 3, 5]);
 }
+
+test('Fire Princess negation is per physical copy and preserves the unnegated partner-owned copy', () => {
+  const game = makeGame(0);
+  addSolemnWishes(game, 0, 0);
+  const negated = addPrincess(game, 0, 0);
+  const eligible = addPrincess(game, 2, 0);
+  const event = makeDrawEvent(game, 0, 1, 'm456:draw:fire-negation');
+  event.negatedFirePrincessUids = [negated.uid];
+
+  const { source, plan } = planDrawPipeline(game, event);
+  assert.equal(source.result.lpGained, 500);
+  assert.equal(plan.firePrincess.triggerCount, 1);
+  assert.deepEqual(plan.firePrincess.triggerSources.map(item => item.uid), [eligible.uid]);
+  assert.equal(plan.firePrincess.triggerSources[0].physicalOwnerSeat, 2);
+  assert.deepEqual(plan.teamLifePointsAfter, [4500, 3500]);
+});
 
 test('a two-card draw by the inactive partner triggers only the unnegated Solemn Wishes copy, then Fire Princess plans one burn', () => {
   const game = makeGame(0);
