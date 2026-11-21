@@ -35,48 +35,48 @@ function expectedFieldArt(state) {
   return new Set(ids);
 }
 
-test('classic TagDuel renderer exposes only the selected physical seat hand for all 4x4 rotations', async t => {
+test('classic TagDuel renderer exposes only the selected physical seat hand for all 4x4 rotations', async () => {
+  let renders = 0;
   for (const first of [0, 1, 2, 3]) {
-    await t.test('initial seat=' + first, async () => {
-      const state = makeGame(first);
-      const layout = tagImageLayout(state);
-      assert.deepEqual(layout, { width: 1400, fieldHeight: 1240, handHeight: 340 });
+    const state = makeGame(first);
+    const layout = tagImageLayout(state);
+    assert.deepEqual(layout, { width: 1400, fieldHeight: 1240, handHeight: 340 });
 
-      const publicRequests = [];
-      const publicImage = await renderTag(state, undefined, async id => {
-        publicRequests.push(id);
+    const publicRequests = [];
+    const publicImage = await renderTag(state, undefined, async id => {
+      publicRequests.push(id);
+      return undefined;
+    });
+    renders++;
+    const publicMetadata = await sharp(publicImage).metadata();
+    assert.equal(publicMetadata.width, 1400);
+    assert.equal(publicMetadata.height, 1240);
+    assert.deepEqual(new Set(publicRequests), expectedFieldArt(state), 'public render must not request private hand art');
+
+    for (const viewerSeat of [0, 1, 2, 3]) {
+      const viewer = member(viewerSeat);
+      const ownHand = new Set(tag.tagMemberHand(state, viewer).map(card => card.id));
+      const otherHands = new Set(
+        [0, 1, 2, 3]
+          .filter(seat => seat !== viewerSeat)
+          .flatMap(seat => tag.tagMemberHand(state, member(seat)).map(card => card.id))
+      );
+      assert.equal(ownHand.size, 4, 'each physical seat starts with four distinct private cards');
+      for (const id of ownHand) assert.equal(otherHands.has(id), false, 'fixture decks must not overlap');
+
+      const requests = [];
+      const image = await renderTag(state, viewer, async id => {
+        requests.push(id);
         return undefined;
       });
-      const publicMetadata = await sharp(publicImage).metadata();
-      assert.equal(publicMetadata.width, 1400);
-      assert.equal(publicMetadata.height, 1240);
-      assert.deepEqual(new Set(publicRequests), expectedFieldArt(state), 'public render must not request any private hand art');
-
-      for (const viewerSeat of [0, 1, 2, 3]) {
-        await t.test('viewer seat=' + viewerSeat, async () => {
-          const viewer = member(viewerSeat);
-          const ownHand = new Set(tag.tagMemberHand(state, viewer).map(card => card.id));
-          const otherHands = new Set(
-            [0, 1, 2, 3]
-              .filter(seat => seat !== viewerSeat)
-              .flatMap(seat => tag.tagMemberHand(state, member(seat)).map(card => card.id))
-          );
-          assert.equal(ownHand.size, 4, 'each physical seat starts with four distinct private cards');
-          for (const id of ownHand) assert.equal(otherHands.has(id), false, 'fixture decks must not overlap');
-
-          const requests = [];
-          const image = await renderTag(state, viewer, async id => {
-            requests.push(id);
-            return undefined;
-          });
-          const metadata = await sharp(image).metadata();
-          assert.equal(metadata.width, 1400);
-          assert.equal(metadata.height, 1580);
-          const expected = new Set([...expectedFieldArt(state), ...ownHand]);
-          assert.deepEqual(new Set(requests), expected, 'private renderer may request only face-up field/grave art and this seat hand');
-          for (const id of otherHands) assert.equal(requests.includes(id), false, 'private renderer leaked another physical seat hand');
-        });
-      }
-    });
+      renders++;
+      const metadata = await sharp(image).metadata();
+      assert.equal(metadata.width, 1400);
+      assert.equal(metadata.height, 1580);
+      const expected = new Set([...expectedFieldArt(state), ...ownHand]);
+      assert.deepEqual(new Set(requests), expected, 'private renderer may request only face-up field/grave art and this seat hand');
+      for (const id of otherHands) assert.equal(requests.includes(id), false, 'private renderer leaked another physical seat hand');
+    }
   }
+  assert.equal(renders, 20);
 });
