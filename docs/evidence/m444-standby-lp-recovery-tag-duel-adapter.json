@@ -1,0 +1,107 @@
+{
+  "format": 1,
+  "mission": "M444",
+  "runId": "work-20261121T064858-0300-M444",
+  "reviewedAt": "2026-11-21",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "name": "Dancing Fairy",
+      "id": "90925163",
+      "konamiDatabaseCid": 5201,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5201&ope=2&request_locale=en",
+      "officialText": "As long as this card remains in face-up Defense Position on your side of the field, increase your Life Points by 1000 points during each of your Standby Phases.",
+      "gainPerEligibleCopy": 1000,
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "Labyrinth of Nightmare (LON-038)"
+    },
+    {
+      "name": "Darklord Marie",
+      "previousEnglishName": "Marie the Fallen One",
+      "id": "57579381",
+      "konamiDatabaseCid": 5209,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5209&ope=2&request_locale=en",
+      "officialText": "Once per turn, during your Standby Phase: You gain 200 LP. This card must be in the Graveyard to activate and to resolve this effect.",
+      "gainPerEligibleCopy": 200,
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "Labyrinth of Nightmare (LON-046)"
+    }
+  ],
+  "adapter": {
+    "file": "src/standbyLpRecoveryTagDuelAdapter.ts",
+    "basePrimitive": "src/dancingFairyStandby.ts",
+    "timingGate": "requires a current TagDuel StandbyFlow task in responding state, bound to the active team and exact turn",
+    "taskIdentity": "m444:standby:<turnNumber>:<activeTeam>",
+    "dancingFairy": {
+      "resolutionZone": "current shared Monster Zones",
+      "eligibility": [
+        "controller team is the team whose Standby task is resolving",
+        "remains in a Monster Zone",
+        "face-up Defense Position",
+        "not negated by the current pending effect or continuous monster-effect negation"
+      ],
+      "physicalOwnerSeat": "derived from stable UID and retained separately from controller team",
+      "gain": "1000 LP per eligible physical copy"
+    },
+    "darklordMarie": {
+      "activationSnapshot": "captureDarklordMarieActivationUids records exact physical UIDs in the active team's shared Graveyard before the task opens",
+      "resolutionZone": "the same physical UID must still be in the active team's shared Graveyard",
+      "ownerRouting": "physical owner seat determines owner team; a card in the wrong team's Graveyard is rejected",
+      "oncePerTurn": "turnNumber:physicalUid ledger; one used copy does not suppress other copies",
+      "gain": "200 LP per eligible physical copy"
+    },
+    "idempotency": "separate event keys for Dancing Fairy and Darklord Marie plus per-UID turn keys; retry produces no second gain",
+    "teamLifePoints": "shared LP totals; no artificial 8000 cap; both card families are combined against one before-snapshot",
+    "mutation": "read-only plan; caller must atomically commit shared LP and both ledgers",
+    "privacy": "public summary contains no card IDs, UIDs, hands or private identities",
+    "validation": "TagDuel shape, physical UID uniqueness, 3+3 shared zones, separate Field Zone, Extra Deck <= 5 and active physical-seat rotation are checked without admitting/certifying the unimplemented card identities"
+  },
+  "tests": {
+    "file": "tests/standbyLpRecoveryTagDuelAdapter.test.cjs",
+    "expectedCases": 22,
+    "behavioralGroups": [
+      "Dancing Fairy 1000 LP and shared-team routing",
+      "physical owner versus current controller",
+      "face-up Defense and effect-negation gates",
+      "Darklord Marie activation and resolution Graveyard snapshots",
+      "multiple copies and independent per-UID once-per-turn keys",
+      "per-copy negation for Dancing Fairy and Darklord Marie",
+      "team 1 active-seat routing",
+      "event and per-copy retry idempotency",
+      "active StandbyFlow task, task identity, turn, team and phase guards",
+      "wrong physical-owner Graveyard rejection",
+      "LP above 8000 and immutable input state",
+      "public privacy summary"
+    ]
+  },
+  "ownerRulesPreserved": {
+    "mainDeck": "20-30",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "runtimeIntegrated": false
+  },
+  "production": {
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "liveDiscordValidated": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false
+  },
+  "limits": [
+    "The adapter does not schedule the StandbyFlow task or register the card triggers in the central resolver.",
+    "The activation UID snapshot must be captured by the future resolver at task opening and persisted to resolution.",
+    "Per-card negatedSourceUids must come from the trusted resolving-chain context; the adapter validates physical identity but cannot independently prove the negation event.",
+    "The caller must atomically commit the returned LP tuple and ledgers; this module deliberately does not mutate TagDuel state.",
+    "The cards remain outside the certified/playable catalog until a separate approved admission and resolver integration."
+  ]
+}

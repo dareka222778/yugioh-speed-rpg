@@ -1,0 +1,36 @@
+name: M444 Standby LP recovery TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m444-standby-lp-recovery-tag-duel-adapter-20261121
+    paths:
+      - 'src/standbyLpRecoveryTagDuelAdapter.ts'
+      - 'tests/standbyLpRecoveryTagDuelAdapter.test.cjs'
+      - 'docs/evidence/m444-standby-lp-recovery-tag-duel-adapter.json'
+      - '.github/workflows/m444-standby-lp-recovery-tag-duel-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/standbyLpRecoveryTagDuelAdapter.ts'
+      - 'tests/standbyLpRecoveryTagDuelAdapter.test.cjs'
+      - 'docs/evidence/m444-standby-lp-recovery-tag-duel-adapter.json'
+      - '.github/workflows/m444-standby-lp-recovery-tag-duel-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  standby-lp-tag-adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run Standby LP TagDuel adapter behavior tests
+        run: node --test tests/standbyLpRecoveryTagDuelAdapter.test.cjs

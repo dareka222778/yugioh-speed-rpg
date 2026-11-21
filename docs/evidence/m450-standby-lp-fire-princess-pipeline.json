@@ -1,0 +1,81 @@
+{
+  "format": 1,
+  "mission": "M450",
+  "runId": "work-20261121T105500-0300-M450",
+  "reviewedAt": "2026-11-21",
+  "purpose": "Behavioral integration of the M444 Standby LP recovery adapter with the M403/M446 Fire Princess LP-gain adapter in TagDuel 2v2.",
+  "upstream": {
+    "standbyRecovery": "M405/M444 — Dancing Fairy and Darklord Marie",
+    "lpGainBurn": "M403/M446 — Fire Princess",
+    "priorPipeline": "M448 — Solemn Wishes draw to Fire Princess",
+    "companionPipeline": "M449 — battle LP recovery to Fire Princess"
+  },
+  "cards": [
+    {
+      "name": "Dancing Fairy",
+      "id": "90925163",
+      "konamiDatabaseCid": 5201,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5201&ope=2&request_locale=en"
+    },
+    {
+      "name": "Darklord Marie",
+      "id": "57579381",
+      "konamiDatabaseCid": 5209,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5209&ope=2&request_locale=en"
+    },
+    {
+      "name": "Fire Princess",
+      "id": "64752646",
+      "sourceEvidence": "M403 official card evidence; not newly admitted or certified"
+    }
+  ],
+  "contract": [
+    "A live resolving StandbyFlow task is validated for the exact team, physical active seat and turn.",
+    "Dancing Fairy and Darklord Marie resolve against one shared LP snapshot.",
+    "The caller atomically commits the combined Standby LP gain.",
+    "Fire Princess consumes the positive LP-gain event after that commit.",
+    "Fire Princess damage is committed separately to the opposing team's shared LP.",
+    "Physical owner seats remain distinct from controller teams.",
+    "Standby per-event/per-UID turn ledgers and Fire Princess event ledger remain independent."
+  ],
+  "tests": {
+    "file": "tests/standbyLpFirePrincessPipeline.test.cjs",
+    "expectedCases": 11,
+    "groups": [
+      "Dancing Fairy to Fire Princess",
+      "Darklord Marie activation UID snapshot to Fire Princess",
+      "combined Dancing Fairy and Darklord Marie gain",
+      "team 1 routing",
+      "multiple Fire Princess copies",
+      "per-copy Standby source negation within the three-Monster-Zone limit",
+      "per-copy Fire Princess negation within the three-Monster-Zone limit",
+      "zero-gain suppression",
+      "independent ledgers and retry idempotency",
+      "read-only adapters before caller commits",
+      "public summary privacy"
+    ]
+  },
+  "ownerRules": {
+    "mainDeck": "20-30",
+    "monsterZones": 3,
+    "backrowZones": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "extraDeck": 5
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "catalogChanged": false,
+  "centralResolverIntegrated": false,
+  "discordLiveValidated": false,
+  "persistentPlayerDataChanged": false,
+  "productionChanged": false,
+  "limitations": [
+    "This verifies the adapter-to-adapter event contract, not central resolver registration or StandbyFlow task scheduling.",
+    "The trusted resolver must open the Standby task and persist the Darklord Marie activation UID snapshot.",
+    "The test simulates caller atomic LP commits; adapters remain read-only.",
+    "No live Discord gateway or production database was exercised."
+  ]
+}
