@@ -101,7 +101,7 @@ export function rollTagAgidoDie(random:DuelRandom):AgidoTagDieRoll{
 }
 
 function phaseAllowsTrigger(game:TagDuel):boolean{
-  return game.core.phase==='battle'||game.core.phase==='response';
+  return !!game&&!!game.core&&(game.core.phase==='battle'||game.core.phase==='response');
 }
 
 function graveProjection(player:TagPlayer):AgidoTagGraveCard[]|null{
@@ -170,8 +170,10 @@ export function captureTagAgidoBattleTrigger(
   game:TagDuel,eventId:string,team:AgidoTagTeam,sourceUid:string,
   destroyedByBattle:boolean,sentToGraveyard:boolean
 ):AgidoTagTriggerSnapshot|null{
-  if(!game||game.mode!=='tag-classic'||typeof eventId!=='string'||!eventId.trim()||
-    eventId.length>128||!isTeam(team)||typeof sourceUid!=='string'||
+  if(!game||game.mode!=='tag-classic'||!game.core||!Array.isArray(game.core.players)||
+    game.core.players.length!==2||!Array.isArray(game.active)||game.active.length!==2||
+    typeof eventId!=='string'||!eventId.trim()||eventId.length>128||
+    !isTeam(team)||typeof sourceUid!=='string'||!sourceUid||
     !destroyedByBattle||!sentToGraveyard||!phaseAllowsTrigger(game))return null;
   const context=project(game,team);
   if(!context)return null;
@@ -193,8 +195,10 @@ function currentContext(
     !isSeat(snapshot.sourcePhysicalOwnerSeat)||typeof snapshot.sourceUid!=='string'||
     !snapshot.sourceUid||snapshot.destroyedByBattle!==true||snapshot.sentToGraveyard!==true||
     !Number.isSafeInteger(snapshot.turn)||snapshot.turn<1)return null;
-  if(!game||game.mode!=='tag-classic'||!phaseAllowsTrigger(game)||
-    game.core.turn!==snapshot.turn||game.active[snapshot.team]!==snapshot.activeSeat||
+  if(!game||game.mode!=='tag-classic'||!game.core||!Array.isArray(game.core.players)||
+    game.core.players.length!==2||!Array.isArray(game.active)||game.active.length!==2||
+    !phaseAllowsTrigger(game)||game.core.turn!==snapshot.turn||
+    game.active[snapshot.team]!==snapshot.activeSeat||
     snapshot.activeSeat%2!==snapshot.team)return null;
   const context=project(game,snapshot.team);
   if(!context||context.activeSeat!==snapshot.activeSeat)return null;
