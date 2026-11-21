@@ -5,79 +5,38 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-const folder = fs.mkdtempSync(path.join(os.tmpdir(), 'm468-tag-command-order-'));
+const folder = fs.mkdtempSync(path.join(os.tmpdir(), 'm468-tag-command-seat-order-'));
 process.env.DATABASE_PATH = path.join(folder, 'isolated.sqlite');
 for (const key of ['DISCORD_TOKEN', 'DISCORD_CLIENT_ID', 'DISCORD_GUILD_ID']) delete process.env[key];
 
 const database = require('../dist/database');
 const store = require('../dist/tagStore');
-const { buildTagInvite } = require('../dist/tagCommand');
 const db = database.db;
+const commandSource = fs.readFileSync(path.join(__dirname, '../src/index.ts'), 'utf8');
 
-test('Discord /dupla convidar maps host and partner to Azul and both opponents to Vermelha', () => {
-  const invite = buildTagInvite({
-    hostId: 'm468-host',
-    partnerId: 'm468-partner',
-    opponent1Id: 'm468-opponent-1',
-    opponent2Id: 'm468-opponent-2',
-    rules: 'classic-owned'
-  });
-  assert.deepEqual(invite.members, [
-    'm468-host',
-    'm468-opponent-1',
-    'm468-partner',
-    'm468-opponent-2'
-  ]);
-  assert.deepEqual(invite.members.map((_, index) => index % 2), [0, 1, 0, 1]);
-  assert.equal(invite.rules, 'classic-owned');
+test('the real /dupla convidar handler preserves host/partner versus opponent seat order and classic-loan default', () => {
+  const line = commandSource.split('\n').find(value => value.includes('createTagLobby([id,op1.id,partner.id,op2.id]'));
+  assert.ok(line, 'the command must pass [host, opponent1, partner, opponent2] to tagStore');
+  assert.ok(line.includes("i.options.getString?.('cartas')??'classic-loan'"),
+    'the existing Discord command must retain classic-loan as its default mode');
 });
 
-test('Discord /dupla convidar defaults to classic-loan and preserves each explicit supported mode', () => {
-  const input = {
-    hostId: 'host',
-    partnerId: 'partner',
-    opponent1Id: 'opponent-1',
-    opponent2Id: 'opponent-2'
-  };
-  assert.equal(buildTagInvite(input).rules, 'classic-loan');
-  assert.equal(buildTagInvite({ ...input, rules: 'classic-loan' }).rules, 'classic-loan');
-  assert.equal(buildTagInvite({ ...input, rules: 'classic-owned' }).rules, 'classic-owned');
-  assert.equal(buildTagInvite({ ...input, rules: 'normal' }).rules, 'normal');
-});
-
-test('duplicate, blank and unsupported invite fields fail before any lobby or seat lock is created', () => {
-  const valid = {
-    hostId: 'host',
-    partnerId: 'partner',
-    opponent1Id: 'opponent-1',
-    opponent2Id: 'opponent-2'
-  };
-  assert.throws(() => buildTagInvite({ ...valid, partnerId: 'host' }), /quatro jogadores diferentes/);
-  assert.throws(() => buildTagInvite({ ...valid, opponent2Id: ' ' }), /quatro jogadores diferentes/);
-  assert.throws(() => buildTagInvite({ ...valid, rules: 'unknown-mode' }), /Modo de cartas 2v2 inválido/);
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM tag_sessions').get().n, 0);
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM tag_members').get().n, 0);
-});
-
-test('the command seat order is the same order persisted by tagStore and creates no inventory', () => {
-  const ids = ['m468-host-live', 'm468-partner-live', 'm468-opponent-1-live', 'm468-opponent-2-live'];
+test('the command seat order persisted by tagStore places host+partner together and opponents together', () => {
+  const ids = ['m468-host', 'm468-partner', 'm468-opponent-1', 'm468-opponent-2'];
   for (const id of ids) database.createPlayer(id, id);
   const before = {
     cards: db.prepare('SELECT COUNT(*) AS n FROM player_cards').get().n,
     grants: db.prepare('SELECT COUNT(*) AS n FROM starter_grants').get().n,
     decks: db.prepare('SELECT COUNT(*) AS n FROM decks').get().n
   };
-  const invite = buildTagInvite({
-    hostId: ids[0],
-    partnerId: ids[1],
-    opponent1Id: ids[2],
-    opponent2Id: ids[3],
-    rules: 'normal'
-  });
-  let record = store.createTagLobby(invite.members, 'm468-guild', 'm468-channel', invite.rules);
-  assert.deepEqual(record.members.map(member => member.id), invite.members);
-  for (const id of ids.slice(1)) record = store.acceptTag(record.id, id, record.guild, record.revision);
+
+  // This is the exact order asserted against the /dupla command source.
+  const members = [ids[0], ids[2], ids[1], ids[3]];
+  let record = store.createTagLobby(members, 'm468-guild', 'm468-channel', 'normal');
+  for (const id of members.slice(1)) record = store.acceptTag(record.id, id, record.guild, record.revision);
+
   assert.equal(record.status, 'playing');
+  assert.deepEqual(record.members.map(member => member.id), members);
   assert.deepEqual(record.state.members.map(member => member.team), [0, 1, 0, 1]);
   assert.equal(record.state.members[0].team, record.state.members[2].team);
   assert.equal(record.state.members[1].team, record.state.members[3].team);
@@ -87,6 +46,15 @@ test('the command seat order is the same order persisted by tagStore and creates
     grants: db.prepare('SELECT COUNT(*) AS n FROM starter_grants').get().n,
     decks: db.prepare('SELECT COUNT(*) AS n FROM decks').get().n
   }, before);
+});
+
+test('duplicate invite IDs are rejected before any lobby or seat lock is created', () => {
+  assert.throws(
+    () => store.createTagLobby(['same', 'opponent-1', 'same', 'opponent-2'], 'm468-guild', 'm468-channel', 'normal'),
+    /quatro jogadores diferentes/
+  );
+  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM tag_sessions').get().n, 0);
+  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM tag_members').get().n, 0);
 });
 
 after(() => {

@@ -1,34 +1,31 @@
 {
   "mission": "M468",
   "runId": "work-20261121T161200-0300-M468",
-  "status": "implementation-complete-ci-pending",
-  "priority": "P1 — make the Discord /dupla convidar seat order explicit and testable so host+partner are always the same team and the two opponents are the other team.",
+  "status": "test-only-after-M8-protection",
+  "priority": "P1 — protect the already-integrated Discord /dupla convidar seat order and default mode without modifying the Mission 8-preserved bootstrap.",
   "base": {
     "branch": "feat/rea-engine-recovery-20261026",
     "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
   },
   "implementation": {
     "files": [
-      "src/tagCommand.ts",
-      "src/index.ts",
       "tests/tagCommandSeatOrder.test.cjs",
       "docs/evidence/m468-tag-command-seat-order.json",
       ".github/workflows/m468-tag-command-seat-order.yml"
     ],
-    "topLevelTests": 4,
-    "behavior": "The command handler now delegates invite field normalization to buildTagInvite. The helper emits [host, opponent1, partner, opponent2], matching tagStore's alternating team assignment [0,1,0,1], preserves classic-loan/classic-owned/normal modes, defaults to classic-loan and rejects duplicate/blank IDs or unknown modes before creating a lobby.",
-    "integration": "src/index.ts /dupla convidar now calls buildTagInvite and passes the validated seat order/rules to createTagLobby. A temporary SQLite integration test verifies the exact member/team order and confirms that creating a normal-mode lobby does not create player_cards, starter_grants or decks."
+    "topLevelTests": 3,
+    "runtimeChanged": false,
+    "behavior": "A source-contract assertion checks the real /dupla convidar handler still passes [host, opponent1, partner, opponent2] and defaults to classic-loan. A temporary SQLite integration then accepts all four participants and proves tagStore persists teams [0,1,0,1], so host+partner share a team and both opponents share the other. Duplicate IDs are rejected before any session/seat lock; no inventory/deck rows are created.",
+    "blockedRuntimeAttempt": "An earlier isolated draft attempted a helper import in src/index.ts. Card Batch Fast/Mission 8 rejected it because the bootstrap-preservation hash changed. The branch now restores src/index.ts byte-for-byte to the shared baseline and removes the unused helper; no gate was bypassed."
   },
   "invariants": {
     "hostAndPartnerSameTeam": true,
     "opponentsSameTeam": true,
     "teamsOpposed": true,
     "defaultClassicLoan": true,
-    "explicitModesPreserved": true,
     "duplicateIdsRejectedBeforeLobby": true,
-    "blankIdsRejectedBeforeLobby": true,
-    "unknownModeRejected": true,
-    "noInventoryGrant": true
+    "noInventoryGrant": true,
+    "mission8BootstrapUnchanged": true
   },
   "rules": {
     "mainDeckMin": 20,
@@ -59,7 +56,7 @@
     "inventoryGranted": 0
   },
   "limitations": [
-    "The slash command's pure seat-order builder and tagStore integration are tested offline; no live Discord interaction or deployment.",
-    "This is command routing and team-seat correctness, not a new card effect or certification."
+    "The test asserts the existing inline Discord command source and executes its seat order through tagStore; it does not import the full Discord client or connect to a live guild.",
+    "No new card effect or certification."
   ]
 }
