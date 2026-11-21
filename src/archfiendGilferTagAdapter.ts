@@ -74,7 +74,6 @@ export type GilferTagFailure =
   | 'invalid-send-event'
   | 'source-not-in-shared-graveyard'
   | 'target-not-in-shared-monster-zones'
-  | 'equipability-check-failed'
   | 'stale-tag-offer';
 export type GilferTagResolution =
   | Readonly<{ resolved: false; reason: GilferTagFailure }>
@@ -141,9 +140,9 @@ function buildContext(
   if (!found) return 'target-not-in-shared-monster-zones';
   const targetSeat = gilferPhysicalSeatFromUid(found.monster.uid);
   if (targetSeat === null) return 'invalid-physical-uid';
+  if (!found.monster.faceUp) return 'target-not-face-up';
   let canBeEquipped = false;
   try { canBeEquipped = canEquip(found.monster, source) === true; } catch { canBeEquipped = false; }
-  if (!canBeEquipped) return 'equipability-check-failed';
   return {
     target: found.monster,
     targetTeam: found.team,
