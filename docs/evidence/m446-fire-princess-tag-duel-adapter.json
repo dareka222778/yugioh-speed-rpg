@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "mission": "M446",
+  "runId": "work-20261121T102656-0300-M446",
+  "priority": "P1",
+  "base": {
+    "branch": "feat/work-m403-fire-princess-lp-gain-burn-20261120",
+    "sha": "42c33e2d0887cf8b9e5ba2171137d29afe0cec3f"
+  },
+  "card": {
+    "id": "64752646",
+    "name": "Fire Princess",
+    "konamiDatabaseCid": 5197,
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5197&ope=2&request_locale=en",
+    "firstTcgRelease": "2003-03-01",
+    "firstTcgSet": "Labyrinth of Nightmare (LON-034)",
+    "historicalEligibility": "eligible-before-2004-09-30",
+    "certificationStatus": "not-certified"
+  },
+  "behavior": {
+    "trigger": "A committed positive LP gain event is consumed once by each eligible Fire Princess controlled by the gaining team.",
+    "fixedDamagePerCopy": 500,
+    "amountScaling": "Damage is per copy and event, not per 500 LP gained.",
+    "teamRouting": "Damage is applied to the opposing team's shared LP.",
+    "physicalOwnership": "Physical owner seat is derived from the stable m0..m3 UID prefix and retained separately from controller team.",
+    "negation": "Current continuous monster-effect negation is checked through monsterEffectsNegated; per-copy chain-negation UIDs are supplied by the trusted chain resolver.",
+    "idempotency": "Event ledger prevents repeated damage after an atomic commit; duplicate retries return the current LP tuple unchanged.",
+    "mutation": "Adapter is read-only; caller must atomically commit the returned LP tuple and event ledger."
+  },
+  "validation": {
+    "focusedTestFile": "tests/firePrincessTagDuelAdapter.test.cjs",
+    "expectedFocusedCases": 24,
+    "node": "22",
+    "build": "npm run check && npm run build",
+    "discord": "offline TagDuel adapter contract only; no live gateway test",
+    "runtimeRegistration": "pending-explicit-M61-handoff",
+    "certification": "not-certified",
+    "automaticCertification": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Does not register Fire Princess in monsterEffects.ts or duelEngineCurrent.ts.",
+    "LP gain event must be emitted by the trusted resolver after the gain is committed.",
+    "Per-copy chain-negation UID snapshot must be captured by the trusted chain context.",
+    "No catalog admission, certification, inventory grant, persistent DB write, player-data write, live Discord test, merge or deployment."
+  ],
+  "ownerRules": {
+    "deck": "20-30 cards at construction; adapter rejects a live deck above 30 but does not impose a minimum after draws",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": "6 with discard at End Phase",
+    "extraDeckLimit": 5
+  }
+}
