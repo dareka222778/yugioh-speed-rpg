@@ -1,0 +1,74 @@
+{
+  "mission": "M465",
+  "runId": "work-20261121T155523-0300-M465",
+  "status": "implementation-complete-ci-pending",
+  "priority": "P1 — verify classic-owned TagDuel acceptance rollback, per-seat active deck ownership, and physical-seat draw routing across all four initial rotations.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagOwnedDeckPhysicalSeatMatrix2v2.test.cjs",
+      "docs/evidence/m465-tag-owned-deck-physical-seat-matrix.json",
+      ".github/workflows/m465-tag-owned-deck-physical-seat-matrix.yml"
+    ],
+    "topLevelTests": 2,
+    "initialSeatRotations": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "seatTurnTransitions": 16,
+    "behavior": "A classic-owned lobby refuses consent when one participant has no active valid deck and rolls back the seat lock/deck-row mutation; after a valid deck is activated, the lobby starts without changing player_cards, starter_grants, deck definitions or deck_cards. Four initial-seat rotations then verify that each physical seat retains only its own deck/hand/Extra UIDs and that each End Phase draw comes from the next physical member's own deck.",
+    "validation": "Temporary SQLite; createPlayer/chooseStarterDeck/decks.openDeck/decks.activateDeck; createTagLobby/acceptTag; createTagDuel/tagInventory/tagMemberHand/tagActions/stepTagDuel; Discord public/private payload builders and validation."
+  },
+  "invariants": {
+    "failedConsentRollsBackSeatLock": true,
+    "failedConsentRollsBackDeckRows": true,
+    "classicOwnedDeckSnapshot": true,
+    "noTagDuelInventoryGrant": true,
+    "noCollectionConsumption": true,
+    "fourPhysicalDeckOwners": true,
+    "allFourInitialSeatRotations": true,
+    "sixteenPhysicalSeatDrawTransitions": true,
+    "onlyIncomingPhysicalHandChanges": true,
+    "uidPrefixesPreserved": true,
+    "privateHandsRemainPrivate": true,
+    "publicPayloadContainsNoHandUids": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false,
+    "merge": false,
+    "deploy": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Starter collections/decks are prepared as fixtures inside a temporary SQLite database before the no-mutation snapshot; the TagDuel lobby and rotation path must leave those rows unchanged.",
+    "Discord builders and payload validation run offline; no live guild, token or production bot session.",
+    "This is a TagDuel ownership/rules integration test, not a new card-effect implementation and does not certify a new card."
+  ]
+}
