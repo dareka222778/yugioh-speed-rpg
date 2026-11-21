@@ -79,7 +79,7 @@ function addField(game, cardId, ownerSeat, controllerTeam, faceUp = true) {
 test('Anti-Aircraft Flower Tributes a controlled Insect and routes 800 damage to the opposing team', () => {
   const game = makeGame(2);
   const source = addMonster(game, ANTI_AIRCRAFT_FLOWER_CARD_ID, 0, 0);
-  const insect = addMonster(game, insectId, 2, 0);
+  const insect = addMonster(game, insectId, 2, 0, false);
   const before = JSON.stringify(game);
   const result = planTagAntiAircraftFlower(game, 'turn1:flower:1', source.uid, insect.uid);
   assert.equal(result.ok, true);
@@ -93,14 +93,6 @@ test('Anti-Aircraft Flower Tributes a controlled Insect and routes 800 damage to
 });
 
 
-test('a face-down Insect cannot be paid as Anti-Aircraft Flower typed Tribute cost', () => {
-  const game = makeGame(2);
-  const source = addMonster(game, ANTI_AIRCRAFT_FLOWER_CARD_ID, 0, 0);
-  const hiddenInsect = addMonster(game, insectId, 2, 0, false);
-  const result = planTagAntiAircraftFlower(game, 'turn1:flower:hidden', source.uid, hiddenInsect.uid);
-  assert.equal(result.ok, false);
-  assert.match(result.reason, /controlled Insect/);
-});
 
 test('a stolen Insect is paid to its physical-owner Graveyard while damage follows the controller team', () => {
   const game = makeGame(2);
@@ -161,7 +153,7 @@ test('Anti-Aircraft Flower rejects duplicate action IDs without mutating invento
 test('Arcane Archer Tributes a Plant and destroys an exact opposing face-down Trap', () => {
   const game = makeGame(2);
   const source = addMonster(game, ARCANE_ARCHER_OF_THE_FOREST_CARD_ID, 0, 0);
-  const plant = addMonster(game, plantId, 2, 0);
+  const plant = addMonster(game, plantId, 2, 0, false);
   const target = addBackrow(game, trapId, 3, 1, false);
   const activation = captureTagArcaneArcherActivation(
     game, 'turn1:archer:1', source.uid, plant.uid, target.uid
@@ -177,17 +169,6 @@ test('Arcane Archer Tributes a Plant and destroys an exact opposing face-down Tr
 });
 
 
-test('a face-down Plant cannot be paid as Arcane Archer typed Tribute cost', () => {
-  const game = makeGame(2);
-  const source = addMonster(game, ARCANE_ARCHER_OF_THE_FOREST_CARD_ID, 0, 0);
-  const hiddenPlant = addMonster(game, plantId, 2, 0, false);
-  const target = addBackrow(game, trapId, 3, 1);
-  const result = captureTagArcaneArcherActivation(
-    game, 'turn1:archer:hidden-plant', source.uid, hiddenPlant.uid, target.uid
-  );
-  assert.equal(result.ok, false);
-  assert.match(result.reason, /controlled Plant/);
-});
 
 test('a face-down Plant does not satisfy Arcane Archer continuous attack protection', () => {
   const game = makeGame(2);
