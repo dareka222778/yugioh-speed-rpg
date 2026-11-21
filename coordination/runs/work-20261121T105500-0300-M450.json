@@ -1,0 +1,72 @@
+{
+  "runId": "work-20261121T105500-0300-M450",
+  "mission": "M450",
+  "owner": "Work",
+  "priority": 1,
+  "status": "active",
+  "startedAt": "2026-11-21T10:55:00-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "a00563d0cdfeb94007e249a25c7683d771263a5b",
+  "baseBranch": "feat/work-m449-battle-lp-fire-princess-pipeline-20261121",
+  "baseSha": "4b935a0a58ce456a576238063b61451a4517a910",
+  "branch": "feat/work-m450-standby-lp-fire-princess-pipeline-20261121",
+  "head": "ea3fca47940fd612dd11a70281b61a4ed0d315c2",
+  "pr": 398,
+  "reservedFiles": [
+    "tests/standbyLpFirePrincessPipeline.test.cjs",
+    "docs/evidence/m450-standby-lp-fire-princess-pipeline.json",
+    ".github/workflows/m450-standby-lp-fire-princess-pipeline.yml"
+  ],
+  "scope": "Pipeline comportamental Dancing Fairy/Darklord Marie na Standby → commit compartilhado de LP → Fire Princess: tarefa Standby ativa, snapshot de UID na ativação, equipes/assentos físicos, negação por cópia, LP compartilhado, ledgers independentes e replay seguro.",
+  "dependencies": {
+    "m405Pr": 353,
+    "m444Pr": 392,
+    "m403Pr": 352,
+    "m446Pr": 394,
+    "m449Pr": 397
+  },
+  "coordination": {
+    "m61Handoff": "pending",
+    "handoffRequestPr": 17,
+    "conflictingFilesUntouched": true,
+    "thirdPartyReservationsReleased": []
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "in_progress",
+    "focusedRunId": 44911989460,
+    "firstAttempt": {
+      "runId": 44911903172,
+      "conclusion": "failure",
+      "passed": 9,
+      "failed": 1,
+      "reason": "Fixture excedia o limite de três Monster Zones ao combinar duas Fairies e duas Fire Princess; divididos os casos de negação por cópia em dois cenários legais."
+    },
+    "cardBatchFast": "in_progress",
+    "cardBatchFastRunId": 44911989378,
+    "milestone1000": "in_progress",
+    "milestoneRunId": 44911989367,
+    "engineValidation": "in_progress",
+    "engineRunId": 44911989382,
+    "extendedSoak": "not-yet-reported"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "discordLiveTest": false
+  },
+  "duration": {
+    "effectiveMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "nextTask": "Aguardar CI do M450, corrigir qualquer regressão com fixtures dentro de 3+3 zonas e então escolher uma integração de evento independente."
+}
