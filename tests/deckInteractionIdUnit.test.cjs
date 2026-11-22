@@ -1,0 +1,159 @@
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+
+const {
+  DECK_INTERACTION_ACTIONS,
+  buildDeckInteractionId,
+  parseDeckInteractionId
+} = require('../dist/deckInteractionId');
+
+test('every supported action round-trips through the canonical custom ID', () => {
+  for (const action of DECK_INTERACTION_ACTIONS) {
+    const value = buildDeckInteractionId(action, 'discord-user_123', 2, 17, 0, '89631139');
+    assert.ok(value.length <= 100);
+    assert.deepEqual(parseDeckInteractionId(value), {
+      action,
+      owner: 'discord-user_123',
+      slot: 2,
+      revision: 17,
+      page: 0,
+      cardId: '89631139'
+    });
+  }
+});
+
+test('empty card selection and zero-based page are valid for navigation', () => {
+  const value = buildDeckInteractionId('view', 'discord-user_123', 1, 0, 0);
+  assert.deepEqual(parseDeckInteractionId(value), {
+    action: 'view',
+    owner: 'discord-user_123',
+    slot: 1,
+    revision: 0,
+    page: 0,
+    cardId: ''
+  });
+});
+
+test('parser rejects malformed, ambiguous, and non-canonical values', () => {
+  const invalid = [
+    null,
+    undefined,
+    17,
+    '',
+    'duel:view:discord-user_123:1:0:1:',
+    'deck:view:discord-user_123:1:0:1',
+    'deck:view:discord-user_123:1:0:1::extra',
+    'deck:unknown:discord-user_123:1:0:1:',
+    'deck:view::1:0:1:',
+    'deck:view:discord-user_123:01:0:1:',
+    'deck:view:discord-user_123:+1:0:1:',
+    'deck:view:discord-user_123:4:0:1:',
+    'deck:view:discord-user_123:1:-1:1:',
+    'deck:view:discord-user_123:1:9007199254740992:1:',
+    'deck:view:discord-user_123:1:0:-1:',
+    'deck:view:discord-user_123:1:0:1:89631139:tail',
+    'deck:view:discord user:1:0:1:',
+    'deck:view:discord:user:1:0:1:',
+    'x'.repeat(101)
+  ];
+
+  for (const value of invalid) {
+    assert.equal(parseDeckInteractionId(value), null, String(value));
+  }
+});
+
+test('builder rejects invalid action, owner, slot, revision, page, and card token', () => {
+  const valid = {
+    action: 'view',
+    owner: 'discord-user_123',
+    slot: 1,
+    revision: 0,
+    page: 0,
+    cardId: ''
+  };
+
+  const invalid = [
+    { action: 'unknown' },
+    { owner: '' },
+    { owner: 'owner:forged' },
+    { owner: 'owner with spaces' },
+    { slot: 0 },
+    { slot: 4 },
+    { slot: 1.5 },
+    { revision: -1 },
+    { revision: Number.MAX_SAFE_INTEGER + 1 },
+    { page: -1 },
+    { page: 1.5 },
+    { cardId: 'id:forged' },
+    { cardId: 'card id' },
+    { cardId: null }
+  ];
+
+  for (const patch of invalid) {
+    const value = key => Object.prototype.hasOwnProperty.call(patch, key)
+      ? patch[key]
+      : valid[key];
+    assert.throws(() => buildDeckInteractionId(
+      value('action'),
+      value('owner'),
+      value('slot'),
+      value('revision'),
+      value('page'),
+      value('cardId')
+    ));
+  }
+});
+
+test('builder rejects non-string owner and card values with a domain error', () => {
+  assert.throws(
+    () => buildDeckInteractionId('view', undefined, 1, 0, 0, ''),
+    /Identificador/
+  );
+  assert.throws(
+    () => buildDeckInteractionId('view', 'discord-user_123', 1, 0, 0, null),
+    /Identificador/
+  );
+});
+
+test('builder refuses IDs that exceed Discord 100-character limit', () => {
+  assert.throws(
+    () => buildDeckInteractionId('view', 'o'.repeat(64), 1, Number.MAX_SAFE_INTEGER, 0, 'c'.repeat(20)),
+    /100 caracteres/
+  );
+});
+
+test('parser returns no partial object when a segment is invalid', () => {
+  const valid = buildDeckInteractionId('card', 'discord-user_123', 3, 42, 4, '89631139');
+  const invalid = valid.replace(':42:', ':042:');
+  assert.equal(parseDeckInteractionId(invalid), null);
+});
+
+test('builder and parser round-trip deterministic numeric and token boundaries', () => {
+  const owners = ['0', 'discord_user', 'owner-123'];
+  const slots = [1, 2, 3];
+  const revisions = [0, 1, Number.MAX_SAFE_INTEGER];
+  const pages = [0, 1, 999];
+  const cardIds = ['', '0', 'card_1-2', '89631139'];
+
+  for (const owner of owners) {
+    for (const slot of slots) {
+      for (const revision of revisions) {
+        for (const page of pages) {
+          for (const cardId of cardIds) {
+            const value = buildDeckInteractionId('view', owner, slot, revision, page, cardId);
+            if (value.length <= 100) {
+              const parsed = parseDeckInteractionId(value);
+              assert.deepEqual(parsed, { action: 'view', owner, slot, revision, page, cardId });
+            } else {
+              assert.throws(() => buildDeckInteractionId('view', owner, slot, revision, page, cardId));
+            }
+          }
+        }
+      }
+    }
+  }
+});
+
+test('supported action allowlist is immutable at runtime', () => {
+  assert.equal(Object.isFrozen(DECK_INTERACTION_ACTIONS), true);
+});
