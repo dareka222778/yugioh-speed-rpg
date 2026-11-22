@@ -1,0 +1,75 @@
+{
+  "runId": "work-20261122T072000-0300-M505",
+  "mission": "M505",
+  "owner": "Work principal",
+  "priority": "P1 — proteger /duelo treino, /duelo treino_fusao e /duelo laboratorio: o treino padrão exige Deck ativo válido; os modos de laboratório usam loadout de teste fixo, não concedem recompensas nem alteram coleção, economia ou inventário.",
+  "startedAt": "2026-11-22T07:20:00-03:00",
+  "lastActivityAt": "2026-11-22T07:20:00-03:00",
+  "endedAt": null,
+  "state": "reserved",
+  "branch": "feat/work-m505-duel-training-command-contract-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c9542a69af90d76e0ad32b1c6c1ded32533efb2c",
+  "sharedHeadAtReservation": "c9542a69af90d76e0ad32b1c6c1ded32533efb2c",
+  "reservedFiles": [
+    "tests/duelTrainingCommandContract.test.cjs",
+    "docs/evidence/m505-duel-training-command-contract.json",
+    ".github/workflows/m505-duel-training-command-contract.yml"
+  ],
+  "scope": [
+    "tests/duelTrainingCommandContract.test.cjs",
+    "docs/evidence/m505-duel-training-command-contract.json",
+    ".github/workflows/m505-duel-training-command-contract.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T07:20:00-03:00",
+    "preserved": [
+      "M501/#449",
+      "M502/#450",
+      "M503/#451",
+      "M504/#452",
+      "M61 e todas as reservas de terceiros"
+    ],
+    "note": "M505 adiciona somente teste/evidência/workflow novos para os três modos de treino 1v1; não altera src/index.ts, src/duelStore.ts, src/duelUI.ts, runtime, catálogo, inventário ou dados persistentes."
+  },
+  "workBlocks": [
+    "Revalidou HEAD compartilhado c9542a69af90d76e0ad32b1c6c1ded32533efb2c e reservas M501–M504.",
+    "Confirmou ausência dos três caminhos M505 em toda a coordenação.",
+    "Inspecionou createTraining e o roteamento de /duelo treino, treino_fusao e laboratorio."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Ainda não executados; CI após abertura da PR."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtReservation": "c9542a69af90d76e0ad32b1c6c1ded32533efb2c",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "Não confirmado pela integração disponível."
+  },
+  "handoffM501": {
+    "pr": 449,
+    "commentId": 7077505382,
+    "status": "requested-no-response"
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Testar os três modos de treino em SQLite temporário, validando Deck ativo obrigatório no padrão, loadout fixo no laboratório e ausência de recompensa/concessão.",
+  "nextWindow": "2026-11-22T11:30:00-03:00"
+}
