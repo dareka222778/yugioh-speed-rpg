@@ -4,8 +4,8 @@
   "owner": "Work principal",
   "priority": "P1 — preparar A Feint Plan (68170903) como bloque de combate temporário TagDuel: bloquear novas declarações de ataque contra monstros face-down durante o turno atual, preservar o ataque já declarado ao ativar em resposta e expirar no fim do turno.",
   "startedAt": "2026-11-22T01:48:58-03:00",
-  "endedAt": null,
-  "state": "reserved-and-implementing",
+  "endedAt": "2026-11-22T02:17:18-03:00",
+  "state": "released-to-auxiliary-monitor-ci",
   "branch": "feat/work-m494-a-feint-plan-tag-adapter-20261122",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "838dd9603c6bc8bd34b1bd1053e977ed3ae777f6",
@@ -38,10 +38,33 @@
     "Reserva M494 em quatro caminhos novos, sem sobreposição."
   ],
   "tests": {
-    "focused": null,
-    "typescript": null,
-    "discordPayload": null,
-    "limitations": "Aguardando implementação e CI remota; adapter temporário ainda não integrado ao resolver."
+    "focused": {
+      "runId": 44986913294,
+      "conclusion": "success",
+      "passed": 14,
+      "failed": 0
+    },
+    "typescript": {
+      "conclusion": "success",
+      "source": "Engine Validation"
+    },
+    "cardBatchFast": {
+      "runId": 44986913258,
+      "conclusion": "success"
+    },
+    "milestone1000": {
+      "runId": 44986913263,
+      "conclusion": "success",
+      "certified": 969,
+      "remaining": 31
+    },
+    "engineValidation": {
+      "runId": 44986913257,
+      "conclusion": "success"
+    },
+    "extendedSoak": {
+      "status": "not-run"
+    }
   },
   "catalog": {
     "certified": 969,
@@ -54,8 +77,43 @@
   "mergePerformed": false,
   "deployPerformed": false,
   "production": "Nenhuma alteração de produção; sem workflow de deploy na branch compartilhada e sem backup de produção verificado.",
-  "pr": null,
-  "releaseToAuxiliary": [],
-  "nextTask": "Implementar adapter A Feint Plan, testar janela de ativação, ataque já declarado, ataques futuros, alvos face-up/face-down e expiração; depois reconsultar HEAD/coordenação.",
-  "nextWindow": "2026-11-22T06:30:00-03:00"
+  "pr": 442,
+  "releaseToAuxiliary": [
+    "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+    "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+    ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
+  ],
+  "nextTask": "Auxiliar monitora #442 e sincroniza sem force; Work executa M495 em três arquivos novos para testar Field Spells compartilhadas no TagDuel 2v2.",
+  "nextWindow": "2026-11-22T06:30:00-03:00",
+  "head": "064eb7aa4b491e0d52b068d094f598f268f74f3d",
+  "auxiliaryAuthorization": {
+    "pr": 442,
+    "commentId": 7074641057,
+    "status": "handoff-requested",
+    "allowed": [
+      "monitor CI",
+      "non-forced synchronization",
+      "correct only the four M494 paths"
+    ],
+    "forbidden": [
+      "resolver",
+      "catalog",
+      "manifest",
+      "allowlist",
+      "certificates",
+      "third-party reservations",
+      "merge",
+      "deploy"
+    ]
+  },
+  "duration": {
+    "startedAt": "2026-11-22T01:48:58-03:00",
+    "endedAt": "2026-11-22T02:17:18-03:00",
+    "elapsedWallMinutes": 28.33,
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "note": "A duração efetiva do ciclo anterior não foi instrumentada; não contar a janela decorrido nem espera de CI como trabalho."
+  }
 }

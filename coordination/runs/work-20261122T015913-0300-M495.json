@@ -1,0 +1,85 @@
+{
+  "runId": "work-20261122T015913-0300-M495",
+  "mission": "M495",
+  "owner": "Work principal",
+  "priority": "P1 — validar a família de Magias de Campo no TagDuel clássico 2v2: ativação/resolução, modificadores por Raça em ambas as equipes, ausência de bônus para não correspondentes, substituição da Zona de Campo, Set face-down/flip e isolamento de mãos/UIDs.",
+  "startedAt": "2026-11-22T01:59:13-03:00",
+  "lastActivityAt": "2026-11-22T02:17:18-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m495-tag-classic-field-spell-modifiers-2v2-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+  "sharedHeadAtReservation": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+  "reservedFiles": [
+    "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+    "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+    ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
+  ],
+  "scope": [
+    "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+    "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+    ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M494 PR #442 liberada ao auxiliar apenas para monitorar/sincronizar/corrigir seus quatro caminhos",
+      "M493 PR #441 e M492 PR #440 preservadas",
+      "M487–M491 PRs #435–#439 preservadas",
+      "M61 e todas as reservas de terceiros preservadas",
+      "nenhuma alteração em resolver, catálogo, manifest, allowlist ou certificados"
+    ]
+  },
+  "workBlocks": [
+    "Leu coordination/state.json e checkpoint M494.",
+    "Revalidou shared HEAD 44c14e24cbb3fd627512da9695399dc3c8f5c22b, main HEAD f78f3080b496d2697072b946088309f36e97b60e, PR #442 e CI: focused 14/14, Card Batch Fast, Milestone 1000 e Engine Validation concluídos com sucesso.",
+    "Solicitou handoff cooperativo de M494 para auxiliar (#442 comentário 7074641057) e renovou M61 para catálogo/certificados (#17 comentário 7074658790)."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Somente testes offline planejados; sem alteração de runtime ou catálogo."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtReservation": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "Não consultado com sucesso nesta sessão; não declarar produção verificada."
+  },
+  "handoffM61": {
+    "pr": 17,
+    "commentId": 7074658790,
+    "status": "requested",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/cardMetadata.ts",
+      "src/cardCertifications.ts"
+    ]
+  },
+  "handoffM494": {
+    "pr": 442,
+    "commentId": 7074641057,
+    "status": "requested",
+    "scope": "monitor/sync/correct only M494 paths"
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Criar teste de integração de Umi, Wasteland, Forest e Sogen em TagDuel 2v2, exercitando legalActions/stepTagDuel e builders Discord reais; reconsultar HEAD e coordenação antes de novo bloco.",
+  "nextWindow": "2026-11-22T06:30:00-03:00"
+}

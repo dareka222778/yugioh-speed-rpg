@@ -1,10 +1,10 @@
 {
-  "runId": "work-20261122T014858-0300-M494",
+  "runId": "work-20261122T015913-0300-M495",
   "owner": "Work principal",
   "priorityRequestedBy": "Work",
   "state": "active",
-  "startedAt": "2026-11-22T01:48:58-03:00",
-  "lastActivityAt": "2026-11-22T01:48:58-03:00",
+  "startedAt": "2026-11-22T01:59:13-03:00",
+  "lastActivityAt": "2026-11-22T02:17:18-03:00",
   "nextScheduledAt": "2026-11-22T06:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -14,8 +14,8 @@
     "docs/evidence/m494-a-feint-plan-tag-adapter.json",
     ".github/workflows/m494-a-feint-plan-tag-adapter.yml"
   ],
-  "lastCheckpoint": "coordination/runs/work-20261122T014858-0300-M494.json",
-  "previousRunId": "work-20261122T014306-0300-M493",
+  "lastCheckpoint": "coordination/runs/work-20261122T015913-0300-M495.json",
+  "previousRunId": "work-20261122T014858-0300-M494",
   "previousReservation": {
     "id": "work-20261113T134424-0300",
     "owner": "Work",
@@ -3682,7 +3682,8 @@
     },
     "deltaToShared": 45,
     "newCertifications": 0,
-    "certifiedAtStart": 969
+    "certifiedAtStart": 969,
+    "certified": 969
   },
   "m60": {
     "officialSourceReviewed": [
@@ -4568,7 +4569,7 @@
     "minimum60MinutesMet": false,
     "note": "M455 iniciado; espera de CI não será contabilizada."
   },
-  "nextTask": "Concluir a suíte de invariantes de revisão/ativação do editor de Deck, publicar PR draft e executar CI; depois reconsultar HEAD/coordenação e liberar somente os três caminhos M487.",
+  "nextTask": "Criar teste de integração de Umi, Wasteland, Forest e Sogen em TagDuel 2v2, exercitando legalActions/stepTagDuel e builders Discord reais; reconsultar HEAD e coordenação antes de novo bloco.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1 — preparar A Feint Plan (68170903) como bloque de combate temporário TagDuel: bloquear novas declarações de ataque contra monstros face-down durante o turno atual, preservar o ataque já declarado ao ativar em resposta e expirar no fim do turno.",
   "sharedHeadBeforeClaim": "b92b1db4a0234d742ae38658f49a9c12e14fd46d",
@@ -4784,22 +4785,22 @@
     }
   ],
   "activeRun": {
-    "runId": "work-20261121T212418-0300-M487",
+    "runId": "work-20261122T015913-0300-M495",
     "owner": "Work principal",
-    "mission": "M487",
+    "mission": "M495",
     "state": "active",
-    "branch": "feat/work-m487-deck-editor-revision-integrity-20261121",
+    "branch": "feat/work-m495-tag-classic-field-spell-modifiers-2v2-20261122",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
-    "sharedHeadAtStart": "b92b1db4a0234d742ae38658f49a9c12e14fd46d",
-    "startedAt": "2026-11-21T21:24:18-03:00",
+    "sharedHeadAtStart": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+    "startedAt": "2026-11-22T01:59:13-03:00",
     "scope": [
-      "tests/deckEditorRevisionIntegrity.test.cjs",
-      "docs/evidence/m487-deck-editor-revision-integrity.json",
-      ".github/workflows/m487-deck-editor-revision-integrity.yml"
+      "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+      "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+      ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
     ],
-    "priority": "P1 — proteger o editor de Deck contra painéis Discord obsoletos e ativação inválida: confirmar que revisão antiga não altera slots, que somente um deck permanece ativo, que editar um deck ativo abaixo de 20 cartas o desativa e que falhas não modificam a coleção."
+    "priority": "P1 — validar a família de Magias de Campo no TagDuel clássico 2v2: ativação/resolução, modificadores por Raça em ambas as equipes, ausência de bônus para não correspondentes, substituição da Zona de Campo, Set face-down/flip e isolamento de mãos/UIDs."
   },
-  "nextWorkAt": "2026-11-21T22:30:00-03:00",
+  "nextWorkAt": "2026-11-22T06:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -7867,7 +7868,7 @@
       "priority": "P1 — validar a projeção Discord do LP compartilhado em todas as quatro rotações iniciais 2v2, com menu privado somente para o representante ativo, privacidade de mãos e continuidade de revisão após End Phase."
     }
   ],
-  "updatedAt": "2026-11-21T20:54:06-03:00",
+  "updatedAt": "2026-11-22T02:17:18-03:00",
   "lastCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "concurrentReservations": [
     {
@@ -9973,9 +9974,9 @@
   "lastActiveWorkMission": "M379–M381",
   "sharedHeadBeforeCheckpointCommit": "aea48819344b899f4fd550ce3873246104d483ec",
   "lastWorkRunId": "work-20261121T202602-0300-M472",
-  "lastWorkMission": "M472",
-  "lastWorkBranch": "feat/work-m472-tag-lobby-atomic-locks-20261121",
-  "lastWorkHead": "7830a0733d4970f6f6aff634612746611325a2d0",
+  "lastWorkMission": "M495",
+  "lastWorkBranch": "feat/work-m495-tag-classic-field-spell-modifiers-2v2-20261122",
+  "lastWorkHead": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
   "lastWorkBranches": [
     {
       "branch": "feat/work-m459-tag-lp-discord-seat-matrix-20261121",
@@ -10156,13 +10157,16 @@
   },
   "m61HandoffRequest": {
     "pr": 17,
-    "commentId": 7071568639,
-    "status": "pending",
+    "commentId": 7074658790,
+    "status": "requested",
     "requestedAt": "2026-11-21T21:24:18-03:00",
     "files": [
       "src/monsterEffects.ts",
-      "src/duelEngineCurrent.ts"
-    ]
+      "src/duelEngineCurrent.ts",
+      "src/cardMetadata.ts",
+      "src/cardCertifications.ts"
+    ],
+    "lastRequestedAt": "2026-11-22T02:17:18-03:00"
   },
   "observedConcurrentPullRequests": [
     {
@@ -11483,37 +11487,37 @@
     "releaseToAuxiliary": "Somente os quatro caminhos novos M444, após publicação da PR."
   },
   "currentReservation": {
-    "runId": "work-20261122T014858-0300-M494",
-    "mission": "M494",
+    "runId": "work-20261122T015913-0300-M495",
+    "mission": "M495",
     "owner": "Work principal",
-    "priority": "P1 — preparar A Feint Plan (68170903) como bloque de combate temporário TagDuel: bloquear novas declarações de ataque contra monstros face-down durante o turno atual, preservar o ataque já declarado ao ativar em resposta e expirar no fim do turno.",
+    "priority": "P1 — validar a família de Magias de Campo no TagDuel clássico 2v2: ativação/resolução, modificadores por Raça em ambas as equipes, ausência de bônus para não correspondentes, substituição da Zona de Campo, Set face-down/flip e isolamento de mãos/UIDs.",
     "state": "reserved",
-    "branch": "feat/work-m494-a-feint-plan-tag-adapter-20261122",
+    "branch": "feat/work-m495-tag-classic-field-spell-modifiers-2v2-20261122",
     "baseBranch": "feat/rea-engine-recovery-20261026",
-    "baseSha": "838dd9603c6bc8bd34b1bd1053e977ed3ae777f6",
-    "sharedHeadAtReservation": "838dd9603c6bc8bd34b1bd1053e977ed3ae777f6",
+    "baseSha": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+    "sharedHeadAtReservation": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
     "reservedFiles": [
-      "src/aFeintPlanTagAdapter.ts",
-      "tests/aFeintPlanTagAdapter.test.cjs",
-      "docs/evidence/m494-a-feint-plan-tag-adapter.json",
-      ".github/workflows/m494-a-feint-plan-tag-adapter.yml"
+      "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+      "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+      ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
+    ],
+    "scope": [
+      "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+      "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+      ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
     ],
     "conflictCheck": {
       "overlap": false,
       "preserved": [
-        "M492 PR #440",
-        "M493 PR #441",
-        "M487 PR #435",
-        "M488 PR #436",
-        "M489 PR #437",
-        "M490 PR #438",
-        "M491 PR #439",
-        "M61 central resolver and all third-party reservations",
-        "A Feint Plan ID 68170903 absent from certification, metadata, registry, branches and PRs"
+        "M494 PR #442 liberada ao auxiliar apenas para monitorar/sincronizar/corrigir seus quatro caminhos",
+        "M493 PR #441 e M492 PR #440 preservadas",
+        "M487–M491 PRs #435–#439 preservadas",
+        "M61 e todas as reservas de terceiros preservadas",
+        "nenhuma alteração em resolver, catálogo, manifest, allowlist ou certificados"
       ]
     },
-    "startedAt": "2026-11-22T01:48:58-03:00",
-    "lastActivityAt": "2026-11-22T01:48:58-03:00"
+    "startedAt": "2026-11-22T01:59:13-03:00",
+    "lastActivityAt": "2026-11-22T02:17:18-03:00"
   },
   "completedOwnRuns": [
     {
@@ -11544,6 +11548,16 @@
         "engineValidation": "success"
       },
       "reservedFilesPreserved": true
+    },
+    {
+      "runId": "work-20261122T014858-0300-M494",
+      "mission": "M494",
+      "state": "released-to-auxiliary-monitor-ci",
+      "pr": 442,
+      "head": "064eb7aa4b491e0d52b068d094f598f268f74f3d",
+      "endedAt": "2026-11-22T02:17:18-03:00",
+      "effectiveWorkMinutes": null,
+      "releaseToAuxiliary": true
     }
   ],
   "currentWorkReservationM455": {
@@ -12784,7 +12798,7 @@
     "pr": null,
     "releaseToAuxiliary": []
   },
-  "mission": "M487",
+  "mission": "M495",
   "currentWorkReservationM487": {
     "mission": "M487",
     "runId": "work-20261121T212418-0300-M487",
@@ -12821,20 +12835,175 @@
     "releaseToAuxiliary": []
   },
   "previousRunSummary": {
-    "runId": "work-20261122T014306-0300-M493",
-    "mission": "M493",
-    "state": "implementation-published-ci-pending-released-to-auxiliary",
-    "pr": 441,
-    "head": "d4b3ebcac8ebf5bcd6ca45affcbead592488d468",
-    "focusedCI": "success 13 tests + check/build/evidence",
+    "runId": "work-20261122T014858-0300-M494",
+    "mission": "M494",
+    "state": "released-to-auxiliary-monitor-ci",
+    "pr": 442,
+    "head": "064eb7aa4b491e0d52b068d094f598f268f74f3d",
+    "focusedCI": "14/14 success",
     "cardBatchFast": "success",
-    "milestone1000": "success 969/1000",
-    "engineValidation": "in progress",
+    "milestone1000": "969 certified / 31 remaining",
+    "engineValidation": "success",
+    "extendedSoak": "not run",
     "releasedToAuxiliary": true
   },
-  "branch": "feat/work-m494-a-feint-plan-tag-adapter-20261122",
+  "branch": "feat/work-m495-tag-classic-field-spell-modifiers-2v2-20261122",
   "baseBranch": "feat/rea-engine-recovery-20261026",
-  "baseSha": "838dd9603c6bc8bd34b1bd1053e977ed3ae777f6",
-  "sharedHeadAtReservation": "838dd9603c6bc8bd34b1bd1053e977ed3ae777f6",
-  "conflictPolicy": "Somente quatro caminhos novos M494. M492 PR #440 e M493 PR #441 liberadas ao auxiliar apenas para CI/sincronização/correções nos quatro arquivos próprios. M487–M491, M61, resolver, catálogo/manifest/allowlist/certificados e reservas de terceiros intocados."
+  "baseSha": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+  "sharedHeadAtReservation": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+  "conflictPolicy": "Somente quatro caminhos novos M494. M492 PR #440 e M493 PR #441 liberadas ao auxiliar apenas para CI/sincronização/correções nos quatro arquivos próprios. M487–M491, M61, resolver, catálogo/manifest/allowlist/certificados e reservas de terceiros intocados.",
+  "previousActiveRun": {
+    "runId": "work-20261121T212418-0300-M487",
+    "owner": "Work principal",
+    "mission": "M487",
+    "state": "active",
+    "branch": "feat/work-m487-deck-editor-revision-integrity-20261121",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtStart": "b92b1db4a0234d742ae38658f49a9c12e14fd46d",
+    "startedAt": "2026-11-21T21:24:18-03:00",
+    "scope": [
+      "tests/deckEditorRevisionIntegrity.test.cjs",
+      "docs/evidence/m487-deck-editor-revision-integrity.json",
+      ".github/workflows/m487-deck-editor-revision-integrity.yml"
+    ],
+    "priority": "P1 — proteger o editor de Deck contra painéis Discord obsoletos e ativação inválida: confirmar que revisão antiga não altera slots, que somente um deck permanece ativo, que editar um deck ativo abaixo de 20 cartas o desativa e que falhas não modificam a coleção."
+  },
+  "currentWorkReservationM494": {
+    "runId": "work-20261122T014858-0300-M494",
+    "mission": "M494",
+    "owner": "Work principal",
+    "state": "released-to-auxiliary-monitor-ci",
+    "branch": "feat/work-m494-a-feint-plan-tag-adapter-20261122",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "838dd9603c6bc8bd34b1bd1053e977ed3ae777f6",
+    "head": "064eb7aa4b491e0d52b068d094f598f268f74f3d",
+    "pr": 442,
+    "reservedFiles": [
+      "src/aFeintPlanTagAdapter.ts",
+      "tests/aFeintPlanTagAdapter.test.cjs",
+      "docs/evidence/m494-a-feint-plan-tag-adapter.json",
+      ".github/workflows/m494-a-feint-plan-tag-adapter.yml"
+    ],
+    "releasedAt": "2026-11-22T02:17:18-03:00",
+    "releaseToAuxiliary": [
+      "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+      "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+      ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
+    ],
+    "auxiliaryAuthorization": {
+      "pr": 442,
+      "commentId": 7074641057,
+      "status": "handoff-requested",
+      "allowed": [
+        "monitor CI",
+        "non-forced synchronization",
+        "correct only the four M494 paths"
+      ],
+      "forbidden": [
+        "resolver",
+        "catalog",
+        "manifest",
+        "allowlist",
+        "certificates",
+        "third-party reservations",
+        "merge",
+        "deploy"
+      ]
+    }
+  },
+  "currentWorkReservationM495": {
+    "runId": "work-20261122T015913-0300-M495",
+    "mission": "M495",
+    "owner": "Work principal",
+    "priority": "P1 — validar a família de Magias de Campo no TagDuel clássico 2v2: ativação/resolução, modificadores por Raça em ambas as equipes, ausência de bônus para não correspondentes, substituição da Zona de Campo, Set face-down/flip e isolamento de mãos/UIDs.",
+    "startedAt": "2026-11-22T01:59:13-03:00",
+    "lastActivityAt": "2026-11-22T02:17:18-03:00",
+    "endedAt": null,
+    "state": "reserved-and-implementing",
+    "branch": "feat/work-m495-tag-classic-field-spell-modifiers-2v2-20261122",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+    "sharedHeadAtReservation": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+    "reservedFiles": [
+      "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+      "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+      ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
+    ],
+    "scope": [
+      "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+      "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+      ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
+    ],
+    "conflictCheck": {
+      "overlap": false,
+      "preserved": [
+        "M494 PR #442 liberada ao auxiliar apenas para monitorar/sincronizar/corrigir seus quatro caminhos",
+        "M493 PR #441 e M492 PR #440 preservadas",
+        "M487–M491 PRs #435–#439 preservadas",
+        "M61 e todas as reservas de terceiros preservadas",
+        "nenhuma alteração em resolver, catálogo, manifest, allowlist ou certificados"
+      ]
+    },
+    "workBlocks": [
+      "Leu coordination/state.json e checkpoint M494.",
+      "Revalidou shared HEAD 44c14e24cbb3fd627512da9695399dc3c8f5c22b, main HEAD f78f3080b496d2697072b946088309f36e97b60e, PR #442 e CI: focused 14/14, Card Batch Fast, Milestone 1000 e Engine Validation concluídos com sucesso.",
+      "Solicitou handoff cooperativo de M494 para auxiliar (#442 comentário 7074641057) e renovou M61 para catálogo/certificados (#17 comentário 7074658790)."
+    ],
+    "tests": {
+      "focused": null,
+      "typescript": null,
+      "discordPayload": null,
+      "limitations": "Somente testes offline planejados; sem alteração de runtime ou catálogo."
+    },
+    "catalog": {
+      "certified": 969,
+      "target": 1000,
+      "remaining": 31,
+      "newCertifications": 0,
+      "automaticCertifications": 0
+    },
+    "inventoryGranted": 0,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "production": {
+      "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+      "sharedHeadAtReservation": "44c14e24cbb3fd627512da9695399dc3c8f5c22b",
+      "backupVerified": false,
+      "liveDiscordValidation": false,
+      "merge": false,
+      "deploy": false,
+      "deploymentRegistry": "Não consultado com sucesso nesta sessão; não declarar produção verificada."
+    },
+    "handoffM61": {
+      "pr": 17,
+      "commentId": 7074658790,
+      "status": "requested",
+      "files": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts",
+        "src/cardMetadata.ts",
+        "src/cardCertifications.ts"
+      ]
+    },
+    "handoffM494": {
+      "pr": 442,
+      "commentId": 7074641057,
+      "status": "requested",
+      "scope": "monitor/sync/correct only M494 paths"
+    },
+    "pr": null,
+    "releaseToAuxiliary": [],
+    "nextTask": "Criar teste de integração de Umi, Wasteland, Forest e Sogen em TagDuel 2v2, exercitando legalActions/stepTagDuel e builders Discord reais; reconsultar HEAD e coordenação antes de novo bloco.",
+    "nextWindow": "2026-11-22T06:30:00-03:00"
+  },
+  "m494Handoff": {
+    "pr": 442,
+    "commentId": 7074641057,
+    "status": "requested",
+    "releasedFiles": [
+      "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+      "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+      ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
+    ]
+  }
 }
