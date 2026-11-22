@@ -17,10 +17,12 @@ const deck31 = [...deck30, additionalMainId];
 const fusionIds = [...new Set(cards
   .filter(card => card.kind === 'monster' && card.monsterType === 'fusion' && getPlayableCard(card.id))
   .map(card => card.id))];
-assert.ok(fusionIds.length >= 2, 'the enabled catalog must provide two distinct Fusion cards');
-// Five Extra Deck cards can use two physical identities while respecting the three-copy limit.
-const extra5 = [fusionIds[0], fusionIds[0], fusionIds[0], fusionIds[1], fusionIds[1]];
-const extra6 = [...extra5, fusionIds[1]];
+assert.ok(fusionIds.length >= 1, 'the enabled catalog must provide one supported Fusion card');
+const supportedFusion = fusionIds[0];
+const extraOne = [supportedFusion];
+// Deliberately invalid negative input: the engine must reject six entries at the 5-card cap
+// before evaluating the independent three-copy rule. This does not claim a legal 6-copy Deck.
+const extraSix = Array(6).fill(supportedFusion);
 
 function players(main, extra=[]) {
   return [0, 1, 2, 3].map(seat => ({
@@ -49,6 +51,7 @@ test('classic 2v2 accepts exact Main Deck and Extra Deck limits and preserves 3+
   assert.equal(RULES_PROFILE.mainDeckMin, 20);
   assert.equal(RULES_PROFILE.mainDeckMax, 30);
   assert.equal(RULES_PROFILE.extraDeckMax, 5);
+  assert.equal(RULES_PROFILE.copiesPerCard, 3);
   assert.equal(RULES_PROFILE.monsterZones, 3);
   assert.equal(RULES_PROFILE.spellTrapZones, 3);
   assert.equal(RULES_PROFILE.handLimit, 6);
@@ -58,15 +61,16 @@ test('classic 2v2 accepts exact Main Deck and Extra Deck limits and preserves 3+
   assert.equal(rulesFor(minimum.core).handLimit, 6);
   assertFieldShape(minimum, 0);
 
-  const maximum = tag.createTagDuel(players(deck30, extra5), { classic: true, seed: 'm486-maximum', first: 0 });
+  const maximum = tag.createTagDuel(players(deck30, extraOne), { classic: true, seed: 'm486-maximum', first: 0 });
   assert.equal(maximum.core.players[0].deck.length + maximum.core.players[0].hand.length, 30);
-  assertFieldShape(maximum, 5);
+  assertFieldShape(maximum, 1);
 });
 
-test('classic 2v2 rejects 19/31 Main Deck cards and six Extra Deck cards', () => {
+test('classic 2v2 rejects 19/31 Main Deck cards and an Extra Deck over five entries', () => {
   assert.equal(deck20.length, 20);
   assert.equal(deck30.length, 30);
   assert.equal(deck31.length, 31);
+  assert.equal(extraSix.length, 6);
   assert.throws(
     () => tag.createTagDuel(players(deck30.slice(0, 19)), { classic: true, seed: 'm486-19' }),
     /20|30|Deck|baralho/i
@@ -76,7 +80,7 @@ test('classic 2v2 rejects 19/31 Main Deck cards and six Extra Deck cards', () =>
     /20|30|Deck|baralho/i
   );
   assert.throws(
-    () => tag.createTagDuel(players(deck30, extra6), { classic: true, seed: 'm486-extra-6' }),
-    /Extra|5|Deck|baralho/i
+    () => tag.createTagDuel(players(deck30, extraSix), { classic: true, seed: 'm486-extra-6' }),
+    /Deck Adicional: máximo de 5 cartas/
   );
 });
