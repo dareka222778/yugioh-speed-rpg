@@ -250,7 +250,7 @@ test('Sogen can be Set face-down, remains inactive until flipped and resolved, t
   assert.equal(record.state.core.phase,'main','setting a Field Spell is a completed action, not an activation chain');
   assert.equal(record.state.core.players[0].field.uid,source.uid);
   assert.equal(record.state.core.players[0].field.faceUp,false);
-  assert.equal(record.state.core.players[0].field.resolved,true,'the replacement Field Spell resolves immediately without a legal response');
+  assert.equal(record.state.core.players[0].field.resolved,false,'a Set Field Spell has no active continuous effect');
   assert.equal(tag.publicTagDuel(record.state).teams[0].field.id,null,'a Set Field Spell identity remains hidden publicly');
   assertStats(record.state,[[warrior,0],[beastWarrior,0],[partnerWarrior,0],[unmatched,0]]);
   assert.equal(record.state.core.players[0].backrow.length,3,'the Field Zone is separate from all three backrow slots');
@@ -258,11 +258,10 @@ test('Sogen can be Set face-down, remains inactive until flipped and resolved, t
 
   record=await activateField(record,source.uid,'sogen-flip');
   assert.equal(record.state.core.players[0].field.faceUp,true);
-  assert.equal(record.state.core.players[0].field.resolved,false,'the continuous effect waits for the response window');
+  assert.equal(record.state.core.players[0].field.resolved,true,'the Field Spell resolves immediately when no legal response is available');
   assertStats(record.state,[[warrior,0],[beastWarrior,0],[partnerWarrior,0],[unmatched,0]]);
   assert.equal(tag.publicTagDuel(record.state).teams[0].field.id,'86318356');
   assert.equal(record.state.core.phase,'main','the Field Spell resolves immediately when no legal response is available');
-  assert.equal(record.state.core.players[0].field.resolved,true);
   assertStats(record.state,[[warrior,200],[beastWarrior,200],[partnerWarrior,200],[unmatched,0]]);
   assertInventoryConserved(record.state,before);
   assertRules(record.state);
@@ -324,12 +323,11 @@ test('replacing Sogen with Mountain sends the old Field Spell to the shared GY a
 
   record=await activateFromHand(record,mountain.uid,'replace-mountain');
   assert.equal(record.state.core.players[0].field.uid,mountain.uid);
-  assert.equal(record.state.core.players[0].field.resolved,false);
+  assert.equal(record.state.core.players[0].field.resolved,true,'the replacement Field Spell resolves immediately without a legal response');
   assert.ok(record.state.core.players[0].grave.some(card=>card.uid===sogen.uid&&card.id==='86318356'),
     'the replaced Field Spell must enter the shared Graveyard with its original UID');
   assertStats(record.state,[[monsters[0],0],[monsters[1],200]],
     'the replaced Sogen modifier ends immediately and Mountain applies to Dragon');
-  assertStats(record.state,[[monsters[0],0],[monsters[1],200]]);
   assertInventoryConserved(record.state,before);
   assertRules(record.state);
   tag.assertTagDuel(JSON.parse(JSON.stringify(record.state)));
