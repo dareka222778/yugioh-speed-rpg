@@ -1,0 +1,38 @@
+name: M502 1v1 Duel Concession Command Contract
+on:
+  push:
+    branches:
+      - feat/work-m502-duel-concession-command-contract-20261122
+    paths:
+      - 'src/duelInteraction.ts'
+      - 'tests/duelConcessionCommandContract.test.cjs'
+      - 'docs/evidence/m502-duel-concession-command-contract.json'
+      - '.github/workflows/m502-duel-concession-command-contract.yml'
+  pull_request:
+    paths:
+      - 'src/duelInteraction.ts'
+      - 'tests/duelConcessionCommandContract.test.cjs'
+      - 'docs/evidence/m502-duel-concession-command-contract.json'
+      - '.github/workflows/m502-duel-concession-command-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-concession-command-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m502-duel-concession-command-contract.json', 'utf8'))"
+      - name: Run /duelo sair command contract
+        run: node --test tests/duelConcessionCommandContract.test.cjs
