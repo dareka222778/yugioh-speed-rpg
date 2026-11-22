@@ -54,19 +54,6 @@ function assertRollback(record, before) {
   assert.equal(count('SELECT COUNT(*) AS n FROM tag_members WHERE session_id=?', record.id), 2);
 }
 
-function assertCancelled(record, actor, before) {
-  const cancelled = store.quitTag(record.id, actor, record.guild, record.revision);
-  assert.equal(cancelled.status, 'cancelled');
-  assert.equal(cancelled.state, null);
-  assert.equal(cancelled.revision, record.revision + 1);
-  assert.equal(count('SELECT COUNT(*) AS n FROM tag_members WHERE session_id=?', record.id), 0);
-  assert.equal(count('SELECT COUNT(*) AS n FROM tag_transition_events WHERE session_id=?', record.id), 0);
-  const after = snapshot(record);
-  assert.deepEqual(after.players, before.players);
-  assert.deepEqual(after.cards, before.cards);
-  return cancelled;
-}
-
 test('cancelled-status update failure keeps both accepted locks and permits a safe retry', () => {
   const { record, actor } = createPartiallyAcceptedLobby();
   const before = snapshot(record);
@@ -89,6 +76,10 @@ test('cancelled-status update failure keeps both accepted locks and permits a sa
   assert.equal(cancelled.status, 'cancelled');
   assert.equal(cancelled.revision, record.revision + 1);
   assert.equal(count('SELECT COUNT(*) AS n FROM tag_members WHERE session_id=?', record.id), 0);
+  const after = snapshot(record);
+  assert.equal(after.events.length, 0);
+  assert.deepEqual(after.players, before.players);
+  assert.deepEqual(after.cards, before.cards);
 });
 
 test('accepted-lock deletion failure rolls back lobby cancellation before retry', () => {
