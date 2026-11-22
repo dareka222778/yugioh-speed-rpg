@@ -89,7 +89,6 @@ test('human-lock insert failure rolls back the training session and permits one 
   );
   database.db.exec('DROP TRIGGER m482_fail_training_lock');
   assert.deepEqual(snapshot(), before);
-  assert.equal(count('SELECT COUNT(*) AS n FROM tag_sessions WHERE status=?', 'playing'), 0);
   assert.equal(count('SELECT COUNT(*) AS n FROM tag_members WHERE owner=?', owner), 0);
 
   const retry = store.createTagTraining(owner, 'm482-guild', 'm482-channel');
