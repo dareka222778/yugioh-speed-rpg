@@ -81,10 +81,11 @@ test('a valid duplicate action receipt still replays once but first persists an 
   const nextActor=tagDecisionMember(first.state);
   const expectedWinner='tag-team-'+(1-nextActor.team);
 
-  const staleUpdated=Date.now()-DECISION_TIMEOUT_MS;
+  const timeoutNow=Date.now();
+  const staleUpdated=timeoutNow-DECISION_TIMEOUT_MS;
   db.prepare('UPDATE tag_sessions SET updated=? WHERE id=?').run(staleUpdated,id);
   const staleRecord={...first,updated:staleUpdated};
-  assert.equal(tagDeadline(staleRecord),Date.now(),'the replay is delivered exactly at the 30-minute deadline');
+  assert.equal(tagDeadline(staleRecord),timeoutNow,'the replay is delivered exactly at the 30-minute deadline');
   const other=first.state.members.find(member=>member.id!==actor.id);
 
   assert.throws(
