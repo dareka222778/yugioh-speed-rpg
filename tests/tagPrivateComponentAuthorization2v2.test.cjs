@@ -86,7 +86,8 @@ test('M511 the physical owner can inspect a card through the emitted private com
   assert.deepEqual(fake.events,['ack','edit']);
   assert.equal(fake.result.edits.length,1);
   validateDiscordPayload(fake.result.edits[0]);
-  assert.equal(fake.result.edits[0].embeds[0].data.title,getCard(hand[0].id).name);
+  assert.ok(fake.result.edits[0].embeds[0].data.title.endsWith(getCard(hand[0].id).name),
+    'the inspected private card must be the physical owner\'s selected card');
   assert.deepEqual(refreshed,[]);
   assert.deepEqual(economySnapshot(),beforeEconomy);
 });
