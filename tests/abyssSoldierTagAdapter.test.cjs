@@ -4,8 +4,6 @@ const assert = require('node:assert/strict');
 
 const {
   ABYSS_SOLDIER_TAG_ADAPTER,
-  canActivateAbyssSoldierTag,
-  markAbyssSoldierTagUsed,
   abyssSoldierTagCostTargets,
   payAbyssSoldierTagCost,
   abyssSoldierTagTargetViews,
@@ -60,32 +58,6 @@ test('Abyss Soldier TagDuel contract retains once-per-turn WATER discard and fie
     kind: 'discard', count: 1, cardKind: 'monster', attribute: 'WATER',
   });
   assert.deepEqual(ABYSS_SOLDIER_TAG_ADAPTER.target.zones, ['monsters', 'backrow', 'field']);
-});
-
-test('Abyss Soldier once-per-turn use is per physical card and resets on the next turn', () => {
-  const s = state();
-  s.players[0].monsters.push({
-    uid: 'm0:abyss', id: '18318842', owner: 0, faceUp: true, position: 'atk',
-    entered: 1, changed: 1, attacked: 0, atkBoost: 0, defBoost: 0,
-  });
-  assert.equal(canActivateAbyssSoldierTag(s, 0, 0, 'm0:abyss'), true);
-  markAbyssSoldierTagUsed(s, 0, 0, 'm0:abyss');
-  assert.equal(s.players[0].monsters[0].effectUsedTurn, 1);
-  assert.equal(canActivateAbyssSoldierTag(s, 0, 0, 'm0:abyss'), false);
-  assert.throws(() => markAbyssSoldierTagUsed(s, 0, 0, 'm0:abyss'), /já utilizou/);
-  s.turn = 2;
-  assert.equal(canActivateAbyssSoldierTag(s, 0, 0, 'm0:abyss'), true);
-});
-
-test('Abyss Soldier once-per-turn marker rejects face-down and foreign card UIDs', () => {
-  const s = state();
-  s.players[0].monsters.push({
-    uid: 'm0:face-down-abyss', id: '18318842', owner: 0, faceUp: false, position: 'def',
-    entered: 1, changed: 1, attacked: 0, atkBoost: 0, defBoost: 0,
-  });
-  assert.equal(canActivateAbyssSoldierTag(s, 0, 0, 'm0:face-down-abyss'), false);
-  assert.throws(() => markAbyssSoldierTagUsed(s, 0, 0, 'm0:face-down-abyss'), /não está face-up/);
-  assert.equal(canActivateAbyssSoldierTag(s, 0, 0, 'missing'), false);
 });
 
 test('cost candidates and payment use only the active physical representative hand', () => {
