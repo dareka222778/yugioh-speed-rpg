@@ -1,0 +1,68 @@
+{
+  "mission": "M490",
+  "runId": "work-20261121T215056-0300-M490",
+  "priority": "P1 — preparar adapter TagDuel 2v2 para Abyss Soldier, com custo WATER da mão do representante ativo, retorno por UID à zona privada do proprietário físico e projeção sem vazamento de identidade de cartas face-down.",
+  "stackedOn": {
+    "pr": 318,
+    "branch": "feat/work-m370-abyss-soldier-typed-discard-bounce-20261118",
+    "head": "bed8ccf6f783599eaf243b9a3b78e3e9a03750cc"
+  },
+  "branch": "feat/work-m490-abyss-soldier-tag-duel-adapter-20261121",
+  "files": [
+    "src/abyssSoldierTagAdapter.ts",
+    "tests/abyssSoldierTagAdapter.test.cjs",
+    "docs/evidence/m490-abyss-soldier-tag-duel-adapter.json",
+    ".github/workflows/m490-abyss-soldier-tag-duel-adapter.yml"
+  ],
+  "testCount": 10,
+  "behavior": [
+    "Janela de ativação limitada à Main Phase.",
+    "Contrato once-per-turn e janela Main Phase.",
+    "Custo: exatamente um monstro WATER da mão privada do representante ativo.",
+    "Alvos: monstros, backrow e Field Spell de ambas as equipes.",
+    "Alvos face-down são projetados como 'Carta oculta'; o ID/nome não é retornado nem consultado.",
+    "Resolução por UID preserva controlador versus proprietário físico.",
+    "Monstro roubado retorna à mão privada do proprietário físico; Fusion retorna ao Extra Deck físico; Token é removido.",
+    "Assento inativo não pode pagar o custo nem resolver como representante.",
+    "A enumeração de alvos é limitada ao representante físico ativo da equipe."
+  ],
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "copiesPerCard": 3
+  },
+  "safety": {
+    "onlyNewPaths": true,
+    "noM370ReservedFilesModified": true,
+    "noResolverRegistration": true,
+    "noCatalogOrAllowlistChanges": true,
+    "noCertification": true,
+    "inventoryGranted": 0,
+    "persistentDatabaseTouched": false,
+    "realPlayerDataTouched": false,
+    "liveDiscord": false,
+    "merge": false,
+    "deploy": false
+  },
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCards": 0,
+    "automatic": 0
+  },
+  "limitations": [
+    "Adapter ainda não está registrado em src/monsterEffects.ts/duelEngineCurrent.ts; handoff M61 continua pendente. Portanto, não certifica Abyss Soldier.",
+    "PR é empilhada sobre M370 #318; precisa ser retargeted/reconciliada depois que a PR-base for revisada e mesclada.",
+    "Testes usam estado DuelState isolado compatível com TeamRotation; não executam uma partida Discord ao vivo.",
+    "M370 helper subjacente ainda contém FieldCardTarget com id; este adapter redige a projeção para UI e não retorna o campo id.",
+    "O marcador per-copy é preparado no adapter; a integração do marcador no fluxo de resolução real depende do handoff M61.",
+    "O plano declara once-per-turn, mas o consumo do marcador permanece no resolver central para respeitar semântica de negação de ativação; não foi simulado fora do handoff M61."
+  ]
+}
