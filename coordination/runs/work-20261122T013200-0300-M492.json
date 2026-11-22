@@ -4,8 +4,8 @@
   "owner": "Work principal",
   "priority": "P1 — preparar A Cat of Ill Omen (24140059) para TagDuel 2v2: selecionar somente Armadilhas do Deck físico do representante ativo, respeitar Necrovalley no momento de ativação/resolução, revelar a carta ao oponente sem expor a mão do parceiro e emitir plano sem mutação.",
   "startedAt": "2026-11-22T01:32:00-03:00",
-  "endedAt": null,
-  "state": "reserved-and-implementing",
+  "endedAt": "2026-11-22T01:43:06-03:00",
+  "state": "implementation-published-ci-pending-released-to-auxiliary",
   "branch": "feat/work-m492-a-cat-of-ill-omen-tag-adapter-20261122",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "aaee5e912d2bf33acbe9927dd02c0bbbd206bbb7",
@@ -38,13 +38,33 @@
   "workBlocks": [
     "Auditoria real de coordination/state.json, checkpoint M487, HEAD/branches, PRs e CI.",
     "Handoff cooperativo M61 renovado no PR #17 (comentário 7074278292); sem resposta/liberação até a reserva.",
-    "Reserva M492 em quatro caminhos novos, sem sobreposição."
+    "Reserva M492 em quatro caminhos novos, sem sobreposição.",
+    "Implementado adapter A Cat of Ill Omen em quatro caminhos novos; 13 testes focados, npm run check, build e JSON passaram no workflow 44986088697.",
+    "PR #440 criada em draft. Card Batch Fast, Milestone 1000 e Engine Validation continuam em andamento."
   ],
   "tests": {
-    "focused": null,
-    "typescript": null,
-    "discordPayload": null,
-    "limitations": "Aguardando implementação e CI remota; nenhum teste local alegado."
+    "focused": {
+      "runId": 44986088697,
+      "conclusion": "success",
+      "tests": 13
+    },
+    "cardBatchFast": {
+      "runId": 44986088694,
+      "status": "in_progress"
+    },
+    "milestone1000": {
+      "runId": 44986088624,
+      "status": "in_progress",
+      "lastVerified": {
+        "certified": 969,
+        "remaining": 31
+      }
+    },
+    "engineValidation": {
+      "runId": 44986088655,
+      "status": "in_progress"
+    },
+    "limitations": "Focused workflow completed successfully. Card Batch Fast, Milestone 1000 and Engine Validation/Extended Soak had not completed at release. No local execution claimed."
   },
   "catalog": {
     "certified": 969,
@@ -57,8 +77,36 @@
   "mergePerformed": false,
   "deployPerformed": false,
   "production": "Nenhuma alteração de produção; .github/workflows na branch compartilhada contém somente card-batch-admission, card-batch-fast, engine-validation e milestone1000; nenhum workflow de deploy encontrado.",
-  "pr": null,
-  "releaseToAuxiliary": [],
-  "nextTask": "Implementar e testar o adapter A Cat of Ill Omen; após CI, reconsultar HEAD/coordenação e iniciar a próxima família independente no mesmo ciclo.",
-  "nextWindow": "2026-11-22T06:30:00-03:00"
+  "pr": {
+    "number": 440,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/440",
+    "branch": "feat/work-m492-a-cat-of-ill-omen-tag-adapter-20261122",
+    "headSha": "1f5268a84fd4f821308c62e92b4273b28f097f0a",
+    "baseSha": "6e8dd5bd4b2ea7ea442d8a0f5618c2a2710bf8cc",
+    "state": "open",
+    "draft": true,
+    "mergeable": true
+  },
+  "releaseToAuxiliary": [
+    {
+      "branch": "feat/work-m492-a-cat-of-ill-omen-tag-adapter-20261122",
+      "pr": 440,
+      "files": [
+        "src/aCatOfIllOmenTagAdapter.ts",
+        "tests/aCatOfIllOmenTagAdapter.test.cjs",
+        "docs/evidence/m492-a-cat-of-ill-omen-tag-adapter.json",
+        ".github/workflows/m492-a-cat-of-ill-omen-tag-adapter.yml"
+      ],
+      "permissions": [
+        "monitor remaining CI",
+        "non-forced synchronization after coordination commit",
+        "fix only the four M492 files"
+      ],
+      "noFurtherScope": true
+    }
+  ],
+  "nextTask": "Auxiliar conclui CI e sincronização não-forçada da M492; Work segue M493 A Hero Emerges em escopo independente.",
+  "nextWindow": "2026-11-22T06:30:00-03:00",
+  "durationElapsedSeconds": 666,
+  "effectiveWorkSeconds": 600
 }

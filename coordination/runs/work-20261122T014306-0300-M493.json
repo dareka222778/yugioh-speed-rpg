@@ -1,0 +1,63 @@
+{
+  "runId": "work-20261122T014306-0300-M493",
+  "mission": "M493",
+  "owner": "Work principal",
+  "priority": "P1 — preparar A Hero Emerges (21597117) para TagDuel 2v2: ativação somente na declaração de ataque adversária, escolha de uma carta oculta exclusivamente da mão do representante defensor ativo pelo representante atacante, revelação apenas após a escolha e plano de Invocação-Especial ou envio ao Cemitério sem mutação.",
+  "startedAt": "2026-11-22T01:43:06-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m493-a-hero-emerges-tag-adapter-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "6e8dd5bd4b2ea7ea442d8a0f5618c2a2710bf8cc",
+  "sharedHeadAtReservation": "6e8dd5bd4b2ea7ea442d8a0f5618c2a2710bf8cc",
+  "reservedFiles": [
+    "src/aHeroEmergesTagAdapter.ts",
+    "tests/aHeroEmergesTagAdapter.test.cjs",
+    "docs/evidence/m493-a-hero-emerges-tag-adapter.json",
+    ".github/workflows/m493-a-hero-emerges-tag-adapter.yml"
+  ],
+  "scope": [
+    "src/aHeroEmergesTagAdapter.ts",
+    "tests/aHeroEmergesTagAdapter.test.cjs",
+    "docs/evidence/m493-a-hero-emerges-tag-adapter.json",
+    ".github/workflows/m493-a-hero-emerges-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M492 PR #440 (released to auxiliary; four files only)",
+      "M487 PR #435",
+      "M488 PR #436",
+      "M489 PR #437",
+      "M490 PR #438",
+      "M491 PR #439",
+      "M61 central resolver and all third-party reservations"
+    ]
+  },
+  "workBlocks": [
+    "Auditoria do HEAD/coordenação após M492; CI focada M492 13/13 + check/build/JSON success.",
+    "M492 PR #440 liberada ao auxiliar para CI remanescente e sincronização não-forçada, restrita aos quatro caminhos próprios.",
+    "Reserva M493 em quatro caminhos novos, sem sobreposição."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Aguardando implementação e CI remota; nenhum teste local alegado."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": "Nenhuma alteração de produção; branch compartilhada não contém workflow de deploy. Nenhum deployment/back-up de produção verificado.",
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implementar adapter A Hero Emerges e seus testes; acompanhar CI M492 independentemente; depois reconsultar HEAD e coordenação.",
+  "nextWindow": "2026-11-22T06:30:00-03:00"
+}
