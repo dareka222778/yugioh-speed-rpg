@@ -1,0 +1,77 @@
+{
+  "runId": "work-20261122T070100-0300-M503",
+  "mission": "M503",
+  "owner": "Work principal",
+  "priority": "P1 — proteger /duelo ver: o comando deve responder somente em ephemeral, localizar a sessão do usuário autenticado, validar o servidor de origem e entregar exclusivamente a mão privada daquele duelista; usuários externos não podem obter sessão, Deck order, IDs face-down ou UIDs privados.",
+  "startedAt": "2026-11-22T07:01:00-03:00",
+  "lastActivityAt": "2026-11-22T07:01:00-03:00",
+  "endedAt": null,
+  "state": "reserved",
+  "branch": "feat/work-m503-duel-view-command-contract-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "8157740b8d9ad6b56285eb07eac7b78e72898974",
+  "sharedHeadAtReservation": "8157740b8d9ad6b56285eb07eac7b78e72898974",
+  "reservedFiles": [
+    "tests/duelViewCommandContract.test.cjs",
+    "docs/evidence/m503-duel-view-command-contract.json",
+    ".github/workflows/m503-duel-view-command-contract.yml"
+  ],
+  "scope": [
+    "tests/duelViewCommandContract.test.cjs",
+    "docs/evidence/m503-duel-view-command-contract.json",
+    ".github/workflows/m503-duel-view-command-contract.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T07:01:00-03:00",
+    "preserved": [
+      "M501 PR #449 e três caminhos reservados; handoff solicitado, sem resposta",
+      "M502 PR #450 e quatro caminhos reservados, inclusive src/duelInteraction.ts",
+      "M496–M500 PRs #444–#448, M61 e todas as reservas de terceiros"
+    ],
+    "note": "M503 adiciona somente teste/evidência/workflow para /duelo ver 1v1; não altera src/index.ts, src/duelUI.ts, src/duelStore.ts, runtime, catálogo, inventário ou dados persistentes."
+  },
+  "workBlocks": [
+    "Revalidou shared HEAD 8157740b8d9ad6b56285eb07eac7b78e72898974 e coordenação M501/M502.",
+    "M502 segue independente; M503 cobre somente /duelo ver 1v1, sem tocar nos caminhos M502/M501.",
+    "Inspecionou o handler /duelo ver, currentDuel e builders de projeção privada/pública."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Ainda não executados; CI após abertura da PR."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtReservation": "8157740b8d9ad6b56285eb07eac7b78e72898974",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "Não confirmado pela integração disponível."
+  },
+  "handoffM501": {
+    "pr": 449,
+    "commentId": 7077505382,
+    "status": "requested-no-response"
+  },
+  "handoffM61": {
+    "pr": 17,
+    "status": "requested-no-response"
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implementar contrato offline de /duelo ver: privacidade da mão, sessão autenticada, guild boundary, ausência de mutação e payload Discord válido.",
+  "nextWindow": "2026-11-22T11:30:00-03:00"
+}
