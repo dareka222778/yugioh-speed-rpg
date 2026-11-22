@@ -12,6 +12,7 @@ for(const key of ['DISCORD_TOKEN','DISCORD_CLIENT_ID','DISCORD_GUILD_ID'])delete
 const database=require('../dist/database');
 const db=database.db;
 const {DECISION_TIMEOUT_MS}=require('../dist/duelStore');
+const {rulesFor}=require('../dist/rulesProfile');
 const {
   createTagDuel,tagNormalCardIds,tagInventory,tagMemberHand,
   tagDecisionMember,publicTagDuel
@@ -76,11 +77,15 @@ test('persisted 2v2 timeout awards the opposing team for each of the four possib
       assert.equal(snapshot.deck.length+snapshot.hand.length,20,'each physical Main Deck remains at the legal minimum');
       assert.ok(snapshot.extra.length<=5,'each physical Extra Deck remains within the five-card cap');
     }
-    for(const team of state.core.players){
-      assert.equal(team.monsters.length,3,'the shared Monster Zone remains 3 slots');
-      assert.equal(team.backrow.length,3,'the shared Spell/Trap Zone remains 3 slots');
-      assert.ok((team.extra??[]).length<=5,'each team core Extra Deck view remains within the five-card cap');
-    }
+    const rules=rulesFor(state.core);
+    assert.equal(rules.mainDeckMin,20);
+    assert.equal(rules.mainDeckMax,30);
+    assert.equal(rules.handLimit,6);
+    assert.equal(rules.handCheck,'end','the hand limit is checked in End Phase');
+    assert.equal(rules.monsterZones,3,'the shared Monster Zone has three legal slots');
+    assert.equal(rules.spellTrapZones,3,'the shared Spell/Trap Zone has three legal slots');
+    assert.equal(rules.extraDeckMax,5);
+    for(const team of state.core.players)assert.ok(Object.hasOwn(team,'field'),'the Field Zone remains a separate property');
 
     const members=state.members.map(member=>({id:member.id,name:member.name,team:member.team,accepted:true}));
     const record=insertSession({id,updated:now,members,state});
