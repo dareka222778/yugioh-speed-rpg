@@ -1,0 +1,36 @@
+name: M528 1v1 Timeout Publication Restart Recovery
+on:
+  push:
+    branches:
+      - feat/work-m528-duel-timeout-restart-publication-20261122
+    paths:
+      - 'tests/duelTimeoutRestartPublication.test.cjs'
+      - 'docs/evidence/m528-duel-timeout-restart-publication.json'
+      - '.github/workflows/m528-duel-timeout-restart-publication.yml'
+  pull_request:
+    paths:
+      - 'tests/duelTimeoutRestartPublication.test.cjs'
+      - 'docs/evidence/m528-duel-timeout-restart-publication.json'
+      - '.github/workflows/m528-duel-timeout-restart-publication.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-timeout-restart-publication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m528-duel-timeout-restart-publication.json', 'utf8'))"
+      - name: Run restart recovery test
+        run: node --test tests/duelTimeoutRestartPublication.test.cjs
