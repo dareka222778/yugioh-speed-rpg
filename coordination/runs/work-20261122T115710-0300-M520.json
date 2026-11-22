@@ -1,0 +1,77 @@
+{
+  "runId": "work-20261122T115710-0300-M520",
+  "mission": "M520",
+  "owner": "Work principal",
+  "priority": "P1 — validar a fronteira de timeout 1v1 pelo handler Discord real: convite expirado não inicia duelo; ação tardia atualiza o painel terminal sem aplicar jogada; W.O., locks, privacidade, Decks e inventário permanecem íntegros.",
+  "startedAt": "2026-11-22T11:57:10-03:00",
+  "lastActivityAt": "2026-11-22T11:57:10-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m520-duel-timeout-discord-boundary-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "0e8c734607712c1bc73eae5e77b23b805b270c2c",
+  "sharedHeadAtReservation": "0e8c734607712c1bc73eae5e77b23b805b270c2c",
+  "reservedFiles": [
+    "tests/duelTimeoutDiscordComponentBoundary.test.cjs",
+    "docs/evidence/m520-duel-timeout-discord-component-boundary.json",
+    ".github/workflows/m520-duel-timeout-discord-component-boundary.yml"
+  ],
+  "scope": [
+    "tests/duelTimeoutDiscordComponentBoundary.test.cjs",
+    "docs/evidence/m520-duel-timeout-discord-component-boundary.json",
+    ".github/workflows/m520-duel-timeout-discord-component-boundary.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T11:57:10-03:00",
+    "checkedAgainst": [
+      "M515 PR #462 — timeout store-level, arquivos próprios preservados",
+      "M516 PR #463 — action race store-level, arquivos próprios preservados",
+      "M517 PR #464 — 3-Hump Lacooda adapter, arquivos próprios preservados",
+      "M518 PR #465 — 8-Claws Scorpion adapter, arquivos próprios preservados",
+      "M519 branch — A Man with Wdjat adapter, preservada",
+      "M502 — src/duelInteraction.ts reservado, somente leitura neste bloco",
+      "M61 e todas as reservas de terceiros"
+    ],
+    "note": "Somente teste/evidência/workflow novos. src/duelInteraction.ts, src/duelStore.ts, src/duelEngine.ts, catálogo, manifesto, resolver, allowlist, certificados, inventário, banco persistente e dados dos jogadores não serão alterados."
+  },
+  "workBlocks": [
+    "Lido coordination/state.json e o checkpoint M515.",
+    "Verificados shared HEAD 0e8c734607712c1bc73eae5e77b23b805b270c2c e main HEAD 197bbda07efc81658604bcd12308665571e26d59.",
+    "PR #462 e CI M515 integralmente aprovadas; M516 focused/Card Batch/Milestone/Engine Validation também aprovadas.",
+    "M517 e M518 focused/Card Batch/Milestone aprovados; Engine Validation ainda em execução.",
+    "M519 branch identificada e preservada; sem alterações em reservas de outros agentes.",
+    "Escopo M520 isolado em três caminhos novos para validar os componentes Discord no timeout 1v1."
+  ],
+  "tests": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "engineValidation": null,
+    "milestone": null,
+    "cardBatchFast": null,
+    "limitations": "Execução local não disponível; validação Node 22 via GitHub Actions. Sem bot/token/guild real."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "Endpoint de deployments não confirmado pela integração disponível; produção não verificada."
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implementar testes offline para aceitar convite expirado e selecionar ação no deadline via handleDuelComponent; validar payloads Discord, W.O., locks e invariância de dados.",
+  "nextWindow": "2026-11-22T16:30:00-03:00"
+}
