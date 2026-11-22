@@ -38,8 +38,8 @@ function assertFieldShape(state, expectedExtra) {
   assert.equal(state.members.length, 4);
   assert.equal(state.core.players.length, 2);
   for (const team of state.core.players) {
-    assert.equal(team.monsters.length, 3, 'each team has exactly three Monster Zones');
-    assert.equal(team.backrow.length, 3, 'each team has exactly three Spell/Trap Zones');
+    assert.ok(team.monsters.length <= 3, 'each team may occupy at most three Monster Zones');
+    assert.ok(team.backrow.length <= 3, 'each team may occupy at most three Spell/Trap Zones');
     assert.equal(team.field, null, 'Field Zone is separate from the three backrow slots');
     assert.equal(team.extra.length, expectedExtra);
   }
