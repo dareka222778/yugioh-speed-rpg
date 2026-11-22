@@ -124,7 +124,7 @@ test('repeated 1v1 decision timeout polling persists one W.O., preserves physica
   assert.equal(first.status,'finished');
   assert.equal(first.state.phase,'finished');
   assert.equal(first.state.winner,winner,'W.O. belongs to the opponent of the player who had to act');
-  assert.match(first.state.reason,/W\\.O\\./i);
+  assert.match(first.state.reason,/W\.O\./i);
   assert.equal(first.revision,data.started.revision+1);
   assert.equal(publicRevision(data.started.id),data.started.revision,'terminal revision is not acknowledged before rendering');
   assert.equal(db.prepare('SELECT COUNT(*) AS n FROM duel_members WHERE duel_id=?').get(data.started.id).n,0);
