@@ -52,7 +52,7 @@ test('Accept revalidates the invited player\'s active Deck after the invitation 
     db.prepare('DELETE FROM deck_cards WHERE discord_id=? AND slot=1 AND card_key=?')
       .run(opponent,removed.card_key);
   }
-  const invalidTotal=db.prepare('SELECT COALESCE(SUM(quantity),0) AS n FROM deck_cards WHERE discord_id=? AND slot=1 AND card_key NOT IN (SELECT card_key FROM deck_cards WHERE discord_id=? AND slot=1 AND 0)').get(opponent,opponent).n;
+  const invalidTotal=db.prepare('SELECT COALESCE(SUM(quantity),0) AS n FROM deck_cards WHERE discord_id=? AND slot=1').get(opponent).n;
   assert.equal(invalidTotal,19,'the opponent\'s active Main Deck is now below the 20-card minimum');
   const invalidAssets=assetSnapshot();
 
