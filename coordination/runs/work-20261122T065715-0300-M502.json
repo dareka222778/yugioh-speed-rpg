@@ -14,28 +14,31 @@
   "reservedFiles": [
     "tests/duelConcessionCommandContract.test.cjs",
     "docs/evidence/m502-duel-concession-command-contract.json",
-    ".github/workflows/m502-duel-concession-command-contract.yml"
+    ".github/workflows/m502-duel-concession-command-contract.yml",
+    "src/duelInteraction.ts"
   ],
   "scope": [
     "tests/duelConcessionCommandContract.test.cjs",
     "docs/evidence/m502-duel-concession-command-contract.json",
-    ".github/workflows/m502-duel-concession-command-contract.yml"
+    ".github/workflows/m502-duel-concession-command-contract.yml",
+    "src/duelInteraction.ts"
   ],
   "conflictCheck": {
     "overlap": false,
-    "checkedAt": "2026-11-22T06:57:15-03:00",
+    "checkedAt": "2026-11-22T06:59:00-03:00",
     "preserved": [
       "M501 PR #449 e seus três caminhos reservados",
       "M500 PR #448 e M496–M499 PRs #444–#447",
       "M472–M498, M61 e todas as reservas de terceiros"
     ],
-    "note": "M502 adiciona somente teste/evidência/workflow novos para /duelo sair 1v1; não altera src/index.ts, src/duelInteraction.ts, src/duelStore.ts, runtime, catálogo, manifest, allowlist, certificados, inventários ou dados persistentes."
+    "note": "M502 adiciona somente teste/evidência/workflow novos para /duelo sair 1v1; não altera src/index.ts, src/duelInteraction.ts, src/duelStore.ts, runtime, catálogo, manifest, allowlist, certificados, inventários ou dados persistentes. Escopo estendido a src/duelInteraction.ts após busca recursiva sem reservas existentes; mudança mínima para rejeitar botão Desistir com revisão obsoleta."
   },
   "workBlocks": [
     "Leu coordination/state.json e checkpoint M501.",
     "Verificou shared HEAD 844ab36bbdc1d1e00c1d7a9840576fbb34c26266, PRs #449/#448 e branch M501.",
     "Solicitou handoff cooperativo na PR #449; comentário 7077505382. M501 permanece intocado.",
-    "Inspecionou handler /duelo sair e handleDuelComponent; reservou cobertura 1v1 independente."
+    "Inspecionou handler /duelo sair e handleDuelComponent; reservou cobertura 1v1 independente.",
+    "Busca recursiva em coordination/state.json confirmou que src/duelInteraction.ts não está reservado por outro agente; escopo M502 estendido para corrigir a aceitação de botão Desistir obsoleto."
   ],
   "tests": {
     "focused": null,
