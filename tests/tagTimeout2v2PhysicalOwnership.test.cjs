@@ -99,7 +99,7 @@ test('the 2v2 decision timeout awards the opposing team and preserves all four p
   assert.deepEqual(state,original,'timeoutTagDuel must not mutate the caller snapshot');
   assert.equal(finished.core.phase,'finished');
   assert.equal(finished.core.winner,'tag-team-1','the team opposite the required decision wins by W.O.');
-  assert.match(finished.core.reason,/W\\.O\\./i);
+  assert.match(finished.core.reason,/W\.O\./i);
   assert.deepEqual(finished.active,state.active,'timeout does not rotate physical representatives');
   assert.deepEqual(finished.reserves,state.reserves,'inactive partners keep their own Deck/hand/Extra references');
   assert.deepEqual(physicalSnapshot(finished),beforePhysical,'all four physical card zones remain byte-for-byte equivalent');
