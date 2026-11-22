@@ -2,7 +2,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 
-const { starterContents, cards } = require('../dist/cardCatalog');
+const { starterContents } = require('../dist/cardCatalog');
 const { engineCatalog, getPlayableCard } = require('../dist/effectRegistry');
 const { tagLoanDeck } = require('../dist/tagStore');
 const tag = require('../dist/tagDuel');
