@@ -1,0 +1,138 @@
+{
+  "mission": "M495",
+  "runId": "work-20261122T015913-0300-M495",
+  "priority": "P1 — validar Magias de Campo já executáveis no TagDuel clássico 2v2: ativação, Set/flip, janela de resolução, modificadores globais por Raça, penalidade, substituição da Zona de Campo, privacidade e conservação física.",
+  "scope": {
+    "files": [
+      "tests/tagClassicFieldSpellModifiers2v2.test.cjs",
+      "docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json",
+      ".github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml"
+    ],
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "fieldSpells": [
+    {
+      "name": "Sogen",
+      "passcode": "86318356",
+      "konamiDatabaseId": 4339,
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4339&request_locale=en",
+      "executableDefinition": {
+        "kind": "field",
+        "races": [
+          "Warrior",
+          "Beast-Warrior"
+        ],
+        "atk": 200,
+        "def": 200
+      },
+      "verifiedBehavior": "Aumenta ATK e DEF em 200 para Warriors e Beast-Warriors em ambos os campos compartilhados."
+    },
+    {
+      "name": "Mountain",
+      "passcode": "50913601",
+      "konamiDatabaseId": 4338,
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4338&request_locale=en",
+      "executableDefinition": {
+        "kind": "field",
+        "races": [
+          "Dragon",
+          "Winged Beast",
+          "Thunder"
+        ],
+        "atk": 200,
+        "def": 200
+      },
+      "verifiedBehavior": "Aumenta ATK e DEF em 200 para Dragons e Winged Beasts em ambos os campos. Thunder consta na definição executável, mas não é declarado como coberto pelo fixture desta missão."
+    },
+    {
+      "name": "Yami",
+      "passcode": "59197169",
+      "konamiDatabaseId": 4341,
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4341&request_locale=en",
+      "executableDefinition": {
+        "kind": "field",
+        "races": [
+          "Fiend",
+          "Spellcaster"
+        ],
+        "penaltyRaces": [
+          "Fairy"
+        ],
+        "atk": 200,
+        "def": 200
+      },
+      "verifiedBehavior": "Aumenta ATK e DEF em 200 para Fiends e Spellcasters e reduz ambos em 200 para Fairies."
+    }
+  ],
+  "deliberatelyExcludedCandidates": [
+    {
+      "names": [
+        "Umi",
+        "Wasteland",
+        "Forest"
+      ],
+      "reason": "Não foram localizados como Magias de Campo com metadata e definição executável na revisão do cardMetadata/classicEngineCards/effectDefinitions deste HEAD. Não foram simulados, importados nem certificados."
+    }
+  ],
+  "testCoverage": [
+    "Sogen Setado face-down não aplica bônus; a identidade permanece oculta no painel público.",
+    "Flip/ativação de Sogen abre a janela de resposta; o modificador só passa a valer após as duas equipes passarem e a resolução marcar o Field Spell como resolved.",
+    "Sogen aplica +200 ATK/DEF a Warriors e Beast-Warriors nos dois lados, inclusive a monstro fisicamente pertencente ao parceiro inativo; Fiend não correspondente permanece inalterado.",
+    "Mountain aplica +200 ATK/DEF a Dragon e Winged Beast de equipes opostas; Warrior não correspondente permanece inalterado.",
+    "Yami aplica +200 ATK/DEF a Fiend e Spellcaster e -200 ATK/DEF a Fairy; Warrior não correspondente permanece inalterado.",
+    "Substituir Sogen por Mountain envia Sogen ao Cemitério compartilhado com o UID original, remove imediatamente o bônus antigo e só aplica o novo bônus após resolver Mountain.",
+    "Ativação da Magia de Campo permanece legal com as três zonas de Magia/Armadilha ocupadas; a Field Zone não consome backrow.",
+    "Handler real handleTagComponent, tagActions/stepTagDuel, revisão persistida, payloads públicos/privados e validateDiscordPayload.",
+    "Conservação dos 80 UIDs/IDs dos quatro Main Decks de 20 cartas e restauração JSON do TagDuel.",
+    "Mãos privadas dos quatro assentos não aparecem no payload público."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "existingCertifiedCardsCovered": 3,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "reason": "A missão exercita três definições de Field Spell já certificadas; não adiciona novas cartas nem altera a allowlist."
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "handler/builder offline com validateDiscordPayload; sem token, guild ou canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/tagClassicFieldSpellModifiers2v2.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Teste de integração Discord offline; não substitui validação em servidor real.",
+    "Umi, Wasteland e Forest permanecem fora do escopo por ausência de definição executável neste HEAD.",
+    "A raça Thunder está na definição de Mountain, mas não é exercitada por este fixture.",
+    "Nenhuma nova certificação é reivindicada."
+  ]
+}
