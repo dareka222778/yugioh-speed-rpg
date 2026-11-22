@@ -1,0 +1,36 @@
+name: M522 2v2 Discord Timeout Component Boundary
+on:
+  push:
+    branches:
+      - feat/work-m522-tag-timeout-discord-boundary-2v2-20261122
+    paths:
+      - 'tests/tagTimeoutDiscordComponentBoundary2v2.test.cjs'
+      - 'docs/evidence/m522-tag-timeout-discord-component-boundary-2v2.json'
+      - '.github/workflows/m522-tag-timeout-discord-component-boundary-2v2.yml'
+  pull_request:
+    paths:
+      - 'tests/tagTimeoutDiscordComponentBoundary2v2.test.cjs'
+      - 'docs/evidence/m522-tag-timeout-discord-component-boundary-2v2.json'
+      - '.github/workflows/m522-tag-timeout-discord-component-boundary-2v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-timeout-discord-boundary-2v2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m522-tag-timeout-discord-component-boundary-2v2.json', 'utf8'))"
+      - name: Run 2v2 Discord timeout component tests
+        run: node --test tests/tagTimeoutDiscordComponentBoundary2v2.test.cjs
