@@ -1,0 +1,80 @@
+{
+  "mission": "M527",
+  "runId": "work-20261122T163436-0300-M527",
+  "title": "1v1 timeout publication idempotency",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "c376248196fc4458c47e2ff7dbb55d438031afed",
+  "branch": "feat/work-m527-duel-timeout-publication-idempotency-20261122",
+  "scope": [
+    "tests/duelTimeoutPublicationIdempotency.test.cjs",
+    "docs/evidence/m527-duel-timeout-publication-idempotency.json",
+    ".github/workflows/m527-duel-timeout-publication-idempotency.yml"
+  ],
+  "behavior": [
+    {
+      "case": "pending invitation at exactly 120000 ms",
+      "assertions": [
+        "status expired",
+        "no DuelState created",
+        "creator lock released",
+        "no opponent lock",
+        "no duel transition event",
+        "revision increments exactly once"
+      ]
+    },
+    {
+      "case": "repeated invitation polling",
+      "assertions": [
+        "terminal revision unchanged",
+        "expired panel has no controls",
+        "stale ACK leaves outbox queued",
+        "matching ACK clears outbox",
+        "duplicate ACK harmless"
+      ]
+    },
+    {
+      "case": "playing duel at exactly 30 minutes",
+      "assertions": [
+        "W.O. goes to opponent of decisionPlayer",
+        "single duelFinished event",
+        "both locks released",
+        "physical hands/decks/monster/backrow/field/grave/banished/extra unchanged",
+        "no action receipt"
+      ]
+    },
+    {
+      "case": "public terminal panel",
+      "assertions": [
+        "Discord payload validates",
+        "no active controls",
+        "private hand UIDs absent",
+        "player/collection/starter-grant/deck rows unchanged"
+      ]
+    }
+  ],
+  "isolatedDatabase": "Temporary SQLite under OS temp directory; Discord credentials unset.",
+  "rulesPreserved": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "runtimeFilesChanged": [],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  }
+}
