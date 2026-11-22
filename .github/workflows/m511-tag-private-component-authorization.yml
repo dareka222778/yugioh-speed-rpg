@@ -1,0 +1,36 @@
+name: M511 Tag Private Component Authorization
+on:
+  push:
+    branches:
+      - feat/work-m511-tag-private-component-authorization-20261122
+    paths:
+      - 'tests/tagPrivateComponentAuthorization2v2.test.cjs'
+      - 'docs/evidence/m511-tag-private-component-authorization.json'
+      - '.github/workflows/m511-tag-private-component-authorization.yml'
+  pull_request:
+    paths:
+      - 'tests/tagPrivateComponentAuthorization2v2.test.cjs'
+      - 'docs/evidence/m511-tag-private-component-authorization.json'
+      - '.github/workflows/m511-tag-private-component-authorization.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-private-component-authorization:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m511-tag-private-component-authorization.json', 'utf8'))"
+      - name: Run private component owner authorization tests
+        run: node --test tests/tagPrivateComponentAuthorization2v2.test.cjs
