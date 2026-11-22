@@ -80,7 +80,7 @@
   ],
   "testCoverage": [
     "Sogen Setado face-down não aplica bônus; a identidade permanece oculta no painel público.",
-    "Flip/ativação de Sogen abre a janela de resposta; o modificador só passa a valer após as duas equipes passarem e a resolução marcar o Field Spell como resolved.",
+    "Flip/ativação de Sogen resolve imediatamente quando nenhuma resposta legal existe; o modificador só passa a valer depois que o motor marca o Field Spell como resolved.",
     "Sogen aplica +200 ATK/DEF a Warriors e Beast-Warriors nos dois lados, inclusive a monstro fisicamente pertencente ao parceiro inativo; Fiend não correspondente permanece inalterado.",
     "Mountain aplica +200 ATK/DEF a Dragon e Winged Beast de equipes opostas; Warrior não correspondente permanece inalterado.",
     "Yami aplica +200 ATK/DEF a Fiend e Spellcaster e -200 ATK/DEF a Fairy; Warrior não correspondente permanece inalterado.",
@@ -133,6 +133,7 @@
     "Teste de integração Discord offline; não substitui validação em servidor real.",
     "Umi, Wasteland e Forest permanecem fora do escopo por ausência de definição executável neste HEAD.",
     "A raça Thunder está na definição de Mountain, mas não é exercitada por este fixture.",
-    "Nenhuma nova certificação é reivindicada."
+    "Nenhuma nova certificação é reivindicada.",
+    "O fixture deixa a backrow adversária sem Counter Trap legal; por isso o motor resolve a Magia de Campo imediatamente. A janela de resposta com Magic Jammer não é reivindicada por esta suíte."
   ]
 }
