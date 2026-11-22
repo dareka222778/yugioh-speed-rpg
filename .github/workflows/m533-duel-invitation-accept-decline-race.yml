@@ -1,0 +1,36 @@
+name: M533 1v1 Invitation Accept versus Decline Race
+on:
+  push:
+    branches:
+      - feat/work-m533-duel-invitation-accept-decline-race-20261122
+    paths:
+      - 'tests/duelInvitationAcceptDeclineRace.test.cjs'
+      - 'docs/evidence/m533-duel-invitation-accept-decline-race.json'
+      - '.github/workflows/m533-duel-invitation-accept-decline-race.yml'
+  pull_request:
+    paths:
+      - 'tests/duelInvitationAcceptDeclineRace.test.cjs'
+      - 'docs/evidence/m533-duel-invitation-accept-decline-race.json'
+      - '.github/workflows/m533-duel-invitation-accept-decline-race.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  invitation-decision-race:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m533-duel-invitation-accept-decline-race.json', 'utf8'))"
+      - name: Run independent-process Accept versus Decline races
+        run: node --test tests/duelInvitationAcceptDeclineRace.test.cjs
