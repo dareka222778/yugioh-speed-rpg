@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "mission": "M526",
+  "runId": "work-20261122T123400-0300-M526",
+  "title": "1v1 duel action receipt replay at timeout",
+  "priority": "P1 — corrigir o caminho de recibo idempotente 1v1 que lia o estado sem passar pelo getDuel; uma repetição válida após 30 min deve persistir W.O. e liberar locks.",
+  "branch": "feat/work-m526-duel-action-receipt-timeout-replay-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c376248196fc4458c47e2ff7dbb55d438031afed",
+  "scope": [
+    "src/duelStore.ts",
+    "tests/duelActionReceiptTimeoutReplay.test.cjs",
+    "docs/evidence/m526-duel-action-receipt-timeout-replay.json",
+    ".github/workflows/m526-duel-action-receipt-timeout-replay.yml"
+  ],
+  "behavior": {
+    "bug": "performDuelAction devolvia read(id) no caminho de recibo já existente, ignorando o timeout pendente e deixando duelo/locks ativos até o próximo poll.",
+    "fix": "replay válido agora executa getDuel antes de retornar o recibo; o W.O. é persistido e os locks são liberados sem reaplicar a ação.",
+    "safeguards": "requestId incompatível continua rejeitado antes de efeitos colaterais; uma receipt e um duelFinished; revisão original permanece imutável.",
+    "ownership": "conserva Decks, mãos, Extra e zonas físicas; painel público não expõe UIDs privados; sem recompensa/inventário."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "openingHand": 4,
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "validation": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "SQLite temporário; perfis/Decks são fixtures isoladas e não alteram contas reais.",
+    "Sem guild Discord real.",
+    "Sem merge/deploy/produção."
+  ]
+}
