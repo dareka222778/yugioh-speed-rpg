@@ -1,0 +1,76 @@
+{
+  "mission": "M489",
+  "runId": "work-20261121T214500-0300-M489",
+  "priority": "P1 — proteger o contrato do comando Discord /deck: opções limitadas às regras do proprietário, respostas privadas e roteamento de componentes owner-bound com revisão obsoleta rejeitada antes de mutação.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "aaee5e912d2bf33acbe9927dd02c0bbbd206bbb7"
+  },
+  "branch": "feat/work-m489-deck-command-contract-20261121",
+  "files": [
+    "tests/deckSlashCommandContract.test.cjs",
+    "docs/evidence/m489-deck-slash-command-contract.json",
+    ".github/workflows/m489-deck-slash-command-contract.yml"
+  ],
+  "testCount": 3,
+  "coverage": {
+    "subcommands": [
+      "ver",
+      "adicionar",
+      "remover",
+      "nome",
+      "ativar",
+      "inicial"
+    ],
+    "slotBounds": "1–3 in all six subcommands",
+    "quantityBounds": "1–3 for add/remove",
+    "deckNameMaxLength": 32,
+    "cardAutocompleteRequired": true,
+    "slashRepliesEphemeral": true,
+    "componentOwnerCheckedBeforeReadAndAck": true,
+    "safeRevisionCheckedBeforeMutation": true,
+    "mutationsUseRevision": [
+      "changeDeck",
+      "renameDeck",
+      "activateDeck",
+      "fillInitialDeck"
+    ]
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "copiesPerCard": 3,
+    "deckSlots": 3
+  },
+  "safety": {
+    "sourceContractOnly": true,
+    "runtimeChanged": false,
+    "temporaryDatabaseUsed": false,
+    "persistentDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "allowlistChanged": false,
+    "liveDiscord": false,
+    "merge": false,
+    "deploy": false
+  },
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCards": 0,
+    "automatic": 0
+  },
+  "limitations": [
+    "Os testes leem o source real de src/index.ts e verificam a estrutura do schema/handler; não importam o bootstrap Discord, não simulam uma Interaction real e não chamam a API Discord.",
+    "O router ainda usa split(':') inline; a primitive strict parser M384 continua separada por proteção do bootstrap. Esta missão não altera index.ts.",
+    "Nenhuma carta nova ou comportamento do resolver é certificado."
+  ]
+}
