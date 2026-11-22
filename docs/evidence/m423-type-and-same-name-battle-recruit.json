@@ -1,0 +1,52 @@
+{
+  "mission": "M423",
+  "family": "battle-destroyed-type-and-same-name-recruit",
+  "cards": [
+    {
+      "name": "Pyramid Turtle",
+      "passcode": "77044671",
+      "konamiId": 5423,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5423&ope=2&request_locale=en",
+      "firstPrinting": "Pharaonic Guardian (PGD-026), TCG 2003-07-18; OCG 2003-10-23",
+      "effectParaphrase": "When destroyed by battle and sent to the Graveyard, may Special Summon one Zombie monster with 2000 or less DEF from the Deck. The effect text does not specify a battle position; legal face-up Attack or face-down Defense choices are exposed.",
+      "sourceVerified": true,
+      "historicalEligibility": "pre-2004-09-30 TCG and OCG printings verified",
+      "certificationStatus": "not-certified",
+      "behavioralTestStatus": "focused-passing locally; engine CI pending",
+      "automaticCertification": false
+    },
+    {
+      "name": "Troop Dragon",
+      "passcode": "55013285",
+      "konamiId": 5341,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5341&ope=2&request_locale=en",
+      "firstPrinting": "Legacy of Darkness (LOD-042), TCG 2003-06-06; OCG 2003-09-18",
+      "effectParaphrase": "When destroyed by battle and sent to the Graveyard, Special Summon one exact-name Troop Dragon from the Deck. The effect text does not specify a battle position; legal face-up Attack or face-down Defense choices are exposed.",
+      "sourceVerified": true,
+      "historicalEligibility": "pre-2004-09-30 TCG and OCG printings verified",
+      "certificationStatus": "not-certified",
+      "behavioralTestStatus": "focused-passing locally; engine CI pending",
+      "automaticCertification": false
+    }
+  ],
+  "sharedFieldRules": {
+    "teamMapping": "seat 0/2 = team 0; seat 1/3 = team 1",
+    "monsterZonesPerTeam": 3,
+    "fieldZoneIsSeparate": true,
+    "deckSource": "physical owner's private Deck only",
+    "summonCount": 1,
+    "positions": ["face-up-attack", "face-down-defense"],
+    "physicalOwnerGetsTriggerWhenControlWasStolen": "owner-based behavior corroborated by archived 2003 tournament ruling mirror; secondary evidence only"
+  },
+  "officialRulingReference": {
+    "url": "https://ms.yugipedia.com/a/a1/2003_tournament_rulings.pdf",
+    "status": "secondary archival mirror; corroborative only"
+  },
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "engineRegistration": "pending cooperative resolver handoff",
+  "discordLiveValidation": false,
+  "mergePerformed": false,
+  "deployPerformed": false
+}
