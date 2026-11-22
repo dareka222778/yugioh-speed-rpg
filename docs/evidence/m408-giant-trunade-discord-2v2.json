@@ -1,0 +1,50 @@
+{
+  "mission": "M408",
+  "runId": "work-20261120T052926-0300-M408",
+  "card": {
+    "name": "Giant Trunade",
+    "id": "42703248",
+    "existingCertification": "certified",
+    "existingSuite": "tests/classicEngine.test.cjs"
+  },
+  "scope": "Discord 2v2 integration regression; no new card admission or certification.",
+  "test": "tests/tagClassicGiantTrunadeDiscord2v2.test.cjs",
+  "behaviors": [
+    "A set Giant Trunade is activated through handleTagComponent and the persisted tagStore action path.",
+    "Five cards in the two shared team backrows return to the four physical owners, including the source itself.",
+    "The inactive teammate cannot submit the team's action.",
+    "All four hands may reach seven during Main Phase; no discard occurs before End Phase.",
+    "At End Phase each physical seat discards once, in A1/B1/A2/B2 order, returning every hand to six.",
+    "Public/private Discord payloads validate; private hand contents remain per-seat.",
+    "All 120 Main Deck UIDs and identities, Extra Deck UIDs, player rows, and player_cards remain unchanged."
+  ],
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "extraDeckMax": 5,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "handLimit": 6,
+    "handCheck": "end"
+  },
+  "certification": {
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "certificateSuiteExtension": "pending successful CI"
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Discord was exercised offline through the production component handler and payload builders; no live guild/token was used.",
+    "The repository could not be cloned in the local container because network access was unavailable; GitHub Actions is the executable validation environment."
+  ]
+}
