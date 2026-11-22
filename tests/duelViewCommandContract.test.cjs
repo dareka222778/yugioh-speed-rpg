@@ -17,12 +17,12 @@ const {starterContents}=require('../dist/cardCatalog');
 const {validateDiscordPayload}=require('../dist/discordPayload');
 const source=fs.readFileSync(path.join(__dirname,'../src/index.ts'),'utf8');
 
-const owner='m503-owner';
-const opponent='m503-opponent';
 const guild='m503-guild';
 const cards=style=>starterContents[style].flatMap(card=>Array(card.quantity).fill(card.id));
 
 function seed(id){
+  const owner=id+'-owner';
+  const opponent=id+'-opponent';
   const state=engine.createDuel([
     {id:owner,name:'Duelista Azul',cards:cards('warrior')},
     {id:opponent,name:'Duelista Vermelho',cards:cards('spellcaster')}
@@ -38,7 +38,7 @@ function seed(id){
   ).run(id,guild,'m503-channel','m503-message','playing',revision,Date.now(),JSON.stringify(state),null);
   db.prepare('INSERT INTO duel_members(owner,duel_id) VALUES(?,?)').run(owner,id);
   db.prepare('INSERT INTO duel_members(owner,duel_id) VALUES(?,?)').run(opponent,id);
-  return {id,state,revision};
+  return {id,state,revision,owner,opponent};
 }
 
 function inventory(state){
@@ -74,8 +74,8 @@ test('/duelo ver is registered, ephemeral, authenticated, and bound to the sourc
 
 test('currentDuel resolves only member-owned sessions and never returns a stranger session',()=>{
   const record=seed('m503-membership');
-  const ownerView=store.currentDuel(owner);
-  const opponentView=store.currentDuel(opponent);
+  const ownerView=store.currentDuel(record.owner);
+  const opponentView=store.currentDuel(record.opponent);
   assert.equal(ownerView.id,record.id);
   assert.equal(opponentView.id,record.id);
   assert.equal(store.currentDuel('m503-outsider'),undefined);
@@ -88,8 +88,8 @@ test('currentDuel resolves only member-owned sessions and never returns a strang
 test('private and public payloads validate while hiding every opponent hand UID and face-down identity',()=>{
   const record=seed('m503-privacy');
   const before=inventory(record.state);
-  const privateOwner=ui.duelPrivateMessage(store.getDuel(record.id),'m503-owner');
-  const privateOpponent=ui.duelPrivateMessage(store.getDuel(record.id),'m503-opponent');
+  const privateOwner=ui.duelPrivateMessage(store.getDuel(record.id),record.owner);
+  const privateOpponent=ui.duelPrivateMessage(store.getDuel(record.id),record.opponent);
   const publicPanel=ui.duelPublicMessage(store.getDuel(record.id));
   validateDiscordPayload(privateOwner);
   validateDiscordPayload(privateOpponent);
@@ -124,8 +124,8 @@ test('private and public payloads validate while hiding every opponent hand UID 
 test('private hand changes remain isolated between physical players after JSON restoration',()=>{
   const record=seed('m503-restoration');
   const loaded=store.getDuel(record.id);
-  const ownerBefore=ui.duelPrivateMessage(loaded,owner);
-  const opponentBefore=ui.duelPrivateMessage(loaded,opponent);
+  const ownerBefore=ui.duelPrivateMessage(loaded,record.owner);
+  const opponentBefore=ui.duelPrivateMessage(loaded,record.opponent);
   const ownerText=JSON.stringify(ownerBefore.embeds.map(embed=>embed.toJSON()));
   const opponentText=JSON.stringify(opponentBefore.embeds.map(embed=>embed.toJSON()));
   const ownHand=loaded.state.players[0].hand.map(card=>card.uid);
