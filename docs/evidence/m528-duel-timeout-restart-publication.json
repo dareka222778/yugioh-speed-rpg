@@ -42,5 +42,32 @@
     "deploy": false,
     "backupVerified": false,
     "liveDiscordGuild": false
+  },
+  "testExecution": {
+    "initialFocusedRun": {
+      "id": 45062935330,
+      "result": "failure",
+      "cause": "W.O. assertion regex escaped twice; no persistence or restart failure was reached"
+    },
+    "correctionCommit": "05cef5ec9145ce60ed1c30136bc1c89a441072f5",
+    "rerunFocusedRun": {
+      "id": 45063097439,
+      "result": "in_progress"
+    },
+    "cardBatchFast": {
+      "id": 45063097429,
+      "result": "in_progress"
+    },
+    "milestone1000": {
+      "id": 45063097418,
+      "result": "success",
+      "certified": 969,
+      "remaining": 31
+    },
+    "engineValidation": {
+      "id": 45063097428,
+      "result": "in_progress"
+    },
+    "limits": "No live Discord guild; restart behavior is exercised by separate Node processes against temporary SQLite."
   }
 }
