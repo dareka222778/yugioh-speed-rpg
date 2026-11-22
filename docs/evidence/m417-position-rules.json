@@ -1,0 +1,50 @@
+{
+  "format": 1,
+  "mission": "M417",
+  "reviewedAt": "2026-11-20",
+  "authority": "Konami official Yu-Gi-Oh! OCG Card Database",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "id": "59784896",
+      "name": "Dark Zebra",
+      "konamiCardDatabaseId": 4920,
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4920&ope=2&request_locale=ae",
+      "officialText": "If this is the only card in your control during your Standby Phase, it is automatically placed in Defense Position. You cannot change the position of this card during the same turn.",
+      "earliestOcgRelease": "2002-10-24",
+      "earliestOcgSet": "Spell Ruler (MRL-084)",
+      "historicalArchiveFirstObserved": "2002-06-20",
+      "historicalArchiveDateConflict": true,
+      "eligibilityBasis": "Official Konami OCG set date",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "39168895",
+      "name": "Berserk Gorilla",
+      "konamiCardDatabaseId": 5823,
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5823&ope=2&request_locale=ae",
+      "officialText": "If this card is in face-up Defense Position, destroy this card. This card must attack if able.",
+      "earliestOcgRelease": "2004-07-15",
+      "earliestOcgSet": "Invasion of Chaos (IOC-013)",
+      "historicalArchiveFirstObserved": "2003-04-24",
+      "historicalArchiveDateConflict": true,
+      "eligibilityBasis": "Official Konami OCG set date",
+      "eligibleAtHistoricalCutoff": true,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "implementationNotes": [
+    "Dark Zebra counts all team-controlled cards across the shared 3 Monster + 3 Spell/Trap + Field Zone layout; a partner-controlled card prevents the only-card condition.",
+    "Dark Zebra's position-change lock is keyed by physical UID and the current turn.",
+    "Berserk Gorilla's face-up Defense destruction is a state check, not a chain link.",
+    "Berserk Gorilla's mandatory attack is represented as a requirement only when the engine reports at least one legal attack; the helper never chooses a target.",
+    "Historical archive firstObserved dates conflict with official Konami OCG set dates for both cards; official dates are used for cutoff eligibility."
+  ],
+  "scope": "Isolated position-rule planner, tests, official evidence and focused workflow only. No card registry, catalog, certification, command, persistence or live duel integration.",
+  "certificationGate": "Do not certify until Dark Zebra's Standby Phase lock and Berserk Gorilla's continuous state/attack requirements are integrated into the real turn and battle resolvers."
+}
