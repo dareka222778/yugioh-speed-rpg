@@ -1,0 +1,73 @@
+{
+  "runId": "work-20261122T171834-0300-M532",
+  "mission": "M532",
+  "owner": "Work principal",
+  "parentRunId": "work-20261122T170217-0300-M531",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-22T17:18:34-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "78b2361bd84ce9ab7bca200b29230970b86d4a37",
+  "branch": "feat/work-m532-duel-invitation-restart-recovery-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "78b2361bd84ce9ab7bca200b29230970b86d4a37",
+  "priority": "P1 — provar que convites 1v1 pendentes sobrevivem ao reinício do processo: o registro e a revisão devem ser recuperados sem criar novo convite; Accept/Decline após restart deve criar exatamente os locks esperados ou liberar o criador, sem alterar inventário, Decks ou economia.",
+  "reservedFiles": [
+    "tests/duelInvitationRestartRecovery.test.cjs",
+    "docs/evidence/m532-duel-invitation-restart-recovery.json",
+    ".github/workflows/m532-duel-invitation-restart-recovery.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T17:18:34-03:00",
+    "checkedAgainst": [
+      "M527 #473 — timeout publication; arquivos próprios liberados ao auxiliar.",
+      "M528 #474 — timeout restart; CI integral success e arquivos próprios liberados.",
+      "M529 #475 — backpressure; CI integral success e arquivos próprios liberados.",
+      "M530 — concorrência entre pollers/ACKs; reserva ativa preservada.",
+      "M531 #476 — concorrência de criação/aceite; três arquivos próprios separados.",
+      "M506 — contrato de componentes de convite Discord; teste de handler em arquivo próprio.",
+      "M61 e todas as reservas de terceiros preservadas."
+    ],
+    "note": "M532 cobre somente persistência de convite pendente entre processos Node e resolução pós-restart. Nenhum arquivo de runtime, handler, store, catálogo ou dados persistentes será alterado."
+  },
+  "workBlocks": [
+    "Auditoria de testes existentes confirmou cobertura sequencial de challenge/accept e recuperação de duelo ativo, mas não a recuperação de convite pendente após restart.",
+    "M532 reservado em três caminhos novos e independentes; M531 permanece ativo enquanto Engine Validation/Extended Soak concluem."
+  ],
+  "tests": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null,
+    "limitations": "Subprocessos Node e SQLite temporário; sem guild/token real."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implementar restart de convite pendente e testar Accept/Decline após recuperação, revisão, locks e conservação de dados.",
+  "nextWindow": "2026-11-22T17:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}
