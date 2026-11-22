@@ -17,9 +17,10 @@ const deck31 = [...deck30, additionalMainId];
 const fusionIds = [...new Set(cards
   .filter(card => card.kind === 'monster' && card.monsterType === 'fusion' && getPlayableCard(card.id))
   .map(card => card.id))];
-assert.ok(fusionIds.length >= 3, 'the enabled catalog must provide three distinct Fusion cards');
-const extra5 = [fusionIds[0], fusionIds[1], fusionIds[2], fusionIds[0], fusionIds[1]];
-const extra6 = [...extra5, fusionIds[2]];
+assert.ok(fusionIds.length >= 2, 'the enabled catalog must provide two distinct Fusion cards');
+// Five Extra Deck cards can use two physical identities while respecting the three-copy limit.
+const extra5 = [fusionIds[0], fusionIds[0], fusionIds[0], fusionIds[1], fusionIds[1]];
+const extra6 = [...extra5, fusionIds[1]];
 
 function players(main, extra=[]) {
   return [0, 1, 2, 3].map(seat => ({
