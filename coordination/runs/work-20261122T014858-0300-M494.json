@@ -1,0 +1,61 @@
+{
+  "runId": "work-20261122T014858-0300-M494",
+  "mission": "M494",
+  "owner": "Work principal",
+  "priority": "P1 — preparar A Feint Plan (68170903) como bloque de combate temporário TagDuel: bloquear novas declarações de ataque contra monstros face-down durante o turno atual, preservar o ataque já declarado ao ativar em resposta e expirar no fim do turno.",
+  "startedAt": "2026-11-22T01:48:58-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m494-a-feint-plan-tag-adapter-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "838dd9603c6bc8bd34b1bd1053e977ed3ae777f6",
+  "sharedHeadAtReservation": "838dd9603c6bc8bd34b1bd1053e977ed3ae777f6",
+  "reservedFiles": [
+    "src/aFeintPlanTagAdapter.ts",
+    "tests/aFeintPlanTagAdapter.test.cjs",
+    "docs/evidence/m494-a-feint-plan-tag-adapter.json",
+    ".github/workflows/m494-a-feint-plan-tag-adapter.yml"
+  ],
+  "scope": [
+    "src/aFeintPlanTagAdapter.ts",
+    "tests/aFeintPlanTagAdapter.test.cjs",
+    "docs/evidence/m494-a-feint-plan-tag-adapter.json",
+    ".github/workflows/m494-a-feint-plan-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M492 PR #440 (auxiliary monitoring only)",
+      "M493 PR #441 (auxiliary monitoring only)",
+      "M487–M491 PRs #435–#439",
+      "M61 and all third-party reservations",
+      "A Feint Plan ID 68170903 absent from shared catalog/registry/branches/PRs"
+    ]
+  },
+  "workBlocks": [
+    "Rechecagem do HEAD e coordenação após M493; M492/M493 focused, Card Batch Fast e Milestone 1000 passaram; Engine Validation/Extended Soak seguem em execução.",
+    "M493 liberada ao auxiliar para CI remanescente e sincronização não-forçada, restrita aos quatro caminhos próprios.",
+    "Reserva M494 em quatro caminhos novos, sem sobreposição."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Aguardando implementação e CI remota; adapter temporário ainda não integrado ao resolver."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": "Nenhuma alteração de produção; sem workflow de deploy na branch compartilhada e sem backup de produção verificado.",
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implementar adapter A Feint Plan, testar janela de ativação, ataque já declarado, ataques futuros, alvos face-up/face-down e expiração; depois reconsultar HEAD/coordenação.",
+  "nextWindow": "2026-11-22T06:30:00-03:00"
+}
