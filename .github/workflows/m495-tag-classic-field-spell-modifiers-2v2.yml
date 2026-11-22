@@ -1,0 +1,36 @@
+name: M495 Tag Classic Field Spell Modifiers 2v2
+on:
+  push:
+    branches:
+      - feat/work-m495-tag-classic-field-spell-modifiers-2v2-20261122
+    paths:
+      - 'tests/tagClassicFieldSpellModifiers2v2.test.cjs'
+      - 'docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json'
+      - '.github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml'
+  pull_request:
+    paths:
+      - 'tests/tagClassicFieldSpellModifiers2v2.test.cjs'
+      - 'docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json'
+      - '.github/workflows/m495-tag-classic-field-spell-modifiers-2v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  field-spell-modifiers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m495-tag-classic-field-spell-modifiers-2v2.json', 'utf8'))"
+      - name: Run TagDuel Field Spell integration tests
+        run: node --test tests/tagClassicFieldSpellModifiers2v2.test.cjs
