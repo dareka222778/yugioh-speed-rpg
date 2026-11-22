@@ -1,0 +1,36 @@
+name: M503 1v1 Duel Private View Command Contract
+on:
+  push:
+    branches:
+      - feat/work-m503-duel-view-command-contract-20261122
+    paths:
+      - 'tests/duelViewCommandContract.test.cjs'
+      - 'docs/evidence/m503-duel-view-command-contract.json'
+      - '.github/workflows/m503-duel-view-command-contract.yml'
+  pull_request:
+    paths:
+      - 'tests/duelViewCommandContract.test.cjs'
+      - 'docs/evidence/m503-duel-view-command-contract.json'
+      - '.github/workflows/m503-duel-view-command-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-private-view-command-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m503-duel-view-command-contract.json', 'utf8'))"
+      - name: Run /duelo ver private view contract
+        run: node --test tests/duelViewCommandContract.test.cjs
