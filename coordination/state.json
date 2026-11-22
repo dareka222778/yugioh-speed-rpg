@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-22T16:34:36-03:00",
-  "lastActivityAt": "2026-11-22T16:52:00-03:00",
+  "lastActivityAt": "2026-11-22T16:56:00-03:00",
   "nextScheduledAt": "2026-11-22T17:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -4566,7 +4566,7 @@
     "targetMet": false,
     "ciWaitExcluded": true
   },
-  "nextTask": "Finalizar Engine Validation/Extended Soak M527 #473 e M528 #474; executar M529 backpressure do outbox 1v1; preservar bloqueio de handoff M61.",
+  "nextTask": "Acompanhar M527/M528 Engine Validation e Extended Soak; executar CI M529; depois liberar os três escopos ao auxiliar para sync sem force/monitoramento, sem merge/deploy.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1 — testar publicação terminal de timeout 1v1 com polling repetido e ACK de revisão: convite expira aos 120 s; duelo encerra por W.O. aos 30 min; uma única revisão/evento, ACK obsoleto não limpa fila, ACK correto/duplicado é idempotente; locks, Decks, mãos, UIDs, privacidade e economia preservados.",
   "sharedHeadBeforeClaim": "c376248196fc4458c47e2ff7dbb55d438031afed",
@@ -7089,7 +7089,7 @@
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261122T165200-0300-M529.json",
-  "lastParallelActivityAt": "2026-11-22T16:52:00-03:00",
+  "lastParallelActivityAt": "2026-11-22T16:56:00-03:00",
   "sharedHeadAfterCheckpoint": "ea907a31daf5c5cafb521e99053a5763483558c5",
   "sharedHeadBeforeStateUpdate": "5dc132241fae3b2d9938022ccddb7e2c20750661",
   "endedAt": "2026-11-21T16:48:08.301-03:00",
@@ -7817,7 +7817,7 @@
       "priority": "P1 — validar a projeção Discord do LP compartilhado em todas as quatro rotações iniciais 2v2, com menu privado somente para o representante ativo, privacidade de mãos e continuidade de revisão após End Phase."
     }
   ],
-  "updatedAt": "2026-11-22T16:52:00-03:00",
+  "updatedAt": "2026-11-22T16:56:00-03:00",
   "lastCheckpointCommit": "93d914f6a97b31a165fd2758f156e97dfc231c62",
   "concurrentReservations": [
     {
@@ -13563,7 +13563,7 @@
       "parentRunId": "work-20261122T163436-0300-M527",
       "branch": "feat/work-m529-duel-timeout-outbox-backpressure-20261122",
       "state": "reserved-and-implementing",
-      "pr": null
+      "pr": 475
     }
   ],
   "subtaskReservationM521": {
@@ -13731,7 +13731,7 @@
       "build": "success",
       "cardBatchFast": "success (45063136073)",
       "milestone1000": "success (45063136055)",
-      "engineValidation": "in_progress (45063136059; npm test + 600s soak)",
+      "engineValidation": "in_progress (45063136059; stress suite + 600s soak)",
       "extendedSoak": "in_progress",
       "limitations": "SQLite temporário e payloads Discord offline; sem guild/token real."
     },
@@ -13822,7 +13822,7 @@
       "build": "success",
       "cardBatchFast": "success (45063169579)",
       "milestone1000": "success (45063169544)",
-      "engineValidation": "in_progress (45063169542; 600s soak)",
+      "engineValidation": "in_progress (45063169542; stress suite + 600s soak)",
       "extendedSoak": "in_progress (600s)"
     },
     "catalog": {
@@ -13885,7 +13885,7 @@
     "owner": "Work principal",
     "priority": "P1 — provar drenagem bounded do outbox terminal 1v1: 205 revisões expiradas devem ser entregues em lotes de no máximo 100, sem perda, duplicação ou starvation; ACK por revisão deve drenar 100+100+5 e sobreviver a ACK repetido.",
     "startedAt": "2026-11-22T16:52:00-03:00",
-    "lastActivityAt": "2026-11-22T16:52:00-03:00",
+    "lastActivityAt": "2026-11-22T16:56:00-03:00",
     "endedAt": null,
     "state": "reserved-and-implementing",
     "branch": "feat/work-m529-duel-timeout-outbox-backpressure-20261122",
@@ -13914,17 +13914,18 @@
       "note": "Somente novos teste/evidência/workflow; SQLite temporário, runtime/store somente leitura."
     },
     "workBlocks": [
-      "Reserva M529 registrada após revisão dos HEADs/CI M527/M528; ambas as suítes focadas e Card Batch Fast/Milestone 1000 passaram; Engine Validation/soak seguem em execução."
+      "Reverificado HEAD compartilhado 38e9d11d528a6bc7aa6ef4014c599d8adf6e837b e coordenação; M527/M528 continuam ativos aguardando Engine Validation/soak.",
+      "M529 reservado em escopo novo para backpressure do outbox 1v1; não sobrepõe M527/M528.",
+      "PR #475 aberta em draft; Card Batch Fast, Milestone 1000, Engine Validation e teste focado enfileirados."
     ],
     "tests": {
-      "focused": null,
+      "focused": "queued (run 45063576160)",
       "check": null,
       "build": null,
-      "cardBatchFast": null,
-      "milestone1000": null,
-      "engineValidation": null,
-      "extendedSoak": null,
-      "limitations": "205 registros terminais sintéticos em SQLite temporário; sem guild/token real."
+      "cardBatchFast": "queued (45063576154)",
+      "milestone1000": "queued (45063576169)",
+      "engineValidation": "queued (45063576215)",
+      "extendedSoak": "queued"
     },
     "catalog": {
       "certified": 969,
@@ -13943,10 +13944,22 @@
       "merge": false,
       "deploy": false
     },
-    "pr": null,
+    "pr": {
+      "number": 475,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/475",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "base": "feat/rea-engine-recovery-20261026",
+      "baseSha": "e5a91b2b5177624b9d737e233ccf10eafd0d0cd4",
+      "head": "feat/work-m529-duel-timeout-outbox-backpressure-20261122",
+      "headSha": "02a6f91c812c93c2aef3726c1d9a526b7481abed"
+    },
     "releaseToAuxiliary": [],
     "nextTask": "Testar o limite de 100 registros por polling e drenagem eventual do outbox em lotes 100/100/5.",
-    "nextWindow": "2026-11-22T17:30:00-03:00"
+    "nextWindow": "2026-11-22T17:30:00-03:00",
+    "branchHead": "02a6f91c812c93c2aef3726c1d9a526b7481abed"
   },
   "subtaskReservationM529": {
     "runId": "work-20261122T165200-0300-M529",
@@ -13963,6 +13976,8 @@
       "tests/duelTimeoutOutboxBackpressure.test.cjs",
       "docs/evidence/m529-duel-timeout-outbox-backpressure.json",
       ".github/workflows/m529-duel-timeout-outbox-backpressure.yml"
-    ]
+    ],
+    "pr": 475,
+    "headSha": "02a6f91c812c93c2aef3726c1d9a526b7481abed"
   }
 }
