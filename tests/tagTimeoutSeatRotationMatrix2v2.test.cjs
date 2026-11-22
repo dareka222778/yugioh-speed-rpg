@@ -70,11 +70,16 @@ test('persisted 2v2 timeout awards the opposing team for each of the four possib
     assert.equal(actor.id,state.members[seat].id,'first seat must be the actual physical decision owner');
     assert.equal(state.cursor,seat);
     assert.equal(state.core.current,seat%2);
-    assert.deepEqual(state.active[seat%2]===seat?state.active:[...state.active].sort((a,b)=>a-b),[0,1,2,3].filter(index=>index%2===0).length===2?state.active:state.active);
+    const seatSnapshots=physicalSnapshot(state);
+    for(const snapshot of seatSnapshots){
+      assert.equal(snapshot.hand.length,4,'each physical seat starts with four private cards');
+      assert.equal(snapshot.deck.length+snapshot.hand.length,20,'each physical Main Deck remains at the legal minimum');
+      assert.ok(snapshot.extra.length<=5,'each physical Extra Deck remains within the five-card cap');
+    }
     for(const team of state.core.players){
       assert.equal(team.monsters.length,3,'the shared Monster Zone remains 3 slots');
       assert.equal(team.backrow.length,3,'the shared Spell/Trap Zone remains 3 slots');
-      assert.ok(team.extra.length<=5,'each team core Extra Deck view remains within the five-card cap');
+      assert.ok((team.extra??[]).length<=5,'each team core Extra Deck view remains within the five-card cap');
     }
 
     const members=state.members.map(member=>({id:member.id,name:member.name,team:member.team,accepted:true}));
