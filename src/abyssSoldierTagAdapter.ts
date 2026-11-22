@@ -68,8 +68,9 @@ export function payAbyssSoldierTagCost(
  * expose their card ID or name; the UID remains internal for resolution.
  */
 export function abyssSoldierTagTargetViews(
- s:DuelState,getCardName:(id:string)=>string|undefined,
+ s:DuelState,team:number,activeSeat:number,getCardName:(id:string)=>string|undefined,
 ):AbyssSoldierTargetView[]{
+ assertActiveRepresentative(s,team,activeSeat);
  return abyssSoldierFieldTargets(s).map((target)=>{
   const ref=fieldRef(s,target);
   if(!ref)throw new Error('A carta escolhida não está mais no campo.');
