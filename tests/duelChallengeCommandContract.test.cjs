@@ -47,7 +47,7 @@ test('/duelo desafiar is a public human-to-human command with a required opponen
   const handler=handlerSource();
   assert.match(handler,/await deferReply\(action==='ver'\|\|action==='sair'\?\{flags:MessageFlags\.Ephemeral\}:\{\}\)/,
     'challenge creation must not be accidentally made ephemeral');
-  assert.match(handler,/const other=i\.options\.getUser\('oponente',true\);if\(other\.bot\)throw Error\('Para enfrentar o bot, use \/duelo treino\.'\);r=challenge\(id,other\.id,i\.guildId,i\.channelId\)/,
+  assert.match(handler,/const other=i\.options\.getUser\('oponente',true\);if\(other\.bot\)throw new Error\('Para enfrentar o bot, use \/duelo treino\.'\);r=challenge\(id,other\.id,i\.guildId,i\.channelId\)/,
     'bots must be redirected to the training command and human challenges must use the authenticated owner');
   assert.match(handler,/const message=await i\.editReply\(await arenaPayload\(r\)\);setDuelMessage\(r\.id,message\.channelId,message\.id,r\.revision\)/,
     'the public invitation must be published and its message/revision persisted');
