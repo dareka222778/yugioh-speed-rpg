@@ -5,10 +5,9 @@ import {
  abyssSoldierFieldTargets,
  payAbyssSoldierDiscard,
  resolveAbyssSoldierTarget,
- type FieldCardTarget,
- type TypedDiscardCardLookup,
- type FieldCardLookup,
 } from './abyssSoldier';
+import type {FieldCardTarget,FieldCardLookup} from './fieldCardReturn';
+import type {TypedDiscardCardLookup} from './typedDiscard';
 
 export const ABYSS_SOLDIER_TAG_ADAPTER=Object.freeze({
  cardId:ABYSS_SOLDIER_ID,
@@ -75,7 +74,7 @@ export function abyssSoldierTagTargetViews(
    controller:target.controller,
    ownerTeam:target.ownerTeam,
    zone:target.zone,
-   visibility:visible?'public':'hidden',
+   visibility:visible?'public' as const:'hidden' as const,
   };
  });
 }
