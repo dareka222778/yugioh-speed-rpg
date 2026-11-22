@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "mission": "M523",
+  "runId": "work-20261122T122700-0300-M523",
+  "title": "TagDuel timeout publication idempotency",
+  "priority": "P1 — garantir que timeout terminal seja persistido uma única vez e que somente o ACK da revisão atual retire o painel da fila pública.",
+  "branch": "feat/work-m523-tag-timeout-publication-idempotency-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c376248196fc4458c47e2ff7dbb55d438031afed",
+  "scope": [
+    "tests/tagTimeoutPublicationIdempotency.test.cjs",
+    "docs/evidence/m523-tag-timeout-publication-idempotency.json",
+    ".github/workflows/m523-tag-timeout-publication-idempotency.yml"
+  ],
+  "behavior": {
+    "lobby": "Polling repetido em dueTags expira convite exatamente uma vez, libera locks e mantém painel terminal até ACK da revisão correspondente.",
+    "duel": "Polling repetido persiste um único duelFinished/W.O., conserva quatro mãos/Decks/Extra físicos e mantém UIDs privados fora da projeção pública.",
+    "publication": "markTagPublished com revisão obsoleta não altera public_revision; ACK correspondente limpa a fila; ACK duplicado é idempotente.",
+    "isolation": "SQLite temporário; nenhum perfil, coleção, Deck persistente ou inventário é criado ou alterado."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "openingHand": 4,
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "validation": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "Sem conexão com guild Discord real.",
+    "Teste cobre store/outbox e builders públicos; não altera handler, UI, store, engine ou catálogo.",
+    "Sem merge/deploy/produção."
+  ],
+  "status": "pending-ci"
+}
