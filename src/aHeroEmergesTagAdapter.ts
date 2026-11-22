@@ -78,6 +78,9 @@ export function prepareAHeroEmerges(
   const defendingTeam = (1 - attackingTeam) as AHeroTeam;
   const defenderSeat = state.teamRotation.active[defendingTeam];
   const chooserSeat = state.teamRotation.active[attackingTeam];
+  if (state.players[attackingTeam].backrow.some(card => card.uid === sourceUid)) {
+    throw new Error('A Hero Emerges só pode ser ativada pela equipe que está sendo atacada.');
+  }
   const source = state.players[defendingTeam].backrow.find(card => card.uid === sourceUid);
   if (!source || source.id !== A_HERO_EMERGES_ID || !source.faceUp || source.resolved || source.setTurn >= state.turn) {
     throw new Error('A Hero Emerges precisa ser uma Armadilha Setada em turno anterior e ativada face-up.');

@@ -147,7 +147,7 @@ test('a declaration by the defending team is not a legal trigger', () => {
   state.current=0;
   state.pending.actor=0;
   state.pending.card='m0:attacker';
-  assert.throws(()=>prepare(state),/monstro adversário/);
+  assert.throws(()=>prepare(state),/equipe que está sendo atacada/);
 });
 
 test('the card selected after activation is revalidated against the current hand', () => {
