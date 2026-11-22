@@ -3,7 +3,7 @@
   "mission": "M529",
   "parentRunId": "work-20261122T163436-0300-M527",
   "owner": "Work principal",
-  "status": "reserved-and-implementing",
+  "status": "code-complete; released-to-auxiliary",
   "startedAt": "2026-11-22T16:52:00-03:00",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "38e9d11d528a6bc7aa6ef4014c599d8adf6e837b",
@@ -30,16 +30,17 @@
   "workBlocks": [
     "Reverificado HEAD compartilhado 38e9d11d528a6bc7aa6ef4014c599d8adf6e837b e coordenação; M527/M528 continuam ativos aguardando Engine Validation/soak.",
     "M529 reservado em escopo novo para backpressure do outbox 1v1; não sobrepõe M527/M528.",
-    "PR #475 aberta em draft; Card Batch Fast, Milestone 1000, Engine Validation e teste focado enfileirados."
+    "PR #475 aberta em draft; Card Batch Fast, Milestone 1000, Engine Validation e teste focado enfileirados.",
+    "Finalização de código e handoff em 2026-11-22T17:02:17-03:00: PR #475 aberta em draft; CI observada pelo Work; escopo próprio liberado ao auxiliar apenas para monitoramento/sincronização não-forçada e correções nos três arquivos da missão. Sem merge/deploy."
   ],
   "tests": {
-    "focused": "queued (run 45063576160)",
-    "check": null,
-    "build": null,
-    "cardBatchFast": "queued (45063576154)",
-    "milestone1000": "queued (45063576169)",
-    "engineValidation": "queued (45063576215)",
-    "extendedSoak": "queued"
+    "focused": "success (45063576160)",
+    "check": "success",
+    "build": "success",
+    "cardBatchFast": "success (45063576154)",
+    "milestone1000": "success (45063576169; 969/1000)",
+    "engineValidation": "in_progress (45063576215)",
+    "extendedSoak": "in_progress (45063576215)"
   },
   "catalog": {
     "certified": 969,
@@ -68,8 +69,21 @@
     "headSha": "02a6f91c812c93c2aef3726c1d9a526b7481abed",
     "baseSha": "e5a91b2b5177624b9d737e233ccf10eafd0d0cd4"
   },
-  "releaseToAuxiliary": [],
-  "nextTask": "Testar 205 revisões terminais, lotes 100/100/5, ACK idempotente e fila vazia.",
+  "releaseToAuxiliary": [
+    {
+      "path": "tests/duelTimeoutOutboxBackpressure.test.cjs",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    },
+    {
+      "path": "docs/evidence/m529-duel-timeout-outbox-backpressure.json",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    },
+    {
+      "path": ".github/workflows/m529-duel-timeout-outbox-backpressure.yml",
+      "permission": "monitor/sync non-forced/correct only this mission's own file"
+    }
+  ],
+  "nextTask": "Auxiliar: monitorar Engine Validation/Extended Soak da PR #475, sincronizar sem force e corrigir somente seus três arquivos.",
   "nextWindow": "2026-11-22T17:30:00-03:00",
   "duration": {
     "targetEffectiveMinutes": 60,
@@ -77,6 +91,7 @@
     "targetMet": false,
     "ciWaitExcluded": true
   },
-  "lastActivityAt": "2026-11-22T16:56:00-03:00",
-  "branchHead": "02a6f91c812c93c2aef3726c1d9a526b7481abed"
+  "lastActivityAt": "2026-11-22T17:02:17-03:00",
+  "branchHead": "02a6f91c812c93c2aef3726c1d9a526b7481abed",
+  "endedAt": "2026-11-22T17:02:17-03:00"
 }
