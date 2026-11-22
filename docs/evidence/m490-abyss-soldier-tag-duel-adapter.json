@@ -14,7 +14,7 @@
     "docs/evidence/m490-abyss-soldier-tag-duel-adapter.json",
     ".github/workflows/m490-abyss-soldier-tag-duel-adapter.yml"
   ],
-  "testCount": 9,
+  "testCount": 11,
   "behavior": [
     "Janela de ativação limitada à Main Phase.",
     "Contrato once-per-turn e janela Main Phase.",
@@ -23,7 +23,8 @@
     "Alvos face-down são projetados como 'Carta oculta'; o ID/nome não é retornado nem consultado.",
     "Resolução por UID preserva controlador versus proprietário físico.",
     "Monstro roubado retorna à mão privada do proprietário físico; Fusion retorna ao Extra Deck físico; Token é removido.",
-    "Assento inativo não pode pagar o custo nem resolver como representante."
+    "Assento inativo não pode pagar o custo nem resolver como representante.",
+    "A enumeração de alvos é limitada ao representante físico ativo da equipe."
   ],
   "rules": {
     "mainDeckMin": 20,
