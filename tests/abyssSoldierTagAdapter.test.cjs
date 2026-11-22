@@ -21,6 +21,7 @@ function state() {
   return {
     players: [player('team0'), player('team1')],
     turn: 1,
+    phase: 'main',
     teamRotation: {
       version: 1,
       cursor: 0,
@@ -99,6 +100,22 @@ test('inactive partner cannot pay the cost or resolve the effect as representati
   assert.throws(
     () => resolveAbyssSoldierTagTarget(s, 0, 2, 'm1:target', getCard),
     /representante ativo/,
+  );
+  assert.deepEqual(s, before);
+});
+
+test('Abyss Soldier cost is unavailable outside Main Phase', () => {
+  const s = state();
+  s.players[0].hand = [{ uid: 'm0:water', id: 'water' }];
+  s.phase = 'battle';
+  const before = structuredClone(s);
+  assert.throws(
+    () => abyssSoldierTagCostTargets(s, 0, 0, getCard),
+    /Main Phase/,
+  );
+  assert.throws(
+    () => payAbyssSoldierTagCost(s, 0, 0, 'm0:water', getCard),
+    /Main Phase/,
   );
   assert.deepEqual(s, before);
 });
