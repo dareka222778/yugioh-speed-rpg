@@ -149,3 +149,14 @@ test('the plan is immutable and never changes cards, Decks, hands or the shared 
   assert.equal(state.teamRotation.reserves[2].deck[0].uid,'m2:partner-draw');
   assert.equal(plan.drawSeat,activation.activeSeat);
 });
+
+test('the effect plans all three draws even above six cards; End Phase, not activation, owns the hand check',()=>{
+  const state=makeState();
+  state.players[0].hand=Array.from({length:5},(_,i)=>({uid:'m0:hand-'+i,id:'HAND_'+i}));
+  const before=structuredClone(state),activation=prepare(state);
+  const plan=resolveThreeHumpLacooda(state,activation,['m2:lacooda-b','m0:lacooda-a']);
+  assert.equal(plan.drawCount,3,'the draw is not truncated to the one free hand slot');
+  assert.equal(state.players[0].hand.length,5,'the adapter never discards during effect resolution');
+  assert.equal(state.teamRotation.reserves[2].hand.length,0,'the inactive partner hand stays private and unchanged');
+  assert.deepEqual(state,before);
+});
