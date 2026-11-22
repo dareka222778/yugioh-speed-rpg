@@ -1,0 +1,36 @@
+name: M510 Tag Lobby Creation Atomicity
+on:
+  push:
+    branches:
+      - feat/work-m510-tag-lobby-creation-atomicity-20261122
+    paths:
+      - 'tests/tagLobbyCreationAtomicity2v2.test.cjs'
+      - 'docs/evidence/m510-tag-lobby-creation-atomicity.json'
+      - '.github/workflows/m510-tag-lobby-creation-atomicity.yml'
+  pull_request:
+    paths:
+      - 'tests/tagLobbyCreationAtomicity2v2.test.cjs'
+      - 'docs/evidence/m510-tag-lobby-creation-atomicity.json'
+      - '.github/workflows/m510-tag-lobby-creation-atomicity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-lobby-creation-atomicity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m510-tag-lobby-creation-atomicity.json', 'utf8'))"
+      - name: Run 2v2 lobby creation transaction tests
+        run: node --test tests/tagLobbyCreationAtomicity2v2.test.cjs
