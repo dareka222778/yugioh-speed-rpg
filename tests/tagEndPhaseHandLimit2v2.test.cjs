@@ -21,7 +21,6 @@ function physicalInventory(state) {
 
 test('2v2 End Phase discards to six before the next physical seat draws, including after JSON restore', () => {
   let state = createClassicTag();
-  state.core.rulesVersion = 'speed-rpg-v2';
   const active = tag.tagDecisionMember(state);
   assert.equal(active.id, 'm485-seat-0');
   assert.equal(rulesFor(state.core).handLimit, 6);
@@ -82,7 +81,6 @@ test('2v2 End Phase discards to six before the next physical seat draws, includi
 
 test('a seven-card hand does not trigger a draw-time discard; the check belongs to End Phase', () => {
   const state = createClassicTag();
-  state.core.rulesVersion = 'speed-rpg-v2';
   const active = tag.tagDecisionMember(state);
   const player = state.core.players[0];
   player.hand.push(...player.deck.splice(0, 3));
