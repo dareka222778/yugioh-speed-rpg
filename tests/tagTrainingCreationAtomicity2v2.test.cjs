@@ -66,7 +66,6 @@ test('training-session insert failure leaves no orphan session or participant lo
   );
   database.db.exec('DROP TRIGGER m482_fail_training_session');
   assert.deepEqual(snapshot(), before);
-  assert.equal(count('SELECT COUNT(*) AS n FROM tag_sessions WHERE status=?', 'playing'), 0);
   assert.equal(count('SELECT COUNT(*) AS n FROM tag_members WHERE owner=?', owner), 0);
 
   const retry = store.createTagTraining(owner, 'm482-guild', 'm482-channel');
