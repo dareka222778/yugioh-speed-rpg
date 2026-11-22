@@ -1,0 +1,40 @@
+{
+  "mission": "M487",
+  "title": "Deck editor revision and active-slot integrity",
+  "baseline": {
+    "certifiedCards": 969,
+    "target": 1000,
+    "remaining": 31
+  },
+  "files": [
+    "tests/deckEditorRevisionIntegrity.test.cjs",
+    "docs/evidence/m487-deck-editor-revision-integrity.json",
+    ".github/workflows/m487-deck-editor-revision-integrity.yml"
+  ],
+  "rules": {
+    "mainDeck": "20–30 cards",
+    "extraDeck": "maximum 5",
+    "copiesPerCard": 3,
+    "slots": 3,
+    "collection": "Deck editing never consumes or grants collection cards",
+    "activeDeck": "at most one active slot per player"
+  },
+  "scenarios": [
+    "Stale revision rejected by changeDeck, renameDeck and activateDeck with full SQLite snapshot unchanged",
+    "Editing an active Deck below 20 Main Deck cards deactivates only that slot",
+    "Activating slot 2 deactivates slot 1; incomplete slot 3 cannot displace the active Deck",
+    "Discord deckMessage/deckCardMessage payloads validate and custom IDs remain owner-bound",
+    "A card present only in another player's collection cannot be inspected through the first player's Deck editor"
+  ],
+  "environment": "Temporary SQLite database; test fixtures inserted only into the isolated test database; no production database or player inventory touched.",
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "This is a Deck editor/data-integrity suite, not a card behavior certification."
+  },
+  "limitations": [
+    "No live Discord API/token interaction; actual builders and payload validation are exercised offline.",
+    "No production deployment or persistent database mutation.",
+    "Full Engine Validation and Extended Soak remain separate CI gates."
+  ]
+}
