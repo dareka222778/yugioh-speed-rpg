@@ -136,6 +136,23 @@ test('M514 duplicate Discord delivery replays one TagDuel action receipt without
   assert.equal(reused.result.edits.length,0);
   assert.deepEqual(reusedRefresh,[]);
   assert.deepEqual(stateSnapshot(record),afterFirst,'reusing a request ID for a different action must fail closed');
+
+  const stale=interaction(actionId,'m514-stale-new-request-'+record.id,actor,[String(actionIndex)]);
+  const staleRefresh=[];
+  await assert.rejects(
+    handleTagComponent(
+      stale.value,
+      async next=>staleRefresh.push(next.revision),
+      kind=>stale.events.push('defer-callback:'+kind),
+      {public:async next=>tagPublicMessage(next),private:async(next,owner)=>tagPrivateMessage(next,owner)}
+    ),
+    /Painel desatualizado/
+  );
+  assert.equal(stale.result.deferred,true);
+  assert.deepEqual(stale.events,['ack','defer-callback:update']);
+  assert.equal(stale.result.edits.length,0);
+  assert.deepEqual(staleRefresh,[]);
+  assert.deepEqual(stateSnapshot(record),afterFirst,'a new request with an obsolete revision must fail without mutation');
 });
 
 after(()=>{
