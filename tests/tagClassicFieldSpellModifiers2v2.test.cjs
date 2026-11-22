@@ -30,7 +30,8 @@ const MONSTERS={
   fairy:'16972957',         // Doma The Angel of Silence
   otherFiend:'41392891'     // Feral Imp
 };
-const trapIds=enabledCardIds.filter(id=>engineCard(id)?.kind==='trap').slice(0,3);
+const magicJammerId='77414722';
+const trapIds=[magicJammerId,...enabledCardIds.filter(id=>engineCard(id)?.kind==='trap'&&id!==magicJammerId).slice(0,2)];
 const normalIds=[...new Set(tag.tagNormalCardIds)]
   .filter(id=>!Object.values(MONSTERS).includes(id))
   .slice(0,6);
@@ -58,6 +59,8 @@ for(const [race,id] of Object.entries(MONSTERS)){
   assert.equal(card.monsterType,'normal');
   assert.ok(tag.tagNormalCardIds.includes(id),race+' fixture must be legal in classic 2v2');
 }
+assert.ok(getPlayableCard(magicJammerId),'Magic Jammer must be certified and playable');
+assert.equal(getEffect(magicJammerId)?.kind,'magicJammer');
 const deckPool=[...new Set([...FIELD_IDS,...Object.values(MONSTERS),...trapIds,...normalIds])];
 assert.ok(deckPool.length>=20,'the deterministic deck pool must contain at least twenty unique cards');
 const deckIds=deckPool.slice(0,20);
@@ -97,7 +100,7 @@ function addMonster(state,seat,id){
   state.core.players[team].monsters.push(value);
   return value;
 }
-function makeGame(seed,monsterEntries){
+function makeGame(seed,monsterEntries,fillBackrow=true){
   const players=[0,1,2,3].map(seat=>({
     id:member(seat),
     name:'M495 Seat '+seat,
@@ -106,11 +109,11 @@ function makeGame(seed,monsterEntries){
   const state=tag.createTagDuel(players,{classic:true,first:0,seed});
   state.core.turn=3;
   const monsters=monsterEntries.map(([seat,id])=>addMonster(state,seat,id));
-  for(const id of trapIds){
+  if(fillBackrow)for(const id of trapIds){
     const card=take(state,0,id);
     state.core.players[0].backrow.push({...card,setTurn:state.core.turn,faceUp:false});
   }
-  assert.equal(state.core.players[0].backrow.length,3);
+  assert.equal(state.core.players[0].backrow.length,fillBackrow?3:0);
   assert.ok(state.core.players[0].monsters.length<=3);
   assert.ok(state.core.players[1].monsters.length<=3);
   tag.assertTagDuel(state);
@@ -327,6 +330,59 @@ test('replacing Sogen with Mountain sends the old Field Spell to the shared GY a
     'the replaced Field Spell must enter the shared Graveyard with its original UID');
   assertStats(record.state,[[monsters[0],0],[monsters[1],200]],
     'the replaced Sogen modifier ends immediately and Mountain applies to Dragon');
+  assertInventoryConserved(record.state,before);
+  assertRules(record.state);
+  tag.assertTagDuel(JSON.parse(JSON.stringify(record.state)));
+  assertPayloads(record);
+});
+
+
+test('Magic Jammer can negate a Field Spell activation through the opponent private 2v2 Discord menu',async()=>{
+  const {state,monsters}=makeGame('m495-magic-jammer-negates-field',[
+    [0,MONSTERS.warrior]
+  ],false);
+  const before=inventorySnapshot(state);
+  const source=ensureInHand(state,0,'86318356');
+  const discard=ensureInHand(state,1,normalIds[0]);
+  const jammer=take(state,1,magicJammerId);
+  state.core.players[1].backrow.push({...jammer,setTurn:1,faceUp:false});
+  tag.assertTagDuel(state);
+  assertRules(state);
+  const handsBefore=new Map([0,1,2,3].map(seat=>[
+    seat,tag.tagMemberHand(state,member(seat)).map(card=>card.uid)
+  ]));
+  let record=register(state,'magic-jammer-negates-field');
+  record=await submitAction(record,action=>action.kind==='field'&&action.card===source.uid,'magic-jammer-field-activate');
+  assert.equal(record.state.core.phase,'response','a legal Counter Trap keeps the Field Spell activation pending');
+  assert.equal(record.state.core.pending.kind,'field');
+  assert.equal(record.state.core.players[0].field.uid,source.uid);
+  assert.equal(record.state.core.players[0].field.resolved,false);
+  assert.equal(tag.tagDecisionMember(record.state).id,member(1),'the opposing active physical representative receives response priority');
+
+  const responseActions=tag.tagActions(record.state,member(1));
+  const jammerIndex=responseActions.findIndex(action=>
+    action.kind==='trap'&&action.card===jammer.uid&&action.target===source.uid&&
+    action.discards?.length===1&&action.discards[0]===discard.uid
+  );
+  assert.ok(jammerIndex>=0,'Magic Jammer must target the pending Field Spell and expose its exact discard cost');
+  record=await submit(record,member(1),jammerIndex,'m495-magic-jammer-chain-'+record.revision);
+
+  assert.equal(record.state.core.phase,'main','the Counter Trap chain resolves when no further legal response exists');
+  assert.equal(record.state.core.players[0].field,null,'a negated Field Spell activation must not remain in the Field Zone');
+  assert.ok(record.state.core.players[0].grave.some(card=>card.uid===source.uid&&card.id==='86318356'),
+    'the negated Field Spell must enter the activating team shared Graveyard');
+  assert.ok(record.state.core.players[1].grave.some(card=>card.uid===jammer.uid&&card.id===magicJammerId),
+    'Magic Jammer must enter the responding team shared Graveyard');
+  assert.ok(record.state.core.players[1].grave.some(card=>card.uid===discard.uid),
+    'the discard cost must be paid exactly once by the responding physical seat');
+  assertStats(record.state,[[monsters[0],0]],'a negated Field Spell must not apply its continuous modifier');
+  for(const seat of [0,1,2,3]){
+    const expected=handsBefore.get(seat).filter(uid=>
+      !(seat===0&&uid===source.uid)&&!(seat===1&&uid===discard.uid)
+    );
+    assert.deepEqual(tag.tagMemberHand(record.state,member(seat)).map(card=>card.uid),expected,
+      'Magic Jammer may change only the activating Field Spell and the responding physical seat discard');
+  }
   assertInventoryConserved(record.state,before);
   assertRules(record.state);
   tag.assertTagDuel(JSON.parse(JSON.stringify(record.state)));
