@@ -14,8 +14,9 @@
     "docs/evidence/m490-abyss-soldier-tag-duel-adapter.json",
     ".github/workflows/m490-abyss-soldier-tag-duel-adapter.yml"
   ],
-  "testCount": 8,
+  "testCount": 9,
   "behavior": [
+    "Janela de ativação limitada à Main Phase.",
     "Contrato once-per-turn e janela Main Phase.",
     "Custo: exatamente um monstro WATER da mão privada do representante ativo.",
     "Alvos: monstros, backrow e Field Spell de ambas as equipes.",
