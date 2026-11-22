@@ -1,0 +1,42 @@
+{
+  "mission": "M481",
+  "title": "TagDuel lobby-expiry transaction rollback under SQLite write faults",
+  "branch": "feat/work-m481-tag-lobby-expiry-rollback-atomicity-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "25028fad6e1f27b96fc55304ae184d56dbc14821",
+  "testFile": "tests/tagLobbyExpiryRollbackAtomicity2v2.test.cjs",
+  "testCount": 2,
+  "scenarios": [
+    "At the exact five-minute lobby deadline, a SQLite trigger aborts the tag_sessions update to status=expired. The original row, revision, event set, accepted-host lock and player collections must remain unchanged; after removing the trigger, retry expires the lobby and releases the host lock.",
+    "At the exact five-minute lobby deadline, a SQLite trigger aborts deletion of the accepted-host lock after the expiry row update. The transaction must roll back the row and lock together; retry expires the lobby and releases the lock without creating duel state or events."
+  ],
+  "invariants": [
+    "The lobby expires at the exact five-minute deadline without extending on retry.",
+    "Status, revision and accepted-host lock are atomic.",
+    "A failed expiry does not leave an orphaned session or a partially released participant lock.",
+    "Player rows and player_cards remain unchanged; no starter cards or inventory are granted by expiry.",
+    "Expired lobbies have no duel state and no transition-event row."
+  ],
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "limits": [
+    "Tests use temporary SQLite and the real compiled TagStore module.",
+    "Fault injection covers SQL trigger aborts, not process termination or filesystem corruption.",
+    "No runtime, resolver, catalog manifest, allowlist, persistent database or player data is modified.",
+    "This is a lobby-storage regression and certifies no new card behavior.",
+    "No live Discord API session is performed."
+  ],
+  "command": "npm run check && npm run build && node --test tests/tagLobbyExpiryRollbackAtomicity2v2.test.cjs",
+  "ciStatus": "pending"
+}
