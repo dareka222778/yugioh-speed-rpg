@@ -4,9 +4,9 @@
   "owner": "Work principal",
   "priority": "P1 — proteger /dupla simular: garantir que a simulação de quatro bots permaneça isolada, use apenas monstros Normais, sobreviva às restaurações JSON e não crie sessões, locks, cartas ou progresso de jogadores.",
   "startedAt": "2026-11-22T06:56:00-03:00",
-  "lastActivityAt": "2026-11-22T06:56:00-03:00",
-  "endedAt": null,
-  "state": "reserved-and-implementing",
+  "lastActivityAt": "2026-11-22T07:26:23-03:00",
+  "endedAt": "2026-11-22T07:26:23-03:00",
+  "state": "completed-awaiting-auxiliary-sync",
   "branch": "feat/work-m501-tag-simulation-command-contract-20261122",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "87b5383e9ccf04d251727586c41820a092e4fad3",
@@ -94,10 +94,12 @@
     "M501 vai proteger o contrato do comando e provar ausência de sessões/locks/progresso de jogador."
   ],
   "tests": {
-    "focused": null,
-    "typescript": null,
-    "discordPayload": null,
-    "limitations": "Ainda não executados; serão disparados pela CI da PR."
+    "focused": "success (M501 Tag Simulation Command Contract)",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "success",
+    "extendedSoak": "success",
+    "limitations": "CI remota; não houve execução local nesta retomada nem interação em guild Discord real."
   },
   "catalog": {
     "certified": 969,
@@ -154,8 +156,34 @@
     "head": "17b49f3f06ff3730cb692704771948dce8c34e89",
     "focused": "running"
   },
-  "pr": null,
-  "releaseToAuxiliary": [],
-  "nextTask": "Proteger a simulação 2v2 de quatro bots e sua resposta Discord efêmera; depois verificar os gates pendentes de M496–M500.",
-  "nextWindow": "2026-11-22T11:30:00-03:00"
+  "pr": {
+    "number": 449,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/449",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "head": "b3251c0b5cc9014f7e78f2eec0558276de19d0c4",
+    "base": "feat/rea-engine-recovery-20261026",
+    "baseSha": "844ab36bbdc1d1e00c1d7a9840576fbb34c26266",
+    "sharedHeadAtClose": "18d0a38c78da0542dd241c01201f2f8bbd708445",
+    "aheadBy": 1,
+    "behindBy": 6,
+    "merged": false
+  },
+  "releaseToAuxiliary": [
+    {
+      "branch": "feat/work-m501-tag-simulation-command-contract-20261122",
+      "pr": 449,
+      "files": [
+        "tests/tagNormalLabRotationMatrix.test.cjs",
+        "docs/evidence/m507-tag-normal-lab-rotation-matrix.json",
+        ".github/workflows/m507-tag-normal-lab-rotation-matrix.yml"
+      ],
+      "permissions": "monitor, non-forced sync, and correct only these three M501 files; no runtime/catalog/registry/merge/deploy"
+    }
+  ],
+  "nextTask": "M507: test the four-seat normal TagDuel rotation matrix, physical hand ownership and JSON restoration; keep M502–M506 and M61 untouched.",
+  "nextWindow": "2026-11-22T11:30:00-03:00",
+  "effectiveWorkMinutes": null,
+  "elapsedMinutes": "30.4 from recorded start to closure; effective work time not measurable from prior checkpoint"
 }
