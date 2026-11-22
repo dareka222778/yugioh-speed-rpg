@@ -1,0 +1,61 @@
+{
+  "mission": "M508",
+  "parentRunId": "work-20261122T072623-0300-M507",
+  "priority": "P1 — cobrir o caminho real de aceite dos botões Discord do lobby 2v2, com autorização por participante, revisão otimista, confirmação dos quatro assentos e ausência de mutações econômicas.",
+  "scope": {
+    "files": [
+      "tests/tagLobbyAcceptDiscord2v2.test.cjs",
+      "docs/evidence/m508-tag-lobby-accept-discord.json",
+      ".github/workflows/m508-tag-lobby-accept-discord.yml"
+    ],
+    "runtimeChanged": false,
+    "tagStoreChanged": false,
+    "tagInteractionChanged": false,
+    "tagUIChanged": false,
+    "commandRegistryChanged": false
+  },
+  "scenarios": [
+    "Participante externo é rejeitado antes do defer e não obtém lock.",
+    "Cada um dos três convidados aceita usando o custom_id emitido pelo painel público da revisão atual.",
+    "O defer precede a mutação; o handler edita e atualiza o painel público após cada aceite.",
+    "O último aceite inicia o modo 2v2 normal, preservando quatro Decks físicos de 30 cartas e UIDs únicos.",
+    "O painel em partida deixa de emitir botões Accept e passa a emitir controles de mão privada.",
+    "Payloads públicos e privados são validados pelos builders Discord.js.",
+    "Um Accept com revisão obsoleta falha fechado sem confirmar o participante nem adquirir lock."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "endPhaseDiscard": 6,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "security": {
+    "database": "SQLite temporário",
+    "discord": "builders/handler reais offline; nenhum token, guild ou canal real",
+    "inventoryGranted": 0,
+    "collectionChanged": false,
+    "starterGrantsChanged": false,
+    "playerBalancesChanged": false
+  },
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "limitations": [
+    "Não envia interações para Discord real.",
+    "Não altera runtime nem corrige falhas de handler; qualquer falha de comportamento será encaminhada para handoff antes de tocar em código protegido.",
+    "Não certifica cartas novas."
+  ]
+}

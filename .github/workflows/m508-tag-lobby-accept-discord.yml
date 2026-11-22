@@ -1,0 +1,36 @@
+name: M508 Tag Lobby Accept Discord Contract
+on:
+  push:
+    branches:
+      - feat/work-m508-tag-lobby-accept-discord-contract-20261122
+    paths:
+      - 'tests/tagLobbyAcceptDiscord2v2.test.cjs'
+      - 'docs/evidence/m508-tag-lobby-accept-discord.json'
+      - '.github/workflows/m508-tag-lobby-accept-discord.yml'
+  pull_request:
+    paths:
+      - 'tests/tagLobbyAcceptDiscord2v2.test.cjs'
+      - 'docs/evidence/m508-tag-lobby-accept-discord.json'
+      - '.github/workflows/m508-tag-lobby-accept-discord.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-lobby-accept-discord:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m508-tag-lobby-accept-discord.json', 'utf8'))"
+      - name: Run real TagDuel Accept component contract
+        run: node --test tests/tagLobbyAcceptDiscord2v2.test.cjs
