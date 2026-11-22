@@ -205,20 +205,6 @@ async function submitAction(record,predicate,key){
   assert.ok(index>=0,'Missing legal action for '+actor+' in '+record.state.core.phase);
   return submit(record,actor,index,'m495-'+key+'-'+record.revision);
 }
-async function passAllResponses(record,key){
-  let passes=0;
-  while(record.state.core.phase==='response'){
-    const actor=tag.tagDecisionMember(record.state).id;
-    const actions=tag.tagActions(record.state,actor);
-    const index=actions.findIndex(action=>action.kind==='pass');
-    assert.ok(index>=0,'the current response seat must have a legal Pass action');
-    record=await submit(record,actor,index,'m495-'+key+'-pass-'+passes);
-    passes++;
-    assert.ok(passes<=2,'a Field Spell response window must resolve after both teams pass');
-  }
-  assert.equal(passes,2,'both teams must pass before a Field Spell resolves');
-  return record;
-}
 function assertNoPublicHandUids(record){
   const payload=ui.tagPublicMessage(record);
   validateDiscordPayload(payload);
@@ -261,10 +247,10 @@ test('Sogen can be Set face-down, remains inactive until flipped and resolved, t
   let record=register(state,'sogen-set-flip');
 
   record=await submitAction(record,action=>action.kind==='setField'&&action.card===source.uid,'sogen-set');
-  record=await passAllResponses(record,'sogen-set');
+  assert.equal(record.state.core.phase,'main','setting a Field Spell is a completed action, not an activation chain');
   assert.equal(record.state.core.players[0].field.uid,source.uid);
   assert.equal(record.state.core.players[0].field.faceUp,false);
-  assert.equal(record.state.core.players[0].field.resolved,false);
+  assert.equal(record.state.core.players[0].field.resolved,true,'the replacement Field Spell resolves immediately without a legal response');
   assert.equal(tag.publicTagDuel(record.state).teams[0].field.id,null,'a Set Field Spell identity remains hidden publicly');
   assertStats(record.state,[[warrior,0],[beastWarrior,0],[partnerWarrior,0],[unmatched,0]]);
   assert.equal(record.state.core.players[0].backrow.length,3,'the Field Zone is separate from all three backrow slots');
@@ -275,7 +261,7 @@ test('Sogen can be Set face-down, remains inactive until flipped and resolved, t
   assert.equal(record.state.core.players[0].field.resolved,false,'the continuous effect waits for the response window');
   assertStats(record.state,[[warrior,0],[beastWarrior,0],[partnerWarrior,0],[unmatched,0]]);
   assert.equal(tag.publicTagDuel(record.state).teams[0].field.id,'86318356');
-  record=await passAllResponses(record,'sogen-flip');
+  assert.equal(record.state.core.phase,'main','the Field Spell resolves immediately when no legal response is available');
   assert.equal(record.state.core.players[0].field.resolved,true);
   assertStats(record.state,[[warrior,200],[beastWarrior,200],[partnerWarrior,200],[unmatched,0]]);
   assertInventoryConserved(record.state,before);
@@ -296,10 +282,7 @@ test('Mountain boosts Dragons and Winged Beasts across both teams without changi
   record=await activateFromHand(record,source.uid,'mountain-activate');
   assert.equal(record.state.core.players[0].field.uid,source.uid);
   assert.equal(record.state.core.players[0].field.faceUp,true);
-  assert.equal(record.state.core.players[0].field.resolved,false);
-  assertStats(record.state,[[monsters[0],0],[monsters[1],0],[monsters[2],0]]);
-  record=await passAllResponses(record,'mountain-activate');
-  assert.equal(record.state.core.players[0].field.resolved,true);
+  assert.equal(record.state.core.players[0].field.resolved,true,'Mountain resolves immediately when no legal response is available');
   assertStats(record.state,[[monsters[0],200],[monsters[1],200],[monsters[2],0]]);
   assert.equal(record.state.core.players[0].backrow.length,3,'Field activation remains legal with a full shared backrow');
   assertInventoryConserved(record.state,before);
@@ -318,7 +301,7 @@ test('Yami boosts Fiends and Spellcasters and applies its separate Fairy penalty
   const source=ensureInHand(state,0,'59197169');
   let record=register(state,'yami-races');
   record=await activateFromHand(record,source.uid,'yami-activate');
-  record=await passAllResponses(record,'yami-activate');
+  assert.equal(record.state.core.phase,'main','Yami resolves immediately when no legal response is available');
   assert.equal(record.state.core.players[0].field.resolved,true);
   assertStats(record.state,[[monsters[0],200],[monsters[1],200],[monsters[2],-200],[monsters[3],0]]);
   assertInventoryConserved(record.state,before);
@@ -336,7 +319,7 @@ test('replacing Sogen with Mountain sends the old Field Spell to the shared GY a
   const mountain=ensureInHand(state,0,'50913601');
   let record=register(state,'field-replacement');
   record=await activateFromHand(record,sogen.uid,'replace-sogen-first');
-  record=await passAllResponses(record,'replace-sogen-first');
+  assert.equal(record.state.core.players[0].field.resolved,true);
   assertStats(record.state,[[monsters[0],200],[monsters[1],0]]);
 
   record=await activateFromHand(record,mountain.uid,'replace-mountain');
@@ -344,9 +327,8 @@ test('replacing Sogen with Mountain sends the old Field Spell to the shared GY a
   assert.equal(record.state.core.players[0].field.resolved,false);
   assert.ok(record.state.core.players[0].grave.some(card=>card.uid===sogen.uid&&card.id==='86318356'),
     'the replaced Field Spell must enter the shared Graveyard with its original UID');
-  assertStats(record.state,[[monsters[0],0],[monsters[1],0]],
-    'the replaced Sogen modifier ends immediately and the new Field Spell waits for resolution');
-  record=await passAllResponses(record,'replace-mountain');
+  assertStats(record.state,[[monsters[0],0],[monsters[1],200]],
+    'the replaced Sogen modifier ends immediately and Mountain applies to Dragon');
   assertStats(record.state,[[monsters[0],0],[monsters[1],200]]);
   assertInventoryConserved(record.state,before);
   assertRules(record.state);
