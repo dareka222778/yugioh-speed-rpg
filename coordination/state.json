@@ -13804,19 +13804,18 @@
       "note": "Somente três caminhos novos; lê stores/engine sem modificá-los; SQLite temporário com processos Node filhos."
     },
     "workBlocks": [
-      "Reserva M528 registrada como sub-bloco independente enquanto M527 aguarda CI.",
-      "Primeira CI focada encontrou regex W.O. superescapada; corrigida no commit 05cef5ec. Nova execução focada 45063097439 e Engine Validation 45063097428 em andamento; Card Batch Fast 45063097429 em andamento.",
-      "Evidência M528 atualizada com causa da falha inicial e commit corretivo."
+      "Reauditado shared HEAD a40f77538b2116042bd8fa4b326ee7b90c3a24ea e coordenação; M527 permanece ativo e CI focada 2/2 aprovada, Card Batch Fast/Engine Validation ainda executando.",
+      "M528 reservado em caminhos novos e independentes para teste de persistência de outbox entre processos.",
+      "CI focada M528 1/1 success após corrigir regex W.O.; npm run check/build, Card Batch Fast e Milestone 1000 success; Engine Validation e Extended Soak 600s ainda em execução."
     ],
     "tests": {
-      "focused": "rerun in progress after correcting W.O. regex",
-      "check": null,
-      "build": null,
-      "cardBatchFast": "in_progress",
-      "milestone1000": "success",
-      "engineValidation": "in_progress",
-      "extendedSoak": null,
-      "limitations": "SQLite temporário, subprocessos Node da CI; sem guild/token real."
+      "focused": "success (1/1) run 45063169545",
+      "check": "success",
+      "build": "success",
+      "cardBatchFast": "success run 45063169579",
+      "milestone1000": "success run 45063169544",
+      "engineValidation": "in_progress run 45063169542",
+      "extendedSoak": "in_progress (600s)"
     },
     "catalog": {
       "certified": 969,
