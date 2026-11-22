@@ -1,0 +1,36 @@
+name: M484 TagDuel Discord lobby and concession flow
+on:
+  push:
+    branches:
+      - feat/work-m484-tag-discord-lobby-and-concession-flow-20261121
+    paths:
+      - 'tests/tagDiscordLobbyAndConcessionFlow2v2.test.cjs'
+      - 'docs/evidence/m484-tag-discord-lobby-and-concession-flow.json'
+      - '.github/workflows/m484-tag-discord-lobby-and-concession-flow.yml'
+  pull_request:
+    paths:
+      - 'tests/tagDiscordLobbyAndConcessionFlow2v2.test.cjs'
+      - 'docs/evidence/m484-tag-discord-lobby-and-concession-flow.json'
+      - '.github/workflows/m484-tag-discord-lobby-and-concession-flow.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-discord-lobby-concession-flow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m484-tag-discord-lobby-and-concession-flow.json', 'utf8'))"
+      - name: Run real TagDuel Discord handler tests
+        run: node --test tests/tagDiscordLobbyAndConcessionFlow2v2.test.cjs
