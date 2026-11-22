@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "mission": "M524",
+  "runId": "work-20261122T122900-0300-M524",
+  "title": "TagDuel timeout physical-seat rotation matrix",
+  "priority": "P1 — fechar a matriz de W.O. 2v2 para todos os quatro assentos físicos, provando que a equipe oposta ao participante que devia agir vence e que propriedade/privacidade permanecem intactas.",
+  "branch": "feat/work-m524-tag-timeout-seat-rotation-matrix-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c376248196fc4458c47e2ff7dbb55d438031afed",
+  "scope": [
+    "tests/tagTimeoutSeatRotationMatrix2v2.test.cjs",
+    "docs/evidence/m524-tag-timeout-seat-rotation-matrix-2v2.json",
+    ".github/workflows/m524-tag-timeout-seat-rotation-matrix-2v2.yml"
+  ],
+  "behavior": {
+    "matrix": "Executa first=0,1,2,3; valida tagDecisionMember, cursor, current team e vencedor W.O. oposto para cada assento.",
+    "boundary": "Um milissegundo antes do prazo permanece playing; no deadline exato persiste finished com uma revisão e um duelFinished.",
+    "ownership": "Conserva UIDs, mãos, Decks e Extra físicos dos quatro participantes; libera quatro locks e não cria action receipts.",
+    "privacy": "publicTagDuel/tagPublicMessage omitem UIDs físicos e removem controles de um duelo encerrado."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "openingHand": 4,
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "validation": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "SQLite temporário; sem guild Discord real.",
+    "Teste cobre store, estado 2v2 e builders públicos; não altera runtime, handler, store, UI ou catálogo.",
+    "Sem merge/deploy/produção."
+  ]
+}
