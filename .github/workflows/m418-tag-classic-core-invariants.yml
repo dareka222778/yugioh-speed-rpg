@@ -1,0 +1,37 @@
+name: M418 Tag Classic 2v2 Core Invariants
+on:
+  push:
+    branches: [feat/work-m418-tag-classic-core-invariants-20261120]
+  pull_request:
+    branches: [feat/rea-engine-recovery-20261026]
+    paths:
+      - 'src/**'
+      - 'tests/tagClassic*2v2.test.cjs'
+      - 'tests/helpers/tagClassic2v2.cjs'
+      - '.github/workflows/m418-tag-classic-core-invariants.yml'
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run 2v2 behavioral invariants
+        run: >-
+          node --test
+          tests/tagClassicSummonTrapLockTeamResponse2v2.test.cjs
+          tests/tagClassicActivationRestrictionsBattlePhase2v2.test.cjs
+          tests/tagClassicNeedleBallTeamLPCost2v2.test.cjs
+          tests/tagClassicFairyMeteorCrushPiercing2v2.test.cjs
+          tests/tagClassicDDAssailantBanishBoth2v2.test.cjs
+          tests/tagClassicBattleBanishVictimTeamZones2v2.test.cjs
+          tests/tagClassicEndPhaseHandLimit2v2.test.cjs
+          tests/tagClassicSharedZoneCapacity2v2.test.cjs
+          tests/tagClassicGraveRecoveryPhysicalOwner2v2.test.cjs
+          tests/tagClassicFieldZoneSeparateFromBackrow2v2.test.cjs
