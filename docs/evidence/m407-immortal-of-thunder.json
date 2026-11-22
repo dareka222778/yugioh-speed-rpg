@@ -1,0 +1,51 @@
+{
+  "format": 1,
+  "mission": "M407",
+  "runId": "work-20261120T051939-0300-M407",
+  "card": {
+    "name": "The Immortal of Thunder",
+    "portugueseName": "O Imortal do Trovão",
+    "id": "84926738",
+    "konamiDatabaseCid": 4468,
+    "attribute": "LIGHT",
+    "type": "Thunder/Flip/Effect",
+    "level": 4,
+    "atk": 1500,
+    "def": 1300,
+    "officialText": "FLIP: Increase your Life Points by 3000 points. When this card is sent from the field to the Graveyard, you lose 5000 Life Points.",
+    "officialTextVerified": true,
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4468&ope=2&request_locale=en",
+    "firstTcgRelease": "2002-06-26",
+    "firstTcgSet": "Metal Raiders (MRD-099)",
+    "firstTcgReleaseVerifiedByOfficialDatabase": true,
+    "historicalCutoff": "2004-09-30",
+    "eligibleByFirstTcgRelease": true
+  },
+  "behavior": {
+    "flipGain": {
+      "gain": 3000,
+      "requiresFaceDownToFaceUpTransition": true,
+      "requiresMonsterZoneAtFlip": true,
+      "usesControllerTeamAtActivation": true,
+      "canResolveAfterSourceLeavesField": true,
+      "idempotentByEventId": true
+    },
+    "fieldToGraveyardLoss": {
+      "loss": 5000,
+      "triggersForAnyFieldToGraveyardCause": true,
+      "usesControllerTeamAtSend": true,
+      "preservesPhysicalOwnerSeat": true,
+      "idempotentByEventId": true,
+      "allowsNegativeLPForDuelEndResolution": true
+    },
+    "separateEventsCanCompose": true
+  },
+  "validation": {
+    "implementation": "two isolated pure event resolvers with focused unit tests",
+    "integrationStatus": "not-registered-in-main-resolver",
+    "certificationStatus": "not-certified",
+    "automaticCertification": false,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  }
+}
