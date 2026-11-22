@@ -1,0 +1,36 @@
+name: M480 TagDuel timeout rollback atomicity
+on:
+  push:
+    branches:
+      - feat/work-m480-tag-timeout-rollback-atomicity-20261121
+    paths:
+      - 'tests/tagTimeoutRollbackAtomicity2v2.test.cjs'
+      - 'docs/evidence/m480-tag-timeout-rollback-atomicity.json'
+      - '.github/workflows/m480-tag-timeout-rollback-atomicity.yml'
+  pull_request:
+    paths:
+      - 'tests/tagTimeoutRollbackAtomicity2v2.test.cjs'
+      - 'docs/evidence/m480-tag-timeout-rollback-atomicity.json'
+      - '.github/workflows/m480-tag-timeout-rollback-atomicity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-timeout-rollback-atomicity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m480-tag-timeout-rollback-atomicity.json', 'utf8'))"
+      - name: Run TagDuel timeout rollback tests
+        run: node --test tests/tagTimeoutRollbackAtomicity2v2.test.cjs
