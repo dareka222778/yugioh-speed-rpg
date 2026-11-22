@@ -1,0 +1,36 @@
+name: M527 1v1 Duel Timeout Publication Idempotency
+on:
+  push:
+    branches:
+      - feat/work-m527-duel-timeout-publication-idempotency-20261122
+    paths:
+      - 'tests/duelTimeoutPublicationIdempotency.test.cjs'
+      - 'docs/evidence/m527-duel-timeout-publication-idempotency.json'
+      - '.github/workflows/m527-duel-timeout-publication-idempotency.yml'
+  pull_request:
+    paths:
+      - 'tests/duelTimeoutPublicationIdempotency.test.cjs'
+      - 'docs/evidence/m527-duel-timeout-publication-idempotency.json'
+      - '.github/workflows/m527-duel-timeout-publication-idempotency.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-timeout-publication-idempotency:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m527-duel-timeout-publication-idempotency.json', 'utf8'))"
+      - name: Run 1v1 timeout publication tests
+        run: node --test tests/duelTimeoutPublicationIdempotency.test.cjs
