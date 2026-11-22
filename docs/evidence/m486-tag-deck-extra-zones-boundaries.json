@@ -7,7 +7,7 @@
   "testFile": "tests/tagDeckExtraAndZoneBoundaries2v2.test.cjs",
   "testCount": 2,
   "scenarios": [
-    "A classic four-seat TagDuel accepts 20-card and 30-card Main Decks, plus one currently enabled Fusion in each physical Extra Deck. Both team fields retain exactly three Monster Zones, three Spell/Trap Zones and a separate Field Zone.",
+    "A classic four-seat TagDuel accepts 20-card and 30-card Main Decks and one currently enabled Fusion in each active physical Extra Deck. The rule profile fixes three Monster Zones, three Spell/Trap Zones and a separate Field Zone; occupied arrays are asserted not to exceed their three-slot capacities.",
     "The same constructor rejects a 19-card Main Deck and a 31-card Main Deck. A synthetic six-entry Extra Deck input is rejected by the engine's five-card cap before the independent three-copy check."
   ],
   "invariants": [
@@ -42,12 +42,13 @@
   "command": "npm run check && npm run build && node --test tests/tagDeckExtraAndZoneBoundaries2v2.test.cjs",
   "ciStatus": "pending",
   "limitations": [
-    "The shared base exposes only one supported Fusion identity (45231177). A valid exactly-five-card Extra Deck cannot be constructed while also respecting the three-copy rule; the positive five-card case is therefore not claimed.",
     "The six-entry negative fixture deliberately repeats the one supported Fusion to reach the length guard; the engine rejects it at the five-card cap before copy-count validation. It is not represented as a legal Deck.",
     "Tests use real compiled TagDuel, rulesProfile and enabled card registry modules.",
     "Main Deck fixtures use existing enabled cards; no collection or inventory mutation occurs.",
     "No runtime, resolver, catalog manifest, allowlist, persistent database or player data is modified.",
-    "No live Discord API session is performed."
+    "No live Discord API session is performed.",
+    "The shared base exposes only one supported Fusion identity (45231177). A valid exactly-five-card Extra Deck cannot be constructed while also respecting the three-copy rule; the positive five-card case is not claimed.",
+    "The six-entry negative fixture deliberately repeats the one supported Fusion to reach the length guard; the engine rejects it at the five-card cap before copy-count validation. It is not represented as a legal Deck."
   ],
   "extraDeckCoverage": {
     "profileMaximum": 5,
