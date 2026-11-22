@@ -120,6 +120,44 @@ test('pending 1v1 invitation can be declined after restart and stale Accept cann
   assert.deepEqual(assetSnapshot(),beforeAssets,'decline/replay never changes player inventory or Deck data');
 });
 
+
+test('pending invitation expires at the exact 120-second deadline after restart without creating DuelState',()=>{
+  const owner='m532-expiry-owner',opponent='m532-expiry-opponent';
+  createDuelist(owner);createDuelist(opponent);
+  const beforeAssets=assetSnapshot();
+  const invitation=store.challenge(owner,opponent,'m532-guild','m532-channel');
+  const deadline=invitation.updated+120000;
+  database.db.close();
+
+  const recovered=runAfterRestart([
+    "const database=require('./dist/database');",
+    "const store=require('./dist/duelStore');",
+    "const id=process.env.M532_DUEL_ID;",
+    "try{",
+    "  const before=store.getDuel(id,Number(process.env.M532_BEFORE_DEADLINE));",
+    "  const expired=store.expireDueDuels(Number(process.env.M532_DEADLINE)).find(record=>record.id===id);",
+    "  let staleAcceptError=null;",
+    "  try{store.acceptChallenge(id,process.env.M532_OPPONENT,process.env.M532_GUILD,Number(process.env.M532_REVISION));}",
+    "  catch(error){staleAcceptError=error instanceof Error?error.message:String(error);}",
+    "  const result={beforeStatus:before.status,beforeRevision:before.revision,expiredStatus:expired?.status,expiredRevision:expired?.revision,state:expired?.state??null,locks:database.db.prepare('SELECT COUNT(*) AS n FROM duel_members WHERE duel_id=?').get(id).n,events:store.duelEventsAt(id,expired?.revision??0).length,staleAcceptError};",
+    "  console.log(JSON.stringify(result));",
+    "}finally{database.db.close();}"
+  ],{M532_DUEL_ID:invitation.id,M532_OPPONENT:opponent,M532_GUILD:'m532-guild',M532_REVISION:String(invitation.revision),M532_BEFORE_DEADLINE:String(deadline-1),M532_DEADLINE:String(deadline)});
+  loadModules();
+
+  assert.equal(recovered.beforeStatus,'pending');
+  assert.equal(recovered.beforeRevision,invitation.revision);
+  assert.equal(recovered.expiredStatus,'expired');
+  assert.equal(recovered.expiredRevision,invitation.revision+1);
+  assert.equal(recovered.state,null,'an expired invitation never creates a DuelState');
+  assert.equal(recovered.locks,0,'the creator lock is released at the exact deadline');
+  assert.equal(recovered.events,0,'an invitation expiry does not fabricate a duel transition');
+  assert.match(recovered.staleAcceptError,/convite expirou|já foi respondido/i);
+  assert.equal(store.getDuel(invitation.id).status,'expired');
+  assert.equal(store.currentDuel(owner),undefined);
+  assert.deepEqual(assetSnapshot(),beforeAssets,'expiry after restart does not change player inventory or Deck rows');
+});
+
 after(()=>{
   if(database?.db?.open)database.db.close();
   fs.rmSync(folder,{recursive:true,force:true});

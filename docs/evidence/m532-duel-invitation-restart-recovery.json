@@ -29,6 +29,18 @@
         "stale Accept is rejected",
         "no membership lock is recreated"
       ]
+    },
+    {
+      "case": "restart before invitation deadline, then expire at exactly 120000 ms",
+      "assertions": [
+        "invitation is pending at deadline minus 1 ms",
+        "status becomes expired at exact deadline",
+        "revision increments exactly once",
+        "no DuelState or transition event is created",
+        "creator lock is released",
+        "stale Accept remains rejected",
+        "player/collection/starter-grant/Deck rows remain unchanged"
+      ]
     }
   ],
   "isolation": {
