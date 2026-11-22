@@ -1,0 +1,55 @@
+{
+  "runId": "work-20261121T212418-0300-M487",
+  "mission": "M487",
+  "owner": "Work principal",
+  "priority": "P1 — proteger o editor de Deck contra painéis Discord obsoletos e ativação inválida: confirmar que revisão antiga não altera slots, que somente um deck permanece ativo, que editar um deck ativo abaixo de 20 cartas o desativa e que falhas não modificam a coleção.",
+  "startedAt": "2026-11-21T21:24:18-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m487-deck-editor-revision-integrity-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b92b1db4a0234d742ae38658f49a9c12e14fd46d",
+  "sharedHeadAtReservation": "b92b1db4a0234d742ae38658f49a9c12e14fd46d",
+  "reservedFiles": [
+    "tests/deckEditorRevisionIntegrity.test.cjs",
+    "docs/evidence/m487-deck-editor-revision-integrity.json",
+    ".github/workflows/m487-deck-editor-revision-integrity.yml"
+  ],
+  "scope": "Somente três caminhos novos. Em SQLite temporário, criar dois jogadores e semeá-los com fixtures já habilitadas sem starter grants; montar Decks 20–30 em slots 1–3; testar revisão obsoleta em changeDeck/activateDeck/renameDeck com rollback integral; confirmar que editar deck ativo para 19 cartas desativa apenas aquele slot; ativar outro slot de forma exclusiva; rejeitar ativação de deck incompleto sem desativar o ativo; validar payloads deckMessage/deckCardMessage e IDs owner-bound sem expor cartas do outro jogador. Sem runtime, catálogo, allowlist, inventário persistente ou dados reais.",
+  "conflictCheck": {
+    "overlap": false,
+    "preserved": [
+      "M472–M486: PRs #420–#434 e seus três caminhos reservados",
+      "M61: src/monsterEffects.ts e src/duelEngineCurrent.ts",
+      "M379 PR #327: apenas limites Main/Extra; M487 cobre revisão/ativação",
+      "M384 PR #331: parser de IDs; M487 não altera parser nem index.ts",
+      "todas as demais reservas de terceiros"
+    ],
+    "note": "M487 atua apenas no editor de Deck 1v1 por funções existentes de decks.ts e builders deckUI.ts; não toca TagDuel, resolver, catálogo, runtime ou arquivos reservados."
+  },
+  "workBlocks": [
+    "Auditoria real de state.json, último checkpoint, HEAD, branches, PRs e CI.",
+    "Pedido cooperativo M61 renovado; comentário 7071568639; aguardando resposta sem tocar nos arquivos protegidos."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Aguardando implementação e CI remota; nenhum teste local foi alegado."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": "Nenhuma alteração de produção autorizada; deployments não expostos pela integração de leitura disponível.",
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Concluir a suíte de invariantes de revisão/ativação do editor de Deck, publicar PR draft e executar CI; depois reconsultar HEAD/coordenação e liberar somente os três caminhos M487.",
+  "nextWindow": "2026-11-21T22:30:00-03:00"
+}
