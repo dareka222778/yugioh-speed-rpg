@@ -1,0 +1,80 @@
+{
+  "mission": "M507",
+  "runId": "work-20261122T072623-0300-M507",
+  "priority": "P1 — verificar rotação física A1→B1→A2→B2 no laboratório 2v2 normal: cada mão/Deck continua pertencendo ao assento físico, somente o assento ativo pode agir, a restauração JSON preserva o próximo ator e a projeção pública não revela UIDs privados.",
+  "scope": {
+    "files": [
+      "tests/tagNormalLabRotationMatrix.test.cjs",
+      "docs/evidence/m507-tag-normal-lab-rotation-matrix.json",
+      ".github/workflows/m507-tag-normal-lab-rotation-matrix.yml"
+    ],
+    "runtimeChanged": false,
+    "commandBuilderChanged": false,
+    "storeChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "mode": "tag-normal-lab",
+    "seats": "Four physical seats; alternating teams; initial seat may be any of 0, 1, 2 or 3.",
+    "rotation": "A1 → B1 → A2 → B2; each incoming physical seat draws from its own Deck and retains its own private hand.",
+    "persistence": "A JSON round-trip occurs after every turn; assertTagDuel and the next decision must remain valid.",
+    "authorization": "tagActions returns legal actions only for the active physical seat.",
+    "publicProjection": "publicTagDuel exposes counts and public field state only; hand/Deck UIDs are redacted."
+  },
+  "testCoverage": [
+    "Verifies the fixture contains ten distinct certified low-level Normal monsters, three copies each, and a legal 30-card Main Deck.",
+    "Runs the four starting-seat permutations and executes four End Phases per permutation.",
+    "Snapshots all four physical hands and Deck orders before each rotation; only the incoming seat may receive the draw.",
+    "Verifies inactive physical seats receive no legal actions.",
+    "Restores JSON after every turn and revalidates the TagDuel state, active seat, and private hand/Deck ownership.",
+    "Checks the public projection never contains private hand or Deck arrays or physical card UIDs.",
+    "Rejects effect monsters in the Normal laboratory, Main Decks outside 20–30, and Extra Decks above five."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "No database import or writes; pure in-memory TagDuel state",
+    "discord": "Engine/projection contract offline; no token, guild or channel",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node -e \"JSON.parse(require('node:fs').readFileSync('docs/evidence/m507-tag-normal-lab-rotation-matrix.json','utf8'))\"",
+      "node --test tests/tagNormalLabRotationMatrix.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "No live Discord Client or guild interaction.",
+    "This is a rules/persistence regression suite, not a new card certification.",
+    "No local runtime execution in this run; remote CI is the acceptance gate."
+  ]
+}
