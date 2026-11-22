@@ -108,7 +108,7 @@ function makeGame(seed,monsterEntries){
   const monsters=monsterEntries.map(([seat,id])=>addMonster(state,seat,id));
   for(const id of trapIds){
     const card=take(state,0,id);
-    state.core.players[0].backrow.push({...card,setTurn:1,faceUp:false});
+    state.core.players[0].backrow.push({...card,setTurn:state.core.turn,faceUp:false});
   }
   assert.equal(state.core.players[0].backrow.length,3);
   assert.ok(state.core.players[0].monsters.length<=3);
