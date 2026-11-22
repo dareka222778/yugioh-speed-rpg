@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "mission": "M409",
+  "runId": "work-20261120T092758-0300-M409",
+  "priority": "P1 — validar Mystical Space Typhoon pelo handler real de componentes Discord 2v2, cobrindo alvos nas duas zonas de equipe, privacidade de cartas Set, destino no Cemitério compartilhado e conservação de UIDs físicos.",
+  "card": {
+    "name": "Mystical Space Typhoon",
+    "id": "05318639",
+    "konamiCardDatabaseId": 4909,
+    "existingCertification": "certified",
+    "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4909&ope=2&request_locale=en",
+    "officialText": "Target 1 Spell/Trap on the field; destroy that target.",
+    "firstTcgRelease": "2002-09-16",
+    "firstTcgSet": "MRL-047"
+  },
+  "scope": "Discord 2v2 integration regression for an already certified card; no new admission or certification.",
+  "test": "tests/tagClassicMysticalSpaceTyphoonDiscord2v2.test.cjs",
+  "behaviors": [
+    "Uses handleTagComponent → tagStore.actTag → tagDuel/duelEngine; does not call stepTagDuel directly for the action under test.",
+    "The active physical seat can target a teammate-owned or opponent-owned card in either shared team backrow.",
+    "A face-down target's UID, card ID and name are absent from the public panel before activation.",
+    "The inactive teammate cannot submit the team's action.",
+    "Exactly the selected target moves to the opposing team's shared Graveyard with its original UID and card ID; other backrow cards remain.",
+    "The resolving Mystical Space Typhoon moves to its controller team's shared Graveyard; its effect does not negate the target's activation.",
+    "All four private hands, all 120 Main Deck UIDs/identities, and all four Extra Decks are conserved except the source leaving the active player's hand for the Graveyard.",
+    "Discord public/private payload builders pass validateDiscordPayload.",
+    "Persistent players and player_cards tables remain byte-for-byte equivalent before and after the borrowed duel."
+  ],
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "extraDeckMax": 5,
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "handLimit": 6,
+    "handCheck": "end"
+  },
+  "certification": {
+    "existingCertification": "certified",
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Discord is exercised offline through the production component handler, store, duel engine and payload builders; no live guild/token is used.",
+    "This is an integration regression for an already certified card, not a new card certification.",
+    "The test uses temporary SQLite and borrowed NPC decks; persistent player inventory is not modified."
+  ]
+}
