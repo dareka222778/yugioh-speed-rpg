@@ -29,17 +29,17 @@
   },
   "workBlocks": [
     "Reverificado HEAD compartilhado 38e9d11d528a6bc7aa6ef4014c599d8adf6e837b e coordenação; M527/M528 continuam ativos aguardando Engine Validation/soak.",
-    "M529 reservado em escopo novo para backpressure do outbox 1v1; não sobrepõe M527/M528."
+    "M529 reservado em escopo novo para backpressure do outbox 1v1; não sobrepõe M527/M528.",
+    "PR #475 aberta em draft; Card Batch Fast, Milestone 1000, Engine Validation e teste focado enfileirados."
   ],
   "tests": {
-    "focused": null,
+    "focused": "queued (run 45063576160)",
     "check": null,
     "build": null,
-    "cardBatchFast": null,
-    "milestone1000": null,
-    "engineValidation": null,
-    "extendedSoak": null,
-    "limitations": "205 registros terminais sintéticos em SQLite temporário; sem guild/token real."
+    "cardBatchFast": "queued (45063576154)",
+    "milestone1000": "queued (45063576169)",
+    "engineValidation": "queued (45063576215)",
+    "extendedSoak": "queued"
   },
   "catalog": {
     "certified": 969,
@@ -58,7 +58,16 @@
     "merge": false,
     "deploy": false
   },
-  "pr": null,
+  "pr": {
+    "number": 475,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/475",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "headSha": "02a6f91c812c93c2aef3726c1d9a526b7481abed",
+    "baseSha": "e5a91b2b5177624b9d737e233ccf10eafd0d0cd4"
+  },
   "releaseToAuxiliary": [],
   "nextTask": "Testar 205 revisões terminais, lotes 100/100/5, ACK idempotente e fila vazia.",
   "nextWindow": "2026-11-22T17:30:00-03:00",
@@ -67,5 +76,7 @@
     "effectiveWorkMinutes": 0,
     "targetMet": false,
     "ciWaitExcluded": true
-  }
+  },
+  "lastActivityAt": "2026-11-22T16:56:00-03:00",
+  "branchHead": "02a6f91c812c93c2aef3726c1d9a526b7481abed"
 }
