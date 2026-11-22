@@ -1,0 +1,36 @@
+name: M529 1v1 Timeout Outbox Backpressure
+on:
+  push:
+    branches:
+      - feat/work-m529-duel-timeout-outbox-backpressure-20261122
+    paths:
+      - 'tests/duelTimeoutOutboxBackpressure.test.cjs'
+      - 'docs/evidence/m529-duel-timeout-outbox-backpressure.json'
+      - '.github/workflows/m529-duel-timeout-outbox-backpressure.yml'
+  pull_request:
+    paths:
+      - 'tests/duelTimeoutOutboxBackpressure.test.cjs'
+      - 'docs/evidence/m529-duel-timeout-outbox-backpressure.json'
+      - '.github/workflows/m529-duel-timeout-outbox-backpressure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-timeout-outbox-backpressure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m529-duel-timeout-outbox-backpressure.json', 'utf8'))"
+      - name: Run bounded outbox drain test
+        run: node --test tests/duelTimeoutOutboxBackpressure.test.cjs
