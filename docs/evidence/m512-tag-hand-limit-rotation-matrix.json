@@ -26,7 +26,9 @@
     "persistence": "JSON round-trip during discard preserves the active physical owner and private hands.",
     "drawOrdering": "The incoming seat's top Deck UID is untouched until the outgoing owner completes discard, then is drawn exactly once.",
     "mainPhase": "A seven-card hand during Main Phase does not expose early discard actions for any of the four starting seats.",
-    "conservation": "All 80 physical UIDs and card identities remain conserved; non-acting hands and Deck orders remain unchanged."
+    "conservation": "All 80 physical UIDs and card identities remain conserved; non-acting hands and Deck orders remain unchanged.",
+    "eightCardOverflow": "For each of the four starting seats, an eight-card hand requires two sequential owner-only discards; the next seat cannot draw after the first discard and draws exactly once after the hand reaches six.",
+    "multiDiscard": "JSON restoration is performed before each discard; the inactive partner has no legal discard action throughout."
   },
   "rules": {
     "mainDeck": "20–30",
@@ -74,5 +76,6 @@
     "Motor TagDuel real em memória; não envia comandos/interações para Discord.",
     "O teste de overflow move cartas físicas já existentes, sem concessão de inventário.",
     "Não certifica novos efeitos de cartas."
-  ]
+  ],
+  "testCount": 6
 }
