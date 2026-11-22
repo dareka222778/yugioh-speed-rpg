@@ -87,7 +87,7 @@ test('the 2v2 decision timeout awards the opposing team and preserves all four p
   const beforeInventory=inventorySnapshot(state);
   for(let index=0;index<4;index++){
     const snapshot=beforePhysical[index];
-    assert.equal(snapshot.hand.length,5,'each physical participant keeps an independent opening hand');
+    assert.equal(snapshot.hand.length,4,'each physical participant keeps an independent opening hand');
     assert.equal(snapshot.deck.length+snapshot.hand.length,20,'each Main Deck starts at the legal 20-card minimum');
     assert.ok(snapshot.extra.length<=5,'each physical Extra Deck stays within the owner limit');
     for(const card of [...snapshot.hand,...snapshot.deck,...snapshot.extra]){
@@ -107,7 +107,7 @@ test('the 2v2 decision timeout awards the opposing team and preserves all four p
   const publicView=publicTagDuel(finished);
   const serialized=JSON.stringify(publicView);
   for(const seat of [0,1,2,3])assert.equal(serialized.includes('m'+seat+':'),false,'the public 2v2 view exposes counts, never private UIDs');
-  assert.deepEqual(publicView.members.map(member=>member.handCount),[5,5,5,5]);
+  assert.deepEqual(publicView.members.map(member=>member.handCount),[4,4,4,4]);
 });
 
 test('the persisted 2v2 timeout finishes exactly at 30 minutes, stores one duelFinished event and releases all four locks',()=>{

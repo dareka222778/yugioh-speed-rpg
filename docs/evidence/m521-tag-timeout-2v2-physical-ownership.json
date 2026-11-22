@@ -31,7 +31,8 @@
       "monsterZones": 3,
       "spellTrapZones": 3,
       "fieldZone": "separada",
-      "extraDeckMax": 5
+      "extraDeckMax": 5,
+      "openingHand": 4
     }
   },
   "validation": {
