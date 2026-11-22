@@ -1,0 +1,27 @@
+name: M428 Tag Classic Flip Discord 2v2
+on:
+  pull_request:
+    paths:
+      - 'tests/tagClassicFlipEffectsDiscord2v2.test.cjs'
+      - 'docs/evidence/m428-tag-classic-flip-discord-2v2.json'
+      - '.github/workflows/m428-tag-classic-flip-discord-2v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-classic-flip-discord-2v2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Verify 2v2 FLIP resolution and Discord privacy payloads
+        run: node --test tests/tagClassicFlipEffectsDiscord2v2.test.cjs
