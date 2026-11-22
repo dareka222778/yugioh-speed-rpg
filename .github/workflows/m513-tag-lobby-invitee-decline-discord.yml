@@ -1,0 +1,36 @@
+name: M513 Tag Lobby Invitee Decline Discord
+on:
+  push:
+    branches:
+      - feat/work-m513-tag-lobby-invitee-decline-20261122
+    paths:
+      - 'tests/tagLobbyInviteeDeclineDiscord2v2.test.cjs'
+      - 'docs/evidence/m513-tag-lobby-invitee-decline-discord.json'
+      - '.github/workflows/m513-tag-lobby-invitee-decline-discord.yml'
+  pull_request:
+    paths:
+      - 'tests/tagLobbyInviteeDeclineDiscord2v2.test.cjs'
+      - 'docs/evidence/m513-tag-lobby-invitee-decline-discord.json'
+      - '.github/workflows/m513-tag-lobby-invitee-decline-discord.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-lobby-invitee-decline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m513-tag-lobby-invitee-decline-discord.json', 'utf8'))"
+      - name: Run invited-seat decline and stale-cancel tests
+        run: node --test tests/tagLobbyInviteeDeclineDiscord2v2.test.cjs
