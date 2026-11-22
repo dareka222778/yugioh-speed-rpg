@@ -18,7 +18,7 @@ function makeState(options={}) {
     {id:'tag-team-0',name:'Azul',lp:4000,deck:[],hand:[],monsters:[monster('m0:face-down',false),monster('m0:face-up',true)],backrow:[source],grave:[],extra:[],summoned:false},
     {id:'tag-team-1',name:'Vermelha',lp:4000,deck:[],hand:[],monsters:[monster('m1:other-face-down',false),monster('m1:attacker',true)],backrow:[],grave:[],extra:[],summoned:false}
   ];
-  if(options.duplicateSource) players[1].backrow.push({...source,uid:'m1:duplicate-feint'});
+  if(options.duplicateSource) players[1].backrow.push({...source});
   return {
     version:1,players,turn:3,current:options.current??1,
     phase:options.phase??'main',resume:'battle',priority:0,passes:0,

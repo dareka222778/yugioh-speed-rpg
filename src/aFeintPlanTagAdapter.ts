@@ -58,7 +58,7 @@ export function prepareAFeintPlan(
     throw new Error('A Feint Plan precisa ser uma Armadilha Setada em turno anterior e ativada face-up.');
   }
   const sourceOwnerSeat = physicalSeat(source.uid);
-  if (sourceOwnerSeat % 2 !== controllerTeam) throw new Error('A Armadilha não pertence fisicamente à equipe controladora.');
+  if (sourceOwnerSeat % 2 !== controllerTeam) throw new Error('A Armadilha não pertence fisicamente à equipe controladora (proprietário físico incompatível).');
   if (!cardActivationAllowed(state, controllerTeam, 'trap') || isTrapNegated(state)) {
     throw new Error('A ativação ou o efeito de Armadilhas está bloqueado/negado.');
   }
