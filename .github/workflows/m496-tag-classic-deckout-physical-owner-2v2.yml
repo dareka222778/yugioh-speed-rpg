@@ -1,0 +1,36 @@
+name: M496 Tag Classic Deck-out Physical Owner 2v2
+on:
+  push:
+    branches:
+      - feat/work-m496-tag-classic-deckout-physical-owner-2v2-20261122
+    paths:
+      - 'tests/tagClassicDeckOutPhysicalOwner2v2.test.cjs'
+      - 'docs/evidence/m496-tag-classic-deckout-physical-owner-2v2.json'
+      - '.github/workflows/m496-tag-classic-deckout-physical-owner-2v2.yml'
+  pull_request:
+    paths:
+      - 'tests/tagClassicDeckOutPhysicalOwner2v2.test.cjs'
+      - 'docs/evidence/m496-tag-classic-deckout-physical-owner-2v2.json'
+      - '.github/workflows/m496-tag-classic-deckout-physical-owner-2v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deckout-physical-owner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m496-tag-classic-deckout-physical-owner-2v2.json', 'utf8'))"
+      - name: Run TagDuel deck-out integration tests
+        run: node --test tests/tagClassicDeckOutPhysicalOwner2v2.test.cjs

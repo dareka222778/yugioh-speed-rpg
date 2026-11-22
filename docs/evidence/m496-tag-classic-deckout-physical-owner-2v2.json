@@ -1,0 +1,79 @@
+{
+  "mission": "M496",
+  "runId": "work-20261122T062947-0300-M496",
+  "priority": "P1 — validar o deck-out no TagDuel clássico 2v2 pelo deck físico do participante que está entrando: o parceiro ainda pode ter cartas, mas não pode emprestar seu Deck; confirmar equipe vencedora, conservação de UIDs, persistência e painel Discord terminal.",
+  "scope": {
+    "files": [
+      "tests/tagClassicDeckOutPhysicalOwner2v2.test.cjs",
+      "docs/evidence/m496-tag-classic-deckout-physical-owner-2v2.json",
+      ".github/workflows/m496-tag-classic-deckout-physical-owner-2v2.yml"
+    ],
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "setup": "TagDuel clássico 2v2, primeiro assento 3, próximo assento físico 0; os 16 cards restantes do Deck do assento 0 são movidos ao Cemitério compartilhado, preservando seus UIDs. O parceiro físico 2 continua com 16 cards no Deck privado.",
+    "expected": "Ao terminar o turno do assento 3, o assento físico 0 entra na vez e falha na compra. A equipe vermelha vence por deck-out; o motor não empresta o Deck do parceiro 2.",
+    "discord": "O handler handleTagComponent recebe o End action pelo menu privado, confirma antes da mutação, persiste status finished e um evento duelFinished, atualiza o painel público e remove controles de ação."
+  },
+  "testCoverage": [
+    "20 cartas legais por participante e 80 UIDs físicos únicos.",
+    "Deck-out é causado pelo Deck vazio do assento que entra, não pelo assento que sai.",
+    "O Deck de 16 cartas do parceiro inativo permanece intacto e não é usado como substituto.",
+    "A equipe vencedora é tag-team-1 e o motivo é a falha em comprar.",
+    "As mãos dos quatro participantes permanecem privadas no painel público.",
+    "A ação Discord é confirmada antes da mutação, incrementa uma revisão e grava exatamente um evento duelFinished.",
+    "O painel terminal não contém controles acionáveis.",
+    "A economia/coleção dos jogadores não muda.",
+    "Conservação dos 80 UIDs/IDs físicos antes e depois da resolução."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "reason": "M496 valida regra de duelo e não adiciona nem certifica cartas."
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "handler e builders offline com validateDiscordPayload; sem token, guild ou canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/tagClassicDeckOutPhysicalOwner2v2.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "O teste cobre o draw obrigatório no início do turno após End Phase; não cobre efeitos opcionais de compra nem todas as condições de deck-out.",
+    "Discord é exercitado offline pelo handler/builders; não há validação em guild/canal real.",
+    "Não altera o resolver, catálogo ou certificações."
+  ]
+}
