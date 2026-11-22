@@ -1,0 +1,28 @@
+name: M425 Flip Monster Destruction Family
+on:
+  pull_request:
+    paths:
+      - 'src/flipMonsterDestructionFamily.ts'
+      - 'tests/flipMonsterDestructionFamily.test.cjs'
+      - 'docs/evidence/m425-flip-destruction-family.json'
+      - '.github/workflows/m425-flip-destruction-family.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flip-monster-destruction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Run FLIP destruction behavior tests
+        run: node --test tests/flipMonsterDestructionFamily.test.cjs
