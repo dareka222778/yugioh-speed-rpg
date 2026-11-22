@@ -70,7 +70,7 @@ test('rejects a source that is not on the responding team shared Monster Zone', 
   const s = state();
   assert.deepEqual(
     prepareATeamTagDuelResponse(s, 0, 0, 'missing', cardKind, speed),
-    { eligible: false, reason: 'activation-not-pending' },
+    { eligible: false, reason: 'source-not-on-monster-zone' },
   );
 });
 
