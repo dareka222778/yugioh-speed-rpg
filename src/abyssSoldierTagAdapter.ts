@@ -70,7 +70,7 @@ export function abyssSoldierTagTargetViews(
   const visible=ref.faceUp===true;
   return {
    uid:target.uid,
-   label:visible?(getCardName(target.id)??'Carta'):'Carta oculta',
+   label:visible?(getCardName(ref.id)??'Carta'):'Carta oculta',
    controller:target.controller,
    ownerTeam:target.ownerTeam,
    zone:target.zone,
