@@ -10,7 +10,9 @@ const { RULES_PROFILE, rulesFor } = require('../dist/rulesProfile');
 
 const deck20 = starterContents.warrior.flatMap(card => Array(card.quantity).fill(card.id));
 const deck30 = tagLoanDeck();
-const deck31 = [...deck30, tagNormalCardIds.find(id => !deck30.includes(id))];
+const additionalMainId = tagNormalCardIds.find(id => !deck30.includes(id));
+assert.ok(additionalMainId, 'the enabled Normal pool must contain an eleventh distinct Main Deck card');
+const deck31 = [...deck30, additionalMainId];
 const fusionIds = [...new Set(cards
   .filter(card => card.kind === 'monster' && card.monsterType === 'fusion' && getPlayableCard(card.id))
   .map(card => card.id))];
