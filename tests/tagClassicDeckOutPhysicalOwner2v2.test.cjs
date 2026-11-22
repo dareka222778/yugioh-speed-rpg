@@ -32,7 +32,6 @@ function game(){
     cards:[...ids]
   }));
   const state=tag.createTagDuel(players,{seed:'m496-incoming-seat-deckout',first:3,classic:true});
-  state.core.rulesVersion='speed-rpg-v2';
   assert.deepEqual(state.active,[0,3]);
   assert.equal(state.cursor,3);
   assert.equal(tag.tagDecisionMember(state).id,'m496-seat-3');
