@@ -82,6 +82,10 @@ test('cost candidates and payment use only the active physical representative ha
 test('inactive partner cannot pay the cost or resolve the effect as representative', () => {
   const s = state();
   s.players[0].hand = [{ uid: 'm0:water', id: 'water' }];
+  s.players[1].monsters.push({
+    uid: 'm1:target', id: 'normal', owner: 1, faceUp: true, position: 'atk',
+    entered: 1, changed: 1, attacked: 0, atkBoost: 0, defBoost: 0,
+  });
   const before = structuredClone(s);
   assert.throws(
     () => abyssSoldierTagCostTargets(s, 0, 2, getCard),
@@ -89,6 +93,10 @@ test('inactive partner cannot pay the cost or resolve the effect as representati
   );
   assert.throws(
     () => payAbyssSoldierTagCost(s, 0, 2, 'm0:water', getCard),
+    /representante ativo/,
+  );
+  assert.throws(
+    () => resolveAbyssSoldierTagTarget(s, 0, 2, 'm1:target', getCard),
     /representante ativo/,
   );
   assert.deepEqual(s, before);
