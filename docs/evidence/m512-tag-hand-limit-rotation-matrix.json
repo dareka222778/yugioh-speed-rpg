@@ -1,0 +1,78 @@
+{
+  "mission": "M512",
+  "runId": "work-20261122T081500-0300-M512",
+  "priority": "P1 — ampliar a regressão do limite de mão 6 para as quatro posições iniciais do TagDuel clássico: descarte somente na End Phase, por dono físico, antes da compra do próximo assento.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e"
+  },
+  "scope": {
+    "files": [
+      "tests/tagHandLimitRotationMatrix2v2.test.cjs",
+      "docs/evidence/m512-tag-hand-limit-rotation-matrix.json",
+      ".github/workflows/m512-tag-hand-limit-rotation-matrix.yml"
+    ],
+    "runtimeChanged": false,
+    "tagDuelChanged": false,
+    "duelEngineChanged": false,
+    "rulesProfileChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "rotations": "Covers starting seats 0, 1, 2 and 3, each followed by the next physical seat.",
+    "endPhase": "Moves three existing physical cards from the active owner's Deck to hand to create a seven-card End Phase; the owner must discard to six before the incoming seat draws.",
+    "ownerAuthorization": "The inactive partner has no legal discard action and cannot call stepTagDuel for the active owner's discard.",
+    "persistence": "JSON round-trip during discard preserves the active physical owner and private hands.",
+    "drawOrdering": "The incoming seat's top Deck UID is untouched until the outgoing owner completes discard, then is drawn exactly once.",
+    "mainPhase": "A seven-card hand during Main Phase does not expose early discard actions for any of the four starting seats.",
+    "conservation": "All 80 physical UIDs and card identities remain conserved; non-acting hands and Deck orders remain unchanged."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "estado de TagDuel em memória; sem banco persistente",
+    "discord": "motor real compilado; sem API Discord",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node -e \"JSON.parse(require('node:fs').readFileSync('docs/evidence/m512-tag-hand-limit-rotation-matrix.json','utf8'))\"",
+      "node --test tests/tagHandLimitRotationMatrix2v2.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Motor TagDuel real em memória; não envia comandos/interações para Discord.",
+    "O teste de overflow move cartas físicas já existentes, sem concessão de inventário.",
+    "Não certifica novos efeitos de cartas."
+  ]
+}
