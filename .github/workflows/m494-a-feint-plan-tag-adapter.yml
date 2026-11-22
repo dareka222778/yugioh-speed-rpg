@@ -1,0 +1,38 @@
+name: M494 A Feint Plan TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m494-a-feint-plan-tag-adapter-20261122
+    paths:
+      - 'src/aFeintPlanTagAdapter.ts'
+      - 'tests/aFeintPlanTagAdapter.test.cjs'
+      - 'docs/evidence/m494-a-feint-plan-tag-adapter.json'
+      - '.github/workflows/m494-a-feint-plan-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/aFeintPlanTagAdapter.ts'
+      - 'tests/aFeintPlanTagAdapter.test.cjs'
+      - 'docs/evidence/m494-a-feint-plan-tag-adapter.json'
+      - '.github/workflows/m494-a-feint-plan-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  a-feint-plan-tag-adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m494-a-feint-plan-tag-adapter.json', 'utf8'))"
+      - name: Run A Feint Plan TagDuel tests
+        run: node --test tests/aFeintPlanTagAdapter.test.cjs
