@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "mission": "M521",
+  "runId": "work-20261122T121011-0300-M521",
+  "title": "Persisted 2v2 timeout and four-seat physical ownership",
+  "priority": "P1 — verify that a 2v2 classic timeout awards the opposing team, releases all four locks, preserves each physical Deck/hand/Extra Deck, and expires incomplete lobbies safely.",
+  "branch": "feat/work-m521-tag-timeout-2v2-physical-ownership-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "3be7995eab1e92279d745c88f41c8d534cfcbff0",
+  "scope": [
+    "tests/tagTimeout2v2PhysicalOwnership.test.cjs",
+    "docs/evidence/m521-tag-timeout-2v2-physical-ownership.json",
+    ".github/workflows/m521-tag-timeout-2v2-physical-ownership.yml"
+  ],
+  "behavior": {
+    "lobbyTimeoutMs": 300000,
+    "decisionTimeoutMs": 1800000,
+    "cases": [
+      "Timeout 2v2 no limite de 30 min vence o time oposto ao assento físico que devia agir.",
+      "A transição persiste status finished, revisão incrementada e um único evento duelFinished.",
+      "Os quatro locks tag_members são removidos atomicamente após W.O.",
+      "Mãos, Decks e Extra Decks dos quatro assentos físicos preservam UIDs e IDs; cada Main Deck fixture contém 20 cartas antes da compra inicial e Extra Deck permanece <=5.",
+      "A projeção pública expõe somente contagens de mão/Deck, nunca UIDs físicos privados.",
+      "Lobby 2v2 expira exatamente aos 5 min; todos os locks dos participantes aceitos são liberados sem criar DuelState nem eventos de duelo.",
+      "A fila dueTags mantém o painel terminal até markTagPublished confirmar a revisão."
+    ],
+    "rules": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "handDiscard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separada",
+      "extraDeckMax": 5
+    }
+  },
+  "validation": {
+    "database": "SQLite temporário isolado via DATABASE_PATH",
+    "store": "tagStore.getTag/dueTags/markTagPublished",
+    "engine": "createTagDuel/timeoutTagDuel/publicTagDuel",
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "Store-level/engine offline; não conecta a uma guild Discord real.",
+    "Não altera runtime, store, comandos, catálogo ou certificados.",
+    "Sem merge/deploy ou validação de produção."
+  ],
+  "status": "pending-ci"
+}
