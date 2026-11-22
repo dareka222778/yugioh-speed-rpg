@@ -34,6 +34,10 @@ function assertActiveRepresentative(s:DuelState,team:number,activeSeat:number):v
  }
 }
 
+function assertMainPhase(s:DuelState):void{
+ if(s.phase!=='main')throw new Error('Abyss Soldier só pode ativar na Main Phase.');
+}
+
 function fieldRef(s:DuelState,target:FieldCardTarget):{uid:string;id:string;faceUp?:boolean}|undefined{
  const player=s.players[target.controller];
  if(target.zone==='monsters')return player.monsters.find(ref=>ref.uid===target.uid);
@@ -46,6 +50,7 @@ export function abyssSoldierTagCostTargets(
  s:DuelState,team:number,activeSeat:number,getCard:TypedDiscardCardLookup,
 ):CardRef[]{
  assertActiveRepresentative(s,team,activeSeat);
+ assertMainPhase(s);
  return abyssSoldierDiscardTargets(s,team,getCard);
 }
 
@@ -54,6 +59,7 @@ export function payAbyssSoldierTagCost(
  s:DuelState,team:number,activeSeat:number,uid:string,getCard:TypedDiscardCardLookup,
 ):CardRef{
  assertActiveRepresentative(s,team,activeSeat);
+ assertMainPhase(s);
  return payAbyssSoldierDiscard(s,team,uid,getCard);
 }
 
