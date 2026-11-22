@@ -127,7 +127,7 @@ test('face-down field targets are redacted and their names are never requested',
   s.players[0].field = { uid: 'm0:hidden-field', id: 'secret-trap', setTurn: 1, faceUp: false };
   s.players[0].backrow.push({ uid: 'm0:faceup-spell', id: 'faceup-spell', setTurn: 1, faceUp: true });
   const lookedUp = [];
-  const views = abyssSoldierTagTargetViews(s, id => {
+  const views = abyssSoldierTagTargetViews(s, 0, 0, id => {
     lookedUp.push(id);
     return getName(id);
   });
@@ -159,6 +159,15 @@ test('face-down field targets are redacted and their names are never requested',
   assert.equal(visible.label, 'Face-up Spell');
   assert.equal(visible.visibility, 'public');
   assert.deepEqual(lookedUp, ['faceup-spell']);
+});
+
+test('inactive partner cannot enumerate Abyss Soldier field targets', () => {
+  const s = state();
+  s.players[1].backrow.push({ uid: 'm3:hidden', id: 'secret-trap', setTurn: 1, faceUp: false });
+  assert.throws(
+    () => abyssSoldierTagTargetViews(s, 0, 2, getName),
+    /representante ativo/,
+  );
 });
 
 test("a stolen monster returns to the inactive physical owner's private hand", () => {
