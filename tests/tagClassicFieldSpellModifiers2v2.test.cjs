@@ -259,7 +259,6 @@ test('Sogen can be Set face-down, remains inactive until flipped and resolved, t
   record=await activateField(record,source.uid,'sogen-flip');
   assert.equal(record.state.core.players[0].field.faceUp,true);
   assert.equal(record.state.core.players[0].field.resolved,true,'the Field Spell resolves immediately when no legal response is available');
-  assertStats(record.state,[[warrior,0],[beastWarrior,0],[partnerWarrior,0],[unmatched,0]]);
   assert.equal(tag.publicTagDuel(record.state).teams[0].field.id,'86318356');
   assert.equal(record.state.core.phase,'main','the Field Spell resolves immediately when no legal response is available');
   assertStats(record.state,[[warrior,200],[beastWarrior,200],[partnerWarrior,200],[unmatched,0]]);
