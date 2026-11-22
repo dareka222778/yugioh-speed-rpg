@@ -1,0 +1,38 @@
+name: M490 Abyss Soldier TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m490-abyss-soldier-tag-duel-adapter-20261121
+    paths:
+      - 'src/abyssSoldierTagAdapter.ts'
+      - 'tests/abyssSoldierTagAdapter.test.cjs'
+      - 'docs/evidence/m490-abyss-soldier-tag-duel-adapter.json'
+      - '.github/workflows/m490-abyss-soldier-tag-duel-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/abyssSoldierTagAdapter.ts'
+      - 'tests/abyssSoldierTagAdapter.test.cjs'
+      - 'docs/evidence/m490-abyss-soldier-tag-duel-adapter.json'
+      - '.github/workflows/m490-abyss-soldier-tag-duel-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  abyss-soldier-tag-adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m490-abyss-soldier-tag-duel-adapter.json', 'utf8'))"
+      - name: Run Abyss Soldier TagDuel tests
+        run: node --test tests/abyssSoldierTagAdapter.test.cjs
