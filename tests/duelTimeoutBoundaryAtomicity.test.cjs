@@ -108,7 +108,7 @@ test('a 30-minute decision timeout awards the W.O. to the actual decision oppone
   assert.equal(terminal.status,'finished');
   assert.equal(terminal.state.phase,'finished');
   assert.equal(terminal.state.winner,winner,'W.O. belongs to the player who was not required to decide');
-  assert.match(terminal.state.reason,/W\\.O\\./i);
+  assert.match(terminal.state.reason,/W\.O\./i);
   assert.equal(terminal.revision,started.revision+1);
   assert.equal(db.prepare('SELECT COUNT(*) AS n FROM duel_members WHERE duel_id=?').get(started.id).n,0);
   assert.equal(store.currentDuel(owner),undefined);
@@ -118,7 +118,7 @@ test('a 30-minute decision timeout awards the W.O. to the actual decision oppone
   const finished=events.filter(event=>event.type==='duelFinished');
   assert.equal(finished.length,1);
   assert.equal(finished[0].winner,winner);
-  assert.match(finished[0].reason,/W\\.O\\./i);
+  assert.match(finished[0].reason,/W\.O\./i);
   assert.equal(store.getDuel(started.id,base+decisionTimeout+60_000).revision,terminal.revision,
     're-reading a terminal duel cannot award a second W.O. or increment its revision');
   assert.equal(store.duelEventsAt(started.id,terminal.revision).filter(event=>event.type==='duelFinished').length,1);
