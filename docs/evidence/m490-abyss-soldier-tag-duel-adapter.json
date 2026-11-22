@@ -14,9 +14,8 @@
     "docs/evidence/m490-abyss-soldier-tag-duel-adapter.json",
     ".github/workflows/m490-abyss-soldier-tag-duel-adapter.yml"
   ],
-  "testCount": 10,
+  "testCount": 8,
   "behavior": [
-    "Guard once-per-turn por UID físico do Abyss Soldier face-up: marca somente após resolução bem-sucedida e libera no turno seguinte.",
     "Contrato once-per-turn e janela Main Phase.",
     "Custo: exatamente um monstro WATER da mão privada do representante ativo.",
     "Alvos: monstros, backrow e Field Spell de ambas as equipes.",
@@ -61,6 +60,7 @@
     "PR é empilhada sobre M370 #318; precisa ser retargeted/reconciliada depois que a PR-base for revisada e mesclada.",
     "Testes usam estado DuelState isolado compatível com TeamRotation; não executam uma partida Discord ao vivo.",
     "M370 helper subjacente ainda contém FieldCardTarget com id; este adapter redige a projeção para UI e não retorna o campo id.",
-    "O marcador per-copy é preparado no adapter; a integração do marcador no fluxo de resolução real depende do handoff M61."
+    "O marcador per-copy é preparado no adapter; a integração do marcador no fluxo de resolução real depende do handoff M61.",
+    "O plano declara once-per-turn, mas o consumo do marcador permanece no resolver central para respeitar semântica de negação de ativação; não foi simulado fora do handoff M61."
   ]
 }
