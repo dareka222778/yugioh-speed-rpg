@@ -41,26 +41,6 @@ function fieldRef(s:DuelState,target:FieldCardTarget):{uid:string;id:string;face
  return player.field?.uid===target.uid?player.field:undefined;
 }
 
-/** Checks the per-copy once-per-turn window on the face-up Abyss Soldier. */
-export function canActivateAbyssSoldierTag(
- s:DuelState,team:number,activeSeat:number,monsterUid:string,
-):boolean{
- assertActiveRepresentative(s,team,activeSeat);
- const monster=s.players[team].monsters.find(ref=>ref.uid===monsterUid);
- return !!monster&&monster.id===ABYSS_SOLDIER_ID&&monster.faceUp&&monster.effectUsedTurn!==s.turn;
-}
-
-/** Called only after a successful resolution, so failed costs do not consume the once-per-turn use. */
-export function markAbyssSoldierTagUsed(
- s:DuelState,team:number,activeSeat:number,monsterUid:string,
-):void{
- assertActiveRepresentative(s,team,activeSeat);
- const monster=s.players[team].monsters.find(ref=>ref.uid===monsterUid);
- if(!monster||monster.id!==ABYSS_SOLDIER_ID||!monster.faceUp)throw new Error('Abyss Soldier não está face-up no campo da equipe.');
- if(monster.effectUsedTurn===s.turn)throw new Error('Abyss Soldier já utilizou seu efeito neste turno.');
- monster.effectUsedTurn=s.turn;
-}
-
 /** Cost candidates are restricted to the active physical representative's private hand. */
 export function abyssSoldierTagCostTargets(
  s:DuelState,team:number,activeSeat:number,getCard:TypedDiscardCardLookup,
