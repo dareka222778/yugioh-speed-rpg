@@ -1,0 +1,153 @@
+{
+  "runId": "work-20261122T064400-0300-M498",
+  "mission": "M498",
+  "owner": "Work principal",
+  "priority": "P1 — proteger o comando Discord /dupla treino: opções yugi/joey/kaiba/meu_deck, default Yugi, resposta pública e integração com createTagTraining/runTagBots; confirmar que usar meu_deck captura o deck ativo do usuário sem alterar coleção ou conceder cartas.",
+  "startedAt": "2026-11-22T06:44:00-03:00",
+  "lastActivityAt": "2026-11-22T06:44:00-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m498-tag-training-command-contract-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b37359e8ca0a8fd7e89d4b9654d4b5c96742927e",
+  "sharedHeadAtReservation": "b37359e8ca0a8fd7e89d4b9654d4b5c96742927e",
+  "reservedFiles": [
+    "tests/tagTrainingCommandContract.test.cjs",
+    "docs/evidence/m498-tag-training-command-contract.json",
+    ".github/workflows/m498-tag-training-command-contract.yml"
+  ],
+  "scope": [
+    "tests/tagTrainingCommandContract.test.cjs",
+    "docs/evidence/m498-tag-training-command-contract.json",
+    ".github/workflows/m498-tag-training-command-contract.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T06:44:00-03:00",
+    "checkedReservations": [
+      "currentWorkReservation",
+      "currentWorkReservationM397",
+      "currentWorkReservationM398",
+      "currentWorkReservationM399",
+      "currentWorkReservationM400",
+      "currentWorkReservationM401",
+      "currentWorkReservationM402",
+      "currentWorkReservationM403",
+      "currentWorkReservationM404",
+      "currentWorkReservationM405",
+      "currentWorkReservationM406",
+      "currentWorkReservationM407",
+      "currentWorkReservationM427",
+      "currentWorkReservationM428",
+      "currentWorkReservationM429",
+      "currentWorkReservationM430",
+      "currentWorkReservationM431",
+      "currentWorkReservationM432",
+      "currentWorkReservationM433",
+      "currentWorkReservationM436",
+      "currentWorkReservationM437",
+      "currentWorkReservationM441",
+      "currentWorkReservationM442",
+      "currentWorkReservationM443",
+      "currentWorkReservationM444",
+      "currentWorkReservationM455",
+      "currentWorkReservationM456",
+      "currentWorkReservationM457",
+      "currentWorkReservationM458",
+      "currentWorkReservationM459",
+      "currentWorkReservationM469",
+      "currentWorkReservationM470",
+      "currentWorkReservationM471",
+      "currentWorkReservationM472",
+      "currentWorkReservationM473",
+      "currentWorkReservationM474",
+      "currentWorkReservationM475",
+      "currentWorkReservationM476",
+      "currentWorkReservationM477",
+      "currentWorkReservationM478",
+      "currentWorkReservationM479",
+      "currentWorkReservationM480",
+      "currentWorkReservationM481",
+      "currentWorkReservationM482",
+      "currentWorkReservationM483",
+      "currentWorkReservationM484",
+      "currentWorkReservationM485",
+      "currentWorkReservationM486",
+      "currentWorkReservationM487",
+      "currentWorkReservationM494",
+      "currentWorkReservationM495",
+      "currentWorkReservationM496",
+      "currentWorkReservationM497"
+    ],
+    "preserved": [
+      "M496 PR #444: focused, Card Batch Fast e Milestone success; Engine Validation/Extended Soak em execução",
+      "M497 PR #445: focused success; Card Batch Fast/Milestone/Engine Validation em execução",
+      "M468 PR #416 já cobre /dupla convidar; M498 limita-se ao subcomando treino",
+      "M61 e todas as reservas de terceiros preservadas"
+    ]
+  },
+  "workBlocks": [
+    "Reconsultou HEAD e coordenação após M496/M497.",
+    "Confirmou que /dupla convidar já tem contrato M468; a lacuna independente é o subcomando /dupla treino e sua opção deck.",
+    "Inspecionou index.ts: treino aceita yugi (default), joey, kaiba e meu_deck; handler chama runTagBots(createTagTraining(...)), publica painel e persiste a mensagem."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Ainda não executados; serão disparados pela CI da PR."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtReservation": "b37359e8ca0a8fd7e89d4b9654d4b5c96742927e",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "Endpoint de deployments não foi aceito pela integração GitHub; produção não verificada."
+  },
+  "handoffM61": {
+    "pr": 17,
+    "commentId": 7074991975,
+    "status": "requested-no-response",
+    "files": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/classicEngineCards.ts",
+      "src/effectDefinitions.ts",
+      "src/cardMetadata.ts",
+      "src/cardCertifications.ts",
+      "catalog/engine-v9/manifest.json"
+    ]
+  },
+  "relatedM496": {
+    "pr": 444,
+    "head": "0425a17a0b7d80b26da39e19451ac620c2687409",
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "running"
+  },
+  "relatedM497": {
+    "pr": 445,
+    "head": "9cf5bc46379ee4ba6ca2f98a10e14d5460b8c215",
+    "focused": "success",
+    "cardBatchFast": "running",
+    "milestone1000": "running",
+    "engineValidation": "running"
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Testar contrato do subcomando /dupla treino e as fontes Yugi/meu_deck no TagStore com SQLite temporário; depois consultar CI e HEAD antes de nova família.",
+  "nextWindow": "2026-11-22T11:30:00-03:00"
+}
