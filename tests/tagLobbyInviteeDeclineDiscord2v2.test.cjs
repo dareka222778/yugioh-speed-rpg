@@ -95,7 +95,8 @@ test('M513 any invited seat may decline a partially accepted lobby; all locks re
 
   const cancelled=store.getTag(record.id);
   assert.deepEqual(deferred,['update']);
-  assert.deepEqual(events,['ack','defer-callback:update','edit','refresh']);
+  assert.deepEqual(fake.events,['ack','edit']);
+  assert.deepEqual(events,['defer-callback:update','refresh']);
   assert.equal(fake.result.edits.length,1);
   assert.equal(cancelled.status,'cancelled');
   assert.equal(cancelled.revision,3);
