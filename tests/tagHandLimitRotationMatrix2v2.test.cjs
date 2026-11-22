@@ -108,7 +108,7 @@ for(let first=0;first<4;first++){
       else if(seat===incoming)assert.equal(afterHands[member(seat)].length,beforeHands[member(seat)].length+1);
       else assert.deepEqual(afterHands[member(seat)],beforeHands[member(seat)],'non-acting physical hand changed: '+seat);
       if(seat===incoming)assert.equal(afterDecks[member(seat)].length,beforeDecks[member(seat)].length-1);
-      else if(seat===first)assert.equal(afterDecks[member(seat)].length,beforeDecks[member(seat)].length+3-3,
+      else if(seat===first)assert.equal(afterDecks[member(seat)].length,beforeDecks[member(seat)].length,
         'outgoing owner used only its own three cards to create the overflow');
       else assert.deepEqual(afterDecks[member(seat)],beforeDecks[member(seat)],'non-acting physical Deck changed: '+seat);
     }
