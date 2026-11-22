@@ -14,7 +14,7 @@
     "docs/evidence/m490-abyss-soldier-tag-duel-adapter.json",
     ".github/workflows/m490-abyss-soldier-tag-duel-adapter.yml"
   ],
-  "testCount": 11,
+  "testCount": 10,
   "behavior": [
     "Janela de ativação limitada à Main Phase.",
     "Contrato once-per-turn e janela Main Phase.",
