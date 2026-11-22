@@ -1,0 +1,71 @@
+{
+  "runId": "work-20261122T164500-0300-M528",
+  "mission": "M528",
+  "parentRunId": "work-20261122T163436-0300-M527",
+  "owner": "Work principal",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-22T16:45:00-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "a40f77538b2116042bd8fa4b326ee7b90c3a24ea",
+  "branch": "feat/work-m528-duel-timeout-restart-publication-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "a40f77538b2116042bd8fa4b326ee7b90c3a24ea",
+  "priority": "P1 — provar recuperação após reinício do processo para timeout 1v1: o evento duelFinished e a revisão terminal devem sobreviver ao restart; polling pós-restart não duplica evento; ACK correspondente persiste e remove o outbox; Decks, mãos, zonas, locks e dados econômicos permanecem íntegros.",
+  "reservedFiles": [
+    "tests/duelTimeoutRestartPublication.test.cjs",
+    "docs/evidence/m528-duel-timeout-restart-publication.json",
+    ".github/workflows/m528-duel-timeout-restart-publication.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T16:45:00-03:00",
+    "checkedAgainst": [
+      "M527 PR #473 — polling/ACK idempotente em um processo; arquivos próprios preservados",
+      "M520 PR #466 — handler 1v1; três caminhos próprios",
+      "M515–M526 PRs #462–#472 — timeouts/receipts; runtime/store somente leitura",
+      "M61 e todas as reservas de terceiros"
+    ],
+    "note": "Somente teste/evidência/workflow novos. O teste usa SQLite temporário e processos Node filhos; não altera src/duelStore.ts, src/duelEngine.ts, handlers, catálogo, manifesto, resolver, allowlist, certificados ou dados persistentes."
+  },
+  "workBlocks": [
+    "Reauditado shared HEAD a40f77538b2116042bd8fa4b326ee7b90c3a24ea e coordenação; M527 permanece ativo e CI focada 2/2 aprovada, Card Batch Fast/Engine Validation ainda executando.",
+    "M528 reservado em caminhos novos e independentes para teste de persistência de outbox entre processos."
+  ],
+  "tests": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null,
+    "limitations": "SQLite temporário, subprocessos Node locais da CI; sem guild/token Discord real."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Persistir um W.O. 1v1 e verificar em novo processo que revisão/evento/outbox permanecem idempotentes até ACK.",
+  "nextWindow": "2026-11-22T17:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}
