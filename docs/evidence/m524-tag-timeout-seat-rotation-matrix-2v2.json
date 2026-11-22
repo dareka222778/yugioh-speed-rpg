@@ -29,9 +29,10 @@
     "extraDeckMax": 5
   },
   "validation": {
-    "focused": "pending",
-    "check": "pending",
-    "build": "pending",
+    "focused": "rerun-pending",
+    "check": "success on prior head",
+    "build": "success on prior head",
+    "supersededAttempt": "The first test asserted monsters/backrow occupancy arrays had fixed length three; they are occupancy lists. Corrected the test to read immutable zone capacities from rulesFor(core), and to assert the separate field property.",
     "inventoryGranted": 0,
     "newCertifications": 0,
     "automaticCertifications": 0
@@ -46,5 +47,6 @@
     "SQLite temporário; sem guild Discord real.",
     "Teste cobre store, estado 2v2 e builders públicos; não altera runtime, handler, store, UI ou catálogo.",
     "Sem merge/deploy/produção."
-  ]
+  ],
+  "status": "rerun-pending"
 }
