@@ -19,13 +19,13 @@ const {starterContents}=require('../dist/cardCatalog');
 const {validateDiscordPayload}=require('../dist/discordPayload');
 const source=fs.readFileSync(path.join(__dirname,'../src/index.ts'),'utf8');
 
-const owner='m502-owner';
-const opponent='m502-opponent';
 const guild='m502-guild';
 let sequence=0;
 const cards=style=>starterContents[style].flatMap(card=>Array(card.quantity).fill(card.id));
 
 function seed(id){
+  const owner=id+'-owner';
+  const opponent=id+'-opponent';
   const state=engine.createDuel([
     {id:owner,name:'Duelista Azul',cards:cards('warrior')},
     {id:opponent,name:'Duelista Vermelho',cards:cards('spellcaster')}
@@ -36,7 +36,7 @@ function seed(id){
   ).run(id,guild,'m502-channel',null,'playing',revision,Date.now(),JSON.stringify(state),null);
   db.prepare('INSERT INTO duel_members(owner,duel_id) VALUES(?,?)').run(owner,id);
   db.prepare('INSERT INTO duel_members(owner,duel_id) VALUES(?,?)').run(opponent,id);
-  return {id,state,revision};
+  return {id,state,revision,owner,opponent};
 }
 
 function inventory(state){
@@ -96,11 +96,11 @@ test('/duelo sair is registered, ephemeral, confirmed, and rejects a stale quit 
 
   const record=seed('m502-confirmation');
   const originalInventory=inventory(record.state);
-  const stale=makeInteraction('duel:quit:'+record.id+':'+(record.revision-1),owner);
+  const stale=makeInteraction('duel:quit:'+record.id+':'+(record.revision-1),record.owner);
   await assert.rejects(deliver(stale.interaction),/painel ficou antigo/i);
   assert.equal(stale.calls.reply.length,0,'stale quit buttons must not open a fresh confirmation');
 
-  const current=makeInteraction('duel:quit:'+record.id+':'+record.revision,owner);
+  const current=makeInteraction('duel:quit:'+record.id+':'+record.revision,record.owner);
   await deliver(current.interaction);
   assert.equal(current.calls.reply.length,1);
   const confirmation=current.calls.reply[0];
@@ -133,10 +133,10 @@ test('only a physical duel participant can open the private concession confirmat
 
 test('the Continue button reopens only the authenticated participant private hand',async()=>{
   const record=seed('m502-continue');
-  const quit=makeInteraction('duel:quit:'+record.id+':'+record.revision,owner);
+  const quit=makeInteraction('duel:quit:'+record.id+':'+record.revision,record.owner);
   await deliver(quit.interaction);
   const continueId=buttonIds(quit.calls.reply[0])[1];
-  const continuation=makeInteraction(continueId,owner);
+  const continuation=makeInteraction(continueId,record.owner);
   await deliver(continuation.interaction);
   assert.equal(continuation.calls.deferReply[0].flags,MessageFlags.Ephemeral);
   const panel=continuation.calls.editReply[0];
@@ -153,11 +153,11 @@ test('the Continue button reopens only the authenticated participant private han
 
 test('a stale confirmation cannot concede; the store revision is checked before persistence',async()=>{
   const record=seed('m502-stale-confirm');
-  const quit=makeInteraction('duel:quit:'+record.id+':'+record.revision,owner);
+  const quit=makeInteraction('duel:quit:'+record.id+':'+record.revision,record.owner);
   await deliver(quit.interaction);
   const confirmId=buttonIds(quit.calls.reply[0])[0];
   db.prepare('UPDATE duels SET revision=revision+1 WHERE id=?').run(record.id);
-  const staleConfirm=makeInteraction(confirmId,owner);
+  const staleConfirm=makeInteraction(confirmId,record.owner);
   await assert.rejects(deliver(staleConfirm.interaction),/painel ficou antigo/i);
   assert.equal(staleConfirm.calls.deferUpdate,1);
   assert.equal(staleConfirm.calls.editReply.length,0);
@@ -171,10 +171,10 @@ test('a stale confirmation cannot concede; the store revision is checked before 
 test('a fresh explicit confirmation finishes the duel, persists duelFinished, and releases both memberships',async()=>{
   const record=seed('m502-fresh-confirm');
   const originalInventory=inventory(record.state);
-  const quit=makeInteraction('duel:quit:'+record.id+':'+record.revision,owner);
+  const quit=makeInteraction('duel:quit:'+record.id+':'+record.revision,record.owner);
   await deliver(quit.interaction);
   const confirmId=buttonIds(quit.calls.reply[0])[0];
-  const confirmation=makeInteraction(confirmId,owner);
+  const confirmation=makeInteraction(confirmId,record.owner);
   let refreshed=0;
   await deliver(confirmation.interaction,{refreshArena:async finished=>{
     refreshed++;
@@ -187,13 +187,13 @@ test('a fresh explicit confirmation finishes the duel, persists duelFinished, an
   const after=store.getDuel(record.id);
   assert.equal(after.status,'finished');
   assert.equal(after.state.phase,'finished');
-  assert.equal(after.state.winner,opponent);
+  assert.equal(after.state.winner,record.opponent);
   assert.match(after.state.reason,/desist/i);
   assert.deepEqual(inventory(after.state),originalInventory,'concession must not move, grant, or duplicate physical cards');
   assert.equal(db.prepare('SELECT COUNT(*) AS n FROM duel_members WHERE duel_id=?').get(record.id).n,0);
   assert.equal(db.prepare('SELECT COUNT(*) AS n FROM duel_transition_events WHERE duel_id=?').get(record.id).n,1);
   const events=JSON.parse(db.prepare('SELECT events_json FROM duel_transition_events WHERE duel_id=?').get(record.id).events_json);
-  assert.ok(events.some(event=>event.type==='duelFinished'&&event.winner===opponent));
+  assert.ok(events.some(event=>event.type==='duelFinished'&&event.winner===record.opponent));
   assert.equal(db.prepare('SELECT COUNT(*) AS n FROM duel_action_receipts WHERE duel_id=?').get(record.id).n,1);
 });
 
