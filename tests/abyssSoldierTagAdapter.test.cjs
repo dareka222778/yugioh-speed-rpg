@@ -39,6 +39,7 @@ const infos = new Map([
   ['normal', { kind: 'monster', attribute: 'EARTH' }],
   ['fusion', { kind: 'monster', attribute: 'DARK', fusion: { materials: [] } }],
   ['secret-trap', { kind: 'trap' }],
+  ['secret-monster', { kind: 'monster', attribute: 'DARK' }],
   ['faceup-spell', { kind: 'spell' }],
 ]);
 const getCard = id => infos.get(id);
@@ -105,6 +106,8 @@ test('inactive partner cannot pay the cost or resolve the effect as representati
 test('face-down field targets are redacted and their names are never requested', () => {
   const s = state();
   s.players[1].backrow.push({ uid: 'm3:hidden-trap', id: 'secret-trap', setTurn: 1, faceUp: false });
+  s.players[1].monsters.push({ uid: 'm3:hidden-monster', id: 'secret-monster', owner: 1, faceUp: false, position: 'def', entered: 1, changed: 1, attacked: 0, atkBoost: 0, defBoost: 0 });
+  s.players[0].field = { uid: 'm0:hidden-field', id: 'secret-trap', setTurn: 1, faceUp: false };
   s.players[0].backrow.push({ uid: 'm0:faceup-spell', id: 'faceup-spell', setTurn: 1, faceUp: true });
   const lookedUp = [];
   const views = abyssSoldierTagTargetViews(s, id => {
@@ -123,6 +126,17 @@ test('face-down field targets are redacted and their names are never requested',
   });
   assert.equal(Object.hasOwn(hidden, 'id'), false);
   assert.equal(lookedUp.includes('secret-trap'), false);
+
+  const hiddenMonster = views.find(view => view.uid === 'm3:hidden-monster');
+  assert.equal(hiddenMonster.label, 'Carta oculta');
+  assert.equal(hiddenMonster.visibility, 'hidden');
+  assert.equal(Object.hasOwn(hiddenMonster, 'id'), false);
+  assert.equal(lookedUp.includes('secret-monster'), false);
+
+  const hiddenField = views.find(view => view.uid === 'm0:hidden-field');
+  assert.equal(hiddenField.label, 'Carta oculta');
+  assert.equal(hiddenField.visibility, 'hidden');
+  assert.equal(Object.hasOwn(hiddenField, 'id'), false);
 
   const visible = views.find(view => view.uid === 'm0:faceup-spell');
   assert.equal(visible.label, 'Face-up Spell');
