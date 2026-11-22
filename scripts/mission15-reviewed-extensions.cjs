@@ -5,8 +5,19 @@ const ids=['26725158','21323861','56606928','20101223','90873992','94716515','95
 const aiImport="import {filteredDestructionUtility} from './filteredDestructionStrategy';\n";
 const aiHook="  if(effect.kind==='destroyFiltered')return filteredDestructionUtility(s,p===s.players[0]?0:1,effect)>0;\n";
 const metadataImport="import {mechanicalBatch15} from './mechanicalBatch15';\n";
+const flipMetadataImportPattern=/^[ \t]*import \{cards as m424_m426_flip_cards\} from '\.\/generated\/m424-m426-flip-cards';\r?\n?/m;
+const flipMetadataSpreadPattern=/,\.\.\.m424_m426_flip_cards(?=\])/g;
 function removeOnce(text,part){assert.equal(text.split(part).length,2,'Reviewed extension must occur exactly once');return text.replace(part,'');}
-function baselineBytes(file,bytes){bytes=require('./mission29-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission21-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission19-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission18-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission17-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission16-reviewed-extensions.cjs').strip(file,bytes);let text=bytes.toString('utf8');
+function baselineBytes(file,bytes){
+ if(file==='src/cardMetadata.ts'){
+  let original=bytes.toString('utf8');
+  if(original.includes('m424_m426_flip_cards')){
+   const imports=original.match(flipMetadataImportPattern)||[];assert.equal(imports.length,1,'M427 metadata import must occur exactly once');original=original.replace(flipMetadataImportPattern,'');
+   const spreads=original.match(flipMetadataSpreadPattern)||[];assert.equal(spreads.length,1,'M427 metadata spread must occur exactly once');original=original.replace(flipMetadataSpreadPattern,'');
+   bytes=Buffer.from(original,'utf8');
+  }
+ }
+ bytes=require('./mission29-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission21-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission19-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission18-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission17-reviewed-extensions.cjs').strip(file,bytes);bytes=require('./mission16-reviewed-extensions.cjs').strip(file,bytes);let text=bytes.toString('utf8');
  if(file==='src/duelStore.ts'&&text.includes(aiImport)){text=removeOnce(text,aiImport);text=removeOnce(text,aiHook);}
  if(file==='src/cardMetadata.ts'&&text.includes(metadataImport)){text=removeOnce(text,metadataImport);text=removeOnce(text,',...mechanicalBatch15');}
  if(file==='src/cardCertifications.ts'){
