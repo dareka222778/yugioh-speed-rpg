@@ -1,0 +1,77 @@
+{
+  "mission": "M513",
+  "runId": "work-20261122T082000-0300-M513",
+  "priority": "P1 — verificar que qualquer participante convidado pode recusar um lobby 2v2 parcialmente aceito, liberando todos os locks em uma única transição e impedindo replay de botão cancelado.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e"
+  },
+  "scope": {
+    "files": [
+      "tests/tagLobbyInviteeDeclineDiscord2v2.test.cjs",
+      "docs/evidence/m513-tag-lobby-invitee-decline-discord.json",
+      ".github/workflows/m513-tag-lobby-invitee-decline-discord.yml"
+    ],
+    "runtimeChanged": false,
+    "tagStoreChanged": false,
+    "tagInteractionChanged": false,
+    "tagUIChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "partialConsent": "Host plus two invited participants have accepted; the fourth invitee can decline using the current public cancel custom_id.",
+    "ackOrdering": "The real handler defers before cancellation and the test observes all three existing locks still present at acknowledgement.",
+    "lockRelease": "The cancelled revision removes every tag_members lock; currentTag returns undefined for all four seats.",
+    "publicRefresh": "The handler edits a terminal public payload with no live components and refreshes the public session once.",
+    "staleReplay": "Replaying the old cancel custom_id after cancellation is acknowledged but rejected without another revision, edit, refresh or lock change.",
+    "economy": "players, player_cards and starter_grants remain unchanged."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário",
+    "discord": "handler/builders reais offline; sem token, guild ou canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node -e \"JSON.parse(require('node:fs').readFileSync('docs/evidence/m513-tag-lobby-invitee-decline-discord.json','utf8'))\"",
+      "node --test tests/tagLobbyInviteeDeclineDiscord2v2.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Interação Discord offline; não chama API ou guild real.",
+    "Cobertura limitada ao cancelamento de lobby antes de iniciar a partida.",
+    "Não altera runtime nem certifica cartas."
+  ]
+}
