@@ -1,0 +1,42 @@
+{
+  "mission": "M484",
+  "title": "Discord TagDuel lobby-cancel and private-concession interaction flow",
+  "branch": "feat/work-m484-tag-discord-lobby-and-concession-flow-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "baf73cbbe28cade146ddcc1ef701d0aa754dea2b",
+  "testFile": "tests/tagDiscordLobbyAndConcessionFlow2v2.test.cjs",
+  "testCount": 2,
+  "scenarios": [
+    "Build the real public tagPublicMessage lobby panel, extract its emitted cancel custom_id, pass it through the real handleTagComponent, assert deferUpdate occurs while the lobby is still active, then assert cancelled public payload and refresh.",
+    "Build the real private tagPrivateMessage, extract the emitted quit custom_id, pass it through handleTagComponent, verify the first click only opens confirmation, extract the emitted confirm custom_id, and pass it through the real handler. Assert acknowledgement precedes concession, the opposite team wins, the finished private panel has no live actions, and the public refresh observes finished state."
+  ],
+  "invariants": [
+    "Real Discord.js builders and the real TagDuel interaction handler are exercised offline.",
+    "The cancel and confirm custom_ids are read from emitted payloads rather than hard-coded guesses.",
+    "The handler defers interaction updates before mutating persistent TagDuel state.",
+    "The private concession sequence is two-step and cannot finish the duel on the initial quit click.",
+    "The handler refreshes the public duel after a committed concession.",
+    "No live Discord token or network session is used."
+  ],
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "limits": [
+    "Fake Discord interaction objects exercise real builders/handler but do not call Discord API.",
+    "The tests cover lobby cancellation and team concession, not every component or modal.",
+    "No runtime, resolver, catalog manifest, allowlist, persistent database or player data is modified.",
+    "This is a Discord transport regression and certifies no new card behavior."
+  ],
+  "command": "npm run check && npm run build && node --test tests/tagDiscordLobbyAndConcessionFlow2v2.test.cjs",
+  "ciStatus": "pending"
+}
