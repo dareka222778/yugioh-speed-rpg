@@ -1,0 +1,77 @@
+{
+  "mission": "M506",
+  "runId": "work-20261122T072800-0300-M506",
+  "priority": "P1 — validar os componentes Discord reais de convite 1v1: aceitar somente pelo usuário convidado, rejeitar outsider/owner/guild/revisão incorretos, persistir a partida e liberar recusas sem alterar coleção ou inventário.",
+  "scope": {
+    "files": [
+      "tests/duelInvitationComponentContract.test.cjs",
+      "docs/evidence/m506-duel-invitation-component-contract.json",
+      ".github/workflows/m506-duel-invitation-component-contract.yml"
+    ],
+    "runtimeChanged": false,
+    "duelInteractionImportedReadOnly": true,
+    "storeChanged": false,
+    "catalogChanged": false
+  },
+  "behavior": {
+    "components": [
+      "duel:accept",
+      "duel:decline"
+    ],
+    "accept": "handleDuelComponent -> acceptChallenge with authenticated user, guild and revision; refreshes arena and sends ephemeral follow-up.",
+    "decline": "handleDuelComponent -> declineChallenge; refreshes arena and releases the creator's pending lock."
+  },
+  "testCoverage": [
+    "Executa handleDuelComponent real para accept/decline.",
+    "Rejeita outsider e o próprio criador ao aceitar.",
+    "Rejeita guild de origem incorreta e revisão obsoleta.",
+    "Confirma início da partida somente pelo convidado e follow-up ephemeral válido.",
+    "Confirma persistência de status/revisão, dois vínculos e IDs físicos dos participantes.",
+    "Confirma recusa pelo convidado, status declined e liberação do lock do criador.",
+    "Compara Decks, player records e coleções antes/depois; zero concessões."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio jogador",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "catalog": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "handleDuelComponent real e builders offline; sem Client/token/guild real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/duelInvitationComponentContract.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "O handler real é executado com interação simulada; não há conexão ao gateway Discord.",
+    "src/duelInteraction.ts é somente importado; a reserva M502 permanece exclusiva."
+  ]
+}

@@ -1,0 +1,36 @@
+name: M506 1v1 Duel Invitation Component Contract
+on:
+  push:
+    branches:
+      - feat/work-m506-duel-invitation-component-contract-20261122
+    paths:
+      - 'tests/duelInvitationComponentContract.test.cjs'
+      - 'docs/evidence/m506-duel-invitation-component-contract.json'
+      - '.github/workflows/m506-duel-invitation-component-contract.yml'
+  pull_request:
+    paths:
+      - 'tests/duelInvitationComponentContract.test.cjs'
+      - 'docs/evidence/m506-duel-invitation-component-contract.json'
+      - '.github/workflows/m506-duel-invitation-component-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-invitation-component-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m506-duel-invitation-component-contract.json', 'utf8'))"
+      - name: Run real duel invitation component contract
+        run: node --test tests/duelInvitationComponentContract.test.cjs
