@@ -1,0 +1,76 @@
+{
+  "mission": "M500",
+  "runId": "work-20261122T065200-0300-M500",
+  "priority": "P1 — proteger /dupla ver: a consulta de uma partida em andamento deve ser efêmera, localizar apenas a sessão do próprio usuário e entregar a mão privada do participante autenticado, nunca a mão do parceiro ou do adversário.",
+  "scope": {
+    "files": [
+      "tests/tagDuelViewCommandContract.test.cjs",
+      "docs/evidence/m500-tag-view-command-contract.json",
+      ".github/workflows/m500-tag-view-command-contract.yml"
+    ],
+    "runtimeChanged": false,
+    "bootstrapChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "command": "/dupla ver",
+    "response": "Ephemeral/private",
+    "sessionLookup": "currentTag(authenticatedDiscordUserId)",
+    "guildBoundary": "existing.guild must equal interaction.guildId",
+    "panel": "visualTagPrivate(record, authenticatedDiscordUserId) for playing duel; public lobby panel only before game starts"
+  },
+  "testCoverage": [
+    "Confirma o subcomando ver no builder e resposta ephemeral no handler real.",
+    "Confirma que a sessão é localizada pelo ID autenticado e que a guild de origem é validada.",
+    "Confirma que não há opção para escolher outro usuário como destinatário da mão.",
+    "Cria sessão 2v2 com quatro mãos físicas em SQLite temporário e um lock do usuário humano.",
+    "Valida painel privado do humano e painel público sem UIDs de nenhuma das quatro mãos.",
+    "Confirma que usuário externo não encontra a sessão.",
+    "Confirma revisão, estado, inventário físico, sessão e lock inalterados pela consulta."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "source contract + builders offline; sem token/guild/canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/tagDuelViewCommandContract.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Não instancia Client Discord nem envia resposta em guild real; valida o handler por contrato de source e os builders offline.",
+    "Não altera runtime, catálogo, certificados ou dados persistentes."
+  ]
+}
