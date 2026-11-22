@@ -1,0 +1,36 @@
+name: M534 1v1 Terminal Outcome Lock Cleanup
+on:
+  push:
+    branches:
+      - feat/work-m534-duel-terminal-outcome-lock-cleanup-20261122
+    paths:
+      - 'tests/duelTerminalOutcomeLockCleanup.test.cjs'
+      - 'docs/evidence/m534-duel-terminal-outcome-lock-cleanup.json'
+      - '.github/workflows/m534-duel-terminal-outcome-lock-cleanup.yml'
+  pull_request:
+    paths:
+      - 'tests/duelTerminalOutcomeLockCleanup.test.cjs'
+      - 'docs/evidence/m534-duel-terminal-outcome-lock-cleanup.json'
+      - '.github/workflows/m534-duel-terminal-outcome-lock-cleanup.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terminal-outcome-lock-cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m534-duel-terminal-outcome-lock-cleanup.json', 'utf8'))"
+      - name: Run 1v1 terminal cleanup regressions
+        run: node --test tests/duelTerminalOutcomeLockCleanup.test.cjs
