@@ -1,0 +1,42 @@
+{
+  "mission": "M482",
+  "title": "TagDuel training creation transaction atomicity",
+  "branch": "feat/work-m482-tag-training-creation-atomicity-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "1bce7b7c030b93cfcd217d587c1c5280ea6ad757",
+  "testFile": "tests/tagTrainingCreationAtomicity2v2.test.cjs",
+  "testCount": 2,
+  "scenarios": [
+    "A SQLite trigger aborts INSERT into tag_sessions during createTagTraining. The transaction must leave no orphan session and no owner lock; after removing the trigger, retry creates one playing training session and one human lock.",
+    "A SQLite trigger aborts INSERT into tag_members after the training session row has been inserted. The transaction must roll back the session row and lock together; retry creates exactly one session and one human lock."
+  ],
+  "invariants": [
+    "Training session and human participant lock are created atomically.",
+    "A failed createTagTraining leaves the preexisting sessions and locks byte-for-byte unchanged.",
+    "Only the human owner receives a global tag_members lock; NPC seats do not create player locks.",
+    "Player rows and player_cards remain unchanged; training decks remain ephemeral.",
+    "Successful training state has unique physical card UIDs."
+  ],
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "limits": [
+    "Tests use temporary SQLite and real compiled TagStore/TagDuel modules.",
+    "Fault injection covers SQL trigger aborts, not process termination or filesystem corruption.",
+    "No runtime, resolver, catalog manifest, allowlist, persistent database or player data is modified.",
+    "This is a training-session persistence regression and certifies no new card behavior.",
+    "No live Discord API session is performed."
+  ],
+  "command": "npm run check && npm run build && node --test tests/tagTrainingCreationAtomicity2v2.test.cjs",
+  "ciStatus": "pending"
+}
