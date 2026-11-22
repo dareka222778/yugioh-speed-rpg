@@ -122,6 +122,58 @@ for(let first=0;first<4;first++){
   });
 }
 
+test('M512 an eight-card hand requires two owner-only End Phase discards before the next seat draws',()=>{
+  for(let first=0;first<4;first++){
+    let state=game(first);
+    const active=tag.tagDecisionMember(state);
+    const incoming=(first+1)%4;
+    const partner=(first+2)%4;
+    const activePhysical=physical(state,first);
+    activePhysical.hand.push(...activePhysical.deck.splice(0,4));
+    tag.assertTagDuel(state);
+    assert.equal(tag.tagMemberHand(state,active.id).length,8);
+    const before=inventorySnapshot(state);
+    const partnerHand=tag.tagMemberHand(state,member(partner)).map(card=>card.uid);
+    const incomingTop=physical(state,incoming).deck[0].uid;
+    const incomingDeckLength=physical(state,incoming).deck.length;
+
+    const end=tag.tagActions(state,active.id).find(action=>action.kind==='end');
+    assert.ok(end);
+    state=tag.stepTagDuel(state,active.id,end);
+    assert.equal(state.core.phase,'discard');
+    assert.equal(tag.tagDecisionMember(state).id,active.id);
+
+    for(let discardNumber=1;discardNumber<=2;discardNumber++){
+      state=JSON.parse(JSON.stringify(state));
+      tag.assertTagDuel(state);
+      assert.equal(tag.tagDecisionMember(state).id,active.id);
+      assert.deepEqual(tag.tagActions(state,member(partner)),[]);
+      const discard=tag.tagActions(state,active.id).find(action=>action.kind==='discard');
+      assert.ok(discard,'physical owner must receive discard '+discardNumber);
+      assert.throws(
+        ()=>tag.stepTagDuel(state,member(partner),discard),
+        /Aguarde a vez do participante ativo/
+      );
+      state=tag.stepTagDuel(state,active.id,discard);
+      assert.deepEqual(tag.tagMemberHand(state,member(partner)).map(card=>card.uid),partnerHand);
+      if(discardNumber===1){
+        assert.equal(state.core.phase,'discard','one extra card still requires another discard');
+        assert.equal(tag.tagDecisionMember(state).id,active.id);
+        assert.equal(tag.tagMemberHand(state,active.id).length,7);
+        assert.equal(physical(state,incoming).deck[0].uid,incomingTop,'incoming seat must wait for both discards');
+      }
+    }
+
+    assert.equal(state.core.phase,'main');
+    assert.equal(tag.tagDecisionMember(state).id,member(incoming));
+    assert.equal(tag.tagMemberHand(state,active.id).length,6);
+    assert.equal(tag.tagMemberHand(state,member(incoming)).length,5);
+    assert.equal(physical(state,incoming).deck.length,incomingDeckLength-1);
+    assert.ok(tag.tagMemberHand(state,member(incoming)).some(card=>card.uid===incomingTop));
+    assertInventoryConserved(state,before);
+  }
+});
+
 test('M512 a seven-card Main Phase hand does not expose an early discard for any starting seat',()=>{
   for(let first=0;first<4;first++){
     const state=game(first);
