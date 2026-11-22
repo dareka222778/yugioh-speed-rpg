@@ -1,0 +1,78 @@
+{
+  "mission": "M504",
+  "runId": "work-20261122T071200-0300-M504",
+  "priority": "P1 — proteger /duelo desafiar: somente duelistas humanos com Deck ativo válido podem iniciar convite; a resposta pública deve identificar apenas o oponente convidado, aceitar/recusar com revisão correta e não alterar coleção, economia ou inventário antes da aceitação.",
+  "scope": {
+    "files": [
+      "tests/duelChallengeCommandContract.test.cjs",
+      "docs/evidence/m504-duel-challenge-command-contract.json",
+      ".github/workflows/m504-duel-challenge-command-contract.yml"
+    ],
+    "runtimeChanged": false,
+    "commandBuilderChanged": false,
+    "storeChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "command": "/duelo desafiar",
+    "opponent": "Required Discord user option",
+    "botTarget": "Rejected with redirect to /duelo treino",
+    "invitation": "Public invitation with revision-bound Accept/Decline buttons and allowedMentions disabled",
+    "acceptance": "Only invited user can accept; source guild and revision must match; both active Decks are snapshotted into the duel"
+  },
+  "testCoverage": [
+    "Confirma registro do subcomando e opção obrigatória oponente.",
+    "Confirma resposta pública para desafio, rejeição de bots e uso do owner autenticado.",
+    "Valida payload de convite, custom IDs e ausência de menções não autorizadas.",
+    "Confirma que o convite bloqueia somente o criador até a aceitação.",
+    "Rejeita terceiro e guild incorreta ao aceitar.",
+    "Aceita somente o convidado e cria partida 1v1 com os dois Decks ativos.",
+    "Confirma revisão e rejeição de aceitação duplicada/obsoleta.",
+    "Compara Decks, player records e coleções antes/depois; nenhuma carta é concedida."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio jogador",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "catalog": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "builders e contrato de source offline; sem token/guild/canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/duelChallengeCommandContract.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Não instancia Client Discord nem envia convite a guild real.",
+    "Teste exercita store e builders reais; o roteamento do slash handler é validado por contrato de source."
+  ]
+}
