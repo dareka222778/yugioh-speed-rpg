@@ -107,7 +107,7 @@ test('only the invited human can accept; acceptance snapshots both active decks 
   assert.deepEqual(database.getCollection(opponent),opponentData.collection);
   assert.deepEqual(database.getPlayer(outsider),outsiderData.player);
   assert.deepEqual(database.getCollection(outsider),outsiderData.collection);
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM duel_members').get().n,2);
+  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM duel_members WHERE duel_id=?').get(invitation.id).n,2);
   assert.equal(db.prepare('SELECT COUNT(*) AS n FROM duel_action_receipts').get().n,0);
 });
 
