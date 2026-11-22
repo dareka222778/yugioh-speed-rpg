@@ -1,0 +1,74 @@
+{
+  "runId": "work-20261122T071200-0300-M504",
+  "mission": "M504",
+  "owner": "Work principal",
+  "priority": "P1 — proteger /duelo desafiar: somente duelistas humanos com Deck ativo válido podem iniciar convite; a resposta pública deve identificar apenas o oponente convidado, aceitar/recusar com revisão correta e não alterar coleção, economia ou inventário antes da aceitação.",
+  "startedAt": "2026-11-22T07:12:00-03:00",
+  "lastActivityAt": "2026-11-22T07:12:00-03:00",
+  "endedAt": null,
+  "state": "reserved",
+  "branch": "feat/work-m504-duel-challenge-command-contract-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "f660f8a875131b11236a68ff6e869e87bd5e1e88",
+  "sharedHeadAtReservation": "f660f8a875131b11236a68ff6e869e87bd5e1e88",
+  "reservedFiles": [
+    "tests/duelChallengeCommandContract.test.cjs",
+    "docs/evidence/m504-duel-challenge-command-contract.json",
+    ".github/workflows/m504-duel-challenge-command-contract.yml"
+  ],
+  "scope": [
+    "tests/duelChallengeCommandContract.test.cjs",
+    "docs/evidence/m504-duel-challenge-command-contract.json",
+    ".github/workflows/m504-duel-challenge-command-contract.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T07:12:00-03:00",
+    "preserved": [
+      "M501/#449",
+      "M502/#450",
+      "M503/#451",
+      "M496–M500, M61 e todas as reservas de terceiros"
+    ],
+    "note": "M504 adiciona somente teste/evidência/workflow novos para /duelo desafiar; não altera src/index.ts, src/duelStore.ts, src/duelUI.ts, runtime, catálogo, inventário ou dados persistentes."
+  },
+  "workBlocks": [
+    "Verificou HEAD compartilhado f660f8a875131b11236a68ff6e869e87bd5e1e88 e reservas M501–M503.",
+    "Confirmou ausência dos três caminhos M504 em todas as entradas de coordenação.",
+    "Inspecionou o comando /duelo desafiar, challenge/acceptChallenge e invitationMessage."
+  ],
+  "tests": {
+    "focused": null,
+    "typescript": null,
+    "discordPayload": null,
+    "limitations": "Ainda não executados; serão executados pela CI após abertura da PR."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "sharedHeadAtReservation": "f660f8a875131b11236a68ff6e869e87bd5e1e88",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "Não confirmado pela integração disponível."
+  },
+  "handoffM501": {
+    "pr": 449,
+    "commentId": 7077505382,
+    "status": "requested-no-response"
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Validar registro/handler do /duelo desafiar e o ciclo de convite, autorização do oponente, snapshot do Deck e ausência de concessões antes da aceitação.",
+  "nextWindow": "2026-11-22T11:30:00-03:00"
+}
