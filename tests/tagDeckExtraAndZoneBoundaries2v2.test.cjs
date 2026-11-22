@@ -47,7 +47,7 @@ function assertFieldShape(state, expectedExtra) {
   assert.equal(new Set(inventory.map(card => card.uid)).size, inventory.length);
 }
 
-test('classic 2v2 accepts exact Main Deck and Extra Deck limits and preserves 3+3+Field layout', () => {
+test('classic 2v2 accepts 20/30 Main Decks and one enabled Fusion while preserving 3+3+Field layout', () => {
   assert.equal(RULES_PROFILE.mainDeckMin, 20);
   assert.equal(RULES_PROFILE.mainDeckMax, 30);
   assert.equal(RULES_PROFILE.extraDeckMax, 5);
