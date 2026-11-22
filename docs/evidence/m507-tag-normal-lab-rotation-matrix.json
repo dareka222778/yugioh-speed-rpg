@@ -76,5 +76,10 @@
     "No live Discord Client or guild interaction.",
     "This is a rules/persistence regression suite, not a new card certification.",
     "No local runtime execution in this run; remote CI is the acceptance gate."
+  ],
+  "validationNotes": [
+    "Primeira CI: 4 cenários de rotação chegaram corretamente ao fim dos quatro turnos, mas a asserção final esperava que ambas as equipes voltassem à posição inicial simultaneamente.",
+    "Correção do teste: a rotação mantém, para cada equipe, o último assento que atuou até o próximo turno daquela equipe; agora a matriz verifica o mapeamento esperado após cada turno e o cursor físico.",
+    "Nenhuma alteração de runtime foi necessária; os outros quatro cenários focados passaram na primeira execução."
   ]
 }

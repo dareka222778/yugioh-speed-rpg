@@ -70,7 +70,7 @@ test('M507 fixture is ten certified low-level Normal monsters and a legal 30-car
 for(const first of [0,1,2,3]){
   test(`M507 physical hands and Decks rotate A1→B1→A2→B2 from starting seat ${first}`,()=>{
     let state=makeGame(first,`m507-rotation-${first}`);
-    const initialActive=[...state.active];
+    const expectedActive=[...state.active];
     const expected=(offset)=>`m507-${first}-seat-${(first+offset)%4}`;
 
     assert.equal(state.mode,'tag-normal-lab');
@@ -96,6 +96,10 @@ for(const first of [0,1,2,3]){
       assertTagDuel(state);
 
       assert.equal(tagDecisionMember(state).id,incoming);
+      expectedActive[incoming.endsWith('-seat-0')||incoming.endsWith('-seat-2')?0:1]=((first+turn+1)%4);
+      assert.deepEqual(state.active,expectedActive,
+        'each team keeps its last active physical seat until that team starts the next turn');
+      assert.equal(state.cursor,(first+turn+1)%4);
       const afterHands=handSnapshot(state);
       const afterDecks=deckSnapshot(state);
       for(const member of state.members){
@@ -121,7 +125,12 @@ for(const first of [0,1,2,3]){
     }
 
     assert.equal(state.core.turn,5);
-    assert.deepEqual(state.active,initialActive,'four turns restore the original active-seat mapping');
+    const nextSeat=first;
+    const previousSeat=(first+3)%4;
+    const finalActive=[null,null];
+    finalActive[nextSeat%2]=nextSeat;
+    finalActive[previousSeat%2]=previousSeat;
+    assert.deepEqual(state.active,finalActive,'each team retains its last physical seat until its next turn');
     assert.deepEqual(Object.values(handSnapshot(state)).map(cards=>cards.length),[5,5,5,5]);
     assert.deepEqual(Object.values(deckSnapshot(state)).map(cards=>cards.length),[25,25,25,25]);
   });
