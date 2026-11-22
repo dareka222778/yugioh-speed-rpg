@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "mission": "M516",
+  "runId": "work-20261122T113619-0300-M516",
+  "title": "1v1 action versus decision-timeout race",
+  "priority": "P1 — garantir que uma ação válida imediatamente antes do prazo renove os 30 minutos e que uma interação entregue no deadline não vença o timeout nem grave recibo.",
+  "branch": "feat/work-m516-duel-timeout-action-race-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "0e8c734607712c1bc73eae5e77b23b805b270c2c",
+  "scope": [
+    "tests/duelTimeoutActionRace.test.cjs",
+    "docs/evidence/m516-duel-timeout-action-race.json",
+    ".github/workflows/m516-duel-timeout-action-race.yml"
+  ],
+  "behavior": {
+    "decisionTimeoutMs": 1800000,
+    "cases": [
+      "Ação legal em 1799999 ms é persistida e move updated para o instante da ação.",
+      "O deadline antigo não encerra uma partida que acabou de receber uma ação válida.",
+      "O novo deadline permanece ativo em 1799999 ms e expira em 1800000 ms.",
+      "Ação entregue exatamente no deadline é rejeitada; o timeout encerra a partida com W.O. para o oponente do decisionPlayer.",
+      "A ação tardia não cria action receipt, não duplica eventos e libera os dois duel_members.",
+      "Economia, coleção, starter grants e Decks permanecem idênticos."
+    ]
+  },
+  "validation": {
+    "database": "SQLite temporário, isolado por DATABASE_PATH",
+    "clock": "Date.now controlado somente dentro de cada caso; sem espera real",
+    "discord": "Store-level; M515 cobre o payload público terminal offline",
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "Sem alteração do runtime ou do contrato de timeout.",
+    "Não substitui teste com bot conectado a uma guild Discord real.",
+    "Sem merge ou deploy."
+  ],
+  "status": "pending-ci"
+}
