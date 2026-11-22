@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "mission": "M411",
+  "reviewedAt": "2026-11-20",
+  "authority": "Konami official Yu-Gi-Oh! Card Database for card identity, printed text and release records; M392 official OCG cutoff audit for earliest OCG printing.",
+  "historicalCutoffInclusive": "2004-09-30",
+  "cards": [
+    {
+      "id": "65064143",
+      "name": "Anti-Aircraft Flower",
+      "konamiCardDatabaseId": 5890,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5890&ope=2&request_locale=en",
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5890&ope=2&request_locale=ae",
+      "officialText": "By tributing 1 Insect-Type monster on your side of the field, inflict 800 points of damage to your opponent's Life Points.",
+      "effectKinds": [
+        "ignition",
+        "typed-tribute-cost",
+        "team-effect-damage"
+      ],
+      "earliestOcgRelease": "2003-07-17",
+      "earliestOcgSetCode": "307-021",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    },
+    {
+      "id": "55001420",
+      "name": "Arcane Archer of the Forest",
+      "konamiCardDatabaseId": 5971,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5971&ope=2&request_locale=en",
+      "officialOcgSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5971&ope=2&request_locale=ja",
+      "officialText": "While there is a Plant-Type monster on your side of the field, this card cannot be attacked. By tributing 1 Plant-Type monster on your side of the field, destroy 1 Spell or Trap Card on the field.",
+      "effectKinds": [
+        "continuous-attack-protection",
+        "ignition",
+        "typed-tribute-cost",
+        "targeted-spell-trap-destruction"
+      ],
+      "earliestOcgRelease": "2003-11-20",
+      "earliestOcgSetCode": "308-029",
+      "eligibleAtHistoricalCutoff": true,
+      "tcgFirstReleaseAudited": false,
+      "behaviorStatus": "not-certified",
+      "certificationStatus": "not-certified",
+      "automaticCertification": false
+    }
+  ],
+  "rulingsAndImplementationNotes": [
+    {
+      "topic": "Face-down typed Tribute costs",
+      "note": "A controller may Tribute their own face-down monster for a cost requiring a specific Type; selection remains private to that controller.",
+      "sourceUrl": "https://ygorganization.com/PERFECT-RULEBOOK-2017/"
+    },
+    {
+      "topic": "Arcane Archer targeting",
+      "note": "The effect selects a Spell/Trap on the field; face-down Spell/Trap cards remain eligible. The helper retains the selected physical UID through resolution.",
+      "sourceUrl": "https://ygoretroformat.com/rulings/arcane-archer-of-the-forest/"
+    }
+  ],
+  "implementationScope": "Pure helper module and isolated tests only. No resolver, catalog, certification, command, persistence or Discord handler integration.",
+  "certificationGate": "Do not certify until the effect is registered in the production resolver and exercised through the 2v2 Discord handler with physical-owner, team-routing, privacy and persistence invariants."
+}
