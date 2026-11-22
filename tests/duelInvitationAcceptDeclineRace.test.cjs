@@ -67,7 +67,7 @@ const workerScript=[
   "    if(database?.db?.open)database.db.close();",
   "  }",
   "}"
-].join('\\n');
+].join('\n');
 
 function launchWorker(env){
   const child=spawn(process.execPath,['-e',workerScript],{
@@ -81,7 +81,7 @@ function launchWorker(env){
   const result=new Promise((resolve,reject)=>{
     child.stdout.on('data',chunk=>{
       stdout+=chunk.toString();
-      if(!readySeen&&stdout.split(/\\r?\\n/).includes('READY')){
+      if(!readySeen&&stdout.split(/\r?\n/).includes('READY')){
         readySeen=true;
         resolveReady();
       }
@@ -90,7 +90,7 @@ function launchWorker(env){
     child.once('error',reject);
     child.once('close',code=>{
       if(!readySeen)rejectReady(new Error('worker exited before barrier readiness: '+stderr));
-      const line=stdout.trim().split(/\\r?\\n/).at(-1);
+      const line=stdout.trim().split(/\r?\n/).at(-1);
       if(code!==0)return reject(new Error('worker exited '+code+': '+stderr+' '+stdout));
       try{resolve(JSON.parse(line));}
       catch(error){reject(new Error('worker did not return JSON: '+String(error)+' '+stdout+' '+stderr));}
