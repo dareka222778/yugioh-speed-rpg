@@ -4,7 +4,7 @@
   "owner": "Work principal",
   "priority": "P1 — validar a fronteira de timeout 1v1 pelo handler Discord real: convite expirado não inicia duelo; ação tardia atualiza o painel terminal sem aplicar jogada; W.O., locks, privacidade, Decks e inventário permanecem íntegros.",
   "startedAt": "2026-11-22T11:57:10-03:00",
-  "lastActivityAt": "2026-11-22T11:57:10-03:00",
+  "lastActivityAt": "2026-11-22T12:10:11-03:00",
   "endedAt": null,
   "state": "reserved-and-implementing",
   "branch": "feat/work-m520-duel-timeout-discord-boundary-20261122",
@@ -41,16 +41,19 @@
     "PR #462 e CI M515 integralmente aprovadas; M516 focused/Card Batch/Milestone/Engine Validation também aprovadas.",
     "M517 e M518 focused/Card Batch/Milestone aprovados; Engine Validation ainda em execução.",
     "M519 branch identificada e preservada; sem alterações em reservas de outros agentes.",
-    "Escopo M520 isolado em três caminhos novos para validar os componentes Discord no timeout 1v1."
+    "Escopo M520 isolado em três caminhos novos para validar os componentes Discord no timeout 1v1.",
+    "PR #466 aberta em draft; branch sincronizada sem sobrescrever concorrência por merge commit 661d097e288306df5340d6e39cc4e952b5389237, com shared 3be7995 como segundo pai.",
+    "Compare M520 vs shared: ahead 3, behind 0; somente os três arquivos novos da missão.",
+    "Workflow focado M520 concluiu success: npm ci, npm run check, npm run build, JSON evidence e 2/2 testes TAP passaram."
   ],
   "tests": {
-    "focused": null,
-    "check": null,
-    "build": null,
-    "engineValidation": null,
-    "milestone": null,
-    "cardBatchFast": null,
-    "limitations": "Execução local não disponível; validação Node 22 via GitHub Actions. Sem bot/token/guild real."
+    "focused": "success (2/2)",
+    "check": "success",
+    "build": "success",
+    "engineValidation": "in_progress (test + Extended Soak)",
+    "cardBatchFast": "in_progress",
+    "milestone": "success on pre-sync head b6da28ff; rerun not yet observed",
+    "limitations": "Offline Discord handler/builders; no live guild. Full Engine Validation and Card Batch Fast remain running."
   },
   "catalog": {
     "certified": 969,
@@ -70,8 +73,26 @@
     "deploy": false,
     "deploymentRegistry": "Endpoint de deployments não confirmado pela integração disponível; produção não verificada."
   },
-  "pr": null,
+  "pr": {
+    "number": 466,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/466",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "base": "feat/rea-engine-recovery-20261026",
+    "baseSha": "3be7995eab1e92279d745c88f41c8d534cfcbff0",
+    "head": "feat/work-m520-duel-timeout-discord-boundary-20261122",
+    "headSha": "661d097e288306df5340d6e39cc4e952b5389237"
+  },
   "releaseToAuxiliary": [],
-  "nextTask": "Implementar testes offline para aceitar convite expirado e selecionar ação no deadline via handleDuelComponent; validar payloads Discord, W.O., locks e invariância de dados.",
-  "nextWindow": "2026-11-22T16:30:00-03:00"
+  "nextTask": "M521: validar timeout 2v2 persistido com quatro proprietários físicos e expiração do lobby; depois revisar gates M517/M518 e handoff do resolver.",
+  "nextWindow": "2026-11-22T16:30:00-03:00",
+  "branchHead": "661d097e288306df5340d6e39cc4e952b5389237",
+  "duration": {
+    "elapsedMinutes": 13,
+    "effectiveMinutesMeasured": false,
+    "minimum60MinutesConfirmed": false,
+    "note": "Tempo decorrido desde 11:57:10 até 12:10:11; trabalho efetivo abaixo de 60 minutos. Espera de CI excluída."
+  }
 }
