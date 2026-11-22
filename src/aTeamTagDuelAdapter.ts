@@ -70,24 +70,17 @@ function activationSnapshot(
  };
 }
 
-function snapshots(
- s:TagDuel,team:0|1,sourceUid:string,
- getCardKind:TagCardKindLookup,getActivationSpeed:TagActivationSpeedLookup,
-):{source:TrapDisposalSource;activation:TrapActivationSnapshot}|undefined{
- const source=sourceSnapshot(s,team,sourceUid);
- const activation=activationSnapshot(s,getCardKind,getActivationSpeed);
- return source&&activation?{source,activation}:undefined;
-}
-
 /** Maps a TagDuel shared field and pending chain link into the typed M387 primitive. */
 export function prepareATeamTagDuelResponse(
  s:TagDuel,team:0|1,activeSeat:number,sourceUid:string,
  getCardKind:TagCardKindLookup,getActivationSpeed:TagActivationSpeedLookup,
 ):TrapDisposalEvaluation{
  assertActiveSeat(s,team,activeSeat);
- const pair=snapshots(s,team,sourceUid,getCardKind,getActivationSpeed);
- if(!pair)return {eligible:false,reason:'activation-not-pending'};
- return prepareATeamTrapDisposal(pair.source,pair.activation);
+ const source=sourceSnapshot(s,team,sourceUid);
+ if(!source)return {eligible:false,reason:'source-not-on-monster-zone'};
+ const activation=activationSnapshot(s,getCardKind,getActivationSpeed);
+ if(!activation)return {eligible:false,reason:'activation-not-pending'};
+ return prepareATeamTrapDisposal(source,activation);
 }
 
 /**
@@ -100,10 +93,12 @@ export function resolveATeamTagDuelResponse(
  getCardKind:TagCardKindLookup,getActivationSpeed:TagActivationSpeedLookup,
 ):TrapDisposalResolution{
  assertActiveSeat(s,team,activeSeat);
- const pair=snapshots(s,team,sourceUid,getCardKind,getActivationSpeed);
- if(!pair)return {resolved:false,reason:'activation-not-pending'};
+ const source=sourceSnapshot(s,team,sourceUid);
+ if(!source)return {resolved:false,reason:'source-not-on-monster-zone'};
+ const activation=activationSnapshot(s,getCardKind,getActivationSpeed);
+ if(!activation)return {resolved:false,reason:'activation-not-pending'};
  const existingGraveyardUids=s.core.players.flatMap(player=>player.grave.map(card=>card.uid));
- return resolveATeamTrapDisposal(pair.source,pair.activation,offer,existingGraveyardUids);
+ return resolveATeamTrapDisposal(source,activation,offer,existingGraveyardUids);
 }
 
 export {A_TEAM_TRAP_DISPOSAL_UNIT_ID};
