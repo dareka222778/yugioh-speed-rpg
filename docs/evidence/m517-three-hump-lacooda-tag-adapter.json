@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "mission": "M517",
+  "runId": "work-20261122T114100-0300-M517",
+  "title": "3-Hump Lacooda TagDuel adapter preparation",
+  "priority": "P1 — preparar uma candidata histórica simples de custo Tributo + compra, com propriedade física e mão privada 2v2 preservadas, sem registrar ou certificar antes da integração central.",
+  "card": {
+    "name": "3-Hump Lacooda",
+    "passcode": "86988864",
+    "konamiCardDatabaseId": 6032,
+    "attribute": "EARTH",
+    "monsterType": "Beast",
+    "level": 3,
+    "atk": 500,
+    "def": 1500,
+    "firstTcgPrinting": "AST-070",
+    "firstTcgReleaseDate": "2004-06-01",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6032&request_locale=en",
+    "officialText": "If there are 3 face-up “3-Hump Lacooda” cards on your side of the field, Tribute 2 of them to draw 3 cards."
+  },
+  "rulesReviewed": {
+    "effectKind": "Ignition Effect",
+    "tributeCount": 2,
+    "tributeTiming": "activation cost",
+    "sourceMayBeTributed": true,
+    "sourceMayRemain": true,
+    "minimumFaceUpCopies": 3,
+    "drawCount": 3,
+    "rulingsArchive": "https://www.edisonformat.com/rulings/individual-rulings-a-c",
+    "rulingsNotes": [
+      "O custo é oferecer dois 3-Hump Lacooda como Tributo.",
+      "A carta que ativa o efeito pode ser uma das duas oferecidas ou a que permanece no campo.",
+      "A ativação não é obrigatória apenas por haver três cópias face-up."
+    ]
+  },
+  "implementation": {
+    "adapter": "src/threeHumpLacoodaTagAdapter.ts",
+    "test": "tests/threeHumpLacoodaTagAdapter.test.cjs",
+    "planOnly": true,
+    "teamField": "Conta as cópias face-up no campo compartilhado da equipe, incluindo monstros fisicamente pertencentes ao parceiro.",
+    "tributeIdentity": "Retorna exatamente dois UIDs físicos distintos para o Cemitério compartilhado.",
+    "drawOwner": "Deck físico do representante ativo no momento da ativação; nunca o Deck do parceiro inativo.",
+    "drawPrivacy": "A compra pertence à mão privada do representante ativo.",
+    "handLimit": "O plano sempre compra 3; não descarta durante a resolução. A mão 6 é verificada na End Phase.",
+    "oncePerTurn": "Nenhuma restrição OPT inventada; com cinco cópias, uma segunda ativação pode ser preparada após o primeiro custo deixar três face-up.",
+    "stateMutation": false
+  },
+  "preservedRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "changedCentralRuntime": false,
+    "changedManifest": false,
+    "changedAllowlist": false,
+    "changedCardMetadata": false,
+    "changedCardCertifications": false,
+    "inventoryGranted": 0,
+    "persistentPlayerDataChanged": false,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "catalogBaseline": {
+      "certified": 969,
+      "target": 1000,
+      "remaining": 31
+    }
+  },
+  "limitations": [
+    "Adapter preparatório: ainda não é chamado pelo resolver v9 nem pelo handler Discord.",
+    "A integração depende do handoff cooperativo M61 para os arquivos centrais de efeitos/resolver ou de um hook versionado explicitamente liberado.",
+    "A política de compra do representante ativo precisa ser confirmada pelo responsável do resolver antes de registrar a carta no catálogo.",
+    "Testes isolados do adapter não são certificação comportamental da carta em partida real."
+  ],
+  "status": "pending-ci-and-central-handoff"
+}
