@@ -1,0 +1,64 @@
+{
+  "mission": "M492",
+  "runId": "work-20261122T013200-0300-M492",
+  "card": {
+    "name": "A Cat of Ill Omen",
+    "passcode": "24140059",
+    "konamiDatabaseId": 5520,
+    "type": "DARK Level 2 Beast / Flip / Effect",
+    "atk": 500,
+    "def": 300,
+    "firstTcgPrinting": {
+      "date": "2003-07-18",
+      "set": "Pharaonic Guardian",
+      "code": "PGD-070"
+    },
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5520&request_locale=en"
+  },
+  "effectSummary": "Ao ser virada para cima, escolhe uma Armadilha do próprio Deck e a coloca no topo; se Necrovalley estiver no campo, pode adicioná-la à mão em vez disso.",
+  "design": {
+    "trigger": "FLIP only",
+    "deckSource": "the current physical representative's private Deck, not the inactive teammate's Deck",
+    "necrovalley": "hand destination is offered only when face-up Necrovalley is present at activation; if it leaves before resolution, the chosen hand mode falls back to topDeck; a later Necrovalley does not unlock hand mode",
+    "reveal": "selected Trap is revealed to the opponent team; the inactive teammate's private hand remains concealed",
+    "mutation": "adapter returns an immutable operation plan; central resolver performs the atomic move",
+    "shuffle": false
+  },
+  "testCoverage": [
+    "source controlled by the team but physically owned by inactive partner",
+    "active representative Deck only",
+    "Trap-only candidate filtering",
+    "Necrovalley on either team's Field Zone",
+    "Necrovalley removed between activation and resolution",
+    "Necrovalley appearing after activation",
+    "partner Deck and non-Trap rejection",
+    "stale representative and turn rejection",
+    "face-down and negated source rejection",
+    "physical UID ownership validation",
+    "no mutation"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Adapter e testes isolados não registram o efeito no resolver compartilhado; handoff M61 permanece pendente."
+  },
+  "security": {
+    "filesOnly": [
+      "src/aCatOfIllOmenTagAdapter.ts",
+      "tests/aCatOfIllOmenTagAdapter.test.cjs",
+      "docs/evidence/m492-a-cat-of-ill-omen-tag-adapter.json",
+      ".github/workflows/m492-a-cat-of-ill-omen-tag-adapter.yml"
+    ],
+    "noRuntimeRegistry": true,
+    "noCatalogChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "Não integrado ao resolver principal nem ao handler Discord; depende do handoff M61.",
+    "Testes usam DuelState isolado; não substituem partida 2v2 real nem chamada à API Discord.",
+    "Não adiciona carta ao catálogo, allowlist ou certificações."
+  ]
+}
