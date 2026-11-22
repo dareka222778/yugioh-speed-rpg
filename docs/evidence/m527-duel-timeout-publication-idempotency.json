@@ -76,5 +76,35 @@
     "deploy": false,
     "backupVerified": false,
     "liveDiscordGuild": false
+  },
+  "testExecution": {
+    "initialFocusedRun": {
+      "id": 45062353242,
+      "result": "failure",
+      "cause": "assertion regex escaped twice; implementation and store behavior were not implicated"
+    },
+    "correctionCommit": "b579e0f9adb5eac34e47fe00b03d14a2525db1fd",
+    "latestFocusedRun": {
+      "id": 45062533909,
+      "result": "success",
+      "passed": 2,
+      "failed": 0
+    },
+    "cardBatchFast": {
+      "id": 45062533906,
+      "result": "success"
+    },
+    "milestone1000": {
+      "id": 45062533948,
+      "result": "success",
+      "certified": 969,
+      "remaining": 31
+    },
+    "engineValidation": {
+      "id": 45062533933,
+      "result": "in_progress",
+      "extendedSoak600": "in_progress"
+    },
+    "limits": "Full Engine Validation and 600-second soak not yet complete; no live Discord guild."
   }
 }
