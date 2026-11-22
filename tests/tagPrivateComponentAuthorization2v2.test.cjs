@@ -97,6 +97,7 @@ test('M511 a same-team partner and an opponent cannot replay another seat privat
   const inspectId=customId(tagPrivateMessage(record,owner),'tag:inspect:');
   assert.ok(inspectId);
   const beforeRevision=store.getTag(record.id).revision;
+  const beforeEconomy=economySnapshot();
   const beforeHands=Object.fromEntries(ids.map(id=>[id,tagMemberHand(record.state,id).map(card=>card.uid)]));
 
   for(const actor of [ids[2],ids[1]]){
@@ -118,7 +119,7 @@ test('M511 a same-team partner and an opponent cannot replay another seat privat
   const after=store.getTag(record.id);
   assert.equal(after.revision,beforeRevision);
   assert.deepEqual(Object.fromEntries(ids.map(id=>[id,tagMemberHand(after.state,id).map(card=>card.uid)])),beforeHands);
-  assert.deepEqual(economySnapshot(),economySnapshot());
+  assert.deepEqual(economySnapshot(),beforeEconomy);
 });
 
 test('M511 an inactive partner cannot execute the active seat action component',async()=>{
