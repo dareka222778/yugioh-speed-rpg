@@ -1,0 +1,36 @@
+name: M516 1v1 Timeout Action Race
+on:
+  push:
+    branches:
+      - feat/work-m516-duel-timeout-action-race-20261122
+    paths:
+      - 'tests/duelTimeoutActionRace.test.cjs'
+      - 'docs/evidence/m516-duel-timeout-action-race.json'
+      - '.github/workflows/m516-duel-timeout-action-race.yml'
+  pull_request:
+    paths:
+      - 'tests/duelTimeoutActionRace.test.cjs'
+      - 'docs/evidence/m516-duel-timeout-action-race.json'
+      - '.github/workflows/m516-duel-timeout-action-race.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-timeout-action-race:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m516-duel-timeout-action-race.json', 'utf8'))"
+      - name: Run 1v1 timeout/action race tests
+        run: node --test tests/duelTimeoutActionRace.test.cjs
