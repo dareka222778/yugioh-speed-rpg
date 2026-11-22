@@ -1,0 +1,23 @@
+name: M401 private set inspection
+on:
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/privateSetInspection.ts'
+      - 'tests/privateSetInspection.test.cjs'
+      - 'docs/evidence/m401-wdjat-private-set-inspection.json'
+      - '.github/workflows/m401-private-set-inspection.yml'
+jobs:
+  m401-focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node scripts/run-tests-isolated.cjs tests/privateSetInspection.test.cjs
