@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "mission": "M518",
+  "runId": "work-20261122T115000-0300-M518",
+  "title": "8-Claws Scorpion TagDuel adapter preparation",
+  "priority": "P1 — preparar efeito de posição e gatilho de batalha com snapshot de face-down no momento da declaração, sem certificar antes de integrar o resolver.",
+  "card": {
+    "name": "8-Claws Scorpion",
+    "passcode": "14261867",
+    "konamiCardDatabaseId": 5421,
+    "attribute": "DARK",
+    "monsterType": "Insect",
+    "level": 2,
+    "atk": 300,
+    "def": 200,
+    "firstTcgPrinting": "PGD-024",
+    "firstTcgReleaseDate": "2003-07-18",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5421&request_locale=en",
+    "officialText": "Once per turn, you can flip this card into face-down Defense Position. When this card attacks an opponent's face-down Defense Position monster, this card's ATK becomes 2400 during damage calculation only."
+  },
+  "rulings": {
+    "source": "https://www.edisonformat.com/rulings/individual-rulings-a-c",
+    "notes": [
+      "A mudança para face-down Defense é um efeito Ignition e usa o marcador effectUsedTurn.",
+      "Se o efeito de virar para baixo foi usado e o monstro depois recebe Flip Summon, não pode usar esse mesmo efeito novamente no turno.",
+      "O efeito de batalha é Trigger obrigatório; a condição é avaliada quando o ataque é declarado contra um monstro face-down Defense.",
+      "O alvo pode estar face-up quando o efeito resolve; o ATK de 8-Claws Scorpion ainda se torna 2400 apenas durante o cálculo de dano.",
+      "O valor 2400 é um set-value, inclusive quando há Equip Spell."
+    ]
+  },
+  "implementation": {
+    "adapter": "src/eightClawsScorpionTagAdapter.ts",
+    "test": "tests/eightClawsScorpionTagAdapter.test.cjs",
+    "turnDown": {
+      "phase": "Main Phase",
+      "faceDownDefense": true,
+      "oncePerTurnMarker": "effectUsedTurn",
+      "markerPersistsThroughFlipSummon": true
+    },
+    "battle": {
+      "trigger": "attack declaration against face-down Defense",
+      "snapshotRequired": "targetWasFaceDownDefenseAtDeclaration",
+      "atkMode": "set",
+      "atkValue": 2400,
+      "duration": "damage-calculation-only",
+      "targetMayBeFaceUpAtResolution": true,
+      "equipModifiersDoNotChangeSetValue": true
+    },
+    "planOnly": true,
+    "stateMutation": false
+  },
+  "integrationBlocker": {
+    "reservedFile": "src/duelEngineCurrent.ts",
+    "observedBehavior": "No estágio attack/declaration, o engine revela o defensor antes de abrir a janela de resposta e não preserva no Pending se ele estava face-down Defense na declaração.",
+    "requiredHook": "Capturar targetWasFaceDownDefenseAtDeclaration antes de defender.m.faceUp=true e persistir o snapshot no contexto do ataque.",
+    "handoff": "M61 ainda aguarda transferência cooperativa; nenhum arquivo reservado foi alterado."
+  },
+  "safety": {
+    "changedCentralRuntime": false,
+    "changedManifest": false,
+    "changedAllowlist": false,
+    "changedCardMetadata": false,
+    "changedCardCertifications": false,
+    "inventoryGranted": 0,
+    "persistentPlayerDataChanged": false,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "catalogBaseline": {
+      "certified": 969,
+      "target": 1000,
+      "remaining": 31
+    }
+  },
+  "limitations": [
+    "Adapter preparatório; o resolver v9 ainda não o invoca.",
+    "A integração exige o snapshot de ataque no arquivo central reservado.",
+    "Os testes isolados não constituem certificação comportamental nem partida Discord real."
+  ],
+  "status": "pending-ci-and-central-handoff"
+}
