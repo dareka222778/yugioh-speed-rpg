@@ -4,8 +4,8 @@
   "owner": "Work principal",
   "priority": "P1 — proteger o editor de Deck contra painéis Discord obsoletos e ativação inválida: confirmar que revisão antiga não altera slots, que somente um deck permanece ativo, que editar um deck ativo abaixo de 20 cartas o desativa e que falhas não modificam a coleção.",
   "startedAt": "2026-11-21T21:24:18-03:00",
-  "endedAt": null,
-  "state": "reserved-and-implementing",
+  "endedAt": "2026-11-21T21:50:54-03:00",
+  "state": "completed-and-released",
   "branch": "feat/work-m487-deck-editor-revision-integrity-20261121",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "b92b1db4a0234d742ae38658f49a9c12e14fd46d",
@@ -29,13 +29,31 @@
   },
   "workBlocks": [
     "Auditoria real de state.json, último checkpoint, HEAD, branches, PRs e CI.",
-    "Pedido cooperativo M61 renovado; comentário 7071568639; aguardando resposta sem tocar nos arquivos protegidos."
+    "Pedido cooperativo M61 renovado; comentário 7071568639; aguardando resposta sem tocar nos arquivos protegidos.",
+    "CI final do M487 verificada por IDs reais: focused, Card Batch Fast, Milestone 1000 e Engine Validation/Extended Soak todos success.",
+    "Reserva M487 liberada ao auxiliar para monitoramento/sincronização não forçada; nenhum merge/deploy."
   ],
   "tests": {
-    "focused": null,
-    "typescript": null,
-    "discordPayload": null,
-    "limitations": "Aguardando implementação e CI remota; nenhum teste local foi alegado."
+    "focused": {
+      "runId": 44966931316,
+      "conclusion": "success"
+    },
+    "cardBatchFast": {
+      "runId": 44966931338,
+      "conclusion": "success"
+    },
+    "milestone1000": {
+      "runId": 44966931411,
+      "conclusion": "success",
+      "certified": 969,
+      "remaining": 31
+    },
+    "engineValidation": {
+      "runId": 44966931403,
+      "conclusion": "success",
+      "includes": "test suite and Extended Soak"
+    },
+    "limitations": "Sem merge, deploy, Discord ao vivo ou alteração de banco persistente; duração efetiva de trabalho não foi medida no comentário de conclusão."
   },
   "catalog": {
     "certified": 969,
@@ -48,8 +66,33 @@
   "mergePerformed": false,
   "deployPerformed": false,
   "production": "Nenhuma alteração de produção autorizada; deployments não expostos pela integração de leitura disponível.",
-  "pr": null,
-  "releaseToAuxiliary": [],
-  "nextTask": "Concluir a suíte de invariantes de revisão/ativação do editor de Deck, publicar PR draft e executar CI; depois reconsultar HEAD/coordenação e liberar somente os três caminhos M487.",
-  "nextWindow": "2026-11-21T22:30:00-03:00"
+  "pr": {
+    "number": 435,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/435",
+    "branch": "feat/work-m487-deck-editor-revision-integrity-20261121",
+    "headSha": "1347a091d0e9b5f1f70c57c9167ad1c9266eba8e",
+    "baseSha": "aaee5e912d2bf33acbe9927dd02c0bbbd206bbb7",
+    "state": "open",
+    "draft": true,
+    "mergeable": true
+  },
+  "releaseToAuxiliary": [
+    {
+      "branch": "feat/work-m487-deck-editor-revision-integrity-20261121",
+      "pr": 435,
+      "files": [
+        "tests/deckEditorRevisionIntegrity.test.cjs",
+        "docs/evidence/m487-deck-editor-revision-integrity.json",
+        ".github/workflows/m487-deck-editor-revision-integrity.yml"
+      ],
+      "permissions": [
+        "monitor CI",
+        "non-forced synchronization only"
+      ],
+      "noFurtherEdits": true
+    }
+  ],
+  "nextTask": "M492: adapter TagDuel isolado para A Cat of Ill Omen; aguardar handoff M61 antes de qualquer registro no resolver.",
+  "nextWindow": "2026-11-22T06:30:00-03:00",
+  "durationElapsedSeconds": 1596
 }
