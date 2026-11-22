@@ -1,0 +1,36 @@
+name: M485 TagDuel 2v2 End Phase hand limit
+on:
+  push:
+    branches:
+      - feat/work-m485-tag-end-phase-hand-limit-2v2-20261121
+    paths:
+      - 'tests/tagEndPhaseHandLimit2v2.test.cjs'
+      - 'docs/evidence/m485-tag-end-phase-hand-limit-2v2.json'
+      - '.github/workflows/m485-tag-end-phase-hand-limit-2v2.yml'
+  pull_request:
+    paths:
+      - 'tests/tagEndPhaseHandLimit2v2.test.cjs'
+      - 'docs/evidence/m485-tag-end-phase-hand-limit-2v2.json'
+      - '.github/workflows/m485-tag-end-phase-hand-limit-2v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-end-phase-hand-limit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m485-tag-end-phase-hand-limit-2v2.json', 'utf8'))"
+      - name: Run TagDuel 2v2 End Phase hand-limit tests
+        run: node --test tests/tagEndPhaseHandLimit2v2.test.cjs
