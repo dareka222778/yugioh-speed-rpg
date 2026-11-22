@@ -4,8 +4,9 @@ const assert = require('node:assert/strict');
 
 const { starterContents, cards } = require('../dist/cardCatalog');
 const { getPlayableCard } = require('../dist/effectRegistry');
-const { tagLoanDeck, tagNormalCardIds } = require('../dist/tagStore');
+const { tagLoanDeck } = require('../dist/tagStore');
 const tag = require('../dist/tagDuel');
+const { tagNormalCardIds } = tag;
 const { RULES_PROFILE, rulesFor } = require('../dist/rulesProfile');
 
 const deck20 = starterContents.warrior.flatMap(card => Array(card.quantity).fill(card.id));
