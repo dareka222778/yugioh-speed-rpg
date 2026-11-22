@@ -1,0 +1,46 @@
+{
+  "mission": "M528",
+  "runId": "work-20261122T164500-0300-M528",
+  "parentRunId": "work-20261122T163436-0300-M527",
+  "title": "1v1 timeout publication recovery across process restarts",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "a40f77538b2116042bd8fa4b326ee7b90c3a24ea",
+  "branch": "feat/work-m528-duel-timeout-restart-publication-20261122",
+  "scope": [
+    "tests/duelTimeoutRestartPublication.test.cjs",
+    "docs/evidence/m528-duel-timeout-restart-publication.json",
+    ".github/workflows/m528-duel-timeout-restart-publication.yml"
+  ],
+  "behavior": [
+    "Persisted 30-minute decision timeout is recovered by a fresh Node process.",
+    "The terminal revision and exactly one duelFinished event survive repeated restarts before publication ACK.",
+    "All physical hands, Decks, Monster/Spell-Trap/Field/Graveyard/Banished/Extra zones remain unchanged.",
+    "Both duel-member locks are released; no action receipt or player/economy mutation is created.",
+    "A matching markDuelPublished ACK survives another restart and removes the outbox entry; subsequent polling remains empty."
+  ],
+  "processIsolation": "Four child Node processes open the same temporary SQLite database sequentially; parent closes its connection before restart probes.",
+  "rulesPreserved": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "runtimeFilesChanged": [],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  }
+}
