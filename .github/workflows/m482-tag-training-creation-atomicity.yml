@@ -1,0 +1,36 @@
+name: M482 TagDuel training creation atomicity
+on:
+  push:
+    branches:
+      - feat/work-m482-tag-training-creation-atomicity-20261121
+    paths:
+      - 'tests/tagTrainingCreationAtomicity2v2.test.cjs'
+      - 'docs/evidence/m482-tag-training-creation-atomicity.json'
+      - '.github/workflows/m482-tag-training-creation-atomicity.yml'
+  pull_request:
+    paths:
+      - 'tests/tagTrainingCreationAtomicity2v2.test.cjs'
+      - 'docs/evidence/m482-tag-training-creation-atomicity.json'
+      - '.github/workflows/m482-tag-training-creation-atomicity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-training-creation-atomicity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m482-tag-training-creation-atomicity.json', 'utf8'))"
+      - name: Run TagDuel training creation tests
+        run: node --test tests/tagTrainingCreationAtomicity2v2.test.cjs
