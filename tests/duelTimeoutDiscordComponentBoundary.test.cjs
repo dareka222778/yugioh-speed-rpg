@@ -144,7 +144,7 @@ test('a decision menu delivered at the exact 30-minute boundary is replaced by t
   assert.equal(terminal.status,'finished');
   assert.equal(terminal.state.phase,'finished');
   assert.equal(terminal.state.winner,winner,'W.O. belongs to the opponent of the player required to decide');
-  assert.match(terminal.state.reason,/W\\.O\\./i);
+  assert.match(terminal.state.reason,/W\.O\./i);
   assert.equal(terminal.revision,data.started.revision+1);
   assert.equal(db.prepare('SELECT COUNT(*) AS n FROM duel_members WHERE duel_id=?').get(data.started.id).n,0);
   assert.equal(store.currentDuel(data.owner),undefined);
