@@ -53,21 +53,6 @@ function assertRollback(record, before) {
   assert.equal(count('SELECT COUNT(*) AS n FROM tag_members WHERE session_id=?', record.id), 1);
 }
 
-function assertExpired(record, beforeRevision) {
-  const expired = store.getTag(record.id, store.tagDeadline(record));
-  assert.equal(expired.status, 'expired');
-  assert.equal(expired.state, null);
-  assert.equal(expired.revision, beforeRevision + 1);
-  assert.equal(count('SELECT COUNT(*) AS n FROM tag_members WHERE session_id=?', record.id), 0);
-  assert.equal(count('SELECT COUNT(*) AS n FROM tag_transition_events WHERE session_id=?', record.id), 0);
-  assert.deepEqual(
-    database.db.prepare('SELECT * FROM player_cards').all(),
-    [],
-    'lobby expiry must not grant or consume cards'
-  );
-  return expired;
-}
-
 test('session-update failure leaves the lobby and host lock intact until retry', () => {
   const record = createLobby();
   const deadline = store.tagDeadline(record);
@@ -91,6 +76,9 @@ test('session-update failure leaves the lobby and host lock intact until retry',
   assert.equal(expired.status, 'expired');
   assert.equal(expired.revision, record.revision + 1);
   assert.equal(count('SELECT COUNT(*) AS n FROM tag_members WHERE session_id=?', record.id), 0);
+  const after = snapshot(record);
+  assert.deepEqual(after.players, before.players);
+  assert.deepEqual(after.cards, before.cards);
 });
 
 test('host-lock deletion failure rolls back the expiry row before retry', () => {
@@ -117,6 +105,9 @@ test('host-lock deletion failure rolls back the expiry row before retry', () => 
   assert.equal(expired.revision, record.revision + 1);
   assert.equal(count('SELECT COUNT(*) AS n FROM tag_members WHERE session_id=?', record.id), 0);
   assert.equal(count('SELECT COUNT(*) AS n FROM tag_transition_events WHERE session_id=?', record.id), 0);
+  const after = snapshot(record);
+  assert.deepEqual(after.players, before.players);
+  assert.deepEqual(after.cards, before.cards);
 });
 
 after(() => {
