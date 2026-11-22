@@ -88,7 +88,8 @@
     "Ativação da Magia de Campo permanece legal com as três zonas de Magia/Armadilha ocupadas; a Field Zone não consome backrow.",
     "Handler real handleTagComponent, tagActions/stepTagDuel, revisão persistida, payloads públicos/privados e validateDiscordPayload.",
     "Conservação dos 80 UIDs/IDs dos quatro Main Decks de 20 cartas e restauração JSON do TagDuel.",
-    "Mãos privadas dos quatro assentos não aparecem no payload público."
+    "Mãos privadas dos quatro assentos não aparecem no payload público.",
+    "Magic Jammer (77414722) responde à ativação de Field Spell no menu privado da equipe adversária, paga exatamente um descarte físico, nega a ativação e envia Field Spell/Counter Trap/Carta descartada aos Cemitério compartilhados corretos."
   ],
   "rules": {
     "mainDeck": "20–30",
@@ -134,6 +135,6 @@
     "Umi, Wasteland e Forest permanecem fora do escopo por ausência de definição executável neste HEAD.",
     "A raça Thunder está na definição de Mountain, mas não é exercitada por este fixture.",
     "Nenhuma nova certificação é reivindicada.",
-    "O fixture deixa a backrow adversária sem Counter Trap legal; por isso o motor resolve a Magia de Campo imediatamente. A janela de resposta com Magic Jammer não é reivindicada por esta suíte."
+    "A resposta com Magic Jammer cobre uma única Counter Trap; não constitui homologação de todas as janelas de resposta ou Counter Traps."
   ]
 }
