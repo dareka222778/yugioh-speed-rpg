@@ -1,0 +1,73 @@
+{
+  "runId": "work-20261122T113307-0300-M515",
+  "mission": "M515",
+  "owner": "Work principal",
+  "priority": "P1 — fechar a lacuna de timeout 1v1: convite expira exatamente aos 120 s e decisão de duelo aos 30 min; o W.O. deve ir ao jogador que devia agir, persistir duelFinished e liberar ambos os locks atomicamente, sem tocar economia ou inventário.",
+  "startedAt": "2026-11-22T11:33:07-03:00",
+  "lastActivityAt": "2026-11-22T11:33:07-03:00",
+  "endedAt": null,
+  "state": "reserved-and-implementing",
+  "branch": "feat/work-m515-duel-timeout-boundary-atomicity-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e",
+  "sharedHeadAtReservation": "fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e",
+  "reservedFiles": [
+    "tests/duelTimeoutBoundaryAtomicity.test.cjs",
+    "docs/evidence/m515-duel-timeout-boundary-atomicity.json",
+    ".github/workflows/m515-duel-timeout-boundary-atomicity.yml"
+  ],
+  "scope": [
+    "tests/duelTimeoutBoundaryAtomicity.test.cjs",
+    "docs/evidence/m515-duel-timeout-boundary-atomicity.json",
+    ".github/workflows/m515-duel-timeout-boundary-atomicity.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T11:33:07-03:00",
+    "checkedAgainst": [
+      "M501–M514",
+      "M61",
+      "M496–M500",
+      "M472–M494",
+      "M402–M471",
+      "all third-party reservations"
+    ],
+    "note": "Arquivos novos exclusivos para timeout 1v1. Não altera src/duelStore.ts, src/duelEngine.ts, src/index.ts, catálogo, manifesto, resolver, allowlist, certificações ou dados persistentes."
+  },
+  "workBlocks": [
+    "Lido coordination/state.json e checkpoint M507.",
+    "Verificado HEAD compartilhado fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e e main f78f3080b496d2697072b946088309f36e97b60e.",
+    "Inspecionadas PRs #449–#461; PRs #449–#461 permanecem abertas em draft; CI dos HEADs examinados passou.",
+    "Identificada lacuna de cobertura de fronteira/rollback do timeout 1v1; escopo isolado sem sobreposição."
+  ],
+  "tests": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "engineValidation": null,
+    "milestone": null,
+    "limitations": "Execução local não disponível; a branch remota executará Node 22, check, build e teste TAP focado."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "production": {
+    "mainHead": "f78f3080b496d2697072b946088309f36e97b60e",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentRegistry": "O endpoint público de deployments não está exposto pela integração de leitura; produção permanece não verificada."
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implementar matriz de fronteira de convite e decisão 1v1, incluindo rollback SQLite no timeout; validar CI e abrir PR draft.",
+  "nextWindow": "2026-11-22T16:30:00-03:00"
+}
