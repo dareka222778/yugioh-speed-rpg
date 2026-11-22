@@ -29,17 +29,17 @@
   },
   "workBlocks": [
     "Reauditado shared HEAD a40f77538b2116042bd8fa4b326ee7b90c3a24ea e coordenação; M527 permanece ativo e CI focada 2/2 aprovada, Card Batch Fast/Engine Validation ainda executando.",
-    "M528 reservado em caminhos novos e independentes para teste de persistência de outbox entre processos."
+    "M528 reservado em caminhos novos e independentes para teste de persistência de outbox entre processos.",
+    "CI focada M528 1/1 success após corrigir regex W.O.; npm run check/build, Card Batch Fast e Milestone 1000 success; Engine Validation e Extended Soak 600s ainda em execução."
   ],
   "tests": {
-    "focused": null,
-    "check": null,
-    "build": null,
-    "cardBatchFast": null,
-    "milestone1000": null,
-    "engineValidation": null,
-    "extendedSoak": null,
-    "limitations": "SQLite temporário, subprocessos Node locais da CI; sem guild/token Discord real."
+    "focused": "success (1/1) run 45063169545",
+    "check": "success",
+    "build": "success",
+    "cardBatchFast": "success run 45063169579",
+    "milestone1000": "success run 45063169544",
+    "engineValidation": "in_progress run 45063169542",
+    "extendedSoak": "in_progress (600s)"
   },
   "catalog": {
     "certified": 969,
@@ -58,14 +58,26 @@
     "merge": false,
     "deploy": false
   },
-  "pr": null,
+  "pr": {
+    "number": 474,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/474",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "headSha": "5c47e2dc23e807886d0cb683a94cd8d558e59d9a",
+    "baseSha": "781f09b58ebf7032fdf5abc3f5ab918446ede593"
+  },
   "releaseToAuxiliary": [],
   "nextTask": "Persistir um W.O. 1v1 e verificar em novo processo que revisão/evento/outbox permanecem idempotentes até ACK.",
   "nextWindow": "2026-11-22T17:30:00-03:00",
   "duration": {
     "targetEffectiveMinutes": 60,
-    "effectiveWorkMinutes": 0,
+    "effectiveWorkMinutes": 4,
     "targetMet": false,
-    "ciWaitExcluded": true
-  }
+    "ciWaitExcluded": true,
+    "elapsedMinutes": 5
+  },
+  "lastActivityAt": "2026-11-22T16:50:00-03:00",
+  "branchHead": "5c47e2dc23e807886d0cb683a94cd8d558e59d9a"
 }
