@@ -1,0 +1,91 @@
+{
+  "mission": "M534",
+  "runId": "work-20261122T174200-0300-M534",
+  "title": "1v1 terminal battle/deck-out lock cleanup and publication",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "b027caee39ef0098c96d5989bd1d49f8f0e225fb",
+  "branch": "feat/work-m534-duel-terminal-outcome-lock-cleanup-20261122",
+  "scope": [
+    "tests/duelTerminalOutcomeLockCleanup.test.cjs",
+    "docs/evidence/m534-duel-terminal-outcome-lock-cleanup.json",
+    ".github/workflows/m534-duel-terminal-outcome-lock-cleanup.yml"
+  ],
+  "priority": "P1 — provar que vitórias normais de 1v1 persistem uma única revisão terminal, liberam os dois locks físicos e preservam UIDs, economia e payload público seguro.",
+  "behavior": [
+    {
+      "case": "vitória por ataque direto",
+      "assertions": [
+        "um monstro físico do Deck inicial é movido para a Monster Zone sem duplicar ou perder UID",
+        "ataque direto reduz LP adversário a zero e termina a partida",
+        "o store persiste exatamente uma revisão terminal e um evento duelFinished",
+        "ambos os duelistas deixam de possuir locks em duel_members",
+        "replay do mesmo requestId retorna receipt.replayed=true sem novo turno, revisão, evento ou lock",
+        "payload público final é válido e não contém controles ativos nem UIDs privados"
+      ]
+    },
+    {
+      "case": "vitória por deck-out",
+      "assertions": [
+        "cartas físicas do Deck vazio permanecem conservadas no Cemitério",
+        "o End Turn força a compra do adversário sem Deck e encerra a partida a favor do jogador ativo",
+        "os dois locks são liberados e o evento terminal é persistido uma única vez",
+        "replay do requestId não aplica a compra nem finaliza novamente",
+        "payload público final não contém controles ativos nem UIDs privados"
+      ]
+    },
+    {
+      "case": "conservação e isolamento",
+      "assertions": [
+        "20 UIDs físicos por jogador permanecem únicos e idênticos antes/depois da resolução",
+        "players, player_cards, starter_grants, decks e deck_cards permanecem byte-equivalentes",
+        "nenhum lock órfão permanece"
+      ]
+    }
+  ],
+  "isolation": {
+    "database": "SQLite temporário no diretório do sistema operacional",
+    "runtime": "duelStore, duelEngine e duelUI reais em dist; somente leitura",
+    "discord": "Builders/payload validados offline; sem token ou guild real",
+    "persistentPlayerData": "Nenhum acesso ao banco persistente"
+  },
+  "ownerRules": {
+    "mainDeck": "20–30; fixture valida 20",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeck": 5,
+    "extraDeckFixture": "≤5",
+    "runtimeChanged": false
+  },
+  "catalog": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "runtimeFilesChanged": [],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  },
+  "limitations": [
+    "O teste valida store, motor, receipt, locks e payload Discord offline; não substitui teste com gateway/guild real.",
+    "A fixture move cartas entre zonas diretamente no SQLite temporário para preparar estados terminais; não altera inventário ou Deck persistente."
+  ],
+  "testExecution": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "customWorkflow": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null
+  }
+}
