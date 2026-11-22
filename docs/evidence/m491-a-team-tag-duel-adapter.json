@@ -1,0 +1,61 @@
+{
+  "mission": "M491",
+  "runId": "work-20261121T220006-0300-M491",
+  "priority": "P1 — adaptar A-Team: Trap Disposal Unit ao TagDuel 2v2, derivando proprietário físico de UID e controlador do assento ativo, e revalidando a ativação de Trap no chain response.",
+  "stackedOn": {
+    "pr": 334,
+    "branch": "feat/work-m387-a-team-trap-disposal-negation-20261119",
+    "head": "eb0497f8dcf51f04050a600337d9c5d7961fba1f"
+  },
+  "branch": "feat/work-m491-a-team-tag-duel-adapter-20261121",
+  "files": [
+    "src/aTeamTagDuelAdapter.ts",
+    "tests/aTeamTagDuelAdapter.test.cjs",
+    "docs/evidence/m491-a-team-tag-duel-adapter.json",
+    ".github/workflows/m491-a-team-tag-duel-adapter.yml"
+  ],
+  "testCount": 8,
+  "behavior": [
+    "Mapeia physicalOwnerSeat pelo prefixo UID m0–m3 e controllerSeat pelo state.active do TagDuel.",
+    "Usa source face-up na Monster Zone compartilhada e slot 0–2.",
+    "Deriva a Trap pendente do core.pending, actor, UID, id, zona atual, phase=response e velocidade fornecida pelo modelo de ativação.",
+    "Revalida activationId com turn/chain length/UID/card ID para rejeitar oferta obsoleta.",
+    "Plano preserva proprietário físico da fonte A-Team e da Trap mesmo quando ambas pertencem a parceiros inativos."
+  ],
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "copiesPerCard": 3
+  },
+  "safety": {
+    "onlyNewPaths": true,
+    "noM387ReservedFilesModified": true,
+    "noResolverRegistration": true,
+    "noCatalogOrAllowlistChanges": true,
+    "noCertification": true,
+    "inventoryGranted": 0,
+    "persistentDatabaseTouched": false,
+    "realPlayerDataTouched": false,
+    "liveDiscord": false,
+    "merge": false,
+    "deploy": false
+  },
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCards": 0,
+    "automatic": 0
+  },
+  "limitations": [
+    "O adapter produz apenas um plano; a movimentação atômica para GY e a negação do chain link ainda dependem do resolver central e do handoff M61.",
+    "Os testes usam um TagDuel fixture mínimo e snapshots de chain; não executam handler Discord ao vivo nem uma cadeia completa no runtime.",
+    "O branch é stacked sobre M387 #334 e requer revisão da base antes de integrar."
+  ]
+}
