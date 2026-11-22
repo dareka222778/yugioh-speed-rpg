@@ -1,0 +1,36 @@
+name: M505 1v1 Duel Training Command Contract
+on:
+  push:
+    branches:
+      - feat/work-m505-duel-training-command-contract-20261122
+    paths:
+      - 'tests/duelTrainingCommandContract.test.cjs'
+      - 'docs/evidence/m505-duel-training-command-contract.json'
+      - '.github/workflows/m505-duel-training-command-contract.yml'
+  pull_request:
+    paths:
+      - 'tests/duelTrainingCommandContract.test.cjs'
+      - 'docs/evidence/m505-duel-training-command-contract.json'
+      - '.github/workflows/m505-duel-training-command-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-training-command-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m505-duel-training-command-contract.json', 'utf8'))"
+      - name: Run /duelo training command contract
+        run: node --test tests/duelTrainingCommandContract.test.cjs

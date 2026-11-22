@@ -1,0 +1,80 @@
+{
+  "mission": "M505",
+  "runId": "work-20261122T072000-0300-M505",
+  "priority": "P1 — proteger /duelo treino, /duelo treino_fusao e /duelo laboratorio: o treino padrão exige Deck ativo válido; os modos de laboratório usam loadout de teste fixo, não concedem recompensas nem alteram coleção, economia ou inventário.",
+  "scope": {
+    "files": [
+      "tests/duelTrainingCommandContract.test.cjs",
+      "docs/evidence/m505-duel-training-command-contract.json",
+      ".github/workflows/m505-duel-training-command-contract.yml"
+    ],
+    "runtimeChanged": false,
+    "commandBuilderChanged": false,
+    "storeChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "commands": [
+      "/duelo treino",
+      "/duelo treino_fusao",
+      "/duelo laboratorio"
+    ],
+    "standard": "Uses authenticated player's active validated Deck; fails closed if no active Deck.",
+    "laboratory": "Uses fixed 24-card tutorial loadout plus one Extra Deck card; fixedOpening=true; no collection mutation.",
+    "rewards": "No encounter/reward, DP/XP, or card grants in either training mode."
+  },
+  "testCoverage": [
+    "Confirma registro dos três subcomandos e roteamento do parâmetro laboratory.",
+    "Confirma que /duelo treino exige Deck ativo válido.",
+    "Executa createTraining padrão e verifica Decks de 20 cartas, NPC, sessão e payload público.",
+    "Executa createTraining em modo laboratório sem Deck ativo e verifica loadout fixo de 24+1.",
+    "Valida payloads Discord e ausência de UIDs de mão/ordem do Deck no painel público.",
+    "Compara player records, coleção e conteúdo do Deck antes/depois.",
+    "Confirma ausência de rewards, receipts e concessões de inventário."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio jogador",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "catalog": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "builders reais offline; sem token/guild/canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/duelTrainingCommandContract.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Não instancia Client Discord nem executa comando em servidor real.",
+    "O roteamento do slash handler é verificado por contrato de source; createTraining e os builders são exercitados diretamente."
+  ]
+}
