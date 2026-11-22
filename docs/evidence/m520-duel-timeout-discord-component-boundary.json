@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "mission": "M520",
+  "runId": "work-20261122T115710-0300-M520",
+  "title": "1v1 duel timeout Discord component boundary",
+  "priority": "P1 — validate that real Discord components respect 120-second invitation expiry and 30-minute decision timeout.",
+  "branch": "feat/work-m520-duel-timeout-discord-boundary-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "0e8c734607712c1bc73eae5e77b23b805b270c2c",
+  "scope": [
+    "tests/duelTimeoutDiscordComponentBoundary.test.cjs",
+    "docs/evidence/m520-duel-timeout-discord-component-boundary.json",
+    ".github/workflows/m520-duel-timeout-discord-component-boundary.yml"
+  ],
+  "behavior": {
+    "invitationTimeoutMs": 120000,
+    "decisionTimeoutMs": 1800000,
+    "cases": [
+      "O componente real duel:accept entregue exatamente aos 120000 ms é rejeitado e não cria estado de duelo.",
+      "O timeout de convite libera o lock do criador; o convidado nunca recebe lock; nenhum evento de duelo é fabricado.",
+      "O painel público de convite expirado é válido e não mantém botões Accept/Decline.",
+      "O menu privado duel:act entregue exatamente aos 1800000 ms é substituído pelo painel terminal de W.O.; nenhuma ação tardia ou receipt é persistida.",
+      "O W.O. é atribuído ao oponente do decisionPlayer e duelFinished é gravado exatamente uma vez.",
+      "Os quatro dados privados de mão não aparecem no painel público; Decks, coleção, starter grants e inventário permanecem idênticos."
+    ],
+    "rules": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "handDiscard": "somente na End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separada",
+      "extraDeckMax": 5
+    }
+  },
+  "validation": {
+    "database": "SQLite temporário e isolado por DATABASE_PATH",
+    "discord": "handleDuelComponent, duelUI builders e validateDiscordPayload offline; sem token/guild real",
+    "playerData": "Snapshots de players, player_cards, starter_grants, decks e deck_cards",
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "Não substitui teste com bot conectado a uma guild Discord real.",
+    "Não verifica o provedor de hospedagem nem implantação de produção.",
+    "Não altera runtime; valida os componentes e o contrato de timeout existentes."
+  ],
+  "status": "pending-ci"
+}

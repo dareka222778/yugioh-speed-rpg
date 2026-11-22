@@ -1,0 +1,36 @@
+name: M520 1v1 Duel Timeout Discord Component Boundary
+on:
+  push:
+    branches:
+      - feat/work-m520-duel-timeout-discord-boundary-20261122
+    paths:
+      - 'tests/duelTimeoutDiscordComponentBoundary.test.cjs'
+      - 'docs/evidence/m520-duel-timeout-discord-component-boundary.json'
+      - '.github/workflows/m520-duel-timeout-discord-component-boundary.yml'
+  pull_request:
+    paths:
+      - 'tests/duelTimeoutDiscordComponentBoundary.test.cjs'
+      - 'docs/evidence/m520-duel-timeout-discord-component-boundary.json'
+      - '.github/workflows/m520-duel-timeout-discord-component-boundary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-timeout-discord-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m520-duel-timeout-discord-component-boundary.json', 'utf8'))"
+      - name: Run Discord timeout component boundary tests
+        run: node --test tests/duelTimeoutDiscordComponentBoundary.test.cjs
