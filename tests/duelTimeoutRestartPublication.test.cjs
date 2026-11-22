@@ -82,7 +82,7 @@ test('1v1 timeout event, revision and publication outbox survive process restart
   assert.equal(first.status,'finished');
   assert.equal(first.phase,'finished');
   assert.equal(first.winner,winner,'W.O. is awarded to the opponent of the physical player who had to act');
-  assert.match(first.reason,/W\\.O\\./i);
+  assert.match(first.reason,/W\.O\./i);
   assert.equal(first.revision,expectedRevision);
   assert.equal(first.publicRevision,started.revision,'the terminal revision remains unacknowledged');
   assert.equal(first.locks,0,'both duel-member locks are released atomically');
