@@ -94,7 +94,7 @@ function assertState(state:CallOfTheHauntedState):void{
       Object.entries(memory.equipped).some(([uid,link])=>!uid||!link||typeof link.targetUid!=='string'||
         !Number.isInteger(link.targetOwnerSeat)||link.targetOwnerSeat<0||link.targetOwnerSeat>3||
         !Number.isInteger(link.trapOwnerSeat)||link.trapOwnerSeat<0||link.trapOwnerSeat>3||
-        (link.controllerTeam!==0&&link.controllerTeam!==1)||!Number.isSafeInteger(link.turn))))
+        (link.controllerTeam!==0&&link.controllerTeam!==1)||!Number.isSafeInteger(link.turn)))
       throw Error('Memória de ativações/vínculos Call of the Haunted inválida.');
     for(const [sourceUid,link] of Object.entries(memory.equipped)){
       const trap=state.core.players[link.controllerTeam].backrow.find(card=>card.uid===sourceUid);
