@@ -1,0 +1,69 @@
+{
+  "mission": "M544",
+  "runId": "work-20261123T024500-0300-M544",
+  "owner": "Work principal",
+  "card": {
+    "name": "An Owl of Luck",
+    "passcode": "23927567",
+    "konamiDatabaseId": 5523,
+    "type": "Flip Effect Monster",
+    "attribute": "WIND",
+    "race": "Winged Beast",
+    "level": 2,
+    "atk": 300,
+    "def": 500,
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5523&ope=2&request_locale=en",
+    "officialEffect": "FLIP: Select 1 Field Spell Card from your Deck and place it on top of your Deck. If \"Necrovalley\" is on the field, you can add the selected Field Spell Card to your hand instead."
+  },
+  "design": {
+    "physicalOwner": "Searches the Deck of the physical seat encoded in the source card UID, including an inactive teammate's reserve.",
+    "target": "Only Field Spell cards in that physical Deck; selection is by immutable UID, not card name or ID alone.",
+    "defaultDestination": "Index 0, because the draw engine takes the top card with Array.shift().",
+    "optionalDestination": "If Necrovalley is face-up in either team's Field Zone at resolution, the selected card may instead be added to the same physical owner's hand.",
+    "timing": "Necrovalley is checked at resolution, not when the target list is first produced.",
+    "conservation": "The same physical UID/ID moves from Deck to Deck top or the same seat's hand; no card is created or granted.",
+    "integration": "Adapter only; shared resolver registration remains blocked pending M61 handoff."
+  },
+  "tests": [
+    "active physical owner target filtering",
+    "Deck top ordering",
+    "Necrovalley on own or opposing Field Zone",
+    "Necrovalley presence evaluated at resolution",
+    "hand option removed if Necrovalley leaves before resolution",
+    "inactive physical owner reserve Deck/hand routing",
+    "active physical owner shared core Deck/hand routing",
+    "no Field Spell in Deck",
+    "teammate Deck isolation",
+    "non-Field Spell rejection",
+    "source identity, face-up state and team ownership",
+    "stale or mismatched FLIP event rejection",
+    "physical UID conservation and immutable input",
+    "selected card must still be in Deck at resolution",
+    "optional hand choice does not replace default Deck-top placement"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "No resolver/metadata/certification/manifest changes; M61 handoff remains pending."
+  },
+  "security": {
+    "filesOnly": [
+      "src/anOwlOfLuckTagAdapter.ts",
+      "tests/anOwlOfLuckTagAdapter.test.cjs",
+      "docs/evidence/m544-an-owl-of-luck-tag-adapter.json",
+      ".github/workflows/m544-an-owl-of-luck-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "Adapter tests use structural TagDuel fixtures because An Owl of Luck is not yet registered in the shared playable-card catalog.",
+    "The helper is not wired into FLIP resolution or the resolver archive; no certification is claimed.",
+    "Offline adapter tests do not replace a full 2v2 duel or live Discord validation."
+  ]
+}
