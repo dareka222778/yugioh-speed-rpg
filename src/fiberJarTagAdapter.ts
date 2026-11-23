@@ -68,7 +68,7 @@ function assertState(state:FiberJarState):void{
     if(player.id!=='tag-team-'+team)
       throw Error('Identidade da equipe inválida para Fiber Jar.');
     const prefix='m'+state.active[team]+':';
-    for(const card of [...player.deck,...player.extra])
+    for(const card of [...player.deck,...(player.extra??[])])
       if(typeof card.uid!=='string'||!card.uid.startsWith(prefix))
         throw Error('Deck/Extra ativos devem pertencer ao representante físico.');
   }
