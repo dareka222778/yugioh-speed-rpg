@@ -1,0 +1,36 @@
+name: M501 Tag Simulation Command Contract
+on:
+  push:
+    branches:
+      - feat/work-m501-tag-simulation-command-contract-20261122
+    paths:
+      - 'tests/tagSimulationCommandContract.test.cjs'
+      - 'docs/evidence/m501-tag-simulation-command-contract.json'
+      - '.github/workflows/m501-tag-simulation-command-contract.yml'
+  pull_request:
+    paths:
+      - 'tests/tagSimulationCommandContract.test.cjs'
+      - 'docs/evidence/m501-tag-simulation-command-contract.json'
+      - '.github/workflows/m501-tag-simulation-command-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-simulation-command-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m501-tag-simulation-command-contract.json', 'utf8'))"
+      - name: Run /dupla simular command contract and isolation test
+        run: node --test tests/tagSimulationCommandContract.test.cjs

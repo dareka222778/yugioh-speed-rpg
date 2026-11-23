@@ -1,0 +1,75 @@
+{
+  "mission": "M501",
+  "runId": "work-20261122T065600-0300-M501",
+  "priority": "P1 — proteger /dupla simular: garantir que a simulação de quatro bots permaneça isolada, use apenas monstros Normais, sobreviva às restaurações JSON e não crie sessões, locks, cartas ou progresso de jogadores.",
+  "scope": {
+    "files": [
+      "tests/tagSimulationCommandContract.test.cjs",
+      "docs/evidence/m501-tag-simulation-command-contract.json",
+      ".github/workflows/m501-tag-simulation-command-contract.yml"
+    ],
+    "runtimeChanged": false,
+    "bootstrapChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "command": "/dupla simular",
+    "response": "Ephemeral",
+    "simulator": "simulateTag(seed) — four virtual seats, normal monsters only, chooseNPC, bounded decisions, JSON restoration every 13 decisions",
+    "output": "tagSimulationMessage — team result, LP, turns, decisions and restoration count",
+    "persistence": "No TagRecord, member lock, inventory grant or player progress is created."
+  },
+  "testCoverage": [
+    "Verifies the /dupla simular subcommand and ephemeral handler contract.",
+    "Verifies the simulator uses only tagNormalCardIds and playable low-level normal monsters.",
+    "Runs a deterministic four-bot simulation to terminal state and crosses JSON restore boundaries.",
+    "Confirms public projection contains no private hand, Deck or physical UID data.",
+    "Validates the Discord simulation embed and safe allowedMentions.",
+    "Snapshots player, collection, grant, deck, tag_session and tag_member tables before/after; requires no changes."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "command source contract + embed builder offline; sem token/guild/canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/tagSimulationCommandContract.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Não instancia Client Discord nem envia mensagem em guild real.",
+    "Não altera runtime, catálogo, certificações ou dados persistentes."
+  ]
+}
