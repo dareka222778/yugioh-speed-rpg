@@ -1,0 +1,77 @@
+{
+  "mission": "M543",
+  "runId": "work-20261123T023404-0300-M543",
+  "owner": "Work principal",
+  "title": "Cross-process Accept-versus-expiry races for 1v1 and TagDuel",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "0b535adce3ecf6505c7d6b4e67d3f5306a81c5a1",
+  "reservationCommit": "ee657eff706a41a08781162f3117411ca8324e4c",
+  "branch": "feat/work-m543-accept-expiry-race-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "priority": "P1 — prove that acceptance immediately before the deadline racing the timeout sweeper yields exactly one consistent state, with no partial acceptance or orphaned physical-seat locks.",
+  "design": {
+    "isolation": "temporary SQLite database seeded by the parent; parent connection closed before child processes start",
+    "concurrency": "six races across separate Node processes: three 1v1 Accept-vs-expiry races and three TagDuel final-seat Accept-vs-expiry races; each race uses separate better-sqlite3 connections and a synchronized start barrier",
+    "clock": "Accept workers use deadline-1ms; sweeper workers use the exact deadline; an idempotent sweeper retry reconciles transient SQLITE_BUSY outcomes",
+    "operations": [
+      "duelStore.acceptChallenge",
+      "duelStore.expireDueDuels",
+      "tagStore.acceptTag",
+      "tagStore.dueTags"
+    ]
+  },
+  "assertions": [
+    "each 1v1 invitation settles to playing or expired; never remains pending after the deterministic retry",
+    "a playing 1v1 has both physical duel_members locks and no tag_members locks; an expired invitation has no locks",
+    "each TagDuel lobby settles to playing or expired; never remains a partially accepted lobby after retry",
+    "a playing TagDuel has all four accepted seats and exactly four tag_members locks; an expired lobby has no tag_members or duel_members locks",
+    "all physical card UIDs remain unique in successfully started games",
+    "players, player_cards, starter_grants, decks and deck_cards remain byte-equivalent before and after all races"
+  ],
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventory": {
+    "granted": 0,
+    "mutated": false
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "persistentDatabaseUsed": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "SQLite temporário e processos Node independentes; sem banco persistente.",
+    "O teste verifica stores/transações reais, não gateway/guild Discord real.",
+    "A corrida usa relógios determinísticos nos processos; o retry explícito cobre falha transitória de lock, não mede latência de produção.",
+    "Não integra nem certifica cartas; não altera comandos ou runtime."
+  ],
+  "testExecution": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "customWorkflow": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending; baseline 969/1000",
+    "engineValidation": "pending"
+  }
+}
