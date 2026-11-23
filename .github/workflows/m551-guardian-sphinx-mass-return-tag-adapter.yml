@@ -1,0 +1,38 @@
+name: M551 Guardian Sphinx non-targeting mass return
+on:
+  push:
+    branches:
+      - feat/work-m551-guardian-sphinx-mass-return-20261123
+    paths:
+      - 'src/guardianSphinxMassReturnTagAdapter.ts'
+      - 'tests/guardianSphinxMassReturnTagAdapter.test.cjs'
+      - 'docs/evidence/m551-guardian-sphinx-mass-return-tag-adapter.json'
+      - '.github/workflows/m551-guardian-sphinx-mass-return-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/guardianSphinxMassReturnTagAdapter.ts'
+      - 'tests/guardianSphinxMassReturnTagAdapter.test.cjs'
+      - 'docs/evidence/m551-guardian-sphinx-mass-return-tag-adapter.json'
+      - '.github/workflows/m551-guardian-sphinx-mass-return-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guardian-sphinx-mass-return:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m551-guardian-sphinx-mass-return-tag-adapter.json', 'utf8'))"
+      - name: Run M551 regressions
+        run: node --test tests/guardianSphinxMassReturnTagAdapter.test.cjs
