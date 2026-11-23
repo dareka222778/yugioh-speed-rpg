@@ -1,0 +1,64 @@
+{
+  "mission": "M538",
+  "runId": "work-20261122T215907-0300-M538",
+  "owner": "Work principal",
+  "title": "Cross-process 1v1 vs TagDuel acceptance lock race",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "5c7b9f179afae742dbfeda1e21b4685685bbb513",
+  "branch": "feat/work-m538-cross-mode-lock-race-20261122",
+  "baseSha": "5c7b9f179afae742dbfeda1e21b4685685bbb513",
+  "priority": "P1 — provar exclusão mútua real entre Accept 1v1 e Accept TagDuel sob concorrência entre processos: duas conexões SQLite independentes não podem adquirir simultaneamente os locks do mesmo jogador.",
+  "scope": [
+    "tests/duelCrossModeLockRace.test.cjs",
+    "docs/evidence/m538-duel-cross-mode-lock-race.json",
+    ".github/workflows/m538-duel-cross-mode-lock-race.yml"
+  ],
+  "design": {
+    "isolation": "temporary SQLite file seeded by the parent process; parent connection closed before workers start",
+    "concurrency": "two independent Node child processes, each with its own better-sqlite3 connection; both workers signal ready before the parent releases both Accept transactions",
+    "operations": [
+      "duelStore.acceptChallenge (1v1)",
+      "tagStore.acceptTag (2v2)"
+    ],
+    "invariant": "exactly one acceptance and exactly one invitee lock (duel_members XOR tag_members)"
+  },
+  "assertions": [
+    "both invitations are pending and the invitee initially owns neither lock",
+    "exactly one process commits its acceptance",
+    "the losing transaction fails closed with a cross-mode conflict or SQLite busy error",
+    "persisted duel/lobby state agrees with the winning lock table",
+    "original host and duel-creator locks remain intact",
+    "players, player_cards, starter_grants, decks and deck_cards are byte-equivalent before and after"
+  ],
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventory": {
+    "granted": 0,
+    "mutated": false
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  },
+  "limitations": [
+    "Process-level concurrency against temporary SQLite; no production database.",
+    "Uses the real duelStore/tagStore acceptance transactions, not a live Discord gateway.",
+    "The test proves lock exclusivity; it does not claim a friendly user-facing retry message for SQLITE_BUSY."
+  ]
+}
