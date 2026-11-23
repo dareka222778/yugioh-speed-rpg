@@ -18,6 +18,7 @@ export type GuardianSphinxPlan={
   targeting:false;
 };
 type OwnerHand={seat:number;team:0|1;hand:CardRefLike[]};
+type TeamHeldShape={deck:TagDuel['core']['players'][number]['deck'];hand:TagDuel['core']['players'][number]['hand'];extra:NonNullable<TagDuel['core']['players'][number]['extra']>};
 type CardRefLike={uid:string;id:string;entityKind?:'token'};
 
 const defaultLookup:GuardianSphinxLookup=id=>getPlayableCard(id);
@@ -135,7 +136,8 @@ export function resolveGuardianSphinxFlipSummon(
     lifetimes[monster.uid]={zone:'hand',epoch:(previous?.epoch??0)+1};
     if(route.hand.length>6)deferred.add(route.seat);
   }
-  next.core.teamRotation!.reserves=next.reserves;
+  const teamReserves:Record<string,TeamHeldShape>=Object.fromEntries(Object.entries(next.reserves).map(([seat,held])=>[seat,{deck:held.deck,hand:held.hand,extra:held.extra??[]}]));
+  next.core.teamRotation!.reserves=teamReserves;
   assertConserved(before,next);
   return {status:'resolved',state:next,returnedUids,removedTokenUids,affectedCount:targets.length,handLimitDeferredSeats:[...deferred].sort((a,b)=>a-b)};
 }
