@@ -27,6 +27,8 @@ test('normalization cannot conceal unrelated bootstrap edits or a partial M537 h
  assert.notEqual(hash(strip('src/index.ts',changed)),baseline);
  const partial=Buffer.from(source.replace(timeoutSweepImport,''));
  assert.throws(()=>strip('src/index.ts',partial),/M537 timeout sweep extension must be complete and exact/);
+ const modifiedSweep=Buffer.from(source.replace('runIndependentTimeoutSweeps([','runIndependentTimeoutSweeps([]'));
+ assert.throws(()=>strip('src/index.ts',modifiedSweep),/M537 timeout sweep extension must be complete and exact/);
  assert.equal(strip('src/resolvers/v8/duelEngineCurrent.ts',changed),changed);
 });
 test('normalization rejects duplicate runtime/timeout hooks and any dependency before dotenv',()=>{
@@ -34,5 +36,5 @@ test('normalization rejects duplicate runtime/timeout hooks and any dependency b
  assert.throws(()=>strip('src/index.ts',Buffer.from(source.replace(runtimeImport,runtimeImport+runtimeImport))));
  assert.throws(()=>strip('src/index.ts',Buffer.from(source.replace(timeoutSweepImport,timeoutSweepImport+timeoutSweepImport))));
  assert.throws(()=>strip('src/index.ts',Buffer.from(runtimeImport+source.replace(runtimeImport,''))),/dotenv must remain first/);
- assert.throws(()=>strip('src/index.ts',Buffer.from(timeoutSweepImport+source.replace(timeoutSweepImport,'')),/dotenv must remain first/);
+ assert.throws(()=>strip('src/index.ts',Buffer.from(timeoutSweepImport+source.replace(timeoutSweepImport,''))),/dotenv must remain first/);
 });

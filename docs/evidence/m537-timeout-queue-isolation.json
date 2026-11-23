@@ -82,22 +82,23 @@
     "check": "success",
     "build": "success",
     "customWorkflow": "success (run 45090203046)",
-    "cardBatchFast": "failed (run 45090203070; exact M29 bootstrap hash gate exposed unreviewed M537 hook; now adding strict exact normalization)",
+    "cardBatchFast": "failed on prior head (run 45090203070) due M29 bootstrap gate; exact normalizer/test added, rerun pending",
     "milestone1000": "success (run 45090203072; 969/1000)",
-    "engineValidation": "in_progress (run 45090203041)",
-    "extendedSoak": "included in Engine Validation; in_progress"
+    "engineValidation": "in_progress on prior head (run 45090203041)",
+    "extendedSoak": "included in Engine Validation; pending"
   },
   "integrityGate": {
     "baselineFile": "docs/evidence/mission8-preserved-baseline.json",
     "baselineChanged": false,
     "reviewedNormalizer": "scripts/mission29-reviewed-extensions.cjs",
     "exactSubstitutions": [
-      "M537 import line",
+      "M537 timeout sweep import line",
       "M537 sweepDuelTimeouts function body"
     ],
     "negativeCoverage": [
       "unrelated bootstrap edit remains detectable",
       "partial hook rejected",
+      "modified hook rejected",
       "duplicate hook rejected",
       "hook before dotenv rejected"
     ],

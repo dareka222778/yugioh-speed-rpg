@@ -1,12 +1,15 @@
-/** Permit only the reviewed operational identity substitution in the bootstrap.
- * Restore its prior bytes for the historical preservation hash; every other
- * bootstrap change must still fail that hash. Never normalize archived engines.
+/** Normalize only exact reviewed bootstrap substitutions.
+ * The mission-8 baseline remains byte-identical after restoring the M29
+ * runtime identity and M537 timeout-sweep hooks. Never normalize archived engines.
  */
 const assert=require('node:assert/strict');
 const runtimeImport="import {runtimeStatusLine,runtimePingText} from './runtimeStatus';\n";
-const baselinePing='`🏓 Pong! Versão ${RELEASE_VERSION} • 130 cartas habilitadas • ${RULES_PROFILE.name} • mão ${RULES_PROFILE.handLimit}, descarte na Fase Final • Adicional ${RULES_PROFILE.extraDeckMax}.`';
-const baselineLog='console.log(`Release ${RELEASE_VERSION} | regras ${RULES_VERSION} | mão ${RULES_PROFILE.handLimit}, descarte na Fase Final | Adicional ${RULES_PROFILE.extraDeckMax} | 130 cartas | 1v1 e 2v2`);';
-function replaceOnce(text,from,to){assert.equal(text.split(from).length,2,'M29 identity substitution must occur exactly once');return text.replace(from,to);}
+const timeoutSweepImport="import {createTimeoutSweepQueue,runIndependentTimeoutSweeps} from './timeoutSweep';\n";
+const baselinePing='\x60🏓 Pong! Versão ${RELEASE_VERSION} • 130 cartas habilitadas • ${RULES_PROFILE.name} • mão ${RULES_PROFILE.handLimit}, descarte na Fase Final • Adicional ${RULES_PROFILE.extraDeckMax}.\x60';
+const baselineLog='console.log(\x60Release ${RELEASE_VERSION} | regras ${RULES_VERSION} | mão ${RULES_PROFILE.handLimit}, descarte na Fase Final | Adicional ${RULES_PROFILE.extraDeckMax} | 130 cartas | 1v1 e 2v2\x60);';
+const baselineSweep="export async function sweepDuelTimeouts(){if(sweepingDuels)return;sweepingDuels=true;try{for(const r of expireDueDuels())await refreshArena(r);for(const pending of dueTags())await refreshTag(runTagBots(pending.id));}catch(error){console.error('Falha ao conferir prazo dos duelos:',errorSummary(error));}finally{sweepingDuels=false;}}";
+const reviewedSweep="export async function sweepDuelTimeouts(){\n if(sweepingDuels)return;\n sweepingDuels=true;\n try{\n  const failures=await runIndependentTimeoutSweeps([\n   createTimeoutSweepQueue('1v1',expireDueDuels,async record=>{await refreshArena(record);}),\n   createTimeoutSweepQueue('2v2',dueTags,async pending=>{await refreshTag(runTagBots(pending.id));})\n  ]);\n  for(const failure of failures){\n   const location=failure.index===undefined?failure.stage:`${failure.stage} #${failure.index+1}`;\n   console.error(`Falha na fila ${failure.queue} (${location}):`,errorSummary(failure.error));\n  }\n }catch(error){\n  console.error('Falha inesperada ao conferir prazo dos duelos:',errorSummary(error));\n }finally{\n  sweepingDuels=false;\n }\n}";
+function replaceOnce(text,from,to){assert.equal(text.split(from).length,2,'M29 reviewed substitution must occur exactly once');return text.replace(from,to);}
 function strip(file,bytes){
  bytes=require('./mission30-conditional-reviewed.cjs').strip(file,bytes);
  if(file!=='src/index.ts')return bytes;
@@ -24,7 +27,4 @@ function strip(file,bytes){
  }
  return Buffer.from(text,'utf8');
 }
-const timeoutSweepImport="import {createTimeoutSweepQueue,runIndependentTimeoutSweeps} from './timeoutSweep';\n";
-const baselineSweep="export async function sweepDuelTimeouts(){if(sweepingDuels)return;sweepingDuels=true;try{for(const r of expireDueDuels())await refreshArena(r);for(const pending of dueTags())await refreshTag(runTagBots(pending.id));}catch(error){console.error('Falha ao conferir prazo dos duelos:',errorSummary(error));}finally{sweepingDuels=false;}}";
-const reviewedSweep="export async function sweepDuelTimeouts(){\n if(sweepingDuels)return;\n sweepingDuels=true;\n try{\n  const failures=await runIndependentTimeoutSweeps([\n   createTimeoutSweepQueue('1v1',expireDueDuels,async record=>{await refreshArena(record);}),\n   createTimeoutSweepQueue('2v2',dueTags,async pending=>{await refreshTag(runTagBots(pending.id));})\n  ]);\n  for(const failure of failures){\n   const location=failure.index===undefined?failure.stage:`${failure.stage} #${failure.index+1}`;\n   console.error(`Falha na fila ${failure.queue} (${location}):`,errorSummary(failure.error));\n  }\n }catch(error){\n  console.error('Falha inesperada ao conferir prazo dos duelos:',errorSummary(error));\n }finally{\n  sweepingDuels=false;\n }\n}";
 module.exports={strip,runtimeImport,timeoutSweepImport};
