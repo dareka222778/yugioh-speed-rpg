@@ -1,0 +1,76 @@
+{
+  "mission": "M499",
+  "runId": "work-20261122T064800-0300-M499",
+  "priority": "P1 — proteger /dupla campo como recuperação do painel 2v2: reutilizar a sessão existente, validar servidor de origem, republicar no canal atual, invalidar a revisão pública antiga e só remover da fila de atualização após markTagPublished confirmar a mesma revisão.",
+  "scope": {
+    "files": [
+      "tests/tagFieldRepublishCommandContract.test.cjs",
+      "docs/evidence/m499-tag-field-republish-command-contract.json",
+      ".github/workflows/m499-tag-field-republish-command-contract.yml"
+    ],
+    "runtimeChanged": false,
+    "bootstrapChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "command": "/dupla campo",
+    "flow": "currentTag(owner) -> validate original guild -> runTagBots(existing.id) -> visualTagPublic -> setTagMessage(existing.id,newMessage,currentChannel) -> markTagPublished(existing.id,revision)",
+    "recovery": "setTagMessage resets public_revision to -1; dueTags requeues the active session; stale markTagPublished revision is ignored; exact revision clears the queue.",
+    "persistence": "Existing session, member lock, revision, state and physical card UIDs remain unchanged; only message/channel/public_revision are updated."
+  },
+  "testCoverage": [
+    "Verifies /dupla campo is registered and uses the existing player session.",
+    "Verifies public channel reply and visualTagPublic/setTagMessage/markTagPublished handler contract.",
+    "Uses temporary SQLite with an actual TagDuel state and member lock.",
+    "Publishes an initial message, then simulates a lost message and recovery in a new channel.",
+    "Confirms dueTags requeues the session until the exact revision is marked published.",
+    "Confirms stale publication revision cannot clear a newer panel.",
+    "Confirms no second session or member lock is created and duel revision/state are unchanged.",
+    "Validates public/private Discord payload builders offline."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "handler contract + builders offline; sem token/guild/canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/tagFieldRepublishCommandContract.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Não instancia Client Discord nem publica em guild/canal real; a integração do handler é protegida por contrato de source e a persistência é exercitada via TagStore.",
+    "Não altera runtime, catálogo, certificações ou dados de jogadores."
+  ]
+}
