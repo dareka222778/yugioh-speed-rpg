@@ -82,10 +82,7 @@ const resolve=(state,id='shallow-1',negated=false)=>{
   const plan=planTheShallowGraveResolution(state,id);
   return resolveTheShallowGraveResolution(state,plan,negated,lookup);
 };
-const inventory=state=>[
-  ...tagInventory(state),
-  ...Object.values(state.reserves).flatMap(held=>[...held.deck,...held.hand,...(held.extra??[])])
-].map(card=>card.uid+'='+card.id).sort();
+const inventory=state=>tagInventory(state).map(card=>card.uid+'='+card.id).sort();
 const move=(state,team,uid,from,to)=>{
   const list=state.core.players[team][from];
   const index=list.findIndex(card=>card.uid===uid);

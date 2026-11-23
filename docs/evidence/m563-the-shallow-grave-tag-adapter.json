@@ -32,7 +32,7 @@
       "extraDeck": 5
     }
   },
-  "testCount": 24,
+  "testCount": 25,
   "testNames": [
     "Normal Spell source, active representative and Main Phase",
     "inactive partner reserve hand rejected",
@@ -57,7 +57,8 @@
     "3 Monster Zone and Extra Deck five bounds",
     "hand above six deferred to End Phase",
     "input immutability",
-    "inactive reserve inventory conservation and short in-duel Deck"
+    "inactive reserve inventory conservation and short in-duel Deck",
+    "Deck construction size is not applied as a mid-duel minimum"
   ],
   "certification": {
     "newCards": 0,

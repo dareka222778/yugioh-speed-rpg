@@ -41,7 +41,7 @@ function physicalSeat(uid:string):number{
   return Number(match[1]);
 }
 function allPhysicalCards(state:TheShallowGraveState){
-  return [...tagInventory(state),...Object.values(state.reserves).flatMap(held=>[...held.deck,...held.hand,...(held.extra??[])])];
+  return tagInventory(state);
 }
 function assertState(state:TheShallowGraveState):void{
   if(!state||state.version!==1||state.mode!=='tag-classic'||!state.core||
