@@ -1,0 +1,36 @@
+name: M551 Discord Decline Cancel Contract
+on:
+  push:
+    branches:
+      - feat/work-m551-discord-decline-cancel-contract-20261123
+    paths:
+      - 'tests/discordDeclineCancelContract.test.cjs'
+      - 'docs/evidence/m551-discord-decline-cancel-contract.json'
+      - '.github/workflows/m551-discord-decline-cancel-contract.yml'
+  pull_request:
+    paths:
+      - 'tests/discordDeclineCancelContract.test.cjs'
+      - 'docs/evidence/m551-discord-decline-cancel-contract.json'
+      - '.github/workflows/m551-discord-decline-cancel-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discord-decline-cancel-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m551-discord-decline-cancel-contract.json', 'utf8'))"
+      - name: Run real Discord handler and payload contract tests
+        run: node --test tests/discordDeclineCancelContract.test.cjs
