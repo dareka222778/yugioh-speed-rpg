@@ -451,7 +451,8 @@ export function returnPrematureBurialToOwnerHand(
     const reserve=next.reserves[link.equipOwnerSeat];
     if(!reserve)throw Error('Reserva física do dono de Premature Burial não existe.');
     reserve.hand.push(equip);
-    next.core.teamRotation.reserves=next.reserves;
+    const rotation=next.core.teamRotation as NonNullable<Core['teamRotation']>;
+    rotation.reserves=next.reserves as unknown as NonNullable<Core['teamRotation']>['reserves'];
   }
   const equipped={...(next.prematureBurial?.equipped??{})};delete equipped[equipUid];
   next.prematureBurial={pending:{...(next.prematureBurial?.pending??{})},
