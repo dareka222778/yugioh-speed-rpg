@@ -1,0 +1,68 @@
+{
+  "mission": "M556",
+  "runId": "work-20261123T075728-0300-M556",
+  "owner": "Work principal",
+  "status": "behavior-adapter-pending-runtime-integration",
+  "engineVersion": "engine-v9",
+  "cards": [
+    {
+      "name": "Dark Mimic LV1",
+      "passcode": "74713514",
+      "konamiDatabaseId": 6101,
+      "attribute": "DARK",
+      "level": 1,
+      "atk": 100,
+      "def": 1000,
+      "race": "Fiend",
+      "firstTcgPrinting": {
+        "date": "2004-10-01",
+        "set": "SOD-EN009",
+        "product": "Soul of the Duelist"
+      },
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6101&request_locale=en",
+      "effectSummary": "FLIP: compra 1. Uma vez por turno na Fase de Apoio, pode enviar esta carta ao GY para Invocar-Especialmente Dark Mimic LV3 da mão ou Deck."
+    },
+    {
+      "name": "Dark Mimic LV3",
+      "passcode": "01102515",
+      "konamiDatabaseId": 6102,
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 1000,
+      "def": 1000,
+      "race": "Fiend",
+      "firstTcgPrinting": {
+        "date": "2004-10-01",
+        "set": "SOD-EN010",
+        "product": "Soul of the Duelist"
+      },
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6102&request_locale=en",
+      "effectSummary": "Se destruída por batalha e enviada ao GY: compra 1; compra 2 se a mesma instância foi Invocada pelo efeito de Dark Mimic LV1."
+    }
+  ],
+  "implementedContracts": [
+    "Dark Mimic LV1 real Flip Summon trigger, draw 1, negation, idempotency and source removal after activation.",
+    "Optional Standby effect with send-to-owner-GY cost, once-per-physical-instance marker, non-targeting LV3 choice at resolution from active representative hand/Deck.",
+    "Dark Mimic LV3 battle-destruction trigger with 1/2 draw based on the exact physical instance and zone epoch.",
+    "Stolen-card controller/owner distinction; cards go to physical owner's GY while draw belongs to controller team's active representative.",
+    "Deck-out during multi-draw; hand overflow deferred to End Phase; 3 Monster + 3 backrow zones; separate Field Zone; Extra Deck 5; physical UID conservation."
+  ],
+  "runtimeIntegration": "not performed; M61 handoff remains pending",
+  "certification": {
+    "admissionEligible": false,
+    "certified": false,
+    "newCertifications": 0,
+    "baselineShared": 969,
+    "remainingTo1000": 31
+  },
+  "inventoryGranted": 0,
+  "safety": {
+    "temporaryFixturesOnly": true,
+    "productionDatabaseTouched": false,
+    "playerDataTouched": false,
+    "discordTokenUsed": false,
+    "liveDiscordUsed": false
+  },
+  "testFile": "tests/darkMimicTagAdapter.test.cjs",
+  "focusedTestCount": 23
+}
