@@ -1,0 +1,99 @@
+{
+  "runId": "work-20261123T175719-0300-M571",
+  "mission": "M571",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-23T17:57:19-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m571-counter-trap-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "32174cfd470f320863e01e1ea57a32f4e5956a80",
+  "reservationCommitSha": null,
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "previousCheckpoint": "coordination/runs/work-20261123T135000-0300-M568.json",
+  "reservedFiles": [
+    "src/counterTrapTagAdapter.ts",
+    "tests/counterTrapTagAdapter.test.cjs",
+    "docs/evidence/m571-counter-trap-tag-adapter.json",
+    ".github/workflows/m571-counter-trap-tag-adapter.yml"
+  ],
+  "scope": "Adapter isolado para Gryphon Wing e Trap Jammer; testes usam transições reais TagDuel para HFD/Mirror Force e validam as duas semânticas de negação.",
+  "cards": [
+    {
+      "id": "55608151",
+      "name": "Gryphon Wing",
+      "kind": "Normal Trap",
+      "officialKonamiCid": 4892,
+      "firstTcgRelease": "2003-03-30",
+      "behavior": "Negar efeito de Harpie's Feather Duster; se negado, destruir todas as Magias/Armadilhas que o oponente controla."
+    },
+    {
+      "id": "19252988",
+      "name": "Trap Jammer",
+      "kind": "Counter Trap",
+      "officialKonamiCid": 5921,
+      "firstTcgRelease": "2004-03-01",
+      "behavior": "Durante a Battle Phase, negar a ativação de uma Armadilha do oponente e destruí-la."
+    }
+  ],
+  "certificationAtStart": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "legacyCardCertificationsEntries": 959,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ciAtStart": {
+    "M566": {
+      "pr": 512,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    "M567": {
+      "pr": 513,
+      "focused": "failure",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "failure"
+    },
+    "M568": {
+      "pr": 514,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    "M569": {
+      "pr": 515,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "success"
+    },
+    "M570": {
+      "pr": 516,
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress"
+    }
+  },
+  "handoff": {
+    "pr": 17,
+    "commentId": 7113961920,
+    "status": "requested-awaiting-explicit-release",
+    "protectedFiles": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts"
+    ]
+  },
+  "deployment": {
+    "status": "not_verified",
+    "reason": "A integração GitHub disponível não expôs o endpoint de deployments; nenhum merge/deploy será executado."
+  },
+  "nextTask": "Concluir os testes focados e CI; integrar comandos/runtime somente após handoff explícito M61; em seguida escolher próxima família de respostas a efeitos sem duplicações.",
+  "nextWorkWindow": "2026-11-23T22:30:00-03:00"
+}
