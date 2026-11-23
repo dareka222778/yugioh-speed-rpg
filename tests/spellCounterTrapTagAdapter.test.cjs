@@ -17,6 +17,7 @@ const {
 const POT='55144522';
 const MST='05318639';
 const SEVEN_TOOLS='03819470';
+const MAGIC_JAMMER='77414722';
 const HFD='18144506';
 const MIRROR='44095762';
 const SOGEN='86318356';
@@ -59,7 +60,7 @@ function hand(state,seat,id){
   return card;
 }
 function setTrap(state,seat,suffix){
-  const c=take(state,seat,SEVEN_TOOLS);
+  const c=take(state,seat,MAGIC_JAMMER);
   c.faceUp=false;
   c.setTurn=1;
   state.core.players[seat%2].backrow.push(c);
@@ -120,7 +121,7 @@ function fixture(trapId,seed){
     [POT,MST],
     [MST],
     [MST],
-    [SEVEN_TOOLS,MST]
+    [MAGIC_JAMMER,MST]
   ];
   const state=create(required,seed);
   const pot=hand(state,0,POT);
@@ -146,7 +147,6 @@ function fixture(trapId,seed){
   assert.equal(response.core.phase,'response');
   assert.equal(response.core.pending.kind,'spell');
   assert.equal(response.core.pending.id,POT);
-  console.log('M572_RESPONSE_DEBUG',JSON.stringify({current:response.core.current,priority:response.core.priority,actor:response.core.pending.actor,active:response.active,cursor:response.cursor}));
   assert.equal(response.core.priority,1);
   tag.assertTagDuel(response);
   assertPrivateHands(response);
@@ -170,6 +170,7 @@ test('M572 cards remain unadmitted and cannot be certified or distributed by the
   assert.ok(getPlayableCard(POT));
   assert.ok(getPlayableCard(MST));
   assert.ok(getPlayableCard(SEVEN_TOOLS));
+  assert.ok(getPlayableCard(MAGIC_JAMMER));
 });
 
 test('Magic Drain opens only for an opponent Spell activation and exposes no target UID',()=>{
