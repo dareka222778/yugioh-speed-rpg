@@ -1,0 +1,107 @@
+{
+  "mission": "M560",
+  "runId": "work-20261123T0913000300-M560",
+  "owner": "Work principal",
+  "sharedHeadAtReservation": "97d11bb4d406cd2b323e2e39eb8c2cf1b0d2091b",
+  "card": {
+    "name": "Spear Cretin",
+    "passcode": "58551308",
+    "konamiDatabaseId": 4923,
+    "attribute": "DARK",
+    "level": 2,
+    "race": "Fiend",
+    "monsterTypes": [
+      "Flip",
+      "Effect"
+    ],
+    "atk": 500,
+    "def": 500,
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4923&ope=2&request_locale=en",
+    "officialText": "FLIP: When this card is sent to the Graveyard after being flipped, each player selects 1 monster from their Graveyard, and Special Summons it in face-up Attack Position or face-down Defense Position.",
+    "firstTcgPrinting": {
+      "date": "2002-09-16",
+      "set": "MRL-087",
+      "product": "Magic Ruler"
+    }
+  },
+  "design": {
+    "scope": "Isolated TagDuel adapter/test/evidence/workflow; no central resolver or catalog registration.",
+    "trigger": "Requires a real prior flip followed by movement from the Monster Zone to the physical owner's team Graveyard. The cause may be battle or a card effect; it is not battle-destruction-only.",
+    "timing": "The trigger is registered without targets or Graveyard choices. At resolution, each team independently selects one monster from its own shared Graveyard.",
+    "mandatoryChoice": "If a team has at least one eligible monster and an open Monster Zone, it must choose one; if it has no eligible monster or its three Monster Zones are full, its choice is null and the other team may still resolve.",
+    "position": "Each team independently chooses face-up Attack Position or face-down Defense Position, exactly as the card text specifies.",
+    "ownership": "The summoned monster is controlled by the team whose Graveyard supplied it, while its physical owner seat is preserved from the UID, including an inactive partner's card.",
+    "sourceCanReturn": "Spear Cretin itself remains an eligible monster in its owner's Graveyard and may be selected by its own team.",
+    "eligibility": "Non-monsters and tokens are excluded. Fusion/Ritual monsters require properlySummoned=true. Other summon restrictions not represented by the current metadata are not inferred.",
+    "atomicity": "Both teams' choices are validated before either card moves; a stale/invalid second choice cannot partially resolve the first.",
+    "replay": "A durable activationId receipt is persisted in JSON and prevents duplicate registration/resolution.",
+    "capacity": "Three shared Monster Zones and three Spell/Trap Zones per team; Field Zone is separate; Extra Deck remains at five.",
+    "hand": "No hand truncation or discard occurs; the End Phase retains responsibility for the six-card limit.",
+    "deck": "Decks are untouched; the 20–30 Main Deck rule remains a deck-construction constraint, not a minimum for an in-progress duel.",
+    "ownerRules": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "testCases": [
+    "requires prior flip and subsequent Monster Zone-to-owner-GY movement",
+    "accepts send by effect as well as battle; no battle-only restriction",
+    "source must be Spear Cretin in its physical owner's team GY",
+    "trigger is independent of whose turn is active and preserves inactive partner owner",
+    "trigger registration persists without target/choice selection",
+    "both teams select from their own shared GY and choose positions independently",
+    "physical owner seat preserved for inactive partners",
+    "cross-team Graveyard selection rejected",
+    "one team with no legal monster does not block the other",
+    "full Monster Zone blocks only that team's summon",
+    "both full Monster Zones produce no summons",
+    "choice is mandatory when a legal monster and space exist",
+    "cards entering GY after trigger registration are available at resolution",
+    "Spear Cretin itself may be revived face-down Defense",
+    "non-monster, token, and improperly summoned Fusion/Ritual cards excluded",
+    "properly summoned Fusion/Ritual cards eligible",
+    "negation consumes receipt without moving cards",
+    "source leaving GY after trigger registration does not cancel the trigger",
+    "JSON save/restore preserves pending activation and replay protection",
+    "activationId cannot be reused while pending or after resolution",
+    "two separate Spear Cretin triggers can remain pending in one turn",
+    "selected card must remain in its own GY until resolution",
+    "both teams are validated before either card moves",
+    "3+3 zones, Field Zone and Extra Deck 5 preserved",
+    "over-six hands remain untouched for End Phase; Decks unchanged",
+    "input state immutable and physical UIDs conserved",
+    "malformed UID, duplicate UID, wrong card and stale turn rejected",
+    "stale/invalid choices cannot partially mutate either team"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Adapter-only preparation. Spear Cretin is absent from cardMetadata, cardCatalog, monsterEffects and cardCertifications on the shared HEAD. No M61 handoff was granted; resolver/catalog/manifest/allowlist were not changed."
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentDatabaseTouched": false,
+    "playerDataTouched": false,
+    "productionDatabaseTouched": false,
+    "discordTokenUsed": false,
+    "liveDiscordUsed": false,
+    "centralResolverChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "limitations": [
+    "Adapter is not registered in the central monster-effect resolver; Spear Cretin remains unavailable for normal deck admission and uncertified.",
+    "The 28 focused tests use offline TagDuel fixtures and injected card metadata; no live Discord gateway or guild was used.",
+    "The actual Flip-to-GY event producer and player choice UI remain to be wired after the protected resolver handoff.",
+    "Special Summon restrictions beyond available monster kind/type and Fusion/Ritual proper-summon metadata are not inferred by this isolated adapter."
+  ],
+  "testCount": 28
+}
