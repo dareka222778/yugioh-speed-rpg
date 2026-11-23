@@ -1,0 +1,36 @@
+name: M540 Cross-Mode Timeout Rollback
+on:
+  push:
+    branches:
+      - feat/work-m540-cross-mode-timeout-rollback-20261122
+    paths:
+      - 'tests/crossModeTimeoutRollback.test.cjs'
+      - 'docs/evidence/m540-cross-mode-timeout-rollback.json'
+      - '.github/workflows/m540-cross-mode-timeout-rollback.yml'
+  pull_request:
+    paths:
+      - 'tests/crossModeTimeoutRollback.test.cjs'
+      - 'docs/evidence/m540-cross-mode-timeout-rollback.json'
+      - '.github/workflows/m540-cross-mode-timeout-rollback.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cross-mode-timeout-rollback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m540-cross-mode-timeout-rollback.json', 'utf8'))"
+      - name: Run cross-mode timeout rollback tests
+        run: node --test tests/crossModeTimeoutRollback.test.cjs
