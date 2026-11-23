@@ -69,7 +69,8 @@
     "source removal consumes self-set use",
     "new zone epoch resets per-instance use",
     "duplicate UID, malformed physical owner and more than three Monster Zones rejected",
-    "inventory conservation and input immutability"
+    "inventory conservation and input immutability",
+    "Guardian Sphinx reuses the self-set ignition while its non-targeting mass return remains separate"
   ],
   "certification": {
     "newCards": 0,
@@ -97,5 +98,13 @@
     "The two cards remain absent from the shared playable catalog; tests inject a narrow metadata lookup fixture.",
     "The adapter is not connected to the central monster-effect registry because the M61 runtime handoff is pending.",
     "Offline TagDuel structural tests do not replace a complete duel-engine integration test or a live Discord guild session."
-  ]
+  ],
+  "adjacentPreparedCard": {
+    "name": "Guardian Sphinx",
+    "passcode": "40659562",
+    "konamiDatabaseId": 5422,
+    "role": "shares the once-per-turn Main Phase self-set primitive; its Flip Summon mass return is intentionally delegated to M551 because it is non-targeting",
+    "certificationStatus": "not-certified"
+  },
+  "testCount": 22
 }

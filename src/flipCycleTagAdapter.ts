@@ -4,6 +4,7 @@ import {tagInventory,type TagDuel} from './tagDuel';
 
 export const STEALTH_BIRD_ID='03510565';
 export const DES_LACOODA_ID='02326738';
+export const GUARDIAN_SPHINX_ID='40659562';
 
 export type FlipCycleState=TagDuel&{
   /** Durable, JSON-serialized once-per-turn use markers, keyed by physical UID + zone epoch. */
@@ -32,7 +33,7 @@ export type FlipSummonPlan={
 export type SelfSetPlan={
   kind:'self-set';
   sourceUid:string;
-  cardId:typeof STEALTH_BIRD_ID|typeof DES_LACOODA_ID;
+  cardId:typeof STEALTH_BIRD_ID|typeof DES_LACOODA_ID|typeof GUARDIAN_SPHINX_ID;
   controllerTeam:0|1;
   activeSeat:number;
   turn:number;
@@ -40,7 +41,7 @@ export type SelfSetPlan={
 };
 type SourceContext={monster:TagDuel['core']['players'][number]['monsters'][number];ownerSeat:number;controllerTeam:0|1;activeSeat:number;instanceKey:string};
 
-const cardIds=new Set<string>([STEALTH_BIRD_ID,DES_LACOODA_ID]);
+const cardIds=new Set<string>([STEALTH_BIRD_ID,DES_LACOODA_ID,GUARDIAN_SPHINX_ID]);
 const cardLookup:FlipCycleCardLookup=(id)=>getPlayableCard(id);
 
 function assertState(state:FlipCycleState):void{
@@ -123,6 +124,7 @@ export function planFlipSummon(
     throw Error('O gatilho M60 exige uma Invocação-Virar real.');
   const source=sourceContext(state,sourceUid,lookup);
   if(state.core.current!==source.controllerTeam)throw Error('A Invocação-Virar não pertence à equipe ativa.');
+  if(source.monster.id!==STEALTH_BIRD_ID&&source.monster.id!==DES_LACOODA_ID)throw Error('O efeito principal de Guardian Sphinx exige o adapter de retorno em massa não direcionado.');
   const isStealthBird=source.monster.id===STEALTH_BIRD_ID;
   return {
     kind:'flip-summon',sourceUid,cardId:source.monster.id as FlipSummonPlan['cardId'],

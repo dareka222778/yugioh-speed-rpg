@@ -3,10 +3,10 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const {tagInventory}=require('../dist/tagDuel');
 const {
-  STEALTH_BIRD_ID,DES_LACOODA_ID,planFlipSummon,resolveFlipSummon,planSelfSet,resolveSelfSet
+  STEALTH_BIRD_ID,DES_LACOODA_ID,GUARDIAN_SPHINX_ID,planFlipSummon,resolveFlipSummon,planSelfSet,resolveSelfSet
 }=require('../dist/flipCycleTagAdapter');
 
-const lookup=id=>[STEALTH_BIRD_ID,DES_LACOODA_ID].includes(id)?{kind:'monster',monsterType:'effect'}:undefined;
+const lookup=id=>[STEALTH_BIRD_ID,DES_LACOODA_ID,GUARDIAN_SPHINX_ID].includes(id)?{kind:'monster',monsterType:'effect'}:undefined;
 const ref=(uid,id='00000001')=>({uid,id});
 function makeState({
   cardId=STEALTH_BIRD_ID,sourceUid='m0:source',sourceTeam=0,ownerSeat=0,currentTeam=sourceTeam,
@@ -214,4 +214,13 @@ test('Flip Cycle effects conserve all physical UIDs and never mutate the input s
   const result=resolveFlipSummon(state,planFlipSummon(state,event(state,'m0:source'),'m0:source',lookup));
   assert.equal(JSON.stringify(state),before);
   assert.deepEqual(ids(result.state),inventory);
+});
+
+test('Guardian Sphinx can reuse the self-set ignition while its mass return remains a separate non-targeting adapter',()=>{
+  const state=makeState({cardId:GUARDIAN_SPHINX_ID});
+  const plan=planSelfSet(state,'m0:source',lookup);
+  const result=resolveSelfSet(state,plan);
+  assert.equal(result.status,'set-face-down');
+  assert.equal(source(result.state).faceUp,false);
+  assert.throws(()=>planFlipSummon(state,event(state,'m0:source'),'m0:source',lookup),/retorno em massa não direcionado/);
 });
