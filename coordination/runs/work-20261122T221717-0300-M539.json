@@ -1,0 +1,142 @@
+{
+  "runId": "work-20261122T221717-0300-M539",
+  "mission": "M539",
+  "owner": "Work principal",
+  "status": "released-to-auxiliary",
+  "startedAt": "2026-11-22T22:17:17-03:00",
+  "lastActivityAt": "2026-11-22T22:20:43-03:00",
+  "endedAt": "2026-11-22T22:20:43-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "ea6772b9a06ed70045bc7e1d45de0401435ea724",
+  "sharedHeadBeforeFinalization": "9d254647e177d3797eeee905b9b8add1c65b3d08",
+  "branch": "feat/work-m539-cross-mode-timeout-lock-release-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "ea6772b9a06ed70045bc7e1d45de0401435ea724",
+  "headSha": "278ffb2d0f140a67c6d8e5242a30ebf98a4aac65",
+  "priority": "P1 — provar que expiração/timeout 1v1 e TagDuel liberam todos os locks físicos e permitem entrar no modo oposto sem locks órfãos.",
+  "scope": [
+    "tests/crossModeTimeoutLockRelease.test.cjs",
+    "docs/evidence/m539-cross-mode-timeout-lock-release.json",
+    ".github/workflows/m539-cross-mode-timeout-lock-release.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T22:17:17-03:00",
+    "checkedAgainst": [
+      "M536 #482: somente seus três arquivos de teste/evidência/workflow; liberada ao auxiliar.",
+      "M537 #481: timeout queue/runtime e seus sete arquivos; liberada ao auxiliar.",
+      "M538 #483: somente três caminhos próprios; liberada ao auxiliar.",
+      "M519 branch exists but is 0 ahead/28 behind and expected files are 404; requested confirmation/transfer, not touched.",
+      "M61 resolver/metadata/manifest/allowlist and all third-party reservations preserved."
+    ],
+    "note": "M539 adds only a new test/evidence/workflow; no runtime/store/engine/catalog changes."
+  },
+  "workBlocks": [
+    "Re-read state.json and M538 checkpoint; confirmed shared HEAD 9d254647e177d3797eeee905b9b8add1c65b3d08 and no M539 branch/PR before reservation.",
+    "Inspected duelStore.getDuel/save and tagStore.getTag/save: terminal status deletes the corresponding physical member locks.",
+    "Added four SQLite-isolated regressions for 1v1 pending expiry, 1v1 playing timeout, TagDuel lobby expiry and TagDuel playing timeout.",
+    "Verified cross-mode transitions: former 1v1 creator can accept/host TagDuel after timeout; former TagDuel host/all four physical members can create 1v1 challenges after timeout.",
+    "Compared players, player_cards, starter_grants, decks and deck_cards before/after each scenario; no asset changes.",
+    "Opened draft PR #484; focused workflow passed 4/4; Card Batch Fast and Milestone 1000 passed.",
+    "Requested handoff confirmation for the stale empty M519 branch; no response yet."
+  ],
+  "tests": {
+    "focused": "4/4 passed (45093874750)",
+    "check": "passed in M539 workflow (45093874750)",
+    "build": "passed in M539 workflow (45093874750)",
+    "customWorkflow": "success; 4/4 TAP (45093874750)",
+    "cardBatchFast": "success (45093874775)",
+    "milestone1000": "success; 969/1000 (45093874740)",
+    "engineValidation": "in progress (45093874812; npm test and 600s soak active)",
+    "extendedSoak": "in progress; 600s job (45093874812)",
+    "limitations": "SQLite temporário com stores reais; timeouts acionados por updated envelhecido; sem gateway Discord real."
+  },
+  "catalog": {
+    "sharedCards": 969,
+    "sharedCertificates": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "developmentBranchCertificates": 1014,
+    "developmentBranchNote": "PR #14/M47 está 39 commits à frente e 326 atrás da branch compartilhada na última comparação; draft e não mergeável. Não contar os 1014 de desenvolvimento como certificados compartilhados."
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "sharedAheadOfMain": 787,
+    "mainAheadOfShared": 12,
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false,
+    "note": "Busca de deploy no branch default não encontrou workflow/configuração; deployments do provedor não são expostos pela integração."
+  },
+  "prs": [
+    {
+      "number": 481,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/481",
+      "headSha": "e55f7e8a84ad61dac8c8cfd3b580061eb343165d",
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "ci": "Engine Validation and 600s Extended Soak success",
+      "releasedToAuxiliary": true
+    },
+    {
+      "number": 482,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/482",
+      "headSha": "580eb32e5de1300f0540bf852cc8a463a7931e47",
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "ci": "2/2 focused; Card Batch Fast, Milestone 1000, Engine Validation and 600s Extended Soak success",
+      "releasedToAuxiliary": true
+    },
+    {
+      "number": 483,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/483",
+      "headSha": "c9c4eadea9f3a7f311133e6489ad009a20df4a76",
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "ci": "focused, Card Batch Fast, Milestone 1000 and 600s Extended Soak success; Engine Validation audit:tag-training still in progress",
+      "releasedToAuxiliary": true
+    },
+    {
+      "number": 484,
+      "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/484",
+      "headSha": "278ffb2d0f140a67c6d8e5242a30ebf98a4aac65",
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "ci": "4/4 focused; Card Batch Fast and Milestone success; Engine Validation/Soak in progress",
+      "releasedToAuxiliary": true
+    }
+  ],
+  "handoffs": {
+    "M536": "https://github.com/dareka222778/yugioh-speed-rpg/pull/482#issuecomment-7088833706",
+    "M537": "https://github.com/dareka222778/yugioh-speed-rpg/pull/481#issuecomment-7088833378",
+    "M538": "https://github.com/dareka222778/yugioh-speed-rpg/pull/483#issuecomment-7088914664",
+    "M539": "https://github.com/dareka222778/yugioh-speed-rpg/pull/484#issuecomment-7089068615",
+    "M61": "https://github.com/dareka222778/yugioh-speed-rpg/pull/17#issuecomment-7088878588",
+    "M519": "https://github.com/dareka222778/yugioh-speed-rpg/pull/17#issuecomment-7089056909"
+  },
+  "releaseToAuxiliary": [
+    "M539: monitor Engine Validation/Extended Soak, sync non-force and correct only the three M539 paths; no merge/deploy.",
+    "M538: monitor remaining Engine Validation and sync non-force only its three paths.",
+    "M536/M537: CI integral success; monitor/sync non-force and correct only their own reserved files."
+  ],
+  "nextTask": "Auxiliar conclui Engine Validation/Extended Soak de #483 e #484 e sincroniza #481–#484 sem force push. Work na próxima janela verifica o novo HEAD/coordination e respostas M61/M519; se houver liberação, integra 3-Hump Lacooda ou prepara A Man with Wdjat. Sem liberação, segue em frente independente.",
+  "nextWindow": "2026-11-22T22:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 3,
+    "elapsedMinutes": 3.4,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "measurement": "estimativa conservadora do bloco M539; espera ociosa de CI excluída."
+  }
+}
