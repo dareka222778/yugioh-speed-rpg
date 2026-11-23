@@ -1,0 +1,160 @@
+{
+  "runId": "work-20261123T131054-0300-M564",
+  "mission": "M564",
+  "owner": "Work principal",
+  "priority": "P1 — Premature Burial (70828912): implementar Equip Spell 2v2 com custo de 800 LP na ativação, alvo físico do Cemitério próprio, Special Summon face-up Attack, vínculo persistente equippedTo e destruição do monstro quando o Equip Spell é destruído; preservar dono físico, zonas, rotação e custos mesmo em negação/alvo inválido.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T13:10:54-03:00",
+  "lastActivityAt": "2026-11-23T13:10:54-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "ef6a59d0e5eca997ba8a9ddb60c7f48ef9c9408b",
+  "branch": "feat/work-m564-premature-burial-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "ef6a59d0e5eca997ba8a9ddb60c7f48ef9c9408b",
+  "reservedFiles": [
+    "src/prematureBurialTagAdapter.ts",
+    "tests/prematureBurialTagAdapter.test.cjs",
+    "docs/evidence/m564-premature-burial-tag-adapter.json",
+    ".github/workflows/m564-premature-burial-tag-adapter.yml"
+  ],
+  "scope": [
+    "src/prematureBurialTagAdapter.ts",
+    "tests/prematureBurialTagAdapter.test.cjs",
+    "docs/evidence/m564-premature-burial-tag-adapter.json",
+    ".github/workflows/m564-premature-burial-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T13:10:54-03:00",
+    "checkedAgainst": [
+      "M557–M563: branches/PRs e reservas verificadas; quatro caminhos próprios por missão, sem sobreposição com M564.",
+      "M61 (#17): resolver, duelEngineCurrent, metadata, certificações e manifesto permanecem protegidos; M564 não os altera.",
+      "M242 cobre recuperação de Magician of Faith/Mask of Darkness; não é equip-link Premature Burial.",
+      "M319 testa contagem de Equip Spells/Maha Vailo, mas não implementa Premature Burial nem reserva os quatro caminhos M564.",
+      "Busca em cardCatalog/cardMetadata/cardCertifications e branches/PRs não encontrou Premature Burial (CID 4966 / passcode 70828912).",
+      "Os quatro caminhos M564 são novos e independentes."
+    ]
+  },
+  "card": {
+    "name": "Premature Burial",
+    "passcode": "70828912",
+    "konamiDatabaseId": 4966,
+    "type": "Equip Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4966&ope=2&request_locale=en",
+    "officialText": "Activate this card by paying 800 LP, then target 1 monster in your GY; Special Summon it in Attack Position and equip it with this card. When this card is destroyed, destroy the equipped monster.",
+    "firstTcgPrinting": {
+      "date": "2002-10-20",
+      "set": "PSV-037",
+      "product": "Pharaoh's Servant"
+    }
+  },
+  "design": {
+    "scope": "Adapter TagDuel isolado, testes, evidência e workflow; sem integração central/catalog registration.",
+    "activation": "Equip Spell da mão do representante ativo em Main Phase aberta; pagar 800 LP imediatamente; requer alvo válido, Monster Zone e Spell/Trap Zone livres.",
+    "targeting": "Um monstro do Cemitério compartilhado da própria equipe é alvo na ativação e recebe TargetBinding zone+epoch.",
+    "resolution": "Se alvo ou fonte ficar inválido, o efeito não invoca; o custo de 800 LP permanece pago e o Equip Spell vai ao Cemitério se ainda estiver no campo.",
+    "summon": "Special Summon face-up Attack; Equip Spell fica face-up no backrow com equippedTo=UID.",
+    "destruction": "Destruir Premature Burial destrói também o monstro equipado; sair do campo sem ser destruído não dispara a destruição do monstro. Se o monstro sair do campo, o Equip Spell é enviado ao Cemitério sem destruí-lo novamente.",
+    "ownership": "UID mantém assento físico do Equip Spell e do monstro; controle do monstro acompanha a equipe do Cemitério.",
+    "eligibility": "Monstros reais; tokens/não-monstros excluídos; Fusion/Ritual exigem properlySummoned=true.",
+    "idempotency": "activationId persistido em JSON; replay bloqueado.",
+    "limits": {
+      "mainDeck": "20–30 construction",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "plannedTests": [
+    "800 LP pagos na ativação, não na resolução",
+    "LP abaixo de 800 rejeita ativação sem mutação",
+    "fonte Equip Spell deve estar na mão do representante ativo",
+    "fase/chain/decision pendente rejeita ativação",
+    "alvo deve ser monstro do próprio Cemitério",
+    "alvo físico do parceiro inativo mantém owner seat",
+    "tokens/não-monstros/Fusion/Ritual impróprio rejeitados",
+    "Fusion/Ritual properlySummoned elegíveis",
+    "Monster Zone e Spell/Trap Zone checadas na ativação",
+    "Spell sai da mão e ocupa backrow face-up na ativação",
+    "alvo removido após ativação: sem summon, custo mantido, Spell vai ao GY",
+    "negação mantém custo pago e envia Spell ao GY",
+    "resolução válida invoca face-up Attack e grava equippedTo",
+    "fonte destruída antes da resolução não invoca monstro",
+    "targetBinding epoch invalida alvo que sai e retorna",
+    "destruir Premature Burial destrói o monstro equipado",
+    "remover Equip Spell sem destruir não destrói o monstro",
+    "monstro equipado saindo do campo manda Equip Spell ao GY",
+    "links equipados persistem em JSON save/restore",
+    "activationId replay bloqueado",
+    "UID e dono físico preservados em todas as quatro rotações",
+    "zona 3+3, Field Zone separada, Extra Deck 5",
+    "mão acima de seis permanece até End Phase",
+    "Deck curto em duelo não é truncado nem preenchido",
+    "inventário completo de reservas é conservado",
+    "entrada imutável e UIDs duplicados/malformados rejeitados"
+  ],
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false
+  },
+  "handoffRequests": [
+    {
+      "target": "PR #17 / M61",
+      "commentId": 7106460330,
+      "status": "awaiting-explicit-release",
+      "scope": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ]
+    }
+  ],
+  "tests": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "not-run"
+  },
+  "limitations": [
+    "Adapter não integrado ao resolver v9; Premature Burial continua não certificada e indisponível em decks.",
+    "Testes offline com TagDuel temporário; sem gateway/guild Discord real.",
+    "O adapter não modela a resolução de derrota por LP=0; casos de ativação exigem custo pagável e esse limite será explicitado.",
+    "M61 sem liberação explícita; arquivos centrais, catálogo, manifesto e allowlist não serão alterados."
+  ],
+  "pr": null,
+  "workBlocks": [
+    "Verificado card passcode/CID/texto oficial e ausência no catálogo, metadata, certificações, branches e PRs.",
+    "Inspecionados tipos reais Backrow.equippedTo, Monster.owner, LP e CardRef do resolver v9; M319 só cobre contagem de Equip Spell, não o vínculo Premature Burial.",
+    "Reservados quatro caminhos novos M564 em branch independente, sem sobreposição M557–M563/M61."
+  ],
+  "nextTask": "Implementar o adapter de Equip Spell e testes de custo, alvo, vínculo/destruição; durante CI consultar novo HEAD/state e avançar outra família independente.",
+  "nextWindow": "2026-11-23T17:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T13:10:54-03:00",
+    "endedAt": null,
+    "elapsedMinutes": null,
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}
