@@ -4,7 +4,7 @@
   "owner": "Work principal",
   "status": "released-to-auxiliary",
   "startedAt": "2026-11-22T21:59:07-03:00",
-  "lastActivityAt": "2026-11-22T22:09:32-03:00",
+  "lastActivityAt": "2026-11-22T22:20:43-03:00",
   "endedAt": "2026-11-22T22:09:32-03:00",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "5c7b9f179afae742dbfeda1e21b4685685bbb513",
@@ -46,8 +46,8 @@
     "customWorkflow": "success; 1/1 TAP, cinco corridas (45092764672)",
     "cardBatchFast": "success (45092764674)",
     "milestone1000": "success; 969/1000 (45092764667)",
-    "engineValidation": "in progress (45092764670)",
-    "extendedSoak": "in progress; 600s job (45092764670)",
+    "engineValidation": "in progress (45092764670; test job at audit:tag-training)",
+    "extendedSoak": "passed; 600s (45092764670)",
     "limitations": "SQLite temporário com processos/conexões independentes; sem banco de produção ou gateway Discord real."
   },
   "catalog": {
@@ -98,8 +98,8 @@
       "headSha": "c9c4eadea9f3a7f311133e6489ad009a20df4a76",
       "state": "open",
       "draft": true,
-      "mergeable": false,
-      "ci": "focused, Card Batch Fast and Milestone 1000 success; Engine Validation/Soak in progress",
+      "mergeable": true,
+      "ci": "focused, Card Batch Fast, Milestone 1000 and 600s Extended Soak success; Engine Validation audit:tag-training still in progress",
       "releasedToAuxiliary": true
     }
   ],
@@ -119,7 +119,7 @@
   "duration": {
     "targetEffectiveMinutes": 60,
     "effectiveWorkMinutes": 9,
-    "elapsedMinutes": 10.4,
+    "elapsedMinutes": 21.6,
     "targetMet": false,
     "ciWaitExcluded": true,
     "measurement": "estimativa conservadora do trabalho ativo desta retomada; tempo ocioso de CI excluído."
