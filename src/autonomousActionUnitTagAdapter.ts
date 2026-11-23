@@ -231,10 +231,10 @@ export function planAutonomousActionUnitActivation(
   state:AutonomousActionUnitState,sourceUid:string,activationId:string,targetUid:string,lookup:Lookup=cardLookup
 ):AutonomousActionUnitActivationPlan{
   assertState(state);
-  const source=sourceContext(state,sourceUid,lookup);
   if(!validActivationId(activationId)||state.autonomousActionUnit?.pending?.[activationId]||
     state.autonomousActionUnit?.resolved?.[activationId])
     throw Error('activationId Autonomous Action Unit inválido ou já utilizado.');
+  const source=sourceContext(state,sourceUid,lookup);
   if(state.core.players[source.controllerTeam].lp<LP_COST)
     throw Error('LP insuficiente para pagar 1500 LP de Autonomous Action Unit.');
   const candidates=getAutonomousActionUnitCandidates(state,source.controllerTeam,lookup);
