@@ -72,18 +72,18 @@ test('Trap setada em turno anterior pode ser ativada na própria prioridade',()=
 });
 test('Trap setada pode responder a corrente no turno adversário',()=>{
   const state=makeState({cursor:0,sourceTeam:1,sourceSeat:3,phase:'response',priority:1,chain:[{id:'chain-1'}],
-    backrow1:[back('m1:target','spell')]});
-  assert.doesNotThrow(()=>planDustTornadoActivation(state,sourceFor(state),'response','m1:target',lookup));
+    backrow0:[back('m0:target','spell')]});
+  assert.doesNotThrow(()=>planDustTornadoActivation(state,sourceFor(state),'response','m0:target',lookup));
 });
 test('Trap não responde sem corrente aberta',()=>{
   const state=makeState({cursor:0,sourceTeam:1,sourceSeat:3,phase:'response',priority:1,chain:[],
-    backrow1:[back('m1:target','spell')]});
-  assert.throws(()=>planDustTornadoActivation(state,sourceFor(state),'no-chain','m1:target',lookup));
+    backrow0:[back('m0:target','spell')]});
+  assert.throws(()=>planDustTornadoActivation(state,sourceFor(state),'no-chain','m0:target',lookup));
 });
 test('Trap não responde se prioridade pertence à outra equipe',()=>{
   const state=makeState({cursor:0,sourceTeam:1,sourceSeat:3,phase:'response',priority:0,chain:[{id:'chain-1'}],
-    backrow1:[back('m1:target','spell')]});
-  assert.throws(()=>planDustTornadoActivation(state,sourceFor(state),'wrong-priority','m1:target',lookup));
+    backrow0:[back('m0:target','spell')]});
+  assert.throws(()=>planDustTornadoActivation(state,sourceFor(state),'wrong-priority','m0:target',lookup));
 });
 test('alvo monstro não é aceito',()=>{
   const state=makeState({backrow1:[back('m1:monster','monster')]});
