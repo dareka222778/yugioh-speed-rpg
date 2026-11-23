@@ -1,0 +1,85 @@
+{
+  "mission": "M551",
+  "runId": "work-20261123T074818-0300-M551",
+  "owner": "Work principal",
+  "card": {
+    "name": "Guardian Sphinx",
+    "passcode": "40659562",
+    "konamiDatabaseId": 5422,
+    "attribute": "EARTH",
+    "level": 5,
+    "atk": 1700,
+    "def": 2400,
+    "race": "Rock",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5422&request_locale=en",
+    "officialText": "Once per turn: You can change this card to face-down Defense Position. If this card is Flip Summoned: Return all monsters your opponent controls to the hand.",
+    "firstTCGPrinting": {
+      "date": "2003-07-18",
+      "set": "PGD-025",
+      "product": "Pharaonic Guardian"
+    }
+  },
+  "design": {
+    "trigger": "Flip Summon only; normal summon and effect-flip do not trigger.",
+    "targeting": "Non-targeting. The plan stores no target list; all monsters on the opposing team's shared Monster Zones are enumerated at resolution.",
+    "sourceRemoval": "The trigger plan resolves even if Guardian Sphinx leaves the field after activation.",
+    "returnDestination": "Each non-token monster goes to the hand of its physical owner, determined by UID prefix; active seat uses core.players[team].hand, inactive partner uses reserves[seat].hand.",
+    "stolenCards": "A monster controlled by the opponent but physically owned by the other team returns to its physical owner's hand.",
+    "faceDown": "Face-down monsters are returned without publishing their identity; the adapter returns internal UIDs only.",
+    "tokens": "Tokens leave the field and cease to exist; they are not added to any hand and are excluded from physical inventory conservation.",
+    "handLimit": "Returned cards may raise a physical hand above 6; no discard occurs in this adapter, leaving the owner's End Phase hand-limit rule to discard to 6.",
+    "selfSet": "Uses M550's shared once-per-turn Main Phase self-set helper, keyed by physical UID + zone epoch and persisted in JSON.",
+    "zones": "No more than 3 Monster Zones per team; Spell/Trap, Field, Deck and Extra Deck zones are not rebuilt."
+  },
+  "tests": [
+    "non-targeting plan contains no target list",
+    "all monsters present at resolution are returned, including monsters added after activation",
+    "face-down monsters are returned",
+    "active owner, inactive reserve owner and stolen cards route to physical owner hands",
+    "team 1 controller returns team 0 field",
+    "zero opponent monsters resolves successfully",
+    "negated effect changes nothing",
+    "source removal after activation does not stop effect",
+    "monster removed before resolution is not returned",
+    "tokens disappear rather than entering a hand",
+    "hand limit above 6 is deferred to End Phase",
+    "Guardian Sphinx reuses M550 self-set marker and JSON persistence",
+    "negated self-set consumes use",
+    "normal summon and effect-flip are rejected",
+    "stale turn and wrong controller are rejected",
+    "face-down source and wrong card ID are rejected",
+    "duplicate source UID and malformed owner are rejected",
+    "invalid target owner fails closed without partial movement",
+    "duplicate target UID fails closed",
+    "more than three Monster Zones rejected",
+    "inventory conserved and input immutable",
+    "Deck, Extra and Spell/Trap zones remain unchanged"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Adapter-only preparation; M61 handoff still blocks central monsterEffects/duelEngineCurrent integration and manifest certification."
+  },
+  "security": {
+    "filesOnly": [
+      "src/guardianSphinxMassReturnTagAdapter.ts",
+      "tests/guardianSphinxMassReturnTagAdapter.test.cjs",
+      "docs/evidence/m551-guardian-sphinx-mass-return-tag-adapter.json",
+      ".github/workflows/m551-guardian-sphinx-mass-return-tag-adapter.yml"
+    ],
+    "noM61FilesChanged": true,
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true,
+    "noLiveDiscordWrite": true
+  },
+  "limitations": [
+    "Guardian Sphinx remains absent from shared playable metadata/certification/manifest; tests inject a narrow lookup.",
+    "The adapter is stacked on M550 and is not connected to the central resolver or Discord commands.",
+    "Offline TagDuel tests do not replace live Discord or full engine integration."
+  ]
+}
