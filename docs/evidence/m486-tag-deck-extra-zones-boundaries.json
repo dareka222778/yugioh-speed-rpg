@@ -1,0 +1,57 @@
+{
+  "mission": "M486",
+  "title": "TagDuel 2v2 Main Deck, Extra Deck and field-zone boundaries",
+  "branch": "feat/work-m486-tag-deck-extra-zones-boundaries-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "e60e2c0006f146244d4560ec2fec091d02af6acf",
+  "testFile": "tests/tagDeckExtraAndZoneBoundaries2v2.test.cjs",
+  "testCount": 2,
+  "scenarios": [
+    "A classic four-seat TagDuel accepts a 20-card Main Deck plus exactly five distinct enabled Fusion cards in each physical Extra Deck. The rule profile defines three Monster Zones, three Spell/Trap Zones and a separate Field Zone; occupied arrays cannot exceed three.",
+    "The same constructor rejects a 19-card Main Deck, a 31-card Main Deck and a sixth distinct enabled Fusion. The 20 Main + 5 Extra case keeps the Main Deck total at 20."
+  ],
+  "invariants": [
+    "Main Deck minimum is 20 and maximum is 30.",
+    "Extra Deck maximum is five.",
+    "Each team has three Monster Zones and three Spell/Trap Zones.",
+    "Field Zone remains separate from the three Spell/Trap slots.",
+    "Current RULES_PROFILE hand limit remains six.",
+    "All four physical participants and card UIDs remain unique.",
+    "The rules profile declares an Extra Deck maximum of five and a three-copy limit."
+  ],
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "limits": [
+    "Tests use real compiled TagDuel, rulesProfile and enabled card registry modules.",
+    "Main/Extra Deck fixtures use existing enabled cards; no collection or inventory mutation occurs.",
+    "No runtime, resolver, catalog manifest, allowlist, persistent database or player data is modified.",
+    "This verifies structural rules, not new card behavior.",
+    "No live Discord API session is performed."
+  ],
+  "command": "npm run check && npm run build && node --test tests/tagDeckExtraAndZoneBoundaries2v2.test.cjs",
+  "ciStatus": "pending",
+  "limitations": [
+    "Tests use real compiled TagDuel, rulesProfile and enabled card registry modules.",
+    "Main Deck fixtures use existing enabled cards; no collection or inventory mutation occurs.",
+    "No runtime, resolver, catalog manifest, allowlist, persistent database or player data is modified.",
+    "No live Discord API session is performed."
+  ],
+  "extraDeckCoverage": {
+    "profileMaximum": 5,
+    "copyLimit": 3,
+    "enabledFusionIdentities": 6,
+    "exactFivePositiveCase": "tested-with-five-distinct-enabled-fusions",
+    "sixthDistinctFusionNegativeGuard": "tested"
+  }
+}
