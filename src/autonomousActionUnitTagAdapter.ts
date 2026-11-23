@@ -407,6 +407,7 @@ function detachAndDestroy(
     }
   }else{
     const zone=destination==='grave'?next.core.players[equipOwnerTeam].grave:next.core.players[equipOwnerTeam].banished;
+    if(!zone)throw Error('Zona de destino do Equip Spell ausente.');
     zone.push(equip);
   }
   let monsterDestroyed=false;
