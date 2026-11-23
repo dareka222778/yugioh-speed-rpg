@@ -1,0 +1,73 @@
+{
+  "mission": "M541",
+  "runId": "work-20261122T223500-0300-M541",
+  "owner": "Work principal",
+  "title": "Cross-mode exclusion during pending invitation and lobby expiry rollback",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "branch": "feat/work-m541-pending-expiry-cross-mode-rollback-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "priority": "P1 — provar que rollback de expiração de convite 1v1 (120 s) e lobby TagDuel (5 min) preserva o lock do dono e bloqueia o modo oposto até o retry terminal.",
+  "scenarios": [
+    {
+      "mode": "pending 1v1 → TagDuel",
+      "deadlineMs": 120000,
+      "failure": "BEFORE DELETE ON duel_members",
+      "expected": [
+        "one millisecond before deadline invitation remains pending",
+        "failed expiry rolls back status/revision and creator lock",
+        "TagDuel creation remains blocked",
+        "retry expires invitation and removes only creator lock",
+        "TagDuel lobby creation then succeeds"
+      ]
+    },
+    {
+      "mode": "TagDuel lobby → 1v1",
+      "deadlineMs": 300000,
+      "failure": "BEFORE DELETE ON tag_members",
+      "expected": [
+        "one millisecond before deadline lobby remains active",
+        "failed expiry rolls back status/revision and host lock",
+        "1v1 challenge remains blocked",
+        "retry expires lobby and removes host lock",
+        "1v1 challenge then succeeds"
+      ]
+    }
+  ],
+  "invariants": {
+    "physicalOwnerLock": "only the 1v1 invitation creator and TagDuel lobby host hold locks before acceptance",
+    "playerAssets": "players, player_cards, starter_grants, decks and deck_cards snapshots remain identical",
+    "deck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5,
+    "inventoryGranted": 0
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "persistentDatabaseUsed": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "SQLite temporário e stores compilados reais; sem banco persistente.",
+    "Deadlines controlados por parâmetro now; sem espera real de 120s/5min.",
+    "Verifica exclusão entre stores; não testa gateway Discord real.",
+    "Não implementa nem certifica cartas."
+  ]
+}\n
