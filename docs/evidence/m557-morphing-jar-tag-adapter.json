@@ -71,5 +71,5 @@
     "TagDuel fixtures run offline; no Discord gateway/guild session.",
     "Deck-out handling is tested in a deterministic adapter fixture; full engine chain ordering awaits M61 integration."
   ],
-  "testCount": 30
+  "testCount": 33
 }
