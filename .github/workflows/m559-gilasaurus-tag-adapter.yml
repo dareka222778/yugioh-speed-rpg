@@ -1,0 +1,38 @@
+name: M559 Gilasaurus TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m559-gilasaurus-tag-adapter-20261123
+    paths:
+      - 'src/gilasaurusTagAdapter.ts'
+      - 'tests/gilasaurusTagAdapter.test.cjs'
+      - 'docs/evidence/m559-gilasaurus-tag-adapter.json'
+      - '.github/workflows/m559-gilasaurus-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/gilasaurusTagAdapter.ts'
+      - 'tests/gilasaurusTagAdapter.test.cjs'
+      - 'docs/evidence/m559-gilasaurus-tag-adapter.json'
+      - '.github/workflows/m559-gilasaurus-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gilasaurus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m559-gilasaurus-tag-adapter.json', 'utf8'))"
+      - name: Run M559 behavior regressions
+        run: node --test tests/gilasaurusTagAdapter.test.cjs
