@@ -1,0 +1,81 @@
+{
+  "mission": "M545",
+  "runId": "work-20261123T025200-0300-M545",
+  "owner": "Work principal",
+  "card": {
+    "name": "Arsenal Bug",
+    "passcode": "42364374",
+    "konamiDatabaseId": 5033,
+    "type": "Effect Monster",
+    "attribute": "EARTH",
+    "race": "Insect",
+    "level": 3,
+    "atk": 2000,
+    "def": 2000,
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5033&ope=2&request_locale=en",
+    "officialEffect": "If you control no other Insect-Type monsters, this card's ATK and DEF become 1000."
+  },
+  "rulings": {
+    "source": "https://www.edisonformat.com/rulings/individual-rulings-a-c",
+    "status": "historical UDE/Edison ruling reference, not presented as a current Konami ruling",
+    "verifiedBehavior": [
+      "the continuous effect applies while Arsenal Bug is face-up",
+      "a face-down Insect does not count as another Insect",
+      "two face-up Arsenal Bugs count each other and each remains at 2000 ATK"
+    ]
+  },
+  "design": {
+    "output": "stat delta, not absolute replacement: -1000 ATK and -1000 DEF when the condition is true, so other Equip/Field modifiers can compose afterward",
+    "teamScope": "TagDuel's shared team Monster Zones; a partner's face-up Insect counts",
+    "exclusions": "the source itself, face-down monsters, opponent monsters, cards in hand/backrow/GY, and face-up non-Insects do not count",
+    "dynamic": "recomputed from the current field every call; no persisted/cached modifier",
+    "typeChanges": "caller may inject an effective race lookup so type-changing effects can be reflected; default lookup uses printed card metadata",
+    "negation": "no modifier while Arsenal Bug's effect is negated",
+    "ownership": "source UID physical seat must belong to the team whose shared Monster Zone contains it"
+  },
+  "tests": [
+    "lone Arsenal Bug falls from 2000/2000 to 1000/1000",
+    "partner face-up Insect keeps it at 2000/2000",
+    "face-down Insect does not count",
+    "opponent Insect does not count",
+    "two Arsenal Bugs count each other",
+    "face-up non-Insect does not count",
+    "source face-down disables the continuous effect",
+    "effect negation disables the modifier",
+    "dynamic recalculation on Flip/field exit",
+    "effective Type lookup for type-changing effects",
+    "multiple other face-up Insects counted",
+    "hand/backrow cards do not count",
+    "physical-seat/team ownership validation",
+    "duplicate source UID rejection",
+    "invalid/missing source rejection",
+    "no cached modifier or adapter mutation"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Adapter is not registered in the shared resolver or manifest; M61 handoff remains pending."
+  },
+  "security": {
+    "filesOnly": [
+      "src/arsenalBugTagAdapter.ts",
+      "tests/arsenalBugTagAdapter.test.cjs",
+      "docs/evidence/m545-arsenal-bug-tag-adapter.json",
+      ".github/workflows/m545-arsenal-bug-tag-adapter.yml"
+    ],
+    "noContinuousEffectsChange": true,
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "Structural TagDuel fixtures are used because Arsenal Bug is not yet registered in the shared playable-card catalog.",
+    "The helper is not wired into the continuous stat resolver; no certification is claimed.",
+    "A full integrated duel must confirm the team-wide interpretation against the project's final TagDuel rules and current race-changing effects.",
+    "Offline adapter tests do not replace live Discord validation."
+  ]
+}
