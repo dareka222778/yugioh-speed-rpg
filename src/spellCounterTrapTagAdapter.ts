@@ -34,6 +34,7 @@ export type SpellCounterTrapResolution={
  sourceActivationNegated:boolean;
  effectApplied:boolean;
  targetActivationNegated:boolean;
+ targetDestroyed:boolean;
  opponentPaidToNegate:boolean;
  targetUid:string;
  costUid?:string;
@@ -157,16 +158,15 @@ function targetIsCurrent(core:DuelState,r:ResponseRef):boolean{
  const target=findLink(core,r);
  return !!target&&core.chain.at(-1)===target&&!target.negated;
 }
-function negateTargetActivation(core:DuelState,r:ResponseRef):boolean{
- if(!targetIsCurrent(core,r))return false;
+function negateTargetActivation(core:DuelState,r:ResponseRef):{negated:boolean;destroyed:boolean}|undefined{
+ if(!targetIsCurrent(core,r))return;
  if(r.kind==='pending')core.pendingNegated=true;
  else{
   const target=findLink(core,r);
-  if(!target)return false;
+  if(!target)return;
   target.negated=true;
  }
- moveToOwnerGrave(core,r.actor,r.card);
- return true;
+ return {negated:true,destroyed:moveToOwnerGrave(core,r.actor,r.card)};
 }
 
 export function createSpellCounterTrapSession(duel:TagDuel):SpellCounterTrapSession{
@@ -249,7 +249,7 @@ export function resolveSpellCounterTrap(
  const own=core.chain.findIndex(l=>l.actor===a.controllerTeam&&l.card===a.sourceUid&&l.id===a.sourceId);
  if(own!==core.chain.length-1)throw new Error('A Armadilha só pode resolver no topo da corrente.');
  core.chain.pop();
- let effectApplied=false,targetActivationNegated=false,opponentPaidToNegate=false,lockedSpellName:string|undefined;
+ let effectApplied=false,targetActivationNegated=false,targetDestroyed=false,opponentPaidToNegate=false,lockedSpellName:string|undefined;
  const removedHands:string[]=[];
  if(!options.sourceActivationNegated&&targetIsCurrent(core,a.response)){
   if(a.sourceId===MAGIC_DRAIN_ID){
@@ -264,13 +264,17 @@ export function resolveSpellCounterTrap(
     removedHands.push(options.opponentDiscardUid);
     opponentPaidToNegate=true;
    }else{
-    targetActivationNegated=negateTargetActivation(core,a.response);
+    const negation=negateTargetActivation(core,a.response);
+    targetActivationNegated=!!negation?.negated;
+    targetDestroyed=!!negation?.destroyed;
     effectApplied=targetActivationNegated;
    }
   }else if(a.sourceId===CURSED_SEAL_OF_THE_FORBIDDEN_SPELL_ID){
-   targetActivationNegated=negateTargetActivation(core,a.response);
+   const negation=negateTargetActivation(core,a.response);
+   targetActivationNegated=!!negation?.negated;
+   targetDestroyed=!!negation?.destroyed;
    effectApplied=targetActivationNegated;
-   if(targetActivationNegated){
+   if(targetActivationNegated&&targetDestroyed){
     const team=a.response.actor,name=cardName(a.response.id,lookup);
     if(!next.lockedSpellNames.some(x=>x.team===team&&x.name===name))next.lockedSpellNames.push({team,name});
     lockedSpellName=name;
@@ -285,7 +289,7 @@ export function resolveSpellCounterTrap(
  assertHandsAfter(hands,next.duel,removedHands);
  return {session:next,result:{
   activationId,cardId:a.sourceId,sourceActivationNegated:!!options.sourceActivationNegated,
-  effectApplied,targetActivationNegated,opponentPaidToNegate,targetUid:a.response.card,
+  effectApplied,targetActivationNegated,targetDestroyed,opponentPaidToNegate,targetUid:a.response.card,
   ...(a.costUid?{costUid:a.costUid}:{}),...(lockedSpellName?{lockedSpellName}:{}),sourceSentToGrave
  }};
 }
