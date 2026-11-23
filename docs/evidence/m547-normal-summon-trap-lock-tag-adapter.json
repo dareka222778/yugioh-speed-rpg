@@ -60,7 +60,7 @@
   ],
   "tests": {
     "file": "tests/normalSummonTrapLockTagAdapter.test.cjs",
-    "expected": 18,
+    "expected": 19,
     "coverage": [
       "all four identities map to one ContinuousRule accepted by continuousRuleIssues",
       "both teams are blocked after the exact Normal Summon",
