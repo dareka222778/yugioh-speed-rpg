@@ -65,7 +65,7 @@ function epochFor(state:FlipCycleState,uid:string):number{
   if(lifetime&&lifetime.zone!=='monsters')throw Error('A instância FLIP não está na Monster Zone.');
   return lifetime?.epoch??0;
 }
-function sourceContext(state:FlipCycleState,uid:string,lookup:FlipCycleCardLookup):SourceContext{
+function sourceContext(state:FlipCycleState,uid:string,lookup:FlipCycleCardLookup,requireFaceUp=true):SourceContext{
   assertState(state);
   if(typeof uid!=='string'||!uid)throw Error('UID da fonte FLIP ausente.');
   const ownerSeat=physicalSeat(uid);
@@ -76,7 +76,7 @@ function sourceContext(state:FlipCycleState,uid:string,lookup:FlipCycleCardLooku
   if(!cardIds.has(monster.id))throw Error('A carta não pertence à família flip-cycle M60.');
   const metadata=lookup(monster.id);
   if(!metadata||metadata.kind!=='monster'||metadata.monsterType!=='effect')throw Error('Definição de monstro de efeito não admitida.');
-  if(!monster.faceUp)throw Error('A fonte FLIP precisa estar com a face para cima.');
+  if(requireFaceUp&&!monster.faceUp)throw Error('A fonte FLIP precisa estar com a face para cima.');
   const epoch=epochFor(state,uid);
   return {monster,ownerSeat,controllerTeam:team,activeSeat:state.active[team],instanceKey:uid+'@'+epoch};
 }
@@ -171,12 +171,13 @@ export function planSelfSet(
   sourceUid:string,
   lookup:FlipCycleCardLookup=cardLookup
 ):SelfSetPlan{
-  const source=sourceContext(state,sourceUid,lookup);
+  const source=sourceContext(state,sourceUid,lookup,false);
   if(state.core.phase!=='main'||state.core.current!==source.controllerTeam||state.core.pending.kind!=='none'||
     state.core.chain.length>0||state.core.choice)
     throw Error('O auto-set FLIP só pode ser ativado na Fase Principal sem cadeia pendente.');
   const used=state.flipCycleUses?.selfSetUsedTurnByInstance?.[source.instanceKey];
   if(used===state.core.turn)throw Error('Esta cópia já usou o auto-set neste turno.');
+  if(!source.monster.faceUp)throw Error('A fonte FLIP precisa estar com a face para cima.');
   return {kind:'self-set',sourceUid,cardId:source.monster.id as SelfSetPlan['cardId'],controllerTeam:source.controllerTeam,activeSeat:source.activeSeat,turn:state.core.turn,instanceKey:source.instanceKey};
 }
 
