@@ -1,0 +1,36 @@
+name: M488 Deck editor cross-connection integrity
+on:
+  push:
+    branches:
+      - feat/work-m488-deck-editor-cross-connection-stale-revision-20261121
+    paths:
+      - 'tests/deckEditorCrossConnectionIntegrity.test.cjs'
+      - 'docs/evidence/m488-deck-editor-cross-connection-integrity.json'
+      - '.github/workflows/m488-deck-editor-cross-connection-integrity.yml'
+  pull_request:
+    paths:
+      - 'tests/deckEditorCrossConnectionIntegrity.test.cjs'
+      - 'docs/evidence/m488-deck-editor-cross-connection-integrity.json'
+      - '.github/workflows/m488-deck-editor-cross-connection-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deck-editor-cross-connection-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m488-deck-editor-cross-connection-integrity.json', 'utf8'))"
+      - name: Run cross-connection Deck editor tests
+        run: node --test tests/deckEditorCrossConnectionIntegrity.test.cjs

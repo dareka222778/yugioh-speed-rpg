@@ -1,0 +1,58 @@
+{
+  "mission": "M488",
+  "runId": "work-20261121T213848-0300-M488",
+  "priority": "P1 — validar a integridade do editor de Deck entre conexões SQLite independentes: ações Discord com revisão obsoleta devem falhar sem mutação, e a ativação de slots concorrentes deve manter exatamente um Deck ativo.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "aaee5e912d2bf33acbe9927dd02c0bbbd206bbb7"
+  },
+  "branch": "feat/work-m488-deck-editor-cross-connection-stale-revision-20261121",
+  "files": [
+    "tests/deckEditorCrossConnectionIntegrity.test.cjs",
+    "docs/evidence/m488-deck-editor-cross-connection-integrity.json",
+    ".github/workflows/m488-deck-editor-cross-connection-integrity.yml"
+  ],
+  "testCount": 2,
+  "scenarios": [
+    "Uma conexão abre o painel e guarda a revisão; outra conexão altera o Deck. A conexão antiga tenta changeDeck, renameDeck e activateDeck; as três ações devem rejeitar a revisão obsoleta e preservar snapshots completos de players, coleção, grants, Decks e deck_cards.",
+    "Duas conexões independentes preenchem slots distintos com a mesma coleção não consumível. Ativar slot 1 e depois slot 2 deve deixar apenas slot 2 ativo, respeitando o índice único parcial."
+  ],
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5,
+    "copiesPerCard": 3,
+    "deckSlots": 3
+  },
+  "isolation": {
+    "temporarySQLite": true,
+    "independentConnections": 2,
+    "discordCredentialsRemoved": true,
+    "starterGrants": 0,
+    "collectionMutation": 0,
+    "productionDatabaseTouched": false,
+    "realPlayerDataTouched": false
+  },
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCards": 0,
+    "automatic": 0
+  },
+  "limitations": [
+    "Duas conexões better-sqlite3 independentes no mesmo processo simulam workers lendo painéis Discord com revisões diferentes; não é um teste de processos distribuídos ou de latência real.",
+    "Builders e API Discord ao vivo não são chamados neste bloco; o foco é persistência e revisão do editor.",
+    "Nenhum runtime, catálogo, allowlist, inventário persistente ou dado real é alterado."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}
