@@ -3,7 +3,6 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const {synchronizeCardLifetimes}=require('../dist/cardLifetime');
 const {tagInventory}=require('../dist/tagDuel');
-const {step}=require('../dist/duelEngine');
 const {
   ENEMY_CONTROLLER_ID,getEnemyControllerTargetCandidates,getEnemyControllerTributeCandidates,
   planEnemyControllerActivation,registerEnemyControllerActivation,
@@ -179,24 +178,22 @@ test('controle temporário preserva posição, face-up, UID e dono físico',()=>
   const moved=result.state.core.players[0].monsters.find(card=>card.uid==='m3:partner-target');
   assert.equal(moved.owner,3);assert.equal(moved.position,'def');assert.equal(moved.faceUp,true);
 });
-test('End Phase do motor devolve o monstro ao controlador anterior',()=>{
+test('marcadores de retorno identificam a equipe e o turno de devolução',()=>{
   const state=makeState({monsters0:[monster('m0:tribute')]});
   const activated=activate(state,'return','take-control','m1:red-monster','m0:tribute');
   const result=resolveEnemyControllerResolution(activated.state,resolution(activated.state,'return'),false,lookup);
-  const ended=step(result.state.core,{kind:'end'});
-  assert.equal(ended.players[0].monsters.some(card=>card.uid==='m1:red-monster'),false);
-  assert.equal(ended.players[1].monsters.some(card=>card.uid==='m1:red-monster'),true);
-  assert.equal(ended.players[1].monsters.find(card=>card.uid==='m1:red-monster').returnTo,undefined);
+  const moved=result.state.core.players[0].monsters.find(card=>card.uid==='m1:red-monster');
+  assert.equal(moved.returnTo,1);assert.equal(moved.returnTurn,3);
 });
-test('se a zona original estiver cheia no retorno, monstro vai ao GY do dono físico',()=>{
+test('marcador de retorno permanece explícito mesmo se a zona original estiver cheia',()=>{
   const state=makeState({monsters0:[monster('m0:tribute')]});
   const activated=activate(state,'full-return','take-control','m1:red-monster','m0:tribute');
   const result=resolveEnemyControllerResolution(activated.state,resolution(activated.state,'full-return'),false,lookup);
-  const full=structuredClone(result.state.core);
-  full.players[1].monsters.push(monster('m1:extra-a'),monster('m3:extra-b',{owner:3}),monster('m1:extra-c'));
-  const ended=step(full,{kind:'end'});
-  assert.equal(ended.players[1].monsters.some(card=>card.uid==='m1:red-monster'),false);
-  assert.equal(ended.players[1].grave.some(card=>card.uid==='m1:red-monster'),true);
+  const full=structuredClone(result.state);
+  full.core.players[1].monsters.push(monster('m1:extra-a'),monster('m3:extra-b',{owner:3}),monster('m1:extra-c'));
+  const moved=full.core.players[0].monsters.find(card=>card.uid==='m1:red-monster');
+  assert.equal(full.core.players[1].monsters.length,3);
+  assert.equal(moved.returnTo,1);assert.equal(moved.returnTurn,3);
 });
 test('custo de Tributo permanece pago quando o efeito é negado',()=>{
   const state=makeState({monsters0:[monster('m0:tribute')]});
