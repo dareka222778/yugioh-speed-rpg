@@ -1,0 +1,38 @@
+name: M558 Cyber Jar TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m558-cyber-jar-tag-adapter-20261123
+    paths:
+      - 'src/cyberJarTagAdapter.ts'
+      - 'tests/cyberJarTagAdapter.test.cjs'
+      - 'docs/evidence/m558-cyber-jar-tag-adapter.json'
+      - '.github/workflows/m558-cyber-jar-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/cyberJarTagAdapter.ts'
+      - 'tests/cyberJarTagAdapter.test.cjs'
+      - 'docs/evidence/m558-cyber-jar-tag-adapter.json'
+      - '.github/workflows/m558-cyber-jar-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cyber-jar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m558-cyber-jar-tag-adapter.json', 'utf8'))"
+      - name: Run M558 behavior regressions
+        run: node --test tests/cyberJarTagAdapter.test.cjs
