@@ -153,8 +153,8 @@ function pendingActivation(state:SpearCretinState,activationId:string):PendingAc
   if(!validActivationId(activationId))throw Error('activationId Spear Cretin inválido.');
   const pending=state.spearCretin?.pending?.[activationId];
   if(!pending)throw Error('Ativação Spear Cretin ausente, já resolvida ou obsoleta.');
-  if(state.core.turn!==pending.turn)
-    throw Error('Turno da ativação Spear Cretin mudou antes da resolução.');
+  if(state.core.turn!==pending.turn||pending.sourceTeam!==pending.sourceOwnerSeat%2)
+    throw Error('Turno ou proprietário físico da ativação Spear Cretin mudou antes da resolução.');
   return pending;
 }
 
@@ -202,7 +202,8 @@ export function planSpearCretinTrigger(
 /** Registers the trigger after the source reaches its owner's GY; no Graveyard choice is made here. */
 export function registerSpearCretinTrigger(
   input:SpearCretinState,
-  plan:SpearCretinTriggerPlan
+  plan:SpearCretinTriggerPlan,
+  lookup:Lookup=cardLookup
 ):SpearCretinState{
   assertState(input);
   if(!plan||plan.kind!=='spear-cretin-trigger'||!validActivationId(plan.activationId)||
@@ -210,7 +211,7 @@ export function registerSpearCretinTrigger(
     plan.sourceTeam!==plan.sourceOwnerSeat%2||
     input.spearCretin?.pending?.[plan.activationId]||input.spearCretin?.resolved?.[plan.activationId])
     throw Error('Plano de trigger Spear Cretin obsoleto ou inválido.');
-  const source=sourceContext(input,plan.sourceUid,cardLookup);
+  const source=sourceContext(input,plan.sourceUid,lookup);
   if(source.sourceOwnerSeat!==plan.sourceOwnerSeat||source.sourceTeam!==plan.sourceTeam)
     throw Error('Proprietário físico do trigger Spear Cretin mudou.');
   const before=inventorySnapshot(input);
