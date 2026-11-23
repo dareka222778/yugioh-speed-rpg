@@ -1,0 +1,36 @@
+name: M464 TagDuel lobby acceptance Discord contract
+on:
+  push:
+    branches:
+      - feat/work-m464-tag-lobby-accept-discord-no-inventory-20261121
+    paths:
+      - 'tests/tagLobbyAcceptDiscord2v2.test.cjs'
+      - 'docs/evidence/m464-tag-lobby-accept-discord.json'
+      - '.github/workflows/m464-tag-lobby-accept-discord.yml'
+  pull_request:
+    paths:
+      - 'tests/tagLobbyAcceptDiscord2v2.test.cjs'
+      - 'docs/evidence/m464-tag-lobby-accept-discord.json'
+      - '.github/workflows/m464-tag-lobby-accept-discord.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tagduel-lobby-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m464-tag-lobby-accept-discord.json', 'utf8'))"
+      - name: Run lobby acceptance and inventory isolation
+        run: node --test tests/tagLobbyAcceptDiscord2v2.test.cjs
