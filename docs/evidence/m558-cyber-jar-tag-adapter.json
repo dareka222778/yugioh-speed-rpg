@@ -1,0 +1,81 @@
+{
+  "mission": "M558",
+  "runId": "work-20261123T084320-0300-M558",
+  "owner": "Work principal",
+  "card": {
+    "name": "Cyber Jar",
+    "passcode": "34124316",
+    "konamiDatabaseId": 4913,
+    "attribute": "DARK",
+    "level": 3,
+    "race": "Rock",
+    "atk": 900,
+    "def": 900,
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4913&ope=2&request_locale=en",
+    "officialText": "FLIP: Destroy all monsters on the field, then both players reveal the top 5 cards from their Decks, then Special Summon all revealed Level 4 or lower monsters in face-up Attack Position or face-down Defense Position, also add any remaining cards to their hand. (If either player has less than 5 cards in their Deck, reveal as many as possible.)",
+    "firstTCGPrinting": {
+      "date": "2002-09-16",
+      "set": "MRL-077",
+      "product": "Spell Ruler"
+    }
+  },
+  "design": {
+    "trigger": "A real Flip Summon only; Normal Summon and effect-flip rejected.",
+    "destroy": "Both shared Monster Zones are cleared. Physical monsters move to team GY with UID preserved; tokens disappear and are excluded from physical conservation.",
+    "reveal": "Each active team reveals up to five from the current physical representative Deck. A shorter Deck reveals as many as possible; this is not deck-out.",
+    "summon": "Level 4 or lower Normal/Effect monsters are summoned up to three zones; face-up Attack or face-down Defense is an explicit choice. Fusion, Ritual, higher-Level and excess cards go to hand.",
+    "ownership": "Inactive partner reserves untouched; stolen Cyber Jar resolves for controller; UIDs remain bound to physical owners.",
+    "replay": "activationId persisted in JSON and consumed even when negated.",
+    "ownerRules": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "testCases": [
+    "real Flip Summon only",
+    "destroy face-up/down monsters on both teams",
+    "source destroyed but trigger resolves",
+    "tokens vanish without GY/inventory",
+    "reveal up to five with short Decks",
+    "eligible Level 4 or lower monsters",
+    "exclude Level 5+, Fusion and Ritual",
+    "position choice Attack/face-up or Defense/face-down",
+    "three Monster Zone cap and excess to hand",
+    "remaining cards to hand",
+    "inactive partner reserves untouched",
+    "stolen source controller context",
+    "negation and replay after JSON restoration",
+    "physical owner UID conservation",
+    "3+3 zones, separate Field Zone, Extra Deck 5",
+    "hand overflow deferred to End Phase",
+    "input immutability and no inventory grant"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Isolated adapter only; no central resolver, cardMetadata, cardCertifications, manifest or allowlist changes. M61 handoff pending."
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentDatabaseTouched": false,
+    "playerDataTouched": false,
+    "productionDatabaseTouched": false,
+    "discordTokenUsed": false,
+    "liveDiscordUsed": false,
+    "centralResolverChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false
+  },
+  "limitations": [
+    "No engine chain/trigger integration; destruction-triggered effects of other monsters are not dispatched by this isolated adapter.",
+    "Position choice is passed as a deterministic map; Discord UI integration awaits M61/command handoff.",
+    "Offline TagDuel fixtures only; no live Discord gateway."
+  ],
+  "testCount": 28
+}
