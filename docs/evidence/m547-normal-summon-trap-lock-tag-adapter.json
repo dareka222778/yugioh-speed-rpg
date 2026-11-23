@@ -1,0 +1,104 @@
+{
+  "mission": "M547",
+  "runId": "work-20261123T031200-0300-M547",
+  "owner": "Work principal",
+  "family": {
+    "effectText": "When this card is Normal Summoned successfully, no Trap Cards can be activated.",
+    "rule": {
+      "kind": "preventActivation",
+      "cardKind": "trap",
+      "controller": "both",
+      "window": "ownNormalSummon"
+    },
+    "scope": "Both teams, only during the response window for this exact successful Normal Summon."
+  },
+  "cards": [
+    {
+      "name": "Eagle Eye",
+      "passcode": "53693416",
+      "konamiDatabaseId": 6191,
+      "attribute": "WIND",
+      "race": "Winged Beast",
+      "level": 3,
+      "atk": 1300,
+      "def": 1200,
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6191&ope=2&request_locale=en"
+    },
+    {
+      "name": "Creeping Doom Manta",
+      "passcode": "52571838",
+      "konamiDatabaseId": 6194,
+      "attribute": "WATER",
+      "race": "Fish",
+      "level": 3,
+      "atk": 1300,
+      "def": 1200,
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6194&ope=2&request_locale=en"
+    },
+    {
+      "name": "Invasion of Flames",
+      "passcode": "26082229",
+      "konamiDatabaseId": 6193,
+      "attribute": "FIRE",
+      "race": "Pyro",
+      "level": 3,
+      "atk": 1300,
+      "def": 1200,
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6193&ope=2&request_locale=en"
+    },
+    {
+      "name": "Tactical Espionage Expert",
+      "passcode": "89698120",
+      "konamiDatabaseId": 6192,
+      "attribute": "EARTH",
+      "race": "Warrior",
+      "level": 3,
+      "atk": 1300,
+      "def": 1200,
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6192&ope=2&request_locale=en"
+    }
+  ],
+  "tests": {
+    "file": "tests/normalSummonTrapLockTagAdapter.test.cjs",
+    "expected": 17,
+    "coverage": [
+      "all four identities map to one ContinuousRule accepted by continuousRuleIssues",
+      "both teams are blocked after the exact Normal Summon",
+      "Trap-only restriction",
+      "Special Summon and Flip Summon exclusions",
+      "response-window-only boundary",
+      "negated summon, face-down source, missing source and negated effect",
+      "pending card/source identity binding",
+      "current controller team versus physical UID owner",
+      "all four physical seats across active-seat rotations",
+      "malformed UID and unknown identity",
+      "input immutability"
+    ]
+  },
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "The adapter is not registered in the shared effect resolver, card metadata, manifest or allowlist. No certification is claimed."
+  },
+  "security": {
+    "filesOnly": [
+      "src/normalSummonTrapLockTagAdapter.ts",
+      "tests/normalSummonTrapLockTagAdapter.test.cjs",
+      "docs/evidence/m547-normal-summon-trap-lock-tag-adapter.json",
+      ".github/workflows/m547-normal-summon-trap-lock-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "Tests use structural TagDuel fixtures and an injected effect-negation resolver; they do not execute a fully registered duel.",
+    "The adapter is not wired into continuousEffects.cardActivationAllowed or the card registry.",
+    "No live Discord bot session was available for end-to-end validation.",
+    "The current M61 handoff still blocks central resolver/manifest integration."
+  ]
+}
