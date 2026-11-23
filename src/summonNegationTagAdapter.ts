@@ -169,13 +169,13 @@ function targetIsCurrent(core:DuelState,r:ResponseRef):boolean{
   const p=core.pending;
   const m=monsterOnField(core,r.actor,r.card);
   return core.chain.length===0&&p.kind===r.pendingKind&&p.actor===r.actor&&p.card===r.card&&
-   !core.pendingNegated&&!!m&&m.id===r.id;
+   !core.pendingNegated&&(!p.id||p.id===r.id)&&!!m&&m.id===r.id;
  }
  if(r.kind==='pending-activation'){
   const p=core.pending;
   const card=cardOnField(core,r.actor,r.card);
   return core.chain.length===0&&p.kind===r.pendingKind&&p.actor===r.actor&&p.card===r.card&&
-   !core.pendingNegated&&!!card&&card.id===r.id;
+   !core.pendingNegated&&(!p.id||p.id===r.id)&&!!card&&card.id===r.id;
  }
  const target=findLink(core,r);
  const card=cardOnField(core,r.actor,r.card);
