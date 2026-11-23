@@ -28,7 +28,10 @@ function createDuelist(id){
   assert.equal(database.chooseStarterDeck(id,'warrior'),true);
   decks.openDeck(id);
   decks.activateDeck(id,1);
-  assert.equal(decks.getActiveDeck(id).errors.length,0);
+  const active=decks.activateDeck(id,1);
+  assert.equal(active.total,20);
+  assert.ok(active.extraTotal<=5);
+  assert.equal(active.errors.length,0);
 }
 function assetSnapshot(connection){
   const tables=['players','player_cards','starter_grants','decks','deck_cards'];
