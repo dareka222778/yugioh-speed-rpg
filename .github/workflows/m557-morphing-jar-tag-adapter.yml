@@ -1,0 +1,38 @@
+name: M557 Morphing Jar TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m557-morphing-jar-tag-adapter-20261123
+    paths:
+      - 'src/morphingJarTagAdapter.ts'
+      - 'tests/morphingJarTagAdapter.test.cjs'
+      - 'docs/evidence/m557-morphing-jar-tag-adapter.json'
+      - '.github/workflows/m557-morphing-jar-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/morphingJarTagAdapter.ts'
+      - 'tests/morphingJarTagAdapter.test.cjs'
+      - 'docs/evidence/m557-morphing-jar-tag-adapter.json'
+      - '.github/workflows/m557-morphing-jar-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  morphing-jar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m557-morphing-jar-tag-adapter.json', 'utf8'))"
+      - name: Run M557 behavior regressions
+        run: node --test tests/morphingJarTagAdapter.test.cjs
