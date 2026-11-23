@@ -317,7 +317,7 @@ test('Solemn Judgment is unavailable when the team cannot pay half its LP',()=>{
   f.state.core.players[1].lp=1;
   assert.deepEqual(summonNegationActions(f.state,lookup),[]);
   const session=createSummonNegationSession(f.state);
-  assert.throws(()=>activateSummonNegation(session,f.sourceUid,'sj-low-lp',lookup),/PV insuficientes/);
+  assert.throws(()=>activateSummonNegation(session,f.sourceUid,'sj-low-lp',lookup),/não está legal/);
 });
 
 test('activation costs are not refunded when Solemn Judgment or Horn of Heaven is itself negated',()=>{
