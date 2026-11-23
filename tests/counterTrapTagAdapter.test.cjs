@@ -47,7 +47,7 @@ function jammerFixture(){
 }
 test('M571 cards remain unadmitted: adapter neither certifies nor distributes them',()=>{
  assert.equal(getPlayableCard(GRYPHON_WING_ID),undefined);assert.equal(getPlayableCard(TRAP_JAMMER_ID),undefined);
- for(const id of [HFD,MIRROR,TORRENTIAL,SOGEN,MOUNTAIN])assert.ok(getPlayableCard(id));
+ for(const id of [HFD,MIRROR,TORRENTIAL,MAGIC_JAMMER,SOGEN,MOUNTAIN])assert.ok(getPlayableCard(id));
 });
 test('Gryphon Wing opens only against opponent HFD and does not target',()=>{
  const f=hfdFixture(),actions=counterTrapActions(f.state,lookup);assert.deepEqual(actions,[{kind:'trap',card:f.gryphon.uid,target:''}]);
