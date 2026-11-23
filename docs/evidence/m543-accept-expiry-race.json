@@ -66,12 +66,25 @@
     "Não integra nem certifica cartas; não altera comandos ou runtime."
   ],
   "testExecution": {
-    "focused": "pending",
-    "check": "pending",
-    "build": "pending",
-    "customWorkflow": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending; baseline 969/1000",
-    "engineValidation": "pending"
+    "focused": "success — M543 workflow run 45119447309",
+    "cardBatchFast": "success — Card Batch Fast run 45119447331",
+    "milestone1000": "success — Milestone 1000 run 45119447323; 969/1000, 31 remaining",
+    "engineValidation": "success — Engine Validation run 45119447268",
+    "extendedSoak": "not configured as a separate M543 workflow"
+  },
+  "review": {
+    "pr": 488,
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "headSha": "15a75b67df9d2653323939ee81d9cfaf2a59d158",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "ee657eff706a41a08781162f3117411ca8324e4c",
+    "comparison": {
+      "aheadBy": 3,
+      "behindBy": 5
+    },
+    "handoffComment": 7093478545,
+    "handoffStatus": "requested; awaiting auxiliary acknowledgement"
   }
 }
