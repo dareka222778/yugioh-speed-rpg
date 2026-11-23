@@ -1,0 +1,98 @@
+{
+  "format": 1,
+  "mission": "M566",
+  "card": {
+    "name": "Autonomous Action Unit",
+    "portugueseName": "Unidade de Ação Autônoma",
+    "passcode": "71453557",
+    "konamiDatabaseId": 5606,
+    "type": "Equip Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5606&ope=2&request_locale=en",
+    "officialText": "Pay 1500 LP, then target 1 monster in your opponent's GY; Special Summon it to your field in Attack Position, and equip it with this card. When this card leaves the field, destroy the equipped monster.",
+    "firstTcgPrinting": {
+      "date": "2003-10-10",
+      "set": "MFC-032",
+      "product": "Magician's Force"
+    }
+  },
+  "implementation": {
+    "file": "src/autonomousActionUnitTagAdapter.ts",
+    "kind": "isolated pure TagDuel adapter",
+    "behavior": [
+      "activation only from active physical representative hand in open Main Phase",
+      "1500 LP paid at activation and never refunded on negation/invalid target/no space",
+      "target must be eligible monster in opponent team's shared GY",
+      "opponent inactive partner physical owner is preserved",
+      "resolution summons face-up Attack under activating team and writes equippedTo",
+      "Equip leaving field by destruction, bounce to hand or banish destroys equipped monster",
+      "equipped monster leaving field sends Equip Spell to GY and clears link",
+      "destruction/leave destination for target follows physical card owner team, not current controller",
+      "activationId replay protection persisted through JSON",
+      "inventory snapshot conservation and immutable inputs"
+    ],
+    "rules": {
+      "mainDeckConstruction": "20–30",
+      "handLimit": 6,
+      "handDiscard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "tests": {
+    "file": "tests/autonomousActionUnitTagAdapter.test.cjs",
+    "expectedScenarios": 26,
+    "scenarios": [
+      "1500 LP activation cost",
+      "insufficient LP",
+      "active representative and Main Phase",
+      "pending chain/choice",
+      "opponent GY targeting",
+      "inactive opponent partner ownership",
+      "token/non-monster/Fusion/Ritual eligibility",
+      "full Monster/Spell-Trap zones",
+      "successful summon and equippedTo",
+      "target removed after activation",
+      "epoch invalidation",
+      "negation without refund",
+      "source missing",
+      "Monster Zone fills after activation",
+      "Equip destruction",
+      "Equip banish",
+      "Equip return to physical owner hand after rotation",
+      "equipped monster leaves field",
+      "control change",
+      "JSON round-trip/replay",
+      "duplicate activation ID",
+      "four physical rotations",
+      "3+3 zones/Field Zone/Extra 5",
+      "hand >6 until End Phase/short Deck",
+      "inventory conservation/no grants",
+      "input immutability",
+      "malformed/duplicate UIDs"
+    ]
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "target": 1000,
+    "remainingAtStart": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "playerDatabaseWrites": 0,
+    "liveDiscordWrites": 0,
+    "catalogChanged": false,
+    "metadataChanged": false,
+    "certificationsChanged": false,
+    "manifestChanged": false,
+    "resolverChanged": false
+  },
+  "limitations": [
+    "Adapter ainda não está registrado no resolver v9 nem no catálogo; não certifica a carta e não a torna jogável em produção.",
+    "Suíte usa TagDuel temporário/SQLite ausente; não valida gateway ou guild Discord real.",
+    "Deck 20–30 é regra de construção; o adaptador não trunca Deck em duelo e preserva mãos acima de seis até End Phase."
+  ]
+}
