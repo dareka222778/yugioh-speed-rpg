@@ -1,0 +1,94 @@
+{
+  "mission": "M546",
+  "runId": "work-20261123T030134-0300-M546",
+  "owner": "Work principal",
+  "cards": [
+    {
+      "name": "Mirage Dragon",
+      "passcode": "15960641",
+      "konamiDatabaseId": 6196,
+      "type": "Effect Monster",
+      "attribute": "LIGHT",
+      "race": "Dragon",
+      "level": 4,
+      "atk": 1600,
+      "def": 600,
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6196&ope=2&request_locale=en",
+      "officialEffect": "Your opponent cannot activate Trap Cards during the Battle Phase."
+    },
+    {
+      "name": "Pitch-Black Warwolf",
+      "passcode": "88975532",
+      "konamiDatabaseId": 6195,
+      "type": "Effect Monster",
+      "attribute": "DARK",
+      "race": "Beast-Warrior",
+      "level": 4,
+      "atk": 1600,
+      "def": 600,
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6195&ope=2&request_locale=en",
+      "officialEffect": "Your opponent cannot activate Trap Cards during the Battle Phase."
+    }
+  ],
+  "sharedPolicy": {
+    "rule": {
+      "kind": "preventActivation",
+      "cardKind": "trap",
+      "controller": "opponent",
+      "window": "battle"
+    },
+    "teamScope": "The team currently controlling the source restricts only the opposing team's new Trap Card activations.",
+    "controllerResolution": "Use the team Monster Zone containing the source, not the physical owner encoded by its m0–m3 UID; this preserves stolen-card control.",
+    "phaseResolution": "Battle Phase remains active during response/choice windows whose resume phase is battle; Main Phase response/choice windows do not inherit the restriction.",
+    "exclusions": [
+      "the source while face-down",
+      "the source while its monster effect is negated",
+      "Quick-Play Spells and all non-Trap activations",
+      "Trap effects that were already activated before the Battle Phase"
+    ],
+    "negation": "The adapter requires the caller to inject the selected engine revision's monster-effect-negation resolver; it never guesses or caches negation."
+  },
+  "tests": {
+    "file": "tests/battleTrapLockTagAdapter.test.cjs",
+    "expected": 16,
+    "coverage": [
+      "both official card identities map to the same ContinuousRule accepted by continuousRuleIssues",
+      "opponent-only restriction for each card",
+      "Main Phase and response/choice resume-phase boundaries",
+      "Trap-only restriction; Quick-Play and non-Trap activations remain legal",
+      "face-down and negated source suppression",
+      "current controller team versus physical UID owner",
+      "all four physical seats across four active-seat rotations",
+      "two opposing sources",
+      "malformed and duplicated physical UIDs",
+      "unknown source identity",
+      "input immutability"
+    ]
+  },
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "The adapter is not registered in the shared effect resolver, card metadata, manifest or allowlist. No certification is claimed."
+  },
+  "security": {
+    "filesOnly": [
+      "src/battleTrapLockTagAdapter.ts",
+      "tests/battleTrapLockTagAdapter.test.cjs",
+      "docs/evidence/m546-battle-trap-lock-tag-adapter.json",
+      ".github/workflows/m546-battle-trap-lock-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "Tests use structural TagDuel fixtures and an injected negation resolver; they do not execute a full registered duel.",
+    "The adapter is not wired into continuousEffects.cardActivationAllowed or the card registry.",
+    "No live Discord bot session was available for end-to-end validation.",
+    "The current M61 handoff still blocks central resolver/manifest integration."
+  ]
+}
