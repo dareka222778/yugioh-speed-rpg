@@ -37,7 +37,6 @@ export type SpellCounterTrapResolution={
  targetDestroyed:boolean;
  opponentPaidToNegate:boolean;
  targetUid:string;
- costUid?:string;
  lockedSpellName?:string;
  sourceSentToGrave:boolean;
 };
@@ -290,7 +289,7 @@ export function resolveSpellCounterTrap(
  return {session:next,result:{
   activationId,cardId:a.sourceId,sourceActivationNegated:!!options.sourceActivationNegated,
   effectApplied,targetActivationNegated,targetDestroyed,opponentPaidToNegate,targetUid:a.response.card,
-  ...(a.costUid?{costUid:a.costUid}:{}),...(lockedSpellName?{lockedSpellName}:{}),sourceSentToGrave
+  ...(lockedSpellName?{lockedSpellName}:{}),sourceSentToGrave
  }};
 }
 export function canTeamActivateSpell(
