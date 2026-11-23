@@ -40,7 +40,7 @@ export type DarkMimicBattleEvent={
 export type DarkMimicBattlePlan={
   kind:'dark-mimic-lv3-battle-draw';eventId:string;sourceUid:string;sourceInstanceKey:string;
   sourceOwnerSeat:number;sourceOwnerTeam:Team;controllerTeam:Team;activeSeat:number;
-  turn:number;drawCount:1|2;
+  turn:number;sourceEpoch:number;drawCount:1|2;
 };
 
 const defaultLookup:DarkMimicLookup=id=>getPlayableCard(id);
@@ -182,11 +182,11 @@ export function planDarkMimicLv1Standby(
   if(state.core.phase!=='standby'||state.core.current!==team||state.core.pending.kind!=='none'||
     state.core.chain.length>0||state.core.choice)
     throw Error('O efeito de Standby de Dark Mimic LV1 exige a Fase de Apoio sem cadeia pendente.');
-  if(player.monsters.length>3||player.monsters.length>=3)
+  if(player.monsters.length>=3)
     throw Error('Não há Zona de Monstro livre para a Invocação-Especial.');
   if(![...player.hand,...player.deck].some(card=>card.id===DARK_MIMIC_LV3_ID))
     throw Error('Não há Dark Mimic LV3 na mão/Deck do representante ativo.');
-  if(memory(state).lv1StandbyUsedTurnByInstance[source.instanceKey]===state.core.turn)
+  if(state.darkMimic?.lv1StandbyUsedTurnByInstance?.[source.instanceKey]===state.core.turn)
     throw Error('Esta cópia de Dark Mimic LV1 já usou o efeito de Standby neste turno.');
   return {kind:'dark-mimic-lv1-standby',sourceUid,sourceOwnerSeat:source.ownerSeat,
     sourceOwnerTeam:source.ownerTeam,controllerTeam:team,activeSeat:source.activeSeat,
@@ -195,7 +195,7 @@ export function planDarkMimicLv1Standby(
 
 /** Pays the send-to-GY cost and consumes this physical instance's once-per-turn use. */
 export function payDarkMimicLv1StandbyCost(
-  input:DarkMimicState,plan:DarkMimicStandbyPlan
+  input:DarkMimicState,plan:DarkMimicStandbyPlan,lookup:DarkMimicLookup=defaultLookup
 ):{state:DarkMimicState;resolutionPlan:DarkMimicStandbyResolution}{
   assertState(input);
   validateTeam(plan?.controllerTeam);
@@ -204,7 +204,7 @@ export function payDarkMimicLv1StandbyCost(
     plan.sourceOwnerSeat!==physicalSeat(plan.sourceUid)||plan.sourceOwnerTeam!==plan.sourceOwnerSeat%2)
     throw Error('Plano de Standby Dark Mimic LV1 obsoleto ou inválido.');
   const next=structuredClone(input) as DarkMimicState,before=inventorySnapshot(input);
-  const source=sourceContext(next,plan.sourceUid,DARK_MIMIC_LV1_ID,defaultLookup);
+  const source=sourceContext(next,plan.sourceUid,DARK_MIMIC_LV1_ID,lookup);
   if(source.controllerTeam!==plan.controllerTeam||source.instanceKey!==plan.sourceInstanceKey||
     source.ownerSeat!==plan.sourceOwnerSeat)
     throw Error('A instância de Dark Mimic LV1 mudou antes do pagamento do custo.');
@@ -294,25 +294,28 @@ export function planDarkMimicLv3BattleDraw(
   const metadata=lookup(DARK_MIMIC_LV3_ID);
   if(!metadata||metadata.kind!=='monster'||metadata.monsterType!=='effect')
     throw Error('Dark Mimic LV3 não está admitido como monstro de efeito.');
-  const instanceKey=event.sourceUid+'@'+String(event.sourceEpoch),mem=memory(state);
-  if(mem.lv3BattleEvents[event.eventId])throw Error('Este evento de batalha de Dark Mimic LV3 já foi resolvido.');
+  const instanceKey=event.sourceUid+'@'+String(event.sourceEpoch),mem=state.darkMimic;
+  if(mem?.lv3BattleEvents?.[event.eventId])throw Error('Este evento de batalha de Dark Mimic LV3 já foi resolvido.');
   return {kind:'dark-mimic-lv3-battle-draw',eventId:event.eventId,sourceUid:event.sourceUid,
     sourceInstanceKey:instanceKey,sourceOwnerSeat:ownerSeat,sourceOwnerTeam:ownerTeam,
-    controllerTeam:event.controllerTeam,activeSeat:state.active[event.controllerTeam],turn:event.turn,
-    drawCount:mem.lv3SummonedByLv1ByInstance[instanceKey]?2:1};
+    controllerTeam:event.controllerTeam,activeSeat:state.active[event.controllerTeam],turn:event.turn,sourceEpoch:event.sourceEpoch,
+    drawCount:mem?.lv3SummonedByLv1ByInstance?.[instanceKey]?2:1};
 }
 export function resolveDarkMimicLv3BattleDraw(
   input:DarkMimicState,plan:DarkMimicBattlePlan,effectNegated=false
 ):{status:'resolved'|'negated';state:DarkMimicState;drawnUids:string[];deckOut:boolean;handLimitDeferred:boolean}{
   assertState(input);
   validateTeam(plan?.controllerTeam);
-  if(!plan||plan.kind!=='dark-mimic-lv3-battle-draw'||plan.turn!==input.core.turn||
+  if(!plan||plan.kind!=='dark-mimic-lv3-battle-draw'||!plan.eventId||plan.turn!==input.core.turn||
+    plan.sourceInstanceKey!==plan.sourceUid+'@'+String(plan.sourceEpoch)||
     input.active[plan.controllerTeam]!==plan.activeSeat||
     plan.sourceOwnerSeat!==physicalSeat(plan.sourceUid)||plan.sourceOwnerTeam!==plan.sourceOwnerSeat%2||
     (plan.drawCount!==1&&plan.drawCount!==2))
     throw Error('Plano de compra de Dark Mimic LV3 obsoleto ou inválido.');
   const next=structuredClone(input) as DarkMimicState,before=inventorySnapshot(input),mem=memory(next);
   if(mem.lv3BattleEvents[plan.eventId])throw Error('Este evento de batalha de Dark Mimic LV3 já foi resolvido.');
+  const expectedDrawCount=mem.lv3SummonedByLv1ByInstance[plan.sourceInstanceKey]?2:1;
+  if(plan.drawCount!==expectedDrawCount)throw Error('Quantidade de compra do plano Dark Mimic LV3 foi adulterada.');
   mem.lv3BattleEvents[plan.eventId]=true;
   delete mem.lv3SummonedByLv1ByInstance[plan.sourceInstanceKey];
   if(effectNegated){

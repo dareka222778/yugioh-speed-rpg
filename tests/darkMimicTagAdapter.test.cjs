@@ -44,7 +44,7 @@ function makeState({
   const targetSeat=active[sourceTeam];
   const targetPool=targetZone==='hand'?players[sourceTeam].hand:players[sourceTeam].deck;
   if(targetZone!=='none'){
-    targetPool[0]={uid:targetUid,id:LV3};
+    targetPool[1]={uid:targetUid,id:LV3};
     core.cardLifetimes[targetUid]={zone:targetZone,epoch:0};
   }
   if(players[0].deck.length)players[0].deck[0]={uid:deckTopUid,id:deckTopId};
@@ -138,7 +138,7 @@ test('LV1 Standby pays its send-to-GY cost and Special Summons LV3 from the acti
   const state=makeState({phase:'standby'});
   const before=inventory(state);
   const activation=planDarkMimicLv1Standby(state,'m0:lv1-source',lookup);
-  const paid=payDarkMimicLv1StandbyCost(state,activation);
+  const paid=payDarkMimicLv1StandbyCost(state,activation,lookup);
   assert.equal(paid.state.core.players[0].monsters.length,0);
   assert.equal(paid.state.core.players[0].grave.at(-1).uid,'m0:lv1-source');
   const result=resolveDarkMimicLv1Standby(paid.state,paid.resolutionPlan,{targetUid:'m0:lv3-target'});
@@ -148,7 +148,7 @@ test('LV1 Standby pays its send-to-GY cost and Special Summons LV3 from the acti
 });
 test('LV1 owned by inactive partner pays to the owner GY but summons from active teammate Deck',()=>{
   const state=makeState({phase:'standby',sourceUid:'m2:partner-lv1'});
-  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m2:partner-lv1',lookup));
+  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m2:partner-lv1',lookup),lookup);
   assert.equal(paid.state.core.players[0].grave.at(-1).uid,'m2:partner-lv1');
   const result=resolveDarkMimicLv1Standby(paid.state,paid.resolutionPlan,{targetUid:'m0:lv3-target'});
   assert.equal(result.status,'summoned');assert.equal(result.state.core.players[0].monsters.at(-1).uid,'m0:lv3-target');
@@ -168,21 +168,21 @@ test('LV1 once-per-turn use is keyed by physical instance and survives JSON rest
 });
 test('a negated LV1 Standby effect still pays the cost but does not Special Summon',()=>{
   const state=makeState({phase:'standby'});
-  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m0:lv1-source',lookup));
+  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m0:lv1-source',lookup),lookup);
   const result=resolveDarkMimicLv1Standby(paid.state,paid.resolutionPlan,{effectNegated:true});
   assert.equal(result.status,'negated');assert.equal(result.state.core.players[0].grave.at(-1).uid,'m0:lv1-source');
   assert.equal(result.state.core.players[0].monsters.length,0);
 });
 test('LV1 Standby resolution does not summon if its selected LV3 left the active hand/Deck',()=>{
   const state=makeState({phase:'standby'});
-  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m0:lv1-source',lookup));
+  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m0:lv1-source',lookup),lookup);
   paid.state.core.players[0].deck=paid.state.core.players[0].deck.filter(card=>card.uid!=='m0:lv3-target');
   const result=resolveDarkMimicLv1Standby(paid.state,paid.resolutionPlan,{targetUid:'m0:lv3-target'});
   assert.equal(result.status,'no-target');assert.equal(result.state.core.players[0].monsters.length,0);
 });
 test('LV1 Standby resolution rechecks the 3 Monster Zone limit and never discards above six immediately',()=>{
   const state=makeState({phase:'standby',hand0Length:6});
-  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m0:lv1-source',lookup));
+  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m0:lv1-source',lookup),lookup);
   paid.state.core.players[0].monsters.push(
     {uid:'m0:extra-a',id:NORMAL,position:'atk',faceUp:true,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0},
     {uid:'m0:extra-b',id:NORMAL,position:'atk',faceUp:true,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0}
@@ -200,7 +200,7 @@ test('LV3 battle trigger draws one when it was not Special Summoned by Dark Mimi
 });
 test('LV3 Special Summoned by LV1 draws two after battle destruction',()=>{
   const state=makeState({phase:'standby'});
-  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m0:lv1-source',lookup));
+  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m0:lv1-source',lookup),lookup);
   const summoned=resolveDarkMimicLv1Standby(paid.state,paid.resolutionPlan,{targetUid:'m0:lv3-target'});
   const event=battleDestroy(summoned.state,'m0:lv3-target',0);
   const result=resolveDarkMimicLv3BattleDraw(summoned.state,planDarkMimicLv3BattleDraw(summoned.state,event,lookup));
@@ -292,6 +292,44 @@ test('Dark Mimic preserves all physical UIDs, 3+3 zones, Field Zone and Extra De
   assert.ok(result.state.core.players[0].field);
   assert.equal(result.state.core.players[0].extra.length,5);
   assert.equal(result.state.core.players[0].monsters.length,1);
+});
+test('LV1 Standby can Special Summon LV3 from the active representative Hand',()=>{
+  const state=makeState({phase:'standby',targetZone:'hand',targetUid:'m0:lv3-hand'});
+  const before=inventory(state);
+  const paid=payDarkMimicLv1StandbyCost(state,planDarkMimicLv1Standby(state,'m0:lv1-source',lookup),lookup);
+  const result=resolveDarkMimicLv1Standby(paid.state,paid.resolutionPlan,{targetUid:'m0:lv3-hand'});
+  assert.equal(result.status,'summoned');
+  assert.deepEqual(inventory(result.state),before);
+});
+test('planning is pure and does not mutate the saved duel snapshot',()=>{
+  const state=makeState({phase:'standby'});
+  const before=JSON.stringify(state);
+  planDarkMimicLv1Standby(state,'m0:lv1-source',lookup);
+  assert.equal(JSON.stringify(state),before);
+  const battle=makeState({sourceUid:'m0:lv3-source',sourceId:LV3,currentTeam:1});
+  battle.core.current=1;battle.cursor=1;battle.core.teamRotation.cursor=1;
+  const event=battleDestroy(battle,'m0:lv3-source',0);
+  const afterEvent=JSON.stringify(battle);
+  planDarkMimicLv3BattleDraw(battle,event,lookup);
+  assert.equal(JSON.stringify(battle),afterEvent);
+});
+test('LV3 battle draw rejects a forged draw count even when the event identity is valid',()=>{
+  const state=makeState({sourceUid:'m0:lv3-source',sourceId:LV3,currentTeam:1});
+  state.core.current=1;state.cursor=1;state.core.teamRotation.cursor=1;
+  const event=battleDestroy(state,'m0:lv3-source',0);
+  const plan=planDarkMimicLv3BattleDraw(state,event,lookup);
+  assert.throws(()=>resolveDarkMimicLv3BattleDraw(state,{...plan,drawCount:2}),/adulterada/);
+});
+test('a once-per-turn LV1 instance may use its Standby effect again only after leaving and re-entering',()=>{
+  const state=makeState({phase:'standby'});
+  const plan=planDarkMimicLv1Standby(state,'m0:lv1-source',lookup);
+  const paid=payDarkMimicLv1StandbyCost(state,plan,lookup);
+  const returned=structuredClone(paid.state);
+  returned.core.players[0].grave=returned.core.players[0].grave.filter(card=>card.uid!=='m0:lv1-source');
+  returned.core.players[0].monsters.push({uid:'m0:lv1-source',id:LV1,position:'atk',faceUp:true,entered:1,changed:1,attacked:0,atkBoost:0,defBoost:0});
+  returned.core.cardLifetimes['m0:lv1-source']={zone:'monsters',epoch:2};
+  const next=planDarkMimicLv1Standby(returned,'m0:lv1-source',lookup);
+  assert.equal(next.sourceInstanceKey,'m0:lv1-source@2');
 });
 test('all four physical seats retain 20-card Main Deck ownership and Extra Deck limit 5 in the fixture',()=>{
   const state=makeState();
