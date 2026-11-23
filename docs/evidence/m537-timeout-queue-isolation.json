@@ -10,7 +10,9 @@
     "src/index.ts",
     "tests/timeoutSweepIsolation.test.cjs",
     "docs/evidence/m537-timeout-queue-isolation.json",
-    ".github/workflows/m537-timeout-queue-isolation.yml"
+    ".github/workflows/m537-timeout-queue-isolation.yml",
+    "scripts/mission29-reviewed-extensions.cjs",
+    "tests/runtimeStatus29.test.cjs"
   ],
   "priority": "P1 — uma falha ao enumerar uma modalidade ou processar uma sessão não pode interromper a drenagem das demais filas de timeout nem das sessões seguintes.",
   "behavior": [
@@ -76,13 +78,29 @@
     "A publicação individual continua delegada a refreshArena/refreshTag existentes; falhas internas já tratadas por esses handlers não são reinterpretadas."
   ],
   "testExecution": {
-    "focused": null,
-    "check": null,
-    "build": null,
-    "customWorkflow": null,
-    "cardBatchFast": null,
-    "milestone1000": null,
-    "engineValidation": null,
-    "extendedSoak": null
+    "focused": "success 3/3 (run 45090203046)",
+    "check": "success",
+    "build": "success",
+    "customWorkflow": "success (run 45090203046)",
+    "cardBatchFast": "failed (run 45090203070; exact M29 bootstrap hash gate exposed unreviewed M537 hook; now adding strict exact normalization)",
+    "milestone1000": "success (run 45090203072; 969/1000)",
+    "engineValidation": "in_progress (run 45090203041)",
+    "extendedSoak": "included in Engine Validation; in_progress"
+  },
+  "integrityGate": {
+    "baselineFile": "docs/evidence/mission8-preserved-baseline.json",
+    "baselineChanged": false,
+    "reviewedNormalizer": "scripts/mission29-reviewed-extensions.cjs",
+    "exactSubstitutions": [
+      "M537 import line",
+      "M537 sweepDuelTimeouts function body"
+    ],
+    "negativeCoverage": [
+      "unrelated bootstrap edit remains detectable",
+      "partial hook rejected",
+      "duplicate hook rejected",
+      "hook before dotenv rejected"
+    ],
+    "note": "The original mission-8 SHA-256/Git blob baseline remains unchanged; only the exact reviewed M537 delta is normalized."
   }
 }

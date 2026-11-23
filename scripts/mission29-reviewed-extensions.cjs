@@ -16,6 +16,15 @@ function strip(file,bytes){
  text=replaceOnce(text,"import {RULES_PROFILE} from './rulesProfile';\n","import {RULES_PROFILE,RULES_VERSION} from './rulesProfile';\nconst RELEASE_VERSION:string=require('../package.json').version;\n");
  text=replaceOnce(text,'content: runtimePingText()', 'content: '+baselinePing);
  text=replaceOnce(text,'console.log(runtimeStatusLine());',baselineLog);
+ const hasTimeoutImport=text.includes(timeoutSweepImport),hasTimeoutSweep=text.includes(reviewedSweep);
+ assert.equal(hasTimeoutImport,hasTimeoutSweep,'M537 timeout sweep extension must be complete and exact');
+ if(hasTimeoutImport){
+  text=replaceOnce(text,timeoutSweepImport,'');
+  text=replaceOnce(text,reviewedSweep,baselineSweep);
+ }
  return Buffer.from(text,'utf8');
 }
-module.exports={strip,runtimeImport};
+const timeoutSweepImport="import {createTimeoutSweepQueue,runIndependentTimeoutSweeps} from './timeoutSweep';\n";
+const baselineSweep="export async function sweepDuelTimeouts(){if(sweepingDuels)return;sweepingDuels=true;try{for(const r of expireDueDuels())await refreshArena(r);for(const pending of dueTags())await refreshTag(runTagBots(pending.id));}catch(error){console.error('Falha ao conferir prazo dos duelos:',errorSummary(error));}finally{sweepingDuels=false;}}";
+const reviewedSweep="export async function sweepDuelTimeouts(){\n if(sweepingDuels)return;\n sweepingDuels=true;\n try{\n  const failures=await runIndependentTimeoutSweeps([\n   createTimeoutSweepQueue('1v1',expireDueDuels,async record=>{await refreshArena(record);}),\n   createTimeoutSweepQueue('2v2',dueTags,async pending=>{await refreshTag(runTagBots(pending.id));})\n  ]);\n  for(const failure of failures){\n   const location=failure.index===undefined?failure.stage:`${failure.stage} #${failure.index+1}`;\n   console.error(`Falha na fila ${failure.queue} (${location}):`,errorSummary(failure.error));\n  }\n }catch(error){\n  console.error('Falha inesperada ao conferir prazo dos duelos:',errorSummary(error));\n }finally{\n  sweepingDuels=false;\n }\n}";
+module.exports={strip,runtimeImport,timeoutSweepImport};

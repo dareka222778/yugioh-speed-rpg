@@ -5,6 +5,8 @@ on:
       - feat/work-m537-timeout-queue-isolation-20261122
     paths:
       - 'src/index.ts'
+      - 'scripts/mission29-reviewed-extensions.cjs'
+      - 'tests/runtimeStatus29.test.cjs'
       - 'src/timeoutSweep.ts'
       - 'tests/timeoutSweepIsolation.test.cjs'
       - 'docs/evidence/m537-timeout-queue-isolation.json'
