@@ -1,0 +1,36 @@
+name: M468 TagDuel command seat order
+on:
+  push:
+    branches:
+      - feat/work-m468-tag-command-seat-order-20261121
+    paths:
+      - 'tests/tagCommandSeatOrder.test.cjs'
+      - 'docs/evidence/m468-tag-command-seat-order.json'
+      - '.github/workflows/m468-tag-command-seat-order.yml'
+  pull_request:
+    paths:
+      - 'tests/tagCommandSeatOrder.test.cjs'
+      - 'docs/evidence/m468-tag-command-seat-order.json'
+      - '.github/workflows/m468-tag-command-seat-order.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-command-seat-order:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m468-tag-command-seat-order.json', 'utf8'))"
+      - name: Run TagDuel command seat-order tests
+        run: node --test tests/tagCommandSeatOrder.test.cjs

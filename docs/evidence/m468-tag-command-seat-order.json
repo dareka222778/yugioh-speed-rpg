@@ -1,0 +1,62 @@
+{
+  "mission": "M468",
+  "runId": "work-20261121T161200-0300-M468",
+  "status": "test-only-after-M8-protection",
+  "priority": "P1 — protect the already-integrated Discord /dupla convidar seat order and default mode without modifying the Mission 8-preserved bootstrap.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagCommandSeatOrder.test.cjs",
+      "docs/evidence/m468-tag-command-seat-order.json",
+      ".github/workflows/m468-tag-command-seat-order.yml"
+    ],
+    "topLevelTests": 3,
+    "runtimeChanged": false,
+    "behavior": "A source-contract assertion checks the real /dupla convidar handler still passes [host, opponent1, partner, opponent2] and defaults to classic-loan. A temporary SQLite integration then accepts all four participants and proves tagStore persists teams [0,1,0,1], so host+partner share a team and both opponents share the other. Duplicate IDs are rejected before any session/seat lock; no inventory/deck rows are created.",
+    "blockedRuntimeAttempt": "An earlier isolated draft attempted a helper import in src/index.ts. Card Batch Fast/Mission 8 rejected it because the bootstrap-preservation hash changed. The branch now restores src/index.ts byte-for-byte to the shared baseline and removes the unused helper; no gate was bypassed."
+  },
+  "invariants": {
+    "hostAndPartnerSameTeam": true,
+    "opponentsSameTeam": true,
+    "teamsOpposed": true,
+    "defaultClassicLoan": true,
+    "duplicateIdsRejectedBeforeLobby": true,
+    "noInventoryGrant": true,
+    "mission8BootstrapUnchanged": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false,
+    "merge": false,
+    "deploy": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "The test asserts the existing inline Discord command source and executes its seat order through tagStore; it does not import the full Discord client or connect to a live guild.",
+    "No new card effect or certification."
+  ]
+}
