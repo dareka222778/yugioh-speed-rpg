@@ -100,20 +100,20 @@ test('inactive partner reserve hands, Decks and Extra Decks are not affected',()
   const reserveDecks={2:refs(2,'partner-deck',7),3:refs(3,'partner-deck',6)};
   const state=makeState({reserveHands,reserveDecks});
   const before=JSON.stringify(state.reserves);
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.equal(JSON.stringify(result.state.reserves),before);
 });
 
 test('the first five Deck cards are drawn in order by both active representatives',()=>{
   const state=makeState({deck0:refs(0,'blue',7),deck1:refs(1,'red',8)});
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.deepEqual(result.state.core.players[0].hand.slice(-5).map(c=>c.uid),refs(0,'blue',5).map(c=>c.uid));
   assert.deepEqual(result.state.core.players[1].hand.slice(-5).map(c=>c.uid),refs(1,'red',5).map(c=>c.uid));
 });
 
 test('exactly five remaining cards is a successful draw, not deck-out',()=>{
   const state=makeState({deck0:refs(0,'d0',5),deck1:refs(1,'d1',5)});
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.deepEqual(result.deckOutTeams,[]);
   assert.equal(result.state.core.phase,'main');
   assert.equal(result.state.core.players[0].hand.length,5);
@@ -122,7 +122,7 @@ test('exactly five remaining cards is a successful draw, not deck-out',()=>{
 
 test('a team with fewer than five cards draws what remains and loses by failed draw',()=>{
   const state=makeState({deck0:refs(0,'short',4),deck1:refs(1,'full',6)});
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.deepEqual(result.deckOutTeams,[0]);
   assert.equal(result.drawnUids[0].length,4);
   assert.equal(result.drawnUids[1].length,5);
@@ -134,7 +134,7 @@ test('a team with fewer than five cards draws what remains and loses by failed d
 
 test('if both teams cannot draw five, the simultaneous failed draws produce a draw',()=>{
   const state=makeState({deck0:refs(0,'short-a',4),deck1:refs(1,'short-b',3)});
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.deepEqual(result.deckOutTeams,[0,1]);
   assert.equal(result.state.core.phase,'finished');
   assert.equal(result.state.core.winner,null);
@@ -145,7 +145,7 @@ test('if both teams cannot draw five, the simultaneous failed draws produce a dr
 
 test('an empty Deck is a failed draw while the opposing team still resolves its five draws',()=>{
   const state=makeState({deck0:[],deck1:refs(1,'full',5)});
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.deepEqual(result.deckOutTeams,[0]);
   assert.equal(result.drawnUids[0].length,0);
   assert.equal(result.drawnUids[1].length,5);
@@ -165,7 +165,7 @@ test('a stolen Morphing Jar resolves for its controller team, not its physical o
 
 test('a Flip Summon trigger resolves after the source leaves the Monster Zone',()=>{
   const state=makeState({deck0:refs(0,'blue',5),deck1:refs(1,'red',5)});
-  const plan=planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup);
+  const plan=planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup);
   const afterActivation=structuredClone(state);
   removeSource(afterActivation,0,'m0:morphing-jar');
   const result=resolveMorphingJarFlip(afterActivation,plan);
@@ -177,7 +177,7 @@ test('a Flip Summon trigger resolves after the source leaves the Monster Zone',(
 test('effect negation preserves both hands and Decks while consuming the activation receipt',()=>{
   const state=makeState({hand0:refs(0,'h0',3),hand1:refs(1,'h1',4),deck0:refs(0,'d0',7),deck1:refs(1,'d1',8)});
   const before=JSON.stringify(state.core.players.map(p=>({deck:p.deck,hand:p.hand,grave:p.grave})));
-  const plan=planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup);
+  const plan=planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup);
   const result=resolveMorphingJarFlip(state,plan,true);
   assert.equal(result.status,'negated');
   assert.equal(JSON.stringify(result.state.core.players.map(p=>({deck:p.deck,hand:p.hand,grave:p.grave}))),before);
@@ -186,14 +186,14 @@ test('effect negation preserves both hands and Decks while consuming the activat
 
 test('a successful activation cannot be replayed',()=>{
   const state=makeState();
-  const plan=planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup);
+  const plan=planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup);
   const result=resolveMorphingJarFlip(state,plan);
   assert.throws(()=>resolveMorphingJarFlip(result.state,plan),/Replay/);
 });
 
 test('a negated activation cannot be replayed after JSON restoration',()=>{
   const state=makeState();
-  const plan=planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup);
+  const plan=planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup);
   const negated=resolveMorphingJarFlip(state,plan,true);
   const restored=JSON.parse(JSON.stringify(negated.state));
   assert.throws(()=>resolveMorphingJarFlip(restored,plan),/Replay/);
@@ -201,7 +201,7 @@ test('a negated activation cannot be replayed after JSON restoration',()=>{
 
 test('a JSON-restored successful receipt blocks the same activationId',()=>{
   const state=makeState();
-  const plan=planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup);
+  const plan=planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup);
   const resolved=resolveMorphingJarFlip(state,plan);
   const restored=JSON.parse(JSON.stringify(resolved.state));
   assert.throws(()=>planMorphingJarFlip(restored,event(restored,'m0:morphing-jar','activation-1'),'m0:morphing-jar',lookup),/já foi resolvida/);
@@ -298,21 +298,21 @@ test('activationId is mandatory and bounded',()=>{
 test('all physical UIDs and card identities are conserved through discard and draw',()=>{
   const state=makeState({hand0:refs(0,'h0',6),hand1:refs(1,'h1',5),deck0:refs(0,'d0',7),deck1:refs(1,'d1',8)});
   const before=inventory(state);
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.deepEqual(inventory(result.state),before);
 });
 
 test('the separate Field Zone is not confused with the three backrow zones',()=>{
   const state=makeState();
   state.core.players[0].field=ref('m0:field-zone');
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.equal(result.state.core.players[0].field.uid,'m0:field-zone');
   assert.equal(result.state.core.players[0].backrow.length,0);
 });
 
 test('discarded cards retain their physical owner UID in the team Graveyard',()=>{
   const state=makeState({hand0:[ref('m0:owned-by-active'),ref('m0:owned-by-partner')],hand1:[ref('m1:red-hand')]});
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.deepEqual(result.state.core.players[0].grave.map(c=>c.uid),['m0:owned-by-active','m0:owned-by-partner']);
   assert.equal(result.state.core.players[1].grave[0].uid,'m1:red-hand');
 });
@@ -320,12 +320,12 @@ test('discarded cards retain their physical owner UID in the team Graveyard',()=
 test('the effect never mutates its input and does not grant inventory',()=>{
   const state=makeState();
   const before=JSON.stringify(state);
-  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup));
+  const result=resolveMorphingJarFlip(state,planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup));
   assert.equal(JSON.stringify(state),before);
   assert.equal(tagInventory(result.state).length,tagInventory(state).length);
 });
 
 test('a malformed active-seat UID in a private Deck is rejected',()=>{
   const state=makeState({deck0:[ref('m2:wrong-seat')]});
-  assert.throws(()=>planMorphingJarFlip(state,event(),'m0:morphing-jar',lookup),/representante físico ativo/);
+  assert.throws(()=>planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup),/representante físico ativo/);
 });
