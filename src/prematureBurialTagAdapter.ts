@@ -230,10 +230,10 @@ export function planPrematureBurialActivation(
   state:PrematureBurialState,sourceUid:string,activationId:string,targetUid:string,lookup:Lookup=cardLookup
 ):PrematureBurialActivationPlan{
   assertState(state);
-  const source=sourceContext(state,sourceUid,lookup);
   if(!validActivationId(activationId)||state.prematureBurial?.pending?.[activationId]||
     state.prematureBurial?.resolved?.[activationId])
     throw Error('activationId Premature Burial inválido ou já utilizado.');
+  const source=sourceContext(state,sourceUid,lookup);
   if(state.core.players[source.controllerTeam].lp<LP_COST)
     throw Error('LP insuficiente para pagar 800 LP de Premature Burial.');
   const candidates=getPrematureBurialCandidates(state,source.controllerTeam,lookup);
