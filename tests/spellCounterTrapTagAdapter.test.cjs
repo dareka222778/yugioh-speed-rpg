@@ -19,6 +19,7 @@ const MST='05318639';
 const SEVEN_TOOLS='03819470';
 const HFD='18144506';
 const MIRROR='44095762';
+const SOGEN='86318356';
 const lookup=id=>{
   const c=getPlayableCard(id);
   return c?{kind:c.kind,name:c.englishName}:undefined;
@@ -189,6 +190,10 @@ test('Magic Drain opens only for an opponent Spell activation and exposes no tar
   const alreadyNegated=structuredClone(f.state);
   alreadyNegated.core.pendingNegated=true;
   assert.deepEqual(spellCounterTrapActions(alreadyNegated,lookup),[]);
+  const sameTeamActor=structuredClone(f.state);
+  sameTeamActor.core.pending.actor=1;
+  assert.deepEqual(spellCounterTrapActions(sameTeamActor,lookup),[],
+    'Magic Drain cannot respond to a Spell activation by its own team');
 });
 
 test('Magic Drain lets the active opposing representative discard a Spell to negate Magic Drain itself',()=>{
@@ -361,5 +366,30 @@ test('Cursed Seal does not lock the Spell name if the activation was negated but
   assert.equal(resolved.result.effectApplied,true);
   assert.deepEqual(resolved.session.lockedSpellNames,[],
     'the name lock requires both activation negation and destruction');
+  assertConserved(resolved.session.duel,f.before);
+});
+
+
+test('Cursed Seal removes a negated Field Spell from the separate Field Zone',()=>{
+  const f=fixture(CURSED_SEAL_OF_THE_FORBIDDEN_SPELL_ID,'cursed-field-zone');
+  const team=f.state.core.players[0];
+  const i=team.backrow.findIndex(c=>c.uid===f.pot.uid);
+  assert.ok(i>=0);
+  const [fieldSpell]=team.backrow.splice(i,1);
+  fieldSpell.id=SOGEN;
+  fieldSpell.faceUp=true;
+  fieldSpell.resolved=true;
+  team.field=fieldSpell;
+  f.state.core.pending.id=SOGEN;
+  f.pot.id=SOGEN;
+  f.before=inventory(f.state);
+  assert.equal(lookup(SOGEN)?.kind,'spell');
+  const session=activate(f,'cs-field',f.controllerCost.uid);
+  const resolved=resolveSpellCounterTrap(session,'cs-field',lookup);
+  assert.equal(resolved.result.targetActivationNegated,true);
+  assert.equal(resolved.result.targetDestroyed,true);
+  assert.equal(resolved.result.lockedSpellName,'Sogen');
+  assert.equal(resolved.session.duel.core.players[0].field,null);
+  assert.ok(grave(resolved.session.duel,0,{uid:fieldSpell.uid,id:SOGEN}));
   assertConserved(resolved.session.duel,f.before);
 });
