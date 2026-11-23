@@ -1,0 +1,38 @@
+name: M570 Dust Tornado TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m570-dust-tornado-tag-adapter-20261123
+    paths:
+      - 'src/dustTornadoTagAdapter.ts'
+      - 'tests/dustTornadoTagAdapter.test.cjs'
+      - 'docs/evidence/m570-dust-tornado-tag-adapter.json'
+      - '.github/workflows/m570-dust-tornado-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/dustTornadoTagAdapter.ts'
+      - 'tests/dustTornadoTagAdapter.test.cjs'
+      - 'docs/evidence/m570-dust-tornado-tag-adapter.json'
+      - '.github/workflows/m570-dust-tornado-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dust-tornado:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m570-dust-tornado-tag-adapter.json', 'utf8'))"
+      - name: Run M570 behavior regressions
+        run: node --test tests/dustTornadoTagAdapter.test.cjs

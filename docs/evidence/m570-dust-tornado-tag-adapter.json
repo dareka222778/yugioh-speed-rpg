@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "mission": "M570",
+  "card": {
+    "name": "Dust Tornado",
+    "portugueseName": "Tornado de Poeira",
+    "passcode": "60082869",
+    "konamiDatabaseId": 4988,
+    "type": "Normal Trap",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4988&ope=2&request_locale=en",
+    "officialText": "Target 1 Spell/Trap your opponent controls; destroy that target, then you can Set 1 Spell/Trap from your hand.",
+    "firstTcgPrinting": {
+      "date": "2002-10-20",
+      "set": "PSV-011",
+      "product": "Pharaoh's Servant"
+    }
+  },
+  "implementation": {
+    "file": "src/dustTornadoTagAdapter.ts",
+    "kind": "isolated pure TagDuel adapter",
+    "behavior": [
+      "Normal Trap only from a face-down backrow set in a previous turn, during own priority or an explicit response chain",
+      "target picker returns UIDs only; targets may be face-up or face-down Spell/Trap cards in the opponent backrow or separate Field Zone",
+      "TargetBinding tracks zone/epoch; a target that leaves, returns, changes controller or changes zone cannot be destroyed",
+      "destroyed target and source Trap go to their physical owners' shared Graveyards",
+      "optional Spell/Trap from active representative hand is set face-down after destruction; its setTurn is the current turn",
+      "if negated, target invalid, or destruction prevented, the optional Set does not occur",
+      "source leaving its backrow frees a zone for the optional Set; field zone remains separate",
+      "activationId replay protection persists through JSON; inventory identities are conserved"
+    ],
+    "rules": {
+      "mainDeckConstruction": "20–30",
+      "handLimit": 6,
+      "handDiscard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "tests": {
+    "file": "tests/dustTornadoTagAdapter.test.cjs",
+    "expectedScenarios": 31
+  },
+  "integration": {
+    "resolverV9": false,
+    "catalog": false,
+    "metadata": false,
+    "certifications": false,
+    "allowlist": false,
+    "discordCommand": false
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentPlayerDataChanged": false,
+    "liveDiscord": false
+  },
+  "limitations": [
+    "Adapter isolado e não certificado; sem integração ao resolver v9, catálogo, metadata, allowlist ou comandos.",
+    "A UI de escolha privada e a projeção pública de cartas Set dependem da integração central; o adapter retorna somente UIDs para o picker.",
+    "Testes offline; sem gateway/guild Discord real."
+  ]
+}
