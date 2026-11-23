@@ -146,6 +146,7 @@ function fixture(trapId,seed){
   assert.equal(response.core.phase,'response');
   assert.equal(response.core.pending.kind,'spell');
   assert.equal(response.core.pending.id,POT);
+  console.log('M572_RESPONSE_DEBUG',JSON.stringify({current:response.core.current,priority:response.core.priority,actor:response.core.pending.actor,active:response.active,cursor:response.cursor}));
   assert.equal(response.core.priority,1);
   tag.assertTagDuel(response);
   assertPrivateHands(response);
