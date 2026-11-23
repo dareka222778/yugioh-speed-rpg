@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "mission": "M572",
-  "status": "behavior-tested-isolated-adapter",
+  "status": "awaiting-focused-ci",
   "historicalCutoff": "2004-10-01",
   "cards": [
     {
@@ -63,8 +63,7 @@
     "Cursed Seal chain-link negation and persistent name lock",
     "Cursed Seal name lock requires successful destruction",
     "duplicate activation and invalid-resolution rejection",
-    "Cursed Seal removes a negated Field Spell from the separate Field Zone",
-    "private hand UIDs are omitted from action and resolution payloads"
+    "Cursed Seal removes a negated Field Spell from the separate Field Zone"
   ],
   "invariants": {
     "mainDeckPerPhysicalSeat": "20–30",
@@ -82,7 +81,8 @@
     "The adapter is isolated and is not wired into the authoritative resolver, tagActions, tagInteraction, Discord commands, or catalog v9.",
     "The duel-long Cursed Seal name lock is persisted in the adapter session only; central duel persistence must be integrated after the M61 handoff.",
     "Tests use the local TagDuel state machine and fixtures; no live Discord gateway or guild was contacted.",
-    "No card certification or inventory availability is claimed."
+    "No card certification or inventory availability is claimed.",
+    "The 12 top-level tests have not yet been confirmed by GitHub Actions at this checkpoint."
   ],
   "certificationAtImplementation": {
     "engineV9Certified": 969,
