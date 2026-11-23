@@ -22,7 +22,7 @@ export async function handleDuelComponent(i:DuelComponent,delivery:DuelDelivery)
       if(action==='public'&&i.isButton()){await deferUpdate();await refreshArena(r);return;}
       if(!r.state?.players.some(p=>p.id===id))throw new Error('Só participantes podem abrir o painel privado.');
       if(action==='open'&&i.isButton()){await deferReply({flags:MessageFlags.Ephemeral});await edit(await privatePayload(r,id));return;}
-      if(action==='quit'&&i.isButton()){await reply({...quitMessage(r),flags:MessageFlags.Ephemeral});return;}
+      if(action==='quit'&&i.isButton()){if(r.revision!==revision)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');await reply({...quitMessage(r),flags:MessageFlags.Ephemeral});return;}
       if(action==='view'&&i.isButton()){await deferUpdate();await edit(await privatePayload(r,id,page));return;}
       if(action==='zoneback'&&i.isButton()){await deferUpdate();await edit(duelZonesMessage(r,id));return;}
       if(action==='zonecard'&&i.isStringSelectMenu()){

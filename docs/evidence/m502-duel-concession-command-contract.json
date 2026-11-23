@@ -1,0 +1,81 @@
+{
+  "mission": "M502",
+  "runId": "work-20261122T065715-0300-M502",
+  "priority": "P1 — proteger /duelo sair: a desistência de uma partida 1v1 deve ser sempre confirmada em resposta privada; somente participantes podem confirmar, revisões antigas não podem encerrar a partida, e a confirmação deve persistir o resultado e liberar os vínculos sem tocar em coleção ou inventário.",
+  "scope": {
+    "files": [
+      "src/duelInteraction.ts",
+      "tests/duelConcessionCommandContract.test.cjs",
+      "docs/evidence/m502-duel-concession-command-contract.json",
+      ".github/workflows/m502-duel-concession-command-contract.yml"
+    ],
+    "runtimeChanged": true,
+    "commandBuilderChanged": false,
+    "storeChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "command": "/duelo sair",
+    "activeDuel": "Responde ephemeral com confirmação explícita; não concede antes do botão confirm.",
+    "staleQuit": "duel:quit compara a revisão do painel com a revisão atual antes de oferecer confirmação.",
+    "staleConfirm": "performDuelAction mantém a validação de revisão antes da persistência.",
+    "authorization": "Somente os dois participantes físicos do duelo podem abrir o fluxo privado.",
+    "confirmation": "A confirmação usa o caminho normal performDuelAction({kind:'concede'}), persiste duelFinished e libera duel_members.",
+    "pendingInvite": "O handler mantém o cancelamento de convite pendente via declineChallenge."
+  },
+  "testCoverage": [
+    "Confirma registro do subcomando /duelo sair e resposta ephemeral no handler real.",
+    "Rejeita botão Desistir de revisão obsoleta antes de abrir nova confirmação.",
+    "Confirma que abrir a confirmação não altera estado, revisão, inventário físico ou vínculos.",
+    "Rejeita usuário externo sem revelar painel privado.",
+    "Valida o botão Continuar jogando e a mão privada do participante autenticado sem UIDs do adversário.",
+    "Rejeita confirmação obsoleta após mudança de revisão.",
+    "Confirma desistência explícita, vencedor adversário, evento duelFinished, recibo e liberação dos dois vínculos.",
+    "Compara UIDs físicos por zona antes/depois para provar conservação."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio jogador",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "catalog": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "handleDuelComponent e builders reais; sem token/guild/canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/duelConcessionCommandContract.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Não instancia Client Discord nem envia mensagens a servidor real.",
+    "Teste usa SQLite temporário; não toca dados de jogadores ou coleção persistente."
+  ]
+}
