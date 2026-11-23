@@ -1,0 +1,36 @@
+name: M541 Pending Expiry Cross-Mode Rollback
+on:
+  push:
+    branches:
+      - feat/work-m541-pending-expiry-cross-mode-rollback-20261122
+    paths:
+      - 'tests/pendingExpiryCrossModeRollback.test.cjs'
+      - 'docs/evidence/m541-pending-expiry-cross-mode-rollback.json'
+      - '.github/workflows/m541-pending-expiry-cross-mode-rollback.yml'
+  pull_request:
+    paths:
+      - 'tests/pendingExpiryCrossModeRollback.test.cjs'
+      - 'docs/evidence/m541-pending-expiry-cross-mode-rollback.json'
+      - '.github/workflows/m541-pending-expiry-cross-mode-rollback.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pending-expiry-cross-mode-rollback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m541-pending-expiry-cross-mode-rollback.json', 'utf8'))"
+      - name: Run pending expiry cross-mode rollback tests
+        run: node --test tests/pendingExpiryCrossModeRollback.test.cjs
