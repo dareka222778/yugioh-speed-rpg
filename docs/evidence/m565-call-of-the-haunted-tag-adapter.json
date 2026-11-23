@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "mission": "M565",
+  "card": {
+    "name": "Call of the Haunted",
+    "portugueseName": "Chamado dos Assombrados",
+    "passcode": "97077563",
+    "konamiDatabaseId": 4989,
+    "type": "Continuous Trap",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4989&ope=2&request_locale=en",
+    "officialText": "Activate this card by targeting 1 monster in your GY; Special Summon that target in Attack Position. When this card leaves the field, destroy that monster. When that monster is destroyed, destroy this card.",
+    "firstTcgPrinting": {
+      "date": "2002-10-20",
+      "set": "PSV-012",
+      "product": "Pharaoh's Servant"
+    }
+  },
+  "implementation": {
+    "file": "src/callOfTheHauntedTagAdapter.ts",
+    "kind": "isolated pure TagDuel adapter",
+    "behavior": [
+      "Continuous Trap must be face-down in backrow from a prior turn; activation supports own Main/Battle priority or explicit response chain",
+      "targets one eligible monster from the activating team's shared Graveyard with TargetBinding zone+epoch",
+      "successful resolution Special Summons face-up Attack without changing physical UID/owner and records equippedTo link",
+      "if Call of the Haunted leaves field for grave/banished/hand, its linked monster is destroyed by UID even after control change",
+      "if the linked monster leaves field by destruction/bounce/banish, the Trap is sent to its physical owner's GY and link is cleared",
+      "inactive partner physical ownership routes Trap/monster to the correct shared GY, banished zone or reserve hand",
+      "negation, invalid target or full Monster Zone does not summon; source is sent to GY",
+      "activationId and equipped link survive JSON; inventory conserved"
+    ],
+    "rules": {
+      "mainDeckConstruction": "20–30",
+      "handLimit": 6,
+      "handDiscard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "tests": {
+    "file": "tests/callOfTheHauntedTagAdapter.test.cjs",
+    "expectedScenarios": 31
+  },
+  "integration": {
+    "resolverV9": false,
+    "catalog": false,
+    "metadata": false,
+    "certifications": false,
+    "allowlist": false,
+    "discordCommand": false
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentPlayerDataChanged": false,
+    "liveDiscord": false
+  },
+  "limitations": [
+    "Adapter empilhado sobre M564 e ainda não integrado ao resolver v9/catalog registration; carta não certificada nem disponível em decks.",
+    "Testes offline; sem gateway/guild Discord real. O engine central deve chamar os dois handlers de saída de vínculo quando cartas deixam o campo.",
+    "A janela de resposta é validada por estado explícito; ordenação completa da corrente continua responsabilidade do resolver central."
+  ]
+}
