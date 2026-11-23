@@ -175,6 +175,9 @@ test('Magic Drain opens only for an opponent Spell activation and exposes no tar
   const f=fixture(MAGIC_DRAIN_ID,'magic-eligibility');
   const actions=spellCounterTrapActions(f.state,lookup);
   assert.deepEqual(actions,[{kind:'trap',card:f.trap.uid,target:''}]);
+  const actionPayload=JSON.stringify(actions);
+  assert.ok(!actionPayload.includes(f.opponentDiscard.uid));
+  assert.ok(!actionPayload.includes(f.opponentPartnerDecoy.uid));
   const wrongKind=structuredClone(f.state);
   wrongKind.core.pending.kind='trap';
   assert.deepEqual(spellCounterTrapActions(wrongKind,lookup),[]);
@@ -207,6 +210,8 @@ test('Magic Drain lets the active opposing representative discard a Spell to neg
   });
   const d=resolved.session.duel;
   assert.equal(resolved.result.opponentPaidToNegate,true);
+  assert.ok(!JSON.stringify(resolved.result).includes(f.opponentDiscard.uid),
+    'the public resolution result must not expose the opponent private discard UID');
   assert.equal(resolved.result.effectApplied,false);
   assert.equal(resolved.result.targetActivationNegated,false);
   assert.equal(d.core.pendingNegated,false);
@@ -277,6 +282,7 @@ test('Cursed Seal pays its Spell discard at activation from the active represent
   assert.equal(resolved.result.targetActivationNegated,true);
   assert.equal(resolved.result.effectApplied,true);
   assert.equal(resolved.result.lockedSpellName,'Pot of Greed');
+  assert.ok(!('costUid' in resolved.result),'the private activation-cost UID is not returned publicly');
   assert.ok(grave(d,0,f.pot));
   assert.ok(grave(d,1,f.trap));
   assert.equal(canTeamActivateSpell(resolved.session,0,POT,lookup),false,
