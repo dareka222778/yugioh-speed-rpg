@@ -2,7 +2,7 @@
   "mission": "M538",
   "runId": "work-20261122T215907-0300-M538",
   "owner": "Work principal",
-  "title": "Cross-process 1v1 vs TagDuel acceptance lock race",
+  "title": "Five cross-process 1v1 vs TagDuel acceptance lock races",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "5c7b9f179afae742dbfeda1e21b4685685bbb513",
   "branch": "feat/work-m538-cross-mode-lock-race-20261122",
@@ -15,20 +15,22 @@
   ],
   "design": {
     "isolation": "temporary SQLite file seeded by the parent process; parent connection closed before workers start",
-    "concurrency": "two independent Node child processes, each with its own better-sqlite3 connection; both workers signal ready before the parent releases both Accept transactions",
+    "concurrency": "Five independent lobbies, tested sequentially; each race uses two independent Node child processes with separate better-sqlite3 connections. Both workers signal ready and receive the same scheduled startAt.",
     "operations": [
       "duelStore.acceptChallenge (1v1)",
       "tagStore.acceptTag (2v2)"
     ],
-    "invariant": "exactly one acceptance and exactly one invitee lock (duel_members XOR tag_members)"
+    "invariant": "exactly one acceptance and exactly one invitee lock (duel_members XOR tag_members)",
+    "iterations": 5
   },
   "assertions": [
-    "both invitations are pending and the invitee initially owns neither lock",
-    "exactly one process commits its acceptance",
+    "five independent races each begin with both invitations pending and no invitee lock",
+    "both workers in each race start from the same scheduled timestamp",
+    "exactly one process commits its acceptance in every race",
     "the losing transaction fails closed with a cross-mode conflict or SQLite busy error",
-    "persisted duel/lobby state agrees with the winning lock table",
-    "original host and duel-creator locks remain intact",
-    "players, player_cards, starter_grants, decks and deck_cards are byte-equivalent before and after"
+    "persisted duel/lobby state agrees with the winning lock table in all five races",
+    "original host and duel-creator locks remain intact in all five races",
+    "players, player_cards, starter_grants, decks and deck_cards remain byte-equivalent before and after all races"
   ],
   "ownerRules": {
     "mainDeck": "20–30",
@@ -60,5 +62,15 @@
     "Process-level concurrency against temporary SQLite; no production database.",
     "Uses the real duelStore/tagStore acceptance transactions, not a live Discord gateway.",
     "The test proves lock exclusivity; it does not claim a friendly user-facing retry message for SQLITE_BUSY."
-  ]
+  ],
+  "testExecution": {
+    "focused": "pending on updated five-race HEAD",
+    "check": "pending",
+    "build": "pending",
+    "customWorkflow": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending; expected 969/1000",
+    "engineValidation": "pending",
+    "extendedSoak": "not applicable to this test-only PR"
+  }
 }
