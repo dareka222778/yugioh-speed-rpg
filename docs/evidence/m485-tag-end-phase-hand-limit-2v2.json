@@ -1,0 +1,44 @@
+{
+  "mission": "M485",
+  "title": "TagDuel 2v2 End Phase six-card hand limit and physical discard ownership",
+  "branch": "feat/work-m485-tag-end-phase-hand-limit-2v2-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "8b9fde02ee56d21ac038bd73570868a5875d3672",
+  "testFile": "tests/tagEndPhaseHandLimit2v2.test.cjs",
+  "testCount": 2,
+  "scenarios": [
+    "A classic four-seat TagDuel begins with seat 0 active. Three real cards are moved from that physical seat's Deck into its hand to create a seven-card End Phase fixture without duplicating UIDs. End Turn must enter discard phase before seat 1 draws; after JSON restore, only seat 0 can discard; the hand becomes six and seat 1 draws exactly one card when the turn advances.",
+    "A seven-card hand during Main Phase does not expose discard actions; the six-card check is deferred until End Phase rather than applied at draw time."
+  ],
+  "invariants": [
+    "RULES_PROFILE handLimit remains six.",
+    "Discard is performed by the physical owner of the active hand, not their inactive teammate.",
+    "The next physical seat's top Deck card is untouched until the outgoing End Phase discard completes.",
+    "After End Phase, the outgoing hand has six, the next seat has one additional card, and its Deck has decreased by one.",
+    "The inactive partner's private hand remains unchanged.",
+    "JSON restoration during discard preserves the active decision owner.",
+    "The full physical UID-to-card-ID inventory is conserved."
+  ],
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "limits": [
+    "Tests use the real compiled TagDuel and duel engine modules, with an in-memory state fixture.",
+    "The seven-card condition is created by moving existing physical cards from the Deck, not by granting inventory.",
+    "No runtime, resolver, catalog manifest, allowlist, persistent database or player data is modified.",
+    "This verifies a rules invariant but does not certify a new card behavior.",
+    "No live Discord API session is performed."
+  ],
+  "command": "npm run check && npm run build && node --test tests/tagEndPhaseHandLimit2v2.test.cjs",
+  "ciStatus": "pending"
+}
