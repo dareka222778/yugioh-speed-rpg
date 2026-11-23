@@ -1,0 +1,74 @@
+{
+  "mission": "M552",
+  "runId": "work-20261123T035000-0300-M552",
+  "owner": "Work principal",
+  "title": "Cross-process race through real TagDuel Discord Accept and Cancel handlers",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "dbe1fb281841a41fa4a3018fab0e7e4dc1bd8b80",
+  "branch": "feat/work-m552-tag-discord-accept-cancel-race-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "priority": "P1 — the fourth-seat Accept and host Cancel components must not both commit when delivered concurrently by separate processes; the terminal state and four physical locks must agree.",
+  "design": {
+    "isolation": "Temporary SQLite database with independent Node processes and separate better-sqlite3 connections; parent connection closed before the races.",
+    "concurrency": "Three synchronized races through handleTagComponent: tag:accept for the fourth seat versus tag:cancel for the host, both using the same revision.",
+    "clock": "Deterministic non-expired time; both actions begin from the same lobby snapshot and revision.",
+    "operations": [
+      "tagInteraction.handleTagComponent",
+      "tagStore.acceptTag",
+      "tagStore.quitTag"
+    ]
+  },
+  "assertions": [
+    "exactly one real component handler commits and the stale competitor fails closed",
+    "Accept winner yields a valid four-seat TagDuel, four accepted members and four physical tag locks",
+    "Cancel winner preserves the three earlier acceptances, produces cancelled with null state and releases all four locks",
+    "all public payloads are validated with validateDiscordPayload before handler completion",
+    "players, player_cards, starter_grants, decks and deck_cards remain unchanged",
+    "physical UIDs remain unique when the duel starts"
+  ],
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventory": {
+    "granted": 0,
+    "mutated": false
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "persistentDatabaseUsed": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Handlers Discord.js reais executados offline com interações falsas; sem token, gateway ou guild real.",
+    "Relógio controlado e SQLite temporário; não mede latência de produção.",
+    "Nenhuma alteração de runtime, comando, catálogo ou certificação."
+  ],
+  "testExecution": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "customWorkflow": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending; baseline 969/1000",
+    "engineValidation": "pending"
+  }
+}
