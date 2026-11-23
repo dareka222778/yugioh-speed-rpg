@@ -42,7 +42,7 @@
   },
   "tests": {
     "file": "tests/autonomousActionUnitTagAdapter.test.cjs",
-    "expectedScenarios": 26,
+    "expectedScenarios": 27,
     "scenarios": [
       "1500 LP activation cost",
       "insufficient LP",
@@ -71,7 +71,9 @@
       "inventory conservation/no grants",
       "input immutability",
       "malformed/duplicate UIDs"
-    ]
+    ],
+    "verifiedScenarios": 27,
+    "result": "27/27 passed in GitHub Actions run 45219108599"
   },
   "catalog": {
     "certifiedAtStart": 969,
