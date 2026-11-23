@@ -204,7 +204,7 @@ test('exactly five cards in every physical Deck is a successful draw',()=>{
 });
 test('one physical seat with fewer than five cards loses for its team',()=>{
   const state=makeState({ownerSeat:2,sourceUid:'m2:fiber-jar',deckCounts:[4,8,8,8],handCounts:[0,0,0,0]});
-  const result=resolveFiberJarFlip(state,planFiberJarFlip(state,event(state),lookup),false,zeroRandom,lookup);
+  const result=resolveFiberJarFlip(state,planFiberJarFlip(state,event(state,'m2:fiber-jar',0),lookup),false,zeroRandom,lookup);
   assert.deepEqual(result.deckOutSeats,[0]);
   assert.deepEqual(result.deckOutTeams,[0]);
   assert.equal(result.state.core.winner,'tag-team-1');
@@ -219,7 +219,7 @@ test('either physical player deck-out causes that team to lose',()=>{
 });
 test('simultaneous deck-out on both teams produces a draw',()=>{
   const state=makeState({ownerSeat:2,sourceUid:'m2:fiber-jar',deckCounts:[4,8,8,3],handCounts:[0,0,0,0]});
-  const result=resolveFiberJarFlip(state,planFiberJarFlip(state,event(state),lookup),false,zeroRandom,lookup);
+  const result=resolveFiberJarFlip(state,planFiberJarFlip(state,event(state,'m2:fiber-jar',0),lookup),false,zeroRandom,lookup);
   assert.deepEqual(result.deckOutTeams,[0,1]);
   assert.equal(result.state.core.winner,null);
   assert.equal(result.state.core.phase,'finished');

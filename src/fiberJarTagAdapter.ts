@@ -217,9 +217,9 @@ export function planFiberJarFlip(
     (event.controllerTeam!==0&&event.controllerTeam!==1)||
     !Number.isInteger(event.activeSeat)||event.activeSeat<0||event.activeSeat>3)
     throw Error('Fiber Jar exige um FLIP real e activationId único.');
-  const source=sourceContext(state,event,lookup);
   if(state.fiberJar?.resolvedActivations?.[event.activationId])
     throw Error('Esta ativação Fiber Jar já foi resolvida.');
+  const source=sourceContext(state,event,lookup);
   return {
     kind:'fiber-jar-flip',sourceUid:event.sourceUid,cardId:FIBER_JAR_ID,
     ownerSeat:source.ownerSeat,controllerTeam:source.controllerTeam,
