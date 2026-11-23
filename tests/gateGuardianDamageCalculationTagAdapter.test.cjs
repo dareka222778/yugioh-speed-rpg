@@ -127,15 +127,15 @@ test('current controller team, not physical owner seat, determines the defending
   assert.equal(result.attackerTeam,0);
 });
 
-test('all four physical seats work across active-seat rotations',()=>{
+test('all four physical seats work across active-seat rotations and stolen control',()=>{
   const rotations=[[0,1],[2,1],[0,3],[2,3]];
-  for(let seat=0;seat<4;seat++)for(const active of rotations){
-    const attackerTeam=seat%2,controllerTeam=1-attackerTeam;
-    const sourceSeat=controllerTeam===0?(seat%2?0:2):(seat%2?1:3);
-    const state=makeState({attackerTeam,sourceUid:'m'+sourceSeat+':source',active,sourceId:ids[seat]});
+  for(let sourceSeat=0;sourceSeat<4;sourceSeat++)for(let attackerTeam=0;attackerTeam<2;attackerTeam++)for(const active of rotations){
+    const controllerTeam=1-attackerTeam;
+    const state=makeState({attackerTeam,sourceUid:'m'+sourceSeat+':source',active,sourceId:ids[sourceSeat]});
     const result=planGateGuardianAttackReduction(state,'m'+sourceSeat+':source','epoch-a',{},noNegation);
     assert.ok(result);
     assert.equal(result.controllerTeam,controllerTeam);
+    assert.equal(result.attackerTeam,attackerTeam);
   }
 });
 
