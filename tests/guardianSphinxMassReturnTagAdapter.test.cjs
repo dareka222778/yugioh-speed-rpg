@@ -183,7 +183,7 @@ test('duplicate target UID fails closed',()=>{
 });
 
 test('more than three opposing Monster Zones are rejected',()=>{
-  const state=makeState();addMonster(state,1,'m1:a');addMonster(state,1,'m1:b');addMonster(state,1,'m1:c');
+  const state=makeState();addMonster(state,1,'m1:a');addMonster(state,1,'m1:b');addMonster(state,1,'m1:c');addMonster(state,1,'m1:d');
   assert.throws(()=>planGuardianSphinxFlipSummon(state,event(state,'m0:guardian'),'m0:guardian',lookup),/Estado TagDuel/);
 });
 
