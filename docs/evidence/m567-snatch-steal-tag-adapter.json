@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "mission": "M567",
+  "card": {
+    "name": "Snatch Steal",
+    "portugueseName": "Roubo Precipitado",
+    "passcode": "45986603",
+    "konamiDatabaseId": 4898,
+    "type": "Equip Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4898&ope=2",
+    "officialText": "Equip only to an opponent's monster. Take control of the equipped monster. Once per turn, during your opponent's Standby Phase: They gain 1000 LP.",
+    "firstTcgPrinting": {
+      "date": "2002-09-16",
+      "set": "MRL-036",
+      "product": "Magic Ruler"
+    }
+  },
+  "implementation": {
+    "file": "src/snatchStealTagAdapter.ts",
+    "kind": "isolated pure TagDuel adapter",
+    "behavior": [
+      "Equip Spell from active physical representative hand in open Main Phase; face-up opponent monster target",
+      "no LP cost at activation; control transfer occurs only on resolution",
+      "preserve physical UID, owner, position and face-up state; no summon flag is added",
+      "when Equip leaves field, return monster to the controller it had immediately before the steal, or to the latest still-active Snatch Steal controller",
+      "if destination team has no Monster Zone when control returns, destroy monster to physical owner's GY and clear all attached Snatch Steals",
+      "if equipped monster leaves field, send every linked Snatch Steal to its physical owner's GY",
+      "classic 2004 face-down handling: send attached Equip Spells to GY while leaving monster under current controller",
+      "each active copy grants 1000 LP to opponent team during that team's Standby Phase once per turn, even if another effect has returned control",
+      "replay protection, sequence ordering for multiple Snatch Steals, inventory conservation and immutable input"
+    ]
+  },
+  "rules": {
+    "deckConstruction": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "catalog": {
+    "certifiedAtStart": 969,
+    "target": 1000,
+    "remainingAtStart": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "playerDatabaseWrites": 0,
+    "liveDiscordWrites": 0,
+    "catalogChanged": false,
+    "metadataChanged": false,
+    "certificationsChanged": false,
+    "manifestChanged": false,
+    "resolverChanged": false
+  },
+  "limitations": [
+    "Adapter ainda não está registrado no resolver v9/catálogo; não certifica nem torna Snatch Steal jogável em produção.",
+    "Standby Phase e retorno de controle foram exercitados em TagDuel temporário; integração com scheduler/handler real ainda depende do resolver.",
+    "Regra de face-down segue ruling TCG clássico de 2004; deve ser confirmada contra a política histórica final do projeto antes de certificação."
+  ]
+}
