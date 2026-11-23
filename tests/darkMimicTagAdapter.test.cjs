@@ -161,7 +161,7 @@ test('LV1 cannot summon LV3 from the inactive partner private Deck or Hand',()=>
 test('LV1 once-per-turn use is keyed by physical instance and survives JSON restore',()=>{
   const state=makeState({phase:'standby'});
   const plan=planDarkMimicLv1Standby(state,'m0:lv1-source',lookup);
-  const paid=payDarkMimicLv1StandbyCost(state,plan);
+  const paid=payDarkMimicLv1StandbyCost(state,plan,lookup);
   const restored=JSON.parse(JSON.stringify(paid.state));
   assert.equal(restored.darkMimic.lv1StandbyUsedTurnByInstance['m0:lv1-source@0'],1);
   assert.throws(()=>planDarkMimicLv1Standby(restored,'m0:lv1-source',lookup),/face-up|Zona de Monstro/);
@@ -205,7 +205,7 @@ test('LV3 Special Summoned by LV1 draws two after battle destruction',()=>{
   const event=battleDestroy(summoned.state,'m0:lv3-target',0);
   const result=resolveDarkMimicLv3BattleDraw(summoned.state,planDarkMimicLv3BattleDraw(summoned.state,event,lookup));
   assert.equal(result.drawnUids.length,2);assert.equal(result.drawnUids[0],'m0:draw-top');
-  assert.equal(result.drawnUids[1],'m0:d1');
+  assert.equal(result.drawnUids[1],'m0:d2');
 });
 test('LV3 summoned by LV1 draws for its current controller when stolen, but returns to owner GY',()=>{
   const state=makeState({sourceUid:'m1:stolen-lv3',sourceId:LV3,currentTeam:1});

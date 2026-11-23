@@ -184,6 +184,9 @@ export function planDarkMimicLv1Standby(
     throw Error('O efeito de Standby de Dark Mimic LV1 exige a Fase de Apoio sem cadeia pendente.');
   if(player.monsters.length>=3)
     throw Error('Não há Zona de Monstro livre para a Invocação-Especial.');
+  const targetMetadata=lookup(DARK_MIMIC_LV3_ID);
+  if(!targetMetadata||targetMetadata.kind!=='monster'||targetMetadata.monsterType!=='effect')
+    throw Error('Dark Mimic LV3 não está admitido como monstro de efeito.');
   if(![...player.hand,...player.deck].some(card=>card.id===DARK_MIMIC_LV3_ID))
     throw Error('Não há Dark Mimic LV3 na mão/Deck do representante ativo.');
   if(state.darkMimic?.lv1StandbyUsedTurnByInstance?.[source.instanceKey]===state.core.turn)
@@ -307,6 +310,7 @@ export function resolveDarkMimicLv3BattleDraw(
   assertState(input);
   validateTeam(plan?.controllerTeam);
   if(!plan||plan.kind!=='dark-mimic-lv3-battle-draw'||!plan.eventId||plan.turn!==input.core.turn||
+    !Number.isSafeInteger(plan.sourceEpoch)||plan.sourceEpoch<0||
     plan.sourceInstanceKey!==plan.sourceUid+'@'+String(plan.sourceEpoch)||
     input.active[plan.controllerTeam]!==plan.activeSeat||
     plan.sourceOwnerSeat!==physicalSeat(plan.sourceUid)||plan.sourceOwnerTeam!==plan.sourceOwnerSeat%2||
