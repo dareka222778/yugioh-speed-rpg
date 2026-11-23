@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "mission": "M572",
+  "status": "behavior-tested-isolated-adapter",
+  "historicalCutoff": "2004-10-01",
+  "cards": [
+    {
+      "id": "59344077",
+      "name": "Magic Drain",
+      "kind": "Counter Trap",
+      "konamiCid": 5133,
+      "firstTcgRelease": "2002-10-20",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5133&ope=2&request_locale=en",
+      "officialBehavior": "When your opponent activates a Spell Card: They can discard 1 Spell to negate this card's effect, otherwise negate the activation of their Spell Card, and if you do, destroy it.",
+      "adapterBehavior": [
+        "Only opens for an opponent Spell activation in the current response window.",
+        "At resolution, the active physical representative who activated the Spell may optionally discard a Spell from their own private hand to negate Magic Drain's effect.",
+        "If no Spell is discarded, the target Spell activation is negated and the activated card is moved to its physical owner's team Graveyard.",
+        "A discarded Spell is moved to its physical owner's team Graveyard; the inactive partner's hand is never searched or consumed."
+      ]
+    },
+    {
+      "id": "58851034",
+      "name": "Cursed Seal of the Forbidden Spell",
+      "kind": "Counter Trap",
+      "konamiCid": 5853,
+      "firstTcgRelease": "2004-03-01",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5853&ope=2&request_locale=en",
+      "officialBehavior": "When a Spell Card is activated: Discard 1 Spell; negate the activation, and if you do, destroy it, and if you do that, your opponent cannot activate Spell Cards with that name for the rest of this Duel.",
+      "adapterBehavior": [
+        "Requires a Spell discard as an activation cost from the active physical representative's private hand, even when the Set Trap belongs to the inactive partner.",
+        "Negates the current Spell activation and attempts to destroy that exact physical card.",
+        "Adds a duel-session name lock for the opposing team only after both activation negation and destruction succeed.",
+        "The name lock is serialized in the adapter session and checked through canTeamActivateSpell."
+      ]
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/spellCounterTrapTagAdapter.ts",
+      "tests/spellCounterTrapTagAdapter.test.cjs",
+      "docs/evidence/m572-spell-counter-traps-tag-adapter.json",
+      ".github/workflows/m572-spell-counter-traps-tag-adapter.yml"
+    ],
+    "runtimeIntegration": false,
+    "resolverRegistration": false,
+    "catalogRegistration": false,
+    "metadataOrCertificationChanges": false,
+    "allowlistChanges": false,
+    "inventoryGrants": 0,
+    "persistentPlayerDataChanges": false
+  },
+  "tests": [
+    "unadmitted cards remain unavailable",
+    "Magic Drain response eligibility and Set-turn restrictions",
+    "Magic Drain optional opponent discard from the active physical hand",
+    "Magic Drain negation/destruction when the opponent declines to discard",
+    "invalid partner/non-Spell discard rejection without input mutation",
+    "Cursed Seal activation cost from the active representative, not the Set partner",
+    "Cursed Seal cost availability and physical-hand ownership",
+    "Cursed Seal cost is not refunded when its activation is negated",
+    "Cursed Seal chain-link negation and persistent name lock",
+    "Cursed Seal name lock requires successful destruction",
+    "duplicate activation and invalid-resolution rejection"
+  ],
+  "invariants": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "extraDeckPerPhysicalSeat": 5,
+    "physicalUids": "preserved",
+    "graveyardOwnership": "physical owner team",
+    "privateHands": "not enumerated or leaked by adapter actions"
+  },
+  "limitations": [
+    "The adapter is isolated and is not wired into the authoritative resolver, tagActions, tagInteraction, Discord commands, or catalog v9.",
+    "The duel-long Cursed Seal name lock is persisted in the adapter session only; central duel persistence must be integrated after the M61 handoff.",
+    "Tests use the local TagDuel state machine and fixtures; no live Discord gateway or guild was contacted.",
+    "No card certification or inventory availability is claimed."
+  ],
+  "certificationAtImplementation": {
+    "engineV9Certified": 969,
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "handoff": {
+    "pullRequest": 17,
+    "commentId": 7113961920,
+    "status": "awaiting-explicit-release",
+    "protectedFiles": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts"
+    ]
+  }
+}
