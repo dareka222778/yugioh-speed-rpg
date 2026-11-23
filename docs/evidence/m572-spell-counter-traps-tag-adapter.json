@@ -48,7 +48,8 @@
     "metadataOrCertificationChanges": false,
     "allowlistChanges": false,
     "inventoryGrants": 0,
-    "persistentPlayerDataChanges": false
+    "persistentPlayerDataChanges": false,
+    "privateHandUidDisclosure": false
   },
   "tests": [
     "unadmitted cards remain unavailable",
@@ -61,7 +62,9 @@
     "Cursed Seal cost is not refunded when its activation is negated",
     "Cursed Seal chain-link negation and persistent name lock",
     "Cursed Seal name lock requires successful destruction",
-    "duplicate activation and invalid-resolution rejection"
+    "duplicate activation and invalid-resolution rejection",
+    "Cursed Seal removes a negated Field Spell from the separate Field Zone",
+    "private hand UIDs are omitted from action and resolution payloads"
   ],
   "invariants": {
     "mainDeckPerPhysicalSeat": "20–30",
