@@ -39,7 +39,8 @@
     "stale or mismatched FLIP event rejection",
     "physical UID conservation and immutable input",
     "selected card must still be in Deck at resolution",
-    "optional hand choice does not replace default Deck-top placement"
+    "optional hand choice does not replace default Deck-top placement",
+    "invalid destination rejection and optional top-of-deck choice when Necrovalley is present"
   ],
   "certification": {
     "newCards": 0,
@@ -65,5 +66,6 @@
     "Adapter tests use structural TagDuel fixtures because An Owl of Luck is not yet registered in the shared playable-card catalog.",
     "The helper is not wired into FLIP resolution or the resolver archive; no certification is claimed.",
     "Offline adapter tests do not replace a full 2v2 duel or live Discord validation."
-  ]
+  ],
+  "testCount": 16
 }
