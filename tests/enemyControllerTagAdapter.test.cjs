@@ -257,7 +257,7 @@ test('quatro rotações preservam representantes e UIDs físicos',()=>{
     const state=makeState({cursor,sourceTeam:cursor%2,sourceSeat:cursor});
     const targetUid=cursor%2===0?'m1:red-monster':'m0:blue-monster';
     const activated=activate(state,'rotation-'+cursor,'change-position',targetUid);
-    const result=resolveEnemyControllerResolution(activated.state,resolution(activated.state,'rotation-'+cursor'),false,lookup);
+    const result=resolveEnemyControllerResolution(activated.state,resolution(activated.state,'rotation-'+cursor),false,lookup);
     assert.equal(result.status,'position-changed');
     assert.equal(result.state.active[cursor%2],cursor);
   }
