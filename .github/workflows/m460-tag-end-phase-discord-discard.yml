@@ -1,0 +1,36 @@
+name: M460 TagDuel End Phase discard Discord integration
+on:
+  push:
+    branches:
+      - feat/work-m460-tag-end-phase-discord-discard-20261121
+    paths:
+      - 'tests/tagDuelEndPhaseDiscardDiscord2v2.test.cjs'
+      - 'docs/evidence/m460-tag-end-phase-discord-discard.json'
+      - '.github/workflows/m460-tag-end-phase-discord-discard.yml'
+  pull_request:
+    paths:
+      - 'tests/tagDuelEndPhaseDiscardDiscord2v2.test.cjs'
+      - 'docs/evidence/m460-tag-end-phase-discord-discard.json'
+      - '.github/workflows/m460-tag-end-phase-discord-discard.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tagduel-end-phase-discard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m460-tag-end-phase-discord-discard.json', 'utf8'))"
+      - name: Run TagDuel End Phase discard integration
+        run: node --test tests/tagDuelEndPhaseDiscardDiscord2v2.test.cjs
