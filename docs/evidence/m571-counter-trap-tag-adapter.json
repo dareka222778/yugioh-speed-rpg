@@ -44,7 +44,7 @@
     "mode": "isolated; not wired into tagActions, tagInteraction or Discord",
     "rootPendingHfd": "separate pending EFFECT-negation flag; does not misuse pendingNegated (activation negation)",
     "physicalOwnership": "UID m0..m3 preserved; partner can activate shared backrow; cards return to physical owner's team Graveyard",
-    "inventory": "zone movement only; before/after UID+ID map invariant; fixture replaces a deck entry and creates no live inventory"
+    "inventory": "Only zone movement; before/after UID+ID map invariant. The isolated HFD fixture opens a real response window with an already-admitted Magic Jammer, then swaps only that fixture card's ID to Gryphon Wing; the Trap Jammer fixture keeps a separate Magic Jammer set. No live inventory or player data is granted."
   },
   "invariants": {
     "mainDeck": "20–30 per physical seat",
@@ -84,5 +84,8 @@
     "Root-pending HFD effect negation needs a distinct pending-effect-negated field in the central engine before production integration.",
     "No live Discord gateway/session used; tests exercise actual TagDuel HFD and Mirror Force transitions plus isolated response adapter.",
     "No merge/deploy authorized."
+  ],
+  "tests": [
+    "HFD response window is held open by a certified Magic Jammer before the fixture substitutes Gryphon Wing"
   ]
 }

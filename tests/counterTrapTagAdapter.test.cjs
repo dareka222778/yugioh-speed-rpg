@@ -2,7 +2,7 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');const {getPlayableCard}=require('../dist/effectRegistry');
 const {GRYPHON_WING_ID,TRAP_JAMMER_ID,HARPIE_FEATHER_DUSTER_ID,createCounterTrapSession,counterTrapActions,activateCounterTrap,resolveCounterTrap}=require('../dist/counterTrapTagAdapter');
-const HFD=HARPIE_FEATHER_DUSTER_ID,MIRROR='44095762',TORRENTIAL='53582587',SOGEN='86318356',MOUNTAIN='50913601';
+const HFD=HARPIE_FEATHER_DUSTER_ID,MIRROR='44095762',TORRENTIAL='53582587',MAGIC_JAMMER='77414722',SOGEN='86318356',MOUNTAIN='50913601';
 const lookup=id=>{const c=getPlayableCard(id);return c?{kind:c.kind}:undefined;};
 const NORMALS=[...new Set(tag.tagNormalCardIds)];assert.ok(NORMALS.length>=20);
 function member(seat){return 'm571-seat-'+seat;}
@@ -19,10 +19,13 @@ function hands(s){const out=[];for(const p of s.core.players)for(const c of p.ha
 function grave(s,t,c){return s.core.players[t].grave.some(x=>x.uid===c.uid&&x.id===c.id);}
 function action(s,seat,predicate,label){const a=tag.tagActions(s,member(seat)).find(predicate);assert.ok(a,'seat '+seat+' must have '+label+' in '+s.core.phase);return a;}
 function hfdFixture(){
- const s=create(1,{1:[HFD]},'gryphon');s.core.turn=3;const h=hand(s,1,HFD);
+ const s=create(1,{1:[HFD]},'gryphon');s.core.turn=3;
+ const magic=backrow(s,0,MAGIC_JAMMER,'gryphon-source-magic-jammer');
+ const h=hand(s,1,HFD);
  const pending=tag.stepTagDuel(s,member(1),action(s,1,a=>a.card===h.uid,'HFD activation'));
  assert.equal(pending.core.phase,'response');assert.equal(pending.core.pending.kind,'spell');assert.equal(pending.core.pending.id,HFD);assert.equal(pending.core.pending.actor,1);assert.equal(pending.core.priority,0);tag.assertTagDuel(pending);
- const g=backrow(pending,0,GRYPHON_WING_ID,'gryphon'),ally=backrow(pending,2,MIRROR,'ally-mirror'),opp=backrow(pending,3,TORRENTIAL,'opp-torrential');
+ const g=pending.core.players[0].backrow.find(c=>c.uid===magic.uid);assert.ok(g);g.id=GRYPHON_WING_ID;
+ const ally=backrow(pending,2,MIRROR,'ally-mirror'),opp=backrow(pending,3,TORRENTIAL,'opp-torrential');
  const ownField=field(pending,0,MOUNTAIN,'own-field'),oppField=field(pending,3,SOGEN,'opp-field');
  return {state:pending,hfd:h,gryphon:g,ally,opp,ownField,oppField};
 }
