@@ -1,0 +1,96 @@
+{
+  "mission": "M559",
+  "runId": "work-20261123T090002-0300-M559",
+  "owner": "Work principal",
+  "sharedHeadAtReservation": "76b517c8b726d82f4d26bcd539776658c0d1951c",
+  "card": {
+    "name": "Gilasaurus",
+    "passcode": "45894482",
+    "konamiDatabaseId": 5256,
+    "attribute": "EARTH",
+    "level": 3,
+    "race": "Dinosaur",
+    "atk": 1400,
+    "def": 400,
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5256&ope=2&request_locale=en",
+    "officialText": "You can Special Summon this card (from your hand). If Summoned this way: Activate this effect; your opponent can Special Summon 1 monster from their GY.",
+    "firstTcgPrinting": {
+      "date": "2003-03-01",
+      "set": "LON-071",
+      "product": "Labyrinth of Nightmare"
+    }
+  },
+  "design": {
+    "scope": "Isolated TagDuel adapter/test/evidence/workflow; no central resolver or catalog registration.",
+    "selfSummon": "Only the Gilasaurus self-Special Summon procedure from the active physical representative's hand during an open Main Phase; Normal Summon and other-effect Special Summon events are rejected. It does not consume the Normal Summon.",
+    "opponentChoice": "The opponent may decline or choose one eligible monster from the opponent team's shared Graveyard at resolution time; the choice is not bound as a target at activation.",
+    "eligibility": "Only actual monsters in the opposing team's Graveyard; tokens and non-monsters are excluded. Fusion/Ritual monsters require properlySummoned=true.",
+    "ownership": "The revived monster is controlled by the opponent team but its physical owner seat is derived from the UID and retained, including an inactive partner's card.",
+    "trigger": "A durable pending activation record is stored in JSON. The trigger resolves even if Gilasaurus leaves the field or changes controller after activation.",
+    "replay": "activationId is unique, persisted while pending, and moved to a resolved receipt on decline, negation, no-legal-monster or successful revival.",
+    "capacity": "Three shared Monster Zones and three Spell/Trap Zones per team; Field Zone is separate; Extra Deck remains at five. A full opposing Monster Zone produces no legal revival.",
+    "hand": "No hand-limit truncation or discard is performed; any over-six hand remains for the End Phase.",
+    "deck": "Deck arrays are not read or modified by this effect. The 20–30 rule remains a deck-construction constraint, not a minimum for an in-progress duel.",
+    "ownerRules": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "testCases": [
+    "self-Special Summon from active physical hand; face-up Attack Position; Normal Summon counter unchanged",
+    "active representative seat 2/3 and physical owner preservation",
+    "Normal Summon and another effect's Special Summon rejected",
+    "inactive partner reserve hand cannot be used as active representative hand",
+    "Main Phase/open-state, pending decision, chain and own Monster Zone capacity guards",
+    "opponent may decline with and without a legal Graveyard monster",
+    "opponent choice is enumerated at resolution time, not targeted on activation",
+    "revive one eligible monster from opponent team Graveyard in face-up Attack Position",
+    "inactive partner's Graveyard card is revived with original physical owner seat",
+    "card physically owned by the other team is not eligible",
+    "non-monster, token and improperly summoned Fusion/Ritual cards excluded",
+    "properly summoned Fusion/Ritual cards remain eligible",
+    "opposing full field, 3+3 zones, separate Field Zone and Extra Deck 5",
+    "over-six hand is not discarded before End Phase",
+    "active and reserve Decks remain unchanged",
+    "input immutability and physical UID conservation across both movements",
+    "trigger resolves after source leaves field or is stolen",
+    "negation consumes activation without moving Graveyard/field cards",
+    "JSON save/restore preserves pending trigger and replay receipt",
+    "activationId reuse rejected while pending and after resolution",
+    "multiple Gilasaurus copies may self-Special Summon in one turn with distinct IDs",
+    "malformed/duplicated/wrong-seat/stale identities rejected",
+    "selected Graveyard card must remain available at resolution",
+    "hands, Decks and Field Zones remain unchanged by opponent choice"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Adapter-only preparation. Gilasaurus is absent from cardMetadata, cardCatalog, monsterEffects and cardCertifications on the shared HEAD. No M61 handoff was granted; resolver/catalog/manifest/allowlist were not changed."
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentDatabaseTouched": false,
+    "playerDataTouched": false,
+    "productionDatabaseTouched": false,
+    "discordTokenUsed": false,
+    "liveDiscordUsed": false,
+    "centralResolverChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "limitations": [
+    "Adapter is not registered in the central monster-effect resolver; Gilasaurus remains unavailable for normal deck admission and uncertified.",
+    "The 24 focused tests use offline TagDuel fixtures and injected card metadata; no live Discord gateway or guild was used.",
+    "Special Summon restrictions beyond the available metadata's monster kind/type and Fusion/Ritual proper-summon marker are not inferred by this isolated adapter.",
+    "Full engine chain ordering and Discord component integration require the protected M61 resolver handoff."
+  ],
+  "testCount": 24
+}
