@@ -85,6 +85,7 @@ function assertConserved(state,before){
   for(const c of cards)assert.equal(before.get(c.uid),c.id,'physical identity changed: '+c.uid);
 }
 function physicalHand(state,seat){return holder(state,seat).hand;}
+function handUids(state,seat){return physicalHand(state,seat).map(c=>c.uid).sort();}
 function hands(state){
   const out=[];
   for(const p of state.core.players)for(const c of p.hand)out.push(c.uid);
@@ -220,11 +221,12 @@ test('Magic Drain lets the active opposing representative discard a Spell to neg
   assert.ok(grave(d,0,f.opponentDiscard),'the active Spell user pays from its own private hand');
   assert.ok(grave(d,1,f.trap),'Magic Drain resolves to the Graveyard of its physical owner team');
   assert.ok(d.core.players[0].backrow.some(c=>c.uid===f.pot.uid),'Pot of Greed remains available to resolve');
-  assert.deepEqual(physicalHand(d,0),[],'only the active opponent seat paid');
-  assert.deepEqual(physicalHand(d,2).map(c=>c.uid),[f.opponentPartnerDecoy.uid],
+  assert.deepEqual(handUids(d,0),handUids(f.state,0).filter(uid=>uid!==f.opponentDiscard.uid).sort(),
+    'only the active opponent seat paid');
+  assert.deepEqual(handUids(d,2),handUids(f.state,2),
     'the inactive partner private hand is not used');
-  assert.deepEqual(physicalHand(d,1).map(c=>c.uid),[f.controllerCost.uid]);
-  assert.deepEqual(physicalHand(d,3).map(c=>c.uid),[f.controllerPartnerDecoy.uid]);
+  assert.deepEqual(handUids(d,1),handUids(f.state,1));
+  assert.deepEqual(handUids(d,3),handUids(f.state,3));
   assert.deepEqual(hands(d),beforeHands.filter(uid=>uid!==f.opponentDiscard.uid).sort());
   assertConserved(d,f.before);
   assertRules(d);
@@ -275,8 +277,8 @@ test('Cursed Seal pays its Spell discard at activation from the active represent
   const session=activate(f,'cs-cost',f.controllerCost.uid);
   assert.ok(grave(session.duel,1,f.controllerCost),'the active representative pays the activation cost');
   assert.ok(!grave(session.duel,1,f.controllerPartnerDecoy),'the inactive Set partner does not pay');
-  assert.deepEqual(physicalHand(session.duel,1),[]);
-  assert.deepEqual(physicalHand(session.duel,3).map(c=>c.uid),[f.controllerPartnerDecoy.uid]);
+  assert.deepEqual(handUids(session.duel,1),handUids(f.state,1).filter(uid=>uid!==f.controllerCost.uid).sort());
+  assert.deepEqual(handUids(session.duel,3),handUids(f.state,3));
   assert.deepEqual(hands(session.duel),beforeHands.filter(uid=>uid!==f.controllerCost.uid).sort());
   assert.equal(session.pending['cs-cost'].costUid,f.controllerCost.uid);
   const resolved=resolveSpellCounterTrap(session,'cs-cost',lookup);
