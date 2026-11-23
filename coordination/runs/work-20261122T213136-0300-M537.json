@@ -1,0 +1,80 @@
+{
+  "runId": "work-20261122T213136-0300-M537",
+  "mission": "M537",
+  "owner": "Work principal",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-22T21:31:36-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "b5aa14a707e97837532c00d647a6a26978884c05",
+  "branch": "feat/work-m537-timeout-queue-isolation-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "b5aa14a707e97837532c00d647a6a26978884c05",
+  "priority": "P1 — isolar as filas de timeout 1v1 e 2v2: uma falha ao drenar uma sessão NPC/tag não pode interromper a publicação de outras sessões, e uma falha ao enumerar um modo não pode impedir o outro.",
+  "scope": [
+    "src/timeoutSweep.ts",
+    "src/index.ts",
+    "tests/timeoutSweepIsolation.test.cjs",
+    "docs/evidence/m537-timeout-queue-isolation.json",
+    ".github/workflows/m537-timeout-queue-isolation.yml"
+  ],
+  "reservedFiles": [
+    "src/timeoutSweep.ts",
+    "src/index.ts",
+    "tests/timeoutSweepIsolation.test.cjs",
+    "docs/evidence/m537-timeout-queue-isolation.json",
+    ".github/workflows/m537-timeout-queue-isolation.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-22T21:31:36-03:00",
+    "checkedAgainst": [
+      "M536 — somente tests/duelCrossModeLockExclusion.test.cjs, evidência e workflow; preservado.",
+      "M527–M535 — PRs #473–#480; arquivos próprios preservados.",
+      "M502 — src/duelInteraction.ts reservado; não tocado.",
+      "M526 — src/duelStore.ts reservado; não tocado.",
+      "M61 e todas as reservas de terceiros preservadas."
+    ],
+    "note": "M537 altera apenas o orquestrador de timeout em src/index.ts e adiciona helper/teste/evidência/workflow próprios. Nenhum store, engine, catálogo, inventário ou dado persistente será alterado."
+  },
+  "workBlocks": [
+    "Inspecionado sweepDuelTimeouts: o try/catch envolve as duas filas; um erro de runTagBots em uma sessão interrompe a iteração 2v2, e erro ao enumerar 1v1 impede a fila 2v2.",
+    "Escopo M537 reservado em cinco caminhos; sem sobreposição com M536/M502/M526/M61."
+  ],
+  "tests": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "customWorkflow": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null,
+    "limitations": "Teste unitário do orquestrador e CI offline; sem gateway Discord real."
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false
+  },
+  "pr": null,
+  "releaseToAuxiliary": [],
+  "nextTask": "Implementar isolamento por fila e por item; testar falha de listagem e falha de publicação sem interromper o modo/itens seguintes.",
+  "nextWindow": "2026-11-22T22:30:00-03:00",
+  "duration": {
+    "targetEffectiveMinutes": 60,
+    "effectiveWorkMinutes": 0,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}
