@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "mission": "M568",
+  "card": {
+    "name": "Creature Swap",
+    "portugueseName": "Troca de Criaturas",
+    "passcode": "31036355",
+    "konamiDatabaseId": 5162,
+    "type": "Normal Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5162&ope=2&request_locale=en",
+    "officialText": "Each player chooses 1 monster they control and switches control of those monsters with each other. Those monsters cannot change their battle positions for the rest of this turn.",
+    "firstTcgPrinting": {
+      "date": "2003-06-06",
+      "set": "LOD-081",
+      "product": "Legacy of Darkness"
+    }
+  },
+  "implementation": {
+    "file": "src/creatureSwapTagAdapter.ts",
+    "kind": "isolated pure TagDuel adapter",
+    "behavior": [
+      "Normal Spell is activated only by the active physical representative during an open Main Phase",
+      "both teams must control at least one monster at activation; each team chooses exactly one controlled monster only at resolution",
+      "choices are non-targeting and validated atomically; an invalid choice cannot partially swap",
+      "control changes simultaneously without Special Summon or new card identity",
+      "UID, physical owner, position, face-up state and combat counters are preserved",
+      "both monsters receive positionLockedThrough for the current turn; an existing longer lock is preserved",
+      "the Spell moves from hand to an available backrow zone on activation and to its physical owner's GY after resolution",
+      "no-monster-at-resolution and negation resolve without a swap",
+      "activationId replay protection persists through JSON; inventory is conserved"
+    ],
+    "rules": {
+      "mainDeckConstruction": "20–30",
+      "handLimit": 6,
+      "handDiscard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "tests": {
+    "file": "tests/creatureSwapTagAdapter.test.cjs",
+    "expectedScenarios": 30
+  },
+  "integration": {
+    "resolverV9": false,
+    "catalog": false,
+    "metadata": false,
+    "certifications": false,
+    "allowlist": false,
+    "discordCommand": false
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentPlayerDataChanged": false,
+    "liveDiscord": false
+  },
+  "limitations": [
+    "Adapter permanece isolado e não está integrado ao resolver v9; a carta não fica disponível em decks.",
+    "Testes usam estado TagDuel em memória e engine compilado; não simulam gateway/guild Discord real.",
+    "A escolha simultânea é recebida como par atômico pelo adaptador; a UI de coleta/privacidade ainda depende da integração central."
+  ]
+}
