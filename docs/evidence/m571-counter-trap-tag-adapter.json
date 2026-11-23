@@ -42,9 +42,9 @@
       ".github/workflows/m571-counter-trap-tag-adapter.yml"
     ],
     "mode": "isolated; not wired into tagActions, tagInteraction or Discord",
-    "rootPendingHfd": "separate pending EFFECT-negation flag; does not misuse pendingNegated (activation negation)",
+    "rootPendingHfd": "The current legacy effect registry does not expose a playable HFD activation effect. The root-pending HFD boundary is therefore constructed as a validated TagDuel response fixture with the card already face-up in backrow; it is not claimed as an end-to-end HFD activation test.",
     "physicalOwnership": "UID m0..m3 preserved; partner can activate shared backrow; cards return to physical owner's team Graveyard",
-    "inventory": "Only zone movement; before/after UID+ID map invariant. The isolated HFD fixture opens a real response window with an already-admitted Magic Jammer, then swaps only that fixture card's ID to Gryphon Wing; the Trap Jammer fixture keeps a separate Magic Jammer set. No live inventory or player data is granted."
+    "inventory": "Only zone movement; before/after UID+ID map invariant. The HFD fixture opens at a validated response boundary and substitutes a previously admitted Magic Jammer fixture card with Gryphon Wing while preserving its physical UID. The Trap Jammer fixture uses a real Mirror Force activation through stepTagDuel and passes any summon-response window before Battle Phase. No live inventory or player data is granted."
   },
   "invariants": {
     "mainDeck": "20–30 per physical seat",
@@ -83,7 +83,8 @@
     "Not wired into authoritative resolver or Discord action menus.",
     "Root-pending HFD effect negation needs a distinct pending-effect-negated field in the central engine before production integration.",
     "No live Discord gateway/session used; tests exercise actual TagDuel HFD and Mirror Force transitions plus isolated response adapter.",
-    "No merge/deploy authorized."
+    "No merge/deploy authorized.",
+    "The HFD activation itself is not currently wired into the legacy effect registry; the adapter test starts at the response boundary. Mirror Force activation and Battle Phase progression are exercised through stepTagDuel."
   ],
   "tests": [
     "HFD response window is held open by a certified Magic Jammer before the fixture substitutes Gryphon Wing"

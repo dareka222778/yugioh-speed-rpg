@@ -21,9 +21,12 @@ function action(s,seat,predicate,label){const a=tag.tagActions(s,member(seat)).f
 function hfdFixture(){
  const s=create(1,{1:[HFD]},'gryphon');s.core.turn=3;
  const magic=backrow(s,0,MAGIC_JAMMER,'gryphon-source-magic-jammer');
- const h=hand(s,1,HFD);
- const pending=tag.stepTagDuel(s,member(1),action(s,1,a=>a.card===h.uid,'HFD activation'));
- assert.equal(pending.core.phase,'response');assert.equal(pending.core.pending.kind,'spell');assert.equal(pending.core.pending.id,HFD);assert.equal(pending.core.pending.actor,1);assert.equal(pending.core.priority,0);tag.assertTagDuel(pending);
+ const h=hand(s,1,HFD),holder1=holder(s,1),hfdIndex=holder1.hand.findIndex(c=>c.uid===h.uid);
+ assert.ok(hfdIndex>=0);const [hfdCard]=holder1.hand.splice(hfdIndex,1);
+ s.core.players[1].backrow.push({...hfdCard,faceUp:true,setTurn:3});
+ s.core.phase='response';s.core.pending={kind:'spell',actor:1,card:h.uid,id:HFD};s.core.priority=0;s.core.resume='main';s.core.passes=0;
+ tag.assertTagDuel(s);
+ const pending=s;
  const g=pending.core.players[0].backrow.find(c=>c.uid===magic.uid);assert.ok(g);g.id=GRYPHON_WING_ID;
  const ally=backrow(pending,2,MIRROR,'ally-mirror'),opp=backrow(pending,3,TORRENTIAL,'opp-torrential');
  const ownField=field(pending,0,MOUNTAIN,'own-field'),oppField=field(pending,3,SOGEN,'opp-field');
@@ -34,6 +37,7 @@ function jammerFixture(){
  const mirror=backrow(s,3,MIRROR,'opp-mirror'),other=backrow(s,3,TORRENTIAL,'opp-other');
  const oppField=field(s,3,SOGEN,'opp-field'),ownField=field(s,0,MOUNTAIN,'own-field');tag.assertTagDuel(s);
  let n=tag.stepTagDuel(s,member(0),action(s,0,a=>a.kind==='summon'&&a.position==='atk','Attack Position summon'));
+ if(n.core.phase==='response')n=tag.stepTagDuel(n,member(1),action(n,1,a=>a.kind==='pass','pass summon response'));
  n=tag.stepTagDuel(n,member(0),action(n,0,a=>a.kind==='battle','Battle Phase'));
  n=tag.stepTagDuel(n,member(0),action(n,0,a=>a.kind==='attack','attack declaration'));
  assert.equal(n.core.phase,'response');assert.equal(n.core.pending.kind,'attack');assert.equal(n.core.resume,'battle');
