@@ -60,26 +60,32 @@ function assertState(state:SnatchStealState):void{
   const cards=tagInventory(state),uids=cards.map(card=>card.uid);
   if(cards.some(card=>typeof card.uid!=='string'||!/^m[0-3]:/.test(card.uid)||typeof card.id!=='string'||!card.id)||new Set(uids).size!==uids.length)
     throw Error('Inventário físico inválido ou UID duplicado no TagDuel.');
-  const memory=state.snatchSteal;
-  if(memory!==undefined&&(!memory||typeof memory!=='object'||!memory.pending||typeof memory.pending!=='object'||!memory.resolved||
-    typeof memory.resolved!=='object'||!memory.equipped||typeof memory.equipped!=='object'||!Number.isSafeInteger(memory.nextSequence)||memory.nextSequence<1||
+  const memory:SnatchStealMemory=state.snatchSteal??{pending:{},resolved:{},equipped:{},nextSequence:1};
+  if(state.snatchSteal!==undefined&&(!memory.pending||typeof memory.pending!=='object'||!memory.resolved||
+    typeof memory.resolved!=='object'||!memory.equipped||typeof memory.equipped!=='object'||
+    !Number.isSafeInteger(memory.nextSequence)||memory.nextSequence<1||
     Object.entries(memory.pending).some(([id,v])=>!validActivationId(id)||!v||typeof v.sourceUid!=='string'||
-      !Number.isInteger(v.equipOwnerSeat)||v.equipOwnerSeat<0||v.equipOwnerSeat>3||!Number.isInteger(v.controllerSeat)||v.controllerSeat<0||v.controllerSeat>3||
-      (v.controllerTeam!==0&&v.controllerTeam!==1)||v.controllerSeat!==v.equipOwnerSeat||v.controllerSeat%2!==v.controllerTeam||
-      !Number.isInteger(v.opponentSeat)||v.opponentSeat<0||v.opponentSeat>3||v.opponentSeat%2!==1-v.controllerTeam||
-      v.originalControllerTeam!==1-v.controllerTeam||!Number.isInteger(v.targetOwnerSeat)||v.targetOwnerSeat<0||v.targetOwnerSeat>3||
+      !Number.isInteger(v.equipOwnerSeat)||v.equipOwnerSeat<0||v.equipOwnerSeat>3||
+      !Number.isInteger(v.controllerSeat)||v.controllerSeat<0||v.controllerSeat>3||
+      (v.controllerTeam!==0&&v.controllerTeam!==1)||v.controllerSeat!==v.equipOwnerSeat||
+      v.controllerSeat%2!==v.controllerTeam||!Number.isInteger(v.opponentSeat)||v.opponentSeat<0||v.opponentSeat>3||
+      v.opponentSeat%2!==1-v.controllerTeam||v.originalControllerTeam!==1-v.controllerTeam||
+      !Number.isInteger(v.targetOwnerSeat)||v.targetOwnerSeat<0||v.targetOwnerSeat>3||
       !v.targetUid.startsWith('m'+v.targetOwnerSeat+':')||!v.sourceUid.startsWith('m'+v.equipOwnerSeat+':')||
-      !Number.isSafeInteger(v.turn)||!v.targetBinding||v.targetBinding.uid!==v.targetUid||v.targetBinding.zone!=='monster'||!Number.isSafeInteger(v.targetBinding.epoch)))||
+      !Number.isSafeInteger(v.turn)||!v.targetBinding||v.targetBinding.uid!==v.targetUid||
+      v.targetBinding.zone!=='monsters'||!Number.isSafeInteger(v.targetBinding.epoch)))||
     Object.entries(memory.resolved).some(([id,v])=>!validActivationId(id)||v!==true)||
-    Object.entries(memory.equipped).some(([uid,v])=>!uid||!v||typeof v.targetUid!=='string'||!Number.isInteger(v.targetOwnerSeat)||
-      v.targetOwnerSeat<0||v.targetOwnerSeat>3||!v.targetUid.startsWith('m'+v.targetOwnerSeat+':')||
-      !Number.isInteger(v.equipOwnerSeat)||v.equipOwnerSeat<0||v.equipOwnerSeat>3||!uid.startsWith('m'+v.equipOwnerSeat+':')||
-      (v.controllerTeam!==0&&v.controllerTeam!==1)||v.equipOwnerSeat%2!==v.controllerTeam||v.originalControllerTeam!==1-v.controllerTeam||
-      !Number.isSafeInteger(v.turn)||!Number.isSafeInteger(v.sequence)||v.sequence<1||
+    Object.entries(memory.equipped).some(([uid,v])=>!uid||!v||typeof v.targetUid!=='string'||
+      !Number.isInteger(v.targetOwnerSeat)||v.targetOwnerSeat<0||v.targetOwnerSeat>3||
+      !v.targetUid.startsWith('m'+v.targetOwnerSeat+':')||!Number.isInteger(v.equipOwnerSeat)||
+      v.equipOwnerSeat<0||v.equipOwnerSeat>3||!uid.startsWith('m'+v.equipOwnerSeat+':')||
+      (v.controllerTeam!==0&&v.controllerTeam!==1)||v.equipOwnerSeat%2!==v.controllerTeam||
+      v.originalControllerTeam!==1-v.controllerTeam||!Number.isSafeInteger(v.turn)||
+      !Number.isSafeInteger(v.sequence)||v.sequence<1||
       (v.lastStandbyTurn!==undefined&&(!Number.isSafeInteger(v.lastStandbyTurn)||v.lastStandbyTurn<1))))
     throw Error('Memória de ativações/equipamentos Snatch Steal inválida.');
-  const links=Object.values(memory?.equipped??{});
-  if(links.some(link=>link.sequence>=(memory?.nextSequence??1))||new Set(links.map(link=>link.sequence)).size!==links.length)
+  const links=Object.values(memory.equipped);
+  if(links.some(link=>link.sequence>=memory.nextSequence)||new Set(links.map(link=>link.sequence)).size!==links.length)
     throw Error('Sequência de vínculos Snatch Steal inválida.');
   for(const [equipUid,link] of Object.entries(memory?.equipped??{})){
     const equip=state.core.players[link.controllerTeam].backrow.find(card=>card.uid===equipUid);
@@ -111,8 +117,8 @@ function isOpponentMonster(state:SnatchStealState,controllerTeam:Team,uid:string
 }
 function bindingFor(state:SnatchStealState,uid:string):TargetBinding{
   const core=structuredClone(state.core);synchronizeCardLifetimes(core);const binding=core.cardLifetimes?.[uid];
-  if(!binding||binding.zone!=='monster')throw Error('Alvo Snatch Steal deve permanecer face-up no campo adversário.');
-  return {uid,zone:'monster',epoch:binding.epoch};
+  if(!binding||binding.zone!=='monsters')throw Error('Alvo Snatch Steal deve permanecer face-up no campo adversário.');
+  return {uid,zone:'monsters',epoch:binding.epoch};
 }
 function inventorySnapshot(state:SnatchStealState):string{
   const cards=tagInventory(state),uids=cards.map(card=>card.uid);
@@ -150,7 +156,7 @@ export function planSnatchStealActivation(state:SnatchStealState,sourceUid:strin
 export function registerSnatchStealActivation(input:SnatchStealState,plan:SnatchStealActivationPlan,lookup:Lookup=cardLookup):SnatchStealState{
   assertState(input);
   if(!plan||plan.kind!=='snatch-steal-activation'||!validActivationId(plan.activationId)||plan.turn!==input.core.turn||
-    plan.targetBinding?.uid!==plan.targetUid||plan.targetBinding.zone!=='monster'||plan.originalControllerTeam!==1-plan.controllerTeam)
+    plan.targetBinding?.uid!==plan.targetUid||plan.targetBinding.zone!=='monsters'||plan.originalControllerTeam!==1-plan.controllerTeam)
     throw Error('Plano de ativação Snatch Steal inválido ou obsoleto.');
   const source=sourceContext(input,plan.sourceUid,lookup);
   if(source.equipOwnerSeat!==plan.equipOwnerSeat||source.controllerSeat!==plan.controllerSeat||source.controllerTeam!==plan.controllerTeam||
@@ -299,12 +305,19 @@ export function reassertSnatchStealControl(input:SnatchStealState,targetUid:stri
   const list=next.core.players[currentTeam].monsters,index=list.findIndex(card=>card.uid===targetUid),[controlled]=list.splice(index,1);
   next.core.players[link.controllerTeam].monsters.push(controlled);synchronizeCardLifetimes(next.core);assertState(next);assertConserved(before,next);return next;
 }
-export function resolveSnatchStealStandbyPhase(input:SnatchStealState):{state:SnatchStealState;applied:number;lpGained:number}{
-  assertState(input);if(input.core.phase!=='standby')return {state:input,applied:0,lpGained:0};
-  const activeTeam=input.core.current as Team,controllerTeam=(1-activeTeam) as Team;
-  const due=Object.entries(input.snatchSteal?.equipped??{}).filter(([,link])=>link.controllerTeam===controllerTeam&&link.lastStandbyTurn!==input.core.turn);
+/** The current Core phase union has no Standby value yet; the phase manager must pass this explicit event. */
+export function resolveSnatchStealStandbyPhase(
+  input:SnatchStealState,event:{phase:'standby';activeTeam:Team;turn:number}
+):{state:SnatchStealState;applied:number;lpGained:number}{
+  assertState(input);
+  if(!event||event.phase!=='standby'||event.activeTeam!==input.core.current||event.turn!==input.core.turn)
+    return {state:input,applied:0,lpGained:0};
+  const activeTeam=event.activeTeam,controllerTeam=(1-activeTeam) as Team;
+  const due=Object.entries(input.snatchSteal?.equipped??{}).filter(([,link])=>
+    link.controllerTeam===controllerTeam&&link.lastStandbyTurn!==event.turn);
   if(due.length===0)return {state:input,applied:0,lpGained:0};
   const before=inventorySnapshot(input),next=structuredClone(input) as SnatchStealState;
-  for(const [equipUid] of due){next.snatchSteal!.equipped[equipUid].lastStandbyTurn=next.core.turn;next.core.players[activeTeam].lp+=1000;}
-  synchronizeCardLifetimes(next.core);assertState(next);assertConserved(before,next);return {state:next,applied:due.length,lpGained:due.length*1000};
+  for(const [equipUid] of due){next.snatchSteal!.equipped[equipUid].lastStandbyTurn=event.turn;next.core.players[activeTeam].lp+=1000;}
+  synchronizeCardLifetimes(next.core);assertState(next);assertConserved(before,next);
+  return {state:next,applied:due.length,lpGained:due.length*1000};
 }
