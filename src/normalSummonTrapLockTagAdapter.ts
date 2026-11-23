@@ -44,8 +44,9 @@ export function normalSummonTrapLockRuleForCard(cardId:string):ContinuousRule|un
 /**
  * The four Rise of Destiny monsters share the same exact text. Their policy
  * exists only in the response window for their own successful Normal Summon.
- * The effect-negation resolver is mandatory: the adapter never assumes that
- * a face-up source is necessarily unnegated.
+ * Pending.id is optional in the engine: the face-up monster in the summoning
+ * team's Monster Zone is the canonical identity, and a supplied pending.id
+ * must agree with it. The negation resolver is mandatory and never guessed.
  */
 export function normalSummonTrapLockActive(
   state:TagDuel,
@@ -55,9 +56,10 @@ export function normalSummonTrapLockActive(
   if(typeof isEffectNegated!=='function')throw new Error('Informe o resolver de negação de efeitos.');
   const core=state.core,pending=core.pending;
   if(core.phase!=='response'||pending.kind!=='summon'||core.pendingNegated===true)return false;
-  if(pending.actor!==core.current||pending.actor!==0&&pending.actor!==1||!pending.id||!CARD_IDS.has(pending.id))return false;
-  const source=core.players[pending.actor].monsters.find(monster=>monster.uid===pending.card&&monster.id===pending.id);
-  if(!source||source.faceUp!==true)return false;
+  if(pending.actor!==core.current||pending.actor!==0&&pending.actor!==1)return false;
+  const source=core.players[pending.actor].monsters.find(monster=>monster.uid===pending.card);
+  if(!source||source.faceUp!==true||!CARD_IDS.has(source.id))return false;
+  if(pending.id!==undefined&&pending.id!==source.id)return false;
   const seat=physicalSeat(source.uid);
   if(!state.members[seat]||state.members[seat].team!==seat%2)throw new Error('Assento físico da fonte de bloqueio inexistente.');
   return !isEffectNegated(state,source.uid);

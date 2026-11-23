@@ -60,7 +60,7 @@
   ],
   "tests": {
     "file": "tests/normalSummonTrapLockTagAdapter.test.cjs",
-    "expected": 17,
+    "expected": 18,
     "coverage": [
       "all four identities map to one ContinuousRule accepted by continuousRuleIssues",
       "both teams are blocked after the exact Normal Summon",
@@ -72,7 +72,8 @@
       "current controller team versus physical UID owner",
       "all four physical seats across active-seat rotations",
       "malformed UID and unknown identity",
-      "input immutability"
+      "input immutability",
+      "pending.id is optional in the engine; the face-up source in the summoning team's Monster Zone is canonical, and any supplied pending.id must match."
     ]
   },
   "certification": {

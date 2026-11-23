@@ -104,9 +104,14 @@ test('a negated monster effect does not create the lock',()=>{
   assert.equal(normalSummonTrapLockActive(state,()=>true),false);
 });
 
-test('pending card identity must match the face-up monster on the field',()=>{
+test('pending card identity must match the face-up monster on the field when an ID is supplied',()=>{
   const state=makeState({pending:{kind:'summon',actor:0,card:'m0:normal-summon',id:TACTICAL_ESPIONAGE_EXPERT_ID}});
   assert.equal(normalSummonTrapLockActive(state,noNegation),false);
+});
+
+test('the face-up summoned monster supplies canonical identity when pending.id is omitted',()=>{
+  const state=makeState({pending:{kind:'summon',actor:0,card:'m0:normal-summon'}});
+  assert.equal(normalSummonTrapLockActive(state,noNegation),true);
 });
 
 test('current controller team controls the summon window even if the physical UID belongs to the partner team',()=>{
