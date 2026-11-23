@@ -412,12 +412,13 @@ test('malformed physical UID, duplicate UID, wrong card and stale turn are rejec
   assert.throws(()=>getSpearCretinCandidates(pending,'spear-1',0,lookup),/Turno/);
 });
 
-test('the source may be controlled by the other team when it is sent to its owner Graveyard',()=>{
+test('the source owner team is derived from the physical UID even during the opponent turn',()=>{
   const state=makeState({cursor:1,sourceTeam:0,sourceSeat:0});
-  const plan=planSpearCretinTrigger(state,event(state),'m0:spear-cretin','stolen-source',lookup);
+  const plan=planSpearCretinTrigger(state,event(state),'m0:spear-cretin','opponent-turn',lookup);
   const registered=registerSpearCretinTrigger(state,plan,lookup);
-  registered.core.players[1].monsters.push(monster(ref('m0:stolen-source-copy',SPEAR_CRETIN_ID),0));
-  assert.equal(registered.spearCretin.pending['stolen-source'].sourceTeam,0);
+  assert.equal(registered.core.current,1);
+  assert.equal(registered.spearCretin.pending['opponent-turn'].sourceTeam,0);
+  assert.equal(registered.spearCretin.pending['opponent-turn'].sourceOwnerSeat,0);
 });
 
 test('no partial mutation occurs if the resolution plan becomes stale or invalid',()=>{
