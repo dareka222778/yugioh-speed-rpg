@@ -1,0 +1,38 @@
+name: M549 A Cat of Ill Omen TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m549-cat-of-ill-omen-tag-adapter-20261123
+    paths:
+      - 'src/aCatOfIllOmenTagAdapter.ts'
+      - 'tests/aCatOfIllOmenTagAdapter.test.cjs'
+      - 'docs/evidence/m549-a-cat-of-ill-omen-tag-adapter.json'
+      - '.github/workflows/m549-a-cat-of-ill-omen-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/aCatOfIllOmenTagAdapter.ts'
+      - 'tests/aCatOfIllOmenTagAdapter.test.cjs'
+      - 'docs/evidence/m549-a-cat-of-ill-omen-tag-adapter.json'
+      - '.github/workflows/m549-a-cat-of-ill-omen-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  a-cat-of-ill-omen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m549-a-cat-of-ill-omen-tag-adapter.json', 'utf8'))"
+      - name: Run A Cat of Ill Omen TagDuel tests
+        run: node --test tests/aCatOfIllOmenTagAdapter.test.cjs

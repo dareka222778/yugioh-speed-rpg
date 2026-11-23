@@ -1,0 +1,80 @@
+{
+  "mission": "M549",
+  "runId": "work-20261123T072956-0300-M549",
+  "owner": "Work principal",
+  "card": {
+    "name": "A Cat of Ill Omen",
+    "passcode": "24140059",
+    "konamiDatabaseId": 5520,
+    "type": "Flip Effect Monster",
+    "attribute": "DARK",
+    "race": "Beast",
+    "level": 2,
+    "atk": 500,
+    "def": 300,
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5520&ope=2&request_locale=en",
+    "officialEffect": "FLIP: Choose 1 Trap from your Deck and place it on top of your Deck, or, if \"Necrovalley\" is on the field, you can add that Trap to your hand instead.",
+    "verifiedTCGPrinting": {
+      "date": "2003-07-18",
+      "set": "PGD-070",
+      "product": "Pharaonic Guardian"
+    }
+  },
+  "design": {
+    "physicalOwner": "The FLIP source UID identifies the physical seat; the adapter searches and returns the selected copy to that seat's active core or reserve Deck/hand.",
+    "target": "Only cards whose registry metadata kind is trap are eligible; Spell and Monster cards are excluded.",
+    "selection": "The chosen copy is identified by UID plus ID, so multiple copies with the same passcode remain distinct.",
+    "defaultDestination": "Index 0, matching the draw engine's Array.shift() top-of-deck convention.",
+    "optionalDestination": "A hand destination is accepted only when Necrovalley is face-up in either team's Field Zone at resolution; the choice is optional and does not force the hand destination.",
+    "timing": "Necrovalley is read at resolution; adding or removing it between target selection and resolution changes whether the hand option is legal.",
+    "conservation": "The same UID/ID moves from the physical owner's Deck to Deck top or the same owner's hand; no card is created or granted.",
+    "privacy": "The adapter only exposes eligible IDs from the source's physical Deck; it does not inspect or reveal the other seats' Decks."
+  },
+  "tests": [
+    "active physical owner filters the Deck to Trap cards only",
+    "without Necrovalley the selected Trap is placed at Deck index 0",
+    "face-up Necrovalley on either team's Field Zone allows the optional hand destination",
+    "Necrovalley presence is evaluated at resolution, not target-list creation",
+    "removing Necrovalley before resolution removes the hand option",
+    "face-down Necrovalley does not allow the hand destination",
+    "inactive physical owner searches and receives the Trap in their reserve Deck/hand",
+    "active physical owner routes through the shared team core",
+    "no eligible Trap resolves as no-target without changing inventory",
+    "a Trap from a teammate's or another physical seat's Deck is rejected",
+    "non-Trap cards are not selectable",
+    "source identity, face-up state and team ownership are enforced",
+    "stale or mismatched FLIP events are rejected",
+    "UID/ID inventory is conserved and the input state remains immutable",
+    "selected Trap must still be in the physical Deck at resolution",
+    "invalid destination is rejected and Necrovalley does not force the hand choice",
+    "duplicate source UID and malformed physical-seat UID fail closed",
+    "same-ID Trap copies remain distinguishable by physical UID"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Adapter preparation only. No resolver/metadata/certification/manifest/allowlist change; M61 handoff remains pending."
+  },
+  "security": {
+    "filesOnly": [
+      "src/aCatOfIllOmenTagAdapter.ts",
+      "tests/aCatOfIllOmenTagAdapter.test.cjs",
+      "docs/evidence/m549-a-cat-of-ill-omen-tag-adapter.json",
+      ".github/workflows/m549-a-cat-of-ill-omen-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true,
+    "noLiveDiscordWrite": true
+  },
+  "limitations": [
+    "The card is not yet registered in the shared playable-card catalog; tests inject a narrow lookup fixture.",
+    "The adapter is not wired into FLIP resolution or the resolver archive and therefore does not certify the card.",
+    "Offline structural TagDuel tests do not replace a full engine duel or live Discord guild validation."
+  ],
+  "testCount": 19
+}
