@@ -62,7 +62,6 @@ function setTrap(state,seat,id,suffix){
   c.id=id;
   c.faceUp=false;
   c.setTurn=1;
-  c.uid='m'+seat+':m572-'+suffix;
   state.core.players[seat%2].backrow.push(c);
   return c;
 }
@@ -175,7 +174,7 @@ test('Magic Drain opens only for an opponent Spell activation and exposes no tar
   wrongKind.core.pending.kind='trap';
   assert.deepEqual(spellCounterTrapActions(wrongKind,lookup),[]);
   const wrongCard=structuredClone(f.state);
-  wrongCard.core.pending.id=HFD;
+  wrongCard.core.pending.id=MIRROR;
   assert.deepEqual(spellCounterTrapActions(wrongCard,lookup),[]);
   const faceUp=structuredClone(f.state);
   faceUp.core.players[1].backrow.find(c=>c.uid===f.trap.uid).faceUp=true;
@@ -246,8 +245,8 @@ test('Magic Drain rejects a discard from the inactive partner or a non-Spell wit
   const bad=structuredClone(session);
   const h=bad.duel.core.players[0].hand;
   assert.ok(h.length);
-  const nonSpell=h[0];
-  assert.notEqual(lookup(nonSpell.id)?.kind,'spell');
+  const nonSpell=hand(bad.duel,0,NORMALS[0]);
+  assert.equal(lookup(nonSpell.id)?.kind,'monster');
   assert.throws(()=>resolveSpellCounterTrap(bad,'md-invalid',lookup,{
     opponentDiscardUid:nonSpell.uid
   }),/Magia da mão privada/);
@@ -326,6 +325,7 @@ test('Cursed Seal handles a Spell chain link and locks the same name only after 
   const session=activate(chainFixture,'cs-chain',f.controllerCost.uid);
   const resolved=resolveSpellCounterTrap(session,'cs-chain',lookup);
   assert.equal(resolved.result.targetActivationNegated,true);
+  assert.equal(resolved.result.targetDestroyed,true);
   assert.equal(resolved.session.duel.core.chain.length,1);
   assert.equal(resolved.session.duel.core.chain[0].negated,true);
   assert.ok(grave(resolved.session.duel,0,f.pot));
@@ -343,4 +343,22 @@ test('both Counter Traps reject duplicate activation IDs and preserve the origin
     assert.throws(()=>resolveSpellCounterTrap(session,'missing-'+id,lookup),/ausente ou já resolvida/);
     assert.equal(JSON.stringify(session),snapshot);
   }
+});
+
+
+test('Cursed Seal does not lock the Spell name if the activation was negated but the Spell was no longer destroyed',()=>{
+  const f=fixture(CURSED_SEAL_OF_THE_FORBIDDEN_SPELL_ID,'cursed-target-left');
+  const session=activate(f,'cs-target-left',f.controllerCost.uid);
+  const p=session.duel.core.players[0];
+  const i=p.backrow.findIndex(c=>c.uid===f.pot.uid);
+  assert.ok(i>=0);
+  const [moved]=p.backrow.splice(i,1);
+  p.grave.push({uid:moved.uid,id:moved.id});
+  const resolved=resolveSpellCounterTrap(session,'cs-target-left',lookup);
+  assert.equal(resolved.result.targetActivationNegated,true);
+  assert.equal(resolved.result.targetDestroyed,false);
+  assert.equal(resolved.result.effectApplied,true);
+  assert.deepEqual(resolved.session.lockedSpellNames,[],
+    'the name lock requires both activation negation and destruction');
+  assertConserved(resolved.session.duel,f.before);
 });
