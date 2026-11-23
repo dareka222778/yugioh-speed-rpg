@@ -148,9 +148,11 @@ function fixture(trapId,seed){
   assert.equal(response.core.priority,1);
   tag.assertTagDuel(response);
   assertPrivateHands(response);
-  trap.id=trapId;
+  const responseTrap=response.core.players[1].backrow.find(c=>c.uid===trap.uid);
+  assert.ok(responseTrap);
+  responseTrap.id=trapId;
   const before=inventory(response);
-  return {state:response,pot,trap,opponentDiscard,opponentPartnerDecoy,controllerCost,controllerPartnerDecoy,before};
+  return {state:response,pot,trap:responseTrap,opponentDiscard,opponentPartnerDecoy,controllerCost,controllerPartnerDecoy,before};
 }
 function activate(f,activationId,costUid){
   const actions=spellCounterTrapActions(f.state,lookup);
