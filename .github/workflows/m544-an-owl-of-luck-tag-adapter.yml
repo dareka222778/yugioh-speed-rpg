@@ -1,0 +1,38 @@
+name: M544 An Owl of Luck TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m544-an-owl-of-luck-tag-adapter-20261123
+    paths:
+      - 'src/anOwlOfLuckTagAdapter.ts'
+      - 'tests/anOwlOfLuckTagAdapter.test.cjs'
+      - 'docs/evidence/m544-an-owl-of-luck-tag-adapter.json'
+      - '.github/workflows/m544-an-owl-of-luck-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/anOwlOfLuckTagAdapter.ts'
+      - 'tests/anOwlOfLuckTagAdapter.test.cjs'
+      - 'docs/evidence/m544-an-owl-of-luck-tag-adapter.json'
+      - '.github/workflows/m544-an-owl-of-luck-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  an-owl-of-luck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m544-an-owl-of-luck-tag-adapter.json', 'utf8'))"
+      - name: Run An Owl of Luck TagDuel tests
+        run: node --test tests/anOwlOfLuckTagAdapter.test.cjs
