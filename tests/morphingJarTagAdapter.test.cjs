@@ -209,7 +209,7 @@ test('a JSON-restored successful receipt blocks the same activationId',()=>{
 
 test('a normal summon is not a Flip Summon trigger',()=>{
   const state=makeState();
-  assert.throws(()=>planMorphingJarFlip(state,event(state,'m0:morphing-jar','normal'),'m0:morphing-jar',lookup),/Invocação-Virar/);
+  assert.throws(()=>planMorphingJarFlip(state,event(state,'m0:morphing-jar','normal-id','normal'),'m0:morphing-jar',lookup),/Invocação-Virar/);
 });
 
 test('an effect-flip is not a Flip Summon trigger',()=>{
@@ -247,7 +247,7 @@ test('the source UID must identify a physical owner seat',()=>{
 test('duplicate source UID in two Monster Zones is rejected',()=>{
   const state=makeState();
   state.core.players[1].monsters.push({...source(state),uid:'m0:morphing-jar'});
-  assert.throws(()=>planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup),/exatamente uma Zona/);
+  assert.throws(()=>planMorphingJarFlip(state,event(state),'m0:morphing-jar',lookup),/UID duplicado|exatamente uma Zona/);
 });
 
 test('more than three Monster Zones are rejected',()=>{
