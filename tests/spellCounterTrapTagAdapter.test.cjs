@@ -57,9 +57,8 @@ function hand(state,seat,id){
   h.hand.push(card);
   return card;
 }
-function setTrap(state,seat,id,suffix){
+function setTrap(state,seat,suffix){
   const c=take(state,seat,SEVEN_TOOLS);
-  c.id=id;
   c.faceUp=false;
   c.setTurn=1;
   state.core.players[seat%2].backrow.push(c);
@@ -127,7 +126,7 @@ function fixture(trapId,seed){
   const opponentPartnerDecoy=hand(state,2,MST);
   const controllerCost=hand(state,1,MST);
   const controllerPartnerDecoy=hand(state,3,MST);
-  const trap=setTrap(state,3,trapId,'source');
+  const trap=setTrap(state,3,'source');
   assert.ok(pot.uid.startsWith('m0:'));
   assert.ok(opponentDiscard.uid.startsWith('m0:'));
   assert.ok(opponentPartnerDecoy.uid.startsWith('m2:'));
@@ -139,7 +138,7 @@ function fixture(trapId,seed){
   tag.assertTagDuel(state);
   assertRules(state);
   assertPrivateHands(state);
-  const before=inventory(state);
+  tag.assertTagDuel(state);
   const spellAction=action(state,0,a=>a.kind==='spell'&&a.card===pot.uid,'Pot of Greed activation');
   const response=tag.stepTagDuel(state,member(0),spellAction);
   assert.equal(response.core.phase,'response');
@@ -147,7 +146,9 @@ function fixture(trapId,seed){
   assert.equal(response.core.pending.id,POT);
   assert.equal(response.core.priority,1);
   tag.assertTagDuel(response);
+  trap.id=trapId;
   assertPrivateHands(response);
+  const before=inventory(response);
   return {state:response,pot,trap,opponentDiscard,opponentPartnerDecoy,controllerCost,controllerPartnerDecoy,before};
 }
 function activate(f,activationId,costUid){
@@ -213,7 +214,7 @@ test('Magic Drain lets the active opposing representative discard a Spell to neg
   assertConserved(d,f.before);
   assertRules(d);
   assertPrivateHands(d);
-  assert.doesNotThrow(()=>tag.assertTagDuel(JSON.parse(JSON.stringify(d))));
+  assert.deepEqual(JSON.parse(JSON.stringify(resolved.session)),resolved.session,'adapter state survives JSON round-trip');
 });
 
 test('Magic Drain negates and destroys the Spell activation when the opponent does not discard',()=>{
@@ -224,6 +225,7 @@ test('Magic Drain negates and destroys the Spell activation when the opponent do
   const d=resolved.session.duel;
   assert.equal(resolved.result.effectApplied,true);
   assert.equal(resolved.result.targetActivationNegated,true);
+  assert.equal(resolved.result.targetDestroyed,true);
   assert.equal(resolved.result.opponentPaidToNegate,false);
   assert.equal(d.core.pendingNegated,true);
   assert.ok(grave(d,0,f.pot));
@@ -320,7 +322,6 @@ test('Cursed Seal handles a Spell chain link and locks the same name only after 
   state.core.chain=[{actor:0,card:f.pot.uid,id:POT,target:''}];
   state.core.phase='response';
   state.core.priority=1;
-  tag.assertTagDuel(state);
   const chainFixture={...f,state};
   const session=activate(chainFixture,'cs-chain',f.controllerCost.uid);
   const resolved=resolveSpellCounterTrap(session,'cs-chain',lookup);
