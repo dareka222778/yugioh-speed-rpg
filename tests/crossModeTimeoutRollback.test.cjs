@@ -14,6 +14,7 @@ const database=require('../dist/database');
 const decks=require('../dist/decks');
 const duel=require('../dist/duelStore');
 const tag=require('../dist/tagStore');
+const tagEngine=require('../dist/tagDuel');
 const db=database.db;
 
 const GUILD='m540-guild',CHANNEL='m540-channel';
@@ -55,7 +56,7 @@ function duelInventory(state){
   return rows;
 }
 function tagInventory(state){
-  return tag.tagInventory(state).map(card=>[card.uid,card.id]).sort((a,b)=>a[0].localeCompare(b[0]));
+  return tagEngine.tagInventory(state).map(card=>[card.uid,card.id]).sort((a,b)=>a[0].localeCompare(b[0]));
 }
 
 test('1v1 timeout lock-release failure keeps the player blocked from TagDuel until retry commits',()=>{
