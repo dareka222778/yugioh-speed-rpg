@@ -1,0 +1,36 @@
+name: M542 Cross-Mode Timeout Discord Handoff
+on:
+  push:
+    branches:
+      - feat/work-m542-cross-mode-timeout-discord-handoff-20261122
+    paths:
+      - 'tests/crossModeTimeoutDiscordHandoff.test.cjs'
+      - 'docs/evidence/m542-cross-mode-timeout-discord-handoff.json'
+      - '.github/workflows/m542-cross-mode-timeout-discord-handoff.yml'
+  pull_request:
+    paths:
+      - 'tests/crossModeTimeoutDiscordHandoff.test.cjs'
+      - 'docs/evidence/m542-cross-mode-timeout-discord-handoff.json'
+      - '.github/workflows/m542-cross-mode-timeout-discord-handoff.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cross-mode-timeout-discord-handoff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m542-cross-mode-timeout-discord-handoff.json', 'utf8'))"
+      - name: Run cross-mode Discord timeout handoff tests
+        run: node --test tests/crossModeTimeoutDiscordHandoff.test.cjs
