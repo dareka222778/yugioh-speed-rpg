@@ -1,0 +1,36 @@
+name: M465 TagDuel owned-deck physical-seat matrix
+on:
+  push:
+    branches:
+      - feat/work-m465-tag-owned-deck-seat-rotation-20261121
+    paths:
+      - 'tests/tagOwnedDeckPhysicalSeatMatrix2v2.test.cjs'
+      - 'docs/evidence/m465-tag-owned-deck-physical-seat-matrix.json'
+      - '.github/workflows/m465-tag-owned-deck-physical-seat-matrix.yml'
+  pull_request:
+    paths:
+      - 'tests/tagOwnedDeckPhysicalSeatMatrix2v2.test.cjs'
+      - 'docs/evidence/m465-tag-owned-deck-physical-seat-matrix.json'
+      - '.github/workflows/m465-tag-owned-deck-physical-seat-matrix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  owned-deck-seat-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m465-tag-owned-deck-physical-seat-matrix.json', 'utf8'))"
+      - name: Run classic-owned TagDuel physical-seat matrix
+        run: node --test tests/tagOwnedDeckPhysicalSeatMatrix2v2.test.cjs
