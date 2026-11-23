@@ -86,9 +86,9 @@ function physicalSeat(uid:string):number{
   return Number(match[1]);
 }
 function sourceContext(state:MorphingJarState,uid:string,lookup:MorphingJarLookup):SourceContext{
-  assertState(state);
   if(typeof uid!=='string'||!uid)throw Error('UID da fonte Morphing Jar ausente.');
   const ownerSeat=physicalSeat(uid);
+  assertState(state);
   if(state.members[ownerSeat]?.team!==ownerSeat%2)throw Error('Proprietário físico Morphing Jar inválido.');
   const matches=state.core.players.flatMap((player,team)=>player.monsters
     .filter(monster=>monster.uid===uid)
