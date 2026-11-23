@@ -1,0 +1,66 @@
+{
+  "mission": "M493",
+  "runId": "work-20261122T014306-0300-M493",
+  "card": {
+    "name": "A Hero Emerges",
+    "passcode": "21597117",
+    "konamiDatabaseId": 5915,
+    "type": "Normal Trap",
+    "firstTcgPrinting": {
+      "date": "2004-03-01",
+      "set": "Invasion of Chaos",
+      "code": "IOC-104"
+    },
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5915&request_locale=en"
+  },
+  "effectSummary": "Quando um monstro adversário declara ataque, o oponente escolhe uma carta oculta da mão; se for um Monstro que possa ser Invocado por Invocação-Especial, é Invocado, caso contrário é enviado ao Cemitério.",
+  "design": {
+    "trigger": "opponent monster attack declaration only",
+    "handSource": "only the defending team's current physical representative hand; inactive partner hand is not enumerated",
+    "chooser": "the attacking team's current physical representative receives indistinguishable 'Carta oculta' tokens with no card IDs/names",
+    "reveal": "the selected card is revealed to both teams after selection; all other cards in the hand remain private",
+    "summon": "the resolver-provided legality callback decides whether the selected Monster can be Special Summoned; successful summon is face-up Attack Position in one of the three shared Monster Zones",
+    "fallback": "non-monsters and monsters not summonable by this effect are planned for the shared Graveyard",
+    "mutation": "adapter emits an immutable plan; central resolver performs atomic movement and attack replay"
+  },
+  "testCoverage": [
+    "Trap physically owned by inactive partner but controlled by defending team",
+    "active defender hand versus inactive partner hand",
+    "attacking active seat as chooser",
+    "redacted indistinguishable hidden-card choices",
+    "summonable Monster to face-up Attack Position",
+    "non-Monster to Graveyard",
+    "Special-Summon-only Monster rejection",
+    "delegated zone/summon restrictions",
+    "stale attack and representative rotation",
+    "Trap set-turn and face-down checks",
+    "no Monster in active hand activation gate",
+    "selected UID revalidated at resolution",
+    "no mutation"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Adapter and tests are isolated; effect is not registered in the shared resolver because M61 handoff is pending."
+  },
+  "security": {
+    "filesOnly": [
+      "src/aHeroEmergesTagAdapter.ts",
+      "tests/aHeroEmergesTagAdapter.test.cjs",
+      "docs/evidence/m493-a-hero-emerges-tag-adapter.json",
+      ".github/workflows/m493-a-hero-emerges-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "Not registered in the main resolver or Discord handler; requires M61 handoff.",
+    "The central resolver must implement atomic movement and attack replay.",
+    "The legality callback must use the authoritative summon rules and 3 Monster Zone limit.",
+    "Offline adapter tests do not replace a live 2v2 duel or Discord API test."
+  ]
+}
