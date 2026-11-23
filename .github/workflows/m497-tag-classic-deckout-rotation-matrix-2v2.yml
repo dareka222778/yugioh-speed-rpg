@@ -1,0 +1,36 @@
+name: M497 Tag Classic Deck-out Rotation Matrix 2v2
+on:
+  push:
+    branches:
+      - feat/work-m497-tag-classic-deckout-rotation-matrix-2v2-20261122
+    paths:
+      - 'tests/tagClassicDeckOutRotationMatrix2v2.test.cjs'
+      - 'docs/evidence/m497-tag-classic-deckout-rotation-matrix-2v2.json'
+      - '.github/workflows/m497-tag-classic-deckout-rotation-matrix-2v2.yml'
+  pull_request:
+    paths:
+      - 'tests/tagClassicDeckOutRotationMatrix2v2.test.cjs'
+      - 'docs/evidence/m497-tag-classic-deckout-rotation-matrix-2v2.json'
+      - '.github/workflows/m497-tag-classic-deckout-rotation-matrix-2v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deckout-rotation-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m497-tag-classic-deckout-rotation-matrix-2v2.json', 'utf8'))"
+      - name: Run four-seat TagDuel deck-out matrix
+        run: node --test tests/tagClassicDeckOutRotationMatrix2v2.test.cjs

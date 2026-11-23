@@ -1,0 +1,72 @@
+{
+  "mission": "M497",
+  "runId": "work-20261122T064000-0300-M497",
+  "priority": "P1 — ampliar a cobertura de deck-out 2v2 para as quatro rotações físicas: validar quando o assento que entra é ativo ou reserva, que somente o Deck daquele assento é consultado e que o parceiro da mesma equipe não empresta cartas.",
+  "scope": {
+    "files": [
+      "tests/tagClassicDeckOutRotationMatrix2v2.test.cjs",
+      "docs/evidence/m497-tag-classic-deckout-rotation-matrix-2v2.json",
+      ".github/workflows/m497-tag-classic-deckout-rotation-matrix-2v2.yml"
+    ],
+    "runtimeChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "testCoverage": [
+    "Executa as quatro rotações: 0→1, 1→2, 2→3 e 3→0.",
+    "Abrange entrada do participante físico que já está ativo e do participante que estava em reserva.",
+    "Esgota somente o Deck físico do assento que entra; mantém os 16 cards do Deck do parceiro na zona privada original.",
+    "A falha na compra obrigatória encerra o duelo e concede a vitória à equipe oposta ao assento que entrou.",
+    "Verifica cursor, assento ativo, mãos privadas e Decks físicos após a transição.",
+    "Conserva 80 UIDs/IDs únicos, incluindo cards movidos ao Cemitério para simular o Deck esgotado.",
+    "Restaura o estado por JSON e revalida invariantes do TagDuel."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "reason": "M497 testa regra de duelo; não adiciona cartas nem certifica efeitos."
+  },
+  "security": {
+    "database": "estado em memória; nenhum SQLite persistente",
+    "discord": "M497 é matriz de motor; integração Discord offline é coberta separadamente por M496",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/tagClassicDeckOutRotationMatrix2v2.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Matriz de compra obrigatória no início do turno; não cobre compras opcionais por efeito.",
+    "Sem chamada Discord ao vivo; M496 cobre o handler e os builders offline.",
+    "Não altera runtime, catálogo ou certificações."
+  ]
+}
