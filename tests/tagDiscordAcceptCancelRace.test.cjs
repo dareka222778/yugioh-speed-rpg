@@ -148,7 +148,7 @@ test('real TagDuel Discord Accept and Cancel handlers race on the same revision 
     const members=JSON.parse(row.members);
     const locks=item.ids.map(id=>count(inspector,'tag_members',id));
     const duelLocks=item.ids.map(id=>count(inspector,'duel_members',id));
-    assert.equal(winner.status,'playing'===winner.status?'playing':winner.status);
+    assert.equal(winner.status,winner.mode==='accept'?'playing':'cancelled','the handler winner and persisted terminal state must agree');
     if(winner.mode==='accept'){
       assert.equal(row.status,'playing');
       assert.ok(row.state);
