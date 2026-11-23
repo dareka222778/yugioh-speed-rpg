@@ -1,0 +1,94 @@
+{
+  "mission": "M542",
+  "runId": "work-20261122T224500-0300-M542",
+  "owner": "Work principal",
+  "title": "Cross-mode timeout handoff through real Discord component handlers",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "branch": "feat/work-m542-cross-mode-timeout-discord-handoff-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "priority": "P1 — validar o ciclo completo de timeout entre 1v1 e TagDuel pelo handler real de componentes Discord, incluindo liberação de locks, fila terminal e privacidade.",
+  "scenarios": [
+    {
+      "mode": "1v1 pending → TagDuel",
+      "component": "duel:accept",
+      "deadlineMs": 120000,
+      "expected": [
+        "late Accept rejected",
+        "creator lock released",
+        "TagDuel lobby created",
+        "terminal public payload has no controls"
+      ]
+    },
+    {
+      "mode": "1v1 playing → TagDuel",
+      "component": "duel:act",
+      "deadlineMs": 1800000,
+      "expected": [
+        "late private action replaced by public terminal panel",
+        "both 1v1 locks released",
+        "TagDuel lobby created",
+        "private hand UIDs absent from public payload"
+      ]
+    },
+    {
+      "mode": "TagDuel lobby → 1v1",
+      "component": "tag:accept",
+      "deadlineMs": 300000,
+      "expected": [
+        "late Accept rejected",
+        "host lock released",
+        "1v1 invitation created",
+        "terminal public payload has no controls"
+      ]
+    },
+    {
+      "mode": "TagDuel playing → 1v1",
+      "component": "tag:act",
+      "deadlineMs": 1800000,
+      "expected": [
+        "late private action rejected",
+        "four physical locks released",
+        "four 1v1 invitations created",
+        "physical card UIDs conserved and hidden from public state"
+      ]
+    }
+  ],
+  "invariants": {
+    "offlineDiscord": "real handleDuelComponent/handleTagComponent and discord.js builders; validateDiscordPayload",
+    "playerAssets": "players, player_cards, starter_grants, decks and deck_cards unchanged",
+    "privateHands": "no private UIDs in public terminal payload/state",
+    "deck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5,
+    "inventoryGranted": 0
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "persistentDatabaseUsed": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "SQLite temporário e fake Discord interactions; sem token, guild ou gateway real.",
+    "Deadlines controlados com Date.now; sem esperar 2/5/30 minutos.",
+    "Testa integração de handlers e stores; não altera comandos de produção.",
+    "Não certifica cartas nem altera catálogo."
+  ]
+}\n
