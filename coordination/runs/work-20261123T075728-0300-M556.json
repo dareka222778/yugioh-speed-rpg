@@ -1,0 +1,67 @@
+{
+  "runId": "work-20261123T075728-0300-M556",
+  "mission": "M556",
+  "owner": "Work principal",
+  "priority": "P1 — implementar e testar Dark Mimic LV1/LV3 no TagDuel: FLIP compra 1; Standby opcional envia LV1 ao GY e Invoca-Especial LV3 da mão/Deck do representante ativo; LV3 destruído por batalha compra 1, ou 2 se a mesma instância foi Invocada pelo efeito de LV1.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T07:57:28-03:00",
+  "lastActivityAt": "2026-11-23T07:57:28-03:00",
+  "endedAt": null,
+  "branch": "feat/work-m556-dark-mimic-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c804bfcffaeb1906594bd038e88e29994711e5e2",
+  "sharedHeadAtReservation": "c804bfcffaeb1906594bd038e88e29994711e5e2",
+  "reservedFiles": [
+    "src/darkMimicTagAdapter.ts",
+    "tests/darkMimicTagAdapter.test.cjs",
+    "docs/evidence/m556-dark-mimic-tag-adapter.json",
+    ".github/workflows/m556-dark-mimic-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T07:57:28-03:00",
+    "checkedAgainst": [
+      "M550 (#502) reserva flipCycleTagAdapter.ts e quatro caminhos próprios; M551 reserva guardianSphinxMassReturnTagAdapter.ts e quatro caminhos próprios.",
+      "M552–M555 (#497–#500) são corridas de handlers Discord com três caminhos próprios cada; não sobrepõem os quatro caminhos M556.",
+      "M544–M548 mantêm adapters próprios; M61 (#17) mantém resolver/metadata/certification/manifest protegidos.",
+      "Dark Mimic LV1 (74713514) e LV3 (01102515) ausentes de cardMetadata, cardCertifications e da base M61/M60 consultada; nenhuma PR/branch anterior encontrada para esses IDs."
+    ],
+    "note": "M556 é adapter/test/evidence/workflow isolado. Não altera resolver, catálogo, manifest, allowlist, certificados, inventário, dados persistentes ou comandos de produção; integração depende de handoff M61."
+  },
+  "baseline": {
+    "sharedCertified": 969,
+    "remainingTo1000": 31,
+    "developmentSnapshot": 1014,
+    "newAdmissions": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "implementation": {
+    "cards": [
+      "Dark Mimic LV1",
+      "Dark Mimic LV3"
+    ],
+    "status": "in-progress",
+    "integration": "blocked pending explicit M61 handoff",
+    "discord": "offline builders/handler not live"
+  },
+  "validation": {
+    "focused": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "releaseToAuxiliary": [
+    "Após conclusão, auxiliar pode sincronizar sem force e corrigir somente os quatro caminhos M556; sem merge/deploy."
+  ],
+  "nextTask": "Aguardar CI M556; se M61 liberar resolver, integrar apenas o subset explicitamente transferido; caso contrário seguir para próxima família independente.",
+  "nextWindow": "2026-11-23T12:30:00-03:00"
+}
