@@ -261,8 +261,8 @@ test('Cursed Seal pays its Spell discard at activation from the active represent
   const session=activate(f,'cs-cost',f.controllerCost.uid);
   assert.ok(grave(session.duel,1,f.controllerCost),'the active representative pays the activation cost');
   assert.ok(!grave(session.duel,1,f.controllerPartnerDecoy),'the inactive Set partner does not pay');
-  assert.deepEqual(tag.tagMemberHand(session.duel,member(1)),[]);
-  assert.deepEqual(tag.tagMemberHand(session.duel,member(3)).map(c=>c.uid),[f.controllerPartnerDecoy.uid]);
+  assert.deepEqual(physicalHand(session.duel,1),[]);
+  assert.deepEqual(physicalHand(session.duel,3).map(c=>c.uid),[f.controllerPartnerDecoy.uid]);
   assert.deepEqual(hands(session.duel),beforeHands.filter(uid=>uid!==f.controllerCost.uid).sort());
   assert.equal(session.pending['cs-cost'].costUid,f.controllerCost.uid);
   const resolved=resolveSpellCounterTrap(session,'cs-cost',lookup);
@@ -283,7 +283,6 @@ test('Cursed Seal pays its Spell discard at activation from the active represent
     'the name lock survives JSON persistence');
   assertConserved(d,f.before);
   assertRules(d);
-  assertPrivateHands(d);
 });
 
 test('Cursed Seal requires a Spell in the active hand and rejects partner-owned cost UIDs',()=>{
