@@ -35,6 +35,13 @@ function makeState({
 const event=(state,uid,summonType='flip')=>({kind:'flip-summon',sourceUid:uid,turn:state.core.turn,summonType,previousFaceUp:false,faceUp:true});
 const source=(state,team=0)=>state.core.players[team].monsters[0];
 const ids=state=>tagInventory(state).map(card=>card.uid+'='+card.id).sort();
+function moveSourceToGrave(state,team=0,uid='m0:source'){
+  const index=state.core.players[team].monsters.findIndex(card=>card.uid===uid);
+  assert.notEqual(index,-1);
+  const [card]=state.core.players[team].monsters.splice(index,1);
+  state.core.players[team].grave.push({uid:card.uid,id:card.id});
+  state.core.cardLifetimes[uid]={zone:'grave',epoch:(state.core.cardLifetimes[uid]?.epoch??0)+1};
+}
 
 test('Stealth Bird only plans 1000 damage on a real Flip Summon',()=>{
   const state=makeState({cardId:STEALTH_BIRD_ID});
@@ -91,7 +98,7 @@ test('an inactive partner-owned Des Lacooda draws for the active representative'
 test('a trigger plan still resolves if the source leaves the field after activation',()=>{
   const state=makeState({cardId:DES_LACOODA_ID,deck0:[ref('m0:drawn')]});
   const plan=planFlipSummon(state,event(state,'m0:source'),'m0:source',lookup);
-  const afterActivation=structuredClone(state);afterActivation.core.players[0].monsters=[];
+  const afterActivation=structuredClone(state);moveSourceToGrave(afterActivation,0,'m0:source');
   const result=resolveFlipSummon(afterActivation,plan);
   assert.equal(result.drawnUid,'m0:drawn');
 });
@@ -170,7 +177,7 @@ test('self-set marker survives JSON restoration and blocks a second use',()=>{
 test('source removal before self-set resolution consumes the use but does not move a missing card',()=>{
   const state=makeState();
   const plan=planSelfSet(state,'m0:source',lookup);
-  const afterActivation=structuredClone(state);afterActivation.core.players[0].monsters=[];
+  const afterActivation=structuredClone(state);moveSourceToGrave(afterActivation,0,'m0:source');
   const result=resolveSelfSet(afterActivation,plan);
   assert.equal(result.status,'source-left-field');
   assert.equal(result.state.core.players[0].monsters.length,0);
