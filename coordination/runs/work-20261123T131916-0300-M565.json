@@ -1,0 +1,157 @@
+{
+  "runId": "work-20261123T131916-0300-M565",
+  "mission": "M565",
+  "owner": "Work principal",
+  "priority": "P1 — Call of the Haunted (97077563): ativação de Trap Contínua previamente Setada, alvo próprio no GY, Special Summon face-up Attack e vínculo bidirecional persistente: se a Trap deixa o campo, destruir o monstro; se o monstro deixa o campo, enviar a Trap ao GY. Preservar assentos físicos, rotação, janelas de resposta, zonas e replay.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T13:19:16-03:00",
+  "lastActivityAt": "2026-11-23T13:19:16-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "02dda19821375681c15c0f8ca6d8803af594095e",
+  "branch": "feat/work-m565-call-of-the-haunted-tag-adapter-20261123",
+  "baseBranch": "feat/work-m564-premature-burial-tag-adapter-20261123",
+  "baseSha": "672fe84068b2c4b7688a1fca0d5407d0601491ff",
+  "reservedFiles": [
+    "src/callOfTheHauntedTagAdapter.ts",
+    "tests/callOfTheHauntedTagAdapter.test.cjs",
+    "docs/evidence/m565-call-of-the-haunted-tag-adapter.json",
+    ".github/workflows/m565-call-of-the-haunted-tag-adapter.yml"
+  ],
+  "scope": [
+    "src/callOfTheHauntedTagAdapter.ts",
+    "tests/callOfTheHauntedTagAdapter.test.cjs",
+    "docs/evidence/m565-call-of-the-haunted-tag-adapter.json",
+    ".github/workflows/m565-call-of-the-haunted-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T13:19:16-03:00",
+    "checkedAgainst": [
+      "M557–M563: quatro caminhos próprios por missão; nenhum dos quatro caminhos M565 coincide.",
+      "M564 Premature Burial: branch base de M565; reutiliza o padrão TargetBinding/UID, mas Call of the Haunted tem janela Trap e vínculo bidirecional próprios.",
+      "M61 (#17): resolver, metadata, certificações e manifesto continuam protegidos; M565 não altera arquivos centrais.",
+      "M242 e M319 não implementam Call of the Haunted; busca em cardCatalog/cardMetadata/cardCertifications, branches e PRs não encontrou passcode 97077563."
+    ]
+  },
+  "card": {
+    "name": "Call of the Haunted",
+    "passcode": "97077563",
+    "konamiDatabaseId": 4989,
+    "type": "Continuous Trap",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4989&ope=2&request_locale=en",
+    "officialText": "Activate this card by targeting 1 monster in your GY; Special Summon that target in Attack Position. When this card leaves the field, destroy that monster. When that monster is destroyed, destroy this card.",
+    "firstTcgPrinting": {
+      "date": "2002-10-20",
+      "set": "PSV-012",
+      "product": "Pharaoh's Servant"
+    }
+  },
+  "design": {
+    "scope": "Adapter TagDuel isolado em branch dependente de M564; sem integração central/catalog registration.",
+    "activation": "Trap face-down em backrow, setTurn anterior ao turno atual; janela main-priority/battle-priority no próprio turno ou chain-response com corrente aberta; a equipe controladora pode ativar independentemente do assento físico dono.",
+    "targeting": "Um monstro elegível do Cemitério compartilhado da equipe controladora, vinculado por TargetBinding zone+epoch.",
+    "resolution": "Trap vira face-up e permanece no backrow; se fonte/alvo/zone ficar inválido ou efeito negado, Trap vai ao GY sem invocação.",
+    "summon": "Special Summon face-up Attack; Backrow.equippedTo liga Trap ao UID físico do monstro.",
+    "link": "Se Call of the Haunted deixa o campo por destruição/retorno/banimento, destruir o monstro; se o monstro deixa o campo, enviar a Trap ao GY. O UID é procurado mesmo após mudança de controle.",
+    "ownership": "Trap e monstro mantêm owner físico; controle do monstro acompanha a equipe do GY.",
+    "idempotency": "activationId persistido em JSON; replay bloqueado.",
+    "limits": {
+      "mainDeck": "20–30 construction",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "plannedTests": [
+    "Trap deve estar face-down, em backrow e setTurn anterior",
+    "não pode ativar no turno em que foi Setada",
+    "janela main-priority própria e battle-priority própria",
+    "chain-response permite resposta com chain aberta mesmo no turno adversário",
+    "chain-response sem chain e prioridade incompatível rejeitados",
+    "fonte física de parceiro inativo pode ser ativada pela equipe",
+    "alvo deve ser monstro do próprio GY",
+    "token/não-monstro/Fusion/Ritual impróprio rejeitados",
+    "Fusion/Ritual properlySummoned elegíveis",
+    "Monster Zone cheia impede ativação",
+    "Trap vira face-up na ativação e permanece no backrow",
+    "alvo removido/epoch alterado/negação envia Trap ao GY sem invocar",
+    "resolução válida invoca face-up Attack e grava equippedTo",
+    "Trap deixa campo por destruição e destrói monstro",
+    "Trap retornada à mão do dono físico destrói monstro",
+    "Trap banida destrói monstro",
+    "monstro destruído envia Call of the Haunted ao GY",
+    "monstro que sai por bounce/banimento também encerra link e envia Trap ao GY",
+    "destruição do monstro após mudança de controle ainda encontra Trap",
+    "links e replay persistem em JSON",
+    "activationId duplicado rejeitado",
+    "quatro rotações físicas e dono de parceiro inativo",
+    "3+3 zonas, Field Zone separada e Extra Deck 5",
+    "mão acima de seis e Deck curto preservados",
+    "inventário de reservas conservado e sem grants",
+    "entrada imutável e UIDs únicos"
+  ],
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "mainHead": "197bbda07efc81658604bcd12308665571e26d59",
+    "backupVerified": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "deploymentWorkflowFound": false,
+    "deploymentsApiExposed": false
+  },
+  "handoffRequests": [
+    {
+      "target": "PR #17 / M61",
+      "commentId": 7106460330,
+      "status": "awaiting-explicit-release",
+      "scope": [
+        "src/monsterEffects.ts",
+        "src/duelEngineCurrent.ts"
+      ]
+    }
+  ],
+  "tests": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "not-run"
+  },
+  "limitations": [
+    "Adapter não integrado ao resolver v9; Call of the Haunted permanece não certificada e indisponível em decks.",
+    "Testes offline com TagDuel temporário; sem gateway/guild Discord real.",
+    "Janela de resposta é modelada explicitamente no plano; o engine central continuará responsável por ordenar/validar toda a corrente real.",
+    "M61 sem liberação explícita; arquivos centrais, catálogo, manifesto e allowlist não serão alterados."
+  ],
+  "pr": null,
+  "workBlocks": [
+    "Releitura do state.json e checkpoint M564; verificado shared HEAD e base M564 branch após correções.",
+    "Verificado passcode/CID/texto oficial e ausência de Call of the Haunted em catálogo, certificações, branches e PRs.",
+    "Reservados quatro caminhos novos M565, sem sobreposição com M557–M564/M61; branch empilhada sobre M564 para reutilizar a família de revival link."
+  ],
+  "nextTask": "Implementar janela de ativação Trap, vínculo bidirecional e testes; depois conferir HEAD/coordenação/CI e escolher próxima família independente.",
+  "nextWindow": "2026-11-23T17:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T13:19:16-03:00",
+    "endedAt": null,
+    "elapsedMinutes": null,
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  }
+}
