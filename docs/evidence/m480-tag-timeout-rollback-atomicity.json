@@ -1,0 +1,42 @@
+{
+  "mission": "M480",
+  "title": "TagDuel automatic decision-timeout transaction rollback under SQLite write faults",
+  "branch": "feat/work-m480-tag-timeout-rollback-atomicity-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "82a49bf54c68f777252a0c7f3616eaf62b1ee774",
+  "testFile": "tests/tagTimeoutRollbackAtomicity2v2.test.cjs",
+  "testCount": 2,
+  "scenarios": [
+    "At the exact decision deadline, a SQLite trigger aborts the terminal transition-event insert inside getTag. The session row, winner, revision, serialized state, event rows and all four participant locks must remain unchanged; retrying the same deadline after removing the trigger must finish the duel and release all locks.",
+    "At the exact decision deadline, a SQLite trigger aborts deletion of the participant locks after getTag writes the terminal state and event. The transaction must roll back; retrying the same deadline must persist exactly one terminal event and remove all four locks."
+  ],
+  "invariants": [
+    "The 30-minute decision timeout is evaluated at its exact deadline.",
+    "Timeout winner, terminal status, revision, transition event and lock release are atomic.",
+    "Failed timeout persistence does not consume, duplicate or reassign physical card UIDs.",
+    "Player rows and player_cards remain unchanged.",
+    "Retrying the same deadline after a transient SQLite failure produces one terminal transition."
+  ],
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "limits": [
+    "Tests use temporary SQLite and real compiled TagStore/TagDuel modules.",
+    "Fault injection covers SQL trigger aborts, not process termination or filesystem corruption.",
+    "No runtime, resolver, catalog manifest, allowlist, persistent database or player data is modified.",
+    "This is a TagDuel persistence regression and certifies no new card behavior.",
+    "No live Discord API session is performed."
+  ],
+  "command": "npm run check && npm run build && node --test tests/tagTimeoutRollbackAtomicity2v2.test.cjs",
+  "ciStatus": "pending"
+}
