@@ -1,0 +1,69 @@
+{
+  "mission": "M467",
+  "runId": "work-20261121T160705-0300-M467",
+  "status": "implementation-complete-ci-pending",
+  "priority": "P1 — prove classic-owned TagDuel freezes each participant's active deck at the correct consent boundary and never rereads later deck edits.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagOwnedDeckConsentSnapshot2v2.test.cjs",
+      "docs/evidence/m467-tag-owned-deck-consent-snapshot.json",
+      ".github/workflows/m467-tag-owned-deck-consent-snapshot.yml"
+    ],
+    "topLevelTests": 1,
+    "consentSnapshots": 4,
+    "postConsentDeckEdits": 2,
+    "behavior": "The host loadout is captured at lobby creation; seat 1's loadout is captured at acceptance; seat 2 edits before acceptance and the new loadout is captured; seat 3 accepts without edits. After the final consent, the actual TagDuel inventory is compared as a multiset against each seat's saved consent snapshot, while current active decks for seats 0/1 intentionally differ. All physical UIDs remain m0–m3 and player/collection/deck rows remain unchanged by TagDuel. The persisted TagDuel JSON is then reloaded through a fresh tagStore module instance; all four consent snapshots, physical UID inventory and seat ownership must survive restoration unchanged.",
+    "validation": "Temporary SQLite; createPlayer/chooseStarterDeck; decks.openDeck/changeDeck; createTagLobby/acceptTag; physical seat extraction from core/reserves; TagDuel inventory conservation; Discord public/private payload builders.",
+    "persistenceReload": true
+  },
+  "invariants": {
+    "hostSnapshotAtLobbyCreation": true,
+    "otherSeatSnapshotAtAcceptance": true,
+    "preConsentDeckEditIsIncluded": true,
+    "postConsentDeckEditsAreExcluded": true,
+    "exactPhysicalSeatDeckMultisets": true,
+    "physicalUidPrefixesPreserved": true,
+    "noTagDuelInventoryGrant": true,
+    "noCollectionConsumption": true,
+    "privateHandsRemainPrivate": true,
+    "persistenceReloadPreservesState": true,
+    "persistenceReloadPreservesConsentSnapshots": true
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false,
+    "merge": false,
+    "deploy": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Additional collection rows used for deck-swap fixtures exist only in a temporary SQLite database; no live player or production data is accessed.",
+    "Discord payloads are validated offline; no live guild/token test.",
+    "No new card effect is implemented or certified."
+  ]
+}
