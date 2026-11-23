@@ -71,7 +71,9 @@ function assertState(state:GilasaurusState):void{
   if(!state||state.version!==1||state.mode!=='tag-classic'||!state.core||
     !Array.isArray(state.core.players)||state.core.players.length!==2||
     !Array.isArray(state.members)||state.members.length!==4||
-    !Array.isArray(state.active)||state.active.length!==2||
+    !Array.isArray(state.active)||state.active.length!==2||!state.reserves||
+    state.active.some((seat,team)=>!Number.isInteger(seat)||seat<0||seat>3||seat%2!==team)||
+    !state.core.pending||!Array.isArray(state.core.chain)||
     !state.core.teamRotation||!Number.isSafeInteger(state.core.turn)||state.core.turn<1||
     !Number.isSafeInteger(state.cursor)||state.cursor<0||state.cursor>3||
     state.core.current!==state.cursor%2||state.active[state.core.current]!==state.cursor||
@@ -90,7 +92,7 @@ function assertState(state:GilasaurusState):void{
     if(player.id!=='tag-team-'+team||!Array.isArray(player.deck)||!Array.isArray(player.hand)||
       !Array.isArray(player.monsters)||player.monsters.length>3||
       !Array.isArray(player.backrow)||player.backrow.length>3||
-      !Array.isArray(player.grave)||(player.extra??[]).length>5||
+      !Array.isArray(player.grave)||!Array.isArray(player.extra??[])||(player.extra??[]).length>5||
       state.active[team]%2!==team)
       throw Error('Zonas 3+3, Extra Deck ou representante ativo inválidos para Gilasaurus.');
     const prefix='m'+state.active[team]+':';
@@ -100,7 +102,8 @@ function assertState(state:GilasaurusState):void{
   }
 
   for(const [seat,held] of Object.entries(state.reserves)){
-    if(!held||!Array.isArray(held.deck)||!Array.isArray(held.hand)||(held.extra??[]).length>5)
+    if(!held||!Array.isArray(held.deck)||!Array.isArray(held.hand)||
+      !Array.isArray(held.extra??[])||(held.extra??[]).length>5)
       throw Error('Deck/mão/Extra da reserva física inválidos.');
     const prefix='m'+seat+':';
     for(const card of [...held.deck,...held.hand,...(held.extra??[])])
@@ -121,7 +124,8 @@ function assertState(state:GilasaurusState):void{
     Object.entries(memory.pending).some(([id,value])=>!validActivationId(id)||!value||
       typeof value.sourceUid!=='string'||(value.controllerTeam!==0&&value.controllerTeam!==1)||
       !Number.isInteger(value.controllerSeat)||(value.opponentTeam!==0&&value.opponentTeam!==1)||
-      !Number.isInteger(value.opponentSeat)||!Number.isSafeInteger(value.turn))||
+      !Number.isInteger(value.opponentSeat)||value.controllerSeat<0||value.controllerSeat>3||
+      value.opponentSeat<0||value.opponentSeat>3||!Number.isSafeInteger(value.turn))||
     Object.entries(memory.resolved).some(([id,value])=>!validActivationId(id)||value!==true)))
     throw Error('Memória de ativações Gilasaurus inválida.');
 }
@@ -304,7 +308,7 @@ export function planGilasaurusOpponentChoice(
     kind:'gilasaurus-opponent-choice',sourceUid:pending.sourceUid,
     activationId,controllerTeam:pending.controllerTeam,
     opponentTeam:pending.opponentTeam,opponentSeat:pending.opponentSeat,
-    turn:pending.turn,...reviveUid!==undefined?{reviveUid}:{}
+    turn:pending.turn,...(reviveUid!==undefined?{reviveUid}:{})
   };
 }
 
