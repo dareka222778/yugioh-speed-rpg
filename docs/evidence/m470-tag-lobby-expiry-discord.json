@@ -1,0 +1,65 @@
+{
+  "mission": "M470",
+  "runId": "work-20261121T163500-0300-M470",
+  "status": "implementation-complete-ci-pending",
+  "priority": "P1 — validate TagDuel lobby expiry at the exact five-minute boundary, physical lock release, scheduled public refresh and rejection of late acceptance.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "6d936254a80ec2a3c39af2077295d8f1f44177b5"
+  },
+  "branch": "feat/work-m470-tag-lobby-expiry-discord-20261121",
+  "implementation": {
+    "files": [
+      "tests/tagLobbyExpiryDiscord2v2.test.cjs",
+      "docs/evidence/m470-tag-lobby-expiry-discord.json",
+      ".github/workflows/m470-tag-lobby-expiry-discord.yml"
+    ],
+    "topLevelTests": 2,
+    "handlerInteractions": 2,
+    "boundaryCases": 2,
+    "behavior": [
+      "A partially accepted lobby remains open one millisecond before LOBBY_MS and expires exactly at the five-minute boundary.",
+      "Expiry increments the revision once, clears state, removes tag_members locks for host and accepted partner, and makes currentTag return undefined for all four seats.",
+      "dueTags schedules the expired public message until markTagPublished records the new revision; repeated getTag calls do not increment revision again.",
+      "An Accept button rendered before expiry is rejected through handleTagComponent after the deadline and cannot restore the lobby or reacquire a seat lock."
+    ],
+    "validation": "Temporary SQLite, createTagLobby, acceptTag through handleTagComponent, getTag(id, now), tagDeadline, dueTags, markTagPublished, tagPublicMessage and validateDiscordPayload."
+  },
+  "invariants": {
+    "exactFiveMinuteBoundary": true,
+    "oneMillisecondBeforeDeadlineStillOpen": true,
+    "expiryRevisionIncrementedOnce": true,
+    "allAcceptedSeatLocksReleased": true,
+    "expiredPublicRefreshQueued": true,
+    "publishedExpiryNotRequeued": true,
+    "staleAcceptRejected": true,
+    "noLockReacquired": true,
+    "inventoryTablesUnchanged": true
+  },
+  "safety": {
+    "isolatedSqlite": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "realPlayerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "allowlistChanged": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Discord handler/builders are exercised offline; no live guild, token or Discord API call.",
+    "Temporary player profiles and SQLite only; no persistent player/deck/collection state is changed.",
+    "Test/evidence/workflow only; no runtime, card effect, catalogue, certification or allowlist changes."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}

@@ -1,0 +1,36 @@
+name: M470 TagDuel lobby expiry Discord contract
+on:
+  push:
+    branches:
+      - feat/work-m470-tag-lobby-expiry-discord-20261121
+    paths:
+      - 'tests/tagLobbyExpiryDiscord2v2.test.cjs'
+      - 'docs/evidence/m470-tag-lobby-expiry-discord.json'
+      - '.github/workflows/m470-tag-lobby-expiry-discord.yml'
+  pull_request:
+    paths:
+      - 'tests/tagLobbyExpiryDiscord2v2.test.cjs'
+      - 'docs/evidence/m470-tag-lobby-expiry-discord.json'
+      - '.github/workflows/m470-tag-lobby-expiry-discord.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-lobby-expiry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m470-tag-lobby-expiry-discord.json', 'utf8'))"
+      - name: Run TagDuel lobby expiry tests
+        run: node --test tests/tagLobbyExpiryDiscord2v2.test.cjs
