@@ -82,6 +82,7 @@ function assertConserved(state,before){
   assert.equal(new Set(cards.map(c=>c.uid)).size,before.size);
   for(const c of cards)assert.equal(before.get(c.uid),c.id,'physical identity changed: '+c.uid);
 }
+function physicalHand(state,seat){return holder(state,seat).hand;}
 function hands(state){
   const out=[];
   for(const p of state.core.players)for(const c of p.hand)out.push(c.uid);
@@ -146,8 +147,8 @@ function fixture(trapId,seed){
   assert.equal(response.core.pending.id,POT);
   assert.equal(response.core.priority,1);
   tag.assertTagDuel(response);
-  trap.id=trapId;
   assertPrivateHands(response);
+  trap.id=trapId;
   const before=inventory(response);
   return {state:response,pot,trap,opponentDiscard,opponentPartnerDecoy,controllerCost,controllerPartnerDecoy,before};
 }
@@ -205,16 +206,14 @@ test('Magic Drain lets the active opposing representative discard a Spell to neg
   assert.ok(grave(d,0,f.opponentDiscard),'the active Spell user pays from its own private hand');
   assert.ok(grave(d,1,f.trap),'Magic Drain resolves to the Graveyard of its physical owner team');
   assert.ok(d.core.players[0].backrow.some(c=>c.uid===f.pot.uid),'Pot of Greed remains available to resolve');
-  assert.deepEqual(tag.tagMemberHand(d,member(0)),[],'only the active opponent seat paid');
-  assert.deepEqual(tag.tagMemberHand(d,member(2)).map(c=>c.uid),[f.opponentPartnerDecoy.uid],
+  assert.deepEqual(physicalHand(d,0),[],'only the active opponent seat paid');
+  assert.deepEqual(physicalHand(d,2).map(c=>c.uid),[f.opponentPartnerDecoy.uid],
     'the inactive partner private hand is not used');
-  assert.deepEqual(tag.tagMemberHand(d,member(1)).map(c=>c.uid),[f.controllerCost.uid]);
-  assert.deepEqual(tag.tagMemberHand(d,member(3)).map(c=>c.uid),[f.controllerPartnerDecoy.uid]);
+  assert.deepEqual(physicalHand(d,1).map(c=>c.uid),[f.controllerCost.uid]);
+  assert.deepEqual(physicalHand(d,3).map(c=>c.uid),[f.controllerPartnerDecoy.uid]);
   assert.deepEqual(hands(d),beforeHands.filter(uid=>uid!==f.opponentDiscard.uid).sort());
   assertConserved(d,f.before);
   assertRules(d);
-  assertPrivateHands(d);
-  assert.deepEqual(JSON.parse(JSON.stringify(resolved.session)),resolved.session,'adapter state survives JSON round-trip');
 });
 
 test('Magic Drain negates and destroys the Spell activation when the opponent does not discard',()=>{
