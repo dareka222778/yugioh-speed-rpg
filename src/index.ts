@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import {runtimeStatusLine,runtimePingText} from './runtimeStatus';
+import {createTimeoutSweepQueue,runIndependentTimeoutSweeps} from './timeoutSweep';
 import {RULES_PROFILE} from './rulesProfile';
 import {createTagLobby,createTagTraining,runTagBots,currentTag,getTag,setTagMessage,markTagPublished,dueTags,type TagRecord} from './tagStore';
 import {visualTagPublic,visualTagPrivate,visualTagCard,tagZonesMessage,visualTagZoneCard,tagPublicMessage,tagPrivateMessage} from './tagUI';
@@ -112,7 +113,24 @@ const busy = new Set<string>();
 async function arenaPayload(r:DuelRecord){try{return await visualDuelPublic(r);}catch(error){console.error('Falha no campo visual:',errorSummary(error));return duelPublicMessage(r);}}
 async function privatePayload(r:DuelRecord,owner:string,page=1){try{return await visualDuelPrivate(r,owner,page);}catch(error){console.error('Falha no painel visual:',errorSummary(error));return duelPrivateMessage(r,owner,page);}}
 let sweepingDuels=false;
-export async function sweepDuelTimeouts(){if(sweepingDuels)return;sweepingDuels=true;try{for(const r of expireDueDuels())await refreshArena(r);for(const pending of dueTags())await refreshTag(runTagBots(pending.id));}catch(error){console.error('Falha ao conferir prazo dos duelos:',errorSummary(error));}finally{sweepingDuels=false;}}
+export async function sweepDuelTimeouts(){
+ if(sweepingDuels)return;
+ sweepingDuels=true;
+ try{
+  const failures=await runIndependentTimeoutSweeps([
+   createTimeoutSweepQueue('1v1',expireDueDuels,async record=>{await refreshArena(record);}),
+   createTimeoutSweepQueue('2v2',dueTags,async pending=>{await refreshTag(runTagBots(pending.id));})
+  ]);
+  for(const failure of failures){
+   const location=failure.index===undefined?failure.stage:`${failure.stage} #${failure.index+1}`;
+   console.error(`Falha na fila ${failure.queue} (${location}):`,errorSummary(failure.error));
+  }
+ }catch(error){
+  console.error('Falha inesperada ao conferir prazo dos duelos:',errorSummary(error));
+ }finally{
+  sweepingDuels=false;
+ }
+}
 const arenaUpdates=new Map<string,Promise<void>>();
 async function refreshArena(record:DuelRecord){
  const previous=arenaUpdates.get(record.id)??Promise.resolve();

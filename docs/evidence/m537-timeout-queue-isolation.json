@@ -1,0 +1,88 @@
+{
+  "mission": "M537",
+  "runId": "work-20261122T213136-0300-M537",
+  "title": "Independent timeout queue draining for 1v1 and TagDuel",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "bd16f0da36b062f5f4de5055ab35387573f89965",
+  "branch": "feat/work-m537-timeout-queue-isolation-20261122",
+  "scope": [
+    "src/timeoutSweep.ts",
+    "src/index.ts",
+    "tests/timeoutSweepIsolation.test.cjs",
+    "docs/evidence/m537-timeout-queue-isolation.json",
+    ".github/workflows/m537-timeout-queue-isolation.yml"
+  ],
+  "priority": "P1 — uma falha ao enumerar uma modalidade ou processar uma sessão não pode interromper a drenagem das demais filas de timeout nem das sessões seguintes.",
+  "behavior": [
+    {
+      "case": "falha ao enumerar a fila 1v1",
+      "assertions": [
+        "a falha é registrada com stage=list",
+        "a fila 2v2 ainda enumera e publica todos os itens válidos"
+      ]
+    },
+    {
+      "case": "uma sessão individual falha ao publicar/avançar",
+      "assertions": [
+        "a falha registra fila, stage e índice",
+        "itens posteriores da mesma fila continuam",
+        "a outra modalidade continua"
+      ]
+    },
+    {
+      "case": "falha inesperada no runner de uma modalidade",
+      "assertions": [
+        "a falha é capturada como stage=runner",
+        "o próximo runner ainda é executado"
+      ]
+    }
+  ],
+  "runtimeIntegration": "sweepDuelTimeouts usa filas independentes para expireDueDuels/refreshArena e dueTags/runTagBots/refreshTag; sweepingDuels continua impedindo sobreposição de sweeps.",
+  "isolation": {
+    "database": "nenhum banco é aberto pelo helper; testes puros com fixtures em memória",
+    "discordCredentials": "nenhum token ou cliente Discord",
+    "persistentPlayerData": "nenhum acesso ou mutação"
+  },
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeck": 5,
+    "runtimeRuleChanges": false
+  },
+  "catalog": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "runtimeFilesChanged": [
+    "src/index.ts",
+    "src/timeoutSweep.ts"
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  },
+  "limitations": [
+    "Teste unitário do orquestrador; não chama gateway Discord.",
+    "A publicação individual continua delegada a refreshArena/refreshTag existentes; falhas internas já tratadas por esses handlers não são reinterpretadas."
+  ],
+  "testExecution": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "customWorkflow": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null
+  }
+}
