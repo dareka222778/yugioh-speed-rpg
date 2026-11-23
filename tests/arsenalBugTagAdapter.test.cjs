@@ -167,9 +167,10 @@ test('the adapter is pure and does not cache a previous stat condition',()=>{
   const state=makeState({otherMonsters:[monster('m2:insect',INSECT_A)]});
   const before=structuredClone(state);
   const first=arsenalBugModifier(state,uid(state),false,lookup);
+  assert.equal(first.atk,0);
+  assert.deepEqual(state,before,'adapter must not mutate the input state');
   state.core.players[0].monsters.find(m=>m.uid==='m2:insect').faceUp=false;
   const second=arsenalBugModifier(state,uid(state),false,lookup);
-  assert.equal(first.atk,0);
   assert.equal(second.atk,-1000);
   assert.deepEqual(state.core.players[0].monsters.find(m=>m.uid==='m0:arsenal'),before.core.players[0].monsters.find(m=>m.uid==='m0:arsenal'));
 });
