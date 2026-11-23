@@ -280,7 +280,8 @@ export function resolveSummonNegation(
  if(own!==core.chain.length-1)throw new Error('A Counter Trap só pode resolver no topo da corrente.');
  core.chain.pop();
  const targetKind=lookup(a.response.id)?.kind;
- const expectedKind=a.response.kind==='pending-summon'?'monster':targetKind==='spell'||targetKind==='trap'?targetKind:undefined;
+ const expectedKind=a.response.kind==='pending-summon'?(targetKind==='monster'?'monster':undefined):
+  targetKind==='spell'||targetKind==='trap'?targetKind:undefined;
  const targetAvailable=targetIsCurrent(core,a.response)&&!!expectedKind;
  let targetActivationNegated=false,targetDestroyed=false,effectApplied=false;
  if(!options.sourceActivationNegated&&targetAvailable){
