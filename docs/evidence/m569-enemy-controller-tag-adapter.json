@@ -39,7 +39,7 @@
   },
   "tests": {
     "file": "tests/enemyControllerTagAdapter.test.cjs",
-    "expectedScenarios": 35
+    "expectedScenarios": 37
   },
   "integration": {
     "resolverV9": false,

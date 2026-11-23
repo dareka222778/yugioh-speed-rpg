@@ -131,6 +131,22 @@ test('alvo que deixa o campo antes da resolução invalida o efeito',()=>{
   assert.equal(result.status,'target-invalid');
   assert.equal(result.state.core.players[0].grave.some(card=>card.uid==='m0:enemy-controller'),true);
 });
+test('fonte removida antes da resolução não executa o efeito',()=>{
+  const activated=activate(makeState(),'source-missing'),changed=structuredClone(activated.state);
+  const [spell]=changed.core.players[0].backrow.splice(0,1);changed.core.players[0].grave.push(spell);
+  synchronizeCardLifetimes(changed.core);
+  const result=resolveEnemyControllerResolution(changed,resolution(changed,'source-missing'),false,lookup);
+  assert.equal(result.status,'source-missing');
+  assert.equal(result.state.core.players[1].monsters[0].position,'atk');
+});
+test('alvo que muda para a própria equipe antes da resolução deixa de ser válido',()=>{
+  const activated=activate(makeState(),'controller-changed'),changed=structuredClone(activated.state);
+  const [target]=changed.core.players[1].monsters.splice(0,1);changed.core.players[0].monsters.push(target);
+  synchronizeCardLifetimes(changed.core);
+  const result=resolveEnemyControllerResolution(changed,resolution(changed,'controller-changed'),false,lookup);
+  assert.equal(result.status,'target-invalid');
+  assert.equal(result.state.core.players[0].monsters.some(card=>card.uid==='m1:red-monster'),true);
+});
 test('modo controle exige um Tributo próprio',()=>{
   const state=makeState();
   assert.throws(()=>planEnemyControllerActivation(state,sourceFor(state),'no-tribute','take-control','m1:red-monster',undefined,lookup));

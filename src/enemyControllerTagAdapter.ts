@@ -104,7 +104,7 @@ function assertConserved(before:string,after:EnemyControllerState):void{
   if(inventorySnapshot(after)!==before)throw Error('Enemy Controller alterou ou perdeu identidade física do inventário.');
 }
 function assertOwnPriority(state:EnemyControllerState,team:Team):void{
-  if(state.core.current!==team||(state.core.phase!=='main'&&state.core.phase!=='battle')||
+  if(state.core.current!==team||state.core.priority!==team||(state.core.phase!=='main'&&state.core.phase!=='battle')||
     state.core.chain.length>0||state.core.pending.kind!=='none'||state.core.choice||
     state.core.handFlow||state.core.turnEnding||state.core.damageStep)
     throw Error('Enemy Controller da mão exige prioridade própria na Main/Battle Phase sem corrente pendente.');
@@ -140,7 +140,7 @@ function sourceContext(state:EnemyControllerState,sourceUid:string,lookup:Lookup
   let controllerTeam:Team,window:Window;
   if(state.core.phase==='response'&&state.core.chain.length>0&&state.core.priority===team){
     controllerTeam=team;window='chain-response';
-  }else if(state.core.current===team&&(state.core.phase==='main'||state.core.phase==='battle')&&
+  }else if(state.core.current===team&&state.core.priority===team&&(state.core.phase==='main'||state.core.phase==='battle')&&
     state.core.chain.length===0&&state.core.pending.kind==='none'&&!state.core.choice&&!state.core.handFlow){
     controllerTeam=team;window='own-priority';
   }else throw Error('Enemy Controller setado exige prioridade própria ou janela de resposta válida.');
