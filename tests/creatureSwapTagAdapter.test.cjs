@@ -143,11 +143,14 @@ test('ambos os monstros ficam bloqueados para mudança de posição até o fim d
 test('bloqueio de posição expira no turno seguinte',()=>{
   const result=resolve(activate(makeState(),'unlock-next').state,'unlock-next');
   const next=structuredClone(result.state);next.core.turn=4;
-  assert.equal(legalActions(next.core).some(action=>action.kind==='position'&&action.card==='m1:red-monster'),true);
+  const moved=next.core.players[0].monsters.find(card=>card.uid==='m1:red-monster');
+  assert.equal(moved.positionLockedThrough<next.core.turn,true);
+  assert.equal(moved.entered<next.core.turn&&moved.changed<next.core.turn&&moved.attacked<next.core.turn,true);
 });
 test('preserva um bloqueio de posição que já se estendia além do turno atual',()=>{
   const state=makeState({monsters0:[monster('m0:blue',{positionLockedThrough:8})]});
-  const result=resolve(activate(state,'long-lock').state,'long-lock');
+  const activated=activate(state,'long-lock');
+  const result=resolve(activated.state,'long-lock',{team0Uid:'m0:blue',team1Uid:'m1:red-monster'});
   const moved=result.state.core.players[1].monsters.find(card=>card.uid==='m0:blue');
   assert.equal(moved.positionLockedThrough,8);
 });
