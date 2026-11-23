@@ -120,14 +120,15 @@ function responseFor(id:string,team:Team,core:DuelState,lookup:SummonNegationLoo
   if(id!==SOLEMN_JUDGMENT_ID||last.actor!==opponent||last.negated)return;
   const kind=lookup(last.id)?.kind;
   if(kind!=='spell'&&kind!=='trap')return;
-  if(!cardOnField(core,opponent,last.card))return;
+  const activated=cardOnField(core,opponent,last.card);
+  if(!activated||activated.id!==last.id)return;
   return {kind:'chain-activation',actor:last.actor as Team,card:last.card,id:last.id};
  }
  const pending=core.pending;
  if(pending.kind==='summon'||pending.kind==='flip'||pending.kind==='specialSummon'){
   if(pending.actor!==opponent)return;
   const m=monsterOnField(core,opponent,pending.card);
-  if(!m||lookup(m.id)?.kind!=='monster')return;
+  if(!m||lookup(m.id)?.kind!=='monster'||(pending.id&&pending.id!==m.id))return;
   if(id===HORN_OF_HEAVEN_ID&&pending.kind==='flip')return;
   return {kind:'pending-summon',pendingKind:pending.kind,actor:pending.actor as Team,card:pending.card,id:m.id};
  }
@@ -166,16 +167,19 @@ function moveMonsterToOwnerGrave(core:DuelState,controller:Team,uid:string):bool
 function targetIsCurrent(core:DuelState,r:ResponseRef):boolean{
  if(r.kind==='pending-summon'){
   const p=core.pending;
+  const m=monsterOnField(core,r.actor,r.card);
   return core.chain.length===0&&p.kind===r.pendingKind&&p.actor===r.actor&&p.card===r.card&&
-   !core.pendingNegated&&!!monsterOnField(core,r.actor,r.card);
+   !core.pendingNegated&&!!m&&m.id===r.id;
  }
  if(r.kind==='pending-activation'){
   const p=core.pending;
+  const card=cardOnField(core,r.actor,r.card);
   return core.chain.length===0&&p.kind===r.pendingKind&&p.actor===r.actor&&p.card===r.card&&
-   !core.pendingNegated&&!!cardOnField(core,r.actor,r.card);
+   !core.pendingNegated&&!!card&&card.id===r.id;
  }
  const target=findLink(core,r);
- return !!target&&core.chain.at(-1)===target&&!target.negated&&!!cardOnField(core,r.actor,r.card);
+ const card=cardOnField(core,r.actor,r.card);
+ return !!target&&core.chain.at(-1)===target&&!target.negated&&!!card&&card.id===r.id;
 }
 function negateTarget(core:DuelState,r:ResponseRef):{negated:boolean;destroyed:boolean}|undefined{
  if(!targetIsCurrent(core,r))return;
@@ -275,7 +279,9 @@ export function resolveSummonNegation(
  const own=core.chain.findIndex(l=>l.actor===a.controllerTeam&&l.card===a.sourceUid&&l.id===a.sourceId);
  if(own!==core.chain.length-1)throw new Error('A Counter Trap só pode resolver no topo da corrente.');
  core.chain.pop();
- const targetAvailable=targetIsCurrent(core,a.response);
+ const targetKind=lookup(a.response.id)?.kind;
+ const expectedKind=a.response.kind==='pending-summon'?'monster':targetKind==='spell'||targetKind==='trap'?targetKind:undefined;
+ const targetAvailable=targetIsCurrent(core,a.response)&&!!expectedKind;
  let targetActivationNegated=false,targetDestroyed=false,effectApplied=false;
  if(!options.sourceActivationNegated&&targetAvailable){
   const result=negateTarget(core,a.response);
