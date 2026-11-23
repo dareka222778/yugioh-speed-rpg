@@ -30,7 +30,7 @@ function makeState(options={}){
       {id:'seat-3',name:'Seat 3',team:1}
     ],
     active:options.active??[0,1],cursor:0,reserves:{'2':{deck:[],hand:[]},'3':{deck:[],hand:[]}},
-    core:{version:1,players,turn:2,current:attackerTeam,phase:options.phase??'response',resume:options.resume??'battle',damageStep:options.damageStep??true,
+    core:{version:1,players,turn:2,current:attackerTeam,priority:options.priority??(1-attackerTeam),phase:options.phase??'response',resume:options.resume??'battle',damageStep:options.damageStep??true,
       pending:options.pending??{kind:'attack',actor:attackerTeam,card:attackerUid,target:sourceUid,stage:options.stage??'calculation'},chain:[],winner:null,reason:'',log:[]}
   };
 }
@@ -77,6 +77,11 @@ test('the effect is unavailable outside the Damage Step response window',()=>{
     {phase:'response',resume:'battle',damageStep:false},
     {phase:'choice',resume:'battle',damageStep:true}
   ])assert.equal(plan(makeState(options)),undefined);
+});
+
+test('the defending team must hold response priority to activate the Quick Effect',()=>{
+  const state=makeState({priority:0});
+  assert.equal(plan(state),undefined);
 });
 
 test('the source must be the actual attack target, not another monster',()=>{

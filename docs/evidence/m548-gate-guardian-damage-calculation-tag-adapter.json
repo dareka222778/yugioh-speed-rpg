@@ -48,7 +48,7 @@
   },
   "tests": {
     "file": "tests/gateGuardianDamageCalculationTagAdapter.test.cjs",
-    "expected": 20,
+    "expected": 21,
     "coverage": [
       "three official identities share the same policy",
       "exact damage calculation response window",
@@ -59,7 +59,8 @@
       "current controller versus physical owner",
       "four physical seats and active-seat rotations",
       "malformed and duplicate UIDs",
-      "pure planning and immutable ledger"
+      "pure planning and immutable ledger",
+      "the defending team must have response priority during the opponent's damage-calculation window."
     ]
   },
   "certification": {

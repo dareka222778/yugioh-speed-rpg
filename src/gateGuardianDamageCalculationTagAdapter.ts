@@ -81,6 +81,7 @@ export function planGateGuardianAttackReduction(
 
   const attackerTeam=pending.actor as 0|1;
   const controllerTeam=(1-attackerTeam) as 0|1;
+  if(core.priority!==controllerTeam)return;
   const source=uniqueMonster(state,controllerTeam,sourceUid);
   const attacker=uniqueMonster(state,attackerTeam,pending.card);
   if(!source||source.faceUp!==true||!COMPONENT_IDS.has(source.id)||
