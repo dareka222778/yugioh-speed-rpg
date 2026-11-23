@@ -1,0 +1,38 @@
+name: M562 Fiber Jar TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m562-fiber-jar-tag-adapter-20261123
+    paths:
+      - 'src/fiberJarTagAdapter.ts'
+      - 'tests/fiberJarTagAdapter.test.cjs'
+      - 'docs/evidence/m562-fiber-jar-tag-adapter.json'
+      - '.github/workflows/m562-fiber-jar-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/fiberJarTagAdapter.ts'
+      - 'tests/fiberJarTagAdapter.test.cjs'
+      - 'docs/evidence/m562-fiber-jar-tag-adapter.json'
+      - '.github/workflows/m562-fiber-jar-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fiber-jar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m562-fiber-jar-tag-adapter.json', 'utf8'))"
+      - name: Run M562 behavior regressions
+        run: node --test tests/fiberJarTagAdapter.test.cjs
