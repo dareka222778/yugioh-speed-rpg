@@ -12,6 +12,7 @@ const {
   resolvePrematureBurialResolution,
   destroyPrematureBurial,
   removePrematureBurialWithoutDestruction,
+  returnPrematureBurialToOwnerHand,
   onPrematureBurialMonsterLeavesField
 }=require('../dist/prematureBurialTagAdapter');
 
@@ -242,6 +243,24 @@ test('leaving the field without destruction removes the link but leaves the mons
   assert.ok(removed.core.players[0].monsters.some(c=>c.uid==='m0:blue-target'));
   assert.deepEqual(removed.prematureBurial.equipped,{});
 });
+test('returning the Equip Spell to hand routes it to its original physical owner after partner rotation',()=>{
+  const {state:pending}=activate(makeState(),'return-owner');
+  const equipped=resolve(pending,'return-owner').state;
+  const old={deck:equipped.core.players[0].deck,hand:equipped.core.players[0].hand,extra:equipped.core.players[0].extra};
+  const next=equipped.reserves['2'];
+  equipped.reserves['0']=old;delete equipped.reserves['2'];
+  equipped.core.players[0].deck=next.deck;equipped.core.players[0].hand=next.hand;equipped.core.players[0].extra=next.extra;
+  equipped.active[0]=2;equipped.cursor=2;
+  equipped.core.current=0;equipped.core.teamRotation.cursor=2;
+  equipped.core.teamRotation.active=equipped.active;equipped.core.teamRotation.reserves=equipped.reserves;
+  synchronizeCardLifetimes(equipped.core);
+  const returned=returnPrematureBurialToOwnerHand(equipped,'m0:premature-burial');
+  assert.ok(returned.reserves['0'].hand.some(c=>c.uid==='m0:premature-burial'));
+  assert.equal(returned.core.players[0].hand.some(c=>c.uid==='m0:premature-burial'),false);
+  assert.ok(returned.core.players[0].monsters.some(c=>c.uid==='m0:blue-target'));
+  assert.deepEqual(returned.prematureBurial.equipped,{});
+});
+
 test('when the equipped monster leaves the field, the Equip Spell is sent to GY without a second destruction',()=>{
   const {state:pending}=activate(makeState(),'monster-leaves');
   const equipped=resolve(pending,'monster-leaves').state;

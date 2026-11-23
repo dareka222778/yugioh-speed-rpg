@@ -35,7 +35,7 @@
       "extraDeck": 5
     }
   },
-  "testCount": 26,
+  "testCount": 27,
   "testNames": [
     "800 LP cost paid at activation and face-up Equip Spell occupies backrow",
     "LP below 800 rejects without mutation",
@@ -62,7 +62,8 @@
     "hand above six deferred and short in-duel Deck preserved",
     "inventory conservation including inactive reserves",
     "input immutability",
-    "malformed/duplicate physical UIDs rejected"
+    "malformed/duplicate physical UIDs rejected",
+    "return Equip Spell to original physical owner's hand after partner rotation"
   ],
   "certification": {
     "newCards": 0,

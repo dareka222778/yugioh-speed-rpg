@@ -433,6 +433,33 @@ export function removePrematureBurialWithoutDestruction(
   return next;
 }
 
+/** Returns the Equip Spell to its original physical owner's hand without destroying the monster. */
+export function returnPrematureBurialToOwnerHand(
+  input:PrematureBurialState,equipUid:string
+):PrematureBurialState{
+  assertState(input);
+  const link=input.prematureBurial?.equipped?.[equipUid];
+  if(!link)throw Error('Vínculo Premature Burial ausente ou já removido.');
+  const before=inventorySnapshot(input),next=structuredClone(input) as PrematureBurialState;
+  const backrow=next.core.players[link.controllerTeam].backrow,index=backrow.findIndex(card=>card.uid===equipUid);
+  if(index<0)throw Error('Premature Burial não está no backrow.');
+  const [equip]=backrow.splice(index,1);
+  const ownerTeam=link.equipOwnerSeat%2;
+  if(next.active[ownerTeam]===link.equipOwnerSeat){
+    next.core.players[ownerTeam].hand.push(equip);
+  }else{
+    const reserve=next.reserves[link.equipOwnerSeat];
+    if(!reserve)throw Error('Reserva física do dono de Premature Burial não existe.');
+    reserve.hand.push(equip);
+    next.core.teamRotation.reserves=next.reserves;
+  }
+  const equipped={...(next.prematureBurial?.equipped??{})};delete equipped[equipUid];
+  next.prematureBurial={pending:{...(next.prematureBurial?.pending??{})},
+    resolved:{...(next.prematureBurial?.resolved??{})},equipped};
+  synchronizeCardLifetimes(next.core);assertState(next);assertConserved(before,next);
+  return next;
+}
+
 /** When the equipped monster leaves the field, the Equip Spell is sent to the GY by the equip rule. */
 export function onPrematureBurialMonsterLeavesField(
   input:PrematureBurialState,targetUid:string,destination:'grave'|'banished'='grave'
