@@ -1,0 +1,81 @@
+{
+  "mission": "M498",
+  "runId": "work-20261122T064400-0300-M498",
+  "priority": "P1 — proteger o comando Discord /dupla treino: opções yugi/joey/kaiba/meu_deck, default Yugi, resposta pública e integração com createTagTraining/runTagBots; confirmar que usar meu_deck captura o deck ativo do usuário sem alterar coleção ou conceder cartas.",
+  "scope": {
+    "files": [
+      "tests/tagTrainingCommandContract.test.cjs",
+      "docs/evidence/m498-tag-training-command-contract.json",
+      ".github/workflows/m498-tag-training-command-contract.yml"
+    ],
+    "runtimeChanged": false,
+    "bootstrapChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "commandContract": {
+    "command": "/dupla treino",
+    "choices": [
+      "yugi",
+      "joey",
+      "kaiba",
+      "meu_deck"
+    ],
+    "default": "yugi",
+    "response": "pública no canal",
+    "handler": "runTagBots(createTagTraining(...)); visualTagPublic; setTagMessage; markTagPublished"
+  },
+  "testCoverage": [
+    "Verifica no builder real as quatro opções de deck e o default Yugi.",
+    "Verifica no handler real que treino usa resposta pública, chama createTagTraining/runTagBots e publica/persiste o painel.",
+    "Cria treino Yugi em SQLite temporário e compara multiconjunto de IDs do Deck/Extra do assento físico 0 com o NPC oficial.",
+    "Cria Deck ativo próprio, inicia treino meu_deck e compara o Deck/Extra físico do assento 0 com o loadout ativo congelado.",
+    "Confirma três NPCs automatizados, mão privada e payloads Discord públicos/privados válidos.",
+    "Confirma que treino Yugi e meu_deck não alteram coleção, grants, decks, deck_cards ou economia."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "source contract + builders offline; sem token, guild/canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/tagTrainingCommandContract.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "O contrato lê o source do bootstrap, mas não instancia um Client Discord nem chama guild/canal real.",
+    "A execução do NPC após a criação já é coberta por tests/tagTraining.test.cjs; M498 valida a ligação do comando ao serviço e as fontes de deck.",
+    "Nenhuma carta nova é implementada ou certificada."
+  ]
+}
