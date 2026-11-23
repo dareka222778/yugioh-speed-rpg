@@ -152,7 +152,8 @@ export function resolveCyberJarFlip(
   input:CyberJarState,
   plan:CyberJarPlan,
   effectNegated=false,
-  positionsByUid:Record<string,PositionChoice>={}
+  positionsByUid:Record<string,PositionChoice>={},
+  lookup:CyberJarLookup=cardLookup
 ):{
   status:'resolved'|'negated';
   state:CyberJarState;
