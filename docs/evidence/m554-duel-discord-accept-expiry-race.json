@@ -1,0 +1,74 @@
+{
+  "mission": "M554",
+  "runId": "work-20261123T035200-0300-M554",
+  "owner": "Work principal",
+  "title": "Cross-process race between real 1v1 Discord Accept handler and invitation expiry sweeper",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "dbe1fb281841a41fa4a3018fab0e7e4dc1bd8b80",
+  "branch": "feat/work-m554-duel-discord-accept-expiry-race-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "priority": "P1 — a real duel:accept component delivered at deadline-1ms must race safely with the 120-second sweeper at the exact deadline.",
+  "design": {
+    "isolation": "Temporary SQLite; independent Node processes and connections; parent database connection closed before the race.",
+    "concurrency": "Three races: handleDuelComponent(duel:accept) at deadline-1ms versus duelStore.expireDueDuels at deadline.",
+    "clock": "Deterministic per-process Date.now with explicit sweeper deadline; idempotent sweeper retry reconciles a transient lock conflict.",
+    "operations": [
+      "duelInteraction.handleDuelComponent",
+      "duelStore.acceptChallenge",
+      "duelStore.expireDueDuels"
+    ]
+  },
+  "assertions": [
+    "Accept either commits a playing DuelState or fails closed after expiry; sweeper never throws an unhandled error",
+    "the final invitation revision advances exactly once",
+    "playing outcome has two physical locks, a two-player state and one private success acknowledgement",
+    "expired outcome has null state and zero physical locks",
+    "all public payloads pass validateDiscordPayload",
+    "players, player_cards, starter_grants, decks and deck_cards remain unchanged"
+  ],
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventory": {
+    "granted": 0,
+    "mutated": false
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "persistentDatabaseUsed": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Handlers Discord.js reais executados offline com interações falsas; sem token, gateway ou guild real.",
+    "SQLite temporário e relógios determinísticos; não mede latência de produção.",
+    "Não integra nem certifica cartas."
+  ],
+  "testExecution": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "customWorkflow": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending; baseline 969/1000",
+    "engineValidation": "pending"
+  }
+}
