@@ -260,9 +260,13 @@ test('equip links and replay protection survive JSON save/restore',()=>{
 });
 test('activationId cannot be reused while pending or after resolution',()=>{
   const first=activate(makeState(),'unique');
-  assert.throws(()=>activate(first.state,'unique'),/já utilizado/);
+  const pendingReplay=structuredClone(first.state);
+  move(pendingReplay,0,'m0:premature-burial','backrow','hand');
+  assert.throws(()=>activate(pendingReplay,'unique'),/já utilizado/);
   const result=resolve(first.state,'unique');
-  assert.throws(()=>activate(result.state,'unique'),/já utilizado/);
+  const resolvedReplay=structuredClone(result.state);
+  move(resolvedReplay,0,'m0:premature-burial','grave','hand');
+  assert.throws(()=>activate(resolvedReplay,'unique'),/já utilizado/);
 });
 test('all four physical turn rotations preserve the active owner and partner target owner',()=>{
   for(const cursor of [0,1,2,3]){
