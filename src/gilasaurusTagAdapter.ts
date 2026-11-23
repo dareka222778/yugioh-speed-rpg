@@ -98,7 +98,7 @@ function assertState(state:GilasaurusState):void{
     const prefix='m'+state.active[team]+':';
     for(const card of [...player.deck,...player.hand,...(player.extra??[])])
       if(typeof card.uid!=='string'||!card.uid.startsWith(prefix))
-        throw Error('Deck/mão/Extra devem pertencer ao representante físico ativo.');
+        throw Error('UID de Deck/mão/Extra deve pertencer ao representante físico ativo.');
   }
 
   for(const [seat,held] of Object.entries(state.reserves)){
@@ -228,6 +228,8 @@ export function planGilasaurusSelfSummon(
     event.turn!==state.core.turn||event.method!=='gilasaurus-hand'||event.successful!==true||
     !validActivationId(activationId))
     throw Error('Gilasaurus exige seu próprio Special Summon bem-sucedido da mão.');
+  if(state.gilasaurus?.pending?.[activationId]||state.gilasaurus?.resolved?.[activationId])
+    throw Error('activationId Gilasaurus já utilizado.');
   const source=sourceContext(state,sourceUid,lookup);
   assertOpenMain(state,source.controllerTeam);
   if(state.core.players[source.controllerTeam].monsters.length>=3)
