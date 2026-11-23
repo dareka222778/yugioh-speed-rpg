@@ -1,0 +1,66 @@
+{
+  "mission": "M462",
+  "runId": "work-20261121T152737-0300-M462",
+  "status": "implementation-complete-ci-pending",
+  "title": "TagDuel classic renderer 4x4 physical-seat privacy matrix",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "69581c21e372faa33de36ff45cc3b72ad6182ded"
+  },
+  "implementation": {
+    "files": [
+      "tests/tagRendererSeatPrivacyMatrix2v2.test.cjs",
+      "docs/evidence/m462-tag-renderer-seat-privacy-matrix.json",
+      ".github/workflows/m462-tag-renderer-seat-privacy-matrix.yml"
+    ],
+    "initialSeatRotations": 4,
+    "viewerSeats": 4,
+    "publicRenders": 4,
+    "privateRenders": 16,
+    "scenarios": 20,
+    "behavior": "For each initial 2v2 seat rotation, render the public board and private board for each of the four physical seats using four disjoint 20-card decks. Assert classic layout dimensions and that the art provider receives only face-up field/last-grave identities publicly, and only those plus the selected physical viewer's own hand privately.",
+    "validation": "Actual renderTag and tagImageLayout with sharp metadata and an injected art provider; no remote art fetch."
+  },
+  "invariants": {
+    "publicHandArtRequests": 0,
+    "privateHandArtRequestsOnlyForViewer": true,
+    "partnerHandPrivate": true,
+    "opponentHandPrivate": true,
+    "fourInitialSeatRotations": true,
+    "fourPhysicalViewers": true,
+    "classicFieldHeight": 1240,
+    "classicPrivateHeight": 1580,
+    "classicWidth": 1400
+  },
+  "rules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneSeparate": true,
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "isolatedDeterministicFixtures": true,
+    "discordCredentialsRemoved": true,
+    "liveDiscordTest": false,
+    "productionDatabaseTouched": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "automaticCertification": false
+  },
+  "certification": {
+    "sharedBaseline": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Renderer validation is offline and uses an injected provider returning no art bytes.",
+    "No live Discord guild, bot token, production database, or player records are used.",
+    "This validates the 2v2 layout/privacy renderer and does not certify a new card."
+  ]
+}

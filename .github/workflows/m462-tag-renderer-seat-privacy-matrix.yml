@@ -1,0 +1,36 @@
+name: M462 TagDuel renderer seat privacy matrix
+on:
+  push:
+    branches:
+      - feat/work-m462-tag-renderer-seat-privacy-matrix-20261121
+    paths:
+      - 'tests/tagRendererSeatPrivacyMatrix2v2.test.cjs'
+      - 'docs/evidence/m462-tag-renderer-seat-privacy-matrix.json'
+      - '.github/workflows/m462-tag-renderer-seat-privacy-matrix.yml'
+  pull_request:
+    paths:
+      - 'tests/tagRendererSeatPrivacyMatrix2v2.test.cjs'
+      - 'docs/evidence/m462-tag-renderer-seat-privacy-matrix.json'
+      - '.github/workflows/m462-tag-renderer-seat-privacy-matrix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tagduel-renderer-seat-privacy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m462-tag-renderer-seat-privacy-matrix.json', 'utf8'))"
+      - name: Run renderer seat privacy matrix
+        run: node --test tests/tagRendererSeatPrivacyMatrix2v2.test.cjs
