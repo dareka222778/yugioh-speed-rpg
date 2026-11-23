@@ -247,8 +247,8 @@ export function resolveFiberJarFlip(
   assertState(input);
   if(!plan||plan.kind!=='fiber-jar-flip'||plan.cardId!==FIBER_JAR_ID||
     typeof plan.activationId!=='string'||!plan.activationId||plan.activationId.length>128||
-    plan.turn!==input.core.turn||plan.controllerTeam!==input.core.current&&
-      plan.controllerTeam!==0&&plan.controllerTeam!==1||
+    plan.turn!==input.core.turn||
+    (plan.controllerTeam!==0&&plan.controllerTeam!==1)||
     input.active[plan.controllerTeam]!==plan.activeSeat||
     physicalSeat(plan.sourceUid)!==plan.ownerSeat||
     input.members[plan.ownerSeat]?.team!==plan.ownerSeat%2)
