@@ -1,0 +1,37 @@
+{
+  "mission": "M476",
+  "title": "TagDuel final-seat acceptance atomicity",
+  "branch": "feat/work-m476-tag-last-seat-start-atomicity-20261121",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "testFile": "tests/tagLobbyLastSeatStartAtomicity2v2.test.cjs",
+  "testCount": 1,
+  "scenario": "Três assentos estão aceitos em lobby 2v2. Um trigger SQLite injeta falha na persistência status lobby→playing durante o quarto aceite. O teste exige rollback conjunto do quarto lock, consentimento, revisão e estado; após remover o trigger, o mesmo aceite deve iniciar a partida com quatro locks.",
+  "invariants": [
+    "A falha no último aceite não deixa sessão parcialmente iniciada.",
+    "O quarto participante continua não aceito e sem lock após rollback.",
+    "Revisão e estado permanecem iguais ao snapshot anterior.",
+    "A repetição após remover a falha inicia uma partida válida com quatro locks.",
+    "Perfil do proprietário permanece Deck 20–30, mão 6 com End Phase, 3+3 zonas e Extra 5.",
+    "Saldos, coleção e starter grants permanecem inalterados."
+  ],
+  "certification": {
+    "baseline": 969,
+    "new": 0,
+    "remaining": 31,
+    "automatic": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscord": false
+  },
+  "limits": [
+    "SQLite temporário com trigger de falha; sem banco persistente ou servidor Discord real.",
+    "Teste de lifecycle do lobby, não de cartas.",
+    "Nenhum runtime é alterado."
+  ],
+  "command": "npm run check && npm run build && node --test tests/tagLobbyLastSeatStartAtomicity2v2.test.cjs",
+  "ciStatus": "pending"
+}
