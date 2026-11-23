@@ -1,0 +1,71 @@
+{
+  "mission": "M540",
+  "runId": "work-20261122T222846-0300-M540",
+  "owner": "Work principal",
+  "title": "Cross-mode exclusion survives failed timeout lock release and clears after retry",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "branch": "feat/work-m540-cross-mode-timeout-rollback-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "priority": "P1 — provar a atomicidade da exclusão mútua entre 1v1 e TagDuel: falha ao remover locks durante timeout não pode permitir entrada no outro modo; retry no mesmo deadline deve liberar os locks corretamente.",
+  "scenarios": [
+    {
+      "mode": "1v1 → TagDuel",
+      "injection": "SQLite BEFORE DELETE ON duel_members aborts terminal timeout transaction",
+      "expected": [
+        "duel status/revision unchanged",
+        "both duel_members rows remain",
+        "TagDuel creation remains blocked",
+        "same-deadline retry finishes duel and removes both locks",
+        "TagDuel lobby can then be created"
+      ]
+    },
+    {
+      "mode": "TagDuel → 1v1",
+      "injection": "SQLite BEFORE DELETE ON tag_members aborts terminal timeout transaction",
+      "expected": [
+        "TagDuel status/revision unchanged",
+        "all four physical tag_members rows remain",
+        "all four 1v1 challenges remain blocked",
+        "same-deadline retry finishes TagDuel and removes four locks",
+        "all four former members can then create independent 1v1 invitations"
+      ]
+    }
+  ],
+  "invariants": {
+    "physicalOwnership": "all card UIDs and card IDs remain unchanged across timeout rollback and retry",
+    "playerAssets": "players, player_cards, starter_grants, decks and deck_cards snapshots are unchanged",
+    "deck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5,
+    "inventoryGranted": 0
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "persistentDatabaseUsed": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "automaticCertifications": 0,
+    "newCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "SQLite temporário com stores compilados reais; não usa banco persistente.",
+    "Timeouts são acionados em deadlines controlados sem esperar 5 ou 30 minutos.",
+    "Valida o contrato de locks entre stores, não o gateway Discord real.",
+    "Não registra nem certifica cartas; não altera o catálogo."
+  ]
+}\n
