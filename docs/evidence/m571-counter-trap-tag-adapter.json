@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "mission": "M571",
+  "runId": "work-20261123T175719-0300-M571",
+  "title": "Gryphon Wing / Trap Jammer — isolated TagDuel counter-response adapter",
+  "cards": [
+    {
+      "id": "55608151",
+      "name": "Gryphon Wing",
+      "kind": "Normal Trap",
+      "konamiCardDatabaseId": 4892,
+      "firstTcgRelease": "2003-03-30",
+      "officialText": "When your opponent activates Harpie's Feather Duster: Negate its effect, and if you do, destroy all Spells and Traps your opponent controls.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4892&request_locale=en",
+      "behavior": {
+        "negates": "effect",
+        "destroys": "all opposing Spell/Trap cards including Field Zone",
+        "targetSelection": false
+      }
+    },
+    {
+      "id": "19252988",
+      "name": "Trap Jammer",
+      "kind": "Counter Trap",
+      "konamiCardDatabaseId": 5921,
+      "firstTcgRelease": "2004-03-01",
+      "officialText": "When your opponent activates a Trap Card during the Battle Phase: Negate the activation, and if you do, destroy it.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5921&request_locale=en",
+      "behavior": {
+        "negates": "activation",
+        "window": "Battle Phase",
+        "destroys": "only the activated Trap",
+        "targetSelection": false
+      }
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/counterTrapTagAdapter.ts",
+      "tests/counterTrapTagAdapter.test.cjs",
+      "docs/evidence/m571-counter-trap-tag-adapter.json",
+      ".github/workflows/m571-counter-trap-tag-adapter.yml"
+    ],
+    "mode": "isolated; not wired into tagActions, tagInteraction or Discord",
+    "rootPendingHfd": "separate pending EFFECT-negation flag; does not misuse pendingNegated (activation negation)",
+    "physicalOwnership": "UID m0..m3 preserved; partner can activate shared backrow; cards return to physical owner's team Graveyard",
+    "inventory": "zone movement only; before/after UID+ID map invariant; fixture replaces a deck entry and creates no live inventory"
+  },
+  "invariants": {
+    "mainDeck": "20–30 per physical seat",
+    "hand": "6-card limit at End Phase; no early discard or hand mutation",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "certification": {
+    "engineV9Before": 969,
+    "engineV9After": 969,
+    "newlyCertified": 0,
+    "remainingTo1000": 31,
+    "legacyCardCertificationsEntries": 959,
+    "automaticCertifications": 0
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "releaseGranted": 0,
+    "persistentPlayerDataChanged": false,
+    "productionChanged": false,
+    "centralRuntimeChanged": false,
+    "catalogOrManifestChanged": false
+  },
+  "integrationGate": {
+    "handoffPr": 17,
+    "commentId": 7113961920,
+    "status": "requested-awaiting-explicit-release",
+    "blockedFiles": [
+      "src/duelEngineCurrent.ts",
+      "src/monsterEffects.ts"
+    ]
+  },
+  "limitations": [
+    "Not wired into authoritative resolver or Discord action menus.",
+    "Root-pending HFD effect negation needs a distinct pending-effect-negated field in the central engine before production integration.",
+    "No live Discord gateway/session used; tests exercise actual TagDuel HFD and Mirror Force transitions plus isolated response adapter.",
+    "No merge/deploy authorized."
+  ]
+}

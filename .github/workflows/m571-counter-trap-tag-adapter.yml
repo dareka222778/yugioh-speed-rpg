@@ -1,0 +1,35 @@
+name: M571 Counter Trap TagDuel adapter
+on:
+  push:
+    branches: [feat/work-m571-counter-trap-tag-adapter-20261123]
+    paths:
+      - 'src/counterTrapTagAdapter.ts'
+      - 'tests/counterTrapTagAdapter.test.cjs'
+      - 'docs/evidence/m571-counter-trap-tag-adapter.json'
+      - '.github/workflows/m571-counter-trap-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/counterTrapTagAdapter.ts'
+      - 'tests/counterTrapTagAdapter.test.cjs'
+      - 'docs/evidence/m571-counter-trap-tag-adapter.json'
+      - '.github/workflows/m571-counter-trap-tag-adapter.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  counter-traps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m571-counter-trap-tag-adapter.json', 'utf8'))"
+      - name: Run M571 behavior regressions
+        run: node --test tests/counterTrapTagAdapter.test.cjs
