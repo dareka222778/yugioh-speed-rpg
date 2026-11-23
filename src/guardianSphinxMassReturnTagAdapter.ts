@@ -1,4 +1,3 @@
-import type {Card} from './cardCatalog';
 import {getPlayableCard} from './effectRegistry';
 import {tagInventory,type TagDuel} from './tagDuel';
 import {
@@ -136,7 +135,7 @@ export function resolveGuardianSphinxFlipSummon(
     lifetimes[monster.uid]={zone:'hand',epoch:(previous?.epoch??0)+1};
     if(route.hand.length>6)deferred.add(route.seat);
   }
-  next.core.teamRotation.reserves=next.reserves;
+  next.core.teamRotation!.reserves=next.reserves;
   assertConserved(before,next);
   return {status:'resolved',state:next,returnedUids,removedTokenUids,affectedCount:targets.length,handLimitDeferredSeats:[...deferred].sort((a,b)=>a-b)};
 }

@@ -55,7 +55,7 @@ test('all opposing monsters present at resolution are returned, including ones a
 test('face-down monsters are included without being selected or revealed',()=>{
   const state=makeState();addMonster(state,1,'m1:face-down','00000003',false);
   const result=resolveGuardianSphinxFlipSummon(state,planGuardianSphinxFlipSummon(state,event(state,'m0:guardian'),'m0:guardian',lookup));
-  assert.equal(result.returnedCount,undefined);
+  assert.equal(result.affectedCount,1);
   assert.ok(result.returnedUids.includes('m1:face-down'));
   assert.equal(result.state.core.players[1].hand.at(-1).uid,'m1:face-down');
 });
