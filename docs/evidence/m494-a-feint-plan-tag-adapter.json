@@ -1,0 +1,65 @@
+{
+  "mission": "M494",
+  "runId": "work-20261122T014858-0300-M494",
+  "card": {
+    "name": "A Feint Plan",
+    "passcode": "68170903",
+    "konamiDatabaseId": 5332,
+    "type": "Normal Trap",
+    "firstTcgPrinting": {
+      "date": "2003-06-06",
+      "set": "Legacy of Darkness",
+      "code": "LOD-032"
+    },
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5332&ope=2&request_locale=en",
+    "officialEffect": "Monsters cannot attack face-down monsters this turn."
+  },
+  "design": {
+    "scope": "global: monsters from either team cannot declare attacks against face-down monsters for the rest of the current turn",
+    "activation": "Trap must be face-up, set in a prior turn, not blocked by Trap activation restrictions, and not negated",
+    "existingAttack": "if activated in response to an already-declared attack whose current target is face-down, that exact attacker/target pair is exempt; the Trap does not retroactively cancel a declared attack",
+    "futureAttacks": "all subsequent attacks against face-down monsters are blocked, regardless of which team controls attacker or target",
+    "expiration": "turn-scoped; lock is inert after state.turn changes",
+    "mutation": "pure immutable lock; no DuelState mutation"
+  },
+  "testCoverage": [
+    "inactive partner physical ownership",
+    "global protection across both teams",
+    "face-up target and direct attack unaffected",
+    "already-declared face-down attack exempt",
+    "future face-down attacks blocked",
+    "attack replay target change no longer exempt when target differs",
+    "direct attack no exemption",
+    "turn expiration",
+    "Damage Step and post-declaration rejection",
+    "set-turn and face-up requirements",
+    "duplicate UID ambiguity",
+    "physical owner/team validation",
+    "Trap activation/effect negation",
+    "no mutation"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Prepared adapter is not registered in the shared resolver; M61 handoff remains pending."
+  },
+  "security": {
+    "filesOnly": [
+      "src/aFeintPlanTagAdapter.ts",
+      "tests/aFeintPlanTagAdapter.test.cjs",
+      "docs/evidence/m494-a-feint-plan-tag-adapter.json",
+      ".github/workflows/m494-a-feint-plan-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "The resolver must persist the returned lock through End Phase and consult aFeintPlanBlocksAttack before attack declaration.",
+    "Attack replay integration must pass the current attacker/target pair so the already-declared exemption cannot leak to a different target.",
+    "Offline adapter tests do not replace full 2v2 duel/Discord integration."
+  ]
+}
