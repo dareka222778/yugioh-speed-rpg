@@ -243,14 +243,15 @@ export function resolveSpellCounterTrap(
  if(options.opponentDiscardUid&&a.sourceId!==MAGIC_DRAIN_ID)throw new Error('Somente Magic Drain permite o descarte opcional do oponente.');
  if(options.opponentDiscardUid&&options.sourceActivationNegated)throw new Error('Uma Armadilha negada não pode receber escolha de descarte na resolução.');
  assertPhysicalRules(input.duel);
- if(options.opponentDiscardUid&&!targetIsCurrent(input.duel.core,a.response))throw new Error('O alvo da resposta não está mais disponível para Magic Drain.');
  const before=inventorySnapshot(input.duel),hands=handSnapshot(input.duel),next=structuredClone(input),core=next.duel.core;
  const own=core.chain.findIndex(l=>l.actor===a.controllerTeam&&l.card===a.sourceUid&&l.id===a.sourceId);
  if(own!==core.chain.length-1)throw new Error('A Armadilha só pode resolver no topo da corrente.');
  core.chain.pop();
+ const targetAvailable=targetIsCurrent(core,a.response);
+ if(options.opponentDiscardUid&&!targetAvailable)throw new Error('O alvo da resposta não está mais disponível para Magic Drain.');
  let effectApplied=false,targetActivationNegated=false,targetDestroyed=false,opponentPaidToNegate=false,lockedSpellName:string|undefined;
  const removedHands:string[]=[];
- if(!options.sourceActivationNegated&&targetIsCurrent(core,a.response)){
+ if(!options.sourceActivationNegated&&targetAvailable){
   if(a.sourceId===MAGIC_DRAIN_ID){
    if(options.opponentDiscardUid){
     const opponentSeat=next.duel.active[a.response.actor];
