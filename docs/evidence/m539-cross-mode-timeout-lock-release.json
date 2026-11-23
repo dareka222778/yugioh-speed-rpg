@@ -1,0 +1,67 @@
+{
+  "mission": "M539",
+  "runId": "work-20261122T221717-0300-M539",
+  "owner": "Work principal",
+  "title": "Cross-mode lock release after 1v1 and TagDuel timeouts",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "ea6772b9a06ed70045bc7e1d45de0401435ea724",
+  "branch": "feat/work-m539-cross-mode-timeout-lock-release-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "ea6772b9a06ed70045bc7e1d45de0401435ea724",
+  "priority": "P1 — provar que expiração/timeout 1v1 e TagDuel liberam todos os locks físicos e permitem entrar no modo oposto sem locks órfãos.",
+  "scope": [
+    "tests/crossModeTimeoutLockRelease.test.cjs",
+    "docs/evidence/m539-cross-mode-timeout-lock-release.json",
+    ".github/workflows/m539-cross-mode-timeout-lock-release.yml"
+  ],
+  "behavior": [
+    {
+      "case": "1v1 pending invitation expires at 120s",
+      "expected": "creator lock removed; same player can accept a pending TagDuel invitation"
+    },
+    {
+      "case": "1v1 playing duel times out at 30m",
+      "expected": "both duel locks removed; former creator can host TagDuel"
+    },
+    {
+      "case": "TagDuel lobby expires at 5m",
+      "expected": "host lock removed; former host can create a 1v1 challenge"
+    },
+    {
+      "case": "TagDuel playing match times out at 30m",
+      "expected": "all four physical locks removed; each former member can create a 1v1 challenge"
+    }
+  ],
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "inventoryGranted": 0,
+    "playerAssetsChanged": false,
+    "productionDatabaseUsed": false
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "limitations": [
+    "SQLite temporário e stores reais; sem gateway/guild Discord real.",
+    "Timeouts acionados por envelhecimento controlado de updated; sem espera real de 5/30 minutos.",
+    "Nenhuma certificação nova: teste de ciclo de vida dos locks, não admissão de cartas."
+  ]
+}
