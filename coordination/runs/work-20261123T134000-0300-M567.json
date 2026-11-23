@@ -1,0 +1,100 @@
+{
+  "runId": "work-20261123T134000-0300-M567",
+  "mission": "M567",
+  "owner": "Work principal",
+  "priority": "P1 — implementar Snatch Steal (45986603): Equip Spell em monstro face-up adversário, transferir controle preservando UID/proprietário/posição, devolver ao controlador original quando o Equip sair, enviar Equip ao GY quando o monstro sair e conceder 1000 LP à equipe adversária na Standby Phase, uma vez por turno por cópia.",
+  "state": "reserved-preparing-during-M566-CI",
+  "startedAt": "2026-11-23T13:40:00-03:00",
+  "lastActivityAt": "2026-11-23T13:40:00-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "1dba7ac48d1260ee82c0dce44bad55db5b4f0925",
+  "branch": "feat/work-m567-snatch-steal-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "1dba7ac48d1260ee82c0dce44bad55db5b4f0925",
+  "reservedFiles": [
+    "src/snatchStealTagAdapter.ts",
+    "tests/snatchStealTagAdapter.test.cjs",
+    "docs/evidence/m567-snatch-steal-tag-adapter.json",
+    ".github/workflows/m567-snatch-steal-tag-adapter.yml"
+  ],
+  "scope": [
+    "src/snatchStealTagAdapter.ts",
+    "tests/snatchStealTagAdapter.test.cjs",
+    "docs/evidence/m567-snatch-steal-tag-adapter.json",
+    ".github/workflows/m567-snatch-steal-tag-adapter.yml"
+  ],
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T13:40:00-03:00",
+    "checkedAgainst": [
+      "M566 usa autonomousActionUnitTagAdapter.ts/tests/evidence/workflow; sem sobreposição.",
+      "M563–M565 permanecem reservados em arquivos próprios; sem sobreposição.",
+      "M61 mantém resolver, metadata, certificações e manifesto protegidos; M567 não os altera.",
+      "Busca por 45986603/Snatch Steal em cardMetadata, cardCertifications, branches e PRs não encontrou implementação."
+    ]
+  },
+  "card": {
+    "name": "Snatch Steal",
+    "portugueseName": "Roubo Precipitado",
+    "passcode": "45986603",
+    "konamiDatabaseId": 4898,
+    "type": "Equip Spell",
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4898&ope=2",
+    "officialText": "Equip only to an opponent's monster. Take control of the equipped monster. Once per turn, during your opponent's Standby Phase: They gain 1000 LP.",
+    "firstTcgPrinting": {
+      "date": "2002-09-16",
+      "set": "MRL-036",
+      "product": "Magic Ruler"
+    }
+  },
+  "design": {
+    "activation": "Equip Spell na mão do representante físico ativo, Main Phase aberta; alvo face-up em Monster Zone da equipe adversária; sem custo de LP.",
+    "resolution": "Mover o monstro do campo adversário para a equipe ativadora sem invocação, preservando UID, proprietário físico, posição e face-up; persistir equippedTo e controlador original.",
+    "continuous": "Na Standby Phase da equipe adversária, cada Snatch Steal ativo concede 1000 LP à equipe ativa uma vez por turno por cópia.",
+    "leaveEquip": "Se Snatch Steal deixa o campo, devolver monstro à equipe que o controlava imediatamente antes do roubo; mover Equip para GY/banished/mão do dono físico.",
+    "leaveMonster": "Se o monstro equipado deixa o campo, enviar Snatch Steal ao GY e encerrar vínculo.",
+    "safety": "Nenhum grant de inventário; somente movimento de controle de carta já existente.",
+    "rules": {
+      "deckConstruction": "20–30",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "tests": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending"
+  },
+  "nextTask": "Concluir M566 e CI; implementar adapter Snatch Steal, standby LP triggers, retorno de controle, testes e workflow M567 em branch independente.",
+  "nextWindow": "2026-11-23T17:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T13:40:00-03:00",
+    "endedAt": null,
+    "elapsedMinutes": null,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true
+  }
+}
