@@ -44,7 +44,8 @@
     "mode": "isolated; not wired into tagActions, tagInteraction or Discord",
     "rootPendingHfd": "The current legacy effect registry does not expose an HFD activation effect. The root-pending HFD boundary is constructed as a validated TagDuel response fixture with HFD already face-up in backrow; it is not claimed as an end-to-end HFD activation test.",
     "physicalOwnership": "UID m0..m3 preserved; partner can activate shared backrow; cards return to physical owner's team Graveyard",
-    "inventory": "Only zone movement; before/after UID+ID map invariant. The HFD fixture starts from a validated response boundary and substitutes an admitted Magic Jammer fixture card with Gryphon Wing while preserving its physical UID. The Trap Jammer fixture uses a real Mirror Force activation through stepTagDuel and passes any summon-response window before Battle Phase. No live inventory or player data is granted."
+    "inventory": "Only zone movement; before/after UID+ID map invariant. The HFD fixture starts from a validated response boundary and substitutes an admitted Magic Jammer fixture card with Gryphon Wing while preserving its physical UID. The Trap Jammer fixture uses a real Mirror Force activation through stepTagDuel and passes any summon-response window before Battle Phase. No live inventory or player data is granted.",
+    "trapJammerFixture": "Mirror Force is activated through stepTagDuel. A previously admitted Seven Tools of the Bandit keeps the real response window open, then the fixture substitutes its ID with Trap Jammer while preserving the physical UID; this avoids claiming the unadmitted card is already wired into tagActions."
   },
   "invariants": {
     "mainDeck": "20–30 per physical seat",
@@ -88,6 +89,7 @@
     "Harpie's Feather Duster is present in the v9 catalog but has no activation effect in the current legacy effectDefinitions.ts; its response boundary is synthetic until the M61 integration handoff."
   ],
   "tests": [
-    "HFD response window is held open by a certified Magic Jammer before the fixture substitutes Gryphon Wing"
+    "HFD response window is held open by a certified Magic Jammer before the fixture substitutes Gryphon Wing",
+    "Trap Jammer response boundary is held open by a certified Seven Tools of the Bandit before fixture ID substitution"
   ]
 }

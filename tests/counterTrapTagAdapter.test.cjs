@@ -2,7 +2,7 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel');const {getPlayableCard}=require('../dist/effectRegistry');
 const {GRYPHON_WING_ID,TRAP_JAMMER_ID,HARPIE_FEATHER_DUSTER_ID,createCounterTrapSession,counterTrapActions,activateCounterTrap,resolveCounterTrap}=require('../dist/counterTrapTagAdapter');
-const HFD=HARPIE_FEATHER_DUSTER_ID,MIRROR='44095762',TORRENTIAL='53582587',MAGIC_JAMMER='77414722',SOGEN='86318356',MOUNTAIN='50913601';
+const HFD=HARPIE_FEATHER_DUSTER_ID,MIRROR='44095762',TORRENTIAL='53582587',MAGIC_JAMMER='77414722',SOGEN='86318356',MOUNTAIN='50913601',SEVEN_TOOLS='03819470';
 const lookup=id=>{const c=getPlayableCard(id);return c?{kind:c.kind}:undefined;};
 const NORMALS=[...new Set(tag.tagNormalCardIds)];assert.ok(NORMALS.length>=20);
 function member(seat){return 'm571-seat-'+seat;}
@@ -35,6 +35,7 @@ function hfdFixture(){
 function jammerFixture(){
  const s=create(0,{},'jammer');s.core.turn=2;
  const mirror=backrow(s,3,MIRROR,'opp-mirror'),other=backrow(s,3,TORRENTIAL,'opp-other');
+ const jammerSeed=backrow(s,2,SEVEN_TOOLS,'jammer-seed');
  const oppField=field(s,3,SOGEN,'opp-field'),ownField=field(s,0,MOUNTAIN,'own-field');tag.assertTagDuel(s);
  let n=tag.stepTagDuel(s,member(0),action(s,0,a=>a.kind==='summon'&&a.position==='atk','Attack Position summon'));
  if(n.core.phase==='response')n=tag.stepTagDuel(n,member(1),action(n,1,a=>a.kind==='pass','pass summon response'));
@@ -42,12 +43,13 @@ function jammerFixture(){
  n=tag.stepTagDuel(n,member(0),action(n,0,a=>a.kind==='attack','attack declaration'));
  assert.equal(n.core.phase,'response');assert.equal(n.core.pending.kind,'attack');assert.equal(n.core.resume,'battle');
  n=tag.stepTagDuel(n,member(1),action(n,1,a=>a.card===mirror.uid,'Mirror Force activation'));
- assert.equal(n.core.phase,'response');assert.equal(n.core.priority,0);assert.equal(n.core.resume,'battle');
- const jammer=backrow(n,2,TRAP_JAMMER_ID,'jammer');return {state:n,mirror,other,oppField,ownField,jammer};
+ assert.equal(n.core.phase,'response');assert.equal(n.core.priority,0);assert.equal(n.core.resume,'battle');tag.assertTagDuel(n);
+ const jammer=n.core.players[0].backrow.find(c=>c.uid===jammerSeed.uid);assert.ok(jammer);jammer.id=TRAP_JAMMER_ID;
+ return {state:n,mirror,other,oppField,ownField,jammer};
 }
 test('M571 cards remain unadmitted: adapter neither certifies nor distributes them',()=>{
  assert.equal(getPlayableCard(GRYPHON_WING_ID),undefined);assert.equal(getPlayableCard(TRAP_JAMMER_ID),undefined);
- for(const id of [HFD,MIRROR,TORRENTIAL,MAGIC_JAMMER,SOGEN,MOUNTAIN])assert.ok(getPlayableCard(id));
+ for(const id of [HFD,MIRROR,TORRENTIAL,MAGIC_JAMMER,SEVEN_TOOLS,SOGEN,MOUNTAIN])assert.ok(getPlayableCard(id));
 });
 test('Gryphon Wing opens only against opponent HFD and does not target',()=>{
  const f=hfdFixture(),actions=counterTrapActions(f.state,lookup);assert.deepEqual(actions,[{kind:'trap',card:f.gryphon.uid,target:''}]);
