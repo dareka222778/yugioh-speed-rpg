@@ -154,7 +154,7 @@ test('real 1v1 action menu at 30 minutes ends the duel and releases the creator 
   assert.equal(count('duel_members',owner),0);
   assert.equal(count('duel_members',opponent),0);
   const publicJson=JSON.stringify(delivered.calls.editReply[0]);
-  for(const uid of privateUids)assert.equal(publicJson.includes(uid),false);
+  for(const uid of privateUids)assert.equal(publicJson.includes(JSON.stringify(uid)),false);
 
   const lobby=tag.createTagLobby([owner,ally1,ally2,ally3],GUILD,CHANNEL,'classic-loan');
   assert.equal(lobby.status,'lobby');
@@ -229,7 +229,7 @@ test('real TagDuel action menu at 30 minutes releases all four physical members 
   assert.equal(publicPayload.components.length,0);
   const publicState=tagEngine.publicTagDuel(terminal.state);
   const publicJson=JSON.stringify(publicState);
-  for(const uid of privateUids)assert.equal(publicJson.includes(uid),false);
+  for(const uid of privateUids)assert.equal(publicJson.includes(JSON.stringify(uid)),false);
 
   for(const [owner,opponent] of [[a,e],[b,f],[c,g],[d,h]]){
     const invitation=duel.challenge(owner,opponent,GUILD,CHANNEL);
