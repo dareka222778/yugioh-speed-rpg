@@ -222,6 +222,7 @@ test('Deck Principal aceita até 30 cartas físicas e rejeita 31', () => {
 test('Deck Adicional aceita cinco cartas e rejeita a sexta', { skip: !FUSION_ID }, () => {
   const duel = makeDuel();
   const sourceUid = putFiendMegacyberInHand(duel, 0);
+  duel.reserves[2].extra = duel.reserves[2].extra || [];
   for (let i = 0; i < 5; i++) {
     duel.reserves[2].extra.push({ uid: 'm2:extra-fiend-' + i, id: FUSION_ID });
   }
