@@ -46,7 +46,7 @@
     ]
   },
   "catalogAtStart": {
-    "directCertificateEntries": 959,
+    "directCertificateEntries": 969,
     "releasedCardIds": 969,
     "emergencyProvisionsCertified": false,
     "emergencyProvisionsReleased": false,
@@ -58,7 +58,8 @@
       "name": "Rain of Mercy",
       "passcode": "66719324",
       "reason": "já certificada e liberada no HEAD; removida para evitar duplicação"
-    }
+    },
+    "countVerifiedByCI": 969
   },
   "catalogAtEnd": {
     "newCertifications": 0,
