@@ -116,7 +116,8 @@ test('The Dark Door allows repeated attacks by the first monster but blocks a se
   session=recordDarkDoorAttack(session,first);
   assert.equal(darkDoorAllowsAttack(session,first),true,'the same monster may attack again');
   assert.equal(darkDoorAllowsAttack(session,second),false,'a second physical monster is blocked');
-  assert.throws(()=>recordDarkDoorAttack(session,second),/apenas o monstro/);
+  pendingAttack(session.duel,0,second);
+  assert.throws(()=>recordDarkDoorAttack(session,second),/The Dark Door permite/);
   assertConserved(session.duel,before);
   assert.deepEqual(hands(session.duel),beforeHands);
   assertRules(session.duel);
@@ -199,8 +200,12 @@ test('Level Limit - Area B changes face-up Level 4+ monsters on both teams only'
     assert.equal(result.duel.core.players[uid===highBlue?0:1].monsters.find(m=>m.uid===uid).position,'def');
   }
   assert.equal(result.duel.core.players[0].monsters.find(m=>m.uid===low).position,'atk');
+  const attemptedAttack=structuredClone(result.duel);
+  attemptedAttack.core.players[0].monsters.find(m=>m.uid===highBlue).position='atk';
+  const reapplied=enforceLevelLimitAreaB(attemptedAttack);
+  assert.equal(reapplied.duel.core.players[0].monsters.find(m=>m.uid===highBlue).position,'def','the continuous effect re-applies after a position change');
   assert.equal(result.duel.core.players[1].monsters.find(m=>m.uid===hidden).faceUp,false);
-  assert.equal(result.duel.core.players[1].monsters.find(m=>m.uid===alreadyDef).position,'def');
+  assert.equal(result.duel.core.players[0].monsters.find(m=>m.uid===alreadyDef).position,'def');
   assert.deepEqual(result.changedUids.sort(),[highBlue,highRed].sort());
   assertConserved(result.duel,before);
   assert.deepEqual(hands(result.duel),beforeHands);
