@@ -4,7 +4,7 @@
   "mission": "M596",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "focused-ci-green; card-batch-and-engine-validation-running",
+  "status": "focused-and-batch-green; engine-validation-running",
   "startedAt": "2026-11-24T18:30:21-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -105,7 +105,7 @@
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Aguardar Card Batch Fast e Engine Validation no SHA 1d085677; se ambos verdes, liberar os quatro caminhos ao auxiliar sem merge.",
+  "nextTask": "Aguardar Engine Validation; não alterar o resolver nem o manifesto. Revisar PR #539 e liberar escopo próprio após conclusão.",
   "nextWindow": "2026-11-24T23:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
   "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/539",
@@ -119,7 +119,7 @@
       "failed": 0
     },
     "cardBatchFast": {
-      "status": "in_progress",
+      "status": "success",
       "runId": 45493080902,
       "sha": "1d0856774dbf54b3b4db86de409d370cb193313a"
     },
@@ -132,19 +132,7 @@
       "status": "in_progress",
       "runId": 45493080809,
       "sha": "1d0856774dbf54b3b4db86de409d370cb193313a"
-    },
-    "priorAttempts": [
-      {
-        "sha": "dbf7ea7b78619bb2c634ca4885b82b916a60e4c0",
-        "status": "failure",
-        "reason": "regex de passcode escapada duas vezes no template raw; corrigida para [0-9]{8}"
-      },
-      {
-        "sha": "6d6a0d27721743ebc26eda05bdb57e61264323cb",
-        "status": "failure",
-        "reason": "fixture esperava UID duplicado, mas usava m1:dup e m3:dup; corrigido para UID realmente repetido"
-      }
-    ]
+    }
   },
-  "lastActivityAt": "2026-11-24T18:39:15-03:00"
+  "lastActivityAt": "2026-11-24T18:43:26-03:00"
 }

@@ -4,7 +4,7 @@
   "mission": "M597",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved-awaiting-isolated-branch",
+  "status": "focused-and-batch-green; engine-validation-running",
   "startedAt": "2026-11-24T18:39:15-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -12,8 +12,8 @@
   "sharedHeadAtStart": "f18a0510bbf5f2ccaa6c75b2608220b689e3dc23",
   "branch": "feat/work-m597-barrel-behind-door-tag-adapter-20261124",
   "baseSha": null,
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "6870963225b3eb13136accd2dc04515e2cd3c0a4",
+  "pullRequest": 540,
   "reservedFiles": [
     "src/barrelBehindTheDoorTagAdapter.ts",
     "tests/barrelBehindTheDoorTagAdapter.test.cjs",
@@ -85,7 +85,34 @@
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar Barrel Behind the Door como redirecionador de dano de efeito ativado, com snapshot de cadeia/LP, validação da armadilha Set, idempotência e 20+ testes; executar CI isolada.",
+  "nextTask": "Aguardar Engine Validation; não integrar no resolver central sem handoff M61.",
   "nextWindow": "2026-11-24T23:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/540",
+  "ci": {
+    "focused": {
+      "status": "success",
+      "runId": 45493457991,
+      "sha": "6870963225b3eb13136accd2dc04515e2cd3c0a4",
+      "tests": 25,
+      "passed": 25,
+      "failed": 0
+    },
+    "cardBatchFast": {
+      "status": "success",
+      "runId": 45493497689,
+      "sha": "6870963225b3eb13136accd2dc04515e2cd3c0a4"
+    },
+    "milestone1000": {
+      "status": "success",
+      "runId": 45493497843,
+      "sha": "6870963225b3eb13136accd2dc04515e2cd3c0a4"
+    },
+    "engineValidation": {
+      "status": "in_progress",
+      "runId": 45493497825,
+      "sha": "6870963225b3eb13136accd2dc04515e2cd3c0a4"
+    }
+  },
+  "lastActivityAt": "2026-11-24T18:43:26-03:00"
 }
