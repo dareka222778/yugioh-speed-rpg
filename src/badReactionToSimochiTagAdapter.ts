@@ -57,11 +57,15 @@ export function resolveSimochiLpGain(
 ):SimochiResolution{
   assertClassicTag(state);assertLedger(ledger);
   assertUid(event?.eventId);assertTeam(event.targetTeam);
-  if(!event||!Number.isSafeInteger(event.currentLP)||event.currentLP<=0||!Number.isSafeInteger(event.proposedGain)||event.proposedGain<0||typeof event.resolved!=='boolean'||typeof event.effectNegated!=='boolean'||!['effect','battle','cost','other'].includes(event.cause)||!Array.isArray(event.negatedSourceUids??[])){
-    throw new Error('Evento de ganho de LP inválido para Bad Reaction to Simochi.');
+  const negatedSourceUids=event.negatedSourceUids??[];
+  if(!Number.isSafeInteger(event.currentLP)||event.currentLP<=0||!Number.isSafeInteger(event.proposedGain)||event.proposedGain<0||typeof event.resolved!=='boolean'||typeof event.effectNegated!=='boolean'||!['effect','battle','cost','other'].includes(event.cause)||!Array.isArray(negatedSourceUids)||negatedSourceUids.some(uid=>typeof uid!=='string'||!uid.trim())||new Set(negatedSourceUids).size!==negatedSourceUids.length){
+    throw new Error('Evento de ganho de LP inválido para Bad Reaction to Simochi; UID de negação inválido.');
   }
-  if(state.core.players[event.targetTeam].lp!==event.currentLP)throw new Error('Snapshot de LP obsoleto para Bad Reaction to Simochi.');
+  // Check the event receipt before the LP snapshot: a retry of an already
+  // processed event must remain idempotent even after the surrounding duel
+  // state has advanced to a later LP total.
   if(ledger.processedEventIds.includes(event.eventId))return {status:'duplicate',ledger,replacement:null};
+  if(state.core.players[event.targetTeam].lp!==event.currentLP)throw new Error('Snapshot de LP obsoleto para Bad Reaction to Simochi.');
   const next:SimochiLedger={version:1,processedEventIds:[...ledger.processedEventIds,event.eventId]};
   if(event.cause!=='effect')return {status:'not-applicable',ledger:next,replacement:null};
   if(!event.resolved||event.effectNegated||event.proposedGain===0)return {status:'no-gain',ledger:next,replacement:null};
@@ -69,7 +73,7 @@ export function resolveSimochiLpGain(
   const active=state.core.players[controllerTeam].backrow.filter(card=>card.id===BAD_REACTION_TO_SIMOCHI_ID&&card.faceUp===true);
   const sourceUids=active.map(card=>card.uid);
   if(sourceUids.some(uid=>typeof uid!=='string'||!uid)||new Set(sourceUids).size!==sourceUids.length)throw new Error('UID duplicado ou ausente de Bad Reaction to Simochi.');
-  const negated=new Set(event.negatedSourceUids??[]);
+  const negated=new Set(negatedSourceUids);
   const effective=sourceUids.filter(uid=>!negated.has(uid));
   if(!effective.length)return {
     status:'unchanged',ledger:next,
