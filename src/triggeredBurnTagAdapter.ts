@@ -54,7 +54,7 @@ function assertNonEmpty(value:unknown,label:string):asserts value is string{
   if(typeof value!=='string'||!value.trim())throw new Error(label+' inválido.');
 }
 function assertCardId(value:unknown,label:string):asserts value is string{
-  if(typeof value!=='string'||!/^\\d{8}$/.test(value))throw new Error(label+' inválido.');
+  if(typeof value!=='string'||!/^[0-9]{8}$/.test(value))throw new Error(label+' inválido.');
 }
 function assertLedger(ledger:TriggeredBurnLedger):void{
   if(!ledger||ledger.version!==1||!Array.isArray(ledger.processedEventIds)||
