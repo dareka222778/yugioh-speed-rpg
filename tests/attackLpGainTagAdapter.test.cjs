@@ -248,6 +248,20 @@ test('Draining Shield cannot respond to its controller team attack even when cha
   assert.deepEqual(attackLpGainActions(f.state),[]);
 });
 
+test('a redirected battle target does not invalidate the same attacking monster response',()=>{
+  for(const [cardId,shouldNegate] of [[DRAINING_SHIELD_ID,true],[ENCHANTED_JAVELIN_ID,false]]){
+    const seed='redirect-'+cardId;
+    const f=attackFixture(cardId,{seed});
+    const session=activate(f,seed);
+    session.duel.core.pending.target='m1:redirected-target';
+    const resolved=resolveAttackLpGain(session,seed);
+    assert.equal(resolved.result.effectApplied,true);
+    assert.equal(resolved.result.attackNegated,shouldNegate);
+    assert.ok(resolved.result.gainAmount>0);
+    assert.equal(resolved.result.attackerUid,f.attackerUid);
+  }
+});
+
 test('a Set trap is unavailable during the turn it was Set',()=>{
   const f=attackFixture(ENCHANTED_JAVELIN_ID,{seed:'same-turn-set'});
   const source=f.state.core.players[1].backrow.find(card=>card.uid===f.sourceUid);
@@ -334,7 +348,7 @@ test('an attack cancelled by another chain link before resolution does not grant
   assert.equal(resolved.result.firePrincessEvent,null);
 });
 
-test('zero ATK is a successful zero-gain resolution and emits no positive recovery amount',()=>{
+test('zero ATK resolves Enchanted Javelin without emitting an LP-gain event',()=>{
   const f=attackFixture(ENCHANTED_JAVELIN_ID,{seed:'zero-atk'});
   const session=activate(f,'zero-atk');
   const attacker=session.duel.core.players[0].monsters.find(card=>card.uid===f.attackerUid);
@@ -343,7 +357,21 @@ test('zero ATK is a successful zero-gain resolution and emits no positive recove
   assert.equal(resolved.result.effectApplied,true);
   assert.equal(resolved.result.attackerAtk,0);
   assert.equal(resolved.result.gainAmount,0);
-  assert.equal(resolved.result.firePrincessEvent.lpGained,0);
+  assert.equal(resolved.result.firePrincessEvent,null);
+  assert.deepEqual(resolved.session.processedEventIds,[]);
+});
+
+test('Draining Shield still negates a zero-ATK attack but emits no LP-gain event',()=>{
+  const f=attackFixture(DRAINING_SHIELD_ID,{seed:'draining-zero-atk'});
+  const session=activate(f,'draining-zero-atk');
+  const attacker=session.duel.core.players[0].monsters.find(card=>card.uid===f.attackerUid);
+  attacker.atkBoost=-getPlayableCard(attacker.id).atk;
+  const resolved=resolveAttackLpGain(session,'draining-zero-atk');
+  assert.equal(resolved.result.effectApplied,true);
+  assert.equal(resolved.result.attackNegated,true);
+  assert.equal(resolved.result.gainAmount,0);
+  assert.equal(resolved.result.firePrincessEvent,null);
+  assert.deepEqual(resolved.session.processedEventIds,[]);
 });
 
 test('LP is routed to the Trap controller team while the physical owner seat remains explicit',()=>{

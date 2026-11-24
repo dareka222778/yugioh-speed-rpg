@@ -14,7 +14,6 @@ type AttackSnapshot={
   turn:number;
   actor:Team;
   card:string;
-  target:string|null;
   attackCount:number;
   attacked:number;
 };
@@ -135,14 +134,14 @@ function currentAttack(duel:TagDuel):AttackSnapshot|undefined{
   const attacker=monsterOnField(duel.core,actor,pending.card);
   if(!attacker||!attacker.faceUp||attacker.position!=='atk'||getPlayableCard(attacker.id)?.kind!=='monster')return;
   return {
-    turn:duel.core.turn,actor,card:pending.card,target:pending.target??null,
+    turn:duel.core.turn,actor,card:pending.card,
     attackCount:attacker.attackCount??0,attacked:attacker.attacked
   };
 }
 function sameAttack(duel:TagDuel,expected:AttackSnapshot):boolean{
   const actual=currentAttack(duel);
   return !!actual&&actual.turn===expected.turn&&actual.actor===expected.actor&&
-    actual.card===expected.card&&actual.target===expected.target&&
+    actual.card===expected.card&&
     actual.attackCount===expected.attackCount&&actual.attacked===expected.attacked;
 }
 function counterTrapWindow(core:DuelState):boolean{
@@ -277,14 +276,16 @@ export function resolveAttackLpGain(
   if(!sourceSentToGrave)throw new Error('A Armadilha resolvida não foi enviada ao Cemitério do proprietário físico.');
   delete next.pending[activationId];
   next.resolved.push(activationId);
-  const eventId='m574:'+activationId;
-  if(next.processedEventIds.includes(eventId))throw new Error('Evento de recuperação duplicado.');
-  next.processedEventIds.push(eventId);
   const teamLifePoints:[number,number]=[core.players[0].lp,core.players[1].lp];
-  const firePrincessEvent=effectApplied?{
+  const eventId='m574:'+activationId;
+  const firePrincessEvent=effectApplied&&gainAmount>0?{
     eventId,gainingTeam:activation.controllerTeam,lpGained:gainAmount,
     teamLifePointsAfterGain:[...teamLifePoints] as [number,number],negatedSourceUids:[]
   }:null;
+  if(firePrincessEvent){
+    if(next.processedEventIds.includes(eventId))throw new Error('Evento de recuperação duplicado.');
+    next.processedEventIds.push(eventId);
+  }
   assertSameInventory(before,next.duel);
   assertHandsUnchanged(hands,next.duel);
   assertPhysicalRules(next.duel);

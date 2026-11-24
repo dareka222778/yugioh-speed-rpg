@@ -80,27 +80,13 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": {
-      "runId": 45306768939,
-      "status": "success"
-    },
-    "cardBatchFast": {
-      "runId": 45306768868,
-      "status": "success"
-    },
-    "milestone1000": {
-      "runId": 45306768803,
-      "status": "success"
-    },
-    "engineValidation": {
-      "runId": 45306768843,
-      "status": "in_progress",
-      "jobs": {
-        "test": "in_progress",
-        "extendedSoak": "in_progress"
-      }
-    },
-    "extendedSoak": "in_progress"
+    "focused": "pending-after-followup",
+    "check": "pending-after-followup",
+    "build": "pending-after-followup",
+    "cardBatchFast": "pending-after-followup",
+    "milestone1000": "pending-after-followup",
+    "engineValidation": "pending-after-followup",
+    "extendedSoak": "pending-after-followup"
   },
   "production": {
     "mergePerformed": false,
@@ -137,10 +123,10 @@
   "duration": {
     "startedAt": "2026-11-23T22:30:10-03:00",
     "endedAt": null,
-    "effectiveWorkMinutes": null,
+    "effectiveWorkMinutes": 20,
     "targetEffectiveMinutes": 60,
     "ciWaitExcluded": true,
-    "note": "Tempo efetivo ainda em andamento; não contar espera ociosa de CI. O alvo de 60 minutos permanece pendente."
+    "note": "Revisão comportamental e correções adicionais em andamento; espera de CI excluída. Meta de 60 minutos ainda não atingida."
   },
   "sharedHeadAfterReservation": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
   "implementationHeadSha": "845d38c09068c5f9d2627bcc0bea90688e9614e2",
@@ -156,7 +142,7 @@
     "tests": "tests/attackLpGainTagAdapter.test.cjs",
     "evidence": "docs/evidence/m574-attack-lp-gain-tag-adapter.json",
     "workflow": ".github/workflows/m574-attack-lp-gain-tag-adapter.yml",
-    "testCases": 24,
+    "testCases": 26,
     "coverage": [
       "ataque adversário e próprio",
       "Draining Shield direcionado vs Enchanted Javelin não-direcionado",
@@ -167,12 +153,26 @@
       "mudança/saída do atacante e ativação negada",
       "LP por equipe controladora e Cemitério do proprietário físico",
       "UIDs, mãos privadas, decks 20–30, zonas 3+3 e Extra 5",
-      "LP seguro, IDs idempotentes e LIFO"
+      "LP seguro, IDs idempotentes e LIFO",
+      "redirecionamento do alvo de batalha sem invalidar a identidade do ataque",
+      "ATK zero não emite evento de ganho de LP nem registra evento processado"
     ]
   },
-  "status": "pr-open-draft-ci-partial",
+  "status": "pr-open-draft-followup-ci-pending",
   "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/520",
   "pullRequestDraft": true,
   "prHeadBeforeCheckpointUpdate": "0f4672bb480c33f82be123e969d0892da7093be3",
-  "lastActivityAt": "2026-11-23T22:45:00-03:00"
+  "lastActivityAt": "2026-11-23T22:49:48-03:00",
+  "followupFixes": [
+    {
+      "issue": "A identidade do ataque era invalidada quando o alvo da batalha mudava, embora o atacante e a declaração permanecessem os mesmos.",
+      "fix": "Removido o alvo defendido do snapshot de identidade; a resolução continua vinculada ao turno, equipe, UID atacante e contadores de ataque.",
+      "tests": 1
+    },
+    {
+      "issue": "Resoluções com ATK zero produziam evento LP de valor zero, que poderia disparar incorretamente efeitos como Fire Princess.",
+      "fix": "Evento compatível com Fire Princess e processedEventIds agora só são produzidos quando gainAmount > 0; Draining Shield ainda nega o ataque com ATK zero.",
+      "tests": 2
+    }
+  ]
 }
