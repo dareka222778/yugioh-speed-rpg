@@ -1,0 +1,31 @@
+name: M588 hand-discard TagDuel adapters
+
+on:
+  pull_request:
+    paths:
+      - 'src/handDiscardTagAdapters.ts'
+      - 'tests/handDiscardTagAdapters.test.cjs'
+      - 'docs/evidence/m588-hand-discard-tag-adapters.json'
+      - '.github/workflows/m588-hand-discard-tag-adapters.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hand-discard-adapters:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m588-hand-discard-tag-adapters.json','utf8'))"
+      - name: Run focused behavioral tests
+        run: node --test tests/handDiscardTagAdapters.test.cjs
