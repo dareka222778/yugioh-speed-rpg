@@ -40,9 +40,13 @@ function holder(state,seat){
 }
 function takeMonster(state,seat,id,{faceUp=true,position='atk'}={}){
   const held=holder(state,seat);
-  const index=held.deck.findIndex(card=>card.id===id);
-  assert.ok(index>=0,'card '+id+' must remain in physical seat '+seat+' deck');
-  const [card]=held.deck.splice(index,1);
+  let index=held.deck.findIndex(card=>card.id===id),card;
+  if(index>=0)[card]=held.deck.splice(index,1);
+  else{
+    index=held.hand.findIndex(card=>card.id===id);
+    assert.ok(index>=0,'card '+id+' must remain in physical seat '+seat+' deck or hand');
+    [card]=held.hand.splice(index,1);
+  }
   const monster={
     ...card,position,faceUp,entered:0,changed:0,attacked:0,
     attackCount:0,atkBoost:0,defBoost:0
