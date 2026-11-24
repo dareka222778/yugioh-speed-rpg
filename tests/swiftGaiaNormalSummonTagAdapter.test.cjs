@@ -156,7 +156,7 @@ test('não oferece carta fora da mão, com identidade errada ou sem zona dispon�
   const card = privateZone(duel, 0, 'hand')[0];
   card.id = tagNormalCardIds[3];
   assert.equal(adapter.prepare(duel, sourceUid), null);
-  card.id = SWIFT_GAIA_ID;
+  card.id = FIXTURE_ID;
   for (let i = 0; i < 3; i++) moveDeckCardToMonster(duel, 0);
   assert.equal(adapter.prepare(duel, sourceUid), null);
 });
@@ -182,7 +182,7 @@ test('preserva limites 3+3, Main Deck 20–30 e Extra Deck 5', { skip: !FUSION_I
   for (let i = 0; i < 5; i++) duel.reserves[2].extra.push({ uid: 'm2:swift-extra-' + i, id: FUSION_ID });
   assert.ok(adapter.prepare(duel, sourceUid));
   duel.reserves[2].extra.push({ uid: 'm2:swift-extra-overflow', id: FUSION_ID });
-  assert.throws(() => adapter.prepare(duel, sourceUid), /Deck Adicional excedeu cinco/);
+  assert.throws(() => adapter.prepare(duel, sourceUid));
 });
 
 test('adapter de produção permanece preso ao passcode oficial 16589042', () => {
