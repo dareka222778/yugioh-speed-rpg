@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "runId": "work-20261124T133008-0300-M589",
+  "mission": "M589",
+  "parentMission": "M588",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-and-fixing-test",
+  "startedAt": "2026-11-24T13:30:08-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "07203aae3a03cc9269346a1d9b9eb42e24ae7051",
+  "branch": "feat/work-m588-hand-discard-tag-adapters-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "branchBaseSha": "4e6743c1bb24d44ca93d8f4946b19625c2a7cfe8",
+  "branchHeadAtStart": "bebfb826a8d0b07fa2eba23cc85311696d616cd8",
+  "branchHeadSha": "bebfb826a8d0b07fa2eba23cc85311696d616cd8",
+  "pullRequest": 532,
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/532",
+  "prState": "open",
+  "draft": true,
+  "reservedFiles": [
+    "tests/handDiscardTagAdapters.test.cjs"
+  ],
+  "scope": "Subtarefa exclusiva para corrigir as duas expectativas textuais do teste de limite 3+3 em M588. O runtime já rejeita a quarta zona antes da validação específica do adapter; nenhuma mudança de regra ou runtime.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T13:30:08-03:00",
+    "ownerReservation": "M588 is held by the same Work principal",
+    "matchingOtherBranches": 0,
+    "matchingOtherPRs": 0,
+    "protectedM61FilesTouched": false,
+    "result": "no cross-agent overlap; own reservation only"
+  },
+  "observedCI": {
+    "focused": {
+      "status": "failure",
+      "runId": 45391490472,
+      "tests": 24,
+      "passed": 23,
+      "failed": 1,
+      "failedScenario": "3+3 shared-zone assertion expected a specific Portuguese message; duelIntegrity.ts rejected first with the established generic 'limite de zonas' message."
+    },
+    "cardBatchFast": {
+      "status": "success",
+      "runId": 45391490445
+    },
+    "milestone1000": {
+      "status": "success",
+      "runId": 45391490798
+    },
+    "engineValidation": {
+      "status": "failure",
+      "runId": 45391490643,
+      "tests": 7386,
+      "passed": 7385,
+      "failed": 1,
+      "failedScenario": "same zone-limit assertion mismatch"
+    },
+    "extendedSoak": {
+      "status": "success",
+      "runId": 45391490643,
+      "job": "extended-soak"
+    }
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Corrigir as duas expectativas, publicar commit com lease e reexecutar os quatro gates; após CI verde, preparar a próxima família isolada sem tocar M61.",
+  "nextWindow": "2026-11-24T18:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
