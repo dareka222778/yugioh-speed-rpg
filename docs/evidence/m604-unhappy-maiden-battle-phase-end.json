@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "mission": "M604",
+  "card": {
+    "name": "The Unhappy Maiden",
+    "portugueseName": "A Donzela Infeliz",
+    "passcode": "51275027",
+    "konamiDatabaseId": 4875,
+    "level": 1,
+    "attack": 0,
+    "defense": 100,
+    "attribute": "LIGHT",
+    "race": "Spellcaster",
+    "effect": "When this card is sent to the Graveyard as a result of battle, the Battle Phase for that turn ends immediately.",
+    "historicalEligibility": {
+      "tcgFirstPrint": "MRD-EN134",
+      "tcgReleaseDate": "2002-06-26",
+      "cutoff": "2004-09-30"
+    },
+    "officialReference": "https://www.db.yugioh-card.com/yugiohdb/member_deck.action?ope=1&request_locale=en"
+  },
+  "implementation": {
+    "branch": "feat/work-m604-unhappy-maiden-battle-phase-end-20261124",
+    "paths": [
+      "src/unhappyMaidenBattlePhaseEndTagAdapter.ts",
+      "tests/unhappyMaidenBattlePhaseEndTagAdapter.test.cjs",
+      "docs/evidence/m604-unhappy-maiden-battle-phase-end.json",
+      ".github/workflows/m604-unhappy-maiden-battle-phase-end.yml"
+    ],
+    "design": [
+      "Mandatory trigger requires battle destruction, destination Graveyard, completed Damage Step, current turn, and the owner's physical team Graveyard.",
+      "Physical owner seat is derived from m0..m3 UID; the owner team may differ from the team whose Battle Phase is active.",
+      "The effect records a deferred end request; it never changes the phase while a Chain, trigger queue, Damage Step, or response window remains open.",
+      "After the chain settles, the adapter opens the engine's existing Battle-Phase-end response boundary, preserving normal End Phase cleanup and the six-card discard flow.",
+      "A source removed from the Graveyard after its trigger was activated still resolves; a negated trigger does not request the phase end.",
+      "Multiple activations coalesce, activation receipts are idempotent, and no card is created, moved, or granted by resolution."
+    ],
+    "rulesValidated": {
+      "mainDeckPerPhysicalSeat": "20-30",
+      "extraDeckPerPhysicalSeat": "0-5",
+      "monsterZonesPerTeam": 3,
+      "spellTrapZonesPerTeam": 3,
+      "endPhaseHandLimit": 6,
+      "handDiscard": "deferred to the existing engine End Phase"
+    },
+    "integrationBoundary": "Isolated TagDuel adapter only. No central resolver, card catalog, command handler, or Discord runtime integration was changed; that work remains blocked on the explicit M61 handoff."
+  },
+  "verification": {
+    "focusedScenarios": [
+      "inactive physical owner and opposing active Battle Phase",
+      "reject non-battle sends, banishment, incomplete Damage Step, wrong owner team, wrong battle team, and stale turn",
+      "source leaves Graveyard after activation",
+      "negation and duplicate resolution",
+      "wait for Chain/trigger queue completion before requesting Battle Phase end",
+      "coalesce multiple Maidens into one phase-end request",
+      "already-ended Battle Phase is not ended twice",
+      "3+3 zones, Main Deck 20/30 boundaries, Extra Deck maximum five",
+      "hand size above six is not discarded by this adapter"
+    ],
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "The production adapter is pinned to passcode 51275027, but the card is not registered in the catalog/resolver on this branch.",
+    "The adapter requires the host to pass the actual battle-destroyed trigger event and call finalizeAfterChain after the engine's trigger/Chain queues settle.",
+    "Focused CI must pass before the adapter can be treated as verified; no local repository runtime was available in this session."
+  ]
+}
