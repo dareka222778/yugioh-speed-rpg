@@ -282,7 +282,7 @@ test('Skull Invitation excludes negated copies and rejects duplicate source UIDs
  const s=state({backrow1:[source('m1:skull',SKULL_INVITATION_ID)],grave0:[putInGrave(a)]});
  const r=resolveSkullInvitation(s,createSkullInvitationLedger(),graveEvent([a],{negatedSourceUids:['m1:skull']}));
  assert.equal(r.status,'unchanged');
- const s2=state({backrow1:[source('m1:dup',SKULL_INVITATION_ID),source('m3:dup',SKULL_INVITATION_ID)],grave0:[putInGrave(a)]});
+ const s2=state({backrow1:[source('m1:dup',SKULL_INVITATION_ID),source('m1:dup',SKULL_INVITATION_ID)],grave0:[putInGrave(a)]});
  assert.throws(()=>resolveSkullInvitation(s2,createSkullInvitationLedger(),graveEvent([a])),/UID duplicado/);
 });
 test('Skull Invitation rejects stale LP snapshots and duplicate receipts remain idempotent',()=>{
