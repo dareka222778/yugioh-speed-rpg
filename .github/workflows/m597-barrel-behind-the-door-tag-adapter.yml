@@ -1,0 +1,38 @@
+name: M597 Barrel Behind the Door TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m597-barrel-behind-door-tag-adapter-20261124
+    paths:
+      - 'src/barrelBehindTheDoorTagAdapter.ts'
+      - 'tests/barrelBehindTheDoorTagAdapter.test.cjs'
+      - 'docs/evidence/m597-barrel-behind-the-door-tag-adapter.json'
+      - '.github/workflows/m597-barrel-behind-the-door-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/barrelBehindTheDoorTagAdapter.ts'
+      - 'tests/barrelBehindTheDoorTagAdapter.test.cjs'
+      - 'docs/evidence/m597-barrel-behind-the-door-tag-adapter.json'
+      - '.github/workflows/m597-barrel-behind-the-door-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  barrel-redirection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m597-barrel-behind-the-door-tag-adapter.json', 'utf8'))"
+      - name: Run focused behavior tests
+        run: node --test tests/barrelBehindTheDoorTagAdapter.test.cjs
