@@ -1,0 +1,120 @@
+{
+  "format": 1,
+  "runId": "work-20261124T000236-0300-M579",
+  "mission": "M579",
+  "owner": "Work principal",
+  "priority": "P1 — Banishment routing: Banisher of the Light (61528025) substitui qualquer envio ao Cemitério por banimento; Bazoo the Soul-Eater (40133511) banishes 1–3 monstros do Cemitério compartilhado da equipe e recebe +300 ATK por carta até o fim do próximo turno adversário.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-24T00:02:36-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "48ec3e7caaf697cbd6c0c952dbb34277058b4020",
+  "branch": "feat/work-m579-bazoo-banisher-tag-adapter-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "48ec3e7caaf697cbd6c0c952dbb34277058b4020",
+  "branchHeadSha": "48ec3e7caaf697cbd6c0c952dbb34277058b4020",
+  "reservationCommitSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/banishmentTagAdapter.ts",
+    "tests/banishmentTagAdapter.test.cjs",
+    "docs/evidence/m579-banishment-tag-adapter.json",
+    ".github/workflows/m579-banishment-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para dois candidatos históricos não reservados: destino físico de cartas enviadas ao Cemitério sob Banisher of the Light e custo/ATK temporário de Bazoo the Soul-Eater. Sem alteração de resolver central, catálogo, certificações, allowlist, comandos, banco ou dados persistentes nesta etapa.",
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-24T00:02:36-03:00",
+    "checkedAgainst": [
+      "Busca de branches e PRs por Bazoo the Soul-Eater e Banisher of the Light: nenhum PR/branch de implementação existente.",
+      "coordination/state.json activeParallelWork: nenhum escopo Bazoo/Banisher reservado.",
+      "M61 permanece aguardando handoff; os caminhos centrais protegidos não serão editados.",
+      "Somente os quatro caminhos novos M579 estão reservados."
+    ]
+  },
+  "cards": [
+    {
+      "id": "61528025",
+      "name": "Banisher of the Light",
+      "konamiDatabaseCid": 4914,
+      "officialText": "Any card sent to the GY is banished instead.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4914&ope=2&request_locale=en",
+      "firstTcgRelease": "2002-09-16",
+      "firstTcgSet": "MRL-078",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "40133511",
+      "name": "Bazoo the Soul-Eater",
+      "konamiDatabaseCid": 5250,
+      "officialText": "Once per turn: You can banish up to 3 monsters from your GY; this card gains 300 ATK for each, until the end of your opponent's turn.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5250&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "LON-064",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "banisher": "O efeito contínuo é global para os dois times; o destino banished/grave é escolhido pela propriedade física (seat prefix do UID), não pelo controlador atual. Face-down ou efeito negado não substitui o destino.",
+    "bazoo": "Uma vez por turno, Main Phase do controlador; banir 1–3 monstros da GY compartilhada da equipe, inclusive cartas físicas do parceiro. O custo é aplicado na ativação; +300 ATK por carta expira após o turno adversário seguinte.",
+    "ownership": "Nenhum UID é recriado ou concedido; banimento preserva identidade física. A mão permanece limitada a 6 somente no End Phase; nenhuma rotina descarta cartas no meio da resolução.",
+    "testFixtures": "Os IDs reais ficam como defaults. Até os dois candidatos entrarem no catálogo jogável após handoff M61, testes usam IDs de monstros normais já jogáveis como fixtures substituíveis; isso não certifica nem libera os cards."
+  },
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "identityBlocked": 27,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "pending",
+    "customWorkflow": "pending"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Implementar helpers puros e testes comportamentais para destino de Cemitério e Bazoo: ownership por UID, ambos os times, negation/face-down, 1–3 custos, uma vez por turno, janela Main Phase e expiração do ATK após o próximo turno adversário.",
+  "nextWindow": "2026-11-24T03:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-24T00:02:36-03:00",
+    "endedAt": null,
+    "elapsedMinutes": 0,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "status": "reserved-and-implementing",
+  "lastActivityAt": "2026-11-24T00:02:36-03:00"
+}

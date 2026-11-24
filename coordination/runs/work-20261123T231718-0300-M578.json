@@ -4,7 +4,7 @@
   "mission": "M578",
   "owner": "Work principal",
   "priority": "P1 — trio de Espíritos Elementais: Spirit of Flames (13522325), The Rock Spirit (76305638) e Garuda the Wind Spirit (12800777). Compartilham a Invocação-Especial da mão por banimento de 1 monstro do mesmo Atributo do Cemitério; dois ganham +300 ATK em fases de batalha específicas e Garuda muda a posição de um monstro face-up do oponente na End Phase.",
-  "state": "reserved-and-implementing",
+  "state": "implementation-complete-pr-open-draft-engine-validation-running",
   "startedAt": "2026-11-23T23:17:18-03:00",
   "endedAt": null,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
@@ -13,8 +13,8 @@
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "3364a7c3587c54ad506f289b18291c0254e8dd16",
   "reservationCommitSha": null,
-  "branchHeadSha": "3364a7c3587c54ad506f289b18291c0254e8dd16",
-  "pullRequest": null,
+  "branchHeadSha": "5f005030927f0350868d99a05dade6a9a943480d",
+  "pullRequest": 523,
   "reservedFiles": [
     "src/elementalSpiritTagAdapter.ts",
     "tests/elementalSpiritTagAdapter.test.cjs",
@@ -91,12 +91,12 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
-    "extendedSoak": "pending",
-    "customWorkflow": "pending"
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "customWorkflow": "success",
+    "engineValidation": "in_progress",
+    "extendedSoak": "in_progress"
   },
   "production": {
     "mergePerformed": false,
@@ -116,15 +116,22 @@
     "deployPerformed": false,
     "liveDiscordValidation": false
   },
-  "nextTask": "Inspecionar TagDuel/duelEngine para confirmar zonas banidas, ownership e janelas de fase; implementar helpers puros e regressões por UID, Atributo, fase, posição e regras 2v2.",
+  "nextTask": "Aguardar Engine Validation e Extended Soak de 600s; após sucesso, liberar somente os quatro arquivos M578 ao auxiliar para monitoramento/sincronização não-forçada. Não fazer merge/deploy.",
   "nextWindow": "2026-11-24T03:30:00-03:00",
   "duration": {
     "startedAt": "2026-11-23T23:17:18-03:00",
     "endedAt": null,
-    "effectiveWorkMinutes": 0,
+    "elapsedMinutes": 45,
+    "effectiveWorkMinutes": 30,
     "targetEffectiveMinutes": 60,
+    "targetMet": false,
     "ciWaitExcluded": true
   },
-  "status": "reserved-and-implementing",
-  "lastActivityAt": "2026-11-23T23:17:18-03:00"
+  "status": "implementation-complete-pr-open-draft-engine-validation-running",
+  "lastActivityAt": "2026-11-24T00:02:36-03:00",
+  "changes": [
+    "Correção de ownership/control: Garuda the Wind Spirit agora acompanha a equipe que controla o monstro no campo; o UID físico continua identificando o proprietário.",
+    "Regressão adicionada para Garuda sob controle da equipe oposta; 23 testes focados aprovados."
+  ],
+  "testCases": 23
 }
