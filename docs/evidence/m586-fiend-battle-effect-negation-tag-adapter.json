@@ -1,0 +1,79 @@
+{
+  "mission": "M586",
+  "title": "Fiend battle-effect negation TagDuel adapter — Dark Ruler Ha Des + Dark Balter the Terrible",
+  "cards": [
+    {
+      "id": "53982768",
+      "name": "Dark Ruler Ha Des",
+      "konamiDatabaseCid": 5301,
+      "firstTcgRelease": "2003-06-06",
+      "firstTcgSet": "LOD-001",
+      "historicalEligibility": "eligible-before-2004-09-30",
+      "officialText": "Cannot be Special Summoned from the GY. Negate the effects of monsters destroyed by battle with Fiend monsters you control.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5301&ope=2&request_locale=en"
+    },
+    {
+      "id": "80071763",
+      "name": "Dark Balter the Terrible",
+      "konamiDatabaseCid": 5302,
+      "firstTcgRelease": "2003-06-06",
+      "firstTcgSet": "LOD-002",
+      "historicalEligibility": "eligible-before-2004-09-30",
+      "officialText": "The effect of an Effect Monster that this monster destroys as a result of battle is negated.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5302&ope=2&request_locale=en"
+    }
+  ],
+  "adapterBehaviorVerifiedCards": 2,
+  "behaviorCertifiedCards": 0,
+  "newEngineV9Certifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "identityBlocked": 27
+  },
+  "testCases": 10,
+  "testCoverage": [
+    "Dark Ruler Ha Des suppresses an Effect Monster destroyed by battle with any Fiend controlled by its team",
+    "Ha Des does not apply to a non-Fiend attacker and requires a face-up, non-negated copy",
+    "Dark Balter suppresses an Effect Monster destroyed by battle with itself, not with another Fiend",
+    "Normal Monsters without a registered monster effect are not marked",
+    "The battle event must be a real opposing-team battle destruction",
+    "A negated Dark Balter attacker cannot apply its battle suppression",
+    "Dark Ruler Ha Des cannot be Special Summoned from the GY",
+    "Negation returns a UID marker for the shared effect pipeline without moving or granting cards",
+    "Fusion card remains in its physical Extra Deck inventory under the five-card cap"
+  ],
+  "fixtureStrategy": "Production defaults retain the official card IDs. Tests alias Ha Des to an enabled Fiend and Dark Balter to an enabled Fusion card; the destroyed target is an enabled Effect Monster with a registered monster-effect definition. Aliases are test-only and do not alter metadata, certificates, allowlist, catalog or inventory.",
+  "resolutionBoundary": "The adapter returns the destroyed monster's physical UID and applicable negation source(s). The shared chain/GY-trigger pipeline must persist and enforce the negation marker; this isolated PR does not mutate the target or integrate that marker.",
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "runtimeResolverChanged": false,
+    "catalogChanged": false,
+    "certificationsChanged": false,
+    "releasedCardIdsChanged": false,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "M61 still owns the protected resolver, metadata and certification files; this PR adds an isolated adapter only.",
+    "Dark Balter's Normal Spell negation by paying 1000 LP is not included in this battle-negation family.",
+    "The shared resolver must persist and enforce the returned negation UID; this adapter alone does not suppress downstream GY/Flip triggers.",
+    "The new card IDs are not yet playable/certified in engine-v9; tests use fixture aliases and do not count as engine-v9 certification.",
+    "No live Discord gateway/guild, production database, merge, deploy or backup restoration was exercised."
+  ]
+}
