@@ -14,8 +14,8 @@
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "b639c13d46ce725380220f99921d3c8eaa0e4738",
   "reservationCommitSha": null,
-  "branchHeadSha": "b639c13d46ce725380220f99921d3c8eaa0e4738",
-  "pullRequest": null,
+  "branchHeadSha": "735bf6077173252a440690d8c840ba7f5e9fa977",
+  "pullRequest": 521,
   "reservedFiles": [
     "src/continuousAttackRestrictionTagAdapter.ts",
     "tests/continuousAttackRestrictionTagAdapter.test.cjs",
@@ -83,13 +83,11 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "pending",
-    "check": "pending",
-    "build": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
-    "extendedSoak": "pending"
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "in_progress",
+    "extendedSoak": "in_progress"
   },
   "production": {
     "mergePerformed": false,
@@ -109,7 +107,7 @@
     "deployPerformed": false,
     "liveDiscordValidation": false
   },
-  "nextTask": "Implementar o adapter de restrições contínuas e testes de Battle Phase compartilhada, UID do atacante, múltiplas cópias, mudança de posição e preservação física; acompanhar CI M574 sem editar a branch M575.",
+  "nextTask": "Aguardar Engine Validation; corrigir apenas falhas objetivas no adapter M576, sem tocar em M575/M61.",
   "nextWindow": "2026-11-24T03:30:00-03:00",
   "duration": {
     "startedAt": "2026-11-23T22:50:51-03:00",
@@ -117,7 +115,35 @@
     "effectiveWorkMinutes": 11,
     "targetEffectiveMinutes": 60,
     "ciWaitExcluded": true,
-    "note": "11 minutos efetivos no subbloco M576; espera de CI excluída. Sessão principal segue ativa."
+    "note": "11 minutos efetivos de implementação M576; CI em andamento e espera ociosa excluída."
   },
-  "lastActivityAt": "2026-11-23T23:01:49-03:00"
+  "lastActivityAt": "2026-11-23T23:07:48-03:00",
+  "status": "pr-open-draft-engine-validation-running",
+  "implementationHeadSha": "735bf6077173252a440690d8c840ba7f5e9fa977",
+  "commits": [
+    "ca0347453731a9206021a5af313f90636ba4d9cb",
+    "0aa1a546a8896a568d48f309808b25ab4bc5a9c0",
+    "fb63b6d4bb884fb56df0a2bca84471a3b36ca537",
+    "9f84b98d2c18e52dc9a63f057cf8b5f5a667de8f",
+    "c74a0914bc4c6e5e886e2a94571d3f6c198c5a88",
+    "735bf6077173252a440690d8c840ba7f5e9fa977"
+  ],
+  "implementation": {
+    "source": "src/continuousAttackRestrictionTagAdapter.ts",
+    "tests": "tests/continuousAttackRestrictionTagAdapter.test.cjs",
+    "evidence": "docs/evidence/m576-continuous-attack-restriction-tag-adapter.json",
+    "workflow": ".github/workflows/m576-continuous-attack-restriction-tag-adapter.yml",
+    "testCases": 9,
+    "coverage": [
+      "The Dark Door: um UID atacante distinto por equipe/Battle Phase; o mesmo UID pode atacar novamente",
+      "ledger persiste quando o primeiro atacante deixa o campo e reinicia em nova Battle Phase",
+      "histórico de ataques é registrado mesmo antes de The Dark Door ser revelada",
+      "cópias face-down não aplicam efeito até serem reveladas",
+      "Level Limit - Area B força monstros face-up Level 4+ de ambas as equipes para DEF",
+      "monstros face-down e Level 3 permanecem inalterados até revelação",
+      "efeito reaplica após tentativa de mudar Level 4+ para ATK",
+      "cópias múltiplas mantêm efeito até a última sair",
+      "UIDs, mãos, decks 20–30, zonas 3+3 e Extra 5 preservados"
+    ]
+  }
 }

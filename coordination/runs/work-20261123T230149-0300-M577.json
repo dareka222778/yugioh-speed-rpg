@@ -14,8 +14,8 @@
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "d8f289447e9125a410506c0d218485fadf919ba0",
   "reservationCommitSha": null,
-  "branchHeadSha": "d8f289447e9125a410506c0d218485fadf919ba0",
-  "pullRequest": null,
+  "branchHeadSha": "05dcab0b48fe63e2015b1893db39783aa2caffc2",
+  "pullRequest": 522,
   "reservedFiles": [
     "src/continuousBattleTrapTagAdapter.ts",
     "tests/continuousBattleTrapTagAdapter.test.cjs",
@@ -85,13 +85,11 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "pending",
-    "check": "pending",
-    "build": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
-    "extendedSoak": "pending"
+    "focused": "success-on-e286-prior-head; latest-05dc-pending",
+    "cardBatchFast": "in_progress-on-e286-prior-head",
+    "milestone1000": "success-on-e286-prior-head",
+    "engineValidation": "in_progress-on-e286-prior-head",
+    "latestCommitWorkflow": "pending"
   },
   "production": {
     "mergePerformed": false,
@@ -111,13 +109,41 @@
     "deployPerformed": false,
     "liveDiscordValidation": false
   },
-  "nextTask": "Inspecionar os tipos de LP/ATK e a semântica de upkeep; implementar helpers isolados com regressões para coin-call, metade do ATK, múltiplas cópias, custo por UID, LP insuficiente e Cemitério físico.",
+  "nextTask": "Aguardar CI no HEAD 05dc; corrigir falhas de TypeScript/teste e confirmar custo de manutenção antes de considerar M577 estável.",
   "nextWindow": "2026-11-24T03:30:00-03:00",
   "duration": {
     "startedAt": "2026-11-23T23:01:49-03:00",
     "endedAt": null,
-    "effectiveWorkMinutes": 0,
+    "effectiveWorkMinutes": 6,
     "targetEffectiveMinutes": 60,
-    "ciWaitExcluded": true
+    "ciWaitExcluded": true,
+    "note": "6 minutos efetivos iniciais M577; o último commit de ajuste de custo ainda aguarda CI específica."
+  },
+  "status": "pr-open-draft-latest-commit-ci-pending",
+  "lastActivityAt": "2026-11-23T23:07:48-03:00",
+  "implementationHeadSha": "05dcab0b48fe63e2015b1893db39783aa2caffc2",
+  "commits": [
+    "ef0365784c9788a3e97ba43799f0e81cf079d2e5",
+    "f18d414732f34dc65d97538ca67c2baf36aed4a4",
+    "1b9ab25eefc99abdfff16b605f957214feb020ed",
+    "e2862b0b789363d9966f8d2d51370491767fbf40",
+    "05dcab0b48fe63e2015b1893db39783aa2caffc2"
+  ],
+  "implementation": {
+    "source": "src/continuousBattleTrapTagAdapter.ts",
+    "tests": "tests/continuousBattleTrapTagAdapter.test.cjs",
+    "evidence": "docs/evidence/m577-continuous-battle-trap-tag-adapter.json",
+    "workflow": ".github/workflows/m577-continuous-battle-trap-tag-adapter.yml",
+    "testCases": 9,
+    "coverage": [
+      "Mirror Wall: metade do ATK atual do monstro atacante adversário sem mutar o monstro",
+      "Fairy Box: chamada/moeda injetadas, ATK zero até Battle Phase e proteção contra resolução duplicada",
+      "Fairy Box: janela de declaração, Set no turno e exclusão de Damage Step",
+      "upkeep por cópia e por turno: 2000 LP/500 LP, pagamento idempotente",
+      "LP precisa permanecer estritamente acima do custo, seguindo StandbyFlow",
+      "recusa/LP insuficiente destrói e envia a carta ao Cemitério do proprietário físico",
+      "LP debitado da equipe controladora; mãos, UIDs e inventário conservados",
+      "regras 20–30, mão 6 no End Phase, zonas 3+3, Field Zone separada, Extra 5"
+    ]
   }
 }

@@ -6,7 +6,7 @@
   "priority": "P1 — Draining Shield (43250041) e Enchanted Javelin (96355986): respostas de ataque que recuperam LP pelo ATK atual; Draining Shield também nega apenas ataque de monstro adversário, enquanto Enchanted Javelin não nega o ataque.",
   "state": "reserved-and-implementing",
   "startedAt": "2026-11-23T22:30:10-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-23T23:07:48-03:00",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "c0da86800217e62719335f8a690113f82c087860",
   "branch": "feat/work-m574-attack-lp-gain-tag-adapter-20261123",
@@ -81,17 +81,18 @@
   },
   "ci": {
     "focused": "success",
-    "cardBatchFast": "in_progress",
+    "cardBatchFast": "success",
     "milestone1000": "success",
-    "engineValidation": "in_progress",
-    "extendedSoak": "in_progress",
+    "engineValidation": "success",
+    "extendedSoak": "success",
     "workflow": "success"
   },
   "production": {
     "mergePerformed": false,
     "deployPerformed": false,
     "backupVerified": false,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "reason": "PR mantido draft; nenhuma autorização explícita de merge/deploy nem backup de produção verificável."
   },
   "safety": {
     "runtimeCoreChanged": false,
@@ -117,15 +118,15 @@
       ".github/workflows/m573-summon-negation-tag-adapter.yml"
     ]
   },
-  "nextTask": "Implementar adapter e regressões comportamentais; durante CI preparar a próxima família independente, conferir novo HEAD/coordenação e só então decidir próximo lote.",
+  "nextTask": "M574 liberado; acompanhar M576/M577 sem alterar seus caminhos e aguardar liberação explícita M573.",
   "nextWindow": "2026-11-24T03:30:00-03:00",
   "duration": {
     "startedAt": "2026-11-23T22:30:10-03:00",
-    "endedAt": null,
-    "effectiveWorkMinutes": 31,
+    "endedAt": "2026-11-23T23:07:48-03:00",
+    "effectiveWorkMinutes": 21,
     "targetEffectiveMinutes": 60,
     "ciWaitExcluded": true,
-    "note": "31 minutos efetivos acumulados no ciclo; CI não contabilizada. Meta de 60 minutos ainda pendente."
+    "note": "21 minutos efetivos de implementação e correção M574; espera de CI excluída. Todos os workflows observados no HEAD 2578811 ficaram verdes."
   },
   "implementationHeadSha": "2578811c4e2c3ee81c6c4f35e23b450ef51e32fa",
   "commits": [
@@ -164,6 +165,17 @@
       "tests": 2
     }
   ],
-  "status": "pr-open-draft-followup-ci-in-progress",
-  "lastActivityAt": "2026-11-23T23:01:49-03:00"
+  "status": "completed-pr-open-draft-ci-green",
+  "lastActivityAt": "2026-11-23T23:07:48-03:00",
+  "reservation": {
+    "state": "released",
+    "releasedAt": "2026-11-23T23:07:48-03:00",
+    "releaseTo": "auxiliary-review-only",
+    "reservedFiles": [
+      "src/attackLpGainTagAdapter.ts",
+      "tests/attackLpGainTagAdapter.test.cjs",
+      "docs/evidence/m574-attack-lp-gain-tag-adapter.json",
+      ".github/workflows/m574-attack-lp-gain-tag-adapter.yml"
+    ]
+  }
 }
