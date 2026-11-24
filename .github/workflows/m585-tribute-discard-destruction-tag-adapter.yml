@@ -1,0 +1,39 @@
+name: M585 costed-destruction TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m585-tribute-discard-destruction-tag-adapter-20261124
+    paths:
+      - 'src/tributeDiscardDestructionTagAdapter.ts'
+      - 'tests/tributeDiscardDestructionTagAdapter.test.cjs'
+      - 'docs/evidence/m585-tribute-discard-destruction-tag-adapter.json'
+      - '.github/workflows/m585-tribute-discard-destruction-tag-adapter.yml'
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/tributeDiscardDestructionTagAdapter.ts'
+      - 'tests/tributeDiscardDestructionTagAdapter.test.cjs'
+      - 'docs/evidence/m585-tribute-discard-destruction-tag-adapter.json'
+      - '.github/workflows/m585-tribute-discard-destruction-tag-adapter.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  costed-destruction-tag-adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate factual evidence
+        run: node -e "const e=require('./docs/evidence/m585-tribute-discard-destruction-tag-adapter.json'); if(e.mission!=='M585'||e.adapterBehaviorVerifiedCards!==2||e.behaviorCertifiedCards!==0||e.automaticCertifications!==0||e.inventoryGranted!==0) process.exit(1)"
+      - name: Run isolated behavioral regressions
+        run: node scripts/run-tests-isolated.cjs tests/tributeDiscardDestructionTagAdapter.test.cjs
