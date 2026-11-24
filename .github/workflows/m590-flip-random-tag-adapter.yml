@@ -1,0 +1,31 @@
+name: M590 FLIP random and dice TagDuel adapters
+
+on:
+  pull_request:
+    paths:
+      - 'src/flipRandomTagAdapter.ts'
+      - 'tests/flipRandomTagAdapter.test.cjs'
+      - 'docs/evidence/m590-flip-random-tag-adapter.json'
+      - '.github/workflows/m590-flip-random-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flip-random-adapters:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m590-flip-random-tag-adapter.json','utf8'))"
+      - name: Run focused behavioral tests
+        run: node --test tests/flipRandomTagAdapter.test.cjs

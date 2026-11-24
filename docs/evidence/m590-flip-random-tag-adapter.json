@@ -1,0 +1,81 @@
+{
+  "mission": "M590",
+  "runId": "work-20261124T134217-0300-M590",
+  "priority": "P1",
+  "family": "flip-random-dice-damage",
+  "cards": [
+    {
+      "name": "Dice Jar",
+      "passcode": "03549275",
+      "konamiDatabaseId": 5424,
+      "firstPrinting": "Pharaonic Guardian (PGD-027), TCG 2003-07-18",
+      "effect": "Both players roll a six-sided die. The player with the lower result takes damage equal to the opponent's result × 500; if the winner rolled a 6, the loser takes 6000. If tied, both roll again.",
+      "sources": [
+        "https://ftp.yugipedia.com/wiki/Dice_Jar",
+        "https://ygoprodeck.com/CARD/DICE-JAR-5424"
+      ],
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5424&request_locale=en",
+      "sourceVerification": "secondary text/date cross-check; Konami database identifier recorded, direct page retrieval not confirmed",
+      "certificationStatus": "not-certified; isolated adapter only"
+    },
+    {
+      "name": "Fire Sorcerer",
+      "passcode": "27132350",
+      "konamiDatabaseId": 5199,
+      "firstPrinting": "Labyrinth of Nightmare (LON-EN036), TCG 2003-03-01",
+      "effect": "FLIP: Banish 2 random cards from your hand; inflict 800 damage to your opponent.",
+      "sources": [
+        "https://ftp.yugipedia.com/wiki/Fire_Sorcerer",
+        "https://ygoprodeck.com/CARD/FIRE-SORCERER-2321"
+      ],
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5199&request_locale=en",
+      "sourceVerification": "secondary text/date cross-check; Konami database identifier recorded, direct page retrieval not confirmed",
+      "certificationStatus": "not-certified; isolated adapter only"
+    }
+  ],
+  "behavior": [
+    "Both effects require a real face-down-to-face-up event (Flip Summon, battle, or card effect); controller team/active seat and source physical owner are captured separately.",
+    "Dice Jar compares 1–6 results for both teams, rerolls both on ties, damages the lower-rolling team by the higher result × 500, and uses 6000 when the higher result is 6.",
+    "Fire Sorcerer uses exactly two RNG-selected UIDs from the active controller's private hand, moves them to that team's shared banished zone, and deals 800 to the opposing team; fewer than two cards means no partial banish or damage.",
+    "A queued FLIP trigger may resolve after its source leaves the field; negation causes no damage or banishment.",
+    "All physical UIDs remain unchanged; no card is created, granted, or discarded by the hand-limit rule during Main Phase."
+  ],
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndBanished": true,
+    "physicalOwnership": "UID m0–m3 remains attached to original physical seat"
+  },
+  "validation": {
+    "focusedSuite": "tests/flipRandomTagAdapter.test.cjs",
+    "workflow": ".github/workflows/m590-flip-random-tag-adapter.yml",
+    "planned": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "JSON parse",
+      "node --test tests/flipRandomTagAdapter.test.cjs"
+    ],
+    "liveDiscord": false
+  },
+  "safety": {
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "allowlistChanged": false,
+    "resolverChanged": false,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "commandsChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "engineRegistration": "pending explicit M61 resolver handoff"
+  }
+}
