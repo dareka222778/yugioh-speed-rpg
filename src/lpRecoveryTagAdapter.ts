@@ -131,10 +131,17 @@ function locateCost(state:TagDuel,team:RecoveryTeam,uid:string):EmergencyCost{
   const field=player.field&&player.field.uid===uid?[player.field]:[];
   if(backrow.length+field.length!==1)throw new Error('Custo de Provisões de Emergência ausente, duplicado ou fora do controle da equipe.');
   const card=backrow[0]??field[0];
-  return {uid,id:card.id,zone:field.length?'field':'backrow',kind:spellTrapKind(card.id)};
+  const metadata=getPlayableCard(card.id);
+  const kind=spellTrapKind(card.id);
+  if(field.length&&metadata?.field!==true){
+    throw new Error('Zona de Campo exige uma Magia de Campo certificada.');
+  }
+  return {uid,id:card.id,zone:field.length?'field':'backrow',kind};
 }
 function consumeAction(ledger:RecoveryLedger,actionId:string):RecoveryLedger{
-  return {version:1,processedActionIds:[...ledger.processedActionIds,actionId]};
+  const next={version:1 as const,processedActionIds:[...ledger.processedActionIds,actionId]};
+  assertLedger(next);
+  return next;
 }
 
 /** Rain of Mercy is a Normal Spell: both shared teams gain 1000 LP. */
