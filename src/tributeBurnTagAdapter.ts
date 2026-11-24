@@ -191,15 +191,23 @@ function assertSession(input:TributeBurnSession):void{
 
 function currentOrOriginalAtk(monster:Monster,core:DuelState):number{
   const metadata=getPlayableCard(monster.id);
-  const originalAtk=metadata?.kind==='monster'
+  const rawOriginalAtk=metadata?.kind==='monster'
     ? metadata.atk
     : monster.id===CATAPULT_TURTLE_ID?CATAPULT_TURTLE_ORIGINAL_ATK:undefined;
-  if(!Number.isSafeInteger(originalAtk)||originalAtk===undefined||originalAtk<0){
+  if(rawOriginalAtk===undefined||rawOriginalAtk===null||
+    !Number.isSafeInteger(rawOriginalAtk)||rawOriginalAtk<0){
     throw new Error('ATK original certificado ausente para o monstro tributado.');
   }
-  const current=monster.faceUp
-    ? metadata?.kind==='monster'?atk(monster,core):originalAtk+(monster.atkBoost??0)
-    : originalAtk;
+  const originalAtk=rawOriginalAtk;
+  let current:number;
+  if(!monster.faceUp)current=originalAtk;
+  else if(metadata?.kind==='monster'){
+    const value=atk(monster,core);
+    if(value===null||value===undefined||!Number.isSafeInteger(value)||value<0){
+      throw new Error('ATK no campo inválido para o cálculo do tributo.');
+    }
+    current=value;
+  }else current=originalAtk+(monster.atkBoost??0);
   if(!Number.isSafeInteger(current)||current<0){
     throw new Error('ATK no campo inválido para o cálculo do tributo.');
   }
