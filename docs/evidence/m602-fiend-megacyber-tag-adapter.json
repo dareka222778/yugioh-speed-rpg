@@ -76,7 +76,9 @@
     "stale turn/phase rejected",
     "wrong identity or non-hand source rejected",
     "three Monster/Spell-Trap Zone limits enforced",
-    "Main Deck minimum enforced"
+    "Main Deck minimum enforced",
+    "Main Deck maximum 30 and rejection at 31",
+    "Extra Deck maximum 5 and rejection at 6"
   ],
   "scope": {
     "newFilesOnly": true,
