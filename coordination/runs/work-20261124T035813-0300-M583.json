@@ -1,0 +1,95 @@
+{
+  "format": 1,
+  "runId": "work-20261124T035813-0300-M583",
+  "mission": "M583",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-24T03:58:13-03:00",
+  "endedAt": null,
+  "durationMinutes": 0,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "branch": "feat/work-m583-sarcophagus-chain-tag-adapter-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "3304dab160d4029ec771482d874d8a6848f34666",
+  "branchStartSha": "3304dab160d4029ec771482d874d8a6848f34666",
+  "branchHeadSha": "3304dab160d4029ec771482d874d8a6848f34666",
+  "coordinationCommitSha": null,
+  "reservedFiles": [
+    "src/sarcophagusTagAdapter.ts",
+    "tests/sarcophagusTagAdapter.test.cjs",
+    "docs/evidence/m583-sarcophagus-chain-tag-adapter.json",
+    ".github/workflows/m583-sarcophagus-chain-tag-adapter.yml"
+  ],
+  "scope": "Implementar os quatro cards do ciclo de Sarcófagos com ownership físico TagDuel, 3 S/T zones, summon e revives.",
+  "cards": [
+    {
+      "id": "31076103",
+      "name": "The First Sarcophagus",
+      "konamiCid": 6063,
+      "tcgRelease": "2004-06-01",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6063&ope=2&request_locale=en"
+    },
+    {
+      "id": "04081094",
+      "name": "The Second Sarcophagus",
+      "konamiCid": 6062,
+      "tcgRelease": "2004-06-01",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6062&ope=2&request_locale=en"
+    },
+    {
+      "id": "78697395",
+      "name": "The Third Sarcophagus",
+      "konamiCid": 6061,
+      "tcgRelease": "2004-06-01",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6061&ope=2&request_locale=en"
+    },
+    {
+      "id": "25343280",
+      "name": "Spirit of the Pharaoh",
+      "konamiCid": 6024,
+      "tcgRelease": "2004-06-01",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6024&ope=2&request_locale=en"
+    }
+  ],
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T03:58:13-03:00",
+    "matchingPRs": 0,
+    "matchingBranches": 0,
+    "activeReservation": false,
+    "otherAgents": [
+      "M581",
+      "M582"
+    ],
+    "overlap": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "playerDataChanged": false,
+    "productionDeploy": false,
+    "centralResolverChanged": false,
+    "commandsChanged": false,
+    "allowlistChanged": false
+  },
+  "validation": {
+    "status": "not-started",
+    "planned": "Node 22, npm ci, check/build, JSON evidence parse, focused node:test suite"
+  },
+  "nextTask": "Implement adapter and tests; then review M580 CI and checkpoint.",
+  "nextWindow": "2026-11-24T08:30:00-03:00",
+  "handoff": "No M580/M581/M582 files touched; M61 central files remain reserved pending explicit transfer."
+}
