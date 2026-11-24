@@ -57,7 +57,7 @@
       "Garuda's WIND cost is positively verified",
       "a six-card hand is not auto-discarded during the summon; End Phase discard remains engine-owned",
       "the next physical partner may summon from their own hand after team-seat rotation",
-      "desynchronized private-hand/reserve snapshots fail closed instead of exposing stale partner data"
+      "desynchronized TagDuel rotation cursor fails closed instead of reading stale physical-seat state"
     ],
     "limitations": [
       "Adapter remains isolated; no central resolver/card metadata/effect registry integration.",

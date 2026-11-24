@@ -314,12 +314,11 @@ test('the next physical partner may summon from their own hand after the team se
   assert.equal(next.core.players[0].banished[0].uid, costUid);
 });
 
-test('a desynchronized private-hand reservation is rejected instead of reading stale partner data', () => {
+test('a desynchronized TagDuel rotation cursor is rejected instead of reading stale partner data', () => {
   const duel = makeDuel();
   const sourceUid = replaceHandCardWith(duel, 0, 0, SPIRIT_OF_FLAMES_ID);
   moveDeckCardToGrave(duel, 2, 0, FIRE_COST);
-  duel.reserves = { ...duel.reserves, 2: { ...duel.reserves[2], hand: [...duel.reserves[2].hand] } };
-  duel.reserves[2].hand[0].id = 'fixture-stale-hand';
+  duel.core.teamRotation.cursor = 3;
 
   assert.throws(() => prepareElementalSpiritSummon(duel, sourceUid, getCard), /fora de sincronia/);
 });
