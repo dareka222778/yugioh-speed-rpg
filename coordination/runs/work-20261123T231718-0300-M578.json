@@ -1,0 +1,130 @@
+{
+  "format": 1,
+  "runId": "work-20261123T231718-0300-M578",
+  "mission": "M578",
+  "owner": "Work principal",
+  "priority": "P1 — trio de Espíritos Elementais: Spirit of Flames (13522325), The Rock Spirit (76305638) e Garuda the Wind Spirit (12800777). Compartilham a Invocação-Especial da mão por banimento de 1 monstro do mesmo Atributo do Cemitério; dois ganham +300 ATK em fases de batalha específicas e Garuda muda a posição de um monstro face-up do oponente na End Phase.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-23T23:17:18-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "3364a7c3587c54ad506f289b18291c0254e8dd16",
+  "branch": "feat/work-m578-elemental-spirit-tag-adapter-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "3364a7c3587c54ad506f289b18291c0254e8dd16",
+  "reservationCommitSha": null,
+  "branchHeadSha": "3364a7c3587c54ad506f289b18291c0254e8dd16",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/elementalSpiritTagAdapter.ts",
+    "tests/elementalSpiritTagAdapter.test.cjs",
+    "docs/evidence/m578-elemental-spirit-tag-adapter.json",
+    ".github/workflows/m578-elemental-spirit-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para três Espíritos Elementais pré-corte. Implementar custo de banir um monstro do mesmo Atributo do Cemitério da equipe, Special Summon somente da mão do representante físico ativo, ATK temporário de Spirit of Flames/The Rock Spirit e mudança de posição de Garuda. Sem integração ao resolver, catálogo, certificação, allowlist, comandos Discord ou dados persistentes nesta etapa.",
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-23T23:17:18-03:00",
+    "checkedAgainst": [
+      "M373/Aqua Spirit PR #321 usa waterGraveCost.ts e battlePositionLock.ts; M578 exclui Aqua Spirit e não modifica esses caminhos.",
+      "M575: src/continuousAttackLockTagAdapter.ts e respectivos testes/evidência/workflow preservados.",
+      "M576: src/continuousAttackRestrictionTagAdapter.ts e respectivos testes/evidência/workflow preservados.",
+      "M577: src/continuousBattleTrapTagAdapter.ts e respectivos testes/evidência/workflow preservados.",
+      "M61: duelEngineCurrent.ts, monsterEffects.ts, cardMetadata.ts, cardCertifications.ts e releasedCardIds.ts protegidos.",
+      "Nenhum dos quatro caminhos M578 aparece nas reservas consultadas."
+    ]
+  },
+  "cards": [
+    {
+      "id": "13522325",
+      "name": "Spirit of Flames",
+      "konamiDatabaseCid": 5252,
+      "officialText": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 FIRE monster from your GY. Gains 300 ATK during your Battle Phase only.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5252&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "LON-067",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "76305638",
+      "name": "The Rock Spirit",
+      "konamiDatabaseCid": 5254,
+      "officialText": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 EARTH monster from your GY. Gains 300 ATK during your opponent's Battle Phase only.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5254&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "LON-069",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "12800777",
+      "name": "Garuda the Wind Spirit",
+      "konamiDatabaseCid": 5255,
+      "officialText": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 1 WIND monster from your GY. Once per turn, during your opponent's End Phase: You can target 1 face-up monster your opponent controls; change that target's battle position.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5255&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "LON-070",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "sharedSummonCost": "The exact copy must be in the active physical representative's private hand. The team must have an open shared Monster Zone and a same-Attribute monster in the shared Graveyard. Pay exactly one physical UID to the shared banished zone, then Special Summon the Spirit from that hand; partner hand is never searched.",
+    "spiritOfFlames": "Adds 300 ATK only while its controller's Battle Phase is active; no persistent atkBoost mutation and no bonus during opponent's Battle Phase.",
+    "rockSpirit": "Adds 300 ATK only while the opponent team's Battle Phase is active; no persistent atkBoost mutation and no bonus during its controller's Battle Phase.",
+    "garuda": "Once per turn during the opponent's End Phase, choose one face-up monster controlled by the opposing team and change its battle position. Preserve target UID, reject face-down/current-position/position-locked targets and do not bypass the shared 3-zone layout.",
+    "ownership": "Banish cost remains the physical owner's card/UID in the team's shared banished zone; summoned Spirit retains its physical UID and owner seat."
+  },
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "pending",
+    "customWorkflow": "pending"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Inspecionar TagDuel/duelEngine para confirmar zonas banidas, ownership e janelas de fase; implementar helpers puros e regressões por UID, Atributo, fase, posição e regras 2v2.",
+  "nextWindow": "2026-11-24T03:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-23T23:17:18-03:00",
+    "endedAt": null,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true
+  },
+  "status": "reserved-and-implementing",
+  "lastActivityAt": "2026-11-23T23:17:18-03:00"
+}
