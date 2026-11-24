@@ -127,7 +127,7 @@ test('mão acima de seis não é descartada antes da End Phase',()=>{
  const activeOpponent=duel.active[1];
  for(let i=0;i<3;i++)moveDeckToHand(duel,activeOpponent);
  const result=resolveFlipBurn(duel,plan,{cardIds:IDS});
- assert.equal(result.state.phase,'main');
+ assert.equal(result.state.core.phase,'main');
  assert.equal(privateZone(result.state,activeOpponent,'hand').length,7);
 });
 
