@@ -257,7 +257,7 @@ function resolveForCardId(
     if (memory.pending && memory.pending.turn !== plan.turn) {
       throw new Error('Existe pedido de Battle Phase pendente de outro turno.');
     }
-    const activationIds = [...memory.pending?.activationIds ?? []];
+    const activationIds = memory.pending ? [...memory.pending.activationIds] : [];
     if (!activationIds.includes(plan.activationId)) activationIds.push(plan.activationId);
     memory.pending = { turn: plan.turn, activationIds };
   }
