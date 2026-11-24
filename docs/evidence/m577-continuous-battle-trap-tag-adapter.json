@@ -28,7 +28,7 @@
   "behavior": {
     "mirrorWall": "Enquanto face-up, cada cópia reduz pela metade (arredondamento para baixo) o ATK do monstro atacante da equipe adversária durante a batalha; cálculo não muta ATK base/boost do monstro.",
     "fairyBox": "Na janela de declaração de ataque, uma chamada e um resultado de moeda são fornecidos explicitamente. Se coincidem, o ATK do atacante é zero até o fim da Battle Phase identificada; uma nova fase não herda o zero.",
-    "upkeep": "Cada UID de cópia tem manutenção independente por turno: Mirror Wall 2000 LP, Fairy Box 500 LP. Pagamento é debitado da equipe controladora; recusa ou LP insuficiente destrói a cópia e envia ao Cemitério do proprietário físico.",
+    "upkeep": "Cada UID de cópia tem manutenção independente por turno: Mirror Wall 2000 LP, Fairy Box 500 LP. O custo só pode ser pago se a equipe tiver LP estritamente maior que o custo, seguindo StandbyFlow; recusa, igualdade ou LP insuficiente destrói a cópia e envia ao Cemitério do proprietário físico.",
     "integration": "Adapter isolado. Não altera resolver central, tagActions, comandos Discord, catálogo, metadata, certificações, allowlist, dados persistentes ou inventário."
   },
   "invariantCoverage": [

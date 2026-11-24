@@ -245,7 +245,7 @@ export function resolveContinuousTrapUpkeep(
   }
   const cost=maintenanceCost(source.id),ownerSeat=physicalSeat(sourceUid);
   const next=structuredClone(input),nextCore=next.duel.core,lpBefore=nextCore.players[controller].lp;
-  const paid=pay&&lpBefore>=cost;
+  const paid=pay&&lpBefore>cost;
   let destroyed=false;
   if(paid)nextCore.players[controller].lp-=cost;
   else{

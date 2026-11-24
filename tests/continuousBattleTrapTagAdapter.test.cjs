@@ -188,14 +188,14 @@ test('Fairy Box upkeep costs 500 LP; insufficient LP destroys it to its physical
   const state=create('fairy-box-upkeep');
   const source=addSource(state,0,1,FAIRY_BOX_ID,{setTurn:0});
   const standby=addStandby(state,0,2);
-  state.core.players[0].lp=300;
+  state.core.players[0].lp=500;
   const before=inventory(state),beforeHands=hands(state);
   const session=createContinuousBattleTrapSession(state);
   const result=resolveContinuousTrapUpkeep(session,source,true,standby);
   assert.equal(result.result.cost,500);
   assert.equal(result.result.paid,false);
   assert.equal(result.result.destroyed,true);
-  assert.equal(result.result.lpAfter,300);
+  assert.equal(result.result.lpAfter,500);
   assert.ok(result.session.duel.core.players[1].grave.some(c=>c.uid===source),'stolen card returns to physical owner grave');
   assertConserved(result.session.duel,before);
   assert.deepEqual(hands(result.session.duel),beforeHands);
