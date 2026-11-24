@@ -1,0 +1,27 @@
+name: M587 Hiro Shadow Scout TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m587-hiro-shadow-scout-tag-adapter-20261124
+  pull_request:
+    paths:
+      - src/hiroShadowScoutTagAdapter.ts
+      - tests/hiroShadowScoutTagAdapter.test.cjs
+      - docs/evidence/m587-hiro-shadow-scout-tag-adapter.json
+      - .github/workflows/m587-hiro-shadow-scout-tag-adapter.yml
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('fs').readFileSync('docs/evidence/m587-hiro-shadow-scout-tag-adapter.json','utf8'))"
+      - run: node --test tests/hiroShadowScoutTagAdapter.test.cjs

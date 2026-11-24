@@ -1,0 +1,36 @@
+{
+  "mission": "M587",
+  "status": "behavior-tests-pending-ci",
+  "card": {
+    "name": "Hiro's Shadow Scout",
+    "passcode": "81863068",
+    "konamiDatabaseCid": 4617,
+    "firstTcgRelease": "2002-09-16",
+    "set": "MRL-024",
+    "effectSummary": "Ao ser virado para cima, o oponente compra três cartas; as cartas são reveladas e as Magias entre elas são enviadas ao Cemitério.",
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4617&ope=2&request_locale=en"
+  },
+  "behavior": {
+    "flipSources": ["flip-summon", "battle", "card-effect"],
+    "draw": "top three cards from only the opposing active physical seat's private Deck",
+    "reveal": "all three drawn identities are exposed to both teams",
+    "discard": "only Spell Cards move to the opponent team's shared Graveyard; Trap and Monster cards remain in the active opponent's private hand",
+    "deckOut": "fewer than three cards follows classic drawCards semantics: no partial draw and immediate loss",
+    "handLimit": "6 checked only at End Phase; no early discard",
+    "ownership": "preserve m0-m3 UID; do not rewrite physical owner",
+    "zones": "3 monster + 3 spell/trap per team; Field Zone separate",
+    "deck": "20-30 main deck per physical seat; Extra Deck maximum 5"
+  },
+  "testFile": "tests/hiroShadowScoutTagAdapter.test.cjs",
+  "expectedFocusedScenarios": 16,
+  "certifiedCardsAdded": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "runtimeCoreChanged": false,
+  "catalogChanged": false,
+  "commandsChanged": false,
+  "playerDataChanged": false,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "liveDiscordValidation": false
+}
