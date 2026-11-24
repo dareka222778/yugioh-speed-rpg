@@ -2,6 +2,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { createTagDuel, tagInventory, tagNormalCardIds } = require('../dist/tagDuel.js');
 const { enabledCardIds, getDuelCard } = require('../dist/effectRegistry.js');
+const { rulesCardName } = require('../dist/cardIdentity.js');
 const {
   UNHAPPY_MAIDEN_ID,
   createUnhappyMaidenAdapter,
@@ -15,18 +16,26 @@ const FIXTURE_ID = enabledCardIds.find(id => {
 const SPELL_IDS = enabledCardIds.filter(id => getDuelCard(id)?.kind === 'spell').slice(0, 2);
 const TRAP_IDS = enabledCardIds.filter(id => getDuelCard(id)?.kind === 'trap').slice(0, 2);
 const FUSION_IDS = enabledCardIds.filter(id => getDuelCard(id)?.fusion);
+const normalNames = new Set();
+const NORMAL_IDS = tagNormalCardIds.filter(id => {
+  const name = rulesCardName(getDuelCard(id));
+  if (normalNames.has(name)) return false;
+  normalNames.add(name);
+  return true;
+});
 const BASE_DECK = [
-  ...tagNormalCardIds.slice(0, 14),
+  ...NORMAL_IDS.slice(0, 14),
   FIXTURE_ID, FIXTURE_ID,
   ...SPELL_IDS,
   ...TRAP_IDS,
 ];
 const MAX_DECK = [
-  ...tagNormalCardIds.slice(0, 26),
+  ...NORMAL_IDS.slice(0, 26),
   FIXTURE_ID, FIXTURE_ID,
   SPELL_IDS[0], TRAP_IDS[0],
 ];
 assert.ok(FIXTURE_ID, 'fixture requires an enabled effect monster');
+assert.ok(NORMAL_IDS.length >= 26, 'fixture requires 26 distinct normal-monster names');
 assert.equal(SPELL_IDS.length, 2, 'fixture requires two enabled Spells');
 assert.equal(TRAP_IDS.length, 2, 'fixture requires two enabled Traps');
 assert.equal(BASE_DECK.length, 20, 'fixture requires a 20-card Main Deck');
