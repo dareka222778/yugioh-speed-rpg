@@ -350,3 +350,46 @@ test('the owner rules retain 20–30 Main Deck, 3+3 shared zones, separate Field
   privateZone(duel, 0, 'deck').pop();
   assert.throws(() => assertHandDiscardPhysicalRules(duel), /Deck principal físico/);
 });
+
+
+test('the shared field accepts exactly three Monster Zones and three Spell/Trap Zones while Field Zone stays separate', () => {
+  const duel = makeDuel(0);
+  const deck = privateZone(duel, 0, 'deck');
+  for (let i = 0; i < 3; i++) {
+    const card = deck.pop();
+    duel.core.players[0].monsters.push({
+      ...card, position: 'atk', faceUp: true, entered: duel.core.turn,
+      changed: duel.core.turn, attacked: 0, atkBoost: 0, defBoost: 0,
+    });
+  }
+  for (let i = 0; i < 3; i++) {
+    const card = deck.pop();
+    duel.core.players[0].backrow.push({ ...card, setTurn: duel.core.turn, faceUp: false });
+  }
+  const field = deck.pop();
+  duel.core.players[0].field = { ...field, setTurn: duel.core.turn, faceUp: true };
+  assert.doesNotThrow(() => assertHandDiscardPhysicalRules(duel));
+  const fourthMonster = deck.pop();
+  duel.core.players[0].monsters.push({
+    ...fourthMonster, position: 'atk', faceUp: true, entered: duel.core.turn,
+    changed: duel.core.turn, attacked: 0, atkBoost: 0, defBoost: 0,
+  });
+  assert.throws(() => assertHandDiscardPhysicalRules(duel), /três Zonas de Monstros/);
+});
+
+test('five Fusion cards are accepted in each physical Extra Deck and a sixth is rejected', () => {
+  const fusionIds = enabledCardIds.filter(id => getDuelCard(id)?.fusion === true);
+  assert.ok(fusionIds.length >= 6, 'fixture needs six enabled Fusion identities');
+  const main = tagNormalCardIds.slice(0, 30);
+  assert.equal(main.length, 30);
+  const extra = fusionIds.slice(0, 5);
+  const players = [0, 1, 2, 3].map(i => ({
+    id: 'extra-' + i, name: 'Extra ' + i, cards: [...main], extra: [...extra],
+  }));
+  const duel = createTagDuel(players, { seed: 'm588-extra-five', first: 0, classic: true });
+  assert.doesNotThrow(() => assertHandDiscardPhysicalRules(duel));
+  const extraCard = privateZone(duel, 0, 'deck').pop();
+  extraCard.id = fusionIds[5];
+  duel.core.players[0].extra.push(extraCard);
+  assert.throws(() => assertHandDiscardPhysicalRules(duel), /Deck Adicional físico excede cinco/);
+});
