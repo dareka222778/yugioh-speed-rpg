@@ -11,9 +11,9 @@
   "sharedHeadAtStart": "c0da86800217e62719335f8a690113f82c087860",
   "branch": "feat/work-m574-attack-lp-gain-tag-adapter-20261123",
   "baseBranch": "feat/rea-engine-recovery-20261026",
-  "baseSha": "c0da86800217e62719335f8a690113f82c087860",
-  "reservationCommitSha": null,
-  "branchHeadSha": null,
+  "baseSha": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+  "reservationCommitSha": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+  "branchHeadSha": "845d38c09068c5f9d2627bcc0bea90688e9614e2",
   "pullRequest": null,
   "previousCheckpoint": "coordination/runs/work-20261123T184744-0300-M573.json",
   "reservedFiles": [
@@ -118,13 +118,43 @@
       ".github/workflows/m573-summon-negation-tag-adapter.yml"
     ]
   },
-  "nextTask": "Implementar adapter e regressões comportamentais; durante CI preparar a próxima família independente, conferir novo HEAD/coordenação e só então decidir próximo lote.",
+  "nextTask": "Abrir PR draft, executar focused/check/build e workflows Card Batch Fast, Milestone 1000, Engine Validation e Extended Soak; corrigir somente os quatro arquivos M574. Enquanto CI independente executa, revisar coordenação e selecionar próxima família M575 sem sobrepor reservas.",
   "nextWindow": "2026-11-24T03:30:00-03:00",
   "duration": {
     "startedAt": "2026-11-23T22:30:10-03:00",
     "endedAt": null,
-    "effectiveWorkMinutes": 0,
+    "effectiveWorkMinutes": null,
     "targetEffectiveMinutes": 60,
-    "ciWaitExcluded": true
-  }
+    "ciWaitExcluded": true,
+    "note": "Tempo efetivo ainda em andamento; não contar espera ociosa de CI. O alvo de 60 minutos permanece pendente."
+  },
+  "sharedHeadAfterReservation": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+  "implementationHeadSha": "845d38c09068c5f9d2627bcc0bea90688e9614e2",
+  "commits": [
+    "9fb26eba2ca9793a46f0278b198efda797135d6f",
+    "513aa58546bdb58731244c6ad5c6dd5ee8680aba",
+    "26a488a792217a770e8789b4a07246d5cee53b62",
+    "da730d879644a066f090c07c39b974186aefa41a",
+    "845d38c09068c5f9d2627bcc0bea90688e9614e2"
+  ],
+  "implementation": {
+    "source": "src/attackLpGainTagAdapter.ts",
+    "tests": "tests/attackLpGainTagAdapter.test.cjs",
+    "evidence": "docs/evidence/m574-attack-lp-gain-tag-adapter.json",
+    "workflow": ".github/workflows/m574-attack-lp-gain-tag-adapter.yml",
+    "testCases": 24,
+    "coverage": [
+      "ataque adversário e próprio",
+      "Draining Shield direcionado vs Enchanted Javelin não-direcionado",
+      "ATK atual na resolução",
+      "negação de ataque somente por Draining Shield",
+      "janela de declaração, turno de Set, prioridade e Damage Step",
+      "Spell Speed 3",
+      "mudança/saída do atacante e ativação negada",
+      "LP por equipe controladora e Cemitério do proprietário físico",
+      "UIDs, mãos privadas, decks 20–30, zonas 3+3 e Extra 5",
+      "LP seguro, IDs idempotentes e LIFO"
+    ]
+  },
+  "status": "implementation-complete-awaiting-ci"
 }
