@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feat/work-m599-standby-burn-tag-adapters-20261124
+      - feat/work-m600-lp-recovery-tag-adapters-20261124
     paths:
       - 'src/standbyBurnTagAdapter.ts'
       - 'tests/standbyBurnTagAdapter.test.cjs'
