@@ -4,9 +4,9 @@
   "mission": "M578",
   "owner": "Work principal",
   "priority": "P1 — trio de Espíritos Elementais: Spirit of Flames (13522325), The Rock Spirit (76305638) e Garuda the Wind Spirit (12800777). Compartilham a Invocação-Especial da mão por banimento de 1 monstro do mesmo Atributo do Cemitério; dois ganham +300 ATK em fases de batalha específicas e Garuda muda a posição de um monstro face-up do oponente na End Phase.",
-  "state": "implementation-complete-pr-open-draft-engine-validation-running",
+  "state": "completed-pr-open-draft-ci-green-released-to-auxiliary",
   "startedAt": "2026-11-23T23:17:18-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-24T00:09:30-03:00",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "3364a7c3587c54ad506f289b18291c0254e8dd16",
   "branch": "feat/work-m578-elemental-spirit-tag-adapter-20261123",
@@ -95,8 +95,8 @@
     "cardBatchFast": "success",
     "milestone1000": "success",
     "customWorkflow": "success",
-    "engineValidation": "in_progress",
-    "extendedSoak": "in_progress"
+    "engineValidation": "success",
+    "extendedSoak": "success"
   },
   "production": {
     "mergePerformed": false,
@@ -116,22 +116,35 @@
     "deployPerformed": false,
     "liveDiscordValidation": false
   },
-  "nextTask": "Aguardar Engine Validation e Extended Soak de 600s; após sucesso, liberar somente os quatro arquivos M578 ao auxiliar para monitoramento/sincronização não-forçada. Não fazer merge/deploy.",
+  "nextTask": "Auxiliar pode monitorar/revisar PR #523 e sincronizar em branch própria se necessário. Work segue M579; integração central continua bloqueada até handoff M61.",
   "nextWindow": "2026-11-24T03:30:00-03:00",
   "duration": {
     "startedAt": "2026-11-23T23:17:18-03:00",
-    "endedAt": null,
-    "elapsedMinutes": 45,
-    "effectiveWorkMinutes": 30,
+    "endedAt": "2026-11-24T00:09:30-03:00",
+    "elapsedMinutes": 52,
+    "effectiveWorkMinutes": 40,
     "targetEffectiveMinutes": 60,
     "targetMet": false,
     "ciWaitExcluded": true
   },
-  "status": "implementation-complete-pr-open-draft-engine-validation-running",
-  "lastActivityAt": "2026-11-24T00:02:36-03:00",
+  "status": "completed-pr-open-draft-ci-green-released-to-auxiliary",
+  "lastActivityAt": "2026-11-24T00:09:30-03:00",
   "changes": [
     "Correção de ownership/control: Garuda the Wind Spirit agora acompanha a equipe que controla o monstro no campo; o UID físico continua identificando o proprietário.",
     "Regressão adicionada para Garuda sob controle da equipe oposta; 23 testes focados aprovados."
   ],
-  "testCases": 23
+  "testCases": 23,
+  "releaseToAuxiliary": {
+    "releasedAt": "2026-11-24T00:09:30-03:00",
+    "branch": "feat/work-m578-elemental-spirit-tag-adapter-20261123",
+    "branchHeadSha": "5f005030927f0350868d99a05dade6a9a943480d",
+    "pullRequest": 523,
+    "scope": [
+      "src/elementalSpiritTagAdapter.ts",
+      "tests/elementalSpiritTagAdapter.test.cjs",
+      "docs/evidence/m578-elemental-spirit-tag-adapter.json",
+      ".github/workflows/m578-elemental-spirit-tag-adapter.yml"
+    ],
+    "permissions": "monitorar PR, revisar e sincronizar em branch própria sem force-push; sem merge, deploy, inventário ou edição de reservas alheias"
+  }
 }

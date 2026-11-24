@@ -4,16 +4,16 @@
   "mission": "M579",
   "owner": "Work principal",
   "priority": "P1 — Banishment routing: Banisher of the Light (61528025) substitui qualquer envio ao Cemitério por banimento; Bazoo the Soul-Eater (40133511) banishes 1–3 monstros do Cemitério compartilhado da equipe e recebe +300 ATK por carta até o fim do próximo turno adversário.",
-  "state": "reserved-and-implementing",
+  "state": "implementing-ci-running",
   "startedAt": "2026-11-24T00:02:36-03:00",
   "endedAt": null,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "48ec3e7caaf697cbd6c0c952dbb34277058b4020",
   "branch": "feat/work-m579-bazoo-banisher-tag-adapter-20261124",
   "baseBranch": "feat/rea-engine-recovery-20261026",
-  "baseSha": "48ec3e7caaf697cbd6c0c952dbb34277058b4020",
-  "branchHeadSha": "48ec3e7caaf697cbd6c0c952dbb34277058b4020",
-  "reservationCommitSha": null,
+  "baseSha": "ac6442c22a27b1d23da337f9e34ef4d7432fcd72",
+  "branchHeadSha": "4ba47607493fd57aa32a156075fd8be0a4488dc6",
+  "reservationCommitSha": "ac6442c22a27b1d23da337f9e34ef4d7432fcd72",
   "pullRequest": null,
   "reservedFiles": [
     "src/banishmentTagAdapter.ts",
@@ -79,7 +79,18 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "pending",
+    "previousRun": {
+      "id": 45317294748,
+      "sha": "c2da4afd8b5df4662113958b07ca2569432d8bde",
+      "conclusion": "failure",
+      "supersededBy": "4ba47607493fd57aa32a156075fd8be0a4488dc6"
+    },
+    "currentRun": {
+      "id": 45317471563,
+      "sha": "4ba47607493fd57aa32a156075fd8be0a4488dc6",
+      "status": "in_progress"
+    },
+    "focused": "in_progress",
     "cardBatchFast": "pending",
     "milestone1000": "pending",
     "engineValidation": "pending",
@@ -104,17 +115,24 @@
     "deployPerformed": false,
     "liveDiscordValidation": false
   },
-  "nextTask": "Implementar helpers puros e testes comportamentais para destino de Cemitério e Bazoo: ownership por UID, ambos os times, negation/face-down, 1–3 custos, uma vez por turno, janela Main Phase e expiração do ATK após o próximo turno adversário.",
+  "nextTask": "Aguardar/inspecionar o workflow M579 no SHA 4ba476; corrigir somente os quatro caminhos reservados se houver falha. Após CI verde, abrir PR draft e escolher próximo candidato sem reserva.",
   "nextWindow": "2026-11-24T03:30:00-03:00",
   "duration": {
     "startedAt": "2026-11-24T00:02:36-03:00",
     "endedAt": null,
-    "elapsedMinutes": 0,
-    "effectiveWorkMinutes": 0,
+    "elapsedMinutes": 7,
+    "effectiveWorkMinutes": 7,
     "targetEffectiveMinutes": 60,
     "targetMet": false,
     "ciWaitExcluded": true
   },
-  "status": "reserved-and-implementing",
-  "lastActivityAt": "2026-11-24T00:02:36-03:00"
+  "status": "implementing-ci-running",
+  "lastActivityAt": "2026-11-24T00:09:30-03:00",
+  "branchStartSha": "ac6442c22a27b1d23da337f9e34ef4d7432fcd72",
+  "testCases": 15,
+  "changes": [
+    "Fixture de token corrigida para usar createTokenGroup e preservar tokenLedger.",
+    "Testes passaram a verificar Spell/Trap fora do custo de Bazoo, seleção 1–3, source fora do campo após ativação e mão com 7 cartas sem descarte antecipado.",
+    "Primeira execução de CI falhou no commit c2da4; correções publicadas em 4ba476 e nova execução está em andamento."
+  ]
 }
