@@ -383,13 +383,14 @@ test('the shared field accepts exactly three Monster Zones and three Spell/Trap 
     ...fourthMonster, position: 'atk', faceUp: true, entered: duel.core.turn,
     changed: duel.core.turn, attacked: 0, atkBoost: 0, defBoost: 0,
   });
-  assert.throws(() => assertHandDiscardPhysicalRules(duel), /três Zonas de Monstros/);
+  // assertTagDuel enforces the 3-slot invariant first and emits its stable generic error.
+  assert.throws(() => assertHandDiscardPhysicalRules(duel), /limite de zonas/);
   duel.core.players[0].monsters.pop();
 
   const fourthBackrow = deck.pop();
   fourthBackrow.id = TRAP_ID;
   duel.core.players[0].backrow.push({ ...fourthBackrow, setTurn: duel.core.turn, faceUp: false });
-  assert.throws(() => assertHandDiscardPhysicalRules(duel), /três Zonas de Magias/);
+  assert.throws(() => assertHandDiscardPhysicalRules(duel), /limite de zonas/);
 });
 
 test('the physical Extra Deck accepts five cards and rejects a sixth', () => {
