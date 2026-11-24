@@ -1,7 +1,7 @@
 import type {TagDuel} from './tagDuel';
 import {getPlayableCard} from './effectRegistry';
 
-export const RAIN_OF_MERCY_ID='47579393';
+export const RAIN_OF_MERCY_ID='66719324';
 export const EMERGENCY_PROVISIONS_ID='53046408';
 export type RecoveryTeam=0|1;
 export type RecoverySourceZone='hand'|'set';
