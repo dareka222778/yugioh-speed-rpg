@@ -1,6 +1,7 @@
 import type {DuelState,Monster} from './duelEngine';
 import {atk} from './duelEngine';
-import {getActivationModel,getEffect} from './effectRegistry';
+import {getActivationModel} from './effectModels';
+import {getEffect} from './effectRegistry';
 import type {TagDuel} from './tagDuel';
 import {tagInventory} from './tagDuel';
 
@@ -211,15 +212,21 @@ export function resolveFairyBoxAttack(
 }
 
 /** Each Continuous Trap has its own once-per-turn Standby Phase upkeep. */
+export type StandbyContext={phase:'standby';turn:number;team:Team};
+
+/** The host supplies this context from its Standby continuation. DuelState.phase
+ * intentionally has no literal "standby"; StandbyFlow owns that boundary. */
 export function resolveContinuousTrapUpkeep(
   input:ContinuousBattleTrapSession,
   sourceUid:string,
-  pay:boolean
+  pay:boolean,
+  context:StandbyContext
 ):{session:ContinuousBattleTrapSession;result:ContinuousTrapUpkeepResult}{
   assertPhysicalRules(input.duel);
-  const core=input.duel.core,controller=core.current;
-  if((controller!==0&&controller!==1)||core.phase!=='standby'){
-    throw new Error('A manutenção só pode ser resolvida na Standby Phase do controlador.');
+  const core=input.duel.core,controller=context?.team;
+  if(context?.phase!=='standby'||(controller!==0&&controller!==1)||
+    context.turn!==core.turn||core.current!==controller){
+    throw new Error('Contexto de Standby Phase incompatível com o turno/controlador.');
   }
   const key=core.turn+':'+sourceUid;
   const existing=input.processedUpkeepIds.includes(key);

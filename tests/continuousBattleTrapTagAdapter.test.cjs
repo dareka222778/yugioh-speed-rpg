@@ -82,9 +82,10 @@ function assertRules(state){
 }
 function addStandby(state,controller=0,turn=2){
   state.core.current=controller;
-  state.core.phase='standby';
+  state.core.phase='main';
   state.core.turn=turn;
   state.core.damageStep=false;
+  return {phase:'standby',team:controller,turn};
 }
 
 test('M577 cards remain outside the catalog and released-card allowlist until certification',()=>{
@@ -167,15 +168,15 @@ test('Fairy Box is unavailable in Damage Step or during the turn it was Set',()=
 test('Mirror Wall upkeep pays 2000 once per copy and is idempotent for the turn',()=>{
   const state=create('mirror-wall-upkeep');
   const source=addSource(state,0,0,MIRROR_WALL_ID,{setTurn:0});
-  addStandby(state,0,2);
+  const standby=addStandby(state,0,2);
   const session=createContinuousBattleTrapSession(state);
   const before=inventory(session.duel),beforeHands=hands(session.duel);
-  const paid=resolveContinuousTrapUpkeep(session,source,true);
+  const paid=resolveContinuousTrapUpkeep(session,source,true,standby);
   assert.equal(paid.result.cost,2000);
   assert.equal(paid.result.paid,true);
   assert.equal(paid.result.paidAmount,2000);
   assert.equal(paid.result.lpAfter,paid.result.lpBefore-2000);
-  const repeated=resolveContinuousTrapUpkeep(paid.session,source,false);
+  const repeated=resolveContinuousTrapUpkeep(paid.session,source,false,standby);
   assert.equal(repeated.result.alreadyProcessed,true);
   assert.equal(repeated.result.lpAfter,paid.result.lpAfter);
   assertConserved(paid.session.duel,before);
@@ -207,7 +208,7 @@ test('declining upkeep destroys Mirror Wall without paying and moves it to owner
   addStandby(state,0,2);
   const session=createContinuousBattleTrapSession(state);
   const before=inventory(session.duel);
-  const result=resolveContinuousTrapUpkeep(session,source,false);
+  const result=resolveContinuousTrapUpkeep(session,source,false,standby);
   assert.equal(result.result.paid,false);
   assert.equal(result.result.destroyed,true);
   assert.ok(result.session.duel.core.players[0].grave.some(c=>c.uid===source));
