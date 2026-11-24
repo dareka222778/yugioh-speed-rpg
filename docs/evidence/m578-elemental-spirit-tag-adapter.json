@@ -1,0 +1,88 @@
+{
+  "mission": "M578",
+  "title": "Elemental Spirit trio — TagDuel 2v2 adapter",
+  "branch": "feat/work-m578-elemental-spirit-tag-adapter-20261123",
+  "cards": [
+    {
+      "id": "13522325",
+      "name": "Spirit of Flames",
+      "konamiId": 5252,
+      "attribute": "FIRE",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5252&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "effect": "Special Summon from hand by banishing 1 FIRE monster from the team's shared Graveyard; +300 ATK only during its controller's Battle Phase."
+    },
+    {
+      "id": "76305638",
+      "name": "The Rock Spirit",
+      "konamiId": 5254,
+      "attribute": "EARTH",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5254&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "effect": "Special Summon from hand by banishing 1 EARTH monster from the team's shared Graveyard; +300 ATK only during the opponent team's Battle Phase."
+    },
+    {
+      "id": "12800777",
+      "name": "Garuda the Wind Spirit",
+      "konamiId": 5255,
+      "attribute": "WIND",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5255&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-03-01",
+      "effect": "Special Summon from hand by banishing 1 WIND monster from the team's shared Graveyard; once per turn in the opponent End Phase, change one face-up opposing monster's battle position."
+    }
+  ],
+  "historicalScope": {
+    "cutoff": "2004-09-30",
+    "eligible": true,
+    "reason": "All three first TCG releases precede the historical cutoff."
+  },
+  "implementation": {
+    "source": "src/elementalSpiritTagAdapter.ts",
+    "tests": "tests/elementalSpiritTagAdapter.test.cjs",
+    "workflow": ".github/workflows/m578-elemental-spirit-tag-adapter.yml",
+    "testCases": 18,
+    "coverage": [
+      "active physical hand only; inactive partner hand never searched",
+      "shared team Graveyard cost restricted to matching Attribute monster",
+      "opponent Graveyard, Spell/Trap, stale cost and wrong Attribute rejected",
+      "three shared Monster Zones enforced",
+      "one physical cost UID banished; exact Spirit UID Special Summoned",
+      "owner seat, partner hand, Field Zone, inventory and card identities conserved",
+      "Spirit of Flames +300 only during controller Battle Phase",
+      "The Rock Spirit +300 only during opponent Battle Phase",
+      "face-down Spirit gets no temporary ATK modifier; no persistent atkBoost mutation",
+      "Garuda only in opponent End Phase; face-up opposing targets only",
+      "Garuda per-copy once-per-turn and position-lock preservation",
+      "20–30 Main Deck, 3+3 shared zones, separate Field Zone and Extra Deck ≤5"
+    ],
+    "limitations": [
+      "Adapter remains isolated; no central resolver/card metadata/effect registry integration.",
+      "Garuda receives an explicit opponent-end window because the current resolver exposes no public End Phase response hook.",
+      "ATK modifier helper must be called by the eventual battle-stat integration; this PR does not alter the archived resolver."
+    ]
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31
+  },
+  "behaviorCertifiedCards": 0,
+  "newCertifications": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "cardCatalogChanged": false,
+    "cardMetadataChanged": false,
+    "cardCertificationsChanged": false,
+    "releasedCardIdsChanged": false,
+    "playerDataChanged": false,
+    "persistentDatabaseChanged": false
+  }
+}
