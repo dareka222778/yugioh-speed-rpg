@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "runId": "work-20261124T191943-0300-M601",
+  "mission": "M601",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved; certification-count reconciliation in progress",
+  "startedAt": "2026-11-24T19:19:43-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "branch": "feat/work-m601-certification-count-reconciliation-20261124",
+  "baseSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "branchHeadSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "pullRequest": null,
+  "reservedFiles": [
+    "scripts/card-certification-audit.cjs",
+    "tests/cardCertificationCountAudit.test.cjs",
+    "docs/evidence/m601-certification-count-reconciliation.json",
+    ".github/workflows/m601-certification-count-reconciliation.yml"
+  ],
+  "scope": "Auditar a contagem efetiva de cartas certificadas usando enabledCardIds/buildCardRegistry, distinguir certificações de IDs da allowlist de distribuição e adicionar teste/CI para impedir que a allowlist seja reportada como certificação. Não altera catálogo, certificados, allowlist, runtime, comandos ou dados.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T19:19:43-03:00",
+    "sharedHead": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+    "conflictingReservations": [
+      "M598 Chain Energy",
+      "M599/M600 LP/burn adapters",
+      "M61 resolver handoff"
+    ],
+    "reservedPathsDisjoint": true,
+    "m600TransferRequestedOnPR": 543,
+    "m600FilesUntouched": true,
+    "m598FilesUntouched": true,
+    "m599FilesUntouched": true,
+    "m61Untouched": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "catalogAtStart": {
+    "certifiedFromCardCertifications": 959,
+    "releasedAllowlist": 969,
+    "releasedButUncertified": 10,
+    "remainingTo1000": 41,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar auditoria executável da fonte real de certificação e teste de regressão; validar no CI e publicar PR draft.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
