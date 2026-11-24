@@ -108,6 +108,9 @@ test('Mirror Wall halves the opponent attacker and keeps the modifier while the 
   session.duel.core.phase='main';
   session.duel.core.pending={kind:'none'};
   assert.equal(mirrorWallEffectiveAtk(session,attacker),Math.floor(before/2),'the halving persists after the attack window');
+  pendingAttack(session.duel,1,attacker);
+  session=recordMirrorWallAttack(session);
+  assert.equal(mirrorWallEffectiveAtk(session,attacker),Math.floor(before/2),'the same copy does not halve the same monster twice');
   assertRules(session.duel);
 });
 
@@ -140,6 +143,7 @@ test('two Mirror Wall copies halve once each and leaving copies restore their in
   let session=createContinuousBattleTrapSession(state);
   session=recordMirrorWallAttack(session);
   const monster=session.duel.core.players[1].monsters.find(m=>m.uid===attacker);
+  const before=inventory(session.duel);
   const full=atk(monster,session.duel.core);
   assert.equal(mirrorWallEffectiveAtk(session,attacker),Math.floor(Math.floor(full/2)/2));
   const removedA=session.duel.core.players[0].backrow.filter(c=>c.uid===sourceA);
@@ -150,6 +154,8 @@ test('two Mirror Wall copies halve once each and leaving copies restore their in
   session.duel.core.players[0].backrow=session.duel.core.players[0].backrow.filter(c=>c.uid!==sourceB);
   session.duel.core.players[0].grave.push(...removedB);
   assert.equal(mirrorWallEffectiveAtk(session,attacker),full);
+  assertConserved(session.duel,before);
+  assertRules(session.duel);
 });
 test('Fairy Box uses injected coin results and sets ATK to zero only for the named Battle Phase',()=>{
   const state=create('fairy-box-correct');
@@ -162,7 +168,7 @@ test('Fairy Box uses injected coin results and sets ATK to zero only for the nam
   assert.equal(resolved.result.correct,true);
   assert.equal(resolved.result.attackerAtkAfter,0);
   assert.equal(fairyBoxEffectiveAtk(resolved.session,'turn-1-team-1-battle'),0);
-  assert.equal(fairyBoxEffectiveAtk(resolved.session,'turn-2-team-1-battle'),mirrorWallEffectiveAtk(resolved.session.duel));
+  assert.equal(fairyBoxEffectiveAtk(resolved.session,'turn-2-team-1-battle'),mirrorWallEffectiveAtk(resolved.session,attacker));
   assert.throws(()=>resolveFairyBoxAttack(resolved.session,source,'heads','heads','turn-1-team-1-battle'),/duplicada/);
 });
 
