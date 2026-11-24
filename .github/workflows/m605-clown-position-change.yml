@@ -1,0 +1,29 @@
+name: M605 Dream and Crass Clown position-change adapters
+on:
+  push:
+    branches:
+      - feat/work-m605-dream-crass-clown-position-change-20261124
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/clownPositionChangeTagAdapter.ts
+      - tests/clownPositionChangeTagAdapter.test.cjs
+      - docs/evidence/m605-clown-position-change.json
+      - .github/workflows/m605-clown-position-change.yml
+permissions:
+  contents: read
+jobs:
+  clown-position-change:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m605-clown-position-change.json', 'utf8'))"
+      - run: node --test tests/clownPositionChangeTagAdapter.test.cjs
