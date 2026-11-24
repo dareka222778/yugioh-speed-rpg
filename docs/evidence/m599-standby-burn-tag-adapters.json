@@ -36,7 +36,7 @@
     "integrity": "Valida rotação dos quatro assentos, LP atual, membro ativo, presença face-up no campo, UIDs físicos, ativação, controle e limites inteiros; não altera o estado recebido."
   },
   "tests": {
-    "planned": 29,
+    "planned": 32,
     "categories": [
       "registro de ativação, reativação e replay idempotente",
       "Dark Snake: dano inicial, progressão 200/400/800, ambos os times, parceiro físico, cópias acumuladas e contadores independentes",
