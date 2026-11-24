@@ -7,7 +7,7 @@
   "cards": [
     {
       "name": "Rain of Mercy",
-      "passcode": "47579393",
+      "passcode": "66719324",
       "konamiDatabaseId": 5151,
       "kind": "Normal Spell",
       "firstTCGPrinting": "Pharaoh's Servant (PSV-065), 2002-10-20",
@@ -46,8 +46,8 @@
   "catalogAtStart": {
     "directCertificateEntries": 959,
     "releasedCardIds": 969,
-    "rainOfMercyCertified": false,
-    "rainOfMercyReleased": false,
+    "rainOfMercyCertified": true,
+    "rainOfMercyReleased": true,
     "emergencyProvisionsCertified": false,
     "emergencyProvisionsReleased": false,
     "newCertifications": 0,
