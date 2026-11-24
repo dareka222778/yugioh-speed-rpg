@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "mission": "M580",
+  "title": "Battle-destroyed GY triggers — Birdface / Keldo",
+  "status": "isolated-adapter-awaiting-CI-and-review",
+  "cards": [
+    {
+      "id": "45547649",
+      "name": "Birdface",
+      "konamiDatabaseCid": 5021,
+      "kind": "Effect Monster",
+      "firstTcgRelease": "2003-07-18",
+      "firstOcgRelease": "2003-04-24",
+      "officialText": "When this card is destroyed by battle and sent to the GY: You can add 1 'Harpie Lady' from your Deck to your hand.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5021&ope=2&request_locale=en",
+      "behavior": {
+        "triggerRequiresBattleDestruction": true,
+        "triggerRequiresGraveyardDestination": true,
+        "triggerRequiresCompletedDamageStep": true,
+        "searchesHarpieLady": "physical owner's private Deck",
+        "destination": "same physical owner's private hand",
+        "shuffle": "persisted HMAC random stream after search"
+      }
+    },
+    {
+      "id": "80441106",
+      "name": "Keldo",
+      "konamiDatabaseCid": 5351,
+      "kind": "Effect Monster",
+      "firstTcgRelease": "2003-12-01",
+      "firstOcgRelease": "2003-02-20",
+      "officialText": "If this card is destroyed by battle and sent to the GY: Target 2 cards in your opponent's GY; shuffle them into the Deck.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5351&ope=2&request_locale=en",
+      "behavior": {
+        "targetCount": 2,
+        "targetZone": "opposing team's shared Graveyard",
+        "destination": "each target's physical owner's private Deck",
+        "staleTarget": "only targets still in the opposing GY move",
+        "fusionTarget": "physical owner's Extra Deck, preserving the Extra Deck rule",
+        "shuffle": "each affected Main Deck shuffled once with persisted HMAC"
+      }
+    }
+  ],
+  "testFile": "tests/battleDestroyedSearchTagAdapter.test.cjs",
+  "expectedScenarioCount": 15,
+  "baseline": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "certification": {
+    "newCards": 0,
+    "certifiedCards": 0,
+    "automaticCertification": false,
+    "releasedCardIdsChanged": false,
+    "allowlistChanged": false
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "playerDataChanged": false,
+    "persistentDatabaseChanged": false,
+    "commandsChanged": false,
+    "resolverCoreChanged": false,
+    "productionDeploy": false
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "handLimit": 6,
+    "handLimitCheck": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5
+  },
+  "validation": {
+    "workflow": "Node 22; npm ci; npm run check; npm run build; evidence JSON parse; focused node:test suite",
+    "liveDiscordGateway": false,
+    "fullEngineIntegration": false
+  },
+  "limits": [
+    "The adapter is isolated and is not registered in the v9 resolver or Discord handlers.",
+    "The actual Birdface/Keldo/Harpie Lady identities are not silently admitted or certified; tests use enabled fixture identities through explicit adapter overrides.",
+    "No live Discord guild/gateway test, merge, or deployment is performed by this batch."
+  ]
+}
