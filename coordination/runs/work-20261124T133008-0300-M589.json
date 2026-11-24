@@ -5,68 +5,53 @@
   "parentMission": "M588",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved-and-fixing-test",
+  "status": "focused-green-engine-validation-and-soak-in-progress",
   "startedAt": "2026-11-24T13:30:08-03:00",
-  "endedAt": null,
+  "lastActivityAt": "2026-11-24T13:42:18-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "07203aae3a03cc9269346a1d9b9eb42e24ae7051",
+  "sharedHeadAfterReservationCommit": "7bb3dbc89e72690e62e83ad1657c4098f866ca41",
   "branch": "feat/work-m588-hand-discard-tag-adapters-20261124",
-  "baseBranch": "feat/rea-engine-recovery-20261026",
   "branchBaseSha": "4e6743c1bb24d44ca93d8f4946b19625c2a7cfe8",
-  "branchHeadAtStart": "bebfb826a8d0b07fa2eba23cc85311696d616cd8",
-  "branchHeadSha": "bebfb826a8d0b07fa2eba23cc85311696d616cd8",
+  "branchHeadSha": "17960b1e99adf2985196ed81bd4f5518a8bbfcc3",
   "pullRequest": 532,
   "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/532",
-  "prState": "open",
   "draft": true,
   "reservedFiles": [
     "tests/handDiscardTagAdapters.test.cjs"
   ],
-  "scope": "Subtarefa exclusiva para corrigir as duas expectativas textuais do teste de limite 3+3 em M588. O runtime já rejeita a quarta zona antes da validação específica do adapter; nenhuma mudança de regra ou runtime.",
-  "conflictCheck": {
-    "checkedAt": "2026-11-24T13:30:08-03:00",
-    "ownerReservation": "M588 is held by the same Work principal",
-    "matchingOtherBranches": 0,
-    "matchingOtherPRs": 0,
-    "protectedM61FilesTouched": false,
-    "result": "no cross-agent overlap; own reservation only"
-  },
-  "observedCI": {
+  "changes": [
+    "Corrigidas as duas expectativas de rejeição 3+3 para o erro genérico estável emitido por assertTagDuel antes da validação do adapter."
+  ],
+  "ci": {
     "focused": {
-      "status": "failure",
-      "runId": 45391490472,
+      "status": "success",
+      "runId": 45438945403,
       "tests": 24,
-      "passed": 23,
-      "failed": 1,
-      "failedScenario": "3+3 shared-zone assertion expected a specific Portuguese message; duelIntegrity.ts rejected first with the established generic 'limite de zonas' message."
+      "passed": 24,
+      "failed": 0
     },
     "cardBatchFast": {
       "status": "success",
-      "runId": 45391490445
+      "runId": 45438945286
     },
     "milestone1000": {
       "status": "success",
-      "runId": 45391490798
+      "runId": 45438945197
     },
     "engineValidation": {
-      "status": "failure",
-      "runId": 45391490643,
-      "tests": 7386,
-      "passed": 7385,
-      "failed": 1,
-      "failedScenario": "same zone-limit assertion mismatch"
-    },
-    "extendedSoak": {
-      "status": "success",
-      "runId": 45391490643,
-      "job": "extended-soak"
+      "status": "in_progress",
+      "runId": 45438945167,
+      "jobs": {
+        "test": "in_progress",
+        "extendedSoak": "in_progress"
+      }
     }
   },
-  "catalogAtStart": {
-    "engineV9Certified": 969,
+  "catalog": {
+    "certified": 969,
     "target": 1000,
-    "remaining": 31,
     "newCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0
@@ -77,11 +62,11 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 12,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Corrigir as duas expectativas, publicar commit com lease e reexecutar os quatro gates; após CI verde, preparar a próxima família isolada sem tocar M61.",
+  "nextTask": "Aguardar npm test e Extended Soak do Engine Validation; não liberar reserva até ambos concluírem.",
   "nextWindow": "2026-11-24T18:30:00-03:00",
   "scopeReleasedToAuxiliary": []
 }
