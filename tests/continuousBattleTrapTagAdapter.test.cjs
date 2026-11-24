@@ -187,11 +187,11 @@ test('Mirror Wall upkeep pays 2000 once per copy and is idempotent for the turn'
 test('Fairy Box upkeep costs 500 LP; insufficient LP destroys it to its physical owner Graveyard',()=>{
   const state=create('fairy-box-upkeep');
   const source=addSource(state,0,1,FAIRY_BOX_ID,{setTurn:0});
-  addStandby(state,0,2);
+  const standby=addStandby(state,0,2);
   state.core.players[0].lp=300;
   const before=inventory(state),beforeHands=hands(state);
   const session=createContinuousBattleTrapSession(state);
-  const result=resolveContinuousTrapUpkeep(session,source,true);
+  const result=resolveContinuousTrapUpkeep(session,source,true,standby);
   assert.equal(result.result.cost,500);
   assert.equal(result.result.paid,false);
   assert.equal(result.result.destroyed,true);
@@ -205,7 +205,7 @@ test('Fairy Box upkeep costs 500 LP; insufficient LP destroys it to its physical
 test('declining upkeep destroys Mirror Wall without paying and moves it to owner Graveyard',()=>{
   const state=create('mirror-wall-decline');
   const source=addSource(state,0,0,MIRROR_WALL_ID,{setTurn:0});
-  addStandby(state,0,2);
+  const standby=addStandby(state,0,2);
   const session=createContinuousBattleTrapSession(state);
   const before=inventory(session.duel);
   const result=resolveContinuousTrapUpkeep(session,source,false,standby);
