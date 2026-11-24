@@ -38,12 +38,10 @@ function takeMonster(state,seat,id=NORMALS[0]){
   return monster.uid;
 }
 function addSource(state,controllerTeam,ownerSeat,id,{faceUp=true,setTurn=0}={}){
-  assert.equal(ownerSeat%2,physicalTeam(controllerTeam));
   const uid='m'+ownerSeat+':m577-source-'+id+'-'+state.core.players[controllerTeam].backrow.length;
   state.core.players[controllerTeam].backrow.push({uid,id,faceUp,setTurn});
   return uid;
 }
-function physicalTeam(team){return team;}
 function pendingAttack(state,attackerTeam,uid,{stage='declare',damageStep=false}={}){
   state.core.current=attackerTeam;
   state.core.priority=1-attackerTeam;
@@ -108,13 +106,20 @@ test('Mirror Wall halves only the opponent attacking monster and does not mutate
   assertRules(state);
 });
 
-test('Mirror Wall does not affect its controller own attacker or a face-down copy',()=>{
-  const state=create('mirror-wall-own');
-  addSource(state,0,0,MIRROR_WALL_ID,{faceUp:false});
-  const attacker=takeMonster(state,0);
-  pendingAttack(state,0,attacker);
-  const monster=state.core.players[0].monsters.find(m=>m.uid===attacker);
-  assert.equal(mirrorWallEffectiveAtk(state),atk(monster,state.core));
+test('Mirror Wall ignores face-down copies and the controller own attacking monsters',()=>{
+  const hidden=create('mirror-wall-face-down');
+  addSource(hidden,0,0,MIRROR_WALL_ID,{faceUp:false});
+  const opponentAttacker=takeMonster(hidden,1);
+  pendingAttack(hidden,1,opponentAttacker);
+  const opponentMonster=hidden.core.players[1].monsters.find(m=>m.uid===opponentAttacker);
+  assert.equal(mirrorWallEffectiveAtk(hidden),atk(opponentMonster,hidden.core));
+
+  const own=create('mirror-wall-own');
+  addSource(own,0,0,MIRROR_WALL_ID);
+  const ownAttacker=takeMonster(own,0);
+  pendingAttack(own,0,ownAttacker);
+  const ownMonster=own.core.players[0].monsters.find(m=>m.uid===ownAttacker);
+  assert.equal(mirrorWallEffectiveAtk(own),atk(ownMonster,own.core));
 });
 
 test('Fairy Box uses injected coin results and sets ATK to zero only for the named Battle Phase',()=>{
