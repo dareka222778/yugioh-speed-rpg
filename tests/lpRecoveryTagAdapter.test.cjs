@@ -161,11 +161,9 @@ test('negação de Emergency Provisions não devolve custos e impede ganho',()=>
   assert.equal(r.plan.gainApplied,false);
 });
 
-test('Emergency Provisions inclui Field Spell controlada no custo',()=>{
-  const s=state({hand0:[card('m0:ep',EMERGENCY_PROVISIONS_ID)],field0:card('m2:field','22702055')});
-  const r=resolveEmergencyProvisions(s,createRecoveryLedger(),emergencyEvent({costUids:['m2:field']}));
-  assert.equal(r.plan.costs[0].zone,'field');
-  assert.equal(r.plan.amount,1000);
+test('Emergency Provisions rejeita Magia comum colocada indevidamente na Field Zone',()=>{
+  const s=state({hand0:[card('m0:ep',EMERGENCY_PROVISIONS_ID)],field0:card('m2:field','05318639')});
+  assert.throws(()=>resolveEmergencyProvisions(s,createRecoveryLedger(),emergencyEvent({costUids:['m2:field']})),/Magia de Campo certificada/);
 });
 
 test('Emergency Provisions rejeita a própria carta como custo',()=>{
