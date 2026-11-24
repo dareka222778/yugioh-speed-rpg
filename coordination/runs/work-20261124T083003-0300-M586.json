@@ -4,29 +4,30 @@
   "mission": "M586",
   "owner": "Work principal",
   "priority": "P1 — efeitos FLIP de dano: Des Koala causa 400 por carta na mão privada do oponente ativo; Princess of Tsurugi causa 500 por Spell/Trap na backrow e Field Zone da equipe adversária.",
-  "status": "reserved-and-implementing",
+  "status": "ci-rerun-in-progress-after-focused-test-fix",
   "startedAt": "2026-11-24T08:30:03-03:00",
   "endedAt": null,
   "duration": {
     "startedAt": "2026-11-24T08:30:03-03:00",
     "endedAt": null,
-    "elapsedMinutes": 0,
-    "effectiveWorkMinutes": 0,
+    "elapsedMinutes": 18,
+    "effectiveWorkMinutes": null,
     "targetEffectiveMinutes": 60,
     "targetMet": false,
-    "ciWaitExcluded": true
+    "ciWaitExcluded": true,
+    "note": "18 minutos de parede desde o início; tempo efetivo não foi cronometrado e espera de CI não será contada."
   },
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "a78ad8d546b5d1c31eed28f7b60a6e003d522b8f",
   "branch": "feat/work-m586-flip-burn-tag-adapter-20261124",
   "baseBranch": "feat/rea-engine-recovery-20261026",
-  "baseSha": null,
-  "branchStartSha": null,
-  "branchHeadSha": null,
+  "baseSha": "462e86aadaa9424575e4eef68cd0e7e67331fc98",
+  "branchStartSha": "462e86aadaa9424575e4eef68cd0e7e67331fc98",
+  "branchHeadSha": "b754b779ead0428f9b108ed80a0e55a33bc79516",
   "coordinationCommitSha": null,
-  "pullRequest": null,
-  "pullRequestUrl": null,
+  "pullRequest": 530,
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/530",
   "reservedFiles": [
     "src/flipBurnTagAdapter.ts",
     "tests/flipBurnTagAdapter.test.cjs",
@@ -109,11 +110,20 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "not-started",
-    "cardBatchFast": "not-started",
-    "milestone1000": "not-started",
-    "engineValidation": "not-started",
-    "customWorkflow": "not-started"
+    "focused": {
+      "status": "rerun-pending",
+      "firstAttempt": {
+        "passed": 15,
+        "failed": 1,
+        "total": 16,
+        "failedScenario": "hand-limit test asserted TagDuel.phase instead of TagDuel.core.phase"
+      },
+      "fixCommit": "b754b779ead0428f9b108ed80a0e55a33bc79516"
+    },
+    "cardBatchFast": "success-on-initial-head-33b62cb",
+    "milestone1000": "success-on-initial-head-33b62cb",
+    "engineValidation": "in-progress-on-initial-head-33b62cb",
+    "customWorkflow": "failed-on-initial-head-33b62cb; corrected test assertion in b754b779; rerun pending"
   },
   "production": {
     "mergePerformed": false,
@@ -140,7 +150,12 @@
     "status": "not-started",
     "planned": "Node 22, npm ci, npm run check, npm run build, JSON evidence parse and focused node:test suite."
   },
-  "nextTask": "Implementar adapter de evento FLIP e dano por equipe; cobrir estado atual no momento da resolução, hand 7 sem descarte antecipado, backrow/Field Zone, face-down, negação, source leave-field, controle versus proprietário físico, LP zero e conservação de UIDs.",
+  "nextTask": "Acompanhar os quatro workflows no novo HEAD b754b779; corrigir somente falhas reproduzíveis; depois registrar contagem final e liberar os quatro caminhos ao auxiliar.",
   "nextWindow": "2026-11-24T13:30:00-03:00",
-  "handoff": "M61 permanece reservado; não editar resolver central, catálogo, allowlist, comandos, banco ou dados dos jogadores. Escopo M586 contém somente quatro caminhos novos."
+  "handoff": "M61 permanece reservado; não editar resolver central, catálogo, allowlist, comandos, banco ou dados dos jogadores. Escopo M586 contém somente quatro caminhos novos.",
+  "latestBranchHeadSha": "b754b779ead0428f9b108ed80a0e55a33bc79516",
+  "lastActivityAt": "2026-11-24T08:48:00-03:00",
+  "blocksCompleted": [
+    "CI inicial: TypeScript check/build e JSON passaram; 15/16 testes passaram. Falha isolada: teste de mão consultou state.phase em vez de state.core.phase; corrigido em b754b779."
+  ]
 }

@@ -1,0 +1,137 @@
+{
+  "format": 1,
+  "runId": "work-20261124T084800-0300-M587",
+  "mission": "M587",
+  "owner": "Work principal",
+  "priority": "P1 — FLIP draw/reveal/discard: Hiro's Shadow Scout faz o oponente ativo comprar 3; Spell Cards comprados vão ao Cemitério compartilhado, demais permanecem na mão.",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-24T08:48:00-03:00",
+  "endedAt": null,
+  "duration": {
+    "startedAt": "2026-11-24T08:48:00-03:00",
+    "endedAt": null,
+    "elapsedMinutes": 0,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "462e86aadaa9424575e4eef68cd0e7e67331fc98",
+  "branch": "feat/work-m587-hiro-shadow-scout-tag-adapter-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": null,
+  "branchStartSha": null,
+  "branchHeadSha": null,
+  "coordinationCommitSha": null,
+  "pullRequest": null,
+  "pullRequestUrl": null,
+  "reservedFiles": [
+    "src/hiroShadowScoutTagAdapter.ts",
+    "tests/hiroShadowScoutTagAdapter.test.cjs",
+    "docs/evidence/m587-hiro-shadow-scout-tag-adapter.json",
+    ".github/workflows/m587-hiro-shadow-scout-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para o Flip Effect de Hiro's Shadow Scout: comprar 3 do Deck privado do representante adversário ativo, revelar os três, enviar somente Spell Cards ao Cemitério compartilhado do time e manter os demais na mão privada. Deck-out abaixo de 3 segue drawCards do engine clássico: compra nenhuma e derrota imediata.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T08:48:00-03:00",
+    "matchingPRs": 0,
+    "matchingBranches": 0,
+    "activeReservation": false,
+    "otherAgents": [
+      "M581",
+      "M582",
+      "M583",
+      "M584",
+      "M585",
+      "M586"
+    ],
+    "overlap": false,
+    "checkedCards": [
+      "Hiro's Shadow Scout"
+    ],
+    "excludedScopes": [
+      "M580 Birdface/Keldo",
+      "M581 Equip attack locks",
+      "M582 Mass Driver/Catapult Turtle",
+      "M583 Sarcophagus chain",
+      "M584 The End of Anubis/Kycoo",
+      "M585 Exiled Force/Tribe-Infecting Virus",
+      "M586 Des Koala/Princess of Tsurugi"
+    ],
+    "result": "No existing PR, branch or reservation for Hiro's Shadow Scout; four paths independent from M586 and other active reservations."
+  },
+  "cards": [
+    {
+      "id": "81863068",
+      "name": "Hiro's Shadow Scout",
+      "konamiDatabaseCid": 4617,
+      "firstTcgRelease": "2002-09-16",
+      "firstTcgSet": "MRL-024",
+      "officialText": "FLIP: Your opponent draws 3 cards. Both players look at the cards. If there are any Spell Cards among them, discard all those Spell Card(s) to the Graveyard.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4617&ope=2&request_locale=en",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "trigger": "Any actual flip face-up event: Flip Summon, battle, or card effect. Snapshot controller and physical UID; source may already be in GY when the trigger is queued.",
+    "draw": "Draw from only the active opposing physical seat's private Deck, top-first, using existing classic drawCards semantics. Inactive partner's private Deck is untouched.",
+    "reveal": "All three drawn identities are returned in a public reveal list/log for both teams.",
+    "discard": "Only Spell Cards among the three move to the opponent team's shared GY; Trap and Monster cards remain in the active opponent's private hand.",
+    "deckOut": "If the active opposing Deck has fewer than three, mirror handFlow.drawCards classic behavior: no partial draw, immediate finish for the opponent with reason 'não conseguiu comprar 3 cartas'.",
+    "ownership": "Preserve each UID m0–m3. Physical owner is not rewritten; shared GY is the team's zone."
+  },
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "not-started",
+    "cardBatchFast": "not-started",
+    "milestone1000": "not-started",
+    "engineValidation": "not-started",
+    "customWorkflow": "not-started"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "commandsChanged": false,
+    "centralResolverChanged": false,
+    "allowlistChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "validation": {
+    "status": "not-started",
+    "planned": "Node 22, npm ci, npm run check, npm run build, evidence JSON parse and focused node:test suite."
+  },
+  "nextTask": "Implementar o adapter de Hiro's Shadow Scout com draw top-first, reveal, descarte exclusivo de Spell Cards, deck-out conforme drawCards clássico, hand limit 6 apenas na End Phase e conservação de UID.",
+  "nextWindow": "2026-11-24T13:30:00-03:00",
+  "handoff": "Não tocar resolver central, catálogo, allowlist, comandos, banco, dados dos jogadores ou inventário. M586 permanece em CI e com reserva própria."
+}
