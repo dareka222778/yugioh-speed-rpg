@@ -2,8 +2,8 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const {
-  RAIN_OF_MERCY_ID,EMERGENCY_PROVISIONS_ID,createRecoveryLedger,
-  resolveRainOfMercy,resolveEmergencyProvisions
+  NUTRIENT_Z_ID,EMERGENCY_PROVISIONS_ID,createRecoveryLedger,
+  resolveNutrientZ,resolveEmergencyProvisions
 }=require('../dist/lpRecoveryTagAdapter');
 
 function card(uid,id,{faceUp=true,setTurn=0}={}){return {uid,id,faceUp,setTurn};}
@@ -28,63 +28,83 @@ function state({turn=1,cursor=0,priority=cursor%2,phase='main',lp0=7000,lp1=8000
     }
   };
 }
-function rainEvent({actionId='rain-1',sourceUid='m0:rain',sourceZone='hand',turn=1,phase='main',activeMemberId='p0',effectNegated=false,lp0=7000,lp1=8000}={}){
-  return {actionId,sourceUid,sourceZone,turn,phase,activeMemberId,effectNegated,currentLPByTeam:[lp0,lp1]};
+function nutrientEvent({actionId='nz-1',sourceUid='m0:nz',turn=3,activeMemberId='p0',defendingTeam=0,incomingBattleDamage=2000,effectNegated=false,lp0=7000,lp1=8000}={}){
+  return {actionId,sourceUid,turn,window:'damage-calculation',activeMemberId,defendingTeam,incomingBattleDamage,effectNegated,currentLPByTeam:[lp0,lp1]};
 }
 function emergencyEvent({actionId='ep-1',sourceUid='m0:ep',sourceZone='hand',turn=1,phase='main',activeMemberId='p0',effectNegated=false,lp0=7000,lp1=8000,costUids=[]}={}){
   return {actionId,sourceUid,sourceZone,turn,phase,activeMemberId,effectNegated,currentLPByTeam:[lp0,lp1],costUids};
 }
 
-test('Rain of Mercy concede 1000 LP a ambos os times',()=>{
-  const s=state({hand0:[card('m0:rain',RAIN_OF_MERCY_ID)]});
-  const r=resolveRainOfMercy(s,createRecoveryLedger(),rainEvent());
+test('Nutrient Z ganha 4000 LP antes de dano de batalha de exatamente 2000',()=>{
+  const s=state({turn:3,cursor:1,priority:0,phase:'response',backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  const r=resolveNutrientZ(s,createRecoveryLedger(),nutrientEvent());
   assert.equal(r.status,'resolved');
-  assert.deepEqual(r.plans.map(p=>p.targetTeam),[0,1]);
-  assert.deepEqual(r.plans.map(p=>p.amount),[1000,1000]);
-  assert.equal(r.plans.every(p=>p.replacementEligible),true);
-  assert.equal(r.sourceLeavesField,true);
+  assert.equal(r.plan.amount,4000);
+  assert.equal(r.plan.incomingBattleDamage,2000);
+  assert.equal(r.plan.beforeBattleDamage,true);
+  assert.equal(r.plan.targetTeam,0);
+  assert.equal(r.plan.replacementEligible,true);
 });
 
-test('Rain of Mercy pode ser ativada da zona de Magias setada no próprio turno',()=>{
-  const s=state({backrow0:[card('m0:rain',RAIN_OF_MERCY_ID,{faceUp:false,setTurn:1})]});
-  const r=resolveRainOfMercy(s,createRecoveryLedger(),rainEvent({sourceZone:'set'}));
-  assert.equal(r.plans.length,2);
+test('Nutrient Z aceita dano iminente acima do limiar',()=>{
+  const s=state({turn:3,cursor:1,priority:0,phase:'response',backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  const r=resolveNutrientZ(s,createRecoveryLedger(),nutrientEvent({incomingBattleDamage:4800}));
+  assert.equal(r.plan.amount,4000);
+  assert.equal(r.plan.incomingBattleDamage,4800);
 });
 
-test('Rain of Mercy negada não gera planos de ganho',()=>{
-  const s=state({hand0:[card('m0:rain',RAIN_OF_MERCY_ID)]});
-  const r=resolveRainOfMercy(s,createRecoveryLedger(),rainEvent({effectNegated:true}));
+test('Nutrient Z rejeita dano de batalha inferior a 2000',()=>{
+  const s=state({turn:3,cursor:1,priority:0,phase:'response',backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  assert.throws(()=>resolveNutrientZ(s,createRecoveryLedger(),nutrientEvent({incomingBattleDamage:1999})),/pelo menos 2000/);
+});
+
+test('Nutrient Z exige que a equipe defensora tenha prioridade e controle a carta',()=>{
+  const wrongPriority=state({turn:3,cursor:1,priority:1,phase:'response',backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  assert.throws(()=>resolveNutrientZ(wrongPriority,createRecoveryLedger(),nutrientEvent({activeMemberId:'p1'})),/prioridade da equipe/);
+  const wrongTeam=state({turn:3,cursor:1,priority:0,phase:'response',backrow1:[card('m1:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  assert.throws(()=>resolveNutrientZ(wrongTeam,createRecoveryLedger(),nutrientEvent()),/não pertence à equipe/);
+});
+
+test('Nutrient Z não pode ser ativada no mesmo turno em que foi setada',()=>{
+  const s=state({turn:3,cursor:1,priority:0,phase:'response',backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:3})]});
+  assert.throws(()=>resolveNutrientZ(s,createRecoveryLedger(),nutrientEvent()),/ainda não pode ser ativada/);
+});
+
+test('Nutrient Z exige carta setada e face-down',()=>{
+  const faceUp=state({turn:3,cursor:1,priority:0,phase:'response',backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:true,setTurn:1})]});
+  assert.throws(()=>resolveNutrientZ(faceUp,createRecoveryLedger(),nutrientEvent()),/não está setada/);
+});
+
+test('negar Nutrient Z impede ganho mas não devolve a Trap ativada',()=>{
+  const s=state({turn:3,cursor:1,priority:0,phase:'response',backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  const r=resolveNutrientZ(s,createRecoveryLedger(),nutrientEvent({effectNegated:true}));
   assert.equal(r.status,'negated');
-  assert.equal(r.plans.length,0);
-  assert.equal(r.sourceLeavesField,true);
+  assert.equal(r.plan.amount,0);
+  assert.equal(r.plan.gainApplied,false);
+  assert.equal(r.plan.sourceLeavesField,true);
 });
 
-test('Rain of Mercy exige Main Phase e turno próprio',()=>{
-  const battle=state({phase:'battle',hand0:[card('m0:rain',RAIN_OF_MERCY_ID)]});
-  assert.throws(()=>resolveRainOfMercy(battle,createRecoveryLedger(),rainEvent({phase:'battle'})),/Main Phase/);
-  const opponent=state({turn:2,cursor:1,backrow0:[card('m0:rain',RAIN_OF_MERCY_ID,{faceUp:false,setTurn:1})]});
-  assert.throws(()=>resolveRainOfMercy(opponent,createRecoveryLedger(),rainEvent({sourceUid:'m0:rain',sourceZone:'set',activeMemberId:'p1',turn:2})),/equipe adversária/);
+test('Nutrient Z rejeita snapshot de LP obsoleto e turno divergente',()=>{
+  const s=state({turn:3,cursor:1,priority:0,phase:'response',lp0:6500,backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  assert.throws(()=>resolveNutrientZ(s,createRecoveryLedger(),nutrientEvent()),/Snapshot de LP/);
+  const fresh=state({turn:4,cursor:1,priority:0,phase:'response',backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  assert.throws(()=>resolveNutrientZ(fresh,createRecoveryLedger(),nutrientEvent()),/dano de batalha iminente/);
 });
 
-test('Rain of Mercy exige que a carta setada pertença à equipe ativa',()=>{
-  const s=state({turn:2,cursor:1,backrow0:[card('m0:rain',RAIN_OF_MERCY_ID,{faceUp:false,setTurn:1})]});
-  assert.throws(()=>resolveRainOfMercy(s,createRecoveryLedger(),rainEvent({sourceUid:'m0:rain',sourceZone:'set',turn:2,activeMemberId:'p1'})),/equipe adversária/);
-});
-
-test('Rain of Mercy rejeita UID de mão pertencente ao parceiro inativo',()=>{
-  const s=state();
-  s.reserves['2'].hand.push(card('m2:rain',RAIN_OF_MERCY_ID));
-  s.core.teamRotation.reserves=s.reserves;
-  assert.throws(()=>resolveRainOfMercy(s,createRecoveryLedger(),rainEvent({sourceUid:'m2:rain'})),/mão privada/);
-});
-
-test('Rain of Mercy rejeita snapshot de LP obsoleto e replay é idempotente',()=>{
-  const s=state({hand0:[card('m0:rain',RAIN_OF_MERCY_ID)]});
-  assert.throws(()=>resolveRainOfMercy(state({lp0:6500,hand0:[card('m0:rain',RAIN_OF_MERCY_ID)]}),createRecoveryLedger(),rainEvent()),/Snapshot de LP/);
-  const once=resolveRainOfMercy(s,createRecoveryLedger(),rainEvent());
-  const replay=resolveRainOfMercy(s,once.ledger,rainEvent());
+test('Nutrient Z replay é idempotente e não duplica recuperação',()=>{
+  const s=state({turn:3,cursor:1,priority:0,phase:'response',backrow0:[card('m0:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  const once=resolveNutrientZ(s,createRecoveryLedger(),nutrientEvent());
+  const replay=resolveNutrientZ(s,once.ledger,nutrientEvent());
   assert.equal(replay.status,'duplicate');
-  assert.equal(replay.plans.length,0);
+  assert.equal(replay.plan,null);
+});
+
+test('Nutrient Z usa o assento ativo da equipe defensora e preserva o estado',()=>{
+  const s=state({turn:3,cursor:1,priority:0,phase:'response',backrow0:[card('m2:nz',NUTRIENT_Z_ID,{faceUp:false,setTurn:1})]});
+  const before=structuredClone(s);
+  const r=resolveNutrientZ(s,createRecoveryLedger(),nutrientEvent({sourceUid:'m2:nz'}));
+  assert.equal(r.plan.controllerTeam,0);
+  assert.deepEqual(s,before);
 });
 
 test('Emergency Provisions envia outras Magias/Armadilhas e ganha 1000 por carta',()=>{
@@ -207,9 +227,9 @@ test('planos preservam LP, mãos, Decks e zonas; não concedem cartas nem altera
   assert.equal(r.plan.costs.length,1);
 });
 
-test('Rain of Mercy não pode ser usada em resposta ou na Battle Phase',()=>{
-  const s=state({phase:'response',priority:0,hand0:[card('m0:rain',RAIN_OF_MERCY_ID)]});
-  assert.throws(()=>resolveRainOfMercy(s,createRecoveryLedger(),rainEvent({phase:'response'})),/Main Phase/);
+test('Nutrient Z não pode ser usada em resposta ou na Battle Phase',()=>{
+  const s=state({phase:'response',priority:0,hand0:[card('m0:rain',NUTRIENT_Z_ID)]});
+  assert.throws(()=>resolveNutrientZ(s,createRecoveryLedger(),nutrientEvent({phase:'response'})),/Main Phase/);
 });
 
 test('ledger malformado e UID físico inválido falham fechado',()=>{
