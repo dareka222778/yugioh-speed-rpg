@@ -1,0 +1,91 @@
+{
+  "format": 1,
+  "runId": "work-20261124T183836-0300-M597",
+  "mission": "M597",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-awaiting-isolated-branch",
+  "startedAt": "2026-11-24T18:39:15-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "f18a0510bbf5f2ccaa6c75b2608220b689e3dc23",
+  "branch": "feat/work-m597-barrel-behind-door-tag-adapter-20261124",
+  "baseSha": null,
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/barrelBehindTheDoorTagAdapter.ts",
+    "tests/barrelBehindTheDoorTagAdapter.test.cjs",
+    "docs/evidence/m597-barrel-behind-the-door-tag-adapter.json",
+    ".github/workflows/m597-barrel-behind-the-door-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel puro para Barrel Behind the Door: redireciona para o time adversário o dano que uma ativação de Magia/Armadilha/efeito de Monstro causaria ao time controlador da Counter Trap. A saída é uma diretiva de redirecionamento, não aplicação de LP. Quatro caminhos novos; sem resolver, catálogo, certificação, inventário ou dados persistentes.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T18:39:15-03:00",
+    "sharedHead": "f18a0510bbf5f2ccaa6c75b2608220b689e3dc23",
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "matchingCodeIds": 0,
+    "m61Handoff": "pending; no integration attempted",
+    "m596FilesUntouched": true,
+    "m593FilesUntouched": true,
+    "m594FilesUntouched": true,
+    "m595FilesUntouched": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "card": {
+    "name": "Barrel Behind the Door",
+    "passcode": "78783370",
+    "konamiDatabaseId": 5543,
+    "kind": "Counter Trap",
+    "firstTCGPrinting": "Pharaonic Guardian (PGD-095), 2003-07-18",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5543&ope=2&request_locale=en",
+    "officialEffect": "When a Spell/Trap Card, or monster effect, is activated that would inflict damage to you: Your opponent takes the damage instead."
+  },
+  "plannedTests": [
+    "Spell, Trap and monster-effect activations that would damage the controller team redirect the exact amount to the opposing team",
+    "battle damage and non-activated/continuous damage are excluded",
+    "only the controller team can be the original damage recipient",
+    "the Counter Trap must have been Set face-down and be face-up in its controller's backrow during resolution",
+    "negated Counter Trap activation or negated/non-resolving source effect produces no redirect",
+    "zero damage, already-applied damage and malformed chain receipts fail closed",
+    "duplicate activation receipt is idempotent; distinct Counter Trap activations against one source effect remain separate directives, not additive damage",
+    "stale shared LP snapshot, duplicate UIDs and invalid physical UID prefixes are rejected",
+    "no mutation of player LP, private hands, decks, 3+3 zones, Field Zone or Extra Deck"
+  ],
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar Barrel Behind the Door como redirecionador de dano de efeito ativado, com snapshot de cadeia/LP, validação da armadilha Set, idempotência e 20+ testes; executar CI isolada.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

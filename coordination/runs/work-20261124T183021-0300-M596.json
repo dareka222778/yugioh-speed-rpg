@@ -4,16 +4,16 @@
   "mission": "M596",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved-awaiting-isolated-branch",
+  "status": "focused-ci-green; card-batch-and-engine-validation-running",
   "startedAt": "2026-11-24T18:30:21-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "ebcf887d0c239a48b8601be520a7a2ed909f2aee",
   "branch": "feat/work-m596-triggered-burn-tag-adapters-20261124",
-  "baseSha": null,
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "baseSha": "f18a0510bbf5f2ccaa6c75b2608220b689e3dc23",
+  "branchHeadSha": "1d0856774dbf54b3b4db86de409d370cb193313a",
+  "pullRequest": 539,
   "reservedFiles": [
     "src/triggeredBurnTagAdapter.ts",
     "tests/triggeredBurnTagAdapter.test.cjs",
@@ -105,7 +105,46 @@
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar adapters puros para Dark Room of Nightmare, Coffin Seller e Skull Invitation, validar propriedade física/LP, adicionar 30+ testes e workflow isolado; executar CI e reavaliar o próximo lote.",
+  "nextTask": "Aguardar Card Batch Fast e Engine Validation no SHA 1d085677; se ambos verdes, liberar os quatro caminhos ao auxiliar sem merge.",
   "nextWindow": "2026-11-24T23:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/539",
+  "ci": {
+    "focused": {
+      "status": "success",
+      "runId": 45493081023,
+      "sha": "1d0856774dbf54b3b4db86de409d370cb193313a",
+      "tests": 39,
+      "passed": 39,
+      "failed": 0
+    },
+    "cardBatchFast": {
+      "status": "in_progress",
+      "runId": 45493080902,
+      "sha": "1d0856774dbf54b3b4db86de409d370cb193313a"
+    },
+    "milestone1000": {
+      "status": "success",
+      "runId": 45493080819,
+      "sha": "1d0856774dbf54b3b4db86de409d370cb193313a"
+    },
+    "engineValidation": {
+      "status": "in_progress",
+      "runId": 45493080809,
+      "sha": "1d0856774dbf54b3b4db86de409d370cb193313a"
+    },
+    "priorAttempts": [
+      {
+        "sha": "dbf7ea7b78619bb2c634ca4885b82b916a60e4c0",
+        "status": "failure",
+        "reason": "regex de passcode escapada duas vezes no template raw; corrigida para [0-9]{8}"
+      },
+      {
+        "sha": "6d6a0d27721743ebc26eda05bdb57e61264323cb",
+        "status": "failure",
+        "reason": "fixture esperava UID duplicado, mas usava m1:dup e m3:dup; corrigido para UID realmente repetido"
+      }
+    ]
+  },
+  "lastActivityAt": "2026-11-24T18:39:15-03:00"
 }
