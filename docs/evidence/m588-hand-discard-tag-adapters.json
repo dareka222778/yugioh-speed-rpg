@@ -1,0 +1,73 @@
+{
+  "mission": "M588",
+  "runId": "work-20261124T085800-0300-M588",
+  "priority": "P1",
+  "family": "physical-hand-discard-effects",
+  "cards": [
+    {
+      "name": "Thunder Dragon",
+      "passcode": "31786629",
+      "konamiId": 4431,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4431&ope=2&request_locale=en",
+      "firstPrinting": "Metal Raiders (MRD-097), TCG 2002-06-26",
+      "officialText": "You can discard this card; add up to 2 \"Thunder Dragon\" from your Deck to your hand.",
+      "behavior": [
+        "Activation is restricted to the active physical player's open Main Phase and private hand.",
+        "Discard is paid immediately as cost and remains paid if the effect is negated.",
+        "At resolution, add zero, one, or two matching copies from that same physical player's private Deck.",
+        "Selection is non-targeting and revalidated at resolution; each physical copy can activate independently."
+      ],
+      "sourceVerified": true,
+      "historicalEligibility": "pre-2004-09-30 TCG printing verified",
+      "certificationStatus": "not-certified; isolated adapter only"
+    },
+    {
+      "name": "Electric Snake",
+      "passcode": "11324436",
+      "konamiId": 4469,
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4469&ope=2&request_locale=en",
+      "firstPrinting": "Spell Ruler (MRL-008), TCG 2002-09-16",
+      "officialText": "When this card is discarded from your hand to the Graveyard by an effect of a card controlled by your opponent, draw 2 cards from your Deck.",
+      "behavior": [
+        "Trigger requires a real hand-to-shared-GY discard by an opponent-controlled card effect; costs and rule discards do not qualify.",
+        "The discarded copy must belong to the active physical representative whose private hand was affected.",
+        "Both cards are drawn from that physical owner's private Deck into that same private hand.",
+        "If fewer than two cards remain, the classic draw contract performs no partial draw and the owner team loses by deck-out.",
+        "A negated trigger draws nothing; the hand limit remains an End Phase check."
+      ],
+      "sourceVerified": true,
+      "historicalEligibility": "pre-2004-09-30 TCG printing verified",
+      "certificationStatus": "not-certified; isolated adapter only"
+    }
+  ],
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "physicalOwnership": "UID m0–m3 remains attached to its original seat; shared Graveyard is team-scoped; hands and Decks remain private"
+  },
+  "validation": {
+    "focusedSuite": "tests/handDiscardTagAdapters.test.cjs",
+    "workflow": ".github/workflows/m588-hand-discard-tag-adapters.yml",
+    "planned": ["npm ci", "npm run check", "npm run build", "JSON parse", "focused Node test suite"],
+    "liveDiscord": false
+  },
+  "safety": {
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "catalogChanged": false,
+    "allowlistChanged": false,
+    "resolverChanged": false,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "commandsChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "engineRegistration": "pending explicit M61 resolver handoff"
+  }
+}
