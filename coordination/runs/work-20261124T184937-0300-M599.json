@@ -75,13 +75,15 @@
   },
   "catalogAtStart": {
     "coordinationClaimedCertified": 969,
-    "directlyCountedCardCertificationEntries": 959,
+    "directUniqueCertificateIds": 969,
     "releasedCardIds": 969,
-    "countDiscrepancy": "src/cardCertifications.ts tem 959 chaves explícitas; src/releasedCardIds.ts tem 969 IDs. O total efetivamente certificado precisa ser reconciliado pelo registry/CI.",
+    "verifiedBy": "direct count + Card Batch Fast/Milestone 1000 on SHA bbfaf37",
+    "remainingTo1000": 31,
     "newCertifications": 0,
     "inventoryGranted": 0
   },
   "catalogAtEnd": {
+    "certified": 969,
     "newCertifications": 0,
     "inventoryGranted": 0
   },
@@ -105,7 +107,15 @@
     "latestCommitBuild": "initial SHA passed npm run check and npm run build; corrected SHA has no visible PR-triggered run yet",
     "cardBatchFast": "success on initial SHA",
     "milestone1000": "success on initial SHA",
-    "engineValidation": "in-progress on initial SHA"
+    "engineValidation": "in-progress on initial SHA",
+    "initialEngineValidation": {
+      "runId": 45496492409,
+      "conclusion": "failure",
+      "npmTestTotal": 7394,
+      "passed": 7392,
+      "failed": 2,
+      "failedCases": "the same two M599 fixture cases; no unrelated baseline failure found"
+    }
   },
   "production": {
     "resolverIntegration": false,
@@ -123,7 +133,7 @@
   "nextWindow": "2026-11-24T23:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
   "pullRequestUrl": null,
-  "lastActivityAt": "2026-11-24T19:03:18-03:00",
+  "lastActivityAt": "2026-11-24T19:14:29-03:00",
   "consolidatedIntoPullRequest": 543,
   "consolidatedBranch": "feat/work-m600-lp-recovery-tag-adapters-20261124",
   "consolidatedHeadSha": "d7cfc827e9d88573bdf690eb5baefa07fc690a43"
