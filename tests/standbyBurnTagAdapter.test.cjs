@@ -165,6 +165,8 @@ test('múltiplas cópias de Dark Snake Syndrome acumulam dano por cópia',()=>{
 
 test('cópias ativadas em turnos diferentes mantêm contadores independentes',()=>{
   let ledger=register().ledger;
+  const firstPhase=standby(ledger,{turn:3,cursor:2,phaseId:'first-copy-first-phase'});
+  ledger=firstPhase.ledger;
   const s=state({turn:3,cursor:2,backrow0:[
     source('m0:source',DARK_SNAKE_SYNDROME_ID),
     source('m2:late',DARK_SNAKE_SYNDROME_ID)
@@ -172,11 +174,11 @@ test('cópias ativadas em turnos diferentes mantêm contadores independentes',()
   ledger=registerStandbyBurnSource(s,ledger,{
     sourceUid:'m2:late',activationId:'late-a1',cardId:DARK_SNAKE_SYNDROME_ID,controllerMemberId:'p2',turn:3
   }).ledger;
-  const first=standby(ledger,{turn:5,cursor:0,backrow0:[
+  const secondPhase=standby(ledger,{turn:5,cursor:0,backrow0:[
     source('m0:source',DARK_SNAKE_SYNDROME_ID),
     source('m2:late',DARK_SNAKE_SYNDROME_ID)
   ]});
-  assert.deepEqual(first.plans.map(p=>p.amount),[400,400,200,200]);
+  assert.deepEqual(secondPhase.plans.map(p=>p.amount),[400,400,200,200]);
 });
 
 test('não dispara no mesmo turno em que a Continuous Spell foi ativada',()=>{
@@ -250,7 +252,7 @@ test('UID duplicado no campo compartilhado falha fechado',()=>{
 
 test('contador exponencial que ultrapassa inteiro seguro falha fechado',()=>{
   const first=register();
-  const ledger={...first.ledger,sources:[{...first.ledger.sources[0],passedStandbyPhases:45}]};
+  const ledger={...first.ledger,sources:[{...first.ledger.sources[0],passedStandbyPhases:46}]};
   const rstate=state({turn:3,cursor:2,backrow0:[source('m0:source',DARK_SNAKE_SYNDROME_ID)]});
   assert.throws(()=>resolveStandbyBurnPhase(rstate,ledger,{
     phaseId:'overflow',phase:'standby',activeMemberId:'p2',turn:3,currentLPByTeam:[7000,8000]
