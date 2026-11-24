@@ -1,0 +1,140 @@
+{
+  "format": 1,
+  "runId": "work-20261124T184937-0300-M599",
+  "mission": "M599",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "consolidated-awaiting-ci",
+  "startedAt": "2026-11-24T18:49:37-03:00",
+  "endedAt": "2026-11-24T19:11:34-03:00",
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "branch": "feat/work-m599-standby-burn-tag-adapters-20261124",
+  "baseSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "branchHeadSha": "513cc08122ce1112de98c19e299e15c247366de6",
+  "pullRequest": {
+    "number": 543,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/543",
+    "state": "open",
+    "draft": true
+  },
+  "reservedFiles": [
+    "src/standbyBurnTagAdapter.ts",
+    "tests/standbyBurnTagAdapter.test.cjs",
+    "docs/evidence/m599-standby-burn-tag-adapters.json",
+    ".github/workflows/m599-standby-burn-tag-adapters.yml"
+  ],
+  "scope": "Dark Snake Syndrome + Wave-Motion Cannon: contagem de Standby por UID/activationId, progressão 200/400/800 e custo de envio ao GY com dano 1000 por fase; somente quatro caminhos novos.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T18:58:48-03:00",
+    "sharedHead": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "cardIds": [
+      "47233801",
+      "38992735"
+    ],
+    "matchingCertificationEntries": 0,
+    "m596HandoffRequested": {
+      "pr": 539,
+      "commentId": 7145456106,
+      "status": "awaiting explicit release"
+    },
+    "m598FilesUntouched": true,
+    "m61Handoff": "pending; no resolver/metadata/certification integration",
+    "thirdPartyReservationsUntouched": true
+  },
+  "cards": [
+    {
+      "name": "Dark Snake Syndrome",
+      "passcode": "47233801",
+      "konamiDatabaseId": 5536,
+      "kind": "Continuous Spell",
+      "firstTCGPrinting": "Pharaonic Guardian (PGD-087), 2003-07-18"
+    },
+    {
+      "name": "Wave-Motion Cannon",
+      "passcode": "38992735",
+      "konamiDatabaseId": 5614,
+      "kind": "Continuous Spell",
+      "firstTCGPrinting": "Magician's Force (MFC-040), 2003-10-10"
+    }
+  ],
+  "plannedTests": 32,
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "coordinationClaimedCertified": 969,
+    "directUniqueCertificateIds": 969,
+    "releasedCardIds": 969,
+    "verifiedBy": "direct count + Card Batch Fast/Milestone 1000 on SHA bbfaf37",
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "certified": 969,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "initialFocusedRun": {
+      "runId": 45496492260,
+      "sha": "bbfaf37ae6429c6713230a821a04c1a8cf715393",
+      "conclusion": "failure",
+      "passedTests": 30,
+      "failedTests": 2,
+      "failures": [
+        "fixture de cópias em turnos diferentes não processou a primeira Standby antes da segunda ativação",
+        "limite de overflow usou 45 fases, ainda dentro de Number.MAX_SAFE_INTEGER"
+      ]
+    },
+    "correctiveCommits": [
+      "66581e4073ed0a1b54e2aff3036046689dd83955",
+      "513cc08122ce1112de98c19e299e15c247366de6"
+    ],
+    "latestFocusedRerun": "not-yet-observed",
+    "latestCommitBuild": "initial SHA passed npm run check and npm run build; corrected SHA has no visible PR-triggered run yet",
+    "cardBatchFast": "success on initial SHA",
+    "milestone1000": "success on initial SHA",
+    "engineValidation": "in-progress on initial SHA",
+    "initialEngineValidation": {
+      "runId": 45496492409,
+      "conclusion": "failure",
+      "npmTestTotal": 7394,
+      "passed": 7392,
+      "failed": 2,
+      "failedCases": "the same two M599 fixture cases; no unrelated baseline failure found"
+    }
+  },
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "effectiveWorkMinutes": 20,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Revalidar os 32 testes M599 no HEAD consolidado; se verdes, prosseguir com próxima família e depois aguardar handoff M61 para integração.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": [],
+  "pullRequestUrl": null,
+  "lastActivityAt": "2026-11-24T19:14:29-03:00",
+  "consolidatedIntoPullRequest": 543,
+  "consolidatedBranch": "feat/work-m600-lp-recovery-tag-adapters-20261124",
+  "consolidatedHeadSha": "d7cfc827e9d88573bdf690eb5baefa07fc690a43"
+}

@@ -1,0 +1,117 @@
+{
+  "format": 1,
+  "runId": "work-20261124T190318-0300-M600",
+  "mission": "M600",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "awaiting-ci-on-consolidated-pr",
+  "startedAt": "2026-11-24T19:03:18-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "baseBranch": "feat/work-m599-standby-burn-tag-adapters-20261124",
+  "baseSha": "d236204915998b42d8d479e682926daf65e74864",
+  "branch": "feat/work-m600-lp-recovery-tag-adapters-20261124",
+  "branchHeadSha": "d7cfc827e9d88573bdf690eb5baefa07fc690a43",
+  "pullRequest": {
+    "number": 543,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/543",
+    "state": "open",
+    "draft": true
+  },
+  "reservedFiles": [
+    "src/lpRecoveryTagAdapter.ts",
+    "tests/lpRecoveryTagAdapter.test.cjs",
+    "docs/evidence/m600-lp-recovery-tag-adapters.json",
+    ".github/workflows/m600-lp-recovery-tag-adapters.yml"
+  ],
+  "scope": "Nutrient Z + Emergency Provisions: recuperação em Damage Calculation e custo de enviar S/T, sem alterar resolver central, catálogo, certificados, allowlist, comandos ou inventário.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T19:10:41-03:00",
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "m599StackedOnOwnBranch": true,
+    "m598FilesUntouched": true,
+    "m61Handoff": "pending; no central integration",
+    "thirdPartyReservationsUntouched": true,
+    "discardedDuplicateCandidate": {
+      "name": "Rain of Mercy",
+      "passcode": "66719324",
+      "certified": true,
+      "released": true,
+      "action": "excluded before PR consolidation"
+    }
+  },
+  "cards": [
+    {
+      "name": "Nutrient Z",
+      "passcode": "29389368",
+      "konamiDatabaseId": 5403,
+      "kind": "Normal Trap",
+      "firstTCGPrinting": "Legacy of Darkness (LOD-096), 2003-06-06"
+    },
+    {
+      "name": "Emergency Provisions",
+      "passcode": "53046408",
+      "konamiDatabaseId": 5350,
+      "kind": "Quick-Play Spell",
+      "firstTCGPrinting": "Legacy of Darkness (LOD-033), 2003-06-06"
+    }
+  ],
+  "plannedTests": 27,
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "directCertificateEntries": 969,
+    "releasedCardIds": 969,
+    "nutrientZCertified": false,
+    "nutrientZReleased": false,
+    "emergencyProvisionsCertified": false,
+    "emergencyProvisionsReleased": false,
+    "newCertifications": 0,
+    "inventoryGranted": 0,
+    "discardedRainOfMercy": {
+      "passcode": "66719324",
+      "certified": true,
+      "released": true
+    }
+  },
+  "catalogAtEnd": {
+    "certified": 969,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "not-yet-observed",
+    "cardBatchFast": "not-yet-observed",
+    "milestone1000": "not-yet-observed",
+    "engineValidation": "not-yet-observed"
+  },
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "effectiveWorkMinutes": 8,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Aguardar os workflows M599/M600 no HEAD consolidado, corrigir falhas e então avançar outra família independente.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": [],
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/543",
+  "lastActivityAt": "2026-11-24T19:14:29-03:00"
+}
