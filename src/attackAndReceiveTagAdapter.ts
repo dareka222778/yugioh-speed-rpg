@@ -61,6 +61,7 @@ export function resolveAttackAndReceive(
   if(!event||event.resolved!==true||!['battle','effect','other'].includes(event.cause)||!Number.isSafeInteger(event.lpBefore)||!Number.isSafeInteger(event.lpAfter)||!Number.isSafeInteger(event.damage)||event.lpBefore<0||event.lpAfter<0||event.damage<=0||event.lpBefore-event.lpAfter!==event.damage){
     throw new Error('Attack and Receive exige dano real de LP já resolvido.');
   }
+  assertTeam(event.damagedTeam);
   if(event.damagedTeam!==team)throw new Error('Attack and Receive só pode responder ao dano recebido pela própria equipe.');
   if(state.core.players[team].lp!==event.lpAfter)throw new Error('Evento de dano de Attack and Receive está obsoleto ou diverge do LP atual.');
   if(state.core.phase==='finished')throw new Error('Duelo encerrado antes da ativação de Attack and Receive.');
