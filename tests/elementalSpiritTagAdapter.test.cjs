@@ -154,7 +154,9 @@ test('payment preserves physical UIDs, partner hand, field zone and total invent
   assert.deepEqual(next.core.players[0].field, fieldZoneBefore);
   assert.deepEqual(inventoryMap(next), beforeInventory);
   assert.deepEqual(duel.core.players[0].monsters, []);
-  assert.equal(duel.core.players[0].grave.length, 0);
+  assert.equal(duel.core.players[0].hand.some(card => card.uid === sourceUid), true);
+  assert.equal(duel.core.players[0].grave.length, 1);
+  assert.equal(duel.core.players[0].grave[0].uid, costUid);
 });
 
 test('a stale or wrong-Attribute cost fails without mutating the input snapshot', () => {
