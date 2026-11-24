@@ -61,7 +61,9 @@ function inventory(duel) {
 function moveSourceToOwnerGrave(duel, source) {
   const controller = duel.core.players.findIndex(team => team.monsters.some(card => card.uid === source.uid));
   if (controller >= 0) duel.core.players[controller].monsters = duel.core.players[controller].monsters.filter(card => card.uid !== source.uid);
-  duel.core.players[source.uid.startsWith('m1:') || source.uid.startsWith('m3:') ? 1 : 0].grave.push({ uid: source.uid, id: source.id });
+  const owner = /^m([0-3]):/.exec(source.uid);
+  assert.ok(owner);
+  duel.core.players[Number(owner[1]) % 2].grave.push({ uid: source.uid, id: source.id });
 }
 
 test('Magical Merchant accepts Flip Summon, battle and card-effect face-up transitions', () => {
@@ -219,23 +221,14 @@ test('the Flip Effect resolves if its source leaves the field after the trigger 
   assert.equal(result.addedUid, privateZone(result.state, 0, 'hand').find(card => card.id === TRAP_ID)?.uid);
 });
 
-test('a stale active-seat plan is rejected after team rotation', () => {
+test('a stale or forged active-seat plan is rejected before touching another private Deck', () => {
   const duel = makeDuel(0);
   const source = putSource(duel, 0, 0);
   setTop(privateZone(duel, 0, 'deck'), [CARD_ID, TRAP_ID]);
   const plan = prepareMagicalMerchantTrigger(duel, flipEvent(duel, source, 0), CARD_ID);
   assert.ok(plan);
-  const next = structuredClone(duel);
-  next.active[0] = 2;
-  next.cursor = 2;
-  next.core.teamRotation.active[0] = 2;
-  next.core.teamRotation.cursor = 2;
-  next.reserves['0'] = { deck: next.core.players[0].deck, hand: next.core.players[0].hand, extra: next.core.players[0].extra };
-  next.core.players[0].deck = next.reserves['2'].deck;
-  next.core.players[0].hand = next.reserves['2'].hand;
-  next.core.players[0].extra = next.reserves['2'].extra;
-  delete next.reserves['2'];
-  assert.equal(resolveMagicalMerchant(next, plan, { cardId: CARD_ID }), null);
+  assert.equal(resolveMagicalMerchant(duel, { ...plan, activeSeat: 2 }, { cardId: CARD_ID }), null);
+  assert.equal(resolveMagicalMerchant(duel, { ...plan, turn: plan.turn - 1 }, { cardId: CARD_ID }), null);
 });
 
 test('the adapter never mutates the input snapshot and conserves every physical UID', () => {
@@ -302,4 +295,17 @@ test('Main Deck minimum remains twenty cards per physical seat', () => {
   const duel = makeDuel(0);
   privateZone(duel, 0, 'deck').pop();
   assert.throws(() => assertMagicalMerchantPhysicalRules(duel), /Deck principal físico fora do limite 20–30/);
+});
+
+test('the active representative of team 1 uses team 1 private Deck even while team 0 has the turn', () => {
+  const duel = makeDuel(0);
+  const source = putSource(duel, 1, 1);
+  setTop(privateZone(duel, 1, 'deck'), [CARD_ID, TRAP_ID]);
+  const selectedUid = privateZone(duel, 1, 'deck')[1].uid;
+  const plan = prepareMagicalMerchantTrigger(duel, flipEvent(duel, source, 1), CARD_ID);
+  assert.ok(plan);
+  assert.equal(plan.activeSeat, 1);
+  const result = resolveMagicalMerchant(duel, plan, { cardId: CARD_ID });
+  assert.ok(result);
+  assert.equal(result.addedUid, selectedUid);
 });
