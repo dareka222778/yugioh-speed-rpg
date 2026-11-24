@@ -219,6 +219,26 @@ test('Garuda changes one selected target, marks its own once-per-turn use and pr
   assert.equal(resolveGarudaPositionChange(next, sourceUid, targetUid, { phase: 'opponent-end', activeTeam: 1 }), null);
 });
 
+test('Garuda follows the controlling team even when its physical owner belongs to the opposing team', () => {
+  const duel = makeDuel();
+  const sourceUid = moveDeckCardToField(duel, 1, 1, GARUDA_THE_WIND_SPIRIT_ID);
+  const [stolen] = duel.core.players[1].monsters.splice(0, 1);
+  duel.core.players[0].monsters.push(stolen);
+  const targetUid = moveDeckCardToField(duel, 1, 1, 'fixture-opponent', 'atk', true);
+  activateOpponentTurn(duel);
+  const beforeInventory = inventoryMap(duel);
+
+  const targets = garudaEndPhaseTargets(duel, sourceUid, { phase: 'opponent-end', activeTeam: 1 });
+  assert.deepEqual(targets.map(monster => monster.uid), [targetUid]);
+
+  const next = resolveGarudaPositionChange(duel, sourceUid, targetUid, { phase: 'opponent-end', activeTeam: 1 });
+  assert.ok(next);
+  assert.equal(next.core.players[0].monsters.find(monster => monster.uid === sourceUid).effectUsedTurn, next.core.turn);
+  assert.equal(next.core.players[1].monsters.find(monster => monster.uid === targetUid).position, 'def');
+  assert.deepEqual(inventoryMap(next), beforeInventory);
+  assert.equal(duel.core.players[1].monsters.some(monster => monster.uid === sourceUid), false);
+});
+
 test('Garuda cannot target a face-down monster or a target locked through the current turn', () => {
   const duel = makeDuel();
   const sourceUid = moveDeckCardToField(duel, 0, 0, GARUDA_THE_WIND_SPIRIT_ID);

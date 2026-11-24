@@ -291,8 +291,7 @@ function garudaSource(duel: TagDuel, sourceUid: string): { team: Team; monster: 
   for (const team of [0, 1] as const) {
     const monster = duel.core.players[team].monsters.find(card => card.uid === sourceUid);
     if (monster) {
-      if (monster.id !== GARUDA_THE_WIND_SPIRIT_ID || !monster.faceUp ||
-          physicalSeat(monster.uid) % 2 !== team) return null;
+      if (monster.id !== GARUDA_THE_WIND_SPIRIT_ID || !monster.faceUp) return null;
       return { team, monster };
     }
   }
