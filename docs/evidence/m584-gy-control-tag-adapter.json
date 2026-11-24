@@ -1,0 +1,80 @@
+{
+  "mission": "M584",
+  "title": "GY control TagDuel adapter — The End of Anubis + Kycoo the Ghost Destroyer",
+  "cards": [
+    {
+      "id": "65403020",
+      "name": "The End of Anubis",
+      "konamiDatabaseCid": 6073,
+      "firstTcgRelease": "2004-05-01",
+      "firstOcgRelease": "2004-02-26",
+      "historicalEligibility": "eligible-before-2004-09-30",
+      "officialText": "All cards and effects that target a card(s) in the GY or that activate in the GY are negated.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6073&ope=2&request_locale=en"
+    },
+    {
+      "id": "88240808",
+      "name": "Kycoo the Ghost Destroyer",
+      "konamiDatabaseCid": 5248,
+      "firstTcgRelease": "2003-03-01",
+      "firstOcgRelease": "2002-12-12",
+      "historicalEligibility": "eligible-before-2004-09-30",
+      "officialText": "When this card inflicts battle damage to your opponent: You can target up to 2 monsters in their GY; banish those targets. Your opponent cannot banish cards from either GY.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5248&ope=2&request_locale=en"
+    }
+  ],
+  "adapterBehaviorVerifiedCards": 2,
+  "behaviorCertifiedCards": 0,
+  "newEngineV9Certifications": 0,
+  "automaticCertifications": 0,
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "identityBlocked": 27
+  },
+  "testCases": 12,
+  "testCoverage": [
+    "The End of Anubis globally negates effects that activate in the GY or target a GY card, but not unrelated effects",
+    "The End of Anubis must remain face-up; face-down copies do not apply",
+    "Kycoo prevents the opposing team from banishing cards from either shared GY while allowing its controller team",
+    "Face-down Kycoo does not apply its continuous restriction",
+    "Kycoo's optional trigger requires positive battle damage in the controller team's battle window",
+    "The target pool contains only opposing GY monsters and includes cards owned by an inactive partner",
+    "Banishment preserves physical UIDs and the inventory multiset",
+    "Duplicate, foreign and more-than-two target selections are rejected",
+    "Targets that leave the GY before resolution are ignored without duplicating UIDs",
+    "The End of Anubis negates Kycoo's GY-targeting effect at resolution",
+    "Zero selected targets do not mutate inventory",
+    "A seven-card hand remains intact until the End Phase; the adapter does not discard early",
+    "A team with more than three Monster Zones is rejected"
+  ],
+  "fixtureStrategy": "Production defaults retain the two official card IDs. Because these candidates are not yet admitted to the engine-v9 playable catalog, tests inject two already-playable Normal Monster IDs as temporary aliases. Aliases are test-only and do not change metadata, certificates, allowlist, catalog, or player inventory.",
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5
+  },
+  "safety": {
+    "runtimeResolverChanged": false,
+    "catalogChanged": false,
+    "certificationsChanged": false,
+    "releasedCardIdsChanged": false,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "M61 still owns the protected resolver, metadata and certification files; this PR adds an isolated adapter only.",
+    "The new card IDs are not yet playable/certified in engine-v9; adapter tests use fixture aliases and do not count as engine-v9 certification.",
+    "No live Discord gateway/guild, production database, merge, deploy or backup restoration was exercised."
+  ]
+}
