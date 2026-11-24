@@ -13,11 +13,11 @@
     "race": "Spellcaster",
     "effect": "When this card is sent to the Graveyard as a result of battle, the Battle Phase for that turn ends immediately.",
     "historicalEligibility": {
-      "tcgFirstPrint": "MRD-EN134",
+      "tcgFirstPrint": "MRD-134",
       "tcgReleaseDate": "2002-06-26",
       "cutoff": "2004-09-30"
     },
-    "officialReference": "https://www.db.yugioh-card.com/yugiohdb/member_deck.action?ope=1&request_locale=en"
+    "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4875&request_locale=en"
   },
   "implementation": {
     "branch": "feat/work-m604-unhappy-maiden-battle-phase-end-20261124",
