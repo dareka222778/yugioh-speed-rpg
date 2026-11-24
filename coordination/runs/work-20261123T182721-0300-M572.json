@@ -3,15 +3,15 @@
   "mission": "M572",
   "owner": "Work principal",
   "priority": "P1 — Magic Drain (59344077) e Cursed Seal of the Forbidden Spell (58851034): duas Counter Traps de negação de ativação de Magias, com custos distintos; descarte opcional do oponente em Magic Drain e descarte obrigatório + bloqueio de nome até o fim do Duelo em Cursed Seal.",
-  "status": "reserved-and-implementing",
+  "status": "implementation-complete-ci-success-released-to-auxiliary",
   "startedAt": "2026-11-23T18:27:21-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-23T22:30:10-03:00",
   "branch": "feat/work-m572-spell-counter-traps-tag-adapter-20261123",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "c89a553dab8220d517bc7d08afe11ca67644ca91",
   "reservationCommitSha": null,
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "b60c05fb498155b6f29cebc96e445ac922eee9d2",
+  "pullRequest": 519,
   "previousCheckpoint": "coordination/runs/work-20261123T175719-0300-M571.json",
   "reservedFiles": [
     "src/spellCounterTrapTagAdapter.ts",
@@ -108,5 +108,26 @@
     "reason": "As funções GitHub disponíveis não expõem consulta de deployments; nenhum merge/deploy será executado."
   },
   "nextTask": "Concluir M572 com testes e CI; revalidar M571/M570; integrar apenas após handoff M61 explícito; avançar para próxima família independente enquanto CI estiver em execução.",
-  "nextWorkWindow": "2026-11-23T22:30:00-03:00"
+  "nextWorkWindow": "2026-11-23T22:30:00-03:00",
+  "ciAtEnd": {
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "success",
+    "extendedSoak": "success",
+    "workflowRuns": [
+      45273275859,
+      45273275864,
+      45273275988,
+      45273276040
+    ],
+    "verifiedAt": "2026-11-23T22:30:10-03:00"
+  },
+  "releasedToAuxiliary": "Monitorar a PR #519, sincronizar sem force e corrigir somente os quatro arquivos M572 se CI futura falhar. Sem merge/deploy; M573 e M61 permanecem reservados.",
+  "duration": {
+    "effectiveWorkMinutes": null,
+    "targetEffectiveMinutes": 60,
+    "ciWaitExcluded": true,
+    "note": "A execução anterior não registrou minutos efetivos; não inferir duração a partir da espera de CI."
+  }
 }
