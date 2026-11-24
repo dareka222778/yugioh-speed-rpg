@@ -1,0 +1,146 @@
+{
+  "format": 1,
+  "runId": "work-20261124T083003-0300-M586",
+  "mission": "M586",
+  "owner": "Work principal",
+  "priority": "P1 — efeitos FLIP de dano: Des Koala causa 400 por carta na mão privada do oponente ativo; Princess of Tsurugi causa 500 por Spell/Trap na backrow e Field Zone da equipe adversária.",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-24T08:30:03-03:00",
+  "endedAt": null,
+  "duration": {
+    "startedAt": "2026-11-24T08:30:03-03:00",
+    "endedAt": null,
+    "elapsedMinutes": 0,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "a78ad8d546b5d1c31eed28f7b60a6e003d522b8f",
+  "branch": "feat/work-m586-flip-burn-tag-adapter-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": null,
+  "branchStartSha": null,
+  "branchHeadSha": null,
+  "coordinationCommitSha": null,
+  "pullRequest": null,
+  "pullRequestUrl": null,
+  "reservedFiles": [
+    "src/flipBurnTagAdapter.ts",
+    "tests/flipBurnTagAdapter.test.cjs",
+    "docs/evidence/m586-flip-burn-tag-adapter.json",
+    ".github/workflows/m586-flip-burn-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para dois efeitos FLIP de dano baseado em estado atual do oponente. Gatilho somente em Flip Summon real; Des Koala conta a mão privada do representante adversário ativo no momento da resolução; Princess conta backrow + Field Zone do time adversário. Preserva controlador atual, proprietário físico, LP compartilhado e zonas.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T08:30:03-03:00",
+    "matchingPRs": 0,
+    "matchingBranches": 0,
+    "activeReservation": false,
+    "otherAgents": [
+      "M581",
+      "M582",
+      "M583",
+      "M584",
+      "M585"
+    ],
+    "overlap": false,
+    "checkedCards": [
+      "Des Koala",
+      "Princess of Tsurugi"
+    ],
+    "excludedScopes": [
+      "M580 Birdface/Keldo",
+      "M581 Equip attack locks",
+      "M582 Mass Driver/Catapult Turtle",
+      "M583 Sarcophagus chain",
+      "M584 The End of Anubis/Kycoo",
+      "M585 Exiled Force/Tribe-Infecting Virus",
+      "M61 central resolver pending handoff"
+    ],
+    "result": "No overlap in card identities or reserved paths; work isolated to four new files."
+  },
+  "cards": [
+    {
+      "id": "69579761",
+      "name": "Des Koala",
+      "konamiDatabaseCid": 5661,
+      "officialText": "FLIP: Inflict 400 damage to your opponent for each card in their hand.",
+      "firstTcgRelease": "2003-10-10",
+      "firstTcgSet": "MFC-077",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5661&ope=2&request_locale=en",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "51371017",
+      "name": "Princess of Tsurugi",
+      "konamiDatabaseCid": 4272,
+      "officialText": "FLIP: Inflict 500 points of damage to your opponent's Life Points for each Spell and Trap Card on your opponent's side of the field.",
+      "firstTcgRelease": "2002-06-26",
+      "firstTcgSet": "MRD-086",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4272&ope=2&request_locale=en",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "design": {
+    "trigger": "Event requires explicit flip-summon, wasFaceDown=true, faceUp=true, current turn and source still face-up in Attack Position when queued; effect flips do not trigger.",
+    "desKoala": "Count only the private hand of the opposing team's currently active seat at resolution; a 7th card is counted and is not discarded until End Phase.",
+    "princessOfTsurugi": "Count every opponent-team Spell/Trap in the three shared backrow zones plus the separate Field Zone; face-down and equipped cards count.",
+    "control": "Capture controller team at trigger creation; physical owner seat remains derived from m0–m3 UID and is never rewritten. If control changes or source leaves after trigger creation, the queued effect still resolves against the opponent of the original controller.",
+    "lp": "Damage applies to shared team LP; zero LP ends the duel using the existing winner/draw semantics."
+  },
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "not-started",
+    "cardBatchFast": "not-started",
+    "milestone1000": "not-started",
+    "engineValidation": "not-started",
+    "customWorkflow": "not-started"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "commandsChanged": false,
+    "centralResolverChanged": false,
+    "allowlistChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "validation": {
+    "status": "not-started",
+    "planned": "Node 22, npm ci, npm run check, npm run build, JSON evidence parse and focused node:test suite."
+  },
+  "nextTask": "Implementar adapter de evento FLIP e dano por equipe; cobrir estado atual no momento da resolução, hand 7 sem descarte antecipado, backrow/Field Zone, face-down, negação, source leave-field, controle versus proprietário físico, LP zero e conservação de UIDs.",
+  "nextWindow": "2026-11-24T13:30:00-03:00",
+  "handoff": "M61 permanece reservado; não editar resolver central, catálogo, allowlist, comandos, banco ou dados dos jogadores. Escopo M586 contém somente quatro caminhos novos."
+}

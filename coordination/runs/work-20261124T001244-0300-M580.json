@@ -4,18 +4,18 @@
   "mission": "M580",
   "owner": "Work principal",
   "priority": "P1 — gatilhos pós-batalha com roteamento por proprietário físico: Birdface pesquisa a mão privada do dono; Keldo embaralha cada alvo no Deck privado do seu dono.",
-  "state": "reserved-and-implementing",
+  "state": "completed-pr-open-draft-ci-green-released-to-auxiliary",
   "startedAt": "2026-11-24T00:12:44-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-24T08:30:03-03:00",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "58e15838acfa2da4dd8149d427c363086c0e6bab",
   "branch": "feat/work-m580-birdface-keldo-battle-destroyed-tag-adapter-20261124",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "58e15838acfa2da4dd8149d427c363086c0e6bab",
   "branchStartSha": "58e15838acfa2da4dd8149d427c363086c0e6bab",
-  "branchHeadSha": "58e15838acfa2da4dd8149d427c363086c0e6bab",
+  "branchHeadSha": "78e61540ff57ec7d976216d56438d09e34d92963",
   "reservationCommitSha": null,
-  "pullRequest": null,
+  "pullRequest": 527,
   "reservedFiles": [
     "src/battleDestroyedSearchTagAdapter.ts",
     "tests/battleDestroyedSearchTagAdapter.test.cjs",
@@ -82,11 +82,17 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
-    "customWorkflow": "pending"
+    "focused": {
+      "status": "success",
+      "sha": "78e61540ff57ec7d976216d56438d09e34d92963",
+      "tests": 16,
+      "passed": 16,
+      "failed": 0
+    },
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "success",
+    "customWorkflow": "success"
   },
   "production": {
     "mergePerformed": false,
@@ -106,17 +112,38 @@
     "deployPerformed": false,
     "liveDiscordValidation": false
   },
-  "nextTask": "Implementar o gate comum de batalha e as duas resoluções: Birdface busca Harpie Lady na Deck privada do proprietário; Keldo embaralha dois alvos da GY adversária de volta aos Decks físicos correspondentes. Cobrir parceiros ativos/inativos, alvos stale, hand 7, RNG e conservação de UIDs.",
-  "nextWindow": "2026-11-24T03:30:00-03:00",
+  "nextTask": "Auxiliar pode monitorar/corrigir somente os quatro arquivos M580 na branch própria; merge permanece condicionado a revisão/autorização do proprietário e integração M61.",
+  "nextWindow": "2026-11-24T13:30:00-03:00",
   "duration": {
     "startedAt": "2026-11-24T00:12:44-03:00",
-    "endedAt": null,
-    "elapsedMinutes": 0,
-    "effectiveWorkMinutes": 0,
+    "endedAt": "2026-11-24T08:30:03-03:00",
+    "elapsedMinutes": 497,
+    "effectiveWorkMinutes": null,
     "targetEffectiveMinutes": 60,
     "targetMet": false,
-    "ciWaitExcluded": true
+    "ciWaitExcluded": true,
+    "note": "Tempo efetivo histórico não pôde ser reconstruído; a espera de CI não foi contabilizada."
   },
-  "status": "reserved-and-implementing",
-  "lastActivityAt": "2026-11-24T00:12:44-03:00"
+  "status": "completed-pr-open-draft-ci-green-released-to-auxiliary",
+  "lastActivityAt": "2026-11-24T08:30:03-03:00",
+  "latestBranchHeadSha": "78e61540ff57ec7d976216d56438d09e34d92963",
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/527",
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "testCases": 16,
+  "blocksCompleted": [
+    "PR #527 conferida no GitHub: aberta, draft, mergeable; 16/16 testes focados e Engine Validation, Card Batch Fast e Milestone 1000 concluídos com sucesso.",
+    "Reserva própria M580 liberada ao auxiliar; nenhum merge, deploy, alteração de catálogo ou concessão de inventário."
+  ],
+  "scopeReleasedToAuxiliary": [
+    "src/battleDestroyedSearchTagAdapter.ts",
+    "tests/battleDestroyedSearchTagAdapter.test.cjs",
+    "docs/evidence/m580-battle-destroyed-search-tag-adapter.json",
+    ".github/workflows/m580-battle-destroyed-search-tag-adapter.yml"
+  ],
+  "handoff": "Reserva própria liberada ao auxiliar após CI verde; M61 permanece aguardando transferência explícita para qualquer integração central."
 }
