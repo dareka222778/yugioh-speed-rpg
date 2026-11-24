@@ -1,0 +1,39 @@
+name: M584 GY-control TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m584-gy-control-tag-adapter-20261124
+    paths:
+      - 'src/gyControlTagAdapter.ts'
+      - 'tests/gyControlTagAdapter.test.cjs'
+      - 'docs/evidence/m584-gy-control-tag-adapter.json'
+      - '.github/workflows/m584-gy-control-tag-adapter.yml'
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+      - 'feat/work-*'
+    paths:
+      - 'src/gyControlTagAdapter.ts'
+      - 'tests/gyControlTagAdapter.test.cjs'
+      - 'docs/evidence/m584-gy-control-tag-adapter.json'
+      - '.github/workflows/m584-gy-control-tag-adapter.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gy-control-tag-adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate factual evidence
+        run: node -e "const e=require('./docs/evidence/m584-gy-control-tag-adapter.json'); if(e.mission!=='M584'||e.adapterBehaviorVerifiedCards!==2||e.behaviorCertifiedCards!==0||e.automaticCertifications!==0||e.inventoryGranted!==0) process.exit(1)"
+      - name: Run isolated behavioral regressions
+        run: node scripts/run-tests-isolated.cjs tests/gyControlTagAdapter.test.cjs
