@@ -1,0 +1,64 @@
+{
+  "mission": "M579",
+  "title": "Banishment routing adapter — Banisher of the Light + Bazoo the Soul-Eater",
+  "cards": [
+    {
+      "id": "61528025",
+      "name": "Banisher of the Light",
+      "konamiDatabaseCid": 4914,
+      "firstTcgRelease": "2002-09-16",
+      "firstTcgSet": "MRL-078",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4914&ope=2&request_locale=en"
+    },
+    {
+      "id": "40133511",
+      "name": "Bazoo the Soul-Eater",
+      "konamiDatabaseCid": 5250,
+      "firstTcgRelease": "2003-03-01",
+      "firstTcgSet": "LON-064",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5250&ope=2&request_locale=en"
+    }
+  ],
+  "adapterBehaviorVerifiedCards": 2,
+  "behaviorCertifiedCards": 0,
+  "newEngineV9Certifications": 0,
+  "automaticCertifications": 0,
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "identityBlocked": 27
+  },
+  "testCases": 14,
+  "testCoverage": [
+    "Banisher replacement is global across both teams and uses physical owner seat encoded in UID",
+    "face-down Banisher does not replace a GY destination",
+    "tokens cease to exist rather than entering GY or banished",
+    "Bazoo can banish 1–3 monsters from its controller team's shared GY, including partner-owned cards",
+    "opponent GY is excluded; stale, duplicate, zero, and four-card selections are rejected",
+    "Bazoo once-per-turn and Main Phase/open-chain timing",
+    "temporary ATK bonus +300 per banished monster persists through the opponent turn and expires afterward",
+    "negated resolution and source leaving field do not grant ATK",
+    "physical inventory, hands, deck limits, zones and player data remain conserved"
+  ],
+  "fixtureStrategy": "Real card IDs and official sources are fixed in production defaults. Tests inject two already-playable Normal Monster IDs only as temporary fixture aliases because these candidates are not yet in the engine-v9 playable catalog. Fixture aliases do not change the source IDs, catalog, certification count, allowlist, or player inventory.",
+  "rules": {
+    "mainDeck": "20–30 per physical seat",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5
+  },
+  "limitations": [
+    "M61 still owns the protected resolver/catalog/certification files; no integration into the live effect resolver or commands is attempted.",
+    "Banisher is verified as a destination decision helper; the global replacement hook still requires resolver handoff.",
+    "Live Discord, production deployment, merge and backup restoration were not exercised."
+  ],
+  "inventoryGranted": 0,
+  "playerDataChanged": false,
+  "mergePerformed": false,
+  "deployPerformed": false,
+  "liveDiscordValidation": false
+}
