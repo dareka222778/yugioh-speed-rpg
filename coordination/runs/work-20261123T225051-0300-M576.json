@@ -114,8 +114,10 @@
   "duration": {
     "startedAt": "2026-11-23T22:50:51-03:00",
     "endedAt": null,
-    "effectiveWorkMinutes": 0,
+    "effectiveWorkMinutes": 11,
     "targetEffectiveMinutes": 60,
-    "ciWaitExcluded": true
-  }
+    "ciWaitExcluded": true,
+    "note": "11 minutos efetivos no subbloco M576; espera de CI excluída. Sessão principal segue ativa."
+  },
+  "lastActivityAt": "2026-11-23T23:01:49-03:00"
 }

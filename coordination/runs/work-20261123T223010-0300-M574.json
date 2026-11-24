@@ -122,10 +122,10 @@
   "duration": {
     "startedAt": "2026-11-23T22:30:10-03:00",
     "endedAt": null,
-    "effectiveWorkMinutes": 21,
+    "effectiveWorkMinutes": 31,
     "targetEffectiveMinutes": 60,
     "ciWaitExcluded": true,
-    "note": "21 minutos efetivos acumulados no ciclo; espera ociosa de CI excluída. Meta de 60 minutos ainda pendente."
+    "note": "31 minutos efetivos acumulados no ciclo; CI não contabilizada. Meta de 60 minutos ainda pendente."
   },
   "implementationHeadSha": "2578811c4e2c3ee81c6c4f35e23b450ef51e32fa",
   "commits": [
@@ -165,5 +165,5 @@
     }
   ],
   "status": "pr-open-draft-followup-ci-in-progress",
-  "lastActivityAt": "2026-11-23T22:50:51-03:00"
+  "lastActivityAt": "2026-11-23T23:01:49-03:00"
 }
