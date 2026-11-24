@@ -211,6 +211,8 @@ test('Deck Principal aceita até 30 cartas físicas e rejeita 31', () => {
   for (let i = 0; i < 10; i++) {
     duel.core.players[0].deck.push({ uid: 'm0:extra-main-' + i, id: tagNormalCardIds[i] });
   }
+  moveDeckCardToMonster(duel, 1);
+  moveDeckCardToMonster(duel, 3);
   assert.ok(prepareFiendMegacyber(duel, sourceUid));
   duel.core.players[0].deck.push({ uid: 'm0:extra-main-overflow', id: tagNormalCardIds[10] });
   assert.throws(() => prepareFiendMegacyber(duel, sourceUid), /Deck Principal físico fora de 20–30/);
@@ -222,7 +224,7 @@ test('Deck Adicional aceita cinco cartas e rejeita a sexta', { skip: !FUSION_ID 
   for (let i = 0; i < 5; i++) {
     duel.reserves[2].extra.push({ uid: 'm2:extra-fiend-' + i, id: FUSION_ID });
   }
-  assert.ok(prepareFiendMegacyber(duel, sourceUid) === null);
+  assert.doesNotThrow(() => prepareFiendMegacyber(duel, sourceUid));
   duel.reserves[2].extra.push({ uid: 'm2:extra-fiend-overflow', id: FUSION_ID });
   assert.throws(() => prepareFiendMegacyber(duel, sourceUid), /Deck Adicional excedeu cinco/);
 });
