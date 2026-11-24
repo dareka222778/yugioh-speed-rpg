@@ -4,7 +4,7 @@
   "mission": "M600",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "implementation-committed-awaiting-ci",
+  "status": "awaiting-ci-on-consolidated-pr",
   "startedAt": "2026-11-24T19:03:18-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -13,8 +13,13 @@
   "baseBranch": "feat/work-m599-standby-burn-tag-adapters-20261124",
   "baseSha": "d236204915998b42d8d479e682926daf65e74864",
   "branch": "feat/work-m600-lp-recovery-tag-adapters-20261124",
-  "branchHeadSha": "6fe3ffc692165a3a163092db139e5fbcc45fe7b1",
-  "pullRequest": null,
+  "branchHeadSha": "d7cfc827e9d88573bdf690eb5baefa07fc690a43",
+  "pullRequest": {
+    "number": 543,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/543",
+    "state": "open",
+    "draft": true
+  },
   "reservedFiles": [
     "src/lpRecoveryTagAdapter.ts",
     "tests/lpRecoveryTagAdapter.test.cjs",
@@ -86,10 +91,10 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending"
+    "focused": "not-yet-observed",
+    "cardBatchFast": "not-yet-observed",
+    "milestone1000": "not-yet-observed",
+    "engineValidation": "not-yet-observed"
   },
   "production": {
     "resolverIntegration": false,
@@ -103,8 +108,9 @@
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Abrir PR consolidada M599/M600 para que os dois workflows executem sobre o mesmo HEAD; corrigir CI; depois preparar a próxima família independente.",
+  "nextTask": "Aguardar os workflows M599/M600 no HEAD consolidado, corrigir falhas e então avançar outra família independente.",
   "nextWindow": "2026-11-24T23:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
-  "pullRequestUrl": null
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/543",
+  "lastActivityAt": "2026-11-24T19:11:34-03:00"
 }
