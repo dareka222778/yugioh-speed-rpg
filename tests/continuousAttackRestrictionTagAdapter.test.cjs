@@ -164,6 +164,21 @@ test('attacks recorded before The Dark Door resolves still count when it is acti
   assert.equal(darkDoorAllowsAttack(session,second),false,'the restriction does not authorize a third monster');
 });
 
+test('a face-down The Dark Door does not restrict until it is revealed',()=>{
+  const state=create(0,'dark-door-face-down');
+  const source=addSource(state,0,0,THE_DARK_DOOR_ID,{faceUp:false});
+  const first=takeMonster(state,0,NORMALS[0]);
+  const second=takeMonster(state,2,NORMALS[1]);
+  pendingAttack(state,0,first);
+  let session=createDarkDoorBattlePhaseSession(state,0,'turn-1-team-0-face-down');
+  session=recordDarkDoorAttack(session,first);
+  assert.equal(darkDoorActive(session.duel),false);
+  assert.equal(darkDoorAllowsAttack(session,second),true);
+  session.duel.core.players[0].backrow.find(card=>card.uid===source).faceUp=true;
+  assert.equal(darkDoorActive(session.duel),true);
+  assert.equal(darkDoorAllowsAttack(session,second),false,'the earlier attacker remains the one permitted in this phase');
+});
+
 test('Level Limit - Area B changes face-up Level 4+ monsters on both teams only',()=>{
   const state=create(0,'area-b-all-teams');
   addSource(state,0,0,LEVEL_LIMIT_AREA_B_ID);
@@ -199,9 +214,13 @@ test('Level Limit - Area B applies to a newly revealed monster and stops after a
   const applied=enforceLevelLimitAreaB(state);
   assert.deepEqual(applied.changedUids,[hidden]);
   assert.equal(applied.duel.core.players[1].monsters.find(m=>m.uid===hidden).position,'def');
+  const removedA=applied.duel.core.players[0].backrow.filter(c=>c.uid===sourceA);
   applied.duel.core.players[0].backrow=applied.duel.core.players[0].backrow.filter(c=>c.uid!==sourceA);
+  applied.duel.core.players[0].grave.push(...removedA);
   assert.equal(levelLimitAreaBActive(applied.duel),true,'the second copy keeps the effect active');
+  const removedB=applied.duel.core.players[1].backrow.filter(c=>c.uid===sourceB);
   applied.duel.core.players[1].backrow=applied.duel.core.players[1].backrow.filter(c=>c.uid!==sourceB);
+  applied.duel.core.players[1].grave.push(...removedB);
   assert.equal(levelLimitAreaBActive(applied.duel),false);
   const monster=applied.duel.core.players[1].monsters.find(m=>m.uid===hidden);
   monster.position='atk';

@@ -43,11 +43,13 @@
     "Level Limit - Area B affects face-up Level 4+ monsters on both teams",
     "face-down monsters and Level 3 monsters are not changed",
     "multiple Continuous Spell copies keep the effect active until the last copy leaves",
-    "no automatic inventory grants or catalog admission"
+    "no automatic inventory grants or catalog admission",
+    "The Dark Door face-down não aplica restrição até ser revelada",
+    "remoção de Continuous Spell envia UID físico ao Cemitério, preservando inventário"
   ],
   "tests": {
     "focusedFile": "tests/continuousAttackRestrictionTagAdapter.test.cjs",
-    "caseCount": 8,
+    "caseCount": 9,
     "behaviorCertifiedCards": 0
   },
   "certification": {
