@@ -1,0 +1,38 @@
+name: M591 Backfire and Balloon Lizard TagDuel adapters
+on:
+  push:
+    branches:
+      - feat/work-m591-backfire-balloon-lizard-lp-20261124
+    paths:
+      - 'src/triggeredLpTagAdapter.ts'
+      - 'tests/triggeredLpTagAdapter.test.cjs'
+      - 'docs/evidence/m591-triggered-lp-tag-adapter.json'
+      - '.github/workflows/m591-triggered-lp-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/triggeredLpTagAdapter.ts'
+      - 'tests/triggeredLpTagAdapter.test.cjs'
+      - 'docs/evidence/m591-triggered-lp-tag-adapter.json'
+      - '.github/workflows/m591-triggered-lp-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  triggered-lp-tag-adapters:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m591-triggered-lp-tag-adapter.json', 'utf8'))"
+      - name: Run Backfire and Balloon Lizard adapter tests
+        run: node --test tests/triggeredLpTagAdapter.test.cjs
