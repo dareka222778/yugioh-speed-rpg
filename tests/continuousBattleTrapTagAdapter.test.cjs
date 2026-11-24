@@ -7,7 +7,7 @@ const {getPlayableCard}=require('../dist/effectRegistry');
 const {rulesFor}=require('../dist/rulesProfile');
 const {
   MIRROR_WALL_ID,FAIRY_BOX_ID,
-  createContinuousBattleTrapSession,mirrorWallEffectiveAtk,
+  createContinuousBattleTrapSession,mirrorWallEffectiveAtk,recordMirrorWallAttack,resolveMirrorWallAttack,
   fairyBoxAttackActions,fairyBoxEffectiveAtk,resolveFairyBoxAttack,
   resolveContinuousTrapUpkeep
 }=require('../dist/continuousBattleTrapTagAdapter');
@@ -93,39 +93,67 @@ test('M577 cards remain outside the catalog and released-card allowlist until ce
   assert.equal(getPlayableCard(FAIRY_BOX_ID),undefined);
 });
 
-test('Mirror Wall halves only the opponent attacking monster and does not mutate it',()=>{
+test('Mirror Wall halves the opponent attacker and keeps the modifier while the source remains face-up',()=>{
   const state=create('mirror-wall');
   addSource(state,0,0,MIRROR_WALL_ID);
   const attacker=takeMonster(state,1);
   pendingAttack(state,1,attacker);
-  const monster=state.core.players[1].monsters.find(m=>m.uid===attacker);
-  const before=atk(monster,state.core);
-  const effective=mirrorWallEffectiveAtk(state);
-  assert.equal(effective,Math.floor(before/2));
+  let session=createContinuousBattleTrapSession(state);
+  session=recordMirrorWallAttack(session);
+  const monster=session.duel.core.players[1].monsters.find(m=>m.uid===attacker);
+  const before=atk(monster,session.duel.core);
+  assert.equal(mirrorWallEffectiveAtk(session,attacker),Math.floor(before/2));
   assert.equal(monster.atkBoost,0);
   assert.equal(monster.position,'atk');
-  assertRules(state);
+  session.duel.core.phase='main';
+  session.duel.core.pending={kind:'none'};
+  assert.equal(mirrorWallEffectiveAtk(session,attacker),Math.floor(before/2),'the halving persists after the attack window');
+  assertRules(session.duel);
 });
 
-test('Mirror Wall ignores face-down copies and the controller own attacking monsters',()=>{
+test('Mirror Wall can be flipped in response to an attack and ignores the controller own attacker',()=>{
   const hidden=create('mirror-wall-face-down');
-  addSource(hidden,0,0,MIRROR_WALL_ID,{faceUp:false});
+  const source=addSource(hidden,0,0,MIRROR_WALL_ID,{faceUp:false,setTurn:0});
   const opponentAttacker=takeMonster(hidden,1);
-  pendingAttack(hidden,1,opponentAttacker);
-  const opponentMonster=hidden.core.players[1].monsters.find(m=>m.uid===opponentAttacker);
-  assert.equal(mirrorWallEffectiveAtk(hidden),atk(opponentMonster,hidden.core));
+  pendingAttack(hidden,1,opponentAttacker,{damageStep:true});
+  let session=createContinuousBattleTrapSession(hidden);
+  session=resolveMirrorWallAttack(session,source);
+  const opponentMonster=session.duel.core.players[1].monsters.find(m=>m.uid===opponentAttacker);
+  assert.equal(opponentMonster.faceUp,true);
+  assert.equal(mirrorWallEffectiveAtk(session,opponentAttacker),Math.floor(atk(opponentMonster,session.duel.core)/2));
 
   const own=create('mirror-wall-own');
   addSource(own,0,0,MIRROR_WALL_ID);
   const ownAttacker=takeMonster(own,0);
   pendingAttack(own,0,ownAttacker);
+  const ownSession=createContinuousBattleTrapSession(own);
   const ownMonster=own.core.players[0].monsters.find(m=>m.uid===ownAttacker);
-  assert.equal(mirrorWallEffectiveAtk(own),atk(ownMonster,own.core));
+  assert.equal(mirrorWallEffectiveAtk(ownSession,ownAttacker),atk(ownMonster,own.core));
 });
 
+test('two Mirror Wall copies halve once each and leaving copies restore their individual modifiers',()=>{
+  const state=create('mirror-wall-two-copies');
+  const sourceA=addSource(state,0,0,MIRROR_WALL_ID);
+  const sourceB=addSource(state,0,2,MIRROR_WALL_ID);
+  const attacker=takeMonster(state,1);
+  pendingAttack(state,1,attacker);
+  let session=createContinuousBattleTrapSession(state);
+  session=recordMirrorWallAttack(session);
+  const monster=session.duel.core.players[1].monsters.find(m=>m.uid===attacker);
+  const full=atk(monster,session.duel.core);
+  assert.equal(mirrorWallEffectiveAtk(session,attacker),Math.floor(Math.floor(full/2)/2));
+  const removedA=session.duel.core.players[0].backrow.filter(c=>c.uid===sourceA);
+  session.duel.core.players[0].backrow=session.duel.core.players[0].backrow.filter(c=>c.uid!==sourceA);
+  session.duel.core.players[0].grave.push(...removedA);
+  assert.equal(mirrorWallEffectiveAtk(session,attacker),Math.floor(full/2));
+  const removedB=session.duel.core.players[0].backrow.filter(c=>c.uid===sourceB);
+  session.duel.core.players[0].backrow=session.duel.core.players[0].backrow.filter(c=>c.uid!==sourceB);
+  session.duel.core.players[0].grave.push(...removedB);
+  assert.equal(mirrorWallEffectiveAtk(session,attacker),full);
+});
 test('Fairy Box uses injected coin results and sets ATK to zero only for the named Battle Phase',()=>{
   const state=create('fairy-box-correct');
-  const source=addSource(state,0,0,FAIRY_BOX_ID);
+  const source=addSource(state,0,0,FAIRY_BOX_ID,{faceUp:false,setTurn:0});
   const attacker=takeMonster(state,1);
   pendingAttack(state,1,attacker);
   const session=createContinuousBattleTrapSession(state);

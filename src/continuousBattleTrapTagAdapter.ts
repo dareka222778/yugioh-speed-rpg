@@ -15,6 +15,7 @@ export type ContinuousBattleTrapSession={
   processedFairyBoxIds:string[];
   processedUpkeepIds:string[];
   zeroedByPhase:Record<string,string[]>;
+  mirrorWallAffectedBySource:Record<string,string[]>;
 };
 export type FairyBoxAttackResult={
   sourceUid:string;
@@ -143,19 +144,84 @@ function maintenanceCost(cardId:string):number{
 
 export function createContinuousBattleTrapSession(duel:TagDuel):ContinuousBattleTrapSession{
   assertPhysicalRules(duel);
-  return {duel:structuredClone(duel),processedFairyBoxIds:[],processedUpkeepIds:[],zeroedByPhase:{}};
+  return {duel:structuredClone(duel),processedFairyBoxIds:[],processedUpkeepIds:[],zeroedByPhase:{},mirrorWallAffectedBySource:{}};
 }
 
-/** Mirror Wall's continuous ATK modifier applies to the current opponent attacker.
- * Each face-up copy applies one halving; the monster object is never mutated. */
-export function mirrorWallEffectiveAtk(duel:TagDuel):number|null{
-  assertPhysicalRules(duel);
-  const attack=currentAttack(duel,false);
-  if(!attack)return null;
+function mirrorWallSourceKey(source:{uid:string;setTurn:number}):string{
+  return source.uid+':'+source.setTurn;
+}
+function mirrorWallMonsterKey(monster:Monster):string{
+  return monster.uid+':'+monster.entered;
+}
+
+/** Record every face-up Mirror Wall that affects the current opponent attacker.
+ * Call this on attack declaration and when a face-down Mirror Wall resolves. */
+export function recordMirrorWallAttack(input:ContinuousBattleTrapSession):ContinuousBattleTrapSession{
+  assertPhysicalRules(input.duel);
+  const attack=currentAttack(input.duel,false);
+  if(!attack)throw new Error('Não existe ataque atual para Mirror Wall.');
   const controller=(1-attack.actor) as Team;
-  const copies=duel.core.players[controller].backrow.filter(card=>card.id===MIRROR_WALL_ID&&card.faceUp).length;
-  let value=atk(attack.monster,duel.core);
-  for(let copy=0;copy<copies;copy++)value=Math.floor(value/2);
+  const sources=input.duel.core.players[controller].backrow.filter(card=>card.id===MIRROR_WALL_ID&&card.faceUp);
+  const next=structuredClone(input),monsterKey=mirrorWallMonsterKey(attack.monster);
+  for(const source of sources){
+    const key=mirrorWallSourceKey(source),affected=next.mirrorWallAffectedBySource[key]??[];
+    if(!affected.includes(monsterKey))affected.push(monsterKey);
+    next.mirrorWallAffectedBySource[key]=affected;
+  }
+  return next;
+}
+
+/** Activates a Set Mirror Wall in response to the current attack (including
+ * before damage calculation), then records its one-time halving for this monster. */
+export function resolveMirrorWallAttack(
+  input:ContinuousBattleTrapSession,
+  sourceUid:string
+):ContinuousBattleTrapSession{
+  assertPhysicalRules(input.duel);
+  const attack=currentAttack(input.duel,false);
+  if(!attack)throw new Error('Não existe ataque atual para ativar Mirror Wall.');
+  const controller=(1-attack.actor) as Team;
+  const source=input.duel.core.players[controller].backrow.find(card=>card.uid===sourceUid);
+  if(!source||source.id!==MIRROR_WALL_ID||source.setTurn>=input.duel.core.turn){
+    throw new Error('Mirror Wall não pode ser ativada nesta janela.');
+  }
+  const next=structuredClone(input);
+  const nextSource=next.duel.core.players[controller].backrow.find(card=>card.uid===sourceUid);
+  if(!nextSource)throw new Error('Mirror Wall saiu da zona antes da resolução.');
+  nextSource.faceUp=true;
+  const key=mirrorWallSourceKey(nextSource),monsterKey=mirrorWallMonsterKey(attack.monster);
+  const affected=next.mirrorWallAffectedBySource[key]??[];
+  if(!affected.includes(monsterKey))affected.push(monsterKey);
+  next.mirrorWallAffectedBySource[key]=affected;
+  return next;
+}
+
+/** ATK remains halved while each applying copy remains face-up; each copy
+ * applies once per monster instance, so two copies produce one-quarter ATK. */
+export function mirrorWallEffectiveAtk(
+  session:ContinuousBattleTrapSession,
+  attackerUid?:string
+):number|null{
+  assertPhysicalRules(session.duel);
+  let attacker:Monster|undefined;
+  let attackerTeam:Team|undefined;
+  if(attackerUid){
+    for(const team of [0,1] as const){
+      const found=monsterOnField(session.duel,team,attackerUid);
+      if(found){attacker=found;attackerTeam=team;break;}
+    }
+  }else{
+    const attack=currentAttack(session.duel,false);
+    if(attack){attacker=attack.monster;attackerTeam=attack.actor;}
+  }
+  if(!attacker||attackerTeam===undefined)return null;
+  const controller=(1-attackerTeam) as Team,monsterKey=mirrorWallMonsterKey(attacker);
+  let value=atk(attacker,session.duel.core);
+  for(const source of session.duel.core.players[controller].backrow){
+    if(source.id!==MIRROR_WALL_ID||!source.faceUp)continue;
+    const key=mirrorWallSourceKey(source);
+    if((session.mirrorWallAffectedBySource[key]??[]).includes(monsterKey))value=Math.floor(value/2);
+  }
   return value;
 }
 
@@ -167,7 +233,7 @@ export function fairyBoxAttackActions(duel:TagDuel):string[]{
   const controller=(1-attack.actor) as Team;
   if(duel.core.priority!==controller)return [];
   return duel.core.players[controller].backrow
-    .filter(card=>card.id===FAIRY_BOX_ID&&card.faceUp&&card.setTurn<duel.core.turn)
+    .filter(card=>card.id===FAIRY_BOX_ID&&card.setTurn<duel.core.turn)
     .map(card=>card.uid);
 }
 export function fairyBoxEffectiveAtk(
@@ -178,7 +244,7 @@ export function fairyBoxEffectiveAtk(
   const attack=currentAttack(session.duel,false);
   if(!attack)return null;
   if((session.zeroedByPhase[phaseId]??[]).includes(attack.uid))return 0;
-  return mirrorWallEffectiveAtk(session.duel);
+  return mirrorWallEffectiveAtk(session,attack.uid);
 }
 export function resolveFairyBoxAttack(
   input:ContinuousBattleTrapSession,
@@ -196,7 +262,11 @@ export function resolveFairyBoxAttack(
   }
   const eventId=phaseId+':'+sourceUid+':'+attack.uid;
   if(input.processedFairyBoxIds.includes(eventId))throw new Error('Resolução de Fairy Box duplicada nesta Battle Phase.');
-  const next=structuredClone(input),attackerAtkBefore=mirrorWallEffectiveAtk(next.duel);
+  const next=structuredClone(input),attackerAtkBefore=mirrorWallEffectiveAtk(next,attack.uid);
+  const controller=(1-attack.actor) as Team;
+  const source=next.duel.core.players[controller].backrow.find(card=>card.uid===sourceUid);
+  if(!source)throw new Error('Fairy Box saiu da zona antes da resolução.');
+  source.faceUp=true;
   const correct=call===toss;
   if(correct){
     const affected=next.zeroedByPhase[phaseId]??[];
