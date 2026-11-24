@@ -366,8 +366,8 @@ test('respeita 3+3 zonas, Main Deck 20–30 e Extra Deck máximo 5', { skip: FUS
   const targetUid = addTarget(duel, 1, 1);
   for (let i = 0; i < 2; i++) addMonsterFromSeat(duel, i % 2, i % 2);
   for (let i = 0; i < 2; i++) addMonsterFromSeat(duel, (i % 2) + 2, i % 2);
-  for (let i = 0; i < 3; i++) addBackrowFromSeat(duel, i % 2, i % 2);
-  for (let i = 0; i < 3; i++) addBackrowFromSeat(duel, (i % 2) + 2, i % 2);
+  for (let i = 0; i < 3; i++) addBackrowFromSeat(duel, 0, 0);
+  for (let i = 0; i < 3; i++) addBackrowFromSeat(duel, 1, 1);
   const event = eventFor(duel, sourceUid, DREAM_FIXTURE_ID, 0);
   assert.ok(adapter.plan(duel, event, targetUid));
 
