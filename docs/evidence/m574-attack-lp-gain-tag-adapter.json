@@ -1,0 +1,84 @@
+{
+  "mission": "M574",
+  "title": "Attack-window LP recovery TagDuel adapter",
+  "cards": [
+    {
+      "id": "43250041",
+      "name": "Draining Shield",
+      "konamiDatabaseCid": 5994,
+      "type": "Normal Trap",
+      "officialText": "If an opponent's monster declares an attack: Target the attacking monster; negate that attack, and if you do, gain LP equal to that target's ATK.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5994&ope=2&request_locale=en",
+      "firstTcgRelease": "2004-06-01",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    },
+    {
+      "id": "96355986",
+      "name": "Enchanted Javelin",
+      "konamiDatabaseCid": 4992,
+      "type": "Normal Trap",
+      "officialText": "Increase your Life Points by the ATK of 1 attacking monster.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4992&ope=2&request_locale=en",
+      "firstTcgRelease": "2002-10-20",
+      "historicalEligibility": "eligible-before-2004-09-30"
+    }
+  ],
+  "behavior": {
+    "sharedWindow": "Response to attack declaration, before the Damage Step; source must be Set since a prior turn and controller must hold response priority.",
+    "drainingShield": {
+      "targetsAttackerAtActivation": true,
+      "requiresOpponentAttack": true,
+      "negatesAttack": true,
+      "lpGain": "Current ATK of the still-valid targeted attacker, only if the attack is negated."
+    },
+    "enchantedJavelin": {
+      "targetsAtActivation": false,
+      "requiresOpponentAttack": false,
+      "negatesAttack": false,
+      "lpGain": "Current ATK of one monster that is still attacking when the Trap resolves."
+    },
+    "chainRules": "Both are Normal Traps; they cannot be chained over a Spell Speed 3 Counter Trap. An already-cancelled attack cannot generate recovery.",
+    "ownership": "LP are added to the shared team controlled by the Trap activator. The Trap's physical UID and owner seat are retained; after resolution it moves to the physical owner's team Graveyard.",
+    "downstream": "Emit a unique m574:<activationId> Fire Princess-compatible event only when a positive amount of LP is actually gained; zero-ATK resolutions do not emit a gain event."
+  },
+  "invariantCoverage": [
+    "TagDuel classic 2v2 physical UID conservation",
+    "private hands unchanged",
+    "main deck 20–30 per physical seat",
+    "hand limit 6 checked at End Phase by the rules profile",
+    "three shared Monster Zones and three shared Spell/Trap Zones per team",
+    "separate Field Zone and Extra Deck maximum five",
+    "current ATK at resolution, not activation-time snapshot",
+    "physical owner seat separated from current team controller",
+    "idempotent activation IDs and LIFO chain resolution",
+    "safe integer LP overflow and non-negative LP validation",
+    "battle-target redirection does not change the identity of the pending attack when attacker UID and attack counters remain stable",
+    "zero-ATK resolution does not emit or record a Fire Princess LP-gain event"
+  ],
+  "tests": {
+    "focusedFile": "tests/attackLpGainTagAdapter.test.cjs",
+    "caseCount": 26,
+    "behaviorCertifiedCards": 0
+  },
+  "certification": {
+    "sharedCertifiedAtStart": 969,
+    "milestoneTarget": 1000,
+    "remainingAtStart": 31,
+    "newCertifications": 0,
+    "automaticCertification": false,
+    "status": "not-certified",
+    "reason": "M574 is an isolated behavior adapter; central resolver, card metadata, certification fingerprints and released-card allowlist were not changed."
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "cardCertificationsChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "playerDataChanged": false,
+    "persistentDatabaseChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  }
+}
