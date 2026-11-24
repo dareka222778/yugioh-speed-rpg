@@ -4,16 +4,16 @@
   "mission": "M601",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "count-source-reconciled; focused-CI-pending",
+  "status": "CI all-green; PR draft open; scope released to auxiliary",
   "startedAt": "2026-11-24T19:19:43-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-24T19:44:12-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "bbb03f6416d08b515adbad1940d094b9a9bed497",
   "branch": "feat/work-m601-certification-count-reconciliation-20261124",
   "baseSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
-  "branchHeadSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
-  "pullRequest": null,
+  "branchHeadSha": "81d3b1131abf179b1a4872c119c6ecc4053ea371",
+  "pullRequest": 544,
   "reservedFiles": [
     "scripts/card-certification-audit.cjs",
     "tests/cardCertificationCountAudit.test.cjs",
@@ -53,12 +53,17 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 15,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Aguardar a CI focada de M601; depois avançar para uma nova família de comportamento independente, sem tocar M598/M599/M600 ou M61.",
+  "nextTask": "Aguardar revisão do proprietário; sem merge/deploy.",
   "nextWindow": "2026-11-24T23:30:00-03:00",
-  "scopeReleasedToAuxiliary": [],
-  "lastActivityAt": "2026-11-24T19:27:18-03:00"
+  "scopeReleasedToAuxiliary": [
+    "scripts/card-certification-audit.cjs",
+    "tests/cardCertificationCountAudit.test.cjs",
+    "docs/evidence/m601-certification-count-reconciliation.json",
+    ".github/workflows/m601-certification-count-reconciliation.yml"
+  ],
+  "lastActivityAt": "2026-11-24T19:44:12-03:00"
 }

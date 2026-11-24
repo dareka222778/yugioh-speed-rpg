@@ -4,16 +4,16 @@
   "mission": "M602",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved; implementation in progress",
+  "status": "PR open; focused CI retry in progress; scope released to auxiliary",
   "startedAt": "2026-11-24T19:32:08-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-24T19:44:12-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "f5dc1a17a5f1ba56d0b82d74ac1f1a6e61967e35",
   "branch": "feat/work-m602-fiend-megacyber-conditional-summon-20261124",
   "baseSha": "f5dc1a17a5f1ba56d0b82d74ac1f1a6e61967e35",
-  "branchHeadSha": "f5dc1a17a5f1ba56d0b82d74ac1f1a6e61967e35",
-  "pullRequest": null,
+  "branchHeadSha": "dce657bf6c4f8314ed167575d4009aa3cfcc228c",
+  "pullRequest": 545,
   "reservedFiles": [
     "src/fiendMegacyberTagAdapter.ts",
     "tests/fiendMegacyberTagAdapter.test.cjs",
@@ -70,11 +70,17 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 12,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar adapter e testes focados; publicar PR draft e observar CI.",
+  "nextTask": "Monitorar a nova execução focada; se verde, solicitar integração do registro e resolver apenas após handoff M61.",
   "nextWindow": "2026-11-24T23:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [
+    "src/fiendMegacyberTagAdapter.ts",
+    "tests/fiendMegacyberTagAdapter.test.cjs",
+    "docs/evidence/m602-fiend-megacyber-tag-adapter.json",
+    ".github/workflows/m602-fiend-megacyber-tag-adapter.yml"
+  ],
+  "lastActivityAt": "2026-11-24T19:44:12-03:00"
 }

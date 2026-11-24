@@ -1,0 +1,80 @@
+{
+  "format": 1,
+  "runId": "work-20261124T194412-0300-M604",
+  "mission": "M604",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved; implementation in progress",
+  "startedAt": "2026-11-24T19:44:12-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "5d18ab35664ec27d0a4094d0ed94e0804b47396b",
+  "branch": "feat/work-m604-unhappy-maiden-battle-phase-end-20261124",
+  "baseSha": "5d18ab35664ec27d0a4094d0ed94e0804b47396b",
+  "branchHeadSha": "5d18ab35664ec27d0a4094d0ed94e0804b47396b",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/unhappyMaidenBattlePhaseEndTagAdapter.ts",
+    "tests/unhappyMaidenBattlePhaseEndTagAdapter.test.cjs",
+    "docs/evidence/m604-unhappy-maiden-battle-phase-end.json",
+    ".github/workflows/m604-unhappy-maiden-battle-phase-end.yml"
+  ],
+  "scope": "Implementar adapter TagDuel puro para The Unhappy Maiden: trigger obrigatório quando enviada ao Cemitério como resultado de batalha; pedir encerramento da Battle Phase somente após a resolução da Chain. Validar assento/proprietário físico, GY do dono, equipe cuja Battle Phase está ativa, Damage Step concluído, negação, idempotência e conservação de inventário. Não integrar resolver central nem certificar sem handoff M61.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T19:44:12-03:00",
+    "sharedHead": "5d18ab35664ec27d0a4094d0ed94e0804b47396b",
+    "matchingBranchSearch": [],
+    "matchingPullRequests": [],
+    "codeSearchPasscode": [],
+    "priorRelatedWork": [
+      "M41/M43 battle banish and M580 battle-destroyed search are distinct effects; separate files."
+    ],
+    "m601FilesDisjoint": true,
+    "m602FilesDisjoint": true,
+    "m603FilesDisjoint": true,
+    "m598FilesUntouched": true,
+    "m599FilesUntouched": true,
+    "m600FilesUntouched": true,
+    "m61Untouched": true,
+    "m600TransferRequestedOnPR": 543,
+    "m600ReleaseReceived": false,
+    "thirdPartyReservationsUntouched": true
+  },
+  "card": {
+    "name": "The Unhappy Maiden",
+    "portugueseName": "A Donzela Infeliz",
+    "passcode": "51275027",
+    "konamiDatabaseId": 4875,
+    "stats": {
+      "level": 1,
+      "atk": 0,
+      "def": 100,
+      "race": "Spellcaster",
+      "attribute": "LIGHT"
+    },
+    "effect": "When this card is sent to the Graveyard as a result of battle, the Battle Phase for that turn ends immediately.",
+    "tcgFirstPrint": "MRD-EN134, 2002-06-26",
+    "historicalCutoff": "2004-09-30"
+  },
+  "catalogAtStart": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter de fim de Battle Phase e testes focados; publicar PR draft.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

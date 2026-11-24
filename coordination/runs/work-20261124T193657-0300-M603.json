@@ -4,16 +4,16 @@
   "mission": "M603",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved; implementation in progress",
+  "status": "PR open; CI in progress/queued; scope released to auxiliary",
   "startedAt": "2026-11-24T19:36:57-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-24T19:44:12-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "a4fb791d7425f334a7d48b386bd2e71981223fe3",
   "branch": "feat/work-m603-swift-gaia-normal-summon-20261124",
   "baseSha": "a4fb791d7425f334a7d48b386bd2e71981223fe3",
-  "branchHeadSha": "a4fb791d7425f334a7d48b386bd2e71981223fe3",
-  "pullRequest": null,
+  "branchHeadSha": "99411d61e0ea21d1bcd49cdff439652784b330b9",
+  "pullRequest": 546,
   "reservedFiles": [
     "src/swiftGaiaNormalSummonTagAdapter.ts",
     "tests/swiftGaiaNormalSummonTagAdapter.test.cjs",
@@ -69,11 +69,17 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 8,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar adapter e testes focados; publicar PR draft e observar CI.",
+  "nextTask": "Monitorar CI focada; depois solicitar registro e integração do resolver somente após handoff M61.",
   "nextWindow": "2026-11-24T23:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [
+    "src/swiftGaiaNormalSummonTagAdapter.ts",
+    "tests/swiftGaiaNormalSummonTagAdapter.test.cjs",
+    "docs/evidence/m603-swift-gaia-normal-summon.json",
+    ".github/workflows/m603-swift-gaia-normal-summon.yml"
+  ],
+  "lastActivityAt": "2026-11-24T19:44:12-03:00"
 }
