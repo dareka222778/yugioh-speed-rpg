@@ -161,10 +161,11 @@ function activeLocks(
   targetUid?: string
 ): UnhappyGirlBattleLock[] {
   const entries = state.unhappyGirlBattleLocks?.entries ?? [];
+  const core = structuredClone(state.core) as DuelState;
   return entries.filter(entry => {
     if (targetUid && entry.targetUid !== targetUid) return false;
-    if (!targetBindingValid(state.core, entry.sourceBinding) ||
-        !targetBindingValid(state.core, entry.targetBinding)) return false;
+    if (!targetBindingValid(core, entry.sourceBinding) ||
+        !targetBindingValid(core, entry.targetBinding)) return false;
     const source = locateMonster(state.core, entry.sourceUid);
     const target = locateMonster(state.core, entry.targetUid);
     return !!source && !!target &&
@@ -261,14 +262,21 @@ function recordBattleForCard(
       targetBindingValid(next.core, entry.sourceBinding) &&
       targetBindingValid(next.core, entry.targetBinding)
     );
-    memory.entries.push({
-      battleId: event.battleId,
-      sourceUid: event.sourceUid,
-      targetUid: event.targetUid,
-      sourceBinding,
-      targetBinding,
-      turn: event.turn,
-    });
+    const alreadyLocked = memory.entries.some(entry =>
+      entry.sourceUid === event.sourceUid && entry.targetUid === event.targetUid &&
+      entry.sourceBinding.epoch === sourceBinding.epoch &&
+      entry.targetBinding.epoch === targetBinding.epoch
+    );
+    if (!alreadyLocked) {
+      memory.entries.push({
+        battleId: event.battleId,
+        sourceUid: event.sourceUid,
+        targetUid: event.targetUid,
+        sourceBinding,
+        targetBinding,
+        turn: event.turn,
+      });
+    }
     if (memory.entries.length > 128) memory.entries.shift();
   }
 
