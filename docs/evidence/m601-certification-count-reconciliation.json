@@ -1,7 +1,7 @@
 {
   "format": 1,
   "mission": "M601",
-  "observedAt": "2026-11-24T19:19:43-03:00",
+  "observedAt": "2026-11-24T19:27:18-03:00",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHead": "bbb03f6416d08b515adbad1940d094b9a9bed497",
   "sourceFiles": {
@@ -11,29 +11,19 @@
     "src/effectRegistry.ts": "568324c1fbd7a2e43e260625c9af77e76c851cda"
   },
   "baseline": {
-    "certifiedFromExplicitCertificates": 959,
-    "enabledRegistryCards": 959,
+    "certifiedFromExplicitCertificates": 969,
+    "enabledRegistryCards": 969,
     "releasedAllowlist": 969,
-    "releasedButUncertified": 10,
+    "releasedButUncertified": 0,
     "certifiedButNotReleased": 0,
-    "remainingTo1000": 41,
+    "remainingTo1000": 31,
     "newCertifications": 0,
     "inventoryGranted": 0
   },
-  "releasedButUncertifiedIds": [
-    "02314238",
-    "13839120",
-    "20727787",
-    "28121403",
-    "38411870",
-    "41172955",
-    "61044390",
-    "63391643",
-    "81510157",
-    "86445415"
-  ],
-  "method": "A contagem autoritativa usa enabledCardIds produzido por buildCardRegistry e é reconciliada com Object.keys(cardCertifications). releasedCardIds é somente uma allowlist de distribuição; não é fonte de certificação. cardDistributionAllowed exige simultaneamente carta jogável/certificada e presença na allowlist.",
-  "conclusion": "O estado de coordenação que reportava 969 certificadas estava usando, ou confundindo, o total da allowlist. O baseline reproduzível no HEAD observado é 959 certificadas; faltam 41 para 1.000. Os 10 IDs excedentes da allowlist permanecem bloqueados pela política e não são promovidos.",
+  "releasedButUncertifiedIds": [],
+  "method": "A contagem autoritativa usa enabledCardIds produzido por buildCardRegistry e é reconciliada com todas as chaves de cardCertifications. releasedCardIds é uma allowlist de distribuição separada; a política cardDistributionAllowed exige carta jogável/certificada e presença na allowlist.",
+  "conclusion": "A leitura completa do objeto, incluindo dez chaves que compartilham linhas, confirma 969 certificados únicos e 969 IDs liberados. O baseline correto é 969/1.000; faltam 31. Nenhuma carta foi promovida automaticamente.",
+  "correction": "A contagem preliminar 959 resultou de uma expressão regular ancorada no início de linha, que omitiu dez chaves inline. A auditoria executável usa o registry compilado e não repete essa limitação.",
   "changes": {
     "runtime": false,
     "catalog": false,
