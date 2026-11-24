@@ -62,8 +62,8 @@ test('Rain of Mercy negada não gera planos de ganho',()=>{
 test('Rain of Mercy exige Main Phase e turno próprio',()=>{
   const battle=state({phase:'battle',hand0:[card('m0:rain',RAIN_OF_MERCY_ID)]});
   assert.throws(()=>resolveRainOfMercy(battle,createRecoveryLedger(),rainEvent({phase:'battle'})),/Main Phase/);
-  const opponent=state({turn:2,cursor:1,hand1:[card('m1:rain',RAIN_OF_MERCY_ID)]});
-  assert.throws(()=>resolveRainOfMercy(opponent,createRecoveryLedger(),rainEvent({sourceUid:'m1:rain',activeMemberId:'p1',turn:2})),/Main Phase/);
+  const opponent=state({turn:2,cursor:1,backrow0:[card('m0:rain',RAIN_OF_MERCY_ID,{faceUp:false,setTurn:1})]});
+  assert.throws(()=>resolveRainOfMercy(opponent,createRecoveryLedger(),rainEvent({sourceUid:'m0:rain',sourceZone:'set',activeMemberId:'p1',turn:2})),/equipe adversária/);
 });
 
 test('Rain of Mercy exige que a carta setada pertença à equipe ativa',()=>{
@@ -72,7 +72,9 @@ test('Rain of Mercy exige que a carta setada pertença à equipe ativa',()=>{
 });
 
 test('Rain of Mercy rejeita UID de mão pertencente ao parceiro inativo',()=>{
-  const s=state({hand0:[card('m2:rain',RAIN_OF_MERCY_ID)]});
+  const s=state();
+  s.reserves['2'].hand.push(card('m2:rain',RAIN_OF_MERCY_ID));
+  s.core.teamRotation.reserves=s.reserves;
   assert.throws(()=>resolveRainOfMercy(s,createRecoveryLedger(),rainEvent({sourceUid:'m2:rain'})),/mão privada/);
 });
 
@@ -128,9 +130,11 @@ test('Emergency Provisions não pode ativar Quick-Play setada no mesmo turno',()
 });
 
 test('Emergency Provisions da mão não pode ser ativada durante turno adversário',()=>{
-  const s=state({turn:3,cursor:1,hand1:[card('m1:ep',EMERGENCY_PROVISIONS_ID)]});
+  const s=state({turn:3,cursor:1});
+  s.reserves['0'].hand.push(card('m0:ep',EMERGENCY_PROVISIONS_ID));
+  s.core.teamRotation.reserves=s.reserves;
   assert.throws(()=>resolveEmergencyProvisions(s,createRecoveryLedger(),emergencyEvent({
-    sourceUid:'m1:ep',turn:3,phase:'main',activeMemberId:'p1'
+    sourceUid:'m0:ep',turn:3,phase:'main',activeMemberId:'p1'
   })),/turno adversário/);
 });
 
