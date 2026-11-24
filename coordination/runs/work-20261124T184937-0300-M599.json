@@ -4,16 +4,21 @@
   "mission": "M599",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "corrected-awaiting-revalidation",
+  "status": "consolidated-awaiting-ci",
   "startedAt": "2026-11-24T18:49:37-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-24T19:11:34-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "bbb03f6416d08b515adbad1940d094b9a9bed497",
   "branch": "feat/work-m599-standby-burn-tag-adapters-20261124",
   "baseSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
   "branchHeadSha": "513cc08122ce1112de98c19e299e15c247366de6",
-  "pullRequest": null,
+  "pullRequest": {
+    "number": 543,
+    "url": "https://github.com/dareka222778/yugioh-speed-rpg/pull/543",
+    "state": "open",
+    "draft": true
+  },
   "reservedFiles": [
     "src/standbyBurnTagAdapter.ts",
     "tests/standbyBurnTagAdapter.test.cjs",
@@ -110,13 +115,16 @@
     "deploy": false,
     "backupVerified": false
   },
-  "effectiveWorkMinutes": 13,
+  "effectiveWorkMinutes": 20,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "M600: implementar Rain of Mercy/Emergency Provisions em escopo isolado durante a revalidação; depois confirmar CI M599 e reconciliar o total de certificados.",
+  "nextTask": "Revalidar os 32 testes M599 no HEAD consolidado; se verdes, prosseguir com próxima família e depois aguardar handoff M61 para integração.",
   "nextWindow": "2026-11-24T23:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
   "pullRequestUrl": null,
-  "lastActivityAt": "2026-11-24T19:03:18-03:00"
+  "lastActivityAt": "2026-11-24T19:03:18-03:00",
+  "consolidatedIntoPullRequest": 543,
+  "consolidatedBranch": "feat/work-m600-lp-recovery-tag-adapters-20261124",
+  "consolidatedHeadSha": "d7cfc827e9d88573bdf690eb5baefa07fc690a43"
 }
