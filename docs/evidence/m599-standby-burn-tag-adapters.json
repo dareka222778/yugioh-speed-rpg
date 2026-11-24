@@ -1,0 +1,79 @@
+{
+  "mission": "M599",
+  "runId": "work-20261124T184937-0300-M599",
+  "owner": "Work principal",
+  "priority": "P1",
+  "scope": "Adapters puros TagDuel para Dark Snake Syndrome e Wave-Motion Cannon; somente quatro caminhos novos, sem resolver central, catálogo, certificações, allowlist, inventário ou dados persistentes.",
+  "cards": [
+    {
+      "name": "Dark Snake Syndrome",
+      "passcode": "47233801",
+      "konamiDatabaseId": 5536,
+      "kind": "Continuous Spell",
+      "firstTCGPrinting": "Pharaonic Guardian (PGD-087), 2003-07-18",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5536&ope=2&request_locale=en",
+      "officialEffect": "During each of your Standby Phases: Inflict damage to both players. This damage begins at 200 and is doubled during each of your following Standby Phases."
+    },
+    {
+      "name": "Wave-Motion Cannon",
+      "passcode": "38992735",
+      "konamiDatabaseId": 5614,
+      "kind": "Continuous Spell",
+      "firstTCGPrinting": "Magician's Force (MFC-040), 2003-10-10",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5614&ope=2&request_locale=en",
+      "officialEffect": "During your Main Phase: You can send this face-up card to the GY; inflict 1000 damage to your opponent for each of your Standby Phases that have passed since this card was activated."
+    }
+  ],
+  "rulings": {
+    "darkSnake": "O contador de Standby continua avançando mesmo se o efeito estiver negado; o dano só deixa de ser aplicado durante a negação. Cópias múltiplas acumulam e ambos os times recebem dano na Standby Phase do controlador.",
+    "waveMotion": "Conta somente as Standby Phases do controlador que passaram após a ativação. Enviar a própria carta ao Cemitério é custo; se o efeito for negado, o custo permanece pago e o dano não ocorre.",
+    "tagDuel": "No 2v2 clássico, o controlador é a equipe que contém a carta na backrow compartilhada; a Standby Phase de qualquer assento ativo dessa equipe conta. LP são compartilhados por equipe, mãos e Decks permanecem privados."
+  },
+  "design": {
+    "ledger": "Ledger versionado por UID físico e activationId; reativação com novo ID reinicia a contagem; eventos de fase/ação são idempotentes.",
+    "darkSnake": "Um plano de dano por cópia ativa e por equipe (200 × 2^fases anteriores); a contagem avança mesmo quando a cópia está negada.",
+    "waveMotion": "A Main Phase ativa gera um plano que envia a cópia ao GY como custo e causa 1000 × Standby Phases próprias transcorridas; negação mantém o custo e zera o dano.",
+    "integrity": "Valida rotação dos quatro assentos, LP atual, membro ativo, presença face-up no campo, UIDs físicos, ativação, controle e limites inteiros; não altera o estado recebido."
+  },
+  "tests": {
+    "planned": 29,
+    "categories": [
+      "registro de ativação, reativação e replay idempotente",
+      "Dark Snake: dano inicial, progressão 200/400/800, ambos os times, parceiro físico, cópias acumuladas e contadores independentes",
+      "Dark Snake: Standby adversária, mesma rodada, negação com avanço do contador, face-down, remoção, rotação, LP obsoleto e overflow",
+      "Wave-Motion: contagem por Standby própria, 1000 por fase, zero fases, custo de envio apesar de negação, equipe adversária, Main Phase e replay",
+      "integridade: UIDs duplicados/malformados, controle alterado, ID de ativação reutilizado, assento incorreto, ledger inválido e imutabilidade"
+    ]
+  },
+  "rules": {
+    "mainDeck": "20-30 por assento físico",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "coordinationClaimedCertified": 969,
+    "directlyCountedCardCertificationEntries": 959,
+    "releasedCardIds": 969,
+    "countDiscrepancy": "A leitura direta de src/cardCertifications.ts encontrou 959 entradas explícitas, enquanto releasedCardIds.ts contém 969 IDs. A contagem certificada efetiva precisa ser reconciliada pelo registry/CI; nenhum número é incrementado por este adapter.",
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}
