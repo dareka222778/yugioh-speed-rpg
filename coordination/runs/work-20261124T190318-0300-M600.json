@@ -72,7 +72,7 @@
     "sharedTeamGraveyardAndLP": true
   },
   "catalogAtStart": {
-    "directCertificateEntries": 959,
+    "directCertificateEntries": 969,
     "releasedCardIds": 969,
     "nutrientZCertified": false,
     "nutrientZReleased": false,
@@ -87,6 +87,7 @@
     }
   },
   "catalogAtEnd": {
+    "certified": 969,
     "newCertifications": 0,
     "inventoryGranted": 0
   },
@@ -112,5 +113,5 @@
   "nextWindow": "2026-11-24T23:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
   "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/543",
-  "lastActivityAt": "2026-11-24T19:11:34-03:00"
+  "lastActivityAt": "2026-11-24T19:14:29-03:00"
 }
