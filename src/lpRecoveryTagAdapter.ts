@@ -1,7 +1,7 @@
 import type {TagDuel} from './tagDuel';
 import {getPlayableCard} from './effectRegistry';
 
-export const RAIN_OF_MERCY_ID='66719324';
+export const NUTRIENT_Z_ID='29389368';
 export const EMERGENCY_PROVISIONS_ID='53046408';
 export type RecoveryTeam=0|1;
 export type RecoverySourceZone='hand'|'set';
@@ -11,14 +11,18 @@ export type RecoveryBaseEvent=Readonly<{
   actionId:string;activeMemberId:string;sourceUid:string;sourceZone:RecoverySourceZone;
   turn:number;phase:RecoveryPhase;currentLPByTeam:readonly [number,number];effectNegated:boolean;
 }>;
-export type RainOfMercyPlan=Readonly<{
-  actionId:string;sourceUid:string;sourceZone:RecoverySourceZone;controllerTeam:RecoveryTeam;
-  targetTeam:RecoveryTeam;amount:1000;gainApplied:true;replacementEligible:true;
-  sourceLeavesField:true;effectNegated:false;
+export type NutrientZEvent=Readonly<{
+  actionId:string;activeMemberId:string;sourceUid:string;turn:number;
+  window:'damage-calculation';defendingTeam:RecoveryTeam;incomingBattleDamage:number;
+  currentLPByTeam:readonly [number,number];effectNegated:boolean;
 }>;
-export type RainOfMercyResolution=Readonly<{
-  status:'resolved'|'negated'|'duplicate';ledger:RecoveryLedger;
-  plans:readonly RainOfMercyPlan[];sourceLeavesField:boolean;
+export type NutrientZPlan=Readonly<{
+  actionId:string;sourceUid:string;controllerTeam:RecoveryTeam;targetTeam:RecoveryTeam;
+  amount:number;incomingBattleDamage:number;gainApplied:boolean;replacementEligible:true;
+  beforeBattleDamage:true;sourceLeavesField:true;effectNegated:boolean;timing:'damage-calculation';
+}>;
+export type NutrientZResolution=Readonly<{
+  status:'resolved'|'negated'|'duplicate';ledger:RecoveryLedger;plan:NutrientZPlan|null;
 }>;
 export type EmergencyCost=Readonly<{uid:string;id:string;zone:'backrow'|'field';kind:'spell'|'trap'}>;
 export type EmergencyProvisionsEvent=RecoveryBaseEvent&Readonly<{costUids:readonly string[]}>;
@@ -154,35 +158,37 @@ function consumeAction(ledger:RecoveryLedger,actionId:string):RecoveryLedger{
   return next;
 }
 
-/** Rain of Mercy is a Normal Spell: both shared teams gain 1000 LP. */
-export function resolveRainOfMercy(
-  state:TagDuel,ledger:RecoveryLedger,event:RecoveryBaseEvent
-):RainOfMercyResolution{
-  assertLedger(ledger);assertBaseEvent(event);assertTagState(state);
-  if(ledger.processedActionIds.includes(event.actionId)){
-    return {status:'duplicate',ledger,plans:[],sourceLeavesField:false};
+/** Nutrient Z gains 4000 LP during Damage Calculation before the pending battle damage. */
+export function resolveNutrientZ(
+  state:TagDuel,ledger:RecoveryLedger,event:NutrientZEvent
+):NutrientZResolution{
+  assertLedger(ledger);assertTagState(state);
+  assertText(event?.actionId,'ID da ação Nutrient Z');assertText(event.activeMemberId,'Participante defensor');
+  assertUid(event.sourceUid);assertTeam(event.defendingTeam);
+  if(event.window!=='damage-calculation'||!Number.isSafeInteger(event.turn)||event.turn!==state.core.turn||
+    !Number.isSafeInteger(event.incomingBattleDamage)||event.incomingBattleDamage<2000||
+    typeof event.effectNegated!=='boolean'){
+    throw new Error('Nutrient Z exige dano de batalha iminente de pelo menos 2000 durante o cálculo de dano.');
   }
-  if(event.turn!==state.core.turn||event.phase!=='main'||state.core.phase!=='main'||state.core.current!==state.core.priority){
-    throw new Error('Rain of Mercy só pode ser ativada na Main Phase do próprio turno.');
+  if(ledger.processedActionIds.includes(event.actionId))return {status:'duplicate',ledger,plan:null};
+  if(state.core.phase!=='response'||state.core.current===event.defendingTeam){
+    throw new Error('Nutrient Z só responde ao cálculo de dano recebido pela equipe defensora.');
   }
   const decision=decisionMember(state,event.activeMemberId);
-  if(decision.team!==state.core.current)throw new Error('Rain of Mercy exige prioridade da equipe ativa.');
-  assertLP(state,event.currentLPByTeam);
-  if(event.sourceZone==='hand'){
-    const handSource=findHandSource(state,event.sourceUid,RAIN_OF_MERCY_ID);
-    if(handSource.team!==decision.team||handSource.seat!==decision.seat||state.core.current!==handSource.team){
-      throw new Error('Rain of Mercy exige a mão privada do participante ativo no próprio turno.');
-    }
-  }else{
-    const location=findSetSource(state,event.sourceUid,RAIN_OF_MERCY_ID,event.turn,true);
-    if(location.team!==decision.team)throw new Error('Rain of Mercy setada pertence à equipe adversária.');
+  if(decision.team!==event.defendingTeam||state.core.priority!==event.defendingTeam){
+    throw new Error('Nutrient Z exige prioridade da equipe que receberá o dano.');
   }
-  const plans:RainOfMercyPlan[]=event.effectNegated?[]:[0,1].map(targetTeam=>({
-    actionId:event.actionId,sourceUid:event.sourceUid,sourceZone:event.sourceZone,
-    controllerTeam:decision.team,targetTeam:targetTeam as RecoveryTeam,amount:1000,
-    gainApplied:true,replacementEligible:true,sourceLeavesField:true,effectNegated:false
-  }));
-  return {status:event.effectNegated?'negated':'resolved',ledger:consumeAction(ledger,event.actionId),plans,sourceLeavesField:true};
+  assertLP(state,event.currentLPByTeam);
+  const location=findSetSource(state,event.sourceUid,NUTRIENT_Z_ID,event.turn,false);
+  if(location.team!==event.defendingTeam)throw new Error('Nutrient Z setada não pertence à equipe que receberá o dano.');
+  const plan:NutrientZPlan={
+    actionId:event.actionId,sourceUid:event.sourceUid,controllerTeam:event.defendingTeam,
+    targetTeam:event.defendingTeam,amount:event.effectNegated?0:4000,
+    incomingBattleDamage:event.incomingBattleDamage,gainApplied:!event.effectNegated,
+    replacementEligible:true,beforeBattleDamage:true,sourceLeavesField:true,
+    effectNegated:event.effectNegated,timing:'damage-calculation'
+  };
+  return {status:event.effectNegated?'negated':'resolved',ledger:consumeAction(ledger,event.actionId),plan};
 }
 
 /**
