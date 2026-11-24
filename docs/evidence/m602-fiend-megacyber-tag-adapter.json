@@ -78,7 +78,8 @@
     "three Monster/Spell-Trap Zone limits enforced",
     "Main Deck minimum enforced",
     "Main Deck maximum 30 and rejection at 31",
-    "Extra Deck maximum 5 and rejection at 6"
+    "Extra Deck maximum 5 and rejection at 6",
+    "production adapter pinned to official passcode"
   ],
   "scope": {
     "newFilesOnly": true,
@@ -91,11 +92,13 @@
     "persistentPlayerDataChanged": false,
     "merge": false,
     "deploy": false,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "testFixtureUsesCatalogValidId": true
   },
   "limitations": [
     "Adapter is isolated and is not connected to the M61 resolver/trigger queue.",
     "Summon-negation chains and real Discord interaction are not modeled here.",
-    "No card certification is claimed; behavior requires resolver integration and end-to-end engine tests."
+    "No card certification is claimed; behavior requires resolver integration and end-to-end engine tests.",
+    "Because The Fiend Megacyber is not yet registered in the runtime catalog, behavioral tests inject a catalog-valid fixture ID through the adapter factory. The production entrypoint remains pinned to 66362965 and is not yet usable in a real duel until catalog registration and resolver handoff."
   ]
 }

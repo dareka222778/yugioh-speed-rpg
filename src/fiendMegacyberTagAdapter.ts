@@ -107,14 +107,14 @@ function assertSameInventory(before: Map<string, string>, duel: TagDuel): void {
   }
 }
 
-function validPlanOwner(plan: FiendMegacyberPlan): boolean {
+function validPlanOwner(plan: FiendMegacyberPlan, expectedCardId: string): boolean {
   return !!plan && typeof plan.sourceUid === 'string' &&
     /^m[0-3]:/.test(plan.sourceUid) &&
     physicalSeat(plan.sourceUid) === plan.ownerSeat &&
     Number.isInteger(plan.ownerSeat) && plan.ownerSeat >= 0 && plan.ownerSeat <= 3 &&
     validTeam(plan.ownerTeam) && plan.ownerTeam === plan.ownerSeat % 2 &&
     plan.opponentTeam === (1 - plan.ownerTeam) &&
-    plan.sourceId === FIEND_MEGACYBER_ID;
+    plan.sourceId === expectedCardId;
 }
 
 /**
@@ -122,15 +122,16 @@ function validPlanOwner(plan: FiendMegacyberPlan): boolean {
  * prepare only when the active physical owner chooses to attempt it. The
  * historical ruling limits the procedure to the Main Phase.
  */
-export function prepareFiendMegacyber(
+function prepareForCardId(
   duel: TagDuel,
   sourceUid: string,
+  expectedCardId: string,
 ): FiendMegacyberPlan | null {
   assertPhysicalRules(duel);
   if (typeof sourceUid !== 'string' || !sourceUid.trim()) return null;
 
   const source = tagInventory(duel).find(card => card.uid === sourceUid && card.entityKind !== 'token');
-  if (!source || source.id !== FIEND_MEGACYBER_ID) return null;
+  if (!source || source.id !== expectedCardId) return null;
 
   const ownerSeat = physicalSeat(source.uid);
   const ownerTeam = (ownerSeat % 2) as Team;
@@ -141,7 +142,7 @@ export function prepareFiendMegacyber(
       duel.core.phase !== 'main') return null;
 
   const hand = ownedPrivateZone(duel.core, source, ownerTeam, 'hand');
-  if (!hand.some(card => card.uid === source.uid && card.id === FIEND_MEGACYBER_ID)) return null;
+  if (!hand.some(card => card.uid === source.uid && card.id === expectedCardId)) return null;
 
   const ownMonsterCount = duel.core.players[ownerTeam].monsters.length;
   const opponentMonsterCount = duel.core.players[opponentTeam].monsters.length;
@@ -168,12 +169,13 @@ export function prepareFiendMegacyber(
  * team's shared Monster Zone; it never creates inventory or consumes the
  * Normal Summon flag.
  */
-export function resolveFiendMegacyber(
+function resolveForCardId(
   input: TagDuel,
   plan: FiendMegacyberPlan,
+  expectedCardId: string,
 ): FiendMegacyberResolution | null {
   assertPhysicalRules(input);
-  if (!plan || plan.kind !== 'fiendMegacyber' || !validPlanOwner(plan) ||
+  if (!plan || plan.kind !== 'fiendMegacyber' || !validPlanOwner(plan, expectedCardId) ||
       plan.turn !== input.core.turn || plan.phase !== 'main' ||
       input.core.phase !== 'main' || input.core.current !== plan.ownerTeam ||
       input.active[plan.ownerTeam] !== plan.ownerSeat) return null;
@@ -187,7 +189,7 @@ export function resolveFiendMegacyber(
 
   const source: CardRef = { uid: plan.sourceUid, id: plan.sourceId };
   const currentHand = ownedPrivateZone(input.core, source, plan.ownerTeam, 'hand');
-  if (!currentHand.some(card => card.uid === plan.sourceUid && card.id === FIEND_MEGACYBER_ID)) return null;
+  if (!currentHand.some(card => card.uid === plan.sourceUid && card.id === expectedCardId)) return null;
 
   const before = inventorySnapshot(input);
   const next = structuredClone(input);
@@ -222,3 +224,21 @@ export function resolveFiendMegacyber(
     faceUp: true,
   };
 }
+
+/**
+ * Test seam for catalog-valid fixtures. Production callers should use the
+ * default exports, which are pinned to the official passcode.
+ */
+export function createFiendMegacyberAdapter(cardId = FIEND_MEGACYBER_ID) {
+  if (typeof cardId !== 'string' || !cardId.trim()) {
+    throw new Error('ID de carta inválido para o adapter.');
+  }
+  return Object.freeze({
+    prepare: (duel: TagDuel, sourceUid: string) => prepareForCardId(duel, sourceUid, cardId),
+    resolve: (input: TagDuel, plan: FiendMegacyberPlan) => resolveForCardId(input, plan, cardId),
+  });
+}
+
+const productionAdapter = createFiendMegacyberAdapter();
+export const prepareFiendMegacyber = productionAdapter.prepare;
+export const resolveFiendMegacyber = productionAdapter.resolve;
