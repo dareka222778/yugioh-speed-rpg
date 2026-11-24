@@ -1,0 +1,83 @@
+{
+  "mission": "M594",
+  "runId": "work-20261124T142648-0300-M594",
+  "owner": "Work principal",
+  "priority": "P2",
+  "card": {
+    "name": "Ancient Telescope",
+    "passcode": "17092736",
+    "konamiDatabaseId": 4852,
+    "kind": "Normal Spell",
+    "firstTCGPrinting": "Starter Deck Kaiba (SDK-039), 2002-03-29",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4852&ope=2&request_locale=en",
+    "officialEffect": "See the top 5 cards of your opponent's Deck. Return the cards to the Deck in the same order.",
+    "sourceVerified": "Konami official card database, checked 2026-11-24"
+  },
+  "design": {
+    "topOfDeck": "Index zero is the top of the Deck in duelEngineCurrent.createDuel and handFlow.drawCards; the adapter copies deck.slice(0,5) without mutation.",
+    "tagTarget": "In classic 2v2, 'opponent's Deck' is resolved as the currently active opposing physical seat's private Deck; the inactive partner's reserve Deck is not inspected.",
+    "privacy": "The reveal contract is controller-private and names the exact physical member allowed to see it. A Discord caller must send it ephemerally; this adapter does not publish or send messages.",
+    "order": "The same top-card order is returned and the Deck remains unchanged.",
+    "integration": "Pure adapter only; card metadata, resolver registration and Discord command integration are intentionally pending explicit M61 handoff."
+  },
+  "tests": [
+    "top five cards in Deck order",
+    "active opposing physical seat selected, inactive reserve excluded",
+    "controller-only visibility contract",
+    "symmetric red-team routing",
+    "partial Deck reveals all remaining cards",
+    "empty Deck returns an empty reveal",
+    "inactive teammate rejected",
+    "wrong current team rejected",
+    "source must be Ancient Telescope",
+    "source physical UID must exist exactly once",
+    "duplicate event remains idempotent after rotation/Deck changes",
+    "malformed event ID rejected",
+    "malformed ledger rejected",
+    "duplicate physical Deck UIDs rejected",
+    "non-classic mode rejected",
+    "inconsistent seat rotation rejected",
+    "input, Deck, hand, reserves and ledger immutability",
+    "reveal contains only copied physical identity fields"
+  ],
+  "testCount": 18,
+  "certification": {
+    "engineV9CertifiedBefore": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "reason": "Adapter-only; no card metadata, effect definition, resolver, certification, manifest, allowlist or catalog changes."
+  },
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "security": {
+    "filesOnly": [
+      "src/ancientTelescopeTagAdapter.ts",
+      "tests/ancientTelescopeTagAdapter.test.cjs",
+      "docs/evidence/m594-ancient-telescope-private-deck-peek.json",
+      ".github/workflows/m594-ancient-telescope-private-deck-peek.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "The adapter does not add Ancient Telescope to the playable card catalog; it is not yet available in a real duel.",
+    "Tests use structural TagDuel fixtures because the central card admission/resolver files remain reserved by M61.",
+    "The private visibility field is a caller contract; live Discord ephemeral delivery has not been validated.",
+    "No certification or inventory grant is claimed."
+  ]
+}
