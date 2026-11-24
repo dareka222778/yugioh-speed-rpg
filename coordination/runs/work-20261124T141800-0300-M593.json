@@ -4,16 +4,16 @@
   "mission": "M593",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved-awaiting-isolated-branch",
+  "status": "ci-green-awaiting-review",
   "startedAt": "2026-11-24T14:18:00-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "b629571378f875ddc7157bf1e023001ad934438d",
   "branch": "feat/work-m593-bad-reaction-to-simochi-lp-replacement-20261124",
-  "baseSha": null,
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "baseSha": "ebcf887d0c239a48b8601be520a7a2ed909f2aee",
+  "branchHeadSha": "5a76d9ce472ccd1f4be27cafc0f6982f81b2c8e5",
+  "pullRequest": 536,
   "reservedFiles": [
     "src/badReactionToSimochiTagAdapter.ts",
     "tests/badReactionToSimochiTagAdapter.test.cjs",
@@ -86,7 +86,20 @@
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar adapter puro, 15+ testes e workflow; revisar CI e procurar próxima família sem conflito.",
-  "nextWindow": "2026-11-24T18:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "nextTask": "Monitorar PR #536 e sincronizar sem force após revisão; não integrar no resolver sem handoff M61.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": [
+    "src/badReactionToSimochiTagAdapter.ts",
+    "tests/badReactionToSimochiTagAdapter.test.cjs",
+    "docs/evidence/m593-bad-reaction-to-simochi-tag-adapter.json",
+    ".github/workflows/m593-bad-reaction-to-simochi-tag-adapter.yml"
+  ],
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/536",
+  "ci": {
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "success"
+  },
+  "scopeReleasedAt": "2026-11-24T18:30:21-03:00"
 }
