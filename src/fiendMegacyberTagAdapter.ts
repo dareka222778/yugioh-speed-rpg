@@ -194,7 +194,7 @@ function resolveForCardId(
   const before = inventorySnapshot(input);
   const next = structuredClone(input);
   const nextHand = ownedPrivateZone(next.core, source, plan.ownerTeam, 'hand');
-  const index = nextHand.findIndex(card => card.uid === plan.sourceUid && card.id === FIEND_MEGACYBER_ID);
+  const index = nextHand.findIndex(card => card.uid === plan.sourceUid && card.id === expectedCardId);
   if (index < 0) return null;
 
   const [card] = nextHand.splice(index, 1);
