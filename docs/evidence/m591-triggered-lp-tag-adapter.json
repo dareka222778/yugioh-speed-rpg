@@ -53,9 +53,11 @@
     "stale source-on-field rejection",
     "destroyer existence and field-controller cross-check",
     "invalid destroyer team",
-    "input immutability"
+    "input immutability",
+    "Backfire copies on the opposing team's field do not trigger for this team's FIRE destruction",
+    "Balloon Lizard counters remain while the card stays on the field face-down"
   ],
-  "testCount": 22,
+  "testCount": 26,
   "certification": {
     "engineV9CertifiedBefore": 969,
     "newCertifications": 0,

@@ -139,7 +139,7 @@ test('Balloon Lizard rejects stale destruction while the source remains on the f
 test('Balloon Lizard requires the destroyer card to exist and match a live field controller',()=>{
  const s=destroyedBalloonState(0);
  assert.throws(()=>resolveBalloonLizardDestruction(s,createBalloonLizardLedger(),destroyEvent(1,{destroyerUid:'missing'})),/não encontrada/);
- const wrong=state({team0:{grave:[{uid:'m0:balloon',id:BALLOON_LIZARD_ID}],monsters:[monster('m1:destroyer','00000001')]}});
+ const wrong=state({team0:{grave:[{uid:'m0:balloon',id:BALLOON_LIZARD_ID}]},team1:{monsters:[monster('m1:destroyer','00000001')]}});
  assert.throws(()=>resolveBalloonLizardDestruction(wrong,createBalloonLizardLedger(),destroyEvent(1,{destroyerTeam:0})),/diverge/);
 });
 test('Balloon Lizard event cannot target an invalid destroyer team',()=>{
@@ -153,4 +153,14 @@ test('adapter functions preserve input state and ledgers',()=>{
  assert.equal(JSON.stringify([s,ledger,ev]),before);
  const bs=balloonState(1,0);const bl=createBalloonLizardLedger();recordBalloonLizardStandby(bs,bl,standby(1,0,'m0:balloon'));
  assert.deepEqual(bl.counters,{});
+});
+
+test('Backfire on the opposing team does not trigger for this team FIRE destruction',()=>{
+ const s=state({team1:{backrow:[backrow('m1:b',BACKFIRE_ID)]}});
+ assert.equal(resolveBackfireEvent(s,createBackfireLedger(),0,event('e25',[fire('m0:f')])).packets.length,0);
+});
+test('Balloon Lizard counters remain while the card stays on the field face-down',()=>{
+ const first=recordBalloonLizardStandby(balloonState(1,0),createBalloonLizardLedger(),standby(1,0,'m0:balloon'));
+ const facedown=balloonState(2,0,false);
+ assert.equal(reconcileBalloonLizardLedger(facedown,first.ledger).counters['m0:balloon'].count,1);
 });
