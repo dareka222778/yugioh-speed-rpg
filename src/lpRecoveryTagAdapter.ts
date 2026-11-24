@@ -94,13 +94,23 @@ function assertBaseEvent(event:RecoveryBaseEvent):void{
     throw new Error('Evento de recuperação de LP inválido.');
   }
 }
-function findHandSource(state:TagDuel,team:RecoveryTeam,seat:number,uid:string,id:string):void{
+function findHandSource(state:TagDuel,uid:string,id:string):{team:RecoveryTeam;seat:number}{
   assertUid(uid);
-  const prefix='m'+seat+':';
-  const matches=state.core.players[team].hand.filter(card=>card.uid===uid);
-  if(!uid.startsWith(prefix)||matches.length!==1||matches[0].id!==id){
-    throw new Error('Carta de recuperação não está na mão privada do participante ativo.');
+  const matches:{team:RecoveryTeam;seat:number;cardId:string}[]=[];
+  for(const team of [0,1] as const){
+    const seat=state.active[team];
+    for(const card of state.core.players[team].hand)if(card.uid===uid)matches.push({team,seat,cardId:card.id});
   }
+  for(const [seatKey,reserve] of Object.entries(state.reserves)){
+    const seat=Number(seatKey);
+    if(!Number.isInteger(seat)||seat<0||seat>3)continue;
+    for(const card of reserve.hand)if(card.uid===uid)matches.push({team:(seat%2) as RecoveryTeam,seat,cardId:card.id});
+  }
+  const physicalSeat=Number(uid.slice(1,2));
+  if(matches.length!==1||matches[0].cardId!==id||matches[0].seat!==physicalSeat){
+    throw new Error('Carta de recuperação não está em uma única mão privada válida.');
+  }
+  return {team:matches[0].team,seat:matches[0].seat};
 }
 function findSetSource(
   state:TagDuel,uid:string,id:string,turn:number,allowSameTurn:boolean
@@ -158,8 +168,12 @@ export function resolveRainOfMercy(
   const decision=decisionMember(state,event.activeMemberId);
   if(decision.team!==state.core.current)throw new Error('Rain of Mercy exige prioridade da equipe ativa.');
   assertLP(state,event.currentLPByTeam);
-  if(event.sourceZone==='hand')findHandSource(state,decision.team,decision.seat,event.sourceUid,RAIN_OF_MERCY_ID);
-  else{
+  if(event.sourceZone==='hand'){
+    const handSource=findHandSource(state,event.sourceUid,RAIN_OF_MERCY_ID);
+    if(handSource.team!==decision.team||handSource.seat!==decision.seat||state.core.current!==handSource.team){
+      throw new Error('Rain of Mercy exige a mão privada do participante ativo no próprio turno.');
+    }
+  }else{
     const location=findSetSource(state,event.sourceUid,RAIN_OF_MERCY_ID,event.turn,true);
     if(location.team!==decision.team)throw new Error('Rain of Mercy setada pertence à equipe adversária.');
   }
@@ -187,9 +201,12 @@ export function resolveEmergencyProvisions(
   assertLP(state,event.currentLPByTeam);
   let controllerTeam:RecoveryTeam;
   if(event.sourceZone==='hand'){
-    if(state.core.current!==decision.team)throw new Error('Quick-Play Spell da mão não pode ser ativada no turno adversário.');
-    findHandSource(state,decision.team,decision.seat,event.sourceUid,EMERGENCY_PROVISIONS_ID);
-    controllerTeam=decision.team;
+    const handSource=findHandSource(state,event.sourceUid,EMERGENCY_PROVISIONS_ID);
+    if(state.core.current!==handSource.team)throw new Error('Quick-Play Spell da mão não pode ser ativada no turno adversário.');
+    if(decision.team!==handSource.team||decision.seat!==handSource.seat){
+      throw new Error('Quick-Play Spell exige a mão privada do participante com prioridade.');
+    }
+    controllerTeam=handSource.team;
   }else{
     const location=findSetSource(state,event.sourceUid,EMERGENCY_PROVISIONS_ID,event.turn,false);
     controllerTeam=location.team;
