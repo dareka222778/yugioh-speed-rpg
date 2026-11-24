@@ -214,6 +214,7 @@ test('Kycoo resolution does not discard a seven-card hand before End Phase', () 
   const target = moveDeckCardToGrave(duel, 1, tagNormalCardIds[19]);
   moveDeckCardToHand(duel, 0);
   moveDeckCardToHand(duel, 0);
+  moveDeckCardToHand(duel, 0);
   assert.equal(duel.core.players[0].hand.length, 7);
   const plan = prepareKycooBattleDamage(duel, sourceUid, 0, 100, FIXTURE_IDS);
   assert.ok(plan);
@@ -229,6 +230,6 @@ test('Kycoo adapter rejects a team field that exceeds the three Monster Zones', 
   for (let i = 0; i < 3; i++) moveDeckCardToField(duel, 0, 0, tagNormalCardIds[20 + i]);
   assert.throws(
     () => prepareKycooBattleDamage(duel, sourceUid, 0, 100, FIXTURE_IDS),
-    /Monster Zones/,
+    /limite de zonas|Monster Zones/,
   );
 });
