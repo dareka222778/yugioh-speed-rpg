@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const { createTagDuel, tagInventory, tagNormalCardIds } = require('../dist/tagDuel.js');
 const { enabledCardIds, getDuelCard } = require('../dist/effectRegistry.js');
 const FUSION_ID = enabledCardIds.find(id => getDuelCard(id)?.fusion);
+const SPELL_TRAP_ID = enabledCardIds.find(id => ['spell', 'trap'].includes(getDuelCard(id)?.kind));
 const {
   FIEND_MEGACYBER_ID,
   prepareFiendMegacyber,
@@ -189,12 +190,12 @@ test('não permite ultrapassar as três Monster Zones ou Spell/Trap Zones', () =
   assert.throws(() => prepareFiendMegacyber(duel, sourceUid), /três Monster Zones/);
   const other = makeDuel();
   const otherUid = putFiendMegacyberInHand(other, 0);
-  other.core.players[0].backrow = [0, 1, 2, 3].map(i => ({
-    uid: 'm0:backrow-' + i,
-    id: tagNormalCardIds[i],
-    setTurn: 0,
-    faceUp: false,
-  }));
+  for (let i = 0; i < 4; i++) {
+    const card = privateZone(other, 0, 'deck').pop();
+    assert.ok(card);
+    card.id = SPELL_TRAP_ID;
+    other.core.players[0].backrow.push({ ...card, setTurn: 0, faceUp: false });
+  }
   assert.throws(() => prepareFiendMegacyber(other, otherUid), /três Spell\/Trap Zones/);
 });
 
