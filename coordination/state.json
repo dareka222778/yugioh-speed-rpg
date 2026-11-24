@@ -4,7 +4,7 @@
   "priorityRequestedBy": "User",
   "state": "active",
   "startedAt": "2026-11-24T18:30:21-03:00",
-  "lastActivityAt": "2026-11-24T18:58:48-03:00",
+  "lastActivityAt": "2026-11-24T19:03:18-03:00",
   "nextScheduledAt": "2026-11-24T23:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -7341,24 +7341,25 @@
       "mission": "M599",
       "owner": "Work principal",
       "priority": "P1",
-      "state": "implementation-committed-awaiting-ci",
+      "state": "corrected-awaiting-revalidation",
       "startedAt": "2026-11-24T18:49:37-03:00",
       "sharedBranch": "feat/rea-engine-recovery-20261026",
       "sharedHeadAtStart": "bbb03f6416d08b515adbad1940d094b9a9bed497",
       "branch": "feat/work-m599-standby-burn-tag-adapters-20261124",
       "baseSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
-      "branchHeadSha": "0e7c2a254d170c4856edcf2e94c034b0c0a795f4",
+      "branchHeadSha": "513cc08122ce1112de98c19e299e15c247366de6",
       "reservedFiles": [
         "src/standbyBurnTagAdapter.ts",
         "tests/standbyBurnTagAdapter.test.cjs",
         "docs/evidence/m599-standby-burn-tag-adapters.json",
         ".github/workflows/m599-standby-burn-tag-adapters.yml"
       ],
-      "checkpoint": "coordination/runs/work-20261124T184937-0300-M599.json"
+      "checkpoint": "coordination/runs/work-20261124T184937-0300-M599.json",
+      "lastActivityAt": "2026-11-24T19:03:18-03:00"
     }
   ],
   "lastParallelCheckpoint": "coordination/runs/work-20261124T184937-0300-M599.json",
-  "lastParallelActivityAt": "2026-11-24T18:58:48-03:00",
+  "lastParallelActivityAt": "2026-11-24T19:03:18-03:00",
   "sharedHeadAfterCheckpoint": "462e86aadaa9424575e4eef68cd0e7e67331fc98",
   "sharedHeadBeforeStateUpdate": "07203aae3a03cc9269346a1d9b9eb42e24ae7051",
   "endedAt": "2026-11-22T22:20:43-03:00",
@@ -20135,8 +20136,8 @@
     "branch": "feat/work-m599-standby-burn-tag-adapters-20261124",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
-    "branchHeadSha": "0e7c2a254d170c4856edcf2e94c034b0c0a795f4",
-    "status": "implementation-committed-awaiting-ci",
+    "branchHeadSha": "513cc08122ce1112de98c19e299e15c247366de6",
+    "status": "corrected-awaiting-revalidation",
     "reservedFiles": [
       "src/standbyBurnTagAdapter.ts",
       "tests/standbyBurnTagAdapter.test.cjs",
@@ -20169,7 +20170,18 @@
     "newCertifications": 0,
     "inventoryGranted": 0
   },
-  "m599Status": "implementation-committed-awaiting-ci",
+  "m599Status": "corrected-awaiting-revalidation",
   "m599NextTask": "Abrir PR draft e executar CI focada; corrigir qualquer falha de typecheck/teste; depois preparar a próxima família independente durante os gates gerais.",
-  "nextWorkWindowM599": "2026-11-24T23:30:00-03:00"
+  "nextWorkWindowM599": "2026-11-24T23:30:00-03:00",
+  "m599FocusedCI": {
+    "initialRun": 45496492260,
+    "conclusion": "failure",
+    "passed": 30,
+    "failed": 2,
+    "correctiveCommits": [
+      "66581e4073ed0a1b54e2aff3036046689dd83955",
+      "513cc08122ce1112de98c19e299e15c247366de6"
+    ],
+    "rerun": "not-yet-observed"
+  }
 }
