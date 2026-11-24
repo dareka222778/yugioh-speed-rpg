@@ -319,6 +319,7 @@ test('a desynchronized private-hand reservation is rejected instead of reading s
   const sourceUid = replaceHandCardWith(duel, 0, 0, SPIRIT_OF_FLAMES_ID);
   moveDeckCardToGrave(duel, 2, 0, FIRE_COST);
   duel.reserves = { ...duel.reserves, 2: { ...duel.reserves[2], hand: [...duel.reserves[2].hand] } };
+  duel.reserves[2].hand[0].id = 'fixture-stale-hand';
 
   assert.throws(() => prepareElementalSpiritSummon(duel, sourceUid, getCard), /fora de sincronia/);
 });
