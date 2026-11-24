@@ -14,7 +14,7 @@
   "baseSha": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
   "reservationCommitSha": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
   "branchHeadSha": "845d38c09068c5f9d2627bcc0bea90688e9614e2",
-  "pullRequest": null,
+  "pullRequest": 520,
   "previousCheckpoint": "coordination/runs/work-20261123T184744-0300-M573.json",
   "reservedFiles": [
     "src/attackLpGainTagAdapter.ts",
@@ -80,13 +80,27 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "pending",
-    "check": "pending",
-    "build": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
-    "extendedSoak": "pending"
+    "focused": {
+      "runId": 45306768939,
+      "status": "success"
+    },
+    "cardBatchFast": {
+      "runId": 45306768868,
+      "status": "success"
+    },
+    "milestone1000": {
+      "runId": 45306768803,
+      "status": "success"
+    },
+    "engineValidation": {
+      "runId": 45306768843,
+      "status": "in_progress",
+      "jobs": {
+        "test": "in_progress",
+        "extendedSoak": "in_progress"
+      }
+    },
+    "extendedSoak": "in_progress"
   },
   "production": {
     "mergePerformed": false,
@@ -118,7 +132,7 @@
       ".github/workflows/m573-summon-negation-tag-adapter.yml"
     ]
   },
-  "nextTask": "Abrir PR draft, executar focused/check/build e workflows Card Batch Fast, Milestone 1000, Engine Validation e Extended Soak; corrigir somente os quatro arquivos M574. Enquanto CI independente executa, revisar coordenação e selecionar próxima família M575 sem sobrepor reservas.",
+  "nextTask": "M575 independente em paralelo à CI M574; depois revalidar Engine Validation/Extended Soak M574, corrigir somente escopo próprio e atualizar coordenação.",
   "nextWindow": "2026-11-24T03:30:00-03:00",
   "duration": {
     "startedAt": "2026-11-23T22:30:10-03:00",
@@ -156,5 +170,9 @@
       "LP seguro, IDs idempotentes e LIFO"
     ]
   },
-  "status": "implementation-complete-awaiting-ci"
+  "status": "pr-open-draft-ci-partial",
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/520",
+  "pullRequestDraft": true,
+  "prHeadBeforeCheckpointUpdate": "0f4672bb480c33f82be123e969d0892da7093be3",
+  "lastActivityAt": "2026-11-23T22:45:00-03:00"
 }
