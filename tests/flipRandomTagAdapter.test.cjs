@@ -225,6 +225,21 @@ test('trigger de Fire Sorcerer continua resolvendo se a fonte sair do campo apó
  assert.equal(result.state.core.players[0].banished.length,2);
 });
 
+test('dano letal de Fire Sorcerer é limitado a zero e encerra o duelo',()=>{
+ const duel=makeDuel();
+ const source=putMonster(duel,0,0,IDS.fireSorcerer);
+ const plan=planFor(duel,source,0);
+ const first=moveDeckToHand(duel,0);
+ const second=moveDeckToHand(duel,0);
+ duel.core.players[1].lp=500;
+ const result=resolveFireSorcerer(duel,plan,[first,second],{cardIds:IDS});
+ assert.ok(result);
+ assert.equal(result.state.core.players[1].lp,0);
+ assert.equal(result.state.core.phase,'finished');
+ assert.equal(result.state.core.winner,'tag-team-0');
+ assert.equal(result.state.core.reason,'pontos de vida');
+});
+
 test('mão acima de seis permanece intacta durante Main Phase; limite é End Phase',()=>{
  const duel=makeDuel();
  const source=putMonster(duel,0,0,IDS.diceJar);

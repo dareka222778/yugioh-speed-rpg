@@ -207,7 +207,7 @@ export function resolveDiceJar(
   const loserTeam=(controllerRoll<opponentRoll?plan.controllerTeam:opponentTeam) as Team;
   const winnerRoll=Math.max(controllerRoll,opponentRoll);
   const damage=winnerRoll===6?6000:winnerRoll*500;
-  next.core.players[loserTeam].lp-=damage;
+  next.core.players[loserTeam].lp=Math.max(0,next.core.players[loserTeam].lp-damage);
   finishForLifePoints(next);
   next.core.log.push('Dice Jar: Equipe '+(loserTeam===0?'Azul':'Vermelha')+' perdeu '+damage+' PV após '+tiedRolls+' empate(s).');
   next.core.log=next.core.log.slice(-12);
@@ -257,7 +257,7 @@ export function resolveFireSorcerer(
    }
    next.core.players[plan.controllerTeam].banished=banished;
    damage=800;
-   next.core.players[affectedTeam].lp-=damage;
+   next.core.players[affectedTeam].lp=Math.max(0,next.core.players[affectedTeam].lp-damage);
    finishForLifePoints(next);
    next.core.log.push('Fire Sorcerer baniu duas cartas da mão privada do assento '+plan.controllerSeat+' e causou 800 de dano à Equipe '+(affectedTeam===0?'Azul':'Vermelha')+'.');
    next.core.log=next.core.log.slice(-12);
