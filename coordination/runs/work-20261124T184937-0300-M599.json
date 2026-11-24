@@ -4,7 +4,7 @@
   "mission": "M599",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "implementation-committed-awaiting-ci",
+  "status": "corrected-awaiting-revalidation",
   "startedAt": "2026-11-24T18:49:37-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -12,7 +12,7 @@
   "sharedHeadAtStart": "bbb03f6416d08b515adbad1940d094b9a9bed497",
   "branch": "feat/work-m599-standby-burn-tag-adapters-20261124",
   "baseSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
-  "branchHeadSha": "0e7c2a254d170c4856edcf2e94c034b0c0a795f4",
+  "branchHeadSha": "513cc08122ce1112de98c19e299e15c247366de6",
   "pullRequest": null,
   "reservedFiles": [
     "src/standbyBurnTagAdapter.ts",
@@ -81,10 +81,26 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending"
+    "initialFocusedRun": {
+      "runId": 45496492260,
+      "sha": "bbfaf37ae6429c6713230a821a04c1a8cf715393",
+      "conclusion": "failure",
+      "passedTests": 30,
+      "failedTests": 2,
+      "failures": [
+        "fixture de cópias em turnos diferentes não processou a primeira Standby antes da segunda ativação",
+        "limite de overflow usou 45 fases, ainda dentro de Number.MAX_SAFE_INTEGER"
+      ]
+    },
+    "correctiveCommits": [
+      "66581e4073ed0a1b54e2aff3036046689dd83955",
+      "513cc08122ce1112de98c19e299e15c247366de6"
+    ],
+    "latestFocusedRerun": "not-yet-observed",
+    "latestCommitBuild": "initial SHA passed npm run check and npm run build; corrected SHA has no visible PR-triggered run yet",
+    "cardBatchFast": "success on initial SHA",
+    "milestone1000": "success on initial SHA",
+    "engineValidation": "in-progress on initial SHA"
   },
   "production": {
     "resolverIntegration": false,
@@ -94,12 +110,13 @@
     "deploy": false,
     "backupVerified": false
   },
-  "effectiveWorkMinutes": 9,
+  "effectiveWorkMinutes": 13,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Abrir PR draft e executar CI focada; corrigir qualquer falha de typecheck/teste; depois preparar a próxima família independente durante os gates gerais.",
+  "nextTask": "M600: implementar Rain of Mercy/Emergency Provisions em escopo isolado durante a revalidação; depois confirmar CI M599 e reconciliar o total de certificados.",
   "nextWindow": "2026-11-24T23:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
-  "pullRequestUrl": null
+  "pullRequestUrl": null,
+  "lastActivityAt": "2026-11-24T19:03:18-03:00"
 }
