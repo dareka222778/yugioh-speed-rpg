@@ -106,13 +106,13 @@ function assertSameInventory(before: Map<string, string>, duel: TagDuel): void {
   }
 }
 
-function validPlanOwner(plan: SwiftGaiaNormalSummonPlan): boolean {
+function validPlanOwner(plan: SwiftGaiaNormalSummonPlan, expectedCardId: string): boolean {
   return !!plan && typeof plan.sourceUid === 'string' &&
     /^m[0-3]:/.test(plan.sourceUid) &&
     physicalSeat(plan.sourceUid) === plan.ownerSeat &&
     Number.isInteger(plan.ownerSeat) && plan.ownerSeat >= 0 && plan.ownerSeat <= 3 &&
     validTeam(plan.ownerTeam) && plan.ownerTeam === plan.ownerSeat % 2 &&
-    plan.sourceId === SWIFT_GAIA_ID &&
+    plan.sourceId === expectedCardId &&
     Array.isArray(plan.handSnapshot) && plan.handSnapshot.length === 1 &&
     plan.handSnapshot[0] === plan.sourceUid;
 }
@@ -122,15 +122,16 @@ function validPlanOwner(plan: SwiftGaiaNormalSummonPlan): boolean {
  * active physical owner's private hand. The partner's private hand is not
  * part of this condition. The adapter offers only face-up Attack Summoning.
  */
-export function prepareSwiftGaiaNormalSummon(
+function prepareForCardId(
   duel: TagDuel,
   sourceUid: string,
+  expectedCardId: string,
 ): SwiftGaiaNormalSummonPlan | null {
   assertPhysicalRules(duel);
   if (typeof sourceUid !== 'string' || !sourceUid.trim()) return null;
 
   const source = tagInventory(duel).find(card => card.uid === sourceUid && card.entityKind !== 'token');
-  if (!source || source.id !== SWIFT_GAIA_ID) return null;
+  if (!source || source.id !== expectedCardId) return null;
 
   const ownerSeat = physicalSeat(source.uid);
   const ownerTeam = (ownerSeat % 2) as Team;
@@ -142,7 +143,7 @@ export function prepareSwiftGaiaNormalSummon(
       duel.core.players[ownerTeam].monsters.length >= RULES_PROFILE.monsterZones) return null;
 
   const hand = ownedPrivateZone(duel.core, source, ownerTeam, 'hand');
-  if (hand.length !== 1 || hand[0].uid !== source.uid || hand[0].id !== SWIFT_GAIA_ID) return null;
+  if (hand.length !== 1 || hand[0].uid !== source.uid || hand[0].id !== expectedCardId) return null;
 
   return Object.freeze({
     kind: 'swiftGaiaNoTributeNormalSummon',
@@ -161,13 +162,14 @@ export function prepareSwiftGaiaNormalSummon(
  * snapshot. It consumes the team's Normal Summon flag and moves the existing
  * UID to the shared Monster Zone; no Tribute or new inventory is created.
  */
-export function resolveSwiftGaiaNormalSummon(
+function resolveForCardId(
   input: TagDuel,
   plan: SwiftGaiaNormalSummonPlan,
+  expectedCardId: string,
 ): SwiftGaiaNormalSummonResolution | null {
   assertPhysicalRules(input);
   if (!plan || plan.kind !== 'swiftGaiaNoTributeNormalSummon' ||
-      !validPlanOwner(plan) || plan.turn !== input.core.turn ||
+      !validPlanOwner(plan, expectedCardId) || plan.turn !== input.core.turn ||
       plan.phase !== 'main' || input.core.phase !== 'main' ||
       input.core.current !== plan.ownerTeam ||
       input.active[plan.ownerTeam] !== plan.ownerSeat ||
@@ -177,7 +179,7 @@ export function resolveSwiftGaiaNormalSummon(
   const source: CardRef = { uid: plan.sourceUid, id: plan.sourceId };
   const currentHand = ownedPrivateZone(input.core, source, plan.ownerTeam, 'hand');
   if (currentHand.length !== 1 || currentHand[0].uid !== plan.sourceUid ||
-      currentHand[0].id !== SWIFT_GAIA_ID) return null;
+      currentHand[0].id !== expectedCardId) return null;
 
   const before = inventorySnapshot(input);
   const next = structuredClone(input);
@@ -213,3 +215,21 @@ export function resolveSwiftGaiaNormalSummon(
     tributesUsed: 0,
   };
 }
+
+/**
+ * Test seam for catalog-valid fixtures. Production callers should use the
+ * default exports, which are pinned to the official passcode.
+ */
+export function createSwiftGaiaAdapter(cardId = SWIFT_GAIA_ID) {
+  if (typeof cardId !== 'string' || !cardId.trim()) {
+    throw new Error('ID de carta inválido para o adapter.');
+  }
+  return Object.freeze({
+    prepare: (duel: TagDuel, sourceUid: string) => prepareForCardId(duel, sourceUid, cardId),
+    resolve: (input: TagDuel, plan: SwiftGaiaNormalSummonPlan) => resolveForCardId(input, plan, cardId),
+  });
+}
+
+const productionAdapter = createSwiftGaiaAdapter();
+export const prepareSwiftGaiaNormalSummon = productionAdapter.prepare;
+export const resolveSwiftGaiaNormalSummon = productionAdapter.resolve;

@@ -67,7 +67,8 @@
     "seven-card hand not auto-discarded",
     "wrong identity and full field rejected",
     "stale turn/phase rejected",
-    "Main/Extra Deck and 3+3 zone invariants"
+    "Main/Extra Deck and 3+3 zone invariants",
+    "production adapter pinned to official passcode"
   ],
   "scope": {
     "newFilesOnly": true,
@@ -80,11 +81,13 @@
     "persistentPlayerDataChanged": false,
     "merge": false,
     "deploy": false,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "testFixtureUsesCatalogValidId": true
   },
   "limitations": [
     "Adapter is isolated and is not connected to the central Normal Summon action or trigger queue.",
     "Summon-negation handling and other Normal Summon modifiers are not modeled.",
-    "No card certification is claimed; behavior requires resolver integration and end-to-end engine tests."
+    "No card certification is claimed; behavior requires resolver integration and end-to-end engine tests.",
+    "Because Swift Gaia is not yet registered in the runtime catalog, behavioral tests inject a catalog-valid fixture ID through the adapter factory. The production entrypoint remains pinned to 16589042 and is not yet usable in a real duel until catalog registration and resolver handoff."
   ]
 }
