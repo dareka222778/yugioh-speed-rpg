@@ -1,0 +1,125 @@
+{
+  "format": 1,
+  "runId": "work-20261124T034707-0300-M582",
+  "mission": "M582",
+  "owner": "Work principal",
+  "priority": "P1 — família Tribute → dano: Mass Driver causa 400 LP por tributo sem limite por turno; Catapult Turtle causa metade do ATK no campo (ATK original se face-down), uma vez por cópia/turno. O tributo é custo, vai ao Cemitério do proprietário físico e o dano atinge a equipe adversária.",
+  "state": "reserved-and-implementing",
+  "startedAt": "2026-11-24T03:47:07-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "47846e5858f7e2a64518b2b0baf9ed2d398bc03d",
+  "branch": "feat/work-m582-tribute-burn-tag-adapter-20261124",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "47846e5858f7e2a64518b2b0baf9ed2d398bc03d",
+  "branchStartSha": "47846e5858f7e2a64518b2b0baf9ed2d398bc03d",
+  "branchHeadSha": "47846e5858f7e2a64518b2b0baf9ed2d398bc03d",
+  "reservationCommitSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/tributeBurnTagAdapter.ts",
+    "tests/tributeBurnTagAdapter.test.cjs",
+    "docs/evidence/m582-tribute-burn-tag-adapter.json",
+    ".github/workflows/m582-tribute-burn-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Mass Driver e Catapult Turtle: tributo como custo, dano por equipe, ATK no instante do tributo, regra de ATK original para monstro face-down, repetição sem OPT para Mass Driver, uma vez por cópia/turno para Catapult Turtle, auto-tributo e Cemitério do proprietário físico.",
+  "conflictCheck": {
+    "overlap": false,
+    "checkedAt": "2026-11-24T03:47:07-03:00",
+    "checkedAgainst": [
+      "M580 mantém quatro caminhos reservados e não tocados.",
+      "M581 mantém quatro caminhos isolados em feat/work-m581-equip-attack-lock-20261124; nenhum caminho M581 será tocado.",
+      "Busca de PRs por Mass Driver e Catapult Turtle não encontrou PRs existentes.",
+      "Busca de branches M582 vazia; os quatro caminhos M582 não existem na árvore atual."
+    ]
+  },
+  "cards": [
+    {
+      "id": "34906152",
+      "name": "Mass Driver",
+      "konamiDatabaseCid": 5671,
+      "kind": "Continuous Spell",
+      "officialText": "Tribute 1 monster on your side of the field to inflict 400 points of damage to your opponent's Life Points.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5671&ope=2",
+      "firstTcgRelease": "2003-10-10",
+      "firstOcgRelease": "2002-09-19",
+      "historicalEligibility": "eligible-before-2004-09-30",
+      "currentTcgStatus": "Forbidden"
+    },
+    {
+      "id": "95727991",
+      "name": "Catapult Turtle",
+      "konamiDatabaseCid": 4095,
+      "kind": "Effect Monster",
+      "officialText": "Once per turn: You can Tribute 1 monster; inflict damage to your opponent equal to half the Tributed monster's ATK on the field.",
+      "officialSourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4095&ope=2&request_locale=ae",
+      "firstTcgRelease": "2002-06-26",
+      "firstOcgRelease": "2002-10-24",
+      "historicalEligibility": "eligible-before-2004-09-30",
+      "currentOcgStatus": "Forbidden"
+    }
+  ],
+  "design": {
+    "cost": "Tributo é pago na ativação. Se a ativação for negada, o monstro continua no Cemitério do proprietário físico; nenhum inventário é criado ou destruído.",
+    "damage": "Mass Driver = 400 fixos por ativação, sem limite por turno no texto. Catapult Turtle = floor(ATK no campo / 2); para alvo face-down usa ATK original.",
+    "control": "Somente monstros atualmente controlados pela equipe da fonte podem ser tributados. Se o monstro foi roubado, vai ao Cemitério do dono físico pelo UID m0–m3.",
+    "source": "Mass Driver precisa permanecer face-up/resolved para aplicar seu efeito contínuo; Catapult Turtle pode ser tributada como custo e seu efeito ainda resolve, salvo negação explícita.",
+    "oncePerTurn": "Catapult Turtle usa limite por cópia e turno, consumido quando o efeito resolve; Mass Driver não recebe limite inventado.",
+    "safety": "Sem catálogo, allowlist, certificação, concessão de inventário, mutação de mãos ou dados persistentes."
+  },
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "customWorkflow": "pending"
+  },
+  "production": {
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "safety": {
+    "runtimeCoreChanged": false,
+    "catalogChanged": false,
+    "certificationChanged": false,
+    "releasedCardIdsChanged": false,
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "mergePerformed": false,
+    "deployPerformed": false,
+    "liveDiscordValidation": false
+  },
+  "nextTask": "Implementar o adapter de tributo e dano com snapshot de ATK, custo imediato, envio ao GY do proprietário, negação, OPT por cópia e regressões de LP/equipe.",
+  "nextWindow": "2026-11-24T08:30:00-03:00",
+  "duration": {
+    "startedAt": "2026-11-24T03:47:07-03:00",
+    "endedAt": null,
+    "elapsedMinutes": 0,
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true
+  },
+  "status": "reserved-and-implementing",
+  "lastActivityAt": "2026-11-24T03:47:07-03:00"
+}
