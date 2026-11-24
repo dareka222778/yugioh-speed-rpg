@@ -1,0 +1,105 @@
+{
+  "format": 1,
+  "runId": "work-20261124T184937-0300-M599",
+  "mission": "M599",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "implementation-committed-awaiting-ci",
+  "startedAt": "2026-11-24T18:49:37-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "branch": "feat/work-m599-standby-burn-tag-adapters-20261124",
+  "baseSha": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "branchHeadSha": "0e7c2a254d170c4856edcf2e94c034b0c0a795f4",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/standbyBurnTagAdapter.ts",
+    "tests/standbyBurnTagAdapter.test.cjs",
+    "docs/evidence/m599-standby-burn-tag-adapters.json",
+    ".github/workflows/m599-standby-burn-tag-adapters.yml"
+  ],
+  "scope": "Dark Snake Syndrome + Wave-Motion Cannon: contagem de Standby por UID/activationId, progressão 200/400/800 e custo de envio ao GY com dano 1000 por fase; somente quatro caminhos novos.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T18:58:48-03:00",
+    "sharedHead": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "cardIds": [
+      "47233801",
+      "38992735"
+    ],
+    "matchingCertificationEntries": 0,
+    "m596HandoffRequested": {
+      "pr": 539,
+      "commentId": 7145456106,
+      "status": "awaiting explicit release"
+    },
+    "m598FilesUntouched": true,
+    "m61Handoff": "pending; no resolver/metadata/certification integration",
+    "thirdPartyReservationsUntouched": true
+  },
+  "cards": [
+    {
+      "name": "Dark Snake Syndrome",
+      "passcode": "47233801",
+      "konamiDatabaseId": 5536,
+      "kind": "Continuous Spell",
+      "firstTCGPrinting": "Pharaonic Guardian (PGD-087), 2003-07-18"
+    },
+    {
+      "name": "Wave-Motion Cannon",
+      "passcode": "38992735",
+      "konamiDatabaseId": 5614,
+      "kind": "Continuous Spell",
+      "firstTCGPrinting": "Magician's Force (MFC-040), 2003-10-10"
+    }
+  ],
+  "plannedTests": 32,
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "coordinationClaimedCertified": 969,
+    "directlyCountedCardCertificationEntries": 959,
+    "releasedCardIds": 969,
+    "countDiscrepancy": "src/cardCertifications.ts tem 959 chaves explícitas; src/releasedCardIds.ts tem 969 IDs. O total efetivamente certificado precisa ser reconciliado pelo registry/CI.",
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "ci": {
+    "focused": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending"
+  },
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "effectiveWorkMinutes": 9,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Abrir PR draft e executar CI focada; corrigir qualquer falha de typecheck/teste; depois preparar a próxima família independente durante os gates gerais.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": [],
+  "pullRequestUrl": null
+}
