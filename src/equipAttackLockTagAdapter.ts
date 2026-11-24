@@ -175,6 +175,7 @@ export function equipAttackLockForMonster(
 ):EquipAttackLockResult{
   assertSession(input);
   if(typeof targetUid!=='string'||!targetUid.trim())throw new Error('UID do monstro equipado inválido.');
+  physicalSeat(targetUid);
   const target=findMonster(input.duel.core,targetUid);
   if(!target)throw new Error('Monstro equipado não está em uma Monster Zone.');
   const metadata=getPlayableCard(target.monster.id);

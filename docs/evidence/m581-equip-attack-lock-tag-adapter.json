@@ -43,7 +43,7 @@
     "damage": "500 LP por cópia de Mask of the Accursed, durante a Standby Phase do controlador do Equip Spell; se LP chega a zero, encerra o duelo conforme regra de equipe."
   },
   "testFile": "tests/equipAttackLockTagAdapter.test.cjs",
-  "expectedScenarioCount": 22,
+  "expectedScenarioCount": 26,
   "certification": {
     "newCards": 0,
     "certifiedCards": 0,
