@@ -1,6 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { createTagDuel, tagInventory, tagNormalCardIds } = require('../dist/tagDuel.js');
+const { swapTeamSeat } = require('../dist/teamRotation.js');
 const {
   SPIRIT_OF_FLAMES_ID, THE_ROCK_SPIRIT_ID, GARUDA_THE_WIND_SPIRIT_ID,
   prepareElementalSpiritSummon, payElementalSpiritSummon,
@@ -64,6 +65,7 @@ function activateOpponentTurn(duel) {
   duel.core.current = 1;
   duel.core.priority = 1;
   duel.cursor = duel.active[1];
+  duel.core.teamRotation.cursor = duel.cursor;
 }
 function inventoryMap(duel) {
   return new Map(tagInventory(duel).filter(card => card.entityKind !== 'token').map(card => [card.uid, card.id]));
@@ -235,6 +237,7 @@ test('Garuda cannot activate in its controller End Phase or from a stale phase w
   assert.deepEqual(garudaEndPhaseTargets(duel, sourceUid, { phase: 'opponent-end', activeTeam: 0 }), []);
   duel.core.current = 0;
   duel.cursor = duel.active[0];
+  duel.core.teamRotation.cursor = duel.cursor;
   assert.deepEqual(garudaEndPhaseTargets(duel, sourceUid, { phase: 'opponent-end', activeTeam: 1 }), []);
 });
 
@@ -291,4 +294,31 @@ test('a six-card hand is not auto-discarded during the summon; only the Spirit l
   assert.ok(next);
   assert.equal(next.core.players[0].hand.length, 5);
   assert.equal(next.core.players[0].hand.some(card => card.uid === sourceUid), false);
+});
+
+test('the next physical partner may summon from their own hand after the team seat rotates', () => {
+  const duel = makeDuel();
+  swapTeamSeat(duel.core, 2);
+  duel.cursor = 2;
+  duel.core.teamRotation.cursor = 2;
+  const sourceUid = replaceHandCardWith(duel, 2, 0, SPIRIT_OF_FLAMES_ID);
+  const costUid = moveDeckCardToGrave(duel, 0, 0, FIRE_COST);
+  const inactiveHandBefore = structuredClone(duel.reserves[0].hand);
+
+  const next = payElementalSpiritSummon(duel, sourceUid, costUid, getCard);
+
+  assert.ok(next);
+  assert.equal(next.core.players[0].monsters[0].uid, sourceUid);
+  assert.equal(next.core.players[0].monsters[0].owner, 0);
+  assert.deepEqual(next.reserves[0].hand, inactiveHandBefore);
+  assert.equal(next.core.players[0].banished[0].uid, costUid);
+});
+
+test('a desynchronized private-hand reservation is rejected instead of reading stale partner data', () => {
+  const duel = makeDuel();
+  const sourceUid = replaceHandCardWith(duel, 0, 0, SPIRIT_OF_FLAMES_ID);
+  moveDeckCardToGrave(duel, 2, 0, FIRE_COST);
+  duel.reserves = { ...duel.reserves, 2: { ...duel.reserves[2], hand: [...duel.reserves[2].hand] } };
+
+  assert.throws(() => prepareElementalSpiritSummon(duel, sourceUid, getCard), /fora de sincronia/);
 });

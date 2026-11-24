@@ -40,7 +40,7 @@
     "source": "src/elementalSpiritTagAdapter.ts",
     "tests": "tests/elementalSpiritTagAdapter.test.cjs",
     "workflow": ".github/workflows/m578-elemental-spirit-tag-adapter.yml",
-    "testCases": 20,
+    "testCases": 22,
     "coverage": [
       "active physical hand only; inactive partner hand never searched",
       "shared team Graveyard cost restricted to matching Attribute monster",
@@ -55,7 +55,9 @@
       "Garuda per-copy once-per-turn and position-lock preservation",
       "20–30 Main Deck, 3+3 shared zones, separate Field Zone and Extra Deck ≤5",
       "Garuda's WIND cost is positively verified",
-      "a six-card hand is not auto-discarded during the summon; End Phase discard remains engine-owned"
+      "a six-card hand is not auto-discarded during the summon; End Phase discard remains engine-owned",
+      "the next physical partner may summon from their own hand after team-seat rotation",
+      "desynchronized private-hand/reserve snapshots fail closed instead of exposing stale partner data"
     ],
     "limitations": [
       "Adapter remains isolated; no central resolver/card metadata/effect registry integration.",

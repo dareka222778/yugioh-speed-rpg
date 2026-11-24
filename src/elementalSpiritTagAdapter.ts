@@ -55,6 +55,12 @@ function assertClassicShape(duel: TagDuel): void {
       duel.active.some((seat, team) => !Number.isInteger(seat) || seat < 0 || seat > 3 || seat % 2 !== team)) {
     throw new Error('Estado TagDuel clássico inválido.');
   }
+  const rotation = duel.core.teamRotation;
+  if (!rotation || rotation.version !== 1 || Object.keys(duel.reserves).length !== 2 ||
+      JSON.stringify([duel.active, duel.cursor, duel.reserves]) !==
+      JSON.stringify([rotation.active, rotation.cursor, rotation.reserves])) {
+    throw new Error('Mãos/decks físicos fora de sincronia com a rotação 2v2.');
+  }
 }
 
 function inventorySnapshot(duel: TagDuel): Map<string, string> {
