@@ -315,6 +315,7 @@ function resolveForCardIds(
       input.active[plan.controllerTeam] !== plan.activeSeat ||
       input.core.turn !== plan.turn ||
       physicalSeat(plan.targetUid) !== plan.targetOwnerSeat ||
+      !plan.targetBinding || plan.targetBinding.uid !== plan.targetUid || plan.targetBinding.zone !== 'monsters' ||
       typeof effectNegated !== 'boolean') {
     throw new Error('Plano de mudança de posição obsoleto ou inválido.');
   }
