@@ -24,7 +24,7 @@ assert.ok(LEVEL4.length>=4,'the pool must contain four distinct Level 4+ monster
 assert.ok(LEVEL3,'the pool must contain a Level 3 monster');
 
 function member(seat){return 'm576-seat-'+seat;}
-function deck(required=[]){
+function deck(required=[...LEVEL4.slice(0,4),LEVEL3]){
   const ordered=[...new Set([...required,...NORMALS.filter(id=>!required.includes(id))])];
   assert.ok(ordered.length>=20);
   return ordered.slice(0,20);
@@ -62,10 +62,7 @@ function pendingAttack(state,team,uid){
   state.core.pending={kind:'attack',actor:team,card:uid,stage:'declare'};
 }
 function inventory(state){
-  const cards=[
-    ...tag.tagInventory(state),
-    ...Object.values(state.reserves).flatMap(held=>[...held.deck,...held.hand,...(held.extra??[])])
-  ].filter(card=>card.entityKind!=='token');
+  const cards=tag.tagInventory(state).filter(card=>card.entityKind!=='token');
   const result=new Map(cards.map(card=>[card.uid,card.id]));
   assert.equal(result.size,cards.length,'physical UIDs must be unique');
   return result;

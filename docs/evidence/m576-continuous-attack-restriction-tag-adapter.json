@@ -47,7 +47,7 @@
   ],
   "tests": {
     "focusedFile": "tests/continuousAttackRestrictionTagAdapter.test.cjs",
-    "caseCount": 7,
+    "caseCount": 8,
     "behaviorCertifiedCards": 0
   },
   "certification": {

@@ -30,12 +30,8 @@ function assertClassicShape(duel:TagDuel):void{
   }
 }
 function allPhysicalCards(duel:TagDuel){
-  return [
-    ...tagInventory(duel),
-    ...Object.values(duel.reserves).flatMap(held=>[
-      ...held.deck,...held.hand,...(held.extra??[])
-    ])
-  ];
+  // tagInventory delegates to duelCards, which already includes teamRotation reserves.
+  return tagInventory(duel);
 }
 function inventorySnapshot(duel:TagDuel):Map<string,string>{
   const result=new Map<string,string>();
