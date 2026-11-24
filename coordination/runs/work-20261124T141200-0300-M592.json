@@ -4,16 +4,16 @@
   "mission": "M592",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved-awaiting-isolated-branch",
+  "status": "focused-ci-running-after-fix",
   "startedAt": "2026-11-24T14:12:00-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "aefa935e6ce6238826ae3d51fd31e6352cf75b7f",
   "branch": "feat/work-m592-attack-and-receive-tag-adapter-20261124",
-  "baseSha": null,
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "baseSha": "b629571378f875ddc7157bf1e023001ad934438d",
+  "branchHeadSha": "f4b156bb703a8012672cd11e11e5389f6d8bfc40",
+  "pullRequest": 535,
   "reservedFiles": [
     "src/attackAndReceiveTagAdapter.ts",
     "tests/attackAndReceiveTagAdapter.test.cjs",
@@ -84,11 +84,38 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 6,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar o adapter de dano recebido, testes determinísticos e workflow; depois conferir CI e iniciar outra família independente.",
+  "nextTask": "M593: adapter contínuo de Bad Reaction to Simochi para substituir ganho de LP do time adversário por dano equivalente; M592 aguarda CI verde.",
   "nextWindow": "2026-11-24T18:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/535",
+  "lastActivityAt": "2026-11-24T14:17:40-03:00",
+  "ci": {
+    "focused": {
+      "status": "in_progress",
+      "runId": 45446945653,
+      "previousFailure": {
+        "runId": 45446853503,
+        "passed": 17,
+        "failed": 1,
+        "reason": "expectativa de erro /Equipe/ não correspondia à mensagem; corrigido com validação explícita do snapshot de equipe",
+        "fixedInSha": "f4b156bb703a8012672cd11e11e5389f6d8bfc40"
+      }
+    },
+    "cardBatchFast": {
+      "status": "in_progress",
+      "runId": 45446945517
+    },
+    "milestone1000": {
+      "status": "in_progress",
+      "runId": 45446945623
+    },
+    "engineValidation": {
+      "status": "in_progress",
+      "runId": 45446945568
+    }
+  }
 }
