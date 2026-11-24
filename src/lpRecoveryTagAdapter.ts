@@ -145,6 +145,7 @@ function locateCost(state:TagDuel,team:RecoveryTeam,uid:string):EmergencyCost{
   const field=player.field&&player.field.uid===uid?[player.field]:[];
   if(backrow.length+field.length!==1)throw new Error('Custo de Provisões de Emergência ausente, duplicado ou fora do controle da equipe.');
   const card=backrow[0]??field[0];
+  if(!card)throw new Error('Custo de recuperação ausente.');
   const metadata=getPlayableCard(card.id);
   const kind=spellTrapKind(card.id);
   if(field.length&&metadata?.field!==true){
