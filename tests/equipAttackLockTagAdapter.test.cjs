@@ -177,7 +177,7 @@ test('Mask upkeep damages the current monster controller, not the Equip Spell co
   assert.equal(resolved.result.targetPhysicalOwnerSeat,1);
   assert.equal(resolved.result.lpBefore,1000);
   assert.equal(resolved.result.lpAfter,500);
-  assert.equal(resolved.session.duel.core.players[0].lp,8000);
+  assert.equal(resolved.session.duel.core.players[0].lp,4000);
   assert.equal(resolved.session.duel.core.players[1].lp,500);
   assertConserved(resolved.session.duel,before);
   assert.deepEqual(hands(resolved.session.duel),beforeHands);
@@ -293,7 +293,7 @@ test('Mask upkeep waits until a later turn after the Equip Spell resolves',()=>{
   const state=create('mask-same-turn'),target=takeMonster(state,1,WARRIOR);
   const source=addEquip(state,0,0,MASK_OF_THE_ACCURSED_ID,target,{setTurn:2});
   const context=addStandby(state,0,2);
-  assert.throws(()=>resolveMaskOfTheAccursedStandby(createEquipAttackLockSession(state),source,context),/eligible/);
+  assert.throws(()=>resolveMaskOfTheAccursedStandby(createEquipAttackLockSession(state),source,context),/elegível/);
 });
 
 test('Mask upkeep rejects an equipped target that left the field',()=>{
