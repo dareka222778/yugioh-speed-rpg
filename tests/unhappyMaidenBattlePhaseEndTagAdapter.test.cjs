@@ -180,7 +180,7 @@ test('resolução mantém o pedido pendente sem terminar a Battle Phase dentro d
   duel.core.players[0].banished.push(source);
   const hand = privateZone(duel, 0, 'hand');
   const deck = privateZone(duel, 0, 'deck');
-  hand.push(...deck.splice(0, 3));
+  while (hand.length < 7) hand.push(deck.shift());
   assert.equal(hand.length, 7);
 
   const before = inventory(duel);
