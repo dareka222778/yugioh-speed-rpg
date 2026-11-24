@@ -216,11 +216,11 @@ test('Catapult Turtle is once per copy per turn',()=>{
 
 test('two Catapult Turtle copies each get their own once-per-turn activation',()=>{
   const state=create('catapult-two-copies'),sourceA=addCatapult(state,0,0),sourceB=addCatapult(state,0,2);
-  const firstTribute=takeMonster(state,0,WARRIOR),secondTribute=takeMonster(state,2,MACHINE);
+  const firstTribute=takeMonster(state,0,WARRIOR);
   mainPhase(state,0,1);
   let session=activateTributeBurn(createTributeBurnSession(state),sourceA,firstTribute,'catapult-copy-a').session;
   session=resolveTributeBurn(session,'catapult-copy-a').session;
-  session=activateTributeBurn(session,sourceB,secondTribute,'catapult-copy-b').session;
+  session=activateTributeBurn(session,sourceB,sourceA,'catapult-copy-b').session;
   const resolved=resolveTributeBurn(session,'catapult-copy-b');
   assert.equal(resolved.result.effectApplied,true);
 });
@@ -248,6 +248,22 @@ test('the soft once-per-turn resets when the host reports a face-down or field-e
   monster.position='atk';
   const second=activateTributeBurn(session,source,secondTribute,'catapult-reset-2');
   assert.equal(second.result.damageAmount,Math.floor(getPlayableCard(MACHINE).atk/2));
+});
+
+
+test('a Catapult Turtle can be revived and used again after it Tributes itself',()=>{
+  const state=create('catapult-self-revive'),source=addCatapult(state,0,0);
+  const tribute=takeMonster(state,0,WARRIOR);
+  mainPhase(state,0,1);
+  let session=activateTributeBurn(createTributeBurnSession(state),source,source,'catapult-self-revive-1').session;
+  session=resolveTributeBurn(session,'catapult-self-revive-1').session;
+  const card=session.duel.core.players[0].grave.find(item=>item.uid===source);
+  session.duel.core.players[0].grave=session.duel.core.players[0].grave.filter(item=>item.uid!==source);
+  session.duel.core.players[0].monsters.push({
+    ...card,faceUp:true,position:'atk',entered:2,changed:2,attacked:0,attackCount:0,atkBoost:0,defBoost:0
+  });
+  const second=activateTributeBurn(session,source,tribute,'catapult-self-revive-2');
+  assert.equal(second.result.damageAmount,Math.floor(getPlayableCard(WARRIOR).atk/2));
 });
 
 test('a Catapult Turtle source removed after activation still resolves unless negated',()=>{
@@ -425,7 +441,7 @@ test('the adapter rejects malformed physical UIDs and unknown tribute targets',(
   mainPhase(state,0,1);
   const session=createTributeBurnSession(state);
   assert.throws(()=>activateTributeBurn(session,'m4:bad',tribute,'bad-source'),/UID físico/);
-  assert.throws(()=>activateTributeBurn(session,source,'m0:unknown','bad-target'),/Monster Zone/);
+  assert.throws(()=>activateTributeBurn(session,source,'m0:unknown','bad-target'),/monstro tributado/);
 });
 
 test('inventory and all private hands are conserved across cost and resolution',()=>{

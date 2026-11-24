@@ -291,13 +291,9 @@ export function activateTributeBurn(
   const next=structuredClone(input),nextSource=locateSource(next.duel.core,sourceUid);
   if(!nextSource)throw new Error('A fonte saiu do campo antes do pagamento do custo.');
   const moved=moveTributeToOwnerGrave(next.duel.core,team,tributeUid);
-  if(sourceId===CATAPULT_TURTLE_ID){
-    next.usedCatapultTurn[sourceUid]=next.duel.core.turn;
-    if(sourceUid===tributeUid){
-      // The soft once-per-turn restriction resets when this copy leaves the field.
-      delete next.usedCatapultTurn[sourceUid];
-    }
-  }
+  if(sourceId===CATAPULT_TURTLE_ID)next.usedCatapultTurn[sourceUid]=next.duel.core.turn;
+  // Any Catapult Turtle that leaves the field resets its soft once-per-turn.
+  if(moved.id===CATAPULT_TURTLE_ID)delete next.usedCatapultTurn[tributeUid];
   const activation:TributeBurnActivation={
     activationId,sourceUid,sourceId,sourcePhysicalOwnerSeat:physicalSeat(sourceUid),
     controllerTeam:team,sourceZone:zone,turn:next.duel.core.turn,
