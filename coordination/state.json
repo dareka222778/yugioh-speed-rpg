@@ -4,7 +4,7 @@
   "priorityRequestedBy": "Work",
   "state": "active",
   "startedAt": "2026-11-23T22:30:10-03:00",
-  "lastActivityAt": "2026-11-23T22:30:10-03:00",
+  "lastActivityAt": "2026-11-23T22:44:03-03:00",
   "nextScheduledAt": "2026-11-24T03:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -4590,7 +4590,7 @@
     "targetMet": false,
     "ciWaitExcluded": true
   },
-  "nextTask": "Implementar adapter e regressões comportamentais; durante CI preparar a próxima família independente, conferir novo HEAD/coordenação e só então decidir próximo lote.",
+  "nextTask": "Concluir M575 em branch própria enquanto Engine Validation/Extended Soak do PR #520 terminam; depois revisar novo HEAD e coordenação, finalizar M574 e seguir próxima família independente.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1 — Draining Shield (43250041) e Enchanted Javelin (96355986): respostas de ataque que recuperam LP pelo ATK atual; Draining Shield também nega apenas ataque de monstro adversário, enquanto Enchanted Javelin não nega o ataque.",
   "sharedHeadBeforeClaim": "c0da86800217e62719335f8a690113f82c087860",
@@ -18408,6 +18408,19 @@
         "docs/evidence/m574-attack-lp-gain-tag-adapter.json",
         ".github/workflows/m574-attack-lp-gain-tag-adapter.yml"
       ]
+    },
+    {
+      "runId": "work-20261123T224403-0300-M575",
+      "mission": "M575",
+      "branch": "feat/work-m575-continuous-attack-cost-tag-adapter-20261123",
+      "baseSha": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+      "state": "reserved-and-implementing",
+      "reservedFiles": [
+        "src/continuousAttackLockTagAdapter.ts",
+        "tests/continuousAttackLockTagAdapter.test.cjs",
+        "docs/evidence/m575-continuous-attack-lock-tag-adapter.json",
+        ".github/workflows/m575-continuous-attack-lock-tag-adapter.yml"
+      ]
     }
   ],
   "currentWorkReservationM574": {
@@ -18461,5 +18474,65 @@
       "docs/evidence/m573-summon-negation-tag-adapter.json",
       ".github/workflows/m573-summon-negation-tag-adapter.yml"
     ]
+  },
+  "currentWorkReservationM575": {
+    "runId": "work-20261123T224403-0300-M575",
+    "mission": "M575",
+    "owner": "Work principal",
+    "state": "reserved-and-implementing",
+    "branch": "feat/work-m575-continuous-attack-cost-tag-adapter-20261123",
+    "baseSha": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+    "reservedFiles": [
+      "src/continuousAttackLockTagAdapter.ts",
+      "tests/continuousAttackLockTagAdapter.test.cjs",
+      "docs/evidence/m575-continuous-attack-lock-tag-adapter.json",
+      ".github/workflows/m575-continuous-attack-lock-tag-adapter.yml"
+    ],
+    "priority": "P1 — bloqueios contínuos de ataque: Messenger of Peace (44656491) proíbe ataques de monstros com ATK atual >=1500 e cobra 100 LP na Standby; Gravekeeper's Servant (16762927) exige que o atacante envie a carta do topo do próprio Deck físico ao Cemitério.",
+    "startedAt": "2026-11-23T22:44:03-03:00",
+    "lastActivityAt": "2026-11-23T22:44:03-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026"
+  },
+  "subtaskReservationM575": {
+    "runId": "work-20261123T224403-0300-M575",
+    "mission": "M575",
+    "owner": "Work principal",
+    "state": "reserved-and-implementing",
+    "branch": "feat/work-m575-continuous-attack-cost-tag-adapter-20261123",
+    "baseSha": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+    "reservedFiles": [
+      "src/continuousAttackLockTagAdapter.ts",
+      "tests/continuousAttackLockTagAdapter.test.cjs",
+      "docs/evidence/m575-continuous-attack-lock-tag-adapter.json",
+      ".github/workflows/m575-continuous-attack-lock-tag-adapter.yml"
+    ],
+    "priority": "P1 — bloqueios contínuos de ataque: Messenger of Peace (44656491) proíbe ataques de monstros com ATK atual >=1500 e cobra 100 LP na Standby; Gravekeeper's Servant (16762927) exige que o atacante envie a carta do topo do próprio Deck físico ao Cemitério.",
+    "startedAt": "2026-11-23T22:44:03-03:00",
+    "lastActivityAt": "2026-11-23T22:44:03-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026"
+  },
+  "latestSubtaskCheckpointM575": "coordination/runs/work-20261123T224403-0300-M575.json",
+  "sharedHeadAtM575Start": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+  "expectedHeadForM575CoordinationCommit": "4f48cd49ad12c7d0d9c80b383dd8b97d6038fbeb",
+  "m575CatalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "m575NextTask": "Implementar os dois comportamentos com regressões 2v2, validar janela de Standby e milagem do Deck ativo; em paralelo acompanhar CI M574 sem alterar sua branch.",
+  "m574Status": {
+    "branch": "feat/work-m574-attack-lp-gain-tag-adapter-20261123",
+    "latestBranchHead": "bc7bec1f9b1cb18fb88e3c1e09f593abf20c0b7a",
+    "pullRequest": 520,
+    "ci": {
+      "focused": "success",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "in_progress",
+      "extendedSoak": "in_progress"
+    }
   }
 }
