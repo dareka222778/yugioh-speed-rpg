@@ -76,5 +76,6 @@
     "M61 still owns the protected resolver, metadata and certification files; this PR adds an isolated adapter only.",
     "The new card IDs are not yet playable/certified in engine-v9; adapter tests use fixture aliases and do not count as engine-v9 certification.",
     "No live Discord gateway/guild, production database, merge, deploy or backup restoration was exercised."
-  ]
+  ],
+  "inventoryGranted": 0
 }
