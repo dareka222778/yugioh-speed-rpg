@@ -6,13 +6,13 @@
   "scope": "Adapters puros para Rain of Mercy e Emergency Provisions; sem alterar resolver central, catálogo, certificações, allowlist ou inventário.",
   "cards": [
     {
-      "name": "Rain of Mercy",
-      "passcode": "66719324",
-      "konamiDatabaseId": 5151,
-      "kind": "Normal Spell",
-      "firstTCGPrinting": "Pharaoh's Servant (PSV-065), 2002-10-20",
-      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5151&ope=2&request_locale=en",
-      "officialEffect": "Increase the Life Points of both players by 1000."
+      "name": "Nutrient Z",
+      "passcode": "29389368",
+      "konamiDatabaseId": 5403,
+      "kind": "Normal Trap",
+      "firstTCGPrinting": "Legacy of Darkness (LOD-096), 2003-06-06",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5403&ope=2&request_locale=en",
+      "officialEffect": "During damage calculation, when you are about to take 2000 or more battle damage: Gain 4000 LP first."
     },
     {
       "name": "Emergency Provisions",
@@ -27,16 +27,18 @@
   "rulings": {
     "rainOfMercy": "Os dois jogadores recebem 1000 LP; no TagDuel isso produz um plano de ganho para cada equipe. Efeitos de substituição de ganho de LP permanecem elegíveis para resolução no motor.",
     "emergencyProvisions": "Pode enviar zero ou mais outras Magias/Armadilhas controladas pela equipe, incluindo cartas setadas e a Field Spell; a própria Emergency Provisions não pode ser custo. Quick-Play da mão só no turno próprio; setada só após o turno em que foi setada. Enviar os custos é custo, então eles permanecem no Cemitério mesmo se o efeito for negado.",
-    "tagDuel": "Mãos permanecem privadas por participante; campo/LP compartilhados por equipe. A carta setada é ativada apenas quando a equipe controladora tem prioridade."
+    "tagDuel": "Mãos permanecem privadas por participante; campo/LP compartilhados por equipe. A carta setada é ativada apenas quando a equipe controladora tem prioridade.",
+    "nutrientZ": "A equipe que está prestes a receber pelo menos 2000 de dano de batalha ganha 4000 LP antes da aplicação do dano. A carta precisa estar setada desde turno anterior; no TagDuel, a equipe defensora compartilha LP e a prioridade da janela de dano."
   },
   "design": {
     "rainOfMercy": "Normal Spell na Main Phase própria, da mão privada do assento ativo ou da zona S/T setada (inclusive no turno em que foi setada); cria dois planos de +1000 LP.",
     "emergencyProvisions": "Quick-Play da mão no turno próprio ou setada em turno anterior quando a equipe controladora possui prioridade; valida custos por UID e metadata certificada, envia outras S/T do backrow ou Field Zone como custo e gera 1000 LP por carta.",
     "replacement": "Planos de ganho ficam marcados como replacementEligible para que Bad Reaction to Simochi e demais substituições sejam resolvidas uma única vez pelo motor central.",
-    "integrity": "Valida prioridade/rotação, mão privada, zonas, IDs, tipo de carta de custo, LP atual, setTurn e idempotência; não altera o estado recebido."
+    "integrity": "Valida prioridade/rotação, mão privada, zonas, IDs, tipo de carta de custo, LP atual, setTurn e idempotência; não altera o estado recebido.",
+    "nutrientZ": "Normal Trap setada em turno anterior; só resolve durante a janela explícita de Damage Calculation quando a equipe controladora está prestes a receber pelo menos 2000 de dano de batalha. Cria ganho de 4000 LP antes do dano, elegível a substituição de ganho."
   },
   "tests": {
-    "planned": 23,
+    "planned": 27,
     "categories": [
       "Rain of Mercy: ganho simultâneo, set no mesmo turno, negação, janela, mão privada, LP stale e replay",
       "Emergency Provisions: custo de Spell/Trap, custos face-up/setados, Field Zone, custo zero, negação sem restituição, Quick-Play da mão/setada, prioridade e turno de set",
@@ -51,7 +53,14 @@
     "emergencyProvisionsCertified": false,
     "emergencyProvisionsReleased": false,
     "newCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "nutrientZCertified": false,
+    "nutrientZReleased": false,
+    "discardedCandidate": {
+      "name": "Rain of Mercy",
+      "passcode": "66719324",
+      "reason": "já certificada e liberada no HEAD; removida para evitar duplicação"
+    }
   },
   "catalogAtEnd": {
     "newCertifications": 0,
