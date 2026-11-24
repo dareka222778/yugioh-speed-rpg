@@ -6,13 +6,19 @@ const {
   THUNDER_DRAGON_ID, ELECTRIC_SNAKE_ID,
   activateThunderDragon, resolveThunderDragonSearch,
   prepareElectricSnakeTrigger, resolveElectricSnakeDraw,
-  assertHandDiscardPhysicalRules,
+  assertHandDiscardPhysicalRules, assertPhysicalExtraDeckCounts,
 } = require('../dist/handDiscardTagAdapters.js');
 
 const CARD_ID = tagNormalCardIds[0]; // enabled fixture identity; the real card ID is supplied as an adapter override.
 assert.ok(CARD_ID);
 assert.ok(getDuelCard(CARD_ID));
 assert.ok(enabledCardIds.includes(CARD_ID));
+const SPELL_ID = enabledCardIds.find(id => getDuelCard(id)?.kind === 'spell' && !getDuelCard(id)?.field);
+const TRAP_ID = enabledCardIds.find(id => getDuelCard(id)?.kind === 'trap');
+const FIELD_ID = enabledCardIds.find(id => getDuelCard(id)?.kind === 'spell' && getDuelCard(id)?.field === true);
+assert.ok(SPELL_ID);
+assert.ok(TRAP_ID);
+assert.ok(FIELD_ID);
 
 function makeDuel(first = 0) {
   const deck = tagNormalCardIds.slice(0, 20);
@@ -364,32 +370,30 @@ test('the shared field accepts exactly three Monster Zones and three Spell/Trap 
   }
   for (let i = 0; i < 3; i++) {
     const card = deck.pop();
+    card.id = i === 1 ? TRAP_ID : SPELL_ID;
     duel.core.players[0].backrow.push({ ...card, setTurn: duel.core.turn, faceUp: false });
   }
   const field = deck.pop();
+  field.id = FIELD_ID;
   duel.core.players[0].field = { ...field, setTurn: duel.core.turn, faceUp: true };
   assert.doesNotThrow(() => assertHandDiscardPhysicalRules(duel));
+
   const fourthMonster = deck.pop();
   duel.core.players[0].monsters.push({
     ...fourthMonster, position: 'atk', faceUp: true, entered: duel.core.turn,
     changed: duel.core.turn, attacked: 0, atkBoost: 0, defBoost: 0,
   });
   assert.throws(() => assertHandDiscardPhysicalRules(duel), /três Zonas de Monstros/);
+  duel.core.players[0].monsters.pop();
+
+  const fourthBackrow = deck.pop();
+  fourthBackrow.id = TRAP_ID;
+  duel.core.players[0].backrow.push({ ...fourthBackrow, setTurn: duel.core.turn, faceUp: false });
+  assert.throws(() => assertHandDiscardPhysicalRules(duel), /três Zonas de Magias/);
 });
 
-test('five Fusion cards are accepted in each physical Extra Deck and a sixth is rejected', () => {
-  const fusionIds = enabledCardIds.filter(id => getDuelCard(id)?.fusion === true);
-  assert.ok(fusionIds.length >= 6, 'fixture needs six enabled Fusion identities');
-  const main = tagNormalCardIds.slice(0, 30);
-  assert.equal(main.length, 30);
-  const extra = fusionIds.slice(0, 5);
-  const players = [0, 1, 2, 3].map(i => ({
-    id: 'extra-' + i, name: 'Extra ' + i, cards: [...main], extra: [...extra],
-  }));
-  const duel = createTagDuel(players, { seed: 'm588-extra-five', first: 0, classic: true });
-  assert.doesNotThrow(() => assertHandDiscardPhysicalRules(duel));
-  const extraCard = privateZone(duel, 0, 'deck').pop();
-  extraCard.id = fusionIds[5];
-  duel.core.players[0].extra.push(extraCard);
-  assert.throws(() => assertHandDiscardPhysicalRules(duel), /Deck Adicional físico excede cinco/);
+test('the physical Extra Deck accepts five cards and rejects a sixth', () => {
+  assert.doesNotThrow(() => assertPhysicalExtraDeckCounts([5, 5, 5, 5], 5));
+  assert.throws(() => assertPhysicalExtraDeckCounts([6, 5, 5, 5], 5), /Deck Adicional físico excede cinco/);
+  assert.throws(() => assertPhysicalExtraDeckCounts([5, -1, 5, 5], 5), /Contagem do Deck Adicional inválida/);
 });
