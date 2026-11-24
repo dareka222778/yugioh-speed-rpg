@@ -109,7 +109,7 @@ function assertPhysicalRules(duel:TagDuel):void{
     for(const card of player.extra??[]){extra.add(card.uid);extras[physicalSeat(card.uid)]++;}
   }
   for(const [seat,held] of Object.entries(duel.reserves)){
-    if(!/^\\d$/.test(seat)||Number(seat)>3)throw new Error('Assento físico de reserva inválido.');
+    if(!/^\d$/.test(seat)||Number(seat)>3)throw new Error('Assento físico de reserva inválido.');
     for(const card of held.extra??[]){extra.add(card.uid);extras[physicalSeat(card.uid)]++;}
   }
   const main=[0,0,0,0];
