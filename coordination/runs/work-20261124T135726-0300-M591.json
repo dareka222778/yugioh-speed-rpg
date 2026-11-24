@@ -4,16 +4,16 @@
   "mission": "M591",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved-awaiting-isolated-branch",
+  "status": "focused-ci-green-engine-validation-running",
   "startedAt": "2026-11-24T13:57:26-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "980c423c8b32916ce6703288f340f1dce5dfca35",
   "branch": "feat/work-m591-backfire-balloon-lizard-lp-20261124",
-  "baseSha": null,
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "baseSha": "aefa935e6ce6238826ae3d51fd31e6352cf75b7f",
+  "branchHeadSha": "ede24efd45475c5539d558d29a3289954b686044",
+  "pullRequest": 534,
   "reservedFiles": [
     "src/triggeredLpTagAdapter.ts",
     "tests/triggeredLpTagAdapter.test.cjs",
@@ -89,11 +89,37 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 15,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar adapter puro e testes determinísticos; depois executar workflow focado, Card Batch Fast, Milestone 1000 e Engine Validation; em seguida revisar o novo HEAD e iniciar outra família independente.",
+  "nextTask": "M592: adapter independente Attack and Receive para dano recebido e dano escalonado por cópias no Cemitério; M591 aguarda Engine Validation.",
   "nextWindow": "2026-11-24T18:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/534",
+  "lastActivityAt": "2026-11-24T14:11:29-03:00",
+  "ci": {
+    "focused": {
+      "status": "success",
+      "runId": 45445750851,
+      "tests": 26,
+      "passed": 26,
+      "failed": 0
+    },
+    "cardBatchFast": {
+      "status": "success",
+      "runId": 45445768185
+    },
+    "milestone1000": {
+      "status": "success",
+      "runId": 45445768234,
+      "certified": 969,
+      "remaining": 31,
+      "newCertifications": 0
+    },
+    "engineValidation": {
+      "status": "in_progress",
+      "runId": 45445768331
+    }
+  }
 }
