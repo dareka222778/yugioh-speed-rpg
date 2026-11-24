@@ -58,11 +58,17 @@
   },
   "catalogAtStart": {
     "coordinationClaimedCertified": 969,
-    "directlyCountedCardCertificationEntries": 959,
+    "directlyCountedCardCertificationEntries": 969,
     "releasedCardIds": 969,
-    "countDiscrepancy": "A leitura direta de src/cardCertifications.ts encontrou 959 entradas explícitas, enquanto releasedCardIds.ts contém 969 IDs. A contagem certificada efetiva precisa ser reconciliada pelo registry/CI; nenhum número é incrementado por este adapter.",
+    "countDiscrepancy": "Rechecagem do HEAD compartilhado e do output de card-batch-fast no SHA bbfaf37 confirmou 969 certificados únicos e 969 IDs liberados; a contagem anterior de 959 foi uma leitura inconsistente e foi corrigida.",
     "newCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "uniqueCertificateIds": 969,
+    "verifiedBy": [
+      "direct unique-ID count in src/cardCertifications.ts",
+      "Card Batch Fast output on initial M599 SHA",
+      "Milestone 1000 workflow on initial M599 SHA"
+    ]
   },
   "catalogAtEnd": {
     "newCertifications": 0,
