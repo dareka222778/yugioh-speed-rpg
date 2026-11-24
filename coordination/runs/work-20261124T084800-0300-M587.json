@@ -4,7 +4,7 @@
   "mission": "M587",
   "owner": "Work principal",
   "priority": "P1 — FLIP draw/reveal/discard: Hiro's Shadow Scout faz o oponente ativo comprar 3; Spell Cards comprados vão ao Cemitério compartilhado, demais permanecem na mão.",
-  "status": "reserved-and-implementing",
+  "status": "ci-in-progress",
   "startedAt": "2026-11-24T08:48:00-03:00",
   "endedAt": null,
   "duration": {
@@ -21,12 +21,12 @@
   "sharedHeadAtReservation": "462e86aadaa9424575e4eef68cd0e7e67331fc98",
   "branch": "feat/work-m587-hiro-shadow-scout-tag-adapter-20261124",
   "baseBranch": "feat/rea-engine-recovery-20261026",
-  "baseSha": null,
-  "branchStartSha": null,
-  "branchHeadSha": null,
+  "baseSha": "65b6a3e5577f35555638c6378e316e3fce71e482",
+  "branchStartSha": "65b6a3e5577f35555638c6378e316e3fce71e482",
+  "branchHeadSha": "32e29cdb286e71d3c977ad2aa731ea2d0d8f53f3",
   "coordinationCommitSha": null,
-  "pullRequest": null,
-  "pullRequestUrl": null,
+  "pullRequest": 531,
+  "pullRequestUrl": "https://github.com/dareka222778/yugioh-speed-rpg/pull/531",
   "reservedFiles": [
     "src/hiroShadowScoutTagAdapter.ts",
     "tests/hiroShadowScoutTagAdapter.test.cjs",
@@ -100,11 +100,11 @@
     "inventoryGranted": 0
   },
   "ci": {
-    "focused": "not-started",
-    "cardBatchFast": "not-started",
-    "milestone1000": "not-started",
-    "engineValidation": "not-started",
-    "customWorkflow": "not-started"
+    "focused": "in-progress",
+    "cardBatchFast": "in-progress",
+    "milestone1000": "success",
+    "engineValidation": "in-progress",
+    "customWorkflow": "in-progress"
   },
   "production": {
     "mergePerformed": false,
@@ -131,7 +131,9 @@
     "status": "not-started",
     "planned": "Node 22, npm ci, npm run check, npm run build, evidence JSON parse and focused node:test suite."
   },
-  "nextTask": "Implementar o adapter de Hiro's Shadow Scout com draw top-first, reveal, descarte exclusivo de Spell Cards, deck-out conforme drawCards clássico, hand limit 6 apenas na End Phase e conservação de UID.",
+  "nextTask": "Acompanhar os quatro workflows do SHA 32e29cdb; corrigir qualquer falha reproduzível antes de liberar a reserva.",
   "nextWindow": "2026-11-24T13:30:00-03:00",
-  "handoff": "Não tocar resolver central, catálogo, allowlist, comandos, banco, dados dos jogadores ou inventário. M586 permanece em CI e com reserva própria."
+  "handoff": "Não tocar resolver central, catálogo, allowlist, comandos, banco, dados dos jogadores ou inventário. M586 permanece em CI e com reserva própria.",
+  "latestBranchHeadSha": "32e29cdb286e71d3c977ad2aa731ea2d0d8f53f3",
+  "lastActivityAt": "2026-11-24T08:51:55-03:00"
 }

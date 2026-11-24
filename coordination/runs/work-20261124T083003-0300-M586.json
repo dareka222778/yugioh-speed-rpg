@@ -4,18 +4,18 @@
   "mission": "M586",
   "owner": "Work principal",
   "priority": "P1 — efeitos FLIP de dano: Des Koala causa 400 por carta na mão privada do oponente ativo; Princess of Tsurugi causa 500 por Spell/Trap na backrow e Field Zone da equipe adversária.",
-  "status": "ci-rerun-in-progress-after-focused-test-fix",
+  "status": "focused-ci-green-engine-validation-pending",
   "startedAt": "2026-11-24T08:30:03-03:00",
   "endedAt": null,
   "duration": {
     "startedAt": "2026-11-24T08:30:03-03:00",
     "endedAt": null,
-    "elapsedMinutes": 18,
+    "elapsedMinutes": 22,
     "effectiveWorkMinutes": null,
     "targetEffectiveMinutes": 60,
     "targetMet": false,
     "ciWaitExcluded": true,
-    "note": "18 minutos de parede desde o início; tempo efetivo não foi cronometrado e espera de CI não será contada."
+    "note": "22 minutos de parede; tempo efetivo não cronometrado; espera de CI excluída."
   },
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
@@ -111,19 +111,16 @@
   },
   "ci": {
     "focused": {
-      "status": "rerun-pending",
-      "firstAttempt": {
-        "passed": 15,
-        "failed": 1,
-        "total": 16,
-        "failedScenario": "hand-limit test asserted TagDuel.phase instead of TagDuel.core.phase"
-      },
-      "fixCommit": "b754b779ead0428f9b108ed80a0e55a33bc79516"
+      "status": "success",
+      "sha": "b754b779ead0428f9b108ed80a0e55a33bc79516",
+      "tests": 16,
+      "passed": 16,
+      "failed": 0
     },
-    "cardBatchFast": "success-on-initial-head-33b62cb",
-    "milestone1000": "success-on-initial-head-33b62cb",
-    "engineValidation": "in-progress-on-initial-head-33b62cb",
-    "customWorkflow": "failed-on-initial-head-33b62cb; corrected test assertion in b754b779; rerun pending"
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "in-progress",
+    "customWorkflow": "success"
   },
   "production": {
     "mergePerformed": false,
@@ -150,12 +147,13 @@
     "status": "not-started",
     "planned": "Node 22, npm ci, npm run check, npm run build, JSON evidence parse and focused node:test suite."
   },
-  "nextTask": "Acompanhar os quatro workflows no novo HEAD b754b779; corrigir somente falhas reproduzíveis; depois registrar contagem final e liberar os quatro caminhos ao auxiliar.",
+  "nextTask": "Aguardar Engine validation no SHA b754b779; se verde, registrar resultado final e liberar os quatro caminhos ao auxiliar. Não fazer merge/deploy.",
   "nextWindow": "2026-11-24T13:30:00-03:00",
   "handoff": "M61 permanece reservado; não editar resolver central, catálogo, allowlist, comandos, banco ou dados dos jogadores. Escopo M586 contém somente quatro caminhos novos.",
   "latestBranchHeadSha": "b754b779ead0428f9b108ed80a0e55a33bc79516",
-  "lastActivityAt": "2026-11-24T08:48:00-03:00",
+  "lastActivityAt": "2026-11-24T08:51:55-03:00",
   "blocksCompleted": [
-    "CI inicial: TypeScript check/build e JSON passaram; 15/16 testes passaram. Falha isolada: teste de mão consultou state.phase em vez de state.core.phase; corrigido em b754b779."
+    "CI inicial: TypeScript check/build e JSON passaram; 15/16 testes passaram. Falha isolada: teste de mão consultou state.phase em vez de state.core.phase; corrigido em b754b779.",
+    "Correção do teste de mão publicada em b754b779; workflow M586 verde: npm ci, TypeScript check, build, evidência JSON e 16/16 testes focados."
   ]
 }
