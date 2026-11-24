@@ -1,0 +1,45 @@
+{
+  "format": 1,
+  "mission": "M601",
+  "observedAt": "2026-11-24T19:19:43-03:00",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHead": "bbb03f6416d08b515adbad1940d094b9a9bed497",
+  "sourceFiles": {
+    "src/cardCertifications.ts": "3725be7ab73c4ce441cdf561037acfaeaa321f6e",
+    "src/releasedCardIds.ts": "2220c352edd047a7cdc5881cb18f88282827b9f1",
+    "src/cardRegistry.ts": "9d253d4137c8f5b12accd64c277c8859172bce36",
+    "src/effectRegistry.ts": "568324c1fbd7a2e43e260625c9af77e76c851cda"
+  },
+  "baseline": {
+    "certifiedFromExplicitCertificates": 959,
+    "enabledRegistryCards": 959,
+    "releasedAllowlist": 969,
+    "releasedButUncertified": 10,
+    "certifiedButNotReleased": 0,
+    "remainingTo1000": 41,
+    "newCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "releasedButUncertifiedIds": [
+    "02314238",
+    "13839120",
+    "20727787",
+    "28121403",
+    "38411870",
+    "41172955",
+    "61044390",
+    "63391643",
+    "81510157",
+    "86445415"
+  ],
+  "method": "A contagem autoritativa usa enabledCardIds produzido por buildCardRegistry e é reconciliada com Object.keys(cardCertifications). releasedCardIds é somente uma allowlist de distribuição; não é fonte de certificação. cardDistributionAllowed exige simultaneamente carta jogável/certificada e presença na allowlist.",
+  "conclusion": "O estado de coordenação que reportava 969 certificadas estava usando, ou confundindo, o total da allowlist. O baseline reproduzível no HEAD observado é 959 certificadas; faltam 41 para 1.000. Os 10 IDs excedentes da allowlist permanecem bloqueados pela política e não são promovidos.",
+  "changes": {
+    "runtime": false,
+    "catalog": false,
+    "certificates": false,
+    "distributionAllowlist": false,
+    "playerData": false,
+    "inventory": false
+  }
+}
