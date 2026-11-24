@@ -1,0 +1,88 @@
+{
+  "mission": "M596",
+  "runId": "work-20261124T183021-0300-M596",
+  "owner": "Work principal",
+  "priority": "P1",
+  "scope": "Three independent, pure TagDuel trigger adapters; no engine resolver, catalog, certification or inventory mutation.",
+  "cards": [
+    {
+      "name": "Dark Room of Nightmare",
+      "passcode": "85562745",
+      "konamiDatabaseId": 5531,
+      "kind": "Continuous Spell",
+      "firstTCGPrinting": "Pharaonic Guardian (PGD-082), 2003-07-18",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5531&ope=2&request_locale=en",
+      "officialEffect": "Each time your opponent takes damage from a card effect, except 'Dark Room of Nightmare', inflict 300 damage to your opponent."
+    },
+    {
+      "name": "Coffin Seller",
+      "passcode": "65830223",
+      "konamiDatabaseId": 5492,
+      "kind": "Continuous Trap",
+      "firstTCGPrinting": "Pharaonic Guardian (PGD-093), 2003-07-18",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5492&ope=2&request_locale=en",
+      "officialEffect": "Each time a monster(s) is sent to your opponent's GY: Inflict 300 damage to your opponent."
+    },
+    {
+      "name": "Skull Invitation",
+      "passcode": "98139712",
+      "konamiDatabaseId": 4961,
+      "kind": "Continuous Trap",
+      "firstTCGPrinting": "Pharaoh's Servant (PSV-056), 2002-10-20",
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4961&ope=2&request_locale=en",
+      "officialEffect": "Each time a card(s) is sent to the Graveyard, inflict 300 damage to its owner for each card sent."
+    }
+  ],
+  "design": {
+    "darkRoom": "Only actual, resolved effect damage to the opposing team's shared LP triggers. Battle damage, costs, unapplied/negated events and damage caused by Dark Room itself are excluded. Each face-up non-negated copy emits a separate 300 plan.",
+    "coffinSeller": "A committed batch containing one or more monsters physically owned by the opposing team and present in that team's shared GY triggers 300 per active copy, once per batch regardless of monster count. Spells/Traps and own-team monsters do not trigger.",
+    "skullInvitation": "A committed batch of cards in shared GYs damages each physical owner team by 300 per card for every active copy. Ownership derives from the immutable m{seat}: UID prefix, not current control or active seat rotation.",
+    "integrity": "Each adapter uses an independent event ledger, validates stale LP snapshots and physical UIDs, excludes face-down/negated sources, and returns immutable plans only. It never mutates LP, hands, Decks, zones or inventory."
+  },
+  "tests": [
+    "Dark Room effect-damage trigger, symmetry, own-team exclusion, multiple copies and self-recursion exclusion",
+    "Dark Room battle/cost/other/unresolved/negated/zero-damage exclusion",
+    "Dark Room negated copies, stale LP, duplicate receipts, malformed identities, duplicate source UIDs and immutability",
+    "Coffin Seller opponent monster-to-GY trigger, once per batch, per-copy stacking and both-team routing",
+    "Coffin Seller own-team/non-monster/face-down/negated exclusions and physical-owner routing after seat rotation",
+    "Coffin Seller GY membership, malformed/duplicate UIDs, stale LP, duplicate receipts and empty movement",
+    "Skull Invitation 300 per card per physical owner, mixed-owner batch splitting and per-copy stacking",
+    "Skull Invitation face-down/negated/no-copy/uncommitted exclusions, exact GY membership, stale LP and idempotency",
+    "All adapters preserve the complete TagDuel snapshot and independent ledgers"
+  ],
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}
