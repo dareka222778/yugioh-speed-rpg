@@ -1,0 +1,99 @@
+{
+  "format": 1,
+  "mission": "M602",
+  "card": {
+    "name": "The Fiend Megacyber",
+    "portugueseName": "Demônio Megacyber",
+    "passcode": "66362965",
+    "konamiDatabaseId": 4761,
+    "stats": {
+      "level": 6,
+      "atk": 2200,
+      "def": 1200,
+      "race": "Warrior",
+      "attribute": "DARK"
+    },
+    "effect": "If your opponent controls at least 2 more monsters than you do, you can Special Summon this card (from your hand).",
+    "historicalCutoff": "2004-09-30",
+    "tcgFirstPrint": "PSV-100, 2002-10-20",
+    "ocgOfficialSetDate": "PSV-100, 2003-04-24"
+  },
+  "sources": [
+    {
+      "publisher": "Konami TCG database",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4761&ope=2&request_locale=en",
+      "supports": [
+        "official card identity",
+        "stats",
+        "effect text",
+        "PSV-100 printing"
+      ]
+    },
+    {
+      "publisher": "Konami TCG database (Portuguese)",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4761&ope=2&request_locale=pt",
+      "supports": [
+        "Portuguese name and effect text"
+      ]
+    },
+    {
+      "publisher": "2003 tournament rulings archive",
+      "url": "https://ms.yugipedia.com/a/a1/2003_tournament_rulings.pdf",
+      "supports": [
+        "effect is optional",
+        "Special Summon effect can only be used during Main Phase"
+      ]
+    },
+    {
+      "publisher": "YGOPRODeck",
+      "url": "https://ygoprodeck.com/CARD/THE-FIEND-MEGACYBER-5571",
+      "supports": [
+        "TCG date 2002-10-20",
+        "passcode 66362965"
+      ]
+    }
+  ],
+  "rules": {
+    "procedure": "Optional non-chain Special Summon from the physical owner's private hand",
+    "condition": "Opponent team controls at least two more monsters than the owner's team",
+    "counting": "All monsters count, including face-down monsters; teams share three Monster Zones",
+    "timing": "Main Phase only, per historical tournament ruling",
+    "position": "Face-up Attack Position",
+    "normalSummon": "This procedure does not consume the Normal Summon; a separate Tribute Normal Summon remains a core-engine path",
+    "handLimit": "No discard occurs here; hand limit six is enforced at End Phase",
+    "deckRules": "20–30 Main Deck cards and at most five Extra Deck cards per physical seat"
+  },
+  "tests": [
+    "difference threshold 2",
+    "face-down monsters included",
+    "both teammates' shared monsters counted",
+    "Main Phase only",
+    "active physical owner and private hand",
+    "exact UID moves from hand to shared Monster Zone",
+    "Special Summon does not consume Normal Summon",
+    "seven-card hand is not prematurely discarded",
+    "stale field snapshot rejected",
+    "stale turn/phase rejected",
+    "wrong identity or non-hand source rejected",
+    "three Monster/Spell-Trap Zone limits enforced",
+    "Main Deck minimum enforced"
+  ],
+  "scope": {
+    "newFilesOnly": true,
+    "catalogRegistration": false,
+    "certificateAdded": false,
+    "automaticCertification": false,
+    "resolverIntegration": false,
+    "discordIntegration": false,
+    "inventoryGranted": 0,
+    "persistentPlayerDataChanged": false,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Adapter is isolated and is not connected to the M61 resolver/trigger queue.",
+    "Summon-negation chains and real Discord interaction are not modeled here.",
+    "No card certification is claimed; behavior requires resolver integration and end-to-end engine tests."
+  ]
+}
