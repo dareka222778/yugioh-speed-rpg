@@ -1,0 +1,74 @@
+{
+  "mission": "M598",
+  "runId": "work-20261124T184000-0300-M598",
+  "owner": "Work principal",
+  "priority": "P1",
+  "scope": "Pure TagDuel LP-cost adapter for Chain Energy; no central resolver, catalog, certification, inventory or player-data mutation.",
+  "card": {
+    "name": "Chain Energy",
+    "passcode": "79323590",
+    "konamiDatabaseId": 4908,
+    "kind": "Continuous Spell",
+    "firstTCGPrinting": "Magic Ruler (MRL-046), 2002-09-16",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4908&ope=2&request_locale=en",
+    "officialEffect": "Each player must pay 500 Life Points per card to Normal Summon, Special Summon, Set or activate cards from his/her respective hand."
+  },
+  "rulings": {
+    "handEffects": "OCG rulings include effects activated from the hand (e.g. Kuriboh/Thunder Dragon) and Special Summons from the hand by card effects; the activation and the later hand summon are separate charge events.",
+    "alreadySet": "Cards already Set on the field and cards placed onto the field by another effect are not treated as cards played from the hand for this cost.",
+    "cost": "The 500 LP is a cost, not effect damage, and does not start a Chain Link.",
+    "multipleCopies": "The adapter treats each active, non-negated face-up copy as an independent continuous cost source; verify in engine integration before certification."
+  },
+  "design": {
+    "perCard": "500 LP per card from hand, per active copy. Multi-card hand summons/sets scale by card count.",
+    "team": "LP is charged from the shared team pool; the action must belong to the current physical member, and the exact card UIDs must be in that member's private active hand.",
+    "privacy": "The output plan exposes only card count and public Chain Energy source UIDs, never the identities or UIDs of private hand cards.",
+    "timing": "Cost plan is emitted before the action; no LP is mutated by the adapter.",
+    "exclusions": "No cost for cards from Deck, GY, Extra Deck, field, banished zone; no cost for discarding/sending/revealing a card as an effect cost."
+  },
+  "plannedTests": [
+    "Normal/Special Summon, Set and activate Spell/Trap/monster effect from hand",
+    "multi-card hand actions and multiple active copies",
+    "both teams, shared LP, active physical seat and private-hand UID ownership",
+    "separate activation-from-hand and later Special Summon-from-hand cost events",
+    "no charge for field/already-Set, Deck, GY, Extra, banished, discard, send-to-GY or reveal",
+    "face-down/negated sources, insufficient LP and exact-zero payment",
+    "stale LP, wrong member, duplicate UID, malformed card type and duplicate action receipt",
+    "privacy-preserving plan and full TagDuel immutability"
+  ],
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "resolverIntegration": false,
+    "discordCommandIntegration": false,
+    "liveDiscordValidation": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  }
+}

@@ -1,0 +1,38 @@
+name: M598 Chain Energy TagDuel hand cost adapter
+on:
+  push:
+    branches:
+      - feat/work-m598-chain-energy-hand-cost-tag-adapter-20261124
+    paths:
+      - 'src/chainEnergyTagAdapter.ts'
+      - 'tests/chainEnergyTagAdapter.test.cjs'
+      - 'docs/evidence/m598-chain-energy-tag-adapter.json'
+      - '.github/workflows/m598-chain-energy-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/chainEnergyTagAdapter.ts'
+      - 'tests/chainEnergyTagAdapter.test.cjs'
+      - 'docs/evidence/m598-chain-energy-tag-adapter.json'
+      - '.github/workflows/m598-chain-energy-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chain-energy-hand-cost:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m598-chain-energy-tag-adapter.json', 'utf8'))"
+      - name: Run focused behavior tests
+        run: node --test tests/chainEnergyTagAdapter.test.cjs
