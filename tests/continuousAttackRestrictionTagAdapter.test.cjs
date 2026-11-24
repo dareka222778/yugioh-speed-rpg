@@ -225,6 +225,8 @@ test('a face-down Level Limit source does not apply and a fresh phase does not i
   const first=takeMonster(state,2,NORMALS[1]);
   pendingAttack(state,0,first);
   const oldPhase=createDarkDoorBattlePhaseSession(state,0,'phase-one');
-  const nextPhase=createDarkDoorBattlePhaseSession(oldPhase.duel,0,'phase-two');
+  const recorded=recordDarkDoorAttack(oldPhase,first);
+  const nextPhase=createDarkDoorBattlePhaseSession(recorded.duel,0,'phase-two');
+  assert.deepEqual(recorded.attackedMonsterUids,[first]);
   assert.deepEqual(nextPhase.attackedMonsterUids,[]);
 });
