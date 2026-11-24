@@ -56,6 +56,8 @@ export type ClownState = TagDuel & {
   clownPositionChange?: { resolvedActivationIds: string[] };
 };
 export type CardLookup = (id: string) => Pick<Card, 'kind' | 'monsterType'> | undefined;
+type ClownResolveStatus = 'destroyed' | 'returned-to-hand' | 'returned-to-extra' | 'token-removed' |
+  'negated' | 'target-left-field' | 'target-no-longer-opponent' | 'target-changed' | 'target-immune' | 'duplicate';
 
 const cardLookup: CardLookup = id => getPlayableCard(id);
 const validTeam = (team: number): team is Team => team === 0 || team === 1;
@@ -244,7 +246,7 @@ function listTargetsForCardIds(
   crassId: string,
   lookup: CardLookup
 ): string[] {
-  const context = validateEvent(state, event, dreamId, crassId, lookup);
+  validateEvent(state, event, dreamId, crassId, lookup);
   const opponentTeam = (1 - event.controllerTeam) as Team;
   return state.core.players[opponentTeam].monsters
     .filter(monster => canAffectMonster(state.core, monster.uid, 'monster'))
@@ -295,9 +297,7 @@ function resolveForCardIds(
   crassId: string,
   effectNegated = false
 ): {
-  status: 'destroyed' | 'returned-to-hand' | 'returned-to-extra' | 'token-removed' |
-    'negated' | 'target-left-field' | 'target-no-longer-opponent' |
-    'target-changed' | 'target-immune' | 'duplicate';
+  status: ClownResolveStatus;
   state: ClownState;
   destination: 'grave' | 'hand' | 'extra' | 'none';
   handLimitDeferred: boolean;
@@ -333,7 +333,7 @@ function resolveForCardIds(
   const next = structuredClone(input) as ClownState;
   const memory = next.clownPositionChange ?? { resolvedActivationIds: [] };
   memory.resolvedActivationIds.push(plan.activationId);
-  let status: ReturnType<typeof resolveForCardIds>['status'] = 'target-left-field';
+  let status: ClownResolveStatus = 'target-left-field';
   let destination: 'grave' | 'hand' | 'extra' | 'none' = 'none';
   let handLimitDeferred = false;
 
