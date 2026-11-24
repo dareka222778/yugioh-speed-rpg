@@ -1,4 +1,4 @@
-import type { DuelState, Monster, CardRef } from './duelEngine';
+import type { CardRef } from './duelEngine';
 import type { TagDuel } from './tagDuel';
 import { assertTagDuel, tagInventory } from './tagDuel';
 import { getDuelCard } from './effectRegistry';

@@ -1,6 +1,10 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { createTagDuel, tagInventory, tagNormalCardIds } = require('../dist/tagDuel.js');
+const { createTokenGroup } = require('../dist/tokens.js');
+const { enabledCardIds, getDuelCard } = require('../dist/effectRegistry.js');
+const SPELL_ID = enabledCardIds.find(id => getDuelCard(id)?.kind === 'spell');
+const TRAP_ID = enabledCardIds.find(id => getDuelCard(id)?.kind === 'trap');
 const {
   BANISHER_OF_THE_LIGHT_ID, BAZOO_THE_SOUL_EATER_ID, BAZOO_BASE_ATK,
   banisherOfTheLightApplies, tagGraveDestination,
@@ -42,6 +46,7 @@ function moveDeckCardToField(duel, seat, controllerTeam, id, faceUp = true) {
 function moveDeckCardToGrave(duel, seat, id) {
   const card = physicalDeck(duel, seat).pop();
   assert.ok(card);
+  card.id = id;
   duel.core.players[seat % 2].grave.push(card);
   return card.uid;
 }
@@ -96,12 +101,7 @@ test('without a face-up Banisher, normal GY routing remains the default', () => 
 
 test('tokens cease to exist rather than entering either GY or the Banished Zone', () => {
   const duel = makeDuel();
-  const token = {
-    uid: 'm0:token:m579-1', id: 'TOKEN', entityKind: 'token',
-    owner: 0, position: 'atk', faceUp: true, entered: duel.core.turn,
-    changed: duel.core.turn, attacked: 0, atkBoost: 0, defBoost: 0,
-  };
-  duel.core.players[0].monsters.push(token);
+  const [token] = createTokenGroup(duel.core, 0, 1, 'atk');
   const destination = tagGraveDestination(duel, token.uid, FIXTURE_IDS);
   assert.equal(destination.zone, 'vanish');
   assert.equal(destination.replacement, 'token-ceases-to-exist');
@@ -112,7 +112,6 @@ test('Bazoo offers only monster cards in its controller team shared GY, includin
   const sourceUid = moveDeckCardToField(duel, 1, 0, FIXTURE_BAZOO_ID);
   const partnerCost = moveDeckCardToGrave(duel, 2, tagNormalCardIds[9]);
   const opponentCost = moveDeckCardToGrave(duel, 1, tagNormalCardIds[10]);
-  duel.core.players[1].grave.push(duel.core.players[1].grave.pop());
   const plan = prepareBazooActivation(duel, sourceUid, 0, FIXTURE_IDS);
   assert.ok(plan);
   assert.deepEqual(plan.candidates.map(card => card.uid), [partnerCost]);
@@ -151,13 +150,18 @@ test('Bazoo accepts one to three costs but rejects zero, four, duplicates and st
   assert.equal(activateBazoo(stale, plan, [costs[0]], FIXTURE_IDS), null);
 });
 
-test('Bazoo cannot banish spells, traps or monsters from the opposing GY', () => {
+test('Bazoo excludes Spell/Trap cards and monsters in the opposing GY', () => {
   const duel = makeDuel();
   const sourceUid = moveDeckCardToField(duel, 0, 0, FIXTURE_BAZOO_ID);
-  const opponentCost = moveDeckCardToGrave(duel, 1, tagNormalCardIds[17]);
+  assert.ok(SPELL_ID && TRAP_ID, 'fixture requires enabled Spell and Trap cards');
+  const ownSpell = moveDeckCardToGrave(duel, 2, SPELL_ID);
+  const ownTrap = moveDeckCardToGrave(duel, 0, TRAP_ID);
+  const ownMonster = moveDeckCardToGrave(duel, 2, tagNormalCardIds[16]);
+  const opponentMonster = moveDeckCardToGrave(duel, 1, tagNormalCardIds[17]);
   const plan = prepareBazooActivation(duel, sourceUid, 0, FIXTURE_IDS);
   assert.ok(plan);
-  assert.equal(plan.candidates.some(card => card.uid === opponentCost), false);
+  assert.deepEqual(plan.candidates.map(card => card.uid), [ownMonster]);
+  assert.equal(plan.candidates.some(card => [ownSpell, ownTrap, opponentMonster].includes(card.uid)), false);
 });
 
 test('Bazoo is available only in its controller Main Phase with an open chain', () => {
@@ -167,7 +171,7 @@ test('Bazoo is available only in its controller Main Phase with an open chain', 
   duel.core.phase = 'battle';
   assert.equal(prepareBazooActivation(duel, sourceUid, 0, FIXTURE_IDS), null);
   duel.core.phase = 'main';
-  duel.core.chain.push({} );
+  duel.core.pending = { kind: 'monsterEffect', actor: 0, card: sourceUid, id: FIXTURE_BAZOO_ID };
   assert.equal(prepareBazooActivation(duel, sourceUid, 0, FIXTURE_IDS), null);
 });
 
@@ -209,7 +213,9 @@ test('if Bazoo leaves the field after activation, the cost remains paid but no m
   const costUid = moveDeckCardToGrave(duel, 2, tagNormalCardIds[22]);
   const plan = prepareBazooActivation(duel, sourceUid, 0, FIXTURE_IDS);
   const paid = activateBazoo(duel, plan, [costUid], FIXTURE_IDS);
-  paid.state.core.players[0].monsters = paid.state.core.players[0].monsters.filter(card => card.uid !== sourceUid);
+  const sourceIndex = paid.state.core.players[0].monsters.findIndex(card => card.uid === sourceUid);
+  const [source] = paid.state.core.players[0].monsters.splice(sourceIndex, 1);
+  paid.state.core.players[0].grave.push({ uid: source.uid, id: source.id });
   const resolved = resolveBazooActivation(paid.state, paid.activation, false, FIXTURE_IDS);
   assert.ok(resolved);
   assert.equal(resolved.core.players[0].banished.some(card => card.uid === costUid), true);
@@ -220,6 +226,7 @@ test('the adapter preserves the input snapshot, player hands and the physical in
   const duel = makeDuel();
   const sourceUid = moveDeckCardToField(duel, 0, 0, FIXTURE_BAZOO_ID);
   const costUid = moveDeckCardToGrave(duel, 2, tagNormalCardIds[23]);
+  while (duel.core.players[0].hand.length < 7) duel.core.players[0].hand.push(physicalDeck(duel, 0).pop());
   const before = JSON.stringify(duel);
   const beforeInventory = inventoryMap(duel);
   const plan = prepareBazooActivation(duel, sourceUid, 0, FIXTURE_IDS);
@@ -227,7 +234,7 @@ test('the adapter preserves the input snapshot, player hands and the physical in
   assert.ok(result);
   assert.equal(JSON.stringify(duel), before);
   assert.deepEqual(inventoryMap(result.state), beforeInventory);
-  assert.equal(result.state.core.players[0].hand.length, duel.core.players[0].hand.length);
+  assert.equal(result.state.core.players[0].hand.length, 7, 'no mid-resolution hand discard; limit is checked at End Phase');
   assert.equal(result.state.reserves[2].hand.length, duel.reserves[2].hand.length);
 });
 

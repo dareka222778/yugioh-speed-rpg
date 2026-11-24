@@ -29,7 +29,7 @@
     "remaining": 31,
     "identityBlocked": 27
   },
-  "testCases": 14,
+  "testCases": 15,
   "testCoverage": [
     "Banisher replacement is global across both teams and uses physical owner seat encoded in UID",
     "face-down Banisher does not replace a GY destination",
