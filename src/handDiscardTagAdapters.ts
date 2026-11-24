@@ -72,6 +72,13 @@ function assertSameInventory(before:string,after:TagDuel):void{
  if(before!==inventorySignature(after))throw new Error('O adapter alterou a identidade ou o inventário físico das cartas.');
 }
 
+/** Pure physical Extra Deck cap used by the TagDuel invariant and directly regression-tested. */
+export function assertPhysicalExtraDeckCounts(extraCounts:readonly number[],maximum=5):void{
+ if(!Array.isArray(extraCounts)||extraCounts.length!==4||!Number.isSafeInteger(maximum)||maximum<0||
+    extraCounts.some(count=>!Number.isSafeInteger(count)||count<0))throw new Error('Contagem do Deck Adicional inválida.');
+ if(extraCounts.some(count=>count>maximum))throw new Error('Deck Adicional físico excede cinco cartas.');
+}
+
 /** Enforces the owner's classic 2v2 profile without changing the saved duel. */
 export function assertHandDiscardPhysicalRules(duel:TagDuel):void{
  assertTagDuel(duel);
@@ -90,8 +97,8 @@ export function assertHandDiscardPhysicalRules(duel:TagDuel):void{
  }
  for(let seat=0;seat<4;seat++){
   if(main[seat]<rules.mainDeckMin||main[seat]>rules.mainDeckMax)throw new Error('Deck principal físico fora do limite 20–30.');
-  if(extra[seat]>rules.extraDeckMax)throw new Error('Deck Adicional físico excede cinco cartas.');
  }
+ assertPhysicalExtraDeckCounts(extra,rules.extraDeckMax);
  for(const team of duel.core.players){
   if(team.monsters.length>rules.monsterZones)throw new Error('Equipe excedeu as três Zonas de Monstros.');
   if(team.backrow.length>rules.spellTrapZones)throw new Error('Equipe excedeu as três Zonas de Magias/Armadilhas.');
