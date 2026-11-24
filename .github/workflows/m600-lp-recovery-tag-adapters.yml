@@ -1,0 +1,38 @@
+name: M600 LP recovery TagDuel adapters
+on:
+  push:
+    branches:
+      - feat/work-m600-lp-recovery-tag-adapters-20261124
+    paths:
+      - 'src/lpRecoveryTagAdapter.ts'
+      - 'tests/lpRecoveryTagAdapter.test.cjs'
+      - 'docs/evidence/m600-lp-recovery-tag-adapters.json'
+      - '.github/workflows/m600-lp-recovery-tag-adapters.yml'
+  pull_request:
+    paths:
+      - 'src/lpRecoveryTagAdapter.ts'
+      - 'tests/lpRecoveryTagAdapter.test.cjs'
+      - 'docs/evidence/m600-lp-recovery-tag-adapters.json'
+      - '.github/workflows/m600-lp-recovery-tag-adapters.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lp-recovery-adapters:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m600-lp-recovery-tag-adapters.json', 'utf8'))"
+      - name: Run focused behavior tests
+        run: node --test tests/lpRecoveryTagAdapter.test.cjs
