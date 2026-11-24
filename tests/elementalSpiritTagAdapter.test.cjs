@@ -264,3 +264,29 @@ test('the adapter preserves 20–30 Main Deck, three shared Monster/Spell-Trap Z
   assert.equal(next.core.players[1].extra.length, duel.core.players[1].extra.length);
   assert.equal(tagInventory(next).length, tagInventory(duel).length);
 });
+
+test('Garuda requires a WIND monster from the same team Graveyard before it can be summoned', () => {
+  const duel = makeDuel();
+  const sourceUid = replaceHandCardWith(duel, 0, 0, GARUDA_THE_WIND_SPIRIT_ID);
+  const costUid = moveDeckCardToGrave(duel, 2, 0, WIND_COST);
+  const plan = prepareElementalSpiritSummon(duel, sourceUid, getCard);
+  assert.ok(plan);
+  assert.deepEqual(plan.costCandidates.map(card => card.uid), [costUid]);
+});
+
+test('a six-card hand is not auto-discarded during the summon; only the Spirit leaves the hand', () => {
+  const duel = makeDuel();
+  const sourceUid = replaceHandCardWith(duel, 0, 0, THE_ROCK_SPIRIT_ID);
+  const hand = duel.core.players[0].hand;
+  for (let i = 0; i < 2; i++) {
+    const card = duel.core.players[0].deck.pop();
+    assert.ok(card);
+    hand.push(card);
+  }
+  const costUid = moveDeckCardToGrave(duel, 2, 0, EARTH_COST);
+  assert.equal(hand.length, 6);
+  const next = payElementalSpiritSummon(duel, sourceUid, costUid, getCard);
+  assert.ok(next);
+  assert.equal(next.core.players[0].hand.length, 5);
+  assert.equal(next.core.players[0].hand.some(card => card.uid === sourceUid), false);
+});
