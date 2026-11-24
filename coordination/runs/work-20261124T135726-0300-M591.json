@@ -1,0 +1,99 @@
+{
+  "format": 1,
+  "runId": "work-20261124T135726-0300-M591",
+  "mission": "M591",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-awaiting-isolated-branch",
+  "startedAt": "2026-11-24T13:57:26-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "980c423c8b32916ce6703288f340f1dce5dfca35",
+  "branch": "feat/work-m591-backfire-balloon-lizard-lp-20261124",
+  "baseSha": null,
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/triggeredLpTagAdapter.ts",
+    "tests/triggeredLpTagAdapter.test.cjs",
+    "docs/evidence/m591-triggered-lp-tag-adapter.json",
+    ".github/workflows/m591-triggered-lp-tag-adapter.yml"
+  ],
+  "scope": "Adapters TagDuel isolados para Backfire (500 de dano por evento de destruição de um ou mais monstros FIRE face-up da equipe enviados ao GY) e Balloon Lizard (1 contador na Standby Phase própria; ao ser destruído, dano ao controlador da carta destruidora igual a 400 por contador). Apenas quatro caminhos novos; sem resolver, catálogo, certificações, inventário ou dados persistentes.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T13:57:26-03:00",
+    "sharedHead": "980c423c8b32916ce6703288f340f1dce5dfca35",
+    "matchingBranches": 0,
+    "matchingPRs": 0,
+    "m61Handoff": "requested; no explicit release",
+    "m590FilesUntouched": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "rules": {
+    "deck": "20-30 por assento físico",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true,
+    "physicalUidOwnership": "m0-m3"
+  },
+  "cards": [
+    {
+      "name": "Backfire",
+      "passcode": "82705573",
+      "konamiDatabaseId": 5986,
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5986&ope=2&request_locale=en",
+      "officialEffect": "If a face-up FIRE monster(s) you control is destroyed and sent to the GY: Inflict 500 damage to your opponent."
+    },
+    {
+      "name": "Balloon Lizard",
+      "passcode": "39892082",
+      "konamiDatabaseId": 5886,
+      "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5886&ope=2&request_locale=en",
+      "officialEffect": "Put 1 counter on this card during each of your Standby Phases. When this card is destroyed, inflict damage to the controller of the card that destroyed it equal to the number of counters x 400 points."
+    }
+  ],
+  "plannedTests": [
+    "Backfire face-up FIRE destroyed to GY triggers 500",
+    "multiple FIRE monsters in one destruction event produce one 500 trigger per Backfire copy",
+    "face-down/non-FIRE/not-sent-to-GY exclusions",
+    "Backfire face-down or negated no-op",
+    "duplicate event idempotency",
+    "Balloon Lizard increments only on its controller team's Standby Phase",
+    "duplicate Standby event does not double count",
+    "face-down Balloon Lizard does not gain counter",
+    "counter persists across turns and is cleared when leaving Monster Zone",
+    "destruction damages the destroyer card's controller team, not the destroyed card owner",
+    "400 per counter",
+    "negated trigger and zero-counter behavior",
+    "UID and event validation",
+    "immutability and inventory conservation",
+    "End Phase hand limit and physical 2v2 invariants remain untouched"
+  ],
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter puro e testes determinísticos; depois executar workflow focado, Card Batch Fast, Milestone 1000 e Engine Validation; em seguida revisar o novo HEAD e iniciar outra família independente.",
+  "nextWindow": "2026-11-24T18:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
