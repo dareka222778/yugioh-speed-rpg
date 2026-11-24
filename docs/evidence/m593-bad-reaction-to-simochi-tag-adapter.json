@@ -14,10 +14,11 @@
     "sourceVerified": "Konami official card database, checked 2026-11-24"
   },
   "design": {
-    "targeting": "A face-up copy controlled by team 1 converts an effect LP gain targeting team 0; a team's own Simochi does not convert that team's own gain.",
+    "targeting": "A face-up copy controlled by the opposing team converts an effect LP gain targeting the other team; a team's own Simochi does not convert that team's own gain.",
     "replacement": "The gain is replaced by damage to the same team in the exact proposed amount; the adapter emits a plan and does not mutate LP.",
-    "copies": "Multiple copies are non-cumulative: one or more face-up copies still convert the gain once. This is reflected in the documented card ruling.",
+    "copies": "Multiple copies are non-cumulative: one or more face-up copies still convert the gain exactly once.",
     "negation": "Negated copies are ignored; if all copies are negated or face-down, the gain remains unchanged.",
+    "idempotency": "Duplicate event receipts are checked before the LP snapshot so retries remain idempotent after later state advancement.",
     "integration": "Pure replacement adapter only; central LP transaction pipeline integration remains pending explicit M61 handoff."
   },
   "rulingSource": "https://yugipedia.com/wiki/Card_Rulings:Bad_Reaction_to_Simochi",
@@ -35,13 +36,20 @@
     "zero gain no-op",
     "negative/fractional gain rejected",
     "invalid team rejected",
-    "stale LP snapshot rejected",
+    "stale current-LP snapshot rejected",
     "event idempotency",
+    "duplicate delivery remains idempotent after LP snapshot advances",
     "distinct gain events independent",
+    "symmetric team-one routing",
     "duplicate source UID rejected",
-    "input immutability"
+    "malformed/duplicated negated source UIDs rejected",
+    "input and ledger immutability"
   ],
-  "testCount": 18,
+  "testCount": 21,
+  "ci": {
+    "initialFailure": "The initial 18-test run exposed inconsistent fixture LP (event snapshot 7000 vs default team LP 8000), causing 13 failures before the behavior assertions.",
+    "correction": "Aligned the structural fixture with its LP event snapshot, added symmetric-team, post-advance idempotency and malformed negation UID cases. A new CI run is required to certify the correction."
+  },
   "certification": {
     "engineV9CertifiedBefore": 969,
     "newCertifications": 0,
