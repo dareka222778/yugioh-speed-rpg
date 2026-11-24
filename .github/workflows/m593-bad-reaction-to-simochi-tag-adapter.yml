@@ -1,0 +1,38 @@
+name: M593 Bad Reaction to Simochi LP replacement adapter
+on:
+  push:
+    branches:
+      - feat/work-m593-bad-reaction-to-simochi-lp-replacement-20261124
+    paths:
+      - 'src/badReactionToSimochiTagAdapter.ts'
+      - 'tests/badReactionToSimochiTagAdapter.test.cjs'
+      - 'docs/evidence/m593-bad-reaction-to-simochi-tag-adapter.json'
+      - '.github/workflows/m593-bad-reaction-to-simochi-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/badReactionToSimochiTagAdapter.ts'
+      - 'tests/badReactionToSimochiTagAdapter.test.cjs'
+      - 'docs/evidence/m593-bad-reaction-to-simochi-tag-adapter.json'
+      - '.github/workflows/m593-bad-reaction-to-simochi-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  simochi-lp-replacement:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m593-bad-reaction-to-simochi-tag-adapter.json', 'utf8'))"
+      - name: Run Simochi adapter tests
+        run: node --test tests/badReactionToSimochiTagAdapter.test.cjs

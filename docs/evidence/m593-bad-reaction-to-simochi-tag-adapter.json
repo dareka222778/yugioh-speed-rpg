@@ -1,0 +1,83 @@
+{
+  "mission": "M593",
+  "runId": "work-20261124T141800-0300-M593",
+  "owner": "Work principal",
+  "priority": "P1",
+  "card": {
+    "name": "Bad Reaction to Simochi",
+    "passcode": "40633297",
+    "konamiDatabaseId": 4694,
+    "kind": "Continuous Trap",
+    "firstTCGPrinting": "Legacy of Darkness (LOD-093), 2003-06-06",
+    "officialDatabaseUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4694&ope=2&request_locale=en",
+    "officialEffect": "As long as this card remains face-up on the field, any effect of increasing your opponent's Life Points is changed to inflict the same amount of points in damage to your opponent's Life Points.",
+    "sourceVerified": "Konami official card database, checked 2026-11-24"
+  },
+  "design": {
+    "targeting": "A face-up copy controlled by team 1 converts an effect LP gain targeting team 0; a team's own Simochi does not convert that team's own gain.",
+    "replacement": "The gain is replaced by damage to the same team in the exact proposed amount; the adapter emits a plan and does not mutate LP.",
+    "copies": "Multiple copies are non-cumulative: one or more face-up copies still convert the gain once. This is reflected in the documented card ruling.",
+    "negation": "Negated copies are ignored; if all copies are negated or face-down, the gain remains unchanged.",
+    "integration": "Pure replacement adapter only; central LP transaction pipeline integration remains pending explicit M61 handoff."
+  },
+  "rulingSource": "https://yugipedia.com/wiki/Card_Rulings:Bad_Reaction_to_Simochi",
+  "tests": [
+    "opponent-team face-up conversion",
+    "no active Simochi unchanged",
+    "face-down copy ignored",
+    "own-team gain unaffected",
+    "both teams fielded: opposing copy applies",
+    "multiple copies non-cumulative",
+    "one negated copy ignored",
+    "all negated copies no conversion",
+    "battle/cost/other non-effect excluded",
+    "unresolved and negated gain no-op",
+    "zero gain no-op",
+    "negative/fractional gain rejected",
+    "invalid team rejected",
+    "stale LP snapshot rejected",
+    "event idempotency",
+    "distinct gain events independent",
+    "duplicate source UID rejected",
+    "input immutability"
+  ],
+  "testCount": 18,
+  "certification": {
+    "engineV9CertifiedBefore": 969,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "reason": "Adapter-only; no resolver, metadata, certification, manifest, allowlist or catalog changes."
+  },
+  "rules": {
+    "mainDeck": "20-30 per physical seat",
+    "handLimit": 6,
+    "handLimitTiming": "End Phase only",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeckMax": 5,
+    "privateHandsAndDecks": true,
+    "sharedTeamGraveyardAndLP": true
+  },
+  "security": {
+    "filesOnly": [
+      "src/badReactionToSimochiTagAdapter.ts",
+      "tests/badReactionToSimochiTagAdapter.test.cjs",
+      "docs/evidence/m593-bad-reaction-to-simochi-tag-adapter.json",
+      ".github/workflows/m593-bad-reaction-to-simochi-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true
+  },
+  "limitations": [
+    "The adapter returns a replacement plan; it does not apply LP changes or alter another effect's resolution.",
+    "Tests use structural TagDuel fixtures, not the complete LP transaction pipeline.",
+    "No live Discord gateway validation or certification is claimed."
+  ]
+}
