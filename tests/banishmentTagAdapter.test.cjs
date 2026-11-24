@@ -146,7 +146,9 @@ test('Bazoo accepts one to three costs but rejects zero, four, duplicates and st
   assert.equal(activateBazoo(duel, plan, costs, FIXTURE_IDS), null);
   assert.equal(activateBazoo(duel, plan, [costs[0], costs[0]], FIXTURE_IDS), null);
   const stale = structuredClone(duel);
-  stale.core.players[0].grave = stale.core.players[0].grave.filter(card => card.uid !== costs[0]);
+  const staleIndex = stale.core.players[0].grave.findIndex(card => card.uid === costs[0]);
+  const [staleCard] = stale.core.players[0].grave.splice(staleIndex, 1);
+  stale.core.players[0].banished.push(staleCard);
   assert.equal(activateBazoo(stale, plan, [costs[0]], FIXTURE_IDS), null);
 });
 
@@ -219,7 +221,7 @@ test('if Bazoo leaves the field after activation, the cost remains paid but no m
   const resolved = resolveBazooActivation(paid.state, paid.activation, false, FIXTURE_IDS);
   assert.ok(resolved);
   assert.equal(resolved.core.players[0].banished.some(card => card.uid === costUid), true);
-  assert.equal(resolved.core.continuousState?.temporary.some(item => item.uid === sourceUid), false);
+  assert.equal(resolved.core.continuousState?.temporary.some(item => item.uid === sourceUid) ?? false, false);
 });
 
 test('the adapter preserves the input snapshot, player hands and the physical inventory', () => {
