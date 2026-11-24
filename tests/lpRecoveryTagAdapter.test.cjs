@@ -130,9 +130,7 @@ test('Emergency Provisions não pode ativar Quick-Play setada no mesmo turno',()
 });
 
 test('Emergency Provisions da mão não pode ser ativada durante turno adversário',()=>{
-  const s=state({turn:3,cursor:1});
-  s.reserves['0'].hand.push(card('m0:ep',EMERGENCY_PROVISIONS_ID));
-  s.core.teamRotation.reserves=s.reserves;
+  const s=state({turn:3,cursor:1,hand0:[card('m0:ep',EMERGENCY_PROVISIONS_ID)]});
   assert.throws(()=>resolveEmergencyProvisions(s,createRecoveryLedger(),emergencyEvent({
     sourceUid:'m0:ep',turn:3,phase:'main',activeMemberId:'p1'
   })),/turno adversário/);
