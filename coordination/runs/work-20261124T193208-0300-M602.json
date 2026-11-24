@@ -1,0 +1,80 @@
+{
+  "format": 1,
+  "runId": "work-20261124T193208-0300-M602",
+  "mission": "M602",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved; implementation in progress",
+  "startedAt": "2026-11-24T19:32:08-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "f5dc1a17a5f1ba56d0b82d74ac1f1a6e61967e35",
+  "branch": "feat/work-m602-fiend-megacyber-conditional-summon-20261124",
+  "baseSha": "f5dc1a17a5f1ba56d0b82d74ac1f1a6e61967e35",
+  "branchHeadSha": "f5dc1a17a5f1ba56d0b82d74ac1f1a6e61967e35",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/fiendMegacyberTagAdapter.ts",
+    "tests/fiendMegacyberTagAdapter.test.cjs",
+    "docs/evidence/m602-fiend-megacyber-tag-adapter.json",
+    ".github/workflows/m602-fiend-megacyber-tag-adapter.yml"
+  ],
+  "scope": "Implementar um adapter TagDuel puro para The Fiend Megacyber: Special Summon opcional da mão somente no Main Phase quando o time adversário controla pelo menos dois monstros a mais. Testar assento/proprietário físico, mão privada, contagem de monstros face-down, zonas 3+3, deck 20–30, Extra 5, imutabilidade e conservação de UIDs. Não integrar resolver central nem certificar carta sem handoff M61.",
+  "conflictCheck": {
+    "checkedAt": "2026-11-24T19:32:08-03:00",
+    "sharedHead": "f5dc1a17a5f1ba56d0b82d74ac1f1a6e61967e35",
+    "matchingBranchSearch": [],
+    "matchingPullRequests": [],
+    "codeSearchNameOrPasscode": [],
+    "priorRelatedWork": [
+      "M421/#369 Giant Germ + Nimble Momonga; different card/mechanic and files",
+      "M416/#364 battle-destroyed swarm triggers; different card/mechanic and files"
+    ],
+    "m601FilesDisjoint": true,
+    "m598FilesUntouched": true,
+    "m599FilesUntouched": true,
+    "m600FilesUntouched": true,
+    "m61Untouched": true,
+    "m600TransferRequestedOnPR": 543,
+    "m600ReleaseReceived": false,
+    "thirdPartyReservationsUntouched": true
+  },
+  "card": {
+    "name": "The Fiend Megacyber",
+    "portugueseName": "Demônio Megacyber",
+    "passcode": "66362965",
+    "konamiDatabaseId": 4761,
+    "stats": {
+      "level": 6,
+      "atk": 2200,
+      "def": 1200,
+      "race": "Warrior",
+      "attribute": "DARK"
+    },
+    "tcgFirstPrint": "2002-10-20 PSV-100",
+    "ocgOfficialSetDate": "2003-04-24 PSV-100",
+    "effect": "If your opponent controls at least 2 more monsters than you do, you can Special Summon this card (from your hand).",
+    "ruling": "Optional Special Summon; Main Phase only; does not replace a Tribute Normal Summon."
+  },
+  "catalogAtStart": {
+    "certified": 969,
+    "remainingTo1000": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter e testes focados; publicar PR draft e observar CI.",
+  "nextWindow": "2026-11-24T23:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
