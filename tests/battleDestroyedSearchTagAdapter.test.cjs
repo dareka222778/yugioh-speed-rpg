@@ -244,7 +244,7 @@ test('Keldo sends a Fusion target to the physical owner Extra Deck, not the Main
   assert.ok(privateZone(result.state, 3, 'extra').some(card => card.uid === fusionTarget));
   assert.ok(!privateZone(result.state, 3, 'deck').some(card => card.uid === fusionTarget));
   assert.ok(privateZone(result.state, 1, 'deck').some(card => card.uid === normalTarget));
-  assert.equal(getDuelCard(FUSION_ID).fusion, true);
+  assert.ok(getDuelCard(FUSION_ID).fusion);
 });
 
 test('Keldo is unavailable when fewer than two opposing cards remain in the shared GY', () => {

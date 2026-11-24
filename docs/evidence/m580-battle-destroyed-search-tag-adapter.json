@@ -42,7 +42,7 @@
     }
   ],
   "testFile": "tests/battleDestroyedSearchTagAdapter.test.cjs",
-  "expectedScenarioCount": 15,
+  "expectedScenarioCount": 16,
   "baseline": {
     "engineV9Certified": 969,
     "target": 1000,
