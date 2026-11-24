@@ -6,8 +6,10 @@ import {getMonsterEffect} from './monsterEffects';
 /** Group changes use a resolution-time snapshot; selected changes keep their UID. */
 import {namedCard} from './cardIdentity';
 import type {PositionRule} from './positionRules';
+import {canChangeBattlePosition} from './battlePositionLock';
 export function positionTargets(s:DuelState,actor:number,rule:PositionRule,target?:string):Monster[]{
  return s.players.flatMap((p,index)=>(rule.scope==='opponent'||rule.controller==='opponent')&&index===actor||rule.scope==='self'&&index!==actor?[]:p.monsters.filter(m=>
+  canChangeBattlePosition(m,s.turn)&&
   (rule.mode==='reveal'||rule.mode==='revealAtk'&&rule.controller===undefined?!m.faceUp:rule.mode==='revealDef'?true:m.faceUp||rule.mode==='revealAtk')&&(rule.scope!=='selected'||target===undefined||m.uid===target)&&
   (rule.mode!=='revealAtk'||rule.controller===undefined||m.position==='def')&&
   (rule.mode!=='def'||m.position==='atk')&&(rule.mode!=='set'||m.entityKind!=='token')&&
