@@ -1,0 +1,31 @@
+name: M632 Tsukuyomi Otohime Spirit Position Adapter
+on:
+  push:
+    branches:
+      - feat/work-m632-tsukuyomi-otohime-spirit-position-20261125
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/tsukuyomiOtohimeTagAdapter.ts
+      - tests/tsukuyomiOtohimeTagAdapter.test.cjs
+      - docs/evidence/m632-tsukuyomi-otohime-spirit-position.json
+      - .github/workflows/m632-tsukuyomi-otohime-spirit-position.yml
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence
+        run: node -e "const e=require('./docs/evidence/m632-tsukuyomi-otohime-spirit-position.json'); if(e.format!==1 || e.mission!=='M632' || e.cards.length!==2 || e.verification.newCertifications!==0 || e.verification.inventoryGranted!==0) process.exit(1)"
+      - run: node --test tests/tsukuyomiOtohimeTagAdapter.test.cjs
