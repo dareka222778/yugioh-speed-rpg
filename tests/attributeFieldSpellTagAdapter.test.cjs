@@ -360,7 +360,7 @@ test('consulta não descarta mão acima de seis antes da End Phase', () => {
 test('Field Zone é separada das três Spell/Trap Zones e das três Monster Zones', () => {
   resetNegation();
   const duel = makeDuel();
-  addField(duel, LUMINOUS_FIXTURE_ID, 0, 0);
+  addField(duel, LUMINOUS_FIXTURE_ID, 2, 0);
   addBackrow(duel, LUMINOUS_FIXTURE_ID, 0, 0);
   addBackrow(duel, MYSTIC_FIXTURE_ID, 0, 0);
   addBackrow(duel, TRAP_IDS[0], 0, 0);
