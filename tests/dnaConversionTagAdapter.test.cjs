@@ -397,11 +397,15 @@ test('três zonas de armadilha continuam independentes da Field Zone e das três
   addTrap(duel, 'DNA_SURGERY', 0, 0, 'Machine', 1);
   addTrap(duel, 'DNA_TRANSPLANT', 0, 0, 'DARK', 2);
   addTrap(duel, 'DNA_SURGERY', 1, 1, 'Fiend', 3);
+  addTrap(duel, 'DNA_TRANSPLANT', 3, 1, 'WATER', 4);
+  addTrap(duel, 'DNA_SURGERY', 3, 1, 'Beast', 5);
   const target = addMonster(duel, 'Warrior', 0, 0);
-  assert.equal(adapter.getDnaConversion(duel, target).race, 'Fiend');
+  assert.equal(adapter.getDnaConversion(duel, target).race, 'Beast');
   assert.equal(duel.core.players[0].backrow.length, 2);
+  assert.equal(duel.core.players[1].backrow.length, 3);
   assert.equal(duel.core.players[0].field.id, '86318356');
-  assert.throws(() => addTrap(duel, 'DNA_TRANSPLANT', 3, 1, 'WATER', 4));
+  addTrap(duel, 'DNA_TRANSPLANT', 1, 1, 'LIGHT', 6);
+  assert.throws(() => adapter.getDnaConversion(duel, target));
 });
 
 test('Deck Principal 20/30 e Deck Adicional máximo de cinco são respeitados', () => {
