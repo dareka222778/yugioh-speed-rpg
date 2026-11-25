@@ -4,10 +4,10 @@
   "mission": "M615",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "PR #558 draft; focused CI corrigida em execução, 24/25 passaram na execução anterior",
+  "status": "M615 concluído: CI focada, Card Batch Fast, Milestone 1000 e Engine Validation aprovados; PR #558 permanece draft e divergente do shared HEAD; reserva liberada ao auxiliar.",
   "reservedAt": "2026-11-25T09:57:29-03:00",
   "startedAt": "2026-11-25T09:57:29-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-25T11:00:00-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtReservation": "2f060086d763a4a31b1a3748effc7f33590692b9",
@@ -63,13 +63,13 @@
   },
   "verification": {
     "focusedScenarios": 25,
-    "focusedTestResult": "rerun in_progress; falha anterior única corrigida preservando inventário",
+    "focusedTestResult": "success",
     "typecheck": "success",
     "build": "success",
     "evidenceValidation": "success",
-    "cardBatchFast": "in_progress",
-    "milestone1000": "in_progress",
-    "engineValidation": "in_progress",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "success",
     "newCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
@@ -80,7 +80,10 @@
       "Teste de fonte ausente removia carta do inventário; agora move a fonte para banimento e preserva contagem.",
       "Teste do assento 2 consultava a mão do assento 0; expectativa corrigida para provar isolamento.",
       "Teste de mão acima de seis preparava apenas seis após ativação; setup ampliado sem truncar."
-    ]
+    ],
+    "cardBatchRunId": 45621620502,
+    "milestoneRunId": 45621620394,
+    "engineValidationRunId": 45621620596
   },
   "production": {
     "merge": false,
@@ -125,8 +128,21 @@
     "status": "awaiting-explicit-release",
     "centralFilesExcluded": true
   },
-  "nextTask": "Executar M615 em branch isolada; durante a CI selecionar a próxima família livre após nova verificação de branches/PRs.",
+  "nextTask": "M620 Dark Core: adapter isolado de custo de descarte, alvo face-up e banimento por proprietário físico; preservar M614–M619 e M61.",
   "nextWindow": "2026-11-25T14:30:00-03:00",
-  "scopeReleasedToAuxiliary": [],
-  "lastActivityAt": "2026-11-25T10:16:45-03:00"
+  "scopeReleasedToAuxiliary": [
+    "src/cheerfulCoffinTagAdapter.ts",
+    "tests/cheerfulCoffinTagAdapter.test.cjs",
+    "docs/evidence/m615-cheerful-coffin-tag-adapter.json",
+    ".github/workflows/m615-cheerful-coffin-tag-adapter.yml"
+  ],
+  "lastActivityAt": "2026-11-25T11:00:00-03:00",
+  "sharedSync": {
+    "status": "diverged",
+    "aheadBy": 4,
+    "behindBy": 4,
+    "sharedHead": "190b1d8adf3aa9d641cd5bacc538c35cd893e254",
+    "merge": false,
+    "reason": "PR #558 continua draft; branch M615 divergiu 4 commits à frente e 4 atrás do shared HEAD."
+  }
 }
