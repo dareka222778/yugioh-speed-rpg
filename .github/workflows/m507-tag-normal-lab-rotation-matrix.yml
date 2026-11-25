@@ -1,0 +1,36 @@
+name: M507 Tag Normal Lab Rotation Matrix
+on:
+  push:
+    branches:
+      - feat/work-m507-tag-normal-lab-rotation-matrix-20261122
+    paths:
+      - 'tests/tagNormalLabRotationMatrix.test.cjs'
+      - 'docs/evidence/m507-tag-normal-lab-rotation-matrix.json'
+      - '.github/workflows/m507-tag-normal-lab-rotation-matrix.yml'
+  pull_request:
+    paths:
+      - 'tests/tagNormalLabRotationMatrix.test.cjs'
+      - 'docs/evidence/m507-tag-normal-lab-rotation-matrix.json'
+      - '.github/workflows/m507-tag-normal-lab-rotation-matrix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-normal-lab-rotation-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m507-tag-normal-lab-rotation-matrix.json', 'utf8'))"
+      - name: Run four-seat rotation and privacy matrix
+        run: node --test tests/tagNormalLabRotationMatrix.test.cjs
