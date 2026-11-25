@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "PR #572 draft aberto; arquivos e 31 cenários publicados; workflow focado ainda sem execução observável",
+  "status": "PR #572 draft; primeiro focused run falhou em cinco fixtures; LP pools e Field Spell corrigidos no commit 9733859; rerun ainda não observado",
   "reservedAt": "2026-11-25T19:44:25-03:00",
   "startedAt": "2026-11-25T19:44:25-03:00",
   "endedAt": null,
@@ -15,7 +15,7 @@
   "branch": "feat/work-m630-ceasefire-tag-adapter-20261125",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "23a10aa49812c2da11c0424b3af0ba428a131f60",
-  "branchHeadSha": "f9b6db6fc8c3fedf2ad74bb184c410951c15cfb5",
+  "branchHeadSha": "97338596deda386e0fe4c852022bafd013d3ad59",
   "pullRequest": 572,
   "reservedFiles": [
     "src/ceasefireTagAdapter.ts",
@@ -82,17 +82,18 @@
   },
   "verification": {
     "focusedScenarios": 31,
-    "focusedTestResult": "pending",
+    "focusedTestResult": "failed-5-fixture-assumptions; corrected in 9733859; rerun pending",
     "typecheck": "pending",
     "build": "pending",
     "evidenceValidation": "pending",
-    "focusedWorkflowRun": null,
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
+    "focusedWorkflowRun": 45716417987,
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "in_progress",
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "engineValidationRun": 45716417992
   },
   "production": {
     "merge": false,
@@ -100,12 +101,12 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 4,
+  "effectiveWorkMinutes": 9,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Acionar/observar workflow focado M630; validar 31 casos e corrigir eventuais falhas antes de considerar integração.",
+  "nextTask": "Observar nova execução focada do commit 9733859; se não surgir, verificar sincronização/trigger do PR #572 sem repetir o job antigo.",
   "nextWindow": "2026-11-25T22:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
-  "lastActivityAt": "2026-11-25T19:49:48-03:00"
+  "lastActivityAt": "2026-11-25T19:54:24-03:00"
 }
