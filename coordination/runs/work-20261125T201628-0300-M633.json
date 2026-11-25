@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reservation registered; implementation starting",
+  "status": "focused adapter suite green after Field Spell fixture correction; PR #575 remains draft",
   "startedAt": "2026-11-25T20:16:28-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -15,8 +15,8 @@
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "59fc80c5c7d27d8c71a0b765acfef2187d1062fa",
   "branchBaseSha": null,
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "100ab768c0de3b37e06530107c42984aff784739",
+  "pullRequest": 575,
   "reservedFiles": [
     "src/darkScorpionBattleDamageTagAdapter.ts",
     "tests/darkScorpionBattleDamageTagAdapter.test.cjs",
@@ -69,14 +69,51 @@
   },
   "verification": {
     "focusedScenarios": 0,
-    "focusedTestResult": "pending",
+    "focusedTestResult": "29/29 passed",
     "typecheck": "pending",
     "build": "pending",
     "evidenceValidation": "pending",
     "newCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "latestRuns": [
+      {
+        "id": 45720886997,
+        "name": "Milestone 1000 - certified-card progress and triage",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720886997"
+      },
+      {
+        "id": 45720886815,
+        "name": "Engine validation",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720886815"
+      },
+      {
+        "id": 45720886766,
+        "name": "Card batch fast feedback",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720886766"
+      },
+      {
+        "id": 45720886677,
+        "name": "M633 Dark Scorpion Battle Damage Adapter",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720886677"
+      },
+      {
+        "id": 45720877293,
+        "name": "M633 Dark Scorpion Battle Damage Adapter",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720877293"
+      }
+    ]
   },
   "production": {
     "merge": false,
@@ -84,11 +121,13 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 17,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar evento de dano de batalha idempotente e resolver os efeitos Burglars/Cliff com deck do representante adversário, seleção privada, epochs, inventário e limites físicos.",
+  "nextTask": "Aguardar Engine Validation completa; revisar seleção privada de Burglars e não integrar sem revisão/autorizações.",
   "nextWindow": "2026-11-25T22:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "lastActivityAt": "2026-11-25T20:25:13-03:00",
+  "lastCheckpointSha": "100ab768c0de3b37e06530107c42984aff784739"
 }

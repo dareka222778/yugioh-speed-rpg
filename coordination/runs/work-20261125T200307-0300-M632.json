@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "implementation committed; focused CI rerun in progress after fixture corrections",
+  "status": "focused adapter suite green; broad Engine Validation still running; PR #574 remains draft",
   "startedAt": "2026-11-25T20:03:07-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -75,16 +75,47 @@
   },
   "verification": {
     "focusedScenarios": 38,
-    "focusedTestResult": "latest rerun queued/in progress; previous run 31/35 then 37/38 passed with one zone-assertion mismatch; correction pushed",
+    "focusedTestResult": "38/38 passed",
     "typecheck": "passed on initial CI",
     "build": "passed on initial CI",
     "evidenceValidation": "passed on initial CI",
-    "latestRuns": {
-      "focused": 45720061381,
-      "cardBatchFast": 45720061376,
-      "milestone1000": 45720061420,
-      "engineValidation": 45720061385
-    },
+    "latestRuns": [
+      {
+        "id": 45720061420,
+        "name": "Milestone 1000 - certified-card progress and triage",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720061420"
+      },
+      {
+        "id": 45720061385,
+        "name": "Engine validation",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720061385"
+      },
+      {
+        "id": 45720061381,
+        "name": "M632 Tsukuyomi Otohime Spirit Position Adapter",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720061381"
+      },
+      {
+        "id": 45720061376,
+        "name": "Card batch fast feedback",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720061376"
+      },
+      {
+        "id": 45720052416,
+        "name": "M632 Tsukuyomi Otohime Spirit Position Adapter",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/dareka222778/yugioh-speed-rpg/actions/runs/45720052416"
+      }
+    ],
     "newCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
@@ -96,13 +127,13 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 12,
+  "effectiveWorkMinutes": 18,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Aguardar a suíte M632 corrigida; se verde, manter draft e solicitar revisão. Em paralelo, preparar M633 para os dois Dark Scorpions com gatilho de dano de batalha.",
+  "nextTask": "Aguardar Engine Validation completa; manter draft, solicitar handoff M61 e não integrar sem revisão/autorizações.",
   "nextWindow": "2026-11-25T22:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
-  "lastActivityAt": "2026-11-25T20:16:28-03:00",
+  "lastActivityAt": "2026-11-25T20:25:13-03:00",
   "lastCheckpointSha": "52360adfc35623c05299d1ed23c270d5e980cfd7"
 }
