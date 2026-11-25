@@ -1,0 +1,29 @@
+name: M607 Injection Fairy Lily Damage Calculation adapter
+on:
+  push:
+    branches:
+      - feat/work-m607-injection-fairy-lily-damage-calculation-20261124
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/injectionFairyLilyDamageCalculationTagAdapter.ts
+      - tests/injectionFairyLilyDamageCalculationTagAdapter.test.cjs
+      - docs/evidence/m607-injection-fairy-lily-damage-calculation.json
+      - .github/workflows/m607-injection-fairy-lily-damage-calculation.yml
+permissions:
+  contents: read
+jobs:
+  injection-fairy-lily:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m607-injection-fairy-lily-damage-calculation.json', 'utf8'))"
+      - run: node --test tests/injectionFairyLilyDamageCalculationTagAdapter.test.cjs
