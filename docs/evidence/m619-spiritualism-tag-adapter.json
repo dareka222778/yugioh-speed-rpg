@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "mission": "M619",
+  "family": "opponent-spell-trap-return-to-owner-hand",
+  "cards": [
+    {
+      "name": "Spiritualism",
+      "passcode": "15866454",
+      "konamiDatabaseId": 5246,
+      "kind": "Normal Spell",
+      "firstTcgSet": "LON-094",
+      "firstTcgRelease": "2003-03-01",
+      "officialEffect": "Target 1 Spell/Trap your opponent controls; return that target to the hand. This card's activation and effect cannot be negated.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5246&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/spiritualismTagAdapter.ts",
+      "tests/spiritualismTagAdapter.test.cjs",
+      "docs/evidence/m619-spiritualism-tag-adapter.json",
+      ".github/workflows/m619-spiritualism-tag-adapter.yml"
+    ],
+    "plannedScenarios": 23,
+    "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, releasedCardIds, certificações, allowlist, comandos Discord, persistência ou produção. A identidade real Spiritualism permanece fora dos fixtures habilitados; os testes usam uma Normal Spell válida como fixture e não concedem inventário."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase; o retorno à mão não executa descarte de regra"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31
+  },
+  "verification": {
+    "focusedScenarios": 23,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "knownLimitations": [
+      "A integração central e a certificação dependem do handoff M61; o adapter isolado não habilita a carta real no catálogo.",
+      "O adapter modela o efeito não-negável após uma ativação válida; a decisão de ativação legal e a janela de resposta continuam sob o resolver central."
+    ]
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
