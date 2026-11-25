@@ -1,0 +1,75 @@
+{
+  "mission": "M550",
+  "runId": "work-20261123T033800-0300-M550",
+  "owner": "Work principal",
+  "title": "TagDuel final-seat Accept versus host cancellation race",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "dbe1fb281841a41fa4a3018fab0e7e4dc1bd8b80",
+  "branch": "feat/work-m550-tag-accept-quit-race-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "priority": "P1 — the fourth physical-seat Accept and host cancellation at the same lobby revision must produce exactly one outcome: a fully accepted four-seat duel or a cancelled lobby with every lock released.",
+  "design": {
+    "isolation": "Temporary SQLite database; independent Node workers each open their own better-sqlite3 connection; parent connection closes before races.",
+    "concurrency": "Three synchronized cross-process races between tagStore.acceptTag for the final seat and tagStore.quitTag for the host.",
+    "clock": "Both workers use a deterministic timestamp one second after lobby creation and before the five-minute expiry deadline; both use the same expected revision.",
+    "operations": [
+      "tagStore.acceptTag",
+      "tagStore.quitTag"
+    ]
+  },
+  "assertions": [
+    "exactly one operation commits; the competing stale revision or SQLite lock conflict fails closed",
+    "the terminal revision advances exactly once",
+    "Accept winner produces status playing, four accepted physical seats, four tag_members locks and a valid TagDuel state",
+    "host-cancel winner produces status cancelled, preserves the three prior acceptances, and releases all four tag_members locks",
+    "neither outcome creates duel_members locks",
+    "all physical card UIDs remain unique in a started duel",
+    "players, player_cards, starter_grants, decks and deck_cards remain byte-equivalent"
+  ],
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventory": {
+    "granted": 0,
+    "mutated": false
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "persistentDatabaseUsed": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "SQLite temporário e processos Node independentes; sem banco persistente.",
+    "Valida stores/transações reais, não gateway/guild Discord real.",
+    "Relógio determinístico elimina espera de cinco minutos; não mede latência de produção.",
+    "Não integra nem certifica cartas; não altera comandos ou runtime."
+  ],
+  "testExecution": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "customWorkflow": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending; baseline 969/1000",
+    "engineValidation": "pending"
+  }
+}

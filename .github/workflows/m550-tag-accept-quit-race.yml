@@ -1,0 +1,36 @@
+name: M550 TagDuel Accept Quit Race
+on:
+  push:
+    branches:
+      - feat/work-m550-tag-accept-quit-race-20261123
+    paths:
+      - 'tests/tagAcceptQuitRace.test.cjs'
+      - 'docs/evidence/m550-tag-accept-quit-race.json'
+      - '.github/workflows/m550-tag-accept-quit-race.yml'
+  pull_request:
+    paths:
+      - 'tests/tagAcceptQuitRace.test.cjs'
+      - 'docs/evidence/m550-tag-accept-quit-race.json'
+      - '.github/workflows/m550-tag-accept-quit-race.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-accept-quit-race:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m550-tag-accept-quit-race.json', 'utf8'))"
+      - name: Run cross-process TagDuel Accept-versus-cancel races
+        run: node --test tests/tagAcceptQuitRace.test.cjs
