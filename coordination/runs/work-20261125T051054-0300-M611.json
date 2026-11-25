@@ -1,0 +1,97 @@
+{
+  "format": 1,
+  "runId": "work-20261125T051054-0300-M611",
+  "mission": "M611",
+  "parentRunId": "work-20261124T235910-0300-M609",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved; implementation pending",
+  "startedAt": "2026-11-25T05:10:54-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "fe62f6146736e98dd1f9ab9e31aaab566e6e13bf",
+  "branch": "feat/work-m611-attribute-field-effects-20261125",
+  "baseSha": "fe62f6146736e98dd1f9ab9e31aaab566e6e13bf",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/attributeFieldEffectsTagAdapter.ts",
+    "tests/attributeFieldEffectsTagAdapter.test.cjs",
+    "docs/evidence/m611-attribute-field-effects-tag-adapter.json",
+    ".github/workflows/m611-attribute-field-effects-tag-adapter.yml"
+  ],
+  "scope": "Adapter isolado TagDuel para Hoshiningen (67629977 / CID 4498), aura global de +500 ATK em monstros LIGHT e -400 ATK em monstros DARK, com múltiplas fontes, face-up e negação; e Thunder Nyan Nyan (14878871 / CID 5028), autodestruição quando a equipe controladora tiver outro monstro face-up não-LIGHT. Sem catálogo, certificações, allowlist, resolver central, comandos Discord, persistência ou produção.",
+  "cards": [
+    {
+      "name": "Hoshiningen",
+      "passcode": "67629977",
+      "konamiDatabaseId": 4498,
+      "type": "LIGHT / Fairy / Effect / Level 2",
+      "atk": 500,
+      "def": 700,
+      "firstTcgSet": "MRD-EN102",
+      "firstKnownRegionalRelease": "2003-07-11 (DE); Portuguese MRD-P102 2004-06-01",
+      "officialEffect": "All LIGHT monsters on the field gain 500 ATK, also all DARK monsters on the field lose 400 ATK.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4498&ope=2&request_locale=en"
+    },
+    {
+      "name": "Thunder Nyan Nyan",
+      "passcode": "14878871",
+      "konamiDatabaseId": 5028,
+      "type": "LIGHT / Thunder / Effect / Level 4",
+      "atk": 1900,
+      "def": 800,
+      "firstTcgSet": "LOD-059",
+      "firstTcgRelease": "2003-06-06",
+      "officialEffect": "If there is a non-LIGHT monster on your side of the field, destroy this face-up card.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5028&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/attributeFieldEffectsTagAdapter.ts",
+      "tests/attributeFieldEffectsTagAdapter.test.cjs",
+      "docs/evidence/m611-attribute-field-effects-tag-adapter.json",
+      ".github/workflows/m611-attribute-field-effects-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Hoshiningen aura soma fontes face-up de ambas as equipes e aplica +500/-400 a alvos face-up LIGHT/DARK; fontes múltiplas acumulam.",
+      "Fontes Hoshiningen com efeito negado não contribuem; alvos face-down e atributos desconhecidos não recebem modificador.",
+      "Thunder Nyan Nyan verifica todo o campo compartilhado da própria equipe, incluindo monstros do parceiro, sem consultar a equipe adversária nem atributos ocultos.",
+      "Se a condição for satisfeita e o efeito não estiver negado, destrói a instância face-up e envia a carta ao Cemitério da equipe do proprietário físico.",
+      "Conservação de UID/inventário e limites do formato clássico são validados; nenhuma mão é alterada."
+    ],
+    "integrationBoundary": "Adapter isolado; o resolver central deverá consultar os modificadores de Hoshiningen na fórmula de ATK e executar a condição de Thunder Nyan Nyan em pontos de sincronização de estado. Não registrar cartas no catálogo nem certificar."
+  },
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "extraDeck": "máximo 5 por assento físico",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "hand": "limite 6",
+    "handDiscard": "diferido para End Phase"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter e testes focados; validar CI; depois avançar para próxima família independente sem tocar M608/M609/M610/M61.",
+  "nextWindow": "2026-11-25T09:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
