@@ -1,0 +1,44 @@
+name: M537 Independent Timeout Queue Isolation
+on:
+  push:
+    branches:
+      - feat/work-m537-timeout-queue-isolation-20261122
+    paths:
+      - 'src/index.ts'
+      - 'scripts/mission29-reviewed-extensions.cjs'
+      - 'tests/runtimeStatus29.test.cjs'
+      - 'src/timeoutSweep.ts'
+      - 'tests/timeoutSweepIsolation.test.cjs'
+      - 'docs/evidence/m537-timeout-queue-isolation.json'
+      - '.github/workflows/m537-timeout-queue-isolation.yml'
+  pull_request:
+    paths:
+      - 'src/index.ts'
+      - 'scripts/mission29-reviewed-extensions.cjs'
+      - 'tests/runtimeStatus29.test.cjs'
+      - 'src/timeoutSweep.ts'
+      - 'tests/timeoutSweepIsolation.test.cjs'
+      - 'docs/evidence/m537-timeout-queue-isolation.json'
+      - '.github/workflows/m537-timeout-queue-isolation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  timeout-queue-isolation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m537-timeout-queue-isolation.json', 'utf8'))"
+      - name: Run independent timeout queue regressions
+        run: node --test tests/timeoutSweepIsolation.test.cjs
