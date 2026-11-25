@@ -1,0 +1,83 @@
+{
+  "format": 1,
+  "runId": "work-20261125T095729-0300-M615",
+  "mission": "M615",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "The Cheerful Coffin",
+      "passcode": "41142615",
+      "konamiDatabaseId": 4858,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRD-059",
+      "firstTcgRelease": "2002-06-26",
+      "officialEffect": "Discard up to 3 Monster Cards from your hand to the Graveyard.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4858&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m615-cheerful-coffin-tag-adapter-20261125",
+    "baseSha": "0e2b285b8402991655e63f0a8ca5646d7423ae32",
+    "files": [
+      "src/cheerfulCoffinTagAdapter.ts",
+      "tests/cheerfulCoffinTagAdapter.test.cjs",
+      "docs/evidence/m615-cheerful-coffin-tag-adapter.json",
+      ".github/workflows/m615-cheerful-coffin-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Ativa a Normal Spell somente na Main Phase aberta, da mão privada do assento físico ativo.",
+      "Descarta opcionalmente zero a três Monster Cards da mesma mão física; não acessa a mão do parceiro ou do adversário.",
+      "Move os descartes ao Cemitério compartilhado da equipe, preservando UID e proprietário físico.",
+      "Revalida a fonte no Cemitério, o turno, o assento, a seleção, a unicidade e o limite de três antes de qualquer mutação.",
+      "Negação deixa a fonte no Cemitério e não descarta monstros; recibo persistido impede replay inclusive com escolha zero.",
+      "Mantém mão acima de seis até a End Phase; Deck 20–30 por assento, Extra 5 e zonas 3+3."
+    ],
+    "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência de jogadores ou produção. Integração central depende do handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "plannedScenarios": 24,
+    "focusedScenarios": 24,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "focusedTestCommand": "node --test tests/cheerfulCoffinTagAdapter.test.cjs",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "A identidade real The Cheerful Coffin permanece fora do catálogo; os testes usam uma Spell habilitada como fixture e passam a identidade real pelo adapter.",
+    "O adapter modela a saída da Normal Spell da mão para o Cemitério no limite de ativação; a integração precisa preservar a janela de corrente e chamar a resolução no momento correto.",
+    "Sem integração ao resolver v9/Discord, gateway real, backup verificável, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
