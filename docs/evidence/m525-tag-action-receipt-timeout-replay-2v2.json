@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "mission": "M525",
+  "runId": "work-20261122T123100-0300-M525",
+  "title": "TagDuel action receipt replay at timeout",
+  "priority": "P1 — corrigir replay idempotente que, ao encontrar um recibo válido, lia o estado sem aplicar o deadline; a repetição não pode deixar sessão expirada e locks presos.",
+  "branch": "feat/work-m525-tag-action-receipt-timeout-replay-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "c376248196fc4458c47e2ff7dbb55d438031afed",
+  "scope": [
+    "src/tagStore.ts",
+    "tests/tagActionReceiptTimeoutReplay2v2.test.cjs",
+    "docs/evidence/m525-tag-action-receipt-timeout-replay-2v2.json",
+    ".github/workflows/m525-tag-action-receipt-timeout-replay-2v2.yml"
+  ],
+  "behavior": {
+    "bug": "actTag consultava recibo válido e retornava read(id) sem passar por getTag; uma repetição após 30 min podia deixar duelo playing e quatro locks ativos até o próximo poll.",
+    "fix": "o caminho de recibo válido agora chama getTag antes de devolver o recibo, persistindo timeout/W.O. e liberando locks sem reaplicar a ação.",
+    "safeguards": "colisão de requestId continua rejeitada antes de efeitos colaterais; o recibo original permanece único; o timeout cria uma única revisão duelFinished.",
+    "ownership": "quatro mãos/Decks/Extra e UIDs físicos permanecem iguais; projeção pública não revela UIDs; nenhuma coleção persistente é criada."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "openingHand": 4,
+    "handLimit": 6,
+    "handDiscard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "validation": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "SQLite temporário; sem guild Discord real.",
+    "Patch limitado ao caminho de replay de recibo em tagStore; sem mudança em handler/UI/catalog/allowlist.",
+    "Sem merge/deploy/produção."
+  ]
+}
