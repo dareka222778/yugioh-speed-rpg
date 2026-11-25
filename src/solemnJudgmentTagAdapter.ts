@@ -229,6 +229,8 @@ export function solemnJudgmentActions(
   if(core.phase!=='response'||!isTeam(team)||core.turnEnding||
     continuousTrapActivationsBlocked(core)||!cardActivationAllowed(core,team,'trap'))return [];
   if(!responseFor(team,core,lookup))return [];
+  const lp=core.players[team].lp;
+  if(!Number.isSafeInteger(lp)||lp<=0||lp<=Math.ceil(lp/2))return [];
   const cardId=options.cardId??SOLEMN_JUDGMENT_ID;
   return core.players[team].backrow
     .filter(card=>card.id===cardId&&!card.faceUp&&Number.isSafeInteger(card.setTurn)&&card.setTurn<core.turn)
