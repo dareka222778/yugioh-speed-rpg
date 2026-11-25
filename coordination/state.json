@@ -4,7 +4,7 @@
   "priorityRequestedBy": "User",
   "state": "active",
   "startedAt": "2026-11-25T09:57:29-03:00",
-  "lastActivityAt": "2026-11-25T10:16:45-03:00",
+  "lastActivityAt": "2026-11-25T10:26:45-03:00",
   "nextScheduledAt": "2026-11-25T14:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -21141,5 +21141,79 @@
   "workSessionEffectiveMinutes": 19,
   "workSessionTargetMinutes": 60,
   "workSessionTargetMet": false,
-  "expectedHeadForM617CoordinationCommit": "1295a7c0d2a1ae14d4b926bdebdf8bef1963175f"
+  "expectedHeadForM617CoordinationCommit": "1295a7c0d2a1ae14d4b926bdebdf8bef1963175f",
+  "currentWorkReservationM618": {
+    "runId": "work-20261125T102645-0300-M618",
+    "mission": "M618",
+    "owner": "Work principal",
+    "priority": "P1",
+    "state": "reserved-and-implementing",
+    "startedAt": "2026-11-25T10:26:45-03:00",
+    "lastActivityAt": "2026-11-25T10:26:45-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "fc2497732342f3fb1380de3090899b70b82070f1",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "fc2497732342f3fb1380de3090899b70b82070f1",
+    "branch": "feat/work-m618-graceful-charity-tag-adapter-20261125",
+    "branchHeadSha": null,
+    "pullRequest": null,
+    "reservedFiles": [
+      "src/gracefulCharityTagAdapter.ts",
+      "tests/gracefulCharityTagAdapter.test.cjs",
+      "docs/evidence/m618-graceful-charity-tag-adapter.json",
+      ".github/workflows/m618-graceful-charity-tag-adapter.yml"
+    ],
+    "scope": [
+      "src/gracefulCharityTagAdapter.ts",
+      "tests/gracefulCharityTagAdapter.test.cjs",
+      "docs/evidence/m618-graceful-charity-tag-adapter.json",
+      ".github/workflows/m618-graceful-charity-tag-adapter.yml"
+    ],
+    "scopeDescription": "Adapter TagDuel clássico para Graceful Charity: comprar exatamente três cartas do Deck privado do assento físico ativo e, após a compra, descartar exatamente duas cartas quaisquer da mesma mão física para o Cemitério compartilhado da equipe. Sem overflow antecipado; limite de seis cartas continua sendo verificado apenas na End Phase.",
+    "scopeReleasedToAuxiliary": [],
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31,
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0
+    },
+    "conflictCheck": {
+      "checkedAt": "2026-11-25T10:26:45-03:00",
+      "sharedHead": "fc2497732342f3fb1380de3090899b70b82070f1",
+      "matchingBranches": 0,
+      "matchingPullRequests": 0,
+      "matchingFiles": 0,
+      "m617FilesDisjoint": true,
+      "m615FilesDisjoint": true,
+      "m616FilesDisjoint": true,
+      "m61CentralFilesExcluded": true,
+      "thirdPartyReservationsUntouched": true,
+      "result": "quatro caminhos novos; Graceful Charity sem branch/PR/arquivo reservado; M617 preservado"
+    }
+  },
+  "m617HandoffRequest": {
+    "requestedAt": "2026-11-25T10:26:45-03:00",
+    "pullRequest": 560,
+    "commentId": 7163847211,
+    "state": "awaiting-explicit-cooperative-release",
+    "reservedFiles": [
+      "src/tributeDoomedTagAdapter.ts",
+      "tests/tributeDoomedTagAdapter.test.cjs",
+      "docs/evidence/m617-tribute-doomed-tag-adapter.json",
+      ".github/workflows/m617-tribute-doomed-tag-adapter.yml"
+    ],
+    "conflictingFilesUntouched": true
+  },
+  "m618CatalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "m618NextTask": "Implementar e testar Graceful Charity em branch isolada; durante a CI preparar a próxima família somente após nova verificação de branches/PRs.",
+  "nextWorkWindowM618": "2026-11-25T14:30:00-03:00"
 }
