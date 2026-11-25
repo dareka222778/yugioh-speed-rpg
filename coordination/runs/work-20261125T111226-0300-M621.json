@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reserved; implementação isolada em preparação",
+  "status": "PR #564 draft; focused workflow verde (31 cenários), check/build/evidência verdes; Card Batch Fast e Engine Validation em execução; sem merge/deploy.",
   "reservedAt": "2026-11-25T11:12:26-03:00",
   "startedAt": "2026-11-25T11:12:26-03:00",
   "endedAt": null,
@@ -14,8 +14,8 @@
   "sharedHeadAtReservation": "ae86a77182c7971613a30e42482e0be8b2942446",
   "branch": "feat/work-m621-nobleman-crossout-tag-adapter-20261125",
   "baseSha": "ae86a77182c7971613a30e42482e0be8b2942446",
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "41353e348da06ea8c5ab9746f259f142605c926b",
+  "pullRequest": 564,
   "reservedFiles": [
     "src/noblemanOfCrossoutTagAdapter.ts",
     "tests/noblemanOfCrossoutTagAdapter.test.cjs",
@@ -81,16 +81,21 @@
   },
   "verification": {
     "focusedScenarios": 28,
-    "focusedTestResult": "pending",
-    "typecheck": "pending",
-    "build": "pending",
-    "evidenceValidation": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
+    "focusedTestResult": "success",
+    "typecheck": "success",
+    "build": "success",
+    "evidenceValidation": "success",
+    "cardBatchFast": "in_progress",
+    "milestone1000": "success",
+    "engineValidation": "in_progress",
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "focusedScenariosPassed": 31,
+    "focusedWorkflowRun": 45632449442,
+    "cardBatchRunId": 45632449382,
+    "milestoneRunId": 45632449386,
+    "engineValidationRunId": 45632449447
   },
   "production": {
     "merge": false,
@@ -98,7 +103,7 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 6,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -144,7 +149,8 @@
     "status": "awaiting-explicit-release",
     "centralFilesExcluded": true
   },
-  "nextTask": "Implementar/testar M621 em branch isolada; durante a CI verificar M620 e escolher a próxima família somente após nova checagem de conflitos.",
+  "nextTask": "M622: escolher a próxima família somente após CI M621 e nova verificação de branch/PR/arquivos.",
   "nextWindow": "2026-11-25T14:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "lastActivityAt": "2026-11-25T11:18:14-03:00"
 }
