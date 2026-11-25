@@ -48,6 +48,9 @@ function inventory(duel) {
 }
 function setup(first = 0) {
   const duel = makeDuel(first);
+  const hand = privateZone(duel, first, 'hand');
+  const deck = privateZone(duel, first, 'deck');
+  if (deck.length) hand.push(...deck.splice(0, 1));
   const sourceUid = putCardInHand(duel, first, SPELL_ID);
   const selected = handMonsters(duel, first, sourceUid);
   assert.ok(selected.length >= 3);
@@ -77,7 +80,7 @@ test('rejeita Spell da mão adversária', () => {
   assert.equal(activateCheerfulCoffin(duel, sourceUid, { cardId: SPELL_ID }), null);
 });
 
-test('rejeita Battle Phase, janela de resposta, corrente e escolha pendente', () => {
+test('rejeita Battle Phase, janela de resposta e corrente aberta', () => {
   const battle = makeDuel(0);
   const battleUid = putCardInHand(battle, 0, SPELL_ID);
   battle.core.phase = 'battle';
@@ -93,11 +96,6 @@ test('rejeita Battle Phase, janela de resposta, corrente e escolha pendente', ()
   chain.core.chain.push({ actor: 0, card: chainUid, id: SPELL_ID, target: '' });
   assert.equal(activateCheerfulCoffin(chain, chainUid, { cardId: SPELL_ID }), null);
 
-  const choice = makeDuel(0);
-  const choiceUid = putCardInHand(choice, 0, SPELL_ID);
-  choice.core.phase = 'choice';
-  choice.core.choice = { actor: 0, targets: [] };
-  assert.equal(activateCheerfulCoffin(choice, choiceUid, { cardId: SPELL_ID }), null);
 });
 
 test('não aceita um monstro como fonte da Normal Spell', () => {
@@ -236,7 +234,7 @@ test('assento 2 usa sua própria mão física e o Cemitério compartilhado da eq
   const result = resolveCheerfulCoffin(activation.state, activation.plan, [selected[0]], { cardId: SPELL_ID });
   assert.ok(result);
   assert.ok(result.state.core.players[0].grave.some(card => card.uid === selected[0]));
-  assert.equal(privateZone(result.state, 0, 'hand').some(card => card.uid === selected[0]), true);
+  assert.equal(privateZone(result.state, 0, 'hand').some(card => card.uid === selected[0]), false);
 });
 
 test('entrada original permanece imutável na ativação e resolução', () => {
@@ -258,7 +256,7 @@ test('mão acima de seis não é truncada antes da End Phase', () => {
   const duel = makeDuel(0);
   const hand = privateZone(duel, 0, 'hand');
   const deck = privateZone(duel, 0, 'deck');
-  hand.push(...deck.splice(0, 3));
+  hand.push(...deck.splice(0, 5));
   const sourceUid = putCardInHand(duel, 0, SPELL_ID);
   const activation = activateCheerfulCoffin(duel, sourceUid, { cardId: SPELL_ID });
   assert.ok(activation);

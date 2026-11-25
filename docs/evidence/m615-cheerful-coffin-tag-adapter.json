@@ -32,7 +32,8 @@
       "Negação deixa a fonte no Cemitério e não descarta monstros; recibo persistido impede replay inclusive com escolha zero.",
       "Mantém mão acima de seis até a End Phase; Deck 20–30 por assento, Extra 5 e zonas 3+3."
     ],
-    "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência de jogadores ou produção. Integração central depende do handoff M61."
+    "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência de jogadores ou produção. Integração central depende do handoff M61.",
+    "plannedScenarios": 25
   },
   "rules": {
     "mainDeckPerPhysicalSeat": "20–30",
@@ -44,8 +45,8 @@
     "handDiscard": "somente na End Phase"
   },
   "verification": {
-    "plannedScenarios": 24,
-    "focusedScenarios": 24,
+    "plannedScenarios": 25,
+    "focusedScenarios": 25,
     "newCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
