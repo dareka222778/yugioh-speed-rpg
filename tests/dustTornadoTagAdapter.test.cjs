@@ -152,6 +152,10 @@ function setup({
   };
 }
 
+function resolveDust(duel, plan, options = {}) {
+  return resolveDustTornado(duel, plan, { ...options, cardId: TRAP_ID });
+}
+
 function moveTargetToHand(duel, targetUid, ownerSeat) {
   const team = duel.core.players.findIndex(player => player.backrow.some(card => card.uid === targetUid));
   if (team >= 0) {
@@ -269,7 +273,7 @@ test('destroys an opponent face-down backrow card and sends it to its physical o
   const result = setup({ targetFaceUp: false });
   assert.ok(result.activation);
   const before = inventory(result.activation.state);
-  const resolved = resolveDustTornado(result.activation.state, result.activation.plan);
+  const resolved = resolveDust(result.activation.state, result.activation.plan);
   assert.ok(resolved);
   assert.equal(resolved.targetDestroyed, true);
   assert.equal(resolved.setUid, null);
@@ -281,7 +285,7 @@ test('destroys an opponent face-down backrow card and sends it to its physical o
 test('destroys an opponent face-up backrow card', () => {
   const result = setup({ targetFaceUp: true });
   assert.ok(result.activation);
-  const resolved = resolveDustTornado(result.activation.state, result.activation.plan);
+  const resolved = resolveDust(result.activation.state, result.activation.plan);
   assert.ok(resolved);
   assert.equal(resolved.targetDestroyed, true);
 });
@@ -289,7 +293,7 @@ test('destroys an opponent face-up backrow card', () => {
 test('destroys an opponent Field Spell and frees only the separate Field Zone', () => {
   const result = setup({ targetZone: 'field', targetFaceUp: true });
   assert.ok(result.activation);
-  const resolved = resolveDustTornado(result.activation.state, result.activation.plan);
+  const resolved = resolveDust(result.activation.state, result.activation.plan);
   assert.ok(resolved);
   assert.equal(resolved.targetDestroyed, true);
   assert.equal(resolved.state.core.players[result.opponentTeam].field, null);
@@ -304,7 +308,7 @@ test('a stolen target returns to its original physical owner GY, not the control
   assert.ok(result.activation);
   const ownerTeam = result.targetPhysicalSeat % 2;
   assert.notEqual(ownerTeam, result.opponentTeam);
-  const resolved = resolveDustTornado(result.activation.state, result.activation.plan);
+  const resolved = resolveDust(result.activation.state, result.activation.plan);
   assert.ok(resolved);
   assert.ok(resolved.state.core.players[ownerTeam].grave.some(card => card.uid === result.targetUid));
   assert.ok(!resolved.state.core.players[result.opponentTeam].grave.some(card => card.uid === result.targetUid));
@@ -315,7 +319,7 @@ test('a target moved out before resolution is not replaced', () => {
   assert.ok(result.activation);
   const next = structuredClone(result.activation.state);
   moveTargetToHand(next, result.targetUid, result.targetPhysicalSeat);
-  const resolved = resolveDustTornado(next, result.activation.plan);
+  const resolved = resolveDust(next, result.activation.plan);
   assert.ok(resolved);
   assert.equal(resolved.targetDestroyed, false);
   assert.ok(privateZone(resolved.state, result.targetPhysicalSeat, 'hand').some(card => card.uid === result.targetUid));
@@ -331,7 +335,7 @@ test('a target that leaves and returns to the same zone has a stale lifetime bin
   const [card] = hand.splice(index, 1);
   next.core.players[result.opponentTeam].backrow.push({ ...card, faceUp: false, setTurn: 0 });
   synchronizeCardLifetimes(next.core);
-  const resolved = resolveDustTornado(next, result.activation.plan);
+  const resolved = resolveDust(next, result.activation.plan);
   assert.ok(resolved);
   assert.equal(resolved.targetDestroyed, false);
 });
@@ -339,7 +343,7 @@ test('a target that leaves and returns to the same zone has a stale lifetime bin
 test('a negated Trap does not destroy the target or Set a card', () => {
   const result = setup();
   assert.ok(result.activation);
-  const resolved = resolveDustTornado(result.activation.state, result.activation.plan, { negated: true });
+  const resolved = resolveDust(result.activation.state, result.activation.plan, { negated: true });
   assert.ok(resolved);
   assert.equal(resolved.negated, true);
   assert.equal(resolved.targetDestroyed, false);
@@ -351,7 +355,7 @@ test('the optional Set uses the active physical seat private hand', () => {
   const result = setup({ sourceSeat: partnerSeat(0) });
   assert.ok(result.activation);
   const setUid = putHandCard(result.activation.state, result.activeSeat, SPELL_ID);
-  const resolved = resolveDustTornado(result.activation.state, result.activation.plan, { setUid });
+  const resolved = resolveDust(result.activation.state, result.activation.plan, { setUid });
   assert.ok(resolved);
   assert.equal(resolved.targetDestroyed, true);
   assert.equal(resolved.setUid, setUid);
@@ -365,7 +369,7 @@ test('the optional Set can place a Field Spell in the separate Field Zone', () =
   const result = setup();
   assert.ok(result.activation);
   const setUid = putHandCard(result.activation.state, result.activeSeat, FIELD_SPELL_ID);
-  const resolved = resolveDustTornado(result.activation.state, result.activation.plan, { setUid });
+  const resolved = resolveDust(result.activation.state, result.activation.plan, { setUid });
   assert.ok(resolved);
   assert.equal(resolved.setUid, setUid);
   assert.equal(resolved.state.core.players[result.activeTeam].field?.uid, setUid);
@@ -377,7 +381,7 @@ test('rejects selecting a card from the inactive partner private hand', () => {
   assert.ok(result.activation);
   const setUid = putHandCard(result.activation.state, partnerSeat(result.activeSeat), SPELL_ID);
   const snapshot = JSON.stringify(result.activation.state);
-  assert.equal(resolveDustTornado(result.activation.state, result.activation.plan, { setUid }), null);
+  assert.equal(resolveDust(result.activation.state, result.activation.plan, { setUid }), null);
   assert.equal(JSON.stringify(result.activation.state), snapshot);
 });
 
@@ -386,7 +390,7 @@ test('rejects selecting a monster as the optional Set', () => {
   assert.ok(result.activation);
   const setUid = putHandCard(result.activation.state, result.activeSeat, MONSTER_ID);
   const snapshot = JSON.stringify(result.activation.state);
-  assert.equal(resolveDustTornado(result.activation.state, result.activation.plan, { setUid }), null);
+  assert.equal(resolveDust(result.activation.state, result.activation.plan, { setUid }), null);
   assert.equal(JSON.stringify(result.activation.state), snapshot);
 });
 
@@ -396,12 +400,12 @@ test('does not Set after a stale target or a negated effect', () => {
   const staleState = structuredClone(stale.activation.state);
   moveTargetToHand(staleState, stale.targetUid, stale.targetPhysicalSeat);
   const staleSetUid = putHandCard(staleState, stale.activeSeat, SPELL_ID);
-  assert.equal(resolveDustTornado(staleState, stale.activation.plan, { setUid: staleSetUid }), null);
+  assert.equal(resolveDust(staleState, stale.activation.plan, { setUid: staleSetUid }), null);
 
   const negated = setup();
   assert.ok(negated.activation);
   const negatedSetUid = putHandCard(negated.activation.state, negated.activeSeat, SPELL_ID);
-  assert.equal(resolveDustTornado(negated.activation.state, negated.activation.plan, {
+  assert.equal(resolveDust(negated.activation.state, negated.activation.plan, {
     negated: true,
     setUid: negatedSetUid,
   }), null);
@@ -410,9 +414,9 @@ test('does not Set after a stale target or a negated effect', () => {
 test('resolution is idempotent and cannot replay the same event', () => {
   const result = setup();
   assert.ok(result.activation);
-  const first = resolveDustTornado(result.activation.state, result.activation.plan);
+  const first = resolveDust(result.activation.state, result.activation.plan);
   assert.ok(first);
-  assert.equal(resolveDustTornado(first.state, result.activation.plan), null);
+  assert.equal(resolveDust(first.state, result.activation.plan), null);
 });
 
 test('rejects stale turn plans without mutating the saved state', () => {
@@ -421,7 +425,7 @@ test('rejects stale turn plans without mutating the saved state', () => {
   const stale = structuredClone(result.activation.state);
   stale.core.turn++;
   const snapshot = JSON.stringify(stale);
-  assert.equal(resolveDustTornado(stale, result.activation.plan), null);
+  assert.equal(resolveDust(stale, result.activation.plan), null);
   assert.equal(JSON.stringify(stale), snapshot);
 });
 
@@ -430,7 +434,7 @@ test('conserves every physical UID through destruction and optional Set', () => 
   assert.ok(result.activation);
   const setUid = putHandCard(result.activation.state, result.activeSeat, SPELL_ID);
   const before = inventory(result.activation.state);
-  const resolved = resolveDustTornado(result.activation.state, result.activation.plan, { setUid });
+  const resolved = resolveDust(result.activation.state, result.activation.plan, { setUid });
   assert.ok(resolved);
   assert.deepEqual(inventory(resolved.state), before);
 });
@@ -439,7 +443,7 @@ test('all four opening-seat rotations preserve physical ownership and team routi
   for (const first of [0, 1, 2, 3]) {
     const result = setup({ first, sourceSeat: partnerSeat(first) });
     assert.ok(result.activation, 'first=' + first);
-    const resolved = resolveDustTornado(result.activation.state, result.activation.plan);
+    const resolved = resolveDust(result.activation.state, result.activation.plan);
     assert.ok(resolved, 'first=' + first);
     assert.equal(resolved.targetDestroyed, true, 'first=' + first);
     assert.ok(resolved.state.core.players[result.targetPhysicalSeat % 2].grave.some(card => card.uid === result.targetUid));
@@ -465,6 +469,8 @@ test('Field Zone is separate from three Spell/Trap Zones', () => {
   const duel = makeDuel(0);
   const team = tagDecisionMember(duel).team;
   const seat = duel.active[team];
+  const hand = privateZone(duel, seat, 'hand');
+  hand.push(privateZone(duel, seat, 'deck').pop());
   placeField(duel, seat, team, FIELD_SPELL_ID, false);
   for (let i = 0; i < 3; i++) placeBackrow(duel, seat, team, i % 2 ? SPELL_ID : TRAP_ID, 0, false);
   assert.doesNotThrow(() => assertDustTornadoRules(duel));
@@ -492,7 +498,7 @@ test('the adapter never creates or grants inventory', () => {
   const result = setup();
   assert.ok(result.activation);
   const before = inventory(result.activation.state);
-  const resolved = resolveDustTornado(result.activation.state, result.activation.plan);
+  const resolved = resolveDust(result.activation.state, result.activation.plan);
   assert.ok(resolved);
   assert.deepEqual(inventory(resolved.state), before);
 });
@@ -538,7 +544,7 @@ test('does not Set a second Field Spell into an occupied Field Zone', () => {
   const setUid = putHandCard(result.activation.state, result.activeSeat, FIELD_SPELL_ID);
   const snapshot = JSON.stringify(result.activation.state);
   assert.equal(
-    resolveDustTornado(result.activation.state, result.activation.plan, { setUid }),
+    resolveDust(result.activation.state, result.activation.plan, { setUid }),
     null,
   );
   assert.equal(JSON.stringify(result.activation.state), snapshot);
