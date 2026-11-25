@@ -296,18 +296,18 @@ function planRobbinGoblin(
   const attacker = validateBattleEvent(state, event, lookup);
   const metadata = lookup(robbinGoblinId);
   if (!metadata || metadata.kind !== 'trap') {
-    throw new Error('Robbin\\' Goblin deve ser uma Armadilha admitida.');
+    throw new Error('Robbin Goblin deve ser uma Armadilha admitida.');
   }
-  if (typeof trapUid !== 'string' || !trapUid) throw new Error('UID de Robbin\\' Goblin inválido.');
+  if (typeof trapUid !== 'string' || !trapUid) throw new Error('UID de Robbin Goblin inválido.');
   const trapOwnerSeat = physicalSeat(trapUid);
   const trapOwnerTeam = (trapOwnerSeat % 2) as Team;
   if (state.members[trapOwnerSeat]?.team !== trapOwnerTeam) {
-    throw new Error('Proprietário físico de Robbin\\' Goblin incompatível com o UID.');
+    throw new Error('Proprietário físico de Robbin Goblin incompatível com o UID.');
   }
   const source = locateBackrow(state.core, trapUid);
   if (!source || source.team !== event.controllerTeam ||
       source.card.id !== robbinGoblinId || source.card.faceUp !== true) {
-    throw new Error('Robbin\\' Goblin deve permanecer face-up na equipe que causou o dano.');
+    throw new Error('Robbin Goblin deve permanecer face-up na equipe que causou o dano.');
   }
 
   const opponentTeam = (1 - event.controllerTeam) as Team;
@@ -421,7 +421,7 @@ export function createBattleDamageDiscardAdapter(
   if (typeof whiteMagicalHatId !== 'string' || !whiteMagicalHatId.trim() ||
       typeof robbinGoblinId !== 'string' || !robbinGoblinId.trim() ||
       whiteMagicalHatId === robbinGoblinId) {
-    throw new Error('IDs de White Magical Hat/Robbin\\' Goblin inválidos.');
+    throw new Error('IDs de White Magical Hat/Robbin Goblin inválidos.');
   }
   return Object.freeze({
     planWhiteMagicalHat: (state: BattleDamageDiscardState, event: BattleDamageEvent) =>

@@ -250,7 +250,7 @@ test('White Magical Hat rejeita dano de efeito, dano zero, Damage Step incomplet
   assert.throws(() => adapter.planWhiteMagicalHat(duel, eventFor(duel, sourceUid, ATTACKER_FIXTURE_ID)));
 });
 
-test('Robbin\\' Goblin reage a qualquer monstro da equipe e descarta uma carta sem selecionar alvo', () => {
+test('Robbin Goblin reage a qualquer monstro da equipe e descarta uma carta sem selecionar alvo', () => {
   const duel = makeDuel(2);
   const trapUid = addTrap(duel, ROBBIN_FIXTURE_ID, 2, 0, true);
   const attackerUid = addMonster(duel, ATTACKER_FIXTURE_ID, 2, 0);
@@ -269,7 +269,7 @@ test('Robbin\\' Goblin reage a qualquer monstro da equipe e descarta uma carta s
   assert.deepEqual(inventory(result.state), before);
 });
 
-test('cada cópia face-up de Robbin\\' Goblin gera seu próprio recibo para o mesmo evento de batalha', () => {
+test('cada cópia face-up de Robbin Goblin gera seu próprio recibo para o mesmo evento de batalha', () => {
   const duel = makeDuel(2);
   const firstTrap = addTrap(duel, ROBBIN_FIXTURE_ID, 2, 0, true);
   const secondTrap = addTrap(duel, ROBBIN_FIXTURE_ID, 0, 0, true);
@@ -286,7 +286,7 @@ test('cada cópia face-up de Robbin\\' Goblin gera seu próprio recibo para o me
   assert.equal(second.state.battleDamageDiscard.resolvedActivationIds.length, 2);
 });
 
-test('Robbin\\' Goblin não resolve se deixar o campo antes da resolução', () => {
+test('Robbin Goblin não resolve se deixar o campo antes da resolução', () => {
   const duel = makeDuel(2);
   const trapUid = addTrap(duel, ROBBIN_FIXTURE_ID, 2, 0, true);
   const attackerUid = addMonster(duel, ATTACKER_FIXTURE_ID, 2, 0);
