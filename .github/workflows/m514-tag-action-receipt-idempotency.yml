@@ -1,0 +1,36 @@
+name: M514 Tag Action Receipt Idempotency 2v2
+on:
+  push:
+    branches:
+      - feat/work-m514-tag-action-receipt-idempotency-20261122
+    paths:
+      - 'tests/tagActionReceiptIdempotency2v2.test.cjs'
+      - 'docs/evidence/m514-tag-action-receipt-idempotency.json'
+      - '.github/workflows/m514-tag-action-receipt-idempotency.yml'
+  pull_request:
+    paths:
+      - 'tests/tagActionReceiptIdempotency2v2.test.cjs'
+      - 'docs/evidence/m514-tag-action-receipt-idempotency.json'
+      - '.github/workflows/m514-tag-action-receipt-idempotency.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-action-receipt-idempotency:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m514-tag-action-receipt-idempotency.json', 'utf8'))"
+      - name: Run 2v2 Discord action receipt idempotency tests
+        run: node --test tests/tagActionReceiptIdempotency2v2.test.cjs

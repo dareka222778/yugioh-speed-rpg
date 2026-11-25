@@ -1,0 +1,76 @@
+{
+  "mission": "M514",
+  "runId": "work-20261122T083000-0300-M514",
+  "priority": "P1 — garantir idempotência de ações Discord 2v2: uma entrega duplicada com o mesmo interaction ID e payload não pode avançar o duelo, duplicar eventos ou gravar outro recibo.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e"
+  },
+  "scope": {
+    "files": [
+      "tests/tagActionReceiptIdempotency2v2.test.cjs",
+      "docs/evidence/m514-tag-action-receipt-idempotency.json",
+      ".github/workflows/m514-tag-action-receipt-idempotency.yml"
+    ],
+    "runtimeChanged": false,
+    "actionReceiptsChanged": false,
+    "tagStoreChanged": false,
+    "tagInteractionChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "firstDelivery": "The active physical seat selects a legal action through the emitted TagDuel Discord component; one state revision, one receipt and one transition-event set are committed.",
+    "duplicateDelivery": "The same interaction ID, actor, guild, revision and action is replayed after persisted-state reload; state, inventory, events, receipt count and committed revision remain unchanged.",
+    "requestIdCollision": "Reusing the same request ID for a different action is rejected before edit/refresh and leaves the duel unchanged.",
+    "payload": "Real Discord builders and handler produce valid private/public payloads offline.",
+    "conservation": "All physical UIDs and card identities remain unchanged except for the intended first action; duplicate replay does not create or lose cards."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário com tabelas reais tag_action_receipts e tag_transition_events",
+    "discord": "handler/builders reais offline; sem token, guild ou canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node -e \"JSON.parse(require('node:fs').readFileSync('docs/evidence/m514-tag-action-receipt-idempotency.json','utf8'))\"",
+      "node --test tests/tagActionReceiptIdempotency2v2.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Não chama a API Discord real; simula entrega duplicada no handler real.",
+    "A suíte não modifica runtime nem concede inventário.",
+    "Não certifica novas cartas."
+  ]
+}
