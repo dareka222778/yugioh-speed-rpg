@@ -1,0 +1,75 @@
+{
+  "mission": "M555",
+  "runId": "work-20261123T035400-0300-M555",
+  "owner": "Work principal",
+  "title": "Cross-process race between real TagDuel Discord Accept handler and five-minute expiry sweeper",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "dbe1fb281841a41fa4a3018fab0e7e4dc1bd8b80",
+  "branch": "feat/work-m555-tag-discord-accept-expiry-race-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "priority": "P1 — the fourth-seat tag:accept component at deadline-1ms must race safely with the five-minute TagDuel expiry worker at the exact deadline.",
+  "design": {
+    "isolation": "Temporary SQLite database with independent Node processes/connections; parent connection closed before races.",
+    "concurrency": "Three races: handleTagComponent(tag:accept) for the final seat at deadline-1ms versus tagStore.dueTags at deadline.",
+    "clock": "Deterministic Date.now per process; idempotent expiry retry reconciles a transient SQLite lock conflict.",
+    "operations": [
+      "tagInteraction.handleTagComponent",
+      "tagStore.acceptTag",
+      "tagStore.dueTags"
+    ]
+  },
+  "assertions": [
+    "Accept either commits a complete four-seat TagDuel or fails closed after expiry",
+    "the terminal lobby revision advances exactly once",
+    "playing outcome has four accepted seats, four physical tag_members locks and a valid TagDuel state",
+    "expired outcome preserves the three earlier acceptances, has null state and releases all four locks",
+    "no duel_members locks are created by a TagDuel lobby race",
+    "public Discord payloads pass validateDiscordPayload and physical card UIDs remain unique when playing",
+    "players, player_cards, starter_grants, decks and deck_cards remain unchanged"
+  ],
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventory": {
+    "granted": 0,
+    "mutated": false
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "persistentDatabaseUsed": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Handler Discord.js real executado offline com interação falsa; sem token, gateway ou guild real.",
+    "SQLite temporário e relógio determinístico; não mede latência de produção.",
+    "Não integra nem certifica cartas."
+  ],
+  "testExecution": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "customWorkflow": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending; baseline 969/1000",
+    "engineValidation": "pending"
+  }
+}
