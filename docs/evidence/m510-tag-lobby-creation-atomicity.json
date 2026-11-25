@@ -1,0 +1,74 @@
+{
+  "mission": "M510",
+  "runId": "work-20261122T080500-0300-M510",
+  "priority": "P1 — proteger a criação de lobby TagDuel 2v2 contra falha parcial: a linha da sessão e o lock do host devem confirmar ou reverter juntos; participantes já bloqueados não podem gerar um segundo lobby.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e"
+  },
+  "scope": {
+    "files": [
+      "tests/tagLobbyCreationAtomicity2v2.test.cjs",
+      "docs/evidence/m510-tag-lobby-creation-atomicity.json",
+      ".github/workflows/m510-tag-lobby-creation-atomicity.yml"
+    ],
+    "runtimeChanged": false,
+    "tagStoreChanged": false,
+    "commandRegistryChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "failedHostLock": "A SQLite trigger aborts the tag_members host-lock insert after tag_sessions insert; the transaction must leave no session row, no lock and no player/economy mutation.",
+    "retry": "After removing the trigger, the same four profiles create exactly one lobby row and one host lock; the other three seats remain unlocked until they accept.",
+    "duplicateActiveParticipant": "A host already locked by a live lobby cannot be reused in a second lobby; the rejected attempt leaves the first session and lock unchanged and creates no second session.",
+    "economy": "players, player_cards and starter_grants snapshots remain unchanged."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário; trigger de falha injetada",
+    "discord": "Não invoca API Discord; valida invariantes do TagStore",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node -e \"JSON.parse(require('node:fs').readFileSync('docs/evidence/m510-tag-lobby-creation-atomicity.json','utf8'))\"",
+      "node --test tests/tagLobbyCreationAtomicity2v2.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Usa o TagStore real com SQLite temporário; não modifica runtime nem banco persistente.",
+    "Não é teste de interação Discord ao vivo.",
+    "Não certifica cartas novas nem concede inventário."
+  ]
+}
