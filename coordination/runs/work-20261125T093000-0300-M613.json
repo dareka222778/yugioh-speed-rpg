@@ -4,9 +4,9 @@
   "mission": "M613",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "focused-CI-green; Engine validation in progress",
+  "status": "CI integral verificada; PR #556 permanece aberta/draft; quatro caminhos liberados ao auxiliar para monitoramento/sincronização sem force",
   "startedAt": "2026-11-25T09:30:00-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-25T09:57:29-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "6f921b8068b6cbd24ec2fc5924154e34670af094",
@@ -143,9 +143,14 @@
     "status": "awaiting-explicit-release",
     "centralFilesExcluded": true
   },
-  "nextTask": "M614 DNA Surgery/DNA Transplant type-and-attribute conversion adapter; independent files; wait for M613 engine validation before finalizing this cycle.",
+  "nextTask": "M614 está em execução na PR #557; handoff cooperativo solicitado. Enquanto aguarda, prosseguir somente em famílias independentes.",
   "nextWindow": "2026-11-25T14:30:00-03:00",
-  "scopeReleasedToAuxiliary": [],
+  "scopeReleasedToAuxiliary": [
+    "src/terrainFieldSpellsTagAdapter.ts",
+    "tests/terrainFieldSpellsTagAdapter.test.cjs",
+    "docs/evidence/m613-terrain-field-spells-tag-adapter.json",
+    ".github/workflows/m613-terrain-field-spells-tag-adapter.yml"
+  ],
   "verification": {
     "focusedScenarios": 23,
     "focusedTestResult": "23/23 passed",
@@ -154,12 +159,13 @@
     "evidenceValidation": "success",
     "cardBatchFast": "success",
     "milestone1000": "success",
-    "engineValidation": "in_progress",
+    "engineValidation": "success",
     "focusedRunId": 45616607136,
     "engineValidationRunId": 45616620992,
     "failedInitialRunId": 45616332184,
     "failedInitialReason": "2 tests removed/replaced a Field Spell without sending the physical card to the owner's GY; fixed by preserving the card in grave.",
-    "status": "focused tests green; extended repository acceptance still running"
+    "status": "focused 23/23, typecheck, build, evidência, Card Batch Fast, Milestone 1000 e Engine Validation aprovados",
+    "scopeReleasedAt": "2026-11-25T09:57:29-03:00"
   },
-  "lastActivityAt": "2026-11-25T09:45:00-03:00"
+  "lastActivityAt": "2026-11-25T09:57:29-03:00"
 }

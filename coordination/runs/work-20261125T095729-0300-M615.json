@@ -1,0 +1,123 @@
+{
+  "format": 1,
+  "runId": "work-20261125T095729-0300-M615",
+  "mission": "M615",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "reservedAt": "2026-11-25T09:57:29-03:00",
+  "startedAt": "2026-11-25T09:57:29-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "2f060086d763a4a31b1a3748effc7f33590692b9",
+  "branch": "feat/work-m615-cheerful-coffin-tag-adapter-20261125",
+  "baseSha": "2f060086d763a4a31b1a3748effc7f33590692b9",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/cheerfulCoffinTagAdapter.ts",
+    "tests/cheerfulCoffinTagAdapter.test.cjs",
+    "docs/evidence/m615-cheerful-coffin-tag-adapter.json",
+    ".github/workflows/m615-cheerful-coffin-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel clássico para The Cheerful Coffin: ativação Normal Spell pela mão privada do assento físico ativo; na resolução, descarte opcional de zero a três Monster Cards da mesma mão para o Cemitério compartilhado da equipe, preservando UID e proprietário físico. Validação atômica, negação, replay/stale selection, rotação e invariantes.",
+  "cards": [
+    {
+      "name": "The Cheerful Coffin",
+      "passcode": "41142615",
+      "konamiDatabaseId": 4858,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRD-059",
+      "firstTcgRelease": "2002-06-26",
+      "officialEffect": "Discard up to 3 Monster Cards from your hand to the Graveyard.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4858&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/cheerfulCoffinTagAdapter.ts",
+      "tests/cheerfulCoffinTagAdapter.test.cjs",
+      "docs/evidence/m615-cheerful-coffin-tag-adapter.json",
+      ".github/workflows/m615-cheerful-coffin-tag-adapter.yml"
+    ],
+    "plannedScenarios": 22,
+    "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção; integração central aguarda handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "observedParallelWork": {
+    "m613": {
+      "pr": 556,
+      "state": "ci-green-open-draft",
+      "filesReleased": 4
+    },
+    "m614": {
+      "pr": 557,
+      "state": "active-open-draft-handoff-requested",
+      "filesOwnedByOtherAgent": true,
+      "touched": false
+    },
+    "m610": {
+      "pr": 553,
+      "state": "open-draft-third-party-reservation-preserved",
+      "touched": false
+    },
+    "m611": {
+      "pr": 554,
+      "state": "ci-green-scope-released",
+      "touched": false
+    },
+    "m612": {
+      "pr": 555,
+      "state": "engine-validation-failure-third-party-preserved",
+      "touched": false
+    }
+  },
+  "m61Handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "centralFilesExcluded": true
+  },
+  "nextTask": "Executar M615 em branch isolada; durante a CI selecionar a próxima família livre após nova verificação de branches/PRs.",
+  "nextWindow": "2026-11-25T14:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
