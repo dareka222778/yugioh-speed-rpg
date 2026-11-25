@@ -1,0 +1,110 @@
+{
+  "format": 1,
+  "runId": "work-20261125T193436-0300-M629",
+  "mission": "M629",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved; implementação isolada em andamento",
+  "reservedAt": "2026-11-25T19:34:36-03:00",
+  "startedAt": "2026-11-25T19:34:36-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "015a62a1394020291df838ecd306a35eecb7607b",
+  "branch": "feat/work-m629-solemn-judgment-tag-adapter-20261125",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "015a62a1394020291df838ecd306a35eecb7607b",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/solemnJudgmentTagAdapter.ts",
+    "tests/solemnJudgmentTagAdapter.test.cjs",
+    "docs/evidence/m629-solemn-judgment-tag-adapter.json",
+    ".github/workflows/m629-solemn-judgment-tag-adapter.yml"
+  ],
+  "scope": "Adapter isolado TagDuel para Solemn Judgment (41420027): responder a uma tentativa real de Invocação (Normal/Flip/Especial) ou ativação de Magia/Armadilha; pagar metade dos PV compartilhados, negar a Invocação/ativação e enviar o objeto físico ao Cemitério do proprietário. Sem resolver central, catálogo, certificações, allowlist, comandos Discord, banco, inventário ou produção.",
+  "cards": [
+    {
+      "name": "Solemn Judgment",
+      "passcode": "41420027",
+      "konamiDatabaseId": 4861,
+      "kind": "Counter Trap",
+      "firstTcgSet": "MRD-EN127",
+      "firstTcgRelease": "2002-06-26",
+      "officialEffect": "When a monster(s) would be Summoned, OR a Spell/Trap Card is activated: Pay half your LP; negate the Summon or activation, and if you do, destroy that card.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4861&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/solemnJudgmentTagAdapter.ts",
+      "tests/solemnJudgmentTagAdapter.test.cjs",
+      "docs/evidence/m629-solemn-judgment-tag-adapter.json",
+      ".github/workflows/m629-solemn-judgment-tag-adapter.yml"
+    ],
+    "plannedScenarios": 30,
+    "integrationBoundary": "Adapter puro isolado, usando janelas Pending/Chain tipadas já presentes no TagDuel; integração do hook de resposta no resolver/Discord depende do handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "coordination/state.json no HEAD compartilhado antes da reserva"
+  },
+  "conflictCheck": {
+    "checkedAt": "2026-11-25T19:34:36-03:00",
+    "sharedHead": "015a62a1394020291df838ecd306a35eecb7607b",
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "matchingFiles": 0,
+    "passcode": "41420027",
+    "konamiDatabaseId": 4861,
+    "metadata": false,
+    "certified": false,
+    "existingEffect": false,
+    "m61CentralFilesExcluded": true,
+    "thirdPartyReservationsUntouched": true,
+    "result": "Nenhum branch/PR/metadata/certificação Solemn Judgment encontrado no checkpoint compartilhado; escopo exclusivo de quatro caminhos novos. M61 permanece aguardando handoff explícito; nenhuma integração central."
+  },
+  "verification": {
+    "focusedScenarios": 30,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter de resposta para Pending/Chain, cobrir negação de Invocação e ativação de Magia/Armadilha com pagamento de metade dos PV, propriedade física e anti-replay; executar CI e depois escolher a próxima família independente.",
+  "nextWindow": "2026-11-25T22:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
