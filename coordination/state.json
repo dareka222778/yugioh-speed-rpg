@@ -21802,6 +21802,20 @@
         ".github/workflows/coordination-guard.yml"
       ],
       "conditionalHeadUpdate": true
+    },
+    {
+      "runId": "work-20261125T2045Z-M636",
+      "mission": "M636",
+      "priority": "P1",
+      "branch": "feat/work-m636-standby-lp-tag-adapter-20261125",
+      "baseHeadSha": "07af90e9212827d858b540016a520f3f1d3bc7e2",
+      "reservedFiles": [
+        "src/standbyLPGainTagAdapter.ts",
+        "tests/standbyLPGainTagAdapter.test.cjs",
+        "docs/evidence/m636-standby-lp-tag-adapter.json",
+        ".github/workflows/m636-standby-lp-tag-adapter.yml"
+      ],
+      "conditionalHeadUpdate": true
     }
   ],
   "currentWorkReservationM625": {
@@ -22977,5 +22991,110 @@
     "requestedAt": "2026-11-25T20:32:59-03:00",
     "scope": "M634 Spirit batch; no reserved files modified"
   },
-  "m635LastActivityAt": "2026-11-25T20:32:59-03:00"
+  "m635LastActivityAt": "2026-11-25T20:32:59-03:00",
+  "currentWorkReservationM636": {
+    "runId": "work-20261125T2045Z-M636",
+    "mission": "M636",
+    "priority": "P1",
+    "owner": "Work principal",
+    "state": "reserved-and-implementing",
+    "startedAt": "2026-11-25T23:47:18.761Z",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "07af90e9212827d858b540016a520f3f1d3bc7e2",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "07af90e9212827d858b540016a520f3f1d3bc7e2",
+    "branch": "feat/work-m636-standby-lp-tag-adapter-20261125",
+    "branchHeadSha": null,
+    "pullRequest": null,
+    "reservedFiles": [
+      "src/standbyLPGainTagAdapter.ts",
+      "tests/standbyLPGainTagAdapter.test.cjs",
+      "docs/evidence/m636-standby-lp-tag-adapter.json",
+      ".github/workflows/m636-standby-lp-tag-adapter.yml"
+    ],
+    "scope": [
+      "src/standbyLPGainTagAdapter.ts",
+      "tests/standbyLPGainTagAdapter.test.cjs",
+      "docs/evidence/m636-standby-lp-tag-adapter.json",
+      ".github/workflows/m636-standby-lp-tag-adapter.yml"
+    ],
+    "conditionalHeadUpdate": true,
+    "scopeDescription": "Adaptador isolado para a família de recuperação de LP na Standby Phase: Cure Mermaid (+800 face-up em qualquer posição) e Spirit of the Breeze (+1000 somente face-up Attack Position). Usa LP compartilhados por equipe no TagDuel, sem tocar standbyFlow central, metadados, certificações ou dados persistentes.",
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31,
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0
+    },
+    "production": {
+      "merge": false,
+      "deploy": false,
+      "backupVerified": false,
+      "liveDiscordValidation": false
+    },
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveWorkMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "nextTask": "Implementar adaptador e regressões de Standby LP para os dois efeitos; verificar posição, equipe, duplicação de resolução e conservação de UIDs.",
+    "nextWindow": "2026-11-25T22:30:00-03:00",
+    "scopeReleasedToAuxiliary": []
+  },
+  "subtaskReservationM636": {
+    "runId": "work-20261125T2045Z-M636",
+    "mission": "M636",
+    "priority": "P1",
+    "owner": "Work principal",
+    "state": "reserved-and-implementing",
+    "startedAt": "2026-11-25T23:47:18.761Z",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "07af90e9212827d858b540016a520f3f1d3bc7e2",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "07af90e9212827d858b540016a520f3f1d3bc7e2",
+    "branch": "feat/work-m636-standby-lp-tag-adapter-20261125",
+    "branchHeadSha": null,
+    "pullRequest": null,
+    "reservedFiles": [
+      "src/standbyLPGainTagAdapter.ts",
+      "tests/standbyLPGainTagAdapter.test.cjs",
+      "docs/evidence/m636-standby-lp-tag-adapter.json",
+      ".github/workflows/m636-standby-lp-tag-adapter.yml"
+    ],
+    "scope": [
+      "src/standbyLPGainTagAdapter.ts",
+      "tests/standbyLPGainTagAdapter.test.cjs",
+      "docs/evidence/m636-standby-lp-tag-adapter.json",
+      ".github/workflows/m636-standby-lp-tag-adapter.yml"
+    ],
+    "conditionalHeadUpdate": true,
+    "scopeDescription": "Adaptador isolado para a família de recuperação de LP na Standby Phase: Cure Mermaid (+800 face-up em qualquer posição) e Spirit of the Breeze (+1000 somente face-up Attack Position). Usa LP compartilhados por equipe no TagDuel, sem tocar standbyFlow central, metadados, certificações ou dados persistentes.",
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31,
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0
+    },
+    "production": {
+      "merge": false,
+      "deploy": false,
+      "backupVerified": false,
+      "liveDiscordValidation": false
+    },
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveWorkMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "nextTask": "Implementar adaptador e regressões de Standby LP para os dois efeitos; verificar posição, equipe, duplicação de resolução e conservação de UIDs.",
+    "nextWindow": "2026-11-25T22:30:00-03:00",
+    "scopeReleasedToAuxiliary": []
+  },
+  "m636Status": "reserved-and-implementing",
+  "m636NextTask": "Implementar adaptador e regressões de Standby LP para os dois efeitos; verificar posição, equipe, duplicação de resolução e conservação de UIDs.",
+  "nextWorkWindowM636": "2026-11-25T22:30:00-03:00",
+  "lastParallelCheckpointM636": "coordination/runs/work-20261125T2045Z-M636.json",
+  "m636LastActivityAt": "2026-11-25T23:47:18.761Z"
 }
