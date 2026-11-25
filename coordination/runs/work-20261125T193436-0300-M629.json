@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "PR #571 draft aberto; CI em execução; M630 preparado em paralelo",
+  "status": "PR #571 draft; suíte focada, Card Batch Fast e Milestone 1000 verdes; Engine Validation em andamento",
   "reservedAt": "2026-11-25T19:34:36-03:00",
   "startedAt": "2026-11-25T19:34:36-03:00",
   "endedAt": null,
@@ -15,7 +15,7 @@
   "branch": "feat/work-m629-solemn-judgment-tag-adapter-20261125",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "015a62a1394020291df838ecd306a35eecb7607b",
-  "branchHeadSha": "2e6dd0f06f95a121351f17afc1f87d439832ad80",
+  "branchHeadSha": "95827c2e5208d40be860a98f7dcd5528c9846e34",
   "pullRequest": 571,
   "reservedFiles": [
     "src/solemnJudgmentTagAdapter.ts",
@@ -80,19 +80,20 @@
     "result": "Nenhum branch/PR/metadata/certificação Solemn Judgment encontrado no checkpoint compartilhado; escopo exclusivo de quatro caminhos novos. M61 permanece aguardando handoff explícito; nenhuma integração central."
   },
   "verification": {
-    "focusedScenarios": 30,
-    "focusedTestResult": "in_progress",
-    "typecheck": "in_progress",
-    "build": "pending",
-    "evidenceValidation": "pending",
-    "focusedWorkflowRun": 45715559054,
-    "cardBatchFast": "in_progress",
+    "focusedScenarios": 32,
+    "focusedTestResult": "success",
+    "typecheck": "success",
+    "build": "success",
+    "evidenceValidation": "success",
+    "focusedWorkflowRun": 45715852114,
+    "cardBatchFast": "success",
     "milestone1000": "success",
     "engineValidation": "in_progress",
     "extendedSoak": "pending",
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "engineValidationRun": 45715852266
   },
   "production": {
     "merge": false,
@@ -100,12 +101,12 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 9,
+  "effectiveWorkMinutes": 13,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Acompanhar/fixar CI do PR #571; em paralelo, implementar Ceasefire (M630) sem tocar no resolver central.",
+  "nextTask": "Aguardar Engine Validation/Extended Soak do PR #571; corrigir somente se houver falha. M630 segue independente em CI.",
   "nextWindow": "2026-11-25T22:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
-  "lastActivityAt": "2026-11-25T19:44:25-03:00"
+  "lastActivityAt": "2026-11-25T19:49:48-03:00"
 }
