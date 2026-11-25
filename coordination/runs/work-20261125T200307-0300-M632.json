@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reservation registered; implementation starting",
+  "status": "implementation committed; focused CI rerun in progress after fixture corrections",
   "startedAt": "2026-11-25T20:03:07-03:00",
   "endedAt": null,
   "repository": "dareka222778/yugioh-speed-rpg",
@@ -14,9 +14,9 @@
   "branch": "feat/work-m632-tsukuyomi-otohime-spirit-position-20261125",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "f24af2da600eb60c373506e8231772fdbfd328a7",
-  "branchBaseSha": null,
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchBaseSha": "59fc80c5c7d27d8c71a0b765acfef2187d1062fa",
+  "branchHeadSha": "52360adfc35623c05299d1ed23c270d5e980cfd7",
+  "pullRequest": 574,
   "reservedFiles": [
     "src/tsukuyomiOtohimeTagAdapter.ts",
     "tests/tsukuyomiOtohimeTagAdapter.test.cjs",
@@ -64,18 +64,31 @@
       "docs/evidence/m632-tsukuyomi-otohime-spirit-position.json",
       ".github/workflows/m632-tsukuyomi-otohime-spirit-position.yml"
     ],
-    "plannedScenarios": 30,
-    "integrationBoundary": "Adapter puro isolado; resolver central/Discord aguarda handoff M61 explícito."
+    "plannedScenarios": 38,
+    "integrationBoundary": "Adapter puro isolado; resolver central/Discord aguarda handoff M61 explícito.",
+    "commits": [
+      "043952d920289b2fd42ded0f5b263c46e32016f5",
+      "29c5c5f9c98fe6ca4906d2d3c94db6f58210ae56",
+      "cf1455f19006286577353f765c64e3ce96d4d149",
+      "52360adfc35623c05299d1ed23c270d5e980cfd7"
+    ]
   },
   "verification": {
-    "focusedScenarios": 0,
-    "focusedTestResult": "pending",
-    "typecheck": "pending",
-    "build": "pending",
-    "evidenceValidation": "pending",
+    "focusedScenarios": 38,
+    "focusedTestResult": "latest rerun queued/in progress; previous run 31/35 then 37/38 passed with one zone-assertion mismatch; correction pushed",
+    "typecheck": "passed on initial CI",
+    "build": "passed on initial CI",
+    "evidenceValidation": "passed on initial CI",
+    "latestRuns": {
+      "focused": 45720061381,
+      "cardBatchFast": 45720061376,
+      "milestone1000": 45720061420,
+      "engineValidation": 45720061385
+    },
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
   },
   "production": {
     "merge": false,
@@ -83,11 +96,13 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 12,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar adapter puro de gatilhos Spirit/posição; construir matriz de testes de alvo, epoch, propriedade física, End Phase, mão 6 e limites de deck/campo; abrir PR draft e aguardar CI integral.",
+  "nextTask": "Aguardar a suíte M632 corrigida; se verde, manter draft e solicitar revisão. Em paralelo, preparar M633 para os dois Dark Scorpions com gatilho de dano de batalha.",
   "nextWindow": "2026-11-25T22:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "lastActivityAt": "2026-11-25T20:16:28-03:00",
+  "lastCheckpointSha": "52360adfc35623c05299d1ed23c270d5e980cfd7"
 }
