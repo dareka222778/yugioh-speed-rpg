@@ -1,0 +1,110 @@
+{
+  "mission": "M550",
+  "runId": "work-20261123T074023-0300-M550",
+  "owner": "Work principal",
+  "family": "m60-flip-cycle",
+  "cards": [
+    {
+      "name": "Stealth Bird",
+      "passcode": "03510565",
+      "konamiDatabaseId": 5882,
+      "attribute": "DARK",
+      "level": 3,
+      "atk": 700,
+      "def": 1700,
+      "race": "Winged Beast",
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5882&request_locale=en",
+      "officialText": "Once per turn: You can change this card to face-down Defense Position. When this card is Flip Summoned: Inflict 1000 damage to your opponent.",
+      "firstTCGPrinting": {
+        "date": "2004-03-01",
+        "set": "IOC-068",
+        "product": "Invasion of Chaos"
+      }
+    },
+    {
+      "name": "Des Lacooda",
+      "passcode": "02326738",
+      "konamiDatabaseId": 5427,
+      "attribute": "EARTH",
+      "level": 3,
+      "atk": 500,
+      "def": 600,
+      "race": "Zombie",
+      "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5427&request_locale=en",
+      "officialText": "Once per turn: You can change this card to face-down Defense Position. If this card is Flip Summoned: Draw 1 card.",
+      "firstTCGPrinting": {
+        "date": "2003-07-18",
+        "set": "PGD-030",
+        "product": "Pharaonic Guardian"
+      }
+    }
+  ],
+  "sharedMechanic": {
+    "manualIgnition": "Once per turn during Main Phase, controller changes this face-up card to face-down Defense Position.",
+    "marker": "Per physical UID plus card-lifetime epoch; persisted in TagDuel JSON; consumed even when negated or source leaves before resolution.",
+    "trigger": "Mandatory Flip Summon only; normal summons and effect flips do not trigger.",
+    "stealthBird": "Deal exactly 1000 LP damage to the opposing team; check lethal/tie.",
+    "desLacooda": "Draw exactly one from the active representative of the controlling team; if Deck empty, lose by failed draw; if hand exceeds 6, do not discard until End Phase.",
+    "sourceRemoval": "A Flip Summon trigger plan already activated resolves even if the source leaves the Monster Zone before resolution.",
+    "tagOwnership": "Controller team comes from the shared Monster Zone; physical owner comes from UID. A stolen card resolves for its controller; Des Lacooda draws to the active representative's Deck/hand."
+  },
+  "tests": [
+    "Stealth Bird 1000 LP burn",
+    "Des Lacooda draw exactly one",
+    "hand size 7 after draw with discard deferred to End Phase",
+    "empty Deck deck-out loss",
+    "lethal burn ends duel",
+    "stolen source resolves for controller team",
+    "inactive partner-owned source draws for active representative",
+    "Flip Summon trigger resolves after source removal",
+    "negated Flip Summon trigger has no effect",
+    "normal summon and effect-flip do not trigger",
+    "stale turn and wrong controller rejected",
+    "face-down source rejected",
+    "self-set only in Main Phase with no chain",
+    "self-set changes to face-down Defense",
+    "per-UID once-per-turn marker",
+    "negated self-set consumes use",
+    "JSON restore preserves marker",
+    "source removal consumes self-set use",
+    "new zone epoch resets per-instance use",
+    "duplicate UID, malformed physical owner and more than three Monster Zones rejected",
+    "inventory conservation and input immutability",
+    "Guardian Sphinx reuses the self-set ignition while its non-targeting mass return remains separate"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Isolated adapter preparation only; no central resolver, monsterEffects, cardMetadata, cardCertifications, manifest or allowlist changes. M61 handoff still pending."
+  },
+  "security": {
+    "filesOnly": [
+      "src/flipCycleTagAdapter.ts",
+      "tests/flipCycleTagAdapter.test.cjs",
+      "docs/evidence/m550-flip-cycle-tag-adapter.json",
+      ".github/workflows/m550-flip-cycle-tag-adapter.yml"
+    ],
+    "noResolverChange": true,
+    "noM61FilesChanged": true,
+    "noCatalogChange": true,
+    "noManifestChange": true,
+    "noAllowlistChange": true,
+    "noInventoryGrant": true,
+    "noPersistentDatabaseChange": true,
+    "noPlayerDataChange": true,
+    "noLiveDiscordWrite": true
+  },
+  "limitations": [
+    "The two cards remain absent from the shared playable catalog; tests inject a narrow metadata lookup fixture.",
+    "The adapter is not connected to the central monster-effect registry because the M61 runtime handoff is pending.",
+    "Offline TagDuel structural tests do not replace a complete duel-engine integration test or a live Discord guild session."
+  ],
+  "adjacentPreparedCard": {
+    "name": "Guardian Sphinx",
+    "passcode": "40659562",
+    "konamiDatabaseId": 5422,
+    "role": "shares the once-per-turn Main Phase self-set primitive; its Flip Summon mass return is intentionally delegated to M551 because it is non-targeting",
+    "certificationStatus": "not-certified"
+  },
+  "testCount": 22
+}
