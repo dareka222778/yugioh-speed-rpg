@@ -337,6 +337,8 @@ test('substituir a Field Zone elimina a fonte anterior e usa o novo UID', () => 
   const first = addField(duel, 0, 0);
   const warrior = addMonster(duel, 'Warrior', 2, 0);
   assert.deepEqual(adapters.SOGEN.getTerrainModifier(duel, warrior).sourceUids, [first]);
+  const oldField = duel.core.players[0].field;
+  duel.core.players[0].grave.push({ uid: oldField.uid, id: oldField.id });
   const replacement = takeFromSeat(duel, 1, ref => ref.id === FIELD_SPELL_FIXTURE_ID);
   duel.core.players[0].field = {
     ...replacement,
@@ -353,9 +355,10 @@ test('substituir a Field Zone elimina a fonte anterior e usa o novo UID', () => 
 test('remover a Field Spell encerra o modificador sem estado residual', () => {
   resetNegation();
   const duel = makeDuel();
-  addField(duel, 2, 1);
+  const fieldUid = addField(duel, 2, 1);
   const warrior = addMonster(duel, 'Warrior', 0, 0);
   assert.equal(adapters.SOGEN.getTerrainModifier(duel, warrior).atk, 200);
+  duel.core.players[0].grave.push({ uid: fieldUid, id: FIELD_SPELL_FIXTURE_ID });
   duel.core.players[1].field = null;
   synchronizeCardLifetimes(duel.core);
   assert.equal(adapters.SOGEN.getTerrainModifier(duel, warrior).atk, 0);
