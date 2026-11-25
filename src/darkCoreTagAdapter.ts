@@ -228,7 +228,7 @@ export function resolveDarkCore(
       !isTeam(plan.ownerTeam) || !Number.isInteger(plan.ownerSeat) || plan.ownerSeat < 0 ||
       plan.ownerSeat > 3 || plan.ownerTeam !== plan.ownerSeat % 2 ||
       physicalSeat(plan.sourceUid) !== plan.ownerSeat || physicalSeat(plan.costUid) !== plan.ownerSeat ||
-      !plan.costId || physicalSeat(plan.targetUid) === null ||
+      !plan.costId || plan.costUid === plan.sourceUid || typeof plan.targetId !== 'string' || !plan.targetId ||
       plan.eventId !== 'dark-core:' + plan.turn + ':' + plan.sourceUid + ':' + plan.targetUid ||
       !plan.targetBinding || plan.targetBinding.uid !== plan.targetUid ||
       plan.targetBinding.zone !== 'monsters' || !Number.isSafeInteger(plan.targetBinding.epoch) ||
