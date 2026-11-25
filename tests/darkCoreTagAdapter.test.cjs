@@ -111,8 +111,8 @@ test('rejeita a fonte na mão do parceiro físico inativo ou do adversário', ()
 test('rejeita custo vindo da mão do parceiro ou do adversário', () => {
   const duel = makeDuel(0);
   const sourceUid = putCardInHand(duel, 0, 0, SPELL_ID);
-  const partnerCost = putCardInHand(duel, 2, 0, TRAP_ID);
   const targetUid = placeMonster(duel, 2, 1, 0);
+  const partnerCost = putCardInHand(duel, 2, 0, TRAP_ID);
   assert.equal(activateDarkCore(duel, sourceUid, partnerCost, targetUid, { cardId: SPELL_ID }), null);
 
   const other = makeDuel(0);
