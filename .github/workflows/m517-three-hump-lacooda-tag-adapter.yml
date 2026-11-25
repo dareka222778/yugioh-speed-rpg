@@ -1,0 +1,38 @@
+name: M517 3-Hump Lacooda TagDuel Adapter
+on:
+  push:
+    branches:
+      - feat/work-m517-three-hump-lacooda-tag-adapter-20261122
+    paths:
+      - 'src/threeHumpLacoodaTagAdapter.ts'
+      - 'tests/threeHumpLacoodaTagAdapter.test.cjs'
+      - 'docs/evidence/m517-three-hump-lacooda-tag-adapter.json'
+      - '.github/workflows/m517-three-hump-lacooda-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/threeHumpLacoodaTagAdapter.ts'
+      - 'tests/threeHumpLacoodaTagAdapter.test.cjs'
+      - 'docs/evidence/m517-three-hump-lacooda-tag-adapter.json'
+      - '.github/workflows/m517-three-hump-lacooda-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  three-hump-lacooda-adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m517-three-hump-lacooda-tag-adapter.json', 'utf8'))"
+      - name: Run 3-Hump Lacooda adapter behavior tests
+        run: node --test tests/threeHumpLacoodaTagAdapter.test.cjs
