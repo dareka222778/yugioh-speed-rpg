@@ -200,8 +200,7 @@ export function resolveDarknessApproaches(
       plan.costUids.some(uid => typeof uid !== 'string' || !uid) ||
       new Set(plan.costUids).size !== 2 || plan.costUids.includes(plan.sourceUid) ||
       physicalSeat(plan.targetUid) !== plan.targetOwnerSeat ||
-      !isTeam(plan.targetTeamAtActivation) || !input.active[plan.ownerTeam] ||
-      input.active[plan.ownerTeam] !== plan.ownerSeat) return null;
+      !isTeam(plan.targetTeamAtActivation) || input.active[plan.ownerTeam] !== plan.ownerSeat) return null;
   const receipts = (input as ReceiptState).darknessApproachesResolvedEvents ?? [];
   if (!Array.isArray(receipts) || receipts.includes(plan.eventId)) return null;
   const inventory = tagInventory(input);

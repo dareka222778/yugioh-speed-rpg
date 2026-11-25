@@ -287,17 +287,15 @@ test('negação não vira o alvo e não devolve os dois custos', () => {
   for (const uid of costs) assert.ok(result.state.core.players[0].grave.some(card => card.uid === uid));
 });
 
-test('tokens face-up não são alvos válidos para virar face-down', () => {
+test('rejeita Spell/Trap face-up na backrow como alvo', () => {
   const duel = makeDuel(0);
   const sourceUid = putCardInHand(duel, 0, SPELL_ID);
   const costs = privateZone(duel, 0, 'hand').filter(card => card.uid !== sourceUid).slice(0, 2).map(card => card.uid);
-  const token = privateZone(duel, 1, 'deck').shift();
-  duel.core.players[1].monsters.push({
-    ...token, entityKind: 'token', owner: 1, position: 'atk', faceUp: true,
-    entered: duel.core.turn, changed: duel.core.turn, attacked: 0, atkBoost: 0, defBoost: 0,
-  });
+  const backrowCard = takeFromSeat(duel, 1, ref => ref.id === MONSTER_ID);
+  backrowCard.id = SPELL_ID;
+  duel.core.players[1].backrow.push({ ...backrowCard, setTurn: 0, faceUp: true });
   synchronizeCardLifetimes(duel.core);
-  assert.equal(activateDarknessApproaches(duel, sourceUid, costs, token.uid, { cardId: SPELL_ID }), null);
+  assert.equal(activateDarknessApproaches(duel, sourceUid, costs, backrowCard.uid, { cardId: SPELL_ID }), null);
 });
 
 test('assento 2 paga custos da própria mão e mantém o Cemitério compartilhado da equipe 0', () => {
