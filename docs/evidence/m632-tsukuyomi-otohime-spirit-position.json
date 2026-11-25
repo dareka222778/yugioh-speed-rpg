@@ -64,7 +64,7 @@
     "automaticCertifications": 0,
     "inventoryGranted": 0,
     "liveDiscordValidation": false,
-    "focusedTestResult": "38 scenarios; rerun pending"
+    "focusedTestResult": "38 scenarios; final zone assertion correction pushed"
   },
   "catalogAtStart": {
     "engineV9Certified": 969,

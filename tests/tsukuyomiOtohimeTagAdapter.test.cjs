@@ -572,7 +572,7 @@ test('quatro Spell/Trap Zones são rejeitadas', () => {
   addBackrow(duel, 2, 0);
   addBackrow(duel, 1, 0);
   addBackrow(duel, 3, 0);
-  assert.throws(() => adapter.registerSummon(duel, event), /três Spell\/Trap Zones/);
+  assert.throws(() => adapter.registerSummon(duel, event), /limite de zonas/);
 });
 
 test('inventário físico permanece conservado ao registrar, resolver e retornar', () => {
