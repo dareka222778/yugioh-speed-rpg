@@ -173,7 +173,9 @@ test('rejeita monstros da mão do parceiro ou do adversário', () => {
 test('revalida se a fonte ainda está no Cemitério da equipe proprietária', () => {
   const { activation, sourceUid } = setup();
   const changed = structuredClone(activation.state);
-  changed.core.players[0].grave = changed.core.players[0].grave.filter(card => card.uid !== sourceUid);
+  const index = changed.core.players[0].grave.findIndex(card => card.uid === sourceUid);
+  const [source] = changed.core.players[0].grave.splice(index, 1);
+  privateZone(changed, 0, 'hand').push(source);
   assert.equal(resolveCheerfulCoffin(changed, activation.plan, [], { cardId: SPELL_ID }), null);
 });
 
