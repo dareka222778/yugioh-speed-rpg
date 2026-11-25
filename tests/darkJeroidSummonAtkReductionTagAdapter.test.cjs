@@ -423,6 +423,8 @@ test('regras físicas aceitam Deck 20/30 e Extra 5, rejeitam limites inválidos 
     const { duel, sourceUid, event } = eventAndSource();
     addMonster(duel, TARGET_FIXTURE_ID, 3, 1);
     for (let i = 0; i < 3; i++) addAnyBackrow(duel, 0, 0);
+    assert.doesNotThrow(() => adapter.plan(duel, event, duel.core.players[1].monsters[0].uid));
+    addAnyBackrow(duel, 0, 0);
     assert.throws(() => adapter.plan(duel, event, duel.core.players[1].monsters[0].uid));
     assert.ok(duel.core.players[0].monsters.some(monster => monster.uid === sourceUid));
   }
