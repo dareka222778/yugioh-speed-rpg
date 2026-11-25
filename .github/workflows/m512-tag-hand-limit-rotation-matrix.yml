@@ -1,0 +1,36 @@
+name: M512 Tag Hand Limit Rotation Matrix 2v2
+on:
+  push:
+    branches:
+      - feat/work-m512-tag-hand-limit-rotation-matrix-20261122
+    paths:
+      - 'tests/tagHandLimitRotationMatrix2v2.test.cjs'
+      - 'docs/evidence/m512-tag-hand-limit-rotation-matrix.json'
+      - '.github/workflows/m512-tag-hand-limit-rotation-matrix.yml'
+  pull_request:
+    paths:
+      - 'tests/tagHandLimitRotationMatrix2v2.test.cjs'
+      - 'docs/evidence/m512-tag-hand-limit-rotation-matrix.json'
+      - '.github/workflows/m512-tag-hand-limit-rotation-matrix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tag-hand-limit-rotation-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m512-tag-hand-limit-rotation-matrix.json', 'utf8'))"
+      - name: Run four-seat End Phase hand-limit matrix
+        run: node --test tests/tagHandLimitRotationMatrix2v2.test.cjs
