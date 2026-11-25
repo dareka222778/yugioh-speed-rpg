@@ -1,0 +1,108 @@
+{
+  "format": 1,
+  "runId": "work-20261125T151500-0300-M626",
+  "mission": "M626",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved; branch empilhada sobre M625",
+  "reservedAt": "2026-11-25T15:15:00-03:00",
+  "startedAt": "2026-11-25T15:15:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "07775dd07cea3e03e66b4d6d03dd4c4bfaee0678",
+  "branch": "feat/work-m626-forceful-sentry-tag-adapter-20261125",
+  "baseBranch": "feat/work-m625-confiscation-tag-adapter-20261125",
+  "baseSha": "555b0d197144a63c9c28f81348323c10173c95c2",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/forcefulSentryTagAdapter.ts",
+    "tests/forcefulSentryTagAdapter.test.cjs",
+    "docs/evidence/m626-forceful-sentry-tag-adapter.json",
+    ".github/workflows/m626-forceful-sentry-tag-adapter.yml"
+  ],
+  "scope": "Segundo adapter da família de inspeção privada: The Forceful Sentry olha a mão do representante adversário ativo, devolve uma carta escolhida na resolução ao Deck privado físico e embaralha com o fluxo aleatório persistido. Reutiliza tagPrivateHand.ts de M625; não altera esse helper.",
+  "cards": [
+    {
+      "name": "The Forceful Sentry",
+      "passcode": "42829885",
+      "konamiDatabaseId": 4907,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRL-045",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Look at your opponent's hand. Select 1 card among them and return it to his/her Deck. The Deck is then shuffled.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4907&ope=2&request_locale=en"
+    }
+  ],
+  "sharedMechanics": "Reutiliza src/tagPrivateHand.ts do M625 para UID físico, mão/Deck privado, inventário e validação de propriedade; não modifica o arquivo reservado por M625.",
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "conflictCheck": {
+    "checkedAt": "2026-11-25T15:15:00-03:00",
+    "sharedHead": "07775dd07cea3e03e66b4d6d03dd4c4bfaee0678",
+    "stackedBaseBranch": "feat/work-m625-confiscation-tag-adapter-20261125",
+    "stackedBaseSha": "555b0d197144a63c9c28f81348323c10173c95c2",
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "metadata": false,
+    "certified": false,
+    "existingEffect": false,
+    "passcode": "42829885",
+    "konamiDatabaseId": 4907,
+    "helperReadOnly": "src/tagPrivateHand.ts (M625)",
+    "m623M624FilesDisjoint": true,
+    "result": "quatro caminhos novos, sem PR/branch/metadata/certificação; helper M625 somente leitura."
+  },
+  "implementation": {
+    "files": [
+      "src/forcefulSentryTagAdapter.ts",
+      "tests/forcefulSentryTagAdapter.test.cjs",
+      "docs/evidence/m626-forceful-sentry-tag-adapter.json",
+      ".github/workflows/m626-forceful-sentry-tag-adapter.yml"
+    ],
+    "plannedScenarios": 29,
+    "randomization": "shuffleDuel(deck, core) usando DuelRandom persistido; sem Math.random."
+  },
+  "verification": {
+    "focusedScenarios": 29,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Após The Forceful Sentry, seguir para outra família independente após revalidar reservas e catálogo.",
+  "nextWindow": "2026-11-25T19:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
