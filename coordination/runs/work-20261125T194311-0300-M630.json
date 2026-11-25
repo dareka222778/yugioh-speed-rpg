@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reserved; implementação isolada em paralelo à CI M629",
+  "status": "PR #572 draft aberto; arquivos e 31 cenários publicados; workflow focado ainda sem execução observável",
   "reservedAt": "2026-11-25T19:44:25-03:00",
   "startedAt": "2026-11-25T19:44:25-03:00",
   "endedAt": null,
@@ -15,8 +15,8 @@
   "branch": "feat/work-m630-ceasefire-tag-adapter-20261125",
   "baseBranch": "feat/rea-engine-recovery-20261026",
   "baseSha": "23a10aa49812c2da11c0424b3af0ba428a131f60",
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "f9b6db6fc8c3fedf2ad74bb184c410951c15cfb5",
+  "pullRequest": 572,
   "reservedFiles": [
     "src/ceasefireTagAdapter.ts",
     "tests/ceasefireTagAdapter.test.cjs",
@@ -81,7 +81,7 @@
     "result": "Nenhum branch/PR/metadata/certificação Ceasefire encontrado; quatro caminhos novos e disjuntos de M629 e M61."
   },
   "verification": {
-    "focusedScenarios": 30,
+    "focusedScenarios": 31,
     "focusedTestResult": "pending",
     "typecheck": "pending",
     "build": "pending",
@@ -100,11 +100,12 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 4,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar flip em massa sem eventos Flip e dano de 500 por Monstro de Efeito; validar propriedade, LP, timing e replay.",
+  "nextTask": "Acionar/observar workflow focado M630; validar 31 casos e corrigir eventuais falhas antes de considerar integração.",
   "nextWindow": "2026-11-25T22:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "lastActivityAt": "2026-11-25T19:49:48-03:00"
 }
