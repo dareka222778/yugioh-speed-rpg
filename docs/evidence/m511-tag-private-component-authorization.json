@@ -1,0 +1,75 @@
+{
+  "mission": "M511",
+  "runId": "work-20261122T081000-0300-M511",
+  "priority": "P1 — provar autorização do dono físico nos componentes privados 2v2: parceiro e adversário não podem reutilizar custom_id de inspeção ou ação de outro assento.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e"
+  },
+  "scope": {
+    "files": [
+      "tests/tagPrivateComponentAuthorization2v2.test.cjs",
+      "docs/evidence/m511-tag-private-component-authorization.json",
+      ".github/workflows/m511-tag-private-component-authorization.yml"
+    ],
+    "runtimeChanged": false,
+    "tagInteractionChanged": false,
+    "tagUIChanged": false,
+    "tagStoreChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "ownerInspect": "The physical owner uses the emitted private inspect custom_id; the real handler acknowledges and renders only that owner's selected card.",
+    "partnerAndOpponentDenied": "A same-team partner and an opponent replaying the owner's inspect custom_id are rejected before acknowledgement, edit or refresh.",
+    "inactivePartnerDenied": "The active seat's emitted action custom_id cannot be replayed by the inactive physical partner; revision and duel state remain unchanged.",
+    "economy": "Temporary players/player_cards/starter_grants snapshots remain unchanged."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário",
+    "discord": "builders e handler reais offline; nenhum token/guild/canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node -e \"JSON.parse(require('node:fs').readFileSync('docs/evidence/m511-tag-private-component-authorization.json','utf8'))\"",
+      "node --test tests/tagPrivateComponentAuthorization2v2.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Não envia interações para Discord real; usa os builders/handler reais com interação fake offline.",
+    "Testa autorização de componentes privados, não a camada de autorização do próprio Discord.",
+    "Não certifica cartas nem altera runtime."
+  ]
+}
