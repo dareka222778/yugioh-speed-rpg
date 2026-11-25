@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "runId": "work-20261125T200307-0300-M632",
+  "mission": "M632",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reservation registered; implementation starting",
+  "startedAt": "2026-11-25T20:03:07-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "f24af2da600eb60c373506e8231772fdbfd328a7",
+  "branch": "feat/work-m632-tsukuyomi-otohime-spirit-position-20261125",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "f24af2da600eb60c373506e8231772fdbfd328a7",
+  "branchBaseSha": null,
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/tsukuyomiOtohimeTagAdapter.ts",
+    "tests/tsukuyomiOtohimeTagAdapter.test.cjs",
+    "docs/evidence/m632-tsukuyomi-otohime-spirit-position.json",
+    ".github/workflows/m632-tsukuyomi-otohime-spirit-position.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Tsukuyomi (34853266 / Konami CID 5780) e Otohime (39751093 / CID 5379): proibição de Invocação-Especial, gatilhos de Normal/Flip/virada face-up, Tsukuyomi coloca qualquer monstro face-up não-token em Defesa face-down, Otohime muda a posição de um monstro face-up adversário, e ambos retornam à mão física do proprietário na End Phase do mesmo turno. Sem resolver central, catálogo, certificações, allowlist, comandos Discord, banco, inventário ou produção.",
+  "cards": [
+    {
+      "name": "Tsukuyomi",
+      "passcode": "34853266",
+      "konamiDatabaseId": 5780,
+      "type": "DARK / Spellcaster / Spirit / Effect / Level 4",
+      "atk": 1100,
+      "def": 1400,
+      "firstTcgRelease": "2003-12-01",
+      "officialEffect": "Cannot be Special Summoned. During the End Phase of the turn this card is Normal Summoned or flipped face-up: Return it to the hand. When this card is Normal Summoned or flipped face-up: Target 1 face-up monster on the field; change it to face-down Defense Position.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5780&ope=2&request_locale=en"
+    },
+    {
+      "name": "Otohime",
+      "passcode": "39751093",
+      "konamiDatabaseId": 5379,
+      "type": "LIGHT / Spellcaster / Spirit / Effect / Level 3",
+      "atk": 0,
+      "def": 100,
+      "firstTcgRelease": "2003-06-06",
+      "officialEffect": "Cannot be Special Summoned. During the End Phase of the turn this card is Normal Summoned or flipped face-up: Return it to the hand. When this card is Normal Summoned or flipped face-up: You can target 1 face-up monster your opponent controls; change that target's battle position.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5379&ope=2&request_locale=en"
+    }
+  ],
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "only End Phase; adapter does not discard"
+  },
+  "implementation": {
+    "files": [
+      "src/tsukuyomiOtohimeTagAdapter.ts",
+      "tests/tsukuyomiOtohimeTagAdapter.test.cjs",
+      "docs/evidence/m632-tsukuyomi-otohime-spirit-position.json",
+      ".github/workflows/m632-tsukuyomi-otohime-spirit-position.yml"
+    ],
+    "plannedScenarios": 30,
+    "integrationBoundary": "Adapter puro isolado; resolver central/Discord aguarda handoff M61 explícito."
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter puro de gatilhos Spirit/posição; construir matriz de testes de alvo, epoch, propriedade física, End Phase, mão 6 e limites de deck/campo; abrir PR draft e aguardar CI integral.",
+  "nextWindow": "2026-11-25T22:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
