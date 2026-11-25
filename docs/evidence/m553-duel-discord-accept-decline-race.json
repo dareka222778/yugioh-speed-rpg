@@ -1,0 +1,74 @@
+{
+  "mission": "M553",
+  "runId": "work-20261123T035100-0300-M553",
+  "owner": "Work principal",
+  "title": "Cross-process race through real 1v1 Discord Accept and Decline handlers",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "dbe1fb281841a41fa4a3018fab0e7e4dc1bd8b80",
+  "branch": "feat/work-m553-duel-discord-accept-decline-race-20261123",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "priority": "P1 — the 1v1 Accept and Decline components must commit exactly one invitation decision when delivered concurrently by separate processes.",
+  "design": {
+    "isolation": "Temporary SQLite database with independent Node processes/connections; parent connection closes before races.",
+    "concurrency": "Three synchronized races through handleDuelComponent: duel:accept for the invited player versus duel:decline, alternating the decline actor between owner and opponent.",
+    "clock": "Deterministic non-expired time; both handlers use the same invitation revision.",
+    "operations": [
+      "duelInteraction.handleDuelComponent",
+      "duelStore.acceptChallenge",
+      "duelStore.declineChallenge"
+    ]
+  },
+  "assertions": [
+    "exactly one real component handler commits and the stale competitor fails closed",
+    "the invitation revision advances exactly once",
+    "Accept winner produces a valid two-player DuelState, exactly two physical duel locks and a private success acknowledgement",
+    "Decline winner produces declined with null DuelState and releases the owner's physical lock",
+    "the public payload is validated through validateDiscordPayload and the accepted state's physical UIDs are unique",
+    "players, player_cards, starter_grants, decks and deck_cards remain byte-equivalent"
+  ],
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventory": {
+    "granted": 0,
+    "mutated": false
+  },
+  "safety": {
+    "runtimeChanged": false,
+    "storesChanged": false,
+    "engineChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false,
+    "persistentDatabaseUsed": false,
+    "playerDataChanged": false,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Handlers/builders Discord.js reais executados offline com interações falsas; sem token, gateway ou guild real.",
+    "SQLite temporário e relógio determinístico; não mede latência de produção.",
+    "Nenhuma alteração de runtime, comandos, catálogo ou certificações."
+  ],
+  "testExecution": {
+    "focused": "pending",
+    "check": "pending",
+    "build": "pending",
+    "customWorkflow": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending; baseline 969/1000",
+    "engineValidation": "pending"
+  }
+}
