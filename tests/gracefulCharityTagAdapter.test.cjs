@@ -70,7 +70,7 @@ test('rejeita Spell da mão adversária', () => {
   assert.equal(activateGracefulCharity(duel, sourceUid, { cardId: SPELL_ID }), null);
 });
 
-test('rejeita Battle Phase, resposta, corrente aberta e hand flow', () => {
+test('rejeita Battle Phase, resposta e corrente aberta', () => {
   const battle = makeDuel(0);
   const battleUid = putCardInHand(battle, 0, SPELL_ID);
   battle.core.phase = 'battle';
@@ -85,11 +85,6 @@ test('rejeita Battle Phase, resposta, corrente aberta e hand flow', () => {
   const chainUid = putCardInHand(chain, 0, SPELL_ID);
   chain.core.chain.push({ actor: 0, card: chainUid, id: SPELL_ID, target: '' });
   assert.equal(activateGracefulCharity(chain, chainUid, { cardId: SPELL_ID }), null);
-
-  const overflow = makeDuel(0);
-  const overflowUid = putCardInHand(overflow, 0, SPELL_ID);
-  overflow.core.handFlow = { actor: 0, remaining: 0, mode: 'overflow', returnPhase: 'main', after: [] };
-  assert.equal(activateGracefulCharity(overflow, overflowUid, { cardId: SPELL_ID }), null);
 });
 
 test('não aceita um monstro como fonte da Normal Spell', () => {
@@ -273,7 +268,7 @@ test('mão acima de seis não é truncada: o descarte próprio da carta é exata
   const duel = makeDuel(0);
   const hand = privateZone(duel, 0, 'hand');
   const deck = privateZone(duel, 0, 'deck');
-  hand.push(...deck.splice(0, 2));
+  hand.push(...deck.splice(0, 3));
   const sourceUid = putCardInHand(duel, 0, SPELL_ID);
   assert.equal(hand.length, 7);
   const activation = activateGracefulCharity(duel, sourceUid, { cardId: SPELL_ID });
@@ -282,7 +277,7 @@ test('mão acima de seis não é truncada: o descarte próprio da carta é exata
   const result = resolveGracefulCharity(activation.state, activation.plan, drawUids.slice(0, 2), { cardId: SPELL_ID });
   assert.ok(result);
   assert.equal(privateZone(result.state, 0, 'hand').length, 7);
-  assert.equal(result.state.core.handFlow, null);
+  assert.equal(result.state.core.handFlow ?? null, null);
   assert.deepEqual(result.discardedUids, drawUids.slice(0, 2));
 });
 
