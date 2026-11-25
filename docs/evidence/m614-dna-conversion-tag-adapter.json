@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "runId": "work-20261125T094500-0300-M614",
+  "mission": "M614",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "DNA Surgery",
+      "passcode": "74701381",
+      "konamiDatabaseId": 4951,
+      "kind": "Continuous Trap",
+      "firstTcgSet": "PSV-026",
+      "firstTcgRelease": "2002-10-20",
+      "officialEffect": "Activate this card by declaring 1 Monster Type. All face-up monsters on the field become that Type.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4951&ope=2&request_locale=en"
+    },
+    {
+      "name": "DNA Transplant",
+      "passcode": "56769674",
+      "konamiDatabaseId": 5919,
+      "kind": "Continuous Trap",
+      "firstTcgSet": "IOC-108",
+      "firstTcgRelease": "2004-03-01",
+      "officialEffect": "Activate by declaring 1 monster Attribute. All face-up monsters become that Attribute.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5919&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m614-dna-conversion-tag-adapter-20261125",
+    "baseSha": "2f060086d763a4a31b1a3748effc7f33590692b9",
+    "files": [
+      "src/dnaConversionTagAdapter.ts",
+      "tests/dnaConversionTagAdapter.test.cjs",
+      "docs/evidence/m614-dna-conversion-tag-adapter.json",
+      ".github/workflows/m614-dna-conversion-tag-adapter.yml"
+    ],
+    "behavior": [
+      "DNA Surgery substitui a Raça efetiva de todos os monstros face-up por uma declaração validada.",
+      "DNA Transplant substitui o Atributo efetivo de todos os monstros face-up por uma declaração validada.",
+      "As duas propriedades podem ser alteradas simultaneamente; cada fonte pertence a um UID físico de Armadilha contínua.",
+      "Fontes face-up, resolvidas e não negadas; declarações e ordem de ativação são dependências explícitas.",
+      "Entre fontes da mesma propriedade, a de maior ordem de ativação prevalece; empate é rejeitado em vez de produzir resultado arbitrário.",
+      "Face-down, não resolvida, negada, removida ou substituída não contribui; monstros face-down não revelam Raça/Atributo.",
+      "Consulta somente leitura; preserva UID/inventário, mão acima de seis até End Phase e limites 20–30, Extra 5 e 3+3 zonas."
+    ],
+    "integrationBoundary": "Adapter isolado; ativação real precisa persistir declaração e ordem de ativação por UID. Não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência, inventário ou produção."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "focusedScenarios": 21,
+    "focusedTestCommand": "node --test tests/dnaConversionTagAdapter.test.cjs",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "actualFocusedRun": null,
+    "status": "implementation committed; CI pending"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "As duas cartas reais permanecem fora do catálogo/allowlist; testes usam duas Armadilhas físicas já admitidas como fixtures e injetam os metadados da identidade DNA.",
+    "A ordem de ativação e a declaração devem ser persistidas pelo motor; o adapter exige essas dependências e não inventa uma ordem.",
+    "Integração na fórmula central/consultas de tipo e atributo aguarda handoff explícito M61.",
+    "Sem sessão real no gateway Discord, backup verificável, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "cardsCount": 2
+}
