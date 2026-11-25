@@ -1,0 +1,85 @@
+{
+  "format": 1,
+  "runId": "work-20261125T150133-0300-M625",
+  "mission": "M625",
+  "priority": "P1",
+  "status": "adapter e suíte comportamental preparados; CI pendente",
+  "cards": [
+    {
+      "name": "Confiscation",
+      "passcode": "17375316",
+      "konamiDatabaseId": 4900,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRL-038",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Pay 1000 Life Points. Look at your opponent's hand, select 1 card in it and discard that card.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4900&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m625-confiscation-tag-adapter-20261125",
+    "baseSha": "07775dd07cea3e03e66b4d6d03dd4c4bfaee0678",
+    "files": [
+      "src/confiscationTagAdapter.ts",
+      "tests/confiscationTagAdapter.test.cjs",
+      "docs/evidence/m625-confiscation-tag-adapter.json",
+      ".github/workflows/m625-confiscation-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Ativa somente da mão privada do assento físico ativo na Main Phase, com a mão do representante adversário ativo não vazia.",
+      "Paga 1000 LP do pool compartilhado da equipe no momento da ativação; o custo permanece pago se o elo for negado.",
+      "Inspeciona a mão atual do representante adversário ativo apenas em payload efêmero endereçado ao assento resolvedor; o plano não contém alvo, UID ou identidade da mão.",
+      "A seleção ocorre na resolução (efeito não-direcionado), podendo escolher carta que entrou na mão após a ativação.",
+      "Descarta exatamente a carta escolhida para o Cemitério compartilhado da equipe adversária, preservando UID e proprietário físico.",
+      "Rejeita seleção da mão do parceiro inativo, do próprio time, UID stale, plano adulterado e replay.",
+      "Se a mão ficar vazia antes da resolução, resolve sem descartar; não corta mão acima de seis antes da End Phase.",
+      "Preserva Deck principal 20–30 por assento, Extra Deck 0–5, zonas 3+3 e Field Zone separada."
+    ],
+    "integrationBoundary": "Adapter puro. Não altera resolver v9, catálogo, certificações, allowlist, comandos Discord, persistência, inventário inicial ou produção. Integração depende de handoff explícito M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "plannedScenarios": 29,
+    "focusedScenarios": 29,
+    "focusedTestCommand": "node --test tests/confiscationTagAdapter.test.cjs",
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Confiscation permanece fora de metadata, certificações e allowlist; nenhum inventário é concedido.",
+    "O payload de inspeção é apenas um contrato para entrega efêmera ao assento resolvedor; nenhum comando Discord/gateway foi integrado.",
+    "O adapter não é chamado pelo resolver central; a integração aguarda handoff explícito M61.",
+    "Sem validação live do Discord, backup de produção, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
