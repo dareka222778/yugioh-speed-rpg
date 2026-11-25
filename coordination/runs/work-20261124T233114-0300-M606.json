@@ -4,16 +4,16 @@
   "mission": "M606",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved; implementation in progress",
+  "status": "published-open-draft-ci-partial; own reservation released to auxiliary for monitoring/corrections on its four files",
   "startedAt": "2026-11-24T23:31:14-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-24T23:59:10-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "f05b9e7b13dd5a700de1da22d1c42c0026f57ae6",
   "branch": "feat/work-m606-battle-damage-discard-20261124",
   "baseSha": "f05b9e7b13dd5a700de1da22d1c42c0026f57ae6",
-  "branchHeadSha": "f05b9e7b13dd5a700de1da22d1c42c0026f57ae6",
-  "pullRequest": null,
+  "branchHeadSha": "9e92d15fff9244a063c53b73861b68692814db02",
+  "pullRequest": 549,
   "reservedFiles": [
     "src/battleDamageDiscardTagAdapter.ts",
     "tests/battleDamageDiscardTagAdapter.test.cjs",
@@ -76,7 +76,20 @@
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar o adapter compartilhado de descarte aleatório por dano de batalha, testar mão privada do assento ativo, controle roubado, fonte removida, negação, duplicação, cartas em mão vazia, 3+3 zonas, Main Deck 20–30, Extra 5 e mão acima de 6 sem descarte antecipado.",
+  "nextTask": "Monitorar Engine Validation/Extended Soak da PR #549; corrigir apenas os quatro arquivos próprios se a CI apontar falha. A integração do resolver continua aguardando handoff M61.",
   "nextWindow": "2026-11-25T04:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [
+    "src/battleDamageDiscardTagAdapter.ts",
+    "tests/battleDamageDiscardTagAdapter.test.cjs",
+    "docs/evidence/m606-battle-damage-discard.json",
+    ".github/workflows/m606-battle-damage-discard.yml"
+  ],
+  "ci": {
+    "focused": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "in_progress",
+    "extendedSoak": "not_reported"
+  },
+  "releaseReason": "Implementação publicada em PR #549; liberar somente os quatro arquivos próprios para monitoramento e correções, sem integração central, merge ou deploy."
 }
