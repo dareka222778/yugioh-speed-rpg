@@ -1,0 +1,96 @@
+{
+  "format": 1,
+  "mission": "M629",
+  "runId": "work-20261125T193436-0300-M629",
+  "priority": "P1",
+  "status": "adapter isolado implementado; CI pendente",
+  "historicalCutoff": "2004-10-01",
+  "cards": [
+    {
+      "name": "Solemn Judgment",
+      "passcode": "41420027",
+      "konamiDatabaseId": 4861,
+      "kind": "Counter Trap",
+      "firstTcgSet": "MRD-EN127",
+      "firstTcgRelease": "2002-06-26",
+      "officialEffect": "When a monster(s) would be Summoned, OR a Spell/Trap Card is activated: Pay half your LP; negate the Summon or activation, and if you do, destroy that card.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4861&ope=2&request_locale=en",
+      "adapterBehavior": [
+        "Responds to the current Pending Normal/Flip/Special Summon attempt or to a Spell/Trap activation in Pending/Chain; ignores monster-effect activations and face-down Normal Sets.",
+        "Pays half the shared team LP at activation, rounding upward, and refuses a payment that would reduce the team to zero.",
+        "Negates the exact activation or summon object; it never chooses a replacement target at resolution.",
+        "Sends destroyed physical cards to the Graveyard of the seat encoded by their UID, including stolen cards and cards owned by inactive partners.",
+        "A negated Counter Trap still consumes its LP cost and goes to its physical owner's Graveyard.",
+        "Removes a negated Token Summon through the token ledger without adding a token to any Graveyard.",
+        "Uses card-lifetime epochs, top-of-Chain checks, bounded replay receipts, and physical inventory conservation."
+      ]
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m629-solemn-judgment-tag-adapter-20261125",
+    "baseSha": "23a10aa49812c2da11c0424b3af0ba428a131f60",
+    "files": [
+      "src/solemnJudgmentTagAdapter.ts",
+      "tests/solemnJudgmentTagAdapter.test.cjs",
+      "docs/evidence/m629-solemn-judgment-tag-adapter.json",
+      ".github/workflows/m629-solemn-judgment-tag-adapter.yml"
+    ],
+    "plannedScenarios": 32,
+    "integrationBoundary": "Pure isolated adapter over the existing typed Pending/Chain state. Central resolver/Discord hook integration remains blocked on explicit M61 handoff."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase only"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "coordination/state.json at the shared HEAD before M629 reservation"
+  },
+  "conflictCheck": {
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "matchingFiles": 0,
+    "metadata": false,
+    "certified": false,
+    "existingEffect": false,
+    "thirdPartyReservationsUntouched": true,
+    "m61CentralFilesExcluded": true
+  },
+  "verification": {
+    "focusedScenarios": 32,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "extendedSoak": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Solemn Judgment permanece fora de cardMetadata, cardCertifications, releasedCardIds e allowlist; a fixture usa uma Trap habilitada como fonte substituta.",
+    "O adapter não está ligado ao resolver v9 nem aos comandos Discord; a integração central aguarda handoff explícito M61.",
+    "A suíte é offline e não valida gateway, permissões, interações ou persistência real do Discord.",
+    "Nenhuma certificação, concessão de inventário, alteração de dados persistentes, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
