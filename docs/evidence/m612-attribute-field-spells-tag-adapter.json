@@ -23,6 +23,46 @@
       "firstTcgRelease": "2002-09-16",
       "officialEffect": "Increase the ATK of all DARK monsters by 500 points and decrease their DEF by 400 points.",
       "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4937&ope=2&request_locale=en"
+    },
+    {
+      "name": "Gaia Power",
+      "passcode": "56594520",
+      "konamiDatabaseId": 4932,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-096",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all EARTH monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4932&ope=2&request_locale=en"
+    },
+    {
+      "name": "Umiiruka",
+      "passcode": "82999629",
+      "konamiDatabaseId": 4933,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-097",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all WATER monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4933&ope=2&request_locale=en"
+    },
+    {
+      "name": "Molten Destruction",
+      "passcode": "19384334",
+      "konamiDatabaseId": 4934,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-098",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all FIRE monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4934&ope=2&request_locale=en"
+    },
+    {
+      "name": "Rising Air Current",
+      "passcode": "45778932",
+      "konamiDatabaseId": 4935,
+      "kind": "Field Spell",
+      "firstTcgSet": "MRL-099",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Increase the ATK of all WIND monsters by 500 points and decrease their DEF by 400 points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4935&ope=2&request_locale=en"
     }
   ],
   "implementation": {
@@ -39,7 +79,8 @@
       "Mystic Plasma Zone modifica somente monstros DARK face-up: +500 ATK e -400 DEF.",
       "Cada equipe possui Field Zone separada; uma fonte face-up e resolvida afeta monstros correspondentes dos dois lados do campo compartilhado.",
       "Duas cópias válidas em Field Zones distintas acumulam seus modificadores; negação, face-down, substituição ou remoção desligam apenas a fonte correspondente.",
-      "Consultas não revelam atributo de monstros face-down, não alteram UIDs/inventário, não descartam mão antes da End Phase e não consomem zonas 3+3."
+      "Consultas não revelam atributo de monstros face-down, não alteram UIDs/inventário, não descartam mão antes da End Phase e não consomem zonas 3+3.",
+      "O mesmo algoritmo parametrizado cobre as seis Field Spells clássicas de atributo: LIGHT, DARK, EARTH, WATER, FIRE e WIND."
     ],
     "integrationBoundary": "Adapter isolado. O resolver central ainda precisa consultar getAttributeModifier na composição de ATK/DEF. Não altera cardMetadata, cardCertifications, catálogo, allowlist, comandos Discord, persistência ou dados dos jogadores."
   },
@@ -53,7 +94,7 @@
     "handDiscard": "diferido à End Phase; o adapter é somente leitura"
   },
   "verification": {
-    "focusedScenarios": 18,
+    "focusedScenarios": 19,
     "focusedTestCommand": "node --test tests/attributeFieldSpellTagAdapter.test.cjs",
     "newCertifications": 0,
     "automaticCertifications": 0,
@@ -82,5 +123,6 @@
     "As cartas permanecem fora do catálogo/allowlist e não recebem certificação por importação.",
     "A integração na fórmula central de ATK/DEF depende do handoff M61 explícito.",
     "CI e testes são offline; não houve sessão no gateway Discord nem acesso ao host de produção."
-  ]
+  ],
+  "cardsCount": 6
 }
