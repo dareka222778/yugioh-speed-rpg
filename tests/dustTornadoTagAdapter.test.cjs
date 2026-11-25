@@ -1,7 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { createTagDuel, tagNormalCardIds, tagInventory, tagDecisionMember } = require('../dist/tagDuel.js');
-const { enabledCardIds, getDuelCard, getEffect } = require('../dist/effectRegistry.js');
+const { enabledCardIds, getDuelCard, getEffect, engineCard, getCardStatus } = require('../dist/effectRegistry.js');
 const { getMonsterEffect } = require('../dist/monsterEffects.js');
 const { synchronizeCardLifetimes } = require('../dist/cardLifetime.js');
 const {
@@ -170,6 +170,8 @@ function moveTargetToHand(duel, targetUid, ownerSeat) {
 }
 
 test('Dust Tornado remains unregistered and cannot be certified by adapter import', () => {
+  assert.equal(engineCard(DUST_TORNADO_ID), undefined);
+  assert.equal(getCardStatus(DUST_TORNADO_ID), undefined);
   assert.equal(getDuelCard(DUST_TORNADO_ID), undefined);
   assert.equal(getEffect(DUST_TORNADO_ID), undefined);
 });
