@@ -261,7 +261,8 @@ test('assento 2 usa seu próprio Deck e mão, mantendo o parceiro físico isolad
   const selected = deckBefore.slice(0, 2);
   const result = resolveGracefulCharity(activation.state, activation.plan, selected, { cardId: SPELL_ID });
   assert.ok(result);
-  assert.equal(result.plan, undefined);
+  assert.deepEqual(result.drawnUids, deckBefore.slice(0, 3));
+  assert.deepEqual(result.discardedUids, selected);
   assert.equal(result.state.active[0], 2);
   assert.deepEqual(privateZone(result.state, 0, 'deck').map(card => card.uid), partnerDeckBefore);
   assert.ok(privateZone(result.state, 2, 'hand').some(card => card.uid === deckBefore[2]));
