@@ -5,16 +5,16 @@
   "parentRunId": "work-20261124T235910-0300-M609",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved; implementation pending",
+  "status": "CI integral verde; PR #554 aberta em draft; reserva própria liberada ao auxiliar para monitoramento",
   "startedAt": "2026-11-25T05:10:54-03:00",
-  "endedAt": null,
+  "endedAt": "2026-11-25T09:30:00-03:00",
   "repository": "dareka222778/yugioh-speed-rpg",
   "sharedBranch": "feat/rea-engine-recovery-20261026",
   "sharedHeadAtStart": "fe62f6146736e98dd1f9ab9e31aaab566e6e13bf",
   "branch": "feat/work-m611-attribute-field-effects-20261125",
   "baseSha": "fe62f6146736e98dd1f9ab9e31aaab566e6e13bf",
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "d315ebe73515db9b926831d8a89408406346dfa1",
+  "pullRequest": 554,
   "reservedFiles": [
     "src/attributeFieldEffectsTagAdapter.ts",
     "tests/attributeFieldEffectsTagAdapter.test.cjs",
@@ -87,11 +87,49 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": null,
   "targetEffectiveMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
   "nextTask": "Implementar adapter e testes focados; validar CI; depois avançar para próxima família independente sem tocar M608/M609/M610/M61.",
   "nextWindow": "2026-11-25T09:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [
+    "src/attributeFieldEffectsTagAdapter.ts",
+    "tests/attributeFieldEffectsTagAdapter.test.cjs",
+    "docs/evidence/m611-attribute-field-effects-tag-adapter.json",
+    ".github/workflows/m611-attribute-field-effects-tag-adapter.yml"
+  ],
+  "observedCompletedAt": "2026-11-25T09:30:00-03:00",
+  "ci": {
+    "focused": {
+      "status": "success",
+      "runId": 45576968326,
+      "sha": "d315ebe73515db9b926831d8a89408406346dfa1"
+    },
+    "cardBatchFast": {
+      "status": "success",
+      "runId": 45576968282,
+      "sha": "d315ebe73515db9b926831d8a89408406346dfa1"
+    },
+    "milestone1000": {
+      "status": "success",
+      "runId": 45576968275,
+      "sha": "d315ebe73515db9b926831d8a89408406346dfa1"
+    },
+    "engineValidation": {
+      "status": "success",
+      "runId": 45576968259,
+      "sha": "d315ebe73515db9b926831d8a89408406346dfa1"
+    }
+  },
+  "catalogAtEnd": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "timeMeasurement": "não verificável retrospectivamente; nenhuma espera de CI contabilizada",
+  "releaseNote": "Auxiliar autorizado apenas a monitorar/sincronizar sem force e corrigir os quatro arquivos M611; não editar runtime central, catálogo, certificados, inventário, dados persistentes ou produção."
 }

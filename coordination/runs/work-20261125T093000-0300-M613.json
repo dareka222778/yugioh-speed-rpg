@@ -1,0 +1,149 @@
+{
+  "format": 1,
+  "runId": "work-20261125T093000-0300-M613",
+  "mission": "M613",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-25T09:30:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "6f921b8068b6cbd24ec2fc5924154e34670af094",
+  "branch": "feat/work-m613-terrain-field-spells-tag-adapter-20261125",
+  "baseSha": "6f921b8068b6cbd24ec2fc5924154e34670af094",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/terrainFieldSpellsTagAdapter.ts",
+    "tests/terrainFieldSpellsTagAdapter.test.cjs",
+    "docs/evidence/m613-terrain-field-spells-tag-adapter.json",
+    ".github/workflows/m613-terrain-field-spells-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para seis Field Spells clássicas de terreno: Sogen, Mountain, Wasteland, Forest, Umi e Yami. Modificadores globais de ATK/DEF por Raça, incluindo penalidades negativas de Umi e Yami, com fontes face-up/resolvidas, negação, Field Zones independentes, múltiplas cópias, privacidade face-down e conservação física.",
+  "cards": [
+    {
+      "name": "Sogen",
+      "passcode": "86318356",
+      "konamiDatabaseId": 4339,
+      "firstTcgSet": "LOB-049",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Warrior and Beast-Warrior monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4339&ope=2&request_locale=en"
+    },
+    {
+      "name": "Mountain",
+      "passcode": "50913601",
+      "konamiDatabaseId": 4338,
+      "firstTcgSet": "LOB-048",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Dragon, Winged Beast, and Thunder monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4338&ope=2&request_locale=en"
+    },
+    {
+      "name": "Wasteland",
+      "passcode": "23424603",
+      "konamiDatabaseId": 4337,
+      "firstTcgSet": "LOB-047",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Dinosaur, Zombie, and Rock monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4337&ope=2&request_locale=en"
+    },
+    {
+      "name": "Forest",
+      "passcode": "87430998",
+      "konamiDatabaseId": 4336,
+      "firstTcgSet": "LOB-046",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Insect, Beast, Plant, and Beast-Warrior monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4336&ope=2&request_locale=en"
+    },
+    {
+      "name": "Umi",
+      "passcode": "22702055",
+      "konamiDatabaseId": 4340,
+      "firstTcgSet": "LOB-050",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Fish, Sea Serpent, Thunder, and Aqua monsters on the field gain 200 ATK/DEF, also all Machine and Pyro monsters on the field lose 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4340&ope=2&request_locale=en"
+    },
+    {
+      "name": "Yami",
+      "passcode": "59197169",
+      "konamiDatabaseId": 4341,
+      "firstTcgSet": "LOB-051",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Fiend and Spellcaster monsters on the field gain 200 ATK/DEF, also all Fairy monsters on the field lose 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4341&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/terrainFieldSpellsTagAdapter.ts",
+      "tests/terrainFieldSpellsTagAdapter.test.cjs",
+      "docs/evidence/m613-terrain-field-spells-tag-adapter.json",
+      ".github/workflows/m613-terrain-field-spells-tag-adapter.yml"
+    ],
+    "plannedScenarios": 20,
+    "integrationBoundary": "Adapter isolado; consulta central de ATK/DEF depende do handoff M61 explícito. Não altera catálogo, cardMetadata, cardCertifications, allowlist, comandos Discord, persistência ou produção."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "observedParallelWork": {
+    "m610": {
+      "pr": 553,
+      "state": "open-draft",
+      "branch": "feat/work-m610-battle-attrition-tag-adapter-20261125",
+      "filesOwnedByOtherAgent": true,
+      "touched": false
+    },
+    "m611": {
+      "pr": 554,
+      "state": "open-draft-ci-green",
+      "head": "d315ebe73515db9b926831d8a89408406346dfa1",
+      "releasedFiles": 4
+    },
+    "m612": {
+      "pr": 555,
+      "state": "open-draft",
+      "head": "f779edc6a90105955184627105e1c7c89929d73d",
+      "cardBatchFast": "success",
+      "milestone1000": "success",
+      "engineValidation": "failure",
+      "touched": false
+    }
+  },
+  "m61Handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "centralFilesExcluded": true
+  },
+  "nextTask": "Implementar adapter de Raça e testes focados para as seis Field Spells; executar CI; durante a CI preparar a próxima família em arquivos independentes, sem tocar M610/M612/M61.",
+  "nextWindow": "2026-11-25T14:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
