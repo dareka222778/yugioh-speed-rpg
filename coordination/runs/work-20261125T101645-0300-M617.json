@@ -1,0 +1,125 @@
+{
+  "format": 1,
+  "runId": "work-20261125T101645-0300-M617",
+  "mission": "M617",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "reservedAt": "2026-11-25T10:16:45-03:00",
+  "startedAt": "2026-11-25T10:16:45-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "1295a7c0d2a1ae14d4b926bdebdf8bef1963175f",
+  "branch": "feat/work-m617-tribute-doomed-tag-adapter-20261125",
+  "baseSha": "1295a7c0d2a1ae14d4b926bdebdf8bef1963175f",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/tributeDoomedTagAdapter.ts",
+    "tests/tributeDoomedTagAdapter.test.cjs",
+    "docs/evidence/m617-tribute-doomed-tag-adapter.json",
+    ".github/workflows/m617-tribute-doomed-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel clássico para Tribute to The Doomed (79759861): descartar exatamente um card qualquer como custo da mão privada do assento físico ativo; selecionar um monstro de qualquer equipe (face-up ou face-down); destruir o alvo original com a operação compartilhada do motor, respeitando proteção contínua, cemitério do proprietário e triggers. Custos não retornam por negação/alvo inválido.",
+  "cards": [
+    {
+      "name": "Tribute to The Doomed",
+      "passcode": "79759861",
+      "konamiDatabaseId": 4856,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRD-057",
+      "firstTcgRelease": "2002-06-26",
+      "officialEffect": "Discard 1 card, then target 1 monster on the field; destroy it.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4856&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/tributeDoomedTagAdapter.ts",
+      "tests/tributeDoomedTagAdapter.test.cjs",
+      "docs/evidence/m617-tribute-doomed-tag-adapter.json",
+      ".github/workflows/m617-tribute-doomed-tag-adapter.yml"
+    ],
+    "plannedScenarios": 30,
+    "integrationBoundary": "Adapter isolado; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central aguarda handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase para descarte de regra; custo de efeito é imediato"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "observedParallelWork": {
+    "m613": {
+      "pr": 556,
+      "state": "ci-green-scope-released"
+    },
+    "m614": {
+      "pr": 557,
+      "state": "handoff-requested-active-agent-no-reply-no-touch"
+    },
+    "m615": {
+      "pr": 558,
+      "state": "focused-rerun-in-progress"
+    },
+    "m616": {
+      "pr": 559,
+      "state": "focused-rerun-in-progress"
+    },
+    "m610": {
+      "pr": 553,
+      "state": "third-party-reserved-no-touch"
+    },
+    "m611": {
+      "pr": 554,
+      "state": "scope-released"
+    },
+    "m612": {
+      "pr": 555,
+      "state": "engine-validation-failure-third-party-no-touch"
+    }
+  },
+  "m61Handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "centralFilesExcluded": true
+  },
+  "nextTask": "Executar M617; em seguida revalidar M615/M616 e avançar para outra família sem sobreposição.",
+  "nextWindow": "2026-11-25T14:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

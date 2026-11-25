@@ -4,7 +4,7 @@
   "mission": "M615",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "PR #558 draft aberta; primeira CI falhou em cinco fixtures, correções publicadas; segunda execução focada enfileirada",
+  "status": "PR #558 draft; focused CI corrigida em execução, 24/25 passaram na execução anterior",
   "reservedAt": "2026-11-25T09:57:29-03:00",
   "startedAt": "2026-11-25T09:57:29-03:00",
   "endedAt": null,
@@ -13,7 +13,7 @@
   "sharedHeadAtReservation": "2f060086d763a4a31b1a3748effc7f33590692b9",
   "branch": "feat/work-m615-cheerful-coffin-tag-adapter-20261125",
   "baseSha": "2f060086d763a4a31b1a3748effc7f33590692b9",
-  "branchHeadSha": "9b0986b346a3a8ea1ea5f7f365c5aaf7c57d6fe6",
+  "branchHeadSha": "f879ad8291491c4f1395f26e93435e243adff37e",
   "pullRequest": 558,
   "reservedFiles": [
     "src/cheerfulCoffinTagAdapter.ts",
@@ -63,17 +63,17 @@
   },
   "verification": {
     "focusedScenarios": 25,
-    "focusedTestResult": "segunda execução enfileirada após corrigir 5 falhas de fixture",
+    "focusedTestResult": "rerun in_progress; falha anterior única corrigida preservando inventário",
     "typecheck": "success",
     "build": "success",
     "evidenceValidation": "success",
-    "cardBatchFast": "success",
-    "milestone1000": "success",
+    "cardBatchFast": "in_progress",
+    "milestone1000": "in_progress",
     "engineValidation": "in_progress",
     "newCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
-    "focusedRunId": 45620331982,
+    "focusedRunId": 45621620319,
     "previousFocusedFailures": [
       "Teste de escolha pendente construiu estado incompatível com o validador; removido, mantendo corrente válida.",
       "Fixture de quatro descartes tinha somente três monstros na mão; setup agora prepara quatro.",
@@ -128,5 +128,5 @@
   "nextTask": "Executar M615 em branch isolada; durante a CI selecionar a próxima família livre após nova verificação de branches/PRs.",
   "nextWindow": "2026-11-25T14:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
-  "lastActivityAt": "2026-11-25T10:07:17-03:00"
+  "lastActivityAt": "2026-11-25T10:16:45-03:00"
 }

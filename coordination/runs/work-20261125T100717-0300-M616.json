@@ -4,7 +4,7 @@
   "mission": "M616",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved-and-implementing",
+  "status": "PR #559 draft; rerun focada enfileirada após corrigir guarda do assento 0 e substituir fixture inválida de ficha",
   "reservedAt": "2026-11-25T10:07:17-03:00",
   "startedAt": "2026-11-25T10:07:17-03:00",
   "endedAt": null,
@@ -13,8 +13,8 @@
   "sharedHeadAtReservation": "0e2b285b8402991655e63f0a8ca5646d7423ae32",
   "branch": "feat/work-m616-darkness-approaches-tag-adapter-20261125",
   "baseSha": "0e2b285b8402991655e63f0a8ca5646d7423ae32",
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "fd694946ab49969ed0b8a471e223ab57d9c9ff21",
+  "pullRequest": 559,
   "reservedFiles": [
     "src/darknessApproachesTagAdapter.ts",
     "tests/darknessApproachesTagAdapter.test.cjs",
@@ -62,17 +62,18 @@
     "inventoryGranted": 0
   },
   "verification": {
-    "focusedScenarios": 0,
-    "focusedTestResult": "pending",
-    "typecheck": "pending",
-    "build": "pending",
-    "evidenceValidation": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
+    "focusedScenarios": 26,
+    "focusedTestResult": "rerun in_progress; execução anterior 25/26, novo commit remove fixture de ficha e alinha evidência",
+    "typecheck": "success",
+    "build": "success",
+    "evidenceValidation": "success",
+    "cardBatchFast": "queued",
+    "milestone1000": "queued",
+    "engineValidation": "queued",
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "focusedRunId": 45621628565
   },
   "production": {
     "merge": false,
@@ -80,7 +81,7 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 9,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -117,5 +118,6 @@
   },
   "nextTask": "Executar M616 em branch isolada; em seguida, revalidar M615/M616 e escolher outra família sem sobreposição.",
   "nextWindow": "2026-11-25T14:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "lastActivityAt": "2026-11-25T10:16:45-03:00"
 }
