@@ -1,0 +1,36 @@
+name: M531 1v1 Lobby Creation Concurrency
+on:
+  push:
+    branches:
+      - feat/work-m531-duel-lobby-creation-concurrency-20261122
+    paths:
+      - 'tests/duelLobbyCreationConcurrency.test.cjs'
+      - 'docs/evidence/m531-duel-lobby-creation-concurrency.json'
+      - '.github/workflows/m531-duel-lobby-creation-concurrency.yml'
+  pull_request:
+    paths:
+      - 'tests/duelLobbyCreationConcurrency.test.cjs'
+      - 'docs/evidence/m531-duel-lobby-creation-concurrency.json'
+      - '.github/workflows/m531-duel-lobby-creation-concurrency.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-lobby-creation-concurrency:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m531-duel-lobby-creation-concurrency.json', 'utf8'))"
+      - name: Run independent-process lobby races
+        run: node --test tests/duelLobbyCreationConcurrency.test.cjs

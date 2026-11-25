@@ -1,0 +1,86 @@
+{
+  "mission": "M531",
+  "runId": "work-20261122T170217-0300-M531",
+  "title": "1v1 lobby creation and acceptance concurrency",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "80a6a6e4013ad4bd6f7390bd0ade2e58ff1b1464",
+  "branch": "feat/work-m531-duel-lobby-creation-concurrency-20261122",
+  "scope": [
+    "tests/duelLobbyCreationConcurrency.test.cjs",
+    "docs/evidence/m531-duel-lobby-creation-concurrency.json",
+    ".github/workflows/m531-duel-lobby-creation-concurrency.yml"
+  ],
+  "behavior": [
+    {
+      "case": "four repeated races: two independent processes challenge the same creator with different opponents",
+      "assertions": [
+        "exactly one pending invitation is committed per creator",
+        "the competing transaction fails closed",
+        "exactly one duel row and one creator membership lock exist",
+        "neither invited opponent is locked before consent",
+        "declining the winning invitation releases the creator lock",
+        "no orphan duel_members rows remain"
+      ]
+    },
+    {
+      "case": "two independent processes Accept the same invitation at the same revision",
+      "assertions": [
+        "exactly one process starts the duel",
+        "the invitation revision advances exactly once",
+        "exactly two physical player membership locks exist",
+        "the saved DuelState contains each player exactly once",
+        "acceptance creates no fabricated action receipt or transition event"
+      ]
+    }
+  ],
+  "isolation": {
+    "database": "Temporary SQLite in the OS temp directory",
+    "processes": "Separate Node 22 processes with a filesystem start barrier",
+    "discordCredentials": "DISCORD_TOKEN, DISCORD_CLIENT_ID and DISCORD_GUILD_ID unset",
+    "persistentPlayerData": "No production database access"
+  },
+  "invariants": {
+    "playerTables": [
+      "players",
+      "player_cards",
+      "starter_grants",
+      "decks",
+      "deck_cards"
+    ],
+    "expected": "byte-equivalent row snapshots before and after each race",
+    "rulesPreserved": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "runtimeFilesChanged": [],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  },
+  "limitations": [
+    "The test validates the actual SQLite-backed store from separate Node processes, not a live Discord guild/gateway.",
+    "A database-busy rejection is accepted only as a fail-closed loser; CI must still prove exactly one committed winner."
+  ],
+  "testExecution": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "ci": null
+  }
+}
