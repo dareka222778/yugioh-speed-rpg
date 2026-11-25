@@ -1,0 +1,32 @@
+{
+  "format": 1,
+  "mission": "M635",
+  "tool": "scripts/coordination-guard.cjs",
+  "purpose": "Validate coordination reservations and compare-and-swap transitions without mutating repository state.",
+  "invariants": [
+    "A transition is accepted only when expected HEAD equals current HEAD.",
+    "A new run ID must not already exist.",
+    "A new reservation must use conditional HEAD updates and its own branch.",
+    "Existing active third-party reservations and their files cannot be removed or weakened.",
+    "Different active runs cannot reserve the same file.",
+    "Auxiliary release scope must be a subset of the current run's reserved files.",
+    "The guard never grants inventory."
+  ],
+  "scenarios": [
+    "deduplicate current/subtask/active reservation aliases for the same run",
+    "accept a disjoint new reservation while preserving the existing owner",
+    "reject stale HEAD",
+    "reject third-party release or file removal",
+    "reject new file collision",
+    "reject duplicate run ID",
+    "reject release outside own scope",
+    "reject inventory grant",
+    "allow release of own reservation only",
+    "report conflicting owners"
+  ],
+  "certifications": 0,
+  "inventoryGranted": 0,
+  "runtimeChanged": false,
+  "playerDataChanged": false,
+  "discordGatewayTested": false
+}
