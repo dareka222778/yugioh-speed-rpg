@@ -1,0 +1,36 @@
+name: M532 1v1 Pending Invitation Restart Recovery
+on:
+  push:
+    branches:
+      - feat/work-m532-duel-invitation-restart-recovery-20261122
+    paths:
+      - 'tests/duelInvitationRestartRecovery.test.cjs'
+      - 'docs/evidence/m532-duel-invitation-restart-recovery.json'
+      - '.github/workflows/m532-duel-invitation-restart-recovery.yml'
+  pull_request:
+    paths:
+      - 'tests/duelInvitationRestartRecovery.test.cjs'
+      - 'docs/evidence/m532-duel-invitation-restart-recovery.json'
+      - '.github/workflows/m532-duel-invitation-restart-recovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-invitation-restart-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m532-duel-invitation-restart-recovery.json', 'utf8'))"
+      - name: Run pending invitation restart tests
+        run: node --test tests/duelInvitationRestartRecovery.test.cjs

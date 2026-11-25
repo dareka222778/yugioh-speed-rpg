@@ -1,0 +1,96 @@
+{
+  "mission": "M532",
+  "runId": "work-20261122T171834-0300-M532",
+  "title": "1v1 pending invitation restart recovery",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "78b2361bd84ce9ab7bca200b29230970b86d4a37",
+  "branch": "feat/work-m532-duel-invitation-restart-recovery-20261122",
+  "scope": [
+    "tests/duelInvitationRestartRecovery.test.cjs",
+    "docs/evidence/m532-duel-invitation-restart-recovery.json",
+    ".github/workflows/m532-duel-invitation-restart-recovery.yml"
+  ],
+  "behavior": [
+    {
+      "case": "restart while a 1v1 invitation is pending, then Accept in a new process",
+      "assertions": [
+        "pending status and revision survive restart",
+        "invitation owner/opponent and Deck snapshot survive restart",
+        "Accept advances the revision once and clears invite payload",
+        "exactly two membership locks are persisted",
+        "no action event is fabricated"
+      ]
+    },
+    {
+      "case": "restart while a 1v1 invitation is pending, then Decline and replay stale Accept",
+      "assertions": [
+        "Decline advances the revision once",
+        "creator membership lock is released",
+        "stale Accept is rejected",
+        "no membership lock is recreated"
+      ]
+    },
+    {
+      "case": "restart before invitation deadline, then expire at exactly 120000 ms",
+      "assertions": [
+        "invitation is pending at deadline minus 1 ms",
+        "status becomes expired at exact deadline",
+        "revision increments exactly once",
+        "no DuelState or transition event is created",
+        "creator lock is released",
+        "stale Accept remains rejected",
+        "player/collection/starter-grant/Deck rows remain unchanged"
+      ]
+    }
+  ],
+  "isolation": {
+    "database": "Temporary SQLite under OS temp directory",
+    "processes": "A separate Node 22 process reopens the same SQLite file",
+    "discordCredentials": "DISCORD_TOKEN, DISCORD_CLIENT_ID and DISCORD_GUILD_ID unset",
+    "persistentPlayerData": "No production database access"
+  },
+  "invariants": {
+    "playerTables": [
+      "players",
+      "player_cards",
+      "starter_grants",
+      "decks",
+      "deck_cards"
+    ],
+    "expected": "byte-equivalent row snapshots before and after restart/consent",
+    "rulesPreserved": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "runtimeFilesChanged": [],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  },
+  "limitations": [
+    "Validates persisted store behavior across Node process restart, not a live Discord gateway.",
+    "No runtime, handler, catalog, resolver or player-data changes."
+  ],
+  "testExecution": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "ci": null
+  }
+}
