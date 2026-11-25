@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "mission": "M618",
+  "family": "draw-three-then-discard-two",
+  "cards": [
+    {
+      "name": "Graceful Charity",
+      "passcode": "79571449",
+      "kind": "Normal Spell",
+      "firstTcgSet": "SDP-040",
+      "firstTcgRelease": "2003-03-30",
+      "officialEffect": "Draw 3 cards, then discard 2 cards.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?keyword=Graceful+Charity&ope=1&request_locale=en",
+      "historicalReference": "https://ftp.yugipedia.com/wiki/SDP-040"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/gracefulCharityTagAdapter.ts",
+      "tests/gracefulCharityTagAdapter.test.cjs",
+      "docs/evidence/m618-graceful-charity-tag-adapter.json",
+      ".github/workflows/m618-graceful-charity-tag-adapter.yml"
+    ],
+    "plannedScenarios": 25,
+    "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, releasedCardIds, certificações, allowlist, comandos Discord, persistência ou produção. A identidade real Graceful Charity permanece fora dos fixtures habilitados; os testes usam uma Normal Spell de fixture e não concedem inventário."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase; Graceful Charity descarta exatamente duas como parte do próprio efeito"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31
+  },
+  "verification": {
+    "focusedScenarios": 25,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "knownLimitations": [
+      "Se o Deck do assento físico tiver menos de três cartas na ativação ou resolução, o adapter rejeita a operação sem mutação; a condição de derrota por Deck vazio permanece fora deste adapter isolado.",
+      "A integração com o resolver central e a certificação dependem do handoff M61."
+    ]
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
