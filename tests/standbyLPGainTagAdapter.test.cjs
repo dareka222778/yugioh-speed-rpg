@@ -23,6 +23,7 @@ function moveToMonster(duel,team,id,position='atk',faceUp=true){
  return card.uid;
 }
 function snapshot(duel){return tagInventory(duel).filter(card=>card.entityKind!=='token').map(card=>[card.uid,card.id]).sort((a,b)=>a[0].localeCompare(b[0]));}
+function zoneCounts(duel){return duel.core.players.map(p=>({hand:p.hand.length,deck:p.deck.length,monsters:p.monsters.length,backrow:p.backrow.length,grave:p.grave.length,extra:p.extra?.length??0,banished:p.banished?.length??0,field:p.field?.uid??null}));}
 function apply(duel,team=0){return applyStandbyLPGains(createStandbyLPSession(duel),team,FIXTURE_IDS);}
 
 test('Cure Mermaid recupera 800 LP mesmo em Defesa face-up',()=>{
@@ -91,9 +92,8 @@ test('aguarda a fila de tarefas da Standby terminar',()=>{
 test('conserva UID, identidade física, mãos, decks e zonas 3+3',()=>{
  const duel=duelFixture();moveToMonster(duel,0,HANE_HANE,'atk',true);moveToMonster(duel,0,MAN_EATER_BUG,'atk',true);
  const before=snapshot(duel),hands=duel.core.players.map(p=>p.hand.length),decks=duel.core.players.map(p=>p.deck.length);
- const monsters=duel.core.players.map(p=>p.monsters.length),backrow=duel.core.players.map(p=>p.backrow.length);
+ const zones=zoneCounts(duel);
  const {session}=applyStandbyLPGains(createStandbyLPSession(duel),0,FIXTURE_IDS);
- assert.deepEqual(snapshot(session.duel),before);assert.deepEqual(session.duel.core.players.map(p=>p.hand.length),hands);
- assert.deepEqual(session.duel.core.players.map(p=>p.deck.length),decks);assert.deepEqual(session.duel.core.players.map(p=>p.monsters.length),monsters);
- assert.deepEqual(session.duel.core.players.map(p=>p.backrow.length),backrow);
+ assert.deepEqual(snapshot(session.duel),before);assert.deepEqual(zoneCounts(session.duel),zones);
+ assert.deepEqual(session.duel.core.players.map(p=>p.hand.length),hands);assert.deepEqual(session.duel.core.players.map(p=>p.deck.length),decks);
 });

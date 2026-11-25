@@ -51,12 +51,12 @@
     "Both effects stack into the shared LP pool of the controller team",
     "Opposing team's monsters do not affect the active team's LP",
     "Face-down monsters do not apply either continuous effect",
-    "Effects are suppressed when monster effects are negated",
     "Each team-turn Standby is applied at most once",
     "The next Standby of the same team may apply again",
     "Only the active team may apply its Standby recovery",
     "Existing optional Standby tasks must drain first",
-    "UIDs, physical ownership, hands, decks, monster/backrow zones and inventory are conserved"
+    "UIDs, physical ownership, hands, decks, monster/backrow zones and inventory are conserved",
+    "Full zone-count conservation across hand, deck, 3 monster zones, 3 backrow zones, graveyard, Extra Deck, banished and field zone"
   ],
   "integrationBoundary": "Call after advanceStandby returns false for the active team and before the Main Phase actions are exposed. The adapter is isolated and does not modify standbyFlow or the central resolver.",
   "rules": {
@@ -84,5 +84,6 @@
     "The adapter is not connected to the central duel resolver, command handlers, persistence or release allowlist.",
     "Tests use Hane-Hane and Man-Eater Bug as already-playable fixture aliases for the two unadmitted card IDs; fixtures do not add cards or certify them.",
     "The host must invoke the adapter once after the existing Standby task queue drains; no live Discord gateway or guild was exercised."
-  ]
+  ],
+  "negationHandling": "The adapter delegates continuous monster-effect negation to the existing monsterEffectsNegated helper; this batch has no dedicated negator-card fixture."
 }
