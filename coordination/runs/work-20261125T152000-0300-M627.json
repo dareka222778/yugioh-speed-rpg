@@ -1,0 +1,92 @@
+{
+  "format": 1,
+  "runId": "work-20261125T152000-0300-M627",
+  "mission": "M627",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved; branch independente empilhada sobre M625",
+  "reservedAt": "2026-11-25T15:20:00-03:00",
+  "startedAt": "2026-11-25T15:20:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "21eb71e0143ad4a137f6447ca7b7ea3b9ca3fcbe",
+  "branch": "feat/work-m627-painful-choice-tag-adapter-20261125",
+  "baseBranch": "feat/work-m625-confiscation-tag-adapter-20261125",
+  "baseSha": "555b0d197144a63c9c28f81348323c10173c95c2",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/painfulChoiceTagAdapter.ts",
+    "tests/painfulChoiceTagAdapter.test.cjs",
+    "docs/evidence/m627-painful-choice-tag-adapter.json",
+    ".github/workflows/m627-painful-choice-tag-adapter.yml"
+  ],
+  "scope": "Família distinta: Painful Choice seleciona cinco cartas do Deck físico do usuário, revela o conjunto somente ao assento adversário ativo, permite que esse oponente escolha uma para a mão do usuário e envia as outras quatro ao GY da equipe proprietária. Seleção em duas fases e recibo anti-replay.",
+  "cards": [
+    {
+      "name": "Painful Choice",
+      "passcode": "74191942",
+      "konamiDatabaseId": 4911,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRL-049",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Select 5 cards from your Deck and show them to your opponent. Your opponent selects 1 card among them. Add that card to your hand and discard the remaining cards to the Graveyard.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4911&ope=2&request_locale=en"
+    }
+  ],
+  "sharedMechanic": "Reutiliza src/tagPrivateHand.ts (M625) para mão/Deck por assento físico, UID, propriedade e assinatura do inventário; não modifica o helper.",
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "implementation": {
+    "files": [
+      "src/painfulChoiceTagAdapter.ts",
+      "tests/painfulChoiceTagAdapter.test.cjs",
+      "docs/evidence/m627-painful-choice-tag-adapter.json",
+      ".github/workflows/m627-painful-choice-tag-adapter.yml"
+    ],
+    "plannedScenarios": 30,
+    "selectionFlow": "owner selects 5 current Deck UIDs; only opponent active seat receives ephemeral reveal; opponent active seat chooses one; one to owner's hand, four to owner's team GY; no shuffle."
+  },
+  "verification": {
+    "focusedScenarios": 30,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Após Painful Choice, seguir para uma família distinta após revalidar estado e catálogo.",
+  "nextWindow": "2026-11-25T19:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
