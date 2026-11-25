@@ -1,0 +1,110 @@
+{
+  "format": 1,
+  "runId": "work-20261125T194311-0300-M630",
+  "mission": "M630",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved; implementação isolada em paralelo à CI M629",
+  "reservedAt": "2026-11-25T19:44:25-03:00",
+  "startedAt": "2026-11-25T19:44:25-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "23a10aa49812c2da11c0424b3af0ba428a131f60",
+  "branch": "feat/work-m630-ceasefire-tag-adapter-20261125",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "23a10aa49812c2da11c0424b3af0ba428a131f60",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/ceasefireTagAdapter.ts",
+    "tests/ceasefireTagAdapter.test.cjs",
+    "docs/evidence/m630-ceasefire-tag-adapter.json",
+    ".github/workflows/m630-ceasefire-tag-adapter.yml"
+  ],
+  "scope": "Adapter isolado para Ceasefire: verificar a condição de ativação, revelar todas as posições de Defesa com a face para baixo sem acionar efeitos Flip, contar todos os Monstros de Efeito no campo e aplicar 500 PV de dano por monstro à equipe adversária; respeitar propriedade física, LP compartilhado, zonas 3+3 e End Phase de mão. Sem resolver central, catálogo, certificações, comandos, banco, inventário ou produção.",
+  "cards": [
+    {
+      "name": "Ceasefire",
+      "passcode": "36468556",
+      "konamiDatabaseId": 4956,
+      "kind": "Normal Trap",
+      "firstTcgSet": "PSV-030",
+      "firstTcgRelease": "2002-10-20",
+      "officialEffect": "If a face-down Defense Position monster or an Effect Monster is on the field: Change all face-down Defense Position monsters on the field to face-up Defense Position (Flip monsters' effects are not activated at this time), also inflict 500 damage to your opponent for each Effect Monster on the field.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4956&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/ceasefireTagAdapter.ts",
+      "tests/ceasefireTagAdapter.test.cjs",
+      "docs/evidence/m630-ceasefire-tag-adapter.json",
+      ".github/workflows/m630-ceasefire-tag-adapter.yml"
+    ],
+    "plannedScenarios": 30,
+    "integrationBoundary": "Pure isolated adapter; no central resolver/Discord integration until explicit M61 handoff."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase only"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "coordination/state.json at M630 reservation"
+  },
+  "conflictCheck": {
+    "checkedAt": "2026-11-25T19:44:25-03:00",
+    "sharedHead": "23a10aa49812c2da11c0424b3af0ba428a131f60",
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "matchingFiles": 0,
+    "passcode": "36468556",
+    "konamiDatabaseId": 4956,
+    "metadata": false,
+    "certified": false,
+    "existingEffect": false,
+    "m629FilesDisjoint": true,
+    "m61CentralFilesExcluded": true,
+    "thirdPartyReservationsUntouched": true,
+    "result": "Nenhum branch/PR/metadata/certificação Ceasefire encontrado; quatro caminhos novos e disjuntos de M629 e M61."
+  },
+  "verification": {
+    "focusedScenarios": 30,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar flip em massa sem eventos Flip e dano de 500 por Monstro de Efeito; validar propriedade, LP, timing e replay.",
+  "nextWindow": "2026-11-25T22:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
