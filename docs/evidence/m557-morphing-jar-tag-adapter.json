@@ -1,0 +1,75 @@
+{
+  "mission": "M557",
+  "runId": "work-20261123T082652-0300-M557",
+  "owner": "Work principal",
+  "card": {
+    "name": "Morphing Jar",
+    "passcode": "33508719",
+    "konamiDatabaseId": 4597,
+    "attribute": "EARTH",
+    "level": 2,
+    "race": "Rock",
+    "atk": 700,
+    "def": 600,
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4597&ope=2&request_locale=en",
+    "officialText": "FLIP: Both players discard as many cards as possible from their hands, then each player draws 5 cards.",
+    "firstTCGPrinting": {
+      "date": "2002-10-01",
+      "set": "TP2-001",
+      "product": "Tournament Pack 2nd Season"
+    }
+  },
+  "design": {
+    "trigger": "A real Flip Summon only; normal summon and effect-flip are rejected.",
+    "resolution": "Discard both active representatives' hands to their team Graveyards first, then each active team draws up to five from its own current Deck.",
+    "deckOut": "A team with fewer than five cards draws what remains and loses; if both fail in the same simultaneous resolution, the result is a draw.",
+    "ownership": "Controller team determines effect context; physical UIDs stay attached to cards. Inactive partner reserve hands/Decks are untouched.",
+    "replay": "activationId receipt is serialized in JSON and consumed on successful or negated resolution.",
+    "ownerRules": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "discard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "testCases": [
+    "real Flip Summon only; normal summon/effect-flip rejected",
+    "both active hands discarded before drawing",
+    "exactly five cards drawn by each team in order",
+    "empty hand and inactive partner reserves",
+    "fewer than five cards causes failed draw after drawing as many as possible",
+    "one-team deck-out and simultaneous two-team deck-out",
+    "stolen source resolves for controller team",
+    "trigger resolves after source removal",
+    "negation and replay protection across JSON restoration",
+    "turn/seat/source/activationId validation",
+    "3+3 zones, separate Field Zone and Extra Deck 5",
+    "physical UID conservation and input immutability"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Isolated behavior adapter only; no resolver, cardMetadata, cardCertifications, manifest or allowlist changes. M61 handoff remains pending."
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentDatabaseTouched": false,
+    "playerDataTouched": false,
+    "productionDatabaseTouched": false,
+    "discordTokenUsed": false,
+    "liveDiscordUsed": false,
+    "centralResolverChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false
+  },
+  "limitations": [
+    "Adapter not integrated into the central monster-effect resolver; Morphing Jar remains uncertified and not released to inventory.",
+    "TagDuel fixtures run offline; no Discord gateway/guild session.",
+    "Deck-out handling is tested in a deterministic adapter fixture; full engine chain ordering awaits M61 integration."
+  ],
+  "testCount": 33
+}
