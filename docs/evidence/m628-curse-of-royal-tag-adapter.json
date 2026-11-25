@@ -3,7 +3,7 @@
   "mission": "M628",
   "runId": "work-20261125T153138-0300-M628",
   "priority": "P1",
-  "status": "adapter isolado implementado; aguardando CI",
+  "status": "adapter isolado implementado; primeira CI falhou somente na validação de metadados; correção publicada e aguardando nova CI",
   "historicalCutoff": "2004-10-01",
   "cards": [
     {
@@ -48,17 +48,18 @@
   },
   "verification": {
     "focusedTestCommand": "node --test tests/curseOfRoyalTagAdapter.test.cjs",
-    "focusedTestResult": "pending",
-    "typecheck": "pending",
-    "build": "pending",
-    "evidenceValidation": "pending",
+    "focusedTestResult": "pending-after-metadata-and-fixture-fix",
+    "typecheck": "passed",
+    "build": "passed",
+    "evidenceValidation": "pending-after-metadata-fix",
     "focusedWorkflowRun": null,
     "cardBatchFast": "pending",
     "milestone1000": "pending",
     "engineValidation": "pending",
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "focusedScenarios": 24
   },
   "catalogAtStart": {
     "engineV9Certified": 969,

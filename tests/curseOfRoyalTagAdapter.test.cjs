@@ -16,10 +16,12 @@ const {
 
 const MST='05318639';
 const POT='55144522';
-const TRAP_ID=enabledCardIds.find(id=>getDuelCard(id)?.kind==='trap');
-const SPELL_ID=enabledCardIds.find(id=>getDuelCard(id)?.kind==='spell'&&getDuelCard(id)?.field!==true&&id!==MST);
-const FIELD_ID=enabledCardIds.find(id=>getDuelCard(id)?.kind==='spell'&&getDuelCard(id)?.field===true);
-assert.ok(TRAP_ID);
+const JINZO_ID='77585513';
+const SOURCE_TRAP_ID='77414722';
+const TARGET_TRAP_ID='03819470';
+const SPELL_ID=POT;
+const FIELD_ID='86318356';
+assert.ok(SOURCE_TRAP_ID);
 assert.ok(SPELL_ID);
 assert.ok(FIELD_ID);
 assert.ok(getDuelCard(MST));
@@ -29,7 +31,7 @@ const lookup=id=>{
   return {
     kind:card.kind,
     name:card.englishName??card.name,
-    destroysExactlyOneSpellTrap:id===MST||id===TRAP_ID
+    destroysExactlyOneSpellTrap:id===MST||id===TARGET_TRAP_ID||id===FIELD_ID
   };
 };
 const normalDeck=tag.tagNormalCardIds.slice(0,20);
@@ -105,7 +107,7 @@ function setPendingField(duel,actorTeam,targetUid){
   duel.core.priority=1-actorTeam;
   duel.core.passes=0;
 }
-function setChainTrap(duel,actorTeam,targetUid,id=TRAP_ID){
+function setChainTrap(duel,actorTeam,targetUid,id=TARGET_TRAP_ID){
   duel.core.phase='response';
   duel.core.resume='main';
   duel.core.pending={kind:'none'};
@@ -130,7 +132,7 @@ function setup({
   const owner=sourceOwnerSeat??partnerSeat(activeSeat);
   const opponentTeam=(1-controllerTeam);
   const targetOwner=targetOwnerSeat??duel.active[opponentTeam];
-  const sourceUid=placeBackrow(duel,owner,controllerTeam,TRAP_ID,sourceSetTurn,sourceFaceUp);
+  const sourceUid=placeBackrow(duel,owner,controllerTeam,SOURCE_TRAP_ID,sourceSetTurn,sourceFaceUp);
   const targetUid=targetZone==='field'
     ?placeField(duel,targetOwner,opponentTeam,targetId,true)
     :placeBackrow(duel,targetOwner,opponentTeam,targetId,targetSetTurn,true);
@@ -142,13 +144,13 @@ function setup({
   return {duel,controllerTeam,activeSeat,opponentTeam,sourceOwnerSeat:owner,sourceUid,targetOwnerSeat:targetOwner,targetUid};
 }
 function actions(f,lookupFn=lookup){
-  return curseOfRoyalActions(f.duel,lookupFn,{cardId:TRAP_ID});
+  return curseOfRoyalActions(f.duel,lookupFn,{cardId:SOURCE_TRAP_ID});
 }
 function activate(f,id='m628-activation',lookupFn=lookup){
-  return activateCurseOfRoyal(createCurseOfRoyalSession(f.duel),f.sourceUid,id,lookupFn,{cardId:TRAP_ID});
+  return activateCurseOfRoyal(createCurseOfRoyalSession(f.duel),f.sourceUid,id,lookupFn,{cardId:SOURCE_TRAP_ID});
 }
 function resolve(session,id='m628-activation',options={}){
-  return resolveCurseOfRoyal(session,id,{...options,cardId:TRAP_ID});
+  return resolveCurseOfRoyal(session,id,{...options,cardId:SOURCE_TRAP_ID});
 }
 function inventory(duel){
   return tag.tagInventory(duel).filter(card=>card.entityKind!=='token')
@@ -200,36 +202,39 @@ test('opens only for an opponent Spell activation whose typed effect destroys ex
 test('ignores monster effects, same-team activations and already-negated activations',()=>{
   const f=setup();
   const monster=structuredClone(f.duel);
-  const monsterUid=placeMonster(monster,monster.active[1],1,normalDeck[0]);
-  monster.core.pending={kind:'monsterEffect',actor:1,card:monsterUid,id:normalDeck[0]};
-  assert.deepEqual(curseOfRoyalActions(monster,lookup,{cardId:TRAP_ID}),[]);
+  const monsterUid=placeMonster(monster,monster.active[1],1,JINZO_ID);
+  monster.core.pending={kind:'monsterEffect',actor:1,card:monsterUid,id:JINZO_ID};
+  assert.deepEqual(curseOfRoyalActions(monster,lookup,{cardId:SOURCE_TRAP_ID}),[]);
   const same=structuredClone(f.duel);
+  const sameIndex=same.core.players[1].backrow.findIndex(card=>card.uid===f.targetUid);
+  const [sameTarget]=same.core.players[1].backrow.splice(sameIndex,1);
+  same.core.players[0].backrow.push(sameTarget);
   same.core.pending.actor=0;
-  same.core.priority=1;
-  assert.deepEqual(curseOfRoyalActions(same,lookup,{cardId:TRAP_ID}),[]);
+  same.core.priority=0;
+  assert.deepEqual(curseOfRoyalActions(same,lookup,{cardId:SOURCE_TRAP_ID}),[]);
   const negated=structuredClone(f.duel);
   negated.core.pendingNegated=true;
-  assert.deepEqual(curseOfRoyalActions(negated,lookup,{cardId:TRAP_ID}),[]);
+  assert.deepEqual(curseOfRoyalActions(negated,lookup,{cardId:SOURCE_TRAP_ID}),[]);
 });
 test('requires the active response priority and a Trap Set before the current turn',()=>{
   const f=setup();
   const wrongPriority=structuredClone(f.duel);
   wrongPriority.core.priority=1;
-  assert.deepEqual(curseOfRoyalActions(wrongPriority,lookup,{cardId:TRAP_ID}),[]);
+  assert.deepEqual(curseOfRoyalActions(wrongPriority,lookup,{cardId:SOURCE_TRAP_ID}),[]);
   const sameTurn=setup({sourceSetTurn:3});
   assert.deepEqual(actions(sameTurn),[]);
   const faceUp=setup({sourceFaceUp:true});
   assert.deepEqual(actions(faceUp),[]);
   const wrongPhase=structuredClone(f.duel);
   wrongPhase.core.phase='main';
-  assert.deepEqual(curseOfRoyalActions(wrongPhase,lookup,{cardId:TRAP_ID}),[]);
+  assert.deepEqual(curseOfRoyalActions(wrongPhase,lookup,{cardId:SOURCE_TRAP_ID}),[]);
 });
 test('activates from the shared team backrow even when the Set card belongs to the inactive partner',()=>{
   const f=setup();
   const session=activate(f);
   assert.equal(session.pending['m628-activation'].controllerSeat,f.activeSeat);
   assert.equal(session.pending['m628-activation'].sourceOwnerSeat,f.sourceOwnerSeat);
-  assert.equal(session.duel.core.chain.at(-1).id,TRAP_ID);
+  assert.equal(session.duel.core.chain.at(-1).id,SOURCE_TRAP_ID);
   assert.equal(session.duel.core.players[0].backrow.find(card=>card.uid===f.sourceUid).faceUp,true);
   assert.deepEqual(inventory(session.duel),inventory(f.duel));
 });
@@ -264,7 +269,7 @@ test('a stolen Curse of Royal returns to its physical owner team after resolutio
   assert.ok(!graveHas(resolved.session.duel,0,f.sourceUid));
 });
 test('negates a Trap activation represented by the top chain link',()=>{
-  const f=setup({targetId:TRAP_ID,targetKind:'chain'});
+  const f=setup({targetId:TARGET_TRAP_ID,targetKind:'chain'});
   const session=activate(f);
   const resolved=resolve(session);
   assert.equal(resolved.result.targetActivationNegated,true);
@@ -286,10 +291,10 @@ test('a target that leaves its zone before resolution is not replaced or destroy
   const session=activate(f);
   const stale=structuredClone(session);
   moveTargetToHand(stale.duel,f.targetUid,f.targetOwnerSeat);
-  const result=resolve(stale).result;
-  assert.equal(result.targetActivationNegated,false);
-  assert.equal(result.targetDestroyed,false);
-  assert.ok(!graveHas(resolve(stale).session.duel,1,f.targetUid));
+  const resolved=resolve(stale);
+  assert.equal(resolved.result.targetActivationNegated,false);
+  assert.equal(resolved.result.targetDestroyed,false);
+  assert.ok(!graveHas(resolved.session.duel,1,f.targetUid));
 });
 test('does not destroy a target that leaves and returns with a new zone lifetime',()=>{
   const f=setup();
@@ -304,6 +309,19 @@ test('does not destroy a target that leaves and returns with a new zone lifetime
   const resolved=resolve(stale);
   assert.equal(resolved.result.targetDestroyed,false);
 });
+test('does not retarget a replacement copy with the same card ID',()=>{
+  const f=setup();
+  const session=activate(f);
+  const stale=structuredClone(session);
+  moveTargetToHand(stale.duel,f.targetUid,f.targetOwnerSeat);
+  const replacementUid=placeBackrow(stale.duel,stale.duel.active[1],1,MST,0,true);
+  synchronizeCardLifetimes(stale.duel.core);
+  const resolved=resolve(stale);
+  assert.equal(resolved.result.targetActivationNegated,false);
+  assert.equal(resolved.result.targetDestroyed,false);
+  assert.ok(!graveHas(resolved.session.duel,1,replacementUid));
+  assert.ok(!graveHas(resolved.session.duel,1,f.targetUid));
+});
 test('a negated Curse of Royal does not negate the original activation but still leaves the field',()=>{
   const f=setup();
   const session=activate(f);
@@ -314,20 +332,18 @@ test('a negated Curse of Royal does not negate the original activation but still
   assert.ok(graveHas(resolved.session.duel,0,f.sourceUid));
   assert.ok(!resolved.session.duel.core.pendingNegated);
 });
-test('Royal Decree-style Trap effect negation suppresses the result at resolution',()=>{
+test('requires the Counter Trap link to remain at the top of the chain for resolution',()=>{
   const f=setup();
   const session=activate(f);
-  const state=structuredClone(session);
-  state.duel.core.players[1].backrow.push({
-    uid:'m1:royal-decree-fixture',id:'51452091',faceUp:true,setTurn:0
-  });
-  const resolved=resolve(state);
-  assert.equal(resolved.result.sourceEffectNegated,true);
-  assert.equal(resolved.result.targetActivationNegated,false);
+  const stacked=structuredClone(session);
+  stacked.duel.core.chain.push({actor:1,card:f.targetUid,id:MST,target:''});
+  const snapshot=JSON.stringify(stacked);
+  assert.throws(()=>resolve(stacked),/topo da corrente/);
+  assert.equal(JSON.stringify(stacked),snapshot);
 });
 test('Jinzo blocks the activation before the Counter Trap is offered',()=>{
   const f=setup();
-  const jinzo=placeMonster(f.duel,f.duel.active[1],1,'77585513');
+  const jinzo=placeMonster(f.duel,f.duel.active[1],1,JINZO_ID);
   assert.ok(jinzo);
   assert.deepEqual(actions(f),[]);
 });
@@ -335,7 +351,7 @@ test('the hand may exceed six during the turn; no premature discard is performed
   const f=setup();
   const hand=privateZone(f.duel,f.activeSeat,'hand');
   const deck=privateZone(f.duel,f.activeSeat,'deck');
-  hand.push(deck.pop(),deck.pop());
+  hand.push(deck.pop(),deck.pop(),deck.pop());
   const before=hand.length;
   const session=activate(f);
   assert.equal(privateZone(session.duel,f.activeSeat,'hand').length,before);
@@ -347,12 +363,12 @@ test('the Field Zone is separate from three shared Spell/Trap Zones',()=>{
   const hand=privateZone(duel,seat,'hand');
   const deck=privateZone(duel,seat,'deck');
   hand.push(deck.pop());
-  placeField(duel,seat,0,FIELD_ID,false);
-  for(let i=0;i<3;i++)placeBackrow(duel,seat,0,i%2?SPELL_ID:TRAP_ID,0,false);
+  placeField(duel,seat,0,FIELD_ID,true);
+  for(let i=0;i<3;i++)placeBackrow(duel,seat,0,i%2?SPELL_ID:TARGET_TRAP_ID,0,false);
   assert.doesNotThrow(()=>assertCurseOfRoyalRules(duel));
   assert.throws(()=>assertCurseOfRoyalRules({...duel,core:{
     ...duel.core,players:duel.core.players.map((player,index)=>index===0
-      ?{...player,backrow:[...player.backrow,{uid:'m0:overflow',id:TRAP_ID,faceUp:false,setTurn:0}]}
+      ?{...player,backrow:[...player.backrow,{uid:'m0:overflow',id:TARGET_TRAP_ID,faceUp:false,setTurn:0}]}
       :player)
   }}),/limite de zonas/);
 });
@@ -369,15 +385,15 @@ test('rejects an invalid activation without mutating the saved session',()=>{
   const f=setup();
   const session=createCurseOfRoyalSession(f.duel);
   const snapshot=JSON.stringify(session);
-  assert.throws(()=>activateCurseOfRoyal(session,'missing','invalid',lookup,{cardId:TRAP_ID}),/não está legal/);
+  assert.throws(()=>activateCurseOfRoyal(session,'missing','invalid',lookup,{cardId:SOURCE_TRAP_ID}),/não está legal/);
   assert.equal(JSON.stringify(session),snapshot);
 });
 test('rejects duplicate activation IDs and duplicate resolution',()=>{
   const f=setup();
   const session=activate(f);
-  assert.throws(()=>activateCurseOfRoyal(session,f.sourceUid,'m628-activation',lookup,{cardId:TRAP_ID}),/duplicado/);
+  assert.throws(()=>activateCurseOfRoyal(session,f.sourceUid,'m628-activation',lookup,{cardId:SOURCE_TRAP_ID}),/duplicado/);
   const resolved=resolve(session);
-  assert.throws(()=>resolveCurseOfRoyal(resolved.session,'m628-activation',{cardId:TRAP_ID}),/ausente ou já resolvida/);
+  assert.throws(()=>resolveCurseOfRoyal(resolved.session,'m628-activation',{cardId:SOURCE_TRAP_ID}),/ausente ou já resolvida/);
 });
 test('all four opening-seat rotations preserve team routing and physical ownership',()=>{
   for(const first of [0,1,2,3]){
@@ -390,9 +406,9 @@ test('all four opening-seat rotations preserve team routing and physical ownersh
 test('a missing or ambiguous destruction descriptor fails closed',()=>{
   const f=setup();
   const unknown=id=>id===MST?{kind:'spell',destroysExactlyOneSpellTrap:false}:lookup(id);
-  assert.deepEqual(curseOfRoyalActions(f.duel,unknown,{cardId:TRAP_ID}),[]);
+  assert.deepEqual(curseOfRoyalActions(f.duel,unknown,{cardId:SOURCE_TRAP_ID}),[]);
   const missing=id=>id===MST?undefined:lookup(id);
-  assert.deepEqual(curseOfRoyalActions(f.duel,missing,{cardId:TRAP_ID}),[]);
+  assert.deepEqual(curseOfRoyalActions(f.duel,missing,{cardId:SOURCE_TRAP_ID}),[]);
 });
 test('the adapter conserves every physical UID and grants no inventory',()=>{
   const f=setup();
