@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "mission": "M633",
+  "runId": "work-20261125T201628-0300-M633",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Dark Scorpion Burglars",
+      "passcode": "40933924",
+      "konamiDatabaseId": 5425,
+      "firstTcgRelease": "2003-07-18",
+      "type": "DARK / Warrior / Effect / Level 4",
+      "atk": 1000,
+      "def": 1000,
+      "effect": "When this card inflicts Battle Damage to your opponent: Your opponent sends 1 Spell Card from their Deck to the Graveyard.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5425&ope=2&request_locale=en"
+    },
+    {
+      "name": "Dark Scorpion - Cliff the Trap Remover",
+      "passcode": "06967870",
+      "konamiDatabaseId": 5662,
+      "firstTcgRelease": "2003-10-10",
+      "type": "DARK / Warrior / Effect / Level 3",
+      "atk": 1200,
+      "def": 1000,
+      "effect": "When this card inflicts Battle Damage to your opponent, you can activate 1 of these effects: target 1 Spell/Trap on the field and destroy it; or send the top 2 cards of their Deck to the GY.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5662&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m633-dark-scorpion-battle-damage-20261125",
+    "paths": [
+      "src/darkScorpionBattleDamageTagAdapter.ts",
+      "tests/darkScorpionBattleDamageTagAdapter.test.cjs",
+      "docs/evidence/m633-dark-scorpion-battle-damage.json",
+      ".github/workflows/m633-dark-scorpion-battle-damage.yml"
+    ],
+    "behavior": [
+      "Aceita somente dano de batalha positivo, aplicado, com delta de LP correspondente e atacante face-up correto.",
+      "Burglars permite que o representante físico adversário escolha uma Magia do Deck ativo; envia ao Cemitério e embaralha.",
+      "Cliff escolhe destruir uma Magia/Armadilha vinculada por UID/epoch ou enviar as duas cartas do topo do Deck ativo adversário ao Cemitério.",
+      "Não há retarget; eventos e resoluções são idempotentes.",
+      "O adapter não altera LP, concede inventário nem executa descarte de mão."
+    ],
+    "integrationBoundary": "Adapter isolado; sem resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, banco ou produção."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase only"
+  },
+  "verification": {
+    "plannedScenarios": 25,
+    "focusedTests": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Fixtures usam IDs de monstros de efeito já habilitados; os passcodes oficiais permanecem fixos no adapter.",
+    "A escolha do Spell de Burglars é recebida como seleção privada do oponente; a UI de prompt não foi integrada.",
+    "Nenhuma carta foi adicionada ao catálogo/allowlist ou certificada.",
+    "Sem gateway Discord ao vivo, merge ou deploy."
+  ]
+}
