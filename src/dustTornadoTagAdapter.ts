@@ -168,9 +168,9 @@ function activeTrapSource(
   const core = duel.core;
   const actor = tagDecisionMember(duel);
   const team = actor.team;
-  const seat = duel.active[team];
-  if (!isTeam(team) || !Number.isInteger(seat) || seat < 0 || seat > 3 ||
-      duel.members[seat]?.team !== team || physicalSeat(sourceUid) === null ||
+  const seatValue = duel.active[team];
+  if (!isTeam(team) || !Number.isInteger(seatValue) || seatValue < 0 || seatValue > 3 ||
+      duel.members[seatValue]?.team !== team || physicalSeat(sourceUid) === null ||
       core.phase === 'choice' || core.phase === 'discard' || core.phase === 'finished' ||
       core.damageStep === true || core.turnEnding || core.handFlow || core.choice ||
       core.pending.kind === 'end' ||
@@ -178,6 +178,7 @@ function activeTrapSource(
         (core.pending.stage === 'damage' || core.pending.stage === 'calculation')) {
     return null;
   }
+  const seat = seatValue as Seat;
   if (continuousTrapActivationsBlocked(core) ||
       !cardActivationAllowed(core, team, 'trap')) {
     return null;
