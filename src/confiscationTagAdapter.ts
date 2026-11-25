@@ -2,6 +2,7 @@ import type { CardRef } from './duelEngine';
 import { getDuelCard } from './effectRegistry';
 import { rulesFor } from './rulesProfile';
 import { assertTagDuel, tagInventory, type TagDuel } from './tagDuel';
+import { assertTagInventoryUnchanged, tagInventorySignature, tagPhysicalSeat, tagPrivateHandForSeat, tagPrivateHandOwnedBySeat } from './tagPrivateHand';
 
 export const CONFISCATION_ID = '17375316';
 const COST_LP = 1000;
@@ -37,25 +38,6 @@ function isTeam(value: unknown): value is Team { return value === 0 || value ===
 function isSeat(value: unknown): value is Seat {
   return Number.isInteger(value) && Number(value) >= 0 && Number(value) <= 3;
 }
-function physicalSeat(uid: string): Seat | null {
-  const match = /^m([0-3]):/.exec(uid);
-  return match ? Number(match[1]) as Seat : null;
-}
-function privateHandForSeat(duel: TagDuel, seat: Seat): CardRef[] {
-  const team = (seat % 2) as Team;
-  if (duel.active[team] === seat) return duel.core.players[team].hand;
-  const reserve = duel.reserves[String(seat)];
-  if (!reserve) throw new Error('Mão privada do assento físico não encontrada.');
-  return reserve.hand;
-}
-function inventorySignature(duel: TagDuel): string {
-  return tagInventory(duel).map(card => card.uid + '|' + card.id).sort().join('\n');
-}
-function assertSameInventory(before: string, after: TagDuel): void {
-  if (before !== inventorySignature(after)) {
-    throw new Error('O adapter alterou a identidade ou o inventário físico das cartas.');
-  }
-}
 function isSpellCardId(cardId: string): boolean {
   if (cardId === CONFISCATION_ID) return true;
   const metadata = getDuelCard(cardId);
@@ -76,7 +58,7 @@ export function assertConfiscationRules(duel: TagDuel): void {
   const extra = [0, 0, 0, 0];
   for (const ref of tagInventory(duel)) {
     if (ref.entityKind === 'token') continue;
-    const seat = physicalSeat(ref.uid);
+    const seat = tagPhysicalSeat(ref.uid);
     if (seat === null) throw new Error('UID sem proprietário físico m0–m3.');
     const metadata = getDuelCard(ref.id);
     if (!metadata) throw new Error('Carta sem metadados habilitados no estado de teste.');
@@ -118,10 +100,10 @@ function activeMainHandSource(
   const opponentTeam = (1 - team) as Team;
   const opponentSeat = duel.active[opponentTeam];
   if (!isSeat(opponentSeat) || duel.members[opponentSeat]?.team !== opponentTeam) return null;
-  const source = privateHandForSeat(duel, seat).find(card =>
+  const source = tagPrivateHandForSeat(duel, seat).find(card =>
     card.uid === sourceUid && card.id === cardId && card.entityKind !== 'token');
-  if (!source || physicalSeat(source.uid) !== seat || !isSpellCardId(cardId)) return null;
-  if (privateHandForSeat(duel, opponentSeat).length === 0) return null;
+  if (!source || tagPhysicalSeat(source.uid) !== seat || !isSpellCardId(cardId)) return null;
+  if (tagPrivateHandForSeat(duel, opponentSeat).length === 0) return null;
   // Costs are paid from the shared team LP pool; the core also forbids a cost
   // that would reduce the team to zero LP.
   if (core.players[team].lp <= COST_LP) return null;
@@ -132,7 +114,7 @@ function validPlan(duel: TagDuel, plan: ConfiscationPlan, cardId: string): boole
   if (!plan || typeof plan.eventId !== 'string' || !plan.eventId.trim() ||
       plan.sourceId !== cardId || !Number.isSafeInteger(plan.turn) ||
       plan.turn !== duel.core.turn || !isTeam(plan.ownerTeam) || !isSeat(plan.ownerSeat) ||
-      plan.ownerTeam !== plan.ownerSeat % 2 || physicalSeat(plan.sourceUid) !== plan.ownerSeat ||
+      plan.ownerTeam !== plan.ownerSeat % 2 || tagPhysicalSeat(plan.sourceUid) !== plan.ownerSeat ||
       !isTeam(plan.opponentTeam) || plan.opponentTeam !== 1 - plan.ownerTeam ||
       !isSeat(plan.opponentSeat) || plan.opponentSeat % 2 !== plan.opponentTeam ||
       duel.active[plan.ownerTeam] !== plan.ownerSeat ||
@@ -142,7 +124,7 @@ function validPlan(duel: TagDuel, plan: ConfiscationPlan, cardId: string): boole
 function sourceInGrave(duel: TagDuel, plan: ConfiscationPlan, cardId: string): boolean {
   return duel.core.players[plan.ownerTeam].grave.some(card =>
     card.uid === plan.sourceUid && card.id === cardId && card.entityKind !== 'token' &&
-    physicalSeat(card.uid) === plan.ownerSeat);
+    tagPhysicalSeat(card.uid) === plan.ownerSeat);
 }
 
 /** Pays 1000 shared LP and sends the Normal Spell to the team's GY at activation. */
@@ -156,9 +138,9 @@ export function activateConfiscation(
   const active = activeMainHandSource(input, sourceUid, cardId);
   if (!active) return null;
 
-  const before = inventorySignature(input);
+  const before = tagInventorySignature(input);
   const next = structuredClone(input);
-  const hand = privateHandForSeat(next, active.seat);
+  const hand = tagPrivateHandForSeat(next, active.seat);
   const index = hand.findIndex(card => card.uid === sourceUid && card.id === cardId);
   if (index < 0) return null;
   const [spell] = hand.splice(index, 1);
@@ -176,7 +158,7 @@ export function activateConfiscation(
     turn: next.core.turn,
   };
   assertConfiscationRules(next);
-  assertSameInventory(before, next);
+  assertTagInventoryUnchanged(before, next);
   assertTagDuel(next);
   return { state: next, plan };
 }
@@ -193,8 +175,8 @@ export function inspectConfiscationHand(
   if (!validPlan(input, plan, cardId) || !sourceInGrave(input, plan, cardId)) return null;
   const receipts = (input as ReceiptState).confiscationResolvedEvents ?? [];
   if (!Array.isArray(receipts) || receipts.includes(plan.eventId)) return null;
-  const hand = privateHandForSeat(input, plan.opponentSeat);
-  if (hand.some(card => card.entityKind === 'token' || physicalSeat(card.uid) !== plan.opponentSeat)) return null;
+  if (!tagPrivateHandOwnedBySeat(input, plan.opponentSeat)) return null;
+  const hand = tagPrivateHandForSeat(input, plan.opponentSeat);
   return {
     privateToSeat: plan.ownerSeat,
     opponentSeat: plan.opponentSeat,
@@ -216,7 +198,7 @@ export function resolveConfiscation(
   const receipts = (input as ReceiptState).confiscationResolvedEvents ?? [];
   if (!Array.isArray(receipts) || receipts.includes(plan.eventId)) return null;
 
-  const hand = privateHandForSeat(input, plan.opponentSeat);
+  const hand = tagPrivateHandForSeat(input, plan.opponentSeat);
   const negated = options.negated === true;
   if (negated) {
     if (selectedUid !== null) return null;
@@ -226,15 +208,15 @@ export function resolveConfiscation(
     if (typeof selectedUid !== 'string' || !selectedUid) return null;
     const selected = hand.find(card => card.uid === selectedUid);
     if (!selected || selected.entityKind === 'token' ||
-        physicalSeat(selected.uid) !== plan.opponentSeat) return null;
+        tagPhysicalSeat(selected.uid) !== plan.opponentSeat) return null;
   }
 
-  const before = inventorySignature(input);
+  const before = tagInventorySignature(input);
   const next = structuredClone(input);
   let discardedUid: string | null = null;
   let discardedId: string | null = null;
   if (!negated && selectedUid !== null) {
-    const nextHand = privateHandForSeat(next, plan.opponentSeat);
+    const nextHand = tagPrivateHandForSeat(next, plan.opponentSeat);
     const index = nextHand.findIndex(card => card.uid === selectedUid);
     if (index < 0) return null;
     const [discarded] = nextHand.splice(index, 1);
@@ -245,7 +227,7 @@ export function resolveConfiscation(
   const nextReceipts = (next as ReceiptState).confiscationResolvedEvents ?? [];
   (next as ReceiptState).confiscationResolvedEvents = [...nextReceipts, plan.eventId].slice(-256);
   assertConfiscationRules(next);
-  assertSameInventory(before, next);
+  assertTagInventoryUnchanged(before, next);
   assertTagDuel(next);
   return {
     state: next,

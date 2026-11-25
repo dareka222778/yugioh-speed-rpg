@@ -4,6 +4,7 @@ on:
     branches:
       - feat/work-m625-confiscation-tag-adapter-20261125
     paths:
+      - src/tagPrivateHand.ts
       - src/confiscationTagAdapter.ts
       - tests/confiscationTagAdapter.test.cjs
       - docs/evidence/m625-confiscation-tag-adapter.json

@@ -3,7 +3,7 @@
   "runId": "work-20261125T150133-0300-M625",
   "mission": "M625",
   "priority": "P1",
-  "status": "adapter e suíte comportamental preparados; CI pendente",
+  "status": "Confiscation com 29 cenários; helper compartilhado preparado para a próxima carta de inspeção privada; CI do refactor pendente.",
   "cards": [
     {
       "name": "Confiscation",
@@ -20,6 +20,7 @@
     "branch": "feat/work-m625-confiscation-tag-adapter-20261125",
     "baseSha": "07775dd07cea3e03e66b4d6d03dd4c4bfaee0678",
     "files": [
+      "src/tagPrivateHand.ts",
       "src/confiscationTagAdapter.ts",
       "tests/confiscationTagAdapter.test.cjs",
       "docs/evidence/m625-confiscation-tag-adapter.json",
@@ -35,7 +36,8 @@
       "Se a mão ficar vazia antes da resolução, resolve sem descartar; não corta mão acima de seis antes da End Phase.",
       "Preserva Deck principal 20–30 por assento, Extra Deck 0–5, zonas 3+3 e Field Zone separada."
     ],
-    "integrationBoundary": "Adapter puro. Não altera resolver v9, catálogo, certificações, allowlist, comandos Discord, persistência, inventário inicial ou produção. Integração depende de handoff explícito M61."
+    "integrationBoundary": "Adapter puro. Não altera resolver v9, catálogo, certificações, allowlist, comandos Discord, persistência, inventário inicial ou produção. Integração depende de handoff explícito M61.",
+    "sharedMechanic": "tagPrivateHand.ts concentra leitura de mãos/Decks por assento físico, identificação por UID, assinatura do inventário e validação de propriedade. M625 e o próximo adapter de inspeção privada reutilizarão o mesmo contrato."
   },
   "rules": {
     "mainDeckPerPhysicalSeat": "20–30",
