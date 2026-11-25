@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "reserved; implementação isolada em andamento",
+  "status": "PR #563 aberto como draft; seis commits isolados; CI focada ainda não apareceu na consulta de runs PR; M621 preparado em escopo independente.",
   "reservedAt": "2026-11-25T11:00:00-03:00",
   "startedAt": "2026-11-25T11:00:00-03:00",
   "endedAt": null,
@@ -14,8 +14,8 @@
   "sharedHeadAtReservation": "190b1d8adf3aa9d641cd5bacc538c35cd893e254",
   "branch": "feat/work-m620-dark-core-tag-adapter-20261125",
   "baseSha": "190b1d8adf3aa9d641cd5bacc538c35cd893e254",
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "351e071f4c89e37274a413f881f613536d7425de",
+  "pullRequest": 563,
   "reservedFiles": [
     "src/darkCoreTagAdapter.ts",
     "tests/darkCoreTagAdapter.test.cjs",
@@ -126,6 +126,18 @@
       "pr": 562,
       "state": "active-independent-reservation",
       "touched": false
+    },
+    "m620": {
+      "pr": 563,
+      "state": "open-draft-awaiting-ci-visibility",
+      "files": 4,
+      "touched": true
+    },
+    "m621": {
+      "pr": null,
+      "state": "reserved-independent",
+      "files": 4,
+      "touched": false
     }
   },
   "m61Handoff": {
@@ -133,7 +145,8 @@
     "status": "awaiting-explicit-release",
     "centralFilesExcluded": true
   },
-  "nextTask": "Implementar/testar M620; durante a CI escolher somente a próxima família sem branch/PR/arquivo reservado.",
+  "nextTask": "M621 Nobleman of Crossout: adapter de alvo face-down, banimento e revelação/busca por nome nos quatro Decks físicos; preservar M614–M620 e M61.",
   "nextWindow": "2026-11-25T14:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "lastActivityAt": "2026-11-25T11:12:26-03:00"
 }
