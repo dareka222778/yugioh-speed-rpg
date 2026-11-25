@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "runId": "work-20261125T051054-0300-M611",
+  "mission": "M611",
+  "cards": [
+    {
+      "name": "Hoshiningen",
+      "passcode": "67629977",
+      "konamiDatabaseId": 4498,
+      "attribute": "LIGHT",
+      "race": "Fairy",
+      "level": 2,
+      "atk": 500,
+      "def": 700,
+      "officialEffect": "All LIGHT monsters on the field gain 500 ATK, also all DARK monsters on the field lose 400 ATK.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4498&ope=2&request_locale=en",
+      "historicalReference": "https://ftp.yugipedia.com/wiki/Hoshiningen"
+    },
+    {
+      "name": "Thunder Nyan Nyan",
+      "passcode": "14878871",
+      "konamiDatabaseId": 5028,
+      "attribute": "LIGHT",
+      "race": "Thunder",
+      "level": 4,
+      "atk": 1900,
+      "def": 800,
+      "officialEffect": "If there is a non-LIGHT monster on your side of the field, destroy this face-up card.",
+      "firstTcgPrinting": "LOD-059",
+      "firstTcgRelease": "2003-06-06",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5028&ope=2&request_locale=en",
+      "historicalReference": "https://ygoprodeck.com/card/thunder-nyan-nyan-5946"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m611-attribute-field-effects-20261125",
+    "paths": [
+      "src/attributeFieldEffectsTagAdapter.ts",
+      "tests/attributeFieldEffectsTagAdapter.test.cjs",
+      "docs/evidence/m611-attribute-field-effects-tag-adapter.json",
+      ".github/workflows/m611-attribute-field-effects-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Hoshiningen aplica +500 ATK a cada monstro LIGHT face-up e -400 ATK a cada monstro DARK face-up, em ambas as equipes; fontes válidas acumulam.",
+      "Uma fonte face-down, removida ou com efeito negado não contribui; alvo face-down não revela atributo nem recebe modificador.",
+      "Thunder Nyan Nyan destrói a si mesmo quando outro monstro face-up não-LIGHT está no campo compartilhado de sua equipe, incluindo o parceiro.",
+      "Monstros da equipe adversária e monstros face-down não satisfazem a condição de autodestruição.",
+      "Se Thunder Nyan Nyan estiver sob controle roubado, a destruição envia a instância ao Cemitério da equipe de seu proprietário físico.",
+      "UIDs são conservados; replay após destruição não duplica a carta."
+    ],
+    "integrationBoundary": "Adapter isolado: o resolver central ainda precisa somar o modificador de Hoshiningen à fórmula de ATK e chamar a verificação de Thunder Nyan Nyan nos pontos de sincronização de estado. Não altera catálogo, allowlist, certificações, comandos Discord, persistência ou dados dos jogadores."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada",
+    "handLimit": 6,
+    "handDiscard": "diferido à End Phase; o adapter não altera mãos"
+  },
+  "verification": {
+    "focusedScenarios": 17,
+    "focusedTestCommand": "node --test tests/attributeFieldEffectsTagAdapter.test.cjs",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "actualFocusedRun": null
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Os testes são offline e usam IDs de cartas já admitidas como fixtures; os passcodes oficiais reais permanecem nos metadados de evidência.",
+    "Hoshiningen ainda não está conectado à função atk() do resolver central.",
+    "A autodestruição de Thunder Nyan Nyan ainda depende de chamada do resolver central após mudanças no campo.",
+    "Não houve sessão real no gateway Discord, banco de produção ou credenciais do host."
+  ]
+}
