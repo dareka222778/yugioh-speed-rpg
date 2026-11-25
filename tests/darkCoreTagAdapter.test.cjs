@@ -392,7 +392,7 @@ test('inventário físico e UIDs permanecem conservados após o banimento', () =
   assert.equal(new Set(inventory(result.state).map(value => value.split('|')[0])).size, inventory(result.state).length);
 });
 
-test('alvo sem efeito de Magia aplicável não pode ser escolhido', () => {
+test('alvo face-up com efeito de Magia aplicável pode ser escolhido', () => {
   const duel = makeDuel(0);
   const sourceUid = putCardInHand(duel, 0, 0, SPELL_ID);
   const costUid = putCardInHand(duel, 0, 1, TRAP_ID);
