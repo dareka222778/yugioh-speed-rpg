@@ -4,7 +4,7 @@
   "priorityRequestedBy": "User",
   "state": "active",
   "startedAt": "2026-11-25T09:30:00-03:00",
-  "lastActivityAt": "2026-11-25T09:30:00-03:00",
+  "lastActivityAt": "2026-11-25T09:45:00-03:00",
   "nextScheduledAt": "2026-11-25T14:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -4659,7 +4659,7 @@
     "ciWaitExcluded": true,
     "note": "4 minutos desde a reserva M587; tempo efetivo não cronometrado."
   },
-  "nextTask": "Implementar adapter de Raça e testes focados para as seis Field Spells; executar CI; durante a CI preparar a próxima família em arquivos independentes, sem tocar M610/M612/M61.",
+  "nextTask": "M614 DNA Surgery/DNA Transplant type-and-attribute conversion adapter; independent files; wait for M613 engine validation before finalizing this cycle.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1",
   "sharedHeadBeforeClaim": "6f921b8068b6cbd24ec2fc5924154e34670af094",
@@ -4915,7 +4915,7 @@
     "state": "active",
     "priority": "P1",
     "startedAt": "2026-11-25T09:30:00-03:00",
-    "lastActivityAt": "2026-11-25T09:30:00-03:00",
+    "lastActivityAt": "2026-11-25T09:45:00-03:00",
     "branch": "feat/work-m613-terrain-field-spells-tag-adapter-20261125",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "6f921b8068b6cbd24ec2fc5924154e34670af094",
@@ -4936,7 +4936,9 @@
       "docs/evidence/m613-terrain-field-spells-tag-adapter.json",
       ".github/workflows/m613-terrain-field-spells-tag-adapter.yml"
     ],
-    "nextWindow": "2026-11-25T14:30:00-03:00"
+    "nextWindow": "2026-11-25T14:30:00-03:00",
+    "nextTask": "M614 DNA Surgery/DNA Transplant type-and-attribute conversion adapter; independent files; wait for M613 engine validation before finalizing this cycle.",
+    "preparedNextRun": "work-20261125T094500-0300-M614"
   },
   "nextWorkAt": "2026-11-24T18:30:00-03:00",
   "parallelRuns": [
@@ -7647,9 +7649,9 @@
     "requestedAt": "2026-11-14T09:18:10-03:00",
     "scope": "partial file-only handoff; no changes until release"
   },
-  "lastCheckpointAt": "2026-11-25T09:30:00-03:00",
+  "lastCheckpointAt": "2026-11-25T09:45:00-03:00",
   "reservationReleased": false,
-  "expectedHeadForCoordinationCommit": "6f921b8068b6cbd24ec2fc5924154e34670af094",
+  "expectedHeadForCoordinationCommit": "535eb23b708e815bf9392e41fc58998a1645e6de",
   "lastRunSummary": {
     "runId": "work-20261124T084800-0300-M587",
     "mission": "M587",
@@ -20814,5 +20816,48 @@
       "result": "quatro caminhos novos; nenhuma sobreposição detectada"
     }
   },
-  "nextWorkWindowM613": "2026-11-25T14:30:00-03:00"
+  "nextWorkWindowM613": "2026-11-25T14:30:00-03:00",
+  "preparedNextRun": {
+    "runId": "work-20261125T094500-0300-M614",
+    "mission": "M614",
+    "status": "prepared-during-M613-CI",
+    "branch": "feat/work-m614-dna-conversion-tag-adapter-20261125",
+    "reservedFiles": [
+      "src/dnaConversionTagAdapter.ts",
+      "tests/dnaConversionTagAdapter.test.cjs",
+      "docs/evidence/m614-dna-conversion-tag-adapter.json",
+      ".github/workflows/m614-dna-conversion-tag-adapter.yml"
+    ],
+    "reservedAt": "2026-11-25T09:45:00-03:00",
+    "baseHeadAtReservation": "535eb23b708e815bf9392e41fc58998a1645e6de",
+    "scope": "Adapter isolado para DNA Surgery (override de Tipo/Raça) e DNA Transplant (override de Atributo), com declaração por UID, ordem de ativação explícita, face-up/resolvida/não negada, prioridade determinística, fontes simultâneas de tipo e atributo e privacidade de monstros face-down.",
+    "nextTask": "Implementar DNA conversion adapter e testes independentes após reservar branch; verificar sobreposição zero com M610–M613."
+  },
+  "currentWorkReservationM614": {
+    "runId": "work-20261125T094500-0300-M614",
+    "mission": "M614",
+    "owner": "Work principal",
+    "priority": "P1",
+    "state": "prepared-during-M613-CI",
+    "reservedAt": "2026-11-25T09:45:00-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "535eb23b708e815bf9392e41fc58998a1645e6de",
+    "branch": "feat/work-m614-dna-conversion-tag-adapter-20261125",
+    "reservedFiles": [
+      "src/dnaConversionTagAdapter.ts",
+      "tests/dnaConversionTagAdapter.test.cjs",
+      "docs/evidence/m614-dna-conversion-tag-adapter.json",
+      ".github/workflows/m614-dna-conversion-tag-adapter.yml"
+    ],
+    "scope": "Adapter isolado para DNA Surgery (override de Tipo/Raça) e DNA Transplant (override de Atributo), com declaração por UID, ordem de ativação explícita, face-up/resolvida/não negada, prioridade determinística, fontes simultâneas de tipo e atributo e privacidade de monstros face-down.",
+    "scopeReleasedToAuxiliary": [],
+    "conflictCheck": {
+      "matchingFiles": 0,
+      "m610FilesDisjoint": true,
+      "m611FilesDisjoint": true,
+      "m612FilesDisjoint": true,
+      "m613FilesDisjoint": true,
+      "m61CentralFilesExcluded": true
+    }
+  }
 }
