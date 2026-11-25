@@ -205,7 +205,7 @@ export const createNPCDuel=db.transaction((owner:string,guild:string,channel:str
 /** Acquire the writer before reading receipts/state: deferred upgrades can starve under WAL contention. */
 export const performDuelAction=db.transaction((id:string,owner:string,guild:string,expected:number,index:number|Action,requestId?:string):DuelRecord=>{
  const request={id,actor:owner,guild,expected,action:index,requestId},receipt=findActionReceipt('duel',request);
- if(receipt){const current=read(id);if(!current)throw new Error('Duelo inexistente.');return {...current,receipt};}
+ if(receipt){const current=getDuel(id);if(current.guild_id!==guild)throw new Error('Esse duelo não está ativo neste servidor.');return {...current,receipt};}
  const r=getDuel(id);if(r.guild_id!==guild||r.status!=='playing'||!r.state)throw new Error('Esse duelo não está ativo neste servidor.');if(r.revision!==expected)throw new Error('Esse painel ficou antigo. Clique em Atualizar.');
  const actions=legalActions(r.state,owner);const action=typeof index==='number'?actions[index]:index;
  if(!action||(typeof index!=='number'&&action.kind!=='concede'))throw new Error('Ação inválida.');

@@ -1,0 +1,38 @@
+name: M526 1v1 Duel Action Receipt Timeout Replay
+on:
+  push:
+    branches:
+      - feat/work-m526-duel-action-receipt-timeout-replay-20261122
+    paths:
+      - 'src/duelStore.ts'
+      - 'tests/duelActionReceiptTimeoutReplay.test.cjs'
+      - 'docs/evidence/m526-duel-action-receipt-timeout-replay.json'
+      - '.github/workflows/m526-duel-action-receipt-timeout-replay.yml'
+  pull_request:
+    paths:
+      - 'src/duelStore.ts'
+      - 'tests/duelActionReceiptTimeoutReplay.test.cjs'
+      - 'docs/evidence/m526-duel-action-receipt-timeout-replay.json'
+      - '.github/workflows/m526-duel-action-receipt-timeout-replay.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  duel-action-receipt-timeout-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m526-duel-action-receipt-timeout-replay.json', 'utf8'))"
+      - name: Run 1v1 action receipt timeout regression
+        run: node --test tests/duelActionReceiptTimeoutReplay.test.cjs
