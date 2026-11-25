@@ -323,6 +323,10 @@ test('hand overflow remains untouched until End Phase',()=>{
   assert.doesNotThrow(()=>assertDirectBurnRules(duel));
   assert.equal(hand.length,before);
 });
+test('does not offer a Normal Spell when the current team has zero LP',()=>{
+  const f=setup({controllerLP:0});
+  assert.deepEqual(actions(f),[]);
+});
 test('conserves every physical UID and never grants inventory',()=>{
   const f=setup();
   const before=inventory(f.duel);
