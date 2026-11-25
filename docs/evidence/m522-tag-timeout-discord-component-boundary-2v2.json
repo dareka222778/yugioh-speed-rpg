@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "mission": "M522",
+  "runId": "work-20261122T121644-0300-M522",
+  "title": "2v2 Discord timeout component boundary",
+  "priority": "P1 — verify expired public Accept and private action components through handleTagComponent, including lock release and terminal publication.",
+  "branch": "feat/work-m522-tag-timeout-discord-boundary-2v2-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "cfdb780bb0edcb07912a1d4e96d1d4d617674c3d",
+  "scope": [
+    "tests/tagTimeoutDiscordComponentBoundary2v2.test.cjs",
+    "docs/evidence/m522-tag-timeout-discord-component-boundary-2v2.json",
+    ".github/workflows/m522-tag-timeout-discord-component-boundary-2v2.yml"
+  ],
+  "behavior": {
+    "lobbyTimeoutMs": 300000,
+    "decisionTimeoutMs": 1800000,
+    "cases": [
+      "O botão público tag:accept aos 5 min é reconhecido pelo handler real, deferido e rejeitado após a expiração; nenhum estado de duelo é criado.",
+      "Os locks de todos os participantes aceitos são liberados; o painel terminal entra em dueTags e tagPublicMessage remove Accept/Cancel.",
+      "O menu privado tag:act aos 30 min é reconhecido pelo handler real, deferido e rejeitado; o W.O. persiste para tag-team-1, um duelFinished e quatro locks removidos.",
+      "Nenhuma action receipt, mutação de mão/Deck/Extra, inventário ou dado de jogador é criado; a projeção pública não contém UIDs físicos privados.",
+      "O publisher terminal continua em dueTags até markTagPublished confirmar a revisão."
+    ],
+    "rules": {
+      "mainDeck": "20–30",
+      "openingHand": 4,
+      "handLimit": 6,
+      "handDiscard": "End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separada",
+      "extraDeckMax": 5
+    }
+  },
+  "knownGap": {
+    "handlerRefreshOnRejectedTimeout": false,
+    "reason": "handleTagComponent executa acceptTag/actTag antes do try/finally que chama refresh; o clique expirado persiste o timeout via getTag, mas o painel só é atualizado pelo publisher dueTags posterior.",
+    "handoffRequested": "PR #432, comment 7081175808; src/tagInteraction.ts não foi alterado enquanto aguarda liberação."
+  },
+  "validation": {
+    "database": "SQLite temporário isolado via DATABASE_PATH",
+    "discord": "handleTagComponent e tagUI builders reais com interação fake; validateDiscordPayload offline; sem token/guild real",
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "Não testa bot conectado a guild Discord real.",
+    "Não corrige o refresh imediato sem transferência explícita de src/tagInteraction.ts.",
+    "Sem merge/deploy ou produção."
+  ],
+  "status": "pending-ci"
+}
