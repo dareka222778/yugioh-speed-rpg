@@ -118,7 +118,7 @@ export function directBurnSpellActions(
   const core=duel.core,team=core.current,def=definition(effectCardId);
   if(!def||!isTeam(team)||core.phase!=='main'||core.priority!==team||
     core.pending.kind!=='none'||core.chain.length!==0||core.turnEnding||core.damageStep||
-    core.players[team].backrow.length>=rulesFor(core).spellTrapZones)return [];
+    core.players[team].lp<=0||core.players[team].backrow.length>=rulesFor(core).spellTrapZones)return [];
   const physicalId=options.sourceCardId??effectCardId;
   const info=getDuelCard(physicalId);
   if(!info||info.kind!=='spell'||isQuickPlaySpell(physicalId))return [];
