@@ -42,7 +42,7 @@
     }
   },
   "verification": {
-    "focusedScenarios": 16,
+    "focusedScenarios": 17,
     "focusedTestCommand": "node --test tests/inabaWhiteRabbitSpiritTagAdapter.test.cjs",
     "covers": [
       "Normal Summon, Flip Summon and effect-based face-up transition",
@@ -67,7 +67,13 @@
     "inventoryGranted": 0,
     "merge": false,
     "deploy": false,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "actualFocusedRun": {
+      "runId": 45542227669,
+      "passed": 17,
+      "failed": 0,
+      "conclusion": "success"
+    }
   },
   "integrationBoundary": "Isolated TagDuel adapter only. Inaba White Rabbit is not added to cardMetadata, cardCatalog, cardCertifications, release allowlist, the central resolver, or Discord commands. The test injects an already-admitted effect-monster fixture ID; the production passcode remains 77084837. Central Spirit/End Phase wiring and direct-attack integration remain pending the explicit M61 resolver handoff.",
   "limitations": [
