@@ -1,0 +1,83 @@
+{
+  "format": 1,
+  "runId": "work-20261125T151500-0300-M626",
+  "mission": "M626",
+  "priority": "P1",
+  "status": "adapter e suíte comportamental preparados; CI pendente",
+  "cards": [
+    {
+      "name": "The Forceful Sentry",
+      "passcode": "42829885",
+      "konamiDatabaseId": 4907,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRL-045",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Look at your opponent's hand. Select 1 card among them and return it to his/her Deck. The Deck is then shuffled.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4907&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m626-forceful-sentry-tag-adapter-20261125",
+    "baseBranch": "feat/work-m625-confiscation-tag-adapter-20261125",
+    "baseSha": "555b0d197144a63c9c28f81348323c10173c95c2",
+    "files": [
+      "src/forcefulSentryTagAdapter.ts",
+      "tests/forcefulSentryTagAdapter.test.cjs",
+      "docs/evidence/m626-forceful-sentry-tag-adapter.json",
+      ".github/workflows/m626-forceful-sentry-tag-adapter.yml"
+    ],
+    "sharedMechanic": "Reutiliza src/tagPrivateHand.ts de M625: UID físico, mão/Deck privados por assento, assinatura de inventário e validação de propriedade.",
+    "behavior": [
+      "Ativa da mão privada do assento ativo na Main Phase, apenas com a mão do representante adversário ativo não vazia; não paga LP.",
+      "Inspeção efêmera da mão atual, endereçada ao assento resolvedor; o plano não armazena alvo nem UIDs.",
+      "Seleção não-direcionada na resolução; devolve a carta escolhida ao Deck privado do proprietário físico e embaralha com shuffleDuel/DuelRandom persistido.",
+      "Negação ou mão vazia não devolve carta nem avança o fluxo aleatório; replay é bloqueado por recibo.",
+      "Preserva inventário, Deck 20–30, Extra 0–5, zonas 3+3 e Field Zone separada."
+    ],
+    "integrationBoundary": "Adapter puro empilhado sobre M625; sem resolver central, catálogo, certificações, allowlist, comandos Discord, persistência de jogadores ou produção."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "plannedScenarios": 30,
+    "focusedScenarios": 30,
+    "focusedTestCommand": "node --test tests/forcefulSentryTagAdapter.test.cjs",
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "The Forceful Sentry permanece fora de metadata, certificações e allowlist; nenhum inventário é concedido.",
+    "Payload privado ainda não é roteado por comando Discord; depende da integração central após handoff M61.",
+    "PR empilhado sobre M625; precisa de merge na ordem M625 → M626.",
+    "Sem validação live Discord, backup, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
