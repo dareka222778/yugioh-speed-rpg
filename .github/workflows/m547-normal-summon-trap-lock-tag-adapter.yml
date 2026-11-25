@@ -1,0 +1,38 @@
+name: M547 Normal Summon Trap Lock TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m547-normal-summon-trap-lock-tag-adapter-20261123
+    paths:
+      - 'src/normalSummonTrapLockTagAdapter.ts'
+      - 'tests/normalSummonTrapLockTagAdapter.test.cjs'
+      - 'docs/evidence/m547-normal-summon-trap-lock-tag-adapter.json'
+      - '.github/workflows/m547-normal-summon-trap-lock-tag-adapter.yml'
+  pull_request:
+    paths:
+      - 'src/normalSummonTrapLockTagAdapter.ts'
+      - 'tests/normalSummonTrapLockTagAdapter.test.cjs'
+      - 'docs/evidence/m547-normal-summon-trap-lock-tag-adapter.json'
+      - '.github/workflows/m547-normal-summon-trap-lock-tag-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  normal-summon-trap-lock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m547-normal-summon-trap-lock-tag-adapter.json', 'utf8'))"
+      - name: Run Normal Summon Trap Lock TagDuel tests
+        run: node --test tests/normalSummonTrapLockTagAdapter.test.cjs
