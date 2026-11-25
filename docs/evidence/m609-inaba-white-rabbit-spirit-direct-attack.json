@@ -1,0 +1,78 @@
+{
+  "format": 1,
+  "mission": "M609",
+  "runId": "work-20261124T235910-0300-M609",
+  "card": {
+    "name": "Inaba White Rabbit",
+    "passcode": "77084837",
+    "konamiDatabaseId": 5374,
+    "type": "EARTH / Beast / Spirit / Effect / Level 3",
+    "atk": 700,
+    "def": 500,
+    "firstTcgPrinting": "LOD-065",
+    "firstTcgReleaseDate": "2003-06-06",
+    "effect": "This card cannot be Special Summoned. This card returns to the owner's hand during the End Phase of the turn that this card is Normal Summoned or flipped face-up. This monster attacks your opponent's Life Points directly.",
+    "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5374&ope=2&request_locale=en",
+    "historicalReference": "https://ftp.yugipedia.com/wiki/Inaba_White_Rabbit"
+  },
+  "implementation": {
+    "branch": "feat/work-m609-inaba-white-rabbit-spirit-direct-attack-20261124",
+    "paths": [
+      "src/inabaWhiteRabbitSpiritTagAdapter.ts",
+      "tests/inabaWhiteRabbitSpiritTagAdapter.test.cjs",
+      "docs/evidence/m609-inaba-white-rabbit-spirit-direct-attack.json",
+      ".github/workflows/m609-inaba-white-rabbit-spirit-direct-attack.yml"
+    ],
+    "behavior": [
+      "Rejects Special Summon attempts as a summoning condition, independently of monster-effect negation.",
+      "Registers Normal Summon, Flip Summon and effect-based face-up transitions with a durable UID/zone-epoch binding.",
+      "At the same turn's End Phase, returns a still face-up, non-negated instance to its physical owner's private hand, even after control changes.",
+      "Does not return a card that left the field, changed to face-down, or was re-entered as a new zone epoch; a fresh face-up event creates a new marker.",
+      "Allows direct-attack permission while face-up and not effect-negated, even if the opposing team controls monsters.",
+      "Does not discard hand overflow; the shared End Phase hand-limit flow remains responsible for the limit of six."
+    ],
+    "rulesValidated": {
+      "mainDeckPerPhysicalSeat": "20-30",
+      "extraDeckPerPhysicalSeat": "0-5",
+      "monsterZonesPerTeam": 3,
+      "spellTrapZonesPerTeam": 3,
+      "fieldZone": "separate",
+      "handLimit": 6,
+      "handDiscard": "deferred to End Phase"
+    }
+  },
+  "verification": {
+    "focusedScenarios": 16,
+    "focusedTestCommand": "node --test tests/inabaWhiteRabbitSpiritTagAdapter.test.cjs",
+    "covers": [
+      "Normal Summon, Flip Summon and effect-based face-up transition",
+      "Special Summon prohibition",
+      "End Phase timing and physical-owner hand routing",
+      "control change without loss of physical ownership",
+      "face-down, removed, stale-zone and fresh-reentry behavior",
+      "effect negation at End Phase",
+      "direct attack with opposing monsters, face-up condition and effect negation",
+      "duplicate summon/End Phase receipts and JSON restoration",
+      "hand overflow deferred to existing End Phase flow",
+      "Deck 20/30, Extra Deck 5 and 3+3 shared zones",
+      "physical UID conservation"
+    ],
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31
+    },
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false
+  },
+  "integrationBoundary": "Isolated TagDuel adapter only. Inaba White Rabbit is not added to cardMetadata, cardCatalog, cardCertifications, release allowlist, the central resolver, or Discord commands. The test injects an already-admitted effect-monster fixture ID; the production passcode remains 77084837. Central Spirit/End Phase wiring and direct-attack integration remain pending the explicit M61 resolver handoff.",
+  "limitations": [
+    "End Phase ordering is supplied by the future resolver integration; this adapter does not alter the shared End Phase pipeline.",
+    "Direct-attack permission is a card-specific predicate; the engine still owns battle-phase, attack-count, and declaration validation.",
+    "No real Discord gateway/guild session, production database, player data, or hosting credentials were used."
+  ]
+}

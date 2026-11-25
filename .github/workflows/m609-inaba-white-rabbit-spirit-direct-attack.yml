@@ -1,0 +1,29 @@
+name: M609 Inaba White Rabbit Spirit and direct attack adapter
+on:
+  push:
+    branches:
+      - feat/work-m609-inaba-white-rabbit-spirit-direct-attack-20261124
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/inabaWhiteRabbitSpiritTagAdapter.ts
+      - tests/inabaWhiteRabbitSpiritTagAdapter.test.cjs
+      - docs/evidence/m609-inaba-white-rabbit-spirit-direct-attack.json
+      - .github/workflows/m609-inaba-white-rabbit-spirit-direct-attack.yml
+permissions:
+  contents: read
+jobs:
+  inaba-white-rabbit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m609-inaba-white-rabbit-spirit-direct-attack.json', 'utf8'))"
+      - run: node --test tests/inabaWhiteRabbitSpiritTagAdapter.test.cjs
