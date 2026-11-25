@@ -1,0 +1,29 @@
+name: M606 White Magical Hat and Robbin Goblin battle-damage discard adapters
+on:
+  push:
+    branches:
+      - feat/work-m606-battle-damage-discard-20261124
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/battleDamageDiscardTagAdapter.ts
+      - tests/battleDamageDiscardTagAdapter.test.cjs
+      - docs/evidence/m606-battle-damage-discard.json
+      - .github/workflows/m606-battle-damage-discard.yml
+permissions:
+  contents: read
+jobs:
+  battle-damage-discard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m606-battle-damage-discard.json', 'utf8'))"
+      - run: node --test tests/battleDamageDiscardTagAdapter.test.cjs
