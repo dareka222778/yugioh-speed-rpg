@@ -1,0 +1,132 @@
+{
+  "format": 1,
+  "runId": "work-20261125T093000-0300-M613",
+  "mission": "M613",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Sogen",
+      "passcode": "86318356",
+      "konamiDatabaseId": 4339,
+      "kind": "Field Spell",
+      "firstTcgSet": "LOB-049",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Warrior and Beast-Warrior monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4339&ope=2&request_locale=en"
+    },
+    {
+      "name": "Mountain",
+      "passcode": "50913601",
+      "konamiDatabaseId": 4338,
+      "kind": "Field Spell",
+      "firstTcgSet": "LOB-048",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Dragon, Winged Beast, and Thunder monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4338&ope=2&request_locale=en"
+    },
+    {
+      "name": "Wasteland",
+      "passcode": "23424603",
+      "konamiDatabaseId": 4337,
+      "kind": "Field Spell",
+      "firstTcgSet": "LOB-047",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Dinosaur, Zombie, and Rock monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4337&ope=2&request_locale=en"
+    },
+    {
+      "name": "Forest",
+      "passcode": "87430998",
+      "konamiDatabaseId": 4336,
+      "kind": "Field Spell",
+      "firstTcgSet": "LOB-046",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Insect, Beast, Plant, and Beast-Warrior monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4336&ope=2&request_locale=en"
+    },
+    {
+      "name": "Umi",
+      "passcode": "22702055",
+      "konamiDatabaseId": 4340,
+      "kind": "Field Spell",
+      "firstTcgSet": "LOB-050",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Fish, Sea Serpent, Thunder, and Aqua monsters on the field gain 200 ATK/DEF, also all Machine and Pyro monsters on the field lose 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4340&ope=2&request_locale=en"
+    },
+    {
+      "name": "Yami",
+      "passcode": "59197169",
+      "konamiDatabaseId": 4341,
+      "kind": "Field Spell",
+      "firstTcgSet": "LOB-051",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Fiend and Spellcaster monsters on the field gain 200 ATK/DEF, also all Fairy monsters on the field lose 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4341&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m613-terrain-field-spells-tag-adapter-20261125",
+    "baseSha": "535eb23b708e815bf9392e41fc58998a1645e6de",
+    "files": [
+      "src/terrainFieldSpellsTagAdapter.ts",
+      "tests/terrainFieldSpellsTagAdapter.test.cjs",
+      "docs/evidence/m613-terrain-field-spells-tag-adapter.json",
+      ".github/workflows/m613-terrain-field-spells-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Sogen: +200 ATK/DEF para Warrior e Beast-Warrior.",
+      "Mountain: +200 ATK/DEF para Dragon, Winged Beast e Thunder.",
+      "Wasteland: +200 ATK/DEF para Dinosaur, Zombie e Rock.",
+      "Forest: +200 ATK/DEF para Insect, Beast, Plant e Beast-Warrior.",
+      "Umi: +200 ATK/DEF para Fish, Sea Serpent, Thunder e Aqua; -200 ATK/DEF para Machine e Pyro.",
+      "Yami: +200 ATK/DEF para Fiend e Spellcaster; -200 ATK/DEF para Fairy.",
+      "Fontes face-up, resolvidas e não negadas em qualquer Field Zone afetam ambos os lados; cópias válidas em zonas distintas acumulam.",
+      "Face-down, não resolvida, negada, substituída ou removida não contribui; monstros face-down não revelam sua Raça.",
+      "Consultas preservam UIDs/inventário, mão acima de seis até End Phase e limites de Deck 20–30, Extra 5 e zonas 3+3."
+    ],
+    "integrationBoundary": "Adapter isolado; o resolver central precisa consultar getTerrainModifier ao compor ATK/DEF. Não altera catálogo, cardMetadata, cardCertifications, allowlist, comandos Discord, persistência ou produção."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "diferido à End Phase"
+  },
+  "verification": {
+    "focusedScenarios": 23,
+    "focusedTestCommand": "node --test tests/terrainFieldSpellsTagAdapter.test.cjs",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "actualFocusedRun": null,
+    "status": "implementation committed; CI pending"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Sogen (86318356) é a única Field Spell já admitida no catálogo-base usada como fixture física; o lookup de teste remapeia essa identidade para cada uma das seis Field Spells. Nenhuma identidade real adicional foi adicionada ao catálogo.",
+    "As seis cartas permanecem fora do catálogo/allowlist e não recebem certificação por importação.",
+    "A integração na fórmula central de ATK/DEF depende de liberação explícita do handoff M61.",
+    "CI/testes offline; sem sessão real no gateway Discord, backup verificável, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "cardsCount": 6
+}
