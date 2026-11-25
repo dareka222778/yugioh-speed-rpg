@@ -1,0 +1,132 @@
+{
+  "format": 1,
+  "runId": "work-20261125T143244-0300-M623",
+  "mission": "M623",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved; implementação isolada iniciada; sem integração central enquanto M61 aguarda handoff",
+  "reservedAt": "2026-11-25T14:32:44-03:00",
+  "startedAt": "2026-11-25T14:32:44-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "625abea1583d14dc0dbc37ef65161159b39a9349",
+  "branch": "feat/work-m623-dust-tornado-tag-adapter-20261125",
+  "baseSha": "625abea1583d14dc0dbc37ef65161159b39a9349",
+  "branchHeadSha": "625abea1583d14dc0dbc37ef65161159b39a9349",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/dustTornadoTagAdapter.ts",
+    "tests/dustTornadoTagAdapter.test.cjs",
+    "docs/evidence/m623-dust-tornado-tag-adapter.json",
+    ".github/workflows/m623-dust-tornado-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel clássico para Dust Tornado (60082869): ativação de Trap setada por qualquer membro da equipe, alvo Spell/Trap adversário em backrow ou Field Zone, destruição para o GY do proprietário físico e Set opcional de Spell/Trap da mão privada do assento ativo. Somente quatro caminhos novos; sem resolver central, catálogo, certificações, allowlist, inventário, comandos ou dados persistentes.",
+  "cards": [
+    {
+      "name": "Dust Tornado",
+      "passcode": "60082869",
+      "konamiDatabaseId": 4988,
+      "kind": "Normal Trap",
+      "firstTcgSet": "PSV-EN011",
+      "firstTcgRelease": "2002-10-20",
+      "officialEffect": "Target 1 Spell/Trap your opponent controls; destroy that target, then you can Set 1 Spell/Trap from your hand.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4988&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/dustTornadoTagAdapter.ts",
+      "tests/dustTornadoTagAdapter.test.cjs",
+      "docs/evidence/m623-dust-tornado-tag-adapter.json",
+      ".github/workflows/m623-dust-tornado-tag-adapter.yml"
+    ],
+    "plannedScenarios": 35,
+    "integrationBoundary": "Adapter puro e isolado. Não altera resolver v9, cardMetadata, cardCertifications, allowlist, comandos Discord, persistência ou produção. Integração depende de handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "último checkpoint M621/M622; contagem ainda será revalidada pelo CI do novo PR"
+  },
+  "conflictCheck": {
+    "checkedAt": "2026-11-25T14:32:44-03:00",
+    "sharedHead": "625abea1583d14dc0dbc37ef65161159b39a9349",
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "matchingFiles": 0,
+    "cardId": "60082869",
+    "konamiDatabaseId": 4988,
+    "metadata": false,
+    "certified": false,
+    "existingEffect": false,
+    "m621M622FilesDisjoint": true,
+    "m61CentralFilesExcluded": true,
+    "thirdPartyReservationsUntouched": true,
+    "result": "Sem branch/PR M623 ou reserva Dust Tornado encontrada; escopo limitado a quatro caminhos novos."
+  },
+  "verification": {
+    "focusedScenarios": 35,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "observedParallelWork": {
+    "m621": {
+      "pr": 564,
+      "state": "CI integral success; draft; escopo próprio sem merge",
+      "touched": false
+    },
+    "m622": {
+      "pr": 565,
+      "state": "CI integral success; draft; escopo próprio sem merge",
+      "touched": false
+    },
+    "m61": {
+      "pr": 17,
+      "state": "handoff solicitado; aguardando liberação explícita",
+      "touched": false
+    }
+  },
+  "m61Handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "commentId": 7169825597,
+    "centralFilesExcluded": true
+  },
+  "nextTask": "Concluir M623 e CI; em seguida iniciar M624 em família independente, sem tocar M61 ou reservas existentes.",
+  "nextWindow": "2026-11-25T19:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
