@@ -13,6 +13,7 @@ const {
 
 const DNA_SURGERY_PASSCODE = '74701381';
 const DNA_TRANSPLANT_PASSCODE = '56769674';
+const FIELD_FIXTURE_ID = '86318356';
 const RACES = ['Warrior', 'Dragon', 'Machine', 'Fiend', 'Fairy', 'Spellcaster', 'Insect', 'Beast'];
 const ATTRIBUTES = ['DARK', 'LIGHT', 'EARTH', 'WATER', 'FIRE', 'WIND'];
 const allMainIds = [...new Set([...enabledCardIds, ...tagNormalCardIds])]
@@ -59,11 +60,12 @@ const NORMAL_FILLER_IDS = tagNormalCardIds.filter(id => {
 const BASE_DECK = [
   ...MONSTER_FIXTURE_IDS,
   ...TRAP_FIXTURE_IDS,
-  ...NORMAL_FILLER_IDS.slice(0, 20 - MONSTER_FIXTURE_IDS.length - TRAP_FIXTURE_IDS.length),
+  FIELD_FIXTURE_ID,
+  ...NORMAL_FILLER_IDS.slice(0, 20 - MONSTER_FIXTURE_IDS.length - TRAP_FIXTURE_IDS.length - 1),
 ];
 const MAX_DECK = [...BASE_DECK, ...NORMAL_FILLER_IDS.slice(
-  20 - MONSTER_FIXTURE_IDS.length - TRAP_FIXTURE_IDS.length,
-  30 - MONSTER_FIXTURE_IDS.length - TRAP_FIXTURE_IDS.length,
+  20 - MONSTER_FIXTURE_IDS.length - TRAP_FIXTURE_IDS.length - 1,
+  30 - MONSTER_FIXTURE_IDS.length - TRAP_FIXTURE_IDS.length - 1,
 )];
 const FUSION_NAMES = new Set();
 const FUSION_IDS = enabledCardIds.filter(id => {
@@ -392,7 +394,7 @@ test('mão acima de seis permanece intacta até a End Phase', () => {
 test('três zonas de armadilha continuam independentes da Field Zone e das três Monster Zones', () => {
   resetState();
   const duel = makeDuel(2, MAX_DECK);
-  const fieldCard = takeFromSeat(duel, 2, ref => ref.id === '86318356');
+  const fieldCard = takeFromSeat(duel, 2, ref => ref.id === FIELD_FIXTURE_ID);
   duel.core.players[0].field = { ...fieldCard, setTurn: 0, faceUp: true, resolved: true };
   addTrap(duel, 'DNA_SURGERY', 0, 0, 'Machine', 1);
   addTrap(duel, 'DNA_TRANSPLANT', 0, 0, 'DARK', 2);
@@ -403,7 +405,7 @@ test('três zonas de armadilha continuam independentes da Field Zone e das três
   assert.equal(adapter.getDnaConversion(duel, target).race, 'Beast');
   assert.equal(duel.core.players[0].backrow.length, 2);
   assert.equal(duel.core.players[1].backrow.length, 3);
-  assert.equal(duel.core.players[0].field.id, '86318356');
+  assert.equal(duel.core.players[0].field.id, FIELD_FIXTURE_ID);
   addTrap(duel, 'DNA_TRANSPLANT', 1, 1, 'LIGHT', 6);
   assert.throws(() => adapter.getDnaConversion(duel, target));
 });
