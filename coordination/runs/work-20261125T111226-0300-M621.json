@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "PR #564 draft; focused workflow verde (31 cenários), check/build/evidência verdes; Card Batch Fast e Engine Validation em execução; sem merge/deploy.",
+  "status": "M621: helper genérico de revelação dos quatro Decks exportado para reuso por M622; PR #564 draft; focused 31/31 verde no SHA anterior, recheck necessário após export; Card Batch/Engine Validation em andamento.",
   "reservedAt": "2026-11-25T11:12:26-03:00",
   "startedAt": "2026-11-25T11:12:26-03:00",
   "endedAt": null,
@@ -14,7 +14,7 @@
   "sharedHeadAtReservation": "ae86a77182c7971613a30e42482e0be8b2942446",
   "branch": "feat/work-m621-nobleman-crossout-tag-adapter-20261125",
   "baseSha": "ae86a77182c7971613a30e42482e0be8b2942446",
-  "branchHeadSha": "41353e348da06ea8c5ab9746f259f142605c926b",
+  "branchHeadSha": "fd0d6d444a2c132c9e018fbc7f143432970de16d",
   "pullRequest": 564,
   "reservedFiles": [
     "src/noblemanOfCrossoutTagAdapter.ts",
@@ -81,7 +81,7 @@
   },
   "verification": {
     "focusedScenarios": 28,
-    "focusedTestResult": "success",
+    "focusedTestResult": "recheck_pending_after_helper_export",
     "typecheck": "success",
     "build": "success",
     "evidenceValidation": "success",
@@ -92,10 +92,11 @@
     "automaticCertifications": 0,
     "inventoryGranted": 0,
     "focusedScenariosPassed": 31,
-    "focusedWorkflowRun": 45632449442,
+    "focusedWorkflowRun": null,
     "cardBatchRunId": 45632449382,
     "milestoneRunId": 45632449386,
-    "engineValidationRunId": 45632449447
+    "engineValidationRunId": 45632449447,
+    "previousFocusedWorkflowRun": 45632449442
   },
   "production": {
     "merge": false,
@@ -103,7 +104,7 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 6,
+  "effectiveWorkMinutes": 8,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -142,6 +143,16 @@
       "pr": 563,
       "state": "open-draft-awaiting-ci-visibility",
       "touched": false
+    },
+    "m621": {
+      "pr": 564,
+      "state": "open-draft-helper-exported-recheck-pending",
+      "touched": true
+    },
+    "m622": {
+      "pr": null,
+      "state": "reserved-stacked-on-m621",
+      "touched": false
     }
   },
   "m61Handoff": {
@@ -149,8 +160,8 @@
     "status": "awaiting-explicit-release",
     "centralFilesExcluded": true
   },
-  "nextTask": "M622: escolher a próxima família somente após CI M621 e nova verificação de branch/PR/arquivos.",
+  "nextTask": "M622 Nobleman of Extermination: reutilizar revealAndBanishCopies de M621 para alvo face-down Spell/Trap e varredura por nome se Trap.",
   "nextWindow": "2026-11-25T14:30:00-03:00",
   "scopeReleasedToAuxiliary": [],
-  "lastActivityAt": "2026-11-25T11:18:14-03:00"
+  "lastActivityAt": "2026-11-25T11:19:59-03:00"
 }
