@@ -21,7 +21,7 @@
       "docs/evidence/m618-graceful-charity-tag-adapter.json",
       ".github/workflows/m618-graceful-charity-tag-adapter.yml"
     ],
-    "plannedScenarios": 25,
+    "plannedScenarios": 28,
     "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, releasedCardIds, certificações, allowlist, comandos Discord, persistência ou produção. A identidade real Graceful Charity permanece fora dos fixtures habilitados; os testes usam uma Normal Spell de fixture e não concedem inventário."
   },
   "rules": {
@@ -39,7 +39,7 @@
     "remaining": 31
   },
   "verification": {
-    "focusedScenarios": 25,
+    "focusedScenarios": 28,
     "focusedTestResult": "pending",
     "typecheck": "pending",
     "build": "pending",
