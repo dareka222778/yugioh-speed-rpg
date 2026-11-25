@@ -4,7 +4,7 @@
   "priorityRequestedBy": "User",
   "state": "active",
   "startedAt": "2026-11-25T09:57:29-03:00",
-  "lastActivityAt": "2026-11-25T10:26:45-03:00",
+  "lastActivityAt": "2026-11-25T10:44:38-03:00",
   "nextScheduledAt": "2026-11-25T14:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -21147,16 +21147,16 @@
     "mission": "M618",
     "owner": "Work principal",
     "priority": "P1",
-    "state": "reserved-and-implementing",
+    "state": "focused-ci-green-engine-validation-in-progress",
     "startedAt": "2026-11-25T10:26:45-03:00",
-    "lastActivityAt": "2026-11-25T10:26:45-03:00",
+    "lastActivityAt": "2026-11-25T10:44:38-03:00",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "fc2497732342f3fb1380de3090899b70b82070f1",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "fc2497732342f3fb1380de3090899b70b82070f1",
     "branch": "feat/work-m618-graceful-charity-tag-adapter-20261125",
-    "branchHeadSha": null,
-    "pullRequest": null,
+    "branchHeadSha": "7a6871dd9446b55e0af6f12f294f15da1ab4d729",
+    "pullRequest": 561,
     "reservedFiles": [
       "src/gracefulCharityTagAdapter.ts",
       "tests/gracefulCharityTagAdapter.test.cjs",
@@ -21191,6 +21191,19 @@
       "m61CentralFilesExcluded": true,
       "thirdPartyReservationsUntouched": true,
       "result": "quatro caminhos novos; Graceful Charity sem branch/PR/arquivo reservado; M617 preservado"
+    },
+    "verification": {
+      "focusedScenarios": 28,
+      "focusedWorkflowRun": 45625850109,
+      "focusedWorkflow": "success",
+      "cardBatchRun": 45625849999,
+      "cardBatch": "success",
+      "milestoneRun": 45625850061,
+      "milestone": "success",
+      "engineValidationRun": 45625849975,
+      "engineValidation": "in_progress",
+      "newCertifications": 0,
+      "inventoryGranted": 0
     }
   },
   "m617HandoffRequest": {
@@ -21215,5 +21228,61 @@
     "inventoryGranted": 0
   },
   "m618NextTask": "Implementar e testar Graceful Charity em branch isolada; durante a CI preparar a próxima família somente após nova verificação de branches/PRs.",
-  "nextWorkWindowM618": "2026-11-25T14:30:00-03:00"
+  "nextWorkWindowM618": "2026-11-25T14:30:00-03:00",
+  "currentWorkReservationM619": {
+    "runId": "work-20261125T104438-0300-M619",
+    "mission": "M619",
+    "owner": "Work principal",
+    "priority": "P1",
+    "state": "reserved-and-implementing",
+    "startedAt": "2026-11-25T10:44:38-03:00",
+    "lastActivityAt": "2026-11-25T10:44:38-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "02a63d10297e6c2b0217fcba6fdfdc2dbb821834",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "02a63d10297e6c2b0217fcba6fdfdc2dbb821834",
+    "branch": "feat/work-m619-spiritualism-tag-adapter-20261125",
+    "branchHeadSha": null,
+    "pullRequest": null,
+    "reservedFiles": [
+      "src/spiritualismTagAdapter.ts",
+      "tests/spiritualismTagAdapter.test.cjs",
+      "docs/evidence/m619-spiritualism-tag-adapter.json",
+      ".github/workflows/m619-spiritualism-tag-adapter.yml"
+    ],
+    "scope": [
+      "src/spiritualismTagAdapter.ts",
+      "tests/spiritualismTagAdapter.test.cjs",
+      "docs/evidence/m619-spiritualism-tag-adapter.json",
+      ".github/workflows/m619-spiritualism-tag-adapter.yml"
+    ],
+    "scopeDescription": "Adapter TagDuel clássico para Spiritualism: ativar na Main Phase, mirar exclusivamente uma Magia/Armadilha controlada pela equipe adversária e devolvê-la à mão do proprietário físico; a ativação e o efeito não podem ser negados. Preservar mão/deck privados por assento, zona de Campo separada e inventário.",
+    "scopeReleasedToAuxiliary": [],
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31,
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0
+    },
+    "conflictCheck": {
+      "checkedAt": "2026-11-25T10:44:38-03:00",
+      "sharedHead": "02a63d10297e6c2b0217fcba6fdfdc2dbb821834",
+      "matchingBranches": 0,
+      "matchingPullRequests": 0,
+      "matchingFiles": 0,
+      "spiritualismId": "15866454",
+      "released": false,
+      "certified": false,
+      "metadata": false,
+      "m617FilesDisjoint": true,
+      "m618FilesDisjoint": true,
+      "m583SarcophagusFilesDisjoint": true,
+      "m61CentralFilesExcluded": true,
+      "thirdPartyReservationsUntouched": true,
+      "result": "quatro caminhos novos; Spiritualism sem branch/PR/reserva; família Sarcophagus M583 não tocada"
+    }
+  },
+  "m619NextTask": "Implementar e testar Spiritualism com retorno ao proprietário físico, incluindo backrow e Field Zone; depois verificar outra família independente."
 }
