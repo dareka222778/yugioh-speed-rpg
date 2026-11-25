@@ -3,7 +3,7 @@
   "mission": "M631",
   "runId": "work-20261125T195300-0300-M631",
   "priority": "P1",
-  "status": "adapter isolado implementado; PR #573 aberto; workflow focado acionado",
+  "status": "adapter isolado implementado; PR #573 aberto; validação focada aguardando execução",
   "historicalCutoff": "2004-10-01",
   "cards": [
     {
@@ -38,7 +38,7 @@
       "docs/evidence/m631-direct-burn-spells-tag-adapter.json",
       ".github/workflows/m631-direct-burn-spells-tag-adapter.yml"
     ],
-    "plannedScenarios": 28,
+    "plannedScenarios": 29,
     "integrationBoundary": "Pure isolated adapter for Normal Spell activation from the active player's hand and exact Pending resolution. Central resolver/Discord integration awaits explicit M61 handoff."
   },
   "rules": {
@@ -71,7 +71,7 @@
     "thirdPartyReservationsUntouched": true
   },
   "verification": {
-    "focusedScenarios": 28,
+    "focusedScenarios": 29,
     "focusedTestResult": "pending",
     "typecheck": "pending",
     "build": "pending",
