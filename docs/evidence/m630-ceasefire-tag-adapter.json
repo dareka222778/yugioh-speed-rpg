@@ -3,7 +3,7 @@
   "mission": "M630",
   "runId": "work-20261125T194311-0300-M630",
   "priority": "P1",
-  "status": "adapter isolado implementado; CI pendente",
+  "status": "adapter isolado implementado; PR #572 aberto; workflow focado acionado",
   "historicalCutoff": "2004-10-01",
   "cards": [
     {
@@ -92,5 +92,6 @@
     "deploy": false,
     "backupVerified": false,
     "liveDiscordValidation": false
-  }
+  },
+  "ciTriggerCommit": true
 }
