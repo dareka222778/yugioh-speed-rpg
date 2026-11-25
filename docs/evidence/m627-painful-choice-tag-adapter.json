@@ -1,0 +1,85 @@
+{
+  "format": 1,
+  "runId": "work-20261125T152000-0300-M627",
+  "mission": "M627",
+  "priority": "P1",
+  "status": "adapter de duas fases e suíte comportamental preparados; CI pendente",
+  "cards": [
+    {
+      "name": "Painful Choice",
+      "passcode": "74191942",
+      "konamiDatabaseId": 4911,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRL-049",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Select 5 cards from your Deck and show them to your opponent. Your opponent selects 1 card among them. Add that card to your hand and discard the remaining cards to the Graveyard.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4911&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m627-painful-choice-tag-adapter-20261125",
+    "baseBranch": "feat/work-m625-confiscation-tag-adapter-20261125",
+    "baseSha": "555b0d197144a63c9c28f81348323c10173c95c2",
+    "files": [
+      "src/painfulChoiceTagAdapter.ts",
+      "tests/painfulChoiceTagAdapter.test.cjs",
+      "docs/evidence/m627-painful-choice-tag-adapter.json",
+      ".github/workflows/m627-painful-choice-tag-adapter.yml"
+    ],
+    "sharedMechanic": "Reutiliza src/tagPrivateHand.ts (M625) para Deck/mão por assento físico, UID, proprietário e assinatura de inventário.",
+    "behavior": [
+      "Ativa somente se o Deck físico do assento ativo contém pelo menos cinco cartas; não paga LP.",
+      "O dono escolhe cinco UIDs do Deck atual na resolução; o plano de ativação não contém alvo nem lista de UIDs.",
+      "Somente o assento adversário ativo recebe payload efêmero com cinco IDs e índices; UIDs permanecem em seleção server-side.",
+      "O assento adversário ativo escolhe exatamente um índice; a carta vai à mão do dono e as outras quatro ao GY da equipe proprietária.",
+      "Não embaralha o Deck; preserva ordem relativa das cartas não selecionadas.",
+      "Rejeita seleção duplicada/stale, UID de parceiro, índice inválido, chooser incorreto, seleção adulterada e replay.",
+      "Preserva mão acima de seis até End Phase, Deck 20–30, Extra 0–5, zonas 3+3 e Field Zone separada."
+    ],
+    "integrationBoundary": "Adapter puro empilhado sobre M625; sem resolver central, catálogo, certificações, allowlist, comandos Discord, persistência ou produção."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separada",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "plannedScenarios": 33,
+    "focusedScenarios": 33,
+    "focusedTestCommand": "node --test tests/painfulChoiceTagAdapter.test.cjs",
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Painful Choice permanece fora de metadata, certificações e allowlist; nenhum inventário é concedido.",
+    "Payload de cinco cartas é apenas contrato para entrega privada ao oponente ativo; comandos Discord/gateway não foram integrados.",
+    "PR empilhado sobre M625; precisa de merge na ordem M625 → M627 (independente de M626).",
+    "Sem validação live Discord, backup, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
