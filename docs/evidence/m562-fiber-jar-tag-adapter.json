@@ -1,0 +1,81 @@
+{
+  "mission": "M562",
+  "runId": "work-20261123T122913-0300-M562",
+  "owner": "Work principal",
+  "card": {
+    "name": "Fiber Jar",
+    "portugueseName": "Jarro de Fibra",
+    "passcode": "78706415",
+    "konamiDatabaseId": 5371,
+    "attribute": "EARTH",
+    "level": 3,
+    "race": "Plant",
+    "atk": 500,
+    "def": 500,
+    "officialCardDatabase": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5371&ope=2&request_locale=en",
+    "officialText": "FLIP: Each player shuffles all cards from their hand, field, and Graveyard into the Deck, then draws 5 cards.",
+    "firstTcgPrinting": {
+      "date": "2003-06-06",
+      "set": "LOD-EN056",
+      "product": "Legacy of Darkness"
+    }
+  },
+  "design": {
+    "trigger": "FLIP Trigger when face-down becomes face-up by Flip Summon, attack while face-down, or card effect; not a normal face-up summon.",
+    "tagDuelModel": "Four physical players keep separate hands and Decks; each team shares its field and Graveyard.",
+    "resolution": "All four physical hands plus both shared fields and Graveyards are returned to the Deck/Extra Deck of each physical card owner, then each physical player shuffles and draws up to five.",
+    "ownership": "UID m0–m3 is authoritative. Stolen cards return to the original owner's physical Deck; Fusion monsters return to the owner's Extra Deck.",
+    "tokens": "Tokens on the field disappear instead of entering any Deck or Graveyard; tokens in hand/GY are rejected as invalid state.",
+    "banished": "Banished cards are untouched.",
+    "deckOut": "A physical player unable to draw five causes their team to lose; if both teams have at least one failed draw in the same resolution, the result is a draw.",
+    "replay": "activationId receipt is serialized in JSON and consumed on successful or negated resolution.",
+    "randomization": "Fisher-Yates with injectable random source; each of the four physical Decks is shuffled independently.",
+    "ownerRules": {
+      "mainDeck": "20–30 at construction; current Deck may be below 20 during a duel",
+      "handLimit": 6,
+      "discard": "End Phase only",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separate",
+      "extraDeck": 5
+    }
+  },
+  "testCases": [
+    "Flip Summon, battle-flip and effect-flip all create the FLIP trigger",
+    "normal face-up summon, reveal-only and stale turn events are rejected",
+    "all four private hands are returned before any draw",
+    "both shared fields and both shared Graveyards are emptied",
+    "cards return to the physical owner Deck even when stolen or controlled by partner",
+    "Fusion monsters from field/GY return to the physical owner's Extra Deck",
+    "tokens leave the field and disappear without entering Deck/GY",
+    "banished cards and unrelated Extra Deck cards remain untouched",
+    "each of four physical Decks is shuffled independently and draws up to five",
+    "one physical seat deck-out loses its team; simultaneous team deck-out is a draw",
+    "exactly five cards succeeds; fewer than five draws available cards only",
+    "source may be destroyed after activation or already be in GY at trigger registration",
+    "negation, JSON restore, activation replay and stale representative are covered",
+    "UID/card identity conservation and input immutability"
+  ],
+  "certification": {
+    "newCards": 0,
+    "automatic": 0,
+    "reason": "Isolated adapter only; no cardCatalog/cardMetadata/cardCertifications/manifest/resolver registration. M61 handoff remains pending."
+  },
+  "safety": {
+    "inventoryGranted": 0,
+    "persistentDatabaseTouched": false,
+    "playerDataTouched": false,
+    "productionDatabaseTouched": false,
+    "discordTokenUsed": false,
+    "liveDiscordUsed": false,
+    "centralResolverChanged": false,
+    "catalogChanged": false,
+    "manifestChanged": false,
+    "allowlistChanged": false
+  },
+  "limitations": [
+    "Adapter is not registered in the resolver v9 or card metadata; Fiber Jar remains uncertified and unavailable to inventory.",
+    "TagDuel four-seat semantics are modeled as four private hands/Decks and two team-shared fields/Graveyards; integration requires M61 review.",
+    "Offline adapter tests do not replace a real Discord gateway/guild match."
+  ]
+}
