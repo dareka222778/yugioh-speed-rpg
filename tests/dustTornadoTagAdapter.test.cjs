@@ -494,3 +494,50 @@ test('the adapter never creates or grants inventory', () => {
   assert.ok(resolved);
   assert.deepEqual(inventory(resolved.state), before);
 });
+
+test('a stolen source Trap returns to its physical owner GY when activated', () => {
+  const duel = makeDuel(0);
+  const activeTeam = tagDecisionMember(duel).team;
+  const activeSeat = duel.active[activeTeam];
+  const sourceOwnerSeat = 1 - activeTeam;
+  const sourceUid = placeBackrow(duel, sourceOwnerSeat, activeTeam, TRAP_ID, 2, false);
+  const targetUid = placeBackrow(duel, 1 - activeTeam, 1 - activeTeam, SPELL_ID, 0, false);
+  const activation = activateDustTornado(duel, sourceUid, targetUid, { cardId: TRAP_ID });
+  assert.ok(activation);
+  assert.equal(activation.plan.activeSeat, activeSeat);
+  assert.equal(activation.plan.sourceOwnerTeam, sourceOwnerSeat % 2);
+  assert.ok(activation.state.core.players[sourceOwnerSeat % 2].grave.some(card => card.uid === sourceUid));
+});
+
+test('a Field Zone card is not accepted as the Dust Tornado source', () => {
+  const duel = makeDuel(0);
+  const activeTeam = tagDecisionMember(duel).team;
+  const activeSeat = duel.active[activeTeam];
+  const sourceUid = placeField(duel, activeSeat, activeTeam, FIELD_SPELL_ID, false);
+  const targetUid = placeBackrow(duel, 1 - activeTeam, 1 - activeTeam, SPELL_ID, 0, false);
+  assert.equal(
+    activateDustTornado(duel, sourceUid, targetUid, { cardId: FIELD_SPELL_ID }),
+    null,
+  );
+});
+
+test('rejects a source whose card identity does not match the activation', () => {
+  const result = setup();
+  assert.equal(
+    activateDustTornado(result.duel, result.sourceUid, result.targetUid, { cardId: SPELL_ID }),
+    null,
+  );
+});
+
+test('does not Set a second Field Spell into an occupied Field Zone', () => {
+  const result = setup();
+  assert.ok(result.activation);
+  placeField(result.activation.state, result.activeSeat, result.activeTeam, FIELD_SPELL_ID, false);
+  const setUid = putHandCard(result.activation.state, result.activeSeat, FIELD_SPELL_ID);
+  const snapshot = JSON.stringify(result.activation.state);
+  assert.equal(
+    resolveDustTornado(result.activation.state, result.activation.plan, { setUid }),
+    null,
+  );
+  assert.equal(JSON.stringify(result.activation.state), snapshot);
+});
