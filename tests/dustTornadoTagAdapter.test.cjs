@@ -108,7 +108,7 @@ function putHandCard(duel, seat, id) {
 }
 
 function partnerSeat(seat) {
-  return seat % 2 === 0 ? seat + 2 : seat - 2;
+  return (seat + 2) % 4;
 }
 
 function inventory(duel) {
@@ -475,7 +475,7 @@ test('Field Zone is separate from three Spell/Trap Zones', () => {
   for (let i = 0; i < 3; i++) placeBackrow(duel, seat, team, i % 2 ? SPELL_ID : TRAP_ID, 0, false);
   assert.doesNotThrow(() => assertDustTornadoRules(duel));
   placeBackrow(duel, seat, team, SPELL_ID, 0, false);
-  assert.throws(() => assertDustTornadoRules(duel), /três Zonas de Magias/);
+  assert.throws(() => assertDustTornadoRules(duel), /limite de zonas/);
 });
 
 test('extra Deck physical limits reject more than five cards', () => {
