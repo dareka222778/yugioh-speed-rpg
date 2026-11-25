@@ -1,0 +1,85 @@
+{
+  "mission": "M535",
+  "runId": "work-20261122T175000-0300-M535",
+  "title": "Revalidate invited player's active Deck at Accept",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "5baf8c81890d2c8e937a2281ff58a5ea39825dac",
+  "branch": "feat/work-m535-duel-invite-deck-revalidation-20261122",
+  "scope": [
+    "tests/duelInvitationAcceptanceDeckRevalidation.test.cjs",
+    "docs/evidence/m535-duel-invite-deck-revalidation.json",
+    ".github/workflows/m535-duel-invite-deck-revalidation.yml"
+  ],
+  "priority": "P1 — consentimento não pode iniciar um duelo usando um Deck que ficou inválido depois que o convite foi criado.",
+  "behavior": [
+    {
+      "case": "convidado altera o Deck ativo de 20 para 19 cartas após receber convite",
+      "assertions": [
+        "o convite já criado mantém o snapshot de 20 cartas do criador e a revisão original",
+        "Accept revalida o Deck ativo atual do convidado dentro da transação",
+        "o Deck de 19 cartas rejeita Accept sem criar DuelState",
+        "a revisão/status do convite permanecem pending e o lock do criador é preservado",
+        "o convidado não adquire lock",
+        "a mudança temporária do active flag feita durante validação é revertida junto com a transação",
+        "não são criados duel_transition_events ou action receipts"
+      ]
+    },
+    {
+      "case": "o convidado restaura o Deck para 20 cartas e aceita o mesmo convite",
+      "assertions": [
+        "o mesmo convite/revisão continua válido, sem recriação",
+        "Accept inicia exatamente um DuelState com os dois jogadores",
+        "cada participante entra com 20 cartas Main entre mão e Deck e Extra Deck dentro do limite 5",
+        "exatamente dois locks físicos existem e não há órfãos",
+        "players, player_cards, starter_grants, decks e deck_cards retornam ao snapshot original"
+      ]
+    }
+  ],
+  "isolation": {
+    "database": "SQLite temporário no diretório do sistema operacional",
+    "runtime": "duelStore/decks reais em dist; somente leitura",
+    "mutation": "somente uma linha temporária de deck_cards do fixture, restaurada antes da aceitação",
+    "discordCredentials": "DISCORD_TOKEN, DISCORD_CLIENT_ID e DISCORD_GUILD_ID removidos",
+    "persistentPlayerData": "Nenhum acesso ao banco persistente"
+  },
+  "ownerRules": {
+    "mainDeck": "20–30; este teste rejeita 19 e aceita 20",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeck": 5,
+    "extraDeckFixture": "≤5",
+    "runtimeChanged": false
+  },
+  "catalog": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "runtimeFilesChanged": [],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  },
+  "limitations": [
+    "O cenário usa SQLite temporário e não faz chamada ao gateway Discord.",
+    "Este bloco testa o limite inferior de 20 cartas no momento do Accept; o limite superior 30 e Extra Deck 5 permanecem cobertos por suítes de formato existentes."
+  ],
+  "testExecution": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "customWorkflow": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null
+  }
+}
