@@ -1,0 +1,77 @@
+{
+  "mission": "M509",
+  "runId": "work-20261122T075959-0300-M509",
+  "priority": "P1 — provar isolamento por guild, consentimento único e rollback transacional do último aceite do lobby TagDuel 2v2, preservando os três aceites anteriores e todos os dados econômicos.",
+  "base": {
+    "branch": "feat/rea-engine-recovery-20261026",
+    "sha": "fdfdaad9f3bff0e52b5810cba51c2990bfe4db6e"
+  },
+  "scope": {
+    "files": [
+      "tests/tagLobbyAcceptAtomicity2v2.test.cjs",
+      "docs/evidence/m509-tag-lobby-accept-atomicity.json",
+      ".github/workflows/m509-tag-lobby-accept-atomicity.yml"
+    ],
+    "runtimeChanged": false,
+    "commandBuilderChanged": false,
+    "tagStoreChanged": false,
+    "tagInteractionChanged": false,
+    "tagUIChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "guildIsolation": "An invited participant presenting the current Accept custom_id from a different guild is rejected before acknowledgement, revision change, or participant lock.",
+    "duplicateConsent": "An already accepted participant cannot consume a second consent at the current revision or create a duplicate tag_members lock.",
+    "finalConsentAtomicity": "An injected SQLite failure during the final transition to playing rolls back the final member lock, accepted flag, session status, state and revision; the same current revision can be retried after removing the trigger.",
+    "successfulRetry": "The final retry creates one normal 2v2 session with four physical 30-card decks, 120 unique UIDs and private payloads for all four participants.",
+    "economy": "players, player_cards and starter_grants snapshots remain unchanged."
+  },
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio participante",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "certification": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário com trigger de falha injetada",
+    "discord": "handler e builders reais offline; sem token, guild ou canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node -e \"JSON.parse(require('node:fs').readFileSync('docs/evidence/m509-tag-lobby-accept-atomicity.json','utf8'))\"",
+      "node --test tests/tagLobbyAcceptAtomicity2v2.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "A interação Discord é exercitada offline por meio do handler e dos builders reais; não substitui teste em guild real.",
+    "A CI remota é a execução de aceitação; não houve checkout local nesta sessão.",
+    "A suíte não certifica novas cartas nem altera runtime."
+  ]
+}
