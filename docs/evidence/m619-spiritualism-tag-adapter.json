@@ -21,7 +21,7 @@
       "docs/evidence/m619-spiritualism-tag-adapter.json",
       ".github/workflows/m619-spiritualism-tag-adapter.yml"
     ],
-    "plannedScenarios": 23,
+    "plannedScenarios": 25,
     "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, releasedCardIds, certificações, allowlist, comandos Discord, persistência ou produção. A identidade real Spiritualism permanece fora dos fixtures habilitados; os testes usam uma Normal Spell válida como fixture e não concedem inventário."
   },
   "rules": {
@@ -39,7 +39,7 @@
     "remaining": 31
   },
   "verification": {
-    "focusedScenarios": 23,
+    "focusedScenarios": 25,
     "focusedTestResult": "pending",
     "typecheck": "pending",
     "build": "pending",
