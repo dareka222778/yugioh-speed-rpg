@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "mission": "M515",
+  "runId": "work-20261122T113307-0300-M515",
+  "title": "1v1 duel timeout boundary and atomic rollback",
+  "priority": "P1 — fechar a lacuna de timeout 1v1: convite expira exatamente aos 120 s e decisão de duelo aos 30 min; o W.O. deve ir ao jogador que devia agir, persistir duelFinished e liberar ambos os locks atomicamente, sem tocar economia ou inventário.",
+  "branch": "feat/work-m515-duel-timeout-boundary-atomicity-20261122",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "0e8c734607712c1bc73eae5e77b23b805b270c2c",
+  "scope": [
+    "tests/duelTimeoutBoundaryAtomicity.test.cjs",
+    "docs/evidence/m515-duel-timeout-boundary-atomicity.json",
+    ".github/workflows/m515-duel-timeout-boundary-atomicity.yml"
+  ],
+  "behavior": {
+    "invitationTimeoutMs": 120000,
+    "decisionTimeoutMs": 1800000,
+    "cases": [
+      "Convite permanece pending em 119999 ms e expira em 120000 ms.",
+      "Expiração do convite libera somente o lock do criador, sem criar estado de duelo ou evento terminal fictício.",
+      "Duelo permanece playing em 1799999 ms e encerra em 1800000 ms.",
+      "W.O. é atribuído ao oponente do jogador que decisionPlayer identifica como responsável pela ação.",
+      "Evento duelFinished é persistido exatamente uma vez e a revisão terminal é estável em leituras posteriores.",
+      "Falha SQLite ao inserir duel_transition_events reverte status, revisão e remoção dos dois locks; retry no mesmo deadline encerra uma única vez.",
+      "Painel Discord terminal não mantém botões ativos nem revela UIDs privados da mão."
+    ],
+    "rules": {
+      "mainDeck": "20–30",
+      "handLimit": 6,
+      "handDiscard": "somente na End Phase",
+      "monsterZones": 3,
+      "spellTrapZones": 3,
+      "fieldZone": "separada",
+      "extraDeckMax": 5
+    }
+  },
+  "validation": {
+    "database": "SQLite temporário, isolado por DATABASE_PATH",
+    "discord": "Builders e payload validados offline com validateDiscordPayload; sem token/guild real",
+    "playerData": "Snapshots de players, player_cards, starter_grants, decks e deck_cards antes/depois",
+    "inventoryGranted": 0,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0
+  },
+  "limitations": [
+    "Não substitui teste com bot conectado a uma guild Discord real.",
+    "Não verifica o provedor de hospedagem nem a implantação de produção.",
+    "Não altera o runtime: cobre o contrato atual de timeout e persistência."
+  ],
+  "status": "pending-ci"
+}
