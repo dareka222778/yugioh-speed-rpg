@@ -1,0 +1,52 @@
+{
+  "mission": "M529",
+  "runId": "work-20261122T165200-0300-M529",
+  "parentRunId": "work-20261122T163436-0300-M527",
+  "title": "1v1 terminal timeout outbox backpressure and bounded drain",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "38e9d11d528a6bc7aa6ef4014c599d8adf6e837b",
+  "branch": "feat/work-m529-duel-timeout-outbox-backpressure-20261122",
+  "scope": [
+    "tests/duelTimeoutOutboxBackpressure.test.cjs",
+    "docs/evidence/m529-duel-timeout-outbox-backpressure.json",
+    ".github/workflows/m529-duel-timeout-outbox-backpressure.yml"
+  ],
+  "scenario": {
+    "terminalRows": 205,
+    "status": "expired",
+    "revision": 1,
+    "publicRevisionBefore": 0,
+    "limitPerPoll": 100,
+    "expectedBatchSizes": [
+      100,
+      100,
+      5,
+      0
+    ]
+  },
+  "assertions": [
+    "no poll exceeds 100 records",
+    "all 205 unique terminal revisions are eventually delivered",
+    "no record is repeated before ACK",
+    "matching ACK updates public_revision",
+    "duplicate ACK is idempotent",
+    "outbox is empty after all ACKs",
+    "no player, duel member, action receipt, transition event or inventory row is created"
+  ],
+  "isolatedDatabase": "Temporary SQLite database; synthetic terminal outbox rows only.",
+  "certification": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "runtimeFilesChanged": [],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  }
+}
