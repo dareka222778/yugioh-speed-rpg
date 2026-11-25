@@ -15,7 +15,7 @@ const EFFECT_IDS = enabledCardIds.filter(id => {
   return card?.kind === 'monster' && card.monsterType === 'effect' && !card.fusion;
 });
 const TRAP_IDS = enabledCardIds.filter(id => getDuelCard(id)?.kind === 'trap').slice(0, 2);
-const SPELL_IDS = enabledCardIds.filter(id => getDuelCard(id)?.kind === 'spell').slice(0, 2);
+const SPELL_IDS = enabledCardIds.filter(id => getDuelCard(id)?.kind === 'spell').slice(0, 6);
 const FUSION_NAMES = new Set();
 const FUSION_IDS = enabledCardIds.filter(id => {
   const card = getDuelCard(id);
@@ -34,39 +34,47 @@ const NORMAL_IDS = tagNormalCardIds.filter(id => {
 });
 assert.ok(EFFECT_IDS.length >= 5, 'fixtures require five enabled effect monsters');
 assert.ok(TRAP_IDS.length >= 1, 'fixtures require an enabled Trap');
-assert.equal(SPELL_IDS.length, 2, 'fixtures require two enabled Spells');
+assert.equal(SPELL_IDS.length, 6, 'fixtures require six enabled Spells');
 assert.ok(NORMAL_IDS.length >= 27, 'fixtures require 27 distinct Normal Monster names');
 
 const LIGHT_FIXTURE_ID = EFFECT_IDS[0];
 const DARK_FIXTURE_ID = EFFECT_IDS[1];
 const EARTH_FIXTURE_ID = EFFECT_IDS[2];
-const LUMINOUS_FIXTURE_ID = SPELL_IDS[0];
-const MYSTIC_FIXTURE_ID = SPELL_IDS[1];
+const FIRE_FIXTURE_ID = EFFECT_IDS[3];
+const WIND_FIXTURE_ID = EFFECT_IDS[4];
+const WATER_FIXTURE_ID = NORMAL_IDS[0];
+const [LUMINOUS_FIXTURE_ID, MYSTIC_FIXTURE_ID, GAIA_FIXTURE_ID,
+  UMIIRUKA_FIXTURE_ID, MOLTEN_FIXTURE_ID, RISING_FIXTURE_ID] = SPELL_IDS;
+const fieldSpellIds = {
+  LIGHT: LUMINOUS_FIXTURE_ID,
+  DARK: MYSTIC_FIXTURE_ID,
+  EARTH: GAIA_FIXTURE_ID,
+  WATER: UMIIRUKA_FIXTURE_ID,
+  FIRE: MOLTEN_FIXTURE_ID,
+  WIND: RISING_FIXTURE_ID,
+};
 const attributes = new Map([
   [LIGHT_FIXTURE_ID, 'LIGHT'],
   [DARK_FIXTURE_ID, 'DARK'],
   [EARTH_FIXTURE_ID, 'EARTH'],
+  [FIRE_FIXTURE_ID, 'FIRE'],
+  [WIND_FIXTURE_ID, 'WIND'],
+  [WATER_FIXTURE_ID, 'WATER'],
 ]);
 const lookup = id => {
   const info = getDuelCard(id);
   if (!info) return undefined;
-  if (id === LUMINOUS_FIXTURE_ID || id === MYSTIC_FIXTURE_ID) {
+  if (SPELL_IDS.includes(id)) {
     return { ...info, field: true };
   }
   return { ...info, attribute: attributes.get(id) ?? info.attribute };
 };
 const negated = new Set();
-const adapter = createAttributeFieldSpellTagAdapter({
-  luminousSparkId: LUMINOUS_FIXTURE_ID,
-  mysticPlasmaZoneId: MYSTIC_FIXTURE_ID,
-}, lookup, (_state, uid) => negated.has(uid));
+const adapter = createAttributeFieldSpellTagAdapter(fieldSpellIds, lookup, (_state, uid) => negated.has(uid));
 
 const BASE_DECK = [
-  ...NORMAL_IDS.slice(0, 12),
-  LIGHT_FIXTURE_ID,
-  DARK_FIXTURE_ID,
-  EARTH_FIXTURE_ID,
-  ...EFFECT_IDS.slice(3, 5),
+  ...NORMAL_IDS.slice(0, 8),
+  ...EFFECT_IDS.slice(0, 5),
   ...SPELL_IDS,
   TRAP_IDS[0],
 ];
@@ -171,8 +179,8 @@ function resetNegation() {
 test('identidades oficiais e fixture Field Spell permanecem separadas', () => {
   assert.equal(LUMINOUS_SPARK_ID, '81777047');
   assert.equal(MYSTIC_PLASMA_ZONE_ID, '18161786');
-  assert.equal(adapter.luminousSparkId, LUMINOUS_FIXTURE_ID);
-  assert.equal(adapter.mysticPlasmaZoneId, MYSTIC_FIXTURE_ID);
+  assert.equal(adapter.fieldSpellIds.LIGHT, LUMINOUS_FIXTURE_ID);
+  assert.equal(adapter.fieldSpellIds.DARK, MYSTIC_FIXTURE_ID);
 });
 
 test('Luminous Spark concede +500 ATK/-400 DEF a monstros LIGHT face-up', () => {
@@ -200,6 +208,25 @@ test('Mystic Plasma Zone concede +500 ATK/-400 DEF somente a monstros DARK', () 
   assert.equal(adapter.getAttributeModifier(duel, dark).atk, 500);
   assert.equal(adapter.getAttributeModifier(duel, dark).def, -400);
   assert.equal(adapter.getAttributeModifier(duel, light).atk, 0);
+});
+
+test('Gaia Power, Umiiruka, Molten Destruction e Rising Air Current cobrem EARTH/WATER/FIRE/WIND', () => {
+  resetNegation();
+  const cases = [
+    [GAIA_FIXTURE_ID, EARTH_FIXTURE_ID],
+    [UMIIRUKA_FIXTURE_ID, WATER_FIXTURE_ID],
+    [MOLTEN_FIXTURE_ID, FIRE_FIXTURE_ID],
+    [RISING_FIXTURE_ID, WIND_FIXTURE_ID],
+  ];
+  for (const [fieldId, monsterId] of cases) {
+    const duel = makeDuel();
+    addField(duel, fieldId, 0, 0);
+    const target = addMonster(duel, monsterId, 2, 0);
+    const modifier = adapter.getAttributeModifier(duel, target);
+    assert.equal(modifier.atk, 500);
+    assert.equal(modifier.def, -400);
+    assert.equal(modifier.activeSources, 1);
+  }
 });
 
 test('Field Spell de qualquer equipe afeta monstros da equipe oposta', () => {
@@ -296,10 +323,7 @@ test('monstro alvo face-down não revela atributo nem recebe modificador', () =>
     if (id === LIGHT_FIXTURE_ID) lookedUp = true;
     return lookup(id);
   };
-  const guarded = createAttributeFieldSpellTagAdapter({
-    luminousSparkId: LUMINOUS_FIXTURE_ID,
-    mysticPlasmaZoneId: MYSTIC_FIXTURE_ID,
-  }, guardedLookup);
+  const guarded = createAttributeFieldSpellTagAdapter(fieldSpellIds, guardedLookup);
   assert.equal(guarded.getAttributeModifier(duel, hidden).attribute, 'UNKNOWN');
   assert.equal(guarded.getAttributeModifier(duel, hidden).atk, 0);
   assert.equal(lookedUp, false);
@@ -323,10 +347,7 @@ test('atributo ausente não é tratado como LIGHT ou DARK', () => {
     const info = lookup(id);
     return id === LIGHT_FIXTURE_ID ? { ...info, attribute: null } : info;
   };
-  const strict = createAttributeFieldSpellTagAdapter({
-    luminousSparkId: LUMINOUS_FIXTURE_ID,
-    mysticPlasmaZoneId: MYSTIC_FIXTURE_ID,
-  }, unknownLookup);
+  const strict = createAttributeFieldSpellTagAdapter(fieldSpellIds, unknownLookup);
   assert.throws(() => strict.getAttributeModifier(duel, light));
 });
 
@@ -389,9 +410,7 @@ test('Deck Principal 20/30 e Extra Deck 5 permanecem preservados', () => {
 
 test('IDs inválidos e metadados de Field Spell não são aceitos silenciosamente', () => {
   resetNegation();
-  assert.throws(() => createAttributeFieldSpellTagAdapter({
-    luminousSparkId: '', mysticPlasmaZoneId: MYSTIC_FIXTURE_ID,
-  }, lookup));
+  assert.throws(() => createAttributeFieldSpellTagAdapter({ LIGHT: '' }, lookup));
   const duel = makeDuel();
   addField(duel, LUMINOUS_FIXTURE_ID, 0, 0);
   const light = addMonster(duel, LIGHT_FIXTURE_ID, 2, 0);
@@ -399,9 +418,6 @@ test('IDs inválidos e metadados de Field Spell não são aceitos silenciosament
     const info = lookup(id);
     return id === LUMINOUS_FIXTURE_ID ? { ...info, field: false } : info;
   };
-  const strict = createAttributeFieldSpellTagAdapter({
-    luminousSparkId: LUMINOUS_FIXTURE_ID,
-    mysticPlasmaZoneId: MYSTIC_FIXTURE_ID,
-  }, invalidLookup);
+  const strict = createAttributeFieldSpellTagAdapter(fieldSpellIds, invalidLookup);
   assert.throws(() => strict.getAttributeModifier(duel, light));
 });
