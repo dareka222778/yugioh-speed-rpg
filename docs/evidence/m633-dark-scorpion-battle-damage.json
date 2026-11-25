@@ -54,9 +54,9 @@
     "handDiscard": "End Phase only"
   },
   "verification": {
-    "plannedScenarios": 25,
+    "plannedScenarios": 29,
     "focusedTests": 0,
-    "focusedTestResult": "pending",
+    "focusedTestResult": "tests expanded for chain negation, active opposing seat, 20–30 deck and 3+3 zones; rerun pending",
     "typecheck": "pending",
     "build": "pending",
     "evidenceValidation": "pending",

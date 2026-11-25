@@ -67,6 +67,7 @@ export type PrepareResult = Readonly<{
   status: 'ready' | 'duplicate' | 'not-eligible' | 'negated' | 'invalid-choice' | 'invalid-target';
   plan?: BattleEffectPlan;
 }>;
+export type ResolveOptions = Readonly<{ effectNegated?: boolean }>;
 export type ResolveResult = Readonly<{
   state: BattleDamageState;
   status: 'resolved' | 'duplicate' | 'awaiting-opponent-selection' | 'invalid-selection' |
@@ -311,7 +312,8 @@ export function createDarkScorpionBattleDamageTagAdapter(
   function resolve(
     input: BattleDamageState,
     plan: BattleEffectPlan,
-    selectedSpellUid?: string
+    selectedSpellUid?: string,
+    options: ResolveOptions = {}
   ): ResolveResult {
     assertState(input);
     if (!plan || !validId(plan.eventId) || !validId(plan.attackerUid) ||
@@ -341,7 +343,7 @@ export function createDarkScorpionBattleDamageTagAdapter(
       assertConserved(before, state);
       return { state, status: 'stale-event', sentUids: [] };
     }
-    if (monsterEffectsNegated(state.core, stored.attackerUid)) {
+    if (options.effectNegated === true || monsterEffectsNegated(state.core, stored.attackerUid)) {
       record.pendingPlans.splice(index, 1);
       record.resolvedEventIds.push(stored.eventId);
       assertConserved(before, state);

@@ -88,8 +88,8 @@ function addBackrow(duel, ownerSeat, controllerTeam, id) {
   duel.core.players[controllerTeam].backrow.push({...card,setTurn:0,faceUp:false});
   return card.uid;
 }
-function eventAndSource(cardId=BURGLARS_FIXTURE_ID, ownerSeat=0, attackerTeam=0, damage=300, first=2) {
-  const duel=makeDuel(first);
+function eventAndSource(cardId=BURGLARS_FIXTURE_ID, ownerSeat=0, attackerTeam=0, damage=300, first=2, deck=BASE_DECK, extraBySeat={}) {
+  const duel=makeDuel(first,deck,extraBySeat);
   const attackerUid=addMonster(duel,cardId,ownerSeat,attackerTeam);
   const opponentTeam=1-attackerTeam;
   const before=duel.core.players[opponentTeam].lp;
@@ -191,6 +191,7 @@ test('Burglars aguarda a seleção privada do oponente sem consumir o plano',()=
 test('Burglars envia somente Magia escolhida do Deck ativo adversário e embaralha',()=>{
   const {duel,event}=eventAndSource();
   const selected=ensureSpellInDeck(duel,3);
+  assert.ok(selected.uid.startsWith('m3:'), 'selection must come from the active opposing physical seat');
   const before=inventory(duel);
   const prepared=planFor(duel,event,{kind:'burglars-send-spell'});
   const resolved=adapter.resolve(prepared.state,prepared.plan,selected.uid);
@@ -330,12 +331,19 @@ test('efeito preparado resolve mesmo se a fonte sair do campo',()=>{
   assert.equal(resolved.status,'resolved');
 });
 
-test('negação da fonte na resolução impede o efeito',()=>{
+test('fonte face-down após a ativação não cancela um gatilho já ativado',()=>{
   const {duel,event}=eventAndSource(CLIFF_FIXTURE_ID);
   const prepared=planFor(duel,event,{kind:'cliff-mill'});
   const source=prepared.state.core.players[0].monsters.find(m=>m.uid===event.attackerUid);
   source.faceUp=false;
   const resolved=adapter.resolve(prepared.state,prepared.plan);
+  assert.equal(resolved.status,'resolved');
+});
+
+test('negação explícita na resolução impede o efeito',()=>{
+  const {duel,event}=eventAndSource(CLIFF_FIXTURE_ID);
+  const prepared=planFor(duel,event,{kind:'cliff-mill'});
+  const resolved=adapter.resolve(prepared.state,prepared.plan,undefined,{effectNegated:true});
   assert.equal(resolved.status,'source-negated');
 });
 
@@ -349,15 +357,32 @@ test('evento duplicado e resolução duplicada são idempotentes',()=>{
   assert.equal(second.status,'duplicate');
 });
 
-test('Deck 20–30, Extra 5 e zonas 3+3 continuam protegidos',()=>{
+test('Deck Principal 20–30 e Deck Adicional até cinco são aceitos',()=>{
+  const maxDeck=[...NORMAL_IDS.slice(0,26),EFFECT_IDS[0],EFFECT_IDS[1],SPELL_IDS[0],TRAP_IDS[0]];
+  assert.equal(maxDeck.length,30);
+  assert.doesNotThrow(()=>makeDuel(2,BASE_DECK));
+  assert.doesNotThrow(()=>makeDuel(2,maxDeck));
+  assert.throws(()=>makeDuel(2,BASE_DECK.slice(0,19)));
+  assert.throws(()=>makeDuel(2,[...maxDeck,NORMAL_IDS[26]]));
+  assert.doesNotThrow(()=>makeDuel(2,BASE_DECK,{0:FUSION_IDS.slice(0,5)}));
+  assert.throws(()=>makeDuel(2,BASE_DECK,{0:FUSION_IDS.slice(0,6)}));
+});
+
+test('quatro Monster Zones são rejeitadas pelo estado compartilhado',()=>{
   const {duel,event}=eventAndSource();
-  assert.equal(planFor(duel,event,{kind:'burglars-send-spell'}).status,'ready');
-  const invalidDeck=makeDuel(2,BASE_DECK.slice(0,19));
-  assert.throws(()=>adapter.prepare(invalidDeck,event,{kind:'burglars-send-spell'}));
-  const extra5=makeDuel(2,BASE_DECK,{0:FUSION_IDS.slice(0,5)});
-  assert.doesNotThrow(()=>adapter.prepare(extra5,event,{kind:'burglars-send-spell'}));
-  const extra6=makeDuel(2,BASE_DECK,{0:FUSION_IDS.slice(0,6)});
-  assert.throws(()=>adapter.prepare(extra6,event,{kind:'burglars-send-spell'}));
+  addAnyMonster(duel,2,0);
+  addAnyMonster(duel,2,0);
+  addAnyMonster(duel,2,0);
+  assert.throws(()=>adapter.prepare(duel,event,{kind:'burglars-send-spell'}),/limite de zonas/);
+});
+
+test('quatro Spell/Trap Zones são rejeitadas pelo estado compartilhado',()=>{
+  const {duel,event}=eventAndSource();
+  addBackrow(duel,0,0);
+  addBackrow(duel,2,0);
+  addBackrow(duel,1,0);
+  addBackrow(duel,3,0);
+  assert.throws(()=>adapter.prepare(duel,event,{kind:'burglars-send-spell'}),/limite de zonas/);
 });
 
 test('evento de dano sem fonte no campo não pode ser fabricado',()=>{
