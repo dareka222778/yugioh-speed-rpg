@@ -5,7 +5,7 @@
   "owner": "Work principal",
   "priority": "P1",
   "priorityRequestedBy": "User",
-  "status": "PR #563 aberto como draft; seis commits isolados; CI focada ainda não apareceu na consulta de runs PR; M621 preparado em escopo independente.",
+  "status": "M620: focused workflow verde (26/26), check/build/evidência, Card Batch Fast e Milestone 1000 verdes; Engine Validation ainda em execução. PR #563 draft, sem merge/deploy; escopo liberado ao auxiliar para revisão/sincronização em branch própria.",
   "reservedAt": "2026-11-25T11:00:00-03:00",
   "startedAt": "2026-11-25T11:00:00-03:00",
   "endedAt": null,
@@ -80,16 +80,21 @@
   },
   "verification": {
     "focusedScenarios": 26,
-    "focusedTestResult": "pending",
-    "typecheck": "pending",
-    "build": "pending",
-    "evidenceValidation": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
+    "focusedTestResult": "success",
+    "typecheck": "success",
+    "build": "success",
+    "evidenceValidation": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "in_progress",
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "focusedScenariosPassed": 26,
+    "focusedWorkflowRun": 45631860844,
+    "cardBatchRunId": 45631860829,
+    "milestoneRunId": 45631861005,
+    "engineValidationRunId": 45631860974
   },
   "production": {
     "merge": false,
@@ -97,7 +102,7 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 18,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -145,8 +150,21 @@
     "status": "awaiting-explicit-release",
     "centralFilesExcluded": true
   },
-  "nextTask": "M621 Nobleman of Crossout: adapter de alvo face-down, banimento e revelação/busca por nome nos quatro Decks físicos; preservar M614–M620 e M61.",
+  "nextTask": "M621 Nobleman of Crossout: validar revelação dos quatro Decks e varredura por rulesCardName; depois selecionar M622 sem conflito.",
   "nextWindow": "2026-11-25T14:30:00-03:00",
-  "scopeReleasedToAuxiliary": [],
-  "lastActivityAt": "2026-11-25T11:12:26-03:00"
+  "scopeReleasedToAuxiliary": [
+    "src/darkCoreTagAdapter.ts",
+    "tests/darkCoreTagAdapter.test.cjs",
+    "docs/evidence/m620-dark-core-tag-adapter.json",
+    ".github/workflows/m620-dark-core-tag-adapter.yml"
+  ],
+  "lastActivityAt": "2026-11-25T11:18:14-03:00",
+  "sharedSync": {
+    "status": "diverged",
+    "aheadBy": 7,
+    "behindBy": 3,
+    "sharedHead": "7d1e6a32bf4875becb19b950c7a90fe381ad59c1",
+    "merge": false,
+    "reason": "PR #563 continua draft; M620 branch ficou 3 commits atrás por checkpoints CAS posteriores, sem tentativa de merge."
+  }
 }
