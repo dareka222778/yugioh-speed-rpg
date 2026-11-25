@@ -1,0 +1,97 @@
+{
+  "format": 1,
+  "runId": "work-20261125T090200Z-M613",
+  "mission": "M613",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Yami",
+      "passcode": "59197169",
+      "konamiDatabaseId": 4341,
+      "kind": "Field Spell",
+      "firstTcgSet": "LOB-051",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Fiend and Spellcaster monsters on the field gain 200 ATK/DEF, also all Fairy monsters on the field lose 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4341&ope=2&request_locale=en"
+    },
+    {
+      "name": "Forest",
+      "passcode": "87430998",
+      "konamiDatabaseId": 4336,
+      "kind": "Field Spell",
+      "firstTcgSet": "LOB-046",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Insect, Beast, Plant, and Beast-Warrior monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4336&ope=2&request_locale=en"
+    },
+    {
+      "name": "Wasteland",
+      "passcode": "23424603",
+      "konamiDatabaseId": 4337,
+      "kind": "Field Spell",
+      "firstTcgSet": "LOB-047",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "All Dinosaur, Zombie, and Rock monsters on the field gain 200 ATK/DEF.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4337&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m613-race-field-spells-tag-adapter-20261125",
+    "baseSha": "6f921b8068b6cbd24ec2fc5924154e34670af094",
+    "files": [
+      "src/raceFieldSpellTagAdapter.ts",
+      "tests/raceFieldSpellTagAdapter.test.cjs",
+      "docs/evidence/m613-race-field-spells-tag-adapter.json",
+      ".github/workflows/m613-race-field-spells-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Yami concede +200 ATK/DEF a Fiend e Spellcaster e aplica -200 ATK/DEF a Fairy.",
+      "Forest concede +200 ATK/DEF a Insect, Beast, Plant e Beast-Warrior.",
+      "Wasteland concede +200 ATK/DEF a Dinosaur, Zombie e Rock.",
+      "Cada Field Zone é independente; fontes iguais acumulam e afetam ambas as equipes.",
+      "Fontes face-down, não resolvidas, negadas, substituídas ou removidas não contribuem.",
+      "Monstros face-down não revelam Raça; consulta preserva UIDs, inventário e mãos."
+    ],
+    "integrationBoundary": "Adapter isolado; o resolver central ainda precisa consultar getRaceModifier ao compor ATK/DEF. Não altera catálogo, metadata, certificações, allowlist, comandos, persistência ou produção."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "diferido à End Phase; adapter somente leitura"
+  },
+  "verification": {
+    "focusedScenarios": 17,
+    "focusedTestCommand": "node --test tests/raceFieldSpellTagAdapter.test.cjs",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false,
+    "actualFocusedRun": null
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "limitations": [
+    "Os testes usam três Magias já admitidas como fixtures com lookup isolado que as trata como Field Spells; passcodes e textos oficiais reais permanecem na evidência.",
+    "As três cartas permanecem fora do catálogo/allowlist e não recebem certificação por importação.",
+    "A integração na fórmula central de ATK/DEF depende do handoff M61 explícito.",
+    "Testes offline; sem sessão real no gateway Discord."
+  ]
+}
