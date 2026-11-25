@@ -296,7 +296,7 @@ test('destroys an opponent Field Spell and frees only the separate Field Zone', 
 
 test('a stolen target returns to its original physical owner GY, not the controller GY', () => {
   const result = setup({
-    targetOwnerSeat: resultSeatPlaceholder(),
+    targetOwnerSeat: 0,
     targetController: 1,
   });
   assert.ok(result.activation);
@@ -307,10 +307,6 @@ test('a stolen target returns to its original physical owner GY, not the control
   assert.ok(resolved.state.core.players[ownerTeam].grave.some(card => card.uid === result.targetUid));
   assert.ok(!resolved.state.core.players[result.opponentTeam].grave.some(card => card.uid === result.targetUid));
 });
-
-function resultSeatPlaceholder() {
-  return 0;
-}
 
 test('a target moved out before resolution is not replaced', () => {
   const result = setup();
@@ -430,8 +426,8 @@ test('rejects stale turn plans without mutating the saved state', () => {
 test('conserves every physical UID through destruction and optional Set', () => {
   const result = setup();
   assert.ok(result.activation);
-  const before = inventory(result.activation.state);
   const setUid = putHandCard(result.activation.state, result.activeSeat, SPELL_ID);
+  const before = inventory(result.activation.state);
   const resolved = resolveDustTornado(result.activation.state, result.activation.plan, { setUid });
   assert.ok(resolved);
   assert.deepEqual(inventory(resolved.state), before);
@@ -455,7 +451,7 @@ test('a hand above six is not truncated before the End Phase', () => {
   const hand = privateZone(duel, activeSeat, 'hand');
   const deck = privateZone(duel, activeSeat, 'deck');
   hand.push(deck.pop(), deck.pop());
-  const sourceUid = placeBackrow(duel, activeSeat, activeTeam, TRAP_ID, 2, false);
+  const sourceUid = placeBackrow(duel, partnerSeat(activeSeat), activeTeam, TRAP_ID, 2, false);
   const targetUid = placeBackrow(duel, 1 - activeTeam, 1 - activeTeam, SPELL_ID, 0, false);
   const beforeHand = privateZone(duel, activeSeat, 'hand').length;
   const activation = activateDustTornado(duel, sourceUid, targetUid, { cardId: TRAP_ID });
