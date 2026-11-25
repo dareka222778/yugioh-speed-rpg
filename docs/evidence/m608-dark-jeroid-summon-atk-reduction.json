@@ -1,0 +1,78 @@
+{
+  "format": 1,
+  "mission": "M608",
+  "runId": "work-20261124T235910-0300-M608",
+  "card": {
+    "name": "Dark Jeroid",
+    "passcode": "90980792",
+    "konamiDatabaseId": 5499,
+    "type": "DARK / Fiend / Effect / Level 4",
+    "atk": 1200,
+    "def": 1500,
+    "firstTcgPrinting": "PGD-056",
+    "firstTcgReleaseDate": "2003-07-18",
+    "effect": "If this card is Summoned: Target 1 face-up monster on the field; it loses 800 ATK.",
+    "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5499&ope=2&request_locale=en",
+    "historicalReference": "https://ftp.yugipedia.com/wiki/Dark_Jeroid"
+  },
+  "implementation": {
+    "branch": "feat/work-m608-dark-jeroid-summon-atk-reduction-20261124",
+    "paths": [
+      "src/darkJeroidSummonAtkReductionTagAdapter.ts",
+      "tests/darkJeroidSummonAtkReductionTagAdapter.test.cjs",
+      "docs/evidence/m608-dark-jeroid-summon-atk-reduction.json",
+      ".github/workflows/m608-dark-jeroid-summon-atk-reduction.yml"
+    ],
+    "behavior": [
+      "Accepts a genuine post-summon event for Normal, Flip or Special Summon; the source must be face-up on the current controller team's shared field.",
+      "The active physical representative of the source controller team selects one face-up monster on either team, including Dark Jeroid itself.",
+      "The selected monster receives a persistent -800 ATK adjustment; DEF is unchanged and the engine's atk() result is floored at zero.",
+      "A TargetBinding zone epoch prevents applying the old activation to a different incarnation after the target leaves and returns.",
+      "Changing control without leaving the Monster Zone does not invalidate the selected physical card.",
+      "The effect resolves if Dark Jeroid leaves the field after activation; negation and duplicate/replayed activations are idempotent.",
+      "Physical UIDs, owners, private hands and Deck/Extra Deck inventories are conserved."
+    ],
+    "rulesValidated": {
+      "mainDeckPerPhysicalSeat": "20-30",
+      "extraDeckPerPhysicalSeat": "0-5",
+      "monsterZonesPerTeam": 3,
+      "spellTrapZonesPerTeam": 3,
+      "handLimit": 6,
+      "handDiscard": "deferred to End Phase"
+    }
+  },
+  "verification": {
+    "focusedScenarios": 18,
+    "focusedTestCommand": "node --test tests/darkJeroidSummonAtkReductionTagAdapter.test.cjs",
+    "covers": [
+      "Normal, Flip and Special Summon",
+      "active-seat target selection and physical owner/control separation",
+      "self-targeting and allied/opposing face-up targets",
+      "invalid, negated, face-down, stale and forged summon events",
+      "target removed, turned face-down, returned with a new lifetime epoch, or merely changes controller",
+      "source removed after activation",
+      "effect negation, duplicate receipts and JSON restoration",
+      "ATK floor at zero with DEF unchanged",
+      "hand above six remains untouched until End Phase",
+      "Deck 20 and 30, Extra Deck 5, and 3+3 zone limits",
+      "physical inventory and UID conservation"
+    ],
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31
+    },
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "liveDiscordValidation": false
+  },
+  "integrationBoundary": "Isolated adapter only. Dark Jeroid is not yet in the engine-v9 certificate set, so focused tests inject an already-admitted effect-monster fixture ID. The production passcode remains 90980792. Central summon-trigger wiring, catalog admission, certification and Discord command integration remain blocked pending explicit M61 handoff.",
+  "limitations": [
+    "The host must emit a genuine successful summon event and pass the selected target UID from the active controller seat.",
+    "No real Discord gateway/guild session or production database was used.",
+    "No central resolver, card metadata, certification, release allowlist, persistent player data or production files were changed."
+  ]
+}
