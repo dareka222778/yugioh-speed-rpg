@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "runId": "work-20261125T110000-0300-M620",
+  "mission": "M620",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Dark Core",
+      "passcode": "70231910",
+      "konamiDatabaseId": 5609,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MFC-035",
+      "firstTcgRelease": "2003-10-10",
+      "officialEffect": "Discard 1 card, then target 1 face-up monster on the field; banish that target.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5609&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m620-dark-core-tag-adapter-20261125",
+    "baseSha": "ae86a77182c7971613a30e42482e0be8b2942446",
+    "files": [
+      "src/darkCoreTagAdapter.ts",
+      "tests/darkCoreTagAdapter.test.cjs",
+      "docs/evidence/m620-dark-core-tag-adapter.json",
+      ".github/workflows/m620-dark-core-tag-adapter.yml"
+    ],
+    "behavior": [
+      "Ativa somente na Main Phase aberta, da mão privada do assento físico ativo.",
+      "Paga exatamente um card qualquer da mesma mão física como custo; o descarte ocorre na ativação e não é devolvido por negação.",
+      "Seleciona um monstro face-up de qualquer equipe, inclusive em Defesa; não seleciona backrow ou Field Spell.",
+      "Vincula alvo por UID, zona e epoch; alvo que sai e retorna não é substituído.",
+      "Na resolução, revalida face-up e aplicabilidade de Magia; mudança de controle sem sair da zona preserva o alvo original.",
+      "Bane para a zona da equipe proprietária original, não da controladora; preserva UID e properlySummoned.",
+      "Tokens saem do campo sem serem convertidos em cartas banidas de inventário.",
+      "Recibo serializável impede replay; negação e alvo obsoleto resolvem sem banimento."
+    ],
+    "integrationBoundary": "Adapter isolado. Não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência de jogadores ou produção. Integração central depende de handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "plannedScenarios": 26,
+    "focusedScenarios": 26,
+    "focusedTestCommand": "node --test tests/darkCoreTagAdapter.test.cjs",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "A identidade real Dark Core ainda não está em cardMetadata, cardCertifications ou effectDefinitions; os testes usam uma Spell habilitada como fixture e injetam a identidade real no adapter.",
+    "O adapter é isolado e ainda não está conectado ao resolver central; a integração de corrente/seleção depende do handoff M61.",
+    "Não houve validação por gateway Discord real, backup verificável, merge ou deploy.",
+    "A execução não concede cartas nem altera dados persistentes de jogadores."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
