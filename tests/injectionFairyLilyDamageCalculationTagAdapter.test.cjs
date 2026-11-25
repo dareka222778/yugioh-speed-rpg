@@ -165,12 +165,14 @@ test('Injection Fairy Lily ativa atacando: paga 2000 LP compartilhados e concede
   assert.equal(plan.atkBonus, 3000);
   const baseAtk = atk(duel.core.players[0].monsters.find(m => m.uid === lilyUid), duel.core);
   const before = inventory(duel);
+  const beforeLP0 = duel.core.players[0].lp;
+  const beforeLP1 = duel.core.players[1].lp;
 
   const activated = adapter.activate(duel, plan);
   assert.equal(activated.status, 'activated');
   assert.equal(activated.lpPaid, 2000);
-  assert.equal(activated.state.core.players[0].lp, 6000);
-  assert.equal(activated.state.core.players[1].lp, 8000);
+  assert.equal(activated.state.core.players[0].lp, beforeLP0 - 2000);
+  assert.equal(activated.state.core.players[1].lp, beforeLP1);
   const resolved = adapter.resolve(activated.state, plan);
   assert.equal(resolved.status, 'boosted');
   assert.equal(resolved.temporaryAtkBonus, 3000);
@@ -207,6 +209,7 @@ test('Injection Fairy Lily ativa como defensora durante o turno adversário; nã
 
 test('once per battle, not once per turn: same battle blocks repeat, new battle can activate', () => {
   const duel = makeDuel(2);
+  duel.core.players[0].lp = 8000;
   const lilyUid = addMonster(duel, LILY_FIXTURE_ID, 2, 0, 'atk', true);
   const defenderUid = addMonster(duel, OPPONENT_MONSTER_ID, 3, 1, 'atk', true);
   const firstPlan = adapter.plan(duel, eventFor(duel, lilyUid, defenderUid), lilyUid);
@@ -253,11 +256,12 @@ test('a negação não devolve o custo já pago e não concede o bônus', () => 
   const lilyUid = addMonster(duel, LILY_FIXTURE_ID, 2, 0, 'atk', true);
   const defenderUid = addMonster(duel, OPPONENT_MONSTER_ID, 3, 1, 'atk', true);
   const plan = adapter.plan(duel, eventFor(duel, lilyUid, defenderUid), lilyUid);
+  const beforeLP = duel.core.players[0].lp;
   const activated = adapter.activate(duel, plan);
   const result = adapter.resolve(activated.state, plan, { effectNegated: true });
   assert.equal(result.status, 'negated');
   assert.equal(result.temporaryAtkBonus, 0);
-  assert.equal(result.state.core.players[0].lp, 6000);
+  assert.equal(result.state.core.players[0].lp, beforeLP - 2000);
   assert.ok(result.state.injectionFairyLily.resolvedActivationIds.includes(plan.activationId));
 });
 
@@ -266,12 +270,13 @@ test('se a fonte sair do campo após pagar o custo, não há bônus nem reembols
   const lilyUid = addMonster(duel, LILY_FIXTURE_ID, 1, 0, 'atk', true);
   const defenderUid = addMonster(duel, OPPONENT_MONSTER_ID, 3, 1, 'atk', true);
   const plan = adapter.plan(duel, eventFor(duel, lilyUid, defenderUid), lilyUid);
+  const beforeLP = duel.core.players[0].lp;
   const activated = adapter.activate(duel, plan);
   moveMonsterToOwnerGrave(activated.state, lilyUid, 0);
   const result = adapter.resolve(activated.state, plan);
   assert.equal(result.status, 'source-left-field');
   assert.equal(result.temporaryAtkBonus, 0);
-  assert.equal(result.state.core.players[0].lp, 6000);
+  assert.equal(result.state.core.players[0].lp, beforeLP - 2000);
 });
 
 test('evento fora do Damage Calculation, carta não participante, virada para baixo ou turno errado é rejeitado', () => {
@@ -302,9 +307,11 @@ test('carta roubada paga LP da equipe controladora, não do dono físico', () =>
   const plan = adapter.plan(duel, eventFor(duel, lilyUid, defenderUid), lilyUid);
   assert.equal(plan.sourceOwnerSeat, 1);
   assert.equal(plan.controllerTeam, 0);
+  const beforeLP0 = duel.core.players[0].lp;
+  const beforeLP1 = duel.core.players[1].lp;
   const result = adapter.activate(duel, plan);
-  assert.equal(result.state.core.players[0].lp, 6000);
-  assert.equal(result.state.core.players[1].lp, 8000);
+  assert.equal(result.state.core.players[0].lp, beforeLP0 - 2000);
+  assert.equal(result.state.core.players[1].lp, beforeLP1);
 });
 
 test('mão acima de seis não sofre descarte antecipado durante o cálculo de dano', () => {
@@ -330,6 +337,7 @@ test('respeita 3+3 zonas, Main Deck 20–30 e Extra Deck máximo 5 por assento',
   addAnyMonster(duel, 2, 0);
   addAnyBackrow(duel, 0, 0);
   addAnyBackrow(duel, 2, 0);
+  addAnyBackrow(duel, 0, 0);
   const event = eventFor(duel, lilyUid, defenderUid);
   assert.ok(adapter.plan(duel, event, lilyUid));
 
