@@ -4,8 +4,16 @@ import { getDuelCard } from './effectRegistry';
 import { RULES_PROFILE } from './rulesProfile';
 import { assertTagDuel, tagInventory, type TagDuel } from './tagDuel';
 
-export const LUMINOUS_SPARK_ID = '81777047';
-export const MYSTIC_PLASMA_ZONE_ID = '18161786';
+export const ATTRIBUTE_FIELD_SPELL_IDS = Object.freeze({
+  LIGHT: '81777047',
+  DARK: '18161786',
+  EARTH: '56594520',
+  WATER: '82999629',
+  FIRE: '19384334',
+  WIND: '45778932',
+} as const);
+export const LUMINOUS_SPARK_ID = ATTRIBUTE_FIELD_SPELL_IDS.LIGHT;
+export const MYSTIC_PLASMA_ZONE_ID = ATTRIBUTE_FIELD_SPELL_IDS.DARK;
 export const ATTRIBUTE_FIELD_SPELL_ATK = 500;
 export const ATTRIBUTE_FIELD_SPELL_DEF = -400;
 
@@ -17,10 +25,8 @@ export type AttributeFieldSpellState = TagDuel;
 export type AttributeFieldSpellLookup =
   (id: string) => Pick<Card, 'kind' | 'field' | 'attribute'> | undefined;
 export type FieldSpellNegationLookup = (state: DuelState, uid: string) => boolean;
-export type AttributeFieldSpellIds = Readonly<{
-  luminousSparkId?: string;
-  mysticPlasmaZoneId?: string;
-}>;
+export type FieldSpellAttribute = keyof typeof ATTRIBUTE_FIELD_SPELL_IDS;
+export type AttributeFieldSpellIds = Readonly<Partial<Record<FieldSpellAttribute, string>>>;
 export type AttributeFieldSpellModifier = Readonly<{
   targetUid: string;
   attribute: Attribute;
@@ -127,11 +133,12 @@ export function createAttributeFieldSpellTagAdapter(
   lookup: AttributeFieldSpellLookup = defaultLookup,
   isEffectNegated: FieldSpellNegationLookup = neverNegated
 ) {
-  const luminousSparkId = ids.luminousSparkId ?? LUMINOUS_SPARK_ID;
-  const mysticPlasmaZoneId = ids.mysticPlasmaZoneId ?? MYSTIC_PLASMA_ZONE_ID;
-  if (!validId(luminousSparkId) || !validId(mysticPlasmaZoneId) ||
-      luminousSparkId === mysticPlasmaZoneId) {
-    throw new Error('Identidades de Luminous Spark/Mystic Plasma Zone inválidas.');
+  const fieldSpellIds = { ...ATTRIBUTE_FIELD_SPELL_IDS, ...ids };
+  const configured = Object.entries(fieldSpellIds) as [FieldSpellAttribute, string][];
+  const configuredIds = configured.map(([, id]) => id);
+  if (configured.length !== 6 || configured.some(([, id]) => !validId(id)) ||
+      new Set(configuredIds).size !== configuredIds.length) {
+    throw new Error('Identidades das seis Field Spells de atributo inválidas.');
   }
 
   function getAttributeModifier(
@@ -166,11 +173,7 @@ export function createAttributeFieldSpellTagAdapter(
       const field = player.field as Backrow | null | undefined;
       if (!field || !field.faceUp || field.resolved === false) continue;
 
-      const fieldAttribute = field.id === luminousSparkId
-        ? 'LIGHT'
-        : field.id === mysticPlasmaZoneId
-          ? 'DARK'
-          : undefined;
+      const fieldAttribute = configured.find(([, id]) => id === field.id)?.[0];
       if (!fieldAttribute) continue;
 
       const sourceInfo = lookup(field.id);
@@ -197,8 +200,7 @@ export function createAttributeFieldSpellTagAdapter(
   }
 
   return {
-    luminousSparkId,
-    mysticPlasmaZoneId,
+    fieldSpellIds: Object.freeze({ ...fieldSpellIds }),
     getAttributeModifier,
   };
 }
