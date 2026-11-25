@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "runId": "work-20261125T111959-0300-M622",
+  "mission": "M622",
+  "priority": "P1",
+  "cards": [
+    {
+      "name": "Nobleman of Extermination",
+      "passcode": "17449108",
+      "konamiDatabaseId": 4964,
+      "kind": "Normal Spell",
+      "firstTcgSet": "PSV-035",
+      "firstTcgRelease": "2002-10-20",
+      "officialEffect": "Target 1 face-down Spell/Trap on the field; destroy that target, and if you do, banish it, then, if it was a Trap, each player reveals their Main Deck, then banishes all cards from it with that card's name.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4964&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m622-nobleman-extermination-tag-adapter-20261125",
+    "baseBranch": "feat/work-m621-nobleman-crossout-tag-adapter-20261125",
+    "baseSha": "fd0d6d444a2c132c9e018fbc7f143432970de16d",
+    "files": [
+      "src/noblemanOfExterminationTagAdapter.ts",
+      "tests/noblemanOfExterminationTagAdapter.test.cjs",
+      "docs/evidence/m622-nobleman-of-extermination-tag-adapter.json",
+      ".github/workflows/m622-nobleman-of-extermination-tag-adapter.yml"
+    ],
+    "sharedMechanic": "Reuses exported M621 revealAndBanishCopies helper; no duplicate deck-reveal implementation.",
+    "behavior": [
+      "Ativa somente na Main Phase aberta, da mão privada do assento físico ativo.",
+      "Seleciona Spell/Trap face-down em Spell/Trap Zone ou Field Zone; o plano de ativação não revela ID/nome.",
+      "Vincula UID/zona/epoch; mudança de controle na mesma zona preserva o alvo, saída e retorno invalida o binding.",
+      "Bane o alvo para a equipe proprietária física, não para a controladora.",
+      "Se o alvo for Trap, reutiliza o helper M621 para revelar os quatro Decks físicos e banir cópias com o mesmo rulesCardName.",
+      "Se o alvo for Spell, não revela Decks nem bane cópias.",
+      "Snapshots dos Decks e IDs banidos só são retornados após a resolução; recibo serializável bloqueia replay.",
+      "Field Zone permanece separada das três Spell/Trap Zones."
+    ],
+    "integrationBoundary": "Adapter isolado e empilhado sobre M621 para compartilhar o helper; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central depende de handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase"
+  },
+  "verification": {
+    "plannedScenarios": 28,
+    "focusedScenarios": 28,
+    "focusedTestCommand": "node --test tests/noblemanOfCrossoutTagAdapter.test.cjs tests/noblemanOfExterminationTagAdapter.test.cjs",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "O ID real ainda não está em metadata/certificações/effects; os testes usam Spell/Trap/Field Spell habilitados como fixtures.",
+    "A sequência de destruição/banimento ainda não está ligada aos hooks centrais de destruição/onDestroy e proteção contra destruição; não deve ser certificada antes da integração M61.",
+    "O PR é empilhado sobre M621 para reutilizar o helper de revelação; não pode ser integrado antes do PR base.",
+    "Sem gateway Discord real, backup verificável, merge ou deploy.",
+    "Nenhuma carta é concedida e nenhum dado persistente de jogador é alterado."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
