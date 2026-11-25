@@ -1,0 +1,110 @@
+{
+  "format": 1,
+  "runId": "work-20261125T043455-0300-M610",
+  "mission": "M610",
+  "parentRunId": "work-20261124T235910-0300-M609",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "implementation committed to isolated branch; CI pending",
+  "startedAt": "2026-11-25T04:34:55-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtStart": "fe62f6146736e98dd1f9ab9e31aaab566e6e13bf",
+  "branch": "feat/work-m610-battle-attrition-tag-adapter-20261125",
+  "baseSha": "fe62f6146736e98dd1f9ab9e31aaab566e6e13bf",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/battleAttritionTagAdapter.ts",
+    "tests/battleAttritionTagAdapter.test.cjs",
+    "docs/evidence/m610-battle-attrition-tag-adapter.json",
+    ".github/workflows/m610-battle-attrition-tag-adapter.yml"
+  ],
+  "scope": "Adapter isolado TagDuel para Zombyra the Dark (88472456 / CID 5245) e Dark Ruler Ha Des (53982768 / CID 5301): perda acumulativa e persistente de 200 ATK após destruição por batalha, restrição de ataque direto, negação de efeitos de monstros destruídos por Fiend, condição de não Invocação-Especial de Ha Des do Cemitério, vínculos por UID/epoch, idempotência e conservação do inventário.",
+  "cards": [
+    {
+      "name": "Zombyra the Dark",
+      "passcode": "88472456",
+      "konamiDatabaseId": 5245,
+      "firstTcgSet": "LON-074",
+      "firstTcgRelease": "2003-03-01",
+      "type": "DARK Level 4 Warrior/Effect",
+      "atk": 2100,
+      "def": 500,
+      "officialEffect": "Cannot attack directly. If this card destroys a monster by battle: This card loses 200 ATK.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5245&ope=2&request_locale=en"
+    },
+    {
+      "name": "Dark Ruler Ha Des",
+      "passcode": "53982768",
+      "konamiDatabaseId": 5301,
+      "firstTcgSet": "LOD-001",
+      "firstTcgRelease": "2003-06-06",
+      "type": "DARK Level 6 Fiend/Effect",
+      "atk": 2450,
+      "def": 1600,
+      "officialEffect": "Cannot be Special Summoned from the GY. Negate the effects of monsters destroyed by battle with Fiend monsters you control.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5301&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/battleAttritionTagAdapter.ts",
+      "tests/battleAttritionTagAdapter.test.cjs"
+    ],
+    "behavior": [
+      "Zombyra usa continuousState.temporary com expiração máxima e syncContinuous; a perda acumula, persiste entre turnos e é removida quando a instância fica face-down ou deixa a zona.",
+      "Zombyra e Ha Des usam recibos idempotentes e TargetBinding por UID/epoch.",
+      "Ha Des registra a negação vinculada à instância destruída enquanto ela permanece na zona de destino (Cemitério ou banida); sair e retornar cria novo epoch.",
+      "Condição de Ha Des não ser Invocada-Especial do Cemitério é separada de seu efeito negável.",
+      "Eventos exigem destruição por batalha após a Damage Step; não há concessão, remoção ou duplicação de cartas."
+    ],
+    "integrationBoundary": [
+      "O adapter ainda não está ligado ao resolver central, à lista legalActions/ataque direto ou ao validador central de Invocação-Especial.",
+      "O host deve chamar os eventos após o resultado de batalha e consultar isHaDesEffectNegated antes de processar efeitos da instância no Cemitério.",
+      "As cartas não foram adicionadas ao catálogo, à allowlist ou ao engine-v9; os testes usam IDs certificados existentes como fixtures com metadados substituídos apenas no lookup do adapter."
+    ]
+  },
+  "rules": {
+    "mainDeck": "20–30 por assento físico",
+    "extraDeck": "máximo 5 por assento físico",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "hand": "limite 6 permanece na End Phase; adapter não descarta antecipadamente nem altera mãos"
+  },
+  "testPlan": {
+    "focusedTests": 22,
+    "status": "pending",
+    "intendedChecks": [
+      "perda de ATK, acumulação, idempotência e negação",
+      "persistência entre turnos e reset ao virar face-down",
+      "fonte que deixa o campo ou perde face-up",
+      "ataque direto proibido e condição de Special Summon do Ha Des",
+      "Ha Des contra Fiend, alvo que sai/retorna e destino banido",
+      "conservação de UID/inventário, hand 7 sem descarte antecipado",
+      "deck 20/30, Extra 5 e limites 3+3"
+    ]
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": null,
+  "targetEffectiveMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Validar CI do M610, corrigir qualquer falha isolada; depois avançar para a próxima família de efeitos de batalha em branch própria, sem tocar nas reservas M608/M609.",
+  "nextWindow": "2026-11-25T09:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

@@ -1,0 +1,37 @@
+name: M610 Battle Attrition Tag Adapter
+on:
+  pull_request:
+    paths:
+      - 'src/battleAttritionTagAdapter.ts'
+      - 'tests/battleAttritionTagAdapter.test.cjs'
+      - 'docs/evidence/m610-battle-attrition-tag-adapter.json'
+      - '.github/workflows/m610-battle-attrition-tag-adapter.yml'
+  push:
+    branches:
+      - 'feat/work-m610-battle-attrition-tag-adapter-20261125'
+    paths:
+      - 'src/battleAttritionTagAdapter.ts'
+      - 'tests/battleAttritionTagAdapter.test.cjs'
+      - 'docs/evidence/m610-battle-attrition-tag-adapter.json'
+      - '.github/workflows/m610-battle-attrition-tag-adapter.yml'
+permissions:
+  contents: read
+concurrency:
+  group: m610-battle-attrition-\${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node --test tests/battleAttritionTagAdapter.test.cjs
+      - name: Validate evidence metadata
+        run: node -e "const e=require('./docs/evidence/m610-battle-attrition-tag-adapter.json'); if(e.format!==1 || e.mission!=='M610' || e.cards.length!==2 || e.catalogAtStart.newCertifications!==0) process.exit(1)"
