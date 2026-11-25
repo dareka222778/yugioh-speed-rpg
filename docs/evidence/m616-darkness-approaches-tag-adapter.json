@@ -32,7 +32,8 @@
       "Negação ou alvo inválido não devolvem o custo; recibo serializável bloqueia replay.",
       "Preserva dono físico, UID, inventário, Deck 20–30, Extra 5, zonas 3+3 e mão 6 com descarte de regra apenas na End Phase."
     ],
-    "integrationBoundary": "Adapter isolado; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central aguarda handoff M61."
+    "integrationBoundary": "Adapter isolado; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central aguarda handoff M61.",
+    "plannedScenarios": 26
   },
   "rules": {
     "mainDeckPerPhysicalSeat": "20–30",
