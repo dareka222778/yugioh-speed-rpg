@@ -35,5 +35,5 @@ jobs:
       - run: npm run check
       - run: npm run build
       - name: Validate evidence metadata
-        run: node -e "const e=require('./docs/evidence/m631-direct-burn-spells-tag-adapter.json'); if(e.format!==1 || e.mission!=='M631' || e.cards.length!==2 || e.cards[0].passcode!=='54899807' || e.cards[1].passcode!=='96300057' || e.verification.focusedScenarios!==28 || e.verification.newCertifications!==0 || e.verification.inventoryGranted!==0 || e.production.merge || e.production.deploy) process.exit(1)"
+        run: node -e "const e=require('./docs/evidence/m631-direct-burn-spells-tag-adapter.json'); if(e.format!==1 || e.mission!=='M631' || e.cards.length!==2 || e.cards[0].passcode!=='54899807' || e.cards[1].passcode!=='96300057' || e.verification.focusedScenarios!==29 || e.verification.newCertifications!==0 || e.verification.inventoryGranted!==0 || e.production.merge || e.production.deploy) process.exit(1)"
       - run: node --test tests/directBurnSpellTagAdapter.test.cjs
