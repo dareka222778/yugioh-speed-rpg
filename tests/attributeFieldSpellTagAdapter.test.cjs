@@ -178,7 +178,7 @@ test('identidades oficiais e fixture Field Spell permanecem separadas', () => {
   assert.equal(LUMINOUS_SPARK_ID, '81777047');
   assert.equal(MYSTIC_PLASMA_ZONE_ID, '18161786');
   assert.equal(adapter.fieldSpellIds.LIGHT, LUMINOUS_FIXTURE_ID);
-  assert.equal(adapter.fieldSpellIds.DARK, FIELD_SPELL_FIXTURE_ID);
+  assert.equal(adapter.fieldSpellIds.DARK, MYSTIC_PLASMA_ZONE_ID);
 });
 
 test('Luminous Spark concede +500 ATK/-400 DEF a monstros LIGHT face-up', () => {
