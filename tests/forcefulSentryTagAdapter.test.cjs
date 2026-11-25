@@ -317,3 +317,14 @@ test('rejeita quatro cartas no backrow compartilhado', () => {
   }
   assert.throws(() => assertForcefulSentryRules(duel));
 });
+
+test('DuelRandom permanece serializável após devolver e embaralhar a carta', () => {
+  const { activation, opponentSeat } = setup();
+  const selected = privateZone(activation.state, opponentSeat, 'hand')[0];
+  const result = resolveForcefulSentry(activation.state, activation.plan, selected.uid, { cardId: SPELL_ID });
+  assert.ok(result);
+  const restored = JSON.parse(JSON.stringify(result.state));
+  assert.equal(restored.core.random.seed, result.state.core.random.seed);
+  assert.equal(restored.core.random.counter, result.state.core.random.counter);
+  assertForcefulSentryRules(restored);
+});
