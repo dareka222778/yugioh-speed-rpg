@@ -1,0 +1,99 @@
+{
+  "format": 1,
+  "mission": "M631",
+  "runId": "work-20261125T195300-0300-M631",
+  "priority": "P1",
+  "status": "adapter isolado implementado; CI pendente",
+  "historicalCutoff": "2004-10-01",
+  "cards": [
+    {
+      "name": "Final Flame",
+      "passcode": "54899807",
+      "konamiDatabaseId": 4351,
+      "kind": "Normal Spell",
+      "damage": 600,
+      "firstTcgSet": "LOB-100",
+      "firstTcgRelease": "2002-03-08",
+      "officialEffect": "Inflict 600 points of damage to your opponent's Life Points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4351&ope=2&request_locale=en"
+    },
+    {
+      "name": "Raimei",
+      "passcode": "96300057",
+      "konamiDatabaseId": 4841,
+      "kind": "Normal Spell",
+      "damage": 300,
+      "firstTcgSet": "TP1-009",
+      "firstTcgRelease": "2002-09-01",
+      "officialEffect": "Inflict 300 points of damage to your opponent's Life Points.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4841&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "branch": "feat/work-m631-direct-burn-spells-tag-adapter-20261125",
+    "baseSha": "f24af2da600eb60c373506e8231772fdbfd328a7",
+    "files": [
+      "src/directBurnSpellTagAdapter.ts",
+      "tests/directBurnSpellTagAdapter.test.cjs",
+      "docs/evidence/m631-direct-burn-spells-tag-adapter.json",
+      ".github/workflows/m631-direct-burn-spells-tag-adapter.yml"
+    ],
+    "plannedScenarios": 28,
+    "integrationBoundary": "Pure isolated adapter for Normal Spell activation from the active player's hand and exact Pending resolution. Central resolver/Discord integration awaits explicit M61 handoff."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "End Phase only"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "coordination/state.json at M631 reservation"
+  },
+  "conflictCheck": {
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "matchingFiles": 0,
+    "metadata": false,
+    "certified": false,
+    "existingEffect": false,
+    "m629M630FilesDisjoint": true,
+    "m61CentralFilesExcluded": true,
+    "thirdPartyReservationsUntouched": true
+  },
+  "verification": {
+    "focusedScenarios": 28,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "limitations": [
+    "Final Flame e Raimei permanecem fora de cardMetadata, cardCertifications, releasedCardIds e allowlist; a fixture usa Dark Hole como Spell habilitada substituta.",
+    "O adapter não está ligado ao resolver v9 nem aos comandos Discord; integração central aguarda handoff explícito M61.",
+    "A suíte é offline e não valida gateway, permissões, interações ou persistência real do Discord.",
+    "Nenhuma certificação, concessão de inventário, alteração de dados persistentes, merge ou deploy."
+  ],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  }
+}
