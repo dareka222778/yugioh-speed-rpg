@@ -56,7 +56,7 @@
   "verification": {
     "plannedScenarios": 29,
     "focusedTests": 0,
-    "focusedTestResult": "tests expanded for chain negation, active opposing seat, 20–30 deck and 3+3 zones; rerun pending",
+    "focusedTestResult": "Field Zone fixture corrected to an admitted Field Spell; final CI rerun pending",
     "typecheck": "pending",
     "build": "pending",
     "evidenceValidation": "pending",

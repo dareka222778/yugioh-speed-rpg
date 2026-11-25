@@ -15,7 +15,8 @@ const EFFECT_IDS = enabledCardIds.filter(id => {
   const card = getDuelCard(id);
   return card?.kind === 'monster' && card.monsterType === 'effect' && !card.fusion;
 });
-const SPELL_IDS = enabledCardIds.filter(id => getDuelCard(id)?.kind === 'spell').slice(0, 2);
+const SPELL_IDS = enabledCardIds.filter(id => getDuelCard(id)?.kind === 'spell' && getDuelCard(id)?.field !== true).slice(0, 2);
+const FIELD_SPELL_IDS = enabledCardIds.filter(id => getDuelCard(id)?.kind === 'spell' && getDuelCard(id)?.field === true);
 const TRAP_IDS = enabledCardIds.filter(id => getDuelCard(id)?.kind === 'trap').slice(0, 2);
 const FUSION_NAMES = new Set();
 const FUSION_IDS = enabledCardIds.filter(id => {
@@ -33,10 +34,11 @@ const NORMAL_IDS = tagNormalCardIds.filter(id => {
   NORMAL_NAMES.add(name);
   return true;
 });
-const BASE_DECK = [...NORMAL_IDS.slice(0, 14), EFFECT_IDS[0], EFFECT_IDS[1], ...SPELL_IDS, TRAP_IDS[0], TRAP_IDS[0]];
+const BASE_DECK = [...NORMAL_IDS.slice(0, 14), EFFECT_IDS[0], EFFECT_IDS[1], SPELL_IDS[0], FIELD_SPELL_IDS[0], TRAP_IDS[0], TRAP_IDS[0]];
 assert.equal(BASE_DECK.length, 20);
 assert.ok(EFFECT_IDS.length >= 2);
-assert.ok(SPELL_IDS.length >= 2);
+assert.ok(SPELL_IDS.length >= 1);
+assert.ok(FIELD_SPELL_IDS.length >= 1);
 assert.ok(TRAP_IDS.length >= 1);
 assert.ok(FUSION_IDS.length >= 6);
 
@@ -84,7 +86,7 @@ function addAnyMonster(duel, ownerSeat, controllerTeam) {
   return card.uid;
 }
 function addBackrow(duel, ownerSeat, controllerTeam, id) {
-  const card=takeFromSeat(duel,ownerSeat,ref=>id?ref.id===id:['spell','trap'].includes(getDuelCard(ref.id)?.kind));
+  const card=takeFromSeat(duel,ownerSeat,ref=>{ const info=getDuelCard(ref.id); return id?ref.id===id:['spell','trap'].includes(info?.kind)&&info?.field!==true; });
   duel.core.players[controllerTeam].backrow.push({...card,setTurn:0,faceUp:false});
   return card.uid;
 }
@@ -247,7 +249,7 @@ test('Cliff destrói Magia/Armadilha face-down no campo',()=>{
 
 test('Cliff pode destruir uma carta na Field Zone',()=>{
   const {duel,event}=eventAndSource(CLIFF_FIXTURE_ID);
-  const card=takeFromSeat(duel,1,ref=>getDuelCard(ref.id)?.kind==='spell');
+  const card=takeFromSeat(duel,1,ref=>ref.id===FIELD_SPELL_IDS[0]);
   duel.core.players[1].field={...card,setTurn:0,faceUp:true};
   const prepared=planFor(duel,event,{kind:'cliff-destroy',targetUid:card.uid});
   assert.equal(prepared.status,'ready');
