@@ -1,0 +1,78 @@
+{
+  "mission": "M503",
+  "runId": "work-20261122T070100-0300-M503",
+  "priority": "P1 — proteger /duelo ver: o comando deve responder somente em ephemeral, localizar a sessão do usuário autenticado, validar o servidor de origem e entregar exclusivamente a mão privada daquele duelista; usuários externos não podem obter sessão, Deck order, IDs face-down ou UIDs privados.",
+  "scope": {
+    "files": [
+      "tests/duelViewCommandContract.test.cjs",
+      "docs/evidence/m503-duel-view-command-contract.json",
+      ".github/workflows/m503-duel-view-command-contract.yml"
+    ],
+    "runtimeChanged": false,
+    "commandBuilderChanged": false,
+    "storeChanged": false,
+    "catalogChanged": false,
+    "certificationRegistryChanged": false
+  },
+  "behavior": {
+    "command": "/duelo ver",
+    "response": "Ephemeral/private",
+    "sessionLookup": "currentDuel(authenticatedDiscordUserId)",
+    "guildBoundary": "record.guild_id must equal interaction.guildId",
+    "panel": "privatePayload(record, authenticatedDiscordUserId) for active duel; invitationMessage(record) only for pending invite"
+  },
+  "testCoverage": [
+    "Confirma subcomando ver registrado, resposta ephemeral e ausência de parâmetro para escolher outro usuário.",
+    "Confirma currentDuel resolve somente sessões ligadas ao ID autenticado; usuário externo não encontra sessão.",
+    "Confirma validação da guild de origem no handler.",
+    "Valida payloads privados dos dois participantes e painel público.",
+    "Verifica que mãos privadas, Deck UIDs, IDs de monstros/backrow face-down não aparecem nos painéis alheios ou públicos.",
+    "Rejeita outsider no builder privado.",
+    "Compara estado, revisão, inventário físico e locks antes/depois da consulta.",
+    "Confirma isolamento de mãos após restauração JSON."
+  ],
+  "rules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "handCheck": "End Phase do próprio jogador",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5
+  },
+  "catalog": {
+    "certifiedBefore": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "security": {
+    "database": "SQLite temporário via DATABASE_PATH",
+    "discord": "builders reais e contrato de source; sem token/guild/canal real",
+    "inventoryGranted": 0,
+    "persistentDatabaseChanged": false,
+    "playerDataChanged": false,
+    "merge": false,
+    "deploy": false
+  },
+  "validationPlan": {
+    "node": "22",
+    "commands": [
+      "npm ci",
+      "npm run check",
+      "npm run build",
+      "node --test tests/duelViewCommandContract.test.cjs"
+    ],
+    "additionalGates": [
+      "Card Batch Fast",
+      "Milestone 1000",
+      "Engine Validation",
+      "Extended Soak"
+    ]
+  },
+  "limitations": [
+    "Não instancia Client Discord nem envia mensagens a guild real.",
+    "Teste valida builders e handler por contrato de source; não prova disponibilidade de gateway Discord."
+  ]
+}
