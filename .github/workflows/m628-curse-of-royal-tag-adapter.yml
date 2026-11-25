@@ -1,0 +1,39 @@
+name: M628 Curse of Royal Tag Adapter
+on:
+  push:
+    branches:
+      - feat/work-m628-curse-of-royal-tag-adapter-20261125
+    paths:
+      - src/curseOfRoyalTagAdapter.ts
+      - tests/curseOfRoyalTagAdapter.test.cjs
+      - docs/evidence/m628-curse-of-royal-tag-adapter.json
+      - .github/workflows/m628-curse-of-royal-tag-adapter.yml
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/curseOfRoyalTagAdapter.ts
+      - tests/curseOfRoyalTagAdapter.test.cjs
+      - docs/evidence/m628-curse-of-royal-tag-adapter.json
+      - .github/workflows/m628-curse-of-royal-tag-adapter.yml
+permissions:
+  contents: read
+concurrency:
+  group: m628-curse-of-royal-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence metadata
+        run: node -e "const e=require('./docs/evidence/m628-curse-of-royal-tag-adapter.json'); if(e.format!==1 || e.mission!=='M628' || e.cards.length!==1 || e.cards[0].passcode!=='02926176' || e.verification.focusedScenarios!==24 || e.verification.newCertifications!==0 || e.verification.inventoryGranted!==0 || e.production.merge || e.production.deploy) process.exit(1)"
+      - run: node --test tests/curseOfRoyalTagAdapter.test.cjs
