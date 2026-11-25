@@ -94,7 +94,7 @@
     "handDiscard": "diferido à End Phase; o adapter é somente leitura"
   },
   "verification": {
-    "focusedScenarios": 19,
+    "focusedScenarios": 20,
     "focusedTestCommand": "node --test tests/attributeFieldSpellTagAdapter.test.cjs",
     "newCertifications": 0,
     "automaticCertifications": 0,
@@ -119,7 +119,7 @@
     "liveDiscordValidation": false
   },
   "limitations": [
-    "Os testes usam duas Magias já admitidas como fixtures com lookup isolado que as trata como Field Spells; os passcodes oficiais reais permanecem na evidência.",
+    "Os testes usam Sogen (ID 86318356), a única Field Spell já certificada no catálogo-base, como fixture físico válido; o lookup injetado remapeia esse ID para cada uma das seis identidades oficiais. Os seis passcodes/textos reais permanecem na evidência.",
     "As cartas permanecem fora do catálogo/allowlist e não recebem certificação por importação.",
     "A integração na fórmula central de ATK/DEF depende do handoff M61 explícito.",
     "CI e testes são offline; não houve sessão no gateway Discord nem acesso ao host de produção."
