@@ -204,7 +204,7 @@ function banishNoblemanTarget(core: TagDuel['core'], uid: string): boolean {
 }
 
 /** Reveals all four physical Main Decks, then banishes every matching rules name. */
-function revealAndBanishCopies(duel: TagDuel, targetName: string): {
+export function revealAndBanishCopies(duel: TagDuel, targetName: string): {
   revealedDecks: RevealedMainDeck[];
   banishedDeckUids: string[];
 } {
