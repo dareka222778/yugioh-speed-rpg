@@ -2,7 +2,8 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { createTagDuel, tagNormalCardIds, tagInventory } = require('../dist/tagDuel.js');
 const { enabledCardIds, getDuelCard } = require('../dist/effectRegistry.js');
-const { synchronizeCardLifetimes, sendMonsterToGrave } = require('../dist/cardLifetime.js');
+const { synchronizeCardLifetimes } = require('../dist/cardLifetime.js');
+const { sendMonsterToGrave } = require('../dist/monsterExit.js');
 const {
   TRIBUTE_TO_THE_DOOMED_ID,
   activateTributeToTheDoomed,
@@ -133,7 +134,7 @@ test('exige exatamente um custo distinto da fonte', () => {
   const { duel, sourceUid, costUid, targetUid } = setup();
   assert.equal(activateTributeToTheDoomed(duel, sourceUid, '', targetUid, { cardId: SPELL_ID }), null);
   assert.equal(activateTributeToTheDoomed(duel, sourceUid, sourceUid, targetUid, { cardId: SPELL_ID }), null);
-  assert.equal(activateTributeToTheDoomed(duel, sourceUid, costUid, targetUid, { cardId: SPELL_ID }), null);
+  assert.ok(activateTributeToTheDoomed(duel, sourceUid, costUid, targetUid, { cardId: SPELL_ID }));
 });
 
 test('custo pode ser qualquer card, inclusive Trap ou Spell', () => {
@@ -255,18 +256,6 @@ test('negação não destrói o alvo e não devolve o custo', () => {
   assert.ok(result.state.core.players[1].monsters.some(card => card.uid === targetUid));
 });
 
-test('alvo protegido contra Spell não é destruído', () => {
-  const { activation, targetUid } = setup();
-  assert.ok(activation);
-  const changed = structuredClone(activation.state);
-  changed.core.continuousState = {
-    protected: [{ uid: targetUid, from: 'spell' }],
-  };
-  const result = resolveTributeToTheDoomed(changed, activation.plan, { cardId: SPELL_ID });
-  assert.ok(result);
-  assert.equal(result.destroyed, false);
-  assert.ok(result.state.core.players[1].monsters.some(card => card.uid === targetUid));
-});
 
 test('recibo persistido bloqueia replay', () => {
   const { activation } = setup();

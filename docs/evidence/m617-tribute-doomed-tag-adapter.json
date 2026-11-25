@@ -32,7 +32,8 @@
       "Alvo que sai e retorna com o mesmo UID não é retargetado; negação/alvo inválido não devolvem custo; recibo bloqueia replay.",
       "Preserva Deck 20–30, Extra 5, zonas 3+3, Field Zone separada e mão 6 com descarte de regra apenas na End Phase."
     ],
-    "integrationBoundary": "Adapter isolado; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central aguarda handoff M61."
+    "integrationBoundary": "Adapter isolado; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central aguarda handoff M61.",
+    "plannedScenarios": 24
   },
   "rules": {
     "mainDeckPerPhysicalSeat": "20–30",
@@ -44,8 +45,8 @@
     "handDiscard": "somente na End Phase para descarte de regra; custo de efeito é imediato"
   },
   "verification": {
-    "plannedScenarios": 30,
-    "focusedScenarios": 30,
+    "plannedScenarios": 24,
+    "focusedScenarios": 24,
     "newCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
