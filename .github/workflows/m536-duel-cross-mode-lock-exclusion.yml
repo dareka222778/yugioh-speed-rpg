@@ -1,0 +1,36 @@
+name: M536 Duel Cross-Mode Lock Exclusion
+on:
+  push:
+    branches:
+      - feat/work-m536-duel-cross-mode-lock-exclusion-20261122
+    paths:
+      - 'tests/duelCrossModeLockExclusion.test.cjs'
+      - 'docs/evidence/m536-duel-cross-mode-lock-exclusion.json'
+      - '.github/workflows/m536-duel-cross-mode-lock-exclusion.yml'
+  pull_request:
+    paths:
+      - 'tests/duelCrossModeLockExclusion.test.cjs'
+      - 'docs/evidence/m536-duel-cross-mode-lock-exclusion.json'
+      - '.github/workflows/m536-duel-cross-mode-lock-exclusion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cross-mode-lock-exclusion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate machine-readable evidence
+        run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m536-duel-cross-mode-lock-exclusion.json', 'utf8'))"
+      - name: Run cross-mode Discord lock regressions
+        run: node --test tests/duelCrossModeLockExclusion.test.cjs

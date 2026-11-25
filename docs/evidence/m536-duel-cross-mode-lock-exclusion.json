@@ -1,0 +1,81 @@
+{
+  "mission": "M536",
+  "runId": "work-20261122T175700-0300-M536",
+  "owner": "Work principal",
+  "title": "Cross-mode lock exclusion through real Discord component handlers",
+  "status": "resumed-and-implemented",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtResume": "5c7b9f179afae742dbfeda1e21b4685685bbb513",
+  "branch": "feat/work-m536-duel-cross-mode-lock-exclusion-20261122",
+  "baseSha": "5c7b9f179afae742dbfeda1e21b4685685bbb513",
+  "scope": [
+    "tests/duelCrossModeLockExclusion.test.cjs",
+    "docs/evidence/m536-duel-cross-mode-lock-exclusion.json",
+    ".github/workflows/m536-duel-cross-mode-lock-exclusion.yml"
+  ],
+  "priority": "P1 — impedir que um participante aceite um convite 1v1 enquanto está travado em TagDuel, ou aceite TagDuel enquanto é dono de convite 1v1; rollback precisa preservar os dois convites e locks.",
+  "scenarios": [
+    {
+      "name": "TagDuel host blocks 1v1 Accept",
+      "steps": [
+        "create 1v1 invitation A→B (only A locked)",
+        "create TagDuel lobby with B as accepted host",
+        "route B's real duel:accept component",
+        "assert pending invitation/revision/state and both lock tables unchanged",
+        "cancel TagDuel lobby",
+        "route the same current 1v1 Accept again"
+      ],
+      "expected": "first Accept rejected; after lobby cancellation the same invitation can start the duel"
+    },
+    {
+      "name": "1v1 invitation owner blocks TagDuel Accept",
+      "steps": [
+        "create TagDuel lobby with C host and B pending",
+        "create 1v1 invitation B→E (B locked)",
+        "route B's real tag:accept component",
+        "assert lobby/member/revision and lock tables unchanged",
+        "decline B's 1v1 invitation",
+        "route the same current TagDuel Accept again"
+      ],
+      "expected": "first TagDuel Accept rejected; after decline the same lobby member can accept"
+    }
+  ],
+  "discordValidation": "Offline integration through handleDuelComponent and handleTagComponent with mocked Discord acknowledgements/payload validation; no gateway credentials.",
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separate",
+    "extraDeck": 5
+  },
+  "inventory": {
+    "snapshotTables": [
+      "players",
+      "player_cards",
+      "starter_grants",
+      "decks",
+      "deck_cards"
+    ],
+    "changed": false,
+    "granted": 0
+  },
+  "catalog": {
+    "certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  },
+  "limitations": [
+    "SQLite temporary file; no production DB.",
+    "Discord handlers are real, but interaction objects and delivery callbacks are mocked; no live guild/API call."
+  ]
+}
