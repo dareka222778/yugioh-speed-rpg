@@ -4,7 +4,7 @@
   "priorityRequestedBy": "User",
   "state": "active",
   "startedAt": "2026-11-25T19:34:36-03:00",
-  "lastActivityAt": "2026-11-25T19:44:25-03:00",
+  "lastActivityAt": "2026-11-25T19:49:48-03:00",
   "nextScheduledAt": "2026-11-25T22:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
@@ -4679,7 +4679,7 @@
     "ciWaitExcluded": true,
     "note": "4 minutos desde a reserva M587; tempo efetivo não cronometrado."
   },
-  "nextTask": "M629: acompanhar CI e corrigir falhas; M630: implementar Ceasefire em paralelo; depois conferir novo HEAD e coordenação.",
+  "nextTask": "M629: aguardar Engine Validation/Extended Soak; M630: acionar/observar workflow focado e corrigir; depois escolher a próxima família independente.",
   "sharedHeadBeforeRelease": "7d3318bfd1ba38d501c76495aa180958f820a373",
   "priority": "P1",
   "sharedHeadBeforeClaim": "015a62a1394020291df838ecd306a35eecb7607b",
@@ -7721,7 +7721,7 @@
   "lastCheckpointAt": "2026-11-25T09:57:29-03:00",
   "reservationReleased": false,
   "expectedHeadForCoordinationCommit": "015a62a1394020291df838ecd306a35eecb7607b",
-  "lastRunSummary": "M629 PR #571 em CI; M630 Ceasefire reservado como próxima família independente.",
+  "lastRunSummary": "M629: 32/32 focused tests, check/build/evidence, Card Batch Fast e Milestone 1000 verdes; Engine Validation em andamento. M630: 31 cenários publicados em PR #572, CI focada ainda não observada.",
   "postReleaseCiCheckAt": "2026-11-15T00:26:25-03:00",
   "recordCorrectionAt": "2026-11-14T09:20:22-03:00",
   "catalogAtEnd": null,
@@ -10408,7 +10408,7 @@
       "files": []
     }
   },
-  "sharedHeadAtLastCheckpoint": "75dc1403897b135dc63fb003387af9a09fab84e5",
+  "sharedHeadAtLastCheckpoint": "b411f7ee3001d74c2e901a53ed47d90c5645a9e7",
   "latestIndependentRun": {
     "runId": "work-20261118T231306-0300-M372-M373",
     "mission": "M372–M373",
@@ -12288,7 +12288,7 @@
     ],
     "nextTask": "Auxiliar monitora CI e corrige apenas os arquivos reservados."
   },
-  "nextWorkTask": "M629: acompanhar CI e corrigir falhas; M630: implementar Ceasefire em paralelo; depois conferir novo HEAD e coordenação.",
+  "nextWorkTask": "M629: aguardar Engine Validation/Extended Soak; M630: acionar/observar workflow focado e corrigir; depois escolher a próxima família independente.",
   "currentWorkReservationM457": {
     "mission": "M457",
     "runId": "work-20261121T121100-0300-M457",
@@ -14665,7 +14665,7 @@
     "headSha": "5c47e2dc23e807886d0cb683a94cd8d558e59d9a",
     "endedAt": "2026-11-22T17:02:17-03:00"
   },
-  "latestSharedHead": "015a62a1394020291df838ecd306a35eecb7607b",
+  "latestSharedHead": "b411f7ee3001d74c2e901a53ed47d90c5645a9e7",
   "currentWorkReservationM529": {
     "runId": "work-20261122T165200-0300-M529",
     "mission": "M529",
@@ -21909,14 +21909,14 @@
     "mission": "M629",
     "priority": "P1",
     "owner": "Work principal",
-    "state": "pr-open-draft-ci-running",
+    "state": "focused-ci-green-engine-validation-in-progress",
     "startedAt": "2026-11-25T19:34:36-03:00",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "015a62a1394020291df838ecd306a35eecb7607b",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "015a62a1394020291df838ecd306a35eecb7607b",
     "branch": "feat/work-m629-solemn-judgment-tag-adapter-20261125",
-    "branchHeadSha": "2e6dd0f06f95a121351f17afc1f87d439832ad80",
+    "branchHeadSha": "95827c2e5208d40be860a98f7dcd5528c9846e34",
     "pullRequest": 571,
     "reservedFiles": [
       "src/solemnJudgmentTagAdapter.ts",
@@ -21946,21 +21946,22 @@
       "m61CentralFilesExcluded": true,
       "thirdPartyReservationsUntouched": true,
       "result": "Nenhum branch/PR/metadata/certificação Solemn Judgment encontrado no checkpoint compartilhado; escopo exclusivo de quatro caminhos novos. M61 permanece aguardando handoff explícito; nenhuma integração central."
-    }
+    },
+    "lastActivityAt": "2026-11-25T19:49:48-03:00"
   },
   "subtaskReservationM629": {
     "runId": "work-20261125T193436-0300-M629",
     "mission": "M629",
     "priority": "P1",
     "owner": "Work principal",
-    "state": "pr-open-draft-ci-running",
+    "state": "focused-ci-green-engine-validation-in-progress",
     "startedAt": "2026-11-25T19:34:36-03:00",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "015a62a1394020291df838ecd306a35eecb7607b",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "015a62a1394020291df838ecd306a35eecb7607b",
     "branch": "feat/work-m629-solemn-judgment-tag-adapter-20261125",
-    "branchHeadSha": "2e6dd0f06f95a121351f17afc1f87d439832ad80",
+    "branchHeadSha": "95827c2e5208d40be860a98f7dcd5528c9846e34",
     "pullRequest": 571,
     "reservedFiles": [
       "src/solemnJudgmentTagAdapter.ts",
@@ -21990,7 +21991,8 @@
       "m61CentralFilesExcluded": true,
       "thirdPartyReservationsUntouched": true,
       "result": "Nenhum branch/PR/metadata/certificação Solemn Judgment encontrado no checkpoint compartilhado; escopo exclusivo de quatro caminhos novos. M61 permanece aguardando handoff explícito; nenhuma integração central."
-    }
+    },
+    "lastActivityAt": "2026-11-25T19:49:48-03:00"
   },
   "m629CatalogAtStart": {
     "engineV9Certified": 969,
@@ -22004,13 +22006,13 @@
   "m629NextTask": "Implementar adapter de resposta para Pending/Chain, cobrir negação de Invocação e ativação de Magia/Armadilha com pagamento de metade dos PV, propriedade física e anti-replay; executar CI e depois escolher a próxima família independente.",
   "nextWorkWindowM629": "2026-11-25T22:30:00-03:00",
   "m629Status": {
-    "state": "pr-open-draft-ci-running",
+    "state": "focused-ci-green-engine-validation-in-progress",
     "branch": "feat/work-m629-solemn-judgment-tag-adapter-20261125",
-    "branchHeadSha": "2e6dd0f06f95a121351f17afc1f87d439832ad80",
+    "branchHeadSha": "95827c2e5208d40be860a98f7dcd5528c9846e34",
     "pullRequest": 571,
-    "focusedWorkflowRun": 45715559054,
+    "focusedWorkflowRun": 45715852114,
+    "cardBatchFast": "success",
     "milestone1000": "success",
-    "cardBatchFast": "in_progress",
     "engineValidation": "in_progress",
     "newCertifications": 0
   },
@@ -22019,15 +22021,15 @@
     "mission": "M630",
     "priority": "P1",
     "owner": "Work principal",
-    "state": "reserved-and-implementing",
+    "state": "pr-open-draft-ci-pending",
     "startedAt": "2026-11-25T19:44:25-03:00",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "23a10aa49812c2da11c0424b3af0ba428a131f60",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "23a10aa49812c2da11c0424b3af0ba428a131f60",
     "branch": "feat/work-m630-ceasefire-tag-adapter-20261125",
-    "branchHeadSha": null,
-    "pullRequest": null,
+    "branchHeadSha": "f9b6db6fc8c3fedf2ad74bb184c410951c15cfb5",
+    "pullRequest": 572,
     "reservedFiles": [
       "src/ceasefireTagAdapter.ts",
       "tests/ceasefireTagAdapter.test.cjs",
@@ -22057,22 +22059,23 @@
       "m61CentralFilesExcluded": true,
       "thirdPartyReservationsUntouched": true,
       "result": "Nenhum branch/PR/metadata/certificação Ceasefire encontrado; quatro caminhos novos e disjuntos de M629 e M61."
-    }
+    },
+    "lastActivityAt": "2026-11-25T19:49:48-03:00"
   },
   "subtaskReservationM630": {
     "runId": "work-20261125T194311-0300-M630",
     "mission": "M630",
     "priority": "P1",
     "owner": "Work principal",
-    "state": "reserved-and-implementing",
+    "state": "pr-open-draft-ci-pending",
     "startedAt": "2026-11-25T19:44:25-03:00",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "23a10aa49812c2da11c0424b3af0ba428a131f60",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "23a10aa49812c2da11c0424b3af0ba428a131f60",
     "branch": "feat/work-m630-ceasefire-tag-adapter-20261125",
-    "branchHeadSha": null,
-    "pullRequest": null,
+    "branchHeadSha": "f9b6db6fc8c3fedf2ad74bb184c410951c15cfb5",
+    "pullRequest": 572,
     "reservedFiles": [
       "src/ceasefireTagAdapter.ts",
       "tests/ceasefireTagAdapter.test.cjs",
@@ -22102,7 +22105,8 @@
       "m61CentralFilesExcluded": true,
       "thirdPartyReservationsUntouched": true,
       "result": "Nenhum branch/PR/metadata/certificação Ceasefire encontrado; quatro caminhos novos e disjuntos de M629 e M61."
-    }
+    },
+    "lastActivityAt": "2026-11-25T19:49:48-03:00"
   },
   "m630CatalogAtStart": {
     "engineV9Certified": 969,
@@ -22116,10 +22120,17 @@
   "m630NextTask": "Implementar flip em massa sem eventos Flip e dano de 500 por Monstro de Efeito; validar propriedade, LP, timing e replay.",
   "nextWorkWindowM630": "2026-11-25T22:30:00-03:00",
   "m630Status": {
-    "state": "reserved-and-implementing",
+    "state": "pr-open-draft-ci-pending",
     "branch": "feat/work-m630-ceasefire-tag-adapter-20261125",
-    "baseSha": "23a10aa49812c2da11c0424b3af0ba428a131f60",
-    "certifiedCards": 969,
+    "branchHeadSha": "f9b6db6fc8c3fedf2ad74bb184c410951c15cfb5",
+    "pullRequest": 572,
+    "focusedWorkflowRun": null,
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
     "newCertifications": 0
-  }
+  },
+  "m61HandoffLastRequestedAt": "2026-11-25T19:49:48-03:00",
+  "m61HandoffCommentId": 7176831267,
+  "m61HandoffState": "awaiting explicit owner response; central files remain blocked"
 }
