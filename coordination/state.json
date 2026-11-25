@@ -7463,8 +7463,8 @@
       "lastActivityAt": "2026-11-25T10:16:45-03:00"
     }
   ],
-  "lastParallelCheckpoint": "coordination/runs/work-20261123T131916-0300-M565.json",
-  "lastParallelActivityAt": "2026-11-23T13:19:16-03:00",
+  "lastParallelCheckpoint": "coordination/runs/work-20261125T150133-0300-M625.json",
+  "lastParallelActivityAt": "2026-11-25T15:01:33-03:00",
   "sharedHeadAfterCheckpoint": "462e86aadaa9424575e4eef68cd0e7e67331fc98",
   "sharedHeadBeforeStateUpdate": "07203aae3a03cc9269346a1d9b9eb42e24ae7051",
   "endedAt": "2026-11-22T22:20:43-03:00",
@@ -10224,12 +10224,12 @@
     }
   ],
   "lastParallelRun": {
-    "runId": "work-20261121T112504-0300-M456",
-    "mission": "M456",
-    "branch": "feat/work-m456-solemn-wishes-fire-princess-20261121",
-    "head": "e39d198f09d78f06de706f0e71c4a0899b2760a2",
+    "runId": "work-20261125T150133-0300-M625",
+    "mission": "M625",
+    "branch": "feat/work-m625-confiscation-tag-adapter-20261125",
     "status": "active",
-    "startedAt": "2026-11-21T11:25:04-03:00"
+    "startedAt": "2026-11-25T15:01:33-03:00",
+    "sharedHeadAtStart": "e248871baa24f31373c7a6102bd8d9da7644d785"
   },
   "nextParallelTask": "Implementar janela de ativação Trap, vínculo bidirecional e testes; depois conferir HEAD/coordenação/CI e escolher próxima família independente.",
   "nextParallelWindow": "2026-11-23T17:30:00-03:00",
@@ -21517,6 +21517,76 @@
         ".github/workflows/m624-remove-trap-tag-adapter.yml"
       ],
       "conditionalHeadUpdate": true
+    },
+    {
+      "runId": "work-20261125T150133-0300-M625",
+      "mission": "M625",
+      "priority": "P1",
+      "branch": "feat/work-m625-confiscation-tag-adapter-20261125",
+      "baseHeadSha": "e248871baa24f31373c7a6102bd8d9da7644d785",
+      "reservedFiles": [
+        "src/confiscationTagAdapter.ts",
+        "tests/confiscationTagAdapter.test.cjs",
+        "docs/evidence/m625-confiscation-tag-adapter.json",
+        ".github/workflows/m625-confiscation-tag-adapter.yml"
+      ],
+      "conditionalHeadUpdate": true
     }
-  ]
+  ],
+  "currentWorkReservationM625": {
+    "runId": "work-20261125T150133-0300-M625",
+    "mission": "M625",
+    "priority": "P1",
+    "owner": "Work principal",
+    "state": "reserved-and-implementing",
+    "startedAt": "2026-11-25T15:01:33-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "e248871baa24f31373c7a6102bd8d9da7644d785",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "e248871baa24f31373c7a6102bd8d9da7644d785",
+    "branch": "feat/work-m625-confiscation-tag-adapter-20261125",
+    "branchHeadSha": null,
+    "pullRequest": null,
+    "reservedFiles": [
+      "src/confiscationTagAdapter.ts",
+      "tests/confiscationTagAdapter.test.cjs",
+      "docs/evidence/m625-confiscation-tag-adapter.json",
+      ".github/workflows/m625-confiscation-tag-adapter.yml"
+    ],
+    "scope": [
+      "src/confiscationTagAdapter.ts",
+      "tests/confiscationTagAdapter.test.cjs",
+      "docs/evidence/m625-confiscation-tag-adapter.json",
+      ".github/workflows/m625-confiscation-tag-adapter.yml"
+    ],
+    "scopeDescription": "Adapter isolado para Confiscation no TagDuel clássico: custo compartilhado de 1000 LP, inspeção privada da mão do assento adversário ativo e descarte não-direcionado escolhido na resolução. Sem resolver central, catálogo, certificações, allowlist, inventário concedido, comandos ou dados persistentes.",
+    "scopeReleasedToAuxiliary": [],
+    "conflictCheck": {
+      "checkedAt": "2026-11-25T15:01:33-03:00",
+      "sharedHead": "e248871baa24f31373c7a6102bd8d9da7644d785",
+      "matchingBranches": 0,
+      "matchingPullRequests": 0,
+      "matchingFiles": 0,
+      "passcode": "17375316",
+      "konamiDatabaseId": 4900,
+      "metadata": false,
+      "certified": false,
+      "existingEffect": false,
+      "m623M624FilesDisjoint": true,
+      "m61CentralFilesExcluded": true,
+      "thirdPartyReservationsUntouched": true,
+      "result": "quatro caminhos novos e independentes; nenhum branch/PR/reserva Confiscation encontrado; M623, M624 e M61 preservados."
+    }
+  },
+  "m625CatalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "source": "checkpoint M623/M624; contagem será revalidada pelo CI do bloco"
+  },
+  "nextTaskM625": "Implementar Confiscation com inspeção privada não-direcionada, custo de LP, descarte por proprietário físico e testes de privacidade/negação/replay; depois escolher uma família independente.",
+  "nextWorkWindowM625": "2026-11-25T19:30:00-03:00"
 }
