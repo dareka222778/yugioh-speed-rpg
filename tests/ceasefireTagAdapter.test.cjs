@@ -18,6 +18,7 @@ const SOURCE_TRAP_ID='56120475'; // enabled Normal Trap fixture
 const MST='05318639';
 const COUNTER_TRAP_ID='77414722';
 const JINZO_ID='77585513';
+const FIELD_ID='86318356';
 const MAN_EATER_ID='54652250';
 const MAGician_OF_FAITH_ID='31560081';
 const lookup=id=>{
@@ -35,6 +36,8 @@ function makeDuel(first=0){
     extra:[]
   }));
   const duel=tag.createTagDuel(players,{seed:'m630-ceasefire-'+first,first,classic:true});
+  duel.core.players[0].lp=8000;
+  duel.core.players[1].lp=8000;
   duel.core.turn=3;
   duel.core.phase='main';
   duel.core.resume='main';
@@ -385,14 +388,14 @@ test('three shared backrow slots and the separate Field Zone remain valid',()=>{
   placeBackrow(duel,seat,0,SOURCE_TRAP_ID,0,false);
   placeBackrow(duel,seat,0,MST,0,false);
   placeBackrow(duel,seat,0,COUNTER_TRAP_ID,0,false);
-  placeField(duel,seat,0,MST,true);
+  placeField(duel,seat,0,FIELD_ID,true);
   assert.doesNotThrow(()=>assertCeasefireRules(duel));
 });
 test('rejects a fourth shared Spell/Trap Zone while keeping the Field Zone separate',()=>{
   const duel=makeDuel();
   const seat=duel.active[0];
   for(let i=0;i<3;i++)placeBackrow(duel,seat,0,i%2?MST:SOURCE_TRAP_ID,0,false);
-  placeField(duel,seat,0,MST,true);
+  placeField(duel,seat,0,FIELD_ID,true);
   duel.core.players[0].backrow.push({...duel.core.players[0].backrow[0],uid:'m0:overflow'});
   assert.throws(()=>assertCeasefireRules(duel),/limite de zonas/);
   assert.ok(duel.core.players[0].field);
