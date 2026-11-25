@@ -1,0 +1,39 @@
+name: M622 Nobleman of Extermination Tag Adapter
+on:
+  push:
+    branches:
+      - feat/work-m622-nobleman-extermination-tag-adapter-20261125
+    paths:
+      - src/noblemanOfExterminationTagAdapter.ts
+      - tests/noblemanOfExterminationTagAdapter.test.cjs
+      - docs/evidence/m622-nobleman-of-extermination-tag-adapter.json
+      - .github/workflows/m622-nobleman-of-extermination-tag-adapter.yml
+  pull_request:
+    branches:
+      - feat/work-m621-nobleman-crossout-tag-adapter-20261125
+    paths:
+      - src/noblemanOfExterminationTagAdapter.ts
+      - tests/noblemanOfExterminationTagAdapter.test.cjs
+      - docs/evidence/m622-nobleman-of-extermination-tag-adapter.json
+      - .github/workflows/m622-nobleman-of-extermination-tag-adapter.yml
+permissions:
+  contents: read
+concurrency:
+  group: m622-nobleman-extermination-\${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Validate evidence metadata
+        run: node -e "const e=require('./docs/evidence/m622-nobleman-of-extermination-tag-adapter.json'); if(e.format!==1 || e.mission!=='M622' || e.cards.length!==1 || e.verification.newCertifications!==0 || e.verification.inventoryGranted!==0) process.exit(1)"
+      - run: node --test tests/noblemanOfCrossoutTagAdapter.test.cjs tests/noblemanOfExterminationTagAdapter.test.cjs
