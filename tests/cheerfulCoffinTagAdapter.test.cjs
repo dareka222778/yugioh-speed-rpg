@@ -90,12 +90,13 @@ test('rejeita Battle Phase, janela de resposta, corrente e escolha pendente', ()
 
   const chain = makeDuel(0);
   const chainUid = putCardInHand(chain, 0, SPELL_ID);
-  chain.core.chain.push({ id: 'fixture' });
+  chain.core.chain.push({ actor: 0, card: chainUid, id: SPELL_ID, target: '' });
   assert.equal(activateCheerfulCoffin(chain, chainUid, { cardId: SPELL_ID }), null);
 
   const choice = makeDuel(0);
   const choiceUid = putCardInHand(choice, 0, SPELL_ID);
-  choice.core.choice = { kind: 'fixture' };
+  choice.core.phase = 'choice';
+  choice.core.choice = { actor: 0, targets: [] };
   assert.equal(activateCheerfulCoffin(choice, choiceUid, { cardId: SPELL_ID }), null);
 });
 
