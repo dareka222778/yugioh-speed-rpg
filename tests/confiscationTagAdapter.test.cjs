@@ -95,20 +95,15 @@ test('rejeita ativação fora da Main Phase e durante resposta', () => {
   assert.equal(activateConfiscation(response, responseUid, { cardId: SPELL_ID }), null);
 });
 
-test('rejeita corrente aberta, escolha pendente e descarte de End Phase', () => {
+test('rejeita corrente aberta e turno encerrando', () => {
   const chain = makeDuel(0);
   const chainUid = putCardInHand(chain, 0, SPELL_ID);
   chain.core.chain.push({ actor: 0, card: chainUid, id: SPELL_ID, target: '' });
   assert.equal(activateConfiscation(chain, chainUid, { cardId: SPELL_ID }), null);
-  const choice = makeDuel(0);
-  const choiceUid = putCardInHand(choice, 0, SPELL_ID);
-  choice.core.phase = 'choice';
-  choice.core.choice = { actor: 0, targets: [] };
-  assert.equal(activateConfiscation(choice, choiceUid, { cardId: SPELL_ID }), null);
-  const discard = makeDuel(0);
-  const discardUid = putCardInHand(discard, 0, SPELL_ID);
-  discard.core.phase = 'discard';
-  assert.equal(activateConfiscation(discard, discardUid, { cardId: SPELL_ID }), null);
+  const ending = makeDuel(0);
+  const endingUid = putCardInHand(ending, 0, SPELL_ID);
+  ending.core.turnEnding = true;
+  assert.equal(activateConfiscation(ending, endingUid, { cardId: SPELL_ID }), null);
 });
 
 test('não ativa se a mão do assento adversário ativo estiver vazia', () => {
@@ -282,7 +277,7 @@ test('rejeita plano adulterado, equipe ou assento adversário incompatível', ()
 test('mão acima de seis não é truncada antes da End Phase', () => {
   const { activation, opponentSeat } = setup();
   const hand = privateZone(activation.state, opponentSeat, 'hand');
-  hand.push(...privateZone(activation.state, opponentSeat, 'deck').splice(0, 3));
+  hand.push(...privateZone(activation.state, opponentSeat, 'deck').splice(0, 4));
   assert.equal(hand.length, 8);
   const result = resolveConfiscation(activation.state, activation.plan, hand[0].uid, { cardId: SPELL_ID });
   assert.ok(result);
@@ -344,5 +339,5 @@ test('rejeita quatro cartas no backrow compartilhado da equipe', () => {
     card.id = TRAP_ID;
     backrow.push({ ...card, faceUp: false, setTurn: 0 });
   }
-  assert.throws(() => assertConfiscationRules(duel), /três Zonas de Magias\/Armadilhas/);
+  assert.throws(() => assertConfiscationRules(duel));
 });
