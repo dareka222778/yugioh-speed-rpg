@@ -7855,6 +7855,14 @@
       "at": "2026-11-22T22:20:43-03:00",
       "scope": "M519 A Man with Wdjat stale empty branch",
       "status": "requested"
+    },
+    {
+      "pr": 12,
+      "commentId": 7177753400,
+      "mission": "M634",
+      "status": "requested-cooperative-handoff; awaiting explicit release",
+      "requestedAt": "2026-11-25T20:32:59-03:00",
+      "scope": "M634 Spirit batch; no reserved files modified"
     }
   ],
   "nextWindow": "2026-11-25T04:30:00-03:00",
@@ -21780,6 +21788,20 @@
         ".github/workflows/m634-spirit-summon-batch.yml"
       ],
       "conditionalHeadUpdate": true
+    },
+    {
+      "runId": "work-20261125T203259-0300-M635",
+      "mission": "M635",
+      "priority": "P1",
+      "branch": "feat/work-m635-coordination-guard-20261125",
+      "baseHeadSha": "0479d5a267b449b30b91ccb5ea5a2e1670727c69",
+      "reservedFiles": [
+        "scripts/coordination-guard.cjs",
+        "tests/coordinationGuard.test.cjs",
+        "docs/evidence/m635-coordination-guard.json",
+        ".github/workflows/coordination-guard.yml"
+      ],
+      "conditionalHeadUpdate": true
     }
   ],
   "currentWorkReservationM625": {
@@ -22822,5 +22844,138 @@
   "m634Status": "reserved-and-implementing",
   "m634NextTask": "Implementar e testar lifecycle Spirit compartilhado, destruição de Dark Dust, redução de dano Susa e look/reorder de Maharaghi; abrir PR draft empilhado sobre M632.",
   "nextWorkWindowM634": "2026-11-25T22:30:00-03:00",
-  "lastParallelCheckpointM634": "coordination/runs/work-20261125T202513-0300-M634.json"
+  "lastParallelCheckpointM634": "coordination/runs/work-20261125T202513-0300-M634.json",
+  "currentWorkReservationM635": {
+    "runId": "work-20261125T203259-0300-M635",
+    "mission": "M635",
+    "priority": "P1",
+    "owner": "Work principal",
+    "state": "reserved-and-implementing",
+    "startedAt": "2026-11-25T20:32:59-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "0479d5a267b449b30b91ccb5ea5a2e1670727c69",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "0479d5a267b449b30b91ccb5ea5a2e1670727c69",
+    "branch": "feat/work-m635-coordination-guard-20261125",
+    "branchHeadSha": null,
+    "pullRequest": null,
+    "reservedFiles": [
+      "scripts/coordination-guard.cjs",
+      "tests/coordinationGuard.test.cjs",
+      "docs/evidence/m635-coordination-guard.json",
+      ".github/workflows/coordination-guard.yml"
+    ],
+    "scope": [
+      "scripts/coordination-guard.cjs",
+      "tests/coordinationGuard.test.cjs",
+      "docs/evidence/m635-coordination-guard.json",
+      ".github/workflows/coordination-guard.yml"
+    ],
+    "conditionalHeadUpdate": true,
+    "scopeDescription": "Ferramenta read-only para auditar reservas e validar transições de coordination/state.json com compare-and-swap de HEAD; protege reservas de terceiros, detecta colisões de arquivos e impede liberação fora do escopo próprio. Sem runtime do duelo, catálogo, certificações, inventário ou produção.",
+    "conflictCheck": {
+      "checkedAt": "2026-11-25T20:32:59-03:00",
+      "sharedHead": "0479d5a267b449b30b91ccb5ea5a2e1670727c69",
+      "matchingBranches": 0,
+      "matchingPullRequests": 0,
+      "matchingFiles": 0,
+      "m634FilesDisjoint": true,
+      "m61CentralFilesExcluded": true,
+      "thirdPartyReservationsUntouched": true
+    },
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31,
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0
+    },
+    "production": {
+      "merge": false,
+      "deploy": false,
+      "backupVerified": false,
+      "liveDiscordValidation": false
+    },
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveWorkMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "nextTask": "Implementar e executar testes do guard de coordenação; validar HEAD condicional, colisões, handoff e preservação de reservas de terceiros.",
+    "nextWindow": "2026-11-25T22:30:00-03:00",
+    "scopeReleasedToAuxiliary": []
+  },
+  "subtaskReservationM635": {
+    "runId": "work-20261125T203259-0300-M635",
+    "mission": "M635",
+    "priority": "P1",
+    "owner": "Work principal",
+    "state": "reserved-and-implementing",
+    "startedAt": "2026-11-25T20:32:59-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "0479d5a267b449b30b91ccb5ea5a2e1670727c69",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "0479d5a267b449b30b91ccb5ea5a2e1670727c69",
+    "branch": "feat/work-m635-coordination-guard-20261125",
+    "branchHeadSha": null,
+    "pullRequest": null,
+    "reservedFiles": [
+      "scripts/coordination-guard.cjs",
+      "tests/coordinationGuard.test.cjs",
+      "docs/evidence/m635-coordination-guard.json",
+      ".github/workflows/coordination-guard.yml"
+    ],
+    "scope": [
+      "scripts/coordination-guard.cjs",
+      "tests/coordinationGuard.test.cjs",
+      "docs/evidence/m635-coordination-guard.json",
+      ".github/workflows/coordination-guard.yml"
+    ],
+    "conditionalHeadUpdate": true,
+    "scopeDescription": "Ferramenta read-only para auditar reservas e validar transições de coordination/state.json com compare-and-swap de HEAD; protege reservas de terceiros, detecta colisões de arquivos e impede liberação fora do escopo próprio. Sem runtime do duelo, catálogo, certificações, inventário ou produção.",
+    "conflictCheck": {
+      "checkedAt": "2026-11-25T20:32:59-03:00",
+      "sharedHead": "0479d5a267b449b30b91ccb5ea5a2e1670727c69",
+      "matchingBranches": 0,
+      "matchingPullRequests": 0,
+      "matchingFiles": 0,
+      "m634FilesDisjoint": true,
+      "m61CentralFilesExcluded": true,
+      "thirdPartyReservationsUntouched": true
+    },
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31,
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0
+    },
+    "production": {
+      "merge": false,
+      "deploy": false,
+      "backupVerified": false,
+      "liveDiscordValidation": false
+    },
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveWorkMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "nextTask": "Implementar e executar testes do guard de coordenação; validar HEAD condicional, colisões, handoff e preservação de reservas de terceiros.",
+    "nextWindow": "2026-11-25T22:30:00-03:00",
+    "scopeReleasedToAuxiliary": []
+  },
+  "m635Status": "reserved-and-implementing",
+  "m635NextTask": "Implementar e executar testes do guard de coordenação; validar HEAD condicional, colisões, handoff e preservação de reservas de terceiros.",
+  "nextWorkWindowM635": "2026-11-25T22:30:00-03:00",
+  "lastParallelCheckpointM635": "coordination/runs/work-20261125T203259-0300-M635.json",
+  "m635HandoffRequest": {
+    "pr": 12,
+    "commentId": 7177753400,
+    "mission": "M634",
+    "status": "requested-cooperative-handoff; awaiting explicit release",
+    "requestedAt": "2026-11-25T20:32:59-03:00",
+    "scope": "M634 Spirit batch; no reserved files modified"
+  },
+  "m635LastActivityAt": "2026-11-25T20:32:59-03:00"
 }

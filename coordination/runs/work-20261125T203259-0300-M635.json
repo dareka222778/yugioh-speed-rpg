@@ -1,0 +1,83 @@
+{
+  "format": 1,
+  "runId": "work-20261125T203259-0300-M635",
+  "mission": "M635",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reservation registered; implementation starting",
+  "startedAt": "2026-11-25T20:32:59-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "0479d5a267b449b30b91ccb5ea5a2e1670727c69",
+  "branch": "feat/work-m635-coordination-guard-20261125",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "0479d5a267b449b30b91ccb5ea5a2e1670727c69",
+  "branchBaseSha": null,
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "scripts/coordination-guard.cjs",
+    "tests/coordinationGuard.test.cjs",
+    "docs/evidence/m635-coordination-guard.json",
+    ".github/workflows/coordination-guard.yml"
+  ],
+  "scope": "Ferramenta read-only para auditar reservas e validar transições de coordination/state.json com compare-and-swap de HEAD; protege reservas de terceiros, detecta colisões de arquivos e impede liberação fora do escopo próprio. Sem runtime do duelo, catálogo, certificações, inventário ou produção.",
+  "handoffRequest": {
+    "pr": 12,
+    "commentId": 7177753400,
+    "targetMission": "M634",
+    "status": "requested-cooperative-handoff; awaiting explicit release"
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "separate",
+    "handLimit": 6,
+    "handDiscard": "only End Phase"
+  },
+  "implementation": {
+    "files": [
+      "scripts/coordination-guard.cjs",
+      "tests/coordinationGuard.test.cjs",
+      "docs/evidence/m635-coordination-guard.json",
+      ".github/workflows/coordination-guard.yml"
+    ],
+    "scope": "Coordination guard only; no gameplay or player data touched."
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "not applicable to guard-only initial test; workflow will run Node tests",
+    "build": "not applicable to guard-only initial test",
+    "evidenceValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar e executar testes do guard de coordenação; validar HEAD condicional, colisões, handoff e preservação de reservas de terceiros.",
+  "nextWindow": "2026-11-25T22:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
