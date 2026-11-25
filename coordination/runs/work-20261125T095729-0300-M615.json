@@ -4,7 +4,7 @@
   "mission": "M615",
   "owner": "Work principal",
   "priority": "P1",
-  "status": "reserved-and-implementing",
+  "status": "PR #558 draft aberta; primeira CI falhou em cinco fixtures, correções publicadas; segunda execução focada enfileirada",
   "reservedAt": "2026-11-25T09:57:29-03:00",
   "startedAt": "2026-11-25T09:57:29-03:00",
   "endedAt": null,
@@ -13,8 +13,8 @@
   "sharedHeadAtReservation": "2f060086d763a4a31b1a3748effc7f33590692b9",
   "branch": "feat/work-m615-cheerful-coffin-tag-adapter-20261125",
   "baseSha": "2f060086d763a4a31b1a3748effc7f33590692b9",
-  "branchHeadSha": null,
-  "pullRequest": null,
+  "branchHeadSha": "9b0986b346a3a8ea1ea5f7f365c5aaf7c57d6fe6",
+  "pullRequest": 558,
   "reservedFiles": [
     "src/cheerfulCoffinTagAdapter.ts",
     "tests/cheerfulCoffinTagAdapter.test.cjs",
@@ -62,17 +62,25 @@
     "inventoryGranted": 0
   },
   "verification": {
-    "focusedScenarios": 0,
-    "focusedTestResult": "pending",
-    "typecheck": "pending",
-    "build": "pending",
-    "evidenceValidation": "pending",
-    "cardBatchFast": "pending",
-    "milestone1000": "pending",
-    "engineValidation": "pending",
+    "focusedScenarios": 25,
+    "focusedTestResult": "segunda execução enfileirada após corrigir 5 falhas de fixture",
+    "typecheck": "success",
+    "build": "success",
+    "evidenceValidation": "success",
+    "cardBatchFast": "success",
+    "milestone1000": "success",
+    "engineValidation": "in_progress",
     "newCertifications": 0,
     "automaticCertifications": 0,
-    "inventoryGranted": 0
+    "inventoryGranted": 0,
+    "focusedRunId": 45620331982,
+    "previousFocusedFailures": [
+      "Teste de escolha pendente construiu estado incompatível com o validador; removido, mantendo corrente válida.",
+      "Fixture de quatro descartes tinha somente três monstros na mão; setup agora prepara quatro.",
+      "Teste de fonte ausente removia carta do inventário; agora move a fonte para banimento e preserva contagem.",
+      "Teste do assento 2 consultava a mão do assento 0; expectativa corrigida para provar isolamento.",
+      "Teste de mão acima de seis preparava apenas seis após ativação; setup ampliado sem truncar."
+    ]
   },
   "production": {
     "merge": false,
@@ -80,7 +88,7 @@
     "backupVerified": false,
     "liveDiscordValidation": false
   },
-  "effectiveWorkMinutes": 0,
+  "effectiveWorkMinutes": 9,
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
@@ -119,5 +127,6 @@
   },
   "nextTask": "Executar M615 em branch isolada; durante a CI selecionar a próxima família livre após nova verificação de branches/PRs.",
   "nextWindow": "2026-11-25T14:30:00-03:00",
-  "scopeReleasedToAuxiliary": []
+  "scopeReleasedToAuxiliary": [],
+  "lastActivityAt": "2026-11-25T10:07:17-03:00"
 }

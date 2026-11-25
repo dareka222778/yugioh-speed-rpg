@@ -1,0 +1,121 @@
+{
+  "format": 1,
+  "runId": "work-20261125T100717-0300-M616",
+  "mission": "M616",
+  "owner": "Work principal",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "reservedAt": "2026-11-25T10:07:17-03:00",
+  "startedAt": "2026-11-25T10:07:17-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "0e2b285b8402991655e63f0a8ca5646d7423ae32",
+  "branch": "feat/work-m616-darkness-approaches-tag-adapter-20261125",
+  "baseSha": "0e2b285b8402991655e63f0a8ca5646d7423ae32",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/darknessApproachesTagAdapter.ts",
+    "tests/darknessApproachesTagAdapter.test.cjs",
+    "docs/evidence/m616-darkness-approaches-tag-adapter.json",
+    ".github/workflows/m616-darkness-approaches-tag-adapter.yml"
+  ],
+  "scope": "Adapter TagDuel clássico para Darkness Approaches (80168720): descartar exatamente dois cards quaisquer como custo da mão privada do assento ativo; selecionar um monstro face-up de qualquer equipe; resolver para face-down Defense Position. Custos não retornam por negação/alvo inválido; UIDs, dono físico, rotação, zonas e inventário preservados.",
+  "cards": [
+    {
+      "name": "Darkness Approaches",
+      "passcode": "80168720",
+      "konamiDatabaseId": 4902,
+      "kind": "Normal Spell",
+      "firstTcgSet": "MRL-040",
+      "firstTcgRelease": "2002-09-16",
+      "officialEffect": "Discard 2 cards from your hand. Select 1 face-up monster and change it to face-down Defense Position.",
+      "officialReference": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4902&ope=2&request_locale=en"
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/darknessApproachesTagAdapter.ts",
+      "tests/darknessApproachesTagAdapter.test.cjs",
+      "docs/evidence/m616-darkness-approaches-tag-adapter.json",
+      ".github/workflows/m616-darkness-approaches-tag-adapter.yml"
+    ],
+    "plannedScenarios": 26,
+    "integrationBoundary": "Adapter isolado; não altera resolver central, catálogo, metadata, certificações, allowlist, comandos Discord, persistência ou produção. Integração central aguarda handoff M61."
+  },
+  "rules": {
+    "mainDeckPerPhysicalSeat": "20–30",
+    "extraDeckPerPhysicalSeat": "0–5",
+    "monsterZonesPerTeam": 3,
+    "spellTrapZonesPerTeam": 3,
+    "fieldZone": "uma por equipe, separada das três Spell/Trap Zones",
+    "handLimit": 6,
+    "handDiscard": "somente na End Phase para descarte de regra; custos de efeito continuam imediatos"
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "cardBatchFast": "pending",
+    "milestone1000": "pending",
+    "engineValidation": "pending",
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "observedParallelWork": {
+    "m613": {
+      "pr": 556,
+      "state": "ci-green-scope-released"
+    },
+    "m614": {
+      "pr": 557,
+      "state": "handoff-requested-active-agent-no-touch"
+    },
+    "m615": {
+      "pr": 558,
+      "state": "open-draft-focused-retry-queued"
+    },
+    "m610": {
+      "pr": 553,
+      "state": "third-party-reserved-no-touch"
+    },
+    "m611": {
+      "pr": 554,
+      "state": "scope-released"
+    },
+    "m612": {
+      "pr": 555,
+      "state": "engine-validation-failure-third-party-no-touch"
+    }
+  },
+  "m61Handoff": {
+    "pr": 17,
+    "status": "awaiting-explicit-release",
+    "centralFilesExcluded": true
+  },
+  "nextTask": "Executar M616 em branch isolada; em seguida, revalidar M615/M616 e escolher outra família sem sobreposição.",
+  "nextWindow": "2026-11-25T14:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
