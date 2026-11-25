@@ -19,7 +19,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: m629-solemn-judgment-\${{ github.event.pull_request.number || github.ref }}
+  group: m629-solemn-judgment-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   focused:
