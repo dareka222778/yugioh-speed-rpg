@@ -313,7 +313,7 @@ test('mão acima de seis não é truncada; somente Spell e dois custos saem da m
   const duel = makeDuel(0);
   const hand = privateZone(duel, 0, 'hand');
   const deck = privateZone(duel, 0, 'deck');
-  hand.push(...deck.splice(0, 5));
+  hand.push(...deck.splice(0, 7));
   const sourceUid = putCardInHand(duel, 0, SPELL_ID);
   const costs = hand.filter(card => card.uid !== sourceUid).slice(0, 2).map(card => card.uid);
   const targetUid = addMonster(duel, 1, 1);
