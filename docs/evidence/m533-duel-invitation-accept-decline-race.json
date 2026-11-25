@@ -1,0 +1,81 @@
+{
+  "mission": "M533",
+  "runId": "work-20261122T173136-0300-M533",
+  "title": "1v1 invitation Accept versus Decline race",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "494add7078f6b97c1e18a80f910ec5feb34e5873",
+  "branch": "feat/work-m533-duel-invitation-accept-decline-race-20261122",
+  "scope": [
+    "tests/duelInvitationAcceptDeclineRace.test.cjs",
+    "docs/evidence/m533-duel-invitation-accept-decline-race.json",
+    ".github/workflows/m533-duel-invitation-accept-decline-race.yml"
+  ],
+  "priority": "P1 — exatamente uma decisão terminal pode vencer quando Accept e Decline disputam o mesmo convite 1v1 em processos Node independentes.",
+  "behavior": [
+    {
+      "case": "seis corridas independentes de Accept contra Decline, alternando o ator de Decline entre criador e convidado",
+      "assertions": [
+        "dois processos Node partem de uma barreira comum e usam o mesmo SQLite temporário",
+        "exatamente uma operação confirma e a outra falha de forma fechada",
+        "a revisão do convite avança exatamente uma vez",
+        "se Accept vence, o convite desaparece, DuelState contém cada jogador uma vez e existem exatamente dois locks físicos",
+        "se Decline vence, nenhum DuelState é criado e o lock do criador é liberado",
+        "replay da decisão perdedora com revisão antiga não altera status, revisão ou locks",
+        "não há linhas órfãs em duel_members nem convites pendentes após a corrida"
+      ]
+    },
+    {
+      "case": "conservação econômica e integridade dos fixtures",
+      "assertions": [
+        "snapshots de players, player_cards, starter_grants, decks e deck_cards são idênticos antes/depois",
+        "cada fixture usa Main Deck legal de 20 cartas e Extra Deck dentro do limite 5",
+        "decisões de convite não criam action receipts ou transition events"
+      ]
+    }
+  ],
+  "isolation": {
+    "database": "SQLite temporário em diretório do sistema operacional",
+    "processes": "Dois processos Node 22 independentes com barreira de início por arquivo",
+    "discordCredentials": "DISCORD_TOKEN, DISCORD_CLIENT_ID e DISCORD_GUILD_ID removidos",
+    "persistentPlayerData": "Nenhum acesso ao banco persistente"
+  },
+  "ownerRules": {
+    "mainDeck": "20–30",
+    "handLimit": 6,
+    "discard": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeck": 5,
+    "runtimeChanged": false
+  },
+  "catalog": {
+    "baseline": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0
+  },
+  "inventoryGranted": 0,
+  "runtimeFilesChanged": [],
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordGuild": false
+  },
+  "limitations": [
+    "O teste executa o armazenamento SQLite real em subprocessos independentes, mas não usa gateway/guild Discord ao vivo.",
+    "Um erro SQLITE_BUSY do processo perdedor só é aceito como falha fechada; a CI ainda exige exatamente um vencedor confirmado."
+  ],
+  "testExecution": {
+    "focused": null,
+    "check": null,
+    "build": null,
+    "customWorkflow": null,
+    "cardBatchFast": null,
+    "milestone1000": null,
+    "engineValidation": null,
+    "extendedSoak": null
+  }
+}
