@@ -55,7 +55,7 @@
     "handDiscard": "End Phase only; adapter does not discard"
   },
   "verification": {
-    "plannedScenarios": 28,
+    "plannedScenarios": 37,
     "focusedTests": 0,
     "typecheck": "pending",
     "build": "pending",
@@ -63,7 +63,8 @@
     "newCertifications": 0,
     "automaticCertifications": 0,
     "inventoryGranted": 0,
-    "liveDiscordValidation": false
+    "liveDiscordValidation": false,
+    "focusedTestResult": "pending rerun after fixture corrections"
   },
   "catalogAtStart": {
     "engineV9Certified": 969,

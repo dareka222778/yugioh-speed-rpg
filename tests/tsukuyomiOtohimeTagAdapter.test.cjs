@@ -9,6 +9,7 @@ const {
 const { enabledCardIds, getDuelCard } = require('../dist/effectRegistry.js');
 const { rulesCardName } = require('../dist/cardIdentity.js');
 const { synchronizeCardLifetimes } = require('../dist/cardLifetime.js');
+const { createTokenGroup } = require('../dist/tokens.js');
 const {
   TSUKUYOMI_ID,
   OTOHIME_ID,
@@ -294,30 +295,41 @@ test('Tsukuyomi pode escolher a si mesmo; ficar face-down impede o retorno Spiri
   assert.ok(end.state.core.players[0].monsters.some(monster => monster.uid === sourceUid));
 });
 
-test('Tsukuyomi não escolhe monstros face-down nem fichas', () => {
+test('Tsukuyomi não escolhe monstro face-down e consome a janela', () => {
   const { duel, event } = eventAndSource();
   const hiddenUid = addMonster(duel, NORMAL_IDS[0], 2, 0, false, 'def');
-  const tokenUid = addAnyMonster(duel, 2, 0, hiddenUid);
-  const token = duel.core.players[0].monsters.find(monster => monster.uid === tokenUid);
-  token.entityKind = 'token';
-  const hiddenPlan = registerAndPlan(duel, event, hiddenUid).planned;
+  const registered = adapter.registerSummon(duel, event);
+  const hiddenPlan = adapter.preparePositionEffect(registered.state, event.eventId, hiddenUid);
   assert.equal(hiddenPlan.status, 'no-target');
-  const tokenPlan = adapter.preparePositionEffect(hiddenPlan.state, event.eventId + ':token', tokenUid);
-  assert.equal(tokenPlan.status, 'duplicate');
+  const retry = adapter.preparePositionEffect(hiddenPlan.state, event.eventId, hiddenUid);
+  assert.equal(retry.status, 'duplicate');
 });
 
-test('Otohime só escolhe monstro face-up controlado pela equipe adversária', () => {
+test('Tsukuyomi não pode colocar Fichas face-down', () => {
+  const { duel, event } = eventAndSource();
+  const [token] = createTokenGroup(duel.core, 0, 1);
+  const registered = adapter.registerSummon(duel, event);
+  const tokenPlan = adapter.preparePositionEffect(registered.state, event.eventId, token.uid);
+  assert.equal(tokenPlan.status, 'invalid-target');
+});
+
+test('Otohime recusa um monstro aliado como alvo', () => {
   const { duel, event } = eventAndSource(OTOHIME_FIXTURE_ID);
   const ownUid = addAnyMonster(duel, 2, 0);
   const registered = adapter.registerSummon(duel, event);
   const ownPlan = adapter.preparePositionEffect(registered.state, event.eventId, ownUid);
   assert.equal(ownPlan.status, 'invalid-target');
-  const enemyUid = addAnyMonster(duel, 1, 1);
-  const enemyPlan = adapter.preparePositionEffect(ownPlan.state, event.eventId + ':enemy', enemyUid);
-  assert.equal(enemyPlan.status, 'not-registered');
 });
 
-test('Otohime alterna Ataque e Defesa sem virar o alvo face-down', () => {
+test('Otohime aceita um monstro adversário face-up', () => {
+  const { duel, event } = eventAndSource(OTOHIME_FIXTURE_ID);
+  const enemyUid = addAnyMonster(duel, 1, 1);
+  const registered = adapter.registerSummon(duel, event);
+  const enemyPlan = adapter.preparePositionEffect(registered.state, event.eventId, enemyUid);
+  assert.equal(enemyPlan.status, 'ready');
+});
+
+test('Otohime alterna Ataque para Defesa sem virar o alvo face-down', () => {
   const { duel, event } = eventAndSource(OTOHIME_FIXTURE_ID);
   const targetUid = addAnyMonster(duel, 1, 1);
   const { planned } = registerAndPlan(duel, event, targetUid);
@@ -327,13 +339,17 @@ test('Otohime alterna Ataque e Defesa sem virar o alvo face-down', () => {
   const target = resolved.state.core.players[1].monsters.find(monster => monster.uid === targetUid);
   assert.equal(target.faceUp, true);
   assert.equal(target.position, 'def');
-  const reverse = addAnyMonster(resolved.state, 1, 1);
-  const secondEvent = { ...event, eventId: event.eventId + ':second' };
-  const registered = adapter.registerSummon(resolved.state, secondEvent);
-  const secondPlan = adapter.preparePositionEffect(registered.state, secondEvent.eventId, reverse);
-  assert.equal(secondPlan.status, 'ready');
-  const secondResolved = adapter.resolvePositionEffect(secondPlan.state, secondPlan.plan);
-  assert.equal(secondResolved.state.core.players[1].monsters.find(monster => monster.uid === reverse).position, 'def');
+});
+
+test('Otohime alterna Defesa para Ataque sem virar o alvo face-down', () => {
+  const { duel, event } = eventAndSource(OTOHIME_FIXTURE_ID);
+  const targetUid = addMonster(duel, NORMAL_IDS[0], 1, 1, true, 'def');
+  const { planned } = registerAndPlan(duel, event, targetUid);
+  assert.equal(planned.status, 'ready');
+  const resolved = adapter.resolvePositionEffect(planned.state, planned.plan);
+  const target = resolved.state.core.players[1].monsters.find(monster => monster.uid === targetUid);
+  assert.equal(target.faceUp, true);
+  assert.equal(target.position, 'atk');
 });
 
 test('Otohime muda Defesa face-up para Ataque face-up', () => {
@@ -547,7 +563,7 @@ test('quatro Monster Zones são rejeitadas sem alterar inventário', () => {
   addAnyMonster(duel, 2, 0);
   addAnyMonster(duel, 2, 0);
   addAnyMonster(duel, 2, 0);
-  assert.throws(() => adapter.registerSummon(duel, event), /três Monster Zones/);
+  assert.throws(() => adapter.registerSummon(duel, event), /limite de zonas/);
 });
 
 test('quatro Spell/Trap Zones são rejeitadas', () => {
