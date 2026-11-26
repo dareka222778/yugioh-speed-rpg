@@ -18,10 +18,15 @@ if(evidence.certifiedCardsBefore!==969||evidence.certifiedCardsAfter!==catalog.c
 if(required.some(id=>ids.has(id)))throw new Error('Uma carta não testada foi liberada no catálogo.');
 if(evidence.integratedIntoCentralResolver!==false||evidence.discordLiveValidated!==false||
  evidence.productionChanged!==false)throw new Error('A evidência exagera a integração ou produção.');
-const baseHead='40dc6be1865f9e5d6f8bf5d774be5464b9b465c4';
-for(const file of ['src/duelEngineCurrent.ts','src/monsterEffects.ts','src/cardCertifications.ts','catalog/engine-v9/manifest.json']){
- try{execFileSync('git',['diff','--quiet',baseHead+'...HEAD','--',file],{cwd:root,stdio:'ignore'});}
- catch{throw new Error('Arquivo central/catálogo alterado: '+file);}
+const protectedFiles={
+ 'src/duelEngineCurrent.ts':'7e16627a2d4e1c7d0aff52fc9e63dc6b85f0f867',
+ 'src/monsterEffects.ts':'c8ba857e3e6534b1a42dde35e9f2a3a36e51bdf2',
+ 'src/cardCertifications.ts':'3725be7ab73c4ce441cdf561037acfaeaa321f6e',
+ 'catalog/engine-v9/manifest.json':'f59955155af85aa94b3a91231ff1a279a1d65f07'
+};
+for(const [file,expected] of Object.entries(protectedFiles)){
+ const actual=execFileSync('git',['hash-object',file],{cwd:root,encoding:'utf8'}).trim();
+ if(actual!==expected)throw new Error('Arquivo central/catálogo alterado: '+file);
 }
 console.log(JSON.stringify({mission:'M657',scenarios:evidence.scenarioCount,passed:evidence.completed,
  certifiedCards:catalog.cards.length,newCertifications:0,inventoryGrants:0,catalogRevision:manifest.current},null,2));
