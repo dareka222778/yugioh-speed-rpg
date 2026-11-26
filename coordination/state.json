@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "3814c94da7c57f0ccd2548211365eef89d29faa8",
-  "updatedAt": "2026-11-26T01:13:45-03:00",
+  "observedHead": "58ff7d48eb71a78e5580fb8d0132b27d84b2bbf8",
+  "updatedAt": "2026-11-26T01:30:00-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -55,6 +55,20 @@
         "docs/evidence/m639-reveal-attack-lock.json",
         ".github/workflows/m639-reveal-attack-lock.yml"
       ]
+    },
+    {
+      "runId": "work-20261126T013000-0300-M640",
+      "mission": "M640",
+      "branch": "feat/work-m640-inexperienced-spy-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/inexperiencedSpyTagAdapter.ts",
+        "tests/inexperiencedSpyTagAdapter.test.cjs",
+        "docs/evidence/m640-inexperienced-spy.json",
+        ".github/workflows/m640-inexperienced-spy-tag-adapter.yml"
+      ]
     }
   ],
   "handoffRequests": [
@@ -69,5 +83,5 @@
       ]
     }
   ],
-  "notes": "M635, M637 e M638 preservados como reservas ativas. M639 usa quatro caminhos independentes para Swords of Revealing Light/Dark-Piercing Light; não toca nos arquivos reservados nem nos arquivos centrais bloqueados por handoff."
+  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 isola a leitura privada de The Inexperienced Spy; não altera os arquivos reservados nem o resolver central."
 }
