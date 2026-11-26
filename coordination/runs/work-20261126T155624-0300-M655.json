@@ -38,6 +38,14 @@
       "admittedAtStart": false,
       "certifiedAtStart": false,
       "officialEffect": "While this card is on the field, Monster Cards cannot be Set or flipped face-down. If a Monster Card would be Set, it must be Normal Summoned in face-up Defense Position."
+    },
+    {
+      "id": "33950246",
+      "name": "Royal Command",
+      "firstTCGRelease": "2003-03-01",
+      "admittedAtStart": false,
+      "certifiedAtStart": false,
+      "officialEffect": "Flip monsters' effects cannot be activated, also their effects are negated."
     }
   ],
   "handoff": {
@@ -67,7 +75,7 @@
     "liveDiscordValidation": false
   },
   "verification": {
-    "focusedScenarios": 0,
+    "focusedScenarios": 19,
     "focusedTestResult": "pending",
     "typecheck": "pending",
     "build": "pending",
@@ -84,7 +92,7 @@
   "targetEffectiveWorkMinutes": 60,
   "targetMet": false,
   "ciWaitExcluded": true,
-  "nextTask": "Implementar o adapter de políticas contínuas de posição e seus cenários TagDuel 2v2; preparar lote independente durante a CI.",
+  "nextTask": "Validar CI, corrigir falhas e preparar a próxima família independente.",
   "nextWindow": "2026-11-26T17:30:00-03:00",
   "scopeReleasedToAuxiliary": []
 }
