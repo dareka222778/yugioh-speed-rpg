@@ -34,7 +34,7 @@ const deck=[
  ratFixture.id,germFixture.id,germFixture.id,germFixture.id,
  momongaFixture.id,momongaFixture.id,momongaFixture.id,
  ...earthLow.map(card=>card.id),nonEarthLow.id,earthHigh.id,highNonEarth.id,
- ...spellIds,...trapIds
+ ...spellIds.map(card=>card.id),...trapIds.map(card=>card.id)
 ];
 assert.equal(deck.length,20);
 const fixtureEffects=new Map([
@@ -353,9 +353,9 @@ scenario('monstro fisicamente pertencente ao parceiro usa o Deck privado do memb
 });
 scenario('mão privada acima de seis permanece intacta até a End Phase',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-hand-seven','rat-hand-seven');
- const source=holder(session,1),extra=source.deck.pop();assert.ok(extra);source.hand.push(extra);
- assert.equal(source.hand.length,7);
- const target=ensureEarthTarget(session,1),before=hands(session);
+ const target=ensureEarthTarget(session,1),source=holder(session,1);
+ while(source.hand.length<7){const extra=source.deck.pop();assert.ok(extra);source.hand.push(extra);}
+ const before=hands(session);
  safeResolve(session,plan.activationId,[target.uid]);
  assert.equal(holder(session,1).hand.length,7);assert.deepEqual(hands(session),before);
 });
