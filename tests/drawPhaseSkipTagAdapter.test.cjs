@@ -184,8 +184,8 @@ scenario('Offerings setado não pode ser ativado no mesmo turno',()=>{
  assert.throws(()=>prepareOfferings(session,0,target.uid,'set','offer-same-turn',session.duel.core.turn),/mesmo turno/);
 });
 scenario('Offerings rejeita recibo de turno obsoleto',()=>{
- const {session}=setup(0),target=deploy(session,1,monsters[0].id);
- const {receipt}=prepareOfferings(session,0,target.uid);
+ const {session}=setup(1),target=deploy(session,0,monsters[0].id);
+ const {receipt}=prepareOfferings(session,1,target.uid);
  assert.throws(()=>adapter.prepare(session,{...receipt,activationId:'old',turn:receipt.turn-1}),/obsoleta/);
 });
 scenario('Time Seal no turno do controlador pula o próximo Draw Phase do adversário',()=>{
