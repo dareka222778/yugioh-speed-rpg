@@ -18,17 +18,16 @@ function unique(kind,predicate,count=100){
   seen.add(name);return true;
  }).slice(0,count);
 }
-const normal=unique('monster',card=>card.cardType==='Normal Monster'&&Number.isFinite(card.atk));
-const ratFixture=normal.find(card=>card.atk>1500&&card.attribute!=='EARTH');
-const germFixture=normal.find(card=>card.atk<=1000&&card.id!==ratFixture?.id);
-const momongaFixture=normal.find(card=>card.atk<=1000&&card.id!==ratFixture?.id&&card.id!==germFixture?.id);
-const fixtureIds=new Set([ratFixture?.id,germFixture?.id,momongaFixture?.id]);
-const earthLow=normal.filter(card=>card.attribute==='EARTH'&&card.atk<=1500&&!fixtureIds.has(card.id)).slice(0,4);
-const nonEarthLow=normal.find(card=>card.attribute!=='EARTH'&&card.atk<=1500&&!fixtureIds.has(card.id)&&!earthLow.some(x=>x.id===card.id));
-const earthHigh=normal.find(card=>card.attribute==='EARTH'&&card.atk>1500&&!fixtureIds.has(card.id)&&!earthLow.some(x=>x.id===card.id));
-const highNonEarth=normal.find(card=>card.attribute!=='EARTH'&&card.atk>1500&&!fixtureIds.has(card.id)&&card.id!==ratFixture?.id);
+const lowMonsters=unique('monster',card=>Number.isFinite(card.atk)&&card.atk<=1400,8);
+const highMonsters=unique('monster',card=>Number.isFinite(card.atk)&&card.atk>1400,3);
+assert.ok(lowMonsters.length>=8&&highMonsters.length>=3);
+const ratFixture=highMonsters[0],germFixture=lowMonsters[0],momongaFixture=lowMonsters[1];
+const fixtureIds=new Set([ratFixture.id,germFixture.id,momongaFixture.id]);
+const earthLow=unique('monster',card=>card.attribute==='EARTH'&&card.atk<=1500&&!fixtureIds.has(card.id),20).slice(0,4);
+const nonEarthLow=unique('monster',card=>card.attribute!=='EARTH'&&card.atk<=1500&&!fixtureIds.has(card.id)&&!earthLow.some(x=>x.id===card.id),1)[0];
+const earthHigh=unique('monster',card=>card.attribute==='EARTH'&&card.atk>1500&&!fixtureIds.has(card.id)&&!earthLow.some(x=>x.id===card.id),1)[0];
+const highNonEarth=unique('monster',card=>card.attribute!=='EARTH'&&card.atk>1500&&!fixtureIds.has(card.id),1)[0];
 const spellIds=unique('spell',()=>true,3),trapIds=unique('trap',()=>true,3);
-assert.ok(ratFixture&&germFixture&&momongaFixture);
 assert.ok(earthLow.length>=4&&nonEarthLow&&earthHigh&&highNonEarth);
 assert.equal(spellIds.length,3);assert.equal(trapIds.length,3);
 const deck=[
