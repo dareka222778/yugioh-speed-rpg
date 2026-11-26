@@ -33,8 +33,7 @@ function addMindHaxorz(state,seat,{setTurn=0}={}){
 function addSetMonster(state,seat){
   const card=holder(state,seat).hand.shift();
   state.core.players[seat%2].monsters.push({
-    ...card,position:'def',faceUp:false,entered:0,changed:0,attacked:0,
-    attackCount:0,atkBoost:0,defBoost:0
+    ...card,position:'def',faceUp:false,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0
   });
   return card.uid;
 }
@@ -266,8 +265,7 @@ test('three shared Monster Zones and three shared S/T Zones remain hard limits w
   const fourth=structuredClone(state);
   const extra=holder(fourth,1).hand.shift();
   fourth.core.players[1].monsters.push({
-    ...extra,position:'def',faceUp:false,entered:0,changed:0,attacked:0,
-    attackCount:0,atkBoost:0,defBoost:0
+    ...extra,position:'def',faceUp:false,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0
   });
   assert.throws(()=>activate(fourth,0,1,source),/três Monster Zones/);
 });
