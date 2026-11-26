@@ -4,6 +4,7 @@ import {assertTagDuel,tagInventory,type TagDuel} from './tagDuel';
 import type {Monster} from './duelEngine';
 import {monsterEffectsNegated} from './continuousEffects';
 import {sendMonsterToGrave} from './monsterExit';
+import {bindTarget,targetBindingValid,type TargetBinding} from './cardLifetime';
 import {cleanEquips,discardBackrow,turnMonsterFaceDown} from './classicEffects';
 
 export const SWARM_OF_SCARABS_ID='15383415';
@@ -12,7 +13,7 @@ export type SwarmEffect='scarabs'|'locusts';
 export type SwarmTeam=0|1;
 export type SwarmSeat=0|1|2|3;
 export type SwarmZone='monster'|'backrow'|'field';
-export type SwarmTarget={uid:string;zone:SwarmZone};
+export type SwarmTarget={uid:string;zone:SwarmZone;binding:TargetBinding};
 export type SwarmCardInfo={kind:'monster';effect:SwarmEffect};
 export type SwarmLookup=(id:string)=>SwarmCardInfo|undefined;
 export type SwarmFlipPlan={
@@ -115,10 +116,16 @@ function findMonster(duel:TagDuel,team:SwarmTeam,uid:string):Monster|undefined{
 }
 function targetOptions(duel:TagDuel,effect:SwarmEffect,targetTeam:SwarmTeam):SwarmTarget[]{
  const opponent=duel.core.players[targetTeam];
- if(effect==='scarabs')return opponent.monsters.map(monster=>({uid:monster.uid,zone:'monster'}));
+ const bind=(uid:string,zone:SwarmZone):SwarmTarget|undefined=>{
+  const binding=bindTarget(duel.core,uid);
+  return binding?{uid,zone,binding}:undefined;
+ };
+ if(effect==='scarabs')return opponent.monsters.flatMap(monster=>{
+  const target=bind(monster.uid,'monster');return target?[target]:[];
+ });
  return [
-  ...opponent.backrow.map(card=>({uid:card.uid,zone:'backrow' as const})),
-  ...(opponent.field?[{uid:opponent.field.uid,zone:'field' as const}]:[])
+  ...opponent.backrow.flatMap(card=>{const target=bind(card.uid,'backrow');return target?[target]:[];}),
+  ...(opponent.field?[bind(opponent.field.uid,'field')].filter((target):target is SwarmTarget=>!!target):[])
  ];
 }
 function locateTarget(duel:TagDuel,team:SwarmTeam,uid:string):SwarmZone|null{
@@ -146,12 +153,13 @@ function validFlipWindow(duel:TagDuel,actorSeat:number,sourceUid:string,lookup:S
  return {source,info,controllerTeam:pending.actor as SwarmTeam,targetTeam:(1-pending.actor) as SwarmTeam};
 }
 function assertTargetStillValid(duel:TagDuel,plan:SwarmFlipPlan,selectedUid:string):SwarmZone|null{
+ const planned=plan.targetOptions.find(target=>target.uid===selectedUid);
+ if(!planned||!targetBindingValid(duel.core,planned.binding))return null;
  const zone=locateTarget(duel,plan.targetTeam,selectedUid);
  if(!zone)return null;
  if(plan.effect==='scarabs'&&zone!=='monster')return null;
  if(plan.effect==='locusts'&&zone==='monster')return null;
- const planned=plan.targetOptions.find(target=>target.uid===selectedUid);
- return planned?.zone===zone?zone:null;
+ return planned.zone===zone?zone:null;
 }
 export function createSwarmFlipAdapter(lookup:SwarmLookup=defaultSwarmLookup){
  if(typeof lookup!=='function')throw new Error('Consulta de cartas inválida.');
@@ -172,6 +180,7 @@ export function createSwarmFlipAdapter(lookup:SwarmLookup=defaultSwarmLookup){
   const window=validFlipWindow(session.duel,actorSeat,sourceUid,lookup),sourceOwnerSeat=physicalSeat(sourceUid);
   if(sourceOwnerSeat===null)throw new Error('UID físico do monstro inválido.');
   const options=targetOptions(session.duel,window.info.effect,window.targetTeam);
+  assertTagDuel(session.duel);
   if(!options.length)throw new Error('Não existe alvo legal para o efeito Flip.');
   const plan:SwarmFlipPlan={
    activationId,effect:window.info.effect,actorSeat:actorSeat as SwarmSeat,sourceUid,

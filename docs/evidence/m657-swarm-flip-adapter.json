@@ -23,11 +23,12 @@
     }
   ],
   "rules": {
-    "targetLock": "UID e zona capturados na ativação; alvo que muda de zona/controlador ou deixa o campo não é substituído.",
+    "targetLock": "UID, zona e epoch capturados na ativação; alvo que deixa e retorna à mesma zona, muda de controlador ou de zona não é substituído.",
     "scarabs": "Monstro da equipe adversária em qualquer posição; inclui o parceiro adversário.",
     "locusts": "Backrow e Field Zone da equipe adversária; Field Zone não consome uma das três Spell/Trap Zones.",
     "sourceLeavesField": "O efeito Flip já ativado continua a resolver; a fonte não é revalidada na resolução.",
-    "selfSet": "Somente Main Phase do membro ativo; uma vez por turno por instância; bloqueios de posição e negação de efeito são respeitados."
+    "selfSet": "Somente Main Phase do membro ativo; uma vez por turno por instância; bloqueios de posição e negação de efeito são respeitados.",
+    "lifetime": "TargetBinding/epoch impede que a mesma carta física que saiu e retornou seja confundida com a instância originalmente selecionada."
   },
   "constraints": {
     "mainDeck": "20-30",

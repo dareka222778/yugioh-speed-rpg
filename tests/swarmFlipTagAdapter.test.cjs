@@ -6,6 +6,7 @@ const {createTagDuel,tagInventory,assertTagDuel}=require('../dist/tagDuel');
 const {enabledCardIds,engineCard}=require('../dist/effectRegistry');
 const {rulesFor}=require('../dist/rulesProfile');
 const {sendMonsterToGrave}=require('../dist/monsterExit');
+const {synchronizeCardLifetimes}=require('../dist/cardLifetime');
 const {
  createSwarmFlipAdapter,assertSwarmFlipRules,SWARM_OF_SCARABS_ID,SWARM_OF_LOCUSTS_ID
 }=require('../dist/swarmFlipTagAdapter');
@@ -84,12 +85,27 @@ function removeMonster(session,team,uid){
  assert.ok(index>=0,'monster exists');
  const [card]=monsters.splice(index,1);
  session.duel.core.players[team].grave.push({uid:card.uid,id:card.id});
+ synchronizeCardLifetimes(session.duel.core);
 }
 function removeBackrow(session,team,uid){
  const player=session.duel.core.players[team],index=player.backrow.findIndex(card=>card.uid===uid);
  assert.ok(index>=0,'backrow exists');
  const [card]=player.backrow.splice(index,1);
  player.grave.push({uid:card.uid,id:card.id});
+ synchronizeCardLifetimes(session.duel.core);
+}
+function reenterMonster(session,team,uid){
+ const player=session.duel.core.players[team],index=player.monsters.findIndex(card=>card.uid===uid);
+ assert.ok(index>=0,'monster exists before re-entry');
+ const [old]=player.monsters.splice(index,1);
+ player.grave.push({uid:old.uid,id:old.id});
+ synchronizeCardLifetimes(session.duel.core);
+ const graveIndex=player.grave.findIndex(card=>card.uid===uid),[ref]=player.grave.splice(graveIndex,1);
+ const turn=session.duel.core.turn;
+ const next={...ref,position:'atk',faceUp:true,entered:turn,changed:turn,lastSummonedTurn:turn,
+  attacked:0,atkBoost:0,defBoost:0,owner:old.owner};
+ player.monsters.push(next);synchronizeCardLifetimes(session.duel.core);
+ return next;
 }
 function snapshot(session){
  return new Map(tagInventory(session.duel).filter(card=>card.entityKind!=='token').map(card=>[card.uid,card.id]));
@@ -135,7 +151,7 @@ scenario('Swarm of Scarabs oferece monstros de toda a equipe oponente, inclusive
  const friendly=deploy(session,0,monsterIds[4],2,true,'atk');
  const actor=beginFlip(session,0,source);
  const plan=prepare(session,source,actor,'scarabs-options');
- assert.deepEqual(plan.targetOptions,[{uid:target.uid,zone:'monster'},{uid:hidden.uid,zone:'monster'}]);
+ assert.deepEqual(plan.targetOptions.map(({uid,zone})=>({uid,zone})),[{uid:target.uid,zone:'monster'},{uid:hidden.uid,zone:'monster'}]);
  assert.equal(plan.targetOptions.some(item=>item.uid===friendly.uid),false);
 });
 
@@ -185,6 +201,18 @@ scenario('o alvo de Scarabs que vira face-down continua sendo o alvo e é destru
  assert.equal(result.status,'destroyed');
 });
 
+scenario('um alvo que deixa e retorna à mesma zona não pode ser destruído pela ativação antiga',()=>{
+ const {session}=setup('m657-scarabs-reenter');
+ const source=deploy(session,0,fixtures.scarabs),target=deploy(session,1,monsterIds[2],1),other=deploy(session,1,monsterIds[3],3);
+ const actor=beginFlip(session,0,source);
+ prepare(session,source,actor,'scarabs-reenter');
+ session.duel.core.pending={kind:'none'};reenterMonster(session,1,target.uid);
+ const result=adapter.resolveFlipSummonEffect(session,'scarabs-reenter',target.uid);
+ assert.equal(result.status,'target-lost');
+ assert.ok(session.duel.core.players[1].monsters.some(card=>card.uid===target.uid));
+ assert.ok(session.duel.core.players[1].monsters.some(card=>card.uid===other.uid));
+});
+
 scenario('o efeito Flip já ativado resolve mesmo que a fonte saia do campo',()=>{
  const {session}=setup('m657-scarabs-source-gone');
  const source=deploy(session,0,fixtures.scarabs),target=deploy(session,1,monsterIds[2],3);
@@ -204,7 +232,7 @@ scenario('Swarm of Locusts oferece backrow e Field Zone da equipe oponente, sem 
  const own=setBackrow(session,0,trapIds[1],2,false);
  const actor=beginFlip(session,0,source);
  const plan=prepare(session,source,actor,'locust-options');
- assert.deepEqual(plan.targetOptions,[{uid:backrow.uid,zone:'backrow'},{uid:field.uid,zone:'field'}]);
+ assert.deepEqual(plan.targetOptions.map(({uid,zone})=>({uid,zone})),[{uid:backrow.uid,zone:'backrow'},{uid:field.uid,zone:'field'}]);
  assert.equal(plan.targetOptions.some(item=>item.uid===own.uid),false);
 });
 
