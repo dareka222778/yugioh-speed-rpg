@@ -1,0 +1,34 @@
+{
+  "format": 1,
+  "runId": "work-20261126T203314-0300-M659",
+  "mission": "M659",
+  "priority": "P1",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T20:33:14-03:00",
+  "endedAt": null,
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "baseHead": "0399a4c8b69a3c1261f6b5b9c8978c70602fd3ff",
+  "branch": "feat/work-m659-battle-recruiters-20261126",
+  "headSha": null,
+  "scope": "Adapter TagDuel isolado para Giant Rat (97077563), Giant Germ (95178994) e Nimble Momonga (22567609): gatilho pós-destruição por batalha; recrutamento EARTH <=1500 ATK, dano 500 + recrutamento em Ataque e recuperação de 1000 LP + recrutamento em Defesa face-down. Mantém deck privado do assento ativo da equipe, UIDs/propriedade física, mãos, deck 20–30, mão 6 na End Phase, zonas 3+3 e Extra 5. Sem resolver central, catálogo/certificações, comandos, banco, Discord ao vivo, inventário ou produção.",
+  "reservedFiles": [
+    "src/battleRecruitTagAdapter.ts",
+    "tests/battleRecruitTagAdapter.test.cjs",
+    "docs/evidence/m659-battle-recruiters.json",
+    ".github/workflows/m659-battle-recruiters.yml",
+    "scripts/audit-battle-recruiters-m659.cjs"
+  ],
+  "certifiedCardsBefore": 969,
+  "certifiedCardsAfter": null,
+  "newCertifications": 0,
+  "inventoryGrants": 0,
+  "ci": {
+    "focused": "pending",
+    "repositoryRegression": "pending"
+  },
+  "pr": null,
+  "production": "não alterada",
+  "discord": "não validado ao vivo",
+  "nextTask": "Implementar o contrato pós-batalha, resolução dos três efeitos e testes de conservação/rotação; validar CI focada e regressão antes de qualquer integração.",
+  "nextWindow": "2026-11-26T22:30:00-03:00"
+}
