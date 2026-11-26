@@ -18,7 +18,7 @@
     "activation": "A previously Set Normal Trap can be activated by the active physical teammate during an open Main/Battle Phase; the 500 LP cost is paid immediately.",
     "tagDuelMapping": "The activating seat selects one of the two opposing physical hands; every face-down monster, backrow card and face-down Field Zone card on the opposing shared field is inspected.",
     "privacy": "Only the exact activating seat receives the hand and set-card identities. The teammate and both opponents receive no private payload.",
-    "persistence": "The private reveal receipt is transient and non-enumerable; activation/resolution IDs persist only for idempotency.",
+    "persistence": "The private reveal receipt is transient and non-enumerable; immutable activation plans and activation/resolution IDs persist only for safe resolution/idempotency.",
     "movement": "Inspected cards remain in their original zones. Mind Haxorz goes to the shared Graveyard after resolution; if negated, its LP cost remains paid and no reveal is produced.",
     "cost": "Pay 500 LP on activation; if the cost reduces team LP to zero, the duel ends before effect resolution.",
     "sourceRemoval": "Removing the activated Trap from the field after activation does not cancel this adapter's already-activated inspection."
@@ -40,7 +40,7 @@
   "tests": {
     "file": "tests/mindHaxorzTagAdapter.test.cjs",
     "command": "node --test tests/mindHaxorzTagAdapter.test.cjs",
-    "scenarios": 12,
+    "scenarios": 13,
     "covered": [
       "catalogue and certification allowlist remain unchanged",
       "only activating seat receives selected opponent hand and all face-down shared-field cards",
@@ -50,6 +50,7 @@
       "paying the final 500 LP ends duel before resolution",
       "insufficient LP, same-turn Set, inactive actor, teammate target, face-up source, phase/chain rejection",
       "activation and resolution idempotency",
+      "forged target/source plans rejected against the immutable persisted activation record",
       "already-activated Trap removed from field still resolves",
       "seven-card hand waits for engine End Phase discard",
       "three Monster Zones, three S/T Zones and separate Field Zone",
