@@ -1,0 +1,96 @@
+{
+  "format": 1,
+  "runId": "work-20261126T102800-0300-M649",
+  "mission": "M649",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T10:28:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "77080a7a9aac77f4c25e1cc707b5cfbc609aad4b",
+  "branch": "feat/work-m649-discard-cost-destruction-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "77080a7a9aac77f4c25e1cc707b5cfbc609aad4b",
+  "branchHeadSha": "a7878289393d0617ea9e6c855b170e7cc7afd517",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/discardCostDestructionTagAdapter.ts",
+    "tests/discardCostDestructionTagAdapter.test.cjs",
+    "docs/evidence/m649-discard-cost-destruction.json",
+    ".github/workflows/m649-discard-cost-destruction.yml"
+  ],
+  "scope": "Adapter isolado TagDuel clássico 2v2 para Tribute to the Doomed (79759861; CID Konami 4856) e Raigeki Break (04178474; CID Konami 5544). Ambos descartam uma carta física da mão como custo e destroem um alvo no campo; Tribute to the Doomed só seleciona monstros e é Normal Spell, Raigeki Break seleciona qualquer carta e é Normal Trap. Preservar propriedade física, mãos privadas, custo mesmo sob negação, alvo por UID/epoch, zonas, deck e Extra. Sem resolver central, catálogo, certificações, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "79759861",
+      "konamiId": 4856,
+      "name": "Tribute to the Doomed",
+      "namePt": "Tributo aos Condenados",
+      "type": "Normal Spell",
+      "officialText": "Discard 1 card, then target 1 monster on the field; destroy it.",
+      "firstTCGRelease": "2002-06-26",
+      "firstTCGSet": "MRD-057",
+      "firstOCGRelease": "1999-09-23",
+      "certifiedAtStart": false
+    },
+    {
+      "id": "04178474",
+      "konamiId": 5544,
+      "name": "Raigeki Break",
+      "namePt": "Fratura Raigeki",
+      "type": "Normal Trap",
+      "officialText": "Discard 1 card, then target 1 card on the field; destroy it.",
+      "firstTCGRelease": "2003-07-18",
+      "firstTCGSet": "PGD-096",
+      "certifiedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "escopo independente; nenhum arquivo reservado por outro agente será alterado; integração central aguarda handoff explícito M637 já solicitado no PR #17",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/commands/duel"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true,
+    "conflictingReservations": 0
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "releasedCardIds": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar o adapter compartilhado de custo de descarte e destruição com janelas Normal Spell/Normal Trap, alvo por UID/epoch, custo físico privado e testes de negação/identidade.",
+  "nextWindow": "2026-11-26T11:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
