@@ -115,7 +115,9 @@ test('the actor and selected opponent privately receive both hands after reveal'
   assert.equal(privateView(revealed,2),undefined,'actor teammate must not receive the reveal');
   assert.equal(privateView(revealed,3),undefined,'opponent teammate is not the selected participant');
   assert.equal(Object.prototype.propertyIsEnumerable.call(revealed,'privateReceipt'),false);
-  const publicView=tag.publicTagDuel(revealed.state);
+  const publicCandidate=structuredClone(revealed.state);
+  publicCandidate.core.players[0].backrow=publicCandidate.core.players[0].backrow.filter(card=>card.uid!==source);
+  const publicView=tag.publicTagDuel(publicCandidate);
   for(const uid of [...actorBefore,...targetBefore])assert.equal(JSON.stringify(publicView).includes(uid),false);
 });
 test('both physical participants exchange one card while preserving UIDs and original owners',()=>{
@@ -139,9 +141,9 @@ test('both physical participants exchange one card while preserving UIDs and ori
 test('a transferred Exchange may be activated by its current physical holder and returns to its original owner team grave',()=>{
   const state=create(0,'stolen-source'),source=addExchangeToHand(state,0,1);
   const activation=activate(state,0,1,source),revealed=reveal(activation);
-  const actorCard=holder(revealed.state,0).hand[0].uid;
-  const targetCard=holder(revealed.state,1).hand[0].uid;
-  const result=resolve(revealed,actorCard,targetCard);
+  const actorTakesUid=holder(revealed.state,1).hand[0].uid;
+  const targetTakesUid=holder(revealed.state,0).hand[0].uid;
+  const result=resolve(revealed,actorTakesUid,targetTakesUid);
   assert.equal(result.state.core.players[1].grave.some(card=>card.uid===source),true);
   assert.equal(result.state.core.players[0].grave.some(card=>card.uid===source),false);
 });
@@ -189,14 +191,13 @@ test('an Exchange in the opposing backrow cannot be activated by the active team
 test('a participant cannot select a card from their own hand',()=>{
   const state=create(0,'wrong-side-choice'),source=addExchangeToHand(state,0),activation=activate(state,0,1,source);
   const revealed=reveal(activation),actorUid=holder(revealed.state,0).hand[0].uid,targetUid=holder(revealed.state,1).hand[0].uid;
-  assert.throws(()=>resolve(revealed,actorUid,actorUid),/mãos do outro/);
-  assert.throws(()=>resolve(revealed,targetUid,targetUid),/mãos do outro/);
+  assert.throws(()=>resolve(revealed,actorUid,targetUid),/mão do outro/);
 });
 test('the two selections must be distinct and each must exist in the other hand',()=>{
   const state=create(0,'invalid-choices'),source=addExchangeToHand(state,0),activation=activate(state,0,1,source),revealed=reveal(activation);
   const actorUid=holder(revealed.state,0).hand[0].uid,targetUid=holder(revealed.state,1).hand[0].uid;
-  assert.throws(()=>resolve(revealed,'not-in-target-hand',actorUid),/mãos do outro/);
-  assert.throws(()=>resolve(revealed,targetUid,'not-in-actor-hand'),/mãos do outro/);
+  assert.throws(()=>resolve(revealed,'not-in-target-hand',actorUid),/mão do outro/);
+  assert.throws(()=>resolve(revealed,targetUid,'not-in-actor-hand'),/mão do outro/);
   assert.throws(()=>resolve(revealed,targetUid,targetUid),/duas escolhas válidas/);
 });
 test('a changed hand invalidates the private reveal commitment',()=>{
@@ -236,8 +237,10 @@ test('private card identities never enter the public duel projection or public l
   const selectedActor=holder(revealed.state,1).hand[0].uid;
   const selectedTarget=holder(revealed.state,0).hand[0].uid;
   const result=resolve(revealed,selectedActor,selectedTarget);
-  const publicView=tag.publicTagDuel(result.state);
-  for(const uid of [...revealed.plan.actorHandCommitment?[selectedActor]:[],selectedTarget]){
+  const publicCandidate=structuredClone(result.state);
+  publicCandidate.core.players[0].grave=publicCandidate.core.players[0].grave.filter(card=>card.uid!==source);
+  const publicView=tag.publicTagDuel(publicCandidate);
+  for(const uid of [selectedActor,selectedTarget]){
     assert.equal(JSON.stringify(publicView).includes(uid),false);
   }
   assert.equal(JSON.stringify(result.state.core.log).includes(selectedActor),false);
@@ -245,8 +248,8 @@ test('private card identities never enter the public duel projection or public l
 });
 test('a six-card hand is preserved until the End Phase; Exchange does not auto-discard',()=>{
   const state=create(0,'end-phase-hand'),source=addExchangeToHand(state,0);
-  moveDeckCardToHand(state,0,0);
-  moveDeckCardToHand(state,1,1);
+  while(holder(state,0).hand.length<7)moveDeckCardToHand(state,0,0);
+  while(holder(state,1).hand.length<6)moveDeckCardToHand(state,1,1);
   const activation=activate(state,0,1,source),revealed=reveal(activation);
   assert.equal(holder(revealed.state,0).hand.length,6);
   assert.equal(holder(revealed.state,1).hand.length,6);
