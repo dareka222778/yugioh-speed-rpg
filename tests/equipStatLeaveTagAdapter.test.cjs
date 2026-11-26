@@ -6,10 +6,10 @@ const {getDuelCard,getPlayableCard,enabledCardIds}=require('../dist/effectRegist
 const {rulesFor}=require('../dist/rulesProfile');
 const {synchronizeCardLifetimes}=require('../dist/cardLifetime');
 const {
- AXE_OF_DESPAIR_ID,BLACK_PENDANT_ID,assertEquipStatRules,assertPhysicalExtraDeckCounts,
- axeOfDespairActions,blackPendantActions,createEquipStatSession,
- activateAxeOfDespair,activateBlackPendant,resolveEquipStat,releaseEquipStat,
- resolveAxeOfDespairGraveTrigger,resolveBlackPendantGraveTrigger
+ AXE_OF_DESPAIR_ID,BLACK_PENDANT_ID,HORN_OF_THE_UNICORN_ID,assertEquipStatRules,assertPhysicalExtraDeckCounts,
+ axeOfDespairActions,blackPendantActions,hornOfTheUnicornActions,createEquipStatSession,
+ activateAxeOfDespair,activateBlackPendant,activateHornOfTheUnicorn,resolveEquipStat,releaseEquipStat,
+ resolveAxeOfDespairGraveTrigger,resolveBlackPendantGraveTrigger,resolveHornOfTheUnicornGraveTrigger
 }=require('../dist/equipStatLeaveTagAdapter');
 
 const SOURCE_FIXTURE='55144522'; // Pot of Greed: enabled Spell fixture
@@ -108,7 +108,7 @@ function assertRules(duel){
 }
 
 test('Axe of Despair and Black Pendant remain unadmitted; no inventory or certificates are granted',()=>{
- for(const id of [AXE_OF_DESPAIR_ID,BLACK_PENDANT_ID]){
+ for(const id of [AXE_OF_DESPAIR_ID,BLACK_PENDANT_ID,HORN_OF_THE_UNICORN_ID]){
   assert.equal(getPlayableCard(id),undefined);
   assert.equal(getDuelCard(id),undefined);
  }
@@ -283,6 +283,45 @@ test('Axe of Despair trigger is idempotent and cannot recycle the same physical 
  const first=resolveAxeOfDespairGraveTrigger(released,'m652-axe',undefined);
  const second=resolveAxeOfDespairGraveTrigger(first.session,'m652-axe',undefined);
  assert.equal(second.result.status,'duplicate');
+});
+
+
+test('Horn of the Unicorn applies +700 ATK and DEF through the same Equip lifetime rules',()=>{
+ const f=setup(),pending=activateHornOfTheUnicorn(createEquipStatSession(f.duel),f.sourceUid,'m652-horn',lookup,
+  {cardId:SOURCE_FIXTURE,targetUid:f.targetUid});
+ const resolved=resolveEquipStat(pending,'m652-horn');
+ assert.equal(resolved.result.applied,true);
+ assert.equal(monster(resolved.session.duel,f.targetUid).atkBoost,700);
+ assert.equal(monster(resolved.session.duel,f.targetUid).defBoost,700);
+});
+
+test('Horn of the Unicorn returns to the physical owner top Deck when released from the field',()=>{
+ const f=setup({sourceOwnerSeat:partnerSeat(0),sourceInBackrow:true,setTurn:0});
+ const pending=activateHornOfTheUnicorn(createEquipStatSession(f.duel),f.sourceUid,'m652-horn',lookup,
+  {cardId:SOURCE_FIXTURE,targetUid:f.targetUid});
+ const active=resolveEquipStat(pending,'m652-horn').session;
+ const released=releaseEquipStat(active,'m652-horn').session;
+ const before=privateZone(released.duel,f.ownerSeat,'deck').length;
+ const returned=resolveHornOfTheUnicornGraveTrigger(released,'m652-horn');
+ assert.equal(returned.result.status,'returned-to-deck');
+ assert.equal(privateZone(returned.session.duel,f.ownerSeat,'deck').length,before+1);
+ assert.equal(privateZone(returned.session.duel,f.ownerSeat,'deck')[0].uid,f.sourceUid);
+ assert.equal(graveHas(returned.session.duel,f.team,f.sourceUid),false);
+});
+
+test('Horn of the Unicorn mandatory return still resolves if removed before Equip resolution',()=>{
+ const f=setup(),pending=activateHornOfTheUnicorn(createEquipStatSession(f.duel),f.sourceUid,'m652-horn',lookup,
+  {cardId:SOURCE_FIXTURE,targetUid:f.targetUid});
+ const field=pending.duel.core.players[f.team].backrow;
+ const index=field.findIndex(card=>card.uid===f.sourceUid);
+ const [source]=field.splice(index,1);
+ pending.duel.core.players[f.team].grave.push({uid:source.uid,id:source.id});
+ synchronizeCardLifetimes(pending.duel.core);
+ const resolved=resolveEquipStat(pending,'m652-horn');
+ assert.equal(resolved.result.sourceSentToGrave,true);
+ const returned=resolveHornOfTheUnicornGraveTrigger(resolved.session,'m652-horn');
+ assert.equal(returned.result.status,'returned-to-deck');
+ assert.equal(privateZone(returned.session.duel,f.activeSeat,'deck')[0].uid,f.sourceUid);
 });
 
 test('Black Pendant inflicts 500 LP damage once when sent from the field to the Graveyard',()=>{
