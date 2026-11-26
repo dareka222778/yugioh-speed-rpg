@@ -24,6 +24,15 @@
       "officialEffect": "While this card is on the field, Monster Cards cannot be Set or flipped face-down. If a Monster Card would be Set, it must be Normal Summoned in face-up Defense Position.",
       "admitted": false,
       "certified": false
+    },
+    {
+      "id": "33950246",
+      "name": "Royal Command",
+      "type": "Continuous Trap",
+      "firstTCGRelease": "2003-03-01",
+      "officialEffect": "Flip monsters' effects cannot be activated, also their effects are negated.",
+      "admitted": false,
+      "certified": false
     }
   ],
   "sources": [
@@ -46,6 +55,16 @@
         "Set becomes face-up Defense Normal Summon",
         "first TCG date 2002-10-20"
       ]
+    },
+    {
+      "publisher": "Yu-Gi-Oh! Card Guide / Yugipedia",
+      "url": "https://www.yugiohcardguide.com/single/royal-command.html",
+      "supports": [
+        "identity and passcode",
+        "continuous Trap type",
+        "Flip Effect activation and effect negation",
+        "first TCG release 2003-03-01"
+      ]
     }
   ],
   "behavior": [
@@ -57,7 +76,8 @@
     "Activation negation sends the Trap to the shared Graveyard; effect negation leaves it face-up but inactive.",
     "A removed or stale source cannot apply its continuous policy; source removal releases the position lock if no other source remains.",
     "The adapter exposes an explicit applyContinuousPolicies hook for face-up monsters entering after activation.",
-    "Hands above six are not discarded early; the hand check remains exclusive to the End Phase."
+    "Hands above six are not discarded early; the hand check remains exclusive to the End Phase.",
+    "Royal Command blocks activation of Flip Effect monster effects and negates those effects while its resolved Continuous Trap remains face-up; non-Flip monster effects remain eligible."
   ],
   "constraints": {
     "mainDeck": "20–30 per physical seat",
@@ -71,9 +91,9 @@
     "sharedFieldAndGravePerTeam": true,
     "physicalUidOwnershipPreserved": true
   },
-  "scenarioCount": 17,
+  "scenarioCount": 19,
   "verification": {
-    "focusedScenarios": 17,
+    "focusedScenarios": 19,
     "focusedTestResult": "pending",
     "typecheck": "pending",
     "build": "pending",
