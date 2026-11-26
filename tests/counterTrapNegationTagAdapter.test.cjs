@@ -285,7 +285,8 @@ test('Horn of Heaven does not destroy a replacement monster with the same ID',()
 test('Horn of Heaven rejects duplicate activation IDs and duplicate resolution',()=>{
   const f=setupHorn();
   const session=activateHorn(f);
-  assert.throws(()=>activateCounterTrap(session,f.sourceUid,'m650-horn',lookup,\n    {effect:'horn-of-heaven',cardId:SOURCE_FIXTURE,costUid:f.costUid}),/duplicado/);
+  assert.throws(()=>activateCounterTrap(session,f.sourceUid,'m650-horn',lookup,
+    {effect:'horn-of-heaven',cardId:SOURCE_FIXTURE,costUid:f.costUid}),/duplicado/);
   const resolved=resolve(session,'m650-horn');
   assert.throws(()=>resolveCounterTrap(resolved.session,'m650-horn'),/ausente ou já resolvida/);
 });
