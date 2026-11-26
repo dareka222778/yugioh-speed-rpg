@@ -115,7 +115,7 @@ test('the effect does not enforce the six-card hand limit before the End Phase',
 test('either newly drawn card or an older card may be selected for discard',()=>{
   const state=create(0,'discard-drawn'),source=addCharityToBackrow(state,0),activation=activate(state,0,source);
   const drawn=holder(activation.state,0).deck.slice(0,3).map(c=>c.uid),result=resolve(activation,[drawn[0],drawn[2]]);
-  assert.deepEqual(privateReceipt(result).discardedUids,[drawn[0],drawn[2]].sort());
+  assert.deepEqual([...privateReceipt(result).discardedUids].sort(),[drawn[0],drawn[2]].sort());
 });
 test('activation is rejected when the active physical Deck has fewer than three cards',()=>{
   const state=create(0,'short-deck'),source=addCharityToHand(state,0),actor=holder(state,0);
