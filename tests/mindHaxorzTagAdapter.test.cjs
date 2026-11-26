@@ -12,9 +12,13 @@ const {
 }=require('../dist/mindHaxorzTagAdapter.js');
 
 const NORMALS=[...new Set(tag.tagNormalCardIds)];
-assert.ok(NORMALS.length>=20,'the normal-monster pool must build four physical 20-card decks');
+const FIELD_SPELLS=[...new Set(enabledCardIds.filter(id=>getDuelCard(id)?.field))];
+const BACKROW=[...new Set(enabledCardIds.filter(id=>['spell','trap'].includes(getDuelCard(id)?.kind)&&!getDuelCard(id)?.field&&!getDuelCard(id)?.fusion))];
+assert.ok(NORMALS.length>=16,'the normal-monster pool must build four physical decks');
+assert.ok(FIELD_SPELLS.length>=1,'fixture requires an enabled Field Spell');
+assert.ok(BACKROW.length>=3,'fixtures require three enabled S/T cards');
 let sequence=0;
-function deck(){return NORMALS.slice(0,20);}
+function deck(){return [FIELD_SPELLS[0],...BACKROW.slice(0,3),...NORMALS.slice(0,16)];}
 function member(seat){return 'm641-seat-'+seat;}
 function create(first=0,seed='default',extraBySeat={}){
   return tag.createTagDuel([0,1,2,3].map(seat=>({
@@ -25,25 +29,32 @@ function holder(state,seat){
   const team=seat%2;
   return state.active[team]===seat?state.core.players[team]:state.reserves[String(seat)];
 }
+function takePrivateCard(held,predicate){
+  let index=held.hand.findIndex(predicate);
+  if(index>=0)return held.hand.splice(index,1)[0];
+  index=held.deck.findIndex(predicate);
+  if(index>=0)return held.deck.splice(index,1)[0];
+  throw new Error('fixture card not found in physical hand/deck');
+}
 function addMindHaxorz(state,seat,{setTurn=0}={}){
   const uid='m'+seat+':m641-mind-haxorz-'+(++sequence);
   state.core.players[seat%2].backrow.push({uid,id:MIND_HAXORZ_ID,setTurn,faceUp:false});
   return uid;
 }
 function addSetMonster(state,seat){
-  const card=holder(state,seat).hand.shift();
+  const card=takePrivateCard(holder(state,seat),card=>getDuelCard(card.id)?.kind==='monster'&&!getDuelCard(card.id)?.fusion);
   state.core.players[seat%2].monsters.push({
     ...card,position:'def',faceUp:false,entered:0,changed:0,attacked:0,atkBoost:0,defBoost:0
   });
   return card.uid;
 }
 function addSetBackrow(state,seat){
-  const card=holder(state,seat).hand.shift();
+  const card=takePrivateCard(holder(state,seat),card=>BACKROW.includes(card.id));
   state.core.players[seat%2].backrow.push({...card,setTurn:0,faceUp:false});
   return card.uid;
 }
 function addSetField(state,seat){
-  const card=holder(state,seat).hand.shift();
+  const card=takePrivateCard(holder(state,seat),card=>FIELD_SPELLS.includes(card.id));
   state.core.players[seat%2].field={...card,setTurn:0,faceUp:false,resolved:false};
   return card.uid;
 }
