@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "mission": "M657",
+  "status": "implementation-candidate-not-certified",
+  "cards": [
+    {
+      "name": "Swarm of Scarabs",
+      "password": "15383415",
+      "konamiId": 5418,
+      "ocgSetDate": "2003-10-23",
+      "tcgSetDate": "2003-07-18",
+      "effect": "Uma vez por turno, pode mudar para face-down Defense Position; quando é Flip Summoned, escolhe 1 monstro do oponente e o destrói.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5418&ope=2&request_locale=en"
+    },
+    {
+      "name": "Swarm of Locusts",
+      "password": "41872150",
+      "konamiId": 5419,
+      "ocgSetDate": "2003-10-23",
+      "tcgSetDate": "2003-07-18",
+      "effect": "Uma vez por turno, pode mudar para face-down Defense Position; quando é Flip Summoned, escolhe 1 Spell/Trap do oponente e a destrói.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5419&ope=2&request_locale=en"
+    }
+  ],
+  "rules": {
+    "targetLock": "UID e zona capturados na ativação; alvo que muda de zona/controlador ou deixa o campo não é substituído.",
+    "scarabs": "Monstro da equipe adversária em qualquer posição; inclui o parceiro adversário.",
+    "locusts": "Backrow e Field Zone da equipe adversária; Field Zone não consome uma das três Spell/Trap Zones.",
+    "sourceLeavesField": "O efeito Flip já ativado continua a resolver; a fonte não é revalidada na resolução.",
+    "selfSet": "Somente Main Phase do membro ativo; uma vez por turno por instância; bloqueios de posição e negação de efeito são respeitados."
+  },
+  "constraints": {
+    "mainDeck": "20-30",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "extraDeckMax": 5,
+    "physicalOwnership": "UID m0..m3 preservado",
+    "inventoryGrants": 0
+  },
+  "certification": {
+    "before": 969,
+    "after": 969,
+    "new": 0,
+    "reason": "Adapter isolado e testes de contrato; integração ao resolver/catálogo e replay oficial ainda não realizados."
+  },
+  "validation": {
+    "suite": "tests/swarmFlipTagAdapter.test.cjs",
+    "expectedMinimumScenarios": 28,
+    "ci": "pending",
+    "discordLive": "not validated",
+    "production": "unchanged"
+  }
+}

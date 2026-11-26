@@ -1,10 +1,10 @@
 import {RULES_PROFILE,rulesFor} from './rulesProfile';
 import {getDuelCard} from './effectRegistry';
 import {assertTagDuel,tagInventory,type TagDuel} from './tagDuel';
-import type {DuelState,Monster} from './duelEngine';
+import type {Monster} from './duelEngine';
 import {monsterEffectsNegated} from './continuousEffects';
 import {sendMonsterToGrave} from './monsterExit';
-import {discardBackrow,turnMonsterFaceDown} from './classicEffects';
+import {cleanEquips,discardBackrow,turnMonsterFaceDown} from './classicEffects';
 
 export const SWARM_OF_SCARABS_ID='15383415';
 export const SWARM_OF_LOCUSTS_ID='41872150';
@@ -200,6 +200,7 @@ export function createSwarmFlipAdapter(lookup:SwarmLookup=defaultSwarmLookup){
    status='destroyed';
   }else if(zone==='backrow'||zone==='field'){
    discardBackrow(working.core,selectedUid);
+   cleanEquips(working.core);
    status='destroyed';
   }
   const result:SwarmFlipResolution={
