@@ -77,7 +77,7 @@
   "scenarioCount": 25,
   "verification": {
     "focusedScenarios": 25,
-    "focusedTestResult": "pending",
+    "focusedTestResult": "pending-retest-after-field-fixture-fix",
     "typecheck": "pending",
     "build": "pending",
     "fullTestSuite": "pending",
@@ -116,5 +116,6 @@
     "Os testes usam IDs físicos já certificados como fixtures e injetam a identidade mecânica por lookup; os passcodes reais continuam fora do catálogo.",
     "O host deve encaminhar a janela de ativação/negação e persistir a sessão + contador HMAC atomicamente; o adapter não executa o gateway Discord.",
     "Não há merge, deploy ou validação de produção."
-  ]
+  ],
+  "testFixtureNote": "A Zona de Campo usa a carta de Campo Umi (22702055), e não uma Magia Normal."
 }
