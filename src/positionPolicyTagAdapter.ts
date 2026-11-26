@@ -142,10 +142,11 @@ export function createPositionPolicyAdapter(lookup:PositionPolicyLookup=defaultL
   if(mode==='flip')return !monster.faceUp;if(!monster.faceUp)return false;
   if(active.has('final-attack-orders'))return false;if(mode==='set'&&active.has('light-of-intervention'))return false;return true;
  }
- function flipEffectAllowed(session:PositionPolicySession,uid:string):boolean{
-  assertSession(session,lookup);const found=findMonster(session.duel,uid);if(!found)return true;
-  return !activeEffects(session.duel,lookup).has('royal-command')||getMonsterEffect(found.monster.id)?.trigger!=='flip';
+ function flipEffectNegated(session:PositionPolicySession,uid:string):boolean{
+  assertSession(session,lookup);const found=findMonster(session.duel,uid);if(!found)return false;
+  return activeEffects(session.duel,lookup).has('royal-command')&&getMonsterEffect(found.monster.id)?.trigger==='flip';
  }
+ function flipEffectAllowed(session:PositionPolicySession,uid:string):boolean{return !flipEffectNegated(session,uid);}
  function canSetMonsterFaceDown(session:PositionPolicySession,uid:string):boolean{
   assertSession(session,lookup);const found=findMonster(session.duel,uid);if(!found||!found.monster.faceUp)return false;
   const active=activeEffects(session.duel,lookup);return !active.has('final-attack-orders')&&!active.has('light-of-intervention');
@@ -178,5 +179,5 @@ export function createPositionPolicyAdapter(lookup:PositionPolicyLookup=defaultL
   assertPositionPolicyRules(working,lookup);assertTagDuel(working);session.duel=working;
   const current=findMonster(working,uid)!.monster;return {uid,faceUp:current.faceUp,position:current.position,turn:working.core.turn};
  }
- return {createSession,prepareActivation,resolveActivation,applyContinuousPolicies,removeContinuousTrap,canChangeBattlePosition,canSetMonsterFaceDown,flipEffectAllowed,resolveSetMonster,changeMonsterPosition};
+ return {createSession,prepareActivation,resolveActivation,applyContinuousPolicies,removeContinuousTrap,canChangeBattlePosition,canSetMonsterFaceDown,flipEffectAllowed,flipEffectNegated,resolveSetMonster,changeMonsterPosition};
 }
