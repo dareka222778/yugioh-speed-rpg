@@ -319,6 +319,11 @@ export function resolveEquipStat(
   applied=true;
  }else{
   sourceSentToGrave=moveSpellTrapToOwnerGrave(core,activation.controllerTeam,activation.sourceUid);
+  const sentEntry:SentEquip={
+   activationId,effect:activation.effect,sourceUid:activation.sourceUid,sourceId:activation.sourceId,
+   sourceOwnerSeat:activation.sourceOwnerSeat,ownerTeam:(activation.sourceOwnerSeat%2) as Team
+  };
+  if(!sourceSentToGrave&&sourceInOwnerGrave(next.duel,sentEntry)>=0)sourceSentToGrave=true;
   if(sourceSentToGrave)queueSent(next,activation);
  }
  delete next.pending[activationId];
