@@ -7,6 +7,7 @@ type SetZone='monster'|'backrow'|'field';
 type PrivateCard={uid:string;id:string;ownerSeat:number;zone:SetZone};
 export type MindHaxorzTagDuel=TagDuel&{
   mindHaxorzActivationIds?:string[];
+  mindHaxorzPending?:MindHaxorzPlan[];
   mindHaxorzResolvedIds?:string[];
 };
 export type MindHaxorzEvent={
@@ -132,6 +133,12 @@ function locateSetSource(
   }
   return {ownerSeat,setTurn:source.setTurn};
 }
+function samePlan(a:MindHaxorzPlan,b:MindHaxorzPlan):boolean{
+  return a.activationId===b.activationId&&a.actorSeat===b.actorSeat&&
+    a.targetSeat===b.targetSeat&&a.sourceUid===b.sourceUid&&
+    a.actorTeam===b.actorTeam&&a.sourceOwnerSeat===b.sourceOwnerSeat&&
+    a.sourceSetTurn===b.sourceSetTurn&&a.turn===b.turn;
+}
 function attachPrivateReceipt(
   result:Omit<MindHaxorzResolution,'privateReceipt'>,
   receipt?:PrivateMindHaxorzReceipt
@@ -178,6 +185,7 @@ export function activateMindHaxorz(
   });
   const next=structuredClone(input) as MindHaxorzTagDuel;
   next.mindHaxorzActivationIds=[...(next.mindHaxorzActivationIds??[]),event.activationId];
+  next.mindHaxorzPending=[...(next.mindHaxorzPending??[]),plan];
   next.core.players[actorTeam].lp-=500;
   const sourceCard=next.core.players[actorTeam].backrow.find(card=>card.uid===event.sourceUid);
   if(!sourceCard)throw new Error('Mind Haxorz saiu do campo durante a ativação.');
@@ -221,6 +229,10 @@ export function resolveMindHaxorz(
   if(resolved.includes(plan.activationId)){
     return attachPrivateReceipt({status:'duplicate',state:input,activationId:plan.activationId});
   }
+  const storedPlan=(input.mindHaxorzPending??[]).find(item=>item.activationId===plan.activationId);
+  if(!storedPlan||!samePlan(storedPlan,plan)){
+    throw new Error('Plano de Mind Haxorz não corresponde ao registro imutável da ativação.');
+  }
   const before=inventorySnapshot(input),hands=handSnapshot(input),logBefore=JSON.stringify(input.core.log);
   const next=structuredClone(input) as MindHaxorzTagDuel;
   const sourceZone=next.core.players[plan.actorTeam].backrow.findIndex(card=>card.uid===plan.sourceUid);
@@ -228,6 +240,7 @@ export function resolveMindHaxorz(
     const [source]=next.core.players[plan.actorTeam].backrow.splice(sourceZone,1);
     next.core.players[plan.actorTeam].grave.push(source);
   }
+  next.mindHaxorzPending=(next.mindHaxorzPending??[]).filter(item=>item.activationId!==plan.activationId);
   next.mindHaxorzResolvedIds=[...resolved,plan.activationId];
   let receipt:PrivateMindHaxorzReceipt|undefined;
   if(!effectNegated){
