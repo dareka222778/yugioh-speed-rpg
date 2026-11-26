@@ -11,7 +11,7 @@ if(!revision)throw new Error('Revisão atual do catálogo ausente.');
 const catalog=JSON.parse(fs.readFileSync(path.join(root,'catalog/engine-v9',revision.file),'utf8'));
 const ids=new Set(catalog.cards.map(card=>card.id));
 if(evidence.mission!=='M659'||evidence.passed!==true||evidence.scenarioCount<35||
- evidence.completed!==evidence.scenarioCount||evidence.inventoryConservationChecks<8)
+ evidence.completed!==evidence.scenarioCount||evidence.inventoryConservationChecks<12)
  throw new Error('A suíte M659 não passou integralmente.');
 if(evidence.certifiedCardsBefore!==969||evidence.certifiedCardsAfter!==catalog.cards.length||
  evidence.newCertifications!==0||evidence.inventoryGrants!==0)
