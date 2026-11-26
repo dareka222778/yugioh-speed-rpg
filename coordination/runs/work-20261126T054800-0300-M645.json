@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "runId": "work-20261126T054800-0300-M645",
+  "mission": "M645",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T05:48:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "a2c6547bb046943807138e02e92c52897dbadf0c",
+  "branch": "feat/work-m645-painful-choice-tag-adapter-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "a2c6547bb046943807138e02e92c52897dbadf0c",
+  "branchHeadSha": "a2c6547bb046943807138e02e92c52897dbadf0c",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/painfulChoiceTagAdapter.ts",
+    "tests/painfulChoiceTagAdapter.test.cjs",
+    "docs/evidence/m645-painful-choice.json",
+    ".github/workflows/m645-painful-choice.yml"
+  ],
+  "scope": "Adapter isolado TagDuel clássico 2v2 para Painful Choice: jogador ativo seleciona cinco cartas distintas do próprio Deck, revela-as apenas ao oponente físico escolhido, e esse oponente escolhe uma para a mão do jogador ativo; as outras quatro vão ao Cemitério da equipe. Sem resolver central, catálogo, certificação, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "74191942",
+      "konamiId": 4911,
+      "name": "Painful Choice",
+      "namePt": "Escolha Dolorosa",
+      "officialText": "Select 5 cards from your Deck and show them to your opponent. Your opponent selects 1 card from them. Add that card to your hand and send the remaining cards to the Graveyard.",
+      "firstTCGRelease": "2002-09-16",
+      "firstOCGRelease": "2002-06-20",
+      "certifiedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "escopo independente; nenhuma reserva conflitante tocada; arquivos centrais permanecem bloqueados até liberação explícita",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar as duas fases da escolha, privacidade do conjunto de cinco cartas, decisão do oponente físico, conservação de UIDs e proteção contra seleção/plano forjados.",
+  "nextWindow": "2026-11-26T10:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

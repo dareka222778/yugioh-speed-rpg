@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "f6b72000c783f6e72cbb388c6b1d047ef0645938",
-  "updatedAt": "2026-11-26T05:47:30-03:00",
+  "observedHead": "a2c6547bb046943807138e02e92c52897dbadf0c",
+  "updatedAt": "2026-11-26T05:48:00-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -97,6 +97,20 @@
         "docs/evidence/m644-graceful-charity.json",
         ".github/workflows/m644-graceful-charity.yml"
       ]
+    },
+    {
+      "runId": "work-20261126T054800-0300-M645",
+      "mission": "M645",
+      "branch": "feat/work-m645-painful-choice-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/painfulChoiceTagAdapter.ts",
+        "tests/painfulChoiceTagAdapter.test.cjs",
+        "docs/evidence/m645-painful-choice.json",
+        ".github/workflows/m645-painful-choice.yml"
+      ]
     }
   ],
   "handoffRequests": [
@@ -111,5 +125,5 @@
       ]
     }
   ],
-  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros. M643 iniciou adapter isolado de The Forceful Sentry em branch própria; não toca nos arquivos reservados por M635/M637/M638/M639/M641/M642 nem nos arquivos centrais bloqueados. M644 iniciou adapter isolado de Graceful Charity (compra 3, descarte 2) em branch própria, independente das reservas de inspeção de mão, LP e combate. M643 concluiu adapter isolado The Forceful Sentry; PR #582 aberta em rascunho, CI focada aprovada, sem certificação/integração/merge/deploy. Reserva M643 liberada; M644 permanece ativo."
+  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros. M643 iniciou adapter isolado de The Forceful Sentry em branch própria; não toca nos arquivos reservados por M635/M637/M638/M639/M641/M642 nem nos arquivos centrais bloqueados. M644 iniciou adapter isolado de Graceful Charity (compra 3, descarte 2) em branch própria, independente das reservas de inspeção de mão, LP e combate. M643 concluiu adapter isolado The Forceful Sentry; PR #582 aberta em rascunho, CI focada aprovada, sem certificação/integração/merge/deploy. Reserva M643 liberada; M644 permanece ativo. M645 iniciou adapter isolado de Painful Choice (escolha de cinco cartas do próprio Deck, revelação ao oponente físico escolhido e seleção de uma para a mão) em branch própria; escopo independente das reservas ativas."
 }
