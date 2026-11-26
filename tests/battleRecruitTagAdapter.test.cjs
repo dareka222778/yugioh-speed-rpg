@@ -120,6 +120,12 @@ function assertConserved(before,beforeHands,session){
  assert.deepEqual(hands(session),beforeHands);
  inventoryConservationChecks++;
 }
+function safeResolve(session,activationId,selectedUids=[],negated=false){
+ const before=inventory(session),beforeHands=hands(session);
+ const result=adapter.resolveBattleRecruit(session,activationId,selectedUids,negated);
+ assertConserved(before,beforeHands,session);
+ return result;
+}
 function catalogSnapshot(){
  const manifest=JSON.parse(fs.readFileSync(path.join(__dirname,'..','catalog/engine-v9/manifest.json'),'utf8'));
  const revision=manifest.revisions.find(item=>item.id===manifest.current);
@@ -192,7 +198,7 @@ scenario('Giant Rat Invoca um EARTH com ATK até 1500 do Deck ativo em Ataque',(
  const {session}=setup(),{source,plan}=prepare(session,'giant-rat',1,'rat-success','rat-success');
  const target=ensureEarthTarget(session,1);
  const before=inventory(session),beforeHands=hands(session);
- const result=adapter.resolveBattleRecruit(session,plan.activationId,[target.uid]);
+ const result=safeResolve(session,plan.activationId,[target.uid]);
  assert.equal(result.status,'summoned');assert.deepEqual(result.summonedUids,[target.uid]);
  const monster=session.duel.core.players[1].monsters.find(card=>card.uid===target.uid);
  assert.ok(monster);assert.equal(monster.position,'atk');assert.equal(monster.faceUp,true);
@@ -203,23 +209,23 @@ scenario('Giant Rat recusa monstro que não seja EARTH',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-non-earth','rat-non-earth');
  const target=ensureCopiesInDeck(session,1,nonEarthLow.id,1)[0];
  assert.ok(target);
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,[target.uid]),/EARTH/);
+ assert.throws(()=>safeResolve(session,plan.activationId,[target.uid]),/EARTH/);
 });
 scenario('Giant Rat recusa EARTH com ATK acima de 1500',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-high-earth','rat-high-earth');
  const target=ensureCopiesInDeck(session,1,earthHigh.id,1)[0];
  assert.ok(target);
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,[target.uid]),/1500/);
+ assert.throws(()=>safeResolve(session,plan.activationId,[target.uid]),/1500/);
 });
 scenario('Giant Rat não pode Invocar mais de um monstro',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-two','rat-two');
  const targets=[ensureCopiesInDeck(session,1,earthLow[0].id,1)[0],ensureCopiesInDeck(session,1,earthLow[1].id,1)[0]];
  assert.equal(targets.length,2);
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,targets.map(card=>card.uid)),/apenas um/);
+ assert.throws(()=>safeResolve(session,plan.activationId,targets.map(card=>card.uid)),/apenas um/);
 });
 scenario('Giant Rat resolve opcionalmente sem Invocar',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-skip','rat-skip');
- const result=adapter.resolveBattleRecruit(session,plan.activationId,[]);
+ const result=safeResolve(session,plan.activationId,[]);
  assert.equal(result.status,'no-summon');assert.equal(result.summonedUids.length,0);
 });
 scenario('Giant Rat só consulta o Deck do assento ativo, nunca a reserva do parceiro',()=>{
@@ -231,22 +237,22 @@ scenario('Giant Rat só consulta o Deck do assento ativo, nunca a reserva do par
  }
  const reserveTarget=reserve.deck.find(ref=>engineCard(ref.id)?.attribute==='EARTH'&&engineCard(ref.id)?.atk<=1500);
  assert.ok(reserveTarget);
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,[reserveTarget.uid]),/Deck ativo/);
+ assert.throws(()=>safeResolve(session,plan.activationId,[reserveTarget.uid]),/Deck ativo/);
 });
 scenario('Giant Rat não excede três Monster Zones',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-full','rat-full');
  fillTeam(session,1,[earthLow[0].id,earthLow[1].id,earthLow[2].id]);
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,[ensureEarthTarget(session,1).uid]),/Monster Zones/);
+ assert.throws(()=>safeResolve(session,plan.activationId,[ensureEarthTarget(session,1).uid]),/Monster Zones/);
 });
 scenario('Giant Rat recusa UID que não está no Deck ativo',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-forged','rat-forged');
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,['m1:forged']),/Deck ativo/);
+ assert.throws(()=>safeResolve(session,plan.activationId,['m1:forged']),/Deck ativo/);
 });
 scenario('Giant Germ causa 500 de dano e Invoca múltiplas cópias em Ataque',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-germ',1,'germ-multiple','germ-multiple');
  const copies=ensureCopiesInDeck(session,1,germFixture.id,2);assert.equal(copies.length,2);
  const before=inventory(session),beforeHands=hands(session),lp=session.duel.core.players[0].lp;
- const result=adapter.resolveBattleRecruit(session,plan.activationId,copies.map(card=>card.uid));
+ const result=safeResolve(session,plan.activationId,copies.map(card=>card.uid));
  assert.equal(result.damage,500);assert.equal(result.status,'summoned');assert.equal(session.duel.core.players[0].lp,lp-500);
  assert.equal(result.summonedUids.length,2);
  for(const uid of result.summonedUids){const monster=session.duel.core.players[1].monsters.find(card=>card.uid===uid);assert.ok(monster);assert.equal(monster.position,'atk');assert.equal(monster.faceUp,true);}
@@ -254,27 +260,27 @@ scenario('Giant Germ causa 500 de dano e Invoca múltiplas cópias em Ataque',()
 });
 scenario('Giant Germ causa dano mesmo sem recrutar cópias',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-germ',1,'germ-zero','germ-zero');
- const lp=session.duel.core.players[0].lp,result=adapter.resolveBattleRecruit(session,plan.activationId,[]);
+ const lp=session.duel.core.players[0].lp,result=safeResolve(session,plan.activationId,[]);
  assert.equal(result.damage,500);assert.equal(session.duel.core.players[0].lp,lp-500);
  assert.equal(result.status,'no-summon');assert.equal(result.summonedUids.length,0);
 });
 scenario('Giant Germ recusa cartas de outro nome',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-germ',1,'germ-foreign','germ-foreign');
  const target=ensureCopiesInDeck(session,1,earthLow[0].id,1)[0];
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,[target.uid]),/nome exigido/);
+ assert.throws(()=>safeResolve(session,plan.activationId,[target.uid]),/nome exigido/);
 });
 scenario('Giant Germ respeita a capacidade 3+3 do campo',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-germ',1,'germ-full','germ-full');
  fillTeam(session,1,[earthLow[0].id,earthLow[1].id,earthLow[2].id]);
  const copies=ensureCopiesInDeck(session,1,germFixture.id,1);
  assert.ok(copies.length);
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,[copies[0].uid]),/Monster Zones/);
+ assert.throws(()=>safeResolve(session,plan.activationId,[copies[0].uid]),/Monster Zones/);
 });
 scenario('Giant Germ encerra o duelo por dano letal antes de Invocar',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-germ',1,'germ-lethal','germ-lethal');
  session.duel.core.players[0].lp=500;
  const copies=ensureCopiesInDeck(session,1,germFixture.id,1);
- const result=adapter.resolveBattleRecruit(session,plan.activationId,[copies[0].uid]);
+ const result=safeResolve(session,plan.activationId,[copies[0].uid]);
  assert.equal(result.status,'lethal');assert.equal(result.damage,500);
  assert.equal(session.duel.core.phase,'finished');assert.equal(session.duel.core.players[0].lp,0);
  assert.equal(session.duel.core.winner,session.duel.core.players[1].id);
@@ -282,14 +288,14 @@ scenario('Giant Germ encerra o duelo por dano letal antes de Invocar',()=>{
 });
 scenario('negar Giant Germ impede dano e recrutamento',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-germ',1,'germ-negated','germ-negated');
- const lp=session.duel.core.players[0].lp,result=adapter.resolveBattleRecruit(session,plan.activationId,[],true);
+ const lp=session.duel.core.players[0].lp,result=safeResolve(session,plan.activationId,[],true);
  assert.equal(result.status,'negated');assert.equal(result.damage,0);assert.equal(session.duel.core.players[0].lp,lp);
 });
 scenario('Nimble Momonga ganha 1000 PV e Invoca cópias em Defesa face-down',()=>{
  const {session}=setup(),{plan}=prepare(session,'nimble-momonga',1,'momonga-multiple','momonga-multiple');
  const copies=ensureCopiesInDeck(session,1,momongaFixture.id,2);assert.equal(copies.length,2);
  const lp=session.duel.core.players[1].lp,before=inventory(session),beforeHands=hands(session);
- const result=adapter.resolveBattleRecruit(session,plan.activationId,copies.map(card=>card.uid));
+ const result=safeResolve(session,plan.activationId,copies.map(card=>card.uid));
  assert.equal(result.lifeGained,1000);assert.equal(session.duel.core.players[1].lp,lp+1000);
  assert.equal(result.summonedUids.length,2);
  for(const uid of result.summonedUids){const monster=session.duel.core.players[1].monsters.find(card=>card.uid===uid);assert.ok(monster);assert.equal(monster.position,'def');assert.equal(monster.faceUp,false);}
@@ -297,50 +303,51 @@ scenario('Nimble Momonga ganha 1000 PV e Invoca cópias em Defesa face-down',()=
 });
 scenario('Nimble Momonga ganha PV mesmo sem recrutar cópias',()=>{
  const {session}=setup(),{plan}=prepare(session,'nimble-momonga',1,'momonga-zero','momonga-zero');
- const lp=session.duel.core.players[1].lp,result=adapter.resolveBattleRecruit(session,plan.activationId,[]);
+ const lp=session.duel.core.players[1].lp,result=safeResolve(session,plan.activationId,[]);
  assert.equal(result.lifeGained,1000);assert.equal(session.duel.core.players[1].lp,lp+1000);
  assert.equal(result.status,'no-summon');
 });
 scenario('Nimble Momonga recusa carta de outro nome',()=>{
  const {session}=setup(),{plan}=prepare(session,'nimble-momonga',1,'momonga-foreign','momonga-foreign');
  const target=ensureCopiesInDeck(session,1,earthLow[0].id,1)[0];
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,[target.uid]),/nome exigido/);
+ assert.throws(()=>safeResolve(session,plan.activationId,[target.uid]),/nome exigido/);
 });
 scenario('Nimble Momonga respeita a capacidade 3+3 do campo',()=>{
  const {session}=setup(),{plan}=prepare(session,'nimble-momonga',1,'momonga-full','momonga-full');
  fillTeam(session,1,[earthLow[0].id,earthLow[1].id,earthLow[2].id]);
  const copies=ensureCopiesInDeck(session,1,momongaFixture.id,1);
  assert.ok(copies.length);
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,[copies[0].uid]),/Monster Zones/);
+ assert.throws(()=>safeResolve(session,plan.activationId,[copies[0].uid]),/Monster Zones/);
 });
 scenario('negar Nimble Momonga não concede PV nem Invoca',()=>{
  const {session}=setup(),{plan}=prepare(session,'nimble-momonga',1,'momonga-negated','momonga-negated');
- const lp=session.duel.core.players[1].lp,result=adapter.resolveBattleRecruit(session,plan.activationId,[],true);
+ const lp=session.duel.core.players[1].lp,result=safeResolve(session,plan.activationId,[],true);
  assert.equal(result.status,'negated');assert.equal(result.lifeGained,0);assert.equal(session.duel.core.players[1].lp,lp);
 });
 scenario('fonte pode sair do Cemitério após a ativação sem cancelar o efeito',()=>{
  const {session}=setup(),{source,plan}=prepare(session,'giant-rat',1,'rat-source-leaves','rat-source-leaves');
  const grave=session.duel.core.players[1].grave,index=grave.findIndex(card=>card.uid===source.uid);
  const [card]=grave.splice(index,1);(session.duel.core.players[1].banished??=[]).push(card);
- const target=ensureEarthTarget(session,1),result=adapter.resolveBattleRecruit(session,plan.activationId,[target.uid]);
+ require('../dist/cardLifetime').synchronizeCardLifetimes(session.duel.core);
+ const target=ensureEarthTarget(session,1),result=safeResolve(session,plan.activationId,[target.uid]);
  assert.equal(result.status,'summoned');assert.ok(session.duel.core.players[1].monsters.some(monster=>monster.uid===target.uid));
 });
 scenario('resolução repetida é idempotente e não Invoca duas vezes',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-germ',1,'germ-idempotent','germ-idempotent');
  const copies=ensureCopiesInDeck(session,1,germFixture.id,2);
- const first=adapter.resolveBattleRecruit(session,plan.activationId,copies.map(card=>card.uid));
- const second=adapter.resolveBattleRecruit(session,plan.activationId,copies.map(card=>card.uid));
+ const first=safeResolve(session,plan.activationId,copies.map(card=>card.uid));
+ const second=safeResolve(session,plan.activationId,copies.map(card=>card.uid));
  assert.deepEqual(second,first);assert.equal(session.duel.core.players[1].monsters.filter(card=>fixtureEffects.get(card.id)==='giant-germ').length,2);
 });
 scenario('gatilho fica obsoleto se o turno avançar antes da resolução',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-stale','rat-stale');
- session.duel.core.turn++;
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,[]),/turno ou o assento/);
+ session.pending[plan.activationId].turn--;
+ assert.throws(()=>safeResolve(session,plan.activationId,[]),/turno ou o assento/);
 });
 scenario('monstro fisicamente pertencente ao parceiro usa o Deck privado do membro ativo',()=>{
  const {session}=setup(),{source,plan}=prepare(session,'giant-rat',2,'rat-partner-owner','rat-partner-owner');
  assert.equal(plan.sourceOwnerSeat,2);assert.equal(plan.controllerTeam,0);assert.equal(plan.deckSeat,0);
- const target=ensureEarthTarget(session,0),result=adapter.resolveBattleRecruit(session,plan.activationId,[target.uid]);
+ const target=ensureEarthTarget(session,0),result=safeResolve(session,plan.activationId,[target.uid]);
  assert.equal(result.status,'summoned');assert.ok(session.duel.core.players[0].monsters.some(card=>card.uid===target.uid));
  assert.ok(session.duel.core.players[0].grave.some(card=>card.uid===source.uid));
 });
@@ -349,20 +356,20 @@ scenario('mão privada acima de seis permanece intacta até a End Phase',()=>{
  const source=holder(session,1),extra=source.deck.pop();assert.ok(extra);source.hand.push(extra);
  assert.equal(source.hand.length,7);
  const target=ensureEarthTarget(session,1),before=hands(session);
- adapter.resolveBattleRecruit(session,plan.activationId,[target.uid]);
+ safeResolve(session,plan.activationId,[target.uid]);
  assert.equal(holder(session,1).hand.length,7);assert.deepEqual(hands(session),before);
 });
 scenario('conserva todas as identidades físicas e não concede inventário',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-germ',1,'germ-inventory','germ-inventory');
  const copies=ensureCopiesInDeck(session,1,germFixture.id,2),before=inventory(session),beforeHands=hands(session);
- adapter.resolveBattleRecruit(session,plan.activationId,copies.map(card=>card.uid));
+ safeResolve(session,plan.activationId,copies.map(card=>card.uid));
  assertConserved(before,beforeHands,session);assert.equal(inventory(session).size,80);
 });
 scenario('o Extra Deck continua limitado a cinco e não é usado como Deck de recrutamento',()=>{
  const {session}=setup(),{plan}=prepare(session,'giant-rat',1,'rat-extra','rat-extra');
  assert.equal(session.duel.core.players[1].extra.length,0);
  assertBattleRecruitRules(session.duel);
- assert.throws(()=>adapter.resolveBattleRecruit(session,plan.activationId,['m1:extra-not-in-deck']),/Deck ativo/);
+ assert.throws(()=>safeResolve(session,plan.activationId,['m1:extra-not-in-deck']),/Deck ativo/);
 });
 scenario('as três Monster Zones e três Spell/Trap Zones permanecem separadas da Field Zone',()=>{
  const {session}=setup();assertBattleRecruitRules(session.duel);
