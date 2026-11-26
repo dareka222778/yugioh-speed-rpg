@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "runId": "work-20261126T114118-0300-M652",
+  "mission": "M652",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T11:41:18-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "a6bf01d3e8ccb5bba893ac0ca1cd2f0cdfd45262",
+  "branch": "feat/work-m652-equip-stat-leave-trigger-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "a6bf01d3e8ccb5bba893ac0ca1cd2f0cdfd45262",
+  "branchHeadSha": "a6bf01d3e8ccb5bba893ac0ca1cd2f0cdfd45262",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/equipStatLeaveTagAdapter.ts",
+    "tests/equipStatLeaveTagAdapter.test.cjs",
+    "docs/evidence/m652-equip-stat-leave-trigger.json",
+    ".github/workflows/m652-equip-stat-leave-trigger.yml"
+  ],
+  "scope": "Adapter TagDuel clássico 2v2 para Axe of Despair (40619825) e Black Pendant (65169794). Aplicar bônus de ATK persistente enquanto o Equip estiver válido; preservar epochs de alvo e identidade física; ao sair do campo, remover o bônus e disparar a resolução própria: tributo opcional para retornar Axe of Despair ao topo do Deck do proprietário, ou 500 de dano ao oponente para Black Pendant. Sem resolver central, catálogo, certificações, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "40619825",
+      "name": "Axe of Despair",
+      "namePt": "Machado do Desespero",
+      "type": "Equip Spell",
+      "officialText": "The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; place this card on top of your Deck.",
+      "admittedAtStart": false
+    },
+    {
+      "id": "65169794",
+      "name": "Black Pendant",
+      "namePt": "Pingente Negro",
+      "type": "Equip Spell",
+      "officialText": "The equipped monster gains 500 ATK. When this card is sent from the field to the Graveyard: Inflict 500 damage to your opponent.",
+      "admittedAtStart": false
+    }
+  ],
+  "handoff": {
+    "status": "Escopo isolado em arquivos exclusivos; nenhuma transferência conflitante necessária. M637 continua dono do handoff dos arquivos centrais.",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts",
+      "src/effectRegistry.ts",
+      "src/commands/duel"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true,
+    "conflictingReservations": 0
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 959,
+    "releasedCardIds": 959,
+    "target": 1000,
+    "remaining": 41,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter isolado, testes de cenários 2v2 e evidência; depois abrir PR draft e aguardar CI.",
+  "nextWindow": "2026-11-26T12:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}

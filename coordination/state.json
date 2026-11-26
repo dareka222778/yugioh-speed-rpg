@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "01e278e2855b942860f49f0fecbeec00e7b0de7e",
-  "updatedAt": "2026-11-26T10:55:07-03:00",
+  "observedHead": "a6bf01d3e8ccb5bba893ac0ca1cd2f0cdfd45262",
+  "updatedAt": "2026-11-26T11:41:18-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -181,6 +181,20 @@
         "docs/evidence/m651-control-change.json",
         ".github/workflows/m651-control-change.yml"
       ]
+    },
+    {
+      "runId": "work-20261126T114118-0300-M652",
+      "mission": "M652",
+      "branch": "feat/work-m652-equip-stat-leave-trigger-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/equipStatLeaveTagAdapter.ts",
+        "tests/equipStatLeaveTagAdapter.test.cjs",
+        "docs/evidence/m652-equip-stat-leave-trigger.json",
+        ".github/workflows/m652-equip-stat-leave-trigger.yml"
+      ]
     }
   ],
   "handoffRequests": [
@@ -195,5 +209,5 @@
       ]
     }
   ],
-  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros. M643 iniciou adapter isolado de The Forceful Sentry em branch própria; não toca nos arquivos reservados por M635/M637/M638/M639/M641/M642 nem nos arquivos centrais bloqueados. M644 iniciou adapter isolado de Graceful Charity (compra 3, descarte 2) em branch própria, independente das reservas de inspeção de mão, LP e combate. M643 concluiu adapter isolado The Forceful Sentry; PR #582 aberta em rascunho, CI focada aprovada, sem certificação/integração/merge/deploy. Reserva M643 liberada; M644 permanece ativo. M645 iniciou adapter isolado de Painful Choice (escolha de cinco cartas do próprio Deck, revelação ao oponente físico escolhido e seleção de uma para a mão) em branch própria; escopo independente das reservas ativas. M646 iniciou adapter isolado para Exchange (Troca), com troca bilateral entre o assento ativo e um assento oponente escolhido; não toca em arquivos reservados por M635/M637/M638/M639/M641/M642/M644/M645 nem no resolver central, catálogo, comandos ou persistência. M647 iniciou adapter isolado para Reload (Quick-Play Spell), com embaralhamento via fluxo HMAC persistido do duelo e compra do mesmo número de cartas; não toca nas reservas ativas nem no resolver central. M648 iniciou adapter isolado para Rush Recklessly e The Reliable Guardian, Quick-Play Spells que concedem +700 ATK ou +700 DEF temporários a um monstro face-up; escopo novo de quatro arquivos, sem resolver central, catálogo, certificação, comandos, banco ou produção. M648 concluiu adapter isolado de Rush Recklessly e The Reliable Guardian: PR #585 draft aberta, CI dedicada passou (30 cenários, check/build/evidência), zero certificações novas; reserva liberada sem merge/deploy. M649 iniciou adapter isolado de custo de descarte + destruição para Tribute to the Doomed e Raigeki Break, sem tocar no resolver central ou em arquivos reservados. M650 iniciou adapter isolado Horn of Heaven + Trap Jammer em branch própria; tributo de monstro como custo e negação de Trap na Battle Phase. Arquivos exclusivos; sem resolver central, catálogo, certificações, comandos ou produção. M651 iniciou adapter isolado de mudança de controle para Snatch Steal + Creature Swap, sem alterar propriedade física nem os arquivos reservados por M638/M637."
+  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros. M643 iniciou adapter isolado de The Forceful Sentry em branch própria; não toca nos arquivos reservados por M635/M637/M638/M639/M641/M642 nem nos arquivos centrais bloqueados. M644 iniciou adapter isolado de Graceful Charity (compra 3, descarte 2) em branch própria, independente das reservas de inspeção de mão, LP e combate. M643 concluiu adapter isolado The Forceful Sentry; PR #582 aberta em rascunho, CI focada aprovada, sem certificação/integração/merge/deploy. Reserva M643 liberada; M644 permanece ativo. M645 iniciou adapter isolado de Painful Choice (escolha de cinco cartas do próprio Deck, revelação ao oponente físico escolhido e seleção de uma para a mão) em branch própria; escopo independente das reservas ativas. M646 iniciou adapter isolado para Exchange (Troca), com troca bilateral entre o assento ativo e um assento oponente escolhido; não toca em arquivos reservados por M635/M637/M638/M639/M641/M642/M644/M645 nem no resolver central, catálogo, comandos ou persistência. M647 iniciou adapter isolado para Reload (Quick-Play Spell), com embaralhamento via fluxo HMAC persistido do duelo e compra do mesmo número de cartas; não toca nas reservas ativas nem no resolver central. M648 iniciou adapter isolado para Rush Recklessly e The Reliable Guardian, Quick-Play Spells que concedem +700 ATK ou +700 DEF temporários a um monstro face-up; escopo novo de quatro arquivos, sem resolver central, catálogo, certificação, comandos, banco ou produção. M648 concluiu adapter isolado de Rush Recklessly e The Reliable Guardian: PR #585 draft aberta, CI dedicada passou (30 cenários, check/build/evidência), zero certificações novas; reserva liberada sem merge/deploy. M649 iniciou adapter isolado de custo de descarte + destruição para Tribute to the Doomed e Raigeki Break, sem tocar no resolver central ou em arquivos reservados. M650 iniciou adapter isolado Horn of Heaven + Trap Jammer em branch própria; tributo de monstro como custo e negação de Trap na Battle Phase. Arquivos exclusivos; sem resolver central, catálogo, certificações, comandos ou produção. M651 iniciou adapter isolado de mudança de controle para Snatch Steal + Creature Swap, sem alterar propriedade física nem os arquivos reservados por M638/M637. M652 iniciou adapter isolado de Equip Spells Axe of Despair + Black Pendant (ATK persistente, saída do campo, tributo opcional para reciclagem e dano de 500 LP), sem alterar resolver central, catálogo, certificações, comandos, banco ou produção. Reserva exclusiva de quatro arquivos; não conflita com M635/M637/M638/M639/M641/M642/M644/M645/M646/M647/M648/M649/M650/M651. Integração central aguarda handoff explícito M637."
 }
