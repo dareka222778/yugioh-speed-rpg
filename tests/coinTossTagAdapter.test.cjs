@@ -8,8 +8,8 @@ function unique(kind,count){
  const seen=new Set();
  return enabledCardIds.filter(id=>{const card=engineCard(id);if(!card||card.kind!==kind||card.fusion)return false;const name=card.englishName||card.name;if(seen.has(name))return false;seen.add(name);return true;}).slice(0,count);
 }
-const monsterIds=unique('monster',8),spellIds=unique('spell',6),trapIds=unique('trap',6);
-assert.equal(monsterIds.length,8);assert.equal(spellIds.length,6);assert.equal(trapIds.length,6);
+const monsterIds=unique('monster',8),fieldSpellId='22702055',spellIds=[fieldSpellId,...unique('spell',10).filter(id=>id!==fieldSpellId).slice(0,5)],trapIds=unique('trap',6);
+assert.equal(monsterIds.length,8);assert.equal(spellIds.length,6);assert.equal(trapIds.length,6);assert.ok(enabledCardIds.includes(fieldSpellId));
 const fixture={barrel:monsterIds[0],blowback:monsterIds[1]},deck=[...monsterIds,...spellIds,...trapIds];
 assert.equal(deck.length,20);
 function lookup(id){if(id===fixture.barrel)return {kind:'monster',effect:'barrel-dragon'};if(id===fixture.blowback)return {kind:'monster',effect:'blowback-dragon'};return undefined;}
@@ -74,7 +74,7 @@ test('Barrel Dragon destroys the selected opponent monster and preserves physica
 
 test('Blowback Dragon can destroy any card on the field, including its controller team backrow',()=>{
  const {adapter,session}=setup(seedFor(true)),source=summon(session,'blowback');
- const ownSpell=setCard(session,0,spellIds[0],0),opponent=deploy(session,1,monsterIds[2],1,true);
+ const ownSpell=setCard(session,0,spellIds[1],0),opponent=deploy(session,1,monsterIds[2],1,true);
  adapter.prepareActivation(session,0,source.uid,'blowback-any-1');
  const result=adapter.resolveCoinToss(session,'blowback-any-1');
  assert.ok(result.targetOptions.includes(ownSpell.uid));assert.ok(result.targetOptions.includes(opponent.uid));
@@ -85,7 +85,7 @@ test('Blowback Dragon can destroy any card on the field, including its controlle
 
 test('Blowback Dragon can select the independent Field Zone',()=>{
  const {adapter,session}=setup(seedFor(true)),source=summon(session,'blowback'),team=session.duel.core.players[0];
- const fieldCard=take(team,spellIds[0]);team.field={...fieldCard,setTurn:0,faceUp:true};
+ const fieldCard=take(team,fieldSpellId);team.field={...fieldCard,setTurn:0,faceUp:true};
  adapter.prepareActivation(session,0,source.uid,'blowback-field-1');
  const rolled=adapter.resolveCoinToss(session,'blowback-field-1');
  assert.ok(rolled.targetOptions.includes(fieldCard.uid));
@@ -237,8 +237,8 @@ test('three Monster Zones and three Spell/Trap Zones remain the hard limits',()=
 
 test('the Field Zone is independent from the three Spell/Trap Zones',()=>{
  const {session}=setup('field-independent'),team=session.duel.core.players[0];
- for(const id of spellIds.slice(0,3)){const card=take(team,id);team.backrow.push({...card,setTurn:0,faceUp:false});}
- const field=take(team,spellIds[3]);team.field={...field,setTurn:0,faceUp:true};
+ for(const id of [spellIds[1],spellIds[2],trapIds[0]]){const card=take(team,id);team.backrow.push({...card,setTurn:0,faceUp:false});}
+ const field=take(team,fieldSpellId);team.field={...field,setTurn:0,faceUp:true};
  assertCoinTossRules(session.duel);assert.equal(team.backrow.length,3);assert.ok(team.field);
 });
 
