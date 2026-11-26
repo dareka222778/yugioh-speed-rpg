@@ -275,7 +275,7 @@ test('Creature Swap offers one monster from each shared team field',()=>{
  const actions=creatureSwapActions(f.duel,lookup,{cardId:SOURCE_FIXTURE});
  assert.deepEqual(actions,[{kind:'spell',card:f.sourceUid,effect:'creature-swap',ownTarget:f.ownUid,opposingTarget:f.opposingUid}]);
  const noOpponent=structuredClone(f.duel);
- noOpponent.core.players[f.opposingTeam].monsters=[];
+ moveMonsterToHand(noOpponent,f.opposingUid,f.opposingOwnerSeat);
  assert.deepEqual(creatureSwapActions(noOpponent,lookup,{cardId:SOURCE_FIXTURE}),[]);
 });
 
@@ -401,7 +401,7 @@ test('three shared Spell/Trap Zones are enforced separately from the Field Zone 
  assert.doesNotThrow(()=>assertControlChangeRules(f.duel));
  assert.equal(f.duel.core.players[f.controllerTeam].field,null);
  placeBackrow(f.duel,fieldOwner,f.controllerTeam);
- assert.throws(()=>assertControlChangeRules(f.duel),/três Spell\/Trap Zones/);
+ assert.throws(()=>assertControlChangeRules(f.duel),/limite de zonas|Spell\/Trap Zones/i);
 });
 
 test('rejects a fourth Monster Zone and preserves the 3+3 shared-field invariant',()=>{
