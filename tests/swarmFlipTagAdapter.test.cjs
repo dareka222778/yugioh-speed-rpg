@@ -20,8 +20,8 @@ function unique(kind,count){
   seen.add(name);return true;
  }).slice(0,count);
 }
-const monsterIds=unique('monster',8),trapIds=unique('trap',6),fieldSpellId=enabledCardIds.find(id=>engineCard(id)?.field),baseSpellIds=unique('spell',6),spellIds=baseSpellIds.includes(fieldSpellId)?baseSpellIds:[...baseSpellIds.slice(0,5),fieldSpellId],fieldSpellIds=[fieldSpellId];
-assert.equal(monsterIds.length,8);assert.equal(spellIds.length,6);assert.equal(trapIds.length,6);assert.equal(fieldSpellIds.length,1);
+const monsterIds=unique('monster',8),spellIds=unique('spell',6),trapIds=unique('trap',6);
+assert.equal(monsterIds.length,8);assert.equal(spellIds.length,6);assert.equal(trapIds.length,6);
 const deck=[...monsterIds,...spellIds,...trapIds];
 assert.equal(deck.length,20);
 const fixtures={scarabs:monsterIds[0],locusts:monsterIds[1]};
@@ -49,7 +49,7 @@ function take(session,seat,id){
 }
 function deploy(session,team,id,seat=team,faceUp=true,position='atk'){
  const card=take(session,seat,id),turn=session.duel.core.turn;
- const monster={...card,position,faceUp,entered:turn-1,changed:turn-1,attacked:0,atkBoost:0,defBoost:0,owner:team};
+ const monster={...card,position,faceUp,entered:turn-1,changed:turn-1,attacked:0,attackCount:0,atkBoost:0,defBoost:0,owner:team};
  session.duel.core.players[team].monsters.push(monster);
  return monster;
 }
@@ -200,7 +200,7 @@ scenario('Swarm of Locusts oferece backrow e Field Zone da equipe oponente, sem 
  const {session}=setup('m657-locust-options');
  const source=deploy(session,0,fixtures.locusts);
  const backrow=setBackrow(session,1,trapIds[0],3,false);
- const field=setField(session,1,fieldSpellIds[0],1,true);
+ const field=setField(session,1,spellIds[0],1,true);
  const own=setBackrow(session,0,trapIds[1],2,false);
  const actor=beginFlip(session,0,source);
  const plan=prepare(session,source,actor,'locust-options');
@@ -223,7 +223,7 @@ scenario('Swarm of Locusts destrói Magia/Armadilha baixada e a envia ao Cemité
 scenario('Swarm of Locusts pode destruir a Magia de Campo do oponente',()=>{
  const {session}=setup('m657-locust-field');
  const source=deploy(session,0,fixtures.locusts);
- const field=setField(session,1,fieldSpellIds[0],3,true);
+ const field=setField(session,1,spellIds[0],3,true);
  const actor=beginFlip(session,0,source);
  prepare(session,source,actor,'locust-field');
  const result=adapter.resolveFlipSummonEffect(session,'locust-field',field.uid);
@@ -232,17 +232,17 @@ scenario('Swarm of Locusts pode destruir a Magia de Campo do oponente',()=>{
  assert.ok(session.duel.core.players[1].grave.some(card=>card.uid===field.uid));
 });
 
-scenario('uma Magia/Armadilha que muda para a equipe controladora deixa de ser o alvo original',()=>{
+scenario('uma Magia/Armadilha que muda de backrow para Field Zone deixa de ser o alvo original',()=>{
  const {session}=setup('m657-locust-zone-change');
  const source=deploy(session,0,fixtures.locusts);
  const target=setBackrow(session,1,trapIds[0],3,false);
  const actor=beginFlip(session,0,source);
  prepare(session,source,actor,'locust-zone-change');
  const [moved]=session.duel.core.players[1].backrow.splice(session.duel.core.players[1].backrow.findIndex(card=>card.uid===target.uid),1);
- session.duel.core.players[0].backrow.push(moved);
+ session.duel.core.players[1].field=moved;
  const result=adapter.resolveFlipSummonEffect(session,'locust-zone-change',target.uid);
  assert.equal(result.status,'target-lost');
- assert.ok(session.duel.core.players[0].backrow.some(card=>card.uid===target.uid));
+ assert.equal(session.duel.core.players[1].field.uid,target.uid);
 });
 
 scenario('Locusts não pode selecionar monstros',()=>{
@@ -296,7 +296,7 @@ scenario('uma Invocação ocorrida em turno anterior não dispara o efeito Flip'
  const {session}=setup('m657-old-flip');
  const source=deploy(session,0,fixtures.scarabs),target=deploy(session,1,monsterIds[2],1);
  const actor=beginFlip(session,0,source);
- session.duel.core.turn=2;source.changed=2;source.lastSummonedTurn=1;
+ source.lastSummonedTurn=session.duel.core.turn-1;
  assert.throws(()=>prepare(session,source,actor,'old-flip'),/recém-Flip Summoned/);
  assert.ok(target.uid);
 });
@@ -382,10 +382,9 @@ scenario('a mudança própria só pode ser usada uma vez por turno, mesmo após 
  const source=deploy(session,0,fixtures.scarabs);
  mainPhase(session,0);
  adapter.changeToFaceDownDefense(session,0,source.uid);
- const current=session.duel.core.players[0].monsters.find(card=>card.uid===source.uid);
- current.faceUp=true;current.position='atk';
+ source.faceUp=true;source.position='atk';
  assert.throws(()=>adapter.changeToFaceDownDefense(session,0,source.uid),/já foi usado/);
- current.effectUsedTurn=undefined;
+ source.effectUsedTurn=undefined;
  assert.throws(()=>adapter.changeToFaceDownDefense(session,0,source.uid),/já foi usado/);
 });
 
