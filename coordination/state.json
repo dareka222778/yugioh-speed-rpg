@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "9b44bf6e0e38173e2bfbadb7f2a2677565df6142",
-  "updatedAt": "2026-11-26T02:01:00-03:00",
+  "observedHead": "82e27d2fd7e3b7f077812eb3802f3e720e6a0515",
+  "updatedAt": "2026-11-26T05:30:28-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -83,6 +83,20 @@
         "docs/evidence/m642-trap-dustshoot.json",
         ".github/workflows/m642-trap-dustshoot.yml"
       ]
+    },
+    {
+      "runId": "work-20261126T053028-0300-M643",
+      "mission": "M643",
+      "branch": "feat/work-m643-forceful-sentry-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/forcefulSentryTagAdapter.ts",
+        "tests/forcefulSentryTagAdapter.test.cjs",
+        "docs/evidence/m643-forceful-sentry.json",
+        ".github/workflows/m643-forceful-sentry.yml"
+      ]
     }
   ],
   "handoffRequests": [
@@ -97,5 +111,5 @@
       ]
     }
   ],
-  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros."
+  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros. M643 iniciou adapter isolado de The Forceful Sentry em branch própria; não toca nos arquivos reservados por M635/M637/M638/M639/M641/M642 nem nos arquivos centrais bloqueados."
 }
