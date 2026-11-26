@@ -90,9 +90,12 @@ function activateSnatch(f,id='m651-snatch',targetUid=f.targetUid,sourceUid=f.sou
  return activateSnatchSteal(createControlChangeSession(f.duel),sourceUid,id,lookup,
   {cardId:SOURCE_FIXTURE,targetUid});
 }
-function activateSwap(f,id='m651-swap',ownUid=f.ownUid,opposingUid=f.opposingUid,sourceUid=f.sourceUid){
+function activateSwap(f,id='m651-swap',sourceUid=f.sourceUid){
  return activateCreatureSwap(createControlChangeSession(f.duel),sourceUid,id,lookup,
-  {cardId:SOURCE_FIXTURE,ownTargetUid:ownUid,opposingTargetUid:opposingUid});
+  {cardId:SOURCE_FIXTURE});
+}
+function resolveSwap(session,id='m651-swap',ownUid,opposingUid,options={}){
+ return resolveControlChange(session,id,{...options,ownTargetUid:ownUid,opposingTargetUid:opposingUid});
 }
 function inventory(duel){
  return tag.tagInventory(duel).filter(card=>card.entityKind!=='token')
@@ -277,7 +280,7 @@ test('Creature Swap offers one monster from each shared team field',()=>{
 test('Creature Swap exchanges control while preserving physical UIDs and owner teams',()=>{
  const f=setupSwap(),before=inventory(f.duel);
  const pending=activateSwap(f);
- const resolved=resolveControlChange(pending,'m651-swap');
+ const resolved=resolveSwap(pending,'m651-swap',f.ownUid,f.opposingUid);
  const own=resolved.session.duel.core.players[f.controllerTeam].monsters.find(m=>m.uid===f.opposingUid);
  const opposing=resolved.session.duel.core.players[f.opposingTeam].monsters.find(m=>m.uid===f.ownUid);
  assert.ok(own&&opposing);
@@ -290,7 +293,7 @@ test('Creature Swap exchanges control while preserving physical UIDs and owner t
 });
 
 test('Creature Swap locks both monsters from changing battle position for the rest of this turn',()=>{
- const f=setupSwap(),resolved=resolveControlChange(activateSwap(f),'m651-swap').session;
+ const f=setupSwap(),resolved=resolveSwap(activateSwap(f),'m651-swap',f.ownUid,f.opposingUid).session;
  const actions=legalActions(resolved.duel.core,'tag-team-'+f.controllerTeam);
  assert.ok(!actions.some(action=>action.kind==='position'&&[f.ownUid,f.opposingUid].includes(action.card)));
  resolved.duel.core.turn++;
@@ -302,7 +305,7 @@ test('Creature Swap can exchange a face-down monster without revealing its ident
  const f=setupSwap({faceDown:true});
  const actions=creatureSwapActions(f.duel,lookup,{cardId:SOURCE_FIXTURE});
  assert.ok(actions.some(action=>action.opposingTarget===f.opposingUid));
- const resolved=resolveControlChange(activateSwap(f),'m651-swap').session;
+ const resolved=resolveSwap(activateSwap(f),'m651-swap',f.ownUid,f.opposingUid).session;
  const target=resolved.duel.core.players[f.controllerTeam].monsters.find(m=>m.uid===f.opposingUid);
  assert.ok(target);
  assert.equal(target.faceUp,false);
@@ -318,30 +321,23 @@ test('a negated Creature Swap does not exchange monsters and still sends the Spe
  assert.ok(graveHas(resolved.session.duel,f.activeSeat%2,f.sourceUid));
 });
 
-test('Creature Swap never retargets a monster that left and returned with the same UID',()=>{
+test('Creature Swap chooses from the current fields at resolution, not from activation-time targets',()=>{
  const f=setupSwap(),pending=activateSwap(f);
- const stale=structuredClone(pending);
- moveMonsterToHand(stale.duel,f.opposingUid,f.opposingOwnerSeat);
- const hand=privateZone(stale.duel,f.opposingOwnerSeat,'hand');
- const index=hand.findIndex(card=>card.uid===f.opposingUid);
- const [card]=hand.splice(index,1);
- stale.duel.core.players[f.opposingTeam].monsters.push({
-  ...card,owner:f.opposingOwnerSeat%2,position:'atk',faceUp:true,
-  entered:stale.duel.core.turn,changed:stale.duel.core.turn,attacked:0,atkBoost:0,defBoost:0
- });
- synchronizeCardLifetimes(stale.duel.core);
- const resolved=resolveControlChange(stale,'m651-swap');
- assert.equal(resolved.result.targetsSwapped,false);
- assert.ok(resolved.session.duel.core.players[f.controllerTeam].monsters.some(m=>m.uid===f.ownUid));
+ const changed=structuredClone(pending);
+ moveMonsterToHand(changed.duel,f.opposingUid,f.opposingOwnerSeat);
+ const replacement=addMonster(changed.duel,changed.duel.active[f.opposingTeam],f.opposingTeam,TARGET_B);
+ const resolved=resolveSwap(changed,'m651-swap',f.ownUid,replacement);
+ assert.equal(resolved.result.targetsSwapped,true);
+ assert.ok(resolved.session.duel.core.players[f.controllerTeam].monsters.some(m=>m.uid===replacement));
+ assert.ok(resolved.session.duel.core.players[f.opposingTeam].monsters.some(m=>m.uid===f.ownUid));
 });
 
-test('Creature Swap rejects duplicate targets, wrong-team targets and duplicate activation IDs',()=>{
- const f=setupSwap();
- assert.throws(()=>activateCreatureSwap(createControlChangeSession(f.duel),f.sourceUid,'m651-bad',lookup,
-  {cardId:SOURCE_FIXTURE,ownTargetUid:f.ownUid,opposingTargetUid:f.ownUid}),/monstro válido/);
- const session=activateSwap(f);
+test('Creature Swap rejects an invalid resolution pair and duplicate activation IDs',()=>{
+ const f=setupSwap(),session=activateSwap(f);
+ const invalid=resolveSwap(session,'m651-swap',f.ownUid,f.ownUid);
+ assert.equal(invalid.result.targetsSwapped,false);
  assert.throws(()=>activateCreatureSwap(session,f.sourceUid,'m651-swap',lookup,
-  {cardId:SOURCE_FIXTURE,ownTargetUid:f.ownUid,opposingTargetUid:f.opposingUid}),/duplicado/);
+  {cardId:SOURCE_FIXTURE}),/duplicado/);
 });
 
 test('both adapters require the active seat to own the activating Spell',()=>{
@@ -351,21 +347,17 @@ test('both adapters require the active seat to own the activating Spell',()=>{
  assert.deepEqual(creatureSwapActions(s.duel,lookup,{cardId:SOURCE_FIXTURE}),[]);
 });
 
-test('Creature Swap rejects a target pair after either target changes zone lifetime',()=>{
+test('Creature Swap does not resolve if a chosen team has no monster at resolution',()=>{
  const f=setupSwap(),pending=activateSwap(f);
- const stale=structuredClone(pending);
- moveMonsterToHand(stale.duel,f.ownUid,f.ownOwnerSeat);
- const replacement=addMonster(stale.duel,stale.duel.active[f.controllerTeam],f.controllerTeam,TARGET_A);
- synchronizeCardLifetimes(stale.duel.core);
- const resolved=resolveControlChange(stale,'m651-swap');
+ moveMonsterToHand(pending.duel,f.opposingUid,f.opposingOwnerSeat);
+ const resolved=resolveSwap(pending,'m651-swap',f.ownUid,f.opposingUid);
  assert.equal(resolved.result.targetsSwapped,false);
- assert.ok(!resolved.session.duel.core.players[f.opposingTeam].monsters.some(m=>m.uid===replacement));
 });
 
 test('Creature Swap preserves a full three-monster field without overflowing zones',()=>{
  const f=setupSwap();
  for(let i=0;i<2;i++)addMonster(f.duel,f.activeSeat,f.controllerTeam,[TARGET_B,TARGET_C][i]);
- const resolved=resolveControlChange(activateSwap(f),'m651-swap');
+ const resolved=resolveSwap(activateSwap(f),'m651-swap',f.ownUid,f.opposingUid);
  assert.equal(resolved.result.targetsSwapped,true);
  assert.equal(resolved.session.duel.core.players[f.controllerTeam].monsters.length,3);
  assert.equal(resolved.session.duel.core.players[f.opposingTeam].monsters.length,1);
@@ -381,7 +373,7 @@ test('all four opening-seat rotations preserve ownership and control-change inva
  for(const first of [0,1,2,3]){
   const f=setupSwap({first});
   const before=inventory(f.duel);
-  const resolved=resolveControlChange(activateSwap(f),'m651-swap');
+  const resolved=resolveSwap(activateSwap(f),'m651-swap',f.ownUid,f.opposingUid);
   assert.ok(resolved.session.duel.core.players[f.controllerTeam].monsters.some(m=>m.uid===f.opposingUid));
   assert.ok(resolved.session.duel.core.players[f.opposingTeam].monsters.some(m=>m.uid===f.ownUid));
   assert.deepEqual(inventory(resolved.session.duel),before);

@@ -25,8 +25,7 @@ type SnatchActivation={
 };
 type SwapActivation={
  activationId:string;effect:'creature-swap';sourceUid:string;sourceId:string;sourceOwnerSeat:Seat;
- controllerTeam:Team;controllerSeat:Seat;turn:number;ownTargetUid:string;opposingTargetUid:string;
- ownTargetBinding:TargetBinding;opposingTargetBinding:TargetBinding
+ controllerTeam:Team;controllerSeat:Seat;turn:number
 };
 type PendingActivation=SnatchActivation|SwapActivation;
 type ActiveSnatch=Omit<SnatchActivation,'effect'> & {standbyTurns:number[]};
@@ -258,7 +257,7 @@ export function activateSnatchSteal(
 }
 export function activateCreatureSwap(
  input:ControlChangeSession,sourceUid:string,activationId:string,lookup:ControlChangeLookup,
- options:{cardId?:string;ownTargetUid:string;opposingTargetUid:string}
+ options:{cardId?:string}={}
 ):ControlChangeSession{
  if(!activationIdValid(input,activationId))throw new Error('ID de ativação ausente ou duplicado.');
  assertControlChangeRules(input.duel);
@@ -266,34 +265,23 @@ export function activateCreatureSwap(
  if(team===null)throw new Error('Creature Swap só pode ser ativada na Main Phase do controlador.');
  const cardId=sourceIdFor('creature-swap',options.cardId);
  const legal=creatureSwapActions(input.duel,lookup,{cardId});
- if(!legal.some(action=>action.kind==='spell'&&action.card===sourceUid&&action.ownTarget===options.ownTargetUid&&
-  action.opposingTarget===options.opposingTargetUid)){
-  throw new Error('Creature Swap exige um monstro válido de cada equipe.');
+ if(!legal.some(action=>action.kind==='spell'&&action.card===sourceUid)){
+  throw new Error('Creature Swap exige um monstro elegível em cada equipe.');
  }
  const source=sourceInActiveHand(input.duel,team,sourceUid,cardId,lookup);
- const ownTarget=findMonster(input.duel.core,team,options.ownTargetUid);
- const opposingTeam=(1-team) as Team;
- const opposingTarget=findMonster(input.duel.core,opposingTeam,options.opposingTargetUid);
- const ownTargetBinding=bindTarget(input.duel.core,options.ownTargetUid);
- const opposingTargetBinding=bindTarget(input.duel.core,options.opposingTargetUid);
- if(!source||!ownTarget||!opposingTarget||!ownTargetBinding||!opposingTargetBinding||
-  ownTargetBinding.zone!=='monsters'||opposingTargetBinding.zone!=='monsters'){
-  throw new Error('Creature Swap perdeu um dos alvos ou a carta de ativação.');
- }
+ if(!source)throw new Error('A Magia não pertence ao participante ativo.');
  const before=inventorySnapshot(input.duel),next=structuredClone(input);
  putSpellOnField(next.duel.core,team,sourceUid,cardId);
  next.pending[activationId]={
   activationId,effect:'creature-swap',sourceUid,sourceId:cardId,sourceOwnerSeat:source.ownerSeat,
-  controllerTeam:team,controllerSeat:next.duel.active[team] as Seat,turn:next.duel.core.turn,
-  ownTargetUid:options.ownTargetUid,opposingTargetUid:options.opposingTargetUid,
-  ownTargetBinding,opposingTargetBinding
+  controllerTeam:team,controllerSeat:next.duel.active[team] as Seat,turn:next.duel.core.turn
  };
  assertSameInventory(before,next.duel);
  assertControlChangeRules(next.duel);
  return next;
 }
 export function resolveControlChange(
- input:ControlChangeSession,activationId:string,options:{sourceActivationNegated?:boolean}={}
+ input:ControlChangeSession,activationId:string,options:{sourceActivationNegated?:boolean;ownTargetUid?:string;opposingTargetUid?:string}={}
 ):{session:ControlChangeSession;result:ControlChangeResolution}{
  const activation=input.pending[activationId];
  if(!activation||input.resolved.includes(activationId))throw new Error('Ativação de mudança de controle ausente ou já resolvida.');
@@ -324,17 +312,16 @@ export function resolveControlChange(
   }else sourceSentToGrave=moveSpellTrapToOwnerGrave(core,activation.controllerTeam,activation.sourceUid);
  }else{
   const opposingTeam=(1-activation.controllerTeam) as Team;
-  const ownTarget=findMonster(core,activation.controllerTeam,activation.ownTargetUid);
-  const opposingTarget=findMonster(core,opposingTeam,activation.opposingTargetUid);
+  const ownTarget=options.ownTargetUid?findMonster(core,activation.controllerTeam,options.ownTargetUid):undefined;
+  const opposingTarget=options.opposingTargetUid?findMonster(core,opposingTeam,options.opposingTargetUid):undefined;
   if(!sourceEffectNegated&&source?.team===activation.controllerTeam&&source.zone==='backrow'&&
    source.card.faceUp&&source.card.id===activation.sourceId&&ownTarget&&opposingTarget&&
-   targetBindingValid(core,activation.ownTargetBinding)&&
-   targetBindingValid(core,activation.opposingTargetBinding)&&
+   options.ownTargetUid!==options.opposingTargetUid&&
    canAffectMonster(core,ownTarget.uid,'spell')&&canAffectMonster(core,opposingTarget.uid,'spell')){
    ownTarget.owner??=activation.controllerTeam;
    opposingTarget.owner??=opposingTeam;
-   const ownIndex=core.players[activation.controllerTeam].monsters.findIndex(monster=>monster.uid===activation.ownTargetUid);
-   const opposingIndex=core.players[opposingTeam].monsters.findIndex(monster=>monster.uid===activation.opposingTargetUid);
+   const ownIndex=core.players[activation.controllerTeam].monsters.findIndex(monster=>monster.uid===options.ownTargetUid);
+   const opposingIndex=core.players[opposingTeam].monsters.findIndex(monster=>monster.uid===options.opposingTargetUid);
    if(ownIndex>=0&&opposingIndex>=0){
     const [ownMonster]=core.players[activation.controllerTeam].monsters.splice(ownIndex,1);
     const [opposingMonster]=core.players[opposingTeam].monsters.splice(opposingIndex,1);

@@ -34,8 +34,8 @@
     "Snatch Steal toma controle apenas após resolver, preserva UID/proprietário físico e mantém Equip vinculado ao alvo.",
     "Quando o Equip sai, o monstro retorna ao controlador anterior; se a zona estiver cheia, vai ao Cemitério do proprietário físico.",
     "Durante cada Standby do time adversário, o time adversário recebe 1000 LP; o evento é idempotente por turno.",
-    "Creature Swap troca um monstro de cada equipe compartilhada e bloqueia mudança de posição até o fim do turno.",
-    "Vínculos de alvo usam epoch de zona para impedir retargeting após saída/retorno.",
+    "Creature Swap escolhe um monstro de cada campo no momento da resolução e bloqueia mudança de posição até o fim do turno.",
+    "O Equip Snatch Steal usa epoch de zona para impedir retargeting após saída/retorno.",
     "Nenhum efeito altera inventário, Deck, mão, Extra Deck ou propriedade física."
   ],
   "scenarioCount": 31,
