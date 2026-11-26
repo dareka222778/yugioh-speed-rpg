@@ -1,0 +1,46 @@
+{
+  "format": 1,
+  "mission": "M645",
+  "card": {
+    "id": "74191942",
+    "konamiId": 4911,
+    "name": "Painful Choice",
+    "namePt": "Escolha Dolorosa",
+    "firstTCGRelease": "2002-09-16",
+    "firstOCGRelease": "2002-06-20",
+    "officialText": "Select 5 cards from your Deck and show them to your opponent. Your opponent selects 1 card from them. Add that card to your hand and send the remaining cards to the Graveyard.",
+    "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4911&ope=2&request_locale=en"
+  },
+  "scope": "TagDuel clássico 2v2. O oponente físico escolhido atua como seletor; somente esse assento e o ativador recebem o conjunto revelado. Adapter isolado sem catálogo/resolver central/comandos/persistência/produção.",
+  "behavior": [
+    "Main Phase e prioridade aberta",
+    "ativação da mão ou backrow compartilhada",
+    "jogador ativo escolhe cinco UIDs distintos do próprio Deck",
+    "conjunto privado revelado somente ao ativador e ao assento oponente escolhido",
+    "compromisso SHA-256 impede trocar o conjunto entre revelação e decisão",
+    "oponente escolhe uma das cinco para a mão física ativa",
+    "quatro restantes vão ao Cemitério compartilhado da equipe",
+    "negação não revela nem move cartas",
+    "idempotência, conservação de UIDs e rejeição de seleções obsoletas/forjadas"
+  ],
+  "invariants": {
+    "mainDeck": "20–30 por assento",
+    "handLimit": 6,
+    "handOverflow": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5,
+    "inventoryGranted": 0
+  },
+  "verification": {
+    "focusedTests": 21,
+    "adapterBehaviorVerifiedCards": 1,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "playableCatalogAdmission": false,
+    "discordGateway": false,
+    "merge": false,
+    "deploy": false
+  }
+}

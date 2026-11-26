@@ -1,0 +1,29 @@
+name: M645 Painful Choice TagDuel adapter
+on:
+  push:
+    branches:
+      - feat/work-m645-painful-choice-tag-adapter-20261126
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - src/painfulChoiceTagAdapter.ts
+      - tests/painfulChoiceTagAdapter.test.cjs
+      - docs/evidence/m645-painful-choice.json
+      - .github/workflows/m645-painful-choice.yml
+permissions:
+  contents: read
+jobs:
+  painful-choice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('docs/evidence/m645-painful-choice.json', 'utf8'))"
+      - run: node --test tests/painfulChoiceTagAdapter.test.cjs
