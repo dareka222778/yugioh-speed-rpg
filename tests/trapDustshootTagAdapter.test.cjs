@@ -15,11 +15,11 @@ const NORMALS=[...new Set(tag.tagNormalCardIds)];
 const SPELLS=[...new Set(enabledCardIds.filter(id=>getDuelCard(id)?.kind==='spell'&&!getDuelCard(id)?.fusion))];
 const FUSIONS=[...new Set(enabledCardIds.filter(id=>getDuelCard(id)?.fusion))];
 assert.ok(NORMALS.length>=20,'the normal-monster pool must build four physical 20-card decks');
-assert.ok(SPELLS.length>=5,'fixtures require five enabled Spells');
+assert.ok(SPELLS.length>=9,'fixtures require nine enabled Spells');
 assert.ok(FUSIONS.length>=6,'fixtures require six enabled Fusion cards');
 let sequence=0;
 function deck(){return NORMALS.slice(0,20);}
-function mixedDeck(){return [...SPELLS.slice(0,5),...NORMALS.slice(0,15)];}
+function mixedDeck(){return [...SPELLS.slice(0,9),...NORMALS.slice(0,11)];}
 function member(seat){return 'm642-seat-'+seat;}
 function create(first=0,seed='default',extraBySeat={},cardsBySeat={}){
   return tag.createTagDuel([0,1,2,3].map(seat=>({
@@ -181,8 +181,8 @@ test('a selected card is removed only from the chosen inactive opponent hand, no
   const source=addDustshoot(state,0);
   const selected=holder(state,1).hand.find(card=>getDuelCard(card.id)?.kind==='monster');
   const other=holder(state,3).hand[0];
-  const result=resolveTrapDustshoot(activate(state,0,1,source).state,
-    activate(state,0,1,source).plan,selected.uid);
+  const activation=activate(state,0,1,source);
+  const result=resolveTrapDustshoot(activation.state,activation.plan,selected.uid);
   assert.equal(holder(result.state,1).hand.some(card=>card.uid===selected.uid),false);
   assert.equal(holder(result.state,3).hand.some(card=>card.uid===other.uid),true);
 });
@@ -215,6 +215,9 @@ test('a non-Monster cannot be selected, and a Monster that left the hand makes t
   const spell=pool.find(card=>getDuelCard(card.id)?.kind==='spell');
   const monster=pool.find(card=>getDuelCard(card.id)?.kind==='monster');
   assert.ok(spell&&monster);
+  const chosen=[spell,monster,...pool.filter(card=>card.uid!==spell.uid&&card.uid!==monster.uid).slice(0,2)];
+  target.hand=chosen;
+  target.deck=pool.filter(card=>!chosen.some(item=>item.uid===card.uid));
   const activation=activate(state,0,1,source);
   assert.throws(()=>resolveTrapDustshoot(activation.state,activation.plan,spell.uid),/só pode devolver um Monstro/);
   const changed=structuredClone(activation.state);
