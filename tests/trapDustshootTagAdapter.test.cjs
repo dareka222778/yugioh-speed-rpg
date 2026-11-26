@@ -12,14 +12,17 @@ const {
 }=require('../dist/trapDustshootTagAdapter.js');
 
 const NORMALS=[...new Set(tag.tagNormalCardIds)];
-const SPELLS=[...new Set(enabledCardIds.filter(id=>getDuelCard(id)?.kind==='spell'&&!getDuelCard(id)?.fusion))];
+const FIELD_SPELLS=[...new Set(enabledCardIds.filter(id=>getDuelCard(id)?.field))];
+const BACKROW_SPELLS=[...new Set(enabledCardIds.filter(id=>getDuelCard(id)?.kind==='spell'&&!getDuelCard(id)?.field&&!getDuelCard(id)?.fusion))];
+const SPELLS=[...FIELD_SPELLS,...BACKROW_SPELLS];
 const FUSIONS=[...new Set(enabledCardIds.filter(id=>getDuelCard(id)?.fusion))];
 assert.ok(NORMALS.length>=20,'the normal-monster pool must build four physical 20-card decks');
-assert.ok(SPELLS.length>=9,'fixtures require nine enabled Spells');
+assert.ok(FIELD_SPELLS.length>=1,'fixtures require an enabled Field Spell');
+assert.ok(BACKROW_SPELLS.length>=8,'fixtures require eight enabled backrow Spells');
 assert.ok(FUSIONS.length>=6,'fixtures require six enabled Fusion cards');
 let sequence=0;
 function deck(){return NORMALS.slice(0,20);}
-function mixedDeck(){return [...SPELLS.slice(0,9),...NORMALS.slice(0,11)];}
+function mixedDeck(){return [FIELD_SPELLS[0],...BACKROW_SPELLS.slice(0,8),...NORMALS.slice(0,11)];}
 function member(seat){return 'm642-seat-'+seat;}
 function create(first=0,seed='default',extraBySeat={},cardsBySeat={}){
   return tag.createTagDuel([0,1,2,3].map(seat=>({
@@ -50,7 +53,7 @@ function moveFromDeckToMonster(state,seat){
 }
 function moveFromDeckToBackrow(state,seat){
   const held=holder(state,seat);
-  const index=held.deck.findIndex(card=>getDuelCard(card.id)?.kind==='spell');
+  const index=held.deck.findIndex(card=>getDuelCard(card.id)?.kind==='spell'&&!getDuelCard(card.id)?.field);
   assert.ok(index>=0);
   const [card]=held.deck.splice(index,1);
   state.core.players[seat%2].backrow.push({...card,setTurn:0,faceUp:false});
@@ -58,7 +61,7 @@ function moveFromDeckToBackrow(state,seat){
 }
 function moveFromDeckToField(state,seat){
   const held=holder(state,seat);
-  const index=held.deck.findIndex(card=>getDuelCard(card.id)?.kind==='spell');
+  const index=held.deck.findIndex(card=>getDuelCard(card.id)?.field);
   assert.ok(index>=0);
   const [card]=held.deck.splice(index,1);
   state.core.players[seat%2].field={...card,setTurn:0,faceUp:false,resolved:false};
