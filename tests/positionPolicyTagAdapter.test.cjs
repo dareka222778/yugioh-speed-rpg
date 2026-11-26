@@ -9,6 +9,7 @@ function unique(kind,count){
  return enabledCardIds.filter(id=>{const card=engineCard(id);if(!card||card.kind!==kind||card.fusion)return false;const name=card.englishName||card.name;if(seen.has(name))return false;seen.add(name);return true;}).slice(0,count);
 }
 const flipMonsterId=enabledCardIds.find(id=>getMonsterEffect(id)?.trigger==='flip');assert.ok(flipMonsterId);
+const nonFlipMonsterId=enabledCardIds.find(id=>engineCard(id)?.kind==='monster'&&getMonsterEffect(id)?.trigger!=='flip');assert.ok(nonFlipMonsterId);
 const monsterIds=[flipMonsterId,...unique('monster',16).filter(id=>id!==flipMonsterId).slice(0,15)],fieldId='22702055',spellIds=[fieldId,...unique('spell',4).filter(id=>id!==fieldId).slice(0,1)],trapIds=unique('trap',3);
 assert.equal(monsterIds.length,16);assert.equal(spellIds.length,2);assert.equal(trapIds.length,3);assert.ok(enabledCardIds.includes(fieldId));
 const deck=[...monsterIds,...spellIds,...trapIds];assert.equal(deck.length,20);
@@ -92,8 +93,8 @@ test('activation IDs are idempotent and cannot be reused',()=>{
  assert.throws(()=>adapter.prepareActivation(session,0,source.uid,'idempotent-1'),/duplicada/);
 });
 test('Royal Command blocks Flip Effect activations on both teams but not non-Flip monsters',()=>{
- const {adapter,session}=setup(),flip=deploy(session,0,flipMonsterId,0,true,'atk'),normal=deploy(session,1,monsterIds[1],1,true,'atk');
- activate(session,'royal');assert.equal(adapter.flipEffectAllowed(session,flip.uid),false);assert.equal(adapter.flipEffectAllowed(session,normal.uid),true);
+ const {adapter,session}=setup(),flip=deploy(session,0,flipMonsterId,0,true,'atk'),normal=deploy(session,1,nonFlipMonsterId,1,true,'atk');
+ activate(session,'royal');assert.equal(adapter.flipEffectAllowed(session,flip.uid),false);assert.equal(adapter.flipEffectNegated(session,flip.uid),true);assert.equal(adapter.flipEffectAllowed(session,normal.uid),true);assert.equal(adapter.flipEffectNegated(session,normal.uid),false);
 });
 test('removing Royal Command restores Flip Effect activation eligibility',()=>{
  const {adapter,session}=setup(),flip=deploy(session,0,flipMonsterId,0,true,'atk'),{source}=activate(session,'royal');
