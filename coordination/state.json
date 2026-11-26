@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "40be4df6da48054aa47a40106ace5dd2e9b7eb68",
-  "updatedAt": "2026-11-26T01:58:32-03:00",
+  "observedHead": "9b44bf6e0e38173e2bfbadb7f2a2677565df6142",
+  "updatedAt": "2026-11-26T02:01:00-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -69,6 +69,20 @@
         "docs/evidence/m641-mind-haxorz.json",
         ".github/workflows/m641-mind-haxorz-private-inspection.yml"
       ]
+    },
+    {
+      "runId": "work-20261126T020100-0300-M642",
+      "mission": "M642",
+      "branch": "feat/work-m642-trap-dustshoot-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/trapDustshootTagAdapter.ts",
+        "tests/trapDustshootTagAdapter.test.cjs",
+        "docs/evidence/m642-trap-dustshoot.json",
+        ".github/workflows/m642-trap-dustshoot.yml"
+      ]
     }
   ],
   "handoffRequests": [
@@ -83,5 +97,5 @@
       ]
     }
   ],
-  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy e aguarda revisão no PR #579. M641 segue em branch dependente para Mind Haxorz; nenhum dos dois altera o resolver central ou comandos Discord."
+  "notes": "M635/M637/M638/M639 permanecem ativos em escopos separados. M640 concluiu a implementação isolada de The Inexperienced Spy (PR #579). M641 implementa Mind Haxorz e M642 Trap Dustshoot em branches dependentes, sem tocar no resolver central, comandos ou arquivos reservados por terceiros."
 }
