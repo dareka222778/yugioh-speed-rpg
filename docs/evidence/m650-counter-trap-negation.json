@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "runId": "work-20261126T103741-0300-M650",
+  "mission": "M650",
+  "status": "pending-ci",
+  "adapter": "src/counterTrapNegationTagAdapter.ts",
+  "testFile": "tests/counterTrapNegationTagAdapter.test.cjs",
+  "baseEngineVersion": "engine-v9",
+  "baseCertifiedCardCount": 969,
+  "cards": [
+    {
+      "id": "98069388",
+      "konamiId": 4864,
+      "name": "Horn of Heaven",
+      "namePt": "Corneta Celestial",
+      "type": "Counter Trap",
+      "officialText": "When a monster(s) would be Summoned: Tribute 1 monster; negate the Summon, and if you do, destroy that monster(s).",
+      "firstTCGRelease": "2002-06-26",
+      "firstTCGSet": "MRD-130",
+      "sourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4864&request_locale=en",
+      "admitted": false,
+      "behaviorVerified": false,
+      "certified": false
+    },
+    {
+      "id": "19252988",
+      "konamiId": 5921,
+      "name": "Trap Jammer",
+      "namePt": "Bloqueador de Armadilhas",
+      "type": "Counter Trap",
+      "officialText": "When your opponent activates a Trap Card during the Battle Phase: Negate the activation, and if you do, destroy it.",
+      "firstTCGRelease": "2004-03-01",
+      "firstTCGSet": "IOC-EN110",
+      "sourceUrl": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5921&request_locale=en",
+      "admitted": false,
+      "behaviorVerified": false,
+      "certified": false
+    }
+  ],
+  "ownerRules": {
+    "mainDeckMin": 20,
+    "mainDeckMax": 30,
+    "handLimit": 6,
+    "handCheck": "end",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZoneIndependent": true,
+    "extraDeckMax": 5
+  },
+  "behaviorAssertions": [
+    "Horn of Heaven lista apenas tributos controlados pela equipe, paga o tributo na ativação e mantém o custo mesmo se a ativação for negada.",
+    "Horn of Heaven nega e destrói a Invocação pendente somente se o alvo físico ainda ocupa a mesma vida de zona.",
+    "Trap Jammer só responde à ativação de Armadilha do oponente durante a Battle Phase; não responde a Magias, efeitos de monstros ou Armadilhas da própria equipe.",
+    "Ambos respeitam prioridade, Set no turno anterior, Jinzo e negação contínua de Armadilhas.",
+    "Cartas destruídas e custos físicos retornam ao Cemitério do proprietário físico, inclusive quando controladas pelo parceiro.",
+    "A rotação dos quatro assentos, a mão privada, o limite de mão apenas na End Phase e a conservação de UIDs físicos são preservados.",
+    "Nenhuma carta é concedida; nenhum registro de catálogo ou certificação é alterado."
+  ],
+  "scenarioCount": 29,
+  "focusedTestResult": "pending",
+  "typecheck": "pending",
+  "build": "pending",
+  "fullSuite": "pending",
+  "tagClassicAudit": "pending",
+  "adapterBehaviorVerifiedCards": 0,
+  "behaviorCertifiedCards": 0,
+  "automaticCertifications": 0,
+  "inventoryGranted": 0,
+  "liveDiscordValidation": false,
+  "mergeAuthorized": false,
+  "deployAuthorized": false
+}

@@ -1,0 +1,49 @@
+name: M650 counter-trap adapter
+on:
+  push:
+    branches:
+      - feat/work-m650-counter-trap-negation-20261126
+    paths:
+      - "src/counterTrapNegationTagAdapter.ts"
+      - "tests/counterTrapNegationTagAdapter.test.cjs"
+      - "docs/evidence/m650-counter-trap-negation.json"
+      - ".github/workflows/m650-counter-trap-negation.yml"
+  pull_request:
+    branches:
+      - feat/rea-engine-recovery-20261026
+    paths:
+      - "src/counterTrapNegationTagAdapter.ts"
+      - "tests/counterTrapNegationTagAdapter.test.cjs"
+      - "docs/evidence/m650-counter-trap-negation.json"
+      - ".github/workflows/m650-counter-trap-negation.yml"
+permissions:
+  contents: read
+concurrency:
+  group: m650-counter-trap-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run audit:tag-classic
+      - run: node --test tests/counterTrapNegationTagAdapter.test.cjs
+      - name: Validate evidence without certifying cards
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const evidence = JSON.parse(fs.readFileSync('docs/evidence/m650-counter-trap-negation.json', 'utf8'));
+          if (evidence.format !== 1 || evidence.mission !== 'M650') throw new Error('Invalid evidence header');
+          if (evidence.cards.length !== 2 || evidence.scenarioCount < 20) throw new Error('Incomplete card/scenario evidence');
+          if (evidence.cards.some(card => card.admitted || card.certified)) throw new Error('Adapter CI must not admit or certify cards');
+          if (evidence.automaticCertifications !== 0 || evidence.inventoryGranted !== 0) throw new Error('Unsafe side effect recorded');
+          console.log('M650 evidence valid; catalog and inventory unchanged.');
+          NODE
