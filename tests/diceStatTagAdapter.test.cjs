@@ -109,7 +109,7 @@ test('Graceful Dice from hand cannot use the inactive partner private hand',()=>
 test('Graceful Dice from hand cannot activate during the opposing turn',()=>{
  const {adapter,session}=setup('opponent-hand',1),source=putInHand(session,0,fixture.gracefulDice,0);
  makeResponse(session,1,'damage');
- assert.throws(()=>adapter.prepareActivation(session,0,source.uid,'opponent-hand-1'),/mão privada/);
+ assert.throws(()=>adapter.prepareActivation(session,session.duel.active[0],source.uid,'opponent-hand-1'),/mão privada/);
 });
 
 test('a Quick-Play Spell Set this turn cannot activate',()=>{
@@ -165,14 +165,14 @@ test('temporary dice modifiers expire at the end of the current turn',()=>{
 
 test('Skull Dice may respond in the Damage Step before Damage Calculation',()=>{
  const {adapter,session}=setup('damage-before',1),source=setCard(session,0,fixture.skullDice,0);
- makeResponse(session,1,'damage');adapter.prepareActivation(session,0,source.uid,'damage-before-1');
+ makeResponse(session,1,'damage');adapter.prepareActivation(session,session.duel.active[0],source.uid,'damage-before-1');
  assert.equal(adapter.resolveActivation(session,'damage-before-1').effect,'skull-dice');
 });
 
 test('dice stat effects cannot activate during Damage Calculation',()=>{
  const {adapter,session}=setup('damage-calculation',1),source=setCard(session,0,fixture.skullDice,0);
  makeResponse(session,1,'calculation');
- assert.throws(()=>adapter.prepareActivation(session,0,source.uid,'damage-calc-1'),/Etapa de Dano/);
+ assert.throws(()=>adapter.prepareActivation(session,session.duel.active[0],source.uid,'damage-calc-1'),/Etapa de Dano/);
 });
 
 test('a Spell Speed 2 effect cannot respond to a Counter Trap',()=>{
@@ -182,7 +182,7 @@ test('a Spell Speed 2 effect cannot respond to a Counter Trap',()=>{
  session.duel.core.pending={kind:'spell',actor:1,card:opponentSpell.uid,id:opponentSpell.id};
  session.duel.core.chain=[{actor:1,card:counter.uid,id:counter.id,target:opponentSpell.uid}];
  assert.equal(getActivationModel(getEffect(counterTrapId)).speed,3);
- assert.throws(()=>adapter.prepareActivation(session,0,source.uid,'counter-trap-1'),/Velocidade 3/);
+ assert.throws(()=>adapter.prepareActivation(session,session.duel.active[0],source.uid,'counter-trap-1'),/Velocidade 3/);
 });
 
 test('a set card destroyed before resolution still resolves its non-continuous dice effect',()=>{
@@ -225,9 +225,12 @@ test('Maximum Six modifier is removed when it turns face-down and does not retur
  const {adapter,session}=setup('maximum-six-faceup'),monster=deploy(session,0,fixture.maximumSix,0,true),event=maximumSixEvent(session,monster);
  adapter.prepareMaximumSixTrigger(session,event,'maximum-six-faceup-1');
  const result=adapter.resolveMaximumSixTrigger(session,'maximum-six-faceup-1');
- assert.equal(continuousModifier(session.duel.core,monster,'atk'),result.bonus);
- monster.faceUp=false;adapter.reconcile(session);assert.equal(continuousModifier(session.duel.core,monster,'atk'),0);
- monster.faceUp=true;adapter.reconcile(session);assert.equal(continuousModifier(session.duel.core,monster,'atk'),0);
+ let live=session.duel.core.players[0].monsters.find(card=>card.uid===monster.uid);
+ assert.equal(continuousModifier(session.duel.core,live,'atk'),result.bonus);
+ live.faceUp=false;adapter.reconcile(session);live=session.duel.core.players[0].monsters.find(card=>card.uid===monster.uid);
+ assert.equal(continuousModifier(session.duel.core,live,'atk'),0);
+ live.faceUp=true;adapter.reconcile(session);live=session.duel.core.players[0].monsters.find(card=>card.uid===monster.uid);
+ assert.equal(continuousModifier(session.duel.core,live,'atk'),0);
 });
 
 test('Maximum Six effect does not follow the card after it leaves and re-enters the field',()=>{
@@ -268,13 +271,13 @@ test('three Spell/Trap Zones plus the independent Field Zone remain legal',()=>{
 test('a fourth Monster Zone is rejected without changing inventory',()=>{
  const {session}=setup('four-monsters');
  for(let i=0;i<4;i++)deploy(session,0,monsterIds[i],0,true);
- assert.throws(()=>assertDiceStatRules(session.duel),/três Monster Zones/);
+ assert.throws(()=>assertDiceStatRules(session.duel),/limite de zonas/);
 });
 
 test('a fourth Spell/Trap Zone is rejected',()=>{
  const {session}=setup('four-backrow');
  for(let i=0;i<4;i++)setCard(session,0,i<2?spellIds[i]:trapIds[i-1],0,0,false);
- assert.throws(()=>assertDiceStatRules(session.duel),/três Spell\/Trap Zones/);
+ assert.throws(()=>assertDiceStatRules(session.duel),/limite de zonas/);
 });
 
 test('deck construction still enforces 20–30 Main Deck and Extra Deck 5',()=>{
