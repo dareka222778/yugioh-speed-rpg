@@ -38,9 +38,9 @@
     "Vínculos de alvo usam epoch de zona para impedir retargeting após saída/retorno.",
     "Nenhum efeito altera inventário, Deck, mão, Extra Deck ou propriedade física."
   ],
-  "scenarioCount": 29,
+  "scenarioCount": 31,
   "verification": {
-    "focusedScenarios": 29,
+    "focusedScenarios": 31,
     "focusedTestResult": "pending",
     "typecheck": "pending",
     "build": "pending",
