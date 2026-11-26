@@ -1,4 +1,3 @@
-import type {DuelState} from './duelEngine';
 import type {TagDuel} from './tagDuel';
 import {tagInventory} from './tagDuel';
 

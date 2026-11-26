@@ -153,6 +153,9 @@ test('only opposing End Phases decrement Swords and the third one destroys it',(
   const second=advanceSwordsEndPhase(state,1);
   assert.equal(second.state.swordsOfRevealingLight[0].remainingOpponentTurns,1);
   state=second.state;
+  state.core.current=0;state.core.turn++;
+  const ownEnd2=advanceSwordsEndPhase(state,0);
+  state=ownEnd2.state;
   state.core.current=1;state.core.turn++;
   const third=advanceSwordsEndPhase(state,1);
   assert.deepEqual(third.expiredUids,[source]);
@@ -297,11 +300,11 @@ test('activation requires a free shared S/T Zone and respects the separate Field
 test('a 7-card hand is not discarded by the adapter; End Phase remains the engine responsibility',()=>{
   const state=create(0,'hand-limit');
   const source=addSpell(state,0,SWORDS_OF_REVEALING_LIGHT_ID);
-  fillHand(state,0,7);
+  fillHand(state,0,8);
   const before=hands(state);
   const result=resolveRevealSpell(state,activate(state,0,SWORDS_OF_REVEALING_LIGHT_ID,source));
-  assert.equal(holder(result.state,0).hand.length,6);
-  assert.equal(before.length-holder(result.state,0).hand.length,1);
+  assert.equal(holder(result.state,0).hand.length,7);
+  assert.equal(before.length-hands(result.state).length,1);
   assert.equal(result.state.core.phase,'main');
   assert.equal(result.state.core.handFlow,undefined);
   assertRules(result.state);
@@ -313,10 +316,11 @@ test('three shared Monster Zones and three shared S/T Zones are enforced',()=>{
   for(let i=0;i<3;i++)state.core.players[0].backrow.push({
     uid:'m0:m639-zone-'+i,id:NORMALS[4+i],setTurn:0,faceUp:false
   });
+  const source=addSpell(state,0,SWORDS_OF_REVEALING_LIGHT_ID);
   assert.throws(()=>planRevealSpell(state,{
     activationId:'m639:zone-full',actorSeat:0,
-    sourceUid:'m0:m639-missing',cardId:SWORDS_OF_REVEALING_LIGHT_ID
-  }));
+    sourceUid:source,cardId:SWORDS_OF_REVEALING_LIGHT_ID
+  }),/Zona de Magias/Armadilhas livre/);
   const fourth=structuredClone(state);
   fourth.core.players[0].monsters.push({
     uid:'m0:m639-fourth-monster',id:NORMALS[7],position:'atk',faceUp:true,
@@ -329,12 +333,12 @@ test('Main Deck 20–30 and Extra Deck maximum 5 remain physical-seat limits',()
   const FUSIONS=[...new Set(require('../dist/effectRegistry.js').enabledCardIds.filter(id=>{
     const c=require('../dist/effectRegistry.js').getDuelCard(id);return c?.fusion;
   }))];
-  assert.ok(FUSIONS.length>=5,'fixture requires five enabled Fusion cards');
+  assert.ok(FUSIONS.length>=6,'fixture requires six enabled Fusion cards');
   const valid=create(0,'extra-five',{2:FUSIONS.slice(0,5)});
   const source=addSpell(valid,0,SWORDS_OF_REVEALING_LIGHT_ID);
   assert.ok(planRevealSpell(valid,{activationId:'m639:extra-five',actorSeat:0,sourceUid:source,cardId:SWORDS_OF_REVEALING_LIGHT_ID}));
   const invalid=structuredClone(valid);
-  const sixth={uid:'m2:m639-extra-sixth',id:FUSIONS[5]||FUSIONS[0]};
+  const sixth={uid:'m2:m639-extra-sixth',id:FUSIONS[5]};
   invalid.reserves['2'].extra.push(sixth);
   assert.throws(()=>canTeamDeclareAttack(invalid,1),/Extra Deck físico excedeu cinco/);
   const short=structuredClone(valid);
