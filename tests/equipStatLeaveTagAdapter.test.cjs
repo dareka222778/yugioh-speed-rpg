@@ -147,7 +147,7 @@ test('a set Equip from the partner may activate only after the turn it was set',
 
 test('a hand Equip cannot activate when all three shared Spell/Trap Zones are occupied',()=>{
  const f=setup();
- for(let i=0;i<3;i++)placeBackrow(f.duel,f.activeSeat,f.team,SOURCE_FIXTURE,0);
+ for(let i=0;i<3;i++)placeBackrow(f.duel,f.activeSeat,f.team,FIELD,0);
  assert.deepEqual(axeOfDespairActions(f.duel,lookup,{cardId:SOURCE_FIXTURE}),[]);
 });
 
@@ -350,18 +350,19 @@ test('a set Equip controlled by a team member returns to the physical owner rese
 test('the Field Zone remains separate from the three shared Spell/Trap Zones',()=>{
  const f=setup();
  assert.ok(FIELD,'fixture has a certified Field Spell');
- const fieldCard=placeSpell(f.duel,f.activeSeat,FIELD);
- const hand=privateZone(f.duel,f.activeSeat,'hand'),index=hand.findIndex(card=>card.uid===fieldCard);
- const [card]=hand.splice(index,1);
+ const deck=privateZone(f.duel,f.activeSeat,'deck');
+ const card=deck.shift();assert.ok(card,'fixture needs a physical Field Spell');
+ card.id=FIELD;
  f.duel.core.players[f.team].field={...card,faceUp:true,setTurn:f.duel.core.turn};
  assert.equal(axeOfDespairActions(f.duel,lookup,{cardId:SOURCE_FIXTURE}).length,1);
  assertEquipStatRules(f.duel);
 });
 
 test('hand overflow remains an End Phase responsibility and the adapter never discards',()=>{
- const f=setup(),pending=activateAxe(f),player=privateZone(pending.duel,f.activeSeat,'hand');
- while(player.hand.length<7){const card=player.deck.shift();assert.ok(card);player.hand.push(card);}
- const before=player.hand.map(card=>card.uid);
+ const f=setup(),pending=activateAxe(f);
+ const hand=privateZone(pending.duel,f.activeSeat,'hand'),deck=privateZone(pending.duel,f.activeSeat,'deck');
+ while(hand.length<7){const card=deck.shift();assert.ok(card);hand.push(card);}
+ const before=hand.map(card=>card.uid);
  const result=resolveEquipStat(pending,'m652-axe');
  assert.deepEqual(privateZone(result.session.duel,f.activeSeat,'hand').map(card=>card.uid),before);
  assert.equal(rulesFor(result.session.duel.core).handLimit,6);
