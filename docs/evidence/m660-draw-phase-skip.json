@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "mission": "M660",
+  "status": "isolated-behavior-verified-candidate",
+  "cards": [
+    {
+      "name": "Offerings to the Doomed",
+      "password": "19230407",
+      "konamiId": 5200,
+      "type": "Quick-Play Spell",
+      "effect": "Escolha 1 monstro face-up no campo e destrua-o. Pule sua próxima Draw Phase.",
+      "tcgFirstRelease": "2003-03-01",
+      "ocgFirstRelease": "2001-04-19",
+      "official": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5200&ope=2&request_locale=en"
+    },
+    {
+      "name": "Time Seal",
+      "password": "35316708",
+      "konamiId": 5155,
+      "type": "Normal Trap",
+      "effect": "Pule a próxima Draw Phase do seu oponente.",
+      "tcgFirstRelease": "2002-10-20",
+      "ocgFirstRelease": "2000-09-28",
+      "official": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5155&ope=2&request_locale=en"
+    }
+  ],
+  "mechanics": {
+    "offerings": "Target binding por UID/época; destrói apenas se o mesmo monstro continuar face-up. Mesmo se o alvo sair, o efeito ainda agenda o skip; se a ativação for negada, não agenda.",
+    "timeSeal": "Trap setada em turno anterior; agenda o próximo Draw Phase da equipe adversária.",
+    "tagRotation": "Seats 0→1→2→3. O próximo Draw Phase do próprio assento é +4 turnos; o próximo Draw Phase do adversário é o próximo assento ativo da equipe, ou o parceiro em +2 se a equipe adversária já está no turno.",
+    "physicalOwnership": "Fila por assento físico, não por equipe; mão e Deck privados permanecem separados.",
+    "consumption": "consumeDrawSkip só consome quando seat/cursor/turn coincidem; uma única vez; duplicatas para o mesmo dueTurn são deduplicadas."
+  },
+  "constraints": {
+    "mainDeck": "20-30 por assento",
+    "handLimit": 6,
+    "handCheck": "End Phase",
+    "monsterZones": 3,
+    "spellTrapZones": 3,
+    "fieldZone": "separada",
+    "extraDeckMax": 5,
+    "privateHands": "inalteradas",
+    "inventoryGrants": 0
+  },
+  "certification": {
+    "before": 969,
+    "after": 969,
+    "new": 0,
+    "reason": "Adapter isolado; hook de Draw Phase e resolver central aguardam integração autorizada."
+  },
+  "validation": {
+    "suite": "tests/drawPhaseSkipTagAdapter.test.cjs",
+    "expectedMinimumScenarios": 30,
+    "ci": "pending",
+    "integrationLimit": "O host precisa chamar consumeDrawSkip antes de comprar no início do turno; não há hook central integrado neste PR.",
+    "discordLive": "not validated",
+    "production": "unchanged"
+  }
+}
