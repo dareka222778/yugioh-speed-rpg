@@ -405,7 +405,7 @@ test('the Field Zone is separate from three shared Spell/Trap Zones',()=>{
 test('rejects a fourth Monster Zone and preserves the three-zone invariant',()=>{
   const f=setupHorn();
   for(let i=0;i<3;i++)placeMonster(f.duel,f.activeSeat,f.controllerTeam,normalDeck[i+2]);
-  assert.throws(()=>assertCounterTrapRules(f.duel),/três Monster Zones/);
+  assert.throws(()=>assertCounterTrapRules(f.duel),/limite de zonas/);
 });
 test('all four opening-seat rotations preserve source, tribute, target and grave ownership',()=>{
   for(const first of [0,1,2,3]){
