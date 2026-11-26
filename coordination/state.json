@@ -4,8 +4,8 @@
   "priorityRequestedBy": "User",
   "state": "active",
   "startedAt": "2026-11-25T19:34:36-03:00",
-  "lastActivityAt": "2026-11-25T19:54:24-03:00",
-  "nextScheduledAt": "2026-11-25T22:30:00-03:00",
+  "lastActivityAt": "2026-11-26T00:29:19-03:00",
+  "nextScheduledAt": "2026-11-26T05:30:00-03:00",
   "timezone": "America/Sao_Paulo",
   "intervalHours": 5,
   "scope": [
@@ -4965,7 +4965,7 @@
     "nextWindow": "2026-11-25T22:30:00-03:00",
     "nextTask": "Implementar adapter de resposta para Pending/Chain, cobrir negação de Invocação e ativação de Magia/Armadilha com pagamento de metade dos PV, propriedade física e anti-replay; executar CI e depois escolher a próxima família independente."
   },
-  "nextWorkAt": "2026-11-24T18:30:00-03:00",
+  "nextWorkAt": "2026-11-26T05:30:00-03:00",
   "parallelRuns": [
     {
       "runId": "work-20261113T082743-0300",
@@ -8227,7 +8227,7 @@
       "priority": "P1 — validar a projeção Discord do LP compartilhado em todas as quatro rotações iniciais 2v2, com menu privado somente para o representante ativo, privacidade de mãos e continuidade de revisão após End Phase."
     }
   ],
-  "updatedAt": "2026-11-25T20:25:13-03:00",
+  "updatedAt": "2026-11-26T00:29:19-03:00",
   "lastCheckpointCommit": null,
   "concurrentReservations": [
     {
@@ -10498,7 +10498,7 @@
   "lastParallelRunSummary": "M562 reservado: Fiber Jar TagDuel adapter, quatro caminhos novos; M61 e M557–M561 preservados.",
   "lastIndependentWorkCheckpoint": "coordination/runs/work-20261123T132707-0300-M566.json",
   "lastIndependentWorkActivityAt": "2026-11-23T13:19:16-03:00",
-  "nextWorkWindow": "2026-11-25T22:30:00-03:00",
+  "nextWorkWindow": "2026-11-26T05:30:00-03:00",
   "lastIndependentWorkRunId": "work-20261124T183021-0300-M596",
   "workBranchesUpdatedAt": "2026-11-20T19:36:27-03:00",
   "lastActiveWorkMission": "M587",
@@ -21815,7 +21815,39 @@
         "docs/evidence/m636-standby-lp-tag-adapter.json",
         ".github/workflows/m636-standby-lp-tag-adapter.yml"
       ],
-      "conditionalHeadUpdate": true
+      "conditionalHeadUpdate": true,
+      "state": "released-to-auxiliary-monitor-ci",
+      "releasedAt": "2026-11-26T00:29:19-03:00",
+      "pullRequest": 577,
+      "branchHeadSha": "7a1a94418d522332d00293a47c2acbebc416da52",
+      "ci": "success",
+      "scopeReleasedToAuxiliary": [
+        "src/standbyLPGainTagAdapter.ts",
+        "tests/standbyLPGainTagAdapter.test.cjs",
+        "docs/evidence/m636-standby-lp-tag-adapter.json",
+        ".github/workflows/m636-standby-lp-tag-adapter.yml"
+      ]
+    },
+    {
+      "runId": "work-20261126T002919-0300-M637",
+      "mission": "M637",
+      "owner": "Work principal",
+      "priority": "P1",
+      "state": "active",
+      "startedAt": "2026-11-26T00:29:19-03:00",
+      "branch": "feat/work-m637-tribute-lp-tag-adapter-20261126",
+      "baseBranch": "feat/rea-engine-recovery-20261026",
+      "baseSha": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+      "sharedBranch": "feat/rea-engine-recovery-20261026",
+      "sharedHeadAtReservation": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+      "reservedFiles": [
+        "src/tributeLPEffectsTagAdapter.ts",
+        "tests/tributeLPEffectsTagAdapter.test.cjs",
+        "docs/evidence/m637-tribute-lp-effects.json",
+        ".github/workflows/m637-tribute-lp-effects.yml"
+      ],
+      "conditionalHeadUpdate": true,
+      "conflictPolicy": "Somente os quatro caminhos novos; não tocar em M61/M629–M636, runtime central, catálogo, certificados, inventário, dados dos jogadores, comandos, banco, main ou produção."
     }
   ],
   "currentWorkReservationM625": {
@@ -22255,9 +22287,9 @@
     "engineValidation": "pending",
     "newCertifications": 0
   },
-  "m61HandoffLastRequestedAt": "2026-11-25T19:49:48-03:00",
-  "m61HandoffCommentId": 7176831267,
-  "m61HandoffState": "awaiting explicit owner response; central files remain blocked",
+  "m61HandoffLastRequestedAt": "2026-11-26T00:29:19-03:00",
+  "m61HandoffCommentId": 7181835623,
+  "m61HandoffState": "partial handoff requested for M637 integration only; awaiting explicit owner response; central files remain blocked",
   "currentWorkReservationM631": {
     "runId": "work-20261125T195300-0300-M631",
     "mission": "M631",
@@ -22997,15 +23029,15 @@
     "mission": "M636",
     "priority": "P1",
     "owner": "Work principal",
-    "state": "reserved-and-implementing",
+    "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-25T23:47:18.761Z",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "07af90e9212827d858b540016a520f3f1d3bc7e2",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "07af90e9212827d858b540016a520f3f1d3bc7e2",
     "branch": "feat/work-m636-standby-lp-tag-adapter-20261125",
-    "branchHeadSha": null,
-    "pullRequest": null,
+    "branchHeadSha": "7a1a94418d522332d00293a47c2acbebc416da52",
+    "pullRequest": 577,
     "reservedFiles": [
       "src/standbyLPGainTagAdapter.ts",
       "tests/standbyLPGainTagAdapter.test.cjs",
@@ -23038,24 +23070,31 @@
     "targetEffectiveWorkMinutes": 60,
     "targetMet": false,
     "ciWaitExcluded": true,
-    "nextTask": "Implementar adaptador e regressões de Standby LP para os dois efeitos; verificar posição, equipe, duplicação de resolução e conservação de UIDs.",
+    "nextTask": "Auxiliar: revisar e monitorar PR #577; manter draft; não integrar nem implantar sem autorização vigente, CI adequada e backup verificável.",
     "nextWindow": "2026-11-25T22:30:00-03:00",
-    "scopeReleasedToAuxiliary": []
+    "scopeReleasedToAuxiliary": [
+      "src/standbyLPGainTagAdapter.ts",
+      "tests/standbyLPGainTagAdapter.test.cjs",
+      "docs/evidence/m636-standby-lp-tag-adapter.json",
+      ".github/workflows/m636-standby-lp-tag-adapter.yml"
+    ],
+    "ci": "success",
+    "releasedAt": "2026-11-26T00:29:19-03:00"
   },
   "subtaskReservationM636": {
     "runId": "work-20261125T2045Z-M636",
     "mission": "M636",
     "priority": "P1",
     "owner": "Work principal",
-    "state": "reserved-and-implementing",
+    "state": "released-to-auxiliary-monitor-ci",
     "startedAt": "2026-11-25T23:47:18.761Z",
     "sharedBranch": "feat/rea-engine-recovery-20261026",
     "sharedHeadAtReservation": "07af90e9212827d858b540016a520f3f1d3bc7e2",
     "baseBranch": "feat/rea-engine-recovery-20261026",
     "baseSha": "07af90e9212827d858b540016a520f3f1d3bc7e2",
     "branch": "feat/work-m636-standby-lp-tag-adapter-20261125",
-    "branchHeadSha": null,
-    "pullRequest": null,
+    "branchHeadSha": "7a1a94418d522332d00293a47c2acbebc416da52",
+    "pullRequest": 577,
     "reservedFiles": [
       "src/standbyLPGainTagAdapter.ts",
       "tests/standbyLPGainTagAdapter.test.cjs",
@@ -23088,13 +23127,254 @@
     "targetEffectiveWorkMinutes": 60,
     "targetMet": false,
     "ciWaitExcluded": true,
-    "nextTask": "Implementar adaptador e regressões de Standby LP para os dois efeitos; verificar posição, equipe, duplicação de resolução e conservação de UIDs.",
+    "nextTask": "Auxiliar: revisar e monitorar PR #577; manter draft; não integrar nem implantar sem autorização vigente, CI adequada e backup verificável.",
     "nextWindow": "2026-11-25T22:30:00-03:00",
-    "scopeReleasedToAuxiliary": []
+    "scopeReleasedToAuxiliary": [
+      "src/standbyLPGainTagAdapter.ts",
+      "tests/standbyLPGainTagAdapter.test.cjs",
+      "docs/evidence/m636-standby-lp-tag-adapter.json",
+      ".github/workflows/m636-standby-lp-tag-adapter.yml"
+    ],
+    "ci": "success",
+    "releasedAt": "2026-11-26T00:29:19-03:00"
   },
-  "m636Status": "reserved-and-implementing",
-  "m636NextTask": "Implementar adaptador e regressões de Standby LP para os dois efeitos; verificar posição, equipe, duplicação de resolução e conservação de UIDs.",
+  "m636Status": "CI focused + engine validation green; PR #577 draft; scope released to auxiliary for review",
+  "m636NextTask": "Auxiliar: revisar e monitorar PR #577; manter draft; não integrar nem implantar sem autorização vigente, CI adequada e backup verificável.",
   "nextWorkWindowM636": "2026-11-25T22:30:00-03:00",
   "lastParallelCheckpointM636": "coordination/runs/work-20261125T2045Z-M636.json",
-  "m636LastActivityAt": "2026-11-25T23:47:18.761Z"
+  "m636LastActivityAt": "2026-11-26T00:29:19-03:00",
+  "currentWorkReservationM637": {
+    "runId": "work-20261126T002919-0300-M637",
+    "mission": "M637",
+    "owner": "Work principal",
+    "priority": "P1",
+    "state": "reserved-and-implementing",
+    "startedAt": "2026-11-26T00:29:19-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+    "branch": "feat/work-m637-tribute-lp-tag-adapter-20261126",
+    "branchHeadSha": null,
+    "pullRequest": null,
+    "reservedFiles": [
+      "src/tributeLPEffectsTagAdapter.ts",
+      "tests/tributeLPEffectsTagAdapter.test.cjs",
+      "docs/evidence/m637-tribute-lp-effects.json",
+      ".github/workflows/m637-tribute-lp-effects.yml"
+    ],
+    "scope": [
+      "src/tributeLPEffectsTagAdapter.ts",
+      "tests/tributeLPEffectsTagAdapter.test.cjs",
+      "docs/evidence/m637-tribute-lp-effects.json",
+      ".github/workflows/m637-tribute-lp-effects.yml"
+    ],
+    "conditionalHeadUpdate": true,
+    "scopeDescription": "Família de efeitos de Tributo com alteração de LP: Zolga (ganho de 2000 após Tribute Summon bem-sucedida usando a carta; LP do controlador no momento do Tributo) e Gravekeeper's Cannonholder (Tributar outro monstro Gravekeeper como custo para causar 700 de dano; sem limite por turno). Adapter isolado, sem resolver central, catálogo, certificação, inventário, comandos, banco ou produção.",
+    "conflictCheck": {
+      "checkedAt": "2026-11-26T00:29:19-03:00",
+      "sharedHead": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+      "matchingBranches": 0,
+      "matchingPullRequests": 0,
+      "matchingFiles": 0,
+      "cards": [
+        {
+          "name": "Zolga",
+          "passcode": "16268841",
+          "konamiDatabaseId": 5363,
+          "firstTcgRelease": "2003-12-01",
+          "certified": false,
+          "metadata": false,
+          "existingPR": false,
+          "existingBranch": false
+        },
+        {
+          "name": "Gravekeeper's Cannonholder",
+          "passcode": "99877698",
+          "konamiDatabaseId": 5516,
+          "firstTcgRelease": "2003-07-18",
+          "certified": false,
+          "metadata": false,
+          "existingPR": false,
+          "existingBranch": false
+        }
+      ],
+      "m629M630M631M632M633M634M635M636FilesDisjoint": true,
+      "m61CentralFilesExcluded": true,
+      "thirdPartyReservationsUntouched": true,
+      "result": "Nenhuma branch/PR/metadata/certificação para Zolga ou Gravekeeper's Cannonholder; quatro caminhos novos inexistentes no HEAD consultado."
+    },
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31,
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0
+    },
+    "production": {
+      "merge": false,
+      "deploy": false,
+      "backupVerified": false,
+      "liveDiscordValidation": false
+    },
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveWorkMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "nextTask": "Implementar adapter isolado e testes de Tributo/LP, incluindo controle vs. dono físico, Summon negado, custo não reembolsado, alvo face-down, múltiplas ativações e conservação de UIDs.",
+    "nextWindow": "2026-11-26T05:30:00-03:00"
+  },
+  "subtaskReservationM637": {
+    "runId": "work-20261126T002919-0300-M637",
+    "mission": "M637",
+    "owner": "Work principal",
+    "priority": "P1",
+    "state": "reserved-and-implementing",
+    "startedAt": "2026-11-26T00:29:19-03:00",
+    "sharedBranch": "feat/rea-engine-recovery-20261026",
+    "sharedHeadAtReservation": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+    "baseBranch": "feat/rea-engine-recovery-20261026",
+    "baseSha": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+    "branch": "feat/work-m637-tribute-lp-tag-adapter-20261126",
+    "branchHeadSha": null,
+    "pullRequest": null,
+    "reservedFiles": [
+      "src/tributeLPEffectsTagAdapter.ts",
+      "tests/tributeLPEffectsTagAdapter.test.cjs",
+      "docs/evidence/m637-tribute-lp-effects.json",
+      ".github/workflows/m637-tribute-lp-effects.yml"
+    ],
+    "scope": [
+      "src/tributeLPEffectsTagAdapter.ts",
+      "tests/tributeLPEffectsTagAdapter.test.cjs",
+      "docs/evidence/m637-tribute-lp-effects.json",
+      ".github/workflows/m637-tribute-lp-effects.yml"
+    ],
+    "conditionalHeadUpdate": true,
+    "scopeDescription": "Família de efeitos de Tributo com alteração de LP: Zolga (ganho de 2000 após Tribute Summon bem-sucedida usando a carta; LP do controlador no momento do Tributo) e Gravekeeper's Cannonholder (Tributar outro monstro Gravekeeper como custo para causar 700 de dano; sem limite por turno). Adapter isolado, sem resolver central, catálogo, certificação, inventário, comandos, banco ou produção.",
+    "conflictCheck": {
+      "checkedAt": "2026-11-26T00:29:19-03:00",
+      "sharedHead": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+      "matchingBranches": 0,
+      "matchingPullRequests": 0,
+      "matchingFiles": 0,
+      "cards": [
+        {
+          "name": "Zolga",
+          "passcode": "16268841",
+          "konamiDatabaseId": 5363,
+          "firstTcgRelease": "2003-12-01",
+          "certified": false,
+          "metadata": false,
+          "existingPR": false,
+          "existingBranch": false
+        },
+        {
+          "name": "Gravekeeper's Cannonholder",
+          "passcode": "99877698",
+          "konamiDatabaseId": 5516,
+          "firstTcgRelease": "2003-07-18",
+          "certified": false,
+          "metadata": false,
+          "existingPR": false,
+          "existingBranch": false
+        }
+      ],
+      "m629M630M631M632M633M634M635M636FilesDisjoint": true,
+      "m61CentralFilesExcluded": true,
+      "thirdPartyReservationsUntouched": true,
+      "result": "Nenhuma branch/PR/metadata/certificação para Zolga ou Gravekeeper's Cannonholder; quatro caminhos novos inexistentes no HEAD consultado."
+    },
+    "catalogAtStart": {
+      "engineV9Certified": 969,
+      "target": 1000,
+      "remaining": 31,
+      "newCertifications": 0,
+      "automaticCertifications": 0,
+      "inventoryGranted": 0
+    },
+    "production": {
+      "merge": false,
+      "deploy": false,
+      "backupVerified": false,
+      "liveDiscordValidation": false
+    },
+    "effectiveWorkMinutes": 0,
+    "targetEffectiveWorkMinutes": 60,
+    "targetMet": false,
+    "ciWaitExcluded": true,
+    "nextTask": "Implementar adapter isolado e testes de Tributo/LP, incluindo controle vs. dono físico, Summon negado, custo não reembolsado, alvo face-down, múltiplas ativações e conservação de UIDs.",
+    "nextWindow": "2026-11-26T05:30:00-03:00"
+  },
+  "m637RunId": "work-20261126T002919-0300-M637",
+  "m637Status": "reserved-and-implementing",
+  "m637Priority": "Família de efeitos de Tributo com alteração de LP: Zolga (ganho de 2000 após Tribute Summon bem-sucedida usando a carta; LP do controlador no momento do Tributo) e Gravekeeper's Cannonholder (Tributar outro monstro Gravekeeper como custo para causar 700 de dano; sem limite por turno). Adapter isolado, sem resolver central, catálogo, certificação, inventário, comandos, banco ou produção.",
+  "m637NextTask": "Implementar adapter isolado e testes de Tributo/LP, incluindo controle vs. dono físico, Summon negado, custo não reembolsado, alvo face-down, múltiplas ativações e conservação de UIDs.",
+  "m637CatalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "m637ConflictCheck": {
+    "checkedAt": "2026-11-26T00:29:19-03:00",
+    "sharedHead": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+    "matchingBranches": 0,
+    "matchingPullRequests": 0,
+    "matchingFiles": 0,
+    "cards": [
+      {
+        "name": "Zolga",
+        "passcode": "16268841",
+        "konamiDatabaseId": 5363,
+        "firstTcgRelease": "2003-12-01",
+        "certified": false,
+        "metadata": false,
+        "existingPR": false,
+        "existingBranch": false
+      },
+      {
+        "name": "Gravekeeper's Cannonholder",
+        "passcode": "99877698",
+        "konamiDatabaseId": 5516,
+        "firstTcgRelease": "2003-07-18",
+        "certified": false,
+        "metadata": false,
+        "existingPR": false,
+        "existingBranch": false
+      }
+    ],
+    "m629M630M631M632M633M634M635M636FilesDisjoint": true,
+    "m61CentralFilesExcluded": true,
+    "thirdPartyReservationsUntouched": true,
+    "result": "Nenhuma branch/PR/metadata/certificação para Zolga ou Gravekeeper's Cannonholder; quatro caminhos novos inexistentes no HEAD consultado."
+  },
+  "m637HandoffRequest": {
+    "pr": 17,
+    "commentId": 7181835623,
+    "requestedAt": "2026-11-26T00:29:19-03:00",
+    "state": "awaiting explicit owner response; central files remain blocked"
+  },
+  "m637LastActivityAt": "2026-11-26T00:29:19-03:00",
+  "nextWorkWindowM637": "2026-11-26T05:30:00-03:00",
+  "lastParallelCheckpointM637": "coordination/runs/work-20261126T002919-0300-M637.json",
+  "sharedHeadBeforeM637Claim": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+  "expectedHeadForM637CoordinationCommit": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+  "m636Release": {
+    "at": "2026-11-26T00:29:19-03:00",
+    "branch": "feat/work-m636-standby-lp-tag-adapter-20261125",
+    "headSha": "7a1a94418d522332d00293a47c2acbebc416da52",
+    "pr": 577,
+    "ci": "success",
+    "scope": [
+      "src/standbyLPGainTagAdapter.ts",
+      "tests/standbyLPGainTagAdapter.test.cjs",
+      "docs/evidence/m636-standby-lp-tag-adapter.json",
+      ".github/workflows/m636-standby-lp-tag-adapter.yml"
+    ],
+    "to": "Auxiliary"
+  }
 }

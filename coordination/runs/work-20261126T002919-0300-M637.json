@@ -1,0 +1,95 @@
+{
+  "format": 1,
+  "runId": "work-20261126T002919-0300-M637",
+  "mission": "M637",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T00:29:19-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+  "branch": "feat/work-m637-tribute-lp-tag-adapter-20261126",
+  "baseBranch": "feat/rea-engine-recovery-20261026",
+  "baseSha": "34508a6d0c9f4aef57b51970fb482f399f7be1cf",
+  "branchHeadSha": null,
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/tributeLPEffectsTagAdapter.ts",
+    "tests/tributeLPEffectsTagAdapter.test.cjs",
+    "docs/evidence/m637-tribute-lp-effects.json",
+    ".github/workflows/m637-tribute-lp-effects.yml"
+  ],
+  "scope": "Família de efeitos de Tributo com alteração de LP: Zolga (ganho de 2000 após Tribute Summon bem-sucedida usando a carta; LP do controlador no momento do Tributo) e Gravekeeper's Cannonholder (Tributar outro monstro Gravekeeper como custo para causar 700 de dano; sem limite por turno). Adapter isolado, sem resolver central, catálogo, certificação, inventário, comandos, banco ou produção.",
+  "cards": [
+    {
+      "id": "16268841",
+      "name": "Zolga",
+      "konamiId": 5363,
+      "officialText": "If a monster is Tribute Summoned by Tributing this card: Gain 2000 LP.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5363&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-12-01",
+      "ruling": "The controller of Zolga when it was Tributed gains the LP; a negated Tribute Summon does not trigger the gain.",
+      "certifiedAtStart": false
+    },
+    {
+      "id": "99877698",
+      "name": "Gravekeeper's Cannonholder",
+      "konamiId": 5516,
+      "officialText": "You can Tribute 1 \"Gravekeeper's\" monster, except \"Gravekeeper's Cannonholder\"; inflict 700 damage to your opponent.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5516&ope=2&request_locale=en",
+      "firstTcgRelease": "2003-07-18",
+      "ruling": "The Tribute is a cost, is not a target, may be face-down when its identity is known to the controller, and is not refunded if the effect is negated.",
+      "certifiedAtStart": false
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/tributeLPEffectsTagAdapter.ts",
+      "tests/tributeLPEffectsTagAdapter.test.cjs",
+      "docs/evidence/m637-tribute-lp-effects.json",
+      ".github/workflows/m637-tribute-lp-effects.yml"
+    ],
+    "scope": "Isolated TagDuel adapter and focused regressions; no central resolver integration, catalog admission, certification, release allowlist, database or Discord commands."
+  },
+  "handoff": {
+    "pr": 17,
+    "commentId": 7181835623,
+    "state": "requested; awaiting explicit owner response",
+    "centralFilesBlocked": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 0,
+    "focusedTestResult": "pending",
+    "typecheck": "pending",
+    "build": "pending",
+    "evidenceValidation": "pending",
+    "adapterBehaviorVerifiedCards": 0,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Implementar adapter isolado e testes de Tributo/LP, incluindo controle vs. dono físico, Summon negado, custo não reembolsado, alvo face-down, múltiplas ativações e conservação de UIDs.",
+  "nextWindow": "2026-11-26T05:30:00-03:00"
+}
