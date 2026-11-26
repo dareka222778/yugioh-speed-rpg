@@ -41,7 +41,7 @@
   "tests": {
     "file": "tests/revealAndAttackLockTagAdapter.test.cjs",
     "command": "node --test tests/revealAndAttackLockTagAdapter.test.cjs",
-    "scenarios": 16,
+    "scenarios": 17,
     "covered": [
       "catalogue remains unchanged",
       "team-wide reveal and attack lock",
@@ -54,7 +54,8 @@
       "negation",
       "duplicate activation",
       "zone and deck/Extra limits",
-      "six-card End Phase ownership"
+      "six-card End Phase ownership",
+      "7-card hand remains intact until the engine's End Phase discard"
     ]
   },
   "certification": {
