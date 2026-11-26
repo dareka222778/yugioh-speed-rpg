@@ -5,9 +5,10 @@ import {RULES_PROFILE,rulesFor} from './rulesProfile';
 import {getDuelCard} from './effectRegistry';
 import {bindTarget,synchronizeCardLifetimes,targetBindingValid,type TargetBinding} from './cardLifetime';
 import {discardBackrow} from './classicEffects';
+import {getMonsterEffect} from './monsterEffects';
 export const FINAL_ATTACK_ORDERS_ID='52503575';
 export const LIGHT_OF_INTERVENTION_ID='62867251';
-export type PositionPolicyEffect='final-attack-orders'|'light-of-intervention';
+export type PositionPolicyEffect='final-attack-orders'|'light-of-intervention'|'royal-command';
 export type PositionPolicyLookup=(id:string)=>{kind:'trap';effect:PositionPolicyEffect}|undefined;
 type Team=0|1;type Seat=0|1|2|3;type PositionMode='attack'|'defense'|'flip'|'set';
 type Plan={activationId:string;effect:PositionPolicyEffect;sourceUid:string;sourceId:string;sourceOwnerSeat:Seat;controllerTeam:Team;actorSeat:Seat;turn:number;sourceBinding:TargetBinding};
@@ -19,6 +20,7 @@ export type PositionChangeResult={uid:string;faceUp:boolean;position:'atk'|'def'
 const defaultLookup:PositionPolicyLookup=(id)=>{
  if(id===FINAL_ATTACK_ORDERS_ID)return {kind:'trap',effect:'final-attack-orders'};
  if(id===LIGHT_OF_INTERVENTION_ID)return {kind:'trap',effect:'light-of-intervention'};
+ if(id==='33950246')return {kind:'trap',effect:'royal-command'};
  return undefined;
 };
 function physicalSeat(uid:string):Seat|null{const match=/^m([0-3]):/.exec(uid);return match?Number(match[1]) as Seat:null;}
@@ -140,6 +142,10 @@ export function createPositionPolicyAdapter(lookup:PositionPolicyLookup=defaultL
   if(mode==='flip')return !monster.faceUp;if(!monster.faceUp)return false;
   if(active.has('final-attack-orders'))return false;if(mode==='set'&&active.has('light-of-intervention'))return false;return true;
  }
+ function flipEffectAllowed(session:PositionPolicySession,uid:string):boolean{
+  assertSession(session,lookup);const found=findMonster(session.duel,uid);if(!found)return true;
+  return !activeEffects(session.duel,lookup).has('royal-command')||getMonsterEffect(found.monster.id)?.trigger!=='flip';
+ }
  function canSetMonsterFaceDown(session:PositionPolicySession,uid:string):boolean{
   assertSession(session,lookup);const found=findMonster(session.duel,uid);if(!found||!found.monster.faceUp)return false;
   const active=activeEffects(session.duel,lookup);return !active.has('final-attack-orders')&&!active.has('light-of-intervention');
@@ -172,5 +178,5 @@ export function createPositionPolicyAdapter(lookup:PositionPolicyLookup=defaultL
   assertPositionPolicyRules(working,lookup);assertTagDuel(working);session.duel=working;
   const current=findMonster(working,uid)!.monster;return {uid,faceUp:current.faceUp,position:current.position,turn:working.core.turn};
  }
- return {createSession,prepareActivation,resolveActivation,applyContinuousPolicies,removeContinuousTrap,canChangeBattlePosition,canSetMonsterFaceDown,resolveSetMonster,changeMonsterPosition};
+ return {createSession,prepareActivation,resolveActivation,applyContinuousPolicies,removeContinuousTrap,canChangeBattlePosition,canSetMonsterFaceDown,flipEffectAllowed,resolveSetMonster,changeMonsterPosition};
 }
