@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "runId": "work-20261126T014700-0300-M641",
+  "mission": "M641",
+  "owner": "Work principal",
+  "priority": "P1",
+  "priorityRequestedBy": "User",
+  "status": "reserved-and-implementing",
+  "startedAt": "2026-11-26T01:47:00-03:00",
+  "endedAt": null,
+  "repository": "dareka222778/yugioh-speed-rpg",
+  "sharedBranch": "feat/rea-engine-recovery-20261026",
+  "sharedHeadAtReservation": "2675597cf6ecf4b66ef6b4e6b8d93b7852c618ba",
+  "branch": "feat/work-m641-mind-haxorz-private-inspection-20261126",
+  "baseBranch": "feat/work-m640-inexperienced-spy-tag-adapter-20261126",
+  "baseSha": "b5b996e86f47be6183dd25475b5924d966b6fc39",
+  "branchHeadSha": "0acca71dda18d72ddde9406b6149caa7c84ca7c3",
+  "pullRequest": null,
+  "reservedFiles": [
+    "src/mindHaxorzTagAdapter.ts",
+    "tests/mindHaxorzTagAdapter.test.cjs",
+    "docs/evidence/m641-mind-haxorz.json",
+    ".github/workflows/m641-mind-haxorz-private-inspection.yml"
+  ],
+  "scope": "Adapter TagDuel isolado para Mind Haxorz: pagamento de 500 PV na ativação, leitura de uma das mãos físicas adversárias e de todas as cartas baixadas no campo compartilhado adversário, com recibo privado restrito ao assento ativador. Sem resolver central, catálogo, comandos Discord, banco ou produção.",
+  "cards": [
+    {
+      "id": "75392615",
+      "name": "Mind Haxorz",
+      "konamiId": 6221,
+      "officialText": "Pay 500 Life Points. Look at your opponent's hand and all Set cards on their side of the field.",
+      "officialSource": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6221&ope=2&request_locale=en",
+      "firstOCGRelease": "2004-08-05",
+      "firstTCGRelease": "2004-12-01",
+      "certifiedAtStart": false
+    }
+  ],
+  "implementation": {
+    "files": [
+      "src/mindHaxorzTagAdapter.ts",
+      "tests/mindHaxorzTagAdapter.test.cjs",
+      "docs/evidence/m641-mind-haxorz.json",
+      ".github/workflows/m641-mind-haxorz-private-inspection.yml"
+    ],
+    "scope": "Ativação de Armadilha previamente baixada, custo de PV imediato, resolução negada, término por PV zero, inspeção privada de mão/campo, idempotência, conservação de UID e regressões de privacidade."
+  },
+  "handoff": {
+    "targetPR": 17,
+    "status": "M637 handoff to central resolver remains awaiting explicit release; M641 does not touch blocked files",
+    "blockedFiles": [
+      "src/monsterEffects.ts",
+      "src/duelEngineCurrent.ts"
+    ],
+    "thisRunDoesNotTouchBlockedFiles": true
+  },
+  "catalogAtStart": {
+    "engineV9Certified": 969,
+    "target": 1000,
+    "remaining": 31,
+    "newCertifications": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0
+  },
+  "production": {
+    "merge": false,
+    "deploy": false,
+    "backupVerified": false,
+    "liveDiscordValidation": false
+  },
+  "verification": {
+    "focusedScenarios": 12,
+    "focusedTestResult": "pending CI",
+    "typecheck": "pending CI",
+    "build": "pending CI",
+    "evidenceValidation": "pending CI",
+    "adapterBehaviorVerifiedCards": 1,
+    "behaviorCertifiedCards": 0,
+    "automaticCertifications": 0,
+    "inventoryGranted": 0,
+    "liveDiscordValidation": false
+  },
+  "effectiveWorkMinutes": 0,
+  "targetEffectiveWorkMinutes": 60,
+  "targetMet": false,
+  "ciWaitExcluded": true,
+  "nextTask": "Validar M641 na CI; depois avaliar uma próxima carta de inspeção/controle de mão sem sobrepor M635/M637/M638/M639/M640 nem tocar no resolver central bloqueado.",
+  "nextWindow": "2026-11-26T05:30:00-03:00",
+  "scopeReleasedToAuxiliary": []
+}
