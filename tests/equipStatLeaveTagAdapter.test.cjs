@@ -153,7 +153,7 @@ test('a hand Equip cannot activate when all three shared Spell/Trap Zones are oc
 
 test('a previously set Equip can activate even when the shared backrow is full',()=>{
  const f=setup({sourceOwnerSeat:partnerSeat(0),sourceInBackrow:true,setTurn:0});
- for(let i=0;i<2;i++)placeBackrow(f.duel,f.activeSeat,f.team,SOURCE_FIXTURE,0);
+ for(let i=0;i<2;i++)placeBackrow(f.duel,f.activeSeat,f.team,FIELD,0);
  assert.equal(f.duel.core.players[f.team].backrow.length,3);
  assert.equal(axeOfDespairActions(f.duel,lookup,{cardId:SOURCE_FIXTURE}).length,1);
 });
@@ -324,10 +324,13 @@ test('a set Equip controlled by a team member returns to the physical owner rese
  const f=setup({sourceOwnerSeat:partnerSeat(0),sourceInBackrow:true,setTurn:0});
  const active=resolveEquipStat(activateAxe(f),'m652-axe').session;
  const released=releaseEquipStat(active,'m652-axe').session;
+ const tributeUid=placeMonster(released.duel,released.duel.active[f.team],f.team,TARGET_B,true);
  const before=privateZone(released.duel,f.ownerSeat,'deck').length;
- const returned=resolveAxeOfDespairGraveTrigger(released,'m652-axe',undefined);
- assert.equal(returned.result.status,'declined');
- assert.equal(privateZone(returned.session.duel,f.ownerSeat,'deck').length,before);
+ const returned=resolveAxeOfDespairGraveTrigger(released,'m652-axe',tributeUid);
+ assert.equal(returned.result.status,'returned-to-deck');
+ assert.equal(privateZone(returned.session.duel,f.ownerSeat,'deck').length,before+1);
+ assert.equal(privateZone(returned.session.duel,f.ownerSeat,'deck')[0].uid,f.sourceUid);
+ assert.ok(graveHas(returned.session.duel,f.team,tributeUid));
 });
 
 test('the Field Zone remains separate from the three shared Spell/Trap Zones',()=>{
