@@ -1,8 +1,8 @@
 {
   "format": 1,
   "sharedBranch": "feat/rea-engine-recovery-20261026",
-  "observedHead": "cfc108c369c9c9d7753ffea6f3f1fce588a663cb",
-  "updatedAt": "2026-11-26T00:56:25-03:00",
+  "observedHead": "3814c94da7c57f0ccd2548211365eef89d29faa8",
+  "updatedAt": "2026-11-26T01:13:45-03:00",
   "activeReservations": [
     {
       "runId": "work-20261125T203259-0300-M635",
@@ -41,6 +41,20 @@
         ".github/workflows/m638-lp-event-tag-adapter.yml"
       ],
       "conditionalHeadUpdate": true
+    },
+    {
+      "runId": "work-20261126T011345-0300-M639",
+      "mission": "M639",
+      "branch": "feat/work-m639-reveal-attack-lock-tag-adapter-20261126",
+      "state": "reserved-and-implementing",
+      "priority": "P1",
+      "conditionalHeadUpdate": true,
+      "reservedFiles": [
+        "src/revealAndAttackLockTagAdapter.ts",
+        "tests/revealAndAttackLockTagAdapter.test.cjs",
+        "docs/evidence/m639-reveal-attack-lock.json",
+        ".github/workflows/m639-reveal-attack-lock.yml"
+      ]
     }
   ],
   "handoffRequests": [
@@ -55,5 +69,5 @@
       ]
     }
   ],
-  "notes": "M635, M637 e M638 preservados como reservas ativas até checkpoint/liberação explícita. M638 usa quatro caminhos novos, sem colisão com os escopos registrados."
+  "notes": "M635, M637 e M638 preservados como reservas ativas. M639 usa quatro caminhos independentes para Swords of Revealing Light/Dark-Piercing Light; não toca nos arquivos reservados nem nos arquivos centrais bloqueados por handoff."
 }
