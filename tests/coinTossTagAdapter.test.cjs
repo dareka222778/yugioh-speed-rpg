@@ -90,7 +90,8 @@ test('Blowback Dragon can select the independent Field Zone',()=>{
  const rolled=adapter.resolveCoinToss(session,'blowback-field-1');
  assert.ok(rolled.targetOptions.includes(fieldCard.uid));
  adapter.selectTarget(session,'blowback-field-1',fieldCard.uid);
- assert.equal(team.field,null);assert.ok(team.grave.some(card=>card.uid===fieldCard.uid));
+ const liveTeam=session.duel.core.players[0];
+ assert.equal(liveTeam.field,null);assert.ok(liveTeam.grave.some(card=>card.uid===fieldCard.uid));
 });
 
 test('coin toss uses exactly three persisted HMAC draws and is deterministic for the same seed',()=>{
