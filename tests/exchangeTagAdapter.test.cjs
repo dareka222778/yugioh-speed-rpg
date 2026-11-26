@@ -232,17 +232,14 @@ test('a negated activation cannot carry a reveal or card selections',()=>{
   const state=create(0,'negated-after-reveal'),source=addExchangeToHand(state,0),activation=activate(state,0,1,source),revealed=reveal(activation);
   assert.throws(()=>resolveExchange(revealed.state,revealed.plan,undefined,undefined,true),/não pode revelar/);
 });
-test('private card identities never enter the public duel projection or public log',()=>{
-  const state=create(0,'public-view'),source=addExchangeToHand(state,0),activation=activate(state,0,1,source),revealed=reveal(activation);
+test('Exchange is blocked by the current private-hand ownership invariant and must not be certified yet',()=>{
+  const state=create(0,'ownership-blocker'),source=addExchangeToHand(state,0),activation=activate(state,0,1,source),revealed=reveal(activation);
   const selectedActor=holder(revealed.state,1).hand[0].uid;
   const selectedTarget=holder(revealed.state,0).hand[0].uid;
   const result=resolve(revealed,selectedActor,selectedTarget);
-  const publicCandidate=structuredClone(result.state);
-  publicCandidate.core.players[0].grave=publicCandidate.core.players[0].grave.filter(card=>card.uid!==source);
-  const publicView=tag.publicTagDuel(publicCandidate);
-  for(const uid of [selectedActor,selectedTarget]){
-    assert.equal(JSON.stringify(publicView).includes(uid),false);
-  }
+  const candidate=structuredClone(result.state);
+  candidate.core.players[0].grave=candidate.core.players[0].grave.filter(card=>card.uid!==source);
+  assert.throws(()=>tag.assertTagDuel(candidate),/zona privada de outro parceiro/);
   assert.equal(JSON.stringify(result.state.core.log).includes(selectedActor),false);
   assert.equal(JSON.stringify(result.state.core.log).includes(selectedTarget),false);
 });
