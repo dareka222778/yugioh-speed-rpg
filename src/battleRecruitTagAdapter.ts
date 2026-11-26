@@ -115,7 +115,7 @@ function candidateCard(duel:TagDuel,team:BattleRecruitTeam,uid:string){
  const ref=duel.core.players[team].deck.find(card=>card.uid===uid);
  if(!ref)return undefined;
  const info=engineCard(ref.id),presented=getDuelCard(ref.id);
- if(!info||presented?.kind!=='monster'||info.kind!=='monster'||info.ritual||info.fusion)return undefined;
+ if(!info||presented?.kind!=='monster'||info.kind!=='monster'||info.fusion)return undefined;
  return {ref,info};
 }
 function finishByLifePoints(core:DuelState,winnerTeam:BattleRecruitTeam|null):void{
