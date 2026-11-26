@@ -130,6 +130,10 @@ function locateSource(
   const field=duel.core.players[team].backrow.find(card=>
     card.uid===sourceUid&&card.id===THE_FORCEFUL_SENTRY_ID
   );
+  const opposingField=duel.core.players[1-team].backrow.find(card=>
+    card.uid===sourceUid&&card.id===THE_FORCEFUL_SENTRY_ID
+  );
+  if(opposingField)throw new Error('The Forceful Sentry preparada pertence à equipe adversária.');
   if(hand&&field)throw new Error('The Forceful Sentry aparece em duas zonas.');
   if(hand)return {location:'hand',ownerSeat:physicalSeat(sourceUid),setTurn:null};
   if(field){

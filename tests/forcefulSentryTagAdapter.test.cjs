@@ -154,14 +154,14 @@ test('only the activating physical seat receives the inspected hand; a selected 
   assert.equal(holder(result.state,3).deck.some(card=>card.uid===selected.uid),true);
   assert.ok(result.state.core.random.counter>counterBefore,'Main Deck return must use persisted duel RNG');
   assertConserved(result.state,before);
-  assert.deepEqual(hands(result.state),beforeHands.filter(uid=>uid!==selected.uid));
+  assert.deepEqual(hands(result.state),beforeHands.filter(uid=>uid!==source&&uid!==selected.uid));
   assert.equal(JSON.stringify(result.state.core.log),beforeLog);
   assert.equal(Object.keys(result).includes('privateReceipt'),false);
   assertRules(result.state);
 });
 
 test('any card type may be selected, including a Spell; the card returns to the physical owner Main Deck',()=>{
-  const state=create(0,'spell-return');
+  const state=create(0,'spell-return',{}, {3:[SPELLS[0],...NORMALS.slice(0,19)]});
   const source=addSentryToBackrow(state,0);
   const spell=moveFromDeckToHand(state,3,SPELLS[0]);
   const activation=activate(state,0,3,source);
@@ -286,8 +286,9 @@ test('the private receipt is transient, non-enumerable, and never added to publi
   const activation=activate(state,0,1,source);
   const result=resolveForcefulSentry(activation.state,activation.plan,selected.uid);
   assert.equal(Object.prototype.propertyIsEnumerable.call(result,'privateReceipt'),false);
-  assert.equal(JSON.stringify(result).includes(selected.id),false);
-  assert.equal(JSON.stringify(result).includes(selected.uid),false);
+  const publicView=tag.publicTagDuel(result.state);
+  assert.equal(JSON.stringify(publicView).includes(selected.id),false);
+  assert.equal(JSON.stringify(publicView).includes(selected.uid),false);
   assert.equal(JSON.stringify(result.state.core.log).includes(selected.id),false);
   assert.equal(JSON.stringify(result.state.core.log).includes(selected.uid),false);
 });
@@ -296,8 +297,8 @@ test('activation IDs are single-use and cannot be registered twice',()=>{
   const state=create(0,'activation-id');
   const source=addSentryToHand(state,0);
   const activationId='m643:fixed-activation';
-  activate(state,0,1,source,activationId);
-  assert.throws(()=>activate(state,0,1,source,activationId),/já foi registrada/);
+  const activation=activate(state,0,1,source,activationId);
+  assert.throws(()=>activate(activation.state,0,1,source,activationId),/já foi registrada/);
 });
 
 test('the adapter preserves the original input and conserves every physical UID across resolution',()=>{
