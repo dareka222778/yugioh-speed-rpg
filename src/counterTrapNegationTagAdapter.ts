@@ -248,6 +248,7 @@ export function counterTrapActions(
   const response=responseFor(options.effect,team,core,lookup);
   if(!response)return [];
   const cardId=sourceIdFor(options.effect,options.cardId);
+  if(lookup(cardId)?.kind!=='trap')return [];
   const sources=core.players[team].backrow.filter(card=>
     card.id===cardId&&!card.faceUp&&Number.isSafeInteger(card.setTurn)&&card.setTurn<core.turn
   );
