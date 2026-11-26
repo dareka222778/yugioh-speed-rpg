@@ -20,7 +20,7 @@ function unique(kind,count){
   seen.add(name);return true;
  }).slice(0,count);
 }
-const monsterIds=unique('monster',8),spellIds=unique('spell',6),trapIds=unique('trap',6),fieldSpellIds=enabledCardIds.filter(id=>engineCard(id)?.field).slice(0,1);
+const monsterIds=unique('monster',8),trapIds=unique('trap',6),fieldSpellId=enabledCardIds.find(id=>engineCard(id)?.field),baseSpellIds=unique('spell',6),spellIds=baseSpellIds.includes(fieldSpellId)?baseSpellIds:[...baseSpellIds.slice(0,5),fieldSpellId],fieldSpellIds=[fieldSpellId];
 assert.equal(monsterIds.length,8);assert.equal(spellIds.length,6);assert.equal(trapIds.length,6);assert.equal(fieldSpellIds.length,1);
 const deck=[...monsterIds,...spellIds,...trapIds];
 assert.equal(deck.length,20);
