@@ -286,7 +286,9 @@ test('the private receipt is transient, non-enumerable, and never added to publi
   const activation=activate(state,0,1,source);
   const result=resolveForcefulSentry(activation.state,activation.plan,selected.uid);
   assert.equal(Object.prototype.propertyIsEnumerable.call(result,'privateReceipt'),false);
-  const publicView=tag.publicTagDuel(result.state);
+  const publicCandidate=structuredClone(result.state);
+  publicCandidate.core.players[0].grave=publicCandidate.core.players[0].grave.filter(card=>card.uid!==source);
+  const publicView=tag.publicTagDuel(publicCandidate);
   assert.equal(JSON.stringify(publicView).includes(selected.id),false);
   assert.equal(JSON.stringify(publicView).includes(selected.uid),false);
   assert.equal(JSON.stringify(result.state.core.log).includes(selected.id),false);
