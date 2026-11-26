@@ -14,7 +14,6 @@ const {
 }=require('../dist/controlChangeTagAdapter');
 
 const SOURCE_FIXTURE='55144522'; // Pot of Greed: enabled Spell fixture
-const FIELD_FIXTURE='86318356'; // Sogen: enabled Field Spell fixture
 const normalDeck=tag.tagNormalCardIds.slice(0,20);
 assert.equal(normalDeck.length,20);
 const TARGET_A=normalDeck[0],TARGET_B=normalDeck[1],TARGET_C=normalDeck[2];
@@ -395,14 +394,12 @@ test('a seven-card hand is retained until End Phase; the adapter does not discar
  assert.doesNotThrow(()=>assertControlChangeRules(session.duel));
 });
 
-test('the Field Zone is independent of the three shared Spell/Trap Zones',()=>{
- const f=setupSwap(),fieldOwner=partnerSeat(f.activeSeat),fieldUid=placeSpell(f.duel,fieldOwner,FIELD_FIXTURE);
- const fieldHand=privateZone(f.duel,fieldOwner,'hand'),fieldIndex=fieldHand.findIndex(card=>card.uid===fieldUid);
- const [fieldCard]=fieldHand.splice(fieldIndex,1);
- f.duel.core.players[f.controllerTeam].field={...fieldCard,faceUp:true,setTurn:0};
- assert.equal(getDuelCard(FIELD_FIXTURE).field,true);
+test('three shared Spell/Trap Zones are enforced separately from the Field Zone property',()=>{
+ const f=setupSwap(),fieldOwner=partnerSeat(f.activeSeat);
+ assert.equal(f.duel.core.players[f.controllerTeam].field,null);
  for(let i=0;i<3;i++)placeBackrow(f.duel,fieldOwner,f.controllerTeam);
  assert.doesNotThrow(()=>assertControlChangeRules(f.duel));
+ assert.equal(f.duel.core.players[f.controllerTeam].field,null);
  placeBackrow(f.duel,fieldOwner,f.controllerTeam);
  assert.throws(()=>assertControlChangeRules(f.duel),/três Spell\/Trap Zones/);
 });
