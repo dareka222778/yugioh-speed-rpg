@@ -43,14 +43,16 @@ function partnerSeat(seat){return (seat+2)%4;}
 function placeSpell(duel,ownerSeat,id=SOURCE_FIXTURE){
  const hand=privateZone(duel,ownerSeat,'hand'),deck=privateZone(duel,ownerSeat,'deck');
  if(!hand.length){const drawn=deck.shift();assert.ok(drawn,'fixture needs another card');hand.push(drawn);}
- const [card]=hand.splice(0,1);
+ const card=hand[0];
  assert.ok(card,'fixture needs a physical card in hand for seat '+ownerSeat);
  card.id=id;
  return card.uid;
 }
 function placeBackrow(duel,ownerSeat,controllerTeam,id=SOURCE_FIXTURE){
  const uid=placeSpell(duel,ownerSeat,id);
- duel.core.players[controllerTeam].backrow.push({uid,id,faceUp:false,setTurn:0});
+ const hand=privateZone(duel,ownerSeat,'hand'),index=hand.findIndex(card=>card.uid===uid);
+ const [card]=hand.splice(index,1);
+ duel.core.players[controllerTeam].backrow.push({...card,faceUp:false,setTurn:0});
  return uid;
 }
 function placeMonster(duel,ownerSeat,controllerTeam,id=TARGET_A,faceUp=true){
@@ -384,7 +386,7 @@ test('all four opening-seat rotations preserve ownership and control-change inva
 test('a seven-card hand is retained until End Phase; the adapter does not discard early',()=>{
  const f=setupSnatch();
  const hand=privateZone(f.duel,f.activeSeat,'hand'),deck=privateZone(f.duel,f.activeSeat,'deck');
- hand.push(deck.pop(),deck.pop(),deck.pop(),deck.pop());
+ hand.push(deck.pop(),deck.pop(),deck.pop());
  const before=hand.length;
  const session=activateSnatch(f);
  assert.equal(before,7);
@@ -394,7 +396,9 @@ test('a seven-card hand is retained until End Phase; the adapter does not discar
 
 test('the Field Zone is independent of the three shared Spell/Trap Zones',()=>{
  const f=setupSwap(),fieldUid=placeSpell(f.duel,f.activeSeat);
- f.duel.core.players[f.controllerTeam].field={uid:fieldUid,id:SOURCE_FIXTURE,faceUp:true,setTurn:0};
+ const fieldHand=privateZone(f.duel,f.activeSeat,'hand'),fieldIndex=fieldHand.findIndex(card=>card.uid===fieldUid);
+ const [fieldCard]=fieldHand.splice(fieldIndex,1);
+ f.duel.core.players[f.controllerTeam].field={...fieldCard,faceUp:true,setTurn:0};
  for(let i=0;i<3;i++)placeBackrow(f.duel,f.activeSeat,f.controllerTeam);
  assert.doesNotThrow(()=>assertControlChangeRules(f.duel));
  placeBackrow(f.duel,f.activeSeat,f.controllerTeam);
