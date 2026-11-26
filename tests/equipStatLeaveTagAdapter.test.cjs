@@ -309,6 +309,20 @@ test('Black Pendant also triggers after a negated activation was sent from the f
  assert.equal(trigger.result.applied,true);
 });
 
+test('Black Pendant triggers when a chained removal sends it to the Graveyard before Equip resolution',()=>{
+ const f=setup(),pending=activatePendant(f);
+ const field=pending.duel.core.players[f.team].backrow;
+ const index=field.findIndex(card=>card.uid===f.sourceUid);
+ const [source]=field.splice(index,1);
+ pending.duel.core.players[f.team].grave.push({uid:source.uid,id:source.id});
+ synchronizeCardLifetimes(pending.duel.core);
+ const resolved=resolveEquipStat(pending,'m652-pendant');
+ assert.equal(resolved.result.sourceSentToGrave,true);
+ const trigger=resolveBlackPendantGraveTrigger(resolved.session,'m652-pendant');
+ assert.equal(trigger.result.damage,500);
+ assert.equal(trigger.result.applied,true);
+});
+
 test('Black Pendant damage that reaches zero LP ends the duel for the owner team',()=>{
  const f=setup(),active=resolveEquipStat(activatePendant(f),'m652-pendant').session;
  const released=releaseEquipStat(active,'m652-pendant').session;
