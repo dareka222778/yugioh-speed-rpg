@@ -248,8 +248,8 @@ test('a forged target or stat cannot alter the stored activation plan',()=>{
 test('a duplicate activation identifier is rejected',()=>{
   const state=create(0,'duplicate-activation'),monster=addMonster(state,0),source=addSourceToHand(state,0,RUSH_RECKLESSLY_ID);
   const id='m648:duplicate:'+source;
-  activate(state,0,source,monster.uid,id);
-  assert.throws(()=>activate(state,0,source,monster.uid,id),/já foi registrada/);
+  const first=activate(state,0,source,monster.uid,id);
+  assert.throws(()=>activate(first.state,0,source,monster.uid,id),/já foi registrada/);
 });
 test('the same resolution cannot apply twice',()=>{
   const state=create(0,'duplicate-resolution'),monster=addMonster(state,0),source=addSourceToHand(state,0,RUSH_RECKLESSLY_ID);
