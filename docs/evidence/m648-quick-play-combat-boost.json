@@ -55,9 +55,10 @@
     "adapterBehaviorVerifiedCards": 2,
     "behaviorCertifiedCards": 0,
     "automaticCertifications": 0,
-    "playableCatalogAdmission": false,
+    "playableCatalogAdmission": true,
     "discordGateway": false,
     "merge": false,
-    "deploy": false
+    "deploy": false,
+    "existingCertifiedCards": 2
   }
 }

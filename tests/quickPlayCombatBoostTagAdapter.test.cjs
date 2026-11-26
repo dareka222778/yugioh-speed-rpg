@@ -2,7 +2,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const tag=require('../dist/tagDuel.js');
-const {getPlayableCard,enabledCardIds}=require('../dist/effectRegistry.js');
+const {getPlayableCard,getCardStatus,enabledCardIds}=require('../dist/effectRegistry.js');
 const {rulesFor}=require('../dist/rulesProfile.js');
 const {atk,def}=require('../dist/duelEngine.js');
 const {synchronizeCardLifetimes}=require('../dist/cardLifetime.js');
@@ -96,11 +96,14 @@ function responseWindow(state,team){
   state.core.pending={kind:'spell',actor:1-team,card:'m'+(1-team)+':m648-response',id:NORMALS[0]};
 }
 
-test('both Quick-Play cards remain outside the playable catalogue and certification allowlist',()=>{
-  assert.equal(getPlayableCard(RUSH_RECKLESSLY_ID),undefined);
-  assert.equal(getPlayableCard(RELIABLE_GUARDIAN_ID),undefined);
-  assert.equal(enabledCardIds.includes(RUSH_RECKLESSLY_ID),false);
-  assert.equal(enabledCardIds.includes(RELIABLE_GUARDIAN_ID),false);
+test('both Quick-Play cards are already certified and this adapter does not count them as new',()=>{
+  for(const id of [RUSH_RECKLESSLY_ID,RELIABLE_GUARDIAN_ID]){
+    const card=getPlayableCard(id);
+    assert.ok(card,'existing catalog entry: '+id);
+    assert.equal(card.kind,'spell');
+    assert.equal(getCardStatus(id)?.stage,'certified');
+    assert.equal(enabledCardIds.includes(id),true);
+  }
 });
 test('Rush Recklessly adds exactly 700 ATK until the current turn expires',()=>{
   const state=create(0,'rush-atk'),monster=addMonster(state,0),source=addSourceToHand(state,0,RUSH_RECKLESSLY_ID);
