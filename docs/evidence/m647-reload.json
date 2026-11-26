@@ -35,8 +35,8 @@
     "inventoryGranted": 0
   },
   "verification": {
-    "focusedTests": 22,
-    "adapterBehaviorVerifiedCards": 0,
+    "focusedTests": 24,
+    "adapterBehaviorVerifiedCards": 1,
     "behaviorCertifiedCards": 0,
     "automaticCertifications": 0,
     "playableCatalogAdmission": false,
